@@ -81,7 +81,7 @@ $(document).ready(function() { init_codefold(0); });
   <div class="headertitle"><div class="title">esp32.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
+<a href="esp32_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">//-------ESP32---------</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#if defined(ESP32)  &amp;&amp; defined(CONFIG_IDF_TARGET_ESP32)</span></div>
@@ -131,31 +131,31 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">//-------I2S Version -----------------------------------------------</span></div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#ifndef USE_LEGACY_I2S</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">#  define USE_LEGACY_I2S (ESP_IDF_VERSION &lt; ESP_IDF_VERSION_VAL(5, 0, 0))</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="esp32_8h.html#aa16a153525f7c742e4395339c2a537f5">   51</a></span><span class="preprocessor">#  define USE_LEGACY_I2S (ESP_IDF_VERSION &lt; ESP_IDF_VERSION_VAL(5, 0, 0))</span></div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">//-------Config for ESP32 families ---------</span></div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">#if defined(ESP32)</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="preprocessor">#  define USE_PSRAM</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="preprocessor">#  define USE_STRTOD</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="esp32_8h.html#aa6f7856b7d31c599d62597d18657b9e6">   56</a></span><span class="preprocessor">#  define USE_PSRAM</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="esp32_8h.html#ae996106c8bc0e093fc21b0ebe36f4893">   57</a></span><span class="preprocessor">#  define USE_STRTOD</span></div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">// We need to use accept instead of available</span></div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="preprocessor">#  if ESP_IDF_VERSION &gt;= ESP_IDF_VERSION_VAL(5, 0, 0) </span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="preprocessor">#    define USE_SERVER_ACCEPT true              </span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="esp32_8h.html#af024668b48abeb1c0eba20cd63a58986">   60</a></span><span class="preprocessor">#    define USE_SERVER_ACCEPT true              </span></div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="preprocessor">#  endif</span></div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="preprocessor">#  if ESP_IDF_VERSION &gt;= ESP_IDF_VERSION_VAL(4, 0, 0) </span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="preprocessor">#    define USE_CONCURRENCY</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="esp32_8h.html#af3ea2770dfed7fc5cceb370f8d9295dd">   63</a></span><span class="preprocessor">#    define USE_CONCURRENCY</span></div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">//   Print has been fixed </span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="preprocessor">#    define USE_PRINT_FLUSH true</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="esp32_8h.html#ae7141af4c08e4549ffe970b30f3161cc">   65</a></span><span class="preprocessor">#    define USE_PRINT_FLUSH true</span></div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="preprocessor">#  else </span></div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="preprocessor">#    define USE_PRINT_FLUSH false</span></div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="preprocessor">#  endif</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="preprocessor">#  define USE_SD_SUPPORTS_SPI</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="esp32_8h.html#a137709eed250ec5c7c669ec8cc7f89ae">   69</a></span><span class="preprocessor">#  define USE_SD_SUPPORTS_SPI</span></div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">//#  define USE_ESP32_LOGGER true</span></div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="preprocessor">#  if !defined(ARDUINO)</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="preprocessor">#    define USE_IDF_LOGGER</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="esp32_8h.html#a699f5264e0ca5f852059257a6406cb99">   72</a></span><span class="preprocessor">#    define USE_IDF_LOGGER</span></div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="preprocessor">#  endif</span></div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="preprocessor">#  if !defined(I2S_USE_APLL)</span></div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="preprocessor">#    define I2S_USE_APLL false</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="esp32_8h.html#a1745f66eb4f292c76547b1ea6229e025">   75</a></span><span class="preprocessor">#    define I2S_USE_APLL false</span></div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="preprocessor">#  endif</span></div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">// use ESP_DSP library for ouput mixing </span></div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">//#  define USE_ESP32_DSP</span></div>

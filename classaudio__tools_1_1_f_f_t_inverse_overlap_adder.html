@@ -88,39 +88,265 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad82a594aafa2b08972a1b2601b086908" id="r_ad82a594aafa2b08972a1b2601b086908"><td class="memItemLeft" align="right" valign="top"><a id="ad82a594aafa2b08972a1b2601b086908" name="ad82a594aafa2b08972a1b2601b086908"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>FFTInverseOverlapAdder</b> (int <a class="el" href="classaudio__tools_1_1_f_f_t_inverse_overlap_adder.html#af4b57d21919c42d55af03391f91a1c08">size</a>=0)</td></tr>
+<tr class="memitem:ad82a594aafa2b08972a1b2601b086908" id="r_ad82a594aafa2b08972a1b2601b086908"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_inverse_overlap_adder.html#ad82a594aafa2b08972a1b2601b086908">FFTInverseOverlapAdder</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> <a class="el" href="classaudio__tools_1_1_f_f_t_inverse_overlap_adder.html#af4b57d21919c42d55af03391f91a1c08">size</a>=0)</td></tr>
 <tr class="separator:ad82a594aafa2b08972a1b2601b086908"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4195e6a5c70568e905e6e431425d3ea" id="r_ae4195e6a5c70568e905e6e431425d3ea"><td class="memItemLeft" align="right" valign="top"><a id="ae4195e6a5c70568e905e6e431425d3ea" name="ae4195e6a5c70568e905e6e431425d3ea"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>add</b> (float value, int pos, <a class="el" href="classaudio__tools_1_1_window_function.html">WindowFunction</a> *window_function)</td></tr>
+<tr class="memitem:ae4195e6a5c70568e905e6e431425d3ea" id="r_ae4195e6a5c70568e905e6e431425d3ea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_inverse_overlap_adder.html#ae4195e6a5c70568e905e6e431425d3ea">add</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a> value, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> pos, <a class="el" href="classaudio__tools_1_1_window_function.html">WindowFunction</a> *window_function)</td></tr>
 <tr class="separator:ae4195e6a5c70568e905e6e431425d3ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d4fda9d271676b56bbf6510089066f9" id="r_a2d4fda9d271676b56bbf6510089066f9"><td class="memItemLeft" align="right" valign="top"><a id="a2d4fda9d271676b56bbf6510089066f9" name="a2d4fda9d271676b56bbf6510089066f9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>getStepData</b> (float *result, int stride, float maxResult)</td></tr>
+<tr class="memitem:a2d4fda9d271676b56bbf6510089066f9" id="r_a2d4fda9d271676b56bbf6510089066f9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_inverse_overlap_adder.html#a2d4fda9d271676b56bbf6510089066f9">getStepData</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a> *result, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> stride, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">maxResult</a>)</td></tr>
 <tr class="separator:a2d4fda9d271676b56bbf6510089066f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada388d17b93c54a1a0f6edddbe0953ab" id="r_ada388d17b93c54a1a0f6edddbe0953ab"><td class="memItemLeft" align="right" valign="top"><a id="ada388d17b93c54a1a0f6edddbe0953ab" name="ada388d17b93c54a1a0f6edddbe0953ab"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>resize</b> (int <a class="el" href="classaudio__tools_1_1_f_f_t_inverse_overlap_adder.html#af4b57d21919c42d55af03391f91a1c08">size</a>)</td></tr>
-<tr class="memdesc:ada388d17b93c54a1a0f6edddbe0953ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initilze data by defining new size. <br /></td></tr>
+<tr class="memitem:ada388d17b93c54a1a0f6edddbe0953ab" id="r_ada388d17b93c54a1a0f6edddbe0953ab"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_inverse_overlap_adder.html#ada388d17b93c54a1a0f6edddbe0953ab">resize</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> <a class="el" href="classaudio__tools_1_1_f_f_t_inverse_overlap_adder.html#af4b57d21919c42d55af03391f91a1c08">size</a>)</td></tr>
+<tr class="memdesc:ada388d17b93c54a1a0f6edddbe0953ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initilze data by defining new size.  <br /></td></tr>
 <tr class="separator:ada388d17b93c54a1a0f6edddbe0953ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4b57d21919c42d55af03391f91a1c08" id="r_af4b57d21919c42d55af03391f91a1c08"><td class="memItemLeft" align="right" valign="top"><a id="af4b57d21919c42d55af03391f91a1c08" name="af4b57d21919c42d55af03391f91a1c08"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> ()</td></tr>
-<tr class="memdesc:af4b57d21919c42d55af03391f91a1c08"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the actual size <br /></td></tr>
+<tr class="memitem:af4b57d21919c42d55af03391f91a1c08" id="r_af4b57d21919c42d55af03391f91a1c08"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_inverse_overlap_adder.html#af4b57d21919c42d55af03391f91a1c08">size</a> ()</td></tr>
+<tr class="memdesc:af4b57d21919c42d55af03391f91a1c08"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the actual size  <br /></td></tr>
 <tr class="separator:af4b57d21919c42d55af03391f91a1c08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a481449c89d8c61cba5efcdd693c8c895" id="r_a481449c89d8c61cba5efcdd693c8c895"><td class="memItemLeft" align="right" valign="top"><a id="a481449c89d8c61cba5efcdd693c8c895" name="a481449c89d8c61cba5efcdd693c8c895"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>data</b> {0}</td></tr>
+<tr class="memitem:a481449c89d8c61cba5efcdd693c8c895" id="r_a481449c89d8c61cba5efcdd693c8c895"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_inverse_overlap_adder.html#a481449c89d8c61cba5efcdd693c8c895">data</a> {0}</td></tr>
 <tr class="separator:a481449c89d8c61cba5efcdd693c8c895"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afed088663f8704004425cdae2120b9b3" id="r_afed088663f8704004425cdae2120b9b3"><td class="memItemLeft" align="right" valign="top"><a id="afed088663f8704004425cdae2120b9b3" name="afed088663f8704004425cdae2120b9b3"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>len</b> = 0</td></tr>
+<tr class="memitem:afed088663f8704004425cdae2120b9b3" id="r_afed088663f8704004425cdae2120b9b3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_inverse_overlap_adder.html#afed088663f8704004425cdae2120b9b3">len</a> = 0</td></tr>
 <tr class="separator:afed088663f8704004425cdae2120b9b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64c11327f5ba983c2401faa236254574" id="r_a64c11327f5ba983c2401faa236254574"><td class="memItemLeft" align="right" valign="top"><a id="a64c11327f5ba983c2401faa236254574" name="a64c11327f5ba983c2401faa236254574"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>rfft_max</b> = 0</td></tr>
+<tr class="memitem:a64c11327f5ba983c2401faa236254574" id="r_a64c11327f5ba983c2401faa236254574"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_inverse_overlap_adder.html#a64c11327f5ba983c2401faa236254574">rfft_max</a> = 0</td></tr>
 <tr class="separator:a64c11327f5ba983c2401faa236254574"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Inverse FFT Overlapp Add. </p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ad82a594aafa2b08972a1b2601b086908" name="ad82a594aafa2b08972a1b2601b086908"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad82a594aafa2b08972a1b2601b086908">&#9670;&#160;</a></span>FFTInverseOverlapAdder()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_f_f_t_inverse_overlap_adder.html">FFTInverseOverlapAdder</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramname"><em>size</em> = <code>0</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ae4195e6a5c70568e905e6e431425d3ea" name="ae4195e6a5c70568e905e6e431425d3ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4195e6a5c70568e905e6e431425d3ea">&#9670;&#160;</a></span>add()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> add </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a>&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramname"><em>pos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_window_function.html">WindowFunction</a> *&#160;</td>
+          <td class="paramname"><em>window_function</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2d4fda9d271676b56bbf6510089066f9" name="a2d4fda9d271676b56bbf6510089066f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d4fda9d271676b56bbf6510089066f9">&#9670;&#160;</a></span>getStepData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> getStepData </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a> *&#160;</td>
+          <td class="paramname"><em>result</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramname"><em>stride</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a>&#160;</td>
+          <td class="paramname"><em>maxResult</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ada388d17b93c54a1a0f6edddbe0953ab" name="ada388d17b93c54a1a0f6edddbe0953ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada388d17b93c54a1a0f6edddbe0953ab">&#9670;&#160;</a></span>resize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> resize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initilze data by defining new size. </p>
+
+</div>
+</div>
+<a id="af4b57d21919c42d55af03391f91a1c08" name="af4b57d21919c42d55af03391f91a1c08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4b57d21919c42d55af03391f91a1c08">&#9670;&#160;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>provides the actual size </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a481449c89d8c61cba5efcdd693c8c895" name="a481449c89d8c61cba5efcdd693c8c895"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a481449c89d8c61cba5efcdd693c8c895">&#9670;&#160;</a></span>data</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a>&gt; data {0}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afed088663f8704004425cdae2120b9b3" name="afed088663f8704004425cdae2120b9b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afed088663f8704004425cdae2120b9b3">&#9670;&#160;</a></span>len</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> len = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a64c11327f5ba983c2401faa236254574" name="a64c11327f5ba983c2401faa236254574"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64c11327f5ba983c2401faa236254574">&#9670;&#160;</a></span>rfft_max</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a> rfft_max = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/AudioTools/AudioLibs/<a class="el" href="_audio_f_f_t_8h_source.html">AudioFFT.h</a></li>
 </ul>
 </div><!-- contents -->

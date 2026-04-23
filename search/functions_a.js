@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['kalmanfilter_0',['KalmanFilter',['../classaudio__tools_1_1_kalman_filter.html#ab197d4e9751913fc626746e3880ce745',1,'audio_tools::KalmanFilter']]],
-  ['karadioprotocol_1',['karadioprotocol',['../classaudio__tools_1_1_k_a_radio_protocol.html#a2bda0a818a7aadadda328008dcb4fdba',1,'audio_tools::KARadioProtocol::KARadioProtocol()'],['../classaudio__tools_1_1_k_a_radio_protocol.html#a050649f9f226f963a0bcec4d310f11ca',1,'audio_tools::KARadioProtocol::KARadioProtocol(AudioPlayer &amp;player)']]],
-  ['karadioprotocolserver_2',['karadioprotocolserver',['../classaudio__tools_1_1_k_a_radio_protocol_server.html#af849441095f4012170fba31dfb1480fa',1,'audio_tools::KARadioProtocolServer::KARadioProtocolServer(AudioPlayer &amp;player, int port=80, const char *ssid=nullptr, const char *pwd=nullptr)'],['../classaudio__tools_1_1_k_a_radio_protocol_server.html#a68ae9310651a0681e789762271e2c938',1,'audio_tools::KARadioProtocolServer::KARadioProtocolServer()=default']]],
-  ['keyoff_3',['keyoff',['../classaudio__tools_1_1_abstract_synthesizer_channel.html#a225bc4c571a71d6c1bcecf47a6ffb650',1,'audio_tools::AbstractSynthesizerChannel::keyOff()'],['../classaudio__tools_1_1_default_synthesizer_channel.html#a248b8fd38d66a48400b8d44e78634edb',1,'audio_tools::DefaultSynthesizerChannel::keyOff()']]],
-  ['keyon_4',['keyon',['../classaudio__tools_1_1_abstract_synthesizer_channel.html#afe2ceeff51e99722f7b6855b674797e9',1,'audio_tools::AbstractSynthesizerChannel::keyOn()'],['../classaudio__tools_1_1_default_synthesizer_channel.html#a1fbaf5d254e757c2593fa1a52dd89728',1,'audio_tools::DefaultSynthesizerChannel::keyOn()']]]
+  ['jpegopencv_0',['JpegOpenCV',['../classaudio__tools_1_1_jpeg_open_c_v.html#a21800b8762708bc34c299a400584a870',1,'audio_tools::JpegOpenCV']]],
+  ['jpegtft_1',['JpegTFT',['../classaudio__tools_1_1_jpeg_t_f_t.html#ac52c87a06f798f22aa736ba35e28f3eb',1,'audio_tools::JpegTFT']]],
+  ['jupyteraudiot_2',['JupyterAudioT',['../classaudio__tools_1_1_jupyter_audio_t.html#a28fb42b4a8d6d545880abb8c924e3cc2',1,'audio_tools::JupyterAudioT']]]
 ];

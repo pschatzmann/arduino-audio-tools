@@ -81,7 +81,7 @@ $(document).ready(function() { init_codefold(0); });
   <div class="headertitle"><div class="title">poly.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/* Author: Mike Lubinets (aka mersinvald)</span></div>
+<a href="poly_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/* Author: Mike Lubinets (aka mersinvald)</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * Date: 29.12.15</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> *</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> * See LICENSE */</span></div>
@@ -101,79 +101,101 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
 <div class="foldopen" id="foldopen00020" data-start="{" data-end="};">
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="struct_r_s_1_1_poly.html">   20</a></span><span class="keyword">struct </span><a class="code hl_struct" href="struct_r_s_1_1_poly.html">Poly</a> {</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <a class="code hl_struct" href="struct_r_s_1_1_poly.html">Poly</a>()</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        : length(0), _memory(NULL) {}</div>
+<div class="foldopen" id="foldopen00021" data-start="{" data-end="}">
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="struct_r_s_1_1_poly.html#a751dd7f801a2fc4c874325fc3a5dfd0d">   21</a></span>    <a class="code hl_function" href="struct_r_s_1_1_poly.html#a751dd7f801a2fc4c874325fc3a5dfd0d">Poly</a>()</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        : <a class="code hl_variable" href="struct_r_s_1_1_poly.html#ab2b3adeb2a67e656ff030b56727fd0ac">length</a>(0), <a class="code hl_variable" href="struct_r_s_1_1_poly.html#ac78e87581b8771652622335d67802784">_memory</a>(NULL) {}</div>
+</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <a class="code hl_struct" href="struct_r_s_1_1_poly.html">Poly</a>(uint8_t <span class="keywordtype">id</span>, uint16_t offset, uint8_t size) \</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        : length(0), _id(<span class="keywordtype">id</span>), _size(size), _offset(offset), _memory(NULL) {}</div>
+<div class="foldopen" id="foldopen00024" data-start="{" data-end="}">
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="struct_r_s_1_1_poly.html#a5d115ac0dc40684c8735bf4322f20375">   24</a></span>    <a class="code hl_function" href="struct_r_s_1_1_poly.html#a5d115ac0dc40684c8735bf4322f20375">Poly</a>(uint8_t <span class="keywordtype">id</span>, uint16_t offset, uint8_t <a class="code hl_function" href="struct_r_s_1_1_poly.html#ae3cfc1e341da42a459065a35f0b079b3">size</a>) \</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        : <a class="code hl_variable" href="struct_r_s_1_1_poly.html#ab2b3adeb2a67e656ff030b56727fd0ac">length</a>(0), <a class="code hl_variable" href="struct_r_s_1_1_poly.html#a8042dbbd2d3832d38177ece306c7437d">_id</a>(<span class="keywordtype">id</span>), <a class="code hl_variable" href="struct_r_s_1_1_poly.html#aaa049a794bf092e892763bad507598b5">_size</a>(<a class="code hl_function" href="struct_r_s_1_1_poly.html#ae3cfc1e341da42a459065a35f0b079b3">size</a>), <a class="code hl_variable" href="struct_r_s_1_1_poly.html#a0a5aaa5f9e6214da71b688c762dc0525">_offset</a>(offset), <a class="code hl_variable" href="struct_r_s_1_1_poly.html#ac78e87581b8771652622335d67802784">_memory</a>(NULL) {}</div>
+</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="comment">/* @brief Append number at the end of polynomial</span></div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">     * @param num - number to append</span></div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">     * @return false if polynomial can&#39;t be stretched */</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keyword">inline</span> <span class="keywordtype">bool</span> Append(uint8_t num) {</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        assert(length+1 &lt; _size);</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        ptr()[length++] = num;</div>
+<div class="foldopen" id="foldopen00030" data-start="{" data-end="}">
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="struct_r_s_1_1_poly.html#a3bdda889013b71affc75fa6ac745b154">   30</a></span>    <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="struct_r_s_1_1_poly.html#a3bdda889013b71affc75fa6ac745b154">Append</a>(uint8_t num) {</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        <a class="code hl_define" href="avr_8h.html#ab2851d907b12a2233b89f8f2c2f7346a">assert</a>(<a class="code hl_variable" href="struct_r_s_1_1_poly.html#ab2b3adeb2a67e656ff030b56727fd0ac">length</a>+1 &lt; <a class="code hl_variable" href="struct_r_s_1_1_poly.html#aaa049a794bf092e892763bad507598b5">_size</a>);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <a class="code hl_function" href="struct_r_s_1_1_poly.html#a8af15accbf2776eeddad38b121710c36">ptr</a>()[<a class="code hl_variable" href="struct_r_s_1_1_poly.html#ab2b3adeb2a67e656ff030b56727fd0ac">length</a>++] = num;</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    }</div>
+</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="comment">/* @brief Polynomial initialization */</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> Init(uint8_t <span class="keywordtype">id</span>, uint16_t offset, uint8_t size, uint8_t** memory_ptr) {</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        this-&gt;_id     = id;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        this-&gt;_offset = offset;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        this-&gt;_size   = size;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        this-&gt;length  = 0;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        this-&gt;_memory = memory_ptr;</div>
+<div class="foldopen" id="foldopen00037" data-start="{" data-end="}">
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="struct_r_s_1_1_poly.html#aee217beefb1ad557a5e44d06e4b86b62">   37</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="struct_r_s_1_1_poly.html#aee217beefb1ad557a5e44d06e4b86b62">Init</a>(uint8_t <span class="keywordtype">id</span>, uint16_t offset, uint8_t <a class="code hl_function" href="struct_r_s_1_1_poly.html#ae3cfc1e341da42a459065a35f0b079b3">size</a>, uint8_t** memory_ptr) {</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        this-&gt;<a class="code hl_variable" href="struct_r_s_1_1_poly.html#a8042dbbd2d3832d38177ece306c7437d">_id</a>     = <a class="code hl_function" href="struct_r_s_1_1_poly.html#a4008ef1f32cd14a39ba2dc0ad196cfcb">id</a>;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        this-&gt;<a class="code hl_variable" href="struct_r_s_1_1_poly.html#a0a5aaa5f9e6214da71b688c762dc0525">_offset</a> = offset;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        this-&gt;<a class="code hl_variable" href="struct_r_s_1_1_poly.html#aaa049a794bf092e892763bad507598b5">_size</a>   = <a class="code hl_function" href="struct_r_s_1_1_poly.html#ae3cfc1e341da42a459065a35f0b079b3">size</a>;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        this-&gt;<a class="code hl_variable" href="struct_r_s_1_1_poly.html#ab2b3adeb2a67e656ff030b56727fd0ac">length</a>  = 0;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        this-&gt;<a class="code hl_variable" href="struct_r_s_1_1_poly.html#ac78e87581b8771652622335d67802784">_memory</a> = memory_ptr;</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    }</div>
+</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="comment">/* @brief Polynomial memory zeroing */</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> Reset() {</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        memset((<span class="keywordtype">void</span>*)ptr(), 0, this-&gt;_size);</div>
+<div class="foldopen" id="foldopen00046" data-start="{" data-end="}">
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="struct_r_s_1_1_poly.html#a372de693ad40b3f42839c8ec6ac845f4">   46</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="struct_r_s_1_1_poly.html#a372de693ad40b3f42839c8ec6ac845f4">Reset</a>() {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        memset((<span class="keywordtype">void</span>*)<a class="code hl_function" href="struct_r_s_1_1_poly.html#a8af15accbf2776eeddad38b121710c36">ptr</a>(), 0, this-&gt;<a class="code hl_variable" href="struct_r_s_1_1_poly.html#aaa049a794bf092e892763bad507598b5">_size</a>);</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    }</div>
+</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="comment">/* @brief Copy polynomial to memory</span></div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">     * @param src    - source byte-sequence</span></div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">     * @param size   - size of polynomial</span></div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">     * @param offset - write offset */</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> Set(<span class="keyword">const</span> uint8_t* src, uint8_t len, uint8_t offset = 0) {</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        assert(src &amp;&amp; len &lt;= this-&gt;_size-offset);</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        memcpy(ptr()+offset, src, len * <span class="keyword">sizeof</span>(uint8_t));</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        length = len + offset;</div>
+<div class="foldopen" id="foldopen00054" data-start="{" data-end="}">
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="struct_r_s_1_1_poly.html#a70968614dffa3a85956a75e91413587a">   54</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="struct_r_s_1_1_poly.html#a70968614dffa3a85956a75e91413587a">Set</a>(<span class="keyword">const</span> uint8_t* src, uint8_t len, uint8_t offset = 0) {</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <a class="code hl_define" href="avr_8h.html#ab2851d907b12a2233b89f8f2c2f7346a">assert</a>(src &amp;&amp; len &lt;= this-&gt;<a class="code hl_variable" href="struct_r_s_1_1_poly.html#aaa049a794bf092e892763bad507598b5">_size</a>-offset);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        memcpy(<a class="code hl_function" href="struct_r_s_1_1_poly.html#a8af15accbf2776eeddad38b121710c36">ptr</a>()+offset, src, len * <span class="keyword">sizeof</span>(uint8_t));</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <a class="code hl_variable" href="struct_r_s_1_1_poly.html#ab2b3adeb2a67e656ff030b56727fd0ac">length</a> = len + offset;</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    }</div>
+</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="preprocessor">    #define poly_max(a, b) ((a &gt; b) ? (a) : (b))</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="poly_8hpp.html#a712ff85a009753e011889650462df58d">   60</a></span><span class="preprocessor">    #define poly_max(a, b) ((a &gt; b) ? (a) : (b))</span></div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> Copy(<span class="keyword">const</span> <a class="code hl_struct" href="struct_r_s_1_1_poly.html">Poly</a>* src) {</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        length = poly_max(length, src-&gt;length);</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        Set(src-&gt;ptr(), length);</div>
+<div class="foldopen" id="foldopen00062" data-start="{" data-end="}">
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="struct_r_s_1_1_poly.html#aeb1a6d9b394bcbc0de07694b4e6334c0">   62</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="struct_r_s_1_1_poly.html#aeb1a6d9b394bcbc0de07694b4e6334c0">Copy</a>(<span class="keyword">const</span> <a class="code hl_struct" href="struct_r_s_1_1_poly.html">Poly</a>* src) {</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <a class="code hl_variable" href="struct_r_s_1_1_poly.html#ab2b3adeb2a67e656ff030b56727fd0ac">length</a> = <a class="code hl_define" href="poly_8hpp.html#a712ff85a009753e011889650462df58d">poly_max</a>(<a class="code hl_variable" href="struct_r_s_1_1_poly.html#ab2b3adeb2a67e656ff030b56727fd0ac">length</a>, src-&gt;<a class="code hl_variable" href="struct_r_s_1_1_poly.html#ab2b3adeb2a67e656ff030b56727fd0ac">length</a>);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <a class="code hl_function" href="struct_r_s_1_1_poly.html#a70968614dffa3a85956a75e91413587a">Set</a>(src-&gt;<a class="code hl_function" href="struct_r_s_1_1_poly.html#a8af15accbf2776eeddad38b121710c36">ptr</a>(), <a class="code hl_variable" href="struct_r_s_1_1_poly.html#ab2b3adeb2a67e656ff030b56727fd0ac">length</a>);</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    }</div>
+</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keyword">inline</span> uint8_t&amp; at(uint8_t i)<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        assert(i &lt; _size);</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keywordflow">return</span> ptr()[i];</div>
+<div class="foldopen" id="foldopen00067" data-start="{" data-end="}">
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="struct_r_s_1_1_poly.html#acedb5a58e2101df874a423c7fed9138c">   67</a></span>    <span class="keyword">inline</span> uint8_t&amp; <a class="code hl_function" href="struct_r_s_1_1_poly.html#acedb5a58e2101df874a423c7fed9138c">at</a>(uint8_t i)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <a class="code hl_define" href="avr_8h.html#ab2851d907b12a2233b89f8f2c2f7346a">assert</a>(i &lt; <a class="code hl_variable" href="struct_r_s_1_1_poly.html#aaa049a794bf092e892763bad507598b5">_size</a>);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="struct_r_s_1_1_poly.html#a8af15accbf2776eeddad38b121710c36">ptr</a>()[i];</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    }</div>
+</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keyword">inline</span> uint8_t id()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <span class="keywordflow">return</span> _id;</div>
+<div class="foldopen" id="foldopen00072" data-start="{" data-end="}">
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="struct_r_s_1_1_poly.html#a4008ef1f32cd14a39ba2dc0ad196cfcb">   72</a></span>    <span class="keyword">inline</span> uint8_t <a class="code hl_function" href="struct_r_s_1_1_poly.html#a4008ef1f32cd14a39ba2dc0ad196cfcb">id</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="struct_r_s_1_1_poly.html#a8042dbbd2d3832d38177ece306c7437d">_id</a>;</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    }</div>
+</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keyword">inline</span> uint8_t size()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        <span class="keywordflow">return</span> _size;</div>
+<div class="foldopen" id="foldopen00076" data-start="{" data-end="}">
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="struct_r_s_1_1_poly.html#ae3cfc1e341da42a459065a35f0b079b3">   76</a></span>    <span class="keyword">inline</span> uint8_t <a class="code hl_function" href="struct_r_s_1_1_poly.html#ae3cfc1e341da42a459065a35f0b079b3">size</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="struct_r_s_1_1_poly.html#aaa049a794bf092e892763bad507598b5">_size</a>;</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    }</div>
+</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="comment">// Returns pointer to memory of this polynomial</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keyword">inline</span> uint8_t* ptr()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        assert(_memory &amp;&amp; *_memory);</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        <span class="keywordflow">return</span> (*_memory) + _offset;</div>
+<div class="foldopen" id="foldopen00081" data-start="{" data-end="}">
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="struct_r_s_1_1_poly.html#a8af15accbf2776eeddad38b121710c36">   81</a></span>    <span class="keyword">inline</span> uint8_t* <a class="code hl_function" href="struct_r_s_1_1_poly.html#a8af15accbf2776eeddad38b121710c36">ptr</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        <a class="code hl_define" href="avr_8h.html#ab2851d907b12a2233b89f8f2c2f7346a">assert</a>(<a class="code hl_variable" href="struct_r_s_1_1_poly.html#ac78e87581b8771652622335d67802784">_memory</a> &amp;&amp; *<a class="code hl_variable" href="struct_r_s_1_1_poly.html#ac78e87581b8771652622335d67802784">_memory</a>);</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        <span class="keywordflow">return</span> (*<a class="code hl_variable" href="struct_r_s_1_1_poly.html#ac78e87581b8771652622335d67802784">_memory</a>) + <a class="code hl_variable" href="struct_r_s_1_1_poly.html#a0a5aaa5f9e6214da71b688c762dc0525">_offset</a>;</div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    }</div>
+</div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    uint8_t length;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="struct_r_s_1_1_poly.html#ab2b3adeb2a67e656ff030b56727fd0ac">   86</a></span>    uint8_t <a class="code hl_variable" href="struct_r_s_1_1_poly.html#ab2b3adeb2a67e656ff030b56727fd0ac">length</a>;</div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="keyword">protected</span>:</div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    uint8_t   _id;</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    uint8_t   _size;    <span class="comment">// Size of reserved memory for this polynomial</span></div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    uint16_t  _offset;  <span class="comment">// Offset in memory</span></div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    uint8_t** _memory;  <span class="comment">// Pointer to pointer to memory</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="struct_r_s_1_1_poly.html#a8042dbbd2d3832d38177ece306c7437d">   90</a></span>    uint8_t   <a class="code hl_variable" href="struct_r_s_1_1_poly.html#a8042dbbd2d3832d38177ece306c7437d">_id</a>;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="struct_r_s_1_1_poly.html#aaa049a794bf092e892763bad507598b5">   91</a></span>    uint8_t   <a class="code hl_variable" href="struct_r_s_1_1_poly.html#aaa049a794bf092e892763bad507598b5">_size</a>;    <span class="comment">// Size of reserved memory for this polynomial</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="struct_r_s_1_1_poly.html#a0a5aaa5f9e6214da71b688c762dc0525">   92</a></span>    uint16_t  <a class="code hl_variable" href="struct_r_s_1_1_poly.html#a0a5aaa5f9e6214da71b688c762dc0525">_offset</a>;  <span class="comment">// Offset in memory</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="struct_r_s_1_1_poly.html#ac78e87581b8771652622335d67802784">   93</a></span>    uint8_t** <a class="code hl_variable" href="struct_r_s_1_1_poly.html#ac78e87581b8771652622335d67802784">_memory</a>;  <span class="comment">// Pointer to pointer to memory</span></div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>};</div>
 </div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
@@ -181,8 +203,26 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>}</div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="preprocessor">#endif </span><span class="comment">// POLY_H</span></div>
+<div class="ttc" id="aavr_8h_html_ab2851d907b12a2233b89f8f2c2f7346a"><div class="ttname"><a href="avr_8h.html#ab2851d907b12a2233b89f8f2c2f7346a">assert</a></div><div class="ttdeci">#define assert(T)</div><div class="ttdef"><b>Definition</b> avr.h:10</div></div>
 <div class="ttc" id="anamespace_r_s_html"><div class="ttname"><a href="namespace_r_s.html">RS</a></div><div class="ttdoc">AudioTools internal: Reed-Solomon.</div><div class="ttdef"><b>Definition</b> gf.hpp:19</div></div>
+<div class="ttc" id="apoly_8hpp_html_a712ff85a009753e011889650462df58d"><div class="ttname"><a href="poly_8hpp.html#a712ff85a009753e011889650462df58d">poly_max</a></div><div class="ttdeci">#define poly_max(a, b)</div><div class="ttdef"><b>Definition</b> poly.hpp:60</div></div>
 <div class="ttc" id="astruct_r_s_1_1_poly_html"><div class="ttname"><a href="struct_r_s_1_1_poly.html">RS::Poly</a></div><div class="ttdef"><b>Definition</b> poly.hpp:20</div></div>
+<div class="ttc" id="astruct_r_s_1_1_poly_html_a0a5aaa5f9e6214da71b688c762dc0525"><div class="ttname"><a href="struct_r_s_1_1_poly.html#a0a5aaa5f9e6214da71b688c762dc0525">RS::Poly::_offset</a></div><div class="ttdeci">uint16_t _offset</div><div class="ttdef"><b>Definition</b> poly.hpp:92</div></div>
+<div class="ttc" id="astruct_r_s_1_1_poly_html_a372de693ad40b3f42839c8ec6ac845f4"><div class="ttname"><a href="struct_r_s_1_1_poly.html#a372de693ad40b3f42839c8ec6ac845f4">RS::Poly::Reset</a></div><div class="ttdeci">void Reset()</div><div class="ttdef"><b>Definition</b> poly.hpp:46</div></div>
+<div class="ttc" id="astruct_r_s_1_1_poly_html_a3bdda889013b71affc75fa6ac745b154"><div class="ttname"><a href="struct_r_s_1_1_poly.html#a3bdda889013b71affc75fa6ac745b154">RS::Poly::Append</a></div><div class="ttdeci">bool Append(uint8_t num)</div><div class="ttdef"><b>Definition</b> poly.hpp:30</div></div>
+<div class="ttc" id="astruct_r_s_1_1_poly_html_a4008ef1f32cd14a39ba2dc0ad196cfcb"><div class="ttname"><a href="struct_r_s_1_1_poly.html#a4008ef1f32cd14a39ba2dc0ad196cfcb">RS::Poly::id</a></div><div class="ttdeci">uint8_t id() const</div><div class="ttdef"><b>Definition</b> poly.hpp:72</div></div>
+<div class="ttc" id="astruct_r_s_1_1_poly_html_a5d115ac0dc40684c8735bf4322f20375"><div class="ttname"><a href="struct_r_s_1_1_poly.html#a5d115ac0dc40684c8735bf4322f20375">RS::Poly::Poly</a></div><div class="ttdeci">Poly(uint8_t id, uint16_t offset, uint8_t size)</div><div class="ttdef"><b>Definition</b> poly.hpp:24</div></div>
+<div class="ttc" id="astruct_r_s_1_1_poly_html_a70968614dffa3a85956a75e91413587a"><div class="ttname"><a href="struct_r_s_1_1_poly.html#a70968614dffa3a85956a75e91413587a">RS::Poly::Set</a></div><div class="ttdeci">void Set(const uint8_t *src, uint8_t len, uint8_t offset=0)</div><div class="ttdef"><b>Definition</b> poly.hpp:54</div></div>
+<div class="ttc" id="astruct_r_s_1_1_poly_html_a751dd7f801a2fc4c874325fc3a5dfd0d"><div class="ttname"><a href="struct_r_s_1_1_poly.html#a751dd7f801a2fc4c874325fc3a5dfd0d">RS::Poly::Poly</a></div><div class="ttdeci">Poly()</div><div class="ttdef"><b>Definition</b> poly.hpp:21</div></div>
+<div class="ttc" id="astruct_r_s_1_1_poly_html_a8042dbbd2d3832d38177ece306c7437d"><div class="ttname"><a href="struct_r_s_1_1_poly.html#a8042dbbd2d3832d38177ece306c7437d">RS::Poly::_id</a></div><div class="ttdeci">uint8_t _id</div><div class="ttdef"><b>Definition</b> poly.hpp:90</div></div>
+<div class="ttc" id="astruct_r_s_1_1_poly_html_a8af15accbf2776eeddad38b121710c36"><div class="ttname"><a href="struct_r_s_1_1_poly.html#a8af15accbf2776eeddad38b121710c36">RS::Poly::ptr</a></div><div class="ttdeci">uint8_t * ptr() const</div><div class="ttdef"><b>Definition</b> poly.hpp:81</div></div>
+<div class="ttc" id="astruct_r_s_1_1_poly_html_aaa049a794bf092e892763bad507598b5"><div class="ttname"><a href="struct_r_s_1_1_poly.html#aaa049a794bf092e892763bad507598b5">RS::Poly::_size</a></div><div class="ttdeci">uint8_t _size</div><div class="ttdef"><b>Definition</b> poly.hpp:91</div></div>
+<div class="ttc" id="astruct_r_s_1_1_poly_html_ab2b3adeb2a67e656ff030b56727fd0ac"><div class="ttname"><a href="struct_r_s_1_1_poly.html#ab2b3adeb2a67e656ff030b56727fd0ac">RS::Poly::length</a></div><div class="ttdeci">uint8_t length</div><div class="ttdef"><b>Definition</b> poly.hpp:86</div></div>
+<div class="ttc" id="astruct_r_s_1_1_poly_html_ac78e87581b8771652622335d67802784"><div class="ttname"><a href="struct_r_s_1_1_poly.html#ac78e87581b8771652622335d67802784">RS::Poly::_memory</a></div><div class="ttdeci">uint8_t ** _memory</div><div class="ttdef"><b>Definition</b> poly.hpp:93</div></div>
+<div class="ttc" id="astruct_r_s_1_1_poly_html_acedb5a58e2101df874a423c7fed9138c"><div class="ttname"><a href="struct_r_s_1_1_poly.html#acedb5a58e2101df874a423c7fed9138c">RS::Poly::at</a></div><div class="ttdeci">uint8_t &amp; at(uint8_t i) const</div><div class="ttdef"><b>Definition</b> poly.hpp:67</div></div>
+<div class="ttc" id="astruct_r_s_1_1_poly_html_ae3cfc1e341da42a459065a35f0b079b3"><div class="ttname"><a href="struct_r_s_1_1_poly.html#ae3cfc1e341da42a459065a35f0b079b3">RS::Poly::size</a></div><div class="ttdeci">uint8_t size() const</div><div class="ttdef"><b>Definition</b> poly.hpp:76</div></div>
+<div class="ttc" id="astruct_r_s_1_1_poly_html_aeb1a6d9b394bcbc0de07694b4e6334c0"><div class="ttname"><a href="struct_r_s_1_1_poly.html#aeb1a6d9b394bcbc0de07694b4e6334c0">RS::Poly::Copy</a></div><div class="ttdeci">void Copy(const Poly *src)</div><div class="ttdef"><b>Definition</b> poly.hpp:62</div></div>
+<div class="ttc" id="astruct_r_s_1_1_poly_html_aee217beefb1ad557a5e44d06e4b86b62"><div class="ttname"><a href="struct_r_s_1_1_poly.html#aee217beefb1ad557a5e44d06e4b86b62">RS::Poly::Init</a></div><div class="ttdeci">void Init(uint8_t id, uint16_t offset, uint8_t size, uint8_t **memory_ptr)</div><div class="ttdef"><b>Definition</b> poly.hpp:37</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

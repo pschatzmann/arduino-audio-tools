@@ -81,7 +81,7 @@ $(document).ready(function() { init_codefold(0); });
   <div class="headertitle"><div class="title">MemoryManager.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
+<a href="_memory_manager_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;AudioLogger.h&quot;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#ifdef ESP32</span></div>
@@ -102,8 +102,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00027" data-start="{" data-end="}">
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_memory_manager.html#a82d0ab6c73ec481b35d04834df57aeed">   27</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_memory_manager.html#a82d0ab6c73ec481b35d04834df57aeed">begin</a>(<span class="keywordtype">int</span> limit = 10000) {</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#ifdef ESP32</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    LOGI(<span class="stringliteral">&quot;Activate PSRAM from %d bytes&quot;</span>, limit);</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    heap_caps_malloc_extmem_enable(limit);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <a class="code hl_define" href="_audio_logger_i_d_f_8h.html#a5512e59d578a380a441a70256af997d0">LOGI</a>(<span class="stringliteral">&quot;Activate PSRAM from %d bytes&quot;</span>, limit);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">heap_caps_malloc_extmem_enable</a>(limit);</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#else</span></div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
@@ -114,11 +114,13 @@ $(document).ready(function() { init_codefold(0); });
 </div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>}</div>
+<div class="ttc" id="a_audio_logger_i_d_f_8h_html_a5512e59d578a380a441a70256af997d0"><div class="ttname"><a href="_audio_logger_i_d_f_8h.html#a5512e59d578a380a441a70256af997d0">LOGI</a></div><div class="ttdeci">#define LOGI(...)</div><div class="ttdef"><b>Definition</b> AudioLoggerIDF.h:28</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_memory_manager_html"><div class="ttname"><a href="classaudio__tools_1_1_memory_manager.html">audio_tools::MemoryManager</a></div><div class="ttdoc">MemoryManager which activates the use of external SPIRAM memory. When external memory is in use,...</div><div class="ttdef"><b>Definition</b> MemoryManager.h:18</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_memory_manager_html_a683c4fb9ce026fee861d584b3d31cff1"><div class="ttname"><a href="classaudio__tools_1_1_memory_manager.html#a683c4fb9ce026fee861d584b3d31cff1">audio_tools::MemoryManager::MemoryManager</a></div><div class="ttdeci">MemoryManager()=default</div><div class="ttdoc">Default Constructor - call begin() to activate PSRAM.</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_memory_manager_html_a7c6515cc6bec4ffb8c5a9075e532ec58"><div class="ttname"><a href="classaudio__tools_1_1_memory_manager.html#a7c6515cc6bec4ffb8c5a9075e532ec58">audio_tools::MemoryManager::MemoryManager</a></div><div class="ttdeci">MemoryManager(int limit)</div><div class="ttdoc">Constructor which activates PSRAM. This constructor automatically calls begin()</div><div class="ttdef"><b>Definition</b> MemoryManager.h:23</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_memory_manager_html_a82d0ab6c73ec481b35d04834df57aeed"><div class="ttname"><a href="classaudio__tools_1_1_memory_manager.html#a82d0ab6c73ec481b35d04834df57aeed">audio_tools::MemoryManager::begin</a></div><div class="ttdeci">bool begin(int limit=10000)</div><div class="ttdoc">Activate the PSRAM for allocated memory &gt; limit.</div><div class="ttdef"><b>Definition</b> MemoryManager.h:27</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:10</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html_ae3c87ac6df70d80e2a4be8979e63cc2e"><div class="ttname"><a href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">audio_tools::writeData</a></div><div class="ttdeci">size_t writeData(Print *p_out, T *data, int samples, int maxSamples=512)</div><div class="ttdef"><b>Definition</b> AudioTypes.h:512</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

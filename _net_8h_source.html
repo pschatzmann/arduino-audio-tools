@@ -81,15 +81,15 @@ $(document).ready(function() { init_codefold(0); });
   <div class="headertitle"><div class="title">Net.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
+<a href="_net_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#ifndef htons</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#  define htonl(x) (((x) &lt;&lt; 24 &amp; 0xFF000000UL) | ((x) &lt;&lt; 8 &amp; 0x00FF0000UL) | ((x) &gt;&gt; 8 &amp; 0x0000FF00UL) | ((x) &gt;&gt; 24 &amp; 0x000000FFUL))</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#  define htons(x) (((uint16_t)(x)&amp;0xff00) &gt;&gt; 8) | (((uint16_t)(x)&amp;0X00FF) &lt;&lt; 8)</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#  define ntohl(x) htonl(x)</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#  define ntohs(x) htons(x)</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno"><a class="line" href="_net_8h.html#ae4027a6ad07f13aa12eab285a1b46019">    6</a></span><span class="preprocessor">#  define htonl(x) (((x) &lt;&lt; 24 &amp; 0xFF000000UL) | ((x) &lt;&lt; 8 &amp; 0x00FF0000UL) | ((x) &gt;&gt; 8 &amp; 0x0000FF00UL) | ((x) &gt;&gt; 24 &amp; 0x000000FFUL))</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="_net_8h.html#a51799f5ebb4c7228ef7e95c247030f42">    7</a></span><span class="preprocessor">#  define htons(x) (((uint16_t)(x)&amp;0xff00) &gt;&gt; 8) | (((uint16_t)(x)&amp;0X00FF) &lt;&lt; 8)</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="_net_8h.html#ac317b3e903719ba02894f1710f7f2439">    8</a></span><span class="preprocessor">#  define ntohl(x) htonl(x)</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="_net_8h.html#ada37feda716b4ba89cf9dba34288141d">    9</a></span><span class="preprocessor">#  define ntohs(x) htons(x)</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#elif __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#  define htonl(x) x</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#  define htons(x) x</span></div>
@@ -102,8 +102,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#ifndef htonll</span></div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#  define htonll(x) ((1==htonl(1)) ? (x) : ((uint64_t)htonl((x) &amp; 0xFFFFFFFF) &lt;&lt; 32) | htonl((x) &gt;&gt; 32))</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#  define ntohll(x) ((1==ntohl(1)) ? (x) : ((uint64_t)ntohl((x) &amp; 0xFFFFFFFF) &lt;&lt; 32) | ntohl((x) &gt;&gt; 32))</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="_net_8h.html#a9f4bf0773c45ad9a9753a1b784a13fbb">   23</a></span><span class="preprocessor">#  define htonll(x) ((1==htonl(1)) ? (x) : ((uint64_t)htonl((x) &amp; 0xFFFFFFFF) &lt;&lt; 32) | htonl((x) &gt;&gt; 32))</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="_net_8h.html#a3cfcf123d4ead264289232f91f2c9ca5">   24</a></span><span class="preprocessor">#  define ntohll(x) ((1==ntohl(1)) ? (x) : ((uint64_t)ntohl((x) &amp; 0xFFFFFFFF) &lt;&lt; 32) | ntohl((x) &gt;&gt; 32))</span></div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#elif __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__</span></div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#  define htonll(x) x</span></div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#  define ntohll(x) x</span></div>

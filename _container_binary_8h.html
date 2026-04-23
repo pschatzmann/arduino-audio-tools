@@ -85,8 +85,8 @@ $(function() {
 <p>A lean and efficient container format which provides Header records with audio info, Audio records with the audio and <a class="el" href="class_meta.html" title="minimial implementtion of Meta which just ignores the data">Meta</a> which can contain any additional information. This can be used together with a codec which does not transmit the audio information or has variable frame lengths. We expect that a single write() is providing full frames.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;string.h&gt;</code><br />
-<code>#include &quot;AudioTools/AudioCodecs/AudioCodecsBase.h&quot;</code><br />
-<code>#include &quot;AudioTools/CoreAudio/AudioBasic/StrView.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="_audio_codecs_base_8h_source.html">AudioTools/AudioCodecs/AudioCodecsBase.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_str_view_8h_source.html">AudioTools/CoreAudio/AudioBasic/StrView.h</a>&quot;</code><br />
 </div>
 <p><a href="_container_binary_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -115,24 +115,23 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:acb4c9518c39bac13fb1a2cfd9185540a" id="r_acb4c9518c39bac13fb1a2cfd9185540a"><td class="memItemLeft" align="right" valign="top"><a id="acb4c9518c39bac13fb1a2cfd9185540a" name="acb4c9518c39bac13fb1a2cfd9185540a"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#acb4c9518c39bac13fb1a2cfd9185540a">BinaryContainerEncoderError</a> { <b>InvalidHeader</b>
-, <b>InvalidChecksum</b>
-, <b>DataMissing</b>
+<tr class="memitem:acb4c9518c39bac13fb1a2cfd9185540a" id="r_acb4c9518c39bac13fb1a2cfd9185540a"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#acb4c9518c39bac13fb1a2cfd9185540a">BinaryContainerEncoderError</a> { <a class="el" href="namespaceaudio__tools.html#acb4c9518c39bac13fb1a2cfd9185540aa7ef308960b2c2d7c1cbfb31a2a0e6410">InvalidHeader</a>
+, <a class="el" href="namespaceaudio__tools.html#acb4c9518c39bac13fb1a2cfd9185540aa21fc1dd33a9fd3c2c192dd76b2bad315">InvalidChecksum</a>
+, <a class="el" href="namespaceaudio__tools.html#acb4c9518c39bac13fb1a2cfd9185540aab2d544b44f6620934391cfba88bc3a4a">DataMissing</a>
  }</td></tr>
-<tr class="memdesc:acb4c9518c39bac13fb1a2cfd9185540a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Error types. <br /></td></tr>
+<tr class="memdesc:acb4c9518c39bac13fb1a2cfd9185540a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Error types.  <a href="namespaceaudio__tools.html#acb4c9518c39bac13fb1a2cfd9185540a">More...</a><br /></td></tr>
 <tr class="separator:acb4c9518c39bac13fb1a2cfd9185540a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4dd4453d1994a706c0eb2350ffa55372" id="r_a4dd4453d1994a706c0eb2350ffa55372"><td class="memItemLeft" align="right" valign="top"><a id="a4dd4453d1994a706c0eb2350ffa55372" name="a4dd4453d1994a706c0eb2350ffa55372"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>ContainerType</b> : uint8_t { <b>Header</b> = 1
-, <b>Audio</b> = 2
-, <b>Meta</b> = 3
-, <b>Undefined</b> = 0
+<tr class="memitem:a4dd4453d1994a706c0eb2350ffa55372" id="r_a4dd4453d1994a706c0eb2350ffa55372"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a4dd4453d1994a706c0eb2350ffa55372">ContainerType</a> : uint8_t { <a class="el" href="namespaceaudio__tools.html#a4dd4453d1994a706c0eb2350ffa55372abf50d5e661106d0abe925af3c2e6f7e7">Header</a> = 1
+, <a class="el" href="namespaceaudio__tools.html#a4dd4453d1994a706c0eb2350ffa55372ab22f0418e8ac915eb66f829d262d14a2">Audio</a> = 2
+, <a class="el" href="namespaceaudio__tools.html#a4dd4453d1994a706c0eb2350ffa55372ab6755d218d5f4e1cef9cce9cc39aeda9">Meta</a> = 3
+, <a class="el" href="namespaceaudio__tools.html#a4dd4453d1994a706c0eb2350ffa55372aec0fc0100c4fc1ce4eea230c3dc10360">Undefined</a> = 0
  }</td></tr>
 <tr class="separator:a4dd4453d1994a706c0eb2350ffa55372"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a3c150cee18b03b247267e3579589d3dd" id="r_a3c150cee18b03b247267e3579589d3dd"><td class="memItemLeft" align="right" valign="top"><a id="a3c150cee18b03b247267e3579589d3dd" name="a3c150cee18b03b247267e3579589d3dd"></a>
-static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>checkSum</b> (const uint8_t *data, size_t len)</td></tr>
-<tr class="memdesc:a3c150cee18b03b247267e3579589d3dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the checksum. <br /></td></tr>
+<tr class="memitem:a3c150cee18b03b247267e3579589d3dd" id="r_a3c150cee18b03b247267e3579589d3dd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a3c150cee18b03b247267e3579589d3dd">checkSum</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *data, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> len)</td></tr>
+<tr class="memdesc:a3c150cee18b03b247267e3579589d3dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the checksum.  <br /></td></tr>
 <tr class="separator:a3c150cee18b03b247267e3579589d3dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>

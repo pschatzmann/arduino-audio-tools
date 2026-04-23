@@ -81,8 +81,8 @@ $(document).ready(function() { init_codefold(0); });
   <div class="headertitle"><div class="title">MovingAverage.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &quot;Collections/List.h&quot;</span></div>
+<a href="_moving_average_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &quot;<a class="code" href="_list_8h.html">Collections/List.h</a>&quot;</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceaudio__tools.html">audio_tools</a> {</div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
@@ -90,40 +90,55 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00014" data-start="{" data-end="};">
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_moving_average.html">   14</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_moving_average.html">MovingAverage</a> {</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  <a class="code hl_class" href="classaudio__tools_1_1_moving_average.html">MovingAverage</a>(<span class="keywordtype">size_t</span> size) {</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <a class="code hl_function" href="classaudio__tools_1_1_moving_average.html#a97deb13018c1b55b18bfe25a9e339e8d">setSize</a>(size);</div>
+<div class="foldopen" id="foldopen00016" data-start="{" data-end="}">
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_moving_average.html#a4cbe3fa2536dbeceb7a88ec16e8dd0ca">   16</a></span>  <a class="code hl_function" href="classaudio__tools_1_1_moving_average.html#a4cbe3fa2536dbeceb7a88ec16e8dd0ca">MovingAverage</a>(<span class="keywordtype">size_t</span> <a class="code hl_variable" href="classaudio__tools_1_1_moving_average.html#a854352f53b148adc24983a58a1866d66">size</a>) {</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <a class="code hl_function" href="classaudio__tools_1_1_moving_average.html#a97deb13018c1b55b18bfe25a9e339e8d">setSize</a>(<a class="code hl_variable" href="classaudio__tools_1_1_moving_average.html#a854352f53b148adc24983a58a1866d66">size</a>);</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  }</div>
+</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  <span class="keywordtype">void</span> addMeasurement(N value) {</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordflow">if</span> (this-&gt;values.size() == this-&gt;size) {</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>      this-&gt;values.pop_front();</div>
+<div class="foldopen" id="foldopen00020" data-start="{" data-end="}">
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_moving_average.html#a14506bc2f7bf5d09cd18ce4f4746ac2a">   20</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_moving_average.html#a14506bc2f7bf5d09cd18ce4f4746ac2a">addMeasurement</a>(N value) {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordflow">if</span> (this-&gt;<a class="code hl_variable" href="classaudio__tools_1_1_moving_average.html#a7ed642f491afb6da2eb50403cbb4378d">values</a>.<a class="code hl_function" href="classaudio__tools_1_1_list.html#a0b6b70701c46e22849f0f363861351cd">size</a>() == this-&gt;size) {</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>      this-&gt;<a class="code hl_variable" href="classaudio__tools_1_1_moving_average.html#a7ed642f491afb6da2eb50403cbb4378d">values</a>.<a class="code hl_function" href="classaudio__tools_1_1_list.html#a41229c4a0274259671fd6e5ab9b0a3b1">pop_front</a>();</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    }</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    this-&gt;values.push_back(value);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    this-&gt;<a class="code hl_variable" href="classaudio__tools_1_1_moving_average.html#a7ed642f491afb6da2eb50403cbb4378d">values</a>.<a class="code hl_function" href="classaudio__tools_1_1_list.html#ae0aee035744313c1715a7c90c688067b">push_back</a>(value);</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  }</div>
+</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  <span class="keywordtype">float</span> calculate() {</div>
+<div class="foldopen" id="foldopen00027" data-start="{" data-end="}">
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_moving_average.html#a0d60c23a5520ad3a0760a1e7dd97ca05">   27</a></span>  <span class="keywordtype">float</span> <a class="code hl_function" href="classaudio__tools_1_1_moving_average.html#a0d60c23a5520ad3a0760a1e7dd97ca05">calculate</a>() {</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keywordtype">float</span> sum = 0;</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; this-&gt;values.size(); i++) {</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>      sum += this-&gt;values[i];</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; this-&gt;<a class="code hl_variable" href="classaudio__tools_1_1_moving_average.html#a7ed642f491afb6da2eb50403cbb4378d">values</a>.<a class="code hl_function" href="classaudio__tools_1_1_list.html#a0b6b70701c46e22849f0f363861351cd">size</a>(); i++) {</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>      sum += this-&gt;<a class="code hl_variable" href="classaudio__tools_1_1_moving_average.html#a7ed642f491afb6da2eb50403cbb4378d">values</a>[i];</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    }</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordflow">return</span> sum / this-&gt;values.size();</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordflow">return</span> sum / this-&gt;<a class="code hl_variable" href="classaudio__tools_1_1_moving_average.html#a7ed642f491afb6da2eb50403cbb4378d">values</a>.<a class="code hl_function" href="classaudio__tools_1_1_list.html#a0b6b70701c46e22849f0f363861351cd">size</a>();</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  }</div>
+</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
 <div class="foldopen" id="foldopen00036" data-start="{" data-end="}">
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_moving_average.html#a97deb13018c1b55b18bfe25a9e339e8d">   36</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_moving_average.html#a97deb13018c1b55b18bfe25a9e339e8d">setSize</a>(<span class="keywordtype">size_t</span> size) {</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    this-&gt;size = size;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_moving_average.html#a97deb13018c1b55b18bfe25a9e339e8d">   36</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_moving_average.html#a97deb13018c1b55b18bfe25a9e339e8d">setSize</a>(<span class="keywordtype">size_t</span> <a class="code hl_variable" href="classaudio__tools_1_1_moving_average.html#a854352f53b148adc24983a58a1866d66">size</a>) {</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    this-&gt;size = <a class="code hl_variable" href="classaudio__tools_1_1_moving_average.html#a854352f53b148adc24983a58a1866d66">size</a>;</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  }</div>
 </div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  <a class="code hl_class" href="classaudio__tools_1_1_list.html">List&lt;N&gt;</a> values;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <span class="keywordtype">size_t</span> size = 0;;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_moving_average.html#a7ed642f491afb6da2eb50403cbb4378d">   41</a></span>  <a class="code hl_class" href="classaudio__tools_1_1_list.html">List&lt;N&gt;</a> <a class="code hl_variable" href="classaudio__tools_1_1_moving_average.html#a7ed642f491afb6da2eb50403cbb4378d">values</a>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_moving_average.html#a854352f53b148adc24983a58a1866d66">   42</a></span>  <span class="keywordtype">size_t</span> <a class="code hl_variable" href="classaudio__tools_1_1_moving_average.html#a854352f53b148adc24983a58a1866d66">size</a> = 0;;</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>};</div>
 </div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="ttc" id="a_list_8h_html"><div class="ttname"><a href="_list_8h.html">List.h</a></div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_list_html"><div class="ttname"><a href="classaudio__tools_1_1_list.html">audio_tools::List</a></div><div class="ttdoc">Double linked list.</div><div class="ttdef"><b>Definition</b> List.h:18</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_list_html_a0b6b70701c46e22849f0f363861351cd"><div class="ttname"><a href="classaudio__tools_1_1_list.html#a0b6b70701c46e22849f0f363861351cd">audio_tools::List::size</a></div><div class="ttdeci">size_t size()</div><div class="ttdef"><b>Definition</b> List.h:293</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_list_html_a41229c4a0274259671fd6e5ab9b0a3b1"><div class="ttname"><a href="classaudio__tools_1_1_list.html#a41229c4a0274259671fd6e5ab9b0a3b1">audio_tools::List::pop_front</a></div><div class="ttdeci">bool pop_front()</div><div class="ttdef"><b>Definition</b> List.h:201</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_list_html_ae0aee035744313c1715a7c90c688067b"><div class="ttname"><a href="classaudio__tools_1_1_list.html#ae0aee035744313c1715a7c90c688067b">audio_tools::List::push_back</a></div><div class="ttdeci">bool push_back(T data)</div><div class="ttdef"><b>Definition</b> List.h:147</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_moving_average_html"><div class="ttname"><a href="classaudio__tools_1_1_moving_average.html">audio_tools::MovingAverage</a></div><div class="ttdoc">Caclulates the moving average of a number of values.</div><div class="ttdef"><b>Definition</b> MovingAverage.h:14</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_moving_average_html_a0d60c23a5520ad3a0760a1e7dd97ca05"><div class="ttname"><a href="classaudio__tools_1_1_moving_average.html#a0d60c23a5520ad3a0760a1e7dd97ca05">audio_tools::MovingAverage::calculate</a></div><div class="ttdeci">float calculate()</div><div class="ttdef"><b>Definition</b> MovingAverage.h:27</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_moving_average_html_a14506bc2f7bf5d09cd18ce4f4746ac2a"><div class="ttname"><a href="classaudio__tools_1_1_moving_average.html#a14506bc2f7bf5d09cd18ce4f4746ac2a">audio_tools::MovingAverage::addMeasurement</a></div><div class="ttdeci">void addMeasurement(N value)</div><div class="ttdef"><b>Definition</b> MovingAverage.h:20</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_moving_average_html_a4cbe3fa2536dbeceb7a88ec16e8dd0ca"><div class="ttname"><a href="classaudio__tools_1_1_moving_average.html#a4cbe3fa2536dbeceb7a88ec16e8dd0ca">audio_tools::MovingAverage::MovingAverage</a></div><div class="ttdeci">MovingAverage(size_t size)</div><div class="ttdef"><b>Definition</b> MovingAverage.h:16</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_moving_average_html_a7ed642f491afb6da2eb50403cbb4378d"><div class="ttname"><a href="classaudio__tools_1_1_moving_average.html#a7ed642f491afb6da2eb50403cbb4378d">audio_tools::MovingAverage::values</a></div><div class="ttdeci">List&lt; N &gt; values</div><div class="ttdef"><b>Definition</b> MovingAverage.h:41</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_moving_average_html_a854352f53b148adc24983a58a1866d66"><div class="ttname"><a href="classaudio__tools_1_1_moving_average.html#a854352f53b148adc24983a58a1866d66">audio_tools::MovingAverage::size</a></div><div class="ttdeci">size_t size</div><div class="ttdef"><b>Definition</b> MovingAverage.h:42</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_moving_average_html_a97deb13018c1b55b18bfe25a9e339e8d"><div class="ttname"><a href="classaudio__tools_1_1_moving_average.html#a97deb13018c1b55b18bfe25a9e339e8d">audio_tools::MovingAverage::setSize</a></div><div class="ttdeci">void setSize(size_t size)</div><div class="ttdoc">Defines the number of values.</div><div class="ttdef"><b>Definition</b> MovingAverage.h:36</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:10</div></div>
 </div><!-- fragment --></div><!-- contents -->

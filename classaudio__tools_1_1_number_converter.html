@@ -87,60 +87,420 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:ae33e08bd59b9edec2c91101cbaa8c1df" id="r_ae33e08bd59b9edec2c91101cbaa8c1df"><td class="memItemLeft" align="right" valign="top"><a id="ae33e08bd59b9edec2c91101cbaa8c1df" name="ae33e08bd59b9edec2c91101cbaa8c1df"></a>
-static int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>clip</b> (float value, int bits)</td></tr>
-<tr class="memdesc:ae33e08bd59b9edec2c91101cbaa8c1df"><td class="mdescLeft">&#160;</td><td class="mdescRight">clips a value <br /></td></tr>
+<tr class="memitem:ae33e08bd59b9edec2c91101cbaa8c1df" id="r_ae33e08bd59b9edec2c91101cbaa8c1df"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_number_converter.html#ae33e08bd59b9edec2c91101cbaa8c1df">clip</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a> value, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> bits)</td></tr>
+<tr class="memdesc:ae33e08bd59b9edec2c91101cbaa8c1df"><td class="mdescLeft">&#160;</td><td class="mdescRight">clips a value  <br /></td></tr>
 <tr class="separator:ae33e08bd59b9edec2c91101cbaa8c1df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b05fd540e9f1829c43659eef49e634f" id="r_a9b05fd540e9f1829c43659eef49e634f"><td class="memTemplParams" colspan="2"><a id="a9b05fd540e9f1829c43659eef49e634f" name="a9b05fd540e9f1829c43659eef49e634f"></a>
-template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a9b05fd540e9f1829c43659eef49e634f"><td class="memTemplItemLeft" align="right" valign="top">static T&#160;</td><td class="memTemplItemRight" valign="bottom"><b>clipT</b> (float value)</td></tr>
-<tr class="memdesc:a9b05fd540e9f1829c43659eef49e634f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clips the value to avoid any over or underflows. <br /></td></tr>
+<tr class="memitem:a9b05fd540e9f1829c43659eef49e634f" id="r_a9b05fd540e9f1829c43659eef49e634f"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </td></tr>
+<tr class="memitem:a9b05fd540e9f1829c43659eef49e634f"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_number_converter.html#a9b05fd540e9f1829c43659eef49e634f">clipT</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a> value)</td></tr>
+<tr class="memdesc:a9b05fd540e9f1829c43659eef49e634f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clips the value to avoid any over or underflows.  <br /></td></tr>
 <tr class="separator:a9b05fd540e9f1829c43659eef49e634f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad847c72f19ba5bcd8ab8e2f4e138c592" id="r_ad847c72f19ba5bcd8ab8e2f4e138c592"><td class="memTemplParams" colspan="2"><a id="ad847c72f19ba5bcd8ab8e2f4e138c592" name="ad847c72f19ba5bcd8ab8e2f4e138c592"></a>
-template&lt;typename FromT , typename ToT &gt; </td></tr>
-<tr class="memitem:ad847c72f19ba5bcd8ab8e2f4e138c592"><td class="memTemplItemLeft" align="right" valign="top">static ToT&#160;</td><td class="memTemplItemRight" valign="bottom"><b>convert</b> (FromT value)</td></tr>
-<tr class="memdesc:ad847c72f19ba5bcd8ab8e2f4e138c592"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert an int number from one type to another. <br /></td></tr>
+<tr class="memitem:ad847c72f19ba5bcd8ab8e2f4e138c592" id="r_ad847c72f19ba5bcd8ab8e2f4e138c592"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">FromT</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">ToT</a> &gt; </td></tr>
+<tr class="memitem:ad847c72f19ba5bcd8ab8e2f4e138c592"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">ToT</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_number_converter.html#ad847c72f19ba5bcd8ab8e2f4e138c592">convert</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">FromT</a> value)</td></tr>
+<tr class="memdesc:ad847c72f19ba5bcd8ab8e2f4e138c592"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert an int number from one type to another.  <br /></td></tr>
 <tr class="separator:ad847c72f19ba5bcd8ab8e2f4e138c592"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50b655940dc86a223901230bf42c005e" id="r_a50b655940dc86a223901230bf42c005e"><td class="memTemplParams" colspan="2"><a id="a50b655940dc86a223901230bf42c005e" name="a50b655940dc86a223901230bf42c005e"></a>
-template&lt;typename FromT , typename ToT &gt; </td></tr>
-<tr class="memitem:a50b655940dc86a223901230bf42c005e"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>convertArray</b> (FromT *from, ToT *to, int samples, float vol=1.0f)</td></tr>
-<tr class="memdesc:a50b655940dc86a223901230bf42c005e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert an array of int types. <br /></td></tr>
+<tr class="memitem:a50b655940dc86a223901230bf42c005e" id="r_a50b655940dc86a223901230bf42c005e"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">FromT</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">ToT</a> &gt; </td></tr>
+<tr class="memitem:a50b655940dc86a223901230bf42c005e"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_number_converter.html#a50b655940dc86a223901230bf42c005e">convertArray</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">FromT</a> *from, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">ToT</a> *to, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> samples, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">vol</a>=1.0f)</td></tr>
+<tr class="memdesc:a50b655940dc86a223901230bf42c005e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert an array of int types.  <br /></td></tr>
 <tr class="separator:a50b655940dc86a223901230bf42c005e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa4e63512f3555b83ea59aaf4970abbfc" id="r_aa4e63512f3555b83ea59aaf4970abbfc"><td class="memItemLeft" align="right" valign="top"><a id="aa4e63512f3555b83ea59aaf4970abbfc" name="aa4e63512f3555b83ea59aaf4970abbfc"></a>
-static int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>fromFloat</b> (float value, int bits)</td></tr>
-<tr class="memdesc:aa4e63512f3555b83ea59aaf4970abbfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a float (with max 1.0) to an integer autio type. <br /></td></tr>
+<tr class="memitem:aa4e63512f3555b83ea59aaf4970abbfc" id="r_aa4e63512f3555b83ea59aaf4970abbfc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_number_converter.html#aa4e63512f3555b83ea59aaf4970abbfc">fromFloat</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a> value, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> bits)</td></tr>
+<tr class="memdesc:aa4e63512f3555b83ea59aaf4970abbfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a float (with max 1.0) to an integer autio type.  <br /></td></tr>
 <tr class="separator:aa4e63512f3555b83ea59aaf4970abbfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a429fbd4bd3a80cf04a3bcab71966935b" id="r_a429fbd4bd3a80cf04a3bcab71966935b"><td class="memTemplParams" colspan="2"><a id="a429fbd4bd3a80cf04a3bcab71966935b" name="a429fbd4bd3a80cf04a3bcab71966935b"></a>
-template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a429fbd4bd3a80cf04a3bcab71966935b"><td class="memTemplItemLeft" align="right" valign="top">static T&#160;</td><td class="memTemplItemRight" valign="bottom"><b>fromFloatT</b> (float value)</td></tr>
-<tr class="memdesc:a429fbd4bd3a80cf04a3bcab71966935b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a float (with max 1.0) to an integer autio type. <br /></td></tr>
+<tr class="memitem:a429fbd4bd3a80cf04a3bcab71966935b" id="r_a429fbd4bd3a80cf04a3bcab71966935b"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </td></tr>
+<tr class="memitem:a429fbd4bd3a80cf04a3bcab71966935b"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_number_converter.html#a429fbd4bd3a80cf04a3bcab71966935b">fromFloatT</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a> value)</td></tr>
+<tr class="memdesc:a429fbd4bd3a80cf04a3bcab71966935b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a float (with max 1.0) to an integer autio type.  <br /></td></tr>
 <tr class="separator:a429fbd4bd3a80cf04a3bcab71966935b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa83040da5c51151a9bd3286ecfcfe413" id="r_aa83040da5c51151a9bd3286ecfcfe413"><td class="memItemLeft" align="right" valign="top"><a id="aa83040da5c51151a9bd3286ecfcfe413" name="aa83040da5c51151a9bd3286ecfcfe413"></a>
-static int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>maxValue</b> (int value_bits_per_sample)</td></tr>
-<tr class="memdesc:aa83040da5c51151a9bd3286ecfcfe413"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the biggest number for the indicated number of bits <br /></td></tr>
+<tr class="memitem:aa83040da5c51151a9bd3286ecfcfe413" id="r_aa83040da5c51151a9bd3286ecfcfe413"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int64_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_number_converter.html#aa83040da5c51151a9bd3286ecfcfe413">maxValue</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">value_bits_per_sample</a>)</td></tr>
+<tr class="memdesc:aa83040da5c51151a9bd3286ecfcfe413"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the biggest number for the indicated number of bits  <br /></td></tr>
 <tr class="separator:aa83040da5c51151a9bd3286ecfcfe413"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae90d74e600f6caf8215b52d047bf17b5" id="r_ae90d74e600f6caf8215b52d047bf17b5"><td class="memTemplParams" colspan="2"><a id="ae90d74e600f6caf8215b52d047bf17b5" name="ae90d74e600f6caf8215b52d047bf17b5"></a>
-template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ae90d74e600f6caf8215b52d047bf17b5"><td class="memTemplItemLeft" align="right" valign="top">static float&#160;</td><td class="memTemplItemRight" valign="bottom"><b>maxValueT</b> ()</td></tr>
-<tr class="memdesc:ae90d74e600f6caf8215b52d047bf17b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the biggest number for the indicated type <br /></td></tr>
+<tr class="memitem:ae90d74e600f6caf8215b52d047bf17b5" id="r_ae90d74e600f6caf8215b52d047bf17b5"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </td></tr>
+<tr class="memitem:ae90d74e600f6caf8215b52d047bf17b5"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_number_converter.html#ae90d74e600f6caf8215b52d047bf17b5">maxValueT</a> ()</td></tr>
+<tr class="memdesc:ae90d74e600f6caf8215b52d047bf17b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the biggest number for the indicated type  <br /></td></tr>
 <tr class="separator:ae90d74e600f6caf8215b52d047bf17b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acae4b18aa1436ef2e3894d50bf2dc96f" id="r_acae4b18aa1436ef2e3894d50bf2dc96f"><td class="memTemplParams" colspan="2"><a id="acae4b18aa1436ef2e3894d50bf2dc96f" name="acae4b18aa1436ef2e3894d50bf2dc96f"></a>
-template&lt;typename T &gt; </td></tr>
-<tr class="memitem:acae4b18aa1436ef2e3894d50bf2dc96f"><td class="memTemplItemLeft" align="right" valign="top">static float&#160;</td><td class="memTemplItemRight" valign="bottom"><b>minValueT</b> ()</td></tr>
+<tr class="memitem:acae4b18aa1436ef2e3894d50bf2dc96f" id="r_acae4b18aa1436ef2e3894d50bf2dc96f"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </td></tr>
+<tr class="memitem:acae4b18aa1436ef2e3894d50bf2dc96f"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_number_converter.html#acae4b18aa1436ef2e3894d50bf2dc96f">minValueT</a> ()</td></tr>
 <tr class="separator:acae4b18aa1436ef2e3894d50bf2dc96f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74d41d3cbb14bdc5a5fe7e7cea5dd799" id="r_a74d41d3cbb14bdc5a5fe7e7cea5dd799"><td class="memItemLeft" align="right" valign="top"><a id="a74d41d3cbb14bdc5a5fe7e7cea5dd799" name="a74d41d3cbb14bdc5a5fe7e7cea5dd799"></a>
-static float&#160;</td><td class="memItemRight" valign="bottom"><b>toFloat</b> (int32_t value, int bits)</td></tr>
-<tr class="memdesc:a74d41d3cbb14bdc5a5fe7e7cea5dd799"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert an integer integer autio type to a float (with max 1.0) <br /></td></tr>
+<tr class="memitem:a74d41d3cbb14bdc5a5fe7e7cea5dd799" id="r_a74d41d3cbb14bdc5a5fe7e7cea5dd799"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_number_converter.html#a74d41d3cbb14bdc5a5fe7e7cea5dd799">toFloat</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int32_t</a> value, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> bits)</td></tr>
+<tr class="memdesc:a74d41d3cbb14bdc5a5fe7e7cea5dd799"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert an integer integer autio type to a float (with max 1.0)  <br /></td></tr>
 <tr class="separator:a74d41d3cbb14bdc5a5fe7e7cea5dd799"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f0ef6fbe5231c08da00b3eba7d29c1a" id="r_a3f0ef6fbe5231c08da00b3eba7d29c1a"><td class="memTemplParams" colspan="2"><a id="a3f0ef6fbe5231c08da00b3eba7d29c1a" name="a3f0ef6fbe5231c08da00b3eba7d29c1a"></a>
-template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a3f0ef6fbe5231c08da00b3eba7d29c1a"><td class="memTemplItemLeft" align="right" valign="top">static float&#160;</td><td class="memTemplItemRight" valign="bottom"><b>toFloatT</b> (T value)</td></tr>
-<tr class="memdesc:a3f0ef6fbe5231c08da00b3eba7d29c1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert an integer integer autio type to a float (with max 1.0) <br /></td></tr>
+<tr class="memitem:a3f0ef6fbe5231c08da00b3eba7d29c1a" id="r_a3f0ef6fbe5231c08da00b3eba7d29c1a"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </td></tr>
+<tr class="memitem:a3f0ef6fbe5231c08da00b3eba7d29c1a"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_number_converter.html#a3f0ef6fbe5231c08da00b3eba7d29c1a">toFloatT</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> value)</td></tr>
+<tr class="memdesc:a3f0ef6fbe5231c08da00b3eba7d29c1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert an integer integer autio type to a float (with max 1.0)  <br /></td></tr>
 <tr class="separator:a3f0ef6fbe5231c08da00b3eba7d29c1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Converts from a source to a target number with a different type. </p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ae33e08bd59b9edec2c91101cbaa8c1df" name="ae33e08bd59b9edec2c91101cbaa8c1df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae33e08bd59b9edec2c91101cbaa8c1df">&#9670;&#160;</a></span>clip()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int32_t</a> clip </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a>&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramname"><em>bits</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>clips a value </p>
+
+</div>
+</div>
+<a id="a9b05fd540e9f1829c43659eef49e634f" name="a9b05fd540e9f1829c43659eef49e634f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b05fd540e9f1829c43659eef49e634f">&#9670;&#160;</a></span>clipT()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> clipT </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a>&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Clips the value to avoid any over or underflows. </p>
+
+</div>
+</div>
+<a id="ad847c72f19ba5bcd8ab8e2f4e138c592" name="ad847c72f19ba5bcd8ab8e2f4e138c592"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad847c72f19ba5bcd8ab8e2f4e138c592">&#9670;&#160;</a></span>convert()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">FromT</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">ToT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">ToT</a> convert </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">FromT</a>&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convert an int number from one type to another. </p>
+
+</div>
+</div>
+<a id="a50b655940dc86a223901230bf42c005e" name="a50b655940dc86a223901230bf42c005e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50b655940dc86a223901230bf42c005e">&#9670;&#160;</a></span>convertArray()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">FromT</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">ToT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> convertArray </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">FromT</a> *&#160;</td>
+          <td class="paramname"><em>from</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">ToT</a> *&#160;</td>
+          <td class="paramname"><em>to</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramname"><em>samples</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a>&#160;</td>
+          <td class="paramname"><em>vol</em> = <code>1.0f</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convert an array of int types. </p>
+
+</div>
+</div>
+<a id="aa4e63512f3555b83ea59aaf4970abbfc" name="aa4e63512f3555b83ea59aaf4970abbfc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4e63512f3555b83ea59aaf4970abbfc">&#9670;&#160;</a></span>fromFloat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int32_t</a> fromFloat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a>&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramname"><em>bits</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convert a float (with max 1.0) to an integer autio type. </p>
+
+</div>
+</div>
+<a id="a429fbd4bd3a80cf04a3bcab71966935b" name="a429fbd4bd3a80cf04a3bcab71966935b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a429fbd4bd3a80cf04a3bcab71966935b">&#9670;&#160;</a></span>fromFloatT()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> fromFloatT </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a>&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convert a float (with max 1.0) to an integer autio type. </p>
+
+</div>
+</div>
+<a id="aa83040da5c51151a9bd3286ecfcfe413" name="aa83040da5c51151a9bd3286ecfcfe413"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa83040da5c51151a9bd3286ecfcfe413">&#9670;&#160;</a></span>maxValue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int64_t</a> maxValue </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramname"><em>value_bits_per_sample</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>provides the biggest number for the indicated number of bits </p>
+
+</div>
+</div>
+<a id="ae90d74e600f6caf8215b52d047bf17b5" name="ae90d74e600f6caf8215b52d047bf17b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae90d74e600f6caf8215b52d047bf17b5">&#9670;&#160;</a></span>maxValueT()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a> maxValueT </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>provides the biggest number for the indicated type </p>
+
+</div>
+</div>
+<a id="acae4b18aa1436ef2e3894d50bf2dc96f" name="acae4b18aa1436ef2e3894d50bf2dc96f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acae4b18aa1436ef2e3894d50bf2dc96f">&#9670;&#160;</a></span>minValueT()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a> minValueT </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a74d41d3cbb14bdc5a5fe7e7cea5dd799" name="a74d41d3cbb14bdc5a5fe7e7cea5dd799"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74d41d3cbb14bdc5a5fe7e7cea5dd799">&#9670;&#160;</a></span>toFloat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a> toFloat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int32_t</a>&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramname"><em>bits</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convert an integer integer autio type to a float (with max 1.0) </p>
+
+</div>
+</div>
+<a id="a3f0ef6fbe5231c08da00b3eba7d29c1a" name="a3f0ef6fbe5231c08da00b3eba7d29c1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f0ef6fbe5231c08da00b3eba7d29c1a">&#9670;&#160;</a></span>toFloatT()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a> toFloatT </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convert an integer integer autio type to a float (with max 1.0) </p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/AudioTools/CoreAudio/<a class="el" href="_audio_types_8h_source.html">AudioTypes.h</a></li>
 </ul>
 </div><!-- contents -->

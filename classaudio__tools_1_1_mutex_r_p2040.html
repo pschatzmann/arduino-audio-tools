@@ -97,22 +97,76 @@ Inheritance diagram for MutexRP2040:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad81318257fd78328c5c86fa6a3a861dd" id="r_ad81318257fd78328c5c86fa6a3a861dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_mutex_r_p2040.html#ad81318257fd78328c5c86fa6a3a861dd">lock</a> () override</td></tr>
+<tr class="memitem:af0ff1db88598378f0082de9d04753d1b" id="r_af0ff1db88598378f0082de9d04753d1b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_mutex_r_p2040.html#af0ff1db88598378f0082de9d04753d1b">MutexRP2040</a> ()</td></tr>
+<tr class="separator:af0ff1db88598378f0082de9d04753d1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f535317613469e5b57420fed87755d3" id="r_a4f535317613469e5b57420fed87755d3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_mutex_r_p2040.html#a4f535317613469e5b57420fed87755d3">~MutexRP2040</a> ()=<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">default</a></td></tr>
+<tr class="separator:a4f535317613469e5b57420fed87755d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad81318257fd78328c5c86fa6a3a861dd" id="r_ad81318257fd78328c5c86fa6a3a861dd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_mutex_r_p2040.html#ad81318257fd78328c5c86fa6a3a861dd">lock</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
 <tr class="separator:ad81318257fd78328c5c86fa6a3a861dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a333677ac769a10df2775f24893e07c21" id="r_a333677ac769a10df2775f24893e07c21"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_mutex_r_p2040.html#a333677ac769a10df2775f24893e07c21">unlock</a> () override</td></tr>
+<tr class="memitem:a333677ac769a10df2775f24893e07c21" id="r_a333677ac769a10df2775f24893e07c21"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_mutex_r_p2040.html#a333677ac769a10df2775f24893e07c21">unlock</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
 <tr class="separator:a333677ac769a10df2775f24893e07c21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a5f1394c1d77ba2f8c347dbf2785ec80e" id="r_a5f1394c1d77ba2f8c347dbf2785ec80e"><td class="memItemLeft" align="right" valign="top"><a id="a5f1394c1d77ba2f8c347dbf2785ec80e" name="a5f1394c1d77ba2f8c347dbf2785ec80e"></a>
-mutex_t&#160;</td><td class="memItemRight" valign="bottom"><b>mtx</b></td></tr>
+<tr class="memitem:a5f1394c1d77ba2f8c347dbf2785ec80e" id="r_a5f1394c1d77ba2f8c347dbf2785ec80e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">mutex_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_mutex_r_p2040.html#a5f1394c1d77ba2f8c347dbf2785ec80e">mtx</a></td></tr>
 <tr class="separator:a5f1394c1d77ba2f8c347dbf2785ec80e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Mutex API for non IRQ mutual exclusion between cores. Mutexes are application level locks usually used protecting data structures that might be used by multiple threads of execution. Unlike critical sections, the mutex protected code is not necessarily required/expected to complete quickly, as no other sytem wide locks are held on account of an acquired mutex. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="af0ff1db88598378f0082de9d04753d1b" name="af0ff1db88598378f0082de9d04753d1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0ff1db88598378f0082de9d04753d1b">&#9670;&#160;</a></span>MutexRP2040()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_mutex_r_p2040.html">MutexRP2040</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4f535317613469e5b57420fed87755d3" name="a4f535317613469e5b57420fed87755d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f535317613469e5b57420fed87755d3">&#9670;&#160;</a></span>~MutexRP2040()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> ~<a class="el" href="classaudio__tools_1_1_mutex_r_p2040.html">MutexRP2040</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="ad81318257fd78328c5c86fa6a3a861dd" name="ad81318257fd78328c5c86fa6a3a861dd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad81318257fd78328c5c86fa6a3a861dd">&#9670;&#160;</a></span>lock()</h2>
 
@@ -123,7 +177,7 @@ mutex_t&#160;</td><td class="memItemRight" valign="bottom"><b>mtx</b></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void lock </td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> lock </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -136,7 +190,7 @@ mutex_t&#160;</td><td class="memItemRight" valign="bottom"><b>mtx</b></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_mutex_base.html">MutexBase</a>.</p>
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_mutex_base.html#ae33bae81fdbbabfe2be20d78338bd0d9">MutexBase</a>.</p>
 
 </div>
 </div>
@@ -150,7 +204,7 @@ mutex_t&#160;</td><td class="memItemRight" valign="bottom"><b>mtx</b></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void unlock </td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> unlock </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -163,7 +217,30 @@ mutex_t&#160;</td><td class="memItemRight" valign="bottom"><b>mtx</b></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_mutex_base.html">MutexBase</a>.</p>
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_mutex_base.html#ae6f018536d482152b993f522d8d2942d">MutexBase</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a5f1394c1d77ba2f8c347dbf2785ec80e" name="a5f1394c1d77ba2f8c347dbf2785ec80e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f1394c1d77ba2f8c347dbf2785ec80e">&#9670;&#160;</a></span>mtx</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">mutex_t</a> mtx</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>

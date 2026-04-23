@@ -88,24 +88,124 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a0e9a2b819adc8ac5d676836f87935fe0" id="r_a0e9a2b819adc8ac5d676836f87935fe0"><td class="memItemLeft" align="right" valign="top"><a id="a0e9a2b819adc8ac5d676836f87935fe0" name="a0e9a2b819adc8ac5d676836f87935fe0"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>LockGuard</b> (<a class="el" href="classaudio__tools_1_1_mutex_base.html">MutexBase</a> &amp;mutex)</td></tr>
+<tr class="memitem:a0e9a2b819adc8ac5d676836f87935fe0" id="r_a0e9a2b819adc8ac5d676836f87935fe0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_lock_guard.html#a0e9a2b819adc8ac5d676836f87935fe0">LockGuard</a> (<a class="el" href="classaudio__tools_1_1_mutex_base.html">MutexBase</a> &amp;mutex)</td></tr>
 <tr class="separator:a0e9a2b819adc8ac5d676836f87935fe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a86cb8f17e3a9b80c6190cadd72190712" id="r_a86cb8f17e3a9b80c6190cadd72190712"><td class="memItemLeft" align="right" valign="top"><a id="a86cb8f17e3a9b80c6190cadd72190712" name="a86cb8f17e3a9b80c6190cadd72190712"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>LockGuard</b> (<a class="el" href="classaudio__tools_1_1_mutex_base.html">MutexBase</a> *mutex)</td></tr>
+<tr class="memitem:a86cb8f17e3a9b80c6190cadd72190712" id="r_a86cb8f17e3a9b80c6190cadd72190712"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_lock_guard.html#a86cb8f17e3a9b80c6190cadd72190712">LockGuard</a> (<a class="el" href="classaudio__tools_1_1_mutex_base.html">MutexBase</a> *mutex)</td></tr>
 <tr class="separator:a86cb8f17e3a9b80c6190cadd72190712"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6241dc9347c314e962bee11d50516f98" id="r_a6241dc9347c314e962bee11d50516f98"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_lock_guard.html#a6241dc9347c314e962bee11d50516f98">~LockGuard</a> ()</td></tr>
+<tr class="separator:a6241dc9347c314e962bee11d50516f98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a21a9cbdfa0dd7695d1b3910508c11b33" id="r_a21a9cbdfa0dd7695d1b3910508c11b33"><td class="memItemLeft" align="right" valign="top"><a id="a21a9cbdfa0dd7695d1b3910508c11b33" name="a21a9cbdfa0dd7695d1b3910508c11b33"></a>
-<a class="el" href="classaudio__tools_1_1_mutex_base.html">MutexBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_mutex</b> = nullptr</td></tr>
+<tr class="memitem:a21a9cbdfa0dd7695d1b3910508c11b33" id="r_a21a9cbdfa0dd7695d1b3910508c11b33"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_mutex_base.html">MutexBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_lock_guard.html#a21a9cbdfa0dd7695d1b3910508c11b33">p_mutex</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td></tr>
 <tr class="separator:a21a9cbdfa0dd7695d1b3910508c11b33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>RAII implementaion using a Mutex: Only a few microcontrollers provide lock guards, so I decided to roll my own solution where we can just use a dummy Mutex implementation that does nothing for the cases where this is not needed. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 * </dd></dl>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a0e9a2b819adc8ac5d676836f87935fe0" name="a0e9a2b819adc8ac5d676836f87935fe0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e9a2b819adc8ac5d676836f87935fe0">&#9670;&#160;</a></span>LockGuard() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_lock_guard.html">LockGuard</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_mutex_base.html">MutexBase</a> &amp;&#160;</td>
+          <td class="paramname"><em>mutex</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a86cb8f17e3a9b80c6190cadd72190712" name="a86cb8f17e3a9b80c6190cadd72190712"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86cb8f17e3a9b80c6190cadd72190712">&#9670;&#160;</a></span>LockGuard() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_lock_guard.html">LockGuard</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_mutex_base.html">MutexBase</a> *&#160;</td>
+          <td class="paramname"><em>mutex</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6241dc9347c314e962bee11d50516f98" name="a6241dc9347c314e962bee11d50516f98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6241dc9347c314e962bee11d50516f98">&#9670;&#160;</a></span>~LockGuard()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">~<a class="el" href="classaudio__tools_1_1_lock_guard.html">LockGuard</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a21a9cbdfa0dd7695d1b3910508c11b33" name="a21a9cbdfa0dd7695d1b3910508c11b33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21a9cbdfa0dd7695d1b3910508c11b33">&#9670;&#160;</a></span>p_mutex</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_mutex_base.html">MutexBase</a>* p_mutex = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/AudioTools/Concurrency/<a class="el" href="_lock_guard_8h_source.html">LockGuard.h</a></li>
 </ul>
 </div><!-- contents -->

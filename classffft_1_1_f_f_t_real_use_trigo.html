@@ -81,34 +81,240 @@ $(function() {
   <div class="headertitle"><div class="title">FFTRealUseTrigo&lt; ALGO &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_f_f_t_real_8h_source.html">FFTReal.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a39fb13732dcfb996819c79cb030f034e" id="r_a39fb13732dcfb996819c79cb030f034e"><td class="memItemLeft" align="right" valign="top"><a id="a39fb13732dcfb996819c79cb030f034e" name="a39fb13732dcfb996819c79cb030f034e"></a>
-typedef FFTRealFixLenParam::DataType&#160;</td><td class="memItemRight" valign="bottom"><b>DataType</b></td></tr>
+<tr class="memitem:a39fb13732dcfb996819c79cb030f034e" id="r_a39fb13732dcfb996819c79cb030f034e"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="classffft_1_1_f_f_t_real_fix_len_param.html#a279b64f47fb2213ad73e59be937afcfa">FFTRealFixLenParam::DataType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classffft_1_1_f_f_t_real_use_trigo.html#a39fb13732dcfb996819c79cb030f034e">DataType</a></td></tr>
 <tr class="separator:a39fb13732dcfb996819c79cb030f034e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a2ad5bc11d394ff05d5f3765fcf1927" id="r_a3a2ad5bc11d394ff05d5f3765fcf1927"><td class="memItemLeft" align="right" valign="top"><a id="a3a2ad5bc11d394ff05d5f3765fcf1927" name="a3a2ad5bc11d394ff05d5f3765fcf1927"></a>
-typedef <a class="el" href="classffft_1_1_osc_sin_cos.html">OscSinCos</a>&lt; DataType &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>OscType</b></td></tr>
+<tr class="memitem:a3a2ad5bc11d394ff05d5f3765fcf1927" id="r_a3a2ad5bc11d394ff05d5f3765fcf1927"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="classffft_1_1_osc_sin_cos.html">OscSinCos</a>&lt; <a class="el" href="classffft_1_1_f_f_t_real_use_trigo.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classffft_1_1_f_f_t_real_use_trigo.html#a3a2ad5bc11d394ff05d5f3765fcf1927">OscType</a></td></tr>
 <tr class="separator:a3a2ad5bc11d394ff05d5f3765fcf1927"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a75858cdc9ecbacf6be99961076896fd5" id="r_a75858cdc9ecbacf6be99961076896fd5"><td class="memItemLeft" align="right" valign="top"><a id="a75858cdc9ecbacf6be99961076896fd5" name="a75858cdc9ecbacf6be99961076896fd5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>iterate</b> (<a class="el" href="classffft_1_1_osc_sin_cos.html">OscType</a> &amp;osc, DataType &amp;c, DataType &amp;s, const DataType cos_ptr[], long index_c, long index_s)</td></tr>
+<tr class="memitem:a75858cdc9ecbacf6be99961076896fd5" id="r_a75858cdc9ecbacf6be99961076896fd5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classffft_1_1_f_f_t_real_use_trigo.html#a75858cdc9ecbacf6be99961076896fd5">iterate</a> (<a class="el" href="classffft_1_1_f_f_t_real_use_trigo.html#a3a2ad5bc11d394ff05d5f3765fcf1927">OscType</a> &amp;osc, <a class="el" href="classffft_1_1_f_f_t_real_use_trigo.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> &amp;c, <a class="el" href="classffft_1_1_f_f_t_real_use_trigo.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> &amp;s, const <a class="el" href="classffft_1_1_f_f_t_real_use_trigo.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> cos_ptr[], long index_c, long index_s)</td></tr>
 <tr class="separator:a75858cdc9ecbacf6be99961076896fd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab42704b13dbe6541d3b73e51535c29d0" id="r_ab42704b13dbe6541d3b73e51535c29d0"><td class="memItemLeft" align="right" valign="top"><a id="ab42704b13dbe6541d3b73e51535c29d0" name="ab42704b13dbe6541d3b73e51535c29d0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>prepare</b> (<a class="el" href="classffft_1_1_osc_sin_cos.html">OscType</a> &amp;osc)</td></tr>
+<tr class="memitem:ab42704b13dbe6541d3b73e51535c29d0" id="r_ab42704b13dbe6541d3b73e51535c29d0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classffft_1_1_f_f_t_real_use_trigo.html#ab42704b13dbe6541d3b73e51535c29d0">prepare</a> (<a class="el" href="classffft_1_1_f_f_t_real_use_trigo.html#a3a2ad5bc11d394ff05d5f3765fcf1927">OscType</a> &amp;osc)</td></tr>
 <tr class="separator:ab42704b13dbe6541d3b73e51535c29d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a75858cdc9ecbacf6be99961076896fd5" id="r_a75858cdc9ecbacf6be99961076896fd5"><td class="memItemLeft" align="right" valign="top"><a id="a75858cdc9ecbacf6be99961076896fd5" name="a75858cdc9ecbacf6be99961076896fd5"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>iterate</b> (<a class="el" href="classffft_1_1_osc_sin_cos.html">OscType</a> &amp;osc, DataType &amp;c, DataType &amp;s, const DataType cos_ptr[], long index_c, long index_s)</td></tr>
+<tr class="memitem:a75858cdc9ecbacf6be99961076896fd5" id="r_a75858cdc9ecbacf6be99961076896fd5"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classffft_1_1_f_f_t_real_use_trigo.html#a75858cdc9ecbacf6be99961076896fd5">iterate</a> (<a class="el" href="classffft_1_1_f_f_t_real_use_trigo.html#a3a2ad5bc11d394ff05d5f3765fcf1927">OscType</a> &amp;osc, <a class="el" href="classffft_1_1_f_f_t_real_use_trigo.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> &amp;c, <a class="el" href="classffft_1_1_f_f_t_real_use_trigo.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> &amp;s, const <a class="el" href="classffft_1_1_f_f_t_real_use_trigo.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> cos_ptr[], long index_c, long index_s)</td></tr>
 <tr class="separator:a75858cdc9ecbacf6be99961076896fd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab42704b13dbe6541d3b73e51535c29d0" id="r_ab42704b13dbe6541d3b73e51535c29d0"><td class="memItemLeft" align="right" valign="top"><a id="ab42704b13dbe6541d3b73e51535c29d0" name="ab42704b13dbe6541d3b73e51535c29d0"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>prepare</b> (<a class="el" href="classffft_1_1_osc_sin_cos.html">OscType</a> &amp;osc)</td></tr>
+<tr class="memitem:ab42704b13dbe6541d3b73e51535c29d0" id="r_ab42704b13dbe6541d3b73e51535c29d0"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classffft_1_1_f_f_t_real_use_trigo.html#ab42704b13dbe6541d3b73e51535c29d0">prepare</a> (<a class="el" href="classffft_1_1_f_f_t_real_use_trigo.html#a3a2ad5bc11d394ff05d5f3765fcf1927">OscType</a> &amp;osc)</td></tr>
 <tr class="separator:ab42704b13dbe6541d3b73e51535c29d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a39fb13732dcfb996819c79cb030f034e" name="a39fb13732dcfb996819c79cb030f034e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39fb13732dcfb996819c79cb030f034e">&#9670;&#160;</a></span>DataType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int ALGO&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="classffft_1_1_f_f_t_real_fix_len_param.html#a279b64f47fb2213ad73e59be937afcfa">FFTRealFixLenParam::DataType</a> <a class="el" href="classffft_1_1_f_f_t_real_use_trigo.html#a39fb13732dcfb996819c79cb030f034e">DataType</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3a2ad5bc11d394ff05d5f3765fcf1927" name="a3a2ad5bc11d394ff05d5f3765fcf1927"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a2ad5bc11d394ff05d5f3765fcf1927">&#9670;&#160;</a></span>OscType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int ALGO&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="classffft_1_1_osc_sin_cos.html">OscSinCos</a>&lt;<a class="el" href="classffft_1_1_f_f_t_real_use_trigo.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&gt; <a class="el" href="classffft_1_1_f_f_t_real_use_trigo.html#a3a2ad5bc11d394ff05d5f3765fcf1927">OscType</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a75858cdc9ecbacf6be99961076896fd5" name="a75858cdc9ecbacf6be99961076896fd5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75858cdc9ecbacf6be99961076896fd5">&#9670;&#160;</a></span>iterate() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int ALGO&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void iterate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_use_trigo.html#a3a2ad5bc11d394ff05d5f3765fcf1927">OscType</a> &amp;&#160;</td>
+          <td class="paramname"><em>osc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_use_trigo.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> &amp;&#160;</td>
+          <td class="paramname"><em>c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_use_trigo.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classffft_1_1_f_f_t_real_use_trigo.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>cos_ptr</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>index_c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>index_s</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a75858cdc9ecbacf6be99961076896fd5" name="a75858cdc9ecbacf6be99961076896fd5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75858cdc9ecbacf6be99961076896fd5">&#9670;&#160;</a></span>iterate() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void iterate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_use_trigo.html#a3a2ad5bc11d394ff05d5f3765fcf1927">OscType</a> &amp;&#160;</td>
+          <td class="paramname"><em>osc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_use_trigo.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> &amp;&#160;</td>
+          <td class="paramname"><em>c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_use_trigo.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classffft_1_1_f_f_t_real_use_trigo.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>cos_ptr</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>index_c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>index_s</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab42704b13dbe6541d3b73e51535c29d0" name="ab42704b13dbe6541d3b73e51535c29d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab42704b13dbe6541d3b73e51535c29d0">&#9670;&#160;</a></span>prepare() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int ALGO&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void prepare </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_use_trigo.html#a3a2ad5bc11d394ff05d5f3765fcf1927">OscType</a> &amp;&#160;</td>
+          <td class="paramname"><em>osc</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab42704b13dbe6541d3b73e51535c29d0" name="ab42704b13dbe6541d3b73e51535c29d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab42704b13dbe6541d3b73e51535c29d0">&#9670;&#160;</a></span>prepare() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void prepare </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_use_trigo.html#a3a2ad5bc11d394ff05d5f3765fcf1927">OscType</a> &amp;&#160;</td>
+          <td class="paramname"><em>osc</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/AudioTools/AudioLibs/FFT/<a class="el" href="_f_f_t_real_8h_source.html">FFTReal.h</a></li>
 </ul>

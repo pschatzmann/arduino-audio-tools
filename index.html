@@ -107,7 +107,7 @@ Example</h2>
 <div class="line">I2SStream i2s;  <span class="comment">// Output to I2S</span></div>
 <div class="line">StreamCopy copier(i2s, music); <span class="comment">// copies sound into i2s</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">void</span> setup(){</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="_main_8h.html#a4fc01d736fe50cf5b977f755b675f11d">setup</a>(){</div>
 <div class="line">    Serial.begin(115200);</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">auto</span> config = i2s.defaultConfig(TX_MODE);</div>
@@ -119,10 +119,12 @@ Example</h2>
 <div class="line">    music.begin();</div>
 <div class="line">}</div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">void</span> loop(){</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="_main_8h.html#afe461d27b9c48d5921c00d521181f12f">loop</a>(){</div>
 <div class="line">    copier.copy();</div>
 <div class="line">}</div>
 <div class="ttc" id="a_audio_tools_8h_html"><div class="ttname"><a href="_audio_tools_8h.html">AudioTools.h</a></div></div>
+<div class="ttc" id="a_main_8h_html_a4fc01d736fe50cf5b977f755b675f11d"><div class="ttname"><a href="_main_8h.html#a4fc01d736fe50cf5b977f755b675f11d">setup</a></div><div class="ttdeci">void setup()</div></div>
+<div class="ttc" id="a_main_8h_html_afe461d27b9c48d5921c00d521181f12f"><div class="ttname"><a href="_main_8h.html#afe461d27b9c48d5921c00d521181f12f">loop</a></div><div class="ttdeci">void loop()</div></div>
 </div><!-- fragment --><p> Each stream has it's own <a href="https://pschatzmann.github.io/arduino-audio-tools/structaudio__tools_1_1_audio_info.html">configuration object</a> that should be passed to the begin method. The defaultConfig() method is providing a default proposal which will usually "just work". Please consult the <a href="https://pschatzmann.github.io/arduino-audio-tools/modules.html">class documentation</a> for the available configuration parameters. You can also <b>easily adapt</b> any provided examples: If you e.g. replace the I2SStream with the AnalogAudioStream class, you will get analog instead of digital output.</p>
 <p>I suggest you continue to read the more <a href="https://github.com/pschatzmann/arduino-audio-tools/wiki/Introduction">detailed introduction</a>.</p>
 <p>Further examples can be found in the <a href="https://github.com/pschatzmann/arduino-audio-tools/wiki/Examples">Wiki</a>.</p>

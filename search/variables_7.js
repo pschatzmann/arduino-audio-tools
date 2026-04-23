@@ -1,6 +1,28 @@
 var searchData=
 [
-  ['gain_5fhigh_0',['gain_high',['../structaudio__tools_1_1_config_equalizer3_bands.html#affc05551bbc2a21b367dd404b4ed31b0',1,'audio_tools::ConfigEqualizer3Bands::gain_high'],['../classaudio__tools_1_1_equalizer3_bands_per_channel.html#a8e1e2a092d89fc0bd65178d531bd0c53',1,'audio_tools::Equalizer3BandsPerChannel::gain_high']]],
-  ['gain_5flow_1',['gain_low',['../structaudio__tools_1_1_config_equalizer3_bands.html#a4709a26edcf9c4fa1995ca600dcc67e8',1,'audio_tools::ConfigEqualizer3Bands::gain_low'],['../classaudio__tools_1_1_equalizer3_bands_per_channel.html#aa2fbd5d14295ea6cdef341d61dffaa93',1,'audio_tools::Equalizer3BandsPerChannel::gain_low']]],
-  ['gain_5fmedium_2',['gain_medium',['../structaudio__tools_1_1_config_equalizer3_bands.html#ab2e8926b85eedd16ac07c10762995613',1,'audio_tools::ConfigEqualizer3Bands::gain_medium'],['../classaudio__tools_1_1_equalizer3_bands_per_channel.html#a99b38d25b22b6c98dc0442cc9e64eb69',1,'audio_tools::Equalizer3BandsPerChannel::gain_medium']]]
+  ['g722_5fdctx_0',['g722_dctx',['../classaudio__tools_1_1_g722_decoder.html#a9b400fa58d50228e4b192e9d36f320d5',1,'audio_tools::G722Decoder']]],
+  ['g722_5fectx_1',['g722_ectx',['../classaudio__tools_1_1_g722_encoder.html#a9132c46a8b42a7a10bc1d7267f3965f7',1,'audio_tools::G722Encoder']]],
+  ['g_5fmicro_5ffeatures_5fstate_2',['g_micro_features_state',['../classaudio__tools_1_1_tf_lite_micro_speach_writer.html#a311d041ed46236e59cfe9bf17fa66733',1,'audio_tools::TfLiteMicroSpeachWriter']]],
+  ['gain_3',['gain',['../structaudio__tools_1_1_audio_m_p34_d_t05_config.html#ad209a6b4e081cf7b984dcfe8ceb7c50d',1,'audio_tools::AudioMP34DT05Config::gain'],['../classaudio__tools_1_1_compressor.html#aca3852dab23cf0066809ecc1997fb58b',1,'audio_tools::Compressor::gain'],['../classaudio__tools_1_1_number_format_converter_stream_t.html#aca3852dab23cf0066809ecc1997fb58b',1,'audio_tools::NumberFormatConverterStreamT::gain'],['../classaudio__tools_1_1_number_format_converter_stream.html#aca3852dab23cf0066809ecc1997fb58b',1,'audio_tools::NumberFormatConverterStream::gain']]],
+  ['gain_5fhigh_4',['gain_high',['../structaudio__tools_1_1_config_equalizer3_bands.html#affc05551bbc2a21b367dd404b4ed31b0',1,'audio_tools::ConfigEqualizer3Bands::gain_high'],['../classaudio__tools_1_1_equalizer3_bands_per_channel.html#a8e1e2a092d89fc0bd65178d531bd0c53',1,'audio_tools::Equalizer3BandsPerChannel::gain_high']]],
+  ['gain_5flow_5',['gain_low',['../structaudio__tools_1_1_config_equalizer3_bands.html#a4709a26edcf9c4fa1995ca600dcc67e8',1,'audio_tools::ConfigEqualizer3Bands::gain_low'],['../classaudio__tools_1_1_equalizer3_bands_per_channel.html#aa2fbd5d14295ea6cdef341d61dffaa93',1,'audio_tools::Equalizer3BandsPerChannel::gain_low']]],
+  ['gain_5fmedium_6',['gain_medium',['../structaudio__tools_1_1_config_equalizer3_bands.html#ab2e8926b85eedd16ac07c10762995613',1,'audio_tools::ConfigEqualizer3Bands::gain_medium'],['../classaudio__tools_1_1_equalizer3_bands_per_channel.html#a99b38d25b22b6c98dc0442cc9e64eb69',1,'audio_tools::Equalizer3BandsPerChannel::gain_medium']]],
+  ['gain_5fstep_5fattack_7',['gain_step_attack',['../classaudio__tools_1_1_compressor.html#a5c283706867526fcc04b62a2a2ab6b85',1,'audio_tools::Compressor']]],
+  ['gain_5fstep_5frelease_8',['gain_step_release',['../classaudio__tools_1_1_compressor.html#a93a4c745f329a54dfdff579d55c66fcb',1,'audio_tools::Compressor']]],
+  ['gainreduce_9',['gainreduce',['../classaudio__tools_1_1_compressor.html#a2b56ecd9dcb36dd9bbdc08d466a625f4',1,'audio_tools::Compressor']]],
+  ['gains_10',['gains',['../classaudio__tools_1_1_equalizer_n_bands.html#ad620e7254ac33f90089a44f59416c09e',1,'audio_tools::EqualizerNBands']]],
+  ['gainsdirty_11',['gainsDirty',['../classaudio__tools_1_1_equalizer_n_bands.html#aa740f29e3ebf366e0e76d5008c10bb7e',1,'audio_tools::EqualizerNBands']]],
+  ['gate_5fexists_12',['gate_exists',['../classaudio__tools_1_1_faust_stream.html#a855eba1834e1665f145fd03420a66254',1,'audio_tools::FaustStream']]],
+  ['generator_13',['generator',['../classaudio__tools_1_1_s_t_k_stream.html#ac4f697c4e9cadd453a993a6f8566b3ca',1,'audio_tools::STKStream']]],
+  ['generator_5fptr_14',['generator_ptr',['../classaudio__tools_1_1_generated_sound_stream.html#a50e0ca4e0aa61311b7b7e97b41e2f503',1,'audio_tools::GeneratedSoundStream']]],
+  ['genre_15',['genre',['../structaudio__tools_1_1_i_d3v1.html#a081a1c005eb62b40514079ade4320e38',1,'audio_tools::ID3v1::genre'],['../structaudio__tools_1_1_i_d3v1_enhanced.html#ad8b088b4257404237bf9026e20fc4a4a',1,'audio_tools::ID3v1Enhanced::genre']]],
+  ['genres_16',['genres',['../namespaceaudio__tools.html#a1c8c26908307dcc9ed5243051454e9ed',1,'audio_tools']]],
+  ['get_5freq_5fentity_5fcb_5f_17',['get_req_entity_cb_',['../classaudio__tools_1_1_u_s_b_audio_device.html#a8133d65cb7cbc786ab31af6f7fe922b7',1,'audio_tools::USBAudioDevice']]],
+  ['get_5freq_5fep_5fcb_5f_18',['get_req_ep_cb_',['../classaudio__tools_1_1_u_s_b_audio_device.html#aa8b1dccb97773834b807ba85e065ca95',1,'audio_tools::USBAudioDevice']]],
+  ['get_5freq_5fitf_5fcb_5f_19',['get_req_itf_cb_',['../classaudio__tools_1_1_u_s_b_audio_device.html#a448ba5e038c30f204e308acfe4373e41',1,'audio_tools::USBAudioDevice']]],
+  ['gpio_20',['gpio',['../structaudio__tools_1_1_pin_info_e_s_p32.html#a9526af66d4e7f0276f5b025afa6c445d',1,'audio_tools::PinInfoESP32']]],
+  ['gpio_5fhigh_21',['gpio_high',['../structaudio__tools_1_1_pin_info_e_s_p32_compl.html#ab30771d2c1bf6ea3f4321bb8147e5520',1,'audio_tools::PinInfoESP32Compl']]],
+  ['gpio_5flow_22',['gpio_low',['../structaudio__tools_1_1_pin_info_e_s_p32_compl.html#a319d7c74f63085195ac17985883912f7',1,'audio_tools::PinInfoESP32Compl']]],
+  ['gps_5fposition_23',['gps_position',['../struct_v_b_a_n___p_i_n_g0.html#acad92cbad90ebb0f856a7df7ceae463e',1,'VBAN_PING0::GPS_Position'],['../vban_8h.html#acad92cbad90ebb0f856a7df7ceae463e',1,'GPS_Position:&#160;vban.h']]],
+  ['granulepos_24',['granulepos',['../classaudio__tools_1_1_ogg_container_output.html#a033864495874bf05599d7d0fc8b6b992',1,'audio_tools::OggContainerOutput']]]
 ];

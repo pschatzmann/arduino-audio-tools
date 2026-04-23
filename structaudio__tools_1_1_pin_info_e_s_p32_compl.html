@@ -87,23 +87,76 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:ab30771d2c1bf6ea3f4321bb8147e5520" id="r_ab30771d2c1bf6ea3f4321bb8147e5520"><td class="memItemLeft" align="right" valign="top"><a id="ab30771d2c1bf6ea3f4321bb8147e5520" name="ab30771d2c1bf6ea3f4321bb8147e5520"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>gpio_high</b></td></tr>
+<tr class="memitem:ab30771d2c1bf6ea3f4321bb8147e5520" id="r_ab30771d2c1bf6ea3f4321bb8147e5520"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_pin_info_e_s_p32_compl.html#ab30771d2c1bf6ea3f4321bb8147e5520">gpio_high</a></td></tr>
 <tr class="separator:ab30771d2c1bf6ea3f4321bb8147e5520"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a319d7c74f63085195ac17985883912f7" id="r_a319d7c74f63085195ac17985883912f7"><td class="memItemLeft" align="right" valign="top"><a id="a319d7c74f63085195ac17985883912f7" name="a319d7c74f63085195ac17985883912f7"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>gpio_low</b></td></tr>
+<tr class="memitem:a319d7c74f63085195ac17985883912f7" id="r_a319d7c74f63085195ac17985883912f7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_pin_info_e_s_p32_compl.html#a319d7c74f63085195ac17985883912f7">gpio_low</a></td></tr>
 <tr class="separator:a319d7c74f63085195ac17985883912f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc593131e638fc8e3e1753f0fb4e38e6" id="r_abc593131e638fc8e3e1753f0fb4e38e6"><td class="memItemLeft" align="right" valign="top"><a id="abc593131e638fc8e3e1753f0fb4e38e6" name="abc593131e638fc8e3e1753f0fb4e38e6"></a>
-mcpwm_timer_t&#160;</td><td class="memItemRight" valign="bottom"><b>timer</b></td></tr>
+<tr class="memitem:abc593131e638fc8e3e1753f0fb4e38e6" id="r_abc593131e638fc8e3e1753f0fb4e38e6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">mcpwm_timer_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_pin_info_e_s_p32_compl.html#abc593131e638fc8e3e1753f0fb4e38e6">timer</a></td></tr>
 <tr class="separator:abc593131e638fc8e3e1753f0fb4e38e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0256cf4e312a2a70cd1c11f0958a55f5" id="r_a0256cf4e312a2a70cd1c11f0958a55f5"><td class="memItemLeft" align="right" valign="top"><a id="a0256cf4e312a2a70cd1c11f0958a55f5" name="a0256cf4e312a2a70cd1c11f0958a55f5"></a>
-mcpwm_unit_t&#160;</td><td class="memItemRight" valign="bottom"><b>unit</b></td></tr>
+<tr class="memitem:a0256cf4e312a2a70cd1c11f0958a55f5" id="r_a0256cf4e312a2a70cd1c11f0958a55f5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">mcpwm_unit_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_pin_info_e_s_p32_compl.html#a0256cf4e312a2a70cd1c11f0958a55f5">unit</a></td></tr>
 <tr class="separator:a0256cf4e312a2a70cd1c11f0958a55f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Mapping information for one complementary PWM audio channel. </p>
 <p>A single logical audio PWM channel is produced by one MCPWM timer within an MCPWM unit. Each timer provides two generator outputs (A and B) which we map to a high-side MOSFET gate (gpio_high / PWMxA) and a low-side MOSFET gate (gpio_low / PWMxB). When dead time is enabled the peripheral inserts blanking around switching edges to avoid shoot-through between the high and low transistors on a half bridge. </p>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
+</div><h2 class="groupheader">Member Data Documentation</h2>
+<a id="ab30771d2c1bf6ea3f4321bb8147e5520" name="ab30771d2c1bf6ea3f4321bb8147e5520"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab30771d2c1bf6ea3f4321bb8147e5520">&#9670;&#160;</a></span>gpio_high</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> gpio_high</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a319d7c74f63085195ac17985883912f7" name="a319d7c74f63085195ac17985883912f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a319d7c74f63085195ac17985883912f7">&#9670;&#160;</a></span>gpio_low</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> gpio_low</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abc593131e638fc8e3e1753f0fb4e38e6" name="abc593131e638fc8e3e1753f0fb4e38e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc593131e638fc8e3e1753f0fb4e38e6">&#9670;&#160;</a></span>timer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">mcpwm_timer_t</a> timer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0256cf4e312a2a70cd1c11f0958a55f5" name="a0256cf4e312a2a70cd1c11f0958a55f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0256cf4e312a2a70cd1c11f0958a55f5">&#9670;&#160;</a></span>unit</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">mcpwm_unit_t</a> unit</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
 <li>src/AudioTools/CoreAudio/AudioPWM/<a class="el" href="_p_w_m_complementary_driver_e_s_p32_8h_source.html">PWMComplementaryDriverESP32.h</a></li>
 </ul>
 </div><!-- contents -->

@@ -1,4 +1,24 @@
 var searchData=
 [
-  ['dsd_5fbuffer_5fsize_0',['DSD_BUFFER_SIZE',['../_codec_d_s_f_8h.html#a7fa7f3a58f65fe2caeeca49e5ec25812',1,'CodecDSF.h']]]
+  ['a2dp_5fbuffer_5fcount_0',['A2DP_BUFFER_COUNT',['../_audio_tools_config_8h.html#a590b380a34cc77fa88da41d214393db0',1,'AudioToolsConfig.h']]],
+  ['a2dp_5fbuffer_5fsize_1',['A2DP_BUFFER_SIZE',['../_audio_tools_config_8h.html#aacdd025528d20ebb44b66dbc05ba65e0',1,'AudioToolsConfig.h']]],
+  ['abs_2',['ABS',['../_m_d_f_echo_cancellation_8h.html#a996f7be338ccb40d1a2a5abc1ad61759',1,'MDFEchoCancellation.h']]],
+  ['abs16_3',['ABS16',['../_m_d_f_echo_cancellation_8h.html#aa4082b064c5e68c941c9ba3b297cc149',1,'MDFEchoCancellation.h']]],
+  ['abs32_4',['ABS32',['../_m_d_f_echo_cancellation_8h.html#a42506a0d6465a6a8be2b1e00bb8f2755',1,'MDFEchoCancellation.h']]],
+  ['adc_5funit_5',['ADC_UNIT',['../_analog_config_e_s_p32_v1_8h.html#aa869cc8a3bf3f2a35447edc6eb11cf32',1,'AnalogConfigESP32V1.h']]],
+  ['alloc_5fmem_5finit_6',['ALLOC_MEM_INIT',['../_codec_t_s_demux_8h.html#a7da461c8d91cf330b2297edbcea9425e',1,'CodecTSDemux.h']]],
+  ['analog_5fbuffer_5fcount_7',['ANALOG_BUFFER_COUNT',['../_audio_tools_config_8h.html#a700d28cbb85493ca806c8fcf2568972f',1,'AudioToolsConfig.h']]],
+  ['analog_5fbuffer_5fsize_8',['analog_buffer_size',['../giga_8h.html#a9f204f0ec124563f8822332d5c6ad770',1,'ANALOG_BUFFER_SIZE:&#160;giga.h'],['../portenta_8h.html#a9f204f0ec124563f8822332d5c6ad770',1,'ANALOG_BUFFER_SIZE:&#160;portenta.h'],['../rp2040hower_8h.html#a9f204f0ec124563f8822332d5c6ad770',1,'ANALOG_BUFFER_SIZE:&#160;rp2040hower.h'],['../rp2040mbed_8h.html#a9f204f0ec124563f8822332d5c6ad770',1,'ANALOG_BUFFER_SIZE:&#160;rp2040mbed.h'],['../unor4_8h.html#a9f204f0ec124563f8822332d5c6ad770',1,'ANALOG_BUFFER_SIZE:&#160;unor4.h'],['../_audio_tools_config_8h.html#a9f204f0ec124563f8822332d5c6ad770',1,'ANALOG_BUFFER_SIZE:&#160;AudioToolsConfig.h']]],
+  ['analog_5fbuffers_9',['analog_buffers',['../unor4_8h.html#ab420df5014a0d22b8924e7ebd9ab8b5d',1,'ANALOG_BUFFERS:&#160;unor4.h'],['../rp2040mbed_8h.html#ab420df5014a0d22b8924e7ebd9ab8b5d',1,'ANALOG_BUFFERS:&#160;rp2040mbed.h'],['../rp2040hower_8h.html#ab420df5014a0d22b8924e7ebd9ab8b5d',1,'ANALOG_BUFFERS:&#160;rp2040hower.h'],['../giga_8h.html#ab420df5014a0d22b8924e7ebd9ab8b5d',1,'ANALOG_BUFFERS:&#160;giga.h'],['../_analog_config_std_8h.html#ab420df5014a0d22b8924e7ebd9ab8b5d',1,'ANALOG_BUFFERS:&#160;AnalogConfigStd.h'],['../portenta_8h.html#ab420df5014a0d22b8924e7ebd9ab8b5d',1,'ANALOG_BUFFERS:&#160;portenta.h']]],
+  ['analog_5fconfig_10',['analog_config',['../_analog_config_e_s_p32_8h.html#a0de7280b2e75fdfd926b8bac8581712a',1,'ANALOG_CONFIG:&#160;AnalogConfigESP32.h'],['../_analog_config_e_s_p32_v1_8h.html#a0de7280b2e75fdfd926b8bac8581712a',1,'ANALOG_CONFIG:&#160;AnalogConfigESP32V1.h'],['../_analog_config_std_8h.html#a0de7280b2e75fdfd926b8bac8581712a',1,'ANALOG_CONFIG:&#160;AnalogConfigStd.h']]],
+  ['analog_5fmax_5fout_5fchannels_11',['analog_max_out_channels',['../_analog_config_std_8h.html#ab5b05638016df67fca9c4f90bd4ba730',1,'ANALOG_MAX_OUT_CHANNELS:&#160;AnalogConfigStd.h'],['../unor4_8h.html#ab5b05638016df67fca9c4f90bd4ba730',1,'ANALOG_MAX_OUT_CHANNELS:&#160;unor4.h']]],
+  ['analog_5fmax_5fsample_5frate_12',['ANALOG_MAX_SAMPLE_RATE',['../unor4_8h.html#a3947897b5d664749a9ca4965981959b5',1,'unor4.h']]],
+  ['assert_13',['assert',['../avr_8h.html#ab2851d907b12a2233b89f8f2c2f7346a',1,'avr.h']]],
+  ['audio_5finclude_5fcore_14',['AUDIO_INCLUDE_CORE',['../_audio_tools_config_8h.html#a7dad175829588936f3c83dce9f6596b7',1,'AudioToolsConfig.h']]],
+  ['audiooutput_15',['AudioOutput',['../_mozzi_stream_8h.html#afc2a2f56c44bd8868cfe3884942637ae',1,'MozziStream.h']]],
+  ['audiotools_5fid3_5ftag_5fallow_5fnonascii_16',['AUDIOTOOLS_ID3_TAG_ALLOW_NONASCII',['../_meta_data_i_d3_8h.html#a44805f87d7f39c3ef8b01f9d4b453c35',1,'MetaDataID3.h']]],
+  ['audiotools_5fmajor_5fversion_17',['AUDIOTOOLS_MAJOR_VERSION',['../_audio_tools_config_8h.html#a3ed40ae9838f3a20da0ac76a70f08a78',1,'AudioToolsConfig.h']]],
+  ['audiotools_5fmetadata_5ficy_5fascii_5fonly_18',['AUDIOTOOLS_METADATA_ICY_ASCII_ONLY',['../_meta_data_i_c_y_8h.html#aedd477568104af5b24ec4e40555858d2',1,'MetaDataICY.h']]],
+  ['audiotools_5fminor_5fversion_19',['AUDIOTOOLS_MINOR_VERSION',['../_audio_tools_config_8h.html#a0e88b7c73f419512f450de658fe6d6e4',1,'AudioToolsConfig.h']]],
+  ['audiotools_5fversion_20',['AUDIOTOOLS_VERSION',['../_audio_tools_config_8h.html#af878c08939cc45212bb82fcd7db22de5',1,'AudioToolsConfig.h']]]
 ];

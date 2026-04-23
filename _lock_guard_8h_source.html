@@ -81,38 +81,52 @@ $(document).ready(function() { init_codefold(0); });
   <div class="headertitle"><div class="title">LockGuard.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &quot;AudioToolsConfig.h&quot;</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;Mutex.h&quot;</span></div>
+<a href="_lock_guard_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &quot;<a class="code" href="_audio_tools_config_8h.html">AudioToolsConfig.h</a>&quot;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="_mutex_8h.html">Mutex.h</a>&quot;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceaudio__tools.html">audio_tools</a> {</div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
 <div class="foldopen" id="foldopen00017" data-start="{" data-end="};">
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_lock_guard.html">   17</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_lock_guard.html">LockGuard</a> {</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  <a class="code hl_class" href="classaudio__tools_1_1_lock_guard.html">LockGuard</a>(<a class="code hl_class" href="classaudio__tools_1_1_mutex_base.html">MutexBase</a> &amp;mutex) {</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    p_mutex = &amp;mutex;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    p_mutex-&gt;lock();</div>
+<div class="foldopen" id="foldopen00019" data-start="{" data-end="}">
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_lock_guard.html#a0e9a2b819adc8ac5d676836f87935fe0">   19</a></span>  <a class="code hl_function" href="classaudio__tools_1_1_lock_guard.html#a0e9a2b819adc8ac5d676836f87935fe0">LockGuard</a>(<a class="code hl_class" href="classaudio__tools_1_1_mutex_base.html">MutexBase</a> &amp;mutex) {</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <a class="code hl_variable" href="classaudio__tools_1_1_lock_guard.html#a21a9cbdfa0dd7695d1b3910508c11b33">p_mutex</a> = &amp;mutex;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <a class="code hl_variable" href="classaudio__tools_1_1_lock_guard.html#a21a9cbdfa0dd7695d1b3910508c11b33">p_mutex</a>-&gt;<a class="code hl_function" href="classaudio__tools_1_1_mutex_base.html#ae33bae81fdbbabfe2be20d78338bd0d9">lock</a>();</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  }</div>
+</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  <a class="code hl_class" href="classaudio__tools_1_1_lock_guard.html">LockGuard</a>(<a class="code hl_class" href="classaudio__tools_1_1_mutex_base.html">MutexBase</a> *mutex) {</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    p_mutex = mutex;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordflow">if</span> (p_mutex != <span class="keyword">nullptr</span>) p_mutex-&gt;lock();</div>
+<div class="foldopen" id="foldopen00024" data-start="{" data-end="}">
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_lock_guard.html#a86cb8f17e3a9b80c6190cadd72190712">   24</a></span>  <a class="code hl_function" href="classaudio__tools_1_1_lock_guard.html#a86cb8f17e3a9b80c6190cadd72190712">LockGuard</a>(<a class="code hl_class" href="classaudio__tools_1_1_mutex_base.html">MutexBase</a> *mutex) {</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <a class="code hl_variable" href="classaudio__tools_1_1_lock_guard.html#a21a9cbdfa0dd7695d1b3910508c11b33">p_mutex</a> = mutex;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="classaudio__tools_1_1_lock_guard.html#a21a9cbdfa0dd7695d1b3910508c11b33">p_mutex</a> != <span class="keyword">nullptr</span>) <a class="code hl_variable" href="classaudio__tools_1_1_lock_guard.html#a21a9cbdfa0dd7695d1b3910508c11b33">p_mutex</a>-&gt;<a class="code hl_function" href="classaudio__tools_1_1_mutex_base.html#ae33bae81fdbbabfe2be20d78338bd0d9">lock</a>();</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  }</div>
+</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  <a class="code hl_class" href="classaudio__tools_1_1_lock_guard.html">~LockGuard</a>() {</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordflow">if</span> (p_mutex != <span class="keyword">nullptr</span>) p_mutex-&gt;unlock();</div>
+<div class="foldopen" id="foldopen00029" data-start="{" data-end="}">
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_lock_guard.html#a6241dc9347c314e962bee11d50516f98">   29</a></span>  <a class="code hl_function" href="classaudio__tools_1_1_lock_guard.html#a6241dc9347c314e962bee11d50516f98">~LockGuard</a>() {</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="classaudio__tools_1_1_lock_guard.html#a21a9cbdfa0dd7695d1b3910508c11b33">p_mutex</a> != <span class="keyword">nullptr</span>) <a class="code hl_variable" href="classaudio__tools_1_1_lock_guard.html#a21a9cbdfa0dd7695d1b3910508c11b33">p_mutex</a>-&gt;<a class="code hl_function" href="classaudio__tools_1_1_mutex_base.html#ae6f018536d482152b993f522d8d2942d">unlock</a>();</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  }</div>
+</div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <a class="code hl_class" href="classaudio__tools_1_1_mutex_base.html">MutexBase</a> *p_mutex = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_lock_guard.html#a21a9cbdfa0dd7695d1b3910508c11b33">   34</a></span>  <a class="code hl_class" href="classaudio__tools_1_1_mutex_base.html">MutexBase</a> *<a class="code hl_variable" href="classaudio__tools_1_1_lock_guard.html#a21a9cbdfa0dd7695d1b3910508c11b33">p_mutex</a> = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>};</div>
 </div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="ttc" id="a_audio_tools_config_8h_html"><div class="ttname"><a href="_audio_tools_config_8h.html">AudioToolsConfig.h</a></div></div>
+<div class="ttc" id="a_mutex_8h_html"><div class="ttname"><a href="_mutex_8h.html">Mutex.h</a></div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_lock_guard_html"><div class="ttname"><a href="classaudio__tools_1_1_lock_guard.html">audio_tools::LockGuard</a></div><div class="ttdoc">RAII implementaion using a Mutex: Only a few microcontrollers provide lock guards,...</div><div class="ttdef"><b>Definition</b> LockGuard.h:17</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_lock_guard_html_a0e9a2b819adc8ac5d676836f87935fe0"><div class="ttname"><a href="classaudio__tools_1_1_lock_guard.html#a0e9a2b819adc8ac5d676836f87935fe0">audio_tools::LockGuard::LockGuard</a></div><div class="ttdeci">LockGuard(MutexBase &amp;mutex)</div><div class="ttdef"><b>Definition</b> LockGuard.h:19</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_lock_guard_html_a21a9cbdfa0dd7695d1b3910508c11b33"><div class="ttname"><a href="classaudio__tools_1_1_lock_guard.html#a21a9cbdfa0dd7695d1b3910508c11b33">audio_tools::LockGuard::p_mutex</a></div><div class="ttdeci">MutexBase * p_mutex</div><div class="ttdef"><b>Definition</b> LockGuard.h:34</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_lock_guard_html_a6241dc9347c314e962bee11d50516f98"><div class="ttname"><a href="classaudio__tools_1_1_lock_guard.html#a6241dc9347c314e962bee11d50516f98">audio_tools::LockGuard::~LockGuard</a></div><div class="ttdeci">~LockGuard()</div><div class="ttdef"><b>Definition</b> LockGuard.h:29</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_lock_guard_html_a86cb8f17e3a9b80c6190cadd72190712"><div class="ttname"><a href="classaudio__tools_1_1_lock_guard.html#a86cb8f17e3a9b80c6190cadd72190712">audio_tools::LockGuard::LockGuard</a></div><div class="ttdeci">LockGuard(MutexBase *mutex)</div><div class="ttdef"><b>Definition</b> LockGuard.h:24</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_mutex_base_html"><div class="ttname"><a href="classaudio__tools_1_1_mutex_base.html">audio_tools::MutexBase</a></div><div class="ttdoc">Empty Mutex implementation which does nothing.</div><div class="ttdef"><b>Definition</b> Mutex.h:18</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_mutex_base_html_ae33bae81fdbbabfe2be20d78338bd0d9"><div class="ttname"><a href="classaudio__tools_1_1_mutex_base.html#ae33bae81fdbbabfe2be20d78338bd0d9">audio_tools::MutexBase::lock</a></div><div class="ttdeci">virtual void lock()</div><div class="ttdef"><b>Definition</b> Mutex.h:20</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_mutex_base_html_ae6f018536d482152b993f522d8d2942d"><div class="ttname"><a href="classaudio__tools_1_1_mutex_base.html#ae6f018536d482152b993f522d8d2942d">audio_tools::MutexBase::unlock</a></div><div class="ttdeci">virtual void unlock()</div><div class="ttdef"><b>Definition</b> Mutex.h:21</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:10</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

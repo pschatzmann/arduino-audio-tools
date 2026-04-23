@@ -81,9 +81,9 @@ $(document).ready(function() { init_codefold(0); });
   <div class="headertitle"><div class="title">Mutex.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
+<a href="_mutex_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;AudioToolsConfig.h&quot;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="_audio_tools_config_8h.html">AudioToolsConfig.h</a>&quot;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifdef USE_STD_CONCURRENCY</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;atomic&gt;</span></div>
@@ -95,68 +95,73 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00018" data-start="{" data-end="};">
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_mutex_base.html">   18</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_mutex_base.html">MutexBase</a> {</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> lock() {}</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> unlock() {}</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_mutex_base.html#ae33bae81fdbbabfe2be20d78338bd0d9">   20</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_mutex_base.html#ae33bae81fdbbabfe2be20d78338bd0d9">lock</a>() {}</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_mutex_base.html#ae6f018536d482152b993f522d8d2942d">   21</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_mutex_base.html#ae6f018536d482152b993f522d8d2942d">unlock</a>() {}</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>};</div>
 </div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#if defined(USE_STD_CONCURRENCY)</span></div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keyword">class </span>SpinLock : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_mutex_base.html">MutexBase</a> {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keyword">class </span><a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">SpinLock</a> : <span class="keyword">public</span> MutexBase {</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  <span class="keywordtype">void</span> lock() {</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keywordflow">for</span> (;;) {</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>      <span class="comment">// Optimistically assume the lock is free on the first try</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>      <span class="keywordflow">if</span> (!lock_.exchange(<span class="keyword">true</span>, std::memory_order_acquire)) {</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>      <span class="keywordflow">if</span> (!<a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">lock_</a>.exchange(<span class="keyword">true</span>, std::memory_order_acquire)) {</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>      }</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>      <span class="comment">// Wait for lock to be released without generating cache misses</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>      <span class="keywordflow">while</span> (lock_.load(std::memory_order_relaxed)) {</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>      <span class="keywordflow">while</span> (<a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">lock_</a>.load(std::memory_order_relaxed)) {</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <span class="comment">// Issue X86 PAUSE or ARM YIELD instruction to reduce contention between</span></div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <span class="comment">// hyper-threads</span></div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="comment">//__builtin_ia32_pause();</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        delay(1);</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <a class="code hl_function" href="namespaceaudio__tools.html#a6bc5f943544a887f8b23cadfb26a5e30">delay</a>(1);</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>      }</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    }</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  }</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  <span class="keywordtype">bool</span> try_lock() {</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">try_lock</a>() {</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="comment">// First do a relaxed load to check if lock is free in order to prevent</span></div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="comment">// unnecessary cache misses if someone does while(!try_lock())</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordflow">return</span> !lock_.load(std::memory_order_relaxed) &amp;&amp;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>           !lock_.exchange(<span class="keyword">true</span>, std::memory_order_acquire);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordflow">return</span> !<a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">lock_</a>.load(std::memory_order_relaxed) &amp;&amp;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>           !<a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">lock_</a>.exchange(<span class="keyword">true</span>, std::memory_order_acquire);</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  }</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  <span class="keywordtype">void</span> unlock() { lock_.store(<span class="keyword">false</span>, std::memory_order_release); }</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  <span class="keywordtype">void</span> unlock() { <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">lock_</a>.store(<span class="keyword">false</span>, std::memory_order_release); }</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  <span class="keyword">volatile</span> std::atomic&lt;bool&gt; lock_ = {0};</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  <span class="keyword">volatile</span> std::atomic&lt;bool&gt; <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">lock_</a> = {0};</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>};</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="keyword">class </span>StdMutex : <span class="keyword">public</span> MutexBase {</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="keyword">class </span><a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">StdMutex</a> : <span class="keyword">public</span> MutexBase {</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  <span class="keywordtype">void</span> lock()<span class="keyword"> override </span>{ std_mutex.lock(); }</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  <span class="keywordtype">void</span> unlock()<span class="keyword"> override </span>{ std_mutex.unlock(); }</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  <span class="keywordtype">void</span> lock()<span class="keyword"> override </span>{ <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">std_mutex</a>.lock(); }</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  <span class="keywordtype">void</span> unlock()<span class="keyword"> override </span>{ <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">std_mutex</a>.unlock(); }</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  std::mutex std_mutex;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  std::mutex <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">std_mutex</a>;</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>};</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="keyword">class </span>StdRecursiveMutex : <span class="keyword">public</span> MutexBase {</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="keyword">class </span><a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">StdRecursiveMutex</a> : <span class="keyword">public</span> MutexBase {</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  <span class="keywordtype">void</span> lock()<span class="keyword"> override </span>{ std_mutex.lock(); }</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  <span class="keywordtype">void</span> unlock()<span class="keyword"> override </span>{ std_mutex.unlock(); }</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  <span class="keywordtype">void</span> lock()<span class="keyword"> override </span>{ <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">std_mutex</a>.lock(); }</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  <span class="keywordtype">void</span> unlock()<span class="keyword"> override </span>{ <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">std_mutex</a>.unlock(); }</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  std::recursive_mutex std_mutex;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  std::recursive_mutex <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">std_mutex</a>;</div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>};</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="ttc" id="a_audio_tools_config_8h_html"><div class="ttname"><a href="_audio_tools_config_8h.html">AudioToolsConfig.h</a></div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_mutex_base_html"><div class="ttname"><a href="classaudio__tools_1_1_mutex_base.html">audio_tools::MutexBase</a></div><div class="ttdoc">Empty Mutex implementation which does nothing.</div><div class="ttdef"><b>Definition</b> Mutex.h:18</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_mutex_base_html_ae33bae81fdbbabfe2be20d78338bd0d9"><div class="ttname"><a href="classaudio__tools_1_1_mutex_base.html#ae33bae81fdbbabfe2be20d78338bd0d9">audio_tools::MutexBase::lock</a></div><div class="ttdeci">virtual void lock()</div><div class="ttdef"><b>Definition</b> Mutex.h:20</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_mutex_base_html_ae6f018536d482152b993f522d8d2942d"><div class="ttname"><a href="classaudio__tools_1_1_mutex_base.html#ae6f018536d482152b993f522d8d2942d">audio_tools::MutexBase::unlock</a></div><div class="ttdeci">virtual void unlock()</div><div class="ttdef"><b>Definition</b> Mutex.h:21</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:10</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html_a6bc5f943544a887f8b23cadfb26a5e30"><div class="ttname"><a href="namespaceaudio__tools.html#a6bc5f943544a887f8b23cadfb26a5e30">audio_tools::delay</a></div><div class="ttdeci">void delay(unsigned long ms)</div><div class="ttdef"><b>Definition</b> Time.h:23</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html_ae3c87ac6df70d80e2a4be8979e63cc2e"><div class="ttname"><a href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">audio_tools::writeData</a></div><div class="ttdeci">size_t writeData(Print *p_out, T *data, int samples, int maxSamples=512)</div><div class="ttdef"><b>Definition</b> AudioTypes.h:512</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

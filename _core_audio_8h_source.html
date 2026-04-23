@@ -81,34 +81,60 @@ $(document).ready(function() { init_codefold(0); });
   <div class="headertitle"><div class="title">CoreAudio.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
+<a href="_core_audio_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioTypes.h&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/Buffers.h&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/BaseConverter.h&quot;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioLogger.h&quot;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioStreams.h&quot;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioStreamsConverter.h&quot;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioOutput.h&quot;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/VolumeStream.h&quot;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioIO.h&quot;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/ResampleStream.h&quot;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/ResampleStreamT.h&quot;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/StreamCopy.h&quot;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/MusicalNotes.h&quot;</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/Fade.h&quot;</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/Pipeline.h&quot;</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioPlayer.h&quot;</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioTimer.h&quot;</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioFilter.h&quot;</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/I2SStream.h&quot;</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioPWM/PWMAudioOutput.h&quot;</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/AnalogAudioStream.h&quot;</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioEffects.h&quot;</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioMetaData.h&quot;</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/FrequencyDetector.h&quot;</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/GoerzelStream.h&quot;</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/RTTTLOutput.h&quot;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="_audio_types_8h.html">AudioTools/CoreAudio/AudioTypes.h</a>&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="_buffers_8h.html">AudioTools/CoreAudio/Buffers.h</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="_base_converter_8h.html">AudioTools/CoreAudio/BaseConverter.h</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="_audio_tools_2_core_audio_2_audio_logger_8h.html">AudioTools/CoreAudio/AudioLogger.h</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="_audio_streams_8h.html">AudioTools/CoreAudio/AudioStreams.h</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="_audio_streams_converter_8h.html">AudioTools/CoreAudio/AudioStreamsConverter.h</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="_audio_output_8h.html">AudioTools/CoreAudio/AudioOutput.h</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="_volume_stream_8h.html">AudioTools/CoreAudio/VolumeStream.h</a>&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="_audio_i_o_8h.html">AudioTools/CoreAudio/AudioIO.h</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="_resample_stream_8h.html">AudioTools/CoreAudio/ResampleStream.h</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="_resample_stream_t_8h.html">AudioTools/CoreAudio/ResampleStreamT.h</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="_stream_copy_8h.html">AudioTools/CoreAudio/StreamCopy.h</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="_musical_notes_8h.html">AudioTools/CoreAudio/MusicalNotes.h</a>&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="_fade_8h.html">AudioTools/CoreAudio/Fade.h</a>&quot;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="_pipeline_8h.html">AudioTools/CoreAudio/Pipeline.h</a>&quot;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &quot;<a class="code" href="_audio_player_8h.html">AudioTools/CoreAudio/AudioPlayer.h</a>&quot;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;<a class="code" href="_audio_timer_8h.html">AudioTools/CoreAudio/AudioTimer.h</a>&quot;</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &quot;<a class="code" href="_audio_filter_8h.html">AudioTools/CoreAudio/AudioFilter.h</a>&quot;</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &quot;<a class="code" href="_i2_s_stream_8h.html">AudioTools/CoreAudio/I2SStream.h</a>&quot;</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &quot;<a class="code" href="_p_w_m_audio_output_8h.html">AudioTools/CoreAudio/AudioPWM/PWMAudioOutput.h</a>&quot;</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#include &quot;<a class="code" href="_analog_audio_stream_8h.html">AudioTools/CoreAudio/AnalogAudioStream.h</a>&quot;</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#include &quot;<a class="code" href="_audio_effects_8h.html">AudioTools/CoreAudio/AudioEffects.h</a>&quot;</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#include &quot;<a class="code" href="_audio_meta_data_8h.html">AudioTools/CoreAudio/AudioMetaData.h</a>&quot;</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &quot;<a class="code" href="_frequency_detector_8h.html">AudioTools/CoreAudio/FrequencyDetector.h</a>&quot;</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &quot;<a class="code" href="_goerzel_stream_8h.html">AudioTools/CoreAudio/GoerzelStream.h</a>&quot;</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &quot;<a class="code" href="_r_t_t_t_l_output_8h.html">AudioTools/CoreAudio/RTTTLOutput.h</a>&quot;</span></div>
+<div class="ttc" id="a_analog_audio_stream_8h_html"><div class="ttname"><a href="_analog_audio_stream_8h.html">AnalogAudioStream.h</a></div></div>
+<div class="ttc" id="a_audio_effects_8h_html"><div class="ttname"><a href="_audio_effects_8h.html">AudioEffects.h</a></div></div>
+<div class="ttc" id="a_audio_filter_8h_html"><div class="ttname"><a href="_audio_filter_8h.html">AudioFilter.h</a></div></div>
+<div class="ttc" id="a_audio_i_o_8h_html"><div class="ttname"><a href="_audio_i_o_8h.html">AudioIO.h</a></div></div>
+<div class="ttc" id="a_audio_meta_data_8h_html"><div class="ttname"><a href="_audio_meta_data_8h.html">AudioMetaData.h</a></div></div>
+<div class="ttc" id="a_audio_output_8h_html"><div class="ttname"><a href="_audio_output_8h.html">AudioOutput.h</a></div></div>
+<div class="ttc" id="a_audio_player_8h_html"><div class="ttname"><a href="_audio_player_8h.html">AudioPlayer.h</a></div></div>
+<div class="ttc" id="a_audio_streams_8h_html"><div class="ttname"><a href="_audio_streams_8h.html">AudioStreams.h</a></div></div>
+<div class="ttc" id="a_audio_streams_converter_8h_html"><div class="ttname"><a href="_audio_streams_converter_8h.html">AudioStreamsConverter.h</a></div></div>
+<div class="ttc" id="a_audio_timer_8h_html"><div class="ttname"><a href="_audio_timer_8h.html">AudioTimer.h</a></div></div>
+<div class="ttc" id="a_audio_tools_2_core_audio_2_audio_logger_8h_html"><div class="ttname"><a href="_audio_tools_2_core_audio_2_audio_logger_8h.html">AudioLogger.h</a></div></div>
+<div class="ttc" id="a_audio_types_8h_html"><div class="ttname"><a href="_audio_types_8h.html">AudioTypes.h</a></div></div>
+<div class="ttc" id="a_base_converter_8h_html"><div class="ttname"><a href="_base_converter_8h.html">BaseConverter.h</a></div></div>
+<div class="ttc" id="a_buffers_8h_html"><div class="ttname"><a href="_buffers_8h.html">Buffers.h</a></div></div>
+<div class="ttc" id="a_fade_8h_html"><div class="ttname"><a href="_fade_8h.html">Fade.h</a></div></div>
+<div class="ttc" id="a_frequency_detector_8h_html"><div class="ttname"><a href="_frequency_detector_8h.html">FrequencyDetector.h</a></div></div>
+<div class="ttc" id="a_goerzel_stream_8h_html"><div class="ttname"><a href="_goerzel_stream_8h.html">GoerzelStream.h</a></div></div>
+<div class="ttc" id="a_i2_s_stream_8h_html"><div class="ttname"><a href="_i2_s_stream_8h.html">I2SStream.h</a></div></div>
+<div class="ttc" id="a_musical_notes_8h_html"><div class="ttname"><a href="_musical_notes_8h.html">MusicalNotes.h</a></div></div>
+<div class="ttc" id="a_p_w_m_audio_output_8h_html"><div class="ttname"><a href="_p_w_m_audio_output_8h.html">PWMAudioOutput.h</a></div></div>
+<div class="ttc" id="a_pipeline_8h_html"><div class="ttname"><a href="_pipeline_8h.html">Pipeline.h</a></div></div>
+<div class="ttc" id="a_r_t_t_t_l_output_8h_html"><div class="ttname"><a href="_r_t_t_t_l_output_8h.html">RTTTLOutput.h</a></div></div>
+<div class="ttc" id="a_resample_stream_8h_html"><div class="ttname"><a href="_resample_stream_8h.html">ResampleStream.h</a></div></div>
+<div class="ttc" id="a_resample_stream_t_8h_html"><div class="ttname"><a href="_resample_stream_t_8h.html">ResampleStreamT.h</a></div></div>
+<div class="ttc" id="a_stream_copy_8h_html"><div class="ttname"><a href="_stream_copy_8h.html">StreamCopy.h</a></div></div>
+<div class="ttc" id="a_volume_stream_8h_html"><div class="ttname"><a href="_volume_stream_8h.html">VolumeStream.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

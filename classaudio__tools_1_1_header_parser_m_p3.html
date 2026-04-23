@@ -91,146 +91,113 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a80d964a185e4d5a9dda986a6db071e86" id="r_a80d964a185e4d5a9dda986a6db071e86"><td class="memItemLeft" align="right" valign="top"><a id="a80d964a185e4d5a9dda986a6db071e86" name="a80d964a185e4d5a9dda986a6db071e86"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>HeaderParserMP3</b> ()=default</td></tr>
-<tr class="memdesc:a80d964a185e4d5a9dda986a6db071e86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor. <br /></td></tr>
+<tr class="memitem:a80d964a185e4d5a9dda986a6db071e86" id="r_a80d964a185e4d5a9dda986a6db071e86"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a80d964a185e4d5a9dda986a6db071e86">HeaderParserMP3</a> ()=<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">default</a></td></tr>
+<tr class="memdesc:a80d964a185e4d5a9dda986a6db071e86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <br /></td></tr>
 <tr class="separator:a80d964a185e4d5a9dda986a6db071e86"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae500ac8481d579cbf306510e209f70c6" id="r_ae500ac8481d579cbf306510e209f70c6"><td class="memItemLeft" align="right" valign="top"><a id="ae500ac8481d579cbf306510e209f70c6" name="ae500ac8481d579cbf306510e209f70c6"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>HeaderParserMP3</b> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;output, int bufferSize=2048)</td></tr>
-<tr class="memdesc:ae500ac8481d579cbf306510e209f70c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for write support. <br /></td></tr>
+<tr class="memitem:ae500ac8481d579cbf306510e209f70c6" id="r_ae500ac8481d579cbf306510e209f70c6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#ae500ac8481d579cbf306510e209f70c6">HeaderParserMP3</a> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;output, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> bufferSize=2048)</td></tr>
+<tr class="memdesc:ae500ac8481d579cbf306510e209f70c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for write support.  <br /></td></tr>
 <tr class="separator:ae500ac8481d579cbf306510e209f70c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac27ae12de126ed5d5b726fc7bf1eb64a" id="r_ac27ae12de126ed5d5b726fc7bf1eb64a"><td class="memItemLeft" align="right" valign="top"><a id="ac27ae12de126ed5d5b726fc7bf1eb64a" name="ac27ae12de126ed5d5b726fc7bf1eb64a"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>findSyncWord</b> (const uint8_t *buf, size_t nBytes, uint8_t synch=0xFF, uint8_t syncl=0xF0)</td></tr>
-<tr class="memdesc:ac27ae12de126ed5d5b726fc7bf1eb64a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the mp3/aac sync word. <br /></td></tr>
+<tr class="memitem:ac27ae12de126ed5d5b726fc7bf1eb64a" id="r_ac27ae12de126ed5d5b726fc7bf1eb64a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#ac27ae12de126ed5d5b726fc7bf1eb64a">findSyncWord</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">buf</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nBytes</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">synch</a>=0xFF, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">syncl</a>=0xF0)</td></tr>
+<tr class="memdesc:ac27ae12de126ed5d5b726fc7bf1eb64a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the mp3/aac sync word.  <br /></td></tr>
 <tr class="separator:ac27ae12de126ed5d5b726fc7bf1eb64a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adac116554b543b7c4228c018a85882f5" id="r_adac116554b543b7c4228c018a85882f5"><td class="memItemLeft" align="right" valign="top"><a id="adac116554b543b7c4228c018a85882f5" name="adac116554b543b7c4228c018a85882f5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>flush</b> ()</td></tr>
+<tr class="memitem:adac116554b543b7c4228c018a85882f5" id="r_adac116554b543b7c4228c018a85882f5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#adac116554b543b7c4228c018a85882f5">flush</a> ()</td></tr>
 <tr class="separator:adac116554b543b7c4228c018a85882f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:affd83a0d0d3327805340a476742646a1" id="r_affd83a0d0d3327805340a476742646a1"><td class="memItemLeft" align="right" valign="top"><a id="affd83a0d0d3327805340a476742646a1" name="affd83a0d0d3327805340a476742646a1"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getBitRate</b> () const</td></tr>
-<tr class="memdesc:affd83a0d0d3327805340a476742646a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bit rate from mp3 header. <br /></td></tr>
+<tr class="memitem:affd83a0d0d3327805340a476742646a1" id="r_affd83a0d0d3327805340a476742646a1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#affd83a0d0d3327805340a476742646a1">getBitRate</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a></td></tr>
+<tr class="memdesc:affd83a0d0d3327805340a476742646a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bit rate from mp3 header.  <br /></td></tr>
 <tr class="separator:affd83a0d0d3327805340a476742646a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01ba3906d2fc77cb1e8b650fc0029b37" id="r_a01ba3906d2fc77cb1e8b650fc0029b37"><td class="memItemLeft" align="right" valign="top"><a id="a01ba3906d2fc77cb1e8b650fc0029b37" name="a01ba3906d2fc77cb1e8b650fc0029b37"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getChannels</b> () const</td></tr>
-<tr class="memdesc:a01ba3906d2fc77cb1e8b650fc0029b37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of channels from mp3 header. <br /></td></tr>
+<tr class="memitem:a01ba3906d2fc77cb1e8b650fc0029b37" id="r_a01ba3906d2fc77cb1e8b650fc0029b37"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a01ba3906d2fc77cb1e8b650fc0029b37">getChannels</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a></td></tr>
+<tr class="memdesc:a01ba3906d2fc77cb1e8b650fc0029b37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of channels from mp3 header.  <br /></td></tr>
 <tr class="separator:a01ba3906d2fc77cb1e8b650fc0029b37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee431d64fbb7d48978370e2100658100" id="r_aee431d64fbb7d48978370e2100658100"><td class="memItemLeft" align="right" valign="top"><a id="aee431d64fbb7d48978370e2100658100" name="aee431d64fbb7d48978370e2100658100"></a>
-FrameHeader&#160;</td><td class="memItemRight" valign="bottom"><b>getFrameHeader</b> ()</td></tr>
+<tr class="memitem:aee431d64fbb7d48978370e2100658100" id="r_aee431d64fbb7d48978370e2100658100"><td class="memItemLeft" align="right" valign="top">FrameHeader&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#aee431d64fbb7d48978370e2100658100">getFrameHeader</a> ()</td></tr>
 <tr class="separator:aee431d64fbb7d48978370e2100658100"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72f8653e1fbaad1e6d6a137e8704b262" id="r_a72f8653e1fbaad1e6d6a137e8704b262"><td class="memItemLeft" align="right" valign="top"><a id="a72f8653e1fbaad1e6d6a137e8704b262" name="a72f8653e1fbaad1e6d6a137e8704b262"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getFrameLength</b> ()</td></tr>
-<tr class="memdesc:a72f8653e1fbaad1e6d6a137e8704b262"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frame length from mp3 header. <br /></td></tr>
+<tr class="memitem:a72f8653e1fbaad1e6d6a137e8704b262" id="r_a72f8653e1fbaad1e6d6a137e8704b262"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a72f8653e1fbaad1e6d6a137e8704b262">getFrameLength</a> ()</td></tr>
+<tr class="memdesc:a72f8653e1fbaad1e6d6a137e8704b262"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frame length from mp3 header.  <br /></td></tr>
 <tr class="separator:a72f8653e1fbaad1e6d6a137e8704b262"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d080b07b703e42aa04d4f2cc301ca39" id="r_a9d080b07b703e42aa04d4f2cc301ca39"><td class="memItemLeft" align="right" valign="top"><a id="a9d080b07b703e42aa04d4f2cc301ca39" name="a9d080b07b703e42aa04d4f2cc301ca39"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>getFrameRateHz</b> ()</td></tr>
-<tr class="memdesc:a9d080b07b703e42aa04d4f2cc301ca39"><td class="mdescLeft">&#160;</td><td class="mdescRight">frame rate in Hz (frames per second) <br /></td></tr>
+<tr class="memitem:a9d080b07b703e42aa04d4f2cc301ca39" id="r_a9d080b07b703e42aa04d4f2cc301ca39"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a9d080b07b703e42aa04d4f2cc301ca39">getFrameRateHz</a> ()</td></tr>
+<tr class="memdesc:a9d080b07b703e42aa04d4f2cc301ca39"><td class="mdescLeft">&#160;</td><td class="mdescRight">frame rate in Hz (frames per second)  <br /></td></tr>
 <tr class="separator:a9d080b07b703e42aa04d4f2cc301ca39"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0dab715bb058583791dff4c54520eda3" id="r_a0dab715bb058583791dff4c54520eda3"><td class="memItemLeft" align="right" valign="top"><a id="a0dab715bb058583791dff4c54520eda3" name="a0dab715bb058583791dff4c54520eda3"></a>
-const char *&#160;</td><td class="memItemRight" valign="bottom"><b>getLayerStr</b> () const</td></tr>
-<tr class="memdesc:a0dab715bb058583791dff4c54520eda3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides a string representation of the MPEG layer. <br /></td></tr>
+<tr class="memitem:a0dab715bb058583791dff4c54520eda3" id="r_a0dab715bb058583791dff4c54520eda3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a0dab715bb058583791dff4c54520eda3">getLayerStr</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a></td></tr>
+<tr class="memdesc:a0dab715bb058583791dff4c54520eda3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides a string representation of the MPEG layer.  <br /></td></tr>
 <tr class="separator:a0dab715bb058583791dff4c54520eda3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a07075c969a1251b4d181ebb6edae0ac0" id="r_a07075c969a1251b4d181ebb6edae0ac0"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a07075c969a1251b4d181ebb6edae0ac0">getPlayingTime</a> (size_t fileSizeBytes)</td></tr>
+<tr class="memitem:a07075c969a1251b4d181ebb6edae0ac0" id="r_a07075c969a1251b4d181ebb6edae0ac0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a07075c969a1251b4d181ebb6edae0ac0">getPlayingTime</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">fileSizeBytes</a>)</td></tr>
 <tr class="separator:a07075c969a1251b4d181ebb6edae0ac0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1ce6296010c13353722a7dcd8a94e216" id="r_a1ce6296010c13353722a7dcd8a94e216"><td class="memItemLeft" align="right" valign="top"><a id="a1ce6296010c13353722a7dcd8a94e216" name="a1ce6296010c13353722a7dcd8a94e216"></a>
-uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>getSampleRate</b> () const</td></tr>
-<tr class="memdesc:a1ce6296010c13353722a7dcd8a94e216"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sample rate from mp3 header. <br /></td></tr>
+<tr class="memitem:a1ce6296010c13353722a7dcd8a94e216" id="r_a1ce6296010c13353722a7dcd8a94e216"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a1ce6296010c13353722a7dcd8a94e216">getSampleRate</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a></td></tr>
+<tr class="memdesc:a1ce6296010c13353722a7dcd8a94e216"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sample rate from mp3 header.  <br /></td></tr>
 <tr class="separator:a1ce6296010c13353722a7dcd8a94e216"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad9f5c91487e31518efd3927825c5dc75" id="r_ad9f5c91487e31518efd3927825c5dc75"><td class="memItemLeft" align="right" valign="top"><a id="ad9f5c91487e31518efd3927825c5dc75" name="ad9f5c91487e31518efd3927825c5dc75"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getSamplesPerFrame</b> ()</td></tr>
-<tr class="memdesc:ad9f5c91487e31518efd3927825c5dc75"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of samples per mp3 frame <br /></td></tr>
+<tr class="memitem:ad9f5c91487e31518efd3927825c5dc75" id="r_ad9f5c91487e31518efd3927825c5dc75"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#ad9f5c91487e31518efd3927825c5dc75">getSamplesPerFrame</a> ()</td></tr>
+<tr class="memdesc:ad9f5c91487e31518efd3927825c5dc75"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of samples per mp3 frame  <br /></td></tr>
 <tr class="separator:ad9f5c91487e31518efd3927825c5dc75"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47f89b48bb518135004fe5ba64a524f3" id="r_a47f89b48bb518135004fe5ba64a524f3"><td class="memItemLeft" align="right" valign="top"><a id="a47f89b48bb518135004fe5ba64a524f3" name="a47f89b48bb518135004fe5ba64a524f3"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>getTimePerFrameMs</b> ()</td></tr>
-<tr class="memdesc:a47f89b48bb518135004fe5ba64a524f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">playing time per frame in ms <br /></td></tr>
+<tr class="memitem:a47f89b48bb518135004fe5ba64a524f3" id="r_a47f89b48bb518135004fe5ba64a524f3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a47f89b48bb518135004fe5ba64a524f3">getTimePerFrameMs</a> ()</td></tr>
+<tr class="memdesc:a47f89b48bb518135004fe5ba64a524f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">playing time per frame in ms  <br /></td></tr>
 <tr class="separator:a47f89b48bb518135004fe5ba64a524f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ae689b8ea046f5094521571581019fd" id="r_a5ae689b8ea046f5094521571581019fd"><td class="memItemLeft" align="right" valign="top"><a id="a5ae689b8ea046f5094521571581019fd" name="a5ae689b8ea046f5094521571581019fd"></a>
-const char *&#160;</td><td class="memItemRight" valign="bottom"><b>getVersionStr</b> () const</td></tr>
-<tr class="memdesc:a5ae689b8ea046f5094521571581019fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides a string representation of the MPEG version. <br /></td></tr>
+<tr class="memitem:a5ae689b8ea046f5094521571581019fd" id="r_a5ae689b8ea046f5094521571581019fd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a5ae689b8ea046f5094521571581019fd">getVersionStr</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a></td></tr>
+<tr class="memdesc:a5ae689b8ea046f5094521571581019fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides a string representation of the MPEG version.  <br /></td></tr>
 <tr class="separator:a5ae689b8ea046f5094521571581019fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6562ff0f500c889704fdbaa1f31a1519" id="r_a6562ff0f500c889704fdbaa1f31a1519"><td class="memItemLeft" align="right" valign="top"><a id="a6562ff0f500c889704fdbaa1f31a1519" name="a6562ff0f500c889704fdbaa1f31a1519"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>hasValidFrame</b> () const</td></tr>
-<tr class="memdesc:a6562ff0f500c889704fdbaa1f31a1519"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if we have parsed at least one valid frame. <br /></td></tr>
+<tr class="memitem:a6562ff0f500c889704fdbaa1f31a1519" id="r_a6562ff0f500c889704fdbaa1f31a1519"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a6562ff0f500c889704fdbaa1f31a1519">hasValidFrame</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a></td></tr>
+<tr class="memdesc:a6562ff0f500c889704fdbaa1f31a1519"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if we have parsed at least one valid frame.  <br /></td></tr>
 <tr class="separator:a6562ff0f500c889704fdbaa1f31a1519"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe93e17ac89cd97917811068ba2af214" id="r_afe93e17ac89cd97917811068ba2af214"><td class="memItemLeft" align="right" valign="top"><a id="afe93e17ac89cd97917811068ba2af214" name="afe93e17ac89cd97917811068ba2af214"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isValid</b> ()</td></tr>
-<tr class="memdesc:afe93e17ac89cd97917811068ba2af214"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if a valid frame has been detected. <br /></td></tr>
+<tr class="memitem:afe93e17ac89cd97917811068ba2af214" id="r_afe93e17ac89cd97917811068ba2af214"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#afe93e17ac89cd97917811068ba2af214">isValid</a> ()</td></tr>
+<tr class="memdesc:afe93e17ac89cd97917811068ba2af214"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if a valid frame has been detected.  <br /></td></tr>
 <tr class="separator:afe93e17ac89cd97917811068ba2af214"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea374da0f1029157b6af16904b9d8726" id="r_aea374da0f1029157b6af16904b9d8726"><td class="memItemLeft" align="right" valign="top"><a id="aea374da0f1029157b6af16904b9d8726" name="aea374da0f1029157b6af16904b9d8726"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isValid</b> (const uint8_t *data, int len)</td></tr>
-<tr class="memdesc:aea374da0f1029157b6af16904b9d8726"><td class="mdescLeft">&#160;</td><td class="mdescRight">parses the header string and returns true if this is a valid mp3 file <br /></td></tr>
+<tr class="memitem:aea374da0f1029157b6af16904b9d8726" id="r_aea374da0f1029157b6af16904b9d8726"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#aea374da0f1029157b6af16904b9d8726">isValid</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *data, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> len)</td></tr>
+<tr class="memdesc:aea374da0f1029157b6af16904b9d8726"><td class="mdescLeft">&#160;</td><td class="mdescRight">parses the header string and returns true if this is a valid mp3 file  <br /></td></tr>
 <tr class="separator:aea374da0f1029157b6af16904b9d8726"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad20897c5c8bd47f5d4005989bead0e55" id="r_ad20897c5c8bd47f5d4005989bead0e55"><td class="memItemLeft" align="right" valign="top"><a id="ad20897c5c8bd47f5d4005989bead0e55" name="ad20897c5c8bd47f5d4005989bead0e55"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>reset</b> ()</td></tr>
-<tr class="memdesc:ad20897c5c8bd47f5d4005989bead0e55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears internal buffer and resets state. <br /></td></tr>
+<tr class="memitem:ad20897c5c8bd47f5d4005989bead0e55" id="r_ad20897c5c8bd47f5d4005989bead0e55"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#ad20897c5c8bd47f5d4005989bead0e55">reset</a> ()</td></tr>
+<tr class="memdesc:ad20897c5c8bd47f5d4005989bead0e55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears internal buffer and resets state.  <br /></td></tr>
 <tr class="separator:ad20897c5c8bd47f5d4005989bead0e55"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada388d17b93c54a1a0f6edddbe0953ab" id="r_ada388d17b93c54a1a0f6edddbe0953ab"><td class="memItemLeft" align="right" valign="top"><a id="ada388d17b93c54a1a0f6edddbe0953ab" name="ada388d17b93c54a1a0f6edddbe0953ab"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>resize</b> (int size)</td></tr>
+<tr class="memitem:ada388d17b93c54a1a0f6edddbe0953ab" id="r_ada388d17b93c54a1a0f6edddbe0953ab"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#ada388d17b93c54a1a0f6edddbe0953ab">resize</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> size)</td></tr>
 <tr class="separator:ada388d17b93c54a1a0f6edddbe0953ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a07cbd23e35a60fce5c7f2d58f2ffc174" id="r_a07cbd23e35a60fce5c7f2d58f2ffc174"><td class="memItemLeft" align="right" valign="top"><a id="a07cbd23e35a60fce5c7f2d58f2ffc174" name="a07cbd23e35a60fce5c7f2d58f2ffc174"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setOutput</b> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;output)</td></tr>
+<tr class="memitem:a07cbd23e35a60fce5c7f2d58f2ffc174" id="r_a07cbd23e35a60fce5c7f2d58f2ffc174"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a07cbd23e35a60fce5c7f2d58f2ffc174">setOutput</a> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;output)</td></tr>
 <tr class="separator:a07cbd23e35a60fce5c7f2d58f2ffc174"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd7270e10d851383ff7b53c1241f6ba1" id="r_afd7270e10d851383ff7b53c1241f6ba1"><td class="memItemLeft" align="right" valign="top"><a id="afd7270e10d851383ff7b53c1241f6ba1" name="afd7270e10d851383ff7b53c1241f6ba1"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const uint8_t *data, size_t len)</td></tr>
-<tr class="memdesc:afd7270e10d851383ff7b53c1241f6ba1"><td class="mdescLeft">&#160;</td><td class="mdescRight">split up the data into mp3 segements and write to output <br /></td></tr>
+<tr class="memitem:afd7270e10d851383ff7b53c1241f6ba1" id="r_afd7270e10d851383ff7b53c1241f6ba1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#afd7270e10d851383ff7b53c1241f6ba1">write</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *data, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> len)</td></tr>
+<tr class="memdesc:afd7270e10d851383ff7b53c1241f6ba1"><td class="mdescLeft">&#160;</td><td class="mdescRight">split up the data into mp3 segements and write to output  <br /></td></tr>
 <tr class="separator:afd7270e10d851383ff7b53c1241f6ba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-types" name="pro-types"></a>
 Protected Types</h2></td></tr>
-<tr class="memitem:a780b7d840e4d94ad24f472cb5bb805eb" id="r_a780b7d840e4d94ad24f472cb5bb805eb"><td class="memItemLeft" align="right" valign="top"><a id="a780b7d840e4d94ad24f472cb5bb805eb" name="a780b7d840e4d94ad24f472cb5bb805eb"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>FrameReason</b> { <br />
-&#160;&#160;<b>VALID</b>
-, <b>INVALID_BITRATE_FOR_VERSION</b>
-, <b>INVALID_SAMPLERATE_FOR_VERSION</b>
-, <b>INVALID_MPEG_VERSION</b>
+<tr class="memitem:a780b7d840e4d94ad24f472cb5bb805eb" id="r_a780b7d840e4d94ad24f472cb5bb805eb"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a780b7d840e4d94ad24f472cb5bb805eb">FrameReason</a> { <br />
+&#160;&#160;<a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a780b7d840e4d94ad24f472cb5bb805ebac9f1a6384b1c466d4612f513bd8e13ea">VALID</a>
+, <a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a780b7d840e4d94ad24f472cb5bb805eba42604ce41a062c40c43d9262708dc223">INVALID_BITRATE_FOR_VERSION</a>
+, <a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a780b7d840e4d94ad24f472cb5bb805eba00d1c74bc9805d9b94e1006de8809763">INVALID_SAMPLERATE_FOR_VERSION</a>
+, <a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a780b7d840e4d94ad24f472cb5bb805ebac0f8ae79085236a1644aeb85e798b14f">INVALID_MPEG_VERSION</a>
 , <br />
-&#160;&#160;<b>INVALID_LAYER</b>
-, <b>INVALID_LAYER_II_BITRATE_AND_MODE</b>
-, <b>INVALID_EMPHASIS</b>
-, <b>INVALID_CRC</b>
+&#160;&#160;<a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a780b7d840e4d94ad24f472cb5bb805eba7bd294dcc81fed8f9acf472c7c4462f3">INVALID_LAYER</a>
+, <a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a780b7d840e4d94ad24f472cb5bb805ebae59668f5aabec165d5bb4162bf604c11">INVALID_LAYER_II_BITRATE_AND_MODE</a>
+, <a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a780b7d840e4d94ad24f472cb5bb805eba8ac87465bfba2217993827647b6fb193">INVALID_EMPHASIS</a>
+, <a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a780b7d840e4d94ad24f472cb5bb805eba70dd1954f85be901887b3ace4f26437f">INVALID_CRC</a>
 <br />
  }</td></tr>
 <tr class="separator:a780b7d840e4d94ad24f472cb5bb805eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a6220e6687945773923452c61013d704e" id="r_a6220e6687945773923452c61013d704e"><td class="memItemLeft" align="right" valign="top"><a id="a6220e6687945773923452c61013d704e" name="a6220e6687945773923452c61013d704e"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>contains</b> (const uint8_t *data, const char *toFind, size_t len)</td></tr>
+<tr class="memitem:a6220e6687945773923452c61013d704e" id="r_a6220e6687945773923452c61013d704e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a6220e6687945773923452c61013d704e">contains</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *data, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a> *<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">toFind</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> len)</td></tr>
 <tr class="separator:a6220e6687945773923452c61013d704e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd772f9c246415c1edee99f09e58c399" id="r_abd772f9c246415c1edee99f09e58c399"><td class="memItemLeft" align="right" valign="top"><a id="abd772f9c246415c1edee99f09e58c399" name="abd772f9c246415c1edee99f09e58c399"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>processBuffer</b> ()</td></tr>
-<tr class="memdesc:abd772f9c246415c1edee99f09e58c399"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes the internal buffer to extract complete mp3 frames. <br /></td></tr>
+<tr class="memitem:abd772f9c246415c1edee99f09e58c399" id="r_abd772f9c246415c1edee99f09e58c399"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#abd772f9c246415c1edee99f09e58c399">processBuffer</a> ()</td></tr>
+<tr class="memdesc:abd772f9c246415c1edee99f09e58c399"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes the internal buffer to extract complete mp3 frames.  <br /></td></tr>
 <tr class="separator:abd772f9c246415c1edee99f09e58c399"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac433d951d88339f38706ffa9156b1240" id="r_ac433d951d88339f38706ffa9156b1240"><td class="memItemLeft" align="right" valign="top"><a id="ac433d951d88339f38706ffa9156b1240" name="ac433d951d88339f38706ffa9156b1240"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>readFrameHeader</b> (const uint8_t *data)</td></tr>
+<tr class="memitem:ac433d951d88339f38706ffa9156b1240" id="r_ac433d951d88339f38706ffa9156b1240"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#ac433d951d88339f38706ffa9156b1240">readFrameHeader</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *data)</td></tr>
 <tr class="separator:ac433d951d88339f38706ffa9156b1240"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a63b16c24e171913e0a72f3bd44f21358" id="r_a63b16c24e171913e0a72f3bd44f21358"><td class="memItemLeft" align="right" valign="top"><a id="a63b16c24e171913e0a72f3bd44f21358" name="a63b16c24e171913e0a72f3bd44f21358"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>seekFrameSync</b> (const uint8_t *str, size_t len)</td></tr>
+<tr class="memitem:a63b16c24e171913e0a72f3bd44f21358" id="r_a63b16c24e171913e0a72f3bd44f21358"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a63b16c24e171913e0a72f3bd44f21358">seekFrameSync</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *str, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> len)</td></tr>
 <tr class="separator:a63b16c24e171913e0a72f3bd44f21358"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad0a79a0114dce96ab371988172a4e9c3" id="r_ad0a79a0114dce96ab371988172a4e9c3"><td class="memItemLeft" align="right" valign="top"><a id="ad0a79a0114dce96ab371988172a4e9c3" name="ad0a79a0114dce96ab371988172a4e9c3"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>validate</b> (const uint8_t *data, size_t len)</td></tr>
+<tr class="memitem:ad0a79a0114dce96ab371988172a4e9c3" id="r_ad0a79a0114dce96ab371988172a4e9c3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#ad0a79a0114dce96ab371988172a4e9c3">validate</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *data, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> len)</td></tr>
 <tr class="separator:ad0a79a0114dce96ab371988172a4e9c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ec33442ccbfe10901c9de8888a44433" id="r_a6ec33442ccbfe10901c9de8888a44433"><td class="memItemLeft" align="right" valign="top"><a id="a6ec33442ccbfe10901c9de8888a44433" name="a6ec33442ccbfe10901c9de8888a44433"></a>
-FrameReason&#160;</td><td class="memItemRight" valign="bottom"><b>validateFrameHeader</b> (const FrameHeader &amp;header)</td></tr>
+<tr class="memitem:a6ec33442ccbfe10901c9de8888a44433" id="r_a6ec33442ccbfe10901c9de8888a44433"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a780b7d840e4d94ad24f472cb5bb805eb">FrameReason</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a6ec33442ccbfe10901c9de8888a44433">validateFrameHeader</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> FrameHeader &amp;<a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#ac19aacda2e198ac7beda420ca738a147">header</a>)</td></tr>
 <tr class="separator:a6ec33442ccbfe10901c9de8888a44433"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:aaf0eef2d94f5e586b3d7cd5935560e29" id="r_aaf0eef2d94f5e586b3d7cd5935560e29"><td class="memItemLeft" align="right" valign="top"><a id="aaf0eef2d94f5e586b3d7cd5935560e29" name="aaf0eef2d94f5e586b3d7cd5935560e29"></a>
-<a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b> {0}</td></tr>
+<tr class="memitem:aaf0eef2d94f5e586b3d7cd5935560e29" id="r_aaf0eef2d94f5e586b3d7cd5935560e29"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#aaf0eef2d94f5e586b3d7cd5935560e29">buffer</a> {0}</td></tr>
 <tr class="separator:aaf0eef2d94f5e586b3d7cd5935560e29"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a799a743b3abd553a37fc01ad3097df08" id="r_a799a743b3abd553a37fc01ad3097df08"><td class="memItemLeft" align="right" valign="top"><a id="a799a743b3abd553a37fc01ad3097df08" name="a799a743b3abd553a37fc01ad3097df08"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_size</b> = 0</td></tr>
+<tr class="memitem:a799a743b3abd553a37fc01ad3097df08" id="r_a799a743b3abd553a37fc01ad3097df08"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a799a743b3abd553a37fc01ad3097df08">buffer_size</a> = 0</td></tr>
 <tr class="separator:a799a743b3abd553a37fc01ad3097df08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7468272e3f2d44fcb0c6e331759fb7e1" id="r_a7468272e3f2d44fcb0c6e331759fb7e1"><td class="memItemLeft" align="right" valign="top"><a id="a7468272e3f2d44fcb0c6e331759fb7e1" name="a7468272e3f2d44fcb0c6e331759fb7e1"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>frame_header_valid</b> = false</td></tr>
+<tr class="memitem:a7468272e3f2d44fcb0c6e331759fb7e1" id="r_a7468272e3f2d44fcb0c6e331759fb7e1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a7468272e3f2d44fcb0c6e331759fb7e1">frame_header_valid</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">false</a></td></tr>
 <tr class="separator:a7468272e3f2d44fcb0c6e331759fb7e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac19aacda2e198ac7beda420ca738a147" id="r_ac19aacda2e198ac7beda420ca738a147"><td class="memItemLeft" align="right" valign="top"><a id="ac19aacda2e198ac7beda420ca738a147" name="ac19aacda2e198ac7beda420ca738a147"></a>
-FrameHeader&#160;</td><td class="memItemRight" valign="bottom"><b>header</b></td></tr>
+<tr class="memitem:ac19aacda2e198ac7beda420ca738a147" id="r_ac19aacda2e198ac7beda420ca738a147"><td class="memItemLeft" align="right" valign="top">FrameHeader&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#ac19aacda2e198ac7beda420ca738a147">header</a></td></tr>
 <tr class="separator:ac19aacda2e198ac7beda420ca738a147"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2403c7e2de441489a3cc48e75f80bc36" id="r_a2403c7e2de441489a3cc48e75f80bc36"><td class="memItemLeft" align="right" valign="top"><a id="a2403c7e2de441489a3cc48e75f80bc36" name="a2403c7e2de441489a3cc48e75f80bc36"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>last_frame_size</b> = 0</td></tr>
+<tr class="memitem:a2403c7e2de441489a3cc48e75f80bc36" id="r_a2403c7e2de441489a3cc48e75f80bc36"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a2403c7e2de441489a3cc48e75f80bc36">last_frame_size</a> = 0</td></tr>
 <tr class="separator:a2403c7e2de441489a3cc48e75f80bc36"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a830b7433661962e39c3c15b066fc706b" id="r_a830b7433661962e39c3c15b066fc706b"><td class="memItemLeft" align="right" valign="top"><a id="a830b7433661962e39c3c15b066fc706b" name="a830b7433661962e39c3c15b066fc706b"></a>
-<a class="el" href="classaudio__tools_1_1_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_output</b> = nullptr</td></tr>
+<tr class="memitem:a830b7433661962e39c3c15b066fc706b" id="r_a830b7433661962e39c3c15b066fc706b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a830b7433661962e39c3c15b066fc706b">p_output</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td></tr>
 <tr class="separator:a830b7433661962e39c3c15b066fc706b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -244,7 +211,383 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>last_frame_size</b>
 </ul>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="a780b7d840e4d94ad24f472cb5bb805eb" name="a780b7d840e4d94ad24f472cb5bb805eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a780b7d840e4d94ad24f472cb5bb805eb">&#9670;&#160;</a></span>FrameReason</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">enum</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a780b7d840e4d94ad24f472cb5bb805eb">FrameReason</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a780b7d840e4d94ad24f472cb5bb805ebac9f1a6384b1c466d4612f513bd8e13ea" name="a780b7d840e4d94ad24f472cb5bb805ebac9f1a6384b1c466d4612f513bd8e13ea"></a>VALID&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a780b7d840e4d94ad24f472cb5bb805eba42604ce41a062c40c43d9262708dc223" name="a780b7d840e4d94ad24f472cb5bb805eba42604ce41a062c40c43d9262708dc223"></a>INVALID_BITRATE_FOR_VERSION&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a780b7d840e4d94ad24f472cb5bb805eba00d1c74bc9805d9b94e1006de8809763" name="a780b7d840e4d94ad24f472cb5bb805eba00d1c74bc9805d9b94e1006de8809763"></a>INVALID_SAMPLERATE_FOR_VERSION&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a780b7d840e4d94ad24f472cb5bb805ebac0f8ae79085236a1644aeb85e798b14f" name="a780b7d840e4d94ad24f472cb5bb805ebac0f8ae79085236a1644aeb85e798b14f"></a>INVALID_MPEG_VERSION&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a780b7d840e4d94ad24f472cb5bb805eba7bd294dcc81fed8f9acf472c7c4462f3" name="a780b7d840e4d94ad24f472cb5bb805eba7bd294dcc81fed8f9acf472c7c4462f3"></a>INVALID_LAYER&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a780b7d840e4d94ad24f472cb5bb805ebae59668f5aabec165d5bb4162bf604c11" name="a780b7d840e4d94ad24f472cb5bb805ebae59668f5aabec165d5bb4162bf604c11"></a>INVALID_LAYER_II_BITRATE_AND_MODE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a780b7d840e4d94ad24f472cb5bb805eba8ac87465bfba2217993827647b6fb193" name="a780b7d840e4d94ad24f472cb5bb805eba8ac87465bfba2217993827647b6fb193"></a>INVALID_EMPHASIS&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a780b7d840e4d94ad24f472cb5bb805eba70dd1954f85be901887b3ace4f26437f" name="a780b7d840e4d94ad24f472cb5bb805eba70dd1954f85be901887b3ace4f26437f"></a>INVALID_CRC&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a80d964a185e4d5a9dda986a6db071e86" name="a80d964a185e4d5a9dda986a6db071e86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80d964a185e4d5a9dda986a6db071e86">&#9670;&#160;</a></span>HeaderParserMP3() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html">HeaderParserMP3</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default constructor. </p>
+
+</div>
+</div>
+<a id="ae500ac8481d579cbf306510e209f70c6" name="ae500ac8481d579cbf306510e209f70c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae500ac8481d579cbf306510e209f70c6">&#9670;&#160;</a></span>HeaderParserMP3() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html">HeaderParserMP3</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;&#160;</td>
+          <td class="paramname"><em>output</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramname"><em>bufferSize</em> = <code>2048</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor for write support. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a6220e6687945773923452c61013d704e" name="a6220e6687945773923452c61013d704e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6220e6687945773923452c61013d704e">&#9670;&#160;</a></span>contains()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> contains </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a> *&#160;</td>
+          <td class="paramname"><em>toFind</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac27ae12de126ed5d5b726fc7bf1eb64a" name="ac27ae12de126ed5d5b726fc7bf1eb64a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac27ae12de126ed5d5b726fc7bf1eb64a">&#9670;&#160;</a></span>findSyncWord()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> findSyncWord </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td>
+          <td class="paramname"><em>buf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td>
+          <td class="paramname"><em>nBytes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td>
+          <td class="paramname"><em>synch</em> = <code>0xFF</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td>
+          <td class="paramname"><em>syncl</em> = <code>0xF0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Finds the mp3/aac sync word. </p>
+
+</div>
+</div>
+<a id="adac116554b543b7c4228c018a85882f5" name="adac116554b543b7c4228c018a85882f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adac116554b543b7c4228c018a85882f5">&#9670;&#160;</a></span>flush()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> flush </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="affd83a0d0d3327805340a476742646a1" name="affd83a0d0d3327805340a476742646a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#affd83a0d0d3327805340a476742646a1">&#9670;&#160;</a></span>getBitRate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> getBitRate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Bit rate from mp3 header. </p>
+
+</div>
+</div>
+<a id="a01ba3906d2fc77cb1e8b650fc0029b37" name="a01ba3906d2fc77cb1e8b650fc0029b37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01ba3906d2fc77cb1e8b650fc0029b37">&#9670;&#160;</a></span>getChannels()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> getChannels </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of channels from mp3 header. </p>
+
+</div>
+</div>
+<a id="aee431d64fbb7d48978370e2100658100" name="aee431d64fbb7d48978370e2100658100"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee431d64fbb7d48978370e2100658100">&#9670;&#160;</a></span>getFrameHeader()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">FrameHeader getFrameHeader </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a72f8653e1fbaad1e6d6a137e8704b262" name="a72f8653e1fbaad1e6d6a137e8704b262"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72f8653e1fbaad1e6d6a137e8704b262">&#9670;&#160;</a></span>getFrameLength()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> getFrameLength </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Frame length from mp3 header. </p>
+
+</div>
+</div>
+<a id="a9d080b07b703e42aa04d4f2cc301ca39" name="a9d080b07b703e42aa04d4f2cc301ca39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d080b07b703e42aa04d4f2cc301ca39">&#9670;&#160;</a></span>getFrameRateHz()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> getFrameRateHz </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>frame rate in Hz (frames per second) </p>
+
+</div>
+</div>
+<a id="a0dab715bb058583791dff4c54520eda3" name="a0dab715bb058583791dff4c54520eda3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0dab715bb058583791dff4c54520eda3">&#9670;&#160;</a></span>getLayerStr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a> * getLayerStr </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Provides a string representation of the MPEG layer. </p>
+
+</div>
+</div>
 <a id="a07075c969a1251b4d181ebb6edae0ac0" name="a07075c969a1251b4d181ebb6edae0ac0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a07075c969a1251b4d181ebb6edae0ac0">&#9670;&#160;</a></span>getPlayingTime()</h2>
 
@@ -255,9 +598,9 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>last_frame_size</b>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t getPlayingTime </td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> getPlayingTime </td>
           <td>(</td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td>
           <td class="paramname"><em>fileSizeBytes</em></td><td>)</td>
           <td></td>
         </tr>
@@ -269,6 +612,607 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>last_frame_size</b>
 </table>
 </div><div class="memdoc">
 <p>Provides the estimated playing time in seconds based on the bitrate of the first segment </p>
+
+</div>
+</div>
+<a id="a1ce6296010c13353722a7dcd8a94e216" name="a1ce6296010c13353722a7dcd8a94e216"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ce6296010c13353722a7dcd8a94e216">&#9670;&#160;</a></span>getSampleRate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint16_t</a> getSampleRate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sample rate from mp3 header. </p>
+
+</div>
+</div>
+<a id="ad9f5c91487e31518efd3927825c5dc75" name="ad9f5c91487e31518efd3927825c5dc75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9f5c91487e31518efd3927825c5dc75">&#9670;&#160;</a></span>getSamplesPerFrame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> getSamplesPerFrame </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>number of samples per mp3 frame </p>
+
+</div>
+</div>
+<a id="a47f89b48bb518135004fe5ba64a524f3" name="a47f89b48bb518135004fe5ba64a524f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47f89b48bb518135004fe5ba64a524f3">&#9670;&#160;</a></span>getTimePerFrameMs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> getTimePerFrameMs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>playing time per frame in ms </p>
+
+</div>
+</div>
+<a id="a5ae689b8ea046f5094521571581019fd" name="a5ae689b8ea046f5094521571581019fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ae689b8ea046f5094521571581019fd">&#9670;&#160;</a></span>getVersionStr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a> * getVersionStr </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Provides a string representation of the MPEG version. </p>
+
+</div>
+</div>
+<a id="a6562ff0f500c889704fdbaa1f31a1519" name="a6562ff0f500c889704fdbaa1f31a1519"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6562ff0f500c889704fdbaa1f31a1519">&#9670;&#160;</a></span>hasValidFrame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> hasValidFrame </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns true if we have parsed at least one valid frame. </p>
+
+</div>
+</div>
+<a id="afe93e17ac89cd97917811068ba2af214" name="afe93e17ac89cd97917811068ba2af214"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe93e17ac89cd97917811068ba2af214">&#9670;&#160;</a></span>isValid() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> isValid </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns true if a valid frame has been detected. </p>
+
+</div>
+</div>
+<a id="aea374da0f1029157b6af16904b9d8726" name="aea374da0f1029157b6af16904b9d8726"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea374da0f1029157b6af16904b9d8726">&#9670;&#160;</a></span>isValid() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> isValid </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>parses the header string and returns true if this is a valid mp3 file </p>
+
+</div>
+</div>
+<a id="abd772f9c246415c1edee99f09e58c399" name="abd772f9c246415c1edee99f09e58c399"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd772f9c246415c1edee99f09e58c399">&#9670;&#160;</a></span>processBuffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> processBuffer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Processes the internal buffer to extract complete mp3 frames. </p>
+
+</div>
+</div>
+<a id="ac433d951d88339f38706ffa9156b1240" name="ac433d951d88339f38706ffa9156b1240"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac433d951d88339f38706ffa9156b1240">&#9670;&#160;</a></span>readFrameHeader()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> readFrameHeader </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad20897c5c8bd47f5d4005989bead0e55" name="ad20897c5c8bd47f5d4005989bead0e55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad20897c5c8bd47f5d4005989bead0e55">&#9670;&#160;</a></span>reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> reset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Clears internal buffer and resets state. </p>
+
+</div>
+</div>
+<a id="ada388d17b93c54a1a0f6edddbe0953ab" name="ada388d17b93c54a1a0f6edddbe0953ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada388d17b93c54a1a0f6edddbe0953ab">&#9670;&#160;</a></span>resize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> resize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a63b16c24e171913e0a72f3bd44f21358" name="a63b16c24e171913e0a72f3bd44f21358"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63b16c24e171913e0a72f3bd44f21358">&#9670;&#160;</a></span>seekFrameSync()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> seekFrameSync </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td>
+          <td class="paramname"><em>str</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a07cbd23e35a60fce5c7f2d58f2ffc174" name="a07cbd23e35a60fce5c7f2d58f2ffc174"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07cbd23e35a60fce5c7f2d58f2ffc174">&#9670;&#160;</a></span>setOutput()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> setOutput </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;&#160;</td>
+          <td class="paramname"><em>output</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad0a79a0114dce96ab371988172a4e9c3" name="ad0a79a0114dce96ab371988172a4e9c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0a79a0114dce96ab371988172a4e9c3">&#9670;&#160;</a></span>validate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> validate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6ec33442ccbfe10901c9de8888a44433" name="a6ec33442ccbfe10901c9de8888a44433"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ec33442ccbfe10901c9de8888a44433">&#9670;&#160;</a></span>validateFrameHeader()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a780b7d840e4d94ad24f472cb5bb805eb">FrameReason</a> validateFrameHeader </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> FrameHeader &amp;&#160;</td>
+          <td class="paramname"><em>header</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afd7270e10d851383ff7b53c1241f6ba1" name="afd7270e10d851383ff7b53c1241f6ba1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd7270e10d851383ff7b53c1241f6ba1">&#9670;&#160;</a></span>write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> write </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>split up the data into mp3 segements and write to output </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="aaf0eef2d94f5e586b3d7cd5935560e29" name="aaf0eef2d94f5e586b3d7cd5935560e29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf0eef2d94f5e586b3d7cd5935560e29">&#9670;&#160;</a></span>buffer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&gt; buffer {0}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a799a743b3abd553a37fc01ad3097df08" name="a799a743b3abd553a37fc01ad3097df08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a799a743b3abd553a37fc01ad3097df08">&#9670;&#160;</a></span>buffer_size</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> buffer_size = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7468272e3f2d44fcb0c6e331759fb7e1" name="a7468272e3f2d44fcb0c6e331759fb7e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7468272e3f2d44fcb0c6e331759fb7e1">&#9670;&#160;</a></span>frame_header_valid</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> frame_header_valid = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">false</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac19aacda2e198ac7beda420ca738a147" name="ac19aacda2e198ac7beda420ca738a147"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac19aacda2e198ac7beda420ca738a147">&#9670;&#160;</a></span>header</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">FrameHeader header</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2403c7e2de441489a3cc48e75f80bc36" name="a2403c7e2de441489a3cc48e75f80bc36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2403c7e2de441489a3cc48e75f80bc36">&#9670;&#160;</a></span>last_frame_size</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> last_frame_size = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a830b7433661962e39c3c15b066fc706b" name="a830b7433661962e39c3c15b066fc706b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a830b7433661962e39c3c15b066fc706b">&#9670;&#160;</a></span>p_output</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_print.html">Print</a>* p_output = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>

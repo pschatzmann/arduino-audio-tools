@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['decoderfromstreaming_0',['DecoderFromStreaming',['../namespaceaudio__tools.html#aea2bc94a5c731653aff7fd015d97f9fb',1,'audio_tools']]]
+  ['datatype_0',['datatype',['../classffft_1_1_dyn_array.html#afe400d3f662f42fab8f065a689ba9a4a',1,'ffft::DynArray::DataType'],['../classffft_1_1_osc_sin_cos.html#afe400d3f662f42fab8f065a689ba9a4a',1,'ffft::OscSinCos::DataType'],['../classffft_1_1_f_f_t_real.html#a5060b6aef02be7e6178c5cfad1125cc2',1,'ffft::FFTReal::DataType'],['../classffft_1_1_array.html#afe400d3f662f42fab8f065a689ba9a4a',1,'ffft::Array::DataType'],['../classffft_1_1_f_f_t_real_fix_len_param.html#a279b64f47fb2213ad73e59be937afcfa',1,'ffft::FFTRealFixLenParam::DataType'],['../classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e',1,'ffft::FFTRealFixLen::DataType'],['../classffft_1_1_f_f_t_real_pass_direct.html#a39fb13732dcfb996819c79cb030f034e',1,'ffft::FFTRealPassDirect::DataType'],['../classffft_1_1_f_f_t_real_use_trigo.html#a39fb13732dcfb996819c79cb030f034e',1,'ffft::FFTRealUseTrigo::DataType'],['../classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e',1,'ffft::FFTRealPassInverse::DataType']]],
+  ['decoderfromstreaming_1',['DecoderFromStreaming',['../namespaceaudio__tools.html#aea2bc94a5c731653aff7fd015d97f9fb',1,'audio_tools']]]
 ];

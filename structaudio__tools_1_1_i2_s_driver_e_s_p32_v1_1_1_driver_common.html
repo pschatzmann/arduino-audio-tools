@@ -80,6 +80,8 @@ $(function() {
   <div class="headertitle"><div class="title">I2SDriverESP32V1::DriverCommon Struct Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_i2_s_e_s_p32_v1_8h_source.html">I2SESP32V1.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for I2SDriverESP32V1::DriverCommon:</div>
 <div class="dyncontent">
@@ -92,23 +94,176 @@ Inheritance diagram for I2SDriverESP32V1::DriverCommon:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8fe1c1019a3edddc65fd2ef48c676e12" id="r_a8fe1c1019a3edddc65fd2ef48c676e12"><td class="memItemLeft" align="right" valign="top"><a id="a8fe1c1019a3edddc65fd2ef48c676e12" name="a8fe1c1019a3edddc65fd2ef48c676e12"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>changeSampleRate</b> (<a class="el" href="classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html">I2SConfigESP32V1</a> &amp;cfg, i2s_chan_handle_t &amp;tx_chan, i2s_chan_handle_t &amp;rx_chan)</td></tr>
+<tr class="memitem:a8fe1c1019a3edddc65fd2ef48c676e12" id="r_a8fe1c1019a3edddc65fd2ef48c676e12"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_i2_s_driver_e_s_p32_v1_1_1_driver_common.html#a8fe1c1019a3edddc65fd2ef48c676e12">changeSampleRate</a> (<a class="el" href="classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html">I2SConfigESP32V1</a> &amp;<a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#ae57bb659601c7f3538bda86ae18a7284">cfg</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">i2s_chan_handle_t</a> &amp;<a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#a728fd31256e227816f5c551fc564e2bd">tx_chan</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">i2s_chan_handle_t</a> &amp;<a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#a2e7fb8b374ed50c13becffe6d5fb9cc7">rx_chan</a>)</td></tr>
 <tr class="separator:a8fe1c1019a3edddc65fd2ef48c676e12"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a457b3199f184c2e221d71f434015639f" id="r_a457b3199f184c2e221d71f434015639f"><td class="memItemLeft" align="right" valign="top"><a id="a457b3199f184c2e221d71f434015639f" name="a457b3199f184c2e221d71f434015639f"></a>
-virtual i2s_chan_config_t&#160;</td><td class="memItemRight" valign="bottom"><b>getChannelConfig</b> (<a class="el" href="classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html">I2SConfigESP32V1</a> &amp;cfg)=0</td></tr>
+<tr class="memitem:a457b3199f184c2e221d71f434015639f" id="r_a457b3199f184c2e221d71f434015639f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">i2s_chan_config_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_i2_s_driver_e_s_p32_v1_1_1_driver_common.html#a457b3199f184c2e221d71f434015639f">getChannelConfig</a> (<a class="el" href="classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html">I2SConfigESP32V1</a> &amp;<a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#ae57bb659601c7f3538bda86ae18a7284">cfg</a>)=0</td></tr>
 <tr class="separator:a457b3199f184c2e221d71f434015639f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65265a1bb4482cb7d0dfcb07c8b27708" id="r_a65265a1bb4482cb7d0dfcb07c8b27708"><td class="memItemLeft" align="right" valign="top"><a id="a65265a1bb4482cb7d0dfcb07c8b27708" name="a65265a1bb4482cb7d0dfcb07c8b27708"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>startChannels</b> (<a class="el" href="classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html">I2SConfigESP32V1</a> &amp;cfg, i2s_chan_handle_t &amp;tx_chan, i2s_chan_handle_t &amp;rx_chan, int txPin, int rxPin)=0</td></tr>
+<tr class="memitem:a65265a1bb4482cb7d0dfcb07c8b27708" id="r_a65265a1bb4482cb7d0dfcb07c8b27708"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_i2_s_driver_e_s_p32_v1_1_1_driver_common.html#a65265a1bb4482cb7d0dfcb07c8b27708">startChannels</a> (<a class="el" href="classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html">I2SConfigESP32V1</a> &amp;<a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#ae57bb659601c7f3538bda86ae18a7284">cfg</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">i2s_chan_handle_t</a> &amp;<a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#a728fd31256e227816f5c551fc564e2bd">tx_chan</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">i2s_chan_handle_t</a> &amp;<a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#a2e7fb8b374ed50c13becffe6d5fb9cc7">rx_chan</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">txPin</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">rxPin</a>)=0</td></tr>
 <tr class="separator:a65265a1bb4482cb7d0dfcb07c8b27708"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a4e7b26e719855eadff69bbe116e6b47a" id="r_a4e7b26e719855eadff69bbe116e6b47a"><td class="memItemLeft" align="right" valign="top"><a id="a4e7b26e719855eadff69bbe116e6b47a" name="a4e7b26e719855eadff69bbe116e6b47a"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>get_bits_eff</b> (int bits)</td></tr>
-<tr class="memdesc:a4e7b26e719855eadff69bbe116e6b47a"><td class="mdescLeft">&#160;</td><td class="mdescRight">24 bits are stored in a 32 bit integer <br /></td></tr>
+<tr class="memitem:a4e7b26e719855eadff69bbe116e6b47a" id="r_a4e7b26e719855eadff69bbe116e6b47a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_i2_s_driver_e_s_p32_v1_1_1_driver_common.html#a4e7b26e719855eadff69bbe116e6b47a">get_bits_eff</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> bits)</td></tr>
+<tr class="memdesc:a4e7b26e719855eadff69bbe116e6b47a"><td class="mdescLeft">&#160;</td><td class="mdescRight">24 bits are stored in a 32 bit integer  <br /></td></tr>
 <tr class="separator:a4e7b26e719855eadff69bbe116e6b47a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a8fe1c1019a3edddc65fd2ef48c676e12" name="a8fe1c1019a3edddc65fd2ef48c676e12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8fe1c1019a3edddc65fd2ef48c676e12">&#9670;&#160;</a></span>changeSampleRate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> changeSampleRate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html">I2SConfigESP32V1</a> &amp;&#160;</td>
+          <td class="paramname"><em>cfg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">i2s_chan_handle_t</a> &amp;&#160;</td>
+          <td class="paramname"><em>tx_chan</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">i2s_chan_handle_t</a> &amp;&#160;</td>
+          <td class="paramname"><em>rx_chan</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="structaudio__tools_1_1_i2_s_driver_e_s_p32_v1_1_1_driver_i2_s.html#a9c7ee71eace1d051088a0dfd7d26d3d4">I2SDriverESP32V1::DriverI2S</a>.</p>
+
+</div>
+</div>
+<a id="a4e7b26e719855eadff69bbe116e6b47a" name="a4e7b26e719855eadff69bbe116e6b47a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e7b26e719855eadff69bbe116e6b47a">&#9670;&#160;</a></span>get_bits_eff()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> get_bits_eff </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramname"><em>bits</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>24 bits are stored in a 32 bit integer </p>
+
+</div>
+</div>
+<a id="a457b3199f184c2e221d71f434015639f" name="a457b3199f184c2e221d71f434015639f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a457b3199f184c2e221d71f434015639f">&#9670;&#160;</a></span>getChannelConfig()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">i2s_chan_config_t</a> getChannelConfig </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html">I2SConfigESP32V1</a> &amp;&#160;</td>
+          <td class="paramname"><em>cfg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="structaudio__tools_1_1_i2_s_driver_e_s_p32_v1_1_1_driver_i2_s.html#a920b2abd0c3037f1ac13589eb60d7703">I2SDriverESP32V1::DriverI2S</a>.</p>
+
+</div>
+</div>
+<a id="a65265a1bb4482cb7d0dfcb07c8b27708" name="a65265a1bb4482cb7d0dfcb07c8b27708"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65265a1bb4482cb7d0dfcb07c8b27708">&#9670;&#160;</a></span>startChannels()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> startChannels </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html">I2SConfigESP32V1</a> &amp;&#160;</td>
+          <td class="paramname"><em>cfg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">i2s_chan_handle_t</a> &amp;&#160;</td>
+          <td class="paramname"><em>tx_chan</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">i2s_chan_handle_t</a> &amp;&#160;</td>
+          <td class="paramname"><em>rx_chan</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramname"><em>txPin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramname"><em>rxPin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="structaudio__tools_1_1_i2_s_driver_e_s_p32_v1_1_1_driver_i2_s.html#a0cc35f25d7db48f7b16aa77e21392350">I2SDriverESP32V1::DriverI2S</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>src/AudioTools/CoreAudio/AudioI2S/<a class="el" href="_i2_s_e_s_p32_v1_8h_source.html">I2SESP32V1.h</a></li>
 </ul>

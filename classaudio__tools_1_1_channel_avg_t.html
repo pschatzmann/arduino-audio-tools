@@ -96,14 +96,15 @@ Inheritance diagram for ChannelAvgT&lt; T, AvgT &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9f22cb9d0b657ed5e0c6012038b7ae0d" id="r_a9f22cb9d0b657ed5e0c6012038b7ae0d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_channel_avg_t.html#a9f22cb9d0b657ed5e0c6012038b7ae0d">convert</a> (uint8_t *src, size_t size) override</td></tr>
+<tr class="memitem:a459e5b4bd53904946398a231a6c7d78c" id="r_a459e5b4bd53904946398a231a6c7d78c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_channel_avg_t.html#a459e5b4bd53904946398a231a6c7d78c">ChannelAvgT</a> ()</td></tr>
+<tr class="separator:a459e5b4bd53904946398a231a6c7d78c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f22cb9d0b657ed5e0c6012038b7ae0d" id="r_a9f22cb9d0b657ed5e0c6012038b7ae0d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_channel_avg_t.html#a9f22cb9d0b657ed5e0c6012038b7ae0d">convert</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">src</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> size) <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
 <tr class="separator:a9f22cb9d0b657ed5e0c6012038b7ae0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab42262038579ccc4e2b40cbbd4034847" id="r_ab42262038579ccc4e2b40cbbd4034847"><td class="memItemLeft" align="right" valign="top"><a id="ab42262038579ccc4e2b40cbbd4034847" name="ab42262038579ccc4e2b40cbbd4034847"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>convert</b> (uint8_t *target, uint8_t *src, size_t size)</td></tr>
+<tr class="memitem:ab42262038579ccc4e2b40cbbd4034847" id="r_ab42262038579ccc4e2b40cbbd4034847"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_channel_avg_t.html#ab42262038579ccc4e2b40cbbd4034847">convert</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *target, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">src</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> size)</td></tr>
 <tr class="separator:ab42262038579ccc4e2b40cbbd4034847"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename T = int16_t, typename AvgT = float&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> = int16_t, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">AvgT</a> = float&gt;<br />
 class audio_tools::ChannelAvgT&lt; T, AvgT &gt;</div><p>We average pairs of channels in a datastream. E.g. if we have 4 channels we end up with 2 channels. The channels will be (channel_1 + channel_2)/2 (channel_3 - channel_4)/2. This is equivalent of stereo to mono conversion but will also work for quadric, sexic or octic audio. This will not work if you provide single channel data! </p>
 <dl class="section author"><dt>Author</dt><dd>Urs Utzinger</dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
@@ -112,28 +113,56 @@ class audio_tools::ChannelAvgT&lt; T, AvgT &gt;</div><p>We average pairs of chan
   </table>
   </dd>
 </dl>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a9f22cb9d0b657ed5e0c6012038b7ae0d" name="a9f22cb9d0b657ed5e0c6012038b7ae0d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9f22cb9d0b657ed5e0c6012038b7ae0d">&#9670;&#160;</a></span>convert()</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a459e5b4bd53904946398a231a6c7d78c" name="a459e5b4bd53904946398a231a6c7d78c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a459e5b4bd53904946398a231a6c7d78c">&#9670;&#160;</a></span>ChannelAvgT()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T  = int16_t, typename AvgT  = float&gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">AvgT</a>  = float&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t convert </td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_channel_avg_t.html">ChannelAvgT</a> </td>
           <td>(</td>
-          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a9f22cb9d0b657ed5e0c6012038b7ae0d" name="a9f22cb9d0b657ed5e0c6012038b7ae0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f22cb9d0b657ed5e0c6012038b7ae0d">&#9670;&#160;</a></span>convert() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">AvgT</a>  = float&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> convert </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td>
           <td class="paramname"><em>src</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td>
           <td class="paramname"><em>size</em>&#160;</td>
         </tr>
         <tr>
@@ -149,7 +178,51 @@ template&lt;typename T  = int16_t, typename AvgT  = float&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="classaudio__tools_1_1_base_converter.html">BaseConverter</a>.</p>
+<p>Implements <a class="el" href="classaudio__tools_1_1_base_converter.html#ae5643b574f501fa22f1604e08f1e031f">BaseConverter</a>.</p>
+
+</div>
+</div>
+<a id="ab42262038579ccc4e2b40cbbd4034847" name="ab42262038579ccc4e2b40cbbd4034847"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab42262038579ccc4e2b40cbbd4034847">&#9670;&#160;</a></span>convert() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">AvgT</a>  = float&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> convert </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td>
+          <td class="paramname"><em>src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>

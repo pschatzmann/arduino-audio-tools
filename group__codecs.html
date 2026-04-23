@@ -357,7 +357,7 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manage multiple StreamingDecoders with automatic format detection.  <a href="classaudio__tools_1_1_multi_streaming_decoder.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_ogg_container_decoder.html">OggContainerDecoder</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decoder for Ogg Container. Decodes a packet from an Ogg container. The Ogg begin segment contains the <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> structure. You can subclass and overwrite the beginOfSegment() method to implement your own headers Dependency: <a href="https://github.com/pschatzmann/arduino-libopus">https://github.com/pschatzmann/arduino-libopus</a>.  <a href="classaudio__tools_1_1_ogg_container_decoder.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decoder for Ogg Container. Decodes a packet from an Ogg container. The Ogg begin segment contains the <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> structure. You can subclass and overwrite the <a class="el" href="classaudio__tools_1_1_ogg_container_decoder.html#a4c840a6a40e0d0cf929a762d991e3f7d">beginOfSegment()</a> method to implement your own headers Dependency: <a href="https://github.com/pschatzmann/arduino-libopus">https://github.com/pschatzmann/arduino-libopus</a>.  <a href="classaudio__tools_1_1_ogg_container_decoder.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_ogg_container_encoder.html">OggContainerEncoder</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encoder for Ogg Container. Encodes a packet for an Ogg container. The Ogg begin segment contains the <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> structure. You can subclass ond overwrite the writeHeader() method to implement your own header logic. When an optional encoder is specified in the constructor we package the encoded data. Dependency: <a href="https://github.com/pschatzmann/arduino-libopus">https://github.com/pschatzmann/arduino-libopus</a>.  <a href="classaudio__tools_1_1_ogg_container_encoder.html#details">More...</a><br /></td></tr>
@@ -410,27 +410,22 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:ga0ad0f49a5ac1d91312aeabca49bbc8ce" id="r_ga0ad0f49a5ac1d91312aeabca49bbc8ce"><td class="memItemLeft" align="right" valign="top"><a id="ga0ad0f49a5ac1d91312aeabca49bbc8ce" name="ga0ad0f49a5ac1d91312aeabca49bbc8ce"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>EncodedAudioPrint</b> = <a class="el" href="classaudio__tools_1_1_encoded_audio_output.html">EncodedAudioOutput</a></td></tr>
-<tr class="memdesc:ga0ad0f49a5ac1d91312aeabca49bbc8ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Legacy alias for <a class="el" href="classaudio__tools_1_1_encoded_audio_output.html" title="A more natural Print class to process encoded data (aac, wav, mp3...). Just define the output and the...">EncodedAudioOutput</a>. <br /></td></tr>
+<tr class="memitem:ga0ad0f49a5ac1d91312aeabca49bbc8ce" id="r_ga0ad0f49a5ac1d91312aeabca49bbc8ce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__codecs.html#ga0ad0f49a5ac1d91312aeabca49bbc8ce">EncodedAudioPrint</a> = <a class="el" href="classaudio__tools_1_1_encoded_audio_output.html">EncodedAudioOutput</a></td></tr>
+<tr class="memdesc:ga0ad0f49a5ac1d91312aeabca49bbc8ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Legacy alias for <a class="el" href="classaudio__tools_1_1_encoded_audio_output.html" title="A more natural Print class to process encoded data (aac, wav, mp3...). Just define the output and the...">EncodedAudioOutput</a>.  <br /></td></tr>
 <tr class="separator:ga0ad0f49a5ac1d91312aeabca49bbc8ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf694ec7686972c628c8218a4cfd8f468" id="r_gaf694ec7686972c628c8218a4cfd8f468"><td class="memItemLeft" align="right" valign="top"><a id="gaf694ec7686972c628c8218a4cfd8f468" name="gaf694ec7686972c628c8218a4cfd8f468"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>FOURCC</b> = char[4]</td></tr>
-<tr class="memdesc:gaf694ec7686972c628c8218a4cfd8f468"><td class="mdescLeft">&#160;</td><td class="mdescRight">Four-character code identifier for AVI format. <br /></td></tr>
+<tr class="memitem:gaf694ec7686972c628c8218a4cfd8f468" id="r_gaf694ec7686972c628c8218a4cfd8f468"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__codecs.html#gaf694ec7686972c628c8218a4cfd8f468">FOURCC</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a>[4]</td></tr>
+<tr class="memdesc:gaf694ec7686972c628c8218a4cfd8f468"><td class="mdescLeft">&#160;</td><td class="mdescRight">Four-character code identifier for AVI format.  <br /></td></tr>
 <tr class="separator:gaf694ec7686972c628c8218a4cfd8f468"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga07e83073af7df530d17433371106bf74" id="r_ga07e83073af7df530d17433371106bf74"><td class="memItemLeft" align="right" valign="top"><a id="ga07e83073af7df530d17433371106bf74" name="ga07e83073af7df530d17433371106bf74"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>MPEG_TSDecoder</b> = <a class="el" href="classaudio__tools_1_1_m_t_s_decoder.html">MTSDecoder</a></td></tr>
-<tr class="memdesc:ga07e83073af7df530d17433371106bf74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Legacy alias for MPEG Transport <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> decoder. <br /></td></tr>
+<tr class="memitem:ga07e83073af7df530d17433371106bf74" id="r_ga07e83073af7df530d17433371106bf74"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__codecs.html#ga07e83073af7df530d17433371106bf74">MPEG_TSDecoder</a> = <a class="el" href="classaudio__tools_1_1_m_t_s_decoder.html">MTSDecoder</a></td></tr>
+<tr class="memdesc:ga07e83073af7df530d17433371106bf74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Legacy alias for MPEG Transport <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> decoder.  <br /></td></tr>
 <tr class="separator:ga07e83073af7df530d17433371106bf74"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac8159db40d58758d6ccbbb593ae6ce4e" id="r_gac8159db40d58758d6ccbbb593ae6ce4e"><td class="memItemLeft" align="right" valign="top"><a id="gac8159db40d58758d6ccbbb593ae6ce4e" name="gac8159db40d58758d6ccbbb593ae6ce4e"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>PCMDecoder</b> = <a class="el" href="classaudio__tools_1_1_copy_decoder.html">CopyDecoder</a></td></tr>
-<tr class="memdesc:gac8159db40d58758d6ccbbb593ae6ce4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias for <a class="el" href="classaudio__tools_1_1_copy_decoder.html" title="Dummy Decoder which just copies the provided data to the output. You can define if it is PCM data.">CopyDecoder</a> to handle PCM audio decoding (no actual decoding) <br /></td></tr>
+<tr class="memitem:gac8159db40d58758d6ccbbb593ae6ce4e" id="r_gac8159db40d58758d6ccbbb593ae6ce4e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__codecs.html#gac8159db40d58758d6ccbbb593ae6ce4e">PCMDecoder</a> = <a class="el" href="classaudio__tools_1_1_copy_decoder.html">CopyDecoder</a></td></tr>
+<tr class="memdesc:gac8159db40d58758d6ccbbb593ae6ce4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias for <a class="el" href="classaudio__tools_1_1_copy_decoder.html" title="Dummy Decoder which just copies the provided data to the output. You can define if it is PCM data.">CopyDecoder</a> to handle PCM audio decoding (no actual decoding)  <br /></td></tr>
 <tr class="separator:gac8159db40d58758d6ccbbb593ae6ce4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4518d29ee6ab03a5a2f0af2aacf6d1bb" id="r_ga4518d29ee6ab03a5a2f0af2aacf6d1bb"><td class="memItemLeft" align="right" valign="top"><a id="ga4518d29ee6ab03a5a2f0af2aacf6d1bb" name="ga4518d29ee6ab03a5a2f0af2aacf6d1bb"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>PCMEncoder</b> = <a class="el" href="classaudio__tools_1_1_copy_encoder.html">CopyEncoder</a></td></tr>
-<tr class="memdesc:ga4518d29ee6ab03a5a2f0af2aacf6d1bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias for <a class="el" href="classaudio__tools_1_1_copy_encoder.html" title="Dummy Encoder which just copies the provided data to the output.">CopyEncoder</a> to handle PCM audio encoding (no actual encoding) <br /></td></tr>
+<tr class="memitem:ga4518d29ee6ab03a5a2f0af2aacf6d1bb" id="r_ga4518d29ee6ab03a5a2f0af2aacf6d1bb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__codecs.html#ga4518d29ee6ab03a5a2f0af2aacf6d1bb">PCMEncoder</a> = <a class="el" href="classaudio__tools_1_1_copy_encoder.html">CopyEncoder</a></td></tr>
+<tr class="memdesc:ga4518d29ee6ab03a5a2f0af2aacf6d1bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias for <a class="el" href="classaudio__tools_1_1_copy_encoder.html" title="Dummy Encoder which just copies the provided data to the output.">CopyEncoder</a> to handle PCM audio encoding (no actual encoding)  <br /></td></tr>
 <tr class="separator:ga4518d29ee6ab03a5a2f0af2aacf6d1bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga8c13e7f0810a3a24e6da3f1412382dda" id="r_ga8c13e7f0810a3a24e6da3f1412382dda"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__codecs.html#ga8c13e7f0810a3a24e6da3f1412382dda">stsz_sample_size_t</a> = uint16_t</td></tr>
+<tr class="memitem:ga8c13e7f0810a3a24e6da3f1412382dda" id="r_ga8c13e7f0810a3a24e6da3f1412382dda"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__codecs.html#ga8c13e7f0810a3a24e6da3f1412382dda">stsz_sample_size_t</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint16_t</a></td></tr>
 <tr class="memdesc:ga8c13e7f0810a3a24e6da3f1412382dda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sample size type optimized for microcontrollers.  <br /></td></tr>
 <tr class="separator:ga8c13e7f0810a3a24e6da3f1412382dda"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -438,6 +433,86 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>PCMEncoder</b> = <a 
 <p>Audio Coder and Decoder <br  />
  </p>
 <h2 class="groupheader">Typedef Documentation</h2>
+<a id="ga0ad0f49a5ac1d91312aeabca49bbc8ce" name="ga0ad0f49a5ac1d91312aeabca49bbc8ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0ad0f49a5ac1d91312aeabca49bbc8ce">&#9670;&#160;</a></span>EncodedAudioPrint</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">using</a> <a class="el" href="group__codecs.html#ga0ad0f49a5ac1d91312aeabca49bbc8ce">EncodedAudioPrint</a> =  <a class="el" href="classaudio__tools_1_1_encoded_audio_output.html">EncodedAudioOutput</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Legacy alias for <a class="el" href="classaudio__tools_1_1_encoded_audio_output.html" title="A more natural Print class to process encoded data (aac, wav, mp3...). Just define the output and the...">EncodedAudioOutput</a>. </p>
+
+</div>
+</div>
+<a id="gaf694ec7686972c628c8218a4cfd8f468" name="gaf694ec7686972c628c8218a4cfd8f468"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf694ec7686972c628c8218a4cfd8f468">&#9670;&#160;</a></span>FOURCC</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">using</a> <a class="el" href="group__codecs.html#gaf694ec7686972c628c8218a4cfd8f468">FOURCC</a> =  <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a>[4]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Four-character code identifier for AVI format. </p>
+
+</div>
+</div>
+<a id="ga07e83073af7df530d17433371106bf74" name="ga07e83073af7df530d17433371106bf74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga07e83073af7df530d17433371106bf74">&#9670;&#160;</a></span>MPEG_TSDecoder</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">using</a> <a class="el" href="group__codecs.html#ga07e83073af7df530d17433371106bf74">MPEG_TSDecoder</a> =  <a class="el" href="classaudio__tools_1_1_m_t_s_decoder.html">MTSDecoder</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Legacy alias for MPEG Transport <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> decoder. </p>
+
+</div>
+</div>
+<a id="gac8159db40d58758d6ccbbb593ae6ce4e" name="gac8159db40d58758d6ccbbb593ae6ce4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac8159db40d58758d6ccbbb593ae6ce4e">&#9670;&#160;</a></span>PCMDecoder</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">using</a> <a class="el" href="group__codecs.html#gac8159db40d58758d6ccbbb593ae6ce4e">PCMDecoder</a> =  <a class="el" href="classaudio__tools_1_1_copy_decoder.html">CopyDecoder</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Alias for <a class="el" href="classaudio__tools_1_1_copy_decoder.html" title="Dummy Decoder which just copies the provided data to the output. You can define if it is PCM data.">CopyDecoder</a> to handle PCM audio decoding (no actual decoding) </p>
+
+</div>
+</div>
+<a id="ga4518d29ee6ab03a5a2f0af2aacf6d1bb" name="ga4518d29ee6ab03a5a2f0af2aacf6d1bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4518d29ee6ab03a5a2f0af2aacf6d1bb">&#9670;&#160;</a></span>PCMEncoder</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">using</a> <a class="el" href="group__codecs.html#ga4518d29ee6ab03a5a2f0af2aacf6d1bb">PCMEncoder</a> =  <a class="el" href="classaudio__tools_1_1_copy_encoder.html">CopyEncoder</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Alias for <a class="el" href="classaudio__tools_1_1_copy_encoder.html" title="Dummy Encoder which just copies the provided data to the output.">CopyEncoder</a> to handle PCM audio encoding (no actual encoding) </p>
+
+</div>
+</div>
 <a id="ga8c13e7f0810a3a24e6da3f1412382dda" name="ga8c13e7f0810a3a24e6da3f1412382dda"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga8c13e7f0810a3a24e6da3f1412382dda">&#9670;&#160;</a></span>stsz_sample_size_t</h2>
 
@@ -445,7 +520,7 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>PCMEncoder</b> = <a 
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="group__codecs.html#ga8c13e7f0810a3a24e6da3f1412382dda">stsz_sample_size_t</a> =  uint16_t</td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">using</a> <a class="el" href="group__codecs.html#ga8c13e7f0810a3a24e6da3f1412382dda">stsz_sample_size_t</a> =  <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint16_t</a></td>
         </tr>
       </table>
 </div><div class="memdoc">

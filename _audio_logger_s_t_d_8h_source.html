@@ -81,18 +81,18 @@ $(document).ready(function() { init_codefold(0); });
   <div class="headertitle"><div class="title">AudioLoggerSTD.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
+<a href="_audio_logger_s_t_d_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;AudioToolsConfig.h&quot;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="_audio_tools_config_8h.html">AudioToolsConfig.h</a>&quot;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#if defined(ARDUINO) &amp;&amp; !defined(IS_MIN_DESKTOP)</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;Print.h&quot;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;AudioTools/Concurrency/LockGuard.h&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="_lock_guard_8h.html">AudioTools/Concurrency/LockGuard.h</a>&quot;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#if defined(RP2040)</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;AudioTools/Concurrency/RP2040/MutexRP2040.h&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="_mutex_r_p2040_8h.html">AudioTools/Concurrency/RP2040/MutexRP2040.h</a>&quot;</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#elif defined(ESP32)</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;AudioTools/Concurrency/RTOS/MutexRTOS.h&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="_mutex_r_t_o_s_8h.html">AudioTools/Concurrency/RTOS/MutexRTOS.h</a>&quot;</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;esp_log.h&quot;</span></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
@@ -101,131 +101,131 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceaudio__tools.html">audio_tools</a> {</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#if defined(ESP32)</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">static</span> MutexRTOS audio_logger_mutex;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">static</span> MutexRTOS <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">audio_logger_mutex</a>;</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#elif defined(RP2040)</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">static</span> MutexRP2040 audio_logger_mutex;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">static</span> MutexRP2040 <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">audio_logger_mutex</a>;</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#else</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">static</span> MutexBase audio_logger_mutex;  <span class="comment">// no locking</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">static</span> MutexBase <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">audio_logger_mutex</a>;  <span class="comment">// no locking</span></div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keyword">class </span>AudioLogger {</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keyword">class </span><a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">AudioLogger</a> {</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <span class="keyword">enum</span> LogLevel { Debug, Info, Warning, Error };</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <span class="keyword">enum</span> <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">LogLevel</a> { <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Debug</a>, <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Info</a>, <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Warning</a>, <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Error</a> };</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  <span class="keywordtype">void</span> begin(Print&amp; out, LogLevel level = LOG_LEVEL) {</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    this-&gt;log_print_ptr = &amp;out;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    this-&gt;log_level = level;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="namespacestd.html#ae020bfd2149f171e3fe7e735f4f277e3">begin</a>(Print&amp; out, <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">LogLevel</a> level = <a class="code hl_define" href="_audio_tools_config_8h.html#a0b87e0d3bf5853bcbb0b66a7c48fdc05">LOG_LEVEL</a>) {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    this-&gt;<a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">log_print_ptr</a> = &amp;out;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    this-&gt;<a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">log_level</a> = level;</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  }</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  <span class="comment">// defines the log level</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  <span class="keywordtype">void</span> setLogLevel(LogLevel level) { this-&gt;log_level = level; }</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">setLogLevel</a>(<a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">LogLevel</a> level) { this-&gt;<a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">log_level</a> = level; }</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  <span class="keywordtype">bool</span> isLogging(LogLevel level = Info) {</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordflow">return</span> log_print_ptr != <span class="keyword">nullptr</span> &amp;&amp; level &gt;= log_level;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">isLogging</a>(<a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">LogLevel</a> level = <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Info</a>) {</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">log_print_ptr</a> != <span class="keyword">nullptr</span> &amp;&amp; level &gt;= <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">log_level</a>;</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  }</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  AudioLogger&amp; prefix(<span class="keyword">const</span> <span class="keywordtype">char</span>* file, <span class="keywordtype">int</span> line, LogLevel current_level) {</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    printPrefix(file, line, current_level);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">AudioLogger</a>&amp; prefix(<span class="keyword">const</span> <span class="keywordtype">char</span>* file, <span class="keywordtype">int</span> <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">line</a>, <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">LogLevel</a> <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">current_level</a>) {</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">printPrefix</a>(file, <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">line</a>, <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">current_level</a>);</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  }</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  <span class="keywordtype">void</span> println() {</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="preprocessor">#if defined(IS_DESKTOP) || defined(IS_DESKTOP_WITH_TIME_ONLY)</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    fprintf(stderr, <span class="stringliteral">&quot;%s\n&quot;</span>, print_buffer);</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    fflush(stderr);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">fprintf</a>(<a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">stderr</a>, <span class="stringliteral">&quot;%s\n&quot;</span>, <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">print_buffer</a>);</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">fflush</a>(<a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">stderr</a>);</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="preprocessor">#else</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    log_print_ptr-&gt;println(print_buffer);</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    log_print_ptr-&gt;flush();</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">log_print_ptr</a>-&gt;println(<a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">print_buffer</a>);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">log_print_ptr</a>-&gt;flush();</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    print_buffer[0] = 0;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">print_buffer</a>[0] = 0;</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  }</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  <span class="keywordtype">char</span>* str() { <span class="keywordflow">return</span> print_buffer; }</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  <span class="keywordtype">char</span>* str() { <span class="keywordflow">return</span> <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">print_buffer</a>; }</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  <span class="keyword">static</span> AudioLogger&amp; instance() {</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keyword">static</span> AudioLogger* ptr;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  <span class="keyword">static</span> <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">AudioLogger</a>&amp; instance() {</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keyword">static</span> <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">AudioLogger</a>* ptr;</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keywordflow">if</span> (ptr == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>      ptr = <span class="keyword">new</span> AudioLogger;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>      ptr = <span class="keyword">new</span> <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">AudioLogger</a>;</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    }</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keywordflow">return</span> *ptr;</div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  }</div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  LogLevel level() { <span class="keywordflow">return</span> log_level; }</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">LogLevel</a> level() { <span class="keywordflow">return</span> <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">log_level</a>; }</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  <span class="keywordtype">void</span> print(<span class="keyword">const</span> <span class="keywordtype">char</span>* c) { log_print_ptr-&gt;print(c); }</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  <span class="keywordtype">void</span> print(<span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">c</a>) { <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">log_print_ptr</a>-&gt;print(<a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">c</a>); }</div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  <span class="keywordtype">void</span> printChar(<span class="keywordtype">char</span> c) { log_print_ptr-&gt;print(c); }</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">printChar</a>(<span class="keywordtype">char</span> <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">c</a>) { <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">log_print_ptr</a>-&gt;print(<a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">c</a>); }</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  <span class="keywordtype">void</span> printCharHex(<span class="keywordtype">char</span> c) {</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">printCharHex</a>(<span class="keywordtype">char</span> <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">c</a>) {</div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="keywordtype">char</span> tmp[5];</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> val = c;</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    snprintf(tmp, 5, <span class="stringliteral">&quot;%02X &quot;</span>, val);</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    log_print_ptr-&gt;print(tmp);</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">val</a> = <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">c</a>;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">snprintf</a>(tmp, 5, <span class="stringliteral">&quot;%02X &quot;</span>, <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">val</a>);</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">log_print_ptr</a>-&gt;print(tmp);</div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  }</div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  Print* log_print_ptr = &amp;LOG_STREAM;</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  LogLevel log_level = LOG_LEVEL;</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  <span class="keywordtype">char</span> print_buffer[LOG_PRINTF_BUFFER_SIZE];</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  Print* <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">log_print_ptr</a> = &amp;<a class="code hl_define" href="_audio_tools_config_8h.html#a202a4200b51e408995c59853fc9fa1f8">LOG_STREAM</a>;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">LogLevel</a> <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">log_level</a> = <a class="code hl_define" href="_audio_tools_config_8h.html#a0b87e0d3bf5853bcbb0b66a7c48fdc05">LOG_LEVEL</a>;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  <span class="keywordtype">char</span> <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">print_buffer</a>[<a class="code hl_define" href="avr_8h.html#acdad1cb704260436c186e2aef9283b4d">LOG_PRINTF_BUFFER_SIZE</a>];</div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  AudioLogger() {}</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">AudioLogger</a>() {}</div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  <span class="keyword">const</span> <span class="keywordtype">char</span>* levelName(LogLevel level)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">levelName</a>(<a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">LogLevel</a> level)<span class="keyword"> const </span>{</div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keywordflow">switch</span> (level) {</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>      <span class="keywordflow">case</span> Debug:</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>      <span class="keywordflow">case</span> <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Debug</a>:</div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;D&quot;</span>;</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>      <span class="keywordflow">case</span> Info:</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>      <span class="keywordflow">case</span> <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Info</a>:</div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;I&quot;</span>;</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>      <span class="keywordflow">case</span> Warning:</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>      <span class="keywordflow">case</span> <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Warning</a>:</div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;W&quot;</span>;</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>      <span class="keywordflow">case</span> Error:</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>      <span class="keywordflow">case</span> <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Error</a>:</div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;E&quot;</span>;</div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    }</div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span>;</div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  }</div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>  <span class="keywordtype">int</span> printPrefix(<span class="keyword">const</span> <span class="keywordtype">char</span>* file, <span class="keywordtype">int</span> line, LogLevel current_level)<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    <span class="keyword">const</span> <span class="keywordtype">char</span>* file_name = strrchr(file, <span class="charliteral">&#39;/&#39;</span>) ? strrchr(file, <span class="charliteral">&#39;/&#39;</span>) + 1 : file;</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <span class="keyword">const</span> <span class="keywordtype">char</span>* level_code = levelName(current_level);</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <span class="keywordtype">int</span> len = log_print_ptr-&gt;print(<span class="stringliteral">&quot;[&quot;</span>);</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    len += log_print_ptr-&gt;print(level_code);</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    len += log_print_ptr-&gt;print(<span class="stringliteral">&quot;] &quot;</span>);</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    len += log_print_ptr-&gt;print(file_name);</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    len += log_print_ptr-&gt;print(<span class="stringliteral">&quot; : &quot;</span>);</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    len += log_print_ptr-&gt;print(line);</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    len += log_print_ptr-&gt;print(<span class="stringliteral">&quot; - &quot;</span>);</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>  <span class="keywordtype">int</span> <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">printPrefix</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* file, <span class="keywordtype">int</span> <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">line</a>, <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">LogLevel</a> <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">current_level</a>)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    <span class="keyword">const</span> <span class="keywordtype">char</span>* file_name = <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">strrchr</a>(file, <span class="charliteral">&#39;/&#39;</span>) ? <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">strrchr</a>(file, <span class="charliteral">&#39;/&#39;</span>) + 1 : file;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">level_code</a> = <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">levelName</a>(<a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">current_level</a>);</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <span class="keywordtype">int</span> len = <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">log_print_ptr</a>-&gt;print(<span class="stringliteral">&quot;[&quot;</span>);</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    len += <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">log_print_ptr</a>-&gt;print(<a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">level_code</a>);</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    len += <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">log_print_ptr</a>-&gt;print(<span class="stringliteral">&quot;] &quot;</span>);</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    len += <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">log_print_ptr</a>-&gt;print(file_name);</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    len += <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">log_print_ptr</a>-&gt;print(<span class="stringliteral">&quot; : &quot;</span>);</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    len += <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">log_print_ptr</a>-&gt;print(<a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">line</a>);</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    len += <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">log_print_ptr</a>-&gt;print(<span class="stringliteral">&quot; - &quot;</span>);</div>
 <div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <span class="keywordflow">return</span> len;</div>
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>  }</div>
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>};</div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="keyword">static</span> AudioLogger&amp; AudioToolsLogger = AudioLogger::instance();</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="keyword">using </span>AudioToolsLogLevel = AudioLogger::LogLevel;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="keyword">static</span> <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">AudioLogger</a>&amp; <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">AudioToolsLogger</a> = AudioLogger::instance();</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="keyword">using </span><a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">AudioToolsLogLevel</a> = AudioLogger::LogLevel;</div>
 <div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="keyword">class </span>CustomLogLevel {</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="keyword">class </span><a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">CustomLogLevel</a> {</div>
 <div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>  AudioLogger::LogLevel getActual() { <span class="keywordflow">return</span> actual; }</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>  AudioLogger::LogLevel <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">getActual</a>() { <span class="keywordflow">return</span> <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">actual</a>; }</div>
 <div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
 <div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>  <span class="keywordtype">void</span> set(AudioLogger::LogLevel level) {</div>
 <div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    active = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    original = AudioLogger::instance().level();</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    actual = level;</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">actual</a> = level;</div>
 <div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>  }</div>
 <div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
 <div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>  <span class="keywordtype">void</span> set() {</div>
 <div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <span class="keywordflow">if</span> (active) {</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>      AudioLogger::instance().begin(Serial, actual);</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>      AudioLogger::instance().begin(<a class="code hl_variable" href="namespaceaudio__tools.html#a7b8c4a195c58f9eb8750e94955c5aa4b">Serial</a>, <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">actual</a>);</div>
 <div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    }</div>
 <div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>  }</div>
 <div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>  <span class="keywordtype">void</span> reset() {</div>
 <div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    <span class="keywordflow">if</span> (active) {</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>      AudioLogger::instance().begin(Serial, original);</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>      AudioLogger::instance().begin(<a class="code hl_variable" href="namespaceaudio__tools.html#a7b8c4a195c58f9eb8750e94955c5aa4b">Serial</a>, original);</div>
 <div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    }</div>
 <div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>  }</div>
 <div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
 <div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span> <span class="keyword">protected</span>:</div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>  <span class="keywordtype">bool</span> active = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>  AudioLogger::LogLevel original;</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>  AudioLogger::LogLevel actual;</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>  AudioLogger::LogLevel <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">actual</a>;</div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>};</div>
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span> </div>
 <div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>}  <span class="comment">// namespace audio_tools</span></div>
@@ -336,17 +336,27 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span><span class="preprocessor">#else</span></div>
 <div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span> </div>
 <div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span><span class="comment">// Switch off logging</span></div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span><span class="preprocessor">#define LOGD(...) </span></div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span><span class="preprocessor">#define LOGI(...) </span></div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span><span class="preprocessor">#define LOGW(...) </span></div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span><span class="preprocessor">#define LOGE(...) </span></div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span><span class="preprocessor">#define TRACED()</span></div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span><span class="preprocessor">#define TRACEI()</span></div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span><span class="preprocessor">#define TRACEW()</span></div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span><span class="preprocessor">#define TRACEE()</span></div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno"><a class="line" href="_audio_logger_s_t_d_8h.html#aa839997a58e14061861cd634fdb7664d">  275</a></span><span class="preprocessor">#define LOGD(...) </span></div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno"><a class="line" href="_audio_logger_s_t_d_8h.html#a5512e59d578a380a441a70256af997d0">  276</a></span><span class="preprocessor">#define LOGI(...) </span></div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno"><a class="line" href="_audio_logger_s_t_d_8h.html#a07f1b0d507acedeb7550353eba4f6e66">  277</a></span><span class="preprocessor">#define LOGW(...) </span></div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno"><a class="line" href="_audio_logger_s_t_d_8h.html#ae02538a80ad5fc009caec73487d11a8d">  278</a></span><span class="preprocessor">#define LOGE(...) </span></div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno"><a class="line" href="_audio_logger_s_t_d_8h.html#a4c626ed1ad7ce63349cc19db0dfaeb7b">  279</a></span><span class="preprocessor">#define TRACED()</span></div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno"><a class="line" href="_audio_logger_s_t_d_8h.html#a2c9be124d60316fe5ce1b3fbbe77e2f1">  280</a></span><span class="preprocessor">#define TRACEI()</span></div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno"><a class="line" href="_audio_logger_s_t_d_8h.html#a5ffd3a15c911ddf4e6407391192b78b3">  281</a></span><span class="preprocessor">#define TRACEW()</span></div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno"><a class="line" href="_audio_logger_s_t_d_8h.html#a897bf5a4e2f73b324ae9085c629561cd">  282</a></span><span class="preprocessor">#define TRACEE()</span></div>
 <div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span> </div>
 <div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="a_audio_tools_config_8h_html"><div class="ttname"><a href="_audio_tools_config_8h.html">AudioToolsConfig.h</a></div></div>
+<div class="ttc" id="a_audio_tools_config_8h_html_a0b87e0d3bf5853bcbb0b66a7c48fdc05"><div class="ttname"><a href="_audio_tools_config_8h.html#a0b87e0d3bf5853bcbb0b66a7c48fdc05">LOG_LEVEL</a></div><div class="ttdeci">#define LOG_LEVEL</div><div class="ttdef"><b>Definition</b> AudioToolsConfig.h:52</div></div>
+<div class="ttc" id="a_audio_tools_config_8h_html_a202a4200b51e408995c59853fc9fa1f8"><div class="ttname"><a href="_audio_tools_config_8h.html#a202a4200b51e408995c59853fc9fa1f8">LOG_STREAM</a></div><div class="ttdeci">#define LOG_STREAM</div><div class="ttdef"><b>Definition</b> AudioToolsConfig.h:56</div></div>
+<div class="ttc" id="a_lock_guard_8h_html"><div class="ttname"><a href="_lock_guard_8h.html">LockGuard.h</a></div></div>
+<div class="ttc" id="a_mutex_r_p2040_8h_html"><div class="ttname"><a href="_mutex_r_p2040_8h.html">MutexRP2040.h</a></div></div>
+<div class="ttc" id="a_mutex_r_t_o_s_8h_html"><div class="ttname"><a href="_mutex_r_t_o_s_8h.html">MutexRTOS.h</a></div></div>
+<div class="ttc" id="aavr_8h_html_acdad1cb704260436c186e2aef9283b4d"><div class="ttname"><a href="avr_8h.html#acdad1cb704260436c186e2aef9283b4d">LOG_PRINTF_BUFFER_SIZE</a></div><div class="ttdeci">#define LOG_PRINTF_BUFFER_SIZE</div><div class="ttdef"><b>Definition</b> avr.h:25</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:10</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html_a7b8c4a195c58f9eb8750e94955c5aa4b"><div class="ttname"><a href="namespaceaudio__tools.html#a7b8c4a195c58f9eb8750e94955c5aa4b">audio_tools::Serial</a></div><div class="ttdeci">static HardwareSerial Serial</div><div class="ttdef"><b>Definition</b> NoArduino.h:186</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html_ae3c87ac6df70d80e2a4be8979e63cc2e"><div class="ttname"><a href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">audio_tools::writeData</a></div><div class="ttdeci">size_t writeData(Print *p_out, T *data, int samples, int maxSamples=512)</div><div class="ttdef"><b>Definition</b> AudioTypes.h:512</div></div>
+<div class="ttc" id="anamespacestd_html_ae020bfd2149f171e3fe7e735f4f277e3"><div class="ttname"><a href="namespacestd.html#ae020bfd2149f171e3fe7e735f4f277e3">std::begin</a></div><div class="ttdeci">constexpr const _Ep * begin(initializer_list&lt; _Ep &gt; __il) noexcept</div><div class="ttdef"><b>Definition</b> InitializerList.h:55</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

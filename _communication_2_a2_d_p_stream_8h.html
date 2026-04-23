@@ -85,13 +85,13 @@ $(function() {
 
 <p>A2DP Support via Arduino Streams.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;AudioToolsConfig.h&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="_audio_tools_config_8h_source.html">AudioToolsConfig.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_audio_tools_8h_source.html">AudioTools.h</a>&quot;</code><br />
 <code>#include &quot;BluetoothA2DPSink.h&quot;</code><br />
 <code>#include &quot;BluetoothA2DPSource.h&quot;</code><br />
-<code>#include &quot;AudioTools/CoreAudio/AudioStreams.h&quot;</code><br />
-<code>#include &quot;AudioTools/Concurrency/RTOS/BufferRTOS.h&quot;</code><br />
-<code>#include &quot;AudioTools/CoreAudio/AudioBasic/StrView.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="_audio_streams_8h_source.html">AudioTools/CoreAudio/AudioStreams.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_buffer_r_t_o_s_8h_source.html">AudioTools/Concurrency/RTOS/BufferRTOS.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_str_view_8h_source.html">AudioTools/CoreAudio/AudioBasic/StrView.h</a>&quot;</code><br />
 </div>
 <p><a href="_communication_2_a2_d_p_stream_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -112,36 +112,31 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a1d4acd31001a6bca774a5d7f5eb98afa" id="r_a1d4acd31001a6bca774a5d7f5eb98afa"><td class="memItemLeft" align="right" valign="top"><a id="a1d4acd31001a6bca774a5d7f5eb98afa" name="a1d4acd31001a6bca774a5d7f5eb98afa"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a1d4acd31001a6bca774a5d7f5eb98afa">A2DPNoData</a> { <b>A2DPSilence</b>
-, <b>A2DPWhoosh</b>
+<tr class="memitem:a1d4acd31001a6bca774a5d7f5eb98afa" id="r_a1d4acd31001a6bca774a5d7f5eb98afa"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a1d4acd31001a6bca774a5d7f5eb98afa">A2DPNoData</a> { <a class="el" href="namespaceaudio__tools.html#a1d4acd31001a6bca774a5d7f5eb98afaa67beee002634c2cc6951ec7ec2b95690">A2DPSilence</a>
+, <a class="el" href="namespaceaudio__tools.html#a1d4acd31001a6bca774a5d7f5eb98afaa2e4cdc4f5fe34fd0c7ffb5ff48dc2f0b">A2DPWhoosh</a>
  }</td></tr>
-<tr class="memdesc:a1d4acd31001a6bca774a5d7f5eb98afa"><td class="mdescLeft">&#160;</td><td class="mdescRight">A2DP Action when there is no data. <br /></td></tr>
+<tr class="memdesc:a1d4acd31001a6bca774a5d7f5eb98afa"><td class="mdescLeft">&#160;</td><td class="mdescRight">A2DP Action when there is no data.  <a href="namespaceaudio__tools.html#a1d4acd31001a6bca774a5d7f5eb98afa">More...</a><br /></td></tr>
 <tr class="separator:a1d4acd31001a6bca774a5d7f5eb98afa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b5699409c82146721f7ed069d134dca" id="r_a2b5699409c82146721f7ed069d134dca"><td class="memItemLeft" align="right" valign="top"><a id="a2b5699409c82146721f7ed069d134dca" name="a2b5699409c82146721f7ed069d134dca"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a2b5699409c82146721f7ed069d134dca">A2DPStartLogic</a> { <b>StartWhenBufferFull</b>
-, <b>StartOnConnect</b>
+<tr class="memitem:a2b5699409c82146721f7ed069d134dca" id="r_a2b5699409c82146721f7ed069d134dca"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a2b5699409c82146721f7ed069d134dca">A2DPStartLogic</a> { <a class="el" href="namespaceaudio__tools.html#a2b5699409c82146721f7ed069d134dcaa25c3ebae671443bcbff5865357edc8f6">StartWhenBufferFull</a>
+, <a class="el" href="namespaceaudio__tools.html#a2b5699409c82146721f7ed069d134dcaa17e0c0f03bfbc06920026ec561ad7db0">StartOnConnect</a>
  }</td></tr>
-<tr class="memdesc:a2b5699409c82146721f7ed069d134dca"><td class="mdescLeft">&#160;</td><td class="mdescRight">A2DP Startup Logic. <br /></td></tr>
+<tr class="memdesc:a2b5699409c82146721f7ed069d134dca"><td class="mdescLeft">&#160;</td><td class="mdescRight">A2DP Startup Logic.  <a href="namespaceaudio__tools.html#a2b5699409c82146721f7ed069d134dca">More...</a><br /></td></tr>
 <tr class="separator:a2b5699409c82146721f7ed069d134dca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aac0a96771ba460561744e3987408ddf5" id="r_aac0a96771ba460561744e3987408ddf5"><td class="memItemLeft" align="right" valign="top"><a id="aac0a96771ba460561744e3987408ddf5" name="aac0a96771ba460561744e3987408ddf5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>a2dp_stream_sink_sound_data</b> (const uint8_t *data, uint32_t len)</td></tr>
+<tr class="memitem:aac0a96771ba460561744e3987408ddf5" id="r_aac0a96771ba460561744e3987408ddf5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aac0a96771ba460561744e3987408ddf5">a2dp_stream_sink_sound_data</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *data, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint32_t</a> len)</td></tr>
 <tr class="separator:aac0a96771ba460561744e3987408ddf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a49c34c11c7bb32e207a0e9aaefb1d0c1" id="r_a49c34c11c7bb32e207a0e9aaefb1d0c1"><td class="memItemLeft" align="right" valign="top"><a id="a49c34c11c7bb32e207a0e9aaefb1d0c1" name="a49c34c11c7bb32e207a0e9aaefb1d0c1"></a>
-int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>a2dp_stream_source_sound_data</b> (Frame *data, int32_t len)</td></tr>
+<tr class="memitem:a49c34c11c7bb32e207a0e9aaefb1d0c1" id="r_a49c34c11c7bb32e207a0e9aaefb1d0c1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a49c34c11c7bb32e207a0e9aaefb1d0c1">a2dp_stream_source_sound_data</a> (Frame *data, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int32_t</a> len)</td></tr>
 <tr class="separator:a49c34c11c7bb32e207a0e9aaefb1d0c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a142a50ac852c3b35cdb5a39b10d7a53b" id="r_a142a50ac852c3b35cdb5a39b10d7a53b"><td class="memItemLeft" align="right" valign="top"><a id="a142a50ac852c3b35cdb5a39b10d7a53b" name="a142a50ac852c3b35cdb5a39b10d7a53b"></a>
-static <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html">BufferRTOS</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>a2dp_buffer</b> {0, A2DP_BUFFER_SIZE, portMAX_DELAY, portMAX_DELAY}</td></tr>
+<tr class="memitem:a142a50ac852c3b35cdb5a39b10d7a53b" id="r_a142a50ac852c3b35cdb5a39b10d7a53b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html">BufferRTOS</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a142a50ac852c3b35cdb5a39b10d7a53b">a2dp_buffer</a> {0, <a class="el" href="_audio_tools_config_8h.html#aacdd025528d20ebb44b66dbc05ba65e0">A2DP_BUFFER_SIZE</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">portMAX_DELAY</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">portMAX_DELAY</a>}</td></tr>
 <tr class="separator:a142a50ac852c3b35cdb5a39b10d7a53b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae49dcee0fc374b24fca8634e3f50a8a6" id="r_ae49dcee0fc374b24fca8634e3f50a8a6"><td class="memItemLeft" align="right" valign="top"><a id="ae49dcee0fc374b24fca8634e3f50a8a6" name="ae49dcee0fc374b24fca8634e3f50a8a6"></a>
-static <a class="el" href="classaudio__tools_1_1_a2_d_p_stream.html">A2DPStream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>A2DPStream_self</b> =nullptr</td></tr>
+<tr class="memitem:ae49dcee0fc374b24fca8634e3f50a8a6" id="r_ae49dcee0fc374b24fca8634e3f50a8a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="classaudio__tools_1_1_a2_d_p_stream.html">A2DPStream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ae49dcee0fc374b24fca8634e3f50a8a6">A2DPStream_self</a> =<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td></tr>
 <tr class="separator:ae49dcee0fc374b24fca8634e3f50a8a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2392d2cf9f9fd71dde3fb54fe41c843f" id="r_a2392d2cf9f9fd71dde3fb54fe41c843f"><td class="memItemLeft" align="right" valign="top"><a id="a2392d2cf9f9fd71dde3fb54fe41c843f" name="a2392d2cf9f9fd71dde3fb54fe41c843f"></a>
-static bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_a2dp_active</b> = false</td></tr>
+<tr class="memitem:a2392d2cf9f9fd71dde3fb54fe41c843f" id="r_a2392d2cf9f9fd71dde3fb54fe41c843f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a2392d2cf9f9fd71dde3fb54fe41c843f">is_a2dp_active</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">false</a></td></tr>
 <tr class="separator:a2392d2cf9f9fd71dde3fb54fe41c843f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>

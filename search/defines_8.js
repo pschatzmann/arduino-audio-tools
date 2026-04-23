@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['i2s_5fbits_5fper_5fsample_0',['I2S_BITS_PER_SAMPLE',['../_s_p_d_i_f_output_8h.html#ab5a342bcd8c7b72f37eb366ff1130af3',1,'SPDIFOutput.h']]],
+  ['i2s_5fbuffer_5fcount_1',['I2S_BUFFER_COUNT',['../_audio_tools_config_8h.html#a8d42424b963f86d97124bbddf1592ac0',1,'AudioToolsConfig.h']]],
+  ['i2s_5fbuffer_5fsize_2',['I2S_BUFFER_SIZE',['../_audio_tools_config_8h.html#a0ff55a66f985a24e425242504c34ab08',1,'AudioToolsConfig.h']]],
+  ['i2s_5fbug_5fmagic_3',['I2S_BUG_MAGIC',['../_s_p_d_i_f_output_8h.html#a3a9d2299d9639cc463746bbff109d1e4',1,'SPDIFOutput.h']]],
+  ['i2s_5fchannels_4',['I2S_CHANNELS',['../_s_p_d_i_f_output_8h.html#a04ecd42a5a08889f5a90db2621d56736',1,'SPDIFOutput.h']]],
+  ['i2s_5fdefault_5fport_5',['I2S_DEFAULT_PORT',['../_audio_tools_config_8h.html#ad680e90b27c4b8948bb1b5fd8616d7da',1,'AudioToolsConfig.h']]],
+  ['i2s_5fmclk_5fmultiple_5fdefault_6',['I2S_MCLK_MULTIPLE_DEFAULT',['../_i2_s_e_s_p32_8h.html#a2665658be7265dfb0f0829ada1e4afad',1,'I2SESP32.h']]],
+  ['i2s_5fnum_7',['I2S_NUM',['../_s_p_d_i_f_output_8h.html#a58dd333d62d5930862baa6fe16ea71d3',1,'SPDIFOutput.h']]],
+  ['i2s_5fuse_5fapll_8',['i2s_use_apll',['../esp32_8h.html#a1745f66eb4f292c76547b1ea6229e025',1,'I2S_USE_APLL:&#160;esp32.h'],['../esp8266_8h.html#a1745f66eb4f292c76547b1ea6229e025',1,'I2S_USE_APLL:&#160;esp8266.h']]],
+  ['input_9',['INPUT',['../_no_arduino_8h.html#a1bb283bd7893b9855e2f23013891fc82',1,'NoArduino.h']]],
+  ['input_5fpullup_10',['INPUT_PULLUP',['../_no_arduino_8h.html#a6295096662a20dd56186396e535fbe92',1,'NoArduino.h']]],
+  ['int24_5fmax_11',['int24_max',['../_int24__4bytes__t_8h.html#a4ade7f65b05984f1f21a8223e70c9fac',1,'INT24_MAX:&#160;Int24_4bytes_t.h'],['../_int24__3bytes__t_8h.html#a4ade7f65b05984f1f21a8223e70c9fac',1,'INT24_MAX:&#160;Int24_3bytes_t.h']]],
+  ['iram_5fattr_12',['iram_attr',['../_audio_streams_8h.html#a8b5a7da03d5e9fbb2ca81ddc85025012',1,'IRAM_ATTR:&#160;AudioStreams.h'],['../rp2040hower_8h.html#a8b5a7da03d5e9fbb2ca81ddc85025012',1,'IRAM_ATTR:&#160;rp2040hower.h'],['../rp2040mbed_8h.html#a8b5a7da03d5e9fbb2ca81ddc85025012',1,'IRAM_ATTR:&#160;rp2040mbed.h']]],
+  ['is_5fi2s_5fimplemented_13',['is_i2s_implemented',['../_i2_s_e_s_p32_8h.html#a25c6f454d3f028e131a6511cd83ae6f4',1,'IS_I2S_IMPLEMENTED:&#160;I2SESP32.h'],['../_i2_s_e_s_p32_v1_8h.html#a25c6f454d3f028e131a6511cd83ae6f4',1,'IS_I2S_IMPLEMENTED:&#160;I2SESP32V1.h'],['../_i2_s_e_s_p8266_8h.html#a25c6f454d3f028e131a6511cd83ae6f4',1,'IS_I2S_IMPLEMENTED:&#160;I2SESP8266.h'],['../_i2_s_nano_sense_b_l_e_8h.html#a25c6f454d3f028e131a6511cd83ae6f4',1,'IS_I2S_IMPLEMENTED:&#160;I2SNanoSenseBLE.h'],['../_i2_s_s_a_m_d_8h.html#a25c6f454d3f028e131a6511cd83ae6f4',1,'IS_I2S_IMPLEMENTED:&#160;I2SSAMD.h']]],
+  ['is_5fmbed_14',['is_mbed',['../giga_8h.html#af966198bce5d27c22368678e186e39fe',1,'IS_MBED:&#160;giga.h'],['../portenta_8h.html#af966198bce5d27c22368678e186e39fe',1,'IS_MBED:&#160;portenta.h']]],
+  ['is_5fnoarduino_15',['IS_NOARDUINO',['../_no_arduino_8h.html#a9c5f32aac90d1c0fdb18eb061321e464',1,'NoArduino.h']]],
+  ['is_5frenesas_16',['IS_RENESAS',['../unor4_8h.html#a80382f4849e9981710c649fb7d56c94c',1,'unor4.h']]],
+  ['is_5fzephyr_17',['IS_ZEPHYR',['../arduino-zephyr_8h.html#a830d3c625b0ead2028e9ad9cf0241ef6',1,'arduino-zephyr.h']]]
+];

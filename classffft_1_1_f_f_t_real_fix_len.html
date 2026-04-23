@@ -80,55 +80,463 @@ $(function() {
   <div class="headertitle"><div class="title">FFTRealFixLen&lt; LL2 &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_f_f_t_real_8h_source.html">FFTReal.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:adc29c2ff13d900c2f185ee95427fb06c" id="r_adc29c2ff13d900c2f185ee95427fb06c"><td class="memItemLeft" align="right" valign="top"><a id="adc29c2ff13d900c2f185ee95427fb06c" name="adc29c2ff13d900c2f185ee95427fb06c"></a>enum &#160;</td><td class="memItemRight" valign="bottom">{ <b>FFT_LEN_L2</b> = LL2
+<tr class="memitem:adc29c2ff13d900c2f185ee95427fb06c" id="r_adc29c2ff13d900c2f185ee95427fb06c"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom">{ <a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#adc29c2ff13d900c2f185ee95427fb06cab3746ada0d2531b7902720556bf04afd">FFT_LEN_L2</a> = LL2
  }</td></tr>
 <tr class="separator:adc29c2ff13d900c2f185ee95427fb06c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61dadd085c1777f559549e05962b2c9e" id="r_a61dadd085c1777f559549e05962b2c9e"><td class="memItemLeft" align="right" valign="top"><a id="a61dadd085c1777f559549e05962b2c9e" name="a61dadd085c1777f559549e05962b2c9e"></a>enum &#160;</td><td class="memItemRight" valign="bottom">{ <b>FFT_LEN</b> = 1 &lt;&lt; FFT_LEN_L2
+<tr class="memitem:a61dadd085c1777f559549e05962b2c9e" id="r_a61dadd085c1777f559549e05962b2c9e"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom">{ <a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a61dadd085c1777f559549e05962b2c9eaadfb1002ef211c0b49fee6ba428178fa">FFT_LEN</a> = 1 &lt;&lt; FFT_LEN_L2
  }</td></tr>
 <tr class="separator:a61dadd085c1777f559549e05962b2c9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a39fb13732dcfb996819c79cb030f034e" id="r_a39fb13732dcfb996819c79cb030f034e"><td class="memItemLeft" align="right" valign="top"><a id="a39fb13732dcfb996819c79cb030f034e" name="a39fb13732dcfb996819c79cb030f034e"></a>
-typedef FFTRealFixLenParam::DataType&#160;</td><td class="memItemRight" valign="bottom"><b>DataType</b></td></tr>
+<tr class="memitem:a39fb13732dcfb996819c79cb030f034e" id="r_a39fb13732dcfb996819c79cb030f034e"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="classffft_1_1_f_f_t_real_fix_len_param.html#a279b64f47fb2213ad73e59be937afcfa">FFTRealFixLenParam::DataType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a></td></tr>
 <tr class="separator:a39fb13732dcfb996819c79cb030f034e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a2ad5bc11d394ff05d5f3765fcf1927" id="r_a3a2ad5bc11d394ff05d5f3765fcf1927"><td class="memItemLeft" align="right" valign="top"><a id="a3a2ad5bc11d394ff05d5f3765fcf1927" name="a3a2ad5bc11d394ff05d5f3765fcf1927"></a>
-typedef <a class="el" href="classffft_1_1_osc_sin_cos.html">OscSinCos</a>&lt; DataType &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>OscType</b></td></tr>
+<tr class="memitem:a3a2ad5bc11d394ff05d5f3765fcf1927" id="r_a3a2ad5bc11d394ff05d5f3765fcf1927"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="classffft_1_1_osc_sin_cos.html">OscSinCos</a>&lt; <a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a3a2ad5bc11d394ff05d5f3765fcf1927">OscType</a></td></tr>
 <tr class="separator:a3a2ad5bc11d394ff05d5f3765fcf1927"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6fbce61ea83d297f0ce36f5754a62e02" id="r_a6fbce61ea83d297f0ce36f5754a62e02"><td class="memItemLeft" align="right" valign="top"><a id="a6fbce61ea83d297f0ce36f5754a62e02" name="a6fbce61ea83d297f0ce36f5754a62e02"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>do_fft</b> (DataType f[], const DataType x[])</td></tr>
+<tr class="memitem:ad25bed2080f6cd0b8253e532e13270c6" id="r_ad25bed2080f6cd0b8253e532e13270c6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#ad25bed2080f6cd0b8253e532e13270c6">FFTRealFixLen</a> ()</td></tr>
+<tr class="separator:ad25bed2080f6cd0b8253e532e13270c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fbce61ea83d297f0ce36f5754a62e02" id="r_a6fbce61ea83d297f0ce36f5754a62e02"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a6fbce61ea83d297f0ce36f5754a62e02">do_fft</a> (<a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> f[], const <a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> x[])</td></tr>
 <tr class="separator:a6fbce61ea83d297f0ce36f5754a62e02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6fbce61ea83d297f0ce36f5754a62e02" id="r_a6fbce61ea83d297f0ce36f5754a62e02"><td class="memItemLeft" align="right" valign="top"><a id="a6fbce61ea83d297f0ce36f5754a62e02" name="a6fbce61ea83d297f0ce36f5754a62e02"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>do_fft</b> (DataType f[], const DataType x[])</td></tr>
+<tr class="memitem:a6fbce61ea83d297f0ce36f5754a62e02" id="r_a6fbce61ea83d297f0ce36f5754a62e02"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a6fbce61ea83d297f0ce36f5754a62e02">do_fft</a> (<a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> f[], const <a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> x[])</td></tr>
 <tr class="separator:a6fbce61ea83d297f0ce36f5754a62e02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6fbce61ea83d297f0ce36f5754a62e02" id="r_a6fbce61ea83d297f0ce36f5754a62e02"><td class="memItemLeft" align="right" valign="top"><a id="a6fbce61ea83d297f0ce36f5754a62e02" name="a6fbce61ea83d297f0ce36f5754a62e02"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>do_fft</b> (DataType f[], const DataType x[])</td></tr>
+<tr class="memitem:a6fbce61ea83d297f0ce36f5754a62e02" id="r_a6fbce61ea83d297f0ce36f5754a62e02"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a6fbce61ea83d297f0ce36f5754a62e02">do_fft</a> (<a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> f[], const <a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> x[])</td></tr>
 <tr class="separator:a6fbce61ea83d297f0ce36f5754a62e02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6fbce61ea83d297f0ce36f5754a62e02" id="r_a6fbce61ea83d297f0ce36f5754a62e02"><td class="memItemLeft" align="right" valign="top"><a id="a6fbce61ea83d297f0ce36f5754a62e02" name="a6fbce61ea83d297f0ce36f5754a62e02"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>do_fft</b> (DataType f[], const DataType x[])</td></tr>
+<tr class="memitem:a6fbce61ea83d297f0ce36f5754a62e02" id="r_a6fbce61ea83d297f0ce36f5754a62e02"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a6fbce61ea83d297f0ce36f5754a62e02">do_fft</a> (<a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> f[], const <a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> x[])</td></tr>
 <tr class="separator:a6fbce61ea83d297f0ce36f5754a62e02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1eddd2f419dbc544a14f6cc4b70ffed9" id="r_a1eddd2f419dbc544a14f6cc4b70ffed9"><td class="memItemLeft" align="right" valign="top"><a id="a1eddd2f419dbc544a14f6cc4b70ffed9" name="a1eddd2f419dbc544a14f6cc4b70ffed9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>do_ifft</b> (const DataType f[], DataType x[])</td></tr>
+<tr class="memitem:a1eddd2f419dbc544a14f6cc4b70ffed9" id="r_a1eddd2f419dbc544a14f6cc4b70ffed9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a1eddd2f419dbc544a14f6cc4b70ffed9">do_ifft</a> (const <a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> f[], <a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> x[])</td></tr>
 <tr class="separator:a1eddd2f419dbc544a14f6cc4b70ffed9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1eddd2f419dbc544a14f6cc4b70ffed9" id="r_a1eddd2f419dbc544a14f6cc4b70ffed9"><td class="memItemLeft" align="right" valign="top"><a id="a1eddd2f419dbc544a14f6cc4b70ffed9" name="a1eddd2f419dbc544a14f6cc4b70ffed9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>do_ifft</b> (const DataType f[], DataType x[])</td></tr>
+<tr class="memitem:a1eddd2f419dbc544a14f6cc4b70ffed9" id="r_a1eddd2f419dbc544a14f6cc4b70ffed9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a1eddd2f419dbc544a14f6cc4b70ffed9">do_ifft</a> (const <a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> f[], <a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> x[])</td></tr>
 <tr class="separator:a1eddd2f419dbc544a14f6cc4b70ffed9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1eddd2f419dbc544a14f6cc4b70ffed9" id="r_a1eddd2f419dbc544a14f6cc4b70ffed9"><td class="memItemLeft" align="right" valign="top"><a id="a1eddd2f419dbc544a14f6cc4b70ffed9" name="a1eddd2f419dbc544a14f6cc4b70ffed9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>do_ifft</b> (const DataType f[], DataType x[])</td></tr>
+<tr class="memitem:a1eddd2f419dbc544a14f6cc4b70ffed9" id="r_a1eddd2f419dbc544a14f6cc4b70ffed9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a1eddd2f419dbc544a14f6cc4b70ffed9">do_ifft</a> (const <a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> f[], <a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> x[])</td></tr>
 <tr class="separator:a1eddd2f419dbc544a14f6cc4b70ffed9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1eddd2f419dbc544a14f6cc4b70ffed9" id="r_a1eddd2f419dbc544a14f6cc4b70ffed9"><td class="memItemLeft" align="right" valign="top"><a id="a1eddd2f419dbc544a14f6cc4b70ffed9" name="a1eddd2f419dbc544a14f6cc4b70ffed9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>do_ifft</b> (const DataType f[], DataType x[])</td></tr>
+<tr class="memitem:a1eddd2f419dbc544a14f6cc4b70ffed9" id="r_a1eddd2f419dbc544a14f6cc4b70ffed9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a1eddd2f419dbc544a14f6cc4b70ffed9">do_ifft</a> (const <a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> f[], <a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> x[])</td></tr>
 <tr class="separator:a1eddd2f419dbc544a14f6cc4b70ffed9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ea7cfb062d3e05e5f27fce1130a4b73" id="r_a5ea7cfb062d3e05e5f27fce1130a4b73"><td class="memItemLeft" align="right" valign="top"><a id="a5ea7cfb062d3e05e5f27fce1130a4b73" name="a5ea7cfb062d3e05e5f27fce1130a4b73"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>get_length</b> () const</td></tr>
+<tr class="memitem:a5ea7cfb062d3e05e5f27fce1130a4b73" id="r_a5ea7cfb062d3e05e5f27fce1130a4b73"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a5ea7cfb062d3e05e5f27fce1130a4b73">get_length</a> () const</td></tr>
 <tr class="separator:a5ea7cfb062d3e05e5f27fce1130a4b73"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a745f490400359b27a0a049d91935ea92" id="r_a745f490400359b27a0a049d91935ea92"><td class="memItemLeft" align="right" valign="top"><a id="a745f490400359b27a0a049d91935ea92" name="a745f490400359b27a0a049d91935ea92"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>rescale</b> (DataType x[]) const</td></tr>
+<tr class="memitem:a745f490400359b27a0a049d91935ea92" id="r_a745f490400359b27a0a049d91935ea92"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a745f490400359b27a0a049d91935ea92">rescale</a> (<a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> x[]) const</td></tr>
 <tr class="separator:a745f490400359b27a0a049d91935ea92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a39fb13732dcfb996819c79cb030f034e" name="a39fb13732dcfb996819c79cb030f034e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39fb13732dcfb996819c79cb030f034e">&#9670;&#160;</a></span>DataType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int LL2&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="classffft_1_1_f_f_t_real_fix_len_param.html#a279b64f47fb2213ad73e59be937afcfa">FFTRealFixLenParam::DataType</a> <a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3a2ad5bc11d394ff05d5f3765fcf1927" name="a3a2ad5bc11d394ff05d5f3765fcf1927"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a2ad5bc11d394ff05d5f3765fcf1927">&#9670;&#160;</a></span>OscType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int LL2&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="classffft_1_1_osc_sin_cos.html">OscSinCos</a>&lt;<a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&gt; <a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a3a2ad5bc11d394ff05d5f3765fcf1927">OscType</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="adc29c2ff13d900c2f185ee95427fb06c" name="adc29c2ff13d900c2f185ee95427fb06c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc29c2ff13d900c2f185ee95427fb06c">&#9670;&#160;</a></span>anonymous enum</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int LL2&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">anonymous enum</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="adc29c2ff13d900c2f185ee95427fb06cab3746ada0d2531b7902720556bf04afd" name="adc29c2ff13d900c2f185ee95427fb06cab3746ada0d2531b7902720556bf04afd"></a>FFT_LEN_L2&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<a id="a61dadd085c1777f559549e05962b2c9e" name="a61dadd085c1777f559549e05962b2c9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61dadd085c1777f559549e05962b2c9e">&#9670;&#160;</a></span>anonymous enum</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int LL2&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">anonymous enum</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a61dadd085c1777f559549e05962b2c9eaadfb1002ef211c0b49fee6ba428178fa" name="a61dadd085c1777f559549e05962b2c9eaadfb1002ef211c0b49fee6ba428178fa"></a>FFT_LEN&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ad25bed2080f6cd0b8253e532e13270c6" name="ad25bed2080f6cd0b8253e532e13270c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad25bed2080f6cd0b8253e532e13270c6">&#9670;&#160;</a></span>FFTRealFixLen()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int LL2&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classffft_1_1_f_f_t_real_fix_len.html">FFTRealFixLen</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a6fbce61ea83d297f0ce36f5754a62e02" name="a6fbce61ea83d297f0ce36f5754a62e02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fbce61ea83d297f0ce36f5754a62e02">&#9670;&#160;</a></span>do_fft() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int LL2&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void do_fft </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>f</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>x</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6fbce61ea83d297f0ce36f5754a62e02" name="a6fbce61ea83d297f0ce36f5754a62e02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fbce61ea83d297f0ce36f5754a62e02">&#9670;&#160;</a></span>do_fft() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void do_fft </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>f</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>x</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6fbce61ea83d297f0ce36f5754a62e02" name="a6fbce61ea83d297f0ce36f5754a62e02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fbce61ea83d297f0ce36f5754a62e02">&#9670;&#160;</a></span>do_fft() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void do_fft </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>f</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>x</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6fbce61ea83d297f0ce36f5754a62e02" name="a6fbce61ea83d297f0ce36f5754a62e02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fbce61ea83d297f0ce36f5754a62e02">&#9670;&#160;</a></span>do_fft() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void do_fft </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>f</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>x</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1eddd2f419dbc544a14f6cc4b70ffed9" name="a1eddd2f419dbc544a14f6cc4b70ffed9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1eddd2f419dbc544a14f6cc4b70ffed9">&#9670;&#160;</a></span>do_ifft() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int LL2&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void do_ifft </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>f</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>x</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1eddd2f419dbc544a14f6cc4b70ffed9" name="a1eddd2f419dbc544a14f6cc4b70ffed9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1eddd2f419dbc544a14f6cc4b70ffed9">&#9670;&#160;</a></span>do_ifft() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void do_ifft </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>f</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>x</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1eddd2f419dbc544a14f6cc4b70ffed9" name="a1eddd2f419dbc544a14f6cc4b70ffed9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1eddd2f419dbc544a14f6cc4b70ffed9">&#9670;&#160;</a></span>do_ifft() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void do_ifft </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>f</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>x</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1eddd2f419dbc544a14f6cc4b70ffed9" name="a1eddd2f419dbc544a14f6cc4b70ffed9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1eddd2f419dbc544a14f6cc4b70ffed9">&#9670;&#160;</a></span>do_ifft() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void do_ifft </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>f</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>x</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5ea7cfb062d3e05e5f27fce1130a4b73" name="a5ea7cfb062d3e05e5f27fce1130a4b73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ea7cfb062d3e05e5f27fce1130a4b73">&#9670;&#160;</a></span>get_length()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int LL2&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">long get_length </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a745f490400359b27a0a049d91935ea92" name="a745f490400359b27a0a049d91935ea92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a745f490400359b27a0a049d91935ea92">&#9670;&#160;</a></span>rescale()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int LL2&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void rescale </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_fix_len.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>x</em>[]</td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/AudioTools/AudioLibs/FFT/<a class="el" href="_f_f_t_real_8h_source.html">FFTReal.h</a></li>
 </ul>

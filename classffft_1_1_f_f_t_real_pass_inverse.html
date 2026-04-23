@@ -81,40 +81,476 @@ $(function() {
   <div class="headertitle"><div class="title">FFTRealPassInverse&lt; PASS &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_f_f_t_real_8h_source.html">FFTReal.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a39fb13732dcfb996819c79cb030f034e" id="r_a39fb13732dcfb996819c79cb030f034e"><td class="memItemLeft" align="right" valign="top"><a id="a39fb13732dcfb996819c79cb030f034e" name="a39fb13732dcfb996819c79cb030f034e"></a>
-typedef FFTRealFixLenParam::DataType&#160;</td><td class="memItemRight" valign="bottom"><b>DataType</b></td></tr>
+<tr class="memitem:a39fb13732dcfb996819c79cb030f034e" id="r_a39fb13732dcfb996819c79cb030f034e"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="classffft_1_1_f_f_t_real_fix_len_param.html#a279b64f47fb2213ad73e59be937afcfa">FFTRealFixLenParam::DataType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a></td></tr>
 <tr class="separator:a39fb13732dcfb996819c79cb030f034e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a2ad5bc11d394ff05d5f3765fcf1927" id="r_a3a2ad5bc11d394ff05d5f3765fcf1927"><td class="memItemLeft" align="right" valign="top"><a id="a3a2ad5bc11d394ff05d5f3765fcf1927" name="a3a2ad5bc11d394ff05d5f3765fcf1927"></a>
-typedef <a class="el" href="classffft_1_1_osc_sin_cos.html">OscSinCos</a>&lt; DataType &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>OscType</b></td></tr>
+<tr class="memitem:a3a2ad5bc11d394ff05d5f3765fcf1927" id="r_a3a2ad5bc11d394ff05d5f3765fcf1927"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="classffft_1_1_osc_sin_cos.html">OscSinCos</a>&lt; <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a3a2ad5bc11d394ff05d5f3765fcf1927">OscType</a></td></tr>
 <tr class="separator:a3a2ad5bc11d394ff05d5f3765fcf1927"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1a7d33f3a2b003cf89c5b56e2c51aea2" id="r_a1a7d33f3a2b003cf89c5b56e2c51aea2"><td class="memItemLeft" align="right" valign="top"><a id="a1a7d33f3a2b003cf89c5b56e2c51aea2" name="a1a7d33f3a2b003cf89c5b56e2c51aea2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process_internal</b> (long len, DataType dest_ptr[], const DataType src_ptr[], const DataType cos_ptr[], long cos_len, const long br_ptr[], <a class="el" href="classffft_1_1_osc_sin_cos.html">OscType</a> osc_list[])</td></tr>
+<tr class="memitem:a1a7d33f3a2b003cf89c5b56e2c51aea2" id="r_a1a7d33f3a2b003cf89c5b56e2c51aea2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a1a7d33f3a2b003cf89c5b56e2c51aea2">process_internal</a> (long len, <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> dest_ptr[], const <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> src_ptr[], const <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> cos_ptr[], long cos_len, const long br_ptr[], <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a3a2ad5bc11d394ff05d5f3765fcf1927">OscType</a> osc_list[])</td></tr>
 <tr class="separator:a1a7d33f3a2b003cf89c5b56e2c51aea2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a7d33f3a2b003cf89c5b56e2c51aea2" id="r_a1a7d33f3a2b003cf89c5b56e2c51aea2"><td class="memItemLeft" align="right" valign="top"><a id="a1a7d33f3a2b003cf89c5b56e2c51aea2" name="a1a7d33f3a2b003cf89c5b56e2c51aea2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process_internal</b> (long len, DataType dest_ptr[], const DataType src_ptr[], const DataType cos_ptr[], long cos_len, const long br_ptr[], <a class="el" href="classffft_1_1_osc_sin_cos.html">OscType</a> osc_list[])</td></tr>
+<tr class="memitem:a1a7d33f3a2b003cf89c5b56e2c51aea2" id="r_a1a7d33f3a2b003cf89c5b56e2c51aea2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a1a7d33f3a2b003cf89c5b56e2c51aea2">process_internal</a> (long len, <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> dest_ptr[], const <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> src_ptr[], const <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> cos_ptr[], long cos_len, const long br_ptr[], <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a3a2ad5bc11d394ff05d5f3765fcf1927">OscType</a> osc_list[])</td></tr>
 <tr class="separator:a1a7d33f3a2b003cf89c5b56e2c51aea2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c956f17599be2bd312a6719473a468c" id="r_a3c956f17599be2bd312a6719473a468c"><td class="memItemLeft" align="right" valign="top"><a id="a3c956f17599be2bd312a6719473a468c" name="a3c956f17599be2bd312a6719473a468c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process_rec</b> (long len, DataType dest_ptr[], DataType src_ptr[], const DataType cos_ptr[], long cos_len, const long br_ptr[], <a class="el" href="classffft_1_1_osc_sin_cos.html">OscType</a> osc_list[])</td></tr>
+<tr class="memitem:a3c956f17599be2bd312a6719473a468c" id="r_a3c956f17599be2bd312a6719473a468c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a3c956f17599be2bd312a6719473a468c">process_rec</a> (long len, <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> dest_ptr[], <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> src_ptr[], const <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> cos_ptr[], long cos_len, const long br_ptr[], <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a3a2ad5bc11d394ff05d5f3765fcf1927">OscType</a> osc_list[])</td></tr>
 <tr class="separator:a3c956f17599be2bd312a6719473a468c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a6009ddd2a455245a41e2ba667486b57b" id="r_a6009ddd2a455245a41e2ba667486b57b"><td class="memItemLeft" align="right" valign="top"><a id="a6009ddd2a455245a41e2ba667486b57b" name="a6009ddd2a455245a41e2ba667486b57b"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (long len, DataType dest_ptr[], DataType src_ptr[], const DataType f_ptr[], const DataType cos_ptr[], long cos_len, const long br_ptr[], <a class="el" href="classffft_1_1_osc_sin_cos.html">OscType</a> osc_list[])</td></tr>
+<tr class="memitem:a6009ddd2a455245a41e2ba667486b57b" id="r_a6009ddd2a455245a41e2ba667486b57b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a6009ddd2a455245a41e2ba667486b57b">process</a> (long len, <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> dest_ptr[], <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> src_ptr[], const <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> f_ptr[], const <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> cos_ptr[], long cos_len, const long br_ptr[], <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a3a2ad5bc11d394ff05d5f3765fcf1927">OscType</a> osc_list[])</td></tr>
 <tr class="separator:a6009ddd2a455245a41e2ba667486b57b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a7d33f3a2b003cf89c5b56e2c51aea2" id="r_a1a7d33f3a2b003cf89c5b56e2c51aea2"><td class="memItemLeft" align="right" valign="top"><a id="a1a7d33f3a2b003cf89c5b56e2c51aea2" name="a1a7d33f3a2b003cf89c5b56e2c51aea2"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>process_internal</b> (long len, DataType dest_ptr[], const DataType src_ptr[], const DataType cos_ptr[], long cos_len, const long br_ptr[], <a class="el" href="classffft_1_1_osc_sin_cos.html">OscType</a> osc_list[])</td></tr>
+<tr class="memitem:a1a7d33f3a2b003cf89c5b56e2c51aea2" id="r_a1a7d33f3a2b003cf89c5b56e2c51aea2"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a1a7d33f3a2b003cf89c5b56e2c51aea2">process_internal</a> (long len, <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> dest_ptr[], const <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> src_ptr[], const <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> cos_ptr[], long cos_len, const long br_ptr[], <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a3a2ad5bc11d394ff05d5f3765fcf1927">OscType</a> osc_list[])</td></tr>
 <tr class="separator:a1a7d33f3a2b003cf89c5b56e2c51aea2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c956f17599be2bd312a6719473a468c" id="r_a3c956f17599be2bd312a6719473a468c"><td class="memItemLeft" align="right" valign="top"><a id="a3c956f17599be2bd312a6719473a468c" name="a3c956f17599be2bd312a6719473a468c"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>process_rec</b> (long len, DataType dest_ptr[], DataType src_ptr[], const DataType cos_ptr[], long cos_len, const long br_ptr[], <a class="el" href="classffft_1_1_osc_sin_cos.html">OscType</a> osc_list[])</td></tr>
+<tr class="memitem:a3c956f17599be2bd312a6719473a468c" id="r_a3c956f17599be2bd312a6719473a468c"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a3c956f17599be2bd312a6719473a468c">process_rec</a> (long len, <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> dest_ptr[], <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> src_ptr[], const <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a> cos_ptr[], long cos_len, const long br_ptr[], <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a3a2ad5bc11d394ff05d5f3765fcf1927">OscType</a> osc_list[])</td></tr>
 <tr class="separator:a3c956f17599be2bd312a6719473a468c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a39fb13732dcfb996819c79cb030f034e" name="a39fb13732dcfb996819c79cb030f034e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39fb13732dcfb996819c79cb030f034e">&#9670;&#160;</a></span>DataType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int PASS&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="classffft_1_1_f_f_t_real_fix_len_param.html#a279b64f47fb2213ad73e59be937afcfa">FFTRealFixLenParam::DataType</a> <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3a2ad5bc11d394ff05d5f3765fcf1927" name="a3a2ad5bc11d394ff05d5f3765fcf1927"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a2ad5bc11d394ff05d5f3765fcf1927">&#9670;&#160;</a></span>OscType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int PASS&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="classffft_1_1_osc_sin_cos.html">OscSinCos</a>&lt;<a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&gt; <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a3a2ad5bc11d394ff05d5f3765fcf1927">OscType</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a6009ddd2a455245a41e2ba667486b57b" name="a6009ddd2a455245a41e2ba667486b57b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6009ddd2a455245a41e2ba667486b57b">&#9670;&#160;</a></span>process()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int PASS&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void process </td>
+          <td>(</td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>dest_ptr</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>src_ptr</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>f_ptr</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>cos_ptr</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>cos_len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const long&#160;</td>
+          <td class="paramname"><em>br_ptr</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a3a2ad5bc11d394ff05d5f3765fcf1927">OscType</a>&#160;</td>
+          <td class="paramname"><em>osc_list</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1a7d33f3a2b003cf89c5b56e2c51aea2" name="a1a7d33f3a2b003cf89c5b56e2c51aea2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a7d33f3a2b003cf89c5b56e2c51aea2">&#9670;&#160;</a></span>process_internal() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int PASS&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void process_internal </td>
+          <td>(</td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>dest_ptr</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>src_ptr</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>cos_ptr</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>cos_len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const long&#160;</td>
+          <td class="paramname"><em>br_ptr</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a3a2ad5bc11d394ff05d5f3765fcf1927">OscType</a>&#160;</td>
+          <td class="paramname"><em>osc_list</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1a7d33f3a2b003cf89c5b56e2c51aea2" name="a1a7d33f3a2b003cf89c5b56e2c51aea2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a7d33f3a2b003cf89c5b56e2c51aea2">&#9670;&#160;</a></span>process_internal() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void process_internal </td>
+          <td>(</td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>dest_ptr</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>src_ptr</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>cos_ptr</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>cos_len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const long&#160;</td>
+          <td class="paramname"><em>br_ptr</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a3a2ad5bc11d394ff05d5f3765fcf1927">OscType</a>&#160;</td>
+          <td class="paramname"><em>osc_list</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1a7d33f3a2b003cf89c5b56e2c51aea2" name="a1a7d33f3a2b003cf89c5b56e2c51aea2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a7d33f3a2b003cf89c5b56e2c51aea2">&#9670;&#160;</a></span>process_internal() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void process_internal </td>
+          <td>(</td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>dest_ptr</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>src_ptr</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>cos_ptr</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>cos_len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const long&#160;</td>
+          <td class="paramname"><em>br_ptr</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a3a2ad5bc11d394ff05d5f3765fcf1927">OscType</a>&#160;</td>
+          <td class="paramname"><em>osc_list</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3c956f17599be2bd312a6719473a468c" name="a3c956f17599be2bd312a6719473a468c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c956f17599be2bd312a6719473a468c">&#9670;&#160;</a></span>process_rec() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int PASS&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void process_rec </td>
+          <td>(</td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>dest_ptr</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>src_ptr</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>cos_ptr</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>cos_len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const long&#160;</td>
+          <td class="paramname"><em>br_ptr</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a3a2ad5bc11d394ff05d5f3765fcf1927">OscType</a>&#160;</td>
+          <td class="paramname"><em>osc_list</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3c956f17599be2bd312a6719473a468c" name="a3c956f17599be2bd312a6719473a468c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c956f17599be2bd312a6719473a468c">&#9670;&#160;</a></span>process_rec() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void process_rec </td>
+          <td>(</td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>dest_ptr</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>src_ptr</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a39fb13732dcfb996819c79cb030f034e">DataType</a>&#160;</td>
+          <td class="paramname"><em>cos_ptr</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>cos_len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const long&#160;</td>
+          <td class="paramname"><em>br_ptr</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#a3a2ad5bc11d394ff05d5f3765fcf1927">OscType</a>&#160;</td>
+          <td class="paramname"><em>osc_list</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/AudioTools/AudioLibs/FFT/<a class="el" href="_f_f_t_real_8h_source.html">FFTReal.h</a></li>
 </ul>

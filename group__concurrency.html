@@ -126,13 +126,12 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:gade590cdeaf9b7f7f988bf41def6cd36f" id="r_gade590cdeaf9b7f7f988bf41def6cd36f"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__concurrency.html#gade590cdeaf9b7f7f988bf41def6cd36f">Mutex</a> = <a class="el" href="classaudio__tools_1_1_mutex_r_p2040.html">MutexRP2040</a></td></tr>
+<tr class="memitem:gade590cdeaf9b7f7f988bf41def6cd36f" id="r_gade590cdeaf9b7f7f988bf41def6cd36f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__concurrency.html#gade590cdeaf9b7f7f988bf41def6cd36f">Mutex</a> = <a class="el" href="classaudio__tools_1_1_mutex_r_p2040.html">MutexRP2040</a></td></tr>
 <tr class="memdesc:gade590cdeaf9b7f7f988bf41def6cd36f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Mutex implementation using RP2040 Pico SDK.  <br /></td></tr>
 <tr class="separator:gade590cdeaf9b7f7f988bf41def6cd36f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab73d6ed323f5db62aed8229aba3bb7e3" id="r_gab73d6ed323f5db62aed8229aba3bb7e3"><td class="memTemplParams" colspan="2"><a id="gab73d6ed323f5db62aed8229aba3bb7e3" name="gab73d6ed323f5db62aed8229aba3bb7e3"></a>
-template&lt;class T &gt; </td></tr>
-<tr class="memitem:gab73d6ed323f5db62aed8229aba3bb7e3"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>SynchronizedBufferRTOS</b> = <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html">BufferRTOS</a>&lt; T &gt;</td></tr>
-<tr class="memdesc:gab73d6ed323f5db62aed8229aba3bb7e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template alias for RTOS-based synchronized buffer. <br /></td></tr>
+<tr class="memitem:gab73d6ed323f5db62aed8229aba3bb7e3" id="r_gab73d6ed323f5db62aed8229aba3bb7e3"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </td></tr>
+<tr class="memitem:gab73d6ed323f5db62aed8229aba3bb7e3"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">using</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__concurrency.html#gab73d6ed323f5db62aed8229aba3bb7e3">SynchronizedBufferRTOS</a> = <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html">BufferRTOS</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt;</td></tr>
+<tr class="memdesc:gab73d6ed323f5db62aed8229aba3bb7e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template alias for RTOS-based synchronized buffer.  <br /></td></tr>
 <tr class="separator:gab73d6ed323f5db62aed8229aba3bb7e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -145,13 +144,31 @@ template&lt;class T &gt; </td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="classaudio__tools_1_1_mutex_r_t_o_s.html">MutexRTOS</a> <a class="el" href="group__concurrency.html#gade590cdeaf9b7f7f988bf41def6cd36f">Mutex</a></td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typedef</a> <a class="el" href="classaudio__tools_1_1_mutex_r_t_o_s.html">MutexRTOS</a> <a class="el" href="group__concurrency.html#gade590cdeaf9b7f7f988bf41def6cd36f">Mutex</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Default Mutex implementation using RP2040 Pico SDK. </p>
 <p>Default Mutex implementation using RTOS semaphores. </p>
+
+</div>
+</div>
+<a id="gab73d6ed323f5db62aed8229aba3bb7e3" name="gab73d6ed323f5db62aed8229aba3bb7e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab73d6ed323f5db62aed8229aba3bb7e3">&#9670;&#160;</a></span>SynchronizedBufferRTOS</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">using</a> <a class="el" href="group__concurrency.html#gab73d6ed323f5db62aed8229aba3bb7e3">SynchronizedBufferRTOS</a> =  <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html">BufferRTOS</a>&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Template alias for RTOS-based synchronized buffer. </p>
 
 </div>
 </div>
