@@ -60,6 +60,7 @@ class BufferedTaskStream : public AudioStream {
   virtual void end() {
     TRACED();
     task.end();
+    buffers.clear();
     active = false;
     ready = false;
   }
