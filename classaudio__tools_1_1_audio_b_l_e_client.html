@@ -229,6 +229,7 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a55dc42c8c45a67a28a4975582ef59d94" id="r_a55dc42c8c45a67a28a4975582ef59d94"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_b_l_e_client.html#a55dc42c8c45a67a28a4975582ef59d94">readAudioInfoCharacteristic</a> ()</td></tr>
 <tr class="separator:a55dc42c8c45a67a28a4975582ef59d94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5caf99a24686511722c4c9f94c4ec52e" id="r_a5caf99a24686511722c4c9f94c4ec52e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#a5caf99a24686511722c4c9f94c4ec52e">refillReadBuffer</a> ()</td></tr>
+<tr class="memdesc:a5caf99a24686511722c4c9f94c4ec52e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Refill small read buffer (e.g. 8 bytes) to avoid single byte reads when calling read()  <br /></td></tr>
 <tr class="separator:a5caf99a24686511722c4c9f94c4ec52e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b61c5752bb4a0d4f0d57b73868ce0d1" id="r_a1b61c5752bb4a0d4f0d57b73868ce0d1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_b_l_e_stream.html#a1b61c5752bb4a0d4f0d57b73868ce0d1">setAudioInfo</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *data, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> size)</td></tr>
 <tr class="separator:a1b61c5752bb4a0d4f0d57b73868ce0d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1346,6 +1347,8 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Refill small read buffer (e.g. 8 bytes) to avoid single byte reads when calling read() </p>
 
 </div>
 </div>

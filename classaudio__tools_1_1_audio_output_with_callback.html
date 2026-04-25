@@ -251,6 +251,7 @@ Protected Member Functions</h2></td></tr>
 <tr class="memdesc:ad83c5c4b16bc749a19f90bf1a27ddd56"><td class="mdescLeft">&#160;</td><td class="mdescRight">refill only if not enough data  <br /></td></tr>
 <tr class="separator:ad83c5c4b16bc749a19f90bf1a27ddd56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5caf99a24686511722c4c9f94c4ec52e" id="r_a5caf99a24686511722c4c9f94c4ec52e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#a5caf99a24686511722c4c9f94c4ec52e">refillReadBuffer</a> ()</td></tr>
+<tr class="memdesc:a5caf99a24686511722c4c9f94c4ec52e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Refill small read buffer (e.g. 8 bytes) to avoid single byte reads when calling read()  <br /></td></tr>
 <tr class="separator:a5caf99a24686511722c4c9f94c4ec52e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33490eea95be838e94ef53433b9021dc" id="r_a33490eea95be838e94ef53433b9021dc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_output_with_callback.html#a33490eea95be838e94ef53433b9021dc">writeExt</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *data, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> len)</td></tr>
 <tr class="separator:a33490eea95be838e94ef53433b9021dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1373,6 +1374,8 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Refill small read buffer (e.g. 8 bytes) to avoid single byte reads when calling <a class="el" href="classaudio__tools_1_1_buffered_stream.html#ad0852e3297f3743332e629b9924c9375" title="reads a byte - to be avoided">read()</a> </p>
 
 </div>
 </div>

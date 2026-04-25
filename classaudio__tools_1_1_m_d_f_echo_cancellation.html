@@ -238,6 +238,7 @@ Protected Member Functions</h2></td></tr>
 <tr class="memdesc:gac27c0c48e17ad583277d99a7f59bf04e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accumulate power spectrum from FFT output.  <br /></td></tr>
 <tr class="separator:gac27c0c48e17ad583277d99a7f59bf04e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5caf99a24686511722c4c9f94c4ec52e" id="r_a5caf99a24686511722c4c9f94c4ec52e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#a5caf99a24686511722c4c9f94c4ec52e">refillReadBuffer</a> ()</td></tr>
+<tr class="memdesc:a5caf99a24686511722c4c9f94c4ec52e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Refill small read buffer (e.g. 8 bytes) to avoid single byte reads when calling read()  <br /></td></tr>
 <tr class="separator:a5caf99a24686511722c4c9f94c4ec52e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga03622b3dee8c71ca8fc2a40e70b6ee77" id="r_ga03622b3dee8c71ca8fc2a40e70b6ee77"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___echo_state.html#ga03622b3dee8c71ca8fc2a40e70b6ee77">spectralMulAccum</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#a50bcbda07abc44e31fbac6d242331b76">echo_word16_t</a> *X, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#a329ec576e637602096421dbbe55a1d5b">echo_word32_t</a> *Y, <a class="el" href="namespaceaudio__tools.html#a50bcbda07abc44e31fbac6d242331b76">echo_word16_t</a> *<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">acc</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> N, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> M)</td></tr>
 <tr class="memdesc:ga03622b3dee8c71ca8fc2a40e70b6ee77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accumulate spectral multiplication across multiple frames.  <br /></td></tr>
@@ -791,6 +792,8 @@ class audio_tools::MDFEchoCancellation&lt; Allocator &gt;</div><p>Acoustic echo 
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Refill small read buffer (e.g. 8 bytes) to avoid single byte reads when calling read() </p>
 
 </div>
 </div>
