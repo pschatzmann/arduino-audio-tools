@@ -15,6 +15,9 @@
 #include "AudioTools/AudioCodecs/CodecCodec2.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
 
+
+
+
 AudioInfo info(8000, 1, 16);
 SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wave
@@ -24,18 +27,6 @@ EncodedAudioStream decoder(&out, new Codec2Decoder()); // encode and write
 EncodedAudioStream encoder(&decoder, new Codec2Encoder()); // encode and write
 StreamCopy copier(encoder, sound);     
 
-
-void loop1(void*) {
-  // setup decoder
-  decoder.begin(info);
-  // setup encoder
-  encoder.begin(info);
-  // processing loop
-  while(true){
-    copier.copy();
-    delay(1);
-  }
-}
 
 void setup() {
   Serial.begin(115200);
@@ -48,12 +39,11 @@ void setup() {
   cfg.copyFrom(info);
   out.begin(cfg);
 
-  int stack = 20000;
-  xTaskCreate(loop1,"loopTask", stack, nullptr,1, nullptr);
-
   Serial.println("Test started...");
 }
 
 
 void loop() {
+    copier.copy();
+    delay(1);
 }

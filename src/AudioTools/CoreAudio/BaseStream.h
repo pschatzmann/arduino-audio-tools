@@ -95,10 +95,11 @@ class BaseStream : public Stream {
   void setWriteBufferSize(int size) { write_buffer_size = size;}
 
  protected:
-  RingBuffer<uint8_t> tmp_in{0};
+  RingBuffer<uint8_t> tmp_in{0}; 
   RingBuffer<uint8_t> tmp_out{0};
   int write_buffer_size = MAX_SINGLE_CHARS;
 
+  /// Refill small read buffer (e.g. 8 bytes) to avoid single byte reads when calling read()
   void refillReadBuffer() {
     tmp_in.resize(DEFAULT_BUFFER_SIZE);
     if (tmp_in.isEmpty()) {

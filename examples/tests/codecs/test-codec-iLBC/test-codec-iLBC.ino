@@ -12,6 +12,8 @@
 #include "AudioTools/AudioCodecs/CodecILBC.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
 
+SET_LOOP_TASK_STACK_SIZE(20 * 1024);
+
 AudioInfo info(8000, 1, 16);
 SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wave
@@ -19,17 +21,6 @@ AudioBoardStream out(AudioKitEs8388V1);
 EncodedAudioStream decoder(&out, new ILBCDecoder()); // encode and write
 EncodedAudioStream encoder(&decoder, new ILBCEncoder()); // encode and write
 StreamCopy copier(encoder, sound);     
-
-void loop1(void*) {
-  // start decoder
-  decoder.begin(info);
-
-  // start encoder
-  encoder.begin(info);
-  while(true){
-    copier.copy();
-  }
-}
 
 void setup() {
   Serial.begin(115200);
@@ -44,12 +35,16 @@ void setup() {
   // Setup sine wave
   sineWave.begin(info, N_B4);
 
-  int stack = 20000;
-  xTaskCreate(loop1,"loopTask", stack, nullptr,1, nullptr);
+  // start decoder
+  decoder.begin(info);
+
+  // start encoder
+  encoder.begin(info);
 
   Serial.println("Test started...");
 }
 
 
 void loop() { 
+    copier.copy();
 }
