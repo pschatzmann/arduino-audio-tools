@@ -401,8 +401,16 @@ class AudioPlayer : public AudioInfoSupport, public VolumeSupport {
     return result;
   }
 
+  /// Defines the volume for the indicated channel
+  bool setVolume(float volume, int channel) {
+    return volume_out.setVolume(volume, channel);
+  }
+
   /// Returns the current volume [0.0, 1.0]
   float volume() override { return current_volume; }
+
+  /// Returns the current volume for the indicated channel
+  float volume(int channel) { return volume_out.volume(channel); }
 
   /// Enables/disables auto-advance at end/timeout (overrides AudioSource)
   void setAutoNext(bool next) { autonext = next; }

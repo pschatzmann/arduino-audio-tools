@@ -92,14 +92,14 @@ class VolumeStream : public ModifyingStream, public VolumeSupport {
         }
 
         bool begin(AudioInfo cfg)  {
-            VolumeStreamConfig cfg1 = setupAudioInfo(cfg);
+            VolumeStreamConfig cfg1 = toVolumeStreamConfig(cfg);
             return begin(cfg1);
         }
 
         /// starts the processing 
         bool begin(VolumeStreamConfig cfg){
             TRACED();
-            setupVolumeStreamConfig(cfg);
+            setVolumeStreamConfig(cfg);
             // usually we use a exponential volume control - except if we allow values > 1.0
             if (cfg.allow_boost){
               setVolumeControl(linear_vc);
@@ -168,10 +168,16 @@ class VolumeStream : public ModifyingStream, public VolumeSupport {
             notifyAudioChange(cfg);
 
             if (is_started){
-                VolumeStreamConfig cfg1 = setupAudioInfo(cfg);
-                setupVolumeStreamConfig(cfg1);
-                // trigger resize of vectors
-                setVolume(info.volume); 
+                int old_n = volume_values.size();;
+                resizeVectors(cfg.channels);
+                // update config and max values
+                VolumeStreamConfig cfg1 = toVolumeStreamConfig(cfg);
+                setVolumeStreamConfig(cfg1);
+                // Only set default volume for new channels if channel count increased
+                int new_n = info.channels;
+                for (int j = old_n; j < new_n; ++j) {
+                    setVolume(info.volume, j);
+                }
             } else {
                 begin(cfg);
             }
@@ -179,10 +185,11 @@ class VolumeStream : public ModifyingStream, public VolumeSupport {
 
         /// Defines the volume for all channels: needs to be in the range of 0 to 1.0 (if allow boost has not been set)
         bool setVolume(float vol) override {
+            LOGI("setVolume: %f", vol);
             bool result = true;
             // just to make sure that we have a valid start volume before begin
             info.volume = vol; 
-            for (int j=0;j<info.channels;j++){
+            for (int j=0; j<info.channels; j++){
               result = setVolume(vol, j);
             }
             return result;
@@ -195,7 +202,7 @@ class VolumeStream : public ModifyingStream, public VolumeSupport {
                 return false;
             }
             if (channel < info.channels){
-              setupVectors();
+              resizeVectors(info.channels);
               float volume_value = volumeValue(vol);
               if (volume_values[channel] != volume_value){
                 LOGI("setVolume: %f at %d", volume_value, channel);
@@ -221,7 +228,7 @@ class VolumeStream : public ModifyingStream, public VolumeSupport {
         /// Provides the current (avg) volume accross all channels
         float volume() override {
             // prevent npe
-            if (volume_values.size()==0) return 0;
+            if (volume_values.size()==0) return info.volume;
             // calculate avg
             float total = 0;
             int cnt = volume_values.size();
@@ -268,13 +275,13 @@ class VolumeStream : public ModifyingStream, public VolumeSupport {
         }
 
         /// Resizes the vectors
-        void setupVectors() {
-            factor_for_channel.resize(info.channels);
-            volume_values.resize(info.channels);
+        void resizeVectors(int channels) {
+            factor_for_channel.resize(channels);
+            volume_values.resize(channels);
         }
 
         /// Provides a VolumeStreamConfig based on a AudioInfo
-        VolumeStreamConfig setupAudioInfo(AudioInfo cfg){
+        VolumeStreamConfig toVolumeStreamConfig(AudioInfo cfg){
             VolumeStreamConfig cfg1;
             cfg1.channels = cfg.channels;
             cfg1.sample_rate = cfg.sample_rate;
@@ -286,7 +293,7 @@ class VolumeStream : public ModifyingStream, public VolumeSupport {
         }
 
         /// Stores the local variable and calculates some max values
-        void setupVolumeStreamConfig(VolumeStreamConfig cfg){
+        void setVolumeStreamConfig(VolumeStreamConfig cfg){
             info = cfg;
             max_value = NumberConverter::maxValue(info.bits_per_sample);
         }
