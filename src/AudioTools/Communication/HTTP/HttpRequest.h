@@ -26,15 +26,18 @@ class HttpRequest : public BaseStream {
  public:
 //  friend class URLStream;
 
-  HttpRequest() = default;
+  HttpRequest(){
+    chunk_reader.setTimeout(client_timeout);
+  };
 
   ~HttpRequest() { end(); }
 
-  HttpRequest(Client &client) { setClient(client); }
+  HttpRequest(Client &client) : HttpRequest() { setClient(client); }
 
   void setClient(Client &client) {
     this->client_ptr = &client;
     this->client_ptr->setTimeout(client_timeout);
+ 
   }
 
   // the requests usually need a host. This needs to be set if we did not
@@ -343,7 +346,13 @@ class HttpRequest : public BaseStream {
   }
 
   /// Defines the client timeout in ms
-  void setTimeout(size_t timeoutMs) { client_timeout = timeoutMs; }
+  void setTimeout(size_t timeoutMs) { 
+    client_timeout = timeoutMs;
+    chunk_reader.setTimeout(client_timeout);
+    if(client_ptr != nullptr){
+      client_ptr->setTimeout(timeoutMs);
+    }
+   }
 
   /// we are sending the data chunked
   bool isChunked() { return request_header.isChunked(); }

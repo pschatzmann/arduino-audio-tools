@@ -38,11 +38,21 @@ class HttpChunkReader : public HttpLineReader {
     LOGD("HttpChunkReader: %s", "read");
     if (has_ended && open_chunk_len == 0) return 0;
 
+    // wait for data
+    auto start_time = millis();
+    client.setTimeout(timeout);
+    int result = client.peek();
+    auto time_eff = millis() - start_time;
+    if (result == -1 && time_eff < timeout) {
+      LOGE("Timout %d not working - waited: %d ms", timeout);
+    }
+
+
     // read the chunk data - but not more then available
     int read_max = len < open_chunk_len ? len : open_chunk_len;
     int len_processed = client.read(str, read_max);
     if (len_processed == -1) {
-      LOGE("HttpChunkReader: client.read result -1");
+      LOGE("HttpChunkReader: client.read result -1, open: %d for timeout %d",open_chunk_len, timeout);
       return -1;
     }
     // update current unprocessed chunk
@@ -87,10 +97,16 @@ class HttpChunkReader : public HttpLineReader {
     return result;
   }
 
+  /// Timout is just used for logging
+  void setTimeout(int timeoutMs) {
+    timeout = timeoutMs;
+  }
+
  protected:
   int open_chunk_len = 0;
   bool has_ended = false;
   HttpReplyHeader* http_header_ptr;
+  int timeout = 0;
 
   void removeCRLF(Client& client) {
     LOGD("HttpChunkReader: %s", "removeCRLF");
