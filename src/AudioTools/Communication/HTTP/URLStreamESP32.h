@@ -165,7 +165,7 @@ class URLStreamESP32 : public AbstractURLStream {
   URLStreamESP32(const char* ssid, const char* pwd) {
     setSSID(ssid);
     setPassword(pwd);
-    _timeout = 8000;
+    _timeout = URL_CLIENT_TIMEOUT;
   }
   URLStreamESP32() : URLStreamESP32(nullptr, nullptr) {}
   ~URLStreamESP32() { end(); }
@@ -299,12 +299,21 @@ class URLStreamESP32 : public AbstractURLStream {
 
   size_t write(const uint8_t* data, size_t len) override {
     TRACED();
-    return esp_http_client_write(client_handle, (const char*)data, len);
+    int written = esp_http_client_write(client_handle, (const char*)data, len);
+    if (written < 0) {
+      LOGE("esp_http_client_write: %d", written);
+      return 0;
+    }
+    return written;
   }
 
   size_t readBytes(uint8_t* data, size_t len) override {
     TRACED();
-    size_t read = esp_http_client_read(client_handle, (char*)data, len);
+    int read = esp_http_client_read(client_handle, (char*)data, len);
+    if (read < 0) {
+      LOGE("esp_http_client_read: %d", read);
+      return 0;
+    }
     total_read += read;
     return read;
   }

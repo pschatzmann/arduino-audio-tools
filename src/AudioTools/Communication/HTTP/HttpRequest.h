@@ -34,7 +34,7 @@ class HttpRequest : public BaseStream {
 
   void setClient(Client &client) {
     this->client_ptr = &client;
-    this->client_ptr->setTimeout(clientTimeout);
+    this->client_ptr->setTimeout(client_timeout);
   }
 
   // the requests usually need a host. This needs to be set if we did not
@@ -50,7 +50,7 @@ class HttpRequest : public BaseStream {
     return client_ptr == nullptr ? false : client_ptr->connected();
   }
 
-  virtual int available() override {
+  int available() override {
     if (reply_header.isChunked()) {
       return chunk_reader.available();
     }
@@ -134,10 +134,15 @@ class HttpRequest : public BaseStream {
   }
 
   size_t readBytes(uint8_t *str, size_t len) override {
-    return read(str, len);
+    int result = read(str, len);
+    if ( result < 0) {
+      LOGE("HttpRequest::read error");
+      return 0;
+    }
+    return result;
   }
 
-  size_t readBytesUntil(char terminator, char *buffer, size_t length)  {
+  size_t readBytesUntil(char terminator, char *buffer, size_t length) {
     TRACED();
     return client_ptr->readBytesUntil(terminator, buffer, length);
   }
@@ -238,7 +243,7 @@ class HttpRequest : public BaseStream {
     }
     if (!this->connected()) {
       LOGI("process connecting to host %s port %d", url.host(), url.port());
-      int is_connected = connect(url.host(), url.port(), clientTimeout);
+      int is_connected = connect(url.host(), url.port(), client_timeout);
       if (!is_connected) {
         LOGE("Connect failed");
         return false;
@@ -304,7 +309,7 @@ class HttpRequest : public BaseStream {
     return result;
   }
 
-  /// Ends the http request processing and returns the status code
+  /// Ends the http request processing and returns the status code or -1 on error
   virtual int processEnd() {
     TRACED();
     // if sending is chunked we terminate with an empty chunk
@@ -320,8 +325,11 @@ class HttpRequest : public BaseStream {
 
     // if we use chunked tranfer we need to read the first chunked length
     if (reply_header.isChunked()) {
-      chunk_reader.open(*client_ptr);
-    };
+      if (!chunk_reader.open(*client_ptr)) {
+        LOGE("HttpRequest: Failed to open chunked reader");
+        return -1;
+      }
+    }
 
     // wait for data
     is_ready = true;
@@ -335,7 +343,7 @@ class HttpRequest : public BaseStream {
   }
 
   /// Defines the client timeout in ms
-  void setTimeout(size_t timeoutMs) { clientTimeout = timeoutMs; }
+  void setTimeout(size_t timeoutMs) { client_timeout = timeoutMs; }
 
   /// we are sending the data chunked
   bool isChunked() { return request_header.isChunked(); }
@@ -352,7 +360,7 @@ class HttpRequest : public BaseStream {
   const char *accept = ACCEPT_ALL;
   const char *accept_encoding = IDENTITY;
   bool is_ready = false;
-  size_t clientTimeout = URL_CLIENT_TIMEOUT;  // 60000;
+  int client_timeout = URL_CLIENT_TIMEOUT;  // 10000;
   void (*http_connect_callback)(HttpRequest &request, Url &url,
                                 HttpRequestHeader &request_header) = nullptr;
   bool is_chunked_output_active = false;
@@ -360,7 +368,7 @@ class HttpRequest : public BaseStream {
   // opens a connection to the indicated host
   virtual int connect(const char *ip, uint16_t port, int32_t timeout) {
     TRACED();
-    client_ptr->setTimeout(timeout / 1000);  // client timeout is in seconds!
+    client_ptr->setTimeout(timeout);  
     request_header.setTimeout(timeout);
     reply_header.setTimeout(timeout);
     int is_connected = this->client_ptr->connect(ip, port);
