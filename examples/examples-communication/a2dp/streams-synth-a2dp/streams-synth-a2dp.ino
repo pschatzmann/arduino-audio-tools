@@ -28,7 +28,7 @@ int32_t get_sound_data(Frame *data, int32_t frameCount) {
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial,AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   // setup synthezizer keys
   synthesizer.setKeys(kit.audioActions(), keys, AudioActions::ActiveLow);

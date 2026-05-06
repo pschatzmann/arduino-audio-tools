@@ -55,7 +55,7 @@ class AudioStreamWrapper : public AudioStream {
 
  protected:
   Stream *p_stream;
-  int32_t clientTimeout = URL_CLIENT_TIMEOUT;  // 60000;
+  int32_t clientTimeout = URL_CLIENT_TIMEOUT;  // 10000;
 };
 
 /**

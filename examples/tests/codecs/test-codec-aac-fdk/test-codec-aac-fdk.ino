@@ -13,7 +13,7 @@ StreamCopy copier(encoder, in);
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial,AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   auto cfg = encoder.defaultConfig();
   cfg.copyFrom(info);

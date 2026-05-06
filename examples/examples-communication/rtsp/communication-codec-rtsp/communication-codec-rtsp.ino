@@ -27,7 +27,7 @@ G711_ULAWEncoder encoder;
 RTSPOutput<RTSPPlatformWiFi> rtsp_stream(format, encoder);
 StreamCopy copier(rtsp_stream, sound);  // rtsp to sine
 // Server
-RTSPServer<RTSPPlatformWiFi>  rtsp(*rtsp_stream.streamer(), port);
+RTSPServer<RTSPPlatformWiFi> rtsp(rtsp_stream.streamer(), port);
 
 
 void setup() {

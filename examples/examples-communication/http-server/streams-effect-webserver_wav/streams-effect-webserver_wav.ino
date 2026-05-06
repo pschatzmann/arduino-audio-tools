@@ -36,7 +36,7 @@ const int channels = 1;
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial,AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   // setup effects
   effects.addEffect(new Boost(volumeControl));

@@ -35,7 +35,7 @@ static const char* LOCATION = "Location";
 static const char* methods[] = {"?",       "GET",    "HEAD",  "POST",
                                 "PUT",     "DELETE", "TRACE", "OPTIONS",
                                 "CONNECT", "PATCH",  nullptr};
-
+constexpr int HTTP_STATUS_UNDEFINED = -1;
 /**
  * @brief A individual key - value header line
  *
@@ -60,7 +60,7 @@ class HttpHeader {
  public:
   HttpHeader() {
     LOGD("HttpHeader");
-    // set default values
+   // set default values
     protocol_str = "HTTP/1.1";
     url_path = "/";
     status_msg = "";
@@ -239,11 +239,20 @@ class HttpHeader {
         LOGI("Data available: %d", in.available());
       }
 
-      readLine(in, line, HTTP_MAX_LEN);
+      if (readLine(in, line, HTTP_MAX_LEN) <= 0) {
+        LOGE("Failed to read the first line of the header");
+        status_code = HTTP_STATUS_UNDEFINED;
+        return false;
+      }
       parse1stLine(line);
       while (true) {
         int len = readLine(in, line, HTTP_MAX_LEN);
         if (len == 0 && in.available() == 0) break;
+        if (len < 0) {
+          LOGE("Failed to read header line");
+          status_code = HTTP_STATUS_UNDEFINED;
+          return false;
+        }
         if (isValidStatus() || isRedirectStatus()) {
           StrView lineStr(line);
           lineStr.ltrim();
@@ -310,7 +319,7 @@ class HttpHeader {
   }
 
  protected:
-  int status_code = UNDEFINED;
+  int status_code = HTTP_STATUS_UNDEFINED;
   bool is_written = false;
   bool is_chunked = false;
   bool create_new_lines = true;
@@ -398,7 +407,7 @@ class HttpRequestHeader : public HttpHeader {
   }
 
   // action path protocol
-  void write1stLine(Client& out) {
+  void write1stLine(Client& out) override {
     LOGD("HttpRequestHeader::write1stLine");
     char* msg = tempBuffer();
     StrView msg_str(msg, HTTP_MAX_LEN);
@@ -419,7 +428,7 @@ class HttpRequestHeader : public HttpHeader {
 
   // parses the requestline
   // Request-Line = Method SP Request-URI SP HTTP-Version CRLF
-  void parse1stLine(const char* line) {
+  void parse1stLine(const char* line) override {
     LOGD("HttpRequestHeader::parse1stLine %s", line);
     StrView line_str(line);
     int space1 = line_str.indexOf(" ");
@@ -466,7 +475,7 @@ class HttpReplyHeader : public HttpHeader {
   }
 
   // HTTP-Version SP Status-Code SP Reason-Phrase CRLF
-  void write1stLine(Client& out) {
+  void write1stLine(Client& out) override {
     LOGI("HttpReplyHeader::write1stLine");
     char* msg = tempBuffer();
     StrView msg_str(msg, HTTP_MAX_LEN);
@@ -483,7 +492,7 @@ class HttpReplyHeader : public HttpHeader {
   // HTTP-Version SP Status-Code SP Reason-Phrase CRLF
   // we just update the pointers to point to the correct position in the
   // http_status_line
-  void parse1stLine(const char* line) {
+  void parse1stLine(const char* line) override {
     LOGD("HttpReplyHeader::parse1stLine: %s", line);
     StrView line_str(line);
     int space1 = line_str.indexOf(' ', 0);

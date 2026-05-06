@@ -16,7 +16,7 @@ SynthesizerKey keys[] = {{kit.getKey(1), N_C3},{kit.getKey(2), N_D3},{kit.getKey
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial,AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   // Setup output
   auto cfg = kit.defaultConfig(TX_MODE);

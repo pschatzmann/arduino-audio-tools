@@ -31,7 +31,7 @@ StreamCopy copierIn(out, hdlc_dec, 256);
 
 void setup() {
   Serial2.begin(115200);
-  AudioLogger::instance().begin(Serial2, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial2, AudioToolsLogLevel::Warning);
   hdlc_enc.begin();
   hdlc_dec.begin();
 

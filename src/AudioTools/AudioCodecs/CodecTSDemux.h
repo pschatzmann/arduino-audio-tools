@@ -295,7 +295,7 @@ class MTSDecoderTSDemux : public AudioDecoder {
            (unsigned long)pes->dts);
       // print out the PES Packet data if it's in our print list
       int i;
-      AudioLogger logger = AudioLogger::instance();
+      AudioLogger logger = AudioToolsLogger();
       for (i = 0; i < MTS_PRINT_PIDS_LEN; ++i) {
         if (print_pids[i] == pid) {
           // log data

@@ -41,7 +41,7 @@
  * Logging Configuration in Arduino -> set USE_AUDIO_LOGGING to false if you want to deactivate Logging.
  * When using cmake you can set -DUSE_AUDIO_LOGGING=false
  * You can also change the LOG_LEVEL and LOG_STREAM here.
- * However it is recommended to do it in your Sketch e.g with AudioLogger::instance().begin(Serial,AudioLogger::Warning);
+ * However it is recommended to do it in your Sketch e.g with AudioToolsLogger().begin(Serial,AudioLogger::Warning);
  */
  
 #ifndef USE_AUDIO_LOGGING 
@@ -274,6 +274,10 @@
 
 #ifndef URL_CLIENT_TIMEOUT
 #  define URL_CLIENT_TIMEOUT 60000;
+#endif
+
+
+#ifndef URL_HANDSHAKE_TIMEOUT
 #  define URL_HANDSHAKE_TIMEOUT 120000
 #endif
 

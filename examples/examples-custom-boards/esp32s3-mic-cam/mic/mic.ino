@@ -13,7 +13,7 @@ StreamCopy copier(csvOutput, i2sStream); // copy i2sStream to csvOutput
 // Arduino Setup
 void setup(void) {
     Serial.begin(115200);
-    AudioLogger::instance().begin(Serial, AudioLogger::Info);
+    AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
     
     auto cfg = i2sStream.defaultConfig(RX_MODE);
     cfg.copyFrom(info);

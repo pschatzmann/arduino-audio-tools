@@ -38,7 +38,7 @@ void setupActions(){
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial,AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   // Setup output
   auto cfg = kit.defaultConfig(TX_MODE);

@@ -30,7 +30,7 @@ Task task("mp3-copy", 10000, 1, 0);
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   Serial1.begin(115200);
   pinMode(flowControlPin, OUTPUT);  // flow control pin

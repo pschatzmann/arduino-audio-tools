@@ -33,7 +33,7 @@ File32* fileToStream(const char* path, File32& oldFile) {
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   Serial.println("AudioSourceVector with SDFAT Test");
 
