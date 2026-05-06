@@ -173,7 +173,7 @@ Macros</h2></td></tr>
 <tr class="memitem:a9e00faaddf0956d464fa9e4ede7a370a" id="r_a9e00faaddf0956d464fa9e4ede7a370a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_audio_tools_config_8h.html#a9e00faaddf0956d464fa9e4ede7a370a">USE_ALLOCATOR</a>&#160;&#160;&#160;false</td></tr>
 <tr class="separator:a9e00faaddf0956d464fa9e4ede7a370a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab70fed55df5e42bb4781f3b685fd6594" id="r_ab70fed55df5e42bb4781f3b685fd6594"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_audio_tools_config_8h.html#ab70fed55df5e42bb4781f3b685fd6594">USE_AUDIO_LOGGING</a>&#160;&#160;&#160;true</td></tr>
-<tr class="memdesc:ab70fed55df5e42bb4781f3b685fd6594"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logging Logging Configuration in Arduino -&gt; set USE_AUDIO_LOGGING to false if you want to deactivate Logging. When using cmake you can set -DUSE_AUDIO_LOGGING=false You can also change the LOG_LEVEL and LOG_STREAM here. However it is recommended to do it in your Sketch e.g with AudioLogger::instance().begin(Serial,AudioLogger::Warning);.  <br /></td></tr>
+<tr class="memdesc:ab70fed55df5e42bb4781f3b685fd6594"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logging Logging Configuration in Arduino -&gt; set USE_AUDIO_LOGGING to false if you want to deactivate Logging. When using cmake you can set -DUSE_AUDIO_LOGGING=false You can also change the LOG_LEVEL and LOG_STREAM here. However it is recommended to do it in your Sketch e.g with AudioToolsLogger().begin(Serial,AudioLogger::Warning);.  <br /></td></tr>
 <tr class="separator:ab70fed55df5e42bb4781f3b685fd6594"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a578a2402fee5b61628896d1f944eb7d8" id="r_a578a2402fee5b61628896d1f944eb7d8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_audio_tools_config_8h.html#a578a2402fee5b61628896d1f944eb7d8">USE_AUDIOTOOLS_NS</a>&#160;&#160;&#160;true</td></tr>
 <tr class="separator:a578a2402fee5b61628896d1f944eb7d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -706,7 +706,7 @@ Typedefs</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Logging Logging Configuration in Arduino -&gt; set USE_AUDIO_LOGGING to false if you want to deactivate Logging. When using cmake you can set -DUSE_AUDIO_LOGGING=false You can also change the LOG_LEVEL and LOG_STREAM here. However it is recommended to do it in your Sketch e.g with AudioLogger::instance().begin(Serial,AudioLogger::Warning);. </p>
+<p>Logging Logging Configuration in Arduino -&gt; set USE_AUDIO_LOGGING to false if you want to deactivate Logging. When using cmake you can set -DUSE_AUDIO_LOGGING=false You can also change the LOG_LEVEL and LOG_STREAM here. However it is recommended to do it in your Sketch e.g with AudioToolsLogger().begin(Serial,AudioLogger::Warning);. </p>
 
 </div>
 </div>
