@@ -7,7 +7,7 @@
 #define PIN_AUDIO_KIT_SD_CARD_MOSI 15
 #define PIN_AUDIO_KIT_SD_CARD_CLK 14
 
-uint8_t data[1024 * 100];
+uint8_t* data[1024 * 99];
 int len[] = { 1, 5, 10, 25, 100, 256, 512, 1024, 1024 * 10, 1024 * 100 };
 size_t totalSize = 1024 * 1024 * 1;
 const char* test_file = "/test.txt";

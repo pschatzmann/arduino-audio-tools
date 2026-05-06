@@ -200,7 +200,7 @@
 ../examples/examples-communication/http-client/player-url_icy-audiokit -> rc=0
 ../examples/examples-communication/http-client/player-url_icy-i2s -> rc=0
 ../examples/examples-communication/http-client/player-url_subclass-i2s -> rc=0
-../examples/examples-communication/http-client/streams-eth_url_mp3_helix-i2s -> rc=0
+../examples/examples-communication/http-client/streams-eth_url_mp3_helix-i2s -> rc=1
 ../examples/examples-communication/http-client/streams-http_post -> rc=0
 ../examples/examples-communication/http-client/streams-url_aac-audiokit -> rc=0
 ../examples/examples-communication/http-client/streams-url_aac-i2s -> rc=0
@@ -241,6 +241,13 @@
 ../examples/tests/adc/read-csv_unsigned -> rc=0
 ../examples/tests/adc/read-esp32-multi-channel-csv -> rc=0
 ../examples/tests/adc/read-speed -> rc=0
+../examples/tests/adc/test-esp32-rx-available-multichannel -> rc=0
+../examples/tests/adc/test-esp32-rx-buffer-count -> rc=0
+../examples/tests/adc/test-esp32-rx-frame-alignment -> rc=0
+../examples/tests/adc/test-esp32-rx-v1-acceptance -> rc=0
+../examples/tests/adc/test-esp32-rx-v1-bin-oversampling -> rc=0
+../examples/tests/adc/test-esp32-rx-v1-multichannel-soak -> rc=0
+../examples/tests/adc/test-esp32-rx-v1-powerline-rms-stress -> rc=0
 ../examples/tests/basic/24bits-write -> rc=0
 ../examples/tests/basic/test-allocator -> rc=0
 ../examples/tests/basic/test-buffer -> rc=0
@@ -269,6 +276,7 @@
 ../examples/tests/codecs/test-codec-opus -> rc=0
 ../examples/tests/codecs/test-codec-opusogg -> rc=0
 ../examples/tests/codecs/test-codec-sbc -> rc=0
+../examples/tests/codecs/test-codec-wav8bit -> rc=0
 ../examples/tests/codecs/test-codec-wav-adpcm -> rc=0
 ../examples/tests/codecs/test-compile-all -> rc=0
 ../examples/tests/codecs/test-container-binary -> rc=0

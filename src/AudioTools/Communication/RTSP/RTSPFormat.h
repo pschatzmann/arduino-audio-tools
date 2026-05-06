@@ -349,7 +349,7 @@ class RTSPFormatGSM : public RTSPFormat {
  */
 class RTSPFormatG711 : public RTSPFormat {
  public:
-  RTSPFormatG711(bool isUlaw) {
+  RTSPFormatG711(bool isUlaw = true) {
     setTimerPeriodUs(20000);  // 20ms standard for G.711 (160 samples at 8kHz)
     setIsULaw(isUlaw);
   }
