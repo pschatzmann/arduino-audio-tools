@@ -357,10 +357,13 @@ class URLStream : public AbstractURLStream {
       if (client_secure == nullptr) {
         client_secure = new WiFiClientSecure();
         client_secure->setInsecure();
-        client_secure->setConnectionTimeout(client_timeout);
         client_secure->setTimeout(client_timeout);
 #ifdef ESP32
+        client_secure->setConnectionTimeout(client_timeout);
         client_secure->setHandshakeTimeout(handshake_timeout);
+#endif
+#ifdef RP2040_HOWER
+        client_secure->setTLSConnectTimeout(client_timeout);
 #endif
       }
       LOGI("WiFiClientSecure");
@@ -368,8 +371,10 @@ class URLStream : public AbstractURLStream {
     }
     if (client_insecure == nullptr) {
       client_insecure = new WiFiClient();
-      client_insecure->setConnectionTimeout(client_timeout);
       client_insecure->setTimeout(client_timeout);
+#ifdef ESP32
+      client_insecure->setConnectionTimeout(client_timeout);
+#endif
       LOGI("WiFiClient");
     }
     return *client_insecure;
