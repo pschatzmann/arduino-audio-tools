@@ -24,7 +24,7 @@ StreamCopy copier(server, in);  // copy mic to tfl
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial,AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
   HttpLogger.setLevel(tinyhttp::Info);
 
   // activate additional checks

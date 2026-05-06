@@ -14,7 +14,7 @@ uint16_t IRAM_ATTR callback(uint8_t *data, uint16_t len){
 
 void setup(){
     Serial.begin(115200);
-    AudioLogger::instance().begin(Serial,AudioLogger::Info);
+    AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
     auto cfg = timerStream.defaultConfig();
     cfg.rx_tx_mode = TX_MODE;

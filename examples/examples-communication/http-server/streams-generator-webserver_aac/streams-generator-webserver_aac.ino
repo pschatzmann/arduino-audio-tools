@@ -24,7 +24,7 @@ GeneratedSoundStream<int16_t> in(sineWave);     // Stream generated from sine wa
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial,AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   // configure FDK to use less RAM (not necessary if you activate PSRAM)
   fdk.setAudioObjectType(2);  // AAC low complexity
