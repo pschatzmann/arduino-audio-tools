@@ -128,9 +128,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aaf81d3fdaf258088d7692fa70cece087"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3aed50bc3b4459454ccb8c64f5ced5a" id="r_ad3aed50bc3b4459454ccb8c64f5ced5a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_print.html#ad3aed50bc3b4459454ccb8c64f5ced5a">flush</a> ()</td></tr>
 <tr class="separator:ad3aed50bc3b4459454ccb8c64f5ced5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2299c86cec1b36ea50195df313dc05e" id="r_aa2299c86cec1b36ea50195df313dc05e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#aa2299c86cec1b36ea50195df313dc05e">flushMixer</a> ()</td></tr>
-<tr class="memdesc:aa2299c86cec1b36ea50195df313dc05e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Force output to final destination.  <br /></td></tr>
-<tr class="separator:aa2299c86cec1b36ea50195df313dc05e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e49978e1afdfd997ba4aa661ad8874c" id="r_a0e49978e1afdfd997ba4aa661ad8874c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a0e49978e1afdfd997ba4aa661ad8874c">flushMixer</a> ()</td></tr>
+<tr class="memdesc:a0e49978e1afdfd997ba4aa661ad8874c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Force output to final destination.  <br /></td></tr>
+<tr class="separator:a0e49978e1afdfd997ba4aa661ad8874c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a778958f194b45626ce7f1856133ab9ec" id="r_a778958f194b45626ce7f1856133ab9ec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a778958f194b45626ce7f1856133ab9ec">getBuffer</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> idx)</td></tr>
 <tr class="memdesc:a778958f194b45626ce7f1856133ab9ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the write buffer for the indicated index.  <br /></td></tr>
 <tr class="separator:a778958f194b45626ce7f1856133ab9ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -241,7 +241,7 @@ class audio_tools::OutputMixer&lt; T &gt;</div><p>Mixing of multiple audio input
 <p>Auto Index Functionality: By default, auto-indexing is enabled (setAutoIndex(true)). When using the basic <a class="el" href="classaudio__tools_1_1_output_mixer.html#af9567acfbc37d764d843239312e5b767" title="Single byte write - not supported, returns 0.">write()</a> method without specifying a stream index, the mixer automatically:</p><ol type="1">
 <li>Writes data to the current stream index (starting at 0)</li>
 <li>Increments to the next stream index after each write</li>
-<li>Automatically calls <a class="el" href="classaudio__tools_1_1_output_mixer.html#aa2299c86cec1b36ea50195df313dc05e" title="Force output to final destination.">flushMixer()</a> after writing to the last stream</li>
+<li>Automatically calls <a class="el" href="classaudio__tools_1_1_output_mixer.html#a0e49978e1afdfd997ba4aa661ad8874c" title="Force output to final destination.">flushMixer()</a> after writing to the last stream</li>
 <li>Resets the index back to 0 for the next cycle</li>
 </ol>
 <p>This enables simple round-robin writing where you just call <a class="el" href="classaudio__tools_1_1_output_mixer.html#af9567acfbc37d764d843239312e5b767" title="Single byte write - not supported, returns 0.">write()</a> repeatedly and the mixer handles stream distribution and output flushing automatically.</p>
@@ -682,8 +682,8 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 
 </div>
 </div>
-<a id="aa2299c86cec1b36ea50195df313dc05e" name="aa2299c86cec1b36ea50195df313dc05e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa2299c86cec1b36ea50195df313dc05e">&#9670;&#160;</a></span>flushMixer()</h2>
+<a id="a0e49978e1afdfd997ba4aa661ad8874c" name="a0e49978e1afdfd997ba4aa661ad8874c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e49978e1afdfd997ba4aa661ad8874c">&#9670;&#160;</a></span>flushMixer()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -694,7 +694,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> flushMixer </td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> flushMixer </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
