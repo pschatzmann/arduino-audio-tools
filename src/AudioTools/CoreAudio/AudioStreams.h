@@ -404,10 +404,16 @@ class GeneratedSoundStream : public AudioStream {
   }
 
   void setInput(SoundGenerator<T> &generator) {
-    this->generator_ptr = &generator;
+    this->p_generator = &generator;
   }
 
-  AudioInfo defaultConfig() { return this->generator_ptr->defaultConfig(); }
+  AudioInfo defaultConfig() {
+    if (p_generator == nullptr) {
+      LOGW("%s", source_not_defined_error);
+      return AudioInfo();
+    }
+    return this->p_generator->defaultConfig();
+  }
 
   void setAudioInfo(AudioInfo newInfo) override {
     if (newInfo.bits_per_sample != sizeof(T) * 8) {
@@ -419,12 +425,12 @@ class GeneratedSoundStream : public AudioStream {
   /// start the processing
   bool begin() override {
     TRACED();
-    if (generator_ptr == nullptr) {
+    if (p_generator == nullptr) {
       LOGE("%s", source_not_defined_error);
       return false;
     }
-    generator_ptr->begin();
-    notifyAudioChange(generator_ptr->audioInfo());
+    p_generator->begin();
+    notifyAudioChange(p_generator->audioInfo());
     active = true;
     return active;
   }
@@ -432,12 +438,12 @@ class GeneratedSoundStream : public AudioStream {
   /// start the processing
   bool begin(AudioInfo cfg) {
     TRACED();
-    if (generator_ptr == nullptr) {
+    if (p_generator == nullptr) {
       LOGE("%s", source_not_defined_error);
       return false;
     }
-    generator_ptr->begin(cfg);
-    notifyAudioChange(generator_ptr->audioInfo());
+    p_generator->begin(cfg);
+    notifyAudioChange(p_generator->audioInfo());
     active = true;
     return active;
   }
@@ -445,11 +451,19 @@ class GeneratedSoundStream : public AudioStream {
   /// stop the processing
   void end() override {
     TRACED();
-    generator_ptr->end();
+    if (p_generator != nullptr) {
+      p_generator->end();
+    }
     active = true;  // legacy support - most sketches do not call begin
   }
 
-  AudioInfo audioInfo() override { return generator_ptr->audioInfo(); }
+  AudioInfo audioInfo() override {
+    if (p_generator == nullptr) {
+      LOGE("%s", source_not_defined_error);
+      return AudioStream::audioInfo();
+    }
+    return p_generator->audioInfo();
+  }
 
   /// This is unbounded so we just return the buffer size
   virtual int available() override { return active ? buffer_size : 0; }
@@ -457,11 +471,17 @@ class GeneratedSoundStream : public AudioStream {
   /// privide the data as byte stream
   size_t readBytes(uint8_t *data, size_t len) override {
     if (!active) return 0;
+    if (p_generator == nullptr) {
+      return 0;
+    }
     LOGD("GeneratedSoundStream::readBytes: %u", (unsigned int)len);
-    return generator_ptr->readBytes(data, len);
+    return p_generator->readBytes(data, len);
   }
 
-  bool isActive() { return active && generator_ptr->isActive(); }
+  bool isActive() { 
+    if (p_generator == nullptr) return false;
+    return active && p_generator->isActive(); 
+  }
 
   operator bool() override { return isActive(); }
 
@@ -472,7 +492,7 @@ class GeneratedSoundStream : public AudioStream {
 
  protected:
   bool active = true;  // support for legacy sketches
-  SoundGenerator<T> *generator_ptr;
+  SoundGenerator<T> *p_generator = nullptr;
   int buffer_size =
       DEFAULT_BUFFER_SIZE * 100;  // there is no reason to limit this
   const char *source_not_defined_error = "Source not defined";
