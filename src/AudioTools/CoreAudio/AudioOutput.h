@@ -501,8 +501,11 @@ class OutputMixer : public Print {
   int availablePercent(int idx) { return 100.0 * available(idx) / size_bytes; }
 
   /// Force output to final destination
-  void flushMixer() {
+  bool flushMixer() {
     LOGD("flush");
+    if (p_final_output == nullptr) {
+      return false;
+    }
     bool result = false;
 
     // determine ringbuffer with mininum available data
@@ -516,7 +519,7 @@ class OutputMixer : public Print {
       p_final_output->write((uint8_t *)output.data(), samples * sizeof(T));
     }
     stream_idx = 0;
-    return;
+    return result;
   }
 
 
