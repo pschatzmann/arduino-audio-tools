@@ -330,7 +330,7 @@ protected:
    */
   void handleContainerBox(const char* type, uint64_t boxSize, int level) {
     strcpy(box.type, type);
-    box.id = ++this->box.id;
+    ++box.id;
     box.data = nullptr;
     box.size = static_cast<size_t>(boxSize - 8);
     box.data_size = 0;
@@ -360,7 +360,7 @@ protected:
   void handleCompleteBox(const char* type, const uint8_t* p, size_t headerSize,
                          size_t payload_size, int level) {
     strcpy(box.type, type);
-    box.id = ++this->box.id;
+    ++box.id; 
     box.data = p + headerSize;
     box.size = payload_size;
     box.data_size = payload_size;
@@ -399,7 +399,7 @@ protected:
     if (available_payload > 0) {
       box_bytes_received += available_payload;
       strcpy(box.type, box_type);
-      box.id = ++this->box.id;
+      ++box.id;
       box.data = p + headerSize;
       box.size = box_bytes_expected;
       box.data_size = box_bytes_expected;
@@ -429,7 +429,7 @@ protected:
                               (size_t)buffer.available());
     if (to_read == 0) return true;
     strcpy(box.type, box_type);
-    box.id = ++this->box.id;
+    ++box.id;
     box.data = buffer.data();
     box.size = box_bytes_expected;
     box.data_size = box_bytes_expected;
