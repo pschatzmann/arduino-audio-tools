@@ -157,7 +157,7 @@ class MetaDataICY : public AbstractMetaData {
   int dataLen = 0;
   int dataPos = 0;
   bool is_ascii = AUDIOTOOLS_METADATA_ICY_ASCII_ONLY;
-  int maxLimit = AUDIOTOOLS_METADATA_ICY_MAX_METADATA_LIMIT;
+  int maxLimit = AUDIOTOOLS_METADATA_ICY_LIMIT;
 
   virtual void clear() {
     nextStatus = ProcessData;
