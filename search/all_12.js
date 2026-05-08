@@ -144,7 +144,7 @@ var searchData=
   ['regards_141',['Regards',['..//home/runner/work/arduino-audio-tools/arduino-audio-tools/src/AudioTools/Communication/FEC/ReedSolomon/README.md#autotoc_md14',1,'']]],
   ['registercallbacks_142',['registerCallbacks',['../classaudio__tools_1_1_r_c_audio_player_o_s_c_receiver.html#aa070601553572cd5b90c14d2c29ab3e7',1,'audio_tools::RCAudioPlayerOSCReceiver']]],
   ['related_20projects_143',['Related projects',['..//home/runner/work/arduino-audio-tools/arduino-audio-tools/src/AudioTools/Communication/FEC/ReedSolomon/README.md#autotoc_md15',1,'']]],
-  ['release_144',['release',['../classaudio__tools_1_1_a_d_s_r.html#a2737f3f07a2ab466c31c627a1aa8d592a203c091eb36ddf3292775fd77fbd4f65',1,'audio_tools::ADSR::Release'],['../classaudio__tools_1_1_a_d_s_r.html#a3dee5c7240d1c7d471a78f3457342ec7',1,'audio_tools::ADSR::release']]],
+  ['release_144',['release',['../classaudio__tools_1_1_a_d_s_r.html#a3dee5c7240d1c7d471a78f3457342ec7',1,'audio_tools::ADSR::release'],['../classaudio__tools_1_1_a_d_s_r.html#a2737f3f07a2ab466c31c627a1aa8d592a203c091eb36ddf3292775fd77fbd4f65',1,'audio_tools::ADSR::Release']]],
   ['release_5fcount_145',['release_count',['../classaudio__tools_1_1_compressor.html#afdc4e181ba91f172946baacd5f6423d1',1,'audio_tools::Compressor']]],
   ['release_5fon_5fend_146',['release_on_end',['../classaudio__tools_1_1_opus_audio_decoder.html#a95dacd84bcefad615c9a652afeec3b8c',1,'audio_tools::OpusAudioDecoder']]],
   ['releasebuffers_147',['releaseBuffers',['../classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#af41720dc43a9eee386d65158fd167e6f',1,'audio_tools::I2SDriverNanoBLE']]],
