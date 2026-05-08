@@ -168,6 +168,16 @@
 #  define PWM_AUDIO_FREQUENCY 30000
 #endif
 
+// ICY Metadata 
+#ifndef AUDIOTOOLS_METADATA_ICY_ASCII_ONLY
+#define AUDIOTOOLS_METADATA_ICY_ASCII_ONLY true
+#endif
+
+#ifndef AUDIOTOOLS_METADATA_ICY_MAX_METADATA_LIMIT
+#define AUDIOTOOLS_METADATA_ICY_MAX_METADATA_LIMIT 400
+#endif
+
+
 // Activate Networking for All Processors
 // #define USE_ETHERNET
 // #define USE_AUDIO_SERVER
