@@ -527,7 +527,7 @@ var searchData=
   ['audiotools_5fid3_5ftag_5fallow_5fnonascii_524',['AUDIOTOOLS_ID3_TAG_ALLOW_NONASCII',['../_meta_data_i_d3_8h.html#a44805f87d7f39c3ef8b01f9d4b453c35',1,'MetaDataID3.h']]],
   ['audiotools_5fmajor_5fversion_525',['AUDIOTOOLS_MAJOR_VERSION',['../_audio_tools_config_8h.html#a3ed40ae9838f3a20da0ac76a70f08a78',1,'AudioToolsConfig.h']]],
   ['audiotools_5fmetadata_5ficy_5fascii_5fonly_526',['AUDIOTOOLS_METADATA_ICY_ASCII_ONLY',['../_audio_tools_config_8h.html#aedd477568104af5b24ec4e40555858d2',1,'AudioToolsConfig.h']]],
-  ['audiotools_5fmetadata_5ficy_5fmax_5fmetadata_5flimit_527',['AUDIOTOOLS_METADATA_ICY_MAX_METADATA_LIMIT',['../_audio_tools_config_8h.html#a38fcc7d0ccc73734935ec71c6afea418',1,'AudioToolsConfig.h']]],
+  ['audiotools_5fmetadata_5ficy_5flimit_527',['AUDIOTOOLS_METADATA_ICY_LIMIT',['../_audio_tools_config_8h.html#a7ebedaab33a32cec2e42079b229c5490',1,'AudioToolsConfig.h']]],
   ['audiotools_5fminor_5fversion_528',['AUDIOTOOLS_MINOR_VERSION',['../_audio_tools_config_8h.html#a0e88b7c73f419512f450de658fe6d6e4',1,'AudioToolsConfig.h']]],
   ['audiotools_5frtsp_529',['audiotools_rtsp',['../namespaceaudiotools__rtsp.html',1,'']]],
   ['audiotools_5fversion_530',['AUDIOTOOLS_VERSION',['../_audio_tools_config_8h.html#af878c08939cc45212bb82fcd7db22de5',1,'AudioToolsConfig.h']]],
