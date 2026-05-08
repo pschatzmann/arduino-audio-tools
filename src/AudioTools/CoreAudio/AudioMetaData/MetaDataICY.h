@@ -137,6 +137,9 @@ class MetaDataICY : public AbstractMetaData {
   /// Sets whether to only accept ASCII characters in metadata (default is true)
   void setAsciiOnly(bool value) { is_ascii = value; }
 
+  /// Sets the maximum allowed metadata length (default is 400)
+  void setMaxMetaDataLimit(int limit) { maxLimit = limit; }
+
  protected:
   Status nextStatus = ProcessData;
   Status currentStatus = ProcessData;
