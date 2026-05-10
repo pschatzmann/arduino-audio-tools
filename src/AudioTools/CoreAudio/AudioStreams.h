@@ -1364,8 +1364,8 @@ class InputMixer : public AudioStream {
       }
     }
     // copy result
-    for (int j = 0; j < samples; j++) {
-      p_data[j] = result_vect[j];
+    for (int j = 0; j < samples_eff_max; j++) {
+      p_data[j] = static_cast<T>(result_vect[j]);
     }
     return samples_eff_max * sizeof(T);
   }
