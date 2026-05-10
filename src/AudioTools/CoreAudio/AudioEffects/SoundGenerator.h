@@ -613,8 +613,16 @@ class GeneratorFromArray : public SoundGenerator<T> {
     LOGI("table_length: %d", (int)size);
   }
 
-  virtual bool begin(AudioInfo info) override {
+  /// Starts the generation of samples with the provided AudioInfo
+  bool begin(AudioInfo info) override {
     return SoundGenerator<T>::begin(info);
+  }
+
+  /// Starts the generation of samples with the provided AudioInfo and frequency
+  bool begin(AudioInfo info, float frequency) {
+    bool rc = begin(info);
+    setFrequency(frequency);
+    return rc;
   }
 
   /// Starts the generation of samples
