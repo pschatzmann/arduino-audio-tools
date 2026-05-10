@@ -120,7 +120,7 @@ var searchData=
   ['logmsg_117',['logMsg',['../classaudio__tools_1_1_o_s_c_data.html#ad70ee58905fa7df1986b258fb61bf176',1,'audio_tools::OSCData']]],
   ['logpins_118',['logPins',['../classaudio__tools_1_1_p_w_m_driver_e_s_p32.html#af1f87501a17f593eef617aed42aac57a',1,'audio_tools::PWMDriverESP32']]],
   ['logresult_119',['logResult',['../classaudio__tools_1_1_m_t_s_decoder_t_s_demux.html#af2cc95385951fea4f160db5fd0e56673',1,'audio_tools::MTSDecoderTSDemux']]],
-  ['logstatus_120',['logStatus',['../classaudio__tools_1_1_sine_wave_generator.html#ae30929257b2c9b9559c0347ca1739812',1,'audio_tools::SineWaveGenerator']]],
+  ['logstatus_120',['logStatus',['../classaudio__tools_1_1_sine_generator.html#ae30929257b2c9b9559c0347ca1739812',1,'audio_tools::SineGenerator']]],
   ['logw_121',['logw',['../_audio_logger_s_t_d_8h.html#a07f1b0d507acedeb7550353eba4f6e66',1,'LOGW:&#160;AudioLoggerSTD.h'],['../_audio_logger_i_d_f_8h.html#a07f1b0d507acedeb7550353eba4f6e66',1,'LOGW:&#160;AudioLoggerIDF.h']]],
   ['lookahead_122',['lookahead',['../classaudio__tools_1_1_a_d_p_c_m_decoder_x_q.html#a3d80b0160c9017df753c6af26ca45ad1',1,'audio_tools::ADPCMDecoderXQ::lookahead'],['../classaudio__tools_1_1_a_d_p_c_m_encoder_x_q.html#a3d80b0160c9017df753c6af26ca45ad1',1,'audio_tools::ADPCMEncoderXQ::lookahead']]],
   ['lookup_123',['lookup',['../classaudio__tools_1_1_resample_stream.html#af8662bc698751731ef239e89b395d5a7',1,'audio_tools::ResampleStream']]],

@@ -95,7 +95,7 @@ var searchData=
   ['distantip_5fascii_92',['distantip_ascii',['../struct_v_b_a_n___p_i_n_g0.html#a6d6cb881f241f34b9ba283de2c2d6ac8',1,'VBAN_PING0::DistantIP_ascii'],['../vban_8h.html#a6d6cb881f241f34b9ba283de2c2d6ac8',1,'DistantIP_ascii:&#160;vban.h']]],
   ['distantport_93',['distantport',['../struct_v_b_a_n___p_i_n_g0.html#af43eda88e8ecbd7a52cf5f61756a2920',1,'VBAN_PING0::DistantPort'],['../vban_8h.html#af43eda88e8ecbd7a52cf5f61756a2920',1,'DistantPort:&#160;vban.h']]],
   ['distantreserved_94',['distantreserved',['../vban_8h.html#a0594b6edbde4cc65361027a42d976895',1,'DistantReserved:&#160;vban.h'],['../struct_v_b_a_n___p_i_n_g0.html#a0594b6edbde4cc65361027a42d976895',1,'VBAN_PING0::DistantReserved']]],
-  ['double_5fpi_95',['double_Pi',['../classaudio__tools_1_1_sine_wave_generator.html#a97c68f8553747ed33bd73bcd53fad516',1,'audio_tools::SineWaveGenerator']]],
+  ['double_5fpi_95',['double_Pi',['../classaudio__tools_1_1_sine_generator.html#a97c68f8553747ed33bd73bcd53fad516',1,'audio_tools::SineGenerator']]],
   ['downpercent_96',['downPercent',['../classaudio__tools_1_1_sound_generator.html#ae2b104b741d35e43975aaf4f91c228b9',1,'audio_tools::SoundGenerator']]],
   ['dreq_5fpin_97',['dreq_pin',['../classaudio__tools_1_1_v_s1053_config.html#a0fcaa7a3d2232ff499bff304da4fe29f',1,'audio_tools::VS1053Config']]],
   ['driver_98',['driver',['../classaudio__tools_1_1_audio_kit_stream_config.html#a80336ac7095495778f32414c6b6cee0c',1,'audio_tools::AudioKitStreamConfig::driver'],['../classaudio__tools_1_1_r2_r_config.html#a5b166247f5fbd4f9648ee18362a37734',1,'audio_tools::R2RConfig::driver'],['../group___echo_state.html#ga45026b2593b445ad4d21e9594984d663',1,'audio_tools::fft_state::driver']]],

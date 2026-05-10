@@ -40,7 +40,7 @@ var searchData=
   ['logmsg_37',['logMsg',['../classaudio__tools_1_1_o_s_c_data.html#ad70ee58905fa7df1986b258fb61bf176',1,'audio_tools::OSCData']]],
   ['logpins_38',['logPins',['../classaudio__tools_1_1_p_w_m_driver_e_s_p32.html#af1f87501a17f593eef617aed42aac57a',1,'audio_tools::PWMDriverESP32']]],
   ['logresult_39',['logResult',['../classaudio__tools_1_1_m_t_s_decoder_t_s_demux.html#af2cc95385951fea4f160db5fd0e56673',1,'audio_tools::MTSDecoderTSDemux']]],
-  ['logstatus_40',['logStatus',['../classaudio__tools_1_1_sine_wave_generator.html#ae30929257b2c9b9559c0347ca1739812',1,'audio_tools::SineWaveGenerator']]],
+  ['logstatus_40',['logStatus',['../classaudio__tools_1_1_sine_generator.html#ae30929257b2c9b9559c0347ca1739812',1,'audio_tools::SineGenerator']]],
   ['lookup_41',['lookup',['../classaudio__tools_1_1_resample_stream.html#af8662bc698751731ef239e89b395d5a7',1,'audio_tools::ResampleStream']]],
   ['lookupmime_42',['lookupMime',['../classaudio__tools_1_1_mime_detector.html#a53fa73274952071470f44253d3467d99',1,'audio_tools::MimeDetector']]],
   ['loop_43',['loop',['../_main_8h.html#afe461d27b9c48d5921c00d521181f12f',1,'loop():&#160;Main.h'],['../classaudio__tools_1_1_audio_client_r_t_s_p.html#afe461d27b9c48d5921c00d521181f12f',1,'audio_tools::AudioClientRTSP::loop()'],['../classaudio__tools_1_1_audio_player_protocol_server.html#afe461d27b9c48d5921c00d521181f12f',1,'audio_tools::AudioPlayerProtocolServer::loop()']]],
