@@ -208,9 +208,9 @@ class SoundGenerator {
 };
 
 /**
- * @brief Generates a Sound with the help of sin() function. If you plan to
- * change the amplitude or frequency (incrementally), I suggest to use
- * SineFromTable instead.
+ * @brief Generates a Sound with the help of sin() function. 
+ * If performance is of concern, I suggest to use theSineFromTable
+ * or the FastSineGenerator.
  * @ingroup generator
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -621,7 +621,7 @@ class GeneratorFromArray : public SoundGenerator<T> {
   bool begin() override {
     TRACEI();
     SoundGenerator<T>::begin();
-    sound_index = 0;
+    sound_index = 0.0f;
     repeat_counter = 0;
     is_running = true;
     return true;
@@ -631,11 +631,21 @@ class GeneratorFromArray : public SoundGenerator<T> {
 
   /// Provides a single sample
   T readSample() override {
+    if (table.size() == 0) {
+      return 0;
+    }
+
+    if (!this->is_running) {
+      return 0;
+    }
+
+    const float table_size = static_cast<float>(table.size());
+
     // at end deactivate output
-    if (sound_index >= table.size()) {
+    while (sound_index >= table_size) {
       // LOGD("reset index - sound_index: %d, table_length:
       // %d",sound_index,table_length);
-      sound_index = 0;
+      sound_index -= table_size;
       // deactivate when count has been used up
       if (max_repeat >= 1 && ++repeat_counter >= max_repeat) {
         LOGD("atEnd");
@@ -643,13 +653,22 @@ class GeneratorFromArray : public SoundGenerator<T> {
         if (inactive_at_end) {
           this->active = false;
         }
+        return 0;
       }
     }
 
     // LOGD("index: %d - active: %d", sound_index, this->active);
     T result = 0;
     if (this->is_running) {
-      result = table[sound_index];
+      int idx0 = static_cast<int>(sound_index);
+      int idx1 = idx0 + 1;
+      if (idx1 >= static_cast<int>(table.size())) {
+        idx1 = 0;
+      }
+      float frac = sound_index - static_cast<float>(idx0);
+      float sample = static_cast<float>(table[idx0]) * (1.0f - frac) +
+                     static_cast<float>(table[idx1]) * frac;
+      result = static_cast<T>(sample);
       sound_index += index_increment;
     }
 
@@ -657,7 +676,26 @@ class GeneratorFromArray : public SoundGenerator<T> {
   }
 
   // step size the sound index is incremented (default = 1)
-  void setIncrement(int inc) { index_increment = inc; }
+  void setIncrement(int inc) {
+    index_increment = inc;
+    frequency = 0.0f;
+  }
+
+  /// Defines the output frequency based on sample rate and table size
+  void setFrequency(float frequency) override {
+    if (SoundGenerator<T>::audioInfo().sample_rate <= 0 || table.size() == 0) {
+      LOGE("setFrequency failed: sample_rate=%d table_size=%d",
+           (int)SoundGenerator<T>::audioInfo().sample_rate, (int)table.size());
+      return;
+    }
+    if (frequency < 0.0f) {
+      frequency = 0.0f;
+    }
+    this->frequency = frequency;
+    index_increment =
+        frequency * static_cast<float>(table.size()) /
+        static_cast<float>(SoundGenerator<T>::audioInfo().sample_rate);
+  }
 
   // Sets up a sine table - returns the effective frequency
   int setupSine(int sampleRate, float reqFrequency, float amplitude = 1.0) {
@@ -677,14 +715,15 @@ class GeneratorFromArray : public SoundGenerator<T> {
   bool isRunning() { return is_running; }
 
  protected:
-  int sound_index = 0;
+  float sound_index = 0.0f;
   int max_repeat = 0;
   int repeat_counter = 0;
-  bool inactive_at_end;
+  bool inactive_at_end = false;
   bool is_running = false;
   bool owns_data = false;
   Vector<T> table;
-  int index_increment = 1;
+  float index_increment = 1.0f;
+  float frequency = 0.0f;
 };
 
 /**
