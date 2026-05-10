@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: InputMixer&lt; T &gt; Class Template Reference</title>
+<title>arduino-audio-tools: InputMixer&lt; T, SumT &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -78,7 +78,7 @@ $(function() {
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_input_mixer-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">InputMixer&lt; T &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__transform.html">Converting Streams</a></div></div></div>
+  <div class="headertitle"><div class="title">InputMixer&lt; T, SumT &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__transform.html">Converting Streams</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -87,17 +87,17 @@ $(function() {
 
 <p><code>#include &lt;<a class="el" href="_audio_streams_8h_source.html">AudioStreams.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for InputMixer&lt; T &gt;:</div>
+Inheritance diagram for InputMixer&lt; T, SumT &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classaudio__tools_1_1_input_mixer.png" usemap="#InputMixer_3C_20T_20_3E_map" alt=""/>
-  <map id="InputMixer_3C_20T_20_3E_map" name="InputMixer_3C_20T_20_3E_map">
-<area href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="AudioStream" shape="rect" coords="120,168,230,192"/>
-<area href="classaudio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer, size_t size) and readBytes(uint..." alt="BaseStream" shape="rect" coords="0,112,110,136"/>
-<area href="classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="AudioInfoSupport" shape="rect" coords="120,112,230,136"/>
-<area href="classaudio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="AudioInfoSource" shape="rect" coords="240,112,350,136"/>
-<area href="classaudio__tools_1_1_stream.html" alt="Stream" shape="rect" coords="0,56,110,80"/>
-<area href="classaudio__tools_1_1_print.html" alt="Print" shape="rect" coords="0,0,110,24"/>
+  <img src="classaudio__tools_1_1_input_mixer.png" usemap="#InputMixer_3C_20T_2C_20SumT_20_3E_map" alt=""/>
+  <map id="InputMixer_3C_20T_2C_20SumT_20_3E_map" name="InputMixer_3C_20T_2C_20SumT_20_3E_map">
+<area href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="AudioStream" shape="rect" coords="152,168,294,192"/>
+<area href="classaudio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer, size_t size) and readBytes(uint..." alt="BaseStream" shape="rect" coords="0,112,142,136"/>
+<area href="classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="AudioInfoSupport" shape="rect" coords="152,112,294,136"/>
+<area href="classaudio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="AudioInfoSource" shape="rect" coords="304,112,446,136"/>
+<area href="classaudio__tools_1_1_stream.html" alt="Stream" shape="rect" coords="0,56,142,80"/>
+<area href="classaudio__tools_1_1_print.html" alt="Print" shape="rect" coords="0,0,142,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -207,8 +207,8 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a5caf99a24686511722c4c9f94c4ec52e" id="r_a5caf99a24686511722c4c9f94c4ec52e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#a5caf99a24686511722c4c9f94c4ec52e">refillReadBuffer</a> ()</td></tr>
 <tr class="memdesc:a5caf99a24686511722c4c9f94c4ec52e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Refill small read buffer (e.g. 8 bytes) to avoid single byte reads when calling read()  <br /></td></tr>
 <tr class="separator:a5caf99a24686511722c4c9f94c4ec52e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad0455637b36081f1ba87bb690fcf15ec" id="r_ad0455637b36081f1ba87bb690fcf15ec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_input_mixer.html#ad0455637b36081f1ba87bb690fcf15ec">resultAdd</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">fact</a>)</td></tr>
-<tr class="separator:ad0455637b36081f1ba87bb690fcf15ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d2dfade3fc8073d9f63580cec8772a8" id="r_a5d2dfade3fc8073d9f63580cec8772a8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_input_mixer.html#a5d2dfade3fc8073d9f63580cec8772a8">resultAdd</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">fact</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">samples_eff</a>)</td></tr>
+<tr class="separator:a5d2dfade3fc8073d9f63580cec8772a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af0ad99db310ab67c62cd0f279bde172e" id="r_af0ad99db310ab67c62cd0f279bde172e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_input_mixer.html#af0ad99db310ab67c62cd0f279bde172e">resultClear</a> ()</td></tr>
 <tr class="separator:af0ad99db310ab67c62cd0f279bde172e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -228,8 +228,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a12a686886a93e878eb46ddb95c27acd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad35c4e2ef458c36e8d36676958cc9cd3" id="r_ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#ad35c4e2ef458c36e8d36676958cc9cd3">notify_vector</a></td></tr>
 <tr class="separator:ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7edc465c04c259b0997bdb1986bb9c9" id="r_af7edc465c04c259b0997bdb1986bb9c9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_input_mixer.html#af7edc465c04c259b0997bdb1986bb9c9">result_vect</a></td></tr>
-<tr class="separator:af7edc465c04c259b0997bdb1986bb9c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9dd9bd5b253028ab1ad7f073d1837131" id="r_a9dd9bd5b253028ab1ad7f073d1837131"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; SumT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_input_mixer.html#a9dd9bd5b253028ab1ad7f073d1837131">result_vect</a></td></tr>
+<tr class="separator:a9dd9bd5b253028ab1ad7f073d1837131"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79d9a1941d35eea97ea57ea98d6ac2ae" id="r_a79d9a1941d35eea97ea57ea98d6ac2ae"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_input_mixer.html#a79d9a1941d35eea97ea57ea98d6ac2ae">retry_count</a> = 5</td></tr>
 <tr class="separator:a79d9a1941d35eea97ea57ea98d6ac2ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83091716adeeb48a1cffe2064676f599" id="r_a83091716adeeb48a1cffe2064676f599"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_input_mixer.html#a83091716adeeb48a1cffe2064676f599">streams</a> {0}</td></tr>
@@ -246,8 +246,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a7f948c0ac99e632d3a033b85ae54d170"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>&gt;<br />
-class audio_tools::InputMixer&lt; T &gt;</div><p>MixerStream is mixing the input from Multiple Input Streams. All streams must have the same audo format (sample rate, channels, bits per sample). </p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> = int16_t, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> SumT = int&gt;<br />
+class audio_tools::InputMixer&lt; T, SumT &gt;</div><p>MixerStream is mixing the input from Multiple Input Streams. All streams must have the same audo format (sample rate, channels, bits per sample). </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -257,7 +257,7 @@ class audio_tools::InputMixer&lt; T &gt;</div><p>MixerStream is mixing the input
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> SumT  = int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -285,7 +285,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> SumT  = int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -443,7 +443,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> SumT  = int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -528,7 +528,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> SumT  = int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -585,7 +585,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> SumT  = int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -645,7 +645,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> SumT  = int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -702,7 +702,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> SumT  = int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -820,7 +820,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> SumT  = int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -850,7 +850,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> SumT  = int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -892,7 +892,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> SumT  = int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -970,7 +970,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> SumT  = int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1026,7 +1026,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> SumT  = int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1055,7 +1055,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> SumT  = int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1109,13 +1109,13 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 
 </div>
 </div>
-<a id="ad0455637b36081f1ba87bb690fcf15ec" name="ad0455637b36081f1ba87bb690fcf15ec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad0455637b36081f1ba87bb690fcf15ec">&#9670;&#160;</a></span>resultAdd()</h2>
+<a id="a5d2dfade3fc8073d9f63580cec8772a8" name="a5d2dfade3fc8073d9f63580cec8772a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d2dfade3fc8073d9f63580cec8772a8">&#9670;&#160;</a></span>resultAdd()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> SumT  = int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1124,8 +1124,18 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
           <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> resultAdd </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a>&#160;</td>
-          <td class="paramname"><em>fact</em></td><td>)</td>
+          <td class="paramname"><em>fact</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramname"><em>samples_eff</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -1143,7 +1153,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> SumT  = int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1170,7 +1180,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> SumT  = int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1242,7 +1252,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> SumT  = int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1299,7 +1309,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> SumT  = int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1328,7 +1338,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> SumT  = int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1393,7 +1403,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> SumT  = int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1541,7 +1551,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> SumT  = int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1565,7 +1575,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> SumT  = int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1633,7 +1643,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> SumT  = int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1673,19 +1683,19 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 
 </div>
 </div>
-<a id="af7edc465c04c259b0997bdb1986bb9c9" name="af7edc465c04c259b0997bdb1986bb9c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af7edc465c04c259b0997bdb1986bb9c9">&#9670;&#160;</a></span>result_vect</h2>
+<a id="a9dd9bd5b253028ab1ad7f073d1837131" name="a9dd9bd5b253028ab1ad7f073d1837131"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9dd9bd5b253028ab1ad7f073d1837131">&#9670;&#160;</a></span>result_vect</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> SumT  = int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&gt; result_vect</td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;SumT&gt; result_vect</td>
         </tr>
       </table>
   </td>
@@ -1703,7 +1713,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> SumT  = int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1727,7 +1737,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> SumT  = int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1795,7 +1805,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> SumT  = int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1819,7 +1829,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> SumT  = int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
