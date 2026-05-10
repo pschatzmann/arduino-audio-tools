@@ -14,7 +14,7 @@ var searchData=
   ['gain_5fstep_5fattack_11',['gain_step_attack',['../classaudio__tools_1_1_compressor.html#a5c283706867526fcc04b62a2a2ab6b85',1,'audio_tools::Compressor']]],
   ['gain_5fstep_5frelease_12',['gain_step_release',['../classaudio__tools_1_1_compressor.html#a93a4c745f329a54dfdff579d55c66fcb',1,'audio_tools::Compressor']]],
   ['gainreduce_13',['gainreduce',['../classaudio__tools_1_1_compressor.html#a2b56ecd9dcb36dd9bbdc08d466a625f4',1,'audio_tools::Compressor']]],
-  ['gains_14',['gains',['../classaudio__tools_1_1_equalizer_n_bands.html#ad620e7254ac33f90089a44f59416c09e',1,'audio_tools::EqualizerNBands']]],
+  ['gains_14',['gains',['../classaudio__tools_1_1_equalizer_n_bands.html#ad620e7254ac33f90089a44f59416c09e',1,'audio_tools::EqualizerNBands::gains'],['../classaudio__tools_1_1_input_mixer.html#a370e1842392548918b64292690bd82d3',1,'audio_tools::InputMixer::gains']]],
   ['gainsdirty_15',['gainsDirty',['../classaudio__tools_1_1_equalizer_n_bands.html#aa740f29e3ebf366e0e76d5008c10bb7e',1,'audio_tools::EqualizerNBands']]],
   ['gate_5fexists_16',['gate_exists',['../classaudio__tools_1_1_faust_stream.html#a855eba1834e1665f145fd03420a66254',1,'audio_tools::FaustStream']]],
   ['generator_17',['generator',['../classaudio__tools_1_1_s_t_k_stream.html#ac4f697c4e9cadd453a993a6f8566b3ca',1,'audio_tools::STKStream']]],
