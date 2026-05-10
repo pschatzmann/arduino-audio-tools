@@ -1192,7 +1192,7 @@ class Throttle : public ModifyingStream {
  * @copyright GPLv3
  */
 
-template <typename T=int16_t, typename SumT=int>
+template <typename T=int16_t, typename SumT=float>
 class InputMixer : public AudioStream {
  public:
   InputMixer() = default;
