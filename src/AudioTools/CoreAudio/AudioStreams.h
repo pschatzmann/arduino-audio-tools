@@ -1201,7 +1201,7 @@ class InputMixer : public AudioStream {
   int add(Stream &in, int weight = 100) {
     streams.push_back(&in);
     weights.push_back(weight);
-    total_weights += weight;
+    recalculateWeights();
     return streams.indexOf(&in);
   }
 
@@ -1239,6 +1239,7 @@ class InputMixer : public AudioStream {
   void end() override {
     streams.clear();
     weights.clear();
+    gains.clear();
     result_vect.clear();
     current_vect.clear();
     total_weights = 0.0;
@@ -1325,6 +1326,7 @@ class InputMixer : public AudioStream {
  protected:
   Vector<Stream *> streams{0};
   Vector<int> weights{0};
+  Vector<float> gains{0};
   int total_weights = 0;
   int frame_size = 4;
   bool limit_available_data = false;
@@ -1339,30 +1341,26 @@ class InputMixer : public AudioStream {
       total += weights[j];
     }
     total_weights = total;
+    gains.resize(weights.size());
+    for (int j = 0; j < weights.size(); j++) {
+      gains[j] = total_weights == 0 ? 0.0f : static_cast<float>(weights[j]) / total_weights;
+    }
   }
 
   /// mixing using a vector of samples
   int readBytesVector(T *p_data, int byteCount) {
     int samples = byteCount / sizeof(T);
-    result_vect.resize(samples);
-    current_vect.resize(samples);
+    if (result_vect.size() < samples) result_vect.resize(samples);
+    if (current_vect.size() < samples) current_vect.resize(samples);
     int stream_count = size();
-    resultClear();
+    resultClear(samples);
     int samples_eff_max = 0;
     for (int j = 0; j < stream_count; j++) {
       if (weights[j] > 0) {
         int samples_eff =
             readSamples(streams[j], current_vect.data(), samples, retry_count);
         if (samples_eff > samples_eff_max) samples_eff_max = samples_eff;
-        // zero out any unread tail to avoid stale data from a previous call
-        if (samples_eff < samples)
-          memset(current_vect.data() + samples_eff, 0,
-                 (samples - samples_eff) * sizeof(T));
-        // if all weights are 0.0 we stop to output
-        float factor = total_weights == 0.0f
-                           ? 0.0f
-                           : static_cast<float>(weights[j]) / total_weights;
-        resultAdd(factor, samples_eff);
+        resultAdd(gains[j], samples_eff);
       }
     }
     // copy result
@@ -1388,8 +1386,8 @@ class InputMixer : public AudioStream {
     }
   }
 
-  void resultClear() {
-    memset(result_vect.data(), 0, sizeof(SumT) * result_vect.size());
+  void resultClear(int samples) {
+    memset(result_vect.data(), 0, sizeof(SumT) * samples);
   }
 };
 
