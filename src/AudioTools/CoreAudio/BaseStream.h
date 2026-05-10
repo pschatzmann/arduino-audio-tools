@@ -243,7 +243,7 @@ class CatStream : public BaseStream {
     end_callback = callback;
   }
 
-  /// Defines the timout the system waits for data when moving to the next stream
+  /// Defines the timout in ms the system waits for data when moving to the next stream
   void setTimeout(size_t t) { _timeout = t; }
 
   /// not supported
@@ -263,7 +263,6 @@ class CatStream : public BaseStream {
   bool is_active = false;
   void (*begin_callback)(Stream *stream) = nullptr;
   void (*end_callback)(Stream *stream) = nullptr;
-  size_t _timeout = 0;
 
   /// moves to the next stream if necessary: returns true if we still have a
   /// valid stream
