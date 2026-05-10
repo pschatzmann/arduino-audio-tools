@@ -31,11 +31,13 @@ class SoundGenerator {
 
   virtual ~SoundGenerator() { end(); }
 
+  /// Starts the processing with the provided AudioInfo
   virtual bool begin(AudioInfo info) {
     this->info = info;
     return begin();
   }
 
+  /// Starts the processing 
   virtual bool begin() {
     TRACED();
     active = true;
@@ -48,11 +50,10 @@ class SoundGenerator {
     return true;
   }
 
-  /// ends the processing
+  /// Ends the processing
   virtual void end() { active = false; }
 
-  /// Checks if the begin method has been called - after end() isActive returns
-  /// false
+  /// Checks if the begin method has been called - after end() isActive is false
   virtual bool isActive() { return active; }
 
   /// Provides a single sample
@@ -95,6 +96,7 @@ class SoundGenerator {
     recalculatePlayTime();
   }
 
+  /// Defines the play time in ms and the ramp up and ramp down time in percent
   void setPlayTime(uint32_t playMs, uint8_t upPercent = 20,
                    uint8_t downPercent = 30) {
     LOGI("setPlayTime: playMs=%d, upPercent=%d, downPercent=%d", playMs,
