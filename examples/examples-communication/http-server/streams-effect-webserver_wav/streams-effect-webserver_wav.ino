@@ -25,7 +25,7 @@ int16_t tremoloDuration = 200;
 float tremoloDepth = 0.5;
 
 // Audio 
-SineWaveGenerator<int16_t> sine;
+SineGenerator<int16_t> sine;
 GeneratedSoundStream<int16_t> stream(sine); 
 AudioEffectStream effects(stream);
 

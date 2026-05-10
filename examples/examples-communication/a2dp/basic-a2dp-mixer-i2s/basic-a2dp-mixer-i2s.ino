@@ -13,7 +13,7 @@
 AudioInfo info(44100, 2, 16);
 BluetoothA2DPSink a2dp_sink;
 I2SStream i2s;
-SineWaveGenerator<int16_t> sineWave(10000);  // subclass of SoundGenerator with max amplitude of 10000
+SineGenerator<int16_t> sineWave(10000);  // subclass of SoundGenerator with max amplitude of 10000
 GeneratedSoundStream<int16_t> sound(sineWave); // Stream generated from sine wave
 OutputMixer<int16_t> mixer(i2s, 2);  // output mixer with 2 outputs
 const int buffer_size = 80;  // split up the output into small chunks

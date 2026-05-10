@@ -2,7 +2,7 @@
 #include "AudioTools/AudioLibs/AudioESP32FFT.h" // Using ESP32FFT
 
 AudioESP32FFT fftc; // or AudioKissFFT
-SineWaveGenerator<int16_t> sineWave(32000);
+SineGenerator<int16_t> sineWave(32000);
 GeneratedSoundStream<int16_t> in(sineWave);
 StreamCopy copier(fftc, in);
 AudioInfo info(44100, 1, 16);

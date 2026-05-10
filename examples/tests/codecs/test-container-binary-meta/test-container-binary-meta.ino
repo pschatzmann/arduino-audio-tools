@@ -44,7 +44,7 @@ void metaCallback(uint8_t* data, int len, void*ref) {
 }
 
 AudioInfo info(8000, 1, 16);
-SineWaveGenerator<int16_t> sineWave(32000);
+SineGenerator<int16_t> sineWave(32000);
 GeneratedSoundStream<int16_t> sound(sineWave);
 AudioBoardStream out(AudioKitEs8388V1);
 BinaryContainerDecoder cont_dec(new OpusAudioDecoder());

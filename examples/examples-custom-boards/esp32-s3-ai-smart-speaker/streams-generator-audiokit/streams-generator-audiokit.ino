@@ -15,7 +15,7 @@
 #include "ESP32S3AISmartSpeaker.h"
 
 AudioInfo info(32000, 2, 16);
-SineWaveGenerator<int16_t> sineWave(32000);                // subclass of SoundGenerator with max amplitude of 32000
+SineGenerator<int16_t> sineWave(32000);                // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound(sineWave);             // Stream generated from sine wave
 AudioBoardStream out(ESP32S3AISmartSpeaker);
 StreamCopy copier(out, sound);                             // copies sound into i2s

@@ -9,7 +9,7 @@
 //#include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 I2SStream i2s; //AudioBoardStream
-SineWaveGenerator<int16_t> sine;
+SineGenerator<int16_t> sine;
 GeneratedSoundStream<int16_t> stream(sine); 
 AudioEffectStream effects(stream);
 ADSRGain adsr(0.0001,0.0001, 0.9 , 0.0002);

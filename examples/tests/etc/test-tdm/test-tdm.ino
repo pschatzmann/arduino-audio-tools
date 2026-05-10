@@ -6,7 +6,7 @@
 const AudioInfo info_in(44100, 1, 16);
 const AudioInfo info_out(44100, 8, 16);
 const MusicalNotes notes;
-Vector<SineWaveGenerator<int16_t>> sineWaves{info_out.channels};
+Vector<SineGenerator<int16_t>> sineWaves{info_out.channels};
 Vector<GeneratedSoundStream<int16_t>> sound{info_out.channels};
 InputMerge<int16_t> imerge;  // merge to 8 channels
 DriverPins dac_pins;

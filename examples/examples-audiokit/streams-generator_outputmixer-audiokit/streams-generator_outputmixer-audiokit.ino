@@ -10,7 +10,7 @@
 
 AudioInfo info(44100, 2, 16);
 const int N = 5;
-SineWaveGenerator<int16_t> sineWave[N](32000);
+SineGenerator<int16_t> sineWave[N](32000);
 GeneratedSoundStream<int16_t> sound[N];
 AudioBoardStream out(AudioKitEs8388V1);
 OutputMixer<int16_t> mixer(out, N, DefaultAllocatorRAM);

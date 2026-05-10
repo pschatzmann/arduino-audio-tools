@@ -3,7 +3,7 @@
 #include "AudioTools/AudioCodecs/CodecADPCM.h"
 
 AudioInfo info(16000, 2, 16);
-SineWaveGenerator<int16_t> sineWave( 32000);  
+SineGenerator<int16_t> sineWave( 32000);  
 GeneratedSoundStream<int16_t> sound( sineWave); 
 CsvOutput<int16_t> out(Serial);
 AVCodecID id = AV_CODEC_ID_ADPCM_IMA_WAV;

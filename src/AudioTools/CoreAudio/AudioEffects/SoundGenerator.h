@@ -217,12 +217,12 @@ class SoundGenerator {
  *
  */
 template <class T = int16_t>
-class SineWaveGenerator : public SoundGenerator<T> {
+class SineGenerator : public SoundGenerator<T> {
  public:
   // the scale defines the max value which is generated
-  SineWaveGenerator(float amplitude = 0.9f * NumberConverter::maxValueT<T>(),
+  SineGenerator(float amplitude = 0.9f * NumberConverter::maxValueT<T>(),
                     float phase = 0.0f) {
-    LOGD("SineWaveGenerator");
+    LOGD("SineGenerator");
     m_amplitude = amplitude;
     m_phase = phase;
   }
@@ -235,7 +235,7 @@ class SineWaveGenerator : public SoundGenerator<T> {
   }
 
   bool begin(AudioInfo info) override {
-    LOGI("%s::begin(channels=%d, sample_rate=%d)", "SineWaveGenerator",
+    LOGI("%s::begin(channels=%d, sample_rate=%d)", "SineGenerator",
          (int)info.channels, (int)info.sample_rate);
     SoundGenerator<T>::begin(info);
     this->m_deltaTime = 1.0f / SoundGenerator<T>::info.sample_rate;
@@ -244,7 +244,7 @@ class SineWaveGenerator : public SoundGenerator<T> {
 
   bool begin(AudioInfo info, float frequency) {
     LOGI("%s::begin(channels=%d, sample_rate=%d, frequency=%.2f)",
-         "SineWaveGenerator", (int)info.channels, (int)info.sample_rate,
+         "SineGenerator", (int)info.channels, (int)info.sample_rate,
          frequency);
     SoundGenerator<T>::begin(info);
     this->m_deltaTime = 1.0f / SoundGenerator<T>::info.sample_rate;
@@ -309,6 +309,10 @@ class SineWaveGenerator : public SoundGenerator<T> {
   }
 };
 
+/// Alias for SineWaveGenerator
+template <class T = int16_t>  
+using SineWaveGenerator = SineGenerator<T>;
+
 /**
  * @brief Sine wave which is based on a fast approximation function.
  * @ingroup generator
@@ -317,21 +321,21 @@ class SineWaveGenerator : public SoundGenerator<T> {
  * @tparam T
  */
 template <class T = int16_t>
-class FastSineGenerator : public SineWaveGenerator<T> {
+class FastSineGenerator : public SineGenerator<T> {
  public:
   FastSineGenerator(float amplitude = 32767.0, float phase = 0.0)
-      : SineWaveGenerator<T>(amplitude, phase) {
+      : SineGenerator<T>(amplitude, phase) {
     LOGD("FastSineGenerator");
   }
 
   virtual T readSample() override {
     float angle =
-        SineWaveGenerator<T>::m_cycles + SineWaveGenerator<T>::m_phase;
-    T result = SineWaveGenerator<T>::m_amplitude * sine(angle);
-    SineWaveGenerator<T>::m_cycles +=
-        SineWaveGenerator<T>::m_frequency * SineWaveGenerator<T>::m_deltaTime;
-    if (SineWaveGenerator<T>::m_cycles > 1.0f) {
-      SineWaveGenerator<T>::m_cycles -= 1.0f;
+        SineGenerator<T>::m_cycles + SineGenerator<T>::m_phase;
+    T result = SineGenerator<T>::m_amplitude * sine(angle);
+    SineGenerator<T>::m_cycles +=
+        SineGenerator<T>::m_frequency * SineGenerator<T>::m_deltaTime;
+    if (SineGenerator<T>::m_cycles > 1.0f) {
+      SineGenerator<T>::m_cycles -= 1.0f;
     }
     return result;
   }
@@ -380,21 +384,21 @@ class SquareWaveGenerator : public FastSineGenerator<T> {
  * @tparam T
  */
 template <class T = int16_t>
-class SawToothGenerator : public SineWaveGenerator<T> {
+class SawToothGenerator : public SineGenerator<T> {
  public:
   SawToothGenerator(float amplitude = 32767.0, float phase = 0.0)
-      : SineWaveGenerator<T>(amplitude, phase) {
+      : SineGenerator<T>(amplitude, phase) {
     LOGD("SawToothGenerator");
   }
 
   virtual T readSample() override {
     float angle =
-        SineWaveGenerator<T>::m_cycles + SineWaveGenerator<T>::m_phase;
-    T result = SineWaveGenerator<T>::m_amplitude * saw(angle);
-    SineWaveGenerator<T>::m_cycles +=
-        SineWaveGenerator<T>::m_frequency * SineWaveGenerator<T>::m_deltaTime;
-    if (SineWaveGenerator<T>::m_cycles > 1.0) {
-      SineWaveGenerator<T>::m_cycles -= 1.0;
+        SineGenerator<T>::m_cycles + SineGenerator<T>::m_phase;
+    T result = SineGenerator<T>::m_amplitude * saw(angle);
+    SineGenerator<T>::m_cycles +=
+        SineGenerator<T>::m_frequency * SineGenerator<T>::m_deltaTime;
+    if (SineGenerator<T>::m_cycles > 1.0) {
+      SineGenerator<T>::m_cycles -= 1.0;
     }
     return result;
   }

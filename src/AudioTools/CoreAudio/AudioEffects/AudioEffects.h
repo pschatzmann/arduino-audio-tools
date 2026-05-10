@@ -71,7 +71,7 @@ class AudioEffectCommon {
 
 /**
  * @brief OBSOLETE AudioEffects: the template class describes the input audio to which the effects are applied: 
- * e.g. SineWaveGenerator, SquareWaveGenerator, GeneratorFromStream etc. 
+ * e.g. SineGenerator, SquareWaveGenerator, GeneratorFromStream etc. 
  * We support only one channel of int16_t data!
  * 
  * We subclass the AudioEffects from GeneratorT so that we can use this class with the GeneratedSoundStream 

@@ -15,7 +15,7 @@
 SET_LOOP_TASK_STACK_SIZE(20 * 1024);
 
 AudioInfo info(8000, 1, 16);
-SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
+SineGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wave
 AudioBoardStream out(AudioKitEs8388V1);
 EncodedAudioStream decoder(&out, new ILBCDecoder()); // encode and write

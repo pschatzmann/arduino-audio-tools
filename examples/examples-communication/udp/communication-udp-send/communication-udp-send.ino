@@ -1,7 +1,7 @@
 /**
  * @file example-udp-send.ino
  * @author Phil Schatzmann
- * @brief Sending audio over udp. Because the SineWaveGenerator is providing the data as fast 
+ * @brief Sending audio over udp. Because the SineGenerator is providing the data as fast 
  * as possible we need to throttle the speed.
  * @version 0.1
  * @date 2022-03-09
@@ -15,7 +15,7 @@
 const char *ssid = "ssid";
 const char *password = "password";
 AudioInfo info(22000, 1, 16);
-SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
+SineGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound( sineWave);  // Stream generated from sine wave
 UDPStream udp(ssid, password); 
 Throttle throttle(udp);

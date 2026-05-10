@@ -8,7 +8,7 @@
 #include "AudioTools.h"
 
 AudioInfo                     info(44100, 2, 16);
-SineWaveGenerator<int16_t>    sineWave(16000);         // subclass of SoundGenerator with max amplitude of 32000
+SineGenerator<int16_t>    sineWave(16000);         // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound(sineWave);         // stream generated from sine wave
 Bin                           binner(64, 2, true, 16);  // configure binning with binsize, channels, enable averaging, bits per channel
 ConverterStream<int16_t>      binning(sound, binner);  // pipe the sound to the binner

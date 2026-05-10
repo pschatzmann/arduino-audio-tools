@@ -2,7 +2,7 @@
 #include "AudioTools/AudioLibs/AudioCmsisFFT.h" // using CMSIS DSP
 
 AudioCmsisFFT fft; // or AudioKissFFT
-SineWaveGenerator<int16_t> sineWave(32000);
+SineGenerator<int16_t> sineWave(32000);
 GeneratedSoundStream<int16_t> in(sineWave);
 StreamCopy copier(fft, in);
 AudioInfo info(44100, 1, 16);

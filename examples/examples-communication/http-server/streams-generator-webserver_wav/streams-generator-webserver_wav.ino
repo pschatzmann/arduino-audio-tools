@@ -21,7 +21,7 @@ AudioWAVServer server(ssid, password);
 const int sample_rate = 10000;
 const int channels = 1;
 
-SineWaveGenerator<int16_t> sineWave;            // Subclass of SoundGenerator with max amplitude of 32000
+SineGenerator<int16_t> sineWave;            // Subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> in(sineWave);     // Stream generated from sine wave
 
 

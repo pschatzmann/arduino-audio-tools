@@ -20,7 +20,7 @@
 
 AudioInfo info(44100, 2, 16);
 I2SStream out; // or AnalogAudioStream, AudioBoardStream etc
-SineWaveGenerator<int16_t> sineWave(32000);
+SineGenerator<int16_t> sineWave(32000);
 GeneratedSoundStream<int16_t> sound(sineWave);
 
 auto &serial = Serial2;
