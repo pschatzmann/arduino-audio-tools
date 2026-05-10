@@ -1192,7 +1192,7 @@ class Throttle : public ModifyingStream {
  * @copyright GPLv3
  */
 
-template <typename T>
+template <typename T=int16_t, typename SumT=int>
 class InputMixer : public AudioStream {
  public:
   InputMixer() = default;
@@ -1262,7 +1262,7 @@ class InputMixer : public AudioStream {
 
     if (len > 0) {
       // result_len must be full frames
-      result_len = len * frame_size / frame_size;
+      result_len = (len / frame_size) * frame_size;;
       // replace sample based with vector based implementation
       // readBytesSamples((T*)data, result_len));
       result_len = readBytesVector((T *)data, result_len);
@@ -1329,7 +1329,7 @@ class InputMixer : public AudioStream {
   int frame_size = 4;
   bool limit_available_data = false;
   int retry_count = 5;
-  Vector<int> result_vect;
+  Vector<SumT> result_vect;
   Vector<T> current_vect;
 
   /// Recalculate the weights
@@ -1354,11 +1354,15 @@ class InputMixer : public AudioStream {
         int samples_eff =
             readSamples(streams[j], current_vect.data(), samples, retry_count);
         if (samples_eff > samples_eff_max) samples_eff_max = samples_eff;
+        // zero out any unread tail to avoid stale data from a previous call
+        if (samples_eff < samples)
+          memset(current_vect.data() + samples_eff, 0,
+                 (samples - samples_eff) * sizeof(T));
         // if all weights are 0.0 we stop to output
         float factor = total_weights == 0.0f
                            ? 0.0f
                            : static_cast<float>(weights[j]) / total_weights;
-        resultAdd(factor);
+        resultAdd(factor, samples_eff);
       }
     }
     // copy result
@@ -1377,15 +1381,15 @@ class InputMixer : public AudioStream {
     return result;
   }
 
-  void resultAdd(float fact) {
-    for (int j = 0; j < current_vect.size(); j++) {
-      current_vect[j] *= fact;
-      result_vect[j] += current_vect[j];
+  void resultAdd(float fact, int samples_eff) {
+    // only accumulate samples that were actually read; tail is already zeroed
+    for (int j = 0; j < samples_eff; j++) {
+      result_vect[j] += static_cast<SumT>(current_vect[j] * fact);
     }
   }
 
   void resultClear() {
-    memset(result_vect.data(), 0, sizeof(int) * result_vect.size());
+    memset(result_vect.data(), 0, sizeof(SumT) * result_vect.size());
   }
 };
 
