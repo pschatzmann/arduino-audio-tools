@@ -197,15 +197,22 @@ class CatStream : public BaseStream {
  public:
   CatStream() = default;
 
-  void add(Stream *stream) { input_streams.push_back(stream); }
-  void add(Stream &stream) { input_streams.push_back(&stream); }
+  void add(Stream *stream) { all_streams.push_back(stream); input_streams.push_back(stream); }
+  void add(Stream &stream) { all_streams.push_back(&stream); input_streams.push_back(&stream); }
 
   bool begin() override {
+    // Restore working list from master so we start at the first stream again
+    input_streams.clear();
+    for (auto s : all_streams) input_streams.push_back(s);
+    p_current_stream = nullptr;
     is_active = true;
     return true;
   }
 
-  void end() override { is_active = false; }
+  void end() override {
+    is_active = false;
+    p_current_stream = nullptr;
+  }
 
   int available() override {
     if (!is_active) return 0;
@@ -226,9 +233,12 @@ class CatStream : public BaseStream {
   /// Returns true if active and we still have data
   operator bool() { return is_active && available() > 0; }
 
+  /// Defines the callback which is called when a new stream is started
   void setOnBeginCallback(void (*callback)(Stream *stream)) {
     begin_callback = callback;
   }
+
+  /// Defines the callback which is called when a stream is finished
   void setOnEndCallback(void (*callback)(Stream *stream)) {
     end_callback = callback;
   }
@@ -239,8 +249,16 @@ class CatStream : public BaseStream {
   /// not supported
   size_t write(const uint8_t *data, size_t size) override { return 0;};
 
+  /// clear
+  void clear() {
+    all_streams.clear();
+    input_streams.clear();
+    p_current_stream = nullptr;
+  }
+
  protected:
-  Vector<Stream *> input_streams;
+  Vector<Stream *> all_streams;      // master list — never consumed
+  Vector<Stream *> input_streams;    // working list — consumed by pop_front
   Stream *p_current_stream = nullptr;
   bool is_active = false;
   void (*begin_callback)(Stream *stream) = nullptr;
