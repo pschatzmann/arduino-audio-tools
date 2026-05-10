@@ -30,6 +30,6 @@ var searchData=
   ['_5frxstate_27',['_rxState',['../classaudio__tools_1_1_h_d_l_c_stream.html#a548f0f1b98da5cbb2386355e53497963',1,'audio_tools::HDLCStream']]],
   ['_5fsize_28',['_size',['../struct_r_s_1_1_poly.html#aaa049a794bf092e892763bad507598b5',1,'RS::Poly']]],
   ['_5ftemplates_29',['_templates',['../classaudio__tools_1_1_wake_word_detector.html#a92ef084ebe47924da802c8026972f7c2',1,'audio_tools::WakeWordDetector']]],
-  ['_5ftimeout_30',['_timeout',['../classaudio__tools_1_1_print.html#aa66a35e5edf58ce00047afcd1d4f455e',1,'audio_tools::Print::_timeout'],['../classaudio__tools_1_1_cat_stream.html#a10a618e8bbc0a6922d490463fa7cd0d4',1,'audio_tools::CatStream::_timeout']]],
+  ['_5ftimeout_30',['_timeout',['../classaudio__tools_1_1_print.html#aa66a35e5edf58ce00047afcd1d4f455e',1,'audio_tools::Print']]],
   ['_5fwriteescaped_31',['_writeEscaped',['../classaudio__tools_1_1_h_d_l_c_stream.html#a8f0b39adacb08a765c7af50066dc3ef7',1,'audio_tools::HDLCStream']]]
 ];
