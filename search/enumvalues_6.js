@@ -11,7 +11,7 @@ var searchData=
   ['g726adpcm_8',['G726ADPCM',['../group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1ac155faf850ade2d91168dac31e37f5ad',1,'audio_tools']]],
   ['genre_9',['Genre',['../group__metadata.html#gga6760f423085f8a63374b1e2db102a6d1a1d7d7e9b14a7453f1f8b31d4ca563869',1,'audio_tools']]],
   ['get_10',['GET',['../_http_types_8h.html#a3a8d8d5989e593d770a33e5cb6c1ae84a12a8dcf59c16b5aadfda3a08ba67d529',1,'HttpTypes.h']]],
-  ['getavailablebuffersize_11',['GetAvailableBufferSize',['../namespaceaudio__tools.html#ad86b43537dea2133a2299586f6e954b6a61a0116761a0b5bfc4e116bb2156a37c',1,'audio_tools']]],
-  ['getfilledbuffersize_12',['GetFilledBufferSize',['../namespaceaudio__tools.html#ad86b43537dea2133a2299586f6e954b6a24aa46302e44cb620ee55b3ede478064',1,'audio_tools']]],
+  ['getavailablebuffersize_11',['GetAvailableBufferSize',['../group__spi-audio.html#ggad86b43537dea2133a2299586f6e954b6a61a0116761a0b5bfc4e116bb2156a37c',1,'audio_tools']]],
+  ['getfilledbuffersize_12',['GetFilledBufferSize',['../group__spi-audio.html#ggad86b43537dea2133a2299586f6e954b6a24aa46302e44cb620ee55b3ede478064',1,'audio_tools']]],
   ['gs_13',['GS',['../group__tools.html#gga9715fceb4c700e7e4a610400464e9396a9c922c72676cab2b540d081a8bb3788a',1,'audio_tools::MusicalNotes']]]
 ];

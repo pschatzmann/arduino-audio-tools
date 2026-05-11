@@ -1,7 +1,7 @@
 var searchData=
 [
   ['c_0',['c',['../group__tools.html#gga9715fceb4c700e7e4a610400464e9396a739ce3f516592d245d16fd8a3893472c',1,'audio_tools::MusicalNotes::C'],['../group__basic.html#gga5b1869d184b84711842bfe4f25433338a0d61f8370cad1d412f80b84d143e1257',1,'audio_tools::C']]],
-  ['clear_1',['Clear',['../namespaceaudio__tools.html#ad86b43537dea2133a2299586f6e954b6adc30bc0c7914db5918da4263fce93ad2',1,'audio_tools']]],
+  ['clear_1',['Clear',['../group__spi-audio.html#ggad86b43537dea2133a2299586f6e954b6adc30bc0c7914db5918da4263fce93ad2',1,'audio_tools']]],
   ['connect_2',['CONNECT',['../_http_types_8h.html#a3a8d8d5989e593d770a33e5cb6c1ae84a20391dd2915a0e64343d24c2f2e40b95',1,'HttpTypes.h']]],
   ['contains_3',['Contains',['../namespaceaudio__tools.html#adf56341f15593a1c3b9b29e001d1c33dab270372be5b4433b4736daaf25e1c74e',1,'audio_tools']]],
   ['corrupted_4',['Corrupted',['../group__metadata.html#gga6760f423085f8a63374b1e2db102a6d1ab2b390c60b7f14f1a639328b24388b26',1,'audio_tools']]],
