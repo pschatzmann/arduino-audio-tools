@@ -17,7 +17,6 @@ namespace audio_tools {
 
 /**
  * @brief Configuration for SPIAudioMaster
- * @ingroup communications
  */
 struct SPIAudioMasterConfig : public AudioInfo {
 #if defined(SS)
@@ -49,7 +48,7 @@ struct SPIAudioMasterConfig : public AudioInfo {
 /**
  * @brief SPI master endpoint for remote audio sink configuration and PCM data
  * transfer.
- * @ingroup communications
+ * @ingroup spi-audio
  *
  * This class implements the master side of a simple binary request/response
  * protocol over SPI and is designed to work with `SPIAudioSlave`.

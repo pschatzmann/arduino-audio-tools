@@ -4,6 +4,7 @@
 namespace audio_tools {
 /**
  * @brief SPI command ids used by SPIAudioMaster
+ * @ingroup spi-audio
  *
  * Frame format (master -> slave):
  * - cmd: uint8_t

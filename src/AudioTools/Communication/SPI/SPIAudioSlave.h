@@ -17,7 +17,6 @@ namespace audio_tools {
 
 /**
  * @brief Configuration for SPIAudioSlave
- * @ingroup communications
  *
  * ## Performance Tuning (ESP32)
  * For optimal performance with ESP32 SPI slave hardware:
@@ -73,7 +72,7 @@ struct SPIAudioSlaveConfig : public AudioInfo {
 
 /**
  * @brief SPI Audio Slave endpoint matching SPIAudioMaster protocol.
- * @ingroup communications
+ * @ingroup spi-audio
  *
  * This class implements the slave side of a binary request/response protocol
  * over SPI. It receives commands from a remote SPIAudioMaster and manages an
