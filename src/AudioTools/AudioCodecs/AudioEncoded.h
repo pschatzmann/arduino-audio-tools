@@ -228,6 +228,9 @@ class EncodedAudioOutput : public ModifyingOutput {
   /// Is Available for Write check activated ?
   bool isCheckAvailableForWrite() { return check_available_for_write; }
 
+  /// Activate/Deactivate the Available for Write check: if activated, the write
+  void setCheckAvailableForWrite(bool check) { check_available_for_write = check; }
+
   /// defines the size of the decoded frame in bytes
   void setFrameSize(int size) { frame_size = size; }
 
@@ -412,7 +415,7 @@ class EncodedAudioStream : public ReformatBaseStream {
 
  protected:
   EncodedAudioOutput enc_out;
-  float byte_factor = 2.0f;
+  float byte_factor = 3.0f;
 };
 
 /**

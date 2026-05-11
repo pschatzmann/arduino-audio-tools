@@ -238,8 +238,10 @@ class CatStream : public BaseStream {
     }
     size_t result = p_current_stream->readBytes(data, len);
     if (result == 0) {
-      // try to move to the next stream and read again
-      if (moveToNextStreamOnEnd()) {
+      // Some stream implementations can return available()>0 even when they
+      // already reached the end and return 0 on readBytes(). In this case we
+      // force the switch to the next stream.
+      if (moveToNextStreamOnEnd(true)) {
         result = p_current_stream->readBytes(data, len);
       }
     }
@@ -289,12 +291,14 @@ class CatStream : public BaseStream {
 
   /// moves to the next stream if necessary: returns true if we still have a
   /// valid stream
-  bool moveToNextStreamOnEnd() {
+  bool moveToNextStreamOnEnd(bool force_next_stream = false) {
     // keep on running
-    if (p_current_stream != nullptr && streamAvailable(p_current_stream) > 0)
+    if (!force_next_stream && p_current_stream != nullptr &&
+        streamAvailable(p_current_stream) > 0)
       return true;
     // at end?
-    if ((p_current_stream == nullptr || availableWithTimeout() == 0)) {
+    if ((p_current_stream == nullptr || force_next_stream ||
+         availableWithTimeout() == 0)) {
       if (end_callback && p_current_stream) end_callback(p_current_stream);
       if (p_current_stream) p_current_stream->flush();
       if (!input_streams.empty()) {
