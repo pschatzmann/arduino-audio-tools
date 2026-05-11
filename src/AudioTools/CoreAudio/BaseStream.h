@@ -197,7 +197,7 @@ class AudioStream : public BaseStream, public AudioInfoSupport, public AudioInfo
  */
 class CatStream : public BaseStream {
  public:
-  CatStream(bool beginReset = false) : begin_reset(!beginReset) {}
+  CatStream(bool beginReset = false) : begin_reset(beginReset) {}
 
   void add(Stream *stream) { 
     if (begin_reset)
@@ -228,7 +228,7 @@ class CatStream : public BaseStream {
     if (!moveToNextStreamOnEnd()) {
       return 0;
     }
-    return availableWithTimout();
+    return availableWithTimeout();
   }
 
   size_t readBytes(uint8_t *data, size_t len) override {
@@ -236,7 +236,14 @@ class CatStream : public BaseStream {
     if (!moveToNextStreamOnEnd()) {
       return 0;
     }
-    return p_current_stream->readBytes(data, len);
+    size_t result = p_current_stream->readBytes(data, len);
+    if (result == 0) {
+      // try to move to the next stream and read again
+      if (moveToNextStreamOnEnd()) {
+        result = p_current_stream->readBytes(data, len);
+      }
+    }
+    return result;
   }
 
   /// Returns true if active and we still have data
@@ -250,6 +257,11 @@ class CatStream : public BaseStream {
   /// Defines the callback which is called when a stream is finished
   void setOnEndCallback(void (*callback)(Stream *stream)) {
     end_callback = callback;
+  }
+
+  /// Defines the callback used to determine available bytes for a stream
+  void setAvailableCallback(int (*callback)(Stream *stream)) {
+    available_callback = callback;
   }
 
   /// Defines the timout in ms the system waits for data when moving to the next stream
@@ -272,16 +284,17 @@ class CatStream : public BaseStream {
   bool is_active = false;
   void (*begin_callback)(Stream *stream) = nullptr;
   void (*end_callback)(Stream *stream) = nullptr;
+  int (*available_callback)(Stream *stream) = nullptr;
   bool begin_reset = false;
 
   /// moves to the next stream if necessary: returns true if we still have a
   /// valid stream
   bool moveToNextStreamOnEnd() {
     // keep on running
-    if (p_current_stream != nullptr && p_current_stream->available() > 0)
+    if (p_current_stream != nullptr && streamAvailable(p_current_stream) > 0)
       return true;
     // at end?
-    if ((p_current_stream == nullptr || availableWithTimout() == 0)) {
+    if ((p_current_stream == nullptr || availableWithTimeout() == 0)) {
       if (end_callback && p_current_stream) end_callback(p_current_stream);
       if (!input_streams.empty()) {
         LOGI("using next stream");
@@ -297,16 +310,21 @@ class CatStream : public BaseStream {
     return p_current_stream != nullptr;
   }
 
-  int availableWithTimout() {
-    int result = p_current_stream->available();
+  int availableWithTimeout() {
+    int result = streamAvailable(p_current_stream);
     if (result == 0) {
       for (int j = 0; j < _timeout / 10; j++) {
         delay(10);
-        result = p_current_stream->available();
+        result = streamAvailable(p_current_stream);
         if (result != 0) break;
       }
     }
     return result;
+  }
+
+  int streamAvailable(Stream *stream) {
+    if (stream == nullptr) return 0;
+    return available_callback ? available_callback(stream) : stream->available();
   }
 };
 
