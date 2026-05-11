@@ -371,10 +371,18 @@ class EncodedAudioStream : public ReformatBaseStream {
     reader.end();
   }
 
+  /// Flushes the encoder without tearing down the reader infrastructure.
+  /// Called by TransformationReader on EOF so that final encoded bytes are
+  /// written into the result_queue while it is still the active output.
+  void flush() override {
+    enc_out.encoder().end();
+    enc_out.decoder().end();
+  }
+
   int availableForWrite() override { return enc_out.availableForWrite(); }
 
   size_t write(const uint8_t *data, size_t len) override {
-    // addNotifyOnFirstWrite();
+    // addNotifyOnFirshtWrite();
     return enc_out.write(data, len);
   }
 

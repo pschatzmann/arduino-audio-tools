@@ -179,6 +179,8 @@ class TransformationReader {
         // limit the number of reads which provide 0;
         if (++zero_count > MAX_ZERO_READ_COUNT) {
           is_eof = true;
+          // Flush any buffered/final encoder bytes into result_queue.
+          p_transform->flush();
           break;
         }
         // wait for some more data
@@ -256,6 +258,13 @@ class ReformatBaseStream : public ModifyingStream {
   }
 
   virtual float getByteFactor() = 0;
+
+  /// Called by TransformationReader when EOF is detected on the source stream.
+  /// Override in subclasses to flush any internally buffered encoder/decoder
+  /// data into the current output (which at that point is the result_queue).
+  /// Do NOT call the full end()/begin() cycle here – that would destroy the
+  /// reader's own buffers and reset the is_eof flag.
+  virtual void flush() {}
 
   void end() override {
     TRACED();
