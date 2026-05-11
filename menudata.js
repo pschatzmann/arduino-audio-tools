@@ -251,6 +251,7 @@ var menudata={children:[
 {text:"i",url:"functions_eval.html#index_i"},
 {text:"k",url:"functions_eval.html#index_k"},
 {text:"m",url:"functions_eval.html#index_m"},
+{text:"o",url:"functions_eval.html#index_o"},
 {text:"r",url:"functions_eval.html#index_r"},
 {text:"s",url:"functions_eval.html#index_s"},
 {text:"t",url:"functions_eval.html#index_t"}]},

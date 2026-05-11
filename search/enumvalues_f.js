@@ -17,5 +17,9 @@ var searchData=
   ['rtsp_5fteardown_14',['RTSP_TEARDOWN',['../namespaceaudio__tools.html#a94e969e01854154ac499fa655fe4c470ac30ce4d66eb975dc36de060c17f1042a',1,'audio_tools']]],
   ['rtsp_5funknown_15',['RTSP_UNKNOWN',['../namespaceaudio__tools.html#a94e969e01854154ac499fa655fe4c470ac80ea42e36839de41d195ce13edb68a3',1,'audio_tools']]],
   ['rx_5fmode_16',['RX_MODE',['../group__basic.html#gga8cbd91a8bac9b5ab425112be1620eb49ae5e96b5cebd8b31efa34211ac73abc1e',1,'audio_tools']]],
-  ['rxtx_5fmode_17',['RXTX_MODE',['../group__basic.html#gga8cbd91a8bac9b5ab425112be1620eb49a6f3b87c1abe374d1d1a5fef79bffeb00',1,'audio_tools']]]
+  ['rxcmd_17',['RxCmd',['../classaudio__tools_1_1_s_p_i_audio_slave.html#ac9f1d458299e3a8dda366bb9700ef489a07addcfdd92b1d7f259ff1219b1e9a9b',1,'audio_tools::SPIAudioSlave']]],
+  ['rxlenhi_18',['RxLenHi',['../classaudio__tools_1_1_s_p_i_audio_slave.html#ac9f1d458299e3a8dda366bb9700ef489a102fadbe40121e27991b00b1b6a6d55c',1,'audio_tools::SPIAudioSlave']]],
+  ['rxlenlo_19',['RxLenLo',['../classaudio__tools_1_1_s_p_i_audio_slave.html#ac9f1d458299e3a8dda366bb9700ef489aaf39adceef835e81035add756dae4968',1,'audio_tools::SPIAudioSlave']]],
+  ['rxpayload_20',['RxPayload',['../classaudio__tools_1_1_s_p_i_audio_slave.html#ac9f1d458299e3a8dda366bb9700ef489a4640112807a34f1580f21b2009f14e77',1,'audio_tools::SPIAudioSlave']]],
+  ['rxtx_5fmode_21',['RXTX_MODE',['../group__basic.html#gga8cbd91a8bac9b5ab425112be1620eb49a6f3b87c1abe374d1d1a5fef79bffeb00',1,'audio_tools']]]
 ];
