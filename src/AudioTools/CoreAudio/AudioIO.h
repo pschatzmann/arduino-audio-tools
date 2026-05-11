@@ -40,14 +40,6 @@ class TransformationReader {
     }
   }
 
-  /// Defines the read buffer size for individual reads
-  void resizeReadBuffer(int size) { buffer.resize(size); }
-  /// Defines the queue size for result
-  void resizeResultQueue(int size) {
-    result_queue_buffer.resize(size);
-    result_queue.begin();
-  }
-
   size_t readBytes(uint8_t* data, size_t len) {
     LOGD("TransformationReader::readBytes: %d", (int)len);
     if (!active) {
@@ -59,11 +51,70 @@ class TransformationReader {
       return 0;
     }
 
+    setupBuffers(len);
+
+    fillResultQueue(len);
+
+    int result_len = min((int)len, result_queue.available());
+    result_len = result_queue.readBytes(data, result_len);
+    LOGD("TransformationReader::readBytes: %d -> %d", (int)len, result_len);
+
+    return result_len;
+  }
+
+  /// Fills the internal queue up to at least DEFAULT_BUFFER_SIZE bytes (if possible) and
+  /// reports the currently available queue size limited by max_read_size.
+  int available() {
+    if (!active || p_stream == nullptr || p_transform == nullptr) return 0;
+    setupBuffers(max_read_size);
+    fillResultQueue(max_read_size);
+    int available_bytes = result_queue.available();
+    LOGD("TransformationReader::available: %d", available_bytes);
+    return available_bytes > max_read_size ? max_read_size : available_bytes;
+  }
+
+  void end() {
+    result_queue_buffer.resize(0);
+    buffer.resize(0);
+  }
+
+  /// Defines the queue size dependent on the read size
+  void setResultQueueFactor(int factor) { result_queue_factor = factor; }
+
+  /// Defines the queue size for result
+  void resizeResultQueue(int size) {
+    result_queue_buffer.resize(size);
+    result_queue.begin();
+  }
+
+  void setMaxReadSize(int size) { max_read_size = size; }
+
+ protected:
+  RingBuffer<uint8_t> result_queue_buffer{0};
+  QueueStream<uint8_t> result_queue{result_queue_buffer};  //
+  Stream* p_stream = nullptr;
+  Vector<uint8_t> buffer{0};  // we allocate memory only when needed
+  T* p_transform = nullptr;
+  bool active = false;
+  int result_queue_factor = 5;
+  int max_read_size = DEFAULT_BUFFER_SIZE;
+
+  /// Defines the read buffer size for individual reads
+  void resizeReadBuffer(int size) { buffer.resize(size); }
+  
+  void setupBuffers(size_t len) {
+    float byte_factor = p_transform->getByteFactor();
+    if (byte_factor <= 0.0f) {
+      LOGE("Invalid byte factor: %f", byte_factor);
+      byte_factor = 1.0f;
+    }
+
     // we read half the necessary bytes
-    if (buffer.size() == 0) {
-      int size = (0.5f / p_transform->getByteFactor() * len);
-      // process full samples/frames
-      size = size / 4 * 4;
+    int size = (0.5f / byte_factor * len);
+    // process full samples/frames
+    size = size / 4 * 4;
+    if (size <= 0) size = 4;
+    if (buffer.size() < size) {
       LOGI("read size: %d", size);
       buffer.resize(size);
     }
@@ -75,56 +126,37 @@ class TransformationReader {
       result_queue_buffer.resize(rb_size);
       result_queue.begin();
     }
+  }
 
-    if (result_queue.available() < len) {
-      Print* tmp = setupOutput();
-      int zero_count = 0;
-      while (result_queue.available() < len) {
-        int read_eff = p_stream->readBytes(buffer.data(), buffer.size());
-        if (read_eff > 0) {
-          zero_count = 0;  // reset 0 count
-          if (read_eff != buffer.size()) {
-            LOGD("readBytes %d -> %d", buffer.size(), read_eff);
-          }
-          int write_eff = p_transform->write(buffer.data(), read_eff);
-          if (write_eff != read_eff) {
-            LOGE("TransformationReader::write %d -> %d", read_eff, write_eff);
-          }
-        } else {
-          // limit the number of reads which provide 0;
-          if (++zero_count > MAX_ZERO_READ_COUNT) {
-            break;
-          }
-          // wait for some more data
-          delay(5);
+  /// Fills the result queue until at least len bytes are available or no more
+  /// input data arrives.
+  void fillResultQueue(size_t len) {
+    if (result_queue.available() >= len) return;
+
+    Print* tmp = setupOutput();
+    int zero_count = 0;
+    while (result_queue.available() < len) {
+      int read_eff = p_stream->readBytes(buffer.data(), buffer.size());
+      if (read_eff > 0) {
+        zero_count = 0;  // reset 0 count
+        if (read_eff != buffer.size()) {
+          LOGD("readBytes %d -> %d", buffer.size(), read_eff);
         }
+        int write_eff = p_transform->write(buffer.data(), read_eff);
+        if (write_eff != read_eff) {
+          LOGE("TransformationReader::write %d -> %d", read_eff, write_eff);
+        }
+      } else {
+        // limit the number of reads which provide 0;
+        if (++zero_count > MAX_ZERO_READ_COUNT) {
+          break;
+        }
+        // wait for some more data
+        delay(5);
       }
-      restoreOutput(tmp);
     }
-
-    int result_len = min((int)len, result_queue.available());
-    result_len = result_queue.readBytes(data, result_len);
-    LOGD("TransformationReader::readBytes: %d -> %d", (int)len, result_len);
-
-    return result_len;
+    restoreOutput(tmp);
   }
-
-  void end() {
-    result_queue_buffer.resize(0);
-    buffer.resize(0);
-  }
-
-  /// Defines the queue size dependent on the read size
-  void setResultQueueFactor(int factor) { result_queue_factor = factor; }
-
- protected:
-  RingBuffer<uint8_t> result_queue_buffer{0};
-  QueueStream<uint8_t> result_queue{result_queue_buffer};  //
-  Stream* p_stream = nullptr;
-  Vector<uint8_t> buffer{0};  // we allocate memory only when needed
-  T* p_transform = nullptr;
-  bool active = false;
-  int result_queue_factor = 5;
 
   /// Makes sure that the data  is written to the array
   /// @param data
@@ -185,7 +217,7 @@ class ReformatBaseStream : public ModifyingStream {
   }
 
   int available() override {
-    return DEFAULT_BUFFER_SIZE;  // reader.availableForWrite();
+    return reader.available();
   }
 
   int availableForWrite() override {
@@ -204,10 +236,14 @@ class ReformatBaseStream : public ModifyingStream {
   /// transformationReader().resizeResultQueue(size)
   void resizeReadResultQueue(int size) { reader.resizeResultQueue(size); }
 
+  /// Defines the read buffer size for individual reads: same as transformationReader().setMaxReadSize(size)
+  void setMaxReadSize(int size) { reader.setMaxReadSize(size); }
+
   /// Provides access to the TransformationReader
   virtual TransformationReader<ReformatBaseStream>& transformationReader() {
     return reader;
   }
+
 
  protected:
   TransformationReader<ReformatBaseStream> reader;
