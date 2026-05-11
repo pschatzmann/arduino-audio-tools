@@ -268,7 +268,7 @@ class ReformatBaseStream : public ModifyingStream {
   void resizeReadResultQueue(int size) { reader.resizeResultQueue(size); }
 
   /// same as resizeReadResultQueue(size)
-  void setReadQueueSize(int size) { reader.resizeResultQueue(size); }
+  void setReadResultQueueSize(int size) { reader.resizeResultQueue(size); }
 
   /// Defines the read buffer size for individual reads: same as transformationReader().setMaxReadSize(size)
   void setMaxReadSize(int size) { reader.setMaxReadSize(size); }
