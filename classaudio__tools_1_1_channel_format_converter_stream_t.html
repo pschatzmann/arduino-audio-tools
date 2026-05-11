@@ -161,6 +161,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae7ea43235bd3821c81da4f95c519bba5" id="r_ae7ea43235bd3821c81da4f95c519bba5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_channel_format_converter_stream_t.html#ae7ea43235bd3821c81da4f95c519bba5">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> cfg) <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
 <tr class="memdesc:ae7ea43235bd3821c81da4f95c519bba5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the input <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>.  <br /></td></tr>
 <tr class="separator:ae7ea43235bd3821c81da4f95c519bba5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d0b09a68d0335c2d9204fb1c51e1d23" id="r_a0d0b09a68d0335c2d9204fb1c51e1d23"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_reformat_base_stream.html#a0d0b09a68d0335c2d9204fb1c51e1d23">setMaxReadSize</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> size)</td></tr>
+<tr class="memdesc:a0d0b09a68d0335c2d9204fb1c51e1d23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the read buffer size for individual reads: same as <a class="el" href="classaudio__tools_1_1_reformat_base_stream.html#a86f4c0b2049388db1f243a91cd5a0574" title="Provides access to the TransformationReader.">transformationReader()</a>.setMaxReadSize(size)  <br /></td></tr>
+<tr class="separator:a0d0b09a68d0335c2d9204fb1c51e1d23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a909f118906f9cf7024baae224dcd90a7" id="r_a909f118906f9cf7024baae224dcd90a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a909f118906f9cf7024baae224dcd90a7">setNotifyActive</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">flag</a>)</td></tr>
 <tr class="memdesc:a909f118906f9cf7024baae224dcd90a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivate/Reactivate automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> updates: (default is active)  <br /></td></tr>
 <tr class="separator:a909f118906f9cf7024baae224dcd90a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1083,6 +1086,34 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <p>Defines the input <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_stream.html#acbaca7240bc555603b0da5b7ca11ce10">AudioStream</a>.</p>
+
+</div>
+</div>
+<a id="a0d0b09a68d0335c2d9204fb1c51e1d23" name="a0d0b09a68d0335c2d9204fb1c51e1d23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d0b09a68d0335c2d9204fb1c51e1d23">&#9670;&#160;</a></span>setMaxReadSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> setMaxReadSize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Defines the read buffer size for individual reads: same as <a class="el" href="classaudio__tools_1_1_reformat_base_stream.html#a86f4c0b2049388db1f243a91cd5a0574" title="Provides access to the TransformationReader.">transformationReader()</a>.setMaxReadSize(size) </p>
 
 </div>
 </div>
