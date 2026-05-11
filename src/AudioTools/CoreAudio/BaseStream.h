@@ -189,6 +189,8 @@ class AudioStream : public BaseStream, public AudioInfoSupport, public AudioInfo
  * moving the file pointer to the beginning) and read them back if you want to
  * process them a second time. The default timeout on the available() method is
  * set to 0. This might be too small if you use e.g. a URLStream.
+ * If you set beginReset to true in the constructor, the system will automatically 
+ * reset the streams when begin() is called. 
  * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -197,8 +199,13 @@ class CatStream : public BaseStream {
  public:
   CatStream(bool beginReset = false) : begin_reset(!beginReset) {}
 
-  void add(Stream *stream) { all_streams.push_back(stream); input_streams.push_back(stream); }
-  void add(Stream &stream) { all_streams.push_back(&stream); input_streams.push_back(&stream); }
+  void add(Stream *stream) { 
+    if (begin_reset)
+      all_streams.push_back(stream); 
+    else
+      input_streams.push_back(stream); 
+  }
+  void add(Stream &stream) { add(&stream); }
 
   bool begin() override {
     if (begin_reset) {
