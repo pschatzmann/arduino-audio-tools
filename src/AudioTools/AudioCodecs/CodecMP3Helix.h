@@ -90,7 +90,7 @@ class MP3DecoderHelix : public AudioDecoder {
 
   /// Releases the reserved memory
   void end() override {
-    TRACED();
+    TRACEI();
     if (mp3 != nullptr) mp3->end();
   }
 

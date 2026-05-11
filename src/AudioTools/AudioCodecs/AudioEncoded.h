@@ -246,6 +246,8 @@ class EncodedAudioOutput : public ModifyingOutput {
     return *this;
   }
 
+  bool isEncoder() { return encoder_ptr != undefined; }
+  bool isDecoder() { return decoder_ptr != undefined; }
 
  protected:
   // AudioInfo info;
@@ -375,8 +377,14 @@ class EncodedAudioStream : public ReformatBaseStream {
   /// Called by TransformationReader on EOF so that final encoded bytes are
   /// written into the result_queue while it is still the active output.
   void flush() override {
-    enc_out.encoder().end();
-    enc_out.decoder().end();
+    if (enc_out.isEncoder()) {
+      enc_out.encoder().end();
+      enc_out.encoder().begin();
+    }
+    if (enc_out.isDecoder()) {
+      enc_out.decoder().end();
+      enc_out.decoder().begin();
+    }
   }
 
   int availableForWrite() override { return enc_out.availableForWrite(); }
