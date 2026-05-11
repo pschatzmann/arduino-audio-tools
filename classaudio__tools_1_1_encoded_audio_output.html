@@ -161,9 +161,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ada93b38d090efbbdb87020aca15f7b37" id="r_ada93b38d090efbbdb87020aca15f7b37"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_encoded_audio_output.html#ada93b38d090efbbdb87020aca15f7b37">isCheckAvailableForWrite</a> ()</td></tr>
 <tr class="memdesc:ada93b38d090efbbdb87020aca15f7b37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is Available for Write check activated ?  <br /></td></tr>
 <tr class="separator:ada93b38d090efbbdb87020aca15f7b37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6dc10e631075f88de658db1936a52b3e" id="r_a6dc10e631075f88de658db1936a52b3e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_encoded_audio_output.html#a6dc10e631075f88de658db1936a52b3e">isDecoder</a> ()</td></tr>
+<tr class="separator:a6dc10e631075f88de658db1936a52b3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33c6511baf83796cbba956c97935ae39" id="r_a33c6511baf83796cbba956c97935ae39"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_output.html#a33c6511baf83796cbba956c97935ae39">isDeletable</a> ()</td></tr>
 <tr class="memdesc:a33c6511baf83796cbba956c97935ae39"><td class="mdescLeft">&#160;</td><td class="mdescRight">If true we need to release the related memory in the destructor.  <br /></td></tr>
 <tr class="separator:a33c6511baf83796cbba956c97935ae39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a668091b855dbaea754fcddbbedaa56bb" id="r_a668091b855dbaea754fcddbbedaa56bb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_encoded_audio_output.html#a668091b855dbaea754fcddbbedaa56bb">isEncoder</a> ()</td></tr>
+<tr class="separator:a668091b855dbaea754fcddbbedaa56bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a475bc9908ea8a1d67e5cc1c1f67a71b2" id="r_a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a475bc9908ea8a1d67e5cc1c1f67a71b2">isNotifyActive</a> ()</td></tr>
 <tr class="memdesc:a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> update is active.  <br /></td></tr>
 <tr class="separator:a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -993,6 +997,31 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a6dc10e631075f88de658db1936a52b3e" name="a6dc10e631075f88de658db1936a52b3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6dc10e631075f88de658db1936a52b3e">&#9670;&#160;</a></span>isDecoder()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> isDecoder </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a33c6511baf83796cbba956c97935ae39" name="a33c6511baf83796cbba956c97935ae39"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a33c6511baf83796cbba956c97935ae39">&#9670;&#160;</a></span>isDeletable()</h2>
 
@@ -1019,6 +1048,31 @@ Protected Attributes</h2></td></tr>
 <p>If true we need to release the related memory in the destructor. </p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_adapter_print_to_audio_output.html#a33c6511baf83796cbba956c97935ae39">AdapterPrintToAudioOutput</a>, and <a class="el" href="classaudio__tools_1_1_adapter_audio_stream_to_audio_output.html#a60506cdcdcb4bd5b49e3db66f09c60b8">AdapterAudioStreamToAudioOutput</a>.</p>
+
+</div>
+</div>
+<a id="a668091b855dbaea754fcddbbedaa56bb" name="a668091b855dbaea754fcddbbedaa56bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a668091b855dbaea754fcddbbedaa56bb">&#9670;&#160;</a></span>isEncoder()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> isEncoder </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
