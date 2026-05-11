@@ -296,6 +296,7 @@ class CatStream : public BaseStream {
     // at end?
     if ((p_current_stream == nullptr || availableWithTimeout() == 0)) {
       if (end_callback && p_current_stream) end_callback(p_current_stream);
+      if (p_current_stream) p_current_stream->flush();
       if (!input_streams.empty()) {
         LOGI("using next stream");
         p_current_stream = input_streams[0];
