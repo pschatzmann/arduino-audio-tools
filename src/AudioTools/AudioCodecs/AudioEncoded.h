@@ -385,6 +385,8 @@ class EncodedAudioStream : public ReformatBaseStream {
 
   /// approx compression factor: e.g. mp3 is around 4
   float getByteFactor() override { return byte_factor; }
+
+  /// Define the compression factor: e.g. mp3 is around 4
   void setByteFactor(float factor) { byte_factor = factor; }
 
   /// defines the size of the decoded frame in bytes
