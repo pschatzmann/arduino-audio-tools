@@ -195,15 +195,17 @@ class AudioStream : public BaseStream, public AudioInfoSupport, public AudioInfo
  */
 class CatStream : public BaseStream {
  public:
-  CatStream() = default;
+  CatStream(bool beginReset = false) : begin_reset(!beginReset) {}
 
   void add(Stream *stream) { all_streams.push_back(stream); input_streams.push_back(stream); }
   void add(Stream &stream) { all_streams.push_back(&stream); input_streams.push_back(&stream); }
 
   bool begin() override {
-    // Restore working list from master so we start at the first stream again
-    input_streams.clear();
-    for (auto s : all_streams) input_streams.push_back(s);
+    if (begin_reset) {
+      // Restore working list from master so we start at the first stream again
+      input_streams.clear();
+      for (auto s : all_streams) input_streams.push_back(s);
+    }
     p_current_stream = nullptr;
     is_active = true;
     return true;
@@ -263,6 +265,7 @@ class CatStream : public BaseStream {
   bool is_active = false;
   void (*begin_callback)(Stream *stream) = nullptr;
   void (*end_callback)(Stream *stream) = nullptr;
+  bool begin_reset = false;
 
   /// moves to the next stream if necessary: returns true if we still have a
   /// valid stream
