@@ -29,6 +29,7 @@ class TransformationReader {
     TRACED();
     active = true;
     is_eof = false;
+    total_bytes_read = 0;
     p_stream = source;
     p_transform = transform;
     if (transform == nullptr) {
@@ -59,7 +60,7 @@ class TransformationReader {
     int result_len = min((int)len, result_queue.available());
     result_len = result_queue.readBytes(data, result_len);
     LOGD("TransformationReader::readBytes: %d -> %d", (int)len, result_len);
-
+    total_bytes_read += result_len;
     return result_len;
   }
 
@@ -78,6 +79,8 @@ class TransformationReader {
   void end() {
     result_queue_buffer.resize(0);
     buffer.resize(0);
+    total_bytes_read = 0;
+    active = false;
   }
 
   /// Defines the queue size dependent on the read size
@@ -91,6 +94,8 @@ class TransformationReader {
 
   void setMaxReadSize(int size) { max_read_size = size; }
 
+  size_t getTotalBytesRead() const { return total_bytes_read; }
+
  protected:
   RingBuffer<uint8_t> result_queue_buffer{0};
   QueueStream<uint8_t> result_queue{result_queue_buffer};  //
@@ -102,6 +107,7 @@ class TransformationReader {
   int max_read_size = DEFAULT_BUFFER_SIZE;
   int last_setup_buffer_size = 0;
   bool is_eof = false;
+  size_t total_bytes_read = 0;
 
   /// Defines the read buffer size for individual reads
   void resizeReadBuffer(int size) { buffer.resize(size); }

@@ -369,8 +369,23 @@ class EncodedAudioStream : public ReformatBaseStream {
   }
 
   void end() override {
+    // In read-side mode (decoder reading from stream, output wired to same stream),
+    // redirect decoder output to sink BEFORE flushing, so buffered data 
+    // doesn't write back to the input source stream
+    Print* original_output = nullptr;
+    if (getStream() != nullptr && getPrint() == getStream() && reader.getTotalBytesRead() > 0) {
+      original_output = getPrint();
+      enc_out.setOutput(&null_stream);
+    }
+
+    // Now end the encoder/decoder and reader
     enc_out.end();
     reader.end();
+
+    // Restore the original output
+    if (original_output != nullptr) {
+      enc_out.setOutput(original_output);
+    }
   }
 
   /// Flushes the encoder without tearing down the reader infrastructure.
@@ -432,6 +447,7 @@ class EncodedAudioStream : public ReformatBaseStream {
  protected:
   EncodedAudioOutput enc_out;
   float byte_factor = 3.0f;
+  NullStream null_stream;
 };
 
 /**
