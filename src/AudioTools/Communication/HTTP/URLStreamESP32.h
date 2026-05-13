@@ -282,6 +282,7 @@ class URLStreamESP32 : public AbstractURLStream {
   }
   // ends the request
   virtual void end() override {
+    if (client_handle == nullptr) return;
     esp_http_client_close(client_handle);
     esp_http_client_cleanup(client_handle);
     client_handle = nullptr;
