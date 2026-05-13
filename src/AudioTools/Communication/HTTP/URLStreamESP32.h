@@ -174,6 +174,9 @@ class URLStreamESP32 : public AbstractURLStream {
                      MethodID action = GET, const char* reqMime = "",
                      const char* reqData = "") {
     TRACED();
+    if (client_handle != nullptr) {
+      end();
+    }
     total_read = 0;
     url_str = urlStr;
     content_length = 0;
@@ -281,6 +284,7 @@ class URLStreamESP32 : public AbstractURLStream {
   virtual void end() override {
     esp_http_client_close(client_handle);
     esp_http_client_cleanup(client_handle);
+    client_handle = nullptr;
   }
 
   /// Writes are not supported
