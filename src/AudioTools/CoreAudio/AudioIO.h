@@ -30,6 +30,7 @@ class TransformationReader {
     active = true;
     is_eof = false;
     total_bytes_read = 0;
+    last_setup_buffer_size = 0;
     p_stream = source;
     p_transform = transform;
     if (transform == nullptr) {
@@ -55,7 +56,9 @@ class TransformationReader {
 
     setupBuffers(len);
 
-    fillResultQueue(len);
+    if (!is_eof) {
+      fillResultQueue(len);
+    }
 
     int result_len = min((int)len, result_queue.available());
     result_len = result_queue.readBytes(data, result_len);
@@ -144,6 +147,7 @@ class TransformationReader {
   /// Fills the result queue until at least len bytes are available or no more
   /// input data arrives.
   void fillResultQueue(size_t len) {
+    if (is_eof) return;
     if (result_queue.available() >= len) return;
     LOGD("fillResultQueue: %d", (int)len);
 
