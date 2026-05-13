@@ -486,7 +486,7 @@ var searchData=
   ['setuptx_483',['setupTx',['../classaudio__tools_1_1_analog_audio_arduino.html#a18a4c78da19ab96b6fdd3a1750c71ee1',1,'audio_tools::AnalogAudioArduino']]],
   ['setuptxbuffer_484',['setuptxbuffer',['../classaudio__tools_1_1_audio_b_l_e_server.html#a12c5daa4ca60355e5b9b2110c6e5229e',1,'audio_tools::AudioBLEServer::setupTXBuffer()'],['../classaudio__tools_1_1_audio_b_l_e_server.html#a12c5daa4ca60355e5b9b2110c6e5229e',1,'audio_tools::AudioBLEServer::setupTXBuffer()']]],
   ['setupvideoinfo_485',['setupVideoInfo',['../classaudio__tools_1_1_a_v_i_decoder.html#a14546084b9cac062dc19e61ef2abc8ae',1,'audio_tools::AVIDecoder']]],
-  ['setupwifi_486',['setupwifi',['../classaudio__tools_1_1_wi_fi_e_s_p32.html#aae8b10bacd181105c59ff7dcec412bfd',1,'audio_tools::WiFiESP32::setupWIFI()'],['../classaudio__tools_1_1_e_s_p_now_stream.html#af38bf9588b38f9a84076b74a270a507c',1,'audio_tools::ESPNowStream::setupWiFi()']]],
+  ['setupwifi_486',['setupwifi',['../classaudio__tools_1_1_e_s_p_now_stream.html#af38bf9588b38f9a84076b74a270a507c',1,'audio_tools::ESPNowStream::setupWiFi()'],['../classaudio__tools_1_1_wi_fi_e_s_p32.html#aae8b10bacd181105c59ff7dcec412bfd',1,'audio_tools::WiFiESP32::setupWIFI()']]],
   ['setupwriter_487',['setupWriter',['../classaudio__tools_1_1_tf_lite_audio_stream.html#ad62cb8d4a7dad62469ca62ba32fb0d00',1,'audio_tools::TfLiteAudioStream']]],
   ['seturl_488',['setUrl',['../classaudio__tools_1_1_url.html#ab778908496401da0e107c228bae8aa42',1,'audio_tools::Url']]],
   ['seturlcount_489',['setUrlCount',['../classaudio__tools__hls_1_1_h_l_s_parser.html#a20369e35080b82ef26cd2ca6d90f533a',1,'audio_tools_hls::HLSParser']]],

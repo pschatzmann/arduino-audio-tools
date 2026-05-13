@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['n_0',['n',['../classaudio__tools_1_1_g7xx_decoder.html#a76f11d9a0a47b94f72c2d0e77fb32240',1,'audio_tools::G7xxDecoder::n'],['../group___echo_state.html#ga7722c8ecbb62d99aee7ce68b1752f337',1,'audio_tools::fft_state::N'],['../classaudio__tools_1_1_silence_removal_converter.html#a76f11d9a0a47b94f72c2d0e77fb32240',1,'audio_tools::SilenceRemovalConverter::n']]],
+  ['n_0',['n',['../classaudio__tools_1_1_silence_removal_converter.html#a76f11d9a0a47b94f72c2d0e77fb32240',1,'audio_tools::SilenceRemovalConverter::n'],['../classaudio__tools_1_1_g7xx_decoder.html#a76f11d9a0a47b94f72c2d0e77fb32240',1,'audio_tools::G7xxDecoder::n'],['../group___echo_state.html#ga7722c8ecbb62d99aee7ce68b1752f337',1,'audio_tools::fft_state::N']]],
   ['n_5fopen_5fread_1',['n_open_read',['../classaudio__tools_1_1_object_stream.html#af293f08dbca33f2cfd26d6fbdd3aca24',1,'audio_tools::ObjectStream']]],
   ['name_2',['name',['../structaudio__tools_1_1_m_p4_parser_1_1_container_info.html#a8f8f80d37794cde9472343e4487ba3eb',1,'audio_tools::MP4Parser::ContainerInfo::name'],['../classaudio__tools_1_1_a2_d_p_config.html#a8f8f80d37794cde9472343e4487ba3eb',1,'audio_tools::A2DPConfig::name'],['../classaudio__tools_1_1_measuring_stream.html#a8f8f80d37794cde9472343e4487ba3eb',1,'audio_tools::MeasuringStream::name'],['../structaudio__tools_1_1_file_entry.html#a2053d0508df9ec303c87d5686f0f0008',1,'audio_tools::FileEntry::name'],['../structaudio__tools_1_1_wake_word_detector_1_1_template.html#a8f8f80d37794cde9472343e4487ba3eb',1,'audio_tools::WakeWordDetector::Template::name']]],
   ['name_5fstr_3',['name_str',['../classaudio__tools_1_1_r_t_s_p_format.html#a2f0359a1ec03265170e5c3b4bdd5766f',1,'audio_tools::RTSPFormat']]],
@@ -40,16 +40,17 @@ var searchData=
   ['notifymimecallback_37',['notifyMimeCallback',['../classaudio__tools_1_1_mime_detector.html#a78c812acd68bc5507d5e2cfef84800f6',1,'audio_tools::MimeDetector']]],
   ['nsamplespersec_38',['nSamplesPerSec',['../structaudio__tools_1_1_w_a_v_format_x.html#a8e2a059d6fd44e667381790eaafbb0d2',1,'audio_tools::WAVFormatX']]],
   ['null_39',['null',['../classaudio__tools_1_1_measuring_stream.html#af69f50aa782c3dfb53e6557e4f7c3478',1,'audio_tools::MeasuringStream']]],
-  ['null_5ftcp_5fsocket_40',['NULL_TCP_SOCKET',['../classaudio__tools_1_1_r_t_s_p_platform.html#a7b2b3ecf9dec56a284f751ec0147a3de',1,'audio_tools::RTSPPlatform']]],
-  ['null_5fudp_5fsocket_41',['NULL_UDP_SOCKET',['../classaudio__tools_1_1_r_t_s_p_platform.html#a74185654fd6412b54af7cac2f3a7e3c8',1,'audio_tools::RTSPPlatform']]],
-  ['null_5fvalue_42',['null_value',['../classaudio__tools_1_1_queue_from_vector.html#a7da11fd464bf63fbf0368b2cdaf44f09',1,'audio_tools::QueueFromVector']]],
-  ['num_5fchannels_43',['num_channels',['../struct_v_ban_header.html#a0d69ee703384cb5388d23fb818c39017',1,'VBanHeader']]],
-  ['num_5fframes_44',['num_frames',['../classaudio__tools_1_1_l_c3_decoder.html#a5dcf08066a79d07d20174446ea180257',1,'audio_tools::LC3Decoder::num_frames'],['../classaudio__tools_1_1_l_c3_encoder.html#a5dcf08066a79d07d20174446ea180257',1,'audio_tools::LC3Encoder::num_frames']]],
-  ['num_5fheader_5fpackets_45',['num_header_packets',['../classaudio__tools_1_1_vorbis_decoder.html#a038f210c6ce8be9af89742a05c270688',1,'audio_tools::VorbisDecoder']]],
-  ['num_5frawdata_5fblocks_46',['num_rawdata_blocks',['../structaudio__tools_1_1_a_d_t_s_parser_1_1_a_d_t_s_header.html#a4d03826843f774de6691903500fdf7e9',1,'audio_tools::ADTSParser::ADTSHeader']]],
-  ['num_5fsamples_47',['num_samples',['../structaudio__tools_1_1_wav_i_m_a_audio_info.html#a32bff09a616cee12a2c61815a990152d',1,'audio_tools::WavIMAAudioInfo::num_samples'],['../struct_v_ban_header.html#a6bd874a22b34b2e3f911f90b07c4e6b4',1,'VBanHeader::num_samples']]],
-  ['number_5fof_5fobjects_5fper_5ffile_48',['number_of_objects_per_file',['../classaudio__tools_1_1_n_buffer_file.html#aa949abffc88818a05c2b3fccce85bbb8',1,'audio_tools::NBufferFile']]],
-  ['numberformatconverter_49',['numberFormatConverter',['../classaudio__tools_1_1_format_converter_stream.html#a5fd0c1fc2e0695a1758f613cdde2cd7b',1,'audio_tools::FormatConverterStream']]],
-  ['numnodes_50',['numNodes',['../structaudio__tools_1_1_median_filter_1_1_median_filter__t.html#a844fcbb68efe0411e9296381f7e61094',1,'audio_tools::MedianFilter::MedianFilter_t']]],
-  ['nversion_51',['nversion',['../struct_v_b_a_n___p_i_n_g0.html#a74dccbd76eab0f1331920a8105468e74',1,'VBAN_PING0::nVersion'],['../vban_8h.html#a74dccbd76eab0f1331920a8105468e74',1,'nVersion:&#160;vban.h']]]
+  ['null_5fstream_40',['null_stream',['../classaudio__tools_1_1_encoded_audio_stream.html#ab20577f8f87c926faa283062042639c5',1,'audio_tools::EncodedAudioStream']]],
+  ['null_5ftcp_5fsocket_41',['NULL_TCP_SOCKET',['../classaudio__tools_1_1_r_t_s_p_platform.html#a7b2b3ecf9dec56a284f751ec0147a3de',1,'audio_tools::RTSPPlatform']]],
+  ['null_5fudp_5fsocket_42',['NULL_UDP_SOCKET',['../classaudio__tools_1_1_r_t_s_p_platform.html#a74185654fd6412b54af7cac2f3a7e3c8',1,'audio_tools::RTSPPlatform']]],
+  ['null_5fvalue_43',['null_value',['../classaudio__tools_1_1_queue_from_vector.html#a7da11fd464bf63fbf0368b2cdaf44f09',1,'audio_tools::QueueFromVector']]],
+  ['num_5fchannels_44',['num_channels',['../struct_v_ban_header.html#a0d69ee703384cb5388d23fb818c39017',1,'VBanHeader']]],
+  ['num_5fframes_45',['num_frames',['../classaudio__tools_1_1_l_c3_decoder.html#a5dcf08066a79d07d20174446ea180257',1,'audio_tools::LC3Decoder::num_frames'],['../classaudio__tools_1_1_l_c3_encoder.html#a5dcf08066a79d07d20174446ea180257',1,'audio_tools::LC3Encoder::num_frames']]],
+  ['num_5fheader_5fpackets_46',['num_header_packets',['../classaudio__tools_1_1_vorbis_decoder.html#a038f210c6ce8be9af89742a05c270688',1,'audio_tools::VorbisDecoder']]],
+  ['num_5frawdata_5fblocks_47',['num_rawdata_blocks',['../structaudio__tools_1_1_a_d_t_s_parser_1_1_a_d_t_s_header.html#a4d03826843f774de6691903500fdf7e9',1,'audio_tools::ADTSParser::ADTSHeader']]],
+  ['num_5fsamples_48',['num_samples',['../structaudio__tools_1_1_wav_i_m_a_audio_info.html#a32bff09a616cee12a2c61815a990152d',1,'audio_tools::WavIMAAudioInfo::num_samples'],['../struct_v_ban_header.html#a6bd874a22b34b2e3f911f90b07c4e6b4',1,'VBanHeader::num_samples']]],
+  ['number_5fof_5fobjects_5fper_5ffile_49',['number_of_objects_per_file',['../classaudio__tools_1_1_n_buffer_file.html#aa949abffc88818a05c2b3fccce85bbb8',1,'audio_tools::NBufferFile']]],
+  ['numberformatconverter_50',['numberFormatConverter',['../classaudio__tools_1_1_format_converter_stream.html#a5fd0c1fc2e0695a1758f613cdde2cd7b',1,'audio_tools::FormatConverterStream']]],
+  ['numnodes_51',['numNodes',['../structaudio__tools_1_1_median_filter_1_1_median_filter__t.html#a844fcbb68efe0411e9296381f7e61094',1,'audio_tools::MedianFilter::MedianFilter_t']]],
+  ['nversion_52',['nversion',['../struct_v_b_a_n___p_i_n_g0.html#a74dccbd76eab0f1331920a8105468e74',1,'VBAN_PING0::nVersion'],['../vban_8h.html#a74dccbd76eab0f1331920a8105468e74',1,'nVersion:&#160;vban.h']]]
 ];

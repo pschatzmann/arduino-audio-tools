@@ -96,6 +96,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a122055b2ed7a47728ee984d173696ba3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf81d3fdaf258088d7692fa70cece087" id="r_aaf81d3fdaf258088d7692fa70cece087"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_transformation_reader.html#aaf81d3fdaf258088d7692fa70cece087">end</a> ()</td></tr>
 <tr class="separator:aaf81d3fdaf258088d7692fa70cece087"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99e5c4f1cc67aaf28d48b745368589da" id="r_a99e5c4f1cc67aaf28d48b745368589da"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_transformation_reader.html#a99e5c4f1cc67aaf28d48b745368589da">getTotalBytesRead</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a></td></tr>
+<tr class="separator:a99e5c4f1cc67aaf28d48b745368589da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8920918d9e0a1390082b2e660c954c8b" id="r_a8920918d9e0a1390082b2e660c954c8b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_transformation_reader.html#a8920918d9e0a1390082b2e660c954c8b">readBytes</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *data, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> len)</td></tr>
 <tr class="separator:a8920918d9e0a1390082b2e660c954c8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acff6b7e7b7c1096ae56b090c1c19289a" id="r_acff6b7e7b7c1096ae56b090c1c19289a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_transformation_reader.html#acff6b7e7b7c1096ae56b090c1c19289a">resizeResultQueue</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> size)</td></tr>
@@ -144,6 +146,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a38da16b57e2083df5b2b5fe31dd5775e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af19045b5b637af0cd1d84019148260f0" id="r_af19045b5b637af0cd1d84019148260f0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_transformation_reader.html#af19045b5b637af0cd1d84019148260f0">result_queue_factor</a> = 5</td></tr>
 <tr class="separator:af19045b5b637af0cd1d84019148260f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75aa3d0ad37966240173294a77916f61" id="r_a75aa3d0ad37966240173294a77916f61"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_transformation_reader.html#a75aa3d0ad37966240173294a77916f61">total_bytes_read</a> = 0</td></tr>
+<tr class="separator:a75aa3d0ad37966240173294a77916f61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>&gt;<br />
@@ -285,6 +289,33 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 </table>
 </div><div class="memdoc">
 <p>Fills the result queue until at least len bytes are available or no more input data arrives. </p>
+
+</div>
+</div>
+<a id="a99e5c4f1cc67aaf28d48b745368589da" name="a99e5c4f1cc67aaf28d48b745368589da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99e5c4f1cc67aaf28d48b745368589da">&#9670;&#160;</a></span>getTotalBytesRead()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> getTotalBytesRead </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -772,6 +803,30 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> result_queue_factor = 5</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a75aa3d0ad37966240173294a77916f61" name="a75aa3d0ad37966240173294a77916f61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75aa3d0ad37966240173294a77916f61">&#9670;&#160;</a></span>total_bytes_read</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> total_bytes_read = 0</td>
         </tr>
       </table>
   </td>
