@@ -2034,9 +2034,9 @@ class CallbackConverterT : public BaseConverter {
   }
 
   size_t convert(uint8_t *src, size_t size) {
+    // no conversion if no callback is provided
     if (callback == nullptr) {
-      LOGE("Callback is not set");
-      return 0;
+      return size;
     }
     int samples = size / sizeof(T);
     T *srcT = (T *)src;
