@@ -2025,10 +2025,10 @@ class CallbackConverterT : public BaseConverter {
  public:
   CallbackConverterT() = default;
   CallbackConverterT(T (*callback)(T in, int channel), int channels = 2) {
-    setCallbacks(callback, channels);
+    setCallback(callback, channels);
   }
 
-  void setCallbacks(T (*callback)(T in, int channel), int channels) {
+  void setCallback(T (*callback)(T in, int channel), int channels) {
     this->callback = callback;
     this->channels = channels;
   }
