@@ -1998,6 +1998,24 @@ class CopyChannels : public BaseConverter {
 };
 
 /**
+ * @brief Inverts the signal (multiplies every sample by -1)
+ * @ingroup convert
+ * @tparam T
+ */
+template <typename T = int16_t>
+class ConverterInvert : public BaseConverter {
+ public:
+  size_t convert(uint8_t *src, size_t size) override {
+    T *data = (T *)src;
+    int samples = size / sizeof(T);
+    for (int j = 0; j < samples; j++) {
+      data[j] = -data[j];
+    }
+    return size;
+  }
+};
+
+/**
  * @brief You can provide a lambda expression to convert the data
  * @ingroup convert
  * @tparam T
@@ -2005,12 +2023,21 @@ class CopyChannels : public BaseConverter {
 template <typename T = int16_t>
 class CallbackConverterT : public BaseConverter {
  public:
+  CallbackConverterT() = default;
   CallbackConverterT(T (*callback)(T in, int channel), int channels = 2) {
+    setCallbacks(callback, channels);
+  }
+
+  void setCallbacks(T (*callback)(T in, int channel), int channels) {
     this->callback = callback;
     this->channels = channels;
   }
 
   size_t convert(uint8_t *src, size_t size) {
+    if (callback == nullptr) {
+      LOGE("Callback is not set");
+      return 0;
+    }
     int samples = size / sizeof(T);
     T *srcT = (T *)src;
     for (int j = 0; j < samples; j++) {
@@ -2020,8 +2047,11 @@ class CallbackConverterT : public BaseConverter {
   }
 
  protected:
-  T (*callback)(T in, int channel);
-  int channels;
+  T (*callback)(T in, int channel) = nullptr;
+  int channels = 2;
 };
+
+/// CallbackConverter with int16_t as default type
+using CallbackConverter = CallbackConverterT<int16_t>;
 
 }  // namespace audio_tools
