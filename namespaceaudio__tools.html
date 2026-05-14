@@ -637,6 +637,9 @@ size_t size)</a> and <a class="el" href="classaudio__tools_1_1_base_stream.html#
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_converter_fill_left_and_right.html">ConverterFillLeftAndRight</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make sure that both channels contain any data. We copy the data from the non-empty channel to the empty one.  <a href="classaudio__tools_1_1_converter_fill_left_and_right.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_converter_invert.html">ConverterInvert</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inverts the signal (multiplies every sample by -1)  <a href="classaudio__tools_1_1_converter_invert.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_converter_n_channels.html">ConverterNChannels</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converter for n Channels which applies the indicated <a class="el" href="classaudio__tools_1_1_filter.html" title="Abstract filter interface definition;.">Filter</a>.  <a href="classaudio__tools_1_1_converter_n_channels.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2111,6 +2114,9 @@ Typedefs</h2></td></tr>
 <tr class="memitem:ga14694aaf4d36cc9526a528a395f2f258" id="r_ga14694aaf4d36cc9526a528a395f2f258"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__buffers.html#ga14694aaf4d36cc9526a528a395f2f258">BufferRP2040</a> = <a class="el" href="classaudio__tools_1_1_buffer_r_p2040_t.html">BufferRP2040T</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> &gt;</td></tr>
 <tr class="memdesc:ga14694aaf4d36cc9526a528a395f2f258"><td class="mdescLeft">&#160;</td><td class="mdescRight">RP2040 specific buffer for audio data.  <br /></td></tr>
 <tr class="separator:ga14694aaf4d36cc9526a528a395f2f258"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4a5cd97442eb14f9966936adcc47210" id="r_ae4a5cd97442eb14f9966936adcc47210"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ae4a5cd97442eb14f9966936adcc47210">CallbackConverter</a> = <a class="el" href="classaudio__tools_1_1_callback_converter_t.html">CallbackConverterT</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int16_t</a> &gt;</td></tr>
+<tr class="memdesc:ae4a5cd97442eb14f9966936adcc47210"><td class="mdescLeft">&#160;</td><td class="mdescRight">CallbackConverter with int16_t as default type.  <br /></td></tr>
+<tr class="separator:ae4a5cd97442eb14f9966936adcc47210"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga99bc7077b04cd39e72f3b82b652b6d24" id="r_ga99bc7077b04cd39e72f3b82b652b6d24"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__io.html#ga99bc7077b04cd39e72f3b82b652b6d24">Chart</a> = <a class="el" href="classaudio__tools_1_1_chart_t.html">ChartT</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int16_t</a> &gt;</td></tr>
 <tr class="memdesc:ga99bc7077b04cd39e72f3b82b652b6d24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default chart type for Jupyter integration.  <br /></td></tr>
 <tr class="separator:ga99bc7077b04cd39e72f3b82b652b6d24"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -3048,6 +3054,22 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae4a5cd97442eb14f9966936adcc47210" name="ae4a5cd97442eb14f9966936adcc47210"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4a5cd97442eb14f9966936adcc47210">&#9670;&#160;</a></span>CallbackConverter</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">using</a> <a class="el" href="namespaceaudio__tools.html#ae4a5cd97442eb14f9966936adcc47210">CallbackConverter</a> =  <a class="el" href="classaudio__tools_1_1_callback_converter_t.html">CallbackConverterT</a>&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int16_t</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>CallbackConverter with int16_t as default type. </p>
 
 </div>
 </div>
