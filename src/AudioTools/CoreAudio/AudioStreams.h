@@ -134,7 +134,7 @@ class MemoryStream : public AudioStream {
     return begin();
   }
 
-  /// resets the read pointer
+  /// resets the read pointer and write pointer if the memory is changeable
   bool begin() override {
     TRACED();
     write_pos = memoryCanChange() ? 0 : buffer_size;
@@ -144,6 +144,13 @@ class MemoryStream : public AudioStream {
     read_pos = 0;
     is_active = this->buffer != nullptr;
     return is_active;
+  }
+
+  /// Resets the read pointer
+  void rewind() {
+    if (buffer != nullptr && buffer_size > 0) {
+      read_pos = 0;
+    }
   }
 
   virtual size_t write(uint8_t byte) override {
@@ -181,7 +188,7 @@ class MemoryStream : public AudioStream {
       read_pos = rewind_pos;
       result = write_pos - read_pos;
       // call callback
-      if (rewind != nullptr) rewind();
+      if (rewind_cb != nullptr) rewind_cb();
     }
     return is_loop ? DEFAULT_BUFFER_SIZE : result;
   }
@@ -290,10 +297,17 @@ class MemoryStream : public AudioStream {
   virtual uint8_t *data() { return buffer; }
 
   /// update the write_pos (e.g. when we used data() to update the array)
-  virtual void setAvailable(size_t len) { this->write_pos = len; }
+  virtual bool setAvailable(size_t len) { 
+    if (len <= buffer_size) {
+      write_pos = len;
+      if (read_pos > write_pos) read_pos = write_pos;
+      return true;
+    }
+    return false;
+  }
 
   /// Callback which is executed when we rewind (in loop mode) to the beginning
-  void setRewindCallback(void (*cb)()) { this->rewind = cb; }
+  void setRewindCallback(void (*cb)()) { this->rewind_cb = cb; }
 
   /// Update the values  (buffer and size)
   void setValue(const uint8_t *buffer, int buffer_size,
@@ -313,7 +327,7 @@ class MemoryStream : public AudioStream {
   uint8_t *buffer = nullptr;
   MemoryType memory_type = RAM;
   bool is_loop = false;
-  void (*rewind)() = nullptr;
+  void (*rewind_cb)() = nullptr;
   bool is_active = false;
   bool owns_memory = true;
 
@@ -321,13 +335,44 @@ class MemoryStream : public AudioStream {
 
   void copy(MemoryStream &source) {
     if (this == &source) return;
-    if (source.memory_type == FLASH_RAM) {
-      setValue(source.buffer, source.buffer_size, source.memory_type);
-    } else {
-      setValue(nullptr, source.buffer_size, source.memory_type);
-      resize(buffer_size);
-      memcpy(buffer, source.buffer, buffer_size);
+
+    // Release currently owned mutable buffer.
+    if (memoryCanChange() && owns_memory && buffer != nullptr) {
+      free(buffer);
+      buffer = nullptr;
     }
+
+    // Shallow copy for FLASH memory source.
+    if (source.memory_type == FLASH_RAM) {
+      owns_memory = false;
+      setValue(source.buffer, source.buffer_size, source.memory_type);
+      is_active = source.is_active;
+      is_loop = source.is_loop;
+      rewind_pos = source.rewind_pos;
+      return;
+    }
+
+    // Deep copy for mutable source memory.
+    owns_memory = true;
+    setValue(nullptr, source.buffer_size, source.memory_type);
+    if (!resize(source.buffer_size)) {
+      setValue(nullptr, 0, source.memory_type);
+      is_active = false;
+      return;
+    }
+
+    if (source.buffer != nullptr && source.buffer_size > 0) {
+      memcpy(buffer, source.buffer, source.buffer_size);
+    }
+
+    write_pos = source.write_pos;
+    read_pos = source.read_pos;
+    if (write_pos > buffer_size) write_pos = buffer_size;
+    if (read_pos > write_pos) read_pos = write_pos;
+
+    is_active = source.is_active;
+    is_loop = source.is_loop;
+    rewind_pos = source.rewind_pos;
   }
 };
 
