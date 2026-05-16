@@ -131,7 +131,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a6ff0d6d1b0f3f9b652c9d5298ed0863c" id="r_a6ff0d6d1b0f3f9b652c9d5298ed0863c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_memory_stream.html#a6ff0d6d1b0f3f9b652c9d5298ed0863c">availableForWrite</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
 <tr class="separator:a6ff0d6d1b0f3f9b652c9d5298ed0863c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acba365cc28eb702040c382646cfb0a7a" id="r_acba365cc28eb702040c382646cfb0a7a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_memory_stream.html#acba365cc28eb702040c382646cfb0a7a">begin</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
-<tr class="memdesc:acba365cc28eb702040c382646cfb0a7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">resets the read pointer  <br /></td></tr>
+<tr class="memdesc:acba365cc28eb702040c382646cfb0a7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">resets the read pointer and write pointer if the memory is changeable  <br /></td></tr>
 <tr class="separator:acba365cc28eb702040c382646cfb0a7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1a0fe2d8421c464e2b0d0fe10690fb1" id="r_af1a0fe2d8421c464e2b0d0fe10690fb1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_memory_stream.html#af1a0fe2d8421c464e2b0d0fe10690fb1">begin</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> <a class="el" href="classaudio__tools_1_1_audio_stream.html#a47385aa19435f5fca9d3083a748258c5">info</a>)</td></tr>
 <tr class="memdesc:af1a0fe2d8421c464e2b0d0fe10690fb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define some audio info and start the processing.  <br /></td></tr>
@@ -172,12 +172,15 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aa5b1cdb06807ff2dc37acbaff63410b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a830b232eab9268993f69dfe9029cfbfc" id="r_a830b232eab9268993f69dfe9029cfbfc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_memory_stream.html#a830b232eab9268993f69dfe9029cfbfc">resize</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> size)</td></tr>
 <tr class="separator:a830b232eab9268993f69dfe9029cfbfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8734e666421c9fe3b6380a818c6c727" id="r_ab8734e666421c9fe3b6380a818c6c727"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_memory_stream.html#ab8734e666421c9fe3b6380a818c6c727">rewind</a> ()</td></tr>
+<tr class="memdesc:ab8734e666421c9fe3b6380a818c6c727"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the read pointer.  <br /></td></tr>
+<tr class="separator:ab8734e666421c9fe3b6380a818c6c727"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acbaca7240bc555603b0da5b7ca11ce10" id="r_acbaca7240bc555603b0da5b7ca11ce10"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_stream.html#acbaca7240bc555603b0da5b7ca11ce10">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">newInfo</a>) <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
 <tr class="memdesc:acbaca7240bc555603b0da5b7ca11ce10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the input <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>.  <br /></td></tr>
 <tr class="separator:acbaca7240bc555603b0da5b7ca11ce10"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2475765a13783c137777f8f789b6f1b7" id="r_a2475765a13783c137777f8f789b6f1b7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_memory_stream.html#a2475765a13783c137777f8f789b6f1b7">setAvailable</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> len)</td></tr>
-<tr class="memdesc:a2475765a13783c137777f8f789b6f1b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">update the write_pos (e.g. when we used <a class="el" href="classaudio__tools_1_1_memory_stream.html#a22c94dfd2fea33980cde1b76a3f951d4" title="Provides access to the data array.">data()</a> to update the array)  <br /></td></tr>
-<tr class="separator:a2475765a13783c137777f8f789b6f1b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a861a64abdad0e7ec7b43bffed8d5a033" id="r_a861a64abdad0e7ec7b43bffed8d5a033"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_memory_stream.html#a861a64abdad0e7ec7b43bffed8d5a033">setAvailable</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> len)</td></tr>
+<tr class="memdesc:a861a64abdad0e7ec7b43bffed8d5a033"><td class="mdescLeft">&#160;</td><td class="mdescRight">update the write_pos (e.g. when we used <a class="el" href="classaudio__tools_1_1_memory_stream.html#a22c94dfd2fea33980cde1b76a3f951d4" title="Provides access to the data array.">data()</a> to update the array)  <br /></td></tr>
+<tr class="separator:a861a64abdad0e7ec7b43bffed8d5a033"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a808d67693c38dccdc6b4692c65d6c36f" id="r_a808d67693c38dccdc6b4692c65d6c36f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_memory_stream.html#a808d67693c38dccdc6b4692c65d6c36f">setLoop</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> <a class="el" href="_main_8h.html#afe461d27b9c48d5921c00d521181f12f">loop</a>)</td></tr>
 <tr class="separator:a808d67693c38dccdc6b4692c65d6c36f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e4ae65bd44173065f2f147b96bb9fcc" id="r_a0e4ae65bd44173065f2f147b96bb9fcc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_memory_stream.html#a0e4ae65bd44173065f2f147b96bb9fcc">setLoop</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> <a class="el" href="_main_8h.html#afe461d27b9c48d5921c00d521181f12f">loop</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">rewindPos</a>)</td></tr>
@@ -240,8 +243,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a9c24680fbb45bc25b0e34d9101777db8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a982799cad8860676b1ff27b9efbd1992" id="r_a982799cad8860676b1ff27b9efbd1992"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_memory_stream.html#a982799cad8860676b1ff27b9efbd1992">read_pos</a> = 0</td></tr>
 <tr class="separator:a982799cad8860676b1ff27b9efbd1992"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa8018eac8572790c86a9dd67a22bb15e" id="r_aa8018eac8572790c86a9dd67a22bb15e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_memory_stream.html#aa8018eac8572790c86a9dd67a22bb15e">rewind</a> )() = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td></tr>
-<tr class="separator:aa8018eac8572790c86a9dd67a22bb15e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74d3cc7abc20a631c85962832b908ce5" id="r_a74d3cc7abc20a631c85962832b908ce5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_memory_stream.html#a74d3cc7abc20a631c85962832b908ce5">rewind_cb</a> )() = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td></tr>
+<tr class="separator:a74d3cc7abc20a631c85962832b908ce5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab47df03c38e223e1a3a7f397e17d98f6" id="r_ab47df03c38e223e1a3a7f397e17d98f6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_memory_stream.html#ab47df03c38e223e1a3a7f397e17d98f6">rewind_pos</a> = 0</td></tr>
 <tr class="separator:ab47df03c38e223e1a3a7f397e17d98f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf64bd29ec689f2d7574efbb63f440bb" id="r_adf64bd29ec689f2d7574efbb63f440bb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#adf64bd29ec689f2d7574efbb63f440bb">tmp_in</a> {0}</td></tr>
@@ -618,7 +621,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>resets the read pointer </p>
+<p>resets the read pointer and write pointer if the memory is changeable </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_base_stream.html#a50f45551c10ca30a0bc7f447e70188b1">BaseStream</a>.</p>
 
@@ -1197,6 +1200,33 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ab8734e666421c9fe3b6380a818c6c727" name="ab8734e666421c9fe3b6380a818c6c727"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8734e666421c9fe3b6380a818c6c727">&#9670;&#160;</a></span>rewind()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> rewind </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Resets the read pointer. </p>
+
+</div>
+</div>
 <a id="acbaca7240bc555603b0da5b7ca11ce10" name="acbaca7240bc555603b0da5b7ca11ce10"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acbaca7240bc555603b0da5b7ca11ce10">&#9670;&#160;</a></span>setAudioInfo()</h2>
 
@@ -1229,8 +1259,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a2475765a13783c137777f8f789b6f1b7" name="a2475765a13783c137777f8f789b6f1b7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2475765a13783c137777f8f789b6f1b7">&#9670;&#160;</a></span>setAvailable()</h2>
+<a id="a861a64abdad0e7ec7b43bffed8d5a033" name="a861a64abdad0e7ec7b43bffed8d5a033"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a861a64abdad0e7ec7b43bffed8d5a033">&#9670;&#160;</a></span>setAvailable()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1239,7 +1269,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> setAvailable </td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> setAvailable </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td>
           <td class="paramname"><em>len</em></td><td>)</td>
@@ -1785,8 +1815,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aa8018eac8572790c86a9dd67a22bb15e" name="aa8018eac8572790c86a9dd67a22bb15e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa8018eac8572790c86a9dd67a22bb15e">&#9670;&#160;</a></span>rewind</h2>
+<a id="a74d3cc7abc20a631c85962832b908ce5" name="a74d3cc7abc20a631c85962832b908ce5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74d3cc7abc20a631c85962832b908ce5">&#9670;&#160;</a></span>rewind_cb</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1795,7 +1825,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(* rewind) () = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(* rewind_cb) () = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td>
         </tr>
       </table>
   </td>

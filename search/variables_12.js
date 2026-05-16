@@ -94,7 +94,7 @@ var searchData=
   ['retry_5fcount_91',['retry_count',['../classaudio__tools_1_1_input_mixer.html#a79d9a1941d35eea97ea57ea98d6ac2ae',1,'audio_tools::InputMixer']]],
   ['retry_5fdelay_92',['retry_delay',['../classaudio__tools_1_1_stream_copy_t.html#aac5d62cce645f39d44792eca4071d1f5',1,'audio_tools::StreamCopyT']]],
   ['retrylimit_93',['retryLimit',['../classaudio__tools_1_1_stream_copy_t.html#afb979c0f6484eb68b25422fbb9a26dc6',1,'audio_tools::StreamCopyT']]],
-  ['rewind_94',['rewind',['../classaudio__tools_1_1_memory_stream.html#aa8018eac8572790c86a9dd67a22bb15e',1,'audio_tools::MemoryStream']]],
+  ['rewind_5fcb_94',['rewind_cb',['../classaudio__tools_1_1_memory_stream.html#a74d3cc7abc20a631c85962832b908ce5',1,'audio_tools::MemoryStream']]],
   ['rewind_5fpos_95',['rewind_pos',['../classaudio__tools_1_1_memory_stream.html#ab47df03c38e223e1a3a7f397e17d98f6',1,'audio_tools::MemoryStream::rewind_pos'],['../classaudio__tools_1_1_file_loop_t.html#ab47df03c38e223e1a3a7f397e17d98f6',1,'audio_tools::FileLoopT::rewind_pos']]],
   ['rf_96',['Rf',['../group___echo_state.html#gab54f06480a61046e51545951690479d8',1,'audio_tools::EchoState_']]],
   ['rfft_5fadd_97',['rfft_add',['../classaudio__tools_1_1_audio_f_f_t_base.html#ab584bdaa085f64bb4fd7253a32b3b8ef',1,'audio_tools::AudioFFTBase']]],
