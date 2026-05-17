@@ -73,7 +73,10 @@ class EncodedAudioOutput : public ModifyingOutput {
   /// Define object which need to be notified if the basinfo is changing
   void addNotifyAudioChange(AudioInfoSupport &bi) override {
     TRACEI();
-    decoder_ptr->addNotifyAudioChange(bi);
+    AudioOutput::addNotifyAudioChange(bi);
+    if (decoder_ptr != undefined) {
+      decoder_ptr->addNotifyAudioChange(bi);
+    }
   }
 
   AudioInfo defaultConfig() {
@@ -146,6 +149,9 @@ class EncodedAudioOutput : public ModifyingOutput {
     writer_ptr = decoder;
     if (ptr_out != nullptr) {
       decoder_ptr->setOutput(*ptr_out);
+    }
+    for (auto n : notify_vector) {
+      if (n != nullptr) decoder_ptr->addNotifyAudioChange(*n);
     }
   }
 
