@@ -12,6 +12,7 @@ Because we need a lot of progmem, do not forget to set the partition scheme to H
 
 - https://github.com/pschatzmann/ESP32-A2DP.git
 - https://github.com/pschatzmann/arduino-simple-tts
+- https://github.com/pschatzmann/arduino-libhelix
 
 
 A word of warning: The A2DP output has it's challenges, so I do not recommend this as your first sketch.
