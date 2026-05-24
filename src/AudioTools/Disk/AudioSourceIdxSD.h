@@ -70,6 +70,7 @@ public:
   }
 
   void end() {
+    file.close();
     SD.end();
     is_sd_setup = false;
   }
@@ -85,6 +86,7 @@ public:
     file_name = idx[index];
     if (file_name==nullptr) return nullptr;
     LOGI("Using file %s", file_name);
+    file.close();
     file = SD.open(file_name);
     return file ? &file : nullptr;
   }

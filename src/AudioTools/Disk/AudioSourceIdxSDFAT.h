@@ -85,6 +85,7 @@ class AudioSourceIdxSDFAT : public AudioSource {
 
   void end() {
     if (is_sd_setup) {
+    file.close();
 #ifdef ESP32
       if (is_close_sd) sd.end();
 #endif
