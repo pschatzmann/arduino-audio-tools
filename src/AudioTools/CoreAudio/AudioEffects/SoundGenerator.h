@@ -222,7 +222,7 @@ template <class T = int16_t>
 class SineGenerator : public SoundGenerator<T> {
  public:
   // the scale defines the max value which is generated
-  SineGenerator(float amplitude = 0.9f * NumberConverter::maxValueT<T>(),
+  SineGenerator(float amplitude = NumberConverter::maxValueT<T>(),
                     float phase = 0.0f) {
     LOGD("SineGenerator");
     m_amplitude = amplitude;
@@ -325,7 +325,7 @@ using SineWaveGenerator = SineGenerator<T>;
 template <class T = int16_t>
 class FastSineGenerator : public SineGenerator<T> {
  public:
-  FastSineGenerator(float amplitude = 32767.0, float phase = 0.0)
+  FastSineGenerator(float amplitude = NumberConverter::maxValueT<T>(), float phase = 0.0)
       : SineGenerator<T>(amplitude, phase) {
     LOGD("FastSineGenerator");
   }
@@ -361,7 +361,7 @@ class FastSineGenerator : public SineGenerator<T> {
 template <class T = int16_t>
 class SquareWaveGenerator : public FastSineGenerator<T> {
  public:
-  SquareWaveGenerator(float amplitude = 32767.0f, float phase = 0.0f)
+  SquareWaveGenerator(float amplitude = NumberConverter::maxValueT<T>(), float phase = 0.0f)
       : FastSineGenerator<T>(amplitude, phase) {
     LOGD("SquareWaveGenerator");
   }
@@ -388,7 +388,7 @@ class SquareWaveGenerator : public FastSineGenerator<T> {
 template <class T = int16_t>
 class SawToothGenerator : public SineGenerator<T> {
  public:
-  SawToothGenerator(float amplitude = 32767.0, float phase = 0.0)
+  SawToothGenerator(float amplitude = NumberConverter::maxValueT<T>(), float phase = 0.0)
       : SineGenerator<T>(amplitude, phase) {
     LOGD("SawToothGenerator");
   }
@@ -783,7 +783,7 @@ class GeneratorFixedValue : public SoundGenerator<T> {
 template <class T = int16_t>
 class SineFromTable : public SoundGenerator<T> {
  public:
-  SineFromTable(float amplitude = 32767.0) {
+  SineFromTable(float amplitude = NumberConverter::maxValueT<T>()) {
     this->amplitude = amplitude;
     this->amplitude_to_be = amplitude;
   }
