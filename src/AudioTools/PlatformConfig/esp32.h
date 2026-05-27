@@ -16,6 +16,14 @@
 #  define USE_PDM
 #  define USE_PDM_RX
 #endif
+#if defined(ESP32)  && defined(CONFIG_IDF_TARGET_ESP32S31)
+#  define ESP32S31
+#  define ESP32S3
+#  define ESP32X
+#  define USE_TDM
+#  define USE_PDM
+#  define USE_PDM_RX
+#endif
 #if defined(ESP32)  && defined(CONFIG_IDF_TARGET_ESP32C3)
 #  define ESP32C3
 #  define ESP32X
