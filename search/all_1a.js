@@ -42,7 +42,7 @@ var searchData=
   ['wifi_39',['wifi',['../classaudio__tools_1_1_audio_player_protocol_server.html#add3b8ef2d0bc9c453e144f2a2bd82e91',1,'audio_tools::AudioPlayerProtocolServer::wifi'],['../classaudio__tools_1_1_audio_server_ex.html#add3b8ef2d0bc9c453e144f2a2bd82e91',1,'audio_tools::AudioServerEx::wifi']]],
   ['wifi_5fmode_40',['wifi_mode',['../structaudio__tools_1_1_e_s_p_now_stream_config.html#a14d88572ae50a8d21f3e6605e6f059e8',1,'audio_tools::ESPNowStreamConfig']]],
   ['wifi_5fsta_5fevent_5fhandler_41',['wifi_sta_event_handler',['../classaudio__tools_1_1_wi_fi_e_s_p32.html#aa37d3daae7606e7d1b10881f3fe9f8a3',1,'audio_tools::WiFiESP32']]],
-  ['wificlientsecure_42',['WiFiClientSecure',['../_platform_config_2_desktop_8h.html#af2d06bc2585c54e374cec09649524f39',1,'desktop.h']]],
+  ['wificlientsecure_42',['WiFiClientSecure',['../_platform_config_2desktop_8h.html#af2d06bc2585c54e374cec09649524f39',1,'desktop.h']]],
   ['wifiesp32_43',['WiFiESP32',['../classaudio__tools_1_1_wi_fi_e_s_p32.html',1,'audio_tools']]],
   ['wifiinclude_2eh_44',['WiFiInclude.h',['../_wi_fi_include_8h.html',1,'']]],
   ['window_45',['window',['../classaudio__tools_1_1_jpeg_open_c_v.html#a2a1fd97d51d689b2cbf19aae6f42487b',1,'audio_tools::JpegOpenCV::window'],['../group___echo_state.html#gad62f7782034c388eb3c69e8bef878734',1,'audio_tools::EchoState_::window']]],
