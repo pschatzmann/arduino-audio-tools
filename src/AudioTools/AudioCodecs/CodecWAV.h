@@ -147,7 +147,7 @@ class WAVHeader {
   }
 
  protected:
-  struct WAVAudioInfo headerInfo;
+  WAVAudioInfo headerInfo;
   SingleBuffer<uint8_t> buffer{MAX_WAV_HEADER_LEN};
   size_t data_pos = 0;
 
@@ -590,16 +590,6 @@ class WAVEncoder : public AudioEncoder {
       wav_info.block_align =
           wav_info.bits_per_sample / 8 * wav_info.channels;
     }
-    if (wav_info.is_streamed || wav_info.data_length == 0 ||
-        wav_info.data_length >= 0x7fff0000) {
-      LOGI("is_streamed! because length is %u",
-           (unsigned)wav_info.data_length);
-      wav_info.is_streamed = true;
-      wav_info.data_length = ~0;
-    } else {
-      size_limit = wav_info.data_length;
-      LOGI("size_limit is %d", (int)size_limit);
-    }
   }
 
   /// starts the processing
@@ -613,6 +603,21 @@ class WAVEncoder : public AudioEncoder {
   virtual bool begin() override {
     TRACED();
     setupEncodedAudio();
+
+    // normalize streaming mode and payload limits at start time
+    if (wav_info.is_streamed || wav_info.data_length == 0 ||
+        wav_info.data_length >= 0x7fff0000) {
+      LOGI("is_streamed! because length is %u",
+           (unsigned)wav_info.data_length);
+      wav_info.is_streamed = true;
+      wav_info.data_length = ~0;
+      size_limit = 0;
+    } else {
+      wav_info.is_streamed = false;
+      size_limit = wav_info.data_length;
+      LOGI("size_limit is %d", (int)size_limit);
+    }
+
     header_written = false;
     is_open = true;
     return true;
