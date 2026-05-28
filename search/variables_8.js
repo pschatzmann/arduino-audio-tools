@@ -22,7 +22,7 @@ var searchData=
   ['header_5fref_19',['header_ref',['../classaudio__tools_1_1_a_d_t_s_parser.html#a4db471315f2894ffce977f13b6c7d13f',1,'audio_tools::ADTSParser']]],
   ['header_5fsize_20',['header_size',['../classaudio__tools_1_1_binary_container_decoder.html#ac680d4d90edb714e35ee4189d36b93a2',1,'audio_tools::BinaryContainerDecoder::header_size'],['../classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#a45d4c712694f9df64529e4954ba4e5ad',1,'audio_tools::RTSPAudioStreamerBase::HEADER_SIZE']]],
   ['header_5fwritten_21',['header_written',['../classaudio__tools_1_1_w_a_v_encoder.html#a4f529ef69928bce7e8a1b4e760048791',1,'audio_tools::WAVEncoder']]],
-  ['headerinfo_22',['headerinfo',['../classaudio__tools_1_1_w_a_v_header.html#a84e229e137b7c978754da2274b7bd879',1,'audio_tools::WAVHeader::headerInfo'],['../classaudio__tools_1_1_wav_i_m_a_header.html#a6eedfe4c684357b6bc741bdd8f27dbb9',1,'audio_tools::WavIMAHeader::headerInfo']]],
+  ['headerinfo_22',['headerinfo',['../classaudio__tools_1_1_w_a_v_header.html#ad507493ca5140b4fc3685cb5996b24f5',1,'audio_tools::WAVHeader::headerInfo'],['../classaudio__tools_1_1_wav_i_m_a_header.html#a6eedfe4c684357b6bc741bdd8f27dbb9',1,'audio_tools::WavIMAHeader::headerInfo']]],
   ['headerparsed_23',['headerParsed',['../classaudio__tools_1_1_d_s_f_decoder.html#a379eb6ee35e82184420b631ab5ac635c',1,'audio_tools::DSFDecoder']]],
   ['headersize_24',['headerSize',['../classaudio__tools_1_1_d_s_f_decoder.html#a570e8b43acdfb7d2d45e42a1cd10771b',1,'audio_tools::DSFDecoder']]],
   ['headphoneisconnected_25',['headphoneIsConnected',['../classaudio__tools_1_1_audio_board_stream.html#a86f6a759a6b9c8080d914c1aa84c243a',1,'audio_tools::AudioBoardStream']]],
