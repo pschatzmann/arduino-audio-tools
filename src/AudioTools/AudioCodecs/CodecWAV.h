@@ -383,6 +383,9 @@ class WAVDecoder : public AudioDecoder {
     convert24 = enable;
   }
 
+  /// Access to the internal header parser and info
+  WAVHeader &getHeader() { return header; }
+
  protected:
   WAVHeader header;
   bool isFirst = true;
@@ -683,6 +686,9 @@ class WAVEncoder : public AudioEncoder {
 
   /// Extended WAV specific info
   WAVAudioInfo &audioInfoEx() { return wav_info; }
+
+  /// Access to the internal header parser and info
+  WAVHeader &getHeader() { return header; }
 
  protected:
   WAVHeader header;
