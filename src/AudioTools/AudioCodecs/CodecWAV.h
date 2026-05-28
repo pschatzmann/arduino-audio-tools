@@ -107,9 +107,14 @@ class WAVHeader {
 
   /// Just write a wav header to the indicated outputbu
   int writeHeader(Print *out) {
-    writeRiffHeader(buffer);
-    writeFMT(buffer);
-    writeDataHeader(buffer);
+    return writeHeader(out, headerInfo);
+  }
+
+  /// Just write a wav header with explicit info to the indicated output
+  int writeHeader(Print *out, const WAVAudioInfo &info) {
+    writeRiffHeader(buffer, info);
+    writeFMT(buffer, info);
+    writeDataHeader(buffer, info);
     int len = buffer.available();
     out->write(buffer.data(), buffer.available());
     return len;
@@ -219,22 +224,23 @@ class WAVHeader {
     LOGI("WAVHeader format: %d", (int)headerInfo.format);
   }
 
-  void writeRiffHeader(BaseBuffer<uint8_t> &buffer) {
+  void writeRiffHeader(BaseBuffer<uint8_t> &buffer,
+                       const WAVAudioInfo &info) {
     buffer.writeArray((uint8_t *)"RIFF", 4);
-    write32(buffer, headerInfo.file_size - 8);
+    write32(buffer, info.file_size - 8);
     buffer.writeArray((uint8_t *)"WAVE", 4);
   }
 
-  void writeFMT(BaseBuffer<uint8_t> &buffer) {
+  void writeFMT(BaseBuffer<uint8_t> &buffer, const WAVAudioInfo &info) {
     uint16_t fmt_len = 16;
     buffer.writeArray((uint8_t *)"fmt ", 4);
     write32(buffer, fmt_len);
-    write16(buffer, (uint16_t)headerInfo.format);  // PCM
-    write16(buffer, headerInfo.channels);
-    write32(buffer, headerInfo.sample_rate);
-    write32(buffer, headerInfo.byte_rate);
-    write16(buffer, headerInfo.block_align);  // frame size
-    write16(buffer, headerInfo.bits_per_sample);
+    write16(buffer, (uint16_t)info.format);  // PCM
+    write16(buffer, info.channels);
+    write32(buffer, info.sample_rate);
+    write32(buffer, info.byte_rate);
+    write16(buffer, info.block_align);  // frame size
+    write16(buffer, info.bits_per_sample);
   }
 
   void write32(BaseBuffer<uint8_t> &buffer, uint64_t value) {
@@ -245,10 +251,10 @@ class WAVHeader {
     buffer.writeArray((uint8_t *)&value, 2);
   }
 
-  void writeDataHeader(BaseBuffer<uint8_t> &buffer) {
+  void writeDataHeader(BaseBuffer<uint8_t> &buffer, const WAVAudioInfo &info) {
     buffer.writeArray((uint8_t *)"data", 4);
-    write32(buffer, headerInfo.file_size);
-    int offset = headerInfo.offset;
+    write32(buffer, info.file_size);
+    int offset = info.offset;
     if (offset > 0) {
       uint8_t empty[offset];
       memset(empty, 0, offset);
@@ -629,8 +635,7 @@ class WAVEncoder : public AudioEncoder {
 
     if (!header_written) {
       LOGI("Writing Header");
-      header.setAudioInfo(wav_info);
-      int len = header.writeHeader(p_print);
+      int len = header.writeHeader(p_print, wav_info);
       wav_info.file_size -= len;
       header_written = true;
     }
