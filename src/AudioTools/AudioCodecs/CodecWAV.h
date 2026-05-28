@@ -227,6 +227,7 @@ class WAVHeader {
   void writeRiffHeader(BaseBuffer<uint8_t> &buffer,
                        const WAVAudioInfo &info) {
     buffer.writeArray((uint8_t *)"RIFF", 4);
+    // chunk_size = file_size - 8 (RIFF header size)
     write32(buffer, info.file_size - 8);
     buffer.writeArray((uint8_t *)"WAVE", 4);
   }
