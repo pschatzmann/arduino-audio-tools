@@ -637,7 +637,7 @@ class WAVEncoder : public AudioEncoder {
 
     int32_t result = 0;
     Print *p_out = p_encoder == nullptr ? p_print : &enc_out;
-    ;
+    
     if (wav_info.is_streamed) {
       result = p_out->write((uint8_t *)data, len);
     } else if (size_limit > 0) {
@@ -661,6 +661,17 @@ class WAVEncoder : public AudioEncoder {
 
   /// Adds n empty bytes at the beginning of the data
   void setDataOffset(uint16_t offset) { wav_info.offset = offset; }
+
+  /// Defines the WAV payload length in bytes (without header)
+  void setDataLength(uint32_t data_length) {
+    wav_info.data_length = data_length;
+    wav_info.is_streamed =
+        (data_length == 0 || data_length >= 0x7fff0000);
+    setAudioInfo(wav_info);
+  }
+
+  /// Extended WAV specific info
+  WAVAudioInfo &audioInfoEx() { return wav_info; }
 
  protected:
   WAVHeader header;
