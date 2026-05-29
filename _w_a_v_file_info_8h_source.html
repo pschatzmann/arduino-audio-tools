@@ -127,22 +127,27 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
 <div class="foldopen" id="foldopen00087" data-start="{" data-end="}">
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_w_a_v_file_info.html#a736fa6b6416d3600041c3b7404847293">   87</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_w_a_v_file_info.html#a736fa6b6416d3600041c3b7404847293">updateSize</a>(<a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">FileT</a> file) {</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <a class="code hl_struct" href="structaudio__tools_1_1_w_a_v_audio_info.html">WAVAudioInfo</a> info;</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keywordflow">if</span> (!<a class="code hl_function" href="classaudio__tools_1_1_w_a_v_file_info.html#aeb76d58c74f2c0cfd4d4c872d2511405">getInfo</a>(file, info)) {</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>      <a class="code hl_define" href="_audio_logger_i_d_f_8h.html#ae02538a80ad5fc009caec73487d11a8d">LOGE</a>(<span class="stringliteral">&quot;Failed to read existing header for size update&quot;</span>);</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// read failed</span></div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    }</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="keywordflow">if</span> (!file.seek(0)) {</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>      <a class="code hl_define" href="_audio_logger_i_d_f_8h.html#ae02538a80ad5fc009caec73487d11a8d">LOGE</a>(<span class="stringliteral">&quot;Failed to seek to beginning of file for header rewrite&quot;</span>);</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// seek failed</span></div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    }</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="classaudio__tools_1_1_w_a_v_file_info.html#a8498562436063cf6ed6af0a8abe3354c">updateSize</a>(file, info);</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>  }</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keywordflow">if</span> (!file.seek(0)) {</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>      <a class="code hl_define" href="_audio_logger_i_d_f_8h.html#ae02538a80ad5fc009caec73487d11a8d">LOGE</a>(<span class="stringliteral">&quot;Failed to seek to beginning of file for header read&quot;</span>);</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    }</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <a class="code hl_struct" href="structaudio__tools_1_1_w_a_v_audio_info.html">WAVAudioInfo</a> info;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <span class="keywordflow">if</span> (!<a class="code hl_function" href="classaudio__tools_1_1_w_a_v_file_info.html#aeb76d58c74f2c0cfd4d4c872d2511405">getInfo</a>(file, info)) {</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>      <a class="code hl_define" href="_audio_logger_i_d_f_8h.html#ae02538a80ad5fc009caec73487d11a8d">LOGE</a>(<span class="stringliteral">&quot;Failed to read existing header for size update&quot;</span>);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// read failed</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    }</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keywordflow">if</span> (!file.seek(0)) {</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>      <a class="code hl_define" href="_audio_logger_i_d_f_8h.html#ae02538a80ad5fc009caec73487d11a8d">LOGE</a>(<span class="stringliteral">&quot;Failed to seek to beginning of file for header rewrite&quot;</span>);</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// seek failed</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    }</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="classaudio__tools_1_1_w_a_v_file_info.html#a8498562436063cf6ed6af0a8abe3354c">updateSize</a>(file, info);</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  }</div>
 </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>};</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>};</div>
 </div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="a_audio_logger_i_d_f_8h_html_ae02538a80ad5fc009caec73487d11a8d"><div class="ttname"><a href="_audio_logger_i_d_f_8h.html#ae02538a80ad5fc009caec73487d11a8d">LOGE</a></div><div class="ttdeci">#define LOGE(...)</div><div class="ttdef"><b>Definition</b> AudioLoggerIDF.h:30</div></div>
 <div class="ttc" id="a_codec_w_a_v_8h_html"><div class="ttname"><a href="_codec_w_a_v_8h.html">CodecWAV.h</a></div></div>
 <div class="ttc" id="a_codec_w_a_v_8h_html_a2ace7ba90183ef2a75bb292712af734f"><div class="ttname"><a href="_codec_w_a_v_8h.html#a2ace7ba90183ef2a75bb292712af734f">MAX_WAV_HEADER_LEN</a></div><div class="ttdeci">#define MAX_WAV_HEADER_LEN</div><div class="ttdef"><b>Definition</b> CodecWAV.h:9</div></div>
