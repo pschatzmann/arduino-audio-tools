@@ -172,6 +172,20 @@ Protected Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Parser for Wav header data for details see <a href="https://de.wikipedia.org/wiki/RIFF_WAVE">https://de.wikipedia.org/wiki/RIFF_WAVE</a>. </p>
+<p>Logic notes for <code><a class="el" href="structaudio__tools_1_1_w_a_v_audio_info.html" title="Sound information which is available in the WAV header.">WAVAudioInfo</a></code> size fields:</p><ul>
+<li><code>file_size</code> stores the full RIFF file size in bytes. In the RIFF header this is written/read as <code>chunk_size = file_size - 8</code>.</li>
+<li><code>data_length</code> stores the WAV payload size (<code>data</code> chunk length).</li>
+<li><code>is_streamed</code> indicates unknown/unbounded payload length.</li>
+</ul>
+<p>Parsing behavior:</p><ul>
+<li>RIFF <code>chunk_size</code> is normalized to full <code>file_size</code> by adding 8.</li>
+<li>If parsed <code>data_length</code> is <code>0</code> or very large (<code>&gt;= 0x7fff0000</code>), the stream is treated as streamed (<code>is_streamed=true</code>) and <code>data_length</code> is normalized to <code>~0</code>.</li>
+</ul>
+<p>Writing behavior:</p><ul>
+<li>RIFF writes <code>file_size - 8</code> into the chunk-size field.</li>
+<li>If <code>data_length==0</code> in non-streamed mode, it is derived from <code>file_size - 36</code> (standard WAV relationship).</li>
+<li>In streamed mode, <code>data_length</code> is written as max (<code>~0</code>) when not set.</li>
+</ul>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
