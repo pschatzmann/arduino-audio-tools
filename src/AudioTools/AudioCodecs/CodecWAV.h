@@ -247,7 +247,9 @@ class WAVHeader {
                        const WAVAudioInfo &info) {
     buffer.writeArray((uint8_t *)"RIFF", 4);
     // chunk_size = file_size - 8 (RIFF header size)
-    write32(buffer, info.file_size - 8);
+    uint32_t chunk_size = info.file_size > 8 ? info.file_size - 8 : 0;
+    LOGI("writeRiffHeader: file_size=%u riff_size=%u", info.file_size, chunk_size);
+    write32(buffer, chunk_size);
     buffer.writeArray((uint8_t *)"WAVE", 4);
   }
 
@@ -272,6 +274,7 @@ class WAVHeader {
     if (!headerInfo.is_streamed && info.file_size >= 36 && (data_length == 0 || data_length == ~0)) {
       data_length = info.file_size - 36;  // data length = file size - header size (36 bytes)
     }
+    LOGI("writeDataHeader: data_length=%u", data_length);
     write32(buffer, data_length);
     int offset = info.offset;
     if (offset > 0) {
