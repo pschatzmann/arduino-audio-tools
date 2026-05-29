@@ -404,6 +404,7 @@ class RtspSession {
     LOGI("aRequest: ------------------------\n%s\n-------------------------",
          aRequest);
 
+    if (aRequestSize > mCurRequest.size()) return false;
     const unsigned CurRequestSize = aRequestSize;
     memcpy(mCurRequest.data(), aRequest, aRequestSize);
 
@@ -443,11 +444,11 @@ class RtspSession {
     memset(CP, 0, m_Response.size());
     char saved = lineEnd[0];
     lineEnd[0] = '\0';
-    strcpy(CP, ClientPortPtr);
+    snprintf(CP, m_Response.size(), "%s", ClientPortPtr);
     char* eq = strstr(CP, "=");
     if (eq) {
       ++eq;
-      strcpy(CP, eq);
+      snprintf(CP, m_Response.size(), "%s", eq);
       char* dash = strstr(CP, "-");
       if (dash) {
         dash[0] = '\0';
@@ -467,8 +468,7 @@ class RtspSession {
     memset(CP, 0, m_Response.size());
     char saved = lineEnd[0];
     lineEnd[0] = '\0';
-    strncpy(CP, TransportPtr, m_Response.size() - 1);
-    CP[m_Response.size() - 1] = '\0';
+    snprintf(CP, m_Response.size(), "%s", TransportPtr);
     if (strstr(CP, "RTP/AVP/TCP") || strstr(CP, "/TCP")) m_TransportIsTcp = true;
     char* inter = strstr(CP, "interleaved=");
     if (inter) {
@@ -679,7 +679,7 @@ class RtspSession {
 
     // simulate DESCRIBE server response
     char* ColonPtr;
-    strncpy(m_Buf1.data(), m_URLHostPort.data(), 256);
+    snprintf(m_Buf1.data(), m_Buf1.size(), "%s", m_URLHostPort.data());
     ColonPtr = strstr(m_Buf1.data(), ":");
     if (ColonPtr != nullptr) ColonPtr[0] = 0x00;
 
