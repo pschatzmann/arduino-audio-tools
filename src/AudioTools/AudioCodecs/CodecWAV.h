@@ -107,18 +107,17 @@ class WAVHeader {
   void setAudioInfo(WAVAudioInfo info) { headerInfo = info; }
 
   /// Just write a wav header to the indicated outputbu
-  int writeHeader(Print *out) {
+  bool writeHeader(Print *out) {
     return writeHeader(out, headerInfo);
   }
 
   /// Just write a wav header with explicit info to the indicated output
-  int writeHeader(Print *out, const WAVAudioInfo &info) {
+  bool writeHeader(Print *out, const WAVAudioInfo &info) {
     writeRiffHeader(buffer, info);
     writeFMT(buffer, info);
     writeDataHeader(buffer, info);
     int len = buffer.available();
-    out->write(buffer.data(), buffer.available());
-    return len;
+    return out->write(buffer.data(), len) == len;
   }
 
   /// Reset internal stored header information and buffer
@@ -650,7 +649,11 @@ class WAVEncoder : public AudioEncoder {
 
     if (!header_written) {
       LOGI("Writing Header");
-      header.writeHeader(p_print, wav_info);
+      if (!header.writeHeader(p_print, wav_info)) {
+        LOGE("Failed to write WAV header");
+        is_open = false;
+        return 0;
+      }
       header_written = true;
     }
 
