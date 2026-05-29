@@ -638,7 +638,7 @@ protected:
         // Log the configuration
         LOGI("dig_cfg.sample_freq_hz: %u", (unsigned)dig_cfg.sample_freq_hz);
         LOGI("dig_cfg.conv_mode: %u (1: unit 1, 2: unit 2, 3: both)", dig_cfg.conv_mode);
-        LOGI("dig_cfg.format: %u (0 is type1: [12bit data, 4bit channel])", dig_cfg.format);
+        LOGI("dig_cfg.format: %u (0 is type1: [12bit data, 4bit channel])", (unsigned)cfg.adc_output_type);
         for (int i = 0; i < cfg.channels; i++) {
             LOGI("dig_cfg.adc_pattern[%d].atten: %u", i, dig_cfg.adc_pattern[i].atten);
             LOGI("dig_cfg.adc_pattern[%d].channel: %u", i, dig_cfg.adc_pattern[i].channel);

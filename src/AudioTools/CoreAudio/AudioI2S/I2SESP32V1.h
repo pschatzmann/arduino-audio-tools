@@ -13,6 +13,11 @@
 
 namespace audio_tools {
 
+// i2s_port_t not valid any more in ESP-IDF v6, but we keep it for compatibility  
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(6, 0, 0)
+using i2s_port_t = int;  
+#endif
+
 /**
  * @brief Basic I2S API for the ESP32 (using the new API).
  * https://docs.espressif.com/projects/esp-idf/en/v5.0.1/esp32/api-reference/peripherals/i2s.html#i2s-communication-mode
