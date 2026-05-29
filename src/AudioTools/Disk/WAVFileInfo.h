@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AudioTools/AudioCodecs/CodecWAV.h"
+#include "FS.h"
 
 namespace audio_tools {
 
@@ -12,7 +13,7 @@ namespace audio_tools {
  * RIFF and data chunk lengths stay consistent.
  */
 
-template <typename File>
+template <typename FileT = File>
 class WAVFileInfo {
  public:
   WAVFileInfo() = default;
@@ -29,7 +30,7 @@ class WAVFileInfo {
    * @return `true` if a complete and valid WAV header was parsed successfully;
    * otherwise `false`.
    */
-  bool getInfo(File file, WAVAudioInfo& info) {
+  bool getInfo(FileT file, WAVAudioInfo& info) {
     WAVHeader header;
     uint8_t buffer[MAX_WAV_HEADER_LEN];
     size_t bytesRead = file.read(buffer, MAX_WAV_HEADER_LEN);
@@ -53,7 +54,7 @@ class WAVFileInfo {
    * @param info WAV metadata to update and write back into the file header.
    * @return `true` if the header was written successfully; otherwise `false`.
    */
-  bool updateSize(File file, WAVAudioInfo& info) {
+  bool updateSize(FileT file, WAVAudioInfo& info) {
     size_t fileSize = file.size();
     info.file_size = fileSize;
     info.data_length = fileSize - 36;  // Assuming standard 44-byte header
@@ -79,7 +80,7 @@ class WAVFileInfo {
    * @return `true` if the header was read, the file was repositioned, and the
    * updated header was written successfully; otherwise `false`.
    */
-  bool updateSize(File file) {
+  bool updateSize(FileT file) {
     WAVAudioInfo info;
     if (!getInfo(file, info)) {
       LOGE("Failed to read existing header for size update");
