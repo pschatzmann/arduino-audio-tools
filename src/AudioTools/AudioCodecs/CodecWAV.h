@@ -136,7 +136,11 @@ class WAVHeader {
     writeFMT(buffer, info);
     writeDataHeader(buffer, info);
     int len = buffer.available();
-    return out->write(buffer.data(), len) == len;
+    int written = out->write(buffer.data(), len);
+    if (written != len) {
+      LOGE("Failed to write WAV header to output: written %d of %d bytes", written, len);
+    }
+    return written == len;
   }
 
   /// Reset internal stored header information and buffer
