@@ -23,7 +23,7 @@ var searchData=
   ['wave_5fformat_5fima_5fadpcm_20',['WAVE_FORMAT_IMA_ADPCM',['../_codec_wav_i_m_a_8h.html#a315f0ad8814e4f3da951782b83873c2d',1,'CodecWavIMA.h']]],
   ['wavencoder_21',['wavencoder',['../classaudio__tools_1_1_w_a_v_encoder.html',1,'WAVEncoder'],['../classaudio__tools_1_1_audio_w_a_v_server_t.html#a5037a7316e7bfbf79e166496ff8d4b29',1,'audio_tools::AudioWAVServerT::wavEncoder()'],['../classaudio__tools_1_1_w_a_v_encoder.html#aaa10c43657d6662d7c740af988cae00f',1,'audio_tools::WAVEncoder::WAVEncoder(AudioEncoderExt &amp;enc, AudioFormat fmt)'],['../classaudio__tools_1_1_w_a_v_encoder.html#a6e412c073e406dda931a09f5ee875fd0',1,'audio_tools::WAVEncoder::WAVEncoder()=default']]],
   ['wavetable_22',['waveTable',['../classaudio__tools_1_1_modulation_base_class.html#ac7596f96fc6881f824a3b8cbe79075b2',1,'audio_tools::ModulationBaseClass']]],
-  ['wavfileinfo_23',['wavfileinfo',['../classaudio__tools_1_1_w_a_v_file_info.html#aca3125514cd713c0f4b5b21a6525460d',1,'audio_tools::WAVFileInfo::WAVFileInfo()'],['../classaudio__tools_1_1_w_a_v_file_info.html',1,'WAVFileInfo&lt; File &gt;']]],
+  ['wavfileinfo_23',['wavfileinfo',['../classaudio__tools_1_1_w_a_v_file_info.html#aca3125514cd713c0f4b5b21a6525460d',1,'audio_tools::WAVFileInfo::WAVFileInfo()'],['../classaudio__tools_1_1_w_a_v_file_info.html',1,'WAVFileInfo&lt; FileT &gt;']]],
   ['wavfileinfo_2eh_24',['WAVFileInfo.h',['../_w_a_v_file_info_8h.html',1,'']]],
   ['wavformatx_25',['WAVFormatX',['../structaudio__tools_1_1_w_a_v_format_x.html',1,'audio_tools']]],
   ['wavheader_26',['wavheader',['../classaudio__tools_1_1_w_a_v_header.html',1,'WAVHeader'],['../classaudio__tools_1_1_w_a_v_header.html#a08b47f2d364c585c791668ad59187360',1,'audio_tools::WAVHeader::WAVHeader()']]],

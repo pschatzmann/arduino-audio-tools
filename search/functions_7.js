@@ -136,7 +136,7 @@ var searchData=
   ['getimpulseresponse_133',['getImpulseResponse',['../group___echo_state.html#ga2172833ea73f22c752dcb4501ac0c96b',1,'audio_tools::MDFEchoCancellation']]],
   ['getimpulseresponsesize_134',['getImpulseResponseSize',['../group___echo_state.html#gaaa664287d1514156cce68d642a060c0b',1,'audio_tools::MDFEchoCancellation']]],
   ['getindexdef_135',['getIndexDef',['../classaudio__tools_1_1_s_d_index.html#ac5e68e5ba484a6d91aa994ed354e073a',1,'audio_tools::SDIndex']]],
-  ['getinfo_136',['getInfo',['../classaudio__tools_1_1_w_a_v_file_info.html#a785db8e2b7325ea6c146bf6aab48e435',1,'audio_tools::WAVFileInfo']]],
+  ['getinfo_136',['getInfo',['../classaudio__tools_1_1_w_a_v_file_info.html#aeb76d58c74f2c0cfd4d4c872d2511405',1,'audio_tools::WAVFileInfo']]],
   ['getinput_137',['getInput',['../classaudio__tools_1_1_pipeline.html#a344e8bf91cc15a6124b7160ab1fe4d65',1,'audio_tools::Pipeline']]],
   ['getinputformat_138',['getInputFormat',['../classaudio__tools_1_1_encoder_a_l_a_c.html#a5a841f69d8ba2e786542e76476858ca7',1,'audio_tools::EncoderALAC']]],
   ['getint_139',['getInt',['../classaudio__tools_1_1_a_v_i_decoder.html#a7cbe3784773fce7e879c4d5678fa3b7a',1,'audio_tools::AVIDecoder']]],

@@ -14,7 +14,7 @@ var searchData=
   ['updatefirkernel_11',['updateFIRKernel',['../classaudio__tools_1_1_equalizer_n_bands.html#a1bbd596ae5b85c0b7a8965a6693f7335',1,'audio_tools::EqualizerNBands']]],
   ['updateminmax_12',['updateMinMax',['../classaudio__tools_1_1_analog_audio_arduino.html#a03ba67459e45d398164ea9e560e592f0',1,'audio_tools::AnalogAudioArduino']]],
   ['updatemodulation_13',['updateModulation',['../classaudio__tools_1_1_simple_flanger.html#a0fa8a90f35312752588052b085075ac8',1,'audio_tools::SimpleFlanger']]],
-  ['updatesize_14',['updatesize',['../classaudio__tools_1_1_w_a_v_file_info.html#a863e2a9221bc1d6959b9ce612c3a1fe8',1,'audio_tools::WAVFileInfo::updateSize(File file, WAVAudioInfo &amp;info)'],['../classaudio__tools_1_1_w_a_v_file_info.html#a0ccbc3bfa6e7f368796deb4dc311040c',1,'audio_tools::WAVFileInfo::updateSize(File file)']]],
+  ['updatesize_14',['updatesize',['../classaudio__tools_1_1_w_a_v_file_info.html#a8498562436063cf6ed6af0a8abe3354c',1,'audio_tools::WAVFileInfo::updateSize(FileT file, WAVAudioInfo &amp;info)'],['../classaudio__tools_1_1_w_a_v_file_info.html#a736fa6b6416d3600041c3b7404847293',1,'audio_tools::WAVFileInfo::updateSize(FileT file)']]],
   ['updatestatistics_15',['updateStatistics',['../classaudio__tools_1_1_driver_p_w_m_base.html#acc63d03deb732e3ae252989e42623d90',1,'audio_tools::DriverPWMBase']]],
   ['updatetimer_16',['updateTimer',['../classaudio__tools_1_1_r_t_s_p_audio_streamer.html#a532f329eae1246ab3b0b37d57a566c65',1,'audio_tools::RTSPAudioStreamer']]],
   ['updatevolume_17',['updateVolume',['../classaudio__tools_1_1_volume_meter.html#ab6007da5c3151b380762d890fcdf3031',1,'audio_tools::VolumeMeter']]],
