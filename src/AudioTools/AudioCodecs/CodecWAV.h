@@ -39,6 +39,25 @@ static const char *wav_mime = "audio/wav";
 /**
  * @brief Parser for Wav header data
  * for details see https://de.wikipedia.org/wiki/RIFF_WAVE
+ *
+ * Logic notes for `WAVAudioInfo` size fields:
+ * - `file_size` stores the full RIFF file size in bytes.
+ *   In the RIFF header this is written/read as `chunk_size = file_size - 8`.
+ * - `data_length` stores the WAV payload size (`data` chunk length).
+ * - `is_streamed` indicates unknown/unbounded payload length.
+ *
+ * Parsing behavior:
+ * - RIFF `chunk_size` is normalized to full `file_size` by adding 8.
+ * - If parsed `data_length` is `0` or very large (`>= 0x7fff0000`), the
+ *   stream is treated as streamed (`is_streamed=true`) and `data_length` is
+ *   normalized to `~0`.
+ *
+ * Writing behavior:
+ * - RIFF writes `file_size - 8` into the chunk-size field.
+ * - If `data_length==0` in non-streamed mode, it is derived from
+ *   `file_size - 36` (standard WAV relationship).
+ * - In streamed mode, `data_length` is written as max (`~0`) when not set.
+ * 
  * @author Phil Schatzmann
  * @copyright GPLv3
  *
