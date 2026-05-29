@@ -61,6 +61,7 @@ class WAVFileInfo {
     size_t fileSize = file.size();
     info.file_size = fileSize;
     info.data_length = fileSize - 36;  // Assuming standard 44-byte header
+    info.is_streamed = false;  // File-based WAV is not streamed
     WAVHeader header;
     if (!header.writeHeader(&file, info)) {
       LOGE("Failed to write updated header with new file size");

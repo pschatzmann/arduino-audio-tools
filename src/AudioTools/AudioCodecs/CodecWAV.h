@@ -247,7 +247,7 @@ class WAVHeader {
   void writeDataHeader(BaseBuffer<uint8_t> &buffer, const WAVAudioInfo &info) {
     buffer.writeArray((uint8_t *)"data", 4);
     uint32_t data_length = info.data_length;
-    if (data_length == 0) {
+    if (info.file_size > 0 && (data_length == 0 || data_length == ~0)) {
       data_length = info.file_size - 36;  // data length = file size - header size (36 bytes)
     }
     write32(buffer, data_length);
