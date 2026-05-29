@@ -60,7 +60,8 @@ class WAVHeader {
     memset((void *)&headerInfo, 0, sizeof(WAVAudioInfo));
 
     if (!setPos("RIFF")) return false;
-    headerInfo.file_size = read_int32();
+    // RIFF stores chunk_size (= file_size - 8): normalize to full file size
+    headerInfo.file_size = read_int32() + 8;
     if (!setPos("WAVE")) return false;
     if (!setPos("fmt ")) return false;
     int fmt_length = read_int32();
@@ -244,6 +245,21 @@ class WAVHeader {
     write16(buffer, info.bits_per_sample);
   }
 
+  void writeDataHeader(BaseBuffer<uint8_t> &buffer, const WAVAudioInfo &info) {
+    buffer.writeArray((uint8_t *)"data", 4);
+    uint32_t data_length = info.data_length;
+    if (data_length == 0) {
+      data_length = info.file_size - 36;  // data length = file size - header size (36 bytes)
+    }
+    write32(buffer, data_length);
+    int offset = info.offset;
+    if (offset > 0) {
+      uint8_t empty[offset];
+      memset(empty, 0, offset);
+      buffer.writeArray(empty, offset);  // resolve issue with wrong aligment
+    }
+  }
+
   void write32(BaseBuffer<uint8_t> &buffer, uint64_t value) {
     buffer.writeArray((uint8_t *)&value, 4);
   }
@@ -252,16 +268,6 @@ class WAVHeader {
     buffer.writeArray((uint8_t *)&value, 2);
   }
 
-  void writeDataHeader(BaseBuffer<uint8_t> &buffer, const WAVAudioInfo &info) {
-    buffer.writeArray((uint8_t *)"data", 4);
-    write32(buffer, info.file_size);
-    int offset = info.offset;
-    if (offset > 0) {
-      uint8_t empty[offset];
-      memset(empty, 0, offset);
-      buffer.writeArray(empty, offset);  // resolve issue with wrong aligment
-    }
-  }
 };
 
 /**
@@ -644,8 +650,7 @@ class WAVEncoder : public AudioEncoder {
 
     if (!header_written) {
       LOGI("Writing Header");
-      int len = header.writeHeader(p_print, wav_info);
-      wav_info.file_size -= len;
+      header.writeHeader(p_print, wav_info);
       header_written = true;
     }
 
@@ -681,6 +686,10 @@ class WAVEncoder : public AudioEncoder {
     wav_info.data_length = data_length;
     wav_info.is_streamed =
         (data_length == 0 || data_length >= 0x7fff0000);
+    if (!wav_info.is_streamed) {
+      // full file size = RIFF chunk (36) + data chunk payload
+      wav_info.file_size = wav_info.data_length + 36;
+    }
     setAudioInfo(wav_info);
   }
 
