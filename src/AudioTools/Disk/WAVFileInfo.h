@@ -11,6 +11,9 @@ namespace audio_tools {
  * The class parses the existing WAV header, extracts the current audio
  * information, and can rewrite the header with an updated file size so the
  * RIFF and data chunk lengths stay consistent.
+ * @ingroup io
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 
 template <typename FileT = File>
