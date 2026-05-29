@@ -85,6 +85,11 @@ class WAVFileInfo {
    * updated header was written successfully; otherwise `false`.
    */
   bool updateSize(FileT file) {
+    if (!file.seek(0)) {
+      LOGE("Failed to seek to beginning of file for header read");
+      return false;
+    }
+
     WAVAudioInfo info;
     if (!getInfo(file, info)) {
       LOGE("Failed to read existing header for size update");
