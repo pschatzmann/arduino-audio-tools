@@ -72,7 +72,7 @@ class WAVHeader {
     return buffer.writeArray(data, data_len);
   }
 
-  /// Call begin when header data is complete to parse the data
+  /// Call when header data write is complete to parse the data
   bool parse() {
     LOGI("WAVHeader::begin: %u", (unsigned)buffer.available());
     this->data_pos = 0l;
