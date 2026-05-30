@@ -63,7 +63,7 @@ var searchData=
   ['filterbank_5fupper_5fband_5flimit_60',['filterbank_upper_band_limit',['../structaudio__tools_1_1_tf_lite_config.html#afad5891631f6a9cc9a3ac7be172e9037',1,'audio_tools::TfLiteConfig']]],
   ['filtered_61',['filtered',['../classaudio__tools_1_1_equalizer_n_bands.html#ab7fb50b4c3325fb4754a452d97dcfb29',1,'audio_tools::EqualizerNBands']]],
   ['filterorder_62',['filterOrder',['../classaudio__tools_1_1_filter_effect_base.html#a9d09c73fcc694ca39d4563a3d9b4f925',1,'audio_tools::FilterEffectBase']]],
-  ['filters_63',['filters',['../classaudio__tools_1_1_converter_n_channels.html#a4d3a84bb182cdc22d0585c754fefc7b2',1,'audio_tools::ConverterNChannels']]],
+  ['filters_63',['filters',['../classaudio__tools_1_1_converter_n_channels.html#a8dffb166dfae3eedd3b6e58de3ed7151',1,'audio_tools::ConverterNChannels']]],
   ['fir_5fvector_64',['fir_vector',['../classaudio__tools_1_1_equalizer_n_bands.html#af68da82752b7feda4f78bdfe20c1dee4',1,'audio_tools::EqualizerNBands']]],
   ['firbuffer_65',['firBuffer',['../classaudio__tools_1_1_filter_effect_base.html#a71e949448a14b350c539b2e97e358e24',1,'audio_tools::FilterEffectBase']]],
   ['fircoefficients_66',['firCoefficients',['../classaudio__tools_1_1_filter_effect_base.html#a1b4b4166a56b76601a607fc863d8d05c',1,'audio_tools::FilterEffectBase']]],
