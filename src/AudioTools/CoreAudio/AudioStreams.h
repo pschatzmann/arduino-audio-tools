@@ -1715,13 +1715,13 @@ class FilteredStream : public ModifyingStream {
   FilteredStream(Stream &stream, int channels) : ModifyingStream() {
     this->channels = channels;
     setStream(stream);
-    p_converter = new ConverterNChannels<T, TF>(channels);
+    converter.setChannels(channels);
   }
   FilteredStream(Print &stream) : ModifyingStream() { setOutput(stream); }
   FilteredStream(Print &stream, int channels) : ModifyingStream() {
     this->channels = channels;
     setOutput(stream);
-    p_converter = new ConverterNChannels<T, TF>(channels);
+    converter.setChannels(channels);
   }
 
   virtual ~FilteredStream() { end(); }
@@ -1736,10 +1736,6 @@ class FilteredStream : public ModifyingStream {
   bool begin(AudioInfo info) {
     setAudioInfo(info);
     this->channels = info.channels;
-    if (p_converter != nullptr && p_converter->getChannels() != channels) {
-      LOGE("Inconsistent number of channels");
-      return false;
-    }
     return begin();
   }
 
@@ -1748,31 +1744,24 @@ class FilteredStream : public ModifyingStream {
       LOGE("channels must not be 0");
       return false;
     }
-    if (p_converter == nullptr) {
-      p_converter = new ConverterNChannels<T, TF>(channels);
-    }
+    converter.setChannels(channels);
     return AudioStream::begin();
   }
 
   void end() override {
     ModifyingStream::end();
-    if (p_converter != nullptr) {
-      delete p_converter;
-      p_converter = nullptr;
-    }
   }
 
   virtual size_t write(const uint8_t *data, size_t len) override {
-    if (p_converter == nullptr) return 0;
-    size_t result = p_converter->convert((uint8_t *)data, len);
+    if (p_print == nullptr) return 0;
+    size_t result = converter.convert((uint8_t *)data, len);
     return p_print->write(data, result);
   }
 
   size_t readBytes(uint8_t *data, size_t len) override {
-    if (p_converter == nullptr) return 0;
     if (p_stream == nullptr) return 0;
     size_t result = p_stream->readBytes(data, len);
-    result = p_converter->convert(data, result);
+    result = converter.convert(data, result);
     return result;
   }
 
@@ -1782,6 +1771,7 @@ class FilteredStream : public ModifyingStream {
   }
 
   virtual int availableForWrite() override {
+    if (p_print == nullptr) return 0;
     return p_print->availableForWrite();
   }
 
@@ -1789,11 +1779,7 @@ class FilteredStream : public ModifyingStream {
   /// number of channels must have been defined before we can call this
   /// function.
   void setFilter(int channel, Filter<TF> *filter) {
-    if (p_converter != nullptr) {
-      p_converter->setFilter(channel, filter);
-    } else {
-      LOGE("p_converter is null");
-    }
+    converter.setFilter(channel, filter);
   }
 
   /// defines the filter for an individual channel - the first channel is 0. The
@@ -1807,7 +1793,7 @@ class FilteredStream : public ModifyingStream {
   int channels = 0;
   Stream *p_stream = nullptr;
   Print *p_print = nullptr;
-  ConverterNChannels<T, TF> *p_converter = nullptr;
+  ConverterNChannels<T, TF> converter{0};
 };
 
 /// Callback function type for activity state changes

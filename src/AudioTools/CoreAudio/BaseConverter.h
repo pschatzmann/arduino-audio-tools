@@ -1692,36 +1692,28 @@ class ConverterNChannels : public BaseConverter {
   /// Default Constructor
   ConverterNChannels(int channels) {
     this->channels = channels;
-    filters = new Filter<FT> *[channels];
-    // make sure that we have 1 filter per channel
+    filters.resize(channels);
     for (int j = 0; j < channels; j++) {
       filters[j] = nullptr;
     }
   }
 
-  /// Destructor
-  ~ConverterNChannels() {
-    for (int j = 0; j < channels; j++) {
-      if (filters[j] != nullptr) {
-        delete filters[j];
-      }
-    }
-    delete[] filters;
-    filters = 0;
-  }
-
   /// defines the filter for an individual channel - the first channel is 0
   void setFilter(int channel, Filter<FT> *filter) {
     if (channel < channels) {
-      if (filters[channel] != nullptr) {
-        delete filters[channel];
-      }
       filters[channel] = filter;
     } else {
       LOGE("Invalid channel nummber %d - max channel is %d", channel,
            channels - 1);
     }
   }
+
+  /// returns the filter for the indicated channel
+  Filter<FT> *getFilter(int channel) {
+    if (channel < channels) return filters[channel];
+    return nullptr;
+  }
+
 
   // convert all samples for each channel separately
   size_t convert(uint8_t *src, size_t size) {
@@ -1740,9 +1732,22 @@ class ConverterNChannels : public BaseConverter {
 
   int getChannels() { return channels; }
 
+  /// dynamically change the number of channels; existing filters for valid
+  /// indices are preserved, new slots are initialized to nullptr
+  void setChannels(int newChannels) {
+    if (newChannels == channels) return;
+    int oldChannels = channels;
+    channels = newChannels;
+    filters.resize(newChannels);
+    // initialize new slots
+    for (int j = oldChannels; j < newChannels; j++) {
+      filters[j] = nullptr;
+    }
+  }
+
  protected:
-  Filter<FT> **filters = nullptr;
-  int channels;
+  Vector<Filter<FT> *> filters;
+  int channels = 0;
 };
 
 /**
