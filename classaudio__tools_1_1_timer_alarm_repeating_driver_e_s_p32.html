@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: TimerAlarmRepeatingDriverAVR Class Reference</title>
+<title>arduino-audio-tools: TimerAlarmRepeatingDriverESP32 Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,80 +69,82 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_a_v_r.html">TimerAlarmRepeatingDriverAVR</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_e_s_p32.html">TimerAlarmRepeatingDriverESP32</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="classaudio__tools_1_1_timer_alarm_repeating_driver_a_v_r-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">TimerAlarmRepeatingDriverAVR Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__platform.html">Platform</a></div></div></div>
+<a href="classaudio__tools_1_1_timer_alarm_repeating_driver_e_s_p32-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">TimerAlarmRepeatingDriverESP32 Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__platform.html">Platform</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Repeating Timer functions for repeated execution: Plaease use the typedef <a class="el" href="classaudio__tools_1_1_timer_alarm_repeating.html" title="Common Interface definition for TimerAlarmRepeating.">TimerAlarmRepeating</a>.  
- <a href="classaudio__tools_1_1_timer_alarm_repeating_driver_a_v_r.html#details">More...</a></p>
+<p>Repeating Timer functions for simple scheduling of repeated execution using <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">esp_timer_create()</a>  
+ <a href="classaudio__tools_1_1_timer_alarm_repeating_driver_e_s_p32.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_audio_timer_a_v_r_8h_source.html">AudioTimerAVR.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_audio_timer_e_s_p32_8h_source.html">AudioTimerESP32.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for TimerAlarmRepeatingDriverAVR:</div>
+Inheritance diagram for TimerAlarmRepeatingDriverESP32:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classaudio__tools_1_1_timer_alarm_repeating_driver_a_v_r.png" usemap="#TimerAlarmRepeatingDriverAVR_map" alt=""/>
-  <map id="TimerAlarmRepeatingDriverAVR_map" name="TimerAlarmRepeatingDriverAVR_map">
-<area href="classaudio__tools_1_1_timer_alarm_repeating_driver_base.html" alt="TimerAlarmRepeatingDriverBase" shape="rect" coords="0,0,196,24"/>
+  <img src="classaudio__tools_1_1_timer_alarm_repeating_driver_e_s_p32.png" usemap="#TimerAlarmRepeatingDriverESP32_map" alt=""/>
+  <map id="TimerAlarmRepeatingDriverESP32_map" name="TimerAlarmRepeatingDriverESP32_map">
+<area href="classaudio__tools_1_1_timer_alarm_repeating_driver_base.html" alt="TimerAlarmRepeatingDriverBase" shape="rect" coords="0,0,206,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a0d542d27d572346ac5915bf73647bc39" id="r_a0d542d27d572346ac5915bf73647bc39"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_a_v_r.html#a0d542d27d572346ac5915bf73647bc39">TimerAlarmRepeatingDriverAVR</a> ()</td></tr>
-<tr class="separator:a0d542d27d572346ac5915bf73647bc39"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef983045eff2dc8f8ea76f40aa095cca" id="r_aef983045eff2dc8f8ea76f40aa095cca"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_a_v_r.html#aef983045eff2dc8f8ea76f40aa095cca">begin</a> (<a class="el" href="namespaceaudio__tools.html#a4352eeeaccea355821b98a27f37e129f">repeating_timer_callback_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">callback_f</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint32_t</a> time, <a class="el" href="group__basic.html#gadd9fe45e09605eee3e4a39c8a5c4476d">TimeUnit</a> unit=<a class="el" href="group__basic.html#ggadd9fe45e09605eee3e4a39c8a5c4476daa30e1fc5e8695e598ffaf20f6dc902bb">MS</a>) <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
+<tr class="memitem:a812ab73a1ac71678dd699981455dbf78" id="r_a812ab73a1ac71678dd699981455dbf78"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_e_s_p32.html#a812ab73a1ac71678dd699981455dbf78">~TimerAlarmRepeatingDriverESP32</a> ()</td></tr>
+<tr class="separator:a812ab73a1ac71678dd699981455dbf78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef983045eff2dc8f8ea76f40aa095cca" id="r_aef983045eff2dc8f8ea76f40aa095cca"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_e_s_p32.html#aef983045eff2dc8f8ea76f40aa095cca">begin</a> (<a class="el" href="namespaceaudio__tools.html#a4352eeeaccea355821b98a27f37e129f">repeating_timer_callback_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">callback_f</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint32_t</a> time, <a class="el" href="group__basic.html#gadd9fe45e09605eee3e4a39c8a5c4476d">TimeUnit</a> unit=<a class="el" href="group__basic.html#ggadd9fe45e09605eee3e4a39c8a5c4476daa30e1fc5e8695e598ffaf20f6dc902bb">MS</a>) <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
+<tr class="memdesc:aef983045eff2dc8f8ea76f40aa095cca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the alarm timer.  <br /></td></tr>
 <tr class="separator:aef983045eff2dc8f8ea76f40aa095cca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9fef81fc6625d889c9acaae5a28e0f03" id="r_a9fef81fc6625d889c9acaae5a28e0f03"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_base.html#a9fef81fc6625d889c9acaae5a28e0f03">callbackParameter</a> ()</td></tr>
 <tr class="separator:a9fef81fc6625d889c9acaae5a28e0f03"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3d8911013b1bab653ee2d819ce44bb3" id="r_ae3d8911013b1bab653ee2d819ce44bb3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_a_v_r.html#ae3d8911013b1bab653ee2d819ce44bb3">end</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
+<tr class="memitem:ae3d8911013b1bab653ee2d819ce44bb3" id="r_ae3d8911013b1bab653ee2d819ce44bb3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_e_s_p32.html#ae3d8911013b1bab653ee2d819ce44bb3">end</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
+<tr class="memdesc:ae3d8911013b1bab653ee2d819ce44bb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">ends the timer and if necessary the task  <br /></td></tr>
 <tr class="separator:ae3d8911013b1bab653ee2d819ce44bb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac13ace18be01a25c51391d37fb24b736" id="r_ac13ace18be01a25c51391d37fb24b736"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_base.html#ac13ace18be01a25c51391d37fb24b736">setCallbackParameter</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">obj</a>)</td></tr>
 <tr class="separator:ac13ace18be01a25c51391d37fb24b736"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f9cb98f2a25a85ec3547cfe199a7c94" id="r_a8f9cb98f2a25a85ec3547cfe199a7c94"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_base.html#a8f9cb98f2a25a85ec3547cfe199a7c94">setIsSave</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">is_save</a>)</td></tr>
-<tr class="memdesc:a8f9cb98f2a25a85ec3547cfe199a7c94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Not used.  <br /></td></tr>
-<tr class="separator:a8f9cb98f2a25a85ec3547cfe199a7c94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49524fe14b9cd5c69590a73d17f0bf86" id="r_a49524fe14b9cd5c69590a73d17f0bf86"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_e_s_p32.html#a49524fe14b9cd5c69590a73d17f0bf86">setIsSave</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">is_save</a>) <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
+<tr class="memdesc:a49524fe14b9cd5c69590a73d17f0bf86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Not used.  <br /></td></tr>
+<tr class="separator:a49524fe14b9cd5c69590a73d17f0bf86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ae41242f5a8f9a94fd1e2f7770636c7" id="r_a4ae41242f5a8f9a94fd1e2f7770636c7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_base.html#a4ae41242f5a8f9a94fd1e2f7770636c7">setTimer</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> timer)</td></tr>
 <tr class="separator:a4ae41242f5a8f9a94fd1e2f7770636c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76cc8f0d84952989d6c65a8e027ab60e" id="r_a76cc8f0d84952989d6c65a8e027ab60e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_base.html#a76cc8f0d84952989d6c65a8e027ab60e">setTimerFunction</a> (<a class="el" href="namespaceaudio__tools.html#a1a80d46b1fcf323c58eb596c016434f2">TimerFunction</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">function</a>=<a class="el" href="namespaceaudio__tools.html#a1a80d46b1fcf323c58eb596c016434f2ae258d3dbc13395dd87a28a529d99a454">DirectTimerCallback</a>)</td></tr>
-<tr class="separator:a76cc8f0d84952989d6c65a8e027ab60e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a18c74596153818b9b03dc023544cb837" id="r_a18c74596153818b9b03dc023544cb837"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_a_v_r.html#a18c74596153818b9b03dc023544cb837">tickerCallback</a> ()</td></tr>
-<tr class="separator:a18c74596153818b9b03dc023544cb837"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad67703d5e52be6bef299ed2292f904fa" id="r_ad67703d5e52be6bef299ed2292f904fa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_e_s_p32.html#ad67703d5e52be6bef299ed2292f904fa">setTimerFunction</a> (<a class="el" href="namespaceaudio__tools.html#a1a80d46b1fcf323c58eb596c016434f2">TimerFunction</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">function</a>) <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
+<tr class="separator:ad67703d5e52be6bef299ed2292f904fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a84f3afe21d83ac07088737ec049dfd10" id="r_a84f3afe21d83ac07088737ec049dfd10"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_a_v_r.html#a84f3afe21d83ac07088737ec049dfd10">setupTimer</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint64_t</a> sample_rate)</td></tr>
-<tr class="separator:a84f3afe21d83ac07088737ec049dfd10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adafdfb6d2db8be3e5815e34e2c309b92" id="r_adafdfb6d2db8be3e5815e34e2c309b92"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_base.html#adafdfb6d2db8be3e5815e34e2c309b92">toString</a> (<a class="el" href="group__basic.html#gadd9fe45e09605eee3e4a39c8a5c4476d">TimeUnit</a> unit)</td></tr>
 <tr class="separator:adafdfb6d2db8be3e5815e34e2c309b92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:af058d9723f5ccfa308b2d173079aa7ed" id="r_af058d9723f5ccfa308b2d173079aa7ed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a4352eeeaccea355821b98a27f37e129f">repeating_timer_callback_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_a_v_r.html#af058d9723f5ccfa308b2d173079aa7ed">callback</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td></tr>
-<tr class="separator:af058d9723f5ccfa308b2d173079aa7ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedeffc7d23da25d52b9a50045189fe2b" id="r_aedeffc7d23da25d52b9a50045189fe2b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_e_s_p32.html#aedeffc7d23da25d52b9a50045189fe2b">initialized</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">false</a></td></tr>
+<tr class="separator:aedeffc7d23da25d52b9a50045189fe2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a077376d12464f945e2414d5499c79b3f" id="r_a077376d12464f945e2414d5499c79b3f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_base.html#a077376d12464f945e2414d5499c79b3f">object</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td></tr>
 <tr class="separator:a077376d12464f945e2414d5499c79b3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6114dad3159d16752bee81cf0a05d2fe" id="r_a6114dad3159d16752bee81cf0a05d2fe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">esp_timer_handle_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_e_s_p32.html#a6114dad3159d16752bee81cf0a05d2fe">rtsp_timer</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td></tr>
+<tr class="separator:a6114dad3159d16752bee81cf0a05d2fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43c08d193d555a2b2a61c53d2a4e5a63" id="r_a43c08d193d555a2b2a61c53d2a4e5a63"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_e_s_p32.html#a43c08d193d555a2b2a61c53d2a4e5a63">started</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">false</a></td></tr>
+<tr class="separator:a43c08d193d555a2b2a61c53d2a4e5a63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5eab06aef6faf3c863b5e14611373d21" id="r_a5eab06aef6faf3c863b5e14611373d21"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint64_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_e_s_p32.html#a5eab06aef6faf3c863b5e14611373d21">time_us</a> = 0</td></tr>
+<tr class="separator:a5eab06aef6faf3c863b5e14611373d21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a166da3f202f9eef0db2dbd2f0e6235ad" id="r_a166da3f202f9eef0db2dbd2f0e6235ad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a1a80d46b1fcf323c58eb596c016434f2">TimerFunction</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_e_s_p32.html#a166da3f202f9eef0db2dbd2f0e6235ad">timer_function</a> = <a class="el" href="namespaceaudio__tools.html#a1a80d46b1fcf323c58eb596c016434f2a6671c687c9ccc98034b5610ac79031df">TimerCallbackInThread</a></td></tr>
+<tr class="separator:a166da3f202f9eef0db2dbd2f0e6235ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Repeating Timer functions for repeated execution: Plaease use the typedef <a class="el" href="classaudio__tools_1_1_timer_alarm_repeating.html" title="Common Interface definition for TimerAlarmRepeating.">TimerAlarmRepeating</a>. </p>
+<div class="textblock"><p>Repeating Timer functions for simple scheduling of repeated execution using <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">esp_timer_create()</a> </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a0d542d27d572346ac5915bf73647bc39" name="a0d542d27d572346ac5915bf73647bc39"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d542d27d572346ac5915bf73647bc39">&#9670;&#160;</a></span>TimerAlarmRepeatingDriverAVR()</h2>
+<a id="a812ab73a1ac71678dd699981455dbf78" name="a812ab73a1ac71678dd699981455dbf78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a812ab73a1ac71678dd699981455dbf78">&#9670;&#160;</a></span>~TimerAlarmRepeatingDriverESP32()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -151,7 +153,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_a_v_r.html">TimerAlarmRepeatingDriverAVR</a> </td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> ~<a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_e_s_p32.html">TimerAlarmRepeatingDriverESP32</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -159,7 +161,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -206,7 +208,8 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Starts the alarm timer </p>
+
+<p>Starts the alarm timer. </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_base.html#a8fc28c0997795f493a18b5ff874c5d30">TimerAlarmRepeatingDriverBase</a>.</p>
 
@@ -260,6 +263,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>ends the timer and if necessary the task </p>
+
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_base.html#a1c206505b75eec73acb77326cbaadf44">TimerAlarmRepeatingDriverBase</a>.</p>
 
 </div>
@@ -290,8 +295,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a8f9cb98f2a25a85ec3547cfe199a7c94" name="a8f9cb98f2a25a85ec3547cfe199a7c94"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8f9cb98f2a25a85ec3547cfe199a7c94">&#9670;&#160;</a></span>setIsSave()</h2>
+<a id="a49524fe14b9cd5c69590a73d17f0bf86" name="a49524fe14b9cd5c69590a73d17f0bf86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49524fe14b9cd5c69590a73d17f0bf86">&#9670;&#160;</a></span>setIsSave()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -300,7 +305,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> setIsSave </td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> setIsSave </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td>
           <td class="paramname"><em>is_save</em></td><td>)</td>
@@ -309,14 +314,14 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Not used. </p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_e_s_p32.html#a49524fe14b9cd5c69590a73d17f0bf86">TimerAlarmRepeatingDriverESP32</a>.</p>
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_base.html#a8f9cb98f2a25a85ec3547cfe199a7c94">TimerAlarmRepeatingDriverBase</a>.</p>
 
 </div>
 </div>
@@ -348,8 +353,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a76cc8f0d84952989d6c65a8e027ab60e" name="a76cc8f0d84952989d6c65a8e027ab60e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a76cc8f0d84952989d6c65a8e027ab60e">&#9670;&#160;</a></span>setTimerFunction()</h2>
+<a id="ad67703d5e52be6bef299ed2292f904fa" name="ad67703d5e52be6bef299ed2292f904fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad67703d5e52be6bef299ed2292f904fa">&#9670;&#160;</a></span>setTimerFunction()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -358,72 +363,21 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> setTimerFunction </td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> setTimerFunction </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#a1a80d46b1fcf323c58eb596c016434f2">TimerFunction</a>&#160;</td>
-          <td class="paramname"><em>function</em> = <code><a class="el" href="namespaceaudio__tools.html#a1a80d46b1fcf323c58eb596c016434f2ae258d3dbc13395dd87a28a529d99a454">DirectTimerCallback</a></code></td><td>)</td>
+          <td class="paramname"><em>function</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_e_s_p32.html#ad67703d5e52be6bef299ed2292f904fa">TimerAlarmRepeatingDriverESP32</a>.</p>
-
-</div>
-</div>
-<a id="a84f3afe21d83ac07088737ec049dfd10" name="a84f3afe21d83ac07088737ec049dfd10"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a84f3afe21d83ac07088737ec049dfd10">&#9670;&#160;</a></span>setupTimer()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> setupTimer </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint64_t</a>&#160;</td>
-          <td class="paramname"><em>sample_rate</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a18c74596153818b9b03dc023544cb837" name="a18c74596153818b9b03dc023544cb837"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a18c74596153818b9b03dc023544cb837">&#9670;&#160;</a></span>tickerCallback()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> tickerCallback </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_base.html#a76cc8f0d84952989d6c65a8e027ab60e">TimerAlarmRepeatingDriverBase</a>.</p>
 
 </div>
 </div>
@@ -454,8 +408,8 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="af058d9723f5ccfa308b2d173079aa7ed" name="af058d9723f5ccfa308b2d173079aa7ed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af058d9723f5ccfa308b2d173079aa7ed">&#9670;&#160;</a></span>callback</h2>
+<a id="aedeffc7d23da25d52b9a50045189fe2b" name="aedeffc7d23da25d52b9a50045189fe2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedeffc7d23da25d52b9a50045189fe2b">&#9670;&#160;</a></span>initialized</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -464,7 +418,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a4352eeeaccea355821b98a27f37e129f">repeating_timer_callback_t</a> callback = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> initialized = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">false</a></td>
         </tr>
       </table>
   </td>
@@ -498,8 +452,96 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a6114dad3159d16752bee81cf0a05d2fe" name="a6114dad3159d16752bee81cf0a05d2fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6114dad3159d16752bee81cf0a05d2fe">&#9670;&#160;</a></span>rtsp_timer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">esp_timer_handle_t</a> rtsp_timer = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a43c08d193d555a2b2a61c53d2a4e5a63" name="a43c08d193d555a2b2a61c53d2a4e5a63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43c08d193d555a2b2a61c53d2a4e5a63">&#9670;&#160;</a></span>started</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> started = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">false</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5eab06aef6faf3c863b5e14611373d21" name="a5eab06aef6faf3c863b5e14611373d21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5eab06aef6faf3c863b5e14611373d21">&#9670;&#160;</a></span>time_us</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint64_t</a> time_us = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a166da3f202f9eef0db2dbd2f0e6235ad" name="a166da3f202f9eef0db2dbd2f0e6235ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a166da3f202f9eef0db2dbd2f0e6235ad">&#9670;&#160;</a></span>timer_function</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a1a80d46b1fcf323c58eb596c016434f2">TimerFunction</a> timer_function = <a class="el" href="namespaceaudio__tools.html#a1a80d46b1fcf323c58eb596c016434f2a6671c687c9ccc98034b5610ac79031df">TimerCallbackInThread</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/CoreAudio/AudioTimer/<a class="el" href="_audio_timer_a_v_r_8h_source.html">AudioTimerAVR.h</a></li>
+<li>src/AudioTools/CoreAudio/AudioTimer/<a class="el" href="_audio_timer_e_s_p32_8h_source.html">AudioTimerESP32.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -247,13 +247,13 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span><span class="preprocessor">#if defined(ESP32X) </span></div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span><span class="preprocessor"># ifdef ARDUINO</span></div>
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span><span class="preprocessor">#  include &quot;esp32-hal-log.h&quot;</span></div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span><span class="preprocessor"># endif</span></div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span><span class="preprocessor"># if ESP_IDF_VERSION &gt; ESP_IDF_VERSION_VAL(5, 0 , 0)</span></div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="preprocessor">#  define USE_INT24_FROM_INT</span></div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span><span class="preprocessor">#  define USE_ANALOG</span></div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span><span class="preprocessor"># endif</span></div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span> </div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span><span class="preprocessor">#define USE_PWM</span></div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span><span class="preprocessor">#  define USE_PWM</span></div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span><span class="preprocessor"># endif</span></div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="preprocessor"># if ESP_IDF_VERSION &gt; ESP_IDF_VERSION_VAL(5, 0 , 0)</span></div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span><span class="preprocessor">#  define USE_INT24_FROM_INT</span></div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span><span class="preprocessor">#  define USE_ANALOG</span></div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span><span class="preprocessor"># endif</span></div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
 <div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><span class="preprocessor">#define USE_URL_ARDUINO</span></div>
 <div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span><span class="preprocessor">#define USE_WIFI</span></div>
 <div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span><span class="preprocessor">#define USE_WIFI_CLIENT_SECURE</span></div>

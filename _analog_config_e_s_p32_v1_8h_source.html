@@ -105,7 +105,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#define HAS_ESP32_DAC</span></div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#define ADC_CHANNEL_TYPE uint16_t</span></div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#define ADC_DATA_TYPE uint16_t</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#elif CONFIG_IDF_TARGET_ESP32S2</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#elif CONFIG_IDF_TARGET_ESP32S2 </span></div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#define ADC_CONV_MODE ADC_CONV_SINGLE_UNIT_1</span></div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#define ADC_OUTPUT_TYPE ADC_DIGI_OUTPUT_FORMAT_TYPE2</span></div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#define AUDIO_ADC_GET_CHANNEL(p_data) ((p_data)-&gt;type2.channel)</span></div>
@@ -139,7 +139,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="preprocessor">#define NUM_ADC_CHANNELS 7</span></div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="preprocessor">#define ADC_CHANNEL_TYPE uint32_t</span></div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="preprocessor">#define ADC_DATA_TYPE uint32_t</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="preprocessor">#elif CONFIG_IDF_TARGET_ESP32S3</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="preprocessor">#elif CONFIG_IDF_TARGET_ESP32S3 || CONFIG_IDF_TARGET_ESP32S31</span></div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="preprocessor">#define ADC_CONV_MODE ADC_CONV_SINGLE_UNIT_1</span></div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="preprocessor">#define ADC_OUTPUT_TYPE ADC_DIGI_OUTPUT_FORMAT_TYPE2</span></div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="preprocessor">#define AUDIO_ADC_GET_CHANNEL(p_data) ((p_data)-&gt;type2.channel)</span></div>
