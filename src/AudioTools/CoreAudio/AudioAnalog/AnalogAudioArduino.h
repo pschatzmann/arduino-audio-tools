@@ -2,7 +2,7 @@
 
 
 #include "AnalogConfigStd.h"
-#if defined(USE_ANALOG) 
+#if defined(USE_ANALOG) && defined(ARDUINO)
 
 #include "AudioTools/CoreAudio/AudioAnalog/AnalogDriverBase.h"
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimer.h"

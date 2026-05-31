@@ -164,13 +164,13 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #if defined(ESP32X) 
 # ifdef ARDUINO
 #  include "esp32-hal-log.h"
+#  define USE_PWM
 # endif
 # if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(5, 0 , 0)
 #  define USE_INT24_FROM_INT
 #  define USE_ANALOG
 # endif
 
-#define USE_PWM
 #define USE_URL_ARDUINO
 #define USE_WIFI
 #define USE_WIFI_CLIENT_SECURE

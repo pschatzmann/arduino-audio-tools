@@ -1,8 +1,8 @@
 #pragma once
 
-#if defined(ESP32) && defined(ARDUINO)
+#if defined(ESP32) 
 #include <esp_task_wdt.h>
-
+#include "esp_timer.h"
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimerBase.h"
 
 namespace audio_tools {
