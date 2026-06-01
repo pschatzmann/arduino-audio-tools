@@ -488,7 +488,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>              {</div>
 <div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>                  .clk = (gpio_num_t)cfg.pin_bck,</div>
 <div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>                  .dout = (gpio_num_t)txPin,</div>
-<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span><span class="preprocessor">#if ESP_IDF_VERSION &gt;= ESP_IDF_VERSION_VAL(6, 1, 0)</span></div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span><span class="preprocessor">#if SOC_I2S_PDM_MAX_TX_LINES &gt; 1</span></div>
 <div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>                  .dout2 = I2S_GPIO_UNUSED,   <span class="comment">// required in IDF v6+</span></div>
 <div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>                  .invert_flags =</div>
