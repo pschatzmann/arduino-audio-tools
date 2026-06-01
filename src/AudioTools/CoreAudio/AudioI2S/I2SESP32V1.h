@@ -390,7 +390,7 @@ class I2SDriverESP32V1 {
               {
                   .clk = (gpio_num_t)cfg.pin_bck,
                   .dout = (gpio_num_t)txPin,
-#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(6, 1, 0)
+#if SOC_I2S_PDM_MAX_TX_LINES > 1
                   .dout2 = I2S_GPIO_UNUSED,   // required in IDF v6+
 #endif
                   .invert_flags =
