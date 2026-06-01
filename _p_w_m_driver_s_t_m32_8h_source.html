@@ -134,8 +134,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>   <span class="keyword">public</span>:</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    PWM() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordtype">void</span> begin(<a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">HardwareTimer</a> *<a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">pwm_timer</a>, <span class="keywordtype">int</span> pwm_frequency, <span class="keywordtype">int</span> maxValue) {</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>      this-&gt;p_timer = <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">pwm_timer</a>;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordtype">void</span> begin(<a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">HardwareTimer</a> *pwm_timer, <span class="keywordtype">int</span> pwm_frequency, <span class="keywordtype">int</span> maxValue) {</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>      this-&gt;p_timer = pwm_timer;</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>      this-&gt;pwm_frequency = pwm_frequency;</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>      this-&gt;max_value = maxValue;</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    }</div>
