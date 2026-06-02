@@ -247,7 +247,10 @@
 #endif
 
 // ------ Zephyr -------
-#ifdef ARDUINO_ARCH_ZEPHYR
+#ifdef __ZEPHYR__
+#include <zephyr/kernel.h>
+#include <zephyr/sys/util.h>
+#  include "AudioTools/PlatformConfig/zephyr.h"
 #endif
 
 //------ VS1053 ----------

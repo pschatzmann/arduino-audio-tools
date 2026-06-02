@@ -9,6 +9,7 @@
 #include "AudioTools/CoreAudio/AudioI2S/I2SESP32.h"
 #include "AudioTools/CoreAudio/AudioI2S/I2SESP32V1.h"
 #include "AudioTools/CoreAudio/AudioI2S/I2SESP8266.h"
+#include "AudioTools/CoreAudio/AudioI2S/I2SZephyr.h"
 #include "AudioTools/CoreAudio/AudioI2S/I2SNanoSenseBLE.h"
 #include "AudioTools/CoreAudio/AudioI2S/I2SRP2040-MBED.h"
 #include "AudioTools/CoreAudio/AudioI2S/I2SRP2040.h"
