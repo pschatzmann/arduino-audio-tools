@@ -10,11 +10,12 @@ if (DEFINED ESP_PLATFORM)
         set(ARDUINO_REQUIRES "")
     endif()
 
+
     idf_component_register(
         # SRC_DIRS src
         INCLUDE_DIRS src 
         # esp_driver_gpio, esp_driver_i2s, esp_driver_dac needed starting idf v6.0.0
-        REQUIRES bt esp_common freertos hal log nvs_flash driver esp_adc esp_http_client esp_driver_gpio esp_driver_ledc ${ARDUINO_REQUIRES}
+        REQUIRES esp_common freertos hal log nvs_flash driver esp_adc esp_http_client esp_driver_gpio esp_driver_ledc ${ARDUINO_REQUIRES}
     )
 
     target_compile_options(${COMPONENT_LIB} INTERFACE -DESP32_CMAKE=1 -Wno-format )
