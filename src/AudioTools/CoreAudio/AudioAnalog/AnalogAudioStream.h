@@ -7,6 +7,7 @@
 #  include "AnalogDriverESP32.h"
 #  include "AnalogDriverESP32V1.h"
 #  include "AnalogDriverMBED.h"
+#  include "AnalogDriverZephyr.h"
 #  include "AnalogDriverArduino.h"
 
 namespace audio_tools {

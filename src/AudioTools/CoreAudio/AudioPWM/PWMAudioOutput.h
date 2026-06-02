@@ -7,6 +7,7 @@
 #include "AudioTools/CoreAudio/AudioPWM/PWMDriverRP2040.h"
 #include "AudioTools/CoreAudio/AudioPWM/PWMDriverRenesas.h"
 #include "AudioTools/CoreAudio/AudioPWM/PWMDriverSTM32.h"
+#include "AudioTools/CoreAudio/AudioPWM/PWMDriverZephyr.h"
 // this is experimental at the moment
 #include "AudioTools/CoreAudio/AudioPWM/PWMDriverAVR.h"
 
