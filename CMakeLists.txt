@@ -39,6 +39,7 @@ else()
 
     # make include directory available to calling projects 
     target_include_directories (arduino-audio-tools INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/src)
+    target_compile_options(arduino-audio-tools INTERFACE  -Wno-format)
 
     # installation of all header files
     install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/src/" # source directory

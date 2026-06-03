@@ -209,7 +209,7 @@ class M4AAudioFileDemuxer : public M4ACommonDemuxer {
     uint8_t buffer[1024];
     p_file->seek(0);
     while (p_file->available()) {
-      int to_read = min(sizeof(buffer), parser.availableForWrite());
+      int to_read = min(sizeof(buffer),(unsigned long) parser.availableForWrite());
       size_t len = p_file->read(buffer, to_read);
       parser.write(buffer, len);
       // stop if we have all the data
