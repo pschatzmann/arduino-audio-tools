@@ -5,7 +5,7 @@
 
 #define IS_ZEPHYR
 #define NO_INPLACE_INIT_SUPPORT
-#define USE_TYPETRAITS
+//#define USE_TYPETRAITS
 #define USE_TIMER
 #define USE_PWM
 
