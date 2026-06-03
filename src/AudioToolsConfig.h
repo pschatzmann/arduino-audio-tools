@@ -180,6 +180,11 @@
 // #define USE_AUDIO_SERVER
 // #define USE_URL_ARDUINO
 
+#ifdef ARDUINO
+#include <Arduino.h>
+#endif
+
+
 /**
  * ------------------------------------------------------------------------- 
  * @brief Platform specific Settings
@@ -316,12 +321,6 @@
 #  define ESP_IDF_VERSION_VAL(a, b , c) 0
 #endif
 
-#if USE_CHECK_MEMORY
-#  define CHECK_MEMORY() checkMemory(true)
-#else
-#  define CHECK_MEMORY() 
-#endif
-
 #pragma GCC diagnostic ignored "-Wunused-variable"
 #pragma GCC diagnostic ignored "-Wunused-function"
 #pragma GCC diagnostic ignored "-Wvla"
@@ -339,13 +338,20 @@
 
 #undef rewind
 
+// Some top level functions: stop(), checkMemory()
+#include "AudioTools/CoreAudio/AudioRuntime.h"
+
+#if USE_CHECK_MEMORY
+#  define CHECK_MEMORY() checkMemory(true)
+#else
+#  define CHECK_MEMORY() 
+#endif
+
+
 // select int24 implementation
 #include "AudioTools/CoreAudio/AudioBasic/Int24_3bytes_t.h"
 #include "AudioTools/CoreAudio/AudioBasic/Int24_4bytes_t.h"
 #include "AudioTools/CoreAudio/AudioBasic/FloatAudio.h"
-
-// Some top level functions: stop(), checkMemory()
-#include "AudioTools/CoreAudio/AudioRuntime.h"
 
 namespace audio_tools {
     #ifdef USE_3BYTE_INT24

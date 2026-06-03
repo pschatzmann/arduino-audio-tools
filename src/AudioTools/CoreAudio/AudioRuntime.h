@@ -7,7 +7,6 @@
 
 #include "AudioToolsConfig.h"
 
-
 namespace audio_tools {
 
 using std::min;
@@ -22,7 +21,6 @@ inline static void checkMemory(bool printMemory=false) {
 }
 
 #ifdef ARDUINO
-#include <Arduino.h>
 /// prints n times the character ch and a new line  @ingroup basic
 inline void printNChar(char ch, int n){
   for (int j=0;j<n;j++) Serial.print(ch);
