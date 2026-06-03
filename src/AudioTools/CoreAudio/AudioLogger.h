@@ -1,6 +1,6 @@
 #pragma once
 #include "AudioToolsConfig.h"
-#if defined(USE_ZEPHYR)
+#if defined(IS_ZEPHYR)
 #  include "AudioTools/CoreAudio/AudioLoggerZephyr.h"
 #elif defined(USE_IDF_LOGGER)
 #  include "AudioTools/CoreAudio/AudioLoggerIDF.h"
