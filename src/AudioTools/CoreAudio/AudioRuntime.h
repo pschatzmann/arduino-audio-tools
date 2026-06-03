@@ -3,9 +3,9 @@
 #include <string.h>
 #include <stdint.h>
 #include <assert.h>
+#include <algorithm>
 
 #include "AudioToolsConfig.h"
-#include <algorithm>
 
 
 namespace audio_tools {
@@ -51,7 +51,7 @@ inline void printVersionInfo() {
   printNChar('*',50);
 }
 
-#elif defined(IS_ZEPHYR) || defined(ESP32)
+#elif defined(IS_ZEPHYR) || defined(ESP32_CMAKE)
 #include "AudioTools/AudioLibs/Desktop/NoArduino.h"
 #endif
 
