@@ -2,7 +2,7 @@
 
 #include "AudioToolsConfig.h"
 
-#if defined(__ZEPHYR__) || defined(DOXYGEN)
+#if defined(IS_ZEPHYR) || defined(DOXYGEN)
 
 #include "AudioTools/CoreAudio/AudioPWM/PWMDriverBase.h"
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimer.h"

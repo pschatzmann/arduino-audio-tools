@@ -1,6 +1,7 @@
 #pragma once
-
-#if defined(IS_MIN_DESKTOP) 
+#if defined(IS_ZEPHYR)
+#  include "AudioTools/AudioLibs/Desktop/NoArduino.h"
+#elif defined(IS_MIN_DESKTOP) 
 #  include "AudioTools/AudioLibs/Desktop/NoArduino.h"
 #  include "AudioTools/AudioLibs/Desktop/Time.h"
 #  include "AudioTools/AudioLibs/Desktop/Main.h"
