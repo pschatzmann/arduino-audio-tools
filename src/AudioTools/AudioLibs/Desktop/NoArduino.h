@@ -192,7 +192,7 @@ inline long map(long x, long in_min, long in_max, long out_min, long out_max) {
 
 }  // namespace audio_tools
 
-#if defined(ESP32)
+#if defined(ESP32_CMAKE)
 #include "driver/gpio.h"
 #include "freertos/FreeRTOS.h"  // needed for ESP Arduino < 2.0
 #include "freertos/FreeRTOSConfig.h"
