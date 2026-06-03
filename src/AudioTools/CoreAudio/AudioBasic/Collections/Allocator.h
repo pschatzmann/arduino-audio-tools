@@ -173,6 +173,67 @@ class AllocatorPSRAM : public Allocator {
 
 #endif
 
+#if defined(IS_ZEPHYR)
+
+#include <zephyr/kernel.h>
+
+/**
+ * @brief Zephyr allocator using the kernel heap (k_malloc / k_free).
+ * This is the standard allocator for Zephyr builds.
+ * @ingroup memorymgmt
+ */
+class AllocatorZephyr : public Allocator {
+ public:
+  void* do_allocate(size_t size) override {
+    if (size == 0) size = 1;
+    void* result = k_malloc(size);
+    if (result != nullptr) memset(result, 0, size);
+    return result;
+  }
+
+  void free(void* memory) override {
+    if (memory != nullptr) k_free(memory);
+  }
+};
+
+#  if defined(USE_PSRAM) || defined(CONFIG_MEM_ATTR_HEAP)
+#    include <zephyr/mem_mgmt/mem_attr_heap.h>
+
+/**
+ * @brief Zephyr PSRAM allocator using mem_attr_heap (requires
+ * CONFIG_MEM_ATTR_HEAP=y and a memory region tagged with DT_MEM_ARM_MPU_RAM_NOCACHE
+ * or similar PSRAM-backed attribute in the board DTS).
+ * Falls back to the regular kernel heap if the PSRAM allocation fails.
+ * @ingroup memorymgmt
+ */
+class AllocatorZephyrPSRAM : public Allocator {
+ public:
+  void* do_allocate(size_t size) override {
+    if (size == 0) size = 1;
+    void* result = mem_attr_heap_alloc(MEM_ATTR_HEAP_RAM_NOCACHE, size);
+    if (result == nullptr) result = k_malloc(size);  // fallback to system heap
+    if (result != nullptr) memset(result, 0, size);
+    return result;
+  }
+
+  void free(void* memory) override {
+    // mem_attr_heap_free handles both PSRAM and fallback k_malloc allocations
+    if (memory != nullptr) mem_attr_heap_free(memory);
+  }
+};
+
+using DefaultAllocator = AllocatorZephyrPSRAM;
+using DefaultAllocatorRAM = AllocatorZephyr;
+
+#  else
+
+using DefaultAllocator = AllocatorZephyr;
+using DefaultAllocatorRAM = AllocatorZephyr;
+
+#  endif  // USE_PSRAM / CONFIG_MEM_ATTR_HEAP
+
+#endif  // IS_ZEPHYR
+
 static AllocatorExt DefaultAllocator;
 static Allocator DefaultAllocatorRAM;
 
