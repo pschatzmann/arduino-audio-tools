@@ -1,5 +1,6 @@
 #pragma once
 
+#include "AudioToolsConfig.h"
 #include "AudioTools/AudioCodecs/AudioCodecs.h"
 #include "AudioTools/CoreAudio/AudioBasic/Debouncer.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
@@ -12,7 +13,6 @@
 #include "AudioTools/CoreAudio/StreamCopy.h"
 #include "AudioTools/CoreAudio/VolumeStream.h"
 #include "AudioTools/Disk/AudioSource.h"
-#include "AudioToolsConfig.h"
 
 /**
  * @defgroup player Player

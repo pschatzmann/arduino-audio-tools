@@ -1,4 +1,5 @@
 #pragma once
+#include "AudioToolsConfig.h"
 #include "AudioFilter/Filter.h"
 #include "AudioTools/CoreAudio/AudioBasic/Collections.h"
 #include "AudioTypes.h"
