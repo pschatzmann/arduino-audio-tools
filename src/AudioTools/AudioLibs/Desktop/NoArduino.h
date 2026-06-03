@@ -150,7 +150,7 @@ class Stream : public Print {
   virtual int peek() { return -1; }
   virtual void setTimeout(size_t timeoutMs) {}
   size_t readBytesUntil(char terminator, char *buffer, size_t length) {
-	for (int j=0;j<length;j++){
+	for (size_t j=0;j<length;j++){
 		int val = read();
 		if (val == -1) return j-1;
 		if (val == terminator) return j;
