@@ -13,9 +13,6 @@
 // Setup for desktop builds
 #include "AudioTools/PlatformConfig/desktop.h"
 
-// Some top level functions: stop(), checkMemory()
-#include "AudioTools/CoreAudio/AudioRuntime.h"
-
 // If you don't want to use all the settings from here you can define your own local config settings in AudioConfigLocal.h
 #if __has_include("AudioConfigLocal.h") 
 #include "AudioConfigLocal.h"
@@ -346,6 +343,9 @@
 #include "AudioTools/CoreAudio/AudioBasic/Int24_3bytes_t.h"
 #include "AudioTools/CoreAudio/AudioBasic/Int24_4bytes_t.h"
 #include "AudioTools/CoreAudio/AudioBasic/FloatAudio.h"
+
+// Some top level functions: stop(), checkMemory()
+#include "AudioTools/CoreAudio/AudioRuntime.h"
 
 namespace audio_tools {
     #ifdef USE_3BYTE_INT24
