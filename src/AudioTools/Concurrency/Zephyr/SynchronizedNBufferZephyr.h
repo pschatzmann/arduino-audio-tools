@@ -1,6 +1,7 @@
 #pragma once
 
-#include "AudioTools/Concurrency/Zephyr/QueueRTOS.h"
+#include "AudioTools/Concurrency/Zephyr/QueueZephyr.h"
+#include "AudioTools/CoreAudio/Buffers.h"
 #include "AudioToolsConfig.h"
 
 #define DEFAULT_BUFFER_WAIT 1000
@@ -8,22 +9,22 @@
 namespace audio_tools {
 
 /**
- * @brief NBuffer using RTOS queues for available and filled buffers.
+ * @brief NBuffer using Zephyr queues for available and filled buffers.
  * @ingroup buffers
  * @ingroup concurrency
  */
 template <typename T>
-class SynchronizedNBufferRTOST : public NBuffer<T> {
+class SynchronizedNBufferZephyrT : public NBuffer<T> {
  public:
-  SynchronizedNBufferRTOST(int bufferSize, int bufferCount,
-                           int writeMaxWait = DEFAULT_BUFFER_WAIT,
-                           int readMaxWait = DEFAULT_BUFFER_WAIT) {
+  SynchronizedNBufferZephyrT(int bufferSize, int bufferCount,
+                             int writeMaxWait = DEFAULT_BUFFER_WAIT,
+                             int readMaxWait = DEFAULT_BUFFER_WAIT) {
     read_max_wait = readMaxWait;
     write_max_wait = writeMaxWait;
     resize(bufferSize, bufferCount);
   }
 
-  ~SynchronizedNBufferRTOST() { cleanup(); }
+  ~SynchronizedNBufferZephyrT() { cleanup(); }
 
   bool resize(int bufferSize, int bufferCount) {
     if (buffer_size == bufferSize && buffer_count == bufferCount) {
@@ -71,8 +72,8 @@ class SynchronizedNBufferRTOST : public NBuffer<T> {
   int bufferCountEmpty() { return available_buffers.size(); }
 
  protected:
-  QueueRTOS<BaseBuffer<T> *> available_buffers{0, DEFAULT_BUFFER_WAIT, 0};
-  QueueRTOS<BaseBuffer<T> *> filled_buffers{0, DEFAULT_BUFFER_WAIT, 0};
+  QueueZephyr<BaseBuffer<T> *> available_buffers{0, DEFAULT_BUFFER_WAIT, 0};
+  QueueZephyr<BaseBuffer<T> *> filled_buffers{0, DEFAULT_BUFFER_WAIT, 0};
   size_t max_size = 0;
   size_t read_max_wait = DEFAULT_BUFFER_WAIT;
   size_t write_max_wait = DEFAULT_BUFFER_WAIT;
@@ -109,12 +110,15 @@ class SynchronizedNBufferRTOST : public NBuffer<T> {
   }
 };
 
-/// @brief RTOS synchronized buffer for managing multiple audio buffers
+/// @brief Zephyr synchronized buffer for managing multiple audio buffers
 /// @ingroup buffers
-using SynchronizedNBufferRTOS = SynchronizedNBufferRTOST<uint8_t>;
+using SynchronizedNBufferZephyr = SynchronizedNBufferZephyrT<uint8_t>;
+
+/// @brief Compatibility typedef for RTOS-based synchronized N-buffer naming
+using SynchronizedNBufferRTOS = SynchronizedNBufferZephyr;
 
 /// @brief Default synchronized buffer alias
 /// @ingroup buffers
-using SynchronizedNBuffer = SynchronizedNBufferRTOS;
+using SynchronizedNBuffer = SynchronizedNBufferZephyr;
 
 }  // namespace audio_tools

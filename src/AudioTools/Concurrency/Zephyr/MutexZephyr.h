@@ -10,10 +10,10 @@ namespace audio_tools {
  * @brief Mutex implementation using Zephyr kernel mutex.
  * @ingroup concurrency
  */
-class MutexRTOS : public MutexBase {
+class MutexZephyr : public MutexBase {
  public:
-  MutexRTOS() { k_mutex_init(&mutex); }
-  virtual ~MutexRTOS() = default;
+  MutexZephyr() { k_mutex_init(&mutex); }
+  virtual ~MutexZephyr() = default;
 
   void lock() override { k_mutex_lock(&mutex, K_FOREVER); }
 
@@ -27,10 +27,10 @@ class MutexRTOS : public MutexBase {
  * @brief Recursive Mutex implementation using Zephyr kernel mutex.
  * @ingroup concurrency
  */
-class MutexRecursiveRTOS : public MutexBase {
+class MutexRecursiveZephyr : public MutexBase {
  public:
-  MutexRecursiveRTOS() { k_mutex_init(&mutex); }
-  virtual ~MutexRecursiveRTOS() = default;
+  MutexRecursiveZephyr() { k_mutex_init(&mutex); }
+  virtual ~MutexRecursiveZephyr() = default;
 
   void lock() override { k_mutex_lock(&mutex, K_FOREVER); }
 
@@ -40,8 +40,12 @@ class MutexRecursiveRTOS : public MutexBase {
   struct k_mutex mutex;
 };
 
-/// @brief Default Mutex implementation using RTOS mutexes
+/// @brief Compatibility typedefs for RTOS-based mutex naming
+using MutexRTOS = MutexZephyr;
+using MutexRecursiveRTOS = MutexRecursiveZephyr;
+
+/// @brief Default Mutex implementation using Zephyr mutexes
 /// @ingroup concurrency
-using Mutex = MutexRTOS;
+using Mutex = MutexZephyr;
 
 }  // namespace audio_tools

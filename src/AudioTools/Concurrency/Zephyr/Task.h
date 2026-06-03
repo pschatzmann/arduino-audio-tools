@@ -1,6 +1,5 @@
 #pragma once
 
-#include "AudioTools/Concurrency/Zephyr/QueueRTOS.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
 
 #include <functional>
@@ -14,15 +13,15 @@ using TaskHandle_t = k_tid_t;
  * @brief Zephyr thread based task.
  * @ingroup concurrency
  */
-class Task {
+class TaskZephyr {
  public:
   /// Defines and creates a task
-  Task(const char *name, int stackSize, int priority = 1, int core = -1) {
+  TaskZephyr(const char *name, int stackSize, int priority = 1, int core = -1) {
     create(name, stackSize, priority, core);
   }
 
-  Task() = default;
-  ~Task() { remove(); }
+  TaskZephyr() = default;
+  ~TaskZephyr() { remove(); }
 
   /// If you used the empty constructor, you need to call create!
   bool create(const char *name, int stackSize, int priority = 1,
@@ -115,11 +114,14 @@ class Task {
     (void)p2;
     (void)p3;
 
-    Task *self = (Task *)arg;
+    TaskZephyr *self = (TaskZephyr *)arg;
     while (true) {
       self->loop_code();
     }
   }
 };
+
+/// @brief Compatibility typedef for RTOS-based task naming
+using Task = TaskZephyr;
 
 }  // namespace audio_tools

@@ -36,11 +36,11 @@ inline k_timeout_t rtosTimeoutFromTicks(TickType_t ticks) {
  * @ingroup concurrency
  */
 template <class T>
-class QueueRTOS {
+class QueueZephyr {
  public:
-  QueueRTOS(int size, TickType_t writeMaxWait = portMAX_DELAY,
-            TickType_t readMaxWait = portMAX_DELAY,
-            Allocator &allocator = DefaultAllocator) {
+  QueueZephyr(int size, TickType_t writeMaxWait = portMAX_DELAY,
+              TickType_t readMaxWait = portMAX_DELAY,
+              Allocator &allocator = DefaultAllocator) {
     p_allocator = &allocator;
     read_max_wait = readMaxWait;
     write_max_wait = writeMaxWait;
@@ -48,7 +48,7 @@ class QueueRTOS {
     setup();
   };
 
-  ~QueueRTOS() { end(); }
+  ~QueueZephyr() { end(); }
 
   void setReadMaxWait(TickType_t ticks) { read_max_wait = ticks; }
 
@@ -122,5 +122,9 @@ class QueueRTOS {
     is_active = false;
   }
 };
+
+/// @brief Compatibility typedef for RTOS-based queue naming
+template <class T>
+using QueueRTOS = QueueZephyr<T>;
 
 }  // namespace audio_tools
