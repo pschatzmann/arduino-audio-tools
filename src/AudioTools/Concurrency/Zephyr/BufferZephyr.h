@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AudioTools/Concurrency/Zephyr/QueueRTOS.h"
+#include "AudioTools/Concurrency/Zephyr/QueueZephyr.h"
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Allocator.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
 #include "AudioTools/CoreAudio/Buffers.h"
@@ -17,17 +17,18 @@ namespace audio_tools {
  * @ingroup concurrency
  */
 template <typename T>
-class BufferRTOS : public BaseBuffer<T> {
+class BufferZephyr : public BaseBuffer<T> {
  public:
-  BufferRTOS(size_t streamBufferSize, size_t xTriggerLevel = 1,
-             TickType_t writeMaxWait = portMAX_DELAY,
-             TickType_t readMaxWait = portMAX_DELAY,
-             Allocator &allocator = DefaultAllocator)
+  BufferZephyr(size_t streamBufferSize, size_t xTriggerLevel = 1,
+               TickType_t writeMaxWait = portMAX_DELAY,
+               TickType_t readMaxWait = portMAX_DELAY,
+               Allocator &allocator = DefaultAllocator)
       : BaseBuffer<T>() {
     (void)xTriggerLevel;
     readWait = readMaxWait;
     writeWait = writeMaxWait;
-    current_size_entries = streamBufferSize + 1;
+    current_size_entries = streamBufferSize + 1;  // +1 for ring-buffer sentinel
+    buffer_size_public = streamBufferSize;
     p_allocator = &allocator;
 
     if (streamBufferSize > 0) {
@@ -35,15 +36,16 @@ class BufferRTOS : public BaseBuffer<T> {
     }
   }
 
-  ~BufferRTOS() { end(); }
+  ~BufferZephyr() { end(); }
 
   /// Re-Allocates the memory and queue
   bool resize(size_t size) {
     bool result = true;
-    int req_size = size + 1;
+    size_t req_size = size + 1;
     if (current_size_entries != req_size) {
       end();
       current_size_entries = req_size;
+      buffer_size_public = size;
       result = setup();
     }
     return result;
@@ -129,7 +131,7 @@ class BufferRTOS : public BaseBuffer<T> {
     return nullptr;
   }
 
-  size_t size() override { return current_size_entries; }
+  size_t size() override { return buffer_size_public; }
 
   operator bool() { return p_data != nullptr && size() > 0; }
 
@@ -140,7 +142,8 @@ class BufferRTOS : public BaseBuffer<T> {
   TickType_t writeWait = portMAX_DELAY;
   bool read_from_isr = false;
   bool write_from_isr = false;
-  size_t current_size_entries = 0;
+  size_t current_size_entries = 0;  // internal ring-buffer capacity (public size + 1)
+  size_t buffer_size_public = 0;    // user-visible capacity
 
   struct k_mutex buffer_mutex;
   struct k_sem items_sem;
@@ -177,6 +180,7 @@ class BufferRTOS : public BaseBuffer<T> {
       p_allocator->free(p_data);
     }
     current_size_entries = 0;
+    buffer_size_public = 0;
     p_data = nullptr;
     head = 0;
     tail = 0;
@@ -209,9 +213,13 @@ class BufferRTOS : public BaseBuffer<T> {
   }
 };
 
+/// @brief Compatibility typedef for RTOS-based buffer naming
+template <class T>
+using BufferRTOS = BufferZephyr<T>;
+
 /// @brief Template alias for RTOS-based synchronized buffer
 /// @ingroup concurrency
 template <class T>
-using SynchronizedBufferRTOS = BufferRTOS<T>;
+using SynchronizedBufferRTOS = BufferZephyr<T>;
 
 }  // namespace audio_tools
