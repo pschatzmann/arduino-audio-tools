@@ -8,6 +8,7 @@
 #  define USE_SD_NO_NS
 #  define USE_TIMER
 #  define USE_CPP_TASK
+#  define USE_STD_CONCURRENCY
 #  ifndef EXIT_ON_STOP
 #    define EXIT_ON_STOP
 #  endif
@@ -17,6 +18,7 @@
 #  define USE_SD_NO_NS
 #  define USE_TIMER
 #  define USE_CPP_TASK
+#define USE_STD_CONCURRENCY
 #  ifndef EXIT_ON_STOP
 #    define EXIT_ON_STOP
 #  endif
@@ -35,6 +37,7 @@
 #  endif
 #  define USE_TIMER
 #  define USE_CPP_TASK
+#  define USE_STD_CONCURRENCY
 //#  define USE_3BYTE_INT24
 typedef WiFiClient WiFiClientSecure;
 #elif defined(ARDUINO)
@@ -47,6 +50,8 @@ typedef WiFiClient WiFiClientSecure;
 #  include "AudioTools/AudioLibs/Desktop/NoArduino.h"
 #else 
 #  include "AudioTools/AudioLibs/Desktop/NoArduino.h"
+#  define USE_CPP_TASK
+#  define USE_STD_CONCURRENCY
 #  define IS_JUPYTER
 //#  define USE_STREAM_READ_OVERRIDE
 #endif
