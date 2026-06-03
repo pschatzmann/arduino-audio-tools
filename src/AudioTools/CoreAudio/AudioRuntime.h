@@ -5,8 +5,6 @@
 #include <assert.h>
 #include <algorithm>
 
-#include "AudioToolsConfig.h"
-
 namespace audio_tools {
 
 using std::min;
