@@ -196,8 +196,8 @@ class AllocatorZephyr : public Allocator {
   }
 };
 
-#  if defined(USE_PSRAM) || defined(CONFIG_MEM_ATTR_HEAP)
-#    include <zephyr/mem_mgmt/mem_attr_heap.h>
+#if defined(USE_PSRAM) && defined(MEM_ATTR_HEAP_RAM_NOCACHE)
+#include <zephyr/mem_mgmt/mem_attr_heap.h>
 
 /**
  * @brief Zephyr PSRAM allocator using mem_attr_heap (requires
