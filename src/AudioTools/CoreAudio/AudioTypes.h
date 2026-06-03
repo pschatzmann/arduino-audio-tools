@@ -6,6 +6,7 @@
 #include <type_traits>
 #endif
 
+#include "AudioTools/CoreAudio/AudioRuntime.h"
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
 

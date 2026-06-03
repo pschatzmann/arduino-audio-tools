@@ -6,6 +6,13 @@
 
 #include "AudioToolsConfig.h"
 
+#ifndef min
+#  define min(a,b) ((a)<(b)?(a):(b))
+#endif
+#ifndef max
+#  define max(a,b) ((a)>(b)?(a):(b))
+#endif
+
 namespace audio_tools {
 
 /// stops any further processing by spinning in an endless loop  @ingroup basic
@@ -28,7 +35,7 @@ inline static void checkMemory(bool printMemory=false) {
 }
 
 #ifdef ARDUINO
-
+#include <Arduino.h>
 /// prints n times the character ch and a new line  @ingroup basic
 inline void printNChar(char ch, int n){
   for (int j=0;j<n;j++) Serial.print(ch);
@@ -57,6 +64,8 @@ inline void printVersionInfo() {
   printNChar('*',50);
 }
 
+#else
+#include "AudioTools/AudioLibs/Desktop/NoArduino.h"
 #endif
 
 }

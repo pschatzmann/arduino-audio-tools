@@ -1,5 +1,6 @@
 #pragma once
 
+#include "AudioTools/CoreAudio/AudioRuntime.h"
 #include "AudioTools/CoreAudio/AudioBasic/Collections.h"
 #include "AudioTools/CoreAudio/AudioBasic/Str.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
