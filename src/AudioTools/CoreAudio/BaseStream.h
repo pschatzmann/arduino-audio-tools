@@ -1,11 +1,8 @@
 #pragma once
+#include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/Buffers.h"
 #include "AudioTools/CoreAudio/AudioTypes.h"
 #include "AudioTools/CoreAudio/BaseConverter.h"
-
-#ifdef ARDUINO
-#include "Stream.h"
-#endif
 
 #ifdef USE_STREAM_WRITE_OVERRIDE
 #define STREAM_WRITE_OVERRIDE override
