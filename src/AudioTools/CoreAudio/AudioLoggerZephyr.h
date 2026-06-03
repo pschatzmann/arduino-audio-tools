@@ -1,6 +1,7 @@
 #pragma once
 
 #if USE_AUDIO_LOGGING
+#include <zephyr/logging/log.h>
 
 #ifndef LOG_METHOD
 #  define LOG_METHOD __PRETTY_FUNCTION__
