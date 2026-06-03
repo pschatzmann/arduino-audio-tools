@@ -5,15 +5,13 @@
 #include <assert.h>
 
 #include "AudioToolsConfig.h"
+#include <algorithm>
 
-#ifndef min
-#  define min(a,b) ((a)<(b)?(a):(b))
-#endif
-#ifndef max
-#  define max(a,b) ((a)>(b)?(a):(b))
-#endif
 
 namespace audio_tools {
+
+using std::min;
+using std::max;
 
 /// stops any further processing by spinning in an endless loop  @ingroup basic
 inline void stop() {
@@ -64,7 +62,7 @@ inline void printVersionInfo() {
   printNChar('*',50);
 }
 
-#else
+#elif defined(IS_ZEPHYR) || defined(ESP32)
 #include "AudioTools/AudioLibs/Desktop/NoArduino.h"
 #endif
 

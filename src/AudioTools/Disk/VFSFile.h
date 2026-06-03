@@ -125,7 +125,7 @@ class VFSFile : public Stream {
     return readBytes((uint8_t*)data, len);
   }
 
-  virtual size_t readBytes(uint8_t* data, size_t len)  {
+  virtual size_t readBytes(uint8_t* data, size_t len) {
     stream.read((char*)data, len);
     return stream ? len : stream.gcount();
   }
