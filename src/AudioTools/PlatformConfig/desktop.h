@@ -1,4 +1,5 @@
 #pragma once
+#include "AudioToolsConfig.h"
 #if defined(IS_ZEPHYR)
 #  include "AudioTools/AudioLibs/Desktop/NoArduino.h"
 #elif defined(IS_MIN_DESKTOP) 
