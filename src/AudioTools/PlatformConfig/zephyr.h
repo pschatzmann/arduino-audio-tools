@@ -24,3 +24,8 @@
 #if IS_ENABLED(CONFIG_ADC)
 #  define USE_ANALOG_ADC
 #endif
+
+// Enable PSRAM allocator if the external memory heap is available
+#if defined(CONFIG_HEAP_MEM_POOL_SIZE) && CONFIG_HEAP_MEM_POOL_SIZE > 0
+#  define USE_PSRAM
+#endif
