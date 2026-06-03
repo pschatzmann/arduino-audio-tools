@@ -6,4 +6,8 @@
 #include "RP2040.h"
 #elif defined(IS_ZEPHYR)
 #include "Zephyr.h"
+#elif defined(USE_STD_CONCURRENCY)
+#include "Desktop.h"
 #endif
+#include "Mutex.h"
+#include "LockGuard.h"
