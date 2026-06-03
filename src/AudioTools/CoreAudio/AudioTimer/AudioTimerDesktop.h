@@ -2,7 +2,7 @@
 
 #include "AudioTimerBase.h"
 
-#if defined(USE_TIMER) && defined(USE_CPP_TASK)
+#if defined(USE_TIMER) && defined(USE_CPP_TASK) && (defined(IS_DESKTOP) || defined(IS_DESKTOP_WITH_TIME_ONLY)|| defined(IS_MIN_DESKTOP))
 
 #include <atomic>
 #include <chrono>
