@@ -238,3 +238,74 @@ inline uint64_t micros() { return xTaskGetTickCount() * portTICK_PERIOD_MS * 100
 #define DESKTOP_MILLIS_DEFINED
 
 #endif
+
+#if defined(__ZEPHYR__)
+#include <zephyr/device.h>
+#include <zephyr/devicetree.h>
+#include <zephyr/drivers/gpio.h>
+#include <zephyr/kernel.h>
+
+inline const device* zephyrGpioPort() {
+#if DT_NODE_HAS_STATUS(DT_NODELABEL(gpio0), okay)
+  const device* dev = DEVICE_DT_GET(DT_NODELABEL(gpio0));
+  if (dev != nullptr && device_is_ready(dev)) {
+    return dev;
+  }
+#endif
+  return nullptr;
+}
+
+/// e.g. for AudioActions
+inline int digitalRead(int pin) {
+  const device* dev = zephyrGpioPort();
+  if (dev == nullptr) {
+    return LOW;
+  }
+  int rc = gpio_pin_get(dev, pin);
+  return rc > 0 ? HIGH : LOW;
+}
+
+inline void digitalWrite(int pin, int value) {
+  const device* dev = zephyrGpioPort();
+  if (dev == nullptr) {
+    return;
+  }
+  gpio_pin_set(dev, pin, value ? 1 : 0);
+}
+
+inline void pinMode(int pin, int mode) {
+  const device* dev = zephyrGpioPort();
+  if (dev == nullptr) {
+    return;
+  }
+
+  gpio_flags_t flags = GPIO_INPUT;
+  switch (mode) {
+    case INPUT:
+      flags = GPIO_INPUT;
+      break;
+    case OUTPUT:
+      flags = GPIO_OUTPUT;
+      break;
+    case INPUT_PULLUP:
+      flags = GPIO_INPUT | GPIO_PULL_UP;
+      break;
+    default:
+      flags = GPIO_INPUT;
+      break;
+  }
+
+  gpio_pin_configure(dev, pin, flags);
+}
+
+inline void delay(uint32_t ms) { k_msleep(ms); }
+inline uint32_t millis() { return k_uptime_get_32(); }
+inline void delayMicroseconds(uint32_t us) {
+  if (us == 0) return;
+  k_busy_wait(us);
+}
+inline uint64_t micros() { return k_cyc_to_us_floor64(k_cycle_get_64()); }
+
+// delay and millis has been defined
+#define DESKTOP_MILLIS_DEFINED
+#endif
