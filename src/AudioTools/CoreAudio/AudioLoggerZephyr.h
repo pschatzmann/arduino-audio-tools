@@ -7,7 +7,10 @@
 #  define LOG_METHOD __PRETTY_FUNCTION__
 #endif
 
-#define TAG_AUDIO "audio-tools"
+#define AUDIO_TOOLS_LOGGER_SETUP(level) \
+    LOG_MODULE_REGISTER(audio_tools, level)
+
+LOG_MODULE_DECLARE(audio_tools, LOG_LEVEL_DBG);
 
 #define LOGD(...) LOG_DBG(__VA_ARGS__);
 #define LOGI(...) LOG_INF(__VA_ARGS__);
@@ -19,7 +22,10 @@
 #define TRACEW()  LOG_WRN("%s", LOG_METHOD);
 #define TRACEE()  LOG_ERR("%s", LOG_METHOD);
 
+
 #else
+
+#define AUDIO_TOOLS_INIT_LOGGING(level)
 
 // Switch off logging
 #define LOGD(...) 
