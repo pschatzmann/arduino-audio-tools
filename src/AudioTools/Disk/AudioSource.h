@@ -1,4 +1,5 @@
 #pragma once
+#include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
 #include "AudioTools/CoreAudio/AudioBasic/Str.h"
 #include "AudioTools/CoreAudio/AudioMetaData/AbstractMetaData.h"
