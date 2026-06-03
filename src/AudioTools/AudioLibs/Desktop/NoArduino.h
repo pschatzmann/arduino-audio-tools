@@ -239,7 +239,7 @@ inline uint64_t micros() { return xTaskGetTickCount() * portTICK_PERIOD_MS * 100
 
 #endif
 
-#if defined(__ZEPHYR__)
+#if defined(IS_ZEPHYR)
 #include <zephyr/device.h>
 #include <zephyr/devicetree.h>
 #include <zephyr/drivers/gpio.h>

@@ -2,7 +2,7 @@
 
 #include "AudioToolsConfig.h"
 #if defined(USE_ANALOG) && \
-    (defined(__ZEPHYR__) || defined(IS_ZEPHYR) || defined(DOXYGEN))
+    ( defined(IS_ZEPHYR) || defined(DOXYGEN))
 #include <limits.h>
 #include <zephyr/device.h>
 #include <zephyr/drivers/adc.h>

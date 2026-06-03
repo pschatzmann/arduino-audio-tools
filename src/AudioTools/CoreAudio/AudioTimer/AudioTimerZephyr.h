@@ -2,7 +2,7 @@
 
 #include "AudioTimerBase.h"
 
-#if defined(__ZEPHYR__) || defined(DOXYGEN)
+#if defined(IS_ZEPHYR) || defined(DOXYGEN)
 
 #include <zephyr/kernel.h>
 
