@@ -1,6 +1,6 @@
 #pragma once
 /**
- * @file NoArduino.h
+ * @file Arduino.h
  * @author Phil Schatzmann
  * @brief If you want to use the framework w/o Arduino you need to provide the
  * implementation of a couple of classes and methods!

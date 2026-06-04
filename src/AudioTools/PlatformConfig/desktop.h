@@ -1,9 +1,9 @@
 #pragma once
 // cmake builds for desktop, zephyr and esp32 without arduino support
 #if defined(IS_MIN_DESKTOP) 
-#  include "AudioTools/AudioLibs/Desktop/NoArduino.h"
-#  include "AudioTools/AudioLibs/Desktop/Time.h"
-#  include "AudioTools/AudioLibs/Desktop/Main.h"
+#  include "AudioTools/AudioLibs/Emulation/Arduino.h"
+#  include "AudioTools/AudioLibs/Emulation/Time.h"
+#  include "AudioTools/AudioLibs/Emulation/Main.h"
 #  define USE_SD_NO_NS
 #  define USE_TIMER
 #  define USE_CPP_TASK
@@ -12,8 +12,8 @@
 #    define EXIT_ON_STOP
 #  endif
 #elif defined(IS_DESKTOP_WITH_TIME_ONLY)
-#  include "AudioTools/AudioLibs/Desktop/Time.h"
-#  include "AudioTools/AudioLibs/Desktop/NoArduino.h"
+#  include "AudioTools/AudioLibs/Emulation/Time.h"
+#  include "AudioTools/AudioLibs/Emulation/Arduino.h"
 #  define USE_SD_NO_NS
 #  define USE_TIMER
 #  define USE_CPP_TASK
@@ -39,9 +39,9 @@ typedef WiFiClient WiFiClientSecure;
 #elif defined(ESP32_CMAKE)
 #  define ESP32
 #  include "esp_idf_version.h"
-#  include "AudioTools/AudioLibs/Desktop/NoArduino.h"
+#  include "AudioTools/AudioLibs/Emulation/Arduino.h"
 #else 
-//#  include "AudioTools/AudioLibs/Desktop/NoArduino.h"
+//#  include "AudioTools/AudioLibs/Emulation/Arduino.h"
 //#  define USE_CPP_TASK
 //#  define USE_STD_CONCURRENCY
 //#  define IS_JUPYTER
