@@ -51,7 +51,7 @@ class AudioLogger {
        log_print_ptr->println(print_buffer);
        log_print_ptr->flush ();
     } else {}
-      vprintk("%s", (const char*)print_buffer);
+      printk(print_buffer);
     }
 #else
     log_print_ptr->println(print_buffer);
