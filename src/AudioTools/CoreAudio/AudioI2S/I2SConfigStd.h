@@ -6,6 +6,22 @@
 #  define PIN_I2S_MCK -1
 #endif
 
+#ifndef PIN_I2S_BCK
+#  define PIN_I2S_BCK -1
+#endif
+
+#ifndef PIN_I2S_WS
+#  define PIN_I2S_WS -1
+#endif
+
+#ifndef PIN_I2S_DATA_IN
+#  define PIN_I2S_DATA_IN -1
+#endif
+
+#ifndef PIN_I2S_DATA_OUT
+#  define PIN_I2S_DATA_OUT -1
+#endif
+
 namespace audio_tools {
 
 /**
