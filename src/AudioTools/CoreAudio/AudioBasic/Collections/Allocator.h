@@ -221,19 +221,22 @@ class AllocatorZephyrPSRAM : public Allocator {
   }
 };
 
-using DefaultAllocator = AllocatorZephyrPSRAM;
-using DefaultAllocatorRAM = AllocatorZephyr;
+static AllocatorZephyrPSRAM DefaultAllocator;
+static AllocatorZephyr DefaultAllocatorRAM;
 
 #  else
 
-using DefaultAllocator = AllocatorZephyr;
-using DefaultAllocatorRAM = AllocatorZephyr;
+static AllocatorZephyr DefaultAllocator;
+static AllocatorZephyr DefaultAllocatorRAM;
 
 #  endif  // USE_PSRAM / CONFIG_MEM_ATTR_HEAP
 
-#endif  // IS_ZEPHYR
+#else
 
 static AllocatorExt DefaultAllocator;
 static Allocator DefaultAllocatorRAM;
+
+#endif  // IS_ZEPHYR
+
 
 }  // namespace audio_tools
