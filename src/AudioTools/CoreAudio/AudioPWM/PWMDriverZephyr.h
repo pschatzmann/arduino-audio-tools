@@ -49,16 +49,14 @@ class PWMDriverZephyr : public DriverPWMBase {
 
     // Stop and release PWM devices
     for (int j = 0; j < audio_config.channels; j++) {
-      if (pwm_devices[j] != nullptr) {
         // Disable PWM on this channel
-        pwm_dt_spec spec = {.dev = pwm_devices[j]->dev,
-                            .channel = pwm_devices[j]->channel,
+        pwm_dt_spec spec = {.dev = pwm_devices[j].dev,
+                            .channel = pwm_devices[j].channel,
                             .flags = 0};
         int rc = pwm_set_dt(&spec, 0, 0);
         if (rc != 0) {
           LOGE("Failed to disable PWM on channel %d: %d", j, rc);
         }
-      }
     }
     pwm_devices.clear();
     deleteBuffer();
@@ -66,7 +64,7 @@ class PWMDriverZephyr : public DriverPWMBase {
 
  protected:
   /// PWM device configuration wrapper
-  PWMDeviceInfo {
+  struct PWMDeviceInfo {
     const device* dev;
     uint32_t channel;
     uint32_t pin;
@@ -134,7 +132,7 @@ class PWMDriverZephyr : public DriverPWMBase {
     LOGI("PWM setup complete");
   }
 
-  device* getDevice(int pin) {
+  const device* getDevice(int gpio_pin) {
     char device_name[20];
     snprintf(device_name, 20, "PWM_%d", gpio_pin);
 
@@ -142,17 +140,16 @@ class PWMDriverZephyr : public DriverPWMBase {
     // For this example, we assume pwm0 is available
     const device* pwm_dev = device_get_binding(device_name);
     if (!pwm_dev) {
-      LOGE("Failed to get PWM device for channel %d (pin %u) - name: %s", j,
-           gpio_pin, device_name);
+      LOGE("Failed to get PWM device for pin %u - name: %s", gpio_pin, device_name);
       return nullptr;
     }
 
     if (!device_is_ready(pwm_dev)) {
-      LOGE("PWM device not ready for channel %d - name: %s", j, device_name);
+      LOGE("PWM device not ready for pin %u - name: %s", gpio_pin, device_name);
       return nullptr;
     }
 
-    return device;
+    return pwm_dev;
   }
 
   /// Configure timer parameters (called after setupPWM)
@@ -176,13 +173,12 @@ class PWMDriverZephyr : public DriverPWMBase {
 
   /// Write PWM value to a specific channel
   virtual void pwmWrite(int channel, int value) override {
-    if (channel < 0 || channel >= pwm_devices.size() ||
-        pwm_devices[channel] == nullptr) {
+    if (channel < 0 || channel >= pwm_devices.size()) {
       LOGW("Invalid PWM channel: %d", channel);
       return;
     }
 
-    PWMDeviceInfo* dev_info = pwm_devices[channel];
+    PWMDeviceInfo& dev_info = pwm_devices[channel];
 
     // Clamp value to valid range
     uint32_t clamped_value =
@@ -190,12 +186,12 @@ class PWMDriverZephyr : public DriverPWMBase {
 
     // Calculate duty cycle in cycles
     uint32_t duty_cycles =
-        (clamped_value * dev_info->period_cycles) / maxOutputValue();
+        (clamped_value * dev_info.period_cycles) / maxOutputValue();
 
     pwm_dt_spec spec = {
-        .dev = dev_info->dev, .channel = dev_info->channel, .flags = 0};
+        .dev = dev_info.dev, .channel = dev_info.channel, .flags = 0};
 
-    int rc = pwm_set_dt(&spec, dev_info->period_cycles, duty_cycles);
+    int rc = pwm_set_dt(&spec, dev_info.period_cycles, duty_cycles);
     if (rc != 0) {
       LOGD("Failed to set PWM duty on channel %d: %d", channel, rc);
     }
