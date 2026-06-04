@@ -49,7 +49,7 @@
 #define LOW 0x0
 #endif
 
-using namespace std;
+//using namespace std;
 
 enum PrintCharFmt { DEC=10, HEX=16 };
 
@@ -239,7 +239,7 @@ inline uint64_t micros() { return xTaskGetTickCount() * portTICK_PERIOD_MS * 100
 #include <unordered_map>
 
 inline const device* getGPIODevice(const char* device_name) {
-  static unordered_map<const char*, const device*> map;
+  static std::unordered_map<const char*, const device*> map;
   // return cached device if available
   auto it = map.find(device_name);
   if (it != map.end()) return it->second;
@@ -255,7 +255,7 @@ inline const device* getGPIODevice(const char* device_name) {
 }
 
 inline const device* getGPIODevice(int gpio_no, const char* prefix="GPIO_") {
-  static unordered_map<int, const device*> map;
+  static std::unordered_map<int, const device*> map;
   // return cached device if available
   auto it = map.find(gpio_no);
   if (it != map.end()) return it->second;
@@ -313,7 +313,10 @@ inline void pinMode(int pin, int mode) {
       break;
   }
 
-  gpio_pin_configure(dev, pin, flags);
+  int rc = gpio_pin_configure(dev, pin, flags);
+  if (rc != 0) {
+    LOGE("Failed to configure GPIO pin %d with mode %d: %d", pin, mode, rc);
+  }
 }
 
 inline void delay(uint32_t ms) { k_msleep(ms); }
