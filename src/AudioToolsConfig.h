@@ -340,9 +340,6 @@
 #pragma GCC diagnostic ignored "-Wnarrowing"
 #endif
 
-// Some top level functions: stop(), checkMemory()
-#include "AudioTools/CoreAudio/AudioRuntime.h"
-
 #if USE_CHECK_MEMORY
 #  define CHECK_MEMORY() checkMemory(true)
 #else
@@ -356,6 +353,7 @@
  * 
  */
 #if USE_AUDIOTOOLS_NS
+namespace audio_tools {}
 using namespace audio_tools;  
 #endif
 

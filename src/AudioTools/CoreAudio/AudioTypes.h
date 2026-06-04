@@ -9,6 +9,8 @@
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
 #include "AudioTools/CoreAudio/AudioBasic/int24_t.h"
+// Some top level functions: stop(), checkMemory()
+#include "AudioTools/CoreAudio/AudioRuntime.h"
 
 
 
