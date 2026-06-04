@@ -127,19 +127,15 @@ class I2SDriverZephyr {
     if (cfg.rx_tx_mode == TX_MODE || cfg.rx_tx_mode == RXTX_MODE) {
       (void)i2s_trigger(i2s_dev, I2S_DIR_TX, I2S_TRIGGER_DROP);
       I2SConfigStd disable_cfg = tx_cfg;
-      disable_cfg.sample_rate = 0;
-      struct i2s_config zephyr_cfg = buildI2SConfig(disable_cfg, &tx_slab);
-      zephyr_cfg.frame_clk_freq = 0U;
-      (void)i2s_configure(i2s_dev, I2S_DIR_TX, &zephyr_cfg);
+      disable_cfg.frame_clk_freq = 0U;
+      (void)i2s_configure(i2s_dev, I2S_DIR_TX, &disable_cfg);
     }
 
     if (cfg.rx_tx_mode == RX_MODE || cfg.rx_tx_mode == RXTX_MODE) {
       (void)i2s_trigger(i2s_dev, I2S_DIR_RX, I2S_TRIGGER_DROP);
       I2SConfigStd disable_cfg = rx_cfg;
-      disable_cfg.sample_rate = 0;
-      struct i2s_config zephyr_cfg = buildI2SConfig(disable_cfg, &rx_slab);
-      zephyr_cfg.frame_clk_freq = 0U;
-      (void)i2s_configure(i2s_dev, I2S_DIR_RX, &zephyr_cfg);
+      disable_cfg.frame_clk_freq = 0U;
+      (void)i2s_configure(i2s_dev, I2S_DIR_RX, &disable_cfg);
     }
 
     is_started = false;
