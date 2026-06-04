@@ -7,23 +7,17 @@
 
 #include "AudioTools/Concurrency/LockGuard.h"
 #if defined(RP2040)
-#include "AudioTools/Concurrency/RP2040/MutexRP2040.h"
+//#include "AudioTools/Concurrency/RP2040/MutexRP2040.h"
 #elif defined(ESP32)
-#include "AudioTools/Concurrency/RTOS/MutexRTOS.h"
+//#include "AudioTools/Concurrency/RTOS/MutexRTOS.h"
 #include "esp_log.h"
+#elif defined(IS_ZEPHYR)
+#include <zephyr/kernel.h>
 #endif
 
 #if USE_AUDIO_LOGGING
 
 namespace audio_tools {
-
-#if defined(ESP32)
-static MutexRTOS audio_logger_mutex;
-#elif defined(RP2040)
-static MutexRP2040 audio_logger_mutex;
-#else
-static MutexBase audio_logger_mutex;  // no locking
-#endif
 
 /**
  * @brief A simple Logger that writes messages dependent on the log level
@@ -64,6 +58,8 @@ class AudioLogger {
 #if defined(IS_DESKTOP) || defined(IS_DESKTOP_WITH_TIME_ONLY)
     fprintf(stderr, "%s\n", print_buffer);
     fflush(stderr);
+#elif defined(IS_ZEPHYR)
+    vprintk(print_buffer);
 #else
     log_print_ptr->println(print_buffer);
     log_print_ptr->flush();
@@ -173,7 +169,6 @@ class CustomLogLevel {
 // AudioLogger::instance().println();}
 #define LOG_OUT_PGMEM(level, fmt, ...)                                         \
   {                                                                            \
-    LockGuard guard{audio_logger_mutex};                                       \
     AudioLogger::instance().prefix(__FILE__, __LINE__, level);                 \
     snprintf(AudioLogger::instance().str(), LOG_PRINTF_BUFFER_SIZE, PSTR(fmt), \
              ##__VA_ARGS__);                                                   \
@@ -182,7 +177,6 @@ class CustomLogLevel {
 
 #define LOG_OUT(level, fmt, ...)                                         \
   {                                                                      \
-    LockGuard guard{audio_logger_mutex};                                 \
     AudioLogger::instance().prefix(__FILE__, __LINE__, level);           \
     snprintf(AudioLogger::instance().str(), LOG_PRINTF_BUFFER_SIZE, fmt, \
              ##__VA_ARGS__);                                             \
@@ -190,7 +184,6 @@ class CustomLogLevel {
   }
 #define LOG_MIN(level)                                         \
   {                                                            \
-    LockGuard guard{audio_logger_mutex};                       \
     AudioLogger::instance().prefix(__FILE__, __LINE__, level); \
     AudioLogger::instance().println();                         \
   }
