@@ -20,6 +20,8 @@
 
 // Prevent compile errors for rewind function on some platforms
 #undef rewind
+// fix compile error for ESP32 C3
+#undef HZ
 
 // Setup for desktop builds
 #include "AudioTools/PlatformConfig/desktop.h"
