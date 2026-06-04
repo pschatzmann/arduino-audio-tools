@@ -1,8 +1,10 @@
 #pragma once
-// commented out because included in AudioToolsConfig.h to prevent recursive includes
 #include "AudioToolsConfig.h"
 #include <string.h>     // std::memcpy
 #include <stdint.h>     // std::int32_t
+#ifdef USE_TYPETRAITS
+#  include <limits>
+#endif
 
 #define INT24_MAX 0x7FFFFF
 
@@ -48,7 +50,7 @@ class int24_3bytes_t  {
 
 #if defined(USE_INT24_FROM_INT) 
 
-  int24_3bytes_t(const int &in) {
+  explicit int24_3bytes_t(const int &in) {
     set(in);
   }
 
@@ -135,7 +137,6 @@ class int24_3bytes_t  {
 }  // namespace audio_tools
 
 #ifdef USE_TYPETRAITS
-#include <limits>
 
 namespace std {
     template<> class numeric_limits<audio_tools::int24_3bytes_t> {
