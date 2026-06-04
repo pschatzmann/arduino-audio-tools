@@ -10,7 +10,7 @@
  * @copyright Copyright (c) 2022
  *
  */
-#include "AudioToolsConfig.h"
+// included by AudioToolsConfig.h when building for desktop
 #ifdef IS_DESKTOP
 #  error We should not get here!
 #endif
@@ -19,10 +19,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-//#include <algorithm>  // std::max
-//#include <chrono>
-
 
 #define IS_NOARDUINO
 

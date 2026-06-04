@@ -6,9 +6,20 @@
  */
 #pragma once
 
+// Prevent warnings
+#pragma GCC diagnostic ignored "-Wunused-variable"
+#pragma GCC diagnostic ignored "-Wunused-function"
+#pragma GCC diagnostic ignored "-Wvla"
+#pragma GCC diagnostic ignored "-Wsign-compare"
+#pragma GCC diagnostic ignored "-Woverloaded-virtual"
+#pragma GCC diagnostic ignored "-Wdouble-promotion"
+
 #define AUDIOTOOLS_VERSION "1.2.4"
 #define AUDIOTOOLS_MAJOR_VERSION 1
 #define AUDIOTOOLS_MINOR_VERSION 2
+
+// Prevent compile errors for rewind function on some platforms
+#undef rewind
 
 // Setup for desktop builds
 #include "AudioTools/PlatformConfig/desktop.h"
@@ -184,15 +195,14 @@
 #include <Arduino.h>
 #endif
 
-
 /**
  * ------------------------------------------------------------------------- 
  * @brief Platform specific Settings
  */
 
- #ifdef ESP32
- #  include "AudioTools/PlatformConfig/esp32.h"
- #endif
+#ifdef ESP32
+#  include "AudioTools/PlatformConfig/esp32.h"
+#endif
 
 //----- ESP8266 -----------
 #ifdef ESP8266
@@ -291,7 +301,6 @@
 #  define URL_CLIENT_TIMEOUT 60000;
 #endif
 
-
 #ifndef URL_HANDSHAKE_TIMEOUT
 #  define URL_HANDSHAKE_TIMEOUT 120000
 #endif
@@ -321,13 +330,6 @@
 #  define ESP_IDF_VERSION_VAL(a, b , c) 0
 #endif
 
-#pragma GCC diagnostic ignored "-Wunused-variable"
-#pragma GCC diagnostic ignored "-Wunused-function"
-#pragma GCC diagnostic ignored "-Wvla"
-#pragma GCC diagnostic ignored "-Wsign-compare"
-#pragma GCC diagnostic ignored "-Woverloaded-virtual"
-#pragma GCC diagnostic ignored "-Wdouble-promotion"
-
 #ifdef USE_NO_MEMACCESS
 #pragma GCC diagnostic ignored "-Wclass-memaccess"
 #endif
@@ -335,8 +337,6 @@
 #ifdef USE_INITIALIZER_LIST
 #pragma GCC diagnostic ignored "-Wnarrowing"
 #endif
-
-#undef rewind
 
 // Some top level functions: stop(), checkMemory()
 #include "AudioTools/CoreAudio/AudioRuntime.h"
