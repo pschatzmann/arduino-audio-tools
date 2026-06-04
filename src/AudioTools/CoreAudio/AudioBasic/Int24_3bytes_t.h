@@ -1,5 +1,6 @@
-#pragma once
-#include "AudioToolsConfig.h"
+#pragma 
+// commented out because included in AudioToolsConfig.h to prevent recursive includes
+//#include "AudioToolsConfig.h"
 
 #define INT24_MAX 0x7FFFFF
 
