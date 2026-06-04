@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <assert.h>
 #include <algorithm>
+#include "AudioToolsConfig.h" 
 
 namespace audio_tools {
 
