@@ -5,13 +5,12 @@
 #if defined(IS_ZEPHYR) || defined(DOXYGEN)
 
 #include <string.h>
-
 #include <zephyr/device.h>
 #include <zephyr/drivers/i2s.h>
 #include <zephyr/kernel.h>
 
 #include "AudioTools/CoreAudio/AudioBasic/Collections.h"
-#include "AudioTools/CoreAudio/AudioI2S/I2SConfig.h"
+#include "AudioTools/CoreAudio/AudioI2S/I2SConfigZephyr.h"
 
 #define IS_I2S_IMPLEMENTED
 
@@ -28,8 +27,8 @@ class I2SDriverZephyr {
 
  public:
   /// Provides the default configuration
-  I2SConfigStd defaultConfig(RxTxMode mode) {
-    I2SConfigStd c(mode);
+  I2SConfigZephyr defaultConfig(RxTxMode mode) {
+    I2SConfigZephyr c(mode);
     return c;
   }
 
@@ -38,7 +37,7 @@ class I2SDriverZephyr {
     if (is_started) {
       if (info.equals(cfg)) return true;
 
-      I2SConfigStd previous_cfg = cfg;
+      I2SConfigZephyr previous_cfg = cfg;
       cfg.sample_rate = info.sample_rate;
       cfg.channels = info.channels;
       cfg.bits_per_sample = info.bits_per_sample;
@@ -62,7 +61,7 @@ class I2SDriverZephyr {
   bool begin(RxTxMode mode = TX_MODE) { return begin(defaultConfig(mode)); }
 
   /// starts the DAC with the current config
-  bool begin(I2SConfigStd cfg) {
+  bool begin(I2SConfigZephyr cfg) {
     TRACEI();
 
     if (is_started) end();
@@ -74,7 +73,8 @@ class I2SDriverZephyr {
       return false;
     }
 
-    if (!tx_slab_buffer.resize(slab_size) || !rx_slab_buffer.resize(slab_size)) {
+    if (!tx_slab_buffer.resize(slab_size) ||
+        !rx_slab_buffer.resize(slab_size)) {
       LOGE("Could not resize Zephyr I2S slabs");
       return false;
     }
@@ -142,18 +142,18 @@ class I2SDriverZephyr {
   }
 
   /// provides the actual configuration
-  I2SConfigStd config() { return cfg; }
+  I2SConfigZephyr config() { return cfg; }
 
   /// writes the data to the I2S interface
-  size_t writeBytes(const void *src, size_t size_bytes) {
+  size_t writeBytes(const void* src, size_t size_bytes) {
     if (!is_started || i2s_dev == nullptr) return 0;
     if (cfg.rx_tx_mode == RX_MODE) return 0;
 
-    int result = i2s_buf_write(i2s_dev, const_cast<void *>(src), size_bytes);
+    int result = i2s_buf_write(i2s_dev, const_cast<void*>(src), size_bytes);
     return (result == 0) ? size_bytes : 0;
   }
 
-  size_t readBytes(void *dest, size_t size_bytes) {
+  size_t readBytes(void* dest, size_t size_bytes) {
     if (!is_started || i2s_dev == nullptr) return 0;
     if (cfg.rx_tx_mode == TX_MODE) return 0;
 
@@ -167,10 +167,10 @@ class I2SDriverZephyr {
   int availableForWrite() { return I2S_BUFFER_COUNT * I2S_BUFFER_SIZE; }
 
  protected:
-  I2SConfigStd cfg = defaultConfig(RXTX_MODE);
+  I2SConfigZephyr cfg = defaultConfig(RXTX_MODE);
   i2s_config tx_cfg{};
   i2s_config rx_cfg{};
-  const device *i2s_dev = nullptr;
+  const device* i2s_dev = nullptr;
   bool is_started = false;
   Vector<uint8_t> tx_slab_buffer{0};
   Vector<uint8_t> rx_slab_buffer{0};
@@ -178,13 +178,15 @@ class I2SDriverZephyr {
   k_mem_slab rx_slab;
   bool slabs_initialized = false;
 
-  i2s_config buildI2SConfig(const I2SConfigStd &cfg, k_mem_slab *mem_slab) {
+  i2s_config buildI2SConfig(const I2SConfigZephyr& cfg, k_mem_slab* mem_slab) {
     i2s_config i2s_cfg = {0};
     i2s_cfg.word_size = cfg.bits_per_sample;
     i2s_cfg.channels = cfg.channels;
     i2s_cfg.format = I2S_FMT_DATA_FORMAT_I2S;
-    i2s_cfg.options = cfg.is_master ? (I2S_OPT_BIT_CLK_CONTROLLER | I2S_OPT_FRAME_CLK_CONTROLLER)
-                                     : (I2S_OPT_BIT_CLK_TARGET | I2S_OPT_FRAME_CLK_TARGET);
+    i2s_cfg.options =
+        cfg.is_master
+            ? (I2S_OPT_BIT_CLK_CONTROLLER | I2S_OPT_FRAME_CLK_CONTROLLER)
+            : (I2S_OPT_BIT_CLK_TARGET | I2S_OPT_FRAME_CLK_TARGET);
     i2s_cfg.frame_clk_freq = cfg.sample_rate;
     i2s_cfg.mem_slab = mem_slab;
     i2s_cfg.block_size = I2S_BUFFER_SIZE;
@@ -192,7 +194,7 @@ class I2SDriverZephyr {
     return i2s_cfg;
   }
 
-  bool initSlabs(const I2SConfigStd &cfg) {
+  bool initSlabs(const I2SConfigZephyr& cfg) {
     k_mem_slab_init(&tx_slab, tx_slab_buffer.data(), cfg.buffer_size,
                     cfg.buffer_count);
     k_mem_slab_init(&rx_slab, rx_slab_buffer.data(), cfg.buffer_size,
@@ -223,17 +225,14 @@ class I2SDriverZephyr {
       return true;
     }
 
-    static const char *const device_names[] = {
-        "i2s_rxtx", "i2s_tx", "i2s_rx", "i2s0", "I2S_0", "i2s"};
-
-    for (const char *name : device_names) {
-      const device *candidate = device_get_binding(name);
-      if (candidate != nullptr && device_is_ready(candidate)) {
-        i2s_dev = candidate;
-        return true;
-      }
+    static const char* const device_name = cfg.device_name;
+    const device* candidate = device_get_binding(name);
+    if (candidate != nullptr && device_is_ready(candidate)) {
+      LOGI("Resolving I2S device: '%s'", device_name);
+      i2s_dev = candidate;
+      return true;
     }
-
+    LOGE("Failed to resolve I2S device: '%s'", device_name);
     return false;
   }
 };
