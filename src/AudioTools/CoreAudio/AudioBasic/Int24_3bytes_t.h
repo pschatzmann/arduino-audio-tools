@@ -1,4 +1,4 @@
-#pragma 
+#pragma once
 // commented out because included in AudioToolsConfig.h to prevent recursive includes
 //#include "AudioToolsConfig.h"
 
