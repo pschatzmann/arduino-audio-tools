@@ -7,7 +7,7 @@
 #define NO_INPLACE_INIT_SUPPORT
 #define USE_TIMER
 #define USE_PWM
-#define USE_ZEPHYR_LOGGER
+//#define USE_ZEPHYR_LOGGER
 //#define USE_TYPETRAITS
 
 #if defined(CONFIG_I2S)
