@@ -11,6 +11,10 @@
 
 #define READ_ERROR_MSG "Could not read full data"
 
+#ifndef PIN_PWM_START
+#  define PIN_PWM_START 0
+#endif
+
 namespace audio_tools {
 
 // forward declarations
