@@ -530,7 +530,7 @@ class OutputMixer : public Print {
     for (int j = 0; j < output_count; j++) {
       int available_samples = buffers[j]->available();
       if (available_samples > 0) {
-        samples = MIN(size_bytes / sizeof(T), (size_t)available_samples);
+        samples = min(size_bytes / sizeof(T), (size_t)available_samples);
       }
     }
     return samples;

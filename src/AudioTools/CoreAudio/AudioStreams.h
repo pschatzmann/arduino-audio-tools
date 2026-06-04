@@ -1496,7 +1496,7 @@ class InputMerge : public AudioStream {
   size_t readBytes(uint8_t *data, size_t len) override {
     LOGD("readBytes: %d", (int)len);
     T *p_data = (T *)data;
-    int result_len = MIN(available(), len);
+    int result_len = min((size_t)available(), len);
     int frames = result_len / (sizeof(T) * total_channel_count);
     int result_idx = 0;
     for (int j = 0; j < frames; j++) {
