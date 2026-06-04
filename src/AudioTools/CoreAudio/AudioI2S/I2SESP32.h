@@ -4,6 +4,8 @@
 #if defined(ESP32) && USE_LEGACY_I2S || defined(DOXYGEN)
 
 #include "AudioTools/CoreAudio/AudioI2S/I2SConfig.h"
+#include "AudioTools/CoreAudio/AudioBasic/int24_t.h"
+
 #include "driver/i2s.h"
 #include "esp_system.h"
 

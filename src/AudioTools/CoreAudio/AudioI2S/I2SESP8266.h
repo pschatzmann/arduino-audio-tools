@@ -5,6 +5,7 @@
 
 #include "AudioTools/CoreAudio/AudioI2S/I2SConfig.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
+#include "AudioTools/CoreAudio/AudioBasic/int24_t.h"
 
 #define IS_I2S_IMPLEMENTED 
 
