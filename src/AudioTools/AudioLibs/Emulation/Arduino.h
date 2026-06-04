@@ -284,7 +284,7 @@ inline int digitalRead(int pin) {
 
 
 inline void digitalWrite(int pin, int value) {
-  const device* dev = getGPIODevice();
+  const device* dev = getGPIODevice(pin);
   if (dev == nullptr) {
     return;
   }
@@ -292,7 +292,7 @@ inline void digitalWrite(int pin, int value) {
 }
 
 inline void pinMode(int pin, int mode) {
-  const device* dev = getGPIODevice();
+  const device* dev = getGPIODevice(pin);
   if (dev == nullptr) {
     return;
   }
