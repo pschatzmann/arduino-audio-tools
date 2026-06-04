@@ -6,6 +6,11 @@
 #include <algorithm>
 #include "AudioToolsConfig.h" 
 
+#ifdef ARDUINO
+#include <Arduino.h>
+#endif
+
+
 namespace audio_tools {
 
 using std::min;

@@ -193,14 +193,14 @@
 // #define USE_AUDIO_SERVER
 // #define USE_URL_ARDUINO
 
-#ifdef ARDUINO
-#include <Arduino.h>
-#endif
-
 /**
  * ------------------------------------------------------------------------- 
  * @brief Platform specific Settings
  */
+#ifdef ARDUINO
+#  include "Arduino.h"
+#endif
+
 
 #ifdef ESP32
 #  include "AudioTools/PlatformConfig/esp32.h"
