@@ -125,17 +125,17 @@ class I2SDriverZephyr {
     }
 
     if (cfg.rx_tx_mode == TX_MODE || cfg.rx_tx_mode == RXTX_MODE) {
-      (void)i2s_trigger(i2s_dev, I2S_DIR_TX, I2S_TRIGGER_DROP);
-      I2SConfigStd disable_cfg = tx_cfg;
+      i2s_trigger(i2s_dev, I2S_DIR_TX, I2S_TRIGGER_DROP);
+      i2s_config disable_cfg = tx_cfg;
       disable_cfg.frame_clk_freq = 0U;
-      (void)i2s_configure(i2s_dev, I2S_DIR_TX, &disable_cfg);
+      i2s_configure(i2s_dev, I2S_DIR_TX, &disable_cfg);
     }
 
     if (cfg.rx_tx_mode == RX_MODE || cfg.rx_tx_mode == RXTX_MODE) {
-      (void)i2s_trigger(i2s_dev, I2S_DIR_RX, I2S_TRIGGER_DROP);
-      I2SConfigStd disable_cfg = rx_cfg;
+      i2s_trigger(i2s_dev, I2S_DIR_RX, I2S_TRIGGER_DROP);
+      i2s_config disable_cfg = rx_cfg;
       disable_cfg.frame_clk_freq = 0U;
-      (void)i2s_configure(i2s_dev, I2S_DIR_RX, &disable_cfg);
+      i2s_configure(i2s_dev, I2S_DIR_RX, &disable_cfg);
     }
 
     is_started = false;
@@ -168,18 +168,18 @@ class I2SDriverZephyr {
 
  protected:
   I2SConfigStd cfg = defaultConfig(RXTX_MODE);
-  I2SConfigStd tx_cfg = defaultConfig(TX_MODE);
-  I2SConfigStd rx_cfg = defaultConfig(RX_MODE);
-  const struct device *i2s_dev = nullptr;
+  i2s_config tx_cfg{};
+  i2s_config rx_cfg{};
+  const device *i2s_dev = nullptr;
   bool is_started = false;
   Vector<uint8_t> tx_slab_buffer{0};
   Vector<uint8_t> rx_slab_buffer{0};
-  struct k_mem_slab tx_slab;
-  struct k_mem_slab rx_slab;
+  k_mem_slab tx_slab;
+  k_mem_slab rx_slab;
   bool slabs_initialized = false;
 
-  struct i2s_config buildI2SConfig(const I2SConfigStd &cfg, struct k_mem_slab *mem_slab) {
-    struct i2s_config i2s_cfg = {0};
+  i2s_config buildI2SConfig(const I2SConfigStd &cfg, k_mem_slab *mem_slab) {
+    i2s_config i2s_cfg = {0};
     i2s_cfg.word_size = cfg.bits_per_sample;
     i2s_cfg.channels = cfg.channels;
     i2s_cfg.format = I2S_FMT_DATA_FORMAT_I2S;
@@ -227,7 +227,7 @@ class I2SDriverZephyr {
         "i2s_rxtx", "i2s_tx", "i2s_rx", "i2s0", "I2S_0", "i2s"};
 
     for (const char *name : device_names) {
-      const struct device *candidate = device_get_binding(name);
+      const device *candidate = device_get_binding(name);
       if (candidate != nullptr && device_is_ready(candidate)) {
         i2s_dev = candidate;
         return true;
