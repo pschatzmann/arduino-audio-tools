@@ -1,7 +1,7 @@
 #pragma once
 
-#include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/AudioRuntime.h"
+#include "AudioToolsConfig.h"
 
 #if USE_AUDIO_LOGGING
 
@@ -48,9 +48,9 @@ class AudioLogger {
     fflush(stderr);
 #elif defined(IS_ZEPHYR)
     if (log_print_ptr != nullptr) {
-       log_print_ptr->println(print_buffer);
-       log_print_ptr->flush ();
-    } else {}
+      log_print_ptr->println(print_buffer);
+      log_print_ptr->flush();
+    } else {
       printk(print_buffer);
       printk("\n");
     }
@@ -120,7 +120,10 @@ class AudioLogger {
   }
 };
 
+/// static logging instance
 static AudioLogger& AudioToolsLogger = AudioLogger::instance();
+
+/// synonym for LogLevel
 using AudioToolsLogLevel = AudioLogger::LogLevel;
 
 /// Class specific custom log level
@@ -156,66 +159,61 @@ class CustomLogLevel {
 
 }  // namespace audio_tools
 
-// #define LOG_OUT(level, fmt, ...)
-// {AudioLogger::instance().prefix(__FILE__,__LINE__, level);cont char PROGMEM
-// *fmt_P=F(fmt); snprintf_P(AudioLogger::instance().str(),
-// LOG_PRINTF_BUFFER_SIZE, fmt,  ##__VA_ARGS__);
-// AudioLogger::instance().println();}
-#define LOG_OUT_PGMEM(level, fmt, ...)                                         \
-  {                                                                            \
-    AudioLogger::instance().prefix(__FILE__, __LINE__, level);                 \
-    snprintf(AudioLogger::instance().str(), LOG_PRINTF_BUFFER_SIZE, PSTR(fmt), \
-             ##__VA_ARGS__);                                                   \
-    AudioLogger::instance().println();                                         \
+#define LOG_OUT_PGMEM(level, fmt, ...)                                  \
+  {                                                                     \
+    ::audio_tools::AudioToolsLogger.prefix(__FILE__, __LINE__, level);                 \
+    snprintf(::audio_tools::AudioToolsLogger.str(), LOG_PRINTF_BUFFER_SIZE, PSTR(fmt), \
+             ##__VA_ARGS__);                                            \
+    ::audio_tools::AudioToolsLogger.println();                                         \
   }
 
-#define LOG_OUT(level, fmt, ...)                                         \
-  {                                                                      \
-    AudioLogger::instance().prefix(__FILE__, __LINE__, level);           \
-    snprintf(AudioLogger::instance().str(), LOG_PRINTF_BUFFER_SIZE, fmt, \
-             ##__VA_ARGS__);                                             \
-    AudioLogger::instance().println();                                   \
+#define LOG_OUT(level, fmt, ...)                                  \
+  {                                                               \
+    ::audio_tools::AudioToolsLogger.prefix(__FILE__, __LINE__, level);           \
+    snprintf(::audio_tools::AudioToolsLogger.str(), LOG_PRINTF_BUFFER_SIZE, fmt, \
+             ##__VA_ARGS__);                                      \
+    ::audio_tools::AudioToolsLogger.println();                                   \
   }
-#define LOG_MIN(level)                                         \
-  {                                                            \
-    AudioLogger::instance().prefix(__FILE__, __LINE__, level); \
-    AudioLogger::instance().println();                         \
+#define LOG_MIN(level)                                  \
+  {                                                     \
+    ::audio_tools::AudioToolsLogger.prefix(__FILE__, __LINE__, level); \
+    ::audio_tools::AudioToolsLogger.println();                         \
   }
 
 #ifdef LOG_NO_MSG
-#define LOGD(fmt, ...)                                         \
-  if (AudioLogger::instance().level() <= AudioLogger::Debug) { \
-    LOG_MIN(AudioLogger::Debug);                               \
+#define LOGD(fmt, ...)                                  \
+  if (::audio_tools::AudioToolsLogger.level() <= AudioLogger::Debug) { \
+    LOG_MIN(AudioLogger::Debug);                        \
   }
-#define LOGI(fmt, ...)                                        \
-  if (AudioLogger::instance().level() <= AudioLogger::Info) { \
-    LOG_MIN(AudioLogger::Info);                               \
+#define LOGI(fmt, ...)                                 \
+  if (::audio_tools::AudioToolsLogger.level() <= AudioLogger::Info) { \
+    LOG_MIN(AudioLogger::Info);                        \
   }
-#define LOGW(fmt, ...)                                           \
-  if (AudioLogger::instance().level() <= AudioLogger::Warning) { \
-    LOG_MIN(AudioLogger::Warning);                               \
+#define LOGW(fmt, ...)                                    \
+  if (::audio_tools::AudioToolsLogger.level() <= AudioLogger::Warning) { \
+    LOG_MIN(AudioLogger::Warning);                        \
   }
-#define LOGE(fmt, ...)                                         \
-  if (AudioLogger::instance().level() <= AudioLogger::Error) { \
-    LOG_MIN(AudioLogger::Error);                               \
+#define LOGE(fmt, ...)                                  \
+  if (::audio_tools::AudioToolsLogger.level() <= AudioLogger::Error) { \
+    LOG_MIN(AudioLogger::Error);                        \
   }
 #else
 // Log statments which store the fmt string in Progmem
-#define LOGD(fmt, ...)                                         \
-  if (AudioLogger::instance().level() <= AudioLogger::Debug) { \
-    LOG_OUT_PGMEM(AudioLogger::Debug, fmt, ##__VA_ARGS__);     \
+#define LOGD(fmt, ...)                                     \
+  if (::audio_tools::AudioToolsLogger.level() <= AudioLogger::Debug) {    \
+    LOG_OUT_PGMEM(AudioLogger::Debug, fmt, ##__VA_ARGS__); \
   }
-#define LOGI(fmt, ...)                                        \
-  if (AudioLogger::instance().level() <= AudioLogger::Info) { \
-    LOG_OUT_PGMEM(AudioLogger::Info, fmt, ##__VA_ARGS__);     \
+#define LOGI(fmt, ...)                                    \
+  if (::audio_tools::AudioToolsLogger.level() <= AudioLogger::Info) {    \
+    LOG_OUT_PGMEM(AudioLogger::Info, fmt, ##__VA_ARGS__); \
   }
-#define LOGW(fmt, ...)                                           \
-  if (AudioLogger::instance().level() <= AudioLogger::Warning) { \
-    LOG_OUT_PGMEM(AudioLogger::Warning, fmt, ##__VA_ARGS__);     \
+#define LOGW(fmt, ...)                                       \
+  if (::audio_tools::AudioToolsLogger.level() <= AudioLogger::Warning) {    \
+    LOG_OUT_PGMEM(AudioLogger::Warning, fmt, ##__VA_ARGS__); \
   }
-#define LOGE(fmt, ...)                                         \
-  if (AudioLogger::instance().level() <= AudioLogger::Error) { \
-    LOG_OUT_PGMEM(AudioLogger::Error, fmt, ##__VA_ARGS__);     \
+#define LOGE(fmt, ...)                                     \
+  if (::audio_tools::AudioToolsLogger.level() <= AudioLogger::Error) {    \
+    LOG_OUT_PGMEM(AudioLogger::Error, fmt, ##__VA_ARGS__); \
   }
 #endif
 
@@ -223,46 +221,46 @@ class CustomLogLevel {
 #if defined(NO_TRACED) || defined(NO_TRACE)
 #define TRACED()
 #else
-#define TRACED()                                               \
-  if (AudioLogger::instance().level() <= AudioLogger::Debug) { \
-    LOG_OUT(AudioLogger::Debug, LOG_METHOD);                   \
+#define TRACED()                                        \
+  if (::audio_tools::AudioToolsLogger.level() <= AudioLogger::Debug) { \
+    LOG_OUT(AudioLogger::Debug, LOG_METHOD);            \
   }
 #endif
 
 #if defined(NO_TRACEI) || defined(NO_TRACE)
 #define TRACEI()
 #else
-#define TRACEI()                                              \
-  if (AudioLogger::instance().level() <= AudioLogger::Info) { \
-    LOG_OUT(AudioLogger::Info, LOG_METHOD);                   \
+#define TRACEI()                                       \
+  if (::audio_tools::AudioToolsLogger.level() <= AudioLogger::Info) { \
+    LOG_OUT(AudioLogger::Info, LOG_METHOD);            \
   }
 #endif
 
 #if defined(NO_TRACEW) || defined(NO_TRACE)
 #define TRACEW()
 #else
-#define TRACEW()                                                 \
-  if (AudioLogger::instance().level() <= AudioLogger::Warning) { \
-    LOG_OUT(AudioLogger::Warning, LOG_METHOD);                   \
+#define TRACEW()                                          \
+  if (::audio_tools::AudioToolsLogger.level() <= AudioLogger::Warning) { \
+    LOG_OUT(AudioLogger::Warning, LOG_METHOD);            \
   }
 #endif
 
 #if defined(NO_TRACEE) || defined(NO_TRACE)
 #define TRACEE()
 #else
-#define TRACEE()                                               \
-  if (AudioLogger::instance().level() <= AudioLogger::Error) { \
-    LOG_OUT(AudioLogger::Error, LOG_METHOD);                   \
+#define TRACEE()                                        \
+  if (::audio_tools::AudioToolsLogger.level() <= AudioLogger::Error) { \
+    LOG_OUT(AudioLogger::Error, LOG_METHOD);            \
   }
 #endif
 
 #else
 
 // Switch off logging
-#define LOGD(...) 
-#define LOGI(...) 
-#define LOGW(...) 
-#define LOGE(...) 
+#define LOGD(...)
+#define LOGI(...)
+#define LOGW(...)
+#define LOGE(...)
 #define TRACED()
 #define TRACEI()
 #define TRACEW()
