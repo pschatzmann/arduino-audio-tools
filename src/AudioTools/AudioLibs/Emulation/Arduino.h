@@ -236,20 +236,45 @@ inline uint64_t micros() { return xTaskGetTickCount() * portTICK_PERIOD_MS * 100
 #include <zephyr/devicetree.h>
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/kernel.h>
+#include <unordered_map>
 
-inline const device* zephyrGpioPort() {
-#if DT_NODE_HAS_STATUS(DT_NODELABEL(gpio0), okay)
-  const device* dev = DEVICE_DT_GET(DT_NODELABEL(gpio0));
+inline const device* getGPIODevice(const char* device_name) {
+  static unordered_map<const char*, const device*> map;
+  // return cached device if available
+  auto it = map.find(device_name);
+  if (it != map.end()) return it->second;
+
+  const device* dev = device_get_binding(device_name);
+  // store result in map for future calls
+  map[device_name] = dev;
   if (dev != nullptr && device_is_ready(dev)) {
     return dev;
   }
-#endif
+  LOGE("Failed to get GPIO device for name: %s", gpio_no, device_name);
+  return nullptr;  
+}
+
+inline const device* getGPIODevice(int gpio_no, const char* prefix="GPIO_") {
+  static unordered_map<int, const device*> map;
+  // return cached device if available
+  auto it = map.find(gpio_no);
+  if (it != map.end()) return it->second;
+
+  char device_name[20];
+  snprintf(device_name, 20, "%s%d", prefix, gpio_no);
+  const device* dev = device_get_binding(device_name);
+  // store result in map for future calls
+  map[gpio_no] = dev;
+  if (dev != nullptr && device_is_ready(dev)) {
+    return dev;
+  }
+  LOGE("Failed to get GPIO device for pin %d - name: %s", gpio_no, device_name);
   return nullptr;
 }
 
 /// e.g. for AudioActions
 inline int digitalRead(int pin) {
-  const device* dev = zephyrGpioPort();
+  const device* dev = getGPIODevice(pin);
   if (dev == nullptr) {
     return LOW;
   }
@@ -257,8 +282,9 @@ inline int digitalRead(int pin) {
   return rc > 0 ? HIGH : LOW;
 }
 
+
 inline void digitalWrite(int pin, int value) {
-  const device* dev = zephyrGpioPort();
+  const device* dev = getGPIODevice();
   if (dev == nullptr) {
     return;
   }
@@ -266,7 +292,7 @@ inline void digitalWrite(int pin, int value) {
 }
 
 inline void pinMode(int pin, int mode) {
-  const device* dev = zephyrGpioPort();
+  const device* dev = getGPIODevice();
   if (dev == nullptr) {
     return;
   }
