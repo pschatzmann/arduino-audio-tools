@@ -50,8 +50,11 @@ class PWMDriverZephyr : public DriverPWMBase {
     // Stop and release PWM devices
     for (int j = 0; j < audio_config.channels; j++) {
       if (pwm_devices[j] != nullptr) {
-        // Disable PWM on this channel
-        int rc = pwm_set_dt(&pwm_devices[j]->spec, 0, 0);
+                // Disable PWM on this channel
+        struct pwm_dt_spec spec = {.dev = pwm_devices[j]->dev,
+                                    .channel = pwm_devices[j]->channel,
+                                    .flags = 0};
+        int rc = pwm_set_dt(&spec, 0, 0);
         if (rc != 0) {
           LOGE("Failed to disable PWM on channel %d: %d", j, rc);
         }
@@ -119,8 +122,9 @@ class PWMDriverZephyr : public DriverPWMBase {
       auto dev_info = new PWMDeviceInfo();
       dev_info->dev = pwm_dev;
       dev_info->channel = j;  // Typically maps to PWM channel
-      dev_info->period_cycles = pwm_get_cycles_per_sec(pwm_dev) /
-                                 audio_config.pwm_frequency;
+      uint64_t cycles_per_sec = 0;
+      pwm_get_cycles_per_sec(pwm_dev, 0, &cycles_per_sec);
+      dev_info->period_cycles = (uint32_t)(cycles_per_sec / audio_config.pwm_frequency);
 
       LOGI("PWM Channel %d: pin=%u, period_cycles=%u", j, gpio_pin,
            dev_info->period_cycles);

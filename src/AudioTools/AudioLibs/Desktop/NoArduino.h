@@ -53,8 +53,6 @@ using namespace std;
 
 enum PrintCharFmt { DEC=10, HEX=16 };
 
-namespace audio_tools {
-
 class Print {
  public:
 #ifndef DOXYGEN
@@ -185,8 +183,6 @@ static HardwareSerial Serial;
 inline long map(long x, long in_min, long in_max, long out_min, long out_max) {
   return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
-
-}  // namespace audio_tools
 
 #if defined(ESP32_CMAKE)
 #include "driver/gpio.h"
