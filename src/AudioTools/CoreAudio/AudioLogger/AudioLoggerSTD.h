@@ -1,19 +1,7 @@
 #pragma once
 
 #include "AudioToolsConfig.h"
-#if defined(ARDUINO) && !defined(IS_MIN_DESKTOP)
-#include "Print.h"
-#endif
-
-#include "AudioTools/Concurrency/LockGuard.h"
-#if defined(RP2040)
-//#include "AudioTools/Concurrency/RP2040/MutexRP2040.h"
-#elif defined(ESP32)
-//#include "AudioTools/Concurrency/RTOS/MutexRTOS.h"
-#include "esp_log.h"
-#elif defined(IS_ZEPHYR)
-#include <zephyr/kernel.h>
-#endif
+#include "AudioTools/CoreAudio/AudioRuntime.h"
 
 #if USE_AUDIO_LOGGING
 
@@ -59,7 +47,12 @@ class AudioLogger {
     fprintf(stderr, "%s\n", print_buffer);
     fflush(stderr);
 #elif defined(IS_ZEPHYR)
-    vprintk(print_buffer);
+    if (log_print_ptr != nullptr) {
+       log_print_ptr->println(print_buffer);
+       log_print_ptr->flush ();
+    } else {}
+      vprintk("%s", (const char*)print_buffer);
+    }
 #else
     log_print_ptr->println(print_buffer);
     log_print_ptr->flush();
