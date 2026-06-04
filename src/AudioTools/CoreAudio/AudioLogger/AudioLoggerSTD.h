@@ -52,6 +52,7 @@ class AudioLogger {
        log_print_ptr->flush ();
     } else {}
       printk(print_buffer);
+      printk("\n");
     }
 #else
     log_print_ptr->println(print_buffer);
