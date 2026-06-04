@@ -4,11 +4,11 @@
 
 #if defined(IS_ZEPHYR) || defined(DOXYGEN)
 
+#include <zephyr/drivers/pwm.h>
+#include <zephyr/kernel.h>
+
 #include "AudioTools/CoreAudio/AudioPWM/PWMDriverBase.h"
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimer.h"
-
-#include <zephyr/kernel.h>
-#include <zephyr/drivers/pwm.h>
 
 namespace audio_tools {
 
@@ -50,10 +50,10 @@ class PWMDriverZephyr : public DriverPWMBase {
     // Stop and release PWM devices
     for (int j = 0; j < audio_config.channels; j++) {
       if (pwm_devices[j] != nullptr) {
-                // Disable PWM on this channel
-        struct pwm_dt_spec spec = {.dev = pwm_devices[j]->dev,
-                                    .channel = pwm_devices[j]->channel,
-                                    .flags = 0};
+        // Disable PWM on this channel
+        pwm_dt_spec spec = {.dev = pwm_devices[j]->dev,
+                            .channel = pwm_devices[j]->channel,
+                            .flags = 0};
         int rc = pwm_set_dt(&spec, 0, 0);
         if (rc != 0) {
           LOGE("Failed to disable PWM on channel %d: %d", j, rc);
@@ -66,13 +66,14 @@ class PWMDriverZephyr : public DriverPWMBase {
 
  protected:
   /// PWM device configuration wrapper
-  struct PWMDeviceInfo {
-    const struct device* dev;
+  PWMDeviceInfo {
+    const device* dev;
     uint32_t channel;
+    uint32_t pin;
     uint32_t period_cycles;
   };
 
-  Vector<PWMDeviceInfo*> pwm_devices;
+  Vector<PWMDeviceInfo> pwm_devices;
   TimerAlarmRepeating timer;  // Callback timer for playback
 
   /// Start the timer for periodic playback
@@ -105,45 +106,53 @@ class PWMDriverZephyr : public DriverPWMBase {
     for (int j = 0; j < audio_config.channels; j++) {
       uint32_t gpio_pin = audio_config.pins()[j];
 
-      // Get the PWM device (simplified - in real Zephyr you'd use devicetree)
-      // For this example, we assume pwm0 is available
-      const struct device* pwm_dev = device_get_binding("PWM_0");
-      if (!pwm_dev) {
+      // Create device info
+      PWMDeviceInfo& dev_info = pwm_devices[j];
+      dev_info.channel = j;  // Typically maps to PWM channel
+      dev_info.pin = gpio_pin;
+      dev_info.dev = getDevice(gpio_pin);
+      if (dev_info.dev == nullptr) {
         LOGE("Failed to get PWM device for channel %d (pin %u)", j, gpio_pin);
         continue;
       }
-
-      if (!device_is_ready(pwm_dev)) {
-        LOGE("PWM device not ready for channel %d", j);
-        continue;
-      }
-
-      // Create device info
-      auto dev_info = new PWMDeviceInfo();
-      dev_info->dev = pwm_dev;
-      dev_info->channel = j;  // Typically maps to PWM channel
       uint64_t cycles_per_sec = 0;
-      pwm_get_cycles_per_sec(pwm_dev, 0, &cycles_per_sec);
-      dev_info->period_cycles = (uint32_t)(cycles_per_sec / audio_config.pwm_frequency);
+      pwm_get_cycles_per_sec(dev_info.dev, dev_info.channel, &cycles_per_sec);
+      dev_info.period_cycles =
+          (uint32_t)(cycles_per_sec / audio_config.pwm_frequency);
 
       LOGI("PWM Channel %d: pin=%u, period_cycles=%u", j, gpio_pin,
-           dev_info->period_cycles);
-
+           dev_info.period_cycles);
       // Apply initial PWM configuration (0% duty cycle)
-      struct pwm_dt_spec spec = {.dev = pwm_dev,
-                                  .channel = (uint32_t)j,
-                                  .flags = 0};
-      int rc = pwm_set_dt(&spec, dev_info->period_cycles, 0);
+      pwm_dt_spec spec = {.dev = dev_info.dev, .channel = dev_info.channel, .flags = 0};
+      int rc = pwm_set_dt(&spec, dev_info.period_cycles, 0);
       if (rc != 0) {
         LOGE("Failed to configure PWM on channel %d: %d", j, rc);
-        delete dev_info;
         continue;
       }
-
-      pwm_devices[j] = dev_info;
     }
 
     LOGI("PWM setup complete");
+  }
+
+  device* getDevice(int pin) {
+    char device_name[20];
+    snprintf(device_name, 20, "PWM_%d", gpio_pin);
+
+    // Get the PWM device (simplified - in real Zephyr you'd use devicetree)
+    // For this example, we assume pwm0 is available
+    const device* pwm_dev = device_get_binding(device_name);
+    if (!pwm_dev) {
+      LOGE("Failed to get PWM device for channel %d (pin %u) - name: %s", j,
+           gpio_pin, device_name);
+      return nullptr;
+    }
+
+    if (!device_is_ready(pwm_dev)) {
+      LOGE("PWM device not ready for channel %d - name: %s", j, device_name);
+      return nullptr;
+    }
+
+    return device;
   }
 
   /// Configure timer parameters (called after setupPWM)
@@ -176,15 +185,15 @@ class PWMDriverZephyr : public DriverPWMBase {
     PWMDeviceInfo* dev_info = pwm_devices[channel];
 
     // Clamp value to valid range
-    uint32_t clamped_value = value > maxOutputValue() ? maxOutputValue() : value;
+    uint32_t clamped_value =
+        value > maxOutputValue() ? maxOutputValue() : value;
 
     // Calculate duty cycle in cycles
     uint32_t duty_cycles =
         (clamped_value * dev_info->period_cycles) / maxOutputValue();
 
-    struct pwm_dt_spec spec = {.dev = dev_info->dev,
-                                .channel = dev_info->channel,
-                                .flags = 0};
+    pwm_dt_spec spec = {
+        .dev = dev_info->dev, .channel = dev_info->channel, .flags = 0};
 
     int rc = pwm_set_dt(&spec, dev_info->period_cycles, duty_cycles);
     if (rc != 0) {
