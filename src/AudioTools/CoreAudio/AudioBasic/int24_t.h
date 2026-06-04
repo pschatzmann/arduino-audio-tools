@@ -7,9 +7,9 @@
 
 namespace audio_tools {
 #ifdef USE_3BYTE_INT24
-    using int24_t = audio_tools::int24_3bytes_t;
+    using int24_t = int24_3bytes_t;
 #else
-    using int24_t = audio_tools::int24_4bytes_t;
+    using int24_t = int24_4bytes_t;
 #endif
 }
 
