@@ -5,9 +5,9 @@
 
 #define IS_ZEPHYR
 #define NO_INPLACE_INIT_SUPPORT
-#define USE_TYPETRAITS
 #define USE_TIMER
 #define USE_PWM
+//#define USE_TYPETRAITS
 
 #if defined(CONFIG_I2S)
 #  define USE_I2S
