@@ -1,4 +1,5 @@
 #pragma once
+#include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/AudioEffects/SoundGenerator.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
 #include "AudioTools/CoreAudio/AudioOutput.h"
@@ -7,7 +8,6 @@
 #include "AudioTools/CoreAudio/BaseConverter.h"
 #include "AudioTools/CoreAudio/BaseStream.h"
 #include "AudioTools/CoreAudio/Buffers.h"
-#include "AudioToolsConfig.h"
 
 #ifndef IRAM_ATTR
 #define IRAM_ATTR

@@ -4,10 +4,10 @@
 #ifdef USE_PWM
 
 #include "AudioTools/CoreAudio/AudioBasic/Collections.h"
-#include "AudioTools.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
 #include "AudioTools/CoreAudio/AudioOutput.h"
 #include "AudioTools/CoreAudio/AudioTypes.h"
+#include "AudioTools/CoreAudio/AudioBasic/int24_t.h"
 
 #define READ_ERROR_MSG "Could not read full data"
 

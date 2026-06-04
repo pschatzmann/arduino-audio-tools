@@ -8,6 +8,8 @@
 
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
+#include "AudioTools/CoreAudio/AudioBasic/int24_t.h"
+
 
 // fix compile error for ESP32 C3
 #undef HZ
