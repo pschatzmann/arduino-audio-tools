@@ -54,7 +54,7 @@ inline void printVersionInfo() {
 }
 
 #elif defined(IS_ZEPHYR) || defined(ESP32_CMAKE)
-#include "AudioTools/AudioLibs/Desktop/NoArduino.h"
+#include "AudioTools/AudioLibs/Emulation/Arduino.h"
 #endif
 
 /// stops any further processing by spinning in an endless loop  @ingroup basic
