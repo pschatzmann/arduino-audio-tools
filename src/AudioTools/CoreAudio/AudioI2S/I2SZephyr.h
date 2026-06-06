@@ -225,9 +225,9 @@ class I2SDriverZephyr {
       return true;
     }
 
-    if (cfg.device != nullptr) {
+    if (cfg.dev != nullptr) {
       LOGI("Using provided I2S device");
-      i2s_dev = cfg.device;
+      i2s_dev = cfg.dev;
       return true;
     }
 
