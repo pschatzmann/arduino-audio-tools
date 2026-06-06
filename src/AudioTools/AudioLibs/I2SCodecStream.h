@@ -28,7 +28,7 @@ struct I2SCodecConfig : public I2SConfig {
   bool sd_active = true;
   bool sdmmc_active = false;
   // define pin source in driver configuration
-  PinFunction i2s_function = PinFunction::UNDEFINED; //CODEC; 
+  PinFunction i2s_function = PinFunction::UNDEFINED; //CODEC;
   bool operator==(I2SCodecConfig alt) {
     return input_device == alt.input_device &&
            output_device == alt.output_device && *((AudioInfo *)this) == alt;
@@ -210,7 +210,7 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
   void digitalWrite(int pin, bool value) {
     p_board->getPins().getGPIO().digitalWrite(pin, value);
   }
-  
+
   /// get value of digital pin
   bool digitalRead(int pin) {
     return p_board->getPins().getGPIO().digitalRead(pin);
@@ -242,7 +242,7 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
     return is_active;
   }
 
-  /// if the cfg.i2s_function was not defined we determine the "correct" default value 
+  /// if the cfg.i2s_function was not defined we determine the "correct" default value
   void setupI2SFunction() {
     if (cfg.i2s_function == PinFunction::UNDEFINED){
       if (cfg.rx_tx_mode == RX_MODE){
@@ -270,7 +270,7 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
 #if defined(__zephyr__)
       // use device from audio-driver library
       if (i2s_pins.device != nullptr){
-        cfg.device = i2s_pins.device;
+        cfg.dev = i2s_pins.dev;
       }
 #else
       cfg.pin_bck = i2s_pins.bck;
@@ -295,7 +295,7 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
   audio_driver_local::Optional<PinsI2S> getI2SPins(){
     TRACED();
      audio_driver_local::Optional<PinsI2S> i2s;
-    // Deterine I2S pins 
+    // Deterine I2S pins
     return  p_board->getPins().getI2SPins(cfg.i2s_function);
   }
 

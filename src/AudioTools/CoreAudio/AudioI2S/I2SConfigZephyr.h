@@ -7,7 +7,7 @@
 namespace audio_tools {
 
 /**
- * @brief Configuration for i2s 
+ * @brief Configuration for i2s
  * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -22,7 +22,7 @@ class I2SConfigStd : public AudioInfo {
     /// Constructor
     I2SConfigStd(RxTxMode mode) {
         channels = DEFAULT_CHANNELS;
-        sample_rate = DEFAULT_SAMPLE_RATE; 
+        sample_rate = DEFAULT_SAMPLE_RATE;
         bits_per_sample = DEFAULT_BITS_PER_SAMPLE;
         rx_tx_mode = mode;
     }
@@ -33,7 +33,7 @@ class I2SConfigStd : public AudioInfo {
     I2SFormat i2s_format = I2S_STD_FORMAT;
     int buffer_count = I2S_BUFFER_COUNT;
     int buffer_size = I2S_BUFFER_SIZE;
-    device* device = nullptr;
+    device* dev = nullptr;
 
 
     void logInfo(const char* source="") {
@@ -44,7 +44,7 @@ class I2SConfigStd : public AudioInfo {
       LOGI("sample rate: %d", (int)sample_rate);
       LOGI("bits per sample: %d", (int)bits_per_sample);
       LOGI("number of channels: %d", (int)channels);
-      LOGI("i2s_format: %s", i2s_formats[i2s_format]);      
+      LOGI("i2s_format: %s", i2s_formats[i2s_format]);
       LOGI("buffer_count:%d",buffer_count);
       LOGI("buffer_size:%d",buffer_size);
       LOGI("device_name: %s", device_name);
@@ -56,4 +56,3 @@ class I2SConfigStd : public AudioInfo {
 using I2SConfig = I2SConfigZephyr;
 
 }
-
