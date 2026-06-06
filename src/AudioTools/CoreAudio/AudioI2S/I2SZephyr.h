@@ -225,6 +225,12 @@ class I2SDriverZephyr {
       return true;
     }
 
+    if (cfg.device != nullptr) {
+      LOGI("Using provided I2S device");
+      i2s_dev = cfg.device;
+      return true;
+    }
+
     static const char* const device_name = cfg.device_name;
     const device* candidate = device_get_binding(name);
     if (candidate != nullptr && device_is_ready(candidate)) {

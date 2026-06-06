@@ -1,6 +1,8 @@
 #pragma once
 #include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/AudioTypes.h"
+#include <zephyr/device.h>
+
 
 namespace audio_tools {
 
@@ -32,6 +34,7 @@ class I2SConfigStd : public AudioInfo {
     int buffer_count = I2S_BUFFER_COUNT;
     int buffer_size = I2S_BUFFER_SIZE;
     const char* device_name = "i2s0";
+    device* device = nullptr;
 
 
     void logInfo(const char* source="") {
