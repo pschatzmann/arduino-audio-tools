@@ -269,7 +269,7 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
       PinsI2S i2s_pins = i2s.value();
 #if defined(__zephyr__)
       // use device from audio-driver library
-      if (i2s_pins.device != nullptr){
+      if (i2s_pins.dev != nullptr){
         cfg.dev = i2s_pins.dev;
       }
 #else
