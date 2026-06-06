@@ -24,7 +24,7 @@ class AudioBoardStream : public I2SCodecStream {
     }
     AudioDriverKey key;
     AudioBoard *p_board;
-    int id() override { return (int)key | 0x400; }
+    int id() override { return (int) key | 0x400; }
     bool readValue() override { return p_board->isKeyPressed((int)key); }
   };
 
