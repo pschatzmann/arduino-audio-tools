@@ -33,7 +33,6 @@ class I2SConfigStd : public AudioInfo {
     I2SFormat i2s_format = I2S_STD_FORMAT;
     int buffer_count = I2S_BUFFER_COUNT;
     int buffer_size = I2S_BUFFER_SIZE;
-    const char* device_name = "i2s0";
     device* device = nullptr;
 
 

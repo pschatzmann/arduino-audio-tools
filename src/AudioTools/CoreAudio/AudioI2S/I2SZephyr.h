@@ -231,14 +231,7 @@ class I2SDriverZephyr {
       return true;
     }
 
-    static const char* const device_name = cfg.device_name;
-    const device* candidate = device_get_binding(name);
-    if (candidate != nullptr && device_is_ready(candidate)) {
-      LOGI("Resolving I2S device: '%s'", device_name);
-      i2s_dev = candidate;
-      return true;
-    }
-    LOGE("Failed to resolve I2S device: '%s'", device_name);
+    LOGE("I2S device is not set in configuration");
     return false;
   }
 };
