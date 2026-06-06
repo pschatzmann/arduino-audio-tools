@@ -267,6 +267,12 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
     if (i2s) {
       // determine i2s pins from board definition
       PinsI2S i2s_pins = i2s.value();
+#if defined(__zephyr__)
+      // use device from audio-driver library
+      if (i2s_pins.device != nullptr){
+        cfg.device = i2s_pins.device;
+      }
+#else
       cfg.pin_bck = i2s_pins.bck;
       cfg.pin_mck = i2s_pins.mclk;
       cfg.pin_ws = i2s_pins.ws;
@@ -282,6 +288,7 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
           cfg.pin_data_rx = i2s_pins.data_in;
           break;
       }
+#endif
     }
   }
 
