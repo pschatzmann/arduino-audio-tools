@@ -146,12 +146,12 @@ class I2SStream : public AudioStream {
 
  protected:
   I2SDriver i2s;
-  int mute_pin = -1;
   bool is_active = false;
 
+#ifdef ARDUINO
+  int mute_pin = -1;
   /// set mute pin on or off
   void mute(bool is_mute) {
-#ifdef ARDUINO
     if (mute_pin > 0) {
       digitalWrite(mute_pin, is_mute ? SOFT_MUTE_VALUE : !SOFT_MUTE_VALUE);
     }
