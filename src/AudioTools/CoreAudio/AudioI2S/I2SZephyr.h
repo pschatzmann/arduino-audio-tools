@@ -2,7 +2,7 @@
 
 #include "AudioToolsConfig.h"
 
-#if defined(IS_ZEPHYR) || defined(DOXYGEN)
+#if defined(IS_ZEPHYR)
 
 #include <string.h>
 #include <zephyr/device.h>
@@ -228,6 +228,7 @@ class I2SDriverZephyr {
     if (cfg.dev != nullptr) {
       LOGI("Using provided I2S device");
       i2s_dev = cfg.dev;
+      LOGI("Using i2s device %s", i2s_dev.name);
       return true;
     }
 
