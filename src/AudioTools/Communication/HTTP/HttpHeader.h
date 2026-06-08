@@ -249,8 +249,7 @@ class HttpHeader {
         int len = readLine(in, line, HTTP_MAX_LEN);
         if (len == 0 && in.available() == 0) break;
         if (len < 0) {
-          LOGE("Failed to read header line");
-          status_code = HTTP_STATUS_UNDEFINED;
+          if (isValidStatus()) LOGE("Failed to read header line");
           return false;
         }
         if (isValidStatus() || isRedirectStatus()) {
@@ -267,9 +266,11 @@ class HttpHeader {
   }
 
   /// writes the full header to the indicated HttpStreamedMultiOutput stream
-  void write(Client& out) {
+  bool write(Client& out) {
     LOGI("HttpHeader::write");
-    write1stLine(out);
+    if (!write1stLine(out)) {
+      return false;
+    }
     for (auto& line_ptr : lines) {
       writeHeaderLine(out, *line_ptr);
     }
@@ -277,6 +278,7 @@ class HttpHeader {
     crlf(out);
     out.flush();
     is_written = true;
+    return true;
   }
 
   void setProcessed() {
@@ -382,7 +384,7 @@ class HttpHeader {
     return (MethodID)0;
   }
 
-  virtual void write1stLine(Client& out) = 0;
+  virtual bool write1stLine(Client& out) = 0;
   virtual void parse1stLine(const char* line) = 0;
 };
 
@@ -407,7 +409,7 @@ class HttpRequestHeader : public HttpHeader {
   }
 
   // action path protocol
-  void write1stLine(Client& out) override {
+  bool write1stLine(Client& out) override {
     LOGD("HttpRequestHeader::write1stLine");
     char* msg = tempBuffer();
     StrView msg_str(msg, HTTP_MAX_LEN);
@@ -419,17 +421,22 @@ class HttpRequestHeader : public HttpHeader {
     msg_str += " ";
     msg_str += this->protocol_str.c_str();
     msg_str += CRLF;
-    out.print(msg);
+    size_t written = out.print(msg);
 
     int len = strlen(msg);
     msg[len - 2] = 0;
     LOGI("-> %s", msg);
+    if (written != len) {
+      LOGE("Failed to write the first line of the header: %d of %d", (int)written, len);
+      return false;
+    }
+    return true;
   }
 
   // parses the requestline
   // Request-Line = Method SP Request-URI SP HTTP-Version CRLF
   void parse1stLine(const char* line) override {
-    LOGD("HttpRequestHeader::parse1stLine %s", line);
+    LOGI("HttpRequestHeader::parse1stLine %s", line);
     StrView line_str(line);
     int space1 = line_str.indexOf(" ");
     int space2 = line_str.indexOf(" ", space1 + 1);
@@ -475,7 +482,7 @@ class HttpReplyHeader : public HttpHeader {
   }
 
   // HTTP-Version SP Status-Code SP Reason-Phrase CRLF
-  void write1stLine(Client& out) override {
+  bool write1stLine(Client& out) override {
     LOGI("HttpReplyHeader::write1stLine");
     char* msg = tempBuffer();
     StrView msg_str(msg, HTTP_MAX_LEN);
@@ -485,8 +492,14 @@ class HttpReplyHeader : public HttpHeader {
     msg_str += " ";
     msg_str += this->status_msg.c_str();
     LOGI("-> %s", msg);
-    out.print(msg);
+    int written = out.print(msg);
+    int len = strlen(msg);
     crlf(out);
+    if (written != len) {
+      LOGE("Failed to write the first line of the header: %d of %d", written, len);
+      return false;
+    }
+    return true;
   }
 
   // HTTP-Version SP Status-Code SP Reason-Phrase CRLF
@@ -509,6 +522,7 @@ class HttpReplyHeader : public HttpHeader {
 
     // get reason-phrase after last SP
     status_msg.substring(line_str, space2 + 1, line_str.length());
+    LOGI("status code: %d %s", status_code, status_msg.c_str());
   }
 };
 
