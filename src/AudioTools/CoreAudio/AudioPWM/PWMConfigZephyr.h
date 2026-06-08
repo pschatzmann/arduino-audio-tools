@@ -49,7 +49,7 @@ struct PWMConfigZephyr : public AudioInfo {
     LOGI("buffer_count: %u", buffers);
     LOGI("pwm_frequency: %u", (unsigned)pwm_frequency);
     LOGI("resolution: %d", resolution);
-    LOGI("pwm pin count: %d", pwm_pins.size());
+    LOGI("pwm pin count: %d", pins.size());
   }
 };
 
