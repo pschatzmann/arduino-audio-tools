@@ -83,6 +83,6 @@ struct PWMConfigSTD : public AudioInfo {
   Pins pins_data;
 };
 
-using PWMConfig = PWMConfigAVR;
+using PWMConfig = PWMConfigSTD;
 
 }

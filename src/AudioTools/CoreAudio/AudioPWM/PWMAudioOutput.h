@@ -10,6 +10,7 @@
 #include "AudioTools/CoreAudio/AudioPWM/PWMDriverZephyr.h"
 // this is experimental at the moment
 #include "AudioTools/CoreAudio/AudioPWM/PWMDriverAVR.h"
+#include "PWMConfig.h"
 
 namespace audio_tools {
 

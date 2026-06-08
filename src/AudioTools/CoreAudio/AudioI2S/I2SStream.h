@@ -149,7 +149,7 @@ class I2SStream : public AudioStream {
   bool isActive()  { return is_active;}
 
  protected:
-  I2SDriverT _i2s;
+  I2SDriverT i2s;
   bool is_active = false;
 
 #ifdef ARDUINO

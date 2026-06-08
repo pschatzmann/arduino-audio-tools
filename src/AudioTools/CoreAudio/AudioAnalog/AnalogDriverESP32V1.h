@@ -2,7 +2,7 @@
 
 #include "AudioToolsConfig.h"
 
-#if (defined(ESP32) && defined(USE_ANALOG) &&  !USE_LEGACY_I2S) || defined(DOXYGEN)
+#if (defined(ESP32) && defined(USE_ANALOG) &&  !USE_LEGACY_I2S) 
 
 #ifdef ARDUINO
     #ifndef perimanClearPinBus
@@ -36,7 +36,7 @@ public:
 
     /// Start the Analog driver
     /// ----------------------------------------------------------
-    bool begin(AnalogConfigESP32V1 cfg) {
+    bool begin(AnalogConfigESP32V1 cfg) override {
         TRACEI();
         bool result = true;
         this->cfg = cfg;
