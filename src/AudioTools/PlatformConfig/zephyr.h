@@ -30,3 +30,8 @@
 #if defined(CONFIG_HEAP_MEM_POOL_SIZE) && CONFIG_HEAP_MEM_POOL_SIZE > 0
 #  define USE_PSRAM
 #endif
+
+// Enable WiFi support if networking is enabled
+#if defined(CONFIG_NETWORKING)
+#  define USE_WIFI
+#endif

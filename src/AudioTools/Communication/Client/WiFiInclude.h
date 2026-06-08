@@ -1,9 +1,11 @@
 #pragma once
 #include "AudioToolsConfig.h"
 
-// Different platforms have different WiFi libraries
-
-#if defined(USE_WIFININA)
+#if defined(IS_ZEPHYR)
+#  include "WiFiZephyr.h"
+#  include "WiFiClientZephyr.h"
+#  include "WiFiClientSecureZephyr.h"
+#elif defined(USE_WIFININA)
 #  include <WiFiNINA.h>
 #elif defined(USE_WIFIS3)
 #  include <WiFiS3.h>
