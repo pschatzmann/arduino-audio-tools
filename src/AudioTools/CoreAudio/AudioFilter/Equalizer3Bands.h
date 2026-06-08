@@ -166,6 +166,7 @@ class Equalizer3Bands : public ModifyingStream {
   /// Called automatically when audio format changes
   /// @param info New audio format information
   virtual void setAudioInfo(AudioInfo info) override {
+    ModifyingStream::setAudioInfo(info);
     p_cfg->sample_rate = info.sample_rate;
     p_cfg->channels = info.channels;
     p_cfg->bits_per_sample = info.bits_per_sample;
