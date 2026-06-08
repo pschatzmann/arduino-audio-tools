@@ -116,7 +116,7 @@ class PWMDriverZephyr : public PWMDriverBase {
         // Apply initial PWM configuration (0% duty cycle)
         int rc = pwm_set_dt(&spec, period_ns, 0);
         if (rc != 0) {
-          LOGE("Failed to configure PWM on channel %d: %d", j, rc);
+          LOGE("Failed to configure PWM on channel %d: %d", ch, rc);
           continue;
         }
     }

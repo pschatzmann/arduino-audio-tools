@@ -14,6 +14,7 @@
 #include <zephyr/kernel.h>
 #include <zephyr/drivers/dac.h>
 #include <zephyr/drivers/adc.h>
+#include <vector>
 
 namespace audio_tools {
 
@@ -36,8 +37,8 @@ class AnalogConfigZephyr : public AudioInfo {
     bool is_auto_center_read = true;
     int max_sample_rate = ANALOG_MAX_SAMPLE_RATE;
 
-    AnalogConfigStd() = default;
-    AnalogConfigStd(RxTxMode rxtxMode) : AudioInfo() {
+    AnalogConfigZephyr() = default;
+    AnalogConfigZephyr(RxTxMode rxtxMode) : AudioInfo() {
       rx_tx_mode = rxtxMode;
     }
 

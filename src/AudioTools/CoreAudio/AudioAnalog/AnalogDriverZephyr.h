@@ -44,11 +44,6 @@ public:
       return false;
     }
 
-    if (!setupBuffers()) {
-      LOGE("Buffer setup failed");
-      return false;
-    }
-
     if (config.rx_tx_mode == TX_MODE || config.rx_tx_mode == RXTX_MODE) {
       if (!setupDac()) return false;
     }
@@ -119,8 +114,8 @@ private:
   // BUFFERS (FULL DUPLEX)
   // ============================================================
 
-  RingBuffer<uint8_t> rx_buffer;  // ADC → APP
-  RingBuffer<uint8_t> tx_buffer;  // APP → DAC
+  RingBuffer<uint8_t> rx_buffer{0};  // ADC → APP
+  RingBuffer<uint8_t> tx_buffer{0};  // APP → DAC
 
   // ============================================================
   // TIMING
@@ -139,13 +134,12 @@ private:
   // SETUP BUFFERS
   // ============================================================
 
-  bool setupBuffers() {
+  bool setupBuffer(RingBuffer<uint8_t>& buffer) {
     size_t size = config.buffer_count * config.buffer_size;
 
-    rx_buffer.resize(size);
-    tx_buffer.resize(size);
+    buffer.resize(size);
 
-    return rx_buffer.data() && tx_buffer.data();
+    return buffer.address() != nullptr;
   }
 
   // ============================================================
@@ -157,6 +151,11 @@ private:
 
     if (config.dac.empty()) {
       LOGE("No DAC configured");
+      return false;
+    }
+
+    if (!setupBuffer(tx_buffer)){
+      LOGE("TX Buffer");
       return false;
     }
 
@@ -190,6 +189,11 @@ private:
 
     if (config.adc.empty()) {
       LOGE("No ADC configured");
+      return false;
+    }
+
+    if (!setupBuffer(rx_buffer)){
+      LOGE("RX Buffer");
       return false;
     }
 
@@ -240,6 +244,8 @@ private:
         self->processRx();  // sample first
         self->processTx();  // output second
         break;
+      default:
+        LOGE("Undefined rx_tx_mode: %d", (int)self->config.rx_tx_mode)
     }
   }
 
@@ -294,12 +300,17 @@ private:
 
     for (int ch = 0; ch < configured_channels; ch++) {
 
-      int16_t raw = 0;
-      adc_read_dt(&config.adc[ch], &raw);
+        int16_t io = 0;
 
-      int32_t sample = adcToSigned(raw);
+        struct adc_sequence seq = {
+            .buffer = &io,
+            .buffer_size = sizeof(io),
+            .resolution = config.adc[ch].resolution,
+        };
+        adc_read_dt(&config.adc[ch], &seq);
+        int32_t sample = adcToSigned(io);
 
-      writeSample(frame, ch, sample);
+        writeSample(frame, ch, sample);
     }
 
     rx_buffer.writeArray(frame, frame_size);
