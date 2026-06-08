@@ -16,29 +16,27 @@ namespace audio_tools {
 
 /**
  * @brief Common functionality for PWM output. We generate audio using PWM
- * with a frequency that is above the hearing range. The sample rate is 
+ * with a frequency that is above the hearing range. The sample rate is
  * usually quite restricted, so we also automatically decimate the data.
  * Further info see PWMConfig
  * @ingroup io
  */
+
+template<class PWMDriverT = PWMDriver>
 class PWMAudioOutput : public AudioOutput {
  public:
   // Default constructor with default driver
   PWMAudioOutput() = default;
 
-  // Inject external driver (must live longer than this object)
-  PWMAudioOutput(DriverPWMBase &ext_driver)
-      : p_driver(&ext_driver) {}
-
   ~PWMAudioOutput() {
-  if (p_driver && p_driver->isTimerStarted()) {
+    if (pwm_driver.isTimerStarted()) {
       end();
     }
   }
 
-  virtual PWMConfig defaultConfig(RxTxMode mode=TX_MODE) { 
-    if (mode!=TX_MODE) LOGE("mode not supported: using TX_MODE");
-  return p_driver->defaultConfig(); 
+  virtual PWMConfig defaultConfig(RxTxMode mode = TX_MODE) {
+    if (mode != TX_MODE) LOGE("mode not supported: using TX_MODE");
+    return pwm_driver.defaultConfig();
   }
 
   PWMConfig config() { return audio_config; }
@@ -61,7 +59,7 @@ class PWMAudioOutput : public AudioOutput {
 
   AudioInfo audioInfoOut() override {
     AudioInfo result = audioInfo();
-  result.sample_rate = p_driver->effectiveOutputSampleRate();
+    result.sample_rate = pwm_driver.effectiveOutputSampleRate();
     return result;
   }
 
@@ -75,28 +73,27 @@ class PWMAudioOutput : public AudioOutput {
   bool begin() {
     TRACED();
     AudioOutput::setAudioInfo(audio_config);
-  return p_driver->begin(audio_config);
+    return pwm_driver.begin(audio_config);
   }
 
-  virtual void end() override { if (p_driver) p_driver->end(); }
+  virtual void end() override { pwm_driver.end(); }
 
-  int availableForWrite() override { return p_driver ? p_driver->availableForWrite() : 0; }
+  int availableForWrite() override { return pwm_driver.availableForWrite(); }
 
-  size_t write(const uint8_t *data, size_t len) override {
-    return p_driver ? p_driver->write(data, len) : 0; }
+  size_t write(const uint8_t* data, size_t len) override {
+    return pwm_driver.write(data, len);
+  }
 
-  uint32_t underflowsPerSecond() { return p_driver ? p_driver->underflowsPerSecond() : 0; }
-  uint32_t framesPerSecond() { return p_driver ? p_driver->framesPerSecond() : 0; }
+  uint32_t underflowsPerSecond() { return pwm_driver.underflowsPerSecond(); }
+  uint32_t framesPerSecond() { return pwm_driver.framesPerSecond(); }
 
-  DriverPWMBase *driver() { return p_driver; }
-  void setBuffer(BaseBuffer<uint8_t> *buffer) { if (p_driver) p_driver->setBuffer(buffer); }
+  PWMDriverT& driver() { return pwm_driver; }
+  void setBuffer(BaseBuffer<uint8_t>* buffer) { pwm_driver.setBuffer(buffer); }
 
  protected:
   PWMConfig audio_config;
-  PWMDriver default_driver;
-  DriverPWMBase *p_driver = &default_driver;
+  PWMDriver pwm_driver;
 };
-
 
 }  // namespace audio_tools
 
