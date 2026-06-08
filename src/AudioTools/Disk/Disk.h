@@ -3,14 +3,15 @@
 /**
  * This file is setting up the SD object and the File class outside of Arduino
  */
+#if defined(ARDUINO)
+#include <SD.h>
+#include <SPI.h>
 
-#if defined(IS_ZEPHYR)
-
+#elif defined(IS_ZEPHYR)
 #include "ZephyrSD.h"
 #include "ZephyrFile.h"
 
 #else
-
 #define VFS_SD SD
 #include "AudioTools/Disk/VFSFile.h"
 #include "AudioTools/Disk/VFS.h"

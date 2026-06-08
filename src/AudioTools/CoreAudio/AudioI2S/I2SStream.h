@@ -140,7 +140,7 @@ class I2SStream : public AudioStream {
   void flush() override {}
 
   /// Provides access to the driver
-  I2SDriverT& driver() { return &i2s; }
+  I2SDriverT& driver() { return i2s; }
 
   /// Returns true if i2s is active
   operator bool() override { return is_active; }

@@ -4,7 +4,7 @@
 
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/MP3Parser.h"
-#include "AudioTools/Disk/SD.h"
+#include "AudioTools/Disk/Disk.h"
 
 MP3ParserEncoder enc;  // mp3 packaging
 MetaDataFilterEncoder filter(enc);
