@@ -93,8 +93,8 @@ class AnalogAudioStream  : public AudioStream {
     }
 
     /// Provides access to the driver
-    AnalogDriverBase* driver() {
-        return &analog_driver;
+    AnalogDriverT& driver() {
+        return analog_driver;
     }
 
 protected:

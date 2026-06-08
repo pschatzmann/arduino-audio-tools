@@ -217,7 +217,7 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
   }
 
  protected:
-  I2SStream i2s;
+  I2SStream<I2SDriver> i2s;
   I2SCodecConfig cfg;
   CodecConfig codec_cfg;
   AudioBoard *p_board = nullptr;
