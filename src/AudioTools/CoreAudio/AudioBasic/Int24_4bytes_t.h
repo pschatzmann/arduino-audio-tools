@@ -51,7 +51,7 @@ class int24_4bytes_t  {
 
 #if defined(USE_INT24_FROM_INT) 
 
-  explicit int24_4bytes_t(const int in) {
+  int24_4bytes_t(const int in) {
     set(in);
   }
 

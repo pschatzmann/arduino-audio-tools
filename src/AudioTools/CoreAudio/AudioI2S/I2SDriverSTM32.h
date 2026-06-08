@@ -2,6 +2,7 @@
 
 #ifdef STM32
 #include "AudioTools/CoreAudio/AudioI2S/I2SConfig.h"
+#include "AudioTools/CoreAudio/AudioI2S/I2SDriverBase.h"
 #include "stm32-i2s.h"
 
 #ifdef STM_I2S_PINS
@@ -21,7 +22,7 @@ namespace audio_tools {
  * @copyright GPLv3
  */
 
-class I2SDriverSTM32 {
+class I2SDriverSTM32 : public I2SDriverBase {
   friend class I2SStream;
 
  public:

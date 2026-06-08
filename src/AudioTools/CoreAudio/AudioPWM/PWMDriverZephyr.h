@@ -37,7 +37,7 @@ using PWMDriver = PWMDriverZephyr;
  * - Automatic pin management
  *
  */
-class PWMDriverZephyr : public DriverPWMBase {
+class PWMDriverZephyr : public PWMDriverBase {
  public:
   PWMDriverZephyr() = default;
 

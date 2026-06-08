@@ -1,7 +1,7 @@
 
 #pragma once
 #ifdef ESP32
-#include "AudioTools/CoreAudio/AudioPWM/PWMDriverBase.h"
+#include "AudioTools/CoreAudio/AudioPWM/.h"
 #include "driver/mcpwm.h"
 
 namespace audio_tools {
@@ -46,7 +46,7 @@ struct PinInfoESP32Compl {
  * the base class buffer. The effective output sample rate equals the rate at
  * which new duty values are pushed to the MCPWM hardware (timer interrupt /
  * alarm frequency) and may differ from the nominal input sample rate due to
- * decimation (see DriverPWMBase).
+ * decimation (see PWMDriverBase).
  *
  * Resolution & PWM Frequency:
  * The requested bit resolution (e.g. 8–11 bits) determines the PWM carrier
@@ -79,7 +79,7 @@ struct PinInfoESP32Compl {
  * 
  * @ingroup platform
  */
-class PWMComplementaryDriverESP32 : public DriverPWMBase {
+class PWMComplementaryDriverESP32 : public PWMDriverBase {
  public:
   // friend void pwm_callback(void*ptr);
 

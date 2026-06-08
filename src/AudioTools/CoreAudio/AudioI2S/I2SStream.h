@@ -6,16 +6,16 @@
 #if defined(USE_I2S)
 
 #include "AudioTools/CoreAudio/AudioI2S/I2SConfig.h"
-#include "AudioTools/CoreAudio/AudioI2S/I2SESP32.h"
-#include "AudioTools/CoreAudio/AudioI2S/I2SESP32V1.h"
-#include "AudioTools/CoreAudio/AudioI2S/I2SESP8266.h"
-#include "AudioTools/CoreAudio/AudioI2S/I2SZephyr.h"
-#include "AudioTools/CoreAudio/AudioI2S/I2SZephyrSAI.h"
-#include "AudioTools/CoreAudio/AudioI2S/I2SNanoSenseBLE.h"
-#include "AudioTools/CoreAudio/AudioI2S/I2SRP2040-MBED.h"
-#include "AudioTools/CoreAudio/AudioI2S/I2SRP2040.h"
-#include "AudioTools/CoreAudio/AudioI2S/I2SSAMD.h"
-#include "AudioTools/CoreAudio/AudioI2S/I2SSTM32.h"
+#include "AudioTools/CoreAudio/AudioI2S/I2SDriverESP32.h"
+#include "AudioTools/CoreAudio/AudioI2S/I2SDriverESP32V1.h"
+#include "AudioTools/CoreAudio/AudioI2S/I2SDriverESP8266.h"
+#include "AudioTools/CoreAudio/AudioI2S/I2SDriverZephyr.h"
+#include "AudioTools/CoreAudio/AudioI2S/I2SDriverZephyrSAI.h"
+#include "AudioTools/CoreAudio/AudioI2S/I2SDriverNanoSenseBLE.h"
+#include "AudioTools/CoreAudio/AudioI2S/I2SDriverRP2040-MBED.h"
+#include "AudioTools/CoreAudio/AudioI2S/I2SDriverRP2040.h"
+#include "AudioTools/CoreAudio/AudioI2S/I2SDriverSAMD.h"
+#include "AudioTools/CoreAudio/AudioI2S/I2SDriverSTM32.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"
 #include "AudioTools/CoreAudio/AudioTypes.h"
 
@@ -34,10 +34,10 @@ namespace audio_tools {
  * I2SStream<SAIDriver> sai
  */
 
-template <class I2SDriverT = I2SDriver>
 class I2SStream : public AudioStream {
  public:
   I2SStream() = default;
+  I2SStream(I2SDriverBase &driver) { p_driver = &driver; }
   ~I2SStream() { end(); }
 
 #ifdef ARDUINO
@@ -53,12 +53,12 @@ class I2SStream : public AudioStream {
 
   /// Provides the default configuration
   I2SConfig defaultConfig(RxTxMode mode = TX_MODE) {
-    return i2s.defaultConfig(mode);
+    return p_driver->defaultConfig(mode);
   }
 
   bool begin() {
     TRACEI();
-    I2SConfig cfg = i2s.config();
+    I2SConfig cfg = p_driver->config();
     if (!cfg){
       LOGE("unsuported AudioInfo: sample_rate: %d / channels: %d / bits_per_sample: %d", (int) cfg.sample_rate, (int)cfg.channels, (int)cfg.bits_per_sample);
       return false;
@@ -67,7 +67,7 @@ class I2SStream : public AudioStream {
     if (cfg.rx_tx_mode == UNDEFINED_MODE){
       cfg.rx_tx_mode = RXTX_MODE;
     }
-    is_active = i2s.begin(cfg);
+    is_active = p_driver->begin(cfg);
     mute(false);
     return is_active;
   }
@@ -80,7 +80,7 @@ class I2SStream : public AudioStream {
       return false;
     }
     AudioStream::setAudioInfo(cfg);
-    is_active = i2s.begin(cfg);
+    is_active = p_driver->begin(cfg);
     // unmute
     mute(false);
     return is_active;
@@ -92,7 +92,7 @@ class I2SStream : public AudioStream {
       TRACEI();
       is_active = false;
       mute(true);
-      i2s.end();
+      p_driver->end();
     }
   }
 
@@ -104,14 +104,14 @@ class I2SStream : public AudioStream {
     assert(info.bits_per_sample != 0);
     AudioStream::setAudioInfo(info);
     if (is_active) {
-      if (!i2s.setAudioInfo(info)) {
-        I2SConfig current_cfg = i2s.config();
+      if (!p_driver->setAudioInfo(info)) {
+        I2SConfig current_cfg = p_driver->config();
         if (!info.equals(current_cfg)) {
           LOGI("restarting i2s");
           info.logInfo("I2SStream");
-          i2s.end();
+          p_driver->end();
           current_cfg.copyFrom(info);
-          i2s.begin(current_cfg);
+          p_driver->begin(current_cfg);
         } else {
           LOGI("no change");
         }
@@ -123,24 +123,24 @@ class I2SStream : public AudioStream {
   virtual size_t write(const uint8_t *data, size_t len) {
     LOGD("I2SStream::write: %d", len);
     if (data == nullptr || len == 0 || !is_active)  return 0;
-    return i2s.writeBytes(data, len);
+    return p_driver->writeBytes(data, len);
   }
 
   /// Reads the audio data
   virtual size_t readBytes(uint8_t *data, size_t len) override {
-    return i2s.readBytes(data, len);
+    return p_driver->readBytes(data, len);
   }
 
   /// Provides the available audio data
-  virtual int available() override { return i2s.available(); }
+  virtual int available() override { return p_driver->available(); }
 
   /// Provides the available audio data
-  virtual int availableForWrite() override { return i2s.availableForWrite(); }
+  virtual int availableForWrite() override { return p_driver->availableForWrite(); }
 
   void flush() override {}
 
   /// Provides access to the driver
-  I2SDriverT& driver() { return i2s; }
+  I2SDriverBase* driver() { return p_driver; }
 
   /// Returns true if i2s is active
   operator bool() override { return is_active; }
@@ -149,7 +149,8 @@ class I2SStream : public AudioStream {
   bool isActive()  { return is_active;}
 
  protected:
-  I2SDriverT i2s;
+  I2SDriver i2s;
+  I2SDriverBase* p_driver = &i2s;
   bool is_active = false;
 
 #ifdef ARDUINO

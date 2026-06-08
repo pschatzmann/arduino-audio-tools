@@ -25,8 +25,8 @@ static constexpr int PWM_ESP32_LEDC_SPEED_MODE_COUNT = 1;
 // forward declaration
 class PWMDriverESP32;
 /**
- * @typedef  DriverPWMBase
- * @brief Please use DriverPWMBase!
+ * @typedef  PWMDriverBase
+ * @brief Please use PWMDriverBase!
  */
 using PWMDriver = PWMDriverESP32;
 
@@ -42,7 +42,7 @@ struct PinInfoESP32 {
   int gpio;
 };
 
-typedef PinInfoESP32 PinInfo;
+using PinInfo = PinInfoESP32;
 
 /**
  * @brief Audio output to PWM pins for the ESP32. The ESP32 supports up to 16
@@ -52,7 +52,7 @@ typedef PinInfoESP32 PinInfo;
  * @copyright GPLv3
  */
 
-class PWMDriverESP32 : public DriverPWMBase {
+class PWMDriverESP32 : public PWMDriverBase {
  public:
   // friend void pwm_callback(void*ptr);
 

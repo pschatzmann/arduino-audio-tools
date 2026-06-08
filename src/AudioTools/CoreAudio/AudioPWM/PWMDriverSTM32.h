@@ -9,8 +9,8 @@ namespace audio_tools {
 // forward declaration
 class PWMDriverSTM32;
 /**
- * @typedef  DriverPWMBase
- * @brief Please use DriverPWMBase!
+ * @typedef  PWMDriverBase
+ * @brief Please use PWMDriverBase!
  */
 using PWMDriver = PWMDriverSTM32;
 
@@ -22,7 +22,7 @@ using PWMDriver = PWMDriverSTM32;
  * @copyright GPLv3
  */
 
-class PWMDriverSTM32 : public DriverPWMBase {
+class PWMDriverSTM32 : public PWMDriverBase {
   /// @brief PWM information for a single pin
   struct PWMPin {
     HardwareTimer *p_timer;

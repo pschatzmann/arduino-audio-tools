@@ -21,7 +21,7 @@ static PWMDriverAVR *accessAudioPWM = nullptr;
  * @copyright GPLv3
  */
 
-class PWMDriverAVR : public DriverPWMBase {
+class PWMDriverAVR : public PWMDriverBase {
   friend void defaultPWMAudioOutputCallback();
 
  public:

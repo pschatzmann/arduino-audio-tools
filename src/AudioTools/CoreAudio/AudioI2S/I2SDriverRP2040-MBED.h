@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AudioTools/CoreAudio/AudioI2S/I2SConfig.h"
+#include "AudioTools/CoreAudio/AudioI2S/I2SDriverBase.h"
 #if defined(RP2040_MBED)
 #include "RP2040-I2S.h"
 
@@ -18,7 +19,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class I2SDriverRP2040MBED {
+class I2SDriverRP2040MBED : public I2SDriverBase {
   friend class I2SStream;
 
  public:

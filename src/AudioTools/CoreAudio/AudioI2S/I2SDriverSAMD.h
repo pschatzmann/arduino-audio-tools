@@ -3,6 +3,7 @@
 #if defined(ARDUINO_ARCH_SAMD)
 #include <I2S.h>
 #include "AudioTools/CoreAudio/AudioI2S/I2SConfig.h"
+#include "AudioTools/CoreAudio/AudioI2S/I2SDriverBase.h"
 
 #define IS_I2S_IMPLEMENTED 
 
@@ -14,7 +15,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class I2SDriverSAMD {
+class I2SDriverSAMD : public I2SDriverBase {
   friend class I2SStream;
 
  public:

@@ -33,10 +33,10 @@ class PWMDriverSTM32;
  * @brief Base Class for all PWM drivers
  * @ingroup platform
  */
-class DriverPWMBase {
+class PWMDriverBase {
  public:
-  DriverPWMBase() = default;
-  virtual ~DriverPWMBase() { end(); }
+  PWMDriverBase() = default;
+  virtual ~PWMDriverBase() { end(); }
 
   PWMConfig &audioInfo() { return audio_config; }
 
