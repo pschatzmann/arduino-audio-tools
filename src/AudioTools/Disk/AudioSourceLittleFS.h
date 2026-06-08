@@ -12,6 +12,7 @@ namespace audio_tools {
  * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
+ * @note only for Arduino
  */
 class AudioSourceLittleFS : public AudioSource {
 public:

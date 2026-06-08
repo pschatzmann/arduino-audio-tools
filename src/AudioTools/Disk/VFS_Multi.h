@@ -6,7 +6,8 @@ namespace audio_tools {
 
 /**
  * @brief Define multipe VFS with their mount point
- * @ingroup player
+ * @note For ESP32 only
+ * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

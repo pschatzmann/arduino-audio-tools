@@ -29,6 +29,7 @@ namespace audio_tools {
  * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
+ * @note only for Arduino
  */
 class AudioSourceIdxSDMMC : public AudioSource {
 public:
