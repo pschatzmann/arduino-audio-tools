@@ -2,7 +2,7 @@
 #include "AudioToolsConfig.h"
 #if defined(USE_ANALOG)
 
-#include "AnalogConfigStd.h"
+#include "AnalogConfig.h"
 
 namespace audio_tools {
 
