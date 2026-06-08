@@ -1,7 +1,7 @@
 #pragma once
 
 /**
- * This file is setting up the SD object and the File class outside of Arduino
+ * This is setting up the SD object and the File class outside of Arduino
  */
 #if defined(ARDUINO)
 #include <SD.h>
