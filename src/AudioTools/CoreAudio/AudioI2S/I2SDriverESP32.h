@@ -5,6 +5,7 @@
 
 #include "AudioTools/CoreAudio/AudioI2S/I2SConfig.h"
 #include "AudioTools/CoreAudio/AudioBasic/int24_t.h"
+#include "AudioTools/CoreAudio/AudioI2S/I2SDriverBase.h"
 
 #include "driver/i2s.h"
 #include "esp_system.h"
@@ -24,7 +25,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class I2SDriverESP32 {
+class I2SDriverESP32 : public I2SDriverBase {
   friend class AnalogAudio;
   friend class AudioKitStream;
 

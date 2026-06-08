@@ -11,12 +11,13 @@
 
 #include "AudioTools/CoreAudio/AudioBasic/Collections.h"
 #include "AudioTools/CoreAudio/AudioI2S/I2SConfigZephyr.h"
+#include "AudioTools/CoreAudio/AudioI2S/I2SDriverBase.h"
 
 #define IS_SAI_IMPLEMENTED
 
 namespace audio_tools {
 
-class SAIDriverZephyr {
+class SAIDriverZephyr : public I2SDriverBase {
   friend class I2SStream;
 
  public:

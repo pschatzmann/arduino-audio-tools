@@ -5,6 +5,7 @@
 #if defined(USE_NANO33BLE)
 
 #include "AudioTools/CoreAudio/AudioI2S/I2SConfig.h"
+#include "AudioTools/CoreAudio/AudioI2S/I2SDriverBase.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
 #include "AudioTools/CoreAudio/AudioTypes.h"
 #include "AudioTools/CoreAudio/Buffers.h"
@@ -122,7 +123,7 @@ void I2S_IRQHandler(void) {
  * @ingroup platform
  * @copyright GPLv3
  */
-class I2SDriverNanoBLE {
+class I2SDriverNanoBLE : public I2SDriverBase {
   friend class I2SStream;
 
  public:

@@ -6,6 +6,7 @@
 #include "AudioTools/CoreAudio/AudioI2S/I2SConfig.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
 #include "AudioTools/CoreAudio/AudioBasic/int24_t.h"
+#include "AudioTools/CoreAudio/AudioI2S/I2SDriverBase.h"
 
 #define IS_I2S_IMPLEMENTED 
 
@@ -18,7 +19,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class I2SDriverESP8266 {
+class I2SDriverESP8266 : public I2SDriverBase {
   friend class I2SStream;
 
  public:

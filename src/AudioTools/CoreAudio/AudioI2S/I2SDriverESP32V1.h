@@ -4,6 +4,7 @@
 #if defined(ESP32) && !USE_LEGACY_I2S || defined(DOXYGEN)
 
 #include "AudioTools/CoreAudio/AudioI2S/I2SConfig.h"
+#include "AudioTools/CoreAudio/AudioI2S/I2SDriverBase.h"
 #include "driver/i2s_pdm.h"
 #include "driver/i2s_std.h"
 #include "driver/i2s_tdm.h"
@@ -31,7 +32,7 @@ using i2s_port_t = int;
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class I2SDriverESP32V1 {
+class I2SDriverESP32V1 : public I2SDriverBase {
  public:
   /// Provides the default configuration
   I2SConfigESP32V1 defaultConfig(RxTxMode mode) {

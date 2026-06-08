@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AudioToolsConfig.h"
+#include "AudioTools/CoreAudio/AudioI2S/I2SDriverBase.h"
 
 #if defined(IS_ZEPHYR)
 
@@ -22,7 +23,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class I2SDriverZephyr {
+class I2SDriverZephyr : public I2SDriverBase {
   friend class I2SStream;
 
  public:

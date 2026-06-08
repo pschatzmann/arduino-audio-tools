@@ -27,16 +27,16 @@ class PWMAudioOutput : public AudioOutput {
  public:
   // Default constructor with default driver
   PWMAudioOutput() = default;
-
+  PWMAudioOutput(PWMDriverBase &driver) { p_driver = &driver; }
   ~PWMAudioOutput() {
-    if (pwm_driver.isTimerStarted()) {
+    if (p_driver->isTimerStarted()) {
       end();
     }
   }
 
   virtual PWMConfig defaultConfig(RxTxMode mode = TX_MODE) {
     if (mode != TX_MODE) LOGE("mode not supported: using TX_MODE");
-    return pwm_driver.defaultConfig();
+    return p_driver->defaultConfig();
   }
 
   PWMConfig config() { return audio_config; }
@@ -59,7 +59,7 @@ class PWMAudioOutput : public AudioOutput {
 
   AudioInfo audioInfoOut() override {
     AudioInfo result = audioInfo();
-    result.sample_rate = pwm_driver.effectiveOutputSampleRate();
+    result.sample_rate = p_driver->effectiveOutputSampleRate();
     return result;
   }
 
@@ -73,26 +73,27 @@ class PWMAudioOutput : public AudioOutput {
   bool begin() {
     TRACED();
     AudioOutput::setAudioInfo(audio_config);
-    return pwm_driver.begin(audio_config);
+    return p_driver->begin(audio_config);
   }
 
-  virtual void end() override { pwm_driver.end(); }
+  virtual void end() override { p_driver->end(); }
 
-  int availableForWrite() override { return pwm_driver.availableForWrite(); }
+  int availableForWrite() override { return p_driver->availableForWrite(); }
 
   size_t write(const uint8_t* data, size_t len) override {
-    return pwm_driver.write(data, len);
+    return p_driver->write(data, len);
   }
 
-  uint32_t underflowsPerSecond() { return pwm_driver.underflowsPerSecond(); }
-  uint32_t framesPerSecond() { return pwm_driver.framesPerSecond(); }
+  uint32_t underflowsPerSecond() { return p_driver->underflowsPerSecond(); }
+  uint32_t framesPerSecond() { return p_driver->framesPerSecond(); }
 
-  PWMDriverT& driver() { return pwm_driver; }
-  void setBuffer(BaseBuffer<uint8_t>* buffer) { pwm_driver.setBuffer(buffer); }
+  PWMDriverBase* driver() { return p_driver; }
+  void setBuffer(BaseBuffer<uint8_t>* buffer) { p_driver->setBuffer(buffer); }
 
  protected:
   PWMConfig audio_config;
   PWMDriver pwm_driver;
+  PWMDriverBase* p_driver = &pwm_driver;
 };
 
 }  // namespace audio_tools

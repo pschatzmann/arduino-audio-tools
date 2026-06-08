@@ -9,8 +9,8 @@ namespace audio_tools {
 // forward declaration
 class PWMDriverRenesas;
 /**
- * @typedef  DriverPWMBase
- * @brief Please use DriverPWMBase!
+ * @typedef  PWMDriverBase
+ * @brief Please use PWMDriverBase!
  */
 using PWMDriver = PWMDriverRenesas;
 
@@ -21,7 +21,7 @@ using PWMDriver = PWMDriverRenesas;
  * @copyright GPLv3
  */
 
-class PWMDriverRenesas : public DriverPWMBase {
+class PWMDriverRenesas : public PWMDriverBase {
  public:
   PWMDriverRenesas() { LOGD("PWMDriverRenesas"); }
 
