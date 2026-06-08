@@ -2,7 +2,7 @@
 
 #include "AudioLogger.h"
 #include "AudioTools/Disk/AudioSource.h"
-#include "AudioTools/AudioLibs/Emulation/File.h"
+#include "AudioTools/Disk/SD.h"
 #include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 #include <filesystem>
 
@@ -12,6 +12,7 @@ namespace fs = std::filesystem;
 
 /**
  * @brief AudioSource using the standard C++ api
+ * @note For platforms providing POSIX file API
  * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -144,7 +145,7 @@ protected:
       return false;
     }
     StrView strFileTName(file_name_c);
-    bool result = strFileTName.endsWithIgnoreCase(exension) 
+    bool result = strFileTName.endsWithIgnoreCase(exension)
                   && strFileTName.matches(file_name_pattern);
     LOGD("-> isValidAudioFile: '%s': %d", file_name_c, result);
     return result;

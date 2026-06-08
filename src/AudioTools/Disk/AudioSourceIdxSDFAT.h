@@ -23,6 +23,7 @@ namespace audio_tools {
  * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
+ * @note only for Arduino
  */
 template <typename AudioFs = SdFat32, typename AudioFile = File32>
 class AudioSourceIdxSDFAT : public AudioSource {

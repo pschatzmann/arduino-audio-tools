@@ -25,9 +25,11 @@ namespace audio_tools {
  *    D1       -
  *
  *  On the AI Thinker boards the pin settings should be On, On, On, On, On,
+ * @note only for Arduino
  * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
+
  */
 class AudioSourceIdxSD : public AudioSource {
 public:
@@ -134,7 +136,7 @@ public:
   }
 
 protected:
-#if defined(USE_SD_NO_NS) 
+#if defined(USE_SD_NO_NS)
   SDIndex<SDClass, File> idx{SD};
 #else
   SDIndex<fs::SDFS,fs::File> idx{SD};

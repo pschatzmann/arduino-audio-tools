@@ -20,6 +20,7 @@ namespace audio_tools {
  * Connect the SD card.
  * For UTF8 Support change SdFatConfig.h #define USE_UTF8_LONG_NAMES 1
  * @param  <SdFat32, File32>, <SdFs, FsFile>, <SdExFat, ExFile>, <SdFat, File>
+ * @note only for Arduino
  * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3

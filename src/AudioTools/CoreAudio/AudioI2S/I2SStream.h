@@ -10,6 +10,7 @@
 #include "AudioTools/CoreAudio/AudioI2S/I2SESP32V1.h"
 #include "AudioTools/CoreAudio/AudioI2S/I2SESP8266.h"
 #include "AudioTools/CoreAudio/AudioI2S/I2SZephyr.h"
+#include "AudioTools/CoreAudio/AudioI2S/I2SZephyrSAI.h"
 #include "AudioTools/CoreAudio/AudioI2S/I2SNanoSenseBLE.h"
 #include "AudioTools/CoreAudio/AudioI2S/I2SRP2040-MBED.h"
 #include "AudioTools/CoreAudio/AudioI2S/I2SRP2040.h"
@@ -26,11 +27,14 @@ namespace audio_tools {
  * @brief We support the Stream interface for the I2S access. In addition we
  * allow a separate mute pin which might also be used to drive a LED...
  * @ingroup io
- * @tparam T
+ * @tparam I2SDriverT with I2SDriver as default
  * @author Phil Schatzmann
  * @copyright GPLv3
+ * @notes In Zephyr we can alternatively use the SAI driver:
+ * I2SStream<SAIDriver> sai
  */
 
+template <class I2SDriverT = I2SDriver>
 class I2SStream : public AudioStream {
  public:
   I2SStream() = default;
@@ -145,7 +149,7 @@ class I2SStream : public AudioStream {
   bool isActive()  { return is_active;}
 
  protected:
-  I2SDriver i2s;
+  I2SDriverT _i2s;
   bool is_active = false;
 
 #ifdef ARDUINO
