@@ -204,7 +204,7 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
   DriverPins &getPins() { return p_board->getPins(); }
 
   /// Provides the i2s driver
-  I2SDriver *driver() { return i2s.driver(); }
+  I2SDriver& driver() { return i2s.driver(); }
 
   /// set value of digital pin
   void digitalWrite(int pin, bool value) {
