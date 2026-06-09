@@ -6,6 +6,7 @@
 #include "AudioTools/CoreAudio/AudioOutput.h"
 #include "AudioTools/CoreAudio/Buffers.h"
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
+
 namespace audio_tools {
 
 /**
@@ -33,8 +34,8 @@ class R2RDriverBase {
 
 class R2RDriver : public R2RDriverBase {
  public:
-  void setupPins(Vector<int> &channel1_pins,
-                         Vector<int> &channel2_pins) override {
+  void setupPins(Vector<digital_pin_t> &channel1_pins,
+                         Vector<digital_pin_t> &channel2_pins) override {
     TRACED();
     p_channel1_pins = &channel1_pins;
     p_channel2_pins = &channel2_pins;

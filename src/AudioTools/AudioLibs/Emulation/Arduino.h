@@ -185,21 +185,24 @@ inline long map(long x, long in_min, long in_max, long out_min, long out_max) {
 }
 
 #if defined(ESP32_CMAKE)
+
 #include "driver/gpio.h"
 #include "freertos/FreeRTOS.h"  // needed for ESP Arduino < 2.0
 #include "freertos/FreeRTOSConfig.h"
 
+using digital_pin_t = int;
+
 /// e.g. for AudioActions
-inline int digitalRead(int pin) {
+inline int digitalRead(digital_pin_t pin) {
   printf("digitalRead:%d\n", pin);
   return gpio_get_level((gpio_num_t)pin);
 }
 
-inline void digitalWrite(int pin, int value) {
+inline void digitalWrite(digital_pin_t pin, int value) {
    gpio_set_level((gpio_num_t)pin, value);
 }
 
-inline void pinMode(int pin, int mode) {
+inline void pinMode(digital_pin_t pin, int mode) {
   gpio_num_t gpio_pin = (gpio_num_t)pin;
   printf("pinMode(%d,%d)\n", pin, mode);
 
@@ -232,79 +235,9 @@ inline uint64_t micros() { return xTaskGetTickCount() * portTICK_PERIOD_MS * 100
 #endif
 
 #if defined(IS_ZEPHYR)
-#include <zephyr/device.h>
-#include <zephyr/devicetree.h>
+
 #include <zephyr/drivers/gpio.h>
-#include <zephyr/kernel.h>
-
- const device* getGPIODevice(const char* device_name) {
-  const device* dev = device_get_binding(device_name);
-  // store result in map for future calls
-  if (dev != nullptr && device_is_ready(dev)) {
-    return dev;
-  }
-  printf("Failed to get GPIO device for name: %s",  device_name);
-  return nullptr;  
-}
-
- const device* getGPIODevice(int gpio_no, const char* prefix="GPIO_") {
-  char device_name[20];
-  snprintf(device_name, 20, "%s%d", prefix, gpio_no);
-  const device* dev = device_get_binding(device_name);
-  // store result in map for future calls
-  if (dev != nullptr && device_is_ready(dev)) {
-    return dev;
-  }
-  printf("Failed to get GPIO device for pin %d - name: %s", gpio_no, device_name);
-  return nullptr;
-}
-
-/// e.g. for AudioActions
-inline int digitalRead(int pin) {
-  const device* dev = getGPIODevice(pin);
-  if (dev == nullptr) {
-    return LOW;
-  }
-  int rc = gpio_pin_get(dev, pin);
-  return rc > 0 ? HIGH : LOW;
-}
-
-
-inline void digitalWrite(int pin, int value) {
-  const device* dev = getGPIODevice(pin);
-  if (dev == nullptr) {
-    return;
-  }
-  gpio_pin_set(dev, pin, value ? 1 : 0);
-}
-
-inline void pinMode(int pin, int mode) {
-  const device* dev = getGPIODevice(pin);
-  if (dev == nullptr) {
-    return;
-  }
-
-  gpio_flags_t flags = GPIO_INPUT;
-  switch (mode) {
-    case INPUT:
-      flags = GPIO_INPUT;
-      break;
-    case OUTPUT:
-      flags = GPIO_OUTPUT;
-      break;
-    case INPUT_PULLUP:
-      flags = GPIO_INPUT | GPIO_PULL_UP;
-      break;
-    default:
-      flags = GPIO_INPUT;
-      break;
-  }
-
-  int rc = gpio_pin_configure(dev, pin, flags);
-  if (rc != 0) {
-    printf("Failed to configure GPIO pin %d with mode %d: %d", pin, mode, rc);
-  }
-}
+#define ZLOGE(...) printk(__VA_ARGS__)
 
 inline void delay(uint32_t ms) { k_msleep(ms); }
 inline uint32_t millis() { return k_uptime_get_32(); }
@@ -313,6 +246,63 @@ inline void delayMicroseconds(uint32_t us) {
   k_busy_wait(us);
 }
 inline uint64_t micros() { return k_cyc_to_us_floor64(k_cycle_get_64()); }
+
+using digital_pin_t = gpio_dt_spec*;
+
+void pinMode(digital_pin_t pin, int mode) {
+  if (pin == nullptr || !gpio_is_ready_dt(pin)) {
+    ZLOGE("GPIO pin not ready");
+    return;
+  }
+
+  gpio_flags_t flags;
+  switch (mode) {
+    case OUTPUT:
+      flags = GPIO_OUTPUT;
+      break;
+    case INPUT:
+      flags = GPIO_INPUT;
+      break;
+    case INPUT_PULLUP:
+      flags = GPIO_INPUT | GPIO_PULL_UP;
+      break;
+    // case INPUT_PULLDOWN:
+    //   flags = GPIO_INPUT | GPIO_PULL_DOWN;
+    //   break;
+    default:
+      flags = GPIO_OUTPUT;
+      break;
+  }
+
+  int rc = gpio_pin_configure_dt(pin, flags);
+  if (rc != 0) {
+    ZLOGE("Failed to configure GPIO pin: %d", rc);
+  }
+}
+
+void digitalWrite(digital_pin_t pin, bool value) {
+  if (pin == nullptr || !gpio_is_ready_dt(pin)) {
+    ZLOGE("GPIO pin not ready");
+  }
+
+  int rc = gpio_pin_set_dt(pin, value ? 1 : 0);
+  if (rc != 0) {
+    ZLOGE("Failed to write GPIO pin: %d", rc);
+  }
+}
+
+int digitalRead(digital_pin_t pin) {
+  if (pin == nullptr || !gpio_is_ready_dt(pin)) {
+    ZLOGE("GPIO pin not ready");
+    return false;
+  }
+
+  int rc = gpio_pin_get_dt(pin);
+  if (rc < 0) {
+    ZLOGE("Failed to read GPIO pin: %d", rc);
+  }
+  return rc;
+}
 
 // delay and millis has been defined
 #define DESKTOP_MILLIS_DEFINED
