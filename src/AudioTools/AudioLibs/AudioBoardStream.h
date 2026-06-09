@@ -57,11 +57,10 @@ class AudioBoardStream : public I2SCodecStream {
     delay(1);
   }
 
-
   /**
    * @brief Defines a new action that is executed when the Button is pressed
    */
-  void addAction(AudioDriverKey key, void (*action)(bool, int, void *),
+  void addAction(AudioDriverKey key, void (*action)(bool, digital_pin_t, void *),
                  void *ref = nullptr) {
       AudioBoardAction *abo = new AudioBoardAction(board(), key);
       abo->actionOn = action;
@@ -72,8 +71,8 @@ class AudioBoardStream : public I2SCodecStream {
   /**
    * @brief Defines a new action that is executed when the Button is pressed and released
    */
-  void addAction(AudioDriverKey key, void (*actionOn)(bool, int, void *),
-                void (*actionOff)(bool, int, void *),
+  void addAction(AudioDriverKey key, void (*actionOn)(bool, digital_pin_t, void *),
+                void (*actionOff)(bool, digital_pin_t, void *),
                 void *ref = nullptr) {
 
       AudioBoardAction *abo = new AudioBoardAction(board(), key);
@@ -91,7 +90,7 @@ class AudioBoardStream : public I2SCodecStream {
    * @param action
    * @param ref
    */
-  void addAction(int pin, void (*action)(bool, int, void *),
+  void addAction(digital_pin_t pin, void (*action)(bool, digital_pin_t, void *),
                  void *ref = nullptr) {
     TRACEI();
     // determine logic from config
@@ -108,7 +107,7 @@ class AudioBoardStream : public I2SCodecStream {
    * @param activeLogic
    * @param ref
    */
-  void addAction(int pin, void (*action)(bool, int, void *),
+  void addAction(digital_pin_t pin, void (*action)(bool, digital_pin_t, void *),
                  AudioActions::ActiveLogic activeLogic, void *ref = nullptr) {
     TRACEI();
     actions.add(pin, action, activeLogic, ref == nullptr ? this : ref);
@@ -135,7 +134,7 @@ class AudioBoardStream : public I2SCodecStream {
    * @brief Increase the volume
    *
    */
-  static void actionVolumeUp(bool, int, void *ref) {
+  static void actionVolumeUp(bool, digital_pin_t, void *ref) {
     TRACEI();
     AudioBoardStream *self = (AudioBoardStream *)ref;
     self->incrementVolume(+self->actionVolumeIncrementValue());
@@ -145,7 +144,7 @@ class AudioBoardStream : public I2SCodecStream {
    * @brief Decrease the volume
    *
    */
-  static void actionVolumeDown(bool, int, void *ref) {
+  static void actionVolumeDown(bool, digital_pin_t, void *ref) {
     TRACEI();
     AudioBoardStream *self = (AudioBoardStream *)ref;
     self->incrementVolume(-self->actionVolumeIncrementValue());
@@ -155,7 +154,7 @@ class AudioBoardStream : public I2SCodecStream {
    * @brief Toggle start stop
    *
    */
-  static void actionStartStop(bool, int, void *ref) {
+  static void actionStartStop(bool, digital_pin_t, void *ref) {
     TRACEI();
     AudioBoardStream *self = (AudioBoardStream *)ref;
     self->active = !self->active;
@@ -166,7 +165,7 @@ class AudioBoardStream : public I2SCodecStream {
    * @brief Start
    *
    */
-  static void actionStart(bool, int, void *ref) {
+  static void actionStart(bool, digital_pin_t, void *ref) {
     TRACEI();
     AudioBoardStream *self = (AudioBoardStream *)ref;
     self->active = true;
@@ -176,7 +175,7 @@ class AudioBoardStream : public I2SCodecStream {
   /**
    * @brief Stop
    */
-  static void actionStop(bool, int, void *ref) {
+  static void actionStop(bool, digital_pin_t, void *ref) {
     TRACEI();
     AudioBoardStream *self = (AudioBoardStream *)ref;
     self->active = false;
@@ -188,7 +187,7 @@ class AudioBoardStream : public I2SCodecStream {
    * and switch it on again if the headphone is unplugged.
    * This method complies with the
    */
-  static void actionHeadphoneDetection(bool, int, void *ref) {
+  static void actionHeadphoneDetection(bool, digital_pin_t, void *ref) {
     AudioBoardStream *self = (AudioBoardStream *)ref;
     if (self->pinHeadphoneDetect() >= 0) {
       // detect changes
@@ -212,7 +211,7 @@ class AudioBoardStream : public I2SCodecStream {
    * @return  -1      non-existent
    *          Others  gpio number
    */
-  GpioPin pinAuxin() { return getPinID(PinFunction::AUXIN_DETECT); }
+  digital_pin_t pinAuxin() { return getPinID(PinFunction::AUXIN_DETECT); }
 
   /**
    * @brief  Get the gpio number for headphone detection
@@ -220,7 +219,7 @@ class AudioBoardStream : public I2SCodecStream {
    * @return  -1      non-existent
    *          Others  gpio number
    */
-  GpioPin pinHeadphoneDetect() {
+  digital_pin_t pinHeadphoneDetect() {
     return getPinID(PinFunction::HEADPHONE_DETECT);
   }
 
@@ -230,7 +229,7 @@ class AudioBoardStream : public I2SCodecStream {
    * @return  -1      non-existent
    *          Others  gpio number
    */
-  GpioPin pinPaEnable() { return getPinID(PinFunction::PA); }
+  digital_pin_t pinPaEnable() { return getPinID(PinFunction::PA); }
 
   //   /**
   //    * @brief  Get the gpio number for adc detection
@@ -238,7 +237,7 @@ class AudioBoardStream : public I2SCodecStream {
   //    * @return  -1      non-existent
   //    *          Others  gpio number
   //    */
-  //   GpioPin pinAdcDetect() { return getPin(AUXIN_DETECT); }
+  //   digital_pin_t pinAdcDetect() { return getPin(AUXIN_DETECT); }
 
   /**
    * @brief  Get the record-button id for adc-button
@@ -246,7 +245,7 @@ class AudioBoardStream : public I2SCodecStream {
    * @return  -1      non-existent
    *          Others  button id
    */
-  GpioPin pinInputRec() { return getPinID(PinFunction::KEY, 1); }
+  digital_pin_t pinInputRec() { return getPinID(PinFunction::KEY, 1); }
 
   /**
    * @brief  Get the number for mode-button
@@ -254,7 +253,7 @@ class AudioBoardStream : public I2SCodecStream {
    * @return  -1      non-existent
    *          Others  number
    */
-  GpioPin pinInputMode() { return getPinID(PinFunction::KEY, 2); }
+  digital_pin_t pinInputMode() { return getPinID(PinFunction::KEY, 2); }
 
   /**
    * @brief Get number for set function
@@ -262,7 +261,7 @@ class AudioBoardStream : public I2SCodecStream {
    * @return -1       non-existent
    *         Others   number
    */
-  GpioPin pinInputSet() { return getPinID(PinFunction::KEY, 4); }
+  digital_pin_t pinInputSet() { return getPinID(PinFunction::KEY, 4); }
 
   /**
    * @brief Get number for play function
@@ -270,7 +269,7 @@ class AudioBoardStream : public I2SCodecStream {
    * @return -1       non-existent
    *         Others   number
    */
-  GpioPin pinInputPlay() { return getPinID(PinFunction::KEY, 3); }
+  digital_pin_t pinInputPlay() { return getPinID(PinFunction::KEY, 3); }
 
   /**
    * @brief number for volume up function
@@ -278,7 +277,7 @@ class AudioBoardStream : public I2SCodecStream {
    * @return -1       non-existent
    *         Others   number
    */
-  GpioPin pinVolumeUp() { return getPinID(PinFunction::KEY, 6); }
+  digital_pin_t pinVolumeUp() { return getPinID(PinFunction::KEY, 6); }
 
   /**
    * @brief Get number for volume down function
@@ -286,7 +285,7 @@ class AudioBoardStream : public I2SCodecStream {
    * @return -1       non-existent
    *         Others   number
    */
-  GpioPin pinVolumeDown() { return getPinID(PinFunction::KEY, 5); }
+  digital_pin_t pinVolumeDown() { return getPinID(PinFunction::KEY, 5); }
 
   /**
    * @brief Get LED pin
@@ -294,7 +293,7 @@ class AudioBoardStream : public I2SCodecStream {
    * @return -1       non-existent
    *         Others   gpio number
    */
-  GpioPin pinLed(int idx) { return getPinID(PinFunction::LED, idx); }
+  digital_pin_t pinLed(int idx) { return getPinID(PinFunction::LED, idx); }
 
   /// the same as setPAPower()
   void setSpeakerActive(bool active) { setPAPower(active); }
@@ -306,7 +305,7 @@ class AudioBoardStream : public I2SCodecStream {
    * @return false
    */
   bool headphoneStatus() {
-    int headphoneGpioPin = pinHeadphoneDetect();
+    digital_pin_t headphoneGpioPin = pinHeadphoneDetect();
     return headphoneGpioPin > 0 ? !digitalRead(headphoneGpioPin) : false;
   }
 
@@ -329,7 +328,7 @@ class AudioBoardStream : public I2SCodecStream {
 
   /// add volume up and volume down action
   void addVolumeActions() {
-    // pin conflicts with SD Lyrat SD CS GpioPin and buttons / Conflict on
+    // pin conflicts with SD Lyrat SD CS digital_pin_t and buttons / Conflict on
     // Audiokit V. 2957
     int sd_cs = getSdCsPin();
     int vol_up = pinVolumeUp();
@@ -341,7 +340,7 @@ class AudioBoardStream : public I2SCodecStream {
       LOGD("actionVolumeUp")
       addAction(vol_up, actionVolumeUp);
     } else {
-      LOGW("Volume Buttons ignored because of conflict: %d ", pinVolumeDown());
+      LOGW("Volume Buttons ignored because of conflict");
     }
   }
 
@@ -384,8 +383,8 @@ class AudioBoardStream : public I2SCodecStream {
   bool active = true;
   float action_increment_value = 0.02;
 
-  int getSdCsPin() {
-    static GpioPin sd_cs = -2;
+  digital_pin_t getSdCsPin() {
+    static digital_pin_t sd_cs = -2;
     // execute only once
     if (sd_cs != -2) return sd_cs;
 
