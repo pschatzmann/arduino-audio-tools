@@ -1,6 +1,8 @@
 #pragma once
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
+#include "AudioTools/CoreAudio/AudioTypes.h"
+#include "AudioTools/CoreAudio/AudioRuntime.h"
 
 #ifndef TOUCH_LIMIT
 #define TOUCH_LIMIT 20
