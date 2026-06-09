@@ -7,7 +7,7 @@
 #include <zephyr/net/wifi_mgmt.h>
 #include <zephyr/sys/util.h>
 
-#include "AudioToolsLogger.h"
+#include "AudioLogger.h"
 
 // ---------------------------------------------------------------------------
 // Kconfig guard — fail at compile time if prerequisites are missing
@@ -30,7 +30,7 @@ namespace audio_tools {
  *      CONFIG_NET_L2_WIFI_MGMT=y
  *      CONFIG_WIFI=y
  *      CONFIG_NET_DHCPV4=y
- * 
+ *
  * @author Phil Schatzmann (ported to Zephyr)
  * @ingroup http
  * @copyright GPLv3

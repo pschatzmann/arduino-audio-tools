@@ -8,8 +8,13 @@
 #include "AudioTools/Disk/AudioSource.h"
 #include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 #include "ZephyrFile.h"
+#include "ZephyrSD.h"
 
 #include <zephyr/fs/fs.h>
+
+#ifndef FS_MAX_PATH
+#  define FS_MAX_PATH 256
+#endif
 
 namespace audio_tools {
 
@@ -17,7 +22,7 @@ namespace audio_tools {
  * @brief AudioSource using Zephyr FS API (NO mounting, only uses mounted FS).
  * Mount using the ZephyrSD class.
  * @ingroup player
- * @note only for ESP32
+ * @note only for Zephyr
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -55,7 +60,7 @@ public:
         return true;
     }
 
-    void end() override {
+    void end() {
         closeFile();
     }
 
@@ -162,7 +167,7 @@ protected:
     size_t idx_pos = 0;
     long count = 0;
 
-    char current_path[CONFIG_FS_FATFS_MAX_LFN + 1] = {};
+    char current_path[FS_MAX_PATH + 1] = {};
 
     const char *extension = ".mp3";
     const char *start_path = "/";
@@ -231,7 +236,7 @@ protected:
             int rc = fs_readdir(&dir, &entry);
             if (rc != 0 || entry.name[0] == '\0') break;
 
-            char full[CONFIG_FS_FATFS_MAX_LFN + 2];
+            char full[FS_MAX_PATH + 2];
 
             if (snprintf(full, sizeof(full),
                          "%s/%s", path, entry.name) >= (int)sizeof(full)) {
@@ -276,7 +281,7 @@ protected:
             int rc = fs_readdir(&dir, &entry);
             if (rc != 0 || entry.name[0] == '\0') break;
 
-            char full[CONFIG_FS_FATFS_MAX_LFN + 2];
+            char full[FS_MAX_PATH + 2];
 
             if (snprintf(full, sizeof(full),
                          "%s/%s", path, entry.name) >= (int)sizeof(full)) {

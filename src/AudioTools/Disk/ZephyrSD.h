@@ -4,10 +4,13 @@
 #  error("ZephyrSD only supported by zephyr")
 #endif
 
+#include "ZephyrFile.h"
 #include <zephyr/fs/fs.h>
 #include <zephyr/storage/disk_access.h>
 #include <string>
-#include "ZephyrFile.h"
+#include <zephyr/sys/util.h>
+
+BUILD_ASSERT(IS_ENABLED(CONFIG_FILE_SYSTEM), "Filesystem required");
 
 namespace audio_tools {
 /**
@@ -28,7 +31,7 @@ public:
         return begin(diskName, mp);
     }
 
-    bool begin(const char* diskName="SD", fs_mount_t moutInfo){
+    bool begin(const char* diskName, fs_mount_t mountInfo){
         disk_name = diskName ? diskName : "";
         mp = mountInfo;
         return mountSD();
@@ -87,7 +90,7 @@ public:
     }
 
     bool rmdir(const char *path) {
-        int ret = fs_rmdir(path);
+        int ret = fs_unlink(path);
         return logErr(ret, "fs_rmdir", path);
     }
 
