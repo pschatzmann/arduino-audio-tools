@@ -15,6 +15,7 @@ extern "C" void pinMode(int, int);
 extern "C" int digitalRead(int);
 #endif
 
+
 namespace audio_tools {
 
 // global reference to access from static callback methods
@@ -28,6 +29,7 @@ static AudioActions* selfAudioActions = nullptr;
  */
 class AudioActions {
  public:
+  /// Defines the logic for the action execution
   enum ActiveLogic : uint8_t {
     ActiveLow,
     ActiveHigh,
@@ -35,12 +37,13 @@ class AudioActions {
     ActiveTouch
   };
 
+  /// Action definition per pin
   struct Action {
     Action() = default;
     virtual ~Action() {}
-    int16_t pin = -1;
-    void (*actionOn)(bool pinStatus, int pin, void* ref) = nullptr;
-    void (*actionOff)(bool pinStatus, int pin, void* ref) = nullptr;
+    digital_pin_t pin = -1;
+    void (*actionOn)(bool pinStatus, digital_pin_t pin, void* ref) = nullptr;
+    void (*actionOff)(bool pinStatus, digital_pin_t pin, void* ref) = nullptr;
     void* ref = nullptr;
     unsigned long debounceTimeout = 0;
     ActiveLogic activeLogic = ActiveHigh;
@@ -50,7 +53,7 @@ class AudioActions {
     /// determines the value for the action
     int debounceDelayValue = DEBOUNCE_DELAY;
     int touchLimit = TOUCH_LIMIT;
-    std::function<bool(int)> read_cb = nullptr;
+    std::function<bool(digital_pin_t)> read_cb = nullptr;
 
     virtual int id() { return pin; }
 
@@ -117,7 +120,7 @@ class AudioActions {
     }
 
    protected:
-    bool readPin(int pin) {
+    bool readPin(digital_pin_t pin) {
       if (read_cb) {
         return read_cb(pin);
       } else {
@@ -139,16 +142,18 @@ class AudioActions {
   void add(Action& action) { insertAction(action); }
 
   /// Adds an action
-  void add(int pin, void (*actionOn)(bool pinStatus, int pin, void* ref),
+  void add(digital_pin_t pin, void (*actionOn)(bool pinStatus, digital_pin_t pin, void* ref),
            ActiveLogic activeLogic = ActiveLow, void* ref = nullptr) {
     add(pin, actionOn, nullptr, activeLogic, ref);
   }
 
   /// Adds an action
-  void add(int pin, void (*actionOn)(bool pinStatus, int pin, void* ref),
-           void (*actionOff)(bool pinStatus, int pin, void* ref),
+  void add(digital_pin_t pin, void (*actionOn)(bool pinStatus, digital_pin_t pin, void* ref),
+           void (*actionOff)(bool pinStatus, digital_pin_t pin, void* ref),
            ActiveLogic activeLogicPar = ActiveLow, void* ref = nullptr) {
+#ifdef IS_PIN_INT
     LOGI("ActionLogic::add pin: %d / logic: %d", pin, activeLogicPar);
+#endif
     if (pin >= 0) {
       // setup pin mode
       setupPin(pin, activeLogicPar);
@@ -166,12 +171,14 @@ class AudioActions {
 
       insertAction(action);
     } else {
+#ifdef IS_PIN_INT
       LOGW("pin %d -> Ignored", pin);
+#endif
     }
   }
 
   /// enable/disable pin actions
-  void setEnabled(int pin, bool enabled) {
+  void setEnabled(digital_pin_t pin, bool enabled) {
     Action* p_action = findAction(pin);
     if (p_action) {
       p_action->enabled = enabled;
@@ -263,15 +270,19 @@ class AudioActions {
 
   static void audioActionsISR() { selfAudioActions->processAllActions(); }
 
-  void setupPin(int pin, ActiveLogic logic) {
+  void setupPin(digital_pin_t pin, ActiveLogic logic) {
     // in the audio-driver library the pins are already set up
     if (use_pin_mode) {
       if (logic == ActiveLow) {
         pinMode(pin, INPUT_PULLUP);
+#ifdef IS_PIN_INT
         LOGI("pin %d -> INPUT_PULLUP", pin);
+#endif
       } else {
         pinMode(pin, INPUT);
+#ifdef IS_PIN_INT
         LOGI("pin %d -> INPUT", pin);
+#endif
       }
     }
 
