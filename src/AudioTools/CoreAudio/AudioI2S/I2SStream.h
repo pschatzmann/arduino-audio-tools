@@ -10,7 +10,6 @@
 #include "AudioTools/CoreAudio/AudioI2S/I2SDriverESP32V1.h"
 #include "AudioTools/CoreAudio/AudioI2S/I2SDriverESP8266.h"
 #include "AudioTools/CoreAudio/AudioI2S/I2SDriverZephyr.h"
-#include "AudioTools/CoreAudio/AudioI2S/I2SDriverZephyrSAI.h"
 #include "AudioTools/CoreAudio/AudioI2S/I2SDriverNanoSenseBLE.h"
 #include "AudioTools/CoreAudio/AudioI2S/I2SDriverRP2040-MBED.h"
 #include "AudioTools/CoreAudio/AudioI2S/I2SDriverRP2040.h"
@@ -20,6 +19,10 @@
 #include "AudioTools/CoreAudio/AudioTypes.h"
 
 #if defined(IS_I2S_IMPLEMENTED)
+
+#ifndef SOFT_MUTE_VALUE
+#  define SOFT_MUTE_VALUE 0
+#endif
 
 namespace audio_tools {
 
@@ -43,7 +46,7 @@ class I2SStream : public AudioStream {
   I2SStream(digital_pin_t mute_pin) {
     TRACED();
     this->mute_pin = mute_pin;
-    if (mute_pin > 0) {
+    if (IS_GPIO(mute_pin)) {
       pinMode(mute_pin, OUTPUT);
       mute(true);
     }
@@ -150,11 +153,11 @@ class I2SStream : public AudioStream {
   I2SDriver i2s;
   I2SDriverBase* p_driver = &i2s;
   bool is_active = false;
+  digital_pin_t mute_pin = GPIO_NONE;
 
-  digital_pin_t mute_pin = -1;
   /// set mute pin on or off
   void mute(bool is_mute) {
-    if (mute_pin > 0) {
+    if (IS_GPIO(mute_pin)) {
       digitalWrite(mute_pin, is_mute ? SOFT_MUTE_VALUE : !SOFT_MUTE_VALUE);
     }
   }

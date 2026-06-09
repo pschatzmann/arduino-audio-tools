@@ -39,8 +39,8 @@ class AudioBoardStream : public I2SCodecStream {
   AudioBoardStream(audio_driver::AudioBoard &board) : I2SCodecStream(board) {
     // pin mode already set up by driver library
     actions.setPinMode(false);
-    // use the AudioBoard 
-    actions.setReadCallback([this](int pin) { return this->digitalRead(pin); });
+    // use the AudioBoard
+    actions.setReadCallback([this](digital_pin_t pin) { return this->digitalRead(pin); });
   }
 
   bool begin() override { return I2SCodecStream::begin(); }
@@ -64,8 +64,8 @@ class AudioBoardStream : public I2SCodecStream {
                  void *ref = nullptr) {
       AudioBoardAction *abo = new AudioBoardAction(board(), key);
       abo->actionOn = action;
-      abo->ref = (ref == nullptr) ? this : ref; 
-      actions.add(*abo);            
+      abo->ref = (ref == nullptr) ? this : ref;
+      actions.add(*abo);
   }
 
   /**
@@ -78,8 +78,8 @@ class AudioBoardStream : public I2SCodecStream {
       AudioBoardAction *abo = new AudioBoardAction(board(), key);
       abo->actionOn = actionOn;
       abo->actionOn = actionOff;
-      abo->ref = (ref == nullptr) ? this : ref; 
-      actions.add(*abo);            
+      abo->ref = (ref == nullptr) ? this : ref;
+      actions.add(*abo);
     }
 
   /**
@@ -189,7 +189,7 @@ class AudioBoardStream : public I2SCodecStream {
    */
   static void actionHeadphoneDetection(bool, digital_pin_t, void *ref) {
     AudioBoardStream *self = (AudioBoardStream *)ref;
-    if (self->pinHeadphoneDetect() >= 0) {
+    if (self->pinHeadphoneDetect() != GPIO_NONE) {
       // detect changes
       bool isConnected = self->headphoneStatus();
       if (self->headphoneIsConnected != isConnected) {
@@ -306,7 +306,7 @@ class AudioBoardStream : public I2SCodecStream {
    */
   bool headphoneStatus() {
     digital_pin_t headphoneGpioPin = pinHeadphoneDetect();
-    return headphoneGpioPin > 0 ? !digitalRead(headphoneGpioPin) : false;
+    return headphoneGpioPin != GPIO_NONE ? !digitalRead(headphoneGpioPin) : false;
   }
 
   /**
@@ -318,9 +318,9 @@ class AudioBoardStream : public I2SCodecStream {
   void addStartStopAction() {
     // pin conflicts for pinInputMode() with the SD CS pin for AIThinker and
     // buttons
-    int sd_cs = getSdCsPin();
-    int input_mode = pinInputMode();
-    if (input_mode != -1 && (input_mode != sd_cs || !cfg.sd_active)) {
+    digital_pin_t sd_cs = getSdCsPin();
+    digital_pin_t input_mode = pinInputMode();
+    if (input_mode != GPIO_NONE && (input_mode != sd_cs || !cfg.sd_active)) {
       LOGD("actionInputMode")
       addAction(input_mode, actionStartStop);
     }
@@ -330,10 +330,10 @@ class AudioBoardStream : public I2SCodecStream {
   void addVolumeActions() {
     // pin conflicts with SD Lyrat SD CS digital_pin_t and buttons / Conflict on
     // Audiokit V. 2957
-    int sd_cs = getSdCsPin();
-    int vol_up = pinVolumeUp();
-    int vol_down = pinVolumeDown();
-    if ((vol_up != -1 && vol_down != -1) &&
+    digital_pin_t sd_cs = getSdCsPin();
+    digital_pin_t vol_up = pinVolumeUp();
+    digital_pin_t vol_down = pinVolumeDown();
+    if ((vol_up != GPIO_NONE && vol_down != GPIO_NONE) &&
         (!cfg.sd_active || (vol_down != sd_cs && vol_up != sd_cs))) {
       LOGD("actionVolumeDown")
       addAction(vol_down, actionVolumeDown);
@@ -347,8 +347,8 @@ class AudioBoardStream : public I2SCodecStream {
   /// Adds headphone determination
   void addHeadphoneDetectionAction() {
     // pin conflicts with AIThinker A101: key6 and headphone detection
-    int head_phone = pinHeadphoneDetect();
-    if (head_phone != -1 && (getPinID(PinFunction::KEY, 6) != head_phone)) {
+    digital_pin_t head_phone = pinHeadphoneDetect();
+    if (head_phone != GPIO_NONE && (getPinID(PinFunction::KEY, 6) != head_phone)) {
       actions.add(head_phone, actionHeadphoneDetection,
                   AudioActions::ActiveChange, this);
     }
@@ -384,9 +384,9 @@ class AudioBoardStream : public I2SCodecStream {
   float action_increment_value = 0.02;
 
   digital_pin_t getSdCsPin() {
-    static digital_pin_t sd_cs = -2;
+    static digital_pin_t sd_cs = GPIO_NONE;
     // execute only once
-    if (sd_cs != -2) return sd_cs;
+    if (sd_cs != GPIO_NONE) return sd_cs;
 
     auto sd_opt = getPins().getSPIPins(PinFunction::SD);
     if (sd_opt) {
@@ -395,13 +395,13 @@ class AudioBoardStream : public I2SCodecStream {
       // no spi -> no sd
       LOGI("No sd defined -> sd_active=false")
       cfg.sd_active = false;
-      sd_cs = -1;
+      sd_cs = GPIO_NONE;
     }
     return sd_cs;
   }
 
   /// Determines the action logic (ActiveLow or ActiveTouch) for the pin
-  AudioActions::ActiveLogic getActionLogic(int pin) {
+  AudioActions::ActiveLogic getActionLogic(digital_pin_t pin) {
     auto opt = board().getPins().getPin(pin);
     PinLogic logic = PinLogic::Input;
     if (opt) logic = opt.value().pin_logic;

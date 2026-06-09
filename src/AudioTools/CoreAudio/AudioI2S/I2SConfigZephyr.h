@@ -12,15 +12,15 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class I2SConfigStd : public AudioInfo {
+class I2SConfigZephyr : public AudioInfo {
   public:
 
-    I2SConfigStd() = default;
+    I2SConfigZephyr() = default;
     /// Default Copy Constructor
-    I2SConfigStd(const I2SConfigStd &cfg) = default;
+    I2SConfigZephyr(const I2SConfigZephyr &cfg) = default;
 
     /// Constructor
-    I2SConfigStd(RxTxMode mode) {
+    I2SConfigZephyr(RxTxMode mode) {
         channels = DEFAULT_CHANNELS;
         sample_rate = DEFAULT_SAMPLE_RATE;
         bits_per_sample = DEFAULT_BITS_PER_SAMPLE;
@@ -47,10 +47,8 @@ class I2SConfigStd : public AudioInfo {
       LOGI("i2s_format: %s", i2s_formats[i2s_format]);
       LOGI("buffer_count:%d",buffer_count);
       LOGI("buffer_size:%d",buffer_size);
-      LOGI("device_name: %s", device_name);
-
+      LOGI("device name: %s", dev->name!=nullptr ? dev->name : "n/a");
     }
-
 };
 
 using I2SConfig = I2SConfigZephyr;
