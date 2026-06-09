@@ -14,10 +14,6 @@
 
 namespace audio_tools {
 
-#ifdef ARDUINO
-using digital_pin_t = int;
-#endif
-
 /// @brief Type alias for sample rate values
 /// @ingroup basic
 using sample_rate_t = uint32_t;

@@ -60,9 +60,9 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
 
   /// Provides the default configuration
   I2SCodecConfig defaultConfig(RxTxMode mode = TX_MODE) {
-    auto cfg1 = i2s.defaultConfig(mode);
+    auto cfg_default = i2s.defaultConfig(mode);
     I2SCodecConfig cfg;
-    memcpy(&cfg, &cfg1, sizeof(cfg1));
+    cfg.copyFrom(cfg_default);
     cfg.input_device = ADC_INPUT_LINE1;
     cfg.output_device = DAC_OUTPUT_ALL;
     cfg.sd_active = true;
@@ -186,22 +186,21 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
   bool hasBoard() { return p_board != nullptr; }
 
   /// Provides the gpio for the indicated function
-  GpioPin getPinID(PinFunction function) {
-    if (p_board == nullptr) return -1;
+  digital_pin_t getPinID(PinFunction function) {
+    if (p_board == nullptr) return GPIO_NONE;
     return p_board->getPins().getPinID(function);
   }
 
   /// Provides the gpio for the indicated function
-  GpioPin getPinID(PinFunction function, int pos) {
-    if (p_board == nullptr) return -1;
+  digital_pin_t getPinID(PinFunction function, int pos) {
+    if (p_board == nullptr) return GPIO_NONE;
     return p_board->getPins().getPinID(function, pos);
   }
-
   /// Provides the gpio for the indicated key pos
-  GpioPin getKey(int pos) { return getPinID(PinFunction::KEY, pos); }
+  digital_pin_t getKey(int pos) { return getPinID(PinFunction::KEY, pos); }
 
   /// Provides access to the pin information
-  DriverPins &getPins() { return p_board->getPins(); }
+  DriverDeviceInfo &getPins() { return p_board->getPins(); }
 
   /// Provides the i2s driver
   I2SDriverBase* driver() { return i2s.driver(); }
@@ -212,7 +211,7 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
   }
 
   /// get value of digital pin
-  bool digitalRead(int pin) {
+  bool digitalRead(digital_pin_t pin) {
     return p_board->getPins().getGPIO().digitalRead(pin);
   }
 
@@ -322,7 +321,9 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
     codec_cfg.i2s.bits = toCodecBits(info.bits_per_sample);
     codec_cfg.i2s.rate = toRate(info.sample_rate);
     codec_cfg.i2s.fmt = toFormat(info.i2s_format);
+#ifndef __zephyr__
     codec_cfg.i2s.signal_type = (signal_t) info.signal_type;
+#endif
     // use reverse logic for codec setting
     codec_cfg.i2s.mode = info.is_master ? MODE_SLAVE : MODE_MASTER;
     if (p_board == nullptr) return false;

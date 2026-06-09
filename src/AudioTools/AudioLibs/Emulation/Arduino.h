@@ -190,6 +190,11 @@ inline long map(long x, long in_min, long in_max, long out_min, long out_max) {
 #include "freertos/FreeRTOS.h"  // needed for ESP Arduino < 2.0
 #include "freertos/FreeRTOSConfig.h"
 
+#define GPIO_NONE -1
+#define IS_GPIO(pin) (pin >= 0)
+#define GPIO_TO_INT(pin) pin
+#define GPIO_TO_STR(pin) std::to_string(pin).c_str()
+
 using digital_pin_t = int;
 
 /// e.g. for AudioActions
@@ -246,6 +251,11 @@ inline void delayMicroseconds(uint32_t us) {
   k_busy_wait(us);
 }
 inline uint64_t micros() { return k_cyc_to_us_floor64(k_cycle_get_64()); }
+
+#define GPIO_NONE nullptr
+#define IS_GPIO(pin) (pin !=nullptr)
+#define GPIO_TO_INT(pin) pin == nullptr ? -1 : pin->pin
+#define GPIO_TO_STR(pin) pin == nullptr ? std::to_string(GPIO_TO_INT(pin)).c_str()
 
 using digital_pin_t = gpio_dt_spec*;
 

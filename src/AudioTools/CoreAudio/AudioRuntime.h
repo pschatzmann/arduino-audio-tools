@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <assert.h>
 #include <algorithm>
-#include "AudioToolsConfig.h" 
+#include "AudioToolsConfig.h"
 
 #ifdef ARDUINO
 #include <Arduino.h>
@@ -19,11 +19,12 @@ using std::max;
 /// Executes heap_caps_check_integrity_all()  @ingroup basic
 inline static void checkMemory(bool printMemory=false) {
     #if defined(ESP32) && defined(ARDUINO)
-        assert(heap_caps_check_integrity_all(true)); 
+        assert(heap_caps_check_integrity_all(true));
         if (printMemory) Serial.printf("==> Available stack: %d - heap: %u - psram: %u\n",(int) uxTaskGetStackHighWaterMark(NULL), (unsigned)ESP.getFreeHeap(),(unsigned)ESP.getFreePsram());
-    #endif    
+    #endif
 }
 
+// Arduino
 #ifdef ARDUINO
 /// prints n times the character ch and a new line  @ingroup basic
 inline void printNChar(char ch, int n){
@@ -53,6 +54,13 @@ inline void printVersionInfo() {
   printNChar('*',50);
 }
 
+#define GPIO_NONE -1
+#define IS_GPIO(pin) (pin >= 0)
+#define GPIO_TO_INT(pin) pin
+#define GPIO_TO_STR(pin) std::to_string(pin).c_str()
+using digital_pin_t = int;
+
+// Non Arduino
 #elif defined(IS_ZEPHYR) || defined(ESP32_CMAKE)
 #include "AudioTools/AudioLibs/Emulation/Arduino.h"
 #endif
