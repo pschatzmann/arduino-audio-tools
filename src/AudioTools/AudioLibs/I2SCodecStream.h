@@ -14,7 +14,8 @@
 #endif
 
 namespace audio_tools {
-
+// we heavily depend on the audio driver functionality
+using namespace audio_driver;
 /**
  * @brief  Configuration for I2SCodecStream
  * @ingroup io
