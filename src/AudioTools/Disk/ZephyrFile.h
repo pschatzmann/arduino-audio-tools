@@ -122,7 +122,7 @@ public:
         return value;
     }
 
-    size_t readBytes(char *buffer, size_t len) override {
+    size_t readBytes(char *buffer, size_t len)  {
         if (!is_open || buffer == nullptr || len == 0) {
             return 0;
         }

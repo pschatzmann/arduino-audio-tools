@@ -10,7 +10,7 @@
 namespace audio_tools {
 
 /**
- * @brief R2R driver base class 
+ * @brief R2R driver base class
  * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -18,8 +18,8 @@ namespace audio_tools {
 
 class R2RDriverBase {
  public:
-  virtual void setupPins(Vector<int> &channel1_pins,
-                         Vector<int> &channel2_pins) = 0;
+  virtual void setupPins(Vector<digital_pin_t> &channel1_pins,
+                         Vector<digital_pin_t> &channel2_pins) = 0;
 
   virtual void writePins(int channels, int channel, unsigned uvalue) = 0;
 };
@@ -44,7 +44,7 @@ class R2RDriver : public R2RDriverBase {
       LOGI("Setup channel1 pin %d", pin);
       pinMode(pin, OUTPUT);
     }
-    for (int pin : channel2_pins) {
+    for (auto pin : channel2_pins) {
       LOGI("Setup channel2 pin %d", pin);
       pinMode(pin, OUTPUT);
     }
@@ -54,22 +54,22 @@ class R2RDriver : public R2RDriverBase {
     switch (channel) {
       case 0:
         for (int j = 0; j < (*p_channel1_pins).size(); j++) {
-          int pin = (*p_channel1_pins)[j];
-          if (pin >= 0) digitalWrite(pin, (uvalue >> j) & 1);
+          digital_pin_t pin = (*p_channel1_pins)[j];
+          if (pin != GPIO_NONE) digitalWrite(pin, (uvalue >> j) & 1);
         }
         break;
       case 1:
         for (int j = 0; j < (*p_channel2_pins).size(); j++) {
-          int pin = (*p_channel2_pins)[j];
-          if (pin >= 0) digitalWrite(pin, (uvalue >> j) & 1);
+          digital_pin_t pin = (*p_channel2_pins)[j];
+          if (pin != GPIO_NONE) digitalWrite(pin, (uvalue >> j) & 1);
         }
         break;
     }
   }
 
  protected:
-  Vector<int> *p_channel1_pins = nullptr;
-  Vector<int> *p_channel2_pins = nullptr;
+  Vector<digital_pin_t> *p_channel1_pins = nullptr;
+  Vector<digital_pin_t> *p_channel2_pins = nullptr;
 } r2r_driver;
 
 /**
@@ -80,8 +80,8 @@ class R2RDriver : public R2RDriverBase {
 
 class R2RConfig : public AudioInfo {
  public:
-  Vector<int> channel1_pins;
-  Vector<int> channel2_pins;
+  Vector<digital_pin_t> channel1_pins;
+  Vector<digital_pin_t> channel2_pins;
   uint16_t buffer_size = DEFAULT_BUFFER_SIZE;
   uint16_t buffer_count = 2;        // double buffer
   R2RDriverBase *driver = &r2r_driver;  // by default use Arduino driver
@@ -91,7 +91,7 @@ class R2RConfig : public AudioInfo {
 };
 
 /**
- * @brief Output to R-2R DAC. 
+ * @brief Output to R-2R DAC.
  * You need to define the used digital pins in the configuration. Any
  * number of bits is supported on max 2 channels. For a 4 bit single
  * channel, you need to define 4 digital pins.
