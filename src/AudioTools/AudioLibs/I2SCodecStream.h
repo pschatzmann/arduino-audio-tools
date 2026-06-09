@@ -207,7 +207,7 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
   I2SDriverBase* driver() { return i2s.driver(); }
 
   /// set value of digital pin
-  void digitalWrite(int pin, bool value) {
+  void digitalWrite(digital_pin_t pin, bool value) {
     p_board->getPins().getGPIO().digitalWrite(pin, value);
   }
 

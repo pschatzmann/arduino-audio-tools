@@ -12,9 +12,11 @@
 // Some top level functions: stop(), checkMemory()
 #include "AudioTools/CoreAudio/AudioRuntime.h"
 
-
-
 namespace audio_tools {
+
+#ifdef ARDUINO
+using digital_pin_t = int;
+#endif
 
 /// @brief Type alias for sample rate values
 /// @ingroup basic
