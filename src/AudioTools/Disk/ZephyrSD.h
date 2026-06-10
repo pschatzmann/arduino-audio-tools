@@ -15,6 +15,9 @@ BUILD_ASSERT(IS_ENABLED(CONFIG_FILE_SYSTEM), "Filesystem required");
 namespace audio_tools {
 /**
  * @brief Arduino SD API for Zephyr
+ * 
+ * @note Supported by all Zephyr platforms with FS support: CONFIG_FILE_SYSTEM=y
+ * 
  * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3

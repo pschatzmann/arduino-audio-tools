@@ -12,6 +12,8 @@ namespace audio_tools {
  * expanded file names is done on the heap, so in order to limit the requested
  * memory we can limit the number of files.
  *
+ * @note supported only by Arduino platforms!
+ * 
  * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3

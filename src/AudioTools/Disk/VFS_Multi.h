@@ -6,7 +6,9 @@ namespace audio_tools {
 
 /**
  * @brief Define multipe VFS with their mount point
- * @note For ESP32 only
+ * 
+ * @note Supported only by ESP32 (Arduino and IDF)
+ * 
  * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3

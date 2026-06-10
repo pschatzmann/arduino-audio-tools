@@ -21,8 +21,10 @@ namespace audio_tools {
 /**
  * @brief AudioSource using Zephyr FS API (NO mounting, only uses mounted FS).
  * Mount using the ZephyrSD class.
+ * 
+ * @note Supported by all Zephyr platforms with FS support: CONFIG_FILE_SYSTEM=y
+ * 
  * @ingroup player
- * @note only for Zephyr
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

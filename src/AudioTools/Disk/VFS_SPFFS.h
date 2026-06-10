@@ -13,7 +13,9 @@ namespace audio_tools {
  * @brief ESP32 Virtual File System for the SPFFS. The default mount point is
  * "/spiffs" DRAFT implementation: not tested See
  * https://github.com/espressif/esp-idf/tree/master/examples/storage/sd_card/sdspi
- * @note For ESP32 only
+ * 
+ * @note Supported only by ESP32 (Arduino and IDF)
+ * 
  * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
