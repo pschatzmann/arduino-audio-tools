@@ -76,7 +76,10 @@ class R2RDriver : public R2RDriverBase {
  protected:
   Vector<digital_pin_t>* p_channel1_pins = nullptr;
   Vector<digital_pin_t>* p_channel2_pins = nullptr;
-} r2r_driver;
+} ;
+
+/// Default driver instance
+static R2RDriver r2r_driver;
 
 /**
  * @brief R2R configuration
