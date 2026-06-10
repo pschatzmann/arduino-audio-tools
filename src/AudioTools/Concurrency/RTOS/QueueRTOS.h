@@ -17,6 +17,9 @@ namespace audio_tools {
 /**
  * @brief FIFO Queue whch is based on the FreeRTOS queue API.
  * The default allocator will allocate the memory from psram if available
+ * 
+ * @note Supported by all FreeRTOS platforms
+ * 
  * @ingroup collections
  * @ingroup concurrency
  * @author Phil Schatzmann

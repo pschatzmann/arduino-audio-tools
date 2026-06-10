@@ -32,6 +32,9 @@ inline k_timeout_t rtosTimeoutFromTicks(TickType_t ticks) {
 
 /**
  * @brief FIFO Queue implementation based on Zephyr message queues.
+ * 
+ * @note Supported by all Zephyr platforms
+ * 
  * @ingroup collections
  * @ingroup concurrency
  */

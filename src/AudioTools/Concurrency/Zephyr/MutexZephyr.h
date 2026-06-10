@@ -8,6 +8,9 @@ namespace audio_tools {
 
 /**
  * @brief Mutex implementation using Zephyr kernel mutex.
+ * 
+ * @note Supported by all Zephyr platforms
+ * 
  * @ingroup concurrency
  */
 class MutexZephyr : public MutexBase {
