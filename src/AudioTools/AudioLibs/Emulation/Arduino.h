@@ -251,6 +251,8 @@ inline void delayMicroseconds(uint32_t us) {
   k_busy_wait(us);
 }
 inline uint64_t micros() { return k_cyc_to_us_floor64(k_cycle_get_64()); }
+// delay and millis has been defined
+#define DESKTOP_MILLIS_DEFINED
 
 #define GPIO_NONE nullptr
 #define IS_GPIO(pin) (pin !=nullptr)
@@ -314,6 +316,4 @@ int digitalRead(digital_pin_t pin) {
   return rc;
 }
 
-// delay and millis has been defined
-#define DESKTOP_MILLIS_DEFINED
 #endif
