@@ -36,6 +36,10 @@ namespace audio_tools {
  *   CONFIG_NET_TCP=y
  *   CONFIG_NET_SOCKETS=y
  *   CONFIG_DNS_RESOLVER=y
+ * 
+ * @author Phil Schatzmann
+ * @ingroup http
+ * @copyright GPLv3
  */
 class WiFiClientZephyr : public Client {
  public:
