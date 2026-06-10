@@ -10,11 +10,15 @@ namespace audio_tools {
  * Header-only implementation — just #include this file.
  *
  * Typical usage:
- *   WiFiClientSecureZephyr client;
+ *   WiFiClientSecure client;
  *   client.setCACert(ca_pem, ca_pem_len);          // optional: verify server
  *   client.setCertificate(cert_pem, cert_pem_len); // optional: mutual TLS
  *   client.setPrivateKey(key_pem, key_pem_len);    // optional: mutual TLS
  *   client.connect("example.com", 443);
+ * 
+ * @author Phil Schatzmann
+ * @ingroup http
+ * @copyright GPLv3
  */
 
 class WiFiClientSecureZephyr : public WiFiClientZephyr {
