@@ -3,7 +3,7 @@
 #include "AudioToolsConfig.h"
 
 #if defined(USE_WIFI)
-#include "AudioTools/Communication/Client/WiFiInclude.h"
+#include "AudioTools/Communication/WiFi/WiFiInclude.h"
 #endif
 
 #include "AudioTools/CoreAudio/AudioBasic/Str.h"
@@ -223,7 +223,7 @@ class URLStream : public AbstractURLStream {
   /// Defines if the stream should wait for data after the request has been sent
   void setWaitForData(bool flag) { wait_for_data = flag; }
 
-  /// returns the content length 
+  /// returns the content length
   int contentLength() override { return content_length; }
 
   /// returns the total number of bytes read from the stream
