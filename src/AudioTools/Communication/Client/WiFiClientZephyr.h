@@ -9,6 +9,7 @@
 #include <zephyr/net/net_ip.h>
 #include <zephyr/net/socket.h>
 #include <zephyr/sys/util.h>   // for BUILD_ASSERT
+#include "AudioTools/CoreAudio/AudioRuntime.h"
 
 // Fail fast at compile time if required Kconfig symbols are missing.
 BUILD_ASSERT(IS_ENABLED(CONFIG_NETWORKING),
@@ -36,14 +37,12 @@ namespace audio_tools {
  *   CONFIG_NET_SOCKETS=y
  *   CONFIG_DNS_RESOLVER=y
  */
-class WiFiClientZephyr {
+class WiFiClientZephyr : public Client {
  public:
-  // ----------------------------------------------------------------
-  // Constructor / Destructor
-  // ----------------------------------------------------------------
-
-  WiFiClientZephyr()
-      : _sock(-1), _timeout_ms(5000), _peek_byte(0), _has_peek(false) {}
+  /// Default constructor
+  WiFiClientZephyr() = default;
+  /// Constructor providing a socket (e.g. used by server)
+  WiFiClientZephyr(int socket) : _sock(socket) {}
 
   virtual ~WiFiClientZephyr() { stop(); }
 
@@ -272,10 +271,10 @@ class WiFiClientZephyr {
   int fd() const { return _sock; }
 
  protected:
-  int _sock;
-  uint32_t _timeout_ms;
-  uint8_t _peek_byte;
-  bool _has_peek;
+  int _sock = -1;
+  uint32_t _timeout_ms = 5000;
+  uint8_t _peek_byte = 0;
+  bool _has_peek = false;
 
   void _applyTimeout() {
     if (_sock < 0) return;
