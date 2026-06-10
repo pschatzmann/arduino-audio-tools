@@ -9,10 +9,10 @@ namespace audio_tools {
 
 /**
  * @brief ESP32 AudioSource for AudioPlayer using an the LittleFS file system
+ * @note Supported only by Arduino platforms that support LittleFS (e.g. ESP32)!
  * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
- * @note only for Arduino
  */
 class AudioSourceLittleFS : public AudioSource {
 public:

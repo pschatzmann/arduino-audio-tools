@@ -12,7 +12,9 @@ namespace fs = std::filesystem;
 
 /**
  * @brief AudioSource using the standard C++ api
- * @note For platforms providing POSIX file API
+ * 
+ * @note Supported by all platforms providing POSIX file API
+ * 
  * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3

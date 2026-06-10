@@ -26,10 +26,12 @@ namespace audio_tools {
  *    D1       4
  *
  *  On the AI Thinker boards the pin settings should be On, On, On, On, On,
+ *
+ * @note Supported only by Arduino ESP32 platforms!
+ *
  * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
- * @note only for Arduino
  */
 class AudioSourceIdxSDMMC : public AudioSource {
 public:
