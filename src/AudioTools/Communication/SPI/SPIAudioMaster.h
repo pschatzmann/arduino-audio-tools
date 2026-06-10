@@ -48,6 +48,7 @@ struct SPIAudioMasterConfig : public AudioInfo {
 /**
  * @brief SPI master endpoint for remote audio sink configuration and PCM data
  * transfer.
+ * @note Supported on all ESP32 Arduino platforms!
  * @ingroup spi-audio
  *
  * This class implements the master side of a simple binary request/response

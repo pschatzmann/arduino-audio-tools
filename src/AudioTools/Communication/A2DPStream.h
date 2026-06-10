@@ -73,7 +73,8 @@ class A2DPConfig {
  * It is recommended to use the API with the callbacks. Examples can be found in the a2dp
  * examples directory starting with basic.
  * 
- * Requires: https://github.com/pschatzmann/ESP32-A2DP
+ * @note Supported only on EP32 (via Arduino and IDF)
+ * @note Requires: https://github.com/pschatzmann/ESP32-A2DP
  *
  * @ingroup io
  * @ingroup communications

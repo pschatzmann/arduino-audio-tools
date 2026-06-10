@@ -14,6 +14,9 @@ namespace audio_tools {
  * AudioSource and AudioSink. By default the WiFiUDP object is used and we login
  * to wifi if the ssid and password is provided and we are not already
  * connected.
+ * 
+ * @note Supported only on Arduino platforms with WiFi support (e.g. ESP32) and the WiFi library!
+ * 
  * @ingroup communications
  * @author Phil Schatzmann
  * @copyright GPLv3
