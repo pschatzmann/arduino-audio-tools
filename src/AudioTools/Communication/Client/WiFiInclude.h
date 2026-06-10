@@ -5,6 +5,7 @@
 #  include "WiFiZephyr.h"
 #  include "WiFiClientZephyr.h"
 #  include "WiFiClientSecureZephyr.h"
+#  include "WiFiServerZephyr.h"
 #elif defined(USE_WIFININA)
 #  include <WiFiNINA.h>
 #elif defined(USE_WIFIS3)

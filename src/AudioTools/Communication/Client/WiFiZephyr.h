@@ -23,6 +23,16 @@ BUILD_ASSERT(IS_ENABLED(CONFIG_NET_DHCPV4),
 
 namespace audio_tools {
 
+enum wifi_status_t {
+  WL_IDLE_STATUS = 0,
+  WL_NO_SSID_AVAIL = 0,
+  WL_SCAN_COMPLETED = 0,
+  WL_CONNECTED = 1,
+  WL_CONNECT_FAILED = 0,
+  WL_CONNECTION_LOST = 0,
+  WL_DISCONNECTED = 0
+};
+
 /**
  * @brief Login to WiFi using Zephyr's wifi_mgmt / net_mgmt API.
  *        Access via the global object ZEPHYR_WIFI.
@@ -70,8 +80,16 @@ class WiFiZephyr {
 
   bool isConnected() { return _is_open; }
 
+  wifi_status_t status() { return _is_open ? WL_CONNECTED : WL_DISCONNECTED; }
+
   /** Returns the assigned IPv4 address (valid after isConnected() == true). */
   const struct in_addr& ip() const { return _ip; }
+
+  const char* localIP() {
+      static char address_str[NET_IPV4_ADDR_LEN];
+      net_addr_ntop(AF_INET, &_ip, address_str, sizeof(address_str));
+      return address_str;
+  }
 
  protected:
   volatile bool _is_open = false;
@@ -207,6 +225,6 @@ class WiFiZephyr {
 inline WiFiZephyr* WiFiZephyr::_instance = nullptr;
 
 // Global instance — mirrors `IDF_WIFI`
-static WiFiZephyr WIFI;
+static WiFiZephyr WiFi;
 
 }  // namespace audio_tools

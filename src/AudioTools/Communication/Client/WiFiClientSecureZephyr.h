@@ -30,12 +30,13 @@ class WiFiClientSecureZephyr : public WiFiClientZephyr {
   ~WiFiClientSecureZephyr() { stop(); }  // calls base stop()
 
   // --- credential API (unchanged from before) ---
-  bool setCACert(const uint8_t* pem, size_t len)      { return _addCredential(TLS_CREDENTIAL_CA_CERTIFICATE,   pem, len, &_ca_tag);   }
+  bool setCACert(const uint8_t* pem, size_t len)       { return _addCredential(TLS_CREDENTIAL_CA_CERTIFICATE,   pem, len, &_ca_tag);   }
   bool setCACert(const char* pem)                      { return pem && setCACert((const uint8_t*)pem, strlen(pem)+1); }
-  bool setCertificate(const uint8_t* pem, size_t len) { return _addCredential(TLS_CREDENTIAL_PUBLIC_CERTIFICATE, pem, len, &_cert_tag); }
+  bool setCertificate(const uint8_t* pem, size_t len)  { return _addCredential(TLS_CREDENTIAL_PUBLIC_CERTIFICATE, pem, len, &_cert_tag); }
   bool setCertificate(const char* pem)                 { return pem && setCertificate((const uint8_t*)pem, strlen(pem)+1); }
-  bool setPrivateKey(const uint8_t* pem, size_t len)  { return _addCredential(TLS_CREDENTIAL_PRIVATE_KEY,      pem, len, &_key_tag);  }
+  bool setPrivateKey(const uint8_t* pem, size_t len)   { return _addCredential(TLS_CREDENTIAL_PRIVATE_KEY,      pem, len, &_key_tag);  }
   bool setPrivateKey(const char* pem)                  { return pem && setPrivateKey((const uint8_t*)pem, strlen(pem)+1); }
+  void setSecure(bool secure)                          { _insecure = secure; }
   void setInsecure()                                   { _insecure = true; }
 
   // --- only connect() needs overriding ---

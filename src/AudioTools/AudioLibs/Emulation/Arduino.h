@@ -69,36 +69,36 @@ class Print {
     return write((const uint8_t *)buffer, size);
   }
 
-  virtual int print(const char *msg) {
+  virtual size_t print(const char *msg) {
     int result = strlen(msg);
     return write(msg, result);
   }
 
-  virtual int println(const char *msg = "") {
+  virtual size_t println(const char *msg = "") {
     int result = print(msg);
     write('\n');
     return result + 1;
   }
 
-  virtual int println(float number) {
+  virtual size_t println(float number) {
     char buffer[120];
     snprintf(buffer, 120, "%f", number);
     return println(buffer);
   }
 
-  virtual int print(float number) {
+  virtual size_t print(float number) {
     char buffer[120];
     snprintf(buffer, 120, "%f", number);
     return print(buffer);
   }
 
-  virtual int print(int number) {
+  virtual size_t print(int number) {
     char buffer[80];
     snprintf(buffer, 80, "%d", number);
     return print(buffer);
   }
 
-  virtual int print(char c, PrintCharFmt spec) {
+  virtual size_t print(char c, PrintCharFmt spec) {
     char result[5];
     switch (spec) {
       case DEC:
@@ -111,7 +111,7 @@ class Print {
     return -1;
   }
 
-  int println(int value, PrintCharFmt fmt) {
+  size_t println(int value, PrintCharFmt fmt) {
     return print(value, fmt) + println();
   }
 
