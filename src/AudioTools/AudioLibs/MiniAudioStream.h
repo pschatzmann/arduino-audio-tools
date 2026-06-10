@@ -5,9 +5,10 @@
  * @copyright GPLv3
  */
 
-#include "AudioTools.h"
-#include <mutex>
 #include <atomic>
+#include <mutex>
+
+#include "AudioTools.h"
 
 #define MINIAUDIO_IMPLEMENTATION
 #include "miniaudio.h"
@@ -31,8 +32,8 @@ class MiniAudioConfig : public AudioInfo {
     channels = 2;
     bits_per_sample = 16;
   };
-  MiniAudioConfig(const MiniAudioConfig &) = default;
-  MiniAudioConfig(const AudioInfo &in) {
+  MiniAudioConfig(const MiniAudioConfig&) = default;
+  MiniAudioConfig(const AudioInfo& in) {
     sample_rate = in.sample_rate;
     channels = in.channels;
     bits_per_sample = in.bits_per_sample;
@@ -44,8 +45,9 @@ class MiniAudioConfig : public AudioInfo {
   int buffer_size = MA_BUFFER_SIZE;
   int buffer_count = MA_BUFFER_COUNT;
   int buffer_start_count = MA_START_COUNT;
-  bool auto_restart_on_underrun = true;  // Automatically restart after buffer underrun
-  int underrun_tolerance = 5;            // Number of empty reads before stopping playback
+  bool auto_restart_on_underrun =
+      true;                    // Automatically restart after buffer underrun
+  int underrun_tolerance = 5;  // Number of empty reads before stopping playback
 };
 
 /**
@@ -53,6 +55,10 @@ class MiniAudioConfig : public AudioInfo {
  * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
+ *
+ * @note Supported only on platforms supported by the miniaudio library:
+ * windows, linux, macos, android, ios, raspberry pi, etc. but not on
+ * microcontrollers like Arduino or ESP32.
  */
 class MiniAudioStream : public AudioStream {
  public:
@@ -173,31 +179,31 @@ class MiniAudioStream : public AudioStream {
     return buffer_out.size() == 0 ? 0 : DEFAULT_BUFFER_SIZE;
   }
 
-  size_t write(const uint8_t *data, size_t len) override {
+  size_t write(const uint8_t* data, size_t len) override {
     // Input validation
     if (!data || len == 0) {
       LOGW("Invalid write parameters: data=%p, len=%zu", data, len);
       return 0;
     }
-    
+
     if (buffer_out.size() == 0) {
       LOGW("Output buffer not initialized");
       return 0;
     }
-    
+
     if (!is_active.load()) {
       LOGW("Stream not active");
       return 0;
     }
-    
+
     LOGD("write: %zu", len);
 
     // write data to buffer
     int open = len;
     int written = 0;
     int retry_count = 0;
-    const int max_retries = 1000; // Prevent infinite loops
-    
+    const int max_retries = 1000;  // Prevent infinite loops
+
     while (open > 0 && retry_count < max_retries) {
       size_t result = 0;
       {
@@ -211,26 +217,27 @@ class MiniAudioStream : public AudioStream {
         retry_count++;
         doWait();
       } else {
-        retry_count = 0; // Reset on successful write
+        retry_count = 0;  // Reset on successful write
       }
     }
-    
+
     if (retry_count >= max_retries) {
-      LOGE("Write timeout after %d retries, written %d of %zu bytes", max_retries, written, len);
+      LOGE("Write timeout after %d retries, written %d of %zu bytes",
+           max_retries, written, len);
     }
 
     // activate playing
     // if (!is_playing && buffer_out.bufferCountFilled()>=MA_START_COUNT) {
     int current_buffer_size = buffer_size.load();
     bool should_start_playing = false;
-    
+
     // Start playing if we have enough data and either:
-    // 1. We're not playing yet, or 
+    // 1. We're not playing yet, or
     // 2. We stopped due to buffer underrun but now have data again
     if (current_buffer_size > 0) {
       int available_data = buffer_out.available();
       int threshold = config.buffer_start_count * current_buffer_size;
-      
+
       if (!is_playing.load() && available_data >= threshold) {
         should_start_playing = true;
       } else if (is_playing.load() && available_data == 0) {
@@ -239,12 +246,12 @@ class MiniAudioStream : public AudioStream {
         is_playing.store(false);
       }
     }
-    
+
     if (should_start_playing) {
       LOGI("starting audio playback");
       is_playing.store(true);
     }
-    
+
     // std::this_thread::yield();
     return written;
   }
@@ -253,22 +260,22 @@ class MiniAudioStream : public AudioStream {
     return buffer_in.size() == 0 ? 0 : buffer_in.available();
   }
 
-  size_t readBytes(uint8_t *data, size_t len) override {
+  size_t readBytes(uint8_t* data, size_t len) override {
     if (!data || len == 0) {
       LOGW("Invalid read parameters: data=%p, len=%zu", data, len);
       return 0;
     }
-    
+
     if (buffer_in.size() == 0) {
       LOGW("Input buffer not initialized");
       return 0;
     }
-    
+
     if (!is_active.load()) {
       LOGW("Stream not active");
       return 0;
     }
-    
+
     LOGD("read: %zu", len);
     std::lock_guard<std::mutex> guard(read_mtx);
     return buffer_in.readArray(data, len);
@@ -280,7 +287,7 @@ class MiniAudioStream : public AudioStream {
       LOGW("Cannot restart playback - stream not active");
       return;
     }
-    
+
     int current_buffer_size = buffer_size.load();
     if (current_buffer_size > 0 && buffer_out.available() > 0) {
       LOGI("Manually restarting playback");
@@ -291,9 +298,7 @@ class MiniAudioStream : public AudioStream {
   }
 
   /// Check if playback is currently active
-  bool isPlaying() const {
-    return is_playing.load();
-  }
+  bool isPlaying() const { return is_playing.load(); }
 
  protected:
   MiniAudioConfig config;
@@ -316,25 +321,25 @@ class MiniAudioStream : public AudioStream {
   void setupBuffers(int size = MA_BUFFER_SIZE) {
     std::lock_guard<std::mutex> guard(write_mtx);
     if (is_buffers_setup.load()) return;
-    
+
     // Validate buffer size
-    if (size <= 0 || size > 1024 * 1024) { // Max 1MB per buffer chunk
+    if (size <= 0 || size > 1024 * 1024) {  // Max 1MB per buffer chunk
       LOGE("Invalid buffer size: %d", size);
       return;
     }
-    
+
     buffer_size.store(size);
     int buffer_count = config.buffer_count;
-    
+
     // Validate total buffer size to prevent excessive memory allocation
     size_t total_size = static_cast<size_t>(size) * buffer_count;
-    if (total_size > 100 * 1024 * 1024) { // Max 100MB total
+    if (total_size > 100 * 1024 * 1024) {  // Max 100MB total
       LOGE("Buffer size too large: %zu bytes", total_size);
       return;
     }
-    
+
     LOGI("setupBuffers: %d * %d = %zu bytes", size, buffer_count, total_size);
-    
+
     if (buffer_out.size() == 0 && config.is_output) {
       if (!buffer_out.resize(size * buffer_count)) {
         LOGE("Failed to resize output buffer");
@@ -351,18 +356,18 @@ class MiniAudioStream : public AudioStream {
   }
 
   void doWait() {
-    //std::this_thread::yield();
+    // std::this_thread::yield();
     delay(config.delay_ms_if_buffer_full);
-    //std::this_thread::sleep_for (std::chrono::milliseconds(MA_DELAY));
+    // std::this_thread::sleep_for (std::chrono::milliseconds(MA_DELAY));
   }
 
-  static void data_callback(ma_device *pDevice, void *pOutput,
-                            const void *pInput, ma_uint32 frameCount) {
-    MiniAudioStream *self = (MiniAudioStream *)pDevice->pUserData;
+  static void data_callback(ma_device* pDevice, void* pOutput,
+                            const void* pInput, ma_uint32 frameCount) {
+    MiniAudioStream* self = (MiniAudioStream*)pDevice->pUserData;
     if (!self || !self->is_active.load()) {
-      return; // Safety check
+      return;  // Safety check
     }
-    
+
     AudioInfo cfg = self->audioInfo();
     if (cfg.channels == 0 || cfg.bits_per_sample == 0) {
       LOGE("Invalid audio configuration in callback");
@@ -370,11 +375,11 @@ class MiniAudioStream : public AudioStream {
     }
 
     int bytes = frameCount * cfg.channels * cfg.bits_per_sample / 8;
-    if (bytes <= 0 || bytes > 1024 * 1024) { // Sanity check
+    if (bytes <= 0 || bytes > 1024 * 1024) {  // Sanity check
       LOGE("Invalid byte count in callback: %d", bytes);
       return;
     }
-    
+
     self->setupBuffers(bytes);
 
     if (pInput && self->buffer_in.size() > 0) {
@@ -382,12 +387,12 @@ class MiniAudioStream : public AudioStream {
       int processed = 0;
       int retry_count = 0;
       const int max_retries = 100;
-      
+
       while (open > 0 && retry_count < max_retries && self->is_active.load()) {
         int len = 0;
         {
           std::unique_lock<std::mutex> guard(self->read_mtx);
-          len = self->buffer_in.writeArray((uint8_t *)pInput + processed, open);
+          len = self->buffer_in.writeArray((uint8_t*)pInput + processed, open);
           open -= len;
           processed += len;
         }
@@ -407,20 +412,22 @@ class MiniAudioStream : public AudioStream {
         int processed = 0;
         int consecutive_failures = 0;
         const int max_failures = self->config.underrun_tolerance;
-        
+
         while (open > 0 && self->is_active.load()) {
           size_t len = 0;
           {
             std::lock_guard<std::mutex> guard(self->write_mtx);
-            len = self->buffer_out.readArray((uint8_t *)pOutput + processed, open);
+            len =
+                self->buffer_out.readArray((uint8_t*)pOutput + processed, open);
             open -= len;
             processed += len;
           }
-          
+
           if (len == 0) {
             consecutive_failures++;
             // If we can't get data for too long, stop playing to prevent issues
-            if (consecutive_failures >= max_failures && self->config.auto_restart_on_underrun) {
+            if (consecutive_failures >= max_failures &&
+                self->config.auto_restart_on_underrun) {
               LOGW("Buffer underrun detected, stopping playback");
               self->is_playing.store(false);
               break;

@@ -122,6 +122,8 @@ struct SPDIFConfig : public AudioInfo {
  * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
+ * 
+ * @note Supported only on ESP32 platforms with I2S output!
  *
  */
 class SPDIFOutput : public AudioStream {

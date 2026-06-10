@@ -68,7 +68,7 @@
 #if AUDIO_INCLUDE_CORE
 
 #ifdef USE_CONCURRENCY
-#  include "AudioTools/AudioLibs/Concurrency.h"
+#  include "AudioTools/Concurrency.h"
 #endif
 
 #include "AudioTools/CoreAudio.h"
