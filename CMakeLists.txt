@@ -31,6 +31,7 @@ else()
     include(FetchContent)
 
     add_library(arduino-audio-tools INTERFACE)
+    target_compile_options(arduino-audio-tools INTERFACE  -Wno-format )
 
     option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
     option(ADD_PORTAUDIO "Add Portaudio Library" OFF)
