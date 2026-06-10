@@ -81,5 +81,6 @@ class WiFiServerZephyr {
 };
 
 using WiFiServer = WiFiServerZephyr;
+using EthernetServer = WiFiServerZephyr;  // EthernetServer API is identical to WiFiServer
 
 }  // namespace audio_tools

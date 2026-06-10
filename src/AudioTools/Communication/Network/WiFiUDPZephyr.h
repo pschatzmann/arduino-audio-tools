@@ -278,6 +278,7 @@ class WiFiUDPZephyr {
 };
 
 using WiFiUDP = WiFiUDPZephyr;
+using EthernetUDP = WiFiUDPZephyr;  // EthernetUDP API is identical to WiFiUDP
 using UDP = WiFiUDPZephyr;
 
 }  // namespace audio_tools

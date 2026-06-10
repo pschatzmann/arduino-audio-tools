@@ -67,6 +67,8 @@ class WiFiZephyr {
         net_mgmt(NET_REQUEST_WIFI_DISCONNECT, iface, nullptr, 0);
         net_if_down(iface);
       }
+      net_mgmt_del_event_callback(&_wifi_cb);
+      net_mgmt_del_event_callback(&_ip_cb);
     }
     _is_open = false;
   }
