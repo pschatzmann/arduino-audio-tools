@@ -1,6 +1,6 @@
 #pragma once
 #if (defined(__zephyr__))
-#  include "AudioTools/Communication/WiFi/WiFiUDPZephyr.h"
+#  include "AudioTools/Communication/Network/WiFiUDPZephyr.h"
 #elif defined(ARDUINO)
 #  include <WiFi.h>
 #  include <WiFiUdp.h>

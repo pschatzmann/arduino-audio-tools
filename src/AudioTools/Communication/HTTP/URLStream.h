@@ -3,7 +3,7 @@
 #include "AudioToolsConfig.h"
 
 #if defined(USE_WIFI)
-#include "AudioTools/Communication/WiFi/WiFiInclude.h"
+#include "AudioTools/Communication/Network/Network.h"
 #endif
 
 #include "AudioTools/CoreAudio/AudioBasic/Str.h"
