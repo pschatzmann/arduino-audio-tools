@@ -15,6 +15,9 @@ namespace audio_tools {
 
 /**
  * @brief Mutex implemntation using FreeRTOS
+ * 
+ * @note Supported by all FreeRTOS platforms
+ * 
  * @ingroup concurrency
  * @author Phil Schatzmann
  * @copyright GPLv3 *

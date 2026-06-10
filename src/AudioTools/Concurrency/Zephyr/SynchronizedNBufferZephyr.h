@@ -10,6 +10,9 @@ namespace audio_tools {
 
 /**
  * @brief NBuffer using Zephyr queues for available and filled buffers.
+ * 
+ * @note Supported by all Zephyr platforms
+ * 
  * @ingroup buffers
  * @ingroup concurrency
  */

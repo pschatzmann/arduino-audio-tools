@@ -20,6 +20,9 @@ namespace audio_tools {
 /**
  * @brief Buffer implementation which is using a FreeRTOS StreamBuffer. The
  * default allocator uses psram is available.
+ * 
+ * @note Supported by all ESP32 FreeRTOS platforms
+ * 
  * @ingroup buffers
  * @ingroup concurrency
  * @author Phil Schatzmann

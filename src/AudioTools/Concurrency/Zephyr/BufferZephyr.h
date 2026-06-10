@@ -13,6 +13,9 @@ namespace audio_tools {
 /**
  * @brief Buffer implementation using Zephyr semaphores + mutex as a bounded
  * ring buffer.
+ * 
+ * @note Supported by all Zephyr platforms
+ * 
  * @ingroup buffers
  * @ingroup concurrency
  */

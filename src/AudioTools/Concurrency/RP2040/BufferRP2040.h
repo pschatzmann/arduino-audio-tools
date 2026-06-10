@@ -21,6 +21,8 @@ namespace audio_tools {
  * but write them into a temporary buffer of bufferSize and write this
  * array to the queue when it is full.
  * 
+ * @note Supported only on RP2040 platforms
+ * 
  * @ingroup buffers
  * @ingroup concurrency
  * @author Phil Schatzmann

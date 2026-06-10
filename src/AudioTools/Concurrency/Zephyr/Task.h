@@ -11,6 +11,9 @@ using TaskHandle_t = k_tid_t;
 
 /**
  * @brief Zephyr thread based task.
+ * 
+ * @note Supported by all Zephyr platforms
+ * 
  * @ingroup concurrency
  */
 class TaskZephyr {
