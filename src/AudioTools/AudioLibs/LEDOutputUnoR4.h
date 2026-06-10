@@ -37,6 +37,8 @@ struct LEDOutputUnoR4Config {
  * @brief LED output using the R4 LED matrix library. 
  * @ingroup io
  * @author Phil Schatzmann
+ * 
+ * @hote Supported only on Arduino Uno R4 with the R4 LED matrix library:
  */
 class LEDOutputUnoR4 {
 

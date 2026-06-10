@@ -1,11 +1,11 @@
 #pragma once
 
-#include "AudioToolsConfig.h"
-#include "AudioTools/CoreAudio/AudioTimer/AudioTimer.h"
+#include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
 #include "AudioTools/CoreAudio/AudioOutput.h"
+#include "AudioTools/CoreAudio/AudioTimer/AudioTimer.h"
 #include "AudioTools/CoreAudio/Buffers.h"
-#include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
+#include "AudioToolsConfig.h"
 
 namespace audio_tools {
 
@@ -18,8 +18,8 @@ namespace audio_tools {
 
 class R2RDriverBase {
  public:
-  virtual void setupPins(Vector<digital_pin_t> &channel1_pins,
-                         Vector<digital_pin_t> &channel2_pins) = 0;
+  virtual void setupPins(Vector<digital_pin_t>& channel1_pins,
+                         Vector<digital_pin_t>& channel2_pins) = 0;
 
   virtual void writePins(int channels, int channel, unsigned uvalue) = 0;
 };
@@ -30,12 +30,18 @@ class R2RDriverBase {
  * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
+ *
+ * @note The logic is using a timer driving digitalWrite(), so the sample rate
+ * is not very high. For higher sample rates you can provide your own optimized
+ * driver.
+ * 
+ * @note Supported by Arduino, Zephyr and IDF!
  */
 
 class R2RDriver : public R2RDriverBase {
  public:
-  void setupPins(Vector<digital_pin_t> &channel1_pins,
-                         Vector<digital_pin_t> &channel2_pins) override {
+  void setupPins(Vector<digital_pin_t>& channel1_pins,
+                 Vector<digital_pin_t>& channel2_pins) override {
     TRACED();
     p_channel1_pins = &channel1_pins;
     p_channel2_pins = &channel2_pins;
@@ -50,7 +56,7 @@ class R2RDriver : public R2RDriverBase {
     }
   };
 
-   void writePins(int channels, int channel, unsigned uvalue) override {
+  void writePins(int channels, int channel, unsigned uvalue) override {
     switch (channel) {
       case 0:
         for (int j = 0; j < (*p_channel1_pins).size(); j++) {
@@ -68,8 +74,8 @@ class R2RDriver : public R2RDriverBase {
   }
 
  protected:
-  Vector<digital_pin_t> *p_channel1_pins = nullptr;
-  Vector<digital_pin_t> *p_channel2_pins = nullptr;
+  Vector<digital_pin_t>* p_channel1_pins = nullptr;
+  Vector<digital_pin_t>* p_channel2_pins = nullptr;
 } r2r_driver;
 
 /**
@@ -83,8 +89,8 @@ class R2RConfig : public AudioInfo {
   Vector<digital_pin_t> channel1_pins;
   Vector<digital_pin_t> channel2_pins;
   uint16_t buffer_size = DEFAULT_BUFFER_SIZE;
-  uint16_t buffer_count = 2;        // double buffer
-  R2RDriverBase *driver = &r2r_driver;  // by default use Arduino driver
+  uint16_t buffer_count = 2;            // double buffer
+  R2RDriverBase* driver = &r2r_driver;  // by default use Arduino driver
   bool is_blocking = true;
   int blocking_retry_delay_ms = 5;
   int timer_id = 0;
@@ -146,7 +152,7 @@ class R2ROutput : public AudioOutput {
     return timer.begin(r2r_timer_callback, cfg.sample_rate, HZ);
   }
 
-  size_t write(const uint8_t *data, size_t len) override {
+  size_t write(const uint8_t* data, size_t len) override {
     LOGD("write: %d", len);
     size_t result = 0;
     // if buffer has not been allocated (buffer_size==0)
@@ -156,14 +162,14 @@ class R2ROutput : public AudioOutput {
       return len;
     }
 
-    if (rcfg.is_blocking){
+    if (rcfg.is_blocking) {
       // write of all bytes
       int open = len;
-      while(open > 0){
+      while (open > 0) {
         int written = buffer.writeArray(data + result, open);
         open -= written;
         result += written;
-        if (open > 0){
+        if (open > 0) {
           delay(rcfg.blocking_retry_delay_ms);
         }
       }
@@ -206,7 +212,7 @@ class R2ROutput : public AudioOutput {
 
     // get next value from buffer
     T value = 0;
-    buffer.readArray((uint8_t *)&value, sizeof(T));
+    buffer.readArray((uint8_t*)&value, sizeof(T));
     // convert to unsigned
     unsigned uvalue = (int)value + NumberConverter::maxValueT<T>() + 1;
     // scale value
@@ -217,8 +223,8 @@ class R2ROutput : public AudioOutput {
     rcfg.driver->writePins(cfg.channels, channel, uvalue);
   }
 
-  static void r2r_timer_callback(void *ptr) {
-    R2ROutput *self = (R2ROutput *)ptr;
+  static void r2r_timer_callback(void* ptr) {
+    R2ROutput* self = (R2ROutput*)ptr;
     if (self->is_active) {
       // output channel 1
       self->writeValue(0);

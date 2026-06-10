@@ -16,6 +16,8 @@ namespace audio_tools {
  * @ingroup fft-dsp
  * @author Phil Schatzmann
  * @copyright GPLv3
+ * 
+ * @note Supported only on ESP32 platforms with esp-dsp library.
  */
 class FFTDriverEspressifFFT : public FFTDriver {
     public:

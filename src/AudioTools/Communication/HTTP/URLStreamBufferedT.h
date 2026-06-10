@@ -1,7 +1,7 @@
 #pragma once
 #include "AudioToolsConfig.h"
 #if defined(USE_CONCURRENCY)
-#include "AudioTools/AudioLibs/Concurrency.h"
+#include "AudioTools/Concurrency.h"
 #include "AudioTools/Communication/HTTP/AbstractURLStream.h"
 #include "AudioTools/CoreAudio/BaseStream.h"
 
