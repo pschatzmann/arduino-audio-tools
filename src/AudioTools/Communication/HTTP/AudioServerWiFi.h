@@ -3,7 +3,7 @@
 #include "AudioToolsConfig.h"
 
 #ifdef USE_WIFI
-#include "AudioTools/Communication/Client/WiFiInclude.h"
+#include "AudioTools/Communication/WiFi/WiFiInclude.h"
 #endif
 
 #include "AudioEncodedServerT.h"
