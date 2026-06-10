@@ -77,6 +77,8 @@ struct SPIAudioSlaveConfig : public AudioInfo {
  * This class implements the slave side of a binary request/response protocol
  * over SPI. It receives commands from a remote SPIAudioMaster and manages an
  * externally-provided audio buffer.
+ * 
+ * @note Supported on all ESP32 Arduino platforms!
  *
  * ## Protocol Role
  * SPIAudioSlave responds passively to SPI transactions initiated by the

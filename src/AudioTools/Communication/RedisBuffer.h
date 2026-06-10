@@ -1,8 +1,8 @@
 #pragma once
 #include "AudioTools/CoreAudio/Buffers.h"
+#include <Client.h>
 
 #define REDIS_RESULT_BUFFER_SIZE (10 * 1024)
-
 
 namespace audio_tools {
 
@@ -22,6 +22,9 @@ namespace audio_tools {
  * - The buffer size for local batching can be configured via the constructor.
  * - Supports automatic expiration of the Redis key after a specified number of
  * seconds.
+ *
+ * @note Supported only on Arduino platforms with network support (e.g., ESP32,
+ * Ethernet) and the Arduino Client library!
  *
  * @tparam T Data type to buffer (e.g., uint8_t, int16_t)
  * @ingroup communications
@@ -299,8 +302,7 @@ class RedisBuffer : public BaseBuffer<T> {
     int nl_pos = tail.indexOf("\r\n");
     while (nl_pos >= 0) {
       String head = tail.substring(0, nl_pos);
-      if (!head.startsWith("$"))
-        result.strValues.push_back(head);
+      if (!head.startsWith("$")) result.strValues.push_back(head);
       tail = tail.substring(nl_pos + 2);
       tail.trim();
       nl_pos = tail.indexOf("\r\n");
@@ -328,15 +330,14 @@ class RedisBuffer : public BaseBuffer<T> {
         line.replace(":", "");
       }
 
-      if (line.startsWith("-")){
+      if (line.startsWith("-")) {
         result.ok = false;
       }
 
-      if (line.isEmpty()){
+      if (line.isEmpty()) {
         result.intValue = -1;  // no data available
         result.ok = false;
-      }
-      else {
+      } else {
         result.intValue = line.toInt();
       }
     }
@@ -397,9 +398,10 @@ class RedisBuffer : public BaseBuffer<T> {
       read_buf.write(value);
     }
 
-    LOGI("RedisBuffer: %d of %d items",(int) read_buf.available(),(int) read_buf.size() );
-    // if this fails the 
-    if(!read_buf.isFull() ){
+    LOGI("RedisBuffer: %d of %d items", (int)read_buf.available(),
+         (int)read_buf.size());
+    // if this fails the
+    if (!read_buf.isFull()) {
       LOGW("RedisBuffer:fillReadBuffer: not enough data read from Redis");
     }
   }
