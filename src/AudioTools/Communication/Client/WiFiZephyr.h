@@ -6,6 +6,7 @@
 #include <zephyr/net/net_ip.h>
 #include <zephyr/net/wifi_mgmt.h>
 #include <zephyr/sys/util.h>
+#include <zephyr/version.h>
 
 #include "AudioLogger.h"
 
@@ -138,7 +139,7 @@ class WiFiZephyr {
 
   /** Handles WIFI_CONNECT_RESULT and WIFI_DISCONNECT_RESULT. */
   static void wifi_event_handler(struct net_mgmt_event_callback* cb,
-                                 uint32_t mgmt_event, struct net_if* iface) {
+                                 uint64_t mgmt_event, struct net_if* iface) {
     WiFiZephyr* self = _instance;
     if (!self) return;
 
@@ -163,7 +164,7 @@ class WiFiZephyr {
 
   /** Handles NET_EVENT_IPV4_ADDR_ADD (equivalent to IP_EVENT_STA_GOT_IP). */
   static void ip_event_handler(struct net_mgmt_event_callback* cb,
-                               uint32_t mgmt_event, struct net_if* iface) {
+                               uint64_t mgmt_event, struct net_if* iface) {
     WiFiZephyr* self = _instance;
     if (!self) return;
 
@@ -173,7 +174,16 @@ class WiFiZephyr {
       if (!ipv4) return;
 
       for (int i = 0; i < NET_IF_MAX_IPV4_ADDR; i++) {
+#if KERNEL_VERSION_NUMBER >= ZEPHYR_VERSION(3,4,0)
+        // New Zephyr: unicast[] is net_if_addr_ipv4, which wraps a net_if_addr
+        // in its .ipv4 member (plus a .netmask). All the original fields
+        // (is_used, addr_type, address) are accessed via .ipv4.
+        struct net_if_addr_ipv4* entry = &ipv4->unicast[i];
+        struct net_if_addr* addr = &entry->ipv4;
+#else
+        // Old Zephyr: unicast[] is net_if_addr directly
         struct net_if_addr* addr = &ipv4->unicast[i];
+#endif
         if (addr->is_used && addr->addr_type == NET_ADDR_DHCP &&
             addr->address.family == AF_INET) {
           self->_ip = addr->address.in_addr;

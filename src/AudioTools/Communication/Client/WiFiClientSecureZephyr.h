@@ -1,23 +1,13 @@
 #pragma once
 #include "WiFiClientZephyr.h"
-
-BUILD_ASSERT(IS_ENABLED(CONFIG_NET_SOCKETS_SOCKOPT_TLS),
-    "WiFiClientSecureZephyr requires CONFIG_NET_SOCKETS_SOCKOPT_TLS=y");
-BUILD_ASSERT(IS_ENABLED(CONFIG_TLS_CREDENTIALS),
-    "WiFiClientSecureZephyr requires CONFIG_TLS_CREDENTIALS=y");
-
+#include <zephyr/net/tls_credentials.h>  // sec_tag_t, tls_credential_type, tls_credential_add, TLS_CREDENTIAL_*
+#include <zephyr/net/socket.h>           // SOL_TLS, TLS_PEER_VERIFY, TLS_HOSTNAME, TLS_SEC_TAG_LIST, IPPROTO_TLS_1_2
 
 namespace audio_tools {
 
 /**
  * WiFiClientSecure-compatible TLS/TCP client for Zephyr RTOS.
  * Header-only implementation — just #include this file.
- *
- * Required prj.conf (in addition to base networking):
- *   CONFIG_NET_SOCKETS_SOCKOPT_TLS=y
- *   CONFIG_TLS_CREDENTIALS=y
- *   CONFIG_MBEDTLS=y                    # or CONFIG_TINYCRYPT_TLS=y
- *   CONFIG_NET_SOCKETS_TLS_MAX_CONTEXTS=4
  *
  * Typical usage:
  *   WiFiClientSecureZephyr client;
@@ -42,7 +32,7 @@ class WiFiClientSecureZephyr : public WiFiClientZephyr {
   // --- credential API (unchanged from before) ---
   bool setCACert(const uint8_t* pem, size_t len)      { return _addCredential(TLS_CREDENTIAL_CA_CERTIFICATE,   pem, len, &_ca_tag);   }
   bool setCACert(const char* pem)                      { return pem && setCACert((const uint8_t*)pem, strlen(pem)+1); }
-  bool setCertificate(const uint8_t* pem, size_t len) { return _addCredential(TLS_CREDENTIAL_SERVER_CERTIFICATE, pem, len, &_cert_tag); }
+  bool setCertificate(const uint8_t* pem, size_t len) { return _addCredential(TLS_CREDENTIAL_PUBLIC_CERTIFICATE, pem, len, &_cert_tag); }
   bool setCertificate(const char* pem)                 { return pem && setCertificate((const uint8_t*)pem, strlen(pem)+1); }
   bool setPrivateKey(const uint8_t* pem, size_t len)  { return _addCredential(TLS_CREDENTIAL_PRIVATE_KEY,      pem, len, &_key_tag);  }
   bool setPrivateKey(const char* pem)                  { return pem && setPrivateKey((const uint8_t*)pem, strlen(pem)+1); }

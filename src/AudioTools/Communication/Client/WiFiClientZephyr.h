@@ -20,9 +20,6 @@ BUILD_ASSERT(IS_ENABLED(CONFIG_NET_TCP),
 BUILD_ASSERT(IS_ENABLED(CONFIG_NET_SOCKETS),
     "WiFiClientZephyr requires CONFIG_NET_SOCKETS=y");
 
-BUILD_ASSERT(IS_ENABLED(CONFIG_NET_SOCKETS_POSIX_NAMES),
-    "WiFiClientZephyr requires CONFIG_NET_SOCKETS_POSIX_NAMES=y");
-
 BUILD_ASSERT(IS_ENABLED(CONFIG_DNS_RESOLVER),
     "WiFiClientZephyr requires CONFIG_DNS_RESOLVER=y");
 
@@ -37,7 +34,6 @@ namespace audio_tools {
  *   CONFIG_NETWORKING=y
  *   CONFIG_NET_TCP=y
  *   CONFIG_NET_SOCKETS=y
- *   CONFIG_NET_SOCKETS_POSIX_NAMES=y
  *   CONFIG_DNS_RESOLVER=y
  */
 class WiFiClientZephyr {
@@ -286,7 +282,7 @@ class WiFiClientZephyr {
     struct timeval tv = {};
     tv.tv_sec = _timeout_ms / 1000;
     tv.tv_usec = (_timeout_ms % 1000) * 1000;
-    setsockopt(_sock, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv));
+    zsock_setsockopt(_sock, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv));
   }
 
   int _resolve(const char* host, uint16_t port, struct sockaddr* out,
