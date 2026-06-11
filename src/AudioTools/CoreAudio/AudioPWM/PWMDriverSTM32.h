@@ -147,7 +147,7 @@ class PWMDriverSTM32 : public PWMDriverBase {
   void setPWMTimer(HardwareTimer &t) { p_pwm_timer = &t; }
 
  protected:
-  TimerAlarmRepeating ticker;  // calls a callback repeatedly with a timeout
+  AudioTimer ticker;  // calls a callback repeatedly with a timeout
   HardwareTimer *p_pwm_timer = nullptr;
   PWM pwm;
   int64_t max_value;

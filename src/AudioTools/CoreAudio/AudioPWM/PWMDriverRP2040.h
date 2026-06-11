@@ -63,7 +63,7 @@ class PWMDriverRP2040 : public PWMDriverBase {
 
  protected:
   Vector<PicoChannelOut> pins;
-  TimerAlarmRepeating ticker;
+  AudioTimer ticker;
 
   virtual void startTimer() override {
     TRACED();

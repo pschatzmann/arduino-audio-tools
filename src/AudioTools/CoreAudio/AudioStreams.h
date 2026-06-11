@@ -2315,7 +2315,7 @@ class TimerCallbackAudioStream : public BufferedStream {
       frameSize = cfg.bits_per_sample * cfg.channels / 8;
       frame = new uint8_t[frameSize];
       buffer = new RingBuffer<uint8_t>(cfg.buffer_size);
-      timer = new TimerAlarmRepeating();
+      timer = new AudioTimer();
       timer->setTimerFunction(cfg.timer_function);
       if (cfg.timer_id >= 0) {
         timer->setTimer(cfg.timer_id);
@@ -2360,7 +2360,7 @@ class TimerCallbackAudioStream : public BufferedStream {
   bool active = false;
   uint16_t (*frameCallback)(uint8_t *data, uint16_t len);
   // below only relevant with timer
-  TimerAlarmRepeating *timer = nullptr;
+  AudioTimer *timer = nullptr;
   RingBuffer<uint8_t> *buffer = nullptr;
   uint8_t *frame = nullptr;
   uint16_t frameSize = 0;

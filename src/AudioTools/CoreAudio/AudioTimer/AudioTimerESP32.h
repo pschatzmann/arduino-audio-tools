@@ -15,10 +15,10 @@ namespace audio_tools {
  * @copyright GPLv3
  *
  */
-class TimerAlarmRepeatingDriverESP32
-    : public TimerAlarmRepeatingDriverBase {
+class AudioTimerDriverESP32
+    : public AudioTimerDriverBase {
  public:
-  virtual ~TimerAlarmRepeatingDriverESP32() {
+  virtual ~AudioTimerDriverESP32() {
     end();
     LOGD("esp_timer_delete");
     esp_timer_delete(rtsp_timer);
@@ -111,8 +111,8 @@ class TimerAlarmRepeatingDriverESP32
   TimerFunction timer_function = TimerCallbackInThread;
 };
 
-/// @brief  use TimerAlarmRepeating!  @ingroup timer_esp32
-using TimerAlarmRepeatingDriver = TimerAlarmRepeatingDriverESP32;
+/// @brief  use AudioTimer!  @ingroup timer_esp32
+using AudioTimerDriver = AudioTimerDriverESP32;
 
 
 }  // namespace audio_tools

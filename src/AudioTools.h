@@ -51,7 +51,7 @@
  * @brief Platform specific implementations.
  * Do not use any of theses classes directly and use the related platform independent
  * typedef instead: 
- * - TimerAlarmRepeating
+ * - AudioTimer
  * - I2SStrem
  * - PWMStream
  */

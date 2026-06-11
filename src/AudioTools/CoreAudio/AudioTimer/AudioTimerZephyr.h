@@ -14,7 +14,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  *
- * Implements `TimerAlarmRepeatingDriverBase` using Zephyr's kernel timer API
+ * Implements `AudioTimerDriverBase` using Zephyr's kernel timer API
  * (k_timer). Supports both callback-based and thread-based execution modes.
  *
  * Characteristics:
@@ -24,11 +24,11 @@ namespace audio_tools {
  * - Precision limited by Zephyr's kernel tick resolution
  *
  */
-class TimerAlarmRepeatingDriverZephyr : public TimerAlarmRepeatingDriverBase {
+class AudioTimerDriverZephyr : public AudioTimerDriverBase {
  public:
-  TimerAlarmRepeatingDriverZephyr() = default;
+  AudioTimerDriverZephyr() = default;
 
-  ~TimerAlarmRepeatingDriverZephyr() { end(); }
+  ~AudioTimerDriverZephyr() { end(); }
 
   /// Starts the repeating timer
   bool begin(repeating_timer_callback_t callback_f, uint32_t time,
@@ -123,7 +123,7 @@ class TimerAlarmRepeatingDriverZephyr : public TimerAlarmRepeatingDriverBase {
   }
 
   static void workCallback(struct k_work* work_ptr) {
-    auto* self = CONTAINER_OF(work_ptr, TimerAlarmRepeatingDriverZephyr, work);
+    auto* self = CONTAINER_OF(work_ptr, AudioTimerDriverZephyr, work);
     if (self != nullptr) {
       self->executeCallback();
     }
@@ -133,7 +133,7 @@ class TimerAlarmRepeatingDriverZephyr : public TimerAlarmRepeatingDriverBase {
   /// This is invoked in interrupt context, so we either call directly
   /// or defer to system workqueue.
   static void timerExpiredCallback(struct k_timer* timer_ptr) {
-    auto* self = static_cast<TimerAlarmRepeatingDriverZephyr*>(
+    auto* self = static_cast<AudioTimerDriverZephyr*>(
         k_timer_user_data_get(timer_ptr));
     if (self == nullptr) return;
 
@@ -146,7 +146,7 @@ class TimerAlarmRepeatingDriverZephyr : public TimerAlarmRepeatingDriverBase {
 };
 
 /// @brief Default timer implementation for Zephyr
-using TimerAlarmRepeatingDriver = TimerAlarmRepeatingDriverZephyr;
+using AudioTimerDriver = AudioTimerDriverZephyr;
 
 }  // namespace audio_tools
 

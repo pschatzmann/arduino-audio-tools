@@ -140,7 +140,7 @@ void defaultPWMAudioOutputCallback() {
 /// timer callback: write the next frame to the pins
 ISR(TIMER1_COMPA_vect) {
   defaultPWMAudioOutputCallback();
-  TimerAlarmRepeatingDriverAVR::tickerCallback();
+  AudioTimerDriverAVR::tickerCallback();
 }
 
 }  // namespace audio_tools
