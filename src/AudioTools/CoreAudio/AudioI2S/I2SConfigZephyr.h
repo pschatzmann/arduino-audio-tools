@@ -7,7 +7,11 @@
 namespace audio_tools {
 
 /**
- * @brief Configuration for i2s
+ * @brief Configuration for i2s 
+ * 
+ * Assign the i2s device to dev e.g. with 
+ * dev = DEVICE_DT_GET(DT_ALIAS(i2s0));
+ * 
  * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
