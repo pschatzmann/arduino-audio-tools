@@ -49,7 +49,7 @@ class PWMDriverMBED : public PWMDriverBase {
 
  protected:
   Vector<mbed::PwmOut*> pins;
-  TimerAlarmRepeating ticker;  // calls a callback repeatedly with a timeout
+  AudioTimer ticker;  // calls a callback repeatedly with a timeout
 
   /// when we get the first write -> we activate the timer to start with the
   /// output of data

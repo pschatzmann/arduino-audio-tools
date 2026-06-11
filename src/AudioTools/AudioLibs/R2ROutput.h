@@ -190,7 +190,7 @@ class R2ROutput : public AudioOutput {
   }
 
  protected:
-  TimerAlarmRepeating timer;
+  AudioTimer timer;
   // Double buffer
   NBuffer<uint8_t> buffer{DEFAULT_BUFFER_SIZE, 0};
   R2RConfig rcfg;

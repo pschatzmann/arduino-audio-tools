@@ -17,7 +17,7 @@ const int sample_rate = 3300;
 const int buffer_size = 50;
 
 Adafruit_ADS1015 ads1015(0x48);   
-TimerAlarmRepeating sound_timer;
+AudioTimer sound_timer;
 NBuffer<int16_t> buffer(buffer_size,3);  
 
 // callback to record the sound data into a buffer

@@ -13,7 +13,7 @@ namespace audio_tools {
 /**
  * @brief Repeating software timer driver for Desktop using std::thread.
  *
- * Provides a lightweight implementation of `TimerAlarmRepeatingDriverBase` that
+ * Provides a lightweight implementation of `AudioTimerDriverBase` that
  * spawns a dedicated thread and invokes the supplied callback at a fixed
  * interval using `sleep_until` for drift minimization.
  *
@@ -27,10 +27,10 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class TimerAlarmRepeatingDriverLinux : public TimerAlarmRepeatingDriverBase {
+class AudioTimerDriverLinux : public AudioTimerDriverBase {
  public:
-  TimerAlarmRepeatingDriverLinux() = default;
-  ~TimerAlarmRepeatingDriverLinux() { end(); }
+  AudioTimerDriverLinux() = default;
+  ~AudioTimerDriverLinux() { end(); }
 
   bool begin(repeating_timer_callback_t callback_f, uint32_t time,
              TimeUnit unit = MS) override {
@@ -82,8 +82,8 @@ class TimerAlarmRepeatingDriverLinux : public TimerAlarmRepeatingDriverBase {
   }
 };
 
-/// @brief  use TimerAlarmRepeating!  @ingroup timer_esp32
-using TimerAlarmRepeatingDriver = TimerAlarmRepeatingDriverLinux;
+/// @brief  use AudioTimer!  @ingroup timer_esp32
+using AudioTimerDriver = AudioTimerDriverLinux;
 
 
 }  // namespace audio_tools

@@ -24,22 +24,22 @@
 namespace audio_tools {
 
 /**
- * @brief Common Interface definition for TimerAlarmRepeating
+ * @brief Common Interface definition for AudioTimer
  * @ingroup timer
  */
-class TimerAlarmRepeating {
+class AudioTimer {
  public:
   /// @brief Default constructor
-  TimerAlarmRepeating() = default;
+  AudioTimer() = default;
   /**
    * @brief Construct a new Timer Alarm Repeating object by passing your object
    * which has been customized with some special platform specific parameters
    * @param timer
    */
-  TimerAlarmRepeating(TimerAlarmRepeatingDriverBase& timer) {
+  AudioTimer(AudioTimerDriverBase& timer) {
     setDriver(timer);
   };
-  virtual ~TimerAlarmRepeating() = default;
+  virtual ~AudioTimer() = default;
 
   bool begin(repeating_timer_callback_t callback_f, uint32_t time,
              TimeUnit unit = MS) {
@@ -70,19 +70,22 @@ class TimerAlarmRepeating {
   operator bool() { return is_active; }
 
   /// Provides access to the driver
-  TimerAlarmRepeatingDriverBase* driver() { return p_timer; }
+  AudioTimerDriverBase* driver() { return p_timer; }
   
   /// Allows to set a different driver
-  void setDriver(TimerAlarmRepeatingDriverBase& timer) {
+  void setDriver(AudioTimerDriverBase& timer) {
     p_timer = &timer;
   }
 
  protected:
   void* object = nullptr;
   bool is_active = false;
-  TimerAlarmRepeatingDriver timer;  // platform specific timer
-  TimerAlarmRepeatingDriverBase* p_timer = &timer;
+  AudioTimerDriver timer;  // platform specific timer
+  AudioTimerDriverBase* p_timer = &timer;
 };
+
+// Support for legacy name
+using TimerAlarmRepeating = AudioTimer;
 
 }  // namespace audio_tools
 

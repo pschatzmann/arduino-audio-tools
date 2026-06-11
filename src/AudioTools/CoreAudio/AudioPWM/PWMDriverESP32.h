@@ -160,7 +160,7 @@ class PWMDriverESP32 : public PWMDriverBase {
 
  protected:
   Vector<PinInfo> pins;
-  TimerAlarmRepeating timer;
+  AudioTimer timer;
   uint32_t actual_timer_frequency = 0;
 
   bool configureTimer(ledc_mode_t speed_mode) {

@@ -33,7 +33,7 @@ using PWMDriver = PWMDriverZephyr;
  * Characteristics:
  * - Uses Zephyr's PWM driver API (pwm_set_dt, pwm_get_cycles_per_sec)
  * - Supports multiple channels via channel configuration
- * - Callback-based playback using TimerAlarmRepeating
+ * - Callback-based playback using AudioTimer
  * - Automatic pin management
  *
  */
@@ -58,7 +58,7 @@ class PWMDriverZephyr : public PWMDriverBase {
   }
 
  protected:
-  TimerAlarmRepeating timer;  // Callback timer for playback
+  AudioTimer timer;  // Callback timer for playback
   uint32_t period_ns = 0;
 
   /// Start the timer for periodic playback

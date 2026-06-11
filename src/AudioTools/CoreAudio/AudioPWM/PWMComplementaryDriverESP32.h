@@ -184,7 +184,7 @@ class PWMComplementaryDriverESP32 : public PWMDriverBase {
 
  protected:
   Vector<PinInfoESP32Compl> pins;
-  TimerAlarmRepeating timer;
+  AudioTimer timer;
   uint32_t actual_timer_frequency = 0;
 
   /// provides the max value for the indicated resulution
