@@ -20,8 +20,11 @@ class AudioTimerDriverESP32
  public:
   virtual ~AudioTimerDriverESP32() {
     end();
-    LOGD("esp_timer_delete");
-    esp_timer_delete(rtsp_timer);
+    if (rtsp_timer != nullptr) {
+      LOGD("esp_timer_delete");
+      esp_timer_delete(rtsp_timer);
+      rtsp_timer = nullptr;
+    }
   }
 
   void setIsSave(bool is_save) override {
@@ -52,7 +55,7 @@ class AudioTimerDriverESP32
     }
     LOGI("Timer every: %u us", time_us);
 
-    if (!initialized) {
+    if (rtsp_timer == nullptr) {
       esp_timer_create_args_t timer_args;
       timer_args.callback = callback_f;
       timer_args.name = "rtsp_timer";
@@ -61,6 +64,9 @@ class AudioTimerDriverESP32
       if (timer_function == DirectTimerCallback) {
 #if CONFIG_ESP_TIMER_SUPPORTS_ISR_DISPATCH_METHOD
         timer_args.dispatch_method = ESP_TIMER_ISR;
+#else
+        LOGW("ESP_TIMER_ISR dispatch method not supported, using ESP_TIMER_TASK");
+        timer_args.dispatch_method = ESP_TIMER_TASK;    
 #endif
       } else {
         timer_args.dispatch_method = ESP_TIMER_TASK;
@@ -75,38 +81,33 @@ class AudioTimerDriverESP32
     }
 
     esp_err_t rc = ESP_OK;
-    if (!started) {
-      LOGD("esp_timer_start_periodic");
-      rc = esp_timer_start_periodic(rtsp_timer, time_us);
-    } else {
-      LOGD("esp_timer_restart");
-      rc = esp_timer_restart(rtsp_timer, time_us);
+    if (esp_timer_is_active(rtsp_timer)) {
+      rc = esp_timer_stop(rtsp_timer);
     }
+
+    LOGD("esp_timer_start_periodic");
+    rc = esp_timer_start_periodic(rtsp_timer, time_us);
+
     if (rc != ESP_OK) {
       LOGE("Could not start timer: %d", rc);
       return false;
     }
 
-    initialized = true;
-    started = true;
     return true;
   }
 
   /// ends the timer and if necessary the task
   bool end() override {
     TRACED();
-    if (started) {
+    if (esp_timer_is_active(rtsp_timer)) {
       LOGD("esp_timer_stop");
       esp_timer_stop(rtsp_timer);
     }
-    started = false;
     return true;
   }
 
  protected:
   esp_timer_handle_t rtsp_timer = nullptr;
-  bool started = false;
-  bool initialized = false;
   uint64_t time_us = 0;
   TimerFunction timer_function = TimerCallbackInThread;
 };
@@ -118,3 +119,4 @@ using AudioTimerDriver = AudioTimerDriverESP32;
 }  // namespace audio_tools
 
 #endif
+
