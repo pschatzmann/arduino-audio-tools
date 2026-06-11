@@ -1,7 +1,7 @@
 #pragma once
 
-#include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/AudioI2S/I2SDriverBase.h"
+#include "AudioToolsConfig.h"
 
 #if defined(IS_ZEPHYR)
 
@@ -12,6 +12,16 @@
 
 #include "AudioTools/CoreAudio/AudioBasic/Collections.h"
 #include "AudioTools/CoreAudio/AudioI2S/I2SConfigZephyr.h"
+
+// Note: The following headers are needed for the ESP32 MCLK routing,
+#if defined(CONFIG_SOC_ESP32)
+#include <zephyr/drivers/gpio.h>
+#define I2S0O_CLK_OUT_IDX 80
+extern "C" {
+void esp_rom_gpio_connect_out_signal(uint32_t gpio_num, uint32_t signal_idx,
+                                     bool out_inv, bool oen_inv);
+}
+#endif
 
 #define IS_I2S_IMPLEMENTED
 
@@ -113,7 +123,9 @@ class I2SDriverZephyr : public I2SDriverBase {
       end();
       return false;
     }
-
+    // Special hack for the ESP32 to enable MCLK output at runtime, since
+    // Zephyr's I2S driver doesn't do this automatically.
+    enableMclkRuntime();
     is_started = true;
     return true;
   }
@@ -179,6 +191,17 @@ class I2SDriverZephyr : public I2SDriverBase {
   k_mem_slab rx_slab;
   bool slabs_initialized = false;
 
+  /// ESP32 specific function to enable MCLK output at runtime, since Zephyr's
+  /// I2S driver doesn't do this automatically.
+  void enableMclkRuntime(void) {
+#if defined(CONFIG_SOC_ESP32)
+    // 0  = Target physical GPIO pin (Change to 2 if your MCLK is wired to
+    // GPIO2) 80 = The permanent hardware signal ID for I2S0 Clock Out on
+    // classic ESP32
+    esp_rom_gpio_connect_out_signal(0, I2S0O_CLK_OUT_IDX, false, false);
+#endif
+  }
+
   i2s_config buildI2SConfig(const I2SConfigZephyr& cfg, k_mem_slab* mem_slab) {
     i2s_config i2s_cfg = {0};
     i2s_cfg.word_size = cfg.bits_per_sample;
@@ -229,7 +252,8 @@ class I2SDriverZephyr : public I2SDriverBase {
     if (cfg.dev != nullptr) {
       LOGI("Using provided I2S device");
       i2s_dev = cfg.dev;
-      LOGI("Using i2s device %s", i2s_dev->name != nullptr ? i2s_dev->name : "n/a" );
+      LOGI("Using i2s device %s",
+           i2s_dev->name != nullptr ? i2s_dev->name : "n/a");
       return true;
     }
 

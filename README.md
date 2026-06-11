@@ -1,4 +1,4 @@
-# Arduino Audio Tools
+# Audio Tools
 
 [![Arduino Library](https://img.shields.io/badge/Arduino-Library-blue.svg)](https://www.arduino.cc/reference/en/libraries/)
 [![Zephyr Library](https://img.shields.io/badge/Zephyr-Library-blue.svg)](https://github.com/pschatzmann/arduino-audio-driver)
