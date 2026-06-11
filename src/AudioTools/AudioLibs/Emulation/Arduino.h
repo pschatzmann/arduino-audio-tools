@@ -12,7 +12,7 @@
  */
 // Used by logger: so we can not use any logging in this file
 #ifdef IS_DESKTOP
-#  error We should not get here!
+#error We should not get here!
 #endif
 #include <ctype.h>
 #include <stdint.h>
@@ -49,9 +49,9 @@
 #define LOW 0x0
 #endif
 
-//using namespace std;
+// using namespace std;
 
-enum PrintCharFmt { DEC=10, HEX=16 };
+enum PrintCharFmt { DEC = 10, HEX = 16 };
 
 class Print {
  public:
@@ -61,20 +61,20 @@ class Print {
     return 0;
   }
 
-  virtual size_t write(const char *str) {
-    return write((const uint8_t *)str, strlen(str));
+  virtual size_t write(const char* str) {
+    return write((const uint8_t*)str, strlen(str));
   }
 
-  virtual size_t write(const char *buffer, size_t size) {
-    return write((const uint8_t *)buffer, size);
+  virtual size_t write(const char* buffer, size_t size) {
+    return write((const uint8_t*)buffer, size);
   }
 
-  virtual size_t print(const char *msg) {
+  virtual size_t print(const char* msg) {
     int result = strlen(msg);
     return write(msg, result);
   }
 
-  virtual size_t println(const char *msg = "") {
+  virtual size_t println(const char* msg = "") {
     int result = print(msg);
     write('\n');
     return result + 1;
@@ -117,7 +117,7 @@ class Print {
 
 #endif
 
-  virtual size_t write(const uint8_t *data, size_t len) {
+  virtual size_t write(const uint8_t* data, size_t len) {
     if (data == nullptr) return 0;
     for (size_t j = 0; j < len; j++) {
       write(data[j]);
@@ -134,26 +134,25 @@ class Print {
 };
 
 class Stream : public Print {
-
  public:
   virtual ~Stream() = default;
   virtual int available() { return 0; }
-  virtual size_t readBytes(uint8_t *data, size_t len) { return 0; }
+  virtual size_t readBytes(uint8_t* data, size_t len) { return 0; }
 #ifndef DOXYGEN
   virtual int read() { return -1; }
   virtual int peek() { return -1; }
   virtual void setTimeout(size_t timeoutMs) {}
-  size_t readBytesUntil(char terminator, char *buffer, size_t length) {
-	for (size_t j=0;j<length;j++){
-		int val = read();
-		if (val == -1) return j-1;
-		if (val == terminator) return j;
-		buffer[j] = val;
-	}
-	return length;
+  size_t readBytesUntil(char terminator, char* buffer, size_t length) {
+    for (size_t j = 0; j < length; j++) {
+      int val = read();
+      if (val == -1) return j - 1;
+      if (val == terminator) return j;
+      buffer[j] = val;
+    }
+    return length;
   };
-  size_t readBytesUntil(char terminator, uint8_t *buffer, size_t length) {
-    return readBytesUntil(terminator, (char *)buffer, length);
+  size_t readBytesUntil(char terminator, uint8_t* buffer, size_t length) {
+    return readBytesUntil(terminator, (char*)buffer, length);
   }
 
 #endif
@@ -163,10 +162,10 @@ class Stream : public Print {
 class Client : public Stream {
  public:
   void stop() {};
-  virtual int read(uint8_t *buffer, size_t len) { return 0; };
+  virtual int read(uint8_t* buffer, size_t len) { return 0; };
   virtual int read() { return 0; };
   bool connected() { return false; };
-  bool connect(const char *ip, int port) { return false; }
+  bool connect(const char* ip, int port) { return false; }
   virtual operator bool() { return false; }
 };
 
@@ -174,7 +173,7 @@ class HardwareSerial : public Stream {
  public:
   size_t write(uint8_t ch) override { return putchar(ch); }
   virtual operator bool() { return true; }
-  bool begin(long baudrate, int config=0) { return true; }
+  bool begin(long baudrate, int config = 0) { return true; }
 };
 
 static HardwareSerial Serial;
@@ -204,7 +203,7 @@ inline int digitalRead(digital_pin_t pin) {
 }
 
 inline void digitalWrite(digital_pin_t pin, int value) {
-   gpio_set_level((gpio_num_t)pin, value);
+  gpio_set_level((gpio_num_t)pin, value);
 }
 
 inline void pinMode(digital_pin_t pin, int mode) {
@@ -229,10 +228,12 @@ inline void pinMode(digital_pin_t pin, int mode) {
   }
 }
 
-inline void delay(uint32_t ms){ vTaskDelay(ms / portTICK_PERIOD_MS);}
-inline uint32_t millis() {return (xTaskGetTickCount() * portTICK_PERIOD_MS);}
-inline void delayMicroseconds(uint32_t ms) {esp_rom_delay_us(ms);}
-inline uint64_t micros() { return xTaskGetTickCount() * portTICK_PERIOD_MS * 1000;}
+inline void delay(uint32_t ms) { vTaskDelay(ms / portTICK_PERIOD_MS); }
+inline uint32_t millis() { return (xTaskGetTickCount() * portTICK_PERIOD_MS); }
+inline void delayMicroseconds(uint32_t ms) { esp_rom_delay_us(ms); }
+inline uint64_t micros() {
+  return xTaskGetTickCount() * portTICK_PERIOD_MS * 1000;
+}
 
 // delay and millis has been defined
 #define DESKTOP_MILLIS_DEFINED
@@ -254,15 +255,28 @@ inline uint64_t micros() { return k_cyc_to_us_floor64(k_cycle_get_64()); }
 // delay and millis has been defined
 #define DESKTOP_MILLIS_DEFINED
 
-#define GPIO_NONE nullptr
-#define IS_GPIO(pin) (pin !=nullptr)
-#define GPIO_TO_INT(pin) pin == nullptr ? -1 : pin->pin
-#define GPIO_TO_STR(pin) pin == nullptr ? std::to_string(GPIO_TO_INT(pin)).c_str()
+#define IS_GPIO(pin) (pin.port != nullptr)
+#define GPIO_TO_INT(pin) pin.pin
+#define GPIO_TO_STR(pin) std::to_string(GPIO_TO_INT(pin)).c_str()
 
-using digital_pin_t = gpio_dt_spec*;
+/// Zephyr GPIO spec as digital_pin_t
+using digital_pin_t = gpio_dt_spec;
+
+/// GPIO_NONE is no pin defined
+static gpio_dt_spec GPIO_NONE = {nullptr, 0, 0};
+
+/// Support for pin compare
+static inline bool operator==(gpio_dt_spec& a, gpio_dt_spec& b) {
+  return (a.port == b.port) && (a.pin == b.pin);
+}
+
+/// Support for pin compare
+static inline bool operator!=(gpio_dt_spec& a, gpio_dt_spec& b) {
+  return !(a == b);
+}
 
 void pinMode(digital_pin_t pin, int mode) {
-  if (pin == nullptr || !gpio_is_ready_dt(pin)) {
+  if (pin == GPIO_NONE || !gpio_is_ready_dt(&pin)) {
     ZLOGE("GPIO pin not ready");
     return;
   }
@@ -286,30 +300,30 @@ void pinMode(digital_pin_t pin, int mode) {
       break;
   }
 
-  int rc = gpio_pin_configure_dt(pin, flags);
+  int rc = gpio_pin_configure_dt(&pin, flags);
   if (rc != 0) {
     ZLOGE("Failed to configure GPIO pin: %d", rc);
   }
 }
 
 void digitalWrite(digital_pin_t pin, bool value) {
-  if (pin == nullptr || !gpio_is_ready_dt(pin)) {
+  if (pin == GPIO_NONE || !gpio_is_ready_dt(&pin)) {
     ZLOGE("GPIO pin not ready");
   }
 
-  int rc = gpio_pin_set_dt(pin, value ? 1 : 0);
+  int rc = gpio_pin_set_dt(&pin, value ? 1 : 0);
   if (rc != 0) {
     ZLOGE("Failed to write GPIO pin: %d", rc);
   }
 }
 
 int digitalRead(digital_pin_t pin) {
-  if (pin == nullptr || !gpio_is_ready_dt(pin)) {
+  if (pin == GPIO_NONE || !gpio_is_ready_dt(&pin)) {
     ZLOGE("GPIO pin not ready");
     return false;
   }
 
-  int rc = gpio_pin_get_dt(pin);
+  int rc = gpio_pin_get_dt(&pin);
   if (rc < 0) {
     ZLOGE("Failed to read GPIO pin: %d", rc);
   }

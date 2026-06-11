@@ -2,24 +2,24 @@
 
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
-#include "AudioTools/CoreAudio/AudioTypes.h"
 #include "AudioTools/CoreAudio/AudioRuntime.h"
+#include "AudioTools/CoreAudio/AudioTypes.h"
 
 #ifndef TOUCH_LIMIT
-#  define TOUCH_LIMIT 20
+#define TOUCH_LIMIT 20
 #endif
 
 #ifndef DEBOUNCE_DELAY
-#  define DEBOUNCE_DELAY 500
+#define DEBOUNCE_DELAY 500
 #endif
-
-#if defined(IS_MIN_DESKTOP)
-extern "C" void pinMode(int, int);
-extern "C" int digitalRead(int);
-#endif
-
 
 namespace audio_tools {
+
+#if defined(IS_MIN_DESKTOP)
+extern void pinMode(int, int);
+extern int digitalRead(int);
+#endif
+
 
 // global reference to access from static callback methods
 class AudioActions;
@@ -145,16 +145,19 @@ class AudioActions {
   void add(Action& action) { insertAction(action); }
 
   /// Adds an action
-  void add(digital_pin_t pin, void (*actionOn)(bool pinStatus, digital_pin_t pin, void* ref),
+  void add(digital_pin_t pin,
+           void (*actionOn)(bool pinStatus, digital_pin_t pin, void* ref),
            ActiveLogic activeLogic = ActiveLow, void* ref = nullptr) {
     add(pin, actionOn, nullptr, activeLogic, ref);
   }
 
   /// Adds an action
-  void add(digital_pin_t pin, void (*actionOn)(bool pinStatus, digital_pin_t pin, void* ref),
+  void add(digital_pin_t pin,
+           void (*actionOn)(bool pinStatus, digital_pin_t pin, void* ref),
            void (*actionOff)(bool pinStatus, digital_pin_t pin, void* ref),
            ActiveLogic activeLogicPar = ActiveLow, void* ref = nullptr) {
-    LOGI("ActionLogic::add pin: %d / logic: %d", GPIO_TO_INT(pin), activeLogicPar);
+    LOGI("ActionLogic::add pin: %d / logic: %d", GPIO_TO_INT(pin),
+         activeLogicPar);
 
     if (pin != GPIO_NONE) {
       // setup pin mode
@@ -174,7 +177,6 @@ class AudioActions {
       insertAction(action);
     } else {
       LOGW("pin %d -> Ignored", GPIO_TO_INT(pin));
-
     }
   }
 
@@ -256,7 +258,9 @@ class AudioActions {
   }
 
   /// Sets a callback function to read the pin state
-  void setReadCallback(std::function<bool(digital_pin_t)> read_cb_par) { read_cb = read_cb_par; }
+  void setReadCallback(std::function<bool(digital_pin_t)> read_cb_par) {
+    read_cb = read_cb_par;
+  }
 
  protected:
   int debounceDelayValue = DEBOUNCE_DELAY;
@@ -278,7 +282,60 @@ class AudioActions {
     }
   }
 
+#if defined(IS_ZEPHYR)
+  static struct gpio_callback button_cb_data;
+
+  /**
+   * @brief Zephyr ISR wrapper (must be static C-style function)
+   */
+  static void audioActionsISRZephyr(const struct device* dev,
+                                    struct gpio_callback* cb, uint32_t pins) {
+    if (selfAudioActions == nullptr) return;
+
+    // forward only triggered pins
+    selfAudioActions->handleZephyrInterrupt(dev, cb, pins);
+  }
+
+  /**
+   * @brief Handles Zephyr GPIO interrupts with pin filtering
+   */
+  void handleZephyrInterrupt(const struct device* dev, struct gpio_callback* cb,
+                             uint32_t pins) {
+    (void)dev;
+    (void)cb;
+
+    // Only process actions matching triggered pins
+    for (Action* action : actions) {
+      if (action == nullptr || !action->enabled) continue;
+
+      // fast bitmask filter: only process relevant pins
+      if (pins & BIT(action->id())) {
+        action->process();
+      }
+    }
+  }
+
+  /**
+   * @brief Setup GPIO interrupt for a given pin
+   */
+  void setupISR(digital_pin_t button) {
+    int ret;
+
+    ret = gpio_pin_interrupt_configure_dt(&button, GPIO_INT_EDGE_BOTH);
+    if (ret != 0) {
+      LOGE("Error %d: failed to enable interrupt", ret);
+      return;
+    }
+
+    gpio_init_callback(&button_cb_data, audioActionsISRZephyr, BIT(button.pin));
+
+    gpio_add_callback(button.port, &button_cb_data);
+  }
+#else
+  // Arduino ISR wrapper
   static void audioActionsISR() { selfAudioActions->processAllActions(); }
+
+#endif
 
   void setupPin(digital_pin_t pin, ActiveLogic logic) {
     // in the audio-driver library the pins are already set up
@@ -289,13 +346,16 @@ class AudioActions {
       } else {
         pinMode(pin, INPUT);
         LOGI("pin %d -> INPUT", GPIO_TO_INT(pin));
-
       }
-    }
+    }  // namespace audio_tools
 
 #if defined(ARDUINO) && !defined(IS_MIN_DESKTOP)
     if (use_pin_interrupt) {
       attachInterrupt(digitalPinToInterrupt(pin), audioActionsISR, CHANGE);
+    }
+#elif defined(IS_ZEPHYR)
+    if (use_pin_interrupt) {
+      setupISR(pin);
     }
 #endif
   }
