@@ -140,6 +140,8 @@ class Equalizer3Bands : public ModifyingStream {
   }
 
   bool begin() {
+    ModifyingStream::setAudioInfo(*p_cfg);
+
     if (p_cfg->channels > max_state_count) {
       if (state != nullptr) delete[] state;
       state = new EQSTATE[p_cfg->channels];
@@ -166,7 +168,6 @@ class Equalizer3Bands : public ModifyingStream {
   /// Called automatically when audio format changes
   /// @param info New audio format information
   virtual void setAudioInfo(AudioInfo info) override {
-    ModifyingStream::setAudioInfo(info);
     p_cfg->sample_rate = info.sample_rate;
     p_cfg->channels = info.channels;
     p_cfg->bits_per_sample = info.bits_per_sample;
@@ -391,6 +392,7 @@ class Equalizer3BandsPerChannel : public ModifyingStream {
   /// Initialize the equalizer using the current configuration
   /// @return true if initialization was successful
   bool begin() {
+    ModifyingStream::setAudioInfo(*p_cfg);
     // Ensure per-channel arrays are allocated
     ensureChannelArraysAllocated();
 
