@@ -393,7 +393,7 @@ class Equalizer3BandsPerChannel : public ModifyingStream {
   /// @return true if initialization was successful
   bool begin() {
     ModifyingStream::setAudioInfo(*p_cfg);
-w    // Ensure per-channel arrays are allocated
+    // Ensure per-channel arrays are allocated
     ensureChannelArraysAllocated();
 
     // Ensure that EQSTATE is allocated
