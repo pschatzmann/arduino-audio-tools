@@ -175,8 +175,11 @@ class AllocatorPSRAM : public Allocator {
 #endif
 
 #if defined(IS_ZEPHYR)
-
 #include <zephyr/kernel.h>
+#if IS_ENABLED(CONFIG_ESP_SPIRAM)
+#include <zephyr/sys/multi_heap_shared.h>
+#endif
+
 
 /**
  * @brief Zephyr allocator using the kernel heap (k_malloc / k_free).
@@ -197,7 +200,7 @@ class AllocatorZephyr : public Allocator {
   }
 };
 
-#if defined(USE_PSRAM) && defined(MEM_ATTR_HEAP_RAM_NOCACHE)
+#if defined(USE_PSRAM) && IS_ENABLED(CONFIG_ESP_SPIRAM)
 #include <zephyr/mem_mgmt/mem_attr_heap.h>
 
 /**
@@ -211,7 +214,11 @@ class AllocatorZephyrPSRAM : public Allocator {
  public:
   void* do_allocate(size_t size) override {
     if (size == 0) size = 1;
-    void* result = mem_attr_heap_alloc(MEM_ATTR_HEAP_RAM_NOCACHE, size);
+    void* result = nullptr;
+#if IS_ENABLED(CONFIG_ESP_SPIRAM)
+    result = shared_multi_heap_alloc(SMH_REG_ATTR_EXTERNAL,size,K_NO_WAIT);
+#endif
+
     if (result == nullptr) result = k_malloc(size);  // fallback to system heap
     if (result != nullptr) memset(result, 0, size);
     return result;
