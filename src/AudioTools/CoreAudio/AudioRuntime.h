@@ -6,10 +6,12 @@
 #include <algorithm>
 #include "AudioToolsConfig.h"
 
-#ifdef ARDUINO
+#if defined(ARDUINO)
 #include <Arduino.h>
+// Non Arduino
+#elif defined(IS_ZEPHYR) || defined(ESP32_CMAKE)
+#include "AudioTools/AudioLibs/Emulation/Arduino.h"
 #endif
-
 
 namespace audio_tools {
 
@@ -60,9 +62,6 @@ inline void printVersionInfo() {
 #define GPIO_TO_STR(pin) std::to_string(pin).c_str()
 using digital_pin_t = int;
 
-// Non Arduino
-#elif defined(IS_ZEPHYR) || defined(ESP32_CMAKE)
-#include "AudioTools/AudioLibs/Emulation/Arduino.h"
 #endif
 
 /// stops any further processing by spinning in an endless loop  @ingroup basic
