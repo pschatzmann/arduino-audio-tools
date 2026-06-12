@@ -176,10 +176,6 @@ class AllocatorPSRAM : public Allocator {
 
 #if defined(IS_ZEPHYR)
 #include <zephyr/kernel.h>
-#if IS_ENABLED(CONFIG_ESP_SPIRAM)
-#include <zephyr/sys/multi_heap_shared.h>
-#endif
-
 
 /**
  * @brief Zephyr allocator using the kernel heap (k_malloc / k_free).
@@ -199,53 +195,15 @@ class AllocatorZephyr : public Allocator {
     if (memory != nullptr) k_free(memory);
   }
 };
+using AlocatorSTD = AllocatorZephyr;
+using AlocatorExt = AllocatorZephyr;
 
-#if defined(USE_PSRAM) && IS_ENABLED(CONFIG_ESP_SPIRAM)
-#include <zephyr/mem_mgmt/mem_attr_heap.h>
-
-/**
- * @brief Zephyr PSRAM allocator using mem_attr_heap (requires
- * CONFIG_MEM_ATTR_HEAP=y and a memory region tagged with DT_MEM_ARM_MPU_RAM_NOCACHE
- * or similar PSRAM-backed attribute in the board DTS).
- * Falls back to the regular kernel heap if the PSRAM allocation fails.
- * @ingroup memorymgmt
- */
-class AllocatorZephyrPSRAM : public Allocator {
- public:
-  void* do_allocate(size_t size) override {
-    if (size == 0) size = 1;
-    void* result = nullptr;
-#if IS_ENABLED(CONFIG_ESP_SPIRAM)
-    result = shared_multi_heap_alloc(SMH_REG_ATTR_EXTERNAL,size,K_NO_WAIT);
+#else // defined(ZEPHYR)
+// all non zephyr cases
+AlocatorSTD = Allocator;
 #endif
 
-    if (result == nullptr) result = k_malloc(size);  // fallback to system heap
-    if (result != nullptr) memset(result, 0, size);
-    return result;
-  }
-
-  void free(void* memory) override {
-    // mem_attr_heap_free handles both PSRAM and fallback k_malloc allocations
-    if (memory != nullptr) mem_attr_heap_free(memory);
-  }
-};
-
-static AllocatorZephyrPSRAM DefaultAllocator;
-static AllocatorZephyr DefaultAllocatorRAM;
-
-#  else
-
-static AllocatorZephyr DefaultAllocator;
-static AllocatorZephyr DefaultAllocatorRAM;
-
-#  endif  // USE_PSRAM / CONFIG_MEM_ATTR_HEAP
-
-#else
-
 static AllocatorExt DefaultAllocator;
-static Allocator DefaultAllocatorRAM;
-
-#endif  // IS_ZEPHYR
-
+static AlocatorSTD DefaultAllocatorRAM;
 
 }  // namespace audio_tools
