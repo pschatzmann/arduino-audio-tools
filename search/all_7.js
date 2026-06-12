@@ -175,7 +175,7 @@ var searchData=
   ['descr_5fbuilder_172',['descr_builder',['../classaudio__tools_1_1_u_s_b_audio_device.html#afdce0ada78d12cd6fca3b3a3b33a66f4',1,'audio_tools::USBAudioDevice']]],
   ['description_173',['Description',['../group__metadata.html#gga6760f423085f8a63374b1e2db102a6d1a57fb606caa142945062c463a838ea18d',1,'audio_tools']]],
   ['descriptor_5ftag_5fto_5fstr_174',['descriptor_tag_to_str',['../classaudio__tools_1_1_m_t_s_decoder_t_s_demux.html#a16038d7bee793abf27e7caa85121c01c',1,'audio_tools::MTSDecoderTSDemux']]],
-  ['desktop_2eh_175',['desktop.h',['../_concurrency_2desktop_8h.html',1,'(Global Namespace)'],['../_platform_config_2desktop_8h.html',1,'(Global Namespace)']]],
+  ['desktop_2eh_175',['desktop.h',['../_concurrency_2_desktop_8h.html',1,'(Global Namespace)'],['../_platform_config_2_desktop_8h.html',1,'(Global Namespace)']]],
   ['desktop_5fmillis_5fdefined_176',['desktop_millis_defined',['../_no_arduino_8h.html#ac9faf1ee520930849fff2feaf62b1d8a',1,'DESKTOP_MILLIS_DEFINED:&#160;NoArduino.h'],['../_time_8h.html#ac9faf1ee520930849fff2feaf62b1d8a',1,'DESKTOP_MILLIS_DEFINED:&#160;Time.h']]],
   ['destroy_177',['destroy',['../classdsp__memory__manager.html#a105a00e96586f86c11e457b26ffa588f',1,'dsp_memory_manager']]],
   ['details_178',['Technical Details',['../classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#technical',1,'']]],
