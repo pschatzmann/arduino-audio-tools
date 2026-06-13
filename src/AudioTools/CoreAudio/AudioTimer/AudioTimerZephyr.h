@@ -122,12 +122,18 @@ class AudioTimerDriverZephyr : public AudioTimerDriverBase {
     }
   }
 
-  static void workCallback(struct k_work* work_ptr) {
+  #pragma GCC diagnostic push
+  #pragma GCC diagnostic ignored "-Winvalid-offsetof"
+
+  static void workCallback(k_work* work_ptr) {
     auto* self = CONTAINER_OF(work_ptr, AudioTimerDriverZephyr, work);
     if (self != nullptr) {
       self->executeCallback();
     }
   }
+
+  #pragma GCC diagnostic pop
+
 
   /// Static callback wrapper for k_timer
   /// This is invoked in interrupt context, so we either call directly
