@@ -67,24 +67,24 @@ class VFSFile : public Stream {
 
   virtual void end() { stream.close(); }
 
-  virtual int print(const char* str) NOARD_OVR {
+  virtual size_t print(const char* str) NOARD_OVR {
     stream << str;
     return strlen(str);
   }
 
-  virtual int println(const char* str = "") NOARD_OVR {
+  virtual size_t println(const char* str = "") NOARD_OVR {
     stream << str << "\n";
     return strlen(str) + 1;
   }
 
-  virtual int print(int number) NOARD_OVR {
+  virtual size_t print(int number) NOARD_OVR {
     char buffer[80];
     int len = snprintf(buffer, 80, "%d", number);
     print(buffer);
     return len;
   }
 
-  virtual int println(int number) {
+  virtual size_t println(int number) {
     char buffer[80];
     int len = snprintf(buffer, 80, "%d\n", number);
     print(buffer);

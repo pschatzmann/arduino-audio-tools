@@ -26,4 +26,8 @@
 #include "AudioTools/CoreAudio/FrequencyDetector.h"
 #include "AudioTools/CoreAudio/GoerzelStream.h"
 #include "AudioTools/CoreAudio/RTTTLOutput.h"
+
+// Audio Actions only when pin support havs been defined
+#if defined(GPIO_NONE)
 #include "AudioTools/CoreAudio/AudioActions.h"
+#endif
