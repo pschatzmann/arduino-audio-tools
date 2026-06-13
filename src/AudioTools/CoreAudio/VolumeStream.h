@@ -165,7 +165,7 @@ class VolumeStream : public ModifyingStream, public VolumeSupport {
         void setAudioInfo(AudioInfo cfg) override {
             TRACED();
             // pass on notification
-            notifyAudioChange(cfg);
+            ModifyingStream::setAudioInfo(cfg);
 
             if (is_started){
                 int old_n = volume_values.size();;
