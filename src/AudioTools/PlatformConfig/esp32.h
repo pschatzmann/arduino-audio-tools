@@ -68,6 +68,7 @@
 #if defined(ESP32)
 #  define USE_PSRAM
 #  define USE_STRTOD
+#  define USE_INITIALIZER_LIST
 // We need to use accept instead of available
 #  if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0) 
 #    define USE_SERVER_ACCEPT true              
@@ -184,7 +185,6 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define USE_STREAM_READ_OVERRIDE
 // support for psram -> set to true
 #define USE_ALLOCATOR true
-//#define USE_INITIALIZER_LIST
 
 #define PWM_FREQENCY 30000
 #define PIN_PWM_START 1
