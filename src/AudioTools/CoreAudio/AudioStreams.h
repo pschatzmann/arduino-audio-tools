@@ -1563,7 +1563,8 @@ class InputMerge : public AudioStream {
 
 /**
  * @brief CallbackStream: A Stream that allows to register callback methods for
- * accessing and providing data. The callbacks can be lambda expressions.
+ * accessing and providing and updating data. The callbacks can be lambda expressions.
+ * The update callback can also be used just to read the data without changing it.
  * Warning: this class does not propagate audio info changes to the target
  * stream. You need to do this manually.
  * @ingroup io
@@ -1594,14 +1595,17 @@ class CallbackStream : public ModifyingStream {
     setReadCallback(cb_read);
   }
 
+  /// Instead of writing to the output stream we call this method
   void setWriteCallback(size_t (*cb_write)(const uint8_t *data, size_t len)) {
     this->cb_write = cb_write;
   }
 
+  /// Instead of reading from the input stream we call this method
   void setReadCallback(size_t (*cb_read)(uint8_t *data, size_t len)) {
     this->cb_read = cb_read;
   }
 
+  /// After Reading or before writing we call this method to allow to modify the data
   void setUpdateCallback(size_t (*cb_update)(uint8_t *data, size_t len)) {
     this->cb_update = cb_update;
   }
