@@ -265,6 +265,9 @@ using digital_pin_t = gpio_dt_spec;
 /// GPIO_NONE is no pin defined
 static gpio_dt_spec GPIO_NONE = {nullptr, 0, 0};
 
+#if !defined(GPIO_COMPARE_DEFINED)
+#define GPIO_COMPARE_DEFINED
+
 /// Support for pin compare
 static inline bool operator==(gpio_dt_spec& a, gpio_dt_spec& b) {
   return (a.port == b.port) && (a.pin == b.pin);
@@ -274,6 +277,8 @@ static inline bool operator==(gpio_dt_spec& a, gpio_dt_spec& b) {
 static inline bool operator!=(gpio_dt_spec& a, gpio_dt_spec& b) {
   return !(a == b);
 }
+
+#endif
 
 void pinMode(digital_pin_t pin, int mode) {
   if (pin == GPIO_NONE || !gpio_is_ready_dt(&pin)) {
