@@ -71,6 +71,18 @@ class ModifyingStream : public AudioStream {
   virtual void setStream(Stream &in) = 0;
   /// Defines/Changes the output target
   virtual void setOutput(Print &out) = 0;
+
+  /// Defines/Changes the input & output and registers for audio change notifications
+  virtual void setStream(AudioStream &io) {
+    setStream(static_cast<Stream&>(io));
+    addNotifyAudioChange(io);
+  }
+
+  /// Defines/Changes the output target and registers for audio change notifications
+  virtual void setOutput(AudioOutput &out) {
+    setOutput(static_cast<Print&>(out));
+    addNotifyAudioChange(out);
+  }
 };
 
 /**
