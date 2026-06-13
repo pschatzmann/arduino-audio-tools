@@ -25,6 +25,9 @@
 #  include "Arduino.h"
 #  include <Client.h>
 #  include <WiFi.h>
+#  ifndef ARDUINO
+#    define ARDUINO
+#  endif
 #  define USE_SD_NO_NS
 #  define USE_WIFI
 #  define USE_URL_ARDUINO

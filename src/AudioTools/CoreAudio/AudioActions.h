@@ -349,7 +349,7 @@ class AudioActions {
       }
     }  // namespace audio_tools
 
-#if defined(ARDUINO) && !defined(IS_MIN_DESKTOP)
+#if defined(ARDUINO) && (!defined(IS_MIN_DESKTOP) && !defined(IS_DESKTOP))
     if (use_pin_interrupt) {
       attachInterrupt(digitalPinToInterrupt(pin), audioActionsISR, CHANGE);
     }
