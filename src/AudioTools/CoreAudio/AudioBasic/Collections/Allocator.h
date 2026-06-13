@@ -195,15 +195,16 @@ class AllocatorZephyr : public Allocator {
     if (memory != nullptr) k_free(memory);
   }
 };
-using AllocatorSTD = AllocatorZephyr;
-using AllocatorExt = AllocatorZephyr;
+using TAllocatorSTD = AllocatorZephyr;
+using TAllocatorExt = AllocatorZephyr;
 
 #else // defined(ZEPHYR)
 // all non zephyr cases
-using AllocatorSTD = Allocator;
+using TAllocatorSTD = Allocator;
+using TAllocatorExt = AllocatorExt;
 #endif
 
-static AllocatorExt DefaultAllocator;
-static AllocatorSTD DefaultAllocatorRAM;
+static TAllocatorExt DefaultAllocator;
+static TAllocatorSTD DefaultAllocatorRAM;
 
 }  // namespace audio_tools
