@@ -241,9 +241,15 @@ inline uint64_t micros() {
 #endif
 
 #if defined(IS_ZEPHYR)
-
 #include <zephyr/drivers/gpio.h>
+
+#define DESKTOP_MILLIS_DEFINED
+#define IS_GPIO(pin) (pin.port != nullptr)
+#define GPIO_TO_INT(pin) pin.pin
+#define GPIO_TO_STR(pin) std::to_string(GPIO_TO_INT(pin)).c_str()
 #define ZLOGE(...) printk(__VA_ARGS__)
+
+namespace audio_tools {
 
 inline void delay(uint32_t ms) { k_msleep(ms); }
 inline uint32_t millis() { return k_uptime_get_32(); }
@@ -253,11 +259,7 @@ inline void delayMicroseconds(uint32_t us) {
 }
 inline uint64_t micros() { return k_cyc_to_us_floor64(k_cycle_get_64()); }
 // delay and millis has been defined
-#define DESKTOP_MILLIS_DEFINED
 
-#define IS_GPIO(pin) (pin.port != nullptr)
-#define GPIO_TO_INT(pin) pin.pin
-#define GPIO_TO_STR(pin) std::to_string(GPIO_TO_INT(pin)).c_str()
 
 /// Zephyr GPIO spec as digital_pin_t
 using digital_pin_t = gpio_dt_spec;
@@ -265,20 +267,16 @@ using digital_pin_t = gpio_dt_spec;
 /// GPIO_NONE is no pin defined
 static gpio_dt_spec GPIO_NONE = {nullptr, 0, 0};
 
-#if !defined(GPIO_COMPARE_DEFINED)
-#define GPIO_COMPARE_DEFINED
-
 /// Support for pin compare
-static inline bool operator==(gpio_dt_spec& a, gpio_dt_spec& b) {
+static inline bool operator==(audio_tools::digital_pin_t& a, audio_tools::digital_pin_t& b) {
   return (a.port == b.port) && (a.pin == b.pin);
 }
 
 /// Support for pin compare
-static inline bool operator!=(gpio_dt_spec& a, gpio_dt_spec& b) {
+static inline bool operator!=(audio_tools::digital_pin_t& a, audio_tools::digital_pin_t& b) {
   return !(a == b);
 }
 
-#endif
 
 void pinMode(digital_pin_t pin, int mode) {
   if (pin == GPIO_NONE || !gpio_is_ready_dt(&pin)) {
@@ -335,4 +333,5 @@ int digitalRead(digital_pin_t pin) {
   return rc;
 }
 
+} // namespace audio_tools
 #endif
