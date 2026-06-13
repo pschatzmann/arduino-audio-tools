@@ -174,6 +174,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a909f118906f9cf7024baae224dcd90a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivate/Reactivate automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> updates: (default is active)  <br /></td></tr>
 <tr class="separator:a909f118906f9cf7024baae224dcd90a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a43f59fb715e89f0cba1af22e894835" id="r_a4a43f59fb715e89f0cba1af22e894835"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timed_stream.html#a4a43f59fb715e89f0cba1af22e894835">setOutput</a> (<a class="el" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a> &amp;out)</td></tr>
+<tr class="memdesc:a4a43f59fb715e89f0cba1af22e894835"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines/Changes the output target and registers for audio change notifications.  <br /></td></tr>
 <tr class="separator:a4a43f59fb715e89f0cba1af22e894835"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05ff4cf361d54457ed8586e8c14aa922" id="r_a05ff4cf361d54457ed8586e8c14aa922"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timed_stream.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput</a> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;out) <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
 <tr class="memdesc:a05ff4cf361d54457ed8586e8c14aa922"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines/Changes the output target.  <br /></td></tr>
@@ -186,6 +187,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a35e225740e3c242aa7ce60e698a57e88" id="r_a35e225740e3c242aa7ce60e698a57e88"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timed_stream.html#a35e225740e3c242aa7ce60e698a57e88">setStream</a> (<a class="el" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a> &amp;out)</td></tr>
 <tr class="separator:a35e225740e3c242aa7ce60e698a57e88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d05266dc1a666b50700eaffc598ba19" id="r_a5d05266dc1a666b50700eaffc598ba19"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timed_stream.html#a5d05266dc1a666b50700eaffc598ba19">setStream</a> (<a class="el" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a> &amp;stream)</td></tr>
+<tr class="memdesc:a5d05266dc1a666b50700eaffc598ba19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines/Changes the input &amp; output and registers for audio change notifications.  <br /></td></tr>
 <tr class="separator:a5d05266dc1a666b50700eaffc598ba19"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c922b2fa6976beaaa7471846e267be4" id="r_a0c922b2fa6976beaaa7471846e267be4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timed_stream.html#a0c922b2fa6976beaaa7471846e267be4">setStream</a> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;stream) <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
 <tr class="memdesc:a0c922b2fa6976beaaa7471846e267be4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines/Changes the input &amp; output.  <br /></td></tr>
@@ -1275,10 +1277,14 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Defines/Changes the output target and registers for audio change notifications. </p>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_modifying_stream.html#abd8b581551dabdcc5a064cfaf0e7014b">ModifyingStream</a>.</p>
 
 </div>
 </div>
@@ -1406,16 +1412,20 @@ Protected Attributes</h2></td></tr>
           <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> setStream </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a> &amp;&#160;</td>
-          <td class="paramname"><em>stream</em></td><td>)</td>
+          <td class="paramname"><em>io</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Defines/Changes the input &amp; output and registers for audio change notifications. </p>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_modifying_stream.html#ac688db11bd34343d243234686d4957fc">ModifyingStream</a>.</p>
 
 </div>
 </div>

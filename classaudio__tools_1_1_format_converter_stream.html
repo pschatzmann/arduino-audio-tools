@@ -178,6 +178,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a909f118906f9cf7024baae224dcd90a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivate/Reactivate automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> updates: (default is active)  <br /></td></tr>
 <tr class="separator:a909f118906f9cf7024baae224dcd90a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a328303442981194ac0b1360bf64a6e9a" id="r_a328303442981194ac0b1360bf64a6e9a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_format_converter_stream.html#a328303442981194ac0b1360bf64a6e9a">setOutput</a> (<a class="el" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a> &amp;print) <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
+<tr class="memdesc:a328303442981194ac0b1360bf64a6e9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines/Changes the output target and registers for audio change notifications.  <br /></td></tr>
 <tr class="separator:a328303442981194ac0b1360bf64a6e9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a28a6cba0e36eb54e72b3336f8b3ed1" id="r_a1a28a6cba0e36eb54e72b3336f8b3ed1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_format_converter_stream.html#a1a28a6cba0e36eb54e72b3336f8b3ed1">setOutput</a> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;print) <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
 <tr class="memdesc:a1a28a6cba0e36eb54e72b3336f8b3ed1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines/Changes the output target.  <br /></td></tr>
@@ -186,6 +187,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a90651a8463466757c0ec5a2df7cba3fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">same as resizeReadResultQueue(size)  <br /></td></tr>
 <tr class="separator:a90651a8463466757c0ec5a2df7cba3fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f3588f5f415da76b48789329d822271" id="r_a5f3588f5f415da76b48789329d822271"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_format_converter_stream.html#a5f3588f5f415da76b48789329d822271">setStream</a> (<a class="el" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a> &amp;io) <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
+<tr class="memdesc:a5f3588f5f415da76b48789329d822271"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines/Changes the input &amp; output and registers for audio change notifications.  <br /></td></tr>
 <tr class="separator:a5f3588f5f415da76b48789329d822271"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb3b6de56b862417b2d77962d06db58c" id="r_adb3b6de56b862417b2d77962d06db58c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_format_converter_stream.html#adb3b6de56b862417b2d77962d06db58c">setStream</a> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;io) <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
 <tr class="memdesc:adb3b6de56b862417b2d77962d06db58c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines/Changes the input &amp; output.  <br /></td></tr>
@@ -1215,7 +1217,7 @@ Protected Attributes</h2></td></tr>
           <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> setOutput </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a> &amp;&#160;</td>
-          <td class="paramname"><em>print</em></td><td>)</td>
+          <td class="paramname"><em>out</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1225,6 +1227,8 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Defines/Changes the output target and registers for audio change notifications. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_reformat_base_stream.html#a7b8352dd3e4a4107eee3a179e533e1d7">ReformatBaseStream</a>.</p>
 
@@ -1311,6 +1315,8 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Defines/Changes the input &amp; output and registers for audio change notifications. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_reformat_base_stream.html#a2a6dc3492cb5003a5e9bcedc0745edd6">ReformatBaseStream</a>.</p>
 
