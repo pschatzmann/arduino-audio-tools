@@ -14,6 +14,9 @@ namespace audio_tools {
 
 /**
  * @brief FreeRTOS task
+ * 
+ * @note Supported by all FreeRTOS platforms
+ * 
  * @ingroup concurrency
  * @author Phil Schatzmann
  * @copyright GPLv3 *

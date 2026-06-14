@@ -14,7 +14,8 @@
 #endif
 
 namespace audio_tools {
-
+// we heavily depend on the audio driver functionality
+using namespace audio_driver;
 /**
  * @brief  Configuration for I2SCodecStream
  * @ingroup io
@@ -28,7 +29,7 @@ struct I2SCodecConfig : public I2SConfig {
   bool sd_active = true;
   bool sdmmc_active = false;
   // define pin source in driver configuration
-  PinFunction i2s_function = PinFunction::UNDEFINED; //CODEC; 
+  PinFunction i2s_function = PinFunction::UNDEFINED; //CODEC;
   bool operator==(I2SCodecConfig alt) {
     return input_device == alt.input_device &&
            output_device == alt.output_device && *((AudioInfo *)this) == alt;
@@ -60,9 +61,9 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
 
   /// Provides the default configuration
   I2SCodecConfig defaultConfig(RxTxMode mode = TX_MODE) {
-    auto cfg1 = i2s.defaultConfig(mode);
+    auto cfg_default = i2s.defaultConfig(mode);
     I2SCodecConfig cfg;
-    memcpy(&cfg, &cfg1, sizeof(cfg1));
+    cfg.copyFrom(cfg_default);
     cfg.input_device = ADC_INPUT_LINE1;
     cfg.output_device = DAC_OUTPUT_ALL;
     cfg.sd_active = true;
@@ -186,33 +187,32 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
   bool hasBoard() { return p_board != nullptr; }
 
   /// Provides the gpio for the indicated function
-  GpioPin getPinID(PinFunction function) {
-    if (p_board == nullptr) return -1;
+  digital_pin_t getPinID(PinFunction function) {
+    if (p_board == nullptr) return GPIO_NONE;
     return p_board->getPins().getPinID(function);
   }
 
   /// Provides the gpio for the indicated function
-  GpioPin getPinID(PinFunction function, int pos) {
-    if (p_board == nullptr) return -1;
+  digital_pin_t getPinID(PinFunction function, int pos) {
+    if (p_board == nullptr) return GPIO_NONE;
     return p_board->getPins().getPinID(function, pos);
   }
-
   /// Provides the gpio for the indicated key pos
-  GpioPin getKey(int pos) { return getPinID(PinFunction::KEY, pos); }
+  digital_pin_t getKey(int pos) { return getPinID(PinFunction::KEY, pos); }
 
   /// Provides access to the pin information
-  DriverPins &getPins() { return p_board->getPins(); }
+  DriverDeviceInfo &getPins() { return p_board->getPins(); }
 
   /// Provides the i2s driver
-  I2SDriver *driver() { return i2s.driver(); }
+  I2SDriverBase* driver() { return i2s.driver(); }
 
   /// set value of digital pin
-  void digitalWrite(int pin, bool value) {
+  void digitalWrite(digital_pin_t pin, bool value) {
     p_board->getPins().getGPIO().digitalWrite(pin, value);
   }
-  
+
   /// get value of digital pin
-  bool digitalRead(int pin) {
+  bool digitalRead(digital_pin_t pin) {
     return p_board->getPins().getGPIO().digitalRead(pin);
   }
 
@@ -242,7 +242,7 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
     return is_active;
   }
 
-  /// if the cfg.i2s_function was not defined we determine the "correct" default value 
+  /// if the cfg.i2s_function was not defined we determine the "correct" default value
   void setupI2SFunction() {
     if (cfg.i2s_function == PinFunction::UNDEFINED){
       if (cfg.rx_tx_mode == RX_MODE){
@@ -267,6 +267,12 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
     if (i2s) {
       // determine i2s pins from board definition
       PinsI2S i2s_pins = i2s.value();
+#if defined(__zephyr__)
+      // use device from audio-driver library
+      if (i2s_pins.dev != nullptr){
+        cfg.dev = i2s_pins.dev;
+      }
+#else
       cfg.pin_bck = i2s_pins.bck;
       cfg.pin_mck = i2s_pins.mclk;
       cfg.pin_ws = i2s_pins.ws;
@@ -282,13 +288,14 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
           cfg.pin_data_rx = i2s_pins.data_in;
           break;
       }
+#endif
     }
   }
 
   audio_driver_local::Optional<PinsI2S> getI2SPins(){
     TRACED();
      audio_driver_local::Optional<PinsI2S> i2s;
-    // Deterine I2S pins 
+    // Deterine I2S pins
     return  p_board->getPins().getI2SPins(cfg.i2s_function);
   }
 
@@ -315,7 +322,9 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
     codec_cfg.i2s.bits = toCodecBits(info.bits_per_sample);
     codec_cfg.i2s.rate = toRate(info.sample_rate);
     codec_cfg.i2s.fmt = toFormat(info.i2s_format);
+#ifndef __zephyr__
     codec_cfg.i2s.signal_type = (signal_t) info.signal_type;
+#endif
     // use reverse logic for codec setting
     codec_cfg.i2s.mode = info.is_master ? MODE_SLAVE : MODE_MASTER;
     if (p_board == nullptr) return false;

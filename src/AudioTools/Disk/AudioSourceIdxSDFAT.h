@@ -19,6 +19,10 @@ namespace audio_tools {
  * An index file is used to speed up the access to the audio files by index.
  * This class is based on the Arduino SD implementation
  * For UTF8 Support change SdFatConfig.h #define USE_UTF8_LONG_NAMES 1
+ *
+ * @note Supported only by Arduino platforms that support SDFAT library!
+ * @note Dependency: https://github.com/greiman/sdfat
+ *
  * @param  <SdFat32, File32>, <SdFs, FsFile>, <SdExFat, ExFile>, <SdFat, File>
  * @ingroup player
  * @author Phil Schatzmann

@@ -1,5 +1,8 @@
 #pragma once
 
+#include <cstdlib>
+#include <string>
+
 #include "AudioTools/AudioCodecs/CodecWAV.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"
 #include "AudioTools/CoreAudio/StreamCopy.h"
@@ -7,11 +10,11 @@
 
 namespace audio_tools {
 
-/// Calback which writes the sound data to the stream
+/// Callback which writes the sound data to the stream
 typedef void (*AudioServerDataCallback)(Print *out);
 
 /**
- * @brief A simple Arduino Webserver template which streams the result
+ * @brief A simple Arduino Webserver which streams the result
  * This template class can work with different Client and Server types.
  * All you need to do is to provide the data with a callback method or
  * from an Arduino Stream: in -copy> client
@@ -21,7 +24,7 @@ typedef void (*AudioServerDataCallback)(Print *out);
  * @copyright GPLv3
  */
 
-/// Calback which writes the sound data to the stream
+/// Callback which writes the sound data to the stream
 typedef void (*AudioServerDataCallback)(Print *out);
 
 /**
@@ -41,7 +44,7 @@ class AudioServerT {
    * We assume that the WiFi is already connected
    */
   AudioServerT(int port = 80) {
-    // the client returns 0 for avialableForWrite()
+    // the client returns 0 for availableForWrite()
     copier.setCheckAvailableForWrite(false);
     setupServer(port);
   }
@@ -53,9 +56,10 @@ class AudioServerT {
    * @param password
    */
   AudioServerT(const char *network, const char *password, int port = 80) {
-    this->network = (char *)network;
-    this->password = (char *)password;
-    // the client returns 0 for avialableForWrite()
+    this->network = network ? network : "";
+    this->password = password ? password : "";
+
+    // the client returns 0 for availableForWrite()
     copier.setCheckAvailableForWrite(false);
     setupServer(port);
   }
@@ -69,12 +73,14 @@ class AudioServerT {
    */
   bool begin(Stream &in, const char *contentType) {
     TRACED();
+
     this->in = &in;
-    this->content_type = contentType;
+    this->content_type = contentType ? contentType : "";
 
 #ifdef USE_WIFI
     connectWiFi();
 #endif
+
     // start server
     server.begin();
     return true;
@@ -88,9 +94,10 @@ class AudioServerT {
    */
   bool begin(AudioServerDataCallback cb, const char *contentType) {
     TRACED();
+
     this->in = nullptr;
     this->callback = cb;
-    this->content_type = contentType;
+    this->content_type = contentType ? contentType : "";
 
 #ifdef USE_WIFI
     connectWiFi();
@@ -118,6 +125,7 @@ class AudioServerT {
   bool doLoop() {
     // LOGD("doLoop");
     bool active = true;
+
     if (!client_obj.connected()) {
 #if USE_SERVER_ACCEPT
       client_obj = server.accept();  // listen for incoming clients
@@ -142,8 +150,6 @@ class AudioServerT {
             active = false;
           }
 
-          // if we limit the size of the WAV the encoder gets automatically
-          // closed when all has been sent
           if (!client_obj) {
             LOGI("stop client...");
             client_obj.stop();
@@ -166,7 +172,7 @@ class AudioServerT {
   /// Provides a pointer to the WiFiClient
   Client *out_ptr() { return &client_obj; }
 
-  /// Checks if any clinent has connnected
+  /// Checks if any client has connected
   bool isClientConnected() { return client_obj.connected(); }
 
   /// Changes the copy buffer size
@@ -179,16 +185,21 @@ class AudioServerT {
 #else
   Server server{80};
 #endif
+
   Client client_obj;
-  char *password = nullptr;
-  char *network = nullptr;
+
+  std::string password;
+  std::string network;
+
   size_t max_bytes = 0;
   size_t sent = 0;
 
   // Content
   const char *content_type = nullptr;
+
   AudioServerDataCallback callback = nullptr;
   Stream *in = nullptr;
+
   StreamCopy copier;
   BaseConverter *converter_ptr = nullptr;
 
@@ -200,18 +211,25 @@ class AudioServerT {
 #ifdef USE_WIFI
   void connectWiFi() {
     TRACED();
-    if (WiFi.status() != WL_CONNECTED && network != nullptr &&
-        password != nullptr) {
-      WiFi.begin(network, password);
+
+    if (WiFi.status() != WL_CONNECTED &&
+        !network.empty() &&
+        !password.empty()) {
+
+      WiFi.begin(network.c_str(), password.c_str());
+
       while (WiFi.status() != WL_CONNECTED) {
         Serial.print(".");
         delay(500);
       }
+
 #ifdef ESP32
       WiFi.setSleep(false);
 #endif
+
       Serial.println();
     }
+
     Serial.print("IP address: ");
     Serial.println(WiFi.localIP());
   }
@@ -228,14 +246,18 @@ class AudioServerT {
     } else {
       response = "HTTP/1.1 200 OK";
     }
+
     client_obj.println(response);
     LOGI("%s", response);
+
     if (content_type != nullptr) {
       client_obj.print("Content-type:");
       client_obj.println(content_type);
       LOGI("Content-type: %s", content_type);
     }
+
     client_obj.println();
+
     if (!client_obj.connected()) {
       LOGE("connection was closed");
     }
@@ -243,6 +265,7 @@ class AudioServerT {
 
   virtual void sendReplyContent() {
     TRACED();
+
     if (callback != nullptr) {
       // provide data via Callback
       LOGI("sendReply - calling callback");
@@ -252,50 +275,56 @@ class AudioServerT {
       // provide data for stream
       LOGI("sendReply - Returning audio stream...");
       copier.begin(client_obj, *in);
+
       if (!client_obj.connected()) {
         LOGE("connection was closed");
       }
     }
   }
 
-  // Handle an new client connection and return the data
+  /**
+   * @brief Handle an new client connection and return the data
+   */
   void processClient() {
     // LOGD("processClient");
-    if (client_obj) {       // if you get a client,
-      LOGI("New Client:");  // print a message out the serial port
-      String currentLine =
-          "";  // make a String to hold incoming data from the client
+    if (client_obj) {
+      LOGI("New Client:");
+
+      std::string currentLine;
+      currentLine.reserve(128);
+
       long firstbyte = 0;
       long lastbyte = 0;
-      while (client_obj.connected()) {  // loop while the client's connected
-        if (client_obj
-                .available()) {  // if there's bytes to read from the client,
-          char c = client_obj.read();  // read a byte, then
-          if (c == '\n') {             // if the byte is a newline character
-            LOGI("Request: %s", currentLine.c_str());
-            if (currentLine.startsWith(String("Range: bytes="))) {
-              int minuspos = currentLine.indexOf('-', 13);
 
-              // toInt returns 0 if it's an invalid conversion, so it's "safe"
-              firstbyte = currentLine.substring(13, minuspos).toInt();
-              lastbyte = currentLine.substring(minuspos + 1).toInt();
+      while (client_obj.connected()) {
+        if (client_obj.available()) {
+          char c = client_obj.read();
+
+          if (c == '\n') {
+            LOGI("Request: %s", currentLine.c_str());
+
+            if (currentLine.rfind("Range: bytes=", 0) == 0) {
+              size_t minuspos = currentLine.find('-', 13);
+
+              firstbyte = std::strtol(currentLine.c_str() + 13, nullptr, 10);
+              lastbyte = std::strtol(currentLine.c_str() + minuspos + 1, nullptr, 10);
             }
+
             // if the current line is blank, you got two newline characters in a
-            // row. that's the end of the client HTTP request, so send a
-            // response:
+            // row. that's the end of the client HTTP request, so send a response:
             if (currentLine.length() == 0) {
               sendReplyHeader();
               sendReplyContent();
+
               max_bytes = lastbyte - firstbyte;
               sent = 0;
-              // break out of the while loop:
+
               break;
-            } else {  // if you got a newline, then clear currentLine:
+            } else {
               currentLine = "";
             }
-          } else if (c != '\r') {  // if you got anything else but a carriage
-                                   // return character,
-            currentLine += c;      // add it to the end of the currentLine
+          } else if (c != '\r') {
+            currentLine += c;
           }
         }
       }

@@ -71,6 +71,8 @@ class VS1053Config : public AudioInfo {
  *
  * Depends on https://github.com/pschatzmann/arduino-vs1053
  *
+ * @note Supported only on Arduino platforms!
+ * 
  * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3

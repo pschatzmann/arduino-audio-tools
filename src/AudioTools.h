@@ -51,7 +51,7 @@
  * @brief Platform specific implementations.
  * Do not use any of theses classes directly and use the related platform independent
  * typedef instead: 
- * - TimerAlarmRepeating
+ * - AudioTimer
  * - I2SStrem
  * - PWMStream
  */
@@ -68,7 +68,7 @@
 #if AUDIO_INCLUDE_CORE
 
 #ifdef USE_CONCURRENCY
-#  include "AudioTools/AudioLibs/Concurrency.h"
+#  include "AudioTools/Concurrency.h"
 #endif
 
 #include "AudioTools/CoreAudio.h"

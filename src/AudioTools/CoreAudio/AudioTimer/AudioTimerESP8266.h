@@ -8,17 +8,17 @@ namespace audio_tools {
 
 typedef void (*repeating_timer_callback_t)(void* obj);
 
-class TimerAlarmRepeatingDriverESP8266;
+class AudioTimerDriverESP8266;
 
 /**
  * @brief Repeating Timer functions for repeated execution: Plaease use the
- * typedef TimerAlarmRepeating
+ * typedef AudioTimer
  * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  *
  */
-class TimerAlarmRepeatingDriverESP8266 : public TimerAlarmRepeatingDriverBase {
+class AudioTimerDriverESP8266 : public AudioTimerDriverBase {
  public:
   /**
    * We can not do any I2C calls in the interrupt handler so we need to do this
@@ -63,8 +63,8 @@ class TimerAlarmRepeatingDriverESP8266 : public TimerAlarmRepeatingDriverBase {
   Ticker ticker;
 };
 
-/// @brief  use TimerAlarmRepeating!  @ingroup timer_esp8266
-using TimerAlarmRepeatingDriver = TimerAlarmRepeatingDriverESP8266;
+/// @brief  use AudioTimer!  @ingroup timer_esp8266
+using AudioTimerDriver = AudioTimerDriverESP8266;
 
 }  // namespace audio_tools
 

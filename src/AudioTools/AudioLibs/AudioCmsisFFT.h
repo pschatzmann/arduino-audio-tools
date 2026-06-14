@@ -19,6 +19,8 @@ namespace audio_tools {
  * @ingroup fft-cmsis
  * @author Phil Schatzmann
  * @copyright GPLv3
+ * 
+ * @note Supported only on ARM platforms!
  */
 class FFTDriverCmsisFFT : public FFTDriver {
     public:

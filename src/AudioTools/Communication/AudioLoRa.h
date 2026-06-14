@@ -2,7 +2,7 @@
 
 #include "AudioTools/CoreAudio/Buffers.h"
 #include "AudioTools/CoreAudio/BaseStream.h"
-#include "LoRa.h"
+#include "LoRa.h" // 👉 https://github.com/sandeepmistry/arduino-LoRa
 
 // define the default pins used by the transceiver module
 #define ss 8
@@ -46,6 +46,10 @@ struct AudioLoRaConfig : public AudioInfo {
 
 /**
  * @brief LoRa Audio Sending and Receiving
+ * 
+ * @note Supported only on Arduino platforms with LoRa support (e.g. ESP32) and the LoRa library!
+ * @note Requires: 👉 https://github.com/sandeepmistry/arduino-LoRa
+ * 
  * @author Phil Schatzmann
  * @ingroup communications
  * @copyright GPLv3

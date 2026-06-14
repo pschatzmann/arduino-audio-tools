@@ -208,11 +208,14 @@ class HttpRequest : public BaseStream {
   // process http request and reads the reply_header from the server
   virtual int process(MethodID action, Url &url, const char *mime,
                       const char *data, int lenData = -1) {
+    LOGD("processing %s", url.url());
     int len = lenData;
     if (data != nullptr && len <= 0) {
       len = strlen(data);
     }
-    processBegin(action, url, mime, len);
+    if (!processBegin(action, url, mime, len)){
+      return false;
+    }
     // posting data parameter
     if (len > 0 && data != nullptr) {
       LOGI("Writing data: %d bytes", len);
@@ -250,6 +253,8 @@ class HttpRequest : public BaseStream {
       if (!is_connected) {
         LOGE("Connect failed");
         return false;
+      } else {
+        LOGI("Connected to host %s port %d", url.host(), url.port());
       }
     } else {
       LOGI("process is already connected");
@@ -272,9 +277,7 @@ class HttpRequest : public BaseStream {
     request_header.put(ACCEPT_ENCODING, accept_encoding);
     request_header.put(ACCEPT, accept);
     request_header.put(CONTENT_TYPE, mime);
-    request_header.write(*client_ptr);
-
-    return true;
+    return request_header.write(*client_ptr);
   }
 
   /// Writes (Posts) the data of the indicated stream after calling processBegin

@@ -8,6 +8,9 @@ namespace audio_tools {
 
 /**
  * @brief NBuffer which uses some RTOS queues to manage the available and filled buffers
+ * 
+ * @note Supported by all FreeRTOS platforms
+ * 
  * @ingroup buffers
  * @ingroup concurrency
  * @tparam T 

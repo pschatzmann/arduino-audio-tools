@@ -1,4 +1,5 @@
 #pragma once
+#include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/AudioEffects/SoundGenerator.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
 #include "AudioTools/CoreAudio/AudioOutput.h"
@@ -7,7 +8,6 @@
 #include "AudioTools/CoreAudio/BaseConverter.h"
 #include "AudioTools/CoreAudio/BaseStream.h"
 #include "AudioTools/CoreAudio/Buffers.h"
-#include "AudioToolsConfig.h"
 
 #ifndef IRAM_ATTR
 #define IRAM_ATTR
@@ -1493,7 +1493,7 @@ class InputMerge : public AudioStream {
   size_t readBytes(uint8_t *data, size_t len) override {
     LOGD("readBytes: %d", (int)len);
     T *p_data = (T *)data;
-    int result_len = MIN(available(), len);
+    int result_len = min((size_t)available(), len);
     int frames = result_len / (sizeof(T) * total_channel_count);
     int result_idx = 0;
     for (int j = 0; j < frames; j++) {
@@ -1560,7 +1560,8 @@ class InputMerge : public AudioStream {
 
 /**
  * @brief CallbackStream: A Stream that allows to register callback methods for
- * accessing and providing data. The callbacks can be lambda expressions.
+ * accessing and providing and updating data. The callbacks can be lambda expressions.
+ * The update callback can also be used just to read the data without changing it.
  * Warning: this class does not propagate audio info changes to the target
  * stream. You need to do this manually.
  * @ingroup io
@@ -1591,14 +1592,17 @@ class CallbackStream : public ModifyingStream {
     setReadCallback(cb_read);
   }
 
+  /// Instead of writing to the output stream we call this method
   void setWriteCallback(size_t (*cb_write)(const uint8_t *data, size_t len)) {
     this->cb_write = cb_write;
   }
 
+  /// Instead of reading from the input stream we call this method
   void setReadCallback(size_t (*cb_read)(uint8_t *data, size_t len)) {
     this->cb_read = cb_read;
   }
 
+  /// After Reading or before writing we call this method to allow to modify the data
   void setUpdateCallback(size_t (*cb_update)(uint8_t *data, size_t len)) {
     this->cb_update = cb_update;
   }
@@ -2327,7 +2331,7 @@ class TimerCallbackAudioStream : public BufferedStream {
       frameSize = cfg.bits_per_sample * cfg.channels / 8;
       frame = new uint8_t[frameSize];
       buffer = new RingBuffer<uint8_t>(cfg.buffer_size);
-      timer = new TimerAlarmRepeating();
+      timer = new AudioTimer();
       timer->setTimerFunction(cfg.timer_function);
       if (cfg.timer_id >= 0) {
         timer->setTimer(cfg.timer_id);
@@ -2372,7 +2376,7 @@ class TimerCallbackAudioStream : public BufferedStream {
   bool active = false;
   uint16_t (*frameCallback)(uint8_t *data, uint16_t len);
   // below only relevant with timer
-  TimerAlarmRepeating *timer = nullptr;
+  AudioTimer *timer = nullptr;
   RingBuffer<uint8_t> *buffer = nullptr;
   uint8_t *frame = nullptr;
   uint16_t frameSize = 0;

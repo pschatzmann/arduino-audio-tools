@@ -6,6 +6,9 @@ namespace audio_tools {
 
 /**
  * @brief Disable, enable interrupts (only on the actual core)
+ * 
+ * @note Supported only on RP2040 platforms
+ * 
  * @ingroup concurrency
  * @author Phil Schatzmann
  * @copyright GPLv3 *

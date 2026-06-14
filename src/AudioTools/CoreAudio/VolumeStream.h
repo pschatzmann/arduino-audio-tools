@@ -267,7 +267,7 @@ class VolumeStream : public ModifyingStream, public VolumeSupport {
         }
 
         bool isAllChannelsFullVolume(){
-            int channels = MIN(info.channels, volume_values.size());
+            int channels = min((int)info.channels, volume_values.size());
             for (int ch=0;ch < channels;ch++){
                 if (volume_values[ch]!=1.0) return false;
             }

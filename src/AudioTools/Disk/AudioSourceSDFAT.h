@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SPI.h>
-#include <SdFat.h>
+#include <SdFat.h> // https://github.com/greiman/sdfat
 
 #include "AudioLogger.h"
 #include "AudioTools/Disk/AudioSource.h"
@@ -15,10 +15,14 @@
 
 namespace audio_tools {
 /**
- * @brief ESP32 AudioSource for AudioPlayer using an SD card as data source.
+ * @brief AudioSource for AudioPlayer using an SD card as data source.
  * This class is based on the Arduino SD implementation
  * Connect the SD card.
  * For UTF8 Support change SdFatConfig.h #define USE_UTF8_LONG_NAMES 1
+ *
+ * @note Supported only by Arduino platforms that support SDFAT library!
+ * @note Dependency: https://github.com/greiman/sdfat
+ * 
  * @param  <SdFat32, File32>, <SdFs, FsFile>, <SdExFat, ExFile>, <SdFat, File>
  * @ingroup player
  * @author Phil Schatzmann

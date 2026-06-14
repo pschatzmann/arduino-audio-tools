@@ -7,7 +7,8 @@
 #define PIN_AUDIO_KIT_SD_CARD_CLK 14
 #define SPI_CLOCK SD_SCK_MHZ(10)
 
-uint8_t* data[1024 * 99];
+const size_t max_len = 1024 * 100;
+uint8_t* data = nullptr;
 int len[] = { 1, 5, 10, 25, 100, 256, 512, 1024, 1024 * 10, 1024 * 100 };
 size_t totalSize = 1024 * 1024 * 1;
 const char* test_file = "/test.txt";
@@ -70,6 +71,9 @@ void testFS(const char* name, SD& sd, Open write, Open read) {
 
 void setup() {
   Serial.begin(115200);
+
+  data = new uint8_t[max_len];
+  assert(data!=nullptr);
 
   // setup SPI pins
   SPI.begin(PIN_AUDIO_KIT_SD_CARD_CLK, PIN_AUDIO_KIT_SD_CARD_MISO, PIN_AUDIO_KIT_SD_CARD_MOSI, PIN_AUDIO_KIT_SD_CARD_CS);

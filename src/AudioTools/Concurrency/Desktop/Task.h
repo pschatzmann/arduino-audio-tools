@@ -14,6 +14,8 @@ namespace audio_tools {
 /**
  * @brief Task abstraction for Linux mapped to a std::thread.
  * suspend()/resume() simulated with condition_variable.
+ * 
+ * @note Supported by all Linux platforms with C++11 support
  */
 class Task {
  public:

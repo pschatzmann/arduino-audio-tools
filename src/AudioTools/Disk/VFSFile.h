@@ -27,7 +27,7 @@ enum SeekMode { SeekSet = 0, SeekCur = 1, SeekEnd = 2 };
 /**
  * @brief Arduino File support using std::fstream
  * @author Phil Schatzmann
- * @ingroup player
+ * @ingroup io
  * @copyright GPLv3
  */
 class VFSFile : public Stream {
@@ -67,24 +67,24 @@ class VFSFile : public Stream {
 
   virtual void end() { stream.close(); }
 
-  virtual int print(const char* str) NOARD_OVR {
+  virtual size_t print(const char* str) NOARD_OVR {
     stream << str;
     return strlen(str);
   }
 
-  virtual int println(const char* str = "") NOARD_OVR {
+  virtual size_t println(const char* str = "") NOARD_OVR {
     stream << str << "\n";
     return strlen(str) + 1;
   }
 
-  virtual int print(int number) NOARD_OVR {
+  virtual size_t print(int number) NOARD_OVR {
     char buffer[80];
     int len = snprintf(buffer, 80, "%d", number);
     print(buffer);
     return len;
   }
 
-  virtual int println(int number) {
+  virtual size_t println(int number) {
     char buffer[80];
     int len = snprintf(buffer, 80, "%d\n", number);
     print(buffer);
@@ -93,7 +93,7 @@ class VFSFile : public Stream {
 
   virtual void flush() override { stream.flush(); }
 
- 
+
   virtual size_t write(uint8_t* str, size_t len) {
      stream.write((const char*)str, len);
      return len;
