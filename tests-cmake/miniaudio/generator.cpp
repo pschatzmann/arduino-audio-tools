@@ -1,7 +1,6 @@
 // Simple wrapper for Arduino sketch to compilable with cpp in cmake
 #include "AudioTools.h"
 #include "AudioTools/AudioLibs/MiniAudioStream.h"
-#include "AudioTools/Disk/SDtdioStream.h"
 
 //LinuxStdio out;                            // Output to stdio on Desktop
 MiniAudioStream out;                         // Output to MiniAudioStream

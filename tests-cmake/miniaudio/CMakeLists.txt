@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.20)
 
 
 # set the project name
-project(generator)
+project(generator-miniaudio)
 set (CMAKE_CXX_STANDARD 11)
 set (DCMAKE_CXX_FLAGS "-Werror")
 set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -ldl -lpthread -lm")
@@ -23,14 +23,14 @@ file(DOWNLOAD https://raw.githubusercontent.com/mackron/miniaudio/master/miniaud
 
 
 # build sketch as executable
-add_executable (generator generator.cpp)
+add_executable (generator-miniaudio generator.cpp)
 
 # set preprocessor defines
-target_compile_definitions(generator PUBLIC -DIS_MIN_DESKTOP)
+target_compile_definitions(generator-miniaudio PUBLIC -DIS_MIN_DESKTOP)
 
 # specify libraries
-target_link_libraries(generator arduino-audio-tools)
+target_link_libraries(generator-miniaudio arduino-audio-tools)
 
 # access to miniaudio in sketch directory
-target_include_directories(generator PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(generator-miniaudio PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
