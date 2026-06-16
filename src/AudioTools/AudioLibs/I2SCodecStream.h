@@ -3,6 +3,7 @@
 #include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/AudioI2S/I2SStream.h"
 
+
 //#pragma GCC diagnostic ignored "-Wclass-memaccess"
 
 // Added to be compatible with the AudioKitStream.h
@@ -16,6 +17,13 @@
 namespace audio_tools {
 // we heavily depend on the audio driver functionality
 using namespace audio_driver;
+
+// The legacy class name was DriverPins
+#if !defined(AUDIO_DRIVER_USE_NEW_API)
+  using DriverDeviceInfo = DriverPins;
+#endif
+
+
 /**
  * @brief  Configuration for I2SCodecStream
  * @ingroup io
