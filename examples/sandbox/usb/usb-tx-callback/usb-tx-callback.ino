@@ -1,5 +1,5 @@
 /**
- * @file usb-device-tx-callback.ino
+ * @file usb-tx-callback.ino
  * @brief USB Audio TX using USBAudioDevice directly with a callback.
  *
  * This example shows the lower-level API: instead of using USBAudioStream,
@@ -15,17 +15,21 @@
  * @note this example is more efficient than usb-tx.ino because it avoids the
  * overhead of the USBAudioStream layer, but it also requires more manual
  * handling of the USB stack and audio generation.
+ *
+ * @note ESP32-S3 board setting: Tools → USB CDC On Boot → Disabled
+ *   TinyUSB must not be started by the bootloader. With it disabled,
+ *   Serial maps to UART (Serial0) and USB is started only by dev.begin().
+ *   USB-Mode must be set to OTG-OTG (TinyUSB))!  
+ *
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 #include "AudioTools.h"
 #include "AudioTools/Sandbox/USB/USBAudioDevice.h"
 
-// ── Audio source ─────────────────────────────────────────────────────────────
+AudioInfo info(44100, 2, 16);
 SineGenerator<int16_t> sine(32000);
 GeneratedSoundStream<int16_t> sound(sine);
-
-// ── USB device ───────────────────────────────────────────────────────────────
 USBAudioDevice dev;
 
 // ── TX callback: fill each USB packet with sine audio ────────────────────────
@@ -35,15 +39,14 @@ uint16_t onTx(uint8_t* data, uint16_t len) {
 
 void setup() {
   Serial.begin(115200);
-  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
+
+  // start generating the sine wave at 440 Hz (A4) with the default audio config
+  sine.begin(info, N_B4);
 
   USBAudioConfig cfg = dev.defaultConfig(TX_MODE);
-  cfg.sample_rate = 44100;
-  cfg.channels = 2;
-  cfg.bits_per_sample = 16;
-
-  sine.begin(cfg, N_B4);
-
+  cfg.copyFrom(info);
+  cfg.begin_usb = true;
   dev.setTxCallback(onTx);
   dev.begin(cfg);  // begin() calls beginUSB() internally
 }
