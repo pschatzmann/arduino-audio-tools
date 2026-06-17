@@ -5,6 +5,8 @@
 #include "tusb.h"
 #include "USBAudioConfig.h"
 
+#define USB_DESCR_MAX_LEN 512
+
 namespace audio_tools {
 
 /**
@@ -63,7 +65,7 @@ class USBAudio2DescriptorBuilder {
 
   // Same but with an explicit first (AC) interface number.
   const uint8_t* buildFullDescriptor(uint8_t first_itf, uint16_t* outLen) {
-    static uint8_t desc[512];
+    static uint8_t desc[USB_DESCR_MAX_LEN];
     uint8_t* p = desc;
 
     const uint8_t itf_ac  = first_itf;
@@ -138,6 +140,7 @@ class USBAudio2DescriptorBuilder {
     }
 
     *outLen = (uint16_t)(p - desc);
+    assert(*outLen <= USB_DESCR_MAX_LEN);
     return desc;
   }
 

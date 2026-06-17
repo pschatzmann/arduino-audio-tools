@@ -59,9 +59,8 @@ extern "C" {
 #define TUSB_FIFO_CONFIG(f, buf, d, ov) tu_fifo_config(f, buf, d, 1, ov)
 // Ensure control selector and request constants are available on old TinyUSB
 // too
-#ifndef AUDIO_CS_AC_INTERFACE_INPUT_TERMINAL
-#define AUDIO_CS_AC_INTERFACE_INPUT_TERMINAL \
-  AUDIO10_CS_AC_INTERFACE_INPUT_TERMINAL
+#ifndef AUDIO10_CS_AC_INTERFACE_INPUT_TERMINAL
+#define AUDIO10_CS_AC_INTERFACE_INPUT_TERMINAL AUDIO_CS_AC_INTERFACE_INPUT_TERMINAL
 #endif
 #ifndef AUDIO_CS_CTRL_CLK_VALID
 #define AUDIO_CS_CTRL_CLK_VALID 0x02u
