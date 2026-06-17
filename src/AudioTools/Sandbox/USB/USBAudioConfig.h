@@ -40,9 +40,18 @@ struct USBAudioConfig : public AudioInfo {
   /// Larger values reduce the risk of underrun/overrun at the cost of latency.
   uint8_t fifo_packets = 16;
 
+  // ── Device identity ───────────────────────────────────────────────────────
+  uint16_t    vid          = 0xCafe;
+  uint16_t    pid          = 0x4002;
+  const char* manufacturer = "Audio Tools";
+  const char* product      = "USB Audio";
+  const char* serial       = "000001";
+  bool        self_powered = true;
+  uint8_t     max_power_ma = 100;
+
   // ── Advanced ──────────────────────────────────────────────────────────────
   /// Enable isochronous feedback endpoint so the host can adjust its clock.
-  bool enable_feedback_ep = false;
+  bool enable_feedback_ep = true;
 
   /// Use a flat contiguous buffer for RX instead of a circular FIFO.
   /// Required when the downstream audio driver uses DMA.

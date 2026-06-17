@@ -136,7 +136,6 @@ class USBAudio2DescriptorBuilder {
     return buildFullDescriptor(outLen);
   }
 
- public:
   int audioFunctionsCount() const {
     return (p_config->enable_ep_in ? 1 : 0) + (p_config->enable_ep_out ? 1 : 0);
   }
