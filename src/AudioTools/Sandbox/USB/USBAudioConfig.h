@@ -60,6 +60,12 @@ struct USBAudioConfig : public AudioInfo {
   /// Required when the upstream audio driver uses DMA.
   bool use_linear_buffer_tx = false;
 
+  // ── ESP32-specific ────────────────────────────────────────────────────────
+  /// When true (default), beginUSB() calls USB.begin() automatically.
+  /// Set to false for composite USB (e.g. Audio + CDC): register all
+  /// interfaces first, then call USB.begin() yourself.
+  bool begin_usb = false;
+
   // ── Zephyr-specific ───────────────────────────────────────────────────────
   /// Terminal ID reported to Zephyr usbd_uac2 callbacks (ignored on TinyUSB).
   /// TX_MODE: Output Terminal ID (device → host, ISO IN).

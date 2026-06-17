@@ -44,6 +44,16 @@ class USBAudio2DescriptorBuilder {
                       ((p_config->sample_rate + 999) / 1000));
   }
 
+  // True when the explicit-feedback endpoint should appear in the descriptor.
+  // Mirrors getEnableFeedbackEp() in USBAudioDeviceBase: feedback is only valid
+  // for a pure OUT (speaker) path — with an IN endpoint present the host uses
+  // the IN stream as implicit feedback, and TX-only mode has no OUT EP at all.
+  bool enableFeedbackEp() const {
+    return p_config->enable_feedback_ep
+        && p_config->enable_ep_out
+        && !p_config->enable_ep_in;
+  }
+
   // Build the complete audio-function descriptor using interface numbers from
   // config.  Returns a pointer to an internal static buffer; *outLen receives
   // the total byte count.
@@ -101,14 +111,14 @@ class USBAudio2DescriptorBuilder {
 
     // ── OUT AS Interface ─────────────────────────────────────────────────────
     if (p_config->enable_ep_out) {
-      const uint8_t nEps = p_config->enable_feedback_ep ? 2 : 1;
+      const uint8_t nEps = enableFeedbackEp() ? 2 : 1;
       p = writeStdIface(p, itf_as, 0, 0,    0x01, 0x02, 0x20); // alt=0 zero BW
       p = writeStdIface(p, itf_as, 1, nEps, 0x01, 0x02, 0x20); // alt=1 active
       p = writeCsAsInterface(p, ENTITY_IT1);  // links to USB Streaming IT
       p = writeFormatType(p);
       p = writeIsoEndpoint(p, p_config->ep_out);
       p = writeCsIsoEndpoint(p);
-      if (p_config->enable_feedback_ep) {
+      if (enableFeedbackEp()) {
         p = writeFeedbackEndpoint(p, p_config->ep_fb);
       }
       ++itf_as;
@@ -303,10 +313,17 @@ class USBAudio2DescriptorBuilder {
   // Standard Isochronous Endpoint Descriptor (7 bytes)
   uint8_t* writeIsoEndpoint(uint8_t* p, uint8_t ep_addr) {
     const uint16_t pkt = calcMaxPacketSize();
+    // bmAttributes: Isochronous (01) + sync type (bits[3:2]) + usage=data (00)
+    // OUT endpoints: async (01=async → 0x05) when a feedback EP accompanies
+    //                them; sync (00=no-sync → 0x01) otherwise.
+    // IN endpoints: always sync (0x01) — the device drives the clock.
+    bool const is_out = !(ep_addr & 0x80u);
+    bool const async  = is_out && enableFeedbackEp();
+    uint8_t const bmAttr = async ? 0x05u : 0x01u;
     *p++ = 7;
     *p++ = 0x05;        // ENDPOINT
     *p++ = ep_addr;
-    *p++ = 0x05;        // Isochronous, Asynchronous
+    *p++ = bmAttr;
     *p++ = (uint8_t)(pkt & 0xFF);
     *p++ = (uint8_t)(pkt >> 8);
     *p++ = 0x01;        // bInterval (1 = every frame for FS; host uses 125 µs for HS)

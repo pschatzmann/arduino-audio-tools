@@ -69,7 +69,7 @@ class USBAudioDeviceESP32 : public USBAudioDeviceBase {
                              descriptorCallback);
 
     if (!is_active_) {
-      USB.begin();
+      if (config_.begin_usb) USB.begin();
       is_active_ = true;
     } else {
       reenumerateUSB();
@@ -95,6 +95,9 @@ class USBAudioDeviceESP32 : public USBAudioDeviceBase {
 
   static uint16_t descriptorCallback(uint8_t* dst, uint8_t* itf) {
     auto& dev = static_cast<USBAudioDeviceESP32&>(USBAudioDeviceBase::activeInstance());
+    // *itf carries the running interface index: set our base from it so that
+    // composite configurations (e.g. CDC + Audio) get non-overlapping numbers.
+    if (itf) dev.config_.itf_num_ac = *itf;
     uint16_t len = 0;
     const uint8_t* desc = dev.getDescriptor(&len);
     if (dst && desc) memcpy(dst, desc, len);

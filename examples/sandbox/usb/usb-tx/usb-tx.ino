@@ -10,38 +10,45 @@
  *
  * Data flow:
  *   SineGenerator → GeneratedSoundStream → StreamCopy → USBAudioStream
- *   → tx_queue_ → process() → USB isochronous IN endpoint → host
+ *   → tx_queue_ → audiod_xfer_cb → USB isochronous IN endpoint → host
+ *
+ * @note ESP32-S3 board setting: Tools → USB CDC On Boot → Disabled
+ *   The native USB stack must be started by this sketch, not by the boot
+ *   loader. If USB CDC On Boot is enabled, TinyUSB starts before setup()
+ *   runs and the audio interface registration will fail with
+ *   "TinyUSB has already started! Interface AUDIO not enabled".
+ *   With it disabled, Serial maps to UART (Serial0) automatically.
  *
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 #include "AudioTools.h"
 #include "AudioTools/Sandbox/USB/USBAudioStream.h"
- 
+
 AudioInfo info(44100, 2, 16);
-SineGenerator<int16_t> sineWave(32000);                
-GeneratedSoundStream<int16_t> sound(sineWave);            
-USBAudioStream out;  
-StreamCopy copier(out, sound);                             
+SineGenerator<int16_t> sineWave(32000);
+GeneratedSoundStream<int16_t> sound(sineWave);
+USBAudioStream out;
+StreamCopy copier(out, sound, 80);
 
-// Arduino Setup
-void setup(void) {  
-  // Open Serial 
+void setup(void) {
+  // Use UART Serial so USB is not started before out.begin().
+  // On ESP32-S3 with "USB CDC On Boot: Disabled", Serial = Serial0 (UART).
   Serial.begin(115200);
-  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
-  // start USB
-  Serial.println("starting I2S...");
+  // Start generating the sine wave at 440 Hz (A4) with the default audio config.
+  sineWave.begin(info, N_B4);
+
+  // USB audio must be started before any other USB device (e.g. USB CDC).
   auto config = out.defaultConfig(TX_MODE);
-  config.copyFrom(info); 
+  config.copyFrom(info);
+  config.begin_usb = true;
   out.begin(config);
 
-  // Setup sine wave
-  sineWave.begin(info, N_B4);
-  Serial.println("started...");
+  Serial.println("USB audio started");
 }
 
-// Arduino loop - copy sound to out
 void loop() {
   copier.copy();
   out.process();

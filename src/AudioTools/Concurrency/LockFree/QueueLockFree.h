@@ -63,6 +63,12 @@ class QueueLockFree {
 
   size_t capacity() const { return capacity_value; }
 
+  size_t availableForWrite() const {
+    size_t head = head_pos.load(std::memory_order_seq_cst);
+    size_t tail = tail_pos.load(std::memory_order_seq_cst);
+    return capacity_value - (tail - head);
+  } 
+
   bool empty() const { return size() == 0; }
 
   size_t size() const {
