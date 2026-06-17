@@ -1,10 +1,13 @@
 #pragma once
-#include "USBAudioDeviceBase.h"
 
 // Abstraction which provides the platform specific USBAudioDevice class implementation
-
+#include "AudioToolsConfig.h"
 #if defined(USE_TINYUSB)
-#include "USBAudioDeviceTinyUSB.h"
+#  include "USBAudioDeviceBase.h"
+#  include "USBAudioDeviceTinyUSB.h"
 #elif defined(ESP32)
-#include "USBAudioDeviceESP32.h"
+#  include "USBAudioDeviceBase.h"
+#  include "USBAudioDeviceESP32.h"
+#elif defined(USE_ZEPHYR)
+#  include "USBAudioDeviceZephyr.h"
 #endif

@@ -150,7 +150,7 @@ class USBAudioStream : public AudioStream {
     return is_active_ ? (int)(tx_queue_.capacity() - tx_queue_.size()) : 0;
   }
 
-  operator bool() override { return is_active_ && tud_mounted(); }
+  operator bool() override { return is_active_ && dev_.mounted(); }
 
  protected:
   Device dev_;

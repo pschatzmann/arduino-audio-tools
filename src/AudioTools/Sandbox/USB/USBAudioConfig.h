@@ -59,6 +59,13 @@ struct USBAudioConfig : public AudioInfo {
   /// Use a flat contiguous buffer for TX instead of a circular FIFO.
   /// Required when the upstream audio driver uses DMA.
   bool use_linear_buffer_tx = false;
+
+  // ── Zephyr-specific ───────────────────────────────────────────────────────
+  /// Terminal ID reported to Zephyr usbd_uac2 callbacks (ignored on TinyUSB).
+  /// TX_MODE: Output Terminal ID (device → host, ISO IN).
+  /// RX_MODE: Input Terminal ID  (host → device, ISO OUT).
+  /// Must match the UAC2 node topology in the board device tree.
+  uint8_t terminal_id = 1;
 };
 
 }  // namespace audio_tools
