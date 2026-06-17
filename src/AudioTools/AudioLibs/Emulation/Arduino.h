@@ -229,6 +229,7 @@ inline void pinMode(digital_pin_t pin, int mode) {
 }
 
 inline void delay(uint32_t ms) { vTaskDelay(ms / portTICK_PERIOD_MS); }
+inline void yield() { taskYIELD(); }
 inline uint32_t millis() { return (xTaskGetTickCount() * portTICK_PERIOD_MS); }
 inline void delayMicroseconds(uint32_t ms) { esp_rom_delay_us(ms); }
 inline uint64_t micros() {
@@ -258,7 +259,7 @@ inline void delayMicroseconds(uint32_t us) {
   k_busy_wait(us);
 }
 inline uint64_t micros() { return k_cyc_to_us_floor64(k_cycle_get_64()); }
-// delay and millis has been defined
+inline void yield() { k_yield(); }
 
 
 /// Zephyr GPIO spec as digital_pin_t

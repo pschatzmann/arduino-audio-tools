@@ -8,6 +8,6 @@
 #elif defined(ESP32)
 #  include "USBAudioDeviceBase.h"
 #  include "USBAudioDeviceESP32.h"
-#elif defined(USE_ZEPHYR)
+#elif defined(IS_ZEPHYR)
 #  include "USBAudioDeviceZephyr.h"
 #endif

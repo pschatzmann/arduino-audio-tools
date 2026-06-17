@@ -124,8 +124,8 @@ class USBAudioStream : public AudioStream {
 
   /// Call regularly in loop() or via ITask to keep audio flowing.
   void process() {
-    dev_.process();  // tud_task() called inside on TinyUSB platforms
-    yield();
+    dev_.process();
+    yield();  
   }
 
 
