@@ -2,63 +2,54 @@
 #include "stdint.h"
 #include "AudioTools/CoreAudio/AudioTypes.h"
 
-
 namespace audio_tools {
-
-
 
 #ifdef STANDALONE_USB
 /**
- * @brief Configuration structure for USB Audio.
- *
- * This struct holds all configuration parameters for USB audio devices, including
- * sample rate, channel count, endpoint addresses, buffer sizes, and feature flags.
- *
- * Members are used to control the behavior and capabilities of the USB audio interface.
+ * @brief Configuration for USB Audio (standalone build without AudioInfo).
  */
-struct USBAudioConfig  {
-  uint32_t sample_rate = 44100;  // Default sample rate
-  uint8_t channels = 2;          // Default number of channels
-  uint8_t bits_per_sample = 16;  // Default bits per sample
+struct USBAudioConfig {
+  uint32_t sample_rate     = 44100;
+  uint8_t  channels        = 2;
+  uint8_t  bits_per_sample = 16;
 #else
 /**
- * @brief Configuration structure for USB Audio, inheriting from AudioInfo.
- *
- * This struct extends AudioInfo and adds USB-specific configuration parameters such as
- * endpoint addresses, buffer sizes, and feature flags for USB audio streaming.
+ * @brief Configuration for USB Audio (inherits sample_rate / channels /
+ *        bits_per_sample from AudioInfo).
  */
 struct USBAudioConfig : public AudioInfo {
 #endif
-  uint8_t entity_id_input_terminal = 1;
-  uint8_t entity_id_feature_unit = 2;
-  uint8_t entity_id_output_terminal = 3;
 
-  uint8_t ep_in = 0x81;   // IN endpoint address (default 0x81)
-  uint8_t ep_out = 0x01;  // OUT endpoint address (default 0x01)
-  uint16_t ep_in_size = 256;
-  uint16_t ep_out_size = 256;
-  //uint8_t interface_num = 1;  // Audio streaming interface number
-  // Moved feature flags and buffer sizes:
-  bool enable_ep_in = true;
-  bool enable_ep_out = true;
+  // ── Direction ─────────────────────────────────────────────────────────────
+  bool enable_ep_in  = true;   ///< device → host  (capture / microphone)
+  bool enable_ep_out = true;   ///< host   → device (playback / speaker)
+
+  // ── USB endpoint addresses ────────────────────────────────────────────────
+  /// Must match the TinyUSB / hardware endpoint assignment.
+  uint8_t ep_in  = 0x81;
+  uint8_t ep_out = 0x01;
+  uint8_t ep_fb = 0x82;
+
+  // ── Interface numbering ───────────────────────────────────────────────────
+  /// Interface number of the Audio Control interface.
+  /// Increment when other USB functions (CDC, HID …) occupy lower numbers.
+  uint8_t itf_num_ac = 0;
+
+  // ── Buffering ─────────────────────────────────────────────────────────────
+  /// Depth of the audio FIFO expressed as a number of 1 ms packets.
+  /// Larger values reduce the risk of underrun/overrun at the cost of latency.
+  uint8_t fifo_packets = 16;
+
+  // ── Advanced ──────────────────────────────────────────────────────────────
+  /// Enable isochronous feedback endpoint so the host can adjust its clock.
   bool enable_feedback_ep = false;
-  bool enable_ep_in_flow_control = false;
-  bool enable_interrupt_ep = false;
-  bool enable_fifo_mutex = false;
-  bool use_linear_buffer_rx = false;
-  bool use_linear_buffer_tx = false;
-  int audio_count = 1;                 // Number of audio functions (ex CFG_TUD_AUDIO)
-  int ctrl_buf_size_per_func = 64;     // Control buffer size per function
-  int ep_in_buf_size_per_func = 256;   // IN endpoint buffer size per function
-  int ep_out_buf_size_per_func = 256;  // OUT endpoint buffer size per function
-  int lin_buf_in_size_per_func = 512;  // Linear buffer size for IN
 
-  int audio_functions_count() const {
-    int count = 0;
-    if (enable_ep_in) count++;
-    if (enable_ep_out) count++;
-    return audio_count;
-  }
+  /// Use a flat contiguous buffer for RX instead of a circular FIFO.
+  /// Required when the downstream audio driver uses DMA.
+  bool use_linear_buffer_rx = false;
+  /// Use a flat contiguous buffer for TX instead of a circular FIFO.
+  /// Required when the upstream audio driver uses DMA.
+  bool use_linear_buffer_tx = false;
 };
 
 }  // namespace audio_tools

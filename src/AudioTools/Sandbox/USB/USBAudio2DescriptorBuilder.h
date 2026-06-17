@@ -1,160 +1,343 @@
+#pragma once
 #include <cstdint>
 #include <cstring>
-#include <functional>
 
 #include "tusb.h"
 #include "USBAudioConfig.h"
 
-
 namespace audio_tools {
 
-// Audio 2.0 Descriptor Generator
+/**
+ * @brief USB Audio Class 2.0 descriptor generator.
+ *
+ * Builds the complete audio-function descriptor block (IAD + AC interface +
+ * AS interface(s)) that must be included in the device configuration descriptor.
+ *
+ * Descriptor layout produced by buildFullDescriptor():
+ *   IAD
+ *   Standard AC Interface (0 EPs)
+ *     CS AC Header  (wTotalLength auto-patched)
+ *     Clock Source
+ *     [OUT path] Input Terminal (USB Streaming) + Feature Unit + Output Terminal (Speaker)
+ *     [IN  path] Input Terminal (Microphone)    + Feature Unit + Output Terminal (USB Streaming)
+ *   [OUT AS Interface] alt=0 (zero BW) + alt=1 (CS AS + Format + ISO EP + CS ISO EP)
+ *   [IN  AS Interface] alt=0 (zero BW) + alt=1 (CS AS + Format + ISO EP + CS ISO EP)
+ */
 class USBAudio2DescriptorBuilder {
  public:
-  USBAudio2DescriptorBuilder(USBAudioConfig &cfg){
-    p_config = &cfg;
-  }
+  // UAC2 entity IDs — assigned sequentially from 1.
+  // Chain 1 is used for the OUT path (or the only path in pure-IN mode).
+  // Chain 2 is used for the IN path in RXTX mode.
+  static constexpr uint8_t ENTITY_CLOCK = 1;
+  static constexpr uint8_t ENTITY_IT1   = 2;  ///< first  Input Terminal
+  static constexpr uint8_t ENTITY_FU1   = 3;  ///< first  Feature Unit
+  static constexpr uint8_t ENTITY_OT1   = 4;  ///< first  Output Terminal
+  static constexpr uint8_t ENTITY_IT2   = 5;  ///< second Input Terminal  (RXTX)
+  static constexpr uint8_t ENTITY_FU2   = 6;  ///< second Feature Unit    (RXTX)
+  static constexpr uint8_t ENTITY_OT2   = 7;  ///< second Output Terminal (RXTX)
 
+  explicit USBAudio2DescriptorBuilder(USBAudioConfig& cfg) : p_config(&cfg) {}
+
+  // Isochronous packet size for one 1 ms frame at the configured rate/format.
   uint16_t calcMaxPacketSize() const {
-    uint16_t bytesPerFrame = (p_config->bits_per_sample / 8) * p_config->channels;
-    uint16_t samplesPerMs = (p_config->sample_rate + 999) / 1000;
-    return bytesPerFrame * samplesPerMs;
+    return (uint16_t)((p_config->bits_per_sample / 8) * p_config->channels *
+                      ((p_config->sample_rate + 999) / 1000));
   }
 
-  const uint8_t* buildDescriptor(uint8_t itf, uint8_t alt, uint16_t* outLen) {
-    static uint8_t desc[256];
+  // Build the complete audio-function descriptor using interface numbers from
+  // config.  Returns a pointer to an internal static buffer; *outLen receives
+  // the total byte count.
+  const uint8_t* buildFullDescriptor(uint16_t* outLen) {
+    return buildFullDescriptor(p_config->itf_num_ac, outLen);
+  }
+
+  // Same but with an explicit first (AC) interface number.
+  const uint8_t* buildFullDescriptor(uint8_t first_itf, uint16_t* outLen) {
+    static uint8_t desc[512];
     uint8_t* p = desc;
 
-    if (alt == 0) {
-      p = addStandardInterfaceDesc(p, itf, alt, 0);
-    } else {
-      p = addStandardInterfaceDesc(p, itf, alt, 1);
-      p = addCsInterfaceHeader(p);
-      p = addInputTerminalDesc(p);
-      p = addFeatureUnitDesc(p);
-      p = addOutputTerminalDesc(p);
-      p = addFormatTypeDesc(p);
-      p = addIsoDataEndpointDesc(p);
-      p = addCsIsoEndpointDesc(p);
+    const uint8_t itf_ac  = first_itf;
+    uint8_t       itf_as  = (uint8_t)(first_itf + 1);
+    const uint8_t num_as  = (uint8_t)audioFunctionsCount();
+
+    // ── IAD ──────────────────────────────────────────────────────────────────
+    p = writeIAD(p, itf_ac, (uint8_t)(1 + num_as));
+
+    // ── Standard AC Interface (no EPs) ───────────────────────────────────────
+    p = writeStdIface(p, itf_ac, 0, 0, 0x01 /*AUDIO*/, 0x01 /*CONTROL*/, 0x20 /*UAC2*/);
+
+    // ── CS AC entities — patch wTotalLength after ────────────────────────────
+    uint8_t* cs_ac_start = p;
+    p = writeCsAcHeader(p);
+    p = writeClockSource(p, ENTITY_CLOCK);
+
+    if (p_config->enable_ep_out) {
+      // OUT path: USB Streaming input → Feature Unit → Speaker output
+      p = writeInputTerminal(p, ENTITY_IT1,
+                             0x0101 /*USB Streaming*/, ENTITY_CLOCK);
+      p = writeFeatureUnit(p, ENTITY_FU1, ENTITY_IT1);
+      p = writeOutputTerminal(p, ENTITY_OT1,
+                              0x0301 /*Speaker*/, ENTITY_FU1,
+                              ENTITY_CLOCK);
     }
 
-    *outLen = static_cast<uint16_t>(p - desc);
+    if (p_config->enable_ep_in) {
+      // IN path: Microphone input → Feature Unit → USB Streaming output.
+      // Pure-IN mode reuses chain 1 IDs; RXTX mode uses chain 2 IDs.
+      const bool    rxtx = p_config->enable_ep_out;
+      const uint8_t it   = rxtx ? ENTITY_IT2 : ENTITY_IT1;
+      const uint8_t fu   = rxtx ? ENTITY_FU2 : ENTITY_FU1;
+      const uint8_t ot   = rxtx ? ENTITY_OT2 : ENTITY_OT1;
+      p = writeInputTerminal(p, it, 0x0201 /*Microphone*/, ENTITY_CLOCK);
+      p = writeFeatureUnit(p, fu, it);
+      p = writeOutputTerminal(p, ot, 0x0101 /*USB Streaming*/, fu,
+                              ENTITY_CLOCK);
+    }
+
+    // Patch wTotalLength (bytes 6-7 of CS AC Header)
+    const uint16_t cs_ac_len = (uint16_t)(p - cs_ac_start);
+    cs_ac_start[6] = (uint8_t)(cs_ac_len & 0xFF);
+    cs_ac_start[7] = (uint8_t)(cs_ac_len >> 8);
+
+    // ── OUT AS Interface ─────────────────────────────────────────────────────
+    if (p_config->enable_ep_out) {
+      const uint8_t nEps = p_config->enable_feedback_ep ? 2 : 1;
+      p = writeStdIface(p, itf_as, 0, 0,    0x01, 0x02, 0x20); // alt=0 zero BW
+      p = writeStdIface(p, itf_as, 1, nEps, 0x01, 0x02, 0x20); // alt=1 active
+      p = writeCsAsInterface(p, ENTITY_IT1);  // links to USB Streaming IT
+      p = writeFormatType(p);
+      p = writeIsoEndpoint(p, p_config->ep_out);
+      p = writeCsIsoEndpoint(p);
+      if (p_config->enable_feedback_ep) {
+        p = writeFeedbackEndpoint(p, p_config->ep_fb);
+      }
+      ++itf_as;
+    }
+
+    // ── IN AS Interface ──────────────────────────────────────────────────────
+    if (p_config->enable_ep_in) {
+      // Links to the Output Terminal that has USB Streaming type
+      const uint8_t ot = p_config->enable_ep_out ? ENTITY_OT2
+                                                  : ENTITY_OT1;
+      p = writeStdIface(p, itf_as, 0, 0, 0x01, 0x02, 0x20); // alt=0 zero BW
+      p = writeStdIface(p, itf_as, 1, 1, 0x01, 0x02, 0x20); // alt=1 active
+      p = writeCsAsInterface(p, ot);
+      p = writeFormatType(p);
+      p = writeIsoEndpoint(p, p_config->ep_in);
+      p = writeCsIsoEndpoint(p);
+    }
+
+    *outLen = (uint16_t)(p - desc);
     return desc;
   }
 
+  // Kept for backward compatibility with existing call sites.
+  const uint8_t* buildDescriptor(uint8_t /*itf*/, uint8_t /*alt*/, uint16_t* outLen) {
+    return buildFullDescriptor(outLen);
+  }
+
+ public:
+  int audioFunctionsCount() const {
+    return (p_config->enable_ep_in ? 1 : 0) + (p_config->enable_ep_out ? 1 : 0);
+  }
+
  private:
-  uint8_t* addStandardInterfaceDesc(uint8_t* p, uint8_t itf, uint8_t alt,
-                                    uint8_t numEps) {
-    *p++ = 9;       // bLength
-    *p++ = 0x04;    // bDescriptorType = Interface
-    *p++ = itf;     // bInterfaceNumber
-    *p++ = alt;     // bAlternateSetting
-    *p++ = numEps;  // bNumEndpoints
-    *p++ = 0x01;    // bInterfaceClass (AUDIO)
-    *p++ = 0x02;    // bInterfaceSubClass (Streaming)
-    *p++ = 0x20;    // bInterfaceProtocol (2.0)
-    *p++ = 0;       // iInterface
+  USBAudioConfig* p_config;
+
+  // ── helpers ─────────────────────────────────────────────────────────────────
+
+  uint32_t channelConfig() const {
+    // Stereo: FL+FR = bits 0-1; mono: FL = bit 0; >2ch: lower N bits.
+    if (p_config->channels == 1) return 0x00000001u;
+    if (p_config->channels == 2) return 0x00000003u;
+    return (1u << p_config->channels) - 1u;
+  }
+
+  // ── descriptor writers ──────────────────────────────────────────────────────
+
+  // Interface Association Descriptor (8 bytes)
+  uint8_t* writeIAD(uint8_t* p, uint8_t first_itf, uint8_t count) {
+    *p++ = 8;
+    *p++ = 0x0B;        // INTERFACE_ASSOCIATION
+    *p++ = first_itf;
+    *p++ = count;
+    *p++ = 0x01;        // bFunctionClass  AUDIO
+    *p++ = 0x00;        // bFunctionSubClass
+    *p++ = 0x20;        // bFunctionProtocol UAC2
+    *p++ = 0x00;        // iFunction
     return p;
   }
 
-  uint8_t* addCsInterfaceHeader(uint8_t* p) {
-    *p++ = 7;     // bLength
-    *p++ = 0x24;  // CS_INTERFACE
-    *p++ = 0x01;  // HEADER subtype
-    *p++ = 0x00;
-    *p++ = 0x02;  // bcdADC = 2.00
-    *p++ = 0x01;  // bCategory = 1 (Speaker)
-    *p++ = 0x00;  // wTotalLength (placeholder)
+  // Standard Interface Descriptor (9 bytes)
+  uint8_t* writeStdIface(uint8_t* p, uint8_t itf, uint8_t alt,
+                          uint8_t nEps, uint8_t cls, uint8_t sub, uint8_t proto) {
+    *p++ = 9;
+    *p++ = 0x04;        // INTERFACE
+    *p++ = itf;
+    *p++ = alt;
+    *p++ = nEps;
+    *p++ = cls;
+    *p++ = sub;
+    *p++ = proto;
+    *p++ = 0;           // iInterface
     return p;
   }
 
-  uint8_t* addInputTerminalDesc(uint8_t* p) {
-    *p++ = 17;                      // bLength
-    *p++ = 0x24;                    // CS_INTERFACE
-    *p++ = 0x02;                    // INPUT_TERMINAL subtype
-    *p++ = p_config->entity_id_input_terminal;  // bTerminalID
-    *p++ = 0x01;
-    *p++ = 0x01;       // wTerminalType = USB Streaming
-    *p++ = 0x00;       // bAssocTerminal
-    *p++ = p_config->channels;  // bNrChannels
-    *p++ = 0x03;
+  // UAC2 CS AC Interface Header (9 bytes).
+  // Caller patches wTotalLength at offsets [6] and [7].
+  uint8_t* writeCsAcHeader(uint8_t* p) {
+    *p++ = 9;
+    *p++ = 0x24;        // CS_INTERFACE
+    *p++ = 0x01;        // HEADER
     *p++ = 0x00;
-    *p++ = 0x00;
-    *p++ = 0x00;  // wChannelConfig
-    *p++ = 0;     // iChannelNames
-    *p++ = 0;     // iTerminal
+    *p++ = 0x02;        // bcdADC 2.00
+    *p++ = 0x08;        // bCategory IO_BOX (generic)
+    *p++ = 0x00;        // wTotalLength LSB — patched by caller
+    *p++ = 0x00;        // wTotalLength MSB — patched by caller
+    *p++ = 0x00;        // bmControls
     return p;
   }
 
-  uint8_t* addFeatureUnitDesc(uint8_t* p) {
-    uint8_t length = 7 + (p_config->channels + 1) * 2;
-    *p++ = length;                  // bLength
-    *p++ = 0x24;                    // CS_INTERFACE
-    *p++ = 0x06;                    // FEATURE_UNIT subtype
-    *p++ = p_config->entity_id_feature_unit;    // bUnitID
-    *p++ = p_config->entity_id_input_terminal;  // bSourceID
-    *p++ = 0x01;                    // bControlSize
-    *p++ = 0x01;                    // bmaControls[0] (Master Mute)
-    for (uint8_t i = 1; i <= p_config->channels; ++i) {
-      *p++ = 0x03;  // bmaControls[i] (Mute + Volume)
+  // UAC2 Clock Source Descriptor (8 bytes)
+  uint8_t* writeClockSource(uint8_t* p, uint8_t clock_id) {
+    *p++ = 8;
+    *p++ = 0x24;        // CS_INTERFACE
+    *p++ = 0x0A;        // CLOCK_SOURCE
+    *p++ = clock_id;
+    *p++ = 0x01;        // bmAttributes: internal fixed clock
+    *p++ = 0x05;        // bmControls: freq read-only (01b), validity read-only (01b)
+    *p++ = 0x00;        // bAssocTerminal
+    *p++ = 0x00;        // iClockSource
+    return p;
+  }
+
+  // UAC2 Input Terminal Descriptor (17 bytes)
+  uint8_t* writeInputTerminal(uint8_t* p, uint8_t term_id,
+                               uint16_t term_type, uint8_t clock_id) {
+    const uint32_t ch_cfg = channelConfig();
+    *p++ = 17;
+    *p++ = 0x24;        // CS_INTERFACE
+    *p++ = 0x02;        // INPUT_TERMINAL
+    *p++ = term_id;
+    *p++ = (uint8_t)(term_type & 0xFF);
+    *p++ = (uint8_t)(term_type >> 8);
+    *p++ = 0x00;        // bAssocTerminal
+    *p++ = clock_id;    // bCSourceID
+    *p++ = p_config->channels;
+    *p++ = (uint8_t)(ch_cfg & 0xFF);
+    *p++ = (uint8_t)((ch_cfg >> 8) & 0xFF);
+    *p++ = (uint8_t)((ch_cfg >> 16) & 0xFF);
+    *p++ = (uint8_t)((ch_cfg >> 24) & 0xFF);
+    *p++ = 0;           // iChannelNames
+    *p++ = 0x00;
+    *p++ = 0x00;        // bmControls
+    *p++ = 0;           // iTerminal
+    return p;
+  }
+
+  // UAC2 Feature Unit Descriptor (6 + (channels+1)*4 bytes)
+  uint8_t* writeFeatureUnit(uint8_t* p, uint8_t unit_id, uint8_t src_id) {
+    const uint8_t len = (uint8_t)(6 + (p_config->channels + 1) * 4);
+    *p++ = len;
+    *p++ = 0x24;        // CS_INTERFACE
+    *p++ = 0x06;        // FEATURE_UNIT
+    *p++ = unit_id;
+    *p++ = src_id;
+    // Master bmaControls[0]: Mute + Volume, host-programmable
+    *p++ = 0x0F; *p++ = 0x00; *p++ = 0x00; *p++ = 0x00;
+    for (uint8_t i = 0; i < p_config->channels; i++) {
+      *p++ = 0x0F; *p++ = 0x00; *p++ = 0x00; *p++ = 0x00;
     }
-    *p++ = 0x00;  // iFeature
+    *p++ = 0x00;        // iFeature
     return p;
   }
 
-  uint8_t* addOutputTerminalDesc(uint8_t* p) {
-    *p++ = 12;                       // bLength
-    *p++ = 0x24;                     // CS_INTERFACE
-    *p++ = 0x03;                     // OUTPUT_TERMINAL subtype
-    *p++ = p_config->entity_id_output_terminal;  // bTerminalID
-    *p++ = 0x01;
-    *p++ = 0x03;                  // wTerminalType = Speaker
-    *p++ = 0x00;                  // bAssocTerminal
-    *p++ = p_config->entity_id_feature_unit;  // bSourceID
-    *p++ = 0x00;                  // iTerminal
-    return p;
-  }
-
-  uint8_t* addFormatTypeDesc(uint8_t* p) {
-    *p++ = 14;                  // bLength
-    *p++ = 0x24;                // CS_INTERFACE
-    *p++ = 0x02;                // FORMAT_TYPE subtype
-    *p++ = 0x01;                // FORMAT_TYPE_I
-    *p++ = p_config->channels;           // bNrChannels
-    *p++ = p_config->bits_per_sample / 8;  // bSubslotSize
-    *p++ = p_config->bits_per_sample;      // bBitResolution
-    *p++ = 1;                   // bSamFreqType
-    *p++ = (uint8_t)(p_config->sample_rate & 0xFF);
-    *p++ = (uint8_t)((p_config->sample_rate >> 8) & 0xFF);
-    *p++ = (uint8_t)((p_config->sample_rate >> 16) & 0xFF);
-    return p;
-  }
-
-  uint8_t* addIsoDataEndpointDesc(uint8_t* p) {
-    uint16_t packetSize = calcMaxPacketSize();
-    *p++ = 7;                         // bLength
-    *p++ = 0x05;                      // ENDPOINT descriptor
-    *p++ = p_config->ep_in;                      // bEndpointAddress
-    *p++ = 0x05;                      // bmAttributes (Isochronous, Async)
-    *p++ = packetSize & 0xFF;         // wMaxPacketSize LSB
-    *p++ = (packetSize >> 8) & 0xFF;  // wMaxPacketSize MSB
-    *p++ = 0x01;                      // bInterval
-    return p;
-  }
-
-  uint8_t* addCsIsoEndpointDesc(uint8_t* p) {
-    *p++ = 8;     // bLength
-    *p++ = 0x25;  // CS_ENDPOINT
-    *p++ = 0x01;  // EP_GENERAL subtype
-    *p++ = 0x00;  // bmAttributes
-    *p++ = 0x00;  // bmControls
+  // UAC2 Output Terminal Descriptor (12 bytes)
+  uint8_t* writeOutputTerminal(uint8_t* p, uint8_t term_id, uint16_t term_type,
+                                uint8_t src_id, uint8_t clock_id) {
+    *p++ = 12;
+    *p++ = 0x24;        // CS_INTERFACE
+    *p++ = 0x03;        // OUTPUT_TERMINAL
+    *p++ = term_id;
+    *p++ = (uint8_t)(term_type & 0xFF);
+    *p++ = (uint8_t)(term_type >> 8);
+    *p++ = 0x00;        // bAssocTerminal
+    *p++ = src_id;      // bSourceID
+    *p++ = clock_id;    // bCSourceID
     *p++ = 0x00;
-    *p++ = 0x00;  // wLockDelayUnits, wLockDelay
+    *p++ = 0x00;        // bmControls
+    *p++ = 0;           // iTerminal
     return p;
   }
 
-  USBAudioConfig *p_config = nullptr;
+  // UAC2 CS AS Interface Descriptor (16 bytes)
+  uint8_t* writeCsAsInterface(uint8_t* p, uint8_t terminal_link) {
+    const uint32_t ch_cfg = channelConfig();
+    *p++ = 16;
+    *p++ = 0x24;        // CS_INTERFACE
+    *p++ = 0x01;        // AS_GENERAL
+    *p++ = terminal_link;
+    *p++ = 0x00;        // bmControls
+    *p++ = 0x01;        // bFormatType TYPE_I
+    // bmFormats: PCM = 0x00000001
+    *p++ = 0x01; *p++ = 0x00; *p++ = 0x00; *p++ = 0x00;
+    *p++ = p_config->channels;
+    *p++ = (uint8_t)(ch_cfg & 0xFF);
+    *p++ = (uint8_t)((ch_cfg >> 8) & 0xFF);
+    *p++ = (uint8_t)((ch_cfg >> 16) & 0xFF);
+    *p++ = (uint8_t)((ch_cfg >> 24) & 0xFF);
+    *p++ = 0;           // iChannelNames
+    return p;
+  }
 
+  // UAC2 Type I Format Type Descriptor (6 bytes)
+  uint8_t* writeFormatType(uint8_t* p) {
+    *p++ = 6;
+    *p++ = 0x24;        // CS_INTERFACE
+    *p++ = 0x02;        // FORMAT_TYPE
+    *p++ = 0x01;        // FORMAT_TYPE_I
+    *p++ = (uint8_t)(p_config->bits_per_sample / 8); // bSubslotSize
+    *p++ = p_config->bits_per_sample;                // bBitResolution
+    return p;
+  }
+
+  // Standard Isochronous Endpoint Descriptor (7 bytes)
+  uint8_t* writeIsoEndpoint(uint8_t* p, uint8_t ep_addr) {
+    const uint16_t pkt = calcMaxPacketSize();
+    *p++ = 7;
+    *p++ = 0x05;        // ENDPOINT
+    *p++ = ep_addr;
+    *p++ = 0x05;        // Isochronous, Asynchronous
+    *p++ = (uint8_t)(pkt & 0xFF);
+    *p++ = (uint8_t)(pkt >> 8);
+    *p++ = 0x01;        // bInterval (1 = every frame for FS; host uses 125 µs for HS)
+    return p;
+  }
+
+  // Explicit Feedback Endpoint Descriptor (7 bytes, IN, no CS descriptor)
+  uint8_t* writeFeedbackEndpoint(uint8_t* p, uint8_t ep_addr) {
+    *p++ = 7;
+    *p++ = 0x05;        // ENDPOINT
+    *p++ = ep_addr;     // must be an IN address (bit 7 set)
+    *p++ = 0x11;        // Isochronous, No Sync, Explicit Feedback usage
+    *p++ = 0x04;        // wMaxPacketSize LSB (4 bytes)
+    *p++ = 0x00;        // wMaxPacketSize MSB
+    *p++ = 0x01;        // bInterval
+    return p;
+  }
+
+  // UAC2 CS ISO Endpoint Descriptor (8 bytes)
+  uint8_t* writeCsIsoEndpoint(uint8_t* p) {
+    *p++ = 8;
+    *p++ = 0x25;        // CS_ENDPOINT
+    *p++ = 0x01;        // EP_GENERAL
+    *p++ = 0x00;        // bmAttributes
+    *p++ = 0x00;        // bmControls
+    *p++ = 0x00;        // bLockDelayUnits (no locking)
+    *p++ = 0x00;
+    *p++ = 0x00;        // wLockDelay
+    return p;
+  }
 };
 
-}  // namespace tinyusb
+}  // namespace audio_tools

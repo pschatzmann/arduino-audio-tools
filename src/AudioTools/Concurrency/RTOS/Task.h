@@ -9,6 +9,7 @@
 #include "task.h"
 #endif
 #include <functional>
+#include "AudioTools/Concurrency/ITask.h"
 
 namespace audio_tools {
 
@@ -21,7 +22,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3 *
  */
-class Task {
+class Task : public ITask {
  public:
   /// Defines and creates a FreeRTOS task
   Task(const char* name, int stackSize, int priority = 1, int core = -1) {

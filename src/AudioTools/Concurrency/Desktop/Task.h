@@ -8,6 +8,7 @@
 #include <functional>
 #include <mutex>
 #include <thread>
+#include "AudioTools/Concurrency/ITask.h"
 
 namespace audio_tools {
 
@@ -17,7 +18,7 @@ namespace audio_tools {
  * 
  * @note Supported by all Linux platforms with C++11 support
  */
-class Task {
+class Task : public ITask {
  public:
   Task(const char *name, int stackSize, int priority = 1, int core = -1) {
     (void)name;

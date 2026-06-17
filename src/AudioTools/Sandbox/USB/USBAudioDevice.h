@@ -176,6 +176,22 @@ class USBAudioDevice {
   }
 
   bool begin() {
+    const int n = getAudioCount();
+    ctrl_buf_sz_.assign(n, 64u);  // 64 bytes is the USB control transfer standard
+
+    const uint16_t sw_buf = fifoSize();
+    ep_in_sw_buf_sz_.assign(n, sw_buf);
+    ep_out_sw_buf_sz_.assign(n, sw_buf);
+
+    uint16_t desc_len = 0;
+    descr_builder.buildFullDescriptor(&desc_len);
+    desc_len_.assign(n, desc_len);
+
+    const uint16_t pkt = packetSize();
+    process_buf_tx_.assign(pkt, 0);
+    process_buf_rx_.assign(pkt, 0);
+
+    audiod_init();
     return true;
   }
   /**
@@ -191,16 +207,14 @@ class USBAudioDevice {
   /** @brief Returns true if the feedback endpoint is enabled. */
   bool getEnableFeedbackEp() const { return config_.enable_feedback_ep; }
   /** @brief Returns true if IN endpoint flow control is enabled. */
-  bool getEnableEpInFlowControl() const {
-    return config_.enable_ep_in_flow_control;
-  }
+  bool getEnableEpInFlowControl() const { return false; }
   /** @brief Returns true if the interrupt endpoint is enabled. */
-  bool getEnableInterruptEp() const { return config_.enable_interrupt_ep; }
+  bool getEnableInterruptEp() const { return false; }
   /** @brief Returns true if FIFO mutex is enabled. */
-  bool getEnableFifoMutex() const { return config_.enable_fifo_mutex; }
+  bool getEnableFifoMutex() const { return true; }
 
-  /** @brief Returns the number of audio functions configured. */
-  uint8_t getAudioCount() const { return config_.audio_count; }
+  /** @brief Returns the number of audio functions (always 1). */
+  uint8_t getAudioCount() const { return 1; }
 
   /**
    * @brief Get the USB audio descriptors for the specified interface and
@@ -210,41 +224,9 @@ class USBAudioDevice {
    * @param out_length Pointer to store the length of the descriptor.
    * @return Pointer to the descriptor data.
    */
-  const uint8_t* getAudioDescriptors(uint8_t itf, uint8_t alt,
+  const uint8_t* getAudioDescriptors(uint8_t /*itf*/, uint8_t /*alt*/,
                                      uint16_t* out_length) {
-    // // Example: simple UAC1 streaming interface with one IN and one OUT
-    // endpoint static const uint8_t desc[] = {
-    //     // Interface Association Descriptor (IAD)
-    //     0x08, 0x0B, 0x01, 0x01, 0x02, 0x00, 0x00, 0x00,
-    //     // Standard AC Interface Descriptor
-    //     0x09, 0x04, 0x00, 0x00, 0x00, 0x01, 0x01, 0x00, 0x00,
-    //     // Class-specific AC Interface Descriptor
-    //     0x09, 0x24, 0x01, 0x00, 0x01, 0x09, 0x00, 0x01, 0x01,
-    //     // Standard AS Interface Descriptor (alt 0 - zero bandwidth)
-    //     0x09, 0x04, 0x01, 0x00, 0x00, 0x01, 0x02, 0x00, 0x00,
-    //     // Standard AS Interface Descriptor (alt 1 - operational, IN)
-    //     0x09, 0x04, 0x01, 0x01, 0x01, 0x01, 0x02, 0x00, 0x00,
-    //     // Class-specific AS Interface Descriptor (IN)
-    //     0x07, 0x24, 0x01, 0x01, 0x01, 0x01, 0x00,
-    //     // Type I Format Type Descriptor (IN)
-    //     0x0B, 0x24, 0x02, 0x01, 0x01, 0x02, 0x10, 0x01, 0x44, 0xAC, 0x00,
-    //     // Standard AS Isochronous Audio Data Endpoint Descriptor (IN)
-    //     0x07, 0x05, 0x81, 0x01, 0x40, 0x00, 0x01,
-    //     // Class-specific AS Isochronous Audio Data Endpoint Descriptor (IN)
-    //     0x07, 0x25, 0x01, 0x00, 0x00, 0x00, 0x00,
-    //     // Standard AS Interface Descriptor (alt 2 - operational, OUT)
-    //     0x09, 0x04, 0x02, 0x01, 0x01, 0x01, 0x02, 0x00, 0x00,
-    //     // Class-specific AS Interface Descriptor (OUT)
-    //     0x07, 0x24, 0x01, 0x01, 0x01, 0x01, 0x00,
-    //     // Type I Format Type Descriptor (OUT)
-    //     0x0B, 0x24, 0x02, 0x01, 0x01, 0x02, 0x10, 0x01, 0x44, 0xAC, 0x00,
-    //     // Standard AS Isochronous Audio Data Endpoint Descriptor (OUT)
-    //     0x07, 0x05, 0x01, 0x01, 0x40, 0x00, 0x01,
-    //     // Class-specific AS Isochronous Audio Data Endpoint Descriptor (OUT)
-    //     0x07, 0x25, 0x01, 0x00, 0x00, 0x00, 0x00};
-    // if (out_length) *out_length = sizeof(desc);
-    // return desc;
-    return descr_builder.buildDescriptor(itf, alt, out_length);
+    return descr_builder.buildFullDescriptor(out_length);
   }
 
   /** @brief Returns true if the device is mounted by the USB host. */
@@ -284,19 +266,21 @@ class USBAudioDevice {
    * audio data transmission and reception.
    */
   void process() {
-    // Example: check if host is ready for IN, send audio packet
-    if (tud_ready()) {
-      uint8_t audio_data[48] = {0};
-      uint16_t bytes_written = 48;
-      if (tx_callback_)
-        bytes_written = tx_callback_(audio_data, sizeof(audio_data));
-      write(audio_data, bytes_written);
+    if (process_buf_tx_.empty()) return;
+    const uint16_t pkt = (uint16_t)process_buf_tx_.size();
+    if (config_.enable_ep_in && tud_ready()) {
+      std::fill(process_buf_tx_.begin(), process_buf_tx_.end(), 0);
+      uint16_t n = pkt;
+      if (tx_callback_) n = tx_callback_(process_buf_tx_.data(), pkt);
+      if (n > 0) write(process_buf_tx_.data(), n);
     }
-    // Example: check for OUT data
-    if (tud_ready()) {
-      uint8_t buf[48];
-      uint16_t n = read(buf, sizeof(buf));
-      if (n > 0 && rx_callback_) rx_callback_(buf, n);
+    if (config_.enable_ep_out && tud_ready()) {
+      // Drain the entire FIFO, not just one packet: if process() is called
+      // less often than every 1 ms, multiple packets accumulate in ep_out_ff.
+      uint16_t n;
+      while ((n = read(process_buf_rx_.data(), pkt)) > 0) {
+        if (rx_callback_) rx_callback_(process_buf_rx_.data(), n);
+      }
     }
   }
 
@@ -313,7 +297,7 @@ class USBAudioDevice {
    * @param cb Callback function with (const uint8_t* data, uint16_t length)
    * returning bytes written.
    */
-  void setTxCallback(std::function<uint16_t(const uint8_t*, uint16_t)> cb) {
+  void setTxCallback(std::function<uint16_t(uint8_t*, uint16_t)> cb) {
     tx_callback_ = cb;
   }
 
@@ -483,6 +467,52 @@ class USBAudioDevice {
     return instance_;
   }
 
+  /** @brief Send audio data to the host (device → host, microphone/capture). */
+  uint16_t writeAudio(const void* data, uint16_t len) { return write(data, len); }
+
+  /** @brief Receive audio data from the host (host → device, speaker/playback). */
+  uint16_t readAudio(void* buffer, uint16_t bufsize) { return read(buffer, bufsize); }
+
+  /** @brief Bytes of received audio waiting in the RX FIFO. */
+  uint16_t rxAvailable() {
+    for (uint8_t i = 0; i < (uint8_t)audiod_fct_.size(); i++) {
+      if (audiod_fct_[i].ep_out == config_.ep_out)
+        return tu_fifo_count(&audiod_fct_[i].ep_out_ff);
+    }
+    return 0;
+  }
+
+  /** @brief Bytes of free space remaining in the TX FIFO (or linear TX buffer). */
+  uint16_t txAvailableForWrite() {
+    for (uint8_t i = 0; i < (uint8_t)audiod_fct_.size(); i++) {
+      if (audiod_fct_[i].ep_in == config_.ep_in) {
+        if (getUseLinearBufferTx())
+          return (uint16_t)audiod_fct_[i].lin_buf_in.size();
+        return tu_fifo_remaining(&audiod_fct_[i].ep_in_ff);
+      }
+    }
+    return 0;
+  }
+
+  /** @brief Stop audio streaming and clear FIFOs. Does not disconnect USB. */
+  void end() {
+    // Null callbacks first so no stale closure can fire between clearing the
+    // FIFOs and the caller registering new ones on the next begin().
+    rx_callback_ = nullptr;
+    tx_callback_ = nullptr;
+    for (auto& audio : audiod_fct_) {
+      tu_fifo_clear(&audio.ep_in_ff);
+      tu_fifo_clear(&audio.ep_out_ff);
+      std::fill(audio.lin_buf_in.begin(),  audio.lin_buf_in.end(),  0);
+      std::fill(audio.lin_buf_out.begin(), audio.lin_buf_out.end(), 0);
+    }
+    process_buf_tx_.clear();
+    process_buf_rx_.clear();
+  }
+
+  /** @brief One isochronous USB packet size in bytes (same formula as the descriptor builder). */
+  uint16_t audioPacketSize() const { return packetSize(); }
+
   /**
    * @brief Get the USB device class driver for TinyUSB integration.
    * @param count Pointer to store the number of drivers (always 1).
@@ -524,7 +554,7 @@ class USBAudioDevice {
   USBAudioConfig config_;
   USBAudio2DescriptorBuilder descr_builder{config_};
   std::function<void(const uint8_t*, uint16_t)> rx_callback_;
-  std::function<uint16_t(const uint8_t*, uint16_t)> tx_callback_;
+  std::function<uint16_t(uint8_t*, uint16_t)> tx_callback_;
   std::function<void(USBAudioDevice*, uint8_t rhport)> int_done_cb_;
   std::function<bool(USBAudioDevice*, uint8_t rhport, audiod_function_t*)>
       tx_done_cb_;
@@ -590,6 +620,8 @@ class USBAudioDevice {
   std::vector<audiod_function_t> audiod_fct_;
   std::vector<osal_mutex_def_t> ep_in_ff_mutex_wr_;
   std::vector<osal_mutex_def_t> ep_out_ff_mutex_rd_;
+  std::vector<uint8_t> process_buf_tx_;
+  std::vector<uint8_t> process_buf_rx_;
 
   USBAudioDevice() = default;
 
@@ -613,10 +645,13 @@ class USBAudioDevice {
     return (fn < desc_len_.size()) ? desc_len_[fn] : 0;
   }
 
-  // Returns whether linear buffer RX is enabled
   bool getUseLinearBufferRx() const { return config_.use_linear_buffer_rx; }
-
   bool getUseLinearBufferTx() const { return config_.use_linear_buffer_tx; }
+
+  // Bytes for one 1 ms isochronous USB packet.
+  uint16_t packetSize() const { return descr_builder.calcMaxPacketSize(); }
+  // Total audio FIFO size in bytes.
+  uint16_t fifoSize() const { return (uint16_t)(packetSize() * config_.fifo_packets); }
 
   // Returns the reset size for audiod_function_t up to and including
   // ctrl_buf_sz
@@ -625,23 +660,78 @@ class USBAudioDevice {
            sizeof(((audiod_function_t*)0)->ctrl_buf_sz);
   }
 
-  // Dummy for tud_audio_feedback_interval_isr (should be implemented elsewhere
-  // if not available)
-  void tud_audio_feedback_interval_isr(uint8_t func_id, uint32_t frame_count,
+  // Called by audiod_sof_isr() at the feedback interval.
+  // Computes the current feedback value then claims the EP and sends it.
+  void tud_audio_feedback_interval_isr(uint8_t func_id, uint32_t /*frame_count*/,
                                        uint8_t frame_shift) {
-    // Implement or forward to actual USB stack as needed
+    audiod_function_t* audio = &audiod_fct_[func_id];
+
+    switch (audio->feedback.compute_method) {
+      case AUDIO_FEEDBACK_METHOD_FIFO_COUNT: {
+        uint32_t ff_count = tu_fifo_count(&audio->ep_out_ff);
+        // Exponential weighted average keeps the level estimate stable
+        audio->feedback.compute.fifo_count.fifo_lvl_avg =
+            audio->feedback.compute.fifo_count.fifo_lvl_avg -
+            (audio->feedback.compute.fifo_count.fifo_lvl_avg >> 8) +
+            ((uint32_t)ff_count << 8);
+        uint32_t avg = audio->feedback.compute.fifo_count.fifo_lvl_avg >> 8;
+        uint32_t thr = audio->feedback.compute.fifo_count.fifo_lvl_thr;
+        uint32_t nom = audio->feedback.compute.fifo_count.nom_value;
+        if (avg > thr) {
+          audio->feedback.value =
+              nom + (uint32_t)audio->feedback.compute.fifo_count.rate_const[0] *
+                        (avg - thr);
+        } else {
+          uint32_t drop = (uint32_t)audio->feedback.compute.fifo_count.rate_const[1] *
+                          (thr - avg);
+          audio->feedback.value = (nom > drop) ? nom - drop : audio->feedback.min_value;
+        }
+        audio->feedback.value = TU_MIN(
+            TU_MAX(audio->feedback.value, audio->feedback.min_value),
+            audio->feedback.max_value);
+      } break;
+
+      case AUDIO_FEEDBACK_METHOD_FREQUENCY_POWER_OF_2:
+        audio->feedback.value = 1UL << audio->feedback.compute.power_of_2;
+        break;
+
+      case AUDIO_FEEDBACK_METHOD_FREQUENCY_FLOAT:
+        audio->feedback.value = (uint32_t)(
+            audio->feedback.compute.float_const *
+            (float)(1UL << (16u - (frame_shift - 1u))));
+        break;
+
+      case AUDIO_FEEDBACK_METHOD_FREQUENCY_FIXED: {
+        uint32_t frame_div = (TUSB_SPEED_FULL == tud_speed_get()) ? 1000u : 8000u;
+        audio->feedback.value =
+            (audio->feedback.compute.fixed.sample_freq << 16) / frame_div;
+      } break;
+
+      default:
+        break;
+    }
+
+    if (usbd_edpt_claim(audio->rhport, audio->ep_fb)) {
+      audiod_fb_send(audio);
+    }
   }
 
   // Write audio data to IN endpoint
   uint16_t write(const void* data, uint16_t len) {
-    uint16_t written = tud_audio_n_write(config_.ep_in, data, len);
-    return written;
+    for (uint8_t i = 0; i < (uint8_t)audiod_fct_.size(); i++) {
+      if (audiod_fct_[i].ep_in == config_.ep_in)
+        return tud_audio_n_write(i, data, len);
+    }
     return 0;
   }
 
   // Read audio data from OUT endpoint
   uint16_t read(void* buffer, uint16_t bufsize) {
-    return tud_audio_n_read(config_.ep_out, buffer, bufsize);
+    for (uint8_t i = 0; i < (uint8_t)audiod_fct_.size(); i++) {
+      if (audiod_fct_[i].ep_out == config_.ep_out)
+        return tud_audio_n_read(i, buffer, bufsize);
+    }
+    return 0;
   }
 
   // USBD Driver API
@@ -657,7 +747,7 @@ class USBAudioDevice {
       audio->ctrl_buf.resize(size);
       audio->ctrl_buf_sz = size;
       // Initialize active alternate interface buffers
-      audio->alt_setting.resize(config_.audio_functions_count());
+      audio->alt_setting.resize(descr_builder.audioFunctionsCount());
       // Initialize IN EP FIFO if required
       if (getEnableEpIn()) {
         audio->ep_in_sw_buf.resize(getEpInSwBufSz(i));
@@ -670,9 +760,8 @@ class USBAudioDevice {
                                osal_mutex_create(&ep_in_ff_mutex_wr_[i]), NULL);
         }
       }
-      // Initialize linear buffers
       if (getUseLinearBufferTx()) {
-        audio->lin_buf_in.resize(config_.lin_buf_in_size_per_func);
+        audio->lin_buf_in.resize(fifoSize());
       }
       // Initialize OUT EP FIFO if required
       if (getEnableEpOut()) {
@@ -684,12 +773,11 @@ class USBAudioDevice {
                                osal_mutex_create(&ep_out_ff_mutex_rd_[i]));
         }
       }
-      // Initialize linear buffers
       if (getUseLinearBufferRx()) {
-        audio->lin_buf_out.resize(config_.lin_buf_in_size_per_func);
+        audio->lin_buf_out.resize(fifoSize());
       }
       if (getEnableFeedbackEp()) {
-        audio->fb_buf.resize(getEpOutSwBufSz(i));
+        audio->fb_buf.resize(1);  // one uint32_t = 4 bytes of feedback data
       }
     }
   }
@@ -923,22 +1011,42 @@ class USBAudioDevice {
       }
       if (getEnableEpIn() && audio->ep_in == ep_addr &&
           audio->alt_setting.size() != 0) {
-        if (tx_done_cb_ && tx_done_cb_(this, rhport, audio)) return true;
+        if (tx_done_cb_) tx_done_cb_(this, rhport, audio);
+        if (getUseLinearBufferTx()) {
+          // Drain FIFO into the DMA staging buffer, then re-arm.
+          // lin_buf_in is safe to write now that the previous DMA has finished.
+          uint16_t n = tu_fifo_read_n(&audio->ep_in_ff,
+                                      audio->lin_buf_in.data(), audio->ep_in_sz);
+          if (n == 0)
+            std::fill(audio->lin_buf_in.begin(), audio->lin_buf_in.end(), 0);
+          TU_VERIFY(usbd_edpt_xfer(rhport, audio->ep_in,
+                                   audio->lin_buf_in.data(), audio->ep_in_sz));
+        } else {
+          TU_VERIFY(usbd_edpt_xfer_fifo(rhport, audio->ep_in,
+                                        &audio->ep_in_ff, audio->ep_in_sz));
+        }
         return true;
       }
       if (getEnableEpOut() && audio->ep_out == ep_addr) {
-        if (rx_done_cb_ &&
-            rx_done_cb_(this, rhport, audio, (uint16_t)xferred_bytes))
-          return true;
+        if (getUseLinearBufferRx()) {
+          // Copy the DMA-received packet into the FIFO so tud_audio_n_read()
+          // sees it, then re-arm the DMA into lin_buf_out.
+          tu_fifo_write_n(&audio->ep_out_ff, audio->lin_buf_out.data(),
+                          (uint16_t)xferred_bytes);
+          if (rx_done_cb_) rx_done_cb_(this, rhport, audio, (uint16_t)xferred_bytes);
+          TU_VERIFY(usbd_edpt_xfer(rhport, audio->ep_out,
+                                   audio->lin_buf_out.data(), audio->ep_out_sz));
+        } else {
+          if (rx_done_cb_) rx_done_cb_(this, rhport, audio, (uint16_t)xferred_bytes);
+          TU_VERIFY(usbd_edpt_xfer_fifo(rhport, audio->ep_out,
+                                        &audio->ep_out_ff, audio->ep_out_sz));
+        }
         return true;
       }
       if (getEnableFeedbackEp() && audio->ep_fb == ep_addr) {
-        if (fb_done_cb_) {
-          fb_done_cb_(this, func_id);
-        }
-        if (usbd_edpt_claim(rhport, audio->ep_fb)) {
-          return audiod_fb_send(audio);
-        }
+        // SOF ISR owns re-sending; just notify the application.
+        if (fb_done_cb_) fb_done_cb_(this, func_id);
+        return true;
       }
     }
     return false;
@@ -1339,7 +1447,7 @@ class USBAudioDevice {
         usbd_edpt_close(rhport, audio->ep_in);
 #endif
 
-        // Clear FIFOs, since data is no longer valid
+        // Clear FIFO since data is no longer valid
         tu_fifo_clear(&audio->ep_in_ff);
 
         // Invoke callback - can be used to stop data sampling
@@ -1436,6 +1544,7 @@ class USBAudioDevice {
                 audio->ep_in = ep_addr;
                 audio->ep_in_as_intf_num = itf;
                 audio->ep_in_sz = tu_edpt_packet_size(desc_ep);
+                if (audio->ep_in_sz == 0) return true;
 
                 // If flow control is enabled, parse for the corresponding
                 // parameters - doing this here means only AS interfaces with
@@ -1449,9 +1558,16 @@ class USBAudioDevice {
                 // available a ZLP is loaded It is necessary to trigger this
                 // here since the refill is done with an RX FIFO empty interrupt
                 // which can only trigger if something was in there
-                if (audiod_tx_done_cb_) {
-                  TU_VERIFY(
-                      audiod_tx_done_cb_(this, rhport, &audiod_fct_[func_id]));
+                if (getUseLinearBufferTx()) {
+                  // Resize staging buffer to match actual endpoint packet size
+                  audio->lin_buf_in.assign(audio->ep_in_sz, 0);
+                  TU_VERIFY(usbd_edpt_xfer(rhport, audio->ep_in,
+                                           audio->lin_buf_in.data(),
+                                           audio->ep_in_sz));
+                } else {
+                  TU_VERIFY(usbd_edpt_xfer_fifo(rhport, audio->ep_in,
+                                                &audio->ep_in_ff,
+                                                audio->ep_in_sz));
                 }
               }
             }  // getEnableEpIn()
@@ -1464,9 +1580,12 @@ class USBAudioDevice {
                 audio->ep_out = ep_addr;
                 audio->ep_out_as_intf_num = itf;
                 audio->ep_out_sz = tu_edpt_packet_size(desc_ep);
+                if (audio->ep_out_sz == 0) return true;
 
                 // Prepare for incoming data
                 if (getUseLinearBufferRx()) {
+                  // Resize staging buffer to match actual endpoint packet size
+                  audio->lin_buf_out.assign(audio->ep_out_sz, 0);
                   TU_VERIFY(usbd_edpt_xfer(rhport, audio->ep_out,
                                            audio->lin_buf_out.data(),
                                            audio->ep_out_sz),
@@ -1505,7 +1624,10 @@ class USBAudioDevice {
         if (getEnableFeedbackEp()) {
           // Prepare feedback computation if endpoint is available
           if (audio->ep_fb != 0) {
-            audio_feedback_params_t fb_param;
+            // Default: FIFO-count feedback at the configured sample rate.
+            audio_feedback_params_t fb_param = {};
+            fb_param.method      = AUDIO_FEEDBACK_METHOD_FIFO_COUNT;
+            fb_param.sample_freq = config_.sample_rate;
 
             if (tud_audio_feedback_params_cb_) {
               tud_audio_feedback_params_cb_(this, func_id, alt, &fb_param);
@@ -1575,16 +1697,10 @@ class USBAudioDevice {
     }
 
     if (getEnableFeedbackEp()) {
-      // Disable SOF interrupt if no driver has any enabled feedback EP
+      // Enable SOF interrupt whenever any feedback EP is active (all methods need it)
       bool enable_sof = false;
       for (uint8_t i = 0; i < getAudioCount(); i++) {
-        if (audiod_fct_[i].ep_fb != 0 &&
-            (audiod_fct_[i].feedback.compute_method ==
-                 AUDIO_FEEDBACK_METHOD_FREQUENCY_FIXED ||
-             audiod_fct_[i].feedback.compute_method ==
-                 AUDIO_FEEDBACK_METHOD_FREQUENCY_FLOAT ||
-             audiod_fct_[i].feedback.compute_method ==
-                 AUDIO_FEEDBACK_METHOD_FREQUENCY_POWER_OF_2)) {
+        if (audiod_fct_[i].ep_fb != 0) {
           enable_sof = true;
           break;
         }
@@ -1690,6 +1806,8 @@ class USBAudioDevice {
 
   uint16_t tud_audio_n_write(uint8_t func_id, const void* data, uint16_t len) {
     TU_VERIFY(func_id < getAudioCount() && audiod_fct_[func_id].p_desc != NULL);
+    // Always write to the FIFO. In linear-buffer mode the xfer_cb drains the
+    // FIFO into lin_buf_in after DMA has finished, so there is no race.
     return tu_fifo_write_n(&audiod_fct_[func_id].ep_in_ff, data, len);
   }
 
