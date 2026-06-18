@@ -12,12 +12,15 @@
  *   SineGenerator → GeneratedSoundStream → StreamCopy → USBAudioStream
  *   → tx_queue_ → audiod_xfer_cb → USB isochronous IN endpoint → host
  *
- * @note ESP32-S3 board setting: Tools → USB CDC On Boot → Disabled
- *   The native USB stack must be started by this sketch, not by the boot
- *   loader. If USB CDC On Boot is enabled, TinyUSB starts before setup()
- *   runs and the audio interface registration will fail with
- *   "TinyUSB has already started! Interface AUDIO not enabled".
- *   With it disabled, Serial maps to UART (Serial0) automatically.
+ * @note for ESP32: Board settings (Arduino IDE):
+ *   Tools → Board            : ESP32S3 Dev Module (or your board)
+ *   Tools → USB Mode         : USB-OTG (TinyUSB)
+ *   Tools → USB CDC On Boot  : Disabled
+ *   If you want to use the CDC serial port for logging: define USBCDC
+ * USBSerial; and use USBSerial!
+ * 
+ * @note for boards using Adafruit TinyUSB core (e.g. RP2040, STM32, SAMD):
+ * Board settings (Arduino IDE): USB Mode: USB OTG (TinyUSB)
  *
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -32,7 +35,11 @@ USBAudioStream out;
 StreamCopy copier(out, sound, 80);
 
 void setup(void) {
-  // Use UART Serial so USB is not started before out.begin().
+  // Manual begin() is required on core without built-in support e.g. mbed rp2040
+  if (!TinyUSBDevice.isInitialized()) {
+    TinyUSBDevice.begin(0);
+  }
+
   // On ESP32-S3 with "USB CDC On Boot: Disabled", Serial = Serial0 (UART).
   Serial.begin(115200);
   AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
@@ -47,6 +54,14 @@ void setup(void) {
   out.begin(config);
 
   Serial.println("USB audio started");
+
+  // If already enumerated, additional class driverr begin() e.g msc, hid, midi won't take effect until re-enumeration
+  if (TinyUSBDevice.mounted()) {
+    TinyUSBDevice.detach();
+    delay(10);
+    TinyUSBDevice.attach();
+  }
+
 }
 
 void loop() {

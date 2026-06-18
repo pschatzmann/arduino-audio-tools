@@ -16,10 +16,15 @@
  * overhead of the USBAudioStream layer, but it also requires more manual
  * handling of the USB stack and audio generation.
  *
- * @note ESP32-S3 board setting: Tools → USB CDC On Boot → Disabled
- *   TinyUSB must not be started by the bootloader. With it disabled,
- *   Serial maps to UART (Serial0) and USB is started only by dev.begin().
- *   USB-Mode must be set to OTG-OTG (TinyUSB))!  
+ * @note for ESP32: Board settings (Arduino IDE):
+ *   Tools → Board            : ESP32S3 Dev Module (or your board)
+ *   Tools → USB Mode         : USB-OTG (TinyUSB)
+ *   Tools → USB CDC On Boot  : Disabled
+ *   If you want to use the CDC serial port for logging: define USBCDC
+ * USBSerial; and use USBSerial!
+ * 
+ * @note for boards using Adafruit TinyUSB core (e.g. RP2040, STM32, SAMD):
+ * Board settings (Arduino IDE): USB Mode: USB OTG (TinyUSB)
  *
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -57,7 +62,7 @@ void setup() {
   dev.setTxCallback(onTx);
   dev.begin(cfg);  // begin() calls beginUSB() internally
 
-    // If already enumerated, additional class driverr begin() e.g msc, hid, midi won't take effect until re-enumeration
+  // If already enumerated, additional class driverr begin() e.g msc, hid, midi won't take effect until re-enumeration
   if (TinyUSBDevice.mounted()) {
     TinyUSBDevice.detach();
     delay(10);
