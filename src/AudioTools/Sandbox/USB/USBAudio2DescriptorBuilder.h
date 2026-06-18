@@ -5,8 +5,6 @@
 #include "tusb.h"
 #include "USBAudioConfig.h"
 
-#define USB_DESCR_MAX_LEN 512
-
 namespace audio_tools {
 
 /**
@@ -40,32 +38,21 @@ class USBAudio2DescriptorBuilder {
 
   explicit USBAudio2DescriptorBuilder(USBAudioConfig& cfg) : p_config(&cfg) {}
 
-  // Isochronous packet size for one 1 ms frame at the configured rate/format.
-  uint16_t calcMaxPacketSize() const {
-    return (uint16_t)((p_config->bits_per_sample / 8) * p_config->channels *
-                      ((p_config->sample_rate + 999) / 1000));
-  }
 
-  // True when the explicit-feedback endpoint should appear in the descriptor.
-  // Mirrors getEnableFeedbackEp() in USBAudioDeviceBase: feedback is only valid
-  // for a pure OUT (speaker) path — with an IN endpoint present the host uses
-  // the IN stream as implicit feedback, and TX-only mode has no OUT EP at all.
-  bool enableFeedbackEp() const {
-    return p_config->enable_feedback_ep
-        && p_config->enable_ep_out
-        && !p_config->enable_ep_in;
+  // Kept for backward compatibility with existing call sites.
+  const uint16_t buildDescriptor(uint8_t /*itf*/, uint8_t /*alt*/, uint8_t* desc) {
+    return buildFullDescriptor(desc);
   }
 
   // Build the complete audio-function descriptor using interface numbers from
   // config.  Returns a pointer to an internal static buffer; *outLen receives
   // the total byte count.
-  const uint8_t* buildFullDescriptor(uint16_t* outLen) {
-    return buildFullDescriptor(p_config->itf_num_ac, outLen);
+  const uint16_t buildFullDescriptor(uint8_t* desc) {
+    return buildFullDescriptor(p_config->itf_num_ac, desc);
   }
 
   // Same but with an explicit first (AC) interface number.
-  const uint8_t* buildFullDescriptor(uint8_t first_itf, uint16_t* outLen) {
-    static uint8_t desc[USB_DESCR_MAX_LEN];
+  const uint16_t buildFullDescriptor(uint8_t first_itf, uint8_t* desc) {
     uint8_t* p = desc;
 
     const uint8_t itf_ac  = first_itf;
@@ -139,18 +126,28 @@ class USBAudio2DescriptorBuilder {
       p = writeCsIsoEndpoint(p);
     }
 
-    *outLen = (uint16_t)(p - desc);
-    assert(*outLen <= USB_DESCR_MAX_LEN);
-    return desc;
-  }
-
-  // Kept for backward compatibility with existing call sites.
-  const uint8_t* buildDescriptor(uint8_t /*itf*/, uint8_t /*alt*/, uint16_t* outLen) {
-    return buildFullDescriptor(outLen);
+    uint16_t outLen = (uint16_t)(p - desc);
+    return outLen;
   }
 
   int audioFunctionsCount() const {
     return (p_config->enable_ep_in ? 1 : 0) + (p_config->enable_ep_out ? 1 : 0);
+  }
+
+  // Isochronous packet size for one 1 ms frame at the configured rate/format.
+  uint16_t calcMaxPacketSize() const {
+    return (uint16_t)((p_config->bits_per_sample / 8) * p_config->channels *
+                      ((p_config->sample_rate + 999) / 1000));
+  }
+
+  // True when the explicit-feedback endpoint should appear in the descriptor.
+  // Mirrors getEnableFeedbackEp() in USBAudioDeviceBase: feedback is only valid
+  // for a pure OUT (speaker) path — with an IN endpoint present the host uses
+  // the IN stream as implicit feedback, and TX-only mode has no OUT EP at all.
+  bool enableFeedbackEp() const {
+    return p_config->enable_feedback_ep
+        && p_config->enable_ep_out
+        && !p_config->enable_ep_in;
   }
 
  private:

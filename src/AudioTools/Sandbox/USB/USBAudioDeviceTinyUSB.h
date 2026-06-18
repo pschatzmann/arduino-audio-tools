@@ -1,8 +1,9 @@
 #pragma once
+#include <Adafruit_TinyUSB.h>
+
 #include <cstring>
 
 #include "AudioTools/Sandbox/USB/USBAudioDeviceBase.h"
-#include <Adafruit_TinyUSB.h>
 
 namespace audio_tools {
 
@@ -29,12 +30,13 @@ namespace audio_tools {
  * @copyright GPLv3
  */
 class USBAudioDeviceTinyUSB : public USBAudioDeviceBase,
-                               public Adafruit_USBD_Interface {
+                              public Adafruit_USBD_Interface {
  public:
   USBAudioDeviceTinyUSB() = default;
   USBAudioDeviceTinyUSB(USBAudioConfig cfg) : USBAudioDeviceBase(cfg) {}
 
-  // ── Adafruit_USBD_Interface ─────────────────────────────────────────────────
+  // ── Adafruit_USBD_Interface
+  // ─────────────────────────────────────────────────
 
   /**
    * Called by Adafruit's addInterface() to build our UAC2 descriptor block
@@ -47,53 +49,47 @@ class USBAudioDeviceTinyUSB : public USBAudioDeviceBase,
    * interface numbering internally via allocInterface().
    */
   uint16_t getInterfaceDescriptor(uint8_t /*itfnum_deprecated*/, uint8_t* buf,
-                                   uint16_t bufsize) override {
+                                  uint16_t bufsize) override {
     if (buf) {
       config_.itf_num_ac = TinyUSBDevice.allocInterface(numInterfaces());
       if (config_.enable_ep_in)
         config_.ep_in = TinyUSBDevice.allocEndpoint(TUSB_DIR_IN);
       if (config_.enable_ep_out)
         config_.ep_out = TinyUSBDevice.allocEndpoint(TUSB_DIR_OUT);
+      if (this->getEnableFeedbackEp())
+        config_.ep_fb = TinyUSBDevice.allocEndpoint(TUSB_DIR_IN);
     }
     uint16_t len = 0;
     const uint8_t* desc = getDescriptor(&len);
     if (!desc) return 0;
     if (buf) {
-      if (len > bufsize) return 0;
+      assert(len <= bufsize);
       memcpy(buf, desc, len);
     }
     return len;
   }
 
-  // ── Platform overrides ──────────────────────────────────────────────────────
+  // ── Platform overrides
+  // ──────────────────────────────────────────────────────
 
   bool beginUSB() override {
-    if (!usb_begun_) {
+    TinyUSBDevice.addInterface(*this);  
+    if (!TinyUSBDevice.isInitialized()) {
       TinyUSBDevice.setID(config_.vid, config_.pid);
       TinyUSBDevice.setManufacturerDescriptor(config_.manufacturer);
       TinyUSBDevice.setProductDescriptor(config_.product);
       TinyUSBDevice.setSerialDescriptor(config_.serial);
-      // bDeviceClass = MISC / IAD is set automatically inside TinyUSBDevice.begin()
-      TinyUSBDevice.addInterface(*this);  // calls getInterfaceDescriptor immediately
       TinyUSBDevice.begin();
-      usb_begun_ = true;
     } else {
-      reenumerateUSB();
+      if (TinyUSBDevice.mounted()) {
+        TinyUSBDevice.detach();
+        delay(10);
+        TinyUSBDevice.attach();
+      }
     }
     return true;
   }
 
-  void reenumerateUSB() override {
-    const bool was_mounted = tud_mounted();
-    if (was_mounted) tud_disconnect();
-    if (was_mounted) {
-      delay(20);
-      tud_connect();
-    }
-  }
-
- protected:
-  bool usb_begun_ = false;
 };
 
 using USBAudioDevice = USBAudioDeviceTinyUSB;

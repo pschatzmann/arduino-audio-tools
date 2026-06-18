@@ -12,7 +12,8 @@
 namespace audio_tools {
 
 /**
- * @brief USBAudioDeviceBase subclass for ESP32-S2/S3 using the arduino-esp32 stack.
+ * @brief USBAudioDeviceBase subclass for ESP32-S2/S3 using the arduino-esp32
+ * stack.
  *
  * On ESP32 the arduino-esp32 core provides strong definitions of the TinyUSB
  * descriptor callbacks — the user cannot override them.  This class registers
@@ -62,51 +63,51 @@ class USBAudioDeviceESP32 : public USBAudioDeviceBase {
     USB.usbAttributes(
         (uint8_t)(0x80u | (config_.self_powered ? 0x40u : 0x00u)));
     USB.usbPower(config_.max_power_ma);
-
-    uint16_t audio_len = 0;
-    getDescriptor(&audio_len);
+    static uint8_t desc[USB_DESCR_MAX_LEN];
+    uint16_t audio_len = getDescriptor(desc);
+    assert(audio_len <= USB_DESCR_MAX_LEN);
     tinyusb_enable_interface(USB_INTERFACE_AUDIO, audio_len,
                              descriptorCallback);
 
-    if (!is_active_) {
-      if (config_.begin_usb) USB.begin();
-      is_active_ = true;
-    } else {
-      reenumerateUSB();
+    // disconnect when mounted and config has changed                         
+    const bool was_mounted = tud_mounted();
+    bool do_reconnect = false;
+    if (was_mounted && configChanged(active_config_)) {
+      tud_disconnect();
+      do_reconnect = true;
     }
+    delay(20);
+
+    // Start or restart 
+    if (config_.begin_usb && !was_mounted) 
+      USB.begin();
+    else if (do_reconnect) {
+      tud_connect();
+    }
+
     return true;
   }
 
-  void reenumerateUSB() override {
-    const bool was_mounted = tud_mounted();
-    if (was_mounted) tud_disconnect();
-    if (was_mounted) {
-      delay(20);
-      tud_connect();
-    }
-  }
-
   // ── ESP32 descriptor callback
-  // ─────────────────────────────────────────────── Called by the arduino-esp32
-  // framework when it builds the configuration descriptor.  The callback reads
-  // the current descriptor at call time, so any format change made via
-  // setConfig() before re-enumeration is picked up automatically without
-  // re-registering the interface.
+  // ───────────────────────────────────────────────
+  // Called by the arduino-esp32 framework when it builds the configuration descriptor.  
+  // The callback reads the current descriptor at call time, so any format change
+  // callback reads the current descriptor at call time, so any format change
+  // made via setConfig() before re-enumeration is picked up automatically
+  // without re-registering the interface.
 
   static uint16_t descriptorCallback(uint8_t* dst, uint8_t* itf) {
-    auto& dev = static_cast<USBAudioDeviceESP32&>(USBAudioDeviceBase::activeInstance());
+    auto& dev =
+        static_cast<USBAudioDeviceESP32&>(USBAudioDeviceBase::activeInstance());
     // *itf carries the running interface index: set our base from it so that
-    // composite configurations (e.g. CDC + Audio) get non-overlapping numbers.
+    // composite configurations (e.g. CDC + Audio) get non-overlapping
+    // numbers.
     if (itf) dev.config_.itf_num_ac = *itf;
-    uint16_t len = 0;
-    const uint8_t* desc = dev.getDescriptor(&len);
-    if (dst && desc) memcpy(dst, desc, len);
+    uint16_t len = dev.getDescriptor(dst);
     if (itf) *itf += dev.numInterfaces();
     return len;
   }
 
- protected:
-  bool is_active_ = false;
 };
 
 using USBAudioDevice = USBAudioDeviceESP32;

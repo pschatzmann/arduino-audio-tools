@@ -29,6 +29,8 @@ extern "C" {
 #include "tusb.h"
 }
 
+#define USB_DESCR_MAX_LEN 512
+
 // TinyUSB >= 0.15 (ESP32 IDF v5+) renamed UAC2 symbols with an AUDIO20_ prefix
 // and changed three function signatures.  These shims let the driver build
 // against both versions; detect the new API by the presence of the new define.
@@ -246,8 +248,8 @@ class USBAudioDeviceBase {
     ep_in_sw_buf_sz_.assign(n, sw_buf);
     ep_out_sw_buf_sz_.assign(n, sw_buf);
 
-    uint16_t desc_len = 0;
-    descr_builder.buildFullDescriptor(&desc_len);
+    uint8_t desc[USB_DESCR_MAX_LEN];
+    uint16_t desc_len = descr_builder.buildFullDescriptor(desc);
     desc_len_.assign(n, desc_len);
 
     const uint16_t pkt = packetSize();
@@ -271,9 +273,6 @@ class USBAudioDeviceBase {
    * static process() trampoline can reach the right object without a singleton.
    */
   static USBAudioDeviceBase& activeInstance() { return *s_active_; }
-
-  /** @brief Override in platform subclasses to force USB re-enumeration. */
-  virtual void reenumerateUSB() {}
 
   /**
    * @brief Apply a new config and re-enumerate only if it differs from the
@@ -321,19 +320,6 @@ class USBAudioDeviceBase {
   /** @brief Returns the number of audio functions (always 1). */
   uint8_t getAudioCount() const { return 1; }
 
-  /**
-   * @brief Get the USB audio descriptors for the specified interface and
-   * alternate setting.
-   * @param itf Interface number.
-   * @param alt Alternate setting number.
-   * @param out_length Pointer to store the length of the descriptor.
-   * @return Pointer to the descriptor data.
-   */
-  const uint8_t* getAudioDescriptors(uint8_t /*itf*/, uint8_t /*alt*/,
-                                     uint16_t* out_length) {
-    return descr_builder.buildFullDescriptor(out_length);
-  }
-
   /** @brief Returns true if the device is mounted by the USB host. */
   bool mounted() const { return tud_mounted(); }
 
@@ -349,16 +335,14 @@ class USBAudioDeviceBase {
     // Example: handle standard GET_DESCRIPTOR request for audio interface
     if (request->bmRequestType_bit.type == TUSB_REQ_TYPE_STANDARD &&
         request->bRequest == TUSB_REQ_GET_DESCRIPTOR) {
-      uint16_t desc_len;
 
-      uint8_t const itf = tu_u16_low(request->wIndex);
-      uint8_t const alt = tu_u16_low(request->wValue);
+      //uint8_t const itf = tu_u16_low(request->wIndex);
+      //uint8_t const alt = tu_u16_low(request->wValue);
 
-      const uint8_t* desc = getAudioDescriptors(itf, alt, &desc_len);
-      if (desc && buffer && length >= desc_len) {
-        std::memcpy(buffer, desc, desc_len);
-        return true;
-      }
+      uint16_t desc_len = getDescriptor((uint8_t*)buffer);  // fills active_config_ as a side effect
+      assert(desc_len <= USB_DESCR_MAX_LEN);
+
+      return true;
     }
     // TODO: handle class-specific requests (mute, volume, etc.)
     return false;
@@ -371,37 +355,28 @@ class USBAudioDeviceBase {
    * audio data transmission and reception.
    */
   void process() {
+    // ESP32: the USB FreeRTOS task drives tud_task() and audiod_xfer_cb — no
+    // need to drain TX here; doing so would over-drain and send silence.
 #ifdef USE_TINYUSB
     // RP2040: the app drives the USB stack; this also triggers audiod_xfer_cb
     // which is the sole TX drainer (fills ep_in_ff at the correct 1-ms rate).
     tud_task();
 #endif
-    // ESP32: the USB FreeRTOS task drives tud_task() and audiod_xfer_cb — no
-    // need to drain TX here; doing so would over-drain and send silence.
     if (process_buf_rx_.empty()) return;
     const uint16_t pkt = (uint16_t)process_buf_rx_.size();
     if (config_.enable_ep_out && tud_ready()) {
       // Snapshot bytes available now — don't chase new arrivals from the USB
       // ISR (one packet/ms).  Without this the drain loop never exits,
       // freezing loop() while audio is streaming.
-      uint16_t avail = available();
+      uint16_t avail = rxAvailable();
       uint16_t n = 0;
-      while (avail > 0 && (n = read(process_buf_rx_.data(), pkt)) > 0) {
+      while (avail > 0 && (n = read1(process_buf_rx_.data(), pkt)) > 0) {
         if (rx_callback_) rx_callback_(process_buf_rx_.data(), n);
         total_rx_bytes_ += n;
         avail = (avail >= n) ? avail - n : 0;
       }
       yield();
     }
-  }
-
-  uint16_t available() {
-    for (uint8_t i = 0; i < (uint8_t)audiod_fct_.size(); i++) {
-      if (audiod_fct_[i].ep_out == config_.ep_out) {
-        return tud_audio_n_available(i);
-      }
-    }
-    return 0;
   }
 
   /**
@@ -583,14 +558,14 @@ class USBAudioDeviceBase {
   }
 
   /** @brief Send audio data to the host (device → host, microphone/capture). */
-  uint16_t writeAudio(const void* data, uint16_t len) {
-    return write(data, len);
+  size_t write(const uint8_t* data, size_t len) {
+    return write1(data, len);
   }
 
   /** @brief Receive audio data from the host (host → device, speaker/playback).
    */
-  uint16_t readAudio(void* buffer, uint16_t bufsize) {
-    return read(buffer, bufsize);
+  size_t readBytes(uint8_t* buffer, size_t bufsize) {
+    return read1(buffer, bufsize);
   }
 
   /** @brief Bytes of received audio waiting in the RX FIFO. */
@@ -646,8 +621,9 @@ class USBAudioDeviceBase {
    * @param[out] len  Total byte count of the returned block.
    * @return Pointer to the audio function descriptor bytes.
    */
-  const uint8_t* getDescriptor(uint16_t* len) {
-    return descr_builder.buildFullDescriptor(len);
+  uint16_t getDescriptor(uint8_t* desc) {
+    active_config_ = config_; // save active config
+    return descr_builder.buildFullDescriptor(desc);
   }
 
   /**
@@ -665,7 +641,7 @@ class USBAudioDeviceBase {
    * @param count Pointer to store the number of drivers (always 1).
    * @return Pointer to the class driver structure.
    */
-  usbd_class_driver_t const* usbd_app_driver_get(uint8_t* count) {
+  usbd_class_driver_t const* getClassDriver(uint8_t* count) {
     static usbd_class_driver_t driver;
     driver.name = "Audio";
     driver.init = [](void) {
@@ -700,31 +676,11 @@ class USBAudioDeviceBase {
   }
 
  protected:
-  static bool strSame(const char* a, const char* b) {
-    if (a == b) return true;
-    if (!a || !b) return false;
-    return std::strcmp(a, b) == 0;
-  }
-
-  bool configChanged(const USBAudioConfig& n) const {
-    const USBAudioConfig& o = config_;
-    return o.sample_rate != n.sample_rate || o.channels != n.channels ||
-           o.bits_per_sample != n.bits_per_sample ||
-           o.enable_ep_in != n.enable_ep_in ||
-           o.enable_ep_out != n.enable_ep_out ||
-           o.enable_feedback_ep != n.enable_feedback_ep || o.ep_in != n.ep_in ||
-           o.ep_out != n.ep_out || o.ep_fb != n.ep_fb ||
-           o.itf_num_ac != n.itf_num_ac || o.vid != n.vid || o.pid != n.pid ||
-           o.self_powered != n.self_powered ||
-           o.max_power_ma != n.max_power_ma ||
-           !strSame(o.manufacturer, n.manufacturer) ||
-           !strSame(o.product, n.product) || !strSame(o.serial, n.serial);
-  }
-
   bool is_started_ = false;
   size_t total_rx_bytes_ = 0;
   size_t total_tx_bytes_ = 0;
   USBAudioConfig config_;
+  USBAudioConfig active_config_;
   USBAudio2DescriptorBuilder descr_builder{config_};
   std::function<void(const uint8_t*, uint16_t)> rx_callback_;
   std::function<uint16_t(uint8_t*, uint16_t)> tx_callback_;
@@ -797,9 +753,13 @@ class USBAudioDeviceBase {
   std::vector<uint8_t> process_buf_tx_;
   std::vector<uint8_t> process_buf_rx_;
 
-  // s_active_ lets usbd_app_driver_get_cb() and the static process() trampoline
+  // s_active_ lets getClassDriver() and the static process() trampoline
   // reach the last-constructed instance without a singleton.
   inline static USBAudioDeviceBase* s_active_ = nullptr;
+
+  bool configChanged(const USBAudioConfig& n) {
+    return config_ != n;
+  }
 
   // Returns the control buffer size for a given function number
   uint16_t getCtrlBufSz(uint8_t fn) const {
@@ -899,7 +859,7 @@ class USBAudioDeviceBase {
   }
 
   // Write audio data to IN endpoint
-  uint16_t write(const void* data, uint16_t len) {
+  uint16_t write1(const void* data, uint16_t len) {
     for (uint8_t i = 0; i < (uint8_t)audiod_fct_.size(); i++) {
       if (audiod_fct_[i].ep_in == config_.ep_in)
         return tud_audio_n_write(i, data, len);
@@ -908,7 +868,7 @@ class USBAudioDeviceBase {
   }
 
   // Read audio data from OUT endpoint
-  uint16_t read(void* buffer, uint16_t bufsize) {
+  uint16_t read1(void* buffer, uint16_t bufsize) {
     for (uint8_t i = 0; i < (uint8_t)audiod_fct_.size(); i++) {
       if (audiod_fct_[i].ep_out == config_.ep_out)
         return tud_audio_n_read(i, buffer, bufsize);
@@ -1215,7 +1175,7 @@ class USBAudioDeviceBase {
           std::fill(process_buf_tx_.begin(), process_buf_tx_.end(), 0);
           uint16_t n = tx_callback_(process_buf_tx_.data(), pkt);
           total_tx_bytes_ += n;
-          if (n > 0) write(process_buf_tx_.data(), n);
+          if (n > 0) write1(process_buf_tx_.data(), n);
         }
         if (getUseLinearBufferTx()) {
           // Drain FIFO into the DMA staging buffer, then re-arm.
@@ -2084,6 +2044,6 @@ class USBAudioDeviceBase {
 // Custom driver registration — routes to whichever USBAudioDeviceBase subclass
 // was constructed (base or derived; set via s_active_ in the constructor).
 extern "C" usbd_class_driver_t const* usbd_app_driver_get_cb(uint8_t* count) {
-  return audio_tools::USBAudioDeviceBase::activeInstance().usbd_app_driver_get(
+  return audio_tools::USBAudioDeviceBase::activeInstance().getClassDriver(
       count);
 }

@@ -1,5 +1,6 @@
 #pragma once
-#include "stdint.h"
+#include <stdint.h>
+#include <cstring>
 #include "AudioTools/CoreAudio/AudioTypes.h"
 
 namespace audio_tools {
@@ -72,6 +73,52 @@ struct USBAudioConfig : public AudioInfo {
   /// RX_MODE: Input Terminal ID  (host → device, ISO OUT).
   /// Must match the UAC2 node topology in the board device tree.
   uint8_t terminal_id = 1;
+
+
+  bool operator==(const USBAudioConfig& other) {
+    return
+      sample_rate == other.sample_rate &&
+      channels == other.channels &&
+      bits_per_sample == other.bits_per_sample &&
+
+      enable_ep_in == other.enable_ep_in &&
+      enable_ep_out == other.enable_ep_out &&
+
+      ep_in == other.ep_in &&
+      ep_out == other.ep_out &&
+      ep_fb == other.ep_fb &&
+
+      itf_num_ac == other.itf_num_ac &&
+      fifo_packets == other.fifo_packets &&
+
+      vid == other.vid &&
+      pid == other.pid &&
+
+      std::strcmp(manufacturer ? manufacturer : "",
+                  other.manufacturer ? other.manufacturer : "") == 0 &&
+
+      std::strcmp(product ? product : "",
+                  other.product ? other.product : "") == 0 &&
+
+      std::strcmp(serial ? serial : "",
+                  other.serial ? other.serial : "") == 0 &&
+
+      self_powered == other.self_powered &&
+      max_power_ma == other.max_power_ma &&
+
+      enable_feedback_ep == other.enable_feedback_ep &&
+      use_linear_buffer_rx == other.use_linear_buffer_rx &&
+      use_linear_buffer_tx == other.use_linear_buffer_tx &&
+
+      begin_usb == other.begin_usb &&
+      terminal_id == other.terminal_id;
+  }
+
+  bool operator!=(const USBAudioConfig& other) {
+    return !(*this == other);
+  }
+
+
 };
 
 }  // namespace audio_tools
