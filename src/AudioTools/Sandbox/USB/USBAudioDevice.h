@@ -10,4 +10,6 @@
 #  include "USBAudioDeviceESP32.h"
 #elif defined(IS_ZEPHYR)
 #  include "USBAudioDeviceZephyr.h"
+#else
+#  error "No USBAudioDevice implementation defined for this platform"
 #endif

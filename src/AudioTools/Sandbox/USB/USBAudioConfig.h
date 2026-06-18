@@ -54,12 +54,19 @@ struct USBAudioConfig : public AudioInfo {
   /// Enable isochronous feedback endpoint so the host can adjust its clock.
   bool enable_feedback_ep = true;
 
+  /// Enable UAC2 IN-endpoint flow control: vary the per-frame isochronous
+  /// packet size so non-integer sample-per-frame rates are delivered at the
+  /// exact average rate.  Without it the device sends a fixed (rounded-up)
+  /// packet every frame, which makes e.g. 44100 Hz run at 45000 Hz effective
+  /// (45 samples/ms instead of the required 44.1 average).
+  bool enable_ep_in_flow_control = true;
+
   /// Use a flat contiguous buffer for RX instead of a circular FIFO.
   /// Required when the downstream audio driver uses DMA.
-  bool use_linear_buffer_rx = false;
+  bool use_linear_buffer_rx = true;
   /// Use a flat contiguous buffer for TX instead of a circular FIFO.
   /// Required when the upstream audio driver uses DMA.
-  bool use_linear_buffer_tx = false;
+  bool use_linear_buffer_tx = true;
 
   // ── ESP32-specific ────────────────────────────────────────────────────────
   /// When true (default), beginUSB() calls USB.begin() automatically.
@@ -107,6 +114,7 @@ struct USBAudioConfig : public AudioInfo {
       max_power_ma == other.max_power_ma &&
 
       enable_feedback_ep == other.enable_feedback_ep &&
+      enable_ep_in_flow_control == other.enable_ep_in_flow_control &&
       use_linear_buffer_rx == other.use_linear_buffer_rx &&
       use_linear_buffer_tx == other.use_linear_buffer_tx &&
 

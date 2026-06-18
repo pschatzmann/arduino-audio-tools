@@ -38,8 +38,15 @@ uint16_t onTx(uint8_t* data, uint16_t len) {
 }
 
 void setup() {
+  // Manual begin() is required on core without built-in support e.g. mbed rp2040
+  if (!TinyUSBDevice.isInitialized()) {
+    TinyUSBDevice.begin(0);
+  }
+
   Serial.begin(115200);
-  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
+  while(!Serial) delay(100);
+  Serial.println("starting...");
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   // start generating the sine wave at 440 Hz (A4) with the default audio config
   sine.begin(info, N_B4);
@@ -49,6 +56,13 @@ void setup() {
   cfg.begin_usb = true;
   dev.setTxCallback(onTx);
   dev.begin(cfg);  // begin() calls beginUSB() internally
+
+    // If already enumerated, additional class driverr begin() e.g msc, hid, midi won't take effect until re-enumeration
+  if (TinyUSBDevice.mounted()) {
+    TinyUSBDevice.detach();
+    delay(10);
+    TinyUSBDevice.attach();
+  }
 }
 
 void loop() {

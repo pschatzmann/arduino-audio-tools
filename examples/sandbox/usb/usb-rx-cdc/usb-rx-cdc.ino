@@ -18,22 +18,22 @@
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-#include <USB.h>
-#include <USBCDC.h>
 #include "AudioTools.h"
 #include "AudioTools/Sandbox/USB/USBAudioStream.h"
 
-USBCDC USBSerial;
-
 AudioInfo info(44100, 2, 16);
 USBAudioStream in;
-MeasuringStream out(200, &USBSerial);
+MeasuringStream out(200, &Serial);
 StreamCopy copier(out, in, 80);
 
 void setup() {
+  // Manual begin() is required on core without built-in support e.g. mbed rp2040
+  if (!TinyUSBDevice.isInitialized()) {
+    TinyUSBDevice.begin(0);
+  }
   // Register the CDC interface first (gets interfaces 0-1).
-  USBSerial.begin(115200);
-  AudioToolsLogger.begin(USBSerial, AudioToolsLogLevel::Warning);
+  Serial.begin(115200);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   // Start MeasuringStream so it knows the audio format.
   out.begin(info);
@@ -50,9 +50,16 @@ void setup() {
 
   // Start the USB stack after all interfaces (CDC + Audio) are registered.
   USB.begin();
-  while (!USBSerial) delay(500);
+  while (!Serial) delay(500);
 
-  USBSerial.println("USB audio RX + CDC started");
+  Serial.println("USB audio RX + CDC started");
+
+  // If already enumerated, additional class driverr begin() e.g msc, hid, midi won't take effect until re-enumeration
+  if (TinyUSBDevice.mounted()) {
+    TinyUSBDevice.detach();
+    delay(10);
+    TinyUSBDevice.attach();
+  }
 }
 
 void loop() {

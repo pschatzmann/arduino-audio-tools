@@ -7,6 +7,7 @@
 
 namespace audio_tools {
 
+
 /**
  * @brief USBAudioDeviceBase subclass for RP2040 / Adafruit TinyUSB.
  *
@@ -32,7 +33,10 @@ namespace audio_tools {
 class USBAudioDeviceTinyUSB : public USBAudioDeviceBase,
                               public Adafruit_USBD_Interface {
  public:
-  USBAudioDeviceTinyUSB() = default;
+  /// Default construcotr using default config
+  USBAudioDeviceTinyUSB() {};
+
+  /// Constructor with config
   USBAudioDeviceTinyUSB(USBAudioConfig cfg) : USBAudioDeviceBase(cfg) {}
 
   // ── Adafruit_USBD_Interface
@@ -59,13 +63,8 @@ class USBAudioDeviceTinyUSB : public USBAudioDeviceBase,
       if (this->getEnableFeedbackEp())
         config_.ep_fb = TinyUSBDevice.allocEndpoint(TUSB_DIR_IN);
     }
-    uint16_t len = 0;
-    const uint8_t* desc = getDescriptor(&len);
-    if (!desc) return 0;
-    if (buf) {
-      assert(len <= bufsize);
-      memcpy(buf, desc, len);
-    }
+    uint16_t len = getDescriptor(buf);
+    assert(bufsize >= len);
     return len;
   }
 
@@ -73,25 +72,25 @@ class USBAudioDeviceTinyUSB : public USBAudioDeviceBase,
   // ──────────────────────────────────────────────────────
 
   bool beginUSB() override {
-    TinyUSBDevice.addInterface(*this);  
-    if (!TinyUSBDevice.isInitialized()) {
-      TinyUSBDevice.setID(config_.vid, config_.pid);
-      TinyUSBDevice.setManufacturerDescriptor(config_.manufacturer);
-      TinyUSBDevice.setProductDescriptor(config_.product);
-      TinyUSBDevice.setSerialDescriptor(config_.serial);
-      TinyUSBDevice.begin();
-    } else {
-      if (TinyUSBDevice.mounted()) {
-        TinyUSBDevice.detach();
-        delay(10);
-        TinyUSBDevice.attach();
-      }
+    TinyUSBDevice.setID(config_.vid, config_.pid);
+    TinyUSBDevice.setManufacturerDescriptor(config_.manufacturer);
+    TinyUSBDevice.setProductDescriptor(config_.product);
+    TinyUSBDevice.setSerialDescriptor(config_.serial);
+    setupBuffer();
+    if (!TinyUSBDevice.addInterface(*this)) {
+      return false;
     }
     return true;
   }
 
+ protected:
+  void setupBuffer() {
+    static uint8_t buffer[USB_DESCR_MAX_LEN];
+    TinyUSBDevice.setConfigurationBuffer(buffer, USB_DESCR_MAX_LEN);
+  }
 };
 
 using USBAudioDevice = USBAudioDeviceTinyUSB;
+
 
 }  // namespace audio_tools

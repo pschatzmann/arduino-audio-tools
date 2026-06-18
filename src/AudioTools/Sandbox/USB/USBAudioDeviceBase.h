@@ -21,7 +21,7 @@
 #endif
 
 #include "USBAudio2DescriptorBuilder.h"
-#include "USBAudioConfig.h"
+#include "AudioLogger.h"
 
 extern "C" {
 #include "device/usbd.h"
@@ -159,6 +159,10 @@ class USBAudioDeviceBase {
     audio_format_type_t format_type_tx;
     uint8_t n_channels_tx;
     uint8_t n_bytes_per_sample_tx;
+    // Fractional sample accumulator for IN-endpoint flow control. Carries the
+    // sub-frame remainder (e.g. the 0.1 sample/frame of 44100 Hz) so the
+    // long-term average packet size matches the real sample rate.
+    uint32_t tx_sample_acc;
     // From this point, data is not cleared by bus reset
     uint8_t ctrl_buf_sz;
     tu_fifo_t ep_out_ff;
@@ -215,14 +219,6 @@ class USBAudioDeviceBase {
       default:
         break;
     }
-#ifdef ESP32
-    // ESP32's USB DCD does not support DMA-direct-to-tu_fifo_t for isochronous
-    // OUT endpoints (usbd_edpt_xfer_fifo fails silently), so ep_out_ff is never
-    // written and no audio data arrives.  Linear-buffer mode uses a plain
-    // uint8_t* DMA target which all DCDs support; audiod_xfer_cb then copies
-    // each received packet into ep_out_ff via tu_fifo_write_n.
-    if (cfg.enable_ep_out) cfg.use_linear_buffer_rx = true;
-#endif
     return cfg;
   }
 
@@ -300,8 +296,12 @@ class USBAudioDeviceBase {
    *  Only meaningful in pure RX (OUT-only) mode: with an IN endpoint present
    *  the host uses the TX stream as implicit feedback instead. */
   bool getEnableFeedbackEp() const { return descr_builder.enableFeedbackEp(); }
-  /** @brief Returns true if IN endpoint flow control is enabled. */
-  bool getEnableEpInFlowControl() const { return false; }
+  /** @brief Returns true if IN endpoint flow control is enabled. When on, the
+   *  per-frame isochronous packet size is varied so non-integer sample-per-
+   *  frame rates (e.g. 44100 Hz) are delivered at the exact average rate. */
+  bool getEnableEpInFlowControl() const {
+    return config_.enable_ep_in_flow_control;
+  }
 
   /** @brief Returns true when the host has selected the streaming alternate
    *  setting (alt > 0) and opened the isochronous IN endpoint.  Use this to
@@ -362,7 +362,7 @@ class USBAudioDeviceBase {
     // which is the sole TX drainer (fills ep_in_ff at the correct 1-ms rate).
     tud_task();
 #endif
-    if (process_buf_rx_.empty()) return;
+//    if (process_buf_rx_.empty()) return;
     const uint16_t pkt = (uint16_t)process_buf_rx_.size();
     if (config_.enable_ep_out && tud_ready()) {
       // Snapshot bytes available now — don't chase new arrivals from the USB
@@ -643,7 +643,7 @@ class USBAudioDeviceBase {
    */
   usbd_class_driver_t const* getClassDriver(uint8_t* count) {
     static usbd_class_driver_t driver;
-    driver.name = "Audio";
+    driver.name = "AUDIO";
     driver.init = [](void) {
       USBAudioDeviceBase::activeInstance().audiod_init();
     };
@@ -671,6 +671,8 @@ class USBAudioDeviceBase {
     driver.sof = [](uint8_t rhport, uint32_t frame_count) {
       USBAudioDeviceBase::activeInstance().audiod_sof_isr(rhport, frame_count);
     };
+
+
     *count = 1;
     return &driver;
   }
@@ -1168,27 +1170,43 @@ class USBAudioDeviceBase {
       if (getEnableEpIn() && audio->ep_in == ep_addr &&
           audio->alt_setting.size() != 0) {
         if (tx_done_cb_) tx_done_cb_(this, rhport, audio);
+
+        // Target byte count for this (micro)frame. With IN flow control on this
+        // varies (e.g. 176/180 bytes for 44100 Hz) so the long-term average
+        // tracks the real sample rate; otherwise it is the fixed max packet.
+        uint16_t frame_bytes = getEnableEpInFlowControl()
+                                   ? audiod_tx_packet_size_fc(audio)
+                                   : audio->ep_in_sz;
+        if (frame_bytes > audio->ep_in_sz) frame_bytes = audio->ep_in_sz;
+
         // Refill ep_in_ff from the TX callback here (in TinyUSB's own task/ISR)
         // so the pipeline never stalls even if process() is blocked in loop().
         if (tx_callback_ && !process_buf_tx_.empty()) {
-          const uint16_t pkt = (uint16_t)process_buf_tx_.size();
-          std::fill(process_buf_tx_.begin(), process_buf_tx_.end(), 0);
-          uint16_t n = tx_callback_(process_buf_tx_.data(), pkt);
+          uint16_t req = frame_bytes;
+          if (req > (uint16_t)process_buf_tx_.size())
+            req = (uint16_t)process_buf_tx_.size();
+          std::fill(process_buf_tx_.begin(), process_buf_tx_.begin() + req, 0);
+          uint16_t n = tx_callback_(process_buf_tx_.data(), req);
           total_tx_bytes_ += n;
           if (n > 0) write1(process_buf_tx_.data(), n);
         }
         if (getUseLinearBufferTx()) {
-          // Drain FIFO into the DMA staging buffer, then re-arm.
+          // Drain one frame's worth into the DMA staging buffer, then re-arm.
           // lin_buf_in is safe to write now that the previous DMA has finished.
-          uint16_t n = tu_fifo_read_n(
-              &audio->ep_in_ff, audio->lin_buf_in.data(), audio->ep_in_sz);
-          if (n == 0)
-            std::fill(audio->lin_buf_in.begin(), audio->lin_buf_in.end(), 0);
+          uint16_t n = tu_fifo_read_n(&audio->ep_in_ff,
+                                      audio->lin_buf_in.data(), frame_bytes);
+          if (n < frame_bytes)
+            std::fill(audio->lin_buf_in.begin() + n,
+                      audio->lin_buf_in.begin() + frame_bytes, 0);
           TU_VERIFY(TUSB_EDPT_XFER(rhport, audio->ep_in,
-                                   audio->lin_buf_in.data(), audio->ep_in_sz));
+                                   audio->lin_buf_in.data(), frame_bytes));
         } else {
+          // Send what is queued, capped at this frame's target size. Passing
+          // more than is buffered to xfer_fifo would over-read the ring.
+          uint16_t send = tu_fifo_count(&audio->ep_in_ff);
+          if (send > frame_bytes) send = frame_bytes;
           TU_VERIFY(TUSB_EDPT_XFER_FIFO(rhport, audio->ep_in, &audio->ep_in_ff,
-                                        audio->ep_in_sz));
+                                        send));
         }
         return true;
       }
@@ -1466,6 +1484,13 @@ class USBAudioDeviceBase {
 
   void audiod_parse_flow_control_params(audiod_function_t* audio,
                                         uint8_t const* p_desc) {
+    // Seed the TX sample rate from the configured AudioInfo so packet-size
+    // calculation works even when the host never issues a SET_CUR(SAM_FREQ)
+    // request (typical for single-frequency clock sources). The host may still
+    // override this later via audiod_control_complete().
+    if (audio->sample_rate_tx == 0)
+      audio->sample_rate_tx = (uint32_t)config_.sample_rate;
+
     p_desc = tu_desc_next(p_desc);  // Exclude standard AS interface descriptor
                                     // of current alternate interface descriptor
 
@@ -1979,6 +2004,9 @@ class USBAudioDeviceBase {
     TU_VERIFY(audio->interval_tx);
     TU_VERIFY(audio->sample_rate_tx);
 
+    // Restart the fractional accumulator for this streaming session.
+    audio->tx_sample_acc = 0;
+
     const uint8_t interval = (tud_speed_get() == TUSB_SPEED_FULL)
                                  ? audio->interval_tx
                                  : 1 << (audio->interval_tx - 1);
@@ -2021,6 +2049,33 @@ class USBAudioDeviceBase {
     return true;
   }
 
+  // Number of audio bytes to transmit in the current (micro)frame when IN
+  // flow control is enabled. A fractional accumulator distributes the
+  // sub-frame sample remainder over successive frames so the long-term average
+  // matches the configured sample rate (e.g. alternating 176/180 bytes for
+  // 44100 Hz stereo 16-bit, averaging 176.4 bytes = 44.1 samples per frame).
+  uint16_t audiod_tx_packet_size_fc(audiod_function_t* audio) {
+    if (audio->sample_rate_tx == 0 || audio->n_channels_tx == 0 ||
+        audio->n_bytes_per_sample_tx == 0) {
+      // Not enough info to size precisely: fall back to the max packet.
+      return audio->ep_in_sz;
+    }
+    const uint32_t denom =
+        (tud_speed_get() == TUSB_SPEED_FULL) ? 1000u : 8000u;
+    const uint8_t iv = audio->interval_tx ? audio->interval_tx : 1;
+    const uint32_t interval =
+        (tud_speed_get() == TUSB_SPEED_FULL) ? iv : (1u << (iv - 1));
+
+    audio->tx_sample_acc += audio->sample_rate_tx * interval;
+    const uint32_t samples = audio->tx_sample_acc / denom;
+    audio->tx_sample_acc -= samples * denom;
+
+    uint32_t bytes =
+        samples * audio->n_channels_tx * audio->n_bytes_per_sample_tx;
+    if (bytes > audio->ep_in_sz) bytes = audio->ep_in_sz;
+    return (uint16_t)bytes;
+  }
+
   uint16_t tud_audio_n_write(uint8_t func_id, const void* data, uint16_t len) {
     TU_VERIFY(func_id < getAudioCount() && audiod_fct_[func_id].p_desc != NULL);
     // Always write to the FIFO. In linear-buffer mode the xfer_cb drains the
@@ -2041,8 +2096,8 @@ class USBAudioDeviceBase {
 
 }  // namespace audio_tools
 
-// Custom driver registration — routes to whichever USBAudioDeviceBase subclass
-// was constructed (base or derived; set via s_active_ in the constructor).
+// // Custom driver registration — routes to whichever USBAudioDeviceBase subclass
+// // was constructed (base or derived; set via s_active_ in the constructor).
 extern "C" usbd_class_driver_t const* usbd_app_driver_get_cb(uint8_t* count) {
   return audio_tools::USBAudioDeviceBase::activeInstance().getClassDriver(
       count);
