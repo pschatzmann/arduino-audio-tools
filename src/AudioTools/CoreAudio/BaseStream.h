@@ -479,7 +479,7 @@ class QueueStream : public BaseStream {
   int levelPercent() {return p_buffer->levelPercent();}
 
   /// Resize the buffer
-  bool resize(int size) {return p_buffer->resize(size);}
+  bool resize(size_t size) {return p_buffer->resize(size);}
 
  protected:
   BaseBuffer<T> *p_buffer;

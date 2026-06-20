@@ -91,12 +91,15 @@ class FFTInverseOverlapAdder {
   }
 
   /// Initilze data by defining new size
-  void resize(int size) {
+  boo resize(size_t size) {
     // reset max for new scaling
     rfft_max = 0.0;
     // define new size
     len = size;
-    data.resize(size);
+    if (!data.resize(size)) {
+      LOGE("Could not resize data");
+      return false;
+    }
     for (int j = 0; j < data.size(); j++) {
       data[j] = 0.0;
     }

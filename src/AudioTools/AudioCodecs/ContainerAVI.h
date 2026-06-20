@@ -30,7 +30,10 @@ public:
     memmove(vector.data(), &vector[size], available_byte_count - size);
     available_byte_count -= size;
   }
-  void resize(int size) { vector.resize(size + 4); }
+  bool resize(size_t size) { 
+    vector.resize(size + 4); 
+    return vector.data() != nullptr;
+  }
 
   uint8_t *data() { return vector.data(); }
 

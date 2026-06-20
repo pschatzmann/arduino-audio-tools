@@ -50,7 +50,7 @@ class QueueRTOS {
   void setWriteMaxWait(TickType_t ticks) { write_max_wait = ticks; }
 
   /// (Re-)defines the size
-  bool resize(int size) {
+  bool resize(size_t size) {
     bool result = true;
     TRACED();
     if (size != queue_size) {

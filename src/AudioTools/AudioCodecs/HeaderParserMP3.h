@@ -190,7 +190,7 @@ class HeaderParserMP3 {
 
   void setOutput(Print& output) { p_output = &output; }
 
-  void resize(int size) { buffer_size = size; }
+  bool resize(size_t size) { buffer_size = size; return true; }
 
   /// split up the data into mp3 segements and write to output
   size_t write(const uint8_t* data, size_t len) {

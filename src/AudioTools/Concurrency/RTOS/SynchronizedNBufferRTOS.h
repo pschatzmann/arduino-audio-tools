@@ -29,7 +29,7 @@ public:
     cleanup();
   }
 
-  bool resize(int bufferSize, int bufferCount) {
+  bool resize(size_t bufferSize, int bufferCount) {
     TRACED();
     if (buffer_size == bufferSize && buffer_count == bufferCount){
       return true;
