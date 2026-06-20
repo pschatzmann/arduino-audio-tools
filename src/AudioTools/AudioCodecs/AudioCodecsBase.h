@@ -116,11 +116,13 @@ class AudioEncoder : public AudioWriter {
   AudioInfo info;
 };
 
+/// @brief  Extended AudioDecoder interface to support block size configuration
 class AudioDecoderExt : public AudioDecoder {
  public:
   virtual void setBlockSize(int blockSize) = 0;
 };
 
+/// @brief  Extended AudioEncoder interface to support block size configuration
 class AudioEncoderExt : public AudioEncoder {
  public:
   virtual int blockSize() = 0;
