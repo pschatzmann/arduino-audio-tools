@@ -150,6 +150,7 @@ class MP3EncoderShine : public AudioEncoder {
   uint16_t samplesPerFrame() override { return 1152; }
 
   void flush() {
+    if (_shine == nullptr || _out == nullptr) return;
     // complete buffer with zeros and write the last frame
     while (!_pcm_buffer.isFull())
       _pcm_buffer.write(0);  // pad with zeros until full
