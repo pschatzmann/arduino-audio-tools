@@ -241,7 +241,7 @@ class QualityAnalysisStream : public ModifyingStream {
 
   template <typename T>
   void analyzeT(const uint8_t* buffer, size_t size) {
-    const T* samples = (const T*)buffer;
+    T* samples = (T*)buffer;
     int count = size / sizeof(T);
     int channels = info.channels > 0 ? info.channels : 1;
     float abs_click = click_threshold * max_value;
@@ -249,7 +249,7 @@ class QualityAnalysisStream : public ModifyingStream {
     float abs_clip = max_value * (1.0f - clipping_margin);
 
     for (int i = 0; i < count; i++) {
-      float val = static_cast<float>(samples[i]);
+      float val = static_cast<float>(static_cast<int>(samples[i]));
       float abs_val = val < 0 ? -val : val;
       int ch = i % channels;
 
