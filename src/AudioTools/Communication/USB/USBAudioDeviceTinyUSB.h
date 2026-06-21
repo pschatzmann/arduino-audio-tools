@@ -94,13 +94,13 @@ class USBAudioDeviceTinyUSB : public USBAudioDeviceBase,
   void resizeBuffers() override {
     uint16_t block_sz = packetSize();
     uint8_t  block_cnt = config_.fifo_packets;
-    if (isEpInEnabled())  buffer_tx_.resize(block_sz, block_cnt);
-    if (isEpOutEnabled()) buffer_rx_.resize(block_sz, block_cnt);
+    if (isEpInEnabled())  buffer_tx_.resize(block_sz * block_cnt);
+    if (isEpOutEnabled()) buffer_rx_.resize(block_sz *block_cnt);
   }
 
  protected:
-  NBuffer<uint8_t> buffer_tx_{0, 0};
-  NBuffer<uint8_t> buffer_rx_{0, 0};
+  RingBuffer<uint8_t> buffer_tx_{0};
+  RingBuffer<uint8_t> buffer_rx_{0};
 
   void setupDescrBuffer() {
     static uint8_t buffer[USB_DESCR_MAX_LEN];

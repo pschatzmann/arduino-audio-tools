@@ -58,7 +58,6 @@ void setup(void) {
   // USB audio must be started before any other USB device (e.g. USB CDC).
   auto config = out.defaultConfig(TX_MODE);
   config.copyFrom(info);
-  config.begin_usb = true;
   out.begin(config);
 
   // If already enumerated, additional class driver begin() e.g msc, hid, midi
@@ -75,4 +74,16 @@ void setup(void) {
 
 void loop() {
   if (out.isStreamingActiveTx()) copier.copy();
+  static unsigned long last_ms = 0;
+  if (millis() - last_ms > 1000) {
+    last_ms = millis();
+    Serial.print("xfer="); Serial.print(out.getTxXferCount());
+    Serial.print(" rd="); Serial.print(out.getTxFifoReadTotal());
+    Serial.print(" avail="); Serial.print(out.availableForWrite());
+    Serial.print(" filled="); Serial.print(out.bufferTx().bufferCountFilled());
+    Serial.print(" empty="); Serial.print(out.bufferTx().bufferCountEmpty());
+    Serial.print(" frame="); Serial.print(out.getTxFrameBytesLast());
+    Serial.print(" bps="); Serial.println(out.getTxBytesPerSample());
+  }
+
 }

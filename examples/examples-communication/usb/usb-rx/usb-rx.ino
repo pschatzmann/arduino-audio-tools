@@ -67,4 +67,13 @@ void setup() {
 
 void loop() {
   copier.copy();  // read ep_out_ff → MeasuringStream
+  static unsigned long last_ms = 0;
+  if (millis() - last_ms > 1000) {
+    last_ms = millis();
+    MySerial.print("active="); MySerial.print(in.isStreamingActiveRx());
+    MySerial.print(" rxXfer="); MySerial.print(in.getRxXferCount());
+    MySerial.print(" rxBytes="); MySerial.print(in.getRxTotalBytes());
+    MySerial.print(" bufRx="); MySerial.print(in.bufferRx().available());
+    MySerial.print(" avail="); MySerial.println(in.available());
+  }
 }

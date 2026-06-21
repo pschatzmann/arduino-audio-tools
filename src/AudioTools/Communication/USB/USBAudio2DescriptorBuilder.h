@@ -238,8 +238,13 @@ class USBAudio2DescriptorBuilder {
     *p++ = 0x24;        // CS_INTERFACE
     *p++ = 0x0A;        // CLOCK_SOURCE
     *p++ = clock_id;
-    *p++ = 0x03;        // bmAttributes: internal programmable clock
-    *p++ = 0x07;        // bmControls: freq host-programmable (11b), validity read-only (01b)
+    if (p_config->enable_multi_sample_rate) {
+      *p++ = 0x03;      // bmAttributes: internal programmable clock
+      *p++ = 0x07;      // bmControls: freq host-programmable (11b), validity read-only (01b)
+    } else {
+      *p++ = 0x01;      // bmAttributes: internal fixed clock
+      *p++ = 0x05;      // bmControls: freq read-only (01b), validity read-only (01b)
+    }
     *p++ = 0x00;        // bAssocTerminal
     *p++ = 0x00;        // iClockSource
     return p;
@@ -356,7 +361,11 @@ class USBAudio2DescriptorBuilder {
   // byte count varies with the current sample rate; the host will never
   // send or expect more than wMaxPacketSize in a single (micro)frame.
   uint8_t* writeIsoEndpoint(uint8_t* p, uint8_t ep_addr) {
-    const uint16_t pkt = calcPacketSizeForRate(192000);
+    // Fixed clock: wMaxPacketSize matches the configured rate.
+    // Multi-rate: covers the highest supported rate (192 kHz).
+    const uint16_t pkt = p_config->enable_multi_sample_rate
+        ? calcPacketSizeForRate(192000)
+        : calcMaxPacketSize();
     // bmAttributes: Isochronous (01) + sync type (bits[3:2]) + usage=data (00)
     //   bits 3:2: 00=None, 01=Async, 10=Adaptive, 11=Sync
     // IN  endpoints: Asynchronous (0x05) — device drives the clock.

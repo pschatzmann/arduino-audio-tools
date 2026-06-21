@@ -59,6 +59,14 @@ struct USBAudioConfig : public AudioInfo {
   /// Enable isochronous feedback endpoint so the host can adjust its clock.
   bool enable_feedback_ep = true;
 
+  /// When false (default): the clock source is fixed at sample_rate.
+  /// The descriptor reports an internal fixed clock, and GET_RANGE returns
+  /// only the configured rate.  This avoids complex host negotiation.
+  /// When true: the clock source is programmable and GET_RANGE returns
+  /// 14 discrete rates (8 kHz – 192 kHz).  The host can change the rate
+  /// via SET_CUR, and the descriptor wMaxPacketSize covers 192 kHz.
+  bool enable_multi_sample_rate = false;
+
   /// Enable the AC interrupt IN endpoint for device-initiated volume, mute,
   /// and sample-rate change notifications.  Without it the host must poll
   /// via GET_CUR; the controls still work, just without push updates.
