@@ -95,6 +95,10 @@ class BaseBuffer {
   ///  same as reset
   void clear() { reset(); }
 
+  /// Submit any partially-filled write buffer so the reader can access it.
+  /// Only meaningful for NBuffer-style block pools; no-op for ring buffers.
+  virtual void flush() {}
+
   /// provides the number of entries that are available to read
   virtual int available() = 0;
 
@@ -119,6 +123,13 @@ class BaseBuffer {
     LOGE("resize not implemented for this buffer");
     return false;
   }
+
+  /// Provides the number of entries that are available to read: -1 does not apply
+  virtual int bufferCountFilled() { return -1; }
+
+  /// Provides the number of entries that are available to write: -1 does not apply
+  virtual int bufferCountEmpty() { return -1; }
+
 };
 
 /**
@@ -673,6 +684,19 @@ class NBuffer : public BaseBuffer<T> {
     return actual_read_buffer->read(result);
   }
 
+  /// Reads up to len entries, spanning across multiple blocks.
+  /// BaseBuffer::readArray stops at the first block boundary because it
+  /// calls available() once.  This override keeps reading across blocks.
+  int readArray(T data[], int len) override {
+    int count = 0;
+    while (count < len) {
+      if (available() == 0) break;
+      actual_read_buffer->read(data[count]);
+      count++;
+    }
+    return count;
+  }
+
   /// peeks the actual entry from the buffer
   bool peek(T &result) override {
     if (available() == 0) return false;
@@ -740,6 +764,16 @@ class NBuffer : public BaseBuffer<T> {
       actual_write_buffer = getNextAvailableBuffer();
     }
     return actual_write_buffer->availableForWrite();
+  }
+
+  /// Submit the partially-filled write buffer to the filled queue so
+  /// the reader can access it immediately.  Call after writeArray() when
+  /// the writer won't add more data to the current block for a while.
+  void flush() {
+    if (actual_write_buffer != nullptr && actual_write_buffer->available() > 0) {
+      addFilledBuffer(actual_write_buffer);
+      actual_write_buffer = nullptr;
+    }
   }
 
   /// resets all buffers

@@ -306,21 +306,8 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
    *  @return true on success. */
   bool begin() {
     if (!is_started_) {
-      // Resize platform buffers here (not in audiod_init) so virtual
-      // dispatch resolves to the platform subclass's override.
-      uint32_t buf_cap = fifoSize();
-      if (isEpInEnabled()) {
-        if (!bufferTx().resize(buf_cap)) {
-          LOGE("bufferTx().resize failed for %d bytes", buf_cap);
-          return false;
-        }
-      }
-      if (isEpOutEnabled()) {
-        if (!bufferRx().resize(buf_cap)) {
-          LOGE("bufferRx().resize failed for %d bytes", buf_cap);
-          return false;
-        }
-      }
+      // Resize platform buffers — virtual so each platform uses the right API.
+      resizeBuffers();
 
       const int n = getAudioCount();
       ctrl_buf_sz_.assign(n, 192u);
@@ -643,15 +630,15 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
     // disregard data if the host has not opened the capture device (alt=0)
     if (!isStreamingActiveTx()) return len;
 
-    // We signal that the buffer is full to trigger a later retry
-    if (len > bufferTx().availableForWrite()) return 0;
-
     // update the volume
     if (config_.volume_active) processVolume((uint8_t*)data, len);
 
-    // write the data to the TX buffer, which will be sent to the host in the
-    // next USB frame
-    return bufferTx().writeArray(data, len);
+    // writeArray writes byte-by-byte into NBuffer blocks.
+    int written = bufferTx().writeArray(data, len);
+    // Flush the partially-filled block so xfer_cb can read it immediately
+    // instead of waiting for the next writeArray call to complete it.
+    bufferTx().flush();
+    return written;
   }
 
   /** @brief Receive audio data from the host (host → device, speaker/playback).
@@ -940,7 +927,10 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
   void setSampleRate(uint32_t rate) {
     bool rate_updated = rate != config_.sample_rate;
     config_.sample_rate = rate;
-    if (rate_updated) notifyAudioChange(config_);
+    if (rate_updated) {
+      notifyAudioChange(config_);
+      resizeBuffers();  // block size depends on packetSize() which uses sample_rate
+    }
     for (auto& fct : audiod_fct_) fct.sample_rate_tx = rate;
     if (sample_rate_cb_) sample_rate_cb_(rate);
     sendInterruptNotification(AUDIO_CS_CTRL_SAM_FREQ, 0,
@@ -952,6 +942,13 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
    *         Called at the end of begin(cfg, info).  The base no-op is correct
    *         for RP2040 where TinyUSB is started by the system before setup().*/
   virtual bool beginUSB() = 0;
+
+  /** @brief Resize the platform audio buffers.
+   *  Both platforms use NBuffer-style block pools:
+   *  block size = max USB packet, block count = fifo_packets.
+   *  ESP32: SynchronizedNBufferRTOS (FreeRTOS queues, cross-core safe).
+   *  RP2040: NBuffer (single-core, no synchronization needed). */
+  virtual void resizeBuffers() = 0;
 
   /** @brief Convert AudioTools volume (0.0–1.0) to UAC2 int16 (1/256 dB).
    *  0.0 maps to 0x8000 (silence), 1.0 maps to 0 (0 dB). */
@@ -1394,6 +1391,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
     return true;
   }
 
+  /// TODO refactor control request handling to separate function and reduce nesting
   bool audiod_xfer_cb(uint8_t rhport, uint8_t ep_addr, xfer_result_t result,
                       uint32_t xferred_bytes) {
     (void)result;

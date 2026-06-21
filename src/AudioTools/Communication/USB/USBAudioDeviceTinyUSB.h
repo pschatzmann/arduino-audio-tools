@@ -83,18 +83,24 @@ class USBAudioDeviceTinyUSB : public USBAudioDeviceBase,
     return true;
   }
 
-  /** @brief Returns the TX audio buffer.  Override in platform subclasses
-   *  to provide a cross-core safe implementation (e.g. BufferRTOS on ESP32).
-   *  The default RingBuffer is suitable for single-core platforms (RP2040). */
-   BaseBuffer<uint8_t>& bufferTx() override { return default_buffer_tx_; }
+  /** @brief Returns the TX audio buffer (NBuffer block pool). */
+  BaseBuffer<uint8_t>& bufferTx() override { return buffer_tx_; }
 
-  /** @brief Returns the RX audio buffer.  Same override rules as bufferTx(). */
-   BaseBuffer<uint8_t>& bufferRx() override { return default_buffer_rx_; }
+  /** @brief Returns the RX audio buffer (NBuffer block pool). */
+  BaseBuffer<uint8_t>& bufferRx() override { return buffer_rx_; }
+
+  /** @brief Resize buffers as block pools: block size = one USB frame
+   *  at the current sample rate, block count = fifo_packets. */
+  void resizeBuffers() override {
+    uint16_t block_sz = packetSize();
+    uint8_t  block_cnt = config_.fifo_packets;
+    if (isEpInEnabled())  buffer_tx_.resize(block_sz, block_cnt);
+    if (isEpOutEnabled()) buffer_rx_.resize(block_sz, block_cnt);
+  }
 
  protected:
-  // ── Default audio buffers (RingBuffer, suitable for single-core platforms) ─
-  RingBuffer<uint8_t> default_buffer_tx_{1};
-  RingBuffer<uint8_t> default_buffer_rx_{1};
+  NBuffer<uint8_t> buffer_tx_{0, 0};
+  NBuffer<uint8_t> buffer_rx_{0, 0};
 
   void setupDescrBuffer() {
     static uint8_t buffer[USB_DESCR_MAX_LEN];

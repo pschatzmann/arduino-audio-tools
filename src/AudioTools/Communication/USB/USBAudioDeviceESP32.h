@@ -10,7 +10,7 @@
 #include <USB.h>
 #include <cstring>
 #include "AudioTools/Communication/USB/USBAudioDeviceBase.h"
-#include "AudioTools/Concurrency/RTOS/BufferRTOS.h"
+#include "AudioTools/Concurrency/RTOS/SynchronizedNBufferRTOS.h"
 #include "esp32-hal-tinyusb.h"
 
 namespace audio_tools {
@@ -47,11 +47,20 @@ class USBAudioDeviceESP32 : public USBAudioDeviceBase {
 
   // ── Platform overrides ─────────────────────────────────────────────────
 
-  /** @brief Returns cross-core safe TX buffer (FreeRTOS StreamBuffer). */
+  /** @brief Returns cross-core safe TX buffer (FreeRTOS queue of blocks). */
   BaseBuffer<uint8_t>& bufferTx() override { return buffer_tx_; }
 
-  /** @brief Returns cross-core safe RX buffer (FreeRTOS StreamBuffer). */
+  /** @brief Returns cross-core safe RX buffer (FreeRTOS queue of blocks). */
   BaseBuffer<uint8_t>& bufferRx() override { return buffer_rx_; }
+
+  /** @brief Resize buffers as block pools: block size = one USB frame
+   *  at the current sample rate, block count = fifo_packets. */
+  void resizeBuffers() override {
+    uint16_t block_sz = packetSize();
+    uint8_t  block_cnt = config_.fifo_packets;
+    if (isEpInEnabled())  buffer_tx_.resize(block_sz, block_cnt);
+    if (isEpOutEnabled()) buffer_rx_.resize(block_sz, block_cnt);
+  }
 
   /**
    * @brief Configure and start the ESP32 USB stack.
@@ -119,9 +128,11 @@ class USBAudioDeviceESP32 : public USBAudioDeviceBase {
 
   bool begin_called = false;
   bool setup_called = false;
-  // Non-blocking BufferRTOS: streamBufferSize, xTriggerLevel, writeMaxWait, readMaxWait  
-  BufferRTOS<uint8_t> buffer_tx_{0, 1, 0, 0};
-  BufferRTOS<uint8_t> buffer_rx_{0, 1, 0, 0};
+  // Block-pool buffers with FreeRTOS queues for cross-core safety.
+  // Initial blockSize=1, blockCount=1 (resized in begin via resizeBuffers).
+  // writeMaxWait=5ms (copier blocks briefly), readMaxWait=0 (xfer_cb never blocks).
+  SynchronizedNBufferRTOS buffer_tx_{0, 0, 5, 0};
+  SynchronizedNBufferRTOS buffer_rx_{0, 0, 0, 5};
 };
 
 /**
