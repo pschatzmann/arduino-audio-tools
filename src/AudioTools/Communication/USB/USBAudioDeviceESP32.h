@@ -60,16 +60,8 @@ class USBAudioDeviceESP32 : public USBAudioDeviceBase {
   void resizeBuffers() override {
     uint16_t block_sz = packetSize();
     uint8_t block_cnt = config_.fifo_packets;
-    if (isEpInEnabled()) {
-      bool rc = buffer_tx_.resize(block_sz * block_cnt);
-      LOGW("Resized TX buffer: block size = %u, block count = %u, total size = %u, rc = %d",
-           block_sz, block_cnt, block_sz * block_cnt, rc);
-    }
-    if (isEpOutEnabled()) {
-      bool rc =buffer_rx_.resize(block_sz * block_cnt);
-      LOGW("Resized RX buffer: block size = %u, block count = %u, total size = %u, rc = %d",
-           block_sz, block_cnt, block_sz * block_cnt, rc);
-    }
+    if (isEpInEnabled())  buffer_tx_.resize(block_sz * block_cnt);
+    if (isEpOutEnabled()) buffer_rx_.resize(block_sz * block_cnt);
   }
 
   /**

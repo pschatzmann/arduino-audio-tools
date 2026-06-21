@@ -40,7 +40,7 @@ AudioInfo info(44100, 2, 16);
 SineGenerator<int16_t> sineWave(32000);
 GeneratedSoundStream<int16_t> sound(sineWave);
 USBAudioStream out;
-StreamCopy copier(out, sound, 80);
+StreamCopy copier(out, sound);
 
 void setup(void) {
   // Manual begin() is required on core without built-in support e.g. mbed rp2040

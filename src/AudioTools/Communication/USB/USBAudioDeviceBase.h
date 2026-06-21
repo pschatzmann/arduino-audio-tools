@@ -635,11 +635,19 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
     // update the volume
     if (config_.volume_active) processVolume((uint8_t*)data, len);
 
-    // writeArray writes byte-by-byte into NBuffer blocks.
-    int written = bufferTx().writeArray(data, len);
-    // Flush the partially-filled block so xfer_cb can read it immediately
-    // instead of waiting for the next writeArray call to complete it.
-    bufferTx().flush();
+    // Write all data, retrying if the buffer is full.  On single-core
+    // platforms (RP2040), serviceTinyUSB() drains the buffer by running
+    // tud_task() → xfer_cb.  On dual-core (ESP32), the USB task drains
+    // independently and the SynchronizedNBufferRTOS blocks internally.
+    size_t written = 0;
+    while (written < len) {
+      int n = bufferTx().writeArray(data + written, len - written);
+      written += n;
+      if (written < len) {
+        serviceTinyUSB();  // drain buffer to make space
+        if (!isStreamingActiveTx()) break;  // host stopped
+      }
+    }
     return written;
   }
 
@@ -659,14 +667,12 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
   /** @brief Bytes of received audio waiting in the RX buffer. */
   int available() override {
     if (!is_started_) return 0;
-    serviceTinyUSB();
     return bufferRx().available();
   }
 
   /** @brief Bytes of free space in the TX buffer. */
   int availableForWrite() override {
     if (!is_started_) return 0;
-    serviceTinyUSB();
     return bufferTx().availableForWrite();
   }
 
@@ -788,7 +794,6 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
  protected:
   bool is_started_ = false;
   bool tx_xfer_armed_ = false;
-  bool ep_out_iso_activated_ = false;
   volatile uint32_t xfer_cb_tx_count_ = 0;
   volatile uint32_t tx_fifo_read_total_ = 0;
   volatile uint32_t xfer_cb_rx_count_ = 0;
@@ -1236,12 +1241,12 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
           }
           if (isEpInEnabled() && ep_in) {
             bool alloc_ok = usbd_edpt_iso_alloc(rhport, ep_in, ep_in_size);
-            LOGW("iso_alloc IN ep=0x%02x sz=%u: %s", ep_in, ep_in_size,
+            LOGD("iso_alloc IN ep=0x%02x sz=%u: %s", ep_in, ep_in_size,
                  alloc_ok ? "OK" : "FAIL");
           }
           if (isEpOutEnabled() && ep_out) {
             bool alloc_ok = usbd_edpt_iso_alloc(rhport, ep_out, ep_out_size);
-            LOGW("iso_alloc OUT ep=0x%02x sz=%u: %s", ep_out, ep_out_size,
+            LOGD("iso_alloc OUT ep=0x%02x sz=%u: %s", ep_out, ep_out_size,
                  alloc_ok ? "OK" : "FAIL");
 #ifdef TUP_DCD_EDPT_ISO_ALLOC
             // Pre-activate during enumeration (no isochronous traffic).
@@ -1251,7 +1256,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
             if (desc_ep_out) {
               usbd_edpt_iso_activate(rhport, desc_ep_out);
               usbd_edpt_release(rhport, ep_out);
-              LOGW("iso_activate+release OUT: done");
+              LOGD("iso_activate+release OUT: done");
             }
 #endif
           }
@@ -2022,7 +2027,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
       bool xfer_ok = TUSB_EDPT_XFER_FIFO(rhport, audio->ep_out,
                                           &audio->ep_out_ff,
                                           audio->ep_out_sz);
-      LOGW("  XFER_FIFO armed: %s", xfer_ok ? "OK" : "FAIL");
+      LOGD("  XFER_FIFO armed: %s", xfer_ok ? "OK" : "FAIL");
     }
   }
 
@@ -2168,7 +2173,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
     uint8_t const* p_desc;
     if (!audiod_get_AS_interface_index_global(itf, &func_id, &idxItf,
                                               &p_desc)) {
-      LOGW("  AS interface %u not found", itf);
+      LOGD("  AS interface %u not found", itf);
       tud_control_status(rhport, p_request);
       return true;
     }
