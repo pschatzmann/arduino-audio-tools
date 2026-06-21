@@ -89,9 +89,9 @@ class OpusOggWriter : public OggContainerOutput {
   OpusOggCommentHeader comment;
   ogg_packet oh1;
   Vector<uint8_t> pendingPacket{0};
-  uint32_t totalGranulepos = 0;
-  uint32_t samplesPerPacket = 960;
-  uint32_t finalPacketSamples = 0;
+  ogg_int64_t totalGranulepos = 0;
+  ogg_int64_t samplesPerPacket = 960;
+  ogg_int64_t finalPacketSamples = 0;
   bool hasPendingPacket = false;
 
   bool writeHeader() override {
@@ -129,7 +129,7 @@ class OpusOggWriter : public OggContainerOutput {
     return result;
   }
 
-  bool emitBufferedPacket(uint32_t granulePosition, bool endOfStream) {
+  bool emitBufferedPacket(ogg_int64_t granulePosition, bool endOfStream) {
     if (!hasPendingPacket) return true;
 
     op.packet = pendingPacket.data();
@@ -157,12 +157,12 @@ class OpusOggWriter : public OggContainerOutput {
   }
 
   void setFrameDurationUs(uint32_t frameDurationUs) {
-    uint32_t opusSamples = (uint32_t)(((uint64_t)frameDurationUs * 48000U) /
-                                      1000000U);
+    ogg_int64_t opusSamples =
+        (ogg_int64_t)(((uint64_t)frameDurationUs * 48000ULL) / 1000000ULL);
     samplesPerPacket = opusSamples > 0 ? opusSamples : 960;
   }
 
-  void setFinalPacketSamples(uint32_t samples) {
+  void setFinalPacketSamples(ogg_int64_t samples) {
     finalPacketSamples = samples;
   }
 
@@ -188,7 +188,7 @@ class OpusOggWriter : public OggContainerOutput {
     TRACED();
 
     if (hasPendingPacket) {
-      uint32_t keptSamples =
+      ogg_int64_t keptSamples =
           finalPacketSamples > 0 ? finalPacketSamples : samplesPerPacket;
       if (keptSamples > samplesPerPacket) {
         keptSamples = samplesPerPacket;
@@ -298,9 +298,9 @@ class OpusOggEncoder : public OggContainerEncoder {
       finalSamples = enc.frameSizeSamples();
     }
 
-    uint32_t finalGranuleSamples =
-        (uint32_t)(((uint64_t)finalSamples * 48000U) /
-                   (uint32_t)enc.config().sample_rate);
+    ogg_int64_t finalGranuleSamples =
+        (ogg_int64_t)(((uint64_t)finalSamples * 48000ULL) /
+                      (uint32_t)enc.config().sample_rate);
     ogg_writer.setFinalPacketSamples(finalGranuleSamples);
 
     OggContainerEncoder::end();
