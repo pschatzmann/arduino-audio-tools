@@ -3,20 +3,23 @@
 #include <string.h>
 #include <stdint.h>
 #include <assert.h>
-#include <algorithm>
 #include "AudioToolsConfig.h"
+
+
 
 #if defined(ARDUINO)
 #include <Arduino.h>
 // Non Arduino
 #elif defined(IS_ZEPHYR) || defined(ESP32_CMAKE)
 #include "AudioTools/AudioLibs/Emulation/Arduino.h"
+#else
+#include <algorithm>
+using std::min;
+using std::max;
 #endif
 
 namespace audio_tools {
 
-using std::min;
-using std::max;
 
 /// Executes heap_caps_check_integrity_all()  @ingroup basic
 inline static void checkMemory(bool printMemory=false) {
