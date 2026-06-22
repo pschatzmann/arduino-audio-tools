@@ -37,7 +37,7 @@ auto& MySerial = Serial;
 #endif
 
 AudioInfo info(44100, 2, 16);
-SineGenerator<int16_t> sineWave(32000);
+SineGenerator<int16_t> sineWave;
 GeneratedSoundStream<int16_t> sound(sineWave);
 USBAudioStream out;
 StreamCopy copier(out, sound);
@@ -54,11 +54,14 @@ void setup(void) {
 
   // Start generating the sine wave at 440 Hz (A4) with the default audio config.
   sineWave.begin(info, N_B4);
+  // USB might change sample rate, allign generator
+  out.addNotifyAudioChange(sound);
 
   // USB audio must be started before any other USB device (e.g. USB CDC).
   auto config = out.defaultConfig(TX_MODE);
   config.copyFrom(info);
   out.begin(config);
+
 
   // If already enumerated, additional class driver begin() e.g msc, hid, midi
   // won't take effect until re-enumeration: on ESP32 you can alternatively call USB.begin()
@@ -69,7 +72,6 @@ void setup(void) {
   }
 
   MySerial.println("USB audio started");
-
 }
 
 void loop() {

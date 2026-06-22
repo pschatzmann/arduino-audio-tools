@@ -476,6 +476,9 @@ class GeneratedSoundStream : public AudioStream {
     if (newInfo.bits_per_sample != sizeof(T) * 8) {
       LOGE("Wrong bits_per_sample: %d", newInfo.bits_per_sample);
     }
+    if (p_generator != nullptr) {
+      p_generator->setAudioInfo(newInfo);
+    } 
     AudioStream::setAudioInfo(newInfo);
   }
 
