@@ -56,7 +56,7 @@ class AudioActions {
     /// determines the value for the action
     int debounceDelayValue = DEBOUNCE_DELAY;
     int touchLimit = TOUCH_LIMIT;
-    std::function<bool(digital_pin_t)> read_cb = nullptr;
+    bool (*read_cb)(digital_pin_t) = nullptr;
 
     // public  methods
     virtual int id() { return GPIO_TO_INT(pin); }
@@ -258,7 +258,7 @@ class AudioActions {
   }
 
   /// Sets a callback function to read the pin state
-  void setReadCallback(std::function<bool(digital_pin_t)> read_cb_par) {
+  void setReadCallback(bool (*read_cb_par)(digital_pin_t)) {
     read_cb = read_cb_par;
   }
 
@@ -268,7 +268,7 @@ class AudioActions {
   bool use_pin_interrupt = false;
   bool use_pin_mode = true;
   Vector<Action*> actions{0};
-  std::function<bool(digital_pin_t)> read_cb = nullptr;
+  bool (*read_cb)(digital_pin_t) = nullptr;
 
   void insertAction(Action& action) {
     int idx = findActionIdx(action.id());
