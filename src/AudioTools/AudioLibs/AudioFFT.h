@@ -103,6 +103,7 @@ class FFTInverseOverlapAdder {
     for (int j = 0; j < data.size(); j++) {
       data[j] = 0.0;
     }
+    return true;
   }
 
   // adds the values to the array (by applying the window function)
