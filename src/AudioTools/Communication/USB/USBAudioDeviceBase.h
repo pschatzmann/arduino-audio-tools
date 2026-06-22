@@ -364,12 +364,6 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
     return true;
   }
   /**
-   * @brief Set the USB audio configuration.
-   * @param cfg Reference to a USBAudioConfig structure with desired settings.
-   */
-  void setConfig(const USBAudioConfig& cfg) { config_ = cfg; }
-
-  /**
    * @brief Returns the most-recently-constructed instance (base or subclass).
    *
    * Set in the constructor via s_active_, so usbd_app_driver_get_cb() and the
@@ -473,9 +467,6 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
     streaming_state_cb_ = std::move(cb);
   }
 
-  /** @brief Returns true when the host has selected the streaming alternate
-   *  setting (alt > 0) and opened the isochronous IN endpoint.  Use this to
-   *  decide whether to buffer TX audio or silently discard it. */
   /** @brief Returns true if either IN or OUT streaming endpoint is open. */
   bool isStreamingActive() const {
     return isStreamingActiveTx() || isStreamingActiveRx();
@@ -803,16 +794,19 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
   /// xferred_bytes from the previous completed transfer (what the DCD actually
   /// sent).
   uint32_t getTxXferredLast() const { return tx_xferred_last_; }
-  /// Flow control params — all must be non-zero for proper frame sizing.
+  /// TX sample rate parsed from the descriptor (must be non-zero for flow control).
   uint32_t getTxSampleRate() const {
     return audiod_fct_.empty() ? 0 : audiod_fct_[0].sample_rate_tx;
   }
+  /// TX channel count parsed from the descriptor.
   uint8_t getTxChannels() const {
     return audiod_fct_.empty() ? 0 : audiod_fct_[0].n_channels_tx;
   }
+  /// TX bytes per sample parsed from the descriptor.
   uint8_t getTxBytesPerSample() const {
     return audiod_fct_.empty() ? 0 : audiod_fct_[0].n_bytes_per_sample_tx;
   }
+  /// TX isochronous interval (bInterval) parsed from the descriptor.
   uint8_t getTxInterval() const {
     return audiod_fct_.empty() ? 0 : audiod_fct_[0].interval_tx;
   }
@@ -899,6 +893,9 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
   // s_active_ lets getClassDriver() and the static process() trampoline
   // reach the last-constructed instance without a singleton.
   inline static USBAudioDeviceBase* s_active_ = nullptr;
+
+  /// Set the USB audio configuration (use begin(cfg) instead).
+  void setConfig(const USBAudioConfig& cfg) { config_ = cfg; }
 
   /** @brief Process pending USB events on platforms where the application
    *         drives the stack (RP2040).  No-op on ESP32 where a dedicated

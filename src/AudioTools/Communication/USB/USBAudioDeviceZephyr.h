@@ -53,8 +53,6 @@ class USBAudioDeviceZephyr {
     return cfg;
   }
 
-  void setConfig(const USBAudioConfig& cfg) { config_ = cfg; }
-
   bool begin(const USBAudioConfig& cfg) {
     config_ = cfg;
     return begin();
