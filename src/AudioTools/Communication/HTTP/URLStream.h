@@ -360,7 +360,7 @@ class URLStream : public AbstractURLStream {
         client_secure->setTimeout(client_timeout);
 #ifdef ESP32
   #if ESP_ARDUINO_VERSION >= ESP_ARDUINO_VERSION_VAL(3,0,0)
-        client_insecure->setConnectionTimeout(client_timeout);
+        client_secure->setConnectionTimeout(client_timeout);
   #endif 
         client_secure->setHandshakeTimeout(handshake_timeout);
 #endif
