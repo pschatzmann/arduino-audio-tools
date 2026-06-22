@@ -43,45 +43,13 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
+class Emulated_TinyUSB;
+
 class USBAudioDeviceESP32 : public USBAudioDeviceBase {
+  friend class Emulated_TinyUSB;
  public:
   USBAudioDeviceESP32() = default;
   USBAudioDeviceESP32(USBAudioConfig cfg) : USBAudioDeviceBase(cfg) {}
-
-  // ── Platform overrides ─────────────────────────────────────────────────
-
-  /** @brief Returns cross-core safe TX buffer (FreeRTOS queue of blocks). */
-  BaseBuffer<uint8_t>& bufferTx() override { return buffer_tx_; }
-
-  /** @brief Returns cross-core safe RX buffer (FreeRTOS queue of blocks). */
-  BaseBuffer<uint8_t>& bufferRx() override { return buffer_rx_; }
-
-  /** @brief Resize buffers as block pools: block size = one USB frame
-   *  at the current sample rate, block count = fifo_packets. */
-  void resizeBuffers() override {
-    uint16_t block_sz = packetSize();
-    uint8_t block_cnt = config_.fifo_packets;
-    if (isEpInEnabled())  buffer_tx_.resize(block_sz * block_cnt);
-    if (isEpOutEnabled()) buffer_rx_.resize(block_sz * block_cnt);
-  }
-
-  /**
-   * @brief Configure and start the ESP32 USB stack.
-   *
-   * Sets VID/PID/strings on the ESPUSB object, registers the audio class
-   * descriptor block with `tinyusb_enable_interface`, and calls `USB.begin()`.
-   * Called automatically from `USBAudioStream::begin(cfg, info)`.
-   */
-  bool beginUSB() override {
-    if (begin_called) return true;
-    setupUSB();
-    bool rc = true;
-    if (config_.begin_usb) {
-      begin_called = true;
-      rc = USB.begin();
-    }
-    return rc;
-  }
 
   // ── ESP32 descriptor callback
   // ───────────────────────────────────────────────
@@ -127,6 +95,40 @@ class USBAudioDeviceESP32 : public USBAudioDeviceBase {
     tinyusb_enable_interface(USB_INTERFACE_AUDIO, audio_len,
                              descriptorCallback);
     return true;
+  }
+
+ protected:
+  /** @brief Returns cross-core safe TX buffer (FreeRTOS queue of blocks). */
+  BaseBuffer<uint8_t>& bufferTx() override { return buffer_tx_; }
+
+  /** @brief Returns cross-core safe RX buffer (FreeRTOS queue of blocks). */
+  BaseBuffer<uint8_t>& bufferRx() override { return buffer_rx_; }
+
+  /** @brief Resize buffers as block pools: block size = one USB frame
+   *  at the current sample rate, block count = fifo_packets. */
+  void resizeBuffers() override {
+    uint16_t block_sz = packetSize();
+    uint8_t block_cnt = config_.fifo_packets;
+    if (isEpInEnabled())  buffer_tx_.resize(block_sz * block_cnt);
+    if (isEpOutEnabled()) buffer_rx_.resize(block_sz * block_cnt);
+  }
+
+  /**
+   * @brief Configure and start the ESP32 USB stack.
+   *
+   * Sets VID/PID/strings on the ESPUSB object, registers the audio class
+   * descriptor block with `tinyusb_enable_interface`, and calls `USB.begin()`.
+   * Called automatically from `USBAudioStream::begin(cfg, info)`.
+   */
+  bool beginUSB() override {
+    if (begin_called) return true;
+    setupUSB();
+    bool rc = true;
+    if (config_.begin_usb) {
+      begin_called = true;
+      rc = USB.begin();
+    }
+    return rc;
   }
 
   bool begin_called = false;

@@ -693,6 +693,9 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
     return bufferTx().availableForWrite();
   }
 
+  /// Returns true when begin() has been called and the USB host has mounted the device.
+  operator bool() override { return is_started_ && mounted(); }
+
   /** @brief Stop audio streaming and clear FIFOs. Does not disconnect USB. */
   void end() {
     for (auto& audio : audiod_fct_) {

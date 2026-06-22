@@ -69,9 +69,7 @@ class USBAudioDeviceTinyUSB : public USBAudioDeviceBase,
     return len;
   }
 
-  // ── Platform overrides
-  // ──────────────────────────────────────────────────────
-
+ protected:
   bool beginUSB() override {
     TinyUSBDevice.setID(config_.vid, config_.pid);
     TinyUSBDevice.setManufacturerDescriptor(config_.manufacturer);
@@ -99,7 +97,6 @@ class USBAudioDeviceTinyUSB : public USBAudioDeviceBase,
     if (isEpOutEnabled()) buffer_rx_.resize(block_sz *block_cnt);
   }
 
- protected:
   RingBuffer<uint8_t> buffer_tx_{0};
   RingBuffer<uint8_t> buffer_rx_{0};
 
