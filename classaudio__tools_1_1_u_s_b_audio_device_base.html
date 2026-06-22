@@ -290,6 +290,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:abea96ff21e0994267e6200114726b1e8" id="r_abea96ff21e0994267e6200114726b1e8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#abea96ff21e0994267e6200114726b1e8">setSampleRateCallback</a> (std::function&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint32_t</a>)&gt; cb)</td></tr>
 <tr class="memdesc:abea96ff21e0994267e6200114726b1e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback invoked when the host (or device) changes the sample rate.  <br /></td></tr>
 <tr class="separator:abea96ff21e0994267e6200114726b1e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae857f5cea73a9723dbd7e313336bebb6" id="r_ae857f5cea73a9723dbd7e313336bebb6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ae857f5cea73a9723dbd7e313336bebb6">setStreamingStateCallback</a> (std::function&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>)&gt; cb)</td></tr>
+<tr class="memdesc:ae857f5cea73a9723dbd7e313336bebb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback invoked when the streaming state changes. Fires when the host opens or closes a streaming interface (SET_INTERFACE alt=1 / alt=0).  <br /></td></tr>
+<tr class="separator:ae857f5cea73a9723dbd7e313336bebb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5af3dbc95ee84481d919d7292c324a5d" id="r_a5af3dbc95ee84481d919d7292c324a5d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a5af3dbc95ee84481d919d7292c324a5d">setTudAudioSetItfCallback</a> (std::function&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">tusb_control_request_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> *)&gt; cb)</td></tr>
 <tr class="memdesc:a5af3dbc95ee84481d919d7292c324a5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback for interface set requests.  <br /></td></tr>
 <tr class="separator:a5af3dbc95ee84481d919d7292c324a5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -426,6 +429,8 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:afc00b141650b11fe19d4c7055d96a075"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a9a665a387a8c4fbf7fed14bbbfc093" id="r_a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a6a9a665a387a8c4fbf7fed14bbbfc093">notifyAudioChange</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> <a class="el" href="classaudio__tools_1_1_audio_stream.html#a47385aa19435f5fca9d3083a748258c5">info</a>)</td></tr>
 <tr class="separator:a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb898b982d216195ee8e9af56ab27069" id="r_aeb898b982d216195ee8e9af56ab27069"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#aeb898b982d216195ee8e9af56ab27069">notifyStreamingState</a> ()</td></tr>
+<tr class="separator:aeb898b982d216195ee8e9af56ab27069"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95daf4131e3094b526bb2576d7313470" id="r_a95daf4131e3094b526bb2576d7313470"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a95daf4131e3094b526bb2576d7313470">openEndpointsForAltSetting</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> rhport, audiod_function_t *audio, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">func_id</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">itf</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">alt</a>)</td></tr>
 <tr class="separator:a95daf4131e3094b526bb2576d7313470"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08b6566393e357e1778b67aca521e18c" id="r_a08b6566393e357e1778b67aca521e18c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a08b6566393e357e1778b67aca521e18c">openEpFeedback</a> (audiod_function_t *audio, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">tusb_desc_endpoint_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> *<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">desc_ep</a>)</td></tr>
@@ -535,6 +540,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a5288bf9051a52c39a999fa8dfaf6ac1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a855651f86cae3504db41a3e3632f978e" id="r_a855651f86cae3504db41a3e3632f978e"><td class="memItemLeft" align="right" valign="top">std::function&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint32_t</a>)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a855651f86cae3504db41a3e3632f978e">sample_rate_cb_</a></td></tr>
 <tr class="separator:a855651f86cae3504db41a3e3632f978e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7090abde622b6d6ab3dd5963b3d25ba1" id="r_a7090abde622b6d6ab3dd5963b3d25ba1"><td class="memItemLeft" align="right" valign="top">std::function&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a7090abde622b6d6ab3dd5963b3d25ba1">streaming_state_cb_</a></td></tr>
+<tr class="separator:a7090abde622b6d6ab3dd5963b3d25ba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf64bd29ec689f2d7574efbb63f440bb" id="r_adf64bd29ec689f2d7574efbb63f440bb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#adf64bd29ec689f2d7574efbb63f440bb">tmp_in</a> {0}</td></tr>
 <tr class="separator:adf64bd29ec689f2d7574efbb63f440bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add363d597c7d8108a5350406105d158d" id="r_add363d597c7d8108a5350406105d158d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#add363d597c7d8108a5350406105d158d">tmp_out</a> {0}</td></tr>
@@ -3358,6 +3365,31 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="aeb898b982d216195ee8e9af56ab27069" name="aeb898b982d216195ee8e9af56ab27069"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb898b982d216195ee8e9af56ab27069">&#9670;&#160;</a></span>notifyStreamingState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> notifyStreamingState </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a9eb35e35f8db9942142922d899a98785" name="a9eb35e35f8db9942142922d899a98785"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9eb35e35f8db9942142922d899a98785">&#9670;&#160;</a></span>numInterfaces()</h2>
 
@@ -4596,6 +4628,40 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 
 </div>
 </div>
+<a id="ae857f5cea73a9723dbd7e313336bebb6" name="ae857f5cea73a9723dbd7e313336bebb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae857f5cea73a9723dbd7e313336bebb6">&#9670;&#160;</a></span>setStreamingStateCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> setStreamingStateCallback </td>
+          <td>(</td>
+          <td class="paramtype">std::function&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>)&gt;&#160;</td>
+          <td class="paramname"><em>cb</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Register a callback invoked when the streaming state changes. Fires when the host opens or closes a streaming interface (SET_INTERFACE alt=1 / alt=0). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cb</td><td>Callback receiving (bool active_tx, bool active_rx). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a5af3dbc95ee84481d919d7292c324a5d" name="a5af3dbc95ee84481d919d7292c324a5d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5af3dbc95ee84481d919d7292c324a5d">&#9670;&#160;</a></span>setTudAudioSetItfCallback()</h2>
 
@@ -5790,6 +5856,28 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       <table class="memname">
         <tr>
           <td class="memname">std::function&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint32_t</a>)&gt; sample_rate_cb_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7090abde622b6d6ab3dd5963b3d25ba1" name="a7090abde622b6d6ab3dd5963b3d25ba1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7090abde622b6d6ab3dd5963b3d25ba1">&#9670;&#160;</a></span>streaming_state_cb_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::function&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>)&gt; streaming_state_cb_</td>
         </tr>
       </table>
   </td>
