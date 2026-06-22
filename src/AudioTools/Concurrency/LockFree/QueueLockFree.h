@@ -31,7 +31,7 @@ class QueueLockFree {
 
   void setAllocator(Allocator& allocator) { vector.setAllocator(allocator); }
 
-  void resize(size_t capacity) {
+  bool resize(size_t capacity) {
     if (capacity == 0) capacity = 1;
 
     // Destroy any live elements in the current queue before reinitialising.
@@ -59,6 +59,7 @@ class QueueLockFree {
 
     tail_pos.store(0, std::memory_order_relaxed);
     head_pos.store(0, std::memory_order_relaxed);
+    return true;
   }
 
   size_t capacity() const { return capacity_value; }

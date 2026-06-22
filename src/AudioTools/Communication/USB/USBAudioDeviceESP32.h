@@ -4,12 +4,15 @@
 #ifdef ESP32
 
 #if ARDUINO_USB_CDC_ON_BOOT
-#  error This sketch should be used when USB is in OTG mode, not CDC-on-boot mode
+#error This sketch should be used when USB is in OTG mode, not CDC-on-boot mode
 #else
 
 #include <USB.h>
+
 #include <cstring>
-#include "AudioTools/Sandbox/USB/USBAudioDeviceBase.h"
+
+#include "AudioTools/Communication/USB/USBAudioDeviceBase.h"
+#include "AudioTools/Concurrency/RTOS/SynchronizedNBufferRTOS.h"
 #include "esp32-hal-tinyusb.h"
 
 namespace audio_tools {
@@ -27,9 +30,9 @@ namespace audio_tools {
  *    descriptor into the configuration descriptor the framework builds
  *
  * ## Timing
- * On ESP32, `USB.begin()` is called explicitly by `beginUSB()` which is
- * invoked from `USBAudioStream::begin(cfg, info)`.  The host cannot connect
- * before that, so there is no descriptor-before-config race.
+ * On ESP32, `USB.begin()` usually should be called explicitly. We provide a
+ * TinyUSBDevice shim that calls `USB.begin()` automatically on the first call
+ * to `attach()`.
  *
  * ## Board settings
  * - Target : ESP32-S2 or ESP32-S3 (native USB OTG)
@@ -44,8 +47,22 @@ class USBAudioDeviceESP32 : public USBAudioDeviceBase {
   USBAudioDeviceESP32() = default;
   USBAudioDeviceESP32(USBAudioConfig cfg) : USBAudioDeviceBase(cfg) {}
 
-  // ── Platform overrides
-  // ──────────────────────────────────────────────────────
+  // ── Platform overrides ─────────────────────────────────────────────────
+
+  /** @brief Returns cross-core safe TX buffer (FreeRTOS queue of blocks). */
+  BaseBuffer<uint8_t>& bufferTx() override { return buffer_tx_; }
+
+  /** @brief Returns cross-core safe RX buffer (FreeRTOS queue of blocks). */
+  BaseBuffer<uint8_t>& bufferRx() override { return buffer_rx_; }
+
+  /** @brief Resize buffers as block pools: block size = one USB frame
+   *  at the current sample rate, block count = fifo_packets. */
+  void resizeBuffers() override {
+    uint16_t block_sz = packetSize();
+    uint8_t block_cnt = config_.fifo_packets;
+    if (isEpInEnabled())  buffer_tx_.resize(block_sz * block_cnt);
+    if (isEpOutEnabled()) buffer_rx_.resize(block_sz * block_cnt);
+  }
 
   /**
    * @brief Configure and start the ESP32 USB stack.
@@ -113,6 +130,18 @@ class USBAudioDeviceESP32 : public USBAudioDeviceBase {
 
   bool begin_called = false;
   bool setup_called = false;
+  // Block-pool buffers with FreeRTOS queues for cross-core safety.
+  // TX: writeMaxWait=5ms (copier blocks briefly for free block),
+  //     readMaxWait=0 (xfer_cb never blocks).
+  // RX: writeMaxWait=0 (xfer_cb never blocks),
+  //     readMaxWait=0 (sketch polls via copier, never blocks).
+  // SynchronizedNBufferRTOS buffer_tx_{0, 0, 5, 0};
+  // SynchronizedNBufferRTOS buffer_rx_{0, 0, 0, 0};
+
+  // size_t streamBufferSize, size_t xTriggerLevel = 1  TickType_t writeMaxWait
+  // = portMAX_DELAY,  TickType_t readMaxWait = portMAX_DELAY,
+  BufferRTOS<uint8_t> buffer_tx_{0, 0, 5, 0};
+  BufferRTOS<uint8_t> buffer_rx_{0, 1, 0, 0};
 };
 
 /**
@@ -153,9 +182,9 @@ class Emulated_TinyUSB {
 
 static Emulated_TinyUSB TinyUSBDevice;
 
-using USBAudioDevice = USBAudioDeviceESP32;
+using USBAudioStream = USBAudioDeviceESP32;
 
 }  // namespace audio_tools
 
-#endif // ARDUINO_USB_CDC_ON_BOOT
+#endif  // ARDUINO_USB_CDC_ON_BOOT
 #endif  // ESP32

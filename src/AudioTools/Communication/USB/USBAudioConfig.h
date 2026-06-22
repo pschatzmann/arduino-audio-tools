@@ -1,6 +1,8 @@
 #pragma once
 #include <stdint.h>
+
 #include <cstring>
+
 #include "AudioTools/CoreAudio/AudioTypes.h"
 
 namespace audio_tools {
@@ -10,9 +12,9 @@ namespace audio_tools {
  * @brief Configuration for USB Audio (standalone build without AudioInfo).
  */
 struct USBAudioConfig {
-  uint32_t sample_rate     = 44100;
-  uint8_t  channels        = 2;
-  uint8_t  bits_per_sample = 16;
+  uint32_t sample_rate = 44100;
+  uint8_t channels = 2;
+  uint8_t bits_per_sample = 16;
 #else
 /**
  * @brief Configuration for USB Audio (inherits sample_rate / channels /
@@ -22,14 +24,17 @@ struct USBAudioConfig : public AudioInfo {
 #endif
 
   // ── Direction ─────────────────────────────────────────────────────────────
-  bool enable_ep_in  = true;   ///< device → host  (capture / microphone)
-  bool enable_ep_out = true;   ///< host   → device (playback / speaker)
+  bool enable_ep_in = true;   ///< device → host  (capture / microphone)
+  bool enable_ep_out = true;  ///< host   → device (playback / speaker)
 
   // ── USB endpoint addresses ────────────────────────────────────────────────
-  /// Must match the TinyUSB / hardware endpoint assignment.
-  uint8_t ep_in  = 0x81;
-  uint8_t ep_out = 0x01;
-  uint8_t ep_fb = 0x82;
+  /// Addresses must not conflict with other USB interfaces (e.g. CDC uses
+  /// 0x81, 0x82, 0x02).  The defaults below are safe for CDC + Audio
+  /// composite devices.
+  uint8_t ep_in = 0x83;   ///< ISO IN  (device → host, capture/microphone)
+  uint8_t ep_out = 0x03;  ///< ISO OUT (host → device, playback/speaker)
+  uint8_t ep_fb = 0x84;   ///< ISO IN  (explicit feedback, RX-only mode)
+  uint8_t ep_int = 0x85;  ///< INT IN  (AC status/change notifications)
 
   // ── Interface numbering ───────────────────────────────────────────────────
   /// Interface number of the Audio Control interface.
@@ -42,17 +47,30 @@ struct USBAudioConfig : public AudioInfo {
   uint8_t fifo_packets = 16;
 
   // ── Device identity ───────────────────────────────────────────────────────
-  uint16_t    vid          = 0xCafe;
-  uint16_t    pid          = 0x4002;
+  uint16_t vid = 0xCafe;
+  uint16_t pid = 0x4002;
   const char* manufacturer = "Audio Tools";
-  const char* product      = "USB Audio";
-  const char* serial       = "000001";
-  bool        self_powered = true;
-  uint8_t     max_power_ma = 100;
+  const char* product = "USB Audio";
+  const char* serial = "000001";
+  bool self_powered = true;
+  uint8_t max_power_ma = 100;
 
   // ── Advanced ──────────────────────────────────────────────────────────────
   /// Enable isochronous feedback endpoint so the host can adjust its clock.
   bool enable_feedback_ep = true;
+
+  /// When false (default): the clock source is fixed at sample_rate.
+  /// The descriptor reports an internal fixed clock, and GET_RANGE returns
+  /// only the configured rate.  This avoids complex host negotiation.
+  /// When true: the clock source is programmable and GET_RANGE returns
+  /// 14 discrete rates (8 kHz – 192 kHz).  The host can change the rate
+  /// via SET_CUR, and the descriptor wMaxPacketSize covers 192 kHz.
+  bool enable_multi_sample_rate = false;
+
+  /// Enable the AC interrupt IN endpoint for device-initiated volume, mute,
+  /// and sample-rate change notifications.  Without it the host must poll
+  /// via GET_CUR; the controls still work, just without push updates.
+  bool enable_interrupt_ep = false;
 
   /// Enable UAC2 IN-endpoint flow control: vary the per-frame isochronous
   /// packet size so non-integer sample-per-frame rates are delivered at the
@@ -67,6 +85,11 @@ struct USBAudioConfig : public AudioInfo {
   /// Use a flat contiguous buffer for TX instead of a circular FIFO.
   /// Required when the upstream audio driver uses DMA.
   bool use_linear_buffer_tx = true;
+  // ── Volume Handling ────────────────────────────────────────────────────────
+  /// When true we will process the volume and mute settings in the audio
+  /// stream. When false we will not process the volume and mute settings but just 
+  /// provide the data for external processing.
+  bool volume_active = false;
 
   // ── ESP32-specific ────────────────────────────────────────────────────────
   /// When true (default), beginUSB() calls USB.begin() automatically.
@@ -81,52 +104,42 @@ struct USBAudioConfig : public AudioInfo {
   /// Must match the UAC2 node topology in the board device tree.
   uint8_t terminal_id = 1;
 
-
   bool operator==(const USBAudioConfig& other) {
-    return
-      sample_rate == other.sample_rate &&
-      channels == other.channels &&
-      bits_per_sample == other.bits_per_sample &&
+    return sample_rate == other.sample_rate && channels == other.channels &&
+           bits_per_sample == other.bits_per_sample &&
 
-      enable_ep_in == other.enable_ep_in &&
-      enable_ep_out == other.enable_ep_out &&
+           enable_ep_in == other.enable_ep_in &&
+           enable_ep_out == other.enable_ep_out &&
 
-      ep_in == other.ep_in &&
-      ep_out == other.ep_out &&
-      ep_fb == other.ep_fb &&
+           ep_in == other.ep_in && ep_out == other.ep_out &&
+           ep_fb == other.ep_fb &&
 
-      itf_num_ac == other.itf_num_ac &&
-      fifo_packets == other.fifo_packets &&
+           itf_num_ac == other.itf_num_ac &&
+           fifo_packets == other.fifo_packets &&
 
-      vid == other.vid &&
-      pid == other.pid &&
+           vid == other.vid && pid == other.pid &&
 
-      std::strcmp(manufacturer ? manufacturer : "",
-                  other.manufacturer ? other.manufacturer : "") == 0 &&
+           std::strcmp(manufacturer ? manufacturer : "",
+                       other.manufacturer ? other.manufacturer : "") == 0 &&
 
-      std::strcmp(product ? product : "",
-                  other.product ? other.product : "") == 0 &&
+           std::strcmp(product ? product : "",
+                       other.product ? other.product : "") == 0 &&
 
-      std::strcmp(serial ? serial : "",
-                  other.serial ? other.serial : "") == 0 &&
+           std::strcmp(serial ? serial : "",
+                       other.serial ? other.serial : "") == 0 &&
 
-      self_powered == other.self_powered &&
-      max_power_ma == other.max_power_ma &&
+           self_powered == other.self_powered &&
+           max_power_ma == other.max_power_ma &&
 
-      enable_feedback_ep == other.enable_feedback_ep &&
-      enable_ep_in_flow_control == other.enable_ep_in_flow_control &&
-      use_linear_buffer_rx == other.use_linear_buffer_rx &&
-      use_linear_buffer_tx == other.use_linear_buffer_tx &&
+           enable_feedback_ep == other.enable_feedback_ep &&
+           enable_ep_in_flow_control == other.enable_ep_in_flow_control &&
+           use_linear_buffer_rx == other.use_linear_buffer_rx &&
+           use_linear_buffer_tx == other.use_linear_buffer_tx &&
 
-      begin_usb == other.begin_usb &&
-      terminal_id == other.terminal_id;
+           begin_usb == other.begin_usb && terminal_id == other.terminal_id;
   }
 
-  bool operator!=(const USBAudioConfig& other) {
-    return !(*this == other);
-  }
-
-
+  bool operator!=(const USBAudioConfig& other) { return !(*this == other); }
 };
 
 }  // namespace audio_tools

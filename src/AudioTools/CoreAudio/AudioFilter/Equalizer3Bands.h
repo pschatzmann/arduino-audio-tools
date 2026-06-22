@@ -97,7 +97,7 @@ class Equalizer3Bands : public ModifyingStream {
   /// @param out AudioOutput where processed audio will be written
   Equalizer3Bands(AudioOutput& out) {
     setOutput(out);
-    out.addNotifyAudioChange(*this);
+    addNotifyAudioChange(out);
   }
 
   /// Constructor with AudioStream (includes automatic audio format
@@ -105,7 +105,7 @@ class Equalizer3Bands : public ModifyingStream {
   /// @param stream AudioStream for both input and output
   Equalizer3Bands(AudioStream& stream) {
     setStream(stream);
-    stream.addNotifyAudioChange(*this);
+    addNotifyAudioChange(stream);
   }
 
   ~Equalizer3Bands() {

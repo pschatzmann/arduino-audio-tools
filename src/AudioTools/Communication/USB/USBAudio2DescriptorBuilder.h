@@ -62,8 +62,9 @@ class USBAudio2DescriptorBuilder {
     // ── IAD ──────────────────────────────────────────────────────────────────
     p = writeIAD(p, itf_ac, (uint8_t)(1 + num_as));
 
-    // ── Standard AC Interface (no EPs) ───────────────────────────────────────
-    p = writeStdIface(p, itf_ac, 0, 0, 0x01 /*AUDIO*/, 0x01 /*CONTROL*/, 0x20 /*UAC2*/);
+    // ── Standard AC Interface ─────────────────────────────────────────────
+    const uint8_t ac_nEps = p_config->enable_interrupt_ep ? 1 : 0;
+    p = writeStdIface(p, itf_ac, 0, ac_nEps, 0x01 /*AUDIO*/, 0x01 /*CONTROL*/, 0x20 /*UAC2*/);
 
     // ── CS AC entities — patch wTotalLength after ────────────────────────────
     uint8_t* cs_ac_start = p;
@@ -93,10 +94,17 @@ class USBAudio2DescriptorBuilder {
                               ENTITY_CLOCK);
     }
 
-    // Patch wTotalLength (bytes 6-7 of CS AC Header)
+    // Patch wTotalLength (bytes 6-7 of CS AC Header) — covers only the
+    // class-specific descriptors above, not the interrupt endpoint below.
     const uint16_t cs_ac_len = (uint16_t)(p - cs_ac_start);
     cs_ac_start[6] = (uint8_t)(cs_ac_len & 0xFF);
     cs_ac_start[7] = (uint8_t)(cs_ac_len >> 8);
+
+    // Interrupt EP must follow the CS AC block (USB spec §9.6.6:
+    // endpoint descriptors come after class-specific interface descriptors).
+    if (p_config->enable_interrupt_ep) {
+      p = writeInterruptEndpoint(p, p_config->ep_int);
+    }
 
     // ── OUT AS Interface ─────────────────────────────────────────────────────
     if (p_config->enable_ep_out) {
@@ -134,14 +142,9 @@ class USBAudio2DescriptorBuilder {
     return (p_config->enable_ep_in ? 1 : 0) + (p_config->enable_ep_out ? 1 : 0);
   }
 
-  // Isochronous packet size for one 1 ms frame at the configured rate/format.
-  uint16_t calcMaxPacketSize() const {
-    return (uint16_t)((p_config->bits_per_sample / 8) * p_config->channels *
-                      ((p_config->sample_rate + 999) / 1000));
-  }
 
   // True when the explicit-feedback endpoint should appear in the descriptor.
-  // Mirrors getEnableFeedbackEp() in USBAudioDeviceBase: feedback is only valid
+  // Mirrors isFeedbackEpEnabled() in USBAudioDeviceBase: feedback is only valid
   // for a pure OUT (speaker) path — with an IN endpoint present the host uses
   // the IN stream as implicit feedback, and TX-only mode has no OUT EP at all.
   bool enableFeedbackEp() const {
@@ -150,7 +153,19 @@ class USBAudio2DescriptorBuilder {
         && !p_config->enable_ep_in;
   }
 
- private:
+  // Isochronous packet size for one 1 ms frame at a given rate.
+  uint16_t calcPacketSizeForRate(uint32_t rate) const {
+    return (uint16_t)((p_config->bits_per_sample / 8) * p_config->channels *
+                      ((rate + 999) / 1000));
+  }
+
+  // Isochronous packet size for one 1 ms frame at the configured rate/format.
+  uint16_t calcMaxPacketSize() const {
+    return (uint16_t)((p_config->bits_per_sample / 8) * p_config->channels *
+                      ((p_config->sample_rate + 999) / 1000));
+  }
+
+ protected:
   USBAudioConfig* p_config;
 
   // ── helpers ─────────────────────────────────────────────────────────────────
@@ -208,13 +223,28 @@ class USBAudio2DescriptorBuilder {
   }
 
   // UAC2 Clock Source Descriptor (8 bytes)
+  //
+  // bmAttributes D1..D0 — clock type:
+  //   0x00 = external, 0x01 = internal fixed, 0x02 = internal variable,
+  //   0x03 = internal programmable
+  // bmControls — bit-pair encoding:
+  //   D1..D0 = Clock Frequency  (01=read-only, 11=host-programmable)
+  //   D3..D2 = Clock Validity   (01=read-only)
+  //
+  // GET_RANGE returns 14 discrete sample rates (8 kHz – 192 kHz).
+  // Host can SET_CUR to any of those rates.
   uint8_t* writeClockSource(uint8_t* p, uint8_t clock_id) {
     *p++ = 8;
     *p++ = 0x24;        // CS_INTERFACE
     *p++ = 0x0A;        // CLOCK_SOURCE
     *p++ = clock_id;
-    *p++ = 0x01;        // bmAttributes: internal fixed clock
-    *p++ = 0x05;        // bmControls: freq read-only (01b), validity read-only (01b)
+    if (p_config->enable_multi_sample_rate) {
+      *p++ = 0x03;      // bmAttributes: internal programmable clock
+      *p++ = 0x07;      // bmControls: freq host-programmable (11b), validity read-only (01b)
+    } else {
+      *p++ = 0x01;      // bmAttributes: internal fixed clock
+      *p++ = 0x05;      // bmControls: freq read-only (01b), validity read-only (01b)
+    }
     *p++ = 0x00;        // bAssocTerminal
     *p++ = 0x00;        // iClockSource
     return p;
@@ -245,6 +275,19 @@ class USBAudio2DescriptorBuilder {
   }
 
   // UAC2 Feature Unit Descriptor (6 + (channels+1)*4 bytes)
+  //
+  // bmaControls[] is a 32-bit bitmap per channel (+ master at index 0).
+  // Each control is a 2-bit pair:
+  //   00 = not present, 01 = read-only, 11 = host-programmable
+  //
+  //   D1..D0 = Mute     (FU_CTRL_MUTE   = 0x01)
+  //   D3..D2 = Volume   (FU_CTRL_VOLUME = 0x02)
+  //
+  // 0x0F = Mute host-programmable (11b) | Volume host-programmable (11b)
+  //
+  // Volume uses int16 in 1/256 dB units (0x8000 = silence, 0 = 0 dB).
+  // AudioTools maps this to float 0.0 (silence) – 1.0 (0 dB).
+  // GET_RANGE reports -100 dB .. 0 dB in 1 dB steps.
   uint8_t* writeFeatureUnit(uint8_t* p, uint8_t unit_id, uint8_t src_id) {
     const uint8_t len = (uint8_t)(6 + (p_config->channels + 1) * 4);
     *p++ = len;
@@ -254,6 +297,7 @@ class USBAudio2DescriptorBuilder {
     *p++ = src_id;
     // Master bmaControls[0]: Mute + Volume, host-programmable
     *p++ = 0x0F; *p++ = 0x00; *p++ = 0x00; *p++ = 0x00;
+    // Per-channel bmaControls[1..N]: same controls
     for (uint8_t i = 0; i < p_config->channels; i++) {
       *p++ = 0x0F; *p++ = 0x00; *p++ = 0x00; *p++ = 0x00;
     }
@@ -311,15 +355,28 @@ class USBAudio2DescriptorBuilder {
   }
 
   // Standard Isochronous Endpoint Descriptor (7 bytes)
+  //
+  // wMaxPacketSize must be large enough for the highest rate the device
+  // advertises in the Clock Source GET_RANGE response.  The actual per-frame
+  // byte count varies with the current sample rate; the host will never
+  // send or expect more than wMaxPacketSize in a single (micro)frame.
   uint8_t* writeIsoEndpoint(uint8_t* p, uint8_t ep_addr) {
-    const uint16_t pkt = calcMaxPacketSize();
+    // Fixed clock: wMaxPacketSize matches the configured rate.
+    // Multi-rate: covers the highest supported rate (192 kHz).
+    const uint16_t pkt = p_config->enable_multi_sample_rate
+        ? calcPacketSizeForRate(192000)
+        : calcMaxPacketSize();
     // bmAttributes: Isochronous (01) + sync type (bits[3:2]) + usage=data (00)
-    // OUT endpoints: async (01=async → 0x05) when a feedback EP accompanies
-    //                them; sync (00=no-sync → 0x01) otherwise.
-    // IN endpoints: always sync (0x01) — the device drives the clock.
-    bool const is_out = !(ep_addr & 0x80u);
-    bool const async  = is_out && enableFeedbackEp();
-    uint8_t const bmAttr = async ? 0x05u : 0x01u;
+    //   bits 3:2: 00=None, 01=Async, 10=Adaptive, 11=Sync
+    // IN  endpoints: Asynchronous (0x05) — device drives the clock.
+    // OUT endpoints: Asynchronous (0x05) when a feedback EP is present,
+    //               Adaptive (0x09) otherwise (device adapts to host rate).
+    bool const is_in  = (ep_addr & 0x80u);
+    bool const is_out = !is_in;
+    uint8_t bmAttr;
+    if (is_in)                             bmAttr = 0x05u;  // ISO + Async
+    else if (is_out && enableFeedbackEp()) bmAttr = 0x05u;  // ISO + Async
+    else                                   bmAttr = 0x09u;  // ISO + Adaptive
     *p++ = 7;
     *p++ = 0x05;        // ENDPOINT
     *p++ = ep_addr;
@@ -339,6 +396,22 @@ class USBAudio2DescriptorBuilder {
     *p++ = 0x04;        // wMaxPacketSize LSB (4 bytes)
     *p++ = 0x00;        // wMaxPacketSize MSB
     *p++ = 0x01;        // bInterval
+    return p;
+  }
+
+  // Audio Control Interrupt IN Endpoint Descriptor (7 bytes)
+  //
+  // Carries 6-byte UAC2 status/change notifications (bInfo, bAttribute,
+  // wValue = CS<<8|CN, wIndex = EntityID<<8|Itf) so the device can push
+  // volume, mute, or sample-rate changes to the host.
+  uint8_t* writeInterruptEndpoint(uint8_t* p, uint8_t ep_addr) {
+    *p++ = 7;
+    *p++ = 0x05;        // ENDPOINT
+    *p++ = ep_addr;     // IN address (bit 7 set)
+    *p++ = 0x03;        // bmAttributes: Interrupt
+    *p++ = 0x06;        // wMaxPacketSize LSB (6 bytes for UAC2 notification)
+    *p++ = 0x00;        // wMaxPacketSize MSB
+    *p++ = 0x10;        // bInterval: 2^(16-1) = 32768 frames ≈ poll only when needed
     return p;
   }
 

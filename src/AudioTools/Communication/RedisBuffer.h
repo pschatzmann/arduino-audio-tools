@@ -207,7 +207,7 @@ class RedisBuffer : public BaseBuffer<T> {
    * @param size New maximum size.
    * @return true if resized, false if any write has already occurred.
    */
-  bool resize(int size) override {
+  bool resize(size_t size) override {
     if (has_written) return false;
     LOGI("RedisBuffer::resize: %d", size);
     max_size = size;

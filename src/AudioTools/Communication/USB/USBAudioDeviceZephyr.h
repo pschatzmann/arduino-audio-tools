@@ -1,15 +1,15 @@
 #pragma once
-#include <cstring>
-#include <functional>
-#include <vector>
-
 #include <zephyr/device.h>
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
 #include <zephyr/usb/class/usbd_uac2.h>
 #include <zephyr/usb/usbd.h>
 
-#include "AudioTools/Sandbox/USB/USBAudioConfig.h"
+#include <cstring>
+#include <functional>
+#include <vector>
+
+#include "AudioTools/Communication/USB/USBAudioConfig.h"
 
 LOG_MODULE_DECLARE(usb_audio_device_zephyr, LOG_LEVEL_INF);
 
@@ -42,19 +42,22 @@ class USBAudioDeviceZephyr {
 
   USBAudioConfig defaultConfig(RxTxMode mode = RXTX_MODE) {
     USBAudioConfig cfg;
-    cfg.sample_rate     = 48000;
-    cfg.channels        = 2;
+    cfg.sample_rate = 48000;
+    cfg.channels = 2;
     cfg.bits_per_sample = 16;
-    cfg.enable_ep_in    = (mode == TX_MODE || mode == RXTX_MODE);
-    cfg.enable_ep_out   = (mode == RX_MODE || mode == RXTX_MODE);
+    cfg.enable_ep_in = (mode == TX_MODE || mode == RXTX_MODE);
+    cfg.enable_ep_out = (mode == RX_MODE || mode == RXTX_MODE);
     cfg.enable_feedback_ep = (mode == RX_MODE);
-    cfg.terminal_id     = 1;
+    cfg.terminal_id = 1;
     return cfg;
   }
 
   void setConfig(const USBAudioConfig& cfg) { config_ = cfg; }
 
-  bool begin(const USBAudioConfig& cfg) { config_ = cfg; return begin(); }
+  bool begin(const USBAudioConfig& cfg) {
+    config_ = cfg;
+    return begin();
+  }
 
   bool begin() {
     uint16_t frame = audioPacketSize();
@@ -76,10 +79,10 @@ class USBAudioDeviceZephyr {
     }
 
     static const struct uac2_ops ops = {
-        .terminal_update_cb  = s_terminal_update,
-        .get_recv_buf        = s_get_recv_buf,
-        .data_recv_cb        = s_data_recv,
-        .buf_release_cb      = s_buf_release,
+        .terminal_update_cb = s_terminal_update,
+        .get_recv_buf = s_get_recv_buf,
+        .data_recv_cb = s_data_recv,
+        .buf_release_cb = s_buf_release,
         .get_explicit_feedback = s_get_feedback,
     };
     usbd_uac2_set_ops(uac2_dev_, &ops, this);
@@ -116,33 +119,48 @@ class USBAudioDeviceZephyr {
   /// This method logs a warning if the audio format changes and is otherwise
   /// a no-op.
   void reenumerateUSBOnChange(const USBAudioConfig& cfg) {
-    if (cfg.sample_rate     != config_.sample_rate  ||
-        cfg.channels        != config_.channels      ||
+    if (cfg.sample_rate != config_.sample_rate ||
+        cfg.channels != config_.channels ||
         cfg.bits_per_sample != config_.bits_per_sample) {
-      LOG_WRN("USBAudioDeviceZephyr: audio format change ignored — "
-              "DTS descriptor is fixed at build time");
+      LOG_WRN(
+          "USBAudioDeviceZephyr: audio format change ignored — "
+          "DTS descriptor is fixed at build time");
     }
   }
 
   /// True while the USB host is actively streaming.
   bool mounted() const { return streaming_; }
 
+  /** @brief Returns the TX audio buffer.  Override in platform subclasses
+   *  to provide a cross-core safe implementation (e.g. BufferRTOS on ESP32).
+   *  The default RingBuffer is suitable for single-core platforms (RP2040). */
+  BaseBuffer<uint8_t>& bufferTx() override { return default_buffer_tx_; }
+
+  /** @brief Returns the RX audio buffer.  Same override rules as bufferTx(). */
+  BaseBuffer<uint8_t>& bufferRx() override { return default_buffer_rx_; }
+
  private:
+  // ── Default audio buffers (RingBuffer, suitable for single-core platforms) ─
+  RingBuffer<uint8_t> default_buffer_tx_{1};
+  RingBuffer<uint8_t> default_buffer_rx_{1};
+
   // ── Static trampolines (user_data == this) ────────────────────────────────
 
-  static void s_terminal_update(const struct device* /*dev*/, uint8_t /*terminal*/,
-                                bool enabled, bool /*microframes*/,
-                                void* user_data) {
+  static void s_terminal_update(const struct device* /*dev*/,
+                                uint8_t /*terminal*/, bool enabled,
+                                bool /*microframes*/, void* user_data) {
     auto* self = static_cast<USBAudioDeviceZephyr*>(user_data);
     self->streaming_ = enabled;
     if (enabled && self->config_.enable_ep_in) {
       self->primeTxPipeline();
     }
-    LOG_INF("USBAudioDeviceZephyr: streaming %s", enabled ? "started" : "stopped");
+    LOG_INF("USBAudioDeviceZephyr: streaming %s",
+            enabled ? "started" : "stopped");
   }
 
-  static void* s_get_recv_buf(const struct device* /*dev*/, uint8_t /*terminal*/,
-                              uint16_t /*size*/, void* user_data) {
+  static void* s_get_recv_buf(const struct device* /*dev*/,
+                              uint8_t /*terminal*/, uint16_t /*size*/,
+                              void* user_data) {
     auto* self = static_cast<USBAudioDeviceZephyr*>(user_data);
     if (!self->is_active_ || !self->config_.enable_ep_out) return nullptr;
     void* buf = nullptr;
@@ -177,7 +195,8 @@ class USBAudioDeviceZephyr {
     void* next = nullptr;
     if (k_mem_slab_alloc(&self->slab_, &next, K_NO_WAIT) != 0) return;
 
-    uint16_t filled = self->tx_cb_(static_cast<uint8_t*>(next), self->block_sz_);
+    uint16_t filled =
+        self->tx_cb_(static_cast<uint8_t*>(next), self->block_sz_);
     if (filled < self->block_sz_) {
       memset(static_cast<uint8_t*>(next) + filled, 0,
              (size_t)(self->block_sz_ - filled));
@@ -216,20 +235,20 @@ class USBAudioDeviceZephyr {
 
   // ── Members ───────────────────────────────────────────────────────────────
 
-  USBAudioConfig        config_;
-  const struct device*  uac2_dev_  = nullptr;
-  struct k_mem_slab     slab_{};
-  std::vector<uint8_t>  slab_buf_;
-  bool                  is_active_ = false;
-  bool                  streaming_ = false;
-  uint16_t              block_sz_  = 0;
+  USBAudioConfig config_;
+  const struct device* uac2_dev_ = nullptr;
+  struct k_mem_slab slab_{};
+  std::vector<uint8_t> slab_buf_;
+  bool is_active_ = false;
+  bool streaming_ = false;
+  uint16_t block_sz_ = 0;
 
   std::function<void(const uint8_t*, uint16_t)> rx_cb_;
-  std::function<uint16_t(uint8_t*, uint16_t)>   tx_cb_;
+  std::function<uint16_t(uint8_t*, uint16_t)> tx_cb_;
 
   static constexpr uint8_t kPipelineDepth = 3;
 };
 
-using USBAudioDevice = USBAudioDeviceZephyr;
+using USBAudioStream = USBAudioDeviceZephyr;
 
 }  // namespace audio_tools

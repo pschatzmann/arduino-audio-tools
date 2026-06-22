@@ -3,7 +3,7 @@
 
 #include <cstring>
 
-#include "AudioTools/Sandbox/USB/USBAudioDeviceBase.h"
+#include "AudioTools/Communication/USB/USBAudioDeviceBase.h"
 
 namespace audio_tools {
 
@@ -60,7 +60,7 @@ class USBAudioDeviceTinyUSB : public USBAudioDeviceBase,
         config_.ep_in = TinyUSBDevice.allocEndpoint(TUSB_DIR_IN);
       if (config_.enable_ep_out)
         config_.ep_out = TinyUSBDevice.allocEndpoint(TUSB_DIR_OUT);
-      if (this->getEnableFeedbackEp())
+      if (this->isFeedbackEpEnabled())
         config_.ep_fb = TinyUSBDevice.allocEndpoint(TUSB_DIR_IN);
     }
     uint16_t len = getDescriptor(buf);
@@ -76,21 +76,39 @@ class USBAudioDeviceTinyUSB : public USBAudioDeviceBase,
     TinyUSBDevice.setManufacturerDescriptor(config_.manufacturer);
     TinyUSBDevice.setProductDescriptor(config_.product);
     TinyUSBDevice.setSerialDescriptor(config_.serial);
-    setupBuffer();
+    setupDescrBuffer();
     if (!TinyUSBDevice.addInterface(*this)) {
       return false;
     }
     return true;
   }
 
+  /** @brief Returns the TX audio buffer (NBuffer block pool). */
+  BaseBuffer<uint8_t>& bufferTx() override { return buffer_tx_; }
+
+  /** @brief Returns the RX audio buffer (NBuffer block pool). */
+  BaseBuffer<uint8_t>& bufferRx() override { return buffer_rx_; }
+
+  /** @brief Resize buffers as block pools: block size = one USB frame
+   *  at the current sample rate, block count = fifo_packets. */
+  void resizeBuffers() override {
+    uint16_t block_sz = packetSize();
+    uint8_t  block_cnt = config_.fifo_packets;
+    if (isEpInEnabled())  buffer_tx_.resize(block_sz * block_cnt);
+    if (isEpOutEnabled()) buffer_rx_.resize(block_sz *block_cnt);
+  }
+
  protected:
-  void setupBuffer() {
+  RingBuffer<uint8_t> buffer_tx_{0};
+  RingBuffer<uint8_t> buffer_rx_{0};
+
+  void setupDescrBuffer() {
     static uint8_t buffer[USB_DESCR_MAX_LEN];
     TinyUSBDevice.setConfigurationBuffer(buffer, USB_DESCR_MAX_LEN);
   }
 };
 
-using USBAudioDevice = USBAudioDeviceTinyUSB;
+using USBAudioStream = USBAudioDeviceTinyUSB;
 
 
 }  // namespace audio_tools

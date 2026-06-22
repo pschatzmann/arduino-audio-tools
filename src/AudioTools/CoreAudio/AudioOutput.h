@@ -537,11 +537,13 @@ class OutputMixer : public Print {
   }
 
   /// Resizes the buffer to the indicated number of bytes
-  void resize(int sizeBytes) {
+  bool resize(size_t sizeBytes) {
+    bool result = true;
     if (sizeBytes != size_bytes) {
-      allocate_buffers(sizeBytes);
+      result = allocate_buffers(sizeBytes);
     }
     size_bytes = sizeBytes;
+    return result;
   }
 
   /// Writes silence to the current stream buffer
@@ -648,14 +650,18 @@ class OutputMixer : public Print {
   }
 
   /// Allocates ring buffers for all input streams
-  void allocate_buffers(int sizeBytes) {
+  bool allocate_buffers(int sizeBytes) {
     // allocate ringbuffers for each output
     for (int j = 0; j < output_count; j++) {
       if (buffers[j] != nullptr) {
         delete buffers[j];
       }
       buffers[j] = create_buffer(sizeBytes, allocator);
+      if (buffers[j] == nullptr) {
+        return false;
+      }
     }
+    return true;
   }
 
   /// Releases memory for all ring buffers
