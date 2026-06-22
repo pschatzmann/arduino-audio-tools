@@ -40,7 +40,7 @@ class AudioBoardStream : public I2SCodecStream {
     // pin mode already set up by driver library
     actions.setPinMode(false);
     // use the AudioBoard
-    actions.setReadCallback([this](digital_pin_t pin) { return this->digitalRead(pin); });
+    actions.setReadCallback(readPinCB, this);
   }
 
   bool begin() override { return I2SCodecStream::begin(); }
@@ -378,6 +378,10 @@ class AudioBoardStream : public I2SCodecStream {
   }
 
  protected:
+  static bool readPinCB(digital_pin_t pin, void* ref) {
+    return static_cast<AudioBoardStream*>(ref)->digitalRead(pin);
+  }
+
   AudioActions actions;
   bool headphoneIsConnected = false;
   bool active = true;
