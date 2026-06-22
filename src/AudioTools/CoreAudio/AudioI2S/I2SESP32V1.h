@@ -18,6 +18,12 @@ namespace audio_tools {
 using i2s_port_t = int;  
 #endif
 
+// support for Arduino ESP32 v3.0.7
+#if ESP_IDF_VERSION <= ESP_IDF_VERSION_VAL(5, 1, 4)
+#define I2S_MCLK_MULTIPLE_192 static_cast<i2s_mclk_multiple_t>(192)  
+#endif
+
+
 /**
  * @brief Basic I2S API for the ESP32 (using the new API).
  * https://docs.espressif.com/projects/esp-idf/en/v5.0.1/esp32/api-reference/peripherals/i2s.html#i2s-communication-mode
