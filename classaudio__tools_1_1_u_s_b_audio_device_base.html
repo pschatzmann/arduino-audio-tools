@@ -103,7 +103,7 @@ Inheritance diagram for USBAudioDeviceBase:</div>
 <area href="classaudio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="AudioInfoSource" shape="rect" coords="334,112,491,136"/>
 <area href="classaudio__tools_1_1_stream.html" alt="Stream" shape="rect" coords="0,56,157,80"/>
 <area href="classaudio__tools_1_1_print.html" alt="Print" shape="rect" coords="0,0,157,24"/>
-<area href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html" title="USBAudioDeviceBase subclass for ESP32-S2/S3 using the arduino-esp32 stack." alt="USBAudioDeviceESP32" shape="rect" coords="167,280,324,304"/>
+<area href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html" alt="USBAudioDeviceESP32" shape="rect" coords="167,280,324,304"/>
 <area href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html" title="USBAudioDeviceBase subclass for RP2040 / Adafruit TinyUSB." alt="USBAudioDeviceTinyUSB" shape="rect" coords="334,280,491,304"/>
   </map>
 </div></div>
@@ -228,8 +228,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9eb35e35f8db9942142922d899a98785" id="r_a9eb35e35f8db9942142922d899a98785"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a9eb35e35f8db9942142922d899a98785">numInterfaces</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a></td></tr>
 <tr class="memdesc:a9eb35e35f8db9942142922d899a98785"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total number of USB interfaces claimed by the audio function (1 AC + 1 or 2 AS), for use in the bNumInterfaces field of the configuration descriptor.  <br /></td></tr>
 <tr class="separator:a9eb35e35f8db9942142922d899a98785"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d52c0ed98e047d782054fa126b281e5" id="r_a0d52c0ed98e047d782054fa126b281e5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_stream.html#a0d52c0ed98e047d782054fa126b281e5">operator bool</a> ()</td></tr>
-<tr class="separator:a0d52c0ed98e047d782054fa126b281e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90622bd78258a36bbcf63426b28307ac" id="r_a90622bd78258a36bbcf63426b28307ac"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a90622bd78258a36bbcf63426b28307ac">operator bool</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
+<tr class="memdesc:a90622bd78258a36bbcf63426b28307ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true when <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a601fb7cf1fc15db50c71a826f084f934" title="(Re-)start the USB audio device with the current config.">begin()</a> has been called and the USB host has mounted the device.  <br /></td></tr>
+<tr class="separator:a90622bd78258a36bbcf63426b28307ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af3322ed0e24d11005573274c1c1d069d" id="r_af3322ed0e24d11005573274c1c1d069d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#af3322ed0e24d11005573274c1c1d069d">readBytes</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *buffer, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bufsize</a>)</td></tr>
 <tr class="memdesc:af3322ed0e24d11005573274c1c1d069d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receive audio data from the host (host → device, speaker/playback).  <br /></td></tr>
 <tr class="separator:af3322ed0e24d11005573274c1c1d069d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -3619,8 +3620,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a0d52c0ed98e047d782054fa126b281e5" name="a0d52c0ed98e047d782054fa126b281e5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d52c0ed98e047d782054fa126b281e5">&#9670;&#160;</a></span>operator bool()</h2>
+<a id="a90622bd78258a36bbcf63426b28307ac" name="a90622bd78258a36bbcf63426b28307ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90622bd78258a36bbcf63426b28307ac">&#9670;&#160;</a></span>operator bool()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3629,7 +3630,7 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">operator</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> </td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">operator</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -3637,12 +3638,14 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_a2_d_p_stream.html#a9b3baad8c612d81b96e46f84d7e97580">A2DPStream</a>, <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#a9b3baad8c612d81b96e46f84d7e97580">ICYStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_audio_b_l_e_stream.html#a9b3baad8c612d81b96e46f84d7e97580">AudioBLEStream</a>, <a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#a90622bd78258a36bbcf63426b28307ac">AudioFFTBase</a>, <a class="el" href="classaudio__tools_1_1_port_audio_stream.html#a90622bd78258a36bbcf63426b28307ac">PortAudioStream</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#a90622bd78258a36bbcf63426b28307ac">URLStream</a>, <a class="el" href="classaudio__tools_1_1_i2_s_stream.html#a90622bd78258a36bbcf63426b28307ac">I2SStream</a>, <a class="el" href="classaudio__tools_1_1_adapter_audio_output_to_audio_stream.html#a90622bd78258a36bbcf63426b28307ac">AdapterAudioOutputToAudioStream</a>, <a class="el" href="classaudio__tools_1_1_timed_stream.html#a90622bd78258a36bbcf63426b28307ac">TimedStream</a>, <a class="el" href="classaudio__tools_1_1_memory_stream.html#a90622bd78258a36bbcf63426b28307ac">MemoryStream</a>, <a class="el" href="classaudio__tools_1_1_generated_sound_stream.html#a90622bd78258a36bbcf63426b28307ac">GeneratedSoundStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_generated_sound_stream.html#a90622bd78258a36bbcf63426b28307ac">GeneratedSoundStream&lt; int16_t &gt;</a>, and <a class="el" href="classaudio__tools_1_1_pipeline.html#a90622bd78258a36bbcf63426b28307ac">Pipeline</a>.</p>
+<p>Returns true when <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a601fb7cf1fc15db50c71a826f084f934" title="(Re-)start the USB audio device with the current config.">begin()</a> has been called and the USB host has mounted the device. </p>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_stream.html#a0d52c0ed98e047d782054fa126b281e5">AudioStream</a>.</p>
 
 </div>
 </div>

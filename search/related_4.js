@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['operator_2a_0',['operator*',['../group___echo_state.html#gad2b7ca532426c924817c24b85bb296bb',1,'audio_tools::echo_float_t']]]
+  ['mp4parser_0',['MP4Parser',['../structaudio__tools_1_1_m_p4_parser_1_1_box.html#aae8eb5c316ccab2c4032e3c371bca493',1,'audio_tools::MP4Parser::Box']]],
+  ['mp4parserext_1',['MP4ParserExt',['../structaudio__tools_1_1_m_p4_parser_1_1_box.html#ab8c8f3c26fbd517786b35bb7d2157fbf',1,'audio_tools::MP4Parser::Box']]]
 ];

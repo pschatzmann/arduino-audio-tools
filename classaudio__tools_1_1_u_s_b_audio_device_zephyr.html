@@ -98,12 +98,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a601fb7cf1fc15db50c71a826f084f934"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a028aa1ca6d908d03c45d5baf41f02406" id="r_a028aa1ca6d908d03c45d5baf41f02406"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_zephyr.html#a028aa1ca6d908d03c45d5baf41f02406">begin</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html">USBAudioConfig</a> &amp;cfg)</td></tr>
 <tr class="separator:a028aa1ca6d908d03c45d5baf41f02406"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acb49b3d87009a5a12096e51f330f2921" id="r_acb49b3d87009a5a12096e51f330f2921"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_zephyr.html#acb49b3d87009a5a12096e51f330f2921">bufferRx</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
-<tr class="memdesc:acb49b3d87009a5a12096e51f330f2921"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the RX audio buffer. Same override rules as <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_zephyr.html#a426037f2e746a9c97f370044b6e3b8c9" title="Returns the TX audio buffer. Override in platform subclasses to provide a cross-core safe implementat...">bufferTx()</a>.  <br /></td></tr>
-<tr class="separator:acb49b3d87009a5a12096e51f330f2921"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a426037f2e746a9c97f370044b6e3b8c9" id="r_a426037f2e746a9c97f370044b6e3b8c9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_zephyr.html#a426037f2e746a9c97f370044b6e3b8c9">bufferTx</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
-<tr class="memdesc:a426037f2e746a9c97f370044b6e3b8c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the TX audio buffer. Override in platform subclasses to provide a cross-core safe implementation (e.g. <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html" title="Buffer implementation which is using a FreeRTOS StreamBuffer. The default allocator uses psram is ava...">BufferRTOS</a> on ESP32). The default <a class="el" href="classaudio__tools_1_1_ring_buffer.html" title="Implements a typed Ringbuffer.">RingBuffer</a> is suitable for single-core platforms (RP2040).  <br /></td></tr>
-<tr class="separator:a426037f2e746a9c97f370044b6e3b8c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac17d9d87adeda9f6383daef2af96f31d" id="r_ac17d9d87adeda9f6383daef2af96f31d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html">USBAudioConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_zephyr.html#ac17d9d87adeda9f6383daef2af96f31d">defaultConfig</a> (<a class="el" href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">RxTxMode</a> mode=<a class="el" href="group__basic.html#gga8cbd91a8bac9b5ab425112be1620eb49a6f3b87c1abe374d1d1a5fef79bffeb00">RXTX_MODE</a>)</td></tr>
 <tr class="separator:ac17d9d87adeda9f6383daef2af96f31d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf81d3fdaf258088d7692fa70cece087" id="r_aaf81d3fdaf258088d7692fa70cece087"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_zephyr.html#aaf81d3fdaf258088d7692fa70cece087">end</a> ()</td></tr>
@@ -257,60 +251,6 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<a id="acb49b3d87009a5a12096e51f330f2921" name="acb49b3d87009a5a12096e51f330f2921"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acb49b3d87009a5a12096e51f330f2921">&#9670;&#160;</a></span>bufferRx()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> &gt; &amp; bufferRx </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns the RX audio buffer. Same override rules as <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_zephyr.html#a426037f2e746a9c97f370044b6e3b8c9" title="Returns the TX audio buffer. Override in platform subclasses to provide a cross-core safe implementat...">bufferTx()</a>. </p>
-
-</div>
-</div>
-<a id="a426037f2e746a9c97f370044b6e3b8c9" name="a426037f2e746a9c97f370044b6e3b8c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a426037f2e746a9c97f370044b6e3b8c9">&#9670;&#160;</a></span>bufferTx()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> &gt; &amp; bufferTx </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns the TX audio buffer. Override in platform subclasses to provide a cross-core safe implementation (e.g. <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html" title="Buffer implementation which is using a FreeRTOS StreamBuffer. The default allocator uses psram is ava...">BufferRTOS</a> on ESP32). The default <a class="el" href="classaudio__tools_1_1_ring_buffer.html" title="Implements a typed Ringbuffer.">RingBuffer</a> is suitable for single-core platforms (RP2040). </p>
 
 </div>
 </div>
