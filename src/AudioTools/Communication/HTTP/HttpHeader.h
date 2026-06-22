@@ -311,8 +311,8 @@ class HttpHeader {
   void setProtocol(const char* protocal) { protocol_str = protocal; }
 
   /// Resizes the internal read buffer
-  void resize(int bufferSize){
-    temp_buffer.resize(bufferSize);
+  bool resize(size_t bufferSize){
+    return temp_buffer.resize(bufferSize);
   }
 
   /// Provides the http parameter lines

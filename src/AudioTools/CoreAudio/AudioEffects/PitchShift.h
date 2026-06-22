@@ -108,7 +108,7 @@ class VariableSpeedRingBufferSimple : public BaseBuffer<T> {
    * @param size New buffer size in samples
    * @return true if successful, false on memory allocation failure
    */
-  bool resize(int size) {
+  bool resize(size_t size) {
     buffer_size = size;
     return buffer.resize(size);
   }
@@ -225,7 +225,7 @@ class VariableSpeedRingBuffer180 : public BaseBuffer<T> {
    * @param size New buffer size in samples
    * @return true if successful
    */
-  bool resize(int size) {
+  bool resize(size_t size) {
     buffer_size = size;
     overlap = buffer_size / 10;
     return buffer.resize(size);
@@ -395,7 +395,7 @@ class VariableSpeedRingBuffer : public BaseBuffer<T> {
    * @param size New buffer size in samples
    * @return true if successful
    */
-  bool resize(int size) {
+  bool resize(size_t size) {
     buffer_size = size;
     // prevent an overrun at the start
     read_pos_float = size / 2;

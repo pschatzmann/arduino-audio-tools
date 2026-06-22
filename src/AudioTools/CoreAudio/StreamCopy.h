@@ -306,9 +306,9 @@ class StreamCopyT {
   bool isCheckAvailable() { return check_available; }
 
   /// resizes the copy buffer
-  void resize(int len) {
+  bool resize(size_t len) {
     buffer_size = len;
-    buffer.resize(len);
+    return buffer.resize(len);
   }
 
   /// deactivate/activate copy - active by default

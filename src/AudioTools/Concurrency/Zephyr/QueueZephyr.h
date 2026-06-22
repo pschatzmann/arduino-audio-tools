@@ -58,7 +58,7 @@ class QueueZephyr {
   void setWriteMaxWait(TickType_t ticks) { write_max_wait = ticks; }
 
   /// (Re-)defines the size
-  bool resize(int size) {
+  bool resize(size_t size) {
     bool result = true;
     if (size != queue_size) {
       end();

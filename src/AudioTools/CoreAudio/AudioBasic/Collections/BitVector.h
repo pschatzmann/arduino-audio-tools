@@ -77,13 +77,16 @@ public:
   }
 
   /// Defines the size of the bit vector
-  void resize(int size) {
+  bool resize(size_t size) {
     max_idx = size;
     int round_up = size % 64 != 0;
-    vector.resize(size / 64 + round_up);
+    if (!vector.resize(size / 64 + round_up)) {
+      return false;
+    }
     for (int j=0;j<max_idx;j++){
       set(j, 0);
     }
+    return true;
   }
 
   // shifts n bits: + to the right; - to the left

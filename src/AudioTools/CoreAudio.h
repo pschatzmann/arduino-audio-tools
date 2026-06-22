@@ -25,6 +25,7 @@
 #include "AudioTools/CoreAudio/AudioMetaData.h"
 #include "AudioTools/CoreAudio/FrequencyDetector.h"
 #include "AudioTools/CoreAudio/GoerzelStream.h"
+#include "AudioTools/CoreAudio/QualityAnalysisStream.h"
 #include "AudioTools/CoreAudio/RTTTLOutput.h"
 
 // Audio Actions only when pin support havs been defined

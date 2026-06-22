@@ -29,7 +29,7 @@ class SynchronizedNBufferZephyrT : public NBuffer<T> {
 
   ~SynchronizedNBufferZephyrT() { cleanup(); }
 
-  bool resize(int bufferSize, int bufferCount) {
+  bool resize(size_t bufferSize, int bufferCount) {
     if (buffer_size == bufferSize && buffer_count == bufferCount) {
       return true;
     }
