@@ -115,8 +115,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a2e9c5136d19b1a95fc427e0852deab5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5bda8073e2388f041a1e189428e55bf9" id="r_a5bda8073e2388f041a1e189428e55bf9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_zephyr.html#a5bda8073e2388f041a1e189428e55bf9">reenumerateUSBOnChange</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html">USBAudioConfig</a> &amp;cfg)</td></tr>
 <tr class="separator:a5bda8073e2388f041a1e189428e55bf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a27be07e636d9943c083f6bf6c8ea90" id="r_a4a27be07e636d9943c083f6bf6c8ea90"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_zephyr.html#a4a27be07e636d9943c083f6bf6c8ea90">setConfig</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html">USBAudioConfig</a> &amp;cfg)</td></tr>
-<tr class="separator:a4a27be07e636d9943c083f6bf6c8ea90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdef2f29b47bcd252b25bda4d29a48d8" id="r_acdef2f29b47bcd252b25bda4d29a48d8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_zephyr.html#acdef2f29b47bcd252b25bda4d29a48d8">setRxCallback</a> (std::function&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint16_t</a>)&gt; cb)</td></tr>
 <tr class="separator:acdef2f29b47bcd252b25bda4d29a48d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fecd4fd4cf2dfa74b1c757c93ea2b07" id="r_a1fecd4fd4cf2dfa74b1c757c93ea2b07"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_zephyr.html#a1fecd4fd4cf2dfa74b1c757c93ea2b07">setTxCallback</a> (std::function&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint16_t</a>(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint16_t</a>)&gt; cb)</td></tr>
@@ -443,32 +441,6 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Zephyr UAC2 descriptors are fixed in the device tree at build time. This method logs a warning if the audio format changes and is otherwise a no-op. </p>
-
-</div>
-</div>
-<a id="a4a27be07e636d9943c083f6bf6c8ea90" name="a4a27be07e636d9943c083f6bf6c8ea90"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4a27be07e636d9943c083f6bf6c8ea90">&#9670;&#160;</a></span>setConfig()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> setConfig </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html">USBAudioConfig</a> &amp;&#160;</td>
-          <td class="paramname"><em>cfg</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
 
 </div>
 </div>
