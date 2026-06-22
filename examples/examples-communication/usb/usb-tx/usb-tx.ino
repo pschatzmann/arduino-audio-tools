@@ -69,7 +69,6 @@ void setup(void) {
   }
 
   MySerial.println("USB audio started");
-
 }
 
 void loop() {
@@ -80,10 +79,7 @@ void loop() {
     Serial.print("xfer="); Serial.print(out.getTxXferCount());
     Serial.print(" rd="); Serial.print(out.getTxFifoReadTotal());
     Serial.print(" avail="); Serial.print(out.availableForWrite());
-    Serial.print(" filled="); Serial.print(out.bufferTx().bufferCountFilled());
-    Serial.print(" empty="); Serial.print(out.bufferTx().bufferCountEmpty());
     Serial.print(" frame="); Serial.print(out.getTxFrameBytesLast());
     Serial.print(" bps="); Serial.println(out.getTxBytesPerSample());
   }
-
 }
