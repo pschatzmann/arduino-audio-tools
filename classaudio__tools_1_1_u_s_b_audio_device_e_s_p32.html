@@ -485,12 +485,14 @@ Protected Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
 <tr class="memitem:a2c5985b81ca9b8bf4cd58b48dc22655f" id="r_a2c5985b81ca9b8bf4cd58b48dc22655f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a2c5985b81ca9b8bf4cd58b48dc22655f">floatToUac2</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">vol</a>)</td></tr>
-<tr class="memdesc:a2c5985b81ca9b8bf4cd58b48dc22655f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert AudioTools volume (0.0–1.0) to UAC2 int16 (1/256 dB). 0.0 maps to 0x8000 (silence), 1.0 maps to 0 (0 dB).  <br /></td></tr>
+<tr class="memdesc:a2c5985b81ca9b8bf4cd58b48dc22655f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert linear volume (0.0–1.0) to UAC2 int16 (1/256 dB). Linear mapping: 0.0 → -100 dB (min), 1.0 → 0 dB (max).  <br /></td></tr>
 <tr class="separator:a2c5985b81ca9b8bf4cd58b48dc22655f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f778894536e5dcb0bd864e8626f4d33" id="r_a8f778894536e5dcb0bd864e8626f4d33"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">constexpr</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a8f778894536e5dcb0bd864e8626f4d33">getResetSize</a> ()</td></tr>
 <tr class="separator:a8f778894536e5dcb0bd864e8626f4d33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77ebf0b2134f23c96a6239f0aa590da6" id="r_a77ebf0b2134f23c96a6239f0aa590da6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a77ebf0b2134f23c96a6239f0aa590da6">isValidBitsPerSample</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bps</a>)</td></tr>
+<tr class="separator:a77ebf0b2134f23c96a6239f0aa590da6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a933d531b84a91b4a11bd8d8cf6fb9b2a" id="r_a933d531b84a91b4a11bd8d8cf6fb9b2a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a933d531b84a91b4a11bd8d8cf6fb9b2a">uac2ToFloat</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int16_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">v</a>)</td></tr>
-<tr class="memdesc:a933d531b84a91b4a11bd8d8cf6fb9b2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert UAC2 int16 (1/256 dB) to AudioTools volume (0.0–1.0). 0x8000 maps to 0.0 (silence), 0 maps to 1.0 (0 dB).  <br /></td></tr>
+<tr class="memdesc:a933d531b84a91b4a11bd8d8cf6fb9b2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert UAC2 int16 (1/256 dB) to linear volume (0.0–1.0). Linear mapping within the -100..0 dB range reported by GET_RANGE.  <br /></td></tr>
 <tr class="separator:a933d531b84a91b4a11bd8d8cf6fb9b2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -590,6 +592,9 @@ Protected Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
+<tr class="memitem:a0bdee6cf53da95e2d5d5e22acbba636e" id="r_a0bdee6cf53da95e2d5d5e22acbba636e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">constexpr</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a0bdee6cf53da95e2d5d5e22acbba636e">kVolumeMinDb256</a> = -25600</td></tr>
+<tr class="memdesc:a0bdee6cf53da95e2d5d5e22acbba636e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert AudioTools volume (0.0–1.0) to UAC2 int16 (1/256 dB). 0.0 maps to 0x8000 (silence), 1.0 maps to 0 (0 dB).  <br /></td></tr>
+<tr class="separator:a0bdee6cf53da95e2d5d5e22acbba636e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4132f694948b3397723dc78696c8a5cc" id="r_a4132f694948b3397723dc78696c8a5cc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a4132f694948b3397723dc78696c8a5cc">s_active_</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td></tr>
 <tr class="separator:a4132f694948b3397723dc78696c8a5cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -2143,7 +2148,7 @@ Board settings</h2>
 </table>
 </div><div class="memdoc">
 
-<p>Convert AudioTools volume (0.0–1.0) to UAC2 int16 (1/256 dB). 0.0 maps to 0x8000 (silence), 1.0 maps to 0 (0 dB). </p>
+<p>Convert linear volume (0.0–1.0) to UAC2 int16 (1/256 dB). Linear mapping: 0.0 → -100 dB (min), 1.0 → 0 dB (max). </p>
 
 </div>
 </div>
@@ -3319,6 +3324,32 @@ Board settings</h2>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a77ebf0b2134f23c96a6239f0aa590da6" name="a77ebf0b2134f23c96a6239f0aa590da6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77ebf0b2134f23c96a6239f0aa590da6">&#9670;&#160;</a></span>isValidBitsPerSample()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> isValidBitsPerSample </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td>
+          <td class="paramname"><em>bps</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -5099,7 +5130,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 </table>
 </div><div class="memdoc">
 
-<p>Convert UAC2 int16 (1/256 dB) to AudioTools volume (0.0–1.0). 0x8000 maps to 0.0 (silence), 0 maps to 1.0 (0 dB). </p>
+<p>Convert UAC2 int16 (1/256 dB) to linear volume (0.0–1.0). Linear mapping within the -100..0 dB range reported by GET_RANGE. </p>
 
 </div>
 </div>
@@ -5721,6 +5752,30 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0bdee6cf53da95e2d5d5e22acbba636e" name="a0bdee6cf53da95e2d5d5e22acbba636e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bdee6cf53da95e2d5d5e22acbba636e">&#9670;&#160;</a></span>kVolumeMinDb256</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">constexpr</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int16_t</a> kVolumeMinDb256 = -25600</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convert AudioTools volume (0.0–1.0) to UAC2 int16 (1/256 dB). 0.0 maps to 0x8000 (silence), 1.0 maps to 0 (0 dB). </p>
 
 </div>
 </div>

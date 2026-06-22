@@ -20,5 +20,6 @@ var searchData=
   ['kslicestoprocess_17',['kSlicesToProcess',['../structaudio__tools_1_1_tf_lite_config.html#a0cbb79fd6d7a97fd47327e039e114cce',1,'audio_tools::TfLiteConfig']]],
   ['kstridesamplesize_18',['kStrideSampleSize',['../classaudio__tools_1_1_tf_lite_micro_speach_writer.html#aff89d0817d427185ee64229680fc2938',1,'audio_tools::TfLiteMicroSpeachWriter']]],
   ['ksupportedsamplerates_19',['kSupportedSampleRates',['../namespaceaudio__tools.html#a62740879acca0d0cf686fa2f3de86c92',1,'audio_tools']]],
-  ['ktensorarenasize_20',['kTensorArenaSize',['../structaudio__tools_1_1_tf_lite_config.html#a632baa6fb9028f59d2d2522d4d0a1e1e',1,'audio_tools::TfLiteConfig']]]
+  ['ktensorarenasize_20',['kTensorArenaSize',['../structaudio__tools_1_1_tf_lite_config.html#a632baa6fb9028f59d2d2522d4d0a1e1e',1,'audio_tools::TfLiteConfig']]],
+  ['kvolumemindb256_21',['kVolumeMinDb256',['../classaudio__tools_1_1_u_s_b_audio_device_base.html#a0bdee6cf53da95e2d5d5e22acbba636e',1,'audio_tools::USBAudioDeviceBase']]]
 ];
