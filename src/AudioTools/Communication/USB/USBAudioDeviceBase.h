@@ -102,6 +102,11 @@ static constexpr uint8_t kNumSupportedSampleRates =
  * over USB. It supports multiple audio formats, feedback methods, and endpoint
  * configurations, and is designed for use with TinyUSB or native USB on
  * supported MCUs.
+ * 
+ * @author Phil Schatzmann
+ * @ingroup usb
+ * @ingroup io
+ * @copyright GPLv3
  */
 class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
   /**

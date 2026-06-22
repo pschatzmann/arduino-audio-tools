@@ -39,6 +39,7 @@ namespace audio_tools {
  * - `ARDUINO_USB_MODE` must be 0 (OTG / TinyUSB mode)
  *
  * @ingroup io
+ * @ingroup usb
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -182,6 +183,13 @@ class Emulated_TinyUSB {
 
 static Emulated_TinyUSB TinyUSBDevice;
 
+/**
+ * @brief USBAudioStream type alias for ESP32.  
+ * @ingroup usb
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ * 
+ */
 using USBAudioStream = USBAudioDeviceESP32;
 
 }  // namespace audio_tools

@@ -34,6 +34,12 @@
  */
 
 /**
+ * @defgroup usb USB
+ * @ingroup communications
+ * @brief USB Audio V 2.0
+ */
+
+/**
  * @defgroup transform Converting Streams
  * @ingroup main
  * @brief Stream classes which change the input or output

@@ -30,6 +30,7 @@ namespace audio_tools {
  *   - `CONFIG_USBD_UAC2=y`, `CONFIG_USB_DEVICE_STACK_NEXT=y`.
  *
  * @ingroup io
+ * @ingroup usb
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -249,6 +250,13 @@ class USBAudioDeviceZephyr {
   static constexpr uint8_t kPipelineDepth = 3;
 };
 
+/**
+ * @brief USBAudioStream type alias for Zephyr RTOS.  
+ * @ingroup usb
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ * 
+ */
 using USBAudioStream = USBAudioDeviceZephyr;
 
 }  // namespace audio_tools

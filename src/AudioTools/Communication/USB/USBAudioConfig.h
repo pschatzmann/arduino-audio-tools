@@ -10,6 +10,10 @@ namespace audio_tools {
 #ifdef STANDALONE_USB
 /**
  * @brief Configuration for USB Audio (standalone build without AudioInfo).
+ * 
+ * @author Phil Schatzmann
+ * @ingroup usb
+ * @copyright GPLv3
  */
 struct USBAudioConfig {
   uint32_t sample_rate = 44100;

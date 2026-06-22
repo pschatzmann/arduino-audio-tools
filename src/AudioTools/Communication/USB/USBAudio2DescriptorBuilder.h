@@ -22,6 +22,10 @@ namespace audio_tools {
  *     [IN  path] Input Terminal (Microphone)    + Feature Unit + Output Terminal (USB Streaming)
  *   [OUT AS Interface] alt=0 (zero BW) + alt=1 (CS AS + Format + ISO EP + CS ISO EP)
  *   [IN  AS Interface] alt=0 (zero BW) + alt=1 (CS AS + Format + ISO EP + CS ISO EP)
+ * 
+ * @author Phil Schatzmann
+ * @ingroup usb
+ * @copyright GPLv3
  */
 class USBAudio2DescriptorBuilder {
  public:

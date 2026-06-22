@@ -27,6 +27,7 @@ namespace audio_tools {
  * - USB Stack : **Adafruit TinyUSB**
  *
  * @ingroup io
+ * @ingroup usb
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -108,6 +109,13 @@ class USBAudioDeviceTinyUSB : public USBAudioDeviceBase,
   }
 };
 
+/**
+ * @brief USBAudioStream type alias for Adafruit TinyUSB based systems.  
+ * @ingroup usb
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ * 
+ */
 using USBAudioStream = USBAudioDeviceTinyUSB;
 
 
