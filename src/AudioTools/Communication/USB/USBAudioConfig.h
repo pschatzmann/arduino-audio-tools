@@ -69,7 +69,7 @@ struct USBAudioConfig : public AudioInfo {
 
   /// Enable the AC interrupt IN endpoint for device-initiated volume, mute,
   /// and sample-rate change notifications.  Without it the host must poll
-  /// via GET_CUR; the controls still work, just without push updates.
+  /// via GET_CUR; the controls might still work, just without push updates.
   bool enable_interrupt_ep = false;
 
   /// Enable UAC2 IN-endpoint flow control: vary the per-frame isochronous

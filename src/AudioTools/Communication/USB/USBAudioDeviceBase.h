@@ -251,6 +251,11 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
 
   /** @brief Change the sample rate and notify the host. */
   void setAudioInfo(AudioInfo info) override {
+    if (!isValidBitsPerSample(info.bits_per_sample)) {
+      LOGE("Unsupported bits_per_sample: %d (must be 16, 24, or 32)",
+           info.bits_per_sample);
+      return;
+    }
     // full flexibility when not started yet
     if (!is_started_) {
       config_.sample_rate = info.sample_rate;
@@ -306,6 +311,12 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
    *  @return true on success. */
   bool begin() {
     if (!is_started_) {
+      if (!isValidBitsPerSample(config_.bits_per_sample)) {
+        LOGE("Unsupported bits_per_sample: %d (must be 16, 24, or 32)",
+             config_.bits_per_sample);
+        return false;
+      }
+
       // Resize platform buffers — virtual so each platform uses the right API.
       resizeBuffers();
 
@@ -399,6 +410,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
    *  @param channel  0 = master, 1..N = per-channel.
    *  @return true if the channel index was valid. */
   bool setVolume(float vol, uint8_t channel) {
+    LOGW("setVolume %f channel: %d", vol, channel);
     if (channel >= volume_.size()) return false;
     volume_[channel] = vol;
     if (volume_cb_) volume_cb_(vol, channel);
@@ -418,6 +430,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
    *  @param channel  0 = master, 1..N = per-channel.
    *  @return true if the channel index was valid. */
   bool setMute(bool m, uint8_t channel = 0) {
+    LOGW("setMute %s channel: %d", m ? "true" : "false", channel);
     if (channel >= mute_.size()) return false;
     mute_[channel] = m;
     if (mute_cb_) mute_cb_(m, channel);
@@ -898,7 +911,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
         processVolume<int16_t>((int16_t*)data, len / 2);
         break;
       case 24:
-        processVolume<int24_t>((int24_t*)data, len / sizeof(int24_t));
+        processVolume<int24_3bytes_t>((int24_3bytes_t*)data, len / 3);
         break;
       case 32:
         processVolume<int32_t>((int32_t*)data, len / 4);
@@ -941,9 +954,10 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
   void setSampleRate(uint32_t rate) {
     bool rate_updated = rate != config_.sample_rate;
     config_.sample_rate = rate;
+    LOGW("Sample rate changed to %u Hz", rate);
     if (rate_updated) {
       notifyAudioChange(config_);
-      resizeBuffers();  // block size depends on packetSize() which uses sample_rate
+      resizeBuffers();
     }
     for (auto& fct : audiod_fct_) fct.sample_rate_tx = rate;
     if (sample_rate_cb_) sample_rate_cb_(rate);
@@ -966,19 +980,23 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
 
   /** @brief Convert AudioTools volume (0.0–1.0) to UAC2 int16 (1/256 dB).
    *  0.0 maps to 0x8000 (silence), 1.0 maps to 0 (0 dB). */
+  static constexpr int16_t kVolumeMinDb256 = -25600;  // -100 dB in 1/256 dB
+
+  /** @brief Convert linear volume (0.0–1.0) to UAC2 int16 (1/256 dB).
+   *  Linear mapping: 0.0 → -100 dB (min), 1.0 → 0 dB (max). */
   static int16_t floatToUac2(float vol) {
     if (vol <= 0.0f) return (int16_t)0x8000;
     if (vol >= 1.0f) return 0;
-    float db = 20.0f * log10f(vol);
-    int16_t r = (int16_t)(db * 256.0f);
-    return (r < -25600) ? (int16_t)-25600 : r;
+    return (int16_t)((1.0f - vol) * kVolumeMinDb256);
   }
 
-  /** @brief Convert UAC2 int16 (1/256 dB) to AudioTools volume (0.0–1.0).
-   *  0x8000 maps to 0.0 (silence), 0 maps to 1.0 (0 dB). */
+  /** @brief Convert UAC2 int16 (1/256 dB) to linear volume (0.0–1.0).
+   *  Linear mapping within the -100..0 dB range reported by GET_RANGE. */
   static float uac2ToFloat(int16_t v) {
     if (v == (int16_t)0x8000) return 0.0f;
-    return powf(10.0f, v / 256.0f / 20.0f);
+    if (v >= 0) return 1.0f;
+    if (v <= kVolumeMinDb256) return 0.0f;
+    return 1.0f - (float)v / (float)kVolumeMinDb256;
   }
 
   /** @brief Returns true if the given entity ID is a Feature Unit (FU1 or FU2).
@@ -1036,6 +1054,10 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
   bool isUseLinearBufferRx() const { return config_.use_linear_buffer_rx; }
 
   bool isUseLinearBufferTx() const { return config_.use_linear_buffer_tx; }
+
+  static bool isValidBitsPerSample(uint8_t bps) {
+    return bps == 16 || bps == 24 || bps == 32;
+  }
 
   // Max Bytes for one 1 ms isochronous USB packet.
   uint16_t packetSize() const { return descr_builder.calcMaxPacketSize(); }
