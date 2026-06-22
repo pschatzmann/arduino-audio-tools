@@ -4,7 +4,7 @@
 #ifdef ESP32
 
 #if ARDUINO_USB_CDC_ON_BOOT
-#error This sketch should be used when USB is in OTG mode, not CDC-on-boot mode
+#error USB Audio is only available in OTG mode, not CDC-on-boot mode
 #else
 
 #include <USB.h>
