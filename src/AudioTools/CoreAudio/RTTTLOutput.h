@@ -1,5 +1,4 @@
 #pragma once
-#include <functional>
 
 #include "AudioTools/CoreAudio/AudioBasic/Str.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"
@@ -198,8 +197,7 @@ class RTTTLOutput : public AudioOutput {
   /// milliseconds
   /// - midiNote: MIDI note number (0-127)
   void setNoteCallback(
-      std::function<void(float freqHz, int durationMs, int midiNote, void* ref)>
-          cb) {
+      void (*cb)(float freqHz, int durationMs, int midiNote, void* ref)) {
     noteCallback = cb;
   }
 
@@ -233,7 +231,7 @@ class RTTTLOutput : public AudioOutput {
   void* reference = nullptr;
   uint8_t m_ramp_upPercent = 20;
   uint8_t m_ramp_downPercent = 30;
-  std::function<void(float, int, int, void*)> noteCallback;
+  void (*noteCallback)(float, int, int, void*) = nullptr;
 
   int find_byte(const uint8_t* haystack, size_t haystack_len, uint8_t needle) {
     for (size_t i = 0; i < haystack_len; i++) {
