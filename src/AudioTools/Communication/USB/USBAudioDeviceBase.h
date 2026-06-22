@@ -460,6 +460,14 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
     sample_rate_cb_ = std::move(cb);
   }
 
+  /** @brief Register a callback invoked when the streaming state changes.
+   *  Fires when the host opens or closes a streaming interface (SET_INTERFACE
+   *  alt=1 / alt=0).
+   *  @param cb  Callback receiving (bool active_tx, bool active_rx). */
+  void setStreamingStateCallback(std::function<void(bool, bool)> cb) {
+    streaming_state_cb_ = std::move(cb);
+  }
+
   /** @brief Returns true when the host has selected the streaming alternate
    *  setting (alt > 0) and opened the isochronous IN endpoint.  Use this to
    *  decide whether to buffer TX audio or silently discard it. */
@@ -820,6 +828,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
   std::function<void(float, uint8_t)> volume_cb_;
   std::function<void(bool, uint8_t)> mute_cb_;
   std::function<void(uint32_t)> sample_rate_cb_;
+  std::function<void(bool, bool)> streaming_state_cb_;
   USBAudioConfig config_;
   USBAudioConfig active_config_;
   USBAudio2DescriptorBuilder descr_builder{config_};
@@ -1057,6 +1066,11 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
 
   static bool isValidBitsPerSample(uint8_t bps) {
     return bps == 16 || bps == 24 || bps == 32;
+  }
+
+  void notifyStreamingState() {
+    if (streaming_state_cb_)
+      streaming_state_cb_(isStreamingActiveTx(), isStreamingActiveRx());
   }
 
   // Max Bytes for one 1 ms isochronous USB packet.
@@ -1968,6 +1982,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
       audio->packet_sz_tx[1] = 0;
       audio->packet_sz_tx[2] = 0;
     }
+    notifyStreamingState();
   }
 
   void closeEpOut(uint8_t rhport, audiod_function_t* audio, uint8_t itf,
@@ -1985,6 +2000,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
       audio->ep_fb = 0;
       tu_memclr(&audio->feedback, sizeof(audio->feedback));
     }
+    notifyStreamingState();
   }
 
   // ── Activate a single endpoint found in the descriptor ────────────────
@@ -2023,6 +2039,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
     audio->lin_buf_in.assign(audio->ep_in_sz, 0);
     tx_xfer_armed_ = TUSB_EDPT_XFER(rhport, audio->ep_in,
                                     audio->lin_buf_in.data(), first_pkt);
+    notifyStreamingState();
   }
 
   // ── Open the OUT (RX) data endpoint ───────────────────────────────────
@@ -2051,6 +2068,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
                                           audio->ep_out_sz);
       LOGD("  XFER_FIFO armed: %s", xfer_ok ? "OK" : "FAIL");
     }
+    notifyStreamingState();
   }
 
   // ── Open the explicit feedback endpoint ───────────────────────────────
