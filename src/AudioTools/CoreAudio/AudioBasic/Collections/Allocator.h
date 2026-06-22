@@ -1,9 +1,10 @@
 #pragma once
 #include <stdlib.h>
 
-#include "AudioTools/CoreAudio/AudioLogger.h"
-#include "AudioTools/CoreAudio/AudioRuntime.h"
 #include "AudioToolsConfig.h"
+#include "AudioTools/CoreAudio/AudioLogger.h"
+// Some top level functions: stop(), checkMemory()
+#include "AudioTools/CoreAudio/AudioRuntime.h"
 
 namespace audio_tools {
 
@@ -173,7 +174,37 @@ class AllocatorPSRAM : public Allocator {
 
 #endif
 
-static AllocatorExt DefaultAllocator;
-static Allocator DefaultAllocatorRAM;
+#if defined(IS_ZEPHYR)
+#include <zephyr/kernel.h>
+
+/**
+ * @brief Zephyr allocator using the kernel heap (k_malloc / k_free).
+ * This is the standard allocator for Zephyr builds.
+ * @ingroup memorymgmt
+ */
+class AllocatorZephyr : public Allocator {
+ public:
+  void* do_allocate(size_t size) override {
+    if (size == 0) size = 1;
+    void* result = k_malloc(size);
+    if (result != nullptr) memset(result, 0, size);
+    return result;
+  }
+
+  void free(void* memory) override {
+    if (memory != nullptr) k_free(memory);
+  }
+};
+using TAllocatorSTD = AllocatorZephyr;
+using TAllocatorExt = AllocatorZephyr;
+
+#else // defined(ZEPHYR)
+// all non zephyr cases
+using TAllocatorSTD = Allocator;
+using TAllocatorExt = AllocatorExt;
+#endif
+
+static TAllocatorExt DefaultAllocator;
+static TAllocatorSTD DefaultAllocatorRAM;
 
 }  // namespace audio_tools

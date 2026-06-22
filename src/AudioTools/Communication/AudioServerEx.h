@@ -30,6 +30,10 @@ struct AudioServerExConfig : public AudioInfo {
  * https://github.com/pschatzmann/TinyHttp.
  * It supports multiple concurrent clients. You can e.g. use it to write mp3 data and make
  * it available in multiple clients.
+ * 
+ * @note Supported only on Arduino platforms with WiFi support (e.g. ESP32) and the WiFi library!
+ * @note Requires: 👉 https://github.com/pschatzmann/TinyHttp
+ * 
  * @ingroup http
  * @author Phil Schatzmann
  * @copyright GPLv3

@@ -66,6 +66,7 @@
 ../examples/examples-audiokit/streams-audiokit-sd_wav -> rc=0
 ../examples/examples-audiokit/streams-audiokit-serial -> rc=0
 ../examples/examples-audiokit/streams-audiokit-tf -> rc=0
+../examples/examples-audiokit/streams-catstream-audiokit -> rc=0
 ../examples/examples-audiokit/streams-file_loop-audiokit -> rc=0
 ../examples/examples-audiokit/streams-generator-audiokit -> rc=0
 ../examples/examples-audiokit/streams-generator_fromarray-audiokit -> rc=0
@@ -181,7 +182,7 @@
 ../examples/examples-communication/vban/streams-generator-vban -> rc=0
 ../examples/examples-communication/vban/streams-vban-audiokit -> rc=0
 ../examples/examples-communication/rtsp/communication-audiokit-rtsp -> rc=0
-../examples/examples-communication/rtsp/communication-codec-rtsp -> rc=1
+../examples/examples-communication/rtsp/communication-codec-rtsp -> rc=0
 ../examples/examples-communication/rtsp/communication-generator-rtsp -> rc=0
 ../examples/examples-communication/rtsp/communication-player_mp3-rtsp -> rc=0
 ../examples/examples-communication/rtsp/communication-player_mp3-rtsp_adcpm -> rc=0
@@ -200,7 +201,7 @@
 ../examples/examples-communication/http-client/player-url_icy-audiokit -> rc=0
 ../examples/examples-communication/http-client/player-url_icy-i2s -> rc=0
 ../examples/examples-communication/http-client/player-url_subclass-i2s -> rc=0
-../examples/examples-communication/http-client/streams-eth_url_mp3_helix-i2s -> rc=1
+../examples/examples-communication/http-client/streams-eth_url_mp3_helix-i2s -> rc=0
 ../examples/examples-communication/http-client/streams-http_post -> rc=0
 ../examples/examples-communication/http-client/streams-url_aac-audiokit -> rc=0
 ../examples/examples-communication/http-client/streams-url_aac-i2s -> rc=0
@@ -269,6 +270,7 @@
 ../examples/tests/codecs/test-codec-g722 -> rc=0
 ../examples/tests/codecs/test-codec-g723_24 -> rc=0
 ../examples/tests/codecs/test-codec-g723_40 -> rc=0
+../examples/tests/codecs/test-codec-g729 -> rc=0
 ../examples/tests/codecs/test-codec-gsm -> rc=0
 ../examples/tests/codecs/test-codec-iLBC -> rc=0
 ../examples/tests/codecs/test-codec-l8 -> rc=0
@@ -323,6 +325,7 @@
 ../examples/tests/etc/test-ringbufferfile -> rc=0
 ../examples/tests/etc/test-tdm -> rc=0
 ../examples/tests/etc/test-write-memory -> rc=0
+../examples/tests/etc/wav-file-size -> rc=0
 ../examples/tests/fft/fft-cmsis -> rc=1
 ../examples/tests/fft/fft-esp32 -> rc=0
 ../examples/tests/fft/fft-espressif -> rc=0

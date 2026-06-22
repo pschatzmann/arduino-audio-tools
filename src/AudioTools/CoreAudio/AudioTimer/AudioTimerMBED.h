@@ -6,20 +6,20 @@
 
 namespace audio_tools {
 
-class TimerAlarmRepeatingDriverMBED;
-static TimerAlarmRepeatingDriverMBED *timerAlarmRepeating = nullptr;
+class AudioTimerDriverMBED;
+static AudioTimerDriverMBED *timerAlarmRepeating = nullptr;
 
 /**
  * @brief Repeating Timer functions for repeated execution: Plaease use the
- * typedef TimerAlarmRepeating
+ * typedef AudioTimer
  * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  *
  */
-class TimerAlarmRepeatingDriverMBED : public TimerAlarmRepeatingDriverBase {
+class AudioTimerDriverMBED : public AudioTimerDriverBase {
  public:
-  TimerAlarmRepeatingDriverMBED() { timerAlarmRepeating = this; }
+  AudioTimerDriverMBED() { timerAlarmRepeating = this; }
 
   /**
    * Starts the alarm timer
@@ -60,8 +60,8 @@ class TimerAlarmRepeatingDriverMBED : public TimerAlarmRepeatingDriverBase {
   }
 };
 
-/// @brief  use TimerAlarmRepeating!  @ingroup timer_mbed
-using TimerAlarmRepeatingDriver = TimerAlarmRepeatingDriverMBED;
+/// @brief  use AudioTimer!  @ingroup timer_mbed
+using AudioTimerDriver = AudioTimerDriverMBED;
 
 }  // namespace audio_tools
 

@@ -167,7 +167,7 @@ class AnalogAudioArduino : public AudioStream {
 
  protected:
   AnalogConfigStd config;
-  TimerAlarmRepeating timer;
+  AudioTimer timer;
   BaseBuffer<uint8_t> *buffer = nullptr;
   int avg_value, min, max, count;
   bool is_combined_channels = false;

@@ -344,7 +344,7 @@ class DynamicMultiBuffer : public BaseBuffer<T> {
    * @param new_size New size in number of elements
    * @return true if resize was successful
    */
-  bool resize(int new_size) override {
+  bool resize(size_t new_size) override {
     // Calculate needed components
     size_t needed_components = (new_size + component_size_ - 1) / component_size_;
     

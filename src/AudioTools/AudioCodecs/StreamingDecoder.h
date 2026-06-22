@@ -276,7 +276,8 @@ class StreamingDecoderAdapter : public StreamingDecoder {
    *
    * @param bufferSize New buffer size in bytes
    */
-  void resize(int bufferSize) { buffer.resize(bufferSize); }
+  bool resize(size_t bufferSize) { 
+    return buffer.resize(bufferSize); }
 
   /**
    * @brief Provides the MIME type
@@ -917,10 +918,11 @@ class DecoderAdapter : public AudioDecoder {
    *
    * @param size New buffer size in bytes
    */
-  void resize(int size) {
+  bool resize(size_t size) {
     buffer_size = size;
     // setup the buffer only if needed
-    if (is_setup) rbuffer.resize(size);
+    if (is_setup) return rbuffer.resize(size);
+    return true;
   }
 
   /**

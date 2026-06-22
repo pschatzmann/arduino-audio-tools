@@ -307,10 +307,11 @@ class M4ACommonDemuxer {
      * @brief Resizes the internal buffer if needed.
      * @param newSize New buffer size.
      */
-    void resize(size_t newSize) {
+    bool resize(size_t newSize) {
       if (buffer.size() < newSize) {
-        buffer.resize(newSize);
+        return buffer.resize(newSize);
       }
+      return true;
     }
 
     /**
@@ -413,11 +414,12 @@ class M4ACommonDemuxer {
 
   M4AAudioConfig getM4AAudioConfig() { return audio_config; }
 
-  void resize(int size) {
+  bool resize(size_t size) {
     default_size = size;
     if (buffer.size() < size) {
-      buffer.resize(size);
+      return buffer.resize(size);
     }
+    return true;
   }
 
   /// File offset of stsz box

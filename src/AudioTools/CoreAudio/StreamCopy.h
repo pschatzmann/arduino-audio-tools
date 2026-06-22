@@ -1,12 +1,12 @@
 #pragma once
 
+#include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
 #include "AudioTools/CoreAudio/AudioMetaData/MimeDetector.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"
 #include "AudioTools/CoreAudio/AudioTypes.h"
 #include "AudioTools/CoreAudio/BaseConverter.h"
 #include "AudioTools/CoreAudio/Buffers.h"
-#include "AudioToolsConfig.h"
 
 #define NOT_ENOUGH_MEMORY_MSG "Could not allocate enough memory: %d bytes"
 
@@ -306,9 +306,9 @@ class StreamCopyT {
   bool isCheckAvailable() { return check_available; }
 
   /// resizes the copy buffer
-  void resize(int len) {
+  bool resize(size_t len) {
     buffer_size = len;
-    buffer.resize(len);
+    return buffer.resize(len);
   }
 
   /// deactivate/activate copy - active by default

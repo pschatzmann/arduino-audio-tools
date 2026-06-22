@@ -263,7 +263,7 @@ class Vector {
     return p_data[index]; 
   }
 
-  bool resize(int newSize, T value) {
+  bool resize(size_t newSize, T value) {
     if (resize(newSize)) {
       for (int j = 0; j < newSize; j++) {
         p_data[j] = value;
@@ -277,11 +277,11 @@ class Vector {
 
   int capacity() { return this->bufferLen; }
 
-  bool resize(int newSize) {
+  bool resize(size_t newSize) {
     int oldSize = this->len;
     resize_internal(newSize, true);
     this->len = newSize;
-    return this->len != oldSize;
+    return this->len != oldSize && data() != nullptr;
   }
 
   iterator begin() { return iterator(p_data, 0); }

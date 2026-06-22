@@ -1,5 +1,6 @@
 #pragma once
 
+#include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/AudioBasic/Collections.h"
 #include "AudioTools/CoreAudio/AudioBasic/Str.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
@@ -94,6 +95,10 @@ class BaseBuffer {
   ///  same as reset
   void clear() { reset(); }
 
+  /// Submit any partially-filled write buffer so the reader can access it.
+  /// Only meaningful for NBuffer-style block pools; no-op for ring buffers.
+  virtual void flush() {}
+
   /// provides the number of entries that are available to read
   virtual int available() = 0;
 
@@ -114,10 +119,17 @@ class BaseBuffer {
   }
 
   /// Resizes the buffer if supported: returns false if not supported
-  virtual bool resize(int bytes) {
+  virtual bool resize(size_t bytes) {
     LOGE("resize not implemented for this buffer");
     return false;
   }
+
+  /// Provides the number of entries that are available to read: -1 does not apply
+  virtual int bufferCountFilled() { return -1; }
+
+  /// Provides the number of entries that are available to write: -1 does not apply
+  virtual int bufferCountEmpty() { return -1; }
+
 };
 
 /**
@@ -302,10 +314,10 @@ class SingleBuffer : public BaseBuffer<T> {
 
   size_t size() override { return buffer.size(); }
 
-  bool resize(int size) {
+  bool resize(size_t size) {
     if (buffer.size() < size) {
       TRACED();
-      buffer.resize(size);
+      return buffer.resize(size);
     }
     return true;
   }
@@ -415,7 +427,7 @@ class RingBuffer : public BaseBuffer<T> {
   // returns the address of the start of the physical read buffer
   virtual T *address() override { return _aucBuffer.data(); }
 
-  virtual bool resize(int len) {
+  virtual bool resize(size_t len) {
     if (max_size != len && len > 0) {
       LOGI("resize: %d", len);
       _aucBuffer.resize(len);
@@ -573,7 +585,7 @@ class RingBufferFile : public BaseBuffer<T> {
   size_t size() override { return max_size; }
 
   /// Defines the capacity
-  bool resize(int size) {
+  bool resize(size_t size) {
     max_size = size;
     return true;
   }
@@ -672,6 +684,19 @@ class NBuffer : public BaseBuffer<T> {
     return actual_read_buffer->read(result);
   }
 
+  /// Reads up to len entries, spanning across multiple blocks.
+  /// BaseBuffer::readArray stops at the first block boundary because it
+  /// calls available() once.  This override keeps reading across blocks.
+  int readArray(T data[], int len) override {
+    int count = 0;
+    while (count < len) {
+      if (available() == 0) break;
+      actual_read_buffer->read(data[count]);
+      count++;
+    }
+    return count;
+  }
+
   /// peeks the actual entry from the buffer
   bool peek(T &result) override {
     if (available() == 0) return false;
@@ -741,6 +766,16 @@ class NBuffer : public BaseBuffer<T> {
     return actual_write_buffer->availableForWrite();
   }
 
+  /// Submit the partially-filled write buffer to the filled queue so
+  /// the reader can access it immediately.  Call after writeArray() when
+  /// the writer won't add more data to the current block for a while.
+  void flush() {
+    if (actual_write_buffer != nullptr && actual_write_buffer->available() > 0) {
+      addFilledBuffer(actual_write_buffer);
+      actual_write_buffer = nullptr;
+    }
+  }
+
   /// resets all buffers
   void reset() {
     TRACED();
@@ -770,13 +805,13 @@ class NBuffer : public BaseBuffer<T> {
   /// Provides the number of entries that are available to write
   virtual int bufferCountEmpty() { return available_buffers.size(); }
 
-  virtual bool resize(int bytes) {
+  virtual bool resize(size_t bytes) {
     int count = bytes / buffer_size;
     return resize(buffer_size, count);
   }
 
   /// Resize the buffers by defining a new buffer size and buffer count
-  virtual bool resize(int size, int count) {
+  virtual bool resize(size_t size, int count) {
     if (buffer_size == size && buffer_count == count) return true;
     freeMemory();
     filled_buffers.resize(count);

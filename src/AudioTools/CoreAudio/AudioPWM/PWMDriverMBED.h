@@ -11,8 +11,8 @@ namespace audio_tools {
 // forward declaration
 class PWMDriverMBED;
 /**
- * @typedef  DriverPWMBase
- * @brief Please use DriverPWMBase!
+ * @typedef  PWMDriverBase
+ * @brief Please use PWMDriverBase!
  */
 using PWMDriver = PWMDriverMBED;
 
@@ -23,7 +23,7 @@ using PWMDriver = PWMDriverMBED;
  * @copyright GPLv3
  */
 
-class PWMDriverMBED : public DriverPWMBase {
+class PWMDriverMBED : public PWMDriverBase {
  public:
   PWMDriverMBED() = default;
 
@@ -49,7 +49,7 @@ class PWMDriverMBED : public DriverPWMBase {
 
  protected:
   Vector<mbed::PwmOut*> pins;
-  TimerAlarmRepeating ticker;  // calls a callback repeatedly with a timeout
+  AudioTimer ticker;  // calls a callback repeatedly with a timeout
 
   /// when we get the first write -> we activate the timer to start with the
   /// output of data

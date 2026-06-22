@@ -55,6 +55,9 @@ class VBANConfig : public AudioInfo {
  * see https://vb-audio.com/Voicemeeter/vban.htm .
  * Inspired by https://github.com/rkinnett/ESP32-VBAN-Audio-Source/tree/master
  * and https://github.com/rkinnett/ESP32-VBAN-Network-Audio-Player
+ * 
+ * @note Supported only on Arduino ESP32 platforms with WiFi support!
+ * 
  * @ingroup communications
  * @author Phil Schatzmann
  * @copyright GPLv3

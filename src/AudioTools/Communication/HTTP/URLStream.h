@@ -3,7 +3,7 @@
 #include "AudioToolsConfig.h"
 
 #if defined(USE_WIFI)
-# include "WiFiInclude.h"
+#include "AudioTools/Communication/Network/Network.h"
 #endif
 
 #include "AudioTools/CoreAudio/AudioBasic/Str.h"
@@ -92,7 +92,7 @@ class URLStream : public AbstractURLStream {
     }
     total_read = 0;
     active = result == 200;
-    LOGI("==> http status: %d", result);
+    LOGI("==> http result: %d", result);
     return active;
   }
 
@@ -223,7 +223,7 @@ class URLStream : public AbstractURLStream {
   /// Defines if the stream should wait for data after the request has been sent
   void setWaitForData(bool flag) { wait_for_data = flag; }
 
-  /// returns the content length 
+  /// returns the content length
   int contentLength() override { return content_length; }
 
   /// returns the total number of bytes read from the stream
@@ -238,8 +238,9 @@ class URLStream : public AbstractURLStream {
       while (request.available() == 0) {
         if (millis() > end) break;
         // stop waiting if we got an error
-        if (request.reply().statusCode() >= 300) {
-          LOGE("Error code recieved ... stop waiting for reply");
+        int rc = request.reply().statusCode();
+         if (rc >= 300) {
+          LOGE("Error code %d recieved: stop waiting for reply", rc);
           break;
         }
         delay(500);

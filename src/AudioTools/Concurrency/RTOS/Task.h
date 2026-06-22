@@ -9,16 +9,20 @@
 #include "task.h"
 #endif
 #include <functional>
+#include "AudioTools/Concurrency/ITask.h"
 
 namespace audio_tools {
 
 /**
  * @brief FreeRTOS task
+ * 
+ * @note Supported by all FreeRTOS platforms
+ * 
  * @ingroup concurrency
  * @author Phil Schatzmann
  * @copyright GPLv3 *
  */
-class Task {
+class Task : public ITask {
  public:
   /// Defines and creates a FreeRTOS task
   Task(const char* name, int stackSize, int priority = 1, int core = -1) {

@@ -1,21 +1,26 @@
 #pragma once
 #include "AudioTools/CoreAudio/BaseStream.h"
-#include "RHGenericDriver.h"
+#include "RHGenericDriver.h" // https://www.airspayce.com/mikem/arduino/RadioHead/
 
 namespace audio_tools {
 
 /**
  * @brief Arduino Stream which is using the RadioHead library to send and
  * receive data. We use the river API directly.
+ *
+ * @note Supported only on Arduino platforms with support for the RadioHead
+ * library and the related hardware (e.g. ESP32 with LoRa, nRF24L01, etc.)!
+ * @note Requires: 👉 https://www.airspayce.com/mikem/arduino/RadioHead/
+ * 
  * @ingroup communications
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 class ReadioHeadStream : public Stream {
  public:
-  ReadioHeadStream(RHGenericDriver &driver) { setDriver(driver); }
+  ReadioHeadStream(RHGenericDriver& driver) { setDriver(driver); }
 
-  void setDriver(RHGenericDriver &driver) { p_driver = &driver; }
+  void setDriver(RHGenericDriver& driver) { p_driver = &driver; }
 
   bool begin() {
     if (p_driver == nullptr) return false;
@@ -31,7 +36,7 @@ class ReadioHeadStream : public Stream {
     return p_driver->available() ? p_driver->maxMessageLength() : 0;
   }
 
-  size_t readBytes(uint8_t *data, size_t len) override {
+  size_t readBytes(uint8_t* data, size_t len) override {
     if (mode == TX_MODE) return 0;
     int open = len;
     int processed = 0;
@@ -50,7 +55,7 @@ class ReadioHeadStream : public Stream {
     return p_driver->maxMessageLength();
   }
 
-  size_t write(const uint8_t *data, size_t len) override {
+  size_t write(const uint8_t* data, size_t len) override {
     if (mode == RX_MODE) return 0;
     int open = len;
     int processed = 0;
@@ -65,7 +70,7 @@ class ReadioHeadStream : public Stream {
   }
 
  protected:
-  RHGenericDriver *p_driver = nullptr;
+  RHGenericDriver* p_driver = nullptr;
   RxTxMode mode;
 };
 

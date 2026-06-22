@@ -15,6 +15,9 @@ namespace fs = std::filesystem;
 /**
  * @brief AudioSource using the standard C++ api. In order to make this work
  * you need to configure and provide a VFS object!
+ * 
+ * @note Supported only by ESP32 (Arduino and IDF)
+ * 
  * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3

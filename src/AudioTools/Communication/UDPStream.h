@@ -1,9 +1,14 @@
 #pragma once
-#include <WiFi.h>
-#include <WiFiUdp.h>
-#if defined(ESP32)
-#  include <esp_wifi.h>
+#if (defined(__zephyr__))
+#  include "AudioTools/Communication/Network/WiFiUDPZephyr.h"
+#elif defined(ARDUINO)
+#  include <WiFi.h>
+#  include <WiFiUdp.h>
+#  if defined(ESP32)
+#    include <esp_wifi.h>
+#  endif
 #endif
+
 #include "AudioTools/CoreAudio/BaseStream.h"
 #include "AudioTools/CoreAudio/Buffers.h"
 
@@ -14,6 +19,9 @@ namespace audio_tools {
  * AudioSource and AudioSink. By default the WiFiUDP object is used and we login
  * to wifi if the ssid and password is provided and we are not already
  * connected.
+ *
+ * @note Supported only on Arduino platforms with WiFi support (e.g. ESP32) and the WiFi library!
+ *
  * @ingroup communications
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -21,7 +29,7 @@ namespace audio_tools {
 
 class UDPStream : public BaseStream {
 public:
-  /// Default Constructor 
+  /// Default Constructor
   UDPStream() = default;
 
   /// @brief  Convinience constructor which defines the optional ssid and
@@ -79,7 +87,7 @@ public:
    /// Starts to receive data in multicast from/with the indicated address / port
   bool beginMulticast(IPAddress address, uint16_t port) {
     connect();
-    return  p_udp->beginMulticast(address,port);   
+    return  p_udp->beginMulticast(address,port);
   }
 
   /// We use the same remote port as defined in begin for write

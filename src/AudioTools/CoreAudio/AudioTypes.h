@@ -8,13 +8,9 @@
 
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
-
-// fix compile error for ESP32 C3
-#undef HZ
-
-// MIN
-#undef MIN
-#define MIN(A, B) ((A) < (B) ? (A) : (B))
+#include "AudioTools/CoreAudio/AudioBasic/int24_t.h"
+// Some top level functions: stop(), checkMemory()
+#include "AudioTools/CoreAudio/AudioRuntime.h"
 
 namespace audio_tools {
 

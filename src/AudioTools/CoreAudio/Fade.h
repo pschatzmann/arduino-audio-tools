@@ -1,6 +1,7 @@
 #pragma once
 #include "AudioToolsConfig.h"
 #include "AudioStreams.h"
+#include "AudioTools/CoreAudio/AudioBasic/int24_t.h"
 
 namespace audio_tools {
 

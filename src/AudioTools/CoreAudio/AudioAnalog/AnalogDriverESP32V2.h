@@ -2,8 +2,7 @@
 
 #include "AudioToolsConfig.h"
 
-#if defined(ESP32) && defined(USE_ANALOG) && \
-    !USE_LEGACY_I2S || defined(DOXYGEN)
+#if defined(ESP32) && defined(USE_ANALOG) && !USE_LEGACY_I2S 
 
 #ifdef ARDUINO
     #ifndef perimanClearPinBus

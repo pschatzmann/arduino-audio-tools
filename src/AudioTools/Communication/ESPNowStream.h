@@ -100,6 +100,8 @@ struct ESPNowStreamConfig {
  *
  * @note If multiple receivers are in range, only the first one which sends an
  * acknowledgment will be used as coordinator.
+ * 
+ * @note Supported only on ESP32 platforms with WiFi support: Arduino and IDF
  *
  * @ingroup communications
  * @author Phil Schatzmann
