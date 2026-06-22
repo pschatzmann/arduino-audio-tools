@@ -91,7 +91,7 @@ class FFTInverseOverlapAdder {
   }
 
   /// Initilze data by defining new size
-  boo resize(size_t size) {
+  bool resize(size_t size) {
     // reset max for new scaling
     rfft_max = 0.0;
     // define new size
