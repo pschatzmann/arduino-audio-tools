@@ -79,7 +79,7 @@ $(function() {
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">USBAudio2DescriptorBuilder Class Reference</div></div>
+  <div class="headertitle"><div class="title">USBAudio2DescriptorBuilder Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__communications.html">Communications</a> &raquo; <a class="el" href="group__usb.html">USB</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -169,7 +169,9 @@ Protected Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>USB Audio Class 2.0 descriptor generator. </p>
 <p>Builds the complete audio-function descriptor block (IAD + AC interface + AS interface(s)) that must be included in the device configuration descriptor.</p>
-<p>Descriptor layout produced by <a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#a4321431e9487f92019d8bc809aff0341">buildFullDescriptor()</a>: IAD Standard AC Interface (0 EPs) CS AC Header (wTotalLength auto-patched) Clock Source [OUT path] Input Terminal (USB Streaming) + Feature Unit + Output Terminal (Speaker) [IN path] Input Terminal (Microphone) + Feature Unit + Output Terminal (USB Streaming) [OUT AS Interface] alt=0 (zero BW) + alt=1 (CS AS + Format + ISO EP + CS ISO EP) [IN AS Interface] alt=0 (zero BW) + alt=1 (CS AS + Format + ISO EP + CS ISO EP) </p>
+<p>Descriptor layout produced by <a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#a4321431e9487f92019d8bc809aff0341">buildFullDescriptor()</a>: IAD Standard AC Interface (0 EPs) CS AC Header (wTotalLength auto-patched) Clock Source [OUT path] Input Terminal (USB Streaming) + Feature Unit + Output Terminal (Speaker) [IN path] Input Terminal (Microphone) + Feature Unit + Output Terminal (USB Streaming) [OUT AS Interface] alt=0 (zero BW) + alt=1 (CS AS + Format + ISO EP + CS ISO EP) [IN AS Interface] alt=0 (zero BW) + alt=1 (CS AS + Format + ISO EP + CS ISO EP)</p>
+<dl class="section author"><dt>Author</dt><dd>Phil Schatzmann</dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aff875b5b3a6078743a7ca8eb462649f0" name="aff875b5b3a6078743a7ca8eb462649f0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aff875b5b3a6078743a7ca8eb462649f0">&#9670;&#160;</a></span>USBAudio2DescriptorBuilder()</h2>

@@ -4,5 +4,5 @@ var searchData=
   ['urlstream_1',['URLStream',['../namespaceaudio__tools.html#a92d0d465f437b08e277a04f713152350',1,'audio_tools']]],
   ['urlstreambuffered_2',['URLStreamBuffered',['../namespaceaudio__tools.html#a232c92c7540e23a629afa3a4b1c54c4c',1,'audio_tools']]],
   ['urlstreambufferedesp32_3',['URLStreamBufferedESP32',['../namespaceaudio__tools.html#a22b64bd5d45692fb5db35650e3fd1c0f',1,'audio_tools']]],
-  ['usbaudiostream_4',['USBAudioStream',['../namespaceaudio__tools.html#a43a0ff637dbf8c8e3d47f575c950f2fd',1,'audio_tools']]]
+  ['usbaudiostream_4',['USBAudioStream',['../group__usb.html#ga43a0ff637dbf8c8e3d47f575c950f2fd',1,'audio_tools']]]
 ];
