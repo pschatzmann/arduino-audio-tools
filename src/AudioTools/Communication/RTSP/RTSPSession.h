@@ -448,11 +448,10 @@ class RtspSession {
     char* eq = strstr(CP, "=");
     if (eq) {
       ++eq;
-      snprintf(CP, m_Response.size(), "%s", eq);
-      char* dash = strstr(CP, "-");
+      char* dash = strstr(eq, "-");
       if (dash) {
         dash[0] = '\0';
-        m_ClientRTPPort = atoi(CP);
+        m_ClientRTPPort = atoi(eq);
         m_ClientRTCPPort = m_ClientRTPPort + 1;
       }
     }
