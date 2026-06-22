@@ -282,7 +282,8 @@ class OpusAudioEncoder : public AudioEncoder {
   /// starts the processing using the actual OpusAudioInfo
   bool begin() override {
     int err;
-    int size = getFrameSizeSamples(cfg.sample_rate) * 2;
+    int size = getFrameSizeSamples(cfg.sample_rate) * cfg.channels *
+               sizeof(int16_t);
     frame.resize(size);
     assert(frame.data() != nullptr);
     enc = opus_encoder_create(cfg.sample_rate, cfg.channels, cfg.application,
@@ -308,10 +309,16 @@ class OpusAudioEncoder : public AudioEncoder {
 
   /// stops the processing
   void end() override {
-    // flush buffered data
-    encodeFrame();
+    // Flush a partial frame only when data is pending; the remainder is
+    // padded with silence and must be trimmed by the container metadata.
+    if (frame_pos > 0) {
+      memset(frame.data() + frame_pos, 0, frame.size() - frame_pos);
+      encodeFrame();
+      frame_pos = 0;
+    }
     // release memory
     opus_encoder_destroy(enc);
+    enc = nullptr;
     is_open = false;
   }
 
@@ -330,6 +337,23 @@ class OpusAudioEncoder : public AudioEncoder {
   operator bool() override { return is_open; }
 
   bool isOpen() { return is_open; }
+
+  int lookaheadSamples() {
+    if (enc == nullptr) return 0;
+    opus_int32 samples = 0;
+    if (opus_encoder_ctl(enc, OPUS_GET_LOOKAHEAD(&samples)) != OPUS_OK) {
+      return 0;
+    }
+    return samples > 0 ? samples : 0;
+  }
+
+  int frameSizeSamples() { return getFrameSizeSamples(cfg.sample_rate); }
+
+  int pendingSamples() {
+    int bytesPerSample = cfg.channels * (int)sizeof(int16_t);
+    if (bytesPerSample <= 0) return 0;
+    return frame_pos / bytesPerSample;
+  }
 
  protected:
   Print *p_print = nullptr;

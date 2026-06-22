@@ -88,10 +88,18 @@ class OpusOggWriter : public OggContainerOutput {
   OpusOggHeader header;
   OpusOggCommentHeader comment;
   ogg_packet oh1;
+  Vector<uint8_t> pendingPacket{0};
+  ogg_int64_t totalGranulepos = 0;
+  ogg_int64_t samplesPerPacket = 960;
+  ogg_int64_t finalPacketSamples = 0;
+  bool hasPendingPacket = false;
 
   bool writeHeader() override {
     LOGI("writeHeader");
     bool result = true;
+    totalGranulepos = 0;
+    finalPacketSamples = 0;
+    hasPendingPacket = false;
     header.sampleRate = cfg.sample_rate;
     header.channelCount = cfg.channels;
     // write header
@@ -111,7 +119,7 @@ class OpusOggWriter : public OggContainerOutput {
     oh1.bytes = sizeof(comment);
     oh1.granulepos = 0;
     oh1.packetno = packetno++;
-    oh1.b_o_s = true;
+    oh1.b_o_s = false;
     oh1.e_o_s = false;
     if (!writePacket(oh1, OGGZ_FLUSH_AFTER)) {
       result = false;
@@ -119,6 +127,79 @@ class OpusOggWriter : public OggContainerOutput {
     }
     TRACED();
     return result;
+  }
+
+  bool emitBufferedPacket(ogg_int64_t granulePosition, bool endOfStream) {
+    if (!hasPendingPacket) return true;
+
+    op.packet = pendingPacket.data();
+    op.bytes = pendingPacket.size();
+    op.granulepos = granulePosition;
+    op.b_o_s = false;
+    op.e_o_s = endOfStream;
+    op.packetno = packetno++;
+    is_audio = true;
+    if (!writePacket(op, OGGZ_FLUSH_AFTER)) {
+      return false;
+    }
+
+    while ((oggz_write(p_oggz, op.bytes)) > 0)
+      ;
+
+    hasPendingPacket = false;
+    pendingPacket.resize(0);
+    return true;
+  }
+
+ public:
+  void setPreSkipSamples(uint16_t preSkipSamples) {
+    header.preSkip = preSkipSamples;
+  }
+
+  void setFrameDurationUs(uint32_t frameDurationUs) {
+    ogg_int64_t opusSamples =
+        (ogg_int64_t)(((uint64_t)frameDurationUs * 48000ULL) / 1000000ULL);
+    samplesPerPacket = opusSamples > 0 ? opusSamples : 960;
+  }
+
+  void setFinalPacketSamples(ogg_int64_t samples) {
+    finalPacketSamples = samples;
+  }
+
+  size_t write(const uint8_t *data, size_t len) override {
+    if (data == nullptr) return 0;
+    LOGD("OpusOggWriter::write: %d", (int)len);
+
+    if (hasPendingPacket) {
+      totalGranulepos += samplesPerPacket;
+      if (!emitBufferedPacket(totalGranulepos, false)) {
+        return 0;
+      }
+    }
+
+    pendingPacket.resize(len);
+    memcpy(pendingPacket.data(), data, len);
+    hasPendingPacket = true;
+
+    return len;
+  }
+
+  void end() override {
+    TRACED();
+
+    if (hasPendingPacket) {
+      ogg_int64_t keptSamples =
+          finalPacketSamples > 0 ? finalPacketSamples : samplesPerPacket;
+      if (keptSamples > samplesPerPacket) {
+        keptSamples = samplesPerPacket;
+      }
+      totalGranulepos += keptSamples;
+      emitBufferedPacket(totalGranulepos, true);
+    }
+
+    is_open = false;
+    oggz_close(p_oggz);
+    p_oggz = nullptr;
   }
 };
 
@@ -148,7 +229,7 @@ class OpusOggEncoder : public OggContainerEncoder {
   uint32_t frameDurationUs() override {
     // Get frame duration from encoder settings
     int frameDurationMs = config().frame_sizes_ms_x2;
-    uint32_t frameDurationUs = 20000;
+    uint32_t frameDurationUs = 10000;
     switch (frameDurationMs) {
       case OPUS_FRAMESIZE_2_5_MS:
         frameDurationUs = 2500;
@@ -162,8 +243,67 @@ class OpusOggEncoder : public OggContainerEncoder {
       case OPUS_FRAMESIZE_20_MS:
         frameDurationUs = 20000;
         break;
+      case OPUS_FRAMESIZE_40_MS:
+        frameDurationUs = 40000;
+        break;
+      case OPUS_FRAMESIZE_60_MS:
+        frameDurationUs = 60000;
+        break;
+      case OPUS_FRAMESIZE_80_MS:
+        frameDurationUs = 80000;
+        break;
+      case OPUS_FRAMESIZE_100_MS:
+        frameDurationUs = 100000;
+        break;
+      case OPUS_FRAMESIZE_120_MS:
+        frameDurationUs = 120000;
+        break;
     }
     return frameDurationUs;
+  }
+
+  bool begin(AudioInfo from) override {
+    setAudioInfo(from);
+    return begin();
+  }
+
+  bool begin() override {
+    if (p_codec == nullptr) return false;
+
+    ogg_writer.setFrameDurationUs(frameDurationUs());
+    p_codec->setOutput(*p_ogg);
+    if (!p_codec->begin(p_ogg->audioInfo())) {
+      return false;
+    }
+
+    int lookaheadSamples = enc.lookaheadSamples();
+    if (lookaheadSamples > 0) {
+      uint32_t preSkipSamples =
+          (uint32_t)(((uint64_t)lookaheadSamples * 48000U) /
+                     (uint32_t)enc.config().sample_rate);
+      ogg_writer.setPreSkipSamples((uint16_t)preSkipSamples);
+    }
+
+    if (!p_ogg->begin()) {
+      p_codec->end();
+      return false;
+    }
+
+    return true;
+  }
+
+  void end() override {
+    int finalSamples = enc.pendingSamples();
+    if (finalSamples <= 0) {
+      finalSamples = enc.frameSizeSamples();
+    }
+
+    ogg_int64_t finalGranuleSamples =
+        (ogg_int64_t)(((uint64_t)finalSamples * 48000ULL) /
+                      (uint32_t)enc.config().sample_rate);
+    ogg_writer.setFinalPacketSamples(finalGranuleSamples);
+
+    OggContainerEncoder::end();
   }
 
  protected:
