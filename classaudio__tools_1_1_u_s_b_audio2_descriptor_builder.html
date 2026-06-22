@@ -75,10 +75,16 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">USBAudio2DescriptorBuilder Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>USB Audio Class 2.0 descriptor generator.  
+ <a href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_u_s_b_audio2_descriptor_builder_8h_source.html">USBAudio2DescriptorBuilder.h</a>&gt;</code></p>
 <table class="memberdecls">
@@ -86,12 +92,85 @@ $(function() {
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aff875b5b3a6078743a7ca8eb462649f0" id="r_aff875b5b3a6078743a7ca8eb462649f0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#aff875b5b3a6078743a7ca8eb462649f0">USBAudio2DescriptorBuilder</a> (<a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html">USBAudioConfig</a> &amp;cfg)</td></tr>
 <tr class="separator:aff875b5b3a6078743a7ca8eb462649f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5145c43aa11f79ea3c3bb8e1e0875993" id="r_a5145c43aa11f79ea3c3bb8e1e0875993"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#a5145c43aa11f79ea3c3bb8e1e0875993">buildDescriptor</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">itf</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">alt</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint16_t</a> *<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">outLen</a>)</td></tr>
-<tr class="separator:a5145c43aa11f79ea3c3bb8e1e0875993"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63349649348b1689922deabd6be291d1" id="r_a63349649348b1689922deabd6be291d1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#a63349649348b1689922deabd6be291d1">audioFunctionsCount</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a></td></tr>
+<tr class="separator:a63349649348b1689922deabd6be291d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3e7c72f1dec7bd6f2fe14cfab2fc3df" id="r_ae3e7c72f1dec7bd6f2fe14cfab2fc3df"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#ae3e7c72f1dec7bd6f2fe14cfab2fc3df">buildDescriptor</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">desc</a>)</td></tr>
+<tr class="separator:ae3e7c72f1dec7bd6f2fe14cfab2fc3df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4321431e9487f92019d8bc809aff0341" id="r_a4321431e9487f92019d8bc809aff0341"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#a4321431e9487f92019d8bc809aff0341">buildFullDescriptor</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">desc</a>)</td></tr>
+<tr class="separator:a4321431e9487f92019d8bc809aff0341"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8203d1f2b87dc2dfb266115777c4cb64" id="r_a8203d1f2b87dc2dfb266115777c4cb64"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#a8203d1f2b87dc2dfb266115777c4cb64">buildFullDescriptor</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">first_itf</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">desc</a>)</td></tr>
+<tr class="separator:a8203d1f2b87dc2dfb266115777c4cb64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af7ad6a52d36e0c858b9a5ac83caa13dc" id="r_af7ad6a52d36e0c858b9a5ac83caa13dc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#af7ad6a52d36e0c858b9a5ac83caa13dc">calcMaxPacketSize</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a></td></tr>
 <tr class="separator:af7ad6a52d36e0c858b9a5ac83caa13dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb3b0158a36c6671513c9388b3bb0f16" id="r_adb3b0158a36c6671513c9388b3bb0f16"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#adb3b0158a36c6671513c9388b3bb0f16">calcPacketSizeForRate</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint32_t</a> rate) <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a></td></tr>
+<tr class="separator:adb3b0158a36c6671513c9388b3bb0f16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8b49abef2b4dd5ca3e6c2c01e126612" id="r_af8b49abef2b4dd5ca3e6c2c01e126612"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#af8b49abef2b4dd5ca3e6c2c01e126612">enableFeedbackEp</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a></td></tr>
+<tr class="separator:af8b49abef2b4dd5ca3e6c2c01e126612"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:a6d1e8303202db4f107fdacac6b5d64ae" id="r_a6d1e8303202db4f107fdacac6b5d64ae"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">constexpr</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#a6d1e8303202db4f107fdacac6b5d64ae">ENTITY_CLOCK</a> = 1</td></tr>
+<tr class="separator:a6d1e8303202db4f107fdacac6b5d64ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48e34ff74e0b75d2c547b2a4f95976fa" id="r_a48e34ff74e0b75d2c547b2a4f95976fa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">constexpr</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#a48e34ff74e0b75d2c547b2a4f95976fa">ENTITY_FU1</a> = 3</td></tr>
+<tr class="memdesc:a48e34ff74e0b75d2c547b2a4f95976fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">first Feature Unit  <br /></td></tr>
+<tr class="separator:a48e34ff74e0b75d2c547b2a4f95976fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a482a42ba24c7329eb1f92c6b3e24348e" id="r_a482a42ba24c7329eb1f92c6b3e24348e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">constexpr</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#a482a42ba24c7329eb1f92c6b3e24348e">ENTITY_FU2</a> = 6</td></tr>
+<tr class="memdesc:a482a42ba24c7329eb1f92c6b3e24348e"><td class="mdescLeft">&#160;</td><td class="mdescRight">second Feature Unit (RXTX)  <br /></td></tr>
+<tr class="separator:a482a42ba24c7329eb1f92c6b3e24348e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aced8dea593fa01457992b2dab90acaa7" id="r_aced8dea593fa01457992b2dab90acaa7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">constexpr</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#aced8dea593fa01457992b2dab90acaa7">ENTITY_IT1</a> = 2</td></tr>
+<tr class="memdesc:aced8dea593fa01457992b2dab90acaa7"><td class="mdescLeft">&#160;</td><td class="mdescRight">first Input Terminal  <br /></td></tr>
+<tr class="separator:aced8dea593fa01457992b2dab90acaa7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a934474231a8f2d35facb0f41c28f695d" id="r_a934474231a8f2d35facb0f41c28f695d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">constexpr</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#a934474231a8f2d35facb0f41c28f695d">ENTITY_IT2</a> = 5</td></tr>
+<tr class="memdesc:a934474231a8f2d35facb0f41c28f695d"><td class="mdescLeft">&#160;</td><td class="mdescRight">second Input Terminal (RXTX)  <br /></td></tr>
+<tr class="separator:a934474231a8f2d35facb0f41c28f695d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b1b105f9896c077b8345fa217e5e610" id="r_a3b1b105f9896c077b8345fa217e5e610"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">constexpr</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#a3b1b105f9896c077b8345fa217e5e610">ENTITY_OT1</a> = 4</td></tr>
+<tr class="memdesc:a3b1b105f9896c077b8345fa217e5e610"><td class="mdescLeft">&#160;</td><td class="mdescRight">first Output Terminal  <br /></td></tr>
+<tr class="separator:a3b1b105f9896c077b8345fa217e5e610"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8adc7590a3bdf8e4686a9d0ade31c7d" id="r_ac8adc7590a3bdf8e4686a9d0ade31c7d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">constexpr</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#ac8adc7590a3bdf8e4686a9d0ade31c7d">ENTITY_OT2</a> = 7</td></tr>
+<tr class="memdesc:ac8adc7590a3bdf8e4686a9d0ade31c7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">second Output Terminal (RXTX)  <br /></td></tr>
+<tr class="separator:ac8adc7590a3bdf8e4686a9d0ade31c7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a9fc1c0c366cfc17d8e53f72e9a6b39fd" id="r_a9fc1c0c366cfc17d8e53f72e9a6b39fd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#a9fc1c0c366cfc17d8e53f72e9a6b39fd">channelConfig</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a></td></tr>
+<tr class="separator:a9fc1c0c366cfc17d8e53f72e9a6b39fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3955785de567da4a82f0e3d2d5819bab" id="r_a3955785de567da4a82f0e3d2d5819bab"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#a3955785de567da4a82f0e3d2d5819bab">writeClockSource</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *p, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">clock_id</a>)</td></tr>
+<tr class="separator:a3955785de567da4a82f0e3d2d5819bab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe7442471477008a6b5c08653b2ed7a2" id="r_abe7442471477008a6b5c08653b2ed7a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#abe7442471477008a6b5c08653b2ed7a2">writeCsAcHeader</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *p)</td></tr>
+<tr class="separator:abe7442471477008a6b5c08653b2ed7a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa8c56d826f72f1c901e97e2fff8bbf5" id="r_afa8c56d826f72f1c901e97e2fff8bbf5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#afa8c56d826f72f1c901e97e2fff8bbf5">writeCsAsInterface</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *p, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">terminal_link</a>)</td></tr>
+<tr class="separator:afa8c56d826f72f1c901e97e2fff8bbf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e4064d76df19e54e0181f7be7da40f3" id="r_a3e4064d76df19e54e0181f7be7da40f3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#a3e4064d76df19e54e0181f7be7da40f3">writeCsIsoEndpoint</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *p)</td></tr>
+<tr class="separator:a3e4064d76df19e54e0181f7be7da40f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9a709ccfa8358eb0e3cee2111181b25" id="r_af9a709ccfa8358eb0e3cee2111181b25"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#af9a709ccfa8358eb0e3cee2111181b25">writeFeatureUnit</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *p, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">unit_id</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">src_id</a>)</td></tr>
+<tr class="separator:af9a709ccfa8358eb0e3cee2111181b25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28b554c1808781ab20d7ebe0cd3a2170" id="r_a28b554c1808781ab20d7ebe0cd3a2170"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#a28b554c1808781ab20d7ebe0cd3a2170">writeFeedbackEndpoint</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *p, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">ep_addr</a>)</td></tr>
+<tr class="separator:a28b554c1808781ab20d7ebe0cd3a2170"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef401093e2f6b41615f275a5545772e5" id="r_aef401093e2f6b41615f275a5545772e5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#aef401093e2f6b41615f275a5545772e5">writeFormatType</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *p)</td></tr>
+<tr class="separator:aef401093e2f6b41615f275a5545772e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf6aac10838ba99435c5f4b1e8911df0" id="r_aaf6aac10838ba99435c5f4b1e8911df0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#aaf6aac10838ba99435c5f4b1e8911df0">writeIAD</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *p, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">first_itf</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> count)</td></tr>
+<tr class="separator:aaf6aac10838ba99435c5f4b1e8911df0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01ebaac612dfa977ddb86d1eed7fc8dd" id="r_a01ebaac612dfa977ddb86d1eed7fc8dd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#a01ebaac612dfa977ddb86d1eed7fc8dd">writeInputTerminal</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *p, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">term_id</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint16_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">term_type</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">clock_id</a>)</td></tr>
+<tr class="separator:a01ebaac612dfa977ddb86d1eed7fc8dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c4a99a41ccede168f16376278e8b31e" id="r_a4c4a99a41ccede168f16376278e8b31e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#a4c4a99a41ccede168f16376278e8b31e">writeInterruptEndpoint</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *p, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">ep_addr</a>)</td></tr>
+<tr class="separator:a4c4a99a41ccede168f16376278e8b31e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c18465075eb5c9d2047c18d9762e699" id="r_a2c18465075eb5c9d2047c18d9762e699"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#a2c18465075eb5c9d2047c18d9762e699">writeIsoEndpoint</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *p, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">ep_addr</a>)</td></tr>
+<tr class="separator:a2c18465075eb5c9d2047c18d9762e699"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a738773d9a8a37240a5f7c4b1ee676cf7" id="r_a738773d9a8a37240a5f7c4b1ee676cf7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#a738773d9a8a37240a5f7c4b1ee676cf7">writeOutputTerminal</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *p, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">term_id</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint16_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">term_type</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">src_id</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">clock_id</a>)</td></tr>
+<tr class="separator:a738773d9a8a37240a5f7c4b1ee676cf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52897cbbd836784471900189421b8be4" id="r_a52897cbbd836784471900189421b8be4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#a52897cbbd836784471900189421b8be4">writeStdIface</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *p, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">itf</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">alt</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nEps</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">cls</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> sub, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">proto</a>)</td></tr>
+<tr class="separator:a52897cbbd836784471900189421b8be4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:ae8d53358ac9417c67d39547f41587c50" id="r_ae8d53358ac9417c67d39547f41587c50"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html">USBAudioConfig</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#ae8d53358ac9417c67d39547f41587c50">p_config</a></td></tr>
+<tr class="separator:ae8d53358ac9417c67d39547f41587c50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>USB Audio Class 2.0 descriptor generator. </p>
+<p>Builds the complete audio-function descriptor block (IAD + AC interface + AS interface(s)) that must be included in the device configuration descriptor.</p>
+<p>Descriptor layout produced by <a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#a4321431e9487f92019d8bc809aff0341">buildFullDescriptor()</a>: IAD Standard AC Interface (0 EPs) CS AC Header (wTotalLength auto-patched) Clock Source [OUT path] Input Terminal (USB Streaming) + Feature Unit + Output Terminal (Speaker) [IN path] Input Terminal (Microphone) + Feature Unit + Output Terminal (USB Streaming) [OUT AS Interface] alt=0 (zero BW) + alt=1 (CS AS + Format + ISO EP + CS ISO EP) [IN AS Interface] alt=0 (zero BW) + alt=1 (CS AS + Format + ISO EP + CS ISO EP) </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aff875b5b3a6078743a7ca8eb462649f0" name="aff875b5b3a6078743a7ca8eb462649f0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aff875b5b3a6078743a7ca8eb462649f0">&#9670;&#160;</a></span>USBAudio2DescriptorBuilder()</h2>
 
@@ -111,7 +190,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -119,8 +198,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a5145c43aa11f79ea3c3bb8e1e0875993" name="a5145c43aa11f79ea3c3bb8e1e0875993"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5145c43aa11f79ea3c3bb8e1e0875993">&#9670;&#160;</a></span>buildDescriptor()</h2>
+<a id="a63349649348b1689922deabd6be291d1" name="a63349649348b1689922deabd6be291d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63349649348b1689922deabd6be291d1">&#9670;&#160;</a></span>audioFunctionsCount()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -129,22 +208,109 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> * buildDescriptor </td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> audioFunctionsCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae3e7c72f1dec7bd6f2fe14cfab2fc3df" name="ae3e7c72f1dec7bd6f2fe14cfab2fc3df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3e7c72f1dec7bd6f2fe14cfab2fc3df">&#9670;&#160;</a></span>buildDescriptor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint16_t</a> buildDescriptor </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td>
-          <td class="paramname"><em>itf</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td>
-          <td class="paramname"><em>alt</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint16_t</a> *&#160;</td>
-          <td class="paramname"><em>outLen</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td>
+          <td class="paramname"><em>desc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4321431e9487f92019d8bc809aff0341" name="a4321431e9487f92019d8bc809aff0341"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4321431e9487f92019d8bc809aff0341">&#9670;&#160;</a></span>buildFullDescriptor() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint16_t</a> buildFullDescriptor </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td>
+          <td class="paramname"><em>desc</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8203d1f2b87dc2dfb266115777c4cb64" name="a8203d1f2b87dc2dfb266115777c4cb64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8203d1f2b87dc2dfb266115777c4cb64">&#9670;&#160;</a></span>buildFullDescriptor() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint16_t</a> buildFullDescriptor </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td>
+          <td class="paramname"><em>first_itf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td>
+          <td class="paramname"><em>desc</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -186,8 +352,783 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="adb3b0158a36c6671513c9388b3bb0f16" name="adb3b0158a36c6671513c9388b3bb0f16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb3b0158a36c6671513c9388b3bb0f16">&#9670;&#160;</a></span>calcPacketSizeForRate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint16_t</a> calcPacketSizeForRate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint32_t</a>&#160;</td>
+          <td class="paramname"><em>rate</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9fc1c0c366cfc17d8e53f72e9a6b39fd" name="a9fc1c0c366cfc17d8e53f72e9a6b39fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fc1c0c366cfc17d8e53f72e9a6b39fd">&#9670;&#160;</a></span>channelConfig()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint32_t</a> channelConfig </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af8b49abef2b4dd5ca3e6c2c01e126612" name="af8b49abef2b4dd5ca3e6c2c01e126612"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8b49abef2b4dd5ca3e6c2c01e126612">&#9670;&#160;</a></span>enableFeedbackEp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> enableFeedbackEp </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3955785de567da4a82f0e3d2d5819bab" name="a3955785de567da4a82f0e3d2d5819bab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3955785de567da4a82f0e3d2d5819bab">&#9670;&#160;</a></span>writeClockSource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> * writeClockSource </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td>
+          <td class="paramname"><em>clock_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abe7442471477008a6b5c08653b2ed7a2" name="abe7442471477008a6b5c08653b2ed7a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe7442471477008a6b5c08653b2ed7a2">&#9670;&#160;</a></span>writeCsAcHeader()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> * writeCsAcHeader </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afa8c56d826f72f1c901e97e2fff8bbf5" name="afa8c56d826f72f1c901e97e2fff8bbf5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa8c56d826f72f1c901e97e2fff8bbf5">&#9670;&#160;</a></span>writeCsAsInterface()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> * writeCsAsInterface </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td>
+          <td class="paramname"><em>terminal_link</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3e4064d76df19e54e0181f7be7da40f3" name="a3e4064d76df19e54e0181f7be7da40f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e4064d76df19e54e0181f7be7da40f3">&#9670;&#160;</a></span>writeCsIsoEndpoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> * writeCsIsoEndpoint </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af9a709ccfa8358eb0e3cee2111181b25" name="af9a709ccfa8358eb0e3cee2111181b25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9a709ccfa8358eb0e3cee2111181b25">&#9670;&#160;</a></span>writeFeatureUnit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> * writeFeatureUnit </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td>
+          <td class="paramname"><em>unit_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td>
+          <td class="paramname"><em>src_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a28b554c1808781ab20d7ebe0cd3a2170" name="a28b554c1808781ab20d7ebe0cd3a2170"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28b554c1808781ab20d7ebe0cd3a2170">&#9670;&#160;</a></span>writeFeedbackEndpoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> * writeFeedbackEndpoint </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td>
+          <td class="paramname"><em>ep_addr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aef401093e2f6b41615f275a5545772e5" name="aef401093e2f6b41615f275a5545772e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef401093e2f6b41615f275a5545772e5">&#9670;&#160;</a></span>writeFormatType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> * writeFormatType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aaf6aac10838ba99435c5f4b1e8911df0" name="aaf6aac10838ba99435c5f4b1e8911df0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf6aac10838ba99435c5f4b1e8911df0">&#9670;&#160;</a></span>writeIAD()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> * writeIAD </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td>
+          <td class="paramname"><em>first_itf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a01ebaac612dfa977ddb86d1eed7fc8dd" name="a01ebaac612dfa977ddb86d1eed7fc8dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01ebaac612dfa977ddb86d1eed7fc8dd">&#9670;&#160;</a></span>writeInputTerminal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> * writeInputTerminal </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td>
+          <td class="paramname"><em>term_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint16_t</a>&#160;</td>
+          <td class="paramname"><em>term_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td>
+          <td class="paramname"><em>clock_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4c4a99a41ccede168f16376278e8b31e" name="a4c4a99a41ccede168f16376278e8b31e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c4a99a41ccede168f16376278e8b31e">&#9670;&#160;</a></span>writeInterruptEndpoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> * writeInterruptEndpoint </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td>
+          <td class="paramname"><em>ep_addr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2c18465075eb5c9d2047c18d9762e699" name="a2c18465075eb5c9d2047c18d9762e699"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c18465075eb5c9d2047c18d9762e699">&#9670;&#160;</a></span>writeIsoEndpoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> * writeIsoEndpoint </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td>
+          <td class="paramname"><em>ep_addr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a738773d9a8a37240a5f7c4b1ee676cf7" name="a738773d9a8a37240a5f7c4b1ee676cf7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a738773d9a8a37240a5f7c4b1ee676cf7">&#9670;&#160;</a></span>writeOutputTerminal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> * writeOutputTerminal </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td>
+          <td class="paramname"><em>term_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint16_t</a>&#160;</td>
+          <td class="paramname"><em>term_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td>
+          <td class="paramname"><em>src_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td>
+          <td class="paramname"><em>clock_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a52897cbbd836784471900189421b8be4" name="a52897cbbd836784471900189421b8be4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52897cbbd836784471900189421b8be4">&#9670;&#160;</a></span>writeStdIface()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> * writeStdIface </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td>
+          <td class="paramname"><em>itf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td>
+          <td class="paramname"><em>alt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td>
+          <td class="paramname"><em>nEps</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td>
+          <td class="paramname"><em>cls</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td>
+          <td class="paramname"><em>sub</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td>
+          <td class="paramname"><em>proto</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a6d1e8303202db4f107fdacac6b5d64ae" name="a6d1e8303202db4f107fdacac6b5d64ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d1e8303202db4f107fdacac6b5d64ae">&#9670;&#160;</a></span>ENTITY_CLOCK</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">constexpr</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> ENTITY_CLOCK = 1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a48e34ff74e0b75d2c547b2a4f95976fa" name="a48e34ff74e0b75d2c547b2a4f95976fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48e34ff74e0b75d2c547b2a4f95976fa">&#9670;&#160;</a></span>ENTITY_FU1</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">constexpr</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> ENTITY_FU1 = 3</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>first Feature Unit </p>
+
+</div>
+</div>
+<a id="a482a42ba24c7329eb1f92c6b3e24348e" name="a482a42ba24c7329eb1f92c6b3e24348e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a482a42ba24c7329eb1f92c6b3e24348e">&#9670;&#160;</a></span>ENTITY_FU2</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">constexpr</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> ENTITY_FU2 = 6</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>second Feature Unit (RXTX) </p>
+
+</div>
+</div>
+<a id="aced8dea593fa01457992b2dab90acaa7" name="aced8dea593fa01457992b2dab90acaa7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aced8dea593fa01457992b2dab90acaa7">&#9670;&#160;</a></span>ENTITY_IT1</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">constexpr</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> ENTITY_IT1 = 2</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>first Input Terminal </p>
+
+</div>
+</div>
+<a id="a934474231a8f2d35facb0f41c28f695d" name="a934474231a8f2d35facb0f41c28f695d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a934474231a8f2d35facb0f41c28f695d">&#9670;&#160;</a></span>ENTITY_IT2</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">constexpr</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> ENTITY_IT2 = 5</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>second Input Terminal (RXTX) </p>
+
+</div>
+</div>
+<a id="a3b1b105f9896c077b8345fa217e5e610" name="a3b1b105f9896c077b8345fa217e5e610"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b1b105f9896c077b8345fa217e5e610">&#9670;&#160;</a></span>ENTITY_OT1</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">constexpr</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> ENTITY_OT1 = 4</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>first Output Terminal </p>
+
+</div>
+</div>
+<a id="ac8adc7590a3bdf8e4686a9d0ade31c7d" name="ac8adc7590a3bdf8e4686a9d0ade31c7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8adc7590a3bdf8e4686a9d0ade31c7d">&#9670;&#160;</a></span>ENTITY_OT2</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">constexpr</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> ENTITY_OT2 = 7</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>second Output Terminal (RXTX) </p>
+
+</div>
+</div>
+<a id="ae8d53358ac9417c67d39547f41587c50" name="ae8d53358ac9417c67d39547f41587c50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8d53358ac9417c67d39547f41587c50">&#9670;&#160;</a></span>p_config</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html">USBAudioConfig</a>* p_config</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/Sandbox/USB/<a class="el" href="_u_s_b_audio2_descriptor_builder_8h_source.html">USBAudio2DescriptorBuilder.h</a></li>
+<li>src/AudioTools/Communication/USB/<a class="el" href="_u_s_b_audio2_descriptor_builder_8h_source.html">USBAudio2DescriptorBuilder.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

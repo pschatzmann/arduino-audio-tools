@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: src/AudioTools/Sandbox/USB/USBAudioDevice.h File Reference</title>
+<title>arduino-audio-tools: src/AudioTools/Communication/USB/USBAudioDeviceZephyr.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,7 +69,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_e2decdf0a26130821d443b556fc4319d.html">Sandbox</a></li><li class="navelem"><a class="el" href="dir_5b93c4b885a6b991fd60a10321b5f1d7.html">USB</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_b4e77409634bf95805ec16199afb6860.html">Communication</a></li><li class="navelem"><a class="el" href="dir_9df518133918eed6c10754410df72ef5.html">USB</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -77,27 +77,25 @@ $(function() {
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#func-members">Functions</a>  </div>
-  <div class="headertitle"><div class="title">USBAudioDevice.h File Reference</div></div>
+  <div class="headertitle"><div class="title">USBAudioDeviceZephyr.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;cstddef&gt;</code><br />
-<code>#include &lt;cstdint&gt;</code><br />
+<div class="textblock"><code>#include &lt;zephyr/device.h&gt;</code><br />
+<code>#include &lt;zephyr/kernel.h&gt;</code><br />
+<code>#include &lt;zephyr/logging/log.h&gt;</code><br />
+<code>#include &lt;zephyr/usb/class/usbd_uac2.h&gt;</code><br />
+<code>#include &lt;zephyr/usb/usbd.h&gt;</code><br />
 <code>#include &lt;cstring&gt;</code><br />
 <code>#include &lt;functional&gt;</code><br />
-<code>#include &lt;mutex&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
-<code>#include &quot;<a class="el" href="_u_s_b_audio2_descriptor_builder_8h_source.html">USBAudio2DescriptorBuilder.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_u_s_b_audio_config_8h_source.html">USBAudioConfig.h</a>&quot;</code><br />
-<code>#include &quot;device/usbd.h&quot;</code><br />
-<code>#include &quot;device/usbd_pvt.h&quot;</code><br />
-<code>#include &quot;tusb.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="_u_s_b_audio_config_8h_source.html">AudioTools/Communication/USB/USBAudioConfig.h</a>&quot;</code><br />
 </div>
-<p><a href="_u_s_b_audio_device_8h_source.html">Go to the source code of this file.</a></p>
+<p><a href="_u_s_b_audio_device_zephyr_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device.html">USBAudioDevice</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">USB Audio Device class for audio streaming over USB.  <a href="classaudio__tools_1_1_u_s_b_audio_device.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_zephyr.html">USBAudioDeviceZephyr</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">USB Audio 2.0 device backend for Zephyr RTOS.  <a href="classaudio__tools_1_1_u_s_b_audio_device_zephyr.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
@@ -108,32 +106,34 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:acf1e86a67db30b14be6f886f6197d564" id="r_acf1e86a67db30b14be6f886f6197d564"><td class="memItemLeft" align="right" valign="top">usbd_class_driver_t const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_u_s_b_audio_device_8h.html#acf1e86a67db30b14be6f886f6197d564">usbd_app_driver_get_cb</a> (uint8_t *count)</td></tr>
-<tr class="separator:acf1e86a67db30b14be6f886f6197d564"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24586d8b4a307821112aa2a76ac8ac33" id="r_a24586d8b4a307821112aa2a76ac8ac33"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_u_s_b_audio_device_zephyr_8h.html#a24586d8b4a307821112aa2a76ac8ac33">LOG_MODULE_DECLARE</a> (usb_audio_device_zephyr, LOG_LEVEL_INF)</td></tr>
+<tr class="separator:a24586d8b4a307821112aa2a76ac8ac33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="acf1e86a67db30b14be6f886f6197d564" name="acf1e86a67db30b14be6f886f6197d564"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acf1e86a67db30b14be6f886f6197d564">&#9670;&#160;</a></span>usbd_app_driver_get_cb()</h2>
+<a id="a24586d8b4a307821112aa2a76ac8ac33" name="a24586d8b4a307821112aa2a76ac8ac33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24586d8b4a307821112aa2a76ac8ac33">&#9670;&#160;</a></span>LOG_MODULE_DECLARE()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">usbd_class_driver_t const  * usbd_app_driver_get_cb </td>
+          <td class="memname">LOG_MODULE_DECLARE </td>
           <td>(</td>
-          <td class="paramtype">uint8_t *&#160;</td>
-          <td class="paramname"><em>count</em></td><td>)</td>
+          <td class="paramtype">usb_audio_device_zephyr&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">LOG_LEVEL_INF&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 </div>

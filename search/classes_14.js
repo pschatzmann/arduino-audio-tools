@@ -12,5 +12,8 @@ var searchData=
   ['urlstreamesp32_9',['URLStreamESP32',['../classaudio__tools_1_1_u_r_l_stream_e_s_p32.html',1,'audio_tools']]],
   ['usbaudio2descriptorbuilder_10',['USBAudio2DescriptorBuilder',['../classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html',1,'audio_tools']]],
   ['usbaudioconfig_11',['USBAudioConfig',['../structaudio__tools_1_1_u_s_b_audio_config.html',1,'audio_tools']]],
-  ['usbaudiodevice_12',['USBAudioDevice',['../classaudio__tools_1_1_u_s_b_audio_device.html',1,'audio_tools']]]
+  ['usbaudiodevicebase_12',['USBAudioDeviceBase',['../classaudio__tools_1_1_u_s_b_audio_device_base.html',1,'audio_tools']]],
+  ['usbaudiodeviceesp32_13',['USBAudioDeviceESP32',['../classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html',1,'audio_tools']]],
+  ['usbaudiodevicetinyusb_14',['USBAudioDeviceTinyUSB',['../classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html',1,'audio_tools']]],
+  ['usbaudiodevicezephyr_15',['USBAudioDeviceZephyr',['../classaudio__tools_1_1_u_s_b_audio_device_zephyr.html',1,'audio_tools']]]
 ];

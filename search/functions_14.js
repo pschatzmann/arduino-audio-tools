@@ -75,9 +75,9 @@ var searchData=
   ['tryparsechunk_72',['tryparsechunk',['../classaudio__tools_1_1_a_v_i_decoder.html#adaead7bfa82627f62dcc663302fc3c51',1,'audio_tools::AVIDecoder::tryParseChunk()'],['../classaudio__tools_1_1_a_v_i_decoder.html#af594a645cf9e66a99a98bef97b59803a',1,'audio_tools::AVIDecoder::tryParseChunk(const char *id)']]],
   ['tryparselist_73',['tryparselist',['../classaudio__tools_1_1_a_v_i_decoder.html#a7074c7c7cb567dba123a2cb219d86bc0',1,'audio_tools::AVIDecoder::tryParseList(const char *id)'],['../classaudio__tools_1_1_a_v_i_decoder.html#a9810da73ae9dd8914b97d452e7f390b1',1,'audio_tools::AVIDecoder::tryParseList()']]],
   ['trystartnewbox_74',['tryStartNewBox',['../classaudio__tools_1_1_m_p4_parser.html#aa4b584280003c8eed129f8e51a8040ff',1,'audio_tools::MP4Parser']]],
-  ['tud_5faudio_5ffeedback_5finterval_5fisr_75',['tud_audio_feedback_interval_isr',['../classaudio__tools_1_1_u_s_b_audio_device.html#af6c233b1b02a5420e09643d0818fa650',1,'audio_tools::USBAudioDevice']]],
-  ['tud_5faudio_5fn_5favailable_76',['tud_audio_n_available',['../classaudio__tools_1_1_u_s_b_audio_device.html#adfad34d00f048abfc6bd742300e14aa3',1,'audio_tools::USBAudioDevice']]],
-  ['tud_5faudio_5fn_5fread_77',['tud_audio_n_read',['../classaudio__tools_1_1_u_s_b_audio_device.html#a702b8da988e3a5525904ebb507a381e6',1,'audio_tools::USBAudioDevice']]],
-  ['tud_5faudio_5fn_5fwrite_78',['tud_audio_n_write',['../classaudio__tools_1_1_u_s_b_audio_device.html#a90f2c945a72627589fb3be1f5a8b72c2',1,'audio_tools::USBAudioDevice']]],
+  ['tud_5faudio_5ffeedback_5finterval_5fisr_75',['tud_audio_feedback_interval_isr',['../classaudio__tools_1_1_u_s_b_audio_device_base.html#a9059ba63118400ad647d45f7cc034069',1,'audio_tools::USBAudioDeviceBase']]],
+  ['tud_5faudio_5fn_5favailable_76',['tud_audio_n_available',['../classaudio__tools_1_1_u_s_b_audio_device_base.html#adfad34d00f048abfc6bd742300e14aa3',1,'audio_tools::USBAudioDeviceBase']]],
+  ['tud_5faudio_5fn_5fread_77',['tud_audio_n_read',['../classaudio__tools_1_1_u_s_b_audio_device_base.html#a702b8da988e3a5525904ebb507a381e6',1,'audio_tools::USBAudioDeviceBase']]],
+  ['tud_5faudio_5fn_5fwrite_78',['tud_audio_n_write',['../classaudio__tools_1_1_u_s_b_audio_device_base.html#a90f2c945a72627589fb3be1f5a8b72c2',1,'audio_tools::USBAudioDeviceBase']]],
   ['type_79',['type',['../classaudio__tools_1_1_parse_object.html#a6fdf3ef46a57d1196f5f853128a047f7',1,'audio_tools::ParseObject']]]
 ];

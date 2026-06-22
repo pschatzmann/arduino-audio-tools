@@ -739,6 +739,9 @@ size_t size)</a> and <a class="el" href="classaudio__tools_1_1_base_stream.html#
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_effect_suite_base.html">EffectSuiteBase</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base Class for Effects.  <a href="classaudio__tools_1_1_effect_suite_base.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_emulated___tiny_u_s_b.html">Emulated_TinyUSB</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimal wrapper around the ESP32 TinyUSB API. We emulate the basic functionality so that we can use the same TinyUSBDevice API on RP2040 and ESP32.  <a href="classaudio__tools_1_1_emulated___tiny_u_s_b.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_encoded_audio_output.html">EncodedAudioOutput</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A more natural <a class="el" href="classaudio__tools_1_1_print.html">Print</a> class to process encoded data (aac, wav, mp3...). Just define the output and the decoder and write the encoded data.  <a href="classaudio__tools_1_1_encoded_audio_output.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1958,12 +1961,22 @@ size_t size)</a> and <a class="el" href="classaudio__tools_1_1_base_stream.html#
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a> using the ESP32 IDF API.  <a href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html">USBAudio2DescriptorBuilder</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">USB Audio Class 2.0 descriptor generator.  <a href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html">USBAudioConfig</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration structure for USB Audio, inheriting from <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>.  <a href="structaudio__tools_1_1_u_s_b_audio_config.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration for USB Audio (inherits sample_rate / channels / bits_per_sample from <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>).  <a href="structaudio__tools_1_1_u_s_b_audio_config.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device.html">USBAudioDevice</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">USB Audio Device class for audio streaming over USB.  <a href="classaudio__tools_1_1_u_s_b_audio_device.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">USB Audio Device class for audio streaming over USB.  <a href="classaudio__tools_1_1_u_s_b_audio_device_base.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html">USBAudioDeviceESP32</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html" title="USB Audio Device class for audio streaming over USB.">USBAudioDeviceBase</a> subclass for ESP32-S2/S3 using the arduino-esp32 stack.  <a href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html">USBAudioDeviceTinyUSB</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html" title="USB Audio Device class for audio streaming over USB.">USBAudioDeviceBase</a> subclass for RP2040 / Adafruit TinyUSB.  <a href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_zephyr.html">USBAudioDeviceZephyr</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">USB Audio 2.0 device backend for Zephyr RTOS.  <a href="classaudio__tools_1_1_u_s_b_audio_device_zephyr.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html">VariableSpeedRingBuffer</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optimized buffer implementation for pitch shifting with interpolation.  <a href="classaudio__tools_1_1_variable_speed_ring_buffer.html#details">More...</a><br /></td></tr>
@@ -2271,6 +2284,8 @@ Typedefs</h2></td></tr>
 <tr class="memitem:a22b64bd5d45692fb5db35650e3fd1c0f" id="r_a22b64bd5d45692fb5db35650e3fd1c0f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a22b64bd5d45692fb5db35650e3fd1c0f">URLStreamBufferedESP32</a> = <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html">URLStreamBufferedT</a>&lt; <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html">URLStreamESP32</a> &gt;</td></tr>
 <tr class="memdesc:a22b64bd5d45692fb5db35650e3fd1c0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffered <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a> for ESP32 platform.  <br /></td></tr>
 <tr class="separator:a22b64bd5d45692fb5db35650e3fd1c0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43a0ff637dbf8c8e3d47f575c950f2fd" id="r_a43a0ff637dbf8c8e3d47f575c950f2fd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a43a0ff637dbf8c8e3d47f575c950f2fd">USBAudioStream</a> = <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html">USBAudioDeviceESP32</a></td></tr>
+<tr class="separator:a43a0ff637dbf8c8e3d47f575c950f2fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaa72f7a57e74e8025d4e74dd1fbdad318" id="r_gaa72f7a57e74e8025d4e74dd1fbdad318"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__io.html#gaa72f7a57e74e8025d4e74dd1fbdad318">VolumeOutput</a> = <a class="el" href="classaudio__tools_1_1_volume_meter.html">VolumeMeter</a></td></tr>
 <tr class="memdesc:gaa72f7a57e74e8025d4e74dd1fbdad318"><td class="mdescLeft">&#160;</td><td class="mdescRight">Legacy alias for <a class="el" href="classaudio__tools_1_1_volume_meter.html" title="A simple class to determine the volume. You can use it as final output or as output or input in your ...">VolumeMeter</a>.  <br /></td></tr>
 <tr class="separator:gaa72f7a57e74e8025d4e74dd1fbdad318"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2920,6 +2935,10 @@ Variables</h2></td></tr>
 <tr class="separator:a6a8099d013ab0669c1f915584b0ed32e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2392d2cf9f9fd71dde3fb54fe41c843f" id="r_a2392d2cf9f9fd71dde3fb54fe41c843f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a2392d2cf9f9fd71dde3fb54fe41c843f">is_a2dp_active</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">false</a></td></tr>
 <tr class="separator:a2392d2cf9f9fd71dde3fb54fe41c843f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0871673bc4fabc917d9c3b8f3c5e8efb" id="r_a0871673bc4fabc917d9c3b8f3c5e8efb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">constexpr</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a0871673bc4fabc917d9c3b8f3c5e8efb">kNumSupportedSampleRates</a></td></tr>
+<tr class="separator:a0871673bc4fabc917d9c3b8f3c5e8efb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62740879acca0d0cf686fa2f3de86c92" id="r_a62740879acca0d0cf686fa2f3de86c92"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">constexpr</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a62740879acca0d0cf686fa2f3de86c92">kSupportedSampleRates</a> []</td></tr>
+<tr class="separator:a62740879acca0d0cf686fa2f3de86c92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab138c7bdee5f06eebb7fb5c997fac350" id="r_ab138c7bdee5f06eebb7fb5c997fac350"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ab138c7bdee5f06eebb7fb5c997fac350">LOCATION</a> = &quot;Location&quot;</td></tr>
 <tr class="separator:ab138c7bdee5f06eebb7fb5c997fac350"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc24da36fe561f8ba8359b1096b3d7dc" id="r_afc24da36fe561f8ba8359b1096b3d7dc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#afc24da36fe561f8ba8359b1096b3d7dc">MetaDataTypeStr</a> [] = {&quot;Title&quot;, &quot;Artist&quot;, &quot;Album&quot;, &quot;Genre&quot;,&quot;Name&quot;, &quot;Description&quot;, &quot;Corrupted&quot;}</td></tr>
@@ -2989,6 +3008,8 @@ Variables</h2></td></tr>
 <tr class="separator:a1aab9fccb0eea490c24d94140cd3301e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f9cfc7022261e8246f2cac14cd58b27" id="r_a3f9cfc7022261e8246f2cac14cd58b27"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a3f9cfc7022261e8246f2cac14cd58b27">TimeUnitStr</a> [3] {&quot;MS&quot;, &quot;US&quot;, &quot;HZ&quot;}</td></tr>
 <tr class="separator:a3f9cfc7022261e8246f2cac14cd58b27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1b2c322982252994a255caf5dac4ff2" id="r_aa1b2c322982252994a255caf5dac4ff2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="classaudio__tools_1_1_emulated___tiny_u_s_b.html">Emulated_TinyUSB</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aa1b2c322982252994a255caf5dac4ff2">TinyUSBDevice</a></td></tr>
+<tr class="separator:aa1b2c322982252994a255caf5dac4ff2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23d5065b09970e19cb7d7c4766a4c770" id="r_a23d5065b09970e19cb7d7c4766a4c770"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a23d5065b09970e19cb7d7c4766a4c770">TRANSFER_ENCODING</a> = &quot;Transfer-<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Encoding&quot;</a></td></tr>
 <tr class="separator:a23d5065b09970e19cb7d7c4766a4c770"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6262d5f41d3f3eeae2906e68d594ce1a" id="r_a6262d5f41d3f3eeae2906e68d594ce1a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a6262d5f41d3f3eeae2906e68d594ce1a">USER_AGENT</a> = &quot;User-<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Agent&quot;</a></td></tr>
@@ -3521,6 +3542,20 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 </div><div class="memdoc">
 
 <p>Buffered <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a> for ESP32 platform. </p>
+
+</div>
+</div>
+<a id="a43a0ff637dbf8c8e3d47f575c950f2fd" name="a43a0ff637dbf8c8e3d47f575c950f2fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43a0ff637dbf8c8e3d47f575c950f2fd">&#9670;&#160;</a></span>USBAudioStream</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typedef</a> <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_zephyr.html">USBAudioDeviceZephyr</a> <a class="el" href="namespaceaudio__tools.html#a43a0ff637dbf8c8e3d47f575c950f2fd">USBAudioStream</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -7289,6 +7324,55 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 
 </div>
 </div>
+<a id="a0871673bc4fabc917d9c3b8f3c5e8efb" name="a0871673bc4fabc917d9c3b8f3c5e8efb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0871673bc4fabc917d9c3b8f3c5e8efb">&#9670;&#160;</a></span>kNumSupportedSampleRates</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">constexpr</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> kNumSupportedSampleRates</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line">    <span class="keyword">sizeof</span>(<a class="code hl_variable" href="namespaceaudio__tools.html#a62740879acca0d0cf686fa2f3de86c92">kSupportedSampleRates</a>) / <span class="keyword">sizeof</span>(kSupportedSampleRates[0])</div>
+<div class="ttc" id="anamespaceaudio__tools_html_a62740879acca0d0cf686fa2f3de86c92"><div class="ttname"><a href="namespaceaudio__tools.html#a62740879acca0d0cf686fa2f3de86c92">audio_tools::kSupportedSampleRates</a></div><div class="ttdeci">static constexpr uint32_t kSupportedSampleRates[]</div><div class="ttdef"><b>Definition</b> USBAudioDeviceBase.h:92</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a62740879acca0d0cf686fa2f3de86c92" name="a62740879acca0d0cf686fa2f3de86c92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62740879acca0d0cf686fa2f3de86c92">&#9670;&#160;</a></span>kSupportedSampleRates</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">constexpr</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint32_t</a> kSupportedSampleRates[]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    8000, 11025, 16000, 22050, 24000, 32000, 44100, 48000}</div>
+</div><!-- fragment -->
+</div>
+</div>
 <a id="ab138c7bdee5f06eebb7fb5c997fac350" name="ab138c7bdee5f06eebb7fb5c997fac350"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab138c7bdee5f06eebb7fb5c997fac350">&#9670;&#160;</a></span>LOCATION</h2>
 
@@ -7984,6 +8068,28 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a>* TimeUnitStr[3] {&quot;MS&quot;, &quot;US&quot;, &quot;HZ&quot;}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa1b2c322982252994a255caf5dac4ff2" name="aa1b2c322982252994a255caf5dac4ff2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1b2c322982252994a255caf5dac4ff2">&#9670;&#160;</a></span>TinyUSBDevice</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_emulated___tiny_u_s_b.html">Emulated_TinyUSB</a> TinyUSBDevice</td>
         </tr>
       </table>
   </td>

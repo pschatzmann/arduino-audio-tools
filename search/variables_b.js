@@ -15,8 +15,10 @@ var searchData=
   ['kit_12',['kit',['../classaudio__tools_1_1_audio_kit_stream.html#ab0c034f0991a293c7173f43c37360316',1,'audio_tools::AudioKitStream']]],
   ['kkeepsamplesize_13',['kKeepSampleSize',['../classaudio__tools_1_1_tf_lite_micro_speach_writer.html#ad2c2ccc32601cb982cb5d1397125bf8d',1,'audio_tools::TfLiteMicroSpeachWriter']]],
   ['kmaxaudiosamplesize_14',['kMaxAudioSampleSize',['../classaudio__tools_1_1_tf_lite_micro_speach_writer.html#afb473c97b88b4f03f49b8d5438a3405e',1,'audio_tools::TfLiteMicroSpeachWriter']]],
-  ['kp_15',['kp',['../classaudio__tools_1_1_p_i_d_controller.html#a1f7add0f84d583bc2eceb290d6c4cc06',1,'audio_tools::PIDController']]],
-  ['kslicestoprocess_16',['kSlicesToProcess',['../structaudio__tools_1_1_tf_lite_config.html#a0cbb79fd6d7a97fd47327e039e114cce',1,'audio_tools::TfLiteConfig']]],
-  ['kstridesamplesize_17',['kStrideSampleSize',['../classaudio__tools_1_1_tf_lite_micro_speach_writer.html#aff89d0817d427185ee64229680fc2938',1,'audio_tools::TfLiteMicroSpeachWriter']]],
-  ['ktensorarenasize_18',['kTensorArenaSize',['../structaudio__tools_1_1_tf_lite_config.html#a632baa6fb9028f59d2d2522d4d0a1e1e',1,'audio_tools::TfLiteConfig']]]
+  ['knumsupportedsamplerates_15',['kNumSupportedSampleRates',['../namespaceaudio__tools.html#a0871673bc4fabc917d9c3b8f3c5e8efb',1,'audio_tools']]],
+  ['kp_16',['kp',['../classaudio__tools_1_1_p_i_d_controller.html#a1f7add0f84d583bc2eceb290d6c4cc06',1,'audio_tools::PIDController']]],
+  ['kslicestoprocess_17',['kSlicesToProcess',['../structaudio__tools_1_1_tf_lite_config.html#a0cbb79fd6d7a97fd47327e039e114cce',1,'audio_tools::TfLiteConfig']]],
+  ['kstridesamplesize_18',['kStrideSampleSize',['../classaudio__tools_1_1_tf_lite_micro_speach_writer.html#aff89d0817d427185ee64229680fc2938',1,'audio_tools::TfLiteMicroSpeachWriter']]],
+  ['ksupportedsamplerates_19',['kSupportedSampleRates',['../namespaceaudio__tools.html#a62740879acca0d0cf686fa2f3de86c92',1,'audio_tools']]],
+  ['ktensorarenasize_20',['kTensorArenaSize',['../structaudio__tools_1_1_tf_lite_config.html#a632baa6fb9028f59d2d2522d4d0a1e1e',1,'audio_tools::TfLiteConfig']]]
 ];

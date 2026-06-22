@@ -5,10 +5,13 @@ var searchData=
   ['touch_5flimit_2',['TOUCH_LIMIT',['../_audio_actions_8h.html#afe31fa239b035c625e0677db1bff910b',1,'AudioActions.h']]],
   ['traced_3',['traced',['../_audio_logger_i_d_f_8h.html#a4c626ed1ad7ce63349cc19db0dfaeb7b',1,'TRACED:&#160;AudioLoggerIDF.h'],['../_audio_logger_s_t_d_8h.html#a4c626ed1ad7ce63349cc19db0dfaeb7b',1,'TRACED:&#160;AudioLoggerSTD.h']]],
   ['tracee_4',['tracee',['../_audio_logger_i_d_f_8h.html#a897bf5a4e2f73b324ae9085c629561cd',1,'TRACEE:&#160;AudioLoggerIDF.h'],['../_audio_logger_s_t_d_8h.html#a897bf5a4e2f73b324ae9085c629561cd',1,'TRACEE:&#160;AudioLoggerSTD.h']]],
-  ['tracei_5',['tracei',['../_audio_logger_s_t_d_8h.html#a2c9be124d60316fe5ce1b3fbbe77e2f1',1,'TRACEI:&#160;AudioLoggerSTD.h'],['../_audio_logger_i_d_f_8h.html#a2c9be124d60316fe5ce1b3fbbe77e2f1',1,'TRACEI:&#160;AudioLoggerIDF.h']]],
-  ['tracew_6',['tracew',['../_audio_logger_i_d_f_8h.html#a5ffd3a15c911ddf4e6407391192b78b3',1,'TRACEW:&#160;AudioLoggerIDF.h'],['../_audio_logger_s_t_d_8h.html#a5ffd3a15c911ddf4e6407391192b78b3',1,'TRACEW:&#160;AudioLoggerSTD.h']]],
+  ['tracei_5',['tracei',['../_audio_logger_i_d_f_8h.html#a2c9be124d60316fe5ce1b3fbbe77e2f1',1,'TRACEI:&#160;AudioLoggerIDF.h'],['../_audio_logger_s_t_d_8h.html#a2c9be124d60316fe5ce1b3fbbe77e2f1',1,'TRACEI:&#160;AudioLoggerSTD.h']]],
+  ['tracew_6',['tracew',['../_audio_logger_s_t_d_8h.html#a5ffd3a15c911ddf4e6407391192b78b3',1,'TRACEW:&#160;AudioLoggerSTD.h'],['../_audio_logger_i_d_f_8h.html#a5ffd3a15c911ddf4e6407391192b78b3',1,'TRACEW:&#160;AudioLoggerIDF.h']]],
   ['ts_5fpacket_5fsize_7',['TS_PACKET_SIZE',['../_codec_m_t_s_8h.html#af79954e736316ebc4a67ff698abec67a',1,'CodecMTS.h']]],
-  ['two_5fpath_8',['TWO_PATH',['../_m_d_f_echo_cancellation_config_8h.html#afb5bcfee6ef2d241fb689d4b6c3d7db0',1,'MDFEchoCancellationConfig.h']]],
-  ['tx_5fbuffer_5fsize_9',['tx_buffer_size',['../_constants_arduino_8h.html#a9ab33647617098646990fe263600b650',1,'TX_BUFFER_SIZE:&#160;ConstantsArduino.h'],['../_constants_e_s_p32_8h.html#a9ab33647617098646990fe263600b650',1,'TX_BUFFER_SIZE:&#160;ConstantsESP32.h']]],
-  ['tx_5fcount_10',['tx_count',['../_constants_arduino_8h.html#a578092cda6c6ba1efc57aaf44393adbe',1,'TX_COUNT:&#160;ConstantsArduino.h'],['../_constants_e_s_p32_8h.html#a578092cda6c6ba1efc57aaf44393adbe',1,'TX_COUNT:&#160;ConstantsESP32.h']]]
+  ['tusb_5fedpt_5fxfer_8',['TUSB_EDPT_XFER',['../_u_s_b_audio_device_base_8h.html#a45fdd33dcda7197d6759f5af62283dcb',1,'USBAudioDeviceBase.h']]],
+  ['tusb_5fedpt_5fxfer_5ffifo_9',['TUSB_EDPT_XFER_FIFO',['../_u_s_b_audio_device_base_8h.html#aed647ee9864f22cb83166d9bad2d6a24',1,'USBAudioDeviceBase.h']]],
+  ['tusb_5ffifo_5fconfig_10',['TUSB_FIFO_CONFIG',['../_u_s_b_audio_device_base_8h.html#a7734ac8a94a55008fe7a628fbd769db0',1,'USBAudioDeviceBase.h']]],
+  ['two_5fpath_11',['TWO_PATH',['../_m_d_f_echo_cancellation_config_8h.html#afb5bcfee6ef2d241fb689d4b6c3d7db0',1,'MDFEchoCancellationConfig.h']]],
+  ['tx_5fbuffer_5fsize_12',['tx_buffer_size',['../_constants_arduino_8h.html#a9ab33647617098646990fe263600b650',1,'TX_BUFFER_SIZE:&#160;ConstantsArduino.h'],['../_constants_e_s_p32_8h.html#a9ab33647617098646990fe263600b650',1,'TX_BUFFER_SIZE:&#160;ConstantsESP32.h']]],
+  ['tx_5fcount_13',['tx_count',['../_constants_arduino_8h.html#a578092cda6c6ba1efc57aaf44393adbe',1,'TX_COUNT:&#160;ConstantsArduino.h'],['../_constants_e_s_p32_8h.html#a578092cda6c6ba1efc57aaf44393adbe',1,'TX_COUNT:&#160;ConstantsESP32.h']]]
 ];

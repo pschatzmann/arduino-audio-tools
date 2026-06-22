@@ -20,12 +20,11 @@ var searchData=
   ['generator_17',['generator',['../classaudio__tools_1_1_s_t_k_stream.html#ac4f697c4e9cadd453a993a6f8566b3ca',1,'audio_tools::STKStream']]],
   ['genre_18',['genre',['../structaudio__tools_1_1_i_d3v1_enhanced.html#ad8b088b4257404237bf9026e20fc4a4a',1,'audio_tools::ID3v1Enhanced::genre'],['../structaudio__tools_1_1_i_d3v1.html#a081a1c005eb62b40514079ade4320e38',1,'audio_tools::ID3v1::genre']]],
   ['genres_19',['genres',['../namespaceaudio__tools.html#a1c8c26908307dcc9ed5243051454e9ed',1,'audio_tools']]],
-  ['get_5freq_5fentity_5fcb_5f_20',['get_req_entity_cb_',['../classaudio__tools_1_1_u_s_b_audio_device.html#a8133d65cb7cbc786ab31af6f7fe922b7',1,'audio_tools::USBAudioDevice']]],
-  ['get_5freq_5fep_5fcb_5f_21',['get_req_ep_cb_',['../classaudio__tools_1_1_u_s_b_audio_device.html#aa8b1dccb97773834b807ba85e065ca95',1,'audio_tools::USBAudioDevice']]],
-  ['get_5freq_5fitf_5fcb_5f_22',['get_req_itf_cb_',['../classaudio__tools_1_1_u_s_b_audio_device.html#a448ba5e038c30f204e308acfe4373e41',1,'audio_tools::USBAudioDevice']]],
-  ['gpio_23',['gpio',['../structaudio__tools_1_1_pin_info_e_s_p32.html#a9526af66d4e7f0276f5b025afa6c445d',1,'audio_tools::PinInfoESP32']]],
-  ['gpio_5fhigh_24',['gpio_high',['../structaudio__tools_1_1_pin_info_e_s_p32_compl.html#ab30771d2c1bf6ea3f4321bb8147e5520',1,'audio_tools::PinInfoESP32Compl']]],
-  ['gpio_5flow_25',['gpio_low',['../structaudio__tools_1_1_pin_info_e_s_p32_compl.html#a319d7c74f63085195ac17985883912f7',1,'audio_tools::PinInfoESP32Compl']]],
-  ['gps_5fposition_26',['gps_position',['../struct_v_b_a_n___p_i_n_g0.html#acad92cbad90ebb0f856a7df7ceae463e',1,'VBAN_PING0::GPS_Position'],['../vban_8h.html#acad92cbad90ebb0f856a7df7ceae463e',1,'GPS_Position:&#160;vban.h']]],
-  ['granulepos_27',['granulepos',['../classaudio__tools_1_1_ogg_container_output.html#a033864495874bf05599d7d0fc8b6b992',1,'audio_tools::OggContainerOutput']]]
+  ['get_5freq_5fep_5fcb_5f_20',['get_req_ep_cb_',['../classaudio__tools_1_1_u_s_b_audio_device_base.html#ace365db5a30ac41715a8edf850a67dd6',1,'audio_tools::USBAudioDeviceBase']]],
+  ['get_5freq_5fitf_5fcb_5f_21',['get_req_itf_cb_',['../classaudio__tools_1_1_u_s_b_audio_device_base.html#ab7e1ae36643d0478149c95e2a0f0a5bd',1,'audio_tools::USBAudioDeviceBase']]],
+  ['gpio_22',['gpio',['../structaudio__tools_1_1_pin_info_e_s_p32.html#a9526af66d4e7f0276f5b025afa6c445d',1,'audio_tools::PinInfoESP32']]],
+  ['gpio_5fhigh_23',['gpio_high',['../structaudio__tools_1_1_pin_info_e_s_p32_compl.html#ab30771d2c1bf6ea3f4321bb8147e5520',1,'audio_tools::PinInfoESP32Compl']]],
+  ['gpio_5flow_24',['gpio_low',['../structaudio__tools_1_1_pin_info_e_s_p32_compl.html#a319d7c74f63085195ac17985883912f7',1,'audio_tools::PinInfoESP32Compl']]],
+  ['gps_5fposition_25',['gps_position',['../struct_v_b_a_n___p_i_n_g0.html#acad92cbad90ebb0f856a7df7ceae463e',1,'VBAN_PING0::GPS_Position'],['../vban_8h.html#acad92cbad90ebb0f856a7df7ceae463e',1,'GPS_Position:&#160;vban.h']]],
+  ['granulepos_26',['granulepos',['../classaudio__tools_1_1_ogg_container_output.html#a033864495874bf05599d7d0fc8b6b992',1,'audio_tools::OggContainerOutput']]]
 ];

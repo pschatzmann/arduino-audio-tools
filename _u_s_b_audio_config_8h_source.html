@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: src/AudioTools/Sandbox/USB/USBAudioConfig.h Source File</title>
+<title>arduino-audio-tools: src/AudioTools/Communication/USB/USBAudioConfig.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,7 +74,7 @@ $(document).ready(function() { init_codefold(0); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_e2decdf0a26130821d443b556fc4319d.html">Sandbox</a></li><li class="navelem"><a class="el" href="dir_5b93c4b885a6b991fd60a10321b5f1d7.html">USB</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_b4e77409634bf95805ec16199afb6860.html">Communication</a></li><li class="navelem"><a class="el" href="dir_9df518133918eed6c10754410df72ef5.html">USB</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -82,59 +82,111 @@ $(document).ready(function() { init_codefold(0); });
 </div><!--header-->
 <div class="contents">
 <a href="_u_s_b_audio_config_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &quot;stdint.h&quot;</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="_audio_types_8h.html">AudioTools/CoreAudio/AudioTypes.h</a>&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;cstring&gt;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceaudio__tools.html">audio_tools</a> {</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="_audio_types_8h.html">AudioTools/CoreAudio/AudioTypes.h</a>&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceaudio__tools.html">audio_tools</a> {</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#ifdef STANDALONE_USB</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">struct </span>USBAudioConfig  {</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint32_t</a> <a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> = 44100;  <span class="comment">// Default sample rate</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> = 2;          <span class="comment">// Default number of channels</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> = 16;  <span class="comment">// Default bits per sample</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#else</span></div>
-<div class="foldopen" id="foldopen00030" data-start="{" data-end="};">
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html">   30</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structaudio__tools_1_1_u_s_b_audio_config.html">USBAudioConfig</a> : <span class="keyword">public</span> <a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> {</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#a80b77280ec2253b2599d02cc1fa57312">   32</a></span>  uint8_t entity_id_input_terminal = 1;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#ad4d34d9b937a2bb6915a6461fc551d7b">   33</a></span>  uint8_t entity_id_feature_unit = 2;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#a47fc4038723979ced1aa9f4521847da7">   34</a></span>  uint8_t entity_id_output_terminal = 3;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#a3aa15d58976b76f3137c2e1d8ee7b7b2">   36</a></span>  uint8_t ep_in = 0x81;   <span class="comment">// IN endpoint address (default 0x81)</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#ac64ae5336c72acfa52ad3a19b4fb079f">   37</a></span>  uint8_t ep_out = 0x01;  <span class="comment">// OUT endpoint address (default 0x01)</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#a0a19ae2915f6b009bea81d009b3dd855">   38</a></span>  uint16_t ep_in_size = 256;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#a7b05f47d45b8e698c5f60a6cc11978ca">   39</a></span>  uint16_t ep_out_size = 256;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  <span class="comment">//uint8_t interface_num = 1;  // Audio streaming interface number</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  <span class="comment">// Moved feature flags and buffer sizes:</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#ab88209dad9dd1e3b80fc66a6dbcb404d">   42</a></span>  <span class="keywordtype">bool</span> enable_ep_in = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#af6c7a5adb56090dcd678dd2b48c3bf9b">   43</a></span>  <span class="keywordtype">bool</span> enable_ep_out = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#a80cb1298c98efa19f75b58688af08d82">   44</a></span>  <span class="keywordtype">bool</span> enable_feedback_ep = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#ada9573363a4a505f00ebaa2f757568e6">   45</a></span>  <span class="keywordtype">bool</span> enable_ep_in_flow_control = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#a1770b6fb9aa6d527f9da627b9e008cd7">   46</a></span>  <span class="keywordtype">bool</span> enable_interrupt_ep = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#a807c2f5bbd888128a34eab123f2cf1e6">   47</a></span>  <span class="keywordtype">bool</span> enable_fifo_mutex = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#ae53d1120a570cd80d6101e402c49ef7e">   48</a></span>  <span class="keywordtype">bool</span> use_linear_buffer_rx = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#a3e80429b3e955a78491daecd02e469ed">   49</a></span>  <span class="keywordtype">bool</span> use_linear_buffer_tx = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#af6e9f18bcea9882b1839eb9fe6bb1992">   50</a></span>  <span class="keywordtype">int</span> audio_count = 1;                 <span class="comment">// Number of audio functions (ex CFG_TUD_AUDIO)</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#a24cda8e18071c410b9cc5b38b333e7f4">   51</a></span>  <span class="keywordtype">int</span> ctrl_buf_size_per_func = 64;     <span class="comment">// Control buffer size per function</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#a96fb1a0e7c304909a7bd9d6e7d9f047a">   52</a></span>  <span class="keywordtype">int</span> ep_in_buf_size_per_func = 256;   <span class="comment">// IN endpoint buffer size per function</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#a53575e113b2a7199261b8c0ccf253295">   53</a></span>  <span class="keywordtype">int</span> ep_out_buf_size_per_func = 256;  <span class="comment">// OUT endpoint buffer size per function</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#a5d125ed358f48f4e08273c9717348eb9">   54</a></span>  <span class="keywordtype">int</span> lin_buf_in_size_per_func = 512;  <span class="comment">// Linear buffer size for IN</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="foldopen" id="foldopen00056" data-start="{" data-end="}">
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#ab820204470dc3dd7490e966c566b4ac9">   56</a></span>  <span class="keywordtype">int</span> <a class="code hl_function" href="structaudio__tools_1_1_u_s_b_audio_config.html#ab820204470dc3dd7490e966c566b4ac9">audio_functions_count</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keywordtype">int</span> count = 0;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordflow">if</span> (enable_ep_in) count++;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordflow">if</span> (enable_ep_out) count++;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordflow">return</span> audio_count;</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  }</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">struct </span>USBAudioConfig {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>  <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint32_t</a> <a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> = 44100;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> = 2;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> = 16;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#else</span></div>
+<div class="foldopen" id="foldopen00023" data-start="{" data-end="};">
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html">   23</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structaudio__tools_1_1_u_s_b_audio_config.html">USBAudioConfig</a> : <span class="keyword">public</span> <a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> {</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  <span class="comment">// ── Direction ─────────────────────────────────────────────────────────────</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#ab88209dad9dd1e3b80fc66a6dbcb404d">   27</a></span>  <span class="keywordtype">bool</span> enable_ep_in = <span class="keyword">true</span>;   </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#af6c7a5adb56090dcd678dd2b48c3bf9b">   28</a></span>  <span class="keywordtype">bool</span> enable_ep_out = <span class="keyword">true</span>;  </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  <span class="comment">// ── USB endpoint addresses ────────────────────────────────────────────────</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#a3aa15d58976b76f3137c2e1d8ee7b7b2">   34</a></span>  uint8_t ep_in = 0x83;   </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#ac64ae5336c72acfa52ad3a19b4fb079f">   35</a></span>  uint8_t ep_out = 0x03;  </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#a1479057b28472afc8a5897aee817d599">   36</a></span>  uint8_t ep_fb = 0x84;   </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#a75eb969d038ecbff9f536208e1d3d77d">   37</a></span>  uint8_t ep_int = 0x85;  </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  <span class="comment">// ── Interface numbering ───────────────────────────────────────────────────</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#ac7d7f14a513f288bd6eb21bfcc2291f4">   42</a></span>  uint8_t itf_num_ac = 0;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  <span class="comment">// ── Buffering ─────────────────────────────────────────────────────────────</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#ad14bedfcf8173ecdccac1e3b97bfb0d1">   47</a></span>  uint8_t fifo_packets = 16;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  <span class="comment">// ── Device identity ───────────────────────────────────────────────────────</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#aac5ffad7f07bfef80deaef77e0eeca69">   50</a></span>  uint16_t vid = 0xCafe;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#a9089e9c40db82122a499b9620e2cb54e">   51</a></span>  uint16_t pid = 0x4002;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#a84875663cfc7f10e83b39e143e4d6ca2">   52</a></span>  <span class="keyword">const</span> <span class="keywordtype">char</span>* manufacturer = <span class="stringliteral">&quot;Audio Tools&quot;</span>;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#a793b0416c25e39874535ef38109b3260">   53</a></span>  <span class="keyword">const</span> <span class="keywordtype">char</span>* product = <span class="stringliteral">&quot;USB Audio&quot;</span>;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#a5e9d4fb7d0fd3f2cf357b62a5d539897">   54</a></span>  <span class="keyword">const</span> <span class="keywordtype">char</span>* serial = <span class="stringliteral">&quot;000001&quot;</span>;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#a550561a9ee8751c85c1c8c9007b219e3">   55</a></span>  <span class="keywordtype">bool</span> self_powered = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#a7eb07813e94ff8bd39c334267f118336">   56</a></span>  uint8_t max_power_ma = 100;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  <span class="comment">// ── Advanced ──────────────────────────────────────────────────────────────</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#a80cb1298c98efa19f75b58688af08d82">   60</a></span>  <span class="keywordtype">bool</span> enable_feedback_ep = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#a6903792eea18087e8c78881d4f415c9c">   68</a></span>  <span class="keywordtype">bool</span> enable_multi_sample_rate = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#a1770b6fb9aa6d527f9da627b9e008cd7">   73</a></span>  <span class="keywordtype">bool</span> enable_interrupt_ep = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#ada9573363a4a505f00ebaa2f757568e6">   80</a></span>  <span class="keywordtype">bool</span> enable_ep_in_flow_control = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#ae53d1120a570cd80d6101e402c49ef7e">   84</a></span>  <span class="keywordtype">bool</span> use_linear_buffer_rx = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#a3e80429b3e955a78491daecd02e469ed">   87</a></span>  <span class="keywordtype">bool</span> use_linear_buffer_tx = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  <span class="comment">// ── Volume Handling ────────────────────────────────────────────────────────</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#ae1d1c41108f6e31acc329a645d56d42b">   92</a></span>  <span class="keywordtype">bool</span> volume_active = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  <span class="comment">// ── ESP32-specific ────────────────────────────────────────────────────────</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#af931744631ed3e32799d351bf78545aa">   98</a></span>  <span class="keywordtype">bool</span> begin_usb = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  <span class="comment">// ── Zephyr-specific ───────────────────────────────────────────────────────</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#ad59fdc7d61058cb0f0cb460c3f40f555">  105</a></span>  uint8_t terminal_id = 1;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
+<div class="foldopen" id="foldopen00107" data-start="{" data-end="}">
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#a3702bdf01be93a78c80459a28c909f3e">  107</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="structaudio__tools_1_1_u_s_b_audio_config.html#a3702bdf01be93a78c80459a28c909f3e">operator==</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structaudio__tools_1_1_u_s_b_audio_config.html">USBAudioConfig</a>&amp; other) {</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="keywordflow">return</span> sample_rate == other.sample_rate &amp;&amp; channels == other.channels &amp;&amp;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>           bits_per_sample == other.bits_per_sample &amp;&amp;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>           enable_ep_in == other.enable_ep_in &amp;&amp;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>           enable_ep_out == other.enable_ep_out &amp;&amp;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>           ep_in == other.ep_in &amp;&amp; ep_out == other.ep_out &amp;&amp;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>           ep_fb == other.ep_fb &amp;&amp;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>           itf_num_ac == other.itf_num_ac &amp;&amp;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>           fifo_packets == other.fifo_packets &amp;&amp;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>           vid == other.vid &amp;&amp; pid == other.pid &amp;&amp;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>           std::strcmp(manufacturer ? manufacturer : <span class="stringliteral">&quot;&quot;</span>,</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>                       other.manufacturer ? other.manufacturer : <span class="stringliteral">&quot;&quot;</span>) == 0 &amp;&amp;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>           std::strcmp(product ? product : <span class="stringliteral">&quot;&quot;</span>,</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>                       other.product ? other.product : <span class="stringliteral">&quot;&quot;</span>) == 0 &amp;&amp;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>           std::strcmp(serial ? serial : <span class="stringliteral">&quot;&quot;</span>,</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>                       other.serial ? other.serial : <span class="stringliteral">&quot;&quot;</span>) == 0 &amp;&amp;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>           self_powered == other.self_powered &amp;&amp;</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>           max_power_ma == other.max_power_ma &amp;&amp;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>           enable_feedback_ep == other.enable_feedback_ep &amp;&amp;</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>           enable_ep_in_flow_control == other.enable_ep_in_flow_control &amp;&amp;</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>           use_linear_buffer_rx == other.use_linear_buffer_rx &amp;&amp;</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>           use_linear_buffer_tx == other.use_linear_buffer_tx &amp;&amp;</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>           begin_usb == other.begin_usb &amp;&amp; terminal_id == other.terminal_id;</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>  }</div>
 </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>};</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_u_s_b_audio_config.html#af0487238a4eef1015408a0d5b71442b3">  142</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="structaudio__tools_1_1_u_s_b_audio_config.html#af0487238a4eef1015408a0d5b71442b3">operator!=</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structaudio__tools_1_1_u_s_b_audio_config.html">USBAudioConfig</a>&amp; other) { <span class="keywordflow">return</span> !(*<span class="keyword">this</span> == other); }</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>};</div>
 </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span> </div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="a_audio_types_8h_html"><div class="ttname"><a href="_audio_types_8h.html">AudioTypes.h</a></div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:10</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html_ae3c87ac6df70d80e2a4be8979e63cc2e"><div class="ttname"><a href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">audio_tools::writeData</a></div><div class="ttdeci">size_t writeData(Print *p_out, T *data, int samples, int maxSamples=512)</div><div class="ttdef"><b>Definition</b> AudioTypes.h:512</div></div>
@@ -142,8 +194,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a0e86c53dfa0ad5dc0d2ecd0304fabc95"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">audio_tools::AudioInfo::sample_rate</a></div><div class="ttdeci">sample_rate_t sample_rate</div><div class="ttdoc">Sample Rate: e.g 44100.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:57</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a1ac7822956f57069d76da865d6b33c55"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">audio_tools::AudioInfo::channels</a></div><div class="ttdeci">uint16_t channels</div><div class="ttdoc">Number of channels: 2=stereo, 1=mono.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:59</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_aa65c89fa8336bfdc4f8d916d9d415a9f"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">audio_tools::AudioInfo::bits_per_sample</a></div><div class="ttdeci">uint8_t bits_per_sample</div><div class="ttdoc">Number of bits per sample (int16_t = 16 bits)</div><div class="ttdef"><b>Definition</b> AudioTypes.h:61</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_u_s_b_audio_config_html"><div class="ttname"><a href="structaudio__tools_1_1_u_s_b_audio_config.html">audio_tools::USBAudioConfig</a></div><div class="ttdoc">Configuration structure for USB Audio, inheriting from AudioInfo.</div><div class="ttdef"><b>Definition</b> USBAudioConfig.h:30</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_u_s_b_audio_config_html_ab820204470dc3dd7490e966c566b4ac9"><div class="ttname"><a href="structaudio__tools_1_1_u_s_b_audio_config.html#ab820204470dc3dd7490e966c566b4ac9">audio_tools::USBAudioConfig::audio_functions_count</a></div><div class="ttdeci">int audio_functions_count() const</div><div class="ttdef"><b>Definition</b> USBAudioConfig.h:56</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_u_s_b_audio_config_html"><div class="ttname"><a href="structaudio__tools_1_1_u_s_b_audio_config.html">audio_tools::USBAudioConfig</a></div><div class="ttdoc">Configuration for USB Audio (inherits sample_rate / channels / bits_per_sample from AudioInfo).</div><div class="ttdef"><b>Definition</b> USBAudioConfig.h:23</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_u_s_b_audio_config_html_a3702bdf01be93a78c80459a28c909f3e"><div class="ttname"><a href="structaudio__tools_1_1_u_s_b_audio_config.html#a3702bdf01be93a78c80459a28c909f3e">audio_tools::USBAudioConfig::operator==</a></div><div class="ttdeci">bool operator==(const USBAudioConfig &amp;other)</div><div class="ttdef"><b>Definition</b> USBAudioConfig.h:107</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_u_s_b_audio_config_html_af0487238a4eef1015408a0d5b71442b3"><div class="ttname"><a href="structaudio__tools_1_1_u_s_b_audio_config.html#af0487238a4eef1015408a0d5b71442b3">audio_tools::USBAudioConfig::operator!=</a></div><div class="ttdeci">bool operator!=(const USBAudioConfig &amp;other)</div><div class="ttdef"><b>Definition</b> USBAudioConfig.h:142</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
