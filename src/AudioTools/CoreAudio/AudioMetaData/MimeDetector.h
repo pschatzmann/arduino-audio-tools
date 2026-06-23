@@ -73,6 +73,7 @@ class MimeDetector : public MimeSource {
       setCheck("video/MP2T", checkMP2T);
       setCheck("audio/prs.sid", checkSID);
       setCheck("audio/m4a", checkM4A, false);
+      setCheck("audio/dsf", checkDSF);
       setCheck("audio/mpeg", checkMP3Ext);
       setCheck("audio/aac", checkAACExt);
     }
@@ -268,6 +269,12 @@ class MimeDetector : public MimeSource {
     if (len < 189) return start[0] == 0x47;
 
     return start[0] == 0x47 && start[188] == 0x47;
+  }
+
+  /// DSF (DSD Stream File): starts with "DSD " magic
+  static bool checkDSF(uint8_t* start, size_t len) {
+    if (len < 4) return false;
+    return memcmp(start, "DSD ", 4) == 0;
   }
 
   /// Commodore 64 SID File
