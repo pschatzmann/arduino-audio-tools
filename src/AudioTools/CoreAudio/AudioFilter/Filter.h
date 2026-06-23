@@ -43,11 +43,11 @@ class Filter {
  * @tparam T
  */
 template <typename T>
-class NoFilter : Filter<T> {
+class NoFilter : public Filter<T> {
  public:
   // construct without coefs
   NoFilter() = default;
-  virtual T process(T in) { return in; }
+  T process(T in) override { return in; }
 };
 
 /**
@@ -76,18 +76,18 @@ class FIR : public Filter<T> {
     }
   }
 
-  T process(T value) {
+  T process(T value) override {
     x[i_b] = value;
     T b_terms = 0;
     T *b_shift = &coeff_b[lenB - i_b - 1];
-    for (uint8_t i = 0; i < lenB; i++) {
+    for (uint16_t i = 0; i < lenB; i++) {
       b_terms += b_shift[i] * x[i];
     }
     i_b++;
     if (i_b == lenB) i_b = 0;
 
 #ifdef USE_TYPETRAITS
-    if (!(std::is_same<T, float>::value || std::is_same<T, float>::value)) {
+    if (!(std::is_same<T, float>::value || std::is_same<T, double>::value)) {
       b_terms = b_terms / factor;
     }
 #else
@@ -99,8 +99,8 @@ class FIR : public Filter<T> {
   }
 
  private:
-  const uint8_t lenB;
-  uint8_t i_b = 0;
+  const uint16_t lenB;
+  uint16_t i_b = 0;
   Vector<T> x;
   Vector<T> coeff_b;
   T factor;
@@ -135,7 +135,7 @@ class IIR : public Filter<T> {
   }
 
 
-  T process(T value) {
+  T process(T value) override {
     x[i_b] = value;
     T b_terms = 0;
     T *b_shift = &coeff_b[lenB - i_b - 1];
@@ -143,10 +143,10 @@ class IIR : public Filter<T> {
     T a_terms = 0;
     T *a_shift = &coeff_a[lenA - i_a - 1];
 
-    for (uint8_t i = 0; i < lenB; i++) {
+    for (uint16_t i = 0; i < lenB; i++) {
       b_terms += x[i] * b_shift[i];
     }
-    for (uint8_t i = 0; i < lenA; i++) {
+    for (uint16_t i = 0; i < lenA; i++) {
       a_terms += y[i] * a_shift[i];
     }
 
@@ -158,7 +158,7 @@ class IIR : public Filter<T> {
     if (i_a == lenA) i_a = 0;
 
 #ifdef USE_TYPETRAITS
-    if (!(std::is_same<T, float>::value || std::is_same<T, float>::value)) {
+    if (!(std::is_same<T, float>::value || std::is_same<T, double>::value)) {
       filtered = filtered / factor;
     }
 #else
@@ -171,8 +171,8 @@ class IIR : public Filter<T> {
 
  private:
   T factor;
-  const uint8_t lenB, lenA;
-  uint8_t i_b = 0, i_a = 0;
+  const uint16_t lenB, lenA;
+  uint16_t i_b = 0, i_a = 0;
   Vector<T> x;
   Vector<T> y;
   Vector<T> coeff_b;
@@ -212,7 +212,7 @@ class BiQuadDF1 : public Filter<T> {
         a_1(a[1] / a[0]),
         a_2(a[2] / a[0]) {}
 
-  T process(T value) {
+  T process(T value) override {
     T x_2 = x_1;
     x_1 = x_0;
     x_0 = value;
@@ -270,7 +270,7 @@ class BiQuadDF2 : public Filter<T> {
         a_1(a[1] / a[0]),
         a_2(a[2] / a[0]) {}
 
-  T process(T value) {
+  T process(T value) override {
     T w_2 = w_1;
     w_1 = w_0;
     w_0 = value - a_1 * w_1 - a_2 * w_2;
@@ -342,11 +342,11 @@ template <typename T>
 class HighPassFilter : public BiQuadDF2<T> {
  public:
   HighPassFilter() = default;
-  HighPassFilter(float frequency, float sampleRate, float q = 0.7071)
+  HighPassFilter(float frequency, float sampleRate, float q = 0.7071f)
       : BiQuadDF2<T>() {
     begin(frequency, sampleRate, q);
   }
-  void begin(float frequency, float sampleRate, float q = 0.7071) {
+  void begin(float frequency, float sampleRate, float q = 0.7071f) {
     T w0 = frequency * (2.0f * PI / sampleRate);
     T sinW0 = sin(w0);
     T alpha = sinW0 / ((float)q * 2.0);
@@ -550,10 +550,12 @@ class SOSFilter : public Filter<T> {
   SOSFilter(const T (&b)[N][3], const T (&a)[N][3]) {
     for (size_t i = 0; i < N; i++) filters[i] = new BiQuadDF2<T>(b[i], a[i]);
   }
+  SOSFilter(SOSFilter const &) = delete;
+  SOSFilter &operator=(SOSFilter const &) = delete;
   ~SOSFilter() {
     for (size_t i = 0; i < N; i++) delete filters[i];
   }
-  T process(T value) {
+  T process(T value) override {
     for (Filter<T> *&filter : filters) value = filter->process(value);
     return value;
   }
@@ -581,7 +583,7 @@ class FilterChain : public Filter<T> {
     }
   }
 
-  T process(T value) {
+  T process(T value) override {
     for (Filter<T> *&filter : filters) {
       if (filter != nullptr) {
         value = filter->process(value);
