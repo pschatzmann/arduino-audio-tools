@@ -4,6 +4,10 @@
 #include "AudioTools/AudioLibs/I2SCodecStream.h"
 #include "AudioTools/CoreAudio/AudioActions.h"
 
+/// global reference to access from static callback methods
+void* p_lastAudioBoardStream = nullptr; 
+
+
 namespace audio_tools {
 
 /**
@@ -17,6 +21,7 @@ namespace audio_tools {
  * @copyright GPLv3
  */
 class AudioBoardStream : public I2SCodecStream {
+
   struct AudioBoardAction : public AudioActions::Action {
     AudioBoardAction(AudioBoard &board, AudioDriverKey key) {
       this->key = key;
@@ -41,6 +46,7 @@ class AudioBoardStream : public I2SCodecStream {
     actions.setPinMode(false);
     // use the AudioBoard
     actions.setReadCallback(readPinCB, this);
+    p_lastAudioBoardStream = this;
   }
 
   bool begin() override { return I2SCodecStream::begin(); }
@@ -63,6 +69,10 @@ class AudioBoardStream : public I2SCodecStream {
   void addAction(AudioDriverKey key, void (*action)(bool, digital_pin_t, void *),
                  void *ref = nullptr) {
       AudioBoardAction *abo = new AudioBoardAction(board(), key);
+      if (abo == nullptr) {
+        LOGE("Failed to allocate AudioBoardAction");
+        return;
+      }
       abo->actionOn = action;
       abo->ref = (ref == nullptr) ? this : ref;
       actions.add(*abo);
@@ -76,8 +86,12 @@ class AudioBoardStream : public I2SCodecStream {
                 void *ref = nullptr) {
 
       AudioBoardAction *abo = new AudioBoardAction(board(), key);
+      if (abo == nullptr) {
+        LOGE("Failed to allocate AudioBoardAction");
+        return;
+      }
       abo->actionOn = actionOn;
-      abo->actionOn = actionOff;
+      abo->actionOff = actionOff;
       abo->ref = (ref == nullptr) ? this : ref;
       actions.add(*abo);
     }
@@ -137,6 +151,7 @@ class AudioBoardStream : public I2SCodecStream {
   static void actionVolumeUp(bool, digital_pin_t, void *ref) {
     TRACEI();
     AudioBoardStream *self = (AudioBoardStream *)ref;
+    if (self == nullptr) self = (AudioBoardStream *)p_lastAudioBoardStream;
     self->incrementVolume(+self->actionVolumeIncrementValue());
   }
 
@@ -147,6 +162,7 @@ class AudioBoardStream : public I2SCodecStream {
   static void actionVolumeDown(bool, digital_pin_t, void *ref) {
     TRACEI();
     AudioBoardStream *self = (AudioBoardStream *)ref;
+    if (self == nullptr) self = (AudioBoardStream *)p_lastAudioBoardStream;
     self->incrementVolume(-self->actionVolumeIncrementValue());
   }
 
@@ -157,6 +173,7 @@ class AudioBoardStream : public I2SCodecStream {
   static void actionStartStop(bool, digital_pin_t, void *ref) {
     TRACEI();
     AudioBoardStream *self = (AudioBoardStream *)ref;
+    if (self == nullptr) self =  (AudioBoardStream *)p_lastAudioBoardStream;
     self->active = !self->active;
     self->setActive(self->active);
   }
@@ -168,6 +185,7 @@ class AudioBoardStream : public I2SCodecStream {
   static void actionStart(bool, digital_pin_t, void *ref) {
     TRACEI();
     AudioBoardStream *self = (AudioBoardStream *)ref;
+    if (self == nullptr) self =  (AudioBoardStream *)p_lastAudioBoardStream;
     self->active = true;
     self->setActive(self->active);
   }
@@ -178,6 +196,7 @@ class AudioBoardStream : public I2SCodecStream {
   static void actionStop(bool, digital_pin_t, void *ref) {
     TRACEI();
     AudioBoardStream *self = (AudioBoardStream *)ref;
+    if (self == nullptr) self =  (AudioBoardStream *)p_lastAudioBoardStream;
     self->active = false;
     self->setActive(self->active);
   }
@@ -189,6 +208,7 @@ class AudioBoardStream : public I2SCodecStream {
    */
   static void actionHeadphoneDetection(bool, digital_pin_t, void *ref) {
     AudioBoardStream *self = (AudioBoardStream *)ref;
+    if (self == nullptr) self =  (AudioBoardStream *)p_lastAudioBoardStream;
     if (self->pinHeadphoneDetect() != GPIO_NONE) {
       // detect changes
       bool isConnected = self->headphoneStatus();
@@ -376,6 +396,9 @@ class AudioBoardStream : public I2SCodecStream {
     if (!board()) return false;
     return board().isKeyPressed(key);
   }
+
+  /// Defines if we use pin interrupts for audio actions (default: false)
+  void setUsePinInterrupt(bool active) { actions.setUsePinInterrupt(active); }
 
  protected:
   static bool readPinCB(digital_pin_t pin, void* ref) {

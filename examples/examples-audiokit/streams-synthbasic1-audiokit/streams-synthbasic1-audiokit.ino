@@ -44,7 +44,7 @@ void setup() {
   auto cfg = kit.defaultConfig(TX_MODE);
   cfg.sd_active = false;
   kit.begin(cfg);
-  kit.setVolume(80);
+  kit.setVolume(0.8f);
 
   // Setup sound generation based on AudioKit settins
   in.begin(cfg);
