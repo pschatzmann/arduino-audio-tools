@@ -3,7 +3,7 @@ var searchData=
   ['object_0',['object',['../classaudio__tools_1_1_timer_alarm_repeating_driver_base.html#a077376d12464f945e2414d5499c79b3f',1,'audio_tools::TimerAlarmRepeatingDriverBase::object'],['../classaudio__tools_1_1_timer_alarm_repeating.html#a077376d12464f945e2414d5499c79b3f',1,'audio_tools::TimerAlarmRepeating::object']]],
   ['object_5fstack_1',['object_stack',['../classaudio__tools_1_1_a_v_i_decoder.html#a9b8fa15ff3722ba332196a24a7242073',1,'audio_tools::AVIDecoder']]],
   ['object_5ftype_2',['object_type',['../classaudio__tools_1_1_parse_object.html#a8ae9653c9b3e0327e501283cad3c42f2',1,'audio_tools::ParseObject']]],
-  ['offset_3',['offset',['../structaudio__tools_1_1_audio_player_command.html#aed7ea92f45bd273dde380a45ddced592',1,'audio_tools::AudioPlayerCommand::offset'],['../structaudio__tools_1_1_w_a_v_audio_info.html#aed7ea92f45bd273dde380a45ddced592',1,'audio_tools::WAVAudioInfo::offset']]],
+  ['offset_3',['offset',['../structaudio__tools_1_1_w_a_v_audio_info.html#aed7ea92f45bd273dde380a45ddced592',1,'audio_tools::WAVAudioInfo::offset'],['../structaudio__tools_1_1_audio_player_command.html#aed7ea92f45bd273dde380a45ddced592',1,'audio_tools::AudioPlayerCommand::offset']]],
   ['offset_5ffrom_4',['offset_from',['../classaudio__tools_1_1_converter_auto_center_t.html#adccd0d678e082bd1f37411a3b943d6a9',1,'audio_tools::ConverterAutoCenterT']]],
   ['offset_5fstep_5',['offset_step',['../classaudio__tools_1_1_converter_auto_center_t.html#ac3469c45350935984f16731b925c6d33',1,'audio_tools::ConverterAutoCenterT']]],
   ['offset_5fto_6',['offset_to',['../classaudio__tools_1_1_converter_auto_center_t.html#a7a3e69e360d1977c42a94d1aaa49d75b',1,'audio_tools::ConverterAutoCenterT']]],
@@ -53,10 +53,11 @@ var searchData=
   ['output_5fpos_50',['output_pos',['../classaudio__tools_1_1_a_p_t_x_encoder.html#ac4c2f200ba94657f62e20b42e7464487',1,'audio_tools::APTXEncoder']]],
   ['output_5fvolume_51',['output_volume',['../structaudio__tools_1_1_mozzi_config.html#aef0603e0f593237821d404f481057701',1,'audio_tools::MozziConfig']]],
   ['overlap_52',['overlap',['../classaudio__tools_1_1_variable_speed_ring_buffer180.html#aed0a8a19fcd367d13f422c4b53a0b696',1,'audio_tools::VariableSpeedRingBuffer180']]],
-  ['owner_53',['owner',['../classaudio__tools_1_1_list_lock_free_1_1_iterator.html#a1b6aeb7ce7ea3b1e57d1cea7f65913cb',1,'audio_tools::ListLockFree::Iterator']]],
-  ['owns_5fbuffer_54',['owns_buffer',['../classaudio__tools_1_1_queue_stream.html#a457a1009fdf0531eb3b9ffa0a2f9eb18',1,'audio_tools::QueueStream::owns_buffer'],['../classaudio__tools_1_1_single_buffer.html#a457a1009fdf0531eb3b9ffa0a2f9eb18',1,'audio_tools::SingleBuffer::owns_buffer']]],
-  ['owns_5fcfg_55',['owns_cfg',['../classaudio__tools_1_1_audio_source_idx_s_d_f_a_t.html#a24a8f3b40e6ac5880e21669a79c7ae70',1,'audio_tools::AudioSourceIdxSDFAT::owns_cfg'],['../classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a24a8f3b40e6ac5880e21669a79c7ae70',1,'audio_tools::AudioSourceSDFAT::owns_cfg']]],
-  ['owns_5fdata_56',['owns_data',['../classaudio__tools_1_1_generator_from_array.html#aa23f8189b8e3a8f40fe3f5deabcbd6df',1,'audio_tools::GeneratorFromArray']]],
-  ['owns_5fgenerator_57',['owns_generator',['../classaudio__tools_1_1_audio_effects.html#afc49eca158ad8664634feeb64d5ae7d0',1,'audio_tools::AudioEffects']]],
-  ['owns_5fmemory_58',['owns_memory',['../classaudio__tools_1_1_memory_stream.html#a9c24680fbb45bc25b0e34d9101777db8',1,'audio_tools::MemoryStream']]]
+  ['oversamplingratio_53',['oversamplingRatio',['../classaudio__tools_1_1_d_s_f_encoder.html#a2a6a64db6f3f9e20db3406e1f5119c1f',1,'audio_tools::DSFEncoder']]],
+  ['owner_54',['owner',['../classaudio__tools_1_1_list_lock_free_1_1_iterator.html#a1b6aeb7ce7ea3b1e57d1cea7f65913cb',1,'audio_tools::ListLockFree::Iterator']]],
+  ['owns_5fbuffer_55',['owns_buffer',['../classaudio__tools_1_1_queue_stream.html#a457a1009fdf0531eb3b9ffa0a2f9eb18',1,'audio_tools::QueueStream::owns_buffer'],['../classaudio__tools_1_1_single_buffer.html#a457a1009fdf0531eb3b9ffa0a2f9eb18',1,'audio_tools::SingleBuffer::owns_buffer']]],
+  ['owns_5fcfg_56',['owns_cfg',['../classaudio__tools_1_1_audio_source_idx_s_d_f_a_t.html#a24a8f3b40e6ac5880e21669a79c7ae70',1,'audio_tools::AudioSourceIdxSDFAT::owns_cfg'],['../classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a24a8f3b40e6ac5880e21669a79c7ae70',1,'audio_tools::AudioSourceSDFAT::owns_cfg']]],
+  ['owns_5fdata_57',['owns_data',['../classaudio__tools_1_1_generator_from_array.html#aa23f8189b8e3a8f40fe3f5deabcbd6df',1,'audio_tools::GeneratorFromArray']]],
+  ['owns_5fgenerator_58',['owns_generator',['../classaudio__tools_1_1_audio_effects.html#afc49eca158ad8664634feeb64d5ae7d0',1,'audio_tools::AudioEffects']]],
+  ['owns_5fmemory_59',['owns_memory',['../classaudio__tools_1_1_memory_stream.html#a9c24680fbb45bc25b0e34d9101777db8',1,'audio_tools::MemoryStream']]]
 ];

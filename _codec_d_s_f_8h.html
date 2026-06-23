@@ -76,13 +76,12 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">CodecDSF.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>DSF (DSD Stream File) format decoder implementation.  
+<p>DSF (DSD Stream File) format decoder and encoder implementation.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="_audio_codecs_base_8h_source.html">AudioTools/AudioCodecs/AudioCodecsBase.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_filter_8h_source.html">AudioTools/CoreAudio/AudioFilter/Filter.h</a>&quot;</code><br />
@@ -92,8 +91,13 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_d_s_f_encoder_1_1_channel_mod_state.html">DSFEncoder::ChannelModState</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_d_s_f_decoder.html">DSFDecoder</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">DSF (DSD <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> File) format decoder.  <a href="classaudio__tools_1_1_d_s_f_decoder.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decodes DSF files containing DSD audio and converts to PCM.  <a href="classaudio__tools_1_1_d_s_f_decoder.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_d_s_f_encoder.html">DSFEncoder</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">DSF (DSD <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> File) format encoder.  <a href="classaudio__tools_1_1_d_s_f_encoder.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_d_s_f_metadata.html">DSFMetadata</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Metadata structure for DSF (DSD <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> File) format.  <a href="structaudio__tools_1_1_d_s_f_metadata.html#details">More...</a><br /></td></tr>
@@ -105,48 +109,26 @@ Namespaces</h2></td></tr>
 <tr class="memdesc:namespaceaudio__tools"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic Implementation of sound input and output for desktop environments using portaudio. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:a7fa7f3a58f65fe2caeeca49e5ec25812" id="r_a7fa7f3a58f65fe2caeeca49e5ec25812"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_codec_d_s_f_8h.html#a7fa7f3a58f65fe2caeeca49e5ec25812">DSD_BUFFER_SIZE</a>&#160;&#160;&#160;1024 * 2</td></tr>
-<tr class="memdesc:a7fa7f3a58f65fe2caeeca49e5ec25812"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffer size for DSD data processing - must accommodate decimation step.  <br /></td></tr>
-<tr class="separator:a7fa7f3a58f65fe2caeeca49e5ec25812"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga6619c72916cad1d8d09d4a897d9f61fb" id="r_ga6619c72916cad1d8d09d4a897d9f61fb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__dsd.html#ga6619c72916cad1d8d09d4a897d9f61fb">__attribute__</a> ((<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">packed</a>)) <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">DSDPrefix</a></td></tr>
-<tr class="memdesc:ga6619c72916cad1d8d09d4a897d9f61fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Header structures for DSF (DSD <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> File) format.  <br /></td></tr>
-<tr class="separator:ga6619c72916cad1d8d09d4a897d9f61fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6619c72916cad1d8d09d4a897d9f61fb" id="r_a6619c72916cad1d8d09d4a897d9f61fb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a6619c72916cad1d8d09d4a897d9f61fb">__attribute__</a> ((<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">packed</a>)) <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">DSDPrefix</a></td></tr>
+<tr class="memdesc:a6619c72916cad1d8d09d4a897d9f61fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">DSF file prefix containing file identification and basic information.  <br /></td></tr>
+<tr class="separator:a6619c72916cad1d8d09d4a897d9f61fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>DSF (DSD Stream File) format decoder implementation. </p>
+<div class="textblock"><p>DSF (DSD Stream File) format decoder and encoder implementation. </p>
 <dl class="section author"><dt>Author</dt><dd>pschatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3</dd></dl>
-<p>This file contains the implementation of a DSF decoder that converts Direct Stream Digital (DSD) audio data to Pulse Code Modulation (PCM) format. The decoder supports the DSF file format which is commonly used for high-resolution audio distribution.</p>
+<p>Decoder: converts DSD audio from DSF files to PCM format. Encoder: converts PCM audio to DSD and writes DSF files.</p>
 <p>Key features:</p><ul>
-<li>DSF file header parsing and validation</li>
-<li>DSD bitstream to PCM conversion with configurable decimation</li>
-<li>BiQuad low-pass filtering for anti-aliasing</li>
+<li>DSF file header parsing, validation, and generation</li>
+<li>Correct block-level channel de-interleaving per DSF spec</li>
+<li>DSD-to-PCM via bit counting with cascaded Butterworth anti-aliasing</li>
+<li>PCM-to-DSD via 2nd order delta-sigma modulation with interpolation</li>
 <li>Streaming-compatible operation for real-time processing</li>
-<li>Support for stereo DSD files (DSD64 and higher sample rates) </li>
+<li>Support for mono and multi-channel DSD files (DSD64 and higher) </li>
 </ul>
-</div><h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a7fa7f3a58f65fe2caeeca49e5ec25812" name="a7fa7f3a58f65fe2caeeca49e5ec25812"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7fa7f3a58f65fe2caeeca49e5ec25812">&#9670;&#160;</a></span>DSD_BUFFER_SIZE</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define DSD_BUFFER_SIZE&#160;&#160;&#160;1024 * 2</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Buffer size for DSD data processing - must accommodate decimation step. </p>
-
-</div>
-</div>
-</div><!-- contents -->
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8

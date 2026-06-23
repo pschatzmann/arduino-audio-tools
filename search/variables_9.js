@@ -183,9 +183,10 @@ var searchData=
   ['isactive_180',['isactive',['../structaudio__tools_1_1_audio_player_command.html#a96eff8420fb9ee1b4c5d5f1bcace116d',1,'audio_tools::AudioPlayerCommand::isActive'],['../classaudio__tools_1_1_d_s_f_decoder.html#a96eff8420fb9ee1b4c5d5f1bcace116d',1,'audio_tools::DSFDecoder::isActive']]],
   ['isfirst_181',['isfirst',['../classaudio__tools_1_1_w_a_v_decoder.html#a08d2a3449f250840171ef25487990223',1,'audio_tools::WAVDecoder::isFirst'],['../classaudio__tools_1_1_wav_i_m_a_decoder.html#a08d2a3449f250840171ef25487990223',1,'audio_tools::WavIMADecoder::isFirst']]],
   ['isfirstchunk_182',['isFirstChunk',['../classaudio__tools_1_1_wav_i_m_a_header.html#a18f4b50f4758d0157de927ae7f516e60',1,'audio_tools::WavIMAHeader']]],
-  ['isupdating_183',['isUpdating',['../classaudio__tools_1_1_equalizer_n_bands.html#a9d51e20e477e832b9b39f320ed0b0dea',1,'audio_tools::EqualizerNBands']]],
-  ['isvalid_184',['isvalid',['../classaudio__tools_1_1_wav_i_m_a_decoder.html#a8cc8d1cb67b70386f41455552f3a56f4',1,'audio_tools::WavIMADecoder::isValid'],['../classaudio__tools_1_1_w_a_v_decoder.html#a8cc8d1cb67b70386f41455552f3a56f4',1,'audio_tools::WAVDecoder::isValid']]],
-  ['it_185',['it',['../classaudio__tools_1_1_dynamic_memory_stream.html#a23cac32c470cb2f4a6968669f3028b02',1,'audio_tools::DynamicMemoryStream']]],
-  ['iter_186',['iter',['../classaudiotools__rtsp_1_1_stream_client_state.html#a7f9a52d49a303e29a521dcb96bcca354',1,'audiotools_rtsp::StreamClientState']]],
-  ['itf_5fnum_5fac_187',['itf_num_ac',['../structaudio__tools_1_1_u_s_b_audio_config.html#ac7d7f14a513f288bd6eb21bfcc2291f4',1,'audio_tools::USBAudioConfig']]]
+  ['isopen_183',['isOpen',['../classaudio__tools_1_1_d_s_f_encoder.html#a882afa92abc68d9b1fa39a42f56a8b3d',1,'audio_tools::DSFEncoder']]],
+  ['isupdating_184',['isUpdating',['../classaudio__tools_1_1_equalizer_n_bands.html#a9d51e20e477e832b9b39f320ed0b0dea',1,'audio_tools::EqualizerNBands']]],
+  ['isvalid_185',['isvalid',['../classaudio__tools_1_1_wav_i_m_a_decoder.html#a8cc8d1cb67b70386f41455552f3a56f4',1,'audio_tools::WavIMADecoder::isValid'],['../classaudio__tools_1_1_w_a_v_decoder.html#a8cc8d1cb67b70386f41455552f3a56f4',1,'audio_tools::WAVDecoder::isValid']]],
+  ['it_186',['it',['../classaudio__tools_1_1_dynamic_memory_stream.html#a23cac32c470cb2f4a6968669f3028b02',1,'audio_tools::DynamicMemoryStream']]],
+  ['iter_187',['iter',['../classaudiotools__rtsp_1_1_stream_client_state.html#a7f9a52d49a303e29a521dcb96bcca354',1,'audiotools_rtsp::StreamClientState']]],
+  ['itf_5fnum_5fac_188',['itf_num_ac',['../structaudio__tools_1_1_u_s_b_audio_config.html#ac7d7f14a513f288bd6eb21bfcc2291f4',1,'audio_tools::USBAudioConfig']]]
 ];

@@ -25,7 +25,7 @@ var searchData=
   ['header_5fwritten_22',['header_written',['../classaudio__tools_1_1_w_a_v_encoder.html#a4f529ef69928bce7e8a1b4e760048791',1,'audio_tools::WAVEncoder']]],
   ['headerinfo_23',['headerinfo',['../classaudio__tools_1_1_w_a_v_header.html#ad507493ca5140b4fc3685cb5996b24f5',1,'audio_tools::WAVHeader::headerInfo'],['../classaudio__tools_1_1_wav_i_m_a_header.html#a6eedfe4c684357b6bc741bdd8f27dbb9',1,'audio_tools::WavIMAHeader::headerInfo']]],
   ['headerparsed_24',['headerParsed',['../classaudio__tools_1_1_d_s_f_decoder.html#a379eb6ee35e82184420b631ab5ac635c',1,'audio_tools::DSFDecoder']]],
-  ['headersize_25',['headerSize',['../classaudio__tools_1_1_d_s_f_decoder.html#a570e8b43acdfb7d2d45e42a1cd10771b',1,'audio_tools::DSFDecoder']]],
+  ['headerwritten_25',['headerWritten',['../classaudio__tools_1_1_d_s_f_encoder.html#a5e354fc0727da072567dc44008059902',1,'audio_tools::DSFEncoder']]],
   ['headphoneisconnected_26',['headphoneIsConnected',['../classaudio__tools_1_1_audio_board_stream.html#a86f6a759a6b9c8080d914c1aa84c243a',1,'audio_tools::AudioBoardStream']]],
   ['hertz_27',['hertz',['../classaudio__tools_1_1_audio_e_s_p32_u_l_p.html#a8f88f758a0f634c147bbdc139daa9183',1,'audio_tools::AudioESP32ULP']]],
   ['hf_28',['hf',['../structaudio__tools_1_1_equalizer3_bands_1_1_e_q_s_t_a_t_e.html#a3aa461d03119c9eb4228d57537e45763',1,'audio_tools::Equalizer3Bands::EQSTATE::hf'],['../structaudio__tools_1_1_equalizer3_bands_per_channel_1_1_e_q_s_t_a_t_e.html#a3aa461d03119c9eb4228d57537e45763',1,'audio_tools::Equalizer3BandsPerChannel::EQSTATE::hf']]],

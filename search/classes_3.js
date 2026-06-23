@@ -26,13 +26,14 @@ var searchData=
   ['driveri2s_23',['DriverI2S',['../structaudio__tools_1_1_i2_s_driver_e_s_p32_v1_1_1_driver_i2_s.html',1,'audio_tools::I2SDriverESP32V1']]],
   ['driverpwmbase_24',['DriverPWMBase',['../classaudio__tools_1_1_driver_p_w_m_base.html',1,'audio_tools']]],
   ['dsfdecoder_25',['DSFDecoder',['../classaudio__tools_1_1_d_s_f_decoder.html',1,'audio_tools']]],
-  ['dsfmetadata_26',['DSFMetadata',['../structaudio__tools_1_1_d_s_f_metadata.html',1,'audio_tools']]],
-  ['dsp_27',['dsp',['../classdsp.html',1,'']]],
-  ['dsp_5fmemory_5fmanager_28',['dsp_memory_manager',['../classdsp__memory__manager.html',1,'']]],
-  ['dynamicmemorystream_29',['DynamicMemoryStream',['../classaudio__tools_1_1_dynamic_memory_stream.html',1,'audio_tools']]],
-  ['dynamicmultibuffer_30',['DynamicMultiBuffer',['../classaudio__tools_1_1_dynamic_multi_buffer.html',1,'audio_tools']]],
-  ['dynarray_31',['DynArray',['../classffft_1_1_dyn_array.html',1,'ffft']]],
-  ['dynarray_3c_20datatype_20_3e_32',['DynArray&lt; DataType &gt;',['../classffft_1_1_dyn_array.html',1,'ffft']]],
-  ['dynarray_3c_20ffft_3a_3aoscsincos_20_3e_33',['DynArray&lt; ffft::OscSinCos &gt;',['../classffft_1_1_dyn_array.html',1,'ffft']]],
-  ['dynarray_3c_20long_20_3e_34',['DynArray&lt; long &gt;',['../classffft_1_1_dyn_array.html',1,'ffft']]]
+  ['dsfencoder_26',['DSFEncoder',['../classaudio__tools_1_1_d_s_f_encoder.html',1,'audio_tools']]],
+  ['dsfmetadata_27',['DSFMetadata',['../structaudio__tools_1_1_d_s_f_metadata.html',1,'audio_tools']]],
+  ['dsp_28',['dsp',['../classdsp.html',1,'']]],
+  ['dsp_5fmemory_5fmanager_29',['dsp_memory_manager',['../classdsp__memory__manager.html',1,'']]],
+  ['dynamicmemorystream_30',['DynamicMemoryStream',['../classaudio__tools_1_1_dynamic_memory_stream.html',1,'audio_tools']]],
+  ['dynamicmultibuffer_31',['DynamicMultiBuffer',['../classaudio__tools_1_1_dynamic_multi_buffer.html',1,'audio_tools']]],
+  ['dynarray_32',['DynArray',['../classffft_1_1_dyn_array.html',1,'ffft']]],
+  ['dynarray_3c_20datatype_20_3e_33',['DynArray&lt; DataType &gt;',['../classffft_1_1_dyn_array.html',1,'ffft']]],
+  ['dynarray_3c_20ffft_3a_3aoscsincos_20_3e_34',['DynArray&lt; ffft::OscSinCos &gt;',['../classffft_1_1_dyn_array.html',1,'ffft']]],
+  ['dynarray_3c_20long_20_3e_35',['DynArray&lt; long &gt;',['../classffft_1_1_dyn_array.html',1,'ffft']]]
 ];

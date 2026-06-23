@@ -27,6 +27,5 @@ var searchData=
   ['desktop_5fmillis_5fdefined_24',['desktop_millis_defined',['../_no_arduino_8h.html#ac9faf1ee520930849fff2feaf62b1d8a',1,'DESKTOP_MILLIS_DEFINED:&#160;NoArduino.h'],['../_time_8h.html#ac9faf1ee520930849fff2feaf62b1d8a',1,'DESKTOP_MILLIS_DEFINED:&#160;Time.h']]],
   ['dio0_25',['dio0',['../_audio_lo_ra_8h.html#a1ae4bf629eab3a2e99cb98bc2d805688',1,'dio0:&#160;AudioLoRa.h'],['../_lo_ra_stream_8h.html#a1ae4bf629eab3a2e99cb98bc2d805688',1,'dio0:&#160;LoRaStream.h']]],
   ['dma_5fbuf_5fcount_26',['DMA_BUF_COUNT',['../_s_p_d_i_f_output_8h.html#a269a7e51407fdeb29660602407f9df02',1,'SPDIFOutput.h']]],
-  ['dma_5fbuf_5flen_27',['DMA_BUF_LEN',['../_s_p_d_i_f_output_8h.html#a9aad186bb43c99bfa49b2f97e204af32',1,'SPDIFOutput.h']]],
-  ['dsd_5fbuffer_5fsize_28',['DSD_BUFFER_SIZE',['../_codec_d_s_f_8h.html#a7fa7f3a58f65fe2caeeca49e5ec25812',1,'CodecDSF.h']]]
+  ['dma_5fbuf_5flen_27',['DMA_BUF_LEN',['../_s_p_d_i_f_output_8h.html#a9aad186bb43c99bfa49b2f97e204af32',1,'SPDIFOutput.h']]]
 ];
