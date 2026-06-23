@@ -47,7 +47,7 @@ struct DSFMetadata : public AudioInfo {
   /// Number of cascaded Butterworth biquad filter stages (1-3), 0 to disable filtering
   int filter_stages = 3;
   /// PCM output buffer size in bytes (must be >= one frame)
-  int output_buffer_size = 1024;
+  int output_buffer_size = 2 * 1024;
   /// When true, output de-interleaved DSD bitstream instead of converting to PCM
   bool is_raw = false;
 };
