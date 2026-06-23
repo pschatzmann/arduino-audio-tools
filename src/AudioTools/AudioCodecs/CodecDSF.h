@@ -214,7 +214,7 @@ class DSFDecoder : public AudioDecoder {
 
     if (meta.is_raw) {
       size_t rawLen = len - startPos;
-      getOutput()->write(data + startPos, rawLen);
+      writeBlocking(getOutput(),(uint8_t*) data + startPos, rawLen);
       return rawLen;
     }
 
@@ -275,14 +275,16 @@ class DSFDecoder : public AudioDecoder {
 
       if (pcmBuffer.isFull()) {
         size_t frameSize = pcmBuffer.available();
-        size_t written =
-            getOutput()->write((uint8_t*)pcmBuffer.data(), frameSize);
-        if (written != frameSize) {
-          LOGE("Failed to write PCM: expected %zu, wrote %zu", frameSize,
-               written);
-        }
+        writeBlocking(getOutput(), (uint8_t*)pcmBuffer.data(), frameSize);
         pcmBuffer.reset();
       }
+    }
+
+    // Flush remaining PCM samples
+    if (pcmBuffer.available() > 0) {
+      writeBlocking(getOutput(), (uint8_t*)pcmBuffer.data(),
+                    pcmBuffer.available());
+      pcmBuffer.reset();
     }
 
     // Compact linear buffers so write space is reclaimed
@@ -627,7 +629,7 @@ class DSFEncoder : public AudioEncoder {
 
   void writeBlockSet() {
     for (int ch = 0; ch < meta.channels; ch++) {
-      p_print->write((uint8_t*)channelBlocks[ch].data(),
+      writeBlocking(p_print, (uint8_t*)channelBlocks[ch].data(),
                      channelBlocks[ch].available());
       totalDsdBytes += channelBlocks[ch].available();
       channelBlocks[ch].reset();
