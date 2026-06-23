@@ -1,5 +1,7 @@
 #pragma once
+#ifdef ARDUINO
 #include <WiFi.h>
+#endif
 #include <esp_now.h>
 #include <esp_wifi.h>
 
@@ -37,7 +39,7 @@ static const uint8_t BROADCAST_MAC[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
  */
 struct ESPNowStreamConfig {
   /// WiFi mode (station or access point). Default: WIFI_STA
-  wifi_mode_t wifi_mode = WIFI_STA;
+  wifi_mode_t wifi_mode = WIFI_MODE_STA;
   /// MAC address to use for the ESP-NOW interface (nullptr for default).
   /// Default: nullptr
   const char* mac_address = nullptr;
@@ -100,8 +102,6 @@ struct ESPNowStreamConfig {
  *
  * @note If multiple receivers are in range, only the first one which sends an
  * acknowledgment will be used as coordinator.
- * 
- * @note Supported only on ESP32 platforms with WiFi support: Arduino and IDF
  *
  * @ingroup communications
  * @author Phil Schatzmann
@@ -122,8 +122,17 @@ class ESPNowStream : public BaseStream {
 
   /// Returns the mac address of the current ESP32
   const char* macAddress() {
+#ifdef ARDUINO
     static String mac_str = WiFi.macAddress();
     return mac_str.c_str();
+#else
+    static char mac_str[18] = {0};
+    uint8_t mac[6];
+    esp_wifi_get_mac(getInterface(), mac);
+    snprintf(mac_str, sizeof(mac_str), "%02X:%02X:%02X:%02X:%02X:%02X",
+             mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
+    return mac_str;
+#endif
   }
 
   /// Defines an alternative send callback
@@ -139,17 +148,39 @@ class ESPNowStream : public BaseStream {
   /// Initialization of ESPNow incl WIFI
   virtual bool begin(ESPNowStreamConfig cfg) {
     this->cfg = cfg;
+#ifdef ARDUINO
     if (WiFi.getMode() == WIFI_MODE_NULL) {
       WiFi.mode(cfg.wifi_mode);
     } else {
       cfg.wifi_mode = WiFi.getMode();
     }
+#else
+    wifi_mode_t mode;
+    esp_err_t ret = esp_wifi_get_mode(&mode);
+    if (ret == ESP_OK) {
+      if (mode == WIFI_MODE_NULL) {
+        esp_wifi_set_mode(cfg.wifi_mode);
+      } else {
+        cfg.wifi_mode = mode;
+      }
+    } else {
+      if (!initWiFi(cfg.wifi_mode)) return false;
+    }
+#endif
 
     if (!setupMAC()) return false;
 
     if (!setupWiFi()) return false;
 
+#ifdef ARDUINO
     WiFi.enableLongRange(cfg.use_long_range);
+#else
+    uint8_t proto = WIFI_PROTOCOL_11B | WIFI_PROTOCOL_11G | WIFI_PROTOCOL_11N;
+    if (cfg.use_long_range) {
+      proto |= WIFI_PROTOCOL_LR;
+    }
+    esp_wifi_set_protocol(getInterface(), proto);
+#endif
 
 #if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0, 0)
     LOGI("Setting ESP-NEW rate");
@@ -160,10 +191,8 @@ class ESPNowStream : public BaseStream {
     if (cfg.channel > 0) {
       setChannel(cfg.channel);
     }
-    Serial.print("mac:     ");
-    Serial.println(WiFi.macAddress());
-    Serial.print("channel: ");
-    Serial.println(getChannel());
+    LOGI("mac:     %s", macAddress());
+    LOGI("channel: %d", getChannel());
     return setup();
   }
 
@@ -183,14 +212,25 @@ class ESPNowStream : public BaseStream {
 
   /// Defines the WiFi Channel
   void setChannel(uint8_t ch) {
+#ifdef ARDUINO
     WiFi.setChannel(ch, WIFI_SECOND_CHAN_NONE);
+#else
+    esp_wifi_set_channel(ch, WIFI_SECOND_CHAN_NONE);
+#endif
     cfg.channel = ch;
   }
 
-  /// Provies the WiFi Channel
+  /// Provides the WiFi Channel
   uint8_t getChannel() {
+#ifdef ARDUINO
     uint32_t ch = WiFi.channel();
     return (uint8_t)ch ^ 0xff;
+#else
+    uint8_t primary;
+    wifi_second_chan_t second;
+    esp_wifi_get_channel(&primary, &second);
+    return primary;
+#endif
   }
 
   /// Adds a peer to which we can send info or from which we can receive info
@@ -411,14 +451,14 @@ class ESPNowStream : public BaseStream {
     // set mac address
     if (cfg.mac_address != nullptr) {
       LOGI("setting mac %s", cfg.mac_address);
-      byte mac[ESP_NOW_KEY_LEN];
+      uint8_t mac[ESP_NOW_KEY_LEN];
       str2mac(cfg.mac_address, mac);
-      if (esp_wifi_set_mac((wifi_interface_t)getInterface(), mac) != ESP_OK) {
+      if (esp_wifi_set_mac(getInterface(), mac) != ESP_OK) {
         LOGE("Could not set mac address");
         return false;
       }
 
-      // On some boards calling macAddress to early leads to a race condition.
+      // On some boards calling macAddress too early leads to a race condition.
       delay(cfg.delay_after_updating_mac_ms);
 
       // checking if address has been updated
@@ -432,25 +472,47 @@ class ESPNowStream : public BaseStream {
   }
 
   bool setupWiFi() {
+#ifdef ARDUINO
     if (WiFi.status() != WL_CONNECTED) {
-      // start only when not connected and we have ssid and password
       if (cfg.ssid != nullptr && cfg.password != nullptr) {
-        LOGI("Logging into WiFi: %s", cfg.ssid);
+        LOGI("Connecting to WiFi: %s", cfg.ssid);
         WiFi.begin(cfg.ssid, cfg.password);
         while (WiFi.status() != WL_CONNECTED) {
-          Serial.print('.');
           delay(1000);
         }
       }
-      Serial.println();
     }
-
-    // in AP mode we neeed to be logged in!
-    if (WiFi.getMode() == WIFI_AP && WiFi.status() != WL_CONNECTED) {
+    if (WiFi.getMode() == WIFI_MODE_AP && WiFi.status() != WL_CONNECTED) {
       LOGE("You did not start Wifi or did not provide ssid and password");
       return false;
     }
-
+#else
+    if (cfg.ssid != nullptr && cfg.password != nullptr) {
+      wifi_ap_record_t ap_info;
+      if (esp_wifi_sta_get_ap_info(&ap_info) != ESP_OK) {
+        LOGI("Connecting to WiFi: %s", cfg.ssid);
+        wifi_config_t wifi_config = {};
+        strncpy((char*)wifi_config.sta.ssid, cfg.ssid,
+                sizeof(wifi_config.sta.ssid) - 1);
+        strncpy((char*)wifi_config.sta.password, cfg.password,
+                sizeof(wifi_config.sta.password) - 1);
+        esp_wifi_set_config(getInterface(), &wifi_config);
+        esp_wifi_connect();
+        for (int i = 0; i < 30; i++) {
+          if (esp_wifi_sta_get_ap_info(&ap_info) == ESP_OK) break;
+          delay(1000);
+        }
+      }
+    }
+    wifi_mode_t mode;
+    if (esp_wifi_get_mode(&mode) == ESP_OK && mode == WIFI_MODE_AP) {
+      wifi_ap_record_t ap_info;
+      if (esp_wifi_sta_get_ap_info(&ap_info) != ESP_OK) {
+        LOGE("You did not start Wifi or did not provide ssid and password");
+        return false;
+      }
+    }
+#endif
     return true;
   }
 
@@ -618,21 +680,38 @@ class ESPNowStream : public BaseStream {
   }
 
   wifi_interface_t getInterface() {
-    // define wifi_interface_t
-    wifi_interface_t result;
     switch (cfg.wifi_mode) {
-      case WIFI_STA:
-        result = (wifi_interface_t)ESP_IF_WIFI_STA;
-        break;
-      case WIFI_AP:
-        result = (wifi_interface_t)ESP_IF_WIFI_AP;
-        break;
+      case WIFI_MODE_STA:
+        return WIFI_IF_STA;
+      case WIFI_MODE_AP:
+        return WIFI_IF_AP;
       default:
-        result = (wifi_interface_t)0;
-        break;
+        return WIFI_IF_STA;
     }
-    return result;
   }
+
+#ifndef ARDUINO
+  bool initWiFi(wifi_mode_t mode) {
+    wifi_init_config_t wifi_init_cfg = WIFI_INIT_CONFIG_DEFAULT();
+    esp_err_t ret = esp_wifi_init(&wifi_init_cfg);
+    if (ret != ESP_OK) {
+      LOGE("esp_wifi_init: %s (ensure NVS and netif are initialized)",
+           esp_err_to_name(ret));
+      return false;
+    }
+    ret = esp_wifi_set_mode(mode);
+    if (ret != ESP_OK) {
+      LOGE("esp_wifi_set_mode: %s", esp_err_to_name(ret));
+      return false;
+    }
+    ret = esp_wifi_start();
+    if (ret != ESP_OK) {
+      LOGE("esp_wifi_start: %s", esp_err_to_name(ret));
+      return false;
+    }
+    return true;
+  }
+#endif
 
   /// Initialization
   bool setup() {

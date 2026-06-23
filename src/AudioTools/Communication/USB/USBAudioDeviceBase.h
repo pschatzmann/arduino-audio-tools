@@ -102,6 +102,11 @@ static constexpr uint8_t kNumSupportedSampleRates =
  * over USB. It supports multiple audio formats, feedback methods, and endpoint
  * configurations, and is designed for use with TinyUSB or native USB on
  * supported MCUs.
+ * 
+ * @author Phil Schatzmann
+ * @ingroup usb
+ * @ingroup io
+ * @copyright GPLv3
  */
 class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
   /**
@@ -251,6 +256,11 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
 
   /** @brief Change the sample rate and notify the host. */
   void setAudioInfo(AudioInfo info) override {
+    if (!isValidBitsPerSample(info.bits_per_sample)) {
+      LOGE("Unsupported bits_per_sample: %d (must be 16, 24, or 32)",
+           info.bits_per_sample);
+      return;
+    }
     // full flexibility when not started yet
     if (!is_started_) {
       config_.sample_rate = info.sample_rate;
@@ -306,6 +316,12 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
    *  @return true on success. */
   bool begin() {
     if (!is_started_) {
+      if (!isValidBitsPerSample(config_.bits_per_sample)) {
+        LOGE("Unsupported bits_per_sample: %d (must be 16, 24, or 32)",
+             config_.bits_per_sample);
+        return false;
+      }
+
       // Resize platform buffers — virtual so each platform uses the right API.
       resizeBuffers();
 
@@ -347,12 +363,6 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
     is_active_ = true;
     return true;
   }
-  /**
-   * @brief Set the USB audio configuration.
-   * @param cfg Reference to a USBAudioConfig structure with desired settings.
-   */
-  void setConfig(const USBAudioConfig& cfg) { config_ = cfg; }
-
   /**
    * @brief Returns the most-recently-constructed instance (base or subclass).
    *
@@ -399,6 +409,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
    *  @param channel  0 = master, 1..N = per-channel.
    *  @return true if the channel index was valid. */
   bool setVolume(float vol, uint8_t channel) {
+    LOGW("setVolume %f channel: %d", vol, channel);
     if (channel >= volume_.size()) return false;
     volume_[channel] = vol;
     if (volume_cb_) volume_cb_(vol, channel);
@@ -418,6 +429,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
    *  @param channel  0 = master, 1..N = per-channel.
    *  @return true if the channel index was valid. */
   bool setMute(bool m, uint8_t channel = 0) {
+    LOGW("setMute %s channel: %d", m ? "true" : "false", channel);
     if (channel >= mute_.size()) return false;
     mute_[channel] = m;
     if (mute_cb_) mute_cb_(m, channel);
@@ -447,9 +459,14 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
     sample_rate_cb_ = std::move(cb);
   }
 
-  /** @brief Returns true when the host has selected the streaming alternate
-   *  setting (alt > 0) and opened the isochronous IN endpoint.  Use this to
-   *  decide whether to buffer TX audio or silently discard it. */
+  /** @brief Register a callback invoked when the streaming state changes.
+   *  Fires when the host opens or closes a streaming interface (SET_INTERFACE
+   *  alt=1 / alt=0).
+   *  @param cb  Callback receiving (bool active_tx, bool active_rx). */
+  void setStreamingStateCallback(std::function<void(bool, bool)> cb) {
+    streaming_state_cb_ = std::move(cb);
+  }
+
   /** @brief Returns true if either IN or OUT streaming endpoint is open. */
   bool isStreamingActive() const {
     return isStreamingActiveTx() || isStreamingActiveRx();
@@ -676,6 +693,9 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
     return bufferTx().availableForWrite();
   }
 
+  /// Returns true when begin() has been called and the USB host has mounted the device.
+  operator bool() override { return is_started_ && mounted(); }
+
   /** @brief Stop audio streaming and clear FIFOs. Does not disconnect USB. */
   void end() {
     for (auto& audio : audiod_fct_) {
@@ -777,16 +797,19 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
   /// xferred_bytes from the previous completed transfer (what the DCD actually
   /// sent).
   uint32_t getTxXferredLast() const { return tx_xferred_last_; }
-  /// Flow control params — all must be non-zero for proper frame sizing.
+  /// TX sample rate parsed from the descriptor (must be non-zero for flow control).
   uint32_t getTxSampleRate() const {
     return audiod_fct_.empty() ? 0 : audiod_fct_[0].sample_rate_tx;
   }
+  /// TX channel count parsed from the descriptor.
   uint8_t getTxChannels() const {
     return audiod_fct_.empty() ? 0 : audiod_fct_[0].n_channels_tx;
   }
+  /// TX bytes per sample parsed from the descriptor.
   uint8_t getTxBytesPerSample() const {
     return audiod_fct_.empty() ? 0 : audiod_fct_[0].n_bytes_per_sample_tx;
   }
+  /// TX isochronous interval (bInterval) parsed from the descriptor.
   uint8_t getTxInterval() const {
     return audiod_fct_.empty() ? 0 : audiod_fct_[0].interval_tx;
   }
@@ -807,6 +830,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
   std::function<void(float, uint8_t)> volume_cb_;
   std::function<void(bool, uint8_t)> mute_cb_;
   std::function<void(uint32_t)> sample_rate_cb_;
+  std::function<void(bool, bool)> streaming_state_cb_;
   USBAudioConfig config_;
   USBAudioConfig active_config_;
   USBAudio2DescriptorBuilder descr_builder{config_};
@@ -873,6 +897,9 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
   // reach the last-constructed instance without a singleton.
   inline static USBAudioDeviceBase* s_active_ = nullptr;
 
+  /// Set the USB audio configuration (use begin(cfg) instead).
+  void setConfig(const USBAudioConfig& cfg) { config_ = cfg; }
+
   /** @brief Process pending USB events on platforms where the application
    *         drives the stack (RP2040).  No-op on ESP32 where a dedicated
    *         FreeRTOS task calls tud_task() continuously. */
@@ -898,7 +925,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
         processVolume<int16_t>((int16_t*)data, len / 2);
         break;
       case 24:
-        processVolume<int24_t>((int24_t*)data, len / sizeof(int24_t));
+        processVolume<int24_3bytes_t>((int24_3bytes_t*)data, len / 3);
         break;
       case 32:
         processVolume<int32_t>((int32_t*)data, len / 4);
@@ -941,9 +968,10 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
   void setSampleRate(uint32_t rate) {
     bool rate_updated = rate != config_.sample_rate;
     config_.sample_rate = rate;
+    LOGW("Sample rate changed to %u Hz", rate);
     if (rate_updated) {
       notifyAudioChange(config_);
-      resizeBuffers();  // block size depends on packetSize() which uses sample_rate
+      resizeBuffers();
     }
     for (auto& fct : audiod_fct_) fct.sample_rate_tx = rate;
     if (sample_rate_cb_) sample_rate_cb_(rate);
@@ -966,19 +994,23 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
 
   /** @brief Convert AudioTools volume (0.0–1.0) to UAC2 int16 (1/256 dB).
    *  0.0 maps to 0x8000 (silence), 1.0 maps to 0 (0 dB). */
+  static constexpr int16_t kVolumeMinDb256 = -25600;  // -100 dB in 1/256 dB
+
+  /** @brief Convert linear volume (0.0–1.0) to UAC2 int16 (1/256 dB).
+   *  Linear mapping: 0.0 → -100 dB (min), 1.0 → 0 dB (max). */
   static int16_t floatToUac2(float vol) {
     if (vol <= 0.0f) return (int16_t)0x8000;
     if (vol >= 1.0f) return 0;
-    float db = 20.0f * log10f(vol);
-    int16_t r = (int16_t)(db * 256.0f);
-    return (r < -25600) ? (int16_t)-25600 : r;
+    return (int16_t)((1.0f - vol) * kVolumeMinDb256);
   }
 
-  /** @brief Convert UAC2 int16 (1/256 dB) to AudioTools volume (0.0–1.0).
-   *  0x8000 maps to 0.0 (silence), 0 maps to 1.0 (0 dB). */
+  /** @brief Convert UAC2 int16 (1/256 dB) to linear volume (0.0–1.0).
+   *  Linear mapping within the -100..0 dB range reported by GET_RANGE. */
   static float uac2ToFloat(int16_t v) {
     if (v == (int16_t)0x8000) return 0.0f;
-    return powf(10.0f, v / 256.0f / 20.0f);
+    if (v >= 0) return 1.0f;
+    if (v <= kVolumeMinDb256) return 0.0f;
+    return 1.0f - (float)v / (float)kVolumeMinDb256;
   }
 
   /** @brief Returns true if the given entity ID is a Feature Unit (FU1 or FU2).
@@ -1036,6 +1068,15 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
   bool isUseLinearBufferRx() const { return config_.use_linear_buffer_rx; }
 
   bool isUseLinearBufferTx() const { return config_.use_linear_buffer_tx; }
+
+  static bool isValidBitsPerSample(uint8_t bps) {
+    return bps == 16 || bps == 24 || bps == 32;
+  }
+
+  void notifyStreamingState() {
+    if (streaming_state_cb_)
+      streaming_state_cb_(isStreamingActiveTx(), isStreamingActiveRx());
+  }
 
   // Max Bytes for one 1 ms isochronous USB packet.
   uint16_t packetSize() const { return descr_builder.calcMaxPacketSize(); }
@@ -1946,6 +1987,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
       audio->packet_sz_tx[1] = 0;
       audio->packet_sz_tx[2] = 0;
     }
+    notifyStreamingState();
   }
 
   void closeEpOut(uint8_t rhport, audiod_function_t* audio, uint8_t itf,
@@ -1963,6 +2005,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
       audio->ep_fb = 0;
       tu_memclr(&audio->feedback, sizeof(audio->feedback));
     }
+    notifyStreamingState();
   }
 
   // ── Activate a single endpoint found in the descriptor ────────────────
@@ -2001,6 +2044,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
     audio->lin_buf_in.assign(audio->ep_in_sz, 0);
     tx_xfer_armed_ = TUSB_EDPT_XFER(rhport, audio->ep_in,
                                     audio->lin_buf_in.data(), first_pkt);
+    notifyStreamingState();
   }
 
   // ── Open the OUT (RX) data endpoint ───────────────────────────────────
@@ -2029,6 +2073,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
                                           audio->ep_out_sz);
       LOGD("  XFER_FIFO armed: %s", xfer_ok ? "OK" : "FAIL");
     }
+    notifyStreamingState();
   }
 
   // ── Open the explicit feedback endpoint ───────────────────────────────

@@ -30,6 +30,7 @@ namespace audio_tools {
  *   - `CONFIG_USBD_UAC2=y`, `CONFIG_USB_DEVICE_STACK_NEXT=y`.
  *
  * @ingroup io
+ * @ingroup usb
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -51,8 +52,6 @@ class USBAudioDeviceZephyr {
     cfg.terminal_id = 1;
     return cfg;
   }
-
-  void setConfig(const USBAudioConfig& cfg) { config_ = cfg; }
 
   bool begin(const USBAudioConfig& cfg) {
     config_ = cfg;
@@ -131,15 +130,13 @@ class USBAudioDeviceZephyr {
   /// True while the USB host is actively streaming.
   bool mounted() const { return streaming_; }
 
-  /** @brief Returns the TX audio buffer.  Override in platform subclasses
-   *  to provide a cross-core safe implementation (e.g. BufferRTOS on ESP32).
-   *  The default RingBuffer is suitable for single-core platforms (RP2040). */
+ private:
+  /** @brief Returns the TX audio buffer. */
   BaseBuffer<uint8_t>& bufferTx() override { return default_buffer_tx_; }
 
-  /** @brief Returns the RX audio buffer.  Same override rules as bufferTx(). */
+  /** @brief Returns the RX audio buffer. */
   BaseBuffer<uint8_t>& bufferRx() override { return default_buffer_rx_; }
 
- private:
   // ── Default audio buffers (RingBuffer, suitable for single-core platforms) ─
   RingBuffer<uint8_t> default_buffer_tx_{1};
   RingBuffer<uint8_t> default_buffer_rx_{1};
@@ -249,6 +246,13 @@ class USBAudioDeviceZephyr {
   static constexpr uint8_t kPipelineDepth = 3;
 };
 
+/**
+ * @brief USBAudioStream type alias for Zephyr RTOS.  
+ * @ingroup usb
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ * 
+ */
 using USBAudioStream = USBAudioDeviceZephyr;
 
 }  // namespace audio_tools
