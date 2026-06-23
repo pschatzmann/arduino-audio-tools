@@ -80,7 +80,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classaudio__tools_1_1_f_i_r.html" title="FIR Filter Converted from https://github.com/sebnil/FIR-filter-Arduino-Library/tree/master/src You ca...">FIR</a> <a class="el" href="classaudio__tools_1_1_filter.html" title="Abstract filter interface definition;.">Filter</a> Converted from <a href="https://github.com/sebnil/FIR-filter-Arduino-Library/tree/master/src">https://github.com/sebnil/FIR-filter-Arduino-Library/tree/master/src</a> You can use <a href="https://www.arc.id.au/FilterDesign.html">https://www.arc.id.au/FilterDesign.html</a> to design the filter.  
+<p>Finite Impulse Response (<a class="el" href="classaudio__tools_1_1_f_i_r.html" title="Finite Impulse Response (FIR) filter. Performs convolution of the input signal with a set of feedforw...">FIR</a>) filter. Performs convolution of the input signal with a set of feedforward coefficients b[]. For integer types, an optional scaling factor is applied to preserve precision. You can use <a href="https://www.arc.id.au/FilterDesign.html">https://www.arc.id.au/FilterDesign.html</a> to design the coefficients.  
  <a href="classaudio__tools_1_1_f_i_r.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_filter_8h_source.html">Filter.h</a>&gt;</code></p>
@@ -90,7 +90,7 @@ Inheritance diagram for FIR&lt; T &gt;:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_f_i_r.png" usemap="#FIR_3C_20T_20_3E_map" alt=""/>
   <map id="FIR_3C_20T_20_3E_map" name="FIR_3C_20T_20_3E_map">
-<area href="classaudio__tools_1_1_filter.html" title="Abstract filter interface definition;." alt="Filter&lt; T &gt;" shape="rect" coords="0,0,72,24"/>
+<area href="classaudio__tools_1_1_filter.html" title="Abstract filter interface definition. Subclasses implement process() to transform audio samples one a..." alt="Filter&lt; T &gt;" shape="rect" coords="0,0,72,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -100,16 +100,25 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5f5bc421d5475afeb10b91936d84ae2e"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_i_r.html#a5f5bc421d5475afeb10b91936d84ae2e">FIR</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>(&amp;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">b</a>)[<a class="el" href="group__basic.html#gga5b1869d184b84711842bfe4f25433338a9d5ed678fe57bcca610140957afab571">B</a>], <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> factor=1.0)</td></tr>
 <tr class="separator:a5f5bc421d5475afeb10b91936d84ae2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a048b29c6a000503a52c293e8fd973847" id="r_a048b29c6a000503a52c293e8fd973847"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_i_r.html#a048b29c6a000503a52c293e8fd973847">process</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> value) <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
+<tr class="memdesc:a048b29c6a000503a52c293e8fd973847"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes the input value and returns the filtered output value.  <br /></td></tr>
 <tr class="separator:a048b29c6a000503a52c293e8fd973847"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebfcdbbd0fe4efbff10b180be50ca6bc" id="r_aebfcdbbd0fe4efbff10b180be50ca6bc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_i_r.html#aebfcdbbd0fe4efbff10b180be50ca6bc">reset</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
+<tr class="separator:aebfcdbbd0fe4efbff10b180be50ca6bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5226f180d75240258d4ff103e2970127" id="r_a5226f180d75240258d4ff103e2970127"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> B&gt; </td></tr>
 <tr class="memitem:a5226f180d75240258d4ff103e2970127"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_i_r.html#a5226f180d75240258d4ff103e2970127">setValues</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>(&amp;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">b</a>)[<a class="el" href="group__basic.html#gga5b1869d184b84711842bfe4f25433338a9d5ed678fe57bcca610140957afab571">B</a>])</td></tr>
 <tr class="separator:a5226f180d75240258d4ff103e2970127"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>&gt;<br />
-class audio_tools::FIR&lt; T &gt;</div><p><a class="el" href="classaudio__tools_1_1_f_i_r.html" title="FIR Filter Converted from https://github.com/sebnil/FIR-filter-Arduino-Library/tree/master/src You ca...">FIR</a> <a class="el" href="classaudio__tools_1_1_filter.html" title="Abstract filter interface definition;.">Filter</a> Converted from <a href="https://github.com/sebnil/FIR-filter-Arduino-Library/tree/master/src">https://github.com/sebnil/FIR-filter-Arduino-Library/tree/master/src</a> You can use <a href="https://www.arc.id.au/FilterDesign.html">https://www.arc.id.au/FilterDesign.html</a> to design the filter. </p>
+class audio_tools::FIR&lt; T &gt;</div><p>Finite Impulse Response (<a class="el" href="classaudio__tools_1_1_f_i_r.html" title="Finite Impulse Response (FIR) filter. Performs convolution of the input signal with a set of feedforw...">FIR</a>) filter. Performs convolution of the input signal with a set of feedforward coefficients b[]. For integer types, an optional scaling factor is applied to preserve precision. You can use <a href="https://www.arc.id.au/FilterDesign.html">https://www.arc.id.au/FilterDesign.html</a> to design the coefficients. </p>
 <dl class="section author"><dt>Author</dt><dd>Pieter P tttapa / pschatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GNU General Public License v3.0 </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>sample type (float, double, or integer types with a scaling factor) </td></tr>
+  </table>
+  </dd>
+</dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a5f5bc421d5475afeb10b91936d84ae2e" name="a5f5bc421d5475afeb10b91936d84ae2e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5f5bc421d5475afeb10b91936d84ae2e">&#9670;&#160;</a></span>FIR()</h2>
@@ -167,7 +176,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
           <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> process </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>&#160;</td>
-          <td class="paramname"><em>value</em></td><td>)</td>
+          <td class="paramname"><em>in</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -178,7 +187,39 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 </table>
 </div><div class="memdoc">
 
+<p>Processes the input value and returns the filtered output value. </p>
+
 <p>Implements <a class="el" href="classaudio__tools_1_1_filter.html#acd1ddbd60df780b8bad4a79ceb0a00e9">Filter&lt; T &gt;</a>.</p>
+
+</div>
+</div>
+<a id="aebfcdbbd0fe4efbff10b180be50ca6bc" name="aebfcdbbd0fe4efbff10b180be50ca6bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebfcdbbd0fe4efbff10b180be50ca6bc">&#9670;&#160;</a></span>reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> reset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Clears the internal state (delay lines) without changing the coefficients. Call after reconfiguring filter parameters via begin() to avoid transients from stale state. </p>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_filter.html#a7b0e029102ad38f4b814c6523aedb53d">Filter&lt; T &gt;</a>.</p>
 
 </div>
 </div>

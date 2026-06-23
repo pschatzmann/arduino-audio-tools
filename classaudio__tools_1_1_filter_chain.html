@@ -80,7 +80,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classaudio__tools_1_1_filter_chain.html" title="FilterChain - A Cascade of multiple filters.">FilterChain</a> - A Cascade of multiple filters.  
+<p>A cascade of N arbitrary filters applied in series. Each sample is passed through all filters in order. The caller owns the filter pointers and must ensure they outlive the chain.  
  <a href="classaudio__tools_1_1_filter_chain.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_filter_8h_source.html">Filter.h</a>&gt;</code></p>
@@ -90,7 +90,7 @@ Inheritance diagram for FilterChain&lt; T, N &gt;:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_filter_chain.png" usemap="#FilterChain_3C_20T_2C_20N_20_3E_map" alt=""/>
   <map id="FilterChain_3C_20T_2C_20N_20_3E_map" name="FilterChain_3C_20T_2C_20N_20_3E_map">
-<area href="classaudio__tools_1_1_filter.html" title="Abstract filter interface definition;." alt="Filter&lt; T &gt;" shape="rect" coords="0,0,123,24"/>
+<area href="classaudio__tools_1_1_filter.html" title="Abstract filter interface definition. Subclasses implement process() to transform audio samples one a..." alt="Filter&lt; T &gt;" shape="rect" coords="0,0,123,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -99,15 +99,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aed7f65dd52b006e116cfff7e27eba99d" id="r_aed7f65dd52b006e116cfff7e27eba99d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_filter_chain.html#aed7f65dd52b006e116cfff7e27eba99d">FilterChain</a> (<a class="el" href="classaudio__tools_1_1_filter.html">Filter</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; *(&amp;&amp;filters)[N])</td></tr>
 <tr class="separator:aed7f65dd52b006e116cfff7e27eba99d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a048b29c6a000503a52c293e8fd973847" id="r_a048b29c6a000503a52c293e8fd973847"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_filter_chain.html#a048b29c6a000503a52c293e8fd973847">process</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> value) <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
+<tr class="memdesc:a048b29c6a000503a52c293e8fd973847"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes the input value and returns the filtered output value.  <br /></td></tr>
 <tr class="separator:a048b29c6a000503a52c293e8fd973847"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebfcdbbd0fe4efbff10b180be50ca6bc" id="r_aebfcdbbd0fe4efbff10b180be50ca6bc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_filter_chain.html#aebfcdbbd0fe4efbff10b180be50ca6bc">reset</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
+<tr class="separator:aebfcdbbd0fe4efbff10b180be50ca6bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> N&gt;<br />
-class audio_tools::FilterChain&lt; T, N &gt;</div><p><a class="el" href="classaudio__tools_1_1_filter_chain.html" title="FilterChain - A Cascade of multiple filters.">FilterChain</a> - A Cascade of multiple filters. </p>
+class audio_tools::FilterChain&lt; T, N &gt;</div><p>A cascade of N arbitrary filters applied in series. Each sample is passed through all filters in order. The caller owns the filter pointers and must ensure they outlive the chain. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td></td></tr>
-    <tr><td class="paramname">N</td><td></td></tr>
+    <tr><td class="paramname">T</td><td>sample type </td></tr>
+    <tr><td class="paramname">N</td><td>number of filters in the chain </td></tr>
   </table>
   </dd>
 </dl>
@@ -156,7 +159,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
           <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> process </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>&#160;</td>
-          <td class="paramname"><em>value</em></td><td>)</td>
+          <td class="paramname"><em>in</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -167,7 +170,39 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 </table>
 </div><div class="memdoc">
 
+<p>Processes the input value and returns the filtered output value. </p>
+
 <p>Implements <a class="el" href="classaudio__tools_1_1_filter.html#acd1ddbd60df780b8bad4a79ceb0a00e9">Filter&lt; T &gt;</a>.</p>
+
+</div>
+</div>
+<a id="aebfcdbbd0fe4efbff10b180be50ca6bc" name="aebfcdbbd0fe4efbff10b180be50ca6bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebfcdbbd0fe4efbff10b180be50ca6bc">&#9670;&#160;</a></span>reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> N&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> reset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Clears the internal state (delay lines) without changing the coefficients. Call after reconfiguring filter parameters via begin() to avoid transients from stale state. </p>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_filter.html#a7b0e029102ad38f4b814c6523aedb53d">Filter&lt; T &gt;</a>.</p>
 
 </div>
 </div>

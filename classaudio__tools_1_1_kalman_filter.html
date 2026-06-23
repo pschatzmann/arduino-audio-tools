@@ -81,7 +81,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Simple 1D Kalman <a class="el" href="classaudio__tools_1_1_filter.html" title="Abstract filter interface definition;.">Filter</a> for smoothing measurements.  
+<p>Simple 1D Kalman <a class="el" href="classaudio__tools_1_1_filter.html" title="Abstract filter interface definition. Subclasses implement process() to transform audio samples one a...">Filter</a> for smoothing measurements.  
  <a href="classaudio__tools_1_1_kalman_filter.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_kalman_filter_8h_source.html">KalmanFilter.h</a>&gt;</code></p>
@@ -89,7 +89,7 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ab197d4e9751913fc626746e3880ce745" id="r_ab197d4e9751913fc626746e3880ce745"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_kalman_filter.html#ab197d4e9751913fc626746e3880ce745">KalmanFilter</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">process_noise</a>=0.01<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">f</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">measurement_noise</a>=1.0f)</td></tr>
-<tr class="memdesc:ab197d4e9751913fc626746e3880ce745"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Kalman <a class="el" href="classaudio__tools_1_1_filter.html" title="Abstract filter interface definition;.">Filter</a> object.  <br /></td></tr>
+<tr class="memdesc:ab197d4e9751913fc626746e3880ce745"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Kalman <a class="el" href="classaudio__tools_1_1_filter.html" title="Abstract filter interface definition. Subclasses implement process() to transform audio samples one a...">Filter</a> object.  <br /></td></tr>
 <tr class="separator:ab197d4e9751913fc626746e3880ce745"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8e6e855234cc17c59226082fd64f513" id="r_ae8e6e855234cc17c59226082fd64f513"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_kalman_filter.html#ae8e6e855234cc17c59226082fd64f513">addMeasurement</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">measurement</a>)</td></tr>
 <tr class="memdesc:ae8e6e855234cc17c59226082fd64f513"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the filter with a new measurement and returns the filtered value.  <br /></td></tr>
@@ -126,7 +126,7 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ab3c4b737dfc5c78a6aba50dda616f7c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Simple 1D Kalman <a class="el" href="classaudio__tools_1_1_filter.html" title="Abstract filter interface definition;.">Filter</a> for smoothing measurements. </p>
+<div class="textblock"><p>Simple 1D Kalman <a class="el" href="classaudio__tools_1_1_filter.html" title="Abstract filter interface definition. Subclasses implement process() to transform audio samples one a...">Filter</a> for smoothing measurements. </p>
 <p>This class implements a basic one-dimensional Kalman filter for smoothing noisy measurements. It is useful for sensor data fusion and signal processing applications where noise reduction is required.</p>
 <p>The Kalman filter uses two main parameters:</p><ul>
 <li><b>process_noise</b> (Q): Represents the expected process variance. A typical default is 0.01.</li>
@@ -170,7 +170,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Construct a new Kalman <a class="el" href="classaudio__tools_1_1_filter.html" title="Abstract filter interface definition;.">Filter</a> object. </p>
+<p>Construct a new Kalman <a class="el" href="classaudio__tools_1_1_filter.html" title="Abstract filter interface definition. Subclasses implement process() to transform audio samples one a...">Filter</a> object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">process_noise</td><td>The process noise covariance (Q). Default is 0.01. </td></tr>

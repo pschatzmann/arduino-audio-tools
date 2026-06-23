@@ -84,7 +84,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>N-Band Equalizer using <a class="el" href="classaudio__tools_1_1_f_i_r.html" title="FIR Filter Converted from https://github.com/sebnil/FIR-filter-Arduino-Library/tree/master/src You ca...">FIR</a> filters with logarithmically spaced bands.  
+<p>N-Band Equalizer using <a class="el" href="classaudio__tools_1_1_f_i_r.html" title="Finite Impulse Response (FIR) filter. Performs convolution of the input signal with a set of feedforw...">FIR</a> filters with logarithmically spaced bands.  
  <a href="classaudio__tools_1_1_equalizer_n_bands.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_equalizer_n_bands_8h_source.html">EqualizerNBands.h</a>&gt;</code></p>
@@ -251,7 +251,7 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:ab7fb50b4c3325fb4754a452d97dcfb29" id="r_ab7fb50b4c3325fb4754a452d97dcfb29"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_filtered_stream.html">FilteredStream</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">SampleT</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">SampleT</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_equalizer_n_bands.html#ab7fb50b4c3325fb4754a452d97dcfb29">filtered</a></td></tr>
 <tr class="separator:ab7fb50b4c3325fb4754a452d97dcfb29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af68da82752b7feda4f78bdfe20c1dee4" id="r_af68da82752b7feda4f78bdfe20c1dee4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_equalizer_n_bands_1_1_e_q_f_i_r_filter.html">EQFIRFilter</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_equalizer_n_bands.html#af68da82752b7feda4f78bdfe20c1dee4">fir_vector</a></td></tr>
-<tr class="memdesc:af68da82752b7feda4f78bdfe20c1dee4"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_vector.html" title="Vector implementation which provides the most important methods as defined by std::vector....">Vector</a> of <a class="el" href="classaudio__tools_1_1_f_i_r.html" title="FIR Filter Converted from https://github.com/sebnil/FIR-filter-Arduino-Library/tree/master/src You ca...">FIR</a> filters for each channel.  <br /></td></tr>
+<tr class="memdesc:af68da82752b7feda4f78bdfe20c1dee4"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_vector.html" title="Vector implementation which provides the most important methods as defined by std::vector....">Vector</a> of <a class="el" href="classaudio__tools_1_1_f_i_r.html" title="Finite Impulse Response (FIR) filter. Performs convolution of the input signal with a set of feedforw...">FIR</a> filters for each channel.  <br /></td></tr>
 <tr class="separator:af68da82752b7feda4f78bdfe20c1dee4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad620e7254ac33f90089a44f59416c09e" id="r_ad620e7254ac33f90089a44f59416c09e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_equalizer_n_bands.html#ad620e7254ac33f90089a44f59416c09e">gains</a> [<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">NUM_BANDS</a>] = {0}</td></tr>
 <tr class="separator:ad620e7254ac33f90089a44f59416c09e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -297,8 +297,8 @@ Static Protected Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">SampleT</a> = int16_t, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">AccT</a> = int64_t, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> NUM_TAPS = 128, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> NUM_BANDS = 12&gt;<br />
-class audio_tools::EqualizerNBands&lt; SampleT, AccT, NUM_TAPS, NUM_BANDS &gt;</div><p>N-Band Equalizer using <a class="el" href="classaudio__tools_1_1_f_i_r.html" title="FIR Filter Converted from https://github.com/sebnil/FIR-filter-Arduino-Library/tree/master/src You ca...">FIR</a> filters with logarithmically spaced bands. </p>
-<p>This class implements a graphic equalizer with configurable number of bands using <a class="el" href="classaudio__tools_1_1_f_i_r.html" title="FIR Filter Converted from https://github.com/sebnil/FIR-filter-Arduino-Library/tree/master/src You ca...">FIR</a> (Finite Impulse Response) filtering. Frequency bands are logarithmically spaced between 20Hz and Nyquist frequency.</p>
+class audio_tools::EqualizerNBands&lt; SampleT, AccT, NUM_TAPS, NUM_BANDS &gt;</div><p>N-Band Equalizer using <a class="el" href="classaudio__tools_1_1_f_i_r.html" title="Finite Impulse Response (FIR) filter. Performs convolution of the input signal with a set of feedforw...">FIR</a> filters with logarithmically spaced bands. </p>
+<p>This class implements a graphic equalizer with configurable number of bands using <a class="el" href="classaudio__tools_1_1_f_i_r.html" title="Finite Impulse Response (FIR) filter. Performs convolution of the input signal with a set of feedforw...">FIR</a> (Finite Impulse Response) filtering. Frequency bands are logarithmically spaced between 20Hz and Nyquist frequency.</p>
 <p>Features:</p><ul>
 <li>Template-based configuration for number of taps and bands</li>
 <li>Fixed-point Q15 arithmetic for efficient processing on embedded systems</li>
@@ -310,7 +310,7 @@ class audio_tools::EqualizerNBands&lt; SampleT, AccT, NUM_TAPS, NUM_BANDS &gt;</
 <p>Thread Safety: Uses double-buffering with two kernel buffers. Audio processing reads from the active kernel while updates are written to the inactive kernel. An atomic pointer swap ensures glitch-free transitions without blocking audio processing.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">NUM_TAPS</td><td>Number of <a class="el" href="classaudio__tools_1_1_f_i_r.html" title="FIR Filter Converted from https://github.com/sebnil/FIR-filter-Arduino-Library/tree/master/src You ca...">FIR</a> filter taps (higher = sharper transitions, more CPU usage). Typical values: 64, 128, 256 </td></tr>
+    <tr><td class="paramname">NUM_TAPS</td><td>Number of <a class="el" href="classaudio__tools_1_1_f_i_r.html" title="Finite Impulse Response (FIR) filter. Performs convolution of the input signal with a set of feedforw...">FIR</a> filter taps (higher = sharper transitions, more CPU usage). Typical values: 64, 128, 256 </td></tr>
     <tr><td class="paramname">NUM_BANDS</td><td>Number of frequency bands. Typical values: 3, 5, 10, 31</td></tr>
   </table>
   </dd>
@@ -2120,7 +2120,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="classaudio__tools_1_1_vector.html" title="Vector implementation which provides the most important methods as defined by std::vector....">Vector</a> of <a class="el" href="classaudio__tools_1_1_f_i_r.html" title="FIR Filter Converted from https://github.com/sebnil/FIR-filter-Arduino-Library/tree/master/src You ca...">FIR</a> filters for each channel. </p>
+<p><a class="el" href="classaudio__tools_1_1_vector.html" title="Vector implementation which provides the most important methods as defined by std::vector....">Vector</a> of <a class="el" href="classaudio__tools_1_1_f_i_r.html" title="Finite Impulse Response (FIR) filter. Performs convolution of the input signal with a set of feedforw...">FIR</a> filters for each channel. </p>
 
 </div>
 </div>

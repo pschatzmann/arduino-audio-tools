@@ -98,7 +98,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab163bcf9a10766ef5bb0c9bab2548f88" id="r_ab163bcf9a10766ef5bb0c9bab2548f88"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_equalizer_n_bands_1_1_e_q_f_i_r_filter.html#ab163bcf9a10766ef5bb0c9bab2548f88">EQFIRFilter</a> ()</td></tr>
 <tr class="separator:ab163bcf9a10766ef5bb0c9bab2548f88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af6693472ecdef7e12f84d1173e925e9d" id="r_af6693472ecdef7e12f84d1173e925e9d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">SampleT</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_equalizer_n_bands_1_1_e_q_f_i_r_filter.html#af6693472ecdef7e12f84d1173e925e9d">process</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">SampleT</a> sample) <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
+<tr class="memdesc:af6693472ecdef7e12f84d1173e925e9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes the input value and returns the filtered output value.  <br /></td></tr>
 <tr class="separator:af6693472ecdef7e12f84d1173e925e9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b0e029102ad38f4b814c6523aedb53d" id="r_a7b0e029102ad38f4b814c6523aedb53d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_filter.html#a7b0e029102ad38f4b814c6523aedb53d">reset</a> ()</td></tr>
+<tr class="separator:a7b0e029102ad38f4b814c6523aedb53d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca93e7303a8742dd0972bd3892cc7b68" id="r_aca93e7303a8742dd0972bd3892cc7b68"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_equalizer_n_bands_1_1_e_q_f_i_r_filter.html#aca93e7303a8742dd0972bd3892cc7b68">setKernel</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">volatile</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int16_t</a> *<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">kernel</a>)</td></tr>
 <tr class="separator:aca93e7303a8742dd0972bd3892cc7b68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -188,7 +191,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
           <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">SampleT</a> process </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">SampleT</a>&#160;</td>
-          <td class="paramname"><em>sample</em></td><td>)</td>
+          <td class="paramname"><em>in</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -199,7 +202,35 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 </table>
 </div><div class="memdoc">
 
+<p>Processes the input value and returns the filtered output value. </p>
+
 <p>Implements <a class="el" href="classaudio__tools_1_1_filter.html#acd1ddbd60df780b8bad4a79ceb0a00e9">Filter&lt; SampleT &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a7b0e029102ad38f4b814c6523aedb53d" name="a7b0e029102ad38f4b814c6523aedb53d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b0e029102ad38f4b814c6523aedb53d">&#9670;&#160;</a></span>reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> reset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Clears the internal state (delay lines) without changing the coefficients. Call after reconfiguring filter parameters via <a class="el" href="classaudio__tools_1_1_equalizer_n_bands.html#acba365cc28eb702040c382646cfb0a7a" title="Initializes the equalizer with the current audio info.">begin()</a> to avoid transients from stale state. </p>
 
 </div>
 </div>
