@@ -57,6 +57,8 @@ var searchData=
   ['musicalnotes_54',['MusicalNotes',['../classaudio__tools_1_1_musical_notes.html',1,'audio_tools']]],
   ['mutexbase_55',['MutexBase',['../classaudio__tools_1_1_mutex_base.html',1,'audio_tools']]],
   ['mutexrecursivertos_56',['MutexRecursiveRTOS',['../classaudio__tools_1_1_mutex_recursive_r_t_o_s.html',1,'audio_tools']]],
-  ['mutexrp2040_57',['MutexRP2040',['../classaudio__tools_1_1_mutex_r_p2040.html',1,'audio_tools']]],
-  ['mutexrtos_58',['MutexRTOS',['../classaudio__tools_1_1_mutex_r_t_o_s.html',1,'audio_tools']]]
+  ['mutexrecursivezephyr_57',['MutexRecursiveZephyr',['../classaudio__tools_1_1_mutex_recursive_zephyr.html',1,'audio_tools']]],
+  ['mutexrp2040_58',['MutexRP2040',['../classaudio__tools_1_1_mutex_r_p2040.html',1,'audio_tools']]],
+  ['mutexrtos_59',['MutexRTOS',['../classaudio__tools_1_1_mutex_r_t_o_s.html',1,'audio_tools']]],
+  ['mutexzephyr_60',['MutexZephyr',['../classaudio__tools_1_1_mutex_zephyr.html',1,'audio_tools']]]
 ];

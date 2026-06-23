@@ -35,7 +35,7 @@ var searchData=
   ['channelstate_32',['ChannelState',['../structaudio__tools_1_1_frequency_detector_zero_crossing_1_1_channel_state.html',1,'audio_tools::FrequencyDetectorZeroCrossing']]],
   ['chartt_33',['ChartT',['../classaudio__tools_1_1_chart_t.html',1,'audio_tools']]],
   ['check_34',['Check',['../structaudio__tools_1_1_mime_detector_1_1_check.html',1,'audio_tools::MimeDetector']]],
-  ['client_35',['Client',['../classaudio__tools_1_1_client.html',1,'audio_tools']]],
+  ['client_35',['Client',['../class_client.html',1,'']]],
   ['codec2decoder_36',['Codec2Decoder',['../classaudio__tools_1_1_codec2_decoder.html',1,'audio_tools']]],
   ['codec2encoder_37',['Codec2Encoder',['../classaudio__tools_1_1_codec2_encoder.html',1,'audio_tools']]],
   ['codecchain_38',['CodecChain',['../classaudio__tools_1_1_codec_chain.html',1,'audio_tools']]],

@@ -80,7 +80,8 @@ $(function() {
   <div class="headertitle"><div class="title">BaseStream.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="_buffers_8h_source.html">AudioTools/CoreAudio/Buffers.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="_audio_tools_config_8h_source.html">AudioToolsConfig.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_buffers_8h_source.html">AudioTools/CoreAudio/Buffers.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_audio_types_8h_source.html">AudioTools/CoreAudio/AudioTypes.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_base_converter_8h_source.html">AudioTools/CoreAudio/BaseConverter.h</a>&quot;</code><br />
 </div>
@@ -104,10 +105,10 @@ size_t size)</a> and <a class="el" href="classaudio__tools_1_1_base_stream.html#
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_memory_stream.html" title="A simple Stream implementation which is backed by allocated memory.">MemoryStream</a> which is written and read using the internal RAM. For each write the data is allocated on the heap.  <a href="classaudio__tools_1_1_dynamic_memory_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_null_stream.html">NullStream</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Arduino <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> which provides silence and simulates a null device when used as audio target or audio source.  <a href="classaudio__tools_1_1_null_stream.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Arduino <a class="el" href="class_stream.html">Stream</a> which provides silence and simulates a null device when used as audio target or audio source.  <a href="classaudio__tools_1_1_null_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_queue_stream.html">QueueStream&lt; T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> class which stores the data in a temporary queue buffer. The queue can be consumed e.g. by a callback function by calling <a class="el" href="classaudio__tools_1_1_queue_stream.html#a6406b16cb31ad79201459cb48b1ad6f0">readBytes()</a>;.  <a href="classaudio__tools_1_1_queue_stream.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_stream.html">Stream</a> class which stores the data in a temporary queue buffer. The queue can be consumed e.g. by a callback function by calling <a class="el" href="classaudio__tools_1_1_queue_stream.html#a6406b16cb31ad79201459cb48b1ad6f0">readBytes()</a>;.  <a href="classaudio__tools_1_1_queue_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>

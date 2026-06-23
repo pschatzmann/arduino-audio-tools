@@ -92,6 +92,7 @@ Inheritance diagram for AnalogDriverBase:</div>
 <area href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html" title="AnalogAudioStream: A very fast DAC using DMA using the new dac_continuous API." alt="AnalogDriverESP32V1" shape="rect" coords="304,56,446,80"/>
 <area href="classaudio__tools_1_1_analog_driver_e_s_p32_v2.html" title="AnalogAudioStream: A very fast DAC using DMA using the new dac_continuous API. This implementation as..." alt="AnalogDriverESP32V2" shape="rect" coords="456,56,598,80"/>
 <area href="classaudio__tools_1_1_analog_driver_m_b_e_d.html" title="Please use AnalogAudioStream: A ADC and DAC API for the Arduino Giga." alt="AnalogDriverMBED" shape="rect" coords="608,56,750,80"/>
+<area href="classaudio__tools_1_1_analog_driver_zephyr.html" alt="AnalogDriverZephyr" shape="rect" coords="760,56,902,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -101,7 +102,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aebd60457902debb30b07971a16f24ebd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a473a08fbb41a997860a55213bc367d44" id="r_a473a08fbb41a997860a55213bc367d44"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_driver_base.html#a473a08fbb41a997860a55213bc367d44">availableForWrite</a> ()</td></tr>
 <tr class="separator:a473a08fbb41a997860a55213bc367d44"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42a46e78de7bcb79102d341a4a0ce903" id="r_a42a46e78de7bcb79102d341a4a0ce903"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_driver_base.html#a42a46e78de7bcb79102d341a4a0ce903">begin</a> (<a class="el" href="namespaceaudio__tools.html#af976b2e6530625999211f5d27d9e1b99">AnalogConfig</a> cfg)=0</td></tr>
+<tr class="memitem:a42a46e78de7bcb79102d341a4a0ce903" id="r_a42a46e78de7bcb79102d341a4a0ce903"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_driver_base.html#a42a46e78de7bcb79102d341a4a0ce903">begin</a> (<a class="el" href="namespaceaudio__tools.html#a60670b1441f64bfaf88682a50ccf0fb8">AnalogConfig</a> cfg)=0</td></tr>
 <tr class="separator:a42a46e78de7bcb79102d341a4a0ce903"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa540e86022c1f72380d1014d98f38f43" id="r_aa540e86022c1f72380d1014d98f38f43"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_driver_base.html#aa540e86022c1f72380d1014d98f38f43">end</a> ()=0</td></tr>
 <tr class="separator:aa540e86022c1f72380d1014d98f38f43"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -134,7 +135,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_analog_driver_arduino.html#a692e2b18b3c2452e38e3f558ad87e9a5">AnalogDriverArduino</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32.html#afbb59a2f946191d7cf2a5c0a00b29ec2">AnalogDriverESP32</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a692e2b18b3c2452e38e3f558ad87e9a5">AnalogDriverESP32V1</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v2.html#a692e2b18b3c2452e38e3f558ad87e9a5">AnalogDriverESP32V2</a>, and <a class="el" href="classaudio__tools_1_1_analog_driver_m_b_e_d.html#afbb59a2f946191d7cf2a5c0a00b29ec2">AnalogDriverMBED</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_analog_driver_arduino.html#a692e2b18b3c2452e38e3f558ad87e9a5">AnalogDriverArduino</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32.html#afbb59a2f946191d7cf2a5c0a00b29ec2">AnalogDriverESP32</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a692e2b18b3c2452e38e3f558ad87e9a5">AnalogDriverESP32V1</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v2.html#a692e2b18b3c2452e38e3f558ad87e9a5">AnalogDriverESP32V2</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_m_b_e_d.html#afbb59a2f946191d7cf2a5c0a00b29ec2">AnalogDriverMBED</a>, and <a class="el" href="classaudio__tools_1_1_analog_driver_zephyr.html#a692e2b18b3c2452e38e3f558ad87e9a5">AnalogDriverZephyr</a>.</p>
 
 </div>
 </div>
@@ -161,7 +162,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_analog_driver_m_b_e_d.html#a86aa7db83a28e2662e01c57a36681cb0">AnalogDriverMBED</a>, and <a class="el" href="classaudio__tools_1_1_analog_driver_arduino.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">AnalogDriverArduino</a>.</p>
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_analog_driver_m_b_e_d.html#a86aa7db83a28e2662e01c57a36681cb0">AnalogDriverMBED</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_arduino.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">AnalogDriverArduino</a>, and <a class="el" href="classaudio__tools_1_1_analog_driver_zephyr.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">AnalogDriverZephyr</a>.</p>
 
 </div>
 </div>
@@ -177,7 +178,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> begin </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#af976b2e6530625999211f5d27d9e1b99">AnalogConfig</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#a60670b1441f64bfaf88682a50ccf0fb8">AnalogConfig</a>&#160;</td>
           <td class="paramname"><em>cfg</em></td><td>)</td>
           <td></td>
         </tr>
@@ -189,7 +190,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_analog_driver_arduino.html#a5b57d1fefbbb011e8e8672dcc6750895">AnalogDriverArduino</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_m_b_e_d.html#a5b57d1fefbbb011e8e8672dcc6750895">AnalogDriverMBED</a>, and <a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32.html#a1a6736486fe8e0df47e3430799bf2498">AnalogDriverESP32</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_analog_driver_arduino.html#a5b57d1fefbbb011e8e8672dcc6750895">AnalogDriverArduino</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_m_b_e_d.html#a5b57d1fefbbb011e8e8672dcc6750895">AnalogDriverMBED</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_zephyr.html#a10e9a907e1cba09bb1a2dda2cb8e58f5">AnalogDriverZephyr</a>, and <a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32.html#a1a6736486fe8e0df47e3430799bf2498">AnalogDriverESP32</a>.</p>
 
 </div>
 </div>
@@ -216,7 +217,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_analog_driver_arduino.html#a64e9fa75beda50a9e8400ee0d4e61984">AnalogDriverArduino</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32.html#a64e9fa75beda50a9e8400ee0d4e61984">AnalogDriverESP32</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a64e9fa75beda50a9e8400ee0d4e61984">AnalogDriverESP32V1</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v2.html#a64e9fa75beda50a9e8400ee0d4e61984">AnalogDriverESP32V2</a>, and <a class="el" href="classaudio__tools_1_1_analog_driver_m_b_e_d.html#a64e9fa75beda50a9e8400ee0d4e61984">AnalogDriverMBED</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_analog_driver_arduino.html#a64e9fa75beda50a9e8400ee0d4e61984">AnalogDriverArduino</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32.html#a64e9fa75beda50a9e8400ee0d4e61984">AnalogDriverESP32</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a64e9fa75beda50a9e8400ee0d4e61984">AnalogDriverESP32V1</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v2.html#a64e9fa75beda50a9e8400ee0d4e61984">AnalogDriverESP32V2</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_m_b_e_d.html#a64e9fa75beda50a9e8400ee0d4e61984">AnalogDriverMBED</a>, and <a class="el" href="classaudio__tools_1_1_analog_driver_zephyr.html#a64e9fa75beda50a9e8400ee0d4e61984">AnalogDriverZephyr</a>.</p>
 
 </div>
 </div>
@@ -254,7 +255,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_analog_driver_arduino.html#a4c5c6275ddee80eb02839356b6185c0b">AnalogDriverArduino</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32.html#a445f7d1cc42dc43338929e2229215545">AnalogDriverESP32</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a445f7d1cc42dc43338929e2229215545">AnalogDriverESP32V1</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v2.html#a445f7d1cc42dc43338929e2229215545">AnalogDriverESP32V2</a>, and <a class="el" href="classaudio__tools_1_1_analog_driver_m_b_e_d.html#a445f7d1cc42dc43338929e2229215545">AnalogDriverMBED</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_analog_driver_arduino.html#a4c5c6275ddee80eb02839356b6185c0b">AnalogDriverArduino</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32.html#a445f7d1cc42dc43338929e2229215545">AnalogDriverESP32</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a445f7d1cc42dc43338929e2229215545">AnalogDriverESP32V1</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v2.html#a445f7d1cc42dc43338929e2229215545">AnalogDriverESP32V2</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_m_b_e_d.html#a445f7d1cc42dc43338929e2229215545">AnalogDriverMBED</a>, and <a class="el" href="classaudio__tools_1_1_analog_driver_zephyr.html#ad7121344745cb0beafc8411d43ed6f30">AnalogDriverZephyr</a>.</p>
 
 </div>
 </div>
@@ -292,7 +293,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_analog_driver_arduino.html#a7597ef706dd1aa590903ce9e095db20a">AnalogDriverArduino</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32.html#a360ffe5435df7f910720c0f3faa04dee">AnalogDriverESP32</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a360ffe5435df7f910720c0f3faa04dee">AnalogDriverESP32V1</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v2.html#a360ffe5435df7f910720c0f3faa04dee">AnalogDriverESP32V2</a>, and <a class="el" href="classaudio__tools_1_1_analog_driver_m_b_e_d.html#a360ffe5435df7f910720c0f3faa04dee">AnalogDriverMBED</a>.</p>
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_analog_driver_arduino.html#a7597ef706dd1aa590903ce9e095db20a">AnalogDriverArduino</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32.html#a360ffe5435df7f910720c0f3faa04dee">AnalogDriverESP32</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a360ffe5435df7f910720c0f3faa04dee">AnalogDriverESP32V1</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v2.html#a360ffe5435df7f910720c0f3faa04dee">AnalogDriverESP32V2</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_m_b_e_d.html#a360ffe5435df7f910720c0f3faa04dee">AnalogDriverMBED</a>, and <a class="el" href="classaudio__tools_1_1_analog_driver_zephyr.html#a360ffe5435df7f910720c0f3faa04dee">AnalogDriverZephyr</a>.</p>
 
 </div>
 </div>

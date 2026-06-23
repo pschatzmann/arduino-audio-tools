@@ -82,7 +82,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>An Adapter Class which lets you use any <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> as a Generator.  
+<p>An Adapter Class which lets you use any <a class="el" href="class_stream.html">Stream</a> as a Generator.  
  <a href="classaudio__tools_1_1_generator_from_stream.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_sound_generator_8h_source.html">SoundGenerator.h</a>&gt;</code></p>
@@ -101,8 +101,8 @@ Inheritance diagram for GeneratorFromStream&lt; T &gt;:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a1ddfd0fd8eaf673dabd7591913b95d48" id="r_a1ddfd0fd8eaf673dabd7591913b95d48"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generator_from_stream.html#a1ddfd0fd8eaf673dabd7591913b95d48">GeneratorFromStream</a> ()</td></tr>
 <tr class="separator:a1ddfd0fd8eaf673dabd7591913b95d48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adbab94c4cc5993e1478137422a8d6ce5" id="r_adbab94c4cc5993e1478137422a8d6ce5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generator_from_stream.html#adbab94c4cc5993e1478137422a8d6ce5">GeneratorFromStream</a> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;input, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> <a class="el" href="classaudio__tools_1_1_generator_from_stream.html#a178795099d0608972755dfef8d8367e3">channels</a>=1, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a> <a class="el" href="classaudio__tools_1_1_volume_support.html#a893871d008fd5516565045bb55e60dd8">volume</a>=1.0)</td></tr>
-<tr class="memdesc:adbab94c4cc5993e1478137422a8d6ce5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new Generator from a <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> object that can be used e.g. as input for AudioEffectss.  <br /></td></tr>
+<tr class="memitem:adbab94c4cc5993e1478137422a8d6ce5" id="r_adbab94c4cc5993e1478137422a8d6ce5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generator_from_stream.html#adbab94c4cc5993e1478137422a8d6ce5">GeneratorFromStream</a> (<a class="el" href="class_stream.html">Stream</a> &amp;input, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> <a class="el" href="classaudio__tools_1_1_generator_from_stream.html#a178795099d0608972755dfef8d8367e3">channels</a>=1, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a> <a class="el" href="classaudio__tools_1_1_volume_support.html#a893871d008fd5516565045bb55e60dd8">volume</a>=1.0)</td></tr>
+<tr class="memdesc:adbab94c4cc5993e1478137422a8d6ce5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new Generator from a <a class="el" href="class_stream.html">Stream</a> object that can be used e.g. as input for AudioEffectss.  <br /></td></tr>
 <tr class="separator:adbab94c4cc5993e1478137422a8d6ce5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada56eff2516fb0a4f5091ce06805411a" id="r_ada56eff2516fb0a4f5091ce06805411a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#ada56eff2516fb0a4f5091ce06805411a">audioInfo</a> ()</td></tr>
 <tr class="memdesc:ada56eff2516fb0a4f5091ce06805411a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>.  <br /></td></tr>
@@ -139,7 +139,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0472837fedcc9128b7cab13fb578aad2" id="r_a0472837fedcc9128b7cab13fb578aad2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#a0472837fedcc9128b7cab13fb578aad2">setPlayTime</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint32_t</a> <a class="el" href="classaudio__tools_1_1_sound_generator.html#a3807da733d5fce809ac890821617e140">playMs</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="el" href="classaudio__tools_1_1_sound_generator.html#ae3a74a14da1708b3abf20be8252dc1a9">upPercent</a>=20, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="el" href="classaudio__tools_1_1_sound_generator.html#ae2b104b741d35e43975aaf4f91c228b9">downPercent</a>=30)</td></tr>
 <tr class="memdesc:a0472837fedcc9128b7cab13fb578aad2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the play time in ms and the ramp up and ramp down time in percent.  <br /></td></tr>
 <tr class="separator:a0472837fedcc9128b7cab13fb578aad2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab134c748b5b151ba54a2d835de040341" id="r_ab134c748b5b151ba54a2d835de040341"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generator_from_stream.html#ab134c748b5b151ba54a2d835de040341">setStream</a> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;input)</td></tr>
+<tr class="memitem:ab134c748b5b151ba54a2d835de040341" id="r_ab134c748b5b151ba54a2d835de040341"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generator_from_stream.html#ab134c748b5b151ba54a2d835de040341">setStream</a> (<a class="el" href="class_stream.html">Stream</a> &amp;input)</td></tr>
 <tr class="memdesc:ab134c748b5b151ba54a2d835de040341"><td class="mdescLeft">&#160;</td><td class="mdescRight">(Re-)Assigns a stream to the Adapter class  <br /></td></tr>
 <tr class="separator:ab134c748b5b151ba54a2d835de040341"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab04c11673138d0f5b099f2a2f932097f" id="r_ab04c11673138d0f5b099f2a2f932097f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_volume_support.html#ab04c11673138d0f5b099f2a2f932097f">setVolume</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a> <a class="el" href="classaudio__tools_1_1_volume_support.html#a893871d008fd5516565045bb55e60dd8">volume</a>)</td></tr>
@@ -178,7 +178,7 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a47385aa19435f5fca9d3083a748258c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abdcc1d365e9355d5e10d50c4340e1cb5" id="r_abdcc1d365e9355d5e10d50c4340e1cb5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generator_from_stream.html#abdcc1d365e9355d5e10d50c4340e1cb5">maxValue</a></td></tr>
 <tr class="separator:abdcc1d365e9355d5e10d50c4340e1cb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c87619d514c8c9627dc94e5e278a530" id="r_a7c87619d514c8c9627dc94e5e278a530"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generator_from_stream.html#a7c87619d514c8c9627dc94e5e278a530">p_stream</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td></tr>
+<tr class="memitem:a7c87619d514c8c9627dc94e5e278a530" id="r_a7c87619d514c8c9627dc94e5e278a530"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generator_from_stream.html#a7c87619d514c8c9627dc94e5e278a530">p_stream</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td></tr>
 <tr class="separator:a7c87619d514c8c9627dc94e5e278a530"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3807da733d5fce809ac890821617e140" id="r_a3807da733d5fce809ac890821617e140"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#a3807da733d5fce809ac890821617e140">playMs</a> = 0</td></tr>
 <tr class="separator:a3807da733d5fce809ac890821617e140"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -201,7 +201,7 @@ Protected Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> = int16_t&gt;<br />
-class audio_tools::GeneratorFromStream&lt; T &gt;</div><p>An Adapter Class which lets you use any <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> as a Generator. </p>
+class audio_tools::GeneratorFromStream&lt; T &gt;</div><p>An Adapter Class which lets you use any <a class="el" href="class_stream.html">Stream</a> as a Generator. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
@@ -252,7 +252,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
         <tr>
           <td class="memname"><a class="el" href="classaudio__tools_1_1_generator_from_stream.html">GeneratorFromStream</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_stream.html">Stream</a> &amp;&#160;</td>
           <td class="paramname"><em>input</em>, </td>
         </tr>
         <tr>
@@ -280,11 +280,11 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 </table>
 </div><div class="memdoc">
 
-<p>Constructs a new Generator from a <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> object that can be used e.g. as input for AudioEffectss. </p>
+<p>Constructs a new Generator from a <a class="el" href="class_stream.html">Stream</a> object that can be used e.g. as input for AudioEffectss. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">input</td><td><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> </td></tr>
-    <tr><td class="paramname">channels</td><td>number of channels of the <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> </td></tr>
+    <tr><td class="paramname">input</td><td><a class="el" href="class_stream.html">Stream</a> </td></tr>
+    <tr><td class="paramname">channels</td><td>number of channels of the <a class="el" href="class_stream.html">Stream</a> </td></tr>
     <tr><td class="paramname">volume</td><td>factor my which the sample value is multiplied - default 1.0; Use it e.g. to reduce the volume (e.g. with 0.5) </td></tr>
   </table>
   </dd>
@@ -854,7 +854,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
         <tr>
           <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> setStream </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_stream.html">Stream</a> &amp;&#160;</td>
           <td class="paramname"><em>input</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1134,7 +1134,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>* p_stream = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td>
+          <td class="memname"><a class="el" href="class_stream.html">Stream</a>* p_stream = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td>
         </tr>
       </table>
   </td>

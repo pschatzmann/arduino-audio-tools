@@ -80,12 +80,12 @@ $(function() {
   <div class="headertitle"><div class="title">R2ROutput.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="_audio_tools_config_8h_source.html">AudioToolsConfig.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_audio_timer_2_audio_timer_8h_source.html">AudioTools/CoreAudio/AudioTimer/AudioTimer.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="_vector_8h_source.html">AudioTools/CoreAudio/AudioBasic/Collections/Vector.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_audio_tools_2_core_audio_2_audio_logger_8h_source.html">AudioTools/CoreAudio/AudioLogger.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_audio_output_8h_source.html">AudioTools/CoreAudio/AudioOutput.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_audio_timer_2_audio_timer_8h_source.html">AudioTools/CoreAudio/AudioTimer/AudioTimer.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_buffers_8h_source.html">AudioTools/CoreAudio/Buffers.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_vector_8h_source.html">AudioTools/CoreAudio/AudioBasic/Collections/Vector.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_audio_tools_config_8h_source.html">AudioToolsConfig.h</a>&quot;</code><br />
 </div>
 <p><a href="_r2_r_output_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -101,7 +101,7 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">R2R driver base class.  <a href="classaudio__tools_1_1_r2_r_driver_base.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r2_r_output.html">R2ROutput</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output to R-2R DAC. You need to define the used digital pins in the configuration. Any number of bits is supported on max 2 channels. For a 4 bit single channel, you need to define 4 digital pins. see <a href="https://www.electronics-tutorials.ws/combination/r-2r-dac.html">https://www.electronics-tutorials.ws/combination/r-2r-dac.html</a> The default driver implementation uses Arduino <a class="el" href="_no_arduino_8h.html#ae9647a9a056bb33fd1206da70c83bde3">digitalWrite()</a>. You can provide your own optimized driver.  <a href="classaudio__tools_1_1_r2_r_output.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output to R-2R DAC. You need to define the used digital pins in the configuration. Any number of bits is supported on max 2 channels. For a 4 bit single channel, you need to define 4 digital pins. see <a href="https://www.electronics-tutorials.ws/combination/r-2r-dac.html">https://www.electronics-tutorials.ws/combination/r-2r-dac.html</a> The default driver implementation uses Arduino <a class="el" href="namespaceaudio__tools.html#a33cb38f3d7d9be71376684a50b289b51">digitalWrite()</a>. You can provide your own optimized driver.  <a href="classaudio__tools_1_1_r2_r_output.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
@@ -112,8 +112,9 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ga199c18f4a0ea23ffac56c0382ca62a5d" id="r_ga199c18f4a0ea23ffac56c0382ca62a5d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_r2_r_driver.html">audio_tools::R2RDriver</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__platform.html#ga199c18f4a0ea23ffac56c0382ca62a5d">r2r_driver</a></td></tr>
-<tr class="separator:ga199c18f4a0ea23ffac56c0382ca62a5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63330e639e2526620abf1853560a8d18" id="r_a63330e639e2526620abf1853560a8d18"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="classaudio__tools_1_1_r2_r_driver.html">R2RDriver</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a63330e639e2526620abf1853560a8d18">r2r_driver</a></td></tr>
+<tr class="memdesc:a63330e639e2526620abf1853560a8d18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default driver instance.  <br /></td></tr>
+<tr class="separator:a63330e639e2526620abf1853560a8d18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

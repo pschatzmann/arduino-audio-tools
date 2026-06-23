@@ -138,7 +138,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae55eca9a46cc796f136913ba90bfb9af" id="r_ae55eca9a46cc796f136913ba90bfb9af"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#ae55eca9a46cc796f136913ba90bfb9af">initTcpInterleavedTransport</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> Platform::TcpClientType *<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">tcpSock</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">rtpChannel</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">rtcpChannel</a>)</td></tr>
 <tr class="memdesc:ae55eca9a46cc796f136913ba90bfb9af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize TCP interleaved transport for RTP over RTSP.  <br /></td></tr>
 <tr class="separator:ae55eca9a46cc796f136913ba90bfb9af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a026f00812a83599af0afb3423b136d5f" id="r_a026f00812a83599af0afb3423b136d5f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#a026f00812a83599af0afb3423b136d5f">initUdpTransport</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">IPAddress</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">aClientIP</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint16_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">aClientPort</a>)</td></tr>
+<tr class="memitem:a026f00812a83599af0afb3423b136d5f" id="r_a026f00812a83599af0afb3423b136d5f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#a026f00812a83599af0afb3423b136d5f">initUdpTransport</a> (<a class="el" href="classaudio__tools_1_1_i_p_address.html">IPAddress</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">aClientIP</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint16_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">aClientPort</a>)</td></tr>
 <tr class="memdesc:a026f00812a83599af0afb3423b136d5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize UDP transport for RTP streaming.  <br /></td></tr>
 <tr class="separator:a026f00812a83599af0afb3423b136d5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeea79f440902ca830b8b0aa3b598351b" id="r_aeea79f440902ca830b8b0aa3b598351b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#aeea79f440902ca830b8b0aa3b598351b">releaseUdpTransport</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>)</td></tr>
@@ -184,7 +184,7 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a45d4c712694f9df64529e4954ba4e5ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a905b7e64fe8e96fd9565c5a917c4990f" id="r_a905b7e64fe8e96fd9565c5a917c4990f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_i_audio_source.html">IAudioSource</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#a905b7e64fe8e96fd9565c5a917c4990f">m_audioSource</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td></tr>
 <tr class="separator:a905b7e64fe8e96fd9565c5a917c4990f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac4f0f54dcede73c74a19238b43945ace" id="r_ac4f0f54dcede73c74a19238b43945ace"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">IPAddress</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#ac4f0f54dcede73c74a19238b43945ace">m_ClientIP</a></td></tr>
+<tr class="memitem:ac4f0f54dcede73c74a19238b43945ace" id="r_ac4f0f54dcede73c74a19238b43945ace"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_i_p_address.html">IPAddress</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#ac4f0f54dcede73c74a19238b43945ace">m_ClientIP</a></td></tr>
 <tr class="separator:ac4f0f54dcede73c74a19238b43945ace"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af7a211e862d97f2e8847b4a4662c137c" id="r_af7a211e862d97f2e8847b4a4662c137c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#af7a211e862d97f2e8847b4a4662c137c">m_ClientPort</a></td></tr>
 <tr class="separator:af7a211e862d97f2e8847b4a4662c137c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -232,8 +232,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:aa19f198330d34294598a04e581da06bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae50a69c0f7040c706c9cf3d32c4d1e79" id="r_ae50a69c0f7040c706c9cf3d32c4d1e79"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">audio_tools::Vector</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#ae50a69c0f7040c706c9cf3d32c4d1e79">mRtpBuf</a></td></tr>
 <tr class="separator:ae50a69c0f7040c706c9cf3d32c4d1e79"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae46c28b6dc95b0cecb42142aa1480266" id="r_ae46c28b6dc95b0cecb42142aa1480266"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_timer_alarm_repeating.html">audio_tools::TimerAlarmRepeating</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer.html#ae46c28b6dc95b0cecb42142aa1480266">rtpTimer</a></td></tr>
-<tr class="separator:ae46c28b6dc95b0cecb42142aa1480266"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabe4714731d717803b6b04b7482cd03c" id="r_aabe4714731d717803b6b04b7482cd03c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_audio_timer.html">audio_tools::AudioTimer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer.html#aabe4714731d717803b6b04b7482cd03c">rtpTimer</a></td></tr>
+<tr class="separator:aabe4714731d717803b6b04b7482cd03c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc04b610213ff85745e77e7ec34bb31b" id="r_abc04b610213ff85745e77e7ec34bb31b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#abc04b610213ff85745e77e7ec34bb31b">STREAMING_BUFFER_SIZE</a> = 1024 * 3</td></tr>
 <tr class="separator:abc04b610213ff85745e77e7ec34bb31b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -243,7 +243,7 @@ class audio_tools::RTSPAudioStreamer&lt; Platform &gt;</div><p><a class="el" hre
 <p>The <a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer.html" title="RTSPAudioStreamer - Timer-driven RTP Audio Streaming Engine.">RTSPAudioStreamer</a> class extends <a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html" title="RTSPAudioStreamerBase - Core RTP Audio Streaming Engine.">RTSPAudioStreamerBase</a> with automatic timer-driven streaming functionality. This class provides:</p>
 <ul>
 <li>All base class functionality (audio source, UDP transport, RTP packets)</li>
-<li>Automatic periodic streaming using AudioTools <a class="el" href="classaudio__tools_1_1_timer_alarm_repeating.html" title="Common Interface definition for TimerAlarmRepeating.">TimerAlarmRepeating</a></li>
+<li>Automatic periodic streaming using AudioTools <a class="el" href="classaudio__tools_1_1_audio_timer.html" title="Common Interface definition for AudioTimer.">AudioTimer</a></li>
 <li>Timer safety configuration for ESP32 platforms</li>
 <li>Background streaming without manual intervention</li>
 </ul>
@@ -769,7 +769,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
         <tr>
           <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> initUdpTransport </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">IPAddress</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_i_p_address.html">IPAddress</a>&#160;</td>
           <td class="paramname"><em>aClientIP</em>, </td>
         </tr>
         <tr>
@@ -984,7 +984,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <p>Start timer-driven RTP streaming. </p>
 <p>Begins the RTP streaming process by:</p><ul>
 <li>Calling base class <a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer.html#a5d5d9ebd12cd3a7d268bc98a3fc7bf97" title="Start timer-driven RTP streaming.">start()</a> to initialize audio source and buffer</li>
-<li>Creating and configuring the <a class="el" href="classaudio__tools_1_1_timer_alarm_repeating.html" title="Common Interface definition for TimerAlarmRepeating.">TimerAlarmRepeating</a> for periodic streaming</li>
+<li>Creating and configuring the <a class="el" href="classaudio__tools_1_1_audio_timer.html" title="Common Interface definition for AudioTimer.">AudioTimer</a> for periodic streaming</li>
 <li>Beginning periodic timer-driven packet transmission</li>
 </ul>
 <dl class="section note"><dt>Note</dt><dd>UDP transport must be initialized before calling this method </dd>
@@ -1024,7 +1024,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 
 <p>Stop timer-driven RTP streaming. </p>
 <p>Stops the RTP streaming process by:</p><ul>
-<li>Stopping the <a class="el" href="classaudio__tools_1_1_timer_alarm_repeating.html" title="Common Interface definition for TimerAlarmRepeating.">TimerAlarmRepeating</a> to cease packet transmission</li>
+<li>Stopping the <a class="el" href="classaudio__tools_1_1_audio_timer.html" title="Common Interface definition for AudioTimer.">AudioTimer</a> to cease packet transmission</li>
 <li>Calling base class <a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer.html#ab3536e22848ce87b16a9b96d6d824d45" title="Stop timer-driven RTP streaming.">stop()</a> to stop the audio source</li>
 </ul>
 <dl class="section note"><dt>Note</dt><dd>Does not release UDP transport or buffers - use <a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#aeea79f440902ca830b8b0aa3b598351b" title="Release UDP transport resources.">releaseUdpTransport()</a> separately </dd>
@@ -1198,7 +1198,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">IPAddress</a> m_ClientIP</td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_i_p_address.html">IPAddress</a> m_ClientIP</td>
         </tr>
       </table>
   </td>
@@ -1764,8 +1764,8 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 
 </div>
 </div>
-<a id="ae46c28b6dc95b0cecb42142aa1480266" name="ae46c28b6dc95b0cecb42142aa1480266"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae46c28b6dc95b0cecb42142aa1480266">&#9670;&#160;</a></span>rtpTimer</h2>
+<a id="aabe4714731d717803b6b04b7482cd03c" name="aabe4714731d717803b6b04b7482cd03c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabe4714731d717803b6b04b7482cd03c">&#9670;&#160;</a></span>rtpTimer</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1776,7 +1776,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_timer_alarm_repeating.html">audio_tools::TimerAlarmRepeating</a> rtpTimer</td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_audio_timer.html">audio_tools::AudioTimer</a> rtpTimer</td>
         </tr>
       </table>
   </td>

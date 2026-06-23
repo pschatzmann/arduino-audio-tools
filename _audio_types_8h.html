@@ -76,7 +76,6 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a> &#124;
@@ -87,6 +86,8 @@ $(function() {
 <div class="textblock"><code>#include &quot;<a class="el" href="_audio_tools_config_8h_source.html">AudioToolsConfig.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_vector_8h_source.html">AudioTools/CoreAudio/AudioBasic/Collections/Vector.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_audio_tools_2_core_audio_2_audio_logger_8h_source.html">AudioTools/CoreAudio/AudioLogger.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="int24__t_8h_source.html">AudioTools/CoreAudio/AudioBasic/int24_t.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_audio_runtime_8h_source.html">AudioTools/CoreAudio/AudioRuntime.h</a>&quot;</code><br />
 </div>
 <p><a href="_audio_types_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -119,11 +120,6 @@ Namespaces</h2></td></tr>
 <tr class="memitem:namespaceaudio__tools" id="r_namespaceaudio__tools"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></td></tr>
 <tr class="memdesc:namespaceaudio__tools"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic Implementation of sound input and output for desktop environments using portaudio. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:adcd021ac91d43a62b2cdecf9a5b971a7" id="r_adcd021ac91d43a62b2cdecf9a5b971a7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_audio_types_8h.html#adcd021ac91d43a62b2cdecf9a5b971a7">MIN</a>(A,  B)&#160;&#160;&#160;((A) &lt; (B) ? (A) : (B))</td></tr>
-<tr class="separator:adcd021ac91d43a62b2cdecf9a5b971a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -183,18 +179,18 @@ Functions</h2></td></tr>
 <tr class="memdesc:a59eee85141fc7b136bf44c31c75811e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Similar to Arduino map function but using floats.  <br /></td></tr>
 <tr class="separator:a59eee85141fc7b136bf44c31c75811e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87b4772f542c8ab3559ee73d4f29cc34" id="r_a87b4772f542c8ab3559ee73d4f29cc34"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </td></tr>
-<tr class="memitem:a87b4772f542c8ab3559ee73d4f29cc34"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a87b4772f542c8ab3559ee73d4f29cc34">readSample</a> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *p_stream)</td></tr>
+<tr class="memitem:a87b4772f542c8ab3559ee73d4f29cc34"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a87b4772f542c8ab3559ee73d4f29cc34">readSample</a> (<a class="el" href="class_stream.html">Stream</a> *p_stream)</td></tr>
 <tr class="memdesc:a87b4772f542c8ab3559ee73d4f29cc34"><td class="mdescLeft">&#160;</td><td class="mdescRight">guaranteed to return the requested data  <br /></td></tr>
 <tr class="separator:a87b4772f542c8ab3559ee73d4f29cc34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a258e123b91169a720b1671dfa473ef7b" id="r_a258e123b91169a720b1671dfa473ef7b"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </td></tr>
-<tr class="memitem:a258e123b91169a720b1671dfa473ef7b"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a258e123b91169a720b1671dfa473ef7b">readSamples</a> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *p_stream, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> *data, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> samples, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">retryCount</a>=-1)</td></tr>
+<tr class="memitem:a258e123b91169a720b1671dfa473ef7b"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a258e123b91169a720b1671dfa473ef7b">readSamples</a> (<a class="el" href="class_stream.html">Stream</a> *p_stream, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> *data, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> samples, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">retryCount</a>=-1)</td></tr>
 <tr class="memdesc:a258e123b91169a720b1671dfa473ef7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">guaranteed to return the requested data  <br /></td></tr>
 <tr class="separator:a258e123b91169a720b1671dfa473ef7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga70cebe1fd6d35a87e3e31dd05ee17664" id="r_ga70cebe1fd6d35a87e3e31dd05ee17664"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__basic.html#ga70cebe1fd6d35a87e3e31dd05ee17664">waitFor</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> &amp;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">flag</a>)</td></tr>
 <tr class="memdesc:ga70cebe1fd6d35a87e3e31dd05ee17664"><td class="mdescLeft">&#160;</td><td class="mdescRight">wait for flag to be active  <br /></td></tr>
 <tr class="separator:ga70cebe1fd6d35a87e3e31dd05ee17664"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3c87ac6df70d80e2a4be8979e63cc2e" id="r_ae3c87ac6df70d80e2a4be8979e63cc2e"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ae3c87ac6df70d80e2a4be8979e63cc2e"><td class="memTemplItemLeft" align="right" valign="top">size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">writeData</a> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> *p_out, T *data, int samples, int maxSamples=512)</td></tr>
+<tr class="memitem:ae3c87ac6df70d80e2a4be8979e63cc2e"><td class="memTemplItemLeft" align="right" valign="top">size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">writeData</a> (<a class="el" href="class_print.html">Print</a> *p_out, T *data, int samples, int maxSamples=512)</td></tr>
 <tr class="separator:ae3c87ac6df70d80e2a4be8979e63cc2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8fc49e8556f8e3fc7ebc2dbeb4f137b" id="r_ac8fc49e8556f8e3fc7ebc2dbeb4f137b"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> P &gt; </td></tr>
 <tr class="memitem:ac8fc49e8556f8e3fc7ebc2dbeb4f137b"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ac8fc49e8556f8e3fc7ebc2dbeb4f137b">writeDataT</a> (P *p_out, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> *data, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> samples, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">maxSamples</a>=512)</td></tr>
@@ -216,35 +212,6 @@ Variables</h2></td></tr>
 <tr class="memitem:a3f9cfc7022261e8246f2cac14cd58b27" id="r_a3f9cfc7022261e8246f2cac14cd58b27"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a3f9cfc7022261e8246f2cac14cd58b27">TimeUnitStr</a> [3] {&quot;MS&quot;, &quot;US&quot;, &quot;HZ&quot;}</td></tr>
 <tr class="separator:a3f9cfc7022261e8246f2cac14cd58b27"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="adcd021ac91d43a62b2cdecf9a5b971a7" name="adcd021ac91d43a62b2cdecf9a5b971a7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adcd021ac91d43a62b2cdecf9a5b971a7">&#9670;&#160;</a></span>MIN</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define MIN</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">A, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">B&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>&#160;&#160;&#160;((A) &lt; (B) ? (A) : (B))</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

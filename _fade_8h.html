@@ -81,6 +81,7 @@ $(function() {
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="_audio_tools_config_8h_source.html">AudioToolsConfig.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_audio_streams_8h_source.html">AudioStreams.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="int24__t_8h_source.html">AudioTools/CoreAudio/AudioBasic/int24_t.h</a>&quot;</code><br />
 </div>
 <p><a href="_fade_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -93,7 +94,7 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">converter which does a fade out or fade in.  <a href="classaudio__tools_1_1_fade_converter.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_fade_stream.html">FadeStream</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> which can be used to manage fade in and fade out. Before you read or write data you need to call <a class="el" href="classaudio__tools_1_1_fade_stream.html#ad1fdd56031f1195cb221ab855fb6a102" title="Defines the input AudioInfo.">setAudioInfo()</a> to provide the bits_per_sample and channels.  <a href="classaudio__tools_1_1_fade_stream.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_stream.html">Stream</a> which can be used to manage fade in and fade out. Before you read or write data you need to call <a class="el" href="classaudio__tools_1_1_fade_stream.html#ad1fdd56031f1195cb221ab855fb6a102" title="Defines the input AudioInfo.">setAudioInfo()</a> to provide the bits_per_sample and channels.  <a href="classaudio__tools_1_1_fade_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_last_sample_fader.html">LastSampleFader</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">If we end audio and the last sample is not close to 0 we can hear a popping noise. This functionality brings the last value slowly to 0. Typless implementation.  <a href="classaudio__tools_1_1_last_sample_fader.html#details">More...</a><br /></td></tr>

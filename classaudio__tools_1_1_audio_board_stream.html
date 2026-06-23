@@ -78,6 +78,7 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_audio_board_stream-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">AudioBoardStream Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__io.html">IO</a></div></div></div>
@@ -100,8 +101,8 @@ Inheritance diagram for AudioBoardStream:</div>
 <area href="classaudio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer, size_t size) and readBytes(uint..." alt="BaseStream" shape="rect" coords="0,112,118,136"/>
 <area href="classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="AudioInfoSupport" shape="rect" coords="128,112,246,136"/>
 <area href="classaudio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="AudioInfoSource" shape="rect" coords="256,112,374,136"/>
-<area href="classaudio__tools_1_1_stream.html" alt="Stream" shape="rect" coords="0,56,118,80"/>
-<area href="classaudio__tools_1_1_print.html" alt="Print" shape="rect" coords="0,0,118,24"/>
+<area href="class_stream.html" alt="Stream" shape="rect" coords="0,56,118,80"/>
+<area href="class_print.html" alt="Print" shape="rect" coords="0,0,118,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -112,18 +113,18 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a90a2f381b162843ef3ae04e0ccba03a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad55687ffc45cfefb7492d2efdda7a579" id="r_ad55687ffc45cfefb7492d2efdda7a579"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#ad55687ffc45cfefb7492d2efdda7a579">actionVolumeIncrementValue</a> ()</td></tr>
 <tr class="separator:ad55687ffc45cfefb7492d2efdda7a579"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a314187d31fcaabecde855d4f7dde9bb9" id="r_a314187d31fcaabecde855d4f7dde9bb9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a314187d31fcaabecde855d4f7dde9bb9">addAction</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">AudioDriverKey</a> key, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(*<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">action</a>)(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *), <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *ref=<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a>)</td></tr>
-<tr class="memdesc:a314187d31fcaabecde855d4f7dde9bb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a new action that is executed when the Button is pressed.  <br /></td></tr>
-<tr class="separator:a314187d31fcaabecde855d4f7dde9bb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a045696077b56acd7a3a8cefef6659832" id="r_a045696077b56acd7a3a8cefef6659832"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a045696077b56acd7a3a8cefef6659832">addAction</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">AudioDriverKey</a> key, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(*actionOn)(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *), <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(*actionOff)(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *), <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *ref=<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a>)</td></tr>
-<tr class="memdesc:a045696077b56acd7a3a8cefef6659832"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a new action that is executed when the Button is pressed and released.  <br /></td></tr>
-<tr class="separator:a045696077b56acd7a3a8cefef6659832"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a24fac46b019688e1b0993569912128a1" id="r_a24fac46b019688e1b0993569912128a1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a24fac46b019688e1b0993569912128a1">addAction</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> pin, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(*<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">action</a>)(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *), <a class="el" href="classaudio__tools_1_1_audio_actions.html#a133764d70380ecc0ac0811525c6cf65e">AudioActions::ActiveLogic</a> activeLogic, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *ref=<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a>)</td></tr>
-<tr class="memdesc:a24fac46b019688e1b0993569912128a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a new action that is executed when the indicated pin is active.  <br /></td></tr>
-<tr class="separator:a24fac46b019688e1b0993569912128a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a08e8001d4d1048b8fd9e13a5e968d453" id="r_a08e8001d4d1048b8fd9e13a5e968d453"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a08e8001d4d1048b8fd9e13a5e968d453">addAction</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> pin, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(*<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">action</a>)(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *), <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *ref=<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a>)</td></tr>
-<tr class="memdesc:a08e8001d4d1048b8fd9e13a5e968d453"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a new action that is executed when the indicated pin is active.  <br /></td></tr>
-<tr class="separator:a08e8001d4d1048b8fd9e13a5e968d453"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae44f9b55067d2f4379388eba53b5dc1e" id="r_ae44f9b55067d2f4379388eba53b5dc1e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#ae44f9b55067d2f4379388eba53b5dc1e">addAction</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">AudioDriverKey</a> key, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(*<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">action</a>)(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *), <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *ref=<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a>)</td></tr>
+<tr class="memdesc:ae44f9b55067d2f4379388eba53b5dc1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a new action that is executed when the Button is pressed.  <br /></td></tr>
+<tr class="separator:ae44f9b55067d2f4379388eba53b5dc1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09fde058e09b817ac7329cec00103985" id="r_a09fde058e09b817ac7329cec00103985"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a09fde058e09b817ac7329cec00103985">addAction</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">AudioDriverKey</a> key, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(*actionOn)(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *), <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(*actionOff)(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *), <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *ref=<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a>)</td></tr>
+<tr class="memdesc:a09fde058e09b817ac7329cec00103985"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a new action that is executed when the Button is pressed and released.  <br /></td></tr>
+<tr class="separator:a09fde058e09b817ac7329cec00103985"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af15c3925f1257c3eddd68a9236f655fb" id="r_af15c3925f1257c3eddd68a9236f655fb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#af15c3925f1257c3eddd68a9236f655fb">addAction</a> (<a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> pin, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(*<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">action</a>)(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *), <a class="el" href="classaudio__tools_1_1_audio_actions.html#a133764d70380ecc0ac0811525c6cf65e">AudioActions::ActiveLogic</a> activeLogic, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *ref=<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a>)</td></tr>
+<tr class="memdesc:af15c3925f1257c3eddd68a9236f655fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a new action that is executed when the indicated pin is active.  <br /></td></tr>
+<tr class="separator:af15c3925f1257c3eddd68a9236f655fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a857567ddd1d637672a1c21cd70983597" id="r_a857567ddd1d637672a1c21cd70983597"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a857567ddd1d637672a1c21cd70983597">addAction</a> (<a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> pin, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(*<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">action</a>)(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *), <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *ref=<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a>)</td></tr>
+<tr class="memdesc:a857567ddd1d637672a1c21cd70983597"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a new action that is executed when the indicated pin is active.  <br /></td></tr>
+<tr class="separator:a857567ddd1d637672a1c21cd70983597"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8451639c179c52119e0fb39d86e5719f" id="r_a8451639c179c52119e0fb39d86e5719f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a8451639c179c52119e0fb39d86e5719f">addDefaultActions</a> ()</td></tr>
 <tr class="memdesc:a8451639c179c52119e0fb39d86e5719f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup the supported default actions (volume, start/stop, headphone detection)  <br /></td></tr>
 <tr class="separator:a8451639c179c52119e0fb39d86e5719f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -167,15 +168,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a71295636859da247dd8398d2c7097ccb" id="r_a71295636859da247dd8398d2c7097ccb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_i2_s_codec_config.html">I2SCodecConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html#a71295636859da247dd8398d2c7097ccb">defaultConfig</a> (<a class="el" href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">RxTxMode</a> mode=<a class="el" href="group__basic.html#gga8cbd91a8bac9b5ab425112be1620eb49a736237ce367b7814c763eacd188cf9e5">TX_MODE</a>)</td></tr>
 <tr class="memdesc:a71295636859da247dd8398d2c7097ccb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the default configuration.  <br /></td></tr>
 <tr class="separator:a71295636859da247dd8398d2c7097ccb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe8dad716657b7bee5933d0203512ba8" id="r_abe8dad716657b7bee5933d0203512ba8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html#abe8dad716657b7bee5933d0203512ba8">digitalRead</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> pin)</td></tr>
-<tr class="memdesc:abe8dad716657b7bee5933d0203512ba8"><td class="mdescLeft">&#160;</td><td class="mdescRight">get value of digital pin  <br /></td></tr>
-<tr class="separator:abe8dad716657b7bee5933d0203512ba8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d16a91b1911a641ea3ff91bdbb0125e" id="r_a9d16a91b1911a641ea3ff91bdbb0125e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html#a9d16a91b1911a641ea3ff91bdbb0125e">digitalWrite</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> pin, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> value)</td></tr>
-<tr class="memdesc:a9d16a91b1911a641ea3ff91bdbb0125e"><td class="mdescLeft">&#160;</td><td class="mdescRight">set value of digital pin  <br /></td></tr>
-<tr class="separator:a9d16a91b1911a641ea3ff91bdbb0125e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a0d73e2ca1b078c0ba059301e9d4794" id="r_a7a0d73e2ca1b078c0ba059301e9d4794"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a2df48ab05a4397fc269c21f811efa8e1">I2SDriver</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html#a7a0d73e2ca1b078c0ba059301e9d4794">driver</a> ()</td></tr>
-<tr class="memdesc:a7a0d73e2ca1b078c0ba059301e9d4794"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the i2s driver.  <br /></td></tr>
-<tr class="separator:a7a0d73e2ca1b078c0ba059301e9d4794"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57317586330d2c4c2eb284bf98a7caa1" id="r_a57317586330d2c4c2eb284bf98a7caa1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html#a57317586330d2c4c2eb284bf98a7caa1">digitalRead</a> (<a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> pin)</td></tr>
+<tr class="memdesc:a57317586330d2c4c2eb284bf98a7caa1"><td class="mdescLeft">&#160;</td><td class="mdescRight">get value of digital pin  <br /></td></tr>
+<tr class="separator:a57317586330d2c4c2eb284bf98a7caa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33cb38f3d7d9be71376684a50b289b51" id="r_a33cb38f3d7d9be71376684a50b289b51"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html#a33cb38f3d7d9be71376684a50b289b51">digitalWrite</a> (<a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> pin, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> value)</td></tr>
+<tr class="memdesc:a33cb38f3d7d9be71376684a50b289b51"><td class="mdescLeft">&#160;</td><td class="mdescRight">set value of digital pin  <br /></td></tr>
+<tr class="separator:a33cb38f3d7d9be71376684a50b289b51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae50f5a184497c896026de061ccdf8c42" id="r_ae50f5a184497c896026de061ccdf8c42"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_i2_s_driver_base.html">I2SDriverBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html#ae50f5a184497c896026de061ccdf8c42">driver</a> ()</td></tr>
+<tr class="memdesc:ae50f5a184497c896026de061ccdf8c42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the i2s driver.  <br /></td></tr>
+<tr class="separator:ae50f5a184497c896026de061ccdf8c42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf81d3fdaf258088d7692fa70cece087" id="r_aaf81d3fdaf258088d7692fa70cece087"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html#aaf81d3fdaf258088d7692fa70cece087">end</a> ()</td></tr>
 <tr class="memdesc:aaf81d3fdaf258088d7692fa70cece087"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the I2S interface.  <br /></td></tr>
 <tr class="separator:aaf81d3fdaf258088d7692fa70cece087"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -183,18 +184,18 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:af654b48544c195ab99fe27e7bc3ed5fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af34ede8abe36599a724053dac024c06b" id="r_af34ede8abe36599a724053dac024c06b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_audio_actions.html">AudioActions</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#af34ede8abe36599a724053dac024c06b">getActions</a> ()</td></tr>
 <tr class="separator:af34ede8abe36599a724053dac024c06b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9736b8f2749abbd1a2edba38e9b96e39" id="r_a9736b8f2749abbd1a2edba38e9b96e39"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">GpioPin</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html#a9736b8f2749abbd1a2edba38e9b96e39">getKey</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> pos)</td></tr>
-<tr class="memdesc:a9736b8f2749abbd1a2edba38e9b96e39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the gpio for the indicated key pos.  <br /></td></tr>
-<tr class="separator:a9736b8f2749abbd1a2edba38e9b96e39"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc7e7ed349d6b52628ad9dc78d665727" id="r_adc7e7ed349d6b52628ad9dc78d665727"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">GpioPin</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html#adc7e7ed349d6b52628ad9dc78d665727">getPinID</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">PinFunction</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">function</a>)</td></tr>
-<tr class="memdesc:adc7e7ed349d6b52628ad9dc78d665727"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the gpio for the indicated function.  <br /></td></tr>
-<tr class="separator:adc7e7ed349d6b52628ad9dc78d665727"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab69341b1e881a1473ecd2f45dd110826" id="r_ab69341b1e881a1473ecd2f45dd110826"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">GpioPin</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html#ab69341b1e881a1473ecd2f45dd110826">getPinID</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">PinFunction</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">function</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> pos)</td></tr>
-<tr class="memdesc:ab69341b1e881a1473ecd2f45dd110826"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the gpio for the indicated function.  <br /></td></tr>
-<tr class="separator:ab69341b1e881a1473ecd2f45dd110826"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a404013f775ef7c8b545414b6bf20f618" id="r_a404013f775ef7c8b545414b6bf20f618"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">DriverPins</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html#a404013f775ef7c8b545414b6bf20f618">getPins</a> ()</td></tr>
-<tr class="memdesc:a404013f775ef7c8b545414b6bf20f618"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides access to the pin information.  <br /></td></tr>
-<tr class="separator:a404013f775ef7c8b545414b6bf20f618"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a078fdcb12ae417fe5d93c53ec94effac" id="r_a078fdcb12ae417fe5d93c53ec94effac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html#a078fdcb12ae417fe5d93c53ec94effac">getKey</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> pos)</td></tr>
+<tr class="memdesc:a078fdcb12ae417fe5d93c53ec94effac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the gpio for the indicated key pos.  <br /></td></tr>
+<tr class="separator:a078fdcb12ae417fe5d93c53ec94effac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5852c0fbde4bad636486bdbeac0a204b" id="r_a5852c0fbde4bad636486bdbeac0a204b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html#a5852c0fbde4bad636486bdbeac0a204b">getPinID</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">PinFunction</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">function</a>)</td></tr>
+<tr class="memdesc:a5852c0fbde4bad636486bdbeac0a204b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the gpio for the indicated function.  <br /></td></tr>
+<tr class="separator:a5852c0fbde4bad636486bdbeac0a204b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca3b85174081ff2f2d4aecc2be06c653" id="r_aca3b85174081ff2f2d4aecc2be06c653"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html#aca3b85174081ff2f2d4aecc2be06c653">getPinID</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">PinFunction</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">function</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> pos)</td></tr>
+<tr class="memdesc:aca3b85174081ff2f2d4aecc2be06c653"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the gpio for the indicated function.  <br /></td></tr>
+<tr class="separator:aca3b85174081ff2f2d4aecc2be06c653"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77915df252a7a3cd46d1c6875aa790d4" id="r_a77915df252a7a3cd46d1c6875aa790d4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a42434040945919c423a6e07ce658b565">DriverDeviceInfo</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html#a77915df252a7a3cd46d1c6875aa790d4">getPins</a> ()</td></tr>
+<tr class="memdesc:a77915df252a7a3cd46d1c6875aa790d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides access to the pin information.  <br /></td></tr>
+<tr class="separator:a77915df252a7a3cd46d1c6875aa790d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc34138b4a6abf14269a6a34e901a5c8" id="r_abc34138b4a6abf14269a6a34e901a5c8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html#abc34138b4a6abf14269a6a34e901a5c8">getVolume</a> ()</td></tr>
 <tr class="memdesc:abc34138b4a6abf14269a6a34e901a5c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">legacy: same as <a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html#a75896c16336462449610b256c8313b4c" title="Provides the actual volume (0.0f - 1.0f)">volume()</a>  <br /></td></tr>
 <tr class="separator:abc34138b4a6abf14269a6a34e901a5c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -214,36 +215,36 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d52c0ed98e047d782054fa126b281e5" id="r_a0d52c0ed98e047d782054fa126b281e5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_stream.html#a0d52c0ed98e047d782054fa126b281e5">operator bool</a> ()</td></tr>
 <tr class="separator:a0d52c0ed98e047d782054fa126b281e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3cc5bafcade54d106ec00838c30d856a" id="r_a3cc5bafcade54d106ec00838c30d856a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">GpioPin</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a3cc5bafcade54d106ec00838c30d856a">pinAuxin</a> ()</td></tr>
-<tr class="memdesc:a3cc5bafcade54d106ec00838c30d856a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the gpio number for auxin detection.  <br /></td></tr>
-<tr class="separator:a3cc5bafcade54d106ec00838c30d856a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e5eda0090d3ce0d4a828ef652e10a2f" id="r_a5e5eda0090d3ce0d4a828ef652e10a2f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">GpioPin</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a5e5eda0090d3ce0d4a828ef652e10a2f">pinHeadphoneDetect</a> ()</td></tr>
-<tr class="memdesc:a5e5eda0090d3ce0d4a828ef652e10a2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the gpio number for headphone detection.  <br /></td></tr>
-<tr class="separator:a5e5eda0090d3ce0d4a828ef652e10a2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a555009869fcf81abedba3bc24e3d7301" id="r_a555009869fcf81abedba3bc24e3d7301"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">GpioPin</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a555009869fcf81abedba3bc24e3d7301">pinInputMode</a> ()</td></tr>
-<tr class="memdesc:a555009869fcf81abedba3bc24e3d7301"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number for mode-button.  <br /></td></tr>
-<tr class="separator:a555009869fcf81abedba3bc24e3d7301"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57da14af534ee41a579cc62071735b5a" id="r_a57da14af534ee41a579cc62071735b5a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">GpioPin</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a57da14af534ee41a579cc62071735b5a">pinInputPlay</a> ()</td></tr>
-<tr class="memdesc:a57da14af534ee41a579cc62071735b5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get number for play function.  <br /></td></tr>
-<tr class="separator:a57da14af534ee41a579cc62071735b5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a059d0367a1404dcf42f06cc59d73f2ce" id="r_a059d0367a1404dcf42f06cc59d73f2ce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">GpioPin</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a059d0367a1404dcf42f06cc59d73f2ce">pinInputRec</a> ()</td></tr>
-<tr class="memdesc:a059d0367a1404dcf42f06cc59d73f2ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the record-button id for adc-button.  <br /></td></tr>
-<tr class="separator:a059d0367a1404dcf42f06cc59d73f2ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ebba51e0cf604b2cd32403eee279f76" id="r_a5ebba51e0cf604b2cd32403eee279f76"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">GpioPin</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a5ebba51e0cf604b2cd32403eee279f76">pinInputSet</a> ()</td></tr>
-<tr class="memdesc:a5ebba51e0cf604b2cd32403eee279f76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get number for set function.  <br /></td></tr>
-<tr class="separator:a5ebba51e0cf604b2cd32403eee279f76"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3521bfe173958daec58f275c595bfdaa" id="r_a3521bfe173958daec58f275c595bfdaa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">GpioPin</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a3521bfe173958daec58f275c595bfdaa">pinLed</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> idx)</td></tr>
-<tr class="memdesc:a3521bfe173958daec58f275c595bfdaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get LED pin.  <br /></td></tr>
-<tr class="separator:a3521bfe173958daec58f275c595bfdaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d8fcedc151202a64b809ec88d453086" id="r_a4d8fcedc151202a64b809ec88d453086"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">GpioPin</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a4d8fcedc151202a64b809ec88d453086">pinPaEnable</a> ()</td></tr>
-<tr class="memdesc:a4d8fcedc151202a64b809ec88d453086"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the gpio number for PA enable.  <br /></td></tr>
-<tr class="separator:a4d8fcedc151202a64b809ec88d453086"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a3ff0ab05f547ca86fc651fad3e86db" id="r_a1a3ff0ab05f547ca86fc651fad3e86db"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">GpioPin</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a1a3ff0ab05f547ca86fc651fad3e86db">pinVolumeDown</a> ()</td></tr>
-<tr class="memdesc:a1a3ff0ab05f547ca86fc651fad3e86db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get number for volume down function.  <br /></td></tr>
-<tr class="separator:a1a3ff0ab05f547ca86fc651fad3e86db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac093e3552e99362d863ae2f404b5aae1" id="r_ac093e3552e99362d863ae2f404b5aae1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">GpioPin</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#ac093e3552e99362d863ae2f404b5aae1">pinVolumeUp</a> ()</td></tr>
-<tr class="memdesc:ac093e3552e99362d863ae2f404b5aae1"><td class="mdescLeft">&#160;</td><td class="mdescRight">number for volume up function  <br /></td></tr>
-<tr class="separator:ac093e3552e99362d863ae2f404b5aae1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98c81424b24cb4a0915ce0ad8ab8cb7a" id="r_a98c81424b24cb4a0915ce0ad8ab8cb7a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a98c81424b24cb4a0915ce0ad8ab8cb7a">pinAuxin</a> ()</td></tr>
+<tr class="memdesc:a98c81424b24cb4a0915ce0ad8ab8cb7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the gpio number for auxin detection.  <br /></td></tr>
+<tr class="separator:a98c81424b24cb4a0915ce0ad8ab8cb7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0606490bd53af200c4affe593dd1193c" id="r_a0606490bd53af200c4affe593dd1193c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a0606490bd53af200c4affe593dd1193c">pinHeadphoneDetect</a> ()</td></tr>
+<tr class="memdesc:a0606490bd53af200c4affe593dd1193c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the gpio number for headphone detection.  <br /></td></tr>
+<tr class="separator:a0606490bd53af200c4affe593dd1193c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa52ff2a7518e935fb52c76cee65abe81" id="r_aa52ff2a7518e935fb52c76cee65abe81"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#aa52ff2a7518e935fb52c76cee65abe81">pinInputMode</a> ()</td></tr>
+<tr class="memdesc:aa52ff2a7518e935fb52c76cee65abe81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number for mode-button.  <br /></td></tr>
+<tr class="separator:aa52ff2a7518e935fb52c76cee65abe81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a474d2bf8655a06799d4201d062d047b6" id="r_a474d2bf8655a06799d4201d062d047b6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a474d2bf8655a06799d4201d062d047b6">pinInputPlay</a> ()</td></tr>
+<tr class="memdesc:a474d2bf8655a06799d4201d062d047b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get number for play function.  <br /></td></tr>
+<tr class="separator:a474d2bf8655a06799d4201d062d047b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93d51ed0c565a0aa40a8bf0ce60b727f" id="r_a93d51ed0c565a0aa40a8bf0ce60b727f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a93d51ed0c565a0aa40a8bf0ce60b727f">pinInputRec</a> ()</td></tr>
+<tr class="memdesc:a93d51ed0c565a0aa40a8bf0ce60b727f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the record-button id for adc-button.  <br /></td></tr>
+<tr class="separator:a93d51ed0c565a0aa40a8bf0ce60b727f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39d053de88a7afe1ebf6b4607b7af29c" id="r_a39d053de88a7afe1ebf6b4607b7af29c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a39d053de88a7afe1ebf6b4607b7af29c">pinInputSet</a> ()</td></tr>
+<tr class="memdesc:a39d053de88a7afe1ebf6b4607b7af29c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get number for set function.  <br /></td></tr>
+<tr class="separator:a39d053de88a7afe1ebf6b4607b7af29c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b711d48c46905e00557e07700261052" id="r_a3b711d48c46905e00557e07700261052"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a3b711d48c46905e00557e07700261052">pinLed</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> idx)</td></tr>
+<tr class="memdesc:a3b711d48c46905e00557e07700261052"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get LED pin.  <br /></td></tr>
+<tr class="separator:a3b711d48c46905e00557e07700261052"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2b91335862b4659348945f365318d4b" id="r_ad2b91335862b4659348945f365318d4b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#ad2b91335862b4659348945f365318d4b">pinPaEnable</a> ()</td></tr>
+<tr class="memdesc:ad2b91335862b4659348945f365318d4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the gpio number for PA enable.  <br /></td></tr>
+<tr class="separator:ad2b91335862b4659348945f365318d4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab19b409cff357c3df01b7275a1a63301" id="r_ab19b409cff357c3df01b7275a1a63301"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#ab19b409cff357c3df01b7275a1a63301">pinVolumeDown</a> ()</td></tr>
+<tr class="memdesc:ab19b409cff357c3df01b7275a1a63301"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get number for volume down function.  <br /></td></tr>
+<tr class="separator:ab19b409cff357c3df01b7275a1a63301"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a292a95f2fb22074efee103e561842aff" id="r_a292a95f2fb22074efee103e561842aff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a292a95f2fb22074efee103e561842aff">pinVolumeUp</a> ()</td></tr>
+<tr class="memdesc:a292a95f2fb22074efee103e561842aff"><td class="mdescLeft">&#160;</td><td class="mdescRight">number for volume up function  <br /></td></tr>
+<tr class="separator:a292a95f2fb22074efee103e561842aff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7897359154057644b97714a13fc70581" id="r_a7897359154057644b97714a13fc70581"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a7897359154057644b97714a13fc70581">processActions</a> ()</td></tr>
 <tr class="memdesc:a7897359154057644b97714a13fc70581"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process input keys and pins.  <br /></td></tr>
 <tr class="separator:a7897359154057644b97714a13fc70581"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -289,6 +290,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1fdd798e6ae46c5c0bd4b3f42bf18220" id="r_a1fdd798e6ae46c5c0bd4b3f42bf18220"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a1fdd798e6ae46c5c0bd4b3f42bf18220">setSpeakerActive</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> <a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a03c996f9fcf0e10baeb3e700be0c409a">active</a>)</td></tr>
 <tr class="memdesc:a1fdd798e6ae46c5c0bd4b3f42bf18220"><td class="mdescLeft">&#160;</td><td class="mdescRight">the same as <a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html#ac515c630cf8bddf7e5238601cb60393f" title="Sets the output of the PA Power Pin.">setPAPower()</a>  <br /></td></tr>
 <tr class="separator:a1fdd798e6ae46c5c0bd4b3f42bf18220"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2c892b1d338b026027a34725c73b69b" id="r_ad2c892b1d338b026027a34725c73b69b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#ad2c892b1d338b026027a34725c73b69b">setUsePinInterrupt</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> <a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a03c996f9fcf0e10baeb3e700be0c409a">active</a>)</td></tr>
+<tr class="memdesc:ad2c892b1d338b026027a34725c73b69b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines if we use pin interrupts for audio actions (default: false)  <br /></td></tr>
+<tr class="separator:ad2c892b1d338b026027a34725c73b69b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad593a1d6f339d68d255deca6ed148a43" id="r_ad593a1d6f339d68d255deca6ed148a43"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html#ad593a1d6f339d68d255deca6ed148a43">setVolume</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">vol</a>) <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
 <tr class="memdesc:ad593a1d6f339d68d255deca6ed148a43"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the volume (range 0.0f - 1.0f)  <br /></td></tr>
 <tr class="separator:ad593a1d6f339d68d255deca6ed148a43"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -308,24 +312,24 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a2077407b3cf9695f2bb536298c21bd9c" id="r_a2077407b3cf9695f2bb536298c21bd9c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a2077407b3cf9695f2bb536298c21bd9c">actionHeadphoneDetection</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *ref)</td></tr>
-<tr class="memdesc:a2077407b3cf9695f2bb536298c21bd9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Switch off the PA if the headphone in plugged in and switch it on again if the headphone is unplugged. This method complies with the.  <br /></td></tr>
-<tr class="separator:a2077407b3cf9695f2bb536298c21bd9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0348c5f89f6a5b0990d7ef15b3850fc" id="r_ae0348c5f89f6a5b0990d7ef15b3850fc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#ae0348c5f89f6a5b0990d7ef15b3850fc">actionStart</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *ref)</td></tr>
-<tr class="memdesc:ae0348c5f89f6a5b0990d7ef15b3850fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start.  <br /></td></tr>
-<tr class="separator:ae0348c5f89f6a5b0990d7ef15b3850fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a486bda2d8b57c7452031652c37417b62" id="r_a486bda2d8b57c7452031652c37417b62"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a486bda2d8b57c7452031652c37417b62">actionStartStop</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *ref)</td></tr>
-<tr class="memdesc:a486bda2d8b57c7452031652c37417b62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Toggle start stop.  <br /></td></tr>
-<tr class="separator:a486bda2d8b57c7452031652c37417b62"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae7d67606b340872f0c6a98829b0909e6" id="r_ae7d67606b340872f0c6a98829b0909e6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#ae7d67606b340872f0c6a98829b0909e6">actionStop</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *ref)</td></tr>
-<tr class="memdesc:ae7d67606b340872f0c6a98829b0909e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop.  <br /></td></tr>
-<tr class="separator:ae7d67606b340872f0c6a98829b0909e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a249d47462e3f9710c2ffc94bff9b2ca9" id="r_a249d47462e3f9710c2ffc94bff9b2ca9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a249d47462e3f9710c2ffc94bff9b2ca9">actionVolumeDown</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *ref)</td></tr>
-<tr class="memdesc:a249d47462e3f9710c2ffc94bff9b2ca9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrease the volume.  <br /></td></tr>
-<tr class="separator:a249d47462e3f9710c2ffc94bff9b2ca9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1abccda83627d593863cea922c0182e6" id="r_a1abccda83627d593863cea922c0182e6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a1abccda83627d593863cea922c0182e6">actionVolumeUp</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *ref)</td></tr>
-<tr class="memdesc:a1abccda83627d593863cea922c0182e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increase the volume.  <br /></td></tr>
-<tr class="separator:a1abccda83627d593863cea922c0182e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f77d672f751978b22ab818004e0d125" id="r_a7f77d672f751978b22ab818004e0d125"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a7f77d672f751978b22ab818004e0d125">actionHeadphoneDetection</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *ref)</td></tr>
+<tr class="memdesc:a7f77d672f751978b22ab818004e0d125"><td class="mdescLeft">&#160;</td><td class="mdescRight">Switch off the PA if the headphone in plugged in and switch it on again if the headphone is unplugged. This method complies with the.  <br /></td></tr>
+<tr class="separator:a7f77d672f751978b22ab818004e0d125"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a672df3d766b603fbe9eb7ee7b9271c33" id="r_a672df3d766b603fbe9eb7ee7b9271c33"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a672df3d766b603fbe9eb7ee7b9271c33">actionStart</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *ref)</td></tr>
+<tr class="memdesc:a672df3d766b603fbe9eb7ee7b9271c33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start.  <br /></td></tr>
+<tr class="separator:a672df3d766b603fbe9eb7ee7b9271c33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab065c1cc026224031ae86693e284a739" id="r_ab065c1cc026224031ae86693e284a739"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#ab065c1cc026224031ae86693e284a739">actionStartStop</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *ref)</td></tr>
+<tr class="memdesc:ab065c1cc026224031ae86693e284a739"><td class="mdescLeft">&#160;</td><td class="mdescRight">Toggle start stop.  <br /></td></tr>
+<tr class="separator:ab065c1cc026224031ae86693e284a739"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c56d067dbfb0831c7a47ce8fa8fb7bf" id="r_a2c56d067dbfb0831c7a47ce8fa8fb7bf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a2c56d067dbfb0831c7a47ce8fa8fb7bf">actionStop</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *ref)</td></tr>
+<tr class="memdesc:a2c56d067dbfb0831c7a47ce8fa8fb7bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop.  <br /></td></tr>
+<tr class="separator:a2c56d067dbfb0831c7a47ce8fa8fb7bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add53283bbe825552f6661c2ff20fec81" id="r_add53283bbe825552f6661c2ff20fec81"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#add53283bbe825552f6661c2ff20fec81">actionVolumeDown</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *ref)</td></tr>
+<tr class="memdesc:add53283bbe825552f6661c2ff20fec81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrease the volume.  <br /></td></tr>
+<tr class="separator:add53283bbe825552f6661c2ff20fec81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12a62cef26dc7e149aef638bce612b60" id="r_a12a62cef26dc7e149aef638bce612b60"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a12a62cef26dc7e149aef638bce612b60">actionVolumeUp</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *ref)</td></tr>
+<tr class="memdesc:a12a62cef26dc7e149aef638bce612b60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increase the volume.  <br /></td></tr>
+<tr class="separator:a12a62cef26dc7e149aef638bce612b60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -333,13 +337,13 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a6223ed9eecf9575a05e6e4b3fa23628b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f9f289a2181f62b89cff6fc401c0108" id="r_a2f9f289a2181f62b89cff6fc401c0108"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html#a2f9f289a2181f62b89cff6fc401c0108">beginCodec</a> (<a class="el" href="structaudio__tools_1_1_i2_s_codec_config.html">I2SCodecConfig</a> <a class="el" href="classaudio__tools_1_1_audio_stream.html#a47385aa19435f5fca9d3083a748258c5">info</a>)</td></tr>
 <tr class="separator:a2f9f289a2181f62b89cff6fc401c0108"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a429791ee6aa07d099b1e2df39b688507" id="r_a429791ee6aa07d099b1e2df39b688507"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_audio_actions.html#a133764d70380ecc0ac0811525c6cf65e">AudioActions::ActiveLogic</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a429791ee6aa07d099b1e2df39b688507">getActionLogic</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> pin)</td></tr>
-<tr class="memdesc:a429791ee6aa07d099b1e2df39b688507"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the action logic (ActiveLow or ActiveTouch) for the pin.  <br /></td></tr>
-<tr class="separator:a429791ee6aa07d099b1e2df39b688507"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af95532528462f95e090eb4d2d9ce39e5" id="r_af95532528462f95e090eb4d2d9ce39e5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_audio_actions.html#a133764d70380ecc0ac0811525c6cf65e">AudioActions::ActiveLogic</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#af95532528462f95e090eb4d2d9ce39e5">getActionLogic</a> (<a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> pin)</td></tr>
+<tr class="memdesc:af95532528462f95e090eb4d2d9ce39e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the action logic (ActiveLow or ActiveTouch) for the pin.  <br /></td></tr>
+<tr class="separator:af95532528462f95e090eb4d2d9ce39e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ff8532d5d5a50232a2dc3b224498cf1" id="r_a2ff8532d5d5a50232a2dc3b224498cf1"><td class="memItemLeft" align="right" valign="top">audio_driver_local::Optional&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">PinsI2S</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html#a2ff8532d5d5a50232a2dc3b224498cf1">getI2SPins</a> ()</td></tr>
 <tr class="separator:a2ff8532d5d5a50232a2dc3b224498cf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab22ccce879df03e04256612fee567543" id="r_ab22ccce879df03e04256612fee567543"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#ab22ccce879df03e04256612fee567543">getSdCsPin</a> ()</td></tr>
-<tr class="separator:ab22ccce879df03e04256612fee567543"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8207b5a74ec6616af6e27ec3cd180e1" id="r_ad8207b5a74ec6616af6e27ec3cd180e1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#ad8207b5a74ec6616af6e27ec3cd180e1">getSdCsPin</a> ()</td></tr>
+<tr class="separator:ad8207b5a74ec6616af6e27ec3cd180e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc00b141650b11fe19d4c7055d96a075" id="r_afc00b141650b11fe19d4c7055d96a075"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_stream.html#afc00b141650b11fe19d4c7055d96a075">not_supported</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> out, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a> *<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">msg</a>=&quot;&quot;)</td></tr>
 <tr class="separator:afc00b141650b11fe19d4c7055d96a075"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a9a665a387a8c4fbf7fed14bbbfc093" id="r_a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a6a9a665a387a8c4fbf7fed14bbbfc093">notifyAudioChange</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> <a class="el" href="classaudio__tools_1_1_audio_stream.html#a47385aa19435f5fca9d3083a748258c5">info</a>)</td></tr>
@@ -360,9 +364,14 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a9ade9c7359aea1b71c2c666cf77afa62" id="r_a9ade9c7359aea1b71c2c666cf77afa62"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">samplerate_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html#a9ade9c7359aea1b71c2c666cf77afa62">toRate</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> rate)</td></tr>
 <tr class="separator:a9ade9c7359aea1b71c2c666cf77afa62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
+Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:ac3904fe29cbaee1527a4a9ec4b707412" id="r_ac3904fe29cbaee1527a4a9ec4b707412"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#ac3904fe29cbaee1527a4a9ec4b707412">readPinCB</a> (<a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> pin, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *ref)</td></tr>
+<tr class="separator:ac3904fe29cbaee1527a4a9ec4b707412"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:aa66a35e5edf58ce00047afcd1d4f455e" id="r_aa66a35e5edf58ce00047afcd1d4f455e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_print.html#aa66a35e5edf58ce00047afcd1d4f455e">_timeout</a> = 10</td></tr>
+<tr class="memitem:aa66a35e5edf58ce00047afcd1d4f455e" id="r_aa66a35e5edf58ce00047afcd1d4f455e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_print.html#aa66a35e5edf58ce00047afcd1d4f455e">_timeout</a> = 10</td></tr>
 <tr class="separator:aa66a35e5edf58ce00047afcd1d4f455e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57716c67663fff8ba54db6d035fd1e30" id="r_a57716c67663fff8ba54db6d035fd1e30"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a57716c67663fff8ba54db6d035fd1e30">action_increment_value</a> = 0.02</td></tr>
 <tr class="separator:a57716c67663fff8ba54db6d035fd1e30"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -431,8 +440,8 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a2077407b3cf9695f2bb536298c21bd9c" name="a2077407b3cf9695f2bb536298c21bd9c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2077407b3cf9695f2bb536298c21bd9c">&#9670;&#160;</a></span>actionHeadphoneDetection()</h2>
+<a id="a7f77d672f751978b22ab818004e0d125" name="a7f77d672f751978b22ab818004e0d125"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f77d672f751978b22ab818004e0d125">&#9670;&#160;</a></span>actionHeadphoneDetection()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -449,7 +458,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
         <tr>
@@ -475,8 +484,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ae0348c5f89f6a5b0990d7ef15b3850fc" name="ae0348c5f89f6a5b0990d7ef15b3850fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae0348c5f89f6a5b0990d7ef15b3850fc">&#9670;&#160;</a></span>actionStart()</h2>
+<a id="a672df3d766b603fbe9eb7ee7b9271c33" name="a672df3d766b603fbe9eb7ee7b9271c33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a672df3d766b603fbe9eb7ee7b9271c33">&#9670;&#160;</a></span>actionStart()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -493,7 +502,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
         <tr>
@@ -519,8 +528,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a486bda2d8b57c7452031652c37417b62" name="a486bda2d8b57c7452031652c37417b62"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a486bda2d8b57c7452031652c37417b62">&#9670;&#160;</a></span>actionStartStop()</h2>
+<a id="ab065c1cc026224031ae86693e284a739" name="ab065c1cc026224031ae86693e284a739"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab065c1cc026224031ae86693e284a739">&#9670;&#160;</a></span>actionStartStop()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -537,7 +546,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
         <tr>
@@ -563,8 +572,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ae7d67606b340872f0c6a98829b0909e6" name="ae7d67606b340872f0c6a98829b0909e6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae7d67606b340872f0c6a98829b0909e6">&#9670;&#160;</a></span>actionStop()</h2>
+<a id="a2c56d067dbfb0831c7a47ce8fa8fb7bf" name="a2c56d067dbfb0831c7a47ce8fa8fb7bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c56d067dbfb0831c7a47ce8fa8fb7bf">&#9670;&#160;</a></span>actionStop()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -581,7 +590,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
         <tr>
@@ -607,8 +616,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a249d47462e3f9710c2ffc94bff9b2ca9" name="a249d47462e3f9710c2ffc94bff9b2ca9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a249d47462e3f9710c2ffc94bff9b2ca9">&#9670;&#160;</a></span>actionVolumeDown()</h2>
+<a id="add53283bbe825552f6661c2ff20fec81" name="add53283bbe825552f6661c2ff20fec81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add53283bbe825552f6661c2ff20fec81">&#9670;&#160;</a></span>actionVolumeDown()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -625,7 +634,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
         <tr>
@@ -676,8 +685,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a1abccda83627d593863cea922c0182e6" name="a1abccda83627d593863cea922c0182e6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1abccda83627d593863cea922c0182e6">&#9670;&#160;</a></span>actionVolumeUp()</h2>
+<a id="a12a62cef26dc7e149aef638bce612b60" name="a12a62cef26dc7e149aef638bce612b60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12a62cef26dc7e149aef638bce612b60">&#9670;&#160;</a></span>actionVolumeUp()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -694,7 +703,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
         <tr>
@@ -720,8 +729,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a314187d31fcaabecde855d4f7dde9bb9" name="a314187d31fcaabecde855d4f7dde9bb9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a314187d31fcaabecde855d4f7dde9bb9">&#9670;&#160;</a></span>addAction() <span class="overload">[1/4]</span></h2>
+<a id="ae44f9b55067d2f4379388eba53b5dc1e" name="ae44f9b55067d2f4379388eba53b5dc1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae44f9b55067d2f4379388eba53b5dc1e">&#9670;&#160;</a></span>addAction() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -738,7 +747,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(*)(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *)&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(*)(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *)&#160;</td>
           <td class="paramname"><em>action</em>, </td>
         </tr>
         <tr>
@@ -764,8 +773,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a045696077b56acd7a3a8cefef6659832" name="a045696077b56acd7a3a8cefef6659832"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a045696077b56acd7a3a8cefef6659832">&#9670;&#160;</a></span>addAction() <span class="overload">[2/4]</span></h2>
+<a id="a09fde058e09b817ac7329cec00103985" name="a09fde058e09b817ac7329cec00103985"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09fde058e09b817ac7329cec00103985">&#9670;&#160;</a></span>addAction() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -782,13 +791,13 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(*)(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *)&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(*)(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *)&#160;</td>
           <td class="paramname"><em>actionOn</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(*)(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *)&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(*)(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *)&#160;</td>
           <td class="paramname"><em>actionOff</em>, </td>
         </tr>
         <tr>
@@ -814,8 +823,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a24fac46b019688e1b0993569912128a1" name="a24fac46b019688e1b0993569912128a1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a24fac46b019688e1b0993569912128a1">&#9670;&#160;</a></span>addAction() <span class="overload">[3/4]</span></h2>
+<a id="af15c3925f1257c3eddd68a9236f655fb" name="af15c3925f1257c3eddd68a9236f655fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af15c3925f1257c3eddd68a9236f655fb">&#9670;&#160;</a></span>addAction() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -826,13 +835,13 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> addAction </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>&#160;</td>
           <td class="paramname"><em>pin</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(*)(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *)&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(*)(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *)&#160;</td>
           <td class="paramname"><em>action</em>, </td>
         </tr>
         <tr>
@@ -873,8 +882,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a08e8001d4d1048b8fd9e13a5e968d453" name="a08e8001d4d1048b8fd9e13a5e968d453"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a08e8001d4d1048b8fd9e13a5e968d453">&#9670;&#160;</a></span>addAction() <span class="overload">[4/4]</span></h2>
+<a id="a857567ddd1d637672a1c21cd70983597" name="a857567ddd1d637672a1c21cd70983597"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a857567ddd1d637672a1c21cd70983597">&#9670;&#160;</a></span>addAction() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -885,13 +894,13 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> addAction </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>&#160;</td>
           <td class="paramname"><em>pin</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(*)(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *)&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(*)(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>, <a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *)&#160;</td>
           <td class="paramname"><em>action</em>, </td>
         </tr>
         <tr>
@@ -1145,7 +1154,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>provides the actual output <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>: this is usually the same as <a class="el" href="classaudio__tools_1_1_audio_stream.html#aececda97cff151859a8695d30896dd20" title="provides the actual input AudioInfo">audioInfo()</a> unless we use a transforming stream </p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_m_p3_encoder_shine.html#ab5af4066a6ef92716fc14eaf50926f72">MP3EncoderShine</a>, <a class="el" href="classaudio__tools_1_1_pure_data_stream.html#ab5af4066a6ef92716fc14eaf50926f72">PureDataStream</a>, <a class="el" href="classaudio__tools_1_1_p_w_m_audio_output.html#ab5af4066a6ef92716fc14eaf50926f72">PWMAudioOutput</a>, <a class="el" href="classaudio__tools_1_1_channel_format_converter_stream_t.html#ab5af4066a6ef92716fc14eaf50926f72">ChannelFormatConverterStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_channel_format_converter_stream.html#ab5af4066a6ef92716fc14eaf50926f72">ChannelFormatConverterStream</a>, <a class="el" href="classaudio__tools_1_1_number_format_converter_stream_t.html#ab5af4066a6ef92716fc14eaf50926f72">NumberFormatConverterStreamT&lt; TFrom, TTo &gt;</a>, <a class="el" href="classaudio__tools_1_1_number_format_converter_stream.html#ab5af4066a6ef92716fc14eaf50926f72">NumberFormatConverterStream</a>, <a class="el" href="classaudio__tools_1_1_format_converter_stream.html#ab5af4066a6ef92716fc14eaf50926f72">FormatConverterStream</a>, <a class="el" href="classaudio__tools_1_1_pipeline.html#ab5af4066a6ef92716fc14eaf50926f72">Pipeline</a>, <a class="el" href="classaudio__tools_1_1_resample_stream.html#ab5af4066a6ef92716fc14eaf50926f72">ResampleStream</a>, and <a class="el" href="classaudio__tools_1_1_resample_stream_t.html#ab5af4066a6ef92716fc14eaf50926f72">ResampleStreamT&lt; TInterpolator &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_m_p3_encoder_shine.html#ab5af4066a6ef92716fc14eaf50926f72">MP3EncoderShine</a>, <a class="el" href="classaudio__tools_1_1_pure_data_stream.html#ab5af4066a6ef92716fc14eaf50926f72">PureDataStream</a>, <a class="el" href="classaudio__tools_1_1_p_w_m_audio_output.html#ab5af4066a6ef92716fc14eaf50926f72">PWMAudioOutput&lt; PWMDriverT &gt;</a>, <a class="el" href="classaudio__tools_1_1_channel_format_converter_stream_t.html#ab5af4066a6ef92716fc14eaf50926f72">ChannelFormatConverterStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_channel_format_converter_stream.html#ab5af4066a6ef92716fc14eaf50926f72">ChannelFormatConverterStream</a>, <a class="el" href="classaudio__tools_1_1_number_format_converter_stream_t.html#ab5af4066a6ef92716fc14eaf50926f72">NumberFormatConverterStreamT&lt; TFrom, TTo &gt;</a>, <a class="el" href="classaudio__tools_1_1_number_format_converter_stream.html#ab5af4066a6ef92716fc14eaf50926f72">NumberFormatConverterStream</a>, <a class="el" href="classaudio__tools_1_1_format_converter_stream.html#ab5af4066a6ef92716fc14eaf50926f72">FormatConverterStream</a>, <a class="el" href="classaudio__tools_1_1_pipeline.html#ab5af4066a6ef92716fc14eaf50926f72">Pipeline</a>, <a class="el" href="classaudio__tools_1_1_resample_stream.html#ab5af4066a6ef92716fc14eaf50926f72">ResampleStream</a>, and <a class="el" href="classaudio__tools_1_1_resample_stream_t.html#ab5af4066a6ef92716fc14eaf50926f72">ResampleStreamT&lt; TInterpolator &gt;</a>.</p>
 
 </div>
 </div>
@@ -1399,8 +1408,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="abe8dad716657b7bee5933d0203512ba8" name="abe8dad716657b7bee5933d0203512ba8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abe8dad716657b7bee5933d0203512ba8">&#9670;&#160;</a></span>digitalRead()</h2>
+<a id="a57317586330d2c4c2eb284bf98a7caa1" name="a57317586330d2c4c2eb284bf98a7caa1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57317586330d2c4c2eb284bf98a7caa1">&#9670;&#160;</a></span>digitalRead()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1411,7 +1420,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> digitalRead </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>&#160;</td>
           <td class="paramname"><em>pin</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1427,8 +1436,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a9d16a91b1911a641ea3ff91bdbb0125e" name="a9d16a91b1911a641ea3ff91bdbb0125e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9d16a91b1911a641ea3ff91bdbb0125e">&#9670;&#160;</a></span>digitalWrite()</h2>
+<a id="a33cb38f3d7d9be71376684a50b289b51" name="a33cb38f3d7d9be71376684a50b289b51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33cb38f3d7d9be71376684a50b289b51">&#9670;&#160;</a></span>digitalWrite()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1439,7 +1448,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> digitalWrite </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>&#160;</td>
           <td class="paramname"><em>pin</em>, </td>
         </tr>
         <tr>
@@ -1465,8 +1474,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a7a0d73e2ca1b078c0ba059301e9d4794" name="a7a0d73e2ca1b078c0ba059301e9d4794"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7a0d73e2ca1b078c0ba059301e9d4794">&#9670;&#160;</a></span>driver()</h2>
+<a id="ae50f5a184497c896026de061ccdf8c42" name="ae50f5a184497c896026de061ccdf8c42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae50f5a184497c896026de061ccdf8c42">&#9670;&#160;</a></span>driver()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1475,7 +1484,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a2df48ab05a4397fc269c21f811efa8e1">I2SDriver</a> * driver </td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_i2_s_driver_base.html">I2SDriverBase</a> * driver </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1544,14 +1553,14 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_print.html#ad3aed50bc3b4459454ccb8c64f5ced5a">Print</a>.</p>
+<p>Reimplemented from <a class="el" href="class_print.html#ad3aed50bc3b4459454ccb8c64f5ced5a">Print</a>.</p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_pure_data_stream.html#adac116554b543b7c4228c018a85882f5">PureDataStream</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#ad3aed50bc3b4459454ccb8c64f5ced5a">URLStreamBufferedT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#ad3aed50bc3b4459454ccb8c64f5ced5a">URLStreamBufferedT&lt; ICYStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_reformat_base_stream.html#ad3aed50bc3b4459454ccb8c64f5ced5a">ReformatBaseStream</a>, <a class="el" href="classaudio__tools_1_1_audio_stream_wrapper.html#ad3aed50bc3b4459454ccb8c64f5ced5a">AudioStreamWrapper</a>, <a class="el" href="classaudio__tools_1_1_resample_stream.html#adac116554b543b7c4228c018a85882f5">ResampleStream</a>, <a class="el" href="classaudio__tools_1_1_encoded_audio_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">EncodedAudioStream</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">URLStream</a>, <a class="el" href="classaudio__tools_1_1_buffered_task_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">BufferedTaskStream</a>, <a class="el" href="classaudio__tools_1_1_i2_s_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">I2SStream</a>, <a class="el" href="classaudio__tools_1_1_memory_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">MemoryStream</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">RingBufferStream</a>, <a class="el" href="classaudio__tools_1_1_generated_sound_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">GeneratedSoundStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_generated_sound_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">GeneratedSoundStream&lt; int16_t &gt;</a>, and <a class="el" href="classaudio__tools_1_1_buffered_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">BufferedStream</a>.</p>
 
 </div>
 </div>
-<a id="a429791ee6aa07d099b1e2df39b688507" name="a429791ee6aa07d099b1e2df39b688507"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a429791ee6aa07d099b1e2df39b688507">&#9670;&#160;</a></span>getActionLogic()</h2>
+<a id="af95532528462f95e090eb4d2d9ce39e5" name="af95532528462f95e090eb4d2d9ce39e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af95532528462f95e090eb4d2d9ce39e5">&#9670;&#160;</a></span>getActionLogic()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1562,7 +1571,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classaudio__tools_1_1_audio_actions.html#a133764d70380ecc0ac0811525c6cf65e">AudioActions::ActiveLogic</a> getActionLogic </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>&#160;</td>
           <td class="paramname"><em>pin</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1628,8 +1637,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a9736b8f2749abbd1a2edba38e9b96e39" name="a9736b8f2749abbd1a2edba38e9b96e39"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9736b8f2749abbd1a2edba38e9b96e39">&#9670;&#160;</a></span>getKey()</h2>
+<a id="a078fdcb12ae417fe5d93c53ec94effac" name="a078fdcb12ae417fe5d93c53ec94effac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a078fdcb12ae417fe5d93c53ec94effac">&#9670;&#160;</a></span>getKey()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1638,7 +1647,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">GpioPin</a> getKey </td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> getKey </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
           <td class="paramname"><em>pos</em></td><td>)</td>
@@ -1656,8 +1665,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="adc7e7ed349d6b52628ad9dc78d665727" name="adc7e7ed349d6b52628ad9dc78d665727"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adc7e7ed349d6b52628ad9dc78d665727">&#9670;&#160;</a></span>getPinID() <span class="overload">[1/2]</span></h2>
+<a id="a5852c0fbde4bad636486bdbeac0a204b" name="a5852c0fbde4bad636486bdbeac0a204b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5852c0fbde4bad636486bdbeac0a204b">&#9670;&#160;</a></span>getPinID() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1666,7 +1675,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">GpioPin</a> getPinID </td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> getPinID </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">PinFunction</a>&#160;</td>
           <td class="paramname"><em>function</em></td><td>)</td>
@@ -1684,8 +1693,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ab69341b1e881a1473ecd2f45dd110826" name="ab69341b1e881a1473ecd2f45dd110826"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab69341b1e881a1473ecd2f45dd110826">&#9670;&#160;</a></span>getPinID() <span class="overload">[2/2]</span></h2>
+<a id="aca3b85174081ff2f2d4aecc2be06c653" name="aca3b85174081ff2f2d4aecc2be06c653"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca3b85174081ff2f2d4aecc2be06c653">&#9670;&#160;</a></span>getPinID() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1694,7 +1703,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">GpioPin</a> getPinID </td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> getPinID </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">PinFunction</a>&#160;</td>
           <td class="paramname"><em>function</em>, </td>
@@ -1722,8 +1731,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a404013f775ef7c8b545414b6bf20f618" name="a404013f775ef7c8b545414b6bf20f618"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a404013f775ef7c8b545414b6bf20f618">&#9670;&#160;</a></span>getPins()</h2>
+<a id="a77915df252a7a3cd46d1c6875aa790d4" name="a77915df252a7a3cd46d1c6875aa790d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77915df252a7a3cd46d1c6875aa790d4">&#9670;&#160;</a></span>getPins()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1732,7 +1741,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">DriverPins</a> &amp; getPins </td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a42434040945919c423a6e07ce658b565">DriverDeviceInfo</a> &amp; getPins </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1749,8 +1758,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ab22ccce879df03e04256612fee567543" name="ab22ccce879df03e04256612fee567543"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab22ccce879df03e04256612fee567543">&#9670;&#160;</a></span>getSdCsPin()</h2>
+<a id="ad8207b5a74ec6616af6e27ec3cd180e1" name="ad8207b5a74ec6616af6e27ec3cd180e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8207b5a74ec6616af6e27ec3cd180e1">&#9670;&#160;</a></span>getSdCsPin()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1759,7 +1768,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> getSdCsPin </td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> getSdCsPin </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -2034,8 +2043,8 @@ false </dd></dl>
 
 </div>
 </div>
-<a id="a3cc5bafcade54d106ec00838c30d856a" name="a3cc5bafcade54d106ec00838c30d856a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3cc5bafcade54d106ec00838c30d856a">&#9670;&#160;</a></span>pinAuxin()</h2>
+<a id="a98c81424b24cb4a0915ce0ad8ab8cb7a" name="a98c81424b24cb4a0915ce0ad8ab8cb7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98c81424b24cb4a0915ce0ad8ab8cb7a">&#9670;&#160;</a></span>pinAuxin()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2044,7 +2053,7 @@ false </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">GpioPin</a> pinAuxin </td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> pinAuxin </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -2062,8 +2071,8 @@ false </dd></dl>
 
 </div>
 </div>
-<a id="a5e5eda0090d3ce0d4a828ef652e10a2f" name="a5e5eda0090d3ce0d4a828ef652e10a2f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5e5eda0090d3ce0d4a828ef652e10a2f">&#9670;&#160;</a></span>pinHeadphoneDetect()</h2>
+<a id="a0606490bd53af200c4affe593dd1193c" name="a0606490bd53af200c4affe593dd1193c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0606490bd53af200c4affe593dd1193c">&#9670;&#160;</a></span>pinHeadphoneDetect()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2072,7 +2081,7 @@ false </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">GpioPin</a> pinHeadphoneDetect </td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> pinHeadphoneDetect </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -2090,8 +2099,8 @@ false </dd></dl>
 
 </div>
 </div>
-<a id="a555009869fcf81abedba3bc24e3d7301" name="a555009869fcf81abedba3bc24e3d7301"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a555009869fcf81abedba3bc24e3d7301">&#9670;&#160;</a></span>pinInputMode()</h2>
+<a id="aa52ff2a7518e935fb52c76cee65abe81" name="aa52ff2a7518e935fb52c76cee65abe81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa52ff2a7518e935fb52c76cee65abe81">&#9670;&#160;</a></span>pinInputMode()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2100,7 +2109,7 @@ false </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">GpioPin</a> pinInputMode </td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> pinInputMode </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -2118,8 +2127,8 @@ false </dd></dl>
 
 </div>
 </div>
-<a id="a57da14af534ee41a579cc62071735b5a" name="a57da14af534ee41a579cc62071735b5a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a57da14af534ee41a579cc62071735b5a">&#9670;&#160;</a></span>pinInputPlay()</h2>
+<a id="a474d2bf8655a06799d4201d062d047b6" name="a474d2bf8655a06799d4201d062d047b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a474d2bf8655a06799d4201d062d047b6">&#9670;&#160;</a></span>pinInputPlay()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2128,7 +2137,7 @@ false </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">GpioPin</a> pinInputPlay </td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> pinInputPlay </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -2146,8 +2155,8 @@ false </dd></dl>
 
 </div>
 </div>
-<a id="a059d0367a1404dcf42f06cc59d73f2ce" name="a059d0367a1404dcf42f06cc59d73f2ce"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a059d0367a1404dcf42f06cc59d73f2ce">&#9670;&#160;</a></span>pinInputRec()</h2>
+<a id="a93d51ed0c565a0aa40a8bf0ce60b727f" name="a93d51ed0c565a0aa40a8bf0ce60b727f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93d51ed0c565a0aa40a8bf0ce60b727f">&#9670;&#160;</a></span>pinInputRec()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2156,7 +2165,7 @@ false </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">GpioPin</a> pinInputRec </td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> pinInputRec </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -2174,8 +2183,8 @@ false </dd></dl>
 
 </div>
 </div>
-<a id="a5ebba51e0cf604b2cd32403eee279f76" name="a5ebba51e0cf604b2cd32403eee279f76"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5ebba51e0cf604b2cd32403eee279f76">&#9670;&#160;</a></span>pinInputSet()</h2>
+<a id="a39d053de88a7afe1ebf6b4607b7af29c" name="a39d053de88a7afe1ebf6b4607b7af29c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39d053de88a7afe1ebf6b4607b7af29c">&#9670;&#160;</a></span>pinInputSet()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2184,7 +2193,7 @@ false </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">GpioPin</a> pinInputSet </td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> pinInputSet </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -2202,8 +2211,8 @@ false </dd></dl>
 
 </div>
 </div>
-<a id="a3521bfe173958daec58f275c595bfdaa" name="a3521bfe173958daec58f275c595bfdaa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3521bfe173958daec58f275c595bfdaa">&#9670;&#160;</a></span>pinLed()</h2>
+<a id="a3b711d48c46905e00557e07700261052" name="a3b711d48c46905e00557e07700261052"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b711d48c46905e00557e07700261052">&#9670;&#160;</a></span>pinLed()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2212,7 +2221,7 @@ false </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">GpioPin</a> pinLed </td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> pinLed </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
           <td class="paramname"><em>idx</em></td><td>)</td>
@@ -2231,8 +2240,8 @@ false </dd></dl>
 
 </div>
 </div>
-<a id="a4d8fcedc151202a64b809ec88d453086" name="a4d8fcedc151202a64b809ec88d453086"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4d8fcedc151202a64b809ec88d453086">&#9670;&#160;</a></span>pinPaEnable()</h2>
+<a id="ad2b91335862b4659348945f365318d4b" name="ad2b91335862b4659348945f365318d4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2b91335862b4659348945f365318d4b">&#9670;&#160;</a></span>pinPaEnable()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2241,7 +2250,7 @@ false </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">GpioPin</a> pinPaEnable </td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> pinPaEnable </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -2259,8 +2268,8 @@ false </dd></dl>
 
 </div>
 </div>
-<a id="a1a3ff0ab05f547ca86fc651fad3e86db" name="a1a3ff0ab05f547ca86fc651fad3e86db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1a3ff0ab05f547ca86fc651fad3e86db">&#9670;&#160;</a></span>pinVolumeDown()</h2>
+<a id="ab19b409cff357c3df01b7275a1a63301" name="ab19b409cff357c3df01b7275a1a63301"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab19b409cff357c3df01b7275a1a63301">&#9670;&#160;</a></span>pinVolumeDown()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2269,7 +2278,7 @@ false </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">GpioPin</a> pinVolumeDown </td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> pinVolumeDown </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -2287,8 +2296,8 @@ false </dd></dl>
 
 </div>
 </div>
-<a id="ac093e3552e99362d863ae2f404b5aae1" name="ac093e3552e99362d863ae2f404b5aae1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac093e3552e99362d863ae2f404b5aae1">&#9670;&#160;</a></span>pinVolumeUp()</h2>
+<a id="a292a95f2fb22074efee103e561842aff" name="a292a95f2fb22074efee103e561842aff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a292a95f2fb22074efee103e561842aff">&#9670;&#160;</a></span>pinVolumeUp()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2297,7 +2306,7 @@ false </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">GpioPin</a> pinVolumeUp </td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> pinVolumeUp </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -2379,6 +2388,42 @@ false </dd></dl>
 <p>Reads the audio data. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_stream.html#a6406b16cb31ad79201459cb48b1ad6f0">AudioStream</a>.</p>
+
+</div>
+</div>
+<a id="ac3904fe29cbaee1527a4a9ec4b707412" name="ac3904fe29cbaee1527a4a9ec4b707412"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3904fe29cbaee1527a4a9ec4b707412">&#9670;&#160;</a></span>readPinCB()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> readPinCB </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>&#160;</td>
+          <td class="paramname"><em>pin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *&#160;</td>
+          <td class="paramname"><em>ref</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -2848,6 +2893,34 @@ false </dd></dl>
 </div><div class="memdoc">
 
 <p>We use the board pins if they are available. </p>
+
+</div>
+</div>
+<a id="ad2c892b1d338b026027a34725c73b69b" name="ad2c892b1d338b026027a34725c73b69b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2c892b1d338b026027a34725c73b69b">&#9670;&#160;</a></span>setUsePinInterrupt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> setUsePinInterrupt </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td>
+          <td class="paramname"><em>active</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Defines if we use pin interrupts for audio actions (default: false) </p>
 
 </div>
 </div>

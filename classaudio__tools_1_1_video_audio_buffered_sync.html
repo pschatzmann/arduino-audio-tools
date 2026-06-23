@@ -81,7 +81,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Logic to Synchronize video and audio output: we use a buffer to store the audio and instead of delaying the frames with <a class="el" href="namespaceaudio__tools.html#a6bc5f943544a887f8b23cadfb26a5e30">delay()</a> we play audio. The bufferSize defines the audio buffer in bytes. The correctionMs is used to slow down or speed up the playback of the video to prevent any audio buffer underflows.  
+<p>Logic to Synchronize video and audio output: we use a buffer to store the audio and instead of delaying the frames with <a class="el" href="namespaceaudio__tools.html#a7f2dfce1046bdd2a2b753643726c2346">delay()</a> we play audio. The bufferSize defines the audio buffer in bytes. The correctionMs is used to slow down or speed up the playback of the video to prevent any audio buffer underflows.  
  <a href="classaudio__tools_1_1_video_audio_buffered_sync.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_video_8h_source.html">Video.h</a>&gt;</code></p>
@@ -101,7 +101,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8cf172d57be330b5c7119b538d07fea2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab185a032a2de20c9a22b393096dcee76" id="r_ab185a032a2de20c9a22b393096dcee76"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_buffered_sync.html#ab185a032a2de20c9a22b393096dcee76">delayVideoFrame</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int32_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">microsecondsPerFrame</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint32_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">time_used_ms</a>)</td></tr>
 <tr class="separator:ab185a032a2de20c9a22b393096dcee76"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac3cf31a4852aa3d77849a3b64904083a" id="r_ac3cf31a4852aa3d77849a3b64904083a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_buffered_sync.html#ac3cf31a4852aa3d77849a3b64904083a">writeAudio</a> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> *out, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *data, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> size)</td></tr>
+<tr class="memitem:ac3cf31a4852aa3d77849a3b64904083a" id="r_ac3cf31a4852aa3d77849a3b64904083a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_buffered_sync.html#ac3cf31a4852aa3d77849a3b64904083a">writeAudio</a> (<a class="el" href="class_print.html">Print</a> *out, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *data, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> size)</td></tr>
 <tr class="memdesc:ac3cf31a4852aa3d77849a3b64904083a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process the audio data.  <br /></td></tr>
 <tr class="separator:ac3cf31a4852aa3d77849a3b64904083a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -109,13 +109,13 @@ Public Member Functions</h2></td></tr>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:ab9302fb4f0040d76522919576f6f927b" id="r_ab9302fb4f0040d76522919576f6f927b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_buffered_sync.html#ab9302fb4f0040d76522919576f6f927b">correction_ms</a> = 0</td></tr>
 <tr class="separator:ab9302fb4f0040d76522919576f6f927b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa42c30e02e51ec7cc38ea4ab215e0db4" id="r_aa42c30e02e51ec7cc38ea4ab215e0db4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_buffered_sync.html#aa42c30e02e51ec7cc38ea4ab215e0db4">p_out</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td></tr>
+<tr class="memitem:aa42c30e02e51ec7cc38ea4ab215e0db4" id="r_aa42c30e02e51ec7cc38ea4ab215e0db4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_buffered_sync.html#aa42c30e02e51ec7cc38ea4ab215e0db4">p_out</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td></tr>
 <tr class="separator:aa42c30e02e51ec7cc38ea4ab215e0db4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9870079e2dc48a291a15a41b6ecffbf" id="r_af9870079e2dc48a291a15a41b6ecffbf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_buffered_sync.html#af9870079e2dc48a291a15a41b6ecffbf">ring_buffer</a> {0}</td></tr>
 <tr class="separator:af9870079e2dc48a291a15a41b6ecffbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Logic to Synchronize video and audio output: we use a buffer to store the audio and instead of delaying the frames with <a class="el" href="namespaceaudio__tools.html#a6bc5f943544a887f8b23cadfb26a5e30">delay()</a> we play audio. The bufferSize defines the audio buffer in bytes. The correctionMs is used to slow down or speed up the playback of the video to prevent any audio buffer underflows. </p>
+<div class="textblock"><p>Logic to Synchronize video and audio output: we use a buffer to store the audio and instead of delaying the frames with <a class="el" href="namespaceaudio__tools.html#a7f2dfce1046bdd2a2b753643726c2346">delay()</a> we play audio. The bufferSize defines the audio buffer in bytes. The correctionMs is used to slow down or speed up the playback of the video to prevent any audio buffer underflows. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -207,7 +207,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> writeAudio </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_print.html">Print</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="class_print.html">Print</a> *&#160;</td>
           <td class="paramname"><em>out</em>, </td>
         </tr>
         <tr>
@@ -274,7 +274,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_print.html">Print</a>* p_out = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td>
+          <td class="memname"><a class="el" href="class_print.html">Print</a>* p_out = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td>
         </tr>
       </table>
   </td>

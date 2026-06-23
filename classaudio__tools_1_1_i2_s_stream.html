@@ -82,7 +82,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>We support the <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> interface for the I2S access. In addition we allow a separate mute pin which might also be used to drive a LED...  
+<p>We support the <a class="el" href="class_stream.html">Stream</a> interface for the I2S access. In addition we allow a separate mute pin which might also be used to drive a LED...  
  <a href="classaudio__tools_1_1_i2_s_stream.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_audio_i2_s_2_i2_s_stream_8h_source.html">I2SStream.h</a>&gt;</code></p>
@@ -96,8 +96,8 @@ Inheritance diagram for I2SStream:</div>
 <area href="classaudio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer, size_t size) and readBytes(uint..." alt="BaseStream" shape="rect" coords="0,112,110,136"/>
 <area href="classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="AudioInfoSupport" shape="rect" coords="120,112,230,136"/>
 <area href="classaudio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="AudioInfoSource" shape="rect" coords="240,112,350,136"/>
-<area href="classaudio__tools_1_1_stream.html" alt="Stream" shape="rect" coords="0,56,110,80"/>
-<area href="classaudio__tools_1_1_print.html" alt="Print" shape="rect" coords="0,0,110,24"/>
+<area href="class_stream.html" alt="Stream" shape="rect" coords="0,56,110,80"/>
+<area href="class_print.html" alt="Print" shape="rect" coords="0,0,110,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -105,6 +105,10 @@ Inheritance diagram for I2SStream:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a69507b90b9beb3efea42b30570e90037" id="r_a69507b90b9beb3efea42b30570e90037"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_stream.html#a69507b90b9beb3efea42b30570e90037">I2SStream</a> ()=<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">default</a></td></tr>
 <tr class="separator:a69507b90b9beb3efea42b30570e90037"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49eddf7a32d169710f32e1a7c5131f29" id="r_a49eddf7a32d169710f32e1a7c5131f29"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_stream.html#a49eddf7a32d169710f32e1a7c5131f29">I2SStream</a> (<a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> <a class="el" href="classaudio__tools_1_1_i2_s_stream.html#a6e8d002c98b01041e7b0e9879897678a">mute_pin</a>)</td></tr>
+<tr class="separator:a49eddf7a32d169710f32e1a7c5131f29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d3ec17ac63dd4323c38294845a92160" id="r_a7d3ec17ac63dd4323c38294845a92160"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_stream.html#a7d3ec17ac63dd4323c38294845a92160">I2SStream</a> (<a class="el" href="classaudio__tools_1_1_i2_s_driver_base.html">I2SDriverBase</a> &amp;<a class="el" href="classaudio__tools_1_1_i2_s_stream.html#ae50f5a184497c896026de061ccdf8c42">driver</a>)</td></tr>
+<tr class="separator:a7d3ec17ac63dd4323c38294845a92160"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af09caa664f17780559042b1b1337f186" id="r_af09caa664f17780559042b1b1337f186"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_stream.html#af09caa664f17780559042b1b1337f186">~I2SStream</a> ()</td></tr>
 <tr class="separator:af09caa664f17780559042b1b1337f186"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a727a24459787e1eeeb7a37ba888394a6" id="r_a727a24459787e1eeeb7a37ba888394a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a727a24459787e1eeeb7a37ba888394a6">addNotifyAudioChange</a> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bi</a>)</td></tr>
@@ -123,18 +127,18 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a6ff0d6d1b0f3f9b652c9d5298ed0863c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a601fb7cf1fc15db50c71a826f084f934" id="r_a601fb7cf1fc15db50c71a826f084f934"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_stream.html#a601fb7cf1fc15db50c71a826f084f934">begin</a> ()</td></tr>
 <tr class="separator:a601fb7cf1fc15db50c71a826f084f934"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5eefc9d5f5c0ebd0b205d09985de96c" id="r_ab5eefc9d5f5c0ebd0b205d09985de96c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_stream.html#ab5eefc9d5f5c0ebd0b205d09985de96c">begin</a> (<a class="el" href="namespaceaudio__tools.html#a550a8b9d4b54cf784404f3514ddf80a8">I2SConfig</a> cfg)</td></tr>
+<tr class="memitem:ab5eefc9d5f5c0ebd0b205d09985de96c" id="r_ab5eefc9d5f5c0ebd0b205d09985de96c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_stream.html#ab5eefc9d5f5c0ebd0b205d09985de96c">begin</a> (<a class="el" href="namespaceaudio__tools.html#a3dc16dcdacf52277c451d1e0494a891c">I2SConfig</a> cfg)</td></tr>
 <tr class="memdesc:ab5eefc9d5f5c0ebd0b205d09985de96c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the I2S interface.  <br /></td></tr>
 <tr class="separator:ab5eefc9d5f5c0ebd0b205d09985de96c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:affd15675a5e391c34cccefa7181354bb" id="r_affd15675a5e391c34cccefa7181354bb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#affd15675a5e391c34cccefa7181354bb">clearNotifyAudioChange</a> ()</td></tr>
 <tr class="memdesc:affd15675a5e391c34cccefa7181354bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes all change notify subscriptions.  <br /></td></tr>
 <tr class="separator:affd15675a5e391c34cccefa7181354bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72661c546cdee7de3302d7d3fda10332" id="r_a72661c546cdee7de3302d7d3fda10332"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a550a8b9d4b54cf784404f3514ddf80a8">I2SConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_stream.html#a72661c546cdee7de3302d7d3fda10332">defaultConfig</a> (<a class="el" href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">RxTxMode</a> mode=<a class="el" href="group__basic.html#gga8cbd91a8bac9b5ab425112be1620eb49a736237ce367b7814c763eacd188cf9e5">TX_MODE</a>)</td></tr>
+<tr class="memitem:a72661c546cdee7de3302d7d3fda10332" id="r_a72661c546cdee7de3302d7d3fda10332"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a3dc16dcdacf52277c451d1e0494a891c">I2SConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_stream.html#a72661c546cdee7de3302d7d3fda10332">defaultConfig</a> (<a class="el" href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">RxTxMode</a> mode=<a class="el" href="group__basic.html#gga8cbd91a8bac9b5ab425112be1620eb49a736237ce367b7814c763eacd188cf9e5">TX_MODE</a>)</td></tr>
 <tr class="memdesc:a72661c546cdee7de3302d7d3fda10332"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the default configuration.  <br /></td></tr>
 <tr class="separator:a72661c546cdee7de3302d7d3fda10332"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a0d73e2ca1b078c0ba059301e9d4794" id="r_a7a0d73e2ca1b078c0ba059301e9d4794"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a2df48ab05a4397fc269c21f811efa8e1">I2SDriver</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_stream.html#a7a0d73e2ca1b078c0ba059301e9d4794">driver</a> ()</td></tr>
-<tr class="memdesc:a7a0d73e2ca1b078c0ba059301e9d4794"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides access to the driver.  <br /></td></tr>
-<tr class="separator:a7a0d73e2ca1b078c0ba059301e9d4794"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae50f5a184497c896026de061ccdf8c42" id="r_ae50f5a184497c896026de061ccdf8c42"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_i2_s_driver_base.html">I2SDriverBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_stream.html#ae50f5a184497c896026de061ccdf8c42">driver</a> ()</td></tr>
+<tr class="memdesc:ae50f5a184497c896026de061ccdf8c42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides access to the driver.  <br /></td></tr>
+<tr class="separator:ae50f5a184497c896026de061ccdf8c42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf81d3fdaf258088d7692fa70cece087" id="r_aaf81d3fdaf258088d7692fa70cece087"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_stream.html#aaf81d3fdaf258088d7692fa70cece087">end</a> ()</td></tr>
 <tr class="memdesc:aaf81d3fdaf258088d7692fa70cece087"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the I2S interface.  <br /></td></tr>
 <tr class="separator:aaf81d3fdaf258088d7692fa70cece087"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -190,9 +194,9 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:aa66a35e5edf58ce00047afcd1d4f455e" id="r_aa66a35e5edf58ce00047afcd1d4f455e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_print.html#aa66a35e5edf58ce00047afcd1d4f455e">_timeout</a> = 10</td></tr>
+<tr class="memitem:aa66a35e5edf58ce00047afcd1d4f455e" id="r_aa66a35e5edf58ce00047afcd1d4f455e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_print.html#aa66a35e5edf58ce00047afcd1d4f455e">_timeout</a> = 10</td></tr>
 <tr class="separator:aa66a35e5edf58ce00047afcd1d4f455e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad74f6cd2c7f29f98eaaecc7bbf81bea7" id="r_ad74f6cd2c7f29f98eaaecc7bbf81bea7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a2df48ab05a4397fc269c21f811efa8e1">I2SDriver</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_stream.html#ad74f6cd2c7f29f98eaaecc7bbf81bea7">i2s</a></td></tr>
+<tr class="memitem:ad74f6cd2c7f29f98eaaecc7bbf81bea7" id="r_ad74f6cd2c7f29f98eaaecc7bbf81bea7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ab0c3164bd6bb3688d5982edf616f5f32">I2SDriver</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_stream.html#ad74f6cd2c7f29f98eaaecc7bbf81bea7">i2s</a></td></tr>
 <tr class="separator:ad74f6cd2c7f29f98eaaecc7bbf81bea7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47385aa19435f5fca9d3083a748258c5" id="r_a47385aa19435f5fca9d3083a748258c5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_stream.html#a47385aa19435f5fca9d3083a748258c5">info</a></td></tr>
 <tr class="separator:a47385aa19435f5fca9d3083a748258c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -200,10 +204,12 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a407c3efba665d276a38229f905bef352"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeaba7fcedcb403536c79ee7f04de17fc" id="r_aeaba7fcedcb403536c79ee7f04de17fc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#aeaba7fcedcb403536c79ee7f04de17fc">is_notify_active</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">true</a></td></tr>
 <tr class="separator:aeaba7fcedcb403536c79ee7f04de17fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0720687e8139ee96588fb06d7f6a1caa" id="r_a0720687e8139ee96588fb06d7f6a1caa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_stream.html#a0720687e8139ee96588fb06d7f6a1caa">mute_pin</a> = -1</td></tr>
-<tr class="separator:a0720687e8139ee96588fb06d7f6a1caa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e8d002c98b01041e7b0e9879897678a" id="r_a6e8d002c98b01041e7b0e9879897678a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_stream.html#a6e8d002c98b01041e7b0e9879897678a">mute_pin</a> = <a class="el" href="namespaceaudio__tools.html#a3f5182f70c2f0f77262bcbbd05d55b79">GPIO_NONE</a></td></tr>
+<tr class="separator:a6e8d002c98b01041e7b0e9879897678a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad35c4e2ef458c36e8d36676958cc9cd3" id="r_ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#ad35c4e2ef458c36e8d36676958cc9cd3">notify_vector</a></td></tr>
 <tr class="separator:ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a587fae5a3369d8455d8d1d45f56cb623" id="r_a587fae5a3369d8455d8d1d45f56cb623"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_i2_s_driver_base.html">I2SDriverBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_stream.html#a587fae5a3369d8455d8d1d45f56cb623">p_driver</a> = &amp;<a class="el" href="classaudio__tools_1_1_i2_s_stream.html#ad74f6cd2c7f29f98eaaecc7bbf81bea7">i2s</a></td></tr>
+<tr class="separator:a587fae5a3369d8455d8d1d45f56cb623"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf64bd29ec689f2d7574efbb63f440bb" id="r_adf64bd29ec689f2d7574efbb63f440bb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#adf64bd29ec689f2d7574efbb63f440bb">tmp_in</a> {0}</td></tr>
 <tr class="separator:adf64bd29ec689f2d7574efbb63f440bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add363d597c7d8108a5350406105d158d" id="r_add363d597c7d8108a5350406105d158d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#add363d597c7d8108a5350406105d158d">tmp_out</a> {0}</td></tr>
@@ -212,18 +218,18 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a7f948c0ac99e632d3a033b85ae54d170"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>We support the <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> interface for the I2S access. In addition we allow a separate mute pin which might also be used to drive a LED... </p>
+<div class="textblock"><p>We support the <a class="el" href="class_stream.html">Stream</a> interface for the I2S access. In addition we allow a separate mute pin which might also be used to drive a LED... </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td></td></tr>
+    <tr><td class="paramname">I2SDriverT</td><td>with I2SDriver as default </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
-<dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 @notes In Zephyr we can alternatively use the SAI driver: I2SStream&lt;SAIDriver&gt; sai </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a69507b90b9beb3efea42b30570e90037" name="a69507b90b9beb3efea42b30570e90037"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a69507b90b9beb3efea42b30570e90037">&#9670;&#160;</a></span>I2SStream()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a69507b90b9beb3efea42b30570e90037">&#9670;&#160;</a></span>I2SStream() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -247,6 +253,32 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a7d3ec17ac63dd4323c38294845a92160" name="a7d3ec17ac63dd4323c38294845a92160"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d3ec17ac63dd4323c38294845a92160">&#9670;&#160;</a></span>I2SStream() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_i2_s_stream.html">I2SStream</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_i2_s_driver_base.html">I2SDriverBase</a> &amp;&#160;</td>
+          <td class="paramname"><em>driver</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="af09caa664f17780559042b1b1337f186" name="af09caa664f17780559042b1b1337f186"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af09caa664f17780559042b1b1337f186">&#9670;&#160;</a></span>~I2SStream()</h2>
 
@@ -260,6 +292,32 @@ Protected Attributes</h2></td></tr>
           <td class="memname">~<a class="el" href="classaudio__tools_1_1_i2_s_stream.html">I2SStream</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a49eddf7a32d169710f32e1a7c5131f29" name="a49eddf7a32d169710f32e1a7c5131f29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49eddf7a32d169710f32e1a7c5131f29">&#9670;&#160;</a></span>I2SStream() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_i2_s_stream.html">I2SStream</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a>&#160;</td>
+          <td class="paramname"><em>mute_pin</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -358,7 +416,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>provides the actual output <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>: this is usually the same as <a class="el" href="classaudio__tools_1_1_audio_stream.html#aececda97cff151859a8695d30896dd20" title="provides the actual input AudioInfo">audioInfo()</a> unless we use a transforming stream </p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_m_p3_encoder_shine.html#ab5af4066a6ef92716fc14eaf50926f72">MP3EncoderShine</a>, <a class="el" href="classaudio__tools_1_1_pure_data_stream.html#ab5af4066a6ef92716fc14eaf50926f72">PureDataStream</a>, <a class="el" href="classaudio__tools_1_1_p_w_m_audio_output.html#ab5af4066a6ef92716fc14eaf50926f72">PWMAudioOutput</a>, <a class="el" href="classaudio__tools_1_1_channel_format_converter_stream_t.html#ab5af4066a6ef92716fc14eaf50926f72">ChannelFormatConverterStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_channel_format_converter_stream.html#ab5af4066a6ef92716fc14eaf50926f72">ChannelFormatConverterStream</a>, <a class="el" href="classaudio__tools_1_1_number_format_converter_stream_t.html#ab5af4066a6ef92716fc14eaf50926f72">NumberFormatConverterStreamT&lt; TFrom, TTo &gt;</a>, <a class="el" href="classaudio__tools_1_1_number_format_converter_stream.html#ab5af4066a6ef92716fc14eaf50926f72">NumberFormatConverterStream</a>, <a class="el" href="classaudio__tools_1_1_format_converter_stream.html#ab5af4066a6ef92716fc14eaf50926f72">FormatConverterStream</a>, <a class="el" href="classaudio__tools_1_1_pipeline.html#ab5af4066a6ef92716fc14eaf50926f72">Pipeline</a>, <a class="el" href="classaudio__tools_1_1_resample_stream.html#ab5af4066a6ef92716fc14eaf50926f72">ResampleStream</a>, and <a class="el" href="classaudio__tools_1_1_resample_stream_t.html#ab5af4066a6ef92716fc14eaf50926f72">ResampleStreamT&lt; TInterpolator &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_m_p3_encoder_shine.html#ab5af4066a6ef92716fc14eaf50926f72">MP3EncoderShine</a>, <a class="el" href="classaudio__tools_1_1_pure_data_stream.html#ab5af4066a6ef92716fc14eaf50926f72">PureDataStream</a>, <a class="el" href="classaudio__tools_1_1_p_w_m_audio_output.html#ab5af4066a6ef92716fc14eaf50926f72">PWMAudioOutput&lt; PWMDriverT &gt;</a>, <a class="el" href="classaudio__tools_1_1_channel_format_converter_stream_t.html#ab5af4066a6ef92716fc14eaf50926f72">ChannelFormatConverterStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_channel_format_converter_stream.html#ab5af4066a6ef92716fc14eaf50926f72">ChannelFormatConverterStream</a>, <a class="el" href="classaudio__tools_1_1_number_format_converter_stream_t.html#ab5af4066a6ef92716fc14eaf50926f72">NumberFormatConverterStreamT&lt; TFrom, TTo &gt;</a>, <a class="el" href="classaudio__tools_1_1_number_format_converter_stream.html#ab5af4066a6ef92716fc14eaf50926f72">NumberFormatConverterStream</a>, <a class="el" href="classaudio__tools_1_1_format_converter_stream.html#ab5af4066a6ef92716fc14eaf50926f72">FormatConverterStream</a>, <a class="el" href="classaudio__tools_1_1_pipeline.html#ab5af4066a6ef92716fc14eaf50926f72">Pipeline</a>, <a class="el" href="classaudio__tools_1_1_resample_stream.html#ab5af4066a6ef92716fc14eaf50926f72">ResampleStream</a>, and <a class="el" href="classaudio__tools_1_1_resample_stream_t.html#ab5af4066a6ef92716fc14eaf50926f72">ResampleStreamT&lt; TInterpolator &gt;</a>.</p>
 
 </div>
 </div>
@@ -459,7 +517,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> begin </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#a550a8b9d4b54cf784404f3514ddf80a8">I2SConfig</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#a3dc16dcdacf52277c451d1e0494a891c">I2SConfig</a>&#160;</td>
           <td class="paramname"><em>cfg</em></td><td>)</td>
           <td></td>
         </tr>
@@ -514,7 +572,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a550a8b9d4b54cf784404f3514ddf80a8">I2SConfig</a> defaultConfig </td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a3dc16dcdacf52277c451d1e0494a891c">I2SConfig</a> defaultConfig </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">RxTxMode</a>&#160;</td>
           <td class="paramname"><em>mode</em> = <code><a class="el" href="group__basic.html#gga8cbd91a8bac9b5ab425112be1620eb49a736237ce367b7814c763eacd188cf9e5">TX_MODE</a></code></td><td>)</td>
@@ -532,8 +590,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a7a0d73e2ca1b078c0ba059301e9d4794" name="a7a0d73e2ca1b078c0ba059301e9d4794"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7a0d73e2ca1b078c0ba059301e9d4794">&#9670;&#160;</a></span>driver()</h2>
+<a id="ae50f5a184497c896026de061ccdf8c42" name="ae50f5a184497c896026de061ccdf8c42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae50f5a184497c896026de061ccdf8c42">&#9670;&#160;</a></span>driver()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -542,7 +600,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a2df48ab05a4397fc269c21f811efa8e1">I2SDriver</a> * driver </td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_i2_s_driver_base.html">I2SDriverBase</a> * driver </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1136,7 +1194,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a2df48ab05a4397fc269c21f811efa8e1">I2SDriver</a> i2s</td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ab0c3164bd6bb3688d5982edf616f5f32">I2SDriver</a> i2s</td>
         </tr>
       </table>
   </td>
@@ -1214,8 +1272,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a0720687e8139ee96588fb06d7f6a1caa" name="a0720687e8139ee96588fb06d7f6a1caa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0720687e8139ee96588fb06d7f6a1caa">&#9670;&#160;</a></span>mute_pin</h2>
+<a id="a6e8d002c98b01041e7b0e9879897678a" name="a6e8d002c98b01041e7b0e9879897678a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e8d002c98b01041e7b0e9879897678a">&#9670;&#160;</a></span>mute_pin</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1224,7 +1282,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> mute_pin = -1</td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> mute_pin = <a class="el" href="namespaceaudio__tools.html#a3f5182f70c2f0f77262bcbbd05d55b79">GPIO_NONE</a></td>
         </tr>
       </table>
   </td>
@@ -1252,6 +1310,28 @@ Protected Attributes</h2></td></tr>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a587fae5a3369d8455d8d1d45f56cb623" name="a587fae5a3369d8455d8d1d45f56cb623"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a587fae5a3369d8455d8d1d45f56cb623">&#9670;&#160;</a></span>p_driver</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_i2_s_driver_base.html">I2SDriverBase</a>* p_driver = &amp;<a class="el" href="classaudio__tools_1_1_i2_s_stream.html#ad74f6cd2c7f29f98eaaecc7bbf81bea7">i2s</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

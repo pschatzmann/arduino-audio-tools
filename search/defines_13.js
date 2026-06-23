@@ -30,14 +30,13 @@ var searchData=
   ['vban_5fsr_5fmaxnumber_27',['VBAN_SR_MAXNUMBER',['../vban_8h.html#ace28627af576ad70888c8af5f1298341',1,'vban.h']]],
   ['vban_5fstream_5fname_5fsize_28',['VBAN_STREAM_NAME_SIZE',['../vban_8h.html#a58d189495644f8df784ba55a1680ef5b',1,'vban.h']]],
   ['vban_5fstreamtype_5fmask_29',['VBAN_STREAMTYPE_MASK',['../vban_8h.html#acc66815ae1d33e93ec12db505a43ee42',1,'vban.h']]],
-  ['vfs_5fsd_30',['VFS_SD',['../_file_8h.html#a98e3a4869c7fcb168289ce6f024f5c00',1,'File.h']]],
-  ['vorbis_5fheader_5fopen_5flimit_31',['VORBIS_HEADER_OPEN_LIMIT',['../_codec_vorbis_8h.html#a6173a1eadd252009861f096c9ccac1a0',1,'CodecVorbis.h']]],
-  ['vs1053_5fcs_32',['vs1053_cs',['../rp2040hower_8h.html#ae2f9931ce076f3d2ae5914881569f0bd',1,'VS1053_CS:&#160;rp2040hower.h'],['../unor4_8h.html#ae2f9931ce076f3d2ae5914881569f0bd',1,'VS1053_CS:&#160;unor4.h']]],
-  ['vs1053_5fcs_5fsd_33',['vs1053_cs_sd',['../unor4_8h.html#a432e88e5ef80c8679a286d05d6275e9d',1,'VS1053_CS_SD:&#160;unor4.h'],['../rp2040hower_8h.html#a432e88e5ef80c8679a286d05d6275e9d',1,'VS1053_CS_SD:&#160;rp2040hower.h']]],
-  ['vs1053_5fdcs_34',['vs1053_dcs',['../rp2040hower_8h.html#a4397cd27e2d7fd2d0e02bff178c66ea1',1,'VS1053_DCS:&#160;rp2040hower.h'],['../unor4_8h.html#a4397cd27e2d7fd2d0e02bff178c66ea1',1,'VS1053_DCS:&#160;unor4.h']]],
-  ['vs1053_5fdefault_5fvolume_35',['VS1053_DEFAULT_VOLUME',['../_audio_tools_config_8h.html#aa9fe3d2dcf0b014ba1f93bb78f2a04dd',1,'AudioToolsConfig.h']]],
-  ['vs1053_5fdefined_36',['vs1053_defined',['../rp2040hower_8h.html#ab288b2c5d3d087909f121e9cb0225426',1,'VS1053_DEFINED:&#160;rp2040hower.h'],['../unor4_8h.html#ab288b2c5d3d087909f121e9cb0225426',1,'VS1053_DEFINED:&#160;unor4.h']]],
-  ['vs1053_5fdreq_37',['vs1053_dreq',['../rp2040hower_8h.html#a3601dbc6eadea33c4d87f105e850b897',1,'VS1053_DREQ:&#160;rp2040hower.h'],['../unor4_8h.html#a3601dbc6eadea33c4d87f105e850b897',1,'VS1053_DREQ:&#160;unor4.h']]],
-  ['vs1053_5fext_38',['VS1053_EXT',['../_audio_tools_config_8h.html#af2a2047836612cd74dcb9348184dad13',1,'AudioToolsConfig.h']]],
-  ['vs1053_5freset_39',['vs1053_reset',['../rp2040hower_8h.html#acc3625cf27c1e344148bc7112062760e',1,'VS1053_RESET:&#160;rp2040hower.h'],['../unor4_8h.html#acc3625cf27c1e344148bc7112062760e',1,'VS1053_RESET:&#160;unor4.h']]]
+  ['vorbis_5fheader_5fopen_5flimit_30',['VORBIS_HEADER_OPEN_LIMIT',['../_codec_vorbis_8h.html#a6173a1eadd252009861f096c9ccac1a0',1,'CodecVorbis.h']]],
+  ['vs1053_5fcs_31',['vs1053_cs',['../rp2040hower_8h.html#ae2f9931ce076f3d2ae5914881569f0bd',1,'VS1053_CS:&#160;rp2040hower.h'],['../unor4_8h.html#ae2f9931ce076f3d2ae5914881569f0bd',1,'VS1053_CS:&#160;unor4.h']]],
+  ['vs1053_5fcs_5fsd_32',['vs1053_cs_sd',['../unor4_8h.html#a432e88e5ef80c8679a286d05d6275e9d',1,'VS1053_CS_SD:&#160;unor4.h'],['../rp2040hower_8h.html#a432e88e5ef80c8679a286d05d6275e9d',1,'VS1053_CS_SD:&#160;rp2040hower.h']]],
+  ['vs1053_5fdcs_33',['vs1053_dcs',['../rp2040hower_8h.html#a4397cd27e2d7fd2d0e02bff178c66ea1',1,'VS1053_DCS:&#160;rp2040hower.h'],['../unor4_8h.html#a4397cd27e2d7fd2d0e02bff178c66ea1',1,'VS1053_DCS:&#160;unor4.h']]],
+  ['vs1053_5fdefault_5fvolume_34',['VS1053_DEFAULT_VOLUME',['../_audio_tools_config_8h.html#aa9fe3d2dcf0b014ba1f93bb78f2a04dd',1,'AudioToolsConfig.h']]],
+  ['vs1053_5fdefined_35',['vs1053_defined',['../rp2040hower_8h.html#ab288b2c5d3d087909f121e9cb0225426',1,'VS1053_DEFINED:&#160;rp2040hower.h'],['../unor4_8h.html#ab288b2c5d3d087909f121e9cb0225426',1,'VS1053_DEFINED:&#160;unor4.h']]],
+  ['vs1053_5fdreq_36',['vs1053_dreq',['../rp2040hower_8h.html#a3601dbc6eadea33c4d87f105e850b897',1,'VS1053_DREQ:&#160;rp2040hower.h'],['../unor4_8h.html#a3601dbc6eadea33c4d87f105e850b897',1,'VS1053_DREQ:&#160;unor4.h']]],
+  ['vs1053_5fext_37',['VS1053_EXT',['../_audio_tools_config_8h.html#af2a2047836612cd74dcb9348184dad13',1,'AudioToolsConfig.h']]],
+  ['vs1053_5freset_38',['vs1053_reset',['../rp2040hower_8h.html#acc3625cf27c1e344148bc7112062760e',1,'VS1053_RESET:&#160;rp2040hower.h'],['../unor4_8h.html#acc3625cf27c1e344148bc7112062760e',1,'VS1053_RESET:&#160;unor4.h']]]
 ];

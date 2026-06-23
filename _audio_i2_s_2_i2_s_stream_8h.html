@@ -75,20 +75,22 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#define-members">Macros</a>  </div>
   <div class="headertitle"><div class="title">I2SStream.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="_audio_tools_config_8h_source.html">AudioToolsConfig.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_i2_s_config_8h_source.html">AudioTools/CoreAudio/AudioI2S/I2SConfig.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_i2_s_e_s_p32_8h_source.html">AudioTools/CoreAudio/AudioI2S/I2SESP32.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_i2_s_e_s_p32_v1_8h_source.html">AudioTools/CoreAudio/AudioI2S/I2SESP32V1.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_i2_s_e_s_p8266_8h_source.html">AudioTools/CoreAudio/AudioI2S/I2SESP8266.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_i2_s_nano_sense_b_l_e_8h_source.html">AudioTools/CoreAudio/AudioI2S/I2SNanoSenseBLE.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_i2_s_r_p2040-_m_b_e_d_8h_source.html">AudioTools/CoreAudio/AudioI2S/I2SRP2040-MBED.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_i2_s_r_p2040_8h_source.html">AudioTools/CoreAudio/AudioI2S/I2SRP2040.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_i2_s_s_a_m_d_8h_source.html">AudioTools/CoreAudio/AudioI2S/I2SSAMD.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_i2_s_s_t_m32_8h_source.html">AudioTools/CoreAudio/AudioI2S/I2SSTM32.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_i2_s_driver_e_s_p32_8h_source.html">AudioTools/CoreAudio/AudioI2S/I2SDriverESP32.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_i2_s_driver_e_s_p32_v1_8h_source.html">AudioTools/CoreAudio/AudioI2S/I2SDriverESP32V1.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_i2_s_driver_e_s_p8266_8h_source.html">AudioTools/CoreAudio/AudioI2S/I2SDriverESP8266.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_i2_s_driver_zephyr_8h_source.html">AudioTools/CoreAudio/AudioI2S/I2SDriverZephyr.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_i2_s_driver_nano_sense_b_l_e_8h_source.html">AudioTools/CoreAudio/AudioI2S/I2SDriverNanoSenseBLE.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_i2_s_driver_r_p2040-_m_b_e_d_8h_source.html">AudioTools/CoreAudio/AudioI2S/I2SDriverRP2040-MBED.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_i2_s_driver_r_p2040_8h_source.html">AudioTools/CoreAudio/AudioI2S/I2SDriverRP2040.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_i2_s_driver_s_a_m_d_8h_source.html">AudioTools/CoreAudio/AudioI2S/I2SDriverSAMD.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_i2_s_driver_s_t_m32_8h_source.html">AudioTools/CoreAudio/AudioI2S/I2SDriverSTM32.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_audio_streams_8h_source.html">AudioTools/CoreAudio/AudioStreams.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_audio_types_8h_source.html">AudioTools/CoreAudio/AudioTypes.h</a>&quot;</code><br />
 </div>
@@ -97,7 +99,7 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_stream.html">I2SStream</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">We support the <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> interface for the I2S access. In addition we allow a separate mute pin which might also be used to drive a LED...  <a href="classaudio__tools_1_1_i2_s_stream.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">We support the <a class="el" href="class_stream.html">Stream</a> interface for the I2S access. In addition we allow a separate mute pin which might also be used to drive a LED...  <a href="classaudio__tools_1_1_i2_s_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
@@ -105,7 +107,27 @@ Namespaces</h2></td></tr>
 <tr class="memitem:namespaceaudio__tools" id="r_namespaceaudio__tools"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></td></tr>
 <tr class="memdesc:namespaceaudio__tools"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic Implementation of sound input and output for desktop environments using portaudio. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a1004855c176d70e99dc77bb5ea1a0912" id="r_a1004855c176d70e99dc77bb5ea1a0912"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_audio_i2_s_2_i2_s_stream_8h.html#a1004855c176d70e99dc77bb5ea1a0912">SOFT_MUTE_VALUE</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a1004855c176d70e99dc77bb5ea1a0912"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a1004855c176d70e99dc77bb5ea1a0912" name="a1004855c176d70e99dc77bb5ea1a0912"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1004855c176d70e99dc77bb5ea1a0912">&#9670;&#160;</a></span>SOFT_MUTE_VALUE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SOFT_MUTE_VALUE&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

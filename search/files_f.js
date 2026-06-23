@@ -11,11 +11,16 @@ var searchData=
   ['puredatastream_2eh_8',['PureDataStream.h',['../_pure_data_stream_8h.html',1,'']]],
   ['pwmaudiooutput_2eh_9',['PWMAudioOutput.h',['../_p_w_m_audio_output_8h.html',1,'']]],
   ['pwmcomplementarydriveresp32_2eh_10',['PWMComplementaryDriverESP32.h',['../_p_w_m_complementary_driver_e_s_p32_8h.html',1,'']]],
-  ['pwmdriveravr_2eh_11',['PWMDriverAVR.h',['../_p_w_m_driver_a_v_r_8h.html',1,'']]],
-  ['pwmdriverbase_2eh_12',['PWMDriverBase.h',['../_p_w_m_driver_base_8h.html',1,'']]],
-  ['pwmdriveresp32_2eh_13',['PWMDriverESP32.h',['../_p_w_m_driver_e_s_p32_8h.html',1,'']]],
-  ['pwmdrivermbed_2eh_14',['PWMDriverMBED.h',['../_p_w_m_driver_m_b_e_d_8h.html',1,'']]],
-  ['pwmdriverrenesas_2eh_15',['PWMDriverRenesas.h',['../_p_w_m_driver_renesas_8h.html',1,'']]],
-  ['pwmdriverrp2040_2eh_16',['PWMDriverRP2040.h',['../_p_w_m_driver_r_p2040_8h.html',1,'']]],
-  ['pwmdriverstm32_2eh_17',['PWMDriverSTM32.h',['../_p_w_m_driver_s_t_m32_8h.html',1,'']]]
+  ['pwmconfig_2eh_11',['PWMConfig.h',['../_p_w_m_config_8h.html',1,'']]],
+  ['pwmconfigavr_2eh_12',['PWMConfigAVR.h',['../_p_w_m_config_a_v_r_8h.html',1,'']]],
+  ['pwmconfigstd_2eh_13',['PWMConfigSTD.h',['../_p_w_m_config_s_t_d_8h.html',1,'']]],
+  ['pwmconfigzephyr_2eh_14',['PWMConfigZephyr.h',['../_p_w_m_config_zephyr_8h.html',1,'']]],
+  ['pwmdriveravr_2eh_15',['PWMDriverAVR.h',['../_p_w_m_driver_a_v_r_8h.html',1,'']]],
+  ['pwmdriverbase_2eh_16',['PWMDriverBase.h',['../_p_w_m_driver_base_8h.html',1,'']]],
+  ['pwmdriveresp32_2eh_17',['PWMDriverESP32.h',['../_p_w_m_driver_e_s_p32_8h.html',1,'']]],
+  ['pwmdrivermbed_2eh_18',['PWMDriverMBED.h',['../_p_w_m_driver_m_b_e_d_8h.html',1,'']]],
+  ['pwmdriverrenesas_2eh_19',['PWMDriverRenesas.h',['../_p_w_m_driver_renesas_8h.html',1,'']]],
+  ['pwmdriverrp2040_2eh_20',['PWMDriverRP2040.h',['../_p_w_m_driver_r_p2040_8h.html',1,'']]],
+  ['pwmdriverstm32_2eh_21',['PWMDriverSTM32.h',['../_p_w_m_driver_s_t_m32_8h.html',1,'']]],
+  ['pwmdriverzephyr_2eh_22',['PWMDriverZephyr.h',['../_p_w_m_driver_zephyr_8h.html',1,'']]]
 ];

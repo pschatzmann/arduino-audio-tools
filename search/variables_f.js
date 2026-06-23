@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['object_0',['object',['../classaudio__tools_1_1_timer_alarm_repeating_driver_base.html#a077376d12464f945e2414d5499c79b3f',1,'audio_tools::TimerAlarmRepeatingDriverBase::object'],['../classaudio__tools_1_1_timer_alarm_repeating.html#a077376d12464f945e2414d5499c79b3f',1,'audio_tools::TimerAlarmRepeating::object']]],
+  ['object_0',['object',['../classaudio__tools_1_1_audio_timer_driver_base.html#a077376d12464f945e2414d5499c79b3f',1,'audio_tools::AudioTimerDriverBase::object'],['../classaudio__tools_1_1_audio_timer.html#a077376d12464f945e2414d5499c79b3f',1,'audio_tools::AudioTimer::object']]],
   ['object_5fstack_1',['object_stack',['../classaudio__tools_1_1_a_v_i_decoder.html#a9b8fa15ff3722ba332196a24a7242073',1,'audio_tools::AVIDecoder']]],
   ['object_5ftype_2',['object_type',['../classaudio__tools_1_1_parse_object.html#a8ae9653c9b3e0327e501283cad3c42f2',1,'audio_tools::ParseObject']]],
   ['offset_3',['offset',['../structaudio__tools_1_1_w_a_v_audio_info.html#aed7ea92f45bd273dde380a45ddced592',1,'audio_tools::WAVAudioInfo::offset'],['../structaudio__tools_1_1_audio_player_command.html#aed7ea92f45bd273dde380a45ddced592',1,'audio_tools::AudioPlayerCommand::offset']]],

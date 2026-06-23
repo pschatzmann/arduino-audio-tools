@@ -78,7 +78,7 @@ $(function() {
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_v_f_s___s_d_s_p_i-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">VFS_SDSPI Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__player.html">Player</a></div></div></div>
+  <div class="headertitle"><div class="title">VFS_SDSPI Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__io.html">IO</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -149,7 +149,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a10cc87b16dcc35ed4c46315f085c40ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa3d109c17be96b604ba8d72f30f07dc6" id="r_aa3d109c17be96b604ba8d72f30f07dc6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_v_f_s___s_d_s_p_i.html#aa3d109c17be96b604ba8d72f30f07dc6">setMosi</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> pin)</td></tr>
 <tr class="separator:aa3d109c17be96b604ba8d72f30f07dc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e4d4980cbebd2900309c4ecba2fc45e" id="r_a6e4d4980cbebd2900309c4ecba2fc45e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_v_f_s___s_d_s_p_i.html#a6e4d4980cbebd2900309c4ecba2fc45e">setMountPoint</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a> *<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">mp</a>)</td></tr>
+<tr class="memitem:a6e4d4980cbebd2900309c4ecba2fc45e" id="r_a6e4d4980cbebd2900309c4ecba2fc45e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_v_f_s___s_d_s_p_i.html#a6e4d4980cbebd2900309c4ecba2fc45e">setMountPoint</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a> *mp)</td></tr>
 <tr class="memdesc:a6e4d4980cbebd2900309c4ecba2fc45e"><td class="mdescLeft">&#160;</td><td class="mdescRight">provide the mount point (root directory for the file system)  <br /></td></tr>
 <tr class="separator:a6e4d4980cbebd2900309c4ecba2fc45e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a174eabe571de5dd6243bdb262399f5e4" id="r_a174eabe571de5dd6243bdb262399f5e4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_v_f_s___s_d_s_p_i.html#a174eabe571de5dd6243bdb262399f5e4">setPins</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> CS, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">MOSI</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">MISO</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">SCK</a>)</td></tr>
@@ -192,6 +192,7 @@ Protected Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>ESP32 Virtual File System for SPI SD. The default mount point is "/sdcard" DRAFT implementation: not tested See <a href="https://github.com/espressif/esp-idf/tree/master/examples/storage/sd_card/sdspi">https://github.com/espressif/esp-idf/tree/master/examples/storage/sd_card/sdspi</a>. </p>
+<dl class="section note"><dt>Note</dt><dd>Supported only by ESP32 (Arduino and IDF)</dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>

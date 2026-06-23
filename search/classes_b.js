@@ -18,7 +18,7 @@ var searchData=
   ['list_3c_20audio_5ftools_3a_3adatanode_20_2a_20_3e_15',['List&lt; audio_tools::DataNode * &gt;',['../classaudio__tools_1_1_list.html',1,'audio_tools']]],
   ['list_3c_20audio_5ftools_3a_3ahttpheaderline_20_2a_20_3e_16',['List&lt; audio_tools::HttpHeaderLine * &gt;',['../classaudio__tools_1_1_list.html',1,'audio_tools']]],
   ['list_3c_20audio_5ftools_3a_3aparseobject_20_3e_17',['List&lt; audio_tools::ParseObject &gt;',['../classaudio__tools_1_1_list.html',1,'audio_tools']]],
-  ['list_3c_20audio_5ftools_3a_3avfsfile_20_3e_18',['List&lt; audio_tools::VFSFile &gt;',['../classaudio__tools_1_1_list.html',1,'audio_tools']]],
+  ['list_3c_20audio_5ftools_3a_3azephyrfile_20_3e_18',['List&lt; audio_tools::ZephyrFile &gt;',['../classaudio__tools_1_1_list.html',1,'audio_tools']]],
   ['list_3c_20n_20_3e_19',['List&lt; N &gt;',['../classaudio__tools_1_1_list.html',1,'audio_tools']]],
   ['list_3c_20string_20_3e_20',['List&lt; String &gt;',['../classaudio__tools_1_1_list.html',1,'audio_tools']]],
   ['listlockfree_21',['ListLockFree',['../classaudio__tools_1_1_list_lock_free.html',1,'audio_tools']]],

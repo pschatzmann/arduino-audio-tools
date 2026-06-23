@@ -85,14 +85,16 @@ $(function() {
 <code>#include &quot;<a class="el" href="_p_w_m_driver_r_p2040_8h_source.html">AudioTools/CoreAudio/AudioPWM/PWMDriverRP2040.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_p_w_m_driver_renesas_8h_source.html">AudioTools/CoreAudio/AudioPWM/PWMDriverRenesas.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_p_w_m_driver_s_t_m32_8h_source.html">AudioTools/CoreAudio/AudioPWM/PWMDriverSTM32.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_p_w_m_driver_zephyr_8h_source.html">AudioTools/CoreAudio/AudioPWM/PWMDriverZephyr.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_p_w_m_driver_a_v_r_8h_source.html">AudioTools/CoreAudio/AudioPWM/PWMDriverAVR.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_p_w_m_config_8h_source.html">PWMConfig.h</a>&quot;</code><br />
 </div>
 <p><a href="_p_w_m_audio_output_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_p_w_m_audio_output.html">PWMAudioOutput</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Common functionality for PWM output. We generate audio using PWM with a frequency that is above the hearing range. The sample rate is usually quite restricted, so we also automatically decimate the data. Further info see <a class="el" href="structaudio__tools_1_1_p_w_m_config.html" title="Configuration data for PWM audio output.">PWMConfig</a>.  <a href="classaudio__tools_1_1_p_w_m_audio_output.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_p_w_m_audio_output.html">PWMAudioOutput&lt; PWMDriverT &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Common functionality for PWM output. We generate audio using PWM with a frequency that is above the hearing range. The sample rate is usually quite restricted, so we also automatically decimate the data. Further info see PWMConfig.  <a href="classaudio__tools_1_1_p_w_m_audio_output.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>

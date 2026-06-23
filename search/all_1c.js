@@ -6,5 +6,6 @@ var searchData=
   ['year_3',['year',['../structaudio__tools_1_1_i_d3v1.html#aecd82c173ce8a51c3765454db363901c',1,'audio_tools::ID3v1']]],
   ['yf_4',['Yf',['../group___echo_state.html#ga90380c7ecee8feac4150cf99c2204c09',1,'audio_tools::EchoState_']]],
   ['yh_5',['Yh',['../group___echo_state.html#ga027fac0251045ce71b0e82c33fe64fd5',1,'audio_tools::EchoState_']]],
-  ['ym_6',['ym',['../classaudio__tools_1_1_logarithmic_volume_control.html#a5a6beb9ca2904e494863187b0026004c',1,'audio_tools::LogarithmicVolumeControl']]]
+  ['yield_6',['yield',['../namespaceaudio__tools.html#a58c8b2ad0ea491a6642e5e1cbd358c89',1,'audio_tools']]],
+  ['ym_7',['ym',['../classaudio__tools_1_1_logarithmic_volume_control.html#a5a6beb9ca2904e494863187b0026004c',1,'audio_tools::LogarithmicVolumeControl']]]
 ];

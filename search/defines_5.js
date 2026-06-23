@@ -54,5 +54,6 @@ var searchData=
   ['float_5fsub_51',['FLOAT_SUB',['../_m_d_f_echo_cancellation_8h.html#a5abd57f4576265f7efcd3955d0fb8194',1,'MDFEchoCancellation.h']]],
   ['float_5fzero_52',['FLOAT_ZERO',['../_m_d_f_echo_cancellation_config_8h.html#a488bad3173f72f7e142d3941111f8378',1,'MDFEchoCancellationConfig.h']]],
   ['foxen_5fin_5fbuffer_5fsize_53',['FOXEN_IN_BUFFER_SIZE',['../_codec_f_l_a_c_foxen_8h.html#aab5ec3c530f04552b84a10578d6355cd',1,'CodecFLACFoxen.h']]],
-  ['foxen_5fout_5fbuffer_5fsize_54',['FOXEN_OUT_BUFFER_SIZE',['../_codec_f_l_a_c_foxen_8h.html#a0d96e41aec626a14fd3b18bfebe725b2',1,'CodecFLACFoxen.h']]]
+  ['foxen_5fout_5fbuffer_5fsize_54',['FOXEN_OUT_BUFFER_SIZE',['../_codec_f_l_a_c_foxen_8h.html#a0d96e41aec626a14fd3b18bfebe725b2',1,'CodecFLACFoxen.h']]],
+  ['fs_5fmax_5fpath_55',['FS_MAX_PATH',['../_audio_source_zephyr_8h.html#a4582bae4ca53dd39ad0167afd5ba0cc4',1,'AudioSourceZephyr.h']]]
 ];

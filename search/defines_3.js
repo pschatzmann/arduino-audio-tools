@@ -6,7 +6,7 @@ var searchData=
   ['default_5fbits_5fper_5fsample_3',['DEFAULT_BITS_PER_SAMPLE',['../_audio_tools_config_8h.html#a006e76f29a44f81e1166abae76a2e3f8',1,'AudioToolsConfig.h']]],
   ['default_5fblocksize_5fpow2_4',['DEFAULT_BLOCKSIZE_POW2',['../_codec_a_d_p_c_m_x_q_8h.html#afe34c380ed5972663cdb7fbd166ede77',1,'CodecADPCMXQ.h']]],
   ['default_5fbuffer_5fsize_5',['default_buffer_size',['../avr_8h.html#a6e576a3c6530636d68b7a220480bcd32',1,'DEFAULT_BUFFER_SIZE:&#160;avr.h'],['../_audio_tools_config_8h.html#a6e576a3c6530636d68b7a220480bcd32',1,'DEFAULT_BUFFER_SIZE:&#160;AudioToolsConfig.h']]],
-  ['default_5fbuffer_5fwait_6',['DEFAULT_BUFFER_WAIT',['../_synchronized_n_buffer_r_t_o_s_8h.html#a87c3f5900abce328aae3d521580f1bfb',1,'SynchronizedNBufferRTOS.h']]],
+  ['default_5fbuffer_5fwait_6',['default_buffer_wait',['../_synchronized_n_buffer_r_t_o_s_8h.html#a87c3f5900abce328aae3d521580f1bfb',1,'DEFAULT_BUFFER_WAIT:&#160;SynchronizedNBufferRTOS.h'],['../_synchronized_n_buffer_zephyr_8h.html#a87c3f5900abce328aae3d521580f1bfb',1,'DEFAULT_BUFFER_WAIT:&#160;SynchronizedNBufferZephyr.h']]],
   ['default_5fbyte_5fcount_7',['DEFAULT_BYTE_COUNT',['../_codec_l_c3_8h.html#a5be0eb140c8768eba391e6d79d9f653a',1,'CodecLC3.h']]],
   ['default_5fchannels_8',['DEFAULT_CHANNELS',['../_audio_tools_config_8h.html#a56c31d7b1dab0427b51c034e798b4722',1,'AudioToolsConfig.h']]],
   ['default_5fclk_9',['default_clk',['../_v_f_s___s_d_m_m_c_8h.html#a8c956b82934bb437f43a62821ce8199a',1,'DEFAULT_CLK:&#160;VFS_SDMMC.h'],['../_v_f_s___s_d_s_p_i_8h.html#a8c956b82934bb437f43a62821ce8199a',1,'DEFAULT_CLK:&#160;VFS_SDSPI.h']]],
@@ -24,7 +24,7 @@ var searchData=
   ['default_5fnoise_5fshaping_21',['DEFAULT_NOISE_SHAPING',['../_codec_a_d_p_c_m_x_q_8h.html#aac7c40ef8118d1191538f208f160d2e4',1,'CodecADPCMXQ.h']]],
   ['default_5fpcm_5ffragment_5fsize_22',['DEFAULT_PCM_FRAGMENT_SIZE',['../_r_t_s_p_format_8h.html#ac4459a88baab0fe257b4e2c94c03d1cc',1,'RTSPFormat.h']]],
   ['default_5fsample_5frate_23',['DEFAULT_SAMPLE_RATE',['../_audio_tools_config_8h.html#abe9b1c28165a7071e354bd9d7823ca1a',1,'AudioToolsConfig.h']]],
-  ['desktop_5fmillis_5fdefined_24',['desktop_millis_defined',['../_no_arduino_8h.html#ac9faf1ee520930849fff2feaf62b1d8a',1,'DESKTOP_MILLIS_DEFINED:&#160;NoArduino.h'],['../_time_8h.html#ac9faf1ee520930849fff2feaf62b1d8a',1,'DESKTOP_MILLIS_DEFINED:&#160;Time.h']]],
+  ['desktop_5fmillis_5fdefined_24',['desktop_millis_defined',['../_arduino_8h.html#ac9faf1ee520930849fff2feaf62b1d8a',1,'DESKTOP_MILLIS_DEFINED:&#160;Arduino.h'],['../_time_8h.html#ac9faf1ee520930849fff2feaf62b1d8a',1,'DESKTOP_MILLIS_DEFINED:&#160;Time.h']]],
   ['dio0_25',['dio0',['../_audio_lo_ra_8h.html#a1ae4bf629eab3a2e99cb98bc2d805688',1,'dio0:&#160;AudioLoRa.h'],['../_lo_ra_stream_8h.html#a1ae4bf629eab3a2e99cb98bc2d805688',1,'dio0:&#160;LoRaStream.h']]],
   ['dma_5fbuf_5fcount_26',['DMA_BUF_COUNT',['../_s_p_d_i_f_output_8h.html#a269a7e51407fdeb29660602407f9df02',1,'SPDIFOutput.h']]],
   ['dma_5fbuf_5flen_27',['DMA_BUF_LEN',['../_s_p_d_i_f_output_8h.html#a9aad186bb43c99bfa49b2f97e204af32',1,'SPDIFOutput.h']]]

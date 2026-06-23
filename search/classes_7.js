@@ -3,7 +3,7 @@ var searchData=
   ['hamming_0',['Hamming',['../classaudio__tools_1_1_hamming.html',1,'audio_tools']]],
   ['hammingfec_1',['HammingFEC',['../classaudio__tools_1_1_hamming_f_e_c.html',1,'audio_tools']]],
   ['hann_2',['Hann',['../classaudio__tools_1_1_hann.html',1,'audio_tools']]],
-  ['hardwareserial_3',['HardwareSerial',['../classaudio__tools_1_1_hardware_serial.html',1,'audio_tools']]],
+  ['hardwareserial_3',['HardwareSerial',['../class_hardware_serial.html',1,'']]],
   ['hdlcstream_4',['HDLCStream',['../classaudio__tools_1_1_h_d_l_c_stream.html',1,'audio_tools']]],
   ['headerparseraac_5',['HeaderParserAAC',['../classaudio__tools_1_1_header_parser_a_a_c.html',1,'audio_tools']]],
   ['headerparsermp3_6',['HeaderParserMP3',['../classaudio__tools_1_1_header_parser_m_p3.html',1,'audio_tools']]],

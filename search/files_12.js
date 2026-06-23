@@ -19,7 +19,8 @@ var searchData=
   ['strview_2eh_16',['StrView.h',['../_str_view_8h.html',1,'']]],
   ['synchronizedbuffer_2eh_17',['SynchronizedBuffer.h',['../_synchronized_buffer_8h.html',1,'']]],
   ['synchronizednbufferrtos_2eh_18',['SynchronizedNBufferRTOS.h',['../_synchronized_n_buffer_r_t_o_s_8h.html',1,'']]],
-  ['synchronizedqueue_2eh_19',['SynchronizedQueue.h',['../_synchronized_queue_8h.html',1,'']]],
-  ['synchronizedstream_2eh_20',['SynchronizedStream.h',['../_synchronized_stream_8h.html',1,'']]],
-  ['synthesizer_2eh_21',['Synthesizer.h',['../_synthesizer_8h.html',1,'']]]
+  ['synchronizednbufferzephyr_2eh_19',['SynchronizedNBufferZephyr.h',['../_synchronized_n_buffer_zephyr_8h.html',1,'']]],
+  ['synchronizedqueue_2eh_20',['SynchronizedQueue.h',['../_synchronized_queue_8h.html',1,'']]],
+  ['synchronizedstream_2eh_21',['SynchronizedStream.h',['../_synchronized_stream_8h.html',1,'']]],
+  ['synthesizer_2eh_22',['Synthesizer.h',['../_synthesizer_8h.html',1,'']]]
 ];

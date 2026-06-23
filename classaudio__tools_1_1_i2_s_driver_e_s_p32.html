@@ -86,7 +86,16 @@ $(function() {
 <p>Basic I2S API - for the ESP32. If we receive 1 channel, we expand the result to 2 channels.  
  <a href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_i2_s_e_s_p32_8h_source.html">I2SESP32.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_i2_s_driver_e_s_p32_8h_source.html">I2SDriverESP32.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for I2SDriverESP32:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classaudio__tools_1_1_i2_s_driver_e_s_p32.png" usemap="#I2SDriverESP32_map" alt=""/>
+  <map id="I2SDriverESP32_map" name="I2SDriverESP32_map">
+<area href="classaudio__tools_1_1_i2_s_driver_base.html" alt="I2SDriverBase" shape="rect" coords="0,0,104,24"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -118,9 +127,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a61750044646f6643180bf5073ed9a32d" id="r_a61750044646f6643180bf5073ed9a32d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#a61750044646f6643180bf5073ed9a32d">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info)</td></tr>
 <tr class="memdesc:a61750044646f6643180bf5073ed9a32d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Potentially updates the sample rate (if supported)  <br /></td></tr>
 <tr class="separator:a61750044646f6643180bf5073ed9a32d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44eae9de9900595d04eb4f40eba61eb4" id="r_a44eae9de9900595d04eb4f40eba61eb4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#a44eae9de9900595d04eb4f40eba61eb4">setWaitTimeReadMs</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">TickType_t</a> ms)</td></tr>
+<tr class="memitem:a44eae9de9900595d04eb4f40eba61eb4" id="r_a44eae9de9900595d04eb4f40eba61eb4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#a44eae9de9900595d04eb4f40eba61eb4">setWaitTimeReadMs</a> (<a class="el" href="_queue_zephyr_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a> ms)</td></tr>
 <tr class="separator:a44eae9de9900595d04eb4f40eba61eb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a20b6f103898cc1e88478d35a5a2c31d0" id="r_a20b6f103898cc1e88478d35a5a2c31d0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#a20b6f103898cc1e88478d35a5a2c31d0">setWaitTimeWriteMs</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">TickType_t</a> ms)</td></tr>
+<tr class="memitem:a20b6f103898cc1e88478d35a5a2c31d0" id="r_a20b6f103898cc1e88478d35a5a2c31d0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#a20b6f103898cc1e88478d35a5a2c31d0">setWaitTimeWriteMs</a> (<a class="el" href="_queue_zephyr_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a> ms)</td></tr>
 <tr class="separator:a20b6f103898cc1e88478d35a5a2c31d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2a2bf0126c0c1fd4baa01f858ffd4d0" id="r_ae2a2bf0126c0c1fd4baa01f858ffd4d0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#ae2a2bf0126c0c1fd4baa01f858ffd4d0">writeBytes</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">src</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> size_bytes)</td></tr>
 <tr class="memdesc:ae2a2bf0126c0c1fd4baa01f858ffd4d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes the data to the I2S interface  <br /></td></tr>
@@ -155,9 +164,9 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a0db771b5a2669f25d0293c58af628c46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f8b893603bd3b5d0bd0d6378f07976c" id="r_a4f8b893603bd3b5d0bd0d6378f07976c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#a4f8b893603bd3b5d0bd0d6378f07976c">is_started</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">false</a></td></tr>
 <tr class="separator:a4f8b893603bd3b5d0bd0d6378f07976c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d8caee358b4ae4050ccede1c32bdb1a" id="r_a3d8caee358b4ae4050ccede1c32bdb1a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">TickType_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#a3d8caee358b4ae4050ccede1c32bdb1a">ticks_to_wait_read</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">portMAX_DELAY</a></td></tr>
+<tr class="memitem:a3d8caee358b4ae4050ccede1c32bdb1a" id="r_a3d8caee358b4ae4050ccede1c32bdb1a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_queue_zephyr_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#a3d8caee358b4ae4050ccede1c32bdb1a">ticks_to_wait_read</a> = <a class="el" href="_queue_zephyr_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a></td></tr>
 <tr class="separator:a3d8caee358b4ae4050ccede1c32bdb1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad39d9e052cb518794e6d534d8450a993" id="r_ad39d9e052cb518794e6d534d8450a993"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">TickType_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#ad39d9e052cb518794e6d534d8450a993">ticks_to_wait_write</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">portMAX_DELAY</a></td></tr>
+<tr class="memitem:ad39d9e052cb518794e6d534d8450a993" id="r_ad39d9e052cb518794e6d534d8450a993"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_queue_zephyr_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#ad39d9e052cb518794e6d534d8450a993">ticks_to_wait_write</a> = <a class="el" href="_queue_zephyr_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a></td></tr>
 <tr class="separator:ad39d9e052cb518794e6d534d8450a993"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
@@ -190,12 +199,14 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>we assume the data is already available in the buffer </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_i2_s_driver_base.html#aebd60457902debb30b07971a16f24ebd">I2SDriverBase</a>.</p>
 
 </div>
 </div>
@@ -217,12 +228,14 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>We limit the write size to the buffer size. </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_i2_s_driver_base.html#a9953a7c3a981eb3a83adb4f9ecfb9ac5">I2SDriverBase</a>.</p>
 
 </div>
 </div>
@@ -271,12 +284,14 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>starts the DAC </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_i2_s_driver_base.html#a547b48399acffe373e6ce4fe9c017c89">I2SDriverBase</a>.</p>
 
 </div>
 </div>
@@ -370,12 +385,14 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>provides the actual configuration </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_i2_s_driver_base.html#a75a2501d24865f9b094ce06971a19cbc">I2SDriverBase</a>.</p>
 
 </div>
 </div>
@@ -398,12 +415,14 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Provides the default configuration. </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_i2_s_driver_base.html#aefde96aa8a2bf558b2f8af41b8a9e633">I2SDriverBase</a>.</p>
 
 </div>
 </div>
@@ -425,12 +444,14 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>stops the I2C and unistalls the driver </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_i2_s_driver_base.html#aa540e86022c1f72380d1014d98f38f43">I2SDriverBase</a>.</p>
 
 </div>
 </div>
@@ -515,10 +536,12 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_i2_s_driver_base.html#a8f54611686e6884b6f61078e00eab7e7">I2SDriverBase</a>.</p>
 
 </div>
 </div>
@@ -541,12 +564,14 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Potentially updates the sample rate (if supported) </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_i2_s_driver_base.html#a911f0892a43a90781c1e20805ea3d046">I2SDriverBase</a>.</p>
 
 </div>
 </div>
@@ -588,7 +613,7 @@ Friends</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> setWaitTimeReadMs </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">TickType_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="_queue_zephyr_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a>&#160;</td>
           <td class="paramname"><em>ms</em></td><td>)</td>
           <td></td>
         </tr>
@@ -614,7 +639,7 @@ Friends</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> setWaitTimeWriteMs </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">TickType_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="_queue_zephyr_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a>&#160;</td>
           <td class="paramname"><em>ms</em></td><td>)</td>
           <td></td>
         </tr>
@@ -709,12 +734,14 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>writes the data to the I2S interface </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_i2_s_driver_base.html#a91ea1f2dd0f278b05a8a3f01dc26d6aa">I2SDriverBase</a>.</p>
 
 </div>
 </div>
@@ -912,7 +939,7 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">TickType_t</a> ticks_to_wait_read = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">portMAX_DELAY</a></td>
+          <td class="memname"><a class="el" href="_queue_zephyr_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a> ticks_to_wait_read = <a class="el" href="_queue_zephyr_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a></td>
         </tr>
       </table>
   </td>
@@ -934,7 +961,7 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">TickType_t</a> ticks_to_wait_write = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">portMAX_DELAY</a></td>
+          <td class="memname"><a class="el" href="_queue_zephyr_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a> ticks_to_wait_write = <a class="el" href="_queue_zephyr_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a></td>
         </tr>
       </table>
   </td>
@@ -947,7 +974,7 @@ Friends</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/CoreAudio/AudioI2S/<a class="el" href="_i2_s_e_s_p32_8h_source.html">I2SESP32.h</a></li>
+<li>src/AudioTools/CoreAudio/AudioI2S/<a class="el" href="_i2_s_driver_e_s_p32_8h_source.html">I2SDriverESP32.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

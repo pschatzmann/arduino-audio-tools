@@ -82,7 +82,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> class which stores the data in a temporary queue buffer. The queue can be consumed e.g. by a callback function by calling <a class="el" href="classaudio__tools_1_1_queue_stream.html#a6406b16cb31ad79201459cb48b1ad6f0">readBytes()</a>;.  
+<p><a class="el" href="class_stream.html">Stream</a> class which stores the data in a temporary queue buffer. The queue can be consumed e.g. by a callback function by calling <a class="el" href="classaudio__tools_1_1_queue_stream.html#a6406b16cb31ad79201459cb48b1ad6f0">readBytes()</a>;.  
  <a href="classaudio__tools_1_1_queue_stream.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_base_stream_8h_source.html">BaseStream.h</a>&gt;</code></p>
@@ -93,8 +93,8 @@ Inheritance diagram for QueueStream&lt; T &gt;:</div>
   <img src="classaudio__tools_1_1_queue_stream.png" usemap="#QueueStream_3C_20T_20_3E_map" alt=""/>
   <map id="QueueStream_3C_20T_20_3E_map" name="QueueStream_3C_20T_20_3E_map">
 <area href="classaudio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer, size_t size) and readBytes(uint..." alt="BaseStream" shape="rect" coords="0,112,120,136"/>
-<area href="classaudio__tools_1_1_stream.html" alt="Stream" shape="rect" coords="0,56,120,80"/>
-<area href="classaudio__tools_1_1_print.html" alt="Print" shape="rect" coords="0,0,120,24"/>
+<area href="class_stream.html" alt="Stream" shape="rect" coords="0,56,120,80"/>
+<area href="class_print.html" alt="Print" shape="rect" coords="0,0,120,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -141,9 +141,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad0852e3297f3743332e629b9924c9375"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6406b16cb31ad79201459cb48b1ad6f0" id="r_a6406b16cb31ad79201459cb48b1ad6f0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_queue_stream.html#a6406b16cb31ad79201459cb48b1ad6f0">readBytes</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *data, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> len) <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
 <tr class="separator:a6406b16cb31ad79201459cb48b1ad6f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e4b1f3359ceb3c1f14fca57e38bc231" id="r_a9e4b1f3359ceb3c1f14fca57e38bc231"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_queue_stream.html#a9e4b1f3359ceb3c1f14fca57e38bc231">resize</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> size)</td></tr>
-<tr class="memdesc:a9e4b1f3359ceb3c1f14fca57e38bc231"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize the buffer.  <br /></td></tr>
-<tr class="separator:a9e4b1f3359ceb3c1f14fca57e38bc231"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4f8f853ac7c7aaa49e0471d25f5e02c" id="r_ae4f8f853ac7c7aaa49e0471d25f5e02c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_queue_stream.html#ae4f8f853ac7c7aaa49e0471d25f5e02c">resize</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> size)</td></tr>
+<tr class="memdesc:ae4f8f853ac7c7aaa49e0471d25f5e02c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize the buffer.  <br /></td></tr>
+<tr class="separator:ae4f8f853ac7c7aaa49e0471d25f5e02c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada27f0e0555156caa2afb7baf035981e" id="r_ada27f0e0555156caa2afb7baf035981e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_queue_stream.html#ada27f0e0555156caa2afb7baf035981e">setBuffer</a> (<a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; &amp;buffer)</td></tr>
 <tr class="separator:ada27f0e0555156caa2afb7baf035981e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adad22dd23fc48a3b338eafe707439deb" id="r_adad22dd23fc48a3b338eafe707439deb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#adad22dd23fc48a3b338eafe707439deb">setWriteBufferSize</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> size)</td></tr>
@@ -161,7 +161,7 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:aa66a35e5edf58ce00047afcd1d4f455e" id="r_aa66a35e5edf58ce00047afcd1d4f455e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_print.html#aa66a35e5edf58ce00047afcd1d4f455e">_timeout</a> = 10</td></tr>
+<tr class="memitem:aa66a35e5edf58ce00047afcd1d4f455e" id="r_aa66a35e5edf58ce00047afcd1d4f455e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_print.html#aa66a35e5edf58ce00047afcd1d4f455e">_timeout</a> = 10</td></tr>
 <tr class="separator:aa66a35e5edf58ce00047afcd1d4f455e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03c996f9fcf0e10baeb3e700be0c409a" id="r_a03c996f9fcf0e10baeb3e700be0c409a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_queue_stream.html#a03c996f9fcf0e10baeb3e700be0c409a">active</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">false</a></td></tr>
 <tr class="separator:a03c996f9fcf0e10baeb3e700be0c409a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -184,7 +184,7 @@ Protected Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>&gt;<br />
-class audio_tools::QueueStream&lt; T &gt;</div><p><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> class which stores the data in a temporary queue buffer. The queue can be consumed e.g. by a callback function by calling <a class="el" href="classaudio__tools_1_1_queue_stream.html#a6406b16cb31ad79201459cb48b1ad6f0">readBytes()</a>;. </p>
+class audio_tools::QueueStream&lt; T &gt;</div><p><a class="el" href="class_stream.html">Stream</a> class which stores the data in a temporary queue buffer. The queue can be consumed e.g. by a callback function by calling <a class="el" href="classaudio__tools_1_1_queue_stream.html#a6406b16cb31ad79201459cb48b1ad6f0">readBytes()</a>;. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -523,7 +523,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_print.html#ad3aed50bc3b4459454ccb8c64f5ced5a">Print</a>.</p>
+<p>Reimplemented from <a class="el" href="class_print.html#ad3aed50bc3b4459454ccb8c64f5ced5a">Print</a>.</p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_pure_data_stream.html#adac116554b543b7c4228c018a85882f5">PureDataStream</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#ad3aed50bc3b4459454ccb8c64f5ced5a">URLStreamBufferedT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#ad3aed50bc3b4459454ccb8c64f5ced5a">URLStreamBufferedT&lt; ICYStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_reformat_base_stream.html#ad3aed50bc3b4459454ccb8c64f5ced5a">ReformatBaseStream</a>, <a class="el" href="classaudio__tools_1_1_audio_stream_wrapper.html#ad3aed50bc3b4459454ccb8c64f5ced5a">AudioStreamWrapper</a>, <a class="el" href="classaudio__tools_1_1_resample_stream.html#adac116554b543b7c4228c018a85882f5">ResampleStream</a>, <a class="el" href="classaudio__tools_1_1_encoded_audio_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">EncodedAudioStream</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">URLStream</a>, <a class="el" href="classaudio__tools_1_1_buffered_task_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">BufferedTaskStream</a>, <a class="el" href="classaudio__tools_1_1_i2_s_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">I2SStream</a>, <a class="el" href="classaudio__tools_1_1_memory_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">MemoryStream</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">RingBufferStream</a>, <a class="el" href="classaudio__tools_1_1_generated_sound_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">GeneratedSoundStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_generated_sound_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">GeneratedSoundStream&lt; int16_t &gt;</a>, and <a class="el" href="classaudio__tools_1_1_buffered_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">BufferedStream</a>.</p>
 
@@ -708,8 +708,8 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 
 </div>
 </div>
-<a id="a9e4b1f3359ceb3c1f14fca57e38bc231" name="a9e4b1f3359ceb3c1f14fca57e38bc231"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9e4b1f3359ceb3c1f14fca57e38bc231">&#9670;&#160;</a></span>resize()</h2>
+<a id="ae4f8f853ac7c7aaa49e0471d25f5e02c" name="ae4f8f853ac7c7aaa49e0471d25f5e02c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4f8f853ac7c7aaa49e0471d25f5e02c">&#9670;&#160;</a></span>resize()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -722,7 +722,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
         <tr>
           <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> resize </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td>
           <td class="paramname"><em>size</em></td><td>)</td>
           <td></td>
         </tr>

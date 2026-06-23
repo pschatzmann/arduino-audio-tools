@@ -84,20 +84,18 @@ $(function() {
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="_audio_tools_config_8h_source.html">AudioToolsConfig.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_collections_8h_source.html">AudioTools/CoreAudio/AudioBasic/Collections.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_audio_tools_8h_source.html">AudioTools.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_audio_tools_2_core_audio_2_audio_logger_8h_source.html">AudioTools/CoreAudio/AudioLogger.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_audio_output_8h_source.html">AudioTools/CoreAudio/AudioOutput.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_audio_types_8h_source.html">AudioTools/CoreAudio/AudioTypes.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="int24__t_8h_source.html">AudioTools/CoreAudio/AudioBasic/int24_t.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_p_w_m_config_8h_source.html">PWMConfig.h</a>&quot;</code><br />
 </div>
 <p><a href="_p_w_m_driver_base_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_driver_p_w_m_base.html">DriverPWMBase</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base Class for all PWM drivers.  <a href="classaudio__tools_1_1_driver_p_w_m_base.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_p_w_m_config.html">PWMConfig</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration data for PWM audio output.  <a href="structaudio__tools_1_1_p_w_m_config.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_p_w_m_driver_base.html">PWMDriverBase</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base Class for all PWM drivers.  <a href="classaudio__tools_1_1_p_w_m_driver_base.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
@@ -108,6 +106,8 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
+<tr class="memitem:a0186ec80bc6d2c3861fea500487b0719" id="r_a0186ec80bc6d2c3861fea500487b0719"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_p_w_m_driver_base_8h.html#a0186ec80bc6d2c3861fea500487b0719">PIN_PWM_START</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a0186ec80bc6d2c3861fea500487b0719"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a807770d0e97a5b1cccd90fca3b8dd8c5" id="r_a807770d0e97a5b1cccd90fca3b8dd8c5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_p_w_m_driver_base_8h.html#a807770d0e97a5b1cccd90fca3b8dd8c5">READ_ERROR_MSG</a>&#160;&#160;&#160;&quot;Could not read full data&quot;</td></tr>
 <tr class="separator:a807770d0e97a5b1cccd90fca3b8dd8c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -122,6 +122,20 @@ Functions</h2></td></tr>
 <tr class="separator:a55868847c0ef334611f3ffa71a64619e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a0186ec80bc6d2c3861fea500487b0719" name="a0186ec80bc6d2c3861fea500487b0719"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0186ec80bc6d2c3861fea500487b0719">&#9670;&#160;</a></span>PIN_PWM_START</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PIN_PWM_START&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a807770d0e97a5b1cccd90fca3b8dd8c5" name="a807770d0e97a5b1cccd90fca3b8dd8c5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a807770d0e97a5b1cccd90fca3b8dd8c5">&#9670;&#160;</a></span>READ_ERROR_MSG</h2>
 

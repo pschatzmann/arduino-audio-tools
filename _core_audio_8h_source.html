@@ -108,8 +108,15 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#include &quot;<a class="code" href="_audio_meta_data_8h.html">AudioTools/CoreAudio/AudioMetaData.h</a>&quot;</span></div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &quot;<a class="code" href="_frequency_detector_8h.html">AudioTools/CoreAudio/FrequencyDetector.h</a>&quot;</span></div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &quot;<a class="code" href="_goerzel_stream_8h.html">AudioTools/CoreAudio/GoerzelStream.h</a>&quot;</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &quot;<a class="code" href="_r_t_t_t_l_output_8h.html">AudioTools/CoreAudio/RTTTLOutput.h</a>&quot;</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &quot;<a class="code" href="_quality_analysis_stream_8h.html">AudioTools/CoreAudio/QualityAnalysisStream.h</a>&quot;</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &quot;<a class="code" href="_r_t_t_t_l_output_8h.html">AudioTools/CoreAudio/RTTTLOutput.h</a>&quot;</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">// Audio Actions only when pin support havs been defined</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#if defined(GPIO_NONE)</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#include &quot;<a class="code" href="_audio_actions_8h.html">AudioTools/CoreAudio/AudioActions.h</a>&quot;</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="a_analog_audio_stream_8h_html"><div class="ttname"><a href="_analog_audio_stream_8h.html">AnalogAudioStream.h</a></div></div>
+<div class="ttc" id="a_audio_actions_8h_html"><div class="ttname"><a href="_audio_actions_8h.html">AudioActions.h</a></div></div>
 <div class="ttc" id="a_audio_effects_8h_html"><div class="ttname"><a href="_audio_effects_8h.html">AudioEffects.h</a></div></div>
 <div class="ttc" id="a_audio_filter_8h_html"><div class="ttname"><a href="_audio_filter_8h.html">AudioFilter.h</a></div></div>
 <div class="ttc" id="a_audio_i_o_8h_html"><div class="ttname"><a href="_audio_i_o_8h.html">AudioIO.h</a></div></div>
@@ -130,6 +137,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="a_musical_notes_8h_html"><div class="ttname"><a href="_musical_notes_8h.html">MusicalNotes.h</a></div></div>
 <div class="ttc" id="a_p_w_m_audio_output_8h_html"><div class="ttname"><a href="_p_w_m_audio_output_8h.html">PWMAudioOutput.h</a></div></div>
 <div class="ttc" id="a_pipeline_8h_html"><div class="ttname"><a href="_pipeline_8h.html">Pipeline.h</a></div></div>
+<div class="ttc" id="a_quality_analysis_stream_8h_html"><div class="ttname"><a href="_quality_analysis_stream_8h.html">QualityAnalysisStream.h</a></div></div>
 <div class="ttc" id="a_r_t_t_t_l_output_8h_html"><div class="ttname"><a href="_r_t_t_t_l_output_8h.html">RTTTLOutput.h</a></div></div>
 <div class="ttc" id="a_resample_stream_8h_html"><div class="ttname"><a href="_resample_stream_8h.html">ResampleStream.h</a></div></div>
 <div class="ttc" id="a_resample_stream_t_8h_html"><div class="ttname"><a href="_resample_stream_t_8h.html">ResampleStreamT.h</a></div></div>

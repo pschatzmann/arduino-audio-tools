@@ -82,7 +82,7 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_adaptive_resampling_stream.html">AdaptiveResamplingStream</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">An Audio <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> backed by a buffer (queue) which tries to correct jitter and automatically adjusts for the slightly different clock rates between an audio source and audio target. Use separate tasks to write and read the data. Also make sure that you protect the access with a mutex or provide a thread-safe buffer!  <a href="classaudio__tools_1_1_adaptive_resampling_stream.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">An Audio <a class="el" href="class_stream.html">Stream</a> backed by a buffer (queue) which tries to correct jitter and automatically adjusts for the slightly different clock rates between an audio source and audio target. Use separate tasks to write and read the data. Also make sure that you protect the access with a mutex or provide a thread-safe buffer!  <a href="classaudio__tools_1_1_adaptive_resampling_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer&lt; T &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shared functionality of all buffers.  <a href="classaudio__tools_1_1_base_buffer.html#details">More...</a><br /></td></tr>
@@ -95,6 +95,9 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html">BufferRTOS&lt; T &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffer implementation which is using a FreeRTOS StreamBuffer. The default allocator uses psram is available.  <a href="classaudio__tools_1_1_buffer_r_t_o_s.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffer_zephyr.html">BufferZephyr&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffer implementation using Zephyr semaphores + mutex as a bounded ring buffer.  <a href="classaudio__tools_1_1_buffer_zephyr.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_dynamic_multi_buffer.html">DynamicMultiBuffer&lt; T, BufferType &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Auto-expanding buffer composed of multiple buffer instances.  <a href="classaudio__tools_1_1_dynamic_multi_buffer.html#details">More...</a><br /></td></tr>
@@ -109,7 +112,7 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A File backed buffer which uses the provided files for buffering with the indicated max size. A file is made available for reading as soon as it reached the size limit. You must provide the files opened in "Write" mode with the <a class="el" href="classaudio__tools_1_1_n_buffer_file.html#a705eba4798cb6de30b3a354f99dab9c4">addFile()</a> method!  <a href="classaudio__tools_1_1_n_buffer_file.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html">RedisBuffer&lt; T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffer implementation that stores and retrieves data from a Redis server using the Arduino <a class="el" href="classaudio__tools_1_1_client.html">Client</a>.  <a href="classaudio__tools_1_1_redis_buffer.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffer implementation that stores and retrieves data from a Redis server using the Arduino <a class="el" href="class_client.html">Client</a>.  <a href="classaudio__tools_1_1_redis_buffer.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer&lt; T &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implements a typed Ringbuffer.  <a href="classaudio__tools_1_1_ring_buffer.html#details">More...</a><br /></td></tr>
@@ -124,7 +127,10 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper class that can turn any Buffer into a thread save implementation.  <a href="classaudio__tools_1_1_synchronized_buffer.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html">SynchronizedNBufferRTOST&lt; T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_n_buffer.html" title="A lock free N buffer. If count=2 we create a DoubleBuffer, if count=3 a TripleBuffer etc.">NBuffer</a> which uses some RTOS queues to manage the available and filled buffers.  <a href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_n_buffer.html" title="A lock free N buffer. If count=2 we create a DoubleBuffer, if count=3 a TripleBuffer etc.">NBuffer</a> which uses FreeRTOS queues to manage the available and filled buffers, making it safe for cross-core SPSC (single producer, single consumer) use on dual-core ESP32.  <a href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_zephyr_t.html">SynchronizedNBufferZephyrT&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_n_buffer.html" title="A lock free N buffer. If count=2 we create a DoubleBuffer, if count=3 a TripleBuffer etc.">NBuffer</a> using Zephyr queues for available and filled buffers.  <a href="classaudio__tools_1_1_synchronized_n_buffer_zephyr_t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html">VariableSpeedRingBuffer&lt; T &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optimized buffer implementation for pitch shifting with interpolation.  <a href="classaudio__tools_1_1_variable_speed_ring_buffer.html#details">More...</a><br /></td></tr>
@@ -141,12 +147,15 @@ Typedefs</h2></td></tr>
 <tr class="memitem:ga14694aaf4d36cc9526a528a395f2f258" id="r_ga14694aaf4d36cc9526a528a395f2f258"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__buffers.html#ga14694aaf4d36cc9526a528a395f2f258">BufferRP2040</a> = <a class="el" href="classaudio__tools_1_1_buffer_r_p2040_t.html">BufferRP2040T</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> &gt;</td></tr>
 <tr class="memdesc:ga14694aaf4d36cc9526a528a395f2f258"><td class="mdescLeft">&#160;</td><td class="mdescRight">RP2040 specific buffer for audio data.  <br /></td></tr>
 <tr class="separator:ga14694aaf4d36cc9526a528a395f2f258"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga11796e904e095bd04de4729d8c0bb1e4" id="r_ga11796e904e095bd04de4729d8c0bb1e4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__buffers.html#ga11796e904e095bd04de4729d8c0bb1e4">SynchronizedNBuffer</a> = <a class="el" href="group__buffers.html#ga74681731439e3b6d9e2a4d8a72d3002a">SynchronizedNBufferRTOS</a></td></tr>
-<tr class="memdesc:ga11796e904e095bd04de4729d8c0bb1e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default synchronized buffer alias &lt;&gt;  <br /></td></tr>
-<tr class="separator:ga11796e904e095bd04de4729d8c0bb1e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga74681731439e3b6d9e2a4d8a72d3002a" id="r_ga74681731439e3b6d9e2a4d8a72d3002a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__buffers.html#ga74681731439e3b6d9e2a4d8a72d3002a">SynchronizedNBufferRTOS</a> = <a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html">SynchronizedNBufferRTOST</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> &gt;</td></tr>
-<tr class="memdesc:ga74681731439e3b6d9e2a4d8a72d3002a"><td class="mdescLeft">&#160;</td><td class="mdescRight">RTOS synchronized buffer for managing multiple audio buffers.  <br /></td></tr>
-<tr class="separator:ga74681731439e3b6d9e2a4d8a72d3002a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac80f4c14d351d7280ded69fc83fcddd9" id="r_gac80f4c14d351d7280ded69fc83fcddd9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__buffers.html#gac80f4c14d351d7280ded69fc83fcddd9">SynchronizedNBuffer</a> = <a class="el" href="group__buffers.html#ga21c5dfc69ca6280a09fa2cd0bf6243d7">SynchronizedNBufferRTOS</a></td></tr>
+<tr class="memdesc:gac80f4c14d351d7280ded69fc83fcddd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default synchronized buffer alias.  <br /></td></tr>
+<tr class="separator:gac80f4c14d351d7280ded69fc83fcddd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga21c5dfc69ca6280a09fa2cd0bf6243d7" id="r_ga21c5dfc69ca6280a09fa2cd0bf6243d7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__buffers.html#ga21c5dfc69ca6280a09fa2cd0bf6243d7">SynchronizedNBufferRTOS</a> = <a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html">SynchronizedNBufferRTOST</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> &gt;</td></tr>
+<tr class="memdesc:ga21c5dfc69ca6280a09fa2cd0bf6243d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">RTOS synchronized buffer for managing multiple audio buffers.  <br /></td></tr>
+<tr class="separator:ga21c5dfc69ca6280a09fa2cd0bf6243d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6b81c2be80e5e5a40f487e5c2b8cf162" id="r_ga6b81c2be80e5e5a40f487e5c2b8cf162"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__buffers.html#ga6b81c2be80e5e5a40f487e5c2b8cf162">SynchronizedNBufferZephyr</a> = <a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_zephyr_t.html">SynchronizedNBufferZephyrT</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> &gt;</td></tr>
+<tr class="memdesc:ga6b81c2be80e5e5a40f487e5c2b8cf162"><td class="mdescLeft">&#160;</td><td class="mdescRight">Zephyr synchronized buffer for managing multiple audio buffers.  <br /></td></tr>
+<tr class="separator:ga6b81c2be80e5e5a40f487e5c2b8cf162"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Different Buffer Implementations. </p>
@@ -167,35 +176,52 @@ Typedefs</h2></td></tr>
 
 </div>
 </div>
-<a id="ga11796e904e095bd04de4729d8c0bb1e4" name="ga11796e904e095bd04de4729d8c0bb1e4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga11796e904e095bd04de4729d8c0bb1e4">&#9670;&#160;</a></span>SynchronizedNBuffer</h2>
+<a id="gac80f4c14d351d7280ded69fc83fcddd9" name="gac80f4c14d351d7280ded69fc83fcddd9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac80f4c14d351d7280ded69fc83fcddd9">&#9670;&#160;</a></span>SynchronizedNBuffer</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">using</a> <a class="el" href="group__buffers.html#ga11796e904e095bd04de4729d8c0bb1e4">SynchronizedNBuffer</a> =  <a class="el" href="group__buffers.html#ga74681731439e3b6d9e2a4d8a72d3002a">SynchronizedNBufferRTOS</a></td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typedef</a> <a class="el" href="group__buffers.html#ga6b81c2be80e5e5a40f487e5c2b8cf162">SynchronizedNBufferZephyr</a> <a class="el" href="group__buffers.html#gac80f4c14d351d7280ded69fc83fcddd9">SynchronizedNBuffer</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Default synchronized buffer alias &lt;&gt; </p>
+<p>Default synchronized buffer alias. </p>
 
 </div>
 </div>
-<a id="ga74681731439e3b6d9e2a4d8a72d3002a" name="ga74681731439e3b6d9e2a4d8a72d3002a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga74681731439e3b6d9e2a4d8a72d3002a">&#9670;&#160;</a></span>SynchronizedNBufferRTOS</h2>
+<a id="ga21c5dfc69ca6280a09fa2cd0bf6243d7" name="ga21c5dfc69ca6280a09fa2cd0bf6243d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga21c5dfc69ca6280a09fa2cd0bf6243d7">&#9670;&#160;</a></span>SynchronizedNBufferRTOS</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">using</a> <a class="el" href="group__buffers.html#ga74681731439e3b6d9e2a4d8a72d3002a">SynchronizedNBufferRTOS</a> =  <a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html">SynchronizedNBufferRTOST</a>&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&gt;</td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typedef</a> <a class="el" href="group__buffers.html#ga6b81c2be80e5e5a40f487e5c2b8cf162">SynchronizedNBufferZephyr</a> <a class="el" href="group__buffers.html#ga21c5dfc69ca6280a09fa2cd0bf6243d7">SynchronizedNBufferRTOS</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>RTOS synchronized buffer for managing multiple audio buffers. </p>
+<p>Compatibility typedef for RTOS-based synchronized N-buffer naming. </p>
+
+</div>
+</div>
+<a id="ga6b81c2be80e5e5a40f487e5c2b8cf162" name="ga6b81c2be80e5e5a40f487e5c2b8cf162"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6b81c2be80e5e5a40f487e5c2b8cf162">&#9670;&#160;</a></span>SynchronizedNBufferZephyr</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">using</a> <a class="el" href="group__buffers.html#ga6b81c2be80e5e5a40f487e5c2b8cf162">SynchronizedNBufferZephyr</a> =  <a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_zephyr_t.html">SynchronizedNBufferZephyrT</a>&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Zephyr synchronized buffer for managing multiple audio buffers. </p>
 
 </div>
 </div>

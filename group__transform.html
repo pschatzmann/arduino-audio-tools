@@ -75,7 +75,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Stream classes which change the input or output.  
+<p><a class="el" href="class_stream.html">Stream</a> classes which change the input or output.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
@@ -102,13 +102,13 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Both the data of the read or write operations will be converted with the help of the indicated converter.  <a href="classaudio__tools_1_1_converter_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_encoded_audio_output.html">EncodedAudioOutput</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A more natural <a class="el" href="classaudio__tools_1_1_print.html">Print</a> class to process encoded data (aac, wav, mp3...). Just define the output and the decoder and write the encoded data.  <a href="classaudio__tools_1_1_encoded_audio_output.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A more natural <a class="el" href="class_print.html">Print</a> class to process encoded data (aac, wav, mp3...). Just define the output and the decoder and write the encoded data.  <a href="classaudio__tools_1_1_encoded_audio_output.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_encoded_audio_stream.html">EncodedAudioStream</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A more natural <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> class to process encoded data (aac, wav, mp3...) which also supports the decoding by calling <a class="el" href="classaudio__tools_1_1_encoded_audio_stream.html#a4c5c6275ddee80eb02839356b6185c0b">readBytes()</a>.  <a href="classaudio__tools_1_1_encoded_audio_stream.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A more natural <a class="el" href="class_stream.html">Stream</a> class to process encoded data (aac, wav, mp3...) which also supports the decoding by calling <a class="el" href="classaudio__tools_1_1_encoded_audio_stream.html#a4c5c6275ddee80eb02839356b6185c0b">readBytes()</a>.  <a href="classaudio__tools_1_1_encoded_audio_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_fade_stream.html">FadeStream</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> which can be used to manage fade in and fade out. Before you read or write data you need to call <a class="el" href="classaudio__tools_1_1_fade_stream.html#ad1fdd56031f1195cb221ab855fb6a102" title="Defines the input AudioInfo.">setAudioInfo()</a> to provide the bits_per_sample and channels.  <a href="classaudio__tools_1_1_fade_stream.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_stream.html">Stream</a> which can be used to manage fade in and fade out. Before you read or write data you need to call <a class="el" href="classaudio__tools_1_1_fade_stream.html#ad1fdd56031f1195cb221ab855fb6a102" title="Defines the input AudioInfo.">setAudioInfo()</a> to provide the bits_per_sample and channels.  <a href="classaudio__tools_1_1_fade_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_effect.html">FFTEffect</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract class for common Logic for FFT based effects. The effect is applied after the fft to the frequency domain before executing the ifft. Please note that this is quite processing time intensitive: so you might keep the sample rate quite low if the processor is not fast enough!  <a href="classaudio__tools_1_1_f_f_t_effect.html#details">More...</a><br /></td></tr>
@@ -132,7 +132,7 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply Robotize FFT Effect on frequency domain data. See <a href="https://learn.bela.io/tutorials/c-plus-plus-for-real-time-audio-programming/phase-vocoder-part-3/">https://learn.bela.io/tutorials/c-plus-plus-for-real-time-audio-programming/phase-vocoder-part-3/</a>.  <a href="classaudio__tools_1_1_f_f_t_whisper.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_filtered_stream.html">FilteredStream&lt; T, TF &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> to which we can apply Filters for each channel. The filter might change the result size!  <a href="classaudio__tools_1_1_filtered_stream.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_stream.html">Stream</a> to which we can apply Filters for each channel. The filter might change the result size!  <a href="classaudio__tools_1_1_filtered_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_format_converter_stream.html">FormatConverterStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converter which converts bits_per_sample, channels and the sample_rate. The conversion is supported both on the input and output side.  <a href="classaudio__tools_1_1_format_converter_stream.html#details">More...</a><br /></td></tr>
@@ -171,11 +171,11 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...">AudioStream</a> class that can define a start and (an optional) stop time Usually it is used to wrap an Audio Sink (e.g. <a class="el" href="classaudio__tools_1_1_i2_s_stream.html" title="We support the Stream interface for the I2S access. In addition we allow a separate mute pin which mi...">I2SStream</a>), but wrapping an Audio Source is supported as well. Only wrap classes which represent PCM data!  <a href="classaudio__tools_1_1_timed_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_volume_stream.html">VolumeStream</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjust the volume of the related input or output: To work properly the class needs to know the bits per sample and number of channels! AudioChanges are forwareded to the related <a class="el" href="classaudio__tools_1_1_print.html">Print</a> or <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> class.  <a href="classaudio__tools_1_1_volume_stream.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjust the volume of the related input or output: To work properly the class needs to know the bits per sample and number of channels! AudioChanges are forwareded to the related <a class="el" href="class_print.html">Print</a> or <a class="el" href="class_stream.html">Stream</a> class.  <a href="classaudio__tools_1_1_volume_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p>Stream classes which change the input or output. </p>
+<p><a class="el" href="class_stream.html">Stream</a> classes which change the input or output. </p>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

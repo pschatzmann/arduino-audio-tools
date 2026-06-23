@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['ulpdac_0',['UlpDac',['../namespaceaudio__tools.html#ab54fc3023f2ec29f09d7ff2d004255f2',1,'audio_tools']]],
-  ['urltype_1',['URLType',['../classaudio__tools__hls_1_1_h_l_s_parser.html#af69e21368a1b58dfa1a6601f6e9539bd',1,'audio_tools_hls::HLSParser']]]
+  ['timerfunction_0',['TimerFunction',['../namespaceaudio__tools.html#a1a80d46b1fcf323c58eb596c016434f2',1,'audio_tools']]],
+  ['timeunit_1',['TimeUnit',['../group__basic.html#gadd9fe45e09605eee3e4a39c8a5c4476d',1,'audio_tools']]],
+  ['transmitrole_2',['TransmitRole',['../namespaceaudio__tools.html#a39767e1d5e989bc1c5719791db129efa',1,'audio_tools']]]
 ];

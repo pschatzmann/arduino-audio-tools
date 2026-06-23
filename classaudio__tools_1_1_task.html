@@ -78,7 +78,7 @@ $(function() {
 <a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_task-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">Task Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__concurrency.html">Concurrency</a></div></div></div>
+  <div class="headertitle"><div class="title">Task Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -86,6 +86,15 @@ $(function() {
  <a href="classaudio__tools_1_1_task.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_r_t_o_s_2_task_8h_source.html">Task.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Task:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classaudio__tools_1_1_task.png" usemap="#Task_map" alt=""/>
+  <map id="Task_map" name="Task_map">
+<area href="classaudio__tools_1_1_i_task.html" title="Interface for a task that can be started and stopped." alt="ITask" shape="rect" coords="0,0,41,24"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -108,7 +117,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a77e448ed32d70ca898f5c8f5919aa074"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a056050e2451ce05d256a44408b6c9fe0" id="r_a056050e2451ce05d256a44408b6c9fe0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_task.html#a056050e2451ce05d256a44408b6c9fe0">getReference</a> ()</td></tr>
 <tr class="separator:a056050e2451ce05d256a44408b6c9fe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1ed49a654fa9b154226995a0c9923294" id="r_a1ed49a654fa9b154226995a0c9923294"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">TaskHandle_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_task.html#a1ed49a654fa9b154226995a0c9923294">getTaskHandle</a> ()</td></tr>
+<tr class="memitem:a1ed49a654fa9b154226995a0c9923294" id="r_a1ed49a654fa9b154226995a0c9923294"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a7be7cde832716638e7144371881ddf85">TaskHandle_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_task.html#a1ed49a654fa9b154226995a0c9923294">getTaskHandle</a> ()</td></tr>
 <tr class="separator:a1ed49a654fa9b154226995a0c9923294"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fcb45e5d2428352eb36b487d1d4eea3" id="r_a1fcb45e5d2428352eb36b487d1d4eea3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_task.html#a1fcb45e5d2428352eb36b487d1d4eea3">remove</a> ()</td></tr>
 <tr class="memdesc:a1fcb45e5d2428352eb36b487d1d4eea3"><td class="mdescLeft">&#160;</td><td class="mdescRight">deletes the FreeRTOS task  <br /></td></tr>
@@ -133,11 +142,12 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ab153441a2052f80aafe00768ea80aee0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1830ddb36c14bdd7057683e633f918c8" id="r_a1830ddb36c14bdd7057683e633f918c8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_task.html#a1830ddb36c14bdd7057683e633f918c8">ref</a></td></tr>
 <tr class="separator:a1830ddb36c14bdd7057683e633f918c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01ba122aba7d048809e2330ee6cbe218" id="r_a01ba122aba7d048809e2330ee6cbe218"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">TaskHandle_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_task.html#a01ba122aba7d048809e2330ee6cbe218">xHandle</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td></tr>
+<tr class="memitem:a01ba122aba7d048809e2330ee6cbe218" id="r_a01ba122aba7d048809e2330ee6cbe218"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a7be7cde832716638e7144371881ddf85">TaskHandle_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_task.html#a01ba122aba7d048809e2330ee6cbe218">xHandle</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td></tr>
 <tr class="separator:a01ba122aba7d048809e2330ee6cbe218"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>FreeRTOS task. </p>
+<dl class="section note"><dt>Note</dt><dd>Supported by all FreeRTOS platforms</dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 * </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -261,10 +271,12 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_i_task.html#a77064a4e94683438ef186bd54aad44e6">ITask</a>.</p>
 
 </div>
 </div>
@@ -336,12 +348,14 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>suspends the task </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_i_task.html#aa540e86022c1f72380d1014d98f38f43">ITask</a>.</p>
 
 </div>
 </div>
@@ -405,7 +419,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">TaskHandle_t</a> &amp; getTaskHandle </td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a7be7cde832716638e7144371881ddf85">TaskHandle_t</a> &amp; getTaskHandle </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -629,7 +643,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">TaskHandle_t</a> xHandle = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a7be7cde832716638e7144371881ddf85">TaskHandle_t</a> xHandle = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td>
         </tr>
       </table>
   </td>

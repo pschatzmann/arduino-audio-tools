@@ -4,5 +4,6 @@ var searchData=
   ['equalizernbands_2eh_1',['EqualizerNBands.h',['../_equalizer_n_bands_8h.html',1,'']]],
   ['esp32_2eh_2',['esp32.h',['../esp32_8h.html',1,'']]],
   ['esp8266_2eh_3',['esp8266.h',['../esp8266_8h.html',1,'']]],
-  ['espnowstream_2eh_4',['ESPNowStream.h',['../_e_s_p_now_stream_8h.html',1,'']]]
+  ['espnowstream_2eh_4',['ESPNowStream.h',['../_e_s_p_now_stream_8h.html',1,'']]],
+  ['ethernetzephyr_2eh_5',['EthernetZephyr.h',['../_ethernet_zephyr_8h.html',1,'']]]
 ];

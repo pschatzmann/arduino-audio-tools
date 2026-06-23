@@ -13,8 +13,13 @@ var searchData=
   ['websocketoutput_10',['WebSocketOutput',['../classaudio__tools_1_1_web_socket_output.html',1,'audio_tools']]],
   ['welch_11',['Welch',['../classaudio__tools_1_1_welch.html',1,'audio_tools']]],
   ['whitenoisegenerator_12',['WhiteNoiseGenerator',['../classaudio__tools_1_1_white_noise_generator.html',1,'audio_tools']]],
-  ['wifiesp32_13',['WiFiESP32',['../classaudio__tools_1_1_wi_fi_e_s_p32.html',1,'audio_tools']]],
-  ['windowfunction_14',['WindowFunction',['../classaudio__tools_1_1_window_function.html',1,'audio_tools']]],
-  ['wm8960config_15',['WM8960Config',['../classaudio__tools_1_1_w_m8960_config.html',1,'audio_tools']]],
-  ['wm8960stream_16',['WM8960Stream',['../classaudio__tools_1_1_w_m8960_stream.html',1,'audio_tools']]]
+  ['wificlientsecurezephyr_13',['WiFiClientSecureZephyr',['../classaudio__tools_1_1_wi_fi_client_secure_zephyr.html',1,'audio_tools']]],
+  ['wificlientzephyr_14',['WiFiClientZephyr',['../classaudio__tools_1_1_wi_fi_client_zephyr.html',1,'audio_tools']]],
+  ['wifiesp32_15',['WiFiESP32',['../classaudio__tools_1_1_wi_fi_e_s_p32.html',1,'audio_tools']]],
+  ['wifiserverzephyr_16',['WiFiServerZephyr',['../classaudio__tools_1_1_wi_fi_server_zephyr.html',1,'audio_tools']]],
+  ['wifiudpzephyr_17',['WiFiUDPZephyr',['../classaudio__tools_1_1_wi_fi_u_d_p_zephyr.html',1,'audio_tools']]],
+  ['wifizephyr_18',['WiFiZephyr',['../classaudio__tools_1_1_wi_fi_zephyr.html',1,'audio_tools']]],
+  ['windowfunction_19',['WindowFunction',['../classaudio__tools_1_1_window_function.html',1,'audio_tools']]],
+  ['wm8960config_20',['WM8960Config',['../classaudio__tools_1_1_w_m8960_config.html',1,'audio_tools']]],
+  ['wm8960stream_21',['WM8960Stream',['../classaudio__tools_1_1_w_m8960_stream.html',1,'audio_tools']]]
 ];

@@ -4,7 +4,7 @@ var searchData=
   ['hdlcstream_2eh_1',['HDLCStream.h',['../_h_d_l_c_stream_8h.html',1,'']]],
   ['headerparseraac_2eh_2',['HeaderParserAAC.h',['../_header_parser_a_a_c_8h.html',1,'']]],
   ['headerparsermp3_2eh_3',['HeaderParserMP3.h',['../_header_parser_m_p3_8h.html',1,'']]],
-  ['hlsstream_2eh_4',['hlsstream.h',['../_audio_libs_2_h_l_s_stream_8h.html',1,'(Global Namespace)'],['../_communication_2_h_l_s_stream_8h.html',1,'(Global Namespace)']]],
+  ['hlsstream_2eh_4',['HLSStream.h',['../_h_l_s_stream_8h.html',1,'']]],
   ['hlsstreamesp32_2eh_5',['HLSStreamESP32.h',['../_h_l_s_stream_e_s_p32_8h.html',1,'']]],
   ['httpchunkreader_2eh_6',['HttpChunkReader.h',['../_http_chunk_reader_8h.html',1,'']]],
   ['httpheader_2eh_7',['HttpHeader.h',['../_http_header_8h.html',1,'']]],

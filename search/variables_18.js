@@ -4,7 +4,7 @@ var searchData=
   ['xf_1',['Xf',['../group___echo_state.html#gadc0bac6ee8df2a91af2a89546514cd22',1,'audio_tools::EchoState_']]],
   ['xfer_5fcb_5frx_5fcount_5f_2',['xfer_cb_rx_count_',['../classaudio__tools_1_1_u_s_b_audio_device_base.html#a09a289e4054eca90a30b09faa6f92472',1,'audio_tools::USBAudioDeviceBase']]],
   ['xfer_5fcb_5ftx_5fcount_5f_3',['xfer_cb_tx_count_',['../classaudio__tools_1_1_u_s_b_audio_device_base.html#a0ab395097573c89def3cdd9417363965',1,'audio_tools::USBAudioDeviceBase']]],
-  ['xhandle_4',['xHandle',['../classaudio__tools_1_1_task.html#a01ba122aba7d048809e2330ee6cbe218',1,'audio_tools::Task']]],
+  ['xhandle_4',['xhandle',['../classaudio__tools_1_1_task.html#a01ba122aba7d048809e2330ee6cbe218',1,'audio_tools::Task::xHandle'],['../classaudio__tools_1_1_task_zephyr.html#a01ba122aba7d048809e2330ee6cbe218',1,'audio_tools::TaskZephyr::xHandle']]],
   ['xhigherprioritytaskwoken_5',['xHigherPriorityTaskWoken',['../classaudio__tools_1_1_buffer_r_t_o_s.html#a9d9a749ad99ec3d4a6886d5277b9ba87',1,'audio_tools::BufferRTOS']]],
   ['xhistory_6',['xHistory',['../classaudio__tools_1_1_equalizer_n_bands_1_1_e_q_f_i_r_filter.html#a5f288493b3a08429e82a2145f190f52f',1,'audio_tools::EqualizerNBands::EQFIRFilter']]],
   ['xqueue_7',['xQueue',['../classaudio__tools_1_1_queue_r_t_o_s.html#aa78b6121b7586233293fb6cba5e19206',1,'audio_tools::QueueRTOS']]],

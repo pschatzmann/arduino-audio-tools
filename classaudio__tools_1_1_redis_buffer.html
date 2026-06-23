@@ -83,7 +83,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Buffer implementation that stores and retrieves data from a Redis server using the Arduino <a class="el" href="classaudio__tools_1_1_client.html">Client</a>.  
+<p>Buffer implementation that stores and retrieves data from a Redis server using the Arduino <a class="el" href="class_client.html">Client</a>.  
  <a href="classaudio__tools_1_1_redis_buffer.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_redis_buffer_8h_source.html">RedisBuffer.h</a>&gt;</code></p>
@@ -104,7 +104,7 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2a44c2a3056b80a5a958dec71f3f5cf3" id="r_a2a44c2a3056b80a5a958dec71f3f5cf3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#a2a44c2a3056b80a5a958dec71f3f5cf3">RedisBuffer</a> (<a class="el" href="classaudio__tools_1_1_client.html">Client</a> &amp;<a class="el" href="classaudio__tools_1_1_redis_buffer.html#a2393964ec1457f7107841f64f396c458">client</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a> *<a class="el" href="classaudio__tools_1_1_redis_buffer.html#acd3d88da3c0e0313c3645ff34f62f542">key</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> <a class="el" href="classaudio__tools_1_1_redis_buffer.html#af4728438dee601cb2554d9bf18d78a43">max_size</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> <a class="el" href="classaudio__tools_1_1_redis_buffer.html#aa0e185fd5cc9e1571b23f4d92b556613">local_buf_size</a>=512, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> <a class="el" href="classaudio__tools_1_1_redis_buffer.html#a90e112dfd1c04774eb392ad6db2903ec">expire_seconds</a>=60 *60)</td></tr>
+<tr class="memitem:a2a44c2a3056b80a5a958dec71f3f5cf3" id="r_a2a44c2a3056b80a5a958dec71f3f5cf3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#a2a44c2a3056b80a5a958dec71f3f5cf3">RedisBuffer</a> (<a class="el" href="class_client.html">Client</a> &amp;<a class="el" href="classaudio__tools_1_1_redis_buffer.html#a2393964ec1457f7107841f64f396c458">client</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a> *<a class="el" href="classaudio__tools_1_1_redis_buffer.html#acd3d88da3c0e0313c3645ff34f62f542">key</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> <a class="el" href="classaudio__tools_1_1_redis_buffer.html#af4728438dee601cb2554d9bf18d78a43">max_size</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> <a class="el" href="classaudio__tools_1_1_redis_buffer.html#aa0e185fd5cc9e1571b23f4d92b556613">local_buf_size</a>=512, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> <a class="el" href="classaudio__tools_1_1_redis_buffer.html#a90e112dfd1c04774eb392ad6db2903ec">expire_seconds</a>=60 *60)</td></tr>
 <tr class="memdesc:a2a44c2a3056b80a5a958dec71f3f5cf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classaudio__tools_1_1_redis_buffer.html" title="Buffer implementation that stores and retrieves data from a Redis server using the Arduino Client.">RedisBuffer</a>.  <br /></td></tr>
 <tr class="separator:a2a44c2a3056b80a5a958dec71f3f5cf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9038db8faec57f3770d30ed8f05270e4" id="r_a9038db8faec57f3770d30ed8f05270e4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#a9038db8faec57f3770d30ed8f05270e4">address</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
@@ -116,12 +116,20 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a87b51853b7bf1bc90d9efa9f3b8d4fea" id="r_a87b51853b7bf1bc90d9efa9f3b8d4fea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">availableForWrite</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
 <tr class="memdesc:a87b51853b7bf1bc90d9efa9f3b8d4fea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of elements that can be written before reaching max_size. There are are no checks in place that would prevent that the size values is exeeded: This is for information only!  <br /></td></tr>
 <tr class="separator:a87b51853b7bf1bc90d9efa9f3b8d4fea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a267f8aa1cda7c4bf1cd632b7a3c611f7" id="r_a267f8aa1cda7c4bf1cd632b7a3c611f7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#a267f8aa1cda7c4bf1cd632b7a3c611f7">bufferCountEmpty</a> ()</td></tr>
+<tr class="memdesc:a267f8aa1cda7c4bf1cd632b7a3c611f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the number of entries that are available to write: -1 does not apply.  <br /></td></tr>
+<tr class="separator:a267f8aa1cda7c4bf1cd632b7a3c611f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa304bc14aea54a51aaec3705b0a39074" id="r_aa304bc14aea54a51aaec3705b0a39074"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#aa304bc14aea54a51aaec3705b0a39074">bufferCountFilled</a> ()</td></tr>
+<tr class="memdesc:aa304bc14aea54a51aaec3705b0a39074"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the number of entries that are available to read: -1 does not apply.  <br /></td></tr>
+<tr class="separator:aa304bc14aea54a51aaec3705b0a39074"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8bb3912a3ce86b15842e79d0b421204" id="r_ac8bb3912a3ce86b15842e79d0b421204"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#ac8bb3912a3ce86b15842e79d0b421204">clear</a> ()</td></tr>
 <tr class="memdesc:ac8bb3912a3ce86b15842e79d0b421204"><td class="mdescLeft">&#160;</td><td class="mdescRight">same as reset  <br /></td></tr>
 <tr class="separator:ac8bb3912a3ce86b15842e79d0b421204"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e526a739923663ae76533d9ad9eb656" id="r_a5e526a739923663ae76533d9ad9eb656"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#a5e526a739923663ae76533d9ad9eb656">clearArray</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> len)</td></tr>
 <tr class="memdesc:a5e526a739923663ae76533d9ad9eb656"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the next len entries.  <br /></td></tr>
 <tr class="separator:a5e526a739923663ae76533d9ad9eb656"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3aed50bc3b4459454ccb8c64f5ced5a" id="r_ad3aed50bc3b4459454ccb8c64f5ced5a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#ad3aed50bc3b4459454ccb8c64f5ced5a">flush</a> ()</td></tr>
+<tr class="separator:ad3aed50bc3b4459454ccb8c64f5ced5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af337ffd75e4f019ce15302c60715d84b" id="r_af337ffd75e4f019ce15302c60715d84b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#af337ffd75e4f019ce15302c60715d84b">isEmpty</a> ()</td></tr>
 <tr class="separator:af337ffd75e4f019ce15302c60715d84b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac0ab007845c29d8d4c9b96a3cbbe2c9" id="r_aac0ab007845c29d8d4c9b96a3cbbe2c9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#aac0ab007845c29d8d4c9b96a3cbbe2c9">isFull</a> ()</td></tr>
@@ -142,9 +150,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aebfcdbbd0fe4efbff10b180be50ca6bc" id="r_aebfcdbbd0fe4efbff10b180be50ca6bc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#aebfcdbbd0fe4efbff10b180be50ca6bc">reset</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
 <tr class="memdesc:aebfcdbbd0fe4efbff10b180be50ca6bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the buffer both locally and on the Redis server. Flushes any pending writes before clearing.  <br /></td></tr>
 <tr class="separator:aebfcdbbd0fe4efbff10b180be50ca6bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a853fbb895321c753966148e151f968e9" id="r_a853fbb895321c753966148e151f968e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#a853fbb895321c753966148e151f968e9">resize</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> <a class="el" href="classaudio__tools_1_1_redis_buffer.html#a128a3f6e587ccc181112bb2892440990">size</a>) <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
-<tr class="memdesc:a853fbb895321c753966148e151f968e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resizes the maximum buffer size. This operation is only allowed before any write has occurred.  <br /></td></tr>
-<tr class="separator:a853fbb895321c753966148e151f968e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5d803a3d1e6f0a5402fd9a25aaa7b61" id="r_ac5d803a3d1e6f0a5402fd9a25aaa7b61"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#ac5d803a3d1e6f0a5402fd9a25aaa7b61">resize</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> <a class="el" href="classaudio__tools_1_1_redis_buffer.html#a128a3f6e587ccc181112bb2892440990">size</a>) <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
+<tr class="memdesc:ac5d803a3d1e6f0a5402fd9a25aaa7b61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resizes the maximum buffer size. This operation is only allowed before any write has occurred.  <br /></td></tr>
+<tr class="separator:ac5d803a3d1e6f0a5402fd9a25aaa7b61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a84b91be149970d91afe46122f4361e" id="r_a5a84b91be149970d91afe46122f4361e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#a5a84b91be149970d91afe46122f4361e">setExpire</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">seconds</a>)</td></tr>
 <tr class="memdesc:a5a84b91be149970d91afe46122f4361e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the expiration time (in seconds) for the Redis key. The expiration will be refreshed on every write/flush.  <br /></td></tr>
 <tr class="separator:a5a84b91be149970d91afe46122f4361e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -183,8 +191,8 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a2393964ec1457f7107841f64f396c458" id="r_a2393964ec1457f7107841f64f396c458"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_client.html">Client</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#a2393964ec1457f7107841f64f396c458">client</a></td></tr>
-<tr class="memdesc:a2393964ec1457f7107841f64f396c458"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference to the Arduino <a class="el" href="classaudio__tools_1_1_client.html">Client</a> for Redis communication.  <br /></td></tr>
+<tr class="memitem:a2393964ec1457f7107841f64f396c458" id="r_a2393964ec1457f7107841f64f396c458"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_client.html">Client</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#a2393964ec1457f7107841f64f396c458">client</a></td></tr>
+<tr class="memdesc:a2393964ec1457f7107841f64f396c458"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference to the Arduino <a class="el" href="class_client.html">Client</a> for Redis communication.  <br /></td></tr>
 <tr class="separator:a2393964ec1457f7107841f64f396c458"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a90e112dfd1c04774eb392ad6db2903ec" id="r_a90e112dfd1c04774eb392ad6db2903ec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#a90e112dfd1c04774eb392ad6db2903ec">expire_seconds</a> = 0</td></tr>
 <tr class="memdesc:a90e112dfd1c04774eb392ad6db2903ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Expiration time in seconds (0 = no expiration).  <br /></td></tr>
@@ -210,14 +218,15 @@ Protected Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>&gt;<br />
-class audio_tools::RedisBuffer&lt; T &gt;</div><p>Buffer implementation that stores and retrieves data from a Redis server using the Arduino <a class="el" href="classaudio__tools_1_1_client.html">Client</a>. </p>
+class audio_tools::RedisBuffer&lt; T &gt;</div><p>Buffer implementation that stores and retrieves data from a Redis server using the Arduino <a class="el" href="class_client.html">Client</a>. </p>
 <p>This buffer uses a Redis list as a circular buffer and batches read/write operations for efficiency. Individual write/read calls are buffered locally using <a class="el" href="classaudio__tools_1_1_single_buffer.html" title="A simple Buffer implementation which just uses a (dynamically sized) array.">SingleBuffer</a> and only sent to Redis in bulk when writeArray/readArray is called or when the buffer is full/empty. This reduces network overhead and improves performance for streaming scenarios.</p>
 <ul>
 <li>Uses RPUSH for writing and LPOP for reading from Redis.</li>
-<li>All Redis commands are constructed using the RESP protocol and sent via the Arduino <a class="el" href="classaudio__tools_1_1_client.html">Client</a> API.</li>
+<li>All Redis commands are constructed using the RESP protocol and sent via the Arduino <a class="el" href="class_client.html">Client</a> API.</li>
 <li>The buffer size for local batching can be configured via the constructor.</li>
 <li>Supports automatic expiration of the Redis key after a specified number of seconds.</li>
 </ul>
+<dl class="section note"><dt>Note</dt><dd>Supported only on Arduino platforms with network support (e.g., ESP32, Ethernet) and the Arduino <a class="el" href="class_client.html">Client</a> library!</dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>Data type to buffer (e.g., uint8_t, int16_t) </td></tr>
@@ -239,7 +248,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
         <tr>
           <td class="memname"><a class="el" href="classaudio__tools_1_1_redis_buffer.html">RedisBuffer</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_client.html">Client</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_client.html">Client</a> &amp;&#160;</td>
           <td class="paramname"><em>client</em>, </td>
         </tr>
         <tr>
@@ -282,7 +291,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <p>Constructs a <a class="el" href="classaudio__tools_1_1_redis_buffer.html" title="Buffer implementation that stores and retrieves data from a Redis server using the Arduino Client.">RedisBuffer</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">client</td><td>Reference to a connected Arduino <a class="el" href="classaudio__tools_1_1_client.html">Client</a> (e.g., WiFiClient, EthernetClient). </td></tr>
+    <tr><td class="paramname">client</td><td>Reference to a connected Arduino <a class="el" href="class_client.html">Client</a> (e.g., WiFiClient, EthernetClient). </td></tr>
     <tr><td class="paramname">key</td><td>Redis key to use for the buffer (list). </td></tr>
     <tr><td class="paramname">max_size</td><td>Maximum number of elements in the buffer. </td></tr>
     <tr><td class="paramname">local_buf_size</td><td>Size of the local buffer for batching (default: 512). </td></tr>
@@ -387,6 +396,64 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <dl class="section return"><dt>Returns</dt><dd>Number of available slots for writing. </dd></dl>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_base_buffer.html#a9953a7c3a981eb3a83adb4f9ecfb9ac5">BaseBuffer&lt; T &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a267f8aa1cda7c4bf1cd632b7a3c611f7" name="a267f8aa1cda7c4bf1cd632b7a3c611f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a267f8aa1cda7c4bf1cd632b7a3c611f7">&#9670;&#160;</a></span>bufferCountEmpty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> bufferCountEmpty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Provides the number of entries that are available to write: -1 does not apply. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html#a95e8c637a1c8ff90def2871dd0420e55">SynchronizedNBufferRTOST&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_zephyr_t.html#a95e8c637a1c8ff90def2871dd0420e55">SynchronizedNBufferZephyrT&lt; T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_n_buffer.html#a267f8aa1cda7c4bf1cd632b7a3c611f7">NBuffer&lt; T &gt;</a>.</p>
+
+</div>
+</div>
+<a id="aa304bc14aea54a51aaec3705b0a39074" name="aa304bc14aea54a51aaec3705b0a39074"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa304bc14aea54a51aaec3705b0a39074">&#9670;&#160;</a></span>bufferCountFilled()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> bufferCountFilled </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Provides the number of entries that are available to read: -1 does not apply. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html#a4f048aa9763e498a403e9ced1754de55">SynchronizedNBufferRTOST&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_zephyr_t.html#a4f048aa9763e498a403e9ced1754de55">SynchronizedNBufferZephyrT&lt; T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_n_buffer.html#aa304bc14aea54a51aaec3705b0a39074">NBuffer&lt; T &gt;</a>.</p>
 
 </div>
 </div>
@@ -503,6 +570,34 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 
 </div>
 </div>
+<a id="ad3aed50bc3b4459454ccb8c64f5ced5a" name="ad3aed50bc3b4459454ccb8c64f5ced5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3aed50bc3b4459454ccb8c64f5ced5a">&#9670;&#160;</a></span>flush()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> flush </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Submit any partially-filled write buffer so the reader can access it. Only meaningful for NBuffer-style block pools; no-op for ring buffers. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_n_buffer.html#adac116554b543b7c4228c018a85882f5">NBuffer&lt; T &gt;</a>.</p>
+
+</div>
+</div>
 <a id="a3591c669cb538047dd8191429e04a01f" name="a3591c669cb538047dd8191429e04a01f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3591c669cb538047dd8191429e04a01f">&#9670;&#160;</a></span>flushWrite()</h2>
 
@@ -582,7 +677,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 
 <p>checks if the buffer is full </p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_n_buffer.html#a3e70330939fdfc4dbc2f60c1a660584d">NBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_p2040_t.html#a91336dd99913834c918d58f4223d7ac4">BufferRP2040T&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#a91336dd99913834c918d58f4223d7ac4">BufferRTOS&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_synchronized_buffer.html#a91336dd99913834c918d58f4223d7ac4">SynchronizedBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#a91336dd99913834c918d58f4223d7ac4">SingleBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#ad83053371f5afc622b82660e8bee750f">RingBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer_file.html#a91336dd99913834c918d58f4223d7ac4">RingBufferFile&lt; File, T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_dynamic_multi_buffer.html#a91336dd99913834c918d58f4223d7ac4">DynamicMultiBuffer&lt; T, BufferType &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_n_buffer.html#a3e70330939fdfc4dbc2f60c1a660584d">NBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_p2040_t.html#a91336dd99913834c918d58f4223d7ac4">BufferRP2040T&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#a91336dd99913834c918d58f4223d7ac4">BufferRTOS&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_synchronized_buffer.html#a91336dd99913834c918d58f4223d7ac4">SynchronizedBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_zephyr.html#a91336dd99913834c918d58f4223d7ac4">BufferZephyr&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#a91336dd99913834c918d58f4223d7ac4">SingleBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#ad83053371f5afc622b82660e8bee750f">RingBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer_file.html#a91336dd99913834c918d58f4223d7ac4">RingBufferFile&lt; File, T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_dynamic_multi_buffer.html#a91336dd99913834c918d58f4223d7ac4">DynamicMultiBuffer&lt; T, BufferType &gt;</a>.</p>
 
 </div>
 </div>
@@ -866,8 +961,8 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 
 </div>
 </div>
-<a id="a853fbb895321c753966148e151f968e9" name="a853fbb895321c753966148e151f968e9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a853fbb895321c753966148e151f968e9">&#9670;&#160;</a></span>resize()</h2>
+<a id="ac5d803a3d1e6f0a5402fd9a25aaa7b61" name="ac5d803a3d1e6f0a5402fd9a25aaa7b61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5d803a3d1e6f0a5402fd9a25aaa7b61">&#9670;&#160;</a></span>resize()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -880,7 +975,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
         <tr>
           <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> resize </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td>
           <td class="paramname"><em>size</em></td><td>)</td>
           <td></td>
         </tr>
@@ -901,7 +996,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if resized, false if any write has already occurred. </dd></dl>
 
-<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_base_buffer.html#aef172abe53c012b929fc3a996ba31967">BaseBuffer&lt; T &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_base_buffer.html#a3ae9b97a38452cf187897592e1e0968a">BaseBuffer&lt; T &gt;</a>.</p>
 
 </div>
 </div>
@@ -1150,7 +1245,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_client.html">Client</a>&amp; client</td>
+          <td class="memname"><a class="el" href="class_client.html">Client</a>&amp; client</td>
         </tr>
       </table>
   </td>
@@ -1160,7 +1255,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 </table>
 </div><div class="memdoc">
 
-<p>Reference to the Arduino <a class="el" href="classaudio__tools_1_1_client.html">Client</a> for Redis communication. </p>
+<p>Reference to the Arduino <a class="el" href="class_client.html">Client</a> for Redis communication. </p>
 
 </div>
 </div>

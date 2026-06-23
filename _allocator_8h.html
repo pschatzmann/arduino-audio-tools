@@ -76,14 +76,16 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">Allocator.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="_audio_tools_config_8h_source.html">AudioToolsConfig.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_audio_tools_2_core_audio_2_audio_logger_8h_source.html">AudioTools/CoreAudio/AudioLogger.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_audio_runtime_8h_source.html">AudioTools/CoreAudio/AudioRuntime.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_audio_tools_config_8h_source.html">AudioToolsConfig.h</a>&quot;</code><br />
+<code>#include &lt;zephyr/kernel.h&gt;</code><br />
 </div>
 <p><a href="_allocator_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -95,6 +97,9 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_allocator_ext.html">AllocatorExt</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Memory allocateator which uses ps_malloc (on the ESP32) and if this fails it resorts to malloc.  <a href="classaudio__tools_1_1_allocator_ext.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_allocator_zephyr.html">AllocatorZephyr</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Zephyr allocator using the kernel heap (k_malloc / k_free). This is the standard allocator for Zephyr builds.  <a href="classaudio__tools_1_1_allocator_zephyr.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
@@ -102,12 +107,19 @@ Namespaces</h2></td></tr>
 <tr class="memdesc:namespaceaudio__tools"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic Implementation of sound input and output for desktop environments using portaudio. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:ab2174d67d4bc47bb7db04900a33abee5" id="r_ab2174d67d4bc47bb7db04900a33abee5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ab2174d67d4bc47bb7db04900a33abee5">TAllocatorExt</a> = <a class="el" href="classaudio__tools_1_1_allocator_zephyr.html">AllocatorZephyr</a></td></tr>
+<tr class="separator:ab2174d67d4bc47bb7db04900a33abee5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56fe5a4b45ee56d995f3e43c732df0b2" id="r_a56fe5a4b45ee56d995f3e43c732df0b2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a56fe5a4b45ee56d995f3e43c732df0b2">TAllocatorSTD</a> = <a class="el" href="classaudio__tools_1_1_allocator_zephyr.html">AllocatorZephyr</a></td></tr>
+<tr class="separator:a56fe5a4b45ee56d995f3e43c732df0b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a8c81a6f0b03132731d7358736559cb15" id="r_a8c81a6f0b03132731d7358736559cb15"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="classaudio__tools_1_1_allocator_ext.html">AllocatorExt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a8c81a6f0b03132731d7358736559cb15">DefaultAllocator</a></td></tr>
-<tr class="separator:a8c81a6f0b03132731d7358736559cb15"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3e4955ca38dd271fb8123c1813daa69a" id="r_a3e4955ca38dd271fb8123c1813daa69a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a3e4955ca38dd271fb8123c1813daa69a">DefaultAllocatorRAM</a></td></tr>
-<tr class="separator:a3e4955ca38dd271fb8123c1813daa69a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02e30d9ec0ddcc5d9e9f1d2324b8cca8" id="r_a02e30d9ec0ddcc5d9e9f1d2324b8cca8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ab2174d67d4bc47bb7db04900a33abee5">TAllocatorExt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a02e30d9ec0ddcc5d9e9f1d2324b8cca8">DefaultAllocator</a></td></tr>
+<tr class="separator:a02e30d9ec0ddcc5d9e9f1d2324b8cca8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b744d9a6c8c2040e545baf0e8136afe" id="r_a6b744d9a6c8c2040e545baf0e8136afe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#a56fe5a4b45ee56d995f3e43c732df0b2">TAllocatorSTD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a6b744d9a6c8c2040e545baf0e8136afe">DefaultAllocatorRAM</a></td></tr>
+<tr class="separator:a6b744d9a6c8c2040e545baf0e8136afe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

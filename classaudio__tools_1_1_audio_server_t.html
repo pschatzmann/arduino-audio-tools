@@ -82,7 +82,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>A simple Arduino Webserver which streams the result This class is based on the WiFiServer class. All you need to do is to provide the data with a callback method or from an Arduino <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>: in -copy&gt; client.  
+<p>A simple Arduino Webserver which streams the result This class is based on the WiFiServer class. All you need to do is to provide the data with a callback method or from an Arduino <a class="el" href="class_stream.html">Stream</a>: in -copy&gt; client.  
  <a href="classaudio__tools_1_1_audio_server_t.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_audio_server_t_8h_source.html">AudioServerT.h</a>&gt;</code></p>
@@ -99,7 +99,7 @@ Inheritance diagram for AudioServerT&lt; Client, Server &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9781eeff13520d99bcbe2ac617d7e1b7" id="r_a9781eeff13520d99bcbe2ac617d7e1b7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#a9781eeff13520d99bcbe2ac617d7e1b7">AudioServerT</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a> *<a class="el" href="classaudio__tools_1_1_audio_server_t.html#aaaf7d9a01488056a298c8e4718ea57e8">network</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a> *<a class="el" href="classaudio__tools_1_1_audio_server_t.html#a59460a3ff2c12443d1022e5cc0fba85c">password</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> port=80)</td></tr>
+<tr class="memitem:a9781eeff13520d99bcbe2ac617d7e1b7" id="r_a9781eeff13520d99bcbe2ac617d7e1b7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#a9781eeff13520d99bcbe2ac617d7e1b7">AudioServerT</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a> *<a class="el" href="classaudio__tools_1_1_audio_server_t.html#a0437905e58814d2f1d702ab862fb1f70">network</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a> *<a class="el" href="classaudio__tools_1_1_audio_server_t.html#a36531f1b290721250b384bbae34f9f1f">password</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> port=80)</td></tr>
 <tr class="memdesc:a9781eeff13520d99bcbe2ac617d7e1b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Audio WAV Server object.  <br /></td></tr>
 <tr class="separator:a9781eeff13520d99bcbe2ac617d7e1b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f50a72af2a5380f88266ff91b4d0360" id="r_a9f50a72af2a5380f88266ff91b4d0360"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#a9f50a72af2a5380f88266ff91b4d0360">AudioServerT</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> port=80)</td></tr>
@@ -108,7 +108,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a44c82a71a51e28df5436bf1f1cc2b180" id="r_a44c82a71a51e28df5436bf1f1cc2b180"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#a44c82a71a51e28df5436bf1f1cc2b180">begin</a> (<a class="el" href="group__http.html#ga2909db5107c19b77138ce5e5a8653f0a">AudioServerDataCallback</a> cb, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a> *contentType)</td></tr>
 <tr class="memdesc:a44c82a71a51e28df5436bf1f1cc2b180"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the server. The data must be provided by a callback method.  <br /></td></tr>
 <tr class="separator:a44c82a71a51e28df5436bf1f1cc2b180"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adda30bbb97d91ad2862ee718f5a53200" id="r_adda30bbb97d91ad2862ee718f5a53200"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#adda30bbb97d91ad2862ee718f5a53200">begin</a> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;<a class="el" href="classaudio__tools_1_1_audio_server_t.html#a2629b5dd3f2a9cae133d5fb0f03cf477">in</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a> *contentType)</td></tr>
+<tr class="memitem:adda30bbb97d91ad2862ee718f5a53200" id="r_adda30bbb97d91ad2862ee718f5a53200"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#adda30bbb97d91ad2862ee718f5a53200">begin</a> (<a class="el" href="class_stream.html">Stream</a> &amp;<a class="el" href="classaudio__tools_1_1_audio_server_t.html#a2629b5dd3f2a9cae133d5fb0f03cf477">in</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a> *contentType)</td></tr>
 <tr class="memdesc:adda30bbb97d91ad2862ee718f5a53200"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the server. You need to be connected to WiFI before calling this method.  <br /></td></tr>
 <tr class="separator:adda30bbb97d91ad2862ee718f5a53200"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a68b01f6d74485da20c323b9c68d906fd" id="r_a68b01f6d74485da20c323b9c68d906fd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#a68b01f6d74485da20c323b9c68d906fd">copy</a> ()</td></tr>
@@ -118,12 +118,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:abdd99e468f667b748b0c9bfd395163d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add this method to your loop Returns true while the client is connected.  <br /></td></tr>
 <tr class="separator:abdd99e468f667b748b0c9bfd395163d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3bee9230cc529af42211e084fb9c78b5" id="r_a3bee9230cc529af42211e084fb9c78b5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#a3bee9230cc529af42211e084fb9c78b5">isClientConnected</a> ()</td></tr>
-<tr class="memdesc:a3bee9230cc529af42211e084fb9c78b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if any clinent has connnected.  <br /></td></tr>
+<tr class="memdesc:a3bee9230cc529af42211e084fb9c78b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if any client has connected.  <br /></td></tr>
 <tr class="separator:a3bee9230cc529af42211e084fb9c78b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af62485ddcbd3bb2c18c7bf6813ed9726" id="r_af62485ddcbd3bb2c18c7bf6813ed9726"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#af62485ddcbd3bb2c18c7bf6813ed9726">out</a> ()</td></tr>
+<tr class="memitem:af62485ddcbd3bb2c18c7bf6813ed9726" id="r_af62485ddcbd3bb2c18c7bf6813ed9726"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_stream.html">Stream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#af62485ddcbd3bb2c18c7bf6813ed9726">out</a> ()</td></tr>
 <tr class="memdesc:af62485ddcbd3bb2c18c7bf6813ed9726"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the output stream.  <br /></td></tr>
 <tr class="separator:af62485ddcbd3bb2c18c7bf6813ed9726"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a696375c96a64240ef23455df93fb3505" id="r_a696375c96a64240ef23455df93fb3505"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_client.html">Client</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#a696375c96a64240ef23455df93fb3505">out_ptr</a> ()</td></tr>
+<tr class="memitem:a696375c96a64240ef23455df93fb3505" id="r_a696375c96a64240ef23455df93fb3505"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_client.html">Client</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#a696375c96a64240ef23455df93fb3505">out_ptr</a> ()</td></tr>
 <tr class="memdesc:a696375c96a64240ef23455df93fb3505"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides a pointer to the WiFiClient.  <br /></td></tr>
 <tr class="separator:a696375c96a64240ef23455df93fb3505"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c42e0c550ffe835f03b8a0c575322b2" id="r_a2c42e0c550ffe835f03b8a0c575322b2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#a2c42e0c550ffe835f03b8a0c575322b2">setConverter</a> (<a class="el" href="classaudio__tools_1_1_base_converter.html">BaseConverter</a> *<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">c</a>)</td></tr>
@@ -138,6 +138,7 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a245f8a30bc52d0a44531847e633fa6ac" id="r_a245f8a30bc52d0a44531847e633fa6ac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#a245f8a30bc52d0a44531847e633fa6ac">connectWiFi</a> ()</td></tr>
 <tr class="separator:a245f8a30bc52d0a44531847e633fa6ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab92b9a93f5bf24000a46f8e16f60c08b" id="r_ab92b9a93f5bf24000a46f8e16f60c08b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#ab92b9a93f5bf24000a46f8e16f60c08b">processClient</a> ()</td></tr>
+<tr class="memdesc:ab92b9a93f5bf24000a46f8e16f60c08b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle an new client connection and return the data.  <br /></td></tr>
 <tr class="separator:ab92b9a93f5bf24000a46f8e16f60c08b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ba0309f574967d298dd4573bbc465f0" id="r_a2ba0309f574967d298dd4573bbc465f0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#a2ba0309f574967d298dd4573bbc465f0">sendReplyContent</a> ()</td></tr>
 <tr class="separator:a2ba0309f574967d298dd4573bbc465f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -150,7 +151,7 @@ Protected Member Functions</h2></td></tr>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:ad2478e87201847c6ec6d6c5e6b93f528" id="r_ad2478e87201847c6ec6d6c5e6b93f528"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__http.html#ga2909db5107c19b77138ce5e5a8653f0a">AudioServerDataCallback</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#ad2478e87201847c6ec6d6c5e6b93f528">callback</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td></tr>
 <tr class="separator:ad2478e87201847c6ec6d6c5e6b93f528"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab28048328641216c25384a638bf7e1fa" id="r_ab28048328641216c25384a638bf7e1fa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_client.html">Client</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#ab28048328641216c25384a638bf7e1fa">client_obj</a></td></tr>
+<tr class="memitem:ab28048328641216c25384a638bf7e1fa" id="r_ab28048328641216c25384a638bf7e1fa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_client.html">Client</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#ab28048328641216c25384a638bf7e1fa">client_obj</a></td></tr>
 <tr class="separator:ab28048328641216c25384a638bf7e1fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad358468c95b5112958816af5de284c5d" id="r_ad358468c95b5112958816af5de284c5d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#ad358468c95b5112958816af5de284c5d">content_type</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td></tr>
 <tr class="separator:ad358468c95b5112958816af5de284c5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -158,22 +159,22 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:aa34862ca37584f68056b46b500a9ce38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9703de4b21cd3484037072082190b9d2" id="r_a9703de4b21cd3484037072082190b9d2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__tools.html#gaa917267e241cc74cd4610bf8674a6e93">StreamCopy</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#a9703de4b21cd3484037072082190b9d2">copier</a></td></tr>
 <tr class="separator:a9703de4b21cd3484037072082190b9d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2629b5dd3f2a9cae133d5fb0f03cf477" id="r_a2629b5dd3f2a9cae133d5fb0f03cf477"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#a2629b5dd3f2a9cae133d5fb0f03cf477">in</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td></tr>
+<tr class="memitem:a2629b5dd3f2a9cae133d5fb0f03cf477" id="r_a2629b5dd3f2a9cae133d5fb0f03cf477"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#a2629b5dd3f2a9cae133d5fb0f03cf477">in</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td></tr>
 <tr class="separator:a2629b5dd3f2a9cae133d5fb0f03cf477"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86ddd840105afc42a52dcce2d4d57ae2" id="r_a86ddd840105afc42a52dcce2d4d57ae2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#a86ddd840105afc42a52dcce2d4d57ae2">max_bytes</a> = 0</td></tr>
 <tr class="separator:a86ddd840105afc42a52dcce2d4d57ae2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaaf7d9a01488056a298c8e4718ea57e8" id="r_aaaf7d9a01488056a298c8e4718ea57e8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#aaaf7d9a01488056a298c8e4718ea57e8">network</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td></tr>
-<tr class="separator:aaaf7d9a01488056a298c8e4718ea57e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a59460a3ff2c12443d1022e5cc0fba85c" id="r_a59460a3ff2c12443d1022e5cc0fba85c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#a59460a3ff2c12443d1022e5cc0fba85c">password</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td></tr>
-<tr class="separator:a59460a3ff2c12443d1022e5cc0fba85c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0437905e58814d2f1d702ab862fb1f70" id="r_a0437905e58814d2f1d702ab862fb1f70"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#a0437905e58814d2f1d702ab862fb1f70">network</a></td></tr>
+<tr class="separator:a0437905e58814d2f1d702ab862fb1f70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36531f1b290721250b384bbae34f9f1f" id="r_a36531f1b290721250b384bbae34f9f1f"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#a36531f1b290721250b384bbae34f9f1f">password</a></td></tr>
+<tr class="separator:a36531f1b290721250b384bbae34f9f1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaac4ecf1d77da473d27d2692413f84c4" id="r_aaac4ecf1d77da473d27d2692413f84c4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#aaac4ecf1d77da473d27d2692413f84c4">sent</a> = 0</td></tr>
 <tr class="separator:aaac4ecf1d77da473d27d2692413f84c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd1a82c786509e03b540bae82af2c137" id="r_afd1a82c786509e03b540bae82af2c137"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#afd1a82c786509e03b540bae82af2c137">server</a></td></tr>
 <tr class="separator:afd1a82c786509e03b540bae82af2c137"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="classaudio__tools_1_1_client.html">Client</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a>&gt;<br />
-class audio_tools::AudioServerT&lt; Client, Server &gt;</div><p>A simple Arduino Webserver which streams the result This class is based on the WiFiServer class. All you need to do is to provide the data with a callback method or from an Arduino <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>: in -copy&gt; client. </p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="class_client.html">Client</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a>&gt;<br />
+class audio_tools::AudioServerT&lt; Client, Server &gt;</div><p>A simple Arduino Webserver which streams the result This class is based on the WiFiServer class. All you need to do is to provide the data with a callback method or from an Arduino <a class="el" href="class_stream.html">Stream</a>: in -copy&gt; client. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -183,7 +184,7 @@ class audio_tools::AudioServerT&lt; Client, Server &gt;</div><p>A simple Arduino
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="classaudio__tools_1_1_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="class_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -213,7 +214,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="classaudio__tools_1_1_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="class_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -267,7 +268,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="classaudio__tools_1_1_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="class_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -314,7 +315,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="classaudio__tools_1_1_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="class_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -322,7 +323,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
         <tr>
           <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> begin </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_stream.html">Stream</a> &amp;&#160;</td>
           <td class="paramname"><em>in</em>, </td>
         </tr>
         <tr>
@@ -361,7 +362,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="classaudio__tools_1_1_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="class_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -388,7 +389,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="classaudio__tools_1_1_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="class_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -420,7 +421,7 @@ false </dd></dl>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="classaudio__tools_1_1_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="class_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -449,7 +450,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="classaudio__tools_1_1_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="class_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -468,7 +469,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 </table>
 </div><div class="memdoc">
 
-<p>Checks if any clinent has connnected. </p>
+<p>Checks if any client has connected. </p>
 
 </div>
 </div>
@@ -478,13 +479,13 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="classaudio__tools_1_1_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="class_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp; out </td>
+          <td class="memname"><a class="el" href="class_stream.html">Stream</a> &amp; out </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -507,13 +508,13 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="classaudio__tools_1_1_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="class_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_client.html">Client</a> * out_ptr </td>
+          <td class="memname"><a class="el" href="class_client.html">Client</a> * out_ptr </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -536,7 +537,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="classaudio__tools_1_1_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="class_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -555,6 +556,8 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 </table>
 </div><div class="memdoc">
 
+<p>Handle an new client connection and return the data. </p>
+
 </div>
 </div>
 <a id="a2ba0309f574967d298dd4573bbc465f0" name="a2ba0309f574967d298dd4573bbc465f0"></a>
@@ -563,7 +566,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="classaudio__tools_1_1_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="class_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -592,7 +595,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="classaudio__tools_1_1_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="class_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -621,7 +624,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="classaudio__tools_1_1_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="class_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -651,7 +654,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="classaudio__tools_1_1_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="class_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -681,7 +684,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="classaudio__tools_1_1_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="class_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -710,7 +713,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="classaudio__tools_1_1_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="class_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -734,13 +737,13 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="classaudio__tools_1_1_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="class_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_client.html">Client</a> client_obj</td>
+          <td class="memname"><a class="el" href="class_client.html">Client</a> client_obj</td>
         </tr>
       </table>
   </td>
@@ -758,7 +761,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="classaudio__tools_1_1_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="class_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -782,7 +785,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="classaudio__tools_1_1_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="class_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -806,7 +809,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="classaudio__tools_1_1_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="class_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -830,13 +833,13 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="classaudio__tools_1_1_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="class_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>* in = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td>
+          <td class="memname"><a class="el" href="class_stream.html">Stream</a>* in = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td>
         </tr>
       </table>
   </td>
@@ -854,7 +857,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="classaudio__tools_1_1_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="class_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -872,19 +875,19 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 
 </div>
 </div>
-<a id="aaaf7d9a01488056a298c8e4718ea57e8" name="aaaf7d9a01488056a298c8e4718ea57e8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaaf7d9a01488056a298c8e4718ea57e8">&#9670;&#160;</a></span>network</h2>
+<a id="a0437905e58814d2f1d702ab862fb1f70" name="a0437905e58814d2f1d702ab862fb1f70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0437905e58814d2f1d702ab862fb1f70">&#9670;&#160;</a></span>network</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="classaudio__tools_1_1_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="class_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a>* network = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td>
+          <td class="memname">std::string network</td>
         </tr>
       </table>
   </td>
@@ -896,19 +899,19 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 
 </div>
 </div>
-<a id="a59460a3ff2c12443d1022e5cc0fba85c" name="a59460a3ff2c12443d1022e5cc0fba85c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a59460a3ff2c12443d1022e5cc0fba85c">&#9670;&#160;</a></span>password</h2>
+<a id="a36531f1b290721250b384bbae34f9f1f" name="a36531f1b290721250b384bbae34f9f1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36531f1b290721250b384bbae34f9f1f">&#9670;&#160;</a></span>password</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="classaudio__tools_1_1_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="class_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a>* password = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td>
+          <td class="memname">std::string password</td>
         </tr>
       </table>
   </td>
@@ -926,7 +929,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="classaudio__tools_1_1_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="class_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -950,7 +953,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="classaudio__tools_1_1_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="class_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">

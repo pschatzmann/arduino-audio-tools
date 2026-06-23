@@ -11,5 +11,8 @@ var searchData=
   ['echostate_8',['EchoState',['../group___echo_state.html#ga6b87a5b6addb825f17d64767529bcf8a',1,'audio_tools']]],
   ['effect_5ft_9',['effect_t',['../namespaceaudio__tools.html#a22141edfb51175c26033a5ddd3a847d0',1,'audio_tools']]],
   ['effectsuite_5ft_10',['effectsuite_t',['../namespaceaudio__tools.html#aacf4f3e6e5e9133e22e4e702cf0ec18c',1,'audio_tools']]],
-  ['encodedaudioprint_11',['EncodedAudioPrint',['../group__codecs.html#ga0ad0f49a5ac1d91312aeabca49bbc8ce',1,'audio_tools']]]
+  ['encodedaudioprint_11',['EncodedAudioPrint',['../group__codecs.html#ga0ad0f49a5ac1d91312aeabca49bbc8ce',1,'audio_tools']]],
+  ['ethernetclass_12',['EthernetClass',['../namespaceaudio__tools.html#a410e691f2491ac530c62933c38b788be',1,'audio_tools']]],
+  ['ethernetserver_13',['EthernetServer',['../namespaceaudio__tools.html#ab15b8263ea82ffb81626a96954766764',1,'audio_tools']]],
+  ['ethernetudp_14',['EthernetUDP',['../namespaceaudio__tools.html#ae90faf16e7d092ff881d9a398486dadd',1,'audio_tools']]]
 ];

@@ -76,7 +76,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classaudio__tools_1_1_mutex_base-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">MutexBase Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__concurrency.html">Concurrency</a></div></div></div>
+  <div class="headertitle"><div class="title">MutexBase Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -90,10 +90,12 @@ Inheritance diagram for MutexBase:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_mutex_base.png" usemap="#MutexBase_map" alt=""/>
   <map id="MutexBase_map" name="MutexBase_map">
-<area href="classaudio__tools_1_1_mutex_r_p2040.html" title="Mutex API for non IRQ mutual exclusion between cores. Mutexes are application level locks usually use..." alt="MutexRP2040" shape="rect" coords="0,56,136,80"/>
-<area href="classaudio__tools_1_1_mutex_r_t_o_s.html" title="Mutex implemntation using FreeRTOS." alt="MutexRTOS" shape="rect" coords="146,56,282,80"/>
-<area href="classaudio__tools_1_1_mutex_recursive_r_t_o_s.html" title="Recursive Mutex implemntation using FreeRTOS." alt="MutexRecursiveRTOS" shape="rect" coords="292,56,428,80"/>
-<area href="classaudio__tools_1_1_no_interrupt_handler.html" title="Disable, enable interrupts (only on the actual core)" alt="NoInterruptHandler" shape="rect" coords="438,56,574,80"/>
+<area href="classaudio__tools_1_1_mutex_r_p2040.html" title="Mutex API for non IRQ mutual exclusion between cores. Mutexes are application level locks usually use..." alt="MutexRP2040" shape="rect" coords="0,56,145,80"/>
+<area href="classaudio__tools_1_1_mutex_r_t_o_s.html" title="Mutex implemntation using FreeRTOS." alt="MutexRTOS" shape="rect" coords="155,56,300,80"/>
+<area href="classaudio__tools_1_1_mutex_recursive_r_t_o_s.html" title="Recursive Mutex implemntation using FreeRTOS." alt="MutexRecursiveRTOS" shape="rect" coords="310,56,455,80"/>
+<area href="classaudio__tools_1_1_mutex_recursive_zephyr.html" title="Recursive Mutex implementation using Zephyr kernel mutex." alt="MutexRecursiveZephyr" shape="rect" coords="465,56,610,80"/>
+<area href="classaudio__tools_1_1_mutex_zephyr.html" title="Mutex implementation using Zephyr kernel mutex." alt="MutexZephyr" shape="rect" coords="620,56,765,80"/>
+<area href="classaudio__tools_1_1_no_interrupt_handler.html" title="Disable, enable interrupts (only on the actual core)" alt="NoInterruptHandler" shape="rect" coords="775,56,920,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -132,7 +134,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_no_interrupt_handler.html#ad81318257fd78328c5c86fa6a3a861dd">NoInterruptHandler</a>, <a class="el" href="classaudio__tools_1_1_mutex_r_p2040.html#ad81318257fd78328c5c86fa6a3a861dd">MutexRP2040</a>, <a class="el" href="classaudio__tools_1_1_mutex_r_t_o_s.html#ad81318257fd78328c5c86fa6a3a861dd">MutexRTOS</a>, and <a class="el" href="classaudio__tools_1_1_mutex_recursive_r_t_o_s.html#ad81318257fd78328c5c86fa6a3a861dd">MutexRecursiveRTOS</a>.</p>
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_no_interrupt_handler.html#ad81318257fd78328c5c86fa6a3a861dd">NoInterruptHandler</a>, <a class="el" href="classaudio__tools_1_1_mutex_r_p2040.html#ad81318257fd78328c5c86fa6a3a861dd">MutexRP2040</a>, <a class="el" href="classaudio__tools_1_1_mutex_r_t_o_s.html#ad81318257fd78328c5c86fa6a3a861dd">MutexRTOS</a>, <a class="el" href="classaudio__tools_1_1_mutex_recursive_r_t_o_s.html#ad81318257fd78328c5c86fa6a3a861dd">MutexRecursiveRTOS</a>, <a class="el" href="classaudio__tools_1_1_mutex_zephyr.html#ad81318257fd78328c5c86fa6a3a861dd">MutexZephyr</a>, and <a class="el" href="classaudio__tools_1_1_mutex_recursive_zephyr.html#ad81318257fd78328c5c86fa6a3a861dd">MutexRecursiveZephyr</a>.</p>
 
 </div>
 </div>
@@ -159,7 +161,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_no_interrupt_handler.html#a333677ac769a10df2775f24893e07c21">NoInterruptHandler</a>, <a class="el" href="classaudio__tools_1_1_mutex_r_p2040.html#a333677ac769a10df2775f24893e07c21">MutexRP2040</a>, <a class="el" href="classaudio__tools_1_1_mutex_r_t_o_s.html#a333677ac769a10df2775f24893e07c21">MutexRTOS</a>, and <a class="el" href="classaudio__tools_1_1_mutex_recursive_r_t_o_s.html#a333677ac769a10df2775f24893e07c21">MutexRecursiveRTOS</a>.</p>
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_no_interrupt_handler.html#a333677ac769a10df2775f24893e07c21">NoInterruptHandler</a>, <a class="el" href="classaudio__tools_1_1_mutex_r_p2040.html#a333677ac769a10df2775f24893e07c21">MutexRP2040</a>, <a class="el" href="classaudio__tools_1_1_mutex_r_t_o_s.html#a333677ac769a10df2775f24893e07c21">MutexRTOS</a>, <a class="el" href="classaudio__tools_1_1_mutex_recursive_r_t_o_s.html#a333677ac769a10df2775f24893e07c21">MutexRecursiveRTOS</a>, <a class="el" href="classaudio__tools_1_1_mutex_zephyr.html#a333677ac769a10df2775f24893e07c21">MutexZephyr</a>, and <a class="el" href="classaudio__tools_1_1_mutex_recursive_zephyr.html#a333677ac769a10df2775f24893e07c21">MutexRecursiveZephyr</a>.</p>
 
 </div>
 </div>

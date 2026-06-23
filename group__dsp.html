@@ -71,7 +71,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#groups">Modules</a> &#124;
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle"><div class="title">DSP<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a></div></div></div>
 </div><!--header-->
 <div class="contents">
@@ -118,18 +119,63 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_maximilian.html">Maximilian</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">AudioTools integration with <a class="el" href="classaudio__tools_1_1_maximilian.html" title="AudioTools integration with Maximilian.">Maximilian</a>.  <a href="classaudio__tools_1_1_maximilian.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html">QualityAnalysisStream</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Analyzes audio stream quality by detecting clicks/pops, gaps/dropouts, and clipping/corruption.  <a href="classaudio__tools_1_1_quality_analysis_stream.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_quality_stats.html">QualityStats</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Statistics collected by <a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html" title="Analyzes audio stream quality by detecting clicks/pops, gaps/dropouts, and clipping/corruption.">QualityAnalysisStream</a>.  <a href="structaudio__tools_1_1_quality_stats.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html">RTTTLOutput&lt; T &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">RTTTL (Ring Tone Text Transfer Language) parser and player stream.  <a href="classaudio__tools_1_1_r_t_t_t_l_output.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_s_t_k_instrument.html">STKInstrument&lt; StkCls, T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">STK <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> for Instrument.  <a href="classaudio__tools_1_1_s_t_k_instrument.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">STK <a class="el" href="class_stream.html">Stream</a> for Instrument.  <a href="classaudio__tools_1_1_s_t_k_instrument.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_s_t_k_stream.html">STKStream&lt; StkCls &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">STK <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> for Instrument or Voicer.  <a href="classaudio__tools_1_1_s_t_k_stream.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">STK <a class="el" href="class_stream.html">Stream</a> for Instrument or Voicer.  <a href="classaudio__tools_1_1_s_t_k_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:gac1859b3dc5b9119471bd06e89b30d7ad" id="r_gac1859b3dc5b9119471bd06e89b30d7ad"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__dsp.html#gac1859b3dc5b9119471bd06e89b30d7ad">QualityIssue</a> : uint8_t { <a class="el" href="group__dsp.html#ggac1859b3dc5b9119471bd06e89b30d7ada316853cc3718335f11c048e33b9be98a">Click</a>
+, <a class="el" href="group__dsp.html#ggac1859b3dc5b9119471bd06e89b30d7ada09bb9294aa4a843883a3f401aeaf8b5b">Dropout</a>
+, <a class="el" href="group__dsp.html#ggac1859b3dc5b9119471bd06e89b30d7ada182cdffb4101f794ff7cd219bafd0f7b">Clipping</a>
+ }</td></tr>
+<tr class="memdesc:gac1859b3dc5b9119471bd06e89b30d7ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Quality issues detected by QualityAnalysisStream.  <a href="group__dsp.html#gac1859b3dc5b9119471bd06e89b30d7ad">More...</a><br /></td></tr>
+<tr class="separator:gac1859b3dc5b9119471bd06e89b30d7ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Digital Signal Processing. </p>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="gac1859b3dc5b9119471bd06e89b30d7ad" name="gac1859b3dc5b9119471bd06e89b30d7ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac1859b3dc5b9119471bd06e89b30d7ad">&#9670;&#160;</a></span>QualityIssue</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">enum</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="group__dsp.html#gac1859b3dc5b9119471bd06e89b30d7ad">QualityIssue</a> : <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Quality issues detected by <a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html" title="Analyzes audio stream quality by detecting clicks/pops, gaps/dropouts, and clipping/corruption.">QualityAnalysisStream</a>. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ggac1859b3dc5b9119471bd06e89b30d7ada316853cc3718335f11c048e33b9be98a" name="ggac1859b3dc5b9119471bd06e89b30d7ada316853cc3718335f11c048e33b9be98a"></a>Click&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ggac1859b3dc5b9119471bd06e89b30d7ada09bb9294aa4a843883a3f401aeaf8b5b" name="ggac1859b3dc5b9119471bd06e89b30d7ada09bb9294aa4a843883a3f401aeaf8b5b"></a>Dropout&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ggac1859b3dc5b9119471bd06e89b30d7ada182cdffb4101f794ff7cd219bafd0f7b" name="ggac1859b3dc5b9119471bd06e89b30d7ada182cdffb4101f794ff7cd219bafd0f7b"></a>Clipping&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

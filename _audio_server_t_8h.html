@@ -80,7 +80,9 @@ $(function() {
   <div class="headertitle"><div class="title">AudioServerT.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="_codec_w_a_v_8h_source.html">AudioTools/AudioCodecs/CodecWAV.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;cstdlib&gt;</code><br />
+<code>#include &lt;string&gt;</code><br />
+<code>#include &quot;<a class="el" href="_codec_w_a_v_8h_source.html">AudioTools/AudioCodecs/CodecWAV.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_audio_streams_8h_source.html">AudioTools/CoreAudio/AudioStreams.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_stream_copy_8h_source.html">AudioTools/CoreAudio/StreamCopy.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_audio_tools_config_8h_source.html">AudioToolsConfig.h</a>&quot;</code><br />
@@ -90,7 +92,7 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html">AudioServerT&lt; Client, Server &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple Arduino Webserver which streams the result This class is based on the WiFiServer class. All you need to do is to provide the data with a callback method or from an Arduino <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>: in -copy&gt; client.  <a href="classaudio__tools_1_1_audio_server_t.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple Arduino Webserver which streams the result This class is based on the WiFiServer class. All you need to do is to provide the data with a callback method or from an Arduino <a class="el" href="class_stream.html">Stream</a>: in -copy&gt; client.  <a href="classaudio__tools_1_1_audio_server_t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
@@ -101,8 +103,8 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:ga2909db5107c19b77138ce5e5a8653f0a" id="r_ga2909db5107c19b77138ce5e5a8653f0a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typedef</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__http.html#ga2909db5107c19b77138ce5e5a8653f0a">AudioServerDataCallback</a>) (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> *out)</td></tr>
-<tr class="memdesc:ga2909db5107c19b77138ce5e5a8653f0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calback which writes the sound data to the stream.  <br /></td></tr>
+<tr class="memitem:ga2909db5107c19b77138ce5e5a8653f0a" id="r_ga2909db5107c19b77138ce5e5a8653f0a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typedef</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__http.html#ga2909db5107c19b77138ce5e5a8653f0a">AudioServerDataCallback</a>) (<a class="el" href="class_print.html">Print</a> *out)</td></tr>
+<tr class="memdesc:ga2909db5107c19b77138ce5e5a8653f0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback which writes the sound data to the stream.  <br /></td></tr>
 <tr class="separator:ga2909db5107c19b77138ce5e5a8653f0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->

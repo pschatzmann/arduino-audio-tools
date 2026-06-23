@@ -1,7 +1,7 @@
 var searchData=
 [
   ['vban_2eh_0',['vban.h',['../vban_8h.html',1,'']]],
-  ['vbanstream_2eh_1',['vbanstream.h',['../_audio_libs_2_v_b_a_n_stream_8h.html',1,'(Global Namespace)'],['../_communication_2_v_b_a_n_stream_8h.html',1,'(Global Namespace)']]],
+  ['vbanstream_2eh_1',['VBANStream.h',['../_v_b_a_n_stream_8h.html',1,'']]],
   ['vector_2eh_2',['Vector.h',['../_vector_8h.html',1,'']]],
   ['vfs_2eh_3',['VFS.h',['../_v_f_s_8h.html',1,'']]],
   ['vfs_5flittlefs_2eh_4',['VFS_LittleFS.h',['../_v_f_s___little_f_s_8h.html',1,'']]],

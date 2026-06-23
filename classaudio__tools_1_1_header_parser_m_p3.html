@@ -84,7 +84,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>MP3 header parser that processes MP3 data incrementally and extracts complete MP3 frames. Can validate MP3 data and extract audio information. When used with a <a class="el" href="classaudio__tools_1_1_print.html">Print</a> output, it splits incoming data into complete MP3 frames and writes them to the output stream.  
+<p>MP3 header parser that processes MP3 data incrementally and extracts complete MP3 frames. Can validate MP3 data and extract audio information. When used with a <a class="el" href="class_print.html">Print</a> output, it splits incoming data into complete MP3 frames and writes them to the output stream.  
  <a href="classaudio__tools_1_1_header_parser_m_p3.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_header_parser_m_p3_8h_source.html">HeaderParserMP3.h</a>&gt;</code></p>
@@ -94,7 +94,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a80d964a185e4d5a9dda986a6db071e86" id="r_a80d964a185e4d5a9dda986a6db071e86"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a80d964a185e4d5a9dda986a6db071e86">HeaderParserMP3</a> ()=<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">default</a></td></tr>
 <tr class="memdesc:a80d964a185e4d5a9dda986a6db071e86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <br /></td></tr>
 <tr class="separator:a80d964a185e4d5a9dda986a6db071e86"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae500ac8481d579cbf306510e209f70c6" id="r_ae500ac8481d579cbf306510e209f70c6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#ae500ac8481d579cbf306510e209f70c6">HeaderParserMP3</a> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;output, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> bufferSize=2048)</td></tr>
+<tr class="memitem:ae500ac8481d579cbf306510e209f70c6" id="r_ae500ac8481d579cbf306510e209f70c6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#ae500ac8481d579cbf306510e209f70c6">HeaderParserMP3</a> (<a class="el" href="class_print.html">Print</a> &amp;output, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> bufferSize=2048)</td></tr>
 <tr class="memdesc:ae500ac8481d579cbf306510e209f70c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for write support.  <br /></td></tr>
 <tr class="separator:ae500ac8481d579cbf306510e209f70c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac27ae12de126ed5d5b726fc7bf1eb64a" id="r_ac27ae12de126ed5d5b726fc7bf1eb64a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#ac27ae12de126ed5d5b726fc7bf1eb64a">findSyncWord</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">buf</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nBytes</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">synch</a>=0xFF, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">syncl</a>=0xF0)</td></tr>
@@ -145,9 +145,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad20897c5c8bd47f5d4005989bead0e55" id="r_ad20897c5c8bd47f5d4005989bead0e55"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#ad20897c5c8bd47f5d4005989bead0e55">reset</a> ()</td></tr>
 <tr class="memdesc:ad20897c5c8bd47f5d4005989bead0e55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears internal buffer and resets state.  <br /></td></tr>
 <tr class="separator:ad20897c5c8bd47f5d4005989bead0e55"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada388d17b93c54a1a0f6edddbe0953ab" id="r_ada388d17b93c54a1a0f6edddbe0953ab"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#ada388d17b93c54a1a0f6edddbe0953ab">resize</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> size)</td></tr>
-<tr class="separator:ada388d17b93c54a1a0f6edddbe0953ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a07cbd23e35a60fce5c7f2d58f2ffc174" id="r_a07cbd23e35a60fce5c7f2d58f2ffc174"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a07cbd23e35a60fce5c7f2d58f2ffc174">setOutput</a> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;output)</td></tr>
+<tr class="memitem:ae4f8f853ac7c7aaa49e0471d25f5e02c" id="r_ae4f8f853ac7c7aaa49e0471d25f5e02c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#ae4f8f853ac7c7aaa49e0471d25f5e02c">resize</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> size)</td></tr>
+<tr class="separator:ae4f8f853ac7c7aaa49e0471d25f5e02c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07cbd23e35a60fce5c7f2d58f2ffc174" id="r_a07cbd23e35a60fce5c7f2d58f2ffc174"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a07cbd23e35a60fce5c7f2d58f2ffc174">setOutput</a> (<a class="el" href="class_print.html">Print</a> &amp;output)</td></tr>
 <tr class="separator:a07cbd23e35a60fce5c7f2d58f2ffc174"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd7270e10d851383ff7b53c1241f6ba1" id="r_afd7270e10d851383ff7b53c1241f6ba1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#afd7270e10d851383ff7b53c1241f6ba1">write</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *data, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> len)</td></tr>
 <tr class="memdesc:afd7270e10d851383ff7b53c1241f6ba1"><td class="mdescLeft">&#160;</td><td class="mdescRight">split up the data into mp3 segements and write to output  <br /></td></tr>
@@ -197,11 +197,11 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ac19aacda2e198ac7beda420ca738a147"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2403c7e2de441489a3cc48e75f80bc36" id="r_a2403c7e2de441489a3cc48e75f80bc36"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a2403c7e2de441489a3cc48e75f80bc36">last_frame_size</a> = 0</td></tr>
 <tr class="separator:a2403c7e2de441489a3cc48e75f80bc36"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a830b7433661962e39c3c15b066fc706b" id="r_a830b7433661962e39c3c15b066fc706b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a830b7433661962e39c3c15b066fc706b">p_output</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td></tr>
+<tr class="memitem:a830b7433661962e39c3c15b066fc706b" id="r_a830b7433661962e39c3c15b066fc706b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a830b7433661962e39c3c15b066fc706b">p_output</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td></tr>
 <tr class="separator:a830b7433661962e39c3c15b066fc706b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>MP3 header parser that processes MP3 data incrementally and extracts complete MP3 frames. Can validate MP3 data and extract audio information. When used with a <a class="el" href="classaudio__tools_1_1_print.html">Print</a> output, it splits incoming data into complete MP3 frames and writes them to the output stream. </p>
+<div class="textblock"><p>MP3 header parser that processes MP3 data incrementally and extracts complete MP3 frames. Can validate MP3 data and extract audio information. When used with a <a class="el" href="class_print.html">Print</a> output, it splits incoming data into complete MP3 frames and writes them to the output stream. </p>
 <p>Features:</p><ul>
 <li>Incremental processing of MP3 data in small chunks</li>
 <li>Frame synchronization and validation</li>
@@ -284,7 +284,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html">HeaderParserMP3</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_print.html">Print</a> &amp;&#160;</td>
           <td class="paramname"><em>output</em>, </td>
         </tr>
         <tr>
@@ -895,8 +895,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ada388d17b93c54a1a0f6edddbe0953ab" name="ada388d17b93c54a1a0f6edddbe0953ab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ada388d17b93c54a1a0f6edddbe0953ab">&#9670;&#160;</a></span>resize()</h2>
+<a id="ae4f8f853ac7c7aaa49e0471d25f5e02c" name="ae4f8f853ac7c7aaa49e0471d25f5e02c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4f8f853ac7c7aaa49e0471d25f5e02c">&#9670;&#160;</a></span>resize()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -905,9 +905,9 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> resize </td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> resize </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td>
           <td class="paramname"><em>size</em></td><td>)</td>
           <td></td>
         </tr>
@@ -969,7 +969,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> setOutput </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_print.html">Print</a> &amp;&#160;</td>
           <td class="paramname"><em>output</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1204,7 +1204,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_print.html">Print</a>* p_output = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td>
+          <td class="memname"><a class="el" href="class_print.html">Print</a>* p_output = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td>
         </tr>
       </table>
   </td>

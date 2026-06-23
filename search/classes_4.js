@@ -25,5 +25,6 @@ var searchData=
   ['esp3288audiooutput_22',['ESP3288AudioOutput',['../classaudio__tools_1_1_e_s_p3288_audio_output.html',1,'audio_tools']]],
   ['espnowstream_23',['ESPNowStream',['../classaudio__tools_1_1_e_s_p_now_stream.html',1,'audio_tools']]],
   ['espnowstreamconfig_24',['ESPNowStreamConfig',['../structaudio__tools_1_1_e_s_p_now_stream_config.html',1,'audio_tools']]],
-  ['exponentialvolumecontrol_25',['ExponentialVolumeControl',['../classaudio__tools_1_1_exponential_volume_control.html',1,'audio_tools']]]
+  ['ethernetzephyr_25',['EthernetZephyr',['../classaudio__tools_1_1_ethernet_zephyr.html',1,'audio_tools']]],
+  ['exponentialvolumecontrol_26',['ExponentialVolumeControl',['../classaudio__tools_1_1_exponential_volume_control.html',1,'audio_tools']]]
 ];

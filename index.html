@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: Arduino Audio Tools</title>
+<title>arduino-audio-tools: Audio Tools</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,10 +69,10 @@ $(function() {
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Arduino Audio Tools </div></div>
+  <div class="headertitle"><div class="title">Audio Tools </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md__r_e_a_d_m_e"></a> <a href="https://www.arduino.cc/reference/en/libraries/"><img src="https://img.shields.io/badge/Arduino-Library-blue.svg" alt="Arduino Library" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/pschatzmann/arduino-audio-tools"><img src="https://img.shields.io/badge/IDF-Component-blue.svg" alt="IDF Component" style="pointer-events: none;" class="inline"/></a> <a href="https://www.gnu.org/licenses/gpl-3.0"><img src="https://img.shields.io/badge/License-GPLv3-green.svg" alt="License: GPL v3" style="pointer-events: none;" class="inline"/></a></p>
+<div class="textblock"><p><a class="anchor" id="md__r_e_a_d_m_e"></a> <a href="https://www.arduino.cc/reference/en/libraries/"><img src="https://img.shields.io/badge/Arduino-Library-blue.svg" alt="Arduino Library" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/pschatzmann/arduino-audio-driver"><img src="https://img.shields.io/badge/Zephyr-Library-blue.svg" alt="Zephyr Library" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/pschatzmann/arduino-audio-tools"><img src="https://img.shields.io/badge/IDF-Component-blue.svg" alt="IDF Component" style="pointer-events: none;" class="inline"/></a> <a href="https://www.gnu.org/licenses/gpl-3.0"><img src="https://img.shields.io/badge/License-GPLv3-green.svg" alt="License: GPL v3" style="pointer-events: none;" class="inline"/></a></p>
 <p>Some basic <b>header-only C++ classes</b> that can be used for <b>Audio Processing</b> provided as <b>Arduino and cmake C++ Library</b>:</p>
 <ul>
 <li>We provide different <a href="https://github.com/pschatzmann/arduino-audio-tools/wiki/Audio-Sources-and-Sinks">"Audio Sources" and "Audio Sinks"</a></li>
@@ -109,7 +109,7 @@ Example</h2>
 <div class="line">StreamCopy copier(i2s, music); <span class="comment">// copies sound into i2s</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="_main_8h.html#a4fc01d736fe50cf5b977f755b675f11d">setup</a>(){</div>
-<div class="line">    Serial.begin(115200);</div>
+<div class="line">    <a class="code hl_variable" href="_arduino_8h.html#a7b8c4a195c58f9eb8750e94955c5aa4b">Serial</a>.<a class="code hl_function" href="class_hardware_serial.html#ad07a5157df5b61add464f4fabfd51431">begin</a>(115200);</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">auto</span> config = i2s.defaultConfig(TX_MODE);</div>
 <div class="line">    config.sample_rate = sample_rate;</div>
@@ -123,9 +123,11 @@ Example</h2>
 <div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="_main_8h.html#afe461d27b9c48d5921c00d521181f12f">loop</a>(){</div>
 <div class="line">    copier.copy();</div>
 <div class="line">}</div>
+<div class="ttc" id="a_arduino_8h_html_a7b8c4a195c58f9eb8750e94955c5aa4b"><div class="ttname"><a href="_arduino_8h.html#a7b8c4a195c58f9eb8750e94955c5aa4b">Serial</a></div><div class="ttdeci">static HardwareSerial Serial</div><div class="ttdef"><b>Definition</b> Arduino.h:179</div></div>
 <div class="ttc" id="a_audio_tools_8h_html"><div class="ttname"><a href="_audio_tools_8h.html">AudioTools.h</a></div></div>
 <div class="ttc" id="a_main_8h_html_a4fc01d736fe50cf5b977f755b675f11d"><div class="ttname"><a href="_main_8h.html#a4fc01d736fe50cf5b977f755b675f11d">setup</a></div><div class="ttdeci">void setup()</div></div>
 <div class="ttc" id="a_main_8h_html_afe461d27b9c48d5921c00d521181f12f"><div class="ttname"><a href="_main_8h.html#afe461d27b9c48d5921c00d521181f12f">loop</a></div><div class="ttdeci">void loop()</div></div>
+<div class="ttc" id="aclass_hardware_serial_html_ad07a5157df5b61add464f4fabfd51431"><div class="ttname"><a href="class_hardware_serial.html#ad07a5157df5b61add464f4fabfd51431">HardwareSerial::begin</a></div><div class="ttdeci">bool begin(long baudrate, int config=0)</div><div class="ttdef"><b>Definition</b> Arduino.h:176</div></div>
 </div><!-- fragment --><p> Each stream has it's own <a href="https://pschatzmann.github.io/arduino-audio-tools/structaudio__tools_1_1_audio_info.html">configuration object</a> that should be passed to the begin method. The defaultConfig() method is providing a default proposal which will usually "just work". Please consult the <a href="https://pschatzmann.github.io/arduino-audio-tools/modules.html">class documentation</a> for the available configuration parameters. You can also <b>easily adapt</b> any provided examples: If you e.g. replace the I2SStream with the AnalogAudioStream class, you will get analog instead of digital output.</p>
 <p>I suggest you continue to read the more <a href="https://github.com/pschatzmann/arduino-audio-tools/wiki/Introduction">detailed introduction</a>.</p>
 <p>Further examples can be found in the <a href="https://github.com/pschatzmann/arduino-audio-tools/wiki/Examples">Wiki</a>.</p>
@@ -137,8 +139,8 @@ AudioPlayer</h2>
 Logging</h2>
 <p>The application uses a built in logger: By default we use the log level warning and the logging output is going to Serial. You can change this in your sketch by calling e.g:</p>
 <div class="fragment"><div class="line"> ++</div>
-<div class="line">AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Debug);</div>
-</div><!-- fragment --><p> You can log to any object that is a subclass of Print and valid log level values are: Debug, Info, Warning, Error.</p>
+<div class="line">AudioToolsLogger.begin(<a class="code hl_variable" href="_arduino_8h.html#a7b8c4a195c58f9eb8750e94955c5aa4b">Serial</a>, AudioToolsLogLevel::Debug);</div>
+</div><!-- fragment --><p> You can log to any object that is a subclass of <a class="el" href="class_print.html">Print</a> and valid log level values are: Debug, Info, Warning, Error.</p>
 <p>You can also deactivate the logging by changing USE_AUDIO_LOGGING to false in the AudioConfig.h to decrease the memory usage:</p>
 <div class="fragment"><div class="line"> ++</div>
 <div class="line"><span class="preprocessor">#define USE_AUDIO_LOGGING false</span></div>
