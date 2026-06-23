@@ -45,11 +45,12 @@ var searchData=
   ['use_5frfc2250_5fheader_5f_42',['use_rfc2250_header_',['../classaudio__tools_1_1_r_t_s_p_format_m_p3.html#a178612d8237fa69be54e5aecea021c80',1,'audio_tools::RTSPFormatMP3']]],
   ['use_5fsend_5fack_43',['use_send_ack',['../structaudio__tools_1_1_e_s_p_now_stream_config.html#adb22ad0ebbfecfe8863d8c40ddf6b31a',1,'audio_tools::ESPNowStreamConfig']]],
   ['use_5ftimer_44',['use_timer',['../structaudio__tools_1_1_timer_callback_audio_stream_info.html#a7003ac70919843aa5fce4176f5712e71',1,'audio_tools::TimerCallbackAudioStreamInfo']]],
-  ['useallopsresolver_45',['useAllOpsResolver',['../structaudio__tools_1_1_tf_lite_config.html#a8ae114adc959d63e8e3a36d653c675d6',1,'audio_tools::TfLiteConfig']]],
-  ['user_5fagent_46',['USER_AGENT',['../namespaceaudio__tools.html#a6262d5f41d3f3eeae2906e68d594ce1a',1,'audio_tools']]],
-  ['user_5fcomment_47',['user_comment',['../classaudio__tools_1_1_v_b_a_n_config.html#a3cda366361b314fd7dd39bbb05d5dde6',1,'audio_tools::VBANConfig']]],
-  ['user_5fname_48',['user_name',['../classaudio__tools_1_1_v_b_a_n_config.html#ab370ad0f96482afbf5dddb8cf6f1e57c',1,'audio_tools::VBANConfig']]],
-  ['user_5fposition_49',['user_position',['../struct_v_b_a_n___p_i_n_g0.html#a4879a317011aeaaa5e8f7d65b6588d5b',1,'VBAN_PING0::USER_Position'],['../vban_8h.html#a4879a317011aeaaa5e8f7d65b6588d5b',1,'USER_Position:&#160;vban.h']]],
-  ['usercomment_5futf8_50',['usercomment_utf8',['../struct_v_b_a_n___p_i_n_g0.html#a5d9867693ef454f6fe37f17800c6210c',1,'VBAN_PING0::UserComment_utf8'],['../vban_8h.html#a5d9867693ef454f6fe37f17800c6210c',1,'UserComment_utf8:&#160;vban.h']]],
-  ['username_5futf8_51',['username_utf8',['../struct_v_b_a_n___p_i_n_g0.html#a2b0c03b7f35564e0218c6007ffeeaa70',1,'VBAN_PING0::UserName_utf8'],['../vban_8h.html#a2b0c03b7f35564e0218c6007ffeeaa70',1,'UserName_utf8:&#160;vban.h']]]
+  ['use_5fwrite_5ffast_45',['use_write_fast',['../structaudio__tools_1_1_n_r_f24_config.html#a671957242ce2ce670faa3efdd6f7b5fe',1,'audio_tools::NRF24Config']]],
+  ['useallopsresolver_46',['useAllOpsResolver',['../structaudio__tools_1_1_tf_lite_config.html#a8ae114adc959d63e8e3a36d653c675d6',1,'audio_tools::TfLiteConfig']]],
+  ['user_5fagent_47',['USER_AGENT',['../namespaceaudio__tools.html#a6262d5f41d3f3eeae2906e68d594ce1a',1,'audio_tools']]],
+  ['user_5fcomment_48',['user_comment',['../classaudio__tools_1_1_v_b_a_n_config.html#a3cda366361b314fd7dd39bbb05d5dde6',1,'audio_tools::VBANConfig']]],
+  ['user_5fname_49',['user_name',['../classaudio__tools_1_1_v_b_a_n_config.html#ab370ad0f96482afbf5dddb8cf6f1e57c',1,'audio_tools::VBANConfig']]],
+  ['user_5fposition_50',['user_position',['../struct_v_b_a_n___p_i_n_g0.html#a4879a317011aeaaa5e8f7d65b6588d5b',1,'VBAN_PING0::USER_Position'],['../vban_8h.html#a4879a317011aeaaa5e8f7d65b6588d5b',1,'USER_Position:&#160;vban.h']]],
+  ['usercomment_5futf8_51',['usercomment_utf8',['../struct_v_b_a_n___p_i_n_g0.html#a5d9867693ef454f6fe37f17800c6210c',1,'VBAN_PING0::UserComment_utf8'],['../vban_8h.html#a5d9867693ef454f6fe37f17800c6210c',1,'UserComment_utf8:&#160;vban.h']]],
+  ['username_5futf8_52',['username_utf8',['../struct_v_b_a_n___p_i_n_g0.html#a2b0c03b7f35564e0218c6007ffeeaa70',1,'VBAN_PING0::UserName_utf8'],['../vban_8h.html#a2b0c03b7f35564e0218c6007ffeeaa70',1,'UserName_utf8:&#160;vban.h']]]
 ];
