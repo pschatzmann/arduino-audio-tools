@@ -146,6 +146,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a76e1ee601feac4a8e4bb429f50200fe9" id="r_a76e1ee601feac4a8e4bb429f50200fe9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#a76e1ee601feac4a8e4bb429f50200fe9">setCodecConfig</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *data, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> len)</td></tr>
 <tr class="memdesc:a76e1ee601feac4a8e4bb429f50200fe9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Some decoders need e.g. a magic cookie to provide the relevant info for decoding.  <br /></td></tr>
 <tr class="separator:a76e1ee601feac4a8e4bb429f50200fe9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af93a8e49698f6ab805bfaf04022edbc5" id="r_af93a8e49698f6ab805bfaf04022edbc5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_d_s_f_decoder.html#af93a8e49698f6ab805bfaf04022edbc5">setInfoCallback</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(*callback)(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">DSFFormat</a> &amp;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">fmt</a>))</td></tr>
+<tr class="memdesc:af93a8e49698f6ab805bfaf04022edbc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback that receives the raw DSFFormat header after parsing.  <br /></td></tr>
+<tr class="separator:af93a8e49698f6ab805bfaf04022edbc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a315d8b7e350368be6281943717783c28" id="r_a315d8b7e350368be6281943717783c28"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_d_s_f_decoder.html#a315d8b7e350368be6281943717783c28">setMetaData</a> (<a class="el" href="structaudio__tools_1_1_d_s_f_metadata.html">DSFMetadata</a> metaData)</td></tr>
 <tr class="separator:a315d8b7e350368be6281943717783c28"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a909f118906f9cf7024baae224dcd90a7" id="r_a909f118906f9cf7024baae224dcd90a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a909f118906f9cf7024baae224dcd90a7">setNotifyActive</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">flag</a>)</td></tr>
@@ -220,6 +223,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a379eb6ee35e82184420b631ab5ac635c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47385aa19435f5fca9d3083a748258c5" id="r_a47385aa19435f5fca9d3083a748258c5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#a47385aa19435f5fca9d3083a748258c5">info</a></td></tr>
 <tr class="separator:a47385aa19435f5fca9d3083a748258c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40a355d578736059d47665d0bd1c8638" id="r_a40a355d578736059d47665d0bd1c8638"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_d_s_f_decoder.html#a40a355d578736059d47665d0bd1c8638">infoCallback</a> )(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">DSFFormat</a> &amp;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">fmt</a>) = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td></tr>
+<tr class="separator:a40a355d578736059d47665d0bd1c8638"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeaba7fcedcb403536c79ee7f04de17fc" id="r_aeaba7fcedcb403536c79ee7f04de17fc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#aeaba7fcedcb403536c79ee7f04de17fc">is_notify_active</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">true</a></td></tr>
 <tr class="separator:aeaba7fcedcb403536c79ee7f04de17fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a96eff8420fb9ee1b4c5d5f1bcace116d" id="r_a96eff8420fb9ee1b4c5d5f1bcace116d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_d_s_f_decoder.html#a96eff8420fb9ee1b4c5d5f1bcace116d">isActive</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">false</a></td></tr>
@@ -1161,6 +1166,34 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="af93a8e49698f6ab805bfaf04022edbc5" name="af93a8e49698f6ab805bfaf04022edbc5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af93a8e49698f6ab805bfaf04022edbc5">&#9670;&#160;</a></span>setInfoCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> setInfoCallback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(*)(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">DSFFormat</a> &amp;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">fmt</a>)&#160;</td>
+          <td class="paramname"><em>callback</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Register a callback that receives the raw DSFFormat header after parsing. </p>
+
+</div>
+</div>
 <a id="a315d8b7e350368be6281943717783c28" name="a315d8b7e350368be6281943717783c28"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a315d8b7e350368be6281943717783c28">&#9670;&#160;</a></span>setMetaData()</h2>
 
@@ -1614,6 +1647,28 @@ Protected Attributes</h2></td></tr>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a40a355d578736059d47665d0bd1c8638" name="a40a355d578736059d47665d0bd1c8638"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40a355d578736059d47665d0bd1c8638">&#9670;&#160;</a></span>infoCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(* infoCallback) (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">DSFFormat</a> &amp;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">fmt</a>) = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

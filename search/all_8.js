@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['e_0',['e',['../group___echo_state.html#gadd5642c93d0db83aca130bf517d43d92',1,'audio_tools::EchoState_::E'],['../group__tools.html#gga9715fceb4c700e7e4a610400464e9396ab199e021998d49b1f09338d8b9b18ecb',1,'audio_tools::MusicalNotes::E'],['../group___echo_state.html#ga69e4d71eb53ae08abd055977ea10e968',1,'audio_tools::EchoState_::e'],['../group___echo_state.html#ga3cef5a1348fe9f94c4a7c0b7440c326d',1,'audio_tools::echo_float_t::e']]],
+  ['e_0',['e',['../group___echo_state.html#ga69e4d71eb53ae08abd055977ea10e968',1,'audio_tools::EchoState_::e'],['../group___echo_state.html#ga3cef5a1348fe9f94c4a7c0b7440c326d',1,'audio_tools::echo_float_t::e'],['../group___echo_state.html#gadd5642c93d0db83aca130bf517d43d92',1,'audio_tools::EchoState_::E'],['../group__tools.html#gga9715fceb4c700e7e4a610400464e9396ab199e021998d49b1f09338d8b9b18ecb',1,'audio_tools::MusicalNotes::E']]],
   ['echo_20canceller_1',['EchoState: Acoustic echo canceller',['../group___echo_state.html',1,'']]],
   ['echo_5ffft_2',['echo_fft',['../group___echo_state.html#ga177264c3cede1b9e72ecdd80bef819ad',1,'audio_tools']]],
   ['echo_5ffft_5fdestroy_3',['echo_fft_destroy',['../group___echo_state.html#ga82a873ffe7fe2f79dc5df96672096cf8',1,'audio_tools']]],
