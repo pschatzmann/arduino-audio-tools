@@ -48,6 +48,8 @@ struct DSFMetadata : public AudioInfo {
   int filter_stages = 3;
   /// PCM output buffer size in bytes (must be >= one frame)
   int output_buffer_size = 1024;
+  /// When true, output de-interleaved DSD bitstream instead of converting to PCM
+  bool is_raw = false;
 };
 
 /// DSF file prefix containing file identification and basic information
@@ -132,6 +134,11 @@ class DSFDecoder : public AudioDecoder {
     AudioDecoder::setAudioInfo(meta);
   }
 
+  /// Register a callback that receives the raw DSFFormat header after parsing
+  void setInfoCallback(void (*callback)(const DSFFormat& fmt)) {
+    infoCallback = callback;
+  }
+
   bool isHeaderAvailable() { return headerParsed; }
 
   operator bool() { return isActive; }
@@ -153,6 +160,7 @@ class DSFDecoder : public AudioDecoder {
   bool headerParsed = false;
   bool isActive = false;
   uint32_t blockPos = 0;
+  void (*infoCallback)(const DSFFormat& fmt) = nullptr;
 
   SingleBuffer<uint8_t> pcmBuffer{0};
   Vector<SingleBuffer<uint8_t>> channelDsdBuffers;
@@ -190,13 +198,26 @@ class DSFDecoder : public AudioDecoder {
     parseData(data + dataPos, len - dataPos);
     headerParsed = true;
 
-    setAudioInfo(meta);
+    if (infoCallback) {
+      infoCallback(*reinterpret_cast<const DSFFormat*>(data + fmtPos));
+    }
+
+    if (!meta.is_raw) {
+      setAudioInfo(meta);
+    }
 
     return dataPos + sizeof(DSFDataHeader);
   }
 
   size_t processDSDData(const uint8_t* data, size_t len, size_t startPos) {
     LOGD("processDSDData: %u (%u)", (unsigned)len, (unsigned)startPos);
+
+    if (meta.is_raw) {
+      size_t rawLen = len - startPos;
+      getOutput()->write(data + startPos, rawLen);
+      return rawLen;
+    }
+
     size_t totalProcessed = 0;
     size_t pos = startPos;
 
