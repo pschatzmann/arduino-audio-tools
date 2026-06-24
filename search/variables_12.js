@@ -53,7 +53,7 @@ var searchData=
   ['references_50',['references',['../classaudio__tools_1_1_goertzel_stream.html#a78ca1d0fc73b52f1052e1a0a6d1ce02e',1,'audio_tools::GoertzelStream']]],
   ['release_51',['release',['../classaudio__tools_1_1_a_d_s_r.html#a3dee5c7240d1c7d471a78f3457342ec7',1,'audio_tools::ADSR']]],
   ['release_5fcount_52',['release_count',['../classaudio__tools_1_1_compressor.html#afdc4e181ba91f172946baacd5f6423d1',1,'audio_tools::Compressor']]],
-  ['release_5fon_5fend_53',['release_on_end',['../classaudio__tools_1_1_opus_audio_decoder.html#a95dacd84bcefad615c9a652afeec3b8c',1,'audio_tools::OpusAudioDecoder']]],
+  ['release_5fon_5fend_53',['release_on_end',['../classaudio__tools_1_1_opus_audio_decoder.html#a95dacd84bcefad615c9a652afeec3b8c',1,'audio_tools::OpusAudioDecoder::release_on_end'],['../classaudio__tools_1_1_opus_multi_stream_audio_decoder.html#a95dacd84bcefad615c9a652afeec3b8c',1,'audio_tools::OpusMultiStreamAudioDecoder::release_on_end']]],
   ['remaining_5fbytes_54',['remaining_bytes',['../classaudio__tools_1_1_wav_i_m_a_decoder.html#aafe7cc7e1370d5f3ea8534f88cce064e',1,'audio_tools::WavIMADecoder']]],
   ['remote_5faddress_5fext_55',['remote_address_ext',['../classaudio__tools_1_1_u_d_p_stream.html#abc218e2b2f51f72979020214e8ab5da2',1,'audio_tools::UDPStream']]],
   ['remote_5fport_5fext_56',['remote_port_ext',['../classaudio__tools_1_1_u_d_p_stream.html#a58db32cc8f03b91fa29bf24bb0a0000c',1,'audio_tools::UDPStream']]],

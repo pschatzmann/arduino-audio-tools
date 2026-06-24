@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['n_0',['n',['../group___echo_state.html#ga7722c8ecbb62d99aee7ce68b1752f337',1,'audio_tools::fft_state::N'],['../classaudio__tools_1_1_silence_removal_converter.html#a76f11d9a0a47b94f72c2d0e77fb32240',1,'audio_tools::SilenceRemovalConverter::n'],['../classaudio__tools_1_1_g7xx_decoder.html#a76f11d9a0a47b94f72c2d0e77fb32240',1,'audio_tools::G7xxDecoder::n']]],
+  ['n_0',['n',['../classaudio__tools_1_1_silence_removal_converter.html#a76f11d9a0a47b94f72c2d0e77fb32240',1,'audio_tools::SilenceRemovalConverter::n'],['../classaudio__tools_1_1_g7xx_decoder.html#a76f11d9a0a47b94f72c2d0e77fb32240',1,'audio_tools::G7xxDecoder::n'],['../group___echo_state.html#ga7722c8ecbb62d99aee7ce68b1752f337',1,'audio_tools::fft_state::N']]],
   ['n_5fa0_1',['N_A0',['../_musical_notes_8h.html#ac7903b3454f8b1656c706d6f2bfb5ee1',1,'MusicalNotes.h']]],
   ['n_5fa1_2',['N_A1',['../_musical_notes_8h.html#a65f6c9807b8d7e9e42a714bf85f85a78',1,'MusicalNotes.h']]],
   ['n_5fa2_3',['N_A2',['../_musical_notes_8h.html#a224568ad6a0656b29bb86562d03d73da',1,'MusicalNotes.h']]],

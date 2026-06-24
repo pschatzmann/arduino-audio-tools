@@ -51,5 +51,5 @@ var searchData=
   ['lookahead_48',['lookahead',['../classaudio__tools_1_1_a_d_p_c_m_decoder_x_q.html#a3d80b0160c9017df753c6af26ca45ad1',1,'audio_tools::ADPCMDecoderXQ::lookahead'],['../classaudio__tools_1_1_a_d_p_c_m_encoder_x_q.html#a3d80b0160c9017df753c6af26ca45ad1',1,'audio_tools::ADPCMEncoderXQ::lookahead']]],
   ['loop_5fcode_49',['loop_code',['../classaudio__tools_1_1_task.html#ab153441a2052f80aafe00768ea80aee0',1,'audio_tools::Task::loop_code'],['../classaudio__tools_1_1_task_zephyr.html#ab153441a2052f80aafe00768ea80aee0',1,'audio_tools::TaskZephyr::loop_code']]],
   ['loop_5fcount_50',['loop_count',['../classaudio__tools_1_1_file_loop_t.html#a2ac8bc219bf895e4a3cdd514c1de6ec4',1,'audio_tools::FileLoopT']]],
-  ['lsb_5fdepth_51',['lsb_depth',['../structaudio__tools_1_1_opus_encoder_settings.html#ad91af827bd8d4045bf8bf640367ee53c',1,'audio_tools::OpusEncoderSettings']]]
+  ['lsb_5fdepth_51',['lsb_depth',['../structaudio__tools_1_1_opus_encoder_settings.html#ad91af827bd8d4045bf8bf640367ee53c',1,'audio_tools::OpusEncoderSettings::lsb_depth'],['../structaudio__tools_1_1_opus_multi_stream_encoder_settings.html#ad91af827bd8d4045bf8bf640367ee53c',1,'audio_tools::OpusMultiStreamEncoderSettings::lsb_depth']]]
 ];
