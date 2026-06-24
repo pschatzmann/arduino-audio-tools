@@ -4,7 +4,7 @@
 #include "AudioTools/Communication/HTTP/HttpRequest.h"
 #include "AudioTools/Communication/HTTP/ICYStreamT.h"
 #include "AudioTools/Communication/HTTP/URLStreamBufferedT.h"
-#include "AudioTools/Communication/Client/WiFiESP32.h"
+#include "AudioTools/Communication/Network/WiFiESP32.h"
 #include "esp_http_client.h"
 #include "esp_idf_version.h"
 #include "esp_system.h"
