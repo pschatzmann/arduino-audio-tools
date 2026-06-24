@@ -26,7 +26,7 @@ namespace audio_tools {
 class HDLCStream : public Stream {
  public:
   HDLCStream() = default;
-  
+
   HDLCStream(int maxFrameSize) {
     resize(maxFrameSize);
   }
@@ -85,6 +85,7 @@ class HDLCStream : public Stream {
    * @return size_t Actual number of bytes read
    */
   size_t readBytes(uint8_t* buffer, size_t length) {
+    assert(_maxFrameSize > 0);
     size_t available_bytes = rx_frame_buffer.available();
     // get more data
     if (available_bytes == 0) {
@@ -134,6 +135,7 @@ class HDLCStream : public Stream {
    * @return size_t Number of bytes written
    */
   size_t write(const uint8_t* data, size_t len) override {
+    assert(_maxFrameSize > 0);
     return writeFrame(data, len);
   }
 
