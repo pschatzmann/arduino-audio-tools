@@ -20,7 +20,7 @@ var searchData=
   ['updatevolume_17',['updateVolume',['../classaudio__tools_1_1_volume_meter.html#ab6007da5c3151b380762d890fcdf3031',1,'audio_tools::VolumeMeter']]],
   ['updatevolumes_18',['updateVolumes',['../classaudio__tools_1_1_volume_meter.html#a4a350b829b7038d0d34ce6a8fc7f4c7c',1,'audio_tools::VolumeMeter']]],
   ['updatevolumest_19',['updateVolumesT',['../classaudio__tools_1_1_volume_meter.html#a966cb655610f02a20053937cf3eebac4',1,'audio_tools::VolumeMeter']]],
-  ['url_20',['url',['../classaudio__tools_1_1_url.html#a3e4728763c8f09ed47d6918fee40409a',1,'audio_tools::Url::url()'],['../classaudio__tools_1_1_url.html#af7dc88ba140498e51c9f3f5ec648e614',1,'audio_tools::Url::Url()=default'],['../classaudio__tools_1_1_url.html#aa9028ce1ab0eae615b25b1b5f98ac06f',1,'audio_tools::Url::Url(const char *url)']]],
+  ['url_20',['url',['../classaudio__tools_1_1_url.html#af7dc88ba140498e51c9f3f5ec648e614',1,'audio_tools::Url::Url()=default'],['../classaudio__tools_1_1_url.html#aa9028ce1ab0eae615b25b1b5f98ac06f',1,'audio_tools::Url::Url(const char *url)'],['../classaudio__tools_1_1_url.html#a3e4728763c8f09ed47d6918fee40409a',1,'audio_tools::Url::url()']]],
   ['urlcount_21',['urlCount',['../classaudio__tools__hls_1_1_u_r_l_loader_h_l_s.html#a2315b128f5a1599b1b4cdb016792a728',1,'audio_tools_hls::URLLoaderHLS']]],
   ['urldecode_22',['urlDecode',['../classaudio__tools_1_1_str.html#a163680465588f9d94bbf448d88388c58',1,'audio_tools::Str']]],
   ['urlencode_23',['urlEncode',['../classaudio__tools_1_1_str.html#ad6305e06db6f80b010d340f325cc0a1f',1,'audio_tools::Str']]],

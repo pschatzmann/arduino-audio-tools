@@ -22,7 +22,7 @@ var searchData=
   ['_5fis_5frecording_19',['_is_recording',['../classaudio__tools_1_1_wake_word_detector.html#a5eb59a9ef9b2d1d87353a8ee61653e61',1,'audio_tools::WakeWordDetector']]],
   ['_5fitail_20',['_iTail',['../classaudio__tools_1_1_ring_buffer.html#af3f4a7ecc60c938c86dcbdbbe31ded95',1,'audio_tools::RingBuffer']]],
   ['_5fmax_5ftemplate_5flen_21',['_max_template_len',['../classaudio__tools_1_1_wake_word_detector.html#a77ca30b158afe1af5e033d79468fd50e',1,'audio_tools::WakeWordDetector']]],
-  ['_5fmaxframesize_22',['_maxFrameSize',['../classaudio__tools_1_1_h_d_l_c_stream.html#a2b97b86e01886aad51f26902499f16ff',1,'audio_tools::HDLCStream']]],
+  ['_5fmaxframesize_22',['_maxFrameSize',['../classaudio__tools_1_1_h_d_l_c_stream.html#a5f5ff8d5e1f1a3e81c184d7506f67f0e',1,'audio_tools::HDLCStream']]],
   ['_5fmemory_23',['_memory',['../struct_r_s_1_1_poly.html#ac78e87581b8771652622335d67802784',1,'RS::Poly']]],
   ['_5fnumelems_24',['_numElems',['../classaudio__tools_1_1_ring_buffer.html#ada1821d01193306ddc57d6a86005fd60',1,'audio_tools::RingBuffer']]],
   ['_5foffset_25',['_offset',['../struct_r_s_1_1_poly.html#a0a5aaa5f9e6214da71b688c762dc0525',1,'RS::Poly']]],
