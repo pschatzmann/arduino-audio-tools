@@ -355,6 +355,9 @@ class OpusAudioEncoder : public AudioEncoder {
     return frame_pos / bytesPerSample;
   }
 
+  uint16_t samplesPerFrame() { return frameSizeSamples();};
+
+
  protected:
   Print *p_print = nullptr;
   OpusEncoder *enc = nullptr;
