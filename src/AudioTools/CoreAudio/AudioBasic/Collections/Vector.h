@@ -127,13 +127,13 @@ class Vector {
   }
 
   /// copy constructor
-  Vector(Vector<T> &copyFrom) {
+  Vector(const Vector<T> &copyFrom) {
     this->p_allocator = copyFrom.p_allocator;
-    resize_internal(copyFrom.size(), false);
-    for (int j = 0; j < copyFrom.size(); j++) {
-      p_data[j] = copyFrom[j];
+    resize_internal(copyFrom.len, false);
+    for (int j = 0; j < copyFrom.len; j++) {
+      p_data[j] = copyFrom.p_data[j];
     }
-    this->len = copyFrom.size();
+    this->len = copyFrom.len;
   }
 
   /// convert from c array
@@ -147,12 +147,12 @@ class Vector {
   }
 
   /// copy operator
-  Vector<T> &operator=(Vector<T> &copyFrom) {
-    resize_internal(copyFrom.size(), false);
-    for (int j = 0; j < copyFrom.size(); j++) {
-      p_data[j] = copyFrom[j];
+  Vector<T> &operator=(const Vector<T> &copyFrom) {
+    resize_internal(copyFrom.len, false);
+    for (int j = 0; j < copyFrom.len; j++) {
+      p_data[j] = copyFrom.p_data[j];
     }
-    this->len = copyFrom.size();
+    this->len = copyFrom.len;
     return *this;
   }
 

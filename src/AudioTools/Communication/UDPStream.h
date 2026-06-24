@@ -107,6 +107,12 @@ public:
     return remote_address_ext;
   }
 
+  /// Changes the target address and port for subsequent writes
+  void setTarget(IPAddress ip, uint16_t port) {
+    remote_address_ext = ip;
+    remote_port_ext = port;
+  }
+
   /// Replys will be sent to the initial remote caller
   size_t write(const uint8_t *data, size_t len) override {
     TRACED();

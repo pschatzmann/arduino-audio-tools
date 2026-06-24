@@ -24,8 +24,8 @@ class BaseBuffer {
  public:
   BaseBuffer() = default;
   virtual ~BaseBuffer() = default;
-  BaseBuffer(BaseBuffer&) = default;
-  BaseBuffer &operator=(BaseBuffer &) = default;
+  BaseBuffer(const BaseBuffer&) = default;
+  BaseBuffer &operator=(const BaseBuffer &) = default;
 
   /// reads a single value
   virtual bool read(T &result) = 0;
@@ -194,8 +194,8 @@ class SingleBuffer : public BaseBuffer<T> {
     reset();
   }
 
-  SingleBuffer(SingleBuffer&) = default;
-  SingleBuffer& operator=(SingleBuffer&) = default;
+  SingleBuffer(const SingleBuffer&) = default;
+  SingleBuffer& operator=(const SingleBuffer&) = default;
 
   /**
    * @brief Construct a new Single Buffer w/o allocating any memory
