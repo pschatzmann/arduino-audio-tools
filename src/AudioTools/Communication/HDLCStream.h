@@ -25,37 +25,44 @@ namespace audio_tools {
 
 class HDLCStream : public Stream {
  public:
+  HDLCStream() = default;
+  
+  HDLCStream(int maxFrameSize) {
+    resize(maxFrameSize);
+  }
   /**
-   * @brief Construct a new HDLCStream object using a Stream for input and output
-   * 
+   * @brief Construct a new HDLCStream object using a Stream for input and
+   * output
+   *
    * @param stream The underlying Stream for both reading and writing
    * @param maxFrameSize Maximum size of a single HDLC frame
    */
-  HDLCStream(Stream& stream, size_t maxFrameSize)
-      : _maxFrameSize(maxFrameSize) {
-    p_stream = &stream;
-    p_print = &stream;
-    tx_frame_buffer.resize(maxFrameSize);
-    rx_frame_buffer.resize(maxFrameSize);
-    _rxBuffer.resize(maxFrameSize);
+  HDLCStream(Stream& stream, size_t maxFrameSize) {
+    setStream(stream);
+    resize(maxFrameSize);
   }
 
   /**
    * @brief Construct a new HDLCStream object using a Print for output only
-   * 
+   *
    * @param stream The underlying Print for writing
    * @param maxFrameSize Maximum size of a single HDLC frame
    */
-  HDLCStream(Print& stream, size_t maxFrameSize) : _maxFrameSize(maxFrameSize) {
-    p_print = &stream;
-    tx_frame_buffer.resize(maxFrameSize);
-    rx_frame_buffer.resize(maxFrameSize);
-    _rxBuffer.resize(maxFrameSize);
+  HDLCStream(Print& stream, size_t maxFrameSize)  {
+    setPrint(stream);
+    resize(maxFrameSize);
   }
+
+  void setStream(Stream& stream) {
+    p_stream = &stream;
+    p_print = &stream;
+  }
+
+  void setPrint(Print& stream) { p_print = &stream; }
 
   /**
    * @brief Get the number of bytes available to read from the frame buffer
-   * 
+   *
    * @return int Number of bytes available
    */
   int available() override {
@@ -65,14 +72,14 @@ class HDLCStream : public Stream {
 
   /**
    * @brief Not supported
-   * 
-   * @return -1 
+   *
+   * @return -1
    */
   int read() override { return -1; }
 
   /**
    * @brief Read a full frame from the stream into a buffer
-   * 
+   *
    * @param buffer Destination buffer to hold the data
    * @param length Maximum number of bytes to read
    * @return size_t Actual number of bytes read
@@ -101,8 +108,8 @@ class HDLCStream : public Stream {
 
   /**
    * @brief Not supported
-   * 
-   * @return -1 
+   *
+   * @return -1
    */
   int peek() override { return -1; }
 
@@ -113,15 +120,15 @@ class HDLCStream : public Stream {
 
   /**
    * @brief Not supported
-   * 
+   *
    * @param b The byte to write
-   * @return  0 
+   * @return  0
    */
   size_t write(uint8_t b) override { return 0; }
 
   /**
    * @brief Write multiple bytes to the stream
-   * 
+   *
    * @param data Pointer to the data buffer
    * @param len Number of bytes to write
    * @return size_t Number of bytes written
@@ -130,10 +137,19 @@ class HDLCStream : public Stream {
     return writeFrame(data, len);
   }
 
+  bool resize(size_t size) {
+    if (size > _maxFrameSize) return false;
+    tx_frame_buffer.resize(size);
+    rx_frame_buffer.resize(size);
+    _rxBuffer.resize(size);
+    _maxFrameSize = size;
+    return true;
+  }
+
  protected:
   Stream* p_stream = nullptr;
   Print* p_print = nullptr;
-  const size_t _maxFrameSize;
+  size_t _maxFrameSize = 0;
   SingleBuffer<uint8_t> tx_frame_buffer;
   SingleBuffer<uint8_t> rx_frame_buffer;
   Vector<uint8_t> _rxBuffer;
@@ -150,7 +166,7 @@ class HDLCStream : public Stream {
 
   /**
    * @brief Calculate CRC-CCITT (16-bit)
-   * 
+   *
    * @param data Byte to include in CRC calculation
    * @param crc Current CRC value
    * @return uint16_t Updated CRC value
@@ -164,7 +180,7 @@ class HDLCStream : public Stream {
 
   /**
    * @brief Write a byte with proper HDLC byte stuffing if needed
-   * 
+   *
    * @param b Byte to write
    */
   void _writeEscaped(uint8_t b) {
@@ -178,7 +194,7 @@ class HDLCStream : public Stream {
 
   /**
    * @brief Write a complete HDLC frame with proper framing and CRC
-   * 
+   *
    * @param data Data to be framed
    * @param len Length of data
    * @return size_t Number of bytes in the original data
