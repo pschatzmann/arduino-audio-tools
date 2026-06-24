@@ -12,7 +12,7 @@ var searchData=
   ['base_9',['base',['../classaudio__tools_1_1_simple_chorus.html#a4b9d927a352137ca958022a72f253d11',1,'audio_tools::SimpleChorus']]],
   ['base46logic_10',['Base46Logic',['../namespaceaudio__tools.html#ab0f1efd62d502b5ca0387fbcb43268e2',1,'audio_tools']]],
   ['base_5ffrequency_11',['base_frequency',['../classaudio__tools_1_1_sine_from_table.html#a3576bb5944b331d1874a0542308a9998',1,'audio_tools::SineFromTable']]],
-  ['basebuffer_12',['basebuffer',['../classaudio__tools_1_1_base_buffer.html#a20cd38fd6aba099def1a6440187b6970',1,'audio_tools::BaseBuffer::BaseBuffer()=default'],['../classaudio__tools_1_1_base_buffer.html#af8fe3db2d9d1e8ea8fddefc9a2aab22b',1,'audio_tools::BaseBuffer::BaseBuffer(BaseBuffer &amp;)=default'],['../classaudio__tools_1_1_base_buffer.html',1,'BaseBuffer&lt; T &gt;']]],
+  ['basebuffer_12',['basebuffer',['../classaudio__tools_1_1_base_buffer.html#a20cd38fd6aba099def1a6440187b6970',1,'audio_tools::BaseBuffer::BaseBuffer()=default'],['../classaudio__tools_1_1_base_buffer.html#a0479e4a51adc20e9d4f8017597288988',1,'audio_tools::BaseBuffer::BaseBuffer(const BaseBuffer &amp;)=default'],['../classaudio__tools_1_1_base_buffer.html',1,'BaseBuffer&lt; T &gt;']]],
   ['basebuffer_3c_20float_20_3e_13',['BaseBuffer&lt; float &gt;',['../classaudio__tools_1_1_base_buffer.html',1,'audio_tools']]],
   ['basebuffer_3c_20frame_20_3e_14',['BaseBuffer&lt; Frame &gt;',['../classaudio__tools_1_1_base_buffer.html',1,'audio_tools']]],
   ['basebuffer_3c_20int16_5ft_20_3e_15',['BaseBuffer&lt; int16_t &gt;',['../classaudio__tools_1_1_base_buffer.html',1,'audio_tools']]],

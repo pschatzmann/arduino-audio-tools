@@ -9,7 +9,7 @@ var searchData=
   ['qualityissue_6',['QualityIssue',['../group__dsp.html#gac1859b3dc5b9119471bd06e89b30d7ad',1,'audio_tools']]],
   ['qualitystats_7',['QualityStats',['../structaudio__tools_1_1_quality_stats.html',1,'audio_tools']]],
   ['quantize_8',['quantize',['../classaudio__tools_1_1_tf_lite_quantizer.html#a418d78a0309643b00c7add25ed4a2c46',1,'audio_tools::TfLiteQuantizer']]],
-  ['queue_9',['queue',['../classaudio__tools_1_1_queue.html',1,'Queue&lt; T &gt;'],['../classaudio__tools_1_1_buffer_r_p2040_t.html#a2b292845656c4b74032615e1c1a328d4',1,'audio_tools::BufferRP2040T::queue'],['../classaudio__tools_1_1_decoder_adapter.html#a1391f46d8eb91ae14d4dd317b29dc765',1,'audio_tools::DecoderAdapter::queue'],['../classaudio__tools_1_1_queue.html#a661ad33bec307cc237c318c39970e78f',1,'audio_tools::Queue::Queue()']]],
+  ['queue_9',['queue',['../classaudio__tools_1_1_queue.html',1,'Queue&lt; T &gt;'],['../classaudio__tools_1_1_queue.html#a661ad33bec307cc237c318c39970e78f',1,'audio_tools::Queue::Queue()'],['../classaudio__tools_1_1_buffer_r_p2040_t.html#a2b292845656c4b74032615e1c1a328d4',1,'audio_tools::BufferRP2040T::queue'],['../classaudio__tools_1_1_decoder_adapter.html#a1391f46d8eb91ae14d4dd317b29dc765',1,'audio_tools::DecoderAdapter::queue']]],
   ['queue_2eh_10',['Queue.h',['../_queue_8h.html',1,'']]],
   ['queue_3c_20audio_5ftools_3a_3azephyrfile_20_3e_11',['Queue&lt; audio_tools::ZephyrFile &gt;',['../classaudio__tools_1_1_queue.html',1,'audio_tools']]],
   ['queue_5fbuffer_12',['queue_buffer',['../classaudio__tools_1_1_queue_r_t_o_s.html#a34cbd8d084572179ca1ddcbfe33c9a13',1,'audio_tools::QueueRTOS']]],
