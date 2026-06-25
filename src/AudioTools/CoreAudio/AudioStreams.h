@@ -864,14 +864,15 @@ class MeasuringStream : public ModifyingStream {
   uint32_t startTime() { return start_time; }
 
   void setAudioInfo(AudioInfo info) override {
-    AudioStream::info = info;
+    LOGI("MeasuringStream::setAudioInfo: %d bits, %d channels", info.bits_per_sample, info.channels);
+    ModifyingStream::setAudioInfo(info);
     setFrameSize(info.bits_per_sample / 8 * info.channels);
   }
 
   bool begin() override {
     total_bytes_since_begin = 0;
     ms_at_begin = millis();
-    return AudioStream::begin();
+    return ModifyingStream::begin();
   }
 
   bool begin(AudioInfo info) {
