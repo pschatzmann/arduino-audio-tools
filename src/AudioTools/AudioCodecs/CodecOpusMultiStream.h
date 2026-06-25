@@ -15,6 +15,12 @@
 
 namespace audio_tools {
 
+enum OpusChannelMapping {
+  OPUS_CHANNEL_MAPPING_COMBINED = 0, // e.g. stereo
+  OPUS_CHANNEL_MAPPING_SEPARATE = 1, // e.g. 2 mono channels
+  OPUS_CHANNEL_MAPPING_CUSTOM = 2
+};  
+
 /**
  * @brief Settings for Opus MultiStream Decoder
  * @author Phil Schatzmann
@@ -25,13 +31,26 @@ struct OpusMultiStreamSettings : public AudioInfo {
     sample_rate = 48000;
     channels = 2;
     bits_per_sample = 16;
-    setupDefaultMapping();
   }
   int max_buffer_size = OPUS_DEC_MAX_BUFFER_SIZE;
   int max_buffer_write_size = 512;
   int streams = 1;
   int coupled_streams = 1;
+  OpusChannelMapping default_channel_mapping = OPUS_CHANNEL_MAPPING_COMBINED;
   unsigned char mapping[255] = {};
+
+  void setupChannelMapping(){
+    switch (default_channel_mapping) {
+      case OPUS_CHANNEL_MAPPING_SEPARATE:
+        setupSeparateChannelsMapping();
+        break;
+      case OPUS_CHANNEL_MAPPING_COMBINED:
+        setupDefaultMapping();
+        break;
+      default:
+        break;
+    }
+  }
 
   void setupDefaultMapping() {
     memset(mapping, 0, sizeof(mapping));
@@ -50,6 +69,15 @@ struct OpusMultiStreamSettings : public AudioInfo {
       for (int i = 0; i < channels; i++) {
         mapping[i] = i;
       }
+    }
+  }
+
+  void setupSeparateChannelsMapping() {
+    memset(mapping, 0, sizeof(mapping));
+    streams = channels;
+    coupled_streams = 0;
+    for (int i = 0; i < channels; i++) {
+      mapping[i] = i;
     }
   }
 };
@@ -96,17 +124,17 @@ class OpusMultiStreamAudioDecoder : public AudioDecoder {
   OpusMultiStreamAudioDecoder(bool releaseOnEnd = false)
       : release_on_end(releaseOnEnd) {}
 
-  OpusMultiStreamAudioDecoder(Print &out_stream) {
+  OpusMultiStreamAudioDecoder(Print& out_stream) {
     TRACED();
     setOutput(out_stream);
   }
 
-  void setOutput(Print &out_stream) override { p_print = &out_stream; }
+  void setOutput(Print& out_stream) override { p_print = &out_stream; }
 
   AudioInfo audioInfo() override { return cfg; }
 
-  OpusMultiStreamSettings &config() { return cfg; }
-  OpusMultiStreamSettings &defaultConfig() { return cfg; }
+  OpusMultiStreamSettings& config() { return cfg; }
+  OpusMultiStreamSettings& defaultConfig() { return cfg; }
 
   bool begin(OpusMultiStreamSettings settings) {
     TRACED();
@@ -122,6 +150,7 @@ class OpusMultiStreamAudioDecoder : public AudioDecoder {
       LOGE("Sample rate not supported: %d", cfg.sample_rate);
       return false;
     }
+    cfg.setupChannelMapping();
     outbuf.resize(cfg.max_buffer_size);
     assert(outbuf.data() != nullptr);
 
@@ -130,10 +159,11 @@ class OpusMultiStreamAudioDecoder : public AudioDecoder {
                                           cfg.streams, cfg.coupled_streams,
                                           cfg.mapping, &err);
     if (err != OPUS_OK || dec == nullptr) {
-      LOGE("opus_multistream_decoder_create: %s for sample_rate: %d, "
-           "channels:%d, streams:%d, coupled:%d",
-           opus_strerror(err), cfg.sample_rate, cfg.channels, cfg.streams,
-           cfg.coupled_streams);
+      LOGE(
+          "opus_multistream_decoder_create: %s for sample_rate: %d, "
+          "channels:%d, streams:%d, coupled:%d",
+          opus_strerror(err), cfg.sample_rate, cfg.channels, cfg.streams,
+          cfg.coupled_streams);
       return false;
     }
     active = true;
@@ -153,20 +183,26 @@ class OpusMultiStreamAudioDecoder : public AudioDecoder {
   }
 
   void setAudioInfo(AudioInfo from) override {
+    bool channels_changed = info.channels != from.channels;
     AudioDecoder::setAudioInfo(from);
     info = from;
     cfg.sample_rate = from.sample_rate;
     cfg.channels = from.channels;
     cfg.bits_per_sample = from.bits_per_sample;
+    if (channels_changed) {
+      cfg.setupChannelMapping();
+      end();
+      begin();
+    }
   }
 
-  size_t write(const uint8_t *data, size_t len) override {
+  size_t write(const uint8_t* data, size_t len) override {
     if (!active || p_print == nullptr) return 0;
     LOGD("OpusMultiStreamAudioDecoder::write: %d", (int)len);
     int in_band_forward_error_correction = 0;
     int frame_count = cfg.max_buffer_size / cfg.channels / sizeof(opus_int16);
     int out_samples = opus_multistream_decode(
-        dec, (uint8_t *)data, len, (opus_int16 *)outbuf.data(), frame_count,
+        dec, (uint8_t*)data, len, (opus_int16*)outbuf.data(), frame_count,
         in_band_forward_error_correction);
     if (out_samples < 0) {
       LOGW("opus_multistream_decode: %s", opus_strerror(out_samples));
@@ -190,8 +226,8 @@ class OpusMultiStreamAudioDecoder : public AudioDecoder {
   void setReleaseOnEnd(bool flag) { release_on_end = flag; }
 
  protected:
-  Print *p_print = nullptr;
-  OpusMSDecoder *dec = nullptr;
+  Print* p_print = nullptr;
+  OpusMSDecoder* dec = nullptr;
   OpusMultiStreamSettings cfg;
   bool active = false;
   Vector<uint8_t> outbuf{0};
@@ -199,7 +235,7 @@ class OpusMultiStreamAudioDecoder : public AudioDecoder {
   bool release_on_end = false;
 
   bool isValidRate(int rate) {
-    for (auto &valid : valid_rates) {
+    for (auto& valid : valid_rates) {
       if (valid == rate) return true;
     }
     return false;
@@ -210,6 +246,9 @@ class OpusMultiStreamAudioDecoder : public AudioDecoder {
  * @brief Encoder for Opus multistream audio.
  * Supports up to 255 channels by combining multiple Opus streams into a
  * single packet. Each fully encoded frame is written to the output stream.
+ *
+ * @warning The decoder needs a lot of stack space: SET_LOOP_TASK_STACK_SIZE(16
+ * * 1024);
  *
  * Depends on https://github.com/pschatzmann/arduino-libopus.git
  *
@@ -222,11 +261,11 @@ class OpusMultiStreamAudioEncoder : public AudioEncoder {
  public:
   OpusMultiStreamAudioEncoder() = default;
 
-  OpusMultiStreamAudioEncoder(Print &out) { setOutput(out); }
+  OpusMultiStreamAudioEncoder(Print& out) { setOutput(out); }
 
-  void setOutput(Print &out_stream) override { p_print = &out_stream; }
+  void setOutput(Print& out_stream) override { p_print = &out_stream; }
 
-  const char *mime() override { return "audio/opus"; }
+  const char* mime() override { return "audio/opus"; }
 
   void setAudioInfo(AudioInfo from) override {
     AudioEncoder::setAudioInfo(from);
@@ -237,27 +276,32 @@ class OpusMultiStreamAudioEncoder : public AudioEncoder {
 
   bool begin() override {
     int err;
-    int size = getFrameSizeSamples(cfg.sample_rate) * cfg.channels *
-               sizeof(int16_t);
+    int size =
+        getFrameSizeSamples(cfg.sample_rate) * cfg.channels * sizeof(int16_t);
     frame.resize(size);
     assert(frame.data() != nullptr);
-    enc = opus_multistream_encoder_create(
-        cfg.sample_rate, cfg.channels, cfg.streams, cfg.coupled_streams,
-        cfg.mapping, cfg.application, &err);
+    int packet_len =
+        OPUS_ENC_MAX_BUFFER_SIZE > 0 ? OPUS_ENC_MAX_BUFFER_SIZE : 512;
+    packet.resize(packet_len);
+    assert(packet.data() != nullptr);
+    enc = opus_multistream_encoder_create(cfg.sample_rate, cfg.channels,
+                                          cfg.streams, cfg.coupled_streams,
+                                          cfg.mapping, cfg.application, &err);
     if (err != OPUS_OK || enc == nullptr) {
-      LOGE("opus_multistream_encoder_create: %s for sample_rate: %d, "
-           "channels:%d, streams:%d, coupled:%d",
-           opus_strerror(err), cfg.sample_rate, cfg.channels, cfg.streams,
-           cfg.coupled_streams);
+      LOGE(
+          "opus_multistream_encoder_create: %s for sample_rate: %d, "
+          "channels:%d, streams:%d, coupled:%d",
+          opus_strerror(err), cfg.sample_rate, cfg.channels, cfg.streams,
+          cfg.coupled_streams);
       return false;
     }
     is_open = settings();
     return is_open;
   }
 
-  OpusMultiStreamEncoderSettings &config() { return cfg; }
+  OpusMultiStreamEncoderSettings& config() { return cfg; }
 
-  OpusMultiStreamEncoderSettings &defaultConfig() { return cfg; }
+  OpusMultiStreamEncoderSettings& defaultConfig() { return cfg; }
 
   bool begin(OpusMultiStreamEncoderSettings settings) {
     cfg = settings;
@@ -277,7 +321,7 @@ class OpusMultiStreamAudioEncoder : public AudioEncoder {
     is_open = false;
   }
 
-  size_t write(const uint8_t *data, size_t len) override {
+  size_t write(const uint8_t* data, size_t len) override {
     if (!is_open || p_print == nullptr) return 0;
     LOGD("OpusMultiStreamAudioEncoder::write: %d", (int)len);
     for (int j = 0; j < len; j++) {
@@ -311,11 +355,12 @@ class OpusMultiStreamAudioEncoder : public AudioEncoder {
   uint16_t samplesPerFrame() { return frameSizeSamples(); }
 
  protected:
-  Print *p_print = nullptr;
-  OpusMSEncoder *enc = nullptr;
+  Print* p_print = nullptr;
+  OpusMSEncoder* enc = nullptr;
   OpusMultiStreamEncoderSettings cfg;
   bool is_open = false;
   Vector<uint8_t> frame{0};
+  Vector<uint8_t> packet{0};
   int frame_pos = 0;
 
   void encodeByte(uint8_t data) {
@@ -328,19 +373,15 @@ class OpusMultiStreamAudioEncoder : public AudioEncoder {
 
   void encodeFrame() {
     if (frame.size() > 0) {
-      int packet_len =
-          OPUS_ENC_MAX_BUFFER_SIZE > 0 ? OPUS_ENC_MAX_BUFFER_SIZE : 512;
-      uint8_t packet[packet_len];
-
       int frames = frame.size() / cfg.channels / sizeof(int16_t);
       LOGD("opus_multistream_encode - frame_size: %d", frames);
-      int len = opus_multistream_encode(enc, (opus_int16 *)frame.data(),
-                                        frames, packet, packet_len);
+      int len = opus_multistream_encode(enc, (opus_int16*)frame.data(), frames,
+                                        packet.data(), packet.size());
       if (len < 0) {
         LOGE("opus_multistream_encode: %s", opus_strerror(len));
       } else if (len > 0) {
         LOGD("opus_multistream_encode: %d", len);
-        int eff = p_print->write(packet, len);
+        int eff = p_print->write(packet.data(), len);
         if (eff != len) {
           LOGE("encodeFrame data lost: %d->%d", len, eff);
         }
@@ -398,9 +439,8 @@ class OpusMultiStreamAudioEncoder : public AudioEncoder {
       ok = false;
     }
     if (cfg.complexity >= 0 &&
-        opus_multistream_encoder_ctl(enc,
-                                     OPUS_SET_COMPLEXITY(cfg.complexity)) !=
-            OPUS_OK) {
+        opus_multistream_encoder_ctl(
+            enc, OPUS_SET_COMPLEXITY(cfg.complexity)) != OPUS_OK) {
       LOGE("invalid complexity: %d", cfg.complexity);
       ok = false;
     }
@@ -410,16 +450,14 @@ class OpusMultiStreamAudioEncoder : public AudioEncoder {
       LOGE("invalid max_bandwidth: %d", cfg.max_bandwidth);
       ok = false;
     }
-    if (cfg.signal >= 0 &&
-        opus_multistream_encoder_ctl(enc, OPUS_SET_SIGNAL(cfg.signal)) !=
-            OPUS_OK) {
+    if (cfg.signal >= 0 && opus_multistream_encoder_ctl(
+                               enc, OPUS_SET_SIGNAL(cfg.signal)) != OPUS_OK) {
       LOGE("invalid signal: %d", cfg.signal);
       ok = false;
     }
     if (cfg.inband_fec >= 0 &&
-        opus_multistream_encoder_ctl(enc,
-                                     OPUS_SET_INBAND_FEC(cfg.inband_fec)) !=
-            OPUS_OK) {
+        opus_multistream_encoder_ctl(
+            enc, OPUS_SET_INBAND_FEC(cfg.inband_fec)) != OPUS_OK) {
       LOGE("invalid inband_fec: %d", cfg.inband_fec);
       ok = false;
     }
@@ -430,22 +468,20 @@ class OpusMultiStreamAudioEncoder : public AudioEncoder {
       ok = false;
     }
     if (cfg.lsb_depth >= 0 &&
-        opus_multistream_encoder_ctl(enc,
-                                     OPUS_SET_LSB_DEPTH(cfg.lsb_depth)) !=
+        opus_multistream_encoder_ctl(enc, OPUS_SET_LSB_DEPTH(cfg.lsb_depth)) !=
             OPUS_OK) {
       LOGE("invalid lsb_depth: %d", cfg.lsb_depth);
       ok = false;
     }
     if (cfg.prediction_disabled >= 0 &&
         opus_multistream_encoder_ctl(
-            enc,
-            OPUS_SET_PREDICTION_DISABLED(cfg.prediction_disabled)) != OPUS_OK) {
+            enc, OPUS_SET_PREDICTION_DISABLED(cfg.prediction_disabled)) !=
+            OPUS_OK) {
       LOGE("invalid pred_disabled: %d", cfg.prediction_disabled);
       ok = false;
     }
-    if (cfg.use_dtx >= 0 &&
-        opus_multistream_encoder_ctl(enc, OPUS_SET_DTX(cfg.use_dtx)) !=
-            OPUS_OK) {
+    if (cfg.use_dtx >= 0 && opus_multistream_encoder_ctl(
+                                enc, OPUS_SET_DTX(cfg.use_dtx)) != OPUS_OK) {
       LOGE("invalid use_dtx: %d", cfg.use_dtx);
       ok = false;
     }
