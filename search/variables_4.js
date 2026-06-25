@@ -47,7 +47,7 @@ var searchData=
   ['default_5factions_5factive_44',['default_actions_active',['../classaudio__tools_1_1_audio_kit_stream_config.html#a4d9936cc7f58eaa856a7e0e1b2d2aaea',1,'audio_tools::AudioKitStreamConfig']]],
   ['default_5fagent_45',['DEFAULT_AGENT',['../namespaceaudio__tools.html#a0999f3356fc08985f208753065d2afa8',1,'audio_tools']]],
   ['default_5fbuffer_5fsize_46',['default_buffer_size',['../classaudio__tools_1_1_dynamic_memory_stream.html#a1eec357c33af988b750dc29cadf908d5',1,'audio_tools::DynamicMemoryStream']]],
-  ['default_5fchannel_5fmapping_47',['default_channel_mapping',['../structaudio__tools_1_1_opus_multi_stream_settings.html#ac2f15155e79a44e719956490cedc3e7c',1,'audio_tools::OpusMultiStreamSettings']]],
+  ['default_5fchannel_5fmapping_47',['default_channel_mapping',['../structaudio__tools_1_1_opus_multi_stream_settings.html#aeb33fd17629466c83722582326547952',1,'audio_tools::OpusMultiStreamSettings']]],
   ['default_5fconfig_48',['default_config',['../classaudio__tools_1_1_goertzel_stream.html#a7faa93bbb86ae47806f24ce7e713cb1f',1,'audio_tools::GoertzelStream']]],
   ['default_5fformat_49',['default_format',['../classaudio__tools_1_1_r_t_s_p_audio_source.html#ad0d91ef85948b41fcdd98affe6e5109b',1,'audio_tools::RTSPAudioSource']]],
   ['default_5fmime_50',['default_mime',['../classaudio__tools_1_1_mime_detector.html#a1703763b5b0986489e9a347a7e529c65',1,'audio_tools::MimeDetector']]],
