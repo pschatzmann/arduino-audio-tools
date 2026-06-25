@@ -15,11 +15,18 @@
 
 namespace audio_tools {
 
+/**
+ * @brief Defines the channel mapping scenarios for Opus MultiStream: default
+ * is OPUS_CHANNEL_MAPPING_COMBINED which treats the channels as a single stream
+ * (e.g. stereo). OPUS_CHANNEL_MAPPING_SEPARATE treats each channel as a
+ * separate stream (e.g. 2 mono channels). OPUS_CHANNEL_MAPPING_CUSTOM allows
+ * for a custom mapping of channels to streams.
+ */
 enum OpusChannelMapping {
-  OPUS_CHANNEL_MAPPING_COMBINED = 0, // e.g. stereo
-  OPUS_CHANNEL_MAPPING_SEPARATE = 1, // e.g. 2 mono channels
+  OPUS_CHANNEL_MAPPING_COMBINED = 0,  // e.g. stereo
+  OPUS_CHANNEL_MAPPING_SEPARATE = 1,  // e.g. 2 mono channels
   OPUS_CHANNEL_MAPPING_CUSTOM = 2
-};  
+};
 
 /**
  * @brief Settings for Opus MultiStream Decoder
@@ -39,7 +46,7 @@ struct OpusMultiStreamSettings : public AudioInfo {
   OpusChannelMapping default_channel_mapping = OPUS_CHANNEL_MAPPING_COMBINED;
   unsigned char mapping[255] = {};
 
-  void setupChannelMapping(){
+  void setupChannelMapping() {
     switch (default_channel_mapping) {
       case OPUS_CHANNEL_MAPPING_SEPARATE:
         setupSeparateChannelsMapping();
