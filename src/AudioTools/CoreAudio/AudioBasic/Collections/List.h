@@ -366,8 +366,8 @@ class List {
             assert(first.next!=nullptr);
             assert(last.prior!=nullptr);
             if (empty()){
-                assert(first.next = &last);
-                assert(last.prior = &first);
+                assert(first.next == &last);
+                assert(last.prior == &first);
             }
         }
 

@@ -105,7 +105,7 @@ class HttpChunkReader : public HttpLineReader {
  protected:
   int open_chunk_len = 0;
   bool has_ended = false;
-  HttpReplyHeader* http_header_ptr;
+  HttpReplyHeader* http_header_ptr = nullptr;
   int timeout = 0;
 
   void removeCRLF(Client& client) {

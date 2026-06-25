@@ -136,6 +136,10 @@ class HttpHeader {
     LOGD("HttpHeader::put -> %s", (const char*)line);
     StrView keyStr(line);
     int pos = keyStr.indexOf(":");
+    if (pos <= 0) {
+      LOGD("HttpHeader::put - no key found in %s", line);
+      return *this;
+    }
     char* key = (char*)line;
     key[pos] = 0;
 

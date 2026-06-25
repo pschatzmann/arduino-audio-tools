@@ -50,17 +50,12 @@ class HttpLineReader {
           break;
         } else {
           // remove cr lf
-          if (j >= 1) {
-            if (str[j - 1] == '\r') {
-              // remove cr
-              str[j - 1] = 0;
-              break;
-            } else {
-              // remove nl
-              str[j] = 0;
-              break;
-            }
+          if (j >= 1 && str[j - 1] == '\r') {
+            str[j - 1] = 0;
+          } else {
+            str[j] = 0;
           }
+          break;
         }
       }
       if (!is_buffer_overflow) {

@@ -330,14 +330,15 @@ class StrView {
   /// we can assign an int
   virtual void operator=(int value) { set(value); }
 
-  /// shift characters to the right -> we just move the pointer
+  /// shift characters to the left -> we just move the pointer
   virtual void operator<<(int n) {
+    if (n <= 0 || n > len) return;
     if (isConst()) {
       this->chars += n;
-      this->len -= n;
     } else {
-      memmove(this->chars, this->chars + n, len + 1);
+      memmove(this->chars, this->chars + n, len - n + 1);
     }
+    this->len -= n;
   }
 
   virtual char operator[](int index) { return chars[index]; }
@@ -526,9 +527,9 @@ class StrView {
 
   /// remove trailing spaces
   virtual void rtrim() {
-    if (chars == nullptr) return;
+    if (chars == nullptr || len == 0) return;
     if (!isConst()) {
-      while (isspace(chars[len])) {
+      while (len > 0 && isspace(chars[len - 1])) {
         len--;
         chars[len] = 0;
       }
