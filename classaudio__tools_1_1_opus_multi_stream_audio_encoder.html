@@ -178,9 +178,13 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a01cdff9fb397966eed50aae3e8f64d81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdad90adc3ba71f7b1e16444c23b5502" id="r_acdad90adc3ba71f7b1e16444c23b5502"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_opus_multi_stream_audio_encoder.html#acdad90adc3ba71f7b1e16444c23b5502">p_print</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td></tr>
 <tr class="separator:acdad90adc3ba71f7b1e16444c23b5502"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4587fed36d16364cf600147115b64f1" id="r_ab4587fed36d16364cf600147115b64f1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_opus_multi_stream_audio_encoder.html#ab4587fed36d16364cf600147115b64f1">packet</a> {0}</td></tr>
+<tr class="separator:ab4587fed36d16364cf600147115b64f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Encoder for Opus multistream audio. Supports up to 255 channels by combining multiple Opus streams into a single packet. Each fully encoded frame is written to the output stream. </p>
+<dl class="section warning"><dt>Warning</dt><dd>The decoder needs a lot of stack space: SET_LOOP_TASK_STACK_SIZE(16
+* 1024);</dd></dl>
 <p>Depends on <a href="https://github.com/pschatzmann/arduino-libopus.git">https://github.com/pschatzmann/arduino-libopus.git</a></p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
@@ -1054,6 +1058,28 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="class_print.html">Print</a>* p_print = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab4587fed36d16364cf600147115b64f1" name="ab4587fed36d16364cf600147115b64f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4587fed36d16364cf600147115b64f1">&#9670;&#160;</a></span>packet</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&gt; packet {0}</td>
         </tr>
       </table>
   </td>
