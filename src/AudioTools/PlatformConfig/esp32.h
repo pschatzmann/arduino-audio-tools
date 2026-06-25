@@ -68,7 +68,7 @@
 #if defined(ESP32)
 #  define USE_PSRAM
 #  define USE_STRTOD
-#  define USE_INITIALIZER_LIST
+//#  define USE_INITIALIZER_LIST
 // We need to use accept instead of available
 #  if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0) 
 #    define USE_SERVER_ACCEPT true              
