@@ -880,6 +880,19 @@ class FormatConverterStream : public ReformatBaseStream {
            channelFormatConverter.getByteFactor();
   }
 
+  /// Returns the sample rate converter stream
+  ResampleStream& getResampleStream() { return sampleRateConverter; }
+
+  /// Returns the channel format converter stream
+  ChannelFormatConverterStream& getChannelFormatConverterStream() {
+    return channelFormatConverter;
+  }
+
+  /// Returns the number format converter stream
+  NumberFormatConverterStream& getNumberFormatConverterStream() {
+    return numberFormatConverter;
+  }
+
  protected:
   AudioInfo& from_cfg = info;
   AudioInfo to_cfg;
