@@ -60,7 +60,7 @@ var searchData=
   ['header_5fis_5favi_57',['header_is_avi',['../classaudio__tools_1_1_a_v_i_decoder.html#ad6822df19a5118b15381f9d171c5d7b9',1,'audio_tools::AVIDecoder']]],
   ['header_5fpackets_58',['header_packets',['../classaudio__tools_1_1_vorbis_decoder.html#a4fa08ed10492a25af2e3c9b8a08fcc3c',1,'audio_tools::VorbisDecoder']]],
   ['header_5fref_59',['header_ref',['../classaudio__tools_1_1_a_d_t_s_parser.html#a4db471315f2894ffce977f13b6c7d13f',1,'audio_tools::ADTSParser']]],
-  ['header_5fsize_60',['header_size',['../classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#a45d4c712694f9df64529e4954ba4e5ad',1,'audio_tools::RTSPAudioStreamerBase::HEADER_SIZE'],['../classaudio__tools_1_1_binary_container_decoder.html#ac680d4d90edb714e35ee4189d36b93a2',1,'audio_tools::BinaryContainerDecoder::header_size']]],
+  ['header_5fsize_60',['header_size',['../classaudio__tools_1_1_binary_container_decoder.html#ac680d4d90edb714e35ee4189d36b93a2',1,'audio_tools::BinaryContainerDecoder::header_size'],['../classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#a45d4c712694f9df64529e4954ba4e5ad',1,'audio_tools::RTSPAudioStreamerBase::HEADER_SIZE']]],
   ['header_5fwritten_61',['header_written',['../classaudio__tools_1_1_w_a_v_encoder.html#a4f529ef69928bce7e8a1b4e760048791',1,'audio_tools::WAVEncoder']]],
   ['headerinfo_62',['headerinfo',['../classaudio__tools_1_1_w_a_v_header.html#ad507493ca5140b4fc3685cb5996b24f5',1,'audio_tools::WAVHeader::headerInfo'],['../classaudio__tools_1_1_wav_i_m_a_header.html#a6eedfe4c684357b6bc741bdd8f27dbb9',1,'audio_tools::WavIMAHeader::headerInfo']]],
   ['headerline_63',['headerLine',['../classaudio__tools_1_1_http_header.html#a450f70a77d4977bcc24ae4629948370e',1,'audio_tools::HttpHeader']]],
