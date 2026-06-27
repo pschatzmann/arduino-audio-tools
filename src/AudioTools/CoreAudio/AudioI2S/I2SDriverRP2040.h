@@ -205,9 +205,17 @@ class I2SDriverRP2040 : public I2SDriverBase {
         return false;
       }
     } else {
-      // use pin_data (if not set use pin_data_rx)
-      int pin = cfg.pin_data;
-      if (pin == -1) pin = cfg.pin_data_rx;
+      // use tx pin for tx mode
+      if (cfg.rx_tx_mode == RX_MODE && cfg.pin_data_rx != -1) {
+        pin = cfg.pin_data_rx;
+      } 
+      // use rx pin for rx mode
+      if (cfg.rx_tx_mode == TX_MODE && cfg.pin_data_tx != -1) {
+        pin = cfg.pin_data_tx;
+      } 
+      // default to pin_data if no specific pin is set
+      if (pin == -1) pin = cfg.pin_data;
+
       if (!i2s.setDATA(pin)) {
         LOGE("Could not set pin_data: %d with pin_data()", pin);
         return false;
