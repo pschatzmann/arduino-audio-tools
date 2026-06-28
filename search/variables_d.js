@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['m_0',['m',['../group___echo_state.html#ga5e78dbd5fd0fc01ba7b98dd15e27221e',1,'audio_tools::EchoState_::M'],['../group___echo_state.html#ga82b80373cd8045e89bc30f24918f5845',1,'audio_tools::echo_float_t::m']]],
+  ['m_0',['m',['../group___echo_state.html#ga82b80373cd8045e89bc30f24918f5845',1,'audio_tools::echo_float_t::m'],['../group___echo_state.html#ga5e78dbd5fd0fc01ba7b98dd15e27221e',1,'audio_tools::EchoState_::M']]],
   ['m_5factual_1',['m_actual',['../classaudio__tools_1_1_r_t_t_t_l_output.html#a5674768dce52e47fa2e55a3615e369e1',1,'audio_tools::RTTTLOutput']]],
   ['m_5faddr_2',['m_addr',['../classaudio__tools_1_1_r_t_s_p_client.html#a4528d55f907280215102cff76a029bbc',1,'audio_tools::RTSPClient']]],
   ['m_5famplitude_3',['m_amplitude',['../classaudio__tools_1_1_sine_generator.html#af9afc98584f86e841e207cef38f7f269',1,'audio_tools::SineGenerator']]],

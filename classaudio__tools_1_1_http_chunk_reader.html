@@ -118,9 +118,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a11fa9692e20bc0ef11ef34ec514843b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8a38528866c46ed49041c59836444bf" id="r_ac8a38528866c46ed49041c59836444bf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_http_line_reader.html#ac8a38528866c46ed49041c59836444bf">readlnInternal</a> (<a class="el" href="class_stream.html">Stream</a> &amp;client, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *str, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> len, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">incl_nl</a>=<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">true</a>)</td></tr>
 <tr class="separator:ac8a38528866c46ed49041c59836444bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0568dfd33619b44c33f3fb1a5fdb820a" id="r_a0568dfd33619b44c33f3fb1a5fdb820a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_http_chunk_reader.html#a0568dfd33619b44c33f3fb1a5fdb820a">setTimeout</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">timeoutMs</a>)</td></tr>
-<tr class="memdesc:a0568dfd33619b44c33f3fb1a5fdb820a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timout is just used for logging.  <br /></td></tr>
-<tr class="separator:a0568dfd33619b44c33f3fb1a5fdb820a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -137,8 +134,6 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:aab7d7623f48c823838290e473fcbc99b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbfe189cc7bfaf3b831c809451320536" id="r_adbfe189cc7bfaf3b831c809451320536"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_http_chunk_reader.html#adbfe189cc7bfaf3b831c809451320536">open_chunk_len</a> = 0</td></tr>
 <tr class="separator:adbfe189cc7bfaf3b831c809451320536"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a493b57f443cc38b3d3df9c1e584d9d82" id="r_a493b57f443cc38b3d3df9c1e584d9d82"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_http_chunk_reader.html#a493b57f443cc38b3d3df9c1e584d9d82">timeout</a> = 0</td></tr>
-<tr class="separator:a493b57f443cc38b3d3df9c1e584d9d82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Http might reply with chunks. So we need to dechunk the data. see <a href="https://en.wikipedia.org/wiki/Chunked_transfer_encoding">https://en.wikipedia.org/wiki/Chunked_transfer_encoding</a>. </p>
@@ -450,34 +445,6 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a0568dfd33619b44c33f3fb1a5fdb820a" name="a0568dfd33619b44c33f3fb1a5fdb820a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0568dfd33619b44c33f3fb1a5fdb820a">&#9670;&#160;</a></span>setTimeout()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> setTimeout </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
-          <td class="paramname"><em>timeoutMs</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Timout is just used for logging. </p>
-
-</div>
-</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="a18d761cb8ab8315d237eb87613efb83b" name="a18d761cb8ab8315d237eb87613efb83b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a18d761cb8ab8315d237eb87613efb83b">&#9670;&#160;</a></span>has_ended</h2>
@@ -534,28 +501,6 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> open_chunk_len = 0</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a493b57f443cc38b3d3df9c1e584d9d82" name="a493b57f443cc38b3d3df9c1e584d9d82"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a493b57f443cc38b3d3df9c1e584d9d82">&#9670;&#160;</a></span>timeout</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> timeout = 0</td>
         </tr>
       </table>
   </td>
