@@ -22,12 +22,6 @@ class HttpLineReader {
                              bool incl_nl = true) {
     int result = 0;
     LOGD("HttpLineReader %s", "readlnInternal");
-    // if we do not have any data we stop
-    if (client.peek() == -1) {
-      LOGW("HttpLineReader %s", "readlnInternal->no Data");
-      str[0] = 0;
-      return -1;
-    }
 
     // process characters until we find a new line
     bool is_buffer_overflow = false;
@@ -35,6 +29,11 @@ class HttpLineReader {
     while (true) {
       int c = client.read();
       if (c == -1) {
+        if (result == 0) {
+          LOGW("HttpLineReader %s", "readlnInternal->no Data");
+          str[0] = 0;
+          return -1;
+        }
         break;
       }
 

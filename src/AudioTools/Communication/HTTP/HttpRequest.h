@@ -26,9 +26,7 @@ class HttpRequest : public BaseStream {
  public:
 //  friend class URLStream;
 
-  HttpRequest(){
-    chunk_reader.setTimeout(client_timeout);
-  };
+  HttpRequest() = default;
 
   ~HttpRequest() { end(); }
 
@@ -349,9 +347,8 @@ class HttpRequest : public BaseStream {
   }
 
   /// Defines the client timeout in ms
-  void setTimeout(size_t timeoutMs) { 
+  void setTimeout(size_t timeoutMs) {
     client_timeout = timeoutMs;
-    chunk_reader.setTimeout(client_timeout);
     if(client_ptr != nullptr){
       client_ptr->setTimeout(timeoutMs);
     }
