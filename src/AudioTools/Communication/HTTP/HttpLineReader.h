@@ -16,61 +16,30 @@ class HttpLineReader {
   /// Default constructor
   HttpLineReader() = default;
 
-  // reads up the the next CR LF - but never more then the indicated len.
-  // returns the number of characters read including crlf
+  /// reads up the the next CR LF - but never more then the indicated len.
   virtual int readlnInternal(Stream& client, uint8_t* str, int len,
                              bool incl_nl = true) {
-    int result = 0;
     LOGD("HttpLineReader %s", "readlnInternal");
-
-    // process characters until we find a new line
-    bool is_buffer_overflow = false;
-    int j = 0;
-    while (true) {
-      int c = client.read();
-      if (c == -1) {
-        if (result == 0) {
-          LOGW("HttpLineReader %s", "readlnInternal->no Data");
-          str[0] = 0;
-          return -1;
-        }
-        break;
-      }
-
-      if (j < len) {
-        result++;
-      } else {
-        is_buffer_overflow = true;
-      }
-
-      if (c == '\n') {
-        if (incl_nl) {
-          str[j] = c;
-          break;
-        } else {
-          // remove cr lf
-          if (j >= 1 && str[j - 1] == '\r') {
-            str[j - 1] = 0;
-          } else {
-            str[j] = 0;
-          }
-          break;
-        }
-      }
-      if (!is_buffer_overflow) {
-        str[j] = c;
-      }
-      j++;
-    }
-    if (result > 0) {
-      str[result - 1] = 0;
-    } else {
+    // readBytesUntil uses timedRead() which respects setTimeout()
+    int result = client.readBytesUntil('\n', (char*)str, len);
+    // Return -1 if no data was read. 
+    if (result == 0) {
+      LOGW("HttpLineReader %s", "readlnInternal->no Data");
       str[0] = 0;
+      return -1;
     }
-    if (is_buffer_overflow) {
-      LOGE("HttpLineReader %s", "readlnInternal->cut off too long line");
+    if (incl_nl) {
+      // we need to add the new line character since it was removed by readBytesUntil
+      if (result < len) {
+        str[result++] = '\n';
+      }
+    } else {
+      // remove trailing CR
+      if (result > 0 && str[result - 1] == '\r') {
+        result--;
+      }
     }
-
+    str[result] = 0;
     return result;
   }
 };
