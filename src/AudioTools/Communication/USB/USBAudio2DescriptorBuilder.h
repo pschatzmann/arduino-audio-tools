@@ -158,15 +158,23 @@ class USBAudio2DescriptorBuilder {
   }
 
   // Isochronous packet size for one 1 ms frame at a given rate.
+  // +1 extra sample provides headroom for clock-drift compensation: the host
+  // may send ceil(rate/1000)+1 samples in occasional frames to stay in sync.
   uint16_t calcPacketSizeForRate(uint32_t rate) const {
-    return (uint16_t)((p_config->bits_per_sample / 8) * p_config->channels *
-                      ((rate + 999) / 1000));
+    const uint16_t bytes_per_sample = (p_config->bits_per_sample / 8) * p_config->channels;
+    return bytes_per_sample * (uint16_t)(((rate + 999) / 1000) + 1);
   }
 
   // Isochronous packet size for one 1 ms frame at the configured rate/format.
+  // +1 extra sample is required for Windows: at rates that are exact multiples
+  // of 1000 Hz (e.g. 48000 Hz = exactly 48 samples/frame), Windows' USB audio
+  // driver may deliver 49 samples in some frames for synchronisation, causing
+  // a descriptor rejection when wMaxPacketSize is set to the nominal 48-sample
+  // value.  Rates like 44100 Hz already have implicit headroom from ceiling
+  // division (44.1 → 45), but the +1 makes this safe for all rates.
   uint16_t calcMaxPacketSize() const {
-    return (uint16_t)((p_config->bits_per_sample / 8) * p_config->channels *
-                      ((p_config->sample_rate + 999) / 1000));
+    const uint16_t bytes_per_sample = (p_config->bits_per_sample / 8) * p_config->channels;
+    return bytes_per_sample * (uint16_t)(((p_config->sample_rate + 999) / 1000) + 1);
   }
 
  protected:
