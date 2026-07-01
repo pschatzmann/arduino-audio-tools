@@ -500,10 +500,10 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ab76d7d0cabb8c67ca3229593914e5224"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee2c24db80d059c72be2137090a6abe0" id="r_aee2c24db80d059c72be2137090a6abe0"><td class="memItemLeft" align="right" valign="top">std::vector&lt; audiod_function_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#aee2c24db80d059c72be2137090a6abe0">audiod_fct_</a></td></tr>
 <tr class="separator:aee2c24db80d059c72be2137090a6abe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6003de415b57812fb24a566c2b14ab2f" id="r_a6003de415b57812fb24a566c2b14ab2f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html#a6003de415b57812fb24a566c2b14ab2f">buffer_rx_</a> {0}</td></tr>
-<tr class="separator:a6003de415b57812fb24a566c2b14ab2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8c58fc7b3744dd4bcea2af0d0d502d4" id="r_ab8c58fc7b3744dd4bcea2af0d0d502d4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html#ab8c58fc7b3744dd4bcea2af0d0d502d4">buffer_tx_</a> {0}</td></tr>
-<tr class="separator:ab8c58fc7b3744dd4bcea2af0d0d502d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a745c116c11377c1b284f6567d8d6648b" id="r_a745c116c11377c1b284f6567d8d6648b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_ring_buffer_s_p_s_c.html">RingBufferSPSC</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html#a745c116c11377c1b284f6567d8d6648b">buffer_rx_</a></td></tr>
+<tr class="separator:a745c116c11377c1b284f6567d8d6648b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a264972de087b2253024d91f9da160277" id="r_a264972de087b2253024d91f9da160277"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_ring_buffer_s_p_s_c.html">RingBufferSPSC</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html#a264972de087b2253024d91f9da160277">buffer_tx_</a></td></tr>
+<tr class="separator:a264972de087b2253024d91f9da160277"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48e2afc8051a00f8a5a1eb034c4161fe" id="r_a48e2afc8051a00f8a5a1eb034c4161fe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html">USBAudioConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a48e2afc8051a00f8a5a1eb034c4161fe">config_</a></td></tr>
 <tr class="separator:a48e2afc8051a00f8a5a1eb034c4161fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7de68334055feefe8ab9a6d41c81a12" id="r_ad7de68334055feefe8ab9a6d41c81a12"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint16_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ad7de68334055feefe8ab9a6d41c81a12">ctrl_buf_sz_</a></td></tr>
@@ -580,6 +580,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a560e48d81bc8e7bc02252f5c3a02a84b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad69c4bafe5ef55641fc67c8c212bbdca" id="r_ad69c4bafe5ef55641fc67c8c212bbdca"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">volatile</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ad69c4bafe5ef55641fc67c8c212bbdca">tx_xferred_last_</a> = 0</td></tr>
 <tr class="separator:ad69c4bafe5ef55641fc67c8c212bbdca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a558c5e9e276ba28c5fd4190a3b663efa" id="r_a558c5e9e276ba28c5fd4190a3b663efa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a558c5e9e276ba28c5fd4190a3b663efa">usb_task_active_</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">false</a></td></tr>
+<tr class="separator:a558c5e9e276ba28c5fd4190a3b663efa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d49e90afa25560b9a6c315b94b76f19" id="r_a0d49e90afa25560b9a6c315b94b76f19"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a0d49e90afa25560b9a6c315b94b76f19">volume_</a></td></tr>
 <tr class="separator:a0d49e90afa25560b9a6c315b94b76f19"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0060b5b523cea292a08f07a64aaf71fe" id="r_a0060b5b523cea292a08f07a64aaf71fe"><td class="memItemLeft" align="right" valign="top">std::function&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a0060b5b523cea292a08f07a64aaf71fe">volume_cb_</a></td></tr>
@@ -5404,8 +5406,8 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 
 </div>
 </div>
-<a id="a6003de415b57812fb24a566c2b14ab2f" name="a6003de415b57812fb24a566c2b14ab2f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6003de415b57812fb24a566c2b14ab2f">&#9670;&#160;</a></span>buffer_rx_</h2>
+<a id="a745c116c11377c1b284f6567d8d6648b" name="a745c116c11377c1b284f6567d8d6648b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a745c116c11377c1b284f6567d8d6648b">&#9670;&#160;</a></span>buffer_rx_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -5414,7 +5416,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&gt; buffer_rx_ {0}</td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_ring_buffer_s_p_s_c.html">RingBufferSPSC</a>&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&gt; buffer_rx_</td>
         </tr>
       </table>
   </td>
@@ -5426,8 +5428,8 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 
 </div>
 </div>
-<a id="ab8c58fc7b3744dd4bcea2af0d0d502d4" name="ab8c58fc7b3744dd4bcea2af0d0d502d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab8c58fc7b3744dd4bcea2af0d0d502d4">&#9670;&#160;</a></span>buffer_tx_</h2>
+<a id="a264972de087b2253024d91f9da160277" name="a264972de087b2253024d91f9da160277"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a264972de087b2253024d91f9da160277">&#9670;&#160;</a></span>buffer_tx_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -5436,7 +5438,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&gt; buffer_tx_ {0}</td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_ring_buffer_s_p_s_c.html">RingBufferSPSC</a>&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&gt; buffer_tx_</td>
         </tr>
       </table>
   </td>
@@ -6319,6 +6321,28 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">volatile</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint32_t</a> tx_xferred_last_ = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a558c5e9e276ba28c5fd4190a3b663efa" name="a558c5e9e276ba28c5fd4190a3b663efa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a558c5e9e276ba28c5fd4190a3b663efa">&#9670;&#160;</a></span>usb_task_active_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> usb_task_active_ = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">false</a></td>
         </tr>
       </table>
   </td>
