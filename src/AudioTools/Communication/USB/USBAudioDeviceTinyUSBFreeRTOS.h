@@ -56,6 +56,8 @@ class USBAudioDeviceTinyUSBFreeRTOS : public USBAudioDeviceTinyUSB {
 
   void startUsbTask() {
     if (usb_task_.getTaskHandle() != nullptr) return;
+    LOGI("Starting USB task: stack=%d, priority=%d",
+         config_.usb_task_stack_size, config_.usb_task_priority);
     usb_task_.create("tud", config_.usb_task_stack_size,
                      config_.usb_task_priority);
     usb_task_.begin([this]() {
