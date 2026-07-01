@@ -816,6 +816,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
 
  protected:
   bool is_started_ = false;
+  bool usb_task_active_ = false;  // true while a dedicated tud_task() FreeRTOS task is running
   bool tx_xfer_armed_ = false;
   volatile uint32_t xfer_cb_tx_count_ = 0;
   volatile uint32_t tx_fifo_read_total_ = 0;
@@ -905,7 +906,10 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
    *         FreeRTOS task calls tud_task() continuously. */
   void serviceTinyUSB() {
 #ifdef USE_TINYUSB
-    tud_task();
+    // Skip when a dedicated FreeRTOS USB task is active — tud_task() is not
+    // re-entrant; calling it from two contexts concurrently corrupts TinyUSB's
+    // internal event queue and causes random hangs.
+    if (!usb_task_active_) tud_task();
 #endif
   }
 
