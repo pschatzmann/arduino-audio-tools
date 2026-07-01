@@ -92,9 +92,29 @@ struct USBAudioConfig : public AudioInfo {
   /// Use a flat contiguous buffer for TX instead of a circular FIFO.
   /// Required when the upstream audio driver uses DMA.
   bool use_linear_buffer_tx = true;
+  
+#if defined(FREERTOS_H) || defined(INC_FREERTOS_H)
+  // ── FreeRTOS USB task (RP2040 + FreeRTOS only) ───────────────────────────
+  /// When true (default), begin() launches a dedicated FreeRTOS task that
+  /// calls tud_task() continuously.  This keeps the USB IN endpoint re-armed
+  /// regardless of what the audio loop is doing, and allows the TX buffer to
+  /// use a blocking write (see usb_task_write_wait_ms) instead of busy-spinning.
+  /// Set to false if you manage your own USB task.
+  bool enable_usb_task = true;
+  /// Stack depth for the USB task in bytes.
+  int usb_task_stack_size = 4096;
+  /// FreeRTOS priority for the USB task.  Should be high enough to run at
+  /// least once per 1 ms USB frame, but below audio-critical tasks.
+  int usb_task_priority = configMAX_PRIORITIES - 1;
+  /// TX buffer blocking-write timeout in ms when the dedicated USB task is
+  /// active.  0 = non-blocking (safe but busy-spins); 5 = block up to 5 ms
+  /// (efficient, relies on USB task to drain the buffer).
+  int usb_task_write_wait_ms = 5;
+
+#endif
   // ── Volume Handling ────────────────────────────────────────────────────────
   /// When true we will process the volume and mute settings in the audio
-  /// stream. When false we will not process the volume and mute settings but just 
+  /// stream. When false we will not process the volume and mute settings but just
   /// provide the data for external processing.
   bool volume_active = false;
 
