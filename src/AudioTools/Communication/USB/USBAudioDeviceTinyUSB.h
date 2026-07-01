@@ -4,6 +4,14 @@
 #include <cstring>
 
 #include "AudioTools/Communication/USB/USBAudioDeviceBase.h"
+#include "AudioTools/Concurrency/LockFree/RingBufferSPSC.h"
+
+// When FreeRTOS is present, tasks can migrate between cores and the SPSC
+// guarantee no longer holds.  Use the FreeRTOS StreamBuffer instead, which
+// is the same solution as on ESP32.
+#if defined(FREERTOS_H) || defined(INC_FREERTOS_H)
+#  include "AudioTools/Concurrency/RTOS/BufferRTOS.h"
+#endif
 
 namespace audio_tools {
 
@@ -97,8 +105,19 @@ class USBAudioDeviceTinyUSB : public USBAudioDeviceBase,
     if (isEpOutEnabled()) buffer_rx_.resize(block_sz *block_cnt);
   }
 
-  RingBuffer<uint8_t> buffer_tx_{0};
-  RingBuffer<uint8_t> buffer_rx_{0};
+#if defined(FREERTOS_H) || defined(INC_FREERTOS_H)
+  // FreeRTOS StreamBuffer: tasks can migrate between cores, so SPSC atomics
+  // alone are not sufficient.  Mirror the same wait-time policy as ESP32:
+  // TX write may block 5 ms (copier context); all other directions never block
+  // (ISR / polling context).
+  BufferRTOS<uint8_t> buffer_tx_{0, 0, 5, 0};
+  BufferRTOS<uint8_t> buffer_rx_{0, 1, 0, 0};
+#else
+  // No RTOS: bare-metal single-core or core-1 loop1() pattern.
+  // RingBufferSPSC is safe and has lower overhead than a FreeRTOS StreamBuffer.
+  RingBufferSPSC<uint8_t> buffer_tx_;
+  RingBufferSPSC<uint8_t> buffer_rx_;
+#endif
 
   void setupDescrBuffer() {
     static uint8_t buffer[USB_DESCR_MAX_LEN];
