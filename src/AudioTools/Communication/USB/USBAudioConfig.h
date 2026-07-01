@@ -101,8 +101,9 @@ struct USBAudioConfig : public AudioInfo {
   /// use a blocking write (see usb_task_write_wait_ms) instead of busy-spinning.
   /// Set to false if you manage your own USB task.
   bool enable_usb_task = true;
-  /// Stack depth for the USB task in bytes.
-  int usb_task_stack_size = 4096;
+  /// Stack depth for the USB task passed directly to xTaskCreate (words).
+  /// On 32-bit MCUs 1 word = 4 bytes, so the default 1024 = 4 KB.
+  int usb_task_stack_size = 1024;
   /// FreeRTOS priority for the USB task.  Should be high enough to run at
   /// least once per 1 ms USB frame, but below audio-critical tasks.
   int usb_task_priority = configMAX_PRIORITIES - 1;
