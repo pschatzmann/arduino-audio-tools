@@ -1107,7 +1107,14 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
 
     switch (audio->feedback.compute_method) {
       case AUDIO_FEEDBACK_METHOD_FIFO_COUNT: {
-        uint32_t ff_count = tu_fifo_count(&audio->ep_out_ff);
+        // In linear-buffer mode, audio data flows lin_buf_out → bufferRx(),
+        // completely bypassing ep_out_ff.  Reading ep_out_ff would always
+        // return 0, driving the feedback to min_value and causing the host
+        // to gradually reduce its send rate until the buffer drains (audible
+        // periodic drop every 5-10 s).  Use the platform RX ring buffer level.
+        uint32_t ff_count = isUseLinearBufferRx()
+            ? (uint32_t)bufferRx().available()
+            : tu_fifo_count(&audio->ep_out_ff);
         // Exponential weighted average keeps the level estimate stable
         audio->feedback.compute.fifo_count.fifo_lvl_avg =
             audio->feedback.compute.fifo_count.fifo_lvl_avg -

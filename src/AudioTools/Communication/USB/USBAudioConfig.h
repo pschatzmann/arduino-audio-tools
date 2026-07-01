@@ -48,7 +48,10 @@ struct USBAudioConfig : public AudioInfo {
   // ── Buffering ─────────────────────────────────────────────────────────────
   /// Depth of the audio FIFO expressed as a number of 1 ms packets.
   /// Larger values reduce the risk of underrun/overrun at the cost of latency.
-  uint8_t fifo_packets = 16;
+  /// 32 packets (~32 ms at 44.1 kHz stereo 16-bit, ~6 kB RAM) is the minimum
+  /// reliable value for RP2040 at 133 MHz: the I2S DMA write can block for
+  /// 2-3 ms, and 16 packets leave no margin for those stalls.
+  uint8_t fifo_packets = 32;
 
   // ── Device identity ───────────────────────────────────────────────────────
   uint16_t vid = 0xCafe;
