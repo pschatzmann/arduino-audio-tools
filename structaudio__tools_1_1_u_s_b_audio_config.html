@@ -167,7 +167,7 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:ac64ae5336c72acfa52ad3a19b4fb079f" id="r_ac64ae5336c72acfa52ad3a19b4fb079f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html#ac64ae5336c72acfa52ad3a19b4fb079f">ep_out</a> = 0x03</td></tr>
 <tr class="memdesc:ac64ae5336c72acfa52ad3a19b4fb079f"><td class="mdescLeft">&#160;</td><td class="mdescRight">ISO OUT (host → device, playback/speaker)  <br /></td></tr>
 <tr class="separator:ac64ae5336c72acfa52ad3a19b4fb079f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad14bedfcf8173ecdccac1e3b97bfb0d1" id="r_ad14bedfcf8173ecdccac1e3b97bfb0d1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html#ad14bedfcf8173ecdccac1e3b97bfb0d1">fifo_packets</a> = 16</td></tr>
+<tr class="memitem:ad14bedfcf8173ecdccac1e3b97bfb0d1" id="r_ad14bedfcf8173ecdccac1e3b97bfb0d1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html#ad14bedfcf8173ecdccac1e3b97bfb0d1">fifo_packets</a> = 32</td></tr>
 <tr class="separator:ad14bedfcf8173ecdccac1e3b97bfb0d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7d7f14a513f288bd6eb21bfcc2291f4" id="r_ac7d7f14a513f288bd6eb21bfcc2291f4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html#ac7d7f14a513f288bd6eb21bfcc2291f4">itf_num_ac</a> = 0</td></tr>
 <tr class="separator:ac7d7f14a513f288bd6eb21bfcc2291f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -757,11 +757,11 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> fifo_packets = 16</td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> fifo_packets = 32</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Depth of the audio FIFO expressed as a number of 1 ms packets. Larger values reduce the risk of underrun/overrun at the cost of latency. </p>
+<p>Depth of the audio FIFO expressed as a number of 1 ms packets. Larger values reduce the risk of underrun/overrun at the cost of latency. 32 packets (~32 ms at 44.1 kHz stereo 16-bit, ~6 kB RAM) is the minimum reliable value for RP2040 at 133 MHz: the I2S DMA write can block for 2-3 ms, and 16 packets leave no margin for those stalls. </p>
 
 </div>
 </div>
