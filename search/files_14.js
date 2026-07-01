@@ -11,6 +11,7 @@ var searchData=
   ['usbaudiodevicebase_2eh_8',['USBAudioDeviceBase.h',['../_u_s_b_audio_device_base_8h.html',1,'']]],
   ['usbaudiodeviceesp32_2eh_9',['USBAudioDeviceESP32.h',['../_u_s_b_audio_device_e_s_p32_8h.html',1,'']]],
   ['usbaudiodevicetinyusb_2eh_10',['USBAudioDeviceTinyUSB.h',['../_u_s_b_audio_device_tiny_u_s_b_8h.html',1,'']]],
-  ['usbaudiodevicezephyr_2eh_11',['USBAudioDeviceZephyr.h',['../_u_s_b_audio_device_zephyr_8h.html',1,'']]],
-  ['usbaudiostream_2eh_12',['USBAudioStream.h',['../_u_s_b_audio_stream_8h.html',1,'']]]
+  ['usbaudiodevicetinyusbfreertos_2eh_11',['USBAudioDeviceTinyUSBFreeRTOS.h',['../_u_s_b_audio_device_tiny_u_s_b_free_r_t_o_s_8h.html',1,'']]],
+  ['usbaudiodevicezephyr_2eh_12',['USBAudioDeviceZephyr.h',['../_u_s_b_audio_device_zephyr_8h.html',1,'']]],
+  ['usbaudiostream_2eh_13',['USBAudioStream.h',['../_u_s_b_audio_stream_8h.html',1,'']]]
 ];

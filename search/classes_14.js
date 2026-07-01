@@ -15,5 +15,6 @@ var searchData=
   ['usbaudiodevicebase_12',['USBAudioDeviceBase',['../classaudio__tools_1_1_u_s_b_audio_device_base.html',1,'audio_tools']]],
   ['usbaudiodeviceesp32_13',['USBAudioDeviceESP32',['../classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html',1,'audio_tools']]],
   ['usbaudiodevicetinyusb_14',['USBAudioDeviceTinyUSB',['../classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html',1,'audio_tools']]],
-  ['usbaudiodevicezephyr_15',['USBAudioDeviceZephyr',['../classaudio__tools_1_1_u_s_b_audio_device_zephyr.html',1,'audio_tools']]]
+  ['usbaudiodevicetinyusbfreertos_15',['USBAudioDeviceTinyUSBFreeRTOS',['../classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b_free_r_t_o_s.html',1,'audio_tools']]],
+  ['usbaudiodevicezephyr_16',['USBAudioDeviceZephyr',['../classaudio__tools_1_1_u_s_b_audio_device_zephyr.html',1,'audio_tools']]]
 ];
