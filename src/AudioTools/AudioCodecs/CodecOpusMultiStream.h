@@ -275,18 +275,31 @@ class OpusMultiStreamAudioEncoder : public AudioEncoder {
   const char* mime() override { return "audio/opus"; }
 
   void setAudioInfo(AudioInfo from) override {
+    LOGD("OpusMultiStreamAudioEncoder::setAudioInfo: sample_rate: %d, channels: %d",
+         from.sample_rate, from.channels);  
     AudioEncoder::setAudioInfo(from);
     cfg.sample_rate = from.sample_rate;
     cfg.channels = from.channels;
     cfg.bits_per_sample = from.bits_per_sample;
+    // Restart the encoder
+    if (enc != nullptr) {
+      end();
+      begin();
+    }
   }
 
   bool begin() override {
+    LOGD("OpusMultiStreamAudioEncoder::begin: sample_rate: %d, channels: %d",
+         cfg.sample_rate, cfg.channels);
     int err;
     int size =
         getFrameSizeSamples(cfg.sample_rate) * cfg.channels * sizeof(int16_t);
     frame.resize(size);
     assert(frame.data() != nullptr);
+
+    // make sure that the channel mapping is set up correctly
+    cfg.setupChannelMapping();
+
     int packet_len =
         OPUS_ENC_MAX_BUFFER_SIZE > 0 ? OPUS_ENC_MAX_BUFFER_SIZE : 512;
     packet.resize(packet_len);
