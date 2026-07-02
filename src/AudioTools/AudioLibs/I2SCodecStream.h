@@ -235,19 +235,27 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
     TRACED();
     setupI2SFunction();
     setupI2SPins();
+
+    if (!i2s.begin(cfg)){
+      TRACEE();
+      is_active = false;
+      return false;
+    }
+
+    delay(200); // wait for codec to be ready
+
     if (!beginCodec(cfg)) {
       TRACEE();
       is_active = false;
       return false;
     }
-    is_active = i2s.begin(cfg);
 
     // if setvolume was called before begin
     float tobeVol = VolumeSupport::volume();
-    if (is_active && tobeVol >= 0.0f) {
+    if (tobeVol >= 0.0f) {
       setVolume(tobeVol);
     }
-    return is_active;
+    return true;
   }
 
   /// if the cfg.i2s_function was not defined we determine the "correct" default value
