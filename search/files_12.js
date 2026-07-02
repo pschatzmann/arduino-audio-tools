@@ -12,7 +12,7 @@ var searchData=
   ['spiaudioslave_2eh_9',['SPIAudioSlave.h',['../_s_p_i_audio_slave_8h.html',1,'']]],
   ['stack_2eh_10',['Stack.h',['../_stack_8h.html',1,'']]],
   ['stdiostream_2eh_11',['StdioStream.h',['../_stdio_stream_8h.html',1,'']]],
-  ['stm32_2eh_12',['stm32.h',['../stm32_8h.html',1,'']]],
+  ['stm32_2eh_12',['stm32.h',['../_concurrency_2_s_t_m32_8h.html',1,'(Global Namespace)'],['../_platform_config_2_s_t_m32_8h.html',1,'(Global Namespace)']]],
   ['str_2eh_13',['Str.h',['../_str_8h.html',1,'']]],
   ['streamcopy_2eh_14',['StreamCopy.h',['../_stream_copy_8h.html',1,'']]],
   ['streamingdecoder_2eh_15',['StreamingDecoder.h',['../_streaming_decoder_8h.html',1,'']]],
