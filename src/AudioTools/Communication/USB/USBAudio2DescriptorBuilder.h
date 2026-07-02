@@ -227,11 +227,23 @@ class USBAudio2DescriptorBuilder {
     *p++ = 0x01;        // HEADER
     *p++ = 0x00;
     *p++ = 0x02;        // bcdADC 2.00
-    *p++ = 0x08;        // bCategory IO_BOX (generic)
+    *p++ = deviceCategory();
     *p++ = 0x00;        // wTotalLength LSB — patched by caller
     *p++ = 0x00;        // wTotalLength MSB — patched by caller
     *p++ = 0x00;        // bmControls
     return p;
+  }
+
+  // UAC2 bCategory:  Windows uses this to classify the audio endpoint.
+  // Using the wrong category (e.g. IO_BOX for a capture-only device) causes
+  // Windows to look for a playback path that does not exist and fail to
+  // enumerate the audio format (Details tab missing in microphone properties).
+  uint8_t deviceCategory() const {
+    bool has_in  = p_config->enable_ep_in;
+    bool has_out = p_config->enable_ep_out;
+    if (has_in && !has_out) return 0x03;  // Microphone
+    if (!has_in && has_out) return 0x01;  // Desktop Speaker
+    return 0x08;                          // I/O Box (bidirectional)
   }
 
   // UAC2 Clock Source Descriptor (8 bytes)
@@ -243,20 +255,24 @@ class USBAudio2DescriptorBuilder {
   //   D1..D0 = Clock Frequency  (01=read-only, 11=host-programmable)
   //   D3..D2 = Clock Validity   (01=read-only)
   //
-  // GET_RANGE returns 14 discrete sample rates (8 kHz – 192 kHz).
-  // Host can SET_CUR to any of those rates.
+  // Always declare "internal programmable" (0x03) with "host-programmable
+  // frequency" (0x07), even when only one rate is supported.  Windows 11's
+  // usbaudio2.sys requires the ability to round-trip a SET_CUR / GET_CUR for
+  // the clock frequency before it will populate the audio format in the device
+  // properties (Details tab) and accept the device in WASAPI.  With a "fixed"
+  // clock (0x01 / 0x05) Windows skips the SET_CUR step at integer rates
+  // (48000, 16000 Hz) and then fails to enumerate the format — the Details tab
+  // does not appear and Audacity returns error -9999.  At fractional rates
+  // (44100 Hz) it works by accident because the ceiling arithmetic in
+  // calcMaxPacketSize already signals the irregular-frame nature of the stream.
+  // The single-rate vs multi-rate distinction is carried by GET_RANGE only.
   uint8_t* writeClockSource(uint8_t* p, uint8_t clock_id) {
     *p++ = 8;
     *p++ = 0x24;        // CS_INTERFACE
     *p++ = 0x0A;        // CLOCK_SOURCE
     *p++ = clock_id;
-    if (p_config->enable_multi_sample_rate) {
-      *p++ = 0x03;      // bmAttributes: internal programmable clock
-      *p++ = 0x07;      // bmControls: freq host-programmable (11b), validity read-only (01b)
-    } else {
-      *p++ = 0x01;      // bmAttributes: internal fixed clock
-      *p++ = 0x05;      // bmControls: freq read-only (01b), validity read-only (01b)
-    }
+    *p++ = 0x03;        // bmAttributes: internal programmable clock
+    *p++ = 0x07;        // bmControls: freq host-programmable (11b), validity read-only (01b)
     *p++ = 0x00;        // bAssocTerminal
     *p++ = 0x00;        // iClockSource
     return p;
