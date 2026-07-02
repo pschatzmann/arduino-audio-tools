@@ -19,7 +19,7 @@
 #endif
 #endif
 #else
-#ifndef USE_TINYUSB
+#if !defined(USE_TINYUSB) && !defined(ARDUINO_ARCH_STM32) && !defined(IS_ZEPHYR)
 #error This Microcontroller has no Native USB interface
 #endif
 #endif

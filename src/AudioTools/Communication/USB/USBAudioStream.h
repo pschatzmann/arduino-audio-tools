@@ -2,10 +2,12 @@
 
 // Abstraction which provides the platform specific USBAudioDevice class implementation
 #include "AudioToolsConfig.h"
-#if defined(USE_TINYUSB)
+#include "AudioTools/Concurrency.h"
+
+#if defined(USE_TINYUSB) || defined(ARDUINO_ARCH_STM32)
 #  include "USBAudioDeviceBase.h"
 #  include "USBAudioDeviceTinyUSB.h"
-#  if defined(FREERTOS_H) || defined(INC_FREERTOS_H)
+#  if defined(USE_FREETROS)
 #    include "USBAudioDeviceTinyUSBFreeRTOS.h"
      namespace audio_tools { using USBAudioStream = USBAudioDeviceTinyUSBFreeRTOS; }
 #  else
