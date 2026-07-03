@@ -113,6 +113,11 @@ class USBAudioDeviceESP32 : public USBAudioDeviceBase {
     if (isEpOutEnabled()) buffer_rx_.resize(block_sz * block_cnt);
   }
 
+  /** @brief No-op: the arduino-esp32 framework already runs a dedicated
+   *  FreeRTOS task that calls tud_task() continuously, so the base class's
+   *  application-driven pumping must not also run here. */
+  void serviceTinyUSB() override {}
+
   /**
    * @brief Configure and start the ESP32 USB stack.
    *

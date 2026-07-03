@@ -902,15 +902,17 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
   void setConfig(const USBAudioConfig& cfg) { config_ = cfg; }
 
   /** @brief Process pending USB events on platforms where the application
-   *         drives the stack (RP2040).  No-op on ESP32 where a dedicated
-   *         FreeRTOS task calls tud_task() continuously. */
-  void serviceTinyUSB() {
-#ifdef USE_TINYUSB
-    // Skip when a dedicated FreeRTOS USB task is active — tud_task() is not
-    // re-entrant; calling it from two contexts concurrently corrupts TinyUSB's
-    // internal event queue and causes random hangs.
+   *         drives the stack (RP2040, STM32, ...). Skipped when a dedicated
+   *         FreeRTOS task already calls tud_task() continuously (see
+   *         usb_task_active_) - tud_task() is not re-entrant; calling it
+   *         from two contexts concurrently corrupts TinyUSB's internal
+   *         event queue and causes random hangs.
+   *
+   *         ESP32 (see USBAudioDeviceESP32) overrides this to an empty
+   *         no-op, since its own FreeRTOS task already calls tud_task()
+   *         continuously. */
+  virtual void serviceTinyUSB() {
     if (!usb_task_active_) tud_task();
-#endif
   }
 
   /** @brief Returns the TX audio buffer.  Must be overridden by subclasses. */
