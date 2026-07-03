@@ -4,7 +4,7 @@
 #include "AudioToolsConfig.h"
 #include "AudioTools/Concurrency.h"
 
-#if defined(USE_TINYUSB) || defined(ARDUINO_ARCH_STM32)
+#if defined(USE_TINYUSB) 
 #  include "USBAudioDeviceBase.h"
 #  include "USBAudioDeviceTinyUSB.h"
 #  if defined(USE_FREETROS)
@@ -13,6 +13,9 @@
 #  else
      namespace audio_tools { using USBAudioStream = USBAudioDeviceTinyUSB; }
 #  endif
+#elif defined(ARDUINO_ARCH_STM32)
+#  include "USBAudioDeviceTinyUSB.h"
+   namespace audio_tools { using USBAudioStream = USBAudioDeviceTinyUSB; }
 #elif defined(ESP32)
 #  include "USBAudioDeviceBase.h"
 #  include "USBAudioDeviceESP32.h"
