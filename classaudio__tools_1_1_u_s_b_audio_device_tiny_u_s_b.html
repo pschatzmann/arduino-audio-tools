@@ -456,9 +456,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a7422464f7c5c388caad12d04d0e7f7a5" id="r_a7422464f7c5c388caad12d04d0e7f7a5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a7422464f7c5c388caad12d04d0e7f7a5">sendInterruptNotification</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">ctrlSel</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> channel, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">entityID</a>)</td></tr>
 <tr class="memdesc:a7422464f7c5c388caad12d04d0e7f7a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send a UAC2 status/change notification via the AC interrupt EP.  <br /></td></tr>
 <tr class="separator:a7422464f7c5c388caad12d04d0e7f7a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a386480caacffe15855184c7cb8248d71" id="r_a386480caacffe15855184c7cb8248d71"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a386480caacffe15855184c7cb8248d71">serviceTinyUSB</a> ()</td></tr>
-<tr class="memdesc:a386480caacffe15855184c7cb8248d71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process pending USB events on platforms where the application drives the stack (RP2040). No-op on ESP32 where a dedicated FreeRTOS task calls <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">tud_task()</a> continuously.  <br /></td></tr>
-<tr class="separator:a386480caacffe15855184c7cb8248d71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48b1d353d0ce4953a22eeaec10852a23" id="r_a48b1d353d0ce4953a22eeaec10852a23"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a48b1d353d0ce4953a22eeaec10852a23">serviceTinyUSB</a> ()</td></tr>
+<tr class="memdesc:a48b1d353d0ce4953a22eeaec10852a23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process pending USB events on platforms where the application drives the stack (RP2040, STM32, ...). Skipped when a dedicated FreeRTOS task already calls <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">tud_task()</a> continuously (see usb_task_active_) - <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">tud_task()</a> is not re-entrant; calling it from two contexts concurrently corrupts TinyUSB's internal event queue and causes random hangs.  <br /></td></tr>
+<tr class="separator:a48b1d353d0ce4953a22eeaec10852a23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a27be07e636d9943c083f6bf6c8ea90" id="r_a4a27be07e636d9943c083f6bf6c8ea90"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a4a27be07e636d9943c083f6bf6c8ea90">setConfig</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html">USBAudioConfig</a> &amp;cfg)</td></tr>
 <tr class="memdesc:a4a27be07e636d9943c083f6bf6c8ea90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the USB audio configuration (use begin(cfg) instead).  <br /></td></tr>
 <tr class="separator:a4a27be07e636d9943c083f6bf6c8ea90"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -4028,8 +4028,8 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 
 </div>
 </div>
-<a id="a386480caacffe15855184c7cb8248d71" name="a386480caacffe15855184c7cb8248d71"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a386480caacffe15855184c7cb8248d71">&#9670;&#160;</a></span>serviceTinyUSB()</h2>
+<a id="a48b1d353d0ce4953a22eeaec10852a23" name="a48b1d353d0ce4953a22eeaec10852a23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48b1d353d0ce4953a22eeaec10852a23">&#9670;&#160;</a></span>serviceTinyUSB()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4038,7 +4038,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> serviceTinyUSB </td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> serviceTinyUSB </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -4046,12 +4046,15 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Process pending USB events on platforms where the application drives the stack (RP2040). No-op on ESP32 where a dedicated FreeRTOS task calls <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">tud_task()</a> continuously. </p>
+<p>Process pending USB events on platforms where the application drives the stack (RP2040, STM32, ...). Skipped when a dedicated FreeRTOS task already calls <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">tud_task()</a> continuously (see usb_task_active_) - <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">tud_task()</a> is not re-entrant; calling it from two contexts concurrently corrupts TinyUSB's internal event queue and causes random hangs. </p>
+<p>ESP32 (see <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html">USBAudioDeviceESP32</a>) overrides this to an empty no-op, since its own FreeRTOS task already calls <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">tud_task()</a> continuously. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#a620a53b384e211085da3222db37e71ea">USBAudioDeviceESP32</a>.</p>
 
 </div>
 </div>
