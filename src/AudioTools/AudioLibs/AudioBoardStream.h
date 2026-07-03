@@ -5,7 +5,7 @@
 #include "AudioTools/CoreAudio/AudioActions.h"
 
 /// global reference to access from static callback methods
-void* p_lastAudioBoardStream = nullptr; 
+static void* p_lastAudioBoardStream = nullptr; 
 
 
 namespace audio_tools {
