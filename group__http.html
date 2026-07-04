@@ -87,19 +87,22 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract Base class for all <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a> implementations.  <a href="classaudio__tools_1_1_abstract_u_r_l_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder_server_t.html">AudioEncoderServerT&lt; Client, Server &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple Arduino Webserver which streams the audio using the indicated encoder.. This class is based on the WiFiServer class. All you need to do is to provide the data with a callback method or from a <a class="el" href="class_stream.html">Stream</a>.  <a href="classaudio__tools_1_1_audio_encoder_server_t.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple Arduino Webserver which encodes the provided PCM audio (from a <a class="el" href="class_stream.html">Stream</a> or a callback) with the given <a class="el" href="classaudio__tools_1_1_audio_encoder.html" title="Encoding of PCM data.">AudioEncoder</a> and streams the result to the connected HTTP client, e.g. WAV, MP3 or any other supported format. This class extends <a class="el" href="classaudio__tools_1_1_audio_server_t.html" title="A minimal, single-client HTTP server that streams audio (or any other data) to a browser or media pla...">AudioServerT</a>, so it inherits its Client/Server template parameters as well as its transfer-encoding behavior: if <a class="el" href="classaudio__tools_1_1_audio_server_t.html#a29d522524865ac7c1cff0ae63d6a2c18">setMaxOutputSize()</a> is not called, the response defaults to <code>Transfer-Encoding: chunked</code>; otherwise a <code>Content-Length</code> header is sent instead.  <a href="classaudio__tools_1_1_audio_encoder_server_t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_ex.html">AudioServerEx</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A powerfull Web server which is based on <a href="https://github.com/pschatzmann/TinyHttp">https://github.com/pschatzmann/TinyHttp</a>. It supports multiple concurrent clients. You can e.g. use it to write mp3 data and make it available in multiple clients.  <a href="classaudio__tools_1_1_audio_server_ex.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html">AudioServerT&lt; Client, Server &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple Arduino Webserver which streams the result This class is based on the WiFiServer class. All you need to do is to provide the data with a callback method or from an Arduino <a class="el" href="class_stream.html">Stream</a>: in -copy&gt; client.  <a href="classaudio__tools_1_1_audio_server_t.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A minimal, single-client HTTP server that streams audio (or any other data) to a browser or media player: in -copy&gt; client. The data is provided either from an Arduino <a class="el" href="class_stream.html">Stream</a> or via an AudioServerDataCallback, and is copied to the connected client on each <a class="el" href="classaudio__tools_1_1_audio_server_t.html#abdd99e468f667b748b0c9bfd395163d7" title="Add this method to your loop Returns true while the client is connected.">doLoop()</a>/copy() call, so no threads or blocking loops are used.  <a href="classaudio__tools_1_1_audio_server_t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_w_a_v_server_ex.html">AudioWAVServerEx</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A powerfull WAV Web server which is based on <a href="https://github.com/pschatzmann/TinyHttp">https://github.com/pschatzmann/TinyHttp</a>. It supports multiple concurrent clients.  <a href="classaudio__tools_1_1_audio_w_a_v_server_ex.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_w_a_v_server_t.html">AudioWAVServerT&lt; Client, Server &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple Arduino Webserver which streams the audio as WAV data. This class is based on the AudioEncodedServer class. All you need to do is to provide the data with a callback method or from a <a class="el" href="class_stream.html">Stream</a>.  <a href="classaudio__tools_1_1_audio_w_a_v_server_t.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_chunked_print.html">ChunkedPrint</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wraps a <a class="el" href="class_print.html">Print</a> target and applies HTTP chunked transfer encoding framing (chunk-size in hex + CRLF + data + CRLF) to everything that is written to it. see <a href="https://en.wikipedia.org/wiki/Chunked_transfer_encoding">https://en.wikipedia.org/wiki/Chunked_transfer_encoding</a>.  <a href="classaudio__tools_1_1_chunked_print.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_http_request.html">HttpRequest</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple API to process get, put, post, del http requests I tried to use Arduino HttpClient, but I did not manage to extract the mime type from streaming get requests.  <a href="classaudio__tools_1_1_http_request.html#details">More...</a><br /></td></tr>
@@ -150,9 +153,6 @@ Typedefs</h2></td></tr>
 <tr class="memitem:ga8e38f3ee8ba28b641249c88aa73a4edf" id="r_ga8e38f3ee8ba28b641249c88aa73a4edf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__http.html#ga8e38f3ee8ba28b641249c88aa73a4edf">AudioServer</a> = <a class="el" href="classaudio__tools_1_1_audio_server_t.html">AudioServerT</a>&lt; <a class="el" href="namespaceaudio__tools.html#adc69dbce3f8125e7ecc45e4011c6feb3">WiFiClient</a>, <a class="el" href="namespaceaudio__tools.html#a6b0733250d04ae38b9e1062aabf27a65">WiFiServer</a> &gt;</td></tr>
 <tr class="memdesc:ga8e38f3ee8ba28b641249c88aa73a4edf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Basic WiFi audio server for streaming audio content.  <br /></td></tr>
 <tr class="separator:ga8e38f3ee8ba28b641249c88aa73a4edf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2909db5107c19b77138ce5e5a8653f0a" id="r_ga2909db5107c19b77138ce5e5a8653f0a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typedef</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__http.html#ga2909db5107c19b77138ce5e5a8653f0a">AudioServerDataCallback</a>) (<a class="el" href="class_print.html">Print</a> *out)</td></tr>
-<tr class="memdesc:ga2909db5107c19b77138ce5e5a8653f0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback which writes the sound data to the stream.  <br /></td></tr>
-<tr class="separator:ga2909db5107c19b77138ce5e5a8653f0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga3598c31c8a690f0d72d3521fb3e62732" id="r_ga3598c31c8a690f0d72d3521fb3e62732"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__http.html#ga3598c31c8a690f0d72d3521fb3e62732">AudioServerWiFi</a> = <a class="el" href="classaudio__tools_1_1_audio_server_t.html">AudioServerT</a>&lt; <a class="el" href="namespaceaudio__tools.html#adc69dbce3f8125e7ecc45e4011c6feb3">WiFiClient</a>, <a class="el" href="namespaceaudio__tools.html#a6b0733250d04ae38b9e1062aabf27a65">WiFiServer</a> &gt;</td></tr>
 <tr class="memdesc:ga3598c31c8a690f0d72d3521fb3e62732"><td class="mdescLeft">&#160;</td><td class="mdescRight">WiFi audio server for streaming audio content (explicit WiFi naming)  <br /></td></tr>
 <tr class="separator:ga3598c31c8a690f0d72d3521fb3e62732"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -220,25 +220,6 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Basic WiFi audio server for streaming audio content. </p>
-
-</div>
-</div>
-<a id="ga2909db5107c19b77138ce5e5a8653f0a" name="ga2909db5107c19b77138ce5e5a8653f0a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga2909db5107c19b77138ce5e5a8653f0a">&#9670;&#160;</a></span>AudioServerDataCallback</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typedef</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(* AudioServerDataCallback)(<a class="el" href="class_print.html">Print</a> *out)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Callback which writes the sound data to the stream. </p>
-<p>A simple Arduino Webserver which streams the result This template class can work with different <a class="el" href="class_client.html">Client</a> and Server types. All you need to do is to provide the data with a callback method or from an Arduino <a class="el" href="class_stream.html">Stream</a>: in -copy&gt; client.</p>
-<dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
-<dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 Callback which writes the sound data to the stream </dd></dl>
 
 </div>
 </div>

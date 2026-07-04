@@ -80,8 +80,7 @@ $(function() {
   <div class="headertitle"><div class="title">AudioServerT.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;cstdlib&gt;</code><br />
-<code>#include &lt;string&gt;</code><br />
+<div class="textblock"><code>#include &lt;string&gt;</code><br />
 <code>#include &quot;<a class="el" href="_codec_w_a_v_8h_source.html">AudioTools/AudioCodecs/CodecWAV.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_audio_streams_8h_source.html">AudioTools/CoreAudio/AudioStreams.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_stream_copy_8h_source.html">AudioTools/CoreAudio/StreamCopy.h</a>&quot;</code><br />
@@ -92,7 +91,10 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html">AudioServerT&lt; Client, Server &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple Arduino Webserver which streams the result This class is based on the WiFiServer class. All you need to do is to provide the data with a callback method or from an Arduino <a class="el" href="class_stream.html">Stream</a>: in -copy&gt; client.  <a href="classaudio__tools_1_1_audio_server_t.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A minimal, single-client HTTP server that streams audio (or any other data) to a browser or media player: in -copy&gt; client. The data is provided either from an Arduino <a class="el" href="class_stream.html">Stream</a> or via an AudioServerDataCallback, and is copied to the connected client on each <a class="el" href="classaudio__tools_1_1_audio_server_t.html#abdd99e468f667b748b0c9bfd395163d7" title="Add this method to your loop Returns true while the client is connected.">doLoop()</a>/copy() call, so no threads or blocking loops are used.  <a href="classaudio__tools_1_1_audio_server_t.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_chunked_print.html">ChunkedPrint</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wraps a <a class="el" href="class_print.html">Print</a> target and applies HTTP chunked transfer encoding framing (chunk-size in hex + CRLF + data + CRLF) to everything that is written to it. see <a href="https://en.wikipedia.org/wiki/Chunked_transfer_encoding">https://en.wikipedia.org/wiki/Chunked_transfer_encoding</a>.  <a href="classaudio__tools_1_1_chunked_print.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
@@ -103,9 +105,9 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:ga2909db5107c19b77138ce5e5a8653f0a" id="r_ga2909db5107c19b77138ce5e5a8653f0a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typedef</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__http.html#ga2909db5107c19b77138ce5e5a8653f0a">AudioServerDataCallback</a>) (<a class="el" href="class_print.html">Print</a> *out)</td></tr>
-<tr class="memdesc:ga2909db5107c19b77138ce5e5a8653f0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback which writes the sound data to the stream.  <br /></td></tr>
-<tr class="separator:ga2909db5107c19b77138ce5e5a8653f0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6d40783cdf760069729786896fc23b2" id="r_ae6d40783cdf760069729786896fc23b2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typedef</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ae6d40783cdf760069729786896fc23b2">AudioServerDataCallback</a>) (<a class="el" href="class_print.html">Print</a> *out)</td></tr>
+<tr class="memdesc:ae6d40783cdf760069729786896fc23b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback which writes the sound data to the stream.  <br /></td></tr>
+<tr class="separator:ae6d40783cdf760069729786896fc23b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->
