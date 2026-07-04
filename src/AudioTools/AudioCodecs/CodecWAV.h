@@ -134,6 +134,8 @@ class WAVHeader {
 
   /// Just write a wav header with explicit info to the indicated output
   bool writeHeader(Print *out, const WAVAudioInfo &info) {
+    // reset first: buffer otherwise keeps accumulating bytes from earlier calls
+    buffer.reset();
     writeRiffHeader(buffer, info);
     writeFMT(buffer, info);
     if (isADPCM(info.format) && info.ext_adpcm_header) {

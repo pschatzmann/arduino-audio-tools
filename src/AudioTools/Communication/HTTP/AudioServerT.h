@@ -316,6 +316,9 @@ class AudioServerT {
       LOGI("Content-type: %s", content_type);
     }
 
+    // for firefox to play
+    client_obj.println("Content-Disposition: inline");
+
     if (max_output_size > 0) {
       client_obj.print("Content-Length:");
       client_obj.println((unsigned long)max_output_size);
