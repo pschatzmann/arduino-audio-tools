@@ -3,6 +3,7 @@
 #ifdef STM32
 #include "AudioTools/CoreAudio/AudioI2S/I2SConfig.h"
 #include "AudioTools/CoreAudio/AudioI2S/I2SDriverBase.h"
+#include "AudioTools/Concurrency/LockFree/RingBufferSPSC.h"
 #include "stm32-i2s.h"
 
 #ifdef STM_I2S_PINS
@@ -125,23 +126,25 @@ class I2SDriverSTM32 : public I2SDriverBase {
   /// https://github.com/pschatzmann/stm32f411-i2s
   static void writeFromReceive(uint8_t *buffer, uint16_t byteCount, void *ref) {
     I2SDriverSTM32 *self = (I2SDriverSTM32 *)ref;
+    // called from the DMA ISR: must not log/print here - Serial I/O relies on
+    // interrupts (SysTick, USB) that are prio-blocked while this ISR runs,
+    // so it would deadlock forever
     uint16_t written = 0;
     if (self->p_dma_out != nullptr)
       written = self->p_dma_out->write(buffer, byteCount);
     else
       written = self->p_rx_buffer->writeArray(buffer, byteCount);
 
-    // check for overflow
-    if (written != byteCount) {
-      LOGW("Buffer overflow: written %d of %d", written, byteCount);
-    }
+    if (written != byteCount) self->rx_overflow_count++;
   }
 
   /// @brief Callback function used by
   /// https://github.com/pschatzmann/stm32f411-i2s
   static void readToTransmit(uint8_t *buffer, uint16_t byteCount, void *ref) {
     I2SDriverSTM32 *self = (I2SDriverSTM32 *)ref;
-    static size_t count = 0;
+    // called from the DMA ISR: must not log/print here - Serial I/O relies on
+    // interrupts (SysTick, USB) that are prio-blocked while this ISR runs,
+    // so it would deadlock forever
     size_t read = 0;
     if (self->p_dma_in != nullptr) {
       // stop reading if timout is relevant
@@ -156,15 +159,11 @@ class I2SDriverSTM32 : public I2SDriverBase {
       // get data from buffer
       if (self->stm32_write_active) {
         read = self->p_tx_buffer->readArray(buffer, byteCount);
-      } 
+      }
     }
     memset(buffer+read, 0, byteCount-read);
 
-    // check for underflow
-    count++;
-    if (read != byteCount) {
-      LOGW("Buffer underflow at %lu: %d for %d", count, read, byteCount);
-    }
+    if (read != byteCount) self->tx_underflow_count++;
   }
 
   /// Checks if timout has been activated and if so, if it is timed out
@@ -187,6 +186,15 @@ class I2SDriverSTM32 : public I2SDriverBase {
     p_dma_out = &out;
   }
 
+  /// number of times the tx DMA callback did not get enough data (silence was played)
+  uint32_t getUnderflowCount() { return tx_underflow_count; }
+
+  /// number of times the rx DMA callback could not store all received data
+  uint32_t getOverflowCount() { return rx_overflow_count; }
+
+  /// resets both the underflow and overflow counters back to 0
+  void resetErrorCounters() { tx_underflow_count = 0; rx_overflow_count = 0; }
+
  protected:
   stm32_i2s::Stm32I2sClass i2s;
   stm32_i2s::I2SSettingsSTM32 i2s_stm32;
@@ -197,6 +205,9 @@ class I2SDriverSTM32 : public I2SDriverBase {
   BaseBuffer<uint8_t> *p_rx_buffer = nullptr;
   volatile bool stm32_write_active = false;
   bool use_dma = true;
+  // incremented from the DMA ISR callbacks: must stay lock-free (no logging!)
+  volatile uint32_t tx_underflow_count = 0;
+  volatile uint32_t rx_overflow_count = 0;
   Print *p_dma_out = nullptr;
   Stream *p_dma_in = nullptr;
   uint32_t last_write_ms = 0;
@@ -204,24 +215,29 @@ class I2SDriverSTM32 : public I2SDriverBase {
   size_t writeBytesDMA(const void *src, size_t size_bytes) {
     size_t result = 0;
     // fill the tx buffer
+    const uint8_t *p_src = (const uint8_t *)src;
     int open = size_bytes;
     while (open > 0) {
-      int actual_written = writeBytesExt(src, size_bytes);
+      int actual_written = writeBytesExt(p_src, open);
+      if (actual_written <= 0) {
+        // tx buffer is full: caller will retry the remainder later
+        stm32_write_active = true;
+        break;
+      }
+      p_src += actual_written;
       result += actual_written;
       open -= actual_written;
-      if (open > 0) {
-        stm32_write_active = true;
-        //delay(1);
-      }
     }
 
     // start output of data only when buffer has been filled
+    // p_tx_buffer is a lock-free SPSCByteRingBuffer: safe to read concurrently
+    // with the DMA ISR without a critical section
     if (!stm32_write_active && p_tx_buffer->availableForWrite() == 0) {
       stm32_write_active = true;
       LOGI("Buffer is full->starting i2s output");
     }
 
-    return size_bytes;
+    return result;
   }
 
   size_t readBytesDMA(void *dest, size_t size_bytes) {
@@ -330,37 +346,49 @@ class I2SDriverSTM32 : public I2SDriverBase {
       LOGW("pins ignored: used from stm32-i2s");
     } else {
       LOGI("setting up pins for stm32-i2s");
+      // cfg.pin_alt_function defaults to -1 (not explicitly set by the
+      // sketch/board). -1 is not a valid AF index, so only override the
+      // board's compiled-in default (from STM_I2S_PINS, which differs per
+      // pin/board - e.g. BLACKPILL's data_out needs AF7, everything else AF6)
+      // when the caller actually asked for a specific one.
       i2s_stm32.hardware_config.pins[0].function = stm32_i2s::mclk;
       i2s_stm32.hardware_config.pins[0].pin = digitalPinToPinName(cfg.pin_mck);
-      i2s_stm32.hardware_config.pins[0].altFunction = cfg.pin_alt_function;
+      if (cfg.pin_alt_function != -1)
+        i2s_stm32.hardware_config.pins[0].altFunction = cfg.pin_alt_function;
 
       i2s_stm32.hardware_config.pins[1].function = stm32_i2s::bck;
       i2s_stm32.hardware_config.pins[1].pin = digitalPinToPinName(cfg.pin_bck);
-      i2s_stm32.hardware_config.pins[1].altFunction = cfg.pin_alt_function;
+      if (cfg.pin_alt_function != -1)
+        i2s_stm32.hardware_config.pins[1].altFunction = cfg.pin_alt_function;
 
       i2s_stm32.hardware_config.pins[2].function = stm32_i2s::ws;
       i2s_stm32.hardware_config.pins[2].pin = digitalPinToPinName(cfg.pin_ws);
-      i2s_stm32.hardware_config.pins[2].altFunction = cfg.pin_alt_function;
+      if (cfg.pin_alt_function != -1)
+        i2s_stm32.hardware_config.pins[2].altFunction = cfg.pin_alt_function;
 
       switch (cfg.rx_tx_mode) {
         case TX_MODE:
           i2s_stm32.hardware_config.pins[3].function = stm32_i2s::data_out;
           i2s_stm32.hardware_config.pins[3].pin = digitalPinToPinName(cfg.pin_data);
-          i2s_stm32.hardware_config.pins[3].altFunction = cfg.pin_alt_function;
+          if (cfg.pin_alt_function != -1)
+            i2s_stm32.hardware_config.pins[3].altFunction = cfg.pin_alt_function;
           break;
         case RX_MODE:
           i2s_stm32.hardware_config.pins[4].function = stm32_i2s::data_in;
           i2s_stm32.hardware_config.pins[4].pin = digitalPinToPinName(cfg.pin_data);
-          i2s_stm32.hardware_config.pins[4].altFunction = cfg.pin_alt_function;
+          if (cfg.pin_alt_function != -1)
+            i2s_stm32.hardware_config.pins[4].altFunction = cfg.pin_alt_function;
           break;
         case RXTX_MODE:
           i2s_stm32.hardware_config.pins[3].function = stm32_i2s::data_out;
           i2s_stm32.hardware_config.pins[3].pin = digitalPinToPinName(cfg.pin_data);
-          i2s_stm32.hardware_config.pins[3].altFunction = cfg.pin_alt_function;
+          if (cfg.pin_alt_function != -1)
+            i2s_stm32.hardware_config.pins[3].altFunction = cfg.pin_alt_function;
 
           i2s_stm32.hardware_config.pins[4].function = stm32_i2s::data_in;
           i2s_stm32.hardware_config.pins[4].pin = digitalPinToPinName(cfg.pin_data);
-          i2s_stm32.hardware_config.pins[4].altFunction = cfg.pin_alt_function;
+          if (cfg.pin_alt_function != -1)
+            i2s_stm32.hardware_config.pins[4].altFunction = cfg.pin_alt_function;
           break;
       };
 
@@ -392,17 +420,22 @@ class I2SDriverSTM32 : public I2SDriverBase {
   }
 
   uint32_t getStandard(I2SConfigStd &cfg) {
-    uint32_t result;
+    // I2S_STD_FORMAT is the default and means classic Philips I2S, same as
+    // I2S_PHILIPS_FORMAT - both must map to I2S_STANDARD_PHILIPS. The
+    // LSB/MSB cases were previously swapped (I2S_LSB_FORMAT ended up as
+    // I2S_STANDARD_MSB and vice versa), which shifts the data by one BCLK
+    // relative to what most codecs (e.g. CS43L22) expect and produces
+    // silence/garbled audio even though the peripheral looks "active".
     switch (cfg.i2s_format) {
       case I2S_PHILIPS_FORMAT:
-        return I2S_STANDARD_PHILIPS;
       case I2S_STD_FORMAT:
+        return I2S_STANDARD_PHILIPS;
       case I2S_LSB_FORMAT:
       case I2S_RIGHT_JUSTIFIED_FORMAT:
-        return I2S_STANDARD_MSB;
+        return I2S_STANDARD_LSB;
       case I2S_MSB_FORMAT:
       case I2S_LEFT_JUSTIFIED_FORMAT:
-        return I2S_STANDARD_LSB;
+        return I2S_STANDARD_MSB;
     }
     return I2S_STANDARD_PHILIPS;
   }
@@ -426,6 +459,9 @@ class I2SDriverSTM32 : public I2SDriverBase {
   }
 
   size_t writeBytesExt(const void *src, size_t size_bytes) {
+    // p_tx_buffer is a lock-free RingBufferSPSC: safe to write here on the
+    // main thread while the DMA ISR (readToTransmit) reads it concurrently,
+    // no critical section needed.
     size_t result = 0;
     if (cfg.channels == 2) {
       result = p_tx_buffer->writeArray((uint8_t *)src, size_bytes);
@@ -434,13 +470,12 @@ class I2SDriverSTM32 : public I2SDriverBase {
       int samples = size_bytes / 2;
       int16_t *src_16 = (int16_t *)src;
       int16_t tmp[2];
-      int result = 0;
       for (int j = 0; j < samples; j++) {
         tmp[0] = src_16[j];
         tmp[1] = src_16[j];
         if (p_tx_buffer->availableForWrite() >= 4) {
           p_tx_buffer->writeArray((uint8_t *)tmp, 4);
-          result = j * 2;
+          result = (j + 1) * 2;
         } else {
           // abort if the buffer is full
           break;
@@ -451,9 +486,12 @@ class I2SDriverSTM32 : public I2SDriverBase {
     return result;
   }
 
+  // NBuffer's QueueFromVector is not safe for concurrent main-thread/DMA-ISR
+  // access (see writeBytesExt/writeBytesDMA); RingBufferSPSC is a proper
+  // lock-free single-producer/single-consumer buffer, which matches exactly
+  // how p_tx_buffer/p_rx_buffer are actually used here.
   BaseBuffer<uint8_t>* allocateBuffer() {
-      //return new RingBuffer<uint8_t>(cfg.buffer_size * cfg.buffer_count);
-      return new NBuffer<uint8_t>(cfg.buffer_size, cfg.buffer_count);
+      return new RingBufferSPSC<uint8_t>(cfg.buffer_size * cfg.buffer_count);
   }
 };
 
