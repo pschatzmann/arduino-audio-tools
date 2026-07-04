@@ -5,10 +5,16 @@
 namespace audio_tools {
 
 /**
- * @brief A simple Arduino Webserver which streams the audio using the indicated
- * encoder.. This class is based on the WiFiServer class. All you need to do is
- * to provide the data with a callback method or from a Stream.
+ * @brief A simple Arduino Webserver which encodes the provided PCM audio (from
+ * a Stream or a callback) with the given AudioEncoder and streams the result
+ * to the connected HTTP client, e.g. WAV, MP3 or any other supported format.
+ * This class extends AudioServerT, so it inherits its Client/Server template
+ * parameters as well as its transfer-encoding behavior: if setMaxOutputSize()
+ * is not called, the response defaults to `Transfer-Encoding: chunked`;
+ * otherwise a `Content-Length` header is sent instead.
  *
+ * @tparam Client the client class e.g. WiFiClient
+ * @tparam Server the server class e.g. WiFiServer
  * @ingroup http
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -148,9 +154,17 @@ class AudioEncoderServerT : public AudioServerT<Client, Server> {
       encoder->begin();
     }
 
+    // if chunked transfer is active, the encoder must write into the
+    // chunked framing wrapper instead of directly into the client
+    Print *p_out = this->out_ptr();
+    if (this->isChunked()) {
+      this->chunked_print.begin(*this->out_ptr());
+      p_out = &this->chunked_print;
+    }
+
     if (this->callback != nullptr) {
       // encoded_stream.begin(out_ptr(), encoder);
-      encoded_stream.setOutput(this->out_ptr());
+      encoded_stream.setOutput(p_out);
       encoded_stream.setEncoder(encoder);
       encoded_stream.begin();
 
@@ -159,12 +173,13 @@ class AudioEncoderServerT : public AudioServerT<Client, Server> {
       // Send delayed header
       AudioServerT<Client, Server>::sendReplyHeader();
       this->callback(&encoded_stream);
+      this->endChunked();
       this->client_obj.stop();
     } else if (this->in != nullptr) {
       // provide data for stream: in -copy>  encoded_stream -> out
       LOGI("sendReply - Returning encoded stream...");
       // encoded_stream.begin(out_ptr(), encoder);
-      encoded_stream.setOutput(this->out_ptr());
+      encoded_stream.setOutput(p_out);
       encoded_stream.setEncoder(encoder);
       encoded_stream.begin();
 
