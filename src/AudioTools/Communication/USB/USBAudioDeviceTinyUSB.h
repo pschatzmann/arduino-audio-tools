@@ -42,20 +42,37 @@ class USBAudioDeviceTinyUSB : public USBAudioDeviceBase,
    * Called by Adafruit's addInterface() to build our UAC2 descriptor block
    * into the shared configuration descriptor buffer.
    *
-   * When buf is non-NULL, allocate interface and endpoint numbers from
-   * TinyUSBDevice so they are unique across all registered interfaces.
+   * When buf is non-NULL, allocate the interface number from TinyUSBDevice
+   * so it is unique across all registered interfaces. Endpoint numbers come
+   * from config_.ep_in/ep_out/ep_fb/ep_int, which default to a fixed,
+   * per-platform value (USB_AUDIO_EP_* in USBAudioConfig.h) on platforms
+   * that need one (e.g. nRF52's hardwired ISO endpoint 8). On platforms
+   * without such a constraint the default is -1, meaning "not fixed" --
+   * in that case we allocate the endpoint dynamically here instead, so it
+   * stays unique across all registered interfaces (e.g. when combined with
+   * CDC). Either way the caller can still override these fields explicitly
+   * before begin() to pin a specific address.
    * When buf is NULL, return the descriptor length for sizing only.
    */
   uint16_t getInterfaceDescriptor(uint8_t /*itfnum_deprecated*/, uint8_t* buf,
                                   uint16_t bufsize) override {
     if (buf) {
       config_.itf_num_ac = TinyUSBDevice.allocInterface(numInterfaces());
-      if (config_.enable_ep_in)
-        config_.ep_in = TinyUSBDevice.allocEndpoint(TUSB_DIR_IN);
-      if (config_.enable_ep_out)
-        config_.ep_out = TinyUSBDevice.allocEndpoint(TUSB_DIR_OUT);
-      if (this->isFeedbackEpEnabled())
-        config_.ep_fb = TinyUSBDevice.allocEndpoint(TUSB_DIR_IN);
+      if (config_.enable_ep_in) {
+        if (config_.ep_in < 0)
+          config_.ep_in = TinyUSBDevice.allocEndpoint(TUSB_DIR_IN);
+      } else if (this->isFeedbackEpEnabled()) {
+        if (config_.ep_fb < 0)
+          config_.ep_fb = TinyUSBDevice.allocEndpoint(TUSB_DIR_IN);
+      }
+      if (config_.enable_ep_out) {
+        if (config_.ep_out < 0)
+          config_.ep_out = TinyUSBDevice.allocEndpoint(TUSB_DIR_OUT);
+      }
+      if (config_.enable_interrupt_ep) {
+        if (config_.ep_int < 0)
+          config_.ep_int = TinyUSBDevice.allocEndpoint(TUSB_DIR_IN);
+      }
     }
     uint16_t len = getDescriptor(buf);
     assert(bufsize >= len);

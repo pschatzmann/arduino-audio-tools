@@ -7,25 +7,86 @@
 
 namespace audio_tools {
 
-#ifdef STANDALONE_USB
-/**
- * @brief Configuration for USB Audio (standalone build without AudioInfo).
- * 
- * @author Phil Schatzmann
- * @ingroup usb
- * @copyright GPLv3
- */
-struct USBAudioConfig {
-  uint32_t sample_rate = 44100;
-  uint8_t channels = 2;
-  uint8_t bits_per_sample = 16;
-#else
+// ── Platform-specific default USB endpoint numbers ──────────────────────────
+// Some MCUs' USB peripherals restrict isochronous transfers to one hardwired
+// endpoint number instead of allowing the stack to allocate any free one.
+//
+// nRF52833/nRF52840 caveats:
+//  - The USBD peripheral has exactly one isochronous endpoint pair, hardwired
+//    to endpoint number 8 (tinyusb dcd_nrf5x.c: EP_ISO_NUM == 8). Opening an
+//    isochronous endpoint at any other number hits
+//    TU_ASSERT(epnum == EP_ISO_NUM) and the device stops responding -- this
+//    is why ep_in/ep_out/ep_fb are pinned here instead of using
+//    TinyUSBDevice.allocEndpoint() like on RP2040/SAMD/STM32.
+//  - ep_in and ep_fb both resolve to 0x88 (the same physical IN endpoint),
+//    which is safe because they're mutually exclusive: enableFeedbackEp()
+//    already requires enable_ep_in == false (see USBAudio2DescriptorBuilder),
+//    matching the hardware's single ISO IN + single ISO OUT pair exactly.
+//  - ep_int (the AC status/change interrupt endpoint) is NOT restricted --
+//    endpoints 1-7 (control/bulk/interrupt) are freely assignable on this
+//    chip -- so it keeps the generic -1 default below and is still allocated
+//    dynamically even on nRF52.
+//  - Because the fixed 0x88/0x08 numbers bypass allocEndpoint() entirely,
+//    TinyUSBDevice's internal endpoint counters don't know endpoint 8 is
+//    taken. Audio + a single CDC Serial (the common composite case) is safe
+//    since CDC only needs a handful of low-numbered endpoints, but stacking
+//    many other USB classes alongside Audio could in theory let one of them
+//    also land on endpoint 8 and collide -- an edge case, not a concern for
+//    a simple Audio+CDC composite device.
+#if defined(NRF52840_XXAA) || defined(NRF52833_XXAA)
+#ifndef USB_AUDIO_EP_IN
+#define USB_AUDIO_EP_IN 0x88
+#endif
+#ifndef USB_AUDIO_EP_OUT
+#define USB_AUDIO_EP_OUT 0x08
+#endif
+#ifndef USB_AUDIO_EP_FB
+#define USB_AUDIO_EP_FB 0x88
+#endif
+#endif
+
+// USBAudioDeviceESP32 (arduino-esp32) has no dynamic endpoint allocation of
+// its own -- whatever address is in the config is baked straight into the
+// descriptor -- so it needs real, working defaults.
+#if defined(ESP32)
+#ifndef USB_AUDIO_EP_IN
+#define USB_AUDIO_EP_IN 0x83
+#endif
+#ifndef USB_AUDIO_EP_OUT
+#define USB_AUDIO_EP_OUT 0x03
+#endif
+#ifndef USB_AUDIO_EP_FB
+#define USB_AUDIO_EP_FB 0x84
+#endif
+#ifndef USB_AUDIO_EP_INT
+#define USB_AUDIO_EP_INT 0x85
+#endif
+#endif
+
+// Everywhere else (generic TinyUSB: RP2040, SAMD, STM32) -1 tells
+// USBAudioDeviceTinyUSB::getInterfaceDescriptor() to allocate the endpoint
+// dynamically via TinyUSBDevice.allocEndpoint() instead of using a fixed
+// number. Define any of these yourself (e.g. via a build flag) to support
+// additional boards/cores, or to pin a fixed address, without touching the
+// struct or driver.
+#ifndef USB_AUDIO_EP_IN
+#define USB_AUDIO_EP_IN -1
+#endif
+#ifndef USB_AUDIO_EP_OUT
+#define USB_AUDIO_EP_OUT -1
+#endif
+#ifndef USB_AUDIO_EP_FB
+#define USB_AUDIO_EP_FB -1
+#endif
+#ifndef USB_AUDIO_EP_INT
+#define USB_AUDIO_EP_INT -1
+#endif
+
 /**
  * @brief Configuration for USB Audio (inherits sample_rate / channels /
  *        bits_per_sample from AudioInfo).
  */
 struct USBAudioConfig : public AudioInfo {
-#endif
 
   // ── Direction ─────────────────────────────────────────────────────────────
   bool enable_ep_in = true;   ///< device → host  (capture / microphone)
@@ -33,12 +94,17 @@ struct USBAudioConfig : public AudioInfo {
 
   // ── USB endpoint addresses ────────────────────────────────────────────────
   /// Addresses must not conflict with other USB interfaces (e.g. CDC uses
-  /// 0x81, 0x82, 0x02).  The defaults below are safe for CDC + Audio
-  /// composite devices.
-  uint8_t ep_in = 0x83;   ///< ISO IN  (device → host, capture/microphone)
-  uint8_t ep_out = 0x03;  ///< ISO OUT (host → device, playback/speaker)
-  uint8_t ep_fb = 0x84;   ///< ISO IN  (explicit feedback, RX-only mode)
-  uint8_t ep_int = 0x85;  ///< INT IN  (AC status/change notifications)
+  /// 0x81, 0x82, 0x02).  The defaults below (overridable per-platform via
+  /// the USB_AUDIO_EP_* build flags, see top of this file) are safe for
+  /// CDC + Audio composite devices on most MCUs.
+  /// Signed so a negative value (the -1 default on platforms without a
+  /// fixed hardware endpoint) can be told apart from a real address:
+  /// USBAudioDeviceTinyUSB treats < 0 as "allocate dynamically" and any
+  /// value you set >= 0 (including these defaults) as a pinned address.
+  int16_t ep_in = USB_AUDIO_EP_IN;    ///< ISO IN  (device → host, capture/microphone)
+  int16_t ep_out = USB_AUDIO_EP_OUT;  ///< ISO OUT (host → device, playback/speaker)
+  int16_t ep_fb = USB_AUDIO_EP_FB;    ///< ISO IN  (explicit feedback, RX-only mode)
+  int16_t ep_int = USB_AUDIO_EP_INT;  ///< INT IN  (AC status/change notifications)
 
   // ── Interface numbering ───────────────────────────────────────────────────
   /// Interface number of the Audio Control interface.
