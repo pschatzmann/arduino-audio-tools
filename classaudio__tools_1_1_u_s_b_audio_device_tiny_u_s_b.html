@@ -2390,7 +2390,7 @@ Board settings (arduino-pico + Adafruit TinyUSB)</h2>
 </table>
 </div><div class="memdoc">
 <p>Called by Adafruit's <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">addInterface()</a> to build our UAC2 descriptor block into the shared configuration descriptor buffer.</p>
-<p>When buf is non-NULL, allocate interface and endpoint numbers from TinyUSBDevice so they are unique across all registered interfaces. When buf is NULL, return the descriptor length for sizing only. </p>
+<p>When buf is non-NULL, allocate the interface number from TinyUSBDevice so it is unique across all registered interfaces. Endpoint numbers come from config_.ep_in/ep_out/ep_fb/ep_int, which default to a fixed, per-platform value (USB_AUDIO_EP_* in <a class="el" href="_u_s_b_audio_config_8h.html">USBAudioConfig.h</a>) on platforms that need one (e.g. nRF52's hardwired ISO endpoint 8). On platforms without such a constraint the default is -1, meaning "not fixed" &ndash; in that case we allocate the endpoint dynamically here instead, so it stays unique across all registered interfaces (e.g. when combined with CDC). Either way the caller can still override these fields explicitly before <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a601fb7cf1fc15db50c71a826f084f934" title="(Re-)start the USB audio device with the current config.">begin()</a> to pin a specific address. When buf is NULL, return the descriptor length for sizing only. </p>
 
 </div>
 </div>
