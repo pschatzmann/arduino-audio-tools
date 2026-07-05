@@ -99,6 +99,16 @@ class TransformationReader {
 
   size_t getTotalBytesRead() const { return total_bytes_read; }
 
+  /// Defines how a run of MAX_ZERO_READ_COUNT consecutive empty reads from
+  /// the source is interpreted:
+  /// - true (default): the source is treated as finished (e.g. end of file)
+  ///   and is_eof latches permanently - matches the historical behavior for
+  ///   decoders/encoders reading a finite stream.
+  /// - false: the source is treated as a live/continuous producer that is
+  ///   just momentarily empty (a buffer underflow). is_eof is never set, so
+  ///   the next call simply tries again once more data has arrived.
+  void setEofOnZeroReads(bool flag) { eof_on_zero_reads = flag; }
+
  protected:
   RingBuffer<uint8_t> result_queue_buffer{0};
   QueueStream<uint8_t> result_queue{result_queue_buffer};  //
@@ -109,20 +119,33 @@ class TransformationReader {
   int result_queue_factor = 5;
   int max_read_size = DEFAULT_BUFFER_SIZE;
   int last_setup_buffer_size = 0;
+  float last_byte_factor = 0.0f;
   bool is_eof = false;
+  bool eof_on_zero_reads = true;
   size_t total_bytes_read = 0;
 
   /// Defines the read buffer size for individual reads
   void resizeReadBuffer(int size) { buffer.resize(size); }
-  
+
   void setupBuffers(size_t len) {
-    if (len == last_setup_buffer_size) return;
-    LOGD("setupBuffers: %d", (int)len);
     float byte_factor = p_transform->getByteFactor();
     if (byte_factor <= 0.0f) {
       LOGE("Invalid byte factor: %f", byte_factor);
       byte_factor = 1.0f;
     }
+    // Recompute if the requested length changed, or if the transform's byte
+    // factor drifted meaningfully since the read chunk size was last sized
+    // (e.g. a live-adjusted resampling step size). For a transform with a
+    // constant byte factor (the common decoder/encoder case) this check
+    // never re-triggers after the first call, so behavior there is
+    // unchanged; it only matters for transforms whose byte factor changes
+    // at runtime, where a stale chunk size would otherwise silently distort
+    // the consumption/production ratio.
+    bool byte_factor_changed =
+        fabsf(byte_factor - last_byte_factor) > 0.01f * last_byte_factor;
+    if (len == last_setup_buffer_size && !byte_factor_changed) return;
+    LOGD("setupBuffers: %d", (int)len);
+    last_byte_factor = byte_factor;
 
     // we read half the necessary bytes
     int size = (0.5f / byte_factor * len);
@@ -188,9 +211,15 @@ class TransformationReader {
       } else {
         // limit the number of reads which provide 0;
         if (++zero_count > MAX_ZERO_READ_COUNT) {
-          is_eof = true;
-          // Flush any buffered/final encoder bytes into result_queue.
-          p_transform->flush();
+          if (eof_on_zero_reads) {
+            is_eof = true;
+            // Flush any buffered/final encoder bytes into result_queue.
+            p_transform->flush();
+          }
+          // Otherwise the source is just a momentarily empty live
+          // producer (buffer underflow, not end of stream): stop trying
+          // for this call, but leave is_eof false so the next call
+          // retries once more data has arrived.
           break;
         }
         // wait for some more data
