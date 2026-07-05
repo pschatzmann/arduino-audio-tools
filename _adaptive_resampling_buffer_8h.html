@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: src/AudioTools/Communication/AdaptiveResamplingStream.h File Reference</title>
+<title>arduino-audio-tools: src/AudioTools/Communication/AdaptiveResamplingBuffer.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -76,18 +76,21 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a>  </div>
-  <div class="headertitle"><div class="title">AdaptiveResamplingStream.h File Reference</div></div>
+  <div class="headertitle"><div class="title">AdaptiveResamplingBuffer.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="_adaptive_resampling_buffer_8h_source.html">AudioTools/Communication/AdaptiveResamplingBuffer.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;atomic&gt;</code><br />
+<code>#include &quot;<a class="el" href="_kalman_filter_8h_source.html">AudioTools/CoreAudio/AudioBasic/KalmanFilter.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_p_i_d_controller_8h_source.html">AudioTools/CoreAudio/AudioBasic/PIDController.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_audio_streams_8h_source.html">AudioTools/CoreAudio/AudioStreams.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_resample_stream_8h_source.html">AudioTools/CoreAudio/ResampleStream.h</a>&quot;</code><br />
 </div>
-<p><a href="_adaptive_resampling_stream_8h_source.html">Go to the source code of this file.</a></p>
+<p><a href="_adaptive_resampling_buffer_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_adaptive_resampling_stream.html">AdaptiveResamplingStream</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">An Audio <a class="el" href="class_stream.html">Stream</a> backed by a buffer (queue) which tries to correct jitter and automatically adjusts for the slightly different clock rates between an audio source and audio target. Use separate tasks to write and read the data. Also make sure that you protect the access with a mutex or provide a thread-safe buffer!  <a href="classaudio__tools_1_1_adaptive_resampling_stream.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_adaptive_resampling_buffer.html">AdaptiveResamplingBuffer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A <a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer&lt;uint8_t&gt;</a> that wraps a raw (unresampled) backing buffer and transparently resamples on read to correct jitter and compensate for the slightly different clock rates between an audio source and audio target. Use separate tasks to write and read the data. Also make sure that you protect the access with a mutex or provide a thread-safe backing buffer!  <a href="classaudio__tools_1_1_adaptive_resampling_buffer.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>

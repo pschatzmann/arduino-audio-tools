@@ -2,7 +2,7 @@ var searchData=
 [
   ['k_0',['k',['../group___echo_state.html#ga2689c4b3931025b79053532a5f1b0a85',1,'audio_tools::EchoState_::K'],['../classaudio__tools_1_1_kalman_filter.html#a58122f7e1c43eecec768d649fef79876',1,'audio_tools::KalmanFilter::K']]],
   ['k_5fdata_1',['k_data',['../classaudio__tools_1_1_f_f_t_driver_kiss_f_f_t.html#a71225149e017ff83a2646f58e85df919',1,'audio_tools::FFTDriverKissFFT']]],
-  ['kalman_5ffilter_2',['kalman_filter',['../classaudio__tools_1_1_adaptive_resampling_stream.html#a1ecb3cf2fe16d8869b63532223f0de8c',1,'audio_tools::AdaptiveResamplingStream']]],
+  ['kalman_5ffilter_2',['kalman_filter',['../classaudio__tools_1_1_adaptive_resampling_buffer.html#a1ecb3cf2fe16d8869b63532223f0de8c',1,'audio_tools::AdaptiveResamplingBuffer']]],
   ['kd_3',['kd',['../classaudio__tools_1_1_p_i_d_controller.html#ae7a5c6018507bb1361fcca170e069b9c',1,'audio_tools::PIDController']]],
   ['kernela_4',['kernelA',['../classaudio__tools_1_1_equalizer_n_bands.html#a5b5d3c3aeba03442d7f5f4cda4e8965e',1,'audio_tools::EqualizerNBands']]],
   ['kernelb_5',['kernelB',['../classaudio__tools_1_1_equalizer_n_bands.html#ac481186f025b0e3365faa766547a3084',1,'audio_tools::EqualizerNBands']]],
