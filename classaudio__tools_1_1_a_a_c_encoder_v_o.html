@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: ADPCMEncoderXQ Class Reference</title>
+<title>arduino-audio-tools: AACEncoderVO Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,7 +69,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_a_d_p_c_m_encoder_x_q.html">ADPCMEncoderXQ</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder_v_o.html">AACEncoderVO</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -77,114 +77,117 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="classaudio__tools_1_1_a_d_p_c_m_encoder_x_q-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">ADPCMEncoderXQ Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__codecs.html">Codecs</a> &#124; <a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__codecs.html">Codecs</a> &raquo; <a class="el" href="group__encoder.html">Encoder</a></div></div></div>
+<a href="classaudio__tools_1_1_a_a_c_encoder_v_o-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">AACEncoderVO Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__codecs.html">Codecs</a> &#124; <a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__codecs.html">Codecs</a> &raquo; <a class="el" href="group__encoder.html">Encoder</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Encoder for ADPCM-XQ - Depends on <a href="https://github.com/pschatzmann/arduino-adpcm-xq">https://github.com/pschatzmann/arduino-adpcm-xq</a>.  
- <a href="classaudio__tools_1_1_a_d_p_c_m_encoder_x_q.html#details">More...</a></p>
+<p>AAC Encoder based on the VisualOn vo-aacenc implementation (<a href="https://github.com/pschatzmann/codec-vo-aacenc">https://github.com/pschatzmann/codec-vo-aacenc</a>).  
+ <a href="classaudio__tools_1_1_a_a_c_encoder_v_o.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_codec_a_d_p_c_m_x_q_8h_source.html">CodecADPCMXQ.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_codec_a_a_c_v_o_8h_source.html">CodecAACVO.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for ADPCMEncoderXQ:</div>
+Inheritance diagram for AACEncoderVO:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classaudio__tools_1_1_a_d_p_c_m_encoder_x_q.png" usemap="#ADPCMEncoderXQ_map" alt=""/>
-  <map id="ADPCMEncoderXQ_map" name="ADPCMEncoderXQ_map">
-<area href="classaudio__tools_1_1_audio_encoder.html" title="Encoding of PCM data." alt="AudioEncoder" shape="rect" coords="0,112,125,136"/>
-<area href="classaudio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="AudioWriter" shape="rect" coords="0,56,125,80"/>
-<area href="classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="AudioInfoSupport" shape="rect" coords="0,0,125,24"/>
+  <img src="classaudio__tools_1_1_a_a_c_encoder_v_o.png" usemap="#AACEncoderVO_map" alt=""/>
+  <map id="AACEncoderVO_map" name="AACEncoderVO_map">
+<area href="classaudio__tools_1_1_audio_encoder.html" title="Encoding of PCM data." alt="AudioEncoder" shape="rect" coords="0,112,110,136"/>
+<area href="classaudio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="AudioWriter" shape="rect" coords="0,56,110,80"/>
+<area href="classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="AudioInfoSupport" shape="rect" coords="0,0,110,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:abb312e419bc5173741329dc41cebbd59" id="r_abb312e419bc5173741329dc41cebbd59"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_d_p_c_m_encoder_x_q.html#abb312e419bc5173741329dc41cebbd59">ADPCMEncoderXQ</a> ()</td></tr>
-<tr class="separator:abb312e419bc5173741329dc41cebbd59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c199eb85a94a8c16d43c6b722d01a5a" id="r_a5c199eb85a94a8c16d43c6b722d01a5a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder_v_o.html#a5c199eb85a94a8c16d43c6b722d01a5a">AACEncoderVO</a> ()=<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">default</a></td></tr>
+<tr class="separator:a5c199eb85a94a8c16d43c6b722d01a5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c4d1833cb3b5af59cf952bbf74034cf" id="r_a7c4d1833cb3b5af59cf952bbf74034cf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder_v_o.html#a7c4d1833cb3b5af59cf952bbf74034cf">AACEncoderVO</a> (<a class="el" href="class_print.html">Print</a> &amp;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">out_stream</a>)</td></tr>
+<tr class="separator:a7c4d1833cb3b5af59cf952bbf74034cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab468fd549062b862eb16b8308f96d166" id="r_ab468fd549062b862eb16b8308f96d166"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder_v_o.html#ab468fd549062b862eb16b8308f96d166">~AACEncoderVO</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
+<tr class="separator:ab468fd549062b862eb16b8308f96d166"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed4bf0d5ce93f27242be485943d0b37d" id="r_aed4bf0d5ce93f27242be485943d0b37d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder.html#aed4bf0d5ce93f27242be485943d0b37d">audioInfo</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
 <tr class="memdesc:aed4bf0d5ce93f27242be485943d0b37d"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the actual input <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>  <br /></td></tr>
 <tr class="separator:aed4bf0d5ce93f27242be485943d0b37d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c77cb3dbe910c765ea439d103bdcbb9" id="r_a1c77cb3dbe910c765ea439d103bdcbb9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_support.html#a1c77cb3dbe910c765ea439d103bdcbb9">audioInfoOut</a> ()</td></tr>
 <tr class="separator:a1c77cb3dbe910c765ea439d103bdcbb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acba365cc28eb702040c382646cfb0a7a" id="r_acba365cc28eb702040c382646cfb0a7a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_d_p_c_m_encoder_x_q.html#acba365cc28eb702040c382646cfb0a7a">begin</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
+<tr class="memitem:acba365cc28eb702040c382646cfb0a7a" id="r_acba365cc28eb702040c382646cfb0a7a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder_v_o.html#acba365cc28eb702040c382646cfb0a7a">begin</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
 <tr class="separator:acba365cc28eb702040c382646cfb0a7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a419d5bfacb0a1e5bf46b5fbd8d94f446" id="r_a419d5bfacb0a1e5bf46b5fbd8d94f446"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_writer.html#a419d5bfacb0a1e5bf46b5fbd8d94f446">begin</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> <a class="el" href="classaudio__tools_1_1_audio_encoder.html#a47385aa19435f5fca9d3083a748258c5">info</a>)</td></tr>
-<tr class="separator:a419d5bfacb0a1e5bf46b5fbd8d94f446"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64e9fa75beda50a9e8400ee0d4e61984" id="r_a64e9fa75beda50a9e8400ee0d4e61984"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_d_p_c_m_encoder_x_q.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
+<tr class="memitem:ac70f7349fc3915c58de8f2f5493422dc" id="r_ac70f7349fc3915c58de8f2f5493422dc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder_v_o.html#ac70f7349fc3915c58de8f2f5493422dc">begin</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> <a class="el" href="classaudio__tools_1_1_audio_encoder.html#a47385aa19435f5fca9d3083a748258c5">info</a>) <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
+<tr class="separator:ac70f7349fc3915c58de8f2f5493422dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84fd6e0518103b7745c5279bbb7e0c76" id="r_a84fd6e0518103b7745c5279bbb7e0c76"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">VOAACEncoder</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder_v_o.html#a84fd6e0518103b7745c5279bbb7e0c76">driver</a> ()</td></tr>
+<tr class="separator:a84fd6e0518103b7745c5279bbb7e0c76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64e9fa75beda50a9e8400ee0d4e61984" id="r_a64e9fa75beda50a9e8400ee0d4e61984"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder_v_o.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
 <tr class="separator:a64e9fa75beda50a9e8400ee0d4e61984"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adfd0d438db34d4e0708738a458d63d8e" id="r_adfd0d438db34d4e0708738a458d63d8e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder.html#adfd0d438db34d4e0708738a458d63d8e">frameDurationUs</a> ()</td></tr>
 <tr class="memdesc:adfd0d438db34d4e0708738a458d63d8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional rtsp function: provide the frame duration in microseconds.  <br /></td></tr>
 <tr class="separator:adfd0d438db34d4e0708738a458d63d8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab233b9d1b86c9d2a2c009d6473aa8938" id="r_ab233b9d1b86c9d2a2c009d6473aa8938"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_d_p_c_m_encoder_x_q.html#ab233b9d1b86c9d2a2c009d6473aa8938">mime</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
+<tr class="memitem:ab233b9d1b86c9d2a2c009d6473aa8938" id="r_ab233b9d1b86c9d2a2c009d6473aa8938"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder_v_o.html#ab233b9d1b86c9d2a2c009d6473aa8938">mime</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
 <tr class="memdesc:ab233b9d1b86c9d2a2c009d6473aa8938"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the mime type of the encoded result.  <br /></td></tr>
 <tr class="separator:ab233b9d1b86c9d2a2c009d6473aa8938"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a90622bd78258a36bbcf63426b28307ac" id="r_a90622bd78258a36bbcf63426b28307ac"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_d_p_c_m_encoder_x_q.html#a90622bd78258a36bbcf63426b28307ac">operator bool</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
+<tr class="memitem:a90622bd78258a36bbcf63426b28307ac" id="r_a90622bd78258a36bbcf63426b28307ac"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder_v_o.html#a90622bd78258a36bbcf63426b28307ac">operator bool</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
 <tr class="separator:a90622bd78258a36bbcf63426b28307ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e4411e8fba4f919672d5b3a145f7170" id="r_a5e4411e8fba4f919672d5b3a145f7170"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder.html#a5e4411e8fba4f919672d5b3a145f7170">samplesPerFrame</a> ()</td></tr>
 <tr class="memdesc:a5e4411e8fba4f919672d5b3a145f7170"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional rtsp function: provide samples per the frame.  <br /></td></tr>
 <tr class="separator:a5e4411e8fba4f919672d5b3a145f7170"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1bfa36528833f68bb14187eb12edb27" id="r_ae1bfa36528833f68bb14187eb12edb27"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder_v_o.html#ae1bfa36528833f68bb14187eb12edb27">setAdts</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> enabled)</td></tr>
+<tr class="memdesc:ae1bfa36528833f68bb14187eb12edb27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines if ADTS headers are generated.  <br /></td></tr>
+<tr class="separator:ae1bfa36528833f68bb14187eb12edb27"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c749802992efec8bc20ba4a522b027f" id="r_a5c749802992efec8bc20ba4a522b027f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder.html#a5c749802992efec8bc20ba4a522b027f">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> from) <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
 <tr class="memdesc:a5c749802992efec8bc20ba4a522b027f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the sample rate, number of channels and bits per sample.  <br /></td></tr>
 <tr class="separator:a5c749802992efec8bc20ba4a522b027f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac6e299ceb04c7d103c328b431e5c61c4" id="r_ac6e299ceb04c7d103c328b431e5c61c4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_d_p_c_m_encoder_x_q.html#ac6e299ceb04c7d103c328b431e5c61c4">setBlockSizePower</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> pow)</td></tr>
-<tr class="memdesc:ac6e299ceb04c7d103c328b431e5c61c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">set bocksizes as 2^pow: range from 8 to 15  <br /></td></tr>
-<tr class="separator:ac6e299ceb04c7d103c328b431e5c61c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed6d991a840256eb66f16c1fbb172439" id="r_aed6d991a840256eb66f16c1fbb172439"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_d_p_c_m_encoder_x_q.html#aed6d991a840256eb66f16c1fbb172439">setLookahead</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> value)</td></tr>
-<tr class="memdesc:aed6d991a840256eb66f16c1fbb172439"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set look ahead bytes from 0 to 8.  <br /></td></tr>
-<tr class="separator:aed6d991a840256eb66f16c1fbb172439"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4b77b224cc2cc916223a44f08d95ee18" id="r_a4b77b224cc2cc916223a44f08d95ee18"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_d_p_c_m_encoder_x_q.html#a4b77b224cc2cc916223a44f08d95ee18">setNoiseShaping</a> (<a class="el" href="namespaceaudio__tools.html#aa905b9b59808bab9ad96d4c56442768d">ADPCMNoiseShaping</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">ns</a>)</td></tr>
-<tr class="memdesc:a4b77b224cc2cc916223a44f08d95ee18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the noise shaping.  <br /></td></tr>
-<tr class="separator:a4b77b224cc2cc916223a44f08d95ee18"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a065fe4c0d3543644ab523a5d9b5fb9c0" id="r_a065fe4c0d3543644ab523a5d9b5fb9c0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_d_p_c_m_encoder_x_q.html#a065fe4c0d3543644ab523a5d9b5fb9c0">setOutput</a> (<a class="el" href="class_print.html">Print</a> &amp;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">out_stream</a>) <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
-<tr class="memdesc:a065fe4c0d3543644ab523a5d9b5fb9c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default output assignment (encoders may override to store <a class="el" href="class_print.html">Print</a> reference)  <br /></td></tr>
+<tr class="memitem:ae6350f03ea150fb9a13d9e739e27f241" id="r_ae6350f03ea150fb9a13d9e739e27f241"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder_v_o.html#ae6350f03ea150fb9a13d9e739e27f241">setBitrate</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint32_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bps</a>)</td></tr>
+<tr class="memdesc:ae6350f03ea150fb9a13d9e739e27f241"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines target bitrate in bps.  <br /></td></tr>
+<tr class="separator:ae6350f03ea150fb9a13d9e739e27f241"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a065fe4c0d3543644ab523a5d9b5fb9c0" id="r_a065fe4c0d3543644ab523a5d9b5fb9c0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder_v_o.html#a065fe4c0d3543644ab523a5d9b5fb9c0">setOutput</a> (<a class="el" href="class_print.html">Print</a> &amp;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">out_stream</a>) <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
+<tr class="memdesc:a065fe4c0d3543644ab523a5d9b5fb9c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the output stream.  <br /></td></tr>
 <tr class="separator:a065fe4c0d3543644ab523a5d9b5fb9c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_d_p_c_m_encoder_x_q.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *data, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> len) <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
+<tr class="memitem:a67a71793d4ced065b286e8e7055e39e3" id="r_a67a71793d4ced065b286e8e7055e39e3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder_v_o.html#a67a71793d4ced065b286e8e7055e39e3">setOutputBufferSize</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> len)</td></tr>
+<tr class="memdesc:a67a71793d4ced065b286e8e7055e39e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines max encoded output frame size.  <br /></td></tr>
+<tr class="separator:a67a71793d4ced065b286e8e7055e39e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder_v_o.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *data, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> len) <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
 <tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a9e1fd708c4297647144574ca6cead718" id="r_a9e1fd708c4297647144574ca6cead718"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_d_p_c_m_encoder_x_q.html#a9e1fd708c4297647144574ca6cead718">encode</a> ()</td></tr>
-<tr class="separator:a9e1fd708c4297647144574ca6cead718"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fa623738bff627cfde5ff87adfe1657" id="r_a0fa623738bff627cfde5ff87adfe1657"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder_v_o.html#a0fa623738bff627cfde5ff87adfe1657">encodeFrame</a> ()</td></tr>
+<tr class="separator:a0fa623738bff627cfde5ff87adfe1657"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e475070d3df18395c90a10c9d38eb0a" id="r_a2e475070d3df18395c90a10c9d38eb0a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_writer.html#a2e475070d3df18395c90a10c9d38eb0a">writeBlocking</a> (<a class="el" href="class_print.html">Print</a> *out, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *data, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> len)</td></tr>
 <tr class="separator:a2e475070d3df18395c90a10c9d38eb0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a5ae4b3bab26841e2110a8bf6c08c1a01" id="r_a5ae4b3bab26841e2110a8bf6c08c1a01"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_d_p_c_m_encoder_x_q.html#a5ae4b3bab26841e2110a8bf6c08c1a01">adpcm_block</a></td></tr>
-<tr class="separator:a5ae4b3bab26841e2110a8bf6c08c1a01"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad9f2a2fae9804a3ae936a155e3328498" id="r_ad9f2a2fae9804a3ae936a155e3328498"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_d_p_c_m_encoder_x_q.html#ad9f2a2fae9804a3ae936a155e3328498">adpcm_cnxt</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td></tr>
-<tr class="separator:ad9f2a2fae9804a3ae936a155e3328498"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70b27761c7d0bd5cd90f4fe47e569b94" id="r_a70b27761c7d0bd5cd90f4fe47e569b94"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_d_p_c_m_encoder_x_q.html#a70b27761c7d0bd5cd90f4fe47e569b94">block_size</a> = 0</td></tr>
-<tr class="separator:a70b27761c7d0bd5cd90f4fe47e569b94"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e1e7797b0db65b499eb68a41321116a" id="r_a7e1e7797b0db65b499eb68a41321116a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_d_p_c_m_encoder_x_q.html#a7e1e7797b0db65b499eb68a41321116a">block_size_pow2</a> = 0</td></tr>
-<tr class="separator:a7e1e7797b0db65b499eb68a41321116a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af507d2d28aa3774531b92b9e88a154b5" id="r_af507d2d28aa3774531b92b9e88a154b5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_d_p_c_m_encoder_x_q.html#af507d2d28aa3774531b92b9e88a154b5">current_sample</a> = 0</td></tr>
-<tr class="separator:af507d2d28aa3774531b92b9e88a154b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03c996f9fcf0e10baeb3e700be0c409a" id="r_a03c996f9fcf0e10baeb3e700be0c409a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder_v_o.html#a03c996f9fcf0e10baeb3e700be0c409a">active</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">false</a></td></tr>
+<tr class="separator:a03c996f9fcf0e10baeb3e700be0c409a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32678c62007e0748dae550bd1007a07d" id="r_a32678c62007e0748dae550bd1007a07d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder_v_o.html#a32678c62007e0748dae550bd1007a07d">bitrate</a> = 128000</td></tr>
+<tr class="separator:a32678c62007e0748dae550bd1007a07d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af376ba91774db086f3f9d322f1d4c0c0" id="r_af376ba91774db086f3f9d322f1d4c0c0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">VOAACEncoder</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder_v_o.html#af376ba91774db086f3f9d322f1d4c0c0">enc</a></td></tr>
+<tr class="separator:af376ba91774db086f3f9d322f1d4c0c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4903e3fd095c9c24024436dd34f0184d" id="r_a4903e3fd095c9c24024436dd34f0184d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder_v_o.html#a4903e3fd095c9c24024436dd34f0184d">frame_bytes</a> = 0</td></tr>
+<tr class="separator:a4903e3fd095c9c24024436dd34f0184d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47385aa19435f5fca9d3083a748258c5" id="r_a47385aa19435f5fca9d3083a748258c5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder.html#a47385aa19435f5fca9d3083a748258c5">info</a></td></tr>
 <tr class="separator:a47385aa19435f5fca9d3083a748258c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c54361cc737ba2d4ea42efe398c924a" id="r_a4c54361cc737ba2d4ea42efe398c924a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_d_p_c_m_encoder_x_q.html#a4c54361cc737ba2d4ea42efe398c924a">is_first</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">true</a></td></tr>
-<tr class="separator:a4c54361cc737ba2d4ea42efe398c924a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d80b0160c9017df753c6af26ca45ad1" id="r_a3d80b0160c9017df753c6af26ca45ad1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_d_p_c_m_encoder_x_q.html#a3d80b0160c9017df753c6af26ca45ad1">lookahead</a> = 0</td></tr>
-<tr class="separator:a3d80b0160c9017df753c6af26ca45ad1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6aa1adca609c17113cd477ca7040f943" id="r_a6aa1adca609c17113cd477ca7040f943"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_d_p_c_m_encoder_x_q.html#a6aa1adca609c17113cd477ca7040f943">noise_shaping</a> = (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>) <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">NOISE_SHAPING_OFF</a></td></tr>
-<tr class="separator:a6aa1adca609c17113cd477ca7040f943"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acdad90adc3ba71f7b1e16444c23b5502" id="r_acdad90adc3ba71f7b1e16444c23b5502"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_d_p_c_m_encoder_x_q.html#acdad90adc3ba71f7b1e16444c23b5502">p_print</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td></tr>
+<tr class="memitem:ab8f2b4e9fe5fda5c55f6c146f672c83e" id="r_ab8f2b4e9fe5fda5c55f6c146f672c83e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder_v_o.html#ab8f2b4e9fe5fda5c55f6c146f672c83e">out_buffer</a> {0}</td></tr>
+<tr class="separator:ab8f2b4e9fe5fda5c55f6c146f672c83e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4131374b11c5a530df9ac0c360dfd45a" id="r_a4131374b11c5a530df9ac0c360dfd45a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder_v_o.html#a4131374b11c5a530df9ac0c360dfd45a">output_buffer_size</a> = 2048</td></tr>
+<tr class="separator:a4131374b11c5a530df9ac0c360dfd45a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdad90adc3ba71f7b1e16444c23b5502" id="r_acdad90adc3ba71f7b1e16444c23b5502"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder_v_o.html#acdad90adc3ba71f7b1e16444c23b5502">p_print</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td></tr>
 <tr class="separator:acdad90adc3ba71f7b1e16444c23b5502"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d80f0c22f0fc1f90e19acdc1478f214" id="r_a9d80f0c22f0fc1f90e19acdc1478f214"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int16_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_d_p_c_m_encoder_x_q.html#a9d80f0c22f0fc1f90e19acdc1478f214">pcm_block</a></td></tr>
-<tr class="separator:a9d80f0c22f0fc1f90e19acdc1478f214"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aad3b520a5b0de5d9d373873af8404eab" id="r_aad3b520a5b0de5d9d373873af8404eab"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_d_p_c_m_encoder_x_q.html#aad3b520a5b0de5d9d373873af8404eab">pcm_block_size</a></td></tr>
-<tr class="separator:aad3b520a5b0de5d9d373873af8404eab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa657d2060c1da36eed7791279a27af1" id="r_aaa657d2060c1da36eed7791279a27af1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_d_p_c_m_encoder_x_q.html#aaa657d2060c1da36eed7791279a27af1">samples_per_block</a> = 0</td></tr>
-<tr class="separator:aaa657d2060c1da36eed7791279a27af1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab223ef888dd050a2ce16d6d68793b9e8" id="r_ab223ef888dd050a2ce16d6d68793b9e8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder_v_o.html#ab223ef888dd050a2ce16d6d68793b9e8">pcm_buffer</a> {0}</td></tr>
+<tr class="separator:ab223ef888dd050a2ce16d6d68793b9e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a757a9336fc7e16dfe3695e70018f420a" id="r_a757a9336fc7e16dfe3695e70018f420a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder_v_o.html#a757a9336fc7e16dfe3695e70018f420a">pcm_pos</a> = 0</td></tr>
+<tr class="separator:a757a9336fc7e16dfe3695e70018f420a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad18b91be0cc13716a2416cae1997c236" id="r_ad18b91be0cc13716a2416cae1997c236"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder_v_o.html#ad18b91be0cc13716a2416cae1997c236">use_adts</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">true</a></td></tr>
+<tr class="separator:ad18b91be0cc13716a2416cae1997c236"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Encoder for ADPCM-XQ - Depends on <a href="https://github.com/pschatzmann/arduino-adpcm-xq">https://github.com/pschatzmann/arduino-adpcm-xq</a>. </p>
+<div class="textblock"><p>AAC Encoder based on the VisualOn vo-aacenc implementation (<a href="https://github.com/pschatzmann/codec-vo-aacenc">https://github.com/pschatzmann/codec-vo-aacenc</a>). </p>
+<p>The encoder consumes PCM in blocks of 1024 samples per channel, so this class buffers arbitrary write sizes and encodes full frames automatically.</p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="abb312e419bc5173741329dc41cebbd59" name="abb312e419bc5173741329dc41cebbd59"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abb312e419bc5173741329dc41cebbd59">&#9670;&#160;</a></span>ADPCMEncoderXQ()</h2>
+<a id="a5c199eb85a94a8c16d43c6b722d01a5a" name="a5c199eb85a94a8c16d43c6b722d01a5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c199eb85a94a8c16d43c6b722d01a5a">&#9670;&#160;</a></span>AACEncoderVO() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -193,7 +196,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_a_d_p_c_m_encoder_x_q.html">ADPCMEncoderXQ</a> </td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder_v_o.html">AACEncoderVO</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -201,7 +204,58 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7c4d1833cb3b5af59cf952bbf74034cf" name="a7c4d1833cb3b5af59cf952bbf74034cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c4d1833cb3b5af59cf952bbf74034cf">&#9670;&#160;</a></span>AACEncoderVO() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder_v_o.html">AACEncoderVO</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_print.html">Print</a> &amp;&#160;</td>
+          <td class="paramname"><em>out_stream</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab468fd549062b862eb16b8308f96d166" name="ab468fd549062b862eb16b8308f96d166"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab468fd549062b862eb16b8308f96d166">&#9670;&#160;</a></span>~AACEncoderVO()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">~<a class="el" href="classaudio__tools_1_1_a_a_c_encoder_v_o.html">AACEncoderVO</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -295,8 +349,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a419d5bfacb0a1e5bf46b5fbd8d94f446" name="a419d5bfacb0a1e5bf46b5fbd8d94f446"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a419d5bfacb0a1e5bf46b5fbd8d94f446">&#9670;&#160;</a></span>begin() <span class="overload">[2/2]</span></h2>
+<a id="ac70f7349fc3915c58de8f2f5493422dc" name="ac70f7349fc3915c58de8f2f5493422dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac70f7349fc3915c58de8f2f5493422dc">&#9670;&#160;</a></span>begin() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -305,7 +359,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> begin </td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> begin </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td>
           <td class="paramname"><em>info</em></td><td>)</td>
@@ -314,17 +368,17 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_opus_ogg_encoder.html#ad061088a5678124520edc616c43880ef">OpusOggEncoder</a>, <a class="el" href="classaudio__tools_1_1_ogg_container_encoder.html#afdef9c285a4434d39af69db70e247e01">OggContainerEncoder</a>, <a class="el" href="classaudio__tools_1_1_decoder_basic.html#af1a0fe2d8421c464e2b0d0fe10690fb1">DecoderBasic</a>, <a class="el" href="classaudio__tools_1_1_audio_decoder.html#a53535f66e5ffb2b3074fccc630c1b8ee">AudioDecoder</a>, <a class="el" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#a53535f66e5ffb2b3074fccc630c1b8ee">AACEncoderFDK</a>, <a class="el" href="classaudio__tools_1_1_a_a_c_encoder_v_o.html#ac70f7349fc3915c58de8f2f5493422dc">AACEncoderVO</a>, <a class="el" href="classaudio__tools_1_1_ogg_container_decoder.html#ac70f7349fc3915c58de8f2f5493422dc">OggContainerDecoder</a>, and <a class="el" href="classaudio__tools_1_1_meta_data_filter_encoder.html#ac70f7349fc3915c58de8f2f5493422dc">MetaDataFilterEncoder</a>.</p>
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_writer.html#a419d5bfacb0a1e5bf46b5fbd8d94f446">AudioWriter</a>.</p>
 
 </div>
 </div>
-<a id="a9e1fd708c4297647144574ca6cead718" name="a9e1fd708c4297647144574ca6cead718"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9e1fd708c4297647144574ca6cead718">&#9670;&#160;</a></span>encode()</h2>
+<a id="a84fd6e0518103b7745c5279bbb7e0c76" name="a84fd6e0518103b7745c5279bbb7e0c76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84fd6e0518103b7745c5279bbb7e0c76">&#9670;&#160;</a></span>driver()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -333,7 +387,32 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> encode </td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">VOAACEncoder</a> * driver </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0fa623738bff627cfde5ff87adfe1657" name="a0fa623738bff627cfde5ff87adfe1657"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fa623738bff627cfde5ff87adfe1657">&#9670;&#160;</a></span>encodeFrame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> encodeFrame </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -489,6 +568,34 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ae1bfa36528833f68bb14187eb12edb27" name="ae1bfa36528833f68bb14187eb12edb27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1bfa36528833f68bb14187eb12edb27">&#9670;&#160;</a></span>setAdts()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> setAdts </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td>
+          <td class="paramname"><em>enabled</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Defines if ADTS headers are generated. </p>
+
+</div>
+</div>
 <a id="a5c749802992efec8bc20ba4a522b027f" name="a5c749802992efec8bc20ba4a522b027f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5c749802992efec8bc20ba4a522b027f">&#9670;&#160;</a></span>setAudioInfo()</h2>
 
@@ -521,8 +628,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ac6e299ceb04c7d103c328b431e5c61c4" name="ac6e299ceb04c7d103c328b431e5c61c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac6e299ceb04c7d103c328b431e5c61c4">&#9670;&#160;</a></span>setBlockSizePower()</h2>
+<a id="ae6350f03ea150fb9a13d9e739e27f241" name="ae6350f03ea150fb9a13d9e739e27f241"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6350f03ea150fb9a13d9e739e27f241">&#9670;&#160;</a></span>setBitrate()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -531,10 +638,10 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> setBlockSizePower </td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> setBitrate </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
-          <td class="paramname"><em>pow</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint32_t</a>&#160;</td>
+          <td class="paramname"><em>bps</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -545,63 +652,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>set bocksizes as 2^pow: range from 8 to 15 </p>
-
-</div>
-</div>
-<a id="aed6d991a840256eb66f16c1fbb172439" name="aed6d991a840256eb66f16c1fbb172439"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aed6d991a840256eb66f16c1fbb172439">&#9670;&#160;</a></span>setLookahead()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> setLookahead </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
-          <td class="paramname"><em>value</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Set look ahead bytes from 0 to 8. </p>
-
-</div>
-</div>
-<a id="a4b77b224cc2cc916223a44f08d95ee18" name="a4b77b224cc2cc916223a44f08d95ee18"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4b77b224cc2cc916223a44f08d95ee18">&#9670;&#160;</a></span>setNoiseShaping()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> setNoiseShaping </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#aa905b9b59808bab9ad96d4c56442768d">ADPCMNoiseShaping</a>&#160;</td>
-          <td class="paramname"><em>ns</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Defines the noise shaping. </p>
+<p>Defines target bitrate in bps. </p>
 
 </div>
 </div>
@@ -629,9 +680,37 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Default output assignment (encoders may override to store <a class="el" href="class_print.html">Print</a> reference) </p>
+<p>Defines the output stream. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_encoder.html#accd4a0f8bb385180e8006fd543aef936">AudioEncoder</a>.</p>
+
+</div>
+</div>
+<a id="a67a71793d4ced065b286e8e7055e39e3" name="a67a71793d4ced065b286e8e7055e39e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67a71793d4ced065b286e8e7055e39e3">&#9670;&#160;</a></span>setOutputBufferSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> setOutputBufferSize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td>
+          <td class="paramname"><em>len</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Defines max encoded output frame size. </p>
 
 </div>
 </div>
@@ -716,8 +795,8 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a5ae4b3bab26841e2110a8bf6c08c1a01" name="a5ae4b3bab26841e2110a8bf6c08c1a01"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5ae4b3bab26841e2110a8bf6c08c1a01">&#9670;&#160;</a></span>adpcm_block</h2>
+<a id="a03c996f9fcf0e10baeb3e700be0c409a" name="a03c996f9fcf0e10baeb3e700be0c409a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03c996f9fcf0e10baeb3e700be0c409a">&#9670;&#160;</a></span>active</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -726,7 +805,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&gt; adpcm_block</td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> active = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">false</a></td>
         </tr>
       </table>
   </td>
@@ -738,8 +817,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ad9f2a2fae9804a3ae936a155e3328498" name="ad9f2a2fae9804a3ae936a155e3328498"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad9f2a2fae9804a3ae936a155e3328498">&#9670;&#160;</a></span>adpcm_cnxt</h2>
+<a id="a32678c62007e0748dae550bd1007a07d" name="a32678c62007e0748dae550bd1007a07d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32678c62007e0748dae550bd1007a07d">&#9670;&#160;</a></span>bitrate</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -748,7 +827,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>* adpcm_cnxt = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint32_t</a> bitrate = 128000</td>
         </tr>
       </table>
   </td>
@@ -760,8 +839,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a70b27761c7d0bd5cd90f4fe47e569b94" name="a70b27761c7d0bd5cd90f4fe47e569b94"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a70b27761c7d0bd5cd90f4fe47e569b94">&#9670;&#160;</a></span>block_size</h2>
+<a id="af376ba91774db086f3f9d322f1d4c0c0" name="af376ba91774db086f3f9d322f1d4c0c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af376ba91774db086f3f9d322f1d4c0c0">&#9670;&#160;</a></span>enc</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -770,7 +849,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> block_size = 0</td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">VOAACEncoder</a> enc</td>
         </tr>
       </table>
   </td>
@@ -782,8 +861,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a7e1e7797b0db65b499eb68a41321116a" name="a7e1e7797b0db65b499eb68a41321116a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e1e7797b0db65b499eb68a41321116a">&#9670;&#160;</a></span>block_size_pow2</h2>
+<a id="a4903e3fd095c9c24024436dd34f0184d" name="a4903e3fd095c9c24024436dd34f0184d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4903e3fd095c9c24024436dd34f0184d">&#9670;&#160;</a></span>frame_bytes</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -792,29 +871,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> block_size_pow2 = 0</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="af507d2d28aa3774531b92b9e88a154b5" name="af507d2d28aa3774531b92b9e88a154b5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af507d2d28aa3774531b92b9e88a154b5">&#9670;&#160;</a></span>current_sample</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> current_sample = 0</td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> frame_bytes = 0</td>
         </tr>
       </table>
   </td>
@@ -848,8 +905,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a4c54361cc737ba2d4ea42efe398c924a" name="a4c54361cc737ba2d4ea42efe398c924a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4c54361cc737ba2d4ea42efe398c924a">&#9670;&#160;</a></span>is_first</h2>
+<a id="ab8f2b4e9fe5fda5c55f6c146f672c83e" name="ab8f2b4e9fe5fda5c55f6c146f672c83e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8f2b4e9fe5fda5c55f6c146f672c83e">&#9670;&#160;</a></span>out_buffer</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -858,7 +915,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> is_first = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">true</a></td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&gt; out_buffer {0}</td>
         </tr>
       </table>
   </td>
@@ -870,8 +927,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a3d80b0160c9017df753c6af26ca45ad1" name="a3d80b0160c9017df753c6af26ca45ad1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3d80b0160c9017df753c6af26ca45ad1">&#9670;&#160;</a></span>lookahead</h2>
+<a id="a4131374b11c5a530df9ac0c360dfd45a" name="a4131374b11c5a530df9ac0c360dfd45a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4131374b11c5a530df9ac0c360dfd45a">&#9670;&#160;</a></span>output_buffer_size</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -880,29 +937,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> lookahead = 0</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a6aa1adca609c17113cd477ca7040f943" name="a6aa1adca609c17113cd477ca7040f943"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6aa1adca609c17113cd477ca7040f943">&#9670;&#160;</a></span>noise_shaping</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> noise_shaping = (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>) <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">NOISE_SHAPING_OFF</a></td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> output_buffer_size = 2048</td>
         </tr>
       </table>
   </td>
@@ -936,8 +971,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a9d80f0c22f0fc1f90e19acdc1478f214" name="a9d80f0c22f0fc1f90e19acdc1478f214"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9d80f0c22f0fc1f90e19acdc1478f214">&#9670;&#160;</a></span>pcm_block</h2>
+<a id="ab223ef888dd050a2ce16d6d68793b9e8" name="ab223ef888dd050a2ce16d6d68793b9e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab223ef888dd050a2ce16d6d68793b9e8">&#9670;&#160;</a></span>pcm_buffer</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -946,7 +981,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int16_t</a>&gt; pcm_block</td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&gt; pcm_buffer {0}</td>
         </tr>
       </table>
   </td>
@@ -958,8 +993,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aad3b520a5b0de5d9d373873af8404eab" name="aad3b520a5b0de5d9d373873af8404eab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aad3b520a5b0de5d9d373873af8404eab">&#9670;&#160;</a></span>pcm_block_size</h2>
+<a id="a757a9336fc7e16dfe3695e70018f420a" name="a757a9336fc7e16dfe3695e70018f420a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a757a9336fc7e16dfe3695e70018f420a">&#9670;&#160;</a></span>pcm_pos</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -968,7 +1003,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> pcm_block_size</td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> pcm_pos = 0</td>
         </tr>
       </table>
   </td>
@@ -980,8 +1015,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aaa657d2060c1da36eed7791279a27af1" name="aaa657d2060c1da36eed7791279a27af1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaa657d2060c1da36eed7791279a27af1">&#9670;&#160;</a></span>samples_per_block</h2>
+<a id="ad18b91be0cc13716a2416cae1997c236" name="ad18b91be0cc13716a2416cae1997c236"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad18b91be0cc13716a2416cae1997c236">&#9670;&#160;</a></span>use_adts</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -990,7 +1025,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> samples_per_block = 0</td>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> use_adts = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">true</a></td>
         </tr>
       </table>
   </td>
@@ -1003,7 +1038,7 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/AudioCodecs/<a class="el" href="_codec_a_d_p_c_m_x_q_8h_source.html">CodecADPCMXQ.h</a></li>
+<li>src/AudioTools/AudioCodecs/<a class="el" href="_codec_a_a_c_v_o_8h_source.html">CodecAACVO.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

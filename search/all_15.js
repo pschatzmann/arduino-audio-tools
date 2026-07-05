@@ -371,7 +371,7 @@ var searchData=
   ['rtspserverbase_2eh_368',['RTSPServerBase.h',['../_r_t_s_p_server_base_8h.html',1,'']]],
   ['rtspservertaskless_369',['rtspservertaskless',['../classaudio__tools_1_1_r_t_s_p_server_taskless.html#acef84a9cb9186cf94d9097cf45399d76',1,'audio_tools::RTSPServerTaskless::RTSPServerTaskless()'],['../classaudio__tools_1_1_r_t_s_p_server_taskless.html',1,'RTSPServerTaskless&lt; Platform &gt;']]],
   ['rtspservertaskless_2eh_370',['RTSPServerTaskless.h',['../_r_t_s_p_server_taskless_8h.html',1,'']]],
-  ['rtspsession_371',['rtspsession',['../classaudio__tools_1_1_r_t_s_p_server_base.html#a3a18e7ed0d3e26ab02a275fd2f935c41',1,'audio_tools::RTSPServerBase::rtspSession'],['../classaudio__tools_1_1_rtsp_session.html#a6c98a543b991399f0df1e562e1512655',1,'audio_tools::RtspSession::RtspSession()'],['../classaudio__tools_1_1_rtsp_session.html',1,'RtspSession&lt; Platform &gt;']]],
+  ['rtspsession_371',['rtspsession',['../classaudio__tools_1_1_rtsp_session.html#a6c98a543b991399f0df1e562e1512655',1,'audio_tools::RtspSession::RtspSession()'],['../classaudio__tools_1_1_r_t_s_p_server_base.html#a3a18e7ed0d3e26ab02a275fd2f935c41',1,'audio_tools::RTSPServerBase::rtspSession'],['../classaudio__tools_1_1_rtsp_session.html',1,'RtspSession&lt; Platform &gt;']]],
   ['rtspsession_2eh_372',['RTSPSession.h',['../_r_t_s_p_session_8h.html',1,'']]],
   ['rtspsinkreceivebuffersize_373',['rtspSinkReceiveBufferSize',['../namespaceaudiotools__rtsp.html#a193908829c55eb82edab4a4a3a7cbdcc',1,'audiotools_rtsp']]],
   ['rtsptaskless_2eh_374',['RTSPTaskless.h',['../_r_t_s_p_taskless_8h.html',1,'']]],
