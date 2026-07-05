@@ -19,7 +19,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-template <typename T = int16_t>
+template <typename T = uint8_t>
 class BaseBuffer {
  public:
   BaseBuffer() = default;
@@ -135,7 +135,7 @@ class BaseBuffer {
 /**
  * @brief A FrameBuffer reads multiple values for array of 2 dimensional frames
  */
-template <typename T = int16_t>
+template <typename T = uint8_t>
 class FrameBuffer {
  public:
   FrameBuffer(BaseBuffer<T> &buffer) { p_buffer = &buffer; }
@@ -180,7 +180,7 @@ class FrameBuffer {
  * @copyright GPLv3
  */
 
-template <typename T = int16_t>
+template <typename T = uint8_t>
 class SingleBuffer : public BaseBuffer<T> {
  public:
   /**
@@ -349,7 +349,7 @@ class SingleBuffer : public BaseBuffer<T> {
  * @ingroup buffers
  * @tparam T
  */
-template <typename T = int16_t>
+template <typename T = uint8_t>
 class RingBuffer : public BaseBuffer<T> {
  public:
   RingBuffer(int size, Allocator &allocator = DefaultAllocator) : _allocator(allocator) {
@@ -671,7 +671,7 @@ class RingBufferFile : public BaseBuffer<T> {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-template <typename T = int16_t>
+template <typename T = uint8_t>
 class NBuffer : public BaseBuffer<T> {
  public:
   NBuffer(int size, int count) { resize(size, count); }
@@ -910,7 +910,7 @@ class NBuffer : public BaseBuffer<T> {
  * @ingroup buffers
  * @tparam T: buffered data type
  */
-template <typename T = int16_t>
+template <typename T = uint8_t>
 class NBufferExt : public NBuffer<T> {
  public:
   NBufferExt(int size, int count) { resize(size, count); }
@@ -1118,7 +1118,7 @@ class NBufferFile : public BaseBuffer<T> {
  * @copyright GPLv3
  */
 
-template <typename T = int16_t>
+template <typename T = uint8_t>
 class BufferedArray {
  public:
   BufferedArray(Stream &input, int len) {
