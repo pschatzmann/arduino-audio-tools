@@ -31,121 +31,141 @@ class MetaDataFilter : public AudioOutput {
   /// (Re)starts the processing
   bool begin() override {
     TRACED();
-    start = 0;
+    total_pos = 0;
+    id3v2_skip_remaining = 0;
+    tail.reset();
+    out_buf.reset();
     if (p_writer) p_writer->begin();
     return true;
   }
 
   void end() override {
+    // the last bytes are still held back in case they are a trailing
+    // ID3v1/TAG+ tag: decide now and flush whatever is real audio
+    flushTail();
     if (p_writer) p_writer->end();
   }
 
   /// Writes the data to the decoder
   size_t write(const uint8_t *data, size_t len) override {
     LOGI("write: %u", (unsigned)len);
-    size_t result = len;
     // prevent npe
     if ((p_out == nullptr && p_writer == nullptr) || (data == nullptr) ||
         (len == 0))
       return 0;
 
-    // find tag
-    int meta_len = 0;
-    if (findTag(data, len, metadata_range.from, meta_len)) {
-      current_pos = 0;
-      metadata_range.setLen(meta_len);
-      LOGI("ignoring metadata at pos: %d len: %d", metadata_range.from,
-           meta_len);
-    }
+    // an ID3v2 header can only ever be located at the very start of the
+    // stream, so it is only ever checked once, on the first bytes seen
+    if (total_pos == 0) checkID3v2Header(data, len);
 
-    // nothing to ignore
-    if (!metadata_range.isDefined()) {
-      if (p_out) return p_out->write(data, len);
-      if (p_writer) return p_writer->write(data, len);
-    }
-
-    // ignore data in metadata range
-    SingleBuffer<uint8_t> tmp(len);
-    for (int j = 0; j < len; j++) {
-      if (!metadata_range.inRange(current_pos)) {
-        tmp.write(data[j]);
+    // Bytes that turn out not to belong to the leading ID3v2 tag are held
+    // back in a small trailing ring buffer: this way a byte is only ever
+    // forwarded once we know it is not part of a trailing ID3v1/TAG+ tag
+    // (which is only recognizable once we reach the real end of stream).
+    // This avoids treating a coincidental "TAG"/"ID3" byte sequence inside
+    // the actual audio data as metadata.
+    out_buf.resize(len);
+    out_buf.reset();
+    for (size_t j = 0; j < len; j++) {
+      total_pos++;
+      if (id3v2_skip_remaining > 0) {
+        id3v2_skip_remaining--;
+        continue;
       }
-      current_pos++;
+      if (tail.isFull()) {
+        uint8_t old = 0;
+        tail.read(old);
+        out_buf.write(old);
+      }
+      tail.write(data[j]);
     }
 
-    // write partial data
-    size_t to_write = tmp.available();
+    size_t to_write = out_buf.available();
     if (to_write > 0) {
       LOGI("output: %u", (unsigned)to_write);
-      size_t written = 0;
-      if (p_out) written = p_out->write(tmp.data(), to_write);
-      if (p_writer) written = p_writer->write(tmp.data(), to_write);
-      assert(to_write == written);
-      metadata_range.clear();
+      writeOut(out_buf.data(), to_write);
     } else {
       LOGI("output ignored");
     }
 
-    // reset for next run
-    if (current_pos > metadata_range.to) {
-      current_pos = 0;
-      metadata_range.clear();
-    }
-
-    return result;
+    return len;
   }
 
  protected:
   Print *p_out = nullptr;
   AudioWriter *p_writer = nullptr;
-  int current_pos = 0;
-  enum MetaType { TAG, TAG_PLUS, ID3 };
-  int start = 0;
-  /// Metadata range
-  struct Range {
-    int from = -1;
-    int to = -1;
+  /// total number of input bytes seen so far (absolute stream position)
+  uint64_t total_pos = 0;
+  /// remaining bytes of a leading ID3v2 tag still to be dropped
+  int id3v2_skip_remaining = 0;
 
-    bool inRange(int pos) { return pos >= from && pos < to; }
-    void setLen(int len) { to = from + len; }
-
-    void clear() {
-      from = -1;
-      to = -1;
-    }
-    bool isDefined() { return from != -1; }
-  } metadata_range;
+  static const int kID3v1Len = 128;
+  static const int kID3v1EnhancedLen = 227;
+  static const int kMaxTailLen = kID3v1Len + kID3v1EnhancedLen;
+  /// delay line holding the last (at most) kMaxTailLen bytes: needed because
+  /// a trailing ID3v1/TAG+ tag can only be recognized once we know we are
+  /// at the actual end of the stream
+  RingBuffer<uint8_t> tail{kMaxTailLen};
+  /// reused scratch buffer for the bytes flushed out of the tail per write()
+  SingleBuffer<uint8_t> out_buf;
 
   /// ID3 verion 2 TAG Header (10 bytes)
-  struct ID3v2 {
+  struct ID3v2Header {
     uint8_t header[3];  // ID3
     uint8_t version[2];
     uint8_t flags;
     uint8_t size[4];
-  } tagv2;
+  };
 
-  /// determines if the data conatins a ID3v1 or ID3v2 tag
-  bool findTag(const uint8_t *data, size_t len, int &pos_tag, int &meta_len) {
-    MetaType tag_type;
-    if (find((const char *)data, len, pos_tag, tag_type)) {
-      switch (tag_type) {
-        case TAG:
-          LOGD("TAG");
-          meta_len = 128;
-          break;
-        case TAG_PLUS:
-          LOGD("TAG+");
-          meta_len = 227;
-          break;
-        case ID3:
-          LOGD("ID3");
-          memcpy(&tagv2, data + pos_tag, sizeof(ID3v2));
-          meta_len = calcSizeID3v2(tagv2.size);
-          break;
-      }
-      return true;
+  size_t writeOut(const uint8_t *data, size_t len) {
+    if (p_out) return p_out->write(data, len);
+    if (p_writer) return p_writer->write(data, len);
+    return 0;
+  }
+
+  /// checks for a ID3v2 header at the start of the stream and, if found,
+  /// arranges for its bytes (header + body) to be skipped
+  void checkID3v2Header(const uint8_t *data, size_t len) {
+    if (len < sizeof(ID3v2Header)) return;
+    if (data[0] == 'I' && data[1] == 'D' && data[2] == '3') {
+      ID3v2Header hdr;
+      memcpy(&hdr, data, sizeof(hdr));
+      id3v2_skip_remaining =
+          (int)sizeof(ID3v2Header) + (int)calcSizeID3v2(hdr.size);
+      LOGI("ignoring ID3v2 header at stream start, len: %d",
+           id3v2_skip_remaining);
     }
-    return false;
+  }
+
+  /// checks the buffered tail (the real end of the stream) for a trailing
+  /// ID3v1 ("TAG") tag, optionally preceded by an enhanced ("TAG+") tag,
+  /// and writes out whatever is left over as regular audio data
+  void flushTail() {
+    int n = tail.available();
+    if (n <= 0) return;
+    uint8_t buf[kMaxTailLen];
+    tail.readArray(buf, n);
+
+    int drop_from = n;
+    if (n >= kID3v1Len && buf[n - kID3v1Len] == 'T' &&
+        buf[n - kID3v1Len + 1] == 'A' && buf[n - kID3v1Len + 2] == 'G') {
+      drop_from = n - kID3v1Len;
+      if (drop_from >= kID3v1EnhancedLen) {
+        int e = drop_from - kID3v1EnhancedLen;
+        if (buf[e] == 'T' && buf[e + 1] == 'A' && buf[e + 2] == 'G' &&
+            buf[e + 3] == '+') {
+          drop_from = e;
+        }
+      }
+    }
+
+    if (drop_from > 0) {
+      LOGI("output: %d", drop_from);
+      writeOut(buf, drop_from);
+    }
+    if (drop_from < n) {
+      LOGI("ignoring trailing tag, len: %d", n - drop_from);
+    }
   }
 
   // calculate the synch save size for ID3v2
@@ -155,23 +175,6 @@ class MetaDataFilter : public AudioOutput {
     uint32_t byte2 = chars[2];
     uint32_t byte3 = chars[3];
     return byte0 << 21 | byte1 << 14 | byte2 << 7 | byte3;
-  }
-
-  /// find the tag position in the string;
-  bool find(const char *str, size_t len, int &pos, MetaType &type) {
-    if (str == nullptr || len <= 0) return false;
-    for (size_t j = 0; j <= len - 3; j++) {
-      if (str[j] == 'T' && str[j + 1] == 'A' && str[j + 2] == 'G') {
-        type = str[j + 3] == '+' ? TAG_PLUS : TAG;
-        pos = j;
-        return true;
-      } else if (str[j] == 'I' && str[j + 1] == 'D' && str[j + 2] == '3') {
-        type = ID3;
-        pos = j;
-        return true;
-      }
-    }
-    return false;
   }
 };
 
