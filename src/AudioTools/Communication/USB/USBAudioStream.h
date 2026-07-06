@@ -6,7 +6,7 @@
 #if defined(USE_TINYUSB) 
 #  include "USBAudioDeviceBase.h"
 #  include "USBAudioDeviceTinyUSB.h"
-#  if defined(USE_FREETROS)
+#  if defined(USE_FREERTOS)
 #    include "AudioTools/Concurrency.h"
 #    include "USBAudioDeviceTinyUSBFreeRTOS.h"
      namespace audio_tools { using USBAudioStream = USBAudioDeviceTinyUSBFreeRTOS; }

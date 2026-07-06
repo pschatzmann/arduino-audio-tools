@@ -20,7 +20,8 @@
  * USBSerial; and use USBSerial!
  * 
  * @note for boards using Adafruit TinyUSB core (e.g. RP2040, STM32, SAMD):
- * Board settings (Arduino IDE): USB Mode: USB OTG (TinyUSB)
+ * Board settings (Arduino IDE): USB Mode: USB OTG (TinyUSB). 
+ * For STM32 the USB Support must be set to None
  *
  * @author Phil Schatzmann
  * @copyright GPLv3

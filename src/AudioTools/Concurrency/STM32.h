@@ -6,7 +6,7 @@
 #  if __has_include("STM32FreeRTOS.h")
 #    include "STM32FreeRTOS.h"
 #    include "RTOS.h"
-#    define USE_FREETROS
+#    define USE_FREERTOS
 #  else
 #    warning("STM32FreeRTOS not found")
 #  endif
