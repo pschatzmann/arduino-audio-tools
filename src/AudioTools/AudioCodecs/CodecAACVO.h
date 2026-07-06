@@ -3,6 +3,8 @@
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
 #include "VOAACEncoder.h"
 
+// Reference bitrate for 16 bit stereo @ 44100 Hz; scaled by sample rate and
+// channel count when the bitrate is not set explicitly via setBitrate().
 #ifndef VOAAC_DEFAULT_BITRATE
 #define VOAAC_DEFAULT_BITRATE 128000
 #endif
@@ -35,8 +37,12 @@ public:
   /// Defines the output stream
   void setOutput(Print &out_stream) override { p_print = &out_stream; }
 
-  /// Defines target bitrate in bps
-  void setBitrate(uint32_t bps) { bitrate = bps; }
+  /// Defines target bitrate in bps. If not called, the bitrate is derived
+  /// from VOAAC_DEFAULT_BITRATE, scaled by the sample rate and channel count.
+  void setBitrate(uint32_t bps) {
+    bitrate = bps;
+    bitrate_set = true;
+  }
 
   /// Defines if ADTS headers are generated
   void setAdts(bool enabled) { use_adts = enabled; }
@@ -69,7 +75,9 @@ public:
     out_buffer.resize(output_buffer_size);
     pcm_pos = 0;
 
-    active = enc.begin(info.sample_rate, bitrate, info.channels, use_adts);
+    uint32_t effective_bitrate =
+        bitrate_set ? bitrate : defaultBitrate(info.sample_rate, info.channels);
+    active = enc.begin(info.sample_rate, effective_bitrate, info.channels, use_adts);
     if (!active) {
       LOGE("VO AAC encoder init failed");
       return false;
@@ -130,8 +138,19 @@ protected:
   size_t pcm_pos = 0;
   size_t output_buffer_size = VOAAC_DEFAULT_OUTPUT_BUFFER_SIZE;
   uint32_t bitrate = VOAAC_DEFAULT_BITRATE;
+  bool bitrate_set = false;
   bool use_adts = true;
   bool active = false;
+
+  /// Scales VOAAC_DEFAULT_BITRATE (defined for 16 bit stereo @ 44100 Hz) by
+  /// sample rate and channel count.
+  static uint32_t defaultBitrate(uint32_t sample_rate, int channels) {
+    double ref_bps = VOAAC_DEFAULT_BITRATE;
+    if (channels == 1) {
+      ref_bps *= 96.0 / 128.0;
+    }
+    return (uint32_t)(ref_bps * sample_rate / 44100.0);
+  }
 
   bool encodeFrame() {
     size_t out_bytes = 0;
