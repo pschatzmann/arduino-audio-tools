@@ -21,7 +21,7 @@ namespace audio_tools {
  *
  * Uses lock-free SPSC ring buffers — suitable for bare-metal or the
  * arduino-pico core-1 `loop1()` pattern where producer/consumer assignment
- * is fixed.  For FreeRTOS use USBAudioDeviceTinyUSBFreeRTOS instead.
+ * is fixed. 
  *
  * ## Board settings (arduino-pico + Adafruit TinyUSB)
  * - Board     : "Raspberry Pi Pico" (earlephilhower/arduino-pico)

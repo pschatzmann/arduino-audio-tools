@@ -12,14 +12,6 @@ namespace audio_tools {
  * under task migration) and launches a dedicated FreeRTOS task that calls
  * `tud_task()` once per 1 ms tick.
  *
- * Two bugs fixed versus calling tud_task() from write():
- * - **Re-entrancy**: tud_task() is not re-entrant; calling it from both
- *   write() and a background task corrupts TinyUSB's event queue.
- *   serviceTinyUSB() is suppressed (via usb_task_active_) while the task runs.
- * - **Starvation**: vTaskDelay(1) — not taskYIELD() — is used so the
- *   max-priority USB task actually sleeps for 1 ms and lets the lower-priority
- *   audio loop run.  One tick matches the USB full-speed frame period exactly.
- *
  * @note I recommend to use the USBAudioStream type alias instead of this class
  * directly, so that the code is portable to other platforms. Just actiavate
  * FreeRTOS in your sketch and the library will automatically use this class

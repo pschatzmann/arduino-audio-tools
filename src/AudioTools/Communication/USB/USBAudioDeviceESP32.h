@@ -31,12 +31,14 @@ class Emulated_TinyUSB;
  *  - `tinyusb_enable_interface(USB_INTERFACE_AUDIO, …)` — injects the UAC2
  *    descriptor into the configuration descriptor the framework builds
  *
- * ## Timing
- * On ESP32, `USB.begin()` usually should be called explicitly. We provide a
+ * @note Timing: On ESP32, `USB.begin()` usually should be called explicitly. We provide a
  * TinyUSBDevice shim that calls `USB.begin()` automatically on the first call
- * to `attach()`.
+ * to `attach()`, so that you can use the same API across all platforms.
+ * Alternatively you can call `USB.begin()` in your sketch's `setup()` or use
+ * the `begin_usb` option in `USBAudioConfig` to have the library call it for
+ * you.
  *
- * ## Board settings
+ * @note Board settings:
  * - Target : ESP32-S2 or ESP32-S3 (native USB OTG)
  * - `ARDUINO_USB_MODE` must be 0 (OTG / TinyUSB mode)
  *
