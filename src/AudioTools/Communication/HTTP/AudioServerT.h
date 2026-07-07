@@ -217,6 +217,9 @@ class AudioServerT {
   /// Checks if any client has connected
   bool isClientConnected() { return client_obj.connected(); }
 
+  /// Checks if any client has connected
+  operator bool() { return client_obj.connected(); }
+
   /// Changes the copy buffer size
   void setCopyBufferSize(int size) { copier.resize(size); }
 
