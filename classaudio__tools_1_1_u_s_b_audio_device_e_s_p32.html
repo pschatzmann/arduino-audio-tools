@@ -620,16 +620,15 @@ Friends</h2></td></tr>
 <li><code>ESPUSB</code> (<code>USB.*</code>) — configures VID/PID/strings and starts the stack</li>
 <li><code>tinyusb_enable_interface(USB_INTERFACE_AUDIO, …)</code> — injects the UAC2 descriptor into the configuration descriptor the framework builds</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md38"></a>
-Timing</h2>
-<p>On ESP32, <code>USB.begin()</code> usually should be called explicitly. We provide a TinyUSBDevice shim that calls <code>USB.begin()</code> automatically on the first call to <code>attach()</code>.</p>
-<h2><a class="anchor" id="autotoc_md39"></a>
-Board settings</h2>
-<ul>
+<dl class="section note"><dt>Note</dt><dd>Timing: On ESP32, <code>USB.begin()</code> usually should be called explicitly. We provide a TinyUSBDevice shim that calls <code>USB.begin()</code> automatically on the first call to <code>attach()</code>, so that you can use the same API across all platforms. Alternatively you can call <code>USB.begin()</code> in your sketch's <code><a class="el" href="_main_8h.html#a4fc01d736fe50cf5b977f755b675f11d">setup()</a></code> or use the <code>begin_usb</code> option in <code><a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html" title="Configuration for USB Audio (inherits sample_rate / channels / bits_per_sample from AudioInfo).">USBAudioConfig</a></code> to have the library call it for you.</dd>
+<dd>
+Board settings:<ul>
 <li>Target : ESP32-S2 or ESP32-S3 (native USB OTG)</li>
 <li><code>ARDUINO_USB_MODE</code> must be 0 (OTG / TinyUSB mode)</li>
 </ul>
-<dl class="section note"><dt>Note</dt><dd>I recommend to use the USBAudioStream type alias instead of this class directly, so that the code is portable to other platforms.</dd></dl>
+</dd>
+<dd>
+I recommend to use the USBAudioStream type alias instead of this class directly, so that the code is portable to other platforms.</dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>

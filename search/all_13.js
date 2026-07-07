@@ -260,7 +260,7 @@ var searchData=
   ['phi_257',['PHI',['../group___echo_state.html#gae4e1eaf62df54e993545c6e8e4c51b44',1,'audio_tools::EchoState_']]],
   ['phymode_258',['phymode',['../structaudio__tools_1_1_e_s_p_now_stream_config.html#af0f1bef66eaf428a84babb8a3e9369d7',1,'audio_tools::ESPNowStreamConfig']]],
   ['pi_259',['pi',['../_audio_effects_suite_8h.html#a598a3330b3c21701223ee0ca14316eca',1,'PI:&#160;AudioEffectsSuite.h'],['../_arduino_8h.html#a598a3330b3c21701223ee0ca14316eca',1,'PI:&#160;Arduino.h'],['../namespaceffft.html#a952eac791b596a61bba0a133a3bb439f',1,'ffft::PI']]],
-  ['pico_20adafruit_20tinyusb_260',['Board settings (arduino-pico + Adafruit TinyUSB)',['../classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html#autotoc_md40',1,'']]],
+  ['pico_20adafruit_20tinyusb_260',['Board settings (arduino-pico + Adafruit TinyUSB)',['../classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html#autotoc_md38',1,'']]],
   ['pid_261',['pid',['../structaudio__tools_1_1_u_s_b_audio_config.html#a9089e9c40db82122a499b9620e2cb54e',1,'audio_tools::USBAudioConfig::pid'],['../classaudio__tools_1_1_adaptive_resampling_buffer.html#afdc6bbcfd62d2481cd08bb21c1e65930',1,'audio_tools::AdaptiveResamplingBuffer::pid']]],
   ['pidcontroller_262',['PIDController',['../classaudio__tools_1_1_p_i_d_controller.html',1,'audio_tools']]],
   ['pidcontroller_2eh_263',['PIDController.h',['../_p_i_d_controller_8h.html',1,'']]],
