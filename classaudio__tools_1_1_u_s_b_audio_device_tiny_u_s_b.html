@@ -612,6 +612,7 @@ Board settings (arduino-pico + Adafruit TinyUSB)</h2>
 <li>Board : "Raspberry Pi Pico" (earlephilhower/arduino-pico)</li>
 <li>USB <a class="el" href="classaudio__tools_1_1_stack.html" title="LIFO Stack which is based on a List.">Stack</a> : <b>Adafruit TinyUSB</b></li>
 </ul>
+<dl class="section note"><dt>Note</dt><dd>I recommend to use the USBAudioStream type alias instead of this class directly, so that the code is portable to other platforms.</dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -4052,7 +4053,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 </div><div class="memdoc">
 
 <p>Process pending USB events on platforms where the application drives the stack (RP2040, STM32, ...). Skipped when a dedicated FreeRTOS task already calls <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">tud_task()</a> continuously (see usb_task_active_) - <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">tud_task()</a> is not re-entrant; calling it from two contexts concurrently corrupts TinyUSB's internal event queue and causes random hangs. </p>
-<p>ESP32 (see <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html">USBAudioDeviceESP32</a>) overrides this to an empty no-op, since its own FreeRTOS task already calls <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">tud_task()</a> continuously. </p>
+<p>ESP32 (see <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html" title="USBAudioDeviceBase subclass for ESP32-S2/S3 using the arduino-esp32 stack.">USBAudioDeviceESP32</a>) overrides this to an empty no-op, since its own FreeRTOS task already calls <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">tud_task()</a> continuously. </p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#a620a53b384e211085da3222db37e71ea">USBAudioDeviceESP32</a>.</p>
 

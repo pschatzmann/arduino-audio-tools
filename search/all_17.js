@@ -113,7 +113,7 @@ var searchData=
   ['timestep_110',['timestep',['../classaudio__tools_1_1_modulation_base_class.html#ac80cb97c3e6b8eebe58efacba3b93351',1,'audio_tools::ModulationBaseClass::timeStep'],['../classaudio__tools_1_1_simple_flanger.html#ac80cb97c3e6b8eebe58efacba3b93351',1,'audio_tools::SimpleFlanger::timeStep']]],
   ['timeunit_111',['TimeUnit',['../group__basic.html#gadd9fe45e09605eee3e4a39c8a5c4476d',1,'audio_tools']]],
   ['timeunitstr_112',['TimeUnitStr',['../namespaceaudio__tools.html#a3f9cfc7022261e8246f2cac14cd58b27',1,'audio_tools']]],
-  ['timing_113',['Timing',['..//home/runner/work/arduino-audio-tools/arduino-audio-tools/src/AudioTools/Communication/USB/USBAudioDeviceESP32.h#autotoc_md38',1,'']]],
+  ['timing_113',['Timing',['../classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#autotoc_md38',1,'']]],
   ['tinyusb_114',['Board settings (arduino-pico + Adafruit TinyUSB)',['../classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html#autotoc_md40',1,'']]],
   ['tinyusbdevice_115',['TinyUSBDevice',['../namespaceaudio__tools.html#aa1b2c322982252994a255caf5dac4ff2',1,'audio_tools']]],
   ['title_116',['title',['../classaudio__tools_1_1_k_a_radio_protocol.html#a5d2040fa0a0fd29edba02627081427f0',1,'audio_tools::KARadioProtocol::title()'],['../structaudio__tools_1_1_i_d3v1.html#ad88295682b9cd5c907f85dd821202432',1,'audio_tools::ID3v1::title'],['../group__metadata.html#gga6760f423085f8a63374b1e2db102a6d1aae37fab5e18e444f110064c349066675',1,'audio_tools::Title'],['../structaudio__tools_1_1_i_d3v1_enhanced.html#ad776f6c142259d0fb2fb7cd8080f71b4',1,'audio_tools::ID3v1Enhanced::title']]],

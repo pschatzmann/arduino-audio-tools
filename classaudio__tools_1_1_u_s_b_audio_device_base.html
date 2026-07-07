@@ -103,7 +103,7 @@ Inheritance diagram for USBAudioDeviceBase:</div>
 <area href="classaudio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="AudioInfoSource" shape="rect" coords="454,112,671,136"/>
 <area href="class_stream.html" alt="Stream" shape="rect" coords="0,56,217,80"/>
 <area href="class_print.html" alt="Print" shape="rect" coords="0,0,217,24"/>
-<area href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html" alt="USBAudioDeviceESP32" shape="rect" coords="227,280,444,304"/>
+<area href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html" title="USBAudioDeviceBase subclass for ESP32-S2/S3 using the arduino-esp32 stack." alt="USBAudioDeviceESP32" shape="rect" coords="227,280,444,304"/>
 <area href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html" title="USBAudioDeviceBase subclass for RP2040 / Adafruit TinyUSB." alt="USBAudioDeviceTinyUSB" shape="rect" coords="454,280,671,304"/>
 <area href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b_free_r_t_o_s.html" title="Variant of USBAudioDeviceTinyUSB for RP2040 + FreeRTOS." alt="USBAudioDeviceTinyUSBFreeRTOS" shape="rect" coords="454,336,671,360"/>
   </map>
@@ -3993,7 +3993,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 </div><div class="memdoc">
 
 <p>Process pending USB events on platforms where the application drives the stack (RP2040, STM32, ...). Skipped when a dedicated FreeRTOS task already calls <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">tud_task()</a> continuously (see usb_task_active_) - <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">tud_task()</a> is not re-entrant; calling it from two contexts concurrently corrupts TinyUSB's internal event queue and causes random hangs. </p>
-<p>ESP32 (see <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html">USBAudioDeviceESP32</a>) overrides this to an empty no-op, since its own FreeRTOS task already calls <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">tud_task()</a> continuously. </p>
+<p>ESP32 (see <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html" title="USBAudioDeviceBase subclass for ESP32-S2/S3 using the arduino-esp32 stack.">USBAudioDeviceESP32</a>) overrides this to an empty no-op, since its own FreeRTOS task already calls <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">tud_task()</a> continuously. </p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#a620a53b384e211085da3222db37e71ea">USBAudioDeviceESP32</a>.</p>
 

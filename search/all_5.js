@@ -129,7 +129,7 @@ var searchData=
   ['bmc_5ftab_5fuint_126',['bmc_tab_uint',['../namespaceaudio__tools.html#a8325f2885f89230ba7b8a69b5857ed12',1,'audio_tools']]],
   ['bmc_5fw_127',['BMC_W',['../_s_p_d_i_f_output_8h.html#ab18604f3839a417202da0b92a57689b8',1,'SPDIFOutput.h']]],
   ['board_128',['board',['../classaudio__tools_1_1_i2_s_codec_stream.html#a982c5a5e1598f285c02342491379559c',1,'audio_tools::I2SCodecStream::board()'],['../classaudio__tools_1_1_audio_kit_stream_config.html#a71175b2fbf476ad11a3545a2ec5a7567',1,'audio_tools::AudioKitStreamConfig::board']]],
-  ['board_20settings_129',['Board settings',['..//home/runner/work/arduino-audio-tools/arduino-audio-tools/src/AudioTools/Communication/USB/USBAudioDeviceESP32.h#autotoc_md39',1,'']]],
+  ['board_20settings_129',['Board settings',['../classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#autotoc_md39',1,'']]],
   ['board_20settings_20arduino_20pico_20adafruit_20tinyusb_130',['Board settings (arduino-pico + Adafruit TinyUSB)',['../classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html#autotoc_md40',1,'']]],
   ['boost_131',['boost',['../classaudio__tools_1_1_boost.html',1,'Boost'],['../classaudio__tools_1_1_boost.html#af191c4af195d48e13b647f34007e9c22',1,'audio_tools::Boost::Boost(float volume=1.0)'],['../classaudio__tools_1_1_boost.html#a98b11cdd5db9f004791e967a5cfb64a2',1,'audio_tools::Boost::Boost(const Boost &amp;copy)=default']]],
   ['box_132',['box',['../structaudio__tools_1_1_m_p4_parser_1_1_box.html',1,'MP4Parser::Box'],['../classaudio__tools_1_1_m_p4_parser.html#ab19e728e80bc2fc43d8e82c3602f8333',1,'audio_tools::MP4Parser::box']]],

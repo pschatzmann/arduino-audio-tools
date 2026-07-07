@@ -621,6 +621,7 @@ Static Protected Attributes</h2></td></tr>
 <li><b>Re-entrancy</b>: <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">tud_task()</a> is not re-entrant; calling it from both <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#afd7270e10d851383ff7b53c1241f6ba1" title="Send audio data to the host (device → host, microphone/capture). Silently discards data when the host...">write()</a> and a background task corrupts TinyUSB's event queue. <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a48b1d353d0ce4953a22eeaec10852a23" title="Process pending USB events on platforms where the application drives the stack (RP2040,...">serviceTinyUSB()</a> is suppressed (via usb_task_active_) while the task runs.</li>
 <li><b>Starvation</b>: vTaskDelay(1) — not <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">taskYIELD()</a> — is used so the max-priority USB task actually sleeps for 1 ms and lets the lower-priority audio loop run. One tick matches the USB full-speed frame period exactly.</li>
 </ul>
+<dl class="section note"><dt>Note</dt><dd>I recommend to use the USBAudioStream type alias instead of this class directly, so that the code is portable to other platforms. Just actiavate FreeRTOS in your sketch and the library will automatically use this class instead of the base TinyUSB class.</dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -4078,7 +4079,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 </div><div class="memdoc">
 
 <p>Process pending USB events on platforms where the application drives the stack (RP2040, STM32, ...). Skipped when a dedicated FreeRTOS task already calls <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">tud_task()</a> continuously (see usb_task_active_) - <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">tud_task()</a> is not re-entrant; calling it from two contexts concurrently corrupts TinyUSB's internal event queue and causes random hangs. </p>
-<p>ESP32 (see <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html">USBAudioDeviceESP32</a>) overrides this to an empty no-op, since its own FreeRTOS task already calls <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">tud_task()</a> continuously. </p>
+<p>ESP32 (see <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html" title="USBAudioDeviceBase subclass for ESP32-S2/S3 using the arduino-esp32 stack.">USBAudioDeviceESP32</a>) overrides this to an empty no-op, since its own FreeRTOS task already calls <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">tud_task()</a> continuously. </p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#a620a53b384e211085da3222db37e71ea">USBAudioDeviceESP32</a>.</p>
 

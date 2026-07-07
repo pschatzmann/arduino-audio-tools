@@ -82,9 +82,12 @@ $(function() {
 <a href="#pro-static-attribs">Static Protected Attributes</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">USBAudioDeviceESP32 Class Reference</div></div>
+  <div class="headertitle"><div class="title">USBAudioDeviceESP32 Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__io.html">IO</a> &#124; <a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__communications.html">Communications</a> &raquo; <a class="el" href="group__usb.html">USB</a></div></div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html" title="USB Audio Device class for audio streaming over USB.">USBAudioDeviceBase</a> subclass for ESP32-S2/S3 using the arduino-esp32 stack.  
+ <a href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_u_s_b_audio_device_e_s_p32_8h_source.html">USBAudioDeviceESP32.h</a>&gt;</code></p>
 <div class="dynheader">
@@ -610,7 +613,26 @@ Friends</h2></td></tr>
 <tr class="memitem:a87a99e20184f855090fe46d08b7a7648" id="r_a87a99e20184f855090fe46d08b7a7648"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#a87a99e20184f855090fe46d08b7a7648">Emulated_TinyUSB</a></td></tr>
 <tr class="separator:a87a99e20184f855090fe46d08b7a7648"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html" title="USB Audio Device class for audio streaming over USB.">USBAudioDeviceBase</a> subclass for ESP32-S2/S3 using the arduino-esp32 stack. </p>
+<p>On ESP32 the arduino-esp32 core provides strong definitions of the TinyUSB descriptor callbacks — the user cannot override them. This class registers the audio function descriptor block via the ESP32-specific API:</p>
+<ul>
+<li><code>ESPUSB</code> (<code>USB.*</code>) — configures VID/PID/strings and starts the stack</li>
+<li><code>tinyusb_enable_interface(USB_INTERFACE_AUDIO, …)</code> — injects the UAC2 descriptor into the configuration descriptor the framework builds</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md38"></a>
+Timing</h2>
+<p>On ESP32, <code>USB.begin()</code> usually should be called explicitly. We provide a TinyUSBDevice shim that calls <code>USB.begin()</code> automatically on the first call to <code>attach()</code>.</p>
+<h2><a class="anchor" id="autotoc_md39"></a>
+Board settings</h2>
+<ul>
+<li>Target : ESP32-S2 or ESP32-S3 (native USB OTG)</li>
+<li><code>ARDUINO_USB_MODE</code> must be 0 (OTG / TinyUSB mode)</li>
+</ul>
+<dl class="section note"><dt>Note</dt><dd>I recommend to use the USBAudioStream type alias instead of this class directly, so that the code is portable to other platforms.</dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a08914ac7214dedb063d5cb7b8e51ec3e" name="a08914ac7214dedb063d5cb7b8e51ec3e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a08914ac7214dedb063d5cb7b8e51ec3e">&#9670;&#160;</a></span>USBAudioDeviceESP32() <span class="overload">[1/2]</span></h2>
 
