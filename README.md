@@ -10,6 +10,7 @@ Some basic __header-only C++ classes__ that can be used for __Audio Processing__
 
 - We provide different ["Audio Sources" and "Audio Sinks"](https://github.com/pschatzmann/arduino-audio-tools/wiki/Audio-Sources-and-Sinks)
 - Support for different [Encoders](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_audio_encoder.html) and [Decoders](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_audio_decoder.html) for MP3, AAC, WAV, FLAC, etc for [EncodedAudioStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_encoded_audio_stream.html)
+- Supports input and output of [audio via USB](https://github.com/pschatzmann/arduino-audio-tools/wiki/USB-Audio-Class-2.0)
 - Integrates with different [DSP libraries](https://github.com/pschatzmann/arduino-audio-tools/wiki/DSP-Libraries)
 - Helps to [communicate](https://github.com/pschatzmann/arduino-audio-tools/wiki/Communication) audio over the wire or wirelessly
 - Different [Sound Generators](https://pschatzmann.github.io/arduino-audio-tools/group__generator.html) (e.g. to generate a sine tone) for [GeneratedSoundStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_generated_sound_stream.html)
