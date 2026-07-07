@@ -17,6 +17,8 @@
 
 namespace audio_tools {
 
+class Emulated_TinyUSB;
+
 /**
  * @brief USBAudioDeviceBase subclass for ESP32-S2/S3 using the arduino-esp32
  * stack.
@@ -38,15 +40,18 @@ namespace audio_tools {
  * - Target : ESP32-S2 or ESP32-S3 (native USB OTG)
  * - `ARDUINO_USB_MODE` must be 0 (OTG / TinyUSB mode)
  *
+ * @note I recommend to use the USBAudioStream type alias instead of this class
+ * directly, so that the code is portable to other platforms.
+ *
  * @ingroup io
  * @ingroup usb
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class Emulated_TinyUSB;
 
 class USBAudioDeviceESP32 : public USBAudioDeviceBase {
   friend class Emulated_TinyUSB;
+
  public:
   USBAudioDeviceESP32() = default;
   USBAudioDeviceESP32(USBAudioConfig cfg) : USBAudioDeviceBase(cfg) {}
@@ -109,7 +114,7 @@ class USBAudioDeviceESP32 : public USBAudioDeviceBase {
   void resizeBuffers() override {
     uint16_t block_sz = packetSize();
     uint8_t block_cnt = config_.fifo_packets;
-    if (isEpInEnabled())  buffer_tx_.resize(block_sz * block_cnt);
+    if (isEpInEnabled()) buffer_tx_.resize(block_sz * block_cnt);
     if (isEpOutEnabled()) buffer_rx_.resize(block_sz * block_cnt);
   }
 
@@ -191,11 +196,11 @@ class Emulated_TinyUSB {
 static Emulated_TinyUSB TinyUSBDevice;
 
 /**
- * @brief USBAudioStream type alias for ESP32.  
+ * @brief USBAudioStream type alias for ESP32.
  * @ingroup usb
  * @author Phil Schatzmann
  * @copyright GPLv3
- * 
+ *
  */
 using USBAudioStream = USBAudioDeviceESP32;
 

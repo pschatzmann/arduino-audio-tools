@@ -28,7 +28,10 @@ namespace audio_tools {
  *   - TX_MODE: ISO IN endpoint (device → host).
  *   - RX_MODE: ISO OUT endpoint (host → device), optional explicit feedback EP.
  *   - `CONFIG_USBD_UAC2=y`, `CONFIG_USB_DEVICE_STACK_NEXT=y`.
- *
+ * 
+ * @note I recommend to use the USBAudioStream type alias instead of this class
+ * directly, so that the code is portable to other platforms.
+ * 
  * @ingroup io
  * @ingroup usb
  * @author Phil Schatzmann

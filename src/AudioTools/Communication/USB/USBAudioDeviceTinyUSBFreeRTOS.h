@@ -20,6 +20,11 @@ namespace audio_tools {
  *   max-priority USB task actually sleeps for 1 ms and lets the lower-priority
  *   audio loop run.  One tick matches the USB full-speed frame period exactly.
  *
+ * @note I recommend to use the USBAudioStream type alias instead of this class
+ * directly, so that the code is portable to other platforms. Just actiavate
+ * FreeRTOS in your sketch and the library will automatically use this class
+ * instead of the base TinyUSB class.
+ *
  * @ingroup io
  * @ingroup usb
  * @author Phil Schatzmann
@@ -28,7 +33,8 @@ namespace audio_tools {
 class USBAudioDeviceTinyUSBFreeRTOS : public USBAudioDeviceTinyUSB {
  public:
   USBAudioDeviceTinyUSBFreeRTOS() = default;
-  USBAudioDeviceTinyUSBFreeRTOS(USBAudioConfig cfg) : USBAudioDeviceTinyUSB(cfg) {}
+  USBAudioDeviceTinyUSBFreeRTOS(USBAudioConfig cfg)
+      : USBAudioDeviceTinyUSB(cfg) {}
   ~USBAudioDeviceTinyUSBFreeRTOS() { stopUsbTask(); }
 
  protected:
@@ -49,8 +55,8 @@ class USBAudioDeviceTinyUSBFreeRTOS : public USBAudioDeviceTinyUSB {
 
   void resizeBuffers() override {
     uint16_t block_sz = packetSize();
-    uint8_t  block_cnt = config_.fifo_packets;
-    if (isEpInEnabled())  buffer_tx_rtos_.resize(block_sz * block_cnt);
+    uint8_t block_cnt = config_.fifo_packets;
+    if (isEpInEnabled()) buffer_tx_rtos_.resize(block_sz * block_cnt);
     if (isEpOutEnabled()) buffer_rx_rtos_.resize(block_sz * block_cnt);
   }
 

@@ -26,6 +26,9 @@ namespace audio_tools {
  * ## Board settings (arduino-pico + Adafruit TinyUSB)
  * - Board     : "Raspberry Pi Pico" (earlephilhower/arduino-pico)
  * - USB Stack : **Adafruit TinyUSB**
+ * 
+ * @note I recommend to use the USBAudioStream type alias instead of this class
+ * directly, so that the code is portable to other platforms.
  *
  * @ingroup io
  * @ingroup usb
