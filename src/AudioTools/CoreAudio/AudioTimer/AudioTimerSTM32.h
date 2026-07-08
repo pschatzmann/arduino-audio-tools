@@ -3,6 +3,19 @@
 #if defined(STM32)
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimerBase.h"
 
+// Not every STM32 family has 5 general-purpose timers (e.g. STM32WB55 only
+// has TIM1/TIM2, plus TIM16/TIM17) - fall back to nullptr for the ones
+// missing on this MCU so the fixed-size lookup table below still compiles.
+#ifndef TIM3
+#define TIM3 nullptr
+#endif
+#ifndef TIM4
+#define TIM4 nullptr
+#endif
+#ifndef TIM5
+#define TIM5 nullptr
+#endif
+
 namespace audio_tools {
 
 class AudioTimerDriverSTM32;
@@ -33,6 +46,10 @@ class AudioTimerDriverSTM32 : public AudioTimerDriverBase {
 
   /// select the timer
   void setTimer(TIM_TypeDef *timerDef) {
+    if (timerDef == nullptr) {
+      LOGE("Timer not available on this MCU");
+      return;
+    }
     if (this->timer != nullptr) {
       delete this->timer;
     }
