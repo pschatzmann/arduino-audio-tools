@@ -15,6 +15,14 @@
 #include "AudioTools/CoreAudio/AudioI2S/I2SDriverRP2040.h"
 #include "AudioTools/CoreAudio/AudioI2S/I2SDriverSAMD.h"
 #include "AudioTools/CoreAudio/AudioI2S/I2SDriverSTM32.h"
+// Optional: only present when this MCU actually has a SAI peripheral (SAI1
+// defined - see I2SDriverSTM32SAI.h) and the (draft) stm32-sai library is
+// installed. Becomes the default I2SDriver on STM32 boards where
+// I2SDriverSTM32 above could not claim IS_I2S_IMPLEMENTED; otherwise just
+// makes I2SDriverSTM32SAI available for explicit opt-in - see that file.
+#if defined(STM32) && defined(SAI1) && __has_include("STM32AudioSAI.h")
+#include "AudioTools/CoreAudio/AudioI2S/I2SDriverSTM32SAI.h"
+#endif
 #include "AudioTools/CoreAudio/AudioStreams.h"
 #include "AudioTools/CoreAudio/AudioTypes.h"
 
@@ -30,11 +38,12 @@ namespace audio_tools {
  * @brief We support the Stream interface for the I2S access. In addition we
  * allow a separate mute pin which might also be used to drive a LED...
  * @ingroup io
- * @tparam I2SDriverT with I2SDriver as default
  * @author Phil Schatzmann
  * @copyright GPLv3
- * @notes In Zephyr we can alternatively use the SAI driver:
- * I2SStream<SAIDriver> sai
+ * @notes On STM32 we can alternatively drive the SAI peripheral instead of
+ * the default I2SDriverSTM32 (I2S/SPI peripheral) by passing an
+ * I2SDriverSTM32SAI instance to the constructor:
+ * I2SDriverSTM32SAI sai_driver; I2SStream i2s(sai_driver);
  */
 
 class I2SStream : public AudioStream {

@@ -4,10 +4,26 @@
 #include "AudioTools/CoreAudio/AudioI2S/I2SConfig.h"
 #include "AudioTools/CoreAudio/AudioI2S/I2SDriverBase.h"
 #include "AudioTools/Concurrency/LockFree/RingBufferSPSC.h"
+
+// Only pull in stm32-i2s (the classic SPI/I2S peripheral driver) on MCUs
+// that don't have a SAI peripheral at all - see I2SDriverSTM32SAI.h, which
+// is always preferred when SAI1 exists. This also sidesteps a real problem:
+// stm32-i2s's config header unconditionally #defines a bare `PLLN` macro
+// that collides with an identically-named struct member in some codec
+// headers (e.g. arduino-audio-driver's WM8994.h/WM8960.h) - skipping the
+// include entirely on SAI-capable boards avoids that pollution rather than
+// working around it.
+#if !defined(SAI1)
 #include "stm32-i2s.h"
 
-#ifdef STM_I2S_PINS
-#define IS_I2S_IMPLEMENTED 
+// STM_I2S_PINS is stm32-i2s's per-board pin table (only defined for boards it
+// has been taught about); SPI_I2SCFGR_I2SMOD is the CMSIS register-bit macro
+// that only exists when this MCU's SPI peripheral actually has I2S mode -
+// i.e. the hardware capability check, kept alongside the per-board one as a
+// safety net so a mis-added board table entry can't compile against silicon
+// that has no I2S-capable SPI at all.
+#if defined(STM_I2S_PINS) && defined(SPI_I2SCFGR_I2SMOD)
+#define IS_I2S_IMPLEMENTED
 
 namespace audio_tools {
 
@@ -499,5 +515,6 @@ using I2SDriver = I2SDriverSTM32;
 
 }  // namespace audio_tools
 
-#endif
-#endif
+#endif  // STM_I2S_PINS && SPI_I2SCFGR_I2SMOD
+#endif  // !SAI1
+#endif  // STM32

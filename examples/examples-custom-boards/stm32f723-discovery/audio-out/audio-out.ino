@@ -5,17 +5,21 @@
 // The example uses the AudioBoardStream class which is a subclass of
 // I2SCodecStream
 //
-// NOTE: this is experimental. The WM8994 is connected via SAI2 (pins
-// PI4/PI5/PI6/PI7), not the classic I2S peripheral used on the STM32F411
-// Discovery. Getting audio flowing additionally requires:
-//  - SAI2 pin/peripheral support in the "stm32-i2s" backend
-//    (https://github.com/pschatzmann/stm32f411-i2s) used by I2SDriverSTM32
-//  - matching entries in this board's PeripheralPins.c
-// Treat this sketch as a template until that lower-level support lands.
+// The WM8994 is connected via SAI2 (pins PI4/PI5/PI6/PI7), not the classic
+// I2S peripheral used on the STM32F411 Discovery - this board has no
+// STM_I2S_PINS entry in stm32-i2s, so AudioBoardStream/I2SStream drive it
+// through I2SDriverSTM32SAI instead, which wraps the
+// https://github.com/pschatzmann/stm32-sai library (requires its
+// STM32DriverF723.h board config). Output-only for now; duplex/audio-in
+// would need a second SD pin (PG10) added to that library's PinConfig.
 //
 
 #include "AudioTools.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
+// Required so Arduino's library auto-detection pulls in stm32-sai (it only
+// reacts to a bare, unconditional #include like this one - the internal
+// __has_include("STM32AudioSAI.h") check in I2SStream.h can't trigger it).
+#include <STM32AudioSAI.h>
 
 AudioInfo info(44100, 2, 16);
 SineWaveGenerator<int16_t> sineWave;
