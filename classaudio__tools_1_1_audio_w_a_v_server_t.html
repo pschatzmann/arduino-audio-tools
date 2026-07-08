@@ -110,6 +110,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a625b9b54981faab69a539029b5be217a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e6445a593474e403a0c139d8da95d78" id="r_a4e6445a593474e403a0c139d8da95d78"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_audio_encoder.html">AudioEncoder</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder_server_t.html#a4e6445a593474e403a0c139d8da95d78">audioEncoder</a> ()</td></tr>
 <tr class="separator:a4e6445a593474e403a0c139d8da95d78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb3cb4c499fd28159dd4680fbff03242" id="r_adb3cb4c499fd28159dd4680fbff03242"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder_server_t.html#adb3cb4c499fd28159dd4680fbff03242">begin</a> (<a class="el" href="namespaceaudio__tools.html#ae6d40783cdf760069729786896fc23b2">AudioServerDataCallback</a> cb, <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info)</td></tr>
+<tr class="memdesc:adb3cb4c499fd28159dd4680fbff03242"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the server. The data must be provided by a callback method.  <br /></td></tr>
+<tr class="separator:adb3cb4c499fd28159dd4680fbff03242"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44c82a71a51e28df5436bf1f1cc2b180" id="r_a44c82a71a51e28df5436bf1f1cc2b180"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#a44c82a71a51e28df5436bf1f1cc2b180">begin</a> (<a class="el" href="namespaceaudio__tools.html#ae6d40783cdf760069729786896fc23b2">AudioServerDataCallback</a> cb, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">char</a> *contentType)</td></tr>
 <tr class="memdesc:a44c82a71a51e28df5436bf1f1cc2b180"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the server. The data must be provided by a callback method.  <br /></td></tr>
 <tr class="separator:a44c82a71a51e28df5436bf1f1cc2b180"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -363,8 +366,55 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 
 </div>
 </div>
+<a id="adb3cb4c499fd28159dd4680fbff03242" name="adb3cb4c499fd28159dd4680fbff03242"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb3cb4c499fd28159dd4680fbff03242">&#9670;&#160;</a></span>begin() <span class="overload">[1/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="class_client.html">Client</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">class</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">Server</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> begin </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae6d40783cdf760069729786896fc23b2">AudioServerDataCallback</a>&#160;</td>
+          <td class="paramname"><em>cb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td>
+          <td class="paramname"><em>info</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Start the server. The data must be provided by a callback method. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cb</td><td></td></tr>
+    <tr><td class="paramname">info</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a44c82a71a51e28df5436bf1f1cc2b180" name="a44c82a71a51e28df5436bf1f1cc2b180"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a44c82a71a51e28df5436bf1f1cc2b180">&#9670;&#160;</a></span>begin() <span class="overload">[1/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a44c82a71a51e28df5436bf1f1cc2b180">&#9670;&#160;</a></span>begin() <span class="overload">[2/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -411,7 +461,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 </div>
 </div>
 <a id="a6c36f7032f419f66255e67dbd87e4e61" name="a6c36f7032f419f66255e67dbd87e4e61"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6c36f7032f419f66255e67dbd87e4e61">&#9670;&#160;</a></span>begin() <span class="overload">[2/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c36f7032f419f66255e67dbd87e4e61">&#9670;&#160;</a></span>begin() <span class="overload">[3/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -471,7 +521,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 </div>
 </div>
 <a id="aba1f1edf777ef83769284b2fcca81731" name="aba1f1edf777ef83769284b2fcca81731"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aba1f1edf777ef83769284b2fcca81731">&#9670;&#160;</a></span>begin() <span class="overload">[3/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aba1f1edf777ef83769284b2fcca81731">&#9670;&#160;</a></span>begin() <span class="overload">[4/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -518,7 +568,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 </div>
 </div>
 <a id="a3ca7fe4afe4bf823a98ccbf067bf1a1e" name="a3ca7fe4afe4bf823a98ccbf067bf1a1e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ca7fe4afe4bf823a98ccbf067bf1a1e">&#9670;&#160;</a></span>begin() <span class="overload">[4/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ca7fe4afe4bf823a98ccbf067bf1a1e">&#9670;&#160;</a></span>begin() <span class="overload">[5/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -572,7 +622,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 </div>
 </div>
 <a id="adda30bbb97d91ad2862ee718f5a53200" name="adda30bbb97d91ad2862ee718f5a53200"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adda30bbb97d91ad2862ee718f5a53200">&#9670;&#160;</a></span>begin() <span class="overload">[5/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#adda30bbb97d91ad2862ee718f5a53200">&#9670;&#160;</a></span>begin() <span class="overload">[6/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -619,7 +669,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 </div>
 </div>
 <a id="aa21783ac9f53658533d75b513c33e547" name="aa21783ac9f53658533d75b513c33e547"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa21783ac9f53658533d75b513c33e547">&#9670;&#160;</a></span>begin() <span class="overload">[6/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa21783ac9f53658533d75b513c33e547">&#9670;&#160;</a></span>begin() <span class="overload">[7/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
