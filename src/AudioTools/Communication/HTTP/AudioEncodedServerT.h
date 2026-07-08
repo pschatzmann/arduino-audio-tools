@@ -129,6 +129,22 @@ class AudioEncoderServerT : public AudioServerT<Client, Server> {
     audio_info.channels = channels;
     audio_info.bits_per_sample = bits_per_sample;
     encoder->setAudioInfo(audio_info);
+    encoded_stream.setAudioInfo(audio_info);
+
+    return AudioServerT<Client, Server>::begin(cb, encoder->mime());
+  }
+
+  /**
+   * @brief Start the server. The data must be provided by a callback method
+   *
+   * @param cb
+   * @param info
+   */
+  bool begin(AudioServerDataCallback cb, AudioInfo info) {
+    TRACED();
+    audio_info = info;
+    encoder->setAudioInfo(audio_info);
+    encoded_stream.setAudioInfo(audio_info);
 
     return AudioServerT<Client, Server>::begin(cb, encoder->mime());
   }
