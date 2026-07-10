@@ -1,53 +1,81 @@
-//
-// Arduino Audio Tools - Audio Out Example for STM32F723E Discovery Board
-// This example generates a sine wave and outputs it via SAI2 to the
-// on-board WM8994 codec.
-// The example uses the AudioBoardStream class which is a subclass of
-// I2SCodecStream
-//
-// The WM8994 is connected via SAI2 (pins PI4/PI5/PI6/PI7), not the classic
-// I2S peripheral used on the STM32F411 Discovery - this board has no
-// STM_I2S_PINS entry in stm32-i2s, so AudioBoardStream/I2SStream drive it
-// through I2SDriverSTM32SAI instead, which wraps the
-// https://github.com/pschatzmann/stm32-sai library (requires its
-// STM32DriverF723.h board config). Output-only for now; duplex/audio-in
-// would need a second SD pin (PG10) added to that library's PinConfig.
-//
-
-#include "AudioTools.h"
-#include "AudioTools/AudioLibs/AudioBoardStream.h"
-// Required so Arduino's library auto-detection pulls in stm32-sai (it only
-// reacts to a bare, unconditional #include like this one - the internal
-// __has_include("STM32AudioSAI.h") check in I2SStream.h can't trigger it).
+// DIAGNOSTIC: bypass AudioBoard/DriverDeviceInfo/AudioDriverWM8994Class
+// entirely - instantiate our own WM8994 C++ class directly and drive it
+// with plain Wire, nothing else in between. Isolates whether WM8994.h/
+// API_I2C.h themselves reproduce the cold-boot failure independent of
+// every higher-level abstraction layer.
+#include <Wire.h>
+#include <AudioDriver.h>
 #include <STM32AudioSAI.h>
 
-AudioInfo info(44100, 2, 16);
-SineWaveGenerator<int16_t> sineWave;
-GeneratedSoundStream<int16_t> sound(sineWave);
-AudioBoardStream out(STM32F723Disco);
-StreamCopy copier(out, sound);  // copies sound into i2s
+using namespace audio_driver;
 
-// Arduino Setup
-void setup(void) {
-  // Open Serial
+WM8994 wm8994;
+
+void setup() {
   Serial.begin(115200);
-  while(!Serial) delay(100);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  delay(200);
   AudioDriverLogger.begin(Serial, AudioDriverLogLevel::Info);
+  Serial.println("direct WM8994 class test starting...");
 
-  // start I2S
-  Serial.println("starting I2S...");
-  auto config = out.defaultConfig(TX_MODE);
-  config.copyFrom(info);
-  if (!out.begin(config)) {
-    Serial.println("error!");
-    stop();
+  Wire.setSCL(PB8);
+  Wire.setSDA(PB9);
+  Wire.begin();
+  Wire.setClock(400000);
+
+  // Wire.begin() (master mode) sets Init.OwnAddress1 = 0x02 (MASTER_ADDRESS
+  // << 1); ST's own I2Cx_Init sets Init.OwnAddress1 = 0. Match ST exactly.
+  {
+    I2C_HandleTypeDef *hi2c = Wire.getHandle();
+    __HAL_I2C_DISABLE(hi2c);
+    hi2c->Init.OwnAddress1 = 0;
+    hi2c->Init.Timing = 0x40912732;
+    HAL_I2C_Init(hi2c);
+    __HAL_I2C_ENABLE(hi2c);
   }
 
-  // Setup sine wave
-  sineWave.begin(info, N_B4);
-  Serial.println("started...");
+  {
+    I2C_HandleTypeDef *hi2c = Wire.getHandle();
+    Serial.print("hi2c ptr=0x"); Serial.println((uint32_t)(uintptr_t)hi2c, HEX);
+    Serial.print("Instance=0x"); Serial.println((uint32_t)(uintptr_t)hi2c->Instance, HEX);
+    Serial.print("Timing=0x"); Serial.println(hi2c->Init.Timing, HEX);
+    Serial.print("OwnAddress1=0x"); Serial.println(hi2c->Init.OwnAddress1, HEX);
+    Serial.print("AddressingMode=0x"); Serial.println(hi2c->Init.AddressingMode, HEX);
+    Serial.print("DualAddressMode=0x"); Serial.println(hi2c->Init.DualAddressMode, HEX);
+    Serial.print("OwnAddress2=0x"); Serial.println(hi2c->Init.OwnAddress2, HEX);
+    Serial.print("GeneralCallMode=0x"); Serial.println(hi2c->Init.GeneralCallMode, HEX);
+    Serial.print("NoStretchMode=0x"); Serial.println(hi2c->Init.NoStretchMode, HEX);
+    Serial.print("PE bit (CR1&1)=0x"); Serial.println((hi2c->Instance->CR1 & 1), HEX);
+  }
+
+  wm8994.setWire(&Wire);
+  wm8994.setAddress(0x1A);
+
+  uint32_t rc = wm8994.init(WM8994::OUTPUT_DEVICE_HEADPHONE, 70, WM8994::AUDIO_FREQUENCY_8K);
+  Serial.print("wm8994.init rc=");
+  Serial.println(rc);
+
+  wm8994.dumpRegisters();
+  Serial.println("done...");
 }
 
-// Arduino loop - copy sound to out
-void loop() { copier.copy(); }
+void loop() {
+  static uint32_t last = 0;
+  uint32_t now = millis();
+  if (now - last >= 3000) {
+    last = now;
+    Serial.print("millis=");
+    Serial.println(now);
+    I2C_HandleTypeDef *hi2c = Wire.getHandle();
+    Serial.print("hi2c ptr=0x"); Serial.println((uint32_t)(uintptr_t)hi2c, HEX);
+    Serial.print("Instance=0x"); Serial.println((uint32_t)(uintptr_t)hi2c->Instance, HEX);
+    Serial.print("Timing=0x"); Serial.println(hi2c->Init.Timing, HEX);
+    Serial.print("OwnAddress1=0x"); Serial.println(hi2c->Init.OwnAddress1, HEX);
+    Serial.print("AddressingMode=0x"); Serial.println(hi2c->Init.AddressingMode, HEX);
+    Serial.print("DualAddressMode=0x"); Serial.println(hi2c->Init.DualAddressMode, HEX);
+    Serial.print("OwnAddress2=0x"); Serial.println(hi2c->Init.OwnAddress2, HEX);
+    Serial.print("GeneralCallMode=0x"); Serial.println(hi2c->Init.GeneralCallMode, HEX);
+    Serial.print("NoStretchMode=0x"); Serial.println(hi2c->Init.NoStretchMode, HEX);
+    Serial.print("PE bit (CR1&1)=0x"); Serial.println((hi2c->Instance->CR1 & 1), HEX);
+    wm8994.dumpRegisters();
+  }
+}

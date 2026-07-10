@@ -69,6 +69,19 @@ class I2SDriverSTM32SAI : public I2SDriverBase {
     sai.setChannels(cfg.channels);
     sai.setProtocol(STM32AudioSAI::I2S);
     sai.setDataFormat(toDataFormat(cfg.i2s_format));
+#if defined(STM32F723xx)
+    // The STM32F723E-Discovery's WM8994 is wired to SAI2 using the ST BSP's
+    // exact frame layout (SAIx_Out_Init in stm32f723e_discovery_audio.c): a
+    // 4-slot, 64-bit TDM frame with all 4 slots active, even though only 2
+    // slots (stereo) carry real DAC data - the codec's AIF only recognizes
+    // its configured timeslot within that specific frame shape. A plain
+    // 2-slot/32-bit frame (this driver's default) does not match what the
+    // codec's AIF expects here and produces complete silence despite
+    // otherwise-correct codec register state and error-free DMA transfers.
+    sai.setSlotCount(4);
+    sai.setActiveSlots(SAI_SLOTACTIVE_0 | SAI_SLOTACTIVE_1 | SAI_SLOTACTIVE_2 |
+                        SAI_SLOTACTIVE_3);
+#endif
     setupPins();
 
     active = sai.begin();
