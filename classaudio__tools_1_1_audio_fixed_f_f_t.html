@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: AudioFFTBase Class Reference</title>
+<title>arduino-audio-tools: AudioFixedFFT&lt; CalcT &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,7 +69,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html">AudioFFTBase</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_audio_fixed_f_f_t.html">AudioFixedFFT</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -77,42 +77,35 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="classaudio__tools_1_1_audio_f_f_t_base-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">AudioFFTBase Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__dsp.html">DSP</a> &raquo; <a class="el" href="group__fft.html">FFT</a></div></div></div>
+<a href="classaudio__tools_1_1_audio_fixed_f_f_t-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">AudioFixedFFT&lt; CalcT &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__dsp.html">DSP</a> &raquo; <a class="el" href="group__fft.html">FFT</a> &raquo; <a class="el" href="group__fft-fixed.html">FixedFFT</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Executes FFT using audio data privded by <a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#a7597ef706dd1aa590903ce9e095db20a" title="Provide the audio data as FFT input.">write()</a> and/or an inverse FFT where the samples are made available via <a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#a4c5c6275ddee80eb02839356b6185c0b" title="Provides the result of a reverse FFT.">readBytes()</a>. The Driver which is passed in the constructor selects a specifc FFT implementation.  
- <a href="classaudio__tools_1_1_audio_f_f_t_base.html#details">More...</a></p>
+<p>AudioFFT using the fixedpoint-fft library. CalcT selects the calculation type (default int16_t, see <a class="el" href="classaudio__tools_1_1_f_f_t_driver_fixed_f_f_t.html" title="Driver for the fixedpoint-fft library (https://github.com/pschatzmann/fixedpoint-fft)....">FFTDriverFixedFFT</a>); pick int8_t on RAM-constrained plain AVR targets, or float/double on FPU-equipped targets.  
+ <a href="classaudio__tools_1_1_audio_fixed_f_f_t.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_audio_f_f_t_8h_source.html">AudioFFT.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_audio_fixed_f_f_t_8h_source.html">AudioFixedFFT.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for AudioFFTBase:</div>
+Inheritance diagram for AudioFixedFFT&lt; CalcT &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classaudio__tools_1_1_audio_f_f_t_base.png" usemap="#AudioFFTBase_map" alt=""/>
-  <map id="AudioFFTBase_map" name="AudioFFTBase_map">
-<area href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="AudioStream" shape="rect" coords="415,168,571,192"/>
-<area href="classaudio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer, size_t size) and readBytes(uint..." alt="BaseStream" shape="rect" coords="249,112,405,136"/>
-<area href="classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="AudioInfoSupport" shape="rect" coords="415,112,571,136"/>
-<area href="classaudio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="AudioInfoSource" shape="rect" coords="581,112,737,136"/>
-<area href="class_stream.html" alt="Stream" shape="rect" coords="249,56,405,80"/>
-<area href="class_print.html" alt="Print" shape="rect" coords="249,0,405,24"/>
-<area href="classaudio__tools_1_1_audio_cmsis_f_f_t.html" title="AudioFFT for ARM processors that provided Cmsis DSP." alt="AudioCmsisFFT" shape="rect" coords="0,280,156,304"/>
-<area href="classaudio__tools_1_1_audio_e_s_p32_f_f_t.html" title="AudioFFT using https://github.com/pschatzmann/esp32-fft." alt="AudioESP32FFT" shape="rect" coords="166,280,322,304"/>
-<area href="classaudio__tools_1_1_audio_espressif_f_f_t.html" title="AudioFFT using FFTReal. The only specific functionality is the access to the dataArray." alt="AudioEspressifFFT" shape="rect" coords="332,280,488,304"/>
-<area href="classaudio__tools_1_1_audio_fixed_f_f_t.html" title="AudioFFT using the fixedpoint-fft library. CalcT selects the calculation type (default int16_t,..." alt="AudioFixedFFT&lt; CalcT &gt;" shape="rect" coords="498,280,654,304"/>
-<area href="classaudio__tools_1_1_audio_kiss_f_f_t.html" title="AudioFFT using FFTReal. The only specific functionality is the access to the dataArray." alt="AudioKissFFT" shape="rect" coords="664,280,820,304"/>
-<area href="classaudio__tools_1_1_audio_real_f_f_t.html" title="AudioFFT using RealFFT." alt="AudioRealFFT" shape="rect" coords="830,280,986,304"/>
+  <img src="classaudio__tools_1_1_audio_fixed_f_f_t.png" usemap="#AudioFixedFFT_3C_20CalcT_20_3E_map" alt=""/>
+  <map id="AudioFixedFFT_3C_20CalcT_20_3E_map" name="AudioFixedFFT_3C_20CalcT_20_3E_map">
+<area href="classaudio__tools_1_1_audio_f_f_t_base.html" title="Executes FFT using audio data privded by write() and/or an inverse FFT where the samples are made ava..." alt="AudioFFTBase" shape="rect" coords="166,224,322,248"/>
+<area href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="AudioStream" shape="rect" coords="166,168,322,192"/>
+<area href="classaudio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer, size_t size) and readBytes(uint..." alt="BaseStream" shape="rect" coords="0,112,156,136"/>
+<area href="classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="AudioInfoSupport" shape="rect" coords="166,112,322,136"/>
+<area href="classaudio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="AudioInfoSource" shape="rect" coords="332,112,488,136"/>
+<area href="class_stream.html" alt="Stream" shape="rect" coords="0,56,156,80"/>
+<area href="class_print.html" alt="Print" shape="rect" coords="0,0,156,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a737190d3d351f65b5184f7c8047a2fb7" id="r_a737190d3d351f65b5184f7c8047a2fb7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#a737190d3d351f65b5184f7c8047a2fb7">AudioFFTBase</a> (<a class="el" href="classaudio__tools_1_1_f_f_t_driver.html">FFTDriver</a> *<a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#a78331df1a4e6bd150c2be32ae74b7b29">driver</a>)</td></tr>
-<tr class="separator:a737190d3d351f65b5184f7c8047a2fb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b303e0e493262145365f84c2302f15f" id="r_a7b303e0e493262145365f84c2302f15f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#a7b303e0e493262145365f84c2302f15f">~AudioFFTBase</a> ()</td></tr>
-<tr class="separator:a7b303e0e493262145365f84c2302f15f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8dfc28b3e96d44e9a696851cc92f702" id="r_ad8dfc28b3e96d44e9a696851cc92f702"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_fixed_f_f_t.html#ad8dfc28b3e96d44e9a696851cc92f702">AudioFixedFFT</a> ()</td></tr>
+<tr class="separator:ad8dfc28b3e96d44e9a696851cc92f702"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a727a24459787e1eeeb7a37ba888394a6" id="r_a727a24459787e1eeeb7a37ba888394a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a727a24459787e1eeeb7a37ba888394a6">addNotifyAudioChange</a> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bi</a>)</td></tr>
 <tr class="memdesc:a727a24459787e1eeeb7a37ba888394a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds target to be notified about audio changes.  <br /></td></tr>
 <tr class="separator:a727a24459787e1eeeb7a37ba888394a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -147,6 +140,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9d0b76a70092c88d1b5a4d9bf7655190"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a78331df1a4e6bd150c2be32ae74b7b29" id="r_a78331df1a4e6bd150c2be32ae74b7b29"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_f_f_t_driver.html">FFTDriver</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#a78331df1a4e6bd150c2be32ae74b7b29">driver</a> ()</td></tr>
 <tr class="separator:a78331df1a4e6bd150c2be32ae74b7b29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b0d252351b2047bd93d76b33a2f24dc" id="r_a1b0d252351b2047bd93d76b33a2f24dc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_f_f_t_driver_fixed_f_f_t.html">FFTDriverFixedFFT</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">CalcT</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_fixed_f_f_t.html#a1b0d252351b2047bd93d76b33a2f24dc">driverEx</a> ()</td></tr>
+<tr class="separator:a1b0d252351b2047bd93d76b33a2f24dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64e9fa75beda50a9e8400ee0d4e61984" id="r_a64e9fa75beda50a9e8400ee0d4e61984"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
 <tr class="memdesc:a64e9fa75beda50a9e8400ee0d4e61984"><td class="mdescLeft">&#160;</td><td class="mdescRight">Release the allocated memory.  <br /></td></tr>
 <tr class="separator:a64e9fa75beda50a9e8400ee0d4e61984"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -164,6 +159,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab4ce80be700d9c58e0b07ff0bf3d56d2" id="r_ab4ce80be700d9c58e0b07ff0bf3d56d2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#ab4ce80be700d9c58e0b07ff0bf3d56d2">getBin</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> pos, <a class="el" href="structaudio__tools_1_1_f_f_t_bin.html">FFTBin</a> &amp;bin)</td></tr>
 <tr class="memdesc:ab4ce80be700d9c58e0b07ff0bf3d56d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">gets the value of a bin  <br /></td></tr>
 <tr class="separator:ab4ce80be700d9c58e0b07ff0bf3d56d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a958e64ab292cd3240896c040af150bbc" id="r_a958e64ab292cd3240896c040af150bbc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">CalcT</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_fixed_f_f_t.html#a958e64ab292cd3240896c040af150bbc">imgArray</a> ()</td></tr>
+<tr class="memdesc:a958e64ab292cd3240896c040af150bbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the imaginary array returned by the FFT.  <br /></td></tr>
+<tr class="separator:a958e64ab292cd3240896c040af150bbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a475bc9908ea8a1d67e5cc1c1f67a71b2" id="r_a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a475bc9908ea8a1d67e5cc1c1f67a71b2">isNotifyActive</a> ()</td></tr>
 <tr class="memdesc:a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> update is active.  <br /></td></tr>
 <tr class="separator:a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -189,6 +187,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a36e26f40121eda38b0042dcba026ab82" id="r_a36e26f40121eda38b0042dcba026ab82"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_stream.html#a36e26f40121eda38b0042dcba026ab82">readSilence</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *buffer, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> <a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#a3d0f4ae571310c6ed081daa3985ecb47">length</a>)</td></tr>
 <tr class="memdesc:a36e26f40121eda38b0042dcba026ab82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Source to generate silence: just sets the buffer to 0.  <br /></td></tr>
 <tr class="separator:a36e26f40121eda38b0042dcba026ab82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab87e6d2a2b7768e57e7726cea78c5274" id="r_ab87e6d2a2b7768e57e7726cea78c5274"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">CalcT</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_fixed_f_f_t.html#ab87e6d2a2b7768e57e7726cea78c5274">realArray</a> ()</td></tr>
+<tr class="memdesc:ab87e6d2a2b7768e57e7726cea78c5274"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the real array returned by the FFT.  <br /></td></tr>
+<tr class="separator:ab87e6d2a2b7768e57e7726cea78c5274"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaab8c227f6430ad7c8419ce5846d193f" id="r_aaab8c227f6430ad7c8419ce5846d193f"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; </td></tr>
 <tr class="memitem:aaab8c227f6430ad7c8419ce5846d193f"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#aaab8c227f6430ad7c8419ce5846d193f">reference</a> ()</td></tr>
 <tr class="memdesc:aaab8c227f6430ad7c8419ce5846d193f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the reference pointer.  <br /></td></tr>
@@ -322,48 +323,24 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a7f948c0ac99e632d3a033b85ae54d170"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Executes FFT using audio data privded by <a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#a7597ef706dd1aa590903ce9e095db20a" title="Provide the audio data as FFT input.">write()</a> and/or an inverse FFT where the samples are made available via <a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#a4c5c6275ddee80eb02839356b6185c0b" title="Provides the result of a reverse FFT.">readBytes()</a>. The Driver which is passed in the constructor selects a specifc FFT implementation. </p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">CalcT</a> = int16_t&gt;<br />
+class audio_tools::AudioFixedFFT&lt; CalcT &gt;</div><p>AudioFFT using the fixedpoint-fft library. CalcT selects the calculation type (default int16_t, see <a class="el" href="classaudio__tools_1_1_f_f_t_driver_fixed_f_f_t.html" title="Driver for the fixedpoint-fft library (https://github.com/pschatzmann/fixedpoint-fft)....">FFTDriverFixedFFT</a>); pick int8_t on RAM-constrained plain AVR targets, or float/double on FPU-equipped targets. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a737190d3d351f65b5184f7c8047a2fb7" name="a737190d3d351f65b5184f7c8047a2fb7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a737190d3d351f65b5184f7c8047a2fb7">&#9670;&#160;</a></span>AudioFFTBase()</h2>
+<a id="ad8dfc28b3e96d44e9a696851cc92f702" name="ad8dfc28b3e96d44e9a696851cc92f702"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8dfc28b3e96d44e9a696851cc92f702">&#9670;&#160;</a></span>AudioFixedFFT()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">CalcT</a>  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html">AudioFFTBase</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_f_f_t_driver.html">FFTDriver</a> *&#160;</td>
-          <td class="paramname"><em>driver</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Default Constructor. The len needs to be of the power of 2 (e.g. 512, 1024, 2048, 4096, 8192) </p>
-
-</div>
-</div>
-<a id="a7b303e0e493262145365f84c2302f15f" name="a7b303e0e493262145365f84c2302f15f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7b303e0e493262145365f84c2302f15f">&#9670;&#160;</a></span>~AudioFFTBase()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">~<a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html">AudioFFTBase</a> </td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_audio_fixed_f_f_t.html">AudioFixedFFT</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -486,7 +463,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -515,7 +492,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -544,7 +521,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -574,7 +551,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -601,7 +578,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -626,7 +603,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -682,7 +659,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -710,7 +687,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -737,11 +714,38 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 <p>provides access to the <a class="el" href="classaudio__tools_1_1_f_f_t_driver.html" title="Abstract Class which defines the basic FFT functionality.">FFTDriver</a> which implements the basic FFT functionality </p>
+
+</div>
+</div>
+<a id="a1b0d252351b2047bd93d76b33a2f24dc" name="a1b0d252351b2047bd93d76b33a2f24dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b0d252351b2047bd93d76b33a2f24dc">&#9670;&#160;</a></span>driverEx()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">CalcT</a>  = int16_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_f_f_t_driver_fixed_f_f_t.html">FFTDriverFixedFFT</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">CalcT</a> &gt; * driverEx </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -763,7 +767,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -794,7 +798,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -849,7 +853,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -877,7 +881,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -927,7 +931,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -973,12 +977,41 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>gets the value of a bin </p>
+
+</div>
+</div>
+<a id="a958e64ab292cd3240896c040af150bbc" name="a958e64ab292cd3240896c040af150bbc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a958e64ab292cd3240896c040af150bbc">&#9670;&#160;</a></span>imgArray()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">CalcT</a>  = int16_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">CalcT</a> * imgArray </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Provides the imaginary array returned by the FFT. </p>
 
 </div>
 </div>
@@ -1013,7 +1046,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1068,7 +1101,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1093,7 +1126,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1121,7 +1154,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1148,7 +1181,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1173,7 +1206,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1199,7 +1232,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1287,7 +1320,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1315,7 +1348,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1355,7 +1388,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1391,7 +1424,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1440,6 +1473,35 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 
 </div>
 </div>
+<a id="ab87e6d2a2b7768e57e7726cea78c5274" name="ab87e6d2a2b7768e57e7726cea78c5274"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab87e6d2a2b7768e57e7726cea78c5274">&#9670;&#160;</a></span>realArray()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">CalcT</a>  = int16_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">CalcT</a> * realArray </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Provides the real array returned by the FFT. </p>
+
+</div>
+</div>
 <a id="aaab8c227f6430ad7c8419ce5846d193f" name="aaab8c227f6430ad7c8419ce5846d193f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aaab8c227f6430ad7c8419ce5846d193f">&#9670;&#160;</a></span>reference()</h2>
 
@@ -1460,7 +1522,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1544,7 +1606,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1571,7 +1633,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1601,7 +1663,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1628,7 +1690,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1654,7 +1716,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1681,7 +1743,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1709,7 +1771,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1737,7 +1799,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1783,7 +1845,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1821,7 +1883,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1902,7 +1964,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1946,7 +2008,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1986,7 +2048,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -2022,7 +2084,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -2092,7 +2154,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -2156,7 +2218,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -2201,7 +2263,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -2223,7 +2285,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -2245,7 +2307,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -2267,7 +2329,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -2333,7 +2395,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -2355,7 +2417,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -2399,7 +2461,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -2421,7 +2483,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -2443,7 +2505,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -2465,7 +2527,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -2487,7 +2549,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -2509,7 +2571,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -2531,7 +2593,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -2605,7 +2667,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/AudioLibs/<a class="el" href="_audio_f_f_t_8h_source.html">AudioFFT.h</a></li>
+<li>src/AudioTools/AudioLibs/<a class="el" href="_audio_fixed_f_f_t_8h_source.html">AudioFixedFFT.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
