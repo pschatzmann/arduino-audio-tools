@@ -267,7 +267,9 @@ class I2SDriverESP32V1 : public I2SDriverBase {
       int frame_size = get_bits_eff(cfg.bits_per_sample) * cfg.channels / 8;
       frame_size = (frame_size == 0) ? 1 : frame_size;
       if (size > 0) result.dma_frame_num = size / frame_size;
+      LOGI("frame_size: %d", (int)frame_size);
       LOGI("dma_frame_num: %d", (int)result.dma_frame_num);
+      LOGI("total buffer size: %d", (int)(result.dma_frame_num * frame_size));
       result.auto_clear = cfg.auto_clear;
       return result;
     }

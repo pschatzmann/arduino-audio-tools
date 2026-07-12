@@ -61,9 +61,9 @@ class I2SConfigESP32V1 : public AudioInfo {
     int pin_data = -1; // rx or tx pin dependent on mode: tx pin for RXTX_MODE
     int pin_data_rx = -1; // rx pin for RXTX_MODE
     int pin_mck = PIN_I2S_MCK;
-    /// not used any more
+    /// total buffer is max buffer_count * buffer_size
     int buffer_count = I2S_BUFFER_COUNT;
-    /// not used any more
+    /// total buffer is max buffer_count * buffer_size
     int buffer_size = I2S_BUFFER_SIZE;
     bool use_apll = I2S_USE_APLL; 
     bool auto_clear = I2S_AUTO_CLEAR;
