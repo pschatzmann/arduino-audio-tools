@@ -1,4 +1,5 @@
 #pragma once
+#include <algorithm>
 #include "AudioToolsConfig.h"
 
 // Support AnalogAudioStream
@@ -76,10 +77,20 @@ class AnalogAudioStream  : public AudioStream {
     }
 
      /// ESP32 only: writes the data to the I2S interface
-    size_t write(const uint8_t *data, size_t len) override { 
+    size_t write(const uint8_t *data, size_t len) override {
       TRACED();
-      return p_driver->write(data, len);
-    }   
+      const size_t max_write_size = 1024;
+      size_t open = len;
+      size_t written = 0;
+      while (open > 0) {
+        size_t to_write = std::min(open, max_write_size);
+        size_t result = p_driver->write(data + written, to_write);
+        written += result;
+        open -= result;
+        if (result < to_write) break;
+      }
+      return written;
+    }
 
     size_t readBytes(uint8_t *data, size_t len) override {
         return p_driver->readBytes(data, len);
