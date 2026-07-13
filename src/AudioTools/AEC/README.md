@@ -15,8 +15,14 @@ no hardware required).
 | [`MDFEchoCancellationStream`](#mdfechocancellationstream) | `MDFEchoCancellationStream.h` + `MDFEchoCancellation.h` | Block-frequency-domain NLMS (speexdsp MDF, two-path) | Yes |
 
 `MDFEchoCancellationConfig.h` is not a class — it's compile-time tuning for
-`MDFEchoCancellation.h` (`TWO_PATH`, `PLAYBACK_DELAY`, and a `FIXED_POINT`
-toggle that **must stay disabled**; see the comment in that file for why).
+`MDFEchoCancellation.h` (`TWO_PATH`, `PLAYBACK_DELAY`).
+
+`PseudoFloat.h` is not a class either in the sense of the table above — it's
+a small, independently-tested numeric type (a software float using integer
+mantissa+exponent arithmetic) that backs `MDFFixedPoint`, one of the two
+`SampleType` choices for `MDFEchoCancellation`/`MDFEchoCancellationStream`
+(the other being the default, `MDFFloat`). See the "SampleType" section
+under `MDFEchoCancellationStream` below.
 
 ---
 
@@ -81,6 +87,7 @@ explicitly in lock-step, useful for testing or non-duplex pipelines.
 ## MDFEchoCancellationStream
 
 ```cpp
+template <typename SampleType = MDFFloat>
 class MDFEchoCancellationStream : public AudioStream;
 ```
 
@@ -103,9 +110,27 @@ cfg.length = 256;                 // frame size in samples
 cfg.sample_rate = 16000;
 fft.begin(cfg);
 
-MDFEchoCancellationStream aec(mic_in, /*filterLength=*/1024, fft);
+MDFEchoCancellationStream<> aec(mic_in, /*filterLength=*/1024, fft);  // MDFFloat
 aec.write(speaker_buf, frame_bytes);      // exactly one frame's worth
 aec.readBytes(clean_mic_buf, frame_bytes); // exactly one frame's worth
+```
+
+### SampleType: MDFFloat vs MDFFixedPoint
+
+The numeric type used for the canceller's internal sample/spectrum arrays
+and adaptation state is a template parameter, chosen per instance at
+construction — this replaced an earlier `FIXED_POINT` preprocessor macro
+that picked one representation for the whole binary:
+
+- **`MDFFloat`** (the default): native `float` arithmetic throughout. The
+  best-tested option — see the convergence numbers below.
+- **`MDFFixedPoint`**: uses [`PseudoFloat`](#pseudofloat) (a software float
+  built from integer mantissa+exponent arithmetic, in `PseudoFloat.h`) for
+  the same arrays/state, so the algorithm runs without native floating-point
+  instructions — useful on microcontrollers without an FPU.
+
+```cpp
+MDFEchoCancellationStream<MDFFixedPoint> aec(mic_in, 1024, fft);
 ```
 
 **Strengths**
@@ -117,8 +142,11 @@ aec.readBytes(clean_mic_buf, frame_bytes); // exactly one frame's worth
   algorithm via a second constructor.
 - After the fixes below, verified to actually converge: on a synthetic
   attenuated-echo signal (no near-end noise), residual echo energy drops to
-  roughly 1e-7 of the original within a few hundred frames. See
-  `test_mdf_converges` in `tests-cmake/stt/stt_test.cpp`.
+  roughly 1e-7 of the original within a few hundred frames with `MDFFloat`,
+  and roughly 1e-5 with `MDFFixedPoint` (less precise, as expected from
+  `PseudoFloat`'s ~15-bit mantissa, but a genuine 4-5 order-of-magnitude
+  reduction). See `test_mdf_converges<MDFFloat>` and
+  `test_mdf_converges<MDFFixedPoint>` in `tests-cmake/stt/stt_test.cpp`.
 
 **Weaknesses / things to know before relying on this**
 - This was, by a wide margin, the most bug-dense file in the folder — it did
@@ -137,7 +165,13 @@ aec.readBytes(clean_mic_buf, frame_bytes); // exactly one frame's worth
   attenuation additionally required two fixes in the **shared**
   `AudioRealFFT.h` driver (bin extraction reading the wrong internal buffer,
   and the FFT engine not being reinitialized when re-`begin()`'d at a
-  different size) — see that file's history for detail.
+  different size) — see that file's history for detail. The old
+  `FIXED_POINT` preprocessor toggle mentioned in some of that history has
+  since been replaced by the `SampleType` template parameter described
+  above; the fixed-point path (now `MDFFixedPoint`) went from unmaintained
+  dead code with a latent infinite-loop bug in its float-to-fixed
+  conversion to something that's actually built, run, and verified to
+  converge (see the "SampleType" section above).
 - **Only verified with the `AudioRealFFT` driver.** Other `AudioFFTBase`
   drivers (`AudioKissFFT`, `AudioCmsisFFT`, `AudioESP32FFT`,
   `AudioEspressifFFT`, `AudioFixedFFT`) have their own, separate bin-access
@@ -158,3 +192,56 @@ aec.readBytes(clean_mic_buf, frame_bytes); // exactly one frame's worth
   tap reverberant paths, concurrent near-end speech, non-stationary noise)
   is not yet validated — treat convergence quality on real audio as
   unproven until you test it yourself.
+
+---
+
+## PseudoFloat
+
+```cpp
+class PseudoFloat;  // in PseudoFloat.h
+```
+
+A software "float" — a real number stored as a signed 16-bit mantissa plus
+a 16-bit exponent (value = mantissa × 2^exponent), computed with integer
+multiply/shift only. This is the numeric type behind `MDFFixedPoint` (see
+`MDFEchoCancellationStream`'s SampleType section above); it's a generalized,
+fully operator-overloaded version of the mantissa+exponent trick classic
+fixed-point speexdsp code used for a handful of wide-dynamic-range control
+variables, extended here to serve as a drop-in `float` replacement anywhere
+in the MDF algorithm (arrays included).
+
+`PseudoFloat` renormalizes on every operation, so — unlike a fixed Q-format
+with a fixed number of fractional bits — it tolerates the same wide dynamic
+range as `float` (audio samples, FFT magnitudes in the thousands, and
+adaptation-rate fractions near zero all coexist in the same arrays in this
+algorithm), at roughly the precision of a 16-bit mantissa (~4-5 significant
+decimal digits, comparable to a compressed/half-precision float).
+
+**Strengths**
+- Verified directly against native `float` arithmetic (round-trip, all four
+  arithmetic operators, all comparisons, across 23 representative
+  magnitudes/signs = 529 pairs, plus a 100-step accumulation) — see
+  `test_pseudofloat_matches_native_float` in `tests-cmake/stt/stt_test.cpp`.
+  This is what makes `MDFFixedPoint` trustworthy without needing DSP
+  reference vectors for a full classic fixed-point port.
+- Has explicit exact-match overloads for mixing with plain `float` on either
+  side (`pseudoFloatValue * 0.7f` and `0.7f * pseudoFloatValue` both work
+  unambiguously) — necessary because the MDF algorithm body mixes float
+  literals and `PseudoFloat` variables constantly.
+
+**Weaknesses**
+- Comparison operators (`<`, `>`, etc.) convert both sides to `float` and
+  compare natively, rather than comparing mantissa/exponent directly —
+  a deliberate simplicity/correctness tradeoff, since comparisons are
+  scalar, infrequent control-flow checks, not the per-element array math
+  this class exists to keep off the FPU.
+- Mixing with a plain `int` literal (e.g. `pseudoFloatValue > 16383`) still
+  compiles and works correctly, but triggers a (non-fatal) "ISO C++ says
+  these are ambiguous" compiler warning on GCC/Clang, the same well-known
+  quirk any custom numeric type with both a converting constructor and a
+  conversion operator runs into — only exact-match `float` overloads were
+  added to resolve it, not every fundamental type.
+- Not a bit-exact reproduction of classic Q15 fixed-point speex code, and
+  doesn't claim to be — see `MDFFixedPoint`'s doc comment in
+  `MDFEchoCancellation.h` for why a narrow fixed Q-format isn't workable for
+  this specific algorithm's value ranges.

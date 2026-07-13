@@ -39,18 +39,6 @@ namespace audio_tools {
 // Feature Flags
 // ============================================================================
 
-/** Enable fixed-point arithmetic for embedded systems
- * When defined, uses integer math instead of floating-point for better
- * performance on processors without FPU.
- *
- * Disabled: the echo canceller algorithm (MDFEchoCancellation.h) is written
- * using plain floating-point arithmetic throughout (e.g. preemph = .9f,
- * notch_radius = .982f, Hann window values in [0,1)), not the Q15
- * bit-shifted fixed-point math a true FIXED_POINT port would need. Enabling
- * this macro would silently truncate those fractional values to 0/1.
- */
-// #define FIXED_POINT
-
 /** Enable two-path filter for improved double-talk robustness
  * When enabled, the echo canceller maintains both a foreground and background
  * filter, allowing it to better handle situations where near-end and far-end
@@ -77,33 +65,5 @@ namespace audio_tools {
 /** Mathematical constant Pi (3.14159265358979323846) */
 #define M_PI 3.14159265358979323846
 #endif
-
-// ============================================================================
-// Floating Point Mode Constants
-// ============================================================================
-
-#ifdef FIXED_POINT
-
-/** Fixed-point zero constant (Q15 format) */
-#define FLOAT_ZERO {0, 0}
-
-/** Fixed-point one constant (Q15 format: 32767, exp 0) */
-#define FLOAT_ONE {32767, 0}
-
-/** Fixed-point half constant (Q15 format: 16384, exp 0) */
-#define FLOAT_HALF {16384, 0}
-
-#else
-
-/** Floating point zero constant */
-#define FLOAT_ZERO 0.f
-
-/** Floating point one constant */
-#define FLOAT_ONE 1.f
-
-/** Floating point half constant */
-#define FLOAT_HALF 0.5f
-
-#endif  // FIXED_POINT
 
 }  // namespace audio_tools

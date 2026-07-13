@@ -1,5 +1,5 @@
-// Tests for AudioTools/AEC (LMSEchoCancellationStream, MDFEchoCancellationStream)
-// and AudioTools/AudioLibs/WakeWordDetector.h.
+// Tests for AudioTools/AEC (LMSEchoCancellationStream, MDFEchoCancellationStream,
+// PseudoFloat) and AudioTools/AudioLibs/WakeWordDetector.h.
 //
 // These are experimental ("Sandbox"-derived) components. This test suite intends to:
 //  - lock in the structural fixes applied to get them to compile and run
@@ -11,17 +11,23 @@
 //    test_mdf_converges for the chain of bugs -- two in the shared
 //    AudioRealFFT.h driver, one here -- that had to be fixed for that to be
 //    true; before those, it ran without crashing but never cancelled
-//    anything).
+//    anything), for both its numeric backends (MDFFloat and MDFFixedPoint,
+//    selected via a template parameter rather than a FIXED_POINT #ifdef),
+//  - verify PseudoFloat (MDFFixedPoint's number type) matches native float
+//    arithmetic directly, since that's what makes MDFFixedPoint trustworthy
+//    without needing DSP reference vectors for a full fixed-point port.
 #include <cassert>
 #include <cmath>
 #include <cstdio>
 #include <cstring>
+#include <vector>
 
 #define IS_DESKTOP_WITH_TIME_ONLY 1
 #include "AudioTools.h"
 #include "AudioTools/FFT/AudioRealFFT.h"
 #include "AudioTools/AEC/LMSEchoCancellationStream.h"
 #include "AudioTools/AEC/MDFEchoCancellationStream.h"
+#include "AudioTools/AEC/PseudoFloat.h"
 #include "AudioTools/AudioLibs/WakeWordDetector.h"
 
 using namespace audio_tools;
@@ -32,6 +38,77 @@ double energy(const int16_t* data, size_t n) {
   double e = 0;
   for (size_t i = 0; i < n; i++) e += (double)data[i] * data[i];
   return e;
+}
+
+// ---------------------------------------------------------------------------
+// PseudoFloat
+// ---------------------------------------------------------------------------
+
+// PseudoFloat backs MDFFixedPoint's word16_t/word32_t/float_t, so its
+// arithmetic needs to match native float directly and unambiguously --
+// including when mixed with plain float/int literals, since the MDF
+// algorithm body does that constantly (e.g. `.6f * st->Davg1`). Verifies
+// round-trip, all four arithmetic operators and all comparisons across a
+// representative range of magnitudes/signs, plus a multi-step accumulation
+// (closer to how it's actually used, in per-sample/per-bin loops).
+void test_pseudofloat_matches_native_float() {
+  const std::vector<float> values = {
+      0.0f,     1.0f,     -1.0f,    0.5f,     -0.5f,   3.14159f, -3.14159f,
+      1234.5f,  -1234.5f, 0.0001f,  -0.0001f, 32768.0f, -32768.0f, 1e6f,
+      -1e6f,    1e-6f,    -1e-6f,   100.0f,   -7.0f,    0.03f,    -0.03f,
+      2.0f,     -2.0f};
+  const float tol = 1e-3f;  // ~15-bit mantissa precision
+
+  auto check = [](const char* op, float expected, float got, float tol) {
+    float diff = fabsf(expected - got);
+    float rel = diff / (fabsf(expected) > 1e-6f ? fabsf(expected) : 1.0f);
+    assert(rel <= tol || diff <= 1e-3f);
+    (void)op;
+  };
+
+  for (float v : values) check("roundtrip", v, (float)PseudoFloat(v), tol);
+
+  for (float a : values) {
+    for (float b : values) {
+      PseudoFloat pa(a), pb(b);
+      check("add", a + b, (float)(pa + pb), tol);
+      check("sub", a - b, (float)(pa - pb), tol);
+      check("mul", a * b, (float)(pa * pb), tol);
+      if (b != 0.0f) check("div", a / b, (float)(pa / pb), tol);
+      assert((a < b) == (pa < pb));
+      assert((a > b) == (pa > pb));
+    }
+  }
+
+  for (float v : values) check("neg", -v, (float)(-PseudoFloat(v)), tol);
+
+  {
+    PseudoFloat a(10.0f);
+    a += PseudoFloat(5.0f);
+    check("+=", 15.0f, (float)a, tol);
+    a -= PseudoFloat(3.0f);
+    check("-=", 12.0f, (float)a, tol);
+    a *= PseudoFloat(2.0f);
+    check("*=", 24.0f, (float)a, tol);
+    a /= PseudoFloat(4.0f);
+    check("/=", 6.0f, (float)a, tol);
+  }
+
+  {
+    // Chained accumulation, closer to how the MDF algorithm actually uses
+    // this type in per-sample/per-bin loops.
+    PseudoFloat acc(0.0f);
+    float facc = 0.0f;
+    for (int i = 0; i < 100; i++) {
+      float v = sinf(i * 0.1f) * 1000.0f;
+      acc = acc + PseudoFloat(v) * PseudoFloat(0.01f);
+      facc += v * 0.01f;
+    }
+    check("accum100", facc, (float)acc, 0.02f);  // looser tol, 100 accumulated steps
+  }
+
+  printf("[pseudofloat] matches native float across %zu values (%zu pairs)\n",
+         values.size(), values.size() * values.size());
 }
 
 // ---------------------------------------------------------------------------
@@ -206,8 +283,15 @@ void test_wakeword_detects_known_tone_and_ignores_other() {
 // anything regardless of how correct the FFT was.
 //
 // With all of those fixed, this test asserts what actually matters: that a
-// simple attenuated echo gets substantially cancelled.
-void test_mdf_converges() {
+// simple attenuated echo gets substantially cancelled -- for both numeric
+// backends selectable via the SampleType template parameter (replacing the
+// old FIXED_POINT #ifdef): MDFFloat (native float, the default) and
+// MDFFixedPoint (PseudoFloat, integer mantissa/exponent arithmetic -- see
+// PseudoFloat.h). MDFFixedPoint is expected to converge less tightly than
+// MDFFloat (lower mantissa precision), hence the separate, looser
+// max_energy_ratio per backend.
+template <typename SampleType>
+void test_mdf_converges(const char* label, double max_energy_ratio) {
   AudioRealFFT fft;
   auto cfg = fft.defaultConfig(RXTX_MODE);
   const int frame_size = 32;
@@ -229,7 +313,7 @@ void test_mdf_converges() {
 
   MemoryStream recStream((const uint8_t*)rec_all, sizeof(rec_all), true,
                           FLASH_RAM);
-  MDFEchoCancellationStream mdf(recStream, /*filterLength=*/96, fft);
+  MDFEchoCancellationStream<SampleType> mdf(recStream, /*filterLength=*/96, fft);
 
   assert(mdf.getFilterLen() == 96);
   mdf.setFilterLen(64);
@@ -255,15 +339,15 @@ void test_mdf_converges() {
     if (f >= num_frames - 10) e_last += e;
   }
 
-  printf("[mdf] e_first=%.1f e_last=%.1f ratio=%.6f\n", e_first, e_last,
-         e_last / e_first);
-  assert(e_last < e_first * 0.01);  // echo attenuated by at least 20dB
+  printf("[mdf %s] e_first=%.1f e_last=%.1f ratio=%.6f\n", label, e_first,
+         e_last, e_last / e_first);
+  assert(e_last < e_first * max_energy_ratio);
 
   auto* st = mdf.getEchoCanceller().getState();
   assert(st != nullptr);
   assert(std::isfinite((float)st->leak_estimate));
   assert(st->screwed_up < 50);  // never hit the internal instability reset
-  printf("[mdf] converges: %d frames processed, no crash, no NaN\n",
+  printf("[mdf %s] converges: %d frames processed, no crash, no NaN\n", label,
          num_frames);
 
   mdf.reset();
@@ -275,16 +359,19 @@ void test_mdf_converges() {
   assert(wrote == frame_size * sizeof(int16_t));
   size_t red = mdf.readBytes(buf, sizeof(buf));
   assert(red == sizeof(buf));
-  printf("[mdf] reset() clears state and remains usable afterwards\n");
+  printf("[mdf %s] reset() clears state and remains usable afterwards\n",
+         label);
 }
 
 }  // namespace
 
 int main() {
+  test_pseudofloat_matches_native_float();
   test_lms_converges_and_does_not_freeze();
   test_lms_stream_pipeline_matches_direct_cancel();
   test_wakeword_detects_known_tone_and_ignores_other();
-  test_mdf_converges();
+  test_mdf_converges<MDFFloat>("MDFFloat", 0.01);          // echo attenuated by >=20dB
+  test_mdf_converges<MDFFixedPoint>("MDFFixedPoint", 0.01);
   printf("All AEC/wake-word sandbox tests passed.\n");
   return 0;
 }

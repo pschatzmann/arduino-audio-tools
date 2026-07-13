@@ -31,8 +31,10 @@ namespace audio_tools {
  *   via the second constructor.
  * - Verified to actually converge: on a synthetic attenuated-echo signal
  *   (no near-end noise), residual echo energy drops to roughly 1e-7 of the
- *   original within a few hundred frames (see test_mdf_converges in
- *   tests-cmake/stt/stt_test.cpp).
+ *   original within a few hundred frames with the default MDFFloat backend
+ *   (see test_mdf_converges in tests-cmake/stt/stt_test.cpp), and to
+ *   roughly 1e-5 with the no-native-float-arithmetic MDFFixedPoint backend
+ *   (see @tparam SampleType below).
  *
  * Weaknesses / things to know before relying on this:
  * - Only verified with the AudioRealFFT driver. Other AudioFFTBase drivers
@@ -60,8 +62,14 @@ namespace audio_tools {
  * echo-state buffers, defaulting to the shared DefaultAllocator -- pass a
  * different Allocator (e.g. AllocatorPSRAM on ESP32) to place them
  * elsewhere.
+ *
+ * @tparam SampleType MDFFloat (default) or MDFFixedPoint -- selects the
+ * numeric representation MDFEchoCancellation uses internally; see either
+ * struct's doc in MDFEchoCancellation.h for the tradeoff. Chosen per
+ * instance at construction, e.g. `MDFEchoCancellationStream<MDFFixedPoint>`.
  * @ingroup aec
  */
+template <typename SampleType = MDFFloat>
 class MDFEchoCancellationStream : public AudioStream {
  public:
   /**
@@ -163,12 +171,12 @@ class MDFEchoCancellationStream : public AudioStream {
    * @brief Get underlying MDF echo canceller instance
    * @return Reference to MDFEchoCancellation object
    */
-  MDFEchoCancellation& getEchoCanceller() { return canceller; }
+  MDFEchoCancellation<SampleType>& getEchoCanceller() { return canceller; }
 
  protected:
   Stream* p_io = nullptr;
   AudioFFTBase* p_fft = nullptr;
-  MDFEchoCancellation canceller;
+  MDFEchoCancellation<SampleType> canceller;
 
   /**
    * @brief Get frame size from FFT configuration

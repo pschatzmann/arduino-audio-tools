@@ -38,6 +38,7 @@
 #include <cstring>
 
 #include "MDFEchoCancellationConfig.h"
+#include "PseudoFloat.h"
 #include "AudioTools/FFT/AudioFFT.h"
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Allocator.h"
 
@@ -48,341 +49,80 @@
 #define ECHO_GET_IMPULSE_RESPONSE_SIZE 27
 #define ECHO_GET_IMPULSE_RESPONSE 29
 
-// Helper macros for floating point mode
-#ifndef FIXED_POINT
-#define PSEUDOFLOAT(x) (x)
-#define FLOAT_MULT(a, b) ((a) * (b))
-#define FLOAT_AMULT(a, b) ((a) * (b))
-#define FLOAT_MUL32(a, b) ((a) * (b))
-#define FLOAT_DIV32(a, b) ((a) / (b))
-#define FLOAT_EXTRACT16(a) (a)
-#define FLOAT_EXTRACT32(a) (a)
-#define FLOAT_ADD(a, b) ((a) + (b))
-#define FLOAT_SUB(a, b) ((a) - (b))
-#define FLOAT_DIV32_FLOAT(a, b) ((a) / (b))
-#define FLOAT_MUL32U(a, b) ((a) * (b))
-#define FLOAT_SHL(a, b) (a)
-#define FLOAT_LT(a, b) ((a) < (b))
-#define FLOAT_GT(a, b) ((a) > (b))
-#define FLOAT_DIVU(a, b) ((a) / (b))
-#define FLOAT_SQRT(a) (sqrtf(a))
-
-// Math operation macros for floating point
-#define ABS(x) (((x) < 0) ? (-(x)) : (x))
-#define ABS16(x) (((x) < 0) ? (-(x)) : (x))
-#define ABS32(x) (((x) < 0) ? (-(x)) : (x))
-#define MIN16(a, b) ((a) < (b) ? (a) : (b))
-#define MAX16(a, b) ((a) > (b) ? (a) : (b))
-#define MIN32(a, b) ((a) < (b) ? (a) : (b))
-#define MAX32(a, b) ((a) > (b) ? (a) : (b))
-
-#define QCONST16(x, bits) (x)
-#define QCONST32(x, bits) (x)
-#define NEG16(x) (-(x))
-#define NEG32(x) (-(x))
-#define EXTRACT16(x) (x)
-#define EXTEND32(x) (x)
-#define SHR16(a, shift) (a)
-#define SHL16(a, shift) (a)
-#define SHR32(a, shift) (a)
-#define SHL32(a, shift) (a)
-#define PSHR16(a, shift) (a)
-#define PSHR32(a, shift) (a)
-#define VSHR32(a, shift) (a)
-#define SATURATE16(x, a) (x)
-#define SATURATE32(x, a) (x)
-#define ADD16(a, b) ((a) + (b))
-#define SUB16(a, b) ((a) - (b))
-#define ADD32(a, b) ((a) + (b))
-#define SUB32(a, b) ((a) - (b))
-#define MULT16_16(a, b) ((echo_word32_t)(a) * (echo_word32_t)(b))
-#define MAC16_16(c, a, b) ((c) + (echo_word32_t)(a) * (echo_word32_t)(b))
-#define MULT16_32_Q15(a, b) ((a) * (b))
-#define MULT16_16_P15(a, b) ((a) * (b))
-#define MULT16_32_P15(a, b) ((a) * (b))
-#define MULT16_16_Q15(a, b) ((a) * (b))
-#define DIV32_16(a, b) (((echo_word32_t)(a)) / (echo_word16_t)(b))
-#define DIV32(a, b) (((echo_word32_t)(a)) / (echo_word32_t)(b))
-#define WORD2INT(x) \
-  ((x) < -32767.5f  \
-       ? -32768     \
-       : ((x) > 32766.5f ? 32767 : (echo_int16_t)floorf(.5f + (x))))
-#define MULT16_16_Q14(a, b) ((a) * (b))
-#define MULT16_16_Q13(a, b) ((a) * (b))
-#define MULT16_16_P13(a, b) ((a) * (b))
-#define MULT16_16_P14(a, b) ((a) * (b))
-#define MULT16_32_Q14(a, b) ((a) * (b))
-#define MAC16_32_Q15(c, a, b) ((c) + (a) * (b))
-
-#define TOP16(x) (x)
-#define WEIGHT_SHIFT 0
-
-#else
-// Fixed-point mode macros
-#define PSEUDOFLOAT(x) (echo_float_from_double(x))
-#define FLOAT_MULT(a, b) (echo_float_mult(a, b))
-#define FLOAT_MUL32U(a, b) (echo_float_mul32_u(a, b))
-#define FLOAT_ADD(a, b) (echo_float_add(a, b))
-#define FLOAT_SUB(a, b) (echo_float_sub(a, b))
-#define FLOAT_LT(a, b) (echo_float_lt(a, b))
-#define FLOAT_GT(a, b) (echo_float_gt(a, b))
-#define FLOAT_DIVU(a, b) (echo_float_divu(a, b))
-#define FLOAT_SQRT(a) (echo_float_sqrt(a))
-#define FLOAT_EXTRACT16(a) (echo_float_extract16(a))
-#define FLOAT_SHL(a, b) (echo_float_shl(a, b))
-
-// Math operation macros (same for fixed-point)
-#define ABS(x) (((x) < 0) ? (-(x)) : (x))
-#define ABS16(x) (((x) < 0) ? (-(x)) : (x))
-#define ABS32(x) (((x) < 0) ? (-(x)) : (x))
-#define MIN16(a, b) ((a) < (b) ? (a) : (b))
-#define MAX16(a, b) ((a) > (b) ? (a) : (b))
-#define MIN32(a, b) ((a) < (b) ? (a) : (b))
-#define MAX32(a, b) ((a) > (b) ? (a) : (b))
-
+// Converts a de-emphasized sample back to a clamped 16-bit PCM value.
+// Independent of the SampleType template parameter below -- this always
+// produces the final echo_int16_t output, regardless of which numeric type
+// was used internally to get there.
 #define WORD2INT(x) \
   ((x) < -32767.5f  \
        ? -32768     \
        : ((x) > 32766.5f ? 32767 : (echo_int16_t)floorf(.5f + (x))))
 
-#define TOP16(x) (x)
-#define WEIGHT_SHIFT 0
-
-#endif  // !FIXED_POINT
-
-// Forward declaration for FFT interface
 namespace audio_tools {
 
-// Type definitions (must be before echo_float_t struct)
+// Type definitions for the fixed-width PCM/control values that are always
+// concrete integers, regardless of the internal DSP numeric representation
+// chosen via SampleType (see MDFFloat / MDFFixedPoint below).
 using echo_int16_t = int16_t;
 using echo_uint16_t = uint16_t;
 using echo_int32_t = int32_t;
 using echo_uint32_t = uint32_t;
 
-// NOTE: the algorithm body below (echoCancellationImpl and its helpers) is
-// written entirely in plain floating-point arithmetic (e.g. preemph = .9f,
-// notch_radius = .982f, Hann window values in [0,1)) with none of the Q15
-// bit-shifting that real fixed-point speex code requires. So even in
-// "FIXED_POINT" mode these element types must be float, or every fractional
-// value silently truncates to 0 when stored.
-#ifdef FIXED_POINT
-using echo_word16_t = int16_t;
-using echo_word32_t = int32_t;
-#else
-using echo_word16_t = float;
-using echo_word32_t = float;
-#endif
-using echo_mem_t = echo_word32_t;
-
-#ifdef FIXED_POINT
-// Forward declarations for operators
-struct echo_float_t;
-inline echo_float_t echo_float_mult(echo_float_t a, echo_float_t b);
-inline echo_float_t echo_float_mul32_u(float a, float b);
-
-// Fixed-point type for pseudo-float operations
-struct echo_float_t {
-  int16_t m;  // Mantissa
-  int16_t e;  // Exponent
-
-  // Constructor for initialization
-  constexpr echo_float_t(int16_t mantissa = 0, int16_t exponent = 0)
-    : m(mantissa), e(exponent) {}
-
-  // Operator overloads for arithmetic
-  inline echo_float_t operator*(const echo_float_t& other) const {
-    return echo_float_mult(*this, other);
-  }
-
-  inline echo_word32_t operator*(int16_t scalar) const {
-    // Result is a regular integer when multiplying float by int
-    int32_t result = ((int32_t)m * scalar);
-    if (e >= 14) {
-      return result << (e - 14);
-    } else {
-      return result >> (14 - e);
-    }
-  }
-
-  inline echo_word32_t operator*(int32_t scalar) const {
-    // Result is a regular integer when multiplying float by int
-    int64_t result = ((int64_t)m * scalar);
-    if (e >= 14) {
-      return result << (e - 14);
-    } else {
-      return result >> (14 - e);
-    }
-  }
-
-  friend inline echo_word32_t operator*(int32_t scalar, const echo_float_t& f) {
-    return f * scalar;
-  }
+/**
+ * @brief Selects `float` as MDFEchoCancellation's internal numeric
+ * representation for sample/spectrum arrays (word16_t/word32_t) and
+ * wide-dynamic-range control state (float_t). This is the default, and the
+ * one that has been verified to converge (see test_mdf_converges in
+ * tests-cmake/stt/stt_test.cpp) -- prefer it unless you specifically need
+ * to avoid hardware floating-point instructions (e.g. no FPU).
+ */
+struct MDFFloat {
+  using word16_t = float;
+  using word32_t = float;
+  using float_t = float;
 };
 
-// Fixed-point arithmetic helper functions
-inline echo_float_t echo_float_from_double(double x) {
-  echo_float_t r;
-  if (x == 0) {
-    r.m = 0;
-    r.e = 0;
-    return r;
-  }
-  int e = 0;
-  while (x >= 32768) { x *= 0.5; e++; }
-  while (x < 16384) { x *= 2.0; e--; }
-  r.m = (int16_t)x;
-  r.e = (int16_t)e;
-  return r;
-}
-
-inline echo_float_t echo_float_mult(echo_float_t a, echo_float_t b) {
-  echo_float_t r;
-  r.m = (int16_t)((((int32_t)a.m) * b.m) >> 15);
-  r.e = a.e + b.e + 15;
-  if (r.m > 0) {
-    while (r.m < 16384) { r.m <<= 1; r.e--; }
-  }
-  return r;
-}
-
-inline echo_float_t echo_float_mul32_u(float a, float b) {
-  return echo_float_from_double(a * b);
-}
-
-inline echo_float_t echo_float_add(echo_float_t a, echo_float_t b) {
-  if (a.e > b.e) {
-    int shift = a.e - b.e;
-    if (shift > 15) return a;
-    echo_float_t r = {(int16_t)(a.m + (b.m >> shift)), a.e};
-    return r;
-  } else {
-    int shift = b.e - a.e;
-    if (shift > 15) return b;
-    echo_float_t r = {(int16_t)((a.m >> shift) + b.m), b.e};
-    return r;
-  }
-}
-
-inline echo_float_t echo_float_sub(echo_float_t a, echo_float_t b) {
-  if (a.e > b.e) {
-    int shift = a.e - b.e;
-    if (shift > 15) return a;
-    echo_float_t r = {(int16_t)(a.m - (b.m >> shift)), a.e};
-    return r;
-  } else {
-    int shift = b.e - a.e;
-    if (shift > 15) {
-      echo_float_t r = {(int16_t)(-b.m), b.e};
-      return r;
-    }
-    echo_float_t r = {(int16_t)((a.m >> shift) - b.m), b.e};
-    return r;
-  }
-}
-
-inline bool echo_float_lt(echo_float_t a, echo_float_t b) {
-  if (a.e != b.e) return a.e < b.e;
-  return a.m < b.m;
-}
-
-inline bool echo_float_gt(echo_float_t a, echo_float_t b) {
-  if (a.e != b.e) return a.e > b.e;
-  return a.m > b.m;
-}
-
-inline echo_float_t echo_float_divu(echo_float_t a, echo_float_t b) {
-  echo_float_t r;
-  if (b.m == 0) {
-    r.m = 32767;
-    r.e = 15;
-    return r;
-  }
-  r.m = (int16_t)((((int32_t)a.m) << 15) / b.m);
-  r.e = a.e - b.e - 15;
-  if (r.m > 0) {
-    while (r.m < 16384) { r.m <<= 1; r.e--; }
-  }
-  return r;
-}
-
-inline echo_float_t echo_float_sqrt(echo_float_t x) {
-  double val = x.m * pow(2.0, x.e - 14);
-  return echo_float_from_double(sqrt(val));
-}
-
-inline int16_t echo_float_extract16(echo_float_t x) {
-  if (x.e > 0) {
-    return x.m << (x.e > 15 ? 15 : x.e);
-  } else {
-    return x.m >> (-x.e > 15 ? 15 : -x.e);
-  }
-}
-
-inline echo_float_t echo_float_shl(echo_float_t x, int bits) {
-  echo_float_t r = {x.m, (int16_t)(x.e + bits)};
-  return r;
-}
-
-
-/** Minimum leak estimate for the adaptive filter (0.005 in Q15: 164) */
-static const echo_float_t MIN_LEAK = {164, -15};
-
-/** Smoothing coefficient for first variance estimator (0.36 in Q15: 11796) */
-static const echo_float_t VAR1_SMOOTH = {11796, -15};
-
-/** Smoothing coefficient for second variance estimator (0.7225 in Q15: 23674) */
-static const echo_float_t VAR2_SMOOTH = {23674, -15};
-
-/** Update threshold for first variance estimator (0.5 in Q15: 16384) */
-static const echo_float_t VAR1_UPDATE = {16384, -15};
-
-/** Update threshold for second variance estimator (0.25 in Q15: 8192) */
-static const echo_float_t VAR2_UPDATE = {8192, -15};
-
-/** Backtrack threshold for filter reset (4.0 in Q15: 16384, exp 2) */
-static const echo_float_t VAR_BACKTRACK = {16384, 2};
-
-#else
-// Floating-point mode
-
-/** Minimum leak estimate for the adaptive filter (0.005) */
-static const float MIN_LEAK = 0.005f;
-
-/** Smoothing coefficient for first variance estimator (0.36) */
-static const float VAR1_SMOOTH = 0.36f;
-
-/** Smoothing coefficient for second variance estimator (0.7225) */
-static const float VAR2_SMOOTH = 0.7225f;
-
-/** Update threshold for first variance estimator (0.5) */
-static const float VAR1_UPDATE = 0.5f;
-
-/** Update threshold for second variance estimator (0.25) */
-static const float VAR2_UPDATE = 0.25f;
-
-/** Backtrack threshold for filter reset (4.0) */
-static const float VAR_BACKTRACK = 4.0f;
-
-#endif  // FIXED_POINT
-
-
-// Floating point type definition (for non-FIXED_POINT mode)
-#ifndef FIXED_POINT
-using echo_float_t = float;
-#endif
+/**
+ * @brief Selects PseudoFloat (see PseudoFloat.h) as MDFEchoCancellation's
+ * internal numeric representation, so the algorithm runs on integer
+ * mantissa/exponent arithmetic instead of native float instructions --
+ * useful on microcontrollers without an FPU. PseudoFloat's arithmetic is
+ * verified against native float directly (see the PseudoFloat tests in
+ * tests-cmake/stt/stt_test.cpp), and MDFEchoCancellation<MDFFixedPoint> is
+ * smoke-tested to run without crashing/NaN and to converge similarly to
+ * MDFFloat on the same synthetic signal -- but it has not received the
+ * same depth of numerical scrutiny as MDFFloat, so treat it as less
+ * battle-tested. Despite the name, this is not a classic narrow Q15
+ * fixed-point format (that would over/underflow across this algorithm's
+ * actual value range -- see PseudoFloat's class doc for why).
+ */
+struct MDFFixedPoint {
+  using word16_t = PseudoFloat;
+  using word32_t = PseudoFloat;
+  using float_t = PseudoFloat;
+};
 
 /**
  * @brief Internal echo canceller state structure
- * 
+ *
  * Contains all internal state variables and buffers for the MDF (Multi-Delay
  * block Frequency adaptive filter) echo cancellation algorithm. This structure
  * should never be accessed directly by users; use the EchoCanceller class
  * methods instead.
- * 
+ *
+ * @tparam SampleType MDFFloat (default) or MDFFixedPoint -- selects the
+ * numeric type used for the arrays/state below (see either struct's doc).
+ *
  * @warning Direct access to this structure is not recommended and may break
  * encapsulation.
  */
+template <typename SampleType>
 struct EchoState {
+  using Word16 = typename SampleType::word16_t;
+  using Word32 = typename SampleType::word32_t;
+  using Num = typename SampleType::float_t;
+  using Mem = Word32;
+
   int frame_size; /**< Number of samples processed each time */
   int window_size;
   int M;
@@ -393,48 +133,48 @@ struct EchoState {
   int C; /** Number of input channels (microphones) */
   int K; /** Number of output channels (loudspeakers) */
   echo_int32_t sampling_rate;
-  echo_word16_t spec_average;
-  echo_word16_t beta0;
-  echo_word16_t beta_max;
-  echo_word32_t sum_adapt;
-  echo_word16_t leak_estimate;
+  Word16 spec_average;
+  Word16 beta0;
+  Word16 beta_max;
+  Word32 sum_adapt;
+  Word16 leak_estimate;
 
-  echo_word16_t* e;     /* scratch */
-  echo_word16_t* x;     /* Far-end input buffer (2N) */
-  echo_word16_t* X;     /* Far-end buffer (M+1 frames) in frequency domain */
-  echo_word16_t* input; /* scratch */
-  echo_word16_t* y;     /* scratch */
-  echo_word16_t* last_y;
-  echo_word16_t* Y; /* scratch */
-  echo_word16_t* E;
-  echo_word32_t* PHI; /* scratch */
-  echo_word32_t* W;   /* (Background) filter weights */
+  Word16* e;     /* scratch */
+  Word16* x;     /* Far-end input buffer (2N) */
+  Word16* X;     /* Far-end buffer (M+1 frames) in frequency domain */
+  Word16* input; /* scratch */
+  Word16* y;     /* scratch */
+  Word16* last_y;
+  Word16* Y; /* scratch */
+  Word16* E;
+  Word32* PHI; /* scratch */
+  Word32* W;   /* (Background) filter weights */
 #ifdef TWO_PATH
-  echo_word16_t* foreground; /* Foreground filter weights */
-  echo_word32_t
+  Word16* foreground; /* Foreground filter weights */
+  Word32
       Davg1; /* 1st recursive average of the residual power difference */
-  echo_word32_t
+  Word32
       Davg2; /* 2nd recursive average of the residual power difference */
-  echo_float_t Dvar1; /* Estimated variance of 1st estimator */
-  echo_float_t Dvar2; /* Estimated variance of 2nd estimator */
+  Num Dvar1; /* Estimated variance of 1st estimator */
+  Num Dvar2; /* Estimated variance of 2nd estimator */
 #endif
-  echo_word32_t* power;  /* Power of the far-end signal */
-  echo_float_t* power_1; /* Inverse power of far-end */
-  echo_word16_t* wtmp;   /* scratch */
-  echo_word32_t* Rf;     /* scratch */
-  echo_word32_t* Yf;     /* scratch */
-  echo_word32_t* Xf;     /* scratch */
-  echo_word32_t* Eh;
-  echo_word32_t* Yh;
-  echo_float_t Pey;
-  echo_float_t Pyy;
-  echo_word16_t* window;
-  echo_word16_t* prop;
+  Word32* power;  /* Power of the far-end signal */
+  Num* power_1; /* Inverse power of far-end */
+  Word16* wtmp;   /* scratch */
+  Word32* Rf;     /* scratch */
+  Word32* Yf;     /* scratch */
+  Word32* Xf;     /* scratch */
+  Word32* Eh;
+  Word32* Yh;
+  Num Pey;
+  Num Pyy;
+  Word16* window;
+  Word16* prop;
   void* fft_table;
-  echo_word16_t *memX, *memD, *memE;
-  echo_word16_t preemph;
-  echo_word16_t notch_radius;
-  echo_mem_t* notch_mem;
+  Word16 *memX, *memD, *memE;
+  Word16 preemph;
+  Word16 notch_radius;
+  Mem* notch_mem;
 
   echo_int16_t* play_buf;
   int play_buf_pos;
@@ -469,11 +209,16 @@ struct fft_state {
 };
 
 // Forward declarations: these are defined at the bottom of this file but
-// referenced from inside MDFEchoCancellation below.
+// referenced from inside MDFEchoCancellation below. echo_fft/echo_ifft are
+// templated on the sample element type (T = SampleType::word16_t, i.e.
+// float or PseudoFloat) since they convert to/from the FFT driver's plain
+// float bins at the boundary.
 inline void* echo_fft_init(int size, FFTDriver* driver);
 inline void echo_fft_destroy(void* table);
-inline void echo_fft(void* table, echo_word16_t* in, echo_word16_t* out);
-inline void echo_ifft(void* table, echo_word16_t* in, echo_word16_t* out);
+template <typename T>
+inline void echo_fft(void* table, T* in, T* out);
+template <typename T>
+inline void echo_ifft(void* table, T* in, T* out);
 
 /**
  * @brief Acoustic echo canceller using MDF algorithm
@@ -512,7 +257,7 @@ inline void echo_ifft(void* table, echo_word16_t* in, echo_word16_t* out);
  * fftDriver.begin(cfg);
  *
  * int filterLength = 1024;  // in samples
- * MDFEchoCancellation echo(filterLength, fftDriver);  // uses DefaultAllocator
+ * MDFEchoCancellation<> echo(filterLength, fftDriver);  // MDFFloat, uses DefaultAllocator
  * echo.playback(speakerFrame);          // frame_size samples
  * echo.capture(micFrame, outputFrame);  // frame_size samples each
  * @endcode
@@ -523,8 +268,13 @@ inline void echo_ifft(void* table, echo_word16_t* in, echo_word16_t* out);
  *   of the per-tap cost, and the two-path filter gives real protection
  *   against double-talk.
  * - Multi-channel (nbMic x nbSpeakers) support built in.
- * - Verified to converge strongly on a synthetic attenuated-echo signal
- *   (see test_mdf_converges in tests-cmake/stt/stt_test.cpp).
+ * - Verified to converge strongly on a synthetic attenuated-echo signal,
+ *   for both numeric backends (see test_mdf_converges<MDFFloat> and
+ *   test_mdf_converges<MDFFixedPoint> in tests-cmake/stt/stt_test.cpp).
+ * - The numeric representation used for internal arrays/state is a
+ *   template parameter (@tparam SampleType, MDFFloat by default) chosen
+ *   when you construct the object, e.g. `MDFEchoCancellation<MDFFixedPoint>`
+ *   -- see MDFFloat/MDFFixedPoint's docs above for the tradeoff.
  *
  * Weaknesses:
  * - Only verified with the AudioRealFFT driver; other AudioFFTBase drivers
@@ -542,9 +292,18 @@ inline void echo_ifft(void* table, echo_word16_t* in, echo_word16_t* out);
  *   zeroed the adaptive filter's gradient) to reach its current, tested
  *   state; treat further changes with real caution and re-run
  *   tests-cmake/stt afterwards.
+ *
+ * @tparam SampleType MDFFloat (default) or MDFFixedPoint.
  */
+template <typename SampleType = MDFFloat>
 class MDFEchoCancellation : public AudioStream {
  public:
+  using Word16 = typename SampleType::word16_t;
+  using Word32 = typename SampleType::word32_t;
+  using Num = typename SampleType::float_t;
+  using Mem = Word32;
+  using State = EchoState<SampleType>;
+
   /** Initialize echo canceller with single channel (mono)
    * @param filterLength Length of echo cancellation filter in samples
    * @param fftDriver FFT driver instance from AudioFFT
@@ -689,7 +448,7 @@ class MDFEchoCancellation : public AudioStream {
     for (int i = 0; i < N * (M + 1); i++) state->X[i] = 0;
     for (int i = 0; i <= state->frame_size; i++) {
       state->power[i] = 0;
-      state->power_1[i] = FLOAT_ONE;
+      state->power_1[i] = 1.0f;
       state->Eh[i] = 0;
       state->Yh[i] = 0;
     }
@@ -703,10 +462,10 @@ class MDFEchoCancellation : public AudioStream {
     state->saturated = 0;
     state->adapted = 0;
     state->sum_adapt = 0;
-    state->Pey = state->Pyy = FLOAT_ONE;
+    state->Pey = state->Pyy = 1.0f;
 #ifdef TWO_PATH
     state->Davg1 = state->Davg2 = 0;
-    state->Dvar1 = state->Dvar2 = FLOAT_ZERO;
+    state->Dvar1 = state->Dvar2 = 0.0f;
 #endif
     for (int i = 0; i < 3 * state->frame_size; i++) state->play_buf[i] = 0;
     state->play_buf_pos = PLAYBACK_DELAY * state->frame_size;
@@ -830,10 +589,10 @@ class MDFEchoCancellation : public AudioStream {
   }
 
   /** Get underlying state (for advanced usage) */
-  EchoState* getState() { return state; }
+  State* getState() { return state; }
 
  protected:
-  EchoState* state = nullptr; /**< Pointer to internal echo canceller state */
+  State* state = nullptr; /**< Pointer to internal echo canceller state */
   AudioFFTBase* fft_driver; /**< Pointer to FFT driver instance */
   Allocator& allocator; /**< Allocator used for the echo-state buffers */
   int filter_length; /**< Length of echo cancellation filter */
@@ -887,7 +646,8 @@ class MDFEchoCancellation : public AudioStream {
     LOGE("EchoCanceller Error: %s", str);
   }
 
-  inline float spxSqrt(float x) { return sqrtf(x); }
+  template <typename T>
+  inline T spxSqrt(T x) { return T(sqrtf((float)x)); }
 
   inline echo_int16_t spxIlog2(echo_uint32_t x) {
     int r = 0;
@@ -936,13 +696,13 @@ class MDFEchoCancellation : public AudioStream {
    * @param mem Filter memory state (2 values)
    * @param stride Stride for accessing input array
    */
-  inline void filterDcNotch16(const echo_int16_t* in, echo_word16_t radius,
-                              echo_word16_t* out, int len, echo_mem_t* mem,
+  inline void filterDcNotch16(const echo_int16_t* in, Word16 radius,
+                              Word16* out, int len, Mem* mem,
                               int stride) {
-    echo_word16_t den2 = radius * radius + .7f * (1 - radius) * (1 - radius);
+    Word16 den2 = radius * radius + .7f * (1 - radius) * (1 - radius);
     for (int i = 0; i < len; i++) {
-      echo_word16_t vin = in[i * stride];
-      echo_word32_t vout = mem[0] + vin;
+      Word16 vin = in[i * stride];
+      Word32 vout = mem[0] + vin;
       mem[0] = mem[1] + 2 * (-vin + radius * vout);
       mem[1] = vin - den2 * vout;
       out[i] = radius * vout;
@@ -956,7 +716,7 @@ class MDFEchoCancellation : public AudioStream {
    * @param len Length of vectors
    * @return Sum of element-wise products
    */
-  inline echo_word32_t mdfInnerProd(const echo_word16_t* x, const echo_word16_t* y,
+  inline Word32 mdfInnerProd(const Word16* x, const Word16* y,
                                    int len) {
     float sum = 0;
     for (int i = 0; i < len; i++) {
@@ -971,7 +731,7 @@ class MDFEchoCancellation : public AudioStream {
    * @param ps Output power spectrum
    * @param N FFT size
    */
-  inline void powerSpectrum(const echo_word16_t* X, echo_word32_t* ps, int N) {
+  inline void powerSpectrum(const Word16* X, Word32* ps, int N) {
     ps[0] = X[0] * X[0];
     for (int i = 1, j = 1; i < N - 1; i += 2, j++) {
       ps[j] = X[i] * X[i] + X[i + 1] * X[i + 1];
@@ -985,7 +745,7 @@ class MDFEchoCancellation : public AudioStream {
    * @param ps Accumulated power spectrum (updated in place)
    * @param N FFT size
    */
-  inline void powerSpectrumAccum(const echo_word16_t* X, echo_word32_t* ps,
+  inline void powerSpectrumAccum(const Word16* X, Word32* ps,
                                  int N) {
     ps[0] += X[0] * X[0];
     for (int i = 1, j = 1; i < N - 1; i += 2, j++) {
@@ -1002,8 +762,8 @@ class MDFEchoCancellation : public AudioStream {
    * @param N FFT size
    * @param M Number of frames to accumulate
    */
-  inline void spectralMulAccum(const echo_word16_t* X, const echo_word32_t* Y,
-                               echo_word16_t* acc, int N, int M) {
+  inline void spectralMulAccum(const Word16* X, const Word32* Y,
+                               Word16* acc, int N, int M) {
     for (int i = 0; i < N; i++) acc[i] = 0;
 
     for (int j = 0; j < M; j++) {
@@ -1027,18 +787,18 @@ class MDFEchoCancellation : public AudioStream {
    * @param prod Output product
    * @param N FFT size
    */
-  inline void weightedSpectralMulConj(const echo_float_t* w, const echo_float_t p,
-                                      const echo_word16_t* X,
-                                      const echo_word16_t* Y, echo_word32_t* prod,
+  inline void weightedSpectralMulConj(const Num* w, const Num p,
+                                      const Word16* X,
+                                      const Word16* Y, Word32* prod,
                                       int N) {
     // NOTE: the (int32_t) casts this code originally had here were only
     // correct in true fixed-point mode (X/Y as int16_t, needing widening
-    // before multiplying to avoid 16-bit overflow). With echo_word16_t /
-    // echo_word32_t now float (see the aliases above), those casts instead
+    // before multiplying to avoid 16-bit overflow). With Word16 /
+    // Word32 now float (see the aliases above), those casts instead
     // truncated every frequency-domain sample to an integer before ever
     // multiplying it by anything -- e.g. a bin magnitude of 0.03 became 0,
     // silently zeroing out the filter's gradient. Removed.
-    echo_float_t W;
+    Num W;
     W = p * w[0];
     prod[0] = W * (X[0] * Y[0]);
     for (int i = 1, j = 1; i < N - 1; i += 2, j++) {
@@ -1058,13 +818,13 @@ class MDFEchoCancellation : public AudioStream {
    * @param P Number of channels
    * @param prop Output proportional weights (normalized)
    */
-  inline void mdfAdjustProp(const echo_word32_t* W, int N, int M, int P,
-                            echo_word16_t* prop) {
-    echo_word16_t max_sum = 1;
-    echo_word32_t prop_sum = 1;
+  inline void mdfAdjustProp(const Word32* W, int N, int M, int P,
+                            Word16* prop) {
+    Word16 max_sum = 1;
+    Word32 prop_sum = 1;
 
     for (int i = 0; i < M; i++) {
-      echo_word32_t tmp = 1;
+      Word32 tmp = 1;
       for (int p = 0; p < P; p++) {
         for (int j = 0; j < N; j++) {
           float val = W[p * N * M + i * N + j];
@@ -1093,14 +853,14 @@ class MDFEchoCancellation : public AudioStream {
    * @param nb_speakers Number of speaker channels
    * @return Pointer to initialized echo state, or nullptr on failure
    */
-  EchoState* echoStateInitMc(int frame_size, int filter_length, int nb_mic,
+  State* echoStateInitMc(int frame_size, int filter_length, int nb_mic,
                                   int nb_speakers) {
     int N = frame_size * 2;
     int M = (filter_length + frame_size - 1) / frame_size;
     int C = nb_mic;
     int K = nb_speakers;
 
-    EchoState* st = new EchoState();
+    State* st = new State();
     if (!st) return nullptr;
 
     st->K = K;
@@ -1119,45 +879,45 @@ class MDFEchoCancellation : public AudioStream {
     st->leak_estimate = 0;
 
     // Allocate buffers
-    st->e = echoAlloc<echo_word16_t>(C * N);
-    st->x = echoAlloc<echo_word16_t>(K * N);
-    st->input = echoAlloc<echo_word16_t>(C * st->frame_size);
-    st->y = echoAlloc<echo_word16_t>(C * N);
-    st->last_y = echoAlloc<echo_word16_t>(C * N);
-    st->Yf = echoAlloc<echo_word32_t>(st->frame_size + 1);
-    st->Rf = echoAlloc<echo_word32_t>(st->frame_size + 1);
-    st->Xf = echoAlloc<echo_word32_t>(st->frame_size + 1);
-    st->Yh = echoAlloc<echo_word32_t>(st->frame_size + 1);
-    st->Eh = echoAlloc<echo_word32_t>(st->frame_size + 1);
-    st->X = echoAlloc<echo_word16_t>(K * (M + 1) * N);
-    st->Y = echoAlloc<echo_word16_t>(C * N);
-    st->E = echoAlloc<echo_word16_t>(C * N);
-    st->W = echoAlloc<echo_word32_t>(C * K * M * N);
+    st->e = echoAlloc<Word16>(C * N);
+    st->x = echoAlloc<Word16>(K * N);
+    st->input = echoAlloc<Word16>(C * st->frame_size);
+    st->y = echoAlloc<Word16>(C * N);
+    st->last_y = echoAlloc<Word16>(C * N);
+    st->Yf = echoAlloc<Word32>(st->frame_size + 1);
+    st->Rf = echoAlloc<Word32>(st->frame_size + 1);
+    st->Xf = echoAlloc<Word32>(st->frame_size + 1);
+    st->Yh = echoAlloc<Word32>(st->frame_size + 1);
+    st->Eh = echoAlloc<Word32>(st->frame_size + 1);
+    st->X = echoAlloc<Word16>(K * (M + 1) * N);
+    st->Y = echoAlloc<Word16>(C * N);
+    st->E = echoAlloc<Word16>(C * N);
+    st->W = echoAlloc<Word32>(C * K * M * N);
 
 #ifdef TWO_PATH
-    st->foreground = echoAlloc<echo_word16_t>(M * N * C * K);
+    st->foreground = echoAlloc<Word16>(M * N * C * K);
 #endif
 
-    st->PHI = echoAlloc<echo_word32_t>(N);
-    st->power = echoAlloc<echo_word32_t>(frame_size + 1);
-    st->power_1 = echoAlloc<echo_float_t>(frame_size + 1);
-    st->window = echoAlloc<echo_word16_t>(N);
-    st->prop = echoAlloc<echo_word16_t>(M);
-    st->wtmp = echoAlloc<echo_word16_t>(N);
+    st->PHI = echoAlloc<Word32>(N);
+    st->power = echoAlloc<Word32>(frame_size + 1);
+    st->power_1 = echoAlloc<Num>(frame_size + 1);
+    st->window = echoAlloc<Word16>(N);
+    st->prop = echoAlloc<Word16>(M);
+    st->wtmp = echoAlloc<Word16>(N);
 
     // Initialize window
     for (int i = 0; i < N; i++)
       st->window[i] = .5f - .5f * cosf(2 * M_PI * i / N);
 
     // Initialize power_1
-    for (int i = 0; i <= st->frame_size; i++) st->power_1[i] = FLOAT_ONE;
+    for (int i = 0; i <= st->frame_size; i++) st->power_1[i] = 1.0f;
 
     // Initialize W
     for (int i = 0; i < N * M * K * C; i++) st->W[i] = 0;
 
     // Initialize prop
     {
-      echo_word32_t sum = 0;
+      Word32 sum = 0;
       float decay = expf(-2.4f / M);
       st->prop[0] = .7f;
       sum = st->prop[0];
@@ -1170,9 +930,9 @@ class MDFEchoCancellation : public AudioStream {
       }
     }
 
-    st->memX = echoAlloc<echo_word16_t>(K);
-    st->memD = echoAlloc<echo_word16_t>(C);
-    st->memE = echoAlloc<echo_word16_t>(C);
+    st->memX = echoAlloc<Word16>(K);
+    st->memD = echoAlloc<Word16>(C);
+    st->memE = echoAlloc<Word16>(C);
     st->preemph = .9f;
 
     if (st->sampling_rate < 12000)
@@ -1182,13 +942,13 @@ class MDFEchoCancellation : public AudioStream {
     else
       st->notch_radius = .992f;
 
-    st->notch_mem = echoAlloc<echo_mem_t>(2 * C);
+    st->notch_mem = echoAlloc<Mem>(2 * C);
     st->adapted = 0;
-    st->Pey = st->Pyy = FLOAT_ONE;
+    st->Pey = st->Pyy = 1.0f;
 
 #ifdef TWO_PATH
     st->Davg1 = st->Davg2 = 0;
-    st->Dvar1 = st->Dvar2 = FLOAT_ZERO;
+    st->Dvar1 = st->Dvar2 = 0.0f;
 #endif
 
     st->play_buf =
@@ -1217,13 +977,22 @@ class MDFEchoCancellation : public AudioStream {
    * @param far_end Reference signal from speakers (interleaved if multi-channel)
    * @param out Output signal with echo removed (interleaved if multi-channel)
    */
-  inline void echoCancellationImpl(EchoState* st, const echo_int16_t* in,
+  inline void echoCancellationImpl(State* st, const echo_int16_t* in,
                                    const echo_int16_t* far_end,
                                    echo_int16_t* out) {
     int N = st->window_size;
     int M = st->M;
     int C = st->C;
     int K = st->K;
+
+    // Wide-dynamic-range tuning constants, as Num (float or PseudoFloat)
+    // so they multiply/compare directly against Num-typed state below.
+    const Num min_leak(0.005f);        // Minimum leak estimate for the adaptive filter
+    const Num var1_smooth(0.36f);      // Smoothing coefficient, 1st variance estimator
+    const Num var2_smooth(0.7225f);    // Smoothing coefficient, 2nd variance estimator
+    const Num var1_update(0.5f);       // Update threshold, 1st variance estimator
+    const Num var2_update(0.25f);      // Update threshold, 2nd variance estimator
+    const Num var_backtrack(4.0f);     // Backtrack threshold for filter reset
 
     st->cancel_count++;
     float ss = .35f / M;
@@ -1236,7 +1005,7 @@ class MDFEchoCancellation : public AudioStream {
                       st->notch_mem + 2 * chan, C);
 
       for (int i = 0; i < st->frame_size; i++) {
-        echo_word32_t tmp32 =
+        Word32 tmp32 =
             st->input[chan * st->frame_size + i] - st->preemph * st->memD[chan];
         st->memD[chan] = st->input[chan * st->frame_size + i];
         st->input[chan * st->frame_size + i] = tmp32;
@@ -1247,9 +1016,9 @@ class MDFEchoCancellation : public AudioStream {
     for (int speak = 0; speak < K; speak++) {
       std::memmove(&st->x[speak * N], 
                    &st->x[speak * N + st->frame_size],
-                   st->frame_size * sizeof(echo_word16_t));
+                   st->frame_size * sizeof(Word16));
       for (int i = 0; i < st->frame_size; i++) {
-        echo_word32_t tmp32 =
+        Word32 tmp32 =
             far_end[i * K + speak] - st->preemph * st->memX[speak];
         st->x[speak * N + i + st->frame_size] = tmp32;
         st->memX[speak] = far_end[i * K + speak];
@@ -1261,13 +1030,13 @@ class MDFEchoCancellation : public AudioStream {
       for (int j = M - 1; j >= 0; j--) {
         std::memmove(&st->X[(j + 1) * N * K + speak * N],
                      &st->X[j * N * K + speak * N],
-                     N * sizeof(echo_word16_t));
+                     N * sizeof(Word16));
       }
       echo_fft(st->fft_table, st->x + speak * N, &st->X[speak * N]);
     }
 
     // Compute power spectrum of far-end
-    echo_word32_t Sxx = 0;
+    Word32 Sxx = 0;
     for (int speak = 0; speak < K; speak++) {
       Sxx += mdfInnerProd(st->x + speak * N + st->frame_size,
                           st->x + speak * N + st->frame_size, st->frame_size);
@@ -1275,7 +1044,7 @@ class MDFEchoCancellation : public AudioStream {
     }
 
     // Compute foreground filter output and residual
-    echo_word32_t Sff = 0;
+    Word32 Sff = 0;
     for (int chan = 0; chan < C; chan++) {
 #ifdef TWO_PATH
       spectralMulAccum(st->X, st->foreground + chan * N * K * M,
@@ -1329,8 +1098,8 @@ class MDFEchoCancellation : public AudioStream {
     for (int i = 0; i <= st->frame_size; i++)
       st->Rf[i] = st->Yf[i] = st->Xf[i] = 0;
 
-    echo_word32_t Dbf = 0;
-    echo_word32_t See = 0;
+    Word32 Dbf = 0;
+    Word32 See = 0;
 
 #ifdef TWO_PATH
     // Compute background filter output
@@ -1358,26 +1127,21 @@ class MDFEchoCancellation : public AudioStream {
     // Two-path filter logic
     st->Davg1 = .6f * st->Davg1 + .4f * (Sff - See);
     st->Davg2 = .85f * st->Davg2 + .15f * (Sff - See);
-    st->Dvar1 = FLOAT_ADD(FLOAT_MULT(VAR1_SMOOTH, st->Dvar1),
-                          FLOAT_MUL32U(.4f * Sff, .4f * Dbf));
-    st->Dvar2 = FLOAT_ADD(FLOAT_MULT(VAR2_SMOOTH, st->Dvar2),
-                          FLOAT_MUL32U(.15f * Sff, .15f * Dbf));
+    st->Dvar1 = var1_smooth * st->Dvar1 + (.4f * Sff) * (.4f * Dbf);
+    st->Dvar2 = var2_smooth * st->Dvar2 + (.15f * Sff) * (.15f * Dbf);
 
     int update_foreground = 0;
-    if (FLOAT_GT(FLOAT_MUL32U(Sff - See, fabsf(Sff - See)),
-                 FLOAT_MUL32U(Sff, Dbf)))
+    if ((Sff - See) * fabsf(Sff - See) > Sff * Dbf)
       update_foreground = 1;
-    else if (FLOAT_GT(FLOAT_MUL32U(st->Davg1, fabsf(st->Davg1)),
-                      FLOAT_MULT(VAR1_UPDATE, st->Dvar1)))
+    else if (st->Davg1 * fabsf((float)st->Davg1) > var1_update * st->Dvar1)
       update_foreground = 1;
-    else if (FLOAT_GT(FLOAT_MUL32U(st->Davg2, fabsf(st->Davg2)),
-                      FLOAT_MULT(VAR2_UPDATE, st->Dvar2)))
+    else if (st->Davg2 * fabsf((float)st->Davg2) > var2_update * st->Dvar2)
       update_foreground = 1;
 
     if (update_foreground) {
       st->Davg1 = st->Davg2 = 0;
-      st->Dvar1 = st->Dvar2 = FLOAT_ZERO;
-      std::memcpy(st->foreground, st->W, N * M * C * K * sizeof(echo_word16_t));
+      st->Dvar1 = st->Dvar2 = 0.0f;
+      std::memcpy(st->foreground, st->W, N * M * C * K * sizeof(Word16));
       for (int chan = 0; chan < C; chan++)
         for (int i = 0; i < st->frame_size; i++)
           st->e[chan * N + i + st->frame_size] =
@@ -1386,18 +1150,16 @@ class MDFEchoCancellation : public AudioStream {
               st->window[i] * st->y[chan * N + i + st->frame_size];
     } else {
       int reset_background = 0;
-      if (FLOAT_GT(FLOAT_MUL32U(-(Sff - See), fabsf(Sff - See)),
-                   FLOAT_MULT(VAR_BACKTRACK, FLOAT_MUL32U(Sff, Dbf))))
+      if ((-(Sff - See)) * fabsf((float)(Sff - See)) >
+          var_backtrack * (Sff * Dbf))
         reset_background = 1;
-      if (FLOAT_GT(FLOAT_MUL32U(-st->Davg1, fabsf(st->Davg1)),
-                   FLOAT_MULT(VAR_BACKTRACK, st->Dvar1)))
+      if ((-st->Davg1) * fabsf((float)st->Davg1) > var_backtrack * st->Dvar1)
         reset_background = 1;
-      if (FLOAT_GT(FLOAT_MUL32U(-st->Davg2, fabsf(st->Davg2)),
-                   FLOAT_MULT(VAR_BACKTRACK, st->Dvar2)))
+      if ((-st->Davg2) * fabsf((float)st->Davg2) > var_backtrack * st->Dvar2)
         reset_background = 1;
 
       if (reset_background) {
-        std::memcpy(st->W, st->foreground, N * M * C * K * sizeof(echo_word32_t));
+        std::memcpy(st->W, st->foreground, N * M * C * K * sizeof(Word32));
         for (int chan = 0; chan < C; chan++) {
           for (int i = 0; i < st->frame_size; i++)
             st->y[chan * N + i + st->frame_size] =
@@ -1408,16 +1170,16 @@ class MDFEchoCancellation : public AudioStream {
         }
         See = Sff;
         st->Davg1 = st->Davg2 = 0;
-        st->Dvar1 = st->Dvar2 = FLOAT_ZERO;
+        st->Dvar1 = st->Dvar2 = 0.0f;
       }
     }
 #endif
 
-    echo_word32_t Sey = 0, Syy = 0, Sdd = 0;
+    Word32 Sey = 0, Syy = 0, Sdd = 0;
     for (int chan = 0; chan < C; chan++) {
       // Compute output with de-emphasis
       for (int i = 0; i < st->frame_size; i++) {
-        echo_word32_t tmp_out;
+        Word32 tmp_out;
 #ifdef TWO_PATH
         tmp_out = st->input[chan * st->frame_size + i] -
                   st->e[chan * N + i + st->frame_size];
@@ -1475,7 +1237,7 @@ class MDFEchoCancellation : public AudioStream {
       return;
     }
 
-    See = MAX32(See, N * 100.0f);
+    if (See < N * 100.0f) See = N * 100.0f;
 
     for (int speak = 0; speak < K; speak++) {
       Sxx += mdfInnerProd(st->x + speak * N + st->frame_size,
@@ -1488,49 +1250,47 @@ class MDFEchoCancellation : public AudioStream {
       st->power[j] = ss_1 * st->power[j] + 1 + ss * st->Xf[j];
 
     // Compute filtered spectra and correlations
-    echo_float_t Pey = FLOAT_ZERO, Pyy = FLOAT_ZERO;
+    Num Pey = 0.0f, Pyy = 0.0f;
     for (int j = st->frame_size; j >= 0; j--) {
-      echo_float_t Eh = PSEUDOFLOAT(st->Rf[j] - st->Eh[j]);
-      echo_float_t Yh = PSEUDOFLOAT(st->Yf[j] - st->Yh[j]);
-      Pey = FLOAT_ADD(Pey, FLOAT_MULT(Eh, Yh));
-      Pyy = FLOAT_ADD(Pyy, FLOAT_MULT(Yh, Yh));
+      Num Eh = st->Rf[j] - st->Eh[j];
+      Num Yh = st->Yf[j] - st->Yh[j];
+      Pey = Pey + Eh * Yh;
+      Pyy = Pyy + Yh * Yh;
       st->Eh[j] =
           (1 - st->spec_average) * st->Eh[j] + st->spec_average * st->Rf[j];
       st->Yh[j] =
           (1 - st->spec_average) * st->Yh[j] + st->spec_average * st->Yf[j];
     }
 
-    Pyy = FLOAT_SQRT(Pyy);
+    Pyy = spxSqrt(Pyy);
     // Pyy is 0 on the very first frames (no echo spectrum has built up yet),
     // which would make Pey/Pyy evaluate to 0/0 = NaN and permanently poison
-    // st->Pey / leak_estimate (FLOAT_LT against NaN is always false, so the
-    // clamps below can never recover from it). Floor it at FLOAT_ONE, same
+    // st->Pey / leak_estimate (a NaN comparison is always false, so the
+    // clamps below can never recover from it). Floor it at 1.0f, same
     // as the clamp already applied to st->Pyy a few lines down.
-    if (FLOAT_LT(Pyy, FLOAT_ONE)) Pyy = FLOAT_ONE;
-    Pey = FLOAT_DIVU(Pey, Pyy);
+    if (Pyy < 1.0f) Pyy = 1.0f;
+    Pey = Pey / Pyy;
 
     // Compute correlation update rate
-    echo_word32_t tmp32 = st->beta0 * Syy;
+    Word32 tmp32 = st->beta0 * Syy;
     if (tmp32 > st->beta_max * See) tmp32 = st->beta_max * See;
-    echo_float_t alpha = tmp32 / See;
-    echo_float_t alpha_1 = FLOAT_SUB(FLOAT_ONE, alpha);
+    Num alpha = tmp32 / See;
+    Num alpha_1 = 1.0f - alpha;
 
-    st->Pey = FLOAT_ADD(FLOAT_MULT(alpha_1, st->Pey), FLOAT_MULT(alpha, Pey));
-    st->Pyy = FLOAT_ADD(FLOAT_MULT(alpha_1, st->Pyy), FLOAT_MULT(alpha, Pyy));
-    if (FLOAT_LT(st->Pyy, FLOAT_ONE)) st->Pyy = FLOAT_ONE;
-    if (FLOAT_LT(st->Pey, FLOAT_MULT(MIN_LEAK, st->Pyy)))
-      st->Pey = FLOAT_MULT(MIN_LEAK, st->Pyy);
-    if (FLOAT_GT(st->Pey, st->Pyy)) st->Pey = st->Pyy;
+    st->Pey = alpha_1 * st->Pey + alpha * Pey;
+    st->Pyy = alpha_1 * st->Pyy + alpha * Pyy;
+    if (st->Pyy < 1.0f) st->Pyy = 1.0f;
+    if (st->Pey < min_leak * st->Pyy) st->Pey = min_leak * st->Pyy;
+    if (st->Pey > st->Pyy) st->Pey = st->Pyy;
 
-    st->leak_estimate =
-        FLOAT_EXTRACT16(FLOAT_SHL(FLOAT_DIVU(st->Pey, st->Pyy), 14));
+    st->leak_estimate = st->Pey / st->Pyy;
     if (st->leak_estimate > 16383)
       st->leak_estimate = 32767;
     else
       st->leak_estimate = st->leak_estimate * 2;
 
     // Compute RER
-    echo_word16_t RER;
+    Word16 RER;
     RER = (.0001f * Sxx + 3.f * st->leak_estimate * Syy) / See;
     if (RER < Sey * Sey / (1 + See * Syy)) RER = Sey * Sey / (1 + See * Syy);
     if (RER > .5f) RER = .5f;
@@ -1542,14 +1302,14 @@ class MDFEchoCancellation : public AudioStream {
 
     if (st->adapted) {
       for (int i = 0; i <= st->frame_size; i++) {
-        echo_word32_t r = st->leak_estimate * st->Yf[i];
-        echo_word32_t e = st->Rf[i] + 1;
+        Word32 r = st->leak_estimate * st->Yf[i];
+        Word32 e = st->Rf[i] + 1;
         if (r > .5f * e) r = .5f * e;
         r = .7f * r + .3f * (RER * e);
         st->power_1[i] = r / (e * (st->power[i] + 10));
       }
     } else {
-      echo_word16_t adapt_rate = 0;
+      Word16 adapt_rate = 0;
       if (Sxx > N * 1000.0f) {
         tmp32 = .25f * Sxx;
         if (tmp32 > .25f * See) tmp32 = .25f * See;
@@ -1562,7 +1322,7 @@ class MDFEchoCancellation : public AudioStream {
 
     std::memmove(st->last_y, 
                  &st->last_y[st->frame_size],
-                 st->frame_size * sizeof(echo_word16_t));
+                 st->frame_size * sizeof(Word16));
     if (st->adapted) {
       for (int i = 0; i < st->frame_size; i++)
         st->last_y[st->frame_size + i] = in[i] - out[i];
@@ -1609,19 +1369,20 @@ inline void echo_fft_destroy(void* table) {
 
 /**
  * @brief Perform forward FFT
+ * @tparam T Element type (SampleType::word16_t -- float or PseudoFloat)
  * @param table Opaque pointer to FFT state
  * @param in Input time-domain signal (size N)
  * @param out Output frequency-domain signal in packed format (size N)
  *            Format: [DC, real1, imag1, real2, imag2, ..., Nyquist]
  */
-inline void echo_fft(void* table, echo_word16_t* in,
-                    echo_word16_t* out) {
+template <typename T>
+inline void echo_fft(void* table, T* in, T* out) {
   auto* st = static_cast<fft_state*>(table);
   if (!st || !st->driver) return;
 
   // Set input values
   for (int i = 0; i < st->N; i++) {
-    st->driver->setValue(i, in[i] / (float)st->N);
+    st->driver->setValue(i, (float)in[i] / (float)st->N);
   }
 
   // Perform FFT
@@ -1651,23 +1412,24 @@ inline void echo_fft(void* table, echo_word16_t* in,
 
 /**
  * @brief Perform inverse FFT
+ * @tparam T Element type (SampleType::word16_t -- float or PseudoFloat)
  * @param table Opaque pointer to FFT state
  * @param in Input frequency-domain signal in packed format (size N)
  *           Format: [DC, real1, imag1, real2, imag2, ..., Nyquist]
  * @param out Output time-domain signal (size N)
  */
-inline void echo_ifft(void* table, echo_word16_t* in,
-                     echo_word16_t* out) {
+template <typename T>
+inline void echo_ifft(void* table, T* in, T* out) {
   auto* st = static_cast<fft_state*>(table);
   if (!st || !st->driver || !st->driver->isReverseFFT()) return;
 
   // Set bins from packed format
-  st->driver->setBin(0, in[0], 0);
+  st->driver->setBin(0, (float)in[0], 0);
   for (int i = 1; i < st->N - 1; i += 2) {
     int bin = (i + 1) / 2;
-    st->driver->setBin(bin, in[i], in[i + 1]);
+    st->driver->setBin(bin, (float)in[i], (float)in[i + 1]);
   }
-  st->driver->setBin(st->N / 2, in[st->N - 1], 0);
+  st->driver->setBin(st->N / 2, (float)in[st->N - 1], 0);
 
   // Perform inverse FFT
   st->driver->rfft();
