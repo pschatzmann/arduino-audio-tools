@@ -83,24 +83,24 @@ $(document).ready(function() { init_codefold(0); });
 <div class="contents">
 <a href="_audio_tools_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="preprocessor">#include &quot;<a class="code" href="_audio_tools_config_8h.html">AudioToolsConfig.h</a>&quot;</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="preprocessor">#if AUDIO_INCLUDE_CORE</span></div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="preprocessor">#ifdef USE_CONCURRENCY</span></div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="preprocessor">#  include &quot;<a class="code" href="_concurrency_8h.html">AudioTools/Concurrency.h</a>&quot;</span></div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="preprocessor">#include &quot;<a class="code" href="_core_audio_8h.html">AudioTools/CoreAudio.h</a>&quot;</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="preprocessor">#include &quot;<a class="code" href="_audio_encoded_8h.html">AudioTools/AudioCodecs/AudioEncoded.h</a>&quot;</span></div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="preprocessor">#include &quot;<a class="code" href="_audio_codecs_8h.html">AudioTools/AudioCodecs/AudioCodecs.h</a>&quot;</span></div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="preprocessor">#if defined(ARDUINO) &amp;&amp; !defined(IS_DESKTOP)</span></div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="preprocessor">#  include &quot;<a class="code" href="_synthesizer_8h.html">AudioTools/CoreAudio/AudioEffects/Synthesizer.h</a>&quot;</span></div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="preprocessor">#endif </span><span class="comment">// AUDIO_INCLUDE_CORE</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="preprocessor">#include &quot;<a class="code" href="_audio_tools_config_8h.html">AudioToolsConfig.h</a>&quot;</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="preprocessor">#if AUDIO_INCLUDE_CORE</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="preprocessor">#ifdef USE_CONCURRENCY</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="preprocessor">#  include &quot;<a class="code" href="_concurrency_8h.html">AudioTools/Concurrency.h</a>&quot;</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="preprocessor">#include &quot;<a class="code" href="_core_audio_8h.html">AudioTools/CoreAudio.h</a>&quot;</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="preprocessor">#include &quot;<a class="code" href="_audio_encoded_8h.html">AudioTools/AudioCodecs/AudioEncoded.h</a>&quot;</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="preprocessor">#include &quot;<a class="code" href="_audio_codecs_8h.html">AudioTools/AudioCodecs/AudioCodecs.h</a>&quot;</span></div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="preprocessor">#if defined(ARDUINO) &amp;&amp; !defined(IS_DESKTOP)</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="preprocessor">#  include &quot;<a class="code" href="_synthesizer_8h.html">AudioTools/CoreAudio/AudioEffects/Synthesizer.h</a>&quot;</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="preprocessor">#endif </span><span class="comment">// AUDIO_INCLUDE_CORE</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
 <div class="ttc" id="a_audio_codecs_8h_html"><div class="ttname"><a href="_audio_codecs_8h.html">AudioCodecs.h</a></div></div>
 <div class="ttc" id="a_audio_encoded_8h_html"><div class="ttname"><a href="_audio_encoded_8h.html">AudioEncoded.h</a></div></div>
 <div class="ttc" id="a_audio_tools_config_8h_html"><div class="ttname"><a href="_audio_tools_config_8h.html">AudioToolsConfig.h</a></div></div>
