@@ -167,6 +167,7 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Configuration for AudioFFT. If there are more then 1 channel the channel_used is defining which channel is used to perform the fft on. </p>
+<dl class="section note"><dt>Note</dt><dd>Only channel_used is analyzed by the forward FFT - the other channels' input samples are discarded. On the reverse FFT the reconstructed signal is written identically to all <code>channels</code>, so multi-channel input/output is effectively collapsed to dual-mono rather than processed independently per channel. </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ac9f6e853e9a53f6f33bf46c7202d931e" name="ac9f6e853e9a53f6f33bf46c7202d931e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac9f6e853e9a53f6f33bf46c7202d931e">&#9670;&#160;</a></span>AudioFFTConfig()</h2>
