@@ -6,11 +6,10 @@
  * @date 2022-04-29
  *
  * @copyright Copyright (c) 2022
-/**
+ * 
  * @defgroup fft-window FFT-Window
  * @ingroup fft
  * @brief FFT Window Functions
- **/
  */
 #pragma once
 

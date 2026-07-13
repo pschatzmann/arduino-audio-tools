@@ -60,6 +60,7 @@ namespace audio_tools {
  * echo-state buffers, defaulting to the shared DefaultAllocator -- pass a
  * different Allocator (e.g. AllocatorPSRAM on ESP32) to place them
  * elsewhere.
+ * @ingroup aec
  */
 class MDFEchoCancellationStream : public AudioStream {
  public:

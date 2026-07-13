@@ -41,6 +41,7 @@ namespace audio_tools {
  *   (mic) must be driven at the same pace for the delay line to stay
  *   time-aligned; there is no internal resampling or drift correction for
  *   a mismatched full-duplex pipeline.
+ * @ingroup aec
  */
 template <typename T = int16_t>
  class LMSEchoCancellationStream : public AudioStream {
