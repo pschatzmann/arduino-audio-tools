@@ -10,5 +10,7 @@ var searchData=
   ['esp_5fidf_5fversion_5fval_7',['ESP_IDF_VERSION_VAL',['../_audio_tools_config_8h.html#aeb3c3d483b3c958fdc360a9639df0e97',1,'AudioToolsConfig.h']]],
   ['exit_5fon_5fstop_8',['EXIT_ON_STOP',['../_platform_config_2_desktop_8h.html#a1731bfea40ca2d20c7d489caa7fda85e',1,'desktop.h']]],
   ['experimentalindicatorflag_9',['ExperimentalIndicatorFlag',['../_meta_data_i_d3_8h.html#adcfcff9085343760ed03deace09ee75b',1,'MetaDataID3.h']]],
-  ['extendedheaderflag_10',['ExtendedHeaderFlag',['../_meta_data_i_d3_8h.html#aac383ece0c988533c2f4aff96dfb3434',1,'MetaDataID3.h']]]
+  ['extend32_10',['EXTEND32',['../_m_d_f_echo_cancellation_8h.html#a5adea5f484325b71c8a1cf2f557c1f2b',1,'MDFEchoCancellation.h']]],
+  ['extendedheaderflag_11',['ExtendedHeaderFlag',['../_meta_data_i_d3_8h.html#aac383ece0c988533c2f4aff96dfb3434',1,'MetaDataID3.h']]],
+  ['extract16_12',['EXTRACT16',['../_m_d_f_echo_cancellation_8h.html#a64696e84a91640d6873867e613c45156',1,'MDFEchoCancellation.h']]]
 ];

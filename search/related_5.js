@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['operator_2a_0',['operator*',['../group___echo_state.html#gad2b7ca532426c924817c24b85bb296bb',1,'audio_tools::echo_float_t']]]
+  ['scaledparameter_0',['ScaledParameter',['../classaudio__tools_1_1_abstract_parameter.html#a5741079b1556551a736addfbeb35bc11',1,'audio_tools::AbstractParameter']]]
 ];

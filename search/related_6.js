@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['scaledparameter_0',['ScaledParameter',['../classaudio__tools_1_1_abstract_parameter.html#a5741079b1556551a736addfbeb35bc11',1,'audio_tools::AbstractParameter']]]
+  ['tflitemicrospeechrecognizecommands_0',['TfLiteMicroSpeechRecognizeCommands',['../structaudio__tools_1_1_tf_lite_config.html#abf3712bf7976e20180b4fb8b42988837',1,'audio_tools::TfLiteConfig']]],
+  ['timercallback_1',['timerCallback',['../classaudio__tools_1_1_timer_callback_audio_stream.html#a6e562b1028fc8b1d8d796e8e56f2238a',1,'audio_tools::TimerCallbackAudioStream']]]
 ];

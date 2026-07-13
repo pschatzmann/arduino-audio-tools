@@ -96,16 +96,16 @@ Inheritance diagram for FilterChain&lt; T, N &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aed7f65dd52b006e116cfff7e27eba99d" id="r_aed7f65dd52b006e116cfff7e27eba99d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_filter_chain.html#aed7f65dd52b006e116cfff7e27eba99d">FilterChain</a> (<a class="el" href="classaudio__tools_1_1_filter.html">Filter</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; *(&amp;&amp;filters)[N])</td></tr>
+<tr class="memitem:aed7f65dd52b006e116cfff7e27eba99d" id="r_aed7f65dd52b006e116cfff7e27eba99d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_filter_chain.html#aed7f65dd52b006e116cfff7e27eba99d">FilterChain</a> (<a class="el" href="classaudio__tools_1_1_filter.html">Filter</a>&lt; T &gt; *(&amp;&amp;filters)[N])</td></tr>
 <tr class="separator:aed7f65dd52b006e116cfff7e27eba99d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a048b29c6a000503a52c293e8fd973847" id="r_a048b29c6a000503a52c293e8fd973847"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_filter_chain.html#a048b29c6a000503a52c293e8fd973847">process</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> value) <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
+<tr class="memitem:a048b29c6a000503a52c293e8fd973847" id="r_a048b29c6a000503a52c293e8fd973847"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_filter_chain.html#a048b29c6a000503a52c293e8fd973847">process</a> (T value) override</td></tr>
 <tr class="memdesc:a048b29c6a000503a52c293e8fd973847"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes the input value and returns the filtered output value.  <br /></td></tr>
 <tr class="separator:a048b29c6a000503a52c293e8fd973847"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aebfcdbbd0fe4efbff10b180be50ca6bc" id="r_aebfcdbbd0fe4efbff10b180be50ca6bc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_filter_chain.html#aebfcdbbd0fe4efbff10b180be50ca6bc">reset</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
+<tr class="memitem:aebfcdbbd0fe4efbff10b180be50ca6bc" id="r_aebfcdbbd0fe4efbff10b180be50ca6bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_filter_chain.html#aebfcdbbd0fe4efbff10b180be50ca6bc">reset</a> () override</td></tr>
 <tr class="separator:aebfcdbbd0fe4efbff10b180be50ca6bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> N&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T, size_t N&gt;<br />
 class audio_tools::FilterChain&lt; T, N &gt;</div><p>A cascade of N arbitrary filters applied in series. Each sample is passed through all filters in order. The caller owns the filter pointers and must ensure they outlive the chain. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -121,7 +121,7 @@ class audio_tools::FilterChain&lt; T, N &gt;</div><p>A cascade of N arbitrary fi
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> N&gt; </div>
+template&lt;typename T , size_t N&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -129,7 +129,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
         <tr>
           <td class="memname"><a class="el" href="classaudio__tools_1_1_filter_chain.html">FilterChain</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_filter.html">Filter</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; *(&amp;&amp;)&#160;</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_filter.html">Filter</a>&lt; T &gt; *(&amp;&amp;)&#160;</td>
           <td class="paramname"><em>filters</em>[N]</td><td>)</td>
           <td></td>
         </tr>
@@ -150,15 +150,15 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> N&gt; </div>
+template&lt;typename T , size_t N&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> process </td>
+          <td class="memname">T process </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>&#160;</td>
+          <td class="paramtype">T&#160;</td>
           <td class="paramname"><em>in</em></td><td>)</td>
           <td></td>
         </tr>
@@ -182,13 +182,13 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> , <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> N&gt; </div>
+template&lt;typename T , size_t N&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> reset </td>
+          <td class="memname">void reset </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>

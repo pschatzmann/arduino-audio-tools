@@ -25,9 +25,7 @@ var searchData=
   ['lmsechocancellationstream_22',['LMSEchoCancellationStream',['../classaudio__tools_1_1_l_m_s_echo_cancellation_stream.html',1,'audio_tools']]],
   ['lockguard_23',['LockGuard',['../classaudio__tools_1_1_lock_guard.html',1,'audio_tools']]],
   ['logarithmicvolumecontrol_24',['LogarithmicVolumeControl',['../classaudio__tools_1_1_logarithmic_volume_control.html',1,'audio_tools']]],
-  ['loraconfig_25',['LoRaConfig',['../structaudio__tools_1_1_lo_ra_config.html',1,'audio_tools']]],
-  ['lorastream_26',['LoRaStream',['../classaudio__tools_1_1_lo_ra_stream.html',1,'audio_tools']]],
-  ['lowpassfilter_27',['LowPassFilter',['../classaudio__tools_1_1_low_pass_filter.html',1,'audio_tools']]],
-  ['lowpassfilter_3c_20float_20_3e_28',['LowPassFilter&lt; float &gt;',['../classaudio__tools_1_1_low_pass_filter.html',1,'audio_tools']]],
-  ['lowshelffilter_29',['LowShelfFilter',['../classaudio__tools_1_1_low_shelf_filter.html',1,'audio_tools']]]
+  ['lowpassfilter_25',['LowPassFilter',['../classaudio__tools_1_1_low_pass_filter.html',1,'audio_tools']]],
+  ['lowpassfilter_3c_20float_20_3e_26',['LowPassFilter&lt; float &gt;',['../classaudio__tools_1_1_low_pass_filter.html',1,'audio_tools']]],
+  ['lowshelffilter_27',['LowShelfFilter',['../classaudio__tools_1_1_low_shelf_filter.html',1,'audio_tools']]]
 ];

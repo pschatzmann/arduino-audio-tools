@@ -102,133 +102,133 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aaa4c5ca79eccba589e325e26deeadff3" id="r_aaa4c5ca79eccba589e325e26deeadff3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#aaa4c5ca79eccba589e325e26deeadff3">OutputMixer</a> (<a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;<a class="el" href="classaudio__tools_1_1_output_mixer.html#a8c57ee070609b5f25226b20c47486814">allocator</a>=<a class="el" href="namespaceaudio__tools.html#a6b744d9a6c8c2040e545baf0e8136afe">DefaultAllocatorRAM</a>)</td></tr>
 <tr class="memdesc:aaa4c5ca79eccba589e325e26deeadff3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor. You must call <a class="el" href="classaudio__tools_1_1_output_mixer.html#ab88fd55315fc62d99c8d5516c0300836" title="Sets the final output destination for mixed audio.">setOutput()</a> and <a class="el" href="classaudio__tools_1_1_output_mixer.html#af8b8a26eeb8af999326ff1d5c9bbd5be" title="Sets the number of input streams to mix.">setOutputCount()</a> before use.  <br /></td></tr>
 <tr class="separator:aaa4c5ca79eccba589e325e26deeadff3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f83f24e42225bc5409b94f5f579e1de" id="r_a4f83f24e42225bc5409b94f5f579e1de"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a4f83f24e42225bc5409b94f5f579e1de">OutputMixer</a> (<a class="el" href="class_print.html">Print</a> &amp;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">finalOutput</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">outputStreamCount</a>, <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;<a class="el" href="classaudio__tools_1_1_output_mixer.html#a8c57ee070609b5f25226b20c47486814">allocator</a>=<a class="el" href="namespaceaudio__tools.html#a6b744d9a6c8c2040e545baf0e8136afe">DefaultAllocatorRAM</a>)</td></tr>
+<tr class="memitem:a4f83f24e42225bc5409b94f5f579e1de" id="r_a4f83f24e42225bc5409b94f5f579e1de"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a4f83f24e42225bc5409b94f5f579e1de">OutputMixer</a> (<a class="el" href="class_print.html">Print</a> &amp;finalOutput, int outputStreamCount, <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;<a class="el" href="classaudio__tools_1_1_output_mixer.html#a8c57ee070609b5f25226b20c47486814">allocator</a>=<a class="el" href="namespaceaudio__tools.html#a6b744d9a6c8c2040e545baf0e8136afe">DefaultAllocatorRAM</a>)</td></tr>
 <tr class="memdesc:a4f83f24e42225bc5409b94f5f579e1de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with output stream, number of input streams, and allocator.  <br /></td></tr>
 <tr class="separator:a4f83f24e42225bc5409b94f5f579e1de"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76d6419a0cdd4959344f821171a2e9ec" id="r_a76d6419a0cdd4959344f821171a2e9ec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a76d6419a0cdd4959344f821171a2e9ec">available</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> idx)</td></tr>
+<tr class="memitem:a76d6419a0cdd4959344f821171a2e9ec" id="r_a76d6419a0cdd4959344f821171a2e9ec"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a76d6419a0cdd4959344f821171a2e9ec">available</a> (int idx)</td></tr>
 <tr class="memdesc:a76d6419a0cdd4959344f821171a2e9ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the available bytes in the buffer.  <br /></td></tr>
 <tr class="separator:a76d6419a0cdd4959344f821171a2e9ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87b51853b7bf1bc90d9efa9f3b8d4fea" id="r_a87b51853b7bf1bc90d9efa9f3b8d4fea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">availableForWrite</a> () <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
+<tr class="memitem:a87b51853b7bf1bc90d9efa9f3b8d4fea" id="r_a87b51853b7bf1bc90d9efa9f3b8d4fea"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">availableForWrite</a> () override</td></tr>
 <tr class="memdesc:a87b51853b7bf1bc90d9efa9f3b8d4fea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the bytes available to write for the current stream buffer.  <br /></td></tr>
 <tr class="separator:a87b51853b7bf1bc90d9efa9f3b8d4fea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad19e788ef2c620faad7b476ad50d7fd8" id="r_ad19e788ef2c620faad7b476ad50d7fd8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#ad19e788ef2c620faad7b476ad50d7fd8">availableForWrite</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> idx)</td></tr>
+<tr class="memitem:ad19e788ef2c620faad7b476ad50d7fd8" id="r_ad19e788ef2c620faad7b476ad50d7fd8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#ad19e788ef2c620faad7b476ad50d7fd8">availableForWrite</a> (int idx)</td></tr>
 <tr class="memdesc:ad19e788ef2c620faad7b476ad50d7fd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the bytes available to write for the indicated stream index.  <br /></td></tr>
 <tr class="separator:ad19e788ef2c620faad7b476ad50d7fd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a884c1a0722e5438413bae17ab615b6dd" id="r_a884c1a0722e5438413bae17ab615b6dd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a884c1a0722e5438413bae17ab615b6dd">availablePercent</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> idx)</td></tr>
+<tr class="memitem:a884c1a0722e5438413bae17ab615b6dd" id="r_a884c1a0722e5438413bae17ab615b6dd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a884c1a0722e5438413bae17ab615b6dd">availablePercent</a> (int idx)</td></tr>
 <tr class="memdesc:a884c1a0722e5438413bae17ab615b6dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the % fill level of the buffer for the indicated index.  <br /></td></tr>
 <tr class="separator:a884c1a0722e5438413bae17ab615b6dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42de37916ce6c72e6b4b79dbc9487b8c" id="r_a42de37916ce6c72e6b4b79dbc9487b8c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a42de37916ce6c72e6b4b79dbc9487b8c">availableSamples</a> ()</td></tr>
+<tr class="memitem:a42de37916ce6c72e6b4b79dbc9487b8c" id="r_a42de37916ce6c72e6b4b79dbc9487b8c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a42de37916ce6c72e6b4b79dbc9487b8c">availableSamples</a> ()</td></tr>
 <tr class="memdesc:a42de37916ce6c72e6b4b79dbc9487b8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the minimum number of samples available across all buffers.  <br /></td></tr>
 <tr class="separator:a42de37916ce6c72e6b4b79dbc9487b8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0c98654e9c9933b24d180b043762470" id="r_ae0c98654e9c9933b24d180b043762470"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#ae0c98654e9c9933b24d180b043762470">begin</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">copy_buffer_size_bytes</a>=<a class="el" href="avr_8h.html#a6e576a3c6530636d68b7a220480bcd32">DEFAULT_BUFFER_SIZE</a>)</td></tr>
+<tr class="memitem:ae0c98654e9c9933b24d180b043762470" id="r_ae0c98654e9c9933b24d180b043762470"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#ae0c98654e9c9933b24d180b043762470">begin</a> (int copy_buffer_size_bytes=<a class="el" href="avr_8h.html#a6e576a3c6530636d68b7a220480bcd32">DEFAULT_BUFFER_SIZE</a>)</td></tr>
 <tr class="memdesc:ae0c98654e9c9933b24d180b043762470"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the processing.  <br /></td></tr>
 <tr class="separator:ae0c98654e9c9933b24d180b043762470"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf81d3fdaf258088d7692fa70cece087" id="r_aaf81d3fdaf258088d7692fa70cece087"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#aaf81d3fdaf258088d7692fa70cece087">end</a> ()</td></tr>
+<tr class="memitem:aaf81d3fdaf258088d7692fa70cece087" id="r_aaf81d3fdaf258088d7692fa70cece087"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#aaf81d3fdaf258088d7692fa70cece087">end</a> ()</td></tr>
 <tr class="memdesc:aaf81d3fdaf258088d7692fa70cece087"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove all input streams.  <br /></td></tr>
 <tr class="separator:aaf81d3fdaf258088d7692fa70cece087"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad3aed50bc3b4459454ccb8c64f5ced5a" id="r_ad3aed50bc3b4459454ccb8c64f5ced5a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_print.html#ad3aed50bc3b4459454ccb8c64f5ced5a">flush</a> ()</td></tr>
+<tr class="memitem:ad3aed50bc3b4459454ccb8c64f5ced5a" id="r_ad3aed50bc3b4459454ccb8c64f5ced5a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_print.html#ad3aed50bc3b4459454ccb8c64f5ced5a">flush</a> ()</td></tr>
 <tr class="separator:ad3aed50bc3b4459454ccb8c64f5ced5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0e49978e1afdfd997ba4aa661ad8874c" id="r_a0e49978e1afdfd997ba4aa661ad8874c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a0e49978e1afdfd997ba4aa661ad8874c">flushMixer</a> ()</td></tr>
+<tr class="memitem:a0e49978e1afdfd997ba4aa661ad8874c" id="r_a0e49978e1afdfd997ba4aa661ad8874c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a0e49978e1afdfd997ba4aa661ad8874c">flushMixer</a> ()</td></tr>
 <tr class="memdesc:a0e49978e1afdfd997ba4aa661ad8874c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Force output to final destination.  <br /></td></tr>
 <tr class="separator:a0e49978e1afdfd997ba4aa661ad8874c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a778958f194b45626ce7f1856133ab9ec" id="r_a778958f194b45626ce7f1856133ab9ec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a778958f194b45626ce7f1856133ab9ec">getBuffer</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> idx)</td></tr>
+<tr class="memitem:a778958f194b45626ce7f1856133ab9ec" id="r_a778958f194b45626ce7f1856133ab9ec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a778958f194b45626ce7f1856133ab9ec">getBuffer</a> (int idx)</td></tr>
 <tr class="memdesc:a778958f194b45626ce7f1856133ab9ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the write buffer for the indicated index.  <br /></td></tr>
 <tr class="separator:a778958f194b45626ce7f1856133ab9ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a041249f802c5bf4c2deae666610e03c4" id="r_a041249f802c5bf4c2deae666610e03c4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a041249f802c5bf4c2deae666610e03c4">next</a> ()</td></tr>
+<tr class="memitem:a041249f802c5bf4c2deae666610e03c4" id="r_a041249f802c5bf4c2deae666610e03c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a041249f802c5bf4c2deae666610e03c4">next</a> ()</td></tr>
 <tr class="memdesc:a041249f802c5bf4c2deae666610e03c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves to the next mixing index.  <br /></td></tr>
 <tr class="separator:a041249f802c5bf4c2deae666610e03c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad617acfdd90051d18fecd8229362f63b" id="r_ad617acfdd90051d18fecd8229362f63b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#ad617acfdd90051d18fecd8229362f63b">resize</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">sizeBytes</a>)</td></tr>
+<tr class="memitem:ad617acfdd90051d18fecd8229362f63b" id="r_ad617acfdd90051d18fecd8229362f63b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#ad617acfdd90051d18fecd8229362f63b">resize</a> (size_t sizeBytes)</td></tr>
 <tr class="memdesc:ad617acfdd90051d18fecd8229362f63b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resizes the buffer to the indicated number of bytes.  <br /></td></tr>
 <tr class="separator:ad617acfdd90051d18fecd8229362f63b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add06bda177f84287ca198abe70eff950" id="r_add06bda177f84287ca198abe70eff950"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#add06bda177f84287ca198abe70eff950">setAutoIndex</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">flag</a>)</td></tr>
+<tr class="memitem:add06bda177f84287ca198abe70eff950" id="r_add06bda177f84287ca198abe70eff950"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#add06bda177f84287ca198abe70eff950">setAutoIndex</a> (bool flag)</td></tr>
 <tr class="memdesc:add06bda177f84287ca198abe70eff950"><td class="mdescLeft">&#160;</td><td class="mdescRight">Automatically increment mixing index after each write.  <br /></td></tr>
 <tr class="separator:add06bda177f84287ca198abe70eff950"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8241749454cb88989b4bfcb39bf48a4a" id="r_a8241749454cb88989b4bfcb39bf48a4a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a8241749454cb88989b4bfcb39bf48a4a">setCreateBufferCallback</a> (<a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; *(*cb)(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> <a class="el" href="classaudio__tools_1_1_output_mixer.html#af4b57d21919c42d55af03391f91a1c08">size</a>))</td></tr>
+<tr class="memitem:a8241749454cb88989b4bfcb39bf48a4a" id="r_a8241749454cb88989b4bfcb39bf48a4a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a8241749454cb88989b4bfcb39bf48a4a">setCreateBufferCallback</a> (<a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; *(*cb)(int <a class="el" href="classaudio__tools_1_1_output_mixer.html#af4b57d21919c42d55af03391f91a1c08">size</a>))</td></tr>
 <tr class="memdesc:a8241749454cb88989b4bfcb39bf48a4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define callback to allocate custum buffer types.  <br /></td></tr>
 <tr class="separator:a8241749454cb88989b4bfcb39bf48a4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a147f94e11ad86e7c885ca8ece6937444" id="r_a147f94e11ad86e7c885ca8ece6937444"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a147f94e11ad86e7c885ca8ece6937444">setIndex</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> idx)</td></tr>
+<tr class="memitem:a147f94e11ad86e7c885ca8ece6937444" id="r_a147f94e11ad86e7c885ca8ece6937444"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a147f94e11ad86e7c885ca8ece6937444">setIndex</a> (int idx)</td></tr>
 <tr class="memdesc:a147f94e11ad86e7c885ca8ece6937444"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the Output <a class="el" href="class_stream.html">Stream</a> index.  <br /></td></tr>
 <tr class="separator:a147f94e11ad86e7c885ca8ece6937444"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab88fd55315fc62d99c8d5516c0300836" id="r_ab88fd55315fc62d99c8d5516c0300836"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#ab88fd55315fc62d99c8d5516c0300836">setOutput</a> (<a class="el" href="class_print.html">Print</a> &amp;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">finalOutput</a>)</td></tr>
+<tr class="memitem:ab88fd55315fc62d99c8d5516c0300836" id="r_ab88fd55315fc62d99c8d5516c0300836"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#ab88fd55315fc62d99c8d5516c0300836">setOutput</a> (<a class="el" href="class_print.html">Print</a> &amp;finalOutput)</td></tr>
 <tr class="memdesc:ab88fd55315fc62d99c8d5516c0300836"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the final output destination for mixed audio.  <br /></td></tr>
 <tr class="separator:ab88fd55315fc62d99c8d5516c0300836"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8b8a26eeb8af999326ff1d5c9bbd5be" id="r_af8b8a26eeb8af999326ff1d5c9bbd5be"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#af8b8a26eeb8af999326ff1d5c9bbd5be">setOutputCount</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> count)</td></tr>
+<tr class="memitem:af8b8a26eeb8af999326ff1d5c9bbd5be" id="r_af8b8a26eeb8af999326ff1d5c9bbd5be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#af8b8a26eeb8af999326ff1d5c9bbd5be">setOutputCount</a> (int count)</td></tr>
 <tr class="memdesc:af8b8a26eeb8af999326ff1d5c9bbd5be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the number of input streams to mix.  <br /></td></tr>
 <tr class="separator:af8b8a26eeb8af999326ff1d5c9bbd5be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb80a48eb1817f480e52497f42b5d4e5" id="r_abb80a48eb1817f480e52497f42b5d4e5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#abb80a48eb1817f480e52497f42b5d4e5">setWeight</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> channel, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a> weight)</td></tr>
+<tr class="memitem:abb80a48eb1817f480e52497f42b5d4e5" id="r_abb80a48eb1817f480e52497f42b5d4e5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#abb80a48eb1817f480e52497f42b5d4e5">setWeight</a> (int channel, float weight)</td></tr>
 <tr class="separator:abb80a48eb1817f480e52497f42b5d4e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4b57d21919c42d55af03391f91a1c08" id="r_af4b57d21919c42d55af03391f91a1c08"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#af4b57d21919c42d55af03391f91a1c08">size</a> ()</td></tr>
+<tr class="memitem:af4b57d21919c42d55af03391f91a1c08" id="r_af4b57d21919c42d55af03391f91a1c08"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#af4b57d21919c42d55af03391f91a1c08">size</a> ()</td></tr>
 <tr class="memdesc:af4b57d21919c42d55af03391f91a1c08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of stremams to which are mixed together.  <br /></td></tr>
 <tr class="separator:af4b57d21919c42d55af03391f91a1c08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *data, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> len) <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
+<tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69fce743755f71ed4b89417b0a8f3408" id="r_a69fce743755f71ed4b89417b0a8f3408"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a69fce743755f71ed4b89417b0a8f3408">write</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> idx, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">buffer_c</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> bytes)</td></tr>
+<tr class="memitem:a69fce743755f71ed4b89417b0a8f3408" id="r_a69fce743755f71ed4b89417b0a8f3408"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a69fce743755f71ed4b89417b0a8f3408">write</a> (int idx, const uint8_t *buffer_c, size_t bytes)</td></tr>
 <tr class="memdesc:a69fce743755f71ed4b89417b0a8f3408"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write the data for an individual stream idx which will be mixed together.  <br /></td></tr>
 <tr class="separator:a69fce743755f71ed4b89417b0a8f3408"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af9567acfbc37d764d843239312e5b767" id="r_af9567acfbc37d764d843239312e5b767"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#af9567acfbc37d764d843239312e5b767">write</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>) <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">override</a></td></tr>
+<tr class="memitem:af9567acfbc37d764d843239312e5b767" id="r_af9567acfbc37d764d843239312e5b767"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#af9567acfbc37d764d843239312e5b767">write</a> (uint8_t) override</td></tr>
 <tr class="memdesc:af9567acfbc37d764d843239312e5b767"><td class="mdescLeft">&#160;</td><td class="mdescRight">Single byte write - not supported, returns 0.  <br /></td></tr>
 <tr class="separator:af9567acfbc37d764d843239312e5b767"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e2e5c01b18c41c9a19147dccd0918b5" id="r_a5e2e5c01b18c41c9a19147dccd0918b5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a5e2e5c01b18c41c9a19147dccd0918b5">writeSilence</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> idx, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> bytes)</td></tr>
+<tr class="memitem:a5e2e5c01b18c41c9a19147dccd0918b5" id="r_a5e2e5c01b18c41c9a19147dccd0918b5"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a5e2e5c01b18c41c9a19147dccd0918b5">writeSilence</a> (int idx, size_t bytes)</td></tr>
 <tr class="memdesc:a5e2e5c01b18c41c9a19147dccd0918b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes silence to the specified stream buffer.  <br /></td></tr>
 <tr class="separator:a5e2e5c01b18c41c9a19147dccd0918b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0bd26a5a969f46d583a193a71c100779" id="r_a0bd26a5a969f46d583a193a71c100779"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a0bd26a5a969f46d583a193a71c100779">writeSilence</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> bytes)</td></tr>
+<tr class="memitem:a0bd26a5a969f46d583a193a71c100779" id="r_a0bd26a5a969f46d583a193a71c100779"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a0bd26a5a969f46d583a193a71c100779">writeSilence</a> (size_t bytes)</td></tr>
 <tr class="memdesc:a0bd26a5a969f46d583a193a71c100779"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes silence to the current stream buffer.  <br /></td></tr>
 <tr class="separator:a0bd26a5a969f46d583a193a71c100779"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a4c9ad2c67fca09dd35ba1d5b914b41b7" id="r_a4c9ad2c67fca09dd35ba1d5b914b41b7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a4c9ad2c67fca09dd35ba1d5b914b41b7">allocate_buffers</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">sizeBytes</a>)</td></tr>
+<tr class="memitem:a4c9ad2c67fca09dd35ba1d5b914b41b7" id="r_a4c9ad2c67fca09dd35ba1d5b914b41b7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a4c9ad2c67fca09dd35ba1d5b914b41b7">allocate_buffers</a> (int sizeBytes)</td></tr>
 <tr class="memdesc:a4c9ad2c67fca09dd35ba1d5b914b41b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocates ring buffers for all input streams.  <br /></td></tr>
 <tr class="separator:a4c9ad2c67fca09dd35ba1d5b914b41b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b0bc2b765973e939c8763071d523d9f" id="r_a9b0bc2b765973e939c8763071d523d9f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a9b0bc2b765973e939c8763071d523d9f">free_buffers</a> ()</td></tr>
+<tr class="memitem:a9b0bc2b765973e939c8763071d523d9f" id="r_a9b0bc2b765973e939c8763071d523d9f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a9b0bc2b765973e939c8763071d523d9f">free_buffers</a> ()</td></tr>
 <tr class="memdesc:a9b0bc2b765973e939c8763071d523d9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases memory for all ring buffers.  <br /></td></tr>
 <tr class="separator:a9b0bc2b765973e939c8763071d523d9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a24366388b22fb7085d133b2910ae9ee0" id="r_a24366388b22fb7085d133b2910ae9ee0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a24366388b22fb7085d133b2910ae9ee0">mixSamples</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> samples)</td></tr>
+<tr class="memitem:a24366388b22fb7085d133b2910ae9ee0" id="r_a24366388b22fb7085d133b2910ae9ee0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a24366388b22fb7085d133b2910ae9ee0">mixSamples</a> (size_t samples)</td></tr>
 <tr class="memdesc:a24366388b22fb7085d133b2910ae9ee0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mixes the samples from all input streams into the output buffer.  <br /></td></tr>
 <tr class="separator:a24366388b22fb7085d133b2910ae9ee0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a97de6910b885d3e1d5ee3d78d8a42d42" id="r_a97de6910b885d3e1d5ee3d78d8a42d42"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a97de6910b885d3e1d5ee3d78d8a42d42">update_total_weights</a> ()</td></tr>
+<tr class="memitem:a97de6910b885d3e1d5ee3d78d8a42d42" id="r_a97de6910b885d3e1d5ee3d78d8a42d42"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a97de6910b885d3e1d5ee3d78d8a42d42">update_total_weights</a> ()</td></tr>
 <tr class="memdesc:a97de6910b885d3e1d5ee3d78d8a42d42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recalculates the total weights for normalization.  <br /></td></tr>
 <tr class="separator:a97de6910b885d3e1d5ee3d78d8a42d42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
-<tr class="memitem:adc004d84ee3320ec66bbb777bb6711ed" id="r_adc004d84ee3320ec66bbb777bb6711ed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#adc004d84ee3320ec66bbb777bb6711ed">create_buffer</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">sizeBytes</a>, <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;<a class="el" href="classaudio__tools_1_1_output_mixer.html#a8c57ee070609b5f25226b20c47486814">allocator</a>)</td></tr>
+<tr class="memitem:adc004d84ee3320ec66bbb777bb6711ed" id="r_adc004d84ee3320ec66bbb777bb6711ed"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#adc004d84ee3320ec66bbb777bb6711ed">create_buffer</a> (int sizeBytes, <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;<a class="el" href="classaudio__tools_1_1_output_mixer.html#a8c57ee070609b5f25226b20c47486814">allocator</a>)</td></tr>
 <tr class="memdesc:adc004d84ee3320ec66bbb777bb6711ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a default ring buffer of the specified size.  <br /></td></tr>
 <tr class="separator:adc004d84ee3320ec66bbb777bb6711ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:aa66a35e5edf58ce00047afcd1d4f455e" id="r_aa66a35e5edf58ce00047afcd1d4f455e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_print.html#aa66a35e5edf58ce00047afcd1d4f455e">_timeout</a> = 10</td></tr>
+<tr class="memitem:aa66a35e5edf58ce00047afcd1d4f455e" id="r_aa66a35e5edf58ce00047afcd1d4f455e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_print.html#aa66a35e5edf58ce00047afcd1d4f455e">_timeout</a> = 10</td></tr>
 <tr class="separator:aa66a35e5edf58ce00047afcd1d4f455e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c57ee070609b5f25226b20c47486814" id="r_a8c57ee070609b5f25226b20c47486814"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a8c57ee070609b5f25226b20c47486814">allocator</a></td></tr>
 <tr class="separator:a8c57ee070609b5f25226b20c47486814"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8051c3933442b02244343e94d678e88" id="r_ac8051c3933442b02244343e94d678e88"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#ac8051c3933442b02244343e94d678e88">buffers</a> {0, <a class="el" href="namespaceaudio__tools.html#a6b744d9a6c8c2040e545baf0e8136afe">DefaultAllocatorRAM</a>}</td></tr>
+<tr class="memitem:ac8051c3933442b02244343e94d678e88" id="r_ac8051c3933442b02244343e94d678e88"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#ac8051c3933442b02244343e94d678e88">buffers</a> {0, <a class="el" href="namespaceaudio__tools.html#a6b744d9a6c8c2040e545baf0e8136afe">DefaultAllocatorRAM</a>}</td></tr>
 <tr class="separator:ac8051c3933442b02244343e94d678e88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac453f7065d78b9ae5625030737ef9b3a" id="r_ac453f7065d78b9ae5625030737ef9b3a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#ac453f7065d78b9ae5625030737ef9b3a">create_buffer_cb</a> )(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> <a class="el" href="classaudio__tools_1_1_output_mixer.html#af4b57d21919c42d55af03391f91a1c08">size</a>, <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;<a class="el" href="classaudio__tools_1_1_output_mixer.html#a8c57ee070609b5f25226b20c47486814">allocator</a>) = <a class="el" href="classaudio__tools_1_1_output_mixer.html#adc004d84ee3320ec66bbb777bb6711ed">create_buffer</a></td></tr>
+<tr class="memitem:ac453f7065d78b9ae5625030737ef9b3a" id="r_ac453f7065d78b9ae5625030737ef9b3a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#ac453f7065d78b9ae5625030737ef9b3a">create_buffer_cb</a> )(int <a class="el" href="classaudio__tools_1_1_output_mixer.html#af4b57d21919c42d55af03391f91a1c08">size</a>, <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;<a class="el" href="classaudio__tools_1_1_output_mixer.html#a8c57ee070609b5f25226b20c47486814">allocator</a>) = <a class="el" href="classaudio__tools_1_1_output_mixer.html#adc004d84ee3320ec66bbb777bb6711ed">create_buffer</a></td></tr>
 <tr class="separator:ac453f7065d78b9ae5625030737ef9b3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a407c3efba665d276a38229f905bef352" id="r_a407c3efba665d276a38229f905bef352"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a407c3efba665d276a38229f905bef352">is_active</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">false</a></td></tr>
+<tr class="memitem:a407c3efba665d276a38229f905bef352" id="r_a407c3efba665d276a38229f905bef352"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a407c3efba665d276a38229f905bef352">is_active</a> = false</td></tr>
 <tr class="separator:a407c3efba665d276a38229f905bef352"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a703a035e35bb638144ace865b1cfa4b1" id="r_a703a035e35bb638144ace865b1cfa4b1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a703a035e35bb638144ace865b1cfa4b1">is_auto_index</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">true</a></td></tr>
+<tr class="memitem:a703a035e35bb638144ace865b1cfa4b1" id="r_a703a035e35bb638144ace865b1cfa4b1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a703a035e35bb638144ace865b1cfa4b1">is_auto_index</a> = true</td></tr>
 <tr class="separator:a703a035e35bb638144ace865b1cfa4b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c6cc27499b81ddd560d4e1953cd8912" id="r_a5c6cc27499b81ddd560d4e1953cd8912"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a5c6cc27499b81ddd560d4e1953cd8912">output</a> {0, <a class="el" href="classaudio__tools_1_1_output_mixer.html#a8c57ee070609b5f25226b20c47486814">allocator</a>}</td></tr>
+<tr class="memitem:a5c6cc27499b81ddd560d4e1953cd8912" id="r_a5c6cc27499b81ddd560d4e1953cd8912"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a5c6cc27499b81ddd560d4e1953cd8912">output</a> {0, <a class="el" href="classaudio__tools_1_1_output_mixer.html#a8c57ee070609b5f25226b20c47486814">allocator</a>}</td></tr>
 <tr class="separator:a5c6cc27499b81ddd560d4e1953cd8912"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac39709c45a8838291f9c76e8193617e1" id="r_ac39709c45a8838291f9c76e8193617e1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#ac39709c45a8838291f9c76e8193617e1">output_count</a> = 0</td></tr>
+<tr class="memitem:ac39709c45a8838291f9c76e8193617e1" id="r_ac39709c45a8838291f9c76e8193617e1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#ac39709c45a8838291f9c76e8193617e1">output_count</a> = 0</td></tr>
 <tr class="separator:ac39709c45a8838291f9c76e8193617e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99c350af45d350708934a697a219ec2c" id="r_a99c350af45d350708934a697a219ec2c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a99c350af45d350708934a697a219ec2c">p_final_output</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td></tr>
+<tr class="memitem:a99c350af45d350708934a697a219ec2c" id="r_a99c350af45d350708934a697a219ec2c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a99c350af45d350708934a697a219ec2c">p_final_output</a> = nullptr</td></tr>
 <tr class="separator:a99c350af45d350708934a697a219ec2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0f3b6d8f47b1f0e8556873fe15f3297" id="r_ae0f3b6d8f47b1f0e8556873fe15f3297"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#ae0f3b6d8f47b1f0e8556873fe15f3297">p_memory</a> = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td></tr>
+<tr class="memitem:ae0f3b6d8f47b1f0e8556873fe15f3297" id="r_ae0f3b6d8f47b1f0e8556873fe15f3297"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#ae0f3b6d8f47b1f0e8556873fe15f3297">p_memory</a> = nullptr</td></tr>
 <tr class="separator:ae0f3b6d8f47b1f0e8556873fe15f3297"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a17e28bed569f0834796f55dcc7de2ec0" id="r_a17e28bed569f0834796f55dcc7de2ec0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a17e28bed569f0834796f55dcc7de2ec0">size_bytes</a> = 0</td></tr>
+<tr class="memitem:a17e28bed569f0834796f55dcc7de2ec0" id="r_a17e28bed569f0834796f55dcc7de2ec0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a17e28bed569f0834796f55dcc7de2ec0">size_bytes</a> = 0</td></tr>
 <tr class="separator:a17e28bed569f0834796f55dcc7de2ec0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52f13ca22a70398277f1d30ef6fd207f" id="r_a52f13ca22a70398277f1d30ef6fd207f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a52f13ca22a70398277f1d30ef6fd207f">stream_idx</a> = 0</td></tr>
+<tr class="memitem:a52f13ca22a70398277f1d30ef6fd207f" id="r_a52f13ca22a70398277f1d30ef6fd207f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a52f13ca22a70398277f1d30ef6fd207f">stream_idx</a> = 0</td></tr>
 <tr class="separator:a52f13ca22a70398277f1d30ef6fd207f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af3633c87dfd30ef8d9151ee9a6b336a8" id="r_af3633c87dfd30ef8d9151ee9a6b336a8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#af3633c87dfd30ef8d9151ee9a6b336a8">total_weights</a> = 0.0</td></tr>
+<tr class="memitem:af3633c87dfd30ef8d9151ee9a6b336a8" id="r_af3633c87dfd30ef8d9151ee9a6b336a8"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#af3633c87dfd30ef8d9151ee9a6b336a8">total_weights</a> = 0.0</td></tr>
 <tr class="separator:af3633c87dfd30ef8d9151ee9a6b336a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a795dfff1dd7c7e2381cedf65cd292fd7" id="r_a795dfff1dd7c7e2381cedf65cd292fd7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a795dfff1dd7c7e2381cedf65cd292fd7">weights</a> {0, <a class="el" href="namespaceaudio__tools.html#a6b744d9a6c8c2040e545baf0e8136afe">DefaultAllocatorRAM</a>}</td></tr>
+<tr class="memitem:a795dfff1dd7c7e2381cedf65cd292fd7" id="r_a795dfff1dd7c7e2381cedf65cd292fd7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a795dfff1dd7c7e2381cedf65cd292fd7">weights</a> {0, <a class="el" href="namespaceaudio__tools.html#a6b744d9a6c8c2040e545baf0e8136afe">DefaultAllocatorRAM</a>}</td></tr>
 <tr class="separator:a795dfff1dd7c7e2381cedf65cd292fd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> = int16_t&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T = int16_t&gt;<br />
 class audio_tools::OutputMixer&lt; T &gt;</div><p>Mixing of multiple audio input streams into a single output stream. </p>
 <p>The <a class="el" href="classaudio__tools_1_1_output_mixer.html" title="Mixing of multiple audio input streams into a single output stream.">OutputMixer</a> allows you to combine multiple audio streams by summing their samples with configurable weights per channel. Each input stream is buffered independently using ring buffers, and the mixer outputs the combined result when all buffers have sufficient data available.</p>
 <p>Features:</p><ul>
@@ -246,29 +246,28 @@ class audio_tools::OutputMixer&lt; T &gt;</div><p>Mixing of multiple audio input
 </ol>
 <p>This enables simple round-robin writing where you just call <a class="el" href="classaudio__tools_1_1_output_mixer.html#af9567acfbc37d764d843239312e5b767" title="Single byte write - not supported, returns 0.">write()</a> repeatedly and the mixer handles stream distribution and output flushing automatically.</p>
 <p>Usage Examples:</p>
-<p>Auto Index Mode (default): </p><div class="fragment"><div class="line"><a class="code hl_class" href="classaudio__tools_1_1_output_mixer.html">OutputMixer&lt;int16_t&gt;</a> <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">mixer</a>(<a class="code hl_variable" href="_arduino_8h.html#a7b8c4a195c58f9eb8750e94955c5aa4b">Serial</a>, 3);  <span class="comment">// 3 input streams to Serial output</span></div>
-<div class="line"><a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">mixer</a>.begin(1024);                      <span class="comment">// 1KB buffer per stream</span></div>
+<p>Auto Index Mode (default): </p><div class="fragment"><div class="line"><a class="code hl_class" href="classaudio__tools_1_1_output_mixer.html">OutputMixer&lt;int16_t&gt;</a> mixer(<a class="code hl_variable" href="_arduino_8h.html#a7b8c4a195c58f9eb8750e94955c5aa4b">Serial</a>, 3);  <span class="comment">// 3 input streams to Serial output</span></div>
+<div class="line">mixer.begin(1024);                      <span class="comment">// 1KB buffer per stream</span></div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Simple round-robin writing - auto-increments stream index</span></div>
-<div class="line"><a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">mixer</a>.write(<a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">audio_data1</a>, length);       <span class="comment">// -&gt; stream 0, index = 1</span></div>
-<div class="line"><a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">mixer</a>.write(<a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">audio_data2</a>, length);       <span class="comment">// -&gt; stream 1, index = 2</span></div>
-<div class="line"><a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">mixer</a>.write(<a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">audio_data3</a>, length);       <span class="comment">// -&gt; stream 2, auto-flush, index = 0</span></div>
+<div class="line">mixer.write(audio_data1, length);       <span class="comment">// -&gt; stream 0, index = 1</span></div>
+<div class="line">mixer.write(audio_data2, length);       <span class="comment">// -&gt; stream 1, index = 2</span></div>
+<div class="line">mixer.write(audio_data3, length);       <span class="comment">// -&gt; stream 2, auto-flush, index = 0</span></div>
 <div class="line"><span class="comment">// Process repeats automatically</span></div>
 <div class="ttc" id="a_arduino_8h_html_a7b8c4a195c58f9eb8750e94955c5aa4b"><div class="ttname"><a href="_arduino_8h.html#a7b8c4a195c58f9eb8750e94955c5aa4b">Serial</a></div><div class="ttdeci">static HardwareSerial Serial</div><div class="ttdef"><b>Definition</b> Arduino.h:179</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_output_mixer_html"><div class="ttname"><a href="classaudio__tools_1_1_output_mixer.html">audio_tools::OutputMixer</a></div><div class="ttdoc">Mixing of multiple audio input streams into a single output stream.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:369</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html_ae3c87ac6df70d80e2a4be8979e63cc2e"><div class="ttname"><a href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">audio_tools::writeData</a></div><div class="ttdeci">size_t writeData(Print *p_out, T *data, int samples, int maxSamples=512)</div><div class="ttdef"><b>Definition</b> AudioTypes.h:508</div></div>
-</div><!-- fragment --><p>Manual Index Mode: </p><div class="fragment"><div class="line"><a class="code hl_class" href="classaudio__tools_1_1_output_mixer.html">OutputMixer&lt;int16_t&gt;</a> <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">mixer</a>(<a class="code hl_variable" href="_arduino_8h.html#a7b8c4a195c58f9eb8750e94955c5aa4b">Serial</a>, 3);</div>
-<div class="line"><a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">mixer</a>.begin(1024);</div>
-<div class="line"><a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">mixer</a>.setAutoIndex(<span class="keyword">false</span>);              <span class="comment">// Disable auto-indexing</span></div>
-<div class="line"><a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">mixer</a>.setWeight(0, 0.8f);              <span class="comment">// Stream 0 at 80% volume</span></div>
-<div class="line"><a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">mixer</a>.setWeight(1, 1.0f);              <span class="comment">// Stream 1 at 100% volume</span></div>
-<div class="line"><a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">mixer</a>.setWeight(2, 0.5f);              <span class="comment">// Stream 2 at 50% volume</span></div>
+</div><!-- fragment --><p>Manual Index Mode: </p><div class="fragment"><div class="line"><a class="code hl_class" href="classaudio__tools_1_1_output_mixer.html">OutputMixer&lt;int16_t&gt;</a> mixer(<a class="code hl_variable" href="_arduino_8h.html#a7b8c4a195c58f9eb8750e94955c5aa4b">Serial</a>, 3);</div>
+<div class="line">mixer.begin(1024);</div>
+<div class="line">mixer.setAutoIndex(<span class="keyword">false</span>);              <span class="comment">// Disable auto-indexing</span></div>
+<div class="line">mixer.setWeight(0, 0.8f);              <span class="comment">// Stream 0 at 80% volume</span></div>
+<div class="line">mixer.setWeight(1, 1.0f);              <span class="comment">// Stream 1 at 100% volume</span></div>
+<div class="line">mixer.setWeight(2, 0.5f);              <span class="comment">// Stream 2 at 50% volume</span></div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Write data to specific streams manually</span></div>
-<div class="line"><a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">mixer</a>.write(0, <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">audio_data1</a>, length);   <span class="comment">// Write to stream 0</span></div>
-<div class="line"><a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">mixer</a>.write(1, <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">audio_data2</a>, length);   <span class="comment">// Write to stream 1</span></div>
-<div class="line"><a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">mixer</a>.write(2, <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">audio_data3</a>, length);   <span class="comment">// Write to stream 2</span></div>
-<div class="line"><a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">mixer</a>.flushMixer();                     <span class="comment">// Manually trigger mix and output</span></div>
+<div class="line">mixer.write(0, audio_data1, length);   <span class="comment">// Write to stream 0</span></div>
+<div class="line">mixer.write(1, audio_data2, length);   <span class="comment">// Write to stream 1</span></div>
+<div class="line">mixer.write(2, audio_data3, length);   <span class="comment">// Write to stream 2</span></div>
+<div class="line">mixer.flushMixer();                     <span class="comment">// Manually trigger mix and output</span></div>
 </div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>By default uses <a class="el" href="classaudio__tools_1_1_ring_buffer.html" title="Implements a typed Ringbuffer.">RingBuffer</a> as the buffer type. Buffer type can be customized using <a class="el" href="classaudio__tools_1_1_output_mixer.html#a8241749454cb88989b4bfcb39bf48a4a" title="Define callback to allocate custum buffer types.">setCreateBufferCallback()</a>. </dd>
 <dd>
 All input streams must have the same sample format (bit depth, sample rate). </dd>
@@ -291,7 +290,7 @@ In auto-index mode, ensure you write to all streams in each cycle for proper mix
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -327,7 +326,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -341,7 +340,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>outputStreamCount</em>, </td>
         </tr>
         <tr>
@@ -382,15 +381,15 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> allocate_buffers </td>
+          <td class="memname">bool allocate_buffers </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>sizeBytes</em></td><td>)</td>
           <td></td>
         </tr>
@@ -412,15 +411,15 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> available </td>
+          <td class="memname">int available </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>idx</em></td><td>)</td>
           <td></td>
         </tr>
@@ -442,13 +441,13 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> availableForWrite </td>
+          <td class="memname">int availableForWrite </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -473,15 +472,15 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> availableForWrite </td>
+          <td class="memname">int availableForWrite </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>idx</em></td><td>)</td>
           <td></td>
         </tr>
@@ -503,15 +502,15 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> availablePercent </td>
+          <td class="memname">int availablePercent </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>idx</em></td><td>)</td>
           <td></td>
         </tr>
@@ -533,13 +532,13 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> availableSamples </td>
+          <td class="memname">int availableSamples </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -562,15 +561,15 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> begin </td>
+          <td class="memname">bool begin </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>copy_buffer_size_bytes</em> = <code><a class="el" href="avr_8h.html#a6e576a3c6530636d68b7a220480bcd32">DEFAULT_BUFFER_SIZE</a></code></td><td>)</td>
           <td></td>
         </tr>
@@ -592,15 +591,15 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; * create_buffer </td>
+          <td class="memname">static <a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; * create_buffer </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>sizeBytes</em>, </td>
         </tr>
         <tr>
@@ -632,13 +631,13 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> end </td>
+          <td class="memname">void end </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -665,7 +664,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> flush </td>
+          <td class="memname">virtual void flush </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -688,13 +687,13 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> flushMixer </td>
+          <td class="memname">bool flushMixer </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -717,13 +716,13 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> free_buffers </td>
+          <td class="memname">void free_buffers </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -746,15 +745,15 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; * getBuffer </td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; * getBuffer </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>idx</em></td><td>)</td>
           <td></td>
         </tr>
@@ -776,15 +775,15 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> mixSamples </td>
+          <td class="memname">void mixSamples </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>samples</em></td><td>)</td>
           <td></td>
         </tr>
@@ -806,13 +805,13 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> next </td>
+          <td class="memname">void next </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -835,15 +834,15 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> resize </td>
+          <td class="memname">bool resize </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>sizeBytes</em></td><td>)</td>
           <td></td>
         </tr>
@@ -865,15 +864,15 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> setAutoIndex </td>
+          <td class="memname">void setAutoIndex </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td>
+          <td class="paramtype">bool&#160;</td>
           <td class="paramname"><em>flag</em></td><td>)</td>
           <td></td>
         </tr>
@@ -895,15 +894,15 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> setCreateBufferCallback </td>
+          <td class="memname">void setCreateBufferCallback </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; *(*)(<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> <a class="el" href="classaudio__tools_1_1_output_mixer.html#af4b57d21919c42d55af03391f91a1c08">size</a>)&#160;</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; *(*)(int <a class="el" href="classaudio__tools_1_1_output_mixer.html#af4b57d21919c42d55af03391f91a1c08">size</a>)&#160;</td>
           <td class="paramname"><em>cb</em></td><td>)</td>
           <td></td>
         </tr>
@@ -925,15 +924,15 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> setIndex </td>
+          <td class="memname">void setIndex </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>idx</em></td><td>)</td>
           <td></td>
         </tr>
@@ -955,13 +954,13 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> setOutput </td>
+          <td class="memname">void setOutput </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_print.html">Print</a> &amp;&#160;</td>
           <td class="paramname"><em>finalOutput</em></td><td>)</td>
@@ -985,15 +984,15 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> setOutputCount </td>
+          <td class="memname">void setOutputCount </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>count</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1015,21 +1014,21 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> setWeight </td>
+          <td class="memname">void setWeight </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>channel</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a>&#160;</td>
+          <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>weight</em>&#160;</td>
         </tr>
         <tr>
@@ -1054,13 +1053,13 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> size </td>
+          <td class="memname">int size </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1083,13 +1082,13 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> update_total_weights </td>
+          <td class="memname">void update_total_weights </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1112,21 +1111,21 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> write </td>
+          <td class="memname">size_t write </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
           <td class="paramname"><em>data</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>len</em>&#160;</td>
         </tr>
         <tr>
@@ -1153,27 +1152,27 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> write </td>
+          <td class="memname">size_t write </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>idx</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
           <td class="paramname"><em>buffer_c</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>bytes</em>&#160;</td>
         </tr>
         <tr>
@@ -1199,15 +1198,15 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> write </td>
+          <td class="memname">size_t write </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a>&#160;</td>
+          <td class="paramtype">uint8_t&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
@@ -1229,21 +1228,21 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> writeSilence </td>
+          <td class="memname">size_t writeSilence </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>idx</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>bytes</em>&#160;</td>
         </tr>
         <tr>
@@ -1269,15 +1268,15 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a> writeSilence </td>
+          <td class="memname">size_t writeSilence </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">size_t</a>&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>bytes</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1304,7 +1303,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> _timeout = 10</td>
+          <td class="memname">int _timeout = 10</td>
         </tr>
       </table>
   </td>
@@ -1322,7 +1321,7 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1346,13 +1345,13 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;<a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>&gt; *&gt; buffers {0, <a class="el" href="namespaceaudio__tools.html#a6b744d9a6c8c2040e545baf0e8136afe">DefaultAllocatorRAM</a>}</td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;<a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt;T&gt; *&gt; buffers {0, <a class="el" href="namespaceaudio__tools.html#a6b744d9a6c8c2040e545baf0e8136afe">DefaultAllocatorRAM</a>}</td>
         </tr>
       </table>
   </td>
@@ -1370,13 +1369,13 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a> &gt; *(* create_buffer_cb) (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> <a class="el" href="classaudio__tools_1_1_output_mixer.html#af4b57d21919c42d55af03391f91a1c08">size</a>, <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;<a class="el" href="classaudio__tools_1_1_output_mixer.html#a8c57ee070609b5f25226b20c47486814">allocator</a>) = <a class="el" href="classaudio__tools_1_1_output_mixer.html#adc004d84ee3320ec66bbb777bb6711ed">create_buffer</a></td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; *(* create_buffer_cb) (int <a class="el" href="classaudio__tools_1_1_output_mixer.html#af4b57d21919c42d55af03391f91a1c08">size</a>, <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;<a class="el" href="classaudio__tools_1_1_output_mixer.html#a8c57ee070609b5f25226b20c47486814">allocator</a>) = <a class="el" href="classaudio__tools_1_1_output_mixer.html#adc004d84ee3320ec66bbb777bb6711ed">create_buffer</a></td>
         </tr>
       </table>
   </td>
@@ -1394,13 +1393,13 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> is_active = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">false</a></td>
+          <td class="memname">bool is_active = false</td>
         </tr>
       </table>
   </td>
@@ -1418,13 +1417,13 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> is_auto_index = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">true</a></td>
+          <td class="memname">bool is_auto_index = true</td>
         </tr>
       </table>
   </td>
@@ -1442,13 +1441,13 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>&gt; output {0, <a class="el" href="classaudio__tools_1_1_output_mixer.html#a8c57ee070609b5f25226b20c47486814">allocator</a>}</td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;T&gt; output {0, <a class="el" href="classaudio__tools_1_1_output_mixer.html#a8c57ee070609b5f25226b20c47486814">allocator</a>}</td>
         </tr>
       </table>
   </td>
@@ -1466,13 +1465,13 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> output_count = 0</td>
+          <td class="memname">int output_count = 0</td>
         </tr>
       </table>
   </td>
@@ -1490,13 +1489,13 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_print.html">Print</a>* p_final_output = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td>
+          <td class="memname"><a class="el" href="class_print.html">Print</a>* p_final_output = nullptr</td>
         </tr>
       </table>
   </td>
@@ -1514,13 +1513,13 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>* p_memory = <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">nullptr</a></td>
+          <td class="memname">void* p_memory = nullptr</td>
         </tr>
       </table>
   </td>
@@ -1538,13 +1537,13 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> size_bytes = 0</td>
+          <td class="memname">int size_bytes = 0</td>
         </tr>
       </table>
   </td>
@@ -1562,13 +1561,13 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> stream_idx = 0</td>
+          <td class="memname">int stream_idx = 0</td>
         </tr>
       </table>
   </td>
@@ -1586,13 +1585,13 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a> total_weights = 0.0</td>
+          <td class="memname">float total_weights = 0.0</td>
         </tr>
       </table>
   </td>
@@ -1610,13 +1609,13 @@ template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">T</a>  = int16_t&gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a>&gt; weights {0, <a class="el" href="namespaceaudio__tools.html#a6b744d9a6c8c2040e545baf0e8136afe">DefaultAllocatorRAM</a>}</td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;float&gt; weights {0, <a class="el" href="namespaceaudio__tools.html#a6b744d9a6c8c2040e545baf0e8136afe">DefaultAllocatorRAM</a>}</td>
         </tr>
       </table>
   </td>

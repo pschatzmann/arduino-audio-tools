@@ -96,11 +96,11 @@ Inheritance diagram for ITask:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a62793e57d67738ac0d0ca58b56cbbe67" id="r_a62793e57d67738ac0d0ca58b56cbbe67"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i_task.html#a62793e57d67738ac0d0ca58b56cbbe67">~ITask</a> ()=<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">default</a></td></tr>
+<tr class="memitem:a62793e57d67738ac0d0ca58b56cbbe67" id="r_a62793e57d67738ac0d0ca58b56cbbe67"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i_task.html#a62793e57d67738ac0d0ca58b56cbbe67">~ITask</a> ()=default</td></tr>
 <tr class="separator:a62793e57d67738ac0d0ca58b56cbbe67"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77064a4e94683438ef186bd54aad44e6" id="r_a77064a4e94683438ef186bd54aad44e6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i_task.html#a77064a4e94683438ef186bd54aad44e6">begin</a> (std::function&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>()&gt; process)=0</td></tr>
+<tr class="memitem:a77064a4e94683438ef186bd54aad44e6" id="r_a77064a4e94683438ef186bd54aad44e6"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i_task.html#a77064a4e94683438ef186bd54aad44e6">begin</a> (std::function&lt; void()&gt; process)=0</td></tr>
 <tr class="separator:a77064a4e94683438ef186bd54aad44e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa540e86022c1f72380d1014d98f38f43" id="r_aa540e86022c1f72380d1014d98f38f43"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i_task.html#aa540e86022c1f72380d1014d98f38f43">end</a> ()=0</td></tr>
+<tr class="memitem:aa540e86022c1f72380d1014d98f38f43" id="r_aa540e86022c1f72380d1014d98f38f43"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i_task.html#aa540e86022c1f72380d1014d98f38f43">end</a> ()=0</td></tr>
 <tr class="separator:aa540e86022c1f72380d1014d98f38f43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -117,7 +117,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> ~<a class="el" href="classaudio__tools_1_1_i_task.html">ITask</a> </td>
+          <td class="memname">virtual ~<a class="el" href="classaudio__tools_1_1_i_task.html">ITask</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -143,9 +143,9 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> begin </td>
+          <td class="memname">virtual bool begin </td>
           <td>(</td>
-          <td class="paramtype">std::function&lt; <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>()&gt;&#160;</td>
+          <td class="paramtype">std::function&lt; void()&gt;&#160;</td>
           <td class="paramname"><em>process</em></td><td>)</td>
           <td></td>
         </tr>
@@ -171,7 +171,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> end </td>
+          <td class="memname">virtual void end </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>

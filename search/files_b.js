@@ -6,6 +6,5 @@ var searchData=
   ['listlockfree_2eh_3',['ListLockFree.h',['../_list_lock_free_8h.html',1,'']]],
   ['lmsechocancellationstream_2eh_4',['LMSEchoCancellationStream.h',['../_l_m_s_echo_cancellation_stream_8h.html',1,'']]],
   ['lockfree_2eh_5',['LockFree.h',['../_lock_free_8h.html',1,'']]],
-  ['lockguard_2eh_6',['LockGuard.h',['../_lock_guard_8h.html',1,'']]],
-  ['lorastream_2eh_7',['LoRaStream.h',['../_lo_ra_stream_8h.html',1,'']]]
+  ['lockguard_2eh_6',['LockGuard.h',['../_lock_guard_8h.html',1,'']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: src/AudioTools/Sandbox/STT/MDFEchoCancellation.h File Reference</title>
+<title>arduino-audio-tools: src/AudioTools/AEC/MDFEchoCancellation.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,7 +69,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_e2decdf0a26130821d443b556fc4319d.html">Sandbox</a></li><li class="navelem"><a class="el" href="dir_5e015c032ced920d517d278f6e4ba895.html">STT</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_2eb25378a66fa7e4a6867941bf80c85c.html">AEC</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -88,23 +88,21 @@ $(function() {
 <code>#include &lt;cstdint&gt;</code><br />
 <code>#include &lt;cstdlib&gt;</code><br />
 <code>#include &lt;cstring&gt;</code><br />
-<code>#include &lt;vector&gt;</code><br />
 <code>#include &quot;<a class="el" href="_m_d_f_echo_cancellation_config_8h_source.html">MDFEchoCancellationConfig.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_audio_f_f_t_8h_source.html">AudioTools/AudioLibs/AudioFFT.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_allocator_8h_source.html">AudioTools/CoreAudio/AudioBasic/Collections/Allocator.h</a>&quot;</code><br />
 </div>
 <p><a href="_m_d_f_echo_cancellation_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html">EchoState</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal echo canceller state structure.  <a href="structaudio__tools_1_1_echo_state.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state__.html">EchoState_</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal echo canceller state structure.  <a href="structaudio__tools_1_1_echo_state__.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1fft__state.html">fft_state</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">FFT state management structure.  <a href="structaudio__tools_1_1fft__state.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1fft__state.html">fft_state&lt; Allocator &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">FFT state management structure with custom allocator support.  <a href="structaudio__tools_1_1fft__state.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_d_f_echo_cancellation.html">MDFEchoCancellation&lt; Allocator &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_d_f_echo_cancellation.html">MDFEchoCancellation</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Acoustic echo canceller using MDF algorithm.  <a href="classaudio__tools_1_1_m_d_f_echo_cancellation.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -122,6 +120,14 @@ Macros</h2></td></tr>
 <tr class="separator:aa4082b064c5e68c941c9ba3b297cc149"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a42506a0d6465a6a8be2b1e00bb8f2755" id="r_a42506a0d6465a6a8be2b1e00bb8f2755"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a42506a0d6465a6a8be2b1e00bb8f2755">ABS32</a>(x)&#160;&#160;&#160;(((x) &lt; 0) ? (-(x)) : (x))</td></tr>
 <tr class="separator:a42506a0d6465a6a8be2b1e00bb8f2755"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada9407a834281b7256402de509127574" id="r_ada9407a834281b7256402de509127574"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#ada9407a834281b7256402de509127574">ADD16</a>(a,  b)&#160;&#160;&#160;((a) + (b))</td></tr>
+<tr class="separator:ada9407a834281b7256402de509127574"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a331894711c95732356e8b51c68d4d440" id="r_a331894711c95732356e8b51c68d4d440"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a331894711c95732356e8b51c68d4d440">ADD32</a>(a,  b)&#160;&#160;&#160;((a) + (b))</td></tr>
+<tr class="separator:a331894711c95732356e8b51c68d4d440"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b23497328e2818e4ff96e32bd0b00c6" id="r_a3b23497328e2818e4ff96e32bd0b00c6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a3b23497328e2818e4ff96e32bd0b00c6">DIV32</a>(a,  b)&#160;&#160;&#160;(((echo_word32_t)(a)) / (echo_word32_t)(b))</td></tr>
+<tr class="separator:a3b23497328e2818e4ff96e32bd0b00c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac32eb42f66a75c1c2c510fa9dbaa375c" id="r_ac32eb42f66a75c1c2c510fa9dbaa375c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#ac32eb42f66a75c1c2c510fa9dbaa375c">DIV32_16</a>(a,  b)&#160;&#160;&#160;(((echo_word32_t)(a)) / (echo_word16_t)(b))</td></tr>
+<tr class="separator:ac32eb42f66a75c1c2c510fa9dbaa375c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4adcac3edefeb1fb3cf2b61a19b03f9" id="r_af4adcac3edefeb1fb3cf2b61a19b03f9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#af4adcac3edefeb1fb3cf2b61a19b03f9">ECHO_GET_FRAME_SIZE</a>&#160;&#160;&#160;3</td></tr>
 <tr class="separator:af4adcac3edefeb1fb3cf2b61a19b03f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07b9086b81b00894a69aba3dafd65846" id="r_a07b9086b81b00894a69aba3dafd65846"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a07b9086b81b00894a69aba3dafd65846">ECHO_GET_IMPULSE_RESPONSE</a>&#160;&#160;&#160;29</td></tr>
@@ -132,26 +138,44 @@ Macros</h2></td></tr>
 <tr class="separator:a508a5bae9fb580e6d6b64f1c08662d5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9cc8a8985e4ec23ca5ac2195dbb2baa3" id="r_a9cc8a8985e4ec23ca5ac2195dbb2baa3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a9cc8a8985e4ec23ca5ac2195dbb2baa3">ECHO_SET_SAMPLING_RATE</a>&#160;&#160;&#160;24</td></tr>
 <tr class="separator:a9cc8a8985e4ec23ca5ac2195dbb2baa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad85f960de919ab744f9a1c17ba7b80f3" id="r_ad85f960de919ab744f9a1c17ba7b80f3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#ad85f960de919ab744f9a1c17ba7b80f3">FLOAT_ADD</a>(a,  b)&#160;&#160;&#160;(echo_float_add(a, b))</td></tr>
+<tr class="memitem:a5adea5f484325b71c8a1cf2f557c1f2b" id="r_a5adea5f484325b71c8a1cf2f557c1f2b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a5adea5f484325b71c8a1cf2f557c1f2b">EXTEND32</a>(x)&#160;&#160;&#160;(x)</td></tr>
+<tr class="separator:a5adea5f484325b71c8a1cf2f557c1f2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64696e84a91640d6873867e613c45156" id="r_a64696e84a91640d6873867e613c45156"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a64696e84a91640d6873867e613c45156">EXTRACT16</a>(x)&#160;&#160;&#160;(x)</td></tr>
+<tr class="separator:a64696e84a91640d6873867e613c45156"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad85f960de919ab744f9a1c17ba7b80f3" id="r_ad85f960de919ab744f9a1c17ba7b80f3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#ad85f960de919ab744f9a1c17ba7b80f3">FLOAT_ADD</a>(a,  b)&#160;&#160;&#160;((a) + (b))</td></tr>
 <tr class="separator:ad85f960de919ab744f9a1c17ba7b80f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab1bd8a810652b8c3c769deadf1285183" id="r_ab1bd8a810652b8c3c769deadf1285183"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#ab1bd8a810652b8c3c769deadf1285183">FLOAT_DIVU</a>(a,  b)&#160;&#160;&#160;(echo_float_divu(a, b))</td></tr>
+<tr class="memitem:a2a069956463a42a16032c462349d94b7" id="r_a2a069956463a42a16032c462349d94b7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a2a069956463a42a16032c462349d94b7">FLOAT_AMULT</a>(a,  b)&#160;&#160;&#160;((a) * (b))</td></tr>
+<tr class="separator:a2a069956463a42a16032c462349d94b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab41e80de39661e16c9a4156b68e555f6" id="r_ab41e80de39661e16c9a4156b68e555f6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#ab41e80de39661e16c9a4156b68e555f6">FLOAT_DIV32</a>(a,  b)&#160;&#160;&#160;((a) / (b))</td></tr>
+<tr class="separator:ab41e80de39661e16c9a4156b68e555f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c06d474d2b30f6c9e0b857396c5f6ea" id="r_a6c06d474d2b30f6c9e0b857396c5f6ea"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a6c06d474d2b30f6c9e0b857396c5f6ea">FLOAT_DIV32_FLOAT</a>(a,  b)&#160;&#160;&#160;((a) / (b))</td></tr>
+<tr class="separator:a6c06d474d2b30f6c9e0b857396c5f6ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1bd8a810652b8c3c769deadf1285183" id="r_ab1bd8a810652b8c3c769deadf1285183"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#ab1bd8a810652b8c3c769deadf1285183">FLOAT_DIVU</a>(a,  b)&#160;&#160;&#160;((a) / (b))</td></tr>
 <tr class="separator:ab1bd8a810652b8c3c769deadf1285183"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9abe7752d63efc6e34c1cc6ed56b6e41" id="r_a9abe7752d63efc6e34c1cc6ed56b6e41"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a9abe7752d63efc6e34c1cc6ed56b6e41">FLOAT_EXTRACT16</a>(a)&#160;&#160;&#160;(echo_float_extract16(a))</td></tr>
+<tr class="memitem:a9abe7752d63efc6e34c1cc6ed56b6e41" id="r_a9abe7752d63efc6e34c1cc6ed56b6e41"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a9abe7752d63efc6e34c1cc6ed56b6e41">FLOAT_EXTRACT16</a>(a)&#160;&#160;&#160;(a)</td></tr>
 <tr class="separator:a9abe7752d63efc6e34c1cc6ed56b6e41"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70164a36a47d2d34628762df0a0a42e9" id="r_a70164a36a47d2d34628762df0a0a42e9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a70164a36a47d2d34628762df0a0a42e9">FLOAT_GT</a>(a,  b)&#160;&#160;&#160;(echo_float_gt(a, b))</td></tr>
+<tr class="memitem:ac5128c94ba2661bdd6f3bf4cb14f5328" id="r_ac5128c94ba2661bdd6f3bf4cb14f5328"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#ac5128c94ba2661bdd6f3bf4cb14f5328">FLOAT_EXTRACT32</a>(a)&#160;&#160;&#160;(a)</td></tr>
+<tr class="separator:ac5128c94ba2661bdd6f3bf4cb14f5328"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70164a36a47d2d34628762df0a0a42e9" id="r_a70164a36a47d2d34628762df0a0a42e9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a70164a36a47d2d34628762df0a0a42e9">FLOAT_GT</a>(a,  b)&#160;&#160;&#160;((a) &gt; (b))</td></tr>
 <tr class="separator:a70164a36a47d2d34628762df0a0a42e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9666532dbabb754828fead78eb46a6e" id="r_ac9666532dbabb754828fead78eb46a6e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#ac9666532dbabb754828fead78eb46a6e">FLOAT_LT</a>(a,  b)&#160;&#160;&#160;(echo_float_lt(a, b))</td></tr>
+<tr class="memitem:ac9666532dbabb754828fead78eb46a6e" id="r_ac9666532dbabb754828fead78eb46a6e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#ac9666532dbabb754828fead78eb46a6e">FLOAT_LT</a>(a,  b)&#160;&#160;&#160;((a) &lt; (b))</td></tr>
 <tr class="separator:ac9666532dbabb754828fead78eb46a6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3fed3280b2a89032973392e5000891d3" id="r_a3fed3280b2a89032973392e5000891d3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a3fed3280b2a89032973392e5000891d3">FLOAT_MUL32U</a>(a,  b)&#160;&#160;&#160;(echo_float_mul32_u(a, b))</td></tr>
+<tr class="memitem:ad2dba1a0facae3cbb44c050cbd40b3be" id="r_ad2dba1a0facae3cbb44c050cbd40b3be"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#ad2dba1a0facae3cbb44c050cbd40b3be">FLOAT_MUL32</a>(a,  b)&#160;&#160;&#160;((a) * (b))</td></tr>
+<tr class="separator:ad2dba1a0facae3cbb44c050cbd40b3be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fed3280b2a89032973392e5000891d3" id="r_a3fed3280b2a89032973392e5000891d3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a3fed3280b2a89032973392e5000891d3">FLOAT_MUL32U</a>(a,  b)&#160;&#160;&#160;((a) * (b))</td></tr>
 <tr class="separator:a3fed3280b2a89032973392e5000891d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ad219f79450c72e1981e44f09d390af" id="r_a4ad219f79450c72e1981e44f09d390af"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a4ad219f79450c72e1981e44f09d390af">FLOAT_MULT</a>(a,  b)&#160;&#160;&#160;(echo_float_mult(a, b))</td></tr>
+<tr class="memitem:a4ad219f79450c72e1981e44f09d390af" id="r_a4ad219f79450c72e1981e44f09d390af"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a4ad219f79450c72e1981e44f09d390af">FLOAT_MULT</a>(a,  b)&#160;&#160;&#160;((a) * (b))</td></tr>
 <tr class="separator:a4ad219f79450c72e1981e44f09d390af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9329dfdce1c77493f6a7cf75a5bf7edf" id="r_a9329dfdce1c77493f6a7cf75a5bf7edf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a9329dfdce1c77493f6a7cf75a5bf7edf">FLOAT_SHL</a>(a,  b)&#160;&#160;&#160;(echo_float_shl(a, b))</td></tr>
+<tr class="memitem:a9329dfdce1c77493f6a7cf75a5bf7edf" id="r_a9329dfdce1c77493f6a7cf75a5bf7edf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a9329dfdce1c77493f6a7cf75a5bf7edf">FLOAT_SHL</a>(a,  b)&#160;&#160;&#160;(a)</td></tr>
 <tr class="separator:a9329dfdce1c77493f6a7cf75a5bf7edf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4b5f9b2e0f07a18df917e20b263d227e" id="r_a4b5f9b2e0f07a18df917e20b263d227e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a4b5f9b2e0f07a18df917e20b263d227e">FLOAT_SQRT</a>(a)&#160;&#160;&#160;(echo_float_sqrt(a))</td></tr>
+<tr class="memitem:a4b5f9b2e0f07a18df917e20b263d227e" id="r_a4b5f9b2e0f07a18df917e20b263d227e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a4b5f9b2e0f07a18df917e20b263d227e">FLOAT_SQRT</a>(a)&#160;&#160;&#160;(sqrtf(a))</td></tr>
 <tr class="separator:a4b5f9b2e0f07a18df917e20b263d227e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5abd57f4576265f7efcd3955d0fb8194" id="r_a5abd57f4576265f7efcd3955d0fb8194"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a5abd57f4576265f7efcd3955d0fb8194">FLOAT_SUB</a>(a,  b)&#160;&#160;&#160;(echo_float_sub(a, b))</td></tr>
+<tr class="memitem:a5abd57f4576265f7efcd3955d0fb8194" id="r_a5abd57f4576265f7efcd3955d0fb8194"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a5abd57f4576265f7efcd3955d0fb8194">FLOAT_SUB</a>(a,  b)&#160;&#160;&#160;((a) - (b))</td></tr>
 <tr class="separator:a5abd57f4576265f7efcd3955d0fb8194"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36b4ca37425ac01d0ccf1f8100026231" id="r_a36b4ca37425ac01d0ccf1f8100026231"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a36b4ca37425ac01d0ccf1f8100026231">MAC16_16</a>(c,  a,  b)&#160;&#160;&#160;((c) + (echo_word32_t)(a) * (echo_word32_t)(b))</td></tr>
+<tr class="separator:a36b4ca37425ac01d0ccf1f8100026231"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23677ee1b137ed99e0653f928bfd3995" id="r_a23677ee1b137ed99e0653f928bfd3995"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a23677ee1b137ed99e0653f928bfd3995">MAC16_32_Q15</a>(c,  a,  b)&#160;&#160;&#160;((c) + (a) * (b))</td></tr>
+<tr class="separator:a23677ee1b137ed99e0653f928bfd3995"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6923ce3ce39d87288b1d22c504d5b8d3" id="r_a6923ce3ce39d87288b1d22c504d5b8d3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a6923ce3ce39d87288b1d22c504d5b8d3">MAX16</a>(a,  b)&#160;&#160;&#160;((a) &gt; (b) ? (a) : (b))</td></tr>
 <tr class="separator:a6923ce3ce39d87288b1d22c504d5b8d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1ba014a74ed316d11b1adb00ee07a11" id="r_ac1ba014a74ed316d11b1adb00ee07a11"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#ac1ba014a74ed316d11b1adb00ee07a11">MAX32</a>(a,  b)&#160;&#160;&#160;((a) &gt; (b) ? (a) : (b))</td></tr>
@@ -160,10 +184,60 @@ Macros</h2></td></tr>
 <tr class="separator:a970600dbc33ce9ddb088a4acc0328716"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa77df58004a050496cf0a96a464a209" id="r_aaa77df58004a050496cf0a96a464a209"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#aaa77df58004a050496cf0a96a464a209">MIN32</a>(a,  b)&#160;&#160;&#160;((a) &lt; (b) ? (a) : (b))</td></tr>
 <tr class="separator:aaa77df58004a050496cf0a96a464a209"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a299d63ebe043d6913621900505a6b5c4" id="r_a299d63ebe043d6913621900505a6b5c4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a299d63ebe043d6913621900505a6b5c4">PSEUDOFLOAT</a>(x)&#160;&#160;&#160;(echo_float_from_double(x))</td></tr>
+<tr class="memitem:a53904429ea46182d094504978a2771bc" id="r_a53904429ea46182d094504978a2771bc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a53904429ea46182d094504978a2771bc">MULT16_16</a>(a,  b)&#160;&#160;&#160;((echo_word32_t)(a) * (echo_word32_t)(b))</td></tr>
+<tr class="separator:a53904429ea46182d094504978a2771bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae745399db3ebb255c2339111d386f1b2" id="r_ae745399db3ebb255c2339111d386f1b2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#ae745399db3ebb255c2339111d386f1b2">MULT16_16_P13</a>(a,  b)&#160;&#160;&#160;((a) * (b))</td></tr>
+<tr class="separator:ae745399db3ebb255c2339111d386f1b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fb759c201b20f832878e3a5bd7b1158" id="r_a8fb759c201b20f832878e3a5bd7b1158"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a8fb759c201b20f832878e3a5bd7b1158">MULT16_16_P14</a>(a,  b)&#160;&#160;&#160;((a) * (b))</td></tr>
+<tr class="separator:a8fb759c201b20f832878e3a5bd7b1158"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afeb9b528bd83183bf99dbe8513202cee" id="r_afeb9b528bd83183bf99dbe8513202cee"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#afeb9b528bd83183bf99dbe8513202cee">MULT16_16_P15</a>(a,  b)&#160;&#160;&#160;((a) * (b))</td></tr>
+<tr class="separator:afeb9b528bd83183bf99dbe8513202cee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f84ebe2ea6147d78c059c85ae0f255a" id="r_a4f84ebe2ea6147d78c059c85ae0f255a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a4f84ebe2ea6147d78c059c85ae0f255a">MULT16_16_Q13</a>(a,  b)&#160;&#160;&#160;((a) * (b))</td></tr>
+<tr class="separator:a4f84ebe2ea6147d78c059c85ae0f255a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12dcf0da378f40c7302a182a0e1ae0db" id="r_a12dcf0da378f40c7302a182a0e1ae0db"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a12dcf0da378f40c7302a182a0e1ae0db">MULT16_16_Q14</a>(a,  b)&#160;&#160;&#160;((a) * (b))</td></tr>
+<tr class="separator:a12dcf0da378f40c7302a182a0e1ae0db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef7e5333cb053a993c157a9b0440fcbc" id="r_aef7e5333cb053a993c157a9b0440fcbc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#aef7e5333cb053a993c157a9b0440fcbc">MULT16_16_Q15</a>(a,  b)&#160;&#160;&#160;((a) * (b))</td></tr>
+<tr class="separator:aef7e5333cb053a993c157a9b0440fcbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6886d183257ae41e054e6315e65683b4" id="r_a6886d183257ae41e054e6315e65683b4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a6886d183257ae41e054e6315e65683b4">MULT16_32_P15</a>(a,  b)&#160;&#160;&#160;((a) * (b))</td></tr>
+<tr class="separator:a6886d183257ae41e054e6315e65683b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7087da193fab7691b50a3cca724e8a1" id="r_ad7087da193fab7691b50a3cca724e8a1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#ad7087da193fab7691b50a3cca724e8a1">MULT16_32_Q14</a>(a,  b)&#160;&#160;&#160;((a) * (b))</td></tr>
+<tr class="separator:ad7087da193fab7691b50a3cca724e8a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff95b426e771540c73a3ad1e4dd2b429" id="r_aff95b426e771540c73a3ad1e4dd2b429"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#aff95b426e771540c73a3ad1e4dd2b429">MULT16_32_Q15</a>(a,  b)&#160;&#160;&#160;((a) * (b))</td></tr>
+<tr class="separator:aff95b426e771540c73a3ad1e4dd2b429"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a051e97a9f43e035c9e825846db9e6e47" id="r_a051e97a9f43e035c9e825846db9e6e47"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a051e97a9f43e035c9e825846db9e6e47">NEG16</a>(x)&#160;&#160;&#160;(-(x))</td></tr>
+<tr class="separator:a051e97a9f43e035c9e825846db9e6e47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:addfb22b1d5f37af2fafb4b2e6e1b2b45" id="r_addfb22b1d5f37af2fafb4b2e6e1b2b45"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#addfb22b1d5f37af2fafb4b2e6e1b2b45">NEG32</a>(x)&#160;&#160;&#160;(-(x))</td></tr>
+<tr class="separator:addfb22b1d5f37af2fafb4b2e6e1b2b45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a299d63ebe043d6913621900505a6b5c4" id="r_a299d63ebe043d6913621900505a6b5c4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a299d63ebe043d6913621900505a6b5c4">PSEUDOFLOAT</a>(x)&#160;&#160;&#160;(x)</td></tr>
 <tr class="separator:a299d63ebe043d6913621900505a6b5c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea3fde013110d06c5ee8ae9cc38355e0" id="r_aea3fde013110d06c5ee8ae9cc38355e0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#aea3fde013110d06c5ee8ae9cc38355e0">PSHR16</a>(a,  shift)&#160;&#160;&#160;(a)</td></tr>
+<tr class="separator:aea3fde013110d06c5ee8ae9cc38355e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57fdc3a2ab2739556453ccef0b497504" id="r_a57fdc3a2ab2739556453ccef0b497504"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a57fdc3a2ab2739556453ccef0b497504">PSHR32</a>(a,  shift)&#160;&#160;&#160;(a)</td></tr>
+<tr class="separator:a57fdc3a2ab2739556453ccef0b497504"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13b0b04631d6d5b2623e3f5e6246af4b" id="r_a13b0b04631d6d5b2623e3f5e6246af4b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a13b0b04631d6d5b2623e3f5e6246af4b">QCONST16</a>(x,  bits)&#160;&#160;&#160;(x)</td></tr>
+<tr class="separator:a13b0b04631d6d5b2623e3f5e6246af4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5dba7de670cda1c68ad76f75c50638f9" id="r_a5dba7de670cda1c68ad76f75c50638f9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a5dba7de670cda1c68ad76f75c50638f9">QCONST32</a>(x,  bits)&#160;&#160;&#160;(x)</td></tr>
+<tr class="separator:a5dba7de670cda1c68ad76f75c50638f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f4b7e11703467c53c5c5ed88790e780" id="r_a1f4b7e11703467c53c5c5ed88790e780"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a1f4b7e11703467c53c5c5ed88790e780">SATURATE16</a>(x,  a)&#160;&#160;&#160;(x)</td></tr>
+<tr class="separator:a1f4b7e11703467c53c5c5ed88790e780"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd51e0045706336f6e9b673c0eb63056" id="r_afd51e0045706336f6e9b673c0eb63056"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#afd51e0045706336f6e9b673c0eb63056">SATURATE32</a>(x,  a)&#160;&#160;&#160;(x)</td></tr>
+<tr class="separator:afd51e0045706336f6e9b673c0eb63056"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ad121534091908a9ed329053fb1bbe9" id="r_a0ad121534091908a9ed329053fb1bbe9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a0ad121534091908a9ed329053fb1bbe9">SHL16</a>(a,  shift)&#160;&#160;&#160;(a)</td></tr>
+<tr class="separator:a0ad121534091908a9ed329053fb1bbe9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4f9986177242e8bb398195a71ad510e" id="r_ae4f9986177242e8bb398195a71ad510e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#ae4f9986177242e8bb398195a71ad510e">SHL32</a>(a,  shift)&#160;&#160;&#160;(a)</td></tr>
+<tr class="separator:ae4f9986177242e8bb398195a71ad510e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a759be9766a4d1977aa16b269911b5dc7" id="r_a759be9766a4d1977aa16b269911b5dc7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a759be9766a4d1977aa16b269911b5dc7">SHR16</a>(a,  shift)&#160;&#160;&#160;(a)</td></tr>
+<tr class="separator:a759be9766a4d1977aa16b269911b5dc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2859cb58d15e7d8f2337b4c22c539756" id="r_a2859cb58d15e7d8f2337b4c22c539756"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a2859cb58d15e7d8f2337b4c22c539756">SHR32</a>(a,  shift)&#160;&#160;&#160;(a)</td></tr>
+<tr class="separator:a2859cb58d15e7d8f2337b4c22c539756"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a0ed1b68e90c114a9f3e099ef155a5b" id="r_a2a0ed1b68e90c114a9f3e099ef155a5b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a2a0ed1b68e90c114a9f3e099ef155a5b">SUB16</a>(a,  b)&#160;&#160;&#160;((a) - (b))</td></tr>
+<tr class="separator:a2a0ed1b68e90c114a9f3e099ef155a5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0c42080a68ca25ff20c4775a161e569" id="r_ad0c42080a68ca25ff20c4775a161e569"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#ad0c42080a68ca25ff20c4775a161e569">SUB32</a>(a,  b)&#160;&#160;&#160;((a) - (b))</td></tr>
+<tr class="separator:ad0c42080a68ca25ff20c4775a161e569"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21803771388f7c108e28f5077c6ee1d3" id="r_a21803771388f7c108e28f5077c6ee1d3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a21803771388f7c108e28f5077c6ee1d3">TOP16</a>(x)&#160;&#160;&#160;(x)</td></tr>
 <tr class="separator:a21803771388f7c108e28f5077c6ee1d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb9acae5c328f20698cb1c2d6adde96e" id="r_adb9acae5c328f20698cb1c2d6adde96e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#adb9acae5c328f20698cb1c2d6adde96e">VSHR32</a>(a,  shift)&#160;&#160;&#160;(a)</td></tr>
+<tr class="separator:adb9acae5c328f20698cb1c2d6adde96e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9677106bd940bb1da6ee9a673df157a3" id="r_a9677106bd940bb1da6ee9a673df157a3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a9677106bd940bb1da6ee9a673df157a3">WEIGHT_SHIFT</a>&#160;&#160;&#160;0</td></tr>
 <tr class="separator:a9677106bd940bb1da6ee9a673df157a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44fc38e6eb1986b67896fa10e2d2e3a0" id="r_a44fc38e6eb1986b67896fa10e2d2e3a0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a44fc38e6eb1986b67896fa10e2d2e3a0">WORD2INT</a>(x)</td></tr>
@@ -171,80 +245,52 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:aa915b3e19323fa0d7c345a1f0b2e20cb" id="r_aa915b3e19323fa0d7c345a1f0b2e20cb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typedef</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">struct</a> <a class="el" href="structaudio__tools_1_1echo__float__t.html">audio_tools::echo_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aa915b3e19323fa0d7c345a1f0b2e20cb">echo_float_t</a></td></tr>
-<tr class="separator:aa915b3e19323fa0d7c345a1f0b2e20cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a191308ec0d2fe9c0619a3422659f9367" id="r_a191308ec0d2fe9c0619a3422659f9367"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typedef</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a191308ec0d2fe9c0619a3422659f9367">echo_int16_t</a></td></tr>
-<tr class="separator:a191308ec0d2fe9c0619a3422659f9367"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54a1bd96d6cf5ec1152cd476f15579d1" id="r_a54a1bd96d6cf5ec1152cd476f15579d1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typedef</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a54a1bd96d6cf5ec1152cd476f15579d1">echo_int32_t</a></td></tr>
-<tr class="separator:a54a1bd96d6cf5ec1152cd476f15579d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3fa02d9aaec3d3a1aee08ac54903d21" id="r_aa3fa02d9aaec3d3a1aee08ac54903d21"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typedef</a> <a class="el" href="namespaceaudio__tools.html#a329ec576e637602096421dbbe55a1d5b">echo_word32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aa3fa02d9aaec3d3a1aee08ac54903d21">echo_mem_t</a></td></tr>
-<tr class="separator:aa3fa02d9aaec3d3a1aee08ac54903d21"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0612a1a35f5aaa5bf5d402bc639c5484" id="r_a0612a1a35f5aaa5bf5d402bc639c5484"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typedef</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a0612a1a35f5aaa5bf5d402bc639c5484">echo_uint16_t</a></td></tr>
-<tr class="separator:a0612a1a35f5aaa5bf5d402bc639c5484"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec6f2e34ff163a77e040db17916a8839" id="r_aec6f2e34ff163a77e040db17916a8839"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typedef</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aec6f2e34ff163a77e040db17916a8839">echo_uint32_t</a></td></tr>
-<tr class="separator:aec6f2e34ff163a77e040db17916a8839"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50bcbda07abc44e31fbac6d242331b76" id="r_a50bcbda07abc44e31fbac6d242331b76"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typedef</a> <a class="el" href="namespaceaudio__tools.html#a191308ec0d2fe9c0619a3422659f9367">echo_int16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a50bcbda07abc44e31fbac6d242331b76">echo_word16_t</a></td></tr>
-<tr class="separator:a50bcbda07abc44e31fbac6d242331b76"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a329ec576e637602096421dbbe55a1d5b" id="r_a329ec576e637602096421dbbe55a1d5b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typedef</a> <a class="el" href="namespaceaudio__tools.html#a54a1bd96d6cf5ec1152cd476f15579d1">echo_int32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a329ec576e637602096421dbbe55a1d5b">echo_word32_t</a></td></tr>
-<tr class="separator:a329ec576e637602096421dbbe55a1d5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6b87a5b6addb825f17d64767529bcf8a" id="r_ga6b87a5b6addb825f17d64767529bcf8a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typedef</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">struct</a> <a class="el" href="structaudio__tools_1_1_echo_state__.html">EchoState_</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___echo_state.html#ga6b87a5b6addb825f17d64767529bcf8a">EchoState</a></td></tr>
-<tr class="separator:ga6b87a5b6addb825f17d64767529bcf8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1c5e8e688bc325fde6d49a2c2eec5ebe" id="r_ga1c5e8e688bc325fde6d49a2c2eec5ebe"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___echo_state.html#ga1c5e8e688bc325fde6d49a2c2eec5ebe">echo_float_t</a> = float</td></tr>
+<tr class="separator:ga1c5e8e688bc325fde6d49a2c2eec5ebe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25c24b2079cdf78e398b7c49cb83d651" id="r_a25c24b2079cdf78e398b7c49cb83d651"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a25c24b2079cdf78e398b7c49cb83d651">echo_int16_t</a> = int16_t</td></tr>
+<tr class="separator:a25c24b2079cdf78e398b7c49cb83d651"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af041250f3317a01414c9fda16da1907c" id="r_af041250f3317a01414c9fda16da1907c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#af041250f3317a01414c9fda16da1907c">echo_int32_t</a> = int32_t</td></tr>
+<tr class="separator:af041250f3317a01414c9fda16da1907c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef705acbb0ca00146e22b9cbfd2617c5" id="r_aef705acbb0ca00146e22b9cbfd2617c5"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aef705acbb0ca00146e22b9cbfd2617c5">echo_mem_t</a> = <a class="el" href="namespaceaudio__tools.html#a5943246cc445502cb28745863b328d5a">echo_word32_t</a></td></tr>
+<tr class="separator:aef705acbb0ca00146e22b9cbfd2617c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d203e37d9a83712d19115102df7d6d2" id="r_a1d203e37d9a83712d19115102df7d6d2"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a1d203e37d9a83712d19115102df7d6d2">echo_uint16_t</a> = uint16_t</td></tr>
+<tr class="separator:a1d203e37d9a83712d19115102df7d6d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeaef611f8c0a6da262120cd6300522e5" id="r_aeaef611f8c0a6da262120cd6300522e5"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aeaef611f8c0a6da262120cd6300522e5">echo_uint32_t</a> = uint32_t</td></tr>
+<tr class="separator:aeaef611f8c0a6da262120cd6300522e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29b80463d2a6bc64c5ab5274bec5b7b0" id="r_a29b80463d2a6bc64c5ab5274bec5b7b0"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a> = float</td></tr>
+<tr class="separator:a29b80463d2a6bc64c5ab5274bec5b7b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5943246cc445502cb28745863b328d5a" id="r_a5943246cc445502cb28745863b328d5a"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a5943246cc445502cb28745863b328d5a">echo_word32_t</a> = float</td></tr>
+<tr class="separator:a5943246cc445502cb28745863b328d5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga177264c3cede1b9e72ecdd80bef819ad" id="r_ga177264c3cede1b9e72ecdd80bef819ad"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>  = std::allocator&lt;uint8_t&gt;&gt; </td></tr>
-<tr class="memitem:ga177264c3cede1b9e72ecdd80bef819ad"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___echo_state.html#ga177264c3cede1b9e72ecdd80bef819ad">echo_fft</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *table, <a class="el" href="namespaceaudio__tools.html#a50bcbda07abc44e31fbac6d242331b76">echo_word16_t</a> *in, <a class="el" href="namespaceaudio__tools.html#a50bcbda07abc44e31fbac6d242331b76">echo_word16_t</a> *out)</td></tr>
-<tr class="memdesc:ga177264c3cede1b9e72ecdd80bef819ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform forward FFT.  <br /></td></tr>
-<tr class="separator:ga177264c3cede1b9e72ecdd80bef819ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga82a873ffe7fe2f79dc5df96672096cf8" id="r_ga82a873ffe7fe2f79dc5df96672096cf8"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>  = std::allocator&lt;uint8_t&gt;&gt; </td></tr>
-<tr class="memitem:ga82a873ffe7fe2f79dc5df96672096cf8"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___echo_state.html#ga82a873ffe7fe2f79dc5df96672096cf8">echo_fft_destroy</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *table)</td></tr>
-<tr class="memdesc:ga82a873ffe7fe2f79dc5df96672096cf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy FFT state and release resources.  <br /></td></tr>
-<tr class="separator:ga82a873ffe7fe2f79dc5df96672096cf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4f73ecc3bed434639986f95cb3b5168c" id="r_ga4f73ecc3bed434639986f95cb3b5168c"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &gt; </td></tr>
-<tr class="memitem:ga4f73ecc3bed434639986f95cb3b5168c"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___echo_state.html#ga4f73ecc3bed434639986f95cb3b5168c">echo_fft_init</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> size, <a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html">AudioFFTBase</a> *driver, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">alloc</a>)</td></tr>
-<tr class="memdesc:ga4f73ecc3bed434639986f95cb3b5168c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize FFT state.  <br /></td></tr>
-<tr class="separator:ga4f73ecc3bed434639986f95cb3b5168c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad84d304f6c5320f6d1ba03fe89b12001" id="r_ad84d304f6c5320f6d1ba03fe89b12001"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ad84d304f6c5320f6d1ba03fe89b12001">echo_float_add</a> (<a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">a</a>, <a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">b</a>)</td></tr>
-<tr class="separator:ad84d304f6c5320f6d1ba03fe89b12001"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a66e03ccae9354f9eecfb9a13ebb1e287" id="r_a66e03ccae9354f9eecfb9a13ebb1e287"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a66e03ccae9354f9eecfb9a13ebb1e287">echo_float_divu</a> (<a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">a</a>, <a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">b</a>)</td></tr>
-<tr class="separator:a66e03ccae9354f9eecfb9a13ebb1e287"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae323f47c916936ea3280315373fc4a1f" id="r_ae323f47c916936ea3280315373fc4a1f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ae323f47c916936ea3280315373fc4a1f">echo_float_extract16</a> (<a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> x)</td></tr>
-<tr class="separator:ae323f47c916936ea3280315373fc4a1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe2bc24297a8bddfd6fffeaf8b3552a6" id="r_abe2bc24297a8bddfd6fffeaf8b3552a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#abe2bc24297a8bddfd6fffeaf8b3552a6">echo_float_from_double</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">double</a> x)</td></tr>
-<tr class="separator:abe2bc24297a8bddfd6fffeaf8b3552a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0eb893223205e3612325b08df9619683" id="r_a0eb893223205e3612325b08df9619683"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a0eb893223205e3612325b08df9619683">echo_float_gt</a> (<a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">a</a>, <a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">b</a>)</td></tr>
-<tr class="separator:a0eb893223205e3612325b08df9619683"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac3ac640f75a7d0347267bf3c76d405dc" id="r_ac3ac640f75a7d0347267bf3c76d405dc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ac3ac640f75a7d0347267bf3c76d405dc">echo_float_lt</a> (<a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">a</a>, <a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">b</a>)</td></tr>
-<tr class="separator:ac3ac640f75a7d0347267bf3c76d405dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a04eed2ebd239dd31b4129e9ec6be2700" id="r_a04eed2ebd239dd31b4129e9ec6be2700"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a04eed2ebd239dd31b4129e9ec6be2700">echo_float_mul32_u</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">a</a>, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">float</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">b</a>)</td></tr>
-<tr class="separator:a04eed2ebd239dd31b4129e9ec6be2700"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:affabad6a7a2d46fa0f7dfd5cef762fbb" id="r_affabad6a7a2d46fa0f7dfd5cef762fbb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#affabad6a7a2d46fa0f7dfd5cef762fbb">echo_float_mult</a> (<a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">a</a>, <a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">b</a>)</td></tr>
-<tr class="separator:affabad6a7a2d46fa0f7dfd5cef762fbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab735723b81e23fb6402b09acd75197e2" id="r_ab735723b81e23fb6402b09acd75197e2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ab735723b81e23fb6402b09acd75197e2">echo_float_shl</a> (<a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> x, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> bits)</td></tr>
-<tr class="separator:ab735723b81e23fb6402b09acd75197e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2be94583352536fa33bd9a6e7c4bda50" id="r_a2be94583352536fa33bd9a6e7c4bda50"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a2be94583352536fa33bd9a6e7c4bda50">echo_float_sqrt</a> (<a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> x)</td></tr>
-<tr class="separator:a2be94583352536fa33bd9a6e7c4bda50"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4fba2b1f7d4852d1f4779c175af0ae3" id="r_ae4fba2b1f7d4852d1f4779c175af0ae3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ae4fba2b1f7d4852d1f4779c175af0ae3">echo_float_sub</a> (<a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">a</a>, <a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">b</a>)</td></tr>
-<tr class="separator:ae4fba2b1f7d4852d1f4779c175af0ae3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0aa7adee7ff9bde5e85767d10a925306" id="r_ga0aa7adee7ff9bde5e85767d10a925306"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">typename</a> <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>  = std::allocator&lt;uint8_t&gt;&gt; </td></tr>
-<tr class="memitem:ga0aa7adee7ff9bde5e85767d10a925306"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___echo_state.html#ga0aa7adee7ff9bde5e85767d10a925306">echo_ifft</a> (<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">void</a> *table, <a class="el" href="namespaceaudio__tools.html#a50bcbda07abc44e31fbac6d242331b76">echo_word16_t</a> *in, <a class="el" href="namespaceaudio__tools.html#a50bcbda07abc44e31fbac6d242331b76">echo_word16_t</a> *out)</td></tr>
-<tr class="memdesc:ga0aa7adee7ff9bde5e85767d10a925306"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform inverse FFT.  <br /></td></tr>
-<tr class="separator:ga0aa7adee7ff9bde5e85767d10a925306"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga78803902f1b859158bdde1bb9aa07929" id="r_ga78803902f1b859158bdde1bb9aa07929"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___echo_state.html#ga78803902f1b859158bdde1bb9aa07929">echo_fft</a> (void *table, <a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a> *in, <a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a> *out)</td></tr>
+<tr class="memdesc:ga78803902f1b859158bdde1bb9aa07929"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform forward FFT.  <br /></td></tr>
+<tr class="separator:ga78803902f1b859158bdde1bb9aa07929"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaff1d3614f49928b0cc170f37eef5f4e1" id="r_gaff1d3614f49928b0cc170f37eef5f4e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___echo_state.html#gaff1d3614f49928b0cc170f37eef5f4e1">echo_fft_destroy</a> (void *table)</td></tr>
+<tr class="memdesc:gaff1d3614f49928b0cc170f37eef5f4e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy FFT state and release resources.  <br /></td></tr>
+<tr class="separator:gaff1d3614f49928b0cc170f37eef5f4e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1b99efc6ed1ddd23ab7e45af7fa2afe6" id="r_ga1b99efc6ed1ddd23ab7e45af7fa2afe6"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___echo_state.html#ga1b99efc6ed1ddd23ab7e45af7fa2afe6">echo_fft_init</a> (int size, <a class="el" href="classaudio__tools_1_1_f_f_t_driver.html">FFTDriver</a> *driver)</td></tr>
+<tr class="memdesc:ga1b99efc6ed1ddd23ab7e45af7fa2afe6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize FFT state.  <br /></td></tr>
+<tr class="separator:ga1b99efc6ed1ddd23ab7e45af7fa2afe6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga68f5fb894c8d97b6fa3196ad3746828d" id="r_ga68f5fb894c8d97b6fa3196ad3746828d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___echo_state.html#ga68f5fb894c8d97b6fa3196ad3746828d">echo_ifft</a> (void *table, <a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a> *in, <a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a> *out)</td></tr>
+<tr class="memdesc:ga68f5fb894c8d97b6fa3196ad3746828d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform inverse FFT.  <br /></td></tr>
+<tr class="separator:ga68f5fb894c8d97b6fa3196ad3746828d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a7da39b1953a2b7d6bdecde2f551c9697" id="r_a7da39b1953a2b7d6bdecde2f551c9697"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a7da39b1953a2b7d6bdecde2f551c9697">MIN_LEAK</a> = {164, -15}</td></tr>
-<tr class="separator:a7da39b1953a2b7d6bdecde2f551c9697"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8d7dc3f49575214afaa60249d1717ae8" id="r_a8d7dc3f49575214afaa60249d1717ae8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a8d7dc3f49575214afaa60249d1717ae8">VAR1_SMOOTH</a> = {11796, -15}</td></tr>
-<tr class="separator:a8d7dc3f49575214afaa60249d1717ae8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28cfeb79b8f4d053efb355533d269d04" id="r_a28cfeb79b8f4d053efb355533d269d04"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a28cfeb79b8f4d053efb355533d269d04">VAR1_UPDATE</a> = {16384, -15}</td></tr>
-<tr class="separator:a28cfeb79b8f4d053efb355533d269d04"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a05445c5c104350fe12003fd17a9f45" id="r_a2a05445c5c104350fe12003fd17a9f45"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a2a05445c5c104350fe12003fd17a9f45">VAR2_SMOOTH</a> = {23674, -15}</td></tr>
-<tr class="separator:a2a05445c5c104350fe12003fd17a9f45"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5fa021d9b6e147961bb35990f0b579b3" id="r_a5fa021d9b6e147961bb35990f0b579b3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a5fa021d9b6e147961bb35990f0b579b3">VAR2_UPDATE</a> = {8192, -15}</td></tr>
-<tr class="separator:a5fa021d9b6e147961bb35990f0b579b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2960fd2288cd8aee2d707ab839fa2e5" id="r_ac2960fd2288cd8aee2d707ab839fa2e5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">static</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">const</a> <a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ac2960fd2288cd8aee2d707ab839fa2e5">VAR_BACKTRACK</a> = {16384, 2}</td></tr>
-<tr class="separator:ac2960fd2288cd8aee2d707ab839fa2e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac61431203fdbf2feb53c206ea500211e" id="r_ac61431203fdbf2feb53c206ea500211e"><td class="memItemLeft" align="right" valign="top">static const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ac61431203fdbf2feb53c206ea500211e">MIN_LEAK</a> = 0.005f</td></tr>
+<tr class="separator:ac61431203fdbf2feb53c206ea500211e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3367ee056d6567de471361690b7c891" id="r_ae3367ee056d6567de471361690b7c891"><td class="memItemLeft" align="right" valign="top">static const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ae3367ee056d6567de471361690b7c891">VAR1_SMOOTH</a> = 0.36f</td></tr>
+<tr class="separator:ae3367ee056d6567de471361690b7c891"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98e373d634189e964daebb0b7c6b7991" id="r_a98e373d634189e964daebb0b7c6b7991"><td class="memItemLeft" align="right" valign="top">static const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a98e373d634189e964daebb0b7c6b7991">VAR1_UPDATE</a> = 0.5f</td></tr>
+<tr class="separator:a98e373d634189e964daebb0b7c6b7991"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ede59717d3b0dd0d68562a45fa8c8bb" id="r_a9ede59717d3b0dd0d68562a45fa8c8bb"><td class="memItemLeft" align="right" valign="top">static const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a9ede59717d3b0dd0d68562a45fa8c8bb">VAR2_SMOOTH</a> = 0.7225f</td></tr>
+<tr class="separator:a9ede59717d3b0dd0d68562a45fa8c8bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e525981078046e81e3e04316acb2601" id="r_a8e525981078046e81e3e04316acb2601"><td class="memItemLeft" align="right" valign="top">static const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a8e525981078046e81e3e04316acb2601">VAR2_UPDATE</a> = 0.25f</td></tr>
+<tr class="separator:a8e525981078046e81e3e04316acb2601"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac314a18f1a9ddd93057725c4b17d1f54" id="r_ac314a18f1a9ddd93057725c4b17d1f54"><td class="memItemLeft" align="right" valign="top">static const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ac314a18f1a9ddd93057725c4b17d1f54">VAR_BACKTRACK</a> = 4.0f</td></tr>
+<tr class="separator:ac314a18f1a9ddd93057725c4b17d1f54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a996f7be338ccb40d1a2a5abc1ad61759" name="a996f7be338ccb40d1a2a5abc1ad61759"></a>
@@ -295,6 +341,118 @@ Variables</h2></td></tr>
           <td class="paramtype">&#160;</td>
           <td class="paramname">x</td><td>)</td>
           <td>&#160;&#160;&#160;(((x) &lt; 0) ? (-(x)) : (x))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ada9407a834281b7256402de509127574" name="ada9407a834281b7256402de509127574"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada9407a834281b7256402de509127574">&#9670;&#160;</a></span>ADD16</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ADD16</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;((a) + (b))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a331894711c95732356e8b51c68d4d440" name="a331894711c95732356e8b51c68d4d440"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a331894711c95732356e8b51c68d4d440">&#9670;&#160;</a></span>ADD32</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ADD32</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;((a) + (b))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3b23497328e2818e4ff96e32bd0b00c6" name="a3b23497328e2818e4ff96e32bd0b00c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b23497328e2818e4ff96e32bd0b00c6">&#9670;&#160;</a></span>DIV32</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DIV32</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;(((echo_word32_t)(a)) / (echo_word32_t)(b))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac32eb42f66a75c1c2c510fa9dbaa375c" name="ac32eb42f66a75c1c2c510fa9dbaa375c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac32eb42f66a75c1c2c510fa9dbaa375c">&#9670;&#160;</a></span>DIV32_16</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DIV32_16</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;(((echo_word32_t)(a)) / (echo_word16_t)(b))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -371,6 +529,42 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a5adea5f484325b71c8a1cf2f557c1f2b" name="a5adea5f484325b71c8a1cf2f557c1f2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5adea5f484325b71c8a1cf2f557c1f2b">&#9670;&#160;</a></span>EXTEND32</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EXTEND32</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x</td><td>)</td>
+          <td>&#160;&#160;&#160;(x)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a64696e84a91640d6873867e613c45156" name="a64696e84a91640d6873867e613c45156"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64696e84a91640d6873867e613c45156">&#9670;&#160;</a></span>EXTRACT16</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EXTRACT16</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x</td><td>)</td>
+          <td>&#160;&#160;&#160;(x)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ad85f960de919ab744f9a1c17ba7b80f3" name="ad85f960de919ab744f9a1c17ba7b80f3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad85f960de919ab744f9a1c17ba7b80f3">&#9670;&#160;</a></span>FLOAT_ADD</h2>
 
@@ -392,7 +586,91 @@ Variables</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;(echo_float_add(a, b))</td>
+          <td></td><td>&#160;&#160;&#160;((a) + (b))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2a069956463a42a16032c462349d94b7" name="a2a069956463a42a16032c462349d94b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a069956463a42a16032c462349d94b7">&#9670;&#160;</a></span>FLOAT_AMULT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FLOAT_AMULT</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;((a) * (b))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab41e80de39661e16c9a4156b68e555f6" name="ab41e80de39661e16c9a4156b68e555f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab41e80de39661e16c9a4156b68e555f6">&#9670;&#160;</a></span>FLOAT_DIV32</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FLOAT_DIV32</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;((a) / (b))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6c06d474d2b30f6c9e0b857396c5f6ea" name="a6c06d474d2b30f6c9e0b857396c5f6ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c06d474d2b30f6c9e0b857396c5f6ea">&#9670;&#160;</a></span>FLOAT_DIV32_FLOAT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FLOAT_DIV32_FLOAT</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;((a) / (b))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -420,7 +698,7 @@ Variables</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;(echo_float_divu(a, b))</td>
+          <td></td><td>&#160;&#160;&#160;((a) / (b))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -438,7 +716,25 @@ Variables</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">a</td><td>)</td>
-          <td>&#160;&#160;&#160;(echo_float_extract16(a))</td>
+          <td>&#160;&#160;&#160;(a)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac5128c94ba2661bdd6f3bf4cb14f5328" name="ac5128c94ba2661bdd6f3bf4cb14f5328"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5128c94ba2661bdd6f3bf4cb14f5328">&#9670;&#160;</a></span>FLOAT_EXTRACT32</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FLOAT_EXTRACT32</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a</td><td>)</td>
+          <td>&#160;&#160;&#160;(a)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -466,7 +762,7 @@ Variables</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;(echo_float_gt(a, b))</td>
+          <td></td><td>&#160;&#160;&#160;((a) &gt; (b))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -494,7 +790,35 @@ Variables</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;(echo_float_lt(a, b))</td>
+          <td></td><td>&#160;&#160;&#160;((a) &lt; (b))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad2dba1a0facae3cbb44c050cbd40b3be" name="ad2dba1a0facae3cbb44c050cbd40b3be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2dba1a0facae3cbb44c050cbd40b3be">&#9670;&#160;</a></span>FLOAT_MUL32</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FLOAT_MUL32</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;((a) * (b))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -522,7 +846,7 @@ Variables</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;(echo_float_mul32_u(a, b))</td>
+          <td></td><td>&#160;&#160;&#160;((a) * (b))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -550,7 +874,7 @@ Variables</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;(echo_float_mult(a, b))</td>
+          <td></td><td>&#160;&#160;&#160;((a) * (b))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -578,7 +902,7 @@ Variables</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;(echo_float_shl(a, b))</td>
+          <td></td><td>&#160;&#160;&#160;(a)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -596,7 +920,7 @@ Variables</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">a</td><td>)</td>
-          <td>&#160;&#160;&#160;(echo_float_sqrt(a))</td>
+          <td>&#160;&#160;&#160;(sqrtf(a))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -624,7 +948,75 @@ Variables</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;(echo_float_sub(a, b))</td>
+          <td></td><td>&#160;&#160;&#160;((a) - (b))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a36b4ca37425ac01d0ccf1f8100026231" name="a36b4ca37425ac01d0ccf1f8100026231"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36b4ca37425ac01d0ccf1f8100026231">&#9670;&#160;</a></span>MAC16_16</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAC16_16</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">c, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;((c) + (echo_word32_t)(a) * (echo_word32_t)(b))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a23677ee1b137ed99e0653f928bfd3995" name="a23677ee1b137ed99e0653f928bfd3995"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23677ee1b137ed99e0653f928bfd3995">&#9670;&#160;</a></span>MAC16_32_Q15</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAC16_32_Q15</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">c, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;((c) + (a) * (b))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -743,6 +1135,322 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a53904429ea46182d094504978a2771bc" name="a53904429ea46182d094504978a2771bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53904429ea46182d094504978a2771bc">&#9670;&#160;</a></span>MULT16_16</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MULT16_16</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;((echo_word32_t)(a) * (echo_word32_t)(b))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae745399db3ebb255c2339111d386f1b2" name="ae745399db3ebb255c2339111d386f1b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae745399db3ebb255c2339111d386f1b2">&#9670;&#160;</a></span>MULT16_16_P13</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MULT16_16_P13</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;((a) * (b))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8fb759c201b20f832878e3a5bd7b1158" name="a8fb759c201b20f832878e3a5bd7b1158"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8fb759c201b20f832878e3a5bd7b1158">&#9670;&#160;</a></span>MULT16_16_P14</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MULT16_16_P14</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;((a) * (b))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afeb9b528bd83183bf99dbe8513202cee" name="afeb9b528bd83183bf99dbe8513202cee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afeb9b528bd83183bf99dbe8513202cee">&#9670;&#160;</a></span>MULT16_16_P15</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MULT16_16_P15</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;((a) * (b))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4f84ebe2ea6147d78c059c85ae0f255a" name="a4f84ebe2ea6147d78c059c85ae0f255a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f84ebe2ea6147d78c059c85ae0f255a">&#9670;&#160;</a></span>MULT16_16_Q13</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MULT16_16_Q13</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;((a) * (b))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a12dcf0da378f40c7302a182a0e1ae0db" name="a12dcf0da378f40c7302a182a0e1ae0db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12dcf0da378f40c7302a182a0e1ae0db">&#9670;&#160;</a></span>MULT16_16_Q14</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MULT16_16_Q14</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;((a) * (b))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aef7e5333cb053a993c157a9b0440fcbc" name="aef7e5333cb053a993c157a9b0440fcbc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef7e5333cb053a993c157a9b0440fcbc">&#9670;&#160;</a></span>MULT16_16_Q15</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MULT16_16_Q15</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;((a) * (b))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6886d183257ae41e054e6315e65683b4" name="a6886d183257ae41e054e6315e65683b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6886d183257ae41e054e6315e65683b4">&#9670;&#160;</a></span>MULT16_32_P15</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MULT16_32_P15</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;((a) * (b))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad7087da193fab7691b50a3cca724e8a1" name="ad7087da193fab7691b50a3cca724e8a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7087da193fab7691b50a3cca724e8a1">&#9670;&#160;</a></span>MULT16_32_Q14</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MULT16_32_Q14</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;((a) * (b))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aff95b426e771540c73a3ad1e4dd2b429" name="aff95b426e771540c73a3ad1e4dd2b429"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff95b426e771540c73a3ad1e4dd2b429">&#9670;&#160;</a></span>MULT16_32_Q15</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MULT16_32_Q15</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;((a) * (b))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a051e97a9f43e035c9e825846db9e6e47" name="a051e97a9f43e035c9e825846db9e6e47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a051e97a9f43e035c9e825846db9e6e47">&#9670;&#160;</a></span>NEG16</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEG16</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x</td><td>)</td>
+          <td>&#160;&#160;&#160;(-(x))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="addfb22b1d5f37af2fafb4b2e6e1b2b45" name="addfb22b1d5f37af2fafb4b2e6e1b2b45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#addfb22b1d5f37af2fafb4b2e6e1b2b45">&#9670;&#160;</a></span>NEG32</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEG32</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x</td><td>)</td>
+          <td>&#160;&#160;&#160;(-(x))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a299d63ebe043d6913621900505a6b5c4" name="a299d63ebe043d6913621900505a6b5c4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a299d63ebe043d6913621900505a6b5c4">&#9670;&#160;</a></span>PSEUDOFLOAT</h2>
 
@@ -754,7 +1462,343 @@ Variables</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">x</td><td>)</td>
-          <td>&#160;&#160;&#160;(echo_float_from_double(x))</td>
+          <td>&#160;&#160;&#160;(x)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aea3fde013110d06c5ee8ae9cc38355e0" name="aea3fde013110d06c5ee8ae9cc38355e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea3fde013110d06c5ee8ae9cc38355e0">&#9670;&#160;</a></span>PSHR16</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PSHR16</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">shift&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;(a)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a57fdc3a2ab2739556453ccef0b497504" name="a57fdc3a2ab2739556453ccef0b497504"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57fdc3a2ab2739556453ccef0b497504">&#9670;&#160;</a></span>PSHR32</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PSHR32</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">shift&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;(a)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a13b0b04631d6d5b2623e3f5e6246af4b" name="a13b0b04631d6d5b2623e3f5e6246af4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13b0b04631d6d5b2623e3f5e6246af4b">&#9670;&#160;</a></span>QCONST16</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define QCONST16</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">bits&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;(x)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5dba7de670cda1c68ad76f75c50638f9" name="a5dba7de670cda1c68ad76f75c50638f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5dba7de670cda1c68ad76f75c50638f9">&#9670;&#160;</a></span>QCONST32</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define QCONST32</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">bits&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;(x)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1f4b7e11703467c53c5c5ed88790e780" name="a1f4b7e11703467c53c5c5ed88790e780"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f4b7e11703467c53c5c5ed88790e780">&#9670;&#160;</a></span>SATURATE16</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SATURATE16</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;(x)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afd51e0045706336f6e9b673c0eb63056" name="afd51e0045706336f6e9b673c0eb63056"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd51e0045706336f6e9b673c0eb63056">&#9670;&#160;</a></span>SATURATE32</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SATURATE32</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;(x)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0ad121534091908a9ed329053fb1bbe9" name="a0ad121534091908a9ed329053fb1bbe9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ad121534091908a9ed329053fb1bbe9">&#9670;&#160;</a></span>SHL16</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SHL16</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">shift&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;(a)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae4f9986177242e8bb398195a71ad510e" name="ae4f9986177242e8bb398195a71ad510e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4f9986177242e8bb398195a71ad510e">&#9670;&#160;</a></span>SHL32</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SHL32</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">shift&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;(a)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a759be9766a4d1977aa16b269911b5dc7" name="a759be9766a4d1977aa16b269911b5dc7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a759be9766a4d1977aa16b269911b5dc7">&#9670;&#160;</a></span>SHR16</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SHR16</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">shift&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;(a)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2859cb58d15e7d8f2337b4c22c539756" name="a2859cb58d15e7d8f2337b4c22c539756"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2859cb58d15e7d8f2337b4c22c539756">&#9670;&#160;</a></span>SHR32</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SHR32</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">shift&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;(a)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2a0ed1b68e90c114a9f3e099ef155a5b" name="a2a0ed1b68e90c114a9f3e099ef155a5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a0ed1b68e90c114a9f3e099ef155a5b">&#9670;&#160;</a></span>SUB16</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SUB16</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;((a) - (b))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad0c42080a68ca25ff20c4775a161e569" name="ad0c42080a68ca25ff20c4775a161e569"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0c42080a68ca25ff20c4775a161e569">&#9670;&#160;</a></span>SUB32</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SUB32</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;((a) - (b))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -773,6 +1817,34 @@ Variables</h2></td></tr>
           <td class="paramtype">&#160;</td>
           <td class="paramname">x</td><td>)</td>
           <td>&#160;&#160;&#160;(x)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adb9acae5c328f20698cb1c2d6adde96e" name="adb9acae5c328f20698cb1c2d6adde96e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb9acae5c328f20698cb1c2d6adde96e">&#9670;&#160;</a></span>VSHR32</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VSHR32</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">shift&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;(a)</td>
         </tr>
       </table>
 </div><div class="memdoc">

@@ -92,12 +92,12 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> <span class="keyword">public</span>:</div>
 <div class="foldopen" id="foldopen00018" data-start="{" data-end="}">
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_no_interrupt_handler.html#ad81318257fd78328c5c86fa6a3a861dd">   18</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_no_interrupt_handler.html#ad81318257fd78328c5c86fa6a3a861dd">lock</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">noInterrupts</a>();</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    noInterrupts();</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  }</div>
 </div>
 <div class="foldopen" id="foldopen00021" data-start="{" data-end="}">
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_no_interrupt_handler.html#a333677ac769a10df2775f24893e07c21">   21</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_no_interrupt_handler.html#a333677ac769a10df2775f24893e07c21">unlock</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">interrupts</a>();</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    interrupts();</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  }</div>
 </div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>};</div>
@@ -108,24 +108,24 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> <span class="keyword">public</span>:</div>
 <div class="foldopen" id="foldopen00040" data-start="{" data-end="}">
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_mutex_r_p2040.html#af0ff1db88598378f0082de9d04753d1b">   40</a></span>  <a class="code hl_function" href="classaudio__tools_1_1_mutex_r_p2040.html#af0ff1db88598378f0082de9d04753d1b">MutexRP2040</a>() {</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">mutex_init</a>(&amp;<a class="code hl_variable" href="classaudio__tools_1_1_mutex_r_p2040.html#a5f1394c1d77ba2f8c347dbf2785ec80e">mtx</a>);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    mutex_init(&amp;<a class="code hl_variable" href="classaudio__tools_1_1_mutex_r_p2040.html#a5f1394c1d77ba2f8c347dbf2785ec80e">mtx</a>);</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  }</div>
 </div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_mutex_r_p2040.html#a4f535317613469e5b57420fed87755d3">   43</a></span>  <span class="keyword">virtual</span> <a class="code hl_function" href="classaudio__tools_1_1_mutex_r_p2040.html#a4f535317613469e5b57420fed87755d3">~MutexRP2040</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
 <div class="foldopen" id="foldopen00045" data-start="{" data-end="}">
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_mutex_r_p2040.html#ad81318257fd78328c5c86fa6a3a861dd">   45</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_mutex_r_p2040.html#ad81318257fd78328c5c86fa6a3a861dd">lock</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">mutex_enter_blocking</a>(&amp;<a class="code hl_variable" href="classaudio__tools_1_1_mutex_r_p2040.html#a5f1394c1d77ba2f8c347dbf2785ec80e">mtx</a>);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    mutex_enter_blocking(&amp;<a class="code hl_variable" href="classaudio__tools_1_1_mutex_r_p2040.html#a5f1394c1d77ba2f8c347dbf2785ec80e">mtx</a>);</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  }</div>
 </div>
 <div class="foldopen" id="foldopen00048" data-start="{" data-end="}">
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_mutex_r_p2040.html#a333677ac769a10df2775f24893e07c21">   48</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_mutex_r_p2040.html#a333677ac769a10df2775f24893e07c21">unlock</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">mutex_exit</a>(&amp;<a class="code hl_variable" href="classaudio__tools_1_1_mutex_r_p2040.html#a5f1394c1d77ba2f8c347dbf2785ec80e">mtx</a>);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    mutex_exit(&amp;<a class="code hl_variable" href="classaudio__tools_1_1_mutex_r_p2040.html#a5f1394c1d77ba2f8c347dbf2785ec80e">mtx</a>);</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  }</div>
 </div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_mutex_r_p2040.html#a5f1394c1d77ba2f8c347dbf2785ec80e">   53</a></span>  <a class="code hl_function" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">mutex_t</a> <a class="code hl_variable" href="classaudio__tools_1_1_mutex_r_p2040.html#a5f1394c1d77ba2f8c347dbf2785ec80e">mtx</a>;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_mutex_r_p2040.html#a5f1394c1d77ba2f8c347dbf2785ec80e">   53</a></span>  mutex_t <a class="code hl_variable" href="classaudio__tools_1_1_mutex_r_p2040.html#a5f1394c1d77ba2f8c347dbf2785ec80e">mtx</a>;</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>};</div>
 </div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
@@ -143,8 +143,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_no_interrupt_handler_html"><div class="ttname"><a href="classaudio__tools_1_1_no_interrupt_handler.html">audio_tools::NoInterruptHandler</a></div><div class="ttdoc">Disable, enable interrupts (only on the actual core)</div><div class="ttdef"><b>Definition</b> MutexRP2040.h:16</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_no_interrupt_handler_html_a333677ac769a10df2775f24893e07c21"><div class="ttname"><a href="classaudio__tools_1_1_no_interrupt_handler.html#a333677ac769a10df2775f24893e07c21">audio_tools::NoInterruptHandler::unlock</a></div><div class="ttdeci">void unlock() override</div><div class="ttdef"><b>Definition</b> MutexRP2040.h:21</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_no_interrupt_handler_html_ad81318257fd78328c5c86fa6a3a861dd"><div class="ttname"><a href="classaudio__tools_1_1_no_interrupt_handler.html#ad81318257fd78328c5c86fa6a3a861dd">audio_tools::NoInterruptHandler::lock</a></div><div class="ttdeci">void lock() override</div><div class="ttdef"><b>Definition</b> MutexRP2040.h:18</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:10</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html_ae3c87ac6df70d80e2a4be8979e63cc2e"><div class="ttname"><a href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">audio_tools::writeData</a></div><div class="ttdeci">size_t writeData(Print *p_out, T *data, int samples, int maxSamples=512)</div><div class="ttdef"><b>Definition</b> AudioTypes.h:508</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> LMSEchoCancellationStream.h:6</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['w_0',['W',['../group___echo_state.html#ga2f1ba93ec6c7a906dc89cd5e756e8113',1,'audio_tools::EchoState_']]],
+  ['w_0',['W',['../group___echo_state.html#ga2f1ba93ec6c7a906dc89cd5e756e8113',1,'audio_tools::EchoState']]],
   ['w_5f0_1',['w_0',['../classaudio__tools_1_1_bi_quad_d_f2.html#a2267aadc45738cfe1cb97b9559fd9367',1,'audio_tools::BiQuadDF2']]],
   ['w_5f1_2',['w_1',['../classaudio__tools_1_1_bi_quad_d_f2.html#a598d2e75d74526b143114836454d742d',1,'audio_tools::BiQuadDF2']]],
   ['wait_5ffor_5fconnection_3',['wait_for_connection',['../classaudio__tools_1_1_a2_d_p_config.html#aa7690bfcae37b7b143d4031eea1c0eea',1,'audio_tools::A2DPConfig']]],
@@ -20,11 +20,11 @@ var searchData=
   ['white_5fvalues_17',['white_values',['../classaudio__tools_1_1_pink_noise_generator.html#acfa5abe8acc209348ca13d1aa08949dd',1,'audio_tools::PinkNoiseGenerator']]],
   ['wifi_18',['wifi',['../namespaceaudio__tools.html#ab0c0a2439f1fc29fbd9a459087c648f5',1,'audio_tools::WiFi'],['../classaudio__tools_1_1_audio_player_protocol_server.html#add3b8ef2d0bc9c453e144f2a2bd82e91',1,'audio_tools::AudioPlayerProtocolServer::wifi'],['../classaudio__tools_1_1_audio_server_ex.html#add3b8ef2d0bc9c453e144f2a2bd82e91',1,'audio_tools::AudioServerEx::wifi']]],
   ['wifi_5fmode_19',['wifi_mode',['../structaudio__tools_1_1_e_s_p_now_stream_config.html#a14d88572ae50a8d21f3e6605e6f059e8',1,'audio_tools::ESPNowStreamConfig']]],
-  ['window_20',['window',['../classaudio__tools_1_1_jpeg_open_c_v.html#a2a1fd97d51d689b2cbf19aae6f42487b',1,'audio_tools::JpegOpenCV::window'],['../group___echo_state.html#gad62f7782034c388eb3c69e8bef878734',1,'audio_tools::EchoState_::window']]],
+  ['window_20',['window',['../classaudio__tools_1_1_jpeg_open_c_v.html#a2a1fd97d51d689b2cbf19aae6f42487b',1,'audio_tools::JpegOpenCV::window'],['../group___echo_state.html#gad62f7782034c388eb3c69e8bef878734',1,'audio_tools::EchoState::window']]],
   ['window_5ffunction_21',['window_function',['../structaudio__tools_1_1_audio_f_f_t_config.html#a844cd7e00ad0a62016fe513da4d3bf73',1,'audio_tools::AudioFFTConfig::window_function'],['../structaudio__tools_1_1_f_f_t_effect_config.html#a844cd7e00ad0a62016fe513da4d3bf73',1,'audio_tools::FFTEffectConfig::window_function']]],
   ['window_5ffunction_5ffft_22',['window_function_fft',['../structaudio__tools_1_1_audio_f_f_t_config.html#a54b93a0d60348be00e5ce74a590619bb',1,'audio_tools::AudioFFTConfig']]],
   ['window_5ffunction_5fifft_23',['window_function_ifft',['../structaudio__tools_1_1_audio_f_f_t_config.html#a239482ff42a24a69a1c1a530da81a291',1,'audio_tools::AudioFFTConfig']]],
-  ['window_5fsize_24',['window_size',['../group___echo_state.html#ga1c7df51cd44a9862d56e5a86a7382fe2',1,'audio_tools::EchoState_']]],
+  ['window_5fsize_24',['window_size',['../group___echo_state.html#ga1c7df51cd44a9862d56e5a86a7382fe2',1,'audio_tools::EchoState']]],
   ['windowcoeffs_25',['windowCoeffs',['../classaudio__tools_1_1_equalizer_n_bands.html#ab162ec9959964609fc93431e4ebdf8a6',1,'audio_tools::EqualizerNBands']]],
   ['wire_26',['wire',['../classaudio__tools_1_1_w_m8960_config.html#ab8d8f9af97a698a5a73132c347acbaf4',1,'audio_tools::WM8960Config']]],
   ['with_5foutput_5fbuffer_27',['with_output_buffer',['../classaudio__tools_1_1_faust_stream.html#ab3edf0d7b9d897bdc087de47a4b2c0aa',1,'audio_tools::FaustStream']]],
@@ -50,5 +50,5 @@ var searchData=
   ['writer_5fptr_47',['writer_ptr',['../classaudio__tools_1_1_encoded_audio_output.html#a5893e22e84a0f40d771d1d8d0cb8e070',1,'audio_tools::EncodedAudioOutput']]],
   ['writewait_48',['writewait',['../classaudio__tools_1_1_buffer_r_t_o_s.html#a1d12dbda5da27a49c3a03b730731693e',1,'audio_tools::BufferRTOS::writeWait'],['../classaudio__tools_1_1_buffer_zephyr.html#a7ec9bb4c39399295073761466d0c3b16',1,'audio_tools::BufferZephyr::writeWait']]],
   ['written_49',['written',['../classaudio__tools_1_1_a_p_t_x_decoder.html#ac7ab1030344ab638a27ba415c914288a',1,'audio_tools::APTXDecoder']]],
-  ['wtmp_50',['wtmp',['../group___echo_state.html#gae87fca25dfdf6c89044c8eb4bdd1100e',1,'audio_tools::EchoState_']]]
+  ['wtmp_50',['wtmp',['../group___echo_state.html#gae87fca25dfdf6c89044c8eb4bdd1100e',1,'audio_tools::EchoState']]]
 ];

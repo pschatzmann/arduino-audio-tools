@@ -96,10 +96,10 @@ Inheritance diagram for HttpLineReader:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a90b98624f283d62be8dfd18e43bf5bb4" id="r_a90b98624f283d62be8dfd18e43bf5bb4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_http_line_reader.html#a90b98624f283d62be8dfd18e43bf5bb4">HttpLineReader</a> ()=<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">default</a></td></tr>
+<tr class="memitem:a90b98624f283d62be8dfd18e43bf5bb4" id="r_a90b98624f283d62be8dfd18e43bf5bb4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_http_line_reader.html#a90b98624f283d62be8dfd18e43bf5bb4">HttpLineReader</a> ()=default</td></tr>
 <tr class="memdesc:a90b98624f283d62be8dfd18e43bf5bb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <br /></td></tr>
 <tr class="separator:a90b98624f283d62be8dfd18e43bf5bb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8a38528866c46ed49041c59836444bf" id="r_ac8a38528866c46ed49041c59836444bf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_http_line_reader.html#ac8a38528866c46ed49041c59836444bf">readlnInternal</a> (<a class="el" href="class_stream.html">Stream</a> &amp;client, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *str, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> len, <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">incl_nl</a>=<a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">true</a>)</td></tr>
+<tr class="memitem:ac8a38528866c46ed49041c59836444bf" id="r_ac8a38528866c46ed49041c59836444bf"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_http_line_reader.html#ac8a38528866c46ed49041c59836444bf">readlnInternal</a> (<a class="el" href="class_stream.html">Stream</a> &amp;client, uint8_t *str, int len, bool incl_nl=true)</td></tr>
 <tr class="memdesc:ac8a38528866c46ed49041c59836444bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads up the the next CR LF - but never more then the indicated len.  <br /></td></tr>
 <tr class="separator:ac8a38528866c46ed49041c59836444bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -146,7 +146,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">virtual</a> <a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a> readlnInternal </td>
+          <td class="memname">virtual int readlnInternal </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_stream.html">Stream</a> &amp;&#160;</td>
           <td class="paramname"><em>client</em>, </td>
@@ -154,20 +154,20 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">uint8_t</a> *&#160;</td>
+          <td class="paramtype">uint8_t *&#160;</td>
           <td class="paramname"><em>str</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">int</a>&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>len</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">bool</a>&#160;</td>
-          <td class="paramname"><em>incl_nl</em> = <code><a class="el" href="namespaceaudio__tools.html#ae3c87ac6df70d80e2a4be8979e63cc2e">true</a></code>&#160;</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>incl_nl</em> = <code>true</code>&#160;</td>
         </tr>
         <tr>
           <td></td>

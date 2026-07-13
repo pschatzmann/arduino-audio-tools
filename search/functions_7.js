@@ -101,7 +101,7 @@ var searchData=
   ['getdriver_98',['getDriver',['../classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#aa7292b5ad8754d05c49b3f9cc6ec172e',1,'audio_tools::I2SDriverESP32V1']]],
   ['getdsp_99',['getDSP',['../classaudio__tools_1_1_faust_stream.html#ac9a441c52633431b76b135e4cb9125c9',1,'audio_tools::FaustStream']]],
   ['getduration_100',['getDuration',['../classaudio__tools_1_1_delay.html#ab498d8bdfb8bbf00d8bcf22e8447066e',1,'audio_tools::Delay']]],
-  ['getechocanceller_101',['getEchoCanceller',['../classaudio__tools_1_1_m_d_f_echo_cancellation_stream.html#aed1aa7a354b22f43abda138d12cdae01',1,'audio_tools::MDFEchoCancellationStream']]],
+  ['getechocanceller_101',['getEchoCanceller',['../classaudio__tools_1_1_m_d_f_echo_cancellation_stream.html#a23c82945a708bc33cb916abb22066d3a',1,'audio_tools::MDFEchoCancellationStream']]],
   ['getencoder_102',['getencoder',['../classaudio__tools_1_1_encoded_audio_stream.html#a4933952b29bc118961d5e97bbb5fe4ed',1,'audio_tools::EncodedAudioStream::getEncoder()'],['../classaudio__tools_1_1_encoded_audio_output.html#a4933952b29bc118961d5e97bbb5fe4ed',1,'audio_tools::EncodedAudioOutput::getEncoder()']]],
   ['getend_103',['getEnd',['../classaudio__tools_1_1_o_s_c_data.html#aab5fd31e6737524b77455389ee3f4b67',1,'audio_tools::OSCData']]],
   ['getendpos_104',['getEndPos',['../classaudio__tools_1_1_k_a_radio_protocol.html#a0f0e4862aca4c7f792a19dafd5faca08',1,'audio_tools::KARadioProtocol']]],
