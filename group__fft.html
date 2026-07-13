@@ -84,6 +84,9 @@ Modules</h2></td></tr>
 <tr class="memitem:group__fft-cmsis" id="r_group__fft-cmsis"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fft-cmsis.html">CMSIS</a></td></tr>
 <tr class="memdesc:group__fft-cmsis"><td class="mdescLeft">&#160;</td><td class="mdescRight">FFT using CMSIS. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group__fft-window" id="r_group__fft-window"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fft-window.html">FFT-Window</a></td></tr>
+<tr class="memdesc:group__fft-window"><td class="mdescLeft">&#160;</td><td class="mdescRight">FFT Window Functions. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:group__fft-fixed" id="r_group__fft-fixed"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fft-fixed.html">FixedFFT</a></td></tr>
 <tr class="memdesc:group__fft-fixed"><td class="mdescLeft">&#160;</td><td class="mdescRight">FFT using fixedpoint-fft (<a href="https://github.com/pschatzmann/fixedpoint-fft">https://github.com/pschatzmann/fixedpoint-fft</a>) <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -113,6 +116,9 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_driver.html">FFTDriver</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract Class which defines the basic FFT functionality.  <a href="classaudio__tools_1_1_f_f_t_driver.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_effect.html">FFTEffect</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract base class for effects that operate on audio in the frequency domain: incoming samples are transformed with a forward FFT, the resulting bins are modified by the <a class="el" href="classaudio__tools_1_1_f_f_t_effect.html#adc876fa966507cd8354864b94e7d6c38">effect()</a> method that a subclass implements, and the modified spectrum is transformed back with an inverse FFT (overlap-add) and streamed to the output.  <a href="classaudio__tools_1_1_f_f_t_effect.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
