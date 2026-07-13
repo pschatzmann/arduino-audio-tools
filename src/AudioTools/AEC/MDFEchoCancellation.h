@@ -366,11 +366,6 @@ static const float VAR_BACKTRACK = 4.0f;
 #endif  // FIXED_POINT
 
 
-/** @defgroup EchoState EchoState: Acoustic echo canceller
- *  This is the acoustic echo canceller module.
- *  @{
- */
-
 // Floating point type definition (for non-FIXED_POINT mode)
 #ifndef FIXED_POINT
 using echo_float_t = float;
