@@ -6,11 +6,6 @@
 #include <type_traits>
 #endif
 
-/**
- * @defgroup dsp DSP
- * @ingroup main
- * @brief Digital Signal Processing
- **/
 
 /**
  * @defgroup filter Filters

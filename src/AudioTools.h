@@ -68,6 +68,18 @@
  * @brief Basic Concepts
  */
 
+/**
+ * @defgroup dsp DSP
+ * @ingroup main
+ * @brief Digital Signal Processing
+ **/
+
+/**
+ * @defgroup aec AEC
+ * @ingroup dsp
+ * @brief Automatic Echo Cancellation
+ **/
+
 
 #include "AudioToolsConfig.h"
 

@@ -8,12 +8,6 @@
 #define M_PI (3.14159265358979323846f)
 #endif
 
-/**
- * @defgroup dsp DSP
- * @ingroup main
- * @brief Digital Signal Processing
- **/
-
 namespace audio_tools {
 
 /**
