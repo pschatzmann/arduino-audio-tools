@@ -42,8 +42,14 @@ namespace audio_tools {
 /** Enable fixed-point arithmetic for embedded systems
  * When defined, uses integer math instead of floating-point for better
  * performance on processors without FPU.
+ *
+ * Disabled: the echo canceller algorithm (MDFEchoCancellation.h) is written
+ * using plain floating-point arithmetic throughout (e.g. preemph = .9f,
+ * notch_radius = .982f, Hann window values in [0,1)), not the Q15
+ * bit-shifted fixed-point math a true FIXED_POINT port would need. Enabling
+ * this macro would silently truncate those fractional values to 0/1.
  */
-#define FIXED_POINT  // Disabled - floating-point mode is currently supported
+// #define FIXED_POINT
 
 /** Enable two-path filter for improved double-talk robustness
  * When enabled, the echo canceller maintains both a foreground and background

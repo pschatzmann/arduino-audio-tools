@@ -36,10 +36,10 @@
 #include <cstdint>
 #include <cstdlib>
 #include <cstring>
-#include <vector>
 
 #include "MDFEchoCancellationConfig.h"
 #include "AudioTools/AudioLibs/AudioFFT.h"
+#include "AudioTools/CoreAudio/AudioBasic/Collections/Allocator.h"
 
 // Control requests
 #define ECHO_GET_FRAME_SIZE 3
@@ -154,14 +154,25 @@
 namespace audio_tools {
 
 // Type definitions (must be before echo_float_t struct)
-typedef int16_t echo_int16_t;
-typedef uint16_t echo_uint16_t;
-typedef int32_t echo_int32_t;
-typedef uint32_t echo_uint32_t;
+using echo_int16_t = int16_t;
+using echo_uint16_t = uint16_t;
+using echo_int32_t = int32_t;
+using echo_uint32_t = uint32_t;
 
-typedef echo_int16_t echo_word16_t;
-typedef echo_int32_t echo_word32_t;
-typedef echo_word32_t echo_mem_t;
+// NOTE: the algorithm body below (echoCancellationImpl and its helpers) is
+// written entirely in plain floating-point arithmetic (e.g. preemph = .9f,
+// notch_radius = .982f, Hann window values in [0,1)) with none of the Q15
+// bit-shifting that real fixed-point speex code requires. So even in
+// "FIXED_POINT" mode these element types must be float, or every fractional
+// value silently truncates to 0 when stored.
+#ifdef FIXED_POINT
+using echo_word16_t = int16_t;
+using echo_word32_t = int32_t;
+#else
+using echo_word16_t = float;
+using echo_word32_t = float;
+#endif
+using echo_mem_t = echo_word32_t;
 
 #ifdef FIXED_POINT
 // Forward declarations for operators
@@ -170,19 +181,19 @@ inline echo_float_t echo_float_mult(echo_float_t a, echo_float_t b);
 inline echo_float_t echo_float_mul32_u(float a, float b);
 
 // Fixed-point type for pseudo-float operations
-typedef struct echo_float_t {
+struct echo_float_t {
   int16_t m;  // Mantissa
   int16_t e;  // Exponent
-  
+
   // Constructor for initialization
-  constexpr echo_float_t(int16_t mantissa = 0, int16_t exponent = 0) 
+  constexpr echo_float_t(int16_t mantissa = 0, int16_t exponent = 0)
     : m(mantissa), e(exponent) {}
-  
+
   // Operator overloads for arithmetic
   inline echo_float_t operator*(const echo_float_t& other) const {
     return echo_float_mult(*this, other);
   }
-  
+
   inline echo_word32_t operator*(int16_t scalar) const {
     // Result is a regular integer when multiplying float by int
     int32_t result = ((int32_t)m * scalar);
@@ -192,7 +203,7 @@ typedef struct echo_float_t {
       return result >> (14 - e);
     }
   }
-  
+
   inline echo_word32_t operator*(int32_t scalar) const {
     // Result is a regular integer when multiplying float by int
     int64_t result = ((int64_t)m * scalar);
@@ -202,11 +213,11 @@ typedef struct echo_float_t {
       return result >> (14 - e);
     }
   }
-  
+
   friend inline echo_word32_t operator*(int32_t scalar, const echo_float_t& f) {
     return f * scalar;
   }
-} echo_float_t;
+};
 
 // Fixed-point arithmetic helper functions
 inline echo_float_t echo_float_from_double(double x) {
@@ -362,7 +373,7 @@ static const float VAR_BACKTRACK = 4.0f;
 
 // Floating point type definition (for non-FIXED_POINT mode)
 #ifndef FIXED_POINT
-typedef float echo_float_t;
+using echo_float_t = float;
 #endif
 
 /**
@@ -376,7 +387,7 @@ typedef float echo_float_t;
  * @warning Direct access to this structure is not recommended and may break
  * encapsulation.
  */
-struct EchoState_ {
+struct EchoState {
   int frame_size; /**< Number of samples processed each time */
   int window_size;
   int M;
@@ -435,84 +446,117 @@ struct EchoState_ {
   int play_buf_started;
 };
 
-typedef struct EchoState_ EchoState;
-
 /**
- * @brief FFT state management structure with custom allocator support
- * 
- * Manages FFT operations through an abstract AudioFFTBase driver interface and
- * maintains temporary buffers for real and imaginary components. The structure
- * is templated to support custom memory allocators for embedded systems or
- * specialized memory management requirements.
- * 
- * @tparam Allocator Custom allocator type (defaults to std::allocator<uint8_t>)
+ * @brief FFT state management structure
+ *
+ * Manages FFT operations through the raw FFTDriver interface. This is a
+ * small, fixed-layout struct (just a driver pointer and a size), so it's
+ * allocated with plain new/delete rather than through the audio_tools
+ * Allocator used for the (much larger) EchoState buffers -- consistent with
+ * how EchoState itself is created (see echoStateInitMc()).
  */
-template <typename Allocator = std::allocator<uint8_t>>
 struct fft_state {
-  using FloatAllocator = typename std::allocator_traits<Allocator>::template rebind_alloc<float>; /**< Rebound allocator for float vectors */
-  
-  AudioFFTBase* driver; /**< Pointer to FFT driver implementation */
+  // The MDF algorithm needs synchronous per-sample setValue()/fft()/getValue()
+  // access at a window size (2x frame size) that is independent of whatever
+  // AudioFFTBase::config().length the caller set up. That low-level, single-
+  // shot API only exists on FFTDriver (e.g. FFTDriverRealFFT), not on the
+  // higher-level AudioFFTBase stream wrapper, so we operate on the raw driver
+  // obtained via AudioFFTBase::driver().
+  FFTDriver* driver; /**< Pointer to the raw FFT driver implementation */
   int N; /**< FFT size */
-  std::vector<float, FloatAllocator> temp_real; /**< Temporary buffer for real components */
-  std::vector<float, FloatAllocator> temp_img; /**< Temporary buffer for imaginary components */
 
   /**
    * @brief Construct FFT state with specified size and driver
    * @param size FFT size (number of points)
-   * @param drv Pointer to FFT driver implementation
-   * @param alloc Allocator instance for memory management
+   * @param drv Pointer to the raw FFT driver implementation
    */
-  fft_state(int size, AudioFFTBase* drv, const Allocator& alloc = Allocator()) 
-      : N(size), driver(drv), 
-        temp_real(FloatAllocator(alloc)), 
-        temp_img(FloatAllocator(alloc)) {
-    temp_real.resize(size);
-    temp_img.resize(size);
-  }
+  fft_state(int size, FFTDriver* drv) : driver(drv), N(size) {}
 };
+
+// Forward declarations: these are defined at the bottom of this file but
+// referenced from inside MDFEchoCancellation below.
+inline void* echo_fft_init(int size, FFTDriver* driver);
+inline void echo_fft_destroy(void* table);
+inline void echo_fft(void* table, echo_word16_t* in, echo_word16_t* out);
+inline void echo_ifft(void* table, echo_word16_t* in, echo_word16_t* out);
 
 /**
  * @brief Acoustic echo canceller using MDF algorithm
- * 
+ *
  * High-performance echo cancellation implementation based on the Multi-Delay
  * block Frequency adaptive filter (MDF) algorithm. Supports both single and
- * multi-channel configurations with customizable memory allocation.
- * 
+ * multi-channel configurations with customizable memory allocation. This is
+ * the underlying algorithm used by MDFEchoCancellationStream -- use this
+ * class directly (via capture()/playback(), or the self-contained cancel())
+ * if you don't want the Stream-based wrapper.
+ *
  * The echo canceller operates by:
  * - Learning the echo path between loudspeakers and microphones
  * - Adaptively filtering the playback signal to predict the echo
  * - Subtracting the predicted echo from the captured microphone signal
- * 
+ *
  * Features:
  * - Header-only C++ implementation
- * - Custom allocator support for embedded systems
- * - Fixed-point and floating-point arithmetic modes
+ * - Custom Allocator support for embedded systems (see
+ *   AudioTools/CoreAudio/AudioBasic/Collections/Allocator.h -- e.g.
+ *   AllocatorPSRAM/AllocatorESP32 to place the (fairly large) echo-state
+ *   buffers off the default heap)
  * - Two-path filter for improved double-talk handling
  * - Multi-channel support (multiple microphones and speakers)
- * 
- * @tparam Allocator Custom allocator type for memory management
- *                   (defaults to std::allocator<uint8_t>)
- * 
+ *
  * @note This implementation requires an external FFT driver implementing
- *       the AudioFFTBase interface from AudioFFT.h
- * 
+ *       the AudioFFTBase interface from AudioFFT.h (only AudioRealFFT has
+ *       been verified -- see the Weaknesses note below).
+ *
  * Example usage:
  * @code
- * FFTDriverImpl fftDriver;
- * EchoCanceller<> echo(frameSize, filterLength, fftDriver);
- * echo.setSamplingRate(16000);
- * echo.cancellation(micData, speakerData, outputData);
+ * AudioRealFFT fftDriver;
+ * auto cfg = fftDriver.defaultConfig(RXTX_MODE);
+ * cfg.length = 256;           // frame size in samples
+ * cfg.sample_rate = 16000;
+ * fftDriver.begin(cfg);
+ *
+ * int filterLength = 1024;  // in samples
+ * MDFEchoCancellation echo(filterLength, fftDriver);  // uses DefaultAllocator
+ * echo.playback(speakerFrame);          // frame_size samples
+ * echo.capture(micFrame, outputFrame);  // frame_size samples each
  * @endcode
+ *
+ * Strengths (see MDFEchoCancellationStream for the fuller writeup):
+ * - Block-frequency-domain adaptation handles much longer echo tails than a
+ *   time-domain LMS filter (e.g. LMSEchoCancellationStream) at a fraction
+ *   of the per-tap cost, and the two-path filter gives real protection
+ *   against double-talk.
+ * - Multi-channel (nbMic x nbSpeakers) support built in.
+ * - Verified to converge strongly on a synthetic attenuated-echo signal
+ *   (see test_mdf_converges in tests-cmake/stt/stt_test.cpp).
+ *
+ * Weaknesses:
+ * - Only verified with the AudioRealFFT driver; other AudioFFTBase drivers
+ *   have their own bin-access implementations that have not been audited.
+ * - capture()/playback() must be called with exactly frame_size samples
+ *   each; ensureInitialized() re-begin()s the FFT driver you pass in at a
+ *   *different* size (2x frame_size) on first use, so dedicate that driver
+ *   instance to this canceller.
+ * - The two-path thresholds/heuristics are unmodified speexdsp defaults,
+ *   only exercised here against a single synthetic tone with no near-end
+ *   noise -- real acoustic echo is not yet validated.
+ * - This file required extensive bug-fixing (missing forward declarations,
+ *   word types hardcoded to int16_t/int32_t despite float-only arithmetic,
+ *   a 0/0 = NaN in the leak estimate, a leftover fixed-point cast that
+ *   zeroed the adaptive filter's gradient) to reach its current, tested
+ *   state; treat further changes with real caution and re-run
+ *   tests-cmake/stt afterwards.
  */
-template <typename Allocator = std::allocator<uint8_t>>
 class MDFEchoCancellation : public AudioStream {
  public:
   /** Initialize echo canceller with single channel (mono)
    * @param filterLength Length of echo cancellation filter in samples
    * @param fftDriver FFT driver instance from AudioFFT
-   * @param alloc Allocator instance (optional)
+   * @param alloc Allocator used for the echo-state buffers (optional,
+   *              defaults to the shared DefaultAllocator)
    */
-  MDFEchoCancellation(int filterLength, AudioFFTBase& fftDriver, const Allocator& alloc = Allocator())
+  MDFEchoCancellation(int filterLength, AudioFFTBase& fftDriver, Allocator& alloc = DefaultAllocator)
       : fft_driver(&fftDriver), allocator(alloc),
         filter_length(filterLength), nb_mic(1), nb_speakers(1) {}
 
@@ -521,10 +565,11 @@ class MDFEchoCancellation : public AudioStream {
    * @param nbMic Number of microphone channels
    * @param nbSpeakers Number of speaker channels
    * @param fftDriver FFT driver instance from AudioFFT
-   * @param alloc Allocator instance (optional)
+   * @param alloc Allocator used for the echo-state buffers (optional,
+   *              defaults to the shared DefaultAllocator)
    */
   MDFEchoCancellation(int filterLength, int nbMic, int nbSpeakers,
-                AudioFFTBase& fftDriver, const Allocator& alloc = Allocator())
+                AudioFFTBase& fftDriver, Allocator& alloc = DefaultAllocator)
       : fft_driver(&fftDriver), allocator(alloc),
         filter_length(filterLength), nb_mic(nbMic), nb_speakers(nbSpeakers) {}
 
@@ -532,36 +577,42 @@ class MDFEchoCancellation : public AudioStream {
   ~MDFEchoCancellation() {
     if (!state) return;
 
-    if (state->fft_table) echo_fft_destroy<Allocator>(state->fft_table);
+    if (state->fft_table) echo_fft_destroy(state->fft_table);
 
-    echoFree(state->e);
-    echoFree(state->x);
-    echoFree(state->input);
-    echoFree(state->y);
-    echoFree(state->last_y);
-    echoFree(state->Yf);
-    echoFree(state->Rf);
-    echoFree(state->Xf);
-    echoFree(state->Yh);
-    echoFree(state->Eh);
-    echoFree(state->X);
-    echoFree(state->Y);
-    echoFree(state->E);
-    echoFree(state->W);
+    int N = state->window_size;
+    int M = state->M;
+    int C = state->C;
+    int K = state->K;
+    int frame_size = state->frame_size;
+
+    echoFree(state->e, C * N);
+    echoFree(state->x, K * N);
+    echoFree(state->input, C * frame_size);
+    echoFree(state->y, C * N);
+    echoFree(state->last_y, C * N);
+    echoFree(state->Yf, frame_size + 1);
+    echoFree(state->Rf, frame_size + 1);
+    echoFree(state->Xf, frame_size + 1);
+    echoFree(state->Yh, frame_size + 1);
+    echoFree(state->Eh, frame_size + 1);
+    echoFree(state->X, K * (M + 1) * N);
+    echoFree(state->Y, C * N);
+    echoFree(state->E, C * N);
+    echoFree(state->W, C * K * M * N);
 #ifdef TWO_PATH
-    echoFree(state->foreground);
+    echoFree(state->foreground, M * N * C * K);
 #endif
-    echoFree(state->PHI);
-    echoFree(state->power);
-    echoFree(state->power_1);
-    echoFree(state->window);
-    echoFree(state->prop);
-    echoFree(state->wtmp);
-    echoFree(state->memX);
-    echoFree(state->memD);
-    echoFree(state->memE);
-    echoFree(state->notch_mem);
-    echoFree(state->play_buf);
+    echoFree(state->PHI, N);
+    echoFree(state->power, frame_size + 1);
+    echoFree(state->power_1, frame_size + 1);
+    echoFree(state->window, N);
+    echoFree(state->prop, M);
+    echoFree(state->wtmp, N);
+    echoFree(state->memX, K);
+    echoFree(state->memD, C);
+    echoFree(state->memE, C);
+    echoFree(state->notch_mem, 2 * C);
+    echoFree(state->play_buf, K * (PLAYBACK_DELAY + 1) * frame_size);
     delete state;
     state = nullptr;
   }
@@ -699,7 +750,7 @@ class MDFEchoCancellation : public AudioStream {
         int M = state->M, N = state->window_size, n = state->frame_size;
         echo_int32_t* filt = (echo_int32_t*)ptr;
         for (int j = 0; j < M; j++) {
-          echo_ifft<Allocator>(state->fft_table, &state->W[j * N], state->wtmp);
+          echo_ifft(state->fft_table, &state->W[j * N], state->wtmp);
           for (int i = 0; i < n; i++) filt[j * n + i] = 32767 * state->wtmp[i];
         }
       } break;
@@ -789,7 +840,7 @@ class MDFEchoCancellation : public AudioStream {
  protected:
   EchoState* state = nullptr; /**< Pointer to internal echo canceller state */
   AudioFFTBase* fft_driver; /**< Pointer to FFT driver instance */
-  Allocator allocator; /**< Allocator instance for memory management */
+  Allocator& allocator; /**< Allocator used for the echo-state buffers */
   int filter_length; /**< Length of echo cancellation filter */
   int nb_mic; /**< Number of microphone channels */
   int nb_speakers; /**< Number of speaker channels */
@@ -800,49 +851,37 @@ class MDFEchoCancellation : public AudioStream {
    */
   void ensureInitialized() {
     if (initialized) return;
-    
+
     int frameSize = fft_driver->config().length;
     state = echoStateInitMc(frameSize, filter_length, nb_mic, nb_speakers);
     if (state && fft_driver) {
-      state->fft_table =
-          echo_fft_init<Allocator>(state->window_size, fft_driver, allocator);
+      state->fft_table = echo_fft_init(state->window_size, fft_driver->driver());
     }
     initialized = true;
   }
 
   /**
-   * @brief Allocate memory for array of type T using custom allocator
+   * @brief Allocate a zero-initialized array of type T using the configured
+   * Allocator (see AudioTools/CoreAudio/AudioBasic/Collections/Allocator.h)
    * @tparam T Type of objects to allocate
    * @param count Number of objects to allocate
    * @return Pointer to allocated and zero-initialized memory
-   * @note Memory is zero-initialized to match calloc behavior
    */
   template <typename T>
   T* echoAlloc(size_t count) {
-    typename std::allocator_traits<Allocator>::template rebind_alloc<T> alloc(allocator);
-    T* ptr = alloc.allocate(count);
-    // Initialize to zero (equivalent to calloc behavior)
-    for (size_t i = 0; i < count; ++i) {
-      std::allocator_traits<typename std::allocator_traits<Allocator>::template rebind_alloc<T>>::construct(alloc, ptr + i);
-    }
-    return ptr;
+    return allocator.createArray<T>(count);
   }
 
   /**
-   * @brief Deallocate memory using custom allocator
+   * @brief Deallocate an array previously returned by echoAlloc()
    * @tparam T Type of objects to deallocate
    * @param ptr Pointer to memory to deallocate
-   * @param count Number of objects (currently unused but kept for API compatibility)
-   * @note For POD types used in speexdsp, count parameter is not strictly required
+   * @param count Number of objects originally allocated (must match the
+   *              echoAlloc() call that produced ptr)
    */
   template <typename T>
-  void echoFree(T* ptr, size_t count = 0) {
-    if (ptr) {
-      typename std::allocator_traits<Allocator>::template rebind_alloc<T> alloc(allocator);
-      // Note: count is not used since we can't track allocation size
-      // This is acceptable for POD types as we're using with speexdsp
-      alloc.deallocate(ptr, count);
-    }
+  void echoFree(T* ptr, size_t count) {
+    allocator.removeArray<T>(ptr, count);
   }
 
   inline void echoWarning(const char* str) {
@@ -997,16 +1036,23 @@ class MDFEchoCancellation : public AudioStream {
                                       const echo_word16_t* X,
                                       const echo_word16_t* Y, echo_word32_t* prod,
                                       int N) {
+    // NOTE: the (int32_t) casts this code originally had here were only
+    // correct in true fixed-point mode (X/Y as int16_t, needing widening
+    // before multiplying to avoid 16-bit overflow). With echo_word16_t /
+    // echo_word32_t now float (see the aliases above), those casts instead
+    // truncated every frequency-domain sample to an integer before ever
+    // multiplying it by anything -- e.g. a bin magnitude of 0.03 became 0,
+    // silently zeroing out the filter's gradient. Removed.
     echo_float_t W;
     W = p * w[0];
-    prod[0] = W * ((int32_t)X[0] * Y[0]);
+    prod[0] = W * (X[0] * Y[0]);
     for (int i = 1, j = 1; i < N - 1; i += 2, j++) {
       W = p * w[j];
-      prod[i] = W * ((int32_t)(X[i] * Y[i] + X[i + 1] * Y[i + 1]));
-      prod[i + 1] = W * ((int32_t)(-X[i + 1] * Y[i] + X[i] * Y[i + 1]));
+      prod[i] = W * (X[i] * Y[i] + X[i + 1] * Y[i + 1]);
+      prod[i + 1] = W * (-X[i + 1] * Y[i] + X[i] * Y[i + 1]);
     }
     W = p * w[N / 2];
-    prod[N - 1] = W * ((int32_t)X[N - 1] * Y[N - 1]);
+    prod[N - 1] = W * (X[N - 1] * Y[N - 1]);
   }
 
   /**
@@ -1222,7 +1268,7 @@ class MDFEchoCancellation : public AudioStream {
                      &st->X[j * N * K + speak * N],
                      N * sizeof(echo_word16_t));
       }
-      echo_fft<Allocator>(st->fft_table, st->x + speak * N, &st->X[speak * N]);
+      echo_fft(st->fft_table, st->x + speak * N, &st->X[speak * N]);
     }
 
     // Compute power spectrum of far-end
@@ -1239,7 +1285,7 @@ class MDFEchoCancellation : public AudioStream {
 #ifdef TWO_PATH
       spectralMulAccum(st->X, st->foreground + chan * N * K * M,
                        st->Y + chan * N, N, M * K);
-      echo_ifft<Allocator>(st->fft_table, st->Y + chan * N, st->e + chan * N);
+      echo_ifft(st->fft_table, st->Y + chan * N, st->e + chan * N);
       for (int i = 0; i < st->frame_size; i++)
         st->e[chan * N + i] = st->input[chan * st->frame_size + i] -
                               st->e[chan * N + i + st->frame_size];
@@ -1272,11 +1318,11 @@ class MDFEchoCancellation : public AudioStream {
       for (int speak = 0; speak < K; speak++) {
         for (int j = 0; j < M; j++) {
           if (j == 0 || st->cancel_count % (M - 1) == j - 1) {
-            echo_ifft<Allocator>(
+            echo_ifft(
                 st->fft_table, &st->W[chan * N * K * M + j * N * K + speak * N],
                 st->wtmp);
             for (int i = st->frame_size; i < N; i++) st->wtmp[i] = 0;
-            echo_fft<Allocator>(
+            echo_fft(
                 st->fft_table, st->wtmp,
                 &st->W[chan * N * K * M + j * N * K + speak * N]);
           }
@@ -1296,7 +1342,7 @@ class MDFEchoCancellation : public AudioStream {
     for (int chan = 0; chan < C; chan++) {
       spectralMulAccum(st->X, st->W + chan * N * K * M, st->Y + chan * N, N,
                        M * K);
-      echo_ifft<Allocator>(st->fft_table, st->Y + chan * N, st->y + chan * N);
+      echo_ifft(st->fft_table, st->Y + chan * N, st->y + chan * N);
       for (int i = 0; i < st->frame_size; i++)
         st->e[chan * N + i] = st->e[chan * N + i + st->frame_size] -
                               st->y[chan * N + i + st->frame_size];
@@ -1407,10 +1453,10 @@ class MDFEchoCancellation : public AudioStream {
                           st->input + chan * st->frame_size, st->frame_size);
 
       // Convert error to frequency domain
-      echo_fft<Allocator>(st->fft_table, st->e + chan * N, st->E + chan * N);
+      echo_fft(st->fft_table, st->e + chan * N, st->E + chan * N);
 
       for (int i = 0; i < st->frame_size; i++) st->y[i + chan * N] = 0;
-      echo_fft<Allocator>(st->fft_table, st->y + chan * N, st->Y + chan * N);
+      echo_fft(st->fft_table, st->y + chan * N, st->Y + chan * N);
 
       // Compute power spectra
       powerSpectrumAccum(st->E + chan * N, st->Rf, N);
@@ -1460,6 +1506,12 @@ class MDFEchoCancellation : public AudioStream {
     }
 
     Pyy = FLOAT_SQRT(Pyy);
+    // Pyy is 0 on the very first frames (no echo spectrum has built up yet),
+    // which would make Pey/Pyy evaluate to 0/0 = NaN and permanently poison
+    // st->Pey / leak_estimate (FLOAT_LT against NaN is always false, so the
+    // clamps below can never recover from it). Floor it at FLOAT_ONE, same
+    // as the clamp already applied to st->Pyy a few lines down.
+    if (FLOAT_LT(Pyy, FLOAT_ONE)) Pyy = FLOAT_ONE;
     Pey = FLOAT_DIVU(Pey, Pyy);
 
     // Compute correlation update rate
@@ -1528,38 +1580,33 @@ class MDFEchoCancellation : public AudioStream {
 // ============================================================================
 /**
  * @brief Initialize FFT state
- * @tparam Allocator Custom allocator type for memory management
- * @param size FFT size (number of points)
- * @param driver Pointer to FFT driver implementing AudioFFTBase interface
- * @param alloc Allocator instance for memory management
+ * @param size FFT size (number of points); this is the MDF window size
+ *             (2x the frame size), independent of whatever length the
+ *             caller's AudioFFTBase happens to be configured with.
+ * @param driver Pointer to the raw FFT driver (e.g. obtained via
+ *               AudioFFTBase::driver())
  * @return Opaque pointer to FFT state, or nullptr on failure
  */
-template <typename Allocator>
-inline void* echo_fft_init(int size, AudioFFTBase* driver, const Allocator& alloc) {
+inline void* echo_fft_init(int size, FFTDriver* driver) {
   if (!driver) {
     return nullptr;
   }
-  
-  // Configure FFT with the required size
-  AudioFFTConfig cfg;
-  cfg.length = size;
-  cfg.rxtx_mode = TX_MODE;  // We need both FFT and IFFT capabilities
-  
-  if (!driver->begin(cfg)) {
+
+  // Re-initialize the raw driver at the window size the MDF algorithm
+  // actually needs (independent of the caller's AudioFFTBase::config()).
+  if (!driver->begin(size)) {
     return nullptr;
   }
-  return new fft_state<Allocator>(size, driver, alloc);
+  return new fft_state(size, driver);
 }
 
 /**
  * @brief Destroy FFT state and release resources
- * @tparam Allocator Custom allocator type (must match the one used in echo_fft_init)
  * @param table Opaque pointer to FFT state returned by echo_fft_init
  */
-template <typename Allocator = std::allocator<uint8_t>>
 inline void echo_fft_destroy(void* table) {
   if (table) {
-    auto* st = static_cast<fft_state<Allocator>*>(table);
+    auto* st = static_cast<fft_state*>(table);
     st->driver->end();
     delete st;
   }
@@ -1567,16 +1614,14 @@ inline void echo_fft_destroy(void* table) {
 
 /**
  * @brief Perform forward FFT
- * @tparam Allocator Custom allocator type (must match the one used in echo_fft_init)
  * @param table Opaque pointer to FFT state
  * @param in Input time-domain signal (size N)
  * @param out Output frequency-domain signal in packed format (size N)
  *            Format: [DC, real1, imag1, real2, imag2, ..., Nyquist]
  */
-template <typename Allocator = std::allocator<uint8_t>>
 inline void echo_fft(void* table, echo_word16_t* in,
                     echo_word16_t* out) {
-  auto* st = static_cast<fft_state<Allocator>*>(table);
+  auto* st = static_cast<fft_state*>(table);
   if (!st || !st->driver) return;
 
   // Set input values
@@ -1590,29 +1635,35 @@ inline void echo_fft(void* table, echo_word16_t* in,
   // Get output in packed format: out[0]=real[0], out[1]=real[1],
   // out[2]=img[1],
   // ...
-  out[0] = st->driver->getValue(0);  // DC component
+  // Note: getValue() only reflects the frequency domain after rfft()
+  // (inverse); right after fft() (forward), it is still the raw input, so
+  // DC/Nyquist must come from getBin() too (its imaginary part is always 0
+  // for those two bins).
+  FFTBin dc_bin;
+  st->driver->getBin(0, dc_bin);
+  out[0] = dc_bin.real;  // DC component
   for (int i = 1; i < st->N - 1; i += 2) {
     int bin = (i + 1) / 2;
-    float real, img;
-    st->driver->getBin(bin, real, img);
-    out[i] = real;
-    out[i + 1] = img;
+    FFTBin fft_bin;
+    st->driver->getBin(bin, fft_bin);
+    out[i] = fft_bin.real;
+    out[i + 1] = fft_bin.img;
   }
-  out[st->N - 1] = st->driver->getValue(st->N / 2);  // Nyquist
+  FFTBin nyquist_bin;
+  st->driver->getBin(st->N / 2, nyquist_bin);
+  out[st->N - 1] = nyquist_bin.real;  // Nyquist
 }
 
 /**
  * @brief Perform inverse FFT
- * @tparam Allocator Custom allocator type (must match the one used in echo_fft_init)
  * @param table Opaque pointer to FFT state
  * @param in Input frequency-domain signal in packed format (size N)
  *           Format: [DC, real1, imag1, real2, imag2, ..., Nyquist]
  * @param out Output time-domain signal (size N)
  */
-template <typename Allocator = std::allocator<uint8_t>>
 inline void echo_ifft(void* table, echo_word16_t* in,
                      echo_word16_t* out) {
-  auto* st = static_cast<fft_state<Allocator>*>(table);
+  auto* st = static_cast<fft_state*>(table);
   if (!st || !st->driver || !st->driver->isReverseFFT()) return;
 
   // Set bins from packed format

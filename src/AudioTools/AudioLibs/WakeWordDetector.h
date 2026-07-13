@@ -11,14 +11,14 @@
 namespace audio_tools {
 
 /*
- * @brief Frame holding the indices of the top 3 frequencies in an FFT window.
+ * @brief Frame holding the top N dominant frequencies (in Hz) of an FFT window.
  *
  * Used as a compact representation of the dominant frequency content in a frame
  * of audio.
  */
 template <size_t N>
 struct FrequencyFrame {
-  uint16_t top_freqs[N];  ///< Indices of top 3 frequencies in FFT
+  uint16_t top_freqs[N];  ///< Top N dominant frequencies of the frame, in Hz
 };
 
 /**
@@ -29,7 +29,9 @@ struct FrequencyFrame {
  * This class detects wake words by comparing the sequence of the top N dominant
  * frequencies in each audio frame to stored templates for each wake word. When
  * the percentage of matching frames exceeds a configurable threshold, the
- * corresponding wake word is considered detected.
+ * corresponding wake word is considered detected. This is a coarse, non-ML
+ * frequency-fingerprint matcher meant for microcontrollers that can't run
+ * real wake-word inference -- not a speech model.
  *
  * @tparam N Number of dominant frequencies to track per frame (default: 3)
  *
@@ -46,6 +48,42 @@ struct FrequencyFrame {
  * detector.setWakeWordCallback([](const char* name) { Serial.println(name); });
  * // ...
  * @endcode
+ *
+ * Strengths:
+ * - Extremely small footprint: fixed-size top-N frequency array per frame,
+ *   no retained spectra, no ML runtime -- plausible on constrained MCUs.
+ * - Templates are captured live via startRecording()/stopRecording(), no
+ *   offline tooling or training pipeline needed.
+ * - Verified to fire correctly for a tone matching its template and to stay
+ *   silent for a clearly different tone (tests-cmake/stt/stt_test.cpp).
+ * - write() re-asserts the FFT callback wiring (fft.config().ref/callback)
+ *   on every call, so it's robust to the common pattern of calling
+ *   fft.begin(fft.defaultConfig()) *after* constructing the detector --
+ *   that ordering used to silently disable detection entirely.
+ *
+ * Weaknesses:
+ * - Fundamentally a frequency-fingerprint matcher, not a wake-word model:
+ *   works well for a synthetic tone or a very distinctive, repeatable
+ *   sound, but real speech (formants, pitch variation, noise, different
+ *   speakers) is unlikely to reproduce the same top-N frequency sequence
+ *   reliably across utterances -- expect a much higher false-reject/
+ *   false-accept rate than a real wake-word model; this has not been
+ *   validated on actual speech.
+ * - No loudness/noise-floor normalization: "top N frequencies" is purely
+ *   relative per frame, so a steady background tone or hum can dominate
+ *   the top bins even when the target sound is comparatively quiet.
+ * - Matching only ever compares the template against the *end* of the
+ *   current rolling buffer (assumes the wake word just finished exactly
+ *   now) -- no time-warping/alignment, so speaking faster or slower than
+ *   the recorded template degrades the match.
+ * - Only verified with the AudioRealFFT driver; other AudioFFTBase drivers
+ *   (AudioKissFFT, AudioCmsisFFT, AudioESP32FFT, AudioEspressifFFT,
+ *   AudioFixedFFT) have their own bin-access implementations that have not
+ *   been audited for correctness the way AudioRealFFT was.
+ * - WakeWordCallback is a plain function pointer (no captures, no
+ *   std::function), and there is no per-template cooldown/debounce -- a
+ *   sustained matching signal re-fires the callback on every qualifying
+ *   frame.
  */
 template <typename T = int16_t, size_t N = 3>
 class WakeWordDetector : public AudioOutput {
@@ -65,9 +103,6 @@ class WakeWordDetector : public AudioOutput {
   WakeWordDetector(AudioFFTBase& fft)
       : p_fft(&fft) {
     _frame_pos = 0;
-    auto& fft_cfg = fft.config();
-    fft_cfg.ref = this;
-    fft_cfg.callback = fftResult;
   }
 
   void startRecording() {
@@ -82,7 +117,9 @@ class WakeWordDetector : public AudioOutput {
 
   bool isRecording() const { return _is_recording; }
 
-  void addTemplate(const Vector<FrequencyFrame<N>>& frames,
+  // Note: takes a non-const reference because AudioTools' Vector::size() is
+  // not const-qualified.
+  void addTemplate(Vector<FrequencyFrame<N>>& frames,
                    float threshold_percent, const char* name) {
     Template t;
     t.frames = frames;
@@ -96,6 +133,15 @@ class WakeWordDetector : public AudioOutput {
   void setWakeWordCallback(WakeWordCallback cb) { _callback = cb; }
 
   size_t write(const uint8_t* buf, size_t size) override {
+    // Reasserted on every write (instead of only in the constructor) because
+    // AudioFFTBase::begin(AudioFFTConfig) replaces the whole config object
+    // (cfg = info), which would silently wipe out ref/callback if they had
+    // only been set once, before the user's fft.begin(cfg) call.
+    auto& fft_cfg = p_fft->config();
+    if (fft_cfg.ref != this || fft_cfg.callback != fftResult) {
+      fft_cfg.ref = this;
+      fft_cfg.callback = fftResult;
+    }
     return p_fft->write(buf, size);
   }
 
