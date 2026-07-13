@@ -294,10 +294,10 @@ Protected Attributes</h2></td></tr>
 <div class="textblock"><p>SPI Audio Slave endpoint matching <a class="el" href="classaudio__tools_1_1_s_p_i_audio_master.html" title="SPI master endpoint for remote audio sink configuration and PCM data transfer.">SPIAudioMaster</a> protocol. </p>
 <p>This class implements the slave side of a binary request/response protocol over SPI. It receives commands from a remote <a class="el" href="classaudio__tools_1_1_s_p_i_audio_master.html" title="SPI master endpoint for remote audio sink configuration and PCM data transfer.">SPIAudioMaster</a> and manages an externally-provided audio buffer.</p>
 <dl class="section note"><dt>Note</dt><dd>Supported on all ESP32 Arduino platforms!</dd></dl>
-<h2><a class="anchor" id="autotoc_md33"></a>
+<h2><a class="anchor" id="autotoc_md34"></a>
 Protocol Role</h2>
 <p><a class="el" href="classaudio__tools_1_1_s_p_i_audio_slave.html" title="SPI Audio Slave endpoint matching SPIAudioMaster protocol.">SPIAudioSlave</a> responds passively to SPI transactions initiated by the master. It parses incoming command frames, executes commands, and sends response frames back. The slave does not control the SPI bus clock or timing.</p>
-<h2><a class="anchor" id="autotoc_md34"></a>
+<h2><a class="anchor" id="autotoc_md35"></a>
 Supported Commands</h2>
 <ul>
 <li><b>SetMime</b> (1): Store MIME type string for format context</li>
@@ -307,7 +307,7 @@ Supported Commands</h2>
 <li><b>Clear</b> (7): Reset the audio buffer to empty state</li>
 <li><b>GetFilledBufferSize</b> (8): Report bytes currently buffered and readable</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md35"></a>
+<h2><a class="anchor" id="autotoc_md36"></a>
 Buffer Management</h2>
 <p>The slave requires an externally-provided <code><a class="el" href="classaudio__tools_1_1_base_buffer.html" title="Shared functionality of all buffers.">BaseBuffer</a>&lt;uint8_t&gt;</code> passed via constructor. The slave does NOT manage buffer memory or sizing; the caller is responsible for:</p><ul>
 <li>Creating the buffer (e.g., <a class="el" href="classaudio__tools_1_1_ring_buffer.html" title="Implements a typed Ringbuffer.">RingBuffer</a>, <a class="el" href="classaudio__tools_1_1_vector.html" title="Vector implementation which provides the most important methods as defined by std::vector....">Vector</a>)</li>
@@ -316,10 +316,10 @@ Buffer Management</h2>
 <li>Managing the buffer lifecycle</li>
 </ul>
 <p>This design decouples protocol handling from buffer implementation, allowing flexible buffer strategies (ring, linear, DMA-based, etc.).</p>
-<h2><a class="anchor" id="autotoc_md36"></a>
+<h2><a class="anchor" id="autotoc_md37"></a>
 Protocol Processing Modes</h2>
 <p>The slave supports two processing patterns:</p>
-<h3><a class="anchor" id="autotoc_md37"></a>
+<h3><a class="anchor" id="autotoc_md38"></a>
 1. Byte-wise Handler (Flexible)</h3>
 <p>Call <code>onTransfer(byte)</code> for each SPI byte received (e.g., from an ISR): </p><div class="fragment"><div class="line"><a class="code hl_class" href="classaudio__tools_1_1_s_p_i_audio_slave.html">SPIAudioSlave</a> slave(my_buffer);</div>
 <div class="line">slave.begin(cfg);</div>
@@ -331,20 +331,20 @@ Protocol Processing Modes</h2>
 <div class="line">}</div>
 <div class="ttc" id="aclassaudio__tools_1_1_s_p_i_audio_slave_html"><div class="ttname"><a href="classaudio__tools_1_1_s_p_i_audio_slave.html">audio_tools::SPIAudioSlave</a></div><div class="ttdoc">SPI Audio Slave endpoint matching SPIAudioMaster protocol.</div><div class="ttdef"><b>Definition</b> SPIAudioSlave.h:237</div></div>
 </div><!-- fragment --><p> Returns the response byte to send back on the next SPI clock cycle.</p>
-<h3><a class="anchor" id="autotoc_md38"></a>
+<h3><a class="anchor" id="autotoc_md39"></a>
 2. Frame-based Helper (Testing/Integration)</h3>
 <p>Use <code><a class="el" href="classaudio__tools_1_1_s_p_i_audio_slave.html#a2af59f03d9374c97914e2374c58ee51b" title="Frame-based helper (same wire format as master, useful for tests)">processFrame()</a></code> to handle complete request/response frames at once: </p><div class="fragment"><div class="line">uint8_t request[256], response[256];</div>
 <div class="line">uint16_t response_len;</div>
 <div class="line">slave.processFrame(request, req_len, response, <span class="keyword">sizeof</span>(response),</div>
 <div class="line">&amp;response_len);</div>
 </div><!-- fragment --><p> Useful for unit tests or SPI drivers that buffer complete transactions.</p>
-<h3><a class="anchor" id="autotoc_md39"></a>
+<h3><a class="anchor" id="autotoc_md40"></a>
 3. ESP32 Hardware Slave Mode (Optional)</h3>
 <p>On ESP32 with <code>use_hw_slave=true</code>, call <code><a class="el" href="classaudio__tools_1_1_s_p_i_audio_slave.html#af268a62c13246b74b5428a296cdf714a">process()</a></code> in your main loop: </p><div class="fragment"><div class="line"><span class="keywordflow">while</span> (1) {</div>
 <div class="line">  slave.process();  <span class="comment">// Performs one byte transaction with HW SPI slave</span></div>
 <div class="line">}</div>
 </div><!-- fragment --><p> The hardware SPI slave driver handles all clock/timing; <code><a class="el" href="classaudio__tools_1_1_s_p_i_audio_slave.html#af268a62c13246b74b5428a296cdf714a">process()</a></code> just feeds bytes to <code><a class="el" href="classaudio__tools_1_1_s_p_i_audio_slave.html#af0f8554be4c6582244a3d23418103da0" title="Byte-wise SPI handler. Call this for each received SPI byte.">onTransfer()</a></code>.</p>
-<h2><a class="anchor" id="autotoc_md40"></a>
+<h2><a class="anchor" id="autotoc_md41"></a>
 State Machine</h2>
 <p>The slave uses an 8-state machine for parsing request/response frames:</p><ul>
 <li><b>RxCmd</b>: Receive command byte, initialize request</li>
@@ -357,7 +357,7 @@ State Machine</h2>
 <li><b>TxPayload</b>: Transmit variable-length response bytes</li>
 </ul>
 <p>After completing a response, the state machine loops back to RxCmd.</p>
-<h2><a class="anchor" id="autotoc_md41"></a>
+<h2><a class="anchor" id="autotoc_md42"></a>
 Audio Data Access</h2>
 <p>After the slave has accepted audio via WriteData commands, retrieve it using:</p><ul>
 <li><code><a class="el" href="classaudio__tools_1_1_s_p_i_audio_slave.html#a692e2b18b3c2452e38e3f558ad87e9a5" title="Returns readable bytes currently buffered.">available()</a></code>: Returns bytes ready to read</li>
@@ -366,7 +366,7 @@ Audio Data Access</h2>
 <li><code>write(buf, len)</code>: Directly write to buffer (for local testing)</li>
 <li><code><a class="el" href="classaudio__tools_1_1_s_p_i_audio_slave.html#a20bbd4d45e3f01305dd709f5a9cc9952" title="Clears local buffered audio data.">clearBuffer()</a></code>: Empty the buffer</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md42"></a>
+<h2><a class="anchor" id="autotoc_md43"></a>
 Error Handling</h2>
 <p>Commands may fail with status codes (see <code>StatusCode</code> enum):</p><ul>
 <li><b>Ok</b> (0): Success</li>
@@ -375,7 +375,7 @@ Error Handling</h2>
 <li><b>BufferOverflow</b> (3): WriteData rejected; buffer full</li>
 <li><b>InternalError</b> (4): Slave resource error</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md43"></a>
+<h2><a class="anchor" id="autotoc_md44"></a>
 ESP32-Specific Configuration</h2>
 <p>When <code>use_hw_slave=true</code> (default on ESP32):</p><ul>
 <li><b>host</b>: SPI host (SPI2_HOST/HSPI_HOST/VSPI_HOST)</li>
@@ -383,7 +383,7 @@ ESP32-Specific Configuration</h2>
 <li><b>pin_mosi/miso/sclk/cs</b>: GPIO pin assignments</li>
 <li><b>queue_size</b>: Transaction queue depth (default 4)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md44"></a>
+<h2><a class="anchor" id="autotoc_md45"></a>
 Typical Usage</h2>
 <div class="fragment"><div class="line"><span class="comment">// Create a ring buffer for incoming audio</span></div>
 <div class="line"><a class="code hl_class" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer&lt;uint8_t&gt;</a> audio_buffer(48000 * 2);  <span class="comment">// 1 second @ 48kHz stereo</span></div>
@@ -429,7 +429,7 @@ Typical Usage</h2>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a1ac7822956f57069d76da865d6b33c55"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">audio_tools::AudioInfo::channels</a></div><div class="ttdeci">uint16_t channels</div><div class="ttdoc">Number of channels: 2=stereo, 1=mono.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:55</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_aa65c89fa8336bfdc4f8d916d9d415a9f"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">audio_tools::AudioInfo::bits_per_sample</a></div><div class="ttdeci">uint8_t bits_per_sample</div><div class="ttdoc">Number of bits per sample (int16_t = 16 bits)</div><div class="ttdef"><b>Definition</b> AudioTypes.h:57</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_s_p_i_audio_slave_config_html"><div class="ttname"><a href="structaudio__tools_1_1_s_p_i_audio_slave_config.html">audio_tools::SPIAudioSlaveConfig</a></div><div class="ttdoc">Configuration for SPIAudioSlave.</div><div class="ttdef"><b>Definition</b> SPIAudioSlave.h:31</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md45"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md46"></a>
 Performance Notes</h2>
 <ul>
 <li><b>Byte-wise handler</b>: Minimal latency, suitable for ISR context. No buffering.</li>

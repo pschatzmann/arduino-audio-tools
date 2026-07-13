@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: EchoState&lt; SampleType &gt; Struct Template Reference</title>
+<title>arduino-audio-tools: EchoState&lt; T, SampleType &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -77,7 +77,7 @@ $(function() {
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="structaudio__tools_1_1_echo_state-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">EchoState&lt; SampleType &gt; Struct Template Reference</div></div>
+  <div class="headertitle"><div class="title">EchoState&lt; T, SampleType &gt; Struct Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -153,8 +153,8 @@ Public Attributes</h2></td></tr>
 <tr class="separator:ad164cf08a85afc085b206297f9a95767"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c716a4a3961a72457623560c5b9e7e1" id="r_a2c716a4a3961a72457623560c5b9e7e1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a2c716a4a3961a72457623560c5b9e7e1">PHI</a></td></tr>
 <tr class="separator:a2c716a4a3961a72457623560c5b9e7e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6288ba774988db41632007b528fc65a6" id="r_a6288ba774988db41632007b528fc65a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a25c24b2079cdf78e398b7c49cb83d651">echo_int16_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a6288ba774988db41632007b528fc65a6">play_buf</a></td></tr>
-<tr class="separator:a6288ba774988db41632007b528fc65a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94e931f2b7958b100eb31fe0008b17be" id="r_a94e931f2b7958b100eb31fe0008b17be"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a94e931f2b7958b100eb31fe0008b17be">play_buf</a></td></tr>
+<tr class="separator:a94e931f2b7958b100eb31fe0008b17be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23fc8ece98896db1d65403bf33a4f3b0" id="r_a23fc8ece98896db1d65403bf33a4f3b0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a23fc8ece98896db1d65403bf33a4f3b0">play_buf_pos</a></td></tr>
 <tr class="separator:a23fc8ece98896db1d65403bf33a4f3b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af3481ebe3a76c6a4da9040cc55cb4cd4" id="r_af3481ebe3a76c6a4da9040cc55cb4cd4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#af3481ebe3a76c6a4da9040cc55cb4cd4">play_buf_started</a></td></tr>
@@ -205,11 +205,13 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a302ab144b74a925e4be2b99cb5900d75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename SampleType&gt;<br />
-struct audio_tools::EchoState&lt; SampleType &gt;</div><p>Internal echo canceller state structure. </p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T, typename SampleType&gt;<br />
+struct audio_tools::EchoState&lt; T, SampleType &gt;</div><p>Internal echo canceller state structure. </p>
 <p>Contains all internal state variables and buffers for the MDF (Multi-Delay block Frequency adaptive filter) echo cancellation algorithm. This structure should never be accessed directly by users; use the EchoCanceller class methods instead.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
+    <tr><td class="paramname">T</td><td>The PCM sample type (e.g. int16_t, int32_t) used for play_buf &ndash; must match <a class="el" href="classaudio__tools_1_1_m_d_f_echo_cancellation.html" title="Acoustic echo canceller using MDF algorithm.">MDFEchoCancellation</a>'s own </td></tr>
+    <tr><td class="paramname">T.</td><td></td></tr>
     <tr><td class="paramname">SampleType</td><td><a class="el" href="structaudio__tools_1_1_m_d_f_float.html" title="Selects float as MDFEchoCancellation&#39;s internal numeric representation for sample/spectrum arrays (wo...">MDFFloat</a> (default) or <a class="el" href="structaudio__tools_1_1_m_d_f_fixed_point.html" title="Selects PseudoFloat (see PseudoFloat.h) as MDFEchoCancellation&#39;s internal numeric representation,...">MDFFixedPoint</a> &ndash; selects the numeric type used for the arrays/state below (see either struct's doc).</td></tr>
   </table>
   </dd>
@@ -222,7 +224,7 @@ struct audio_tools::EchoState&lt; SampleType &gt;</div><p>Internal echo cancelle
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">using <a class="el" href="structaudio__tools_1_1_echo_state.html#a8e255bf79c603d36664c2488da3a201a">Mem</a> =  <a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a></td>
@@ -238,7 +240,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">using <a class="el" href="structaudio__tools_1_1_echo_state.html#abce58cab65b741ca6b7ee0c4a410dd2e">Num</a> =  typename SampleType::float_t</td>
@@ -254,7 +256,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">using <a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a> =  typename SampleType::word16_t</td>
@@ -270,7 +272,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">using <a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a> =  typename SampleType::word32_t</td>
@@ -287,7 +289,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">int adapted</td>
@@ -303,7 +305,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a> beta0</td>
@@ -319,7 +321,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a> beta_max</td>
@@ -335,7 +337,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">int C</td>
@@ -351,7 +353,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">int cancel_count</td>
@@ -367,7 +369,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a> Davg1</td>
@@ -383,7 +385,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a> Davg2</td>
@@ -399,7 +401,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#abce58cab65b741ca6b7ee0c4a410dd2e">Num</a> Dvar1</td>
@@ -415,7 +417,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#abce58cab65b741ca6b7ee0c4a410dd2e">Num</a> Dvar2</td>
@@ -431,7 +433,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a>* e</td>
@@ -447,7 +449,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a>* E</td>
@@ -463,7 +465,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a>* Eh</td>
@@ -479,7 +481,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">void* fft_table</td>
@@ -495,7 +497,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a>* foreground</td>
@@ -511,7 +513,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">int frame_size</td>
@@ -528,7 +530,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a>* input</td>
@@ -544,7 +546,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">int K</td>
@@ -561,7 +563,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a>* last_y</td>
@@ -577,7 +579,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a> leak_estimate</td>
@@ -593,7 +595,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">int M</td>
@@ -609,7 +611,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a> * memD</td>
@@ -625,7 +627,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a> * memE</td>
@@ -641,7 +643,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a>* memX</td>
@@ -657,7 +659,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a8e255bf79c603d36664c2488da3a201a">Mem</a>* notch_mem</td>
@@ -673,7 +675,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a> notch_radius</td>
@@ -689,7 +691,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#abce58cab65b741ca6b7ee0c4a410dd2e">Num</a> Pey</td>
@@ -705,7 +707,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a>* PHI</td>
@@ -715,16 +717,16 @@ template&lt;typename SampleType &gt; </div>
 
 </div>
 </div>
-<a id="a6288ba774988db41632007b528fc65a6" name="a6288ba774988db41632007b528fc65a6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6288ba774988db41632007b528fc65a6">&#9670;&#160;</a></span>play_buf</h2>
+<a id="a94e931f2b7958b100eb31fe0008b17be" name="a94e931f2b7958b100eb31fe0008b17be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94e931f2b7958b100eb31fe0008b17be">&#9670;&#160;</a></span>play_buf</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a25c24b2079cdf78e398b7c49cb83d651">echo_int16_t</a>* play_buf</td>
+          <td class="memname">T* play_buf</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -737,7 +739,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">int play_buf_pos</td>
@@ -753,7 +755,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">int play_buf_started</td>
@@ -769,7 +771,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a>* power</td>
@@ -785,7 +787,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#abce58cab65b741ca6b7ee0c4a410dd2e">Num</a>* power_1</td>
@@ -801,7 +803,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a> preemph</td>
@@ -817,7 +819,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a>* prop</td>
@@ -833,7 +835,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#abce58cab65b741ca6b7ee0c4a410dd2e">Num</a> Pyy</td>
@@ -849,7 +851,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a>* Rf</td>
@@ -865,7 +867,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="namespaceaudio__tools.html#af041250f3317a01414c9fda16da1907c">echo_int32_t</a> sampling_rate</td>
@@ -882,7 +884,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">int saturated</td>
@@ -898,7 +900,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">int screwed_up</td>
@@ -914,7 +916,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a> spec_average</td>
@@ -930,7 +932,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a> sum_adapt</td>
@@ -946,7 +948,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a>* W</td>
@@ -962,7 +964,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a>* window</td>
@@ -978,7 +980,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">int window_size</td>
@@ -994,7 +996,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a>* wtmp</td>
@@ -1010,7 +1012,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a>* x</td>
@@ -1026,7 +1028,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a>* X</td>
@@ -1042,7 +1044,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a>* Xf</td>
@@ -1058,7 +1060,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a>* y</td>
@@ -1074,7 +1076,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a>* Y</td>
@@ -1090,7 +1092,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a>* Yf</td>
@@ -1106,7 +1108,7 @@ template&lt;typename SampleType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleType &gt; </div>
+template&lt;typename T , typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a>* Yh</td>

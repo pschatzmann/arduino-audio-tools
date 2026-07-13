@@ -7,7 +7,7 @@ var searchData=
   ['m4afilesamplesizebuffer_4',['M4AFileSampleSizeBuffer',['../classaudio__tools_1_1_m4_a_file_sample_size_buffer.html',1,'audio_tools']]],
   ['maximilian_5',['Maximilian',['../classaudio__tools_1_1_maximilian.html',1,'audio_tools']]],
   ['mdfechocancellation_6',['MDFEchoCancellation',['../classaudio__tools_1_1_m_d_f_echo_cancellation.html',1,'audio_tools']]],
-  ['mdfechocancellation_3c_20mdffloat_20_3e_7',['MDFEchoCancellation&lt; MDFFloat &gt;',['../classaudio__tools_1_1_m_d_f_echo_cancellation.html',1,'audio_tools']]],
+  ['mdfechocancellation_3c_20int16_5ft_2c_20mdffloat_20_3e_7',['MDFEchoCancellation&lt; int16_t, MDFFloat &gt;',['../classaudio__tools_1_1_m_d_f_echo_cancellation.html',1,'audio_tools']]],
   ['mdfechocancellationstream_8',['MDFEchoCancellationStream',['../classaudio__tools_1_1_m_d_f_echo_cancellation_stream.html',1,'audio_tools']]],
   ['mdffixedpoint_9',['MDFFixedPoint',['../structaudio__tools_1_1_m_d_f_fixed_point.html',1,'audio_tools']]],
   ['mdffloat_10',['MDFFloat',['../structaudio__tools_1_1_m_d_f_float.html',1,'audio_tools']]],

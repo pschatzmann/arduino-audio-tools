@@ -280,7 +280,7 @@ var searchData=
   ['vorbis_5fheader_5fopen_5flimit_277',['VORBIS_HEADER_OPEN_LIMIT',['../_codec_vorbis_8h.html#a6173a1eadd252009861f096c9ccac1a0',1,'CodecVorbis.h']]],
   ['vorbisdecoder_278',['vorbisdecoder',['../classaudio__tools_1_1_vorbis_decoder.html#a6a1e0eabfd0e36b07f1fc454c36050cd',1,'audio_tools::VorbisDecoder::VorbisDecoder()=default'],['../classaudio__tools_1_1_vorbis_decoder.html#acae85448d4970016df262224d5e78e55',1,'audio_tools::VorbisDecoder::VorbisDecoder(size_t buffer_size=256, int header_packets=3)'],['../classaudio__tools_1_1_vorbis_decoder.html',1,'VorbisDecoder']]],
   ['vorbisdecoder_2eh_279',['VorbisDecoder.h',['../_vorbis_decoder_8h.html',1,'']]],
-  ['vs_20mdffixedpoint_280',['SampleType: MDFFloat vs MDFFixedPoint',['..//home/runner/work/arduino-audio-tools/arduino-audio-tools/src/AudioTools/AEC/README.md#autotoc_md14',1,'']]],
+  ['vs_20mdffixedpoint_280',['SampleType: MDFFloat vs MDFFixedPoint',['..//home/runner/work/arduino-audio-tools/arduino-audio-tools/src/AudioTools/AEC/README.md#autotoc_md15',1,'']]],
   ['vs1053_5fcs_281',['vs1053_cs',['../unor4_8h.html#ae2f9931ce076f3d2ae5914881569f0bd',1,'VS1053_CS:&#160;unor4.h'],['../rp2040hower_8h.html#ae2f9931ce076f3d2ae5914881569f0bd',1,'VS1053_CS:&#160;rp2040hower.h']]],
   ['vs1053_5fcs_5fsd_282',['vs1053_cs_sd',['../rp2040hower_8h.html#a432e88e5ef80c8679a286d05d6275e9d',1,'VS1053_CS_SD:&#160;rp2040hower.h'],['../unor4_8h.html#a432e88e5ef80c8679a286d05d6275e9d',1,'VS1053_CS_SD:&#160;unor4.h']]],
   ['vs1053_5fdcs_283',['vs1053_dcs',['../unor4_8h.html#a4397cd27e2d7fd2d0e02bff178c66ea1',1,'VS1053_DCS:&#160;unor4.h'],['../rp2040hower_8h.html#a4397cd27e2d7fd2d0e02bff178c66ea1',1,'VS1053_DCS:&#160;rp2040hower.h']]],

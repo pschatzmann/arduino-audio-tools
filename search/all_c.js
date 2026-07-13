@@ -203,7 +203,7 @@ var searchData=
   ['int_5fdone_5fcb_5f_200',['int_done_cb_',['../classaudio__tools_1_1_u_s_b_audio_device_base.html#adb2c01b6f629078fa20141387b500204',1,'audio_tools::USBAudioDeviceBase']]],
   ['int_5fnotify_5fbuf_5f_201',['int_notify_buf_',['../classaudio__tools_1_1_u_s_b_audio_device_base.html#ae35e4ab6161805aac7d031a5f6aa75d7',1,'audio_tools::USBAudioDeviceBase']]],
   ['integral_202',['integral',['../classaudio__tools_1_1_p_i_d_controller.html#a1174af01b8a329a6d465ea6e0951b3e5',1,'audio_tools::PIDController']]],
-  ['integration_203',['2. Frame-based Helper (Testing/Integration)',['../classaudio__tools_1_1_s_p_i_audio_slave.html#autotoc_md38',1,'']]],
+  ['integration_203',['2. Frame-based Helper (Testing/Integration)',['../classaudio__tools_1_1_s_p_i_audio_slave.html#autotoc_md39',1,'']]],
   ['internalerror_204',['InternalError',['../classaudio__tools_1_1_s_p_i_audio_slave.html#a7d30a5d04ebac11084c4f8bd9cb40491ae696511a49921d2a6536428898e3977d',1,'audio_tools::SPIAudioSlave']]],
   ['interpolate_205',['interpolate',['../classaudio__tools_1_1_sine_from_table.html#a3535633ec4c9f67ec0095563db4eaadb',1,'audio_tools::SineFromTable::interpolate()'],['../classaudio__tools_1_1_variable_speed_ring_buffer.html#a3bce71572014e53be5e85c35a8d9192c',1,'audio_tools::VariableSpeedRingBuffer::interpolate()']]],
   ['interpolationtable_206',['interpolationTable',['../namespaceaudio__tools.html#a6a8099d013ab0669c1f915584b0ed32e',1,'audio_tools']]],

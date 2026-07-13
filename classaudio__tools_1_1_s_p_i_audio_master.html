@@ -226,10 +226,10 @@ Protected Attributes</h2></td></tr>
 <div class="textblock"><p>SPI master endpoint for remote audio sink configuration and PCM data transfer. </p>
 <dl class="section note"><dt>Note</dt><dd>Supported on all ESP32 Arduino platforms!</dd></dl>
 <p>This class implements the master side of a simple binary request/response protocol over SPI and is designed to work with <code><a class="el" href="classaudio__tools_1_1_s_p_i_audio_slave.html" title="SPI Audio Slave endpoint matching SPIAudioMaster protocol.">SPIAudioSlave</a></code>.</p>
-<h2><a class="anchor" id="autotoc_md24"></a>
+<h2><a class="anchor" id="autotoc_md25"></a>
 Protocol Overview</h2>
 <p><a class="el" href="classaudio__tools_1_1_s_p_i_audio_master.html" title="SPI master endpoint for remote audio sink configuration and PCM data transfer.">SPIAudioMaster</a> provides a lightweight binary protocol for controlling a remote audio sink and streaming PCM data over SPI. The protocol is request/response based; the master initiates all transactions and waits for slave responses.</p>
-<h2><a class="anchor" id="autotoc_md25"></a>
+<h2><a class="anchor" id="autotoc_md26"></a>
 Supported Commands</h2>
 <ul>
 <li><b>SetMime</b>: Configure remote MIME type (e.g., "audio/wav", "audio/mp3"). Helps the slave understand the audio format context.</li>
@@ -239,17 +239,17 @@ Supported Commands</h2>
 <li><b>GetFilledBufferSize</b>: Query how many bytes are currently buffered on the remote side and ready to be consumed. Useful for monitoring latency.</li>
 <li><b>Clear</b>: Reset the remote buffer (useful for state recovery).</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md26"></a>
+<h2><a class="anchor" id="autotoc_md27"></a>
 Wire Format</h2>
 <p><b>Request frame</b>: <code>cmd(1) + payload_len(2 LE) + payload(0..65535)</code> <b>Response frame</b>: <code>status(1) + response_len(2 LE) + response(0..65535)</code></p>
 <p>All multi-byte integers are little-endian. Payload length is uint16_t, allowing up to 64KB payloads per command.</p>
-<h2><a class="anchor" id="autotoc_md27"></a>
+<h2><a class="anchor" id="autotoc_md28"></a>
 Flow Control</h2>
 <p>The master supports two write modes via <code>is_blocking_write</code>:</p><ul>
 <li><b>is_blocking_write=false</b> (default): Non-blocking writes. <code><a class="el" href="classaudio__tools_1_1_s_p_i_audio_master.html#afd7270e10d851383ff7b53c1241f6ba1" title="Writes audio bytes in chunks using WriteData command.">write()</a></code> sends only the bytes that currently fit into the remote buffer and returns immediately.</li>
 <li><b>is_blocking_write=true</b>: Blocking writes. <code><a class="el" href="classaudio__tools_1_1_s_p_i_audio_master.html#afd7270e10d851383ff7b53c1241f6ba1" title="Writes audio bytes in chunks using WriteData command.">write()</a></code> waits until enough remote space is available for one chunk and then sends that chunk in a single SPI command.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md28"></a>
+<h2><a class="anchor" id="autotoc_md29"></a>
 Status Codes</h2>
 <p>Responses include status byte:</p><ul>
 <li>0: Ok (command executed successfully)</li>
@@ -258,7 +258,7 @@ Status Codes</h2>
 <li>3: BufferOverflow (slave buffer full, write rejected)</li>
 <li>4: InternalError (slave-side error)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md29"></a>
+<h2><a class="anchor" id="autotoc_md30"></a>
 SPI Configuration</h2>
 <p>Configure SPI bus settings via <code><a class="el" href="structaudio__tools_1_1_s_p_i_audio_master_config.html" title="Configuration for SPIAudioMaster.">SPIAudioMasterConfig</a></code>:</p><ul>
 <li><code>cs_pin</code>: Chip select GPIO (defaults to SS if defined, else 10). Set to <code>-1</code> to disable manual CS handling (external or hardware-controlled CS).</li>
@@ -268,7 +268,7 @@ SPI Configuration</h2>
 <li><code>max_payload</code>: Max bytes per WriteData command (default 1024)</li>
 <li><code>is_blocking_write</code>: Enable blocking write mode (default false)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md30"></a>
+<h2><a class="anchor" id="autotoc_md31"></a>
 Typical Usage</h2>
 <div class="fragment"><div class="line"><a class="code hl_class" href="classaudio__tools_1_1_s_p_i_audio_master.html">SPIAudioMaster</a> master;</div>
 <div class="line"><a class="code hl_struct" href="structaudio__tools_1_1_s_p_i_audio_master_config.html">SPIAudioMasterConfig</a> <a class="code hl_variable" href="classaudio__tools_1_1_audio_output.html#a07fab440d87063e83df0bc30223964c5">cfg</a>;</div>
@@ -298,7 +298,7 @@ Typical Usage</h2>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a1ac7822956f57069d76da865d6b33c55"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">audio_tools::AudioInfo::channels</a></div><div class="ttdeci">uint16_t channels</div><div class="ttdoc">Number of channels: 2=stereo, 1=mono.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:55</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_aa65c89fa8336bfdc4f8d916d9d415a9f"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">audio_tools::AudioInfo::bits_per_sample</a></div><div class="ttdeci">uint8_t bits_per_sample</div><div class="ttdoc">Number of bits per sample (int16_t = 16 bits)</div><div class="ttdef"><b>Definition</b> AudioTypes.h:57</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_s_p_i_audio_master_config_html"><div class="ttname"><a href="structaudio__tools_1_1_s_p_i_audio_master_config.html">audio_tools::SPIAudioMasterConfig</a></div><div class="ttdoc">Configuration for SPIAudioMaster.</div><div class="ttdef"><b>Definition</b> SPIAudioMaster.h:21</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md31"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md32"></a>
 Performance Notes</h2>
 <ul>
 <li>Each command triggers a full SPI transaction (multiple CS toggles).</li>

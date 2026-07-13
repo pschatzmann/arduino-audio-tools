@@ -87,26 +87,28 @@ $(function() {
 <code>#include &lt;cstdint&gt;</code><br />
 <code>#include &lt;cstdlib&gt;</code><br />
 <code>#include &lt;cstring&gt;</code><br />
+<code>#include &lt;type_traits&gt;</code><br />
 <code>#include &quot;<a class="el" href="_m_d_f_echo_cancellation_config_8h_source.html">MDFEchoCancellationConfig.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_pseudo_float_8h_source.html">PseudoFloat.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_audio_f_f_t_8h_source.html">AudioTools/FFT/AudioFFT.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_allocator_8h_source.html">AudioTools/CoreAudio/AudioBasic/Collections/Allocator.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_audio_types_8h_source.html">AudioTools/CoreAudio/AudioTypes.h</a>&quot;</code><br />
 </div>
 <p><a href="_m_d_f_echo_cancellation_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html">EchoState&lt; SampleType &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html">EchoState&lt; T, SampleType &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal echo canceller state structure.  <a href="structaudio__tools_1_1_echo_state.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1fft__state.html">fft_state</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">FFT state management structure.  <a href="structaudio__tools_1_1fft__state.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_d_f_echo_cancellation.html">MDFEchoCancellation&lt; SampleType &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_d_f_echo_cancellation.html">MDFEchoCancellation&lt; T, SampleType &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Acoustic echo canceller using MDF algorithm.  <a href="classaudio__tools_1_1_m_d_f_echo_cancellation.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_m_d_f_fixed_point.html">MDFFixedPoint</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects <a class="el" href="classaudio__tools_1_1_pseudo_float.html" title="Software &quot;pseudo-float&quot;: a real number represented as a signed 16-bit mantissa plus a 16-bit exponent...">PseudoFloat</a> (see <a class="el" href="_pseudo_float_8h.html">PseudoFloat.h</a>) as <a class="el" href="classaudio__tools_1_1_m_d_f_echo_cancellation.html" title="Acoustic echo canceller using MDF algorithm.">MDFEchoCancellation</a>'s internal numeric representation, so the algorithm runs on integer mantissa/exponent arithmetic instead of native float instructions &ndash; useful on microcontrollers without an FPU. <a class="el" href="classaudio__tools_1_1_pseudo_float.html" title="Software &quot;pseudo-float&quot;: a real number represented as a signed 16-bit mantissa plus a 16-bit exponent...">PseudoFloat</a>'s arithmetic is verified against native float directly (see the <a class="el" href="classaudio__tools_1_1_pseudo_float.html" title="Software &quot;pseudo-float&quot;: a real number represented as a signed 16-bit mantissa plus a 16-bit exponent...">PseudoFloat</a> tests in tests-cmake/stt/stt_test.cpp), and MDFEchoCancellation&lt;MDFFixedPoint&gt; is smoke-tested to run without crashing/NaN and to converge similarly to <a class="el" href="structaudio__tools_1_1_m_d_f_float.html" title="Selects float as MDFEchoCancellation&#39;s internal numeric representation for sample/spectrum arrays (wo...">MDFFloat</a> on the same synthetic signal &ndash; but it has not received the same depth of numerical scrutiny as <a class="el" href="structaudio__tools_1_1_m_d_f_float.html" title="Selects float as MDFEchoCancellation&#39;s internal numeric representation for sample/spectrum arrays (wo...">MDFFloat</a>, so treat it as less battle-tested. Despite the name, this is not a classic narrow Q15 fixed-point format (that would over/underflow across this algorithm's actual value range &ndash; see <a class="el" href="classaudio__tools_1_1_pseudo_float.html" title="Software &quot;pseudo-float&quot;: a real number represented as a signed 16-bit mantissa plus a 16-bit exponent...">PseudoFloat</a>'s class doc for why).  <a href="structaudio__tools_1_1_m_d_f_fixed_point.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects <a class="el" href="classaudio__tools_1_1_pseudo_float.html" title="Software &quot;pseudo-float&quot;: a real number represented as a signed 16-bit mantissa plus a 16-bit exponent...">PseudoFloat</a> (see <a class="el" href="_pseudo_float_8h.html">PseudoFloat.h</a>) as <a class="el" href="classaudio__tools_1_1_m_d_f_echo_cancellation.html" title="Acoustic echo canceller using MDF algorithm.">MDFEchoCancellation</a>'s internal numeric representation, so the algorithm runs on integer mantissa/exponent arithmetic instead of native float instructions &ndash; useful on microcontrollers without an FPU. <a class="el" href="classaudio__tools_1_1_pseudo_float.html" title="Software &quot;pseudo-float&quot;: a real number represented as a signed 16-bit mantissa plus a 16-bit exponent...">PseudoFloat</a>'s arithmetic is verified against native float directly (see the <a class="el" href="classaudio__tools_1_1_pseudo_float.html" title="Software &quot;pseudo-float&quot;: a real number represented as a signed 16-bit mantissa plus a 16-bit exponent...">PseudoFloat</a> tests in tests-cmake/stt/stt_test.cpp), and MDFEchoCancellation&lt;int16_t, MDFFixedPoint&gt; is smoke-tested to run without crashing/NaN and to converge similarly to <a class="el" href="structaudio__tools_1_1_m_d_f_float.html" title="Selects float as MDFEchoCancellation&#39;s internal numeric representation for sample/spectrum arrays (wo...">MDFFloat</a> on the same synthetic signal &ndash; but it has not received the same depth of numerical scrutiny as <a class="el" href="structaudio__tools_1_1_m_d_f_float.html" title="Selects float as MDFEchoCancellation&#39;s internal numeric representation for sample/spectrum arrays (wo...">MDFFloat</a>, so treat it as less battle-tested. Despite the name, this is not a classic narrow Q15 fixed-point format (that would over/underflow across this algorithm's actual value range &ndash; see <a class="el" href="classaudio__tools_1_1_pseudo_float.html" title="Software &quot;pseudo-float&quot;: a real number represented as a signed 16-bit mantissa plus a 16-bit exponent...">PseudoFloat</a>'s class doc for why).  <a href="structaudio__tools_1_1_m_d_f_fixed_point.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_m_d_f_float.html">MDFFloat</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects <code>float</code> as <a class="el" href="classaudio__tools_1_1_m_d_f_echo_cancellation.html" title="Acoustic echo canceller using MDF algorithm.">MDFEchoCancellation</a>'s internal numeric representation for sample/spectrum arrays (word16_t/word32_t) and wide-dynamic-range control state (float_t). This is the default, and the one that has been verified to converge (see test_mdf_converges in tests-cmake/stt/stt_test.cpp) &ndash; prefer it unless you specifically need to avoid hardware floating-point instructions (e.g. no FPU).  <a href="structaudio__tools_1_1_m_d_f_float.html#details">More...</a><br /></td></tr>
@@ -130,8 +132,6 @@ Macros</h2></td></tr>
 <tr class="separator:a508a5bae9fb580e6d6b64f1c08662d5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9cc8a8985e4ec23ca5ac2195dbb2baa3" id="r_a9cc8a8985e4ec23ca5ac2195dbb2baa3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a9cc8a8985e4ec23ca5ac2195dbb2baa3">ECHO_SET_SAMPLING_RATE</a>&#160;&#160;&#160;24</td></tr>
 <tr class="separator:a9cc8a8985e4ec23ca5ac2195dbb2baa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44fc38e6eb1986b67896fa10e2d2e3a0" id="r_a44fc38e6eb1986b67896fa10e2d2e3a0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_d_f_echo_cancellation_8h.html#a44fc38e6eb1986b67896fa10e2d2e3a0">WORD2INT</a>(x)</td></tr>
-<tr class="separator:a44fc38e6eb1986b67896fa10e2d2e3a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -230,27 +230,6 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a id="a44fc38e6eb1986b67896fa10e2d2e3a0" name="a44fc38e6eb1986b67896fa10e2d2e3a0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a44fc38e6eb1986b67896fa10e2d2e3a0">&#9670;&#160;</a></span>WORD2INT</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define WORD2INT</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">x</td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">  ((x) &lt; -32767.5f  \</div>
-<div class="line">       ? -32768     \</div>
-<div class="line">       : ((x) &gt; 32766.5f ? 32767 : (echo_int16_t)floorf(.5f + (x))))</div>
-</div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->

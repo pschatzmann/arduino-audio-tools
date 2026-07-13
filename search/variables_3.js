@@ -7,7 +7,7 @@ var searchData=
   ['callbacks_4',['callbacks',['../classaudio__tools_1_1_m_p4_parser.html#a65346921c57abe52d690b5f58c9c6fcd',1,'audio_tools::MP4Parser::callbacks'],['../classaudio__tools_1_1_o_s_c_data.html#af3383f864a641a7190f2202e909ca0d9',1,'audio_tools::OSCData::callbacks'],['../classaudio__tools_1_1_vorbis_decoder.html#a95289d00b2a2f13ba2f75658829dca7b',1,'audio_tools::VorbisDecoder::callbacks']]],
   ['callgeneric_5',['callGeneric',['../structaudio__tools_1_1_m_p4_parser_1_1_callback_entry.html#ad5ce83c82b757fff683a52ce389cbd28',1,'audio_tools::MP4Parser::CallbackEntry']]],
   ['cancel_5fcount_6',['cancel_count',['../structaudio__tools_1_1_echo_state.html#acbd2054663504990db9967b83d2fd2b7',1,'audio_tools::EchoState']]],
-  ['canceller_7',['canceller',['../classaudio__tools_1_1_m_d_f_echo_cancellation_stream.html#a6bff883dd5b4b28b141925560d4d372d',1,'audio_tools::MDFEchoCancellationStream']]],
+  ['canceller_7',['canceller',['../classaudio__tools_1_1_m_d_f_echo_cancellation_stream.html#affe3d4bca1b8303518553bde913f75d9',1,'audio_tools::MDFEchoCancellationStream']]],
   ['capacity_5fmask_8',['capacity_mask',['../classaudio__tools_1_1_queue_lock_free.html#aef1f1005a780c5069e1fdee90b51ec86',1,'audio_tools::QueueLockFree']]],
   ['capacity_5fvalue_9',['capacity_value',['../classaudio__tools_1_1_queue_lock_free.html#a3a311080bf46e428e7d542040cecc6d5',1,'audio_tools::QueueLockFree']]],
   ['card_10',['card',['../classaudio__tools_1_1_v_f_s___s_d_m_m_c.html#ad85cb86f6cbc94b88b09c3315c9028f1',1,'audio_tools::VFS_SDMMC::card'],['../classaudio__tools_1_1_v_f_s___s_d_s_p_i.html#ad85cb86f6cbc94b88b09c3315c9028f1',1,'audio_tools::VFS_SDSPI::card']]],
