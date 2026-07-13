@@ -66,6 +66,7 @@ struct FFTEffectConfig : public AudioInfo {
  * collapses the signal to dual-mono and loses the original stereo image -
  * it does not process channels independently.
  * @ingroup transform
+ * @ingroup fft
  * @author phil schatzmann
  */
 

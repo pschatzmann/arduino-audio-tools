@@ -6,7 +6,11 @@
  * @date 2022-04-29
  *
  * @copyright Copyright (c) 2022
- *
+/**
+ * @defgroup fft-window FFT-Window
+ * @ingroup fft
+ * @brief FFT Window Functions
+ **/
  */
 #pragma once
 
@@ -19,6 +23,7 @@ namespace audio_tools {
  * @brief FFT Window Function
  * @author Phil Schatzmann
  * @copyright GPLv3
+ * @ingroup fft-window
  */
 
 class WindowFunction {
@@ -66,6 +71,7 @@ class WindowFunction {
 /**
  * @brief Buffered window function, so that we do not need to re-calculate the
  * values
+ * @ingroup fft-window
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -106,6 +112,7 @@ class BufferedWindow : public WindowFunction {
 
 /**
  * @brief Rectange FFT Window function
+ * @ingroup fft-window
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -121,6 +128,7 @@ class Rectange : public WindowFunction {
 
 /**
  * @brief Hamming FFT Window function
+ * @ingroup fft-window
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -135,6 +143,7 @@ class Hamming : public WindowFunction {
 
 /**
  * @brief Hann FFT Window function
+ * @ingroup fft-window
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -150,6 +159,7 @@ class Hann : public WindowFunction {
 
 /**
  * @brief Triangle FFT Window function
+ * @ingroup fft-window
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -166,6 +176,7 @@ class Triangle : public WindowFunction {
 
 /**
  * @brief Nuttall FFT Window function
+ * @ingroup fft-window
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -183,6 +194,7 @@ class Nuttall : public WindowFunction {
 
 /**
  * @brief Blackman FFT Window function
+ * @ingroup fft-window
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -200,6 +212,7 @@ class Blackman : public WindowFunction {
 
 /**
  * @brief BlackmanNuttall FFT Window function
+ * @ingroup fft-window
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -216,6 +229,7 @@ class BlackmanNuttall : public WindowFunction {
 
 /**
  * @brief BlackmanHarris FFT Window function
+ * @ingroup fft-window
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -232,6 +246,7 @@ class BlackmanHarris : public WindowFunction {
 
 /**
  * @brief FlatTop FFT Window function
+ * @ingroup fft-window
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -248,6 +263,7 @@ class FlatTop : public WindowFunction {
 
 /**
  * @brief Welch FFT Window function
+ * @ingroup fft-window
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
