@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['k_0',['k',['../group___echo_state.html#ga2689c4b3931025b79053532a5f1b0a85',1,'audio_tools::EchoState::K'],['../classaudio__tools_1_1_kalman_filter.html#a58122f7e1c43eecec768d649fef79876',1,'audio_tools::KalmanFilter::K']]],
+  ['k_0',['k',['../structaudio__tools_1_1_echo_state.html#a2689c4b3931025b79053532a5f1b0a85',1,'audio_tools::EchoState::K'],['../classaudio__tools_1_1_kalman_filter.html#a58122f7e1c43eecec768d649fef79876',1,'audio_tools::KalmanFilter::K']]],
   ['k_5fdata_1',['k_data',['../classaudio__tools_1_1_f_f_t_driver_kiss_f_f_t.html#a71225149e017ff83a2646f58e85df919',1,'audio_tools::FFTDriverKissFFT']]],
   ['ka_5fversion_2',['KA_VERSION',['../_k_a_radio_protocol_8h.html#ac7f9888713cbd5fe7ae0b7ef773562a5',1,'KARadioProtocol.h']]],
   ['kalman_5ffilter_3',['kalman_filter',['../classaudio__tools_1_1_adaptive_resampling_buffer.html#a1ecb3cf2fe16d8869b63532223f0de8c',1,'audio_tools::AdaptiveResamplingBuffer']]],

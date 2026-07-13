@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['e_0',['e',['../group___echo_state.html#gadd5642c93d0db83aca130bf517d43d92',1,'audio_tools::EchoState::E'],['../group___echo_state.html#ga69e4d71eb53ae08abd055977ea10e968',1,'audio_tools::EchoState::e']]],
+  ['e_0',['e',['../structaudio__tools_1_1_echo_state.html#add5642c93d0db83aca130bf517d43d92',1,'audio_tools::EchoState::E'],['../structaudio__tools_1_1_echo_state.html#a69e4d71eb53ae08abd055977ea10e968',1,'audio_tools::EchoState::e']]],
   ['effect_5fvalue_1',['effect_value',['../classaudio__tools_1_1_pitch_shift.html#aadbca1011884df66c3dcca2932eef2d8',1,'audio_tools::PitchShift']]],
   ['effectgain_2',['effectGain',['../classaudio__tools_1_1_simple_flanger.html#aefc0405dcc62ff631b2ca54f74da93a0',1,'audio_tools::SimpleFlanger']]],
   ['effects_3',['effects',['../classaudio__tools_1_1_audio_effect_common.html#a582a43eb372fcf56ab01bb61996c150e',1,'audio_tools::AudioEffectCommon::effects'],['../classaudio__tools_1_1_audio_effects.html#aabf82b9d0d68dbcf9120221076b05b01',1,'audio_tools::AudioEffects::effects'],['../classaudio__tools_1_1_audio_effect_stream_t.html#aabf82b9d0d68dbcf9120221076b05b01',1,'audio_tools::AudioEffectStreamT::effects'],['../classaudio__tools_1_1_default_synthesizer_channel.html#aabf82b9d0d68dbcf9120221076b05b01',1,'audio_tools::DefaultSynthesizerChannel::effects']]],
-  ['eh_4',['Eh',['../group___echo_state.html#gaa031598bb65ae2f2aa21dc19ee027dd9',1,'audio_tools::EchoState']]],
+  ['eh_4',['Eh',['../structaudio__tools_1_1_echo_state.html#aa031598bb65ae2f2aa21dc19ee027dd9',1,'audio_tools::EchoState']]],
   ['element_5fcount_5',['element_count',['../classaudio__tools_1_1_ring_buffer_file.html#aefcb7028280d7a692203f3b46b1c42be',1,'audio_tools::RingBufferFile']]],
   ['empty_6',['empty',['../classaudio__tools_1_1_n_buffer_file.html#ac83f4d9ebac626752cecc0bcc9165430',1,'audio_tools::NBufferFile']]],
   ['empty_5ffiles_7',['empty_files',['../classaudio__tools_1_1_n_buffer_file.html#a6ba3690490ea0b635d140b869848d6b1',1,'audio_tools::NBufferFile']]],

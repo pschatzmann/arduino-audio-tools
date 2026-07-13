@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['w_0',['W',['../group___echo_state.html#ga2f1ba93ec6c7a906dc89cd5e756e8113',1,'audio_tools::EchoState']]],
+  ['w_0',['W',['../structaudio__tools_1_1_echo_state.html#a2f1ba93ec6c7a906dc89cd5e756e8113',1,'audio_tools::EchoState']]],
   ['w_5f0_1',['w_0',['../classaudio__tools_1_1_bi_quad_d_f2.html#a2267aadc45738cfe1cb97b9559fd9367',1,'audio_tools::BiQuadDF2']]],
   ['w_5f1_2',['w_1',['../classaudio__tools_1_1_bi_quad_d_f2.html#a598d2e75d74526b143114836454d742d',1,'audio_tools::BiQuadDF2']]],
   ['wait_5ffor_5fconnection_3',['wait_for_connection',['../classaudio__tools_1_1_a2_d_p_config.html#aa7690bfcae37b7b143d4031eea1c0eea',1,'audio_tools::A2DPConfig']]],
@@ -35,7 +35,7 @@ var searchData=
   ['websocketoutput_2eh_32',['WebSocketOutput.h',['../_web_socket_output_8h.html',1,'']]],
   ['weight_33',['weight',['../structaudio__tools_1_1_input_merge_1_1_merge_record.html#a8128625c9e3fd04c27b82957732d8781',1,'audio_tools::InputMerge::MergeRecord']]],
   ['weight_5fshift_34',['WEIGHT_SHIFT',['../_m_d_f_echo_cancellation_8h.html#a9677106bd940bb1da6ee9a673df157a3',1,'MDFEchoCancellation.h']]],
-  ['weightedspectralmulconj_35',['weightedSpectralMulConj',['../group___echo_state.html#gae4da351d4963ccbd1c8a7772c86dcdfa',1,'audio_tools::MDFEchoCancellation']]],
+  ['weightedspectralmulconj_35',['weightedSpectralMulConj',['../classaudio__tools_1_1_m_d_f_echo_cancellation.html#ae4da351d4963ccbd1c8a7772c86dcdfa',1,'audio_tools::MDFEchoCancellation']]],
   ['weights_36',['weights',['../classaudio__tools_1_1_input_mixer.html#a7861c64fd6773c88d1782150b865fbb9',1,'audio_tools::InputMixer::weights'],['../classaudio__tools_1_1_output_mixer.html#a795dfff1dd7c7e2381cedf65cd292fd7',1,'audio_tools::OutputMixer::weights']]],
   ['welch_37',['welch',['../classaudio__tools_1_1_welch.html',1,'Welch'],['../classaudio__tools_1_1_welch.html#adfd640a89bf1b66686666af5ca89db55',1,'audio_tools::Welch::Welch()']]],
   ['wformattag_38',['wFormatTag',['../structaudio__tools_1_1_w_a_v_format_x.html#afa21f4c1cfbdf05c16167ef16c6c4bac',1,'audio_tools::WAVFormatX']]],
@@ -62,11 +62,11 @@ var searchData=
   ['wifiudpzephyr_2eh_59',['WiFiUDPZephyr.h',['../_wi_fi_u_d_p_zephyr_8h.html',1,'']]],
   ['wifizephyr_60',['WiFiZephyr',['../classaudio__tools_1_1_wi_fi_zephyr.html',1,'audio_tools']]],
   ['wifizephyr_2eh_61',['WiFiZephyr.h',['../_wi_fi_zephyr_8h.html',1,'']]],
-  ['window_62',['window',['../group__fft-window.html',1,'FFT-Window'],['../classaudio__tools_1_1_jpeg_open_c_v.html#a2a1fd97d51d689b2cbf19aae6f42487b',1,'audio_tools::JpegOpenCV::window'],['../group___echo_state.html#gad62f7782034c388eb3c69e8bef878734',1,'audio_tools::EchoState::window']]],
+  ['window_62',['window',['../group__fft-window.html',1,'FFT-Window'],['../classaudio__tools_1_1_jpeg_open_c_v.html#a2a1fd97d51d689b2cbf19aae6f42487b',1,'audio_tools::JpegOpenCV::window'],['../structaudio__tools_1_1_echo_state.html#ad62f7782034c388eb3c69e8bef878734',1,'audio_tools::EchoState::window']]],
   ['window_5ffunction_63',['window_function',['../structaudio__tools_1_1_f_f_t_effect_config.html#a844cd7e00ad0a62016fe513da4d3bf73',1,'audio_tools::FFTEffectConfig::window_function'],['../structaudio__tools_1_1_audio_f_f_t_config.html#a844cd7e00ad0a62016fe513da4d3bf73',1,'audio_tools::AudioFFTConfig::window_function']]],
   ['window_5ffunction_5ffft_64',['window_function_fft',['../structaudio__tools_1_1_audio_f_f_t_config.html#a54b93a0d60348be00e5ce74a590619bb',1,'audio_tools::AudioFFTConfig']]],
   ['window_5ffunction_5fifft_65',['window_function_ifft',['../structaudio__tools_1_1_audio_f_f_t_config.html#a239482ff42a24a69a1c1a530da81a291',1,'audio_tools::AudioFFTConfig']]],
-  ['window_5fsize_66',['window_size',['../group___echo_state.html#ga1c7df51cd44a9862d56e5a86a7382fe2',1,'audio_tools::EchoState']]],
+  ['window_5fsize_66',['window_size',['../structaudio__tools_1_1_echo_state.html#a1c7df51cd44a9862d56e5a86a7382fe2',1,'audio_tools::EchoState']]],
   ['windowcoeffs_67',['windowCoeffs',['../classaudio__tools_1_1_equalizer_n_bands.html#ab162ec9959964609fc93431e4ebdf8a6',1,'audio_tools::EqualizerNBands']]],
   ['windowedsample_68',['windowedSample',['../classaudio__tools_1_1_audio_f_f_t_base.html#a177a0e58b5dd80a7abf7aa1e700ef7c1',1,'audio_tools::AudioFFTBase']]],
   ['windowfunction_69',['windowfunction',['../classaudio__tools_1_1_window_function.html#a1f01e9fa60473035b20b0dce00e46930',1,'audio_tools::WindowFunction::WindowFunction()'],['../classaudio__tools_1_1_window_function.html',1,'WindowFunction']]],
@@ -174,5 +174,5 @@ var searchData=
   ['writevaluet_171',['writeValueT',['../classaudio__tools_1_1_r2_r_output.html#ab2bf50ea3679bb3164b9ed9e6e5c7418',1,'audio_tools::R2ROutput']]],
   ['writewait_172',['writewait',['../classaudio__tools_1_1_buffer_r_t_o_s.html#a1d12dbda5da27a49c3a03b730731693e',1,'audio_tools::BufferRTOS::writeWait'],['../classaudio__tools_1_1_buffer_zephyr.html#a7ec9bb4c39399295073761466d0c3b16',1,'audio_tools::BufferZephyr::writeWait']]],
   ['written_173',['written',['../classaudio__tools_1_1_a_p_t_x_decoder.html#ac7ab1030344ab638a27ba415c914288a',1,'audio_tools::APTXDecoder']]],
-  ['wtmp_174',['wtmp',['../group___echo_state.html#gae87fca25dfdf6c89044c8eb4bdd1100e',1,'audio_tools::EchoState']]]
+  ['wtmp_174',['wtmp',['../structaudio__tools_1_1_echo_state.html#ae87fca25dfdf6c89044c8eb4bdd1100e',1,'audio_tools::EchoState']]]
 ];

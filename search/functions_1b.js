@@ -103,7 +103,7 @@ var searchData=
   ['_7elockguard_100',['~LockGuard',['../classaudio__tools_1_1_lock_guard.html#a6241dc9347c314e962bee11d50516f98',1,'audio_tools::LockGuard']]],
   ['_7em4acommondemuxer_101',['~M4ACommonDemuxer',['../classaudio__tools_1_1_m4_a_common_demuxer.html#ad088ccdd6b00f6c1c9a7c77ee8ef03b5',1,'audio_tools::M4ACommonDemuxer']]],
   ['_7emaximilian_102',['~Maximilian',['../classaudio__tools_1_1_maximilian.html#ac21dbd680b5e9b4168a9a2390f401d2c',1,'audio_tools::Maximilian']]],
-  ['_7emdfechocancellation_103',['~MDFEchoCancellation',['../group___echo_state.html#ga1f5eec91bdda19c76efdef449a8c38e9',1,'audio_tools::MDFEchoCancellation']]],
+  ['_7emdfechocancellation_103',['~MDFEchoCancellation',['../classaudio__tools_1_1_m_d_f_echo_cancellation.html#a1f5eec91bdda19c76efdef449a8c38e9',1,'audio_tools::MDFEchoCancellation']]],
   ['_7ememorystream_104',['~MemoryStream',['../classaudio__tools_1_1_memory_stream.html#a36ec148dcd5ac49c02e2c9087f195108',1,'audio_tools::MemoryStream']]],
   ['_7emetadataicy_105',['~MetaDataICY',['../classaudio__tools_1_1_meta_data_i_c_y.html#a2801205ca7fc312cc02bb31e02cb7c6d',1,'audio_tools::MetaDataICY']]],
   ['_7emetadataid3_106',['~MetaDataID3',['../classaudio__tools_1_1_meta_data_i_d3.html#a9ed95e8dc5ba0f268eb5f9b3419a4bb7',1,'audio_tools::MetaDataID3']]],

@@ -77,7 +77,7 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="structaudio__tools_1_1fft__state-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">fft_state Struct Reference<div class="ingroups"><a class="el" href="group___echo_state.html">EchoState: Acoustic echo canceller</a></div></div></div>
+  <div class="headertitle"><div class="title">fft_state Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -88,21 +88,98 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:gaff9c821c7a9a71cde6d75401c068fe20" id="r_gaff9c821c7a9a71cde6d75401c068fe20"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___echo_state.html#gaff9c821c7a9a71cde6d75401c068fe20">fft_state</a> (int size, <a class="el" href="classaudio__tools_1_1_f_f_t_driver.html">FFTDriver</a> *drv)</td></tr>
-<tr class="memdesc:gaff9c821c7a9a71cde6d75401c068fe20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct FFT state with specified size and driver.  <br /></td></tr>
-<tr class="separator:gaff9c821c7a9a71cde6d75401c068fe20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff9c821c7a9a71cde6d75401c068fe20" id="r_aff9c821c7a9a71cde6d75401c068fe20"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1fft__state.html#aff9c821c7a9a71cde6d75401c068fe20">fft_state</a> (int size, <a class="el" href="classaudio__tools_1_1_f_f_t_driver.html">FFTDriver</a> *drv)</td></tr>
+<tr class="memdesc:aff9c821c7a9a71cde6d75401c068fe20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct FFT state with specified size and driver.  <br /></td></tr>
+<tr class="separator:aff9c821c7a9a71cde6d75401c068fe20"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:gaa774257692cf1c61ae37bca312e860f2" id="r_gaa774257692cf1c61ae37bca312e860f2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_f_f_t_driver.html">FFTDriver</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___echo_state.html#gaa774257692cf1c61ae37bca312e860f2">driver</a></td></tr>
-<tr class="separator:gaa774257692cf1c61ae37bca312e860f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7722c8ecbb62d99aee7ce68b1752f337" id="r_ga7722c8ecbb62d99aee7ce68b1752f337"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___echo_state.html#ga7722c8ecbb62d99aee7ce68b1752f337">N</a></td></tr>
-<tr class="separator:ga7722c8ecbb62d99aee7ce68b1752f337"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa774257692cf1c61ae37bca312e860f2" id="r_aa774257692cf1c61ae37bca312e860f2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_f_f_t_driver.html">FFTDriver</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1fft__state.html#aa774257692cf1c61ae37bca312e860f2">driver</a></td></tr>
+<tr class="separator:aa774257692cf1c61ae37bca312e860f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7722c8ecbb62d99aee7ce68b1752f337" id="r_a7722c8ecbb62d99aee7ce68b1752f337"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1fft__state.html#a7722c8ecbb62d99aee7ce68b1752f337">N</a></td></tr>
+<tr class="separator:a7722c8ecbb62d99aee7ce68b1752f337"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>FFT state management structure. </p>
 <p>Manages FFT operations through the raw <a class="el" href="classaudio__tools_1_1_f_f_t_driver.html" title="Abstract Class which defines the basic FFT functionality.">FFTDriver</a> interface. This is a small, fixed-layout struct (just a driver pointer and a size), so it's allocated with plain new/delete rather than through the <a class="el" href="namespaceaudio__tools.html" title="Generic Implementation of sound input and output for desktop environments using portaudio.">audio_tools</a> <a class="el" href="classaudio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc.">Allocator</a> used for the (much larger) <a class="el" href="structaudio__tools_1_1_echo_state.html" title="Internal echo canceller state structure.">EchoState</a> buffers &ndash; consistent with how <a class="el" href="structaudio__tools_1_1_echo_state.html" title="Internal echo canceller state structure.">EchoState</a> itself is created (see echoStateInitMc()). </p>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aff9c821c7a9a71cde6d75401c068fe20" name="aff9c821c7a9a71cde6d75401c068fe20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff9c821c7a9a71cde6d75401c068fe20">&#9670;&#160;</a></span>fft_state()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1fft__state.html">fft_state</a> </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_f_f_t_driver.html">FFTDriver</a> *&#160;</td>
+          <td class="paramname"><em>drv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct FFT state with specified size and driver. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>FFT size (number of points) </td></tr>
+    <tr><td class="paramname">drv</td><td>Pointer to the raw FFT driver implementation </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="aa774257692cf1c61ae37bca312e860f2" name="aa774257692cf1c61ae37bca312e860f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa774257692cf1c61ae37bca312e860f2">&#9670;&#160;</a></span>driver</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_f_f_t_driver.html">FFTDriver</a>* driver</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Pointer to the raw FFT driver implementation </p>
+
+</div>
+</div>
+<a id="a7722c8ecbb62d99aee7ce68b1752f337" name="a7722c8ecbb62d99aee7ce68b1752f337"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7722c8ecbb62d99aee7ce68b1752f337">&#9670;&#160;</a></span>N</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int N</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>FFT size </p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
 <li>src/AudioTools/AEC/<a class="el" href="_m_d_f_echo_cancellation_8h_source.html">MDFEchoCancellation.h</a></li>
 </ul>
 </div><!-- contents -->

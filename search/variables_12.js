@@ -100,7 +100,7 @@ var searchData=
   ['retrylimit_97',['retryLimit',['../classaudio__tools_1_1_stream_copy_t.html#afb979c0f6484eb68b25422fbb9a26dc6',1,'audio_tools::StreamCopyT']]],
   ['rewind_5fcb_98',['rewind_cb',['../classaudio__tools_1_1_memory_stream.html#a74d3cc7abc20a631c85962832b908ce5',1,'audio_tools::MemoryStream']]],
   ['rewind_5fpos_99',['rewind_pos',['../classaudio__tools_1_1_memory_stream.html#ab47df03c38e223e1a3a7f397e17d98f6',1,'audio_tools::MemoryStream::rewind_pos'],['../classaudio__tools_1_1_file_loop_t.html#ab47df03c38e223e1a3a7f397e17d98f6',1,'audio_tools::FileLoopT::rewind_pos']]],
-  ['rf_100',['Rf',['../group___echo_state.html#gab54f06480a61046e51545951690479d8',1,'audio_tools::EchoState']]],
+  ['rf_100',['Rf',['../structaudio__tools_1_1_echo_state.html#ab54f06480a61046e51545951690479d8',1,'audio_tools::EchoState']]],
   ['rfft_5fadd_101',['rfft_add',['../classaudio__tools_1_1_audio_f_f_t_base.html#ab584bdaa085f64bb4fd7253a32b3b8ef',1,'audio_tools::AudioFFTBase']]],
   ['rfft_5fdata_102',['rfft_data',['../classaudio__tools_1_1_audio_f_f_t_base.html#a52ba3aef85ab5813308c89ea40330c4f',1,'audio_tools::AudioFFTBase']]],
   ['rfft_5fmax_103',['rfft_max',['../classaudio__tools_1_1_f_f_t_inverse_overlap_adder.html#a64c11327f5ba983c2401faa236254574',1,'audio_tools::FFTInverseOverlapAdder']]],

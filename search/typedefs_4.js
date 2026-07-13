@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['echo_5ffloat_5ft_0',['echo_float_t',['../group___echo_state.html#ga1c5e8e688bc325fde6d49a2c2eec5ebe',1,'audio_tools']]],
+  ['echo_5ffloat_5ft_0',['echo_float_t',['../namespaceaudio__tools.html#a1c5e8e688bc325fde6d49a2c2eec5ebe',1,'audio_tools']]],
   ['echo_5fint16_5ft_1',['echo_int16_t',['../namespaceaudio__tools.html#a25c24b2079cdf78e398b7c49cb83d651',1,'audio_tools']]],
   ['echo_5fint32_5ft_2',['echo_int32_t',['../namespaceaudio__tools.html#af041250f3317a01414c9fda16da1907c',1,'audio_tools']]],
   ['echo_5fmem_5ft_3',['echo_mem_t',['../namespaceaudio__tools.html#aef705acbb0ca00146e22b9cbfd2617c5',1,'audio_tools']]],
