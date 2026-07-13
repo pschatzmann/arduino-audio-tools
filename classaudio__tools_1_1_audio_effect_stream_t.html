@@ -82,7 +82,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>EffectsStreamT: the template class describes an input or output stream to which one or multiple effects are applied. The number of channels are used to merge the samples of one frame into one sample before outputting the result as a frame (by repeating the result sample for each channel). Currently only int16_t values are supported, so I recommend to use the <b><a class="el" href="classaudio__tools_1_1_audio_effect_stream.html" title="EffectsStream supporting variable bits_per_sample. This class is only available when __cplusplus &gt;= 2...">AudioEffectStream</a></b> class which is defined as using <a class="el" href="classaudio__tools_1_1_audio_effect_stream.html" title="EffectsStream supporting variable bits_per_sample. This class is only available when __cplusplus &gt;= 2...">AudioEffectStream</a> = AudioEffectStreamT&lt;effect_t&gt;;.  
+<p>EffectsStreamT: the template class describes an input or output stream to which one or multiple effects are applied. Each channel is processed by its own independent clone of the effect chain (created via <a class="el" href="classaudio__tools_1_1_audio_effect.html#a098c1289a9aab088f5f1cf7a6bfb5189">AudioEffect::clone()</a>), so e.g. a stereo signal keeps its channel separation and effects that carry internal state (<a class="el" href="classaudio__tools_1_1_delay.html" title="Delay/Echo AudioEffect. See https://wiki.analog.com/resources/tools-software/sharc-audio-module/barem...">Delay</a>'s ring buffer, ADSRGain/Tremolo's envelope or oscillator phase, etc.) don't get confused by interleaved samples from different channels. <a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a8c1b8bfcd46d399503e45d49c32ce087" title="Adds an effect object (by reference) to the template chain: cloned into every channel.">addEffect()</a> adds to a shared template chain that is cloned into every channel on <a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a> (and immediately cloned into all already-active channels if called afterwards); use addEffect(channel, effect) to register an effect directly on just one channel instead. Note that <a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a0b6b70701c46e22849f0f363861351cd" title="Provides the actual number of defined effects in the template chain.">size()</a>/operator[]/findEffect() operate on the template chain, not on the per-channel clones: mutating a pointer obtained from them after <a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a> has already cloned it does not retroactively change already-cloned per-channel copies. Currently only int16_t values are supported, so I recommend to use the <b><a class="el" href="classaudio__tools_1_1_audio_effect_stream.html" title="EffectsStream supporting variable bits_per_sample. This class is only available when __cplusplus &gt;= 2...">AudioEffectStream</a></b> class which is defined as using <a class="el" href="classaudio__tools_1_1_audio_effect_stream.html" title="EffectsStream supporting variable bits_per_sample. This class is only available when __cplusplus &gt;= 2...">AudioEffectStream</a> = AudioEffectStreamT&lt;effect_t&gt;;.  
  <a href="classaudio__tools_1_1_audio_effect_stream_t.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_audio_effects_2_audio_effects_8h_source.html">AudioEffects.h</a>&gt;</code></p>
@@ -106,16 +106,24 @@ Inheritance diagram for AudioEffectStreamT&lt; T &gt;:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a5bbdfceff41fcd387dcb27f41233143b" id="r_a5bbdfceff41fcd387dcb27f41233143b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a5bbdfceff41fcd387dcb27f41233143b">AudioEffectStreamT</a> ()=default</td></tr>
 <tr class="separator:a5bbdfceff41fcd387dcb27f41233143b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81c9553592c45e67ab7913c3b1f79cd6" id="r_a81c9553592c45e67ab7913c3b1f79cd6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a81c9553592c45e67ab7913c3b1f79cd6">AudioEffectStreamT</a> (const <a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html">AudioEffectStreamT</a> &amp;)=delete</td></tr>
+<tr class="separator:a81c9553592c45e67ab7913c3b1f79cd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4efaa3cbff6e9c8f93e50e85555b4e46" id="r_a4efaa3cbff6e9c8f93e50e85555b4e46"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a4efaa3cbff6e9c8f93e50e85555b4e46">AudioEffectStreamT</a> (<a class="el" href="class_print.html">Print</a> &amp;out)</td></tr>
 <tr class="separator:a4efaa3cbff6e9c8f93e50e85555b4e46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb526a7a0d2e25c2295c70865dfdd856" id="r_acb526a7a0d2e25c2295c70865dfdd856"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#acb526a7a0d2e25c2295c70865dfdd856">AudioEffectStreamT</a> (<a class="el" href="class_stream.html">Stream</a> &amp;io)</td></tr>
 <tr class="separator:acb526a7a0d2e25c2295c70865dfdd856"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2f6dc162fa623d9ea5650344126535b" id="r_ab2f6dc162fa623d9ea5650344126535b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#ab2f6dc162fa623d9ea5650344126535b">~AudioEffectStreamT</a> ()</td></tr>
+<tr class="separator:ab2f6dc162fa623d9ea5650344126535b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c1b8bfcd46d399503e45d49c32ce087" id="r_a8c1b8bfcd46d399503e45d49c32ce087"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a8c1b8bfcd46d399503e45d49c32ce087">addEffect</a> (<a class="el" href="classaudio__tools_1_1_audio_effect.html">AudioEffect</a> &amp;effect)</td></tr>
-<tr class="memdesc:a8c1b8bfcd46d399503e45d49c32ce087"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an effect object (by reference)  <br /></td></tr>
+<tr class="memdesc:a8c1b8bfcd46d399503e45d49c32ce087"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an effect object (by reference) to the template chain: cloned into every channel.  <br /></td></tr>
 <tr class="separator:a8c1b8bfcd46d399503e45d49c32ce087"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a76977e2ce53e1e0cb66e2dc76eb34500" id="r_a76977e2ce53e1e0cb66e2dc76eb34500"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a76977e2ce53e1e0cb66e2dc76eb34500">addEffect</a> (<a class="el" href="classaudio__tools_1_1_audio_effect.html">AudioEffect</a> *effect)</td></tr>
-<tr class="memdesc:a76977e2ce53e1e0cb66e2dc76eb34500"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an effect using a pointer.  <br /></td></tr>
+<tr class="memdesc:a76977e2ce53e1e0cb66e2dc76eb34500"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an effect using a pointer to the template chain: cloned into every channel.  <br /></td></tr>
 <tr class="separator:a76977e2ce53e1e0cb66e2dc76eb34500"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3718af1116be5b2a8b9b19aeca21607c" id="r_a3718af1116be5b2a8b9b19aeca21607c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a3718af1116be5b2a8b9b19aeca21607c">addEffect</a> (int channel, <a class="el" href="classaudio__tools_1_1_audio_effect.html">AudioEffect</a> &amp;effect)</td></tr>
+<tr class="separator:a3718af1116be5b2a8b9b19aeca21607c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1857849fa1cafc89f0fdfa1e370f081" id="r_ab1857849fa1cafc89f0fdfa1e370f081"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#ab1857849fa1cafc89f0fdfa1e370f081">addEffect</a> (int channel, <a class="el" href="classaudio__tools_1_1_audio_effect.html">AudioEffect</a> *effect)</td></tr>
+<tr class="separator:ab1857849fa1cafc89f0fdfa1e370f081"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a727a24459787e1eeeb7a37ba888394a6" id="r_a727a24459787e1eeeb7a37ba888394a6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a727a24459787e1eeeb7a37ba888394a6">addNotifyAudioChange</a> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;bi)</td></tr>
 <tr class="memdesc:a727a24459787e1eeeb7a37ba888394a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds target to be notified about audio changes.  <br /></td></tr>
 <tr class="separator:a727a24459787e1eeeb7a37ba888394a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -132,6 +140,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a601fb7cf1fc15db50c71a826f084f934"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af99303e9bfe78c84f1abd84376477ec7" id="r_af99303e9bfe78c84f1abd84376477ec7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#af99303e9bfe78c84f1abd84376477ec7">begin</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> cfg)</td></tr>
 <tr class="separator:af99303e9bfe78c84f1abd84376477ec7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd9c5bad5f5b500a011c794b5299e93d" id="r_abd9c5bad5f5b500a011c794b5299e93d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#abd9c5bad5f5b500a011c794b5299e93d">channelCount</a> ()</td></tr>
+<tr class="memdesc:abd9c5bad5f5b500a011c794b5299e93d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the number of channels that have their own effect chain (valid after <a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a>)  <br /></td></tr>
+<tr class="separator:abd9c5bad5f5b500a011c794b5299e93d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50f083e96242bcc82714a331fecca8dd" id="r_a50f083e96242bcc82714a331fecca8dd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_audio_effect_common.html">AudioEffectCommon</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a50f083e96242bcc82714a331fecca8dd">channelEffects</a> (int channel)</td></tr>
+<tr class="memdesc:a50f083e96242bcc82714a331fecca8dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides access to a single channel's own effect chain (valid after <a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a>)  <br /></td></tr>
+<tr class="separator:a50f083e96242bcc82714a331fecca8dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8bb3912a3ce86b15842e79d0b421204" id="r_ac8bb3912a3ce86b15842e79d0b421204"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#ac8bb3912a3ce86b15842e79d0b421204">clear</a> ()</td></tr>
 <tr class="memdesc:ac8bb3912a3ce86b15842e79d0b421204"><td class="mdescLeft">&#160;</td><td class="mdescRight">deletes all defined effects  <br /></td></tr>
 <tr class="separator:ac8bb3912a3ce86b15842e79d0b421204"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -143,7 +157,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a64e9fa75beda50a9e8400ee0d4e61984" id="r_a64e9fa75beda50a9e8400ee0d4e61984"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a> () override</td></tr>
 <tr class="separator:a64e9fa75beda50a9e8400ee0d4e61984"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a18b09b875d881236e0e4162509526ca4" id="r_a18b09b875d881236e0e4162509526ca4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_audio_effect.html">AudioEffect</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a18b09b875d881236e0e4162509526ca4">findEffect</a> (int id)</td></tr>
-<tr class="memdesc:a18b09b875d881236e0e4162509526ca4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds an effect by id.  <br /></td></tr>
+<tr class="memdesc:a18b09b875d881236e0e4162509526ca4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds an effect by id in the template chain.  <br /></td></tr>
 <tr class="separator:a18b09b875d881236e0e4162509526ca4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af654b48544c195ab99fe27e7bc3ed5fe" id="r_af654b48544c195ab99fe27e7bc3ed5fe"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">flush</a> () override</td></tr>
 <tr class="separator:af654b48544c195ab99fe27e7bc3ed5fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -152,8 +166,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d52c0ed98e047d782054fa126b281e5" id="r_a0d52c0ed98e047d782054fa126b281e5"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_stream.html#a0d52c0ed98e047d782054fa126b281e5">operator bool</a> ()</td></tr>
 <tr class="separator:a0d52c0ed98e047d782054fa126b281e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd3f18b48affa75a53ffe444d352e78a" id="r_abd3f18b48affa75a53ffe444d352e78a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html">AudioEffectStreamT</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#abd3f18b48affa75a53ffe444d352e78a">operator=</a> (const <a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html">AudioEffectStreamT</a> &amp;)=delete</td></tr>
+<tr class="separator:abd3f18b48affa75a53ffe444d352e78a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa8910423666c6f5b534c3a9c5cfa9ea1" id="r_aa8910423666c6f5b534c3a9c5cfa9ea1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_audio_effect.html">AudioEffect</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#aa8910423666c6f5b534c3a9c5cfa9ea1">operator[]</a> (int idx)</td></tr>
-<tr class="memdesc:aa8910423666c6f5b534c3a9c5cfa9ea1"><td class="mdescLeft">&#160;</td><td class="mdescRight">gets an effect by index  <br /></td></tr>
+<tr class="memdesc:aa8910423666c6f5b534c3a9c5cfa9ea1"><td class="mdescLeft">&#160;</td><td class="mdescRight">gets an effect by index from the template chain  <br /></td></tr>
 <tr class="separator:aa8910423666c6f5b534c3a9c5cfa9ea1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c5c6275ddee80eb02839356b6185c0b" id="r_a4c5c6275ddee80eb02839356b6185c0b"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a4c5c6275ddee80eb02839356b6185c0b">readBytes</a> (uint8_t *data, size_t len) override</td></tr>
 <tr class="separator:a4c5c6275ddee80eb02839356b6185c0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -184,7 +200,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:adad22dd23fc48a3b338eafe707439deb" id="r_adad22dd23fc48a3b338eafe707439deb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#adad22dd23fc48a3b338eafe707439deb">setWriteBufferSize</a> (int <a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a0b6b70701c46e22849f0f363861351cd">size</a>)</td></tr>
 <tr class="separator:adad22dd23fc48a3b338eafe707439deb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b6b70701c46e22849f0f363861351cd" id="r_a0b6b70701c46e22849f0f363861351cd"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a0b6b70701c46e22849f0f363861351cd">size</a> ()</td></tr>
-<tr class="memdesc:a0b6b70701c46e22849f0f363861351cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the actual number of defined effects.  <br /></td></tr>
+<tr class="memdesc:a0b6b70701c46e22849f0f363861351cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the actual number of defined effects in the template chain.  <br /></td></tr>
 <tr class="separator:a0b6b70701c46e22849f0f363861351cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -196,6 +212,9 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:ae8e518ef8959832d66445740c2367581" id="r_ae8e518ef8959832d66445740c2367581"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#ae8e518ef8959832d66445740c2367581">cloneInto</a> (int ch, <a class="el" href="classaudio__tools_1_1_audio_effect.html">AudioEffect</a> *effect)</td></tr>
+<tr class="memdesc:ae8e518ef8959832d66445740c2367581"><td class="mdescLeft">&#160;</td><td class="mdescRight">clones a single effect into a single channel's chain, tracking ownership  <br /></td></tr>
+<tr class="separator:ae8e518ef8959832d66445740c2367581"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc00b141650b11fe19d4c7055d96a075" id="r_afc00b141650b11fe19d4c7055d96a075"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_stream.html#afc00b141650b11fe19d4c7055d96a075">not_supported</a> (int out, const char *msg=&quot;&quot;)</td></tr>
 <tr class="separator:afc00b141650b11fe19d4c7055d96a075"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a9a665a387a8c4fbf7fed14bbbfc093" id="r_a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a6a9a665a387a8c4fbf7fed14bbbfc093">notifyAudioChange</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> <a class="el" href="classaudio__tools_1_1_audio_stream.html#a47385aa19435f5fca9d3083a748258c5">info</a>)</td></tr>
@@ -203,6 +222,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a5caf99a24686511722c4c9f94c4ec52e" id="r_a5caf99a24686511722c4c9f94c4ec52e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#a5caf99a24686511722c4c9f94c4ec52e">refillReadBuffer</a> ()</td></tr>
 <tr class="memdesc:a5caf99a24686511722c4c9f94c4ec52e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Refill small read buffer (e.g. 8 bytes) to avoid single byte reads when calling read()  <br /></td></tr>
 <tr class="separator:a5caf99a24686511722c4c9f94c4ec52e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4de0cef03e4a060114df9ac2719ea435" id="r_a4de0cef03e4a060114df9ac2719ea435"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a4de0cef03e4a060114df9ac2719ea435">setupChannels</a> ()</td></tr>
+<tr class="memdesc:a4de0cef03e4a060114df9ac2719ea435"><td class="mdescLeft">&#160;</td><td class="mdescRight">(re)builds channel_effects from the template <code>effects</code> chain  <br /></td></tr>
+<tr class="separator:a4de0cef03e4a060114df9ac2719ea435"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -210,6 +232,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:aa66a35e5edf58ce00047afcd1d4f455e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03c996f9fcf0e10baeb3e700be0c409a" id="r_a03c996f9fcf0e10baeb3e700be0c409a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a03c996f9fcf0e10baeb3e700be0c409a">active</a> = false</td></tr>
 <tr class="separator:a03c996f9fcf0e10baeb3e700be0c409a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64f46d5e77810b356ffcd58f3cc166bb" id="r_a64f46d5e77810b356ffcd58f3cc166bb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_audio_effect_common.html">AudioEffectCommon</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a64f46d5e77810b356ffcd58f3cc166bb">channel_effects</a></td></tr>
+<tr class="separator:a64f46d5e77810b356ffcd58f3cc166bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aabf82b9d0d68dbcf9120221076b05b01" id="r_aabf82b9d0d68dbcf9120221076b05b01"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_audio_effect_common.html">AudioEffectCommon</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#aabf82b9d0d68dbcf9120221076b05b01">effects</a></td></tr>
 <tr class="separator:aabf82b9d0d68dbcf9120221076b05b01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47385aa19435f5fca9d3083a748258c5" id="r_a47385aa19435f5fca9d3083a748258c5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_stream.html#a47385aa19435f5fca9d3083a748258c5">info</a></td></tr>
@@ -218,6 +242,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:aeaba7fcedcb403536c79ee7f04de17fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad35c4e2ef458c36e8d36676958cc9cd3" id="r_ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#ad35c4e2ef458c36e8d36676958cc9cd3">notify_vector</a></td></tr>
 <tr class="separator:ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a671b71539cef36c557d778d25187a357" id="r_a671b71539cef36c557d778d25187a357"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_audio_effect.html">AudioEffect</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a671b71539cef36c557d778d25187a357">owned_clones</a></td></tr>
+<tr class="separator:a671b71539cef36c557d778d25187a357"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb1e9a9c69281667d85bc8dfdc46dd95" id="r_afb1e9a9c69281667d85bc8dfdc46dd95"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#afb1e9a9c69281667d85bc8dfdc46dd95">p_io</a> =nullptr</td></tr>
 <tr class="separator:afb1e9a9c69281667d85bc8dfdc46dd95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdad90adc3ba71f7b1e16444c23b5502" id="r_acdad90adc3ba71f7b1e16444c23b5502"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#acdad90adc3ba71f7b1e16444c23b5502">p_print</a> =nullptr</td></tr>
@@ -231,12 +257,12 @@ Protected Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class T&gt;<br />
-class audio_tools::AudioEffectStreamT&lt; T &gt;</div><p>EffectsStreamT: the template class describes an input or output stream to which one or multiple effects are applied. The number of channels are used to merge the samples of one frame into one sample before outputting the result as a frame (by repeating the result sample for each channel). Currently only int16_t values are supported, so I recommend to use the <b><a class="el" href="classaudio__tools_1_1_audio_effect_stream.html" title="EffectsStream supporting variable bits_per_sample. This class is only available when __cplusplus &gt;= 2...">AudioEffectStream</a></b> class which is defined as using <a class="el" href="classaudio__tools_1_1_audio_effect_stream.html" title="EffectsStream supporting variable bits_per_sample. This class is only available when __cplusplus &gt;= 2...">AudioEffectStream</a> = AudioEffectStreamT&lt;effect_t&gt;;. </p>
+class audio_tools::AudioEffectStreamT&lt; T &gt;</div><p>EffectsStreamT: the template class describes an input or output stream to which one or multiple effects are applied. Each channel is processed by its own independent clone of the effect chain (created via <a class="el" href="classaudio__tools_1_1_audio_effect.html#a098c1289a9aab088f5f1cf7a6bfb5189">AudioEffect::clone()</a>), so e.g. a stereo signal keeps its channel separation and effects that carry internal state (<a class="el" href="classaudio__tools_1_1_delay.html" title="Delay/Echo AudioEffect. See https://wiki.analog.com/resources/tools-software/sharc-audio-module/barem...">Delay</a>'s ring buffer, ADSRGain/Tremolo's envelope or oscillator phase, etc.) don't get confused by interleaved samples from different channels. <a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a8c1b8bfcd46d399503e45d49c32ce087" title="Adds an effect object (by reference) to the template chain: cloned into every channel.">addEffect()</a> adds to a shared template chain that is cloned into every channel on <a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a> (and immediately cloned into all already-active channels if called afterwards); use addEffect(channel, effect) to register an effect directly on just one channel instead. Note that <a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a0b6b70701c46e22849f0f363861351cd" title="Provides the actual number of defined effects in the template chain.">size()</a>/operator[]/findEffect() operate on the template chain, not on the per-channel clones: mutating a pointer obtained from them after <a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a> has already cloned it does not retroactively change already-cloned per-channel copies. Currently only int16_t values are supported, so I recommend to use the <b><a class="el" href="classaudio__tools_1_1_audio_effect_stream.html" title="EffectsStream supporting variable bits_per_sample. This class is only available when __cplusplus &gt;= 2...">AudioEffectStream</a></b> class which is defined as using <a class="el" href="classaudio__tools_1_1_audio_effect_stream.html" title="EffectsStream supporting variable bits_per_sample. This class is only available when __cplusplus &gt;= 2...">AudioEffectStream</a> = AudioEffectStreamT&lt;effect_t&gt;;. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a5bbdfceff41fcd387dcb27f41233143b" name="a5bbdfceff41fcd387dcb27f41233143b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5bbdfceff41fcd387dcb27f41233143b">&#9670;&#160;</a></span>AudioEffectStreamT() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bbdfceff41fcd387dcb27f41233143b">&#9670;&#160;</a></span>AudioEffectStreamT() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -263,7 +289,7 @@ template&lt;class T &gt; </div>
 </div>
 </div>
 <a id="acb526a7a0d2e25c2295c70865dfdd856" name="acb526a7a0d2e25c2295c70865dfdd856"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acb526a7a0d2e25c2295c70865dfdd856">&#9670;&#160;</a></span>AudioEffectStreamT() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#acb526a7a0d2e25c2295c70865dfdd856">&#9670;&#160;</a></span>AudioEffectStreamT() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -291,7 +317,7 @@ template&lt;class T &gt; </div>
 </div>
 </div>
 <a id="a4efaa3cbff6e9c8f93e50e85555b4e46" name="a4efaa3cbff6e9c8f93e50e85555b4e46"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4efaa3cbff6e9c8f93e50e85555b4e46">&#9670;&#160;</a></span>AudioEffectStreamT() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a4efaa3cbff6e9c8f93e50e85555b4e46">&#9670;&#160;</a></span>AudioEffectStreamT() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -318,9 +344,64 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
+<a id="a81c9553592c45e67ab7913c3b1f79cd6" name="a81c9553592c45e67ab7913c3b1f79cd6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81c9553592c45e67ab7913c3b1f79cd6">&#9670;&#160;</a></span>AudioEffectStreamT() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html">AudioEffectStreamT</a> </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html">AudioEffectStreamT</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab2f6dc162fa623d9ea5650344126535b" name="ab2f6dc162fa623d9ea5650344126535b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2f6dc162fa623d9ea5650344126535b">&#9670;&#160;</a></span>~AudioEffectStreamT()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">~<a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html">AudioEffectStreamT</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a8c1b8bfcd46d399503e45d49c32ce087" name="a8c1b8bfcd46d399503e45d49c32ce087"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8c1b8bfcd46d399503e45d49c32ce087">&#9670;&#160;</a></span>addEffect() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c1b8bfcd46d399503e45d49c32ce087">&#9670;&#160;</a></span>addEffect() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -345,12 +426,12 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Adds an effect object (by reference) </p>
+<p>Adds an effect object (by reference) to the template chain: cloned into every channel. </p>
 
 </div>
 </div>
 <a id="a76977e2ce53e1e0cb66e2dc76eb34500" name="a76977e2ce53e1e0cb66e2dc76eb34500"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a76977e2ce53e1e0cb66e2dc76eb34500">&#9670;&#160;</a></span>addEffect() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a76977e2ce53e1e0cb66e2dc76eb34500">&#9670;&#160;</a></span>addEffect() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -375,7 +456,85 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Adds an effect using a pointer. </p>
+<p>Adds an effect using a pointer to the template chain: cloned into every channel. </p>
+
+</div>
+</div>
+<a id="a3718af1116be5b2a8b9b19aeca21607c" name="a3718af1116be5b2a8b9b19aeca21607c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3718af1116be5b2a8b9b19aeca21607c">&#9670;&#160;</a></span>addEffect() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void addEffect </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>channel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_audio_effect.html">AudioEffect</a> &amp;&#160;</td>
+          <td class="paramname"><em>effect</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Adds an effect object (by reference) directly to a single channel's own chain (not cloned, not owned by this class). Requires <a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a> to have already been called. </p>
+
+</div>
+</div>
+<a id="ab1857849fa1cafc89f0fdfa1e370f081" name="ab1857849fa1cafc89f0fdfa1e370f081"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1857849fa1cafc89f0fdfa1e370f081">&#9670;&#160;</a></span>addEffect() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void addEffect </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>channel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_audio_effect.html">AudioEffect</a> *&#160;</td>
+          <td class="paramname"><em>effect</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Adds an effect using a pointer directly to a single channel's own chain (not cloned, not owned by this class). Requires <a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a> to have already been called. </p>
 
 </div>
 </div>
@@ -583,6 +742,65 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
+<a id="abd9c5bad5f5b500a011c794b5299e93d" name="abd9c5bad5f5b500a011c794b5299e93d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd9c5bad5f5b500a011c794b5299e93d">&#9670;&#160;</a></span>channelCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int channelCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Provides the number of channels that have their own effect chain (valid after <a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a>) </p>
+
+</div>
+</div>
+<a id="a50f083e96242bcc82714a331fecca8dd" name="a50f083e96242bcc82714a331fecca8dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50f083e96242bcc82714a331fecca8dd">&#9670;&#160;</a></span>channelEffects()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_audio_effect_common.html">AudioEffectCommon</a> &amp; channelEffects </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>channel</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Provides access to a single channel's own effect chain (valid after <a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a>) </p>
+
+</div>
+</div>
 <a id="ac8bb3912a3ce86b15842e79d0b421204" name="ac8bb3912a3ce86b15842e79d0b421204"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac8bb3912a3ce86b15842e79d0b421204">&#9670;&#160;</a></span>clear()</h2>
 
@@ -638,6 +856,46 @@ template&lt;class T &gt; </div>
 <p>Deletes all change notify subscriptions. </p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_r_t_s_p_client.html#ae1a875c01380562f27970cab11f8c375">RTSPClient&lt; TcpClient, UdpSocket &gt;</a>.</p>
+
+</div>
+</div>
+<a id="ae8e518ef8959832d66445740c2367581" name="ae8e518ef8959832d66445740c2367581"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8e518ef8959832d66445740c2367581">&#9670;&#160;</a></span>cloneInto()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cloneInto </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ch</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_audio_effect.html">AudioEffect</a> *&#160;</td>
+          <td class="paramname"><em>effect</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>clones a single effect into a single channel's chain, tracking ownership </p>
 
 </div>
 </div>
@@ -723,7 +981,7 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Finds an effect by id. </p>
+<p>Finds an effect by id in the template chain. </p>
 
 </div>
 </div>
@@ -872,6 +1130,34 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
+<a id="abd3f18b48affa75a53ffe444d352e78a" name="abd3f18b48affa75a53ffe444d352e78a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd3f18b48affa75a53ffe444d352e78a">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html">AudioEffectStreamT</a> &amp; operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html">AudioEffectStreamT</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aa8910423666c6f5b534c3a9c5cfa9ea1" name="aa8910423666c6f5b534c3a9c5cfa9ea1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa8910423666c6f5b534c3a9c5cfa9ea1">&#9670;&#160;</a></span>operator[]()</h2>
 
@@ -898,7 +1184,7 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>gets an effect by index </p>
+<p>gets an effect by index from the template chain </p>
 
 </div>
 </div>
@@ -1222,6 +1508,35 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
+<a id="a4de0cef03e4a060114df9ac2719ea435" name="a4de0cef03e4a060114df9ac2719ea435"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4de0cef03e4a060114df9ac2719ea435">&#9670;&#160;</a></span>setupChannels()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setupChannels </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>(re)builds channel_effects from the template <code>effects</code> chain </p>
+
+</div>
+</div>
 <a id="adad22dd23fc48a3b338eafe707439deb" name="adad22dd23fc48a3b338eafe707439deb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adad22dd23fc48a3b338eafe707439deb">&#9670;&#160;</a></span>setWriteBufferSize()</h2>
 
@@ -1273,7 +1588,7 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Provides the actual number of defined effects. </p>
+<p>Provides the actual number of defined effects in the template chain. </p>
 
 </div>
 </div>
@@ -1421,6 +1736,30 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
+<a id="a64f46d5e77810b356ffcd58f3cc166bb" name="a64f46d5e77810b356ffcd58f3cc166bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64f46d5e77810b356ffcd58f3cc166bb">&#9670;&#160;</a></span>channel_effects</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;<a class="el" href="classaudio__tools_1_1_audio_effect_common.html">AudioEffectCommon</a>&gt; channel_effects</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aabf82b9d0d68dbcf9120221076b05b01" name="aabf82b9d0d68dbcf9120221076b05b01"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aabf82b9d0d68dbcf9120221076b05b01">&#9670;&#160;</a></span>effects</h2>
 
@@ -1505,6 +1844,30 @@ template&lt;class T &gt; </div>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a671b71539cef36c557d778d25187a357" name="a671b71539cef36c557d778d25187a357"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a671b71539cef36c557d778d25187a357">&#9670;&#160;</a></span>owned_clones</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;<a class="el" href="classaudio__tools_1_1_audio_effect.html">AudioEffect</a>*&gt; owned_clones</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
