@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: src/AudioTools/AudioLibs/FFTEffects.h File Reference</title>
+<title>arduino-audio-tools: src/AudioTools/FFT/FFTEffects.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,7 +69,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_b89ab0614282f1f48540f827bdc28c76.html">AudioLibs</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_1dfd2b107c2ebbc737c993fa3075f5ba.html">FFT</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -80,7 +80,7 @@ $(function() {
   <div class="headertitle"><div class="title">FFTEffects.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="_audio_real_f_f_t_8h_source.html">AudioTools/AudioLibs/AudioRealFFT.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="_audio_real_f_f_t_8h_source.html">AudioTools/FFT/AudioRealFFT.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_audio_output_8h_source.html">AudioTools/CoreAudio/AudioOutput.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_stream_copy_8h_source.html">AudioTools/CoreAudio/StreamCopy.h</a>&quot;</code><br />
 </div>
@@ -89,10 +89,16 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_effect.html">FFTEffect</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract class for common Logic for FFT based effects. The effect is applied after the fft to the frequency domain before executing the ifft. Please note that this is quite processing time intensitive: so you might keep the sample rate quite low if the processor is not fast enough!  <a href="classaudio__tools_1_1_f_f_t_effect.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract base class for effects that operate on audio in the frequency domain: incoming samples are transformed with a forward FFT, the resulting bins are modified by the <a class="el" href="classaudio__tools_1_1_f_f_t_effect.html#adc876fa966507cd8354864b94e7d6c38">effect()</a> method that a subclass implements, and the modified spectrum is transformed back with an inverse FFT (overlap-add) and streamed to the output.  <a href="classaudio__tools_1_1_f_f_t_effect.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_f_f_t_effect_config.html">FFTEffectConfig</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Common configuration for FFT effects.  <a href="structaudio__tools_1_1_f_f_t_effect_config.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_equalizer.html">FFTEqualizer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Graphic Equalizer implemented as an FFT effect: boosts or cuts logarithmically spaced frequency bands (20Hz .. Nyquist) by scaling the magnitude of the bins that fall into each band while leaving their phase untouched. Since this operates directly on the frequency-domain bins rather than an FIR/IIR approximation, band edges are exact and there is no filter ripple.  <a href="classaudio__tools_1_1_f_f_t_equalizer.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_f_f_t_equalizer_config.html">FFTEqualizerConfig</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Equalizer FFT Effect Configuration.  <a href="structaudio__tools_1_1_f_f_t_equalizer_config.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_nop.html">FFTNop</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply FFT and IFFT w/o any changes to the frequency domain.  <a href="classaudio__tools_1_1_f_f_t_nop.html#details">More...</a><br /></td></tr>
@@ -107,7 +113,7 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply Robotize FFT Effect on frequency domain data. See <a href="https://learn.bela.io/tutorials/c-plus-plus-for-real-time-audio-programming/phase-vocoder-part-3/">https://learn.bela.io/tutorials/c-plus-plus-for-real-time-audio-programming/phase-vocoder-part-3/</a>.  <a href="classaudio__tools_1_1_f_f_t_robotize.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_whisper.html">FFTWhisper</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply Robotize FFT Effect on frequency domain data. See <a href="https://learn.bela.io/tutorials/c-plus-plus-for-real-time-audio-programming/phase-vocoder-part-3/">https://learn.bela.io/tutorials/c-plus-plus-for-real-time-audio-programming/phase-vocoder-part-3/</a>.  <a href="classaudio__tools_1_1_f_f_t_whisper.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply Whisper FFT Effect on frequency domain data: keep the magnitude of each bin but randomize its phase. See <a href="https://learn.bela.io/tutorials/c-plus-plus-for-real-time-audio-programming/phase-vocoder-part-3/">https://learn.bela.io/tutorials/c-plus-plus-for-real-time-audio-programming/phase-vocoder-part-3/</a>.  <a href="classaudio__tools_1_1_f_f_t_whisper.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>

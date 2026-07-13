@@ -1,7 +1,7 @@
 var searchData=
 [
   ['matches_0',['Matches',['../namespaceaudio__tools.html#adf56341f15593a1c3b9b29e001d1c33daa61bbf7ad0ed153cb6c84fe3c8a9f2bb',1,'audio_tools']]],
-  ['max_5fbit_5fdepth_1',['MAX_BIT_DEPTH',['../classffft_1_1_f_f_t_real.html#adf764cbdea00d65edcd07bb9953ad2b7ae30341bf7a7c79070d42c723fa9f8d4b',1,'ffft::FFTReal']]],
+  ['max_5fbit_5fdepth_1',['MAX_BIT_DEPTH',['../classffft_1_1_f_f_t_real.html#ab04a0655cd1e3bcac5e8f48c18df1a57ae30341bf7a7c79070d42c723fa9f8d4b',1,'ffft::FFTReal']]],
   ['mediaspace_5fadpcm_2',['MEDIASPACE_ADPCM',['../group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1a40f3eb2d06718c01cc842d83233c28fe',1,'audio_tools']]],
   ['mediavision_5fadpcm_3',['MEDIAVISION_ADPCM',['../group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1a6a6467e42662b85e2a7b4ca791859988',1,'audio_tools']]],
   ['meta_4',['Meta',['../namespaceaudio__tools.html#a4dd4453d1994a706c0eb2350ffa55372ab6755d218d5f4e1cef9cce9cc39aeda9',1,'audio_tools']]],

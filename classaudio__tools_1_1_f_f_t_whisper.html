@@ -83,7 +83,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Apply Robotize FFT Effect on frequency domain data. See <a href="https://learn.bela.io/tutorials/c-plus-plus-for-real-time-audio-programming/phase-vocoder-part-3/">https://learn.bela.io/tutorials/c-plus-plus-for-real-time-audio-programming/phase-vocoder-part-3/</a>.  
+<p>Apply Whisper FFT Effect on frequency domain data: keep the magnitude of each bin but randomize its phase. See <a href="https://learn.bela.io/tutorials/c-plus-plus-for-real-time-audio-programming/phase-vocoder-part-3/">https://learn.bela.io/tutorials/c-plus-plus-for-real-time-audio-programming/phase-vocoder-part-3/</a>.  
  <a href="classaudio__tools_1_1_f_f_t_whisper.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_f_f_t_effects_8h_source.html">FFTEffects.h</a>&gt;</code></p>
@@ -93,7 +93,7 @@ Inheritance diagram for FFTWhisper:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_f_f_t_whisper.png" usemap="#FFTWhisper_map" alt=""/>
   <map id="FFTWhisper_map" name="FFTWhisper_map">
-<area href="classaudio__tools_1_1_f_f_t_effect.html" title="Abstract class for common Logic for FFT based effects. The effect is applied after the fft to the fre..." alt="FFTEffect" shape="rect" coords="120,112,230,136"/>
+<area href="classaudio__tools_1_1_f_f_t_effect.html" title="Abstract base class for effects that operate on audio in the frequency domain: incoming samples are t..." alt="FFTEffect" shape="rect" coords="120,112,230,136"/>
 <area href="classaudio__tools_1_1_audio_output.html" title="Abstract Audio Ouptut class." alt="AudioOutput" shape="rect" coords="120,56,230,80"/>
 <area href="class_print.html" alt="Print" shape="rect" coords="0,0,110,24"/>
 <area href="classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="AudioInfoSupport" shape="rect" coords="120,0,230,24"/>
@@ -105,10 +105,16 @@ Inheritance diagram for FFTWhisper:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a7c3723fc426dae60da8c7b859f6205a8" id="r_a7c3723fc426dae60da8c7b859f6205a8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_whisper.html#a7c3723fc426dae60da8c7b859f6205a8">FFTWhisper</a> (<a class="el" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a> &amp;out)</td></tr>
 <tr class="separator:a7c3723fc426dae60da8c7b859f6205a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa066d97978d5c413b8e5c3e9bc267318" id="r_aa066d97978d5c413b8e5c3e9bc267318"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_whisper.html#aa066d97978d5c413b8e5c3e9bc267318">FFTWhisper</a> (<a class="el" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a> &amp;out, <a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html">AudioFFTBase</a> &amp;fft)</td></tr>
+<tr class="separator:aa066d97978d5c413b8e5c3e9bc267318"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a113bd9f8c69374707587f1f5ed947806" id="r_a113bd9f8c69374707587f1f5ed947806"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_whisper.html#a113bd9f8c69374707587f1f5ed947806">FFTWhisper</a> (<a class="el" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a> &amp;out)</td></tr>
 <tr class="separator:a113bd9f8c69374707587f1f5ed947806"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a376a9ab20312c9b62b6e0a9e749bd91c" id="r_a376a9ab20312c9b62b6e0a9e749bd91c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_whisper.html#a376a9ab20312c9b62b6e0a9e749bd91c">FFTWhisper</a> (<a class="el" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a> &amp;out, <a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html">AudioFFTBase</a> &amp;fft)</td></tr>
+<tr class="separator:a376a9ab20312c9b62b6e0a9e749bd91c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a11779c8942757a697bc095836fdae4a4" id="r_a11779c8942757a697bc095836fdae4a4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_whisper.html#a11779c8942757a697bc095836fdae4a4">FFTWhisper</a> (<a class="el" href="class_print.html">Print</a> &amp;out)</td></tr>
 <tr class="separator:a11779c8942757a697bc095836fdae4a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34bc746c151aa441206d1426abd971fd" id="r_a34bc746c151aa441206d1426abd971fd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_whisper.html#a34bc746c151aa441206d1426abd971fd">FFTWhisper</a> (<a class="el" href="class_print.html">Print</a> &amp;out, <a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html">AudioFFTBase</a> &amp;fft)</td></tr>
+<tr class="separator:a34bc746c151aa441206d1426abd971fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a727a24459787e1eeeb7a37ba888394a6" id="r_a727a24459787e1eeeb7a37ba888394a6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a727a24459787e1eeeb7a37ba888394a6">addNotifyAudioChange</a> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;bi)</td></tr>
 <tr class="memdesc:a727a24459787e1eeeb7a37ba888394a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds target to be notified about audio changes.  <br /></td></tr>
 <tr class="separator:a727a24459787e1eeeb7a37ba888394a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -160,9 +166,9 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a44d81ea738cc15a002e5901164a04597" id="r_a44d81ea738cc15a002e5901164a04597"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_whisper.html#a44d81ea738cc15a002e5901164a04597">effect</a> (<a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html">AudioFFTBase</a> &amp;<a class="el" href="classaudio__tools_1_1_f_f_t_effect.html#ab6ccc61dcc78fba9e7baf3d12f48ee78">fft</a>)</td></tr>
-<tr class="memdesc:a44d81ea738cc15a002e5901164a04597"><td class="mdescLeft">&#160;</td><td class="mdescRight">Robotise the output.  <br /></td></tr>
-<tr class="separator:a44d81ea738cc15a002e5901164a04597"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5bda70c0e7d326bdb0635b8f9b56a16" id="r_af5bda70c0e7d326bdb0635b8f9b56a16"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_whisper.html#af5bda70c0e7d326bdb0635b8f9b56a16">effect</a> (<a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html">AudioFFTBase</a> &amp;fft) override</td></tr>
+<tr class="memdesc:af5bda70c0e7d326bdb0635b8f9b56a16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whisperize the output.  <br /></td></tr>
+<tr class="separator:af5bda70c0e7d326bdb0635b8f9b56a16"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a9a665a387a8c4fbf7fed14bbbfc093" id="r_a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a6a9a665a387a8c4fbf7fed14bbbfc093">notifyAudioChange</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info)</td></tr>
 <tr class="separator:a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73f9ab4d6d2d15f12cc640d559235fc6" id="r_a73f9ab4d6d2d15f12cc640d559235fc6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_effect.html#a73f9ab4d6d2d15f12cc640d559235fc6">processOutput</a> ()</td></tr>
@@ -170,7 +176,7 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
-<tr class="memitem:ac386a2f67cb3aa675d9d5aae6154455d" id="r_ac386a2f67cb3aa675d9d5aae6154455d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_effect.html#ac386a2f67cb3aa675d9d5aae6154455d">effect_callback</a> (<a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html">AudioFFTBase</a> &amp;<a class="el" href="classaudio__tools_1_1_f_f_t_effect.html#ab6ccc61dcc78fba9e7baf3d12f48ee78">fft</a>)</td></tr>
+<tr class="memitem:ac386a2f67cb3aa675d9d5aae6154455d" id="r_ac386a2f67cb3aa675d9d5aae6154455d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_effect.html#ac386a2f67cb3aa675d9d5aae6154455d">effect_callback</a> (<a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html">AudioFFTBase</a> &amp;fft)</td></tr>
 <tr class="separator:ac386a2f67cb3aa675d9d5aae6154455d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -183,9 +189,9 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a07fab440d87063e83df0bc30223964c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9703de4b21cd3484037072082190b9d2" id="r_a9703de4b21cd3484037072082190b9d2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__tools.html#gaa917267e241cc74cd4610bf8674a6e93">StreamCopy</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_effect.html#a9703de4b21cd3484037072082190b9d2">copier</a></td></tr>
 <tr class="separator:a9703de4b21cd3484037072082190b9d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6ccc61dcc78fba9e7baf3d12f48ee78" id="r_ab6ccc61dcc78fba9e7baf3d12f48ee78"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_audio_real_f_f_t.html">AudioRealFFT</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_effect.html#ab6ccc61dcc78fba9e7baf3d12f48ee78">fft</a></td></tr>
-<tr class="separator:ab6ccc61dcc78fba9e7baf3d12f48ee78"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af24934918fce630f009699589976dd13" id="r_af24934918fce630f009699589976dd13"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_audio_f_f_t_config.html">AudioFFTConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_effect.html#af24934918fce630f009699589976dd13">fft_cfg</a> {fft.defaultConfig(<a class="el" href="group__basic.html#gga8cbd91a8bac9b5ab425112be1620eb49a6f3b87c1abe374d1d1a5fef79bffeb00">RXTX_MODE</a>)}</td></tr>
+<tr class="memitem:aa58796bafcb87deb027343d0bc635d53" id="r_aa58796bafcb87deb027343d0bc635d53"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_audio_real_f_f_t.html">AudioRealFFT</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_effect.html#aa58796bafcb87deb027343d0bc635d53">default_fft</a></td></tr>
+<tr class="separator:aa58796bafcb87deb027343d0bc635d53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af24934918fce630f009699589976dd13" id="r_af24934918fce630f009699589976dd13"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_audio_f_f_t_config.html">AudioFFTConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_effect.html#af24934918fce630f009699589976dd13">fft_cfg</a> {default_fft.defaultConfig(<a class="el" href="group__basic.html#gga8cbd91a8bac9b5ab425112be1620eb49a6f3b87c1abe374d1d1a5fef79bffeb00">RXTX_MODE</a>)}</td></tr>
 <tr class="separator:af24934918fce630f009699589976dd13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4b942065e46dade6960ba3a6adccb30" id="r_ac4b942065e46dade6960ba3a6adccb30"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_hann.html">Hann</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_effect.html#ac4b942065e46dade6960ba3a6adccb30">hann</a></td></tr>
 <tr class="separator:ac4b942065e46dade6960ba3a6adccb30"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -195,6 +201,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:aeaba7fcedcb403536c79ee7f04de17fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad35c4e2ef458c36e8d36676958cc9cd3" id="r_ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#ad35c4e2ef458c36e8d36676958cc9cd3">notify_vector</a></td></tr>
 <tr class="separator:ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92500918e341fec52d9e3f1e3a46b81e" id="r_a92500918e341fec52d9e3f1e3a46b81e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html">AudioFFTBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_effect.html#a92500918e341fec52d9e3f1e3a46b81e">p_fft</a> = nullptr</td></tr>
+<tr class="separator:a92500918e341fec52d9e3f1e3a46b81e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa42c30e02e51ec7cc38ea4ab215e0db4" id="r_aa42c30e02e51ec7cc38ea4ab215e0db4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_effect.html#aa42c30e02e51ec7cc38ea4ab215e0db4">p_out</a> = nullptr</td></tr>
 <tr class="separator:aa42c30e02e51ec7cc38ea4ab215e0db4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a01124ad53939abba13387b01cbf6b1c0" id="r_a01124ad53939abba13387b01cbf6b1c0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_output.html#a01124ad53939abba13387b01cbf6b1c0">tmp</a> {<a class="el" href="_audio_tools_config_8h.html#a2ef1bdd86c16c6aeef9eec83fd19cbcf">MAX_SINGLE_CHARS</a>}</td></tr>
@@ -203,11 +211,11 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a5c8bfed099f70e8b41e7ddcd5578fedb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Apply Robotize FFT Effect on frequency domain data. See <a href="https://learn.bela.io/tutorials/c-plus-plus-for-real-time-audio-programming/phase-vocoder-part-3/">https://learn.bela.io/tutorials/c-plus-plus-for-real-time-audio-programming/phase-vocoder-part-3/</a>. </p>
+<div class="textblock"><p>Apply Whisper FFT Effect on frequency domain data: keep the magnitude of each bin but randomize its phase. See <a href="https://learn.bela.io/tutorials/c-plus-plus-for-real-time-audio-programming/phase-vocoder-part-3/">https://learn.bela.io/tutorials/c-plus-plus-for-real-time-audio-programming/phase-vocoder-part-3/</a>. </p>
 <dl class="section author"><dt>Author</dt><dd>phil schatzmann </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a113bd9f8c69374707587f1f5ed947806" name="a113bd9f8c69374707587f1f5ed947806"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a113bd9f8c69374707587f1f5ed947806">&#9670;&#160;</a></span>FFTWhisper() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a113bd9f8c69374707587f1f5ed947806">&#9670;&#160;</a></span>FFTWhisper() <span class="overload">[1/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -232,8 +240,44 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a376a9ab20312c9b62b6e0a9e749bd91c" name="a376a9ab20312c9b62b6e0a9e749bd91c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a376a9ab20312c9b62b6e0a9e749bd91c">&#9670;&#160;</a></span>FFTWhisper() <span class="overload">[2/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_f_f_t_whisper.html">FFTWhisper</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a> &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html">AudioFFTBase</a> &amp;&#160;</td>
+          <td class="paramname"><em>fft</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a7c3723fc426dae60da8c7b859f6205a8" name="a7c3723fc426dae60da8c7b859f6205a8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7c3723fc426dae60da8c7b859f6205a8">&#9670;&#160;</a></span>FFTWhisper() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c3723fc426dae60da8c7b859f6205a8">&#9670;&#160;</a></span>FFTWhisper() <span class="overload">[3/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -258,8 +302,44 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="aa066d97978d5c413b8e5c3e9bc267318" name="aa066d97978d5c413b8e5c3e9bc267318"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa066d97978d5c413b8e5c3e9bc267318">&#9670;&#160;</a></span>FFTWhisper() <span class="overload">[4/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_f_f_t_whisper.html">FFTWhisper</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a> &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html">AudioFFTBase</a> &amp;&#160;</td>
+          <td class="paramname"><em>fft</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a11779c8942757a697bc095836fdae4a4" name="a11779c8942757a697bc095836fdae4a4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a11779c8942757a697bc095836fdae4a4">&#9670;&#160;</a></span>FFTWhisper() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a11779c8942757a697bc095836fdae4a4">&#9670;&#160;</a></span>FFTWhisper() <span class="overload">[5/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -273,6 +353,42 @@ Protected Attributes</h2></td></tr>
           <td class="paramtype"><a class="el" href="class_print.html">Print</a> &amp;&#160;</td>
           <td class="paramname"><em>out</em></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a34bc746c151aa441206d1426abd971fd" name="a34bc746c151aa441206d1426abd971fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34bc746c151aa441206d1426abd971fd">&#9670;&#160;</a></span>FFTWhisper() <span class="overload">[6/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_f_f_t_whisper.html">FFTWhisper</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_print.html">Print</a> &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html">AudioFFTBase</a> &amp;&#160;</td>
+          <td class="paramname"><em>fft</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -428,7 +544,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_output.html#a50f45551c10ca30a0bc7f447e70188b1">AudioOutput</a>.</p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_f_f_t_pitch_shift.html#acba365cc28eb702040c382646cfb0a7a">FFTPitchShift</a>.</p>
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_f_f_t_pitch_shift.html#acba365cc28eb702040c382646cfb0a7a">FFTPitchShift</a>, and <a class="el" href="classaudio__tools_1_1_f_f_t_equalizer.html#acba365cc28eb702040c382646cfb0a7a">FFTEqualizer</a>.</p>
 
 </div>
 </div>
@@ -540,8 +656,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a44d81ea738cc15a002e5901164a04597" name="a44d81ea738cc15a002e5901164a04597"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a44d81ea738cc15a002e5901164a04597">&#9670;&#160;</a></span>effect()</h2>
+<a id="af5bda70c0e7d326bdb0635b8f9b56a16" name="af5bda70c0e7d326bdb0635b8f9b56a16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5bda70c0e7d326bdb0635b8f9b56a16">&#9670;&#160;</a></span>effect()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -559,12 +675,12 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Robotise the output. </p>
+<p>Whisperize the output. </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_f_f_t_effect.html#adc876fa966507cd8354864b94e7d6c38">FFTEffect</a>.</p>
 
@@ -1063,8 +1179,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ab6ccc61dcc78fba9e7baf3d12f48ee78" name="ab6ccc61dcc78fba9e7baf3d12f48ee78"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab6ccc61dcc78fba9e7baf3d12f48ee78">&#9670;&#160;</a></span>fft</h2>
+<a id="aa58796bafcb87deb027343d0bc635d53" name="aa58796bafcb87deb027343d0bc635d53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa58796bafcb87deb027343d0bc635d53">&#9670;&#160;</a></span>default_fft</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1073,7 +1189,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_audio_real_f_f_t.html">AudioRealFFT</a> fft</td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_audio_real_f_f_t.html">AudioRealFFT</a> default_fft</td>
         </tr>
       </table>
   </td>
@@ -1095,7 +1211,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structaudio__tools_1_1_audio_f_f_t_config.html">AudioFFTConfig</a> fft_cfg {fft.defaultConfig(<a class="el" href="group__basic.html#gga8cbd91a8bac9b5ab425112be1620eb49a6f3b87c1abe374d1d1a5fef79bffeb00">RXTX_MODE</a>)}</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_audio_f_f_t_config.html">AudioFFTConfig</a> fft_cfg {default_fft.defaultConfig(<a class="el" href="group__basic.html#gga8cbd91a8bac9b5ab425112be1620eb49a6f3b87c1abe374d1d1a5fef79bffeb00">RXTX_MODE</a>)}</td>
         </tr>
       </table>
   </td>
@@ -1195,6 +1311,28 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a92500918e341fec52d9e3f1e3a46b81e" name="a92500918e341fec52d9e3f1e3a46b81e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92500918e341fec52d9e3f1e3a46b81e">&#9670;&#160;</a></span>p_fft</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html">AudioFFTBase</a>* p_fft = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aa42c30e02e51ec7cc38ea4ab215e0db4" name="aa42c30e02e51ec7cc38ea4ab215e0db4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa42c30e02e51ec7cc38ea4ab215e0db4">&#9670;&#160;</a></span>p_out</h2>
 
@@ -1262,7 +1400,7 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/AudioLibs/<a class="el" href="_f_f_t_effects_8h_source.html">FFTEffects.h</a></li>
+<li>src/AudioTools/FFT/<a class="el" href="_f_f_t_effects_8h_source.html">FFTEffects.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
