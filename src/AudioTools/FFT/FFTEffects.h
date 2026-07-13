@@ -59,6 +59,12 @@ struct FFTEffectConfig : public AudioInfo {
  * @note This is quite processing time intensive: keep the sample rate low
  * if the processor is not fast enough to keep up in real time or select an
  * integer based FFT implementation (AudioFixedFFT) instead of the default AudioRealFFT.
+ * @note Effectively mono only: the forward FFT analyzes just
+ * AudioFFTConfig::channel_used (default channel 0) and discards the other
+ * channels' input samples; the reconstructed signal is then written
+ * identically to every output channel. With stereo input/output this
+ * collapses the signal to dual-mono and loses the original stereo image -
+ * it does not process channels independently.
  * @ingroup transform
  * @author phil schatzmann
  */

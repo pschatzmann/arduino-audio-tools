@@ -35,6 +35,11 @@ struct AudioFFTResult {
 /**
  * @brief Configuration for AudioFFT. If there are more then 1 channel the
  * channel_used is defining which channel is used to perform the fft on.
+ * @note Only channel_used is analyzed by the forward FFT - the other
+ * channels' input samples are discarded. On the reverse FFT the
+ * reconstructed signal is written identically to all `channels`, so
+ * multi-channel input/output is effectively collapsed to dual-mono rather
+ * than processed independently per channel.
  * @ingroup fft
  */
 struct AudioFFTConfig : public AudioInfo {
