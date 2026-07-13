@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AudioTools/AudioLibs/AudioRealFFT.h"  // using RealFFT
+#include "AudioTools/FFT/AudioRealFFT.h"  // using RealFFT
 #include "AudioTools/CoreAudio/AudioOutput.h"
 #include "AudioTools/CoreAudio/StreamCopy.h"
 

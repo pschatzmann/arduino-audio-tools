@@ -1,5 +1,5 @@
 #include "AudioTools.h"
-#include "AudioTools/AudioLibs/AudioRealFFT.h" // using RealFFT
+#include "AudioTools/FFT/AudioRealFFT.h" // using RealFFT
 #include "AudioTools/AudioLibs/MiniAudioStream.h"
 
 AudioInfo info(44100, 2, 16);

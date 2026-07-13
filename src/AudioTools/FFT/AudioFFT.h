@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AudioTools/AudioLibs/FFT/FFTWindows.h"
+#include "AudioTools/FFT/FFTWindows.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"
 #include "AudioTools/CoreAudio/MusicalNotes.h"
 

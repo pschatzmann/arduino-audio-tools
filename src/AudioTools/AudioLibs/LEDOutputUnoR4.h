@@ -1,7 +1,7 @@
 #pragma once
 #include "Arduino_LED_Matrix.h"
-#include "AudioTools/AudioLibs/AudioFFT.h"
-#include "FFTDisplay.h"
+#include "AudioTools/FFT/AudioFFT.h"
+#include "AudioTools/FFT/FFTDisplay.h"
 
 namespace audio_tools {
 class LEDOutputUnoR4;

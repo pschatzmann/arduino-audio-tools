@@ -1,5 +1,5 @@
 #pragma once
-#include "AudioTools/AudioLibs/AudioFFT.h"
+#include "AudioTools/FFT/AudioFFT.h"
 #include "AudioTools/Concurrency/LockGuard.h"
 
 namespace audio_tools {

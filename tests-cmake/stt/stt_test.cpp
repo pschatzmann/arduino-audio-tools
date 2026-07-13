@@ -19,7 +19,7 @@
 
 #define IS_DESKTOP_WITH_TIME_ONLY 1
 #include "AudioTools.h"
-#include "AudioTools/AudioLibs/AudioRealFFT.h"
+#include "AudioTools/FFT/AudioRealFFT.h"
 #include "AudioTools/AEC/LMSEchoCancellationStream.h"
 #include "AudioTools/AEC/MDFEchoCancellationStream.h"
 #include "AudioTools/AudioLibs/WakeWordDetector.h"

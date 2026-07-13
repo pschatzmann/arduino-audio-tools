@@ -1,5 +1,5 @@
 #include "AudioTools.h"
-#include "AudioTools/AudioLibs/AudioCmsisFFT.h" // using CMSIS DSP
+#include "AudioTools/FFT/AudioCmsisFFT.h" // using CMSIS DSP
 
 AudioCmsisFFT fft; // or AudioKissFFT
 SineGenerator<int16_t> sineWave(32000);

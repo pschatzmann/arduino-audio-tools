@@ -6,7 +6,7 @@
 #include "AudioTools/CoreAudio/AudioOutput.h"
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
 #include "AudioTools/CoreAudio/Buffers.h"
-#include "AudioTools/AudioLibs/AudioFFT.h"
+#include "AudioTools/FFT/AudioFFT.h"
 
 namespace audio_tools {
 

@@ -1,5 +1,5 @@
 #include "AudioTools.h"
-#include "AudioTools/AudioLibs/AudioESP32FFT.h" // Using ESP32FFT
+#include "AudioTools/FFT/AudioESP32FFT.h" // Using ESP32FFT
 
 AudioESP32FFT fftc; // or AudioKissFFT
 SineGenerator<int16_t> sineWave(32000);

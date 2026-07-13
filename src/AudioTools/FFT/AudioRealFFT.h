@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AudioFFT.h"
-#include "FFT/FFTReal.h"
+#include "FFTReal.h"
 
 /** 
  * @defgroup fft-real Real

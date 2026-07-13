@@ -1,6 +1,6 @@
 #include "AudioTools.h"
 #include "AudioTools/AudioLibs/MiniAudioStream.h"
-#include "AudioTools/AudioLibs/FFTEffects.h"
+#include "AudioTools/FFT/FFTEffects.h"
 #include "AudioTools/Disk/FileSystem.h"
 
 AudioInfo info(16000, 2, 16);

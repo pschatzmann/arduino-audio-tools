@@ -1,6 +1,6 @@
 
 #include "AudioTools.h"
-#include "AudioTools/AudioLibs/AudioRealFFT.h" // using RealFFT
+#include "AudioTools/FFT/AudioRealFFT.h" // using RealFFT
 
 AudioRealFFT fft; // or AudioKissFFT
 SineGenerator<int16_t> sineWave(32000);

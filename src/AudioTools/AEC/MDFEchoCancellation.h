@@ -38,7 +38,7 @@
 #include <cstring>
 
 #include "MDFEchoCancellationConfig.h"
-#include "AudioTools/AudioLibs/AudioFFT.h"
+#include "AudioTools/FFT/AudioFFT.h"
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Allocator.h"
 
 // Control requests
