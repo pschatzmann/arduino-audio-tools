@@ -313,7 +313,7 @@ void test_mdf_converges(const char* label, double max_energy_ratio) {
 
   MemoryStream recStream((const uint8_t*)rec_all, sizeof(rec_all), true,
                           FLASH_RAM);
-  MDFEchoCancellationStream<SampleType> mdf(recStream, /*filterLength=*/96, fft);
+  MDFEchoCancellationStream<int16_t, SampleType> mdf(recStream, /*filterLength=*/96, fft);
 
   assert(mdf.getFilterLen() == 96);
   mdf.setFilterLen(64);

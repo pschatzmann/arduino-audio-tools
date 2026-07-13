@@ -87,7 +87,7 @@ explicitly in lock-step, useful for testing or non-duplex pipelines.
 ## MDFEchoCancellationStream
 
 ```cpp
-template <typename SampleType = MDFFloat>
+template <typename T = int16_t, typename SampleType = MDFFloat>
 class MDFEchoCancellationStream : public AudioStream;
 ```
 
@@ -110,10 +110,21 @@ cfg.length = 256;                 // frame size in samples
 cfg.sample_rate = 16000;
 fft.begin(cfg);
 
-MDFEchoCancellationStream<> aec(mic_in, /*filterLength=*/1024, fft);  // MDFFloat
+MDFEchoCancellationStream<> aec(mic_in, /*filterLength=*/1024, fft);  // int16_t, MDFFloat
 aec.write(speaker_buf, frame_bytes);      // exactly one frame's worth
 aec.readBytes(clean_mic_buf, frame_bytes); // exactly one frame's worth
 ```
+
+### T: the PCM sample type
+
+The first template parameter, `T` (default `int16_t`), is the PCM sample
+type carried by `write()`/`readBytes()` and by `MDFEchoCancellation`'s
+`capture()`/`playback()`/`cancel()` — mirroring `LMSEchoCancellationStream`'s
+own `T` parameter. Unlike the LMS filter's scale-invariant math, MDF's
+saturation detection and output clamping are range-aware: they're computed
+from `NumberConverter::minValueT<T>()`/`maxValueT<T>()`, so picking a wider
+`T` (e.g. `int32_t`) is safe, but `T` must match the actual sample width of
+the audio flowing through the canceller.
 
 ### SampleType: MDFFloat vs MDFFixedPoint
 
@@ -130,7 +141,7 @@ that picked one representation for the whole binary:
   instructions — useful on microcontrollers without an FPU.
 
 ```cpp
-MDFEchoCancellationStream<MDFFixedPoint> aec(mic_in, 1024, fft);
+MDFEchoCancellationStream<int16_t, MDFFixedPoint> aec(mic_in, 1024, fft);
 ```
 
 **Strengths**

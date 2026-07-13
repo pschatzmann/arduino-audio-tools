@@ -36,11 +36,13 @@
 #include <cstdint>
 #include <cstdlib>
 #include <cstring>
+#include <type_traits>
 
 #include "MDFEchoCancellationConfig.h"
 #include "PseudoFloat.h"
 #include "AudioTools/FFT/AudioFFT.h"
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Allocator.h"
+#include "AudioTools/CoreAudio/AudioTypes.h"
 
 // Control requests
 #define ECHO_GET_FRAME_SIZE 3
@@ -48,15 +50,6 @@
 #define ECHO_GET_SAMPLING_RATE 25
 #define ECHO_GET_IMPULSE_RESPONSE_SIZE 27
 #define ECHO_GET_IMPULSE_RESPONSE 29
-
-// Converts a de-emphasized sample back to a clamped 16-bit PCM value.
-// Independent of the SampleType template parameter below -- this always
-// produces the final echo_int16_t output, regardless of which numeric type
-// was used internally to get there.
-#define WORD2INT(x) \
-  ((x) < -32767.5f  \
-       ? -32768     \
-       : ((x) > 32766.5f ? 32767 : (echo_int16_t)floorf(.5f + (x))))
 
 namespace audio_tools {
 
@@ -88,7 +81,7 @@ struct MDFFloat {
  * mantissa/exponent arithmetic instead of native float instructions --
  * useful on microcontrollers without an FPU. PseudoFloat's arithmetic is
  * verified against native float directly (see the PseudoFloat tests in
- * tests-cmake/stt/stt_test.cpp), and MDFEchoCancellation<MDFFixedPoint> is
+ * tests-cmake/stt/stt_test.cpp), and MDFEchoCancellation<int16_t, MDFFixedPoint> is
  * smoke-tested to run without crashing/NaN and to converge similarly to
  * MDFFloat on the same synthetic signal -- but it has not received the
  * same depth of numerical scrutiny as MDFFloat, so treat it as less
@@ -110,13 +103,15 @@ struct MDFFixedPoint {
  * should never be accessed directly by users; use the EchoCanceller class
  * methods instead.
  *
+ * @tparam T The PCM sample type (e.g. int16_t, int32_t) used for play_buf --
+ * must match MDFEchoCancellation's own @tparam T.
  * @tparam SampleType MDFFloat (default) or MDFFixedPoint -- selects the
  * numeric type used for the arrays/state below (see either struct's doc).
  *
  * @warning Direct access to this structure is not recommended and may break
  * encapsulation.
  */
-template <typename SampleType>
+template <typename T, typename SampleType>
 struct EchoState {
   using Word16 = typename SampleType::word16_t;
   using Word32 = typename SampleType::word32_t;
@@ -176,7 +171,7 @@ struct EchoState {
   Word16 notch_radius;
   Mem* notch_mem;
 
-  echo_int16_t* play_buf;
+  T* play_buf;
   int play_buf_pos;
   int play_buf_started;
 };
@@ -273,7 +268,7 @@ inline void echo_ifft(void* table, T* in, T* out);
  *   test_mdf_converges<MDFFixedPoint> in tests-cmake/stt/stt_test.cpp).
  * - The numeric representation used for internal arrays/state is a
  *   template parameter (@tparam SampleType, MDFFloat by default) chosen
- *   when you construct the object, e.g. `MDFEchoCancellation<MDFFixedPoint>`
+ *   when you construct the object, e.g. `MDFEchoCancellation<int16_t, MDFFixedPoint>`
  *   -- see MDFFloat/MDFFixedPoint's docs above for the tradeoff.
  *
  * Weaknesses:
@@ -293,16 +288,19 @@ inline void echo_ifft(void* table, T* in, T* out);
  *   state; treat further changes with real caution and re-run
  *   tests-cmake/stt afterwards.
  *
+ * @tparam T The PCM sample type used by capture()/playback() (e.g. int16_t,
+ * int32_t). Defaults to int16_t. Must match the sample type of the audio
+ * actually flowing through the canceller -- see saturateToSample().
  * @tparam SampleType MDFFloat (default) or MDFFixedPoint.
  */
-template <typename SampleType = MDFFloat>
+template <typename T = int16_t, typename SampleType = MDFFloat>
 class MDFEchoCancellation : public AudioStream {
  public:
   using Word16 = typename SampleType::word16_t;
   using Word32 = typename SampleType::word32_t;
   using Num = typename SampleType::float_t;
   using Mem = Word32;
-  using State = EchoState<SampleType>;
+  using State = EchoState<T, SampleType>;
 
   /** Initialize echo canceller with single channel (mono)
    * @param filterLength Length of echo cancellation filter in samples
@@ -377,8 +375,8 @@ class MDFEchoCancellation : public AudioStream {
    * @param play Playback signal (reference)
    * @param out Output signal (echo removed)
    */
-  void cancel(const echo_int16_t* rec, const echo_int16_t* play,
-                    echo_int16_t* out) {
+  void cancel(const T* rec, const T* play,
+                    T* out) {
     ensureInitialized();
     echoCancellationImpl(state, rec, play, out);
   }
@@ -387,7 +385,7 @@ class MDFEchoCancellation : public AudioStream {
    * @param rec Recorded signal
    * @param out Output signal (echo removed)
    */
-  void capture(const echo_int16_t* rec, echo_int16_t* out) {
+  void capture(const T* rec, T* out) {
     ensureInitialized();
     state->play_buf_started = 1;
     if (state->play_buf_pos >= state->frame_size) {
@@ -395,7 +393,7 @@ class MDFEchoCancellation : public AudioStream {
       state->play_buf_pos -= state->frame_size;
       std::memmove(state->play_buf,
                    &state->play_buf[state->frame_size],
-                   state->play_buf_pos * sizeof(echo_int16_t));
+                   state->play_buf_pos * sizeof(T));
     } else {
       echoWarning("No playback frame available");
       if (state->play_buf_pos != 0) {
@@ -409,7 +407,7 @@ class MDFEchoCancellation : public AudioStream {
   /** Buffer playback signal for later processing
    * @param play Playback signal to buffer
    */
-  void playback(const echo_int16_t* play) {
+  void playback(const T* play) {
     ensureInitialized();
     if (!state->play_buf_started) {
       echoWarning("Discarded first playback frame");
@@ -615,27 +613,27 @@ class MDFEchoCancellation : public AudioStream {
   }
 
   /**
-   * @brief Allocate a zero-initialized array of type T using the configured
+   * @brief Allocate a zero-initialized array of type A using the configured
    * Allocator (see AudioTools/CoreAudio/AudioBasic/Collections/Allocator.h)
-   * @tparam T Type of objects to allocate
+   * @tparam A Type of objects to allocate
    * @param count Number of objects to allocate
    * @return Pointer to allocated and zero-initialized memory
    */
-  template <typename T>
-  T* echoAlloc(size_t count) {
-    return allocator.createArray<T>(count);
+  template <typename A>
+  A* echoAlloc(size_t count) {
+    return allocator.createArray<A>(count);
   }
 
   /**
    * @brief Deallocate an array previously returned by echoAlloc()
-   * @tparam T Type of objects to deallocate
+   * @tparam A Type of objects to deallocate
    * @param ptr Pointer to memory to deallocate
    * @param count Number of objects originally allocated (must match the
    *              echoAlloc() call that produced ptr)
    */
-  template <typename T>
-  void echoFree(T* ptr, size_t count) {
-    allocator.removeArray<T>(ptr, count);
+  template <typename A>
+  void echoFree(A* ptr, size_t count) {
+    allocator.removeArray<A>(ptr, count);
   }
 
   inline void echoWarning(const char* str) {
@@ -646,8 +644,8 @@ class MDFEchoCancellation : public AudioStream {
     LOGE("EchoCanceller Error: %s", str);
   }
 
-  template <typename T>
-  inline T spxSqrt(T x) { return T(sqrtf((float)x)); }
+  template <typename A>
+  inline A spxSqrt(A x) { return A(sqrtf((float)x)); }
 
   inline echo_int16_t spxIlog2(echo_uint32_t x) {
     int r = 0;
@@ -696,7 +694,7 @@ class MDFEchoCancellation : public AudioStream {
    * @param mem Filter memory state (2 values)
    * @param stride Stride for accessing input array
    */
-  inline void filterDcNotch16(const echo_int16_t* in, Word16 radius,
+  inline void filterDcNotch16(const T* in, Word16 radius,
                               Word16* out, int len, Mem* mem,
                               int stride) {
     Word16 den2 = radius * radius + .7f * (1 - radius) * (1 - radius);
@@ -952,7 +950,7 @@ class MDFEchoCancellation : public AudioStream {
 #endif
 
     st->play_buf =
-        echoAlloc<echo_int16_t>(K * (PLAYBACK_DELAY + 1) * st->frame_size);
+        echoAlloc<T>(K * (PLAYBACK_DELAY + 1) * st->frame_size);
     st->play_buf_pos = PLAYBACK_DELAY * st->frame_size;
     st->play_buf_started = 0;
 
@@ -962,8 +960,25 @@ class MDFEchoCancellation : public AudioStream {
   }
 
   /**
+   * @brief Rounds and saturates a de-emphasized output sample to T's
+   * representable range. Replaces the original fixed int16_t-only WORD2INT
+   * macro. Uses NumberConverter::minValueT<T>()/maxValueT<T>() (symmetric
+   * +-maxValue(bits) -- a harmless 1-LSB narrower on the negative side than
+   * T's native asymmetric two's-complement minimum, e.g. -32767 vs -32768
+   * for int16_t).
+   */
+  inline T saturateToSample(Num x) const {
+    float v = (float)x;
+    float mn = NumberConverter::minValueT<T>();
+    float mx = NumberConverter::maxValueT<T>();
+    if (v < mn + 0.5f) return (T)mn;
+    if (v > mx - 0.5f) return (T)mx;
+    return (T)floorf(0.5f + v);
+  }
+
+  /**
    * @brief Core echo cancellation implementation
-   * 
+   *
    * Implements the complete MDF echo cancellation algorithm including:
    * - Pre-processing (DC notch filter, pre-emphasis)
    * - FFT transformation of input signals
@@ -977,9 +992,9 @@ class MDFEchoCancellation : public AudioStream {
    * @param far_end Reference signal from speakers (interleaved if multi-channel)
    * @param out Output signal with echo removed (interleaved if multi-channel)
    */
-  inline void echoCancellationImpl(State* st, const echo_int16_t* in,
-                                   const echo_int16_t* far_end,
-                                   echo_int16_t* out) {
+  inline void echoCancellationImpl(State* st, const T* in,
+                                   const T* far_end,
+                                   T* out) {
     int N = st->window_size;
     int M = st->M;
     int C = st->C;
@@ -1176,6 +1191,7 @@ class MDFEchoCancellation : public AudioStream {
 #endif
 
     Word32 Sey = 0, Syy = 0, Sdd = 0;
+    const float sat_threshold = NumberConverter::maxValueT<T>() * (32000.0f / 32767.0f);
     for (int chan = 0; chan < C; chan++) {
       // Compute output with de-emphasis
       for (int i = 0; i < st->frame_size; i++) {
@@ -1188,10 +1204,10 @@ class MDFEchoCancellation : public AudioStream {
                   st->y[chan * N + i + st->frame_size];
 #endif
         tmp_out = tmp_out + st->preemph * st->memE[chan];
-        if (in[i * C + chan] <= -32000 || in[i * C + chan] >= 32000) {
+        if (in[i * C + chan] <= -sat_threshold || in[i * C + chan] >= sat_threshold) {
           if (st->saturated == 0) st->saturated = 1;
         }
-        out[i * C + chan] = WORD2INT(tmp_out);
+        out[i * C + chan] = saturateToSample(tmp_out);
         st->memE[chan] = tmp_out;
       }
 

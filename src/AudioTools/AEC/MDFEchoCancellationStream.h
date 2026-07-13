@@ -63,13 +63,16 @@ namespace audio_tools {
  * different Allocator (e.g. AllocatorPSRAM on ESP32) to place them
  * elsewhere.
  *
+ * @tparam T The PCM sample type flowing through write()/readBytes() (e.g.
+ * int16_t, int32_t). Defaults to int16_t, matching the underlying
+ * MDFEchoCancellation default.
  * @tparam SampleType MDFFloat (default) or MDFFixedPoint -- selects the
  * numeric representation MDFEchoCancellation uses internally; see either
  * struct's doc in MDFEchoCancellation.h for the tradeoff. Chosen per
- * instance at construction, e.g. `MDFEchoCancellationStream<MDFFixedPoint>`.
+ * instance at construction, e.g. `MDFEchoCancellationStream<int16_t, MDFFixedPoint>`.
  * @ingroup aec
  */
-template <typename SampleType = MDFFloat>
+template <typename T = int16_t, typename SampleType = MDFFloat>
 class MDFEchoCancellationStream : public AudioStream {
  public:
   /**
@@ -114,13 +117,13 @@ class MDFEchoCancellationStream : public AudioStream {
    */
   size_t write(const uint8_t* buf, size_t len) override {
     int frame_size = getFrameSize();
-    size_t samples = len / sizeof(echo_int16_t);
+    size_t samples = len / sizeof(T);
     size_t frames = samples / (size_t)frame_size;
-    const echo_int16_t* data = (const echo_int16_t*)buf;
+    const T* data = (const T*)buf;
     for (size_t f = 0; f < frames; f++) {
       canceller.playback(data + f * frame_size);
     }
-    return frames * (size_t)frame_size * sizeof(echo_int16_t);
+    return frames * (size_t)frame_size * sizeof(T);
   }
 
   /**
@@ -133,14 +136,14 @@ class MDFEchoCancellationStream : public AudioStream {
    */
   size_t readBytes(uint8_t* buf, size_t len) override {
     size_t read = p_io->readBytes(buf, len);
-    size_t samples = read / sizeof(echo_int16_t);
+    size_t samples = read / sizeof(T);
     int frame_size = getFrameSize();
     size_t frames = samples / (size_t)frame_size;
-    echo_int16_t* data = (echo_int16_t*)buf;
+    T* data = (T*)buf;
     for (size_t f = 0; f < frames; f++) {
       canceller.capture(data + f * frame_size, data + f * frame_size);
     }
-    return frames * (size_t)frame_size * sizeof(echo_int16_t);
+    return frames * (size_t)frame_size * sizeof(T);
   }
 
   void setAudioInfo(AudioInfo info) override {
@@ -171,12 +174,12 @@ class MDFEchoCancellationStream : public AudioStream {
    * @brief Get underlying MDF echo canceller instance
    * @return Reference to MDFEchoCancellation object
    */
-  MDFEchoCancellation<SampleType>& getEchoCanceller() { return canceller; }
+  MDFEchoCancellation<T, SampleType>& getEchoCanceller() { return canceller; }
 
  protected:
   Stream* p_io = nullptr;
   AudioFFTBase* p_fft = nullptr;
-  MDFEchoCancellation<SampleType> canceller;
+  MDFEchoCancellation<T, SampleType> canceller;
 
   /**
    * @brief Get frame size from FFT configuration
