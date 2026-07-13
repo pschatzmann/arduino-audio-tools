@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: EchoState Struct Reference</title>
+<title>arduino-audio-tools: EchoState&lt; SampleType &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,9 +74,10 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="structaudio__tools_1_1_echo_state-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">EchoState Struct Reference</div></div>
+  <div class="headertitle"><div class="title">EchoState&lt; SampleType &gt; Struct Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -85,123 +86,208 @@ $(function() {
 
 <p><code>#include &lt;<a class="el" href="_m_d_f_echo_cancellation_8h_source.html">MDFEchoCancellation.h</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a8e255bf79c603d36664c2488da3a201a" id="r_a8e255bf79c603d36664c2488da3a201a"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a8e255bf79c603d36664c2488da3a201a">Mem</a> = <a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a></td></tr>
+<tr class="separator:a8e255bf79c603d36664c2488da3a201a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abce58cab65b741ca6b7ee0c4a410dd2e" id="r_abce58cab65b741ca6b7ee0c4a410dd2e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#abce58cab65b741ca6b7ee0c4a410dd2e">Num</a> = typename SampleType::float_t</td></tr>
+<tr class="separator:abce58cab65b741ca6b7ee0c4a410dd2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cbc3957c61ff8173c42683c6acd13ad" id="r_a3cbc3957c61ff8173c42683c6acd13ad"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a> = typename SampleType::word16_t</td></tr>
+<tr class="separator:a3cbc3957c61ff8173c42683c6acd13ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a368b6a31dea45d3db9720f1190d4657b" id="r_a368b6a31dea45d3db9720f1190d4657b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a> = typename SampleType::word32_t</td></tr>
+<tr class="separator:a368b6a31dea45d3db9720f1190d4657b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a9905af07d098b2358fe09c7350362550" id="r_a9905af07d098b2358fe09c7350362550"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a9905af07d098b2358fe09c7350362550">adapted</a></td></tr>
 <tr class="separator:a9905af07d098b2358fe09c7350362550"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d24825ec2e8ab477fe4d2a2f2d4d046" id="r_a4d24825ec2e8ab477fe4d2a2f2d4d046"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a4d24825ec2e8ab477fe4d2a2f2d4d046">beta0</a></td></tr>
-<tr class="separator:a4d24825ec2e8ab477fe4d2a2f2d4d046"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aabb285374694f858aa890e98e932bcf0" id="r_aabb285374694f858aa890e98e932bcf0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#aabb285374694f858aa890e98e932bcf0">beta_max</a></td></tr>
-<tr class="separator:aabb285374694f858aa890e98e932bcf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40c152589874c9f564c6e2597642fc5e" id="r_a40c152589874c9f564c6e2597642fc5e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a40c152589874c9f564c6e2597642fc5e">beta0</a></td></tr>
+<tr class="separator:a40c152589874c9f564c6e2597642fc5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f6418511a6401364b66b9d63d5f6775" id="r_a3f6418511a6401364b66b9d63d5f6775"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3f6418511a6401364b66b9d63d5f6775">beta_max</a></td></tr>
+<tr class="separator:a3f6418511a6401364b66b9d63d5f6775"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5464533d23b59ba11030432e73528730" id="r_a5464533d23b59ba11030432e73528730"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a5464533d23b59ba11030432e73528730">C</a></td></tr>
 <tr class="separator:a5464533d23b59ba11030432e73528730"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acbd2054663504990db9967b83d2fd2b7" id="r_acbd2054663504990db9967b83d2fd2b7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#acbd2054663504990db9967b83d2fd2b7">cancel_count</a></td></tr>
 <tr class="separator:acbd2054663504990db9967b83d2fd2b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a490d0e3cc854964296488e6ab7e78ec7" id="r_a490d0e3cc854964296488e6ab7e78ec7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a5943246cc445502cb28745863b328d5a">echo_word32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a490d0e3cc854964296488e6ab7e78ec7">Davg1</a></td></tr>
-<tr class="separator:a490d0e3cc854964296488e6ab7e78ec7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7df5ec55798355b6b1b1bf76ecc86a1" id="r_ad7df5ec55798355b6b1b1bf76ecc86a1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a5943246cc445502cb28745863b328d5a">echo_word32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#ad7df5ec55798355b6b1b1bf76ecc86a1">Davg2</a></td></tr>
-<tr class="separator:ad7df5ec55798355b6b1b1bf76ecc86a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f543322fad4caba2bbaa6e5a662f101" id="r_a3f543322fad4caba2bbaa6e5a662f101"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a1c5e8e688bc325fde6d49a2c2eec5ebe">echo_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3f543322fad4caba2bbaa6e5a662f101">Dvar1</a></td></tr>
-<tr class="separator:a3f543322fad4caba2bbaa6e5a662f101"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a580d02a43d95a70c0a8b70221ce08c57" id="r_a580d02a43d95a70c0a8b70221ce08c57"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a1c5e8e688bc325fde6d49a2c2eec5ebe">echo_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a580d02a43d95a70c0a8b70221ce08c57">Dvar2</a></td></tr>
-<tr class="separator:a580d02a43d95a70c0a8b70221ce08c57"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69e4d71eb53ae08abd055977ea10e968" id="r_a69e4d71eb53ae08abd055977ea10e968"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a69e4d71eb53ae08abd055977ea10e968">e</a></td></tr>
-<tr class="separator:a69e4d71eb53ae08abd055977ea10e968"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add5642c93d0db83aca130bf517d43d92" id="r_add5642c93d0db83aca130bf517d43d92"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#add5642c93d0db83aca130bf517d43d92">E</a></td></tr>
-<tr class="separator:add5642c93d0db83aca130bf517d43d92"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa031598bb65ae2f2aa21dc19ee027dd9" id="r_aa031598bb65ae2f2aa21dc19ee027dd9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a5943246cc445502cb28745863b328d5a">echo_word32_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#aa031598bb65ae2f2aa21dc19ee027dd9">Eh</a></td></tr>
-<tr class="separator:aa031598bb65ae2f2aa21dc19ee027dd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a076c9f1dca58c5fb33d948f6cbc70b93" id="r_a076c9f1dca58c5fb33d948f6cbc70b93"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a076c9f1dca58c5fb33d948f6cbc70b93">Davg1</a></td></tr>
+<tr class="separator:a076c9f1dca58c5fb33d948f6cbc70b93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4d25ac4f0cc3f9b51c2a8761650986c" id="r_ad4d25ac4f0cc3f9b51c2a8761650986c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#ad4d25ac4f0cc3f9b51c2a8761650986c">Davg2</a></td></tr>
+<tr class="separator:ad4d25ac4f0cc3f9b51c2a8761650986c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaea07c3726e19a115533e980e6134875" id="r_aaea07c3726e19a115533e980e6134875"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#abce58cab65b741ca6b7ee0c4a410dd2e">Num</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#aaea07c3726e19a115533e980e6134875">Dvar1</a></td></tr>
+<tr class="separator:aaea07c3726e19a115533e980e6134875"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf907d1b02d08882659a66ca8df0241b" id="r_acf907d1b02d08882659a66ca8df0241b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#abce58cab65b741ca6b7ee0c4a410dd2e">Num</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#acf907d1b02d08882659a66ca8df0241b">Dvar2</a></td></tr>
+<tr class="separator:acf907d1b02d08882659a66ca8df0241b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72d969434f82c5acbf1435c7c2662242" id="r_a72d969434f82c5acbf1435c7c2662242"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a72d969434f82c5acbf1435c7c2662242">e</a></td></tr>
+<tr class="separator:a72d969434f82c5acbf1435c7c2662242"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a556a9563ae7d5f0ab9d538d3c32e2d1e" id="r_a556a9563ae7d5f0ab9d538d3c32e2d1e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a556a9563ae7d5f0ab9d538d3c32e2d1e">E</a></td></tr>
+<tr class="separator:a556a9563ae7d5f0ab9d538d3c32e2d1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a863689b27bf16b881e60c3cd07680977" id="r_a863689b27bf16b881e60c3cd07680977"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a863689b27bf16b881e60c3cd07680977">Eh</a></td></tr>
+<tr class="separator:a863689b27bf16b881e60c3cd07680977"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12b7d40daff70aa97dd9167804397c98" id="r_a12b7d40daff70aa97dd9167804397c98"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a12b7d40daff70aa97dd9167804397c98">fft_table</a></td></tr>
 <tr class="separator:a12b7d40daff70aa97dd9167804397c98"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8bd76ca835a69a900d65342d5fea352f" id="r_a8bd76ca835a69a900d65342d5fea352f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a8bd76ca835a69a900d65342d5fea352f">foreground</a></td></tr>
-<tr class="separator:a8bd76ca835a69a900d65342d5fea352f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec80db7299f77a8be6184b672a7f8107" id="r_aec80db7299f77a8be6184b672a7f8107"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#aec80db7299f77a8be6184b672a7f8107">foreground</a></td></tr>
+<tr class="separator:aec80db7299f77a8be6184b672a7f8107"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad662aa56c1696f09c0ac6b97abafac6d" id="r_ad662aa56c1696f09c0ac6b97abafac6d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#ad662aa56c1696f09c0ac6b97abafac6d">frame_size</a></td></tr>
 <tr class="separator:ad662aa56c1696f09c0ac6b97abafac6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae7d723ee9481f7fc4723d199ae6567f" id="r_aae7d723ee9481f7fc4723d199ae6567f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#aae7d723ee9481f7fc4723d199ae6567f">input</a></td></tr>
-<tr class="separator:aae7d723ee9481f7fc4723d199ae6567f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c2ee764f17eca5993afd11c65538019" id="r_a0c2ee764f17eca5993afd11c65538019"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a0c2ee764f17eca5993afd11c65538019">input</a></td></tr>
+<tr class="separator:a0c2ee764f17eca5993afd11c65538019"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2689c4b3931025b79053532a5f1b0a85" id="r_a2689c4b3931025b79053532a5f1b0a85"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a2689c4b3931025b79053532a5f1b0a85">K</a></td></tr>
 <tr class="separator:a2689c4b3931025b79053532a5f1b0a85"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48554e47292f3c935ce3060da3ec7203" id="r_a48554e47292f3c935ce3060da3ec7203"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a48554e47292f3c935ce3060da3ec7203">last_y</a></td></tr>
-<tr class="separator:a48554e47292f3c935ce3060da3ec7203"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac40352497eb1a4fc00d627990a80ea2f" id="r_ac40352497eb1a4fc00d627990a80ea2f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#ac40352497eb1a4fc00d627990a80ea2f">leak_estimate</a></td></tr>
-<tr class="separator:ac40352497eb1a4fc00d627990a80ea2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d78cfef26fac66b9e63952d5b371bdd" id="r_a3d78cfef26fac66b9e63952d5b371bdd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3d78cfef26fac66b9e63952d5b371bdd">last_y</a></td></tr>
+<tr class="separator:a3d78cfef26fac66b9e63952d5b371bdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38744965a5fb22f4efd92d4d37e1cd47" id="r_a38744965a5fb22f4efd92d4d37e1cd47"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a38744965a5fb22f4efd92d4d37e1cd47">leak_estimate</a></td></tr>
+<tr class="separator:a38744965a5fb22f4efd92d4d37e1cd47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e78dbd5fd0fc01ba7b98dd15e27221e" id="r_a5e78dbd5fd0fc01ba7b98dd15e27221e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a5e78dbd5fd0fc01ba7b98dd15e27221e">M</a></td></tr>
 <tr class="separator:a5e78dbd5fd0fc01ba7b98dd15e27221e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af913f85d4d215cf35cfe77eadfe60797" id="r_af913f85d4d215cf35cfe77eadfe60797"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#af913f85d4d215cf35cfe77eadfe60797">memD</a></td></tr>
-<tr class="separator:af913f85d4d215cf35cfe77eadfe60797"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae284ea31860345929ce492778280305f" id="r_ae284ea31860345929ce492778280305f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#ae284ea31860345929ce492778280305f">memE</a></td></tr>
-<tr class="separator:ae284ea31860345929ce492778280305f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0e0f20c8beb24c4ecc44bfdd4e74201e" id="r_a0e0f20c8beb24c4ecc44bfdd4e74201e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a0e0f20c8beb24c4ecc44bfdd4e74201e">memX</a></td></tr>
-<tr class="separator:a0e0f20c8beb24c4ecc44bfdd4e74201e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f8d51adda997af54728351e84d490ed" id="r_a5f8d51adda997af54728351e84d490ed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#aef705acbb0ca00146e22b9cbfd2617c5">echo_mem_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a5f8d51adda997af54728351e84d490ed">notch_mem</a></td></tr>
-<tr class="separator:a5f8d51adda997af54728351e84d490ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a777afcb5fc723a22870afa73f4558ca3" id="r_a777afcb5fc723a22870afa73f4558ca3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a777afcb5fc723a22870afa73f4558ca3">notch_radius</a></td></tr>
-<tr class="separator:a777afcb5fc723a22870afa73f4558ca3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d1bbe82c036a4da17b5e3180f87075a" id="r_a4d1bbe82c036a4da17b5e3180f87075a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a1c5e8e688bc325fde6d49a2c2eec5ebe">echo_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a4d1bbe82c036a4da17b5e3180f87075a">Pey</a></td></tr>
-<tr class="separator:a4d1bbe82c036a4da17b5e3180f87075a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4e1eaf62df54e993545c6e8e4c51b44" id="r_ae4e1eaf62df54e993545c6e8e4c51b44"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a5943246cc445502cb28745863b328d5a">echo_word32_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#ae4e1eaf62df54e993545c6e8e4c51b44">PHI</a></td></tr>
-<tr class="separator:ae4e1eaf62df54e993545c6e8e4c51b44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad35281ade3cda22f979a8ac71398d76e" id="r_ad35281ade3cda22f979a8ac71398d76e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#ad35281ade3cda22f979a8ac71398d76e">memD</a></td></tr>
+<tr class="separator:ad35281ade3cda22f979a8ac71398d76e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d170f113f3c11960eb1456d77b5113f" id="r_a2d170f113f3c11960eb1456d77b5113f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a2d170f113f3c11960eb1456d77b5113f">memE</a></td></tr>
+<tr class="separator:a2d170f113f3c11960eb1456d77b5113f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61bf64784f48a98fcd436d292219e49d" id="r_a61bf64784f48a98fcd436d292219e49d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a61bf64784f48a98fcd436d292219e49d">memX</a></td></tr>
+<tr class="separator:a61bf64784f48a98fcd436d292219e49d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f748bd816739cc35cffc7d578bbbd59" id="r_a2f748bd816739cc35cffc7d578bbbd59"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#a8e255bf79c603d36664c2488da3a201a">Mem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a2f748bd816739cc35cffc7d578bbbd59">notch_mem</a></td></tr>
+<tr class="separator:a2f748bd816739cc35cffc7d578bbbd59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a036a5ee355daa130c2fcbc056a5d71" id="r_a8a036a5ee355daa130c2fcbc056a5d71"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a8a036a5ee355daa130c2fcbc056a5d71">notch_radius</a></td></tr>
+<tr class="separator:a8a036a5ee355daa130c2fcbc056a5d71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad164cf08a85afc085b206297f9a95767" id="r_ad164cf08a85afc085b206297f9a95767"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#abce58cab65b741ca6b7ee0c4a410dd2e">Num</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#ad164cf08a85afc085b206297f9a95767">Pey</a></td></tr>
+<tr class="separator:ad164cf08a85afc085b206297f9a95767"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c716a4a3961a72457623560c5b9e7e1" id="r_a2c716a4a3961a72457623560c5b9e7e1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a2c716a4a3961a72457623560c5b9e7e1">PHI</a></td></tr>
+<tr class="separator:a2c716a4a3961a72457623560c5b9e7e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6288ba774988db41632007b528fc65a6" id="r_a6288ba774988db41632007b528fc65a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a25c24b2079cdf78e398b7c49cb83d651">echo_int16_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a6288ba774988db41632007b528fc65a6">play_buf</a></td></tr>
 <tr class="separator:a6288ba774988db41632007b528fc65a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23fc8ece98896db1d65403bf33a4f3b0" id="r_a23fc8ece98896db1d65403bf33a4f3b0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a23fc8ece98896db1d65403bf33a4f3b0">play_buf_pos</a></td></tr>
 <tr class="separator:a23fc8ece98896db1d65403bf33a4f3b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af3481ebe3a76c6a4da9040cc55cb4cd4" id="r_af3481ebe3a76c6a4da9040cc55cb4cd4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#af3481ebe3a76c6a4da9040cc55cb4cd4">play_buf_started</a></td></tr>
 <tr class="separator:af3481ebe3a76c6a4da9040cc55cb4cd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72619d2932afa37f64350d3b00d923a0" id="r_a72619d2932afa37f64350d3b00d923a0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a5943246cc445502cb28745863b328d5a">echo_word32_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a72619d2932afa37f64350d3b00d923a0">power</a></td></tr>
-<tr class="separator:a72619d2932afa37f64350d3b00d923a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5576dfe5eee266972d603a536fea874b" id="r_a5576dfe5eee266972d603a536fea874b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a1c5e8e688bc325fde6d49a2c2eec5ebe">echo_float_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a5576dfe5eee266972d603a536fea874b">power_1</a></td></tr>
-<tr class="separator:a5576dfe5eee266972d603a536fea874b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77cf3cdc78c952e0e3a3e5fb899a7826" id="r_a77cf3cdc78c952e0e3a3e5fb899a7826"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a77cf3cdc78c952e0e3a3e5fb899a7826">preemph</a></td></tr>
-<tr class="separator:a77cf3cdc78c952e0e3a3e5fb899a7826"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a40b6fed3246effd57f0b7b0ced35aff3" id="r_a40b6fed3246effd57f0b7b0ced35aff3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a40b6fed3246effd57f0b7b0ced35aff3">prop</a></td></tr>
-<tr class="separator:a40b6fed3246effd57f0b7b0ced35aff3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a780235b996fb491f6d29a9f2a41c665a" id="r_a780235b996fb491f6d29a9f2a41c665a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a1c5e8e688bc325fde6d49a2c2eec5ebe">echo_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a780235b996fb491f6d29a9f2a41c665a">Pyy</a></td></tr>
-<tr class="separator:a780235b996fb491f6d29a9f2a41c665a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab54f06480a61046e51545951690479d8" id="r_ab54f06480a61046e51545951690479d8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a5943246cc445502cb28745863b328d5a">echo_word32_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#ab54f06480a61046e51545951690479d8">Rf</a></td></tr>
-<tr class="separator:ab54f06480a61046e51545951690479d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b26b6a58a538a0463543905495e6759" id="r_a2b26b6a58a538a0463543905495e6759"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a2b26b6a58a538a0463543905495e6759">power</a></td></tr>
+<tr class="separator:a2b26b6a58a538a0463543905495e6759"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae666d9ee76788ab8fcb1a06e826bda77" id="r_ae666d9ee76788ab8fcb1a06e826bda77"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#abce58cab65b741ca6b7ee0c4a410dd2e">Num</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#ae666d9ee76788ab8fcb1a06e826bda77">power_1</a></td></tr>
+<tr class="separator:ae666d9ee76788ab8fcb1a06e826bda77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4a124b5b3d587558e58b680de5266dc" id="r_ae4a124b5b3d587558e58b680de5266dc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#ae4a124b5b3d587558e58b680de5266dc">preemph</a></td></tr>
+<tr class="separator:ae4a124b5b3d587558e58b680de5266dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8741ced20f7069b1f0a183ee4eb84a10" id="r_a8741ced20f7069b1f0a183ee4eb84a10"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a8741ced20f7069b1f0a183ee4eb84a10">prop</a></td></tr>
+<tr class="separator:a8741ced20f7069b1f0a183ee4eb84a10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93af7610c048b46ded03dae98cd5c9d6" id="r_a93af7610c048b46ded03dae98cd5c9d6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#abce58cab65b741ca6b7ee0c4a410dd2e">Num</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a93af7610c048b46ded03dae98cd5c9d6">Pyy</a></td></tr>
+<tr class="separator:a93af7610c048b46ded03dae98cd5c9d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cc5cd8cfc921fc3152c94863872c7e4" id="r_a4cc5cd8cfc921fc3152c94863872c7e4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a4cc5cd8cfc921fc3152c94863872c7e4">Rf</a></td></tr>
+<tr class="separator:a4cc5cd8cfc921fc3152c94863872c7e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ae6903e77df5a9a6bd5b749653d2ac4" id="r_a6ae6903e77df5a9a6bd5b749653d2ac4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#af041250f3317a01414c9fda16da1907c">echo_int32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a6ae6903e77df5a9a6bd5b749653d2ac4">sampling_rate</a></td></tr>
 <tr class="separator:a6ae6903e77df5a9a6bd5b749653d2ac4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1b7f30ed4366641738fad4d49c041e6" id="r_aa1b7f30ed4366641738fad4d49c041e6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#aa1b7f30ed4366641738fad4d49c041e6">saturated</a></td></tr>
 <tr class="separator:aa1b7f30ed4366641738fad4d49c041e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab15ddce3a3c3757a24d15d36098cc2b8" id="r_ab15ddce3a3c3757a24d15d36098cc2b8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#ab15ddce3a3c3757a24d15d36098cc2b8">screwed_up</a></td></tr>
 <tr class="separator:ab15ddce3a3c3757a24d15d36098cc2b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0733a2cb7fb2bfdbb93f23933798104e" id="r_a0733a2cb7fb2bfdbb93f23933798104e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a0733a2cb7fb2bfdbb93f23933798104e">spec_average</a></td></tr>
-<tr class="separator:a0733a2cb7fb2bfdbb93f23933798104e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a7c23742f7f4926c5d5a1e758e3740a" id="r_a5a7c23742f7f4926c5d5a1e758e3740a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a5943246cc445502cb28745863b328d5a">echo_word32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a5a7c23742f7f4926c5d5a1e758e3740a">sum_adapt</a></td></tr>
-<tr class="separator:a5a7c23742f7f4926c5d5a1e758e3740a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f1ba93ec6c7a906dc89cd5e756e8113" id="r_a2f1ba93ec6c7a906dc89cd5e756e8113"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a5943246cc445502cb28745863b328d5a">echo_word32_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a2f1ba93ec6c7a906dc89cd5e756e8113">W</a></td></tr>
-<tr class="separator:a2f1ba93ec6c7a906dc89cd5e756e8113"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad62f7782034c388eb3c69e8bef878734" id="r_ad62f7782034c388eb3c69e8bef878734"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#ad62f7782034c388eb3c69e8bef878734">window</a></td></tr>
-<tr class="separator:ad62f7782034c388eb3c69e8bef878734"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f117060b3637fb8860d9f47a7526fdd" id="r_a6f117060b3637fb8860d9f47a7526fdd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a6f117060b3637fb8860d9f47a7526fdd">spec_average</a></td></tr>
+<tr class="separator:a6f117060b3637fb8860d9f47a7526fdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1642b91bddeb6951358336df72eea26e" id="r_a1642b91bddeb6951358336df72eea26e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a1642b91bddeb6951358336df72eea26e">sum_adapt</a></td></tr>
+<tr class="separator:a1642b91bddeb6951358336df72eea26e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5913f79a4b64cfbde4fc7eb78c2472f0" id="r_a5913f79a4b64cfbde4fc7eb78c2472f0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a5913f79a4b64cfbde4fc7eb78c2472f0">W</a></td></tr>
+<tr class="separator:a5913f79a4b64cfbde4fc7eb78c2472f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a147ea8f952ada603dd7a967bb6f3cdc8" id="r_a147ea8f952ada603dd7a967bb6f3cdc8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a147ea8f952ada603dd7a967bb6f3cdc8">window</a></td></tr>
+<tr class="separator:a147ea8f952ada603dd7a967bb6f3cdc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c7df51cd44a9862d56e5a86a7382fe2" id="r_a1c7df51cd44a9862d56e5a86a7382fe2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a1c7df51cd44a9862d56e5a86a7382fe2">window_size</a></td></tr>
 <tr class="separator:a1c7df51cd44a9862d56e5a86a7382fe2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae87fca25dfdf6c89044c8eb4bdd1100e" id="r_ae87fca25dfdf6c89044c8eb4bdd1100e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#ae87fca25dfdf6c89044c8eb4bdd1100e">wtmp</a></td></tr>
-<tr class="separator:ae87fca25dfdf6c89044c8eb4bdd1100e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae887df5985e2899cd9f86b4d79b4b70f" id="r_ae887df5985e2899cd9f86b4d79b4b70f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#ae887df5985e2899cd9f86b4d79b4b70f">x</a></td></tr>
-<tr class="separator:ae887df5985e2899cd9f86b4d79b4b70f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1cb42628b5decdd26991ee691a2a76ce" id="r_a1cb42628b5decdd26991ee691a2a76ce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a1cb42628b5decdd26991ee691a2a76ce">X</a></td></tr>
-<tr class="separator:a1cb42628b5decdd26991ee691a2a76ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc0bac6ee8df2a91af2a89546514cd22" id="r_adc0bac6ee8df2a91af2a89546514cd22"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a5943246cc445502cb28745863b328d5a">echo_word32_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#adc0bac6ee8df2a91af2a89546514cd22">Xf</a></td></tr>
-<tr class="separator:adc0bac6ee8df2a91af2a89546514cd22"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aebf41273227a6866cfcf019b0581f15d" id="r_aebf41273227a6866cfcf019b0581f15d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#aebf41273227a6866cfcf019b0581f15d">y</a></td></tr>
-<tr class="separator:aebf41273227a6866cfcf019b0581f15d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54a186ce5d090b509da3d5fcae50486b" id="r_a54a186ce5d090b509da3d5fcae50486b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a54a186ce5d090b509da3d5fcae50486b">Y</a></td></tr>
-<tr class="separator:a54a186ce5d090b509da3d5fcae50486b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a90380c7ecee8feac4150cf99c2204c09" id="r_a90380c7ecee8feac4150cf99c2204c09"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a5943246cc445502cb28745863b328d5a">echo_word32_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a90380c7ecee8feac4150cf99c2204c09">Yf</a></td></tr>
-<tr class="separator:a90380c7ecee8feac4150cf99c2204c09"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a027fac0251045ce71b0e82c33fe64fd5" id="r_a027fac0251045ce71b0e82c33fe64fd5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a5943246cc445502cb28745863b328d5a">echo_word32_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a027fac0251045ce71b0e82c33fe64fd5">Yh</a></td></tr>
-<tr class="separator:a027fac0251045ce71b0e82c33fe64fd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c042532a53b6913c83a113278c1ec86" id="r_a8c042532a53b6913c83a113278c1ec86"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a8c042532a53b6913c83a113278c1ec86">wtmp</a></td></tr>
+<tr class="separator:a8c042532a53b6913c83a113278c1ec86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2163335e1f7f074f44377ee787b29d25" id="r_a2163335e1f7f074f44377ee787b29d25"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a2163335e1f7f074f44377ee787b29d25">x</a></td></tr>
+<tr class="separator:a2163335e1f7f074f44377ee787b29d25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b3f79996892c023df4398ac223b881d" id="r_a9b3f79996892c023df4398ac223b881d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a9b3f79996892c023df4398ac223b881d">X</a></td></tr>
+<tr class="separator:a9b3f79996892c023df4398ac223b881d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2720715c1393de0332ecd8198484c7f5" id="r_a2720715c1393de0332ecd8198484c7f5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a2720715c1393de0332ecd8198484c7f5">Xf</a></td></tr>
+<tr class="separator:a2720715c1393de0332ecd8198484c7f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a822ceed8792de92a4c94263da2ed5a94" id="r_a822ceed8792de92a4c94263da2ed5a94"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a822ceed8792de92a4c94263da2ed5a94">y</a></td></tr>
+<tr class="separator:a822ceed8792de92a4c94263da2ed5a94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cd4199914c5ca3d29ab362478840f1d" id="r_a6cd4199914c5ca3d29ab362478840f1d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a6cd4199914c5ca3d29ab362478840f1d">Y</a></td></tr>
+<tr class="separator:a6cd4199914c5ca3d29ab362478840f1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bf57f07f01dd984746b327ef712d357" id="r_a2bf57f07f01dd984746b327ef712d357"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a2bf57f07f01dd984746b327ef712d357">Yf</a></td></tr>
+<tr class="separator:a2bf57f07f01dd984746b327ef712d357"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a302ab144b74a925e4be2b99cb5900d75" id="r_a302ab144b74a925e4be2b99cb5900d75"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state.html#a302ab144b74a925e4be2b99cb5900d75">Yh</a></td></tr>
+<tr class="separator:a302ab144b74a925e4be2b99cb5900d75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Internal echo canceller state structure. </p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename SampleType&gt;<br />
+struct audio_tools::EchoState&lt; SampleType &gt;</div><p>Internal echo canceller state structure. </p>
 <p>Contains all internal state variables and buffers for the MDF (Multi-Delay block Frequency adaptive filter) echo cancellation algorithm. This structure should never be accessed directly by users; use the EchoCanceller class methods instead.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">SampleType</td><td><a class="el" href="structaudio__tools_1_1_m_d_f_float.html" title="Selects float as MDFEchoCancellation&#39;s internal numeric representation for sample/spectrum arrays (wo...">MDFFloat</a> (default) or <a class="el" href="structaudio__tools_1_1_m_d_f_fixed_point.html" title="Selects PseudoFloat (see PseudoFloat.h) as MDFEchoCancellation&#39;s internal numeric representation,...">MDFFixedPoint</a> &ndash; selects the numeric type used for the arrays/state below (see either struct's doc).</td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section warning"><dt>Warning</dt><dd>Direct access to this structure is not recommended and may break encapsulation. </dd></dl>
-</div><h2 class="groupheader">Member Data Documentation</h2>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a8e255bf79c603d36664c2488da3a201a" name="a8e255bf79c603d36664c2488da3a201a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e255bf79c603d36664c2488da3a201a">&#9670;&#160;</a></span>Mem</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structaudio__tools_1_1_echo_state.html#a8e255bf79c603d36664c2488da3a201a">Mem</a> =  <a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abce58cab65b741ca6b7ee0c4a410dd2e" name="abce58cab65b741ca6b7ee0c4a410dd2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abce58cab65b741ca6b7ee0c4a410dd2e">&#9670;&#160;</a></span>Num</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structaudio__tools_1_1_echo_state.html#abce58cab65b741ca6b7ee0c4a410dd2e">Num</a> =  typename SampleType::float_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3cbc3957c61ff8173c42683c6acd13ad" name="a3cbc3957c61ff8173c42683c6acd13ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cbc3957c61ff8173c42683c6acd13ad">&#9670;&#160;</a></span>Word16</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a> =  typename SampleType::word16_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a368b6a31dea45d3db9720f1190d4657b" name="a368b6a31dea45d3db9720f1190d4657b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a368b6a31dea45d3db9720f1190d4657b">&#9670;&#160;</a></span>Word32</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a> =  typename SampleType::word32_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
 <a id="a9905af07d098b2358fe09c7350362550" name="a9905af07d098b2358fe09c7350362550"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9905af07d098b2358fe09c7350362550">&#9670;&#160;</a></span>adapted</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">int adapted</td>
@@ -211,28 +297,32 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a4d24825ec2e8ab477fe4d2a2f2d4d046" name="a4d24825ec2e8ab477fe4d2a2f2d4d046"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4d24825ec2e8ab477fe4d2a2f2d4d046">&#9670;&#160;</a></span>beta0</h2>
+<a id="a40c152589874c9f564c6e2597642fc5e" name="a40c152589874c9f564c6e2597642fc5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40c152589874c9f564c6e2597642fc5e">&#9670;&#160;</a></span>beta0</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a> beta0</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a> beta0</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="aabb285374694f858aa890e98e932bcf0" name="aabb285374694f858aa890e98e932bcf0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aabb285374694f858aa890e98e932bcf0">&#9670;&#160;</a></span>beta_max</h2>
+<a id="a3f6418511a6401364b66b9d63d5f6775" name="a3f6418511a6401364b66b9d63d5f6775"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f6418511a6401364b66b9d63d5f6775">&#9670;&#160;</a></span>beta_max</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a> beta_max</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a> beta_max</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -244,6 +334,8 @@ Public Attributes</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">int C</td>
@@ -258,6 +350,8 @@ Public Attributes</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">int cancel_count</td>
@@ -267,98 +361,112 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a490d0e3cc854964296488e6ab7e78ec7" name="a490d0e3cc854964296488e6ab7e78ec7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a490d0e3cc854964296488e6ab7e78ec7">&#9670;&#160;</a></span>Davg1</h2>
+<a id="a076c9f1dca58c5fb33d948f6cbc70b93" name="a076c9f1dca58c5fb33d948f6cbc70b93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a076c9f1dca58c5fb33d948f6cbc70b93">&#9670;&#160;</a></span>Davg1</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a5943246cc445502cb28745863b328d5a">echo_word32_t</a> Davg1</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a> Davg1</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="ad7df5ec55798355b6b1b1bf76ecc86a1" name="ad7df5ec55798355b6b1b1bf76ecc86a1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad7df5ec55798355b6b1b1bf76ecc86a1">&#9670;&#160;</a></span>Davg2</h2>
+<a id="ad4d25ac4f0cc3f9b51c2a8761650986c" name="ad4d25ac4f0cc3f9b51c2a8761650986c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4d25ac4f0cc3f9b51c2a8761650986c">&#9670;&#160;</a></span>Davg2</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a5943246cc445502cb28745863b328d5a">echo_word32_t</a> Davg2</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a> Davg2</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a3f543322fad4caba2bbaa6e5a662f101" name="a3f543322fad4caba2bbaa6e5a662f101"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3f543322fad4caba2bbaa6e5a662f101">&#9670;&#160;</a></span>Dvar1</h2>
+<a id="aaea07c3726e19a115533e980e6134875" name="aaea07c3726e19a115533e980e6134875"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaea07c3726e19a115533e980e6134875">&#9670;&#160;</a></span>Dvar1</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a1c5e8e688bc325fde6d49a2c2eec5ebe">echo_float_t</a> Dvar1</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#abce58cab65b741ca6b7ee0c4a410dd2e">Num</a> Dvar1</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a580d02a43d95a70c0a8b70221ce08c57" name="a580d02a43d95a70c0a8b70221ce08c57"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a580d02a43d95a70c0a8b70221ce08c57">&#9670;&#160;</a></span>Dvar2</h2>
+<a id="acf907d1b02d08882659a66ca8df0241b" name="acf907d1b02d08882659a66ca8df0241b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf907d1b02d08882659a66ca8df0241b">&#9670;&#160;</a></span>Dvar2</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a1c5e8e688bc325fde6d49a2c2eec5ebe">echo_float_t</a> Dvar2</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#abce58cab65b741ca6b7ee0c4a410dd2e">Num</a> Dvar2</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a69e4d71eb53ae08abd055977ea10e968" name="a69e4d71eb53ae08abd055977ea10e968"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a69e4d71eb53ae08abd055977ea10e968">&#9670;&#160;</a></span>e</h2>
+<a id="a72d969434f82c5acbf1435c7c2662242" name="a72d969434f82c5acbf1435c7c2662242"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72d969434f82c5acbf1435c7c2662242">&#9670;&#160;</a></span>e</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a>* e</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a>* e</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="add5642c93d0db83aca130bf517d43d92" name="add5642c93d0db83aca130bf517d43d92"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#add5642c93d0db83aca130bf517d43d92">&#9670;&#160;</a></span>E</h2>
+<a id="a556a9563ae7d5f0ab9d538d3c32e2d1e" name="a556a9563ae7d5f0ab9d538d3c32e2d1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a556a9563ae7d5f0ab9d538d3c32e2d1e">&#9670;&#160;</a></span>E</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a>* E</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a>* E</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="aa031598bb65ae2f2aa21dc19ee027dd9" name="aa031598bb65ae2f2aa21dc19ee027dd9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa031598bb65ae2f2aa21dc19ee027dd9">&#9670;&#160;</a></span>Eh</h2>
+<a id="a863689b27bf16b881e60c3cd07680977" name="a863689b27bf16b881e60c3cd07680977"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a863689b27bf16b881e60c3cd07680977">&#9670;&#160;</a></span>Eh</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a5943246cc445502cb28745863b328d5a">echo_word32_t</a>* Eh</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a>* Eh</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -370,6 +478,8 @@ Public Attributes</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">void* fft_table</td>
@@ -379,14 +489,16 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a8bd76ca835a69a900d65342d5fea352f" name="a8bd76ca835a69a900d65342d5fea352f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8bd76ca835a69a900d65342d5fea352f">&#9670;&#160;</a></span>foreground</h2>
+<a id="aec80db7299f77a8be6184b672a7f8107" name="aec80db7299f77a8be6184b672a7f8107"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec80db7299f77a8be6184b672a7f8107">&#9670;&#160;</a></span>foreground</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a>* foreground</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a>* foreground</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -398,6 +510,8 @@ Public Attributes</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">int frame_size</td>
@@ -408,14 +522,16 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aae7d723ee9481f7fc4723d199ae6567f" name="aae7d723ee9481f7fc4723d199ae6567f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aae7d723ee9481f7fc4723d199ae6567f">&#9670;&#160;</a></span>input</h2>
+<a id="a0c2ee764f17eca5993afd11c65538019" name="a0c2ee764f17eca5993afd11c65538019"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c2ee764f17eca5993afd11c65538019">&#9670;&#160;</a></span>input</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a>* input</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a>* input</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -427,6 +543,8 @@ Public Attributes</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">int K</td>
@@ -437,28 +555,32 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a48554e47292f3c935ce3060da3ec7203" name="a48554e47292f3c935ce3060da3ec7203"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a48554e47292f3c935ce3060da3ec7203">&#9670;&#160;</a></span>last_y</h2>
+<a id="a3d78cfef26fac66b9e63952d5b371bdd" name="a3d78cfef26fac66b9e63952d5b371bdd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d78cfef26fac66b9e63952d5b371bdd">&#9670;&#160;</a></span>last_y</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a>* last_y</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a>* last_y</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="ac40352497eb1a4fc00d627990a80ea2f" name="ac40352497eb1a4fc00d627990a80ea2f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac40352497eb1a4fc00d627990a80ea2f">&#9670;&#160;</a></span>leak_estimate</h2>
+<a id="a38744965a5fb22f4efd92d4d37e1cd47" name="a38744965a5fb22f4efd92d4d37e1cd47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38744965a5fb22f4efd92d4d37e1cd47">&#9670;&#160;</a></span>leak_estimate</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a> leak_estimate</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a> leak_estimate</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -470,6 +592,8 @@ Public Attributes</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">int M</td>
@@ -479,98 +603,112 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="af913f85d4d215cf35cfe77eadfe60797" name="af913f85d4d215cf35cfe77eadfe60797"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af913f85d4d215cf35cfe77eadfe60797">&#9670;&#160;</a></span>memD</h2>
+<a id="ad35281ade3cda22f979a8ac71398d76e" name="ad35281ade3cda22f979a8ac71398d76e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad35281ade3cda22f979a8ac71398d76e">&#9670;&#160;</a></span>memD</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a> * memD</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a> * memD</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="ae284ea31860345929ce492778280305f" name="ae284ea31860345929ce492778280305f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae284ea31860345929ce492778280305f">&#9670;&#160;</a></span>memE</h2>
+<a id="a2d170f113f3c11960eb1456d77b5113f" name="a2d170f113f3c11960eb1456d77b5113f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d170f113f3c11960eb1456d77b5113f">&#9670;&#160;</a></span>memE</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a> * memE</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a> * memE</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a0e0f20c8beb24c4ecc44bfdd4e74201e" name="a0e0f20c8beb24c4ecc44bfdd4e74201e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0e0f20c8beb24c4ecc44bfdd4e74201e">&#9670;&#160;</a></span>memX</h2>
+<a id="a61bf64784f48a98fcd436d292219e49d" name="a61bf64784f48a98fcd436d292219e49d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61bf64784f48a98fcd436d292219e49d">&#9670;&#160;</a></span>memX</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a>* memX</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a>* memX</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a5f8d51adda997af54728351e84d490ed" name="a5f8d51adda997af54728351e84d490ed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5f8d51adda997af54728351e84d490ed">&#9670;&#160;</a></span>notch_mem</h2>
+<a id="a2f748bd816739cc35cffc7d578bbbd59" name="a2f748bd816739cc35cffc7d578bbbd59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f748bd816739cc35cffc7d578bbbd59">&#9670;&#160;</a></span>notch_mem</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#aef705acbb0ca00146e22b9cbfd2617c5">echo_mem_t</a>* notch_mem</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a8e255bf79c603d36664c2488da3a201a">Mem</a>* notch_mem</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a777afcb5fc723a22870afa73f4558ca3" name="a777afcb5fc723a22870afa73f4558ca3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a777afcb5fc723a22870afa73f4558ca3">&#9670;&#160;</a></span>notch_radius</h2>
+<a id="a8a036a5ee355daa130c2fcbc056a5d71" name="a8a036a5ee355daa130c2fcbc056a5d71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a036a5ee355daa130c2fcbc056a5d71">&#9670;&#160;</a></span>notch_radius</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a> notch_radius</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a> notch_radius</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a4d1bbe82c036a4da17b5e3180f87075a" name="a4d1bbe82c036a4da17b5e3180f87075a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4d1bbe82c036a4da17b5e3180f87075a">&#9670;&#160;</a></span>Pey</h2>
+<a id="ad164cf08a85afc085b206297f9a95767" name="ad164cf08a85afc085b206297f9a95767"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad164cf08a85afc085b206297f9a95767">&#9670;&#160;</a></span>Pey</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a1c5e8e688bc325fde6d49a2c2eec5ebe">echo_float_t</a> Pey</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#abce58cab65b741ca6b7ee0c4a410dd2e">Num</a> Pey</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="ae4e1eaf62df54e993545c6e8e4c51b44" name="ae4e1eaf62df54e993545c6e8e4c51b44"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4e1eaf62df54e993545c6e8e4c51b44">&#9670;&#160;</a></span>PHI</h2>
+<a id="a2c716a4a3961a72457623560c5b9e7e1" name="a2c716a4a3961a72457623560c5b9e7e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c716a4a3961a72457623560c5b9e7e1">&#9670;&#160;</a></span>PHI</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a5943246cc445502cb28745863b328d5a">echo_word32_t</a>* PHI</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a>* PHI</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -582,6 +720,8 @@ Public Attributes</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="namespaceaudio__tools.html#a25c24b2079cdf78e398b7c49cb83d651">echo_int16_t</a>* play_buf</td>
@@ -596,6 +736,8 @@ Public Attributes</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">int play_buf_pos</td>
@@ -610,6 +752,8 @@ Public Attributes</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">int play_buf_started</td>
@@ -619,84 +763,96 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a72619d2932afa37f64350d3b00d923a0" name="a72619d2932afa37f64350d3b00d923a0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a72619d2932afa37f64350d3b00d923a0">&#9670;&#160;</a></span>power</h2>
+<a id="a2b26b6a58a538a0463543905495e6759" name="a2b26b6a58a538a0463543905495e6759"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b26b6a58a538a0463543905495e6759">&#9670;&#160;</a></span>power</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a5943246cc445502cb28745863b328d5a">echo_word32_t</a>* power</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a>* power</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a5576dfe5eee266972d603a536fea874b" name="a5576dfe5eee266972d603a536fea874b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5576dfe5eee266972d603a536fea874b">&#9670;&#160;</a></span>power_1</h2>
+<a id="ae666d9ee76788ab8fcb1a06e826bda77" name="ae666d9ee76788ab8fcb1a06e826bda77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae666d9ee76788ab8fcb1a06e826bda77">&#9670;&#160;</a></span>power_1</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a1c5e8e688bc325fde6d49a2c2eec5ebe">echo_float_t</a>* power_1</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#abce58cab65b741ca6b7ee0c4a410dd2e">Num</a>* power_1</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a77cf3cdc78c952e0e3a3e5fb899a7826" name="a77cf3cdc78c952e0e3a3e5fb899a7826"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a77cf3cdc78c952e0e3a3e5fb899a7826">&#9670;&#160;</a></span>preemph</h2>
+<a id="ae4a124b5b3d587558e58b680de5266dc" name="ae4a124b5b3d587558e58b680de5266dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4a124b5b3d587558e58b680de5266dc">&#9670;&#160;</a></span>preemph</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a> preemph</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a> preemph</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a40b6fed3246effd57f0b7b0ced35aff3" name="a40b6fed3246effd57f0b7b0ced35aff3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a40b6fed3246effd57f0b7b0ced35aff3">&#9670;&#160;</a></span>prop</h2>
+<a id="a8741ced20f7069b1f0a183ee4eb84a10" name="a8741ced20f7069b1f0a183ee4eb84a10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8741ced20f7069b1f0a183ee4eb84a10">&#9670;&#160;</a></span>prop</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a>* prop</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a>* prop</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a780235b996fb491f6d29a9f2a41c665a" name="a780235b996fb491f6d29a9f2a41c665a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a780235b996fb491f6d29a9f2a41c665a">&#9670;&#160;</a></span>Pyy</h2>
+<a id="a93af7610c048b46ded03dae98cd5c9d6" name="a93af7610c048b46ded03dae98cd5c9d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93af7610c048b46ded03dae98cd5c9d6">&#9670;&#160;</a></span>Pyy</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a1c5e8e688bc325fde6d49a2c2eec5ebe">echo_float_t</a> Pyy</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#abce58cab65b741ca6b7ee0c4a410dd2e">Num</a> Pyy</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="ab54f06480a61046e51545951690479d8" name="ab54f06480a61046e51545951690479d8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab54f06480a61046e51545951690479d8">&#9670;&#160;</a></span>Rf</h2>
+<a id="a4cc5cd8cfc921fc3152c94863872c7e4" name="a4cc5cd8cfc921fc3152c94863872c7e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cc5cd8cfc921fc3152c94863872c7e4">&#9670;&#160;</a></span>Rf</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a5943246cc445502cb28745863b328d5a">echo_word32_t</a>* Rf</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a>* Rf</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -708,6 +864,8 @@ Public Attributes</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="namespaceaudio__tools.html#af041250f3317a01414c9fda16da1907c">echo_int32_t</a> sampling_rate</td>
@@ -723,6 +881,8 @@ Public Attributes</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">int saturated</td>
@@ -737,6 +897,8 @@ Public Attributes</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">int screwed_up</td>
@@ -746,56 +908,64 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a0733a2cb7fb2bfdbb93f23933798104e" name="a0733a2cb7fb2bfdbb93f23933798104e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0733a2cb7fb2bfdbb93f23933798104e">&#9670;&#160;</a></span>spec_average</h2>
+<a id="a6f117060b3637fb8860d9f47a7526fdd" name="a6f117060b3637fb8860d9f47a7526fdd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f117060b3637fb8860d9f47a7526fdd">&#9670;&#160;</a></span>spec_average</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a> spec_average</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a> spec_average</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a5a7c23742f7f4926c5d5a1e758e3740a" name="a5a7c23742f7f4926c5d5a1e758e3740a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a7c23742f7f4926c5d5a1e758e3740a">&#9670;&#160;</a></span>sum_adapt</h2>
+<a id="a1642b91bddeb6951358336df72eea26e" name="a1642b91bddeb6951358336df72eea26e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1642b91bddeb6951358336df72eea26e">&#9670;&#160;</a></span>sum_adapt</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a5943246cc445502cb28745863b328d5a">echo_word32_t</a> sum_adapt</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a> sum_adapt</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a2f1ba93ec6c7a906dc89cd5e756e8113" name="a2f1ba93ec6c7a906dc89cd5e756e8113"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2f1ba93ec6c7a906dc89cd5e756e8113">&#9670;&#160;</a></span>W</h2>
+<a id="a5913f79a4b64cfbde4fc7eb78c2472f0" name="a5913f79a4b64cfbde4fc7eb78c2472f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5913f79a4b64cfbde4fc7eb78c2472f0">&#9670;&#160;</a></span>W</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a5943246cc445502cb28745863b328d5a">echo_word32_t</a>* W</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a>* W</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="ad62f7782034c388eb3c69e8bef878734" name="ad62f7782034c388eb3c69e8bef878734"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad62f7782034c388eb3c69e8bef878734">&#9670;&#160;</a></span>window</h2>
+<a id="a147ea8f952ada603dd7a967bb6f3cdc8" name="a147ea8f952ada603dd7a967bb6f3cdc8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a147ea8f952ada603dd7a967bb6f3cdc8">&#9670;&#160;</a></span>window</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a>* window</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a>* window</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -807,6 +977,8 @@ Public Attributes</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">int window_size</td>
@@ -816,112 +988,128 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ae87fca25dfdf6c89044c8eb4bdd1100e" name="ae87fca25dfdf6c89044c8eb4bdd1100e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae87fca25dfdf6c89044c8eb4bdd1100e">&#9670;&#160;</a></span>wtmp</h2>
+<a id="a8c042532a53b6913c83a113278c1ec86" name="a8c042532a53b6913c83a113278c1ec86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c042532a53b6913c83a113278c1ec86">&#9670;&#160;</a></span>wtmp</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a>* wtmp</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a>* wtmp</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="ae887df5985e2899cd9f86b4d79b4b70f" name="ae887df5985e2899cd9f86b4d79b4b70f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae887df5985e2899cd9f86b4d79b4b70f">&#9670;&#160;</a></span>x</h2>
+<a id="a2163335e1f7f074f44377ee787b29d25" name="a2163335e1f7f074f44377ee787b29d25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2163335e1f7f074f44377ee787b29d25">&#9670;&#160;</a></span>x</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a>* x</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a>* x</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a1cb42628b5decdd26991ee691a2a76ce" name="a1cb42628b5decdd26991ee691a2a76ce"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1cb42628b5decdd26991ee691a2a76ce">&#9670;&#160;</a></span>X</h2>
+<a id="a9b3f79996892c023df4398ac223b881d" name="a9b3f79996892c023df4398ac223b881d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b3f79996892c023df4398ac223b881d">&#9670;&#160;</a></span>X</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a>* X</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a>* X</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="adc0bac6ee8df2a91af2a89546514cd22" name="adc0bac6ee8df2a91af2a89546514cd22"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adc0bac6ee8df2a91af2a89546514cd22">&#9670;&#160;</a></span>Xf</h2>
+<a id="a2720715c1393de0332ecd8198484c7f5" name="a2720715c1393de0332ecd8198484c7f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2720715c1393de0332ecd8198484c7f5">&#9670;&#160;</a></span>Xf</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a5943246cc445502cb28745863b328d5a">echo_word32_t</a>* Xf</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a>* Xf</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="aebf41273227a6866cfcf019b0581f15d" name="aebf41273227a6866cfcf019b0581f15d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aebf41273227a6866cfcf019b0581f15d">&#9670;&#160;</a></span>y</h2>
+<a id="a822ceed8792de92a4c94263da2ed5a94" name="a822ceed8792de92a4c94263da2ed5a94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a822ceed8792de92a4c94263da2ed5a94">&#9670;&#160;</a></span>y</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a>* y</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a>* y</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a54a186ce5d090b509da3d5fcae50486b" name="a54a186ce5d090b509da3d5fcae50486b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a54a186ce5d090b509da3d5fcae50486b">&#9670;&#160;</a></span>Y</h2>
+<a id="a6cd4199914c5ca3d29ab362478840f1d" name="a6cd4199914c5ca3d29ab362478840f1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6cd4199914c5ca3d29ab362478840f1d">&#9670;&#160;</a></span>Y</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a29b80463d2a6bc64c5ab5274bec5b7b0">echo_word16_t</a>* Y</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad">Word16</a>* Y</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a90380c7ecee8feac4150cf99c2204c09" name="a90380c7ecee8feac4150cf99c2204c09"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a90380c7ecee8feac4150cf99c2204c09">&#9670;&#160;</a></span>Yf</h2>
+<a id="a2bf57f07f01dd984746b327ef712d357" name="a2bf57f07f01dd984746b327ef712d357"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2bf57f07f01dd984746b327ef712d357">&#9670;&#160;</a></span>Yf</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a5943246cc445502cb28745863b328d5a">echo_word32_t</a>* Yf</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a>* Yf</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a027fac0251045ce71b0e82c33fe64fd5" name="a027fac0251045ce71b0e82c33fe64fd5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a027fac0251045ce71b0e82c33fe64fd5">&#9670;&#160;</a></span>Yh</h2>
+<a id="a302ab144b74a925e4be2b99cb5900d75" name="a302ab144b74a925e4be2b99cb5900d75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a302ab144b74a925e4be2b99cb5900d75">&#9670;&#160;</a></span>Yh</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a5943246cc445502cb28745863b328d5a">echo_word32_t</a>* Yh</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b">Word32</a>* Yh</td>
         </tr>
       </table>
 </div><div class="memdoc">

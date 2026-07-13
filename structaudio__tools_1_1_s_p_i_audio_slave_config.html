@@ -164,7 +164,7 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Configuration for <a class="el" href="classaudio__tools_1_1_s_p_i_audio_slave.html" title="SPI Audio Slave endpoint matching SPIAudioMaster protocol.">SPIAudioSlave</a>. </p>
-<h2><a class="anchor" id="autotoc_md29"></a>
+<h2><a class="anchor" id="autotoc_md32"></a>
 Performance Tuning (ESP32)</h2>
 <p>For optimal performance with ESP32 SPI slave hardware:</p><ul>
 <li><b>queue_size</b>: Increase from default 4 to 8+ if experiencing buffer overflow or if audio data arrives in large bursts. Each queue entry consumes ~256 bytes of DMA-capable RAM. Start with 4 and increase as needed.</li>

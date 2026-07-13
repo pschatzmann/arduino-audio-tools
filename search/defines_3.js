@@ -26,8 +26,6 @@ var searchData=
   ['default_5fsample_5frate_23',['DEFAULT_SAMPLE_RATE',['../_audio_tools_config_8h.html#abe9b1c28165a7071e354bd9d7823ca1a',1,'AudioToolsConfig.h']]],
   ['desktop_5fmillis_5fdefined_24',['desktop_millis_defined',['../_arduino_8h.html#ac9faf1ee520930849fff2feaf62b1d8a',1,'DESKTOP_MILLIS_DEFINED:&#160;Arduino.h'],['../_time_8h.html#ac9faf1ee520930849fff2feaf62b1d8a',1,'DESKTOP_MILLIS_DEFINED:&#160;Time.h']]],
   ['dio0_25',['dio0',['../_audio_lo_ra_8h.html#a1ae4bf629eab3a2e99cb98bc2d805688',1,'AudioLoRa.h']]],
-  ['div32_26',['DIV32',['../_m_d_f_echo_cancellation_8h.html#a3b23497328e2818e4ff96e32bd0b00c6',1,'MDFEchoCancellation.h']]],
-  ['div32_5f16_27',['DIV32_16',['../_m_d_f_echo_cancellation_8h.html#ac32eb42f66a75c1c2c510fa9dbaa375c',1,'MDFEchoCancellation.h']]],
-  ['dma_5fbuf_5fcount_28',['DMA_BUF_COUNT',['../_s_p_d_i_f_output_8h.html#a269a7e51407fdeb29660602407f9df02',1,'SPDIFOutput.h']]],
-  ['dma_5fbuf_5flen_29',['DMA_BUF_LEN',['../_s_p_d_i_f_output_8h.html#a9aad186bb43c99bfa49b2f97e204af32',1,'SPDIFOutput.h']]]
+  ['dma_5fbuf_5fcount_26',['DMA_BUF_COUNT',['../_s_p_d_i_f_output_8h.html#a269a7e51407fdeb29660602407f9df02',1,'SPDIFOutput.h']]],
+  ['dma_5fbuf_5flen_27',['DMA_BUF_LEN',['../_s_p_d_i_f_output_8h.html#a9aad186bb43c99bfa49b2f97e204af32',1,'SPDIFOutput.h']]]
 ];
