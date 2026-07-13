@@ -1,9 +1,17 @@
 #pragma once
+#include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/AudioBasic/Collections.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"
 #include "SoundGenerator.h"
 #include "AudioEffect.h"
-#if defined(USE_VARIANTS) && __cplusplus >= 201703L 
+// USE_VARIANTS defaults to on whenever the compiler is capable of it (needed
+// for AudioEffectStream's runtime bits_per_sample switching); define
+// `#define USE_VARIANTS 0` before including AudioTools.h to force the plain
+// AudioEffectStreamT<effect_t> typedef instead, e.g. on a size-constrained target.
+#ifndef USE_VARIANTS
+#  define USE_VARIANTS (__cplusplus >= 201703L)
+#endif
+#if USE_VARIANTS
 #  include <variant>
 #endif
 
@@ -247,7 +255,12 @@ class AudioEffectStreamT : public ModifyingStream {
 
     bool begin(){
         TRACEI();
-        if (sizeof(T)==info.bits_per_sample/8){
+        // 24-bit samples are commonly stored padded to 4 bytes (int24_4bytes_t,
+        // the default int24_t) for alignment/performance, so sizeof(T) won't
+        // equal bits_per_sample/8==3 in that case; accept sizeof(int24_t) too.
+        bool bits_ok = sizeof(T)==info.bits_per_sample/8
+                    || (info.bits_per_sample==24 && sizeof(T)==sizeof(int24_t));
+        if (bits_ok){
             active = true;
             setupChannels();
         } else {
@@ -441,7 +454,7 @@ class AudioEffectStreamT : public ModifyingStream {
     }
 };
 
-#if defined(USE_VARIANTS) && __cplusplus >= 201703L || defined(DOXYGEN)
+#if USE_VARIANTS || defined(DOXYGEN)
 /** 
  * @brief EffectsStream supporting variable bits_per_sample.
  * This class is only available when __cplusplus >= 201703L. Otherwise AudioEffectStream results in
@@ -453,6 +466,7 @@ class AudioEffectStreamT : public ModifyingStream {
  **/
 
 class AudioEffectStream : public ModifyingStream {
+  public:
     AudioEffectStream() = default;
 
     AudioEffectStream(Stream &io){
@@ -490,12 +504,16 @@ class AudioEffectStream : public ModifyingStream {
                 variant.emplace<2>();
                 break;
             default:
-                LOGE("Unspported bits_per_sample: %d", cfg.bits_per_sample);
+                LOGE("Unspported bits_per_sample: %d", info.bits_per_sample);
                 return false;
         }
-        std::visit( [this](auto&& e) {return e.setOutput(*p_print);}, variant );
-        std::visit( [this](auto&& e) {return e.setInput(*p_io);}, variant );
-        return std::visit( [cfg](auto&& e) {return e.begin(info);}, variant );
+        if (p_print != nullptr) {
+            std::visit( [this](auto&& e) {return e.setOutput(*p_print);}, variant );
+        }
+        if (p_io != nullptr) {
+            std::visit( [this](auto&& e) {return e.setStream(*p_io);}, variant );
+        }
+        return std::visit( [this](auto&& e) {return e.begin(info);}, variant );
     }
 
     void end() override {
@@ -511,7 +529,7 @@ class AudioEffectStream : public ModifyingStream {
     }
 
     void setOutput(Stream &io){
-        p_io = &io;
+        p_print = &io;
     }
 
     void setOutput(Print &print){
@@ -580,6 +598,16 @@ class AudioEffectStream : public ModifyingStream {
     /// Finds an effect by id
     AudioEffect* findEffect(int id){
         return std::visit( [id](auto&& e) {return e.findEffect(id);}, variant );
+    }
+
+    /// Provides access to a single channel's own effect chain (valid after begin())
+    AudioEffectCommon& channelEffects(int channel){
+        return std::visit( [channel](auto&& e) -> AudioEffectCommon& {return e.channelEffects(channel);}, variant );
+    }
+
+    /// Provides the number of channels that have their own effect chain (valid after begin())
+    int channelCount(){
+        return std::visit( [](auto&& e) {return e.channelCount();}, variant );
     }
 
   protected:
