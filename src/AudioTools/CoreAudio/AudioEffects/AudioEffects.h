@@ -194,12 +194,19 @@ class AudioEffects : public SoundGenerator<effect_t> {
 
 
 /**
- * @brief EffectsStreamT: the template class describes an input or output stream to which one or multiple 
- * effects are applied. The number of channels are used to merge the samples of one frame into one sample
- * before outputting the result as a frame (by repeating the result sample for each channel).
- * Currently only int16_t values are supported, so I recommend to use the __AudioEffectStream__ class which is defined as 
+ * @brief EffectsStreamT: the template class describes an input or output stream to which one or multiple
+ * effects are applied. Each channel is processed by its own independent clone of the effect chain (created
+ * via AudioEffect::clone()), so e.g. a stereo signal keeps its channel separation and effects that carry
+ * internal state (Delay's ring buffer, ADSRGain/Tremolo's envelope or oscillator phase, etc.) don't get
+ * confused by interleaved samples from different channels.
+ * addEffect() adds to a shared template chain that is cloned into every channel on begin() (and immediately
+ * cloned into all already-active channels if called afterwards); use addEffect(channel, effect) to register
+ * an effect directly on just one channel instead. Note that size()/operator[]/findEffect() operate on the
+ * template chain, not on the per-channel clones: mutating a pointer obtained from them after begin() has
+ * already cloned it does not retroactively change already-cloned per-channel copies.
+ * Currently only int16_t values are supported, so I recommend to use the __AudioEffectStream__ class which is defined as
  * using AudioEffectStream = AudioEffectStreamT<effect_t>;
-  
+
  * @ingroup effects transform
  * @author Phil Schatzmann
  * @copyright GPLv3*/
@@ -215,6 +222,14 @@ class AudioEffectStreamT : public ModifyingStream {
 
     AudioEffectStreamT(Print &out){
         setOutput(out);
+    }
+
+    // copying would shallow-copy channel_effects/owned_clones and double-free on destruction
+    AudioEffectStreamT(const AudioEffectStreamT&) = delete;
+    AudioEffectStreamT& operator=(const AudioEffectStreamT&) = delete;
+
+    ~AudioEffectStreamT() {
+        clear();
     }
 
     AudioInfo defaultConfig() {
@@ -234,6 +249,7 @@ class AudioEffectStreamT : public ModifyingStream {
         TRACEI();
         if (sizeof(T)==info.bits_per_sample/8){
             active = true;
+            setupChannels();
         } else {
             LOGE("bits_per_sample not consistent: %d",info.bits_per_sample);
             active = false;
@@ -261,35 +277,22 @@ class AudioEffectStreamT : public ModifyingStream {
     */
     size_t readBytes(uint8_t *data, size_t len) override {
         if (!active || p_io==nullptr)return 0;
-        size_t result_size = 0;
 
         // read data from source
         size_t result = p_io->readBytes((uint8_t*)data, len);
         int frames = result / sizeof(T) / info.channels;
         T* samples = (T*) data;
 
-        for (int count=0;count<frames;count++){
-            // determine sample by combining all channels in frame
-            T result_sample = 0;
+        for (int f=0;f<frames;f++){
             for (int ch=0;ch<info.channels;ch++){
-                T sample = *samples++;
-                //p_io->readBytes((uint8_t*)&sample, sizeof(T));
-                result_sample += sample / info.channels;
-            }
-
-            // apply effects
-            for (int j=0; j<size(); j++){
-                result_sample = effects[j]->process(result_sample);
-            }
-
-            // write result multiplying channels 
-            T* p_buffer = ((T*)data)+(count*info.channels);
-            for (int ch=0;ch<info.channels;ch++){
-                p_buffer[ch] = result_sample;
-                result_size += sizeof(T);
+                T &sample = samples[f*info.channels+ch];
+                AudioEffectCommon &chain = channel_effects[ch];
+                for (int j=0; j<chain.size(); j++){
+                    sample = chain[j]->process(sample);
+                }
             }
         }
-        return result_size;
+        return result;
     }
 
     /**
@@ -304,28 +307,21 @@ class AudioEffectStreamT : public ModifyingStream {
         size_t result_size = 0;
 
         // process all samples
-        for (int j=0;j<frames;j++){
-            // calculate sample for frame
-            T* p_buffer = ((T*)data) + (j*info.channels);
-            T sample=0;
+        for (int f=0;f<frames;f++){
+            const T* p_buffer = ((const T*)data) + (f*info.channels);
             for (int ch=0;ch<info.channels;ch++){
-                sample += p_buffer[ch] / info.channels;
-                result_size += sizeof(T);
-            }
+                T sample = p_buffer[ch];
+                AudioEffectCommon &chain = channel_effects[ch];
+                for (int j=0; j<chain.size(); j++){
+                    sample = chain[j]->process(sample);
+                }
 
-            // apply effects
-            for (int j=0; j<size(); j++){
-                sample = effects[j]->process(sample);
-            }
-
-            // wite result channel times to output defined in constructor
-            for (int ch=0;ch<info.channels;ch++){
                 if (p_io!=nullptr){
                     p_io->write((uint8_t*)&sample, sizeof(T));
-
                 } else if (p_print!=nullptr){
                     p_print->write((uint8_t*)&sample, sizeof(T));
                 }
+                result_size += sizeof(T);
             }
         }
         return result_size;
@@ -342,45 +338,107 @@ class AudioEffectStreamT : public ModifyingStream {
         return 0;
     }
 
-    /// Adds an effect object (by reference)
+    /// Adds an effect object (by reference) to the template chain: cloned into every channel
     void addEffect(AudioEffect &effect){
-        TRACED();
-        effects.addEffect(&effect);
+        addEffect(&effect);
     }
 
-    /// Adds an effect using a pointer
+    /// Adds an effect using a pointer to the template chain: cloned into every channel
     void addEffect(AudioEffect *effect){
         TRACED();
         effects.addEffect(effect);
         LOGI("addEffect -> Number of effects: %d", (int) size());
+        // if channels are already set up, extend them immediately instead of
+        // waiting for the next begin()
+        if (active){
+            for (int ch=0; ch<channel_effects.size(); ch++){
+                cloneInto(ch, effect);
+            }
+        }
+    }
+
+    /// Adds an effect object (by reference) directly to a single channel's own chain (not cloned,
+    /// not owned by this class). Requires begin() to have already been called.
+    void addEffect(int channel, AudioEffect &effect){
+        addEffect(channel, &effect);
+    }
+
+    /// Adds an effect using a pointer directly to a single channel's own chain (not cloned,
+    /// not owned by this class). Requires begin() to have already been called.
+    void addEffect(int channel, AudioEffect *effect){
+        TRACED();
+        if (!active || channel<0 || channel>=channel_effects.size()){
+            LOGE("Invalid channel %d or begin() not yet called", channel);
+            return;
+        }
+        channel_effects[channel].addEffect(effect);
     }
 
     /// deletes all defined effects
     void clear() {
         TRACED();
+        for (int i=0; i<owned_clones.size(); i++){
+            delete owned_clones[i];
+        }
+        owned_clones.clear();
+        channel_effects.clear();
         effects.clear();
     }
 
-    /// Provides the actual number of defined effects
+    /// Provides the actual number of defined effects in the template chain
     size_t size() {
         return effects.size();
     }
 
-    /// gets an effect by index
+    /// gets an effect by index from the template chain
     AudioEffect* operator [](int idx){
         return effects[idx];
     }
 
-    /// Finds an effect by id
+    /// Finds an effect by id in the template chain
     AudioEffect* findEffect(int id){
         return effects.findEffect(id);
     }
 
+    /// Provides access to a single channel's own effect chain (valid after begin())
+    AudioEffectCommon& channelEffects(int channel){
+        return channel_effects[channel];
+    }
+
+    /// Provides the number of channels that have their own effect chain (valid after begin())
+    int channelCount(){
+        return channel_effects.size();
+    }
+
   protected:
-    AudioEffectCommon effects;
+    AudioEffectCommon effects;                  // template chain populated via addEffect()
+    Vector<AudioEffectCommon> channel_effects;   // one independent chain per channel, cloned from `effects`
+    Vector<AudioEffect*> owned_clones;           // clones created internally; ours to delete
     bool active = false;
     Stream *p_io=nullptr;
     Print *p_print=nullptr;
+
+    /// clones a single effect into a single channel's chain, tracking ownership
+    void cloneInto(int ch, AudioEffect *effect){
+        AudioEffect *clone = effect->clone();
+        channel_effects[ch].addEffect(clone);
+        owned_clones.push_back(clone);
+    }
+
+    /// (re)builds channel_effects from the template `effects` chain
+    void setupChannels() {
+        for (int i=0; i<owned_clones.size(); i++){
+            delete owned_clones[i];
+        }
+        owned_clones.clear();
+        channel_effects.clear();
+        channel_effects.resize(info.channels);
+        for (int ch=0; ch<info.channels; ch++){
+            for (int j=0; j<effects.size(); j++){
+                cloneInto(ch, effects[j]);
+            }
+        }
+    }
 };
 
 #if defined(USE_VARIANTS) && __cplusplus >= 201703L || defined(DOXYGEN)
@@ -492,6 +550,16 @@ class AudioEffectStream : public ModifyingStream {
     /// Adds an effect using a pointer
     void addEffect(AudioEffect *effect){
         std::visit( [effect](auto&& e) {e.addEffect(effect);}, variant );
+    }
+
+    /// Adds an effect object (by reference) directly to a single channel's own chain
+    void addEffect(int channel, AudioEffect &effect){
+        addEffect(channel, &effect);
+    }
+
+    /// Adds an effect using a pointer directly to a single channel's own chain
+    void addEffect(int channel, AudioEffect *effect){
+        std::visit( [channel, effect](auto&& e) {e.addEffect(channel, effect);}, variant );
     }
 
     /// deletes all defined effects
