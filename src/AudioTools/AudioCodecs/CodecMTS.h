@@ -18,6 +18,7 @@ namespace audio_tools {
  * @ingroup basic
  */
 enum class MTSStreamType {
+  NONE = 0x00,
   VIDEO = 0x01,
   VIDEO_H262 = 0x02,
   AUDIO_MP3 = 0x03,
@@ -100,6 +101,7 @@ class MTSDecoder : public AudioDecoder {
     is_adts_missing = false;
     open_pes_data_size = 0;
     frame_length = 0;
+    selected_stream_type = MTSStreamType::NONE;
 
     // default supported stream types
     if (stream_types.empty()) {
@@ -136,14 +138,24 @@ class MTSDecoder : public AudioDecoder {
       return 0;
     }
 
-    // wait until we have enough data
-    if (buffer.availableForWrite() < len) {
-      LOGI("MTSDecoder::write: Buffer full");
+    // free up space if the buffer can't currently hold everything
+    if ((size_t)buffer.availableForWrite() < len) {
       demux();
+    }
+
+    // write as much as currently fits: len may exceed the total buffer
+    // capacity, so a full write can never be guaranteed. Returning a
+    // partial count (standard Print::write contract) lets the caller
+    // resend the remainder instead of stalling forever.
+    size_t toWrite = (size_t)buffer.availableForWrite() < len
+                          ? (size_t)buffer.availableForWrite()
+                          : len;
+    if (toWrite == 0) {
+      LOGI("MTSDecoder::write: Buffer full");
       return 0;
     }
-    LOGI("MTSDecoder::write: %d", (int)len);
-    size_t result = buffer.writeArray((uint8_t *)data, len);
+    LOGI("MTSDecoder::write: %d", (int)toWrite);
+    size_t result = buffer.writeArray((uint8_t *)data, toWrite);
     demux();
     return result;
   }
@@ -206,7 +218,7 @@ class MTSDecoder : public AudioDecoder {
   AudioDecoder *p_dec = nullptr;
   uint16_t pmt_pid = 0xFFFF;
   // AACProfile aac_profile = AACProfile::LC;
-  MTSStreamType selected_stream_type;
+  MTSStreamType selected_stream_type = MTSStreamType::NONE;
   int open_pes_data_size = 0;
   int frame_length = 0;
   bool is_adts_missing = false;
@@ -253,6 +265,9 @@ class MTSDecoder : public AudioDecoder {
       LOGW("Sync byte not found at position 0. Skipping %d bytes", pos);
       buffer.clearArray(pos);
     }
+    // not enough data left for a full packet after skipping to the sync byte
+    if (buffer.available() < TS_PACKET_SIZE) return false;
+
     // parse data
     uint8_t *packet = buffer.data();
     int pid = ((packet[1] & 0x1F) << 8) | (packet[2] & 0xFF);
@@ -400,7 +415,10 @@ class MTSDecoder : public AudioDecoder {
     int pesDataSize = 0;
 
     if (payloadUnitStartIndicator) {
-      assert(len >= 6);
+      if (len < 6) {
+        LOGE("PES packet too short: %d", len);
+        return;
+      }
       // PES header is not alligned correctly
       if (!isPESStartCodeValid(pes)) {
         LOGE("PES header not aligned correctly");
@@ -411,18 +429,23 @@ class MTSDecoder : public AudioDecoder {
           (static_cast<int>(pes[4]) << 8) | static_cast<int>(pes[5]);
 
       // PES Header size is at least 6 bytes, but can be larger with optional
-      // fields
+      // fields. Only inspect the optional fields when they are actually
+      // within the available data (pes[6..8]).
       int pesHeaderSize = 6;
-      if ((pes[6] & 0xC0) != 0) {  // Check for PTS/DTS flags
+      if (len >= 9 && (pes[6] & 0xC0) != 0) {  // Check for PTS/DTS flags
         pesHeaderSize += 3 + ((pes[7] & 0xC0) == 0xC0 ? 5 : 0);
         pesHeaderSize += pes[8];  // PES header stuffing size
       }
       LOGI("- PES Header Size: %d", pesHeaderSize);
+
+      // pesHeaderSize is derived from stream-controlled bytes and can
+      // legally encode a value that exceeds the available payload
+      if (pesHeaderSize >= len) {
+        LOGE("Unexpected PES Header Size: %d (len: %d)", pesHeaderSize, len);
+        return;
+      }
       pesData = pes + pesHeaderSize;
       pesDataSize = len - pesHeaderSize;
-
-      assert(pesHeaderSize < len);
-      assert(pesDataSize > 0);
 
       /// Check for ADTS
       if (pes_count == 1 && selected_stream_type == MTSStreamType::AUDIO_AAC) {
@@ -482,9 +505,12 @@ class MTSDecoder : public AudioDecoder {
   /// Finds the mp3/aac sync word
   int findSyncWord(const uint8_t *buf, size_t nBytes, uint8_t synch = 0xFF,
                    uint8_t syncl = 0xF0) {
-    for (int i = 0; i < nBytes - 1; i++) {
+    // nBytes is unsigned: bail out up front so "nBytes - 1" can never
+    // underflow into a huge loop bound below
+    if (nBytes < 2) return -1;
+    for (size_t i = 0; i < nBytes - 1; i++) {
       if ((buf[i + 0] & synch) == synch && (buf[i + 1] & syncl) == syncl)
-        return i;
+        return (int)i;
     }
     return -1;
   }
