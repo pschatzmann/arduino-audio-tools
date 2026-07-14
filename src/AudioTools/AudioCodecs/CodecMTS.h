@@ -355,11 +355,16 @@ class MTSDecoder : public AudioDecoder {
     int staticLengthOfPMT = 12;
     int sectionLength = ((pmt[1] & 0x0F) << 8) | (pmt[2] & 0xFF);
     LOGI("- PMT Section Length: %d", sectionLength);
+    if (sectionLength >= len) {
+      LOGE("Unexpected PMT Section Length: %d", sectionLength);
+      sectionLength = len;
+    }
     int programInfoLength = ((pmt[10] & 0x0F) << 8) | (pmt[11] & 0xFF);
     LOGI("- PMT Program Info Length: %d", programInfoLength);
 
     int cursor = staticLengthOfPMT + programInfoLength;
     while (cursor < sectionLength - 1) {
+      if (cursor + 4 >= len) break;
       MTSStreamType streamType = static_cast<MTSStreamType>(pmt[cursor] & 0xFF);
       int elementaryPID =
           ((pmt[cursor + 1] & 0x1F) << 8) | (pmt[cursor + 2] & 0xFF);
