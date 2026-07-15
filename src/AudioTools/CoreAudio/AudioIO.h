@@ -1,6 +1,7 @@
 #pragma once
 #include "AudioTools/CoreAudio/AudioOutput.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"
+#include "AudioTools/Communication/HTTP/AudioClient.h"  // for Client
 
 #ifndef MAX_ZERO_READ_COUNT
 #define MAX_ZERO_READ_COUNT 3
@@ -476,34 +477,50 @@ class MultiOutput : public ModifyingOutput {
   virtual ~MultiOutput() { clear(); }
 
   /// Add an additional AudioOutput output
-  void add(AudioOutput& out) { vector.push_back(&out); }
+  void add(AudioOutput& out) {
+    vector.push_back({&out, &out, Kind::AudioOutputKind});
+  }
 
   /// Add an AudioStream to the output
   void add(AudioStream& stream) {
-    AdapterAudioStreamToAudioOutput* out =
-        new AdapterAudioStreamToAudioOutput(stream);
-    vector.push_back(out);
+    vector.push_back({&stream, &stream, Kind::AudioStreamKind});
   }
 
-  void add(Print& print) {
-    AdapterPrintToAudioOutput* out = new AdapterPrintToAudioOutput(print);
-    vector.push_back(out);
+  /// Add a (network) Client as output: e.g. WiFiClient, EthernetClient...
+  void add(Client& client) {
+    vector.push_back({&client, nullptr, Kind::ClientKind});
+  }
+
+  /// Add a generic Print output: Warning no support for AudioInfo
+  /// notifications. It is recommended to use one of the other add() methods.
+  void add(Print& print) { vector.push_back({&print, nullptr, Kind::PrintKind}); }
+
+  /// Removes the indicated output
+  void remove(Print& print) {
+    for (int j = 0; j < vector.size(); j++) {
+      if (vector[j].print == &print) {
+        vector.erase(j);
+        return;
+      }
+    }
   }
 
   void flush() {
     for (int j = 0; j < vector.size(); j++) {
-      vector[j]->flush();
+      vector[j].print->flush();
     }
   }
 
   void setAudioInfo(AudioInfo info) {
     for (int j = 0; j < vector.size(); j++) {
-      vector[j]->setAudioInfo(info);
+      if (vector[j].info != nullptr) {
+        vector[j].info->setAudioInfo(info);
+      }
     }
   }
 
   size_t write(const uint8_t* data, size_t len) override {
-    for (auto& out : vector) {
+    for (auto& rec : vector) {
       int open = len;
       int start = 0;
       // create copy of data to avoid that one output changes the data for the
@@ -511,7 +528,7 @@ class MultiOutput : public ModifyingOutput {
       uint8_t copy[len];
       memcpy(copy, data, len);
       while (open > 0) {
-        int written = out->write(copy + start, open);
+        int written = rec.print->write(copy + start, open);
         open -= written;
         start += written;
       }
@@ -523,24 +540,66 @@ class MultiOutput : public ModifyingOutput {
     for (int j = 0; j < vector.size(); j++) {
       int open = 1;
       while (open > 0) {
-        open -= vector[j]->write(ch);
+        open -= vector[j].print->write(ch);
       }
     }
     return 1;
   }
 
-  /// Removes all output components
-  void clear() {
-    for (auto& tmp : vector) {
-      if (tmp != nullptr && tmp->isDeletable()) {
-        delete tmp;
+  /// Removes all output components: the referenced Print/AudioOutput/
+  /// AudioStream/Client objects are never owned by MultiOutput, so no
+  /// memory needs to be released here.
+  void clear() { vector.clear(); }
+
+  /// Removes all outputs which are no longer active. Client, AudioStream and
+  /// AudioOutput provide an operator bool() which is used to determine if the
+  /// output is still active; plain Print outputs cannot be checked and are
+  /// always kept.
+  void clearInactive() {
+    for (int j = vector.size() - 1; j >= 0; j--) {
+      if (!isActive(vector[j])) {
+        vector.erase(j);
       }
     }
-    vector.clear();
   }
 
  protected:
-  Vector<AudioOutput*> vector;
+  /// Identifies the actual type behind the stored Print pointer so that
+  /// clearInactive() can safely static_cast back to call operator bool()
+  enum class Kind { PrintKind, ClientKind, AudioStreamKind, AudioOutputKind };
+
+  /// Record describing a single replicated output
+  struct MultiOutputRecord {
+    /// Target to which the data is actually written
+    Print* print;
+    /// Optional AudioInfoSupport interface: only set when the added object
+    /// also supports AudioInfo notifications (AudioOutput, AudioStream)
+    AudioInfoSupport* info;
+    /// Actual type of the object behind print
+    Kind kind;
+
+    MultiOutputRecord(Print* print = nullptr, AudioInfoSupport* info = nullptr,
+                       Kind kind = Kind::PrintKind)
+        : print(print), info(info), kind(kind) {}
+  };
+
+  Vector<MultiOutputRecord> vector;
+
+  /// Determines if the output is still active: Client, AudioStream and
+  /// AudioOutput support this via their operator bool(); plain Print
+  /// outputs cannot be checked and are always reported as active.
+  bool isActive(MultiOutputRecord& rec) {
+    switch (rec.kind) {
+      case Kind::ClientKind:
+        return (bool)*static_cast<Client*>(rec.print);
+      case Kind::AudioStreamKind:
+        return (bool)*static_cast<AudioStream*>(rec.print);
+      case Kind::AudioOutputKind:
+        return (bool)*static_cast<AudioOutput*>(rec.print);
+      default:
+        return true;
+    }
+  }
 
   /// support for Pipleline
   void setOutput(Print& out) { add(out); }
