@@ -115,15 +115,10 @@ class AudioServerT {
     TRACED();
 
     this->in = &in;
-    this->content_type = contentType ? contentType : "";
+    this->callback = nullptr;
+    setContentType(contentType);
 
-#ifdef USE_WIFI
-    connectWiFi();
-#endif
-
-    // start server
-    server.begin();
-    return true;
+    return startServer();
   }
 
   /**
@@ -137,16 +132,22 @@ class AudioServerT {
 
     this->in = nullptr;
     this->callback = cb;
-    this->content_type = contentType ? contentType : "";
+    setContentType(contentType);
 
-#ifdef USE_WIFI
-    connectWiFi();
-#endif
-
-    // start server
-    server.begin();
-    return true;
+    return startServer();
   }
+
+  /// Just starts the server
+  bool begin() {
+    if (content_type == nullptr) {
+      LOGE("Content type is not defined");
+      return false;
+    }
+    return startServer();
+  }
+
+  /// Defines the content type (MIME type) of the data that will be sent to the client. Needs to be set before calling begin().
+  void setContentType(const char *contentType) { this->content_type = contentType ? contentType : ""; }
 
   /**
    * @brief Add this method to your loop
@@ -243,6 +244,20 @@ class AudioServerT {
   /// Provides the defined total number of bytes that will be sent
   size_t maxOutputSize() { return max_output_size; }
 
+  /// Ends the connection and resets the state
+  void end() {
+    if (client_obj) {
+      endChunked();
+      client_obj.stop();
+    }
+    // reset the state
+    callback = nullptr;
+    in = nullptr;
+    converter_ptr = nullptr;
+    sent = 0;
+  }
+
+
  protected:
   // WIFI
 #ifdef ESP32
@@ -275,6 +290,16 @@ class AudioServerT {
   void setupServer(int port) {
     Server tmp(port);
     server = tmp;
+  }
+
+  /// Connects to WiFi (if enabled) and starts the server: shared tail of all
+  /// begin() overloads
+  bool startServer() {
+#ifdef USE_WIFI
+    connectWiFi();
+#endif
+    server.begin();
+    return true;
   }
 
 #ifdef USE_WIFI
