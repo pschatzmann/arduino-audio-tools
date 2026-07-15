@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['a_0',['a',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338a7fc56270e7a70fa81a5935b72eacbe29',1,'audio_tools::A'],['../group__tools.html#gga9715fceb4c700e7e4a610400464e9396a42a4ade1acd55a49164099104990e09f',1,'audio_tools::MusicalNotes::A']]],
+  ['a_0',['a',['../group__tools.html#gga9715fceb4c700e7e4a610400464e9396a42a4ade1acd55a49164099104990e09f',1,'audio_tools::MusicalNotes::A'],['../group__basic.html#gga5b1869d184b84711842bfe4f25433338a7fc56270e7a70fa81a5935b72eacbe29',1,'audio_tools::A']]],
   ['a2dpsilence_1',['A2DPSilence',['../namespaceaudio__tools.html#a1d4acd31001a6bca774a5d7f5eb98afaa67beee002634c2cc6951ec7ec2b95690',1,'audio_tools']]],
   ['a2dpwhoosh_2',['A2DPWhoosh',['../namespaceaudio__tools.html#a1d4acd31001a6bca774a5d7f5eb98afaa2e4cdc4f5fe34fd0c7ffb5ff48dc2f0b',1,'audio_tools']]],
   ['aac_3',['aac',['../classaudio__tools_1_1_m4_a_common_demuxer.html#a87487bf84e831b40083eb736cc1a237ca6409dac0c80c79ddf61858be7f2c699b',1,'audio_tools::M4ACommonDemuxer::AAC'],['../namespaceaudio__tools.html#a320f7b385576131cdae7758303baf7aaa6409dac0c80c79ddf61858be7f2c699b',1,'audio_tools::AAC']]],
@@ -35,8 +35,10 @@ var searchData=
   ['audio_5feac3_32',['AUDIO_EAC3',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338a055281fd9a36efde282c361c588f8015',1,'audio_tools']]],
   ['audio_5fmp3_33',['AUDIO_MP3',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338a2f98d551f554f9242fed8ab373837619',1,'audio_tools']]],
   ['audio_5fmp3_5flow_5fbitrate_34',['AUDIO_MP3_LOW_BITRATE',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338a8283286a05c67a41f56adbf611b224cc',1,'audio_tools']]],
-  ['auto_35',['Auto',['../group__convert.html#gga077b71bccfdb0bda598c8ec04372c474ab81b7469043e9c54603ca3aebbe38e90',1,'audio_tools']]],
-  ['avichunk_36',['AVIChunk',['../namespaceaudio__tools.html#a4403c7ff6337b5b822354d33c6a007bda14ed1a46c8c0a602067ad2959efc1ead',1,'audio_tools']]],
-  ['avilist_37',['AVIList',['../namespaceaudio__tools.html#a4403c7ff6337b5b822354d33c6a007bda48f228faf17a7ac73d09ca4a7bdacec5',1,'audio_tools']]],
-  ['avistreamdata_38',['AVIStreamData',['../namespaceaudio__tools.html#a4403c7ff6337b5b822354d33c6a007bdac5ef28915bac2b58344802e25bc6e07f',1,'audio_tools']]]
+  ['audiooutputkind_35',['AudioOutputKind',['../classaudio__tools_1_1_multi_output.html#aa10c9e8951b8ccf714a59ec321bdac5baa01a7f63cb8af82931a20bf2ff8deed4',1,'audio_tools::MultiOutput']]],
+  ['audiostreamkind_36',['AudioStreamKind',['../classaudio__tools_1_1_multi_output.html#aa10c9e8951b8ccf714a59ec321bdac5ba21202ed5eacb890a69a610358a92b0dc',1,'audio_tools::MultiOutput']]],
+  ['auto_37',['Auto',['../group__convert.html#gga077b71bccfdb0bda598c8ec04372c474ab81b7469043e9c54603ca3aebbe38e90',1,'audio_tools']]],
+  ['avichunk_38',['AVIChunk',['../namespaceaudio__tools.html#a4403c7ff6337b5b822354d33c6a007bda14ed1a46c8c0a602067ad2959efc1ead',1,'audio_tools']]],
+  ['avilist_39',['AVIList',['../namespaceaudio__tools.html#a4403c7ff6337b5b822354d33c6a007bda48f228faf17a7ac73d09ca4a7bdacec5',1,'audio_tools']]],
+  ['avistreamdata_40',['AVIStreamData',['../namespaceaudio__tools.html#a4403c7ff6337b5b822354d33c6a007bdac5ef28915bac2b58344802e25bc6e07f',1,'audio_tools']]]
 ];

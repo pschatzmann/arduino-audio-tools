@@ -55,12 +55,13 @@ var searchData=
   ['multiconverter_52',['MultiConverter',['../classaudio__tools_1_1_multi_converter.html',1,'audio_tools']]],
   ['multidecoder_53',['MultiDecoder',['../classaudio__tools_1_1_multi_decoder.html',1,'audio_tools']]],
   ['multioutput_54',['MultiOutput',['../classaudio__tools_1_1_multi_output.html',1,'audio_tools']]],
-  ['multistreamingdecoder_55',['MultiStreamingDecoder',['../classaudio__tools_1_1_multi_streaming_decoder.html',1,'audio_tools']]],
-  ['musicalnotes_56',['MusicalNotes',['../classaudio__tools_1_1_musical_notes.html',1,'audio_tools']]],
-  ['mutexbase_57',['MutexBase',['../classaudio__tools_1_1_mutex_base.html',1,'audio_tools']]],
-  ['mutexrecursivertos_58',['MutexRecursiveRTOS',['../classaudio__tools_1_1_mutex_recursive_r_t_o_s.html',1,'audio_tools']]],
-  ['mutexrecursivezephyr_59',['MutexRecursiveZephyr',['../classaudio__tools_1_1_mutex_recursive_zephyr.html',1,'audio_tools']]],
-  ['mutexrp2040_60',['MutexRP2040',['../classaudio__tools_1_1_mutex_r_p2040.html',1,'audio_tools']]],
-  ['mutexrtos_61',['MutexRTOS',['../classaudio__tools_1_1_mutex_r_t_o_s.html',1,'audio_tools']]],
-  ['mutexzephyr_62',['MutexZephyr',['../classaudio__tools_1_1_mutex_zephyr.html',1,'audio_tools']]]
+  ['multioutputrecord_55',['MultiOutputRecord',['../structaudio__tools_1_1_multi_output_1_1_multi_output_record.html',1,'audio_tools::MultiOutput']]],
+  ['multistreamingdecoder_56',['MultiStreamingDecoder',['../classaudio__tools_1_1_multi_streaming_decoder.html',1,'audio_tools']]],
+  ['musicalnotes_57',['MusicalNotes',['../classaudio__tools_1_1_musical_notes.html',1,'audio_tools']]],
+  ['mutexbase_58',['MutexBase',['../classaudio__tools_1_1_mutex_base.html',1,'audio_tools']]],
+  ['mutexrecursivertos_59',['MutexRecursiveRTOS',['../classaudio__tools_1_1_mutex_recursive_r_t_o_s.html',1,'audio_tools']]],
+  ['mutexrecursivezephyr_60',['MutexRecursiveZephyr',['../classaudio__tools_1_1_mutex_recursive_zephyr.html',1,'audio_tools']]],
+  ['mutexrp2040_61',['MutexRP2040',['../classaudio__tools_1_1_mutex_r_p2040.html',1,'audio_tools']]],
+  ['mutexrtos_62',['MutexRTOS',['../classaudio__tools_1_1_mutex_r_t_o_s.html',1,'audio_tools']]],
+  ['mutexzephyr_63',['MutexZephyr',['../classaudio__tools_1_1_mutex_zephyr.html',1,'audio_tools']]]
 ];
