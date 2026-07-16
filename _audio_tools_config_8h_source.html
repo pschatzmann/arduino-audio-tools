@@ -102,7 +102,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#undef HZ</span></div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">// Setup for desktop builds</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &quot;<a class="code" href="_platform_config_2desktop_8h.html">AudioTools/PlatformConfig/desktop.h</a>&quot;</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &quot;<a class="code" href="_platform_config_2_desktop_8h.html">AudioTools/PlatformConfig/desktop.h</a>&quot;</span></div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">// If you don&#39;t want to use all the settings from here you can define your own local config settings in AudioConfigLocal.h</span></div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#if __has_include(&quot;AudioConfigLocal.h&quot;) </span></div>
@@ -293,7 +293,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span> </div>
 <div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span><span class="comment">//---- STM32 ------------</span></div>
 <div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span><span class="preprocessor">#if defined(ARDUINO_ARCH_STM32) || defined(STM32)</span></div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span><span class="preprocessor">#  include &quot;<a class="code" href="_platform_config_2stm32_8h.html">AudioTools/PlatformConfig/stm32.h</a>&quot;</span></div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span><span class="preprocessor">#  include &quot;<a class="code" href="_platform_config_2_s_t_m32_8h.html">AudioTools/PlatformConfig/stm32.h</a>&quot;</span></div>
 <div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span> </div>
 <div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span><span class="comment">//---- SAMD ------------</span></div>
@@ -323,7 +323,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span><span class="preprocessor">#ifdef __ZEPHYR__</span></div>
 <div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span><span class="preprocessor">#include &lt;zephyr/kernel.h&gt;</span></div>
 <div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span><span class="preprocessor">#include &lt;zephyr/sys/util.h&gt;</span></div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span><span class="preprocessor">#  include &quot;<a class="code" href="_platform_config_2zephyr_8h.html">AudioTools/PlatformConfig/zephyr.h</a>&quot;</span></div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span><span class="preprocessor">#  include &quot;<a class="code" href="_platform_config_2_zephyr_8h.html">AudioTools/PlatformConfig/zephyr.h</a>&quot;</span></div>
 <div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span> </div>
 <div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span><span class="comment">//------ VS1053 ----------</span></div>
@@ -412,9 +412,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span> </div>
 <div class="ttc" id="a_arduino_8h_html"><div class="ttname"><a href="_arduino_8h.html">Arduino.h</a></div><div class="ttdoc">If you want to use the framework w/o Arduino you need to provide the implementation of a couple of cl...</div></div>
-<div class="ttc" id="a_platform_config_2desktop_8h_html"><div class="ttname"><a href="_platform_config_2desktop_8h.html">desktop.h</a></div></div>
-<div class="ttc" id="a_platform_config_2stm32_8h_html"><div class="ttname"><a href="_platform_config_2stm32_8h.html">stm32.h</a></div></div>
-<div class="ttc" id="a_platform_config_2zephyr_8h_html"><div class="ttname"><a href="_platform_config_2zephyr_8h.html">zephyr.h</a></div></div>
+<div class="ttc" id="a_platform_config_2_desktop_8h_html"><div class="ttname"><a href="_platform_config_2_desktop_8h.html">desktop.h</a></div></div>
+<div class="ttc" id="a_platform_config_2_s_t_m32_8h_html"><div class="ttname"><a href="_platform_config_2_s_t_m32_8h.html">stm32.h</a></div></div>
+<div class="ttc" id="a_platform_config_2_zephyr_8h_html"><div class="ttname"><a href="_platform_config_2_zephyr_8h.html">zephyr.h</a></div></div>
 <div class="ttc" id="aavr_8h_html"><div class="ttname"><a href="avr_8h.html">avr.h</a></div></div>
 <div class="ttc" id="aesp32_8h_html"><div class="ttname"><a href="esp32_8h.html">esp32.h</a></div></div>
 <div class="ttc" id="aesp8266_8h_html"><div class="ttname"><a href="esp8266_8h.html">esp8266.h</a></div></div>

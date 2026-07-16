@@ -407,50 +407,53 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span> </div>
 <div class="foldopen" id="foldopen00386" data-start="{" data-end="}">
 <div class="line"><a id="l00386" name="l00386"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_server_t.html#a2adc4dbed490c0561919d26365e69e63">  386</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_audio_server_t.html#a2adc4dbed490c0561919d26365e69e63">endChunked</a>() {</div>
-<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="classaudio__tools_1_1_audio_server_t.html#acf81da07c857489ae727344716cc9291">is_chunked</a>) <a class="code hl_variable" href="classaudio__tools_1_1_audio_server_t.html#ad9ee34b1b9c2665e0148111837a1956a">chunked_print</a>.<a class="code hl_function" href="classaudio__tools_1_1_chunked_print.html#aaf81d3fdaf258088d7692fa70cece087">end</a>();</div>
-<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>  }</div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="classaudio__tools_1_1_audio_server_t.html#acf81da07c857489ae727344716cc9291">is_chunked</a>) {</div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>      <a class="code hl_define" href="_audio_logger_i_d_f_8h.html#a5512e59d578a380a441a70256af997d0">LOGI</a>(<span class="stringliteral">&quot;endChunked&quot;</span>);</div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>      <a class="code hl_variable" href="classaudio__tools_1_1_audio_server_t.html#ad9ee34b1b9c2665e0148111837a1956a">chunked_print</a>.<a class="code hl_function" href="classaudio__tools_1_1_chunked_print.html#aaf81d3fdaf258088d7692fa70cece087">end</a>();</div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>    }</div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>  }</div>
 </div>
-<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span> </div>
-<div class="foldopen" id="foldopen00393" data-start="{" data-end="}">
-<div class="line"><a id="l00393" name="l00393"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_server_t.html#ab92b9a93f5bf24000a46f8e16f60c08b">  393</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_audio_server_t.html#ab92b9a93f5bf24000a46f8e16f60c08b">processClient</a>() {</div>
-<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>    <span class="comment">// LOGD(&quot;processClient&quot;);</span></div>
-<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="classaudio__tools_1_1_audio_server_t.html#ab28048328641216c25384a638bf7e1fa">client_obj</a>) {</div>
-<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>      <a class="code hl_define" href="_audio_logger_i_d_f_8h.html#a5512e59d578a380a441a70256af997d0">LOGI</a>(<span class="stringliteral">&quot;New Client:&quot;</span>);</div>
-<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span> </div>
-<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>      std::string currentLine;</div>
-<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>      currentLine.reserve(128);</div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span> </div>
+<div class="foldopen" id="foldopen00396" data-start="{" data-end="}">
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_server_t.html#ab92b9a93f5bf24000a46f8e16f60c08b">  396</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_audio_server_t.html#ab92b9a93f5bf24000a46f8e16f60c08b">processClient</a>() {</div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>    <span class="comment">// LOGD(&quot;processClient&quot;);</span></div>
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="classaudio__tools_1_1_audio_server_t.html#ab28048328641216c25384a638bf7e1fa">client_obj</a>) {</div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>      <a class="code hl_define" href="_audio_logger_i_d_f_8h.html#a5512e59d578a380a441a70256af997d0">LOGI</a>(<span class="stringliteral">&quot;New Client:&quot;</span>);</div>
 <div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span> </div>
-<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>      <span class="keywordflow">while</span> (<a class="code hl_variable" href="classaudio__tools_1_1_audio_server_t.html#ab28048328641216c25384a638bf7e1fa">client_obj</a>.<a class="code hl_function" href="class_client.html#a59fc494d53391b27e2fd75cb750690d9">connected</a>()) {</div>
-<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="classaudio__tools_1_1_audio_server_t.html#ab28048328641216c25384a638bf7e1fa">client_obj</a>.<a class="code hl_function" href="class_stream.html#a512cfced3ab951dde7a9a78f1274fe63">available</a>()) {</div>
-<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>          <span class="keywordtype">char</span> c = <a class="code hl_variable" href="classaudio__tools_1_1_audio_server_t.html#ab28048328641216c25384a638bf7e1fa">client_obj</a>.<a class="code hl_function" href="class_client.html#a774a25c050206a6c6efbb98cf94345a6">read</a>();</div>
-<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span> </div>
-<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>          <span class="keywordflow">if</span> (c == <span class="charliteral">&#39;\n&#39;</span>) {</div>
-<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>            <a class="code hl_define" href="_audio_logger_i_d_f_8h.html#a5512e59d578a380a441a70256af997d0">LOGI</a>(<span class="stringliteral">&quot;Request: %s&quot;</span>, currentLine.c_str());</div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>      std::string currentLine;</div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>      currentLine.reserve(128);</div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span> </div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>      <span class="keywordflow">while</span> (<a class="code hl_variable" href="classaudio__tools_1_1_audio_server_t.html#ab28048328641216c25384a638bf7e1fa">client_obj</a>.<a class="code hl_function" href="class_client.html#a59fc494d53391b27e2fd75cb750690d9">connected</a>()) {</div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="classaudio__tools_1_1_audio_server_t.html#ab28048328641216c25384a638bf7e1fa">client_obj</a>.<a class="code hl_function" href="class_stream.html#a512cfced3ab951dde7a9a78f1274fe63">available</a>()) {</div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>          <span class="keywordtype">char</span> c = <a class="code hl_variable" href="classaudio__tools_1_1_audio_server_t.html#ab28048328641216c25384a638bf7e1fa">client_obj</a>.<a class="code hl_function" href="class_client.html#a774a25c050206a6c6efbb98cf94345a6">read</a>();</div>
 <div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span> </div>
-<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>            <span class="comment">// if the current line is blank, you got two newline characters in a</span></div>
-<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>            <span class="comment">// row. that&#39;s the end of the client HTTP request, so send a response:</span></div>
-<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>            <span class="keywordflow">if</span> (currentLine.length() == 0) {</div>
-<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>              <a class="code hl_function" href="classaudio__tools_1_1_audio_server_t.html#a7710e4fdd3c7995a399083781f95aa81">sendReplyHeader</a>();</div>
-<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>              <a class="code hl_function" href="classaudio__tools_1_1_audio_server_t.html#a2ba0309f574967d298dd4573bbc465f0">sendReplyContent</a>();</div>
-<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span> </div>
-<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>              <a class="code hl_variable" href="classaudio__tools_1_1_audio_server_t.html#aaac4ecf1d77da473d27d2692413f84c4">sent</a> = 0;</div>
-<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span> </div>
-<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>              <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>              currentLine = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>            }</div>
-<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>          } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (c != <span class="charliteral">&#39;\r&#39;</span>) {</div>
-<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>            currentLine += c;</div>
-<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>          }</div>
-<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>        }</div>
-<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span>      }</div>
-<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span>    }</div>
-<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>  }</div>
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>          <span class="keywordflow">if</span> (c == <span class="charliteral">&#39;\n&#39;</span>) {</div>
+<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>            <a class="code hl_define" href="_audio_logger_i_d_f_8h.html#a5512e59d578a380a441a70256af997d0">LOGI</a>(<span class="stringliteral">&quot;Request: %s&quot;</span>, currentLine.c_str());</div>
+<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span> </div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>            <span class="comment">// if the current line is blank, you got two newline characters in a</span></div>
+<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>            <span class="comment">// row. that&#39;s the end of the client HTTP request, so send a response:</span></div>
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>            <span class="keywordflow">if</span> (currentLine.length() == 0) {</div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>              <a class="code hl_function" href="classaudio__tools_1_1_audio_server_t.html#a7710e4fdd3c7995a399083781f95aa81">sendReplyHeader</a>();</div>
+<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>              <a class="code hl_function" href="classaudio__tools_1_1_audio_server_t.html#a2ba0309f574967d298dd4573bbc465f0">sendReplyContent</a>();</div>
+<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span> </div>
+<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>              <a class="code hl_variable" href="classaudio__tools_1_1_audio_server_t.html#aaac4ecf1d77da473d27d2692413f84c4">sent</a> = 0;</div>
+<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span> </div>
+<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>              <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>              currentLine = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>            }</div>
+<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>          } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (c != <span class="charliteral">&#39;\r&#39;</span>) {</div>
+<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span>            currentLine += c;</div>
+<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span>          }</div>
+<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>        }</div>
+<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span>      }</div>
+<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span>    }</div>
+<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>  }</div>
 </div>
-<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span>};</div>
+<div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span>};</div>
 </div>
-<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span> </div>
-<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span> </div>
+<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="a_arduino_8h_html_a7b8c4a195c58f9eb8750e94955c5aa4b"><div class="ttname"><a href="_arduino_8h.html#a7b8c4a195c58f9eb8750e94955c5aa4b">Serial</a></div><div class="ttdeci">static HardwareSerial Serial</div><div class="ttdef"><b>Definition</b> Arduino.h:179</div></div>
 <div class="ttc" id="a_arduino_8h_html_ad6c89ce0bc361acabef4cbc9d1e9efb7ad3c20094c5fe3327350484d01c44c137"><div class="ttname"><a href="_arduino_8h.html#ad6c89ce0bc361acabef4cbc9d1e9efb7ad3c20094c5fe3327350484d01c44c137">HEX</a></div><div class="ttdeci">@ HEX</div><div class="ttdef"><b>Definition</b> Arduino.h:54</div></div>
 <div class="ttc" id="a_audio_logger_i_d_f_8h_html_a4c626ed1ad7ce63349cc19db0dfaeb7b"><div class="ttname"><a href="_audio_logger_i_d_f_8h.html#a4c626ed1ad7ce63349cc19db0dfaeb7b">TRACED</a></div><div class="ttdeci">#define TRACED()</div><div class="ttdef"><b>Definition</b> AudioLoggerIDF.h:31</div></div>
@@ -497,7 +500,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_audio_server_t_html_aaf81d3fdaf258088d7692fa70cece087"><div class="ttname"><a href="classaudio__tools_1_1_audio_server_t.html#aaf81d3fdaf258088d7692fa70cece087">audio_tools::AudioServerT::end</a></div><div class="ttdeci">void end()</div><div class="ttdoc">Ends the connection and resets the state.</div><div class="ttdef"><b>Definition</b> AudioServerT.h:241</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_server_t_html_ab28048328641216c25384a638bf7e1fa"><div class="ttname"><a href="classaudio__tools_1_1_audio_server_t.html#ab28048328641216c25384a638bf7e1fa">audio_tools::AudioServerT::client_obj</a></div><div class="ttdeci">Client client_obj</div><div class="ttdef"><b>Definition</b> AudioServerT.h:262</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_server_t_html_ab5ddefe65965d016d6b7b8156db530bf"><div class="ttname"><a href="classaudio__tools_1_1_audio_server_t.html#ab5ddefe65965d016d6b7b8156db530bf">audio_tools::AudioServerT::setCopyBufferSize</a></div><div class="ttdeci">void setCopyBufferSize(int size)</div><div class="ttdoc">Changes the copy buffer size.</div><div class="ttdef"><b>Definition</b> AudioServerT.h:218</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_server_t_html_ab92b9a93f5bf24000a46f8e16f60c08b"><div class="ttname"><a href="classaudio__tools_1_1_audio_server_t.html#ab92b9a93f5bf24000a46f8e16f60c08b">audio_tools::AudioServerT::processClient</a></div><div class="ttdeci">void processClient()</div><div class="ttdoc">Handle an new client connection and return the data.</div><div class="ttdef"><b>Definition</b> AudioServerT.h:393</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_server_t_html_ab92b9a93f5bf24000a46f8e16f60c08b"><div class="ttname"><a href="classaudio__tools_1_1_audio_server_t.html#ab92b9a93f5bf24000a46f8e16f60c08b">audio_tools::AudioServerT::processClient</a></div><div class="ttdeci">void processClient()</div><div class="ttdoc">Handle an new client connection and return the data.</div><div class="ttdef"><b>Definition</b> AudioServerT.h:396</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_server_t_html_abdd99e468f667b748b0c9bfd395163d7"><div class="ttname"><a href="classaudio__tools_1_1_audio_server_t.html#abdd99e468f667b748b0c9bfd395163d7">audio_tools::AudioServerT::doLoop</a></div><div class="ttdeci">bool doLoop()</div><div class="ttdoc">Add this method to your loop Returns true while the client is connected.</div><div class="ttdef"><b>Definition</b> AudioServerT.h:166</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_server_t_html_ac8fd3141320ca4bbe993be0fb049a7a9"><div class="ttname"><a href="classaudio__tools_1_1_audio_server_t.html#ac8fd3141320ca4bbe993be0fb049a7a9">audio_tools::AudioServerT::max_output_size</a></div><div class="ttdeci">size_t max_output_size</div><div class="ttdef"><b>Definition</b> AudioServerT.h:268</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_server_t_html_acf81da07c857489ae727344716cc9291"><div class="ttname"><a href="classaudio__tools_1_1_audio_server_t.html#acf81da07c857489ae727344716cc9291">audio_tools::AudioServerT::is_chunked</a></div><div class="ttdeci">bool is_chunked</div><div class="ttdef"><b>Definition</b> AudioServerT.h:280</div></div>
