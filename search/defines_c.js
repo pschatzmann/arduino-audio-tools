@@ -108,7 +108,7 @@ var searchData=
   ['n_5fgs6_105',['N_GS6',['../_musical_notes_8h.html#a5db95e5c7f80e519974c981089d0d802',1,'MusicalNotes.h']]],
   ['n_5fgs7_106',['N_GS7',['../_musical_notes_8h.html#ac1a4ed87949fc608d20bc4a8c9b1b2b5',1,'MusicalNotes.h']]],
   ['n_5fgs8_107',['N_GS8',['../_musical_notes_8h.html#a66d2836acda193e67ae23d43252ba42c',1,'MusicalNotes.h']]],
-  ['no_5finplace_5finit_5fsupport_108',['no_inplace_init_support',['../arduino-zephyr_8h.html#aff81a0f0c25ffd67b69fe60e4aad9e36',1,'NO_INPLACE_INIT_SUPPORT:&#160;arduino-zephyr.h'],['../avr_8h.html#aff81a0f0c25ffd67b69fe60e4aad9e36',1,'NO_INPLACE_INIT_SUPPORT:&#160;avr.h'],['../samd_8h.html#aff81a0f0c25ffd67b69fe60e4aad9e36',1,'NO_INPLACE_INIT_SUPPORT:&#160;samd.h'],['../_platform_config_2_zephyr_8h.html#aff81a0f0c25ffd67b69fe60e4aad9e36',1,'NO_INPLACE_INIT_SUPPORT:&#160;zephyr.h']]],
+  ['no_5finplace_5finit_5fsupport_108',['no_inplace_init_support',['../arduino-zephyr_8h.html#aff81a0f0c25ffd67b69fe60e4aad9e36',1,'NO_INPLACE_INIT_SUPPORT:&#160;arduino-zephyr.h'],['../avr_8h.html#aff81a0f0c25ffd67b69fe60e4aad9e36',1,'NO_INPLACE_INIT_SUPPORT:&#160;avr.h'],['../samd_8h.html#aff81a0f0c25ffd67b69fe60e4aad9e36',1,'NO_INPLACE_INIT_SUPPORT:&#160;samd.h'],['../_platform_config_2zephyr_8h.html#aff81a0f0c25ffd67b69fe60e4aad9e36',1,'NO_INPLACE_INIT_SUPPORT:&#160;zephyr.h']]],
   ['no_5ftrace_109',['NO_TRACE',['../unor4_8h.html#ace2bb0d802a911ea5b057e58286641cc',1,'unor4.h']]],
   ['no_5ftraced_110',['NO_TRACED',['../avr_8h.html#ab4e2e3571d90f4d4112d0224318313b5',1,'avr.h']]],
   ['no_5ftracee_111',['NO_TRACEE',['../avr_8h.html#a6767d474a6b3ce39880b292cc1f0ceb9',1,'avr.h']]],
