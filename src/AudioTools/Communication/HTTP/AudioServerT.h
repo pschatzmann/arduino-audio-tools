@@ -191,13 +191,6 @@ class AudioServerT {
             client_obj.stop();
             active = false;
           }
-
-          if (!client_obj) {
-            LOGI("stop client...");
-            endChunked();
-            client_obj.stop();
-            active = false;
-          }
         }
       } else {
         LOGI("client was not connected");
