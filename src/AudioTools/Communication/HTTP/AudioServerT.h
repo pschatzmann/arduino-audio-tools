@@ -384,7 +384,10 @@ class AudioServerT {
 
   /// Sends the terminating 0-length chunk when chunked transfer is active
   void endChunked() {
-    if (is_chunked) chunked_print.end();
+    if (is_chunked) {
+      LOGI("endChunked");
+      chunked_print.end();
+    }
   }
 
   /**
