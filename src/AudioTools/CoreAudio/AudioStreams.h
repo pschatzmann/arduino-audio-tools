@@ -1332,6 +1332,14 @@ class InputMixer : public AudioStream {
     return result_len;
   }
 
+  /// Reports 0 when no streams are mixed in, otherwise the combined available
+  /// bytes (bounded by the least-available stream when limit_available_data
+  /// is set)
+  int available() override {
+    if (total_weights == 0 || streams.empty()) return 0;
+    return limit_available_data ? availableBytes() : DEFAULT_BUFFER_SIZE;
+  }
+
   /// Limit the copy to the available data of all streams: stops to provide data
   /// when any stream has ended
   void setLimitToAvailableData(bool flag) { limit_available_data = flag; }
