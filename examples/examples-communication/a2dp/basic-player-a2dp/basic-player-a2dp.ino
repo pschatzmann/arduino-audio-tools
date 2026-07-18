@@ -11,9 +11,9 @@
  */
 
  #include "AudioTools.h"
- #include "AudioTools/Communication/A2DPStream.h"
+ #include "AudioTools/Communication/A2DPStream.h" //  https://github.com/pschatzmann/ESP32-A2DP
  #include "AudioTools/Disk/AudioSourceSDFAT.h"
- #include "AudioTools/AudioCodecs/CodecMP3Helix.h"
+ #include "AudioTools/AudioCodecs/CodecMP3Helix.h" // https://github.com/pschatzmann/arduino-libhelix
  //#include "AudioTools/AudioLibs/AudioBoardStream.h"  // for SD Pins
  
  const int cs = 33; //PIN_AUDIO_KIT_SD_CARD_CS;

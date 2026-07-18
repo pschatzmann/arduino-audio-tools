@@ -9,8 +9,8 @@
  */
 
 #include "AudioTools.h"
-#include "AudioTools/Communication/A2DPStream.h"
-#include "AudioTools/AudioLibs/AudioBoardStream.h"
+#include "AudioTools/Communication/A2DPStream.h"   // https://github.com/pschatzmann/ESP32-A2DP
+#include "AudioTools/AudioLibs/AudioBoardStream.h" // https://github.com/pschatzmann/arduino-audio-driver 
 
 
 A2DPStream in;

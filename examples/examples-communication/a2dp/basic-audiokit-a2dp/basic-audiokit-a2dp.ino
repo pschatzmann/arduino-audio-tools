@@ -6,8 +6,8 @@
  */
 
 #include "AudioTools.h"
-#include "AudioTools/AudioLibs/AudioBoardStream.h"
-#include "AudioTools/Communication/A2DPStream.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h" // https://github.com/pschatzmann/arduino-audio-driver
+#include "AudioTools/Communication/A2DPStream.h" // https://github.com/pschatzmann/ESP32-A2DP
 
 AudioInfo info(44100, 2, 16);
 BluetoothA2DPSource a2dp_source;

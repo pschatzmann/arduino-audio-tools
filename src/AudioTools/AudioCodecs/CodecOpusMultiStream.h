@@ -196,7 +196,14 @@ class OpusMultiStreamAudioDecoder : public AudioDecoder {
     cfg.sample_rate = from.sample_rate;
     cfg.channels = from.channels;
     cfg.bits_per_sample = from.bits_per_sample;
-    if (channels_changed) {
+    // Also (re)initialize when the codec was never started: relying on
+    // channels_changed alone misses the very first call whenever the real
+    // channel count happens to equal AudioInfo's own default (DEFAULT_CHANNELS
+    // == 2, i.e. plain stereo) - info.channels then already equals
+    // from.channels before any real begin() has happened, so the decoder was
+    // silently left uninitialized (active == false) despite looking
+    // "unchanged".
+    if (channels_changed || !active) {
       cfg.setupChannelMapping();
       end();
       begin();

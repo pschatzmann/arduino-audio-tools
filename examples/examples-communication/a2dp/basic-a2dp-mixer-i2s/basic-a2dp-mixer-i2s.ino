@@ -8,7 +8,7 @@
  */
 
 #include "AudioTools.h"
-#include "BluetoothA2DPSink.h"
+#include "BluetoothA2DPSink.h" // https://github.com/pschatzmann/ESP32-A2DP
 
 AudioInfo info(44100, 2, 16);
 BluetoothA2DPSink a2dp_sink;

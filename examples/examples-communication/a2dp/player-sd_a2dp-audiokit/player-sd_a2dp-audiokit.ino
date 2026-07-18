@@ -9,13 +9,11 @@
  * 
  */
 
-// install https://github.com/greiman/SdFat.git
-
 #include "AudioTools.h"
-#include "AudioTools/Communication/A2DPStream.h"
-#include "AudioTools/AudioLibs/AudioBoardStream.h"
-#include "AudioTools/Disk/AudioSourceSDFAT.h"
-#include "AudioTools/AudioCodecs/CodecMP3Helix.h"
+#include "AudioTools/Communication/A2DPStream.h"   // https://github.com/pschatzmann/ESP32-A2DP
+#include "AudioTools/AudioLibs/AudioBoardStream.h" // https://github.com/pschatzmann/arduino-audio-driver 
+#include "AudioTools/Disk/AudioSourceSDFAT.h"      // https://github.com/greiman/SdFat.git
+#include "AudioTools/AudioCodecs/CodecMP3Helix.h"  // https://github.com/pschatzmann/arduino-libhelix
 
 const char *startFilePath="/";
 const char* ext="mp3";
