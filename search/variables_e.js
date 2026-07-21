@@ -10,7 +10,7 @@ var searchData=
   ['nb_5fspeakers_7',['nb_speakers',['../classaudio__tools_1_1_m_d_f_echo_cancellation.html#a7766c0e0a82c1252db56dc9c6765b856',1,'audio_tools::MDFEchoCancellation']]],
   ['nblockalign_8',['nBlockAlign',['../structaudio__tools_1_1_w_a_v_format_x.html#a8bf00a138a5d49cdd5179f2c747b2690',1,'audio_tools::WAVFormatX']]],
   ['nchannels_9',['nChannels',['../structaudio__tools_1_1_w_a_v_format_x.html#a7ecffb4549153bb35cd3e1a402886e67',1,'audio_tools::WAVFormatX']]],
-  ['network_10',['network',['../classaudio__tools_1_1_u_r_l_stream.html#a401098f5aef1991a0444deeaeee4084d',1,'audio_tools::URLStream::network'],['../classaudio__tools_1_1_audio_server_t.html#a0437905e58814d2f1d702ab862fb1f70',1,'audio_tools::AudioServerT::network']]],
+  ['network_10',['network',['../classaudio__tools_1_1_audio_server_t.html#a0437905e58814d2f1d702ab862fb1f70',1,'audio_tools::AudioServerT']]],
   ['newline_5flogic_11',['newline_logic',['../classaudio__tools_1_1_decoder_base64.html#ad5dde9be751e27332ab7feb47e58384d',1,'audio_tools::DecoderBase64::newline_logic'],['../classaudio__tools_1_1_encoder_base64.html#ad5dde9be751e27332ab7feb47e58384d',1,'audio_tools::EncoderBase64::newline_logic']]],
   ['next_12',['next',['../structaudio__tools_1_1_list_lock_free_1_1_node.html#aee974509d8b3c02ceed02a39b76d89c8',1,'audio_tools::ListLockFree::Node::next'],['../structaudio__tools_1_1_list_1_1_node.html#a00dd0a636d0c9134072b4bc7951d08c2',1,'audio_tools::List::Node::next']]],
   ['next_5ffile_5fname_13',['next_file_name',['../classaudio__tools_1_1_n_buffer_file.html#a0adb3acebecbd9423f94c75d43e61537',1,'audio_tools::NBufferFile']]],

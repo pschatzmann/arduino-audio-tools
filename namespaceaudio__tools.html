@@ -115,7 +115,7 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the sound generation for one channel. A channel is used to process an indivudual key so that we can generate multiple notes at the same time.  <a href="classaudio__tools_1_1_abstract_synthesizer_channel.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_abstract_u_r_l_stream.html">AbstractURLStream</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract Base class for all <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a> implementations.  <a href="classaudio__tools_1_1_abstract_u_r_l_stream.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract Base class for all URLStream implementations.  <a href="classaudio__tools_1_1_abstract_u_r_l_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_adapter_audio_output_to_audio_stream.html">AdapterAudioOutputToAudioStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper which converts a <a class="el" href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...">AudioStream</a> to a <a class="el" href="classaudio__tools_1_1_audio_output.html" title="Abstract Audio Ouptut class.">AudioOutput</a>.  <a href="classaudio__tools_1_1_adapter_audio_output_to_audio_stream.html#details">More...</a><br /></td></tr>
@@ -588,7 +588,7 @@ size_t size)</a> and <a class="el" href="classaudio__tools_1_1_base_stream.html#
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide the volume function as callback method: This is easy to use e.g together with a lamda function!  <a href="classaudio__tools_1_1_callback_volume_control.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_cat_stream.html">CatStream</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides data from a concatenation of Streams. Please note that the provided Streams can be played only once! You will need to reset them (e.g. moving the file pointer to the beginning) and read them back if you want to process them a second time. The default timeout on the <a class="el" href="classaudio__tools_1_1_cat_stream.html#a692e2b18b3c2452e38e3f558ad87e9a5">available()</a> method is set to 0. This might be too small if you use e.g. a <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a>. If you set beginReset to true in the constructor, the system will automatically reset the streams when <a class="el" href="classaudio__tools_1_1_cat_stream.html#acba365cc28eb702040c382646cfb0a7a">begin()</a> is called.  <a href="classaudio__tools_1_1_cat_stream.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides data from a concatenation of Streams. Please note that the provided Streams can be played only once! You will need to reset them (e.g. moving the file pointer to the beginning) and read them back if you want to process them a second time. The default timeout on the <a class="el" href="classaudio__tools_1_1_cat_stream.html#a692e2b18b3c2452e38e3f558ad87e9a5">available()</a> method is set to 0. This might be too small if you use e.g. a URLStream. If you set beginReset to true in the constructor, the system will automatically reset the streams when <a class="el" href="classaudio__tools_1_1_cat_stream.html#acba365cc28eb702040c382646cfb0a7a">begin()</a> is called.  <a href="classaudio__tools_1_1_cat_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_channel_avg.html">ChannelAvg</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">We average pairs of channels in a datastream. E.g. if we have 4 channels we end up with 2 channels. The channels will be (channel_1 + channel_2)/2 (channel_3 - channel_4)/2. This is equivalent of stereo to mono conversion but will also work for quadric, sexic or octic audio. This will not work if you provide single channel data!  <a href="classaudio__tools_1_1_channel_avg.html#details">More...</a><br /></td></tr>
@@ -2053,14 +2053,11 @@ size_t size)</a> and <a class="el" href="classaudio__tools_1_1_base_stream.html#
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_url.html">Url</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">URL parser which breaks a full url string up into its individual parts.  <a href="classaudio__tools_1_1_url.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_r_l_stream.html">URLStream</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the content of a URL as <a class="el" href="class_stream.html">Stream</a>. We use the WiFi.h API. If you run into performance issues, check if the data is provided chunked. In this chase you can check if setting the protocol to "HTTP/1.0" improves the situation.  <a href="classaudio__tools_1_1_u_r_l_stream.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html">URLStreamBufferedT</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a> implementation for the ESP32 based on a separate FreeRTOS task: the.  <a href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">URLStream implementation for the ESP32 based on a separate FreeRTOS task: the.  <a href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html">URLStreamESP32</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a> using the ESP32 IDF API.  <a href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">URLStream using the ESP32 IDF API.  <a href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html">USBAudio2DescriptorBuilder</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">USB Audio Class 2.0 descriptor generator.  <a href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#details">More...</a><br /></td></tr>
@@ -2304,7 +2301,7 @@ Typedefs</h2></td></tr>
 <tr class="memitem:gaf694ec7686972c628c8218a4cfd8f468" id="r_gaf694ec7686972c628c8218a4cfd8f468"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__codecs.html#gaf694ec7686972c628c8218a4cfd8f468">FOURCC</a> = char[4]</td></tr>
 <tr class="memdesc:gaf694ec7686972c628c8218a4cfd8f468"><td class="mdescLeft">&#160;</td><td class="mdescRight">Four-character code identifier for AVI format.  <br /></td></tr>
 <tr class="separator:gaf694ec7686972c628c8218a4cfd8f468"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae5adbdb647152d65fed57460cc0b4708" id="r_ae5adbdb647152d65fed57460cc0b4708"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ae5adbdb647152d65fed57460cc0b4708">HLSStream</a> = <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html">HLSStreamT</a>&lt; <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html">URLStream</a> &gt;</td></tr>
+<tr class="memitem:ae5adbdb647152d65fed57460cc0b4708" id="r_ae5adbdb647152d65fed57460cc0b4708"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ae5adbdb647152d65fed57460cc0b4708">HLSStream</a> = <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html">HLSStreamT</a>&lt; <a class="el" href="namespaceaudio__tools.html#a92d0d465f437b08e277a04f713152350">URLStream</a> &gt;</td></tr>
 <tr class="separator:ae5adbdb647152d65fed57460cc0b4708"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gada555f2505dcf73af544a22f56e43848" id="r_gada555f2505dcf73af544a22f56e43848"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__hls.html#gada555f2505dcf73af544a22f56e43848">HLSStreamESP32</a> = <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html">HLSStreamT</a>&lt; <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html">URLStreamESP32</a> &gt;</td></tr>
 <tr class="memdesc:gada555f2505dcf73af544a22f56e43848"><td class="mdescLeft">&#160;</td><td class="mdescRight">HLS <a class="el" href="class_stream.html">Stream</a> implementation using <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html" title="URLStream using the ESP32 IDF API.">URLStreamESP32</a> for ESP32-specific HTTP requests.  <br /></td></tr>
@@ -2315,7 +2312,7 @@ Typedefs</h2></td></tr>
 <tr class="separator:a3dc16dcdacf52277c451d1e0494a891c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab0c3164bd6bb3688d5982edf616f5f32" id="r_ab0c3164bd6bb3688d5982edf616f5f32"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ab0c3164bd6bb3688d5982edf616f5f32">I2SDriver</a> = <a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html">I2SDriverESP32</a></td></tr>
 <tr class="separator:ab0c3164bd6bb3688d5982edf616f5f32"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae1e819ad54e9849657902fb4f16f1f6d" id="r_gae1e819ad54e9849657902fb4f16f1f6d"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__http.html#gae1e819ad54e9849657902fb4f16f1f6d">ICYStream</a> = <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html">ICYStreamT</a>&lt; <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html">URLStream</a> &gt;</td></tr>
+<tr class="memitem:gae1e819ad54e9849657902fb4f16f1f6d" id="r_gae1e819ad54e9849657902fb4f16f1f6d"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__http.html#gae1e819ad54e9849657902fb4f16f1f6d">ICYStream</a> = <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html">ICYStreamT</a>&lt; <a class="el" href="namespaceaudio__tools.html#a92d0d465f437b08e277a04f713152350">URLStream</a> &gt;</td></tr>
 <tr class="memdesc:gae1e819ad54e9849657902fb4f16f1f6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for ICYStreamT&lt;URLStream&gt;.  <br /></td></tr>
 <tr class="separator:gae1e819ad54e9849657902fb4f16f1f6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa78db84a3f6cdadae931e4fe622af9ec" id="r_aa78db84a3f6cdadae931e4fe622af9ec"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aa78db84a3f6cdadae931e4fe622af9ec">ICYStreamBuffered</a> = <a class="el" href="namespaceaudio__tools.html#aedd4adeef1b5c5ab6dac8a0d5cd9539d">ICYStreamBufferedESP32</a></td></tr>
@@ -2427,13 +2424,13 @@ Typedefs</h2></td></tr>
 <tr class="memitem:ae79683a32908fdf4f2d0fbf0197353f2" id="r_ae79683a32908fdf4f2d0fbf0197353f2"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ae79683a32908fdf4f2d0fbf0197353f2">UDP</a> = <a class="el" href="classaudio__tools_1_1_wi_fi_u_d_p_zephyr.html">WiFiUDPZephyr</a></td></tr>
 <tr class="separator:ae79683a32908fdf4f2d0fbf0197353f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92d0d465f437b08e277a04f713152350" id="r_a92d0d465f437b08e277a04f713152350"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a92d0d465f437b08e277a04f713152350">URLStream</a> = <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html">URLStreamESP32</a></td></tr>
-<tr class="memdesc:a92d0d465f437b08e277a04f713152350"><td class="mdescLeft">&#160;</td><td class="mdescRight">Support <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a> w/o Arduino.  <br /></td></tr>
+<tr class="memdesc:a92d0d465f437b08e277a04f713152350"><td class="mdescLeft">&#160;</td><td class="mdescRight">Support URLStream w/o Arduino.  <br /></td></tr>
 <tr class="separator:a92d0d465f437b08e277a04f713152350"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a232c92c7540e23a629afa3a4b1c54c4c" id="r_a232c92c7540e23a629afa3a4b1c54c4c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a232c92c7540e23a629afa3a4b1c54c4c">URLStreamBuffered</a> = <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html">URLStreamBufferedT</a>&lt; <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html">URLStream</a> &gt;</td></tr>
-<tr class="memdesc:a232c92c7540e23a629afa3a4b1c54c4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for buffered <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a>.  <br /></td></tr>
-<tr class="separator:a232c92c7540e23a629afa3a4b1c54c4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1327f6ae2f04c65c36e7744e9a5a4ec5" id="r_a1327f6ae2f04c65c36e7744e9a5a4ec5"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a1327f6ae2f04c65c36e7744e9a5a4ec5">URLStreamBuffered</a> = <a class="el" href="namespaceaudio__tools.html#a22b64bd5d45692fb5db35650e3fd1c0f">URLStreamBufferedESP32</a></td></tr>
+<tr class="memdesc:a1327f6ae2f04c65c36e7744e9a5a4ec5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffered URLStream alias for ESP32 (non-Arduino environments)  <br /></td></tr>
+<tr class="separator:a1327f6ae2f04c65c36e7744e9a5a4ec5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22b64bd5d45692fb5db35650e3fd1c0f" id="r_a22b64bd5d45692fb5db35650e3fd1c0f"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a22b64bd5d45692fb5db35650e3fd1c0f">URLStreamBufferedESP32</a> = <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html">URLStreamBufferedT</a>&lt; <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html">URLStreamESP32</a> &gt;</td></tr>
-<tr class="memdesc:a22b64bd5d45692fb5db35650e3fd1c0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffered <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a> for ESP32 platform.  <br /></td></tr>
+<tr class="memdesc:a22b64bd5d45692fb5db35650e3fd1c0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffered URLStream for ESP32 platform.  <br /></td></tr>
 <tr class="separator:a22b64bd5d45692fb5db35650e3fd1c0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga43a0ff637dbf8c8e3d47f575c950f2fd" id="r_ga43a0ff637dbf8c8e3d47f575c950f2fd"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usb.html#ga43a0ff637dbf8c8e3d47f575c950f2fd">USBAudioStream</a> = <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html">USBAudioDeviceESP32</a></td></tr>
 <tr class="memdesc:ga43a0ff637dbf8c8e3d47f575c950f2fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">USBAudioStream type alias for ESP32.  <br /></td></tr>
@@ -3535,7 +3532,7 @@ template&lt;class T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="namespaceaudio__tools.html#ae5adbdb647152d65fed57460cc0b4708">HLSStream</a> =  <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html">HLSStreamT</a>&lt;<a class="el" href="classaudio__tools_1_1_u_r_l_stream.html">URLStream</a>&gt;</td>
+          <td class="memname">using <a class="el" href="namespaceaudio__tools.html#ae5adbdb647152d65fed57460cc0b4708">HLSStream</a> =  <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html">HLSStreamT</a>&lt;<a class="el" href="namespaceaudio__tools.html#a92d0d465f437b08e277a04f713152350">URLStream</a>&gt;</td>
         </tr>
       </table>
   </td>
@@ -3939,30 +3936,29 @@ template&lt;class T &gt; </div>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html">URLStream</a> =  <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html">URLStreamESP32</a></td>
+          <td class="memname">using <a class="el" href="namespaceaudio__tools.html#a92d0d465f437b08e277a04f713152350">URLStream</a> =  <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html">URLStreamESP32</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Support <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a> w/o Arduino. </p>
-<p><a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a> alias for ESP32 (non-Arduino environments) </p>
+<p>Support URLStream w/o Arduino. </p>
+<p>URLStream alias for ESP32 (non-Arduino environments) </p>
 
 </div>
 </div>
-<a id="a232c92c7540e23a629afa3a4b1c54c4c" name="a232c92c7540e23a629afa3a4b1c54c4c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a232c92c7540e23a629afa3a4b1c54c4c">&#9670;&#160;</a></span>URLStreamBuffered</h2>
+<a id="a1327f6ae2f04c65c36e7744e9a5a4ec5" name="a1327f6ae2f04c65c36e7744e9a5a4ec5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1327f6ae2f04c65c36e7744e9a5a4ec5">&#9670;&#160;</a></span>URLStreamBuffered</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="namespaceaudio__tools.html#a22b64bd5d45692fb5db35650e3fd1c0f">URLStreamBufferedESP32</a> <a class="el" href="namespaceaudio__tools.html#a232c92c7540e23a629afa3a4b1c54c4c">URLStreamBuffered</a></td>
+          <td class="memname">using <a class="el" href="namespaceaudio__tools.html#a1327f6ae2f04c65c36e7744e9a5a4ec5">URLStreamBuffered</a> =  <a class="el" href="namespaceaudio__tools.html#a22b64bd5d45692fb5db35650e3fd1c0f">URLStreamBufferedESP32</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Type alias for buffered <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a>. </p>
-<p>Buffered <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a> alias for ESP32 (non-Arduino environments) </p>
+<p>Buffered URLStream alias for ESP32 (non-Arduino environments) </p>
 
 </div>
 </div>
@@ -3978,7 +3974,7 @@ template&lt;class T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Buffered <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a> for ESP32 platform. </p>
+<p>Buffered URLStream for ESP32 platform. </p>
 
 </div>
 </div>
