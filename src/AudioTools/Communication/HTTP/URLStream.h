@@ -11,6 +11,12 @@
 #include "AudioTools/Communication/HTTP/HttpRequest.h"
 #include "AudioTools/Communication/HTTP/URLStreamBufferedT.h"
 
+// UNO R3 has no WiFiClientSecure implementation, so we need to disable it
+#if !defined(USE_WIFIS3)
+#define HAS_CLIENT_SECURE
+#endif
+
+
 namespace audio_tools {
 
 /**
@@ -49,10 +55,12 @@ class URLStream : public AbstractURLStream {
   ~URLStream() {
     TRACED();
     end();
+#if defined(HAS_CLIENT_SECURE)
     if (client_secure != nullptr) {
       delete client_secure;
       client_secure = nullptr;
     }
+#endif
     if (client_insecure != nullptr) {
       delete client_insecure;
       client_insecure = nullptr;
@@ -256,7 +264,11 @@ class URLStream : public AbstractURLStream {
 
   /// Define the Root PEM Certificate for SSL
   void setCACert(const char* cert) override{
+#if defined(HAS_CLIENT_SECURE)
     if (client_secure!=nullptr) client_secure->setCACert(cert);
+#else
+    LOGE("setCACert is not supported on this platform");
+#endif
   }
 
   /// Returns the content length of the request
@@ -277,7 +289,9 @@ class URLStream : public AbstractURLStream {
   bool wait_for_data = true;
   Client* client = nullptr; // client defined via setClient
   WiFiClient* client_insecure = nullptr; // wifi client for http
+#if defined(HAS_CLIENT_SECURE)
   WiFiClientSecure* client_secure = nullptr; // wifi client for https
+#endif
   int client_timeout = URL_CLIENT_TIMEOUT;                  // 60000;
   unsigned long handshake_timeout = URL_HANDSHAKE_TIMEOUT;  // 120000
   bool is_power_save = false;
@@ -354,24 +368,27 @@ class URLStream : public AbstractURLStream {
 
   /// Determines the client
   Client& getClient(bool isSecure) {
+#if defined(HAS_CLIENT_SECURE)
     if (isSecure) {
       if (client_secure == nullptr) {
         client_secure = new WiFiClientSecure();
-        client_secure->setInsecure();
         client_secure->setTimeout(client_timeout);
 #ifdef ESP32
+        client_secure->setInsecure();
   #if ESP_ARDUINO_VERSION >= ESP_ARDUINO_VERSION_VAL(3,0,0)
         client_secure->setConnectionTimeout(client_timeout);
   #endif 
         client_secure->setHandshakeTimeout(handshake_timeout);
 #endif
 #ifdef RP2040_HOWER
+        client_secure->setInsecure();
         client_secure->setTLSConnectTimeout(client_timeout);
 #endif
       }
       LOGI("WiFiClientSecure");
       return *client_secure;
     }
+#endif
     if (client_insecure == nullptr) {
       client_insecure = new WiFiClient();
       client_insecure->setTimeout(client_timeout);
