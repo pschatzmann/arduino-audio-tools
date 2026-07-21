@@ -28,7 +28,7 @@ var searchData=
   ['ki_25',['ki',['../classaudio__tools_1_1_p_i_d_controller.html#a050993b7ca6c97e62c1020017f716b91',1,'audio_tools::PIDController']]],
   ['kid3v1enhancedlen_26',['kID3v1EnhancedLen',['../classaudio__tools_1_1_meta_data_filter.html#a9c6c1edbc0d4b623de7810c0c2b68b16',1,'audio_tools::MetaDataFilter']]],
   ['kid3v1len_27',['kID3v1Len',['../classaudio__tools_1_1_meta_data_filter.html#a0692507a006893bc03afe2aa49a6ac82',1,'audio_tools::MetaDataFilter']]],
-  ['kind_28',['kind',['../structaudio__tools_1_1_multi_output_1_1_multi_output_record.html#ad4f6a38e725118afcde5fbb91ccbbb12',1,'audio_tools::MultiOutput::MultiOutputRecord::kind'],['../classaudio__tools_1_1_multi_output.html#aa10c9e8951b8ccf714a59ec321bdac5b',1,'audio_tools::MultiOutput::Kind']]],
+  ['kind_28',['kind',['../classaudio__tools_1_1_multi_output.html#aa10c9e8951b8ccf714a59ec321bdac5b',1,'audio_tools::MultiOutput::Kind'],['../structaudio__tools_1_1_multi_output_1_1_multi_output_record.html#ad4f6a38e725118afcde5fbb91ccbbb12',1,'audio_tools::MultiOutput::MultiOutputRecord::kind']]],
   ['kiss_29',['KISS',['../group__fft-kiss.html',1,'']]],
   ['kit_30',['kit',['../classaudio__tools_1_1_audio_kit_stream.html#ab0c034f0991a293c7173f43c37360316',1,'audio_tools::AudioKitStream']]],
   ['kkeepsamplesize_31',['kKeepSampleSize',['../classaudio__tools_1_1_tf_lite_micro_speach_writer.html#ad2c2ccc32601cb982cb5d1397125bf8d',1,'audio_tools::TfLiteMicroSpeachWriter']]],

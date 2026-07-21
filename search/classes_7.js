@@ -12,7 +12,7 @@ var searchData=
   ['highpassfilter_9',['HighPassFilter',['../classaudio__tools_1_1_high_pass_filter.html',1,'audio_tools']]],
   ['highshelffilter_10',['HighShelfFilter',['../classaudio__tools_1_1_high_shelf_filter.html',1,'audio_tools']]],
   ['hlsparser_11',['HLSParser',['../classaudio__tools__hls_1_1_h_l_s_parser.html',1,'audio_tools_hls']]],
-  ['hlsparser_3c_20audio_5ftools_3a_3aurlstreamesp32_20_3e_12',['HLSParser&lt; audio_tools::URLStreamESP32 &gt;',['../classaudio__tools__hls_1_1_h_l_s_parser.html',1,'audio_tools_hls']]],
+  ['hlsparser_3c_20audio_5ftools_3a_3aurlstream_20_3e_12',['HLSParser&lt; audio_tools::URLStream &gt;',['../classaudio__tools__hls_1_1_h_l_s_parser.html',1,'audio_tools_hls']]],
   ['hlsstreamt_13',['HLSStreamT',['../classaudio__tools_1_1_h_l_s_stream_t.html',1,'audio_tools']]],
   ['httpchunkreader_14',['HttpChunkReader',['../classaudio__tools_1_1_http_chunk_reader.html',1,'audio_tools']]],
   ['httpheader_15',['HttpHeader',['../classaudio__tools_1_1_http_header.html',1,'audio_tools']]],
