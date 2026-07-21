@@ -28,7 +28,7 @@
 #define VS1053_DEFINED
 #define PIN_CS 9
 
-#if defined(ARDUINO) && !defined(ARDUINO_MINIMA)
+#if defined(ARDUINO_UNOWIFIR4)
 #  define USE_WIFI
 #  define USE_URL_ARDUINO
 #  define USE_AUDIO_SERVER
