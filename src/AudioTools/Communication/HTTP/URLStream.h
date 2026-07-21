@@ -370,22 +370,7 @@ class URLStream : public AbstractURLStream {
   Client& getClient(bool isSecure) {
 #if defined(HAS_CLIENT_SECURE)
     if (isSecure) {
-      if (client_secure == nullptr) {
-        client_secure = new WiFiClientSecure();
-        client_secure->setTimeout(client_timeout);
-#ifdef ESP32
-        client_secure->setInsecure();
-  #if ESP_ARDUINO_VERSION >= ESP_ARDUINO_VERSION_VAL(3,0,0)
-        client_secure->setConnectionTimeout(client_timeout);
-  #endif 
-        client_secure->setHandshakeTimeout(handshake_timeout);
-#endif
-#ifdef RP2040_HOWER
-        client_secure->setInsecure();
-        client_secure->setTLSConnectTimeout(client_timeout);
-#endif
-      }
-      LOGI("WiFiClientSecure");
+      setupClientSecure();
       return *client_secure;
     }
 #endif
@@ -403,6 +388,28 @@ class URLStream : public AbstractURLStream {
     }
     return *client_insecure;
   }
+
+#if defined(HAS_CLIENT_SECURE)
+
+  void setupClientSecure() {
+      LOGI("setupClientSecure");
+      if (client_secure == nullptr) {
+        client_secure = new WiFiClientSecure();
+        client_secure->setTimeout(client_timeout);
+#ifdef ESP32
+        client_secure->setInsecure();
+  #if ESP_ARDUINO_VERSION >= ESP_ARDUINO_VERSION_VAL(3,0,0)
+        client_secure->setConnectionTimeout(client_timeout);
+  #endif 
+        client_secure->setHandshakeTimeout(handshake_timeout);
+#endif
+#ifdef RP2040_HOWER
+        client_secure->setInsecure();
+        client_secure->setTLSConnectTimeout(client_timeout);
+#endif
+  }
+
+#endif
 
   inline void fillBuffer() {
     if (isEOS()) {
