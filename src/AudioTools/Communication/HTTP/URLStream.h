@@ -407,6 +407,7 @@ class URLStream : public AbstractURLStream {
         client_secure->setInsecure();
         client_secure->setTLSConnectTimeout(client_timeout);
 #endif
+      }
   }
 
 #endif
