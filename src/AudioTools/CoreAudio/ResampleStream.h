@@ -8,6 +8,8 @@
 #  define PRINT_FLUSH_OVERRIDE
 #endif
 
+// Forced processing at 1.0f has been disabled in this local build.
+
 namespace audio_tools {
 
 /**
@@ -181,16 +183,27 @@ class ResampleStream : public ReformatBaseStream {
 
   /// When buffering is active, writes the buffered audio to the output
   void flush() PRINT_FLUSH_OVERRIDE {
-    if (p_out != nullptr && !out_buffer.isEmpty()) {
-      TRACED();
+    if (p_out == nullptr || out_buffer.isEmpty()) return;
+
+    TRACED();
 #if USE_PRINT_FLUSH
       p_out->flush();
 #endif
-      int rc = p_out->write(out_buffer.data(), out_buffer.available());
-      if (rc != out_buffer.available()) {
-        LOGE("write error %d vs %d", rc, out_buffer.available());
+
+    while (!out_buffer.isEmpty()) {
+      int to_write = out_buffer.available();
+      int rc = p_out->write(out_buffer.data(), to_write);
+
+      if (rc <= 0) {
+        LOGE("write error %d vs %d", rc, to_write);
+        break;
       }
-      out_buffer.reset();
+
+      if (rc < to_write) {
+        LOGW("partial write %d vs %d", rc, to_write);
+      }
+
+      out_buffer.clearArray(rc);
     }
   }
 
@@ -230,9 +243,11 @@ class ResampleStream : public ReformatBaseStream {
       LOGE("channels is 0");
       return 0;
     }
+
     T *data = (T *)buffer;
     int samples = bytes / sizeof(T);
-    size_t frames = samples / info.channels;
+    int channels = info.channels;
+    size_t frames = samples / channels;
     written = 0;
 
     // avoid noise if audio does not start with 0
@@ -241,14 +256,41 @@ class ResampleStream : public ReformatBaseStream {
       setupLastSamples<T>(data, 0);
     }
 
-    T frame[info.channels];
-    size_t frame_size = sizeof(frame);
+    T frame[channels];
+    size_t frame_size = sizeof(T) * channels;
+    T *pt_last_samples = (T *)last_samples.data();
 
     // process all samples
     while (idx < frames - 1) {
-      for (int ch = 0; ch < info.channels; ch++) {
-        T result = getValue<T>(data, idx, ch);
-        frame[ch] = result;
+      int frame_idx0 = (int)idx;
+      float frac = idx - frame_idx0;
+      int frame_idx1 = frame_idx0 + 1;
+
+      T *frame0 = frame_idx0 >= 0 ? &data[frame_idx0 * channels]
+                                   : (T *)pt_last_samples;
+      T *frame1 = &data[frame_idx1 * channels];
+
+      // fast integer path when we exactly hit a source frame
+      if (frac <= 0.000001f) {
+        memcpy(frame, frame0, frame_size);
+      }
+      // optimized fixed-point interpolation for 16-bit samples
+      else if (sizeof(T) == sizeof(int16_t)) {
+        int32_t frac_q15 = (int32_t)(frac * 32768.0f + 0.5f);
+        int32_t one_minus_q15 = 32768 - frac_q15;
+        for (int ch = 0; ch < channels; ch++) {
+          int32_t v0 = (int32_t)frame0[ch];
+          int32_t v1 = (int32_t)frame1[ch];
+          int32_t y = (v0 * one_minus_q15 + v1 * frac_q15) >> 15;
+          frame[ch] = NumberConverter::clipT<T>((float)y);
+        }
+      } else {
+        // generic interpolation path
+        for (int ch = 0; ch < channels; ch++) {
+          float v0 = (float)((int32_t)frame0[ch]);
+          float v1 = (float)((int32_t)frame1[ch]);
+          frame[ch] = NumberConverter::clipT<T>(v0 + (v1 - v0) * frac);
+        }
       }
 
       if (is_buffer_active) {
@@ -286,7 +328,7 @@ class ResampleStream : public ReformatBaseStream {
     }
 
     // returns requested bytes to avoid rewriting of processed bytes
-    return frames * info.channels * sizeof(T);
+    return frames * channels * sizeof(T);
   }
 
   /// get the interpolated value for indicated (float) index value
