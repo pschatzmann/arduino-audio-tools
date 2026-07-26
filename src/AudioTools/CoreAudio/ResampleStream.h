@@ -72,6 +72,7 @@ class ResampleStream : public ReformatBaseStream {
     setStepSize(cfg.step_size);
     is_first = true;
     idx = 0;
+    idx_q16 = 0;
     // step_dirty = true;
     bytes_per_frame = info.bits_per_sample / 8 * info.channels;
 
@@ -145,7 +146,15 @@ class ResampleStream : public ReformatBaseStream {
   /// influence the sample rate
   void setStepSize(float step) {
     LOGI("setStepSize: %f", step);
+    if (step <= 0.0f) {
+      step = 1.0f;
+    }
     step_size = step;
+    idx_q16 = static_cast<int32_t>(idx * 65536.0f);
+    step_q16 = static_cast<int32_t>(step_size * 65536.0f + 0.5f);
+    if (step_q16 <= 0) {
+      step_q16 = 1;
+    }
   }
 
   void setTargetSampleRate(int rate) { to_sample_rate = rate; }
@@ -212,6 +221,8 @@ class ResampleStream : public ReformatBaseStream {
  protected:
   Vector<uint8_t> last_samples{0};
   float idx = 0;
+  int32_t idx_q16 = 0;
+  int32_t step_q16 = 65536;
   bool is_first = true;
   float step_size = 1.0;
   int to_sample_rate = 0;
@@ -249,6 +260,11 @@ class ResampleStream : public ReformatBaseStream {
     int channels = info.channels;
     size_t frames = samples / channels;
     written = 0;
+
+    if (sizeof(T) == sizeof(int16_t) && channels == 2) {
+      return writeFastInt16Stereo(p_out, reinterpret_cast<int16_t *>(data),
+                                  frames, written);
+    }
 
     // avoid noise if audio does not start with 0
     if (is_first) {
@@ -322,6 +338,7 @@ class ResampleStream : public ReformatBaseStream {
     // save last samples to be made available at index position -1;
     setupLastSamples<T>(data, frames - 1);
     idx -= frames;
+    idx_q16 = static_cast<int32_t>(idx * 65536.0f);
 
     if (bytes != (written * step_size)) {
       LOGD("write: %d vs %d", (int)bytes, (int)written);
@@ -329,6 +346,79 @@ class ResampleStream : public ReformatBaseStream {
 
     // returns requested bytes to avoid rewriting of processed bytes
     return frames * channels * sizeof(T);
+  }
+
+  size_t writeFastInt16Stereo(Print *p_out, const int16_t *data, size_t frames,
+                              size_t &written) {
+    if (frames == 0) {
+      return 0;
+    }
+
+    const size_t frame_size = sizeof(int16_t) * 2;
+    int16_t frame[2];
+    int16_t *pt_last_samples = reinterpret_cast<int16_t *>(last_samples.data());
+
+    // avoid noise if audio does not start with 0
+    if (is_first) {
+      is_first = false;
+      setupLastSamples<int16_t>(const_cast<int16_t *>(data), 0);
+    }
+
+    const int32_t max_idx_q16 = static_cast<int32_t>((frames - 1) << 16);
+    while (idx_q16 < max_idx_q16) {
+      int32_t frame_idx0 = idx_q16 >> 16;
+      int32_t frac_q16 = idx_q16 - (frame_idx0 << 16);
+      int32_t frame_idx1 = frame_idx0 + 1;
+
+      const int16_t *frame0 =
+          frame_idx0 >= 0 ? &data[frame_idx0 * 2] : pt_last_samples;
+      const int16_t *frame1 = &data[frame_idx1 * 2];
+
+      if (frac_q16 == 0) {
+        frame[0] = frame0[0];
+        frame[1] = frame0[1];
+      } else {
+        int32_t one_minus_q16 = 65536 - frac_q16;
+        frame[0] = static_cast<int16_t>(
+            ((static_cast<int32_t>(frame0[0]) * one_minus_q16) +
+             (static_cast<int32_t>(frame1[0]) * frac_q16)) >>
+            16);
+        frame[1] = static_cast<int16_t>(
+            ((static_cast<int32_t>(frame0[1]) * one_minus_q16) +
+             (static_cast<int32_t>(frame1[1]) * frac_q16)) >>
+            16);
+      }
+
+      if (is_buffer_active) {
+        if (out_buffer.availableForWrite() <= frame_size) {
+          flush();
+        }
+        int tmp_written =
+            out_buffer.writeArray(reinterpret_cast<const uint8_t *>(&frame),
+                                  frame_size);
+        written += tmp_written;
+        if (frame_size != static_cast<size_t>(tmp_written)) {
+          TRACEE();
+        }
+      } else {
+        int tmp = p_out->write(reinterpret_cast<const uint8_t *>(&frame),
+                               frame_size);
+        written += tmp;
+        if (tmp != static_cast<int>(frame_size)) {
+          LOGE("Failed to write %d bytes: %d", (int)frame_size, tmp);
+        }
+      }
+
+      idx_q16 += step_q16;
+    }
+
+    flush();
+
+    setupLastSamples<int16_t>(const_cast<int16_t *>(data), frames - 1);
+    idx_q16 -= static_cast<int32_t>(frames << 16);
+    idx = static_cast<float>(idx_q16) / 65536.0f;
+
+    return frames * frame_size;
   }
 
   /// get the interpolated value for indicated (float) index value
