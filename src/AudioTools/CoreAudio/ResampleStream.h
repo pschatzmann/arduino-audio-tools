@@ -278,9 +278,10 @@ class ResampleStream : public ReformatBaseStream {
 
     // process all samples
     while (idx < frames - 1) {
-      int frame_idx0 = (int)idx;
-      float frac = idx - frame_idx0;
-      int frame_idx1 = frame_idx0 + 1;
+int frame_idx0 = (int)idx;
+if (frame_idx0 == 0 && idx < 0) frame_idx0 = -1;
+int frame_idx1 = frame_idx0 + 1;
+float frac = idx - frame_idx0;
 
       T *frame0 = frame_idx0 >= 0 ? &data[frame_idx0 * channels]
                                    : (T *)pt_last_samples;
