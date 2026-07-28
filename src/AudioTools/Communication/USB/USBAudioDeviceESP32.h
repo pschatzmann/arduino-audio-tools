@@ -96,6 +96,7 @@ class USBAudioDeviceESP32 : public USBAudioDeviceBase {
     USB.usbAttributes(
         (uint8_t)(0x80u | (config_.self_powered ? 0x40u : 0x00u)));
     USB.usbPower(config_.max_power_ma);
+    resolveEndpoints();
     static uint8_t desc[USB_DESCR_MAX_LEN];
     uint16_t audio_len = getDescriptor(desc);
     assert(audio_len <= USB_DESCR_MAX_LEN);
@@ -104,12 +105,58 @@ class USBAudioDeviceESP32 : public USBAudioDeviceBase {
     return true;
   }
 
- protected:
   /** @brief Returns cross-core safe TX buffer (FreeRTOS queue of blocks). */
   BaseBuffer<uint8_t>& bufferTx() override { return buffer_tx_; }
 
   /** @brief Returns cross-core safe RX buffer (FreeRTOS queue of blocks). */
   BaseBuffer<uint8_t>& bufferRx() override { return buffer_rx_; }
+
+ protected:
+  /**
+   * @brief Resolve any endpoint left at -1 ("allocate dynamically") to a
+   * free endpoint number via arduino-esp32's own
+   * tinyusb_get_free_in_endpoint()/tinyusb_get_free_out_endpoint(). These
+   * already know about endpoints reserved by other interfaces (e.g. CDC
+   * reserves OUT 0x03, IN 0x84, IN 0x85 -- see USBCDC::load_cdc_descriptor()
+   * in arduino-esp32), so this avoids the endpoint collisions that the
+   * previous fixed defaults (0x83/0x03/0x84/0x85) had with CDC on composite
+   * devices. Must run exactly once, before the first call to getDescriptor(),
+   * since that function is invoked twice (once here to size the interface,
+   * once later via descriptorCallback to fill it in) and both calls must see
+   * the same resolved addresses.
+   */
+  void resolveEndpoints() {
+    if (config_.enable_ep_in) {
+      if (config_.ep_in < 0) config_.ep_in = allocInEndpoint();
+    } else if (isFeedbackEpEnabled()) {
+      if (config_.ep_fb < 0) config_.ep_fb = allocInEndpoint();
+    }
+    if (config_.enable_ep_out) {
+      if (config_.ep_out < 0) config_.ep_out = allocOutEndpoint();
+    }
+    if (config_.enable_interrupt_ep) {
+      if (config_.ep_int < 0) config_.ep_int = allocInEndpoint();
+    }
+  }
+
+  static int16_t allocInEndpoint() {
+    uint8_t n = tinyusb_get_free_in_endpoint();
+    if (n == 0) {
+      LOGE("No free USB IN endpoint available");
+      return -1;
+    }
+    return (int16_t)(0x80u | n);
+  }
+
+  static int16_t allocOutEndpoint() {
+    uint8_t n = tinyusb_get_free_out_endpoint();
+    if (n == 0) {
+      LOGE("No free USB OUT endpoint available");
+      return -1;
+    }
+    return (int16_t)n;
+  }
+
 
   /** @brief Resize buffers as block pools: block size = one USB frame
    *  at the current sample rate, block count = fifo_packets. */

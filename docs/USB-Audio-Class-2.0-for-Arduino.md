@@ -148,12 +148,12 @@ config.copyFrom(info);                     // inherit sample_rate, channels, bit
 
 | Field | Default | Description |
 |-------|---------|-------------|
-| `ep_in` | 0x83 | ISO IN endpoint address (capture). |
-| `ep_out` | 0x03 | ISO OUT endpoint address (playback). |
-| `ep_fb` | 0x84 | ISO IN feedback endpoint (RX-only mode). |
-| `ep_int` | 0x85 | INT IN endpoint (AC change notifications). |
+| `ep_in` | -1 | ISO IN endpoint address (capture). |
+| `ep_out` | -1 | ISO OUT endpoint address (playback). |
+| `ep_fb` | -1 | ISO IN feedback endpoint (RX-only mode). |
+| `ep_int` | -1 | INT IN endpoint (AC change notifications). |
 
-The defaults are chosen to avoid conflicts with CDC, which uses 0x81, 0x82, and 0x02.
+-1 means "allocate a free endpoint automatically" (via `TinyUSBDevice.allocEndpoint()` on RP2040/SAMD/STM32, or `tinyusb_get_free_in_endpoint()`/`tinyusb_get_free_out_endpoint()` on ESP32). Both allocators are aware of endpoints reserved by other interfaces, so this avoids conflicts with CDC automatically — set a value >= 0 yourself only if you need to pin a specific address.
 
 ### Buffering
 
@@ -283,7 +283,7 @@ void setup() {
 }
 ```
 
-The default endpoint addresses (0x83, 0x03, 0x84, 0x85) are chosen to avoid conflicts with CDC, which uses 0x81, 0x82, and 0x02.
+Endpoint addresses are allocated automatically (see [Endpoint Addresses](#endpoint-addresses) above) and steer clear of whatever CDC has already reserved, so no manual coordination is needed.
 
 ## Testing
 

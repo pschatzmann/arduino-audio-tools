@@ -45,30 +45,25 @@ namespace audio_tools {
 #endif
 #endif
 
-// USBAudioDeviceESP32 (arduino-esp32) has no dynamic endpoint allocation of
-// its own -- whatever address is in the config is baked straight into the
-// descriptor -- so it needs real, working defaults.
-#if defined(ESP32)
-#ifndef USB_AUDIO_EP_IN
-#define USB_AUDIO_EP_IN 0x83
-#endif
-#ifndef USB_AUDIO_EP_OUT
-#define USB_AUDIO_EP_OUT 0x03
-#endif
-#ifndef USB_AUDIO_EP_FB
-#define USB_AUDIO_EP_FB 0x84
-#endif
-#ifndef USB_AUDIO_EP_INT
-#define USB_AUDIO_EP_INT 0x85
-#endif
-#endif
+// USBAudioDeviceESP32 (arduino-esp32) previously pinned 0x83/0x03/0x84/0x85
+// here under the assumption that CDC uses 0x81/0x82/0x02. That assumption is
+// wrong: arduino-esp32's own USBCDC::load_cdc_descriptor() (USBCDC.cpp)
+// hardcodes notification=0x85, OUT=0x03, IN=0x84 -- i.e. exactly the "safe"
+// defaults this block used to define -- so a composite CDC + Audio device
+// silently collided on three endpoints (confirmed independently: Adafruit's
+// own TinyUSBDevice::allocEndpoint() carries a matching ESP32 workaround
+// that explicitly steers around 0x03/0x84/0x85 for the same reason). Rather
+// than guess another set of "safe" fixed numbers, ESP32 now falls through to
+// the generic -1 ("allocate dynamically") default below: USBAudioDeviceESP32
+// resolves it via arduino-esp32's own tinyusb_get_free_in_endpoint() /
+// tinyusb_get_free_out_endpoint(), which already know about CDC's reserved
+// endpoints. See https://github.com/pschatzmann/arduino-audio-tools/issues/2396.
 
-// Everywhere else (generic TinyUSB: RP2040, SAMD, STM32) -1 tells
-// USBAudioDeviceTinyUSB::getInterfaceDescriptor() to allocate the endpoint
-// dynamically via TinyUSBDevice.allocEndpoint() instead of using a fixed
-// number. Define any of these yourself (e.g. via a build flag) to support
-// additional boards/cores, or to pin a fixed address, without touching the
-// struct or driver.
+// Everywhere else (generic TinyUSB: RP2040, SAMD, STM32, and now ESP32) -1
+// tells the platform subclass to allocate the endpoint dynamically instead
+// of using a fixed number. Define any of these yourself (e.g. via a build
+// flag) to support additional boards/cores, or to pin a fixed address,
+// without touching the struct or driver.
 #ifndef USB_AUDIO_EP_IN
 #define USB_AUDIO_EP_IN -1
 #endif
@@ -93,14 +88,14 @@ struct USBAudioConfig : public AudioInfo {
   bool enable_ep_out = true;  ///< host   → device (playback / speaker)
 
   // ── USB endpoint addresses ────────────────────────────────────────────────
-  /// Addresses must not conflict with other USB interfaces (e.g. CDC uses
-  /// 0x81, 0x82, 0x02).  The defaults below (overridable per-platform via
-  /// the USB_AUDIO_EP_* build flags, see top of this file) are safe for
-  /// CDC + Audio composite devices on most MCUs.
+  /// Addresses must not conflict with other USB interfaces. On most
+  /// platforms the -1 default (see USB_AUDIO_EP_* at the top of this file)
+  /// lets the platform subclass allocate a free endpoint dynamically, which
+  /// avoids conflicts automatically -- including with CDC.
   /// Signed so a negative value (the -1 default on platforms without a
-  /// fixed hardware endpoint) can be told apart from a real address:
-  /// USBAudioDeviceTinyUSB treats < 0 as "allocate dynamically" and any
-  /// value you set >= 0 (including these defaults) as a pinned address.
+  /// fixed hardware endpoint) can be told apart from a real address: the
+  /// platform subclass treats < 0 as "allocate dynamically" and any value
+  /// you set >= 0 as a pinned address.
   int16_t ep_in = USB_AUDIO_EP_IN;    ///< ISO IN  (device → host, capture/microphone)
   int16_t ep_out = USB_AUDIO_EP_OUT;  ///< ISO OUT (host → device, playback/speaker)
   int16_t ep_fb = USB_AUDIO_EP_FB;    ///< ISO IN  (explicit feedback, RX-only mode)
