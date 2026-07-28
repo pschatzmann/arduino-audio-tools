@@ -3,6 +3,7 @@
 
 #include <cstring>
 
+#include "AudioTools/Communication/USB/USBAudioBackendTinyUSB.h"
 #include "AudioTools/Communication/USB/USBAudioDeviceBase.h"
 #include "AudioTools/Concurrency/LockFree/RingBufferSPSC.h"
 
@@ -82,9 +83,30 @@ class USBAudioDeviceTinyUSB : public USBAudioDeviceBase,
     return len;
   }
 
+  /** @brief Returns the TX audio buffer (public to match USBAudioDeviceESP32,
+   *  so sketches using the portable USBAudioStream alias can call it on
+   *  either platform). */
+  BaseBuffer<uint8_t>& bufferTx() override { return buffer_tx_; }
+
+  /** @brief Returns the RX audio buffer (public to match USBAudioDeviceESP32,
+   *  so sketches using the portable USBAudioStream alias can call it on
+   *  either platform). */
+  BaseBuffer<uint8_t>& bufferRx() override { return buffer_rx_; }
+
  protected:
+  USBAudioBackendTinyUSB backend_impl_;
   RingBufferSPSC<uint8_t> buffer_tx_;
   RingBufferSPSC<uint8_t> buffer_rx_;
+
+  USBAudioBackend& backend() override { return backend_impl_; }
+
+  /** @brief Process pending USB events. Skipped when a dedicated FreeRTOS
+   *  task already calls tud_task() continuously (see usb_task_active_,
+   *  set by USBAudioDeviceTinyUSBFreeRTOS) -- tud_task() is not re-entrant.
+   */
+  void serviceTinyUSB() override {
+    if (!usb_task_active_) tud_task();
+  }
 
   bool beginUSB() override {
     TinyUSBDevice.setID(config_.vid, config_.pid);
@@ -94,9 +116,6 @@ class USBAudioDeviceTinyUSB : public USBAudioDeviceBase,
     setupDescrBuffer();
     return TinyUSBDevice.addInterface(*this);
   }
-
-  BaseBuffer<uint8_t>& bufferTx() override { return buffer_tx_; }
-  BaseBuffer<uint8_t>& bufferRx() override { return buffer_rx_; }
 
   void resizeBuffers() override {
     uint16_t block_sz = packetSize();

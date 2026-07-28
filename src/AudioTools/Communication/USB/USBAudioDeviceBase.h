@@ -26,73 +26,56 @@
 
 #include "AudioLogger.h"
 #include "AudioTools/CoreAudio/BaseStream.h"
+#include "AudioTools/Communication/USB/USBAudioBackend.h"
 #include "USBAudio2DescriptorBuilder.h"
-
-extern "C" {
-#include "device/usbd.h"
-#include "device/usbd_pvt.h"
-#include "tusb.h"
-}
 
 #define USB_DESCR_MAX_LEN 512
 
-// TinyUSB >= 0.15 (ESP32 IDF v5+) renamed UAC2 symbols with an AUDIO20_ prefix
-// and changed three function signatures.  These shims let the driver build
-// against both versions; detect the new API by the presence of the new define.
-#ifdef TUD_AUDIO20_DESC_IAD_LEN
-#define TUD_AUDIO_DESC_IAD_LEN TUD_AUDIO20_DESC_IAD_LEN
-#define AUDIO_CS_AC_INTERFACE_INPUT_TERMINAL \
-  AUDIO20_CS_AC_INTERFACE_INPUT_TERMINAL
-#define AUDIO_CS_AC_INTERFACE_OUTPUT_TERMINAL \
-  AUDIO20_CS_AC_INTERFACE_OUTPUT_TERMINAL
-#define AUDIO_CS_CTRL_SAM_FREQ AUDIO20_CS_CTRL_SAM_FREQ
-#define AUDIO_CS_CTRL_CLK_VALID AUDIO20_CS_CTRL_CLK_VALID
-#define AUDIO_CS_REQ_CUR AUDIO20_CS_REQ_CUR
-#define AUDIO_CS_REQ_RANGE AUDIO20_CS_REQ_RANGE
-#define AUDIO_CS_AS_INTERFACE_AS_GENERAL AUDIO20_CS_AS_INTERFACE_AS_GENERAL
-#define AUDIO_CS_AS_INTERFACE_FORMAT_TYPE AUDIO20_CS_AS_INTERFACE_FORMAT_TYPE
-#define audio_desc_cs_ac_interface_t audio20_desc_cs_ac_interface_t
-#define audio_desc_cs_as_interface_t audio20_desc_cs_as_interface_t
-#define audio_desc_type_I_format_t audio20_desc_type_I_format_t
-// New: is_isr parameter added; fifo element-size arg removed
-#define TUSB_EDPT_XFER(rp, ep, buf, sz) usbd_edpt_xfer(rp, ep, buf, sz, false)
-#define TUSB_EDPT_XFER_FIFO(rp, ep, ff, sz) \
-  usbd_edpt_xfer_fifo(rp, ep, ff, sz, false)
-#define TUSB_FIFO_CONFIG(f, buf, d, ov) tu_fifo_config(f, buf, d, ov)
-#else
-// Old TinyUSB (RP2040 / Adafruit bundle)
-#define TUSB_EDPT_XFER(rp, ep, buf, sz) usbd_edpt_xfer(rp, ep, buf, sz)
-#define TUSB_EDPT_XFER_FIFO(rp, ep, ff, sz) usbd_edpt_xfer_fifo(rp, ep, ff, sz)
-#define TUSB_FIFO_CONFIG(f, buf, d, ov) tu_fifo_config(f, buf, d, 1, ov)
-// Ensure control selector and request constants are available on old TinyUSB
-// too
-#ifndef AUDIO10_CS_AC_INTERFACE_INPUT_TERMINAL
-#define AUDIO10_CS_AC_INTERFACE_INPUT_TERMINAL \
-  AUDIO_CS_AC_INTERFACE_INPUT_TERMINAL
-#endif
-#ifndef AUDIO_CS_CTRL_CLK_VALID
-#define AUDIO_CS_CTRL_CLK_VALID 0x02u
-#endif
-#ifndef AUDIO_CS_REQ_RANGE
-#define AUDIO_CS_REQ_RANGE 0x02u
-#endif
-#endif
-
-// Feature Unit control selectors (UAC2 Table A-23)
-#ifndef AUDIO_FU_CTRL_MUTE
-#define AUDIO_FU_CTRL_MUTE 0x01u
-#endif
-#ifndef AUDIO_FU_CTRL_VOLUME
-#define AUDIO_FU_CTRL_VOLUME 0x02u
-#endif
-
 namespace audio_tools {
 
-// Discrete sample rates supported by the UAC2 clock source.
-static constexpr uint32_t kSupportedSampleRates[] = {
-    8000, 11025, 16000, 22050, 24000, 32000, 44100, 48000};
-static constexpr uint8_t kNumSupportedSampleRates =
-    sizeof(kSupportedSampleRates) / sizeof(kSupportedSampleRates[0]);
+// ── UAC2 / USB 2.0 spec constants ───────────────────────────────────────────
+// These are fixed byte values defined by the USB 2.0 and UAC2 specs, not
+// TinyUSB API surface (TinyUSB's own headers just give them names). Owned
+// here directly so USBAudioDeviceBase has zero dependency on any particular
+// USB stack's headers.
+
+// Descriptor types (USB 2.0 spec Table 9-5).
+static constexpr uint8_t kUsbDescTypeInterface = 0x04;
+static constexpr uint8_t kUsbDescTypeEndpoint = 0x05;
+static constexpr uint8_t kUsbDescTypeCsInterface = 0x24;
+
+// Audio class/subclass/protocol codes (UAC2 spec Appendix A).
+static constexpr uint8_t kUsbClassAudio = 0x01;
+static constexpr uint8_t kAudioSubclassControl = 0x01;
+static constexpr uint8_t kAudioIntProtocolCodeV2 = 0x20;
+
+// AC interface descriptor subtypes (UAC2 Table A-9).
+static constexpr uint8_t kAudioCsAcInputTerminal = 0x02;
+static constexpr uint8_t kAudioCsAcOutputTerminal = 0x03;
+// AS interface descriptor subtypes (UAC2 Table A-11).
+static constexpr uint8_t kAudioCsAsGeneral = 0x01;
+static constexpr uint8_t kAudioCsAsFormatType = 0x02;
+// Control request codes (UAC2 Table A-15).
+static constexpr uint8_t kAudioCsReqCur = 0x01;
+static constexpr uint8_t kAudioCsReqRange = 0x02;
+// Clock Source control selectors (UAC2 Table A-18).
+static constexpr uint8_t kAudioCsCtrlSamFreq = 0x01;
+static constexpr uint8_t kAudioCsCtrlClkValid = 0x02;
+// Feature Unit control selectors (UAC2 Table A-23).
+static constexpr uint8_t AUDIO_FU_CTRL_MUTE = 0x01;
+static constexpr uint8_t AUDIO_FU_CTRL_VOLUME = 0x02;
+// Terminal type: USB Streaming (UAC2 Table 2-1).
+static constexpr uint16_t kAudioTermTypeUsbStreaming = 0x0101;
+// Interface Association Descriptor length — fixed 8 bytes.
+static constexpr uint16_t kAudioDescIadLen = 8;
+
+// USB control-transfer state-machine stages (universal to any USB stack's
+// control-transfer handling, not TinyUSB-specific).
+static constexpr uint8_t kControlStageSetup = 1;
+static constexpr uint8_t kControlStageData = 2;
+
+static inline uint8_t u16Low(uint16_t v) { return (uint8_t)(v & 0xFF); }
+static inline uint8_t u16High(uint16_t v) { return (uint8_t)(v >> 8); }
 
 /**
  * @brief USB Audio Device class for audio streaming over USB.
@@ -188,17 +171,18 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
     // sub-frame remainder (e.g. the 0.1 sample/frame of 44100 Hz) so the
     // long-term average packet size matches the real sample rate.
     uint32_t tx_sample_acc;
+    // Cached OUT endpoint descriptor (populated by audiod_open()'s descriptor
+    // scan) so closeEpOut() can re-activate the endpoint -- resetting its
+    // busy/claimed state for the next SET_INTERFACE -- without needing to
+    // re-walk the descriptor. See closeEpOut() for why this is needed.
+    UsbEndpointDescriptorView ep_out_view;
     // From this point, data is not cleared by bus reset
     uint8_t ctrl_buf_sz;
-    tu_fifo_t ep_out_ff;
-    tu_fifo_t ep_in_ff;
     std::vector<uint8_t> ctrl_buf;
     std::vector<uint8_t> alt_setting;
     std::vector<uint8_t> lin_buf_out;
     std::vector<uint8_t> lin_buf_in;
     std::vector<uint32_t> fb_buf;
-    std::vector<uint8_t> ep_in_sw_buf;   // For feedback EP
-    std::vector<uint8_t> ep_out_sw_buf;  // For feedback EP
   };
 
   /**
@@ -329,10 +313,6 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
       // 192 bytes needed for multi-rate RANGE (2+14*12=170); 64 suffices for single rate
       uint16_t cb_sz = config_.enable_multi_sample_rate ? 192u : 64u;
       ctrl_buf_sz_.assign(n, cb_sz);
-
-      const uint16_t sw_buf = fifoSize();
-      ep_in_sw_buf_sz_.assign(n, sw_buf);
-      ep_out_sw_buf_sz_.assign(n, sw_buf);
 
       uint8_t desc[USB_DESCR_MAX_LEN];
       uint16_t desc_len = descr_builder.buildFullDescriptor(desc);
@@ -490,21 +470,18 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
   /** @brief Returns true if the interrupt endpoint is enabled. */
   bool isInterruptEpEnabled() const { return config_.enable_interrupt_ep; }
 
-  /** @brief Returns true if FIFO mutex is enabled. */
-  bool isFifoMutexEnabled() const { return true; }
-
   /** @brief Returns the number of audio functions (always 1). */
   uint8_t getAudioCount() const { return 1; }
 
   /** @brief Returns true if the device is mounted by the USB host. */
-  bool mounted() const { return tud_mounted(); }
+  bool mounted() { return backend().mounted(); }
 
   /**
    * @brief Register a callback for GET requests on the interface.
    * @param cb Callback function.
    */
   void setGetReqItfCallback(std::function<bool(USBAudioDeviceBase*, uint8_t,
-                                               tusb_control_request_t const*)>
+                                               UsbSetupPacket const&)>
                                 cb) {
     get_req_itf_cb_ = cb;
   }
@@ -514,7 +491,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
    * @param cb Callback function.
    */
   void setGetReqEpCallback(std::function<bool(USBAudioDeviceBase*, uint8_t,
-                                              tusb_control_request_t const*)>
+                                              UsbSetupPacket const&)>
                                cb) {
     get_req_ep_cb_ = cb;
   }
@@ -571,7 +548,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
    */
   void setTudAudioSetItfCallback(
       std::function<bool(USBAudioDeviceBase*, uint8_t,
-                         tusb_control_request_t const*)>
+                         UsbSetupPacket const&)>
           cb) {
     tud_audio_set_itf_cb_ = cb;
   }
@@ -582,7 +559,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
    */
   void setReqEntityCallback(
       std::function<bool(USBAudioDeviceBase*, uint8_t,
-                         tusb_control_request_t const*, uint8_t*)>
+                         UsbSetupPacket const&, uint8_t*)>
           cb) {
     tud_audio_set_req_entity_cb_ = cb;
   }
@@ -593,7 +570,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
    */
   void setReqItfCallback(
       std::function<bool(USBAudioDeviceBase*, uint8_t,
-                         tusb_control_request_t const*, uint8_t*)>
+                         UsbSetupPacket const&, uint8_t*)>
           cb) {
     tud_audio_set_req_itf_cb_ = cb;
   }
@@ -604,7 +581,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
    */
   void setReqEpCallback(
       std::function<bool(USBAudioDeviceBase*, uint8_t,
-                         tusb_control_request_t const*, uint8_t*)>
+                         UsbSetupPacket const&, uint8_t*)>
           cb) {
     tud_audio_set_req_ep_cb_ = cb;
   }
@@ -614,7 +591,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
    * @param cb Callback function.
    */
   void setItfCloseEpCallback(std::function<bool(USBAudioDeviceBase*, uint8_t,
-                                                tusb_control_request_t const*)>
+                                                UsbSetupPacket const&)>
                                  cb) {
     tud_audio_set_itf_close_EP_cb_ = cb;
   }
@@ -696,11 +673,9 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
   /// Returns true when begin() has been called and the USB host has mounted the device.
   operator bool() override { return is_started_ && mounted(); }
 
-  /** @brief Stop audio streaming and clear FIFOs. Does not disconnect USB. */
+  /** @brief Stop audio streaming and clear buffers. Does not disconnect USB. */
   void end() {
     for (auto& audio : audiod_fct_) {
-      tu_fifo_clear(&audio.ep_in_ff);
-      tu_fifo_clear(&audio.ep_out_ff);
       std::fill(audio.lin_buf_in.begin(), audio.lin_buf_in.end(), 0);
       std::fill(audio.lin_buf_out.begin(), audio.lin_buf_out.end(), 0);
     }
@@ -739,46 +714,6 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
                      (config_.enable_ep_in ? 1 : 0));
   }
 
-  /**
-   * @brief Get the USB device class driver for TinyUSB integration.
-   * @param count Pointer to store the number of drivers (always 1).
-   * @return Pointer to the class driver structure.
-   */
-  usbd_class_driver_t const* getClassDriver(uint8_t* count) {
-    static usbd_class_driver_t driver;
-    driver.name = "AUDIO";
-    driver.init = [](void) {
-      USBAudioDeviceBase::activeInstance().audiod_init();
-    };
-    driver.deinit = [](void) {
-      return USBAudioDeviceBase::activeInstance().audiod_deinit();
-    };
-    driver.reset = [](uint8_t rhport) {
-      USBAudioDeviceBase::activeInstance().audiod_reset(rhport);
-    };
-    driver.open = [](uint8_t rhport, tusb_desc_interface_t const* itf_desc,
-                     uint16_t max_len) {
-      return USBAudioDeviceBase::activeInstance().audiod_open(rhport, itf_desc,
-                                                              max_len);
-    };
-    driver.control_xfer_cb = [](uint8_t rhport, uint8_t stage,
-                                tusb_control_request_t const* request) {
-      return USBAudioDeviceBase::activeInstance().audiod_control_xfer_cb(
-          rhport, stage, request);
-    };
-    driver.xfer_cb = [](uint8_t rhport, uint8_t ep_addr, xfer_result_t result,
-                        uint32_t xferred_bytes) {
-      return USBAudioDeviceBase::activeInstance().audiod_xfer_cb(
-          rhport, ep_addr, result, xferred_bytes);
-    };
-    driver.sof = [](uint8_t rhport, uint32_t frame_count) {
-      USBAudioDeviceBase::activeInstance().audiod_sof_isr(rhport, frame_count);
-    };
-
-    *count = 1;
-    return &driver;
-  }
-
   /// True if the initial isochronous IN transfer was armed successfully.
   bool isTxXferArmed() const { return tx_xfer_armed_; }
 
@@ -791,6 +726,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
   /// Total bytes read from ep_in_ff by xfer_cb (should grow at ~176KB/s for
   /// 44100Hz stereo 16-bit).
   uint32_t getTxFifoReadTotal() const { return tx_fifo_read_total_; }
+
   /// Last frame_bytes computed by flow control (should be ~176-180 for
   /// 44100Hz).
   uint16_t getTxFrameBytesLast() const { return tx_frame_bytes_last_; }
@@ -824,6 +760,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
   volatile uint32_t rx_total_bytes_ = 0;
   volatile uint16_t tx_frame_bytes_last_ = 0;
   volatile uint32_t tx_xferred_last_ = 0;
+
   bool is_active_ = false;
   // ── Volume / mute state (sized to channels+1 in begin()) ─────────────────
   std::vector<float> volume_;
@@ -843,33 +780,33 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
       rx_done_cb_;
   // Callback for interface GET requests
   std::function<bool(USBAudioDeviceBase*, uint8_t rhport,
-                     tusb_control_request_t const*)>
+                     UsbSetupPacket const&)>
       get_req_itf_cb_;
   // Callback for endpoint GET requests
   std::function<bool(USBAudioDeviceBase*, uint8_t rhport,
-                     tusb_control_request_t const*)>
+                     UsbSetupPacket const&)>
       get_req_ep_cb_;
 
   // Callback for feedback done event
   std::function<void(USBAudioDeviceBase*, uint8_t func_id)> fb_done_cb_;
   std::function<bool(USBAudioDeviceBase*, uint8_t func_id)> req_entity_cb_;
   std::function<bool(USBAudioDeviceBase*, uint8_t rhport,
-                     tusb_control_request_t const* p_request)>
+                     UsbSetupPacket const& p_request)>
       tud_audio_set_itf_cb_;
   std::function<bool(USBAudioDeviceBase*, uint8_t rhport,
-                     tusb_control_request_t const* p_request, uint8_t* pBuff)>
+                     UsbSetupPacket const& p_request, uint8_t* pBuff)>
       tud_audio_set_req_entity_cb_;
 
   std::function<bool(USBAudioDeviceBase*, uint8_t rhport,
-                     tusb_control_request_t const* p_request, uint8_t* pBuff)>
+                     UsbSetupPacket const& p_request, uint8_t* pBuff)>
       tud_audio_set_req_itf_cb_;
 
   std::function<bool(USBAudioDeviceBase*, uint8_t rhport,
-                     tusb_control_request_t const* p_request, uint8_t* pBuff)>
+                     UsbSetupPacket const& p_request, uint8_t* pBuff)>
       tud_audio_set_req_ep_cb_;
 
   std::function<bool(USBAudioDeviceBase*, uint8_t rhport,
-                     tusb_control_request_t const* p_request)>
+                     UsbSetupPacket const& p_request)>
       tud_audio_set_itf_close_EP_cb_;
 
   std::function<void(USBAudioDeviceBase*, uint8_t func_id, uint8_t alt_itf,
@@ -880,22 +817,15 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
       tud_audio_feedback_format_correction_cb_;
   uint8_t int_notify_buf_[6] = {};
 
-  std::vector<uint16_t> ep_out_sw_buf_sz_;
-  //  (TUD_OPT_HIGH_SPEED ? 32 : 4) * CFG_TUD_AUDIO_EP_SZ_IN // Example write
-  //  FIFO every 1ms, so it should be 8 times larger for HS device
-  std::vector<uint16_t> ep_in_sw_buf_sz_;
   // calculate!
   std::vector<uint16_t> desc_len_;
   // 64
   std::vector<uint16_t> ctrl_buf_sz_;
 
   std::vector<audiod_function_t> audiod_fct_;
-  // std::vector<osal_mutex_def_t> ep_in_ff_mutex_wr_;
-  // std::vector<osal_mutex_def_t> ep_in_ff_mutex_rd_;
-  std::vector<osal_mutex_def_t> ep_out_ff_mutex_rd_;
 
-  // s_active_ lets getClassDriver() and the static process() trampoline
-  // reach the last-constructed instance without a singleton.
+  // s_active_ lets the class-driver trampolines and the static process()
+  // trampoline reach the last-constructed instance without a singleton.
   inline static USBAudioDeviceBase* s_active_ = nullptr;
 
   /// Set the USB audio configuration (use begin(cfg) instead).
@@ -910,10 +840,17 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
    *
    *         ESP32 (see USBAudioDeviceESP32) overrides this to an empty
    *         no-op, since its own FreeRTOS task already calls tud_task()
-   *         continuously. */
-  virtual void serviceTinyUSB() {
-    if (!usb_task_active_) tud_task();
-  }
+   *         continuously. TinyUSB-based platforms (USBAudioDeviceTinyUSB)
+   *         override this to pump tud_task() directly -- driving the USB
+   *         stack's event loop is inherently stack-specific and has no
+   *         equivalent on a native-HAL backend, so it is not part of
+   *         USBAudioBackend. */
+  virtual void serviceTinyUSB() = 0;
+
+  /** @brief Returns the backend used for all raw USB-stack calls (TinyUSB
+   *  today, or a future native-HAL backend). Must be overridden by every
+   *  platform subclass; the returned reference must outlive this object. */
+  virtual USBAudioBackend& backend() = 0;
 
   /** @brief Returns the TX audio buffer.  Must be overridden by subclasses. */
   virtual BaseBuffer<uint8_t>& bufferTx() = 0;
@@ -981,7 +918,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
     }
     for (auto& fct : audiod_fct_) fct.sample_rate_tx = rate;
     if (sample_rate_cb_) sample_rate_cb_(rate);
-    sendInterruptNotification(AUDIO_CS_CTRL_SAM_FREQ, 0,
+    sendInterruptNotification(kAudioCsCtrlSamFreq, 0,
                               USBAudio2DescriptorBuilder::ENTITY_CLOCK);
   }
 
@@ -1035,16 +972,16 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
    *  @param entityID  Target entity (Feature Unit or Clock Source). */
   void sendInterruptNotification(uint8_t ctrlSel, uint8_t channel,
                                  uint8_t entityID) {
-    if (!tud_mounted()) return;
+    if (!backend().mounted()) return;
     for (uint8_t i = 0; i < (uint8_t)audiod_fct_.size(); i++) {
       if (audiod_fct_[i].ep_int == 0) continue;
       int_notify_buf_[0] = 0x00;                // bInfo: interface, not vendor
-      int_notify_buf_[1] = AUDIO_CS_REQ_CUR;    // bAttribute: CUR changed
+      int_notify_buf_[1] = kAudioCsReqCur;      // bAttribute: CUR changed
       int_notify_buf_[2] = channel;             // wValue low = CN
       int_notify_buf_[3] = ctrlSel;             // wValue high = CS
       int_notify_buf_[4] = config_.itf_num_ac;  // wIndex low = interface
       int_notify_buf_[5] = entityID;            // wIndex high = entity ID
-      (void)TUSB_EDPT_XFER(0, audiod_fct_[i].ep_int, int_notify_buf_, 6);
+      (void)backend().transfer(0, audiod_fct_[i].ep_int, int_notify_buf_, 6);
       break;
     }
   }
@@ -1056,24 +993,10 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
     return (fn < ctrl_buf_sz_.size()) ? ctrl_buf_sz_[fn] : 64;
   }
 
-  // Returns the OUT software buffer size for a given function number
-  uint16_t getEpOutSwBufSz(uint8_t fn) const {
-    return (fn < ep_out_sw_buf_sz_.size()) ? ep_out_sw_buf_sz_[fn] : 0;
-  }
-
-  // Returns the IN software buffer size for a given function number
-  uint16_t getEpInSwBufSz(uint8_t fn) const {
-    return (fn < ep_in_sw_buf_sz_.size()) ? ep_in_sw_buf_sz_[fn] : 0;
-  }
-
   // Returns the descriptor length for a given function number
   uint16_t getDescLen(uint8_t fn) const {
     return (fn < desc_len_.size()) ? desc_len_[fn] : 0;
   }
-
-  bool isUseLinearBufferRx() const { return config_.use_linear_buffer_rx; }
-
-  bool isUseLinearBufferTx() const { return config_.use_linear_buffer_tx; }
 
   static bool isValidBitsPerSample(uint8_t bps) {
     return bps == 16 || bps == 24 || bps == 32;
@@ -1086,16 +1009,6 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
 
   // Max Bytes for one 1 ms isochronous USB packet.
   uint16_t packetSize() const { return descr_builder.calcMaxPacketSize(); }
-
-  // Total audio FIFO size in bytes.
-  uint16_t fifoSize() const {
-    uint16_t sz = (uint16_t)(packetSize() * config_.fifo_packets);
-    // // Round up to next power of 2 — some tu_fifo implementations use
-    // // idx & (depth-1) for index wrapping, which requires power-of-2 depth.
-    uint16_t p = 256;
-    while (p < sz) p <<= 1;
-    return p;
-  }
 
   // Returns the reset size for audiod_function_t up to and including
   // ctrl_buf_sz
@@ -1118,9 +1031,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
         // return 0, driving the feedback to min_value and causing the host
         // to gradually reduce its send rate until the buffer drains (audible
         // periodic drop every 5-10 s).  Use the platform RX ring buffer level.
-        uint32_t ff_count = isUseLinearBufferRx()
-            ? (uint32_t)bufferRx().available()
-            : tu_fifo_count(&audio->ep_out_ff);
+        uint32_t ff_count = (uint32_t)bufferRx().available();
         // Exponential weighted average keeps the level estimate stable
         audio->feedback.compute.fifo_count.fifo_lvl_avg =
             audio->feedback.compute.fifo_count.fifo_lvl_avg -
@@ -1140,9 +1051,12 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
           audio->feedback.value =
               (nom > drop) ? nom - drop : audio->feedback.min_value;
         }
-        audio->feedback.value =
-            TU_MIN(TU_MAX(audio->feedback.value, audio->feedback.min_value),
-                   audio->feedback.max_value);
+        uint32_t clamped = audio->feedback.value < audio->feedback.min_value
+                              ? audio->feedback.min_value
+                              : audio->feedback.value;
+        audio->feedback.value = clamped > audio->feedback.max_value
+                                    ? audio->feedback.max_value
+                                    : clamped;
       } break;
 
       case AUDIO_FEEDBACK_METHOD_FREQUENCY_POWER_OF_2:
@@ -1156,8 +1070,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
         break;
 
       case AUDIO_FEEDBACK_METHOD_FREQUENCY_FIXED: {
-        uint32_t frame_div =
-            (TUSB_SPEED_FULL == tud_speed_get()) ? 1000u : 8000u;
+        uint32_t frame_div = backend().isFullSpeed() ? 1000u : 8000u;
         audio->feedback.value =
             (audio->feedback.compute.fixed.sample_freq << 16) / frame_div;
       } break;
@@ -1166,15 +1079,19 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
         break;
     }
 
-    if (usbd_edpt_claim(audio->rhport, audio->ep_fb)) {
+    if (backend().claimEndpoint(audio->rhport, audio->ep_fb)) {
       audiod_fb_send(audio);
     }
   }
 
-  // USBD Driver API
+  // USBD Driver API — public so a backend's class-driver registration glue
+  // (e.g. USBAudioBackendTinyUSB.h's trampoline into TinyUSB's
+  // usbd_class_driver_t) can call these without being a member of this
+  // class. A native-HAL backend with no such registration concept would
+  // instead call these directly from its own ISR/init code.
+ public:
   void audiod_init(void) {
     audiod_fct_.resize(getAudioCount());
-    alloc_mutex();
 
     // Initialize control buffers
     for (uint8_t i = 0; i < getAudioCount(); i++) {
@@ -1188,33 +1105,19 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
       // Initialize IN EP — lin_buf_in is the DMA staging buffer (one frame).
       // Audio data flows through bufferTx() (resized in begin()), not ep_in_ff.
       if (isEpInEnabled()) {
-        // Max packet across all supported rates (192 kHz):
-        uint16_t max_pkt = descr_builder.calcPacketSizeForRate(192000);
+        // Max packet across all advertised rates (see kSupportedSampleRates).
+        uint16_t max_pkt = descr_builder.calcPacketSizeForRate(
+            kSupportedSampleRates[kNumSupportedSampleRates - 1]);
         audio->lin_buf_in.resize(max_pkt);
       }
-      // Initialize OUT EP — always set up both FIFO and linear buffer.
-      // The FIFO is needed by TinyUSB internals even in linear buffer mode.
+      // Initialize OUT EP linear (DMA staging) buffer.
       if (isEpOutEnabled()) {
-        audio->ep_out_sw_buf.resize(getEpOutSwBufSz(i));
-        TUSB_FIFO_CONFIG(&audio->ep_out_ff, audio->ep_out_sw_buf.data(),
-                         getEpOutSwBufSz(i), true);
-        if (isFifoMutexEnabled()) {
-          tu_fifo_config_mutex(&audio->ep_out_ff, NULL,
-                               osal_mutex_create(&ep_out_ff_mutex_rd_[i]));
-        }
-        uint16_t max_pkt = descr_builder.calcPacketSizeForRate(192000);
+        uint16_t max_pkt = descr_builder.calcPacketSizeForRate(
+            kSupportedSampleRates[kNumSupportedSampleRates - 1]);
         audio->lin_buf_out.resize(max_pkt);
       }
       if (isFeedbackEpEnabled()) {
         audio->fb_buf.resize(1);  // one uint32_t = 4 bytes of feedback data
-      }
-    }
-  }
-
-  void alloc_mutex() {
-    if (isFifoMutexEnabled()) {
-      if (isEpOutEnabled()) {
-        ep_out_ff_mutex_rd_.resize(getAudioCount());
       }
     }
   }
@@ -1229,93 +1132,90 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
       audiod_function_t* audio = &audiod_fct_[i];
       memset(audio, 0, getResetSize());
       if (isEpInEnabled()) {
-        tu_fifo_clear(&audio->ep_in_ff);
         bufferTx().reset();
       }
       if (isEpOutEnabled()) {
-        tu_fifo_clear(&audio->ep_out_ff);
         bufferRx().reset();
       }
     }
   }
 
-  uint16_t audiod_open(uint8_t rhport, tusb_desc_interface_t const* itf_desc,
-                       uint16_t max_len) {
+  uint16_t audiod_open(uint8_t rhport, UsbInterfaceDescriptorView const& itf_desc,
+                       uint8_t const* raw_desc, uint16_t max_len) {
     (void)max_len;
-    TU_VERIFY(TUSB_CLASS_AUDIO == itf_desc->bInterfaceClass &&
-              AUDIO_SUBCLASS_CONTROL == itf_desc->bInterfaceSubClass);
-    TU_VERIFY(itf_desc->bInterfaceProtocol == AUDIO_INT_PROTOCOL_CODE_V2);
-    TU_ASSERT(itf_desc->bNumEndpoints <= 1);
-    if (itf_desc->bNumEndpoints == 1) {
-      TU_ASSERT(isInterruptEpEnabled());
-    }
-    TU_VERIFY(itf_desc->bAlternateSetting == 0);
+    if (!(kUsbClassAudio == itf_desc.bInterfaceClass &&
+          kAudioSubclassControl == itf_desc.bInterfaceSubClass))
+      return 0;
+    if (itf_desc.bInterfaceProtocol != kAudioIntProtocolCodeV2) return 0;
+    if (itf_desc.bNumEndpoints > 1) return 0;
+    if (itf_desc.bNumEndpoints == 1 && !isInterruptEpEnabled()) return 0;
+    if (itf_desc.bAlternateSetting != 0) return 0;
     uint8_t i;
     for (i = 0; i < getAudioCount(); i++) {
       if (!audiod_fct_[i].p_desc) {
-        audiod_fct_[i].p_desc = (uint8_t const*)itf_desc;
+        audiod_fct_[i].p_desc = raw_desc;
         audiod_fct_[i].rhport = rhport;
         audiod_fct_[i].desc_length = getDescLen(i);
         // audiod_reset() zeroes ctrl_buf_sz via memset — restore it so
-        // tud_control_xfer() receives the correct buffer length.
+        // controlTransfer() receives the correct buffer length.
         audiod_fct_[i].ctrl_buf_sz = getCtrlBufSz(i);
         if (isEpInEnabled() || isEpOutEnabled() || isFeedbackEpEnabled()) {
           uint8_t ep_in = 0, ep_out = 0, ep_fb = 0;
           uint16_t ep_in_size = 0, ep_out_size = 0;
-          tusb_desc_endpoint_t const* desc_ep_out = nullptr;
+          UsbEndpointDescriptorView desc_ep_out{};
+          bool has_ep_out_view = false;
           uint8_t const* p_desc = audiod_fct_[i].p_desc;
           uint8_t const* p_desc_end =
-              p_desc + audiod_fct_[i].desc_length - TUD_AUDIO_DESC_IAD_LEN;
+              p_desc + audiod_fct_[i].desc_length - kAudioDescIadLen;
           while (p_desc_end - p_desc > 0) {
-            if (tu_desc_type(p_desc) == TUSB_DESC_ENDPOINT) {
-              tusb_desc_endpoint_t const* desc_ep =
-                  (tusb_desc_endpoint_t const*)p_desc;
-              if (desc_ep->bmAttributes.xfer == TUSB_XFER_ISOCHRONOUS) {
-                if (isFeedbackEpEnabled() && desc_ep->bmAttributes.usage == 1) {
-                  ep_fb = desc_ep->bEndpointAddress;
+            if (descType(p_desc) == kUsbDescTypeEndpoint) {
+              UsbEndpointDescriptorView desc_ep = decodeEndpoint(p_desc);
+              if (desc_ep.xferType == UsbXferType::Isochronous) {
+                if (isFeedbackEpEnabled() && desc_ep.usage == 1) {
+                  ep_fb = desc_ep.bEndpointAddress;
                 }
-                if (desc_ep->bmAttributes.usage == 0) {
-                  if (isEpInEnabled() &&
-                      tu_edpt_dir(desc_ep->bEndpointAddress) == TUSB_DIR_IN) {
-                    ep_in = desc_ep->bEndpointAddress;
-                    ep_in_size =
-                        TU_MAX(tu_edpt_packet_size(desc_ep), ep_in_size);
+                if (desc_ep.usage == 0) {
+                  if (isEpInEnabled() && desc_ep.direction() == UsbDir::In) {
+                    ep_in = desc_ep.bEndpointAddress;
+                    uint16_t sz = desc_ep.packetSize();
+                    ep_in_size = sz > ep_in_size ? sz : ep_in_size;
                   } else if (isEpOutEnabled() &&
-                             tu_edpt_dir(desc_ep->bEndpointAddress) ==
-                                 TUSB_DIR_OUT) {
-                    ep_out = desc_ep->bEndpointAddress;
-                    ep_out_size =
-                        TU_MAX(tu_edpt_packet_size(desc_ep), ep_out_size);
+                             desc_ep.direction() == UsbDir::Out) {
+                    ep_out = desc_ep.bEndpointAddress;
+                    uint16_t sz = desc_ep.packetSize();
+                    ep_out_size = sz > ep_out_size ? sz : ep_out_size;
                     desc_ep_out = desc_ep;
+                    has_ep_out_view = true;
                   }
                 }
               }
             }
-            p_desc = tu_desc_next(p_desc);
+            p_desc = descNext(p_desc);
           }
           if (isEpInEnabled() && ep_in) {
-            bool alloc_ok = usbd_edpt_iso_alloc(rhport, ep_in, ep_in_size);
+            bool alloc_ok = backend().isoAllocEndpoint(rhport, ep_in, ep_in_size);
             LOGD("iso_alloc IN ep=0x%02x sz=%u: %s", ep_in, ep_in_size,
                  alloc_ok ? "OK" : "FAIL");
           }
           if (isEpOutEnabled() && ep_out) {
-            bool alloc_ok = usbd_edpt_iso_alloc(rhport, ep_out, ep_out_size);
+            bool alloc_ok = backend().isoAllocEndpoint(rhport, ep_out, ep_out_size);
             LOGD("iso_alloc OUT ep=0x%02x sz=%u: %s", ep_out, ep_out_size,
                  alloc_ok ? "OK" : "FAIL");
-#ifdef TUP_DCD_EDPT_ISO_ALLOC
-            // Pre-activate during enumeration (no isochronous traffic).
-            // Cannot be done in SET_INTERFACE because iso_activate blocks
-            // on ESP32's DWC2 when the host is already sending.
-            // release clears the busy flag so XFER can arm later.
-            if (desc_ep_out) {
-              usbd_edpt_iso_activate(rhport, desc_ep_out);
-              usbd_edpt_release(rhport, ep_out);
-              LOGD("iso_activate+release OUT: done");
+            if (has_ep_out_view) audiod_fct_[i].ep_out_view = desc_ep_out;
+            if (backend().usesIsoAlloc() && has_ep_out_view) {
+              // Pre-activate during enumeration (no isochronous traffic).
+              // Cannot be done in SET_INTERFACE because iso_activate blocks
+              // on ESP32's DWC2 when the host is already sending. Activation
+              // itself resets the endpoint's busy/claimed state to a known
+              // (not busy) baseline, so nothing further is needed here for
+              // the first open -- see closeEpOut() for why re-activation is
+              // also needed on every subsequent re-open.
+              backend().isoActivateEndpoint(rhport, desc_ep_out);
+              LOGD("iso_activate OUT: done");
             }
-#endif
           }
           if (isFeedbackEpEnabled() && ep_fb) {
-            usbd_edpt_iso_alloc(rhport, ep_fb, 4);
+            backend().isoAllocEndpoint(rhport, ep_fb, 4);
           }
         }
         // Scan for bclock_id_tx (clock entity referenced by the USB-streaming
@@ -1327,73 +1227,66 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
         if (isEpInEnabled() || isEpOutEnabled()) {
           uint8_t const* p_desc = audiod_fct_[i].p_desc;
           uint8_t const* p_desc_end =
-              p_desc + audiod_fct_[i].desc_length - TUD_AUDIO_DESC_IAD_LEN;
+              p_desc + audiod_fct_[i].desc_length - kAudioDescIadLen;
           while (p_desc_end - p_desc > 0) {
-            if (tu_desc_type(p_desc) == TUSB_DESC_ENDPOINT) {
+            if (descType(p_desc) == kUsbDescTypeEndpoint) {
               if (isEpInEnabled()) {
-                tusb_desc_endpoint_t const* desc_ep =
-                    (tusb_desc_endpoint_t const*)p_desc;
-                if (desc_ep->bmAttributes.xfer == TUSB_XFER_ISOCHRONOUS &&
-                    desc_ep->bmAttributes.usage == 0 &&
-                    tu_edpt_dir(desc_ep->bEndpointAddress) == TUSB_DIR_IN) {
-                  audiod_fct_[i].interval_tx = desc_ep->bInterval;
+                UsbEndpointDescriptorView desc_ep = decodeEndpoint(p_desc);
+                if (desc_ep.xferType == UsbXferType::Isochronous &&
+                    desc_ep.usage == 0 && desc_ep.direction() == UsbDir::In) {
+                  audiod_fct_[i].interval_tx = desc_ep.bInterval;
                 }
               }
-            } else if (tu_desc_type(p_desc) == TUSB_DESC_CS_INTERFACE) {
-              if (tu_desc_subtype(p_desc) ==
-                  AUDIO_CS_AC_INTERFACE_OUTPUT_TERMINAL) {
-                if (tu_unaligned_read16(p_desc + 4) ==
-                    AUDIO_TERM_TYPE_USB_STREAMING) {
+            } else if (descType(p_desc) == kUsbDescTypeCsInterface) {
+              if (descSubtype(p_desc) == kAudioCsAcOutputTerminal) {
+                if (descU16(p_desc + 4) == kAudioTermTypeUsbStreaming) {
                   audiod_fct_[i].bclock_id_tx = p_desc[8];  // OT bCSourceID
                 }
-              } else if (tu_desc_subtype(p_desc) ==
-                         AUDIO_CS_AC_INTERFACE_INPUT_TERMINAL) {
-                if (tu_unaligned_read16(p_desc + 4) ==
-                    AUDIO_TERM_TYPE_USB_STREAMING) {
+              } else if (descSubtype(p_desc) == kAudioCsAcInputTerminal) {
+                if (descU16(p_desc + 4) == kAudioTermTypeUsbStreaming) {
                   audiod_fct_[i].bclock_id_tx = p_desc[7];  // IT bCSourceID
                 }
               }
             }
-            p_desc = tu_desc_next(p_desc);
+            p_desc = descNext(p_desc);
           }
         }
 
         if (isInterruptEpEnabled()) {
           uint8_t const* p_desc = audiod_fct_[i].p_desc;
           uint8_t const* p_desc_end =
-              p_desc + audiod_fct_[i].desc_length - TUD_AUDIO_DESC_IAD_LEN;
+              p_desc + audiod_fct_[i].desc_length - kAudioDescIadLen;
           while (p_desc_end - p_desc > 0) {
-            if (tu_desc_type(p_desc) == TUSB_DESC_ENDPOINT) {
-              tusb_desc_endpoint_t const* desc_ep =
-                  (tusb_desc_endpoint_t const*)p_desc;
-              uint8_t const ep_addr = desc_ep->bEndpointAddress;
-              if (tu_edpt_dir(ep_addr) == TUSB_DIR_IN &&
-                  desc_ep->bmAttributes.xfer == TUSB_XFER_INTERRUPT) {
-                if (usbd_edpt_open(audiod_fct_[i].rhport, desc_ep)) {
+            if (descType(p_desc) == kUsbDescTypeEndpoint) {
+              UsbEndpointDescriptorView desc_ep = decodeEndpoint(p_desc);
+              uint8_t const ep_addr = desc_ep.bEndpointAddress;
+              if (desc_ep.direction() == UsbDir::In &&
+                  desc_ep.xferType == UsbXferType::Interrupt) {
+                if (backend().openEndpoint(audiod_fct_[i].rhport, desc_ep)) {
                   audiod_fct_[i].ep_int = ep_addr;
                 } else {
                   LOGE("  UAC2: interrupt EP 0x%02x open failed", ep_addr);
-                        
+
                 }
               }
             }
-            p_desc = tu_desc_next(p_desc);
+            p_desc = descNext(p_desc);
           }
         }
         audiod_fct_[i].mounted = true;
         break;
       }
     }
-    TU_ASSERT(i < getAudioCount());
-    uint16_t drv_len = audiod_fct_[i].desc_length - TUD_AUDIO_DESC_IAD_LEN;
+    if (i >= getAudioCount()) return 0;
+    uint16_t drv_len = audiod_fct_[i].desc_length - kAudioDescIadLen;
     return drv_len;
   }
 
   bool audiod_control_xfer_cb(uint8_t rhport, uint8_t stage,
-                              tusb_control_request_t const* request) {
-    if (stage == CONTROL_STAGE_SETUP) {
+                              UsbSetupPacket const& request) {
+    if (stage == kControlStageSetup) {
       return audiod_control_request(rhport, request);
-    } else if (stage == CONTROL_STAGE_DATA) {
+    } else if (stage == kControlStageData) {
       return audiod_control_complete(rhport, request);
     }
     return true;
@@ -1401,33 +1294,33 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
   // Invoked when class request DATA stage is finished.
   // return false to stall control EP (e.g Host send non-sense DATA)
   bool audiod_control_complete(uint8_t rhport,
-                               tusb_control_request_t const* p_request) {
+                               UsbSetupPacket const& p_request) {
     // Handle audio class specific set requests
-    if (p_request->bmRequestType_bit.type == TUSB_REQ_TYPE_CLASS &&
-        p_request->bmRequestType_bit.direction == TUSB_DIR_OUT) {
+    if (p_request.type() == UsbSetupPacket::Type::Class &&
+        p_request.direction() == UsbDir::Out) {
       uint8_t func_id;
 
-      switch (p_request->bmRequestType_bit.recipient) {
-        case TUSB_REQ_RCPT_INTERFACE: {
-          uint8_t itf = TU_U16_LOW(p_request->wIndex);
-          uint8_t entityID = TU_U16_HIGH(p_request->wIndex);
+      switch (p_request.recipient()) {
+        case UsbSetupPacket::Recipient::Interface: {
+          uint8_t itf = u16Low(p_request.wIndex);
+          uint8_t entityID = u16High(p_request.wIndex);
 
           if (entityID != 0) {
             func_id = 0;
-            uint8_t ctrlSel = TU_U16_HIGH(p_request->wValue);
+            uint8_t ctrlSel = u16High(p_request.wValue);
             uint8_t* cb = audiod_fct_[func_id].ctrl_buf.data();
 
             // ── Clock Source SET_CUR (sample rate) ──────────────
             if (entityID == USBAudio2DescriptorBuilder::ENTITY_CLOCK &&
-                ctrlSel == AUDIO_CS_CTRL_SAM_FREQ &&
-                p_request->bRequest == AUDIO_CS_REQ_CUR) {
-              setSampleRate(tu_unaligned_read32(cb));
+                ctrlSel == kAudioCsCtrlSamFreq &&
+                p_request.bRequest == kAudioCsReqCur) {
+              setSampleRate(descU32(cb));
             }
 
             // ── Feature Unit SET_CUR (mute / volume) ────────────
             if (isFeatureUnit(entityID) &&
-                p_request->bRequest == AUDIO_CS_REQ_CUR) {
-              uint8_t channel = TU_U16_LOW(p_request->wValue);
+                p_request.bRequest == kAudioCsReqCur) {
+              uint8_t channel = u16Low(p_request.wValue);
               if (ctrlSel == AUDIO_FU_CTRL_MUTE) {
                 setMute(cb[0] != 0, channel);
               } else if (ctrlSel == AUDIO_FU_CTRL_VOLUME) {
@@ -1444,7 +1337,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
           } else {
             // Find index of audio driver structure and verify interface really
             // exists
-            TU_VERIFY(audiod_verify_itf_exists(itf, &func_id));
+            if (!audiod_verify_itf_exists(itf, &func_id)) return false;
 
             // Invoke callback
             if (tud_audio_set_req_itf_cb_) {
@@ -1455,11 +1348,11 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
           }
         } break;
 
-        case TUSB_REQ_RCPT_ENDPOINT: {
-          uint8_t ep = TU_U16_LOW(p_request->wIndex);
+        case UsbSetupPacket::Recipient::Endpoint: {
+          uint8_t ep = u16Low(p_request.wIndex);
 
           // Check if entity is present and get corresponding driver index
-          TU_VERIFY(audiod_verify_ep_exists(ep, &func_id));
+          if (!audiod_verify_ep_exists(ep, &func_id)) return false;
 
           // Invoke callback
           if (tud_audio_set_req_ep_cb_) {
@@ -1469,7 +1362,6 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
         } break;
         // Unknown/Unsupported recipient
         default:
-          TU_BREAKPOINT();
           return false;
       }
     }
@@ -1477,7 +1369,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
   }
 
   /// TODO refactor control request handling to separate function and reduce nesting
-  bool audiod_xfer_cb(uint8_t rhport, uint8_t ep_addr, xfer_result_t result,
+  bool audiod_xfer_cb(uint8_t rhport, uint8_t ep_addr, UsbXferResult result,
                       uint32_t xferred_bytes) {
     (void)result;
     (void)xferred_bytes;
@@ -1505,35 +1397,21 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
           uint16_t n = (uint16_t)bufferTx().readArray(dst, frame_bytes);
           tx_fifo_read_total_ += n;
           if (n < frame_bytes) memset(dst + n, 0, frame_bytes - n);
-          (void)TUSB_EDPT_XFER(rhport, audio->ep_in, dst, frame_bytes);
+          (void)backend().transfer(rhport, audio->ep_in, dst, frame_bytes);
         }
         return true;
       }
       if (isEpOutEnabled() && audio->ep_out == ep_addr) {
         xfer_cb_rx_count_ = xfer_cb_rx_count_ + 1;
         rx_total_bytes_ += xferred_bytes;
-        if (isUseLinearBufferRx()) {
-          // Copy DMA-received data into the platform buffer, re-arm DMA.
-          if (xferred_bytes > 0)
-            bufferRx().writeArray(audio->lin_buf_out.data(),
-                                  (int)xferred_bytes);
-          if (rx_done_cb_)
-            rx_done_cb_(this, rhport, audio, (uint16_t)xferred_bytes);
-          (void)TUSB_EDPT_XFER(rhport, audio->ep_out, audio->lin_buf_out.data(),
-                               audio->ep_out_sz);
-        } else {
-          // FIFO mode: data is already in ep_out_ff from DMA, copy to buffer
-          if (xferred_bytes > 0) {
-            uint8_t tmp[768];
-            uint16_t n =
-                tu_fifo_read_n(&audio->ep_out_ff, tmp, (uint16_t)xferred_bytes);
-            if (n > 0) bufferRx().writeArray(tmp, n);
-          }
-          if (rx_done_cb_)
-            rx_done_cb_(this, rhport, audio, (uint16_t)xferred_bytes);
-          (void)TUSB_EDPT_XFER_FIFO(rhport, audio->ep_out, &audio->ep_out_ff,
-                                    audio->ep_out_sz);
-        }
+        // Copy DMA-received data into the platform buffer, re-arm DMA.
+        if (xferred_bytes > 0)
+          bufferRx().writeArray(audio->lin_buf_out.data(),
+                                (int)xferred_bytes);
+        if (rx_done_cb_)
+          rx_done_cb_(this, rhport, audio, (uint16_t)xferred_bytes);
+        (void)backend().transfer(rhport, audio->ep_out,
+                                 audio->lin_buf_out.data(), audio->ep_out_sz);
         return true;
       }
       if (isFeedbackEpEnabled() && audio->ep_fb == ep_addr) {
@@ -1545,15 +1423,14 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
     return false;
   }
 
-  TU_ATTR_FAST_FUNC void audiod_sof_isr(uint8_t rhport, uint32_t frame_count) {
+  void audiod_sof_isr(uint8_t rhport, uint32_t frame_count) {
     (void)rhport;
     (void)frame_count;
     if (isEpOutEnabled() && isFeedbackEpEnabled()) {
       for (uint8_t i = 0; i < getAudioCount(); i++) {
         audiod_function_t* audio = &audiod_fct_[i];
         if (audio->ep_fb != 0) {
-          uint8_t const hs_adjust =
-              (TUSB_SPEED_HIGH == tud_speed_get()) ? 3 : 0;
+          uint8_t const hs_adjust = backend().isHighSpeed() ? 3 : 0;
           uint32_t const interval =
               1UL << (audio->feedback.frame_shift - hs_adjust);
           if (0 == (frame_count & (interval - 1))) {
@@ -1565,23 +1442,24 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
     }
   }
 
+ protected:
   // ── Clock Source GET handler ────────────────────────────────────────────
   bool handleClockSourceGet(uint8_t rhport,
-                            tusb_control_request_t const* p_request,
+                            UsbSetupPacket const& p_request,
                             uint8_t* cb) {
-    uint8_t ctrlSel = TU_U16_HIGH(p_request->wValue);
-    if (ctrlSel == AUDIO_CS_CTRL_CLK_VALID &&
-        p_request->bRequest == AUDIO_CS_REQ_CUR) {
+    uint8_t ctrlSel = u16High(p_request.wValue);
+    if (ctrlSel == kAudioCsCtrlClkValid &&
+        p_request.bRequest == kAudioCsReqCur) {
       cb[0] = 1;
-      return tud_control_xfer(rhport, p_request, cb, 1);
+      return backend().controlTransfer(rhport, p_request, cb, 1);
     }
-    if (ctrlSel == AUDIO_CS_CTRL_SAM_FREQ) {
+    if (ctrlSel == kAudioCsCtrlSamFreq) {
       uint32_t rate = (uint32_t)config_.sample_rate;
-      if (p_request->bRequest == AUDIO_CS_REQ_CUR) {
+      if (p_request.bRequest == kAudioCsReqCur) {
         memcpy(cb, &rate, 4);
-        return tud_control_xfer(rhport, p_request, cb, 4);
+        return backend().controlTransfer(rhport, p_request, cb, 4);
       }
-      if (p_request->bRequest == AUDIO_CS_REQ_RANGE) {
+      if (p_request.bRequest == kAudioCsReqRange) {
         if (config_.enable_multi_sample_rate) {
           // List all supported discrete rates
           uint16_t cnt = kNumSupportedSampleRates;
@@ -1593,8 +1471,9 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
             memcpy(cb + 2 + i * 12 + 4, &r, 4);
             memcpy(cb + 2 + i * 12 + 8, &z, 4);
           }
-          return tud_control_xfer(rhport, p_request, cb,
-                                  (uint16_t)(2 + kNumSupportedSampleRates * 12));
+          return backend().controlTransfer(
+              rhport, p_request, cb,
+              (uint16_t)(2 + kNumSupportedSampleRates * 12));
         } else {
           // Single fixed rate from config
           uint16_t cnt = 1;
@@ -1603,7 +1482,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
           memcpy(cb + 2,  &rate, 4);  // dMIN
           memcpy(cb + 6,  &rate, 4);  // dMAX
           memcpy(cb + 10, &z,    4);  // dRES = 0 (fixed)
-          return tud_control_xfer(rhport, p_request, cb, 14);
+          return backend().controlTransfer(rhport, p_request, cb, 14);
         }
       }
     }
@@ -1612,29 +1491,29 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
 
   // ── Feature Unit GET handler ──────────────────────────────────────────
   bool handleFeatureUnitGet(uint8_t rhport,
-                            tusb_control_request_t const* p_request,
+                            UsbSetupPacket const& p_request,
                             uint8_t* cb) {
-    uint8_t ctrlSel = TU_U16_HIGH(p_request->wValue);
-    uint8_t channel = TU_U16_LOW(p_request->wValue);
+    uint8_t ctrlSel = u16High(p_request.wValue);
+    uint8_t channel = u16Low(p_request.wValue);
     if (ctrlSel == AUDIO_FU_CTRL_MUTE &&
-        p_request->bRequest == AUDIO_CS_REQ_CUR) {
+        p_request.bRequest == kAudioCsReqCur) {
       cb[0] = isMute(channel) ? 1 : 0;
-      return tud_control_xfer(rhport, p_request, cb, 1);
+      return backend().controlTransfer(rhport, p_request, cb, 1);
     }
     if (ctrlSel == AUDIO_FU_CTRL_VOLUME) {
-      if (p_request->bRequest == AUDIO_CS_REQ_CUR) {
+      if (p_request.bRequest == kAudioCsReqCur) {
         int16_t v = floatToUac2(volume(channel));
         memcpy(cb, &v, 2);
-        return tud_control_xfer(rhport, p_request, cb, 2);
+        return backend().controlTransfer(rhport, p_request, cb, 2);
       }
-      if (p_request->bRequest == AUDIO_CS_REQ_RANGE) {
+      if (p_request.bRequest == kAudioCsReqRange) {
         uint16_t cnt = 1;
         int16_t vmin = -25600, vmax = 0, vres = 256;
         memcpy(cb + 0, &cnt, 2);
         memcpy(cb + 2, &vmin, 2);
         memcpy(cb + 4, &vmax, 2);
         memcpy(cb + 6, &vres, 2);
-        return tud_control_xfer(rhport, p_request, cb, 8);
+        return backend().controlTransfer(rhport, p_request, cb, 8);
       }
     }
     return false;
@@ -1642,93 +1521,93 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
 
   // ── Entity request handler (Clock Source + Feature Unit) ──────────────
   bool handleEntityRequest(uint8_t rhport,
-                           tusb_control_request_t const* p_request,
+                           UsbSetupPacket const& p_request,
                            uint8_t entityID) {
     uint8_t func_id = 0;
     uint8_t* cb = audiod_fct_[func_id].ctrl_buf.data();
-    bool is_get = (p_request->bmRequestType_bit.direction == TUSB_DIR_IN);
+    bool is_get = (p_request.direction() == UsbDir::In);
 
     if (entityID == USBAudio2DescriptorBuilder::ENTITY_CLOCK) {
       if (is_get && handleClockSourceGet(rhport, p_request, cb)) return true;
       // SET — schedule data receive for audiod_control_complete()
-      return tud_control_xfer(rhport, p_request, cb,
-                              audiod_fct_[func_id].ctrl_buf_sz);
+      return backend().controlTransfer(rhport, p_request, cb,
+                                       audiod_fct_[func_id].ctrl_buf_sz);
     }
 
     if (isFeatureUnit(entityID)) {
       if (is_get && handleFeatureUnitGet(rhport, p_request, cb)) return true;
       // SET — schedule data receive
-      return tud_control_xfer(rhport, p_request, cb,
-                              audiod_fct_[func_id].ctrl_buf_sz);
+      return backend().controlTransfer(rhport, p_request, cb,
+                                       audiod_fct_[func_id].ctrl_buf_sz);
     }
 
     // Unknown entity — try generic verify
-    uint8_t itf = TU_U16_LOW(p_request->wIndex);
+    uint8_t itf = u16Low(p_request.wIndex);
     if (!audiod_verify_entity_exists(itf, entityID, &func_id)) {
-      tud_control_status(rhport, p_request);
+      backend().controlStatus(rhport, p_request);
       return true;
     }
     if (is_get && req_entity_cb_) return req_entity_cb_(this, func_id);
-    return tud_control_xfer(rhport, p_request,
-                            audiod_fct_[func_id].ctrl_buf.data(),
-                            audiod_fct_[func_id].ctrl_buf_sz);
+    return backend().controlTransfer(rhport, p_request,
+                                     audiod_fct_[func_id].ctrl_buf.data(),
+                                     audiod_fct_[func_id].ctrl_buf_sz);
   }
 
   // ── Interface request handler (entityID == 0) ─────────────────────────
   bool handleInterfaceRequest(uint8_t rhport,
-                              tusb_control_request_t const* p_request) {
-    uint8_t itf = TU_U16_LOW(p_request->wIndex);
+                              UsbSetupPacket const& p_request) {
+    uint8_t itf = u16Low(p_request.wIndex);
     uint8_t func_id;
-    TU_VERIFY(audiod_verify_itf_exists(itf, &func_id));
-    if (p_request->bmRequestType_bit.direction == TUSB_DIR_IN) {
+    if (!audiod_verify_itf_exists(itf, &func_id)) return false;
+    if (p_request.direction() == UsbDir::In) {
       if (get_req_itf_cb_) return get_req_itf_cb_(this, rhport, p_request);
       return false;
     }
-    return tud_control_xfer(rhport, p_request,
-                            audiod_fct_[func_id].ctrl_buf.data(),
-                            audiod_fct_[func_id].ctrl_buf_sz);
+    return backend().controlTransfer(rhport, p_request,
+                                     audiod_fct_[func_id].ctrl_buf.data(),
+                                     audiod_fct_[func_id].ctrl_buf_sz);
   }
 
   // ── Endpoint request handler ──────────────────────────────────────────
   bool handleEndpointRequest(uint8_t rhport,
-                             tusb_control_request_t const* p_request) {
-    uint8_t ep = TU_U16_LOW(p_request->wIndex);
+                             UsbSetupPacket const& p_request) {
+    uint8_t ep = u16Low(p_request.wIndex);
     uint8_t func_id;
-    TU_VERIFY(audiod_verify_ep_exists(ep, &func_id));
-    if (p_request->bmRequestType_bit.direction == TUSB_DIR_IN) {
+    if (!audiod_verify_ep_exists(ep, &func_id)) return false;
+    if (p_request.direction() == UsbDir::In) {
       if (get_req_ep_cb_) return get_req_ep_cb_(this, rhport, p_request);
       return false;
     }
-    return tud_control_xfer(rhport, p_request,
-                            audiod_fct_[func_id].ctrl_buf.data(),
-                            audiod_fct_[func_id].ctrl_buf_sz);
+    return backend().controlTransfer(rhport, p_request,
+                                     audiod_fct_[func_id].ctrl_buf.data(),
+                                     audiod_fct_[func_id].ctrl_buf_sz);
   }
 
   // ── Main control request dispatcher ───────────────────────────────────
   bool audiod_control_request(uint8_t rhport,
-                              tusb_control_request_t const* p_request) {
-    if (p_request->bmRequestType_bit.type == TUSB_REQ_TYPE_STANDARD) {
-      switch (p_request->bRequest) {
-        case TUSB_REQ_GET_INTERFACE:
+                              UsbSetupPacket const& p_request) {
+    if (p_request.type() == UsbSetupPacket::Type::Standard) {
+      switch (p_request.bRequest) {
+        case (uint8_t)UsbStdRequest::GetInterface:
           return audiod_get_interface(rhport, p_request);
-        case TUSB_REQ_SET_INTERFACE:
+        case (uint8_t)UsbStdRequest::SetInterface:
           return audiod_set_interface(rhport, p_request);
-        case TUSB_REQ_CLEAR_FEATURE:
+        case (uint8_t)UsbStdRequest::ClearFeature:
           return true;
         default:
           return false;
       }
     }
 
-    if (p_request->bmRequestType_bit.type == TUSB_REQ_TYPE_CLASS) {
-      switch (p_request->bmRequestType_bit.recipient) {
-        case TUSB_REQ_RCPT_INTERFACE: {
-          uint8_t entityID = TU_U16_HIGH(p_request->wIndex);
+    if (p_request.type() == UsbSetupPacket::Type::Class) {
+      switch (p_request.recipient()) {
+        case UsbSetupPacket::Recipient::Interface: {
+          uint8_t entityID = u16High(p_request.wIndex);
           return (entityID != 0)
                      ? handleEntityRequest(rhport, p_request, entityID)
                      : handleInterfaceRequest(rhport, p_request);
         }
-        case TUSB_REQ_RCPT_ENDPOINT:
+        case UsbSetupPacket::Recipient::Endpoint:
           return handleEndpointRequest(rhport, p_request);
         default:
           return false;
@@ -1747,16 +1626,16 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
       // Look for the correct driver by checking if the unique standard AC
       // interface number fits
       if (audiod_fct_[i].p_desc &&
-          ((tusb_desc_interface_t const*)audiod_fct_[i].p_desc)
-                  ->bInterfaceNumber == itf) {
+          decodeInterface(audiod_fct_[i].p_desc).bInterfaceNumber == itf) {
         // Get pointers after class specific AC descriptors and end of AC
         // descriptors - entities are defined in between
         uint8_t const* p_desc =
-            tu_desc_next(audiod_fct_[i].p_desc);  // Points to CS AC descriptor
-        uint8_t const* p_desc_end =
-            ((audio_desc_cs_ac_interface_t const*)p_desc)->wTotalLength +
-            p_desc;
-        p_desc = tu_desc_next(p_desc);  // Get past CS AC descriptor
+            descNext(audiod_fct_[i].p_desc);  // Points to CS AC descriptor
+        // AC interface header wTotalLength lives at byte offset 6 (UAC2
+        // Table 4-5: bLength,bDescriptorType,bDescriptorSubType,bcdADC(2),
+        // bCategory,wTotalLength(2),bmControls).
+        uint8_t const* p_desc_end = descU16(p_desc + 6) + p_desc;
+        p_desc = descNext(p_desc);  // Get past CS AC descriptor
 
         // Condition modified from p_desc < p_desc_end to prevent gcc>=12
         // strict-overflow warning
@@ -1766,7 +1645,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
             *func_id = i;
             return true;
           }
-          p_desc = tu_desc_next(p_desc);
+          p_desc = descNext(p_desc);
         }
       }
     }
@@ -1782,18 +1661,18 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
             audiod_fct_[i].p_desc + audiod_fct_[i].desc_length;
 
         // Advance past AC descriptors - EP we look for are streaming EPs
-        uint8_t const* p_desc = tu_desc_next(audiod_fct_[i].p_desc);
-        p_desc += ((audio_desc_cs_ac_interface_t const*)p_desc)->wTotalLength;
+        uint8_t const* p_desc = descNext(audiod_fct_[i].p_desc);
+        p_desc += descU16(p_desc + 6);  // AC header wTotalLength, see above
 
         // Condition modified from p_desc < p_desc_end to prevent gcc>=12
         // strict-overflow warning
         while (p_desc_end - p_desc > 0) {
-          if (tu_desc_type(p_desc) == TUSB_DESC_ENDPOINT &&
-              ((tusb_desc_endpoint_t const*)p_desc)->bEndpointAddress == ep) {
+          if (descType(p_desc) == kUsbDescTypeEndpoint &&
+              decodeEndpoint(p_desc).bEndpointAddress == ep) {
             *func_id = i;
             return true;
           }
-          p_desc = tu_desc_next(p_desc);
+          p_desc = descNext(p_desc);
         }
       }
     }
@@ -1808,17 +1687,16 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
         uint8_t const* p_desc = audiod_fct_[i].p_desc;
         uint8_t const* p_desc_end = audiod_fct_[i].p_desc +
                                     audiod_fct_[i].desc_length -
-                                    TUD_AUDIO_DESC_IAD_LEN;
+                                    kAudioDescIadLen;
         // Condition modified from p_desc < p_desc_end to prevent gcc>=12
         // strict-overflow warning
         while (p_desc_end - p_desc > 0) {
-          if (tu_desc_type(p_desc) == TUSB_DESC_INTERFACE &&
-              ((tusb_desc_interface_t const*)audiod_fct_[i].p_desc)
-                      ->bInterfaceNumber == itf) {
+          if (descType(p_desc) == kUsbDescTypeInterface &&
+              decodeInterface(audiod_fct_[i].p_desc).bInterfaceNumber == itf) {
             *func_id = i;
             return true;
           }
-          p_desc = tu_desc_next(p_desc);
+          p_desc = descNext(p_desc);
         }
       }
     }
@@ -1834,26 +1712,25 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
     if (audio->sample_rate_tx == 0)
       audio->sample_rate_tx = (uint32_t)config_.sample_rate;
 
-    p_desc = tu_desc_next(p_desc);  // Exclude standard AS interface descriptor
-                                    // of current alternate interface descriptor
+    p_desc = descNext(p_desc);  // Exclude standard AS interface descriptor
+                                // of current alternate interface descriptor
 
     // Look for a Class-Specific AS Interface Descriptor(4.9.2) to verify format
-    // type and format and also to get number of physical channels
-    if (tu_desc_type(p_desc) == TUSB_DESC_CS_INTERFACE &&
-        tu_desc_subtype(p_desc) == AUDIO_CS_AS_INTERFACE_AS_GENERAL) {
-      audio->n_channels_tx =
-          ((audio_desc_cs_as_interface_t const*)p_desc)->bNrChannels;
-      audio->format_type_tx =
-          (audio_format_type_t)(((audio_desc_cs_as_interface_t const*)p_desc)
-                                    ->bFormatType);
+    // type and format and also to get number of physical channels.
+    // Layout (UAC2 Table 4-27): bLength,bDescriptorType,bDescriptorSubType,
+    // bTerminalLink,bmControls,bFormatType[5],bmFormats(4),bNrChannels[10],...
+    if (descType(p_desc) == kUsbDescTypeCsInterface &&
+        descSubtype(p_desc) == kAudioCsAsGeneral) {
+      audio->n_channels_tx = p_desc[10];
+      audio->format_type_tx = (audio_format_type_t)p_desc[5];
       // Look for a Type I Format Type Descriptor(2.3.1.6 - Audio Formats)
-      p_desc = tu_desc_next(p_desc);
-      if (tu_desc_type(p_desc) == TUSB_DESC_CS_INTERFACE &&
-          tu_desc_subtype(p_desc) == AUDIO_CS_AS_INTERFACE_FORMAT_TYPE &&
-          ((audio_desc_type_I_format_t const*)p_desc)->bFormatType ==
-              AUDIO_FORMAT_TYPE_I) {
-        audio->n_bytes_per_sample_tx =
-            ((audio_desc_type_I_format_t const*)p_desc)->bSubslotSize;
+      // Layout: bLength,bDescriptorType,bDescriptorSubType,bFormatType,
+      // bSubslotSize[4],bBitResolution.
+      p_desc = descNext(p_desc);
+      if (descType(p_desc) == kUsbDescTypeCsInterface &&
+          descSubtype(p_desc) == kAudioCsAsFormatType &&
+          p_desc[3] == AUDIO_FORMAT_TYPE_I) {
+        audio->n_bytes_per_sample_tx = p_desc[4];
       }
     }
 
@@ -1878,11 +1755,11 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
     if (audio->p_desc) {
       // Get pointer at end
       uint8_t const* p_desc_end =
-          audio->p_desc + audio->desc_length - TUD_AUDIO_DESC_IAD_LEN;
+          audio->p_desc + audio->desc_length - kAudioDescIadLen;
 
       // Advance past AC descriptors
-      uint8_t const* p_desc = tu_desc_next(audio->p_desc);
-      p_desc += ((audio_desc_cs_ac_interface_t const*)p_desc)->wTotalLength;
+      uint8_t const* p_desc = descNext(audio->p_desc);
+      p_desc += descU16(p_desc + 6);  // AC header wTotalLength
 
       uint8_t tmp = 0;
       // Condition modified from p_desc < p_desc_end to prevent gcc>=12
@@ -1890,9 +1767,9 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
       while (p_desc_end - p_desc > 0) {
         // We assume the number of alternate settings is increasing thus we
         // return the index of alternate setting zero!
-        if (tu_desc_type(p_desc) == TUSB_DESC_INTERFACE &&
-            ((tusb_desc_interface_t const*)p_desc)->bAlternateSetting == 0) {
-          if (((tusb_desc_interface_t const*)p_desc)->bInterfaceNumber == itf) {
+        if (descType(p_desc) == kUsbDescTypeInterface &&
+            decodeInterface(p_desc).bAlternateSetting == 0) {
+          if (decodeInterface(p_desc).bInterfaceNumber == itf) {
             *idxItf = tmp;
             *pp_desc_int = p_desc;
             return true;
@@ -1900,7 +1777,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
           // Increase index, bytes read, and pointer
           tmp++;
         }
-        p_desc = tu_desc_next(p_desc);
+        p_desc = descNext(p_desc);
       }
     }
     return false;
@@ -1929,17 +1806,18 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
   }
 
   bool audiod_get_interface(uint8_t rhport,
-                            tusb_control_request_t const* p_request) {
-    uint8_t const itf = tu_u16_low(p_request->wIndex);
+                            UsbSetupPacket const& p_request) {
+    uint8_t const itf = u16Low(p_request.wIndex);
 
     // Find index of audio streaming interface
     uint8_t func_id, idxItf;
     uint8_t const* dummy;
 
-    TU_VERIFY(
-        audiod_get_AS_interface_index_global(itf, &func_id, &idxItf, &dummy));
-    TU_VERIFY(tud_control_xfer(rhport, p_request,
-                               &audiod_fct_[func_id].alt_setting[idxItf], 1));
+    if (!audiod_get_AS_interface_index_global(itf, &func_id, &idxItf, &dummy))
+      return false;
+    if (!backend().controlTransfer(
+            rhport, p_request, &audiod_fct_[func_id].alt_setting[idxItf], 1))
+      return false;
 
     LOGI("  Get itf: %u - current alt: %u", itf,
             audiod_fct_[func_id].alt_setting[idxItf]);
@@ -1948,8 +1826,8 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
   }
 
   bool audiod_fb_send(audiod_function_t* audio) {
-    bool apply_correction = (TUSB_SPEED_FULL == tud_speed_get()) &&
-                            audio->feedback.format_correction;
+    bool apply_correction =
+        backend().isFullSpeed() && audio->feedback.format_correction;
     // Format the feedback value
     if (apply_correction) {
       uint8_t* fb = (uint8_t*)audio->fb_buf.data();
@@ -1977,20 +1855,17 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
     //
     // We send 3 bytes since sending packet larger than wMaxPacketSize is pretty
     // ugly
-    return TUSB_EDPT_XFER(audio->rhport, audio->ep_fb,
-                          (uint8_t*)audio->fb_buf.data(),
-                          apply_correction ? 3 : 4);
+    return backend().transfer(audio->rhport, audio->ep_fb,
+                              (uint8_t*)audio->fb_buf.data(),
+                              apply_correction ? 3 : 4);
   }
 
   // ── Close existing EPs for this interface ──────────────────────────────
   void closeEpIn(uint8_t rhport, audiod_function_t* audio, uint8_t itf,
-                 tusb_control_request_t const* p_request) {
+                 UsbSetupPacket const& p_request) {
     if (!isEpInEnabled() || audio->ep_in_as_intf_num != itf) return;
     audio->ep_in_as_intf_num = 0;
-#ifndef TUP_DCD_EDPT_ISO_ALLOC
-    usbd_edpt_close(rhport, audio->ep_in);
-#endif
-    tu_fifo_clear(&audio->ep_in_ff);
+    if (!backend().usesIsoAlloc()) backend().closeEndpoint(rhport, audio->ep_in);
     bufferTx().reset();
     if (tud_audio_set_itf_close_EP_cb_)
       tud_audio_set_itf_close_EP_cb_(this, rhport, p_request);
@@ -2004,48 +1879,59 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
   }
 
   void closeEpOut(uint8_t rhport, audiod_function_t* audio, uint8_t itf,
-                  tusb_control_request_t const* p_request) {
+                  UsbSetupPacket const& p_request) {
     if (!isEpOutEnabled() || audio->ep_out_as_intf_num != itf) return;
     audio->ep_out_as_intf_num = 0;
-#ifndef TUP_DCD_EDPT_ISO_ALLOC
-    usbd_edpt_close(rhport, audio->ep_out);
-#endif
-    tu_fifo_clear(&audio->ep_out_ff);
+    if (!backend().usesIsoAlloc()) {
+      backend().closeEndpoint(rhport, audio->ep_out);
+    } else {
+      // usesIsoAlloc() backends never close the OUT endpoint between
+      // sessions (DPRAM stays allocated), so nothing resets the DCD's
+      // internal busy/claimed bookkeeping for it. If the transfer armed by
+      // the *previous* openEpOut() never completed (no host data arrived,
+      // or the session was torn down mid-flight), that endpoint stays
+      // "busy" forever and every later usbd_edpt_xfer() call in openEpOut()
+      // silently fails, permanently breaking RX after the first
+      // open/close cycle. Re-activating here -- while the host is quiet
+      // (it just asked to close the stream) rather than right as a new
+      // session starts -- resets busy/claimed to a known-good state for
+      // the next open, matching the reasoning in audiod_open() for why
+      // this can't be done at SET_INTERFACE(alt=1) time instead.
+      backend().isoActivateEndpoint(rhport, audio->ep_out_view);
+    }
     if (tud_audio_set_itf_close_EP_cb_)
       tud_audio_set_itf_close_EP_cb_(this, rhport, p_request);
     audio->ep_out = 0;
     if (isFeedbackEpEnabled()) {
       audio->ep_fb = 0;
-      tu_memclr(&audio->feedback, sizeof(audio->feedback));
+      memset(&audio->feedback, 0, sizeof(audio->feedback));
     }
     notifyStreamingState();
   }
 
   // ── Activate a single endpoint found in the descriptor ────────────────
-  bool activateEndpoint(uint8_t rhport, tusb_desc_endpoint_t const* desc_ep,
-                        uint8_t dir = TUSB_DIR_IN) {
-#ifdef TUP_DCD_EDPT_ISO_ALLOC
-    // Skip iso_activate for isochronous OUT — on ESP32's DWC2 it blocks
-    // for the entire playback duration.  The endpoint DPRAM was already
-    // allocated by iso_alloc in audiod_open().  The XFER call in
-    // openEpOut will configure the DCD to receive.
-    if (dir == TUSB_DIR_OUT &&
-        desc_ep->bmAttributes.xfer == TUSB_XFER_ISOCHRONOUS)
-      return true;
-    return usbd_edpt_iso_activate(rhport, desc_ep);
-#else
+  bool activateEndpoint(uint8_t rhport, const UsbEndpointDescriptorView& desc_ep,
+                        UsbDir dir = UsbDir::In) {
+    if (backend().usesIsoAlloc()) {
+      // Skip iso_activate for isochronous OUT — on ESP32's DWC2 it blocks
+      // for the entire playback duration.  The endpoint DPRAM was already
+      // allocated by iso_alloc in audiod_open().  The XFER call in
+      // openEpOut will configure the DCD to receive.
+      if (dir == UsbDir::Out && desc_ep.xferType == UsbXferType::Isochronous)
+        return true;
+      return backend().isoActivateEndpoint(rhport, desc_ep);
+    }
     (void)dir;
-    return usbd_edpt_open(rhport, desc_ep);
-#endif
+    return backend().openEndpoint(rhport, desc_ep);
   }
 
   // ── Open the IN (TX) data endpoint ────────────────────────────────────
   void openEpIn(uint8_t rhport, audiod_function_t* audio, uint8_t itf,
-                tusb_desc_endpoint_t const* desc_ep,
+                const UsbEndpointDescriptorView& desc_ep,
                 uint8_t const* p_desc_for_params) {
-    audio->ep_in = desc_ep->bEndpointAddress;
+    audio->ep_in = desc_ep.bEndpointAddress;
     audio->ep_in_as_intf_num = itf;
-    audio->ep_in_sz = tu_edpt_packet_size(desc_ep);
+    audio->ep_in_sz = desc_ep.packetSize();
     if (audio->ep_in_sz == 0) return;
 
     if (isEpInFlowControlEnabled())
@@ -2055,45 +1941,33 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
     uint16_t first_pkt = packetSize();
     if (first_pkt > audio->ep_in_sz) first_pkt = audio->ep_in_sz;
     audio->lin_buf_in.assign(audio->ep_in_sz, 0);
-    tx_xfer_armed_ = TUSB_EDPT_XFER(rhport, audio->ep_in,
-                                    audio->lin_buf_in.data(), first_pkt);
+    tx_xfer_armed_ = backend().transfer(rhport, audio->ep_in,
+                                        audio->lin_buf_in.data(), first_pkt);
     notifyStreamingState();
   }
 
   // ── Open the OUT (RX) data endpoint ───────────────────────────────────
   void openEpOut(uint8_t rhport, audiod_function_t* audio, uint8_t itf,
-                 tusb_desc_endpoint_t const* desc_ep) {
-    LOGD("openEpOut: ep=0x%02x sz=%u", desc_ep->bEndpointAddress,
-         tu_edpt_packet_size(desc_ep));
-    audio->ep_out = desc_ep->bEndpointAddress;
+                 const UsbEndpointDescriptorView& desc_ep) {
+    audio->ep_out = desc_ep.bEndpointAddress;
     audio->ep_out_as_intf_num = itf;
-    audio->ep_out_sz = tu_edpt_packet_size(desc_ep);
+    audio->ep_out_sz = desc_ep.packetSize();
     if (audio->ep_out_sz == 0) return;
 
     // iso_activate was done in audiod_open() (no traffic, instant).
-    // Just arm the XFER here.
-    if (isUseLinearBufferRx()) {
-      if (audio->lin_buf_out.size() < audio->ep_out_sz)
-        audio->lin_buf_out.assign(audio->ep_out_sz, 0);
-      bool xfer_ok = TUSB_EDPT_XFER(rhport, audio->ep_out,
-                                    audio->lin_buf_out.data(),
-                                    audio->ep_out_sz);
-      LOGD("  XFER armed: %s, buf=%p sz=%u", xfer_ok ? "OK" : "FAIL",
-           audio->lin_buf_out.data(), audio->ep_out_sz);
-    } else {
-      bool xfer_ok = TUSB_EDPT_XFER_FIFO(rhport, audio->ep_out,
-                                          &audio->ep_out_ff,
-                                          audio->ep_out_sz);
-      LOGD("  XFER_FIFO armed: %s", xfer_ok ? "OK" : "FAIL");
-    }
+    // Just arm the transfer here.
+    if (audio->lin_buf_out.size() < audio->ep_out_sz)
+      audio->lin_buf_out.assign(audio->ep_out_sz, 0);
+    backend().transfer(rhport, audio->ep_out, audio->lin_buf_out.data(),
+                       audio->ep_out_sz);
     notifyStreamingState();
   }
 
   // ── Open the explicit feedback endpoint ───────────────────────────────
   void openEpFeedback(audiod_function_t* audio,
-                      tusb_desc_endpoint_t const* desc_ep) {
-    audio->ep_fb = desc_ep->bEndpointAddress;
-    audio->feedback.frame_shift = desc_ep->bInterval - 1;
+                      const UsbEndpointDescriptorView& desc_ep) {
+    audio->ep_fb = desc_ep.bEndpointAddress;
+    audio->feedback.frame_shift = desc_ep.bInterval - 1;
   }
 
   // ── Configure feedback computation parameters ─────────────────────────
@@ -2107,13 +1981,11 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
       tud_audio_feedback_params_cb_(this, func_id, alt, &fb_param);
     audio->feedback.compute_method = fb_param.method;
 
-    if (TUSB_SPEED_FULL == tud_speed_get() &&
-        tud_audio_feedback_format_correction_cb_)
+    if (backend().isFullSpeed() && tud_audio_feedback_format_correction_cb_)
       audio->feedback.format_correction =
           tud_audio_feedback_format_correction_cb_(this, func_id);
 
-    uint32_t const frame_div =
-        (TUSB_SPEED_FULL == tud_speed_get()) ? 1000 : 8000;
+    uint32_t const frame_div = backend().isFullSpeed() ? 1000 : 8000;
     audio->feedback.min_value = ((fb_param.sample_freq - 1) / frame_div) << 16;
     audio->feedback.max_value = (fb_param.sample_freq / frame_div + 1) << 16;
 
@@ -2130,8 +2002,15 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
         if (fifo_depth == 0) fifo_depth = 1;  // guard against div-by-zero
         uint16_t fifo_lvl_thr = fifo_depth / 2;
         audio->feedback.compute.fifo_count.fifo_lvl_thr = fifo_lvl_thr;
+        // fifo_lvl_avg is a Q8 exponential moving average (see the update
+        // formula in tud_audio_feedback_interval_isr: `avg = fifo_lvl_avg
+        // >> 8`, fed by `ff_count << 8` each tick) -- seed it in the same
+        // Q8 scale. It was previously seeded as `fifo_lvl_thr << 16` (Q16,
+        // 256x too large), which pinned the very first ~1400 feedback
+        // updates (~1.4s at 1kHz) at feedback.max_value before decaying
+        // into a sane range.
         audio->feedback.compute.fifo_count.fifo_lvl_avg =
-            ((uint32_t)fifo_lvl_thr) << 16;
+            ((uint32_t)fifo_lvl_thr) << 8;
         uint32_t nominal =
             ((fb_param.sample_freq / 100) << 16) / (frame_div / 100);
         audio->feedback.compute.fifo_count.nom_value = nominal;
@@ -2139,7 +2018,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
             (uint16_t)((audio->feedback.max_value - nominal) / fifo_lvl_thr);
         audio->feedback.compute.fifo_count.rate_const[1] =
             (uint16_t)((nominal - audio->feedback.min_value) / fifo_lvl_thr);
-        if (tud_speed_get() == TUSB_SPEED_HIGH) {
+        if (backend().isHighSpeed()) {
           audio->feedback.compute.fifo_count.rate_const[0] /= 8;
           audio->feedback.compute.fifo_count.rate_const[1] /= 8;
         }
@@ -2154,77 +2033,75 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
                                   uint8_t func_id, uint8_t itf, uint8_t alt) {
     uint8_t const* p_desc = audio->p_desc;
     uint8_t const* p_desc_end =
-        p_desc + audio->desc_length - TUD_AUDIO_DESC_IAD_LEN;
+        p_desc + audio->desc_length - kAudioDescIadLen;
     LOGD("  openEPs: p_desc=%p end=%p len=%u itf=%u alt=%u",
          p_desc, p_desc_end, audio->desc_length, itf, alt);
 
     while (p_desc_end - p_desc > 0) {
-      if (tu_desc_type(p_desc) == TUSB_DESC_INTERFACE &&
-          ((tusb_desc_interface_t const*)p_desc)->bInterfaceNumber == itf &&
-          ((tusb_desc_interface_t const*)p_desc)->bAlternateSetting == alt) {
+      if (descType(p_desc) == kUsbDescTypeInterface &&
+          decodeInterface(p_desc).bInterfaceNumber == itf &&
+          decodeInterface(p_desc).bAlternateSetting == alt) {
         uint8_t const* p_desc_for_params =
             (isEpInEnabled() && isEpInFlowControlEnabled()) ? p_desc : nullptr;
         uint8_t foundEPs = 0;
-        uint8_t nEps = ((tusb_desc_interface_t const*)p_desc)->bNumEndpoints;
+        uint8_t nEps = decodeInterface(p_desc).bNumEndpoints;
         LOGD("  matched itf=%u alt=%u nEps=%u", itf, alt, nEps);
 
         while (foundEPs < nEps && (p_desc_end - p_desc > 0)) {
           LOGD("  scan: type=0x%02x len=%u offset=%d",
                p_desc[1], p_desc[0], (int)(p_desc - audio->p_desc));
-          if (tu_desc_type(p_desc) == TUSB_DESC_ENDPOINT) {
-            tusb_desc_endpoint_t const* desc_ep =
-                (tusb_desc_endpoint_t const*)p_desc;
+          if (descType(p_desc) == kUsbDescTypeEndpoint) {
+            UsbEndpointDescriptorView desc_ep = decodeEndpoint(p_desc);
 
             LOGD("  activating ep=0x%02x type=%u...",
-                 desc_ep->bEndpointAddress, desc_ep->bmAttributes.xfer);
-            if (!activateEndpoint(rhport, desc_ep,
-                                  tu_edpt_dir(desc_ep->bEndpointAddress))) {
+                 desc_ep.bEndpointAddress, (unsigned)desc_ep.xferType);
+            if (!activateEndpoint(rhport, desc_ep, desc_ep.direction())) {
               LOGD("  activateEndpoint FAILED");
-              p_desc = tu_desc_next(p_desc);
+              p_desc = descNext(p_desc);
               continue;
             }
             LOGD("  activated OK");
             // Skip clear_stall for isochronous OUT (iso_activate was also
             // skipped).  For other endpoints, clear the stall as usual.
-            if (!(tu_edpt_dir(desc_ep->bEndpointAddress) == TUSB_DIR_OUT &&
-                  desc_ep->bmAttributes.xfer == TUSB_XFER_ISOCHRONOUS))
-              usbd_edpt_clear_stall(rhport, desc_ep->bEndpointAddress);
+            if (!(desc_ep.direction() == UsbDir::Out &&
+                  desc_ep.xferType == UsbXferType::Isochronous))
+              backend().clearStall(rhport, desc_ep.bEndpointAddress);
 
-            uint8_t ep_addr = desc_ep->bEndpointAddress;
-            if (isEpInEnabled() && tu_edpt_dir(ep_addr) == TUSB_DIR_IN &&
-                desc_ep->bmAttributes.usage == 0x00)
+            uint8_t ep_addr = desc_ep.bEndpointAddress;
+            if (isEpInEnabled() && desc_ep.direction() == UsbDir::In &&
+                desc_ep.usage == 0x00)
               openEpIn(rhport, audio, itf, desc_ep, p_desc_for_params);
 
             if (isEpOutEnabled()) {
-              if (tu_edpt_dir(ep_addr) == TUSB_DIR_OUT)
+              if (desc_ep.direction() == UsbDir::Out)
                 openEpOut(rhport, audio, itf, desc_ep);
               if (isFeedbackEpEnabled() &&
-                  tu_edpt_dir(ep_addr) == TUSB_DIR_IN &&
-                  desc_ep->bmAttributes.usage == 1)
+                  desc_ep.direction() == UsbDir::In && desc_ep.usage == 1)
                 openEpFeedback(audio, desc_ep);
             }
             foundEPs += 1;
           }
-          p_desc = tu_desc_next(p_desc);
+          p_desc = descNext(p_desc);
         }
 
         if (foundEPs != nEps) return true;  // ZLP already sent
 
-        if (tud_audio_set_itf_cb_) tud_audio_set_itf_cb_(this, rhport, nullptr);
+        if (tud_audio_set_itf_cb_)
+          tud_audio_set_itf_cb_(this, rhport, UsbSetupPacket{});
 
         setupFeedback(audio, func_id, alt);
         return true;
       }
-      p_desc = tu_desc_next(p_desc);
+      p_desc = descNext(p_desc);
     }
     return true;
   }
 
   // ── Main SET_INTERFACE handler ────────────────────────────────────────
   bool audiod_set_interface(uint8_t rhport,
-                            tusb_control_request_t const* p_request) {
-    uint8_t const itf = tu_u16_low(p_request->wIndex);
-    uint8_t const alt = tu_u16_low(p_request->wValue);
+                            UsbSetupPacket const& p_request) {
+    uint8_t const itf = u16Low(p_request.wIndex);
+    uint8_t const alt = u16Low(p_request.wValue);
     LOGD("SET_ITF itf=%u alt=%u [start]", itf, alt);
 
     uint8_t func_id, idxItf;
@@ -2232,7 +2109,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
     if (!audiod_get_AS_interface_index_global(itf, &func_id, &idxItf,
                                               &p_desc)) {
       LOGD("  AS interface %u not found", itf);
-      tud_control_status(rhport, p_request);
+      backend().controlStatus(rhport, p_request);
       return true;
     }
     LOGD("  found func=%u idx=%u", func_id, idxItf);
@@ -2247,7 +2124,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
     // 2. Save alt setting and acknowledge
     audio->alt_setting[idxItf] = alt;
 
-    tud_control_status(rhport, p_request);
+    backend().controlStatus(rhport, p_request);
     openEndpointsForAltSetting(rhport, audio, func_id, itf, alt);
 
     // 4. Update SOF and flow control
@@ -2259,12 +2136,22 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
           break;
         }
       }
-      usbd_sof_enable(rhport, SOF_CONSUMER_AUDIO, enable_sof);
+      backend().enableSof(rhport, enable_sof);
     }
     if (isEpInEnabled() && isEpInFlowControlEnabled())
       audiod_calc_tx_packet_sz(audio);
 
     return true;
+  }
+
+  static bool isPowerOfTwo(uint32_t value) {
+    return value != 0 && (value & (value - 1)) == 0;
+  }
+
+  static uint8_t log2Floor(uint32_t value) {
+    uint8_t result = 0;
+    while ((value >>= 1u) != 0u) result++;
+    return result;
   }
 
   bool audiod_set_fb_params_freq(audiod_function_t* audio, uint32_t sample_freq,
@@ -2275,23 +2162,22 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
     // n_frames_min is ceil(2^10 * f_s / f_m) for full speed and ceil(2^13 * f_s
     // / f_m) for high speed this lower limit ensures the measures feedback
     // value has sufficient precision
-    uint32_t const k = (TUSB_SPEED_FULL == tud_speed_get()) ? 10 : 13;
+    uint32_t const k = backend().isFullSpeed() ? 10 : 13;
     uint32_t const n_frame = (1UL << audio->feedback.frame_shift);
 
     if ((((1UL << k) * sample_freq / mclk_freq) + 1) > n_frame) {
       LOGE("  UAC2 feedback interval too small");
-      TU_BREAKPOINT();
       return false;
     }
 
     // Check if parameters really allow for a power of two division
     if ((mclk_freq % sample_freq) == 0 &&
-        tu_is_power_of_two(mclk_freq / sample_freq)) {
+        isPowerOfTwo(mclk_freq / sample_freq)) {
       audio->feedback.compute_method =
           AUDIO_FEEDBACK_METHOD_FREQUENCY_POWER_OF_2;
       audio->feedback.compute.power_of_2 =
           (uint8_t)(16 - (audio->feedback.frame_shift - 1) -
-                    tu_log2(mclk_freq / sample_freq));
+                    log2Floor(mclk_freq / sample_freq));
     } else if (audio->feedback.compute_method ==
                AUDIO_FEEDBACK_METHOD_FREQUENCY_FLOAT) {
       audio->feedback.compute.float_const =
@@ -2306,25 +2192,23 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
   }
 
   bool audiod_calc_tx_packet_sz(audiod_function_t* audio) {
-    TU_VERIFY(audio->format_type_tx == AUDIO_FORMAT_TYPE_I);
-    TU_VERIFY(audio->n_channels_tx);
-    TU_VERIFY(audio->n_bytes_per_sample_tx);
-    TU_VERIFY(audio->interval_tx);
-    TU_VERIFY(audio->sample_rate_tx);
+    if (audio->format_type_tx != AUDIO_FORMAT_TYPE_I) return false;
+    if (!audio->n_channels_tx) return false;
+    if (!audio->n_bytes_per_sample_tx) return false;
+    if (!audio->interval_tx) return false;
+    if (!audio->sample_rate_tx) return false;
 
     // Restart the fractional accumulator for this streaming session.
     audio->tx_sample_acc = 0;
 
-    const uint8_t interval = (tud_speed_get() == TUSB_SPEED_FULL)
-                                 ? audio->interval_tx
-                                 : 1 << (audio->interval_tx - 1);
+    bool full_speed = backend().isFullSpeed();
+    const uint8_t interval =
+        full_speed ? audio->interval_tx : 1 << (audio->interval_tx - 1);
 
-    const uint16_t sample_normimal =
-        (uint16_t)(audio->sample_rate_tx * interval /
-                   ((tud_speed_get() == TUSB_SPEED_FULL) ? 1000 : 8000));
-    const uint16_t sample_reminder =
-        (uint16_t)(audio->sample_rate_tx * interval %
-                   ((tud_speed_get() == TUSB_SPEED_FULL) ? 1000 : 8000));
+    const uint16_t sample_normimal = (uint16_t)(audio->sample_rate_tx *
+                                                interval / (full_speed ? 1000 : 8000));
+    const uint16_t sample_reminder = (uint16_t)(audio->sample_rate_tx *
+                                                interval % (full_speed ? 1000 : 8000));
 
     const uint16_t packet_sz_tx_min =
         (uint16_t)((sample_normimal - 1) * audio->n_channels_tx *
@@ -2337,7 +2221,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
                    audio->n_bytes_per_sample_tx);
 
     // Endpoint size must larger than packet size
-    TU_ASSERT(packet_sz_tx_max <= audio->ep_in_sz);
+    if (packet_sz_tx_max > audio->ep_in_sz) return false;
 
     // Frmt20.pdf 2.3.1.1 USB Packets
     if (sample_reminder) {
@@ -2368,10 +2252,10 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
       // Not enough info to size precisely: fall back to the max packet.
       return audio->ep_in_sz;
     }
-    const uint32_t denom = (tud_speed_get() == TUSB_SPEED_FULL) ? 1000u : 8000u;
+    bool full_speed = backend().isFullSpeed();
+    const uint32_t denom = full_speed ? 1000u : 8000u;
     const uint8_t iv = audio->interval_tx ? audio->interval_tx : 1;
-    const uint32_t interval =
-        (tud_speed_get() == TUSB_SPEED_FULL) ? iv : (1u << (iv - 1));
+    const uint32_t interval = full_speed ? iv : (1u << (iv - 1));
 
     audio->tx_sample_acc += audio->sample_rate_tx * interval;
     const uint32_t samples = audio->tx_sample_acc / denom;
@@ -2383,29 +2267,6 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
     return (uint16_t)bytes;
   }
 
-  uint16_t tud_audio_n_write(uint8_t func_id, const void* data, uint16_t len) {
-    TU_VERIFY(func_id < getAudioCount() && audiod_fct_[func_id].p_desc != NULL);
-    // Always write to the FIFO. In linear-buffer mode the xfer_cb drains the
-    // FIFO into lin_buf_in after DMA has finished, so there is no race.
-    return tu_fifo_write_n(&audiod_fct_[func_id].ep_in_ff, data, len);
-  }
-
-  uint16_t tud_audio_n_available(uint8_t func_id) {
-    TU_VERIFY(func_id < getAudioCount() && audiod_fct_[func_id].p_desc != NULL);
-    return tu_fifo_count(&audiod_fct_[func_id].ep_out_ff);
-  }
-
-  uint16_t tud_audio_n_read(uint8_t func_id, void* buffer, uint16_t bufsize) {
-    TU_VERIFY(func_id < getAudioCount() && audiod_fct_[func_id].p_desc != NULL);
-    return tu_fifo_read_n(&audiod_fct_[func_id].ep_out_ff, buffer, bufsize);
-  }
 };
 
 }  // namespace audio_tools
-
-// Custom driver registration — routes to whichever USBAudioDeviceBase subclass
-// was constructed (base or derived; set via s_active_ in the constructor).
-extern "C" usbd_class_driver_t const* usbd_app_driver_get_cb(uint8_t* count) {
-  return audio_tools::USBAudioDeviceBase::activeInstance().getClassDriver(
-      count);
-}

@@ -77,6 +77,24 @@ namespace audio_tools {
 #define USB_AUDIO_EP_INT -1
 #endif
 
+// Discrete sample rates advertised in the Clock Source GET_RANGE response
+// when enable_multi_sample_rate is true (see USBAudioDeviceBase::begin() and
+// USBAudio2DescriptorBuilder::writeIsoEndpoint()). This is the single source
+// of truth for "highest rate the device claims to support" -- isochronous
+// packet/buffer sizing for multi-rate mode must be based on the LAST entry
+// here, not on an independent assumption, since the host will never actually
+// select a rate the GET_RANGE response didn't offer. (A prior version sized
+// packets for a hardcoded 192 kHz ceiling that was never actually reachable
+// via GET_RANGE -- just wasted buffer space, and on MCUs with small USB FIFO
+// RAM, such as ESP32-S2/S3's DWC2 peripheral, sized packets that large
+// exceed the endpoint's available shared RX FIFO capacity entirely, causing
+// isochronous OUT reception to silently fail even though endpoint
+// allocation and transfer arming both report success.)
+static constexpr uint32_t kSupportedSampleRates[] = {
+    8000, 11025, 16000, 22050, 24000, 32000, 44100, 48000};
+static constexpr uint8_t kNumSupportedSampleRates =
+    sizeof(kSupportedSampleRates) / sizeof(kSupportedSampleRates[0]);
+
 /**
  * @brief Configuration for USB Audio (inherits sample_rate / channels /
  *        bits_per_sample from AudioInfo).
@@ -147,13 +165,6 @@ struct USBAudioConfig : public AudioInfo {
   /// (45 samples/ms instead of the required 44.1 average).
   bool enable_ep_in_flow_control = true;
 
-  /// Use a flat contiguous buffer for RX instead of a circular FIFO.
-  /// Required when the downstream audio driver uses DMA.
-  bool use_linear_buffer_rx = true;
-  /// Use a flat contiguous buffer for TX instead of a circular FIFO.
-  /// Required when the upstream audio driver uses DMA.
-  bool use_linear_buffer_tx = true;
-  
 #if defined(FREERTOS_H) || defined(INC_FREERTOS_H)
   // ── FreeRTOS USB task (RP2040 + FreeRTOS only) ───────────────────────────
   /// When true (default), begin() launches a dedicated FreeRTOS task that
@@ -222,8 +233,6 @@ struct USBAudioConfig : public AudioInfo {
 
            enable_feedback_ep == other.enable_feedback_ep &&
            enable_ep_in_flow_control == other.enable_ep_in_flow_control &&
-           use_linear_buffer_rx == other.use_linear_buffer_rx &&
-           use_linear_buffer_tx == other.use_linear_buffer_tx &&
 
            begin_usb == other.begin_usb && terminal_id == other.terminal_id;
   }

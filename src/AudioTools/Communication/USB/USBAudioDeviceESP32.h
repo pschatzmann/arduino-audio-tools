@@ -11,6 +11,7 @@
 
 #include <cstring>
 
+#include "AudioTools/Communication/USB/USBAudioBackendTinyUSB.h"
 #include "AudioTools/Communication/USB/USBAudioDeviceBase.h"
 #include "AudioTools/Concurrency/RTOS/SynchronizedNBufferRTOS.h"
 #include "esp32-hal-tinyusb.h"
@@ -112,6 +113,9 @@ class USBAudioDeviceESP32 : public USBAudioDeviceBase {
   BaseBuffer<uint8_t>& bufferRx() override { return buffer_rx_; }
 
  protected:
+  USBAudioBackendTinyUSB backend_impl_;
+  USBAudioBackend& backend() override { return backend_impl_; }
+
   /**
    * @brief Resolve any endpoint left at -1 ("allocate dynamically") to a
    * free endpoint number via arduino-esp32's own
