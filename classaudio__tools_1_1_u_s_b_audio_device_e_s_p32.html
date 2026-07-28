@@ -136,6 +136,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a028aa1ca6d908d03c45d5baf41f02406" id="r_a028aa1ca6d908d03c45d5baf41f02406"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a028aa1ca6d908d03c45d5baf41f02406">begin</a> (const <a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html">USBAudioConfig</a> &amp;cfg)</td></tr>
 <tr class="memdesc:a028aa1ca6d908d03c45d5baf41f02406"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply a config and start the USB audio device.  <br /></td></tr>
 <tr class="separator:a028aa1ca6d908d03c45d5baf41f02406"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb49b3d87009a5a12096e51f330f2921" id="r_acb49b3d87009a5a12096e51f330f2921"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; uint8_t &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#acb49b3d87009a5a12096e51f330f2921">bufferRx</a> () override</td></tr>
+<tr class="memdesc:acb49b3d87009a5a12096e51f330f2921"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns cross-core safe RX buffer (FreeRTOS queue of blocks).  <br /></td></tr>
+<tr class="separator:acb49b3d87009a5a12096e51f330f2921"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a426037f2e746a9c97f370044b6e3b8c9" id="r_a426037f2e746a9c97f370044b6e3b8c9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; uint8_t &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#a426037f2e746a9c97f370044b6e3b8c9">bufferTx</a> () override</td></tr>
+<tr class="memdesc:a426037f2e746a9c97f370044b6e3b8c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns cross-core safe TX buffer (FreeRTOS queue of blocks).  <br /></td></tr>
+<tr class="separator:a426037f2e746a9c97f370044b6e3b8c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:affd15675a5e391c34cccefa7181354bb" id="r_affd15675a5e391c34cccefa7181354bb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#affd15675a5e391c34cccefa7181354bb">clearNotifyAudioChange</a> ()</td></tr>
 <tr class="memdesc:affd15675a5e391c34cccefa7181354bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes all change notify subscriptions.  <br /></td></tr>
 <tr class="separator:affd15675a5e391c34cccefa7181354bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -387,12 +393,6 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a67b0ecd0961d037358f5f1ea75c363d5" id="r_a67b0ecd0961d037358f5f1ea75c363d5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#a67b0ecd0961d037358f5f1ea75c363d5">beginUSB</a> () override</td></tr>
 <tr class="memdesc:a67b0ecd0961d037358f5f1ea75c363d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure and start the ESP32 USB stack.  <br /></td></tr>
 <tr class="separator:a67b0ecd0961d037358f5f1ea75c363d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acb49b3d87009a5a12096e51f330f2921" id="r_acb49b3d87009a5a12096e51f330f2921"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; uint8_t &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#acb49b3d87009a5a12096e51f330f2921">bufferRx</a> () override</td></tr>
-<tr class="memdesc:acb49b3d87009a5a12096e51f330f2921"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns cross-core safe RX buffer (FreeRTOS queue of blocks).  <br /></td></tr>
-<tr class="separator:acb49b3d87009a5a12096e51f330f2921"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a426037f2e746a9c97f370044b6e3b8c9" id="r_a426037f2e746a9c97f370044b6e3b8c9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; uint8_t &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#a426037f2e746a9c97f370044b6e3b8c9">bufferTx</a> () override</td></tr>
-<tr class="memdesc:a426037f2e746a9c97f370044b6e3b8c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns cross-core safe TX buffer (FreeRTOS queue of blocks).  <br /></td></tr>
-<tr class="separator:a426037f2e746a9c97f370044b6e3b8c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8904c9a6dd2ee936b6b2fe789ced04d" id="r_af8904c9a6dd2ee936b6b2fe789ced04d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#af8904c9a6dd2ee936b6b2fe789ced04d">closeEpIn</a> (uint8_t rhport, audiod_function_t *audio, uint8_t itf, tusb_control_request_t const *p_request)</td></tr>
 <tr class="separator:af8904c9a6dd2ee936b6b2fe789ced04d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a613a12755c566b1d38f5ff0f43bf7314" id="r_a613a12755c566b1d38f5ff0f43bf7314"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a613a12755c566b1d38f5ff0f43bf7314">closeEpOut</a> (uint8_t rhport, audiod_function_t *audio, uint8_t itf, tusb_control_request_t const *p_request)</td></tr>
@@ -457,6 +457,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a96cdfbc8c30051e8416a706bf16d6934" id="r_a96cdfbc8c30051e8416a706bf16d6934"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#a96cdfbc8c30051e8416a706bf16d6934">resizeBuffers</a> () override</td></tr>
 <tr class="memdesc:a96cdfbc8c30051e8416a706bf16d6934"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize buffers as block pools: block size = one USB frame at the current sample rate, block count = fifo_packets.  <br /></td></tr>
 <tr class="separator:a96cdfbc8c30051e8416a706bf16d6934"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b48486306edc591c461dbafda3c1c94" id="r_a3b48486306edc591c461dbafda3c1c94"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#a3b48486306edc591c461dbafda3c1c94">resolveEndpoints</a> ()</td></tr>
+<tr class="memdesc:a3b48486306edc591c461dbafda3c1c94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resolve any endpoint left at -1 ("allocate dynamically") to a free endpoint number via arduino-esp32's own tinyusb_get_free_in_endpoint()/tinyusb_get_free_out_endpoint(). These already know about endpoints reserved by other interfaces (e.g. CDC reserves OUT 0x03, IN 0x84, IN 0x85 &ndash; see USBCDC::load_cdc_descriptor() in arduino-esp32), so this avoids the endpoint collisions that the previous fixed defaults (0x83/0x03/0x84/0x85) had with CDC on composite devices. Must run exactly once, before the first call to <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a8e64d1bcfd5812dc7532e97b6a3eed77" title="Returns the audio-function descriptor block for use in tud_descriptor_configuration_cb().">getDescriptor()</a>, since that function is invoked twice (once here to size the interface, once later via descriptorCallback to fill it in) and both calls must see the same resolved addresses.  <br /></td></tr>
+<tr class="separator:a3b48486306edc591c461dbafda3c1c94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7422464f7c5c388caad12d04d0e7f7a5" id="r_a7422464f7c5c388caad12d04d0e7f7a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a7422464f7c5c388caad12d04d0e7f7a5">sendInterruptNotification</a> (uint8_t ctrlSel, uint8_t channel, uint8_t entityID)</td></tr>
 <tr class="memdesc:a7422464f7c5c388caad12d04d0e7f7a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send a UAC2 status/change notification via the AC interrupt EP.  <br /></td></tr>
 <tr class="separator:a7422464f7c5c388caad12d04d0e7f7a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -482,6 +485,10 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:a9d7af0d9b8bde4de6078fa3b7780e642" id="r_a9d7af0d9b8bde4de6078fa3b7780e642"><td class="memItemLeft" align="right" valign="top">static int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#a9d7af0d9b8bde4de6078fa3b7780e642">allocInEndpoint</a> ()</td></tr>
+<tr class="separator:a9d7af0d9b8bde4de6078fa3b7780e642"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26331b9a6d533daa404b5333f02fc482" id="r_a26331b9a6d533daa404b5333f02fc482"><td class="memItemLeft" align="right" valign="top">static int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#a26331b9a6d533daa404b5333f02fc482">allocOutEndpoint</a> ()</td></tr>
+<tr class="separator:a26331b9a6d533daa404b5333f02fc482"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c5985b81ca9b8bf4cd58b48dc22655f" id="r_a2c5985b81ca9b8bf4cd58b48dc22655f"><td class="memItemLeft" align="right" valign="top">static int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a2c5985b81ca9b8bf4cd58b48dc22655f">floatToUac2</a> (float vol)</td></tr>
 <tr class="memdesc:a2c5985b81ca9b8bf4cd58b48dc22655f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert linear volume (0.0–1.0) to UAC2 int16 (1/256 dB). Linear mapping: 0.0 → -100 dB (min), 1.0 → 0 dB (max).  <br /></td></tr>
 <tr class="separator:a2c5985b81ca9b8bf4cd58b48dc22655f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -803,6 +810,56 @@ I recommend to use the USBAudioStream type alias instead of this class directly,
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9d7af0d9b8bde4de6078fa3b7780e642" name="a9d7af0d9b8bde4de6078fa3b7780e642"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d7af0d9b8bde4de6078fa3b7780e642">&#9670;&#160;</a></span>allocInEndpoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int16_t allocInEndpoint </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a26331b9a6d533daa404b5333f02fc482" name="a26331b9a6d533daa404b5333f02fc482"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26331b9a6d533daa404b5333f02fc482">&#9670;&#160;</a></span>allocOutEndpoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int16_t allocOutEndpoint </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1824,7 +1881,7 @@ I recommend to use the USBAudioStream type alias instead of this class directly,
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1853,7 +1910,7 @@ I recommend to use the USBAudioStream type alias instead of this class directly,
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -4000,6 +4057,33 @@ template&lt;typename T &gt; </div>
 <p>Resize buffers as block pools: block size = one USB frame at the current sample rate, block count = fifo_packets. </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#aa84e845b8aa8fcc1ed5d75108aec7c91">USBAudioDeviceBase</a>.</p>
+
+</div>
+</div>
+<a id="a3b48486306edc591c461dbafda3c1c94" name="a3b48486306edc591c461dbafda3c1c94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b48486306edc591c461dbafda3c1c94">&#9670;&#160;</a></span>resolveEndpoints()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void resolveEndpoints </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Resolve any endpoint left at -1 ("allocate dynamically") to a free endpoint number via arduino-esp32's own tinyusb_get_free_in_endpoint()/tinyusb_get_free_out_endpoint(). These already know about endpoints reserved by other interfaces (e.g. CDC reserves OUT 0x03, IN 0x84, IN 0x85 &ndash; see USBCDC::load_cdc_descriptor() in arduino-esp32), so this avoids the endpoint collisions that the previous fixed defaults (0x83/0x03/0x84/0x85) had with CDC on composite devices. Must run exactly once, before the first call to <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a8e64d1bcfd5812dc7532e97b6a3eed77" title="Returns the audio-function descriptor block for use in tud_descriptor_configuration_cb().">getDescriptor()</a>, since that function is invoked twice (once here to size the interface, once later via descriptorCallback to fill it in) and both calls must see the same resolved addresses. </p>
 
 </div>
 </div>
