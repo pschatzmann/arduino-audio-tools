@@ -6,5 +6,7 @@ var searchData=
   ['opus_5fchannel_5fmapping_5fcombined_3',['OPUS_CHANNEL_MAPPING_COMBINED',['../namespaceaudio__tools.html#ac23a88fb567747dc8436f625400d9f4aa2b3d230acb260b001046e8f75b17d27a',1,'audio_tools']]],
   ['opus_5fchannel_5fmapping_5fcustom_4',['OPUS_CHANNEL_MAPPING_CUSTOM',['../namespaceaudio__tools.html#ac23a88fb567747dc8436f625400d9f4aa09423604da6f833c7934c2071c8cddc0',1,'audio_tools']]],
   ['opus_5fchannel_5fmapping_5fseparate_5',['OPUS_CHANNEL_MAPPING_SEPARATE',['../namespaceaudio__tools.html#ac23a88fb567747dc8436f625400d9f4aada8f3196a006da276bdb7a338dadaa83',1,'audio_tools']]],
-  ['others_6',['others',['../namespaceaudio__tools.html#a44f4d7d26b9f81198ebefe8c302ee30ca8211f4011554f20761026a405fc45162',1,'audio_tools']]]
+  ['other_6',['Other',['../structaudio__tools_1_1_usb_setup_packet.html#ae8288d1dc035579e1d28712b41397b2ba6311ae17c1ee52b36e68aaf4ad066387',1,'audio_tools::UsbSetupPacket']]],
+  ['others_7',['others',['../namespaceaudio__tools.html#a44f4d7d26b9f81198ebefe8c302ee30ca8211f4011554f20761026a405fc45162',1,'audio_tools']]],
+  ['out_8',['Out',['../namespaceaudio__tools.html#a157d05f33287286839e78e8d8116bedda7c147cda9e49590f6abe83d118b7353b',1,'audio_tools']]]
 ];

@@ -6,6 +6,7 @@ var searchData=
   ['head_3',['HEAD',['../_http_types_8h.html#a3a8d8d5989e593d770a33e5cb6c1ae84a0b0955668575b21eb0ab2272aef49f76',1,'HttpTypes.h']]],
   ['header_4',['Header',['../namespaceaudio__tools.html#a4dd4453d1994a706c0eb2350ffa55372abf50d5e661106d0abe925af3c2e6f7e7',1,'audio_tools']]],
   ['hex_5',['HEX',['../_arduino_8h.html#ad6c89ce0bc361acabef4cbc9d1e9efb7ad3c20094c5fe3327350484d01c44c137',1,'Arduino.h']]],
-  ['hs_6',['HS',['../classaudio__tools_1_1_v_f_s___s_d_m_m_c.html#ad57b3fa8e45359906ac229567c209a63a55a055409207a12d5937b243fd508bde',1,'audio_tools::VFS_SDMMC']]],
-  ['hz_7',['HZ',['../group__basic.html#ggadd9fe45e09605eee3e4a39c8a5c4476da60bcd2a30600425969cffd701375c9f2',1,'audio_tools']]]
+  ['high_6',['High',['../namespaceaudio__tools.html#af21c897fe6ae1bb1a36cf4db2b54f888a655d20c1ca69519ca647684edbb2db35',1,'audio_tools']]],
+  ['hs_7',['HS',['../classaudio__tools_1_1_v_f_s___s_d_m_m_c.html#ad57b3fa8e45359906ac229567c209a63a55a055409207a12d5937b243fd508bde',1,'audio_tools::VFS_SDMMC']]],
+  ['hz_8',['HZ',['../group__basic.html#ggadd9fe45e09605eee3e4a39c8a5c4476da60bcd2a30600425969cffd701375c9f2',1,'audio_tools']]]
 ];

@@ -11,10 +11,15 @@ var searchData=
   ['urlstreambufferedt_3c_20icystream_20_3e_8',['URLStreamBufferedT&lt; ICYStream &gt;',['../classaudio__tools_1_1_u_r_l_stream_buffered_t.html',1,'audio_tools']]],
   ['urlstreamesp32_9',['URLStreamESP32',['../classaudio__tools_1_1_u_r_l_stream_e_s_p32.html',1,'audio_tools']]],
   ['usbaudio2descriptorbuilder_10',['USBAudio2DescriptorBuilder',['../classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html',1,'audio_tools']]],
-  ['usbaudioconfig_11',['USBAudioConfig',['../structaudio__tools_1_1_u_s_b_audio_config.html',1,'audio_tools']]],
-  ['usbaudiodevicebase_12',['USBAudioDeviceBase',['../classaudio__tools_1_1_u_s_b_audio_device_base.html',1,'audio_tools']]],
-  ['usbaudiodeviceesp32_13',['USBAudioDeviceESP32',['../classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html',1,'audio_tools']]],
-  ['usbaudiodevicetinyusb_14',['USBAudioDeviceTinyUSB',['../classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html',1,'audio_tools']]],
-  ['usbaudiodevicetinyusbfreertos_15',['USBAudioDeviceTinyUSBFreeRTOS',['../classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b_free_r_t_o_s.html',1,'audio_tools']]],
-  ['usbaudiodevicezephyr_16',['USBAudioDeviceZephyr',['../classaudio__tools_1_1_u_s_b_audio_device_zephyr.html',1,'audio_tools']]]
+  ['usbaudiobackend_11',['USBAudioBackend',['../classaudio__tools_1_1_u_s_b_audio_backend.html',1,'audio_tools']]],
+  ['usbaudiobackendtinyusb_12',['USBAudioBackendTinyUSB',['../classaudio__tools_1_1_u_s_b_audio_backend_tiny_u_s_b.html',1,'audio_tools']]],
+  ['usbaudioconfig_13',['USBAudioConfig',['../structaudio__tools_1_1_u_s_b_audio_config.html',1,'audio_tools']]],
+  ['usbaudiodevicebase_14',['USBAudioDeviceBase',['../classaudio__tools_1_1_u_s_b_audio_device_base.html',1,'audio_tools']]],
+  ['usbaudiodeviceesp32_15',['USBAudioDeviceESP32',['../classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html',1,'audio_tools']]],
+  ['usbaudiodevicetinyusb_16',['USBAudioDeviceTinyUSB',['../classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html',1,'audio_tools']]],
+  ['usbaudiodevicetinyusbfreertos_17',['USBAudioDeviceTinyUSBFreeRTOS',['../classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b_free_r_t_o_s.html',1,'audio_tools']]],
+  ['usbaudiodevicezephyr_18',['USBAudioDeviceZephyr',['../classaudio__tools_1_1_u_s_b_audio_device_zephyr.html',1,'audio_tools']]],
+  ['usbendpointdescriptorview_19',['UsbEndpointDescriptorView',['../structaudio__tools_1_1_usb_endpoint_descriptor_view.html',1,'audio_tools']]],
+  ['usbinterfacedescriptorview_20',['UsbInterfaceDescriptorView',['../structaudio__tools_1_1_usb_interface_descriptor_view.html',1,'audio_tools']]],
+  ['usbsetuppacket_21',['UsbSetupPacket',['../structaudio__tools_1_1_usb_setup_packet.html',1,'audio_tools']]]
 ];

@@ -7,11 +7,13 @@ var searchData=
   ['urlstreambufferedt_2eh_4',['URLStreamBufferedT.h',['../_u_r_l_stream_buffered_t_8h.html',1,'']]],
   ['urlstreamesp32_2eh_5',['URLStreamESP32.h',['../_u_r_l_stream_e_s_p32_8h.html',1,'']]],
   ['usbaudio2descriptorbuilder_2eh_6',['USBAudio2DescriptorBuilder.h',['../_u_s_b_audio2_descriptor_builder_8h.html',1,'']]],
-  ['usbaudioconfig_2eh_7',['USBAudioConfig.h',['../_u_s_b_audio_config_8h.html',1,'']]],
-  ['usbaudiodevicebase_2eh_8',['USBAudioDeviceBase.h',['../_u_s_b_audio_device_base_8h.html',1,'']]],
-  ['usbaudiodeviceesp32_2eh_9',['USBAudioDeviceESP32.h',['../_u_s_b_audio_device_e_s_p32_8h.html',1,'']]],
-  ['usbaudiodevicetinyusb_2eh_10',['USBAudioDeviceTinyUSB.h',['../_u_s_b_audio_device_tiny_u_s_b_8h.html',1,'']]],
-  ['usbaudiodevicetinyusbfreertos_2eh_11',['USBAudioDeviceTinyUSBFreeRTOS.h',['../_u_s_b_audio_device_tiny_u_s_b_free_r_t_o_s_8h.html',1,'']]],
-  ['usbaudiodevicezephyr_2eh_12',['USBAudioDeviceZephyr.h',['../_u_s_b_audio_device_zephyr_8h.html',1,'']]],
-  ['usbaudiostream_2eh_13',['USBAudioStream.h',['../_u_s_b_audio_stream_8h.html',1,'']]]
+  ['usbaudiobackend_2eh_7',['USBAudioBackend.h',['../_u_s_b_audio_backend_8h.html',1,'']]],
+  ['usbaudiobackendtinyusb_2eh_8',['USBAudioBackendTinyUSB.h',['../_u_s_b_audio_backend_tiny_u_s_b_8h.html',1,'']]],
+  ['usbaudioconfig_2eh_9',['USBAudioConfig.h',['../_u_s_b_audio_config_8h.html',1,'']]],
+  ['usbaudiodevicebase_2eh_10',['USBAudioDeviceBase.h',['../_u_s_b_audio_device_base_8h.html',1,'']]],
+  ['usbaudiodeviceesp32_2eh_11',['USBAudioDeviceESP32.h',['../_u_s_b_audio_device_e_s_p32_8h.html',1,'']]],
+  ['usbaudiodevicetinyusb_2eh_12',['USBAudioDeviceTinyUSB.h',['../_u_s_b_audio_device_tiny_u_s_b_8h.html',1,'']]],
+  ['usbaudiodevicetinyusbfreertos_2eh_13',['USBAudioDeviceTinyUSBFreeRTOS.h',['../_u_s_b_audio_device_tiny_u_s_b_free_r_t_o_s_8h.html',1,'']]],
+  ['usbaudiodevicezephyr_2eh_14',['USBAudioDeviceZephyr.h',['../_u_s_b_audio_device_zephyr_8h.html',1,'']]],
+  ['usbaudiostream_2eh_15',['USBAudioStream.h',['../_u_s_b_audio_stream_8h.html',1,'']]]
 ];

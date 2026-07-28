@@ -13,5 +13,6 @@ var searchData=
   ['get_10',['GET',['../_http_types_8h.html#a3a8d8d5989e593d770a33e5cb6c1ae84a12a8dcf59c16b5aadfda3a08ba67d529',1,'HttpTypes.h']]],
   ['getavailablebuffersize_11',['GetAvailableBufferSize',['../group__spi-audio.html#ggad86b43537dea2133a2299586f6e954b6a61a0116761a0b5bfc4e116bb2156a37c',1,'audio_tools']]],
   ['getfilledbuffersize_12',['GetFilledBufferSize',['../group__spi-audio.html#ggad86b43537dea2133a2299586f6e954b6a24aa46302e44cb620ee55b3ede478064',1,'audio_tools']]],
-  ['gs_13',['GS',['../group__tools.html#gga9715fceb4c700e7e4a610400464e9396a9c922c72676cab2b540d081a8bb3788a',1,'audio_tools::MusicalNotes']]]
+  ['getinterface_13',['GetInterface',['../namespaceaudio__tools.html#aaf8bb5e97ea58bb2d819a09a8817b964aa7094428afbac4d093c65389c11dbfc1',1,'audio_tools']]],
+  ['gs_14',['GS',['../group__tools.html#gga9715fceb4c700e7e4a610400464e9396a9c922c72676cab2b540d081a8bb3788a',1,'audio_tools::MusicalNotes']]]
 ];

@@ -188,10 +188,6 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a5e9d4fb7d0fd3f2cf357b62a5d539897"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad59fdc7d61058cb0f0cb460c3f40f555" id="r_ad59fdc7d61058cb0f0cb460c3f40f555"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html#ad59fdc7d61058cb0f0cb460c3f40f555">terminal_id</a> = 1</td></tr>
 <tr class="separator:ad59fdc7d61058cb0f0cb460c3f40f555"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae53d1120a570cd80d6101e402c49ef7e" id="r_ae53d1120a570cd80d6101e402c49ef7e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html#ae53d1120a570cd80d6101e402c49ef7e">use_linear_buffer_rx</a> = true</td></tr>
-<tr class="separator:ae53d1120a570cd80d6101e402c49ef7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3e80429b3e955a78491daecd02e469ed" id="r_a3e80429b3e955a78491daecd02e469ed"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html#a3e80429b3e955a78491daecd02e469ed">use_linear_buffer_tx</a> = true</td></tr>
-<tr class="separator:a3e80429b3e955a78491daecd02e469ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac5ffad7f07bfef80deaef77e0eeca69" id="r_aac5ffad7f07bfef80deaef77e0eeca69"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html#aac5ffad7f07bfef80deaef77e0eeca69">vid</a> = 0xCafe</td></tr>
 <tr class="separator:aac5ffad7f07bfef80deaef77e0eeca69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1d1c41108f6e31acc329a645d56d42b" id="r_ae1d1c41108f6e31acc329a645d56d42b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html#ae1d1c41108f6e31acc329a645d56d42b">volume_active</a> = false</td></tr>
@@ -900,36 +896,6 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Terminal ID reported to Zephyr usbd_uac2 callbacks (ignored on TinyUSB). TX_MODE: Output Terminal ID (device → host, ISO IN). RX_MODE: Input Terminal ID (host → device, ISO OUT). Must match the UAC2 node topology in the board device tree. </p>
-
-</div>
-</div>
-<a id="ae53d1120a570cd80d6101e402c49ef7e" name="ae53d1120a570cd80d6101e402c49ef7e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae53d1120a570cd80d6101e402c49ef7e">&#9670;&#160;</a></span>use_linear_buffer_rx</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool use_linear_buffer_rx = true</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Use a flat contiguous buffer for RX instead of a circular FIFO. Required when the downstream audio driver uses DMA. </p>
-
-</div>
-</div>
-<a id="a3e80429b3e955a78491daecd02e469ed" name="a3e80429b3e955a78491daecd02e469ed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3e80429b3e955a78491daecd02e469ed">&#9670;&#160;</a></span>use_linear_buffer_tx</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool use_linear_buffer_tx = true</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Use a flat contiguous buffer for TX instead of a circular FIFO. Required when the upstream audio driver uses DMA. </p>
 
 </div>
 </div>

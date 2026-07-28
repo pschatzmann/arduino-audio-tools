@@ -93,10 +93,8 @@ $(function() {
 <code>#include &quot;<a class="el" href="_buffers_8h_source.html">AudioTools/CoreAudio/Buffers.h</a>&quot;</code><br />
 <code>#include &quot;AudioLogger.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="_base_stream_8h_source.html">AudioTools/CoreAudio/BaseStream.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_u_s_b_audio_backend_8h_source.html">AudioTools/Communication/USB/USBAudioBackend.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_u_s_b_audio2_descriptor_builder_8h_source.html">USBAudio2DescriptorBuilder.h</a>&quot;</code><br />
-<code>#include &quot;device/usbd.h&quot;</code><br />
-<code>#include &quot;device/usbd_pvt.h&quot;</code><br />
-<code>#include &quot;tusb.h&quot;</code><br />
 </div>
 <p><a href="_u_s_b_audio_device_base_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -114,228 +112,60 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a8285e43a719ce10c4adc11dc063d7f4b" id="r_a8285e43a719ce10c4adc11dc063d7f4b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_u_s_b_audio_device_base_8h.html#a8285e43a719ce10c4adc11dc063d7f4b">AUDIO10_CS_AC_INTERFACE_INPUT_TERMINAL</a>&#160;&#160;&#160;  AUDIO_CS_AC_INTERFACE_INPUT_TERMINAL</td></tr>
-<tr class="separator:a8285e43a719ce10c4adc11dc063d7f4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b0c38ffc3ce446fc8d69105042a0549" id="r_a2b0c38ffc3ce446fc8d69105042a0549"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_u_s_b_audio_device_base_8h.html#a2b0c38ffc3ce446fc8d69105042a0549">AUDIO_CS_CTRL_CLK_VALID</a>&#160;&#160;&#160;0x02u</td></tr>
-<tr class="separator:a2b0c38ffc3ce446fc8d69105042a0549"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba8a6b08c16ff1f0ab90768b3e6d5a7b" id="r_aba8a6b08c16ff1f0ab90768b3e6d5a7b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_u_s_b_audio_device_base_8h.html#aba8a6b08c16ff1f0ab90768b3e6d5a7b">AUDIO_CS_REQ_RANGE</a>&#160;&#160;&#160;0x02u</td></tr>
-<tr class="separator:aba8a6b08c16ff1f0ab90768b3e6d5a7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae3cfc85fb75d4e9143c7683a5eceb6b" id="r_aae3cfc85fb75d4e9143c7683a5eceb6b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_u_s_b_audio_device_base_8h.html#aae3cfc85fb75d4e9143c7683a5eceb6b">AUDIO_FU_CTRL_MUTE</a>&#160;&#160;&#160;0x01u</td></tr>
-<tr class="separator:aae3cfc85fb75d4e9143c7683a5eceb6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5a5f0d502f22c33d2aaf6b12d846b63" id="r_aa5a5f0d502f22c33d2aaf6b12d846b63"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_u_s_b_audio_device_base_8h.html#aa5a5f0d502f22c33d2aaf6b12d846b63">AUDIO_FU_CTRL_VOLUME</a>&#160;&#160;&#160;0x02u</td></tr>
-<tr class="separator:aa5a5f0d502f22c33d2aaf6b12d846b63"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a45fdd33dcda7197d6759f5af62283dcb" id="r_a45fdd33dcda7197d6759f5af62283dcb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_u_s_b_audio_device_base_8h.html#a45fdd33dcda7197d6759f5af62283dcb">TUSB_EDPT_XFER</a>(rp,  ep,  buf,  sz)&#160;&#160;&#160;usbd_edpt_xfer(rp, ep, buf, sz)</td></tr>
-<tr class="separator:a45fdd33dcda7197d6759f5af62283dcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed647ee9864f22cb83166d9bad2d6a24" id="r_aed647ee9864f22cb83166d9bad2d6a24"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_u_s_b_audio_device_base_8h.html#aed647ee9864f22cb83166d9bad2d6a24">TUSB_EDPT_XFER_FIFO</a>(rp,  ep,  ff,  sz)&#160;&#160;&#160;usbd_edpt_xfer_fifo(rp, ep, ff, sz)</td></tr>
-<tr class="separator:aed647ee9864f22cb83166d9bad2d6a24"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7734ac8a94a55008fe7a628fbd769db0" id="r_a7734ac8a94a55008fe7a628fbd769db0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_u_s_b_audio_device_base_8h.html#a7734ac8a94a55008fe7a628fbd769db0">TUSB_FIFO_CONFIG</a>(f,  buf,  d,  ov)&#160;&#160;&#160;tu_fifo_config(f, buf, d, 1, ov)</td></tr>
-<tr class="separator:a7734ac8a94a55008fe7a628fbd769db0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acaef65a3c3a5b05cc8d8228fc4e279db" id="r_acaef65a3c3a5b05cc8d8228fc4e279db"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_u_s_b_audio_device_base_8h.html#acaef65a3c3a5b05cc8d8228fc4e279db">USB_DESCR_MAX_LEN</a>&#160;&#160;&#160;512</td></tr>
 <tr class="separator:acaef65a3c3a5b05cc8d8228fc4e279db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:acf1e86a67db30b14be6f886f6197d564" id="r_acf1e86a67db30b14be6f886f6197d564"><td class="memItemLeft" align="right" valign="top">usbd_class_driver_t const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_u_s_b_audio_device_base_8h.html#acf1e86a67db30b14be6f886f6197d564">usbd_app_driver_get_cb</a> (uint8_t *count)</td></tr>
-<tr class="separator:acf1e86a67db30b14be6f886f6197d564"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86c6339f6da13b57540a447567e9eb3d" id="r_a86c6339f6da13b57540a447567e9eb3d"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a86c6339f6da13b57540a447567e9eb3d">u16High</a> (uint16_t v)</td></tr>
+<tr class="separator:a86c6339f6da13b57540a447567e9eb3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cc24e8a43229b911ca49a915c341b78" id="r_a6cc24e8a43229b911ca49a915c341b78"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a6cc24e8a43229b911ca49a915c341b78">u16Low</a> (uint16_t v)</td></tr>
+<tr class="separator:a6cc24e8a43229b911ca49a915c341b78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a0871673bc4fabc917d9c3b8f3c5e8efb" id="r_a0871673bc4fabc917d9c3b8f3c5e8efb"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a0871673bc4fabc917d9c3b8f3c5e8efb">kNumSupportedSampleRates</a></td></tr>
-<tr class="separator:a0871673bc4fabc917d9c3b8f3c5e8efb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a62740879acca0d0cf686fa2f3de86c92" id="r_a62740879acca0d0cf686fa2f3de86c92"><td class="memItemLeft" align="right" valign="top">static constexpr uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a62740879acca0d0cf686fa2f3de86c92">kSupportedSampleRates</a> []</td></tr>
-<tr class="separator:a62740879acca0d0cf686fa2f3de86c92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92faab18f22516a2fa901a361325b238" id="r_a92faab18f22516a2fa901a361325b238"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a92faab18f22516a2fa901a361325b238">AUDIO_FU_CTRL_MUTE</a> = 0x01</td></tr>
+<tr class="separator:a92faab18f22516a2fa901a361325b238"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69fd0f088369a883db7f763cf4b88ac7" id="r_a69fd0f088369a883db7f763cf4b88ac7"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a69fd0f088369a883db7f763cf4b88ac7">AUDIO_FU_CTRL_VOLUME</a> = 0x02</td></tr>
+<tr class="separator:a69fd0f088369a883db7f763cf4b88ac7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ec17388887f5cac77ac008f2a71da1e" id="r_a9ec17388887f5cac77ac008f2a71da1e"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a9ec17388887f5cac77ac008f2a71da1e">kAudioCsAcInputTerminal</a> = 0x02</td></tr>
+<tr class="separator:a9ec17388887f5cac77ac008f2a71da1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34c09e8cbe72093f3e808fe96afbde48" id="r_a34c09e8cbe72093f3e808fe96afbde48"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a34c09e8cbe72093f3e808fe96afbde48">kAudioCsAcOutputTerminal</a> = 0x03</td></tr>
+<tr class="separator:a34c09e8cbe72093f3e808fe96afbde48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad286c63df56ef2f4c07ebe55f38cbf9e" id="r_ad286c63df56ef2f4c07ebe55f38cbf9e"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ad286c63df56ef2f4c07ebe55f38cbf9e">kAudioCsAsFormatType</a> = 0x02</td></tr>
+<tr class="separator:ad286c63df56ef2f4c07ebe55f38cbf9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd02ea43266d16473248dbb208e2c6f8" id="r_acd02ea43266d16473248dbb208e2c6f8"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#acd02ea43266d16473248dbb208e2c6f8">kAudioCsAsGeneral</a> = 0x01</td></tr>
+<tr class="separator:acd02ea43266d16473248dbb208e2c6f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f2c9acb33f8b4cdacc6d0feaaa0b033" id="r_a8f2c9acb33f8b4cdacc6d0feaaa0b033"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a8f2c9acb33f8b4cdacc6d0feaaa0b033">kAudioCsCtrlClkValid</a> = 0x02</td></tr>
+<tr class="separator:a8f2c9acb33f8b4cdacc6d0feaaa0b033"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05e035faed884443a96614e997c9e440" id="r_a05e035faed884443a96614e997c9e440"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a05e035faed884443a96614e997c9e440">kAudioCsCtrlSamFreq</a> = 0x01</td></tr>
+<tr class="separator:a05e035faed884443a96614e997c9e440"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30149fb226d7ef7cc899c3378f784983" id="r_a30149fb226d7ef7cc899c3378f784983"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a30149fb226d7ef7cc899c3378f784983">kAudioCsReqCur</a> = 0x01</td></tr>
+<tr class="separator:a30149fb226d7ef7cc899c3378f784983"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed27eb81b548e57bacbe9b7c394970eb" id="r_aed27eb81b548e57bacbe9b7c394970eb"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aed27eb81b548e57bacbe9b7c394970eb">kAudioCsReqRange</a> = 0x02</td></tr>
+<tr class="separator:aed27eb81b548e57bacbe9b7c394970eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0da6d824897cb2e42a199eb5d6c847ee" id="r_a0da6d824897cb2e42a199eb5d6c847ee"><td class="memItemLeft" align="right" valign="top">static constexpr uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a0da6d824897cb2e42a199eb5d6c847ee">kAudioDescIadLen</a> = 8</td></tr>
+<tr class="separator:a0da6d824897cb2e42a199eb5d6c847ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d895a110eee6fed2ecd4fa0c9b1737e" id="r_a2d895a110eee6fed2ecd4fa0c9b1737e"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a2d895a110eee6fed2ecd4fa0c9b1737e">kAudioIntProtocolCodeV2</a> = 0x20</td></tr>
+<tr class="separator:a2d895a110eee6fed2ecd4fa0c9b1737e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a035bf0f0cd5de55f14802563ea99707e" id="r_a035bf0f0cd5de55f14802563ea99707e"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a035bf0f0cd5de55f14802563ea99707e">kAudioSubclassControl</a> = 0x01</td></tr>
+<tr class="separator:a035bf0f0cd5de55f14802563ea99707e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ceccd9180130872bc7c51eda112cf4c" id="r_a9ceccd9180130872bc7c51eda112cf4c"><td class="memItemLeft" align="right" valign="top">static constexpr uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a9ceccd9180130872bc7c51eda112cf4c">kAudioTermTypeUsbStreaming</a> = 0x0101</td></tr>
+<tr class="separator:a9ceccd9180130872bc7c51eda112cf4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69ae23bffd1b3498f0df83640e2e7a5d" id="r_a69ae23bffd1b3498f0df83640e2e7a5d"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a69ae23bffd1b3498f0df83640e2e7a5d">kControlStageData</a> = 2</td></tr>
+<tr class="separator:a69ae23bffd1b3498f0df83640e2e7a5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae94f7527e14e2378344a5183c2d2b9fe" id="r_ae94f7527e14e2378344a5183c2d2b9fe"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ae94f7527e14e2378344a5183c2d2b9fe">kControlStageSetup</a> = 1</td></tr>
+<tr class="separator:ae94f7527e14e2378344a5183c2d2b9fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26249c976181af176010e43b94a4f809" id="r_a26249c976181af176010e43b94a4f809"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a26249c976181af176010e43b94a4f809">kUsbClassAudio</a> = 0x01</td></tr>
+<tr class="separator:a26249c976181af176010e43b94a4f809"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaafc6d239ff6424024acac2a6e707a23" id="r_aaafc6d239ff6424024acac2a6e707a23"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aaafc6d239ff6424024acac2a6e707a23">kUsbDescTypeCsInterface</a> = 0x24</td></tr>
+<tr class="separator:aaafc6d239ff6424024acac2a6e707a23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d0331203c0613596337b1066f66f88a" id="r_a7d0331203c0613596337b1066f66f88a"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a7d0331203c0613596337b1066f66f88a">kUsbDescTypeEndpoint</a> = 0x05</td></tr>
+<tr class="separator:a7d0331203c0613596337b1066f66f88a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac2a2cd297d85dae672fabc4a2c9539d" id="r_aac2a2cd297d85dae672fabc4a2c9539d"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aac2a2cd297d85dae672fabc4a2c9539d">kUsbDescTypeInterface</a> = 0x04</td></tr>
+<tr class="separator:aac2a2cd297d85dae672fabc4a2c9539d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a8285e43a719ce10c4adc11dc063d7f4b" name="a8285e43a719ce10c4adc11dc063d7f4b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8285e43a719ce10c4adc11dc063d7f4b">&#9670;&#160;</a></span>AUDIO10_CS_AC_INTERFACE_INPUT_TERMINAL</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define AUDIO10_CS_AC_INTERFACE_INPUT_TERMINAL&#160;&#160;&#160;  AUDIO_CS_AC_INTERFACE_INPUT_TERMINAL</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a2b0c38ffc3ce446fc8d69105042a0549" name="a2b0c38ffc3ce446fc8d69105042a0549"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2b0c38ffc3ce446fc8d69105042a0549">&#9670;&#160;</a></span>AUDIO_CS_CTRL_CLK_VALID</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define AUDIO_CS_CTRL_CLK_VALID&#160;&#160;&#160;0x02u</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aba8a6b08c16ff1f0ab90768b3e6d5a7b" name="aba8a6b08c16ff1f0ab90768b3e6d5a7b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aba8a6b08c16ff1f0ab90768b3e6d5a7b">&#9670;&#160;</a></span>AUDIO_CS_REQ_RANGE</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define AUDIO_CS_REQ_RANGE&#160;&#160;&#160;0x02u</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aae3cfc85fb75d4e9143c7683a5eceb6b" name="aae3cfc85fb75d4e9143c7683a5eceb6b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aae3cfc85fb75d4e9143c7683a5eceb6b">&#9670;&#160;</a></span>AUDIO_FU_CTRL_MUTE</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define AUDIO_FU_CTRL_MUTE&#160;&#160;&#160;0x01u</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aa5a5f0d502f22c33d2aaf6b12d846b63" name="aa5a5f0d502f22c33d2aaf6b12d846b63"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa5a5f0d502f22c33d2aaf6b12d846b63">&#9670;&#160;</a></span>AUDIO_FU_CTRL_VOLUME</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define AUDIO_FU_CTRL_VOLUME&#160;&#160;&#160;0x02u</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a45fdd33dcda7197d6759f5af62283dcb" name="a45fdd33dcda7197d6759f5af62283dcb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a45fdd33dcda7197d6759f5af62283dcb">&#9670;&#160;</a></span>TUSB_EDPT_XFER</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define TUSB_EDPT_XFER</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">rp, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">ep, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">buf, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">sz&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>&#160;&#160;&#160;usbd_edpt_xfer(rp, ep, buf, sz)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aed647ee9864f22cb83166d9bad2d6a24" name="aed647ee9864f22cb83166d9bad2d6a24"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aed647ee9864f22cb83166d9bad2d6a24">&#9670;&#160;</a></span>TUSB_EDPT_XFER_FIFO</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define TUSB_EDPT_XFER_FIFO</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">rp, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">ep, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">ff, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">sz&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>&#160;&#160;&#160;usbd_edpt_xfer_fifo(rp, ep, ff, sz)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a7734ac8a94a55008fe7a628fbd769db0" name="a7734ac8a94a55008fe7a628fbd769db0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7734ac8a94a55008fe7a628fbd769db0">&#9670;&#160;</a></span>TUSB_FIFO_CONFIG</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define TUSB_FIFO_CONFIG</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">f, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">buf, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">d, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">ov&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>&#160;&#160;&#160;tu_fifo_config(f, buf, d, 1, ov)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="acaef65a3c3a5b05cc8d8228fc4e279db" name="acaef65a3c3a5b05cc8d8228fc4e279db"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acaef65a3c3a5b05cc8d8228fc4e279db">&#9670;&#160;</a></span>USB_DESCR_MAX_LEN</h2>
 
@@ -344,25 +174,6 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define USB_DESCR_MAX_LEN&#160;&#160;&#160;512</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="acf1e86a67db30b14be6f886f6197d564" name="acf1e86a67db30b14be6f886f6197d564"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acf1e86a67db30b14be6f886f6197d564">&#9670;&#160;</a></span>usbd_app_driver_get_cb()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">usbd_class_driver_t const  * usbd_app_driver_get_cb </td>
-          <td>(</td>
-          <td class="paramtype">uint8_t *&#160;</td>
-          <td class="paramname"><em>count</em></td><td>)</td>
-          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">

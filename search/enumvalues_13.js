@@ -52,12 +52,13 @@ var searchData=
   ['vban_5ftxt_5fwchar_49',['VBAN_TXT_WCHAR',['../vban_8h.html#aec5b692b4e67571a79d7ee3847476bc2af9b774feb9b67415bff3123897f3bd95',1,'vban.h']]],
   ['vc1_50',['VC1',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338a347f3a62cf1be8adbad6829e05b3e62c',1,'audio_tools']]],
   ['vei_51',['VEI',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338af5b01d1fcfc27348aadab6c114fca649',1,'audio_tools']]],
-  ['vfs_5ffile_5fappend_52',['VFS_FILE_APPEND',['../namespaceaudio__tools.html#a031770da453a180e21dcbef5cf5aeab6ab384a3f34c711dc713ae2ee238d08ddb',1,'audio_tools']]],
-  ['vfs_5ffile_5fread_53',['VFS_FILE_READ',['../namespaceaudio__tools.html#a031770da453a180e21dcbef5cf5aeab6a1a597ab198a857a857e25039fc461c91',1,'audio_tools']]],
-  ['vfs_5ffile_5fwrite_54',['VFS_FILE_WRITE',['../namespaceaudio__tools.html#a031770da453a180e21dcbef5cf5aeab6a97fabd87f5fdf8610e87afd9354ea13f',1,'audio_tools']]],
-  ['video_55',['video',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338ae60ae31f67ab883c746bb71c7a145c18',1,'audio_tools::VIDEO'],['../namespaceaudio__tools.html#a3529160d6b73e5a63e0a95afeb424659aff13e87d7cbbe18fface435a5b84aaec',1,'audio_tools::Video']]],
-  ['video_5favc_56',['VIDEO_AVC',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338a5a63b30a669280e6c747f70c796c53af',1,'audio_tools']]],
-  ['video_5fh222_5f0_57',['VIDEO_H222_0',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338a00398da1d4c01718373fcf143c4f746f',1,'audio_tools']]],
-  ['video_5fh262_58',['VIDEO_H262',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338a1a91065bdbcec22d8dcd6c682b569f72',1,'audio_tools']]],
-  ['visual_59',['VISUAL',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338a8daf3496602a64f00b16ce266e7084dc',1,'audio_tools']]]
+  ['vendor_52',['Vendor',['../structaudio__tools_1_1_usb_setup_packet.html#a5f787df9cdf370248382504196841479aec9ceefe0c19f4c029008c23e3c947b7',1,'audio_tools::UsbSetupPacket']]],
+  ['vfs_5ffile_5fappend_53',['VFS_FILE_APPEND',['../namespaceaudio__tools.html#a031770da453a180e21dcbef5cf5aeab6ab384a3f34c711dc713ae2ee238d08ddb',1,'audio_tools']]],
+  ['vfs_5ffile_5fread_54',['VFS_FILE_READ',['../namespaceaudio__tools.html#a031770da453a180e21dcbef5cf5aeab6a1a597ab198a857a857e25039fc461c91',1,'audio_tools']]],
+  ['vfs_5ffile_5fwrite_55',['VFS_FILE_WRITE',['../namespaceaudio__tools.html#a031770da453a180e21dcbef5cf5aeab6a97fabd87f5fdf8610e87afd9354ea13f',1,'audio_tools']]],
+  ['video_56',['video',['../namespaceaudio__tools.html#a3529160d6b73e5a63e0a95afeb424659aff13e87d7cbbe18fface435a5b84aaec',1,'audio_tools::Video'],['../group__basic.html#gga5b1869d184b84711842bfe4f25433338ae60ae31f67ab883c746bb71c7a145c18',1,'audio_tools::VIDEO']]],
+  ['video_5favc_57',['VIDEO_AVC',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338a5a63b30a669280e6c747f70c796c53af',1,'audio_tools']]],
+  ['video_5fh222_5f0_58',['VIDEO_H222_0',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338a00398da1d4c01718373fcf143c4f746f',1,'audio_tools']]],
+  ['video_5fh262_59',['VIDEO_H262',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338a1a91065bdbcec22d8dcd6c682b569f72',1,'audio_tools']]],
+  ['visual_60',['VISUAL',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338a8daf3496602a64f00b16ce266e7084dc',1,'audio_tools']]]
 ];

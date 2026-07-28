@@ -9,12 +9,13 @@ var searchData=
   ['default_6',['Default',['../namespaceaudio__tools.html#ac7e19a69c5927b90d045e091376d1119a7a1920d61156abc05a60135aefe8bc67',1,'audio_tools']]],
   ['delete_7',['DELETE',['../_http_types_8h.html#a3a8d8d5989e593d770a33e5cb6c1ae84a9d61e82a9a12752f10aece1b22183913',1,'HttpTypes.h']]],
   ['description_8',['Description',['../group__metadata.html#gga6760f423085f8a63374b1e2db102a6d1a57fb606caa142945062c463a838ea18d',1,'audio_tools']]],
-  ['dialogic_5foki_5fadpcm_9',['DIALOGIC_OKI_ADPCM',['../group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1a258f552bbbf8afd6d17ce98d1feb0a71',1,'audio_tools']]],
-  ['digiadpcm_10',['DIGIADPCM',['../group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1a7be4eeae45b914e2ee006b2379a9ddc3',1,'audio_tools']]],
-  ['digital_11',['Digital',['../namespaceaudio__tools.html#a1d3846b210a1698eaf7cdb7258fcc3e1a144c84f4216331667caf031b85dc1cdc',1,'audio_tools']]],
-  ['directtimercallback_12',['DirectTimerCallback',['../namespaceaudio__tools.html#a1a80d46b1fcf323c58eb596c016434f2ae258d3dbc13395dd87a28a529d99a454',1,'audio_tools']]],
-  ['dropout_13',['Dropout',['../group__dsp.html#ggac1859b3dc5b9119471bd06e89b30d7ada09bb9294aa4a843883a3f401aeaf8b5b',1,'audio_tools']]],
-  ['ds_14',['DS',['../group__tools.html#gga9715fceb4c700e7e4a610400464e9396ab8092694163a64aa32694a8246d94210',1,'audio_tools::MusicalNotes']]],
-  ['dvb_5fmpe_5ffec_15',['DVB_MPE_FEC',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338a1bc36dc0a93fa35bc9f3801bb8d0c096',1,'audio_tools']]],
-  ['dvi_5fadpcm_16',['DVI_ADPCM',['../group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1ac85f6b9c69883d9812fe85bb4d5240b4',1,'audio_tools']]]
+  ['device_9',['Device',['../structaudio__tools_1_1_usb_setup_packet.html#ae8288d1dc035579e1d28712b41397b2bae0ac20adce6ffee48c7151b070aa5737',1,'audio_tools::UsbSetupPacket']]],
+  ['dialogic_5foki_5fadpcm_10',['DIALOGIC_OKI_ADPCM',['../group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1a258f552bbbf8afd6d17ce98d1feb0a71',1,'audio_tools']]],
+  ['digiadpcm_11',['DIGIADPCM',['../group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1a7be4eeae45b914e2ee006b2379a9ddc3',1,'audio_tools']]],
+  ['digital_12',['Digital',['../namespaceaudio__tools.html#a1d3846b210a1698eaf7cdb7258fcc3e1a144c84f4216331667caf031b85dc1cdc',1,'audio_tools']]],
+  ['directtimercallback_13',['DirectTimerCallback',['../namespaceaudio__tools.html#a1a80d46b1fcf323c58eb596c016434f2ae258d3dbc13395dd87a28a529d99a454',1,'audio_tools']]],
+  ['dropout_14',['Dropout',['../group__dsp.html#ggac1859b3dc5b9119471bd06e89b30d7ada09bb9294aa4a843883a3f401aeaf8b5b',1,'audio_tools']]],
+  ['ds_15',['DS',['../group__tools.html#gga9715fceb4c700e7e4a610400464e9396ab8092694163a64aa32694a8246d94210',1,'audio_tools::MusicalNotes']]],
+  ['dvb_5fmpe_5ffec_16',['DVB_MPE_FEC',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338a1bc36dc0a93fa35bc9f3801bb8d0c096',1,'audio_tools']]],
+  ['dvi_5fadpcm_17',['DVI_ADPCM',['../group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1ac85f6b9c69883d9812fe85bb4d5240b4',1,'audio_tools']]]
 ];
