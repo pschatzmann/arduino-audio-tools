@@ -75,7 +75,8 @@ $(function() {
 <li>M&#160;:&#160;<a class="el" href="structaudio__tools_1_1_echo_state.html#a5e78dbd5fd0fc01ba7b98dd15e27221e">EchoState&lt; T, SampleType &gt;</a></li>
 <li>m_actual&#160;:&#160;<a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a5674768dce52e47fa2e55a3615e369e1">RTTTLOutput&lt; T &gt;</a></li>
 <li>m_addr&#160;:&#160;<a class="el" href="classaudio__tools_1_1_r_t_s_p_client.html#a4528d55f907280215102cff76a029bbc">RTSPClient&lt; TcpClient, UdpSocket &gt;</a></li>
-<li>m_amplitude&#160;:&#160;<a class="el" href="classaudio__tools_1_1_sine_generator.html#af9afc98584f86e841e207cef38f7f269">SineGenerator&lt; T &gt;</a></li>
+<li>m_amplitude&#160;:&#160;<a class="el" href="classaudio__tools_1_1_fast_int_sine_generator.html#af9afc98584f86e841e207cef38f7f269">FastIntSineGenerator&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_sine_generator.html#af9afc98584f86e841e207cef38f7f269">SineGenerator&lt; T &gt;</a></li>
+<li>m_amplitude_i&#160;:&#160;<a class="el" href="classaudio__tools_1_1_fast_int_sine_generator.html#af2b57498b18fba46f36d68933f3af1dc">FastIntSineGenerator&lt; T &gt;</a></li>
 <li>m_audioSource&#160;:&#160;<a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#a905b7e64fe8e96fd9565c5a917c4990f">RTSPAudioStreamerBase&lt; Platform &gt;</a></li>
 <li>m_baseUrl&#160;:&#160;<a class="el" href="classaudio__tools_1_1_r_t_s_p_client.html#af3f72cdeea76fc65ce58b68855d4d6c2">RTSPClient&lt; TcpClient, UdpSocket &gt;</a></li>
 <li>m_bodyBuf&#160;:&#160;<a class="el" href="classaudio__tools_1_1_r_t_s_p_client.html#a85ff8352f3fed15795acfeaf4e5da857">RTSPClient&lt; TcpClient, UdpSocket &gt;</a></li>
@@ -104,7 +105,7 @@ $(function() {
 <li>m_encoding&#160;:&#160;<a class="el" href="classaudio__tools_1_1_r_t_s_p_client.html#acba20b81beb675aa6969dbf483adf6ce">RTSPClient&lt; TcpClient, UdpSocket &gt;</a></li>
 <li>m_fixed_delay_ms&#160;:&#160;<a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html#a7cfa1510fab38dd33caeece92fac96c3">RTSPAudioStreamerUsingTask&lt; Platform &gt;</a></li>
 <li>m_fragmentSize&#160;:&#160;<a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#a46115f79bf7810fb5646366430e83a6b">RTSPAudioStreamerBase&lt; Platform &gt;</a></li>
-<li>m_frequency&#160;:&#160;<a class="el" href="classaudio__tools_1_1_sine_generator.html#a56708602600557483f6aed7b0272c45b">SineGenerator&lt; T &gt;</a></li>
+<li>m_frequency&#160;:&#160;<a class="el" href="classaudio__tools_1_1_fast_int_sine_generator.html#a56708602600557483f6aed7b0272c45b">FastIntSineGenerator&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_sine_generator.html#a56708602600557483f6aed7b0272c45b">SineGenerator&lt; T &gt;</a></li>
 <li>m_hdrBuf&#160;:&#160;<a class="el" href="classaudio__tools_1_1_r_t_s_p_client.html#aa16523e3f5a2dbb4b65d0bfaa8a288c8">RTSPClient&lt; TcpClient, UdpSocket &gt;</a></li>
 <li>m_headerTimeoutMs&#160;:&#160;<a class="el" href="classaudio__tools_1_1_r_t_s_p_client.html#a59e5b576940e29f59ee339ebfd040cfe">RTSPClient&lt; TcpClient, UdpSocket &gt;</a></li>
 <li>m_idleDelayMs&#160;:&#160;<a class="el" href="classaudio__tools_1_1_r_t_s_p_client.html#acbda20b2335b7ee4110a6b6cc39c8cc3">RTSPClient&lt; TcpClient, UdpSocket &gt;</a></li>
@@ -128,6 +129,9 @@ $(function() {
 <li>m_payloadOffset&#160;:&#160;<a class="el" href="classaudio__tools_1_1_r_t_s_p_client.html#adeb5c2edfabd462c71302768a661a54e">RTSPClient&lt; TcpClient, UdpSocket &gt;</a></li>
 <li>m_payloadType&#160;:&#160;<a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#add52c773f5cb1d76a4a268c98778c33f">RTSPAudioStreamerBase&lt; Platform &gt;</a>, <a class="el" href="classaudio__tools_1_1_r_t_s_p_client.html#a489356ec90fe9f601afeed061c5a1c54">RTSPClient&lt; TcpClient, UdpSocket &gt;</a></li>
 <li>m_phase&#160;:&#160;<a class="el" href="classaudio__tools_1_1_sine_generator.html#a09554626f44e9d18665ed667cdca8643">SineGenerator&lt; T &gt;</a></li>
+<li>m_phase_acc&#160;:&#160;<a class="el" href="classaudio__tools_1_1_fast_int_sine_generator.html#ace4d7351b94dedad6851e74045c5776b">FastIntSineGenerator&lt; T &gt;</a></li>
+<li>m_phase_increment&#160;:&#160;<a class="el" href="classaudio__tools_1_1_fast_int_sine_generator.html#a3a4c4f89162d04840551ac1ca3461acc">FastIntSineGenerator&lt; T &gt;</a></li>
+<li>m_phase_offset&#160;:&#160;<a class="el" href="classaudio__tools_1_1_fast_int_sine_generator.html#ae57fc322e6897b246feaf8f96e66a32f">FastIntSineGenerator&lt; T &gt;</a></li>
 <li>m_pktBuf&#160;:&#160;<a class="el" href="classaudio__tools_1_1_r_t_s_p_client.html#a70b444b146baac6287963c6ab83852f0">RTSPClient&lt; TcpClient, UdpSocket &gt;</a></li>
 <li>m_port&#160;:&#160;<a class="el" href="classaudio__tools_1_1_r_t_s_p_client.html#acd2fd7bb7ab933130e879aab7e803a3f">RTSPClient&lt; TcpClient, UdpSocket &gt;</a></li>
 <li>m_prec&#160;:&#160;<a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#ac331b226b191f27843a912605c89244b">RTTTLOutput&lt; T &gt;</a></li>

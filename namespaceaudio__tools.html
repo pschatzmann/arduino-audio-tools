@@ -852,6 +852,9 @@ size_t size)</a> and <a class="el" href="classaudio__tools_1_1_base_stream.html#
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_fade_stream.html">FadeStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_stream.html">Stream</a> which can be used to manage fade in and fade out. Before you read or write data you need to call <a class="el" href="classaudio__tools_1_1_fade_stream.html#ad1fdd56031f1195cb221ab855fb6a102" title="Defines the input AudioInfo.">setAudioInfo()</a> to provide the bits_per_sample and channels.  <a href="classaudio__tools_1_1_fade_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_fast_int_sine_generator.html">FastIntSineGenerator</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sine wave generator that does not use any floating point operations in the <a class="el" href="classaudio__tools_1_1_fast_int_sine_generator.html#a45b168302ee30ce87241d8987e5f9adf" title="Provides a single sample - integer only, no float ops or sin() calls!">readSample()</a> hot path: it advances a 32 bit phase accumulator with an integer increment and looks up the result in a Q15 fixed point table. All floating point math (converting frequency/sample_rate into the phase increment) is done once in <a class="el" href="classaudio__tools_1_1_fast_int_sine_generator.html#a0517b8e9504478c5d7f9c5b39d2853bf" title="Defines the frequency - the only place where float math is used.">setFrequency()</a>/setAudioInfo(), never per sample. This makes it a good fit for MCUs without a hardware FPU - e.g. the RP2040 - where sinf() is comparatively expensive.  <a href="classaudio__tools_1_1_fast_int_sine_generator.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_fast_sine_generator.html">FastSineGenerator</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sine wave which is based on a fast approximation function.  <a href="classaudio__tools_1_1_fast_sine_generator.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2080,6 +2083,9 @@ size_t size)</a> and <a class="el" href="classaudio__tools_1_1_base_stream.html#
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html">USBAudioDeviceESP32</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html" title="USB Audio Device class for audio streaming over USB.">USBAudioDeviceBase</a> subclass for ESP32-S2/S3 using the arduino-esp32 stack.  <a href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_renesas.html">USBAudioDeviceRenesas</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html" title="USB Audio Device class for audio streaming over USB.">USBAudioDeviceBase</a> subclass for the Arduino UNO R4 / Nano R4 (Renesas RA4M1, <code>arduino:renesas_uno</code> core).  <a href="classaudio__tools_1_1_u_s_b_audio_device_renesas.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html">USBAudioDeviceTinyUSB</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html" title="USB Audio Device class for audio streaming over USB.">USBAudioDeviceBase</a> subclass for RP2040 / Adafruit TinyUSB.  <a href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2954,6 +2960,8 @@ Functions</h2></td></tr>
 <tr class="memitem:a7788a85ffcebdcf25ea71d8789d60e42" id="r_a7788a85ffcebdcf25ea71d8789d60e42"><td class="memItemLeft" align="right" valign="top">CHSV&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a7788a85ffcebdcf25ea71d8789d60e42">getDefaultColor</a> (int x, int y, int magnitude)</td></tr>
 <tr class="memdesc:a7788a85ffcebdcf25ea71d8789d60e42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default logic to update the color for the indicated x,y position.  <br /></td></tr>
 <tr class="separator:a7788a85ffcebdcf25ea71d8789d60e42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9f926eedcb14784e7b7065cbc7405fb" id="r_aa9f926eedcb14784e7b7065cbc7405fb"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aa9f926eedcb14784e7b7065cbc7405fb">highestSupportedSampleRate</a> (const <a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html">USBAudioConfig</a> &amp;cfg)</td></tr>
+<tr class="separator:aa9f926eedcb14784e7b7065cbc7405fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9addbb5546bc446e46b7929960f6be1b" id="r_a9addbb5546bc446e46b7929960f6be1b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a9addbb5546bc446e46b7929960f6be1b">I2S_IRQHandler</a> (void)</td></tr>
 <tr class="separator:a9addbb5546bc446e46b7929960f6be1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7d8c544e044f473c5cbf20605ebb1fe" id="r_aa7d8c544e044f473c5cbf20605ebb1fe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aa7d8c544e044f473c5cbf20605ebb1fe">I2S_IRQRead</a> (void)</td></tr>
@@ -3236,10 +3244,6 @@ Variables</h2></td></tr>
 <tr class="separator:a69ae23bffd1b3498f0df83640e2e7a5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae94f7527e14e2378344a5183c2d2b9fe" id="r_ae94f7527e14e2378344a5183c2d2b9fe"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ae94f7527e14e2378344a5183c2d2b9fe">kControlStageSetup</a> = 1</td></tr>
 <tr class="separator:ae94f7527e14e2378344a5183c2d2b9fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0871673bc4fabc917d9c3b8f3c5e8efb" id="r_a0871673bc4fabc917d9c3b8f3c5e8efb"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a0871673bc4fabc917d9c3b8f3c5e8efb">kNumSupportedSampleRates</a></td></tr>
-<tr class="separator:a0871673bc4fabc917d9c3b8f3c5e8efb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a62740879acca0d0cf686fa2f3de86c92" id="r_a62740879acca0d0cf686fa2f3de86c92"><td class="memItemLeft" align="right" valign="top">static constexpr uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a62740879acca0d0cf686fa2f3de86c92">kSupportedSampleRates</a> []</td></tr>
-<tr class="separator:a62740879acca0d0cf686fa2f3de86c92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26249c976181af176010e43b94a4f809" id="r_a26249c976181af176010e43b94a4f809"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a26249c976181af176010e43b94a4f809">kUsbClassAudio</a> = 0x01</td></tr>
 <tr class="separator:a26249c976181af176010e43b94a4f809"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaafc6d239ff6424024acac2a6e707a23" id="r_aaafc6d239ff6424024acac2a6e707a23"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aaafc6d239ff6424024acac2a6e707a23">kUsbDescTypeCsInterface</a> = 0x24</td></tr>
@@ -3313,6 +3317,8 @@ Variables</h2></td></tr>
 <tr class="separator:a88dad4eabd1b544845c2b62c8680948a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f9cfc7022261e8246f2cac14cd58b27" id="r_a3f9cfc7022261e8246f2cac14cd58b27"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a3f9cfc7022261e8246f2cac14cd58b27">TimeUnitStr</a> [3] {&quot;MS&quot;, &quot;US&quot;, &quot;HZ&quot;}</td></tr>
 <tr class="separator:a3f9cfc7022261e8246f2cac14cd58b27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1b2c322982252994a255caf5dac4ff2" id="r_aa1b2c322982252994a255caf5dac4ff2"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classaudio__tools_1_1_emulated___tiny_u_s_b.html">Emulated_TinyUSB</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aa1b2c322982252994a255caf5dac4ff2">TinyUSBDevice</a></td></tr>
+<tr class="separator:aa1b2c322982252994a255caf5dac4ff2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1b2c322982252994a255caf5dac4ff2" id="r_aa1b2c322982252994a255caf5dac4ff2"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classaudio__tools_1_1_emulated___tiny_u_s_b.html">Emulated_TinyUSB</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aa1b2c322982252994a255caf5dac4ff2">TinyUSBDevice</a></td></tr>
 <tr class="separator:aa1b2c322982252994a255caf5dac4ff2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23d5065b09970e19cb7d7c4766a4c770" id="r_a23d5065b09970e19cb7d7c4766a4c770"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a23d5065b09970e19cb7d7c4766a4c770">TRANSFER_ENCODING</a> = &quot;Transfer-Encoding&quot;</td></tr>
@@ -5727,6 +5733,33 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 
 <p>Default logic to update the color for the indicated x,y position. </p>
+
+</div>
+</div>
+<a id="aa9f926eedcb14784e7b7065cbc7405fb" name="aa9f926eedcb14784e7b7065cbc7405fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9f926eedcb14784e7b7065cbc7405fb">&#9670;&#160;</a></span>highestSupportedSampleRate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t highestSupportedSampleRate </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html">USBAudioConfig</a> &amp;&#160;</td>
+          <td class="paramname"><em>cfg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Highest rate multi-rate mode should size isochronous packets/buffers for (see supported_sample_rates above). Falls back to the fixed sample_rate if the list was cleared out, so sizing logic never indexes an empty vector. </p>
 
 </div>
 </div>
@@ -9210,55 +9243,6 @@ template&lt;typename T , class P &gt; </div>
 
 </div>
 </div>
-<a id="a0871673bc4fabc917d9c3b8f3c5e8efb" name="a0871673bc4fabc917d9c3b8f3c5e8efb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0871673bc4fabc917d9c3b8f3c5e8efb">&#9670;&#160;</a></span>kNumSupportedSampleRates</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr uint8_t kNumSupportedSampleRates</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">=</div>
-<div class="line">    <span class="keyword">sizeof</span>(<a class="code hl_variable" href="namespaceaudio__tools.html#a62740879acca0d0cf686fa2f3de86c92">kSupportedSampleRates</a>) / <span class="keyword">sizeof</span>(kSupportedSampleRates[0])</div>
-<div class="ttc" id="anamespaceaudio__tools_html_a62740879acca0d0cf686fa2f3de86c92"><div class="ttname"><a href="namespaceaudio__tools.html#a62740879acca0d0cf686fa2f3de86c92">audio_tools::kSupportedSampleRates</a></div><div class="ttdeci">static constexpr uint32_t kSupportedSampleRates[]</div><div class="ttdef"><b>Definition</b> USBAudioConfig.h:93</div></div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a62740879acca0d0cf686fa2f3de86c92" name="a62740879acca0d0cf686fa2f3de86c92"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a62740879acca0d0cf686fa2f3de86c92">&#9670;&#160;</a></span>kSupportedSampleRates</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr uint32_t kSupportedSampleRates[]</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
-<div class="line">    8000, 11025, 16000, 22050, 24000, 32000, 44100, 48000}</div>
-</div><!-- fragment -->
-</div>
-</div>
 <a id="a26249c976181af176010e43b94a4f809" name="a26249c976181af176010e43b94a4f809"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a26249c976181af176010e43b94a4f809">&#9670;&#160;</a></span>kUsbClassAudio</h2>
 
@@ -10013,7 +9997,29 @@ template&lt;typename T , class P &gt; </div>
 </div>
 </div>
 <a id="aa1b2c322982252994a255caf5dac4ff2" name="aa1b2c322982252994a255caf5dac4ff2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa1b2c322982252994a255caf5dac4ff2">&#9670;&#160;</a></span>TinyUSBDevice</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1b2c322982252994a255caf5dac4ff2">&#9670;&#160;</a></span>TinyUSBDevice <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_emulated___tiny_u_s_b.html">Emulated_TinyUSB</a> TinyUSBDevice</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa1b2c322982252994a255caf5dac4ff2" name="aa1b2c322982252994a255caf5dac4ff2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1b2c322982252994a255caf5dac4ff2">&#9670;&#160;</a></span>TinyUSBDevice <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">

@@ -103,9 +103,10 @@ Inheritance diagram for USBAudioDeviceBase:</div>
 <area href="classaudio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="AudioInfoSource" shape="rect" coords="454,112,671,136"/>
 <area href="class_stream.html" alt="Stream" shape="rect" coords="0,56,217,80"/>
 <area href="class_print.html" alt="Print" shape="rect" coords="0,0,217,24"/>
-<area href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html" title="USBAudioDeviceBase subclass for ESP32-S2/S3 using the arduino-esp32 stack." alt="USBAudioDeviceESP32" shape="rect" coords="227,280,444,304"/>
-<area href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html" title="USBAudioDeviceBase subclass for RP2040 / Adafruit TinyUSB." alt="USBAudioDeviceTinyUSB" shape="rect" coords="454,280,671,304"/>
-<area href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b_free_r_t_o_s.html" title="Variant of USBAudioDeviceTinyUSB for RP2040 + FreeRTOS." alt="USBAudioDeviceTinyUSBFreeRTOS" shape="rect" coords="454,336,671,360"/>
+<area href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html" title="USBAudioDeviceBase subclass for ESP32-S2/S3 using the arduino-esp32 stack." alt="USBAudioDeviceESP32" shape="rect" coords="113,280,330,304"/>
+<area href="classaudio__tools_1_1_u_s_b_audio_device_renesas.html" title="USBAudioDeviceBase subclass for the Arduino UNO R4 / Nano R4 (Renesas RA4M1, arduino:renesas_uno core..." alt="USBAudioDeviceRenesas" shape="rect" coords="340,280,557,304"/>
+<area href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html" title="USBAudioDeviceBase subclass for RP2040 / Adafruit TinyUSB." alt="USBAudioDeviceTinyUSB" shape="rect" coords="567,280,784,304"/>
+<area href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b_free_r_t_o_s.html" title="Variant of USBAudioDeviceTinyUSB for RP2040 + FreeRTOS." alt="USBAudioDeviceTinyUSBFreeRTOS" shape="rect" coords="567,336,784,360"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -1670,7 +1671,7 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Returns the backend used for all raw USB-stack calls (TinyUSB today, or a future native-HAL backend). Must be overridden by every platform subclass; the returned reference must outlive this object. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#ac0a8c4bb84f2df1e1fb42901c1e8f8a4">USBAudioDeviceESP32</a>, and <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html#ac0a8c4bb84f2df1e1fb42901c1e8f8a4">USBAudioDeviceTinyUSB</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#ac0a8c4bb84f2df1e1fb42901c1e8f8a4">USBAudioDeviceESP32</a>, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_renesas.html#ac0a8c4bb84f2df1e1fb42901c1e8f8a4">USBAudioDeviceRenesas</a>, and <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html#ac0a8c4bb84f2df1e1fb42901c1e8f8a4">USBAudioDeviceTinyUSB</a>.</p>
 
 </div>
 </div>
@@ -1764,7 +1765,7 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Override in platform subclasses to register descriptors and start the USB host-controller stack (e.g. USB.begin() on ESP32). Called at the end of begin(cfg, info). The base no-op is correct for RP2040 where TinyUSB is started by the system before <a class="el" href="_main_8h.html#a4fc01d736fe50cf5b977f755b675f11d">setup()</a>. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#a67b0ecd0961d037358f5f1ea75c363d5">USBAudioDeviceESP32</a>, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html#a67b0ecd0961d037358f5f1ea75c363d5">USBAudioDeviceTinyUSB</a>, and <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b_free_r_t_o_s.html#a67b0ecd0961d037358f5f1ea75c363d5">USBAudioDeviceTinyUSBFreeRTOS</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#a67b0ecd0961d037358f5f1ea75c363d5">USBAudioDeviceESP32</a>, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_renesas.html#a67b0ecd0961d037358f5f1ea75c363d5">USBAudioDeviceRenesas</a>, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html#a67b0ecd0961d037358f5f1ea75c363d5">USBAudioDeviceTinyUSB</a>, and <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b_free_r_t_o_s.html#a67b0ecd0961d037358f5f1ea75c363d5">USBAudioDeviceTinyUSBFreeRTOS</a>.</p>
 
 </div>
 </div>
@@ -1793,7 +1794,7 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Returns the RX audio buffer. Must be overridden by subclasses. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#acb49b3d87009a5a12096e51f330f2921">USBAudioDeviceESP32</a>, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html#acb49b3d87009a5a12096e51f330f2921">USBAudioDeviceTinyUSB</a>, and <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b_free_r_t_o_s.html#acb49b3d87009a5a12096e51f330f2921">USBAudioDeviceTinyUSBFreeRTOS</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#acb49b3d87009a5a12096e51f330f2921">USBAudioDeviceESP32</a>, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_renesas.html#acb49b3d87009a5a12096e51f330f2921">USBAudioDeviceRenesas</a>, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html#acb49b3d87009a5a12096e51f330f2921">USBAudioDeviceTinyUSB</a>, and <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b_free_r_t_o_s.html#acb49b3d87009a5a12096e51f330f2921">USBAudioDeviceTinyUSBFreeRTOS</a>.</p>
 
 </div>
 </div>
@@ -1822,7 +1823,7 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Returns the TX audio buffer. Must be overridden by subclasses. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#a426037f2e746a9c97f370044b6e3b8c9">USBAudioDeviceESP32</a>, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html#a426037f2e746a9c97f370044b6e3b8c9">USBAudioDeviceTinyUSB</a>, and <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b_free_r_t_o_s.html#a426037f2e746a9c97f370044b6e3b8c9">USBAudioDeviceTinyUSBFreeRTOS</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#a426037f2e746a9c97f370044b6e3b8c9">USBAudioDeviceESP32</a>, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_renesas.html#a426037f2e746a9c97f370044b6e3b8c9">USBAudioDeviceRenesas</a>, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html#a426037f2e746a9c97f370044b6e3b8c9">USBAudioDeviceTinyUSB</a>, and <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b_free_r_t_o_s.html#a426037f2e746a9c97f370044b6e3b8c9">USBAudioDeviceTinyUSBFreeRTOS</a>.</p>
 
 </div>
 </div>
@@ -3763,7 +3764,7 @@ template&lt;typename T &gt; </div>
 
 <p>Resize the platform audio buffers. Both platforms use NBuffer-style block pools: block size = max USB packet, block count = fifo_packets. ESP32: SynchronizedNBufferRTOS (FreeRTOS queues, cross-core safe). RP2040: <a class="el" href="classaudio__tools_1_1_n_buffer.html" title="A lock free N buffer. If count=2 we create a DoubleBuffer, if count=3 a TripleBuffer etc.">NBuffer</a> (single-core, no synchronization needed). </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#a96cdfbc8c30051e8416a706bf16d6934">USBAudioDeviceESP32</a>, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html#a96cdfbc8c30051e8416a706bf16d6934">USBAudioDeviceTinyUSB</a>, and <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b_free_r_t_o_s.html#a96cdfbc8c30051e8416a706bf16d6934">USBAudioDeviceTinyUSBFreeRTOS</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#a96cdfbc8c30051e8416a706bf16d6934">USBAudioDeviceESP32</a>, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_renesas.html#a96cdfbc8c30051e8416a706bf16d6934">USBAudioDeviceRenesas</a>, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html#a96cdfbc8c30051e8416a706bf16d6934">USBAudioDeviceTinyUSB</a>, and <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b_free_r_t_o_s.html#a96cdfbc8c30051e8416a706bf16d6934">USBAudioDeviceTinyUSBFreeRTOS</a>.</p>
 
 </div>
 </div>
@@ -3845,7 +3846,7 @@ template&lt;typename T &gt; </div>
 <p>Process pending USB events on platforms where the application drives the stack (RP2040, STM32, ...). Skipped when a dedicated FreeRTOS task already calls tud_task() continuously (see usb_task_active_) - tud_task() is not re-entrant; calling it from two contexts concurrently corrupts TinyUSB's internal event queue and causes random hangs. </p>
 <p>ESP32 (see <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html" title="USBAudioDeviceBase subclass for ESP32-S2/S3 using the arduino-esp32 stack.">USBAudioDeviceESP32</a>) overrides this to an empty no-op, since its own FreeRTOS task already calls tud_task() continuously. TinyUSB-based platforms (<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html" title="USBAudioDeviceBase subclass for RP2040 / Adafruit TinyUSB.">USBAudioDeviceTinyUSB</a>) override this to pump tud_task() directly &ndash; driving the USB stack's event loop is inherently stack-specific and has no equivalent on a native-HAL backend, so it is not part of <a class="el" href="classaudio__tools_1_1_u_s_b_audio_backend.html" title="Abstract seam for every raw USB-stack call the UAC2 driver (USBAudioDeviceBase) needs....">USBAudioBackend</a>. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#a620a53b384e211085da3222db37e71ea">USBAudioDeviceESP32</a>, and <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html#a620a53b384e211085da3222db37e71ea">USBAudioDeviceTinyUSB</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#a620a53b384e211085da3222db37e71ea">USBAudioDeviceESP32</a>, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_renesas.html#a620a53b384e211085da3222db37e71ea">USBAudioDeviceRenesas</a>, and <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html#a620a53b384e211085da3222db37e71ea">USBAudioDeviceTinyUSB</a>.</p>
 
 </div>
 </div>

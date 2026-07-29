@@ -16,10 +16,11 @@ var searchData=
   ['usbaudioconfig_13',['USBAudioConfig',['../structaudio__tools_1_1_u_s_b_audio_config.html',1,'audio_tools']]],
   ['usbaudiodevicebase_14',['USBAudioDeviceBase',['../classaudio__tools_1_1_u_s_b_audio_device_base.html',1,'audio_tools']]],
   ['usbaudiodeviceesp32_15',['USBAudioDeviceESP32',['../classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html',1,'audio_tools']]],
-  ['usbaudiodevicetinyusb_16',['USBAudioDeviceTinyUSB',['../classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html',1,'audio_tools']]],
-  ['usbaudiodevicetinyusbfreertos_17',['USBAudioDeviceTinyUSBFreeRTOS',['../classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b_free_r_t_o_s.html',1,'audio_tools']]],
-  ['usbaudiodevicezephyr_18',['USBAudioDeviceZephyr',['../classaudio__tools_1_1_u_s_b_audio_device_zephyr.html',1,'audio_tools']]],
-  ['usbendpointdescriptorview_19',['UsbEndpointDescriptorView',['../structaudio__tools_1_1_usb_endpoint_descriptor_view.html',1,'audio_tools']]],
-  ['usbinterfacedescriptorview_20',['UsbInterfaceDescriptorView',['../structaudio__tools_1_1_usb_interface_descriptor_view.html',1,'audio_tools']]],
-  ['usbsetuppacket_21',['UsbSetupPacket',['../structaudio__tools_1_1_usb_setup_packet.html',1,'audio_tools']]]
+  ['usbaudiodevicerenesas_16',['USBAudioDeviceRenesas',['../classaudio__tools_1_1_u_s_b_audio_device_renesas.html',1,'audio_tools']]],
+  ['usbaudiodevicetinyusb_17',['USBAudioDeviceTinyUSB',['../classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html',1,'audio_tools']]],
+  ['usbaudiodevicetinyusbfreertos_18',['USBAudioDeviceTinyUSBFreeRTOS',['../classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b_free_r_t_o_s.html',1,'audio_tools']]],
+  ['usbaudiodevicezephyr_19',['USBAudioDeviceZephyr',['../classaudio__tools_1_1_u_s_b_audio_device_zephyr.html',1,'audio_tools']]],
+  ['usbendpointdescriptorview_20',['UsbEndpointDescriptorView',['../structaudio__tools_1_1_usb_endpoint_descriptor_view.html',1,'audio_tools']]],
+  ['usbinterfacedescriptorview_21',['UsbInterfaceDescriptorView',['../structaudio__tools_1_1_usb_interface_descriptor_view.html',1,'audio_tools']]],
+  ['usbsetuppacket_22',['UsbSetupPacket',['../structaudio__tools_1_1_usb_setup_packet.html',1,'audio_tools']]]
 ];

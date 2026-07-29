@@ -77,12 +77,13 @@ $(function() {
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#define-members">Macros</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">USBAudioConfig.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
 <code>#include &lt;cstring&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
 <code>#include &quot;<a class="el" href="_audio_types_8h_source.html">AudioTools/CoreAudio/AudioTypes.h</a>&quot;</code><br />
 </div>
 <p><a href="_u_s_b_audio_config_8h_source.html">Go to the source code of this file.</a></p>
@@ -101,21 +102,19 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a7787b9330649976ccbef8e3a1563efa4" id="r_a7787b9330649976ccbef8e3a1563efa4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_u_s_b_audio_config_8h.html#a7787b9330649976ccbef8e3a1563efa4">USB_AUDIO_EP_FB</a>&#160;&#160;&#160;-1</td></tr>
+<tr class="memitem:a7787b9330649976ccbef8e3a1563efa4" id="r_a7787b9330649976ccbef8e3a1563efa4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_u_s_b_audio_config_8h.html#a7787b9330649976ccbef8e3a1563efa4">USB_AUDIO_EP_FB</a>&#160;&#160;&#160;0x86</td></tr>
 <tr class="separator:a7787b9330649976ccbef8e3a1563efa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b3410372a36bcbfe9a7c8b1143060ac" id="r_a6b3410372a36bcbfe9a7c8b1143060ac"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_u_s_b_audio_config_8h.html#a6b3410372a36bcbfe9a7c8b1143060ac">USB_AUDIO_EP_IN</a>&#160;&#160;&#160;-1</td></tr>
+<tr class="memitem:a6b3410372a36bcbfe9a7c8b1143060ac" id="r_a6b3410372a36bcbfe9a7c8b1143060ac"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_u_s_b_audio_config_8h.html#a6b3410372a36bcbfe9a7c8b1143060ac">USB_AUDIO_EP_IN</a>&#160;&#160;&#160;0x85</td></tr>
 <tr class="separator:a6b3410372a36bcbfe9a7c8b1143060ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab459008037860e035591910d633fdfc1" id="r_ab459008037860e035591910d633fdfc1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_u_s_b_audio_config_8h.html#ab459008037860e035591910d633fdfc1">USB_AUDIO_EP_INT</a>&#160;&#160;&#160;-1</td></tr>
+<tr class="memitem:ab459008037860e035591910d633fdfc1" id="r_ab459008037860e035591910d633fdfc1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_u_s_b_audio_config_8h.html#ab459008037860e035591910d633fdfc1">USB_AUDIO_EP_INT</a>&#160;&#160;&#160;0x87</td></tr>
 <tr class="separator:ab459008037860e035591910d633fdfc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe81a81e98cfcc758e1737075e18c60f" id="r_abe81a81e98cfcc758e1737075e18c60f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_u_s_b_audio_config_8h.html#abe81a81e98cfcc758e1737075e18c60f">USB_AUDIO_EP_OUT</a>&#160;&#160;&#160;-1</td></tr>
+<tr class="memitem:abe81a81e98cfcc758e1737075e18c60f" id="r_abe81a81e98cfcc758e1737075e18c60f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_u_s_b_audio_config_8h.html#abe81a81e98cfcc758e1737075e18c60f">USB_AUDIO_EP_OUT</a>&#160;&#160;&#160;0x05</td></tr>
 <tr class="separator:abe81a81e98cfcc758e1737075e18c60f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a0871673bc4fabc917d9c3b8f3c5e8efb" id="r_a0871673bc4fabc917d9c3b8f3c5e8efb"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a0871673bc4fabc917d9c3b8f3c5e8efb">kNumSupportedSampleRates</a></td></tr>
-<tr class="separator:a0871673bc4fabc917d9c3b8f3c5e8efb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a62740879acca0d0cf686fa2f3de86c92" id="r_a62740879acca0d0cf686fa2f3de86c92"><td class="memItemLeft" align="right" valign="top">static constexpr uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a62740879acca0d0cf686fa2f3de86c92">kSupportedSampleRates</a> []</td></tr>
-<tr class="separator:a62740879acca0d0cf686fa2f3de86c92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:aa9f926eedcb14784e7b7065cbc7405fb" id="r_aa9f926eedcb14784e7b7065cbc7405fb"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aa9f926eedcb14784e7b7065cbc7405fb">highestSupportedSampleRate</a> (const <a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html">USBAudioConfig</a> &amp;cfg)</td></tr>
+<tr class="separator:aa9f926eedcb14784e7b7065cbc7405fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a7787b9330649976ccbef8e3a1563efa4" name="a7787b9330649976ccbef8e3a1563efa4"></a>
@@ -125,7 +124,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define USB_AUDIO_EP_FB&#160;&#160;&#160;-1</td>
+          <td class="memname">#define USB_AUDIO_EP_FB&#160;&#160;&#160;0x86</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -139,7 +138,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define USB_AUDIO_EP_IN&#160;&#160;&#160;-1</td>
+          <td class="memname">#define USB_AUDIO_EP_IN&#160;&#160;&#160;0x85</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -153,7 +152,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define USB_AUDIO_EP_INT&#160;&#160;&#160;-1</td>
+          <td class="memname">#define USB_AUDIO_EP_INT&#160;&#160;&#160;0x87</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -167,7 +166,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define USB_AUDIO_EP_OUT&#160;&#160;&#160;-1</td>
+          <td class="memname">#define USB_AUDIO_EP_OUT&#160;&#160;&#160;0x05</td>
         </tr>
       </table>
 </div><div class="memdoc">
