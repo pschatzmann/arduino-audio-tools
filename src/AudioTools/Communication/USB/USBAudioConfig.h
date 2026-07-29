@@ -2,6 +2,7 @@
 #include <stdint.h>
 
 #include <cstring>
+#include <vector>
 
 #include "AudioTools/CoreAudio/AudioTypes.h"
 
@@ -59,6 +60,38 @@ namespace audio_tools {
 // tinyusb_get_free_out_endpoint(), which already know about CDC's reserved
 // endpoints. See https://github.com/pschatzmann/arduino-audio-tools/issues/2396.
 
+// Arduino UNO R4 / Nano R4 (Renesas RA4M1, arduino:renesas_uno core) caveats:
+//  - This core's USB.cpp builds one fixed composite descriptor (CDC + HID +
+//    MSD) at runtime and has no dynamic endpoint allocator API (no
+//    TinyUSBDevice.allocEndpoint(), no tinyusb_get_free_in_endpoint()), so
+//    endpoint numbers must be fixed constants here, same as nRF52 above.
+//  - Values must avoid the ones the core's own USB.cpp hardcodes for its
+//    built-in interfaces: CDC uses 0x81 (notification), 0x02/0x82 (data);
+//    HID uses 0x83; MSD uses 0x04/0x84 (see __USBGetCustomInterfaceDescriptor
+//    in USB.h for the authoritative list). EP5-EP7 are free on every
+//    variant since none of the built-ins use them.
+//  - The RA4M1's RUSB2 USB peripheral (dcd_rusb2.c) only has 2 isochronous-
+//    capable pipes, so at most 2 ISO endpoints can be open at once. This
+//    matches USBAudioConfig's own constraint that feedback
+//    (enable_feedback_ep) is only active in RX-only mode (no IN endpoint) --
+//    TX-only, RX-only-with-feedback, and RXTX-without-feedback each need
+//    exactly 2 or fewer ISO endpoints, so this hardware limit is never hit
+//    through this library's own configuration surface.
+#if defined(ARDUINO_ARCH_RENESAS)
+#ifndef USB_AUDIO_EP_IN
+#define USB_AUDIO_EP_IN 0x85
+#endif
+#ifndef USB_AUDIO_EP_OUT
+#define USB_AUDIO_EP_OUT 0x05
+#endif
+#ifndef USB_AUDIO_EP_FB
+#define USB_AUDIO_EP_FB 0x86
+#endif
+#ifndef USB_AUDIO_EP_INT
+#define USB_AUDIO_EP_INT 0x87
+#endif
+#endif
+
 // Everywhere else (generic TinyUSB: RP2040, SAMD, STM32, and now ESP32) -1
 // tells the platform subclass to allocate the endpoint dynamically instead
 // of using a fixed number. Define any of these yourself (e.g. via a build
@@ -76,24 +109,6 @@ namespace audio_tools {
 #ifndef USB_AUDIO_EP_INT
 #define USB_AUDIO_EP_INT -1
 #endif
-
-// Discrete sample rates advertised in the Clock Source GET_RANGE response
-// when enable_multi_sample_rate is true (see USBAudioDeviceBase::begin() and
-// USBAudio2DescriptorBuilder::writeIsoEndpoint()). This is the single source
-// of truth for "highest rate the device claims to support" -- isochronous
-// packet/buffer sizing for multi-rate mode must be based on the LAST entry
-// here, not on an independent assumption, since the host will never actually
-// select a rate the GET_RANGE response didn't offer. (A prior version sized
-// packets for a hardcoded 192 kHz ceiling that was never actually reachable
-// via GET_RANGE -- just wasted buffer space, and on MCUs with small USB FIFO
-// RAM, such as ESP32-S2/S3's DWC2 peripheral, sized packets that large
-// exceed the endpoint's available shared RX FIFO capacity entirely, causing
-// isochronous OUT reception to silently fail even though endpoint
-// allocation and transfer arming both report success.)
-static constexpr uint32_t kSupportedSampleRates[] = {
-    8000, 11025, 16000, 22050, 24000, 32000, 44100, 48000};
-static constexpr uint8_t kNumSupportedSampleRates =
-    sizeof(kSupportedSampleRates) / sizeof(kSupportedSampleRates[0]);
 
 /**
  * @brief Configuration for USB Audio (inherits sample_rate / channels /
@@ -148,10 +163,26 @@ struct USBAudioConfig : public AudioInfo {
   /// When false (default): the clock source is fixed at sample_rate.
   /// The descriptor reports an internal fixed clock, and GET_RANGE returns
   /// only the configured rate.  This avoids complex host negotiation.
-  /// When true: the clock source is programmable and GET_RANGE returns
-  /// 14 discrete rates (8 kHz – 192 kHz).  The host can change the rate
-  /// via SET_CUR, and the descriptor wMaxPacketSize covers 192 kHz.
+  /// When true: the clock source is programmable and GET_RANGE returns the
+  /// discrete rates listed in supported_sample_rates below.  The host can
+  /// change the rate via SET_CUR, and the descriptor wMaxPacketSize covers
+  /// the highest rate in that list.
   bool enable_multi_sample_rate = false;
+
+  /// Discrete sample rates advertised in the Clock Source GET_RANGE response
+  /// when enable_multi_sample_rate is true (ignored otherwise). Isochronous
+  /// packet/buffer sizing for multi-rate mode is based on the LAST entry, so
+  /// keep this sorted ascending -- the host will never actually select a
+  /// rate the GET_RANGE response didn't offer, so sizing for anything past
+  /// the last entry would just waste buffer/FIFO space (and on MCUs with
+  /// small USB FIFO RAM, such as ESP32-S2/S3's DWC2 peripheral, packets
+  /// sized for an unreachably high rate can exceed the endpoint's available
+  /// FIFO capacity entirely, silently breaking isochronous reception even
+  /// though endpoint allocation and transfer arming both report success).
+  /// Override before begin() to advertise a different set, e.g. just
+  /// {44100, 48000}.
+  std::vector<uint32_t> supported_sample_rates = {8000,  11025, 16000, 22050,
+                                                   24000, 32000, 44100, 48000};
 
   /// Enable the AC interrupt IN endpoint for device-initiated volume, mute,
   /// and sample-rate change notifications.  Without it the host must poll
@@ -239,5 +270,14 @@ struct USBAudioConfig : public AudioInfo {
 
   bool operator!=(const USBAudioConfig& other) { return !(*this == other); }
 };
+
+/// Highest rate multi-rate mode should size isochronous packets/buffers for
+/// (see supported_sample_rates above). Falls back to the fixed sample_rate
+/// if the list was cleared out, so sizing logic never indexes an empty
+/// vector.
+inline uint32_t highestSupportedSampleRate(const USBAudioConfig& cfg) {
+  return !cfg.enable_multi_sample_rate || cfg.supported_sample_rates.empty() ? (uint32_t)cfg.sample_rate
+                                             : cfg.supported_sample_rates.back();
+}
 
 }  // namespace audio_tools

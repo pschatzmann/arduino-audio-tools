@@ -1,4 +1,16 @@
 #pragma once
+
+// Some cores (e.g. Arduino's Renesas UNO R4 core, Arduino.h) #define abs(x)
+// as a function-like macro for AVR-era C compatibility. Since Arduino.h is
+// always included ahead of library headers in a .ino, that macro is already
+// active here and breaks libstdc++'s own templated abs(duration<...>)
+// overload inside <chrono> (pulled in by <mutex>) -- the preprocessor sees
+// the comma inside duration<_Rep, _Period> as a second macro argument.
+// Suppress the macro for just this header's STL includes, then restore it
+// so nothing else in the translation unit is affected.
+#pragma push_macro("abs")
+#undef abs
+
 #include <cmath>
 #include <cstddef>
 #include <cstdint>
@@ -6,6 +18,8 @@
 #include <functional>
 #include <mutex>
 #include <vector>
+
+#pragma pop_macro("abs")
 
 #include "AudioTools/CoreAudio/AudioTypes.h"
 #include "AudioTools/CoreAudio/Buffers.h"
@@ -19,7 +33,8 @@
 #endif
 #endif
 #else
-#if !defined(USE_TINYUSB) && !defined(ARDUINO_ARCH_STM32) && !defined(IS_ZEPHYR)
+#if !defined(USE_TINYUSB) && !defined(ARDUINO_ARCH_STM32) && \
+    !defined(ARDUINO_ARCH_RENESAS) && !defined(IS_ZEPHYR)
 #error This Microcontroller has no Native USB interface
 #endif
 #endif
@@ -126,11 +141,22 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
   struct audiod_function_t {
     uint8_t rhport;
     uint8_t const* p_desc;  // Pointer to Standard AC Interface Descriptor
-    uint8_t ep_in;          // TX audio data EP.
+    // ep_in/ep_out are written from the USB interrupt handler (openEpIn/
+    // openEpOut/closeEpIn/closeEpOut, reached via audiod_set_interface() in
+    // ISR context) and read from normal application code (write()/
+    // readBytes()/isStreamingActiveTx()/isStreamingActiveRx(), called from
+    // loop()). Without a memory-visibility guarantee across that boundary, a
+    // compiler is free to cache a stale read indefinitely -- observed in
+    // practice on the arm-none-eabi-gcc 7.2.1 toolchain used by the Arduino
+    // Renesas UNO R4 core: isStreamingActiveTx() kept reporting false while
+    // real ISO-IN transfers were actively completing, so write() silently
+    // discarded all audio data (see the "disregard data" branch below) while
+    // still reporting success.
+    volatile uint8_t ep_in;  // TX audio data EP.
     uint16_t ep_in_sz;      // Current size of TX EP
     uint8_t
         ep_in_as_intf_num;  // Standard AS Interface Descriptor number for IN
-    uint8_t ep_out;         // RX audio data EP.
+    volatile uint8_t ep_out;  // RX audio data EP.
     uint16_t ep_out_sz;     // Current size of RX EP
     uint8_t
         ep_out_as_intf_num;  // Standard AS Interface Descriptor number for OUT
@@ -310,8 +336,14 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
       resizeBuffers();
 
       const int n = getAudioCount();
-      // 192 bytes needed for multi-rate RANGE (2+14*12=170); 64 suffices for single rate
-      uint16_t cb_sz = config_.enable_multi_sample_rate ? 192u : 64u;
+      // GET_RANGE response is 2 + count*12 bytes; 64 is the floor needed for
+      // everything else sharing this buffer (Feature Unit GET_RANGE, etc.).
+      uint16_t cb_sz = 64u;
+      if (config_.enable_multi_sample_rate) {
+        uint16_t needed =
+            (uint16_t)(2 + config_.supported_sample_rates.size() * 12);
+        if (needed > cb_sz) cb_sz = needed;
+      }
       ctrl_buf_sz_.assign(n, cb_sz);
 
       uint8_t desc[USB_DESCR_MAX_LEN];
@@ -1105,15 +1137,15 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
       // Initialize IN EP — lin_buf_in is the DMA staging buffer (one frame).
       // Audio data flows through bufferTx() (resized in begin()), not ep_in_ff.
       if (isEpInEnabled()) {
-        // Max packet across all advertised rates (see kSupportedSampleRates).
+        // Max packet across all advertised rates (see supported_sample_rates).
         uint16_t max_pkt = descr_builder.calcPacketSizeForRate(
-            kSupportedSampleRates[kNumSupportedSampleRates - 1]);
+            highestSupportedSampleRate(config_));
         audio->lin_buf_in.resize(max_pkt);
       }
       // Initialize OUT EP linear (DMA staging) buffer.
       if (isEpOutEnabled()) {
         uint16_t max_pkt = descr_builder.calcPacketSizeForRate(
-            kSupportedSampleRates[kNumSupportedSampleRates - 1]);
+            highestSupportedSampleRate(config_));
         audio->lin_buf_out.resize(max_pkt);
       }
       if (isFeedbackEpEnabled()) {
@@ -1462,10 +1494,11 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
       if (p_request.bRequest == kAudioCsReqRange) {
         if (config_.enable_multi_sample_rate) {
           // List all supported discrete rates
-          uint16_t cnt = kNumSupportedSampleRates;
+          const auto& rates = config_.supported_sample_rates;
+          uint16_t cnt = (uint16_t)rates.size();
           memcpy(cb, &cnt, 2);
-          for (uint8_t i = 0; i < kNumSupportedSampleRates; i++) {
-            uint32_t r = kSupportedSampleRates[i];
+          for (size_t i = 0; i < rates.size(); i++) {
+            uint32_t r = rates[i];
             uint32_t z = 0;
             memcpy(cb + 2 + i * 12,     &r, 4);
             memcpy(cb + 2 + i * 12 + 4, &r, 4);
@@ -1473,7 +1506,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
           }
           return backend().controlTransfer(
               rhport, p_request, cb,
-              (uint16_t)(2 + kNumSupportedSampleRates * 12));
+              (uint16_t)(2 + rates.size() * 12));
         } else {
           // Single fixed rate from config
           uint16_t cnt = 1;

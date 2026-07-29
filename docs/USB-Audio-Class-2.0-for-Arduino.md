@@ -23,6 +23,7 @@ With UAC2, the microcontroller *is* the sound card. Plug it in, and tools like `
 - **ESP32-S2 / ESP32-S3** — via the native USB OTG peripheral (DWC2 controller)
 - **Adafruit TinyUSB stack** all boards supporting the Adafruit TinyUSB stack (e.g. Raspberry Pi Pico)
 - **Zephyr-based boards** — via Zephyr's native `usbd_uac2` driver (nRF5340, STM32, etc.)
+- **Arduino UNO R4 / Nano R4 (Renesas RA4M1)** — via the core's own TinyUSB integration; both directions hardware-verified working, but **requires a not-yet-released core** and swapping in a newer TinyUSB (see [Arduino UNO R4](#arduino-uno-r4-renesas) below)
 
 ## Getting Started
 
@@ -160,8 +161,6 @@ config.copyFrom(info);                     // inherit sample_rate, channels, bit
 | Field | Default | Description |
 |-------|---------|-------------|
 | `fifo_packets` | 16 | Number of 1 ms USB packets buffered. Higher values reduce the risk of underrun at the cost of latency. |
-| `use_linear_buffer_rx` | true | Use a flat buffer for RX (required for DMA-based downstream drivers). |
-| `use_linear_buffer_tx` | true | Use a flat buffer for TX. |
 
 ### Device Identity
 
@@ -245,7 +244,7 @@ The implementation is split into layers:
 - **`USBAudioConfig`** — all configuration in one struct: sample rate, channels, bit depth, endpoint addresses, buffering, device identity, and feature flags.
 - **`USBAudio2DescriptorBuilder`** — generates the complete UAC2 descriptor block at runtime: IAD, Audio Control interface with Clock Source, Input/Output Terminals, and Feature Units, plus Audio Streaming interfaces with Format Type descriptors and isochronous endpoints.
 - **`USBAudioDeviceBase`** — the core class (~2200 lines) that implements the TinyUSB class driver interface: descriptor callbacks, control request handling (sample rate, volume, mute), isochronous endpoint management, flow control for accurate sample rates, and the `AudioStream` read/write API.
-- **`USBAudioDeviceESP32`** / **`USBAudioDeviceTinyUSB`** / **`USBAudioDeviceZephyr`** — thin platform subclasses that provide the right buffer implementation and USB stack initialization for each target.
+- **`USBAudioDeviceESP32`** / **`USBAudioDeviceTinyUSB`** / **`USBAudioDeviceRenesas`** / **`USBAudioDeviceZephyr`** — thin platform subclasses that provide the right buffer implementation and USB stack initialization for each target.
 - **`USBAudioStream`** — a dispatch header that resolves to the correct platform class automatically.
 
 The key design goal was to make USB audio feel like any other AudioTools stream. `StreamCopy` works. `addNotifyAudioChange` works. Volume and mute integrate with the existing `VolumeSupport` interface. You can chain it with any source or sink in the library.
@@ -284,6 +283,95 @@ void setup() {
 ```
 
 Endpoint addresses are allocated automatically (see [Endpoint Addresses](#endpoint-addresses) above) and steer clear of whatever CDC has already reserved, so no manual coordination is needed.
+
+## Arduino UNO R4 (Renesas)
+
+Support for the UNO R4 / Nano R4 (Renesas RA4M1) was blocked for a while: the stock
+`arduino:renesas_uno` core (as of the released version 1.6.0) builds one fixed,
+hardcoded composite USB descriptor (CDC + HID + MSD) with no hook for a third-party
+class driver to append its own interface — unlike RP2040's
+`TinyUSBDevice.addInterface()` or ESP32's `tinyusb_enable_interface()`. That's now
+fixed upstream: `USB.h`/`USB.cpp` gained a `__USBGetCustomInterfaceDescriptor()` hook
+(mirroring the existing `__USBGetHIDReport()` pattern) that lets an external interface
+append itself to the composite descriptor. **This hook is not yet in a released core
+version** — it needs a build of `arduino:renesas_uno` newer than 1.6.0. Once it ships,
+`USBAudioDeviceRenesas` (implementing the same `USBAudioBackend`/`USBAudioDeviceBase`
+pattern as `USBAudioDeviceESP32`/`USBAudioDeviceTinyUSB`, reusing
+`USBAudioBackendTinyUSB` as-is since this core runs TinyUSB internally via its own
+`dcd_rusb2.c` Device Controller Driver) works out of the box.
+
+**Status, hardware-verified on a real UNO R4 Minima: both directions work.**
+
+- **RX_MODE (speaker, host → device) works correctly.** Confirmed with `aplay` streaming
+  an 8-second 44.1kHz/stereo/16-bit test tone: the device's received-byte counter climbed
+  at exactly the expected real-time rate (~176,400 bytes/s) for the whole file, `aplay`
+  completed with no underrun/xrun errors, and `SerialUSB` logging kept working
+  the entire time.
+- **TX_MODE (microphone, device → host) works correctly.** Confirmed with `arecord`
+  capturing a 6-second 44.1kHz/stereo/16-bit stream of a generated sine wave: full
+  amplitude range (`max 0.999969`, `RMS 0.4996`), the correct tone, no dropouts, and
+  `SerialUSB` logging stayed live throughout.
+
+Getting TX_MODE working required going around a real bug, not anything in this library:
+the version of TinyUSB the `arduino:renesas_uno` core bundles (pinned to an
+Aug-2023-era snapshot of the `arduino/tinyusb` fork) has a broken isochronous-IN path in
+`dcd_rusb2.c` — adding an IN audio endpoint left `ep_in` never getting set on
+`SET_INTERFACE`, and separately, the FIFO-ready wait (`pipe_wait_for_ready()`) could spin
+forever with the USB IRQ masked if the host hadn't started draining the pipe yet, freezing
+the whole MCU (breaking EP0 control requests and CDC output along with it, not just
+audio). **The fix: replace `extras/tinyusb` in the core with the official upstream
+`hathach/tinyusb` release `0.21.0`** (verified: symlinks in `cores/arduino/tinyusb/*`
+into `extras/tinyusb/src/*` still resolve unchanged, so no other core files need
+updating). This resolved both issues outright — no manual patching needed on top of the
+plain 0.21.0 checkout. If you swap in `extras/tinyusb`, do a **full replacement** of the
+directory tree (not a partial `git checkout <tag> -- .`, which leaves stale files behind
+for anything the newer tree renamed or restructured — e.g. `usbd_control.c` no longer
+exists as a separate file in 0.21.0 — and produces confusing signature-mismatch build
+errors between old and new files).
+
+For the record: the exact upstream commit that *directly* fixes the FIFO-wait hang
+(`7b1eb4f86`, "dcd(rusb2): iso alloc/activate; bound the FIFO-ready wait") landed on
+`hathach/tinyusb`'s unreleased `master` branch on 2026-07-09, after the `0.21.0` tag
+(2026-06-30) — so `0.21.0` doesn't contain that specific commit, yet testing showed
+TX_MODE working correctly on it anyway. Whatever regressed the `ep_in`-never-set behavior
+between the old fork base and 0.21.0 was apparently fixed as a side effect of general
+upstream progress in the ~3 years between those two points, independent of the FIFO-wait
+fix. If a future TinyUSB update ever regresses this again, `master` HEAD is the fallback
+with the confirmed, named fix.
+
+### Requires building with `-DNO_USB`
+
+The core's `main.cpp` calls `__USBStart()` — which builds and permanently caches the
+composite descriptor — automatically at boot, before the sketch's `setup()` runs,
+unless the board defines `NO_USB` (UNO R4 WiFi already does this by default; Minima and
+Nano R4 don't). Since our Audio interface must be registered *before* that first build,
+`USBAudioDeviceRenesas::beginUSB()` calls `__USBStart()` itself, from your sketch's
+`begin()` call — which only works if the core's own automatic call is disabled. Add
+`-DNO_USB` yourself for Minima/Nano R4, e.g.:
+
+```bash
+arduino-cli compile --fqbn arduino:renesas_uno:minima --build-property "build.extra_flags=-DNO_USB" your_sketch
+```
+
+(or a `boards.local.txt`/`platform.local.txt` override for the Arduino IDE). With
+`NO_USB` defined, the `Serial` macro maps to a plain UART instead of native-USB CDC —
+use `SerialUSB` explicitly if you also want USB serial alongside audio, same as the
+[composite device pattern](#composite-usb-devices) above.
+
+### Other UNO R4-specific notes
+
+- **Endpoint addresses are fixed**, not dynamically allocated — this core has no
+  `allocEndpoint()`/`tinyusb_get_free_in_endpoint()` equivalent. Defaults (`0x85` IN,
+  `0x05` OUT, `0x86` feedback, `0x87` interrupt) are chosen to avoid the core's
+  built-in CDC/HID/MSD endpoints; override via `USB_AUDIO_EP_IN`/`_OUT`/`_FB`/`_INT` if
+  you need different ones.
+- **`vid`/`pid`/`manufacturer`/`product`/`serial` in `USBAudioConfig` are not
+  applicable** on this platform — the whole composite device (CDC + HID + Audio)
+  shares the one board-level identity the core's `USB.cpp` compiles in.
+- The RA4M1's USB peripheral has only 2 isochronous-capable pipes, which limits it to
+  2 simultaneous ISO endpoints. This matches how `enable_feedback_ep` is already scoped
+  to RX-only mode elsewhere in this driver, so it's never actually a limit in practice
+  through this library's configuration surface.
 
 ## Testing
 

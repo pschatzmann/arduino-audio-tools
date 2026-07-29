@@ -390,10 +390,10 @@ class USBAudio2DescriptorBuilder {
   uint8_t* writeIsoEndpoint(uint8_t* p, uint8_t ep_addr) {
     // Fixed clock: wMaxPacketSize matches the configured rate.
     // Multi-rate: covers the highest rate actually advertised via GET_RANGE
-    // (see kSupportedSampleRates) -- sizing for anything higher would waste
+    // (see supported_sample_rates) -- sizing for anything higher would waste
     // buffer/FIFO space for a rate the host can never select.
     const uint16_t pkt = p_config->enable_multi_sample_rate
-        ? calcPacketSizeForRate(kSupportedSampleRates[kNumSupportedSampleRates - 1])
+        ? calcPacketSizeForRate(highestSupportedSampleRate(*p_config))
         : calcMaxPacketSize();
     // bmAttributes: Isochronous (01) + sync type (bits[3:2]) + usage=data (00)
     //   bits 3:2: 00=None, 01=Async, 10=Adaptive, 11=Sync

@@ -20,6 +20,22 @@ namespace audio_tools {
 #define TU_AUDIO_EDPT_XFER(rp, ep, buf, sz) usbd_edpt_xfer(rp, ep, buf, sz)
 #endif
 
+// Same story for usbd_sof_enable(): newer TinyUSB added a per-consumer enum
+// parameter (sof_consumer_t, e.g. SOF_CONSUMER_AUDIO) so multiple class
+// drivers can each enable/disable the SOF interrupt independently; older
+// TinyUSB (e.g. the version bundled with Arduino's Renesas UNO R4 core) only
+// has the plain two-argument form. SOF_CONSUMER_AUDIO is an *enum value*,
+// not a macro, so #ifdef can never detect it (a prior version of this file
+// tried that and always silently fell through to the 2-arg form, which
+// doesn't compile against the 3-arg signature -- this went unnoticed until
+// ESP32/RP2040 were recompiled). Use the same TUSB_VERSION_NUMBER threshold
+// as the usbd_class_driver_t::deinit detection below instead.
+#if TUSB_VERSION_NUMBER >= 1600
+#define TU_SOF_ENABLE(rp, en) usbd_sof_enable(rp, SOF_CONSUMER_AUDIO, en)
+#else
+#define TU_SOF_ENABLE(rp, en) usbd_sof_enable(rp, en)
+#endif
+
 /**
  * @brief USBAudioBackend implementation wrapping the real TinyUSB device
  *        stack. Injected by the ESP32, TinyUSB (RP2040/Adafruit), and
@@ -105,7 +121,7 @@ class USBAudioBackendTinyUSB : public USBAudioBackend {
   bool mounted() const override { return tud_mounted(); }
 
   void enableSof(uint8_t rhport, bool enable) override {
-    usbd_sof_enable(rhport, SOF_CONSUMER_AUDIO, enable);
+    TU_SOF_ENABLE(rhport, enable);
   }
 
   // ── The only two places in the whole backend that touch TinyUSB's raw
@@ -167,11 +183,30 @@ namespace audio_tools {
 
 inline usbd_class_driver_t const* usbAudioGetClassDriver(uint8_t* count) {
   static usbd_class_driver_t driver;
+  // usbd_class_driver_t's `name` field is unconditional on every TinyUSB
+  // version actually in use here (ESP32, RP2040/Adafruit, and Renesas as of
+  // its 0.21.0 upgrade all have it unguarded). It was only ever compiled out
+  // behind a `#if CFG_TUSB_DEBUG >= CFG_TUD_LOG_LEVEL` guard on the old
+  // pre-0.16-era struct layout (TUSB_VERSION_NUMBER < 1600), so gate on that
+  // instead of the debug-level macros -- those default to a combination
+  // (CFG_TUSB_DEBUG=0, CFG_TUD_LOG_LEVEL=2) that's false on every version,
+  // which would silently skip this assignment even on versions where the
+  // field is always present and always safe to set.
+#if TUSB_VERSION_NUMBER >= 1600
   driver.name = "AUDIO";
+#endif
   driver.init = []() { USBAudioDeviceBase::activeInstance().audiod_init(); };
+#if TUSB_VERSION_NUMBER >= 1600
+  // usbd_class_driver_t only gained a `deinit` member around TinyUSB 0.16 --
+  // the older TinyUSB bundled with Arduino's Renesas UNO R4 core (0.15)
+  // doesn't have this field at all, so referencing it there is a compile
+  // error. TUSB_VERSION_NUMBER (from tusb_option.h) is TinyUSB's own
+  // major*10000+minor*100+revision version macro, so this stays correct
+  // automatically as bundled TinyUSB versions change.
   driver.deinit = []() {
     return USBAudioDeviceBase::activeInstance().audiod_deinit();
   };
+#endif
   driver.reset = [](uint8_t rhport) {
     USBAudioDeviceBase::activeInstance().audiod_reset(rhport);
   };

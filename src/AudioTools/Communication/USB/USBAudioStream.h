@@ -20,6 +20,9 @@
 #  include "AudioTools/Concurrency.h"
 #  include "USBAudioDeviceBase.h"
 #  include "USBAudioDeviceESP32.h"
+#elif defined(ARDUINO_ARCH_RENESAS)
+#  include "USBAudioDeviceBase.h"
+#  include "USBAudioDeviceRenesas.h"
 #elif defined(IS_ZEPHYR)
 #  include "USBAudioDeviceZephyr.h"
 #else
