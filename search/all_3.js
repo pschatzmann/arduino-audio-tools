@@ -2,7 +2,7 @@ var searchData=
 [
   ['_5f_5fattribute_5f_5f_0',['__attribute__',['../vban_8h.html#a5ad568bdd8ccae0b3648cb889526d9a1',1,'__attribute__():&#160;vban.h'],['../namespaceaudio__tools.html#a6619c72916cad1d8d09d4a897d9f61fb',1,'audio_tools::__attribute__()'],['../vban_8h.html#a594e840319e1039bca660b9ceeff1aaf',1,'__attribute__:&#160;vban.h']]],
   ['_5f_5fusbgetcustominterfacedescriptor_1',['__USBGetCustomInterfaceDescriptor',['../_u_s_b_audio_device_renesas_8h.html#a7843d7024b52cfe3421142e432f94764',1,'USBAudioDeviceRenesas.h']]],
-  ['_5f_5fusbgetcustominterfacedescriptor_20tt_20hook_2',['Requires a core with the &lt;tt&gt;__USBGetCustomInterfaceDescriptor&lt;/tt&gt; hook',['../classaudio__tools_1_1_u_s_b_audio_device_renesas.html#autotoc_md47',1,'']]],
+  ['_5f_5fusbgetcustominterfacedescriptor_20tt_20hook_2',['Requires a core with the &lt;tt&gt;__USBGetCustomInterfaceDescriptor&lt;/tt&gt; hook',['../classaudio__tools_1_1_u_s_b_audio_device_renesas.html#autotoc_md38',1,'']]],
   ['_5fallocator_3',['_allocator',['../classaudio__tools_1_1_ring_buffer.html#ab923916861b8e3cbcb7f3ff182c45e9e',1,'audio_tools::RingBuffer::_allocator'],['../classaudio__tools_1_1_single_buffer.html#a2a60d51c6823e1185e80b3bf4b59eee4',1,'audio_tools::SingleBuffer::_allocator'],['../classaudio__tools_1_1_stream_copy_t.html#a2a60d51c6823e1185e80b3bf4b59eee4',1,'audio_tools::StreamCopyT::_allocator']]],
   ['_5fapplytimeout_4',['_applyTimeout',['../classaudio__tools_1_1_wi_fi_client_zephyr.html#adda66b0b30b1ab5feaacbaad88f4c936',1,'audio_tools::WiFiClientZephyr']]],
   ['_5faucbuffer_5',['_aucBuffer',['../classaudio__tools_1_1_ring_buffer.html#ae10deb0a6fe478a21c65149d1f37efe9',1,'audio_tools::RingBuffer']]],

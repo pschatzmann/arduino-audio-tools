@@ -181,7 +181,7 @@ var searchData=
   ['notecallback_178',['noteCallback',['../classaudio__tools_1_1_r_t_t_t_l_output.html#a4cfb8e164d151a42970638297a89da52',1,'audio_tools::RTTTLOutput']]],
   ['noteoff_179',['noteOff',['../classaudio__tools_1_1_s_t_k_instrument.html#a39ee3ad3856535dc467078338df0b92a',1,'audio_tools::STKInstrument']]],
   ['noteon_180',['noteOn',['../classaudio__tools_1_1_s_t_k_instrument.html#a8fe6662455cb22207ec680d5b890101f',1,'audio_tools::STKInstrument']]],
-  ['notes_181',['notes',['../classaudio__tools_1_1_musical_notes.html#a4e0a41b78e6336ca44cc15aea3c06965',1,'audio_tools::MusicalNotes::notes'],['../classaudio__tools_1_1_s_p_i_audio_master.html#autotoc_md32',1,'Performance Notes'],['../classaudio__tools_1_1_s_p_i_audio_slave.html#autotoc_md46',1,'Performance Notes']]],
+  ['notes_181',['notes',['../classaudio__tools_1_1_musical_notes.html#a4e0a41b78e6336ca44cc15aea3c06965',1,'audio_tools::MusicalNotes::notes'],['../classaudio__tools_1_1_s_p_i_audio_master.html#autotoc_md23',1,'Performance Notes'],['../classaudio__tools_1_1_s_p_i_audio_slave.html#autotoc_md37',1,'Performance Notes']]],
   ['notes_5fstr_182',['notes_str',['../classaudio__tools_1_1_musical_notes.html#accd1a83ececa6b1cdc14901cc4958abc',1,'audio_tools::MusicalNotes']]],
   ['notetofrequency_183',['noteToFrequency',['../classaudio__tools_1_1_faust_stream.html#ade3ee993ba3998d6541c7ed369940ef7',1,'audio_tools::FaustStream']]],
   ['notify_5fbase_5finfo_184',['notify_base_Info',['../classaudio__tools_1_1_a2_d_p_stream.html#a135e3e6aa275bd03ad26ba8377c4f29a',1,'audio_tools::A2DPStream']]],
