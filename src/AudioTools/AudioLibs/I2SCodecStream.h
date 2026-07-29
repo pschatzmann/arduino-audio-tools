@@ -391,7 +391,7 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
     }
     if (rate <= 48000 || rate > 48000) {
       LOGD("RATE_48K");
-      return RATE_44K;
+      return RATE_48K;
     }
     LOGE("Invalid rate: %d using 44K", rate);
     return RATE_44K;
