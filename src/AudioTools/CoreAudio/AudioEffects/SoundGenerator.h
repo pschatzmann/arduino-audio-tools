@@ -352,6 +352,142 @@ class FastSineGenerator : public SineGenerator<T> {
 };
 
 /**
+ * @brief Sine wave generator that does not use any floating point operations
+ * in the readSample() hot path: it advances a 32 bit phase accumulator with
+ * an integer increment and looks up the result in a Q15 fixed point table.
+ * All floating point math (converting frequency/sample_rate into the phase
+ * increment) is done once in setFrequency()/setAudioInfo(), never per
+ * sample. This makes it a good fit for MCUs without a hardware FPU - e.g.
+ * the RP2040 - where sinf() is comparatively expensive.
+ * @ingroup generator
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ * @tparam T
+ */
+template <class T = int16_t>
+class FastIntSineGenerator : public SoundGenerator<T> {
+ public:
+  FastIntSineGenerator(float amplitude = NumberConverter::maxValueT<T>(),
+                        float phase = 0.0f) {
+    LOGD("FastIntSineGenerator");
+    setAmplitude(amplitude);
+    setPhase(phase);
+  }
+
+  bool begin() override {
+    TRACEI();
+    SoundGenerator<T>::begin();
+    updatePhaseIncrement();
+    return true;
+  }
+
+  bool begin(AudioInfo info) override {
+    LOGI("%s::begin(channels=%d, sample_rate=%d)", "FastIntSineGenerator",
+         (int)info.channels, (int)info.sample_rate);
+    SoundGenerator<T>::begin(info);
+    updatePhaseIncrement();
+    return true;
+  }
+
+  bool begin(AudioInfo info, float frequency) {
+    SoundGenerator<T>::begin(info);
+    if (frequency > 0.0f) {
+      setFrequency(frequency);
+    }
+    return true;
+  }
+
+  bool begin(int channels, int sample_rate, float frequency) {
+    SoundGenerator<T>::info.channels = channels;
+    SoundGenerator<T>::info.sample_rate = sample_rate;
+    return begin(SoundGenerator<T>::info, frequency);
+  }
+
+  virtual void setAudioInfo(AudioInfo info) override {
+    SoundGenerator<T>::setAudioInfo(info);
+    updatePhaseIncrement();
+  }
+
+  /// Defines the frequency - the only place where float math is used
+  void setFrequency(float frequency) override {
+    LOGI("setFrequency: %.2f", frequency);
+    m_frequency = frequency;
+    updatePhaseIncrement();
+  }
+
+  /// Defines the starting phase in radians
+  void setPhase(float phase) {
+    double turns = phase / (2.0 * PI);
+    m_phase_offset = (uint32_t)(turns * 4294967296.0);
+  }
+
+  void setAmplitude(float amp) {
+    m_amplitude = amp;
+    m_amplitude_i = (int32_t)amp;
+  }
+
+  /// Provides a single sample - integer only, no float ops or sin() calls!
+  virtual T readSample() override {
+    // top kTableBits of the 32 bit accumulator select the table entry
+    uint32_t index = (m_phase_acc + m_phase_offset) >> kIndexShift;
+    m_phase_acc += m_phase_increment;
+    int32_t sine_q15 = sine_table[index];
+    return (T)(((int64_t)sine_q15 * m_amplitude_i) >> 15);
+  }
+
+ protected:
+  static const int kTableBits = 8;
+  static const int kTableSize = 1 << kTableBits;    // 256 entries
+  static const int kIndexShift = 32 - kTableBits;
+
+  volatile float m_frequency = 0.0f;
+  float m_amplitude = 1.0f;
+  int32_t m_amplitude_i = 32767;
+  // fixed point (32 bit) phase: wrapping is implicit via unsigned overflow
+  uint32_t m_phase_acc = 0;
+  uint32_t m_phase_offset = 0;
+  uint32_t m_phase_increment = 0;
+
+  // only called from begin()/setFrequency()/setAudioInfo(), never per sample
+  void updatePhaseIncrement() {
+    uint32_t sample_rate = SoundGenerator<T>::info.sample_rate;
+    if (sample_rate > 0) {
+      m_phase_increment =
+          (uint32_t)((double)m_frequency / sample_rate * 4294967296.0);
+    }
+  }
+
+  // one sine period in Q15 fixed point (-32767..32767)
+  static constexpr int16_t sine_table[kTableSize] = {
+      0,     804,   1608,  2410,  3212,  4011,  4808,  5602,  6393,  7179,
+      7962,  8739,  9512,  10278, 11039, 11793, 12539, 13279, 14010, 14732,
+      15446, 16151, 16846, 17530, 18204, 18868, 19519, 20159, 20787, 21403,
+      22005, 22594, 23170, 23731, 24279, 24811, 25329, 25832, 26319, 26790,
+      27245, 27683, 28105, 28510, 28898, 29268, 29621, 29956, 30273, 30571,
+      30852, 31113, 31356, 31580, 31785, 31971, 32137, 32285, 32412, 32521,
+      32609, 32678, 32728, 32757, 32767, 32757, 32728, 32678, 32609, 32521,
+      32412, 32285, 32137, 31971, 31785, 31580, 31356, 31113, 30852, 30571,
+      30273, 29956, 29621, 29268, 28898, 28510, 28105, 27683, 27245, 26790,
+      26319, 25832, 25329, 24811, 24279, 23731, 23170, 22594, 22005, 21403,
+      20787, 20159, 19519, 18868, 18204, 17530, 16846, 16151, 15446, 14732,
+      14010, 13279, 12539, 11793, 11039, 10278, 9512,  8739,  7962,  7179,
+      6393,  5602,  4808,  4011,  3212,  2410,  1608,  804,   0,     -804,
+      -1608, -2410, -3212, -4011, -4808, -5602, -6393, -7179, -7962, -8739,
+      -9512, -10278,-11039,-11793,-12539,-13279,-14010,-14732,-15446,-16151,
+      -16846,-17530,-18204,-18868,-19519,-20159,-20787,-21403,-22005,-22594,
+      -23170,-23731,-24279,-24811,-25329,-25832,-26319,-26790,-27245,-27683,
+      -28105,-28510,-28898,-29268,-29621,-29956,-30273,-30571,-30852,-31113,
+      -31356,-31580,-31785,-31971,-32137,-32285,-32412,-32521,-32609,-32678,
+      -32728,-32757,-32767,-32757,-32728,-32678,-32609,-32521,-32412,-32285,
+      -32137,-31971,-31785,-31580,-31356,-31113,-30852,-30571,-30273,-29956,
+      -29621,-29268,-28898,-28510,-28105,-27683,-27245,-26790,-26319,-25832,
+      -25329,-24811,-24279,-23731,-23170,-22594,-22005,-21403,-20787,-20159,
+      -19519,-18868,-18204,-17530,-16846,-16151,-15446,-14732,-14010,-13279,
+      -12539,-11793,-11039,-10278,-9512, -8739, -7962, -7179, -6393, -5602,
+      -4808, -4011, -3212, -2410, -1608, -804};
+};
+
+/**
  * @brief Generates a square wave sound.
  * @ingroup generator
  * @author Phil Schatzmann
