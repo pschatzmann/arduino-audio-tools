@@ -11,11 +11,16 @@ if (DEFINED ESP_PLATFORM)
     endif()
 
 
+    # esp_driver_i2s esp_driver_dac needed starting idf v6.0.0
+    set(AAT_REQUIRES esp_common freertos hal log nvs_flash driver esp_adc esp_http_client esp_driver_gpio esp_driver_ledc)
+    if(IDF_VERSION_MAJOR GREATER_EQUAL 6)
+        list(APPEND AAT_REQUIRES esp_driver_i2s esp_driver_dac)
+    endif()
+
     idf_component_register(
         # SRC_DIRS src
-        INCLUDE_DIRS src 
-        # esp_driver_gpio, esp_driver_i2s, esp_driver_dac needed starting idf v6.0.0
-        REQUIRES esp_common freertos hal log nvs_flash driver esp_adc esp_http_client esp_driver_gpio esp_driver_ledc ${ARDUINO_REQUIRES}
+        INCLUDE_DIRS src
+        REQUIRES ${AAT_REQUIRES} ${ARDUINO_REQUIRES}
     )
 
     target_compile_options(${COMPONENT_LIB} INTERFACE -DESP32_CMAKE=1 -Wno-format )

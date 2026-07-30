@@ -188,6 +188,7 @@ inline long map(long x, long in_min, long in_max, long out_min, long out_max) {
 #include "driver/gpio.h"
 #include "freertos/FreeRTOS.h"  // needed for ESP Arduino < 2.0
 #include "freertos/FreeRTOSConfig.h"
+#include <algorithm>
 
 #define GPIO_NONE -1
 #define IS_GPIO(pin) (pin >= 0)
@@ -195,6 +196,9 @@ inline long map(long x, long in_min, long in_max, long out_min, long out_max) {
 #define GPIO_TO_STR(pin) std::to_string(pin).c_str()
 
 using digital_pin_t = int;
+using std::min;
+using std::max;
+
 
 /// e.g. for AudioActions
 inline int digitalRead(digital_pin_t pin) {
