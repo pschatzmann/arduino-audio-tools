@@ -271,161 +271,165 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span><span class="preprocessor">#include &quot;driver/gpio.h&quot;</span></div>
 <div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span><span class="preprocessor">#include &quot;freertos/FreeRTOS.h&quot;</span>  <span class="comment">// needed for ESP Arduino &lt; 2.0</span></div>
 <div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span><span class="preprocessor">#include &quot;freertos/FreeRTOSConfig.h&quot;</span></div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span><span class="preprocessor">#define GPIO_NONE -1</span></div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span><span class="preprocessor">#define IS_GPIO(pin) (pin &gt;= 0)</span></div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span><span class="preprocessor">#define GPIO_TO_INT(pin) pin</span></div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span><span class="preprocessor">#define GPIO_TO_STR(pin) std::to_string(pin).c_str()</span></div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span> </div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span><span class="keyword">using </span><a class="code hl_typedef" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> = int;</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span> </div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span><span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code hl_function" href="namespaceaudio__tools.html#ad462fdb06c94fd4a815c755941503234">digitalRead</a>(digital_pin_t pin) {</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>  printf(<span class="stringliteral">&quot;digitalRead:%d\n&quot;</span>, pin);</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>  <span class="keywordflow">return</span> gpio_get_level((gpio_num_t)pin);</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>}</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> </div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceaudio__tools.html#a33cb38f3d7d9be71376684a50b289b51">digitalWrite</a>(digital_pin_t pin, <span class="keywordtype">int</span> value) {</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>  gpio_set_level((gpio_num_t)pin, value);</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span><span class="preprocessor">#include &lt;algorithm&gt;</span></div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> </div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span><span class="preprocessor">#define GPIO_NONE -1</span></div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span><span class="preprocessor">#define IS_GPIO(pin) (pin &gt;= 0)</span></div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span><span class="preprocessor">#define GPIO_TO_INT(pin) pin</span></div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span><span class="preprocessor">#define GPIO_TO_STR(pin) std::to_string(pin).c_str()</span></div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span> </div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span><span class="keyword">using </span><a class="code hl_typedef" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> = int;</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span><span class="keyword">using </span>std::min;</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span><span class="keyword">using </span>std::max;</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span> </div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span> </div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span><span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code hl_function" href="namespaceaudio__tools.html#ad462fdb06c94fd4a815c755941503234">digitalRead</a>(digital_pin_t pin) {</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>  printf(<span class="stringliteral">&quot;digitalRead:%d\n&quot;</span>, pin);</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>  <span class="keywordflow">return</span> gpio_get_level((gpio_num_t)pin);</div>
 <div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>}</div>
 <div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span> </div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceaudio__tools.html#a9fab86a2636e4b6480fe9a45f45fff88">pinMode</a>(digital_pin_t pin, <span class="keywordtype">int</span> mode) {</div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>  gpio_num_t gpio_pin = (gpio_num_t)pin;</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>  printf(<span class="stringliteral">&quot;pinMode(%d,%d)\n&quot;</span>, pin, mode);</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceaudio__tools.html#a33cb38f3d7d9be71376684a50b289b51">digitalWrite</a>(digital_pin_t pin, <span class="keywordtype">int</span> value) {</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>  gpio_set_level((gpio_num_t)pin, value);</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>}</div>
 <div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span> </div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>  gpio_reset_pin(gpio_pin);</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>  <span class="keywordflow">switch</span> (mode) {</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    <span class="keywordflow">case</span> <a class="code hl_define" href="_arduino_8h.html#a1bb283bd7893b9855e2f23013891fc82">INPUT</a>:</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>      gpio_set_direction(gpio_pin, GPIO_MODE_INPUT);</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>      <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    <span class="keywordflow">case</span> <a class="code hl_define" href="_arduino_8h.html#a61a3c9a18380aafb6e430e79bf596557">OUTPUT</a>:</div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>      gpio_set_direction(gpio_pin, GPIO_MODE_OUTPUT);</div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>      <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    <span class="keywordflow">case</span> <a class="code hl_define" href="_arduino_8h.html#a6295096662a20dd56186396e535fbe92">INPUT_PULLUP</a>:</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>      gpio_set_direction(gpio_pin, GPIO_MODE_INPUT);</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>      gpio_set_pull_mode(gpio_pin, GPIO_PULLUP_ONLY);</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceaudio__tools.html#a9fab86a2636e4b6480fe9a45f45fff88">pinMode</a>(digital_pin_t pin, <span class="keywordtype">int</span> mode) {</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>  gpio_num_t gpio_pin = (gpio_num_t)pin;</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>  printf(<span class="stringliteral">&quot;pinMode(%d,%d)\n&quot;</span>, pin, mode);</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span> </div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>  gpio_reset_pin(gpio_pin);</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>  <span class="keywordflow">switch</span> (mode) {</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    <span class="keywordflow">case</span> <a class="code hl_define" href="_arduino_8h.html#a1bb283bd7893b9855e2f23013891fc82">INPUT</a>:</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>      gpio_set_direction(gpio_pin, GPIO_MODE_INPUT);</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>      <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    <span class="keywordflow">case</span> <a class="code hl_define" href="_arduino_8h.html#a61a3c9a18380aafb6e430e79bf596557">OUTPUT</a>:</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>      gpio_set_direction(gpio_pin, GPIO_MODE_OUTPUT);</div>
 <div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>      <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    <span class="keywordflow">default</span>:</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>      gpio_set_direction(gpio_pin, GPIO_MODE_INPUT_OUTPUT);</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>      <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>  }</div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>}</div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span> </div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceaudio__tools.html#a7f2dfce1046bdd2a2b753643726c2346">delay</a>(uint32_t ms) { vTaskDelay(ms / portTICK_PERIOD_MS); }</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceaudio__tools.html#a58c8b2ad0ea491a6642e5e1cbd358c89">yield</a>() { taskYIELD(); }</div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span><span class="keyword">inline</span> uint32_t <a class="code hl_function" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">millis</a>() { <span class="keywordflow">return</span> (xTaskGetTickCount() * portTICK_PERIOD_MS); }</div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceaudio__tools.html#adaddd7b123c186ab936b79a7715e312b">delayMicroseconds</a>(uint32_t ms) { esp_rom_delay_us(ms); }</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span><span class="keyword">inline</span> uint64_t <a class="code hl_function" href="namespaceaudio__tools.html#a8b24cbb7c3486e1bfa05c86db83ecb01">micros</a>() {</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>  <span class="keywordflow">return</span> xTaskGetTickCount() * portTICK_PERIOD_MS * 1000;</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>}</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span> </div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span><span class="comment">// delay and millis has been defined</span></div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span><span class="preprocessor">#define DESKTOP_MILLIS_DEFINED</span></div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span> </div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span> </div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span><span class="preprocessor">#if defined(IS_ZEPHYR)</span></div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span><span class="preprocessor">#include &lt;zephyr/drivers/gpio.h&gt;</span></div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span> </div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno"><a class="line" href="_arduino_8h.html#ac9faf1ee520930849fff2feaf62b1d8a">  247</a></span><span class="preprocessor">#define DESKTOP_MILLIS_DEFINED</span></div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno"><a class="line" href="_arduino_8h.html#a745da728dd2beeab26f929526e2538ab">  248</a></span><span class="preprocessor">#define IS_GPIO(pin) (pin.port != nullptr)</span></div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno"><a class="line" href="_arduino_8h.html#aa222c806f5498b65952f602eb23818b8">  249</a></span><span class="preprocessor">#define GPIO_TO_INT(pin) pin.pin</span></div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno"><a class="line" href="_arduino_8h.html#ab5d052bccc523dfdafb661d152838c8e">  250</a></span><span class="preprocessor">#define GPIO_TO_STR(pin) std::to_string(GPIO_TO_INT(pin)).c_str()</span></div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno"><a class="line" href="_arduino_8h.html#adcf34aa935f702ce12dbaf6dbc29f954">  251</a></span><span class="preprocessor">#define ZLOGE(...) printk(__VA_ARGS__)</span></div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span> </div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceaudio__tools.html">audio_tools</a> {</div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span> </div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#a7f2dfce1046bdd2a2b753643726c2346">  255</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceaudio__tools.html#a7f2dfce1046bdd2a2b753643726c2346">delay</a>(uint32_t ms) { k_msleep(ms); }</div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">  256</a></span><span class="keyword">inline</span> uint32_t <a class="code hl_function" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">millis</a>() { <span class="keywordflow">return</span> k_uptime_get_32(); }</div>
-<div class="foldopen" id="foldopen00257" data-start="{" data-end="}">
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#adaddd7b123c186ab936b79a7715e312b">  257</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceaudio__tools.html#adaddd7b123c186ab936b79a7715e312b">delayMicroseconds</a>(uint32_t us) {</div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>  <span class="keywordflow">if</span> (us == 0) <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>  k_busy_wait(us);</div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>}</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    <span class="keywordflow">case</span> <a class="code hl_define" href="_arduino_8h.html#a6295096662a20dd56186396e535fbe92">INPUT_PULLUP</a>:</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>      gpio_set_direction(gpio_pin, GPIO_MODE_INPUT);</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>      gpio_set_pull_mode(gpio_pin, GPIO_PULLUP_ONLY);</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>      <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>      gpio_set_direction(gpio_pin, GPIO_MODE_INPUT_OUTPUT);</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>      <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>  }</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>}</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span> </div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceaudio__tools.html#a7f2dfce1046bdd2a2b753643726c2346">delay</a>(uint32_t ms) { vTaskDelay(ms / portTICK_PERIOD_MS); }</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceaudio__tools.html#a58c8b2ad0ea491a6642e5e1cbd358c89">yield</a>() { taskYIELD(); }</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span><span class="keyword">inline</span> uint32_t <a class="code hl_function" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">millis</a>() { <span class="keywordflow">return</span> (xTaskGetTickCount() * portTICK_PERIOD_MS); }</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceaudio__tools.html#adaddd7b123c186ab936b79a7715e312b">delayMicroseconds</a>(uint32_t ms) { esp_rom_delay_us(ms); }</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span><span class="keyword">inline</span> uint64_t <a class="code hl_function" href="namespaceaudio__tools.html#a8b24cbb7c3486e1bfa05c86db83ecb01">micros</a>() {</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>  <span class="keywordflow">return</span> xTaskGetTickCount() * portTICK_PERIOD_MS * 1000;</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>}</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span> </div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span><span class="comment">// delay and millis has been defined</span></div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span><span class="preprocessor">#define DESKTOP_MILLIS_DEFINED</span></div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span> </div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span> </div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span><span class="preprocessor">#if defined(IS_ZEPHYR)</span></div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span><span class="preprocessor">#include &lt;zephyr/drivers/gpio.h&gt;</span></div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span> </div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno"><a class="line" href="_arduino_8h.html#ac9faf1ee520930849fff2feaf62b1d8a">  251</a></span><span class="preprocessor">#define DESKTOP_MILLIS_DEFINED</span></div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno"><a class="line" href="_arduino_8h.html#a745da728dd2beeab26f929526e2538ab">  252</a></span><span class="preprocessor">#define IS_GPIO(pin) (pin.port != nullptr)</span></div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno"><a class="line" href="_arduino_8h.html#aa222c806f5498b65952f602eb23818b8">  253</a></span><span class="preprocessor">#define GPIO_TO_INT(pin) pin.pin</span></div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno"><a class="line" href="_arduino_8h.html#ab5d052bccc523dfdafb661d152838c8e">  254</a></span><span class="preprocessor">#define GPIO_TO_STR(pin) std::to_string(GPIO_TO_INT(pin)).c_str()</span></div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno"><a class="line" href="_arduino_8h.html#adcf34aa935f702ce12dbaf6dbc29f954">  255</a></span><span class="preprocessor">#define ZLOGE(...) printk(__VA_ARGS__)</span></div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span> </div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceaudio__tools.html">audio_tools</a> {</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span> </div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#a7f2dfce1046bdd2a2b753643726c2346">  259</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceaudio__tools.html#a7f2dfce1046bdd2a2b753643726c2346">delay</a>(uint32_t ms) { k_msleep(ms); }</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">  260</a></span><span class="keyword">inline</span> uint32_t <a class="code hl_function" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">millis</a>() { <span class="keywordflow">return</span> k_uptime_get_32(); }</div>
+<div class="foldopen" id="foldopen00261" data-start="{" data-end="}">
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#adaddd7b123c186ab936b79a7715e312b">  261</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceaudio__tools.html#adaddd7b123c186ab936b79a7715e312b">delayMicroseconds</a>(uint32_t us) {</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>  <span class="keywordflow">if</span> (us == 0) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>  k_busy_wait(us);</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>}</div>
 </div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#a8b24cbb7c3486e1bfa05c86db83ecb01">  261</a></span><span class="keyword">inline</span> uint64_t <a class="code hl_function" href="namespaceaudio__tools.html#a8b24cbb7c3486e1bfa05c86db83ecb01">micros</a>() { <span class="keywordflow">return</span> k_cyc_to_us_floor64(k_cycle_get_64()); }</div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#a58c8b2ad0ea491a6642e5e1cbd358c89">  262</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceaudio__tools.html#a58c8b2ad0ea491a6642e5e1cbd358c89">yield</a>() { k_yield(); }</div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span> </div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span> </div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">  266</a></span><span class="keyword">using </span><a class="code hl_typedef" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> = gpio_dt_spec;</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#a8b24cbb7c3486e1bfa05c86db83ecb01">  265</a></span><span class="keyword">inline</span> uint64_t <a class="code hl_function" href="namespaceaudio__tools.html#a8b24cbb7c3486e1bfa05c86db83ecb01">micros</a>() { <span class="keywordflow">return</span> k_cyc_to_us_floor64(k_cycle_get_64()); }</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#a58c8b2ad0ea491a6642e5e1cbd358c89">  266</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceaudio__tools.html#a58c8b2ad0ea491a6642e5e1cbd358c89">yield</a>() { k_yield(); }</div>
 <div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span> </div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#a3f5182f70c2f0f77262bcbbd05d55b79">  269</a></span><span class="keyword">static</span> gpio_dt_spec <a class="code hl_variable" href="namespaceaudio__tools.html#a3f5182f70c2f0f77262bcbbd05d55b79">GPIO_NONE</a> = {<span class="keyword">nullptr</span>, 0, 0};</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span> </div>
-<div class="foldopen" id="foldopen00272" data-start="{" data-end="}">
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#ac8f98106c04a5e444b4c0f45746bcf03">  272</a></span><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="namespaceaudio__tools.html#a12ae44678b579bec3c828dff970fb5d6">operator==</a>(<a class="code hl_typedef" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">audio_tools::digital_pin_t</a>&amp; a, <a class="code hl_typedef" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">audio_tools::digital_pin_t</a>&amp; b) {</div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>  <span class="keywordflow">return</span> (a.port == b.port) &amp;&amp; (a.pin == b.pin);</div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>}</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span> </div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">  270</a></span><span class="keyword">using </span><a class="code hl_typedef" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> = gpio_dt_spec;</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span> </div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#a3f5182f70c2f0f77262bcbbd05d55b79">  273</a></span><span class="keyword">static</span> gpio_dt_spec <a class="code hl_variable" href="namespaceaudio__tools.html#a3f5182f70c2f0f77262bcbbd05d55b79">GPIO_NONE</a> = {<span class="keyword">nullptr</span>, 0, 0};</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span> </div>
+<div class="foldopen" id="foldopen00276" data-start="{" data-end="}">
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#ac8f98106c04a5e444b4c0f45746bcf03">  276</a></span><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="namespaceaudio__tools.html#a12ae44678b579bec3c828dff970fb5d6">operator==</a>(<a class="code hl_typedef" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">audio_tools::digital_pin_t</a>&amp; a, <a class="code hl_typedef" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">audio_tools::digital_pin_t</a>&amp; b) {</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>  <span class="keywordflow">return</span> (a.port == b.port) &amp;&amp; (a.pin == b.pin);</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>}</div>
 </div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span> </div>
-<div class="foldopen" id="foldopen00277" data-start="{" data-end="}">
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#a7003387e44fc36bcb1ba512a80c3f1b4">  277</a></span><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="namespaceaudio__tools.html#a89dba7db9b107dbb6a00b76977f2f06b">operator!=</a>(<a class="code hl_typedef" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">audio_tools::digital_pin_t</a>&amp; a, <a class="code hl_typedef" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">audio_tools::digital_pin_t</a>&amp; b) {</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>  <span class="keywordflow">return</span> !(a == b);</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>}</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span> </div>
+<div class="foldopen" id="foldopen00281" data-start="{" data-end="}">
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#a7003387e44fc36bcb1ba512a80c3f1b4">  281</a></span><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="namespaceaudio__tools.html#a89dba7db9b107dbb6a00b76977f2f06b">operator!=</a>(<a class="code hl_typedef" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">audio_tools::digital_pin_t</a>&amp; a, <a class="code hl_typedef" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">audio_tools::digital_pin_t</a>&amp; b) {</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>  <span class="keywordflow">return</span> !(a == b);</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>}</div>
 </div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span> </div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span> </div>
-<div class="foldopen" id="foldopen00282" data-start="{" data-end="}">
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#a9fab86a2636e4b6480fe9a45f45fff88">  282</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespaceaudio__tools.html#a9fab86a2636e4b6480fe9a45f45fff88">pinMode</a>(<a class="code hl_typedef" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> pin, <span class="keywordtype">int</span> mode) {</div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>  <span class="keywordflow">if</span> (pin == <a class="code hl_variable" href="namespaceaudio__tools.html#a3f5182f70c2f0f77262bcbbd05d55b79">GPIO_NONE</a> || !gpio_is_ready_dt(&amp;pin)) {</div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>    <a class="code hl_define" href="_arduino_8h.html#adcf34aa935f702ce12dbaf6dbc29f954">ZLOGE</a>(<span class="stringliteral">&quot;GPIO pin not ready&quot;</span>);</div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>  }</div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span> </div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>  gpio_flags_t flags;</div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>  <span class="keywordflow">switch</span> (mode) {</div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>    <span class="keywordflow">case</span> <a class="code hl_define" href="_arduino_8h.html#a61a3c9a18380aafb6e430e79bf596557">OUTPUT</a>:</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>      flags = GPIO_OUTPUT;</div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>      <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>    <span class="keywordflow">case</span> <a class="code hl_define" href="_arduino_8h.html#a1bb283bd7893b9855e2f23013891fc82">INPUT</a>:</div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>      flags = GPIO_INPUT;</div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>      <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>    <span class="keywordflow">case</span> <a class="code hl_define" href="_arduino_8h.html#a6295096662a20dd56186396e535fbe92">INPUT_PULLUP</a>:</div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>      flags = GPIO_INPUT | GPIO_PULL_UP;</div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>      <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>    <span class="comment">// case INPUT_PULLDOWN:</span></div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    <span class="comment">//   flags = GPIO_INPUT | GPIO_PULL_DOWN;</span></div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>    <span class="comment">//   break;</span></div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>    <span class="keywordflow">default</span>:</div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>      flags = GPIO_OUTPUT;</div>
-<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>      <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>  }</div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span> </div>
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>  <span class="keywordtype">int</span> rc = gpio_pin_configure_dt(&amp;pin, flags);</div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>  <span class="keywordflow">if</span> (rc != 0) {</div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>    <a class="code hl_define" href="_arduino_8h.html#adcf34aa935f702ce12dbaf6dbc29f954">ZLOGE</a>(<span class="stringliteral">&quot;Failed to configure GPIO pin: %d&quot;</span>, rc);</div>
-<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>  }</div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>}</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span> </div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span> </div>
+<div class="foldopen" id="foldopen00286" data-start="{" data-end="}">
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#a9fab86a2636e4b6480fe9a45f45fff88">  286</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespaceaudio__tools.html#a9fab86a2636e4b6480fe9a45f45fff88">pinMode</a>(<a class="code hl_typedef" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> pin, <span class="keywordtype">int</span> mode) {</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>  <span class="keywordflow">if</span> (pin == <a class="code hl_variable" href="namespaceaudio__tools.html#a3f5182f70c2f0f77262bcbbd05d55b79">GPIO_NONE</a> || !gpio_is_ready_dt(&amp;pin)) {</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>    <a class="code hl_define" href="_arduino_8h.html#adcf34aa935f702ce12dbaf6dbc29f954">ZLOGE</a>(<span class="stringliteral">&quot;GPIO pin not ready&quot;</span>);</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>  }</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span> </div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>  gpio_flags_t flags;</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>  <span class="keywordflow">switch</span> (mode) {</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>    <span class="keywordflow">case</span> <a class="code hl_define" href="_arduino_8h.html#a61a3c9a18380aafb6e430e79bf596557">OUTPUT</a>:</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>      flags = GPIO_OUTPUT;</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>      <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>    <span class="keywordflow">case</span> <a class="code hl_define" href="_arduino_8h.html#a1bb283bd7893b9855e2f23013891fc82">INPUT</a>:</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>      flags = GPIO_INPUT;</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>      <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    <span class="keywordflow">case</span> <a class="code hl_define" href="_arduino_8h.html#a6295096662a20dd56186396e535fbe92">INPUT_PULLUP</a>:</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>      flags = GPIO_INPUT | GPIO_PULL_UP;</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>      <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>    <span class="comment">// case INPUT_PULLDOWN:</span></div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>    <span class="comment">//   flags = GPIO_INPUT | GPIO_PULL_DOWN;</span></div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>    <span class="comment">//   break;</span></div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>      flags = GPIO_OUTPUT;</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>      <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>  }</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span> </div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>  <span class="keywordtype">int</span> rc = gpio_pin_configure_dt(&amp;pin, flags);</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>  <span class="keywordflow">if</span> (rc != 0) {</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>    <a class="code hl_define" href="_arduino_8h.html#adcf34aa935f702ce12dbaf6dbc29f954">ZLOGE</a>(<span class="stringliteral">&quot;Failed to configure GPIO pin: %d&quot;</span>, rc);</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>  }</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>}</div>
 </div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span> </div>
-<div class="foldopen" id="foldopen00313" data-start="{" data-end="}">
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#a33cb38f3d7d9be71376684a50b289b51">  313</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespaceaudio__tools.html#a33cb38f3d7d9be71376684a50b289b51">digitalWrite</a>(<a class="code hl_typedef" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> pin, <span class="keywordtype">bool</span> value) {</div>
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>  <span class="keywordflow">if</span> (pin == <a class="code hl_variable" href="namespaceaudio__tools.html#a3f5182f70c2f0f77262bcbbd05d55b79">GPIO_NONE</a> || !gpio_is_ready_dt(&amp;pin)) {</div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>    <a class="code hl_define" href="_arduino_8h.html#adcf34aa935f702ce12dbaf6dbc29f954">ZLOGE</a>(<span class="stringliteral">&quot;GPIO pin not ready&quot;</span>);</div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>  }</div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span> </div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>  <span class="keywordtype">int</span> rc = gpio_pin_set_dt(&amp;pin, value ? 1 : 0);</div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>  <span class="keywordflow">if</span> (rc != 0) {</div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>    <a class="code hl_define" href="_arduino_8h.html#adcf34aa935f702ce12dbaf6dbc29f954">ZLOGE</a>(<span class="stringliteral">&quot;Failed to write GPIO pin: %d&quot;</span>, rc);</div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>  }</div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>}</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span> </div>
+<div class="foldopen" id="foldopen00317" data-start="{" data-end="}">
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#a33cb38f3d7d9be71376684a50b289b51">  317</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespaceaudio__tools.html#a33cb38f3d7d9be71376684a50b289b51">digitalWrite</a>(<a class="code hl_typedef" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> pin, <span class="keywordtype">bool</span> value) {</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>  <span class="keywordflow">if</span> (pin == <a class="code hl_variable" href="namespaceaudio__tools.html#a3f5182f70c2f0f77262bcbbd05d55b79">GPIO_NONE</a> || !gpio_is_ready_dt(&amp;pin)) {</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>    <a class="code hl_define" href="_arduino_8h.html#adcf34aa935f702ce12dbaf6dbc29f954">ZLOGE</a>(<span class="stringliteral">&quot;GPIO pin not ready&quot;</span>);</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>  }</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span> </div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>  <span class="keywordtype">int</span> rc = gpio_pin_set_dt(&amp;pin, value ? 1 : 0);</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>  <span class="keywordflow">if</span> (rc != 0) {</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>    <a class="code hl_define" href="_arduino_8h.html#adcf34aa935f702ce12dbaf6dbc29f954">ZLOGE</a>(<span class="stringliteral">&quot;Failed to write GPIO pin: %d&quot;</span>, rc);</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>  }</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>}</div>
 </div>
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span> </div>
-<div class="foldopen" id="foldopen00324" data-start="{" data-end="}">
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#ad462fdb06c94fd4a815c755941503234">  324</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="namespaceaudio__tools.html#ad462fdb06c94fd4a815c755941503234">digitalRead</a>(<a class="code hl_typedef" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> pin) {</div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>  <span class="keywordflow">if</span> (pin == <a class="code hl_variable" href="namespaceaudio__tools.html#a3f5182f70c2f0f77262bcbbd05d55b79">GPIO_NONE</a> || !gpio_is_ready_dt(&amp;pin)) {</div>
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>    <a class="code hl_define" href="_arduino_8h.html#adcf34aa935f702ce12dbaf6dbc29f954">ZLOGE</a>(<span class="stringliteral">&quot;GPIO pin not ready&quot;</span>);</div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>  }</div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span> </div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>  <span class="keywordtype">int</span> rc = gpio_pin_get_dt(&amp;pin);</div>
-<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>  <span class="keywordflow">if</span> (rc &lt; 0) {</div>
-<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>    <a class="code hl_define" href="_arduino_8h.html#adcf34aa935f702ce12dbaf6dbc29f954">ZLOGE</a>(<span class="stringliteral">&quot;Failed to read GPIO pin: %d&quot;</span>, rc);</div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>  }</div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>  <span class="keywordflow">return</span> rc;</div>
-<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>}</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span> </div>
+<div class="foldopen" id="foldopen00328" data-start="{" data-end="}">
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#ad462fdb06c94fd4a815c755941503234">  328</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="namespaceaudio__tools.html#ad462fdb06c94fd4a815c755941503234">digitalRead</a>(<a class="code hl_typedef" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> pin) {</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>  <span class="keywordflow">if</span> (pin == <a class="code hl_variable" href="namespaceaudio__tools.html#a3f5182f70c2f0f77262bcbbd05d55b79">GPIO_NONE</a> || !gpio_is_ready_dt(&amp;pin)) {</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>    <a class="code hl_define" href="_arduino_8h.html#adcf34aa935f702ce12dbaf6dbc29f954">ZLOGE</a>(<span class="stringliteral">&quot;GPIO pin not ready&quot;</span>);</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>  }</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span> </div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>  <span class="keywordtype">int</span> rc = gpio_pin_get_dt(&amp;pin);</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>  <span class="keywordflow">if</span> (rc &lt; 0) {</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>    <a class="code hl_define" href="_arduino_8h.html#adcf34aa935f702ce12dbaf6dbc29f954">ZLOGE</a>(<span class="stringliteral">&quot;Failed to read GPIO pin: %d&quot;</span>, rc);</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>  }</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>  <span class="keywordflow">return</span> rc;</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>}</div>
 </div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span> </div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>} <span class="comment">// namespace audio_tools</span></div>
-<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span> </div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>} <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="a_arduino_8h_html_a1bb283bd7893b9855e2f23013891fc82"><div class="ttname"><a href="_arduino_8h.html#a1bb283bd7893b9855e2f23013891fc82">INPUT</a></div><div class="ttdeci">#define INPUT</div><div class="ttdef"><b>Definition</b> Arduino.h:34</div></div>
 <div class="ttc" id="a_arduino_8h_html_a61a3c9a18380aafb6e430e79bf596557"><div class="ttname"><a href="_arduino_8h.html#a61a3c9a18380aafb6e430e79bf596557">OUTPUT</a></div><div class="ttdeci">#define OUTPUT</div><div class="ttdef"><b>Definition</b> Arduino.h:38</div></div>
 <div class="ttc" id="a_arduino_8h_html_a6295096662a20dd56186396e535fbe92"><div class="ttname"><a href="_arduino_8h.html#a6295096662a20dd56186396e535fbe92">INPUT_PULLUP</a></div><div class="ttdeci">#define INPUT_PULLUP</div><div class="ttdef"><b>Definition</b> Arduino.h:42</div></div>
@@ -434,7 +438,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="a_arduino_8h_html_ad6c89ce0bc361acabef4cbc9d1e9efb7"><div class="ttname"><a href="_arduino_8h.html#ad6c89ce0bc361acabef4cbc9d1e9efb7">PrintCharFmt</a></div><div class="ttdeci">PrintCharFmt</div><div class="ttdef"><b>Definition</b> Arduino.h:54</div></div>
 <div class="ttc" id="a_arduino_8h_html_ad6c89ce0bc361acabef4cbc9d1e9efb7a851043138f8ef49c6eeea75760b69481"><div class="ttname"><a href="_arduino_8h.html#ad6c89ce0bc361acabef4cbc9d1e9efb7a851043138f8ef49c6eeea75760b69481">DEC</a></div><div class="ttdeci">@ DEC</div><div class="ttdef"><b>Definition</b> Arduino.h:54</div></div>
 <div class="ttc" id="a_arduino_8h_html_ad6c89ce0bc361acabef4cbc9d1e9efb7ad3c20094c5fe3327350484d01c44c137"><div class="ttname"><a href="_arduino_8h.html#ad6c89ce0bc361acabef4cbc9d1e9efb7ad3c20094c5fe3327350484d01c44c137">HEX</a></div><div class="ttdeci">@ HEX</div><div class="ttdef"><b>Definition</b> Arduino.h:54</div></div>
-<div class="ttc" id="a_arduino_8h_html_adcf34aa935f702ce12dbaf6dbc29f954"><div class="ttname"><a href="_arduino_8h.html#adcf34aa935f702ce12dbaf6dbc29f954">ZLOGE</a></div><div class="ttdeci">#define ZLOGE(...)</div><div class="ttdef"><b>Definition</b> Arduino.h:251</div></div>
+<div class="ttc" id="a_arduino_8h_html_adcf34aa935f702ce12dbaf6dbc29f954"><div class="ttname"><a href="_arduino_8h.html#adcf34aa935f702ce12dbaf6dbc29f954">ZLOGE</a></div><div class="ttdeci">#define ZLOGE(...)</div><div class="ttdef"><b>Definition</b> Arduino.h:255</div></div>
 <div class="ttc" id="aclass_client_html"><div class="ttname"><a href="class_client.html">Client</a></div><div class="ttdef"><b>Definition</b> Arduino.h:162</div></div>
 <div class="ttc" id="aclass_client_html_a2606e8c144de512e19c29fff31a4140f"><div class="ttname"><a href="class_client.html#a2606e8c144de512e19c29fff31a4140f">Client::connect</a></div><div class="ttdeci">bool connect(const char *ip, int port)</div><div class="ttdef"><b>Definition</b> Arduino.h:168</div></div>
 <div class="ttc" id="aclass_client_html_a59fc494d53391b27e2fd75cb750690d9"><div class="ttname"><a href="class_client.html#a59fc494d53391b27e2fd75cb750690d9">Client::connected</a></div><div class="ttdeci">bool connected()</div><div class="ttdef"><b>Definition</b> Arduino.h:167</div></div>
@@ -454,18 +458,18 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclass_stream_html_a512cfced3ab951dde7a9a78f1274fe63"><div class="ttname"><a href="class_stream.html#a512cfced3ab951dde7a9a78f1274fe63">Stream::available</a></div><div class="ttdeci">virtual int available()</div><div class="ttdef"><b>Definition</b> Arduino.h:139</div></div>
 <div class="ttc" id="aclass_stream_html_acf845f4bb63730e9f7d42fe6b646d7b9"><div class="ttname"><a href="class_stream.html#acf845f4bb63730e9f7d42fe6b646d7b9">Stream::~Stream</a></div><div class="ttdeci">virtual ~Stream()=default</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> LMSEchoCancellationStream.h:6</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html_a0955c1051f595f6f0428f8efb34a15cb"><div class="ttname"><a href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">audio_tools::digital_pin_t</a></div><div class="ttdeci">gpio_dt_spec digital_pin_t</div><div class="ttdoc">Zephyr GPIO spec as digital_pin_t.</div><div class="ttdef"><b>Definition</b> Arduino.h:266</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html_a0955c1051f595f6f0428f8efb34a15cb"><div class="ttname"><a href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">audio_tools::digital_pin_t</a></div><div class="ttdeci">gpio_dt_spec digital_pin_t</div><div class="ttdoc">Zephyr GPIO spec as digital_pin_t.</div><div class="ttdef"><b>Definition</b> Arduino.h:270</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html_a12ae44678b579bec3c828dff970fb5d6"><div class="ttname"><a href="namespaceaudio__tools.html#a12ae44678b579bec3c828dff970fb5d6">audio_tools::operator==</a></div><div class="ttdeci">bool operator==(float a, PseudoFloat b)</div><div class="ttdef"><b>Definition</b> PseudoFloat.h:195</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html_a33cb38f3d7d9be71376684a50b289b51"><div class="ttname"><a href="namespaceaudio__tools.html#a33cb38f3d7d9be71376684a50b289b51">audio_tools::digitalWrite</a></div><div class="ttdeci">void digitalWrite(digital_pin_t pin, bool value)</div><div class="ttdef"><b>Definition</b> Arduino.h:313</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html_a3f5182f70c2f0f77262bcbbd05d55b79"><div class="ttname"><a href="namespaceaudio__tools.html#a3f5182f70c2f0f77262bcbbd05d55b79">audio_tools::GPIO_NONE</a></div><div class="ttdeci">static gpio_dt_spec GPIO_NONE</div><div class="ttdoc">GPIO_NONE is no pin defined.</div><div class="ttdef"><b>Definition</b> Arduino.h:269</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html_a58c8b2ad0ea491a6642e5e1cbd358c89"><div class="ttname"><a href="namespaceaudio__tools.html#a58c8b2ad0ea491a6642e5e1cbd358c89">audio_tools::yield</a></div><div class="ttdeci">void yield()</div><div class="ttdef"><b>Definition</b> Arduino.h:262</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html_a7f2dfce1046bdd2a2b753643726c2346"><div class="ttname"><a href="namespaceaudio__tools.html#a7f2dfce1046bdd2a2b753643726c2346">audio_tools::delay</a></div><div class="ttdeci">void delay(uint32_t ms)</div><div class="ttdef"><b>Definition</b> Arduino.h:255</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html_a33cb38f3d7d9be71376684a50b289b51"><div class="ttname"><a href="namespaceaudio__tools.html#a33cb38f3d7d9be71376684a50b289b51">audio_tools::digitalWrite</a></div><div class="ttdeci">void digitalWrite(digital_pin_t pin, bool value)</div><div class="ttdef"><b>Definition</b> Arduino.h:317</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html_a3f5182f70c2f0f77262bcbbd05d55b79"><div class="ttname"><a href="namespaceaudio__tools.html#a3f5182f70c2f0f77262bcbbd05d55b79">audio_tools::GPIO_NONE</a></div><div class="ttdeci">static gpio_dt_spec GPIO_NONE</div><div class="ttdoc">GPIO_NONE is no pin defined.</div><div class="ttdef"><b>Definition</b> Arduino.h:273</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html_a58c8b2ad0ea491a6642e5e1cbd358c89"><div class="ttname"><a href="namespaceaudio__tools.html#a58c8b2ad0ea491a6642e5e1cbd358c89">audio_tools::yield</a></div><div class="ttdeci">void yield()</div><div class="ttdef"><b>Definition</b> Arduino.h:266</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html_a7f2dfce1046bdd2a2b753643726c2346"><div class="ttname"><a href="namespaceaudio__tools.html#a7f2dfce1046bdd2a2b753643726c2346">audio_tools::delay</a></div><div class="ttdeci">void delay(uint32_t ms)</div><div class="ttdef"><b>Definition</b> Arduino.h:259</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html_a89dba7db9b107dbb6a00b76977f2f06b"><div class="ttname"><a href="namespaceaudio__tools.html#a89dba7db9b107dbb6a00b76977f2f06b">audio_tools::operator!=</a></div><div class="ttdeci">bool operator!=(float a, PseudoFloat b)</div><div class="ttdef"><b>Definition</b> PseudoFloat.h:196</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html_a8b24cbb7c3486e1bfa05c86db83ecb01"><div class="ttname"><a href="namespaceaudio__tools.html#a8b24cbb7c3486e1bfa05c86db83ecb01">audio_tools::micros</a></div><div class="ttdeci">uint64_t micros()</div><div class="ttdef"><b>Definition</b> Arduino.h:261</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html_a9fab86a2636e4b6480fe9a45f45fff88"><div class="ttname"><a href="namespaceaudio__tools.html#a9fab86a2636e4b6480fe9a45f45fff88">audio_tools::pinMode</a></div><div class="ttdeci">void pinMode(digital_pin_t pin, int mode)</div><div class="ttdef"><b>Definition</b> Arduino.h:282</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html_ad462fdb06c94fd4a815c755941503234"><div class="ttname"><a href="namespaceaudio__tools.html#ad462fdb06c94fd4a815c755941503234">audio_tools::digitalRead</a></div><div class="ttdeci">int digitalRead(digital_pin_t pin)</div><div class="ttdef"><b>Definition</b> Arduino.h:324</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html_adaddd7b123c186ab936b79a7715e312b"><div class="ttname"><a href="namespaceaudio__tools.html#adaddd7b123c186ab936b79a7715e312b">audio_tools::delayMicroseconds</a></div><div class="ttdeci">void delayMicroseconds(uint32_t us)</div><div class="ttdef"><b>Definition</b> Arduino.h:257</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html_adb94fbd930038e1510574dd4bcf07fe1"><div class="ttname"><a href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">audio_tools::millis</a></div><div class="ttdeci">uint32_t millis()</div><div class="ttdoc">Returns the milliseconds since the start.</div><div class="ttdef"><b>Definition</b> Arduino.h:256</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html_a8b24cbb7c3486e1bfa05c86db83ecb01"><div class="ttname"><a href="namespaceaudio__tools.html#a8b24cbb7c3486e1bfa05c86db83ecb01">audio_tools::micros</a></div><div class="ttdeci">uint64_t micros()</div><div class="ttdef"><b>Definition</b> Arduino.h:265</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html_a9fab86a2636e4b6480fe9a45f45fff88"><div class="ttname"><a href="namespaceaudio__tools.html#a9fab86a2636e4b6480fe9a45f45fff88">audio_tools::pinMode</a></div><div class="ttdeci">void pinMode(digital_pin_t pin, int mode)</div><div class="ttdef"><b>Definition</b> Arduino.h:286</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html_ad462fdb06c94fd4a815c755941503234"><div class="ttname"><a href="namespaceaudio__tools.html#ad462fdb06c94fd4a815c755941503234">audio_tools::digitalRead</a></div><div class="ttdeci">int digitalRead(digital_pin_t pin)</div><div class="ttdef"><b>Definition</b> Arduino.h:328</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html_adaddd7b123c186ab936b79a7715e312b"><div class="ttname"><a href="namespaceaudio__tools.html#adaddd7b123c186ab936b79a7715e312b">audio_tools::delayMicroseconds</a></div><div class="ttdeci">void delayMicroseconds(uint32_t us)</div><div class="ttdef"><b>Definition</b> Arduino.h:261</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html_adb94fbd930038e1510574dd4bcf07fe1"><div class="ttname"><a href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">audio_tools::millis</a></div><div class="ttdeci">uint32_t millis()</div><div class="ttdoc">Returns the milliseconds since the start.</div><div class="ttdef"><b>Definition</b> Arduino.h:260</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
