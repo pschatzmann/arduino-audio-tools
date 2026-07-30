@@ -36,11 +36,6 @@
 #  define AUDIO_INCLUDE_CORE true
 #endif
 
-// Use fixed point multiplication instead float for VolumeStream for slightly better performance on platforms without float hardware. Tested on RP2040 at 16 bit per second (still too slow for 32bit)
-#ifndef PREFER_FIXEDPOINT
-#  define PREFER_FIXEDPOINT false 
-#endif
-
 // Add automatic using namespace audio_tools;
 #ifndef USE_AUDIOTOOLS_NS
 #  define USE_AUDIOTOOLS_NS true
@@ -286,6 +281,11 @@
 
 //----------------
 // Fallback defined if nothing was defined in the platform
+
+// Use fixed point multiplication instead float for VolumeStream for slightly better performance on platforms without float hardware. Tested on RP2040 at 16 bit per second (still too slow for 32bit)
+#ifndef PREFER_FIXEDPOINT
+#  define PREFER_FIXEDPOINT false 
+#endif
 
 #ifndef ARDUINO
 #  define USE_STREAM_WRITE_OVERRIDE

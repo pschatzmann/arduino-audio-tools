@@ -38,6 +38,9 @@
 //#define USE_CONCURRENCY
 #define USE_SD_SUPPORTS_SPI
 
+// Use fixed point operations 
+#define PREFER_FIXEDPOINT true 
+
 // default pins for VS1053 shield
 #define VS1053_CS 17 
 #define VS1053_DCS 9 

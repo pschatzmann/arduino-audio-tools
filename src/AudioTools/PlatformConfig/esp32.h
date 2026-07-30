@@ -46,6 +46,7 @@
 #  define ESP32X
 #  define USE_TDM
 #  define USE_PDM
+#  define PREFER_FIXEDPOINT true 
 #endif
 #if defined(ESP32)  && defined(CONFIG_IDF_TARGET_ESP32P4)
 #  define ESP32P4
