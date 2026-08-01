@@ -23,7 +23,7 @@ namespace audio_tools {
  * @author pschatzmann
  * @tparam T sample type (e.g. int16_t, float, double)
  */
-template <typename T>
+template <typename T = float>
 class Filter {
  public:
   // construct without coefs
@@ -46,7 +46,7 @@ class Filter {
  * @author pschatzmann
  * @tparam T sample type
  */
-template <typename T>
+template <typename T = float>
 class NoFilter : public Filter<T> {
  public:
   // construct without coefs
@@ -64,7 +64,7 @@ class NoFilter : public Filter<T> {
  * @copyright GNU General Public License v3.0
  * @tparam T sample type (float, double, or integer types with a scaling factor)
  */
-template <typename T>
+template <typename T = float>
 class FIR : public Filter<T> {
  public:
   template <size_t B>
@@ -126,7 +126,7 @@ class FIR : public Filter<T> {
  * @copyright GNU General Public License v3.0
  * @tparam T sample type (float, double, or integer types with a scaling factor)
  */
-template <typename T>
+template <typename T = float>
 class IIR : public Filter<T> {
  public:
   template <size_t B, size_t A>
@@ -206,7 +206,7 @@ class IIR : public Filter<T> {
  * @copyright GNU General Public License v3.0
  * @tparam T sample type (use float or double, not integer types)
  */
-template <typename T>
+template <typename T = float>
 class BiQuadDF1 : public Filter<T> {
  public:
   BiQuadDF1(const T (&b)[3], const T (&a)[3])
@@ -267,7 +267,7 @@ class BiQuadDF1 : public Filter<T> {
  * @copyright GNU General Public License v3.0
  * @tparam T sample type (use float or double, not integer types)
  */
-template <typename T>
+template <typename T = float>
 class BiQuadDF2 : public Filter<T> {
  public:
   BiQuadDF2(const T (&b)[3], const T (&a)[3])
@@ -328,7 +328,7 @@ class BiQuadDF2 : public Filter<T> {
  * @tparam T sample type (use float or double)
  */
 
-template <typename T>
+template <typename T = float>
 class LowPassFilter : public BiQuadDF2<T> {
  public:
   LowPassFilter() = default;
@@ -363,7 +363,7 @@ class LowPassFilter : public BiQuadDF2<T> {
  * @tparam T sample type (use float or double)
  */
 
-template <typename T>
+template <typename T = float>
 class HighPassFilter : public BiQuadDF2<T> {
  public:
   HighPassFilter() = default;
@@ -399,7 +399,7 @@ class HighPassFilter : public BiQuadDF2<T> {
  * @tparam T sample type (use float or double)
  */
 
-template <typename T>
+template <typename T = float>
 class BandPassFilter : public BiQuadDF2<T> {
  public:
   BandPassFilter() = default;
@@ -436,7 +436,7 @@ class BandPassFilter : public BiQuadDF2<T> {
  * @tparam T sample type (use float or double)
  */
 
-template <typename T>
+template <typename T = float>
 class NotchFilter : public BiQuadDF2<T> {
  public:
   NotchFilter() = default;
@@ -474,7 +474,7 @@ class NotchFilter : public BiQuadDF2<T> {
  * @tparam T sample type (use float or double)
  */
 
-template <typename T>
+template <typename T = float>
 class LowShelfFilter : public BiQuadDF2<T> {
  public:
   LowShelfFilter() = default;
@@ -521,7 +521,7 @@ class LowShelfFilter : public BiQuadDF2<T> {
  * @tparam T sample type (use float or double)
  */
 
-template <typename T>
+template <typename T = float>
 class HighShelfFilter : public BiQuadDF2<T> {
  public:
   HighShelfFilter() = default;
