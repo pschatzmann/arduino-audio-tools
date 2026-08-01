@@ -92,7 +92,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceaudio__tools.html">audio_tools</a> {</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T = <span class="keywordtype">float</span>&gt;</div>
 <div class="foldopen" id="foldopen00027" data-start="{" data-end="};">
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_filter.html">   27</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_filter.html">Filter</a> {</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> <span class="keyword">public</span>:</div>
@@ -106,7 +106,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>};</div>
 </div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T = <span class="keywordtype">float</span>&gt;</div>
 <div class="foldopen" id="foldopen00050" data-start="{" data-end="};">
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_no_filter.html">   50</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_no_filter.html">NoFilter</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_filter.html">Filter</a>&lt;T&gt; {</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> <span class="keyword">public</span>:</div>
@@ -116,7 +116,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>};</div>
 </div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T = <span class="keywordtype">float</span>&gt;</div>
 <div class="foldopen" id="foldopen00068" data-start="{" data-end="};">
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_f_i_r.html">   68</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_f_i_r.html">FIR</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_filter.html">Filter</a>&lt;T&gt; {</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> <span class="keyword">public</span>:</div>
@@ -178,7 +178,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>};</div>
 </div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T = <span class="keywordtype">float</span>&gt;</div>
 <div class="foldopen" id="foldopen00130" data-start="{" data-end="};">
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i_i_r.html">  130</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_i_i_r.html">IIR</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_filter.html">Filter</a>&lt;T&gt; {</div>
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> <span class="keyword">public</span>:</div>
@@ -257,7 +257,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>};</div>
 </div>
 <div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span> </div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T = <span class="keywordtype">float</span>&gt;</div>
 <div class="foldopen" id="foldopen00210" data-start="{" data-end="};">
 <div class="line"><a id="l00210" name="l00210"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_bi_quad_d_f1.html">  210</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_bi_quad_d_f1.html">BiQuadDF1</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_filter.html">Filter</a>&lt;T&gt; {</div>
 <div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span> <span class="keyword">public</span>:</div>
@@ -319,7 +319,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>};</div>
 </div>
 <div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span> </div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T = <span class="keywordtype">float</span>&gt;</div>
 <div class="foldopen" id="foldopen00271" data-start="{" data-end="};">
 <div class="line"><a id="l00271" name="l00271"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_bi_quad_d_f2.html">  271</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_bi_quad_d_f2.html">BiQuadDF2</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_filter.html">Filter</a>&lt;T&gt; {</div>
 <div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span> <span class="keyword">public</span>:</div>
@@ -379,7 +379,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>};</div>
 </div>
 <div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span> </div>
-<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T = <span class="keywordtype">float</span>&gt;</div>
 <div class="foldopen" id="foldopen00332" data-start="{" data-end="};">
 <div class="line"><a id="l00332" name="l00332"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_low_pass_filter.html">  332</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_low_pass_filter.html">LowPassFilter</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_bi_quad_d_f2.html">BiQuadDF2</a>&lt;T&gt; {</div>
 <div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span> <span class="keyword">public</span>:</div>
@@ -407,7 +407,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>};</div>
 </div>
 <div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span> </div>
-<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T = <span class="keywordtype">float</span>&gt;</div>
 <div class="foldopen" id="foldopen00367" data-start="{" data-end="};">
 <div class="line"><a id="l00367" name="l00367"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_high_pass_filter.html">  367</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_high_pass_filter.html">HighPassFilter</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_bi_quad_d_f2.html">BiQuadDF2</a>&lt;T&gt; {</div>
 <div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span> <span class="keyword">public</span>:</div>
@@ -435,7 +435,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>};</div>
 </div>
 <div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span> </div>
-<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T = <span class="keywordtype">float</span>&gt;</div>
 <div class="foldopen" id="foldopen00403" data-start="{" data-end="};">
 <div class="line"><a id="l00403" name="l00403"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_band_pass_filter.html">  403</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_band_pass_filter.html">BandPassFilter</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_bi_quad_d_f2.html">BiQuadDF2</a>&lt;T&gt; {</div>
 <div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span> <span class="keyword">public</span>:</div>
@@ -463,7 +463,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>};</div>
 </div>
 <div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span> </div>
-<div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T = <span class="keywordtype">float</span>&gt;</div>
 <div class="foldopen" id="foldopen00440" data-start="{" data-end="};">
 <div class="line"><a id="l00440" name="l00440"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_notch_filter.html">  440</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_notch_filter.html">NotchFilter</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_bi_quad_d_f2.html">BiQuadDF2</a>&lt;T&gt; {</div>
 <div class="line"><a id="l00441" name="l00441"></a><span class="lineno">  441</span> <span class="keyword">public</span>:</div>
@@ -492,7 +492,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00460" name="l00460"></a><span class="lineno">  460</span>};</div>
 </div>
 <div class="line"><a id="l00461" name="l00461"></a><span class="lineno">  461</span> </div>
-<div class="line"><a id="l00477" name="l00477"></a><span class="lineno">  477</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00477" name="l00477"></a><span class="lineno">  477</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T = <span class="keywordtype">float</span>&gt;</div>
 <div class="foldopen" id="foldopen00478" data-start="{" data-end="};">
 <div class="line"><a id="l00478" name="l00478"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_low_shelf_filter.html">  478</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_low_shelf_filter.html">LowShelfFilter</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_bi_quad_d_f2.html">BiQuadDF2</a>&lt;T&gt; {</div>
 <div class="line"><a id="l00479" name="l00479"></a><span class="lineno">  479</span> <span class="keyword">public</span>:</div>
@@ -529,7 +529,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00506" name="l00506"></a><span class="lineno">  506</span>};</div>
 </div>
 <div class="line"><a id="l00507" name="l00507"></a><span class="lineno">  507</span> </div>
-<div class="line"><a id="l00524" name="l00524"></a><span class="lineno">  524</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00524" name="l00524"></a><span class="lineno">  524</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T = <span class="keywordtype">float</span>&gt;</div>
 <div class="foldopen" id="foldopen00525" data-start="{" data-end="};">
 <div class="line"><a id="l00525" name="l00525"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_high_shelf_filter.html">  525</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_high_shelf_filter.html">HighShelfFilter</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_bi_quad_d_f2.html">BiQuadDF2</a>&lt;T&gt; {</div>
 <div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span> <span class="keyword">public</span>:</div>

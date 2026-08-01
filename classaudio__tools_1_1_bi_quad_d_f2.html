@@ -142,7 +142,7 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a598d2e75d74526b143114836454d742d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T = float&gt;<br />
 class audio_tools::BiQuadDF2&lt; T &gt;</div><p>Second-order <a class="el" href="classaudio__tools_1_1_i_i_r.html" title="Infinite Impulse Response (IIR) filter. Uses both feedforward (b[]) and feedback (a[]) coefficients....">IIR</a> filter in Direct Form II. Uses a single delay line, requiring less memory than DF1. This is the base class for the ready-to-use filter types (<a class="el" href="classaudio__tools_1_1_low_pass_filter.html" title="Second-order low-pass filter (BiQuad DF2). Attenuates frequencies above the cutoff frequency....">LowPassFilter</a>, <a class="el" href="classaudio__tools_1_1_high_pass_filter.html" title="Second-order high-pass filter (BiQuad DF2). Attenuates frequencies below the cutoff frequency....">HighPassFilter</a>, <a class="el" href="classaudio__tools_1_1_band_pass_filter.html" title="Second-order band-pass filter (BiQuad DF2). Passes frequencies near the center frequency and attenuat...">BandPassFilter</a>, <a class="el" href="classaudio__tools_1_1_notch_filter.html" title="Second-order notch (band-reject) filter (BiQuad DF2). Rejects frequencies near the center frequency a...">NotchFilter</a>, <a class="el" href="classaudio__tools_1_1_low_shelf_filter.html" title="Second-order low-shelf filter (BiQuad DF2). Boosts or cuts frequencies below the shelf frequency by t...">LowShelfFilter</a>, <a class="el" href="classaudio__tools_1_1_high_shelf_filter.html" title="Second-order high-shelf filter (BiQuad DF2). Boosts or cuts frequencies above the shelf frequency by ...">HighShelfFilter</a>) which compute their coefficients from frequency, sample rate and Q/gain parameters. </p>
 <dl class="section author"><dt>Author</dt><dd>Pieter P tttapa / pschatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GNU General Public License v3.0 </dd></dl>
@@ -159,7 +159,7 @@ class audio_tools::BiQuadDF2&lt; T &gt;</div><p>Second-order <a class="el" href=
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T  = float&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -197,7 +197,7 @@ template&lt;typename T &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T  = float&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -235,7 +235,7 @@ template&lt;typename T &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T  = float&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -279,7 +279,7 @@ template&lt;typename T &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T  = float&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -323,7 +323,7 @@ template&lt;typename T &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T  = float&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -351,7 +351,7 @@ template&lt;typename T &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T  = float&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -383,7 +383,7 @@ template&lt;typename T &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T  = float&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -414,7 +414,7 @@ template&lt;typename T &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T  = float&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -438,7 +438,7 @@ template&lt;typename T &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T  = float&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -462,7 +462,7 @@ template&lt;typename T &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T  = float&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -486,7 +486,7 @@ template&lt;typename T &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T  = float&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -510,7 +510,7 @@ template&lt;typename T &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T  = float&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -534,7 +534,7 @@ template&lt;typename T &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T  = float&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -558,7 +558,7 @@ template&lt;typename T &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T  = float&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
