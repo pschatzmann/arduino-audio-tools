@@ -77,9 +77,12 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_high_shelf_filter-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">HighShelfFilter&lt; T &gt; Class Template Reference</div></div>
+  <div class="headertitle"><div class="title">HighShelfFilter&lt; T &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__dsp.html">DSP</a> &raquo; <a class="el" href="group__filter.html">Filters</a></div></div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Second-order high-shelf filter (BiQuad DF2). Boosts or cuts frequencies above the shelf frequency by the specified gain (in dB) while leaving lower frequencies unchanged. Commonly used in tone controls and equalization. Coefficients are derived from the Audio EQ Cookbook.  
+ <a href="classaudio__tools_1_1_high_shelf_filter.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_filter_8h_source.html">Filter.h</a>&gt;</code></p>
 <div class="dynheader">
@@ -124,7 +127,27 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a598d2e75d74526b143114836454d742d" id="r_a598d2e75d74526b143114836454d742d"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_bi_quad_d_f2.html#a598d2e75d74526b143114836454d742d">w_1</a> = 0</td></tr>
 <tr class="separator:a598d2e75d74526b143114836454d742d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T = float&gt;<br />
+class audio_tools::HighShelfFilter&lt; T &gt;</div><p>Second-order high-shelf filter (BiQuad DF2). Boosts or cuts frequencies above the shelf frequency by the specified gain (in dB) while leaving lower frequencies unchanged. Commonly used in tone controls and equalization. Coefficients are derived from the Audio EQ Cookbook. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">frequency</td><td>shelf transition frequency in Hz </td></tr>
+    <tr><td class="paramname">sampleRate</td><td>sample rate in Hz </td></tr>
+    <tr><td class="paramname">gain</td><td>boost/cut in dB (positive = boost, negative = cut) </td></tr>
+    <tr><td class="paramname">slope</td><td>shelf slope (default 1.0; values &lt; 1.0 give a gentler slope)</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>pschatzmann </dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>GNU General Public License v3.0 </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>sample type (use float or double). NOTE: <a class="el" href="classaudio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a> (or any fixed-point type with only ~1 bit of headroom above +-1.0) does not work here &ndash; <a class="el" href="classaudio__tools_1_1_high_shelf_filter_d_f1.html" title="Second-order high-shelf filter (BiQuad DF1). Same coefficients as HighShelfFilter....">HighShelfFilterDF1</a> does NOT fix this the way it fixes the other filters. Its coefficients scale with the linear gain factor 10^(gain_dB/40) and, for a low shelf frequency relative to sampleRate, already exceed a q1_14_t-sized range at just +1dB of gain (measured, not a theoretical edge case). <a class="el" href="classaudio__tools_1_1_high_shelf_filter.html#a75fd4ddcc9c56fc70e09bf95ccc84abe">begin()</a> logs an error (LOGE) via <a class="el" href="namespaceaudio__tools.html#a336e063c01ea3f0e57ac7ac20fa59bfe" title="Warns (once per call, via LOGE) about any coefficient that doesn&#39;t survive being stored in T....">checkCoeffRange()</a> when this happens. </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a89921ae2915dd8e8c683dff6e744a2bc" name="a89921ae2915dd8e8c683dff6e744a2bc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a89921ae2915dd8e8c683dff6e744a2bc">&#9670;&#160;</a></span>HighShelfFilter() <span class="overload">[1/2]</span></h2>
 

@@ -70,8 +70,7 @@ $(function() {
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#nested-classes">Classes</a>  </div>
   <div class="headertitle"><div class="title">Filters<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__dsp.html">DSP</a></div></div></div>
 </div><!--header-->
 <div class="contents">
@@ -81,8 +80,11 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_band_pass_filter.html">BandPassFilter&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second-order band-pass filter (BiQuad DF2). Passes frequencies near the center frequency and attenuates those further away. The bandwidth is controlled by the Q factor: higher Q produces a narrower passband. Coefficients are derived from the Audio EQ Cookbook.  <a href="classaudio__tools_1_1_band_pass_filter.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_band_pass_filter_d_f1.html">BandPassFilterDF1&lt; T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second-order band-pass filter (BiQuad DF1). Same coefficients as <a class="el" href="classaudio__tools_1_1_band_pass_filter.html">BandPassFilter</a>; use this (not <a class="el" href="classaudio__tools_1_1_band_pass_filter.html">BandPassFilter</a>) when T is a bounded fixed-point type like <a class="el" href="classaudio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a> &ndash; see <a class="el" href="classaudio__tools_1_1_low_pass_filter_d_f1.html" title="Second-order low-pass filter (BiQuad DF1). Same coefficients as LowPassFilter, but built on BiQuadDF1...">LowPassFilterDF1</a> for why.  <a href="classaudio__tools_1_1_band_pass_filter_d_f1.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second-order band-pass filter (BiQuad DF1). Same coefficients as <a class="el" href="classaudio__tools_1_1_band_pass_filter.html" title="Second-order band-pass filter (BiQuad DF2). Passes frequencies near the center frequency and attenuat...">BandPassFilter</a>; use this (not <a class="el" href="classaudio__tools_1_1_band_pass_filter.html" title="Second-order band-pass filter (BiQuad DF2). Passes frequencies near the center frequency and attenuat...">BandPassFilter</a>) when T is a bounded fixed-point type like <a class="el" href="classaudio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a> &ndash; see <a class="el" href="classaudio__tools_1_1_low_pass_filter_d_f1.html" title="Second-order low-pass filter (BiQuad DF1). Same coefficients as LowPassFilter, but built on BiQuadDF1...">LowPassFilterDF1</a> for why.  <a href="classaudio__tools_1_1_band_pass_filter_d_f1.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_bi_quad_coeffs.html">BiQuadCoeffs</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Biquad coefficients, always computed in float regardless of the filter's sample type T. Intermediate values like the angular cutoff frequency w0 range up to PI (~3.14) at Nyquist, which overflows bounded fixed-point sample types like <a class="el" href="classaudio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a> (range ~[-2,2)); only the final, range-safe coefficients (typically within [-2,2) for a stable filter) get cast into T when assigned to a BiQuadDF1/BiQuadDF2 instance.  <a href="structaudio__tools_1_1_bi_quad_coeffs.html#details">More...</a><br /></td></tr>
@@ -91,7 +93,7 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second-order <a class="el" href="classaudio__tools_1_1_i_i_r.html" title="Infinite Impulse Response (IIR) filter. Uses both feedforward (b[]) and feedback (a[]) coefficients....">IIR</a> filter in Direct Form I. Maintains separate input and output histories (x and y delay lines). Requires more memory than DF2 but is less susceptible to quantization issues with fixed-point arithmetic.  <a href="classaudio__tools_1_1_bi_quad_d_f1.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_bi_quad_d_f2.html">BiQuadDF2&lt; T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second-order <a class="el" href="classaudio__tools_1_1_i_i_r.html" title="Infinite Impulse Response (IIR) filter. Uses both feedforward (b[]) and feedback (a[]) coefficients....">IIR</a> filter in Direct Form II. Uses a single delay line, requiring less memory than DF1. This is the base class for the ready-to-use filter types (<a class="el" href="classaudio__tools_1_1_low_pass_filter.html" title="Second-order low-pass filter (BiQuad DF2). Attenuates frequencies above the cutoff frequency....">LowPassFilter</a>, <a class="el" href="classaudio__tools_1_1_high_pass_filter.html">HighPassFilter</a>, <a class="el" href="classaudio__tools_1_1_band_pass_filter.html">BandPassFilter</a>, <a class="el" href="classaudio__tools_1_1_notch_filter.html">NotchFilter</a>, <a class="el" href="classaudio__tools_1_1_low_shelf_filter.html">LowShelfFilter</a>, <a class="el" href="classaudio__tools_1_1_high_shelf_filter.html">HighShelfFilter</a>) which compute their coefficients from frequency, sample rate and Q/gain parameters.  <a href="classaudio__tools_1_1_bi_quad_d_f2.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second-order <a class="el" href="classaudio__tools_1_1_i_i_r.html" title="Infinite Impulse Response (IIR) filter. Uses both feedforward (b[]) and feedback (a[]) coefficients....">IIR</a> filter in Direct Form II. Uses a single delay line, requiring less memory than DF1. This is the base class for the ready-to-use filter types (<a class="el" href="classaudio__tools_1_1_low_pass_filter.html" title="Second-order low-pass filter (BiQuad DF2). Attenuates frequencies above the cutoff frequency....">LowPassFilter</a>, <a class="el" href="classaudio__tools_1_1_high_pass_filter.html" title="Second-order high-pass filter (BiQuad DF2). Attenuates frequencies below the cutoff frequency....">HighPassFilter</a>, <a class="el" href="classaudio__tools_1_1_band_pass_filter.html" title="Second-order band-pass filter (BiQuad DF2). Passes frequencies near the center frequency and attenuat...">BandPassFilter</a>, <a class="el" href="classaudio__tools_1_1_notch_filter.html" title="Second-order notch (band-reject) filter (BiQuad DF2). Rejects frequencies near the center frequency a...">NotchFilter</a>, <a class="el" href="classaudio__tools_1_1_low_shelf_filter.html" title="Second-order low-shelf filter (BiQuad DF2). Boosts or cuts frequencies below the shelf frequency by t...">LowShelfFilter</a>, <a class="el" href="classaudio__tools_1_1_high_shelf_filter.html" title="Second-order high-shelf filter (BiQuad DF2). Boosts or cuts frequencies above the shelf frequency by ...">HighShelfFilter</a>) which compute their coefficients from frequency, sample rate and Q/gain parameters.  <a href="classaudio__tools_1_1_bi_quad_d_f2.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_filter.html">Filter&lt; T &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract filter interface definition. Subclasses implement <a class="el" href="classaudio__tools_1_1_filter.html#acd1ddbd60df780b8bad4a79ceb0a00e9" title="Processes the input value and returns the filtered output value.">process()</a> to transform audio samples one at a time. Use <a class="el" href="classaudio__tools_1_1_filter.html#a7b0e029102ad38f4b814c6523aedb53d">reset()</a> to clear internal state (e.g. delay lines) without changing the filter coefficients.  <a href="classaudio__tools_1_1_filter.html#details">More...</a><br /></td></tr>
@@ -102,11 +104,17 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_i_r.html">FIR&lt; T &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finite Impulse Response (<a class="el" href="classaudio__tools_1_1_f_i_r.html" title="Finite Impulse Response (FIR) filter. Performs convolution of the input signal with a set of feedforw...">FIR</a>) filter. Performs convolution of the input signal with a set of feedforward coefficients b[]. For integer types, an optional scaling factor is applied to preserve precision. You can use <a href="https://www.arc.id.au/FilterDesign.html">https://www.arc.id.au/FilterDesign.html</a> to design the coefficients.  <a href="classaudio__tools_1_1_f_i_r.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_high_pass_filter.html">HighPassFilter&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second-order high-pass filter (BiQuad DF2). Attenuates frequencies below the cutoff frequency. Coefficients are derived from the Audio EQ Cookbook.  <a href="classaudio__tools_1_1_high_pass_filter.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_high_pass_filter_d_f1.html">HighPassFilterDF1&lt; T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second-order high-pass filter (BiQuad DF1). Same coefficients as <a class="el" href="classaudio__tools_1_1_high_pass_filter.html">HighPassFilter</a>; use this (not <a class="el" href="classaudio__tools_1_1_high_pass_filter.html">HighPassFilter</a>) when T is a bounded fixed-point type like <a class="el" href="classaudio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a> &ndash; see <a class="el" href="classaudio__tools_1_1_low_pass_filter_d_f1.html" title="Second-order low-pass filter (BiQuad DF1). Same coefficients as LowPassFilter, but built on BiQuadDF1...">LowPassFilterDF1</a> for why.  <a href="classaudio__tools_1_1_high_pass_filter_d_f1.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second-order high-pass filter (BiQuad DF1). Same coefficients as <a class="el" href="classaudio__tools_1_1_high_pass_filter.html" title="Second-order high-pass filter (BiQuad DF2). Attenuates frequencies below the cutoff frequency....">HighPassFilter</a>; use this (not <a class="el" href="classaudio__tools_1_1_high_pass_filter.html" title="Second-order high-pass filter (BiQuad DF2). Attenuates frequencies below the cutoff frequency....">HighPassFilter</a>) when T is a bounded fixed-point type like <a class="el" href="classaudio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a> &ndash; see <a class="el" href="classaudio__tools_1_1_low_pass_filter_d_f1.html" title="Second-order low-pass filter (BiQuad DF1). Same coefficients as LowPassFilter, but built on BiQuadDF1...">LowPassFilterDF1</a> for why.  <a href="classaudio__tools_1_1_high_pass_filter_d_f1.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_high_shelf_filter.html">HighShelfFilter&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second-order high-shelf filter (BiQuad DF2). Boosts or cuts frequencies above the shelf frequency by the specified gain (in dB) while leaving lower frequencies unchanged. Commonly used in tone controls and equalization. Coefficients are derived from the Audio EQ Cookbook.  <a href="classaudio__tools_1_1_high_shelf_filter.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_high_shelf_filter_d_f1.html">HighShelfFilterDF1&lt; T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second-order high-shelf filter (BiQuad DF1). Same coefficients as <a class="el" href="classaudio__tools_1_1_high_shelf_filter.html">HighShelfFilter</a>. NOTE: unlike the other DF1 filters here, this is NOT a working fix for <a class="el" href="classaudio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a> (or similar bounded fixed-point types) &ndash; see the.  <a href="classaudio__tools_1_1_high_shelf_filter_d_f1.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second-order high-shelf filter (BiQuad DF1). Same coefficients as <a class="el" href="classaudio__tools_1_1_high_shelf_filter.html" title="Second-order high-shelf filter (BiQuad DF2). Boosts or cuts frequencies above the shelf frequency by ...">HighShelfFilter</a>. NOTE: unlike the other DF1 filters here, this is NOT a working fix for <a class="el" href="classaudio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a> (or similar bounded fixed-point types) &ndash; see the.  <a href="classaudio__tools_1_1_high_shelf_filter_d_f1.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i_i_r.html">IIR&lt; T &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Infinite Impulse Response (<a class="el" href="classaudio__tools_1_1_i_i_r.html" title="Infinite Impulse Response (IIR) filter. Uses both feedforward (b[]) and feedback (a[]) coefficients....">IIR</a>) filter. Uses both feedforward (b[]) and feedback (a[]) coefficients. The a[0] coefficient is used to normalize all other coefficients. For integer types, an optional scaling factor is applied to preserve precision.  <a href="classaudio__tools_1_1_i_i_r.html#details">More...</a><br /></td></tr>
@@ -117,8 +125,11 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_low_pass_filter_d_f1.html">LowPassFilterDF1&lt; T &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second-order low-pass filter (BiQuad DF1). Same coefficients as <a class="el" href="classaudio__tools_1_1_low_pass_filter.html" title="Second-order low-pass filter (BiQuad DF2). Attenuates frequencies above the cutoff frequency....">LowPassFilter</a>, but built on <a class="el" href="classaudio__tools_1_1_bi_quad_d_f1.html" title="Second-order IIR filter in Direct Form I. Maintains separate input and output histories (x and y dela...">BiQuadDF1</a>, whose separate x[]/y[] delay lines stay bounded to the actual signal range &ndash; unlike DF2's single delay line, which can need far more dynamic range than the signal for low cutoff/ sampleRate ratios. Use this (not <a class="el" href="classaudio__tools_1_1_low_pass_filter.html" title="Second-order low-pass filter (BiQuad DF2). Attenuates frequencies above the cutoff frequency....">LowPassFilter</a>) when T is a bounded fixed-point type like <a class="el" href="classaudio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a>.  <a href="classaudio__tools_1_1_low_pass_filter_d_f1.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_low_shelf_filter.html">LowShelfFilter&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second-order low-shelf filter (BiQuad DF2). Boosts or cuts frequencies below the shelf frequency by the specified gain (in dB) while leaving higher frequencies unchanged. Commonly used in tone controls and equalization. Coefficients are derived from the Audio EQ Cookbook.  <a href="classaudio__tools_1_1_low_shelf_filter.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_low_shelf_filter_d_f1.html">LowShelfFilterDF1&lt; T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second-order low-shelf filter (BiQuad DF1). Same coefficients as <a class="el" href="classaudio__tools_1_1_low_shelf_filter.html">LowShelfFilter</a>. NOTE: switching to DF1 does NOT make this reliable for bounded fixed-point types like <a class="el" href="classaudio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a> &ndash; shelf coefficients scale with the linear gain factor and can exceed the type's range even at modest gain settings; this is a coefficient headroom problem, not the DF2 state-headroom problem DF1 fixes elsewhere. Watch for the LOGE warning from <a class="el" href="namespaceaudio__tools.html#a336e063c01ea3f0e57ac7ac20fa59bfe" title="Warns (once per call, via LOGE) about any coefficient that doesn&#39;t survive being stored in T....">checkCoeffRange()</a> in <a class="el" href="classaudio__tools_1_1_low_shelf_filter_d_f1.html#a75fd4ddcc9c56fc70e09bf95ccc84abe">begin()</a>.  <a href="classaudio__tools_1_1_low_shelf_filter_d_f1.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second-order low-shelf filter (BiQuad DF1). Same coefficients as <a class="el" href="classaudio__tools_1_1_low_shelf_filter.html" title="Second-order low-shelf filter (BiQuad DF2). Boosts or cuts frequencies below the shelf frequency by t...">LowShelfFilter</a>. NOTE: switching to DF1 does NOT make this reliable for bounded fixed-point types like <a class="el" href="classaudio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a> &ndash; shelf coefficients scale with the linear gain factor and can exceed the type's range even at modest gain settings; this is a coefficient headroom problem, not the DF2 state-headroom problem DF1 fixes elsewhere. Watch for the LOGE warning from <a class="el" href="namespaceaudio__tools.html#a336e063c01ea3f0e57ac7ac20fa59bfe" title="Warns (once per call, via LOGE) about any coefficient that doesn&#39;t survive being stored in T....">checkCoeffRange()</a> in <a class="el" href="classaudio__tools_1_1_low_shelf_filter_d_f1.html#a75fd4ddcc9c56fc70e09bf95ccc84abe">begin()</a>.  <a href="classaudio__tools_1_1_low_shelf_filter_d_f1.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_median_filter.html">MedianFilter&lt; T &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">An embedded friendly, fast one-dimensional median filter algorithm implementation in C and C++ Useful for spike and noise removal from analog signals or other DSP Also known as "salt-and-pepper noise" or "impulse noise" filter.  <a href="classaudio__tools_1_1_median_filter.html#details">More...</a><br /></td></tr>
@@ -126,348 +137,18 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_no_filter.html">NoFilter&lt; T &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Passes the input through unchanged. Useful as a placeholder when a <a class="el" href="classaudio__tools_1_1_filter.html" title="Abstract filter interface definition. Subclasses implement process() to transform audio samples one a...">Filter</a> is required but no processing is desired.  <a href="classaudio__tools_1_1_no_filter.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_notch_filter.html">NotchFilter&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second-order notch (band-reject) filter (BiQuad DF2). Rejects frequencies near the center frequency and passes those further away. Useful for removing a specific unwanted frequency (e.g. mains hum at 50/60 Hz). Coefficients are derived from the Audio EQ Cookbook.  <a href="classaudio__tools_1_1_notch_filter.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_notch_filter_d_f1.html">NotchFilterDF1&lt; T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second-order notch (band-reject) filter (BiQuad DF1). Same coefficients as <a class="el" href="classaudio__tools_1_1_notch_filter.html">NotchFilter</a>; use this (not <a class="el" href="classaudio__tools_1_1_notch_filter.html">NotchFilter</a>) when T is a bounded fixed-point type like <a class="el" href="classaudio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a> &ndash; see <a class="el" href="classaudio__tools_1_1_low_pass_filter_d_f1.html" title="Second-order low-pass filter (BiQuad DF1). Same coefficients as LowPassFilter, but built on BiQuadDF1...">LowPassFilterDF1</a> for why.  <a href="classaudio__tools_1_1_notch_filter_d_f1.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second-order notch (band-reject) filter (BiQuad DF1). Same coefficients as <a class="el" href="classaudio__tools_1_1_notch_filter.html" title="Second-order notch (band-reject) filter (BiQuad DF2). Rejects frequencies near the center frequency a...">NotchFilter</a>; use this (not <a class="el" href="classaudio__tools_1_1_notch_filter.html" title="Second-order notch (band-reject) filter (BiQuad DF2). Rejects frequencies near the center frequency a...">NotchFilter</a>) when T is a bounded fixed-point type like <a class="el" href="classaudio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a> &ndash; see <a class="el" href="classaudio__tools_1_1_low_pass_filter_d_f1.html" title="Second-order low-pass filter (BiQuad DF1). Same coefficients as LowPassFilter, but built on BiQuadDF1...">LowPassFilterDF1</a> for why.  <a href="classaudio__tools_1_1_notch_filter_d_f1.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_s_o_s_filter.html">SOSFilter&lt; T, N &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second Order Sections (SOS) filter — a cascade of N BiQuad DF2 stages. Higher-order filters should be decomposed into second-order sections to avoid numerical instability. Each section has its own b[3]/a[3] coefficients and optional gain. Tools like scipy.signal.butter(..., output='sos') or MATLAB's tf2sos produce the required coefficient arrays.  <a href="classaudio__tools_1_1_s_o_s_filter.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:ga291de2e7a86aff12389f3817eef0d947" id="r_ga291de2e7a86aff12389f3817eef0d947"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_bi_quad_coeffs.html">BiQuadCoeffs</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__filter.html#ga291de2e7a86aff12389f3817eef0d947">calculateBandPassCoeffs</a> (float frequency, float sampleRate, float q)</td></tr>
-<tr class="memdesc:ga291de2e7a86aff12389f3817eef0d947"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second-order band-pass filter (BiQuad DF2). Passes frequencies near the center frequency and attenuates those further away. The bandwidth is controlled by the Q factor: higher Q produces a narrower passband. Coefficients are derived from the Audio EQ Cookbook.  <br /></td></tr>
-<tr class="separator:ga291de2e7a86aff12389f3817eef0d947"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac3bec975e6de06708fb8a76bd38bb199" id="r_gac3bec975e6de06708fb8a76bd38bb199"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_bi_quad_coeffs.html">BiQuadCoeffs</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__filter.html#gac3bec975e6de06708fb8a76bd38bb199">calculateHighPassCoeffs</a> (float frequency, float sampleRate, float q)</td></tr>
-<tr class="memdesc:gac3bec975e6de06708fb8a76bd38bb199"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second-order high-pass filter (BiQuad DF2). Attenuates frequencies below the cutoff frequency. Coefficients are derived from the Audio EQ Cookbook.  <br /></td></tr>
-<tr class="separator:gac3bec975e6de06708fb8a76bd38bb199"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1f7ec58cd6a4a65afabbefd97657f390" id="r_ga1f7ec58cd6a4a65afabbefd97657f390"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_bi_quad_coeffs.html">BiQuadCoeffs</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__filter.html#ga1f7ec58cd6a4a65afabbefd97657f390">calculateHighShelfCoeffs</a> (float frequency, float sampleRate, float gain, float slope)</td></tr>
-<tr class="memdesc:ga1f7ec58cd6a4a65afabbefd97657f390"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second-order high-shelf filter (BiQuad DF2). Boosts or cuts frequencies above the shelf frequency by the specified gain (in dB) while leaving lower frequencies unchanged. Commonly used in tone controls and equalization. Coefficients are derived from the Audio EQ Cookbook.  <br /></td></tr>
-<tr class="separator:ga1f7ec58cd6a4a65afabbefd97657f390"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga62fcb264203db4f868a43cc28b92ff24" id="r_ga62fcb264203db4f868a43cc28b92ff24"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_bi_quad_coeffs.html">BiQuadCoeffs</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__filter.html#ga62fcb264203db4f868a43cc28b92ff24">calculateLowShelfCoeffs</a> (float frequency, float sampleRate, float gain, float slope)</td></tr>
-<tr class="memdesc:ga62fcb264203db4f868a43cc28b92ff24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second-order low-shelf filter (BiQuad DF2). Boosts or cuts frequencies below the shelf frequency by the specified gain (in dB) while leaving higher frequencies unchanged. Commonly used in tone controls and equalization. Coefficients are derived from the Audio EQ Cookbook.  <br /></td></tr>
-<tr class="separator:ga62fcb264203db4f868a43cc28b92ff24"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf148040374e4504cff20b2dbcf0d7f79" id="r_gaf148040374e4504cff20b2dbcf0d7f79"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_bi_quad_coeffs.html">BiQuadCoeffs</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__filter.html#gaf148040374e4504cff20b2dbcf0d7f79">calculateNotchCoeffs</a> (float frequency, float sampleRate, float q)</td></tr>
-<tr class="memdesc:gaf148040374e4504cff20b2dbcf0d7f79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second-order notch (band-reject) filter (BiQuad DF2). Rejects frequencies near the center frequency and passes those further away. Useful for removing a specific unwanted frequency (e.g. mains hum at 50/60 Hz). Coefficients are derived from the Audio EQ Cookbook.  <br /></td></tr>
-<tr class="separator:gaf148040374e4504cff20b2dbcf0d7f79"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Digital Filters. </p>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="ga291de2e7a86aff12389f3817eef0d947" name="ga291de2e7a86aff12389f3817eef0d947"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga291de2e7a86aff12389f3817eef0d947">&#9670;&#160;</a></span>calculateBandPassCoeffs()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structaudio__tools_1_1_bi_quad_coeffs.html">BiQuadCoeffs</a> calculateBandPassCoeffs </td>
-          <td>(</td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>frequency</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>sampleRate</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>q</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Second-order band-pass filter (BiQuad DF2). Passes frequencies near the center frequency and attenuates those further away. The bandwidth is controlled by the Q factor: higher Q produces a narrower passband. Coefficients are derived from the Audio EQ Cookbook. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">frequency</td><td>center frequency in Hz </td></tr>
-    <tr><td class="paramname">sampleRate</td><td>sample rate in Hz </td></tr>
-    <tr><td class="paramname">q</td><td>quality factor (default 1.0; higher values narrow the passband)</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section author"><dt>Author</dt><dd>pschatzmann </dd></dl>
-<dl class="section copyright"><dt>Copyright</dt><dd>GNU General Public License v3.0 </dd></dl>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>sample type (use float or double; for fixed-point types like <a class="el" href="classaudio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a> use <a class="el" href="classaudio__tools_1_1_band_pass_filter_d_f1.html" title="Second-order band-pass filter (BiQuad DF1). Same coefficients as BandPassFilter; use this (not BandPa...">BandPassFilterDF1</a> instead &ndash; see <a class="el" href="classaudio__tools_1_1_low_pass_filter.html" title="Second-order low-pass filter (BiQuad DF2). Attenuates frequencies above the cutoff frequency....">LowPassFilter</a> for why) </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="gac3bec975e6de06708fb8a76bd38bb199" name="gac3bec975e6de06708fb8a76bd38bb199"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gac3bec975e6de06708fb8a76bd38bb199">&#9670;&#160;</a></span>calculateHighPassCoeffs()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structaudio__tools_1_1_bi_quad_coeffs.html">BiQuadCoeffs</a> calculateHighPassCoeffs </td>
-          <td>(</td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>frequency</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>sampleRate</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>q</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Second-order high-pass filter (BiQuad DF2). Attenuates frequencies below the cutoff frequency. Coefficients are derived from the Audio EQ Cookbook. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">frequency</td><td>cutoff frequency in Hz </td></tr>
-    <tr><td class="paramname">sampleRate</td><td>sample rate in Hz </td></tr>
-    <tr><td class="paramname">q</td><td>quality factor (default 0.7071 = Butterworth)</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section author"><dt>Author</dt><dd>pschatzmann </dd></dl>
-<dl class="section copyright"><dt>Copyright</dt><dd>GNU General Public License v3.0 </dd></dl>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>sample type (use float or double; for fixed-point types like <a class="el" href="classaudio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a> use <a class="el" href="classaudio__tools_1_1_high_pass_filter_d_f1.html" title="Second-order high-pass filter (BiQuad DF1). Same coefficients as HighPassFilter; use this (not HighPa...">HighPassFilterDF1</a> instead &ndash; see <a class="el" href="classaudio__tools_1_1_low_pass_filter.html" title="Second-order low-pass filter (BiQuad DF2). Attenuates frequencies above the cutoff frequency....">LowPassFilter</a> for why) </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="ga1f7ec58cd6a4a65afabbefd97657f390" name="ga1f7ec58cd6a4a65afabbefd97657f390"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga1f7ec58cd6a4a65afabbefd97657f390">&#9670;&#160;</a></span>calculateHighShelfCoeffs()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structaudio__tools_1_1_bi_quad_coeffs.html">BiQuadCoeffs</a> calculateHighShelfCoeffs </td>
-          <td>(</td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>frequency</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>sampleRate</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>gain</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>slope</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Second-order high-shelf filter (BiQuad DF2). Boosts or cuts frequencies above the shelf frequency by the specified gain (in dB) while leaving lower frequencies unchanged. Commonly used in tone controls and equalization. Coefficients are derived from the Audio EQ Cookbook. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">frequency</td><td>shelf transition frequency in Hz </td></tr>
-    <tr><td class="paramname">sampleRate</td><td>sample rate in Hz </td></tr>
-    <tr><td class="paramname">gain</td><td>boost/cut in dB (positive = boost, negative = cut) </td></tr>
-    <tr><td class="paramname">slope</td><td>shelf slope (default 1.0; values &lt; 1.0 give a gentler slope)</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section author"><dt>Author</dt><dd>pschatzmann </dd></dl>
-<dl class="section copyright"><dt>Copyright</dt><dd>GNU General Public License v3.0 </dd></dl>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>sample type (use float or double). NOTE: <a class="el" href="classaudio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a> (or any fixed-point type with only ~1 bit of headroom above +-1.0) does not work here &ndash; <a class="el" href="classaudio__tools_1_1_high_shelf_filter_d_f1.html" title="Second-order high-shelf filter (BiQuad DF1). Same coefficients as HighShelfFilter....">HighShelfFilterDF1</a> does NOT fix this the way it fixes the other filters. Its coefficients scale with the linear gain factor 10^(gain_dB/40) and, for a low shelf frequency relative to sampleRate, already exceed a q1_14_t-sized range at just +1dB of gain (measured, not a theoretical edge case). begin() logs an error (LOGE) via <a class="el" href="namespaceaudio__tools.html#a336e063c01ea3f0e57ac7ac20fa59bfe" title="Warns (once per call, via LOGE) about any coefficient that doesn&#39;t survive being stored in T....">checkCoeffRange()</a> when this happens. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="ga62fcb264203db4f868a43cc28b92ff24" name="ga62fcb264203db4f868a43cc28b92ff24"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga62fcb264203db4f868a43cc28b92ff24">&#9670;&#160;</a></span>calculateLowShelfCoeffs()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structaudio__tools_1_1_bi_quad_coeffs.html">BiQuadCoeffs</a> calculateLowShelfCoeffs </td>
-          <td>(</td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>frequency</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>sampleRate</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>gain</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>slope</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Second-order low-shelf filter (BiQuad DF2). Boosts or cuts frequencies below the shelf frequency by the specified gain (in dB) while leaving higher frequencies unchanged. Commonly used in tone controls and equalization. Coefficients are derived from the Audio EQ Cookbook. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">frequency</td><td>shelf transition frequency in Hz </td></tr>
-    <tr><td class="paramname">sampleRate</td><td>sample rate in Hz </td></tr>
-    <tr><td class="paramname">gain</td><td>boost/cut in dB (positive = boost, negative = cut) </td></tr>
-    <tr><td class="paramname">slope</td><td>shelf slope (default 1.0; values &lt; 1.0 give a gentler slope)</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section author"><dt>Author</dt><dd>pschatzmann </dd></dl>
-<dl class="section copyright"><dt>Copyright</dt><dd>GNU General Public License v3.0 </dd></dl>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>sample type (use float or double). NOTE: unlike the other filters here, <a class="el" href="classaudio__tools_1_1_low_shelf_filter_d_f1.html" title="Second-order low-shelf filter (BiQuad DF1). Same coefficients as LowShelfFilter. NOTE: switching to D...">LowShelfFilterDF1</a> is NOT a reliable fix for bounded fixed-point types like <a class="el" href="classaudio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a>: shelf coefficients scale with the linear gain factor 10^(gain_dB/40) and can exceed a bounded type's range even at modest gain settings, independent of DF1 vs DF2 &ndash; this is a coefficient headroom limitation, not the DF2 state-headroom issue DF1 solves for the other filter types. begin() logs an error (LOGE) via <a class="el" href="namespaceaudio__tools.html#a336e063c01ea3f0e57ac7ac20fa59bfe" title="Warns (once per call, via LOGE) about any coefficient that doesn&#39;t survive being stored in T....">checkCoeffRange()</a> if this happens; check for that warning rather than assuming it works. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="gaf148040374e4504cff20b2dbcf0d7f79" name="gaf148040374e4504cff20b2dbcf0d7f79"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaf148040374e4504cff20b2dbcf0d7f79">&#9670;&#160;</a></span>calculateNotchCoeffs()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structaudio__tools_1_1_bi_quad_coeffs.html">BiQuadCoeffs</a> calculateNotchCoeffs </td>
-          <td>(</td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>frequency</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>sampleRate</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>q</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Second-order notch (band-reject) filter (BiQuad DF2). Rejects frequencies near the center frequency and passes those further away. Useful for removing a specific unwanted frequency (e.g. mains hum at 50/60 Hz). Coefficients are derived from the Audio EQ Cookbook. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">frequency</td><td>center frequency to reject in Hz </td></tr>
-    <tr><td class="paramname">sampleRate</td><td>sample rate in Hz </td></tr>
-    <tr><td class="paramname">q</td><td>quality factor (default 1.0; higher values narrow the rejection band)</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section author"><dt>Author</dt><dd>pschatzmann </dd></dl>
-<dl class="section copyright"><dt>Copyright</dt><dd>GNU General Public License v3.0 </dd></dl>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>sample type (use float or double; for fixed-point types like <a class="el" href="classaudio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a> use <a class="el" href="classaudio__tools_1_1_notch_filter_d_f1.html" title="Second-order notch (band-reject) filter (BiQuad DF1). Same coefficients as NotchFilter; use this (not...">NotchFilterDF1</a> instead &ndash; see <a class="el" href="classaudio__tools_1_1_low_pass_filter.html" title="Second-order low-pass filter (BiQuad DF2). Attenuates frequencies above the cutoff frequency....">LowPassFilter</a> for why) </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
