@@ -373,6 +373,7 @@ void checkCoeffRange(const BiQuadCoeffs &c) {
   check("a_2", c.a_2);
 }
 
+/// Computes the b0/b1/b2/a1/a2 biquad coefficients for a low-pass filter.
 inline BiQuadCoeffs calculateLowPassCoeffs(float frequency, float sampleRate,
                                             float q) {
   float w0 = frequency * (2.0f * PI / sampleRate);
@@ -460,20 +461,7 @@ class LowPassFilterDF1 : public BiQuadDF1<T> {
   }
 };
 
-/**
- * @brief Second-order high-pass filter (BiQuad DF2). Attenuates frequencies
- * below the cutoff frequency. Coefficients are derived from the Audio EQ
- * Cookbook.
- * @param frequency cutoff frequency in Hz
- * @param sampleRate sample rate in Hz
- * @param q quality factor (default 0.7071 = Butterworth)
- * @ingroup filter
- * @author pschatzmann
- * @copyright GNU General Public License v3.0
- * @tparam T sample type (use float or double; for fixed-point types like
- * q1_14_t use HighPassFilterDF1 instead -- see LowPassFilter for why)
- */
-
+/// Computes the b0/b1/b2/a1/a2 biquad coefficients for a high-pass filter.
 inline BiQuadCoeffs calculateHighPassCoeffs(float frequency, float sampleRate,
                                              float q) {
   float w0 = frequency * (2.0f * PI / sampleRate);
@@ -489,6 +477,20 @@ inline BiQuadCoeffs calculateHighPassCoeffs(float frequency, float sampleRate,
   c.a_2 = (1.0f - alpha) * scale;
   return c;
 }
+
+/**
+ * @brief Second-order high-pass filter (BiQuad DF2). Attenuates frequencies
+ * below the cutoff frequency. Coefficients are derived from the Audio EQ
+ * Cookbook.
+ * @param frequency cutoff frequency in Hz
+ * @param sampleRate sample rate in Hz
+ * @param q quality factor (default 0.7071 = Butterworth)
+ * @ingroup filter
+ * @author pschatzmann
+ * @copyright GNU General Public License v3.0
+ * @tparam T sample type (use float or double; for fixed-point types like
+ * q1_14_t use HighPassFilterDF1 instead -- see LowPassFilter for why)
+ */
 
 template <typename T = float>
 class HighPassFilter : public BiQuadDF2<T> {
@@ -542,21 +544,7 @@ class HighPassFilterDF1 : public BiQuadDF1<T> {
   }
 };
 
-/**
- * @brief Second-order band-pass filter (BiQuad DF2). Passes frequencies near
- * the center frequency and attenuates those further away. The bandwidth is
- * controlled by the Q factor: higher Q produces a narrower passband.
- * Coefficients are derived from the Audio EQ Cookbook.
- * @param frequency center frequency in Hz
- * @param sampleRate sample rate in Hz
- * @param q quality factor (default 1.0; higher values narrow the passband)
- * @ingroup filter
- * @author  pschatzmann
- * @copyright GNU General Public License v3.0
- * @tparam T sample type (use float or double; for fixed-point types like
- * q1_14_t use BandPassFilterDF1 instead -- see LowPassFilter for why)
- */
-
+/// Computes the b0/b1/b2/a1/a2 biquad coefficients for a band-pass filter.
 inline BiQuadCoeffs calculateBandPassCoeffs(float frequency, float sampleRate,
                                              float q) {
   float w0 = frequency * (2.0f * PI / sampleRate);
@@ -572,6 +560,21 @@ inline BiQuadCoeffs calculateBandPassCoeffs(float frequency, float sampleRate,
   c.a_2 = (1.0f - alpha) * scale;
   return c;
 }
+
+/**
+ * @brief Second-order band-pass filter (BiQuad DF2). Passes frequencies near
+ * the center frequency and attenuates those further away. The bandwidth is
+ * controlled by the Q factor: higher Q produces a narrower passband.
+ * Coefficients are derived from the Audio EQ Cookbook.
+ * @param frequency center frequency in Hz
+ * @param sampleRate sample rate in Hz
+ * @param q quality factor (default 1.0; higher values narrow the passband)
+ * @ingroup filter
+ * @author  pschatzmann
+ * @copyright GNU General Public License v3.0
+ * @tparam T sample type (use float or double; for fixed-point types like
+ * q1_14_t use BandPassFilterDF1 instead -- see LowPassFilter for why)
+ */
 
 template <typename T = float>
 class BandPassFilter : public BiQuadDF2<T> {
@@ -625,22 +628,9 @@ class BandPassFilterDF1 : public BiQuadDF1<T> {
   }
 };
 
-/**
- * @brief Second-order notch (band-reject) filter (BiQuad DF2). Rejects
- * frequencies near the center frequency and passes those further away. Useful
- * for removing a specific unwanted frequency (e.g. mains hum at 50/60 Hz).
- * Coefficients are derived from the Audio EQ Cookbook.
- * @param frequency center frequency to reject in Hz
- * @param sampleRate sample rate in Hz
- * @param q quality factor (default 1.0; higher values narrow the rejection
- * band)
- * @ingroup filter
- * @author  pschatzmann
- * @copyright GNU General Public License v3.0
- * @tparam T sample type (use float or double; for fixed-point types like
- * q1_14_t use NotchFilterDF1 instead -- see LowPassFilter for why)
- */
 
+/// Computes the b0/b1/b2/a1/a2 biquad coefficients for a notch (band-reject)
+/// filter.
 inline BiQuadCoeffs calculateNotchCoeffs(float frequency, float sampleRate,
                                           float q) {
   float w0 = frequency * (2.0f * PI / sampleRate);
@@ -656,6 +646,22 @@ inline BiQuadCoeffs calculateNotchCoeffs(float frequency, float sampleRate,
   c.a_2 = (1.0f - alpha) * scale;
   return c;
 }
+
+/**
+ * @brief Second-order notch (band-reject) filter (BiQuad DF2). Rejects
+ * frequencies near the center frequency and passes those further away. Useful
+ * for removing a specific unwanted frequency (e.g. mains hum at 50/60 Hz).
+ * Coefficients are derived from the Audio EQ Cookbook.
+ * @param frequency center frequency to reject in Hz
+ * @param sampleRate sample rate in Hz
+ * @param q quality factor (default 1.0; higher values narrow the rejection
+ * band)
+ * @ingroup filter
+ * @author  pschatzmann
+ * @copyright GNU General Public License v3.0
+ * @tparam T sample type (use float or double; for fixed-point types like
+ * q1_14_t use NotchFilterDF1 instead -- see LowPassFilter for why)
+ */
 
 template <typename T = float>
 class NotchFilter : public BiQuadDF2<T> {
@@ -712,28 +718,7 @@ class NotchFilterDF1 : public BiQuadDF1<T> {
   }
 };
 
-/**
- * @brief Second-order low-shelf filter (BiQuad DF2). Boosts or cuts frequencies
- * below the shelf frequency by the specified gain (in dB) while leaving higher
- * frequencies unchanged. Commonly used in tone controls and equalization.
- * Coefficients are derived from the Audio EQ Cookbook.
- * @param frequency shelf transition frequency in Hz
- * @param sampleRate sample rate in Hz
- * @param gain boost/cut in dB (positive = boost, negative = cut)
- * @param slope shelf slope (default 1.0; values < 1.0 give a gentler slope)
- * @ingroup filter
- * @author  pschatzmann
- * @copyright GNU General Public License v3.0
- * @tparam T sample type (use float or double). NOTE: unlike the other
- * filters here, LowShelfFilterDF1 is NOT a reliable fix for bounded
- * fixed-point types like q1_14_t: shelf coefficients scale with the linear
- * gain factor 10^(gain_dB/40) and can exceed a bounded type's range even at
- * modest gain settings, independent of DF1 vs DF2 -- this is a coefficient
- * headroom limitation, not the DF2 state-headroom issue DF1 solves for the
- * other filter types. begin() logs an error (LOGE) via checkCoeffRange() if
- * this happens; check for that warning rather than assuming it works.
- */
-
+/// Computes the b0/b1/b2/a1/a2 biquad coefficients for a low-shelf filter.
 inline BiQuadCoeffs calculateLowShelfCoeffs(float frequency, float sampleRate,
                                              float gain, float slope) {
   float a = pow(10.0f, gain / 40.0f);
@@ -755,6 +740,28 @@ inline BiQuadCoeffs calculateLowShelfCoeffs(float frequency, float sampleRate,
   c.a_2 = ((a + 1.0f) + aMinus - sinsq) * scale;
   return c;
 }
+
+/**
+ * @brief Second-order low-shelf filter (BiQuad DF2). Boosts or cuts frequencies
+ * below the shelf frequency by the specified gain (in dB) while leaving higher
+ * frequencies unchanged. Commonly used in tone controls and equalization.
+ * Coefficients are derived from the Audio EQ Cookbook.
+ * @param frequency shelf transition frequency in Hz
+ * @param sampleRate sample rate in Hz
+ * @param gain boost/cut in dB (positive = boost, negative = cut)
+ * @param slope shelf slope (default 1.0; values < 1.0 give a gentler slope)
+ * @ingroup filter
+ * @author  pschatzmann
+ * @copyright GNU General Public License v3.0
+ * @tparam T sample type (use float or double). NOTE: unlike the other
+ * filters here, LowShelfFilterDF1 is NOT a reliable fix for bounded
+ * fixed-point types like q1_14_t: shelf coefficients scale with the linear
+ * gain factor 10^(gain_dB/40) and can exceed a bounded type's range even at
+ * modest gain settings, independent of DF1 vs DF2 -- this is a coefficient
+ * headroom limitation, not the DF2 state-headroom issue DF1 solves for the
+ * other filter types. begin() logs an error (LOGE) via checkCoeffRange() if
+ * this happens; check for that warning rather than assuming it works.
+ */
 
 template <typename T = float>
 class LowShelfFilter : public BiQuadDF2<T> {
@@ -819,29 +826,7 @@ class LowShelfFilterDF1 : public BiQuadDF1<T> {
   }
 };
 
-/**
- * @brief Second-order high-shelf filter (BiQuad DF2). Boosts or cuts
- * frequencies above the shelf frequency by the specified gain (in dB) while
- * leaving lower frequencies unchanged. Commonly used in tone controls and
- * equalization.
- * Coefficients are derived from the Audio EQ Cookbook.
- * @param frequency shelf transition frequency in Hz
- * @param sampleRate sample rate in Hz
- * @param gain boost/cut in dB (positive = boost, negative = cut)
- * @param slope shelf slope (default 1.0; values < 1.0 give a gentler slope)
- * @ingroup filter
- * @author pschatzmann
- * @copyright GNU General Public License v3.0
- * @tparam T sample type (use float or double). NOTE: q1_14_t (or any
- * fixed-point type with only ~1 bit of headroom above +-1.0) does not work
- * here -- HighShelfFilterDF1 does NOT fix this the way it fixes the other
- * filters. Its coefficients scale with the linear gain factor
- * 10^(gain_dB/40) and, for a low shelf frequency relative to sampleRate,
- * already exceed a q1_14_t-sized range at just +1dB of gain (measured, not
- * a theoretical edge case). begin() logs an error (LOGE) via
- * checkCoeffRange() when this happens.
- */
-
+/// Computes the b0/b1/b2/a1/a2 biquad coefficients for a high-shelf filter.
 inline BiQuadCoeffs calculateHighShelfCoeffs(float frequency,
                                               float sampleRate, float gain,
                                               float slope) {
@@ -864,6 +849,29 @@ inline BiQuadCoeffs calculateHighShelfCoeffs(float frequency,
   c.a_2 = ((a + 1.0f) - aMinus - sinsq) * scale;
   return c;
 }
+
+/**
+ * @brief Second-order high-shelf filter (BiQuad DF2). Boosts or cuts
+ * frequencies above the shelf frequency by the specified gain (in dB) while
+ * leaving lower frequencies unchanged. Commonly used in tone controls and
+ * equalization.
+ * Coefficients are derived from the Audio EQ Cookbook.
+ * @param frequency shelf transition frequency in Hz
+ * @param sampleRate sample rate in Hz
+ * @param gain boost/cut in dB (positive = boost, negative = cut)
+ * @param slope shelf slope (default 1.0; values < 1.0 give a gentler slope)
+ * @ingroup filter
+ * @author pschatzmann
+ * @copyright GNU General Public License v3.0
+ * @tparam T sample type (use float or double). NOTE: q1_14_t (or any
+ * fixed-point type with only ~1 bit of headroom above +-1.0) does not work
+ * here -- HighShelfFilterDF1 does NOT fix this the way it fixes the other
+ * filters. Its coefficients scale with the linear gain factor
+ * 10^(gain_dB/40) and, for a low shelf frequency relative to sampleRate,
+ * already exceed a q1_14_t-sized range at just +1dB of gain (measured, not
+ * a theoretical edge case). begin() logs an error (LOGE) via
+ * checkCoeffRange() when this happens.
+ */
 
 template <typename T = float>
 class HighShelfFilter : public BiQuadDF2<T> {
