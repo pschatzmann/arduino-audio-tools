@@ -18,6 +18,13 @@
 #  define SOC_ADC_SAMPLE_FREQ_THRES_LOW           (20000)
 #endif
 
+// Prevent compile error in ARDUINO
+#ifdef ARDUINO
+    #ifndef perimanClearPinBus
+        #define perimanClearPinBus(p) perimanSetPinBus(p, ESP32_BUS_TYPE_INIT, NULL)
+    #endif
+#endif
+
 
 #if CONFIG_IDF_TARGET_ESP32
 #define ADC_CONV_MODE ADC_CONV_SINGLE_UNIT_1

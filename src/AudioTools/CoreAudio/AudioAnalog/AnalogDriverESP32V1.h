@@ -4,12 +4,6 @@
 
 #if (defined(ESP32) && defined(USE_ANALOG) &&  !USE_LEGACY_I2S) 
 
-#ifdef ARDUINO
-    #ifndef perimanClearPinBus
-        #define perimanClearPinBus(p) perimanSetPinBus(p, ESP32_BUS_TYPE_INIT, NULL)
-    #endif
-#endif
-
 #include "AudioTools/CoreAudio/AudioAnalog/AnalogDriverBase.h"
 #include "AudioTools/CoreAudio/AudioAnalog/AnalogConfigESP32V1.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"

@@ -316,7 +316,7 @@ template <class T = int16_t>
 using SineWaveGenerator = SineGenerator<T>;
 
 /**
- * @brief Sine wave which is based on a fast approximation function.
+ * @brief Sine wave which is based on a fast approximation function using floating point math.
  * @ingroup generator
  * @author Vivian Leigh Stewart
  * @copyright GPLv3
@@ -488,64 +488,211 @@ class FastIntSineGenerator : public SoundGenerator<T> {
 };
 
 /**
- * @brief Generates a square wave sound.
+ * @brief Generates a square wave sound. Uses the same 32 bit phase
+ * accumulator as SawToothGenerator/FastIntSineGenerator: no floating point
+ * operations or sin() calls in the readSample() hot path. A square wave
+ * needs neither a sine approximation nor a lookup table - just the sign
+ * bit of the ramp - so readSample() is a single comparison, making this a
+ * good fit for MCUs without a hardware FPU (e.g. RP2040), where the
+ * previous FastSineGenerator based implementation still did a float
+ * polynomial evaluation per sample just to keep its sign.
  * @ingroup generator
  * @author Phil Schatzmann
  * @copyright GPLv3
  *
  */
 template <class T = int16_t>
-class SquareWaveGenerator : public FastSineGenerator<T> {
+class SquareWaveGenerator : public SoundGenerator<T> {
  public:
-  SquareWaveGenerator(float amplitude = NumberConverter::maxValueT<T>(), float phase = 0.0f)
-      : FastSineGenerator<T>(amplitude, phase) {
+  SquareWaveGenerator(float amplitude = NumberConverter::maxValueT<T>(),
+                       float phase = 0.0f) {
     LOGD("SquareWaveGenerator");
+    setAmplitude(amplitude);
+    setPhase(phase);
   }
 
-  virtual T readSample() {
-    return value(FastSineGenerator<T>::readSample(),
-                 FastSineGenerator<T>::m_amplitude);
+  bool begin() override {
+    TRACEI();
+    SoundGenerator<T>::begin();
+    updatePhaseIncrement();
+    return true;
+  }
+
+  bool begin(AudioInfo info) override {
+    LOGI("%s::begin(channels=%d, sample_rate=%d)", "SquareWaveGenerator",
+         (int)info.channels, (int)info.sample_rate);
+    SoundGenerator<T>::begin(info);
+    updatePhaseIncrement();
+    return true;
+  }
+
+  bool begin(AudioInfo info, float frequency) {
+    SoundGenerator<T>::begin(info);
+    if (frequency > 0.0f) {
+      setFrequency(frequency);
+    }
+    return true;
+  }
+
+  bool begin(int channels, int sample_rate, float frequency) {
+    SoundGenerator<T>::info.channels = channels;
+    SoundGenerator<T>::info.sample_rate = sample_rate;
+    return begin(SoundGenerator<T>::info, frequency);
+  }
+
+  virtual void setAudioInfo(AudioInfo info) override {
+    SoundGenerator<T>::setAudioInfo(info);
+    updatePhaseIncrement();
+  }
+
+  /// Defines the frequency - the only place where float math is used
+  void setFrequency(float frequency) override {
+    LOGI("setFrequency: %.2f", frequency);
+    m_frequency = frequency;
+    updatePhaseIncrement();
+  }
+
+  /// Defines the starting phase in radians
+  void setPhase(float phase) {
+    double turns = phase / (2.0 * PI);
+    m_phase_offset = (uint32_t)(turns * 4294967296.0);
+  }
+
+  void setAmplitude(float amp) {
+    m_amplitude = amp;
+    m_amplitude_i = (int32_t)amp;
+  }
+
+  /// Provides a single sample - integer only, no float ops!
+  virtual T readSample() override {
+    uint32_t phase = m_phase_acc + m_phase_offset;
+    m_phase_acc += m_phase_increment;
+    // top bit of the phase marks the half of the cycle we're in
+    return (int32_t)phase >= 0 ? (T)m_amplitude_i : (T)(-m_amplitude_i);
   }
 
  protected:
-  // returns amplitude for positive vales and -amplitude for negative values
-  T value(T value, T amplitude) {
-    return (value >= 0) ? amplitude : -amplitude;
+  volatile float m_frequency = 0.0f;
+  float m_amplitude = 1.0f;
+  int32_t m_amplitude_i = 32767;
+  // fixed point (32 bit) phase: wrapping is implicit via unsigned overflow
+  uint32_t m_phase_acc = 0;
+  uint32_t m_phase_offset = 0;
+  uint32_t m_phase_increment = 0;
+
+  // only called from begin()/setFrequency()/setAudioInfo(), never per sample
+  void updatePhaseIncrement() {
+    uint32_t sample_rate = SoundGenerator<T>::info.sample_rate;
+    if (sample_rate > 0) {
+      m_phase_increment =
+          (uint32_t)((double)m_frequency / sample_rate * 4294967296.0);
+    }
   }
 };
 
 /**
- * @brief SawToothGenerator
+ * @brief Generates a saw tooth wave sound. Uses a 32 bit phase accumulator
+ * with an integer increment, just like FastIntSineGenerator: no floating
+ * point operations or divisions in the readSample() hot path. Unlike a
+ * sine, a saw tooth needs no lookup table either - a wrapping unsigned
+ * accumulator reinterpreted as signed already is a linear ramp - so this
+ * is even cheaper than FastIntSineGenerator and a good fit for MCUs
+ * without a hardware FPU (e.g. RP2040), where the previous sinf()/float
+ * based implementation (inherited from SineGenerator) was comparatively
+ * expensive.
  * @ingroup generator
  * @author Phil Schatzmann
  * @copyright GPLv3
  * @tparam T
  */
 template <class T = int16_t>
-class SawToothGenerator : public SineGenerator<T> {
+class SawToothGenerator : public SoundGenerator<T> {
  public:
-  SawToothGenerator(float amplitude = NumberConverter::maxValueT<T>(), float phase = 0.0)
-      : SineGenerator<T>(amplitude, phase) {
+  SawToothGenerator(float amplitude = NumberConverter::maxValueT<T>(),
+                     float phase = 0.0f) {
     LOGD("SawToothGenerator");
+    setAmplitude(amplitude);
+    setPhase(phase);
   }
 
-  virtual T readSample() override {
-    float angle =
-        SineGenerator<T>::m_cycles + SineGenerator<T>::m_phase;
-    T result = SineGenerator<T>::m_amplitude * saw(angle);
-    SineGenerator<T>::m_cycles +=
-        SineGenerator<T>::m_frequency * SineGenerator<T>::m_deltaTime;
-    if (SineGenerator<T>::m_cycles > 1.0) {
-      SineGenerator<T>::m_cycles -= 1.0;
+  bool begin() override {
+    TRACEI();
+    SoundGenerator<T>::begin();
+    updatePhaseIncrement();
+    return true;
+  }
+
+  bool begin(AudioInfo info) override {
+    LOGI("%s::begin(channels=%d, sample_rate=%d)", "SawToothGenerator",
+         (int)info.channels, (int)info.sample_rate);
+    SoundGenerator<T>::begin(info);
+    updatePhaseIncrement();
+    return true;
+  }
+
+  bool begin(AudioInfo info, float frequency) {
+    SoundGenerator<T>::begin(info);
+    if (frequency > 0.0f) {
+      setFrequency(frequency);
     }
-    return result;
+    return true;
+  }
+
+  bool begin(int channels, int sample_rate, float frequency) {
+    SoundGenerator<T>::info.channels = channels;
+    SoundGenerator<T>::info.sample_rate = sample_rate;
+    return begin(SoundGenerator<T>::info, frequency);
+  }
+
+  virtual void setAudioInfo(AudioInfo info) override {
+    SoundGenerator<T>::setAudioInfo(info);
+    updatePhaseIncrement();
+  }
+
+  /// Defines the frequency - the only place where float math is used
+  void setFrequency(float frequency) override {
+    LOGI("setFrequency: %.2f", frequency);
+    m_frequency = frequency;
+    updatePhaseIncrement();
+  }
+
+  /// Defines the starting phase in radians
+  void setPhase(float phase) {
+    double turns = phase / (2.0 * PI);
+    m_phase_offset = (uint32_t)(turns * 4294967296.0);
+  }
+
+  void setAmplitude(float amp) {
+    m_amplitude = amp;
+    m_amplitude_i = (int32_t)amp;
+  }
+
+  /// Provides a single sample - integer only, no float ops!
+  virtual T readSample() override {
+    uint32_t phase = m_phase_acc + m_phase_offset;
+    m_phase_acc += m_phase_increment;
+    // reinterpreting the wrapping unsigned phase as signed already gives
+    // a linear ramp from -2^31 to 2^31-1: exactly a saw tooth
+    int32_t ramp = (int32_t)phase;
+    return (T)(((int64_t)ramp * m_amplitude_i) >> 31);
   }
 
  protected:
-  /// sine approximation.
-  inline float saw(float t) {
-    float p = (t - (int)t) - 0.5f;  // 0 <= p <= 1
-    return p;
+  volatile float m_frequency = 0.0f;
+  float m_amplitude = 1.0f;
+  int32_t m_amplitude_i = 32767;
+  // fixed point (32 bit) phase: wrapping is implicit via unsigned overflow
+  uint32_t m_phase_acc = 0;
+  uint32_t m_phase_offset = 0;
+  uint32_t m_phase_increment = 0;
+
+  // only called from begin()/setFrequency()/setAudioInfo(), never per sample
+  void updatePhaseIncrement() {
+    uint32_t sample_rate = SoundGenerator<T>::info.sample_rate;
+    if (sample_rate > 0) {
+      m_phase_increment =
+          (uint32_t)((double)m_frequency / sample_rate * 4294967296.0);
+    }
   }
 };
 

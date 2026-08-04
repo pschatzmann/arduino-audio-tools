@@ -101,6 +101,11 @@ class VS1053Stream : public AudioStream, public VolumeSupport {
  public:
   VS1053Stream() = default;
 
+  /// Constructor which accepts an alternative SPI instance to use instead of
+  /// the default SPI object. Only supported when using
+  /// https://github.com/pschatzmann/arduino-vs1053 (VS1053_EXT).
+  explicit VS1053Stream(SPIClass& spi) { p_spi = &spi; }
+
   ~VS1053Stream() { end(); }
 
   /// Provides the default configuration for the indicated mod
@@ -150,12 +155,30 @@ class VS1053Stream : public AudioStream, public VolumeSupport {
     LOGI("cs_sd_pin: %d", cfg.cs_sd_pin);
 
     if (p_vs1053 == nullptr) {
+#if VS1053_EXT
+      if (p_spi != nullptr) {
+        LOGI("Using custom SPI instance");
+        p_vs1053 = new VS1053(cfg.cs_pin, cfg.dcs_pin, cfg.dreq_pin,
+                               (uint8_t)-1, *p_spi);
+      } else {
+        p_vs1053 = new VS1053(cfg.cs_pin, cfg.dcs_pin, cfg.dreq_pin);
+      }
+#else
+      if (p_spi != nullptr) {
+        LOGE("Custom SPI is only supported when using VS1053_EXT");
+      }
       p_vs1053 = new VS1053(cfg.cs_pin, cfg.dcs_pin, cfg.dreq_pin);
+#endif
       p_vs1053_out = new VS1053StreamOut(p_vs1053);
 
       if (cfg.is_start_spi) {
-        LOGI("SPI.begin()")
-        SPI.begin();
+        if (p_spi != nullptr) {
+          LOGI("p_spi->begin()")
+          p_spi->begin();
+        } else {
+          LOGI("SPI.begin()")
+          SPI.begin();
+        }
       } else {
         LOGI("SPI not started");
       }
@@ -304,18 +327,20 @@ class VS1053Stream : public AudioStream, public VolumeSupport {
 
 #if VS1053_EXT
   int available() override {
-    int result = getVS1053().available();
-    LOGI("available: %d", result);
-    return result;
+    if (p_vs1053 == nullptr) return 0;
+    TRACED();
+    return p_vs1053->available();
   }
   size_t readBytes(uint8_t* data, size_t len) override {
     TRACED();
-    return getVS1053().readBytes(data, len);
+    if (p_vs1053 == nullptr) return 0;
+    return p_vs1053->readBytes(data, len);
   }
 
   /// Provides the treble amplitude value
   float treble() {
     TRACED();
+    if (p_vs1053 == nullptr) return -1.0f;
     return static_cast<float>(getVS1053().treble()) / 100.0;
   }
 
@@ -325,12 +350,14 @@ class VS1053Stream : public AudioStream, public VolumeSupport {
     if (value < 0.0f) value = 0.0f;
     if (value > 1.0f) value = 1.0f;
     LOGD("setTreble: %f", value);
+    if (p_vs1053 == nullptr) return;
     getVS1053().setTreble(value * 100.0f);
   }
 
   /// Provides the Bass amplitude value
   float bass() {
     TRACED();
+    if (p_vs1053 == nullptr) return -1.0f;
     return static_cast<float>(getVS1053().bass()) / 100.0;
   }
 
@@ -340,17 +367,20 @@ class VS1053Stream : public AudioStream, public VolumeSupport {
     if (value < 0.0f) value = 0.0f;
     if (value > 1.0f) value = 1.0f;
     LOGD("setBass: %f", value);
+    if (p_vs1053 == nullptr) return;
     getVS1053().setBass(value * 100.0f);
   }
 
   /// Sets the treble frequency limit in hz (range 0 to 15000)
   void setTrebleFrequencyLimit(uint16_t value) {
     LOGD("setTrebleFrequencyLimit: %u", value);
+    if (p_vs1053 == nullptr) return;
     getVS1053().setTrebleFrequencyLimit(value);
   }
   /// Sets the bass frequency limit in hz (range 0 to 15000)
   void setBassFrequencyLimit(uint16_t value) {
     LOGD("setBassFrequencyLimit: %u", value);
+    if (p_vs1053 == nullptr) return;
     getVS1053().setBassFrequencyLimit(value);
   }
 
@@ -374,6 +404,7 @@ class VS1053Stream : public AudioStream, public VolumeSupport {
 
  protected:
   VS1053Config cfg;
+  SPIClass* p_spi = nullptr;
   VS1053* p_vs1053 = nullptr;
   VS1053StreamOut* p_vs1053_out = nullptr;
   EncodedAudioStream* p_out = nullptr;
