@@ -164,6 +164,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae1b561d233416d4a4aa45b7343c081a5" id="r_ae1b561d233416d4a4aa45b7343c081a5"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1q1__14__t.html#ae1b561d233416d4a4aa45b7343c081a5">raw</a> () const</td></tr>
 <tr class="memdesc:ae1b561d233416d4a4aa45b7343c081a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">raw underlying Q1.14 representation  <br /></td></tr>
 <tr class="separator:ae1b561d233416d4a4aa45b7343c081a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73dd49e26f6fbcca417713ff6f968bb1" id="r_a73dd49e26f6fbcca417713ff6f968bb1"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1q1__14__t.html#a73dd49e26f6fbcca417713ff6f968bb1">scale</a> (int16_t sample) const</td></tr>
+<tr class="memdesc:a73dd49e26f6fbcca417713ff6f968bb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">scales a 16-bit PCM sample by this Q1.14 factor  <br /></td></tr>
+<tr class="separator:a73dd49e26f6fbcca417713ff6f968bb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a9a46a7815229969db452f5f19e2845" id="r_a3a9a46a7815229969db452f5f19e2845"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a22fbdd2584e0693fd85ab3142e9122fd">int24_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1q1__14__t.html#a3a9a46a7815229969db452f5f19e2845">scale</a> (<a class="el" href="namespaceaudio__tools.html#a22fbdd2584e0693fd85ab3142e9122fd">int24_t</a> sample) const</td></tr>
+<tr class="memdesc:a3a9a46a7815229969db452f5f19e2845"><td class="mdescLeft">&#160;</td><td class="mdescRight">scales a 24-bit PCM sample by this Q1.14 factor  <br /></td></tr>
+<tr class="separator:a3a9a46a7815229969db452f5f19e2845"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62be53d8f20e43f082e6471118b71964" id="r_a62be53d8f20e43f082e6471118b71964"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1q1__14__t.html#a62be53d8f20e43f082e6471118b71964">scale</a> (int32_t sample) const</td></tr>
+<tr class="memdesc:a62be53d8f20e43f082e6471118b71964"><td class="mdescLeft">&#160;</td><td class="mdescRight">scales a 32-bit PCM sample by this Q1.14 factor  <br /></td></tr>
+<tr class="separator:a62be53d8f20e43f082e6471118b71964"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8dfe31f9bfc5961cdb784430bccdbd11" id="r_a8dfe31f9bfc5961cdb784430bccdbd11"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1q1__14__t.html#a8dfe31f9bfc5961cdb784430bccdbd11">toInt16</a> () const</td></tr>
 <tr class="memdesc:a8dfe31f9bfc5961cdb784430bccdbd11"><td class="mdescLeft">&#160;</td><td class="mdescRight">converts to a 16-bit PCM sample (-32768..32767)  <br /></td></tr>
 <tr class="separator:a8dfe31f9bfc5961cdb784430bccdbd11"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1377,6 +1386,90 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>raw underlying Q1.14 representation </p>
+
+</div>
+</div>
+<a id="a73dd49e26f6fbcca417713ff6f968bb1" name="a73dd49e26f6fbcca417713ff6f968bb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73dd49e26f6fbcca417713ff6f968bb1">&#9670;&#160;</a></span>scale() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int16_t scale </td>
+          <td>(</td>
+          <td class="paramtype">int16_t&#160;</td>
+          <td class="paramname"><em>sample</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>scales a 16-bit PCM sample by this Q1.14 factor </p>
+
+</div>
+</div>
+<a id="a3a9a46a7815229969db452f5f19e2845" name="a3a9a46a7815229969db452f5f19e2845"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a9a46a7815229969db452f5f19e2845">&#9670;&#160;</a></span>scale() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a22fbdd2584e0693fd85ab3142e9122fd">int24_t</a> scale </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#a22fbdd2584e0693fd85ab3142e9122fd">int24_t</a>&#160;</td>
+          <td class="paramname"><em>sample</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>scales a 24-bit PCM sample by this Q1.14 factor </p>
+
+</div>
+</div>
+<a id="a62be53d8f20e43f082e6471118b71964" name="a62be53d8f20e43f082e6471118b71964"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62be53d8f20e43f082e6471118b71964">&#9670;&#160;</a></span>scale() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t scale </td>
+          <td>(</td>
+          <td class="paramtype">int32_t&#160;</td>
+          <td class="paramname"><em>sample</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>scales a 32-bit PCM sample by this Q1.14 factor </p>
 
 </div>
 </div>
