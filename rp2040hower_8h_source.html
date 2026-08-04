@@ -121,34 +121,38 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">//#define USE_CONCURRENCY</span></div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="rp2040hower_8h.html#a137709eed250ec5c7c669ec8cc7f89ae">   39</a></span><span class="preprocessor">#define USE_SD_SUPPORTS_SPI</span></div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">// Use fixed point operations </span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="rp2040hower_8h.html#aed4e4901ba0f1ea2983e7f12b5af5d44">   42</a></span><span class="preprocessor">#define PREFER_FIXEDPOINT true </span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">// default pins for VS1053 shield</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="rp2040hower_8h.html#ae2f9931ce076f3d2ae5914881569f0bd">   45</a></span><span class="preprocessor">#define VS1053_CS 17 </span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="rp2040hower_8h.html#a4397cd27e2d7fd2d0e02bff178c66ea1">   46</a></span><span class="preprocessor">#define VS1053_DCS 9 </span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="rp2040hower_8h.html#a3601dbc6eadea33c4d87f105e850b897">   47</a></span><span class="preprocessor">#define VS1053_DREQ 10 </span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="rp2040hower_8h.html#a432e88e5ef80c8679a286d05d6275e9d">   48</a></span><span class="preprocessor">#define VS1053_CS_SD -1</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="rp2040hower_8h.html#acc3625cf27c1e344148bc7112062760e">   49</a></span><span class="preprocessor">#define VS1053_RESET 11</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="rp2040hower_8h.html#ab288b2c5d3d087909f121e9cb0225426">   50</a></span><span class="preprocessor">#define VS1053_DEFINED</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">// The Pico W has WIFI support: but platformio is messing up, so we support NO_WIFI</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">#if (LWIP_IPV4==1 || LWIP_IPV6==1) &amp;&amp;!defined(NO_WIFI)</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="preprocessor">#  include &lt;WiFi.h&gt;</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">#  define USE_WIFI</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="preprocessor">#  define USE_WIFI_CLIENT_SECURE</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="preprocessor">#  define USE_URL_ARDUINO</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="preprocessor">#  define USE_AUDIO_SERVER</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="keyword">using </span>WiFiServerSecure = BearSSL::WiFiServerSecure;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">// psram support</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="preprocessor">#ifdef RP2350_PSRAM_CS</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="preprocessor">#define USE_PSRAM</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="preprocessor">#define ps_malloc(size) pmalloc(size)</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="preprocessor">#define ps_calloc(num, size) pcalloc(num, size)</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="preprocessor">#define ps_realloc(ptr, size) realloc(ptr, size)</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">// Use fixed point operations for RP2040 only</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">#if defined(PICO_RP2350)</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#  define PREFER_FIXEDPOINT false</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="rp2040hower_8h.html#aed4e4901ba0f1ea2983e7f12b5af5d44">   45</a></span><span class="preprocessor">#  define PREFER_FIXEDPOINT true</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">// default pins for VS1053 shield</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="rp2040hower_8h.html#ae2f9931ce076f3d2ae5914881569f0bd">   49</a></span><span class="preprocessor">#define VS1053_CS 17 </span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="rp2040hower_8h.html#a4397cd27e2d7fd2d0e02bff178c66ea1">   50</a></span><span class="preprocessor">#define VS1053_DCS 9 </span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="rp2040hower_8h.html#a3601dbc6eadea33c4d87f105e850b897">   51</a></span><span class="preprocessor">#define VS1053_DREQ 10 </span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="rp2040hower_8h.html#a432e88e5ef80c8679a286d05d6275e9d">   52</a></span><span class="preprocessor">#define VS1053_CS_SD -1</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="rp2040hower_8h.html#acc3625cf27c1e344148bc7112062760e">   53</a></span><span class="preprocessor">#define VS1053_RESET 11</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="rp2040hower_8h.html#ab288b2c5d3d087909f121e9cb0225426">   54</a></span><span class="preprocessor">#define VS1053_DEFINED</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">// The Pico W has WIFI support: but platformio is messing up, so we support NO_WIFI</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="preprocessor">#if (LWIP_IPV4==1 || LWIP_IPV6==1) &amp;&amp;!defined(NO_WIFI)</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="preprocessor">#  include &lt;WiFi.h&gt;</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="preprocessor">#  define USE_WIFI</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="preprocessor">#  define USE_WIFI_CLIENT_SECURE</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="preprocessor">#  define USE_URL_ARDUINO</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="preprocessor">#  define USE_AUDIO_SERVER</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="keyword">using </span>WiFiServerSecure = BearSSL::WiFiServerSecure;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">// psram support</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="preprocessor">#ifdef RP2350_PSRAM_CS</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="preprocessor">#define USE_PSRAM</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="preprocessor">#define ps_malloc(size) pmalloc(size)</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="preprocessor">#define ps_calloc(num, size) pcalloc(num, size)</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="preprocessor">#define ps_realloc(ptr, size) realloc(ptr, size)</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="a_arduino_8h_html"><div class="ttname"><a href="_arduino_8h.html">Arduino.h</a></div><div class="ttdoc">If you want to use the framework w/o Arduino you need to provide the implementation of a couple of cl...</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
