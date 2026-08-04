@@ -38,8 +38,12 @@
 //#define USE_CONCURRENCY
 #define USE_SD_SUPPORTS_SPI
 
-// Use fixed point operations 
-#define PREFER_FIXEDPOINT true 
+// Use fixed point operations for RP2040 only
+#if defined(PICO_RP2350)
+#  define PREFER_FIXEDPOINT false
+#else
+#  define PREFER_FIXEDPOINT true
+#endif
 
 // default pins for VS1053 shield
 #define VS1053_CS 17 
