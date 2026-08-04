@@ -207,8 +207,8 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a5caf99a24686511722c4c9f94c4ec52e" id="r_a5caf99a24686511722c4c9f94c4ec52e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#a5caf99a24686511722c4c9f94c4ec52e">refillReadBuffer</a> ()</td></tr>
 <tr class="memdesc:a5caf99a24686511722c4c9f94c4ec52e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Refill small read buffer (e.g. 8 bytes) to avoid single byte reads when calling read()  <br /></td></tr>
 <tr class="separator:a5caf99a24686511722c4c9f94c4ec52e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d2dfade3fc8073d9f63580cec8772a8" id="r_a5d2dfade3fc8073d9f63580cec8772a8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_input_mixer.html#a5d2dfade3fc8073d9f63580cec8772a8">resultAdd</a> (float fact, int samples_eff)</td></tr>
-<tr class="separator:a5d2dfade3fc8073d9f63580cec8772a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a498dd21195717f39eabcc0fabb807bd4" id="r_a498dd21195717f39eabcc0fabb807bd4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_input_mixer.html#a498dd21195717f39eabcc0fabb807bd4">resultAdd</a> (<a class="el" href="structaudio__tools_1_1_mix_gain.html">MixGain</a>&lt; T &gt; factor, int samples_eff)</td></tr>
+<tr class="separator:a498dd21195717f39eabcc0fabb807bd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac3ad0336dfb3282f09ffa9fa1984a998" id="r_ac3ad0336dfb3282f09ffa9fa1984a998"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_input_mixer.html#ac3ad0336dfb3282f09ffa9fa1984a998">resultClear</a> (int samples)</td></tr>
 <tr class="separator:ac3ad0336dfb3282f09ffa9fa1984a998"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -1112,8 +1112,8 @@ template&lt;typename T  = int16_t, typename SumT  = float&gt; </div>
 
 </div>
 </div>
-<a id="a5d2dfade3fc8073d9f63580cec8772a8" name="a5d2dfade3fc8073d9f63580cec8772a8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d2dfade3fc8073d9f63580cec8772a8">&#9670;&#160;</a></span>resultAdd()</h2>
+<a id="a498dd21195717f39eabcc0fabb807bd4" name="a498dd21195717f39eabcc0fabb807bd4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a498dd21195717f39eabcc0fabb807bd4">&#9670;&#160;</a></span>resultAdd()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1126,8 +1126,8 @@ template&lt;typename T  = int16_t, typename SumT  = float&gt; </div>
         <tr>
           <td class="memname">void resultAdd </td>
           <td>(</td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>fact</em>, </td>
+          <td class="paramtype"><a class="el" href="structaudio__tools_1_1_mix_gain.html">MixGain</a>&lt; T &gt;&#160;</td>
+          <td class="paramname"><em>factor</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
