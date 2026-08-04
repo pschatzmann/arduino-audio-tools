@@ -156,6 +156,8 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:aca05ff9ab728526f003dc9eed9554ae3" id="r_aca05ff9ab728526f003dc9eed9554ae3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">RxTxMode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_v_s1053_config.html#aca05ff9ab728526f003dc9eed9554ae3">mode</a> = <a class="el" href="group__basic.html#gga8cbd91a8bac9b5ab425112be1620eb49a736237ce367b7814c763eacd188cf9e5">TX_MODE</a></td></tr>
 <tr class="memdesc:aca05ff9ab728526f003dc9eed9554ae3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operation mode (transmit/receive). Default: TX_MODE (playback).  <br /></td></tr>
 <tr class="separator:aca05ff9ab728526f003dc9eed9554ae3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e3aed00eb1f288f9a7fb667184c93f9" id="r_a7e3aed00eb1f288f9a7fb667184c93f9"><td class="memItemLeft" align="right" valign="top">SPIClass *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_v_s1053_config.html#a7e3aed00eb1f288f9a7fb667184c93f9">p_spi</a> = nullptr</td></tr>
+<tr class="separator:a7e3aed00eb1f288f9a7fb667184c93f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad40e44bf24326c37570a21fd2dcd9ac4" id="r_ad40e44bf24326c37570a21fd2dcd9ac4"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_v_s1053_config.html#ad40e44bf24326c37570a21fd2dcd9ac4">reset_pin</a> = <a class="el" href="rp2040hower_8h.html#acc3625cf27c1e344148bc7112062760e">VS1053_RESET</a></td></tr>
 <tr class="separator:ad40e44bf24326c37570a21fd2dcd9ac4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e86c53dfa0ad5dc0d2ecd0304fabc95" id="r_a0e86c53dfa0ad5dc0d2ecd0304fabc95"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__basic.html#ga61cb255f24ebd0bbb95f02eaad61599f">sample_rate_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> = <a class="el" href="_audio_tools_config_8h.html#abe9b1c28165a7071e354bd9d7823ca1a">DEFAULT_SAMPLE_RATE</a></td></tr>
@@ -639,6 +641,21 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Operation mode (transmit/receive). Default: TX_MODE (playback). </p>
+
+</div>
+</div>
+<a id="a7e3aed00eb1f288f9a7fb667184c93f9" name="a7e3aed00eb1f288f9a7fb667184c93f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e3aed00eb1f288f9a7fb667184c93f9">&#9670;&#160;</a></span>p_spi</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SPIClass* p_spi = nullptr</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Optional alternative SPI instance to use instead of the default SPI. Only supported when using <a href="https://github.com/pschatzmann/arduino-vs1053">https://github.com/pschatzmann/arduino-vs1053</a> (VS1053_EXT). Leave as nullptr to use the default SPI object. </p>
 
 </div>
 </div>
