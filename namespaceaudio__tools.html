@@ -1670,6 +1670,9 @@ size_t size)</a> and <a class="el" href="classaudio__tools_1_1_base_stream.html#
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_p_w_m_driver_zephyr.html">PWMDriverZephyr</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Audio output to PWM pins for Zephyr RTOS.  <a href="classaudio__tools_1_1_p_w_m_driver_zephyr.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits (value = raw / 16384.0). Covers the range [-2.0, 1.99993896484375] with a resolution of ~6.1e-5, using only integer add/sub/mul/div &ndash; no hardware floating-point instructions.  <a href="classaudio__tools_1_1q1__14__t.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html">QualityAnalysisStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Analyzes audio stream quality by detecting clicks/pops, gaps/dropouts, and clipping/corruption.  <a href="classaudio__tools_1_1_quality_analysis_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2987,8 +2990,12 @@ Functions</h2></td></tr>
 <tr class="separator:a7003387e44fc36bcb1ba512a80c3f1b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89dba7db9b107dbb6a00b76977f2f06b" id="r_a89dba7db9b107dbb6a00b76977f2f06b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a89dba7db9b107dbb6a00b76977f2f06b">operator!=</a> (float a, <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> b)</td></tr>
 <tr class="separator:a89dba7db9b107dbb6a00b76977f2f06b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac180cc745eb857402fafa9ac30b3d81b" id="r_ac180cc745eb857402fafa9ac30b3d81b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ac180cc745eb857402fafa9ac30b3d81b">operator!=</a> (float a, <a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a> b)</td></tr>
+<tr class="separator:ac180cc745eb857402fafa9ac30b3d81b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c532e435e81cc4d6bdf4e07291661dd" id="r_a7c532e435e81cc4d6bdf4e07291661dd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a7c532e435e81cc4d6bdf4e07291661dd">operator*</a> (float a, <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> b)</td></tr>
 <tr class="separator:a7c532e435e81cc4d6bdf4e07291661dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1dcdbd28e545007f53dbedf69eb054d" id="r_ac1dcdbd28e545007f53dbedf69eb054d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ac1dcdbd28e545007f53dbedf69eb054d">operator*</a> (float a, <a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a> b)</td></tr>
+<tr class="separator:ac1dcdbd28e545007f53dbedf69eb054d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0fffcee56d421648fc2c343a6aedd1fc" id="r_a0fffcee56d421648fc2c343a6aedd1fc"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a0fffcee56d421648fc2c343a6aedd1fc">operator*</a> (float one, <a class="el" href="classaudio__tools_1_1float16.html">float16</a> two)</td></tr>
 <tr class="separator:a0fffcee56d421648fc2c343a6aedd1fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a70d5b5d7e18fb2f08940c7f0bbc142c6" id="r_a70d5b5d7e18fb2f08940c7f0bbc142c6"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a70d5b5d7e18fb2f08940c7f0bbc142c6">operator*</a> (float one, <a class="el" href="classaudio__tools_1_1float32.html">float32</a> two)</td></tr>
@@ -3003,6 +3010,8 @@ Functions</h2></td></tr>
 <tr class="separator:a3d663f50d79f9b03abdbfb5796e78b65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adda705d96f7778b579d1f5e509b8f632" id="r_adda705d96f7778b579d1f5e509b8f632"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#adda705d96f7778b579d1f5e509b8f632">operator+</a> (float a, <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> b)</td></tr>
 <tr class="separator:adda705d96f7778b579d1f5e509b8f632"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87e8cf0b6a707ad8b2f429c4a499ce7a" id="r_a87e8cf0b6a707ad8b2f429c4a499ce7a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a87e8cf0b6a707ad8b2f429c4a499ce7a">operator+</a> (float a, <a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a> b)</td></tr>
+<tr class="separator:a87e8cf0b6a707ad8b2f429c4a499ce7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9828abb47eae042ea662a93664d0cfd6" id="r_a9828abb47eae042ea662a93664d0cfd6"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a9828abb47eae042ea662a93664d0cfd6">operator+</a> (float one, <a class="el" href="classaudio__tools_1_1float16.html">float16</a> two)</td></tr>
 <tr class="separator:a9828abb47eae042ea662a93664d0cfd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ead404fd2121896489d7c04d5743c95" id="r_a0ead404fd2121896489d7c04d5743c95"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a0ead404fd2121896489d7c04d5743c95">operator+</a> (float one, <a class="el" href="classaudio__tools_1_1float32.html">float32</a> two)</td></tr>
@@ -3017,6 +3026,8 @@ Functions</h2></td></tr>
 <tr class="separator:aa729503ff1a0651114410b7696ef7bc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08d3374716445392e525a6caa6ed4acd" id="r_a08d3374716445392e525a6caa6ed4acd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a08d3374716445392e525a6caa6ed4acd">operator-</a> (float a, <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> b)</td></tr>
 <tr class="separator:a08d3374716445392e525a6caa6ed4acd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5930bcba0d4cfbbb6b1550482aa134c8" id="r_a5930bcba0d4cfbbb6b1550482aa134c8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a5930bcba0d4cfbbb6b1550482aa134c8">operator-</a> (float a, <a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a> b)</td></tr>
+<tr class="separator:a5930bcba0d4cfbbb6b1550482aa134c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43df323ec732265452702fa83c1895fb" id="r_a43df323ec732265452702fa83c1895fb"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a43df323ec732265452702fa83c1895fb">operator-</a> (float one, <a class="el" href="classaudio__tools_1_1float16.html">float16</a> two)</td></tr>
 <tr class="separator:a43df323ec732265452702fa83c1895fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad32122724ec8d9d5d653acd48337b992" id="r_ad32122724ec8d9d5d653acd48337b992"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ad32122724ec8d9d5d653acd48337b992">operator-</a> (float one, <a class="el" href="classaudio__tools_1_1float32.html">float32</a> two)</td></tr>
@@ -3031,6 +3042,8 @@ Functions</h2></td></tr>
 <tr class="separator:a1df2813cb4f6f8b8a79cdcb57c19e27b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad54ca1933a6acafd6125692489ae51fa" id="r_ad54ca1933a6acafd6125692489ae51fa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ad54ca1933a6acafd6125692489ae51fa">operator/</a> (float a, <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> b)</td></tr>
 <tr class="separator:ad54ca1933a6acafd6125692489ae51fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7646775551d19d6c9f3360301530ba6" id="r_ac7646775551d19d6c9f3360301530ba6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ac7646775551d19d6c9f3360301530ba6">operator/</a> (float a, <a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a> b)</td></tr>
+<tr class="separator:ac7646775551d19d6c9f3360301530ba6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03f13592adfc482d0e7f64ebaddc1c21" id="r_a03f13592adfc482d0e7f64ebaddc1c21"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a03f13592adfc482d0e7f64ebaddc1c21">operator/</a> (float one, <a class="el" href="classaudio__tools_1_1float16.html">float16</a> two)</td></tr>
 <tr class="separator:a03f13592adfc482d0e7f64ebaddc1c21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb664ebaf74c24c61e72bbd12ac461e4" id="r_abb664ebaf74c24c61e72bbd12ac461e4"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#abb664ebaf74c24c61e72bbd12ac461e4">operator/</a> (float one, <a class="el" href="classaudio__tools_1_1float32.html">float32</a> two)</td></tr>
@@ -3045,17 +3058,27 @@ Functions</h2></td></tr>
 <tr class="separator:adfc51c5353d8125c51e8c4f3239c2dc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a93569d1f3db46326b52e0400fa4e761a" id="r_a93569d1f3db46326b52e0400fa4e761a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a93569d1f3db46326b52e0400fa4e761a">operator&lt;</a> (float a, <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> b)</td></tr>
 <tr class="separator:a93569d1f3db46326b52e0400fa4e761a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ae2bbe0cfcf4b67ec5618c13fcc3c84" id="r_a5ae2bbe0cfcf4b67ec5618c13fcc3c84"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a5ae2bbe0cfcf4b67ec5618c13fcc3c84">operator&lt;</a> (float a, <a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a> b)</td></tr>
+<tr class="separator:a5ae2bbe0cfcf4b67ec5618c13fcc3c84"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a55e153ec347255bf19d8e5dfab7ed3" id="r_a6a55e153ec347255bf19d8e5dfab7ed3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a6a55e153ec347255bf19d8e5dfab7ed3">operator&lt;=</a> (float a, <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> b)</td></tr>
 <tr class="separator:a6a55e153ec347255bf19d8e5dfab7ed3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af71ff5828b0be927e226b1b4fdf944a3" id="r_af71ff5828b0be927e226b1b4fdf944a3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#af71ff5828b0be927e226b1b4fdf944a3">operator&lt;=</a> (float a, <a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a> b)</td></tr>
+<tr class="separator:af71ff5828b0be927e226b1b4fdf944a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8f98106c04a5e444b4c0f45746bcf03" id="r_ac8f98106c04a5e444b4c0f45746bcf03"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ac8f98106c04a5e444b4c0f45746bcf03">operator==</a> (<a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">audio_tools::digital_pin_t</a> &amp;a, <a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">audio_tools::digital_pin_t</a> &amp;b)</td></tr>
 <tr class="memdesc:ac8f98106c04a5e444b4c0f45746bcf03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Support for pin compare.  <br /></td></tr>
 <tr class="separator:ac8f98106c04a5e444b4c0f45746bcf03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12ae44678b579bec3c828dff970fb5d6" id="r_a12ae44678b579bec3c828dff970fb5d6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a12ae44678b579bec3c828dff970fb5d6">operator==</a> (float a, <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> b)</td></tr>
 <tr class="separator:a12ae44678b579bec3c828dff970fb5d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af753cc3f9aaeb323abf21c763d87fbfd" id="r_af753cc3f9aaeb323abf21c763d87fbfd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#af753cc3f9aaeb323abf21c763d87fbfd">operator==</a> (float a, <a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a> b)</td></tr>
+<tr class="separator:af753cc3f9aaeb323abf21c763d87fbfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a868bd8eedc1f06fac24a4474d67a17b7" id="r_a868bd8eedc1f06fac24a4474d67a17b7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a868bd8eedc1f06fac24a4474d67a17b7">operator&gt;</a> (float a, <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> b)</td></tr>
 <tr class="separator:a868bd8eedc1f06fac24a4474d67a17b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade1a301c9db16670334fa3fe4488a8c1" id="r_ade1a301c9db16670334fa3fe4488a8c1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ade1a301c9db16670334fa3fe4488a8c1">operator&gt;</a> (float a, <a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a> b)</td></tr>
+<tr class="separator:ade1a301c9db16670334fa3fe4488a8c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad664e8d8843e84fe0349d4a55c91256a" id="r_ad664e8d8843e84fe0349d4a55c91256a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ad664e8d8843e84fe0349d4a55c91256a">operator&gt;=</a> (float a, <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> b)</td></tr>
 <tr class="separator:ad664e8d8843e84fe0349d4a55c91256a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e70a7bb4d5be8bd58ff75f350ab582d" id="r_a5e70a7bb4d5be8bd58ff75f350ab582d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a5e70a7bb4d5be8bd58ff75f350ab582d">operator&gt;=</a> (float a, <a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a> b)</td></tr>
+<tr class="separator:a5e70a7bb4d5be8bd58ff75f350ab582d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9fab86a2636e4b6480fe9a45f45fff88" id="r_a9fab86a2636e4b6480fe9a45f45fff88"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a9fab86a2636e4b6480fe9a45f45fff88">pinMode</a> (<a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> pin, int mode)</td></tr>
 <tr class="separator:a9fab86a2636e4b6480fe9a45f45fff88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87b4772f542c8ab3559ee73d4f29cc34" id="r_a87b4772f542c8ab3559ee73d4f29cc34"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
@@ -6001,7 +6024,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="a7003387e44fc36bcb1ba512a80c3f1b4" name="a7003387e44fc36bcb1ba512a80c3f1b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7003387e44fc36bcb1ba512a80c3f1b4">&#9670;&#160;</a></span>operator!=() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7003387e44fc36bcb1ba512a80c3f1b4">&#9670;&#160;</a></span>operator!=() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -6039,7 +6062,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="a89dba7db9b107dbb6a00b76977f2f06b" name="a89dba7db9b107dbb6a00b76977f2f06b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a89dba7db9b107dbb6a00b76977f2f06b">&#9670;&#160;</a></span>operator!=() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a89dba7db9b107dbb6a00b76977f2f06b">&#9670;&#160;</a></span>operator!=() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -6074,8 +6097,44 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="ac180cc745eb857402fafa9ac30b3d81b" name="ac180cc745eb857402fafa9ac30b3d81b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac180cc745eb857402fafa9ac30b3d81b">&#9670;&#160;</a></span>operator!=() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool operator!= </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a>&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a7c532e435e81cc4d6bdf4e07291661dd" name="a7c532e435e81cc4d6bdf4e07291661dd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7c532e435e81cc4d6bdf4e07291661dd">&#9670;&#160;</a></span>operator*() <span class="overload">[1/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c532e435e81cc4d6bdf4e07291661dd">&#9670;&#160;</a></span>operator*() <span class="overload">[1/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -6110,8 +6169,44 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="ac1dcdbd28e545007f53dbedf69eb054d" name="ac1dcdbd28e545007f53dbedf69eb054d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1dcdbd28e545007f53dbedf69eb054d">&#9670;&#160;</a></span>operator*() <span class="overload">[2/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a> operator* </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a>&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a0fffcee56d421648fc2c343a6aedd1fc" name="a0fffcee56d421648fc2c343a6aedd1fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0fffcee56d421648fc2c343a6aedd1fc">&#9670;&#160;</a></span>operator*() <span class="overload">[2/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fffcee56d421648fc2c343a6aedd1fc">&#9670;&#160;</a></span>operator*() <span class="overload">[3/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -6147,7 +6242,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="a70d5b5d7e18fb2f08940c7f0bbc142c6" name="a70d5b5d7e18fb2f08940c7f0bbc142c6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a70d5b5d7e18fb2f08940c7f0bbc142c6">&#9670;&#160;</a></span>operator*() <span class="overload">[3/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a70d5b5d7e18fb2f08940c7f0bbc142c6">&#9670;&#160;</a></span>operator*() <span class="overload">[4/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -6183,7 +6278,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="a33ef97ba5fb5b11b777bbf313db49495" name="a33ef97ba5fb5b11b777bbf313db49495"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a33ef97ba5fb5b11b777bbf313db49495">&#9670;&#160;</a></span>operator*() <span class="overload">[4/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a33ef97ba5fb5b11b777bbf313db49495">&#9670;&#160;</a></span>operator*() <span class="overload">[5/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -6219,7 +6314,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="af95702bc50c7b9300774623766a9ba30" name="af95702bc50c7b9300774623766a9ba30"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af95702bc50c7b9300774623766a9ba30">&#9670;&#160;</a></span>operator*() <span class="overload">[5/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af95702bc50c7b9300774623766a9ba30">&#9670;&#160;</a></span>operator*() <span class="overload">[6/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -6255,7 +6350,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="a6b61daa649b20c2c1f3cc67e8e220804" name="a6b61daa649b20c2c1f3cc67e8e220804"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6b61daa649b20c2c1f3cc67e8e220804">&#9670;&#160;</a></span>operator*() <span class="overload">[6/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b61daa649b20c2c1f3cc67e8e220804">&#9670;&#160;</a></span>operator*() <span class="overload">[7/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -6291,7 +6386,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="a3d663f50d79f9b03abdbfb5796e78b65" name="a3d663f50d79f9b03abdbfb5796e78b65"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3d663f50d79f9b03abdbfb5796e78b65">&#9670;&#160;</a></span>operator*() <span class="overload">[7/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d663f50d79f9b03abdbfb5796e78b65">&#9670;&#160;</a></span>operator*() <span class="overload">[8/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -6327,7 +6422,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="adda705d96f7778b579d1f5e509b8f632" name="adda705d96f7778b579d1f5e509b8f632"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adda705d96f7778b579d1f5e509b8f632">&#9670;&#160;</a></span>operator+() <span class="overload">[1/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#adda705d96f7778b579d1f5e509b8f632">&#9670;&#160;</a></span>operator+() <span class="overload">[1/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -6362,8 +6457,44 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="a87e8cf0b6a707ad8b2f429c4a499ce7a" name="a87e8cf0b6a707ad8b2f429c4a499ce7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87e8cf0b6a707ad8b2f429c4a499ce7a">&#9670;&#160;</a></span>operator+() <span class="overload">[2/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a> operator+ </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a>&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a9828abb47eae042ea662a93664d0cfd6" name="a9828abb47eae042ea662a93664d0cfd6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9828abb47eae042ea662a93664d0cfd6">&#9670;&#160;</a></span>operator+() <span class="overload">[2/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9828abb47eae042ea662a93664d0cfd6">&#9670;&#160;</a></span>operator+() <span class="overload">[3/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -6399,7 +6530,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="a0ead404fd2121896489d7c04d5743c95" name="a0ead404fd2121896489d7c04d5743c95"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0ead404fd2121896489d7c04d5743c95">&#9670;&#160;</a></span>operator+() <span class="overload">[3/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ead404fd2121896489d7c04d5743c95">&#9670;&#160;</a></span>operator+() <span class="overload">[4/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -6435,7 +6566,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="ac31a3d3bd150ec16875c8f2ed70e2291" name="ac31a3d3bd150ec16875c8f2ed70e2291"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac31a3d3bd150ec16875c8f2ed70e2291">&#9670;&#160;</a></span>operator+() <span class="overload">[4/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac31a3d3bd150ec16875c8f2ed70e2291">&#9670;&#160;</a></span>operator+() <span class="overload">[5/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -6471,7 +6602,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="a476867ace844db5ad537e9026c0829d7" name="a476867ace844db5ad537e9026c0829d7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a476867ace844db5ad537e9026c0829d7">&#9670;&#160;</a></span>operator+() <span class="overload">[5/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a476867ace844db5ad537e9026c0829d7">&#9670;&#160;</a></span>operator+() <span class="overload">[6/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -6507,7 +6638,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="ae8f808d5f83f73e950af46bed5e875dd" name="ae8f808d5f83f73e950af46bed5e875dd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae8f808d5f83f73e950af46bed5e875dd">&#9670;&#160;</a></span>operator+() <span class="overload">[6/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8f808d5f83f73e950af46bed5e875dd">&#9670;&#160;</a></span>operator+() <span class="overload">[7/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -6543,7 +6674,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="aa729503ff1a0651114410b7696ef7bc4" name="aa729503ff1a0651114410b7696ef7bc4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa729503ff1a0651114410b7696ef7bc4">&#9670;&#160;</a></span>operator+() <span class="overload">[7/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa729503ff1a0651114410b7696ef7bc4">&#9670;&#160;</a></span>operator+() <span class="overload">[8/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -6579,7 +6710,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="a08d3374716445392e525a6caa6ed4acd" name="a08d3374716445392e525a6caa6ed4acd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a08d3374716445392e525a6caa6ed4acd">&#9670;&#160;</a></span>operator-() <span class="overload">[1/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a08d3374716445392e525a6caa6ed4acd">&#9670;&#160;</a></span>operator-() <span class="overload">[1/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -6614,8 +6745,44 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="a5930bcba0d4cfbbb6b1550482aa134c8" name="a5930bcba0d4cfbbb6b1550482aa134c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5930bcba0d4cfbbb6b1550482aa134c8">&#9670;&#160;</a></span>operator-() <span class="overload">[2/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a> operator- </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a>&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a43df323ec732265452702fa83c1895fb" name="a43df323ec732265452702fa83c1895fb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a43df323ec732265452702fa83c1895fb">&#9670;&#160;</a></span>operator-() <span class="overload">[2/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a43df323ec732265452702fa83c1895fb">&#9670;&#160;</a></span>operator-() <span class="overload">[3/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -6651,7 +6818,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="ad32122724ec8d9d5d653acd48337b992" name="ad32122724ec8d9d5d653acd48337b992"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad32122724ec8d9d5d653acd48337b992">&#9670;&#160;</a></span>operator-() <span class="overload">[3/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad32122724ec8d9d5d653acd48337b992">&#9670;&#160;</a></span>operator-() <span class="overload">[4/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -6687,7 +6854,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="a947253b232a604073404409f0dac65af" name="a947253b232a604073404409f0dac65af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a947253b232a604073404409f0dac65af">&#9670;&#160;</a></span>operator-() <span class="overload">[4/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a947253b232a604073404409f0dac65af">&#9670;&#160;</a></span>operator-() <span class="overload">[5/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -6723,7 +6890,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="ac3d178134e9aa5689cfecd1e8aa3e37c" name="ac3d178134e9aa5689cfecd1e8aa3e37c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac3d178134e9aa5689cfecd1e8aa3e37c">&#9670;&#160;</a></span>operator-() <span class="overload">[5/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3d178134e9aa5689cfecd1e8aa3e37c">&#9670;&#160;</a></span>operator-() <span class="overload">[6/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -6759,7 +6926,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="adb8c239eb8e65395bc913aab110be937" name="adb8c239eb8e65395bc913aab110be937"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adb8c239eb8e65395bc913aab110be937">&#9670;&#160;</a></span>operator-() <span class="overload">[6/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#adb8c239eb8e65395bc913aab110be937">&#9670;&#160;</a></span>operator-() <span class="overload">[7/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -6795,7 +6962,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="a1df2813cb4f6f8b8a79cdcb57c19e27b" name="a1df2813cb4f6f8b8a79cdcb57c19e27b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1df2813cb4f6f8b8a79cdcb57c19e27b">&#9670;&#160;</a></span>operator-() <span class="overload">[7/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1df2813cb4f6f8b8a79cdcb57c19e27b">&#9670;&#160;</a></span>operator-() <span class="overload">[8/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -6831,7 +6998,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="ad54ca1933a6acafd6125692489ae51fa" name="ad54ca1933a6acafd6125692489ae51fa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad54ca1933a6acafd6125692489ae51fa">&#9670;&#160;</a></span>operator/() <span class="overload">[1/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad54ca1933a6acafd6125692489ae51fa">&#9670;&#160;</a></span>operator/() <span class="overload">[1/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -6866,8 +7033,44 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="ac7646775551d19d6c9f3360301530ba6" name="ac7646775551d19d6c9f3360301530ba6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7646775551d19d6c9f3360301530ba6">&#9670;&#160;</a></span>operator/() <span class="overload">[2/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a> operator/ </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a>&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a03f13592adfc482d0e7f64ebaddc1c21" name="a03f13592adfc482d0e7f64ebaddc1c21"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a03f13592adfc482d0e7f64ebaddc1c21">&#9670;&#160;</a></span>operator/() <span class="overload">[2/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a03f13592adfc482d0e7f64ebaddc1c21">&#9670;&#160;</a></span>operator/() <span class="overload">[3/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -6903,7 +7106,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="abb664ebaf74c24c61e72bbd12ac461e4" name="abb664ebaf74c24c61e72bbd12ac461e4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abb664ebaf74c24c61e72bbd12ac461e4">&#9670;&#160;</a></span>operator/() <span class="overload">[3/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abb664ebaf74c24c61e72bbd12ac461e4">&#9670;&#160;</a></span>operator/() <span class="overload">[4/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -6939,7 +7142,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="a6ce148cd8bfa97bfbfba5f94ce486319" name="a6ce148cd8bfa97bfbfba5f94ce486319"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6ce148cd8bfa97bfbfba5f94ce486319">&#9670;&#160;</a></span>operator/() <span class="overload">[4/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ce148cd8bfa97bfbfba5f94ce486319">&#9670;&#160;</a></span>operator/() <span class="overload">[5/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -6975,7 +7178,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="a7953402cf810a326790ec4ef16e9d6f7" name="a7953402cf810a326790ec4ef16e9d6f7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7953402cf810a326790ec4ef16e9d6f7">&#9670;&#160;</a></span>operator/() <span class="overload">[5/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7953402cf810a326790ec4ef16e9d6f7">&#9670;&#160;</a></span>operator/() <span class="overload">[6/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -7011,7 +7214,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="a673eb899804fa930d22f79951468425f" name="a673eb899804fa930d22f79951468425f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a673eb899804fa930d22f79951468425f">&#9670;&#160;</a></span>operator/() <span class="overload">[6/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a673eb899804fa930d22f79951468425f">&#9670;&#160;</a></span>operator/() <span class="overload">[7/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -7047,7 +7250,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="adfc51c5353d8125c51e8c4f3239c2dc8" name="adfc51c5353d8125c51e8c4f3239c2dc8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adfc51c5353d8125c51e8c4f3239c2dc8">&#9670;&#160;</a></span>operator/() <span class="overload">[7/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#adfc51c5353d8125c51e8c4f3239c2dc8">&#9670;&#160;</a></span>operator/() <span class="overload">[8/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -7083,7 +7286,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="a93569d1f3db46326b52e0400fa4e761a" name="a93569d1f3db46326b52e0400fa4e761a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a93569d1f3db46326b52e0400fa4e761a">&#9670;&#160;</a></span>operator&lt;()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a93569d1f3db46326b52e0400fa4e761a">&#9670;&#160;</a></span>operator&lt;() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -7118,8 +7321,44 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="a5ae2bbe0cfcf4b67ec5618c13fcc3c84" name="a5ae2bbe0cfcf4b67ec5618c13fcc3c84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ae2bbe0cfcf4b67ec5618c13fcc3c84">&#9670;&#160;</a></span>operator&lt;() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool operator&lt; </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a>&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a6a55e153ec347255bf19d8e5dfab7ed3" name="a6a55e153ec347255bf19d8e5dfab7ed3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6a55e153ec347255bf19d8e5dfab7ed3">&#9670;&#160;</a></span>operator&lt;=()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a55e153ec347255bf19d8e5dfab7ed3">&#9670;&#160;</a></span>operator&lt;=() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -7154,8 +7393,44 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="af71ff5828b0be927e226b1b4fdf944a3" name="af71ff5828b0be927e226b1b4fdf944a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af71ff5828b0be927e226b1b4fdf944a3">&#9670;&#160;</a></span>operator&lt;=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool operator&lt;= </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a>&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ac8f98106c04a5e444b4c0f45746bcf03" name="ac8f98106c04a5e444b4c0f45746bcf03"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac8f98106c04a5e444b4c0f45746bcf03">&#9670;&#160;</a></span>operator==() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8f98106c04a5e444b4c0f45746bcf03">&#9670;&#160;</a></span>operator==() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -7193,7 +7468,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="a12ae44678b579bec3c828dff970fb5d6" name="a12ae44678b579bec3c828dff970fb5d6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a12ae44678b579bec3c828dff970fb5d6">&#9670;&#160;</a></span>operator==() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a12ae44678b579bec3c828dff970fb5d6">&#9670;&#160;</a></span>operator==() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -7228,8 +7503,44 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="af753cc3f9aaeb323abf21c763d87fbfd" name="af753cc3f9aaeb323abf21c763d87fbfd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af753cc3f9aaeb323abf21c763d87fbfd">&#9670;&#160;</a></span>operator==() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool operator== </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a>&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a868bd8eedc1f06fac24a4474d67a17b7" name="a868bd8eedc1f06fac24a4474d67a17b7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a868bd8eedc1f06fac24a4474d67a17b7">&#9670;&#160;</a></span>operator&gt;()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a868bd8eedc1f06fac24a4474d67a17b7">&#9670;&#160;</a></span>operator&gt;() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -7264,8 +7575,44 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="ade1a301c9db16670334fa3fe4488a8c1" name="ade1a301c9db16670334fa3fe4488a8c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade1a301c9db16670334fa3fe4488a8c1">&#9670;&#160;</a></span>operator&gt;() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool operator&gt; </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a>&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ad664e8d8843e84fe0349d4a55c91256a" name="ad664e8d8843e84fe0349d4a55c91256a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad664e8d8843e84fe0349d4a55c91256a">&#9670;&#160;</a></span>operator&gt;=()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad664e8d8843e84fe0349d4a55c91256a">&#9670;&#160;</a></span>operator&gt;=() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -7283,6 +7630,42 @@ template&lt;typename T &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5e70a7bb4d5be8bd58ff75f350ab582d" name="a5e70a7bb4d5be8bd58ff75f350ab582d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e70a7bb4d5be8bd58ff75f350ab582d">&#9670;&#160;</a></span>operator&gt;=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool operator&gt;= </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a>&#160;</td>
           <td class="paramname"><em>b</em>&#160;</td>
         </tr>
         <tr>
