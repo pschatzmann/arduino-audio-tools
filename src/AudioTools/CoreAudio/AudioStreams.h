@@ -1429,7 +1429,7 @@ class InputMixer : public AudioStream {
         int samples_eff =
             readSamples(streams[j], current_vect.data(), samples, retry_count);
         if (samples_eff > samples_eff_max) samples_eff_max = samples_eff;
-        resultAdd(gains[j], samples_eff);
+        resultAdd(MixGain<T>(gains[j]), samples_eff);
       }
     }
     // copy result
@@ -1448,10 +1448,10 @@ class InputMixer : public AudioStream {
     return result;
   }
 
-  void resultAdd(float fact, int samples_eff) {
+  void resultAdd(MixGain<T> factor, int samples_eff) {
     // only accumulate samples that were actually read; tail is already zeroed
     for (int j = 0; j < samples_eff; j++) {
-      result_vect[j] += static_cast<SumT>(current_vect[j] * fact);
+      result_vect[j] += static_cast<SumT>(factor.scale(current_vect[j]));
     }
   }
 

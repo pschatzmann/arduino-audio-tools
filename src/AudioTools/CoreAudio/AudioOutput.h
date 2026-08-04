@@ -365,6 +365,48 @@ class HexDumpOutput : public AudioOutput {
  * @copyright GPLv3
  * @tparam T Audio sample data type (e.g., int16_t, int32_t, float)
  */
+
+/**
+ * @brief Applies a normalized [0,1] mixing gain to a full-range sample T,
+ * used by OutputMixer and InputMixer. The default (float) multiply works
+ * for any T, including T=float. Specialized for T=int16_t/int24_t/int32_t
+ * under PREFER_FIXEDPOINT to go through q1_14_t::scale() (integer-only)
+ * instead of a per-sample float multiply -- the same technique used for
+ * VolumeStream's fixed-point volume path.
+ * @ingroup transform
+ */
+template <typename T>
+struct MixGain {
+  float value = 0;
+  MixGain() = default;
+  MixGain(float f) : value(f) {}
+  T scale(T sample) const { return static_cast<T>(value * sample); }
+};
+
+#if PREFER_FIXEDPOINT
+template <>
+struct MixGain<int16_t> {
+  q1_14_t value;
+  MixGain() = default;
+  MixGain(float f) : value(f) {}
+  int16_t scale(int16_t sample) const { return value.scale(sample); }
+};
+template <>
+struct MixGain<int24_t> {
+  q1_14_t value;
+  MixGain() = default;
+  MixGain(float f) : value(f) {}
+  int24_t scale(int24_t sample) const { return value.scale(sample); }
+};
+template <>
+struct MixGain<int32_t> {
+  q1_14_t value;
+  MixGain() = default;
+  MixGain(float f) : value(f) {}
+  int32_t scale(int32_t sample) const { return value.scale(sample); }
+};
+#endif
+
 template <typename T = int16_t>
 class OutputMixer : public Print {
  public:
@@ -631,11 +673,11 @@ class OutputMixer : public Print {
     output.resize(samples);
     memset(output.data(), 0, samples * sizeof(T));
     for (int j = 0; j < output_count; j++) {
-      float factor = weights[j] / total_weights;
+      MixGain<T> factor(weights[j] / total_weights);
       for (int i = 0; i < samples; i++) {
         T sample = 0;
         buffers[j]->read(sample);
-        output[i] += static_cast<T>(factor * sample);
+        output[i] += factor.scale(sample);
       }
     }
 #endif
