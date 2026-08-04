@@ -2,6 +2,7 @@
 #include "AudioToolsConfig.h"
 #include "AudioFilter/Filter.h"
 #include "AudioTools/CoreAudio/AudioBasic/Collections.h"
+#include "AudioTools/CoreAudio/AudioBasic/Q1_14.h"
 #include "AudioTypes.h"
 
 /**
@@ -1682,6 +1683,49 @@ class Converter1Channel : public BaseConverter {
 };
 
 /**
+ * @brief Converts a raw sample (type T) to/from a filter's arithmetic type
+ * (FT) for ConverterNChannels. The default just casts the raw sample
+ * straight through -- this matches the traditional convention used here,
+ * where FT=float and filter coefficients are calibrated against the
+ * sample's raw magnitude (e.g. up to +-32767 for 16-bit audio), so no
+ * rescaling is wanted. Specialized below for FT=q1_14_t, whose bounded
+ * ~[-2,2) range means a plain (q1_14_t)sample cast would misinterpret the
+ * raw PCM magnitude as a literal Q1.14 value and saturate almost
+ * immediately; q1_14_t::fromIntNN()/toIntNN() do the correct bit-shift
+ * scaling instead.
+ * @ingroup convert
+ */
+template <typename T, typename FT>
+struct FilterSampleConverter {
+  static FT toFilterType(T sample) { return (FT)sample; }
+  static T fromFilterType(FT value) { return (T)value; }
+};
+
+template <>
+struct FilterSampleConverter<int16_t, q1_14_t> {
+  static q1_14_t toFilterType(int16_t sample) {
+    return q1_14_t::fromInt16(sample);
+  }
+  static int16_t fromFilterType(q1_14_t value) { return value.toInt16(); }
+};
+
+template <>
+struct FilterSampleConverter<int24_t, q1_14_t> {
+  static q1_14_t toFilterType(int24_t sample) {
+    return q1_14_t::fromInt24(sample);
+  }
+  static int24_t fromFilterType(q1_14_t value) { return value.toInt24(); }
+};
+
+template <>
+struct FilterSampleConverter<int32_t, q1_14_t> {
+  static q1_14_t toFilterType(int32_t sample) {
+    return q1_14_t::fromInt32(sample);
+  }
+  static int32_t fromFilterType(q1_14_t value) { return value.toInt32(); }
+};
+
+/**
  * @brief Converter for n Channels which applies the indicated Filter
  * @ingroup convert
  * @author pschatzmann
@@ -1723,7 +1767,9 @@ class ConverterNChannels : public BaseConverter {
     for (size_t j = 0; j < count; j++) {
       for (int channel = 0; channel < channels; channel++) {
         if (filters[channel] != nullptr) {
-          *sample = filters[channel]->process(*sample);
+          FT in = FilterSampleConverter<T, FT>::toFilterType(*sample);
+          FT out = filters[channel]->process(in);
+          *sample = FilterSampleConverter<T, FT>::fromFilterType(out);
         }
         sample++;
       }

@@ -256,7 +256,14 @@ class VolumeStream : public ModifyingStream, public VolumeSupport {
             Vector<float> factor_for_channel;
         #endif
         bool is_started = false;
-        float max_value = 32767; // max value for clipping
+        // max value for clipping: integer on the fixed-point path, so the
+        // per-sample clip in applyVolume16/24/32 stays pure-integer instead
+        // of promoting the int32_t/int64_t result to float on every sample.
+        #if PREFER_FIXEDPOINT
+            int64_t max_value = 32767;
+        #else
+            float max_value = 32767;
+        #endif
 
         // checks if volume needs to be updated
         bool isVolumeUpdate(){
