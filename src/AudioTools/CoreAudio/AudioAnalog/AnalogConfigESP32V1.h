@@ -7,8 +7,17 @@
 #include "esp_adc/adc_cali_scheme.h"
 #include "esp_adc/adc_continuous.h"
 #ifdef ARDUINO
-#include "esp32-hal-periman.h"
+#  include "esp32-hal-periman.h"
 #endif
+
+// Not available in IDF 6.2 any more
+#ifndef SOC_ADC_SAMPLE_FREQ_THRES_HIGH
+#  define SOC_ADC_SAMPLE_FREQ_THRES_HIGH          (2000000)
+#endif
+#ifndef SOC_ADC_SAMPLE_FREQ_THRES_LOW
+#  define SOC_ADC_SAMPLE_FREQ_THRES_LOW           (20000)
+#endif
+
 
 #if CONFIG_IDF_TARGET_ESP32
 #define ADC_CONV_MODE ADC_CONV_SINGLE_UNIT_1
