@@ -3,6 +3,7 @@
 #include "AudioTools/CoreAudio/AudioStreams.h"
 #include "AudioTools/CoreAudio/AudioOutput.h"
 #include "AudioTools/CoreAudio/VolumeControl.h"
+#include "AudioTools/CoreAudio/AudioBasic/Q1_14.h"
 #include "AudioTools/CoreAudio/AudioTypes.h"
 
 namespace audio_tools {
@@ -209,11 +210,9 @@ class VolumeStream : public ModifyingStream, public VolumeSupport {
                 float factor = volumeControl().getVolumeFactor(volume_value);
                 volume_values[channel]=volume_value;
                 #if PREFER_FIXEDPOINT
-                    //convert float to fixed point 2.6
-                    //Fixedpoint-Math from https://github.com/earlephilhower/ESP8266Audio/blob/0abcf71012f6128d52a6bcd155ed1404d6cc6dcd/src/AudioOutput.h#L67
-                    if(factor > 4.0) factor = 4.0;//factor can only be >1 if allow_boost == true TODO: should we update volume_values[channel] if factor got clipped to 4.0?
-                    uint8_t factorF2P6 = (uint8_t) (factor*(1<<6));
-                    factor_for_channel[channel] = factorF2P6;
+                    // q1_14_t saturates at ~1.99994 (its Q1.14 range), so boost
+                    // is capped there (factor can only be >1 if allow_boost==true)
+                    factor_for_channel[channel] = q1_14_t(factor);
                 #else
                     factor_for_channel[channel]=factor;
                 #endif
@@ -252,7 +251,7 @@ class VolumeStream : public ModifyingStream, public VolumeSupport {
         CachedVolumeControl cached_volume{pot_vc};
         Vector<float> volume_values;
         #if PREFER_FIXEDPOINT
-            Vector<uint8_t> factor_for_channel; //Fixed point 2.6
+            Vector<q1_14_t> factor_for_channel; // Q1.14 fixed point
         #else
             Vector<float> factor_for_channel;
         #endif
@@ -313,7 +312,7 @@ class VolumeStream : public ModifyingStream, public VolumeSupport {
         }
 
         #if PREFER_FIXEDPOINT
-        uint8_t factorForChannel(int channel){
+        q1_14_t factorForChannel(int channel){
         #else
         float factorForChannel(int channel){
         #endif
@@ -341,7 +340,7 @@ class VolumeStream : public ModifyingStream, public VolumeSupport {
         void applyVolume16(int16_t* data, size_t size){
             for (size_t j=0;j<size;j++){
                 #if PREFER_FIXEDPOINT
-                int32_t result = (data[j] * factorForChannel(j%info.channels)) >> 6; //Fixedpoint-Math from https://github.com/earlephilhower/ESP8266Audio/blob/0abcf71012f6128d52a6bcd155ed1404d6cc6dcd/src/AudioOutput.h#L67
+                int32_t result = factorForChannel(j%info.channels).scale(data[j]);
                 #else
                 float result = factorForChannel(j%info.channels) * data[j];
                 #endif
@@ -356,7 +355,7 @@ class VolumeStream : public ModifyingStream, public VolumeSupport {
         void applyVolume24(int24_t* data, size_t size) {
             for (size_t j=0;j<size;j++){
                 #if PREFER_FIXEDPOINT
-                int32_t result = (data[j] * factorForChannel(j%info.channels)) >> 6; //8bits * 24bits = fits into 32
+                int32_t result = factorForChannel(j%info.channels).scale(data[j]);
                 #else
                 float result = factorForChannel(j%info.channels) * data[j];
                 #endif
@@ -372,7 +371,7 @@ class VolumeStream : public ModifyingStream, public VolumeSupport {
         void applyVolume32(int32_t* data, size_t size) {
             for (size_t j=0;j<size;j++){
                 #if PREFER_FIXEDPOINT
-                int64_t result = (static_cast<int64_t>(data[j]) * static_cast<int64_t>(factorForChannel(j%info.channels))) >> 6;
+                int64_t result = factorForChannel(j%info.channels).scale(data[j]);
                 #else
                 float result = factorForChannel(j%info.channels) * data[j];
                 #endif

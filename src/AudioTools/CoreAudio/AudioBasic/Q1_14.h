@@ -75,6 +75,26 @@ class q1_14_t {
   /// builds a q1_14_t from a 32-bit PCM sample (-2147483648..2147483647)
   static q1_14_t fromInt32(int32_t sample) { return fromRaw((int16_t)(sample >> 17)); }
 
+  // Applies this Q1.14 value as a gain/volume factor to a full-scale PCM
+  // sample (sample * factor), clipping on overflow -- integer-only, no FPU
+  // needed. Unlike operator*, the sample here is NOT itself Q1.14-scaled.
+
+  /// scales a 16-bit PCM sample by this Q1.14 factor
+  int16_t scale(int16_t sample) const {
+    int32_t prod = ((int32_t)sample * value) >> kFractionalBits;
+    return (int16_t)clampRange32(prod, -32768, 32767);
+  }
+  /// scales a 24-bit PCM sample by this Q1.14 factor
+  int24_t scale(int24_t sample) const {
+    int64_t prod = ((int64_t)(int32_t)sample * value) >> kFractionalBits;
+    return (int32_t)clampRange64(prod, -8388608, 8388607);
+  }
+  /// scales a 32-bit PCM sample by this Q1.14 factor
+  int32_t scale(int32_t sample) const {
+    int64_t prod = ((int64_t)sample * value) >> kFractionalBits;
+    return (int32_t)clampRange64(prod, INT32_MIN, INT32_MAX);
+  }
+
   q1_14_t operator+(q1_14_t o) const {
     return fromRaw(clamp((int32_t)value + o.value));
   }
