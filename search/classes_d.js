@@ -14,12 +14,13 @@ var searchData=
   ['nointerrupthandler_11',['NoInterruptHandler',['../classaudio__tools_1_1_no_interrupt_handler.html',1,'audio_tools']]],
   ['nopconverter_12',['NOPConverter',['../classaudio__tools_1_1_n_o_p_converter.html',1,'audio_tools']]],
   ['notchfilter_13',['NotchFilter',['../classaudio__tools_1_1_notch_filter.html',1,'audio_tools']]],
-  ['nrf24config_14',['NRF24Config',['../structaudio__tools_1_1_n_r_f24_config.html',1,'audio_tools']]],
-  ['nrf24stream_15',['NRF24Stream',['../classaudio__tools_1_1_n_r_f24_stream.html',1,'audio_tools']]],
-  ['nullstream_16',['NullStream',['../classaudio__tools_1_1_null_stream.html',1,'audio_tools']]],
-  ['numberconverter_17',['NumberConverter',['../classaudio__tools_1_1_number_converter.html',1,'audio_tools']]],
-  ['numberformatconverterstream_18',['NumberFormatConverterStream',['../classaudio__tools_1_1_number_format_converter_stream.html',1,'audio_tools']]],
-  ['numberformatconverterstreamt_19',['NumberFormatConverterStreamT',['../classaudio__tools_1_1_number_format_converter_stream_t.html',1,'audio_tools']]],
-  ['numberreader_20',['NumberReader',['../classaudio__tools_1_1_number_reader.html',1,'audio_tools']]],
-  ['nuttall_21',['Nuttall',['../classaudio__tools_1_1_nuttall.html',1,'audio_tools']]]
+  ['notchfilterdf1_14',['NotchFilterDF1',['../classaudio__tools_1_1_notch_filter_d_f1.html',1,'audio_tools']]],
+  ['nrf24config_15',['NRF24Config',['../structaudio__tools_1_1_n_r_f24_config.html',1,'audio_tools']]],
+  ['nrf24stream_16',['NRF24Stream',['../classaudio__tools_1_1_n_r_f24_stream.html',1,'audio_tools']]],
+  ['nullstream_17',['NullStream',['../classaudio__tools_1_1_null_stream.html',1,'audio_tools']]],
+  ['numberconverter_18',['NumberConverter',['../classaudio__tools_1_1_number_converter.html',1,'audio_tools']]],
+  ['numberformatconverterstream_19',['NumberFormatConverterStream',['../classaudio__tools_1_1_number_format_converter_stream.html',1,'audio_tools']]],
+  ['numberformatconverterstreamt_20',['NumberFormatConverterStreamT',['../classaudio__tools_1_1_number_format_converter_stream_t.html',1,'audio_tools']]],
+  ['numberreader_21',['NumberReader',['../classaudio__tools_1_1_number_reader.html',1,'audio_tools']]],
+  ['nuttall_22',['Nuttall',['../classaudio__tools_1_1_nuttall.html',1,'audio_tools']]]
 ];

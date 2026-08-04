@@ -84,6 +84,7 @@ $(function() {
 <div class="textblock"><code>#include &quot;<a class="el" href="_audio_tools_config_8h_source.html">AudioToolsConfig.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_filter_8h_source.html">AudioFilter/Filter.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_collections_8h_source.html">AudioTools/CoreAudio/AudioBasic/Collections.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_q1__14_8h_source.html">AudioTools/CoreAudio/AudioBasic/Q1_14.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_audio_types_8h_source.html">AudioTypes.h</a>&quot;</code><br />
 </div>
 <p><a href="_base_converter_8h_source.html">Go to the source code of this file.</a></p>
@@ -191,6 +192,15 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_decimate_t.html">DecimateT&lt; T &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides reduced sampling rates.  <a href="classaudio__tools_1_1_decimate_t.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_filter_sample_converter.html">FilterSampleConverter&lt; T, FT &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a raw sample (type T) to/from a filter's arithmetic type (FT) for <a class="el" href="classaudio__tools_1_1_converter_n_channels.html" title="Converter for n Channels which applies the indicated Filter.">ConverterNChannels</a>. The default just casts the raw sample straight through &ndash; this matches the traditional convention used here, where FT=float and filter coefficients are calibrated against the sample's raw magnitude (e.g. up to +-32767 for 16-bit audio), so no rescaling is wanted. Specialized below for FT=<a class="el" href="classaudio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a>, whose bounded ~[-2,2) range means a plain (<a class="el" href="classaudio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a>)sample cast would misinterpret the raw PCM magnitude as a literal Q1.14 value and saturate almost immediately; q1_14_t::fromIntNN()/toIntNN() do the correct bit-shift scaling instead.  <a href="structaudio__tools_1_1_filter_sample_converter.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_filter_sample_converter_3_01int16__t_00_01q1__14__t_01_4.html">FilterSampleConverter&lt; int16_t, q1_14_t &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_filter_sample_converter_3_01int24__t_00_01q1__14__t_01_4.html">FilterSampleConverter&lt; int24_t, q1_14_t &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_filter_sample_converter_3_01int32__t_00_01q1__14__t_01_4.html">FilterSampleConverter&lt; int32_t, q1_14_t &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_converter.html">MultiConverter&lt; T &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Combines multiple converters.  <a href="classaudio__tools_1_1_multi_converter.html#details">More...</a><br /></td></tr>

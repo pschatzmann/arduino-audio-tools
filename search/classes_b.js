@@ -27,5 +27,7 @@ var searchData=
   ['logarithmicvolumecontrol_24',['LogarithmicVolumeControl',['../classaudio__tools_1_1_logarithmic_volume_control.html',1,'audio_tools']]],
   ['lowpassfilter_25',['LowPassFilter',['../classaudio__tools_1_1_low_pass_filter.html',1,'audio_tools']]],
   ['lowpassfilter_3c_20float_20_3e_26',['LowPassFilter&lt; float &gt;',['../classaudio__tools_1_1_low_pass_filter.html',1,'audio_tools']]],
-  ['lowshelffilter_27',['LowShelfFilter',['../classaudio__tools_1_1_low_shelf_filter.html',1,'audio_tools']]]
+  ['lowpassfilterdf1_27',['LowPassFilterDF1',['../classaudio__tools_1_1_low_pass_filter_d_f1.html',1,'audio_tools']]],
+  ['lowshelffilter_28',['LowShelfFilter',['../classaudio__tools_1_1_low_shelf_filter.html',1,'audio_tools']]],
+  ['lowshelffilterdf1_29',['LowShelfFilterDF1',['../classaudio__tools_1_1_low_shelf_filter_d_f1.html',1,'audio_tools']]]
 ];

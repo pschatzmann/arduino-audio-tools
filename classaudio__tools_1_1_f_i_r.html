@@ -75,6 +75,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="classaudio__tools_1_1_f_i_r-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">FIR&lt; T &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__dsp.html">DSP</a> &raquo; <a class="el" href="group__filter.html">Filters</a></div></div></div>
 </div><!--header-->
@@ -96,9 +97,10 @@ Inheritance diagram for FIR&lt; T &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a5f5bc421d5475afeb10b91936d84ae2e" id="r_a5f5bc421d5475afeb10b91936d84ae2e"><td class="memTemplParams" colspan="2">template&lt;size_t B&gt; </td></tr>
-<tr class="memitem:a5f5bc421d5475afeb10b91936d84ae2e"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_i_r.html#a5f5bc421d5475afeb10b91936d84ae2e">FIR</a> (const T(&amp;b)[<a class="el" href="group__basic.html#gga5b1869d184b84711842bfe4f25433338a9d5ed678fe57bcca610140957afab571">B</a>], const T factor=1.0)</td></tr>
-<tr class="separator:a5f5bc421d5475afeb10b91936d84ae2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35179d6733bbaf991f1fac852f506124" id="r_a35179d6733bbaf991f1fac852f506124"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_i_r.html#a35179d6733bbaf991f1fac852f506124">factor</a> (factor)</td></tr>
+<tr class="separator:a35179d6733bbaf991f1fac852f506124"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8615c701bb232e99b544e11cc16a9a41" id="r_a8615c701bb232e99b544e11cc16a9a41"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_i_r.html#a8615c701bb232e99b544e11cc16a9a41">needs_divide</a> (factor !=T(1))</td></tr>
+<tr class="separator:a8615c701bb232e99b544e11cc16a9a41"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a048b29c6a000503a52c293e8fd973847" id="r_a048b29c6a000503a52c293e8fd973847"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_i_r.html#a048b29c6a000503a52c293e8fd973847">process</a> (T value) override</td></tr>
 <tr class="memdesc:a048b29c6a000503a52c293e8fd973847"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes the input value and returns the filtered output value.  <br /></td></tr>
 <tr class="separator:a048b29c6a000503a52c293e8fd973847"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -107,6 +109,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5226f180d75240258d4ff103e2970127" id="r_a5226f180d75240258d4ff103e2970127"><td class="memTemplParams" colspan="2">template&lt;size_t B&gt; </td></tr>
 <tr class="memitem:a5226f180d75240258d4ff103e2970127"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_i_r.html#a5226f180d75240258d4ff103e2970127">setValues</a> (const T(&amp;b)[<a class="el" href="group__basic.html#gga5b1869d184b84711842bfe4f25433338a9d5ed678fe57bcca610140957afab571">B</a>])</td></tr>
 <tr class="separator:a5226f180d75240258d4ff103e2970127"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:abc6b242cdba6a964a9aad25bcb3cf57c" id="r_abc6b242cdba6a964a9aad25bcb3cf57c"><td class="memTemplParams" colspan="2">template&lt;size_t B&gt; </td></tr>
+<tr class="memitem:abc6b242cdba6a964a9aad25bcb3cf57c"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom">: lenB(<a class="el" href="group__basic.html#gga5b1869d184b84711842bfe4f25433338a9d5ed678fe57bcca610140957afab571">B</a>)</td></tr>
+<tr class="separator:abc6b242cdba6a964a9aad25bcb3cf57c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T = float&gt;<br />
@@ -119,36 +127,44 @@ class audio_tools::FIR&lt; T &gt;</div><p>Finite Impulse Response (<a class="el"
   </table>
   </dd>
 </dl>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a5f5bc421d5475afeb10b91936d84ae2e" name="a5f5bc421d5475afeb10b91936d84ae2e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5f5bc421d5475afeb10b91936d84ae2e">&#9670;&#160;</a></span>FIR()</h2>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a35179d6733bbaf991f1fac852f506124" name="a35179d6733bbaf991f1fac852f506124"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35179d6733bbaf991f1fac852f506124">&#9670;&#160;</a></span>factor()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename T  = float&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">factor </td>
+          <td>(</td>
+          <td class="paramtype">factor&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8615c701bb232e99b544e11cc16a9a41" name="a8615c701bb232e99b544e11cc16a9a41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8615c701bb232e99b544e11cc16a9a41">&#9670;&#160;</a></span>needs_divide()</h2>
+
+<div class="memitem">
+<div class="memproto">
 <div class="memtemplate">
-template&lt;size_t B&gt; </div>
+template&lt;typename T  = float&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_f_i_r.html">FIR</a> </td>
+          <td class="memname">needs_divide </td>
           <td>(</td>
-          <td class="paramtype">const T(&amp;)&#160;</td>
-          <td class="paramname"><em>b</em>[B], </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">factor !&#160;</td>
+          <td class="paramname"> = <code>T(1)</code></td><td>)</td>
           <td></td>
-          <td class="paramtype">const T&#160;</td>
-          <td class="paramname"><em>factor</em> = <code>1.0</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -160,7 +176,6 @@ template&lt;size_t B&gt; </div>
 
 </div>
 </div>
-<h2 class="groupheader">Member Function Documentation</h2>
 <a id="a048b29c6a000503a52c293e8fd973847" name="a048b29c6a000503a52c293e8fd973847"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a048b29c6a000503a52c293e8fd973847">&#9670;&#160;</a></span>process()</h2>
 
@@ -249,6 +264,25 @@ template&lt;size_t B&gt; </div>
 <span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="abc6b242cdba6a964a9aad25bcb3cf57c" name="abc6b242cdba6a964a9aad25bcb3cf57c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc6b242cdba6a964a9aad25bcb3cf57c">&#9670;&#160;</a></span>__pad0__</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T  = float&gt; </div>
+<div class="memtemplate">
+template&lt;size_t B&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">__pad0__</td>
+        </tr>
+      </table>
 </div><div class="memdoc">
 
 </div>

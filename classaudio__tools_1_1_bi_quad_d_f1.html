@@ -75,6 +75,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_bi_quad_d_f1-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">BiQuadDF1&lt; T &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__dsp.html">DSP</a> &raquo; <a class="el" href="group__filter.html">Filters</a></div></div></div>
 </div><!--header-->
@@ -90,7 +92,13 @@ Inheritance diagram for BiQuadDF1&lt; T &gt;:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_bi_quad_d_f1.png" usemap="#BiQuadDF1_3C_20T_20_3E_map" alt=""/>
   <map id="BiQuadDF1_3C_20T_20_3E_map" name="BiQuadDF1_3C_20T_20_3E_map">
-<area href="classaudio__tools_1_1_filter.html" title="Abstract filter interface definition. Subclasses implement process() to transform audio samples one a..." alt="Filter&lt; T &gt;" shape="rect" coords="0,0,109,24"/>
+<area href="classaudio__tools_1_1_filter.html" title="Abstract filter interface definition. Subclasses implement process() to transform audio samples one a..." alt="Filter&lt; T &gt;" shape="rect" coords="405,0,557,24"/>
+<area href="classaudio__tools_1_1_band_pass_filter_d_f1.html" title="Second-order band-pass filter (BiQuad DF1). Same coefficients as BandPassFilter; use this (not BandPa..." alt="BandPassFilterDF1&lt; T &gt;" shape="rect" coords="0,112,152,136"/>
+<area href="classaudio__tools_1_1_high_pass_filter_d_f1.html" title="Second-order high-pass filter (BiQuad DF1). Same coefficients as HighPassFilter; use this (not HighPa..." alt="HighPassFilterDF1&lt; T &gt;" shape="rect" coords="162,112,314,136"/>
+<area href="classaudio__tools_1_1_high_shelf_filter_d_f1.html" title="Second-order high-shelf filter (BiQuad DF1). Same coefficients as HighShelfFilter...." alt="HighShelfFilterDF1&lt; T &gt;" shape="rect" coords="324,112,476,136"/>
+<area href="classaudio__tools_1_1_low_pass_filter_d_f1.html" title="Second-order low-pass filter (BiQuad DF1). Same coefficients as LowPassFilter, but built on BiQuadDF1..." alt="LowPassFilterDF1&lt; T &gt;" shape="rect" coords="486,112,638,136"/>
+<area href="classaudio__tools_1_1_low_shelf_filter_d_f1.html" title="Second-order low-shelf filter (BiQuad DF1). Same coefficients as LowShelfFilter. NOTE: switching to D..." alt="LowShelfFilterDF1&lt; T &gt;" shape="rect" coords="648,112,800,136"/>
+<area href="classaudio__tools_1_1_notch_filter_d_f1.html" title="Second-order notch (band-reject) filter (BiQuad DF1). Same coefficients as NotchFilter; use this (not..." alt="NotchFilterDF1&lt; T &gt;" shape="rect" coords="810,112,962,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -109,6 +117,32 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a048b29c6a000503a52c293e8fd973847"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aebfcdbbd0fe4efbff10b180be50ca6bc" id="r_aebfcdbbd0fe4efbff10b180be50ca6bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_bi_quad_d_f1.html#aebfcdbbd0fe4efbff10b180be50ca6bc">reset</a> () override</td></tr>
 <tr class="separator:aebfcdbbd0fe4efbff10b180be50ca6bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a7176e4ecd402808a0a5725cdc1dc5236" id="r_a7176e4ecd402808a0a5725cdc1dc5236"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_bi_quad_d_f1.html#a7176e4ecd402808a0a5725cdc1dc5236">BiQuadDF1</a> ()=default</td></tr>
+<tr class="separator:a7176e4ecd402808a0a5725cdc1dc5236"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a9c3b7406660c82b019e1a9ef58fc4df4" id="r_a9c3b7406660c82b019e1a9ef58fc4df4"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_bi_quad_d_f1.html#a9c3b7406660c82b019e1a9ef58fc4df4">a_1</a> = 0</td></tr>
+<tr class="separator:a9c3b7406660c82b019e1a9ef58fc4df4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e9bfede45fa5ec00962668721d4c98f" id="r_a1e9bfede45fa5ec00962668721d4c98f"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_bi_quad_d_f1.html#a1e9bfede45fa5ec00962668721d4c98f">a_2</a> = 0</td></tr>
+<tr class="separator:a1e9bfede45fa5ec00962668721d4c98f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc66b4cad2937dcbddca44209a69dcf5" id="r_adc66b4cad2937dcbddca44209a69dcf5"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_bi_quad_d_f1.html#adc66b4cad2937dcbddca44209a69dcf5">b_0</a> = 0</td></tr>
+<tr class="separator:adc66b4cad2937dcbddca44209a69dcf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63befdc9568231c064b4ef2e524824e0" id="r_a63befdc9568231c064b4ef2e524824e0"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_bi_quad_d_f1.html#a63befdc9568231c064b4ef2e524824e0">b_1</a> = 0</td></tr>
+<tr class="separator:a63befdc9568231c064b4ef2e524824e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f1a432b023a8969d43670fb4dacb40b" id="r_a6f1a432b023a8969d43670fb4dacb40b"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_bi_quad_d_f1.html#a6f1a432b023a8969d43670fb4dacb40b">b_2</a> = 0</td></tr>
+<tr class="separator:a6f1a432b023a8969d43670fb4dacb40b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1c3b0c0ef5e48e7fd57f2f5623de9fb" id="r_aa1c3b0c0ef5e48e7fd57f2f5623de9fb"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_bi_quad_d_f1.html#aa1c3b0c0ef5e48e7fd57f2f5623de9fb">x_0</a> = 0</td></tr>
+<tr class="separator:aa1c3b0c0ef5e48e7fd57f2f5623de9fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55b98741895fd0383a51ff6627217a5c" id="r_a55b98741895fd0383a51ff6627217a5c"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_bi_quad_d_f1.html#a55b98741895fd0383a51ff6627217a5c">x_1</a> = 0</td></tr>
+<tr class="separator:a55b98741895fd0383a51ff6627217a5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a435ad02615972ebf3621ba921c0b0eb3" id="r_a435ad02615972ebf3621ba921c0b0eb3"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_bi_quad_d_f1.html#a435ad02615972ebf3621ba921c0b0eb3">y_1</a> = 0</td></tr>
+<tr class="separator:a435ad02615972ebf3621ba921c0b0eb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16a6b2c21c0f4055b1a3a520df1c28aa" id="r_a16a6b2c21c0f4055b1a3a520df1c28aa"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_bi_quad_d_f1.html#a16a6b2c21c0f4055b1a3a520df1c28aa">y_2</a> = 0</td></tr>
+<tr class="separator:a16a6b2c21c0f4055b1a3a520df1c28aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T = float&gt;<br />
@@ -123,7 +157,7 @@ class audio_tools::BiQuadDF1&lt; T &gt;</div><p>Second-order <a class="el" href=
 </dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad20850cc092ac3e589dd59dd39bb0d6e" name="ad20850cc092ac3e589dd59dd39bb0d6e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad20850cc092ac3e589dd59dd39bb0d6e">&#9670;&#160;</a></span>BiQuadDF1() <span class="overload">[1/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad20850cc092ac3e589dd59dd39bb0d6e">&#9670;&#160;</a></span>BiQuadDF1() <span class="overload">[1/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -161,7 +195,7 @@ template&lt;typename T  = float&gt; </div>
 </div>
 </div>
 <a id="a4a20fff16a64fdb19009acc8b414ce31" name="a4a20fff16a64fdb19009acc8b414ce31"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4a20fff16a64fdb19009acc8b414ce31">&#9670;&#160;</a></span>BiQuadDF1() <span class="overload">[2/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a20fff16a64fdb19009acc8b414ce31">&#9670;&#160;</a></span>BiQuadDF1() <span class="overload">[2/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -199,7 +233,7 @@ template&lt;typename T  = float&gt; </div>
 </div>
 </div>
 <a id="af2571eedfa14b06f72cc196087b84ca8" name="af2571eedfa14b06f72cc196087b84ca8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af2571eedfa14b06f72cc196087b84ca8">&#9670;&#160;</a></span>BiQuadDF1() <span class="overload">[3/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af2571eedfa14b06f72cc196087b84ca8">&#9670;&#160;</a></span>BiQuadDF1() <span class="overload">[3/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -243,7 +277,7 @@ template&lt;typename T  = float&gt; </div>
 </div>
 </div>
 <a id="ad1bf02f6b1cfb9207bffed5c248899a7" name="ad1bf02f6b1cfb9207bffed5c248899a7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad1bf02f6b1cfb9207bffed5c248899a7">&#9670;&#160;</a></span>BiQuadDF1() <span class="overload">[4/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1bf02f6b1cfb9207bffed5c248899a7">&#9670;&#160;</a></span>BiQuadDF1() <span class="overload">[4/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -280,6 +314,33 @@ template&lt;typename T  = float&gt; </div>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7176e4ecd402808a0a5725cdc1dc5236" name="a7176e4ecd402808a0a5725cdc1dc5236"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7176e4ecd402808a0a5725cdc1dc5236">&#9670;&#160;</a></span>BiQuadDF1() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T  = float&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_bi_quad_d_f1.html">BiQuadDF1</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">default</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -346,6 +407,223 @@ template&lt;typename T  = float&gt; </div>
 <p>Clears the internal state (delay lines) without changing the coefficients. Call after reconfiguring filter parameters via begin() to avoid transients from stale state. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_filter.html#a7b0e029102ad38f4b814c6523aedb53d">Filter&lt; T &gt;</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a9c3b7406660c82b019e1a9ef58fc4df4" name="a9c3b7406660c82b019e1a9ef58fc4df4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c3b7406660c82b019e1a9ef58fc4df4">&#9670;&#160;</a></span>a_1</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T  = float&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T a_1 = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1e9bfede45fa5ec00962668721d4c98f" name="a1e9bfede45fa5ec00962668721d4c98f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e9bfede45fa5ec00962668721d4c98f">&#9670;&#160;</a></span>a_2</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T  = float&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T a_2 = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adc66b4cad2937dcbddca44209a69dcf5" name="adc66b4cad2937dcbddca44209a69dcf5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc66b4cad2937dcbddca44209a69dcf5">&#9670;&#160;</a></span>b_0</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T  = float&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T b_0 = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a63befdc9568231c064b4ef2e524824e0" name="a63befdc9568231c064b4ef2e524824e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63befdc9568231c064b4ef2e524824e0">&#9670;&#160;</a></span>b_1</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T  = float&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T b_1 = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6f1a432b023a8969d43670fb4dacb40b" name="a6f1a432b023a8969d43670fb4dacb40b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f1a432b023a8969d43670fb4dacb40b">&#9670;&#160;</a></span>b_2</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T  = float&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T b_2 = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa1c3b0c0ef5e48e7fd57f2f5623de9fb" name="aa1c3b0c0ef5e48e7fd57f2f5623de9fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1c3b0c0ef5e48e7fd57f2f5623de9fb">&#9670;&#160;</a></span>x_0</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T  = float&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T x_0 = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a55b98741895fd0383a51ff6627217a5c" name="a55b98741895fd0383a51ff6627217a5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55b98741895fd0383a51ff6627217a5c">&#9670;&#160;</a></span>x_1</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T  = float&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T x_1 = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a435ad02615972ebf3621ba921c0b0eb3" name="a435ad02615972ebf3621ba921c0b0eb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a435ad02615972ebf3621ba921c0b0eb3">&#9670;&#160;</a></span>y_1</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T  = float&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T y_1 = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a16a6b2c21c0f4055b1a3a520df1c28aa" name="a16a6b2c21c0f4055b1a3a520df1c28aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16a6b2c21c0f4055b1a3a520df1c28aa">&#9670;&#160;</a></span>y_2</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T  = float&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T y_2 = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>

@@ -142,7 +142,7 @@ class audio_tools::LowPassFilter&lt; T &gt;</div><p>Second-order low-pass filter
 <dl class="section copyright"><dt>Copyright</dt><dd>GNU General Public License v3.0 </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td>sample type (use float or double) </td></tr>
+    <tr><td class="paramname">T</td><td>sample type (use float or double; for fixed-point types like <a class="el" href="classaudio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a> use <a class="el" href="classaudio__tools_1_1_low_pass_filter_d_f1.html" title="Second-order low-pass filter (BiQuad DF1). Same coefficients as LowPassFilter, but built on BiQuadDF1...">LowPassFilterDF1</a> instead &ndash; DF2's single delay line needs much more dynamic range than the signal for low cutoff/sampleRate ratios and will saturate/misbehave in a bounded fixed-point type) </td></tr>
   </table>
   </dd>
 </dl>
