@@ -104,7 +104,7 @@ class VS1053Stream : public AudioStream, public VolumeSupport {
   /// Constructor which accepts an alternative SPI instance to use instead of
   /// the default SPI object. Only supported when using
   /// https://github.com/pschatzmann/arduino-vs1053 (VS1053_EXT).
-  VS1053Stream(SPIClass& spi) { p_spi = &spi; }
+  explicit VS1053Stream(SPIClass& spi) { p_spi = &spi; }
 
   ~VS1053Stream() { end(); }
 
@@ -327,18 +327,20 @@ class VS1053Stream : public AudioStream, public VolumeSupport {
 
 #if VS1053_EXT
   int available() override {
-    int result = getVS1053().available();
-    LOGI("available: %d", result);
-    return result;
+    if (p_vs1053 == nullptr) return 0;
+    TRACED();
+    return p_vs1053->available();
   }
   size_t readBytes(uint8_t* data, size_t len) override {
     TRACED();
-    return getVS1053().readBytes(data, len);
+    if (p_vs1053 == nullptr) return 0;
+    return p_vs1053->readBytes(data, len);
   }
 
   /// Provides the treble amplitude value
   float treble() {
     TRACED();
+    if (p_vs1053 == nullptr) return -1.0f;
     return static_cast<float>(getVS1053().treble()) / 100.0;
   }
 
@@ -348,12 +350,14 @@ class VS1053Stream : public AudioStream, public VolumeSupport {
     if (value < 0.0f) value = 0.0f;
     if (value > 1.0f) value = 1.0f;
     LOGD("setTreble: %f", value);
+    if (p_vs1053 == nullptr) return;
     getVS1053().setTreble(value * 100.0f);
   }
 
   /// Provides the Bass amplitude value
   float bass() {
     TRACED();
+    if (p_vs1053 == nullptr) return -1.0f;
     return static_cast<float>(getVS1053().bass()) / 100.0;
   }
 
@@ -363,17 +367,20 @@ class VS1053Stream : public AudioStream, public VolumeSupport {
     if (value < 0.0f) value = 0.0f;
     if (value > 1.0f) value = 1.0f;
     LOGD("setBass: %f", value);
+    if (p_vs1053 == nullptr) return;
     getVS1053().setBass(value * 100.0f);
   }
 
   /// Sets the treble frequency limit in hz (range 0 to 15000)
   void setTrebleFrequencyLimit(uint16_t value) {
     LOGD("setTrebleFrequencyLimit: %u", value);
+    if (p_vs1053 == nullptr) return;
     getVS1053().setTrebleFrequencyLimit(value);
   }
   /// Sets the bass frequency limit in hz (range 0 to 15000)
   void setBassFrequencyLimit(uint16_t value) {
     LOGD("setBassFrequencyLimit: %u", value);
+    if (p_vs1053 == nullptr) return;
     getVS1053().setBassFrequencyLimit(value);
   }
 
