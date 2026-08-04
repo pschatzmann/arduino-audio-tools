@@ -58,6 +58,11 @@ class VS1053Config : public AudioInfo {
   /// If true the driver will call SPI.begin() during initialization. Set
   /// to false if SPI is managed externally by the application.
   bool is_start_spi = true;
+
+  /// Optional alternative SPI instance to use instead of the default SPI.
+  /// Only supported when using https://github.com/pschatzmann/arduino-vs1053
+  /// (VS1053_EXT). Leave as nullptr to use the default SPI object.
+  SPIClass* p_spi = nullptr;
 #if VS1053_EXT
   VS1053_INPUT input_device = VS1053_MIC;
 #endif
@@ -150,12 +155,30 @@ class VS1053Stream : public AudioStream, public VolumeSupport {
     LOGI("cs_sd_pin: %d", cfg.cs_sd_pin);
 
     if (p_vs1053 == nullptr) {
+#if VS1053_EXT
+      if (cfg.p_spi != nullptr) {
+        LOGI("Using custom SPI instance");
+        p_vs1053 = new VS1053(cfg.cs_pin, cfg.dcs_pin, cfg.dreq_pin,
+                               (uint8_t)-1, *cfg.p_spi);
+      } else {
+        p_vs1053 = new VS1053(cfg.cs_pin, cfg.dcs_pin, cfg.dreq_pin);
+      }
+#else
+      if (cfg.p_spi != nullptr) {
+        LOGE("Custom SPI is only supported when using VS1053_EXT");
+      }
       p_vs1053 = new VS1053(cfg.cs_pin, cfg.dcs_pin, cfg.dreq_pin);
+#endif
       p_vs1053_out = new VS1053StreamOut(p_vs1053);
 
       if (cfg.is_start_spi) {
-        LOGI("SPI.begin()")
-        SPI.begin();
+        if (cfg.p_spi != nullptr) {
+          LOGI("p_spi->begin()")
+          cfg.p_spi->begin();
+        } else {
+          LOGI("SPI.begin()")
+          SPI.begin();
+        }
       } else {
         LOGI("SPI not started");
       }
