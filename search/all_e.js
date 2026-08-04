@@ -42,7 +42,7 @@ var searchData=
   ['ki_39',['ki',['../classaudio__tools_1_1_p_i_d_controller.html#a050993b7ca6c97e62c1020017f716b91',1,'audio_tools::PIDController']]],
   ['kid3v1enhancedlen_40',['kID3v1EnhancedLen',['../classaudio__tools_1_1_meta_data_filter.html#a9c6c1edbc0d4b623de7810c0c2b68b16',1,'audio_tools::MetaDataFilter']]],
   ['kid3v1len_41',['kID3v1Len',['../classaudio__tools_1_1_meta_data_filter.html#a0692507a006893bc03afe2aa49a6ac82',1,'audio_tools::MetaDataFilter']]],
-  ['kind_42',['kind',['../classaudio__tools_1_1_multi_output.html#aa10c9e8951b8ccf714a59ec321bdac5b',1,'audio_tools::MultiOutput::Kind'],['../structaudio__tools_1_1_multi_output_1_1_multi_output_record.html#ad4f6a38e725118afcde5fbb91ccbbb12',1,'audio_tools::MultiOutput::MultiOutputRecord::kind']]],
+  ['kind_42',['kind',['../structaudio__tools_1_1_multi_output_1_1_multi_output_record.html#ad4f6a38e725118afcde5fbb91ccbbb12',1,'audio_tools::MultiOutput::MultiOutputRecord::kind'],['../classaudio__tools_1_1_multi_output.html#aa10c9e8951b8ccf714a59ec321bdac5b',1,'audio_tools::MultiOutput::Kind']]],
   ['kindexshift_43',['kIndexShift',['../classaudio__tools_1_1_fast_int_sine_generator.html#a677ba0e4354cd867d2a013353b68d8d5',1,'audio_tools::FastIntSineGenerator']]],
   ['kiss_44',['KISS',['../group__fft-kiss.html',1,'']]],
   ['kit_45',['kit',['../classaudio__tools_1_1_audio_kit_stream.html#ab0c034f0991a293c7173f43c37360316',1,'audio_tools::AudioKitStream']]],
