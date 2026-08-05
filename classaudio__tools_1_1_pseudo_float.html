@@ -75,6 +75,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="classaudio__tools_1_1_pseudo_float-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">PseudoFloat Class Reference</div></div>
 </div><!--header-->
@@ -103,6 +104,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a53402496946a9b2ecb7e4372cd2c3d88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc4ec9f715112697477f2f425122ce21" id="r_abc4ec9f715112697477f2f425122ce21"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_pseudo_float.html#abc4ec9f715112697477f2f425122ce21">operator float</a> () const</td></tr>
 <tr class="separator:abc4ec9f715112697477f2f425122ce21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48d27bd92e68c69527589ea65a9af69f" id="r_a48d27bd92e68c69527589ea65a9af69f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_pseudo_float.html#a48d27bd92e68c69527589ea65a9af69f">operator int</a> () const</td></tr>
+<tr class="memdesc:a48d27bd92e68c69527589ea65a9af69f"><td class="mdescLeft">&#160;</td><td class="mdescRight">truncates toward zero, like (int)someFloat  <br /></td></tr>
+<tr class="separator:a48d27bd92e68c69527589ea65a9af69f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe52e240844a306eaf87031bbf852537" id="r_afe52e240844a306eaf87031bbf852537"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_pseudo_float.html#afe52e240844a306eaf87031bbf852537">operator!=</a> (float o) const</td></tr>
 <tr class="separator:afe52e240844a306eaf87031bbf852537"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3fadc47ecc594859de8fe150e0f5256" id="r_ae3fadc47ecc594859de8fe150e0f5256"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_pseudo_float.html#ae3fadc47ecc594859de8fe150e0f5256">operator!=</a> (<a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> o) const</td></tr>
@@ -153,6 +157,36 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aaf70a49dbc4cba6b1f207af58dbd38c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a87612daa4ed1a726f81eab2be7f98e" id="r_a8a87612daa4ed1a726f81eab2be7f98e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_pseudo_float.html#a8a87612daa4ed1a726f81eab2be7f98e">operator&gt;=</a> (<a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> o) const</td></tr>
 <tr class="separator:a8a87612daa4ed1a726f81eab2be7f98e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73dd49e26f6fbcca417713ff6f968bb1" id="r_a73dd49e26f6fbcca417713ff6f968bb1"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_pseudo_float.html#a73dd49e26f6fbcca417713ff6f968bb1">scale</a> (int16_t sample) const</td></tr>
+<tr class="memdesc:a73dd49e26f6fbcca417713ff6f968bb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">scales a 16-bit PCM sample by this factor  <br /></td></tr>
+<tr class="separator:a73dd49e26f6fbcca417713ff6f968bb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a9a46a7815229969db452f5f19e2845" id="r_a3a9a46a7815229969db452f5f19e2845"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a22fbdd2584e0693fd85ab3142e9122fd">int24_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_pseudo_float.html#a3a9a46a7815229969db452f5f19e2845">scale</a> (<a class="el" href="namespaceaudio__tools.html#a22fbdd2584e0693fd85ab3142e9122fd">int24_t</a> sample) const</td></tr>
+<tr class="memdesc:a3a9a46a7815229969db452f5f19e2845"><td class="mdescLeft">&#160;</td><td class="mdescRight">scales a 24-bit PCM sample by this factor  <br /></td></tr>
+<tr class="separator:a3a9a46a7815229969db452f5f19e2845"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62be53d8f20e43f082e6471118b71964" id="r_a62be53d8f20e43f082e6471118b71964"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_pseudo_float.html#a62be53d8f20e43f082e6471118b71964">scale</a> (int32_t sample) const</td></tr>
+<tr class="memdesc:a62be53d8f20e43f082e6471118b71964"><td class="mdescLeft">&#160;</td><td class="mdescRight">scales a 32-bit PCM sample by this factor  <br /></td></tr>
+<tr class="separator:a62be53d8f20e43f082e6471118b71964"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8dfe31f9bfc5961cdb784430bccdbd11" id="r_a8dfe31f9bfc5961cdb784430bccdbd11"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_pseudo_float.html#a8dfe31f9bfc5961cdb784430bccdbd11">toInt16</a> () const</td></tr>
+<tr class="memdesc:a8dfe31f9bfc5961cdb784430bccdbd11"><td class="mdescLeft">&#160;</td><td class="mdescRight">converts to a 16-bit PCM sample (-32768..32767)  <br /></td></tr>
+<tr class="separator:a8dfe31f9bfc5961cdb784430bccdbd11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a95f3e60e4d148d74d77e586ff4403e" id="r_a3a95f3e60e4d148d74d77e586ff4403e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a22fbdd2584e0693fd85ab3142e9122fd">int24_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_pseudo_float.html#a3a95f3e60e4d148d74d77e586ff4403e">toInt24</a> () const</td></tr>
+<tr class="memdesc:a3a95f3e60e4d148d74d77e586ff4403e"><td class="mdescLeft">&#160;</td><td class="mdescRight">converts to a 24-bit PCM sample (-8388608..8388607)  <br /></td></tr>
+<tr class="separator:a3a95f3e60e4d148d74d77e586ff4403e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3116bf322d11a75b97728760e3a4e3e1" id="r_a3116bf322d11a75b97728760e3a4e3e1"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_pseudo_float.html#a3116bf322d11a75b97728760e3a4e3e1">toInt32</a> () const</td></tr>
+<tr class="memdesc:a3116bf322d11a75b97728760e3a4e3e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">converts to a 32-bit PCM sample (-2147483648..2147483647)  <br /></td></tr>
+<tr class="separator:a3116bf322d11a75b97728760e3a4e3e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:ac74e3e39c4a6fa94b3c2ffc0d1ba2350" id="r_ac74e3e39c4a6fa94b3c2ffc0d1ba2350"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_pseudo_float.html#ac74e3e39c4a6fa94b3c2ffc0d1ba2350">fromInt16</a> (int16_t sample)</td></tr>
+<tr class="memdesc:ac74e3e39c4a6fa94b3c2ffc0d1ba2350"><td class="mdescLeft">&#160;</td><td class="mdescRight">builds a <a class="el" href="classaudio__tools_1_1_pseudo_float.html" title="Software &quot;pseudo-float&quot;: a real number represented as a signed 16-bit mantissa plus a 16-bit exponent...">PseudoFloat</a> from a 16-bit PCM sample (-32768..32767)  <br /></td></tr>
+<tr class="separator:ac74e3e39c4a6fa94b3c2ffc0d1ba2350"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d7bbc62a38080247be1cb6b041ca5cc" id="r_a5d7bbc62a38080247be1cb6b041ca5cc"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_pseudo_float.html#a5d7bbc62a38080247be1cb6b041ca5cc">fromInt24</a> (<a class="el" href="namespaceaudio__tools.html#a22fbdd2584e0693fd85ab3142e9122fd">int24_t</a> sample)</td></tr>
+<tr class="memdesc:a5d7bbc62a38080247be1cb6b041ca5cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">builds a <a class="el" href="classaudio__tools_1_1_pseudo_float.html" title="Software &quot;pseudo-float&quot;: a real number represented as a signed 16-bit mantissa plus a 16-bit exponent...">PseudoFloat</a> from a 24-bit PCM sample (-8388608..8388607)  <br /></td></tr>
+<tr class="separator:a5d7bbc62a38080247be1cb6b041ca5cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88c0cff90f08c0f25c7724392e7234af" id="r_a88c0cff90f08c0f25c7724392e7234af"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_pseudo_float.html#a88c0cff90f08c0f25c7724392e7234af">fromInt32</a> (int32_t sample)</td></tr>
+<tr class="memdesc:a88c0cff90f08c0f25c7724392e7234af"><td class="mdescLeft">&#160;</td><td class="mdescRight">builds a <a class="el" href="classaudio__tools_1_1_pseudo_float.html" title="Software &quot;pseudo-float&quot;: a real number represented as a signed 16-bit mantissa plus a 16-bit exponent...">PseudoFloat</a> from a 32-bit PCM sample (-2147483648..2147483647)  <br /></td></tr>
+<tr class="separator:a88c0cff90f08c0f25c7724392e7234af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Software "pseudo-float": a real number represented as a signed 16-bit mantissa plus a 16-bit exponent (value = mantissa * 2^exponent), computed with integer multiply/shift/compare only &ndash; no hardware floating-point instructions. This generalizes speexdsp's classic fixed-point trick of tracking a handful of wide-dynamic-range control variables as a normalized mantissa+exponent pair into a full, operator-overloaded numeric type usable as a drop-in replacement for <code>float</code> (see <a class="el" href="structaudio__tools_1_1_m_d_f_fixed_point.html" title="Selects PseudoFloat (see PseudoFloat.h) as MDFEchoCancellation&#39;s internal numeric representation,...">MDFFixedPoint</a> in <a class="el" href="classaudio__tools_1_1_m_d_f_echo_cancellation.html#a7fe93bc76dca86a344399ff245c4a4db" title="Allocate a zero-initialized array of type A using the configured Allocator (see AudioTools/CoreAudio/...">MDFEchoCancellation.h</a>, which uses this class as the element type for the MDF echo canceller's sample/spectrum arrays and internal state, so the whole algorithm runs without native float arithmetic). </p>
@@ -324,6 +358,90 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ac74e3e39c4a6fa94b3c2ffc0d1ba2350" name="ac74e3e39c4a6fa94b3c2ffc0d1ba2350"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac74e3e39c4a6fa94b3c2ffc0d1ba2350">&#9670;&#160;</a></span>fromInt16()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> fromInt16 </td>
+          <td>(</td>
+          <td class="paramtype">int16_t&#160;</td>
+          <td class="paramname"><em>sample</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>builds a <a class="el" href="classaudio__tools_1_1_pseudo_float.html" title="Software &quot;pseudo-float&quot;: a real number represented as a signed 16-bit mantissa plus a 16-bit exponent...">PseudoFloat</a> from a 16-bit PCM sample (-32768..32767) </p>
+
+</div>
+</div>
+<a id="a5d7bbc62a38080247be1cb6b041ca5cc" name="a5d7bbc62a38080247be1cb6b041ca5cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d7bbc62a38080247be1cb6b041ca5cc">&#9670;&#160;</a></span>fromInt24()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> fromInt24 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#a22fbdd2584e0693fd85ab3142e9122fd">int24_t</a>&#160;</td>
+          <td class="paramname"><em>sample</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>builds a <a class="el" href="classaudio__tools_1_1_pseudo_float.html" title="Software &quot;pseudo-float&quot;: a real number represented as a signed 16-bit mantissa plus a 16-bit exponent...">PseudoFloat</a> from a 24-bit PCM sample (-8388608..8388607) </p>
+
+</div>
+</div>
+<a id="a88c0cff90f08c0f25c7724392e7234af" name="a88c0cff90f08c0f25c7724392e7234af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88c0cff90f08c0f25c7724392e7234af">&#9670;&#160;</a></span>fromInt32()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> fromInt32 </td>
+          <td>(</td>
+          <td class="paramtype">int32_t&#160;</td>
+          <td class="paramname"><em>sample</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>builds a <a class="el" href="classaudio__tools_1_1_pseudo_float.html" title="Software &quot;pseudo-float&quot;: a real number represented as a signed 16-bit mantissa plus a 16-bit exponent...">PseudoFloat</a> from a 32-bit PCM sample (-2147483648..2147483647) </p>
+
+</div>
+</div>
 <a id="a53402496946a9b2ecb7e4372cd2c3d88" name="a53402496946a9b2ecb7e4372cd2c3d88"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a53402496946a9b2ecb7e4372cd2c3d88">&#9670;&#160;</a></span>mantissa()</h2>
 
@@ -371,6 +489,33 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a48d27bd92e68c69527589ea65a9af69f" name="a48d27bd92e68c69527589ea65a9af69f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48d27bd92e68c69527589ea65a9af69f">&#9670;&#160;</a></span>operator int()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">operator int </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>truncates toward zero, like (int)someFloat </p>
 
 </div>
 </div>
@@ -1023,8 +1168,173 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a73dd49e26f6fbcca417713ff6f968bb1" name="a73dd49e26f6fbcca417713ff6f968bb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73dd49e26f6fbcca417713ff6f968bb1">&#9670;&#160;</a></span>scale() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int16_t scale </td>
+          <td>(</td>
+          <td class="paramtype">int16_t&#160;</td>
+          <td class="paramname"><em>sample</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>scales a 16-bit PCM sample by this factor </p>
+
+</div>
+</div>
+<a id="a3a9a46a7815229969db452f5f19e2845" name="a3a9a46a7815229969db452f5f19e2845"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a9a46a7815229969db452f5f19e2845">&#9670;&#160;</a></span>scale() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a22fbdd2584e0693fd85ab3142e9122fd">int24_t</a> scale </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#a22fbdd2584e0693fd85ab3142e9122fd">int24_t</a>&#160;</td>
+          <td class="paramname"><em>sample</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>scales a 24-bit PCM sample by this factor </p>
+
+</div>
+</div>
+<a id="a62be53d8f20e43f082e6471118b71964" name="a62be53d8f20e43f082e6471118b71964"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62be53d8f20e43f082e6471118b71964">&#9670;&#160;</a></span>scale() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t scale </td>
+          <td>(</td>
+          <td class="paramtype">int32_t&#160;</td>
+          <td class="paramname"><em>sample</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>scales a 32-bit PCM sample by this factor </p>
+
+</div>
+</div>
+<a id="a8dfe31f9bfc5961cdb784430bccdbd11" name="a8dfe31f9bfc5961cdb784430bccdbd11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8dfe31f9bfc5961cdb784430bccdbd11">&#9670;&#160;</a></span>toInt16()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int16_t toInt16 </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>converts to a 16-bit PCM sample (-32768..32767) </p>
+
+</div>
+</div>
+<a id="a3a95f3e60e4d148d74d77e586ff4403e" name="a3a95f3e60e4d148d74d77e586ff4403e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a95f3e60e4d148d74d77e586ff4403e">&#9670;&#160;</a></span>toInt24()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a22fbdd2584e0693fd85ab3142e9122fd">int24_t</a> toInt24 </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>converts to a 24-bit PCM sample (-8388608..8388607) </p>
+
+</div>
+</div>
+<a id="a3116bf322d11a75b97728760e3a4e3e1" name="a3116bf322d11a75b97728760e3a4e3e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3116bf322d11a75b97728760e3a4e3e1">&#9670;&#160;</a></span>toInt32()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t toInt32 </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>converts to a 32-bit PCM sample (-2147483648..2147483647) </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/AEC/<a class="el" href="_pseudo_float_8h_source.html">PseudoFloat.h</a></li>
+<li>src/AudioTools/CoreAudio/AudioBasic/<a class="el" href="_pseudo_float_8h_source.html">PseudoFloat.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
