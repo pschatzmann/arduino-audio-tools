@@ -27,7 +27,7 @@
 #include "AudioTools/FFT/AudioRealFFT.h"
 #include "AudioTools/AEC/LMSEchoCancellationStream.h"
 #include "AudioTools/AEC/MDFEchoCancellationStream.h"
-#include "AudioTools/AEC/PseudoFloat.h"
+#include "AudioTools/CoreAudio/AudioBasic/PseudoFloat.h"
 #include "AudioTools/AudioLibs/WakeWordDetector.h"
 
 using namespace audio_tools;

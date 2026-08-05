@@ -2,6 +2,7 @@
 
 #include <cmath>
 #include <cstdint>
+#include "AudioTools/CoreAudio/AudioBasic/int24_t.h"
 
 namespace audio_tools {
 
@@ -52,6 +53,51 @@ class PseudoFloat {
   PseudoFloat(int i) { fromFloat((float)i); }
 
   operator float() const { return toFloat(); }
+  /// truncates toward zero, like (int)someFloat
+  explicit operator int() const {
+    float v = toFloat();
+    if (v >= 2147483647.0f) return INT32_MAX;
+    if (v <= -2147483648.0f) return INT32_MIN;
+    return (int)v;
+  }
+
+  // PCM samples are interpreted at their raw magnitude (e.g. up to +-32767
+  // for 16-bit audio) rather than normalized, matching the convention used
+  // when T=float elsewhere in this codebase -- PseudoFloat's wide dynamic
+  // range (unlike q1_14_t's bounded +-2.0) means no rescaling is needed.
+
+  /// converts to a 16-bit PCM sample (-32768..32767)
+  int16_t toInt16() const { return (int16_t)clampRound(toFloat(), -32768.0, 32767.0); }
+  /// converts to a 24-bit PCM sample (-8388608..8388607)
+  int24_t toInt24() const { return clampRound(toFloat(), -8388608.0, 8388607.0); }
+  /// converts to a 32-bit PCM sample (-2147483648..2147483647)
+  int32_t toInt32() const { return clampRound(toFloat(), -2147483648.0, 2147483647.0); }
+
+  /// builds a PseudoFloat from a 16-bit PCM sample (-32768..32767)
+  static PseudoFloat fromInt16(int16_t sample) { return PseudoFloat((float)sample); }
+  /// builds a PseudoFloat from a 24-bit PCM sample (-8388608..8388607)
+  static PseudoFloat fromInt24(int24_t sample) {
+    return PseudoFloat((float)(int32_t)sample);
+  }
+  /// builds a PseudoFloat from a 32-bit PCM sample (-2147483648..2147483647)
+  static PseudoFloat fromInt32(int32_t sample) { return PseudoFloat((float)sample); }
+
+  // Applies this value as a gain/volume factor to a full-scale PCM sample
+  // (sample * factor), clipping on overflow. Unlike operator*, the sample
+  // here is NOT itself a PseudoFloat-scaled value.
+
+  /// scales a 16-bit PCM sample by this factor
+  int16_t scale(int16_t sample) const {
+    return (int16_t)clampRound(toFloat() * (double)sample, -32768.0, 32767.0);
+  }
+  /// scales a 24-bit PCM sample by this factor
+  int24_t scale(int24_t sample) const {
+    return clampRound(toFloat() * (double)(int32_t)sample, -8388608.0, 8388607.0);
+  }
+  /// scales a 32-bit PCM sample by this factor
+  int32_t scale(int32_t sample) const {
+    return clampRound(toFloat() * (double)sample, -2147483648.0, 2147483647.0);
+  }
 
   PseudoFloat operator+(PseudoFloat o) const {
     return addAligned(m_, e_, o.m_, o.e_);
@@ -115,6 +161,15 @@ class PseudoFloat {
  private:
   int16_t m_ = 0;  // normalized magnitude in [16384, 32767] (0 iff value == 0)
   int16_t e_ = 0;  // value = m_ * 2^e_
+
+  /// rounds to nearest and clamps to [lo, hi], for the PCM boundary
+  /// conversions (toIntNN/scale) above.
+  static int32_t clampRound(double v, double lo, double hi) {
+    if (v >= hi) return (int32_t)hi;
+    if (v <= lo) return (int32_t)lo;
+    v += (v >= 0.0 ? 0.5 : -0.5);
+    return (int32_t)v;
+  }
 
   void fromFloat(float f) {
     if (f == 0.0f) {
