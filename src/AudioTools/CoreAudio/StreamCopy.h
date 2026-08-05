@@ -168,7 +168,7 @@ class StreamCopyT {
 
       // determine mime
       if (p_mime_detector != nullptr) {
-        p_mime_detector->write(buffer.data(), bytes_to_read);
+        p_mime_detector->write(buffer.data(), bytes_read);
       }
 
       // convert data
