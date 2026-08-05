@@ -663,8 +663,11 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
    *
    * @param percent 0..100; values above 100 are clamped.
    */
-  void setFeedbackPercent(uint8_t percent) {
-    manual_feedback_percent_ = percent > 100 ? 100 : percent;
+  void setFeedbackPercent(int percent) {
+    int normalized = percent;
+    if (normalized < 0) normalized = 0;
+    if (normalized > 100) normalized = 100;
+    manual_feedback_percent_ = normalized;
   }
 
   /** @brief Reverts setFeedbackPercent() and restores the automatic
