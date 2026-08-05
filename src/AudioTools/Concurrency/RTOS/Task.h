@@ -42,10 +42,17 @@ class Task : public ITask {
                               &xHandle, core);
     else
       xTaskCreate(task_loop, name, stackSize, this, priority, &xHandle);
+    suspend();
 #else
     xTaskCreate(task_loop, name, stackSize, this, priority, &xHandle);
-#endif
     suspend();
+#if defined(configUSE_CORE_AFFINITY) && (configUSE_CORE_AFFINITY == 1) && \
+    (configNUMBER_OF_CORES > 1)
+    // e.g. RP2040 (Earle Philhower core): pin the task to a core after
+    // creation via the FreeRTOS SMP core-affinity API
+    if (core >= 0) vTaskCoreAffinitySet(xHandle, (1 << core));
+#endif
+#endif
     return true;
   }
 
