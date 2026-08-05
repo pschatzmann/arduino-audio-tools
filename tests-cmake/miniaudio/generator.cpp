@@ -4,7 +4,7 @@
 
 //LinuxStdio out;                            // Output to stdio on Desktop
 MiniAudioStream out;                         // Output to MiniAudioStream
-SineWaveGenerator<int16_t> sine_wave;        // subclass of SoundGenerator with max amplitude
+SineGenerator<int16_t> sine_wave;        // subclass of SoundGenerator with max amplitude
 GeneratedSoundStream<int16_t> in_stream(sine_wave); // Stream generated from sine wave
 StreamCopy copier(out, in_stream);                  // copies sound to out
 

@@ -9,7 +9,7 @@
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 AudioInfo info(44100, 2, 16);
-SineWaveGenerator<int16_t> sineWave;
+SineGenerator<int16_t> sineWave;
 GeneratedSoundStream<int16_t> sound(sineWave);
 AudioBoardStream out(STM32F411Disco);
 StreamCopy copier(out, sound);  // copies sound into i2s

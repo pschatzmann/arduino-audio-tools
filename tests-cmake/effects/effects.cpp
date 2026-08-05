@@ -4,8 +4,8 @@
 #include "AudioTools/AudioLibs/PortAudioStream.h"
 
 PortAudioStream out;
-SineWaveGenerator<int16_t> sine;
-AudioEffects<SineWaveGenerator<int16_t>> effects(sine);
+SineGenerator<int16_t> sine;
+AudioEffects<SineGenerator<int16_t>> effects(sine);
 ADSRGain adsr(0.0001,0.0001, 0.9 , 0.0002);
 GeneratedSoundStream<int16_t> in(effects); 
 StreamCopy copier(out, in); 

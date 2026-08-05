@@ -210,21 +210,24 @@ class SoundGenerator {
 };
 
 /**
- * @brief Generates a Sound with the help of sin() function. 
- * If performance is of concern, I suggest to use theSineFromTable
- * or the FastSineGenerator.
+ * @brief Generates a Sound with the help of sin() function.
+ * If performance is of concern, I suggest to use theSineFromTable,
+ * the FastSineGenerator or the FastIntSineGenerator.
+ * @note Prefer SineGenerator instead of using this class directly: it
+ * automatically picks this (float) or FastIntSineGenerator, whichever is
+ * optimal for the target platform (see PREFER_FIXEDPOINT).
  * @ingroup generator
  * @author Phil Schatzmann
  * @copyright GPLv3
  *
  */
 template <class T = int16_t>
-class SineGenerator : public SoundGenerator<T> {
+class FloatSineGenerator : public SoundGenerator<T> {
  public:
   // the scale defines the max value which is generated
-  SineGenerator(float amplitude = NumberConverter::maxValueT<T>(),
+  FloatSineGenerator(float amplitude = NumberConverter::maxValueT<T>(),
                     float phase = 0.0f) {
-    LOGD("SineGenerator");
+    LOGD("FloatSineGenerator");
     m_amplitude = amplitude;
     m_phase = phase;
   }
@@ -237,7 +240,7 @@ class SineGenerator : public SoundGenerator<T> {
   }
 
   bool begin(AudioInfo info) override {
-    LOGI("%s::begin(channels=%d, sample_rate=%d)", "SineGenerator",
+    LOGI("%s::begin(channels=%d, sample_rate=%d)", "FloatSineGenerator",
          (int)info.channels, (int)info.sample_rate);
     SoundGenerator<T>::begin(info);
     this->m_deltaTime = 1.0f / SoundGenerator<T>::info.sample_rate;
@@ -246,7 +249,7 @@ class SineGenerator : public SoundGenerator<T> {
 
   bool begin(AudioInfo info, float frequency) {
     LOGI("%s::begin(channels=%d, sample_rate=%d, frequency=%.2f)",
-         "SineGenerator", (int)info.channels, (int)info.sample_rate,
+         "FloatSineGenerator", (int)info.channels, (int)info.sample_rate,
          frequency);
     SoundGenerator<T>::begin(info);
     this->m_deltaTime = 1.0f / SoundGenerator<T>::info.sample_rate;
@@ -311,10 +314,6 @@ class SineGenerator : public SoundGenerator<T> {
   }
 };
 
-/// Alias for SineWaveGenerator
-template <class T = int16_t>  
-using SineWaveGenerator = SineGenerator<T>;
-
 /**
  * @brief Sine wave which is based on a fast approximation function using floating point math.
  * @ingroup generator
@@ -323,21 +322,21 @@ using SineWaveGenerator = SineGenerator<T>;
  * @tparam T
  */
 template <class T = int16_t>
-class FastSineGenerator : public SineGenerator<T> {
+class FastSineGenerator : public FloatSineGenerator<T> {
  public:
   FastSineGenerator(float amplitude = NumberConverter::maxValueT<T>(), float phase = 0.0)
-      : SineGenerator<T>(amplitude, phase) {
+      : FloatSineGenerator<T>(amplitude, phase) {
     LOGD("FastSineGenerator");
   }
 
   virtual T readSample() override {
     float angle =
-        SineGenerator<T>::m_cycles + SineGenerator<T>::m_phase;
-    T result = SineGenerator<T>::m_amplitude * sine(angle);
-    SineGenerator<T>::m_cycles +=
-        SineGenerator<T>::m_frequency * SineGenerator<T>::m_deltaTime;
-    if (SineGenerator<T>::m_cycles > 1.0f) {
-      SineGenerator<T>::m_cycles -= 1.0f;
+        FloatSineGenerator<T>::m_cycles + FloatSineGenerator<T>::m_phase;
+    T result = FloatSineGenerator<T>::m_amplitude * sine(angle);
+    FloatSineGenerator<T>::m_cycles +=
+        FloatSineGenerator<T>::m_frequency * FloatSineGenerator<T>::m_deltaTime;
+    if (FloatSineGenerator<T>::m_cycles > 1.0f) {
+      FloatSineGenerator<T>::m_cycles -= 1.0f;
     }
     return result;
   }
@@ -359,6 +358,9 @@ class FastSineGenerator : public SineGenerator<T> {
  * increment) is done once in setFrequency()/setAudioInfo(), never per
  * sample. This makes it a good fit for MCUs without a hardware FPU - e.g.
  * the RP2040 - where sinf() is comparatively expensive.
+ * @note Prefer SineGenerator instead of using this class directly: it
+ * automatically picks this (fixed-point) or FloatSineGenerator, whichever
+ * is optimal for the target platform (see PREFER_FIXEDPOINT).
  * @ingroup generator
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -486,6 +488,20 @@ class FastIntSineGenerator : public SoundGenerator<T> {
       -12539,-11793,-11039,-10278,-9512, -8739, -7962, -7179, -6393, -5602,
       -4808, -4011, -3212, -2410, -1608, -804};
 };
+
+/// Default sine generator: FastIntSineGenerator (no FPU needed) on platforms
+/// that set PREFER_FIXEDPOINT, FloatSineGenerator (sinf() based) otherwise.
+#if PREFER_FIXEDPOINT
+template <class T = int16_t>
+using SineGenerator = FastIntSineGenerator<T>;
+#else
+template <class T = int16_t>
+using SineGenerator = FloatSineGenerator<T>;
+#endif
+
+/// Alias for SineGenerator
+template <class T = int16_t>
+using SineWaveGenerator = SineGenerator<T>;
 
 /**
  * @brief Generates a square wave sound. Uses the same 32 bit phase
