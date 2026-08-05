@@ -648,6 +648,29 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
     tud_audio_feedback_format_correction_cb_ = cb;
   }
 
+  /**
+   * @brief Overrides the automatic (FIFO_COUNT) feedback computation with a
+   * fixed value driven by the caller, e.g. from an external buffer-fill
+   * measurement.
+   *
+   * The USB audio feedback endpoint tells the host how fast to send/receive
+   * samples so its clock stays in sync with the device's clock. Instead of
+   * the built-in algorithm (which watches bufferRx()'s fill level), call
+   * this repeatedly -- e.g. once per loop() -- with a value derived from
+   * your own buffer: 0 asks the host to slow down (maps to the negotiated
+   * min feedback value), 100 asks it to speed up (max value), and 50
+   * approximates the nominal sample rate.
+   *
+   * @param percent 0..100; values above 100 are clamped.
+   */
+  void setFeedbackPercent(uint8_t percent) {
+    manual_feedback_percent_ = percent > 100 ? 100 : percent;
+  }
+
+  /** @brief Reverts setFeedbackPercent() and restores the automatic
+   *  (FIFO_COUNT) feedback computation. */
+  void setFeedbackAutomatic() { manual_feedback_percent_ = -1; }
+
   /** @brief Send audio data to the host (device → host, microphone/capture).
    *  Silently discards data when the host has not opened the capture device
    *  (alt=0) so StreamCopy doesn't report write errors before recording. */
@@ -848,6 +871,12 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
   std::function<bool(USBAudioDeviceBase*, uint8_t func_id)>
       tud_audio_feedback_format_correction_cb_;
   uint8_t int_notify_buf_[6] = {};
+
+  // Manual feedback override: -1 means "automatic" (use the negotiated
+  // compute_method, e.g. AUDIO_FEEDBACK_METHOD_FIFO_COUNT); 0..100 means
+  // the caller is driving the feedback value directly via
+  // setFeedbackPercent(). See tud_audio_feedback_interval_isr().
+  int16_t manual_feedback_percent_ = -1;
 
   // calculate!
   std::vector<uint16_t> desc_len_;
@@ -1056,59 +1085,71 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
                                        uint8_t frame_shift) {
     audiod_function_t* audio = &audiod_fct_[func_id];
 
-    switch (audio->feedback.compute_method) {
-      case AUDIO_FEEDBACK_METHOD_FIFO_COUNT: {
-        // In linear-buffer mode, audio data flows lin_buf_out → bufferRx(),
-        // completely bypassing ep_out_ff.  Reading ep_out_ff would always
-        // return 0, driving the feedback to min_value and causing the host
-        // to gradually reduce its send rate until the buffer drains (audible
-        // periodic drop every 5-10 s).  Use the platform RX ring buffer level.
-        uint32_t ff_count = (uint32_t)bufferRx().available();
-        // Exponential weighted average keeps the level estimate stable
-        audio->feedback.compute.fifo_count.fifo_lvl_avg =
-            audio->feedback.compute.fifo_count.fifo_lvl_avg -
-            (audio->feedback.compute.fifo_count.fifo_lvl_avg >> 8) +
-            ((uint32_t)ff_count << 8);
-        uint32_t avg = audio->feedback.compute.fifo_count.fifo_lvl_avg >> 8;
-        uint32_t thr = audio->feedback.compute.fifo_count.fifo_lvl_thr;
-        uint32_t nom = audio->feedback.compute.fifo_count.nom_value;
-        if (avg > thr) {
+    if (manual_feedback_percent_ >= 0) {
+      // setFeedbackPercent() override: scale linearly across the negotiated
+      // [min_value, max_value] range instead of running the automatic
+      // compute_method below.
+      uint32_t range = audio->feedback.max_value - audio->feedback.min_value;
+      audio->feedback.value =
+          audio->feedback.min_value +
+          (range * (uint32_t)manual_feedback_percent_) / 100;
+    } else {
+      switch (audio->feedback.compute_method) {
+        case AUDIO_FEEDBACK_METHOD_FIFO_COUNT: {
+          // In linear-buffer mode, audio data flows lin_buf_out → bufferRx(),
+          // completely bypassing ep_out_ff.  Reading ep_out_ff would always
+          // return 0, driving the feedback to min_value and causing the host
+          // to gradually reduce its send rate until the buffer drains
+          // (audible periodic drop every 5-10 s).  Use the platform RX ring
+          // buffer level.
+          uint32_t ff_count = (uint32_t)bufferRx().available();
+          // Exponential weighted average keeps the level estimate stable
+          audio->feedback.compute.fifo_count.fifo_lvl_avg =
+              audio->feedback.compute.fifo_count.fifo_lvl_avg -
+              (audio->feedback.compute.fifo_count.fifo_lvl_avg >> 8) +
+              ((uint32_t)ff_count << 8);
+          uint32_t avg = audio->feedback.compute.fifo_count.fifo_lvl_avg >> 8;
+          uint32_t thr = audio->feedback.compute.fifo_count.fifo_lvl_thr;
+          uint32_t nom = audio->feedback.compute.fifo_count.nom_value;
+          if (avg > thr) {
+            audio->feedback.value =
+                nom +
+                (uint32_t)audio->feedback.compute.fifo_count.rate_const[0] *
+                    (avg - thr);
+          } else {
+            uint32_t drop =
+                (uint32_t)audio->feedback.compute.fifo_count.rate_const[1] *
+                (thr - avg);
+            audio->feedback.value =
+                (nom > drop) ? nom - drop : audio->feedback.min_value;
+          }
+          uint32_t clamped = audio->feedback.value < audio->feedback.min_value
+                                ? audio->feedback.min_value
+                                : audio->feedback.value;
+          audio->feedback.value = clamped > audio->feedback.max_value
+                                      ? audio->feedback.max_value
+                                      : clamped;
+        } break;
+
+        case AUDIO_FEEDBACK_METHOD_FREQUENCY_POWER_OF_2:
+          audio->feedback.value = 1UL << audio->feedback.compute.power_of_2;
+          break;
+
+        case AUDIO_FEEDBACK_METHOD_FREQUENCY_FLOAT:
           audio->feedback.value =
-              nom + (uint32_t)audio->feedback.compute.fifo_count.rate_const[0] *
-                        (avg - thr);
-        } else {
-          uint32_t drop =
-              (uint32_t)audio->feedback.compute.fifo_count.rate_const[1] *
-              (thr - avg);
+              (uint32_t)(audio->feedback.compute.float_const *
+                         (float)(1UL << (16u - (frame_shift - 1u))));
+          break;
+
+        case AUDIO_FEEDBACK_METHOD_FREQUENCY_FIXED: {
+          uint32_t frame_div = backend().isFullSpeed() ? 1000u : 8000u;
           audio->feedback.value =
-              (nom > drop) ? nom - drop : audio->feedback.min_value;
-        }
-        uint32_t clamped = audio->feedback.value < audio->feedback.min_value
-                              ? audio->feedback.min_value
-                              : audio->feedback.value;
-        audio->feedback.value = clamped > audio->feedback.max_value
-                                    ? audio->feedback.max_value
-                                    : clamped;
-      } break;
+              (audio->feedback.compute.fixed.sample_freq << 16) / frame_div;
+        } break;
 
-      case AUDIO_FEEDBACK_METHOD_FREQUENCY_POWER_OF_2:
-        audio->feedback.value = 1UL << audio->feedback.compute.power_of_2;
-        break;
-
-      case AUDIO_FEEDBACK_METHOD_FREQUENCY_FLOAT:
-        audio->feedback.value =
-            (uint32_t)(audio->feedback.compute.float_const *
-                       (float)(1UL << (16u - (frame_shift - 1u))));
-        break;
-
-      case AUDIO_FEEDBACK_METHOD_FREQUENCY_FIXED: {
-        uint32_t frame_div = backend().isFullSpeed() ? 1000u : 8000u;
-        audio->feedback.value =
-            (audio->feedback.compute.fixed.sample_freq << 16) / frame_div;
-      } break;
-
-      default:
-        break;
+        default:
+          break;
+      }
     }
 
     if (backend().claimEndpoint(audio->rhport, audio->ep_fb)) {
