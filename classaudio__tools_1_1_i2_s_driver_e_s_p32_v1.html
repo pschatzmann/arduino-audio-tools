@@ -77,6 +77,7 @@ $(function() {
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_i2_s_driver_e_s_p32_v1-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">I2SDriverESP32V1 Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span><div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__platform.html">Platform</a></div></div></div>
@@ -110,7 +111,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a4549a76725f2e4c013e4d57018366109"><td class="mdescLeft">&#160;</td><td class="mdescRight">we assume the data is already available in the buffer  <br /></td></tr>
 <tr class="separator:a4549a76725f2e4c013e4d57018366109"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86aa7db83a28e2662e01c57a36681cb0" id="r_a86aa7db83a28e2662e01c57a36681cb0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#a86aa7db83a28e2662e01c57a36681cb0">availableForWrite</a> ()</td></tr>
-<tr class="memdesc:a86aa7db83a28e2662e01c57a36681cb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">We limit the write size to the buffer size.  <br /></td></tr>
 <tr class="separator:a86aa7db83a28e2662e01c57a36681cb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a601fb7cf1fc15db50c71a826f084f934" id="r_a601fb7cf1fc15db50c71a826f084f934"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#a601fb7cf1fc15db50c71a826f084f934">begin</a> ()</td></tr>
 <tr class="separator:a601fb7cf1fc15db50c71a826f084f934"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -154,10 +154,21 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a8271f351dfd73e50bb7a8084c975898c" id="r_a8271f351dfd73e50bb7a8084c975898c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#a8271f351dfd73e50bb7a8084c975898c">newChannels</a> (<a class="el" href="classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html">I2SConfigESP32V1</a> &amp;<a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#ae57bb659601c7f3538bda86ae18a7284">cfg</a>, <a class="el" href="structaudio__tools_1_1_i2_s_driver_e_s_p32_v1_1_1_driver_common.html">DriverCommon</a> &amp;driver)</td></tr>
 <tr class="separator:a8271f351dfd73e50bb7a8084c975898c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
+Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:a6e69456b2a6fb03d764ce2ba78f4b65d" id="r_a6e69456b2a6fb03d764ce2ba78f4b65d"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#a6e69456b2a6fb03d764ce2ba78f4b65d">onSentCb</a> (i2s_chan_handle_t handle, i2s_event_data_t *event, void *user_ctx)</td></tr>
+<tr class="separator:a6e69456b2a6fb03d764ce2ba78f4b65d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:a6dc59e626bdc6f5fda890a7b889bac94" id="r_a6dc59e626bdc6f5fda890a7b889bac94"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#a6dc59e626bdc6f5fda890a7b889bac94">bytes_sent_</a> {0}</td></tr>
+<tr class="separator:a6dc59e626bdc6f5fda890a7b889bac94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a062afc8dc0720c21a065143adf0d26c3" id="r_a062afc8dc0720c21a065143adf0d26c3"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#a062afc8dc0720c21a065143adf0d26c3">bytes_written_</a> {0}</td></tr>
+<tr class="separator:a062afc8dc0720c21a065143adf0d26c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae57bb659601c7f3538bda86ae18a7284" id="r_ae57bb659601c7f3538bda86ae18a7284"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html">I2SConfigESP32V1</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#ae57bb659601c7f3538bda86ae18a7284">cfg</a> = <a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#a077146a075c54b6acf22c5b467d929e9">defaultConfig</a>(<a class="el" href="group__basic.html#gga8cbd91a8bac9b5ab425112be1620eb49a6f3b87c1abe374d1d1a5fef79bffeb00">RXTX_MODE</a>)</td></tr>
 <tr class="separator:ae57bb659601c7f3538bda86ae18a7284"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a998bc475244207c653dfecc7d3057384" id="r_a998bc475244207c653dfecc7d3057384"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#a998bc475244207c653dfecc7d3057384">dma_capacity_</a> = 0</td></tr>
+<tr class="separator:a998bc475244207c653dfecc7d3057384"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f8c4a9c8f46d7fb1cc2fa8c8f9917cd" id="r_a3f8c4a9c8f46d7fb1cc2fa8c8f9917cd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_i2_s_driver_e_s_p32_v1_1_1_driver_i2_s.html">audio_tools::I2SDriverESP32V1::DriverI2S</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#a3f8c4a9c8f46d7fb1cc2fa8c8f9917cd">i2s</a></td></tr>
 <tr class="separator:a3f8c4a9c8f46d7fb1cc2fa8c8f9917cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6da5c40f01781729773fdfc3144e2fc" id="r_ae6da5c40f01781729773fdfc3144e2fc"><td class="memItemLeft" align="right" valign="top">i2s_std_config_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#ae6da5c40f01781729773fdfc3144e2fc">i2s_config</a></td></tr>
@@ -229,8 +240,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>We limit the write size to the buffer size. </p>
+<p>Reports the real free space in the TX DMA queue: capacity minus the backlog of bytes handed to i2s_channel_write() but not yet reported back as sent by the on_sent event callback (see <a class="el" href="structaudio__tools_1_1_i2_s_driver_e_s_p32_v1_1_1_driver_i2_s.html#a591c819bb8d93d345958e716fe828ebe">DriverI2S::startChannels</a> and onSentCb below). Falls back to the old constant if the callback was never wired up (e.g. dma_capacity_ still 0 before <a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a>). </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_i2_s_driver_base.html#a9953a7c3a981eb3a83adb4f9ecfb9ac5">I2SDriverBase</a>.</p>
 
@@ -541,6 +551,49 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a6e69456b2a6fb03d764ce2ba78f4b65d" name="a6e69456b2a6fb03d764ce2ba78f4b65d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e69456b2a6fb03d764ce2ba78f4b65d">&#9670;&#160;</a></span>onSentCb()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool onSentCb </td>
+          <td>(</td>
+          <td class="paramtype">i2s_chan_handle_t&#160;</td>
+          <td class="paramname"><em>handle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">i2s_event_data_t *&#160;</td>
+          <td class="paramname"><em>event</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>user_ctx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>on_sent callback (ISR context): a DMA buffer of event-&gt;size bytes has just finished physically transmitting. Nested classes have access to enclosing-class members in C++, so <a class="el" href="structaudio__tools_1_1_i2_s_driver_e_s_p32_v1_1_1_driver_i2_s.html">DriverI2S</a> can call this directly. </p>
+
+</div>
+</div>
 <a id="aecdbea3a6aff480653df559eb8097559" name="aecdbea3a6aff480653df559eb8097559"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aecdbea3a6aff480653df559eb8097559">&#9670;&#160;</a></span>readBytes()</h2>
 
@@ -702,6 +755,50 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a6dc59e626bdc6f5fda890a7b889bac94" name="a6dc59e626bdc6f5fda890a7b889bac94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6dc59e626bdc6f5fda890a7b889bac94">&#9670;&#160;</a></span>bytes_sent_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::atomic&lt;uint32_t&gt; bytes_sent_ {0}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a062afc8dc0720c21a065143adf0d26c3" name="a062afc8dc0720c21a065143adf0d26c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a062afc8dc0720c21a065143adf0d26c3">&#9670;&#160;</a></span>bytes_written_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::atomic&lt;uint32_t&gt; bytes_written_ {0}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ae57bb659601c7f3538bda86ae18a7284" name="ae57bb659601c7f3538bda86ae18a7284"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae57bb659601c7f3538bda86ae18a7284">&#9670;&#160;</a></span>cfg</h2>
 
@@ -713,6 +810,28 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html">I2SConfigESP32V1</a> cfg = <a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#a077146a075c54b6acf22c5b467d929e9">defaultConfig</a>(<a class="el" href="group__basic.html#gga8cbd91a8bac9b5ab425112be1620eb49a6f3b87c1abe374d1d1a5fef79bffeb00">RXTX_MODE</a>)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a998bc475244207c653dfecc7d3057384" name="a998bc475244207c653dfecc7d3057384"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a998bc475244207c653dfecc7d3057384">&#9670;&#160;</a></span>dma_capacity_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t dma_capacity_ = 0</td>
         </tr>
       </table>
   </td>

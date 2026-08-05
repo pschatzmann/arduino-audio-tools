@@ -132,5 +132,7 @@ var searchData=
   ['bytes_5fper_5fframe_129',['bytes_per_frame',['../classaudio__tools_1_1_resample_stream.html#aeff5997abcf0c88c9434923e2ffd032b',1,'audio_tools::ResampleStream::bytes_per_frame'],['../classaudio__tools_1_1_faust_stream.html#aeff5997abcf0c88c9434923e2ffd032b',1,'audio_tools::FaustStream::bytes_per_frame']]],
   ['bytes_5fper_5fsample_130',['bytes_per_sample',['../classaudio__tools_1_1_faust_stream.html#a9459b2e7b5be656d4ff28ea1b274e20b',1,'audio_tools::FaustStream']]],
   ['bytes_5fper_5fsecond_131',['bytes_per_second',['../classaudio__tools_1_1_measuring_stream.html#a9546d93d065a4d24eaa949f2f179eb0d',1,'audio_tools::MeasuringStream']]],
-  ['bytes_5freceived_132',['bytes_received',['../classaudio__tools_1_1_v_b_a_n_stream.html#a45b8f3efe5394dc3ebb4318f5b476b2b',1,'audio_tools::VBANStream']]]
+  ['bytes_5freceived_132',['bytes_received',['../classaudio__tools_1_1_v_b_a_n_stream.html#a45b8f3efe5394dc3ebb4318f5b476b2b',1,'audio_tools::VBANStream']]],
+  ['bytes_5fsent_5f_133',['bytes_sent_',['../classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#a6dc59e626bdc6f5fda890a7b889bac94',1,'audio_tools::I2SDriverESP32V1']]],
+  ['bytes_5fwritten_5f_134',['bytes_written_',['../classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#a062afc8dc0720c21a065143adf0d26c3',1,'audio_tools::I2SDriverESP32V1']]]
 ];
