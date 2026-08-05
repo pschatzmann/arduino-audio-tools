@@ -100,7 +100,7 @@ var searchData=
   ['distantport_97',['distantport',['../struct_v_b_a_n___p_i_n_g0.html#af43eda88e8ecbd7a52cf5f61756a2920',1,'VBAN_PING0::DistantPort'],['../vban_8h.html#af43eda88e8ecbd7a52cf5f61756a2920',1,'DistantPort:&#160;vban.h']]],
   ['distantreserved_98',['distantreserved',['../vban_8h.html#a0594b6edbde4cc65361027a42d976895',1,'DistantReserved:&#160;vban.h'],['../struct_v_b_a_n___p_i_n_g0.html#a0594b6edbde4cc65361027a42d976895',1,'VBAN_PING0::DistantReserved']]],
   ['dma_5fchan_99',['dma_chan',['../structaudio__tools_1_1_s_p_i_audio_slave_config.html#a456684b326733e9d7a283b12f7316770',1,'audio_tools::SPIAudioSlaveConfig']]],
-  ['double_5fpi_100',['double_Pi',['../classaudio__tools_1_1_sine_generator.html#a97c68f8553747ed33bd73bcd53fad516',1,'audio_tools::SineGenerator']]],
+  ['double_5fpi_100',['double_Pi',['../classaudio__tools_1_1_float_sine_generator.html#a97c68f8553747ed33bd73bcd53fad516',1,'audio_tools::FloatSineGenerator']]],
   ['downpercent_101',['downPercent',['../classaudio__tools_1_1_sound_generator.html#ae2b104b741d35e43975aaf4f91c228b9',1,'audio_tools::SoundGenerator']]],
   ['dreq_5fpin_102',['dreq_pin',['../classaudio__tools_1_1_v_s1053_config.html#a0fcaa7a3d2232ff499bff304da4fe29f',1,'audio_tools::VS1053Config']]],
   ['driver_103',['driver',['../classaudio__tools_1_1_r2_r_config.html#a5b166247f5fbd4f9648ee18362a37734',1,'audio_tools::R2RConfig::driver'],['../structaudio__tools_1_1fft__state.html#aa774257692cf1c61ae37bca312e860f2',1,'audio_tools::fft_state::driver'],['../classaudio__tools_1_1_audio_kit_stream_config.html#a80336ac7095495778f32414c6b6cee0c',1,'audio_tools::AudioKitStreamConfig::driver']]],
