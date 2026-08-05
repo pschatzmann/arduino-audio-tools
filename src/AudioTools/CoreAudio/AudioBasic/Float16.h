@@ -3,7 +3,22 @@
 namespace audio_tools {
 
 /**
- * @brief Stores float values with 2 bytes
+ * @brief Half-precision IEEE-754 binary16 float compressed into 2 bytes (1
+ * sign + 5 exponent + 10 mantissa bits, no infinity/NaN encoding), used to
+ * halve the memory footprint of large float buffers (e.g. sample or FFT
+ * data) at the cost of precision: range +-131008.0, minimum positive normal
+ * ~6.1035156E-5, ~3.3 significant decimal digits. Unlike float32, this is a
+ * genuinely lossy compression -- converting a value in and back out will
+ * generally not return the exact original float.
+ *
+ * There is no assumption of hardware fp16 support: conversion to/from a
+ * native 32-bit `float` is done with portable integer bit manipulation (see
+ * half_to_float()/float_to_half()), and all arithmetic (+, -, *, /) is
+ * performed by converting both operands to `float`, computing natively, and
+ * returning `float` -- there is no direct half+half instruction path. This
+ * makes float16 suitable as a compact storage type, not as a type to run
+ * tight numeric loops in.
+ * @ingroup basic
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

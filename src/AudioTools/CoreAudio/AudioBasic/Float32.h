@@ -4,7 +4,16 @@
 namespace audio_tools {
 
 /**
- * @brief Stores float values as uint32_t so that we can use memory allocated with MALLOC_CAP_32BIT
+ * @brief A plain 32-bit `float`'s bit pattern reinterpreted as a `uint32_t`,
+ * so instances can live in memory obtained from a capability-specific
+ * allocator (e.g. ESP32's MALLOC_CAP_32BIT, which some heap regions require
+ * for word-addressed access and won't necessarily hand out for a plain
+ * `float` array). Conversion to/from `float` is a zero-cost bitwise
+ * reinterpretation (see as_uint()/as_float()), not an encoding -- unlike
+ * float16, this class is bit-for-bit identical to `float` and loses no
+ * precision or range; it exists purely to control storage/allocation, not
+ * to compress data.
+ * @ingroup basic
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
