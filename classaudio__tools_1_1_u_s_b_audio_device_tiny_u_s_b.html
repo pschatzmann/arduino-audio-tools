@@ -269,11 +269,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a8200744635720247ed883a3aeca5b902"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback for feedback done events.  <br /></td></tr>
 <tr class="separator:a8200744635720247ed883a3aeca5b902"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6bb007a212fa1ad3ae4b2b18aa955508" id="r_a6bb007a212fa1ad3ae4b2b18aa955508"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a6bb007a212fa1ad3ae4b2b18aa955508">setFeedbackAutomatic</a> ()</td></tr>
-<tr class="memdesc:a6bb007a212fa1ad3ae4b2b18aa955508"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reverts <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a84e5be1ecfe38f27c62477488eccfe66" title="Overrides the automatic (FIFO_COUNT) feedback computation with a fixed value driven by the caller,...">setFeedbackPercent()</a> and restores the automatic (FIFO_COUNT) feedback computation.  <br /></td></tr>
+<tr class="memdesc:a6bb007a212fa1ad3ae4b2b18aa955508"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reverts <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a608feb54e61be3eeda81a7dce023c2fd" title="Overrides the automatic (FIFO_COUNT) feedback computation with a fixed value driven by the caller,...">setFeedbackPercent()</a> and restores the automatic (FIFO_COUNT) feedback computation.  <br /></td></tr>
 <tr class="separator:a6bb007a212fa1ad3ae4b2b18aa955508"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a84e5be1ecfe38f27c62477488eccfe66" id="r_a84e5be1ecfe38f27c62477488eccfe66"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a84e5be1ecfe38f27c62477488eccfe66">setFeedbackPercent</a> (uint8_t percent)</td></tr>
-<tr class="memdesc:a84e5be1ecfe38f27c62477488eccfe66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overrides the automatic (FIFO_COUNT) feedback computation with a fixed value driven by the caller, e.g. from an external buffer-fill measurement.  <br /></td></tr>
-<tr class="separator:a84e5be1ecfe38f27c62477488eccfe66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a608feb54e61be3eeda81a7dce023c2fd" id="r_a608feb54e61be3eeda81a7dce023c2fd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a608feb54e61be3eeda81a7dce023c2fd">setFeedbackPercent</a> (int percent)</td></tr>
+<tr class="memdesc:a608feb54e61be3eeda81a7dce023c2fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overrides the automatic (FIFO_COUNT) feedback computation with a fixed value driven by the caller, e.g. from an external buffer-fill measurement.  <br /></td></tr>
+<tr class="separator:a608feb54e61be3eeda81a7dce023c2fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a2b83c2a4c09c120dbc3319da7ad2ff" id="r_a3a2b83c2a4c09c120dbc3319da7ad2ff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a3a2b83c2a4c09c120dbc3319da7ad2ff">setGetReqEpCallback</a> (std::function&lt; bool(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *, uint8_t, <a class="el" href="structaudio__tools_1_1_usb_setup_packet.html">UsbSetupPacket</a> const &amp;)&gt; cb)</td></tr>
 <tr class="memdesc:a3a2b83c2a4c09c120dbc3319da7ad2ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback for GET requests on an endpoint.  <br /></td></tr>
 <tr class="separator:a3a2b83c2a4c09c120dbc3319da7ad2ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -4101,12 +4101,12 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Reverts <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a84e5be1ecfe38f27c62477488eccfe66" title="Overrides the automatic (FIFO_COUNT) feedback computation with a fixed value driven by the caller,...">setFeedbackPercent()</a> and restores the automatic (FIFO_COUNT) feedback computation. </p>
+<p>Reverts <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a608feb54e61be3eeda81a7dce023c2fd" title="Overrides the automatic (FIFO_COUNT) feedback computation with a fixed value driven by the caller,...">setFeedbackPercent()</a> and restores the automatic (FIFO_COUNT) feedback computation. </p>
 
 </div>
 </div>
-<a id="a84e5be1ecfe38f27c62477488eccfe66" name="a84e5be1ecfe38f27c62477488eccfe66"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a84e5be1ecfe38f27c62477488eccfe66">&#9670;&#160;</a></span>setFeedbackPercent()</h2>
+<a id="a608feb54e61be3eeda81a7dce023c2fd" name="a608feb54e61be3eeda81a7dce023c2fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a608feb54e61be3eeda81a7dce023c2fd">&#9670;&#160;</a></span>setFeedbackPercent()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4117,7 +4117,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="memname">void setFeedbackPercent </td>
           <td>(</td>
-          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>percent</em></td><td>)</td>
           <td></td>
         </tr>

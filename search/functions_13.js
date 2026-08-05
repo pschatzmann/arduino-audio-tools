@@ -214,7 +214,7 @@ var searchData=
   ['setfeedback_211',['setFeedback',['../classaudio__tools_1_1_delay.html#a52e8aaf6ccc5f440a2562f28a632389d',1,'audio_tools::Delay']]],
   ['setfeedbackautomatic_212',['setFeedbackAutomatic',['../classaudio__tools_1_1_u_s_b_audio_device_base.html#a6bb007a212fa1ad3ae4b2b18aa955508',1,'audio_tools::USBAudioDeviceBase']]],
   ['setfeedbackgain_213',['setfeedbackgain',['../classaudio__tools_1_1_filtered_delay.html#ad77bc0821f5c6d26d7c840fb63e687e6',1,'audio_tools::FilteredDelay::setFeedbackGain()'],['../classaudio__tools_1_1_simple_delay.html#ad77bc0821f5c6d26d7c840fb63e687e6',1,'audio_tools::SimpleDelay::setFeedbackGain()']]],
-  ['setfeedbackpercent_214',['setFeedbackPercent',['../classaudio__tools_1_1_u_s_b_audio_device_base.html#a84e5be1ecfe38f27c62477488eccfe66',1,'audio_tools::USBAudioDeviceBase']]],
+  ['setfeedbackpercent_214',['setFeedbackPercent',['../classaudio__tools_1_1_u_s_b_audio_device_base.html#a608feb54e61be3eeda81a7dce023c2fd',1,'audio_tools::USBAudioDeviceBase']]],
   ['setfftdriver_215',['setFFTDriver',['../classaudio__tools_1_1_m_d_f_echo_cancellation.html#ad093b61126ba04e9b99c4d4d0e75e61b',1,'audio_tools::MDFEchoCancellation']]],
   ['setfile_216',['setFile',['../classaudio__tools_1_1_file_loop_t.html#a32d5d25919e43b8c99e16c87629986b7',1,'audio_tools::FileLoopT']]],
   ['setfiledeletecallback_217',['setFileDeleteCallback',['../classaudio__tools_1_1_n_buffer_file.html#a139fcc90971cdda4c5d0f8f42d9702a8',1,'audio_tools::NBufferFile']]],
