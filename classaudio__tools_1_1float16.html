@@ -78,11 +78,11 @@ $(function() {
 <a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1float16-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">float16 Class Reference</div></div>
+  <div class="headertitle"><div class="title">float16 Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__basic.html">Basic</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Stores float values with 2 bytes.  
+<p>Half-precision IEEE-754 binary16 float compressed into 2 bytes (1 sign + 5 exponent + 10 mantissa bits, no infinity/NaN encoding), used to halve the memory footprint of large float buffers (e.g. sample or FFT data) at the cost of precision: range +-131008.0, minimum positive normal ~6.1035156E-5, ~3.3 significant decimal digits. Unlike <a class="el" href="classaudio__tools_1_1float32.html" title="A plain 32-bit float&#39;s bit pattern reinterpreted as a uint32_t, so instances can live in memory obtai...">float32</a>, this is a genuinely lossy compression &ndash; converting a value in and back out will generally not return the exact original float.  
  <a href="classaudio__tools_1_1float16.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_float16_8h_source.html">Float16.h</a>&gt;</code></p>
@@ -133,7 +133,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a900b69af7d674b8db3bceae754b4955a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Stores float values with 2 bytes. </p>
+<div class="textblock"><p>Half-precision IEEE-754 binary16 float compressed into 2 bytes (1 sign + 5 exponent + 10 mantissa bits, no infinity/NaN encoding), used to halve the memory footprint of large float buffers (e.g. sample or FFT data) at the cost of precision: range +-131008.0, minimum positive normal ~6.1035156E-5, ~3.3 significant decimal digits. Unlike <a class="el" href="classaudio__tools_1_1float32.html" title="A plain 32-bit float&#39;s bit pattern reinterpreted as a uint32_t, so instances can live in memory obtai...">float32</a>, this is a genuinely lossy compression &ndash; converting a value in and back out will generally not return the exact original float. </p>
+<p>There is no assumption of hardware fp16 support: conversion to/from a native 32-bit <code>float</code> is done with portable integer bit manipulation (see <a class="el" href="classaudio__tools_1_1float16.html#a0842bda138a6c90f81bb8749a0d38c45">half_to_float()</a>/float_to_half()), and all arithmetic (+, -, *, /) is performed by converting both operands to <code>float</code>, computing natively, and returning <code>float</code> &ndash; there is no direct half+half instruction path. This makes <a class="el" href="classaudio__tools_1_1float16.html" title="Half-precision IEEE-754 binary16 float compressed into 2 bytes (1 sign + 5 exponent + 10 mantissa bit...">float16</a> suitable as a compact storage type, not as a type to run tight numeric loops in.</p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
