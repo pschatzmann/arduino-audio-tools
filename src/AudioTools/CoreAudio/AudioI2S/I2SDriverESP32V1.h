@@ -9,6 +9,7 @@
 #include "driver/i2s_std.h"
 #include "driver/i2s_tdm.h"
 #include "esp_system.h"
+#include <atomic>
 
 #define IS_I2S_IMPLEMENTED
 
@@ -88,8 +89,21 @@ class I2SDriverESP32V1 : public I2SDriverBase {
   /// we assume the data is already available in the buffer
   int available() { return I2S_BUFFER_COUNT * I2S_BUFFER_SIZE; }
 
-  /// We limit the write size to the buffer size
-  int availableForWrite() { return I2S_BUFFER_COUNT * I2S_BUFFER_SIZE; }
+  /// Reports the real free space in the TX DMA queue: capacity minus the
+  /// backlog of bytes handed to i2s_channel_write() but not yet reported
+  /// back as sent by the on_sent event callback (see DriverI2S::startChannels
+  /// and onSentCb below). Falls back to the old constant if the callback
+  /// was never wired up (e.g. dma_capacity_ still 0 before begin()).
+  int availableForWrite() {
+    if (dma_capacity_ == 0) return I2S_BUFFER_COUNT * I2S_BUFFER_SIZE;
+    uint32_t backlog = bytes_written_.load(std::memory_order_relaxed) -
+                       bytes_sent_.load(std::memory_order_relaxed);
+    // Guards against transient over-reads while counters are mid-update
+    // across the ISR/task boundary; backlog can never legitimately exceed
+    // the DMA capacity itself.
+    if (backlog > dma_capacity_) backlog = dma_capacity_;
+    return (int)(dma_capacity_ - backlog);
+  }
 
   /// stops the I2C and unistalls the driver
   void end() {
@@ -105,6 +119,7 @@ class I2SDriverESP32V1 : public I2SDriverBase {
       tx_chan = nullptr;
     }
 
+    dma_capacity_ = 0;
     is_started = false;
   }
 
@@ -114,12 +129,13 @@ class I2SDriverESP32V1 : public I2SDriverBase {
   /// writes the data to the I2S interface
   size_t writeBytes(const void *src, size_t size_bytes) {
     TRACED();
-    size_t result;
+    size_t result = 0;
     assert(tx_chan != nullptr);
     if (i2s_channel_write(tx_chan, src, size_bytes, &result,
                           ticks_to_wait_write) != ESP_OK) {
       TRACEE();
     }
+    bytes_written_.fetch_add((uint32_t)result, std::memory_order_relaxed);
     return result;
   }
 
@@ -148,11 +164,30 @@ class I2SDriverESP32V1 : public I2SDriverBase {
   TickType_t ticks_to_wait_read = portMAX_DELAY;
   TickType_t ticks_to_wait_write = portMAX_DELAY;
 
+  // Real TX DMA backlog tracking for availableForWrite() -- see
+  // DriverI2S::startChannels() for where onSentCb gets registered, and
+  // newChannels() for where dma_capacity_ is computed from the actual
+  // dma_desc_num/dma_frame_num ESP-IDF ends up allocating.
+  std::atomic<uint32_t> bytes_written_{0};
+  std::atomic<uint32_t> bytes_sent_{0};
+  uint32_t dma_capacity_ = 0;
+
+  /// on_sent callback (ISR context): a DMA buffer of event->size bytes has
+  /// just finished physically transmitting. Nested classes have access to
+  /// enclosing-class members in C++, so DriverI2S can call this directly.
+  static bool onSentCb(i2s_chan_handle_t handle, i2s_event_data_t *event,
+                       void *user_ctx) {
+    auto *self = static_cast<I2SDriverESP32V1 *>(user_ctx);
+    self->bytes_sent_.fetch_add((uint32_t)event->size,
+                                std::memory_order_relaxed);
+    return false;  // no higher-priority task to wake
+  }
+
   struct DriverCommon {
     virtual bool startChannels(I2SConfigESP32V1 &cfg,
                                i2s_chan_handle_t &tx_chan,
                                i2s_chan_handle_t &rx_chan, int txPin,
-                               int rxPin) = 0;
+                               int rxPin, I2SDriverESP32V1 *self) = 0;
 
     virtual i2s_chan_config_t getChannelConfig(I2SConfigESP32V1 &cfg) = 0;
     // changes the sample rate
@@ -169,10 +204,11 @@ class I2SDriverESP32V1 : public I2SDriverBase {
 
   struct DriverI2S : public DriverCommon {
     bool startChannels(I2SConfigESP32V1 &cfg, i2s_chan_handle_t &tx_chan,
-                       i2s_chan_handle_t &rx_chan, int txPin, int rxPin) {
+                       i2s_chan_handle_t &rx_chan, int txPin, int rxPin,
+                       I2SDriverESP32V1 *self) {
       TRACED();
       LOGI("tx: %d, rx: %d", txPin, rxPin);
-      i2s_std_config_t std_cfg; 
+      i2s_std_config_t std_cfg;
       std_cfg.clk_cfg = getClockConfig(cfg);
       std_cfg.slot_cfg = getSlotConfig(cfg);
       std_cfg.gpio_cfg = {
@@ -188,12 +224,36 @@ class I2SDriverESP32V1 : public I2SDriverBase {
                           .ws_inv = false,
                       },
       };
-      
+
 
       if (cfg.rx_tx_mode == RXTX_MODE || cfg.rx_tx_mode == TX_MODE) {
         if (i2s_channel_init_std_mode(tx_chan, &std_cfg) != ESP_OK) {
           LOGE("i2s_channel_init_std_mode %s", "tx");
           return false;
+        }
+        // Must register while the channel is REGISTERED/READY, i.e. before
+        // i2s_channel_enable() below transitions it to RUNNING.
+        i2s_event_callbacks_t cbs = {};
+        cbs.on_sent = &I2SDriverESP32V1::onSentCb;
+        if (i2s_channel_register_event_callback(tx_chan, &cbs, self) != ESP_OK) {
+          LOGE("i2s_channel_register_event_callback %s", "tx");
+        } else {
+          // Real DMA capacity for availableForWrite(): read back the
+          // dma_desc_num/dma_frame_num ESP-IDF actually allocated (from the
+          // same getChannelConfig() computation newChannels() used to call
+          // i2s_new_channel()) rather than assuming
+          // cfg.buffer_size * cfg.buffer_count -- getChannelConfig() doesn't
+          // always set dma_desc_num explicitly, in which case it falls back
+          // to the I2S_CHANNEL_DEFAULT_CONFIG macro default (6).
+          i2s_chan_config_t chan_cfg = getChannelConfig(cfg);
+          int frame_size =
+              ((cfg.bits_per_sample == 24) ? 32 : cfg.bits_per_sample) *
+              cfg.channels / 8;
+          if (frame_size <= 0) frame_size = 1;
+          self->dma_capacity_ = (uint32_t)chan_cfg.dma_desc_num *
+                                chan_cfg.dma_frame_num * frame_size;
+          self->bytes_written_ = 0;
+          self->bytes_sent_ = 0;
         }
         if (i2s_channel_enable(tx_chan) != ESP_OK) {
           LOGE("i2s_channel_enable %s", "tx");
@@ -355,7 +415,8 @@ class I2SDriverESP32V1 : public I2SDriverBase {
 
   struct DriverPDM : public DriverCommon {
     bool startChannels(I2SConfigESP32V1 &cfg, i2s_chan_handle_t &tx_chan,
-                       i2s_chan_handle_t &rx_chan, int txPin, int rxPin) {
+                       i2s_chan_handle_t &rx_chan, int txPin, int rxPin,
+                       I2SDriverESP32V1 * /*self*/) {
       if (cfg.rx_tx_mode == TX_MODE) {
         return startTX(cfg, tx_chan, txPin);
       } else if (cfg.rx_tx_mode == RX_MODE) {
@@ -470,7 +531,8 @@ class I2SDriverESP32V1 : public I2SDriverBase {
   // https://github.com/espressif/esp-idf/blob/v5.3-dev/examples/peripherals/i2s/i2s_basic/i2s_tdm/main/i2s_tdm_example_main.c
   struct DriverTDM : public DriverCommon {
     bool startChannels(I2SConfigESP32V1 &cfg, i2s_chan_handle_t &tx_chan,
-                       i2s_chan_handle_t &rx_chan, int txPin, int rxPin) {
+                       i2s_chan_handle_t &rx_chan, int txPin, int rxPin,
+                       I2SDriverESP32V1 * /*self*/) {
       i2s_tdm_config_t tdm_cfg = {
           .clk_cfg = getClockConfig(cfg),
           .slot_cfg = getSlotConfig(cfg),
@@ -575,7 +637,7 @@ class I2SDriverESP32V1 : public I2SDriverBase {
       return false;
     }
 
-    is_started = driver.startChannels(cfg, tx_chan, rx_chan, txPin, rxPin);
+    is_started = driver.startChannels(cfg, tx_chan, rx_chan, txPin, rxPin, this);
     if (!is_started) {
       end();
       LOGE("Channels not started");
@@ -585,6 +647,10 @@ class I2SDriverESP32V1 : public I2SDriverBase {
 
   bool newChannels(I2SConfigESP32V1 &cfg, DriverCommon &driver) {
     i2s_chan_config_t chan_cfg = driver.getChannelConfig(cfg);
+    // dma_capacity_/counters are only set up in DriverI2S::startChannels()
+    // (the only driver that registers the on_sent callback crediting
+    // bytes_sent_ back) -- leave them at 0 here for PDM/TDM so
+    // availableForWrite() keeps using the old constant fallback for those.
     switch (cfg.rx_tx_mode) {
       case RX_MODE:
         if (i2s_new_channel(&chan_cfg, NULL, &rx_chan) != ESP_OK) {
