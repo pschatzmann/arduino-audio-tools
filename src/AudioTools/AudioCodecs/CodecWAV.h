@@ -551,9 +551,13 @@ class WAVDecoder : public AudioDecoder {
         int data_start = decodeHeader((uint8_t *)data, len);
         // we do not have the complete header yet: need more data
         if (data_start == 0) return len;
-        // process the outstanding data
-        result = data_start +
-                 write_out((uint8_t *)data + data_start, len - data_start);
+        // process the outstanding data - only if the format is supported;
+        // otherwise report 0 bytes written, consistent with subsequent
+        // write() calls once the format has been found to be invalid
+        if (isValid) {
+          result = data_start +
+                   write_out((uint8_t *)data + data_start, len - data_start);
+        }
 
       } else if (isValid) {
         result = write_out((uint8_t *)data, len);
@@ -827,9 +831,31 @@ class WAVDecoder : public AudioDecoder {
       AudioInfo bi = audioInfo();
       notifyAudioChange(bi);
     } else {
-      LOGE("WAV format not supported: %d", (int)format);
+      LOGE("WAV format not supported: 0x%04X", (unsigned)format);
+      logSupportedFormats();
     }
     return header.getDataPos();
+  }
+
+  /// Logs (at error level) the WAV format tags this instance can currently
+  /// decode: the natively handled ones, plus any registered via
+  /// setDecoder()/addDecoder()
+  void logSupportedFormats() {
+    LOGE(
+        "Natively supported: PCM (0x%04X), IEEE_FLOAT (0x%04X), ALAW "
+        "(0x%04X), MULAW (0x%04X)",
+        (unsigned)AudioFormat::PCM, (unsigned)AudioFormat::IEEE_FLOAT,
+        (unsigned)AudioFormat::ALAW, (unsigned)AudioFormat::MULAW);
+    if (decoders.empty()) {
+      LOGE(
+          "No additional decoders registered - use "
+          "setDecoder()/addDecoder() to support e.g. ADPCM formats");
+    } else {
+      for (int i = 0; i < decoders.size(); i++) {
+        LOGE("Registered decoder for format: 0x%04X",
+             (unsigned)decoders[i].format);
+      }
+    }
   }
 
   /// Finds the decoder registered for the given format tag, if any
