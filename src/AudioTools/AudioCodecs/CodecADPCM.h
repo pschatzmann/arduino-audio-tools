@@ -110,7 +110,7 @@ class ADPCMDecoder : public AudioDecoderExt {
       case AV_CODEC_ID_ADPCM_MS:
         return AudioFormat::ADPCM;
       case AV_CODEC_ID_ADPCM_IMA_WAV:
-        return AudioFormat::DVI_ADPCM;
+        return AudioFormat::IMA_ADPCM;
       case AV_CODEC_ID_ADPCM_YAMAHA:
         return AudioFormat::YAMAHA_ADPCM;
       default:

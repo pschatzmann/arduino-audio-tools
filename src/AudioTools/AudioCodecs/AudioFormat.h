@@ -31,7 +31,7 @@ enum class AudioFormat : uint16_t {
   // WMAVOICE10 = 0x000B, /* Microsoft Corporation */
   OKI_ADPCM = 0x0010, /* OKI */
   DVI_ADPCM = 0x0011, /* Intel Corporation */
-  //IMA_ADPCM(DVI_ADPCM), /*  Intel Corporation */
+  IMA_ADPCM = DVI_ADPCM, /* alias: same WAVE format tag as DVI_ADPCM */
   MEDIASPACE_ADPCM = 0x0012, /* Videologic */
   SIERRA_ADPCM = 0x0013, /* Sierra Semiconductor Corp */
   G723_ADPCM = 0x0014, /* Antex Electronics Corporation */

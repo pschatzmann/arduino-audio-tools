@@ -6,7 +6,7 @@ AudioInfo info(16000, 2, 16);
 SineGenerator<int16_t> sineWave( 32000);  
 GeneratedSoundStream<int16_t> sound( sineWave); 
 CsvOutput<int16_t> out(Serial);
-AVCodecID id = AV_CODEC_ID_ADPCM_IMA_WAV;
+AVCodecID id = AV_CODEC_ID_ADPCM_MS;
 ADPCMDecoder adpcm_decoder(id); 
 ADPCMEncoder adpcm_encoder(id);  
 WAVDecoder wav_decoder(adpcm_decoder, AudioFormat::ADPCM);
