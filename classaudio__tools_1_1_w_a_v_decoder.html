@@ -74,16 +74,18 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_w_a_v_decoder-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">WAVDecoder Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__codecs.html">Codecs</a> &#124; <a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__codecs.html">Codecs</a> &raquo; <a class="el" href="group__decoder.html">Decoder</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>A simple <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html" title="A simple WAVDecoder: We parse the header data on the first record to determine the format....">WAVDecoder</a>: We parse the header data on the first record to determine the format. If no <a class="el" href="classaudio__tools_1_1_audio_decoder_ext.html" title="Extended AudioDecoder interface to support block size configuration.">AudioDecoderExt</a> is specified we just write the PCM data to the output that is defined by calling <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a065fe4c0d3543644ab523a5d9b5fb9c0" title="Defines the output Stream.">setOutput()</a>. You can define a ADPCM decoder to decode WAV files that contain ADPCM data.  
+<p>A simple <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html" title="A simple WAVDecoder: We parse the header data on the first record to determine the format....">WAVDecoder</a>: We parse the header data on the first record to determine the format. If no <a class="el" href="classaudio__tools_1_1_audio_decoder_ext.html" title="Extended AudioDecoder interface to support block size configuration.">AudioDecoderExt</a> is specified we just write the PCM data to the output that is defined by calling <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a065fe4c0d3543644ab523a5d9b5fb9c0" title="Defines the output Stream.">setOutput()</a>. You can define a ADPCM decoder to decode WAV files that contain ADPCM data. Since WAV files can use different ADPCM (or other) encodings, you can register more than one decoder with <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a8f111a8186ef65062eae42904631a081">addDecoder()</a>: the decoder matching the format tag found in the WAV header is selected automatically when a file is parsed.  
  <a href="classaudio__tools_1_1_w_a_v_decoder.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_codec_w_a_v_8h_source.html">CodecWAV.h</a>&gt;</code></p>
@@ -100,6 +102,12 @@ Inheritance diagram for WAVDecoder:</div>
   </map>
 </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_w_a_v_decoder_1_1_decoder_entry.html">DecoderEntry</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Associates a WAV format tag with the decoder responsible for it.  <a href="structaudio__tools_1_1_w_a_v_decoder_1_1_decoder_entry.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a9c47a827a0f04215fa3005ba97123435" id="r_a9c47a827a0f04215fa3005ba97123435"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a9c47a827a0f04215fa3005ba97123435">WAVDecoder</a> ()=default</td></tr>
@@ -108,6 +116,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab5555009a75f049857a44ae320627e59" id="r_ab5555009a75f049857a44ae320627e59"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#ab5555009a75f049857a44ae320627e59">WAVDecoder</a> (<a class="el" href="classaudio__tools_1_1_audio_decoder_ext.html">AudioDecoderExt</a> &amp;dec, <a class="el" href="group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1">AudioFormat</a> fmt)</td></tr>
 <tr class="memdesc:ab5555009a75f049857a44ae320627e59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html" title="A simple WAVDecoder: We parse the header data on the first record to determine the format....">WAVDecoder</a> object for ADPCM data.  <br /></td></tr>
 <tr class="separator:ab5555009a75f049857a44ae320627e59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f111a8186ef65062eae42904631a081" id="r_a8f111a8186ef65062eae42904631a081"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a8f111a8186ef65062eae42904631a081">addDecoder</a> (<a class="el" href="classaudio__tools_1_1_audio_decoder_ext.html">AudioDecoderExt</a> &amp;dec, <a class="el" href="group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1">AudioFormat</a> fmt)</td></tr>
+<tr class="separator:a8f111a8186ef65062eae42904631a081"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a727a24459787e1eeeb7a37ba888394a6" id="r_a727a24459787e1eeeb7a37ba888394a6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a727a24459787e1eeeb7a37ba888394a6">addNotifyAudioChange</a> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;bi)</td></tr>
 <tr class="memdesc:a727a24459787e1eeeb7a37ba888394a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds target to be notified about audio changes.  <br /></td></tr>
 <tr class="separator:a727a24459787e1eeeb7a37ba888394a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -162,8 +172,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a491404639b045035530de8e2079d8c95" id="r_a491404639b045035530de8e2079d8c95"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a491404639b045035530de8e2079d8c95">setConvert8Bit</a> (bool enable)</td></tr>
 <tr class="memdesc:a491404639b045035530de8e2079d8c95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert 8 bit to 16 bit PCM data (default: enabled)  <br /></td></tr>
 <tr class="separator:a491404639b045035530de8e2079d8c95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcb882caee0698053c3356997acdf4b9" id="r_afcb882caee0698053c3356997acdf4b9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#afcb882caee0698053c3356997acdf4b9">setConvertALawMuLaw</a> (bool enable)</td></tr>
+<tr class="separator:afcb882caee0698053c3356997acdf4b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1113a99aa668488e62a0f646af0f8b87" id="r_a1113a99aa668488e62a0f646af0f8b87"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a1113a99aa668488e62a0f646af0f8b87">setDecoder</a> (<a class="el" href="classaudio__tools_1_1_audio_decoder_ext.html">AudioDecoderExt</a> &amp;dec, <a class="el" href="group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1">AudioFormat</a> fmt)</td></tr>
-<tr class="memdesc:a1113a99aa668488e62a0f646af0f8b87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines an optional decoder if the format is not PCM.  <br /></td></tr>
 <tr class="separator:a1113a99aa668488e62a0f646af0f8b87"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a909f118906f9cf7024baae224dcd90a7" id="r_a909f118906f9cf7024baae224dcd90a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a909f118906f9cf7024baae224dcd90a7">setNotifyActive</a> (bool flag)</td></tr>
 <tr class="memdesc:a909f118906f9cf7024baae224dcd90a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivate/Reactivate automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> updates: (default is active)  <br /></td></tr>
@@ -192,6 +203,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a40ccab761fbae35e3eae43acc41be366" id="r_a40ccab761fbae35e3eae43acc41be366"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a40ccab761fbae35e3eae43acc41be366">decodeHeader</a> (uint8_t *in_ptr, size_t in_size)</td></tr>
 <tr class="memdesc:a40ccab761fbae35e3eae43acc41be366"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decodes the header data: Returns the start pos of the data.  <br /></td></tr>
 <tr class="separator:a40ccab761fbae35e3eae43acc41be366"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96f82a9eb20b43855334200c12469063" id="r_a96f82a9eb20b43855334200c12469063"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_audio_decoder_ext.html">AudioDecoderExt</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a96f82a9eb20b43855334200c12469063">findDecoder</a> (<a class="el" href="group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1">AudioFormat</a> format)</td></tr>
+<tr class="memdesc:a96f82a9eb20b43855334200c12469063"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the decoder registered for the given format tag, if any.  <br /></td></tr>
+<tr class="separator:a96f82a9eb20b43855334200c12469063"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a9a665a387a8c4fbf7fed14bbbfc093" id="r_a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a6a9a665a387a8c4fbf7fed14bbbfc093">notifyAudioChange</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> <a class="el" href="classaudio__tools_1_1_audio_decoder.html#a47385aa19435f5fca9d3083a748258c5">info</a>)</td></tr>
 <tr class="separator:a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3385069922699baaff027d995436e44d" id="r_a3385069922699baaff027d995436e44d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_print.html">Print</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a3385069922699baaff027d995436e44d">out</a> ()</td></tr>
@@ -206,8 +220,26 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:ad2c4348c8a00ba1c00465d2bf13acc37" id="r_ad2c4348c8a00ba1c00465d2bf13acc37"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#ad2c4348c8a00ba1c00465d2bf13acc37">write_out_8to16</a> (const uint8_t *in_ptr, size_t in_size)</td></tr>
 <tr class="memdesc:ad2c4348c8a00ba1c00465d2bf13acc37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert 8-bit PCM to 16-bit PCM and write out.  <br /></td></tr>
 <tr class="separator:ad2c4348c8a00ba1c00465d2bf13acc37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d4f48aef16e442db6b2aad49b3a5800" id="r_a7d4f48aef16e442db6b2aad49b3a5800"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a7d4f48aef16e442db6b2aad49b3a5800">write_out_alaw</a> (const uint8_t *in_ptr, size_t in_size)</td></tr>
+<tr class="memdesc:a7d4f48aef16e442db6b2aad49b3a5800"><td class="mdescLeft">&#160;</td><td class="mdescRight">Expand G.711 A-law 8-bit samples to 16-bit linear PCM and write out.  <br /></td></tr>
+<tr class="separator:a7d4f48aef16e442db6b2aad49b3a5800"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabc21e470c47c37fc39fd0ee81001afa" id="r_aabc21e470c47c37fc39fd0ee81001afa"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#aabc21e470c47c37fc39fd0ee81001afa">write_out_mulaw</a> (const uint8_t *in_ptr, size_t in_size)</td></tr>
+<tr class="memdesc:aabc21e470c47c37fc39fd0ee81001afa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Expand G.711 mu-law 8-bit samples to 16-bit linear PCM and write out.  <br /></td></tr>
+<tr class="separator:aabc21e470c47c37fc39fd0ee81001afa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e475070d3df18395c90a10c9d38eb0a" id="r_a2e475070d3df18395c90a10c9d38eb0a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_writer.html#a2e475070d3df18395c90a10c9d38eb0a">writeBlocking</a> (<a class="el" href="class_print.html">Print</a> *<a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a3385069922699baaff027d995436e44d">out</a>, uint8_t *data, size_t len)</td></tr>
 <tr class="separator:a2e475070d3df18395c90a10c9d38eb0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
+Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:aa3d9239926b25a520e8077ef7e2d6a7e" id="r_aa3d9239926b25a520e8077ef7e2d6a7e"><td class="memItemLeft" align="right" valign="top">static int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#aa3d9239926b25a520e8077ef7e2d6a7e">alaw2linear</a> (uint8_t a_val)</td></tr>
+<tr class="memdesc:aa3d9239926b25a520e8077ef7e2d6a7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a G.711 A-law encoded byte to a 16-bit linear PCM sample.  <br /></td></tr>
+<tr class="separator:aa3d9239926b25a520e8077ef7e2d6a7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3138e4a5d7c4cd0e342696ae20961034" id="r_a3138e4a5d7c4cd0e342696ae20961034"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a3138e4a5d7c4cd0e342696ae20961034">isNativelySupported</a> (<a class="el" href="group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1">AudioFormat</a> format)</td></tr>
+<tr class="memdesc:a3138e4a5d7c4cd0e342696ae20961034"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats that are handled internally without an external decoder.  <br /></td></tr>
+<tr class="separator:a3138e4a5d7c4cd0e342696ae20961034"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd1f0c862c0d5498d02fac2e3f272acc" id="r_abd1f0c862c0d5498d02fac2e3f272acc"><td class="memItemLeft" align="right" valign="top">static int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#abd1f0c862c0d5498d02fac2e3f272acc">ulaw2linear</a> (uint8_t u_val)</td></tr>
+<tr class="memdesc:abd1f0c862c0d5498d02fac2e3f272acc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a G.711 mu-law encoded byte to a 16-bit linear PCM sample.  <br /></td></tr>
+<tr class="separator:abd1f0c862c0d5498d02fac2e3f272acc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -223,10 +255,16 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ae15adab126f4b00607b00d234ee4cfd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5a5bbc8c54b8a33e76906e207a4c476" id="r_af5a5bbc8c54b8a33e76906e207a4c476"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#af5a5bbc8c54b8a33e76906e207a4c476">convert8to16</a> = true</td></tr>
 <tr class="separator:af5a5bbc8c54b8a33e76906e207a4c476"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93bcbd7bd5bde637be2bcd7b60ea3f61" id="r_a93bcbd7bd5bde637be2bcd7b60ea3f61"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a93bcbd7bd5bde637be2bcd7b60ea3f61">convertALawMuLaw</a> = true</td></tr>
+<tr class="separator:a93bcbd7bd5bde637be2bcd7b60ea3f61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb88a7977658bc9af3cae6500011adf1" id="r_adb88a7977658bc9af3cae6500011adf1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_encoded_audio_output.html">EncodedAudioOutput</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#adb88a7977658bc9af3cae6500011adf1">dec_out</a></td></tr>
 <tr class="separator:adb88a7977658bc9af3cae6500011adf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b432da52d2652bb3e2a75d50bde2a84" id="r_a6b432da52d2652bb3e2a75d50bde2a84"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1">AudioFormat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a6b432da52d2652bb3e2a75d50bde2a84">decoder_format</a> = <a class="el" href="group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1a1088fbc901dc88b6c18085220cc33de9">AudioFormat::PCM</a></td></tr>
+<tr class="memdesc:a6b432da52d2652bb3e2a75d50bde2a84"><td class="mdescLeft">&#160;</td><td class="mdescRight">format tag of the decoder currently selected in p_decoder  <br /></td></tr>
 <tr class="separator:a6b432da52d2652bb3e2a75d50bde2a84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f944515e8cb651c3db6270da427b909" id="r_a3f944515e8cb651c3db6270da427b909"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="structaudio__tools_1_1_w_a_v_decoder_1_1_decoder_entry.html">DecoderEntry</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a3f944515e8cb651c3db6270da427b909">decoders</a></td></tr>
+<tr class="memdesc:a3f944515e8cb651c3db6270da427b909"><td class="mdescLeft">&#160;</td><td class="mdescRight">decoders registered via <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a1113a99aa668488e62a0f646af0f8b87">setDecoder()</a>/addDecoder(), keyed by format tag  <br /></td></tr>
+<tr class="separator:a3f944515e8cb651c3db6270da427b909"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae5e6bba484cf15221185bf1bcb4198c" id="r_aae5e6bba484cf15221185bf1bcb4198c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_w_a_v_header.html">WAVHeader</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#aae5e6bba484cf15221185bf1bcb4198c">header</a></td></tr>
 <tr class="separator:aae5e6bba484cf15221185bf1bcb4198c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47385aa19435f5fca9d3083a748258c5" id="r_a47385aa19435f5fca9d3083a748258c5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#a47385aa19435f5fca9d3083a748258c5">info</a></td></tr>
@@ -245,7 +283,11 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:acdad90adc3ba71f7b1e16444c23b5502"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A simple <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html" title="A simple WAVDecoder: We parse the header data on the first record to determine the format....">WAVDecoder</a>: We parse the header data on the first record to determine the format. If no <a class="el" href="classaudio__tools_1_1_audio_decoder_ext.html" title="Extended AudioDecoder interface to support block size configuration.">AudioDecoderExt</a> is specified we just write the PCM data to the output that is defined by calling <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a065fe4c0d3543644ab523a5d9b5fb9c0" title="Defines the output Stream.">setOutput()</a>. You can define a ADPCM decoder to decode WAV files that contain ADPCM data. </p>
+<div class="textblock"><p>A simple <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html" title="A simple WAVDecoder: We parse the header data on the first record to determine the format....">WAVDecoder</a>: We parse the header data on the first record to determine the format. If no <a class="el" href="classaudio__tools_1_1_audio_decoder_ext.html" title="Extended AudioDecoder interface to support block size configuration.">AudioDecoderExt</a> is specified we just write the PCM data to the output that is defined by calling <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a065fe4c0d3543644ab523a5d9b5fb9c0" title="Defines the output Stream.">setOutput()</a>. You can define a ADPCM decoder to decode WAV files that contain ADPCM data. Since WAV files can use different ADPCM (or other) encodings, you can register more than one decoder with <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a8f111a8186ef65062eae42904631a081">addDecoder()</a>: the decoder matching the format tag found in the WAV header is selected automatically when a file is parsed. </p>
+<p>Besides plain PCM, the following formats are natively supported without the need to provide an external decoder:</p><ul>
+<li>IEEE_FLOAT (0x0003): uncompressed 32-bit float PCM is just passed through.</li>
+<li>ALAW (0x0006) and MULAW (0x0007): the 8-bit logarithmic G.711 samples are expanded to 16-bit linear PCM. This can be disabled with setConvertALawMuLaw(false) to pass through the raw encoded bytes instead.</li>
+</ul>
 <p>Optionally, if the input WAV file contains 8-bit PCM data, you can enable automatic conversion to 16-bit PCM output by calling setConvert8to16(true). This will convert unsigned 8-bit samples to signed 16-bit samples before writing to the output stream, and the reported bits_per_sample in <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#aed4bf0d5ce93f27242be485943d0b37d" title="Exposed AudioInfo (may reflect conversion flags)">audioInfo()</a> will be 16 when conversion is active. The same is valid for the 24 bit conversion which converts 24 bit (3 byte) to 32 bit (4 byte).</p>
 <p>Please note that you need to call <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#acba365cc28eb702040c382646cfb0a7a" title="Prepare decoder for a new WAV stream.">begin()</a> everytime you process a new file to let the decoder know that we start with a new header.</p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
@@ -317,6 +359,43 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a8f111a8186ef65062eae42904631a081" name="a8f111a8186ef65062eae42904631a081"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f111a8186ef65062eae42904631a081">&#9670;&#160;</a></span>addDecoder()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void addDecoder </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_audio_decoder_ext.html">AudioDecoderExt</a> &amp;&#160;</td>
+          <td class="paramname"><em>dec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1">AudioFormat</a>&#160;</td>
+          <td class="paramname"><em>fmt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Registers an additional decoder for a specific WAV format tag, on top of any decoder(s) already defined. The decoder used to decode the stream is selected automatically based on the format tag found in the WAV header, so a single <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html" title="A simple WAVDecoder: We parse the header data on the first record to determine the format....">WAVDecoder</a> instance can transparently handle files using any of the registered formats (e.g. multiple ADPCM variants). </p>
+
+</div>
+</div>
 <a id="a727a24459787e1eeeb7a37ba888394a6" name="a727a24459787e1eeeb7a37ba888394a6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a727a24459787e1eeeb7a37ba888394a6">&#9670;&#160;</a></span>addNotifyAudioChange()</h2>
 
@@ -344,6 +423,34 @@ Protected Attributes</h2></td></tr>
 <p>Adds target to be notified about audio changes. </p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_codec_n_o_p.html#a727a24459787e1eeeb7a37ba888394a6">CodecNOP</a>, <a class="el" href="classaudio__tools_1_1_encoded_audio_output.html#a1bf0444507e89c3e82e8f1825bf21ce0">EncodedAudioOutput</a>, <a class="el" href="classaudio__tools_1_1_encoded_audio_stream.html#a1bf0444507e89c3e82e8f1825bf21ce0">EncodedAudioStream</a>, <a class="el" href="classaudio__tools_1_1_a_a_c_decoder_f_d_k.html#a1bf0444507e89c3e82e8f1825bf21ce0">AACDecoderFDK</a>, <a class="el" href="classaudio__tools_1_1_decoder_basic.html#a1bf0444507e89c3e82e8f1825bf21ce0">DecoderBasic</a>, <a class="el" href="classaudio__tools_1_1_codec_chain.html#a1bf0444507e89c3e82e8f1825bf21ce0">CodecChain</a>, <a class="el" href="classaudio__tools_1_1_m_p3_decoder_helix.html#a1bf0444507e89c3e82e8f1825bf21ce0">MP3DecoderHelix</a>, <a class="el" href="classaudio__tools_1_1_m_p3_decoder_m_a_d.html#a2ce449ac7f41ded497a55d120bb80348">MP3DecoderMAD</a>, <a class="el" href="classaudio__tools_1_1_ogg_container_decoder.html#a1bf0444507e89c3e82e8f1825bf21ce0">OggContainerDecoder</a>, <a class="el" href="classaudio__tools_1_1_r_t_s_p_client.html#a1bf0444507e89c3e82e8f1825bf21ce0">RTSPClient&lt; TcpClient, UdpSocket &gt;</a>, <a class="el" href="classaudio__tools_1_1_pipeline.html#a1bf0444507e89c3e82e8f1825bf21ce0">Pipeline</a>, and <a class="el" href="structaudio__tools_1_1_pipeline_1_1_modifying_stream_adapter.html#a1bf0444507e89c3e82e8f1825bf21ce0">Pipeline::ModifyingStreamAdapter</a>.</p>
+
+</div>
+</div>
+<a id="aa3d9239926b25a520e8077ef7e2d6a7e" name="aa3d9239926b25a520e8077ef7e2d6a7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3d9239926b25a520e8077ef7e2d6a7e">&#9670;&#160;</a></span>alaw2linear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int16_t alaw2linear </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>a_val</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Converts a G.711 A-law encoded byte to a 16-bit linear PCM sample. </p>
 
 </div>
 </div>
@@ -586,6 +693,34 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a96f82a9eb20b43855334200c12469063" name="a96f82a9eb20b43855334200c12469063"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96f82a9eb20b43855334200c12469063">&#9670;&#160;</a></span>findDecoder()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_audio_decoder_ext.html">AudioDecoderExt</a> * findDecoder </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1">AudioFormat</a>&#160;</td>
+          <td class="paramname"><em>format</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Finds the decoder registered for the given format tag, if any. </p>
+
+</div>
+</div>
 <a id="a764b0c8052fa1c5a2226d15cc63f64f5" name="a764b0c8052fa1c5a2226d15cc63f64f5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a764b0c8052fa1c5a2226d15cc63f64f5">&#9670;&#160;</a></span>getHeader()</h2>
 
@@ -635,6 +770,34 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3138e4a5d7c4cd0e342696ae20961034" name="a3138e4a5d7c4cd0e342696ae20961034"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3138e4a5d7c4cd0e342696ae20961034">&#9670;&#160;</a></span>isNativelySupported()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool isNativelySupported </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1">AudioFormat</a>&#160;</td>
+          <td class="paramname"><em>format</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Formats that are handled internally without an external decoder. </p>
 
 </div>
 </div>
@@ -959,6 +1122,33 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="afcb882caee0698053c3356997acdf4b9" name="afcb882caee0698053c3356997acdf4b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcb882caee0698053c3356997acdf4b9">&#9670;&#160;</a></span>setConvertALawMuLaw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setConvertALawMuLaw </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>enable</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Expand ALAW/MULAW 8-bit logarithmic samples to 16-bit linear PCM (default: enabled). If disabled, the raw encoded bytes are passed through unchanged. </p>
+
+</div>
+</div>
 <a id="a1113a99aa668488e62a0f646af0f8b87" name="a1113a99aa668488e62a0f646af0f8b87"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1113a99aa668488e62a0f646af0f8b87">&#9670;&#160;</a></span>setDecoder()</h2>
 
@@ -992,8 +1182,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Defines an optional decoder if the format is not PCM. </p>
+<p>Defines an optional decoder if the format is not PCM. This replaces any previously registered decoders. To support WAV files that may use different ADPCM (or other) formats, register multiple decoders with <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a8f111a8186ef65062eae42904631a081">addDecoder()</a> instead. </p>
 
 </div>
 </div>
@@ -1137,6 +1326,34 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="abd1f0c862c0d5498d02fac2e3f272acc" name="abd1f0c862c0d5498d02fac2e3f272acc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd1f0c862c0d5498d02fac2e3f272acc">&#9670;&#160;</a></span>ulaw2linear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int16_t ulaw2linear </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>u_val</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Converts a G.711 mu-law encoded byte to a 16-bit linear PCM sample. </p>
 
 </div>
 </div>
@@ -1289,6 +1506,82 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Convert 8-bit PCM to 16-bit PCM and write out. </p>
+
+</div>
+</div>
+<a id="a7d4f48aef16e442db6b2aad49b3a5800" name="a7d4f48aef16e442db6b2aad49b3a5800"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d4f48aef16e442db6b2aad49b3a5800">&#9670;&#160;</a></span>write_out_alaw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t write_out_alaw </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>in_ptr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>in_size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Expand G.711 A-law 8-bit samples to 16-bit linear PCM and write out. </p>
+
+</div>
+</div>
+<a id="aabc21e470c47c37fc39fd0ee81001afa" name="aabc21e470c47c37fc39fd0ee81001afa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabc21e470c47c37fc39fd0ee81001afa">&#9670;&#160;</a></span>write_out_mulaw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t write_out_mulaw </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>in_ptr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>in_size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Expand G.711 mu-law 8-bit samples to 16-bit linear PCM and write out. </p>
 
 </div>
 </div>
@@ -1467,6 +1760,28 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a93bcbd7bd5bde637be2bcd7b60ea3f61" name="a93bcbd7bd5bde637be2bcd7b60ea3f61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93bcbd7bd5bde637be2bcd7b60ea3f61">&#9670;&#160;</a></span>convertALawMuLaw</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool convertALawMuLaw = true</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="adb88a7977658bc9af3cae6500011adf1" name="adb88a7977658bc9af3cae6500011adf1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adb88a7977658bc9af3cae6500011adf1">&#9670;&#160;</a></span>dec_out</h2>
 
@@ -1508,6 +1823,32 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>format tag of the decoder currently selected in p_decoder </p>
+
+</div>
+</div>
+<a id="a3f944515e8cb651c3db6270da427b909" name="a3f944515e8cb651c3db6270da427b909"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f944515e8cb651c3db6270da427b909">&#9670;&#160;</a></span>decoders</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;<a class="el" href="structaudio__tools_1_1_w_a_v_decoder_1_1_decoder_entry.html">DecoderEntry</a>&gt; decoders</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>decoders registered via <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a1113a99aa668488e62a0f646af0f8b87">setDecoder()</a>/addDecoder(), keyed by format tag </p>
 
 </div>
 </div>
@@ -1686,6 +2027,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>decoder matching the format of the WAV file currently being processed (selected in <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a40ccab761fbae35e3eae43acc41be366" title="Decodes the header data: Returns the start pos of the data.">decodeHeader()</a> from the registered decoders) </p>
 
 </div>
 </div>
