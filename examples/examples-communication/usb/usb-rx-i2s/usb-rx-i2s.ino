@@ -23,6 +23,10 @@
  * @note for boards using Adafruit TinyUSB core (e.g. RP2040, STM32, SAMD):
  * Board settings (Arduino IDE): USB Mode: USB OTG (TinyUSB)
  *
+ * @note This example only works for platforms where the i2s availableForWrite()
+ * is a measure of the number of bytes that can be written to the I2S output
+ * buffer. This is true for ESP32 and RP2040, but not for all platforms.
+ *
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -46,19 +50,20 @@ I2SStream out;
 size_t i2s_buffer_capacity = 0;
 
 // Callback to push data to I2S
-bool rxDone(USBAudioDeviceBase* p_usb, uint8_t, USBAudioDeviceBase::audiod_function_t*, uint16_t) {
-    // read Audio data
-    int len = in.bufferRx().available();
-    uint8_t data[len];
-    in.bufferRx().readArray(data, len);
+bool rxDone(USBAudioDeviceBase* p_usb, uint8_t,
+            USBAudioDeviceBase::audiod_function_t*, uint16_t) {
+  // read Audio data
+  int len = in.bufferRx().available();
+  uint8_t data[len];
+  in.bufferRx().readArray(data, len);
 
-    // write to I2S
-    out.write(data, len);
+  // write to I2S
+  out.write(data, len);
 
-    // update feedback
-    int i2s_free_pct = 100 * out.availableForWrite() / (int)i2s_buffer_capacity;
-    in.setFeedbackPercent(i2s_free_pct);
-    return true;
+  // update feedback
+  int i2s_free_pct = 100 * out.availableForWrite() / (int)i2s_buffer_capacity;
+  in.setFeedbackPercent(i2s_free_pct);
+  return true;
 }
 
 void setup() {
@@ -81,10 +86,12 @@ void setup() {
   // Capture the true capacity directly from the driver right after begin()
   // (buffer is empty here, so availableForWrite() == full capacity) --
   // avoids assuming buffer_size/buffer_count map 1:1 to availableForWrite()'s
-  // units, which they don't on RP2040 (confirmed by the initial >100% readings).
+  // units, which they don't on RP2040 (confirmed by the initial >100%
+  // readings).
   i2s_buffer_capacity = (size_t)out.availableForWrite();
 
-  // We can avoid a copy in the loop by triggering a write to i2s when we receive a packet
+  // We can avoid a copy in the loop by triggering a write to i2s when we
+  // receive a packet
   in.setRxDoneCallback(rxDone);
 
   // Register USB audio in RX mode (host → device, i.e. USB speaker).
@@ -94,9 +101,9 @@ void setup() {
   config.fifo_packets = 1;
   in.begin(config);
 
-
   // If already enumerated, additional class driver begin() e.g msc, hid, midi
-  // won't take effect until re-enumeration: on ESP32 you can alternatively call USB.begin()
+  // won't take effect until re-enumeration: on ESP32 you can alternatively call
+  // USB.begin()
   if (TinyUSBDevice.mounted()) {
     TinyUSBDevice.detach();
     delay(10);
