@@ -7,7 +7,7 @@ var searchData=
   ['i2s_5fphilips_5fformat_4',['I2S_PHILIPS_FORMAT',['../namespaceaudio__tools.html#a720616ce211566d808f3e441f9b18cdaa67f7dfec583715689211621cd4c57ea1',1,'audio_tools']]],
   ['i2s_5fright_5fjustified_5fformat_5',['I2S_RIGHT_JUSTIFIED_FORMAT',['../namespaceaudio__tools.html#a720616ce211566d808f3e441f9b18cdaacf576905412ed1fc9987301abd92bd1f',1,'audio_tools']]],
   ['i2s_5fstd_5fformat_6',['I2S_STD_FORMAT',['../namespaceaudio__tools.html#a720616ce211566d808f3e441f9b18cdaa2884c08fd9010cb2ab5e92e863d95477',1,'audio_tools']]],
-  ['idle_7',['idle',['../classaudio__tools_1_1_a_d_s_r.html#a2737f3f07a2ab466c31c627a1aa8d592ad3fa9ae9431d6cb1772f9d9df48cab19',1,'audio_tools::ADSR::Idle'],['../classaudio__tools_1_1_h_d_l_c_stream.html#afa22e66eb5ea0daab0f0cd0360936f82afd6a0e4343048b10646dd2976cc5ad18',1,'audio_tools::HDLCStream::IDLE']]],
+  ['idle_7',['idle',['../classaudio__tools_1_1_h_d_l_c_stream.html#afa22e66eb5ea0daab0f0cd0360936f82afd6a0e4343048b10646dd2976cc5ad18',1,'audio_tools::HDLCStream::IDLE'],['../classaudio__tools_1_1_a_d_s_r.html#a2737f3f07a2ab466c31c627a1aa8d592ad3fa9ae9431d6cb1772f9d9df48cab19',1,'audio_tools::ADSR::Idle']]],
   ['ieee_5ffloat_8',['IEEE_FLOAT',['../group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1afe36a4dfe912b10c8798929adea045c0',1,'audio_tools']]],
   ['ima_5fchunk_5fok_9',['IMA_CHUNK_OK',['../namespaceaudio__tools.html#a6a59ed379dc716d3d4f19e585d96abcca970a46c1fe8855c5af7e6cb51533c8a9',1,'audio_tools']]],
   ['ima_5fchunk_5funknown_10',['IMA_CHUNK_UNKNOWN',['../namespaceaudio__tools.html#a6a59ed379dc716d3d4f19e585d96abcca667781f618d3b73bbcae28d5ff237038',1,'audio_tools']]],
