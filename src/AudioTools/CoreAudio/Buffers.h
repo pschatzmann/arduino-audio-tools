@@ -394,6 +394,49 @@ class RingBuffer : public BaseBuffer<T> {
     return result;
   }
 
+  // Bulk read: the inherited BaseBuffer<T>::readArray() calls read() once
+  // per element - a virtual call plus a modulo (nextIndex()) for every
+  // single byte, which is expensive on MCUs without hardware integer
+  // divide (e.g. RP2040's Cortex-M0+). Copy in at most two contiguous
+  // runs (handling ring wraparound) instead.
+  virtual int readArray(T data[], int len) override {
+    if (data == nullptr) {
+      LOGE("NPE");
+      return 0;
+    }
+    int to_read = min(len, available());
+    if (to_read <= 0) return 0;
+    int first = min(to_read, max_size - _iTail);
+    memcpy(data, _aucBuffer.data() + _iTail, first * sizeof(T));
+    int second = to_read - first;
+    if (second > 0) {
+      memcpy(data + first, _aucBuffer.data(), second * sizeof(T));
+    }
+    _iTail = (_iTail + to_read) % max_size;
+    _numElems -= to_read;
+    return to_read;
+  }
+
+  // Bulk write: see readArray() above for why this avoids the inherited
+  // per-element BaseBuffer<T>::writeArray() loop.
+  virtual int writeArray(const T data[], int len) override {
+    if (data == nullptr) {
+      LOGE("NPE");
+      return 0;
+    }
+    int to_write = min(len, availableForWrite());
+    if (to_write <= 0) return 0;
+    int first = min(to_write, max_size - _iHead);
+    memcpy(_aucBuffer.data() + _iHead, data, first * sizeof(T));
+    int second = to_write - first;
+    if (second > 0) {
+      memcpy(_aucBuffer.data(), data + first, second * sizeof(T));
+    }
+    _iHead = (_iHead + to_write) % max_size;
+    _numElems += to_write;
+    return to_write;
+  }
+
   // checks if the buffer is full
   virtual bool isFull() override { return available() == max_size; }
 

@@ -1492,10 +1492,18 @@ public:
           if ((uint32_t)written < xferred_bytes)
             rx_dropped_bytes_ += xferred_bytes - (uint32_t)written;
         }
-        if (rx_done_cb_)
-          rx_done_cb_(this, rhport, audio, (uint16_t)xferred_bytes);
+        // Re-arm the OUT endpoint before invoking the callback: rx_done_cb_
+        // is user code (e.g. it may push the packet through a resampler)
+        // and its duration is out of our control. If the next transfer
+        // isn't queued until after it returns, a slow callback delays
+        // re-arming past the next isochronous OUT window and the host's
+        // packet for that frame is lost - audible as clicks/dropouts,
+        // and more likely to happen the larger each packet is (e.g. at
+        // 44.1/48kHz vs. 32kHz).
         (void)backend().transfer(rhport, audio->ep_out,
                                  audio->lin_buf_out.data(), audio->ep_out_sz);
+        if (rx_done_cb_)
+          rx_done_cb_(this, rhport, audio, (uint16_t)xferred_bytes);
         return true;
       }
       if (isFeedbackEpEnabled() && audio->ep_fb == ep_addr) {

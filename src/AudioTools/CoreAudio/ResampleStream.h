@@ -81,6 +81,7 @@ class ResampleStream : public ReformatBaseStream {
 #endif
     // step_dirty = true;
     bytes_per_frame = info.bits_per_sample / 8 * info.channels;
+    carry_len = 0;
 
     setupReader();
 
@@ -174,22 +175,67 @@ class ResampleStream : public ReformatBaseStream {
   size_t write(const uint8_t *data, size_t len) override {
     LOGD("ResampleStream::write: %d", (int)len);
     //addNotifyOnFirstWrite();
-    size_t written = 0;
-    switch (info.bits_per_sample) {
-      case 16:
-#if PREFER_FIXEDPOINT
-        return writeFixed(p_print, data, len, written);
-#else
-        return write<int16_t>(p_print, data, len, written);
-#endif
-      case 24:
-        return write<int24_t>(p_print, data, len, written);
-      case 32:
-        return write<int32_t>(p_print, data, len, written);
-      default:
-        TRACEE();
+    int frame_bytes = info.bits_per_sample / 8 * info.channels;
+    if (frame_bytes <= 0) {
+      TRACEE();
+      return 0;
     }
-    return 0;
+
+    const uint8_t *proc_data = data;
+    size_t proc_len = len;
+    // Combine any partial-frame remainder carried over from a previous
+    // call (e.g. the source delivered a byte count that wasn't a whole
+    // number of frames - a short/malformed USB packet, for instance) with
+    // the new data, instead of processing len on its own. write<T>()/
+    // writeFixed() below only ever consume whole frames; without this,
+    // any remainder they leave behind would be silently dropped by the
+    // caller (see TransformationReader::fillResultQueue(), which advances
+    // past exactly `len` bytes on the source regardless of how much we
+    // report back) - permanently shifting every following sample by the
+    // gap and turning a single hiccup into session-long scrambled audio.
+    if (carry_len > 0) {
+      combine_buffer.resize(carry_len + len);
+      memcpy(combine_buffer.data(), carry.data(), carry_len);
+      memcpy(combine_buffer.data() + carry_len, data, len);
+      proc_data = combine_buffer.data();
+      proc_len = combine_buffer.size();
+    }
+
+    size_t whole = (proc_len / (size_t)frame_bytes) * (size_t)frame_bytes;
+    size_t leftover = proc_len - whole;
+
+    if (whole > 0) {
+      size_t written = 0;
+      switch (info.bits_per_sample) {
+        case 16:
+#if PREFER_FIXEDPOINT
+          writeFixed(p_print, proc_data, whole, written);
+#else
+          write<int16_t>(p_print, proc_data, whole, written);
+#endif
+          break;
+        case 24:
+          write<int24_t>(p_print, proc_data, whole, written);
+          break;
+        case 32:
+          write<int32_t>(p_print, proc_data, whole, written);
+          break;
+        default:
+          TRACEE();
+          return 0;
+      }
+    }
+
+    carry_len = leftover;
+    if (leftover > 0) {
+      carry.resize(leftover);
+      memcpy(carry.data(), proc_data + whole, leftover);
+    }
+
+    // The remainder is safely carried forward (to be completed by the
+    // next call) rather than dropped, so all of the caller's new bytes
+    // count as accounted for.
+    return len;
   }
 
   /// Activates buffering to avoid small incremental writes
@@ -219,6 +265,12 @@ class ResampleStream : public ReformatBaseStream {
   float step_size = 1.0;
   int to_sample_rate = 0;
   int bytes_per_frame = 0;
+  // Partial-frame remainder left over from a write() whose byte count
+  // wasn't a whole number of frames - see write() for why this must be
+  // carried forward rather than dropped.
+  Vector<uint8_t> carry{0};
+  size_t carry_len = 0;
+  Vector<uint8_t> combine_buffer{0};  // scratch space for carry+new data
 #if PREFER_FIXEDPOINT
   // Q16.16 fixed-point read position and step size, used for the 16-bit fast
   // path: avoids soft-float add/div/round() on FPU-less MCUs (e.g. RP2040).

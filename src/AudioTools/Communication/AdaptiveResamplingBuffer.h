@@ -128,6 +128,15 @@ class AdaptiveResamplingBuffer : public BaseBuffer<uint8_t>,
     // This is a jitter buffer for an endless/live stream: a momentarily
     // empty backing buffer is a transient underflow, not end of stream.
     resample_stream.transformationReader().setEofOnZeroReads(false);
+    // readArray()/available() are typically driven from the same loop that
+    // also has to keep a downstream time-critical consumer fed (e.g. a
+    // StreamCopy pumping an I2S output with only a few ms of DMA buffer).
+    // The default zero-read handling blocks in delay() - up to
+    // MAX_ZERO_READ_COUNT times - waiting for more input on every
+    // transient underflow; on that calling pattern, blocking here is what
+    // starves the downstream consumer, not the resampling math itself. So
+    // give up on a transient underflow immediately instead of stalling.
+    resample_stream.transformationReader().setZeroReadDelay(0);
     last_time_ms = 0;
     is_active = true;
     is_primed = false;
@@ -255,9 +264,23 @@ class AdaptiveResamplingBuffer : public BaseBuffer<uint8_t>,
   float recalculate() {
     if (p_buffer == nullptr) return step_size;
 
+    // Throttle: writeArray() calls us on every write (e.g. once per
+    // received USB packet, possibly ~1ms apart). Actually redoing the
+    // PID/Kalman math that often ties the PID's dt - and therefore its
+    // derivative term - to the caller's write cadence rather than a
+    // deliberate control-loop interval, so a single write-sized jump in
+    // the buffer fill level can dominate/saturate the derivative term.
+    // Skip the recomputation (and its float math) until enough real time
+    // has passed; in between, callers keep getting the last computed
+    // step size, which is already applied to resample_stream.
+    uint32_t now_ms = millis();
+    if (min_recalc_interval_ms > 0 && last_time_ms != 0 &&
+        (uint32_t)(now_ms - last_time_ms) < min_recalc_interval_ms) {
+      return step_size;
+    }
+
     // determine the actual elapsed time so the PID's integral/derivative
     // terms don't depend on how often/how large the caller's writes are
-    uint32_t now_ms = millis();
     float dt = last_time_ms == 0 ? 1.0f : (now_ms - last_time_ms) / 1000.0f;
     if (dt <= 0.0f) dt = 0.001f;
     pid.setDt(dt);
@@ -277,7 +300,35 @@ class AdaptiveResamplingBuffer : public BaseBuffer<uint8_t>,
     // is far more stable than centering on a fixed 1.0 and relying solely
     // on the PID to chase both drift and jitter from a noisy instantaneous
     // fill level.
-    step_size = averageStepSize() - correction;
+    float new_step_size = averageStepSize() - correction;
+    // averageStepSize() is only sanity-clamped to a generous [0.5, 2.0] (see
+    // its docs) since it must be able to represent genuine long-run clock
+    // drift; it is NOT bounded by resample_range. Enforce the documented
+    // setStepRangePercent() contract here, on the combined result, so a
+    // skewed drift estimate (e.g. from a transient input underrun briefly
+    // depressing total_bytes_read - see readArray()) can't push playback
+    // speed - and therefore pitch - outside the range the caller asked for.
+    float min_step = 1.0f - resample_range;
+    float max_step = 1.0f + resample_range;
+    if (new_step_size < min_step) new_step_size = min_step;
+    if (new_step_size > max_step) new_step_size = max_step;
+
+    // Slew-rate limit: bound how fast step_size is allowed to move per
+    // second, regardless of how large the jump from the current value to
+    // new_step_size is or how long dt happens to be. Without this, a
+    // wide resample_range combined with an infrequent recalculation
+    // cadence (setMinRecalculateInterval()) lets a single correction snap
+    // to a far-off value and hold it for the whole interval - audible as
+    // a sudden pitch jump/"crack" rather than a smooth bend. This makes
+    // any correction, however large the target, ramp in gradually and
+    // caps the worst-case audible glitch regardless of range/interval
+    // settings.
+    float current_step = step_size;
+    float max_delta = max_step_change_per_sec * dt;
+    float delta = new_step_size - current_step;
+    if (delta > max_delta) delta = max_delta;
+    if (delta < -max_delta) delta = -max_delta;
+    step_size = current_step + delta;
 
     // log step size every 100th recalculation
     if (recalc_count++ % 100 == 0) {
@@ -328,6 +379,43 @@ class AdaptiveResamplingBuffer : public BaseBuffer<uint8_t>,
    */
   void setMinBytesForDriftEstimate(uint32_t bytes) {
     min_bytes_for_drift_estimate = bytes;
+  }
+
+  /**
+   * @brief Minimum time between actual PID/Kalman recomputations, in
+   * milliseconds. writeArray() calls recalculate() on every write (e.g.
+   * once per received USB packet, which can be as often as ~1ms), but the
+   * control loop itself only re-evaluates once this much time has passed
+   * since the last recomputation - calls in between are no-ops that just
+   * return the current step size. This decouples the PID's dt (and its
+   * derivative term in particular) from the caller's write frequency, so
+   * a single write-sized burst in the buffer fill level can't by itself
+   * saturate the derivative term, and reduces the number of float
+   * operations performed per second.
+   *
+   * Default is 0 (disabled - recalculate on every write, matching prior
+   * behavior). This is opt-in: throttling changes how corrections are
+   * applied (fewer, larger, longer-lived step size changes instead of many
+   * small ones) and the PID/Kalman gains are not automatically retuned for
+   * a different interval, so a larger interval is not strictly better and
+   * should be verified on real hardware before relying on it.
+   */
+  void setMinRecalculateInterval(uint32_t interval_ms) {
+    min_recalc_interval_ms = interval_ms;
+  }
+
+  /**
+   * @brief Maximum rate at which step_size is allowed to change, in
+   * (fractional step) units per second - e.g. 0.2 lets step_size move by
+   * at most 0.2 per second (so covering a 0.15 range takes >= 0.75s).
+   * This bounds the size of any single audible pitch jump regardless of
+   * resample_range or the recalculate interval: however large the
+   * PID/feedforward's computed target is, the applied step_size ramps
+   * toward it at this rate instead of snapping to it immediately.
+   * Default is 0.2 (20% per second).
+   */
+  void setMaxStepChangeRate(float per_second) {
+    max_step_change_per_sec = per_second;
   }
 
   /// Cumulative raw bytes written to the backing buffer since the drift
@@ -427,7 +515,9 @@ class AdaptiveResamplingBuffer : public BaseBuffer<uint8_t>,
   float d = 0.0001;                 // PID derivative gain
   float level_percent_smoothed = 0.0; // Last calculated (Kalman-smoothed) fill level (percent)
   uint32_t recalc_count = 0;        // recalculate() call counter (used to throttle logging)
-  uint32_t last_time_ms = 0;        // Timestamp of the last recalculate() call, for PID dt
+  uint32_t last_time_ms = 0;        // Timestamp of the last actual recalculation, for PID dt
+  uint32_t min_recalc_interval_ms = 0; // 0 = recalculate on every write (default/prior behavior)
+  float max_step_change_per_sec = 0.2f; // max allowed |d(step_size)/dt|, in step units/sec
   bool is_active = false;           // true between begin() and end()
   uint8_t peek_byte = 0;            // one-byte lookahead cache for peek()
   bool has_peek = false;            // true if peek_byte holds an unconsumed byte

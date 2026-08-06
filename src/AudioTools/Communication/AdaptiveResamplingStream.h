@@ -61,6 +61,16 @@ class AdaptiveResamplingStream : public AudioStream {
   }
 
   /**
+   * @brief Initialize the stream and internal components with the given audio info.
+   * @return true if initialization was successful, false otherwise
+   */
+
+  bool begin(AudioInfo info) {
+    setAudioInfo(info);
+    return begin();
+  }
+
+  /**
    * @brief Write audio data to the buffer.
    *
    * @param data Pointer to the data to write
@@ -152,6 +162,26 @@ class AdaptiveResamplingStream : public AudioStream {
    */
   void setPIDParameters(float p_value, float i_value, float d_value) {
     resampling_buffer.setPIDParameters(p_value, i_value, d_value);
+  }
+
+  /**
+   * @brief Set the minimum time between actual PID/Kalman recomputations.
+   * See AdaptiveResamplingBuffer::setMinRecalculateInterval().
+   *
+   * @param interval_ms Minimum interval in milliseconds (default: 15)
+   */
+  void setMinRecalculateInterval(uint32_t interval_ms) {
+    resampling_buffer.setMinRecalculateInterval(interval_ms);
+  }
+
+  /**
+   * @brief Set the maximum rate at which step_size is allowed to change.
+   * See AdaptiveResamplingBuffer::setMaxStepChangeRate().
+   *
+   * @param per_second Maximum change in step_size per second (default: 0.2)
+   */
+  void setMaxStepChangeRate(float per_second) {
+    resampling_buffer.setMaxStepChangeRate(per_second);
   }
 
  protected:

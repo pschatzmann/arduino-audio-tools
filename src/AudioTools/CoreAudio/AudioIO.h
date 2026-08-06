@@ -110,6 +110,17 @@ class TransformationReader {
   ///   the next call simply tries again once more data has arrived.
   void setEofOnZeroReads(bool flag) { eof_on_zero_reads = flag; }
 
+  /// Defines how long fillResultQueue() blocks in delay() after each empty
+  /// read from the source, before retrying (up to MAX_ZERO_READ_COUNT
+  /// times). Default is 5ms, matching historical behavior. For a live
+  /// producer read from the same thread/task that also has to keep some
+  /// other time-critical consumer fed (e.g. an I2S output pump driven from
+  /// the same loop()), blocking here for up to MAX_ZERO_READ_COUNT * this
+  /// value on every transient underflow can itself starve that consumer -
+  /// set this to 0 in that case so a momentarily-empty source just returns
+  /// immediately with whatever's available instead of stalling the caller.
+  void setZeroReadDelay(uint32_t delay_ms) { zero_read_delay_ms = delay_ms; }
+
  protected:
   RingBuffer<uint8_t> result_queue_buffer{0};
   QueueStream<uint8_t> result_queue{result_queue_buffer};  //
@@ -123,6 +134,7 @@ class TransformationReader {
   float last_byte_factor = 0.0f;
   bool is_eof = false;
   bool eof_on_zero_reads = true;
+  uint32_t zero_read_delay_ms = 5;
   size_t total_bytes_read = 0;
 
   /// Defines the read buffer size for individual reads
@@ -224,7 +236,7 @@ class TransformationReader {
           break;
         }
         // wait for some more data
-        delay(5);
+        if (zero_read_delay_ms > 0) delay(zero_read_delay_ms);
       }
     }
     LOGD("fillResultQueue available: %d", result_queue.available());
