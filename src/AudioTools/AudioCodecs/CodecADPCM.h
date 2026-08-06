@@ -101,6 +101,23 @@ class ADPCMDecoder : public AudioDecoderExt {
 
   operator bool() override { return is_started; }
 
+  /// Maps the codec id to the corresponding WAV format tag, for the codec
+  /// ids that are actually defined WAV format tags. Most AVCodecID values
+  /// are game/container specific variants that have no WAV format tag, so
+  /// they return AudioFormat::UNKNOWN and must be registered explicitly.
+  AudioFormat wavFormat() override {
+    switch (codec_id) {
+      case AV_CODEC_ID_ADPCM_MS:
+        return AudioFormat::ADPCM;
+      case AV_CODEC_ID_ADPCM_IMA_WAV:
+        return AudioFormat::DVI_ADPCM;
+      case AV_CODEC_ID_ADPCM_YAMAHA:
+        return AudioFormat::YAMAHA_ADPCM;
+      default:
+        return AudioFormat::UNKNOWN;
+    }
+  }
+
  protected:
   adpcm_ffmpeg::ADPCMDecoder *p_decoder = nullptr;
   Vector<uint8_t> adpcm_block;

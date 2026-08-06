@@ -2,6 +2,7 @@
 
 #include "AudioToolsConfig.h"
 #include "AudioLogger.h"
+#include "AudioTools/AudioCodecs/AudioFormat.h"
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
 #include "AudioTools/CoreAudio/AudioTypes.h"
 #include "AudioTools/CoreAudio/BaseStream.h"
@@ -120,6 +121,13 @@ class AudioEncoder : public AudioWriter {
 class AudioDecoderExt : public AudioDecoder {
  public:
   virtual void setBlockSize(int blockSize) = 0;
+  /// Provides the WAV format tag (see AudioFormat) that this decoder
+  /// handles, if it corresponds to a well defined WAV format tag. Used by
+  /// WAVDecoder::setDecoder()/addDecoder() to auto-detect the format when
+  /// it is not explicitly provided. Returns AudioFormat::UNKNOWN if the
+  /// decoder does not (always) map to a single WAV format tag - in this
+  /// case the format must be provided explicitly.
+  virtual AudioFormat wavFormat() { return AudioFormat::UNKNOWN; }
 };
 
 /// @brief  Extended AudioEncoder interface to support block size configuration

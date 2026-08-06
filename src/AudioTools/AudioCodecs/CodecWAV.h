@@ -422,16 +422,25 @@ class WAVDecoder : public AudioDecoder {
   WAVDecoder() = default;
 
   /**
-   * @brief Construct a new WAVDecoder object for ADPCM data
-   *
+   * @brief Construct a new WAVDecoder object for ADPCM data. If fmt is not
+   * provided, it is derived from dec.wavFormat() (see setDecoder()).
    */
-  WAVDecoder(AudioDecoderExt &dec, AudioFormat fmt) { setDecoder(dec, fmt); }
+  WAVDecoder(AudioDecoderExt &dec, AudioFormat fmt = AudioFormat::UNKNOWN) {
+    setDecoder(dec, fmt);
+  }
 
   /// Defines an optional decoder if the format is not PCM. This replaces
   /// any previously registered decoders. To support WAV files that may use
   /// different ADPCM (or other) formats, register multiple decoders with
   /// addDecoder() instead.
-  void setDecoder(AudioDecoderExt &dec, AudioFormat fmt) {
+  ///
+  /// fmt is the WAV format tag (see AudioFormat) that dec decodes. It can
+  /// be omitted if dec can identify its own format via
+  /// AudioDecoderExt::wavFormat() - e.g. ADPCMDecoder does this for the
+  /// codec ids that correspond to a well defined WAV format tag (currently
+  /// MS ADPCM, IMA/DVI ADPCM and Yamaha ADPCM). For codecs that don't map
+  /// to a single WAV format tag, fmt must be provided explicitly.
+  void setDecoder(AudioDecoderExt &dec, AudioFormat fmt = AudioFormat::UNKNOWN) {
     TRACED();
     decoders.clear();
     addDecoder(dec, fmt);
@@ -442,9 +451,24 @@ class WAVDecoder : public AudioDecoder {
   /// stream is selected automatically based on the format tag found in the
   /// WAV header, so a single WAVDecoder instance can transparently handle
   /// files using any of the registered formats (e.g. multiple ADPCM
-  /// variants).
-  void addDecoder(AudioDecoderExt &dec, AudioFormat fmt) {
+  /// variants). If a decoder is already registered for the same format tag,
+  /// it is replaced. See setDecoder() for details on the optional fmt
+  /// parameter.
+  void addDecoder(AudioDecoderExt &dec, AudioFormat fmt = AudioFormat::UNKNOWN) {
     TRACED();
+    if (fmt == AudioFormat::UNKNOWN) fmt = dec.wavFormat();
+    if (fmt == AudioFormat::UNKNOWN) {
+      LOGE(
+          "addDecoder: could not determine the WAV format tag for this "
+          "decoder - please provide it explicitly");
+      return;
+    }
+    for (int i = 0; i < decoders.size(); i++) {
+      if (decoders[i].format == fmt) {
+        decoders[i].decoder = &dec;
+        return;
+      }
+    }
     decoders.push_back({fmt, &dec});
   }
 
