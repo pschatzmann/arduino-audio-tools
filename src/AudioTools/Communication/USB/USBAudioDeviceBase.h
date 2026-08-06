@@ -781,6 +781,10 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
   uint32_t getRxXferCount() const { return xfer_cb_rx_count_; }
   /// Total bytes received from host via OUT endpoint.
   uint32_t getRxTotalBytes() const { return rx_total_bytes_; }
+  /// Bytes silently discarded because bufferRx() was full when they arrived.
+  /// Non-zero means audio is being lost -- increase fifo_packets or drain
+  /// bufferRx() (readBytes()) faster/more regularly.
+  uint32_t getRxDroppedBytes() const { return rx_dropped_bytes_; }
   /// Total bytes read from ep_in_ff by xfer_cb (should grow at ~176KB/s for
   /// 44100Hz stereo 16-bit).
   uint32_t getTxFifoReadTotal() const { return tx_fifo_read_total_; }
@@ -816,6 +820,7 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
   volatile uint32_t tx_fifo_read_total_ = 0;
   volatile uint32_t xfer_cb_rx_count_ = 0;
   volatile uint32_t rx_total_bytes_ = 0;
+  volatile uint32_t rx_dropped_bytes_ = 0;
   volatile uint16_t tx_frame_bytes_last_ = 0;
   volatile uint32_t tx_xferred_last_ = 0;
 
@@ -1481,9 +1486,12 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
         xfer_cb_rx_count_ = xfer_cb_rx_count_ + 1;
         rx_total_bytes_ += xferred_bytes;
         // Copy DMA-received data into the platform buffer, re-arm DMA.
-        if (xferred_bytes > 0)
-          bufferRx().writeArray(audio->lin_buf_out.data(),
-                                (int)xferred_bytes);
+        if (xferred_bytes > 0) {
+          int written = bufferRx().writeArray(audio->lin_buf_out.data(),
+                                              (int)xferred_bytes);
+          if ((uint32_t)written < xferred_bytes)
+            rx_dropped_bytes_ += xferred_bytes - (uint32_t)written;
+        }
         if (rx_done_cb_)
           rx_done_cb_(this, rhport, audio, (uint16_t)xferred_bytes);
         (void)backend().transfer(rhport, audio->ep_out,
