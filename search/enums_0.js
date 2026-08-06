@@ -5,7 +5,9 @@ var searchData=
   ['activelogic_2',['ActiveLogic',['../classaudio__tools_1_1_audio_actions.html#a133764d70380ecc0ac0811525c6cf65e',1,'audio_tools::AudioActions']]],
   ['adpcmnoiseshaping_3',['ADPCMNoiseShaping',['../namespaceaudio__tools.html#aa905b9b59808bab9ad96d4c56442768d',1,'audio_tools']]],
   ['adsrphase_4',['AdsrPhase',['../classaudio__tools_1_1_a_d_s_r.html#a2737f3f07a2ab466c31c627a1aa8d592',1,'audio_tools::ADSR']]],
-  ['audioformat_5',['AudioFormat',['../group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1',1,'audio_tools']]],
-  ['audioplayercommandtype_6',['AudioPlayerCommandType',['../namespaceaudio__tools.html#a3f9c0ca2a0642d7ef5913a3cc03c093e',1,'audio_tools']]],
-  ['audiotype_7',['AudioType',['../namespaceaudio__tools.html#a320f7b385576131cdae7758303baf7aa',1,'audio_tools']]]
+  ['audio_5ffeedback_5fmethod_5ft_5',['audio_feedback_method_t',['../classaudio__tools_1_1_u_s_b_audio_device_base.html#a89899d7ebee30a177a6fe0fab848abbb',1,'audio_tools::USBAudioDeviceBase']]],
+  ['audio_5fformat_5ftype_5ft_6',['audio_format_type_t',['../classaudio__tools_1_1_u_s_b_audio_device_base.html#ae18c93236294ee991e5f5c6b0922cd2f',1,'audio_tools::USBAudioDeviceBase']]],
+  ['audioformat_7',['AudioFormat',['../group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1',1,'audio_tools']]],
+  ['audioplayercommandtype_8',['AudioPlayerCommandType',['../namespaceaudio__tools.html#a3f9c0ca2a0642d7ef5913a3cc03c093e',1,'audio_tools']]],
+  ['audiotype_9',['AudioType',['../namespaceaudio__tools.html#a320f7b385576131cdae7758303baf7aa',1,'audio_tools']]]
 ];

@@ -74,6 +74,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
@@ -107,6 +108,26 @@ Inheritance diagram for USBAudioDeviceESP32:</div>
   </map>
 </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a89899d7ebee30a177a6fe0fab848abbb" id="r_a89899d7ebee30a177a6fe0fab848abbb"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a89899d7ebee30a177a6fe0fab848abbb">audio_feedback_method_t</a> { <br />
+&#160;&#160;<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a89899d7ebee30a177a6fe0fab848abbba6b5e284049302b6be2242c9608071f49">AUDIO_FEEDBACK_METHOD_DISABLED</a>
+, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a89899d7ebee30a177a6fe0fab848abbba2ac099f16cafffc23c2c811d62a4b18e">AUDIO_FEEDBACK_METHOD_FREQUENCY_FIXED</a>
+, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a89899d7ebee30a177a6fe0fab848abbbae5cff3934bbb40b71306bd54c7140644">AUDIO_FEEDBACK_METHOD_FREQUENCY_FLOAT</a>
+, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a89899d7ebee30a177a6fe0fab848abbbab978a249ee7580a37f4a8c144c6df61c">AUDIO_FEEDBACK_METHOD_FREQUENCY_POWER_OF_2</a>
+, <br />
+&#160;&#160;<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a89899d7ebee30a177a6fe0fab848abbba28d401d42acb2bfc4b1f475c31cd3eb5">AUDIO_FEEDBACK_METHOD_FIFO_COUNT</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:a89899d7ebee30a177a6fe0fab848abbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Methods for USB audio feedback endpoint operation.  <a href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a89899d7ebee30a177a6fe0fab848abbb">More...</a><br /></td></tr>
+<tr class="separator:a89899d7ebee30a177a6fe0fab848abbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae18c93236294ee991e5f5c6b0922cd2f" id="r_ae18c93236294ee991e5f5c6b0922cd2f"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ae18c93236294ee991e5f5c6b0922cd2f">audio_format_type_t</a> { <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ae18c93236294ee991e5f5c6b0922cd2faaca39c01f96e7e659f427adec29204e8">AUDIO_FORMAT_TYPE_I</a>
+, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ae18c93236294ee991e5f5c6b0922cd2fa9b72072cd81c55316f46845f56e01417">AUDIO_FORMAT_TYPE_II</a>
+, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ae18c93236294ee991e5f5c6b0922cd2fa7ab0e96ce1a69b79a70df36ce830758a">AUDIO_FORMAT_TYPE_III</a>
+ }</td></tr>
+<tr class="memdesc:ae18c93236294ee991e5f5c6b0922cd2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Supported USB audio format types.  <a href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ae18c93236294ee991e5f5c6b0922cd2f">More...</a><br /></td></tr>
+<tr class="separator:ae18c93236294ee991e5f5c6b0922cd2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a08914ac7214dedb063d5cb7b8e51ec3e" id="r_a08914ac7214dedb063d5cb7b8e51ec3e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#a08914ac7214dedb063d5cb7b8e51ec3e">USBAudioDeviceESP32</a> ()=default</td></tr>
@@ -259,7 +280,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a28746f4dbf43949f835521d8493c037f" id="r_a28746f4dbf43949f835521d8493c037f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a28746f4dbf43949f835521d8493c037f">setAudioFeedbackFormatCorrectionCallback</a> (std::function&lt; bool(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *, uint8_t)&gt; cb)</td></tr>
 <tr class="memdesc:a28746f4dbf43949f835521d8493c037f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback for audio feedback format correction events.  <br /></td></tr>
 <tr class="separator:a28746f4dbf43949f835521d8493c037f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae733129df4c95bbf728b40ed01b1fd55" id="r_ae733129df4c95bbf728b40ed01b1fd55"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ae733129df4c95bbf728b40ed01b1fd55">setAudioFeedbackParamsCallback</a> (std::function&lt; void(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *, uint8_t, uint8_t, audio_feedback_params_t *)&gt; cb)</td></tr>
+<tr class="memitem:ae733129df4c95bbf728b40ed01b1fd55" id="r_ae733129df4c95bbf728b40ed01b1fd55"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ae733129df4c95bbf728b40ed01b1fd55">setAudioFeedbackParamsCallback</a> (std::function&lt; void(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *, uint8_t, uint8_t, <a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audio__feedback__params__t.html">audio_feedback_params_t</a> *)&gt; cb)</td></tr>
 <tr class="memdesc:ae733129df4c95bbf728b40ed01b1fd55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback for audio feedback parameter events.  <br /></td></tr>
 <tr class="separator:ae733129df4c95bbf728b40ed01b1fd55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1fdd56031f1195cb221ab855fb6a102" id="r_ad1fdd56031f1195cb221ab855fb6a102"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ad1fdd56031f1195cb221ab855fb6a102">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> <a class="el" href="classaudio__tools_1_1_audio_stream.html#a47385aa19435f5fca9d3083a748258c5">info</a>) override</td></tr>
@@ -307,7 +328,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aded9c453f3fc94ea8c378e698f0a989d" id="r_aded9c453f3fc94ea8c378e698f0a989d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#aded9c453f3fc94ea8c378e698f0a989d">setReqItfCallback</a> (std::function&lt; bool(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *, uint8_t, <a class="el" href="structaudio__tools_1_1_usb_setup_packet.html">UsbSetupPacket</a> const &amp;, uint8_t *)&gt; cb)</td></tr>
 <tr class="memdesc:aded9c453f3fc94ea8c378e698f0a989d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback for interface set requests.  <br /></td></tr>
 <tr class="separator:aded9c453f3fc94ea8c378e698f0a989d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a06623665db8a9023cda13dadfd8572ae" id="r_a06623665db8a9023cda13dadfd8572ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a06623665db8a9023cda13dadfd8572ae">setRxDoneCallback</a> (std::function&lt; bool(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *, uint8_t, audiod_function_t *, uint16_t)&gt; cb)</td></tr>
+<tr class="memitem:a06623665db8a9023cda13dadfd8572ae" id="r_a06623665db8a9023cda13dadfd8572ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a06623665db8a9023cda13dadfd8572ae">setRxDoneCallback</a> (std::function&lt; bool(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *, uint8_t, <a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *, uint16_t)&gt; cb)</td></tr>
 <tr class="memdesc:a06623665db8a9023cda13dadfd8572ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback for RX done events.  <br /></td></tr>
 <tr class="separator:a06623665db8a9023cda13dadfd8572ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abea96ff21e0994267e6200114726b1e8" id="r_abea96ff21e0994267e6200114726b1e8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#abea96ff21e0994267e6200114726b1e8">setSampleRateCallback</a> (std::function&lt; void(uint32_t)&gt; cb)</td></tr>
@@ -319,7 +340,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8529d82dae52df6888973bec98918854" id="r_a8529d82dae52df6888973bec98918854"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a8529d82dae52df6888973bec98918854">setTudAudioSetItfCallback</a> (std::function&lt; bool(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *, uint8_t, <a class="el" href="structaudio__tools_1_1_usb_setup_packet.html">UsbSetupPacket</a> const &amp;)&gt; cb)</td></tr>
 <tr class="memdesc:a8529d82dae52df6888973bec98918854"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback for interface set requests.  <br /></td></tr>
 <tr class="separator:a8529d82dae52df6888973bec98918854"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c81ff9569c55fb1839212b5d0589d7d" id="r_a1c81ff9569c55fb1839212b5d0589d7d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a1c81ff9569c55fb1839212b5d0589d7d">setTxDoneCallback</a> (std::function&lt; bool(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *, uint8_t, audiod_function_t *)&gt; cb)</td></tr>
+<tr class="memitem:a1c81ff9569c55fb1839212b5d0589d7d" id="r_a1c81ff9569c55fb1839212b5d0589d7d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a1c81ff9569c55fb1839212b5d0589d7d">setTxDoneCallback</a> (std::function&lt; bool(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *, uint8_t, <a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *)&gt; cb)</td></tr>
 <tr class="memdesc:a1c81ff9569c55fb1839212b5d0589d7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback for TX done events.  <br /></td></tr>
 <tr class="separator:a1c81ff9569c55fb1839212b5d0589d7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a16c8b208cfd32fed56842b46c88b56e4" id="r_a16c8b208cfd32fed56842b46c88b56e4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#a16c8b208cfd32fed56842b46c88b56e4">setupUSB</a> ()</td></tr>
@@ -364,25 +385,25 @@ Static Public Member Functions</h2></td></tr>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a547c9fcf63b1bb72fb078ad7b723411c" id="r_a547c9fcf63b1bb72fb078ad7b723411c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a547c9fcf63b1bb72fb078ad7b723411c">activateEndpoint</a> (uint8_t rhport, const <a class="el" href="structaudio__tools_1_1_usb_endpoint_descriptor_view.html">UsbEndpointDescriptorView</a> &amp;desc_ep, <a class="el" href="namespaceaudio__tools.html#a157d05f33287286839e78e8d8116bedd">UsbDir</a> dir=<a class="el" href="namespaceaudio__tools.html#a157d05f33287286839e78e8d8116beddaefeb369cccbd560588a756610865664c">UsbDir::In</a>)</td></tr>
 <tr class="separator:a547c9fcf63b1bb72fb078ad7b723411c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d014ae6c815438a21954efb66b93f27" id="r_a7d014ae6c815438a21954efb66b93f27"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a7d014ae6c815438a21954efb66b93f27">audiod_calc_tx_packet_sz</a> (audiod_function_t *audio)</td></tr>
+<tr class="memitem:a7d014ae6c815438a21954efb66b93f27" id="r_a7d014ae6c815438a21954efb66b93f27"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a7d014ae6c815438a21954efb66b93f27">audiod_calc_tx_packet_sz</a> (<a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *audio)</td></tr>
 <tr class="separator:a7d014ae6c815438a21954efb66b93f27"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe940ae0272916dd049752227213acbf" id="r_abe940ae0272916dd049752227213acbf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#abe940ae0272916dd049752227213acbf">audiod_control_request</a> (uint8_t rhport, <a class="el" href="structaudio__tools_1_1_usb_setup_packet.html">UsbSetupPacket</a> const &amp;p_request)</td></tr>
 <tr class="separator:abe940ae0272916dd049752227213acbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a121b60c311c5e121e9c044747125a155" id="r_a121b60c311c5e121e9c044747125a155"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a121b60c311c5e121e9c044747125a155">audiod_fb_send</a> (audiod_function_t *audio)</td></tr>
+<tr class="memitem:a121b60c311c5e121e9c044747125a155" id="r_a121b60c311c5e121e9c044747125a155"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a121b60c311c5e121e9c044747125a155">audiod_fb_send</a> (<a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *audio)</td></tr>
 <tr class="separator:a121b60c311c5e121e9c044747125a155"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca20411d4540339ce9fff98999384615" id="r_aca20411d4540339ce9fff98999384615"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#aca20411d4540339ce9fff98999384615">audiod_get_AS_interface_index</a> (uint8_t itf, audiod_function_t *audio, uint8_t *idxItf, uint8_t const **pp_desc_int)</td></tr>
+<tr class="memitem:aca20411d4540339ce9fff98999384615" id="r_aca20411d4540339ce9fff98999384615"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#aca20411d4540339ce9fff98999384615">audiod_get_AS_interface_index</a> (uint8_t itf, <a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *audio, uint8_t *idxItf, uint8_t const **pp_desc_int)</td></tr>
 <tr class="separator:aca20411d4540339ce9fff98999384615"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3fff8c5a41e63328cca41d7b90d3f08f" id="r_a3fff8c5a41e63328cca41d7b90d3f08f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a3fff8c5a41e63328cca41d7b90d3f08f">audiod_get_AS_interface_index_global</a> (uint8_t itf, uint8_t *func_id, uint8_t *idxItf, uint8_t const **pp_desc_int)</td></tr>
 <tr class="separator:a3fff8c5a41e63328cca41d7b90d3f08f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac21e39b988976d01c261dc06b4d01527" id="r_ac21e39b988976d01c261dc06b4d01527"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ac21e39b988976d01c261dc06b4d01527">audiod_get_interface</a> (uint8_t rhport, <a class="el" href="structaudio__tools_1_1_usb_setup_packet.html">UsbSetupPacket</a> const &amp;p_request)</td></tr>
 <tr class="separator:ac21e39b988976d01c261dc06b4d01527"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a494a98fc7e8107de0c3cbf7c7790c27c" id="r_a494a98fc7e8107de0c3cbf7c7790c27c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a494a98fc7e8107de0c3cbf7c7790c27c">audiod_parse_flow_control_params</a> (audiod_function_t *audio, uint8_t const *p_desc)</td></tr>
+<tr class="memitem:a494a98fc7e8107de0c3cbf7c7790c27c" id="r_a494a98fc7e8107de0c3cbf7c7790c27c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a494a98fc7e8107de0c3cbf7c7790c27c">audiod_parse_flow_control_params</a> (<a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *audio, uint8_t const *p_desc)</td></tr>
 <tr class="separator:a494a98fc7e8107de0c3cbf7c7790c27c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8d2246b42391dc681759501d6e71b50" id="r_ae8d2246b42391dc681759501d6e71b50"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ae8d2246b42391dc681759501d6e71b50">audiod_set_fb_params_freq</a> (audiod_function_t *audio, uint32_t sample_freq, uint32_t mclk_freq)</td></tr>
+<tr class="memitem:ae8d2246b42391dc681759501d6e71b50" id="r_ae8d2246b42391dc681759501d6e71b50"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ae8d2246b42391dc681759501d6e71b50">audiod_set_fb_params_freq</a> (<a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *audio, uint32_t sample_freq, uint32_t mclk_freq)</td></tr>
 <tr class="separator:ae8d2246b42391dc681759501d6e71b50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a16fe0b34d1cdf454672c9c3f75ff1980" id="r_a16fe0b34d1cdf454672c9c3f75ff1980"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a16fe0b34d1cdf454672c9c3f75ff1980">audiod_set_interface</a> (uint8_t rhport, <a class="el" href="structaudio__tools_1_1_usb_setup_packet.html">UsbSetupPacket</a> const &amp;p_request)</td></tr>
 <tr class="separator:a16fe0b34d1cdf454672c9c3f75ff1980"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace93315bf70f3f252191731688be6fb7" id="r_ace93315bf70f3f252191731688be6fb7"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ace93315bf70f3f252191731688be6fb7">audiod_tx_packet_size_fc</a> (audiod_function_t *audio)</td></tr>
+<tr class="memitem:ace93315bf70f3f252191731688be6fb7" id="r_ace93315bf70f3f252191731688be6fb7"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ace93315bf70f3f252191731688be6fb7">audiod_tx_packet_size_fc</a> (<a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *audio)</td></tr>
 <tr class="separator:ace93315bf70f3f252191731688be6fb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87d596aa472b38e876d960be1475937a" id="r_a87d596aa472b38e876d960be1475937a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a87d596aa472b38e876d960be1475937a">audiod_verify_entity_exists</a> (uint8_t itf, uint8_t entityID, uint8_t *func_id)</td></tr>
 <tr class="separator:a87d596aa472b38e876d960be1475937a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -396,9 +417,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a67b0ecd0961d037358f5f1ea75c363d5" id="r_a67b0ecd0961d037358f5f1ea75c363d5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#a67b0ecd0961d037358f5f1ea75c363d5">beginUSB</a> () override</td></tr>
 <tr class="memdesc:a67b0ecd0961d037358f5f1ea75c363d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure and start the ESP32 USB stack.  <br /></td></tr>
 <tr class="separator:a67b0ecd0961d037358f5f1ea75c363d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac77fd21062a0885dec2c83d3d78df9b3" id="r_ac77fd21062a0885dec2c83d3d78df9b3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ac77fd21062a0885dec2c83d3d78df9b3">closeEpIn</a> (uint8_t rhport, audiod_function_t *audio, uint8_t itf, <a class="el" href="structaudio__tools_1_1_usb_setup_packet.html">UsbSetupPacket</a> const &amp;p_request)</td></tr>
+<tr class="memitem:ac77fd21062a0885dec2c83d3d78df9b3" id="r_ac77fd21062a0885dec2c83d3d78df9b3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ac77fd21062a0885dec2c83d3d78df9b3">closeEpIn</a> (uint8_t rhport, <a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *audio, uint8_t itf, <a class="el" href="structaudio__tools_1_1_usb_setup_packet.html">UsbSetupPacket</a> const &amp;p_request)</td></tr>
 <tr class="separator:ac77fd21062a0885dec2c83d3d78df9b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37501fb3f041d66d4f0d5d794680ad7f" id="r_a37501fb3f041d66d4f0d5d794680ad7f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a37501fb3f041d66d4f0d5d794680ad7f">closeEpOut</a> (uint8_t rhport, audiod_function_t *audio, uint8_t itf, <a class="el" href="structaudio__tools_1_1_usb_setup_packet.html">UsbSetupPacket</a> const &amp;p_request)</td></tr>
+<tr class="memitem:a37501fb3f041d66d4f0d5d794680ad7f" id="r_a37501fb3f041d66d4f0d5d794680ad7f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a37501fb3f041d66d4f0d5d794680ad7f">closeEpOut</a> (uint8_t rhport, <a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *audio, uint8_t itf, <a class="el" href="structaudio__tools_1_1_usb_setup_packet.html">UsbSetupPacket</a> const &amp;p_request)</td></tr>
 <tr class="separator:a37501fb3f041d66d4f0d5d794680ad7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af2e6a62036e962ab8be4d37483df2624" id="r_af2e6a62036e962ab8be4d37483df2624"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#af2e6a62036e962ab8be4d37483df2624">configChanged</a> (const <a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html">USBAudioConfig</a> &amp;n)</td></tr>
 <tr class="separator:af2e6a62036e962ab8be4d37483df2624"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -428,13 +449,13 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeb898b982d216195ee8e9af56ab27069" id="r_aeb898b982d216195ee8e9af56ab27069"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#aeb898b982d216195ee8e9af56ab27069">notifyStreamingState</a> ()</td></tr>
 <tr class="separator:aeb898b982d216195ee8e9af56ab27069"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95daf4131e3094b526bb2576d7313470" id="r_a95daf4131e3094b526bb2576d7313470"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a95daf4131e3094b526bb2576d7313470">openEndpointsForAltSetting</a> (uint8_t rhport, audiod_function_t *audio, uint8_t func_id, uint8_t itf, uint8_t alt)</td></tr>
+<tr class="memitem:a95daf4131e3094b526bb2576d7313470" id="r_a95daf4131e3094b526bb2576d7313470"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a95daf4131e3094b526bb2576d7313470">openEndpointsForAltSetting</a> (uint8_t rhport, <a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *audio, uint8_t func_id, uint8_t itf, uint8_t alt)</td></tr>
 <tr class="separator:a95daf4131e3094b526bb2576d7313470"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae05c4c788711f8acd4ce0b292f967e9e" id="r_ae05c4c788711f8acd4ce0b292f967e9e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ae05c4c788711f8acd4ce0b292f967e9e">openEpFeedback</a> (audiod_function_t *audio, const <a class="el" href="structaudio__tools_1_1_usb_endpoint_descriptor_view.html">UsbEndpointDescriptorView</a> &amp;desc_ep)</td></tr>
+<tr class="memitem:ae05c4c788711f8acd4ce0b292f967e9e" id="r_ae05c4c788711f8acd4ce0b292f967e9e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ae05c4c788711f8acd4ce0b292f967e9e">openEpFeedback</a> (<a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *audio, const <a class="el" href="structaudio__tools_1_1_usb_endpoint_descriptor_view.html">UsbEndpointDescriptorView</a> &amp;desc_ep)</td></tr>
 <tr class="separator:ae05c4c788711f8acd4ce0b292f967e9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a36b4e6c4fee75df3c7d1aa447a75e6e9" id="r_a36b4e6c4fee75df3c7d1aa447a75e6e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a36b4e6c4fee75df3c7d1aa447a75e6e9">openEpIn</a> (uint8_t rhport, audiod_function_t *audio, uint8_t itf, const <a class="el" href="structaudio__tools_1_1_usb_endpoint_descriptor_view.html">UsbEndpointDescriptorView</a> &amp;desc_ep, uint8_t const *p_desc_for_params)</td></tr>
+<tr class="memitem:a36b4e6c4fee75df3c7d1aa447a75e6e9" id="r_a36b4e6c4fee75df3c7d1aa447a75e6e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a36b4e6c4fee75df3c7d1aa447a75e6e9">openEpIn</a> (uint8_t rhport, <a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *audio, uint8_t itf, const <a class="el" href="structaudio__tools_1_1_usb_endpoint_descriptor_view.html">UsbEndpointDescriptorView</a> &amp;desc_ep, uint8_t const *p_desc_for_params)</td></tr>
 <tr class="separator:a36b4e6c4fee75df3c7d1aa447a75e6e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a80a5bbdb68890c4d846197a3427f2fcb" id="r_a80a5bbdb68890c4d846197a3427f2fcb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a80a5bbdb68890c4d846197a3427f2fcb">openEpOut</a> (uint8_t rhport, audiod_function_t *audio, uint8_t itf, const <a class="el" href="structaudio__tools_1_1_usb_endpoint_descriptor_view.html">UsbEndpointDescriptorView</a> &amp;desc_ep)</td></tr>
+<tr class="memitem:a80a5bbdb68890c4d846197a3427f2fcb" id="r_a80a5bbdb68890c4d846197a3427f2fcb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a80a5bbdb68890c4d846197a3427f2fcb">openEpOut</a> (uint8_t rhport, <a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *audio, uint8_t itf, const <a class="el" href="structaudio__tools_1_1_usb_endpoint_descriptor_view.html">UsbEndpointDescriptorView</a> &amp;desc_ep)</td></tr>
 <tr class="separator:a80a5bbdb68890c4d846197a3427f2fcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add33aa23a935c1ab5b815699f0813fd1" id="r_add33aa23a935c1ab5b815699f0813fd1"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#add33aa23a935c1ab5b815699f0813fd1">packetSize</a> () const</td></tr>
 <tr class="separator:add33aa23a935c1ab5b815699f0813fd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -465,7 +486,7 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a90098821bb0105222929a731ca7765ef" id="r_a90098821bb0105222929a731ca7765ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a90098821bb0105222929a731ca7765ef">setSampleRate</a> (uint32_t rate)</td></tr>
 <tr class="memdesc:a90098821bb0105222929a731ca7765ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Device-initiated sample rate change.  <br /></td></tr>
 <tr class="separator:a90098821bb0105222929a731ca7765ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac6315270bcee7537ad32ce3a40aeadbb" id="r_ac6315270bcee7537ad32ce3a40aeadbb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ac6315270bcee7537ad32ce3a40aeadbb">setupFeedback</a> (audiod_function_t *audio, uint8_t func_id, uint8_t alt)</td></tr>
+<tr class="memitem:ac6315270bcee7537ad32ce3a40aeadbb" id="r_ac6315270bcee7537ad32ce3a40aeadbb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ac6315270bcee7537ad32ce3a40aeadbb">setupFeedback</a> (<a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *audio, uint8_t func_id, uint8_t alt)</td></tr>
 <tr class="separator:ac6315270bcee7537ad32ce3a40aeadbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9059ba63118400ad647d45f7cc034069" id="r_a9059ba63118400ad647d45f7cc034069"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a9059ba63118400ad647d45f7cc034069">tud_audio_feedback_interval_isr</a> (uint8_t func_id, uint32_t, uint8_t frame_shift)</td></tr>
 <tr class="separator:a9059ba63118400ad647d45f7cc034069"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -497,7 +518,7 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:aa66a35e5edf58ce00047afcd1d4f455e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab76d7d0cabb8c67ca3229593914e5224" id="r_ab76d7d0cabb8c67ca3229593914e5224"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html">USBAudioConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ab76d7d0cabb8c67ca3229593914e5224">active_config_</a></td></tr>
 <tr class="separator:ab76d7d0cabb8c67ca3229593914e5224"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee2c24db80d059c72be2137090a6abe0" id="r_aee2c24db80d059c72be2137090a6abe0"><td class="memItemLeft" align="right" valign="top">std::vector&lt; audiod_function_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#aee2c24db80d059c72be2137090a6abe0">audiod_fct_</a></td></tr>
+<tr class="memitem:aee2c24db80d059c72be2137090a6abe0" id="r_aee2c24db80d059c72be2137090a6abe0"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#aee2c24db80d059c72be2137090a6abe0">audiod_fct_</a></td></tr>
 <tr class="separator:aee2c24db80d059c72be2137090a6abe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb4cef9c59a55889cec89fb9fee308cc" id="r_acb4cef9c59a55889cec89fb9fee308cc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_backend_tiny_u_s_b.html">USBAudioBackendTinyUSB</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#acb4cef9c59a55889cec89fb9fee308cc">backend_impl_</a></td></tr>
 <tr class="separator:acb4cef9c59a55889cec89fb9fee308cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -543,7 +564,7 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7dc5d87ca00e2e111d842eaa3333016d" id="r_a7dc5d87ca00e2e111d842eaa3333016d"><td class="memItemLeft" align="right" valign="top">std::function&lt; bool(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *, uint8_t func_id)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a7dc5d87ca00e2e111d842eaa3333016d">req_entity_cb_</a></td></tr>
 <tr class="separator:a7dc5d87ca00e2e111d842eaa3333016d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa44e7a21843b0ada7f033f10a77f766" id="r_aaa44e7a21843b0ada7f033f10a77f766"><td class="memItemLeft" align="right" valign="top">std::function&lt; bool(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *, uint8_t rhport, audiod_function_t *, uint16_t xferred_bytes)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#aaa44e7a21843b0ada7f033f10a77f766">rx_done_cb_</a></td></tr>
+<tr class="memitem:aaa44e7a21843b0ada7f033f10a77f766" id="r_aaa44e7a21843b0ada7f033f10a77f766"><td class="memItemLeft" align="right" valign="top">std::function&lt; bool(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *, uint8_t rhport, <a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *, uint16_t xferred_bytes)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#aaa44e7a21843b0ada7f033f10a77f766">rx_done_cb_</a></td></tr>
 <tr class="separator:aaa44e7a21843b0ada7f033f10a77f766"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83f536376c6b0d270a088a83511013b7" id="r_a83f536376c6b0d270a088a83511013b7"><td class="memItemLeft" align="right" valign="top">volatile uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a83f536376c6b0d270a088a83511013b7">rx_dropped_bytes_</a> = 0</td></tr>
 <tr class="separator:a83f536376c6b0d270a088a83511013b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -561,7 +582,7 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:add363d597c7d8108a5350406105d158d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a94be6c942ddc2846641ad71f130fd4c0" id="r_a94be6c942ddc2846641ad71f130fd4c0"><td class="memItemLeft" align="right" valign="top">std::function&lt; bool(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *, uint8_t func_id)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a94be6c942ddc2846641ad71f130fd4c0">tud_audio_feedback_format_correction_cb_</a></td></tr>
 <tr class="separator:a94be6c942ddc2846641ad71f130fd4c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00c73a160fefe9ba38fe1b9565e0dd48" id="r_a00c73a160fefe9ba38fe1b9565e0dd48"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *, uint8_t func_id, uint8_t alt_itf, audio_feedback_params_t *feedback_param)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a00c73a160fefe9ba38fe1b9565e0dd48">tud_audio_feedback_params_cb_</a></td></tr>
+<tr class="memitem:a00c73a160fefe9ba38fe1b9565e0dd48" id="r_a00c73a160fefe9ba38fe1b9565e0dd48"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *, uint8_t func_id, uint8_t alt_itf, <a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audio__feedback__params__t.html">audio_feedback_params_t</a> *feedback_param)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a00c73a160fefe9ba38fe1b9565e0dd48">tud_audio_feedback_params_cb_</a></td></tr>
 <tr class="separator:a00c73a160fefe9ba38fe1b9565e0dd48"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0522e99ef68c30c1564db654cc02ef87" id="r_a0522e99ef68c30c1564db654cc02ef87"><td class="memItemLeft" align="right" valign="top">std::function&lt; bool(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *, uint8_t rhport, <a class="el" href="structaudio__tools_1_1_usb_setup_packet.html">UsbSetupPacket</a> const  &amp;p_request)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a0522e99ef68c30c1564db654cc02ef87">tud_audio_set_itf_cb_</a></td></tr>
 <tr class="separator:a0522e99ef68c30c1564db654cc02ef87"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -573,7 +594,7 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:aef56057b47b45ccf1f84facd57c060be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a270bd3858e3f27a4195925df9f6be8c6" id="r_a270bd3858e3f27a4195925df9f6be8c6"><td class="memItemLeft" align="right" valign="top">std::function&lt; bool(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *, uint8_t rhport, <a class="el" href="structaudio__tools_1_1_usb_setup_packet.html">UsbSetupPacket</a> const  &amp;p_request, uint8_t *pBuff)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a270bd3858e3f27a4195925df9f6be8c6">tud_audio_set_req_itf_cb_</a></td></tr>
 <tr class="separator:a270bd3858e3f27a4195925df9f6be8c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2df8031abfdaae2e83478c0a10ac9a07" id="r_a2df8031abfdaae2e83478c0a10ac9a07"><td class="memItemLeft" align="right" valign="top">std::function&lt; bool(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *, uint8_t rhport, audiod_function_t *)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a2df8031abfdaae2e83478c0a10ac9a07">tx_done_cb_</a></td></tr>
+<tr class="memitem:a2df8031abfdaae2e83478c0a10ac9a07" id="r_a2df8031abfdaae2e83478c0a10ac9a07"><td class="memItemLeft" align="right" valign="top">std::function&lt; bool(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *, uint8_t rhport, <a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a2df8031abfdaae2e83478c0a10ac9a07">tx_done_cb_</a></td></tr>
 <tr class="separator:a2df8031abfdaae2e83478c0a10ac9a07"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a2d6c7dca40aa71e54c7504fd45d0ee" id="r_a4a2d6c7dca40aa71e54c7504fd45d0ee"><td class="memItemLeft" align="right" valign="top">volatile uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a4a2d6c7dca40aa71e54c7504fd45d0ee">tx_fifo_read_total_</a> = 0</td></tr>
 <tr class="separator:a4a2d6c7dca40aa71e54c7504fd45d0ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -629,7 +650,70 @@ Board settings:<ul>
 I recommend to use the USBAudioStream type alias instead of this class directly, so that the code is portable to other platforms.</dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+</div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="a89899d7ebee30a177a6fe0fab848abbb" name="a89899d7ebee30a177a6fe0fab848abbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89899d7ebee30a177a6fe0fab848abbb">&#9670;&#160;</a></span>audio_feedback_method_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a89899d7ebee30a177a6fe0fab848abbb">audio_feedback_method_t</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Methods for USB audio feedback endpoint operation. </p>
+<p>Enumerates the available feedback methods for synchronizing audio streaming between the device and the host. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a89899d7ebee30a177a6fe0fab848abbba6b5e284049302b6be2242c9608071f49" name="a89899d7ebee30a177a6fe0fab848abbba6b5e284049302b6be2242c9608071f49"></a>AUDIO_FEEDBACK_METHOD_DISABLED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89899d7ebee30a177a6fe0fab848abbba2ac099f16cafffc23c2c811d62a4b18e" name="a89899d7ebee30a177a6fe0fab848abbba2ac099f16cafffc23c2c811d62a4b18e"></a>AUDIO_FEEDBACK_METHOD_FREQUENCY_FIXED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89899d7ebee30a177a6fe0fab848abbbae5cff3934bbb40b71306bd54c7140644" name="a89899d7ebee30a177a6fe0fab848abbbae5cff3934bbb40b71306bd54c7140644"></a>AUDIO_FEEDBACK_METHOD_FREQUENCY_FLOAT&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89899d7ebee30a177a6fe0fab848abbbab978a249ee7580a37f4a8c144c6df61c" name="a89899d7ebee30a177a6fe0fab848abbbab978a249ee7580a37f4a8c144c6df61c"></a>AUDIO_FEEDBACK_METHOD_FREQUENCY_POWER_OF_2&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89899d7ebee30a177a6fe0fab848abbba28d401d42acb2bfc4b1f475c31cd3eb5" name="a89899d7ebee30a177a6fe0fab848abbba28d401d42acb2bfc4b1f475c31cd3eb5"></a>AUDIO_FEEDBACK_METHOD_FIFO_COUNT&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<a id="ae18c93236294ee991e5f5c6b0922cd2f" name="ae18c93236294ee991e5f5c6b0922cd2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae18c93236294ee991e5f5c6b0922cd2f">&#9670;&#160;</a></span>audio_format_type_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ae18c93236294ee991e5f5c6b0922cd2f">audio_format_type_t</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Supported USB audio format types. </p>
+<p>Enumerates the audio format types supported by the USB audio device. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ae18c93236294ee991e5f5c6b0922cd2faaca39c01f96e7e659f427adec29204e8" name="ae18c93236294ee991e5f5c6b0922cd2faaca39c01f96e7e659f427adec29204e8"></a>AUDIO_FORMAT_TYPE_I&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ae18c93236294ee991e5f5c6b0922cd2fa9b72072cd81c55316f46845f56e01417" name="ae18c93236294ee991e5f5c6b0922cd2fa9b72072cd81c55316f46845f56e01417"></a>AUDIO_FORMAT_TYPE_II&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ae18c93236294ee991e5f5c6b0922cd2fa7ab0e96ce1a69b79a70df36ce830758a" name="ae18c93236294ee991e5f5c6b0922cd2fa7ab0e96ce1a69b79a70df36ce830758a"></a>AUDIO_FORMAT_TYPE_III&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a08914ac7214dedb063d5cb7b8e51ec3e" name="a08914ac7214dedb063d5cb7b8e51ec3e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a08914ac7214dedb063d5cb7b8e51ec3e">&#9670;&#160;</a></span>USBAudioDeviceESP32() <span class="overload">[1/2]</span></h2>
 
@@ -844,7 +928,7 @@ I recommend to use the USBAudioStream type alias instead of this class directly,
         <tr>
           <td class="memname">bool audiod_calc_tx_packet_sz </td>
           <td>(</td>
-          <td class="paramtype">audiod_function_t *&#160;</td>
+          <td class="paramtype"><a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *&#160;</td>
           <td class="paramname"><em>audio</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1010,7 +1094,7 @@ I recommend to use the USBAudioStream type alias instead of this class directly,
         <tr>
           <td class="memname">bool audiod_fb_send </td>
           <td>(</td>
-          <td class="paramtype">audiod_function_t *&#160;</td>
+          <td class="paramtype"><a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *&#160;</td>
           <td class="paramname"><em>audio</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1042,7 +1126,7 @@ I recommend to use the USBAudioStream type alias instead of this class directly,
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">audiod_function_t *&#160;</td>
+          <td class="paramtype"><a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *&#160;</td>
           <td class="paramname"><em>audio</em>, </td>
         </tr>
         <tr>
@@ -1242,7 +1326,7 @@ I recommend to use the USBAudioStream type alias instead of this class directly,
         <tr>
           <td class="memname">void audiod_parse_flow_control_params </td>
           <td>(</td>
-          <td class="paramtype">audiod_function_t *&#160;</td>
+          <td class="paramtype"><a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *&#160;</td>
           <td class="paramname"><em>audio</em>, </td>
         </tr>
         <tr>
@@ -1304,7 +1388,7 @@ I recommend to use the USBAudioStream type alias instead of this class directly,
         <tr>
           <td class="memname">bool audiod_set_fb_params_freq </td>
           <td>(</td>
-          <td class="paramtype">audiod_function_t *&#160;</td>
+          <td class="paramtype"><a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *&#160;</td>
           <td class="paramname"><em>audio</em>, </td>
         </tr>
         <tr>
@@ -1418,7 +1502,7 @@ I recommend to use the USBAudioStream type alias instead of this class directly,
         <tr>
           <td class="memname">uint16_t audiod_tx_packet_size_fc </td>
           <td>(</td>
-          <td class="paramtype">audiod_function_t *&#160;</td>
+          <td class="paramtype"><a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *&#160;</td>
           <td class="paramname"><em>audio</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1969,7 +2053,7 @@ I recommend to use the USBAudioStream type alias instead of this class directly,
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">audiod_function_t *&#160;</td>
+          <td class="paramtype"><a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *&#160;</td>
           <td class="paramname"><em>audio</em>, </td>
         </tr>
         <tr>
@@ -2017,7 +2101,7 @@ I recommend to use the USBAudioStream type alias instead of this class directly,
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">audiod_function_t *&#160;</td>
+          <td class="paramtype"><a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *&#160;</td>
           <td class="paramname"><em>audio</em>, </td>
         </tr>
         <tr>
@@ -3482,7 +3566,7 @@ I recommend to use the USBAudioStream type alias instead of this class directly,
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">audiod_function_t *&#160;</td>
+          <td class="paramtype"><a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *&#160;</td>
           <td class="paramname"><em>audio</em>, </td>
         </tr>
         <tr>
@@ -3530,7 +3614,7 @@ I recommend to use the USBAudioStream type alias instead of this class directly,
         <tr>
           <td class="memname">void openEpFeedback </td>
           <td>(</td>
-          <td class="paramtype">audiod_function_t *&#160;</td>
+          <td class="paramtype"><a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *&#160;</td>
           <td class="paramname"><em>audio</em>, </td>
         </tr>
         <tr>
@@ -3572,7 +3656,7 @@ I recommend to use the USBAudioStream type alias instead of this class directly,
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">audiod_function_t *&#160;</td>
+          <td class="paramtype"><a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *&#160;</td>
           <td class="paramname"><em>audio</em>, </td>
         </tr>
         <tr>
@@ -3626,7 +3710,7 @@ I recommend to use the USBAudioStream type alias instead of this class directly,
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">audiod_function_t *&#160;</td>
+          <td class="paramtype"><a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *&#160;</td>
           <td class="paramname"><em>audio</em>, </td>
         </tr>
         <tr>
@@ -4104,7 +4188,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="memname">void setAudioFeedbackParamsCallback </td>
           <td>(</td>
-          <td class="paramtype">std::function&lt; void(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *, uint8_t, uint8_t, audio_feedback_params_t *)&gt;&#160;</td>
+          <td class="paramtype">std::function&lt; void(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *, uint8_t, uint8_t, <a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audio__feedback__params__t.html">audio_feedback_params_t</a> *)&gt;&#160;</td>
           <td class="paramname"><em>cb</em></td><td>)</td>
           <td></td>
         </tr>
@@ -4672,7 +4756,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="memname">void setRxDoneCallback </td>
           <td>(</td>
-          <td class="paramtype">std::function&lt; bool(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *, uint8_t, audiod_function_t *, uint16_t)&gt;&#160;</td>
+          <td class="paramtype">std::function&lt; bool(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *, uint8_t, <a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *, uint16_t)&gt;&#160;</td>
           <td class="paramname"><em>cb</em></td><td>)</td>
           <td></td>
         </tr>
@@ -4842,7 +4926,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="memname">void setTxDoneCallback </td>
           <td>(</td>
-          <td class="paramtype">std::function&lt; bool(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *, uint8_t, audiod_function_t *)&gt;&#160;</td>
+          <td class="paramtype">std::function&lt; bool(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *, uint8_t, <a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *)&gt;&#160;</td>
           <td class="paramname"><em>cb</em></td><td>)</td>
           <td></td>
         </tr>
@@ -4876,7 +4960,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="memname">void setupFeedback </td>
           <td>(</td>
-          <td class="paramtype">audiod_function_t *&#160;</td>
+          <td class="paramtype"><a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *&#160;</td>
           <td class="paramname"><em>audio</em>, </td>
         </tr>
         <tr>
@@ -5375,7 +5459,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;audiod_function_t&gt; audiod_fct_</td>
+          <td class="memname">std::vector&lt;<a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a>&gt; audiod_fct_</td>
         </tr>
       </table>
   </td>
@@ -5905,7 +5989,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::function&lt;bool(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a>*, uint8_t rhport, audiod_function_t*, uint16_t xferred_bytes)&gt; rx_done_cb_</td>
+          <td class="memname">std::function&lt;bool(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a>*, uint8_t rhport, <a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a>*, uint16_t xferred_bytes)&gt; rx_done_cb_</td>
         </tr>
       </table>
   </td>
@@ -6125,7 +6209,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::function&lt;void(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a>*, uint8_t func_id, uint8_t alt_itf, audio_feedback_params_t* feedback_param)&gt; tud_audio_feedback_params_cb_</td>
+          <td class="memname">std::function&lt;void(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a>*, uint8_t func_id, uint8_t alt_itf, <a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audio__feedback__params__t.html">audio_feedback_params_t</a>* feedback_param)&gt; tud_audio_feedback_params_cb_</td>
         </tr>
       </table>
   </td>
@@ -6257,7 +6341,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::function&lt;bool(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a>*, uint8_t rhport, audiod_function_t*)&gt; tx_done_cb_</td>
+          <td class="memname">std::function&lt;bool(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a>*, uint8_t rhport, <a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a>*)&gt; tx_done_cb_</td>
         </tr>
       </table>
   </td>
