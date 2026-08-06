@@ -174,6 +174,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a491404639b045035530de8e2079d8c95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afcb882caee0698053c3356997acdf4b9" id="r_afcb882caee0698053c3356997acdf4b9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#afcb882caee0698053c3356997acdf4b9">setConvertALawMuLaw</a> (bool enable)</td></tr>
 <tr class="separator:afcb882caee0698053c3356997acdf4b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26f2f05055cee68ddc697d8e41aab0c9" id="r_a26f2f05055cee68ddc697d8e41aab0c9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a26f2f05055cee68ddc697d8e41aab0c9">setConvertFloatToInt16</a> (bool enable)</td></tr>
+<tr class="separator:a26f2f05055cee68ddc697d8e41aab0c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3dbf49d3369aa93714d2c4a3a1c9cbb9" id="r_a3dbf49d3369aa93714d2c4a3a1c9cbb9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a3dbf49d3369aa93714d2c4a3a1c9cbb9">setDecoder</a> (<a class="el" href="classaudio__tools_1_1_audio_decoder_ext.html">AudioDecoderExt</a> &amp;dec, <a class="el" href="group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1">AudioFormat</a> fmt=<a class="el" href="group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1a696b031073e74bf2cb98e5ef201d4aa3">AudioFormat::UNKNOWN</a>)</td></tr>
 <tr class="separator:a3dbf49d3369aa93714d2c4a3a1c9cbb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a909f118906f9cf7024baae224dcd90a7" id="r_a909f118906f9cf7024baae224dcd90a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a909f118906f9cf7024baae224dcd90a7">setNotifyActive</a> (bool flag)</td></tr>
@@ -223,6 +225,8 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a7d4f48aef16e442db6b2aad49b3a5800" id="r_a7d4f48aef16e442db6b2aad49b3a5800"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a7d4f48aef16e442db6b2aad49b3a5800">write_out_alaw</a> (const uint8_t *in_ptr, size_t in_size)</td></tr>
 <tr class="memdesc:a7d4f48aef16e442db6b2aad49b3a5800"><td class="mdescLeft">&#160;</td><td class="mdescRight">Expand G.711 A-law 8-bit samples to 16-bit linear PCM and write out.  <br /></td></tr>
 <tr class="separator:a7d4f48aef16e442db6b2aad49b3a5800"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41643dada2ad235dfa2f88671873e933" id="r_a41643dada2ad235dfa2f88671873e933"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a41643dada2ad235dfa2f88671873e933">write_out_float_to_int16</a> (const uint8_t *in_ptr, size_t in_size)</td></tr>
+<tr class="separator:a41643dada2ad235dfa2f88671873e933"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aabc21e470c47c37fc39fd0ee81001afa" id="r_aabc21e470c47c37fc39fd0ee81001afa"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#aabc21e470c47c37fc39fd0ee81001afa">write_out_mulaw</a> (const uint8_t *in_ptr, size_t in_size)</td></tr>
 <tr class="memdesc:aabc21e470c47c37fc39fd0ee81001afa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Expand G.711 mu-law 8-bit samples to 16-bit linear PCM and write out.  <br /></td></tr>
 <tr class="separator:aabc21e470c47c37fc39fd0ee81001afa"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -249,6 +253,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:aa60fb6d9ae3862492d9a11bf78027d9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5c393c0a40abb1501b8029ce74540a5" id="r_af5c393c0a40abb1501b8029ce74540a5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; int32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#af5c393c0a40abb1501b8029ce74540a5">buffer24</a> {0}</td></tr>
 <tr class="separator:af5c393c0a40abb1501b8029ce74540a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f34ae5ba070569e454ed7ce344aa66d" id="r_a1f34ae5ba070569e454ed7ce344aa66d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; int16_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a1f34ae5ba070569e454ed7ce344aa66d">buffer_float16</a> {0}</td></tr>
+<tr class="separator:a1f34ae5ba070569e454ed7ce344aa66d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa697e397eb17a824bdd1debf33dd61e4" id="r_aa697e397eb17a824bdd1debf33dd61e4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#aa697e397eb17a824bdd1debf33dd61e4">byte_buffer</a> {0}</td></tr>
 <tr class="separator:aa697e397eb17a824bdd1debf33dd61e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae15adab126f4b00607b00d234ee4cfd4" id="r_ae15adab126f4b00607b00d234ee4cfd4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#ae15adab126f4b00607b00d234ee4cfd4">convert24</a> = true</td></tr>
@@ -257,6 +263,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:af5a5bbc8c54b8a33e76906e207a4c476"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a93bcbd7bd5bde637be2bcd7b60ea3f61" id="r_a93bcbd7bd5bde637be2bcd7b60ea3f61"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a93bcbd7bd5bde637be2bcd7b60ea3f61">convertALawMuLaw</a> = true</td></tr>
 <tr class="separator:a93bcbd7bd5bde637be2bcd7b60ea3f61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0efe4744597cc16236f8b94ca90e7cda" id="r_a0efe4744597cc16236f8b94ca90e7cda"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a0efe4744597cc16236f8b94ca90e7cda">convertFloatToInt16</a> = true</td></tr>
+<tr class="separator:a0efe4744597cc16236f8b94ca90e7cda"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb88a7977658bc9af3cae6500011adf1" id="r_adb88a7977658bc9af3cae6500011adf1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_encoded_audio_output.html">EncodedAudioOutput</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#adb88a7977658bc9af3cae6500011adf1">dec_out</a></td></tr>
 <tr class="separator:adb88a7977658bc9af3cae6500011adf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b432da52d2652bb3e2a75d50bde2a84" id="r_a6b432da52d2652bb3e2a75d50bde2a84"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1">AudioFormat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a6b432da52d2652bb3e2a75d50bde2a84">decoder_format</a> = <a class="el" href="group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1a1088fbc901dc88b6c18085220cc33de9">AudioFormat::PCM</a></td></tr>
@@ -285,7 +293,7 @@ Protected Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A simple <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html" title="A simple WAVDecoder: We parse the header data on the first record to determine the format....">WAVDecoder</a>: We parse the header data on the first record to determine the format. If no <a class="el" href="classaudio__tools_1_1_audio_decoder_ext.html" title="Extended AudioDecoder interface to support block size configuration.">AudioDecoderExt</a> is specified we just write the PCM data to the output that is defined by calling <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a065fe4c0d3543644ab523a5d9b5fb9c0" title="Defines the output Stream.">setOutput()</a>. You can define a ADPCM decoder to decode WAV files that contain ADPCM data. Since WAV files can use different ADPCM (or other) encodings, you can register more than one decoder with <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#ab2028fe84009a2ac9741fe0892ca7c89">addDecoder()</a>: the decoder matching the format tag found in the WAV header is selected automatically when a file is parsed. </p>
 <p>Besides plain PCM, the following formats are natively supported without the need to provide an external decoder:</p><ul>
-<li>IEEE_FLOAT (0x0003): uncompressed 32-bit float PCM is just passed through.</li>
+<li>IEEE_FLOAT (0x0003): 32-bit float PCM samples are converted to 16-bit linear PCM by default (clamped to [-1.0, 1.0] and scaled). This can be disabled with setConvertFloatToInt16(false) to pass through the raw 32-bit float bytes instead.</li>
 <li>ALAW (0x0006) and MULAW (0x0007): the 8-bit logarithmic G.711 samples are expanded to 16-bit linear PCM. This can be disabled with setConvertALawMuLaw(false) to pass through the raw encoded bytes instead.</li>
 </ul>
 <p>Optionally, if the input WAV file contains 8-bit PCM data, you can enable automatic conversion to 16-bit PCM output by calling setConvert8to16(true). This will convert unsigned 8-bit samples to signed 16-bit samples before writing to the output stream, and the reported bits_per_sample in <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#aed4bf0d5ce93f27242be485943d0b37d" title="Exposed AudioInfo (may reflect conversion flags)">audioInfo()</a> will be 16 when conversion is active. The same is valid for the 24 bit conversion which converts 24 bit (3 byte) to 32 bit (4 byte).</p>
@@ -1149,6 +1157,33 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a26f2f05055cee68ddc697d8e41aab0c9" name="a26f2f05055cee68ddc697d8e41aab0c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26f2f05055cee68ddc697d8e41aab0c9">&#9670;&#160;</a></span>setConvertFloatToInt16()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setConvertFloatToInt16 </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>enable</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Convert 32-bit IEEE_FLOAT samples to 16-bit linear PCM (default: enabled). Samples are clamped to [-1.0, 1.0] before scaling to the int16 range. If disabled, the raw 32-bit float bytes are passed through unchanged. </p>
+
+</div>
+</div>
 <a id="a3dbf49d3369aa93714d2c4a3a1c9cbb9" name="a3dbf49d3369aa93714d2c4a3a1c9cbb9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3dbf49d3369aa93714d2c4a3a1c9cbb9">&#9670;&#160;</a></span>setDecoder()</h2>
 
@@ -1548,6 +1583,43 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a41643dada2ad235dfa2f88671873e933" name="a41643dada2ad235dfa2f88671873e933"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41643dada2ad235dfa2f88671873e933">&#9670;&#160;</a></span>write_out_float_to_int16()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t write_out_float_to_int16 </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>in_ptr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>in_size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Convert 32-bit IEEE_FLOAT samples to 16-bit linear PCM and write out. Samples are clamped to [-1.0, 1.0] before scaling to the int16 range. </p>
+
+</div>
+</div>
 <a id="aabc21e470c47c37fc39fd0ee81001afa" name="aabc21e470c47c37fc39fd0ee81001afa"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aabc21e470c47c37fc39fd0ee81001afa">&#9670;&#160;</a></span>write_out_mulaw()</h2>
 
@@ -1695,6 +1767,28 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a1f34ae5ba070569e454ed7ce344aa66d" name="a1f34ae5ba070569e454ed7ce344aa66d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f34ae5ba070569e454ed7ce344aa66d">&#9670;&#160;</a></span>buffer_float16</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt;int16_t&gt; buffer_float16 {0}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aa697e397eb17a824bdd1debf33dd61e4" name="aa697e397eb17a824bdd1debf33dd61e4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa697e397eb17a824bdd1debf33dd61e4">&#9670;&#160;</a></span>byte_buffer</h2>
 
@@ -1772,6 +1866,28 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">bool convertALawMuLaw = true</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0efe4744597cc16236f8b94ca90e7cda" name="a0efe4744597cc16236f8b94ca90e7cda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0efe4744597cc16236f8b94ca90e7cda">&#9670;&#160;</a></span>convertFloatToInt16</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool convertFloatToInt16 = true</td>
         </tr>
       </table>
   </td>
