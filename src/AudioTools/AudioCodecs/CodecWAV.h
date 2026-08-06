@@ -393,7 +393,10 @@ class WAVHeader {
  *
  * Besides plain PCM, the following formats are natively supported without
  * the need to provide an external decoder:
- * - IEEE_FLOAT (0x0003): uncompressed 32-bit float PCM is just passed through.
+ * - IEEE_FLOAT (0x0003): 32-bit float PCM samples are converted to 16-bit
+ *   linear PCM by default (clamped to [-1.0, 1.0] and scaled). This can be
+ *   disabled with setConvertFloatToInt16(false) to pass through the raw
+ *   32-bit float bytes instead.
  * - ALAW (0x0006) and MULAW (0x0007): the 8-bit logarithmic G.711 samples are
  *   expanded to 16-bit linear PCM. This can be disabled with
  *   setConvertALawMuLaw(false) to pass through the raw encoded bytes instead.
@@ -485,6 +488,7 @@ class WAVDecoder : public AudioDecoder {
     p_decoder = nullptr;
     byte_buffer.reset();
     buffer24.reset();
+    buffer_float16.reset();
     isFirst = true;
     active = true;
     return true;
@@ -495,6 +499,7 @@ class WAVDecoder : public AudioDecoder {
     TRACED();
     byte_buffer.reset();
     buffer24.reset();
+    buffer_float16.reset();
     active = false;
   }
 
@@ -519,6 +524,11 @@ class WAVDecoder : public AudioDecoder {
     // ALAW/MULAW are expanded from 8-bit logarithmic to 16-bit linear PCM
     if (convertALawMuLaw && (info.format == AudioFormat::ALAW ||
                               info.format == AudioFormat::MULAW)) {
+      info.bits_per_sample = 16;
+    }
+    // IEEE_FLOAT can optionally be converted to 16-bit linear PCM
+    if (convertFloatToInt16 && info.format == AudioFormat::IEEE_FLOAT &&
+        info.bits_per_sample == 32) {
       info.bits_per_sample = 16;
     }
     // any other non-PCM/non-IEEE_FLOAT format (e.g. ADPCM) is decoded by
@@ -572,6 +582,14 @@ class WAVDecoder : public AudioDecoder {
     convertALawMuLaw = enable;
   }
 
+  /// Convert 32-bit IEEE_FLOAT samples to 16-bit linear PCM (default:
+  /// enabled). Samples are clamped to [-1.0, 1.0] before scaling to the
+  /// int16 range. If disabled, the raw 32-bit float bytes are passed
+  /// through unchanged.
+  void setConvertFloatToInt16(bool enable) {
+    convertFloatToInt16 = enable;
+  }
+
   /// Access to the internal header parser and info
   WAVHeader &getHeader() { return header; }
 
@@ -596,9 +614,11 @@ class WAVDecoder : public AudioDecoder {
   EncodedAudioOutput dec_out;
   SingleBuffer<uint8_t> byte_buffer{0};
   SingleBuffer<int32_t> buffer24{0};
+  SingleBuffer<int16_t> buffer_float16{0};
   bool convert8to16 = true;  // Optional conversion flag
   bool convert24 = true;  // Optional conversion flag
   bool convertALawMuLaw = true;  // Optional conversion flag
+  bool convertFloatToInt16 = true;  // Optional conversion flag
   const size_t batch_size = 256;
 
   Print &out() { return p_decoder == nullptr ? *p_print : dec_out; }
@@ -618,6 +638,9 @@ class WAVDecoder : public AudioDecoder {
       result = write_out_alaw(in_ptr, in_size);
     } else if (convertALawMuLaw && format == AudioFormat::MULAW) {
       result = write_out_mulaw(in_ptr, in_size);
+    } else if (convertFloatToInt16 && format == AudioFormat::IEEE_FLOAT &&
+               header.audioInfo().bits_per_sample == 32) {
+      result = write_out_float_to_int16(in_ptr, in_size);
     } else {
       result = out().write(in_ptr, in_size);
     }
@@ -665,7 +688,34 @@ class WAVDecoder : public AudioDecoder {
         byte_buffer.reset();
       }
     }
-    
+
+    return in_size;
+  }
+
+  /// Convert 32-bit IEEE_FLOAT samples to 16-bit linear PCM and write out.
+  /// Samples are clamped to [-1.0, 1.0] before scaling to the int16 range.
+  size_t write_out_float_to_int16(const uint8_t *in_ptr, size_t in_size) {
+    buffer_float16.resize(batch_size);
+    byte_buffer.resize(4);
+
+    for (size_t i = 0; i < in_size; i++) {
+      byte_buffer.write(in_ptr[i]);
+
+      if (byte_buffer.isFull()) {
+        float sample_f;
+        memcpy(&sample_f, byte_buffer.data(), sizeof(sample_f));
+        if (sample_f > 1.0f) sample_f = 1.0f;
+        if (sample_f < -1.0f) sample_f = -1.0f;
+        buffer_float16.write((int16_t)(sample_f * 32767.0f));
+        if (buffer_float16.isFull()) {
+          writeDataT<int16_t>(&out(), buffer_float16.data(),
+                               buffer_float16.available());
+          buffer_float16.reset();
+        }
+        byte_buffer.reset();
+      }
+    }
+
     return in_size;
   }
 
