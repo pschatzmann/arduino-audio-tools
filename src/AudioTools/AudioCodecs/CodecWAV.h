@@ -12,6 +12,12 @@
 /// 'data'). Protects against an unbounded/never-ending search on malformed
 /// input.
 #define MAX_WAV_HEADER_LEN_LIMIT 2048
+/// Granularity (in bytes, rounded down to a whole number of frames) in
+/// which WAVEncoder feeds PCM data to an external (compressing) encoder
+/// when a fixed data_length was declared via setDataLength(). Smaller
+/// values make the point at which data_length is reached more precise (see
+/// WAVEncoder::write()) at the cost of more, smaller writes to the encoder.
+#define WAV_ENCODER_COMPRESSED_CHUNK_SIZE 1024
 
 namespace audio_tools {
 
@@ -310,7 +316,12 @@ class WAVHeader {
 
     uint16_t spb = samplesPerBlock(info);
     uint32_t byte_rate = info.byte_rate;
-    if ((is_ms_adpcm || is_ima_adpcm) && spb > 0 && info.block_align > 0) {
+    // use the real average byte rate for ADPCM formats whenever the block
+    // layout is known, regardless of whether the extended 'fmt '/'fact'
+    // chunk is written: byte_rate is informational (e.g. used by some
+    // players for scrubbing/duration estimates) and the linear-PCM-based
+    // default in info.byte_rate is misleading for compressed formats
+    if (isADPCM(info.format) && spb > 0 && info.block_align > 0) {
       // average bytes/sec = (sample_rate * block_align) / samples_per_block
       byte_rate = ((uint64_t)info.sample_rate * info.block_align) / spb;
     }
@@ -1006,7 +1017,11 @@ class WAVEncoder : public AudioEncoder {
     setAudioInfo(wav_info);
   }
 
-  /// Defines the WAVAudioInfo
+  /// Defines the WAVAudioInfo. Replaces wav_info wholesale - any settings
+  /// made via setDataLength()/setDataOffset()/setExtADPCMHeader() are
+  /// re-applied on top afterward (see applyPendingOverrides()), so they
+  /// stick regardless of whether those setters were called before or after
+  /// this one.
   virtual void setAudioInfo(WAVAudioInfo ai) {
     AudioEncoder::setAudioInfo(ai);
     if (p_encoder) p_encoder->setAudioInfo(ai);
@@ -1027,11 +1042,11 @@ class WAVEncoder : public AudioEncoder {
       wav_info.block_align =
           wav_info.bits_per_sample / 8 * wav_info.channels;
     }
+    applyPendingOverrides();
   }
 
   /// starts the processing
   bool begin(WAVAudioInfo ai) {
-    header.clear();
     setAudioInfo(ai);
     return begin();
   }
@@ -1039,6 +1054,7 @@ class WAVEncoder : public AudioEncoder {
   /// starts the processing using the actual WAVAudioInfo
   virtual bool begin() override {
     TRACED();
+    header.clear();
     if (!setupEncodedAudio()) {
       is_open = false;
       return false;
@@ -1113,7 +1129,7 @@ class WAVEncoder : public AudioEncoder {
         // knows what still needs to be resent (e.g. to a new file).
         int frame_size = wav_info.bits_per_sample / 8 * wav_info.channels;
         if (frame_size <= 0) frame_size = 1;
-        size_t chunk = (256 / frame_size) * frame_size;
+        size_t chunk = (WAV_ENCODER_COMPRESSED_CHUNK_SIZE / frame_size) * frame_size;
         if (chunk == 0) chunk = frame_size;
 
         while (result < len && size_limit > 0) {
@@ -1140,24 +1156,33 @@ class WAVEncoder : public AudioEncoder {
   /// Check if encoder is open
   bool isOpen() { return is_open; }
 
-  /// Adds n empty bytes at the beginning of the data
-  void setDataOffset(uint16_t offset) { wav_info.offset = offset; }
+  /// Adds n empty bytes at the beginning of the data. Sticks even if
+  /// setAudioInfo(WAVAudioInfo)/begin(WAVAudioInfo) is called afterward
+  /// (see applyPendingOverrides()).
+  void setDataOffset(uint16_t offset) {
+    has_pending_offset = true;
+    pending_offset = offset;
+    wav_info.offset = offset;
+  }
 
   /// Writes the extended 'fmt ' chunk + 'fact' chunk for ADPCM formats
-  /// (disabled by default - the standard 16-byte 'fmt ' chunk is written)
-  void setExtADPCMHeader(bool enable) { wav_info.ext_adpcm_header = enable; }
+  /// (disabled by default - the standard 16-byte 'fmt ' chunk is written).
+  /// Sticks even if setAudioInfo(WAVAudioInfo)/begin(WAVAudioInfo) is
+  /// called afterward (see applyPendingOverrides()).
+  void setExtADPCMHeader(bool enable) {
+    has_pending_ext_adpcm_header = true;
+    pending_ext_adpcm_header = enable;
+    wav_info.ext_adpcm_header = enable;
+  }
 
-  /// Defines the WAV payload length in bytes (without header)
+  /// Defines the WAV payload length in bytes (without header). Sticks even
+  /// if setAudioInfo(WAVAudioInfo)/begin(WAVAudioInfo) is called afterward
+  /// (see applyPendingOverrides()) - e.g. calling setDataLength() before
+  /// begin(WAVAudioInfo) will not be silently discarded.
   void setDataLength(uint32_t data_length) {
-    wav_info.data_length = data_length;
-    wav_info.is_streamed =
-        (data_length == 0 || data_length >= 0x7fff0000);
-    if (!wav_info.is_streamed) {
-      // full file size = RIFF chunk (36) + format specific extra header
-      // bytes (e.g. ADPCM 'fmt ' extension + 'fact' chunk) + data chunk payload
-      wav_info.file_size = wav_info.data_length + 36 +
-                            WAVHeader::extraHeaderBytes(wav_info);
-    }
+    has_pending_data_length = true;
+    pending_data_length = data_length;
+    applyPendingOverrides();
     setAudioInfo(wav_info);
   }
 
@@ -1178,6 +1203,45 @@ class WAVEncoder : public AudioEncoder {
   int64_t size_limit = 0;
   bool header_written = false;
   volatile bool is_open = false;
+
+  // fields set via setDataLength()/setDataOffset()/setExtADPCMHeader() that
+  // must survive a subsequent wholesale setAudioInfo(WAVAudioInfo)/
+  // begin(WAVAudioInfo) call, regardless of call order - see
+  // applyPendingOverrides()
+  bool has_pending_data_length = false;
+  uint32_t pending_data_length = 0;
+  bool has_pending_offset = false;
+  uint16_t pending_offset = 0;
+  bool has_pending_ext_adpcm_header = false;
+  bool pending_ext_adpcm_header = false;
+
+  /// Re-applies any settings configured via setDataLength()/setDataOffset()/
+  /// setExtADPCMHeader() on top of wav_info. Called after every wholesale
+  /// (re)assignment of wav_info (setAudioInfo(WAVAudioInfo)), so these
+  /// settings stick no matter whether the dedicated setters were called
+  /// before or after setAudioInfo(WAVAudioInfo)/begin(WAVAudioInfo).
+  void applyPendingOverrides() {
+    // must run before pending_data_length below: its file_size calculation
+    // depends on wav_info.ext_adpcm_header
+    if (has_pending_ext_adpcm_header) {
+      wav_info.ext_adpcm_header = pending_ext_adpcm_header;
+    }
+    if (has_pending_offset) {
+      wav_info.offset = pending_offset;
+    }
+    if (has_pending_data_length) {
+      wav_info.data_length = pending_data_length;
+      wav_info.is_streamed =
+          (pending_data_length == 0 || pending_data_length >= 0x7fff0000);
+      if (!wav_info.is_streamed) {
+        // full file size = RIFF chunk (36) + format specific extra header
+        // bytes (e.g. ADPCM 'fmt ' extension + 'fact' chunk) + data chunk
+        // payload
+        wav_info.file_size = wav_info.data_length + 36 +
+                              WAVHeader::extraHeaderBytes(wav_info);
+      }
+    }
+  }
 
   /// Sets up the external encoder pipeline. Returns false (and logs an
   /// error) instead of crashing if the required output stream has not been
