@@ -205,6 +205,8 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a40ccab761fbae35e3eae43acc41be366" id="r_a40ccab761fbae35e3eae43acc41be366"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a40ccab761fbae35e3eae43acc41be366">decodeHeader</a> (uint8_t *in_ptr, size_t in_size)</td></tr>
 <tr class="memdesc:a40ccab761fbae35e3eae43acc41be366"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decodes the header data: Returns the start pos of the data.  <br /></td></tr>
 <tr class="separator:a40ccab761fbae35e3eae43acc41be366"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ff7127223a48d0606570bcc21e0b5b6" id="r_a6ff7127223a48d0606570bcc21e0b5b6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a6ff7127223a48d0606570bcc21e0b5b6">endCurrentDecoder</a> ()</td></tr>
+<tr class="separator:a6ff7127223a48d0606570bcc21e0b5b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a96f82a9eb20b43855334200c12469063" id="r_a96f82a9eb20b43855334200c12469063"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_audio_decoder_ext.html">AudioDecoderExt</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a96f82a9eb20b43855334200c12469063">findDecoder</a> (<a class="el" href="group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1">AudioFormat</a> format)</td></tr>
 <tr class="memdesc:a96f82a9eb20b43855334200c12469063"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the decoder registered for the given format tag, if any.  <br /></td></tr>
 <tr class="separator:a96f82a9eb20b43855334200c12469063"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -269,9 +271,6 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a0efe4744597cc16236f8b94ca90e7cda"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb88a7977658bc9af3cae6500011adf1" id="r_adb88a7977658bc9af3cae6500011adf1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_encoded_audio_output.html">EncodedAudioOutput</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#adb88a7977658bc9af3cae6500011adf1">dec_out</a></td></tr>
 <tr class="separator:adb88a7977658bc9af3cae6500011adf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b432da52d2652bb3e2a75d50bde2a84" id="r_a6b432da52d2652bb3e2a75d50bde2a84"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1">AudioFormat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a6b432da52d2652bb3e2a75d50bde2a84">decoder_format</a> = <a class="el" href="group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1a1088fbc901dc88b6c18085220cc33de9">AudioFormat::PCM</a></td></tr>
-<tr class="memdesc:a6b432da52d2652bb3e2a75d50bde2a84"><td class="mdescLeft">&#160;</td><td class="mdescRight">format tag of the decoder currently selected in p_decoder  <br /></td></tr>
-<tr class="separator:a6b432da52d2652bb3e2a75d50bde2a84"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f944515e8cb651c3db6270da427b909" id="r_a3f944515e8cb651c3db6270da427b909"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="structaudio__tools_1_1_w_a_v_decoder_1_1_decoder_entry.html">DecoderEntry</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a3f944515e8cb651c3db6270da427b909">decoders</a></td></tr>
 <tr class="memdesc:a3f944515e8cb651c3db6270da427b909"><td class="mdescLeft">&#160;</td><td class="mdescRight">decoders registered via <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a3dbf49d3369aa93714d2c4a3a1c9cbb9">setDecoder()</a>/addDecoder(), keyed by format tag  <br /></td></tr>
 <tr class="separator:a3f944515e8cb651c3db6270da427b909"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -700,6 +699,32 @@ Protected Attributes</h2></td></tr>
 <p>Finish decoding and release temporary buffers. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">AudioDecoder</a>.</p>
+
+</div>
+</div>
+<a id="a6ff7127223a48d0606570bcc21e0b5b6" name="a6ff7127223a48d0606570bcc21e0b5b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ff7127223a48d0606570bcc21e0b5b6">&#9670;&#160;</a></span>endCurrentDecoder()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void endCurrentDecoder </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Ends the decoder currently selected for the stream just finished (if any), so it doesn't retain state (e.g. sample_rate/channels) across unrelated streams the next time this format is matched </p>
 
 </div>
 </div>
@@ -1946,30 +1971,6 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<a id="a6b432da52d2652bb3e2a75d50bde2a84" name="a6b432da52d2652bb3e2a75d50bde2a84"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6b432da52d2652bb3e2a75d50bde2a84">&#9670;&#160;</a></span>decoder_format</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1">AudioFormat</a> decoder_format = <a class="el" href="group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1a1088fbc901dc88b6c18085220cc33de9">AudioFormat::PCM</a></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>format tag of the decoder currently selected in p_decoder </p>
 
 </div>
 </div>

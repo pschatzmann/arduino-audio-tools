@@ -111,6 +111,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1ff465571c87cad9bcbfcfd1d573b7d2" id="r_a1ff465571c87cad9bcbfcfd1d573b7d2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_header.html#a1ff465571c87cad9bcbfcfd1d573b7d2">isDataComplete</a> ()</td></tr>
 <tr class="memdesc:a1ff465571c87cad9bcbfcfd1d573b7d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the header is complete (containd data tag)  <br /></td></tr>
 <tr class="separator:a1ff465571c87cad9bcbfcfd1d573b7d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbd4fb95a5dec4e1356e53d1c1204d24" id="r_adbd4fb95a5dec4e1356e53d1c1204d24"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_header.html#adbd4fb95a5dec4e1356e53d1c1204d24">isOverflow</a> ()</td></tr>
+<tr class="separator:adbd4fb95a5dec4e1356e53d1c1204d24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e17a5c9f8b518e6aea8ba0adb9113c4" id="r_a1e17a5c9f8b518e6aea8ba0adb9113c4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_header.html#a1e17a5c9f8b518e6aea8ba0adb9113c4">parse</a> ()</td></tr>
 <tr class="memdesc:a1e17a5c9f8b518e6aea8ba0adb9113c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call when header data write is complete to parse the data.  <br /></td></tr>
 <tr class="separator:a1e17a5c9f8b518e6aea8ba0adb9113c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -547,6 +549,32 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="adbd4fb95a5dec4e1356e53d1c1204d24" name="adbd4fb95a5dec4e1356e53d1c1204d24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbd4fb95a5dec4e1356e53d1c1204d24">&#9670;&#160;</a></span>isOverflow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isOverflow </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>True if the header buffer has grown to its maximum allowed size (MAX_WAV_HEADER_LEN_LIMIT) without finding the 'data' chunk - indicates a malformed or unusually large header that will never complete. </p>
+
+</div>
+</div>
 <a id="a1b8d42eced946978e15cdb16bd00ec74" name="a1b8d42eced946978e15cdb16bd00ec74"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1b8d42eced946978e15cdb16bd00ec74">&#9670;&#160;</a></span>logInfo()</h2>
 
@@ -875,7 +903,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Adds data to the 44 byte wav header data buffer and make it available for parsing </p>
+<p>Adds data to the wav header data buffer and make it available for parsing. The buffer grows automatically (up to MAX_WAV_HEADER_LEN_LIMIT) if the header does not fit into the initial MAX_WAV_HEADER_LEN bytes - e.g. because of LIST/bext/other metadata chunks before 'data'. </p>
 
 </div>
 </div>

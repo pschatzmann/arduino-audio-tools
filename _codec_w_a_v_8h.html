@@ -90,6 +90,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_counting_print.html">CountingPrint</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimal <a class="el" href="class_print.html">Print</a> wrapper that counts the bytes actually written to the wrapped output. Used by <a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html" title="A simple WAV file encoder. If no AudioEncoderExt is specified the WAV file contains PCM data,...">WAVEncoder</a> to track the number of <em>encoded</em> bytes an external <a class="el" href="classaudio__tools_1_1_audio_encoder_ext.html" title="Extended AudioEncoder interface to support block size configuration.">AudioEncoderExt</a> has emitted, since <a class="el" href="classaudio__tools_1_1_audio_writer.html#a4f016ab9037bd654f538f107eb1d8f78">AudioEncoder::write()</a> reports the number of raw PCM input bytes it accepted, not the number of encoded bytes it produced (these differ for compressing formats like ADPCM).  <a href="classaudio__tools_1_1_counting_print.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_w_a_v_decoder_1_1_decoder_entry.html">WAVDecoder::DecoderEntry</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Associates a WAV format tag with the decoder responsible for it.  <a href="structaudio__tools_1_1_w_a_v_decoder_1_1_decoder_entry.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -116,6 +119,8 @@ Namespaces</h2></td></tr>
 Macros</h2></td></tr>
 <tr class="memitem:a2ace7ba90183ef2a75bb292712af734f" id="r_a2ace7ba90183ef2a75bb292712af734f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_codec_w_a_v_8h.html#a2ace7ba90183ef2a75bb292712af734f">MAX_WAV_HEADER_LEN</a>&#160;&#160;&#160;200</td></tr>
 <tr class="separator:a2ace7ba90183ef2a75bb292712af734f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe4cee31eb9ee24b4eb53c71cd14304c" id="r_abe4cee31eb9ee24b4eb53c71cd14304c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_codec_w_a_v_8h.html#abe4cee31eb9ee24b4eb53c71cd14304c">MAX_WAV_HEADER_LEN_LIMIT</a>&#160;&#160;&#160;2048</td></tr>
+<tr class="separator:abe4cee31eb9ee24b4eb53c71cd14304c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a46167a977503a51eb6efe97e870568c3" id="r_a46167a977503a51eb6efe97e870568c3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_codec_w_a_v_8h.html#a46167a977503a51eb6efe97e870568c3">READ_BUFFER_SIZE</a>&#160;&#160;&#160;512</td></tr>
 <tr class="separator:a46167a977503a51eb6efe97e870568c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -136,6 +141,21 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="abe4cee31eb9ee24b4eb53c71cd14304c" name="abe4cee31eb9ee24b4eb53c71cd14304c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe4cee31eb9ee24b4eb53c71cd14304c">&#9670;&#160;</a></span>MAX_WAV_HEADER_LEN_LIMIT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAX_WAV_HEADER_LEN_LIMIT&#160;&#160;&#160;2048</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Hard upper bound the header buffer may grow to while searching for the 'data' chunk tag (e.g. because of LIST/bext/other metadata chunks before 'data'). Protects against an unbounded/never-ending search on malformed input. </p>
 
 </div>
 </div>

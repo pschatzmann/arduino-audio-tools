@@ -172,13 +172,16 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a49624bf1f0983f6882e820138ebff1a3" id="r_a49624bf1f0983f6882e820138ebff1a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#a49624bf1f0983f6882e820138ebff1a3">setupEncodedAudio</a> ()</td></tr>
-<tr class="separator:a49624bf1f0983f6882e820138ebff1a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b8ff4733261b4cac5bc0deb538dd5dc" id="r_a8b8ff4733261b4cac5bc0deb538dd5dc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#a8b8ff4733261b4cac5bc0deb538dd5dc">setupEncodedAudio</a> ()</td></tr>
+<tr class="separator:a8b8ff4733261b4cac5bc0deb538dd5dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e475070d3df18395c90a10c9d38eb0a" id="r_a2e475070d3df18395c90a10c9d38eb0a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_writer.html#a2e475070d3df18395c90a10c9d38eb0a">writeBlocking</a> (<a class="el" href="class_print.html">Print</a> *out, uint8_t *data, size_t len)</td></tr>
 <tr class="separator:a2e475070d3df18395c90a10c9d38eb0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:a0bcc2976b7069926aa72cf6ce12e9ed8" id="r_a0bcc2976b7069926aa72cf6ce12e9ed8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_counting_print.html">CountingPrint</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#a0bcc2976b7069926aa72cf6ce12e9ed8">counting_print</a></td></tr>
+<tr class="memdesc:a0bcc2976b7069926aa72cf6ce12e9ed8"><td class="mdescLeft">&#160;</td><td class="mdescRight">tracks the actual encoded bytes p_encoder emits to p_print (see <a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#a016bb39af201e717c1975551b7ecc1b3" title="Writes PCM data to be encoded as WAV.">write()</a>)  <br /></td></tr>
+<tr class="separator:a0bcc2976b7069926aa72cf6ce12e9ed8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b65a38c4e52efe2cb7cab9370008bac" id="r_a7b65a38c4e52efe2cb7cab9370008bac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_encoded_audio_output.html">EncodedAudioOutput</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#a7b65a38c4e52efe2cb7cab9370008bac">enc_out</a></td></tr>
 <tr class="separator:a7b65a38c4e52efe2cb7cab9370008bac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae5e6bba484cf15221185bf1bcb4198c" id="r_aae5e6bba484cf15221185bf1bcb4198c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_w_a_v_header.html">WAVHeader</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#aae5e6bba484cf15221185bf1bcb4198c">header</a></td></tr>
@@ -875,8 +878,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a49624bf1f0983f6882e820138ebff1a3" name="a49624bf1f0983f6882e820138ebff1a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a49624bf1f0983f6882e820138ebff1a3">&#9670;&#160;</a></span>setupEncodedAudio()</h2>
+<a id="a8b8ff4733261b4cac5bc0deb538dd5dc" name="a8b8ff4733261b4cac5bc0deb538dd5dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b8ff4733261b4cac5bc0deb538dd5dc">&#9670;&#160;</a></span>setupEncodedAudio()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -885,7 +888,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void setupEncodedAudio </td>
+          <td class="memname">bool setupEncodedAudio </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -897,6 +900,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Sets up the external encoder pipeline. Returns false (and logs an error) instead of crashing if the required output stream has not been provided yet via <a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#a05ff4cf361d54457ed8586e8c14aa922" title="Defines the otuput stream.">setOutput()</a>. </p>
 
 </div>
 </div>
@@ -983,6 +987,30 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a0bcc2976b7069926aa72cf6ce12e9ed8" name="a0bcc2976b7069926aa72cf6ce12e9ed8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bcc2976b7069926aa72cf6ce12e9ed8">&#9670;&#160;</a></span>counting_print</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_counting_print.html">CountingPrint</a> counting_print</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>tracks the actual encoded bytes p_encoder emits to p_print (see <a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#a016bb39af201e717c1975551b7ecc1b3" title="Writes PCM data to be encoded as WAV.">write()</a>) </p>
+
+</div>
+</div>
 <a id="a7b65a38c4e52efe2cb7cab9370008bac" name="a7b65a38c4e52efe2cb7cab9370008bac"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7b65a38c4e52efe2cb7cab9370008bac">&#9670;&#160;</a></span>enc_out</h2>
 

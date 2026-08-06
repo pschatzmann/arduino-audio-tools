@@ -65,5 +65,6 @@ var searchData=
   ['copychannels_62',['CopyChannels',['../classaudio__tools_1_1_copy_channels.html',1,'audio_tools']]],
   ['copydecoder_63',['CopyDecoder',['../classaudio__tools_1_1_copy_decoder.html',1,'audio_tools']]],
   ['copyencoder_64',['CopyEncoder',['../classaudio__tools_1_1_copy_encoder.html',1,'audio_tools']]],
-  ['csvoutput_65',['CsvOutput',['../classaudio__tools_1_1_csv_output.html',1,'audio_tools']]]
+  ['countingprint_65',['CountingPrint',['../classaudio__tools_1_1_counting_print.html',1,'audio_tools']]],
+  ['csvoutput_66',['CsvOutput',['../classaudio__tools_1_1_csv_output.html',1,'audio_tools']]]
 ];
