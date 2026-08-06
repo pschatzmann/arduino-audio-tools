@@ -208,6 +208,8 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a96f82a9eb20b43855334200c12469063" id="r_a96f82a9eb20b43855334200c12469063"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_audio_decoder_ext.html">AudioDecoderExt</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a96f82a9eb20b43855334200c12469063">findDecoder</a> (<a class="el" href="group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1">AudioFormat</a> format)</td></tr>
 <tr class="memdesc:a96f82a9eb20b43855334200c12469063"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the decoder registered for the given format tag, if any.  <br /></td></tr>
 <tr class="separator:a96f82a9eb20b43855334200c12469063"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9688af628451d0009ad67cd87478266c" id="r_a9688af628451d0009ad67cd87478266c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a9688af628451d0009ad67cd87478266c">logSupportedFormats</a> ()</td></tr>
+<tr class="separator:a9688af628451d0009ad67cd87478266c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a9a665a387a8c4fbf7fed14bbbfc093" id="r_a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a6a9a665a387a8c4fbf7fed14bbbfc093">notifyAudioChange</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> <a class="el" href="classaudio__tools_1_1_audio_decoder.html#a47385aa19435f5fca9d3083a748258c5">info</a>)</td></tr>
 <tr class="separator:a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3385069922699baaff027d995436e44d" id="r_a3385069922699baaff027d995436e44d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_print.html">Print</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a3385069922699baaff027d995436e44d">out</a> ()</td></tr>
@@ -862,6 +864,32 @@ Protected Attributes</h2></td></tr>
 <p>Returns true to indicate that the decoding result is PCM data. </p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_copy_decoder.html#a2b485ba5b9d96f94384f4a3840f84314">CopyDecoder</a>, <a class="el" href="classaudio__tools_1_1_decoder_network_format.html#a2b485ba5b9d96f94384f4a3840f84314">DecoderNetworkFormat</a>, and <a class="el" href="classaudio__tools_1_1_container_m4_a.html#abf7a01101c5d8d183d5f28be4ff6a4f3">ContainerM4A</a>.</p>
+
+</div>
+</div>
+<a id="a9688af628451d0009ad67cd87478266c" name="a9688af628451d0009ad67cd87478266c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9688af628451d0009ad67cd87478266c">&#9670;&#160;</a></span>logSupportedFormats()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void logSupportedFormats </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Logs (at error level) the WAV format tags this instance can currently decode: the natively handled ones, plus any registered via <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a3dbf49d3369aa93714d2c4a3a1c9cbb9">setDecoder()</a>/addDecoder() </p>
 
 </div>
 </div>
