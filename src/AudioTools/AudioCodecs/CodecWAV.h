@@ -386,13 +386,23 @@ class WAVHeader {
  * @brief A simple WAVDecoder: We parse the header data on the first record to
  * determine the format. If no AudioDecoderExt is specified we just write the
  * PCM data to the output that is defined by calling setOutput(). You can define
- * a ADPCM decoder to decode WAV files that contain ADPCM data.
+ * a ADPCM decoder to decode WAV files that contain ADPCM data. Since WAV files
+ * can use different ADPCM (or other) encodings, you can register more than one
+ * decoder with addDecoder(): the decoder matching the format tag found in the
+ * WAV header is selected automatically when a file is parsed.
+ *
+ * Besides plain PCM, the following formats are natively supported without
+ * the need to provide an external decoder:
+ * - IEEE_FLOAT (0x0003): uncompressed 32-bit float PCM is just passed through.
+ * - ALAW (0x0006) and MULAW (0x0007): the 8-bit logarithmic G.711 samples are
+ *   expanded to 16-bit linear PCM. This can be disabled with
+ *   setConvertALawMuLaw(false) to pass through the raw encoded bytes instead.
  *
  * Optionally, if the input WAV file contains 8-bit PCM data, you can enable automatic
  * conversion to 16-bit PCM output by calling setConvert8to16(true). This will convert
  * unsigned 8-bit samples to signed 16-bit samples before writing to the output stream,
  * and the reported bits_per_sample in audioInfo() will be 16 when conversion is active.
- * The same is valid for the 24 bit conversion which converts 24 bit (3 byte) to 32 bit 
+ * The same is valid for the 24 bit conversion which converts 24 bit (3 byte) to 32 bit
  * (4 byte).
  *
  * Please note that you need to call begin() everytime you process a new file to let the decoder
@@ -417,11 +427,25 @@ class WAVDecoder : public AudioDecoder {
    */
   WAVDecoder(AudioDecoderExt &dec, AudioFormat fmt) { setDecoder(dec, fmt); }
 
-  /// Defines an optional decoder if the format is not PCM
+  /// Defines an optional decoder if the format is not PCM. This replaces
+  /// any previously registered decoders. To support WAV files that may use
+  /// different ADPCM (or other) formats, register multiple decoders with
+  /// addDecoder() instead.
   void setDecoder(AudioDecoderExt &dec, AudioFormat fmt) {
     TRACED();
-    decoder_format = fmt;
-    p_decoder = &dec;
+    decoders.clear();
+    addDecoder(dec, fmt);
+  }
+
+  /// Registers an additional decoder for a specific WAV format tag, on top
+  /// of any decoder(s) already defined. The decoder used to decode the
+  /// stream is selected automatically based on the format tag found in the
+  /// WAV header, so a single WAVDecoder instance can transparently handle
+  /// files using any of the registered formats (e.g. multiple ADPCM
+  /// variants).
+  void addDecoder(AudioDecoderExt &dec, AudioFormat fmt) {
+    TRACED();
+    decoders.push_back({fmt, &dec});
   }
 
   /// Defines the output Stream
@@ -431,7 +455,10 @@ class WAVDecoder : public AudioDecoder {
   bool begin() override {
     TRACED();
     header.clear();
-    setupEncodedAudio();
+    // the matching decoder (if any) is only known once the header of this
+    // stream has been parsed, so setupEncodedAudio() is triggered from
+    // decodeHeader() instead of here
+    p_decoder = nullptr;
     byte_buffer.reset();
     buffer24.reset();
     isFirst = true;
@@ -465,8 +492,17 @@ class WAVDecoder : public AudioDecoder {
         info.bits_per_sample == 24) {
       info.bits_per_sample = 32;
     }
-    // non-PCM (e.g. ADPCM) is decoded by p_decoder to 16-bit PCM
-    if (info.format != AudioFormat::PCM) {
+    // ALAW/MULAW are expanded from 8-bit logarithmic to 16-bit linear PCM
+    if (convertALawMuLaw && (info.format == AudioFormat::ALAW ||
+                              info.format == AudioFormat::MULAW)) {
+      info.bits_per_sample = 16;
+    }
+    // any other non-PCM/non-IEEE_FLOAT format (e.g. ADPCM) is decoded by
+    // p_decoder to 16-bit PCM; IEEE_FLOAT is passed through as-is
+    if (info.format != AudioFormat::PCM &&
+        info.format != AudioFormat::IEEE_FLOAT &&
+        info.format != AudioFormat::ALAW &&
+        info.format != AudioFormat::MULAW) {
       info.bits_per_sample = 16;
     }
     return info;
@@ -505,21 +541,40 @@ class WAVDecoder : public AudioDecoder {
     convert24 = enable;
   }
 
+  /// Expand ALAW/MULAW 8-bit logarithmic samples to 16-bit linear PCM
+  /// (default: enabled). If disabled, the raw encoded bytes are passed
+  /// through unchanged.
+  void setConvertALawMuLaw(bool enable) {
+    convertALawMuLaw = enable;
+  }
+
   /// Access to the internal header parser and info
   WAVHeader &getHeader() { return header; }
 
  protected:
+  /// Associates a WAV format tag with the decoder responsible for it
+  struct DecoderEntry {
+    AudioFormat format = AudioFormat::PCM;
+    AudioDecoderExt *decoder = nullptr;
+  };
+
   WAVHeader header;
   bool isFirst = true;
   bool isValid = true;
   bool active = false;
+  /// format tag of the decoder currently selected in p_decoder
   AudioFormat decoder_format = AudioFormat::PCM;
+  /// decoder matching the format of the WAV file currently being processed
+  /// (selected in decodeHeader() from the registered decoders)
   AudioDecoderExt *p_decoder = nullptr;
+  /// decoders registered via setDecoder()/addDecoder(), keyed by format tag
+  Vector<DecoderEntry> decoders;
   EncodedAudioOutput dec_out;
   SingleBuffer<uint8_t> byte_buffer{0};
   SingleBuffer<int32_t> buffer24{0};
   bool convert8to16 = true;  // Optional conversion flag
   bool convert24 = true;  // Optional conversion flag
+  bool convertALawMuLaw = true;  // Optional conversion flag
   const size_t batch_size = 256;
 
   Print &out() { return p_decoder == nullptr ? *p_print : dec_out; }
@@ -527,13 +582,18 @@ class WAVDecoder : public AudioDecoder {
   virtual size_t write_out(const uint8_t *in_ptr, size_t in_size) {
     // check if we need to convert int24 data from 3 bytes to 4 bytes
     size_t result = 0;
-    if (convert24 && header.audioInfo().format == AudioFormat::PCM &&
+    AudioFormat format = header.audioInfo().format;
+    if (convert24 && format == AudioFormat::PCM &&
         header.audioInfo().bits_per_sample == 24 && sizeof(int24_t) == 4) {
       write_out_24(in_ptr, in_size);
       result = in_size;
-    } else if (convert8to16 && header.audioInfo().format == AudioFormat::PCM &&
+    } else if (convert8to16 && format == AudioFormat::PCM &&
                header.audioInfo().bits_per_sample == 8) {
       result = write_out_8to16(in_ptr, in_size);
+    } else if (convertALawMuLaw && format == AudioFormat::ALAW) {
+      result = write_out_alaw(in_ptr, in_size);
+    } else if (convertALawMuLaw && format == AudioFormat::MULAW) {
+      result = write_out_mulaw(in_ptr, in_size);
     } else {
       result = out().write(in_ptr, in_size);
     }
@@ -585,6 +645,69 @@ class WAVDecoder : public AudioDecoder {
     return in_size;
   }
 
+  /// Expand G.711 A-law 8-bit samples to 16-bit linear PCM and write out
+  size_t write_out_alaw(const uint8_t *in_ptr, size_t in_size) {
+    size_t remaining = in_size;
+    size_t offset = 0;
+    int16_t out_buf[batch_size];
+    while (remaining > 0) {
+      size_t current_batch =
+          remaining > batch_size ? batch_size : remaining;
+      for (size_t i = 0; i < current_batch; ++i) {
+        out_buf[i] = alaw2linear(in_ptr[offset + i]);
+      }
+      writeDataT<int16_t>(&out(), out_buf, current_batch);
+      offset += current_batch;
+      remaining -= current_batch;
+    }
+    return in_size;
+  }
+
+  /// Expand G.711 mu-law 8-bit samples to 16-bit linear PCM and write out
+  size_t write_out_mulaw(const uint8_t *in_ptr, size_t in_size) {
+    size_t remaining = in_size;
+    size_t offset = 0;
+    int16_t out_buf[batch_size];
+    while (remaining > 0) {
+      size_t current_batch =
+          remaining > batch_size ? batch_size : remaining;
+      for (size_t i = 0; i < current_batch; ++i) {
+        out_buf[i] = ulaw2linear(in_ptr[offset + i]);
+      }
+      writeDataT<int16_t>(&out(), out_buf, current_batch);
+      offset += current_batch;
+      remaining -= current_batch;
+    }
+    return in_size;
+  }
+
+  /// Converts a G.711 A-law encoded byte to a 16-bit linear PCM sample
+  static int16_t alaw2linear(uint8_t a_val) {
+    a_val ^= 0x55;
+    int t = (a_val & 0x0f) << 4;
+    int seg = ((unsigned)a_val & 0x70) >> 4;
+    switch (seg) {
+      case 0:
+        t += 8;
+        break;
+      case 1:
+        t += 0x108;
+        break;
+      default:
+        t += 0x108;
+        t <<= (seg - 1);
+        break;
+    }
+    return (int16_t)((a_val & 0x80) ? t : -t);
+  }
+
+  /// Converts a G.711 mu-law encoded byte to a 16-bit linear PCM sample
+  static int16_t ulaw2linear(uint8_t u_val) {
+    u_val = ~u_val;
+    int t = ((u_val & 0x0f) << 3) + 0x84;
+    t <<= ((unsigned)u_val & 0x70) >> 4;
+    return (int16_t)((u_val & 0x80) ? (0x84 - t) : (t - 0x84));
+  }
 
   /// Decodes the header data: Returns the start pos of the data
   int decodeHeader(uint8_t *in_ptr, size_t in_size) {
@@ -611,14 +734,19 @@ class WAVDecoder : public AudioDecoder {
     LOGI("WAV is_streamed: %d", header.audioInfo().is_streamed);
     LOGI("WAV is_valid: %s", header.audioInfo().is_valid ? "true" : "false");
 
-    // check format
+    // select the decoder matching the format found in the header (if any
+    // was registered via setDecoder()/addDecoder()); otherwise fall back to
+    // the natively supported formats (PCM, IEEE_FLOAT, ALAW, MULAW)
     AudioFormat format = header.audioInfo().format;
-    isValid = format == decoder_format;
+    p_decoder = findDecoder(format);
+    isValid = p_decoder != nullptr ? true : isNativelySupported(format);
     if (isValid) {
-      // update blocksize
       if (p_decoder != nullptr) {
+        decoder_format = format;
+        // update blocksize before begin() is called in setupEncodedAudio()
         int block_size = header.audioInfo().block_align;
         p_decoder->setBlockSize(block_size);
+        setupEncodedAudio();
       }
 
       // update sampling rate if the target supports it
@@ -630,6 +758,14 @@ class WAVDecoder : public AudioDecoder {
     return header.getDataPos();
   }
 
+  /// Finds the decoder registered for the given format tag, if any
+  AudioDecoderExt *findDecoder(AudioFormat format) {
+    for (int i = 0; i < decoders.size(); i++) {
+      if (decoders[i].format == format) return decoders[i].decoder;
+    }
+    return nullptr;
+  }
+
   void setupEncodedAudio() {
     if (p_decoder != nullptr) {
       assert(p_print != nullptr);
@@ -637,6 +773,12 @@ class WAVDecoder : public AudioDecoder {
       dec_out.setDecoder(p_decoder);
       dec_out.begin(info);
     }
+  }
+
+  /// Formats that are handled internally without an external decoder
+  static bool isNativelySupported(AudioFormat format) {
+    return format == AudioFormat::PCM || format == AudioFormat::IEEE_FLOAT ||
+           format == AudioFormat::ALAW || format == AudioFormat::MULAW;
   }
 };
 
@@ -712,7 +854,13 @@ class WAVEncoder : public AudioEncoder {
     // bytes per second
     wav_info.byte_rate = wav_info.sample_rate * wav_info.channels *
                           wav_info.bits_per_sample / 8;
-    if (wav_info.format == AudioFormat::PCM) {
+    // uncompressed formats with a fixed size per sample: block_align is
+    // simply the frame size. Compressed formats (e.g. ADPCM) are handled
+    // via p_encoder instead.
+    if (wav_info.format == AudioFormat::PCM ||
+        wav_info.format == AudioFormat::IEEE_FLOAT ||
+        wav_info.format == AudioFormat::ALAW ||
+        wav_info.format == AudioFormat::MULAW) {
       wav_info.block_align =
           wav_info.bits_per_sample / 8 * wav_info.channels;
     }
