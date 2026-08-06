@@ -150,13 +150,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:accee684614189e73bdc9f1b2f7abf919"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update actual <a class="el" href="structaudio__tools_1_1_w_a_v_audio_info.html" title="Sound information which is available in the WAV header.">WAVAudioInfo</a>.  <br /></td></tr>
 <tr class="separator:accee684614189e73bdc9f1b2f7abf919"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a651d1dd445f965019c81634389f6061e" id="r_a651d1dd445f965019c81634389f6061e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#a651d1dd445f965019c81634389f6061e">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_w_a_v_audio_info.html">WAVAudioInfo</a> ai)</td></tr>
-<tr class="memdesc:a651d1dd445f965019c81634389f6061e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the <a class="el" href="structaudio__tools_1_1_w_a_v_audio_info.html" title="Sound information which is available in the WAV header.">WAVAudioInfo</a>.  <br /></td></tr>
 <tr class="separator:a651d1dd445f965019c81634389f6061e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af42ae02bcc193a24c6c6d1154618216a" id="r_af42ae02bcc193a24c6c6d1154618216a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#af42ae02bcc193a24c6c6d1154618216a">setDataLength</a> (uint32_t data_length)</td></tr>
-<tr class="memdesc:af42ae02bcc193a24c6c6d1154618216a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the WAV payload length in bytes (without header)  <br /></td></tr>
 <tr class="separator:af42ae02bcc193a24c6c6d1154618216a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a714eb943cec9f2478e46d32af2467f3e" id="r_a714eb943cec9f2478e46d32af2467f3e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#a714eb943cec9f2478e46d32af2467f3e">setDataOffset</a> (uint16_t offset)</td></tr>
-<tr class="memdesc:a714eb943cec9f2478e46d32af2467f3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds n empty bytes at the beginning of the data.  <br /></td></tr>
 <tr class="separator:a714eb943cec9f2478e46d32af2467f3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adfdd79089f7b47c037583c792c768614" id="r_adfdd79089f7b47c037583c792c768614"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#adfdd79089f7b47c037583c792c768614">setEncoder</a> (<a class="el" href="classaudio__tools_1_1_audio_encoder_ext.html">AudioEncoderExt</a> &amp;enc, <a class="el" href="group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1">AudioFormat</a> fmt)</td></tr>
 <tr class="memdesc:adfdd79089f7b47c037583c792c768614"><td class="mdescLeft">&#160;</td><td class="mdescRight">Associates an external encoder for non-PCM formats.  <br /></td></tr>
@@ -172,6 +169,8 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:ad7bb6a6582271646846a3aa9cbfea721" id="r_ad7bb6a6582271646846a3aa9cbfea721"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#ad7bb6a6582271646846a3aa9cbfea721">applyPendingOverrides</a> ()</td></tr>
+<tr class="separator:ad7bb6a6582271646846a3aa9cbfea721"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b8ff4733261b4cac5bc0deb538dd5dc" id="r_a8b8ff4733261b4cac5bc0deb538dd5dc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#a8b8ff4733261b4cac5bc0deb538dd5dc">setupEncodedAudio</a> ()</td></tr>
 <tr class="separator:a8b8ff4733261b4cac5bc0deb538dd5dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e475070d3df18395c90a10c9d38eb0a" id="r_a2e475070d3df18395c90a10c9d38eb0a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_writer.html#a2e475070d3df18395c90a10c9d38eb0a">writeBlocking</a> (<a class="el" href="class_print.html">Print</a> *out, uint8_t *data, size_t len)</td></tr>
@@ -184,6 +183,12 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a0bcc2976b7069926aa72cf6ce12e9ed8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b65a38c4e52efe2cb7cab9370008bac" id="r_a7b65a38c4e52efe2cb7cab9370008bac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_encoded_audio_output.html">EncodedAudioOutput</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#a7b65a38c4e52efe2cb7cab9370008bac">enc_out</a></td></tr>
 <tr class="separator:a7b65a38c4e52efe2cb7cab9370008bac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa38bd00f44fa6076d5a9839f6699e60a" id="r_aa38bd00f44fa6076d5a9839f6699e60a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#aa38bd00f44fa6076d5a9839f6699e60a">has_pending_data_length</a> = false</td></tr>
+<tr class="separator:aa38bd00f44fa6076d5a9839f6699e60a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeef8564b8d918e41f64c0e6852c71e30" id="r_aeef8564b8d918e41f64c0e6852c71e30"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#aeef8564b8d918e41f64c0e6852c71e30">has_pending_ext_adpcm_header</a> = false</td></tr>
+<tr class="separator:aeef8564b8d918e41f64c0e6852c71e30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c8d5415477e8e98a4dfdd85d81ce49e" id="r_a3c8d5415477e8e98a4dfdd85d81ce49e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#a3c8d5415477e8e98a4dfdd85d81ce49e">has_pending_offset</a> = false</td></tr>
+<tr class="separator:a3c8d5415477e8e98a4dfdd85d81ce49e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae5e6bba484cf15221185bf1bcb4198c" id="r_aae5e6bba484cf15221185bf1bcb4198c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_w_a_v_header.html">WAVHeader</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#aae5e6bba484cf15221185bf1bcb4198c">header</a></td></tr>
 <tr class="separator:aae5e6bba484cf15221185bf1bcb4198c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f529ef69928bce7e8a1b4e760048791" id="r_a4f529ef69928bce7e8a1b4e760048791"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#a4f529ef69928bce7e8a1b4e760048791">header_written</a> = false</td></tr>
@@ -196,6 +201,12 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a53658bd6cada24d1a2ef979df6ed896c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdad90adc3ba71f7b1e16444c23b5502" id="r_acdad90adc3ba71f7b1e16444c23b5502"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#acdad90adc3ba71f7b1e16444c23b5502">p_print</a> = nullptr</td></tr>
 <tr class="separator:acdad90adc3ba71f7b1e16444c23b5502"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32fdfdec34c7ddd20139a17e4c98b2f5" id="r_a32fdfdec34c7ddd20139a17e4c98b2f5"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#a32fdfdec34c7ddd20139a17e4c98b2f5">pending_data_length</a> = 0</td></tr>
+<tr class="separator:a32fdfdec34c7ddd20139a17e4c98b2f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa993240bc52de5d896e6f451c5141561" id="r_aa993240bc52de5d896e6f451c5141561"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#aa993240bc52de5d896e6f451c5141561">pending_ext_adpcm_header</a> = false</td></tr>
+<tr class="separator:aa993240bc52de5d896e6f451c5141561"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb3c8d4aaf81f34faf9952082c21915b" id="r_aeb3c8d4aaf81f34faf9952082c21915b"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#aeb3c8d4aaf81f34faf9952082c21915b">pending_offset</a> = 0</td></tr>
+<tr class="separator:aeb3c8d4aaf81f34faf9952082c21915b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6783f401470463ceabf84790125b9823" id="r_a6783f401470463ceabf84790125b9823"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#a6783f401470463ceabf84790125b9823">size_limit</a> = 0</td></tr>
 <tr class="separator:a6783f401470463ceabf84790125b9823"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6128a4203e6e000adee09fe2f9419fb6" id="r_a6128a4203e6e000adee09fe2f9419fb6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_w_a_v_audio_info.html">WAVAudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#a6128a4203e6e000adee09fe2f9419fb6">wav_info</a> = <a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#aab12f201f1d67663e31698daf6866e0a">defaultConfig</a>()</td></tr>
@@ -272,6 +283,32 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad7bb6a6582271646846a3aa9cbfea721" name="ad7bb6a6582271646846a3aa9cbfea721"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7bb6a6582271646846a3aa9cbfea721">&#9670;&#160;</a></span>applyPendingOverrides()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void applyPendingOverrides </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Re-applies any settings configured via <a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#af42ae02bcc193a24c6c6d1154618216a">setDataLength()</a>/setDataOffset()/ <a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#a830711738081c9ab3178a3f848543857">setExtADPCMHeader()</a> on top of wav_info. Called after every wholesale (re)assignment of wav_info (<a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#a651d1dd445f965019c81634389f6061e">setAudioInfo(WAVAudioInfo)</a>), so these settings stick no matter whether the dedicated setters were called before or after <a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#a651d1dd445f965019c81634389f6061e">setAudioInfo(WAVAudioInfo)</a>/begin(<a class="el" href="structaudio__tools_1_1_w_a_v_audio_info.html" title="Sound information which is available in the WAV header.">WAVAudioInfo</a>). </p>
+
+</div>
+</div>
 <a id="aed4bf0d5ce93f27242be485943d0b37d" name="aed4bf0d5ce93f27242be485943d0b37d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aed4bf0d5ce93f27242be485943d0b37d">&#9670;&#160;</a></span>audioInfo()</h2>
 
@@ -722,8 +759,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Defines the <a class="el" href="structaudio__tools_1_1_w_a_v_audio_info.html" title="Sound information which is available in the WAV header.">WAVAudioInfo</a>. </p>
+<p>Defines the <a class="el" href="structaudio__tools_1_1_w_a_v_audio_info.html" title="Sound information which is available in the WAV header.">WAVAudioInfo</a>. Replaces wav_info wholesale - any settings made via <a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#af42ae02bcc193a24c6c6d1154618216a">setDataLength()</a>/setDataOffset()/setExtADPCMHeader() are re-applied on top afterward (see <a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#ad7bb6a6582271646846a3aa9cbfea721">applyPendingOverrides()</a>), so they stick regardless of whether those setters were called before or after this one. </p>
 
 </div>
 </div>
@@ -750,8 +786,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Defines the WAV payload length in bytes (without header) </p>
+<p>Defines the WAV payload length in bytes (without header). Sticks even if <a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#a651d1dd445f965019c81634389f6061e">setAudioInfo(WAVAudioInfo)</a>/begin(<a class="el" href="structaudio__tools_1_1_w_a_v_audio_info.html" title="Sound information which is available in the WAV header.">WAVAudioInfo</a>) is called afterward (see <a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#ad7bb6a6582271646846a3aa9cbfea721">applyPendingOverrides()</a>) - e.g. calling <a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#af42ae02bcc193a24c6c6d1154618216a">setDataLength()</a> before <a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#a53dcee21b53306935d18af26f2ff78d2" title="starts the processing">begin(WAVAudioInfo)</a> will not be silently discarded. </p>
 
 </div>
 </div>
@@ -778,8 +813,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Adds n empty bytes at the beginning of the data. </p>
+<p>Adds n empty bytes at the beginning of the data. Sticks even if <a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#a651d1dd445f965019c81634389f6061e">setAudioInfo(WAVAudioInfo)</a>/begin(<a class="el" href="structaudio__tools_1_1_w_a_v_audio_info.html" title="Sound information which is available in the WAV header.">WAVAudioInfo</a>) is called afterward (see <a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#ad7bb6a6582271646846a3aa9cbfea721">applyPendingOverrides()</a>). </p>
 
 </div>
 </div>
@@ -844,7 +878,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Writes the extended 'fmt ' chunk + 'fact' chunk for ADPCM formats (disabled by default - the standard 16-byte 'fmt ' chunk is written) </p>
+<p>Writes the extended 'fmt ' chunk + 'fact' chunk for ADPCM formats (disabled by default - the standard 16-byte 'fmt ' chunk is written). Sticks even if <a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#a651d1dd445f965019c81634389f6061e">setAudioInfo(WAVAudioInfo)</a>/begin(<a class="el" href="structaudio__tools_1_1_w_a_v_audio_info.html" title="Sound information which is available in the WAV header.">WAVAudioInfo</a>) is called afterward (see <a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#ad7bb6a6582271646846a3aa9cbfea721">applyPendingOverrides()</a>). </p>
 
 </div>
 </div>
@@ -1033,6 +1067,72 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="aa38bd00f44fa6076d5a9839f6699e60a" name="aa38bd00f44fa6076d5a9839f6699e60a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa38bd00f44fa6076d5a9839f6699e60a">&#9670;&#160;</a></span>has_pending_data_length</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool has_pending_data_length = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aeef8564b8d918e41f64c0e6852c71e30" name="aeef8564b8d918e41f64c0e6852c71e30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeef8564b8d918e41f64c0e6852c71e30">&#9670;&#160;</a></span>has_pending_ext_adpcm_header</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool has_pending_ext_adpcm_header = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3c8d5415477e8e98a4dfdd85d81ce49e" name="a3c8d5415477e8e98a4dfdd85d81ce49e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c8d5415477e8e98a4dfdd85d81ce49e">&#9670;&#160;</a></span>has_pending_offset</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool has_pending_offset = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aae5e6bba484cf15221185bf1bcb4198c" name="aae5e6bba484cf15221185bf1bcb4198c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aae5e6bba484cf15221185bf1bcb4198c">&#9670;&#160;</a></span>header</h2>
 
@@ -1154,6 +1254,72 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="class_print.html">Print</a>* p_print = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a32fdfdec34c7ddd20139a17e4c98b2f5" name="a32fdfdec34c7ddd20139a17e4c98b2f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32fdfdec34c7ddd20139a17e4c98b2f5">&#9670;&#160;</a></span>pending_data_length</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t pending_data_length = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa993240bc52de5d896e6f451c5141561" name="aa993240bc52de5d896e6f451c5141561"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa993240bc52de5d896e6f451c5141561">&#9670;&#160;</a></span>pending_ext_adpcm_header</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool pending_ext_adpcm_header = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aeb3c8d4aaf81f34faf9952082c21915b" name="aeb3c8d4aaf81f34faf9952082c21915b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb3c8d4aaf81f34faf9952082c21915b">&#9670;&#160;</a></span>pending_offset</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t pending_offset = 0</td>
         </tr>
       </table>
   </td>

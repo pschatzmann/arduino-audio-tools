@@ -123,6 +123,8 @@ Macros</h2></td></tr>
 <tr class="separator:abe4cee31eb9ee24b4eb53c71cd14304c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a46167a977503a51eb6efe97e870568c3" id="r_a46167a977503a51eb6efe97e870568c3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_codec_w_a_v_8h.html#a46167a977503a51eb6efe97e870568c3">READ_BUFFER_SIZE</a>&#160;&#160;&#160;512</td></tr>
 <tr class="separator:a46167a977503a51eb6efe97e870568c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe33858858ec2db2758cbdc03d87df91" id="r_afe33858858ec2db2758cbdc03d87df91"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_codec_w_a_v_8h.html#afe33858858ec2db2758cbdc03d87df91">WAV_ENCODER_COMPRESSED_CHUNK_SIZE</a>&#160;&#160;&#160;1024</td></tr>
+<tr class="separator:afe33858858ec2db2758cbdc03d87df91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -170,6 +172,21 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="afe33858858ec2db2758cbdc03d87df91" name="afe33858858ec2db2758cbdc03d87df91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe33858858ec2db2758cbdc03d87df91">&#9670;&#160;</a></span>WAV_ENCODER_COMPRESSED_CHUNK_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define WAV_ENCODER_COMPRESSED_CHUNK_SIZE&#160;&#160;&#160;1024</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Granularity (in bytes, rounded down to a whole number of frames) in which WAVEncoder feeds PCM data to an external (compressing) encoder when a fixed data_length was declared via setDataLength(). Smaller values make the point at which data_length is reached more precise (see WAVEncoder::write()) at the cost of more, smaller writes to the encoder. </p>
 
 </div>
 </div>
