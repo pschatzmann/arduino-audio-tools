@@ -7,6 +7,11 @@
 
 #define READ_BUFFER_SIZE 512
 #define MAX_WAV_HEADER_LEN 200
+/// Hard upper bound the header buffer may grow to while searching for the
+/// 'data' chunk tag (e.g. because of LIST/bext/other metadata chunks before
+/// 'data'). Protects against an unbounded/never-ending search on malformed
+/// input.
+#define MAX_WAV_HEADER_LEN_LIMIT 2048
 
 namespace audio_tools {
 
@@ -68,9 +73,18 @@ class WAVHeader {
  public:
   WAVHeader() = default;
 
-  /// Adds data to the 44 byte wav header data buffer and make it available for
-  /// parsing
+  /// Adds data to the wav header data buffer and make it available for
+  /// parsing. The buffer grows automatically (up to MAX_WAV_HEADER_LEN_LIMIT)
+  /// if the header does not fit into the initial MAX_WAV_HEADER_LEN bytes -
+  /// e.g. because of LIST/bext/other metadata chunks before 'data'.
   int write(uint8_t *data, size_t data_len) {
+    size_t needed = (size_t)buffer.available() + data_len;
+    if (needed > buffer.size() && buffer.size() < MAX_WAV_HEADER_LEN_LIMIT) {
+      size_t new_size = needed < (size_t)MAX_WAV_HEADER_LEN_LIMIT
+                             ? needed
+                             : (size_t)MAX_WAV_HEADER_LEN_LIMIT;
+      buffer.resize(new_size);
+    }
     return buffer.writeArray(data, data_len);
   }
 
@@ -108,6 +122,13 @@ class WAVHeader {
   bool isDataComplete() {
     int pos = getDataPos();
     return pos > 0 && buffer.available() >= pos;
+  }
+
+  /// True if the header buffer has grown to its maximum allowed size
+  /// (MAX_WAV_HEADER_LEN_LIMIT) without finding the 'data' chunk - indicates
+  /// a malformed or unusually large header that will never complete.
+  bool isOverflow() {
+    return buffer.size() >= MAX_WAV_HEADER_LEN_LIMIT && !isDataComplete();
   }
 
   /// number of bytes available in the header buffer
@@ -482,10 +503,11 @@ class WAVDecoder : public AudioDecoder {
   bool begin() override {
     TRACED();
     header.clear();
-    // the matching decoder (if any) is only known once the header of this
-    // stream has been parsed, so setupEncodedAudio() is triggered from
+    // close the decoder used for a previous stream (if any) before
+    // selecting a new one for this stream: the match is only known once
+    // the header has been parsed, so setupEncodedAudio() is triggered from
     // decodeHeader() instead of here
-    p_decoder = nullptr;
+    endCurrentDecoder();
     byte_buffer.reset();
     buffer24.reset();
     buffer_float16.reset();
@@ -497,6 +519,7 @@ class WAVDecoder : public AudioDecoder {
   /// Finish decoding and release temporary buffers
   void end() override {
     TRACED();
+    endCurrentDecoder();
     byte_buffer.reset();
     buffer24.reset();
     buffer_float16.reset();
@@ -608,8 +631,6 @@ class WAVDecoder : public AudioDecoder {
   bool isFirst = true;
   bool isValid = true;
   bool active = false;
-  /// format tag of the decoder currently selected in p_decoder
-  AudioFormat decoder_format = AudioFormat::PCM;
   /// decoder matching the format of the WAV file currently being processed
   /// (selected in decodeHeader() from the registered decoders)
   AudioDecoderExt *p_decoder = nullptr;
@@ -653,7 +674,6 @@ class WAVDecoder : public AudioDecoder {
 
   /// Convert 8-bit PCM to 16-bit PCM and write out
   size_t write_out_8to16(const uint8_t *in_ptr, size_t in_size) {
-    size_t total_written = 0;
     size_t samples_remaining = in_size;
     size_t offset = 0;
     int16_t out_buf[batch_size];
@@ -789,10 +809,21 @@ class WAVDecoder : public AudioDecoder {
 
   /// Decodes the header data: Returns the start pos of the data
   int decodeHeader(uint8_t *in_ptr, size_t in_size) {
-    int result = in_size;
     // we expect at least the full header
-    int written = header.write(in_ptr, in_size);
+    header.write(in_ptr, in_size);
     if (!header.isDataComplete()) {
+      if (header.isOverflow()) {
+        // the header (up to and including the 'data' chunk tag) exceeds
+        // MAX_WAV_HEADER_LEN_LIMIT without ever completing - give up
+        // instead of waiting forever for data that will never arrive
+        LOGE(
+            "WAV header exceeds the maximum supported size of %d bytes "
+            "without a 'data' chunk - aborting",
+            (int)MAX_WAV_HEADER_LEN_LIMIT);
+        isFirst = false;
+        isValid = false;
+        return 0;
+      }
       LOGW("WAV header misses 'data' section in len: %d",
            (int)header.available());
       header.dumpHeader();
@@ -805,12 +836,10 @@ class WAVDecoder : public AudioDecoder {
     }
 
     isFirst = false;
-    isValid = header.audioInfo().is_valid;
 
     LOGI("WAV sample_rate: %d", (int)header.audioInfo().sample_rate);
     LOGI("WAV data_length: %u", (unsigned)header.audioInfo().data_length);
     LOGI("WAV is_streamed: %d", header.audioInfo().is_streamed);
-    LOGI("WAV is_valid: %s", header.audioInfo().is_valid ? "true" : "false");
 
     // select the decoder matching the format found in the header (if any
     // was registered via setDecoder()/addDecoder()); otherwise fall back to
@@ -820,7 +849,6 @@ class WAVDecoder : public AudioDecoder {
     isValid = p_decoder != nullptr ? true : isNativelySupported(format);
     if (isValid) {
       if (p_decoder != nullptr) {
-        decoder_format = format;
         // update blocksize before begin() is called in setupEncodedAudio()
         int block_size = header.audioInfo().block_align;
         p_decoder->setBlockSize(block_size);
@@ -875,11 +903,46 @@ class WAVDecoder : public AudioDecoder {
     }
   }
 
+  /// Ends the decoder currently selected for the stream just finished (if
+  /// any), so it doesn't retain state (e.g. sample_rate/channels) across
+  /// unrelated streams the next time this format is matched
+  void endCurrentDecoder() {
+    if (p_decoder != nullptr) {
+      p_decoder->end();
+      p_decoder = nullptr;
+    }
+  }
+
   /// Formats that are handled internally without an external decoder
   static bool isNativelySupported(AudioFormat format) {
     return format == AudioFormat::PCM || format == AudioFormat::IEEE_FLOAT ||
            format == AudioFormat::ALAW || format == AudioFormat::MULAW;
   }
+};
+
+/**
+ * @brief Minimal Print wrapper that counts the bytes actually written to
+ * the wrapped output. Used by WAVEncoder to track the number of *encoded*
+ * bytes an external AudioEncoderExt has emitted, since AudioEncoder::write()
+ * reports the number of raw PCM input bytes it accepted, not the number of
+ * encoded bytes it produced (these differ for compressing formats like
+ * ADPCM).
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class CountingPrint : public Print {
+ public:
+  void setOutput(Print *out) { p_out = out; }
+  size_t write(uint8_t c) override { return write(&c, 1); }
+  size_t write(const uint8_t *data, size_t len) override {
+    size_t written = p_out != nullptr ? p_out->write(data, len) : 0;
+    count += written;
+    return written;
+  }
+  size_t count = 0;
+
+ protected:
+  Print *p_out = nullptr;
 };
 
 /**
@@ -976,7 +1039,10 @@ class WAVEncoder : public AudioEncoder {
   /// starts the processing using the actual WAVAudioInfo
   virtual bool begin() override {
     TRACED();
-    setupEncodedAudio();
+    if (!setupEncodedAudio()) {
+      is_open = false;
+      return false;
+    }
 
     // normalize streaming mode and payload limits at start time
     if (wav_info.is_streamed || wav_info.data_length == 0 ||
@@ -1022,15 +1088,43 @@ class WAVEncoder : public AudioEncoder {
       header_written = true;
     }
 
-    int32_t result = 0;
+    size_t result = 0;
     Print *p_out = p_encoder == nullptr ? p_print : &enc_out;
-    
+
     if (wav_info.is_streamed) {
       result = p_out->write((uint8_t *)data, len);
     } else if (size_limit > 0) {
-      size_t write_size = min((size_t)len, (size_t)size_limit);
-      result = p_out->write((uint8_t *)data, write_size);
-      size_limit -= result;
+      if (p_encoder == nullptr) {
+        // uncompressed: input bytes map 1:1 to output bytes, so we can
+        // truncate exactly at the declared data_length boundary
+        size_t write_size = min((size_t)len, (size_t)size_limit);
+        result = p_out->write((uint8_t *)data, write_size);
+        size_limit -= result;
+      } else {
+        // compressed: the number of encoded bytes an external encoder
+        // produces for a given amount of PCM input is not known in advance
+        // (and may only be emitted once a full internal block is ready), so
+        // AudioEncoder::write()'s return value (raw PCM input bytes
+        // accepted) cannot be used to track progress towards data_length.
+        // Track the *actual* encoded bytes written via counting_print, and
+        // feed the encoder in frame-aligned chunks so we can stop as soon
+        // as data_length is reached - result then correctly reflects only
+        // the bytes of `data` that were actually consumed, so the caller
+        // knows what still needs to be resent (e.g. to a new file).
+        int frame_size = wav_info.bits_per_sample / 8 * wav_info.channels;
+        if (frame_size <= 0) frame_size = 1;
+        size_t chunk = (256 / frame_size) * frame_size;
+        if (chunk == 0) chunk = frame_size;
+
+        while (result < len && size_limit > 0) {
+          size_t n = min(chunk, len - result);
+          counting_print.count = 0;
+          size_t accepted = p_out->write((uint8_t *)data + result, n);
+          size_limit -= counting_print.count;
+          result += accepted;
+          if (accepted < n) break;  // encoder didn't accept the full chunk
+        }
+      }
 
       if (size_limit <= 0) {
         LOGI("The defined size was written - so we close the WAVEncoder now");
@@ -1078,21 +1172,34 @@ class WAVEncoder : public AudioEncoder {
   Print *p_print = nullptr;  // final output  CopyEncoder copy; // used for PCM
   AudioEncoderExt *p_encoder = nullptr;
   EncodedAudioOutput enc_out;
+  /// tracks the actual encoded bytes p_encoder emits to p_print (see write())
+  CountingPrint counting_print;
   WAVAudioInfo wav_info = defaultConfig();
   int64_t size_limit = 0;
   bool header_written = false;
   volatile bool is_open = false;
 
-  void setupEncodedAudio() {
+  /// Sets up the external encoder pipeline. Returns false (and logs an
+  /// error) instead of crashing if the required output stream has not been
+  /// provided yet via setOutput().
+  bool setupEncodedAudio() {
     if (p_encoder != nullptr) {
-      assert(p_print != nullptr);
-      enc_out.setOutput(p_print);
+      if (p_print == nullptr) {
+        LOGE(
+            "setupEncodedAudio: no output stream was provided - call "
+            "setOutput() before begin()");
+        return false;
+      }
+      counting_print.setOutput(p_print);
+      counting_print.count = 0;
+      enc_out.setOutput(&counting_print);
       enc_out.setEncoder(p_encoder);
       enc_out.setAudioInfo(wav_info);
       enc_out.begin();
       // block size only available after begin(): update block size
       wav_info.block_align = p_encoder->blockSize();
     }
+    return true;
   }
 };
 
