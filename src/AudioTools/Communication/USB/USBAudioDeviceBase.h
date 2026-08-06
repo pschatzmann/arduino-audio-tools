@@ -107,6 +107,7 @@ static inline uint8_t u16High(uint16_t v) { return (uint8_t)(v >> 8); }
  * @copyright GPLv3
  */
 class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
+public:
   /**
    * @brief Supported USB audio format types.
    *
@@ -229,7 +230,6 @@ class USBAudioDeviceBase : public AudioStream, public VolumeSupport {
     };
   };
 
- public:
   /// Default Constructor
   USBAudioDeviceBase() { s_active_ = this; }
 
