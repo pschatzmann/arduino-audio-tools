@@ -29,6 +29,9 @@ class USBAudioDeviceTinyUSBFreeRTOS : public USBAudioDeviceTinyUSB {
       : USBAudioDeviceTinyUSB(cfg) {}
   ~USBAudioDeviceTinyUSBFreeRTOS() { stopUsbTask(); }
 
+  BaseBuffer<uint8_t>& bufferTx() override { return buffer_tx_rtos_; }
+  BaseBuffer<uint8_t>& bufferRx() override { return buffer_rx_rtos_; }
+
  protected:
   // writeMaxWait=0 initially; startUsbTask() upgrades to blocking once the
   // dedicated task is actively draining the buffer.
@@ -42,8 +45,6 @@ class USBAudioDeviceTinyUSBFreeRTOS : public USBAudioDeviceTinyUSB {
     return ok;
   }
 
-  BaseBuffer<uint8_t>& bufferTx() override { return buffer_tx_rtos_; }
-  BaseBuffer<uint8_t>& bufferRx() override { return buffer_rx_rtos_; }
 
   void resizeBuffers() override {
     uint16_t block_sz = packetSize();
