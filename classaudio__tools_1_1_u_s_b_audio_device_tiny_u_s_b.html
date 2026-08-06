@@ -178,6 +178,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8e64d1bcfd5812dc7532e97b6a3eed77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79c8dddfa7a0340ba718368070e478dc" id="r_a79c8dddfa7a0340ba718368070e478dc"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html#a79c8dddfa7a0340ba718368070e478dc">getInterfaceDescriptor</a> (uint8_t, uint8_t *buf, uint16_t bufsize) override</td></tr>
 <tr class="separator:a79c8dddfa7a0340ba718368070e478dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cb7078b818a17c8614a8a57091964b2" id="r_a8cb7078b818a17c8614a8a57091964b2"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a8cb7078b818a17c8614a8a57091964b2">getRxDroppedBytes</a> () const</td></tr>
+<tr class="separator:a8cb7078b818a17c8614a8a57091964b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f396bfc16067897ae2d3079f0d5aa08" id="r_a5f396bfc16067897ae2d3079f0d5aa08"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a5f396bfc16067897ae2d3079f0d5aa08">getRxTotalBytes</a> () const</td></tr>
 <tr class="memdesc:a5f396bfc16067897ae2d3079f0d5aa08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total bytes received from host via OUT endpoint.  <br /></td></tr>
 <tr class="separator:a5f396bfc16067897ae2d3079f0d5aa08"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -532,6 +534,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a7dc5d87ca00e2e111d842eaa3333016d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa44e7a21843b0ada7f033f10a77f766" id="r_aaa44e7a21843b0ada7f033f10a77f766"><td class="memItemLeft" align="right" valign="top">std::function&lt; bool(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *, uint8_t rhport, audiod_function_t *, uint16_t xferred_bytes)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#aaa44e7a21843b0ada7f033f10a77f766">rx_done_cb_</a></td></tr>
 <tr class="separator:aaa44e7a21843b0ada7f033f10a77f766"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83f536376c6b0d270a088a83511013b7" id="r_a83f536376c6b0d270a088a83511013b7"><td class="memItemLeft" align="right" valign="top">volatile uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a83f536376c6b0d270a088a83511013b7">rx_dropped_bytes_</a> = 0</td></tr>
+<tr class="separator:a83f536376c6b0d270a088a83511013b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5288bf9051a52c39a999fa8dfaf6ac1a" id="r_a5288bf9051a52c39a999fa8dfaf6ac1a"><td class="memItemLeft" align="right" valign="top">volatile uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a5288bf9051a52c39a999fa8dfaf6ac1a">rx_total_bytes_</a> = 0</td></tr>
 <tr class="separator:a5288bf9051a52c39a999fa8dfaf6ac1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a855651f86cae3504db41a3e3632f978e" id="r_a855651f86cae3504db41a3e3632f978e"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(uint32_t)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a855651f86cae3504db41a3e3632f978e">sample_rate_cb_</a></td></tr>
@@ -2302,6 +2306,32 @@ Board settings (arduino-pico + Adafruit TinyUSB)</h2>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8cb7078b818a17c8614a8a57091964b2" name="a8cb7078b818a17c8614a8a57091964b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8cb7078b818a17c8614a8a57091964b2">&#9670;&#160;</a></span>getRxDroppedBytes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t getRxDroppedBytes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Bytes silently discarded because <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html#acb49b3d87009a5a12096e51f330f2921" title="Returns the RX audio buffer (public to match USBAudioDeviceESP32, so sketches using the portable USBA...">bufferRx()</a> was full when they arrived. Non-zero means audio is being lost &ndash; increase fifo_packets or drain <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html#acb49b3d87009a5a12096e51f330f2921" title="Returns the RX audio buffer (public to match USBAudioDeviceESP32, so sketches using the portable USBA...">bufferRx()</a> (<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#af3322ed0e24d11005573274c1c1d069d" title="Receive audio data from the host (host → device, speaker/playback).">readBytes()</a>) faster/more regularly. </p>
 
 </div>
 </div>
@@ -5721,6 +5751,28 @@ template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">std::function&lt;bool(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a>*, uint8_t rhport, audiod_function_t*, uint16_t xferred_bytes)&gt; rx_done_cb_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a83f536376c6b0d270a088a83511013b7" name="a83f536376c6b0d270a088a83511013b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83f536376c6b0d270a088a83511013b7">&#9670;&#160;</a></span>rx_dropped_bytes_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint32_t rx_dropped_bytes_ = 0</td>
         </tr>
       </table>
   </td>
