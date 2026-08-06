@@ -24,7 +24,7 @@ var searchData=
   ['oggvorbisdecoder_2eh_21',['OggVorbisDecoder.h',['../_ogg_vorbis_decoder_8h.html',1,'']]],
   ['oh_22',['oh',['../classaudio__tools_1_1_ogg_container_output.html#a5d819d71a25499f110932fd2761e823e',1,'audio_tools::OggContainerOutput']]],
   ['oh1_23',['oh1',['../classaudio__tools_1_1_opus_ogg_writer.html#ac5735817baae865600db861c7fecc253',1,'audio_tools::OpusOggWriter']]],
-  ['ok_24',['ok',['../structaudio__tools_1_1_redis_buffer_1_1_redis_result.html#a1d67bd6634a9002df97231d8c8dbc66c',1,'audio_tools::RedisBuffer::RedisResult::ok'],['../classaudio__tools_1_1_s_p_i_audio_slave.html#a7d30a5d04ebac11084c4f8bd9cb40491a06d32f047358de4e6a30c28046f4688e',1,'audio_tools::SPIAudioSlave::Ok']]],
+  ['ok_24',['ok',['../classaudio__tools_1_1_s_p_i_audio_slave.html#a7d30a5d04ebac11084c4f8bd9cb40491a06d32f047358de4e6a30c28046f4688e',1,'audio_tools::SPIAudioSlave::Ok'],['../structaudio__tools_1_1_redis_buffer_1_1_redis_result.html#a1d67bd6634a9002df97231d8c8dbc66c',1,'audio_tools::RedisBuffer::RedisResult::ok']]],
   ['oki_5fadpcm_25',['OKI_ADPCM',['../group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1a57e9fbbf316b6e9fb94757397e380393',1,'audio_tools']]],
   ['on_5feof_5fcallback_26',['on_eof_callback',['../classaudio__tools_1_1_audio_player.html#a2f7b9f81bd5eda0447b75e818e624b8d',1,'audio_tools::AudioPlayer']]],
   ['on_5fstream_5fchange_5fcallback_27',['on_stream_change_callback',['../classaudio__tools_1_1_audio_player.html#a2e5fc997c71c951d1c05c04c1935c04b',1,'audio_tools::AudioPlayer']]],

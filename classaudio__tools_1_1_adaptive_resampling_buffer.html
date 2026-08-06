@@ -182,9 +182,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:abff5eac35186831ee633b07112ffc2b6" id="r_abff5eac35186831ee633b07112ffc2b6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_adaptive_resampling_buffer.html#abff5eac35186831ee633b07112ffc2b6">setKalmanParameters</a> (float process_noise, float measurement_noise)</td></tr>
 <tr class="memdesc:abff5eac35186831ee633b07112ffc2b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Kalman filter parameters.  <br /></td></tr>
 <tr class="separator:abff5eac35186831ee633b07112ffc2b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f53d2a560f30f6cf128a2458d783659" id="r_a4f53d2a560f30f6cf128a2458d783659"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_adaptive_resampling_buffer.html#a4f53d2a560f30f6cf128a2458d783659">setMaxStepChangeRate</a> (float per_second)</td></tr>
+<tr class="memdesc:a4f53d2a560f30f6cf128a2458d783659"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum rate at which step_size is allowed to change, in (fractional step) units per second - e.g. 0.2 lets step_size move by at most 0.2 per second (so covering a 0.15 range takes &gt;= 0.75s). This bounds the size of any single audible pitch jump regardless of resample_range or the recalculate interval: however large the PID/feedforward's computed target is, the applied step_size ramps toward it at this rate instead of snapping to it immediately. Default is 0.2 (20% per second).  <br /></td></tr>
+<tr class="separator:a4f53d2a560f30f6cf128a2458d783659"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac57bfbf64c606774f0b2fa7aee2ddecc" id="r_ac57bfbf64c606774f0b2fa7aee2ddecc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_adaptive_resampling_buffer.html#ac57bfbf64c606774f0b2fa7aee2ddecc">setMinBytesForDriftEstimate</a> (uint32_t bytes)</td></tr>
 <tr class="memdesc:ac57bfbf64c606774f0b2fa7aee2ddecc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum cumulative output bytes that must have been read before <a class="el" href="classaudio__tools_1_1_adaptive_resampling_buffer.html#ac3260a3416f85da8ffe1cea43235ef34" title="Long-run average step size implied by cumulative bytes written vs. bytes read, used as the feedforwar...">averageStepSize()</a> is trusted; below this it returns 1.0. Avoids acting on a ratio computed from a handful of bytes right after <a class="el" href="classaudio__tools_1_1_adaptive_resampling_buffer.html#a601fb7cf1fc15db50c71a826f084f934" title="Initialize the buffer and internal components.">begin()</a>. Default is 4096.  <br /></td></tr>
 <tr class="separator:ac57bfbf64c606774f0b2fa7aee2ddecc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0b23ab3f29701d68a236ddc866db458" id="r_ac0b23ab3f29701d68a236ddc866db458"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_adaptive_resampling_buffer.html#ac0b23ab3f29701d68a236ddc866db458">setMinRecalculateInterval</a> (uint32_t interval_ms)</td></tr>
+<tr class="memdesc:ac0b23ab3f29701d68a236ddc866db458"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum time between actual PID/Kalman recomputations, in milliseconds. <a class="el" href="classaudio__tools_1_1_adaptive_resampling_buffer.html#afa5c50695c481e2a8582f04dc1a4771a">writeArray()</a> calls <a class="el" href="classaudio__tools_1_1_adaptive_resampling_buffer.html#afa2ce02b9537ebcecc88d1410ad334d2" title="Recalculate the resampling step size based on buffer fill level. Called automatically by writeArray()...">recalculate()</a> on every write (e.g. once per received USB packet, which can be as often as ~1ms), but the control loop itself only re-evaluates once this much time has passed since the last recomputation - calls in between are no-ops that just return the current step size. This decouples the PID's dt (and its derivative term in particular) from the caller's write frequency, so a single write-sized burst in the buffer fill level can't by itself saturate the derivative term, and reduces the number of float operations performed per second.  <br /></td></tr>
+<tr class="separator:ac0b23ab3f29701d68a236ddc866db458"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1add7c8bcd4c783db2dabcb67dcf87b0" id="r_a1add7c8bcd4c783db2dabcb67dcf87b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_adaptive_resampling_buffer.html#a1add7c8bcd4c783db2dabcb67dcf87b0">setPIDParameters</a> (float p_value, float i_value, float d_value)</td></tr>
 <tr class="memdesc:a1add7c8bcd4c783db2dabcb67dcf87b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the PID controller parameters.  <br /></td></tr>
 <tr class="separator:a1add7c8bcd4c783db2dabcb67dcf87b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -240,8 +246,12 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a0c77e8dadb8503437800d72e30fcbfc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad8cad62a16344c25a0c65ea4c1c6d5e8" id="r_ad8cad62a16344c25a0c65ea4c1c6d5e8"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_adaptive_resampling_buffer.html#ad8cad62a16344c25a0c65ea4c1c6d5e8">level_percent_smoothed</a> = 0.0</td></tr>
 <tr class="separator:ad8cad62a16344c25a0c65ea4c1c6d5e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af56cc52758b898ea9f3367a74674cc3c" id="r_af56cc52758b898ea9f3367a74674cc3c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_adaptive_resampling_buffer.html#af56cc52758b898ea9f3367a74674cc3c">max_step_change_per_sec</a> = 0.2f</td></tr>
+<tr class="separator:af56cc52758b898ea9f3367a74674cc3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a982b15cd997038b4987809522c54759b" id="r_a982b15cd997038b4987809522c54759b"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_adaptive_resampling_buffer.html#a982b15cd997038b4987809522c54759b">min_bytes_for_drift_estimate</a> = 4096</td></tr>
 <tr class="separator:a982b15cd997038b4987809522c54759b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f9b8b84db5443d27af4db99899d1305" id="r_a0f9b8b84db5443d27af4db99899d1305"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_adaptive_resampling_buffer.html#a0f9b8b84db5443d27af4db99899d1305">min_recalc_interval_ms</a> = 0</td></tr>
+<tr class="separator:a0f9b8b84db5443d27af4db99899d1305"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1922a551816a2725c69a086db7c12a03" id="r_a1922a551816a2725c69a086db7c12a03"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_adaptive_resampling_buffer.html#a1922a551816a2725c69a086db7c12a03">p</a> = 0.005</td></tr>
 <tr class="separator:a1922a551816a2725c69a086db7c12a03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23dcc8cc0d1809b6ec0e94343a2ac7a4" id="r_a23dcc8cc0d1809b6ec0e94343a2ac7a4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; uint8_t &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_adaptive_resampling_buffer.html#a23dcc8cc0d1809b6ec0e94343a2ac7a4">p_buffer</a> = nullptr</td></tr>
@@ -1239,6 +1249,34 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a4f53d2a560f30f6cf128a2458d783659" name="a4f53d2a560f30f6cf128a2458d783659"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f53d2a560f30f6cf128a2458d783659">&#9670;&#160;</a></span>setMaxStepChangeRate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setMaxStepChangeRate </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>per_second</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Maximum rate at which step_size is allowed to change, in (fractional step) units per second - e.g. 0.2 lets step_size move by at most 0.2 per second (so covering a 0.15 range takes &gt;= 0.75s). This bounds the size of any single audible pitch jump regardless of resample_range or the recalculate interval: however large the PID/feedforward's computed target is, the applied step_size ramps toward it at this rate instead of snapping to it immediately. Default is 0.2 (20% per second). </p>
+
+</div>
+</div>
 <a id="ac57bfbf64c606774f0b2fa7aee2ddecc" name="ac57bfbf64c606774f0b2fa7aee2ddecc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac57bfbf64c606774f0b2fa7aee2ddecc">&#9670;&#160;</a></span>setMinBytesForDriftEstimate()</h2>
 
@@ -1264,6 +1302,35 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Minimum cumulative output bytes that must have been read before <a class="el" href="classaudio__tools_1_1_adaptive_resampling_buffer.html#ac3260a3416f85da8ffe1cea43235ef34" title="Long-run average step size implied by cumulative bytes written vs. bytes read, used as the feedforwar...">averageStepSize()</a> is trusted; below this it returns 1.0. Avoids acting on a ratio computed from a handful of bytes right after <a class="el" href="classaudio__tools_1_1_adaptive_resampling_buffer.html#a601fb7cf1fc15db50c71a826f084f934" title="Initialize the buffer and internal components.">begin()</a>. Default is 4096. </p>
+
+</div>
+</div>
+<a id="ac0b23ab3f29701d68a236ddc866db458" name="ac0b23ab3f29701d68a236ddc866db458"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0b23ab3f29701d68a236ddc866db458">&#9670;&#160;</a></span>setMinRecalculateInterval()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setMinRecalculateInterval </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>interval_ms</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Minimum time between actual PID/Kalman recomputations, in milliseconds. <a class="el" href="classaudio__tools_1_1_adaptive_resampling_buffer.html#afa5c50695c481e2a8582f04dc1a4771a">writeArray()</a> calls <a class="el" href="classaudio__tools_1_1_adaptive_resampling_buffer.html#afa2ce02b9537ebcecc88d1410ad334d2" title="Recalculate the resampling step size based on buffer fill level. Called automatically by writeArray()...">recalculate()</a> on every write (e.g. once per received USB packet, which can be as often as ~1ms), but the control loop itself only re-evaluates once this much time has passed since the last recomputation - calls in between are no-ops that just return the current step size. This decouples the PID's dt (and its derivative term in particular) from the caller's write frequency, so a single write-sized burst in the buffer fill level can't by itself saturate the derivative term, and reduces the number of float operations performed per second. </p>
+<p>Default is 0 (disabled - recalculate on every write, matching prior behavior). This is opt-in: throttling changes how corrections are applied (fewer, larger, longer-lived step size changes instead of many small ones) and the PID/Kalman gains are not automatically retuned for a different interval, so a larger interval is not strictly better and should be verified on real hardware before relying on it. </p>
 
 </div>
 </div>
@@ -1800,6 +1867,28 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="af56cc52758b898ea9f3367a74674cc3c" name="af56cc52758b898ea9f3367a74674cc3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af56cc52758b898ea9f3367a74674cc3c">&#9670;&#160;</a></span>max_step_change_per_sec</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float max_step_change_per_sec = 0.2f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a982b15cd997038b4987809522c54759b" name="a982b15cd997038b4987809522c54759b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a982b15cd997038b4987809522c54759b">&#9670;&#160;</a></span>min_bytes_for_drift_estimate</h2>
 
@@ -1811,6 +1900,28 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">uint32_t min_bytes_for_drift_estimate = 4096</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0f9b8b84db5443d27af4db99899d1305" name="a0f9b8b84db5443d27af4db99899d1305"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f9b8b84db5443d27af4db99899d1305">&#9670;&#160;</a></span>min_recalc_interval_ms</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t min_recalc_interval_ms = 0</td>
         </tr>
       </table>
   </td>

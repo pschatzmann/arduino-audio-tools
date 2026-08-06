@@ -124,6 +124,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a601fb7cf1fc15db50c71a826f084f934" id="r_a601fb7cf1fc15db50c71a826f084f934"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_adaptive_resampling_stream.html#a601fb7cf1fc15db50c71a826f084f934">begin</a> ()</td></tr>
 <tr class="memdesc:a601fb7cf1fc15db50c71a826f084f934"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the stream and internal components.  <br /></td></tr>
 <tr class="separator:a601fb7cf1fc15db50c71a826f084f934"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1a0fe2d8421c464e2b0d0fe10690fb1" id="r_af1a0fe2d8421c464e2b0d0fe10690fb1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_adaptive_resampling_stream.html#af1a0fe2d8421c464e2b0d0fe10690fb1">begin</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> <a class="el" href="classaudio__tools_1_1_audio_stream.html#a47385aa19435f5fca9d3083a748258c5">info</a>)</td></tr>
+<tr class="memdesc:af1a0fe2d8421c464e2b0d0fe10690fb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the stream and internal components with the given audio info.  <br /></td></tr>
+<tr class="separator:af1a0fe2d8421c464e2b0d0fe10690fb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:affd15675a5e391c34cccefa7181354bb" id="r_affd15675a5e391c34cccefa7181354bb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#affd15675a5e391c34cccefa7181354bb">clearNotifyAudioChange</a> ()</td></tr>
 <tr class="memdesc:affd15675a5e391c34cccefa7181354bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes all change notify subscriptions.  <br /></td></tr>
 <tr class="separator:affd15675a5e391c34cccefa7181354bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -166,6 +169,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:abff5eac35186831ee633b07112ffc2b6" id="r_abff5eac35186831ee633b07112ffc2b6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_adaptive_resampling_stream.html#abff5eac35186831ee633b07112ffc2b6">setKalmanParameters</a> (float process_noise, float measurement_noise)</td></tr>
 <tr class="memdesc:abff5eac35186831ee633b07112ffc2b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Kalman filter parameters.  <br /></td></tr>
 <tr class="separator:abff5eac35186831ee633b07112ffc2b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f53d2a560f30f6cf128a2458d783659" id="r_a4f53d2a560f30f6cf128a2458d783659"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_adaptive_resampling_stream.html#a4f53d2a560f30f6cf128a2458d783659">setMaxStepChangeRate</a> (float per_second)</td></tr>
+<tr class="memdesc:a4f53d2a560f30f6cf128a2458d783659"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the maximum rate at which step_size is allowed to change. See <a class="el" href="classaudio__tools_1_1_adaptive_resampling_buffer.html#a4f53d2a560f30f6cf128a2458d783659" title="Maximum rate at which step_size is allowed to change, in (fractional step) units per second - e....">AdaptiveResamplingBuffer::setMaxStepChangeRate()</a>.  <br /></td></tr>
+<tr class="separator:a4f53d2a560f30f6cf128a2458d783659"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0b23ab3f29701d68a236ddc866db458" id="r_ac0b23ab3f29701d68a236ddc866db458"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_adaptive_resampling_stream.html#ac0b23ab3f29701d68a236ddc866db458">setMinRecalculateInterval</a> (uint32_t interval_ms)</td></tr>
+<tr class="memdesc:ac0b23ab3f29701d68a236ddc866db458"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the minimum time between actual PID/Kalman recomputations. See <a class="el" href="classaudio__tools_1_1_adaptive_resampling_buffer.html#ac0b23ab3f29701d68a236ddc866db458" title="Minimum time between actual PID/Kalman recomputations, in milliseconds. writeArray() calls recalculat...">AdaptiveResamplingBuffer::setMinRecalculateInterval()</a>.  <br /></td></tr>
+<tr class="separator:ac0b23ab3f29701d68a236ddc866db458"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a909f118906f9cf7024baae224dcd90a7" id="r_a909f118906f9cf7024baae224dcd90a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a909f118906f9cf7024baae224dcd90a7">setNotifyActive</a> (bool flag)</td></tr>
 <tr class="memdesc:a909f118906f9cf7024baae224dcd90a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivate/Reactivate automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> updates: (default is active)  <br /></td></tr>
 <tr class="separator:a909f118906f9cf7024baae224dcd90a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -444,7 +453,7 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <a id="a601fb7cf1fc15db50c71a826f084f934" name="a601fb7cf1fc15db50c71a826f084f934"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a601fb7cf1fc15db50c71a826f084f934">&#9670;&#160;</a></span>begin()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a601fb7cf1fc15db50c71a826f084f934">&#9670;&#160;</a></span>begin() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -470,6 +479,35 @@ Protected Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>true if initialization was successful, false otherwise </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_base_stream.html#a50f45551c10ca30a0bc7f447e70188b1">BaseStream</a>.</p>
+
+</div>
+</div>
+<a id="af1a0fe2d8421c464e2b0d0fe10690fb1" name="af1a0fe2d8421c464e2b0d0fe10690fb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1a0fe2d8421c464e2b0d0fe10690fb1">&#9670;&#160;</a></span>begin() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool begin </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td>
+          <td class="paramname"><em>info</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initialize the stream and internal components with the given audio info. </p>
+<dl class="section return"><dt>Returns</dt><dd>true if initialization was successful, false otherwise </dd></dl>
 
 </div>
 </div>
@@ -1034,6 +1072,74 @@ Protected Attributes</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">process_noise</td><td>Process noise covariance (Q) </td></tr>
     <tr><td class="paramname">measurement_noise</td><td>Measurement noise covariance (R) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a4f53d2a560f30f6cf128a2458d783659" name="a4f53d2a560f30f6cf128a2458d783659"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f53d2a560f30f6cf128a2458d783659">&#9670;&#160;</a></span>setMaxStepChangeRate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setMaxStepChangeRate </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>per_second</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the maximum rate at which step_size is allowed to change. See <a class="el" href="classaudio__tools_1_1_adaptive_resampling_buffer.html#a4f53d2a560f30f6cf128a2458d783659" title="Maximum rate at which step_size is allowed to change, in (fractional step) units per second - e....">AdaptiveResamplingBuffer::setMaxStepChangeRate()</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">per_second</td><td>Maximum change in step_size per second (default: 0.2) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac0b23ab3f29701d68a236ddc866db458" name="ac0b23ab3f29701d68a236ddc866db458"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0b23ab3f29701d68a236ddc866db458">&#9670;&#160;</a></span>setMinRecalculateInterval()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setMinRecalculateInterval </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>interval_ms</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the minimum time between actual PID/Kalman recomputations. See <a class="el" href="classaudio__tools_1_1_adaptive_resampling_buffer.html#ac0b23ab3f29701d68a236ddc866db458" title="Minimum time between actual PID/Kalman recomputations, in milliseconds. writeArray() calls recalculat...">AdaptiveResamplingBuffer::setMinRecalculateInterval()</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">interval_ms</td><td>Minimum interval in milliseconds (default: 15) </td></tr>
   </table>
   </dd>
 </dl>

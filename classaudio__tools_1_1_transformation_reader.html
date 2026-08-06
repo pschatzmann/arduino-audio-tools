@@ -110,6 +110,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:adaad7757eb03b75c4588e316c1a68287" id="r_adaad7757eb03b75c4588e316c1a68287"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_transformation_reader.html#adaad7757eb03b75c4588e316c1a68287">setResultQueueFactor</a> (int factor)</td></tr>
 <tr class="memdesc:adaad7757eb03b75c4588e316c1a68287"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the queue size dependent on the read size.  <br /></td></tr>
 <tr class="separator:adaad7757eb03b75c4588e316c1a68287"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2a592be63f83b338da66339ae5466fd" id="r_ac2a592be63f83b338da66339ae5466fd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_transformation_reader.html#ac2a592be63f83b338da66339ae5466fd">setZeroReadDelay</a> (uint32_t delay_ms)</td></tr>
+<tr class="separator:ac2a592be63f83b338da66339ae5466fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -154,6 +156,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:af19045b5b637af0cd1d84019148260f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75aa3d0ad37966240173294a77916f61" id="r_a75aa3d0ad37966240173294a77916f61"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_transformation_reader.html#a75aa3d0ad37966240173294a77916f61">total_bytes_read</a> = 0</td></tr>
 <tr class="separator:a75aa3d0ad37966240173294a77916f61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab02e7abb267436f5258b4f29fba8bba2" id="r_ab02e7abb267436f5258b4f29fba8bba2"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_transformation_reader.html#ab02e7abb267436f5258b4f29fba8bba2">zero_read_delay_ms</a> = 5</td></tr>
+<tr class="separator:ab02e7abb267436f5258b4f29fba8bba2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class T&gt;<br />
@@ -611,6 +615,35 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
+<a id="ac2a592be63f83b338da66339ae5466fd" name="ac2a592be63f83b338da66339ae5466fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2a592be63f83b338da66339ae5466fd">&#9670;&#160;</a></span>setZeroReadDelay()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setZeroReadDelay </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>delay_ms</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Defines how long <a class="el" href="classaudio__tools_1_1_transformation_reader.html#a83eb9f79b900af8f6302a87fe9b7af0b">fillResultQueue()</a> blocks in <a class="el" href="namespaceaudio__tools.html#a7f2dfce1046bdd2a2b753643726c2346">delay()</a> after each empty read from the source, before retrying (up to MAX_ZERO_READ_COUNT times). Default is 5ms, matching historical behavior. For a live producer read from the same thread/task that also has to keep some other time-critical consumer fed (e.g. an I2S output pump driven from the same <a class="el" href="_main_8h.html#afe461d27b9c48d5921c00d521181f12f">loop()</a>), blocking here for up to MAX_ZERO_READ_COUNT * this value on every transient underflow can itself starve that consumer - set this to 0 in that case so a momentarily-empty source just returns immediately with whatever's available instead of stalling the caller. </p>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="a03c996f9fcf0e10baeb3e700be0c409a" name="a03c996f9fcf0e10baeb3e700be0c409a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a03c996f9fcf0e10baeb3e700be0c409a">&#9670;&#160;</a></span>active</h2>
@@ -913,6 +946,30 @@ template&lt;class T &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">size_t total_bytes_read = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab02e7abb267436f5258b4f29fba8bba2" name="ab02e7abb267436f5258b4f29fba8bba2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab02e7abb267436f5258b4f29fba8bba2">&#9670;&#160;</a></span>zero_read_delay_ms</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t zero_read_delay_ms = 5</td>
         </tr>
       </table>
   </td>

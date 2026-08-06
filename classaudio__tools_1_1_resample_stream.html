@@ -262,6 +262,12 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:aa66a35e5edf58ce00047afcd1d4f455e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeff5997abcf0c88c9434923e2ffd032b" id="r_aeff5997abcf0c88c9434923e2ffd032b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_resample_stream.html#aeff5997abcf0c88c9434923e2ffd032b">bytes_per_frame</a> = 0</td></tr>
 <tr class="separator:aeff5997abcf0c88c9434923e2ffd032b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8e7a843bb38b380bb575a17938fff0e" id="r_af8e7a843bb38b380bb575a17938fff0e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_resample_stream.html#af8e7a843bb38b380bb575a17938fff0e">carry</a> {0}</td></tr>
+<tr class="separator:af8e7a843bb38b380bb575a17938fff0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac561540ae73e77b53ce1cfc2bc163f5" id="r_aac561540ae73e77b53ce1cfc2bc163f5"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_resample_stream.html#aac561540ae73e77b53ce1cfc2bc163f5">carry_len</a> = 0</td></tr>
+<tr class="separator:aac561540ae73e77b53ce1cfc2bc163f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbb3211716f2035bf94fbc244cdc55bb" id="r_afbb3211716f2035bf94fbc244cdc55bb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_resample_stream.html#afbb3211716f2035bf94fbc244cdc55bb">combine_buffer</a> {0}</td></tr>
+<tr class="separator:afbb3211716f2035bf94fbc244cdc55bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a791caab74bc4e8b8d9bb4b9667744eb2" id="r_a791caab74bc4e8b8d9bb4b9667744eb2"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_resample_stream.html#a791caab74bc4e8b8d9bb4b9667744eb2">idx</a> = 0</td></tr>
 <tr class="separator:a791caab74bc4e8b8d9bb4b9667744eb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47385aa19435f5fca9d3083a748258c5" id="r_a47385aa19435f5fca9d3083a748258c5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_stream.html#a47385aa19435f5fca9d3083a748258c5">info</a></td></tr>
@@ -2081,6 +2087,72 @@ template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">int bytes_per_frame = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af8e7a843bb38b380bb575a17938fff0e" name="af8e7a843bb38b380bb575a17938fff0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8e7a843bb38b380bb575a17938fff0e">&#9670;&#160;</a></span>carry</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;uint8_t&gt; carry {0}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aac561540ae73e77b53ce1cfc2bc163f5" name="aac561540ae73e77b53ce1cfc2bc163f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac561540ae73e77b53ce1cfc2bc163f5">&#9670;&#160;</a></span>carry_len</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t carry_len = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afbb3211716f2035bf94fbc244cdc55bb" name="afbb3211716f2035bf94fbc244cdc55bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbb3211716f2035bf94fbc244cdc55bb">&#9670;&#160;</a></span>combine_buffer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;uint8_t&gt; combine_buffer {0}</td>
         </tr>
       </table>
   </td>
