@@ -100,16 +100,14 @@ Inheritance diagram for Task:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a28206f111a6f856efa0d12bc4b21f6f3" id="r_a28206f111a6f856efa0d12bc4b21f6f3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_task.html#a28206f111a6f856efa0d12bc4b21f6f3">Task</a> ()=default</td></tr>
 <tr class="separator:a28206f111a6f856efa0d12bc4b21f6f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a803e1db59ce7b20ba3f1d0bbe3e57404" id="r_a803e1db59ce7b20ba3f1d0bbe3e57404"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_task.html#a803e1db59ce7b20ba3f1d0bbe3e57404">Task</a> (const char *name, int stackSize, int priority=1, int core=-1)</td></tr>
-<tr class="memdesc:a803e1db59ce7b20ba3f1d0bbe3e57404"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines and creates a FreeRTOS task.  <br /></td></tr>
-<tr class="separator:a803e1db59ce7b20ba3f1d0bbe3e57404"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a826ebd3695c0f200dd3ffc42aa0b63f7" id="r_a826ebd3695c0f200dd3ffc42aa0b63f7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_task.html#a826ebd3695c0f200dd3ffc42aa0b63f7">Task</a> (const char *name, int stackSizeWords, int priority=1, int core=-1)</td></tr>
+<tr class="separator:a826ebd3695c0f200dd3ffc42aa0b63f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1eb733e1621bbf8c6939e1bd2978ddd8" id="r_a1eb733e1621bbf8c6939e1bd2978ddd8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_task.html#a1eb733e1621bbf8c6939e1bd2978ddd8">~Task</a> ()</td></tr>
 <tr class="separator:a1eb733e1621bbf8c6939e1bd2978ddd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1d9b45dd981a313a51ec91aca72a853" id="r_ac1d9b45dd981a313a51ec91aca72a853"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_task.html#ac1d9b45dd981a313a51ec91aca72a853">begin</a> (std::function&lt; void()&gt; process)</td></tr>
 <tr class="separator:ac1d9b45dd981a313a51ec91aca72a853"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0924715b76f5f0305eda62e802cfcf2b" id="r_a0924715b76f5f0305eda62e802cfcf2b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_task.html#a0924715b76f5f0305eda62e802cfcf2b">create</a> (const char *name, int stackSize, int priority=1, int core=-1)</td></tr>
-<tr class="memdesc:a0924715b76f5f0305eda62e802cfcf2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">If you used the empty constructor, you need to call create!  <br /></td></tr>
-<tr class="separator:a0924715b76f5f0305eda62e802cfcf2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a724bcf01bf6edc3199f3d2f258d536ab" id="r_a724bcf01bf6edc3199f3d2f258d536ab"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_task.html#a724bcf01bf6edc3199f3d2f258d536ab">create</a> (const char *name, int stackSizeWords, int priority=1, int core=-1)</td></tr>
+<tr class="separator:a724bcf01bf6edc3199f3d2f258d536ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf81d3fdaf258088d7692fa70cece087" id="r_aaf81d3fdaf258088d7692fa70cece087"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_task.html#aaf81d3fdaf258088d7692fa70cece087">end</a> ()</td></tr>
 <tr class="memdesc:aaf81d3fdaf258088d7692fa70cece087"><td class="mdescLeft">&#160;</td><td class="mdescRight">suspends the task  <br /></td></tr>
 <tr class="separator:aaf81d3fdaf258088d7692fa70cece087"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -142,6 +140,14 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ab153441a2052f80aafe00768ea80aee0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1830ddb36c14bdd7057683e633f918c8" id="r_a1830ddb36c14bdd7057683e633f918c8"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_task.html#a1830ddb36c14bdd7057683e633f918c8">ref</a></td></tr>
 <tr class="separator:a1830ddb36c14bdd7057683e633f918c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28c8055cde540f46d40018d0bde70b9e" id="r_a28c8055cde540f46d40018d0bde70b9e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_task.html#a28c8055cde540f46d40018d0bde70b9e">task_core</a> = -1</td></tr>
+<tr class="separator:a28c8055cde540f46d40018d0bde70b9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad87bb135e802a9cd9c35e58f6a74d417" id="r_ad87bb135e802a9cd9c35e58f6a74d417"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_task.html#ad87bb135e802a9cd9c35e58f6a74d417">task_name</a> = nullptr</td></tr>
+<tr class="separator:ad87bb135e802a9cd9c35e58f6a74d417"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a282f7a55c99a4cf6446d23e343aeca6c" id="r_a282f7a55c99a4cf6446d23e343aeca6c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_task.html#a282f7a55c99a4cf6446d23e343aeca6c">task_priority</a> = 1</td></tr>
+<tr class="separator:a282f7a55c99a4cf6446d23e343aeca6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28070049410ce8dc0653c915ebe14686" id="r_a28070049410ce8dc0653c915ebe14686"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_task.html#a28070049410ce8dc0653c915ebe14686">task_stack_size</a> = 0</td></tr>
+<tr class="separator:a28070049410ce8dc0653c915ebe14686"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a01ba122aba7d048809e2330ee6cbe218" id="r_a01ba122aba7d048809e2330ee6cbe218"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a7be7cde832716638e7144371881ddf85">TaskHandle_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_task.html#a01ba122aba7d048809e2330ee6cbe218">xHandle</a> = nullptr</td></tr>
 <tr class="separator:a01ba122aba7d048809e2330ee6cbe218"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -151,8 +157,8 @@ Protected Attributes</h2></td></tr>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 * </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a803e1db59ce7b20ba3f1d0bbe3e57404" name="a803e1db59ce7b20ba3f1d0bbe3e57404"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a803e1db59ce7b20ba3f1d0bbe3e57404">&#9670;&#160;</a></span>Task() <span class="overload">[1/2]</span></h2>
+<a id="a826ebd3695c0f200dd3ffc42aa0b63f7" name="a826ebd3695c0f200dd3ffc42aa0b63f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a826ebd3695c0f200dd3ffc42aa0b63f7">&#9670;&#160;</a></span>Task() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -170,7 +176,7 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>stackSize</em>, </td>
+          <td class="paramname"><em>stackSizeWords</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -196,8 +202,15 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Defines and creates a FreeRTOS task. </p>
+<p>Defines the task parameters; the actual FreeRTOS task is only created when <a class="el" href="classaudio__tools_1_1_task.html#ac1d9b45dd981a313a51ec91aca72a853">begin()</a> is called (typically from <a class="el" href="_main_8h.html#a4fc01d736fe50cf5b977f755b675f11d">setup()</a>), so that it is safe to declare a <a class="el" href="classaudio__tools_1_1_task.html" title="FreeRTOS task.">Task</a> as a global object. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>task name, used for debugging (e.g. in FreeRTOS trace tools); must stay valid for the lifetime of the task </td></tr>
+    <tr><td class="paramname">stackSizeWords</td><td>stack depth in words, not bytes (stack size in bytes = stackSizeWords * sizeof(StackType_t)); too small a value can cause a stack overflow, which on some platforms (e.g. RP2040/arduino-pico) halts the whole system instead of failing gracefully </td></tr>
+    <tr><td class="paramname">priority</td><td>FreeRTOS task priority; valid range and meaning are platform-specific (bounded by configMAX_PRIORITIES, which differs a lot between platforms, e.g. RP2040/arduino-pico only goes up to 7) </td></tr>
+    <tr><td class="paramname">core</td><td>core to pin the task to (0 or 1), or -1 to let the scheduler decide; only relevant on multi-core targets </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -280,8 +293,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a0924715b76f5f0305eda62e802cfcf2b" name="a0924715b76f5f0305eda62e802cfcf2b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0924715b76f5f0305eda62e802cfcf2b">&#9670;&#160;</a></span>create()</h2>
+<a id="a724bcf01bf6edc3199f3d2f258d536ab" name="a724bcf01bf6edc3199f3d2f258d536ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a724bcf01bf6edc3199f3d2f258d536ab">&#9670;&#160;</a></span>create()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -299,7 +312,7 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>stackSize</em>, </td>
+          <td class="paramname"><em>stackSizeWords</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -325,8 +338,12 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>If you used the empty constructor, you need to call create! </p>
+<p>If you used the empty constructor, you need to call create! </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stackSizeWords</td><td>stack depth in words, not bytes </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -622,6 +639,94 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">void* ref</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a28c8055cde540f46d40018d0bde70b9e" name="a28c8055cde540f46d40018d0bde70b9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28c8055cde540f46d40018d0bde70b9e">&#9670;&#160;</a></span>task_core</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int task_core = -1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad87bb135e802a9cd9c35e58f6a74d417" name="ad87bb135e802a9cd9c35e58f6a74d417"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad87bb135e802a9cd9c35e58f6a74d417">&#9670;&#160;</a></span>task_name</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* task_name = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a282f7a55c99a4cf6446d23e343aeca6c" name="a282f7a55c99a4cf6446d23e343aeca6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a282f7a55c99a4cf6446d23e343aeca6c">&#9670;&#160;</a></span>task_priority</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int task_priority = 1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a28070049410ce8dc0653c915ebe14686" name="a28070049410ce8dc0653c915ebe14686"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28070049410ce8dc0653c915ebe14686">&#9670;&#160;</a></span>task_stack_size</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int task_stack_size = 0</td>
         </tr>
       </table>
   </td>
