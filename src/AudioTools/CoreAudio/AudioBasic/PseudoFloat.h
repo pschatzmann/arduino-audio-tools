@@ -155,6 +155,23 @@ class PseudoFloat {
   bool operator==(float o) const { return *this == PseudoFloat(o); }
   bool operator!=(float o) const { return *this != PseudoFloat(o); }
 
+  // Same exact-match-ambiguity issue as the float overloads above, but for
+  // `int` literals (e.g. `1 - pseudoFloatValue`, `radius > 16383`): without
+  // these, the compiler has to choose between the float overload (needs an
+  // int->float conversion) and the built-in int operator (reachable from
+  // PseudoFloat via the implicit operator float() followed by a
+  // floating-integral conversion), and neither dominates the other.
+  PseudoFloat operator+(int o) const { return *this + PseudoFloat(o); }
+  PseudoFloat operator-(int o) const { return *this - PseudoFloat(o); }
+  PseudoFloat operator*(int o) const { return *this * PseudoFloat(o); }
+  PseudoFloat operator/(int o) const { return *this / PseudoFloat(o); }
+  bool operator<(int o) const { return *this < PseudoFloat(o); }
+  bool operator>(int o) const { return *this > PseudoFloat(o); }
+  bool operator<=(int o) const { return *this <= PseudoFloat(o); }
+  bool operator>=(int o) const { return *this >= PseudoFloat(o); }
+  bool operator==(int o) const { return *this == PseudoFloat(o); }
+  bool operator!=(int o) const { return *this != PseudoFloat(o); }
+
   int16_t mantissa() const { return m_; }
   int16_t exponent() const { return e_; }
 
@@ -249,5 +266,18 @@ inline bool operator<=(float a, PseudoFloat b) { return PseudoFloat(a) <= b; }
 inline bool operator>=(float a, PseudoFloat b) { return PseudoFloat(a) >= b; }
 inline bool operator==(float a, PseudoFloat b) { return PseudoFloat(a) == b; }
 inline bool operator!=(float a, PseudoFloat b) { return PseudoFloat(a) != b; }
+
+// Free-function overloads for `int op PseudoFloat` (int on the left), for
+// the same reason as the free `float` overloads above.
+inline PseudoFloat operator+(int a, PseudoFloat b) { return PseudoFloat(a) + b; }
+inline PseudoFloat operator-(int a, PseudoFloat b) { return PseudoFloat(a) - b; }
+inline PseudoFloat operator*(int a, PseudoFloat b) { return PseudoFloat(a) * b; }
+inline PseudoFloat operator/(int a, PseudoFloat b) { return PseudoFloat(a) / b; }
+inline bool operator<(int a, PseudoFloat b) { return PseudoFloat(a) < b; }
+inline bool operator>(int a, PseudoFloat b) { return PseudoFloat(a) > b; }
+inline bool operator<=(int a, PseudoFloat b) { return PseudoFloat(a) <= b; }
+inline bool operator>=(int a, PseudoFloat b) { return PseudoFloat(a) >= b; }
+inline bool operator==(int a, PseudoFloat b) { return PseudoFloat(a) == b; }
+inline bool operator!=(int a, PseudoFloat b) { return PseudoFloat(a) != b; }
 
 }  // namespace audio_tools
