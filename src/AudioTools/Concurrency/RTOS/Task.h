@@ -24,27 +24,44 @@ namespace audio_tools {
  */
 class Task : public ITask {
  public:
-  /// Defines and creates a FreeRTOS task
-  Task(const char* name, int stackSize, int priority = 1, int core = -1) {
-    create(name, stackSize, priority, core);
-  }
+  /// Defines the task parameters; the actual FreeRTOS task is only created
+  /// when begin() is called (typically from setup()), so that it is safe
+  /// to declare a Task as a global object.
+  /// @param name task name, used for debugging (e.g. in FreeRTOS trace
+  /// tools); must stay valid for the lifetime of the task
+  /// @param stackSizeWords stack depth in words, not bytes (stack size in
+  /// bytes = stackSizeWords * sizeof(StackType_t)); too small a value can
+  /// cause a stack overflow, which on some platforms (e.g.
+  /// RP2040/arduino-pico) halts the whole system instead of failing
+  /// gracefully
+  /// @param priority FreeRTOS task priority; valid range and meaning are
+  /// platform-specific (bounded by configMAX_PRIORITIES, which differs a
+  /// lot between platforms, e.g. RP2040/arduino-pico only goes up to 7)
+  /// @param core core to pin the task to (0 or 1), or -1 to let the
+  /// scheduler decide; only relevant on multi-core targets
+  Task(const char* name, int stackSizeWords, int priority = 1, int core = -1)
+      : task_name(name),
+        task_stack_size(stackSizeWords),
+        task_priority(priority),
+        task_core(core) {}
 
   Task() = default;
   ~Task() { remove(); }
 
   /// If you used the empty constructor, you need to call create!
-  bool create(const char* name, int stackSize, int priority = 1,
+  /// @param stackSizeWords stack depth in words, not bytes
+  bool create(const char* name, int stackSizeWords, int priority = 1,
               int core = -1) {
     if (xHandle != 0) return false;
 #ifdef ESP32
     if (core >= 0)
-      xTaskCreatePinnedToCore(task_loop, name, stackSize, this, priority,
+      xTaskCreatePinnedToCore(task_loop, name, stackSizeWords, this, priority,
                               &xHandle, core);
     else
-      xTaskCreate(task_loop, name, stackSize, this, priority, &xHandle);
+      xTaskCreate(task_loop, name, stackSizeWords, this, priority, &xHandle);
     suspend();
 #else
-    xTaskCreate(task_loop, name, stackSize, this, priority, &xHandle);
+    xTaskCreate(task_loop, name, stackSizeWords, this, priority, &xHandle);
     suspend();
 #if defined(configUSE_CORE_AFFINITY) && (configUSE_CORE_AFFINITY == 1) && \
     (configNUMBER_OF_CORES > 1)
@@ -67,6 +84,9 @@ class Task : public ITask {
 
   bool begin(std::function<void()> process) {
     LOGI("staring task");
+    if (xHandle == nullptr && task_name != nullptr) {
+      create(task_name, task_stack_size, task_priority, task_core);
+    }
     loop_code = process;
     resume();
     return true;
@@ -101,6 +121,10 @@ class Task : public ITask {
   TaskHandle_t xHandle = nullptr;
   std::function<void()> loop_code = nop;
   void *ref;
+  const char* task_name = nullptr;
+  int task_stack_size = 0;
+  int task_priority = 1;
+  int task_core = -1;
 
   static void nop() { delay(100); }
 
