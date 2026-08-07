@@ -240,7 +240,7 @@ var searchData=
   ['tx_5fcfg_237',['tx_cfg',['../classaudio__tools_1_1_i2_s_driver_zephyr.html#aafd96047dd5ea1f49f2fd75525ba0954',1,'audio_tools::I2SDriverZephyr']]],
   ['tx_5fchan_238',['tx_chan',['../classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#a728fd31256e227816f5c551fc564e2bd',1,'audio_tools::I2SDriverESP32V1']]],
   ['tx_5fcount_239',['tx_count',['../_constants_e_s_p32_8h.html#a578092cda6c6ba1efc57aaf44393adbe',1,'TX_COUNT:&#160;ConstantsESP32.h'],['../_constants_arduino_8h.html#a578092cda6c6ba1efc57aaf44393adbe',1,'TX_COUNT:&#160;ConstantsArduino.h']]],
-  ['tx_5fdone_5fcb_5f_240',['tx_done_cb_',['../classaudio__tools_1_1_u_s_b_audio_device_base.html#a2df8031abfdaae2e83478c0a10ac9a07',1,'audio_tools::USBAudioDeviceBase']]],
+  ['tx_5fdone_5fcb_5f_240',['tx_done_cb_',['../classaudio__tools_1_1_u_s_b_audio_device_base.html#a4e1f3634cd199188b9d5b0f86afd822d',1,'audio_tools::USBAudioDeviceBase']]],
   ['tx_5ffifo_5fread_5ftotal_5f_241',['tx_fifo_read_total_',['../classaudio__tools_1_1_u_s_b_audio_device_base.html#a4a2d6c7dca40aa71e54c7504fd45d0ee',1,'audio_tools::USBAudioDeviceBase']]],
   ['tx_5fframe_5fbuffer_242',['tx_frame_buffer',['../classaudio__tools_1_1_h_d_l_c_stream.html#a96345dd380044bf65f94a66158407526',1,'audio_tools::HDLCStream']]],
   ['tx_5fframe_5fbytes_5flast_5f_243',['tx_frame_bytes_last_',['../classaudio__tools_1_1_u_s_b_audio_device_base.html#a5ebd5cc0f7cc3c4691f9cda1f75f1519',1,'audio_tools::USBAudioDeviceBase']]],

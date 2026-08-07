@@ -109,7 +109,7 @@ var searchData=
   ['tx_5fbuffer_106',['tx_buffer',['../classaudio__tools_1_1_n_r_f24_stream.html#a61b34603ccfa6b4efec016529a659509',1,'audio_tools::NRF24Stream::tx_buffer'],['../classaudio__tools_1_1_v_b_a_n_stream.html#a4d011dfc901fcb4204ab139d9202eb7c',1,'audio_tools::VBANStream::tx_buffer']]],
   ['tx_5fcfg_107',['tx_cfg',['../classaudio__tools_1_1_i2_s_driver_zephyr.html#aafd96047dd5ea1f49f2fd75525ba0954',1,'audio_tools::I2SDriverZephyr']]],
   ['tx_5fchan_108',['tx_chan',['../classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#a728fd31256e227816f5c551fc564e2bd',1,'audio_tools::I2SDriverESP32V1']]],
-  ['tx_5fdone_5fcb_5f_109',['tx_done_cb_',['../classaudio__tools_1_1_u_s_b_audio_device_base.html#a2df8031abfdaae2e83478c0a10ac9a07',1,'audio_tools::USBAudioDeviceBase']]],
+  ['tx_5fdone_5fcb_5f_109',['tx_done_cb_',['../classaudio__tools_1_1_u_s_b_audio_device_base.html#a4e1f3634cd199188b9d5b0f86afd822d',1,'audio_tools::USBAudioDeviceBase']]],
   ['tx_5ffifo_5fread_5ftotal_5f_110',['tx_fifo_read_total_',['../classaudio__tools_1_1_u_s_b_audio_device_base.html#a4a2d6c7dca40aa71e54c7504fd45d0ee',1,'audio_tools::USBAudioDeviceBase']]],
   ['tx_5fframe_5fbuffer_111',['tx_frame_buffer',['../classaudio__tools_1_1_h_d_l_c_stream.html#a96345dd380044bf65f94a66158407526',1,'audio_tools::HDLCStream']]],
   ['tx_5fframe_5fbytes_5flast_5f_112',['tx_frame_bytes_last_',['../classaudio__tools_1_1_u_s_b_audio_device_base.html#a5ebd5cc0f7cc3c4691f9cda1f75f1519',1,'audio_tools::USBAudioDeviceBase']]],
