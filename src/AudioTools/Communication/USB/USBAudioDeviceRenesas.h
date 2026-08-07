@@ -100,6 +100,13 @@ class USBAudioDeviceRenesas : public USBAudioDeviceBase {
    *  either platform). */
   BaseBuffer<uint8_t>& bufferRx() override { return buffer_rx_; }
 
+  /** @brief No-op: `_usbfs_interrupt_handler()` in the core's USB.cpp already
+   *  calls `tud_task()` directly from the USB ISR on every interrupt, so
+   *  polling it again here would be redundant (tud_task() is not
+   *  re-entrant). */
+  void serviceUSB() override {}
+
+
  protected:
   USBAudioBackendTinyUSB backend_impl_;
   RingBufferSPSC<uint8_t> buffer_tx_;
@@ -107,12 +114,6 @@ class USBAudioDeviceRenesas : public USBAudioDeviceBase {
   bool begin_called_ = false;
 
   USBAudioBackend& backend() override { return backend_impl_; }
-
-  /** @brief No-op: `_usbfs_interrupt_handler()` in the core's USB.cpp already
-   *  calls `tud_task()` directly from the USB ISR on every interrupt, so
-   *  polling it again here would be redundant (tud_task() is not
-   *  re-entrant). */
-  void serviceTinyUSB() override {}
 
   /**
    * @brief Starts the RA4M1's native USB peripheral via the core's

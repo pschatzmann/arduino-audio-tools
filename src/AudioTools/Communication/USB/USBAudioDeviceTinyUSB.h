@@ -93,20 +93,28 @@ class USBAudioDeviceTinyUSB : public USBAudioDeviceBase,
    *  either platform). */
   BaseBuffer<uint8_t>& bufferRx() override { return buffer_rx_; }
 
+  /** @brief Process pending USB events. Skipped when a dedicated FreeRTOS
+   *  task already calls tud_task() continuously (see usb_task_active_,
+   *  set by USBAudioDeviceTinyUSBFreeRTOS) -- tud_task() is not re-entrant.
+   */
+  void serviceUSB() override {
+    if (!usb_task_active_ && core == getActualCore()) tud_task();
+  }
+
+  int getActualCore() const override {
+#ifdef RP2040_HOWER 
+    return get_core_num();
+#else
+    return -1;  
+#endif
+  }
+
  protected:
   USBAudioBackendTinyUSB backend_impl_;
   RingBufferSPSC<uint8_t> buffer_tx_;
   RingBufferSPSC<uint8_t> buffer_rx_;
 
   USBAudioBackend& backend() override { return backend_impl_; }
-
-  /** @brief Process pending USB events. Skipped when a dedicated FreeRTOS
-   *  task already calls tud_task() continuously (see usb_task_active_,
-   *  set by USBAudioDeviceTinyUSBFreeRTOS) -- tud_task() is not re-entrant.
-   */
-  void serviceTinyUSB() override {
-    if (!usb_task_active_) tud_task();
-  }
 
   bool beginUSB() override {
     TinyUSBDevice.setID(config_.vid, config_.pid);

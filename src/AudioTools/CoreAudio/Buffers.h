@@ -118,6 +118,11 @@ class BaseBuffer {
            static_cast<float>(size());
   }
 
+  /// Returns the free space of the buffer in %
+  virtual float freePercent() {
+    return 100.0 - levelPercent();
+  }
+
   /// Resizes the buffer if supported: returns false if not supported
   virtual bool resize(size_t bytes) {
     LOGE("resize not implemented for this buffer");

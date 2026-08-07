@@ -112,6 +112,15 @@ class USBAudioDeviceESP32 : public USBAudioDeviceBase {
   /** @brief Returns cross-core safe RX buffer (FreeRTOS queue of blocks). */
   BaseBuffer<uint8_t>& bufferRx() override { return buffer_rx_; }
 
+  /// Returns the actual core on which the call is running (for RP2040)
+  int getActualCore() const override  { return xPortGetCoreID();}
+
+  /** @brief No-op: the arduino-esp32 framework already runs a dedicated
+   *  FreeRTOS task that calls tud_task() continuously, so the base class's
+   *  application-driven pumping must not also run here. */
+  void serviceUSB() override {}
+
+
  protected:
   USBAudioBackendTinyUSB backend_impl_;
   USBAudioBackend& backend() override { return backend_impl_; }
@@ -170,11 +179,6 @@ class USBAudioDeviceESP32 : public USBAudioDeviceBase {
     if (isEpInEnabled()) buffer_tx_.resize(block_sz * block_cnt);
     if (isEpOutEnabled()) buffer_rx_.resize(block_sz * block_cnt);
   }
-
-  /** @brief No-op: the arduino-esp32 framework already runs a dedicated
-   *  FreeRTOS task that calls tud_task() continuously, so the base class's
-   *  application-driven pumping must not also run here. */
-  void serviceTinyUSB() override {}
 
   /**
    * @brief Configure and start the ESP32 USB stack.

@@ -332,6 +332,9 @@ public:
         return false;
       }
 
+      core = getActualCore();
+      LOGI("USB on core: %d", core);
+
       // Resize platform buffers — virtual so each platform uses the right API.
       resizeBuffers();
 
@@ -363,6 +366,7 @@ public:
         return false;
       }
       is_started_ = true;
+      rx_primed_ = false;  // re-arm the one-shot startup prime for this session
     }
 
     // Push current state to the host.  sendInterruptNotification()
@@ -679,7 +683,7 @@ public:
    *  (alt=0) so StreamCopy doesn't report write errors before recording. */
   size_t write(const uint8_t* data, size_t len) {
     if (!is_started_) return 0;
-    serviceTinyUSB();
+    serviceUSB();
 
     // disregard data if the host has not opened the capture device (alt=0)
     if (!isStreamingActiveTx()) return len;
@@ -688,7 +692,7 @@ public:
     if (config_.volume_active) processVolume((uint8_t*)data, len);
 
     // Write all data, retrying if the buffer is full.  On single-core
-    // platforms (RP2040), serviceTinyUSB() drains the buffer by running
+    // platforms (RP2040), serviceUSB() drains the buffer by running
     // tud_task() → xfer_cb.  On dual-core (ESP32), the USB task drains
     // independently and the SynchronizedNBufferRTOS blocks internally.
     size_t written = 0;
@@ -696,7 +700,7 @@ public:
       int n = bufferTx().writeArray(data + written, len - written);
       written += n;
       if (written < len) {
-        serviceTinyUSB();  // drain buffer to make space
+        serviceUSB();  // drain buffer to make space
         if (!isStreamingActiveTx()) break;  // host stopped
       }
     }
@@ -704,16 +708,38 @@ public:
   }
 
   /** @brief Receive audio data from the host (host → device, speaker/playback).
-   */
+   *  Until bufferRx() has filled past rx_start_fill_percent_ at least once
+   *  after begin(), no data is returned. This is a one-shot startup prime
+   *  only -- once reached, readBytes() keeps draining normally for the rest
+   *  of the session and is not gated again by later underruns. */
   size_t readBytes(uint8_t* buffer, size_t bufsize) {
     if (!is_started_) return 0;
-    serviceTinyUSB();
+    serviceUSB();
+
+    if (!rx_primed_) {
+      if (rx_start_fill_percent_ > 0 &&
+          bufferRx().levelPercent() < rx_start_fill_percent_)
+        return 0;
+      rx_primed_ = true;
+    }
+
     // get the data from the buffer
     size_t ret = bufferRx().readArray(buffer, bufsize);
     // upate the volume
     if (config_.volume_active) processVolume(buffer, ret);
 
     return ret;
+  }
+
+  /** @brief Delays readBytes() from returning any data until bufferRx() has
+   *  filled past this percentage; purely a startup prime -- once reached,
+   *  readBytes() is never gated again for the rest of the session (a later
+   *  underrun does not re-arm it). Defaults to 50. Set to 0 to disable and
+   *  return data as soon as any is available.
+   *  @param percent 0..100. */
+  void setRxStartFillPercent(uint8_t percent) {
+    rx_start_fill_percent_ = percent > 100 ? 100 : percent;
+    rx_primed_ = false;
   }
 
   /** @brief Bytes of received audio waiting in the RX buffer. */
@@ -812,6 +838,9 @@ public:
     return audiod_fct_.empty() ? 0 : audiod_fct_[0].interval_tx;
   }
 
+  /// Returns the actual core on which the call is running (for RP2040)
+  virtual int getActualCore() const { return -1;}
+
  protected:
   bool is_started_ = false;
   bool usb_task_active_ = false;  // true while a dedicated tud_task() FreeRTOS task is running
@@ -823,6 +852,9 @@ public:
   volatile uint32_t rx_dropped_bytes_ = 0;
   volatile uint16_t tx_frame_bytes_last_ = 0;
   volatile uint32_t tx_xferred_last_ = 0;
+  int core = -1;
+  uint8_t rx_start_fill_percent_ = 50;  // 0 = gate disabled
+  bool rx_primed_ = false;
 
   bool is_active_ = false;
   // ── Volume / mute state (sized to channels+1 in begin()) ─────────────────
@@ -914,7 +946,7 @@ public:
    *         stack's event loop is inherently stack-specific and has no
    *         equivalent on a native-HAL backend, so it is not part of
    *         USBAudioBackend. */
-  virtual void serviceTinyUSB() = 0;
+  virtual void serviceUSB() = 0;
 
   /** @brief Returns the backend used for all raw USB-stack calls (TinyUSB
    *  today, or a future native-HAL backend). Must be overridden by every
@@ -1120,16 +1152,22 @@ public:
           uint32_t thr = audio->feedback.compute.fifo_count.fifo_lvl_thr;
           uint32_t nom = audio->feedback.compute.fifo_count.nom_value;
           if (avg > thr) {
+            // Buffer fuller than the target level: ask the host to slow
+            // down. rate_const[1] is scaled so avg==fifo_depth (full) maps
+            // exactly to min_value.
+            uint32_t drop =
+                (uint32_t)audio->feedback.compute.fifo_count.rate_const[1] *
+                (avg - thr);
+            audio->feedback.value =
+                (nom > drop) ? nom - drop : audio->feedback.min_value;
+          } else {
+            // Buffer emptier than the target level: ask the host to speed
+            // up. rate_const[0] is scaled so avg==0 (empty) maps exactly to
+            // max_value.
             audio->feedback.value =
                 nom +
                 (uint32_t)audio->feedback.compute.fifo_count.rate_const[0] *
-                    (avg - thr);
-          } else {
-            uint32_t drop =
-                (uint32_t)audio->feedback.compute.fifo_count.rate_const[1] *
-                (thr - avg);
-            audio->feedback.value =
-                (nom > drop) ? nom - drop : audio->feedback.min_value;
+                    (thr - avg);
           }
           uint32_t clamped = audio->feedback.value < audio->feedback.min_value
                                 ? audio->feedback.min_value
