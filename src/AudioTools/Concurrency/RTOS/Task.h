@@ -10,6 +10,7 @@
 #endif
 #include <functional>
 #include "AudioTools/Concurrency/ITask.h"
+#include "AudioLogger.h"
 
 namespace audio_tools {
 
@@ -56,7 +57,10 @@ class Task : public ITask {
     // configMAX_PRIORITIES varies a lot between platforms (e.g.
     // RP2040/arduino-pico only goes up to 7); clamp to avoid undefined
     // behavior when a caller-supplied priority is out of range
-    if (priority >= configMAX_PRIORITIES) priority = configMAX_PRIORITIES - 1;
+    if (priority >= configMAX_PRIORITIES) {
+       priority = configMAX_PRIORITIES - 1;
+       LOGW("clamped task priority to %d ", priority);
+    }
 #ifdef ESP32
     if (core >= 0)
       xTaskCreatePinnedToCore(task_loop, name, stackSizeWords, this, priority,
