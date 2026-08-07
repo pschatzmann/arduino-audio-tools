@@ -179,6 +179,8 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a9089e9c40db82122a499b9620e2cb54e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a793b0416c25e39874535ef38109b3260" id="r_a793b0416c25e39874535ef38109b3260"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html#a793b0416c25e39874535ef38109b3260">product</a> = &quot;USB Audio&quot;</td></tr>
 <tr class="separator:a793b0416c25e39874535ef38109b3260"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b73ecf75f50ac783c40631f67f0d8c7" id="r_a9b73ecf75f50ac783c40631f67f0d8c7"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html#a9b73ecf75f50ac783c40631f67f0d8c7">rx_start_fill_percent</a> = 20</td></tr>
+<tr class="separator:a9b73ecf75f50ac783c40631f67f0d8c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e86c53dfa0ad5dc0d2ecd0304fabc95" id="r_a0e86c53dfa0ad5dc0d2ecd0304fabc95"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__basic.html#ga61cb255f24ebd0bbb95f02eaad61599f">sample_rate_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> = <a class="el" href="_audio_tools_config_8h.html#abe9b1c28165a7071e354bd9d7823ca1a">DEFAULT_SAMPLE_RATE</a></td></tr>
 <tr class="memdesc:a0e86c53dfa0ad5dc0d2ecd0304fabc95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sample Rate: e.g 44100.  <br /></td></tr>
 <tr class="separator:a0e86c53dfa0ad5dc0d2ecd0304fabc95"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -831,6 +833,21 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9b73ecf75f50ac783c40631f67f0d8c7" name="a9b73ecf75f50ac783c40631f67f0d8c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b73ecf75f50ac783c40631f67f0d8c7">&#9670;&#160;</a></span>rx_start_fill_percent</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t rx_start_fill_percent = 20</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Delays readBytes() from returning any data until bufferRx() has filled past this percentage; purely a startup prime &ndash; once reached, readBytes() is never gated again for the rest of the session (a later underrun does not re-arm it). Set to 0 to disable and return data as soon as any is available. Values above 100 are clamped. </p>
 
 </div>
 </div>

@@ -272,7 +272,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a90622bd78258a36bbcf63426b28307ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true when <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a601fb7cf1fc15db50c71a826f084f934" title="(Re-)start the USB audio device with the current config.">begin()</a> has been called and the USB host has mounted the device.  <br /></td></tr>
 <tr class="separator:a90622bd78258a36bbcf63426b28307ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af3322ed0e24d11005573274c1c1d069d" id="r_af3322ed0e24d11005573274c1c1d069d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#af3322ed0e24d11005573274c1c1d069d">readBytes</a> (uint8_t *buffer, size_t bufsize)</td></tr>
-<tr class="memdesc:af3322ed0e24d11005573274c1c1d069d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receive audio data from the host (host → device, speaker/playback). Until <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a8047bb6432da76f639976f03f85686f9" title="Returns the RX audio buffer. Must be overridden by subclasses.">bufferRx()</a> has filled past rx_start_fill_percent_ at least once after <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a601fb7cf1fc15db50c71a826f084f934" title="(Re-)start the USB audio device with the current config.">begin()</a>, no data is returned. This is a one-shot startup prime only &ndash; once reached, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#af3322ed0e24d11005573274c1c1d069d" title="Receive audio data from the host (host → device, speaker/playback). Until bufferRx() has filled past ...">readBytes()</a> keeps draining normally for the rest of the session and is not gated again by later underruns.  <br /></td></tr>
+<tr class="memdesc:af3322ed0e24d11005573274c1c1d069d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receive audio data from the host (host → device, speaker/playback). Until <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a8047bb6432da76f639976f03f85686f9" title="Returns the RX audio buffer. Must be overridden by subclasses.">bufferRx()</a> has filled past config.rx_start_fill_percent at least once after <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a601fb7cf1fc15db50c71a826f084f934" title="(Re-)start the USB audio device with the current config.">begin()</a>, no data is returned. This is a one-shot startup prime only &ndash; once reached, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#af3322ed0e24d11005573274c1c1d069d" title="Receive audio data from the host (host → device, speaker/playback). Until bufferRx() has filled past ...">readBytes()</a> keeps draining normally for the rest of the session and is not gated again by later underruns.  <br /></td></tr>
 <tr class="separator:af3322ed0e24d11005573274c1c1d069d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36e26f40121eda38b0042dcba026ab82" id="r_a36e26f40121eda38b0042dcba026ab82"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_stream.html#a36e26f40121eda38b0042dcba026ab82">readSilence</a> (uint8_t *buffer, size_t length)</td></tr>
 <tr class="memdesc:a36e26f40121eda38b0042dcba026ab82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Source to generate silence: just sets the buffer to 0.  <br /></td></tr>
@@ -337,9 +337,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a06623665db8a9023cda13dadfd8572ae" id="r_a06623665db8a9023cda13dadfd8572ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a06623665db8a9023cda13dadfd8572ae">setRxDoneCallback</a> (std::function&lt; bool(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *, uint8_t, <a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *, uint16_t)&gt; cb)</td></tr>
 <tr class="memdesc:a06623665db8a9023cda13dadfd8572ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback for RX done events.  <br /></td></tr>
 <tr class="separator:a06623665db8a9023cda13dadfd8572ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a31eaef385f9346b902528544d022ec04" id="r_a31eaef385f9346b902528544d022ec04"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a31eaef385f9346b902528544d022ec04">setRxStartFillPercent</a> (uint8_t percent)</td></tr>
-<tr class="memdesc:a31eaef385f9346b902528544d022ec04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delays <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#af3322ed0e24d11005573274c1c1d069d" title="Receive audio data from the host (host → device, speaker/playback). Until bufferRx() has filled past ...">readBytes()</a> from returning any data until <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a8047bb6432da76f639976f03f85686f9" title="Returns the RX audio buffer. Must be overridden by subclasses.">bufferRx()</a> has filled past this percentage; purely a startup prime &ndash; once reached, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#af3322ed0e24d11005573274c1c1d069d" title="Receive audio data from the host (host → device, speaker/playback). Until bufferRx() has filled past ...">readBytes()</a> is never gated again for the rest of the session (a later underrun does not re-arm it). Defaults to 50. Set to 0 to disable and return data as soon as any is available.  <br /></td></tr>
-<tr class="separator:a31eaef385f9346b902528544d022ec04"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abea96ff21e0994267e6200114726b1e8" id="r_abea96ff21e0994267e6200114726b1e8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#abea96ff21e0994267e6200114726b1e8">setSampleRateCallback</a> (std::function&lt; void(uint32_t)&gt; cb)</td></tr>
 <tr class="memdesc:abea96ff21e0994267e6200114726b1e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback invoked when the host (or device) changes the sample rate.  <br /></td></tr>
 <tr class="separator:abea96ff21e0994267e6200114726b1e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -578,8 +575,6 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a83f536376c6b0d270a088a83511013b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a0da3d1e6d01a48890a48c75cf06480" id="r_a5a0da3d1e6d01a48890a48c75cf06480"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a5a0da3d1e6d01a48890a48c75cf06480">rx_primed_</a> = false</td></tr>
 <tr class="separator:a5a0da3d1e6d01a48890a48c75cf06480"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10f80c5ea12922178bffa7ca663fa8d9" id="r_a10f80c5ea12922178bffa7ca663fa8d9"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a10f80c5ea12922178bffa7ca663fa8d9">rx_start_fill_percent_</a> = 50</td></tr>
-<tr class="separator:a10f80c5ea12922178bffa7ca663fa8d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5288bf9051a52c39a999fa8dfaf6ac1a" id="r_a5288bf9051a52c39a999fa8dfaf6ac1a"><td class="memItemLeft" align="right" valign="top">volatile uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a5288bf9051a52c39a999fa8dfaf6ac1a">rx_total_bytes_</a> = 0</td></tr>
 <tr class="separator:a5288bf9051a52c39a999fa8dfaf6ac1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a855651f86cae3504db41a3e3632f978e" id="r_a855651f86cae3504db41a3e3632f978e"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(uint32_t)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a855651f86cae3504db41a3e3632f978e">sample_rate_cb_</a></td></tr>
@@ -3945,7 +3940,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Receive audio data from the host (host → device, speaker/playback). Until <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#acb49b3d87009a5a12096e51f330f2921" title="Returns cross-core safe RX buffer (FreeRTOS queue of blocks).">bufferRx()</a> has filled past rx_start_fill_percent_ at least once after <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a601fb7cf1fc15db50c71a826f084f934" title="(Re-)start the USB audio device with the current config.">begin()</a>, no data is returned. This is a one-shot startup prime only &ndash; once reached, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#af3322ed0e24d11005573274c1c1d069d" title="Receive audio data from the host (host → device, speaker/playback). Until bufferRx() has filled past ...">readBytes()</a> keeps draining normally for the rest of the session and is not gated again by later underruns. </p>
+<p>Receive audio data from the host (host → device, speaker/playback). Until <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#acb49b3d87009a5a12096e51f330f2921" title="Returns cross-core safe RX buffer (FreeRTOS queue of blocks).">bufferRx()</a> has filled past config.rx_start_fill_percent at least once after <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a601fb7cf1fc15db50c71a826f084f934" title="(Re-)start the USB audio device with the current config.">begin()</a>, no data is returned. This is a one-shot startup prime only &ndash; once reached, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#af3322ed0e24d11005573274c1c1d069d" title="Receive audio data from the host (host → device, speaker/playback). Until bufferRx() has filled past ...">readBytes()</a> keeps draining normally for the rest of the session and is not gated again by later underruns. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_stream.html#a6406b16cb31ad79201459cb48b1ad6f0">AudioStream</a>.</p>
 
@@ -4813,40 +4808,6 @@ template&lt;typename T &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">cb</td><td>Callback function. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a31eaef385f9346b902528544d022ec04" name="a31eaef385f9346b902528544d022ec04"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a31eaef385f9346b902528544d022ec04">&#9670;&#160;</a></span>setRxStartFillPercent()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void setRxStartFillPercent </td>
-          <td>(</td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>percent</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Delays <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#af3322ed0e24d11005573274c1c1d069d" title="Receive audio data from the host (host → device, speaker/playback). Until bufferRx() has filled past ...">readBytes()</a> from returning any data until <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#acb49b3d87009a5a12096e51f330f2921" title="Returns cross-core safe RX buffer (FreeRTOS queue of blocks).">bufferRx()</a> has filled past this percentage; purely a startup prime &ndash; once reached, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#af3322ed0e24d11005573274c1c1d069d" title="Receive audio data from the host (host → device, speaker/playback). Until bufferRx() has filled past ...">readBytes()</a> is never gated again for the rest of the session (a later underrun does not re-arm it). Defaults to 50. Set to 0 to disable and return data as soon as any is available. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">percent</td><td>0..100. </td></tr>
   </table>
   </dd>
 </dl>
@@ -6131,28 +6092,6 @@ template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">bool rx_primed_ = false</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a10f80c5ea12922178bffa7ca663fa8d9" name="a10f80c5ea12922178bffa7ca663fa8d9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a10f80c5ea12922178bffa7ca663fa8d9">&#9670;&#160;</a></span>rx_start_fill_percent_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint8_t rx_start_fill_percent_ = 50</td>
         </tr>
       </table>
   </td>
