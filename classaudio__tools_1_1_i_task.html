@@ -102,6 +102,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a77064a4e94683438ef186bd54aad44e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa540e86022c1f72380d1014d98f38f43" id="r_aa540e86022c1f72380d1014d98f38f43"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i_task.html#aa540e86022c1f72380d1014d98f38f43">end</a> ()=0</td></tr>
 <tr class="separator:aa540e86022c1f72380d1014d98f38f43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1237c8e564a05608bf13641d5f61fa7f" id="r_a1237c8e564a05608bf13641d5f61fa7f"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i_task.html#a1237c8e564a05608bf13641d5f61fa7f">isEnded</a> ()=0</td></tr>
+<tr class="separator:a1237c8e564a05608bf13641d5f61fa7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae18fdecaaf0c007c3063f6f673633b91" id="r_ae18fdecaaf0c007c3063f6f673633b91"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i_task.html#ae18fdecaaf0c007c3063f6f673633b91">isRunning</a> ()=0</td></tr>
+<tr class="separator:ae18fdecaaf0c007c3063f6f673633b91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa03f1adfa2d94c4eb874f7c6b75111bc" id="r_aa03f1adfa2d94c4eb874f7c6b75111bc"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i_task.html#aa03f1adfa2d94c4eb874f7c6b75111bc">isSuspended</a> ()=0</td></tr>
+<tr class="separator:aa03f1adfa2d94c4eb874f7c6b75111bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Interface for a task that can be started and stopped. </p>
@@ -185,6 +191,87 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Implemented in <a class="el" href="classaudio__tools_1_1_task.html#aaf81d3fdaf258088d7692fa70cece087">Task</a>.</p>
+
+</div>
+</div>
+<a id="a1237c8e564a05608bf13641d5f61fa7f" name="a1237c8e564a05608bf13641d5f61fa7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1237c8e564a05608bf13641d5f61fa7f">&#9670;&#160;</a></span>isEnded()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool isEnded </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_task.html#a47f0005dd597f15fbd2c6a813870d821">Task</a>.</p>
+
+</div>
+</div>
+<a id="ae18fdecaaf0c007c3063f6f673633b91" name="ae18fdecaaf0c007c3063f6f673633b91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae18fdecaaf0c007c3063f6f673633b91">&#9670;&#160;</a></span>isRunning()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool isRunning </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_task.html#a40e5881f9c001c5cc38554084751adbc">Task</a>.</p>
+
+</div>
+</div>
+<a id="aa03f1adfa2d94c4eb874f7c6b75111bc" name="aa03f1adfa2d94c4eb874f7c6b75111bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa03f1adfa2d94c4eb874f7c6b75111bc">&#9670;&#160;</a></span>isSuspended()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool isSuspended </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_task.html#a43495d3672dec16e22690f68ea7bf0fc">Task</a>.</p>
 
 </div>
 </div>
