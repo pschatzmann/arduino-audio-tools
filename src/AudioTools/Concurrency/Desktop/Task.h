@@ -82,6 +82,10 @@ class Task : public ITask {
   void setReference(void *r) { ref = r; }
   void *getReference() { return ref; }
 
+  bool isSuspended() { return paused; }
+  bool isEnded() { return terminate_flag.load(); }
+  bool isRunning() { return !paused && !isEnded(); }
+
  protected:
   std::thread running_thread;
   std::thread::id thread_id{};

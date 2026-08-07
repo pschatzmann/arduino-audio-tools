@@ -87,6 +87,7 @@ class Task : public ITask {
       suspend();
       vTaskDelete(xHandle);
       xHandle = nullptr;
+      task_suspended = false;
     }
   }
 
@@ -103,9 +104,24 @@ class Task : public ITask {
   /// suspends the task
   void end() { suspend(); }
 
-  void suspend() { vTaskSuspend(xHandle); }
+  void suspend() {
+    vTaskSuspend(xHandle);
+    task_suspended = true;
+  }
 
-  void resume() { vTaskResume(xHandle); }
+  void resume() {
+    vTaskResume(xHandle);
+    task_suspended = false;
+  }
+
+  /// true if the task was created and is currently suspended
+  bool isSuspended() { return xHandle != nullptr && task_suspended; }
+
+  /// true if the task was never created or has been removed
+  bool isEnded() { return xHandle == nullptr; }
+
+  /// true if the task was created and is not suspended
+  bool isRunning() { return xHandle != nullptr && !task_suspended; }
 
   TaskHandle_t &getTaskHandle() {
     return xHandle;
@@ -133,6 +149,7 @@ class Task : public ITask {
   int task_stack_size = 0;
   int task_priority = 1;
   int task_core = -1;
+  bool task_suspended = false;
 
   static void nop() { delay(100); }
 

@@ -12,6 +12,9 @@ class ITask {
   virtual ~ITask() = default;
   virtual bool begin(std::function<void()> process) = 0;
   virtual void end() = 0;
+  virtual bool isSuspended() = 0;
+  virtual bool isEnded() = 0;
+  virtual bool isRunning() = 0;
 };
 
 }  // namespace audio_tools
