@@ -147,6 +147,13 @@ struct USBAudioConfig : public AudioInfo {
   /// 2-3 ms, and 16 packets leave no margin for those stalls.
   uint8_t fifo_packets = 32;
 
+  /// Delays readBytes() from returning any data until bufferRx() has filled
+  /// past this percentage; purely a startup prime -- once reached, readBytes()
+  /// is never gated again for the rest of the session (a later underrun does
+  /// not re-arm it). Set to 0 to disable and return data as soon as any is
+  /// available. Values above 100 are clamped.
+  uint8_t rx_start_fill_percent = 20;
+
   // ── Device identity ───────────────────────────────────────────────────────
   uint16_t vid = 0xCafe;
   uint16_t pid = 0x4002;

@@ -708,18 +708,19 @@ public:
   }
 
   /** @brief Receive audio data from the host (host → device, speaker/playback).
-   *  Until bufferRx() has filled past rx_start_fill_percent_ at least once
-   *  after begin(), no data is returned. This is a one-shot startup prime
-   *  only -- once reached, readBytes() keeps draining normally for the rest
-   *  of the session and is not gated again by later underruns. */
+   *  Until bufferRx() has filled past config.rx_start_fill_percent at least
+   *  once after begin(), no data is returned. This is a one-shot startup
+   *  prime only -- once reached, readBytes() keeps draining normally for the
+   *  rest of the session and is not gated again by later underruns. */
   size_t readBytes(uint8_t* buffer, size_t bufsize) {
     if (!is_started_) return 0;
     serviceUSB();
 
     if (!rx_primed_) {
-      if (rx_start_fill_percent_ > 0 &&
-          bufferRx().levelPercent() < rx_start_fill_percent_)
-        return 0;
+      uint8_t start_fill = config_.rx_start_fill_percent > 100
+                               ? 100
+                               : config_.rx_start_fill_percent;
+      if (start_fill > 0 && bufferRx().levelPercent() < start_fill) return 0;
       rx_primed_ = true;
     }
 
@@ -729,17 +730,6 @@ public:
     if (config_.volume_active) processVolume(buffer, ret);
 
     return ret;
-  }
-
-  /** @brief Delays readBytes() from returning any data until bufferRx() has
-   *  filled past this percentage; purely a startup prime -- once reached,
-   *  readBytes() is never gated again for the rest of the session (a later
-   *  underrun does not re-arm it). Defaults to 50. Set to 0 to disable and
-   *  return data as soon as any is available.
-   *  @param percent 0..100. */
-  void setRxStartFillPercent(uint8_t percent) {
-    rx_start_fill_percent_ = percent > 100 ? 100 : percent;
-    rx_primed_ = false;
   }
 
   /** @brief Bytes of received audio waiting in the RX buffer. */
@@ -853,7 +843,6 @@ public:
   volatile uint16_t tx_frame_bytes_last_ = 0;
   volatile uint32_t tx_xferred_last_ = 0;
   int core = -1;
-  uint8_t rx_start_fill_percent_ = 50;  // 0 = gate disabled
   bool rx_primed_ = false;
 
   bool is_active_ = false;
