@@ -636,6 +636,9 @@ class WAVDecoder : public AudioDecoder {
   struct DecoderEntry {
     AudioFormat format = AudioFormat::PCM;
     AudioDecoderExt *decoder = nullptr;
+    DecoderEntry() = default;
+    DecoderEntry(AudioFormat fmt, AudioDecoderExt *dec)
+        : format(fmt), decoder(dec) {}
   };
 
   WAVHeader header;
