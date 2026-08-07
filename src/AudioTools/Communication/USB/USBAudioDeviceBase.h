@@ -550,7 +550,7 @@ public:
    * @param cb Callback function.
    */
   void setTxDoneCallback(
-      std::function<bool(USBAudioDeviceBase*, uint8_t, audiod_function_t*)>
+      std::function<bool(USBAudioDeviceBase*, uint8_t, audiod_function_t*, uint16_t)>
           cb) {
     tx_done_cb_ = cb;
   }
@@ -836,7 +836,7 @@ public:
   USBAudioConfig active_config_;
   USBAudio2DescriptorBuilder descr_builder{config_};
   std::function<void(USBAudioDeviceBase*, uint8_t rhport)> int_done_cb_;
-  std::function<bool(USBAudioDeviceBase*, uint8_t rhport, audiod_function_t*)>
+  std::function<bool(USBAudioDeviceBase*, uint8_t rhport, audiod_function_t*, uint16_t bytes)>
       tx_done_cb_;
   std::function<bool(USBAudioDeviceBase*, uint8_t rhport, audiod_function_t*,
                      uint16_t xferred_bytes)>
@@ -1463,12 +1463,13 @@ public:
       if (isEpInEnabled() && audio->ep_in == ep_addr &&
           audio->alt_setting.size() != 0) {
         xfer_cb_tx_count_ = xfer_cb_tx_count_ + 1;
-        if (tx_done_cb_) tx_done_cb_(this, rhport, audio);
 
         uint16_t frame_bytes = isEpInFlowControlEnabled()
                                    ? audiod_tx_packet_size_fc(audio)
                                    : audio->ep_in_sz;
         if (frame_bytes > audio->ep_in_sz) frame_bytes = audio->ep_in_sz;
+        if (tx_done_cb_) tx_done_cb_(this, rhport, audio, frame_bytes);
+
         tx_frame_bytes_last_ = frame_bytes;
         tx_xferred_last_ = xferred_bytes;
 
