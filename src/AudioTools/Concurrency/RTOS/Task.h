@@ -53,6 +53,10 @@ class Task : public ITask {
   bool create(const char* name, int stackSizeWords, int priority = 1,
               int core = -1) {
     if (xHandle != 0) return false;
+    // configMAX_PRIORITIES varies a lot between platforms (e.g.
+    // RP2040/arduino-pico only goes up to 7); clamp to avoid undefined
+    // behavior when a caller-supplied priority is out of range
+    if (priority >= configMAX_PRIORITIES) priority = configMAX_PRIORITIES - 1;
 #ifdef ESP32
     if (core >= 0)
       xTaskCreatePinnedToCore(task_loop, name, stackSizeWords, this, priority,
