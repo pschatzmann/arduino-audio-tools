@@ -199,6 +199,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aaf81d3fdaf258088d7692fa70cece087"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af654b48544c195ab99fe27e7bc3ed5fe" id="r_af654b48544c195ab99fe27e7bc3ed5fe"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">flush</a> () override</td></tr>
 <tr class="separator:af654b48544c195ab99fe27e7bc3ed5fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8fb7bec4bd5011d8209a59f32127d65" id="r_ac8fb7bec4bd5011d8209a59f32127d65"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ac8fb7bec4bd5011d8209a59f32127d65">getActualCore</a> () const</td></tr>
+<tr class="memdesc:ac8fb7bec4bd5011d8209a59f32127d65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the actual core on which the call is running (for RP2040)  <br /></td></tr>
+<tr class="separator:ac8fb7bec4bd5011d8209a59f32127d65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a66e873e5d13bc9d2312574fc2baab3e3" id="r_a66e873e5d13bc9d2312574fc2baab3e3"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a66e873e5d13bc9d2312574fc2baab3e3">getAudioCount</a> () const</td></tr>
 <tr class="memdesc:a66e873e5d13bc9d2312574fc2baab3e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of audio functions (always 1).  <br /></td></tr>
 <tr class="separator:a66e873e5d13bc9d2312574fc2baab3e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -277,7 +280,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a90622bd78258a36bbcf63426b28307ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true when <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a601fb7cf1fc15db50c71a826f084f934" title="(Re-)start the USB audio device with the current config.">begin()</a> has been called and the USB host has mounted the device.  <br /></td></tr>
 <tr class="separator:a90622bd78258a36bbcf63426b28307ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af3322ed0e24d11005573274c1c1d069d" id="r_af3322ed0e24d11005573274c1c1d069d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#af3322ed0e24d11005573274c1c1d069d">readBytes</a> (uint8_t *buffer, size_t bufsize)</td></tr>
-<tr class="memdesc:af3322ed0e24d11005573274c1c1d069d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receive audio data from the host (host → device, speaker/playback).  <br /></td></tr>
+<tr class="memdesc:af3322ed0e24d11005573274c1c1d069d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receive audio data from the host (host → device, speaker/playback). Until <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a8047bb6432da76f639976f03f85686f9" title="Returns the RX audio buffer. Must be overridden by subclasses.">bufferRx()</a> has filled past rx_start_fill_percent_ at least once after <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a601fb7cf1fc15db50c71a826f084f934" title="(Re-)start the USB audio device with the current config.">begin()</a>, no data is returned. This is a one-shot startup prime only &ndash; once reached, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#af3322ed0e24d11005573274c1c1d069d" title="Receive audio data from the host (host → device, speaker/playback). Until bufferRx() has filled past ...">readBytes()</a> keeps draining normally for the rest of the session and is not gated again by later underruns.  <br /></td></tr>
 <tr class="separator:af3322ed0e24d11005573274c1c1d069d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36e26f40121eda38b0042dcba026ab82" id="r_a36e26f40121eda38b0042dcba026ab82"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_stream.html#a36e26f40121eda38b0042dcba026ab82">readSilence</a> (uint8_t *buffer, size_t length)</td></tr>
 <tr class="memdesc:a36e26f40121eda38b0042dcba026ab82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Source to generate silence: just sets the buffer to 0.  <br /></td></tr>
@@ -339,6 +342,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a06623665db8a9023cda13dadfd8572ae" id="r_a06623665db8a9023cda13dadfd8572ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a06623665db8a9023cda13dadfd8572ae">setRxDoneCallback</a> (std::function&lt; bool(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *, uint8_t, <a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *, uint16_t)&gt; cb)</td></tr>
 <tr class="memdesc:a06623665db8a9023cda13dadfd8572ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback for RX done events.  <br /></td></tr>
 <tr class="separator:a06623665db8a9023cda13dadfd8572ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31eaef385f9346b902528544d022ec04" id="r_a31eaef385f9346b902528544d022ec04"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a31eaef385f9346b902528544d022ec04">setRxStartFillPercent</a> (uint8_t percent)</td></tr>
+<tr class="memdesc:a31eaef385f9346b902528544d022ec04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delays <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#af3322ed0e24d11005573274c1c1d069d" title="Receive audio data from the host (host → device, speaker/playback). Until bufferRx() has filled past ...">readBytes()</a> from returning any data until <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a8047bb6432da76f639976f03f85686f9" title="Returns the RX audio buffer. Must be overridden by subclasses.">bufferRx()</a> has filled past this percentage; purely a startup prime &ndash; once reached, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#af3322ed0e24d11005573274c1c1d069d" title="Receive audio data from the host (host → device, speaker/playback). Until bufferRx() has filled past ...">readBytes()</a> is never gated again for the rest of the session (a later underrun does not re-arm it). Defaults to 50. Set to 0 to disable and return data as soon as any is available.  <br /></td></tr>
+<tr class="separator:a31eaef385f9346b902528544d022ec04"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abea96ff21e0994267e6200114726b1e8" id="r_abea96ff21e0994267e6200114726b1e8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#abea96ff21e0994267e6200114726b1e8">setSampleRateCallback</a> (std::function&lt; void(uint32_t)&gt; cb)</td></tr>
 <tr class="memdesc:abea96ff21e0994267e6200114726b1e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback invoked when the host (or device) changes the sample rate.  <br /></td></tr>
 <tr class="separator:abea96ff21e0994267e6200114726b1e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -482,9 +488,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a7422464f7c5c388caad12d04d0e7f7a5" id="r_a7422464f7c5c388caad12d04d0e7f7a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a7422464f7c5c388caad12d04d0e7f7a5">sendInterruptNotification</a> (uint8_t ctrlSel, uint8_t channel, uint8_t entityID)</td></tr>
 <tr class="memdesc:a7422464f7c5c388caad12d04d0e7f7a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send a UAC2 status/change notification via the AC interrupt EP.  <br /></td></tr>
 <tr class="separator:a7422464f7c5c388caad12d04d0e7f7a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc0c982a5bddb0285af605936e22a41c" id="r_afc0c982a5bddb0285af605936e22a41c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#afc0c982a5bddb0285af605936e22a41c">serviceTinyUSB</a> ()=0</td></tr>
-<tr class="memdesc:afc0c982a5bddb0285af605936e22a41c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process pending USB events on platforms where the application drives the stack (RP2040, STM32, ...). Skipped when a dedicated FreeRTOS task already calls tud_task() continuously (see usb_task_active_) - tud_task() is not re-entrant; calling it from two contexts concurrently corrupts TinyUSB's internal event queue and causes random hangs.  <br /></td></tr>
-<tr class="separator:afc0c982a5bddb0285af605936e22a41c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af448ed63efb175d73dfbd132928ea88d" id="r_af448ed63efb175d73dfbd132928ea88d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#af448ed63efb175d73dfbd132928ea88d">serviceUSB</a> ()=0</td></tr>
+<tr class="memdesc:af448ed63efb175d73dfbd132928ea88d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process pending USB events on platforms where the application drives the stack (RP2040, STM32, ...). Skipped when a dedicated FreeRTOS task already calls tud_task() continuously (see usb_task_active_) - tud_task() is not re-entrant; calling it from two contexts concurrently corrupts TinyUSB's internal event queue and causes random hangs.  <br /></td></tr>
+<tr class="separator:af448ed63efb175d73dfbd132928ea88d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a27be07e636d9943c083f6bf6c8ea90" id="r_a4a27be07e636d9943c083f6bf6c8ea90"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a4a27be07e636d9943c083f6bf6c8ea90">setConfig</a> (const <a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html">USBAudioConfig</a> &amp;cfg)</td></tr>
 <tr class="memdesc:a4a27be07e636d9943c083f6bf6c8ea90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the USB audio configuration (use begin(cfg) instead).  <br /></td></tr>
 <tr class="separator:a4a27be07e636d9943c083f6bf6c8ea90"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -523,6 +529,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:aee2c24db80d059c72be2137090a6abe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48e2afc8051a00f8a5a1eb034c4161fe" id="r_a48e2afc8051a00f8a5a1eb034c4161fe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html">USBAudioConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a48e2afc8051a00f8a5a1eb034c4161fe">config_</a></td></tr>
 <tr class="separator:a48e2afc8051a00f8a5a1eb034c4161fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18da1e1fddf1ac92da74aecf88ab2b2e" id="r_a18da1e1fddf1ac92da74aecf88ab2b2e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a18da1e1fddf1ac92da74aecf88ab2b2e">core</a> = -1</td></tr>
+<tr class="separator:a18da1e1fddf1ac92da74aecf88ab2b2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7de68334055feefe8ab9a6d41c81a12" id="r_ad7de68334055feefe8ab9a6d41c81a12"><td class="memItemLeft" align="right" valign="top">std::vector&lt; uint16_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ad7de68334055feefe8ab9a6d41c81a12">ctrl_buf_sz_</a></td></tr>
 <tr class="separator:ad7de68334055feefe8ab9a6d41c81a12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6c2c7be8affac381b81ab93749f3847" id="r_aa6c2c7be8affac381b81ab93749f3847"><td class="memItemLeft" align="right" valign="top">std::vector&lt; uint16_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#aa6c2c7be8affac381b81ab93749f3847">desc_len_</a></td></tr>
@@ -561,6 +569,10 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:aaa44e7a21843b0ada7f033f10a77f766"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83f536376c6b0d270a088a83511013b7" id="r_a83f536376c6b0d270a088a83511013b7"><td class="memItemLeft" align="right" valign="top">volatile uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a83f536376c6b0d270a088a83511013b7">rx_dropped_bytes_</a> = 0</td></tr>
 <tr class="separator:a83f536376c6b0d270a088a83511013b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a0da3d1e6d01a48890a48c75cf06480" id="r_a5a0da3d1e6d01a48890a48c75cf06480"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a5a0da3d1e6d01a48890a48c75cf06480">rx_primed_</a> = false</td></tr>
+<tr class="separator:a5a0da3d1e6d01a48890a48c75cf06480"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10f80c5ea12922178bffa7ca663fa8d9" id="r_a10f80c5ea12922178bffa7ca663fa8d9"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a10f80c5ea12922178bffa7ca663fa8d9">rx_start_fill_percent_</a> = 50</td></tr>
+<tr class="separator:a10f80c5ea12922178bffa7ca663fa8d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5288bf9051a52c39a999fa8dfaf6ac1a" id="r_a5288bf9051a52c39a999fa8dfaf6ac1a"><td class="memItemLeft" align="right" valign="top">volatile uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a5288bf9051a52c39a999fa8dfaf6ac1a">rx_total_bytes_</a> = 0</td></tr>
 <tr class="separator:a5288bf9051a52c39a999fa8dfaf6ac1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a855651f86cae3504db41a3e3632f978e" id="r_a855651f86cae3504db41a3e3632f978e"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(uint32_t)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a855651f86cae3504db41a3e3632f978e">sample_rate_cb_</a></td></tr>
@@ -2187,6 +2199,35 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ac8fb7bec4bd5011d8209a59f32127d65" name="ac8fb7bec4bd5011d8209a59f32127d65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8fb7bec4bd5011d8209a59f32127d65">&#9670;&#160;</a></span>getActualCore()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual int getActualCore </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the actual core on which the call is running (for RP2040) </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#af830c2c9103a15da634d3ff9aab55475">USBAudioDeviceESP32</a>, and <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html#af830c2c9103a15da634d3ff9aab55475">USBAudioDeviceTinyUSB</a>.</p>
+
+</div>
+</div>
 <a id="a66e873e5d13bc9d2312574fc2baab3e3" name="a66e873e5d13bc9d2312574fc2baab3e3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a66e873e5d13bc9d2312574fc2baab3e3">&#9670;&#160;</a></span>getAudioCount()</h2>
 
@@ -2349,7 +2390,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Bytes silently discarded because <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a8047bb6432da76f639976f03f85686f9" title="Returns the RX audio buffer. Must be overridden by subclasses.">bufferRx()</a> was full when they arrived. Non-zero means audio is being lost &ndash; increase fifo_packets or drain <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a8047bb6432da76f639976f03f85686f9" title="Returns the RX audio buffer. Must be overridden by subclasses.">bufferRx()</a> (<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#af3322ed0e24d11005573274c1c1d069d" title="Receive audio data from the host (host → device, speaker/playback).">readBytes()</a>) faster/more regularly. </p>
+<p>Bytes silently discarded because <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a8047bb6432da76f639976f03f85686f9" title="Returns the RX audio buffer. Must be overridden by subclasses.">bufferRx()</a> was full when they arrived. Non-zero means audio is being lost &ndash; increase fifo_packets or drain <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a8047bb6432da76f639976f03f85686f9" title="Returns the RX audio buffer. Must be overridden by subclasses.">bufferRx()</a> (<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#af3322ed0e24d11005573274c1c1d069d" title="Receive audio data from the host (host → device, speaker/playback). Until bufferRx() has filled past ...">readBytes()</a>) faster/more regularly. </p>
 
 </div>
 </div>
@@ -3753,7 +3794,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Receive audio data from the host (host → device, speaker/playback). </p>
+<p>Receive audio data from the host (host → device, speaker/playback). Until <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a8047bb6432da76f639976f03f85686f9" title="Returns the RX audio buffer. Must be overridden by subclasses.">bufferRx()</a> has filled past rx_start_fill_percent_ at least once after <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a601fb7cf1fc15db50c71a826f084f934" title="(Re-)start the USB audio device with the current config.">begin()</a>, no data is returned. This is a one-shot startup prime only &ndash; once reached, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#af3322ed0e24d11005573274c1c1d069d" title="Receive audio data from the host (host → device, speaker/playback). Until bufferRx() has filled past ...">readBytes()</a> keeps draining normally for the rest of the session and is not gated again by later underruns. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_stream.html#a6406b16cb31ad79201459cb48b1ad6f0">AudioStream</a>.</p>
 
@@ -3935,8 +3976,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="afc0c982a5bddb0285af605936e22a41c" name="afc0c982a5bddb0285af605936e22a41c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afc0c982a5bddb0285af605936e22a41c">&#9670;&#160;</a></span>serviceTinyUSB()</h2>
+<a id="af448ed63efb175d73dfbd132928ea88d" name="af448ed63efb175d73dfbd132928ea88d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af448ed63efb175d73dfbd132928ea88d">&#9670;&#160;</a></span>serviceUSB()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3945,7 +3986,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void serviceTinyUSB </td>
+          <td class="memname">virtual void serviceUSB </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -3961,7 +4002,7 @@ template&lt;typename T &gt; </div>
 <p>Process pending USB events on platforms where the application drives the stack (RP2040, STM32, ...). Skipped when a dedicated FreeRTOS task already calls tud_task() continuously (see usb_task_active_) - tud_task() is not re-entrant; calling it from two contexts concurrently corrupts TinyUSB's internal event queue and causes random hangs. </p>
 <p>ESP32 (see <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html" title="USBAudioDeviceBase subclass for ESP32-S2/S3 using the arduino-esp32 stack.">USBAudioDeviceESP32</a>) overrides this to an empty no-op, since its own FreeRTOS task already calls tud_task() continuously. TinyUSB-based platforms (<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html" title="USBAudioDeviceBase subclass for RP2040 / Adafruit TinyUSB.">USBAudioDeviceTinyUSB</a>) override this to pump tud_task() directly &ndash; driving the USB stack's event loop is inherently stack-specific and has no equivalent on a native-HAL backend, so it is not part of <a class="el" href="classaudio__tools_1_1_u_s_b_audio_backend.html" title="Abstract seam for every raw USB-stack call the UAC2 driver (USBAudioDeviceBase) needs....">USBAudioBackend</a>. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#a620a53b384e211085da3222db37e71ea">USBAudioDeviceESP32</a>, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_renesas.html#a620a53b384e211085da3222db37e71ea">USBAudioDeviceRenesas</a>, and <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html#a620a53b384e211085da3222db37e71ea">USBAudioDeviceTinyUSB</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#a54157bf4c85fde61f40c19d2735ed067">USBAudioDeviceESP32</a>, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_renesas.html#a54157bf4c85fde61f40c19d2735ed067">USBAudioDeviceRenesas</a>, and <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html#a54157bf4c85fde61f40c19d2735ed067">USBAudioDeviceTinyUSB</a>.</p>
 
 </div>
 </div>
@@ -4595,6 +4636,40 @@ template&lt;typename T &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">cb</td><td>Callback function. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a31eaef385f9346b902528544d022ec04" name="a31eaef385f9346b902528544d022ec04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31eaef385f9346b902528544d022ec04">&#9670;&#160;</a></span>setRxStartFillPercent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setRxStartFillPercent </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>percent</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Delays <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#af3322ed0e24d11005573274c1c1d069d" title="Receive audio data from the host (host → device, speaker/playback). Until bufferRx() has filled past ...">readBytes()</a> from returning any data until <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a8047bb6432da76f639976f03f85686f9" title="Returns the RX audio buffer. Must be overridden by subclasses.">bufferRx()</a> has filled past this percentage; purely a startup prime &ndash; once reached, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#af3322ed0e24d11005573274c1c1d069d" title="Receive audio data from the host (host → device, speaker/playback). Until bufferRx() has filled past ...">readBytes()</a> is never gated again for the rest of the session (a later underrun does not re-arm it). Defaults to 50. Set to 0 to disable and return data as soon as any is available. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">percent</td><td>0..100. </td></tr>
   </table>
   </dd>
 </dl>
@@ -5268,6 +5343,28 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="a18da1e1fddf1ac92da74aecf88ab2b2e" name="a18da1e1fddf1ac92da74aecf88ab2b2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18da1e1fddf1ac92da74aecf88ab2b2e">&#9670;&#160;</a></span>core</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int core = -1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ad7de68334055feefe8ab9a6d41c81a12" name="ad7de68334055feefe8ab9a6d41c81a12"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad7de68334055feefe8ab9a6d41c81a12">&#9670;&#160;</a></span>ctrl_buf_sz_</h2>
 
@@ -5699,6 +5796,50 @@ template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">volatile uint32_t rx_dropped_bytes_ = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5a0da3d1e6d01a48890a48c75cf06480" name="a5a0da3d1e6d01a48890a48c75cf06480"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a0da3d1e6d01a48890a48c75cf06480">&#9670;&#160;</a></span>rx_primed_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool rx_primed_ = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a10f80c5ea12922178bffa7ca663fa8d9" name="a10f80c5ea12922178bffa7ca663fa8d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10f80c5ea12922178bffa7ca663fa8d9">&#9670;&#160;</a></span>rx_start_fill_percent_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t rx_start_fill_percent_ = 50</td>
         </tr>
       </table>
   </td>

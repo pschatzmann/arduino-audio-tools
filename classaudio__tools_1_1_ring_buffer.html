@@ -123,6 +123,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a5e526a739923663ae76533d9ad9eb656"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3aed50bc3b4459454ccb8c64f5ced5a" id="r_ad3aed50bc3b4459454ccb8c64f5ced5a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#ad3aed50bc3b4459454ccb8c64f5ced5a">flush</a> ()</td></tr>
 <tr class="separator:ad3aed50bc3b4459454ccb8c64f5ced5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a047f603a4a26ab4870619748148c2c71" id="r_a047f603a4a26ab4870619748148c2c71"><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#a047f603a4a26ab4870619748148c2c71">freePercent</a> ()</td></tr>
+<tr class="memdesc:a047f603a4a26ab4870619748148c2c71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the free space of the buffer in %.  <br /></td></tr>
+<tr class="separator:a047f603a4a26ab4870619748148c2c71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af337ffd75e4f019ce15302c60715d84b" id="r_af337ffd75e4f019ce15302c60715d84b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_ring_buffer.html#af337ffd75e4f019ce15302c60715d84b">isEmpty</a> ()</td></tr>
 <tr class="separator:af337ffd75e4f019ce15302c60715d84b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad83053371f5afc622b82660e8bee750f" id="r_ad83053371f5afc622b82660e8bee750f"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_ring_buffer.html#ad83053371f5afc622b82660e8bee750f">isFull</a> () override</td></tr>
@@ -473,6 +476,35 @@ template&lt;typename T  = uint8_t&gt; </div>
 <p>Submit any partially-filled write buffer so the reader can access it. Only meaningful for NBuffer-style block pools; no-op for ring buffers. </p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_n_buffer.html#adac116554b543b7c4228c018a85882f5">NBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_n_buffer.html#adac116554b543b7c4228c018a85882f5">NBuffer&lt; Frame &gt;</a>, <a class="el" href="classaudio__tools_1_1_n_buffer.html#adac116554b543b7c4228c018a85882f5">NBuffer&lt; T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_n_buffer.html#adac116554b543b7c4228c018a85882f5">NBuffer&lt; uint8_t &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a047f603a4a26ab4870619748148c2c71" name="a047f603a4a26ab4870619748148c2c71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a047f603a4a26ab4870619748148c2c71">&#9670;&#160;</a></span>freePercent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T  = uint8_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual float freePercent </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the free space of the buffer in %. </p>
 
 </div>
 </div>
