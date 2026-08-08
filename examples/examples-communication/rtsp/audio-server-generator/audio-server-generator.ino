@@ -1,5 +1,5 @@
 /**
- * @file audio-generator-rtsp.ino
+ * @file audio-server-generator.ino
  * @author Phil Schatzmann
  * @brief Provide generated sine tone via RTSP. 
  * @version 0.1

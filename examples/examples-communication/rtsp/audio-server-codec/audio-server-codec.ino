@@ -1,5 +1,5 @@
 /**
- * @file audio-codec-rtsp.ino
+ * @file audio-server-codec.ino
  * @author Phil Schatzmann
  * @brief Provide Audio via RTSP using a codec. Depends on https://github.com/pschatzmann/Micro-RTSP-Audio
  * @version 0.1

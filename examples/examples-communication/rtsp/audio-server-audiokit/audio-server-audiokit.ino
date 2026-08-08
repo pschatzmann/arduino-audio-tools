@@ -1,5 +1,5 @@
 /**
- * @file audio-audiokit-rtsp.ino
+ * @file audio-server-audiokit.ino
  * @author Phil Schatzmann
  * @brief Provide Microphone from AudioKit via RTSP. Depends on https://github.com/pschatzmann/Micro-RTSP-Audio
  * @version 0.1

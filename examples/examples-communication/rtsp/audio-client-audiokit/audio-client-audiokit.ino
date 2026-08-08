@@ -1,6 +1,6 @@
 
 /**
- * @file audio-rtsp-audiokit.ino
+ * @file audio-client-audiokit.ino
  * @brief RTSP client demo using the new UDP/RTP client and AudioKit output.
  *        Connects to an RTSP server, decodes audio via MultiDecoder, and plays
  *        out via `AudioBoardStream` (AudioKit ES8388). Tested with RTSP
