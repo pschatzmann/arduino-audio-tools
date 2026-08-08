@@ -101,7 +101,13 @@ class VariableSpeedRingBufferSimple : public BaseBuffer<T> {
    * @brief Set the reading speed increment
    * @param increment Reading speed multiplier (1.0 = normal, >1.0 = faster for higher pitch)
    */
-  void setIncrement(float increment) { read_increment = increment; }
+  void setIncrement(float increment) {
+#if PREFER_FIXEDPOINT
+    read_increment_fixed = (int32_t)roundf(increment * 65536.0f);
+#else
+    read_increment = increment;
+#endif
+  }
 
   /**
    * @brief Resize the internal buffer
@@ -118,18 +124,24 @@ class VariableSpeedRingBufferSimple : public BaseBuffer<T> {
    * @param result Reference to store the read sample value
    * @return true if successful
    */
-  /**
-   * @brief Read the next sample and advance the read pointer
-   * @param result Reference to store the read sample value
-   * @return true if successful
-   */
   bool read(T &result) {
     peek(result);
+#if PREFER_FIXEDPOINT
+    read_pos_fixed += read_increment_fixed;
+    // on buffer overflow reset to beginning. Uses >= (unlike the float
+    // path's >): with an integer increment (e.g. 1.0) the position can land
+    // exactly on bufferSizeFixed(), and > would leave it there -- an index
+    // one past the end of the buffer on the next peek().
+    if (read_pos_fixed >= bufferSizeFixed()) {
+      read_pos_fixed -= bufferSizeFixed();
+    }
+#else
     read_pos_float += read_increment;
     // on buffer overflow reset to beginning
     if (read_pos_float > buffer_size) {
       read_pos_float -= buffer_size;
     }
+#endif
     return true;
   }
 
@@ -143,7 +155,11 @@ class VariableSpeedRingBufferSimple : public BaseBuffer<T> {
       LOGE("buffer has no memory");
       result = 0;
     } else {
+#if PREFER_FIXEDPOINT
+      result = buffer[(int)(read_pos_fixed >> 16)];
+#else
       result = buffer[(int)read_pos_float];
+#endif
     }
     return true;
   }
@@ -168,7 +184,11 @@ class VariableSpeedRingBufferSimple : public BaseBuffer<T> {
 
   /// Reset pointer positions and clear buffer
   void reset() {
+#if PREFER_FIXEDPOINT
+    read_pos_fixed = 0;
+#else
     read_pos_float = 0;
+#endif
     write_pos = 0;
     memset(buffer.data(), 0, sizeof(T) * buffer_size);
   }
@@ -182,9 +202,26 @@ class VariableSpeedRingBufferSimple : public BaseBuffer<T> {
  protected:
   Vector<T> buffer{0};
   int buffer_size = 0;
+  int write_pos = 0;
+#if PREFER_FIXEDPOINT
+  // Q16.16 fixed-point read position/increment: a plain int32_t add/compare
+  // per read() instead of a float add + compare, with the buffer index a
+  // shift instead of a float->int truncation -- no FPU needed on FPU-less
+  // MCUs, at the same 4-byte width as the float it replaces (int64_t would
+  // needlessly double the size of exactly the fields this optimization
+  // touches, on exactly the RAM-constrained MCUs it targets). int32_t caps
+  // buffer_size at < 32768 (buffer_size << 16 must fit in int32) -- not a
+  // real constraint here: 32767 samples is ~743ms of buffer at 44.1kHz,
+  // already far beyond a practical pitch-shift buffer (typically hundreds
+  // to low thousands of samples), and this path's target platforms don't
+  // have the RAM for a buffer that large anyway.
+  int32_t read_pos_fixed = 0;
+  int32_t read_increment_fixed = 1 << 16;
+  int32_t bufferSizeFixed() const { return buffer_size << 16; }
+#else
   float read_pos_float = 0.0;
   float read_increment = 1.0;
-  int write_pos = 0;
+#endif
 };
 
 /**
