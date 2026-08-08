@@ -8,8 +8,8 @@ var searchData=
   ['fileloop_2eh_5',['FileLoop.h',['../_file_loop_8h.html',1,'']]],
   ['filesystem_2eh_6',['FileSystem.h',['../_file_system_8h.html',1,'']]],
   ['filter_2eh_7',['Filter.h',['../_filter_8h.html',1,'']]],
-  ['float16_2eh_8',['Float16.h',['../_float16_8h.html',1,'']]],
-  ['float32_2eh_9',['Float32.h',['../_float32_8h.html',1,'']]],
+  ['float16_2eh_8',['float16.h',['../float16_8h.html',1,'']]],
+  ['float32_2eh_9',['float32.h',['../float32_8h.html',1,'']]],
   ['floataudio_2eh_10',['FloatAudio.h',['../_float_audio_8h.html',1,'']]],
   ['frequencydetector_2eh_11',['FrequencyDetector.h',['../_frequency_detector_8h.html',1,'']]]
 ];

@@ -21,8 +21,8 @@ var searchData=
   ['icystream_2eh_18',['ICYStream.h',['../_i_c_y_stream_8h.html',1,'']]],
   ['icystreamt_2eh_19',['ICYStreamT.h',['../_i_c_y_stream_t_8h.html',1,'']]],
   ['initializerlist_2eh_20',['InitializerList.h',['../_initializer_list_8h.html',1,'']]],
-  ['int24_5f3bytes_5ft_2eh_21',['Int24_3bytes_t.h',['../_int24__3bytes__t_8h.html',1,'']]],
-  ['int24_5f4bytes_5ft_2eh_22',['Int24_4bytes_t.h',['../_int24__4bytes__t_8h.html',1,'']]],
+  ['int24_5f3bytes_5ft_2eh_21',['int24_3bytes_t.h',['../int24__3bytes__t_8h.html',1,'']]],
+  ['int24_5f4bytes_5ft_2eh_22',['int24_4bytes_t.h',['../int24__4bytes__t_8h.html',1,'']]],
   ['int24_5ft_2eh_23',['int24_t.h',['../int24__t_8h.html',1,'']]],
   ['ipaddress_2eh_24',['IPAddress.h',['../_i_p_address_8h.html',1,'']]],
   ['itask_2eh_25',['ITask.h',['../_i_task_8h.html',1,'']]]
