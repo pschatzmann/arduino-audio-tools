@@ -142,14 +142,20 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae1220e7e3542f5a84c21fe2f7cef194c" id="r_ae1220e7e3542f5a84c21fe2f7cef194c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_v_i_encoder.html#ae1220e7e3542f5a84c21fe2f7cef194c">setOutput</a> (<a class="el" href="class_print.html">Print</a> &amp;out)</td></tr>
 <tr class="memdesc:ae1220e7e3542f5a84c21fe2f7cef194c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the output: e.g. a local File or a network <a class="el" href="class_client.html">Client</a>.  <br /></td></tr>
 <tr class="separator:ae1220e7e3542f5a84c21fe2f7cef194c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3768e0da9f5b95491c38923e480e4fb" id="r_ae3768e0da9f5b95491c38923e480e4fb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_v_i_encoder.html#ae3768e0da9f5b95491c38923e480e4fb">setStreamType</a> (<a class="el" href="namespaceaudio__tools.html#a3529160d6b73e5a63e0a95afeb424659">StreamContentType</a> type)</td></tr>
+<tr class="separator:ae3768e0da9f5b95491c38923e480e4fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac074c5e645dfd5ff20f0887a81f11743" id="r_ac074c5e645dfd5ff20f0887a81f11743"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a3529160d6b73e5a63e0a95afeb424659">StreamContentType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_v_i_encoder.html#ac074c5e645dfd5ff20f0887a81f11743">streamType</a> ()</td></tr>
+<tr class="memdesc:ac074c5e645dfd5ff20f0887a81f11743"><td class="mdescLeft">&#160;</td><td class="mdescRight">The track <a class="el" href="classaudio__tools_1_1_a_v_i_encoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> currently targets (see <a class="el" href="classaudio__tools_1_1_a_v_i_encoder.html#ae3768e0da9f5b95491c38923e480e4fb">setStreamType()</a>)  <br /></td></tr>
+<tr class="separator:ac074c5e645dfd5ff20f0887a81f11743"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad63cb07bedf497ac99a4ceeea6cd09ff" id="r_ad63cb07bedf497ac99a4ceeea6cd09ff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_a_v_i_encoder_video_config.html">AVIEncoderVideoConfig</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_v_i_encoder.html#ad63cb07bedf497ac99a4ceeea6cd09ff">videoConfig</a> ()</td></tr>
 <tr class="separator:ad63cb07bedf497ac99a4ceeea6cd09ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a813c30af649016700445aa39733ad242" id="r_a813c30af649016700445aa39733ad242"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_v_i_encoder.html#a813c30af649016700445aa39733ad242">videoFrameCount</a> ()</td></tr>
 <tr class="memdesc:a813c30af649016700445aa39733ad242"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of video frames written so far.  <br /></td></tr>
 <tr class="separator:a813c30af649016700445aa39733ad242"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_v_i_encoder.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
-<tr class="memdesc:a7597ef706dd1aa590903ce9e095db20a"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory.">VideoOutput</a> API: appends data to the currently open video frame.  <br /></td></tr>
 <tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a652507618d3d8af506eb404f91023b44" id="r_a652507618d3d8af506eb404f91023b44"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_v_i_encoder.html#a652507618d3d8af506eb404f91023b44">writeFrame</a> (const uint8_t *data, size_t len)</td></tr>
+<tr class="separator:a652507618d3d8af506eb404f91023b44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -222,6 +228,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a63539c14bde8cf496cc70322327b3436"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc9b82aa0839ed697828218a9d334b05" id="r_adc9b82aa0839ed697828218a9d334b05"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_v_i_encoder.html#adc9b82aa0839ed697828218a9d334b05">video_frame_count</a> = 0</td></tr>
 <tr class="separator:adc9b82aa0839ed697828218a9d334b05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0149649a14427bc3df4297495ee0c8d9" id="r_a0149649a14427bc3df4297495ee0c8d9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a3529160d6b73e5a63e0a95afeb424659">StreamContentType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_v_i_encoder.html#a0149649a14427bc3df4297495ee0c8d9">write_stream_type</a> = <a class="el" href="namespaceaudio__tools.html#a3529160d6b73e5a63e0a95afeb424659aff13e87d7cbbe18fface435a5b84aaec">StreamContentType::Video</a></td></tr>
+<tr class="separator:a0149649a14427bc3df4297495ee0c8d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
@@ -1013,6 +1021,60 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ae3768e0da9f5b95491c38923e480e4fb" name="ae3768e0da9f5b95491c38923e480e4fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3768e0da9f5b95491c38923e480e4fb">&#9670;&#160;</a></span>setStreamType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setStreamType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#a3529160d6b73e5a63e0a95afeb424659">StreamContentType</a>&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Selects whether <a class="el" href="classaudio__tools_1_1_a_v_i_encoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> feeds the video or the audio track. Defaults to <a class="el" href="namespaceaudio__tools.html#a3529160d6b73e5a63e0a95afeb424659aff13e87d7cbbe18fface435a5b84aaec">StreamContentType::Video</a>; switch to <a class="el" href="namespaceaudio__tools.html#a3529160d6b73e5a63e0a95afeb424659ad3c111fe8a0e835609a6187d6e9d2e57">StreamContentType::Audio</a> (and back) around calls when using <a class="el" href="classaudio__tools_1_1_a_v_i_encoder.html" title="AVI Container Encoder: muxes an already-encoded video stream (e.g. H.264 access units) and an optiona...">AVIEncoder</a> as a plain sink for both. </p>
+
+</div>
+</div>
+<a id="ac074c5e645dfd5ff20f0887a81f11743" name="ac074c5e645dfd5ff20f0887a81f11743"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac074c5e645dfd5ff20f0887a81f11743">&#9670;&#160;</a></span>streamType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a3529160d6b73e5a63e0a95afeb424659">StreamContentType</a> streamType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The track <a class="el" href="classaudio__tools_1_1_a_v_i_encoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> currently targets (see <a class="el" href="classaudio__tools_1_1_a_v_i_encoder.html#ae3768e0da9f5b95491c38923e480e4fb">setStreamType()</a>) </p>
+
+</div>
+</div>
 <a id="ad63cb07bedf497ac99a4ceeea6cd09ff" name="ad63cb07bedf497ac99a4ceeea6cd09ff"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad63cb07bedf497ac99a4ceeea6cd09ff">&#9670;&#160;</a></span>videoConfig()</h2>
 
@@ -1151,8 +1213,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory.">VideoOutput</a> API: appends data to the currently open video frame. </p>
+<p><a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory.">VideoOutput</a> API / generic sink: writes one complete frame to whichever track <a class="el" href="classaudio__tools_1_1_a_v_i_encoder.html#ac074c5e645dfd5ff20f0887a81f11743" title="The track write() currently targets (see setStreamType())">streamType()</a> currently selects (see <a class="el" href="classaudio__tools_1_1_a_v_i_encoder.html#ae3768e0da9f5b95491c38923e480e4fb">setStreamType()</a>). For video, dispatches to the addXxxFrame() matching <a class="el" href="classaudio__tools_1_1_a_v_i_encoder.html#ad63cb07bedf497ac99a4ceeea6cd09ff">videoConfig()</a>.format; for audio, calls <a class="el" href="classaudio__tools_1_1_a_v_i_encoder.html#aeb9297bd1b2ace18aa8a6628cc2fb659">addAudioFrame()</a>. Lets <a class="el" href="classaudio__tools_1_1_a_v_i_encoder.html" title="AVI Container Encoder: muxes an already-encoded video stream (e.g. H.264 access units) and an optiona...">AVIEncoder</a> be used as a plain one-call-per-frame Print-like sink (e.g. from a camera driver, or an audio encoder) without the caller needing to know which addXxxFrame() applies. </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">VideoOutput</a>.</p>
 
@@ -1268,6 +1329,43 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a652507618d3d8af506eb404f91023b44" name="a652507618d3d8af506eb404f91023b44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a652507618d3d8af506eb404f91023b44">&#9670;&#160;</a></span>writeFrame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t writeFrame </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p><a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory.">VideoOutput</a> API: appends data to the currently open video frame - requires a prior <a class="el" href="classaudio__tools_1_1_a_v_i_encoder.html#abd410811ee391c7d4531142bc2a1365a" title="VideoOutput API: starts a new video (&#39;00dc&#39;) chunk of the given size.">beginFrame()</a> (and a later <a class="el" href="classaudio__tools_1_1_a_v_i_encoder.html#a6045acdc41b4fc3d1b3d55a6ec60eadb" title="VideoOutput API: closes the current video frame (word-aligns the chunk)">endFrame()</a>); use this for incremental/streaming sources that hand over a frame in pieces. For a single complete frame per call, use <a class="el" href="classaudio__tools_1_1_a_v_i_encoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> (dispatches by <a class="el" href="classaudio__tools_1_1_a_v_i_encoder.html#ad63cb07bedf497ac99a4ceeea6cd09ff">videoConfig()</a>.format) or one of the addXxxFrame() methods instead. </p>
 
 </div>
 </div>
@@ -1730,6 +1828,28 @@ Static Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">uint32_t video_frame_count = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0149649a14427bc3df4297495ee0c8d9" name="a0149649a14427bc3df4297495ee0c8d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0149649a14427bc3df4297495ee0c8d9">&#9670;&#160;</a></span>write_stream_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaudio__tools.html#a3529160d6b73e5a63e0a95afeb424659">StreamContentType</a> write_stream_type = <a class="el" href="namespaceaudio__tools.html#a3529160d6b73e5a63e0a95afeb424659aff13e87d7cbbe18fface435a5b84aaec">StreamContentType::Video</a></td>
         </tr>
       </table>
   </td>

@@ -48,12 +48,13 @@ var searchData=
   ['write_5fpointer_45',['write_pointer',['../classaudio__tools_1_1_variable_speed_ring_buffer180.html#a27a176d477c8d67a0cb518e1e4c33a0b',1,'audio_tools::VariableSpeedRingBuffer180']]],
   ['write_5fpos_46',['write_pos',['../classaudio__tools_1_1_variable_speed_ring_buffer180.html#a89d2c2295a587bc5e3a6e47ac56c3d96',1,'audio_tools::VariableSpeedRingBuffer180::write_pos'],['../classaudio__tools_1_1_o_s_c_data.html#a89d2c2295a587bc5e3a6e47ac56c3d96',1,'audio_tools::OSCData::write_pos'],['../classaudio__tools_1_1_dynamic_multi_buffer.html#ac49807707757ef19984e651ab0812c26',1,'audio_tools::DynamicMultiBuffer::write_pos'],['../classaudio__tools_1_1_ring_buffer_file.html#a89d2c2295a587bc5e3a6e47ac56c3d96',1,'audio_tools::RingBufferFile::write_pos'],['../classaudio__tools_1_1_memory_stream.html#a89d2c2295a587bc5e3a6e47ac56c3d96',1,'audio_tools::MemoryStream::write_pos'],['../classaudio__tools_1_1_variable_speed_ring_buffer.html#a89d2c2295a587bc5e3a6e47ac56c3d96',1,'audio_tools::VariableSpeedRingBuffer::write_pos'],['../classaudio__tools_1_1_variable_speed_ring_buffer_simple.html#a89d2c2295a587bc5e3a6e47ac56c3d96',1,'audio_tools::VariableSpeedRingBufferSimple::write_pos']]],
   ['write_5fretry_5fcount_47',['write_retry_count',['../structaudio__tools_1_1_e_s_p_now_stream_config.html#ac4015338f31222e2bd9a8a6c5ad97247',1,'audio_tools::ESPNowStreamConfig']]],
-  ['write_5fthrottle_48',['write_throttle',['../classaudio__tools_1_1_audio_b_l_e_client.html#a74cc0987d74478e27a8020a5c8e8b805',1,'audio_tools::AudioBLEClient']]],
-  ['writeheadindex_49',['writeHeadIndex',['../classaudio__tools_1_1_simple_delay.html#a775bf7c801e875bdc3cd6b425c1c2d2a',1,'audio_tools::SimpleDelay']]],
-  ['writer_50',['writer',['../structaudio__tools_1_1_tf_lite_config.html#a17e8068657f29a56c68d5124c275a7dd',1,'audio_tools::TfLiteConfig']]],
-  ['writer_5fptr_51',['writer_ptr',['../classaudio__tools_1_1_encoded_audio_output.html#a5893e22e84a0f40d771d1d8d0cb8e070',1,'audio_tools::EncodedAudioOutput']]],
-  ['writewait_52',['writewait',['../classaudio__tools_1_1_buffer_r_t_o_s.html#a1d12dbda5da27a49c3a03b730731693e',1,'audio_tools::BufferRTOS::writeWait'],['../classaudio__tools_1_1_buffer_zephyr.html#a7ec9bb4c39399295073761466d0c3b16',1,'audio_tools::BufferZephyr::writeWait']]],
-  ['written_53',['written',['../classaudio__tools_1_1_a_p_t_x_decoder.html#ac7ab1030344ab638a27ba415c914288a',1,'audio_tools::APTXDecoder']]],
-  ['wtmp_54',['wtmp',['../structaudio__tools_1_1_echo_state.html#a8c042532a53b6913c83a113278c1ec86',1,'audio_tools::EchoState']]],
-  ['wvalue_55',['wValue',['../structaudio__tools_1_1_usb_setup_packet.html#a7383d0165ad8eab48aa239c005199121',1,'audio_tools::UsbSetupPacket']]]
+  ['write_5fstream_5ftype_48',['write_stream_type',['../classaudio__tools_1_1_a_v_i_encoder.html#a0149649a14427bc3df4297495ee0c8d9',1,'audio_tools::AVIEncoder']]],
+  ['write_5fthrottle_49',['write_throttle',['../classaudio__tools_1_1_audio_b_l_e_client.html#a74cc0987d74478e27a8020a5c8e8b805',1,'audio_tools::AudioBLEClient']]],
+  ['writeheadindex_50',['writeHeadIndex',['../classaudio__tools_1_1_simple_delay.html#a775bf7c801e875bdc3cd6b425c1c2d2a',1,'audio_tools::SimpleDelay']]],
+  ['writer_51',['writer',['../structaudio__tools_1_1_tf_lite_config.html#a17e8068657f29a56c68d5124c275a7dd',1,'audio_tools::TfLiteConfig']]],
+  ['writer_5fptr_52',['writer_ptr',['../classaudio__tools_1_1_encoded_audio_output.html#a5893e22e84a0f40d771d1d8d0cb8e070',1,'audio_tools::EncodedAudioOutput']]],
+  ['writewait_53',['writewait',['../classaudio__tools_1_1_buffer_r_t_o_s.html#a1d12dbda5da27a49c3a03b730731693e',1,'audio_tools::BufferRTOS::writeWait'],['../classaudio__tools_1_1_buffer_zephyr.html#a7ec9bb4c39399295073761466d0c3b16',1,'audio_tools::BufferZephyr::writeWait']]],
+  ['written_54',['written',['../classaudio__tools_1_1_a_p_t_x_decoder.html#ac7ab1030344ab638a27ba415c914288a',1,'audio_tools::APTXDecoder']]],
+  ['wtmp_55',['wtmp',['../structaudio__tools_1_1_echo_state.html#a8c042532a53b6913c83a113278c1ec86',1,'audio_tools::EchoState']]],
+  ['wvalue_56',['wValue',['../structaudio__tools_1_1_usb_setup_packet.html#a7383d0165ad8eab48aa239c005199121',1,'audio_tools::UsbSetupPacket']]]
 ];
