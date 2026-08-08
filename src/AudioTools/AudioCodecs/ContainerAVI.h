@@ -803,7 +803,7 @@ struct AVIEncoderVideoConfig {
   uint16_t width = 320;
   uint16_t height = 240;
   float fps = 25.0f;
-  AVIVideoFormat format = AVIVideoFormat::H264;
+  AVIVideoFormat format = AVIVideoFormat::RGB565;
   /// Optional: overrides the FOURCC derived from 'format'. Must point to (at
   /// least) 4 characters and stay valid until begin() is called.
   const char *fourcc = nullptr;
@@ -891,6 +891,13 @@ class AVIEncoder : public VideoOutput {
     return true;
   }
 
+  /// Selects whether write() feeds the video or the audio track. Defaults
+  /// to StreamContentType::Video; switch to StreamContentType::Audio (and
+  /// back) around calls when using AVIEncoder as a plain sink for both.
+  void setStreamType(StreamContentType type) { write_stream_type = type; }
+  /// The track write() currently targets (see setStreamType())
+  StreamContentType streamType() { return write_stream_type; }
+
   /// Closes the encoder: no trailer is written (streaming AVI has no idx1)
   void end() { is_open = false; }
 
@@ -905,8 +912,12 @@ class AVIEncoder : public VideoOutput {
     frame_pad = (size % 2) != 0;
   }
 
-  /// VideoOutput API: appends data to the currently open video frame
-  size_t write(const uint8_t *data, size_t len) override {
+  /// VideoOutput API: appends data to the currently open video frame -
+  /// requires a prior beginFrame() (and a later endFrame()); use this for
+  /// incremental/streaming sources that hand over a frame in pieces. For a
+  /// single complete frame per call, use write() (dispatches by
+  /// videoConfig().format) or one of the addXxxFrame() methods instead.
+  size_t writeFrame(const uint8_t *data, size_t len) {
     if (!is_open || !frame_open) return 0;
     size_t to_write = len < frame_remaining ? len : frame_remaining;
     size_t written = p_out->write(data, to_write);
@@ -922,6 +933,31 @@ class AVIEncoder : public VideoOutput {
     return 0;
   }
 
+  /// VideoOutput API / generic sink: writes one complete frame to whichever
+  /// track streamType() currently selects (see setStreamType()). For video,
+  /// dispatches to the addXxxFrame() matching videoConfig().format; for
+  /// audio, calls addAudioFrame(). Lets AVIEncoder be used as a plain
+  /// one-call-per-frame Print-like sink (e.g. from a camera driver, or an
+  /// audio encoder) without the caller needing to know which addXxxFrame()
+  /// applies.
+  size_t write(const uint8_t *data, size_t len) override {
+    if (write_stream_type == StreamContentType::Audio) {
+      return addAudioFrame(data, len);
+    }
+    switch (video_cfg.format) {
+      case AVIVideoFormat::MJPEG:
+        return addJpegFrame(data, len);
+      case AVIVideoFormat::YUV422:
+        return addYUV422Frame(data, len);
+      case AVIVideoFormat::RGB565:
+        return addRGB565Frame(data, len);
+      case AVIVideoFormat::I420:
+        return addI420Frame(data, len);
+      default:
+        return addVideoFrame(data, len);
+    }
+  }
+
   /// Convenience: writes one complete, already-encoded video frame (e.g. one
   /// H.264 access unit, or one raw pixel buffer) as a single '00dc' chunk.
   /// Works for any AVIVideoFormat - the format-specific addXxxFrame()
@@ -929,7 +965,7 @@ class AVIEncoder : public VideoOutput {
   /// and (for fixed-size raw formats) the buffer length.
   size_t addVideoFrame(const uint8_t *data, size_t len) {
     beginFrame(len);
-    size_t written = write(data, len);
+    size_t written = writeFrame(data, len);
     endFrame();
     return written;
   }
@@ -986,6 +1022,7 @@ class AVIEncoder : public VideoOutput {
 
   Print *p_out = nullptr;
   AVIEncoderVideoConfig video_cfg;
+  StreamContentType write_stream_type = StreamContentType::Video;
   AudioInfo audio_info;
   AudioFormat audio_format = AudioFormat::PCM;
   bool has_audio = false;

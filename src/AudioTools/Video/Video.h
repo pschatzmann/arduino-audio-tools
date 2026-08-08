@@ -26,6 +26,64 @@ class VideoOutput {
 };
 
 /**
+ * @brief Simple in-memory VideoOutput sink that assembles a single video
+ * frame of at most a fixed maximum size. Connect it to any
+ * beginFrame()/write()/endFrame() producer (e.g. a decoder), then, once
+ * endFrame() has been called, read the assembled frame back via data() and
+ * available().
+ * @ingroup video
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class VideoFrame : public VideoOutput {
+ public:
+  /// @param maxSize maximum frame size in bytes that this instance can hold
+  VideoFrame(size_t maxSize) : max_size(maxSize) { buffer.resize(max_size); }
+
+  /// Starts a new frame: resets the write position. 'size' must not exceed
+  /// the maxSize provided to the constructor.
+  void beginFrame(size_t size) override {
+    assert(size <= max_size);
+    pos = 0;
+  }
+
+  /// Appends data to the frame; truncates (rather than overflowing the
+  /// buffer) if it would exceed maxSize. Returns the number of bytes
+  /// actually written.
+  size_t write(const uint8_t *data, size_t len) override {
+    size_t to_write = pos + len <= max_size ? len : max_size - pos;
+    memcpy(buffer.data() + pos, data, to_write);
+    pos += to_write;
+    return to_write;
+  }
+
+  /// Ends the frame and returns the number of bytes assembled
+  uint32_t endFrame() override { return pos; }
+
+  /// Number of bytes currently assembled in the frame
+  size_t available() { return pos; }
+
+  /// Manually declares how many bytes of the frame are valid, e.g. after
+  /// writing directly into data() from an external source (DMA buffer,
+  /// camera driver, ...) instead of going through write(). Clamped to
+  /// size().
+  void setAvailable(size_t available) {
+    pos = available <= max_size ? available : max_size;
+  }
+
+  /// Pointer to the assembled frame data
+  uint8_t *data() { return buffer.data(); }
+
+  /// Maximum frame size (bytes) this instance can hold
+  size_t size() { return max_size; }
+
+ protected:
+  Vector<uint8_t> buffer;
+  size_t max_size;
+  size_t pos = 0;
+};
+
+/**
  * @brief Logic to Synchronize video and audio output: This is the minimum
  * implementatin which actually does not synchronize, but directly processes the
  * data. No additinal memory is used! Provide your own optimized platform
