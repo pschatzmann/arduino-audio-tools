@@ -1,10 +1,12 @@
 #pragma once
 #include <math.h>
 
+#include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/AudioOutput.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"
 #include "AudioTools/CoreAudio/BaseConverter.h"
-#include "AudioToolsConfig.h"
+#include "AudioTools/CoreAudio/AudioBasic/soft_float_t.h"
+#include "AudioTools/CoreAudio/AudioBasic/q1_14_t.h"
 
 /**
  * @defgroup equilizer Equalizer

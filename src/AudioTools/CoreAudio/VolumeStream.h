@@ -3,7 +3,7 @@
 #include "AudioTools/CoreAudio/AudioStreams.h"
 #include "AudioTools/CoreAudio/AudioOutput.h"
 #include "AudioTools/CoreAudio/VolumeControl.h"
-#include "AudioTools/CoreAudio/AudioBasic/Q1_14.h"
+#include "AudioTools/CoreAudio/AudioBasic/q1_14_t.h"
 #include "AudioTools/CoreAudio/AudioTypes.h"
 
 namespace audio_tools {

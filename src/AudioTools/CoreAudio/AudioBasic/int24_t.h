@@ -2,8 +2,8 @@
 #include "AudioToolsConfig.h"
 
 // select int24 implementation
-#include "AudioTools/CoreAudio/AudioBasic/Int24_3bytes_t.h"
-#include "AudioTools/CoreAudio/AudioBasic/Int24_4bytes_t.h"
+#include "AudioTools/CoreAudio/AudioBasic/int24_3bytes_t.h"
+#include "AudioTools/CoreAudio/AudioBasic/int24_4bytes_t.h"
 
 namespace audio_tools {
 #ifdef USE_3BYTE_INT24
