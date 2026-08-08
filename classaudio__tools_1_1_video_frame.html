@@ -74,6 +74,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_video_frame-members.html">List of all members</a>  </div>
@@ -81,7 +82,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Simple in-memory <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory.">VideoOutput</a> sink that assembles a single video frame of at most a fixed maximum size. Connect it to any <a class="el" href="classaudio__tools_1_1_video_frame.html#abd410811ee391c7d4531142bc2a1365a">beginFrame()</a>/write()/endFrame() producer (e.g. a decoder), then, once <a class="el" href="classaudio__tools_1_1_video_frame.html#a6045acdc41b4fc3d1b3d55a6ec60eadb" title="Ends the frame and returns the number of bytes assembled.">endFrame()</a> has been called, read the assembled frame back via <a class="el" href="classaudio__tools_1_1_video_frame.html#a99c07c946023f413991a249db8b99ab0" title="Pointer to the assembled frame data.">data()</a> and <a class="el" href="classaudio__tools_1_1_video_frame.html#a946aef1a9634871bd728edb663075543" title="Number of bytes currently assembled in the frame.">available()</a>.  
+<p>Simple in-memory <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory.">VideoOutput</a> sink that assembles a single video frame of at most a fixed maximum size. Connect it to any <a class="el" href="classaudio__tools_1_1_video_frame.html#abd410811ee391c7d4531142bc2a1365a">beginFrame()</a>/write()/endFrame() producer (e.g. a decoder), then, once <a class="el" href="classaudio__tools_1_1_video_frame.html#a6045acdc41b4fc3d1b3d55a6ec60eadb">endFrame()</a> has been called, read the assembled frame back via <a class="el" href="classaudio__tools_1_1_video_frame.html#a99c07c946023f413991a249db8b99ab0" title="Pointer to the assembled frame data.">data()</a> and <a class="el" href="classaudio__tools_1_1_video_frame.html#a946aef1a9634871bd728edb663075543" title="Number of bytes currently assembled in the frame.">available()</a> (or register a <a class="el" href="classaudio__tools_1_1_video_frame.html#a26375f36e4f5430e0ef7f3775195a996">setOnEnd()</a> callback to be notified instead of polling).  
  <a href="classaudio__tools_1_1_video_frame.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_video_8h_source.html">Video.h</a>&gt;</code></p>
@@ -95,6 +96,11 @@ Inheritance diagram for VideoFrame:</div>
   </map>
 </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:af9b2985aa5741c47234155bed39ab058" id="r_af9b2985aa5741c47234155bed39ab058"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_frame.html#af9b2985aa5741c47234155bed39ab058">VideoFrameCallback</a> = void(*)(<a class="el" href="classaudio__tools_1_1_video_frame.html">VideoFrame</a> &amp;frame)</td></tr>
+<tr class="separator:af9b2985aa5741c47234155bed39ab058"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a2b98e958190152cc51bec64f404f3e7d" id="r_a2b98e958190152cc51bec64f404f3e7d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_frame.html#a2b98e958190152cc51bec64f404f3e7d">VideoFrame</a> (size_t maxSize)</td></tr>
@@ -108,10 +114,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a99c07c946023f413991a249db8b99ab0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the assembled frame data.  <br /></td></tr>
 <tr class="separator:a99c07c946023f413991a249db8b99ab0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6045acdc41b4fc3d1b3d55a6ec60eadb" id="r_a6045acdc41b4fc3d1b3d55a6ec60eadb"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_frame.html#a6045acdc41b4fc3d1b3d55a6ec60eadb">endFrame</a> () override</td></tr>
-<tr class="memdesc:a6045acdc41b4fc3d1b3d55a6ec60eadb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ends the frame and returns the number of bytes assembled.  <br /></td></tr>
 <tr class="separator:a6045acdc41b4fc3d1b3d55a6ec60eadb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8294e259df5bc770d72bb59f9a7521a7" id="r_a8294e259df5bc770d72bb59f9a7521a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_frame.html#a8294e259df5bc770d72bb59f9a7521a7">setAvailable</a> (size_t <a class="el" href="classaudio__tools_1_1_video_frame.html#a946aef1a9634871bd728edb663075543">available</a>)</td></tr>
 <tr class="separator:a8294e259df5bc770d72bb59f9a7521a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26375f36e4f5430e0ef7f3775195a996" id="r_a26375f36e4f5430e0ef7f3775195a996"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_frame.html#a26375f36e4f5430e0ef7f3775195a996">setOnEnd</a> (<a class="el" href="classaudio__tools_1_1_video_frame.html#af9b2985aa5741c47234155bed39ab058">VideoFrameCallback</a> callback)</td></tr>
+<tr class="separator:a26375f36e4f5430e0ef7f3775195a996"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b6b70701c46e22849f0f363861351cd" id="r_a0b6b70701c46e22849f0f363861351cd"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_frame.html#a0b6b70701c46e22849f0f363861351cd">size</a> ()</td></tr>
 <tr class="memdesc:a0b6b70701c46e22849f0f363861351cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum frame size (bytes) this instance can hold.  <br /></td></tr>
 <tr class="separator:a0b6b70701c46e22849f0f363861351cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -124,14 +131,32 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:afa0dac30433855379ff3ac93383d7ef2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4728438dee601cb2554d9bf18d78a43" id="r_af4728438dee601cb2554d9bf18d78a43"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_frame.html#af4728438dee601cb2554d9bf18d78a43">max_size</a></td></tr>
 <tr class="separator:af4728438dee601cb2554d9bf18d78a43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae71a0d57a886cd455846621fcb6d712d" id="r_ae71a0d57a886cd455846621fcb6d712d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_video_frame.html#af9b2985aa5741c47234155bed39ab058">VideoFrameCallback</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_frame.html#ae71a0d57a886cd455846621fcb6d712d">on_end_cb</a> = nullptr</td></tr>
+<tr class="separator:ae71a0d57a886cd455846621fcb6d712d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5438a597ee291f523ae04a9fe355924f" id="r_a5438a597ee291f523ae04a9fe355924f"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_frame.html#a5438a597ee291f523ae04a9fe355924f">pos</a> = 0</td></tr>
 <tr class="separator:a5438a597ee291f523ae04a9fe355924f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Simple in-memory <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory.">VideoOutput</a> sink that assembles a single video frame of at most a fixed maximum size. Connect it to any <a class="el" href="classaudio__tools_1_1_video_frame.html#abd410811ee391c7d4531142bc2a1365a">beginFrame()</a>/write()/endFrame() producer (e.g. a decoder), then, once <a class="el" href="classaudio__tools_1_1_video_frame.html#a6045acdc41b4fc3d1b3d55a6ec60eadb" title="Ends the frame and returns the number of bytes assembled.">endFrame()</a> has been called, read the assembled frame back via <a class="el" href="classaudio__tools_1_1_video_frame.html#a99c07c946023f413991a249db8b99ab0" title="Pointer to the assembled frame data.">data()</a> and <a class="el" href="classaudio__tools_1_1_video_frame.html#a946aef1a9634871bd728edb663075543" title="Number of bytes currently assembled in the frame.">available()</a>. </p>
+<div class="textblock"><p>Simple in-memory <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory.">VideoOutput</a> sink that assembles a single video frame of at most a fixed maximum size. Connect it to any <a class="el" href="classaudio__tools_1_1_video_frame.html#abd410811ee391c7d4531142bc2a1365a">beginFrame()</a>/write()/endFrame() producer (e.g. a decoder), then, once <a class="el" href="classaudio__tools_1_1_video_frame.html#a6045acdc41b4fc3d1b3d55a6ec60eadb">endFrame()</a> has been called, read the assembled frame back via <a class="el" href="classaudio__tools_1_1_video_frame.html#a99c07c946023f413991a249db8b99ab0" title="Pointer to the assembled frame data.">data()</a> and <a class="el" href="classaudio__tools_1_1_video_frame.html#a946aef1a9634871bd728edb663075543" title="Number of bytes currently assembled in the frame.">available()</a> (or register a <a class="el" href="classaudio__tools_1_1_video_frame.html#a26375f36e4f5430e0ef7f3775195a996">setOnEnd()</a> callback to be notified instead of polling). </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="af9b2985aa5741c47234155bed39ab058" name="af9b2985aa5741c47234155bed39ab058"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9b2985aa5741c47234155bed39ab058">&#9670;&#160;</a></span>VideoFrameCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classaudio__tools_1_1_video_frame.html#af9b2985aa5741c47234155bed39ab058">VideoFrameCallback</a> =  void (*)(<a class="el" href="classaudio__tools_1_1_video_frame.html">VideoFrame</a> &amp;frame)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Callback signature for <a class="el" href="classaudio__tools_1_1_video_frame.html#a26375f36e4f5430e0ef7f3775195a996">setOnEnd()</a>: invoked from <a class="el" href="classaudio__tools_1_1_video_frame.html#a6045acdc41b4fc3d1b3d55a6ec60eadb">endFrame()</a> with a reference to the <a class="el" href="classaudio__tools_1_1_video_frame.html" title="Simple in-memory VideoOutput sink that assembles a single video frame of at most a fixed maximum size...">VideoFrame</a> whose frame was just completed. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a2b98e958190152cc51bec64f404f3e7d" name="a2b98e958190152cc51bec64f404f3e7d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2b98e958190152cc51bec64f404f3e7d">&#9670;&#160;</a></span>VideoFrame()</h2>
 
@@ -270,8 +295,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Ends the frame and returns the number of bytes assembled. </p>
+<p>Ends the frame, invokes the <a class="el" href="classaudio__tools_1_1_video_frame.html#a26375f36e4f5430e0ef7f3775195a996">setOnEnd()</a> callback (if any) with a reference to this <a class="el" href="classaudio__tools_1_1_video_frame.html" title="Simple in-memory VideoOutput sink that assembles a single video frame of at most a fixed maximum size...">VideoFrame</a>, and returns the number of bytes assembled </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_video_output.html#ad3acf8a26a2870cb679f85c8692823e3">VideoOutput</a>.</p>
 
@@ -301,6 +325,33 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Manually declares how many bytes of the frame are valid, e.g. after writing directly into <a class="el" href="classaudio__tools_1_1_video_frame.html#a99c07c946023f413991a249db8b99ab0" title="Pointer to the assembled frame data.">data()</a> from an external source (DMA buffer, camera driver, ...) instead of going through <a class="el" href="classaudio__tools_1_1_video_frame.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>. Clamped to <a class="el" href="classaudio__tools_1_1_video_frame.html#a0b6b70701c46e22849f0f363861351cd" title="Maximum frame size (bytes) this instance can hold.">size()</a>. </p>
+
+</div>
+</div>
+<a id="a26375f36e4f5430e0ef7f3775195a996" name="a26375f36e4f5430e0ef7f3775195a996"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26375f36e4f5430e0ef7f3775195a996">&#9670;&#160;</a></span>setOnEnd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setOnEnd </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_video_frame.html#af9b2985aa5741c47234155bed39ab058">VideoFrameCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Registers a callback that is invoked from <a class="el" href="classaudio__tools_1_1_video_frame.html#a6045acdc41b4fc3d1b3d55a6ec60eadb">endFrame()</a>, once the frame has been fully assembled, receiving a reference to this <a class="el" href="classaudio__tools_1_1_video_frame.html" title="Simple in-memory VideoOutput sink that assembles a single video frame of at most a fixed maximum size...">VideoFrame</a> so it can read <a class="el" href="classaudio__tools_1_1_video_frame.html#a99c07c946023f413991a249db8b99ab0" title="Pointer to the assembled frame data.">data()</a>/available(). </p>
 
 </div>
 </div>
@@ -404,6 +455,28 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">size_t max_size</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae71a0d57a886cd455846621fcb6d712d" name="ae71a0d57a886cd455846621fcb6d712d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae71a0d57a886cd455846621fcb6d712d">&#9670;&#160;</a></span>on_end_cb</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_video_frame.html#af9b2985aa5741c47234155bed39ab058">VideoFrameCallback</a> on_end_cb = nullptr</td>
         </tr>
       </table>
   </td>
