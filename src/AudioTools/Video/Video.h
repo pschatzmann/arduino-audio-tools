@@ -30,15 +30,25 @@ class VideoOutput {
  * frame of at most a fixed maximum size. Connect it to any
  * beginFrame()/write()/endFrame() producer (e.g. a decoder), then, once
  * endFrame() has been called, read the assembled frame back via data() and
- * available().
+ * available() (or register a setOnEnd() callback to be notified instead of
+ * polling).
  * @ingroup video
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 class VideoFrame : public VideoOutput {
  public:
+  /// Callback signature for setOnEnd(): invoked from endFrame() with a
+  /// reference to the VideoFrame whose frame was just completed.
+  using VideoFrameCallback = void (*)(VideoFrame &frame);
+
   /// @param maxSize maximum frame size in bytes that this instance can hold
   VideoFrame(size_t maxSize) : max_size(maxSize) { buffer.resize(max_size); }
+
+  /// Registers a callback that is invoked from endFrame(), once the frame
+  /// has been fully assembled, receiving a reference to this VideoFrame so
+  /// it can read data()/available().
+  void setOnEnd(VideoFrameCallback callback) { on_end_cb = callback; }
 
   /// Starts a new frame: resets the write position. 'size' must not exceed
   /// the maxSize provided to the constructor.
@@ -57,8 +67,13 @@ class VideoFrame : public VideoOutput {
     return to_write;
   }
 
-  /// Ends the frame and returns the number of bytes assembled
-  uint32_t endFrame() override { return pos; }
+  /// Ends the frame, invokes the setOnEnd() callback (if any) with a
+  /// reference to this VideoFrame, and returns the number of bytes
+  /// assembled
+  uint32_t endFrame() override {
+    if (on_end_cb != nullptr) on_end_cb(*this);
+    return pos;
+  }
 
   /// Number of bytes currently assembled in the frame
   size_t available() { return pos; }
@@ -81,6 +96,7 @@ class VideoFrame : public VideoOutput {
   Vector<uint8_t> buffer;
   size_t max_size;
   size_t pos = 0;
+  VideoFrameCallback on_end_cb = nullptr;
 };
 
 /**
