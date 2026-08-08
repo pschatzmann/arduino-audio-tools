@@ -18,6 +18,7 @@ endif()
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/codec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/converter-state ${CMAKE_CURRENT_BINARY_DIR}/converter-state)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/converters_fixedpoint ${CMAKE_CURRENT_BINARY_DIR}/converters_fixedpoint)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/effects ${CMAKE_CURRENT_BINARY_DIR}/effects)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/effects_fixedpoint ${CMAKE_CURRENT_BINARY_DIR}/effects_fixedpoint)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/equalizer ${CMAKE_CURRENT_BINARY_DIR}/equalizer)
