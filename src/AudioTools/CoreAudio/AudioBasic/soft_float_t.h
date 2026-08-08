@@ -172,6 +172,22 @@ class soft_float_t {
   bool operator==(int o) const { return *this == soft_float_t(o); }
   bool operator!=(int o) const { return *this != soft_float_t(o); }
 
+  // Same exact-match-ambiguity issue again, but for `double` literals --
+  // e.g. unsuffixed literals like `1.` or `.5`, or macros such as the
+  // Arduino core's `PI` (ArduinoCore-API/api/Common.h defines it as an
+  // unsuffixed double, so it stays double even on real hardware, not just
+  // desktop builds).
+  soft_float_t operator+(double o) const { return *this + soft_float_t(o); }
+  soft_float_t operator-(double o) const { return *this - soft_float_t(o); }
+  soft_float_t operator*(double o) const { return *this * soft_float_t(o); }
+  soft_float_t operator/(double o) const { return *this / soft_float_t(o); }
+  bool operator<(double o) const { return *this < soft_float_t(o); }
+  bool operator>(double o) const { return *this > soft_float_t(o); }
+  bool operator<=(double o) const { return *this <= soft_float_t(o); }
+  bool operator>=(double o) const { return *this >= soft_float_t(o); }
+  bool operator==(double o) const { return *this == soft_float_t(o); }
+  bool operator!=(double o) const { return *this != soft_float_t(o); }
+
   int16_t mantissa() const { return m_; }
   int16_t exponent() const { return e_; }
 
@@ -279,6 +295,19 @@ inline bool operator<=(int a, soft_float_t b) { return soft_float_t(a) <= b; }
 inline bool operator>=(int a, soft_float_t b) { return soft_float_t(a) >= b; }
 inline bool operator==(int a, soft_float_t b) { return soft_float_t(a) == b; }
 inline bool operator!=(int a, soft_float_t b) { return soft_float_t(a) != b; }
+
+// Free-function overloads for `double op soft_float_t` (double on the
+// left), for the same reason as the free `float`/`int` overloads above.
+inline soft_float_t operator+(double a, soft_float_t b) { return soft_float_t(a) + b; }
+inline soft_float_t operator-(double a, soft_float_t b) { return soft_float_t(a) - b; }
+inline soft_float_t operator*(double a, soft_float_t b) { return soft_float_t(a) * b; }
+inline soft_float_t operator/(double a, soft_float_t b) { return soft_float_t(a) / b; }
+inline bool operator<(double a, soft_float_t b) { return soft_float_t(a) < b; }
+inline bool operator>(double a, soft_float_t b) { return soft_float_t(a) > b; }
+inline bool operator<=(double a, soft_float_t b) { return soft_float_t(a) <= b; }
+inline bool operator>=(double a, soft_float_t b) { return soft_float_t(a) >= b; }
+inline bool operator==(double a, soft_float_t b) { return soft_float_t(a) == b; }
+inline bool operator!=(double a, soft_float_t b) { return soft_float_t(a) != b; }
 
 /// @deprecated use soft_float_t
 using PseudoFloat = soft_float_t;
