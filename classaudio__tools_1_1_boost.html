@@ -120,9 +120,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3d929477fef71d52c9c6df2ba2d50841" id="r_a3d929477fef71d52c9c6df2ba2d50841"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect.html#a3d929477fef71d52c9c6df2ba2d50841">setId</a> (int <a class="el" href="classaudio__tools_1_1_audio_effect.html#a4a716406d3d9d4fdbbe46f100e648f3b">id</a>)</td></tr>
 <tr class="memdesc:a3d929477fef71d52c9c6df2ba2d50841"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allows to identify an effect.  <br /></td></tr>
 <tr class="separator:a3d929477fef71d52c9c6df2ba2d50841"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab04c11673138d0f5b099f2a2f932097f" id="r_ab04c11673138d0f5b099f2a2f932097f"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_volume_support.html#ab04c11673138d0f5b099f2a2f932097f">setVolume</a> (float <a class="el" href="classaudio__tools_1_1_volume_support.html#a893871d008fd5516565045bb55e60dd8">volume</a>)</td></tr>
-<tr class="memdesc:ab04c11673138d0f5b099f2a2f932097f"><td class="mdescLeft">&#160;</td><td class="mdescRight">define the actual volume in the range of 0.0f to 1.0f  <br /></td></tr>
-<tr class="separator:ab04c11673138d0f5b099f2a2f932097f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a645f14b9b646688d8e8c03f193ab0cf3" id="r_a645f14b9b646688d8e8c03f193ab0cf3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_boost.html#a645f14b9b646688d8e8c03f193ab0cf3">setVolume</a> (float <a class="el" href="classaudio__tools_1_1_volume_support.html#a893871d008fd5516565045bb55e60dd8">volume</a>) override</td></tr>
+<tr class="separator:a645f14b9b646688d8e8c03f193ab0cf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a893871d008fd5516565045bb55e60dd8" id="r_a893871d008fd5516565045bb55e60dd8"><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_volume_support.html#a893871d008fd5516565045bb55e60dd8">volume</a> ()</td></tr>
 <tr class="memdesc:a893871d008fd5516565045bb55e60dd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the actual volume in the range of 0.0f to 1.0f  <br /></td></tr>
 <tr class="separator:a893871d008fd5516565045bb55e60dd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -440,8 +439,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ab04c11673138d0f5b099f2a2f932097f" name="ab04c11673138d0f5b099f2a2f932097f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab04c11673138d0f5b099f2a2f932097f">&#9670;&#160;</a></span>setVolume()</h2>
+<a id="a645f14b9b646688d8e8c03f193ab0cf3" name="a645f14b9b646688d8e8c03f193ab0cf3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a645f14b9b646688d8e8c03f193ab0cf3">&#9670;&#160;</a></span>setVolume()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -450,7 +449,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool setVolume </td>
+          <td class="memname">bool setVolume </td>
           <td>(</td>
           <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>volume</em></td><td>)</td>
@@ -459,14 +458,13 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>define the actual volume in the range of 0.0f to 1.0f (values &gt; 1.0f boost the signal, capped to <a class="el" href="classaudio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a>'s ~1.99994 range when PREFER_FIXEDPOINT is active) </p>
 
-<p>define the actual volume in the range of 0.0f to 1.0f </p>
-
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_maximilian.html#adc84079fab657fa03b21504d2f895677">Maximilian</a>, <a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html#ad593a1d6f339d68d255deca6ed148a43">I2SCodecStream</a>, <a class="el" href="classaudio__tools_1_1_v_s1053_stream.html#ad593a1d6f339d68d255deca6ed148a43">VS1053Stream</a>, <a class="el" href="classaudio__tools_1_1_volume_stream.html#ad593a1d6f339d68d255deca6ed148a43">VolumeStream</a>, <a class="el" href="classaudio__tools_1_1_a2_d_p_stream.html#a645f14b9b646688d8e8c03f193ab0cf3">A2DPStream</a>, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a645f14b9b646688d8e8c03f193ab0cf3">USBAudioDeviceBase</a>, and <a class="el" href="classaudio__tools_1_1_audio_player.html#a645f14b9b646688d8e8c03f193ab0cf3">AudioPlayer</a>.</p>
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_volume_support.html#ab04c11673138d0f5b099f2a2f932097f">VolumeSupport</a>.</p>
 
 </div>
 </div>

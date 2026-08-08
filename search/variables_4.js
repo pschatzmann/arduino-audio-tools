@@ -136,5 +136,6 @@ var searchData=
   ['dwstreams_133',['dwStreams',['../structaudio__tools_1_1_a_v_i_main_header.html#a0928e393586cd6e061e7670046ab2574',1,'audio_tools::AVIMainHeader']]],
   ['dwsuggestedbuffersize_134',['dwsuggestedbuffersize',['../structaudio__tools_1_1_a_v_i_main_header.html#ac511218e347ba5a63f1afb5ab781e879',1,'audio_tools::AVIMainHeader::dwSuggestedBufferSize'],['../structaudio__tools_1_1_a_v_i_stream_header.html#ac511218e347ba5a63f1afb5ab781e879',1,'audio_tools::AVIStreamHeader::dwSuggestedBufferSize']]],
   ['dwtotalframes_135',['dwTotalFrames',['../structaudio__tools_1_1_a_v_i_main_header.html#aeac882bbcab6a958319b839510e2ef7e',1,'audio_tools::AVIMainHeader']]],
-  ['dwwidth_136',['dwwidth',['../structaudio__tools_1_1_a_v_i_main_header.html#adab68f797bd432387c383e56f958f168',1,'audio_tools::AVIMainHeader::dwWidth'],['../structaudio__tools_1_1_r_e_c_t.html#adab68f797bd432387c383e56f958f168',1,'audio_tools::RECT::dwWidth']]]
+  ['dwwidth_136',['dwwidth',['../structaudio__tools_1_1_a_v_i_main_header.html#adab68f797bd432387c383e56f958f168',1,'audio_tools::AVIMainHeader::dwWidth'],['../structaudio__tools_1_1_r_e_c_t.html#adab68f797bd432387c383e56f958f168',1,'audio_tools::RECT::dwWidth']]],
+  ['dynamic_5fdelta_137',['dynamic_delta',['../classaudio__tools_1_1_converter_auto_center_t.html#ab0e7ccd2e426921c0bf307c687f29ca4',1,'audio_tools::ConverterAutoCenterT']]]
 ];
