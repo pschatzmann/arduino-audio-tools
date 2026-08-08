@@ -84,6 +84,12 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_v_i_decoder.html">AVIDecoder</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">AVI Container Decoder which can be fed with small chunks of data. The minimum length must be bigger then the header size! The file structure is documented at <a href="https://learn.microsoft.com/en-us/windows/win32/directshow/avi-riff-file-reference">https://learn.microsoft.com/en-us/windows/win32/directshow/avi-riff-file-reference</a>.  <a href="classaudio__tools_1_1_a_v_i_decoder.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_v_i_encoder.html">AVIEncoder</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">AVI Container Encoder: muxes an already-encoded video stream (e.g. H.264 access units) and an optional PCM/compressed audio stream into a RIFF/AVI container written to a <a class="el" href="class_print.html">Print</a> (a local File to record, or e.g. a network <a class="el" href="class_client.html">Client</a> to publish a live stream to an HTTP/TCP client).  <a href="classaudio__tools_1_1_a_v_i_encoder.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_a_v_i_encoder_video_config.html">AVIEncoderVideoConfig</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration for the (single) video track written by <a class="el" href="classaudio__tools_1_1_a_v_i_encoder.html" title="AVI Container Encoder: muxes an already-encoded video stream (e.g. H.264 access units) and an optiona...">AVIEncoder</a>.  <a href="structaudio__tools_1_1_a_v_i_encoder_video_config.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_jpeg_open_c_v.html">JpegOpenCV</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display image with opencv to be used on the desktop.  <a href="classaudio__tools_1_1_jpeg_open_c_v.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -143,6 +149,20 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:ga4fcb46758e1356d5ff7c6523c52810c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Audio format codes used by Microsoft e.g. in avi or wav files.  <a href="group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1">More...</a><br /></td></tr>
 <tr class="separator:ga4fcb46758e1356d5ff7c6523c52810c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaac961b2fad4045ebc23ed70f727d3bd5" id="r_gaac961b2fad4045ebc23ed70f727d3bd5"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__video.html#gaac961b2fad4045ebc23ed70f727d3bd5">AVIVideoFormat</a> { <br />
+&#160;&#160;<a class="el" href="group__video.html#ggaac961b2fad4045ebc23ed70f727d3bd5a8ba63b54352f7053b055235a9ec7ac09">H264</a>
+, <a class="el" href="group__video.html#ggaac961b2fad4045ebc23ed70f727d3bd5a0a5417ce14732e9bdb402be642ebe9ea">MJPEG</a>
+, <a class="el" href="group__video.html#ggaac961b2fad4045ebc23ed70f727d3bd5a36476ddbd35c20ef7cbbea0bbb32b897">MPEG4</a>
+, <a class="el" href="group__video.html#ggaac961b2fad4045ebc23ed70f727d3bd5a633d6abff0a3fc22404347728d195059">RAW</a>
+, <br />
+&#160;&#160;<a class="el" href="group__video.html#ggaac961b2fad4045ebc23ed70f727d3bd5ae2ebd9cc5a78afc028dd47f2443affea">YUV422</a>
+, <a class="el" href="group__video.html#ggaac961b2fad4045ebc23ed70f727d3bd5a3b73e4d15701467ed72f157ffaff680a">RGB565</a>
+, <a class="el" href="group__video.html#ggaac961b2fad4045ebc23ed70f727d3bd5acd1ea458818d68e388b9356fd528d67a">I420</a>
+, <a class="el" href="group__video.html#ggaac961b2fad4045ebc23ed70f727d3bd5a696b031073e74bf2cb98e5ef201d4aa3">UNKNOWN</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:gaac961b2fad4045ebc23ed70f727d3bd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Video codec identifier for the (single) video stream of an AVI file, used by both AVIEncoder (to write the video track) and AVIDecoder (AVIDecoder::videoFormatType(), decoded from the 'strf' biCompression field - see <a href="https://www.fourcc.org">https://www.fourcc.org</a>). H264 is the primary encoder target; the others are provided for convenience.  <a href="group__video.html#gaac961b2fad4045ebc23ed70f727d3bd5">More...</a><br /></td></tr>
+<tr class="separator:gaac961b2fad4045ebc23ed70f727d3bd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Video playback. </p>
@@ -198,6 +218,49 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><a id="gga4fcb46758e1356d5ff7c6523c52810c1a3c35d6546cbdc225a8e1443cbc3461ec" name="gga4fcb46758e1356d5ff7c6523c52810c1a3c35d6546cbdc225a8e1443cbc3461ec"></a>SANYO_LD_ADPCM&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="gga4fcb46758e1356d5ff7c6523c52810c1ac155faf850ade2d91168dac31e37f5ad" name="gga4fcb46758e1356d5ff7c6523c52810c1ac155faf850ade2d91168dac31e37f5ad"></a>G726ADPCM&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="gga4fcb46758e1356d5ff7c6523c52810c1a16c2a17526e85de193cdd60f67ff81f2" name="gga4fcb46758e1356d5ff7c6523c52810c1a16c2a17526e85de193cdd60f67ff81f2"></a>UNISYS_NAP_ADPCM&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<a id="gaac961b2fad4045ebc23ed70f727d3bd5" name="gaac961b2fad4045ebc23ed70f727d3bd5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaac961b2fad4045ebc23ed70f727d3bd5">&#9670;&#160;</a></span>AVIVideoFormat</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="group__video.html#gaac961b2fad4045ebc23ed70f727d3bd5">AVIVideoFormat</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Video codec identifier for the (single) video stream of an AVI file, used by both <a class="el" href="classaudio__tools_1_1_a_v_i_encoder.html" title="AVI Container Encoder: muxes an already-encoded video stream (e.g. H.264 access units) and an optiona...">AVIEncoder</a> (to write the video track) and <a class="el" href="classaudio__tools_1_1_a_v_i_decoder.html" title="AVI Container Decoder which can be fed with small chunks of data. The minimum length must be bigger t...">AVIDecoder</a> (<a class="el" href="classaudio__tools_1_1_a_v_i_decoder.html#a9b518951e06fa6fe62e53177f6d01d18">AVIDecoder::videoFormatType()</a>, decoded from the 'strf' biCompression field - see <a href="https://www.fourcc.org">https://www.fourcc.org</a>). H264 is the primary encoder target; the others are provided for convenience. </p>
+<ul>
+<li>H264/MPEG4: compressed, variable frame size -&gt; use addVideoFrame()</li>
+<li>MJPEG: one complete JPEG image per frame -&gt; use addJpegFrame()</li>
+<li>RAW: uncompressed 24-bit BGR -&gt; use addVideoFrame()</li>
+<li>YUV422: packed 4:2:2 (YUY2/YUYV), 16 bit/pixel -&gt; use addYUV422Frame()</li>
+<li>RGB565: uncompressed 16-bit RGB (5-6-5) -&gt; use addRGB565Frame()</li>
+<li>I420: planar 4:2:0 YUV (aka IYUV), 12 bit/pixel -&gt; use addI420Frame()</li>
+<li>UNKNOWN: decoder only - the codec did not match any of the above </li>
+</ul>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ggaac961b2fad4045ebc23ed70f727d3bd5a8ba63b54352f7053b055235a9ec7ac09" name="ggaac961b2fad4045ebc23ed70f727d3bd5a8ba63b54352f7053b055235a9ec7ac09"></a>H264&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ggaac961b2fad4045ebc23ed70f727d3bd5a0a5417ce14732e9bdb402be642ebe9ea" name="ggaac961b2fad4045ebc23ed70f727d3bd5a0a5417ce14732e9bdb402be642ebe9ea"></a>MJPEG&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ggaac961b2fad4045ebc23ed70f727d3bd5a36476ddbd35c20ef7cbbea0bbb32b897" name="ggaac961b2fad4045ebc23ed70f727d3bd5a36476ddbd35c20ef7cbbea0bbb32b897"></a>MPEG4&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ggaac961b2fad4045ebc23ed70f727d3bd5a633d6abff0a3fc22404347728d195059" name="ggaac961b2fad4045ebc23ed70f727d3bd5a633d6abff0a3fc22404347728d195059"></a>RAW&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ggaac961b2fad4045ebc23ed70f727d3bd5ae2ebd9cc5a78afc028dd47f2443affea" name="ggaac961b2fad4045ebc23ed70f727d3bd5ae2ebd9cc5a78afc028dd47f2443affea"></a>YUV422&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ggaac961b2fad4045ebc23ed70f727d3bd5a3b73e4d15701467ed72f157ffaff680a" name="ggaac961b2fad4045ebc23ed70f727d3bd5a3b73e4d15701467ed72f157ffaff680a"></a>RGB565&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ggaac961b2fad4045ebc23ed70f727d3bd5acd1ea458818d68e388b9356fd528d67a" name="ggaac961b2fad4045ebc23ed70f727d3bd5acd1ea458818d68e388b9356fd528d67a"></a>I420&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ggaac961b2fad4045ebc23ed70f727d3bd5a696b031073e74bf2cb98e5ef201d4aa3" name="ggaac961b2fad4045ebc23ed70f727d3bd5a696b031073e74bf2cb98e5ef201d4aa3"></a>UNKNOWN&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>

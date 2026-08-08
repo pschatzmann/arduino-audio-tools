@@ -148,6 +148,8 @@ var searchData=
   ['audiowriter_145',['AudioWriter',['../classaudio__tools_1_1_audio_writer.html',1,'audio_tools']]],
   ['audiowritertoaudiooutput_146',['AudioWriterToAudioOutput',['../classaudio__tools_1_1_audio_writer_to_audio_output.html',1,'audio_tools']]],
   ['avidecoder_147',['AVIDecoder',['../classaudio__tools_1_1_a_v_i_decoder.html',1,'audio_tools']]],
-  ['avimainheader_148',['AVIMainHeader',['../structaudio__tools_1_1_a_v_i_main_header.html',1,'audio_tools']]],
-  ['avistreamheader_149',['AVIStreamHeader',['../structaudio__tools_1_1_a_v_i_stream_header.html',1,'audio_tools']]]
+  ['aviencoder_148',['AVIEncoder',['../classaudio__tools_1_1_a_v_i_encoder.html',1,'audio_tools']]],
+  ['aviencodervideoconfig_149',['AVIEncoderVideoConfig',['../structaudio__tools_1_1_a_v_i_encoder_video_config.html',1,'audio_tools']]],
+  ['avimainheader_150',['AVIMainHeader',['../structaudio__tools_1_1_a_v_i_main_header.html',1,'audio_tools']]],
+  ['avistreamheader_151',['AVIStreamHeader',['../structaudio__tools_1_1_a_v_i_stream_header.html',1,'audio_tools']]]
 ];

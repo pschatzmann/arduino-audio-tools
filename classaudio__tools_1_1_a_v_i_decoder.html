@@ -77,6 +77,7 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_a_v_i_decoder-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">AVIDecoder Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__codecs.html">Codecs</a> &#124; <a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__codecs.html">Codecs</a> &raquo; <a class="el" href="group__decoder.html">Decoder</a> &#124; <a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__video.html">Video</a></div></div></div>
@@ -183,6 +184,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:af2d2d9fa75b7f5d48b2cf38ce5c48f65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad0392d8a273ee5faabbf013e05498a8d" id="r_ad0392d8a273ee5faabbf013e05498a8d"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_v_i_decoder.html#ad0392d8a273ee5faabbf013e05498a8d">videoFormat</a> ()</td></tr>
 <tr class="separator:ad0392d8a273ee5faabbf013e05498a8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b518951e06fa6fe62e53177f6d01d18" id="r_a9b518951e06fa6fe62e53177f6d01d18"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__video.html#gaac961b2fad4045ebc23ed70f727d3bd5">AVIVideoFormat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_v_i_decoder.html#a9b518951e06fa6fe62e53177f6d01d18">videoFormatType</a> ()</td></tr>
+<tr class="separator:a9b518951e06fa6fe62e53177f6d01d18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a69e59074343653b1c99551ca65bc9c13" id="r_a69e59074343653b1c99551ca65bc9c13"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_v_i_decoder.html#a69e59074343653b1c99551ca65bc9c13">videoSeconds</a> ()</td></tr>
 <tr class="memdesc:a69e59074343653b1c99551ca65bc9c13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide the length of the video in seconds.  <br /></td></tr>
 <tr class="separator:a69e59074343653b1c99551ca65bc9c13"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -245,6 +248,11 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a2e475070d3df18395c90a10c9d38eb0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace9ff262e1947e3791efa6f27cdc4418" id="r_ace9ff262e1947e3791efa6f27cdc4418"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_v_i_decoder.html#ace9ff262e1947e3791efa6f27cdc4418">writeData</a> ()</td></tr>
 <tr class="separator:ace9ff262e1947e3791efa6f27cdc4418"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
+Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:a0943bb523b44e500baf3c9c625a1ce4f" id="r_a0943bb523b44e500baf3c9c625a1ce4f"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__video.html#gaac961b2fad4045ebc23ed70f727d3bd5">AVIVideoFormat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_v_i_decoder.html#a0943bb523b44e500baf3c9c625a1ce4f">toAVIVideoFormat</a> (uint32_t biCompression, uint16_t biBitCount)</td></tr>
+<tr class="separator:a0943bb523b44e500baf3c9c625a1ce4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -1585,6 +1593,43 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a0943bb523b44e500baf3c9c625a1ce4f" name="a0943bb523b44e500baf3c9c625a1ce4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0943bb523b44e500baf3c9c625a1ce4f">&#9670;&#160;</a></span>toAVIVideoFormat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="group__video.html#gaac961b2fad4045ebc23ed70f727d3bd5">AVIVideoFormat</a> toAVIVideoFormat </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>biCompression</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>biBitCount</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Maps a 'strf' biCompression value (+ biBitCount, to disambiguate BI_BITFIELDS) to the corresponding AVIVideoFormat. Covers what <a class="el" href="classaudio__tools_1_1_a_v_i_encoder.html" title="AVI Container Encoder: muxes an already-encoded video stream (e.g. H.264 access units) and an optiona...">AVIEncoder</a> writes plus a few common real-world FOURCC aliases seen in third-party AVI files. </p>
+
+</div>
+</div>
 <a id="adaead7bfa82627f62dcc663302fc3c51" name="adaead7bfa82627f62dcc663302fc3c51"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adaead7bfa82627f62dcc663302fc3c51">&#9670;&#160;</a></span>tryParseChunk() <span class="overload">[1/2]</span></h2>
 
@@ -1713,6 +1758,32 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9b518951e06fa6fe62e53177f6d01d18" name="a9b518951e06fa6fe62e53177f6d01d18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b518951e06fa6fe62e53177f6d01d18">&#9670;&#160;</a></span>videoFormatType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__video.html#gaac961b2fad4045ebc23ed70f727d3bd5">AVIVideoFormat</a> videoFormatType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Provides the video codec as a typed AVIVideoFormat - the same enum used by <a class="el" href="classaudio__tools_1_1_a_v_i_encoder.html" title="AVI Container Encoder: muxes an already-encoded video stream (e.g. H.264 access units) and an optiona...">AVIEncoder</a> - decoded from the 'strf' biCompression field (the authoritative codec id; more reliable than the 'strh' handler text for third-party files). Returns <a class="el" href="group__video.html#ggaac961b2fad4045ebc23ed70f727d3bd5a696b031073e74bf2cb98e5ef201d4aa3">AVIVideoFormat::UNKNOWN</a> for any codec not covered by the enum. </p>
 
 </div>
 </div>

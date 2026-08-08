@@ -96,6 +96,12 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_v_i_decoder.html">AVIDecoder</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">AVI Container Decoder which can be fed with small chunks of data. The minimum length must be bigger then the header size! The file structure is documented at <a href="https://learn.microsoft.com/en-us/windows/win32/directshow/avi-riff-file-reference">https://learn.microsoft.com/en-us/windows/win32/directshow/avi-riff-file-reference</a>.  <a href="classaudio__tools_1_1_a_v_i_decoder.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_v_i_encoder.html">AVIEncoder</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">AVI Container Encoder: muxes an already-encoded video stream (e.g. H.264 access units) and an optional PCM/compressed audio stream into a RIFF/AVI container written to a <a class="el" href="class_print.html">Print</a> (a local File to record, or e.g. a network <a class="el" href="class_client.html">Client</a> to publish a live stream to an HTTP/TCP client).  <a href="classaudio__tools_1_1_a_v_i_encoder.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_a_v_i_encoder_video_config.html">AVIEncoderVideoConfig</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration for the (single) video track written by <a class="el" href="classaudio__tools_1_1_a_v_i_encoder.html" title="AVI Container Encoder: muxes an already-encoded video stream (e.g. H.264 access units) and an optiona...">AVIEncoder</a>.  <a href="structaudio__tools_1_1_a_v_i_encoder_video_config.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_a_v_i_main_header.html">AVIMainHeader</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_a_v_i_stream_header.html">AVIStreamHeader</a></td></tr>
@@ -134,6 +140,20 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
+<tr class="memitem:gaac961b2fad4045ebc23ed70f727d3bd5" id="r_gaac961b2fad4045ebc23ed70f727d3bd5"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__video.html#gaac961b2fad4045ebc23ed70f727d3bd5">AVIVideoFormat</a> { <br />
+&#160;&#160;<a class="el" href="group__video.html#ggaac961b2fad4045ebc23ed70f727d3bd5a8ba63b54352f7053b055235a9ec7ac09">H264</a>
+, <a class="el" href="group__video.html#ggaac961b2fad4045ebc23ed70f727d3bd5a0a5417ce14732e9bdb402be642ebe9ea">MJPEG</a>
+, <a class="el" href="group__video.html#ggaac961b2fad4045ebc23ed70f727d3bd5a36476ddbd35c20ef7cbbea0bbb32b897">MPEG4</a>
+, <a class="el" href="group__video.html#ggaac961b2fad4045ebc23ed70f727d3bd5a633d6abff0a3fc22404347728d195059">RAW</a>
+, <br />
+&#160;&#160;<a class="el" href="group__video.html#ggaac961b2fad4045ebc23ed70f727d3bd5ae2ebd9cc5a78afc028dd47f2443affea">YUV422</a>
+, <a class="el" href="group__video.html#ggaac961b2fad4045ebc23ed70f727d3bd5a3b73e4d15701467ed72f157ffaff680a">RGB565</a>
+, <a class="el" href="group__video.html#ggaac961b2fad4045ebc23ed70f727d3bd5acd1ea458818d68e388b9356fd528d67a">I420</a>
+, <a class="el" href="group__video.html#ggaac961b2fad4045ebc23ed70f727d3bd5a696b031073e74bf2cb98e5ef201d4aa3">UNKNOWN</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:gaac961b2fad4045ebc23ed70f727d3bd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Video codec identifier for the (single) video stream of an AVI file, used by both AVIEncoder (to write the video track) and AVIDecoder (AVIDecoder::videoFormatType(), decoded from the 'strf' biCompression field - see <a href="https://www.fourcc.org">https://www.fourcc.org</a>). H264 is the primary encoder target; the others are provided for convenience.  <a href="group__video.html#gaac961b2fad4045ebc23ed70f727d3bd5">More...</a><br /></td></tr>
+<tr class="separator:gaac961b2fad4045ebc23ed70f727d3bd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4403c7ff6337b5b822354d33c6a007bd" id="r_a4403c7ff6337b5b822354d33c6a007bd"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a4403c7ff6337b5b822354d33c6a007bd">ParseObjectType</a> { <a class="el" href="namespaceaudio__tools.html#a4403c7ff6337b5b822354d33c6a007bda48f228faf17a7ac73d09ca4a7bdacec5">AVIList</a>
 , <a class="el" href="namespaceaudio__tools.html#a4403c7ff6337b5b822354d33c6a007bda14ed1a46c8c0a602067ad2959efc1ead">AVIChunk</a>
 , <a class="el" href="namespaceaudio__tools.html#a4403c7ff6337b5b822354d33c6a007bdac5ef28915bac2b58344802e25bc6e07f">AVIStreamData</a>

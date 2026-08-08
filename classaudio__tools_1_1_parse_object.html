@@ -97,6 +97,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ae94d17a2a0faa3517af1f3fa83481577"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a91e2474a27dc54c8c2b8bbfce71ae534" id="r_a91e2474a27dc54c8c2b8bbfce71ae534"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_bitmap_info_header.html">BitmapInfoHeader</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_parse_object.html#a91e2474a27dc54c8c2b8bbfce71ae534">asAVIVideoFormat</a> (void *ptr)</td></tr>
 <tr class="separator:a91e2474a27dc54c8c2b8bbfce71ae534"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9df9c4105a5838c50fe0b0347f67b04f" id="r_a9df9c4105a5838c50fe0b0347f67b04f"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_parse_object.html#a9df9c4105a5838c50fe0b0347f67b04f">declaredSize</a> ()</td></tr>
+<tr class="separator:a9df9c4105a5838c50fe0b0347f67b04f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af2bf48343439de316d02bd9641ed47ad" id="r_af2bf48343439de316d02bd9641ed47ad"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_parse_object.html#af2bf48343439de316d02bd9641ed47ad">id</a> ()</td></tr>
 <tr class="separator:af2bf48343439de316d02bd9641ed47ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adea735689b909b7b59c57febc4ddcdc6" id="r_adea735689b909b7b59c57febc4ddcdc6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_parse_object.html#adea735689b909b7b59c57febc4ddcdc6">isAudio</a> ()</td></tr>
@@ -124,6 +126,8 @@ Public Member Functions</h2></td></tr>
 Public Attributes</h2></td></tr>
 <tr class="memitem:ad6bc120bffc64dfc5230863a8ba96596" id="r_ad6bc120bffc64dfc5230863a8ba96596"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_parse_object.html#ad6bc120bffc64dfc5230863a8ba96596">data_size</a></td></tr>
 <tr class="separator:ad6bc120bffc64dfc5230863a8ba96596"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a883b99439c92f48c28ec6e2a0c35b6f9" id="r_a883b99439c92f48c28ec6e2a0c35b6f9"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_parse_object.html#a883b99439c92f48c28ec6e2a0c35b6f9">declared_size</a></td></tr>
+<tr class="separator:a883b99439c92f48c28ec6e2a0c35b6f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a612f1a1dba8266089e62621c1f3325" id="r_a6a612f1a1dba8266089e62621c1f3325"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_parse_object.html#a6a612f1a1dba8266089e62621c1f3325">end_pos</a></td></tr>
 <tr class="separator:a6a612f1a1dba8266089e62621c1f3325"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d6ed19a6acdcbd876689889df0e81a5" id="r_a5d6ed19a6acdcbd876689889df0e81a5"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_parse_object.html#a5d6ed19a6acdcbd876689889df0e81a5">open</a></td></tr>
@@ -244,6 +248,32 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9df9c4105a5838c50fe0b0347f67b04f" name="a9df9c4105a5838c50fe0b0347f67b04f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9df9c4105a5838c50fe0b0347f67b04f">&#9670;&#160;</a></span>declaredSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t declaredSize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Original (unpadded) size as declared in the file - for AVIStreamData this is the real payload length, excluding the RIFF word-alignment pad byte that <a class="el" href="classaudio__tools_1_1_parse_object.html#a0b6b70701c46e22849f0f363861351cd">size()</a>/open may include when the declared size is odd. </p>
 
 </div>
 </div>
@@ -599,6 +629,20 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">size_t data_size</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a883b99439c92f48c28ec6e2a0c35b6f9" name="a883b99439c92f48c28ec6e2a0c35b6f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a883b99439c92f48c28ec6e2a0c35b6f9">&#9670;&#160;</a></span>declared_size</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t declared_size</td>
         </tr>
       </table>
 </div><div class="memdoc">
