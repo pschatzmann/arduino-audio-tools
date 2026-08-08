@@ -39,7 +39,7 @@
 #include <type_traits>
 
 #include "MDFEchoCancellationConfig.h"
-#include "AudioTools/CoreAudio/AudioBasic/PseudoFloat.h"
+#include "AudioTools/CoreAudio/AudioBasic/soft_float_t.h"
 #include "AudioTools/FFT/AudioFFT.h"
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Allocator.h"
 #include "AudioTools/CoreAudio/AudioTypes.h"
@@ -76,23 +76,23 @@ struct MDFFloat {
 };
 
 /**
- * @brief Selects PseudoFloat (see PseudoFloat.h) as MDFEchoCancellation's
+ * @brief Selects soft_float_t (see soft_float_t.h) as MDFEchoCancellation's
  * internal numeric representation, so the algorithm runs on integer
  * mantissa/exponent arithmetic instead of native float instructions --
- * useful on microcontrollers without an FPU. PseudoFloat's arithmetic is
- * verified against native float directly (see the PseudoFloat tests in
+ * useful on microcontrollers without an FPU. soft_float_t's arithmetic is
+ * verified against native float directly (see the soft_float_t tests in
  * tests-cmake/stt/stt_test.cpp), and MDFEchoCancellation<int16_t, MDFFixedPoint> is
  * smoke-tested to run without crashing/NaN and to converge similarly to
  * MDFFloat on the same synthetic signal -- but it has not received the
  * same depth of numerical scrutiny as MDFFloat, so treat it as less
  * battle-tested. Despite the name, this is not a classic narrow Q15
  * fixed-point format (that would over/underflow across this algorithm's
- * actual value range -- see PseudoFloat's class doc for why).
+ * actual value range -- see soft_float_t's class doc for why).
  */
 struct MDFFixedPoint {
-  using word16_t = PseudoFloat;
-  using word32_t = PseudoFloat;
-  using float_t = PseudoFloat;
+  using word16_t = soft_float_t;
+  using word32_t = soft_float_t;
+  using float_t = soft_float_t;
 };
 
 /**
@@ -206,7 +206,7 @@ struct fft_state {
 // Forward declarations: these are defined at the bottom of this file but
 // referenced from inside MDFEchoCancellation below. echo_fft/echo_ifft are
 // templated on the sample element type (T = SampleType::word16_t, i.e.
-// float or PseudoFloat) since they convert to/from the FFT driver's plain
+// float or soft_float_t) since they convert to/from the FFT driver's plain
 // float bins at the boundary.
 inline void* echo_fft_init(int size, FFTDriver* driver);
 inline void echo_fft_destroy(void* table);
@@ -1000,7 +1000,7 @@ class MDFEchoCancellation : public AudioStream {
     int C = st->C;
     int K = st->K;
 
-    // Wide-dynamic-range tuning constants, as Num (float or PseudoFloat)
+    // Wide-dynamic-range tuning constants, as Num (float or soft_float_t)
     // so they multiply/compare directly against Num-typed state below.
     const Num min_leak(0.005f);        // Minimum leak estimate for the adaptive filter
     const Num var1_smooth(0.36f);      // Smoothing coefficient, 1st variance estimator
@@ -1385,7 +1385,7 @@ inline void echo_fft_destroy(void* table) {
 
 /**
  * @brief Perform forward FFT
- * @tparam T Element type (SampleType::word16_t -- float or PseudoFloat)
+ * @tparam T Element type (SampleType::word16_t -- float or soft_float_t)
  * @param table Opaque pointer to FFT state
  * @param in Input time-domain signal (size N)
  * @param out Output frequency-domain signal in packed format (size N)
@@ -1428,7 +1428,7 @@ inline void echo_fft(void* table, T* in, T* out) {
 
 /**
  * @brief Perform inverse FFT
- * @tparam T Element type (SampleType::word16_t -- float or PseudoFloat)
+ * @tparam T Element type (SampleType::word16_t -- float or soft_float_t)
  * @param table Opaque pointer to FFT state
  * @param in Input frequency-domain signal in packed format (size N)
  *           Format: [DC, real1, imag1, real2, imag2, ..., Nyquist]

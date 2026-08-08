@@ -1,5 +1,5 @@
 // Tests for AudioTools/AEC (LMSEchoCancellationStream, MDFEchoCancellationStream,
-// PseudoFloat) and AudioTools/AudioLibs/WakeWordDetector.h.
+// soft_float_t) and AudioTools/AudioLibs/WakeWordDetector.h.
 //
 // These are experimental ("Sandbox"-derived) components. This test suite intends to:
 //  - lock in the structural fixes applied to get them to compile and run
@@ -13,7 +13,7 @@
 //    true; before those, it ran without crashing but never cancelled
 //    anything), for both its numeric backends (MDFFloat and MDFFixedPoint,
 //    selected via a template parameter rather than a FIXED_POINT #ifdef),
-//  - verify PseudoFloat (MDFFixedPoint's number type) matches native float
+//  - verify soft_float_t (MDFFixedPoint's number type) matches native float
 //    arithmetic directly, since that's what makes MDFFixedPoint trustworthy
 //    without needing DSP reference vectors for a full fixed-point port.
 #include <cassert>
@@ -27,7 +27,7 @@
 #include "AudioTools/FFT/AudioRealFFT.h"
 #include "AudioTools/AEC/LMSEchoCancellationStream.h"
 #include "AudioTools/AEC/MDFEchoCancellationStream.h"
-#include "AudioTools/CoreAudio/AudioBasic/PseudoFloat.h"
+#include "AudioTools/CoreAudio/AudioBasic/soft_float_t.h"
 #include "AudioTools/AudioLibs/WakeWordDetector.h"
 
 using namespace audio_tools;
@@ -41,17 +41,17 @@ double energy(const int16_t* data, size_t n) {
 }
 
 // ---------------------------------------------------------------------------
-// PseudoFloat
+// soft_float_t
 // ---------------------------------------------------------------------------
 
-// PseudoFloat backs MDFFixedPoint's word16_t/word32_t/float_t, so its
+// soft_float_t backs MDFFixedPoint's word16_t/word32_t/float_t, so its
 // arithmetic needs to match native float directly and unambiguously --
 // including when mixed with plain float/int literals, since the MDF
 // algorithm body does that constantly (e.g. `.6f * st->Davg1`). Verifies
 // round-trip, all four arithmetic operators and all comparisons across a
 // representative range of magnitudes/signs, plus a multi-step accumulation
 // (closer to how it's actually used, in per-sample/per-bin loops).
-void test_pseudofloat_matches_native_float() {
+void test_soft_float_matches_native_float() {
   const std::vector<float> values = {
       0.0f,     1.0f,     -1.0f,    0.5f,     -0.5f,   3.14159f, -3.14159f,
       1234.5f,  -1234.5f, 0.0001f,  -0.0001f, 32768.0f, -32768.0f, 1e6f,
@@ -66,11 +66,11 @@ void test_pseudofloat_matches_native_float() {
     (void)op;
   };
 
-  for (float v : values) check("roundtrip", v, (float)PseudoFloat(v), tol);
+  for (float v : values) check("roundtrip", v, (float)soft_float_t(v), tol);
 
   for (float a : values) {
     for (float b : values) {
-      PseudoFloat pa(a), pb(b);
+      soft_float_t pa(a), pb(b);
       check("add", a + b, (float)(pa + pb), tol);
       check("sub", a - b, (float)(pa - pb), tol);
       check("mul", a * b, (float)(pa * pb), tol);
@@ -80,34 +80,34 @@ void test_pseudofloat_matches_native_float() {
     }
   }
 
-  for (float v : values) check("neg", -v, (float)(-PseudoFloat(v)), tol);
+  for (float v : values) check("neg", -v, (float)(-soft_float_t(v)), tol);
 
   {
-    PseudoFloat a(10.0f);
-    a += PseudoFloat(5.0f);
+    soft_float_t a(10.0f);
+    a += soft_float_t(5.0f);
     check("+=", 15.0f, (float)a, tol);
-    a -= PseudoFloat(3.0f);
+    a -= soft_float_t(3.0f);
     check("-=", 12.0f, (float)a, tol);
-    a *= PseudoFloat(2.0f);
+    a *= soft_float_t(2.0f);
     check("*=", 24.0f, (float)a, tol);
-    a /= PseudoFloat(4.0f);
+    a /= soft_float_t(4.0f);
     check("/=", 6.0f, (float)a, tol);
   }
 
   {
     // Chained accumulation, closer to how the MDF algorithm actually uses
     // this type in per-sample/per-bin loops.
-    PseudoFloat acc(0.0f);
+    soft_float_t acc(0.0f);
     float facc = 0.0f;
     for (int i = 0; i < 100; i++) {
       float v = sinf(i * 0.1f) * 1000.0f;
-      acc = acc + PseudoFloat(v) * PseudoFloat(0.01f);
+      acc = acc + soft_float_t(v) * soft_float_t(0.01f);
       facc += v * 0.01f;
     }
     check("accum100", facc, (float)acc, 0.02f);  // looser tol, 100 accumulated steps
   }
 
-  printf("[pseudofloat] matches native float across %zu values (%zu pairs)\n",
+  printf("[soft_float] matches native float across %zu values (%zu pairs)\n",
          values.size(), values.size() * values.size());
 }
 
@@ -286,8 +286,8 @@ void test_wakeword_detects_known_tone_and_ignores_other() {
 // simple attenuated echo gets substantially cancelled -- for both numeric
 // backends selectable via the SampleType template parameter (replacing the
 // old FIXED_POINT #ifdef): MDFFloat (native float, the default) and
-// MDFFixedPoint (PseudoFloat, integer mantissa/exponent arithmetic -- see
-// PseudoFloat.h). MDFFixedPoint is expected to converge less tightly than
+// MDFFixedPoint (soft_float_t, integer mantissa/exponent arithmetic -- see
+// soft_float_t.h). MDFFixedPoint is expected to converge less tightly than
 // MDFFloat (lower mantissa precision), hence the separate, looser
 // max_energy_ratio per backend.
 template <typename SampleType>
@@ -366,7 +366,7 @@ void test_mdf_converges(const char* label, double max_energy_ratio) {
 }  // namespace
 
 int main() {
-  test_pseudofloat_matches_native_float();
+  test_soft_float_matches_native_float();
   test_lms_converges_and_does_not_freeze();
   test_lms_stream_pipeline_matches_direct_cancel();
   test_wakeword_detects_known_tone_and_ignores_other();
