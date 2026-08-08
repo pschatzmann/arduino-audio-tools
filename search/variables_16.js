@@ -45,5 +45,5 @@ var searchData=
   ['vs1053_5fdump_42',['vs1053_dump',['../classaudio__tools_1_1_w_m8960_config.html#ac422ac3c2e25766ec8115811b7b75a1d',1,'audio_tools::WM8960Config']]],
   ['vs1053_5fenable_5fpll_43',['vs1053_enable_pll',['../classaudio__tools_1_1_w_m8960_config.html#a3f1c8e5721a062a24f7b7d2ef549601b',1,'audio_tools::WM8960Config']]],
   ['vs1053_5fmclk_5fhz_44',['vs1053_mclk_hz',['../classaudio__tools_1_1_w_m8960_config.html#ad9b0acc96ff1397ffcf5d23829d1d437',1,'audio_tools::WM8960Config']]],
-  ['vsa_45',['vsa',['../classaudio__tools_1_1_equalizer3_bands.html#a4c99f82cdda0c54b60b99cc55c10c3b6',1,'audio_tools::Equalizer3Bands::vsa'],['../classaudio__tools_1_1_equalizer3_bands_per_channel.html#a4c99f82cdda0c54b60b99cc55c10c3b6',1,'audio_tools::Equalizer3BandsPerChannel::vsa']]]
+  ['vsa_45',['vsa',['../classaudio__tools_1_1_equalizer3_bands_t.html#aaa9091d5bb55224ece1294454fb005f9',1,'audio_tools::Equalizer3BandsT::vsa'],['../classaudio__tools_1_1_equalizer3_bands_per_channel_t.html#aaa9091d5bb55224ece1294454fb005f9',1,'audio_tools::Equalizer3BandsPerChannelT::vsa']]]
 ];

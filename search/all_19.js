@@ -232,7 +232,7 @@ var searchData=
   ['vfsfile_2eh_229',['VFSFile.h',['../_v_f_s_file_8h.html',1,'']]],
   ['vi_230',['vi',['../classaudio__tools_1_1_vorbis_decoder.html#ab0f1683720d1dc40770009fd6c8d3722',1,'audio_tools::VorbisDecoder']]],
   ['vid_231',['vid',['../structaudio__tools_1_1_u_s_b_audio_config.html#aac5ffad7f07bfef80deaef77e0eeca69',1,'audio_tools::USBAudioConfig']]],
-  ['video_232',['video',['../group__video.html',1,'Video'],['../group__basic.html#gga5b1869d184b84711842bfe4f25433338ae60ae31f67ab883c746bb71c7a145c18',1,'audio_tools::VIDEO'],['../namespaceaudio__tools.html#a3529160d6b73e5a63e0a95afeb424659aff13e87d7cbbe18fface435a5b84aaec',1,'audio_tools::Video']]],
+  ['video_232',['video',['../group__video.html',1,'Video'],['../namespaceaudio__tools.html#a3529160d6b73e5a63e0a95afeb424659aff13e87d7cbbe18fface435a5b84aaec',1,'audio_tools::Video'],['../group__basic.html#gga5b1869d184b84711842bfe4f25433338ae60ae31f67ab883c746bb71c7a145c18',1,'audio_tools::VIDEO']]],
   ['video_2eh_233',['Video.h',['../_video_8h.html',1,'']]],
   ['video_5favc_234',['VIDEO_AVC',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338a5a63b30a669280e6c747f70c796c53af',1,'audio_tools']]],
   ['video_5fformat_235',['video_format',['../classaudio__tools_1_1_a_v_i_decoder.html#a8ac94e596326d1711852e270b0adecd4',1,'audio_tools::AVIDecoder']]],
@@ -297,5 +297,5 @@ var searchData=
   ['vs1053mode_294',['VS1053Mode',['../namespaceaudio__tools.html#ae01ff26451004d25dd832a9e3a178b1a',1,'audio_tools']]],
   ['vs1053stream_295',['vs1053stream',['../classaudio__tools_1_1_v_s1053_stream.html#aae736b4816f3d74f696a161ce0409a51',1,'audio_tools::VS1053Stream::VS1053Stream()'],['../classaudio__tools_1_1_v_s1053_stream.html',1,'VS1053Stream'],['../classaudio__tools_1_1_v_s1053_stream.html#a139a834f0ca0de230dd75df3f78386c8',1,'audio_tools::VS1053Stream::VS1053Stream()']]],
   ['vs1053stream_2eh_296',['VS1053Stream.h',['../_v_s1053_stream_8h.html',1,'']]],
-  ['vsa_297',['vsa',['../classaudio__tools_1_1_equalizer3_bands.html#a4c99f82cdda0c54b60b99cc55c10c3b6',1,'audio_tools::Equalizer3Bands::vsa'],['../classaudio__tools_1_1_equalizer3_bands_per_channel.html#a4c99f82cdda0c54b60b99cc55c10c3b6',1,'audio_tools::Equalizer3BandsPerChannel::vsa']]]
+  ['vsa_297',['vsa',['../classaudio__tools_1_1_equalizer3_bands_t.html#aaa9091d5bb55224ece1294454fb005f9',1,'audio_tools::Equalizer3BandsT::vsa'],['../classaudio__tools_1_1_equalizer3_bands_per_channel_t.html#aaa9091d5bb55224ece1294454fb005f9',1,'audio_tools::Equalizer3BandsPerChannelT::vsa']]]
 ];

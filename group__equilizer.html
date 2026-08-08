@@ -70,7 +70,8 @@ $(function() {
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle"><div class="title">Equalizer<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__dsp.html">DSP</a></div></div></div>
 </div><!--header-->
 <div class="contents">
@@ -83,15 +84,53 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_config_equalizer3_bands.html">ConfigEqualizer3Bands</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration for 3 Band Equalizer.  <a href="structaudio__tools_1_1_config_equalizer3_bands.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_equalizer3_bands.html">Equalizer3Bands</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">3 Band Equalizer with identical settings for all channels  <a href="classaudio__tools_1_1_equalizer3_bands.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_equalizer3_bands_per_channel_t.html">Equalizer3BandsPerChannelT&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">3 Band Equalizer with per-channel frequency and gain control Allows independent frequency and gain settings for each audio channel. Each channel can have different low/high frequency cutoffs and different gain values for low, medium, and high frequency bands.  <a href="classaudio__tools_1_1_equalizer3_bands_per_channel_t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_equalizer3_bands_per_channel.html">Equalizer3BandsPerChannel</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">3 Band Equalizer with per-channel frequency and gain control Allows independent frequency and gain settings for each audio channel. Each channel can have different low/high frequency cutoffs and different gain values for low, medium, and high frequency bands.  <a href="classaudio__tools_1_1_equalizer3_bands_per_channel.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_equalizer3_bands_t.html">Equalizer3BandsT&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">3 Band Equalizer with identical settings for all channels  <a href="classaudio__tools_1_1_equalizer3_bands_t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:gac3f450477c3a8f8ed76bc9d90a7a3797" id="r_gac3f450477c3a8f8ed76bc9d90a7a3797"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__equilizer.html#gac3f450477c3a8f8ed76bc9d90a7a3797">Equalizer3Bands</a> = <a class="el" href="classaudio__tools_1_1_equalizer3_bands_t.html">Equalizer3BandsT</a>&lt; float &gt;</td></tr>
+<tr class="separator:gac3f450477c3a8f8ed76bc9d90a7a3797"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad237b02d8704acbc8e4738bf0c26dff3" id="r_gad237b02d8704acbc8e4738bf0c26dff3"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__equilizer.html#gad237b02d8704acbc8e4738bf0c26dff3">Equalizer3BandsPerChannel</a> = <a class="el" href="classaudio__tools_1_1_equalizer3_bands_per_channel_t.html">Equalizer3BandsPerChannelT</a>&lt; float &gt;</td></tr>
+<tr class="separator:gad237b02d8704acbc8e4738bf0c26dff3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Digital Equalizer. </p>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="gac3f450477c3a8f8ed76bc9d90a7a3797" name="gac3f450477c3a8f8ed76bc9d90a7a3797"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac3f450477c3a8f8ed76bc9d90a7a3797">&#9670;&#160;</a></span>Equalizer3Bands</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="group__equilizer.html#gac3f450477c3a8f8ed76bc9d90a7a3797">Equalizer3Bands</a> =  <a class="el" href="classaudio__tools_1_1_equalizer3_bands_t.html">Equalizer3BandsT</a>&lt;float&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><code>float</code>-based alias kept for backwards compatibility; see <a class="el" href="classaudio__tools_1_1_equalizer3_bands_t.html" title="3 Band Equalizer with identical settings for all channels">Equalizer3BandsT</a> for the templated version used on FPU-less microcontrollers. </p>
+
+</div>
+</div>
+<a id="gad237b02d8704acbc8e4738bf0c26dff3" name="gad237b02d8704acbc8e4738bf0c26dff3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad237b02d8704acbc8e4738bf0c26dff3">&#9670;&#160;</a></span>Equalizer3BandsPerChannel</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="group__equilizer.html#gad237b02d8704acbc8e4738bf0c26dff3">Equalizer3BandsPerChannel</a> =  <a class="el" href="classaudio__tools_1_1_equalizer3_bands_per_channel_t.html">Equalizer3BandsPerChannelT</a>&lt;float&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><code>float</code>-based alias kept for backwards compatibility; see <a class="el" href="classaudio__tools_1_1_equalizer3_bands_per_channel_t.html" title="3 Band Equalizer with per-channel frequency and gain control Allows independent frequency and gain se...">Equalizer3BandsPerChannelT</a> for the templated version used on FPU-less microcontrollers. </p>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

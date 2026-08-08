@@ -33,7 +33,7 @@ var searchData=
   ['headerwritten_30',['headerWritten',['../classaudio__tools_1_1_d_s_f_encoder.html#a5e354fc0727da072567dc44008059902',1,'audio_tools::DSFEncoder']]],
   ['headphoneisconnected_31',['headphoneIsConnected',['../classaudio__tools_1_1_audio_board_stream.html#a86f6a759a6b9c8080d914c1aa84c243a',1,'audio_tools::AudioBoardStream']]],
   ['hertz_32',['hertz',['../classaudio__tools_1_1_audio_e_s_p32_u_l_p.html#a8f88f758a0f634c147bbdc139daa9183',1,'audio_tools::AudioESP32ULP']]],
-  ['hf_33',['hf',['../structaudio__tools_1_1_equalizer3_bands_1_1_e_q_s_t_a_t_e.html#a3aa461d03119c9eb4228d57537e45763',1,'audio_tools::Equalizer3Bands::EQSTATE::hf'],['../structaudio__tools_1_1_equalizer3_bands_per_channel_1_1_e_q_s_t_a_t_e.html#a3aa461d03119c9eb4228d57537e45763',1,'audio_tools::Equalizer3BandsPerChannel::EQSTATE::hf']]],
+  ['hf_33',['hf',['../structaudio__tools_1_1_equalizer3_bands_t_1_1_e_q_s_t_a_t_e.html#a52932997126eee66518199b9e38c6836',1,'audio_tools::Equalizer3BandsT::EQSTATE::hf'],['../structaudio__tools_1_1_equalizer3_bands_per_channel_t_1_1_e_q_s_t_a_t_e.html#a52932997126eee66518199b9e38c6836',1,'audio_tools::Equalizer3BandsPerChannelT::EQSTATE::hf']]],
   ['history_34',['history',['../classaudio__tools__hls_1_1_u_r_l_history.html#aab387880a250164cc4c820cf6b1bb5a0',1,'audio_tools_hls::URLHistory']]],
   ['hold_5fcount_35',['hold_count',['../classaudio__tools_1_1_compressor.html#a038d4ecdd0cff856b86d7bb5a701e2ed',1,'audio_tools::Compressor']]],
   ['home_36',['home',['../structaudio__tools_1_1_a_d_t_s_parser_1_1_a_d_t_s_header.html#a8a8fb0d8a8822771fccdb36f9e4d031b',1,'audio_tools::ADTSParser::ADTSHeader']]],

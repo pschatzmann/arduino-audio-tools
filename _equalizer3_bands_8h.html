@@ -75,13 +75,15 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle"><div class="title">Equalizer3Bands.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;math.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="_audio_output_8h_source.html">AudioTools/CoreAudio/AudioOutput.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_audio_streams_8h_source.html">AudioTools/CoreAudio/AudioStreams.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_base_converter_8h_source.html">AudioTools/CoreAudio/BaseConverter.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_audio_tools_config_8h_source.html">AudioToolsConfig.h</a>&quot;</code><br />
 </div>
 <p><a href="_equalizer3_bands_8h_source.html">Go to the source code of this file.</a></p>
@@ -91,16 +93,16 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_config_equalizer3_bands.html">ConfigEqualizer3Bands</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration for 3 Band Equalizer.  <a href="structaudio__tools_1_1_config_equalizer3_bands.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_equalizer3_bands_1_1_e_q_s_t_a_t_e.html">Equalizer3Bands::EQSTATE</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_filter.html" title="Abstract filter interface definition. Subclasses implement process() to transform audio samples one a...">Filter</a> state for each channel.  <a href="structaudio__tools_1_1_equalizer3_bands_1_1_e_q_s_t_a_t_e.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_equalizer3_bands_t_1_1_e_q_s_t_a_t_e.html">Equalizer3BandsT&lt; T &gt;::EQSTATE</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_filter.html" title="Abstract filter interface definition. Subclasses implement process() to transform audio samples one a...">Filter</a> state for each channel.  <a href="structaudio__tools_1_1_equalizer3_bands_t_1_1_e_q_s_t_a_t_e.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_equalizer3_bands_per_channel_1_1_e_q_s_t_a_t_e.html">Equalizer3BandsPerChannel::EQSTATE</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_equalizer3_bands_per_channel_t_1_1_e_q_s_t_a_t_e.html">Equalizer3BandsPerChannelT&lt; T &gt;::EQSTATE</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_equalizer3_bands.html">Equalizer3Bands</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">3 Band Equalizer with identical settings for all channels  <a href="classaudio__tools_1_1_equalizer3_bands.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_equalizer3_bands_per_channel_t.html">Equalizer3BandsPerChannelT&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">3 Band Equalizer with per-channel frequency and gain control Allows independent frequency and gain settings for each audio channel. Each channel can have different low/high frequency cutoffs and different gain values for low, medium, and high frequency bands.  <a href="classaudio__tools_1_1_equalizer3_bands_per_channel_t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_equalizer3_bands_per_channel.html">Equalizer3BandsPerChannel</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">3 Band Equalizer with per-channel frequency and gain control Allows independent frequency and gain settings for each audio channel. Each channel can have different low/high frequency cutoffs and different gain values for low, medium, and high frequency bands.  <a href="classaudio__tools_1_1_equalizer3_bands_per_channel.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_equalizer3_bands_t.html">Equalizer3BandsT&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">3 Band Equalizer with identical settings for all channels  <a href="classaudio__tools_1_1_equalizer3_bands_t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
@@ -108,6 +110,13 @@ Namespaces</h2></td></tr>
 <tr class="memitem:namespaceaudio__tools" id="r_namespaceaudio__tools"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></td></tr>
 <tr class="memdesc:namespaceaudio__tools"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic Implementation of sound input and output for desktop environments using portaudio. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:gac3f450477c3a8f8ed76bc9d90a7a3797" id="r_gac3f450477c3a8f8ed76bc9d90a7a3797"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__equilizer.html#gac3f450477c3a8f8ed76bc9d90a7a3797">Equalizer3Bands</a> = <a class="el" href="classaudio__tools_1_1_equalizer3_bands_t.html">Equalizer3BandsT</a>&lt; float &gt;</td></tr>
+<tr class="separator:gac3f450477c3a8f8ed76bc9d90a7a3797"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad237b02d8704acbc8e4738bf0c26dff3" id="r_gad237b02d8704acbc8e4738bf0c26dff3"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__equilizer.html#gad237b02d8704acbc8e4738bf0c26dff3">Equalizer3BandsPerChannel</a> = <a class="el" href="classaudio__tools_1_1_equalizer3_bands_per_channel_t.html">Equalizer3BandsPerChannelT</a>&lt; float &gt;</td></tr>
+<tr class="separator:gad237b02d8704acbc8e4738bf0c26dff3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->
