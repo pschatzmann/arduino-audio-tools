@@ -13,7 +13,7 @@ var searchData=
   ['main_10',['main',['../_main_8h.html#a840291bc02cba5474a4cb46a9b9566fe',1,'Main.h']]],
   ['mainfrequency_11',['mainfrequency',['../classaudio__tools_1_1_musical_notes.html#abd5f92e43178a3194e8416160b2f5984',1,'audio_tools::MusicalNotes::mainFrequency(uint8_t mainNoteIdx, uint8_t octave) const'],['../classaudio__tools_1_1_musical_notes.html#adb03438437148af1a6efc8ded1c031a3',1,'audio_tools::MusicalNotes::mainFrequency(uint64_t idx) const']]],
   ['mainheader_12',['mainHeader',['../classaudio__tools_1_1_a_v_i_decoder.html#a63fba9c3de55b396cd5a356ab0dca7b3',1,'audio_tools::AVIDecoder']]],
-  ['mantissa_13',['mantissa',['../classaudio__tools_1_1_pseudo_float.html#a53402496946a9b2ecb7e4372cd2c3d88',1,'audio_tools::PseudoFloat']]],
+  ['mantissa_13',['mantissa',['../classaudio__tools_1_1soft__float__t.html#a53402496946a9b2ecb7e4372cd2c3d88',1,'audio_tools::soft_float_t']]],
   ['map_14',['map',['../classaudio__tools_1_1_sine_from_table.html#a3eec11f53d23e6083aaaeb9ee1296c84',1,'audio_tools::SineFromTable::map()'],['../classaudio__tools_1_1_equalizer_n_bands.html#a8dc088f276afcfa44f00e7d750375dcd',1,'audio_tools::EqualizerNBands::map()'],['../_arduino_8h.html#aada2d75bc8a8c6eb845bd940eadfa3fd',1,'map():&#160;Arduino.h']]],
   ['mapt_15',['mapT',['../namespaceaudio__tools.html#a59eee85141fc7b136bf44c31c75811e1',1,'audio_tools']]],
   ['matches_16',['matches',['../classaudio__tools_1_1_str_view.html#ab9782b5988236272374d58e37e79b792',1,'audio_tools::StrView']]],

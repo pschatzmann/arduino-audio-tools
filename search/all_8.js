@@ -187,7 +187,7 @@ var searchData=
   ['expected_5fpayload_5flen_184',['expected_payload_len',['../classaudio__tools_1_1_s_p_i_audio_slave.html#a0fe62a513ba32a035a62928926d03d3d',1,'audio_tools::SPIAudioSlave']]],
   ['experimentalindicatorflag_185',['ExperimentalIndicatorFlag',['../_meta_data_i_d3_8h.html#adcfcff9085343760ed03deace09ee75b',1,'MetaDataID3.h']]],
   ['expire_5fseconds_186',['expire_seconds',['../classaudio__tools_1_1_redis_buffer.html#a90e112dfd1c04774eb392ad6db2903ec',1,'audio_tools::RedisBuffer']]],
-  ['exponent_187',['exponent',['../classaudio__tools_1_1_pseudo_float.html#a23019b766aa79e195a35e83890ce3098',1,'audio_tools::PseudoFloat']]],
+  ['exponent_187',['exponent',['../classaudio__tools_1_1soft__float__t.html#a23019b766aa79e195a35e83890ce3098',1,'audio_tools::soft_float_t']]],
   ['exponentialvolumecontrol_188',['ExponentialVolumeControl',['../classaudio__tools_1_1_exponential_volume_control.html',1,'audio_tools']]],
   ['ext_189',['ext',['../classaudio__tools_1_1_s_d_index.html#af9b32121c4ad80b0887a3d73fd24de5f',1,'audio_tools::SDIndex::ext'],['../classaudio__tools_1_1_s_d_direct.html#af9b32121c4ad80b0887a3d73fd24de5f',1,'audio_tools::SDDirect::ext'],['../structaudio__tools_1_1_mime_entry.html#af9b32121c4ad80b0887a3d73fd24de5f',1,'audio_tools::MimeEntry::ext']]],
   ['ext_5fadpcm_5fheader_190',['ext_adpcm_header',['../structaudio__tools_1_1_w_a_v_audio_info.html#afa735c6f70d85eac8940d4416716f025',1,'audio_tools::WAVAudioInfo']]],

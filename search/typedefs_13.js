@@ -6,7 +6,7 @@ var searchData=
   ['wifiserver_3',['WiFiServer',['../namespaceaudio__tools.html#a6b0733250d04ae38b9e1062aabf27a65',1,'audio_tools']]],
   ['wifiudp_4',['WiFiUDP',['../namespaceaudio__tools.html#a8806d402d8514807dbe470eefd6e793c',1,'audio_tools']]],
   ['word16_5',['word16',['../structaudio__tools_1_1_echo_state.html#a3cbc3957c61ff8173c42683c6acd13ad',1,'audio_tools::EchoState::Word16'],['../classaudio__tools_1_1_m_d_f_echo_cancellation.html#a3cbc3957c61ff8173c42683c6acd13ad',1,'audio_tools::MDFEchoCancellation::Word16']]],
-  ['word16_5ft_6',['word16_t',['../structaudio__tools_1_1_m_d_f_float.html#ad79d8abdcc74adf94c88646188a67059',1,'audio_tools::MDFFloat::word16_t'],['../structaudio__tools_1_1_m_d_f_fixed_point.html#a96342f5c43d38c5840a38833d1a050c8',1,'audio_tools::MDFFixedPoint::word16_t']]],
+  ['word16_5ft_6',['word16_t',['../structaudio__tools_1_1_m_d_f_float.html#ad79d8abdcc74adf94c88646188a67059',1,'audio_tools::MDFFloat::word16_t'],['../structaudio__tools_1_1_m_d_f_fixed_point.html#adfc2446791928b343b865957de15b46c',1,'audio_tools::MDFFixedPoint::word16_t']]],
   ['word32_7',['word32',['../structaudio__tools_1_1_echo_state.html#a368b6a31dea45d3db9720f1190d4657b',1,'audio_tools::EchoState::Word32'],['../classaudio__tools_1_1_m_d_f_echo_cancellation.html#a368b6a31dea45d3db9720f1190d4657b',1,'audio_tools::MDFEchoCancellation::Word32']]],
-  ['word32_5ft_8',['word32_t',['../structaudio__tools_1_1_m_d_f_float.html#ab97db8e928dcf9bfffc75af318cb6703',1,'audio_tools::MDFFloat::word32_t'],['../structaudio__tools_1_1_m_d_f_fixed_point.html#a2506fa72bfbb2d4ab1cf3c12938587a3',1,'audio_tools::MDFFixedPoint::word32_t']]]
+  ['word32_5ft_8',['word32_t',['../structaudio__tools_1_1_m_d_f_float.html#ab97db8e928dcf9bfffc75af318cb6703',1,'audio_tools::MDFFloat::word32_t'],['../structaudio__tools_1_1_m_d_f_fixed_point.html#a13117f02b4e75ad71702a4892d4e658a',1,'audio_tools::MDFFixedPoint::word32_t']]]
 ];

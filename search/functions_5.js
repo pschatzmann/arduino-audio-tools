@@ -73,6 +73,6 @@ var searchData=
   ['exists_70',['exists',['../class_u_i.html#a33e750cdf3390bcf14077e72fa3c3744',1,'UI::exists()'],['../classaudio__tools_1_1_v_f_s.html#a5199a71c2890bca602898112dacb2686',1,'audio_tools::VFS::exists(const char *path)'],['../classaudio__tools_1_1_v_f_s.html#ae033c59d263164d7f25cf3eb1d1d7700',1,'audio_tools::VFS::exists(const std::string &amp;path)'],['../classaudio__tools_1_1_zephyr_s_d_class.html#a1c60a887561951bdacd899ddb1dc8574',1,'audio_tools::ZephyrSDClass::exists()']]],
   ['exitcritical_71',['exitCritical',['../classaudio__tools_1_1_equalizer_n_bands.html#ad3472993125aa42b258c2634a4b7d326',1,'audio_tools::EqualizerNBands']]],
   ['expand_72',['expand',['../classaudio__tools_1_1_v_f_s.html#a8efde8af3f984e1664284eeb8bdac15f',1,'audio_tools::VFS']]],
-  ['exponent_73',['exponent',['../classaudio__tools_1_1_pseudo_float.html#a23019b766aa79e195a35e83890ce3098',1,'audio_tools::PseudoFloat']]],
+  ['exponent_73',['exponent',['../classaudio__tools_1_1soft__float__t.html#a23019b766aa79e195a35e83890ce3098',1,'audio_tools::soft_float_t']]],
   ['extraheaderbytes_74',['extraHeaderBytes',['../classaudio__tools_1_1_w_a_v_header.html#af4e7231352d35439ec82090d7b0a08b6',1,'audio_tools::WAVHeader']]]
 ];

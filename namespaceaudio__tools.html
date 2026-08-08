@@ -1343,7 +1343,7 @@ size_t size)</a> and <a class="el" href="classaudio__tools_1_1_base_stream.html#
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">MDF (Multi-Delay block Frequency) echo cancellation with stream API.  <a href="classaudio__tools_1_1_m_d_f_echo_cancellation_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_m_d_f_fixed_point.html">MDFFixedPoint</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects <a class="el" href="classaudio__tools_1_1_pseudo_float.html" title="Software &quot;pseudo-float&quot;: a real number represented as a signed 16-bit mantissa plus a 16-bit exponent...">PseudoFloat</a> (see <a class="el" href="_pseudo_float_8h.html">PseudoFloat.h</a>) as <a class="el" href="classaudio__tools_1_1_m_d_f_echo_cancellation.html" title="Acoustic echo canceller using MDF algorithm.">MDFEchoCancellation</a>'s internal numeric representation, so the algorithm runs on integer mantissa/exponent arithmetic instead of native float instructions &ndash; useful on microcontrollers without an FPU. <a class="el" href="classaudio__tools_1_1_pseudo_float.html" title="Software &quot;pseudo-float&quot;: a real number represented as a signed 16-bit mantissa plus a 16-bit exponent...">PseudoFloat</a>'s arithmetic is verified against native float directly (see the <a class="el" href="classaudio__tools_1_1_pseudo_float.html" title="Software &quot;pseudo-float&quot;: a real number represented as a signed 16-bit mantissa plus a 16-bit exponent...">PseudoFloat</a> tests in tests-cmake/stt/stt_test.cpp), and MDFEchoCancellation&lt;int16_t, MDFFixedPoint&gt; is smoke-tested to run without crashing/NaN and to converge similarly to <a class="el" href="structaudio__tools_1_1_m_d_f_float.html" title="Selects float as MDFEchoCancellation&#39;s internal numeric representation for sample/spectrum arrays (wo...">MDFFloat</a> on the same synthetic signal &ndash; but it has not received the same depth of numerical scrutiny as <a class="el" href="structaudio__tools_1_1_m_d_f_float.html" title="Selects float as MDFEchoCancellation&#39;s internal numeric representation for sample/spectrum arrays (wo...">MDFFloat</a>, so treat it as less battle-tested. Despite the name, this is not a classic narrow Q15 fixed-point format (that would over/underflow across this algorithm's actual value range &ndash; see <a class="el" href="classaudio__tools_1_1_pseudo_float.html" title="Software &quot;pseudo-float&quot;: a real number represented as a signed 16-bit mantissa plus a 16-bit exponent...">PseudoFloat</a>'s class doc for why).  <a href="structaudio__tools_1_1_m_d_f_fixed_point.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects <a class="el" href="classaudio__tools_1_1soft__float__t.html" title="Software &quot;pseudo-float&quot;: a real number represented as a signed 16-bit mantissa plus a 16-bit exponent...">soft_float_t</a> (see <a class="el" href="soft__float__t_8h.html">soft_float_t.h</a>) as <a class="el" href="classaudio__tools_1_1_m_d_f_echo_cancellation.html" title="Acoustic echo canceller using MDF algorithm.">MDFEchoCancellation</a>'s internal numeric representation, so the algorithm runs on integer mantissa/exponent arithmetic instead of native float instructions &ndash; useful on microcontrollers without an FPU. <a class="el" href="classaudio__tools_1_1soft__float__t.html" title="Software &quot;pseudo-float&quot;: a real number represented as a signed 16-bit mantissa plus a 16-bit exponent...">soft_float_t</a>'s arithmetic is verified against native float directly (see the <a class="el" href="classaudio__tools_1_1soft__float__t.html" title="Software &quot;pseudo-float&quot;: a real number represented as a signed 16-bit mantissa plus a 16-bit exponent...">soft_float_t</a> tests in tests-cmake/stt/stt_test.cpp), and MDFEchoCancellation&lt;int16_t, MDFFixedPoint&gt; is smoke-tested to run without crashing/NaN and to converge similarly to <a class="el" href="structaudio__tools_1_1_m_d_f_float.html" title="Selects float as MDFEchoCancellation&#39;s internal numeric representation for sample/spectrum arrays (wo...">MDFFloat</a> on the same synthetic signal &ndash; but it has not received the same depth of numerical scrutiny as <a class="el" href="structaudio__tools_1_1_m_d_f_float.html" title="Selects float as MDFEchoCancellation&#39;s internal numeric representation for sample/spectrum arrays (wo...">MDFFloat</a>, so treat it as less battle-tested. Despite the name, this is not a classic narrow Q15 fixed-point format (that would over/underflow across this algorithm's actual value range &ndash; see <a class="el" href="classaudio__tools_1_1soft__float__t.html" title="Software &quot;pseudo-float&quot;: a real number represented as a signed 16-bit mantissa plus a 16-bit exponent...">soft_float_t</a>'s class doc for why).  <a href="structaudio__tools_1_1_m_d_f_fixed_point.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_m_d_f_float.html">MDFFloat</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects <code>float</code> as <a class="el" href="classaudio__tools_1_1_m_d_f_echo_cancellation.html" title="Acoustic echo canceller using MDF algorithm.">MDFEchoCancellation</a>'s internal numeric representation for sample/spectrum arrays (word16_t/word32_t) and wide-dynamic-range control state (float_t). This is the default, and the one that has been verified to converge (see test_mdf_converges in tests-cmake/stt/stt_test.cpp) &ndash; prefer it unless you specifically need to avoid hardware floating-point instructions (e.g. no FPU).  <a href="structaudio__tools_1_1_m_d_f_float.html#details">More...</a><br /></td></tr>
@@ -1666,9 +1666,6 @@ size_t size)</a> and <a class="el" href="classaudio__tools_1_1_base_stream.html#
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_progress_stream_info.html">ProgressStreamInfo</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration for <a class="el" href="classaudio__tools_1_1_progress_stream.html" title="Generic calss to measure the the total bytes which were processed in order to calculate the progress ...">ProgressStream</a>.  <a href="classaudio__tools_1_1_progress_stream_info.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Software "pseudo-float": a real number represented as a signed 16-bit mantissa plus a 16-bit exponent (value = mantissa * 2^exponent), computed with integer multiply/shift/compare only &ndash; no hardware floating-point instructions. This generalizes speexdsp's classic fixed-point trick of tracking a handful of wide-dynamic-range control variables as a normalized mantissa+exponent pair into a full, operator-overloaded numeric type usable as a drop-in replacement for <code>float</code> (see <a class="el" href="structaudio__tools_1_1_m_d_f_fixed_point.html" title="Selects PseudoFloat (see PseudoFloat.h) as MDFEchoCancellation&#39;s internal numeric representation,...">MDFFixedPoint</a> in <a class="el" href="classaudio__tools_1_1_m_d_f_echo_cancellation.html#a7fe93bc76dca86a344399ff245c4a4db" title="Allocate a zero-initialized array of type A using the configured Allocator (see AudioTools/CoreAudio/...">MDFEchoCancellation.h</a>, which uses this class as the element type for the MDF echo canceller's sample/spectrum arrays and internal state, so the whole algorithm runs without native float arithmetic).  <a href="classaudio__tools_1_1_pseudo_float.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_pure_data_stream.html">PureDataStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input and output of Pure Data PD using code generated by the hvcc compiler. The audio format is defined by the sample rate in the Heavy constructor, the number of channels in the ADC and DAC and the bits_per_sample of 16. Therefore the audio format can not be changed dynamically. I recommend to make sure that the input format and output format is consistent, otherwise you need to change the format in PD.  <a href="classaudio__tools_1_1_pure_data_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1916,6 +1913,9 @@ size_t size)</a> and <a class="el" href="classaudio__tools_1_1_base_stream.html#
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_smooth_transition.html">SmoothTransition</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the samples at the beginning or at the end to slowly ramp up the volume.  <a href="classaudio__tools_1_1_smooth_transition.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Software "pseudo-float": a real number represented as a signed 16-bit mantissa plus a 16-bit exponent (value = mantissa * 2^exponent), computed with integer multiply/shift/compare only &ndash; no hardware floating-point instructions. This generalizes speexdsp's classic fixed-point trick of tracking a handful of wide-dynamic-range control variables as a normalized mantissa+exponent pair into a full, operator-overloaded numeric type usable as a drop-in replacement for <code>float</code> (see <a class="el" href="structaudio__tools_1_1_m_d_f_fixed_point.html" title="Selects soft_float_t (see soft_float_t.h) as MDFEchoCancellation&#39;s internal numeric representation,...">MDFFixedPoint</a> in <a class="el" href="classaudio__tools_1_1_m_d_f_echo_cancellation.html#a7fe93bc76dca86a344399ff245c4a4db" title="Allocate a zero-initialized array of type A using the configured Allocator (see AudioTools/CoreAudio/...">MDFEchoCancellation.h</a>, which uses this class as the element type for the MDF echo canceller's sample/spectrum arrays and internal state, so the whole algorithm runs without native float arithmetic).  <a href="classaudio__tools_1_1soft__float__t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_s_o_s_filter.html">SOSFilter</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second Order Sections (SOS) filter — a cascade of N BiQuad DF2 stages. Higher-order filters should be decomposed into second-order sections to avoid numerical instability. Each section has its own b[3]/a[3] coefficients and optional gain. Tools like scipy.signal.butter(..., output='sos') or MATLAB's tf2sos produce the required coefficient arrays.  <a href="classaudio__tools_1_1_s_o_s_filter.html#details">More...</a><br /></td></tr>
@@ -2415,6 +2415,8 @@ Typedefs</h2></td></tr>
 <tr class="memitem:ga869d6ee1c77c17df29cad21068f647cc" id="r_ga869d6ee1c77c17df29cad21068f647cc"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__basic.html#ga869d6ee1c77c17df29cad21068f647cc">Pins</a> = <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; int &gt;</td></tr>
 <tr class="memdesc:ga869d6ee1c77c17df29cad21068f647cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for a collection of pin numbers.  <br /></td></tr>
 <tr class="separator:ga869d6ee1c77c17df29cad21068f647cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3c5ca93af13faaba54c8a4ba512b1fa" id="r_ad3c5ca93af13faaba54c8a4ba512b1fa"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ad3c5ca93af13faaba54c8a4ba512b1fa">PseudoFloat</a> = <a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a></td></tr>
+<tr class="separator:ad3c5ca93af13faaba54c8a4ba512b1fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36414d33418cab2d47c0c3e3ab507aeb" id="r_a36414d33418cab2d47c0c3e3ab507aeb"><td class="memItemLeft" align="right" valign="top">typedef bool(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a36414d33418cab2d47c0c3e3ab507aeb">PWMCallbackType</a>) (uint8_t channels, int16_t *data)</td></tr>
 <tr class="separator:a36414d33418cab2d47c0c3e3ab507aeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1d240a17256a1242244f3a021738bce" id="r_ae1d240a17256a1242244f3a021738bce"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ae1d240a17256a1242244f3a021738bce">PWMConfig</a> = <a class="el" href="structaudio__tools_1_1_p_w_m_config_a_v_r.html">PWMConfigAVR</a></td></tr>
@@ -3049,16 +3051,16 @@ Functions</h2></td></tr>
 <tr class="memitem:a7003387e44fc36bcb1ba512a80c3f1b4" id="r_a7003387e44fc36bcb1ba512a80c3f1b4"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a7003387e44fc36bcb1ba512a80c3f1b4">operator!=</a> (<a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">audio_tools::digital_pin_t</a> &amp;a, <a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">audio_tools::digital_pin_t</a> &amp;b)</td></tr>
 <tr class="memdesc:a7003387e44fc36bcb1ba512a80c3f1b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Support for pin compare.  <br /></td></tr>
 <tr class="separator:a7003387e44fc36bcb1ba512a80c3f1b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a89dba7db9b107dbb6a00b76977f2f06b" id="r_a89dba7db9b107dbb6a00b76977f2f06b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a89dba7db9b107dbb6a00b76977f2f06b">operator!=</a> (float a, <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> b)</td></tr>
-<tr class="separator:a89dba7db9b107dbb6a00b76977f2f06b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac180cc745eb857402fafa9ac30b3d81b" id="r_ac180cc745eb857402fafa9ac30b3d81b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ac180cc745eb857402fafa9ac30b3d81b">operator!=</a> (float a, <a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a> b)</td></tr>
 <tr class="separator:ac180cc745eb857402fafa9ac30b3d81b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a400e4fe9c010ab4258de6cb02d273973" id="r_a400e4fe9c010ab4258de6cb02d273973"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a400e4fe9c010ab4258de6cb02d273973">operator!=</a> (int a, <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> b)</td></tr>
-<tr class="separator:a400e4fe9c010ab4258de6cb02d273973"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c532e435e81cc4d6bdf4e07291661dd" id="r_a7c532e435e81cc4d6bdf4e07291661dd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a7c532e435e81cc4d6bdf4e07291661dd">operator*</a> (float a, <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> b)</td></tr>
-<tr class="separator:a7c532e435e81cc4d6bdf4e07291661dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac80b3749c8a7b9afeda36fdb613370b3" id="r_ac80b3749c8a7b9afeda36fdb613370b3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ac80b3749c8a7b9afeda36fdb613370b3">operator!=</a> (float a, <a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a> b)</td></tr>
+<tr class="separator:ac80b3749c8a7b9afeda36fdb613370b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b08b3ab46ff0e1ef28580c0804c740f" id="r_a3b08b3ab46ff0e1ef28580c0804c740f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a3b08b3ab46ff0e1ef28580c0804c740f">operator!=</a> (int a, <a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a> b)</td></tr>
+<tr class="separator:a3b08b3ab46ff0e1ef28580c0804c740f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1dcdbd28e545007f53dbedf69eb054d" id="r_ac1dcdbd28e545007f53dbedf69eb054d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ac1dcdbd28e545007f53dbedf69eb054d">operator*</a> (float a, <a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a> b)</td></tr>
 <tr class="separator:ac1dcdbd28e545007f53dbedf69eb054d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae78d4383a468d8a00d38893d0b2fa4b8" id="r_ae78d4383a468d8a00d38893d0b2fa4b8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ae78d4383a468d8a00d38893d0b2fa4b8">operator*</a> (float a, <a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a> b)</td></tr>
+<tr class="separator:ae78d4383a468d8a00d38893d0b2fa4b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0fffcee56d421648fc2c343a6aedd1fc" id="r_a0fffcee56d421648fc2c343a6aedd1fc"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a0fffcee56d421648fc2c343a6aedd1fc">operator*</a> (float one, <a class="el" href="classaudio__tools_1_1float16.html">float16</a> two)</td></tr>
 <tr class="separator:a0fffcee56d421648fc2c343a6aedd1fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a70d5b5d7e18fb2f08940c7f0bbc142c6" id="r_a70d5b5d7e18fb2f08940c7f0bbc142c6"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a70d5b5d7e18fb2f08940c7f0bbc142c6">operator*</a> (float one, <a class="el" href="classaudio__tools_1_1float32.html">float32</a> two)</td></tr>
@@ -3071,12 +3073,12 @@ Functions</h2></td></tr>
 <tr class="separator:a6b61daa649b20c2c1f3cc67e8e220804"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3d663f50d79f9b03abdbfb5796e78b65" id="r_a3d663f50d79f9b03abdbfb5796e78b65"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a3d663f50d79f9b03abdbfb5796e78b65">operator*</a> (<a class="el" href="classaudio__tools_1_1float32.html">float32</a> one, <a class="el" href="classaudio__tools_1_1float32.html">float32</a> two)</td></tr>
 <tr class="separator:a3d663f50d79f9b03abdbfb5796e78b65"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab55422b0783840bb27fafed3e704241d" id="r_ab55422b0783840bb27fafed3e704241d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ab55422b0783840bb27fafed3e704241d">operator*</a> (int a, <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> b)</td></tr>
-<tr class="separator:ab55422b0783840bb27fafed3e704241d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adda705d96f7778b579d1f5e509b8f632" id="r_adda705d96f7778b579d1f5e509b8f632"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#adda705d96f7778b579d1f5e509b8f632">operator+</a> (float a, <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> b)</td></tr>
-<tr class="separator:adda705d96f7778b579d1f5e509b8f632"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9933a47f6c32f56d0571c0b01bc5463" id="r_ac9933a47f6c32f56d0571c0b01bc5463"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ac9933a47f6c32f56d0571c0b01bc5463">operator*</a> (int a, <a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a> b)</td></tr>
+<tr class="separator:ac9933a47f6c32f56d0571c0b01bc5463"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87e8cf0b6a707ad8b2f429c4a499ce7a" id="r_a87e8cf0b6a707ad8b2f429c4a499ce7a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a87e8cf0b6a707ad8b2f429c4a499ce7a">operator+</a> (float a, <a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a> b)</td></tr>
 <tr class="separator:a87e8cf0b6a707ad8b2f429c4a499ce7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7774a448071a6219996e7fbdf5fede6f" id="r_a7774a448071a6219996e7fbdf5fede6f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a7774a448071a6219996e7fbdf5fede6f">operator+</a> (float a, <a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a> b)</td></tr>
+<tr class="separator:a7774a448071a6219996e7fbdf5fede6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9828abb47eae042ea662a93664d0cfd6" id="r_a9828abb47eae042ea662a93664d0cfd6"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a9828abb47eae042ea662a93664d0cfd6">operator+</a> (float one, <a class="el" href="classaudio__tools_1_1float16.html">float16</a> two)</td></tr>
 <tr class="separator:a9828abb47eae042ea662a93664d0cfd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ead404fd2121896489d7c04d5743c95" id="r_a0ead404fd2121896489d7c04d5743c95"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a0ead404fd2121896489d7c04d5743c95">operator+</a> (float one, <a class="el" href="classaudio__tools_1_1float32.html">float32</a> two)</td></tr>
@@ -3089,12 +3091,12 @@ Functions</h2></td></tr>
 <tr class="separator:ae8f808d5f83f73e950af46bed5e875dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa729503ff1a0651114410b7696ef7bc4" id="r_aa729503ff1a0651114410b7696ef7bc4"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aa729503ff1a0651114410b7696ef7bc4">operator+</a> (<a class="el" href="classaudio__tools_1_1float32.html">float32</a> one, <a class="el" href="classaudio__tools_1_1float32.html">float32</a> two)</td></tr>
 <tr class="separator:aa729503ff1a0651114410b7696ef7bc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9673719d53a08f960273e04691c14424" id="r_a9673719d53a08f960273e04691c14424"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a9673719d53a08f960273e04691c14424">operator+</a> (int a, <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> b)</td></tr>
-<tr class="separator:a9673719d53a08f960273e04691c14424"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a08d3374716445392e525a6caa6ed4acd" id="r_a08d3374716445392e525a6caa6ed4acd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a08d3374716445392e525a6caa6ed4acd">operator-</a> (float a, <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> b)</td></tr>
-<tr class="separator:a08d3374716445392e525a6caa6ed4acd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48f1979c8c7e33e1a2087ee79762631f" id="r_a48f1979c8c7e33e1a2087ee79762631f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a48f1979c8c7e33e1a2087ee79762631f">operator+</a> (int a, <a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a> b)</td></tr>
+<tr class="separator:a48f1979c8c7e33e1a2087ee79762631f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5930bcba0d4cfbbb6b1550482aa134c8" id="r_a5930bcba0d4cfbbb6b1550482aa134c8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a5930bcba0d4cfbbb6b1550482aa134c8">operator-</a> (float a, <a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a> b)</td></tr>
 <tr class="separator:a5930bcba0d4cfbbb6b1550482aa134c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ab84b421214e77e218421fadd717461" id="r_a7ab84b421214e77e218421fadd717461"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a7ab84b421214e77e218421fadd717461">operator-</a> (float a, <a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a> b)</td></tr>
+<tr class="separator:a7ab84b421214e77e218421fadd717461"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43df323ec732265452702fa83c1895fb" id="r_a43df323ec732265452702fa83c1895fb"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a43df323ec732265452702fa83c1895fb">operator-</a> (float one, <a class="el" href="classaudio__tools_1_1float16.html">float16</a> two)</td></tr>
 <tr class="separator:a43df323ec732265452702fa83c1895fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad32122724ec8d9d5d653acd48337b992" id="r_ad32122724ec8d9d5d653acd48337b992"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ad32122724ec8d9d5d653acd48337b992">operator-</a> (float one, <a class="el" href="classaudio__tools_1_1float32.html">float32</a> two)</td></tr>
@@ -3107,12 +3109,12 @@ Functions</h2></td></tr>
 <tr class="separator:adb8c239eb8e65395bc913aab110be937"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1df2813cb4f6f8b8a79cdcb57c19e27b" id="r_a1df2813cb4f6f8b8a79cdcb57c19e27b"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a1df2813cb4f6f8b8a79cdcb57c19e27b">operator-</a> (<a class="el" href="classaudio__tools_1_1float32.html">float32</a> one, <a class="el" href="classaudio__tools_1_1float32.html">float32</a> two)</td></tr>
 <tr class="separator:a1df2813cb4f6f8b8a79cdcb57c19e27b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a522fb1e29501c992be480e72aee57250" id="r_a522fb1e29501c992be480e72aee57250"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a522fb1e29501c992be480e72aee57250">operator-</a> (int a, <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> b)</td></tr>
-<tr class="separator:a522fb1e29501c992be480e72aee57250"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad54ca1933a6acafd6125692489ae51fa" id="r_ad54ca1933a6acafd6125692489ae51fa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ad54ca1933a6acafd6125692489ae51fa">operator/</a> (float a, <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> b)</td></tr>
-<tr class="separator:ad54ca1933a6acafd6125692489ae51fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16f831e672559737d7e1bf1aa156df33" id="r_a16f831e672559737d7e1bf1aa156df33"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a16f831e672559737d7e1bf1aa156df33">operator-</a> (int a, <a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a> b)</td></tr>
+<tr class="separator:a16f831e672559737d7e1bf1aa156df33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7646775551d19d6c9f3360301530ba6" id="r_ac7646775551d19d6c9f3360301530ba6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ac7646775551d19d6c9f3360301530ba6">operator/</a> (float a, <a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a> b)</td></tr>
 <tr class="separator:ac7646775551d19d6c9f3360301530ba6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae649c3acf4b5970f2a7e165eaf3631c6" id="r_ae649c3acf4b5970f2a7e165eaf3631c6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ae649c3acf4b5970f2a7e165eaf3631c6">operator/</a> (float a, <a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a> b)</td></tr>
+<tr class="separator:ae649c3acf4b5970f2a7e165eaf3631c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03f13592adfc482d0e7f64ebaddc1c21" id="r_a03f13592adfc482d0e7f64ebaddc1c21"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a03f13592adfc482d0e7f64ebaddc1c21">operator/</a> (float one, <a class="el" href="classaudio__tools_1_1float16.html">float16</a> two)</td></tr>
 <tr class="separator:a03f13592adfc482d0e7f64ebaddc1c21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb664ebaf74c24c61e72bbd12ac461e4" id="r_abb664ebaf74c24c61e72bbd12ac461e4"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#abb664ebaf74c24c61e72bbd12ac461e4">operator/</a> (float one, <a class="el" href="classaudio__tools_1_1float32.html">float32</a> two)</td></tr>
@@ -3125,41 +3127,41 @@ Functions</h2></td></tr>
 <tr class="separator:a673eb899804fa930d22f79951468425f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adfc51c5353d8125c51e8c4f3239c2dc8" id="r_adfc51c5353d8125c51e8c4f3239c2dc8"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#adfc51c5353d8125c51e8c4f3239c2dc8">operator/</a> (<a class="el" href="classaudio__tools_1_1float32.html">float32</a> one, <a class="el" href="classaudio__tools_1_1float32.html">float32</a> two)</td></tr>
 <tr class="separator:adfc51c5353d8125c51e8c4f3239c2dc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ffc4bee057fb611911b6e23712d2018" id="r_a2ffc4bee057fb611911b6e23712d2018"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a2ffc4bee057fb611911b6e23712d2018">operator/</a> (int a, <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> b)</td></tr>
-<tr class="separator:a2ffc4bee057fb611911b6e23712d2018"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93569d1f3db46326b52e0400fa4e761a" id="r_a93569d1f3db46326b52e0400fa4e761a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a93569d1f3db46326b52e0400fa4e761a">operator&lt;</a> (float a, <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> b)</td></tr>
-<tr class="separator:a93569d1f3db46326b52e0400fa4e761a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5512e4400c3e265ba6f7eb4fa87b342f" id="r_a5512e4400c3e265ba6f7eb4fa87b342f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a5512e4400c3e265ba6f7eb4fa87b342f">operator/</a> (int a, <a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a> b)</td></tr>
+<tr class="separator:a5512e4400c3e265ba6f7eb4fa87b342f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ae2bbe0cfcf4b67ec5618c13fcc3c84" id="r_a5ae2bbe0cfcf4b67ec5618c13fcc3c84"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a5ae2bbe0cfcf4b67ec5618c13fcc3c84">operator&lt;</a> (float a, <a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a> b)</td></tr>
 <tr class="separator:a5ae2bbe0cfcf4b67ec5618c13fcc3c84"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a338893a0b9fc30f7f2ac1e72cd043f8c" id="r_a338893a0b9fc30f7f2ac1e72cd043f8c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a338893a0b9fc30f7f2ac1e72cd043f8c">operator&lt;</a> (int a, <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> b)</td></tr>
-<tr class="separator:a338893a0b9fc30f7f2ac1e72cd043f8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a55e153ec347255bf19d8e5dfab7ed3" id="r_a6a55e153ec347255bf19d8e5dfab7ed3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a6a55e153ec347255bf19d8e5dfab7ed3">operator&lt;=</a> (float a, <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> b)</td></tr>
-<tr class="separator:a6a55e153ec347255bf19d8e5dfab7ed3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a195aae983b109fe0fd04a1ab746835dc" id="r_a195aae983b109fe0fd04a1ab746835dc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a195aae983b109fe0fd04a1ab746835dc">operator&lt;</a> (float a, <a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a> b)</td></tr>
+<tr class="separator:a195aae983b109fe0fd04a1ab746835dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29bfe4101c3ab420cf7ca28d4a075d2c" id="r_a29bfe4101c3ab420cf7ca28d4a075d2c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a29bfe4101c3ab420cf7ca28d4a075d2c">operator&lt;</a> (int a, <a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a> b)</td></tr>
+<tr class="separator:a29bfe4101c3ab420cf7ca28d4a075d2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af71ff5828b0be927e226b1b4fdf944a3" id="r_af71ff5828b0be927e226b1b4fdf944a3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#af71ff5828b0be927e226b1b4fdf944a3">operator&lt;=</a> (float a, <a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a> b)</td></tr>
 <tr class="separator:af71ff5828b0be927e226b1b4fdf944a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f3fb475efa2ae94ca3b49e83e768abd" id="r_a6f3fb475efa2ae94ca3b49e83e768abd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a6f3fb475efa2ae94ca3b49e83e768abd">operator&lt;=</a> (int a, <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> b)</td></tr>
-<tr class="separator:a6f3fb475efa2ae94ca3b49e83e768abd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f4c926a6cc1105c513890f131e64469" id="r_a3f4c926a6cc1105c513890f131e64469"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a3f4c926a6cc1105c513890f131e64469">operator&lt;=</a> (float a, <a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a> b)</td></tr>
+<tr class="separator:a3f4c926a6cc1105c513890f131e64469"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a6d610f4105399aad55b66be77eb6a9" id="r_a9a6d610f4105399aad55b66be77eb6a9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a9a6d610f4105399aad55b66be77eb6a9">operator&lt;=</a> (int a, <a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a> b)</td></tr>
+<tr class="separator:a9a6d610f4105399aad55b66be77eb6a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8f98106c04a5e444b4c0f45746bcf03" id="r_ac8f98106c04a5e444b4c0f45746bcf03"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ac8f98106c04a5e444b4c0f45746bcf03">operator==</a> (<a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">audio_tools::digital_pin_t</a> &amp;a, <a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">audio_tools::digital_pin_t</a> &amp;b)</td></tr>
 <tr class="memdesc:ac8f98106c04a5e444b4c0f45746bcf03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Support for pin compare.  <br /></td></tr>
 <tr class="separator:ac8f98106c04a5e444b4c0f45746bcf03"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12ae44678b579bec3c828dff970fb5d6" id="r_a12ae44678b579bec3c828dff970fb5d6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a12ae44678b579bec3c828dff970fb5d6">operator==</a> (float a, <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> b)</td></tr>
-<tr class="separator:a12ae44678b579bec3c828dff970fb5d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af753cc3f9aaeb323abf21c763d87fbfd" id="r_af753cc3f9aaeb323abf21c763d87fbfd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#af753cc3f9aaeb323abf21c763d87fbfd">operator==</a> (float a, <a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a> b)</td></tr>
 <tr class="separator:af753cc3f9aaeb323abf21c763d87fbfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f01071ace85a2984ce578621345aff0" id="r_a7f01071ace85a2984ce578621345aff0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a7f01071ace85a2984ce578621345aff0">operator==</a> (int a, <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> b)</td></tr>
-<tr class="separator:a7f01071ace85a2984ce578621345aff0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a868bd8eedc1f06fac24a4474d67a17b7" id="r_a868bd8eedc1f06fac24a4474d67a17b7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a868bd8eedc1f06fac24a4474d67a17b7">operator&gt;</a> (float a, <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> b)</td></tr>
-<tr class="separator:a868bd8eedc1f06fac24a4474d67a17b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1383a947f648455f6b0d896b5b529ba" id="r_af1383a947f648455f6b0d896b5b529ba"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#af1383a947f648455f6b0d896b5b529ba">operator==</a> (float a, <a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a> b)</td></tr>
+<tr class="separator:af1383a947f648455f6b0d896b5b529ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec7132f63922f31f3d55114cd4c15599" id="r_aec7132f63922f31f3d55114cd4c15599"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aec7132f63922f31f3d55114cd4c15599">operator==</a> (int a, <a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a> b)</td></tr>
+<tr class="separator:aec7132f63922f31f3d55114cd4c15599"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade1a301c9db16670334fa3fe4488a8c1" id="r_ade1a301c9db16670334fa3fe4488a8c1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ade1a301c9db16670334fa3fe4488a8c1">operator&gt;</a> (float a, <a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a> b)</td></tr>
 <tr class="separator:ade1a301c9db16670334fa3fe4488a8c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c9ddd6ba19ede2abd32b2d60723aaed" id="r_a2c9ddd6ba19ede2abd32b2d60723aaed"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a2c9ddd6ba19ede2abd32b2d60723aaed">operator&gt;</a> (int a, <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> b)</td></tr>
-<tr class="separator:a2c9ddd6ba19ede2abd32b2d60723aaed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad664e8d8843e84fe0349d4a55c91256a" id="r_ad664e8d8843e84fe0349d4a55c91256a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ad664e8d8843e84fe0349d4a55c91256a">operator&gt;=</a> (float a, <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> b)</td></tr>
-<tr class="separator:ad664e8d8843e84fe0349d4a55c91256a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d7264f97562edef1b742f8f94b4ffe5" id="r_a1d7264f97562edef1b742f8f94b4ffe5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a1d7264f97562edef1b742f8f94b4ffe5">operator&gt;</a> (float a, <a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a> b)</td></tr>
+<tr class="separator:a1d7264f97562edef1b742f8f94b4ffe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5a4d0b3328cd10a57750c3e94f30d47" id="r_ae5a4d0b3328cd10a57750c3e94f30d47"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ae5a4d0b3328cd10a57750c3e94f30d47">operator&gt;</a> (int a, <a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a> b)</td></tr>
+<tr class="separator:ae5a4d0b3328cd10a57750c3e94f30d47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e70a7bb4d5be8bd58ff75f350ab582d" id="r_a5e70a7bb4d5be8bd58ff75f350ab582d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a5e70a7bb4d5be8bd58ff75f350ab582d">operator&gt;=</a> (float a, <a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a> b)</td></tr>
 <tr class="separator:a5e70a7bb4d5be8bd58ff75f350ab582d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9464426d362d9ac692c38b47d792fb4" id="r_ab9464426d362d9ac692c38b47d792fb4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ab9464426d362d9ac692c38b47d792fb4">operator&gt;=</a> (int a, <a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> b)</td></tr>
-<tr class="separator:ab9464426d362d9ac692c38b47d792fb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2773d3f3360044eebf4a9d412021061" id="r_ae2773d3f3360044eebf4a9d412021061"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ae2773d3f3360044eebf4a9d412021061">operator&gt;=</a> (float a, <a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a> b)</td></tr>
+<tr class="separator:ae2773d3f3360044eebf4a9d412021061"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7abf5ac797062ba1c78c1963963e3dd4" id="r_a7abf5ac797062ba1c78c1963963e3dd4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a7abf5ac797062ba1c78c1963963e3dd4">operator&gt;=</a> (int a, <a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a> b)</td></tr>
+<tr class="separator:a7abf5ac797062ba1c78c1963963e3dd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9fab86a2636e4b6480fe9a45f45fff88" id="r_a9fab86a2636e4b6480fe9a45f45fff88"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a9fab86a2636e4b6480fe9a45f45fff88">pinMode</a> (<a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> pin, int mode)</td></tr>
 <tr class="separator:a9fab86a2636e4b6480fe9a45f45fff88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87b4772f542c8ab3559ee73d4f29cc34" id="r_a87b4772f542c8ab3559ee73d4f29cc34"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
@@ -3938,6 +3940,21 @@ template&lt;class T &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad3c5ca93af13faaba54c8a4ba512b1fa" name="ad3c5ca93af13faaba54c8a4ba512b1fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3c5ca93af13faaba54c8a4ba512b1fa">&#9670;&#160;</a></span>PseudoFloat</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespaceaudio__tools.html#ad3c5ca93af13faaba54c8a4ba512b1fa">PseudoFloat</a> =  <a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000001">Deprecated:</a></b></dt><dd>use <a class="el" href="classaudio__tools_1_1soft__float__t.html" title="Software &quot;pseudo-float&quot;: a real number represented as a signed 16-bit mantissa plus a 16-bit exponent...">soft_float_t</a> </dd></dl>
 
 </div>
 </div>
@@ -5883,7 +5900,7 @@ template&lt;typename T &gt; </div>
 <p>Perform forward FFT. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td>Element type (SampleType::word16_t &ndash; float or <a class="el" href="classaudio__tools_1_1_pseudo_float.html" title="Software &quot;pseudo-float&quot;: a real number represented as a signed 16-bit mantissa plus a 16-bit exponent...">PseudoFloat</a>) </td></tr>
+    <tr><td class="paramname">T</td><td>Element type (SampleType::word16_t &ndash; float or <a class="el" href="classaudio__tools_1_1soft__float__t.html" title="Software &quot;pseudo-float&quot;: a real number represented as a signed 16-bit mantissa plus a 16-bit exponent...">soft_float_t</a>) </td></tr>
   </table>
   </dd>
 </dl>
@@ -6023,7 +6040,7 @@ template&lt;typename T &gt; </div>
 <p>Perform inverse FFT. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td>Element type (SampleType::word16_t &ndash; float or <a class="el" href="classaudio__tools_1_1_pseudo_float.html" title="Software &quot;pseudo-float&quot;: a real number represented as a signed 16-bit mantissa plus a 16-bit exponent...">PseudoFloat</a>) </td></tr>
+    <tr><td class="paramname">T</td><td>Element type (SampleType::word16_t &ndash; float or <a class="el" href="classaudio__tools_1_1soft__float__t.html" title="Software &quot;pseudo-float&quot;: a real number represented as a signed 16-bit mantissa plus a 16-bit exponent...">soft_float_t</a>) </td></tr>
   </table>
   </dd>
 </dl>
@@ -6456,44 +6473,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a89dba7db9b107dbb6a00b76977f2f06b" name="a89dba7db9b107dbb6a00b76977f2f06b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a89dba7db9b107dbb6a00b76977f2f06b">&#9670;&#160;</a></span>operator!=() <span class="overload">[2/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool operator!= </td>
-          <td>(</td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>a</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td>
-          <td class="paramname"><em>b</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="ac180cc745eb857402fafa9ac30b3d81b" name="ac180cc745eb857402fafa9ac30b3d81b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac180cc745eb857402fafa9ac30b3d81b">&#9670;&#160;</a></span>operator!=() <span class="overload">[3/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac180cc745eb857402fafa9ac30b3d81b">&#9670;&#160;</a></span>operator!=() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -6528,8 +6509,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a400e4fe9c010ab4258de6cb02d273973" name="a400e4fe9c010ab4258de6cb02d273973"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a400e4fe9c010ab4258de6cb02d273973">&#9670;&#160;</a></span>operator!=() <span class="overload">[4/4]</span></h2>
+<a id="ac80b3749c8a7b9afeda36fdb613370b3" name="ac80b3749c8a7b9afeda36fdb613370b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac80b3749c8a7b9afeda36fdb613370b3">&#9670;&#160;</a></span>operator!=() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -6540,13 +6521,13 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="memname">bool operator!= </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>a</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a>&#160;</td>
           <td class="paramname"><em>b</em>&#160;</td>
         </tr>
         <tr>
@@ -6564,8 +6545,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a7c532e435e81cc4d6bdf4e07291661dd" name="a7c532e435e81cc4d6bdf4e07291661dd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7c532e435e81cc4d6bdf4e07291661dd">&#9670;&#160;</a></span>operator*() <span class="overload">[1/9]</span></h2>
+<a id="a3b08b3ab46ff0e1ef28580c0804c740f" name="a3b08b3ab46ff0e1ef28580c0804c740f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b08b3ab46ff0e1ef28580c0804c740f">&#9670;&#160;</a></span>operator!=() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -6574,15 +6555,15 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> operator* </td>
+          <td class="memname">bool operator!= </td>
           <td>(</td>
-          <td class="paramtype">float&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>a</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a>&#160;</td>
           <td class="paramname"><em>b</em>&#160;</td>
         </tr>
         <tr>
@@ -6601,7 +6582,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="ac1dcdbd28e545007f53dbedf69eb054d" name="ac1dcdbd28e545007f53dbedf69eb054d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac1dcdbd28e545007f53dbedf69eb054d">&#9670;&#160;</a></span>operator*() <span class="overload">[2/9]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1dcdbd28e545007f53dbedf69eb054d">&#9670;&#160;</a></span>operator*() <span class="overload">[1/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -6619,6 +6600,42 @@ template&lt;typename T &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a>&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae78d4383a468d8a00d38893d0b2fa4b8" name="ae78d4383a468d8a00d38893d0b2fa4b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae78d4383a468d8a00d38893d0b2fa4b8">&#9670;&#160;</a></span>operator*() <span class="overload">[2/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a> operator* </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a>&#160;</td>
           <td class="paramname"><em>b</em>&#160;</td>
         </tr>
         <tr>
@@ -6852,8 +6869,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="ab55422b0783840bb27fafed3e704241d" name="ab55422b0783840bb27fafed3e704241d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab55422b0783840bb27fafed3e704241d">&#9670;&#160;</a></span>operator*() <span class="overload">[9/9]</span></h2>
+<a id="ac9933a47f6c32f56d0571c0b01bc5463" name="ac9933a47f6c32f56d0571c0b01bc5463"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9933a47f6c32f56d0571c0b01bc5463">&#9670;&#160;</a></span>operator*() <span class="overload">[9/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -6862,7 +6879,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> operator* </td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a> operator* </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>a</em>, </td>
@@ -6870,43 +6887,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td>
-          <td class="paramname"><em>b</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="adda705d96f7778b579d1f5e509b8f632" name="adda705d96f7778b579d1f5e509b8f632"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adda705d96f7778b579d1f5e509b8f632">&#9670;&#160;</a></span>operator+() <span class="overload">[1/9]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> operator+ </td>
-          <td>(</td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>a</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a>&#160;</td>
           <td class="paramname"><em>b</em>&#160;</td>
         </tr>
         <tr>
@@ -6925,7 +6906,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="a87e8cf0b6a707ad8b2f429c4a499ce7a" name="a87e8cf0b6a707ad8b2f429c4a499ce7a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a87e8cf0b6a707ad8b2f429c4a499ce7a">&#9670;&#160;</a></span>operator+() <span class="overload">[2/9]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a87e8cf0b6a707ad8b2f429c4a499ce7a">&#9670;&#160;</a></span>operator+() <span class="overload">[1/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -6943,6 +6924,42 @@ template&lt;typename T &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a>&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7774a448071a6219996e7fbdf5fede6f" name="a7774a448071a6219996e7fbdf5fede6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7774a448071a6219996e7fbdf5fede6f">&#9670;&#160;</a></span>operator+() <span class="overload">[2/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a> operator+ </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a>&#160;</td>
           <td class="paramname"><em>b</em>&#160;</td>
         </tr>
         <tr>
@@ -7176,8 +7193,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a9673719d53a08f960273e04691c14424" name="a9673719d53a08f960273e04691c14424"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9673719d53a08f960273e04691c14424">&#9670;&#160;</a></span>operator+() <span class="overload">[9/9]</span></h2>
+<a id="a48f1979c8c7e33e1a2087ee79762631f" name="a48f1979c8c7e33e1a2087ee79762631f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48f1979c8c7e33e1a2087ee79762631f">&#9670;&#160;</a></span>operator+() <span class="overload">[9/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -7186,7 +7203,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> operator+ </td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a> operator+ </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>a</em>, </td>
@@ -7194,43 +7211,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td>
-          <td class="paramname"><em>b</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a08d3374716445392e525a6caa6ed4acd" name="a08d3374716445392e525a6caa6ed4acd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a08d3374716445392e525a6caa6ed4acd">&#9670;&#160;</a></span>operator-() <span class="overload">[1/9]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> operator- </td>
-          <td>(</td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>a</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a>&#160;</td>
           <td class="paramname"><em>b</em>&#160;</td>
         </tr>
         <tr>
@@ -7249,7 +7230,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="a5930bcba0d4cfbbb6b1550482aa134c8" name="a5930bcba0d4cfbbb6b1550482aa134c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5930bcba0d4cfbbb6b1550482aa134c8">&#9670;&#160;</a></span>operator-() <span class="overload">[2/9]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a5930bcba0d4cfbbb6b1550482aa134c8">&#9670;&#160;</a></span>operator-() <span class="overload">[1/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -7267,6 +7248,42 @@ template&lt;typename T &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a>&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7ab84b421214e77e218421fadd717461" name="a7ab84b421214e77e218421fadd717461"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ab84b421214e77e218421fadd717461">&#9670;&#160;</a></span>operator-() <span class="overload">[2/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a> operator- </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a>&#160;</td>
           <td class="paramname"><em>b</em>&#160;</td>
         </tr>
         <tr>
@@ -7500,8 +7517,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a522fb1e29501c992be480e72aee57250" name="a522fb1e29501c992be480e72aee57250"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a522fb1e29501c992be480e72aee57250">&#9670;&#160;</a></span>operator-() <span class="overload">[9/9]</span></h2>
+<a id="a16f831e672559737d7e1bf1aa156df33" name="a16f831e672559737d7e1bf1aa156df33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16f831e672559737d7e1bf1aa156df33">&#9670;&#160;</a></span>operator-() <span class="overload">[9/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -7510,7 +7527,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> operator- </td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a> operator- </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>a</em>, </td>
@@ -7518,43 +7535,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td>
-          <td class="paramname"><em>b</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ad54ca1933a6acafd6125692489ae51fa" name="ad54ca1933a6acafd6125692489ae51fa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad54ca1933a6acafd6125692489ae51fa">&#9670;&#160;</a></span>operator/() <span class="overload">[1/9]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> operator/ </td>
-          <td>(</td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>a</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a>&#160;</td>
           <td class="paramname"><em>b</em>&#160;</td>
         </tr>
         <tr>
@@ -7573,7 +7554,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="ac7646775551d19d6c9f3360301530ba6" name="ac7646775551d19d6c9f3360301530ba6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac7646775551d19d6c9f3360301530ba6">&#9670;&#160;</a></span>operator/() <span class="overload">[2/9]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7646775551d19d6c9f3360301530ba6">&#9670;&#160;</a></span>operator/() <span class="overload">[1/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -7591,6 +7572,42 @@ template&lt;typename T &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classaudio__tools_1_1q1__14__t.html">q1_14_t</a>&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae649c3acf4b5970f2a7e165eaf3631c6" name="ae649c3acf4b5970f2a7e165eaf3631c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae649c3acf4b5970f2a7e165eaf3631c6">&#9670;&#160;</a></span>operator/() <span class="overload">[2/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a> operator/ </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a>&#160;</td>
           <td class="paramname"><em>b</em>&#160;</td>
         </tr>
         <tr>
@@ -7824,8 +7841,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a2ffc4bee057fb611911b6e23712d2018" name="a2ffc4bee057fb611911b6e23712d2018"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2ffc4bee057fb611911b6e23712d2018">&#9670;&#160;</a></span>operator/() <span class="overload">[9/9]</span></h2>
+<a id="a5512e4400c3e265ba6f7eb4fa87b342f" name="a5512e4400c3e265ba6f7eb4fa87b342f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5512e4400c3e265ba6f7eb4fa87b342f">&#9670;&#160;</a></span>operator/() <span class="overload">[9/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -7834,7 +7851,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a> operator/ </td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a> operator/ </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>a</em>, </td>
@@ -7842,43 +7859,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td>
-          <td class="paramname"><em>b</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a93569d1f3db46326b52e0400fa4e761a" name="a93569d1f3db46326b52e0400fa4e761a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a93569d1f3db46326b52e0400fa4e761a">&#9670;&#160;</a></span>operator&lt;() <span class="overload">[1/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool operator&lt; </td>
-          <td>(</td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>a</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a>&#160;</td>
           <td class="paramname"><em>b</em>&#160;</td>
         </tr>
         <tr>
@@ -7897,7 +7878,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="a5ae2bbe0cfcf4b67ec5618c13fcc3c84" name="a5ae2bbe0cfcf4b67ec5618c13fcc3c84"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5ae2bbe0cfcf4b67ec5618c13fcc3c84">&#9670;&#160;</a></span>operator&lt;() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ae2bbe0cfcf4b67ec5618c13fcc3c84">&#9670;&#160;</a></span>operator&lt;() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -7932,8 +7913,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a338893a0b9fc30f7f2ac1e72cd043f8c" name="a338893a0b9fc30f7f2ac1e72cd043f8c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a338893a0b9fc30f7f2ac1e72cd043f8c">&#9670;&#160;</a></span>operator&lt;() <span class="overload">[3/3]</span></h2>
+<a id="a195aae983b109fe0fd04a1ab746835dc" name="a195aae983b109fe0fd04a1ab746835dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a195aae983b109fe0fd04a1ab746835dc">&#9670;&#160;</a></span>operator&lt;() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -7944,13 +7925,13 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="memname">bool operator&lt; </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>a</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a>&#160;</td>
           <td class="paramname"><em>b</em>&#160;</td>
         </tr>
         <tr>
@@ -7968,8 +7949,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a6a55e153ec347255bf19d8e5dfab7ed3" name="a6a55e153ec347255bf19d8e5dfab7ed3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6a55e153ec347255bf19d8e5dfab7ed3">&#9670;&#160;</a></span>operator&lt;=() <span class="overload">[1/3]</span></h2>
+<a id="a29bfe4101c3ab420cf7ca28d4a075d2c" name="a29bfe4101c3ab420cf7ca28d4a075d2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29bfe4101c3ab420cf7ca28d4a075d2c">&#9670;&#160;</a></span>operator&lt;() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -7978,15 +7959,15 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool operator&lt;= </td>
+          <td class="memname">bool operator&lt; </td>
           <td>(</td>
-          <td class="paramtype">float&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>a</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a>&#160;</td>
           <td class="paramname"><em>b</em>&#160;</td>
         </tr>
         <tr>
@@ -8005,7 +7986,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="af71ff5828b0be927e226b1b4fdf944a3" name="af71ff5828b0be927e226b1b4fdf944a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af71ff5828b0be927e226b1b4fdf944a3">&#9670;&#160;</a></span>operator&lt;=() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af71ff5828b0be927e226b1b4fdf944a3">&#9670;&#160;</a></span>operator&lt;=() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -8040,8 +8021,44 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a6f3fb475efa2ae94ca3b49e83e768abd" name="a6f3fb475efa2ae94ca3b49e83e768abd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6f3fb475efa2ae94ca3b49e83e768abd">&#9670;&#160;</a></span>operator&lt;=() <span class="overload">[3/3]</span></h2>
+<a id="a3f4c926a6cc1105c513890f131e64469" name="a3f4c926a6cc1105c513890f131e64469"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f4c926a6cc1105c513890f131e64469">&#9670;&#160;</a></span>operator&lt;=() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool operator&lt;= </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a>&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9a6d610f4105399aad55b66be77eb6a9" name="a9a6d610f4105399aad55b66be77eb6a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a6d610f4105399aad55b66be77eb6a9">&#9670;&#160;</a></span>operator&lt;=() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -8058,7 +8075,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a>&#160;</td>
           <td class="paramname"><em>b</em>&#160;</td>
         </tr>
         <tr>
@@ -8114,44 +8131,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a12ae44678b579bec3c828dff970fb5d6" name="a12ae44678b579bec3c828dff970fb5d6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a12ae44678b579bec3c828dff970fb5d6">&#9670;&#160;</a></span>operator==() <span class="overload">[2/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool operator== </td>
-          <td>(</td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>a</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td>
-          <td class="paramname"><em>b</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="af753cc3f9aaeb323abf21c763d87fbfd" name="af753cc3f9aaeb323abf21c763d87fbfd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af753cc3f9aaeb323abf21c763d87fbfd">&#9670;&#160;</a></span>operator==() <span class="overload">[3/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af753cc3f9aaeb323abf21c763d87fbfd">&#9670;&#160;</a></span>operator==() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -8186,8 +8167,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a7f01071ace85a2984ce578621345aff0" name="a7f01071ace85a2984ce578621345aff0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7f01071ace85a2984ce578621345aff0">&#9670;&#160;</a></span>operator==() <span class="overload">[4/4]</span></h2>
+<a id="af1383a947f648455f6b0d896b5b529ba" name="af1383a947f648455f6b0d896b5b529ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1383a947f648455f6b0d896b5b529ba">&#9670;&#160;</a></span>operator==() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -8198,13 +8179,13 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="memname">bool operator== </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>a</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a>&#160;</td>
           <td class="paramname"><em>b</em>&#160;</td>
         </tr>
         <tr>
@@ -8222,8 +8203,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a868bd8eedc1f06fac24a4474d67a17b7" name="a868bd8eedc1f06fac24a4474d67a17b7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a868bd8eedc1f06fac24a4474d67a17b7">&#9670;&#160;</a></span>operator&gt;() <span class="overload">[1/3]</span></h2>
+<a id="aec7132f63922f31f3d55114cd4c15599" name="aec7132f63922f31f3d55114cd4c15599"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec7132f63922f31f3d55114cd4c15599">&#9670;&#160;</a></span>operator==() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -8232,15 +8213,15 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool operator&gt; </td>
+          <td class="memname">bool operator== </td>
           <td>(</td>
-          <td class="paramtype">float&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>a</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a>&#160;</td>
           <td class="paramname"><em>b</em>&#160;</td>
         </tr>
         <tr>
@@ -8259,7 +8240,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="ade1a301c9db16670334fa3fe4488a8c1" name="ade1a301c9db16670334fa3fe4488a8c1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade1a301c9db16670334fa3fe4488a8c1">&#9670;&#160;</a></span>operator&gt;() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ade1a301c9db16670334fa3fe4488a8c1">&#9670;&#160;</a></span>operator&gt;() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -8294,8 +8275,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a2c9ddd6ba19ede2abd32b2d60723aaed" name="a2c9ddd6ba19ede2abd32b2d60723aaed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2c9ddd6ba19ede2abd32b2d60723aaed">&#9670;&#160;</a></span>operator&gt;() <span class="overload">[3/3]</span></h2>
+<a id="a1d7264f97562edef1b742f8f94b4ffe5" name="a1d7264f97562edef1b742f8f94b4ffe5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d7264f97562edef1b742f8f94b4ffe5">&#9670;&#160;</a></span>operator&gt;() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -8306,13 +8287,13 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="memname">bool operator&gt; </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>a</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a>&#160;</td>
           <td class="paramname"><em>b</em>&#160;</td>
         </tr>
         <tr>
@@ -8330,8 +8311,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="ad664e8d8843e84fe0349d4a55c91256a" name="ad664e8d8843e84fe0349d4a55c91256a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad664e8d8843e84fe0349d4a55c91256a">&#9670;&#160;</a></span>operator&gt;=() <span class="overload">[1/3]</span></h2>
+<a id="ae5a4d0b3328cd10a57750c3e94f30d47" name="ae5a4d0b3328cd10a57750c3e94f30d47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5a4d0b3328cd10a57750c3e94f30d47">&#9670;&#160;</a></span>operator&gt;() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -8340,15 +8321,15 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool operator&gt;= </td>
+          <td class="memname">bool operator&gt; </td>
           <td>(</td>
-          <td class="paramtype">float&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>a</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a>&#160;</td>
           <td class="paramname"><em>b</em>&#160;</td>
         </tr>
         <tr>
@@ -8367,7 +8348,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="a5e70a7bb4d5be8bd58ff75f350ab582d" name="a5e70a7bb4d5be8bd58ff75f350ab582d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5e70a7bb4d5be8bd58ff75f350ab582d">&#9670;&#160;</a></span>operator&gt;=() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e70a7bb4d5be8bd58ff75f350ab582d">&#9670;&#160;</a></span>operator&gt;=() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -8402,8 +8383,44 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="ab9464426d362d9ac692c38b47d792fb4" name="ab9464426d362d9ac692c38b47d792fb4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab9464426d362d9ac692c38b47d792fb4">&#9670;&#160;</a></span>operator&gt;=() <span class="overload">[3/3]</span></h2>
+<a id="ae2773d3f3360044eebf4a9d412021061" name="ae2773d3f3360044eebf4a9d412021061"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2773d3f3360044eebf4a9d412021061">&#9670;&#160;</a></span>operator&gt;=() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool operator&gt;= </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a>&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7abf5ac797062ba1c78c1963963e3dd4" name="a7abf5ac797062ba1c78c1963963e3dd4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7abf5ac797062ba1c78c1963963e3dd4">&#9670;&#160;</a></span>operator&gt;=() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -8420,7 +8437,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_pseudo_float.html">PseudoFloat</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1soft__float__t.html">soft_float_t</a>&#160;</td>
           <td class="paramname"><em>b</em>&#160;</td>
         </tr>
         <tr>

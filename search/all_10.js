@@ -149,7 +149,7 @@ var searchData=
   ['mainfrequency_146',['mainfrequency',['../classaudio__tools_1_1_musical_notes.html#abd5f92e43178a3194e8416160b2f5984',1,'audio_tools::MusicalNotes::mainFrequency(uint8_t mainNoteIdx, uint8_t octave) const'],['../classaudio__tools_1_1_musical_notes.html#adb03438437148af1a6efc8ded1c031a3',1,'audio_tools::MusicalNotes::mainFrequency(uint64_t idx) const']]],
   ['mainheader_147',['mainHeader',['../classaudio__tools_1_1_a_v_i_decoder.html#a63fba9c3de55b396cd5a356ab0dca7b3',1,'audio_tools::AVIDecoder']]],
   ['management_148',['management',['../classaudio__tools_1_1_s_p_i_audio_slave.html#autotoc_md27',1,'Buffer Management'],['../group__memorymgmt.html',1,'Memory Management']]],
-  ['mantissa_149',['mantissa',['../classaudio__tools_1_1_pseudo_float.html#a53402496946a9b2ecb7e4372cd2c3d88',1,'audio_tools::PseudoFloat']]],
+  ['mantissa_149',['mantissa',['../classaudio__tools_1_1soft__float__t.html#a53402496946a9b2ecb7e4372cd2c3d88',1,'audio_tools::soft_float_t']]],
   ['manual_5ffeedback_5fpercent_5f_150',['manual_feedback_percent_',['../classaudio__tools_1_1_u_s_b_audio_device_base.html#a47825321e0c526ee5a8fda20218a0a0b',1,'audio_tools::USBAudioDeviceBase']]],
   ['manufacturer_151',['manufacturer',['../structaudio__tools_1_1_u_s_b_audio_config.html#a84875663cfc7f10e83b39e143e4d6ca2',1,'audio_tools::USBAudioConfig']]],
   ['manufacturer_5fname_152',['manufacturer_name',['../classaudio__tools_1_1_v_b_a_n_config.html#ab193ebd7d4d81c2433b41b1fe2d91656',1,'audio_tools::VBANConfig']]],
