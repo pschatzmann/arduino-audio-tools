@@ -5,11 +5,30 @@
  * This example demonstrates how to use the JPEGRtpEncoder for proper
  * JPEG frame fragmentation and RTSP streaming from ESP32 camera.
  *
+ * Like the RTSP audio sources, video is pulled rather than pushed:
+ * RTSPMediaCallbackSource exposes JPEGRtpEncoder's already-packetized RTP
+ * fragments through a read/packetSize callback pair.
+ *
+ * RTSP request handling runs on RTSPServer's own background tasks (see
+ * RTSPServer.h), not in loop() - so loop() is free to just poll capture at
+ * its own pace, no dedicated capture task needed either since
+ * esp_camera_fb_get() is cheap. Capture is gated by rtspServer.clientCount(),
+ * checked directly in loop() - no start/stop callback needed. This is a bit
+ * coarser than PLAY/TEARDOWN (a client is "connected" from TCP accept
+ * through DESCRIBE/SETUP, before it necessarily PLAYs), but harmless here:
+ * RTSPMediaCallbackSource still gates actual RTP sending on its own
+ * is_active flag (true only between PLAY/TEARDOWN), so any frame captured a
+ * moment early is simply dropped by JPEGRtpEncoder's 1-frame queue rather
+ * than ever being sent. It also keeps jpegEncoder.begin()/end() on the same
+ * thread as capture (loop()), so there's no cross-thread race against an
+ * in-flight capture call.
+ *
  * Features:
  * - RFC 2435 compliant JPEG over RTP fragmentation
  * - Proper fragment offset handling for large frames
  * - Optimized bandwidth with optional header stripping
  * - Enhanced compatibility with RTSP clients
+ * - Camera capture only runs while a client is connected
  *
  * Hardware Requirements:
  * - ESP32-CAM board or ESP32 with OV2640/OV3660 camera module
@@ -18,7 +37,7 @@
  * Components demonstrated:
  * - ESP32 Camera API for JPEG frame capture
  * - JPEGRtpEncoder for RFC 2435 compliant frame processing
- * - RTSPOutput with encoder pattern for clean architecture
+ * - RTSPMediaCallbackSource as a pull-based MediaSource for video
  * - RTSPFormatMJPEG for MJPEG format handling
  * - Real-time video streaming with proper frame fragmentation
  *
@@ -69,13 +88,10 @@ const char* password = "your_wifi_password";
 const int VIDEO_WIDTH = 800;   // SVGA width
 const int VIDEO_HEIGHT = 600;  // SVGA height
 const float VIDEO_FPS = 10.0;  // Conservative frame rate for stability
+const unsigned long FRAME_DURATION_MS = 1000 / VIDEO_FPS;
 
 // Camera and streaming state
 static int frameCounter = 0;
-static unsigned long lastFrameTime = 0;
-static unsigned long frameDuration = 1000 / VIDEO_FPS;  // ms between frames
-static bool streamingActive = false;
-static bool cameraInitialized = false;
 
 // Camera initialization function
 bool beginCamera(size_t bufferSize = 65536) {
@@ -145,11 +161,47 @@ bool beginCamera(size_t bufferSize = 65536) {
   return true;
 }
 
-// RTSP Server and components with JPEG fragmentation encoder
+// RTP payloader: does the RFC 2435 fragmentation and queues already
+// RTP-ready fragments, retrieved via packetSize()/readBytes()
 RTSPFormatMJPEG mjpegFormat(VIDEO_WIDTH, VIDEO_HEIGHT, VIDEO_FPS);
 JPEGRtpEncoder jpegEncoder;
-RTSPOutput<RTSPPlatformWiFi> rtspOutput(mjpegFormat, jpegEncoder);
-RTSPServerTaskless<RTSPPlatformWiFi> rtspServer(rtspOutput.streamer());
+
+int readVideoPacket(uint8_t* buffer, int maxBytes, void* userData);
+int videoPacketSize(void* userData);
+void captureLoop();
+
+// RTSPMediaCallbackSource: pull-based MediaSource wired to JPEGRtpEncoder's
+// queue - same shape as a callback-based audio source, just packetized
+RTSPMediaCallbackSource videoSource(mjpegFormat, readVideoPacket, &jpegEncoder);
+RTSPMediaStreamer<RTSPPlatformWiFi> rtspStreamer(videoSource);
+RTSPServer<RTSPPlatformWiFi> rtspServer(rtspStreamer);
+
+// -- RTSPMediaCallbackSource callbacks ------------------------------------
+
+int readVideoPacket(uint8_t* buffer, int maxBytes, void* userData) {
+  return ((JPEGRtpEncoder*)userData)->readBytes(buffer, maxBytes);
+}
+
+int videoPacketSize(void* userData) {
+  return ((JPEGRtpEncoder*)userData)->packetSize();
+}
+
+// Called from loop() while captureEnabled; paces itself to VIDEO_FPS since
+// esp_camera_fb_get() (unlike H264Encoder::captureH264()) does not do this
+// internally. Returns immediately (no delay/blocking) when not yet due.
+void captureLoop() {
+  static unsigned long lastFrameCapture = 0;
+  unsigned long now = millis();
+  if (now - lastFrameCapture < FRAME_DURATION_MS) return;
+  lastFrameCapture = now;
+
+  camera_fb_t* fb = esp_camera_fb_get();
+  if (fb && fb->len > 0) {
+    jpegEncoder.write(fb->buf, fb->len);
+    frameCounter++;
+  }
+  if (fb) esp_camera_fb_return(fb);
+}
 
 void setup() {
   Serial.begin(115200);
@@ -161,9 +213,9 @@ void setup() {
   Serial.println();
 
   // Configure JPEG encoder for optimal video streaming
-  jpegEncoder.setMaxFragmentSize(1400);    // Optimal for most networks
-  jpegEncoder.setStripJpegHeaders(false);  // Keep headers for compatibility
-  Serial.println("✓ JPEG encoder configured for fragmentation");
+  jpegEncoder.setFormat(mjpegFormat);
+  jpegEncoder.setMaxFragmentSize(1400);  // Optimal for most networks
+  Serial.println("JPEG encoder configured for fragmentation");
 
   // Initialize camera first
   if (!beginCamera(65536)) {
@@ -172,7 +224,9 @@ void setup() {
       delay(1000);
     }
   }
-  Serial.println("✓ Camera initialized successfully");
+  Serial.println("Camera initialized successfully");
+
+  videoSource.setPacketSizeCallback(videoPacketSize);
 
   // Connect to WiFi
   Serial.println("Connecting to WiFi...");
@@ -185,14 +239,7 @@ void setup() {
 
   Serial.print("Connected to WiFi. IP address: ");
   Serial.println(WiFi.localIP());
-  Serial.println("✓ WiFi connected successfully");
-
-  // Initialize RTSP output with JPEG encoder
-  if (!rtspOutput.begin()) {
-    Serial.println("Failed to start RTSP output!");
-    while (1) delay(1000);
-  }
-  Serial.println("✓ RTSP output initialized");
+  Serial.println("WiFi connected successfully");
 
   // Start RTSP server
   rtspServer.begin();
@@ -207,10 +254,10 @@ void setup() {
                 rtspServer.getPort());
   Serial.println();
   Serial.println("Enhanced Features Enabled:");
-  Serial.println("✓ JPEG frame fragmentation (RFC 2435)");
-  Serial.println("✓ Proper fragment offset handling");
-  Serial.println("✓ RTP marker bit on last fragment");
-  Serial.println("✓ Optimized for large frame streaming");
+  Serial.println("- JPEG frame fragmentation (RFC 2435)");
+  Serial.println("- Proper fragment offset handling");
+  Serial.println("- RTP marker bit on last fragment");
+  Serial.println("- Optimized for large frame streaming");
   Serial.println();
   Serial.println("You can now connect with:");
   Serial.println("- VLC Media Player");
@@ -222,47 +269,33 @@ void setup() {
 }
 
 void loop() {
-  // Handle RTSP server requests
-  rtspServer.doLoop();
+  // RTSPServer handles accept/session/RTSP-request processing on its own
+  // background tasks - nothing to do here for that.
 
-  // Capture and stream camera frames using JPEG encoder
-  static unsigned long lastFrameCapture = 0;
-  if (millis() - lastFrameCapture >= frameDuration) {
-    // Check if output is ready for more data
-    if (rtspOutput.availableForWrite() > 0) {
-      // Capture frame from camera
-      camera_fb_t* fb = esp_camera_fb_get();
-      if (fb && fb->len > 0) {
-        // Stream JPEG frame through fragmentation encoder
-        size_t processed = rtspOutput.write(fb->buf, fb->len);
-
-        if (processed > 0) {
-          frameCounter++;
-          Serial.printf("Frame %d: %d bytes → %d processed (fragmented)\n",
-                        frameCounter, (int)fb->len, (int)processed);
-        }
-
-        // Return frame buffer to camera driver
-        esp_camera_fb_return(fb);
-        lastFrameCapture = millis();
-      } else {
-        if (fb) esp_camera_fb_return(fb);
-      }
+  // Enable/disable capture based on client connectivity, read directly from
+  // the server rather than a start/stop callback pair. Since
+  // jpegEncoder.begin()/end() now only ever run here (loop()), on the same
+  // thread as capture, there's no cross-thread race against an in-flight
+  // captureLoop() call either.
+  static bool captureEnabled = false;
+  bool clientConnected = rtspServer.clientCount() > 0;
+  if (clientConnected != captureEnabled) {
+    captureEnabled = clientConnected;
+    if (captureEnabled) {
+      jpegEncoder.begin();
+    } else {
+      jpegEncoder.end();
     }
   }
+
+  if (captureEnabled) captureLoop();
 
   // Optional: Print status every 10 seconds
   static unsigned long lastStatus = 0;
   if (millis() - lastStatus > 10000) {
     Serial.printf("RTSP Camera Server running - Streamed %d frames\n",
                   frameCounter);
-    Serial.printf("JPEG Encoder: fragmentation active, max size: %d bytes\n",
-                  1400);
-
-    // Optional: Print memory usage
     Serial.printf("Free heap: %d bytes\n", ESP.getFreeHeap());
     lastStatus = millis();
   }
-
-  delay(1);
 }

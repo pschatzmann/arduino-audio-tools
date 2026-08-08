@@ -77,6 +77,26 @@ class IMediaSource {
   // Default no-op so derived classes may optionally override
   virtual void stop() {}
 
+  /**
+   * @brief Size of the next queued, ready-to-send fragment, for sources
+   * that provide already RTP-payload-ready, self-delimited fragments (e.g.
+   * RFC 2435 JPEG) instead of a continuous byte stream. For these sources,
+   * readBytes() must always be called with exactly packetSize() as
+   * maxBytes, so each call retrieves exactly one complete fragment instead
+   * of the transport having to guess where one RTP payload ends and the
+   * next begins.
+   *
+   * Call it once before each readBytes() to size that call, and again
+   * right after to tell whether the fragment just read was the last one
+   * currently available - a 0 result means the caller should set the RTP
+   * marker bit on the fragment it just sent (and may advance the timestamp
+   * for the next frame).
+   *
+   * @return -1 if this source is not packetized (use the plain readBytes()
+   * stream instead), 0 if packetized but nothing is queued right now,
+   * otherwise the size in bytes of the next fragment
+   */
+  virtual int packetSize() { return -1; }
 };
 
 }  // namespace audio_tools

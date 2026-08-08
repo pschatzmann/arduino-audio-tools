@@ -14,11 +14,13 @@
 #include "RTSP/RTSPServer.h"
 #include "RTSP/RTSPServerTaskless.h"
 #include "RTSP/RTSPMediaSource.h"
+#include "RTSP/RTSPMediaCallbackSource.h"
 #include "RTSP/RTSPFormat.h"
 #include "RTSP/RTSPOutput.h"
 #include "RTSP/RTSPMediaStreamer.h"
 #include "RTSP/RTSPMediaStreamerUsingTask.h"
 #include "RTSP/JPEGRtpEncoder.h"
+#include "RTSP/H264RtpEncoder.h"
 #include "RTSP/RTSPClient.h"
 #ifdef ESP32
 #include "RTSP/RTSPPlatformWiFi.h"

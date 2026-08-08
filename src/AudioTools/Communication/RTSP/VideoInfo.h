@@ -17,7 +17,8 @@ enum VideoFormat {
   VIDEO_YUV420,    ///< YUV 4:2:0 planar format
   VIDEO_JPEG,      ///< JPEG compressed format
   VIDEO_MJPEG,     ///< Motion JPEG format
-  VIDEO_GRAYSCALE  ///< 8-bit grayscale
+  VIDEO_GRAYSCALE, ///< 8-bit grayscale
+  VIDEO_H264       ///< H.264/AVC compressed format
 };
 
 /**
@@ -59,29 +60,33 @@ struct VideoInfo {
       case VIDEO_MJPEG:
         // Variable size - return max estimate (1/4 compression ratio)
         return (width * height * bits_per_pixel) / (8 * 4);
+      case VIDEO_H264:
+        // Variable size - return a rough estimate (much higher compression
+        // ratio than JPEG thanks to inter-frame prediction)
+        return (width * height * bits_per_pixel) / (8 * 20);
       default:
         return width * height * (bits_per_pixel / 8);
     }
   }
-  
+
   /// Calculate RTP timestamp increment per frame
   uint32_t timestampIncrement() const {
     return (uint32_t)(rtp_clock_rate / framerate);
   }
-  
+
   /// Calculate frame period in microseconds
   uint32_t framePeriodUs() const {
     return (uint32_t)(1000000.0f / framerate);
   }
-  
+
   /// Get aspect ratio
   float aspectRatio() const {
     return (float)width / (float)height;
   }
-  
+
   /// Check if format is compressed
   bool isCompressed() const {
-    return format == VIDEO_JPEG || format == VIDEO_MJPEG;
+    return format == VIDEO_JPEG || format == VIDEO_MJPEG || format == VIDEO_H264;
   }
   
   /// Convert to string for debugging
@@ -101,6 +106,7 @@ struct VideoInfo {
       case VIDEO_JPEG: result += "JPEG"; break;
       case VIDEO_MJPEG: result += "MJPEG"; break;
       case VIDEO_GRAYSCALE: result += "GRAY"; break;
+      case VIDEO_H264: result += "H264"; break;
       default: result += "UNKNOWN"; break;
     }
     

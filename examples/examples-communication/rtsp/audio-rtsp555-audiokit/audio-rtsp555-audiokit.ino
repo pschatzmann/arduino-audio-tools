@@ -1,6 +1,6 @@
 
 /**
- * @file communication-rtsp555-i2s.ino
+ * @file audio-rtsp555-audiokit.ino
  * @author Phil Schatzmann
  * @brief Demo for RTSP Client that is playing mp3. I tested with the live555 server with linux 
  * @version 0.1

@@ -295,6 +295,11 @@ class RTSPMediaStreamerBase {
       return -1;
     }
 
+    int firstPacketSize = m_audioSource->packetSize();
+    if (firstPacketSize != -1) {
+      return sendPacketizedFrame(firstPacketSize);
+    }
+
     // unsigned char * dataBuf = &mRtpBuf[m_fragmentSize];
     if (m_fragmentSize + HEADER_SIZE >= STREAMING_BUFFER_SIZE) {
       LOGE(
@@ -327,6 +332,56 @@ class RTSPMediaStreamerBase {
     m_SequenceNumber++;
     sendOut(HEADER_SIZE + bytesNet + header_len);
     return bytesNet;
+  }
+
+  /**
+   * @brief Send every already-fragmented RTP payload belonging to the next
+   * queued video frame (packetized sources, e.g. JPEGRtpEncoder).
+   *
+   * Each fragment already carries its own payload-format header (e.g. RFC
+   * 2435); this method only wraps it in the generic 12-byte RTP header. The
+   * marker bit is set on a fragment when packetSize() reports nothing left
+   * queued right after sending it - i.e. the source is expected to keep at
+   * most one frame's worth of fragments queued at a time (see
+   * JPEGRtpEncoder::m_maxQueuedFrames), so "nothing left" means "that was
+   * the last fragment of this frame". All fragments of the frame share a
+   * single timestamp (advanced once by the caller after this method
+   * returns, matching one call = one frame).
+   *
+   * @param firstPacketSize Result of the packetSize() call the caller
+   * already made to detect that this source is packetized; reused here
+   * instead of querying it again for the first fragment.
+   * @return Total payload bytes sent across all fragments of the frame, 0 if
+   * nothing was queued, negative on error
+   */
+  int sendPacketizedFrame(int firstPacketSize) {
+    int totalBytes = 0;
+    int maxPayload = STREAMING_BUFFER_SIZE - HEADER_SIZE;
+    int size = firstPacketSize;
+
+    while (size > 0) {
+      int toRead = size > maxPayload ? maxPayload : size;
+
+      unsigned char *dataBuf = &mRtpBuf[HEADER_SIZE];
+      int len = m_audioSource->readBytes(dataBuf, toRead);
+      if (len <= 0) break;
+      totalBytes += len;
+
+      // Peek: 0 (or -1, defensively) means nothing left, so this fragment
+      // was the last one of the current frame.
+      size = m_audioSource->packetSize();
+      bool isLast = (size <= 0);
+      buildRtpHeader(isLast);
+      m_SequenceNumber++;
+      sendOut(HEADER_SIZE + len);
+
+      if (isLast) break;
+    }
+
+    if (totalBytes > 0) {
+      m_lastSamplesSent = m_audioSource->getFormat().timestampIncrement();
+    }
+    return totalBytes;
   }
 
   /**
@@ -571,16 +626,14 @@ class RTSPMediaStreamerBase {
     return (uint32_t)samples;
   }
 
-  inline void buildRtpHeader() {
+  inline void buildRtpHeader(bool markerBit = false) {
     mRtpBuf[0] = 0x80;  // V=2
     mRtpBuf[1] = (uint8_t)(m_payloadType & 0x7F);
     if (m_payloadType == 14) {
       // Set Marker bit on each complete MP3 frame packet
       mRtpBuf[1] |= 0x80;
-    } else if (m_payloadType == 26) {
-      // Set Marker bit on last packet of each JPEG frame
-      // Note: This should be controlled by fragmentation logic
-      // For now, assume each RTP packet contains a complete JPEG frame
+    } else if (markerBit) {
+      // Set by the caller: e.g. the last fragment of a JPEG frame
       mRtpBuf[1] |= 0x80;
     }
     mRtpBuf[2] = (uint8_t)((m_SequenceNumber >> 8) & 0xFF);

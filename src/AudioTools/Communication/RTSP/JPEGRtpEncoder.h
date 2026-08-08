@@ -8,23 +8,36 @@
 #pragma once
 
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
+#include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
 #include "RTSPFormat.h"
+#include "RTSPFragmentQueue.h"
+#include "RTSPVideoEncoder.h"
 
 namespace audio_tools {
 
 /**
- * @brief JPEG RTP Encoder - Handles JPEG Frame Processing for RTP Streaming
+ * @brief JPEG RTP Encoder - Fragments JPEG frames per RFC 2435 for RTSP
+ * video streaming.
  *
- * This encoder implements the complete JPEG frame processing pipeline for
- * RTP streaming as per RFC 2435:
+ * This class plays both roles needed to get a JPEG frame onto the wire:
+ * - As an AudioEncoder, write() accepts complete JPEG frames (e.g. straight
+ *   from a camera).
+ * - As an IMediaSource, packetSize()/readBytes() hand out the resulting RTP
+ *   payloads one fragment at a time, each one already carrying its RFC 2435
+ *   header (and, on the first fragment of a frame, an embedded
+ *   quantization-table header).
  *
- * 1. Takes JPEG frames (complete or raw data to encode)
- * 2. Removes standard JPEG headers (optional optimization)
- * 3. Splits large frames into RTP-sized chunks
- * 4. Outputs RTP-ready packets with:
- *    - Proper JPEG RTP headers with fragment offsets
- *    - Same timestamp for all fragments of a frame
- *    - Marker bit set only on the last packet of each frame
+ * Keeping fragmentation and header construction in one place means the RTP
+ * transport never has to re-derive fragment boundaries or rebuild a JPEG
+ * header of its own - it only wraps each queued fragment in the generic RTP
+ * header (sequence number, shared timestamp, marker bit set once
+ * packetSize() reports the queue empty).
+ *
+ * Per RFC 2435, the payload must be the raw entropy-coded scan data only;
+ * SOI/APPn/DQT/SOF/SOS markers are stripped and reconstructed by the
+ * receiver from the RTP header fields, so header stripping is not optional.
+ *
+ * @note Restart intervals (DRI) are not supported.
  *
  * Usage with RTSPOutput:
  * ```cpp
@@ -37,28 +50,51 @@ namespace audio_tools {
  * @ingroup codecs
  * @author Phil Schatzmann
  */
-class JPEGRtpEncoder : public AudioEncoder {
+class JPEGRtpEncoder : public RTSPVideoEncoder, protected RTSPFragmentQueue {
  public:
   JPEGRtpEncoder() = default;
-  
+
   /**
    * @brief Constructor with maximum fragment size
-   * @param maxFragmentSize Maximum payload size per RTP packet (default: 1400 bytes)
+   * @param maxFragmentSize Maximum RTP payload size per packet, including
+   * the RFC 2435 header (default: 1400 bytes)
    */
   JPEGRtpEncoder(size_t maxFragmentSize) : m_maxFragmentSize(maxFragmentSize) {}
 
-  /// Set the maximum fragment size for RTP packets
+  /// Set the maximum RTP payload size per packet (header + data)
   void setMaxFragmentSize(size_t size) { m_maxFragmentSize = size; }
-  
-  /// Enable/disable JPEG header stripping optimization
-  void setStripJpegHeaders(bool strip) { m_stripHeaders = strip; }
+
+  /// Maximum number of complete frames buffered when the consumer falls behind
+  void setMaxQueuedFrames(size_t frames) { m_maxQueuedFrames = frames; }
+
+  /// Associates the RTSPFormat (e.g. RTSPFormatMJPEG) that supplies width/height
+  void setFormat(RTSPFormat &format) override { p_format = &format; }
+
+  // -- IMediaSource --------------------------------------------------
+
+  RTSPFormat &getFormat() override {
+    return p_format != nullptr ? *p_format : default_format;
+  }
+
+  void start() override { begin(); }
+  void stop() override { end(); }
+
+  int packetSize() override { return queuePacketSize(); }
+
+  /// Retrieves the next queued fragment. Call packetSize() first and pass
+  /// its result as maxBytes so exactly one fragment is read.
+  int readBytes(void *dest, int maxBytes) override {
+    return queueReadBytes(dest, maxBytes);
+  }
+
+  // -- AudioEncoder ----------------------------------------------------
 
   bool begin() override {
     LOGI("Starting JPEG RTP Encoder");
     m_isStarted = true;
     m_currentFrame.clear();
-    m_fragmentOffset = 0;
     m_frameComplete = true;
+    clearQueue();
     return true;
   }
 
@@ -66,49 +102,38 @@ class JPEGRtpEncoder : public AudioEncoder {
     LOGI("Stopping JPEG RTP Encoder");
     m_isStarted = false;
     m_currentFrame.clear();
-  }
-
-  void setOutput(Stream &outputStream) {
-    p_stream = &outputStream;
+    clearQueue();
   }
 
   void setAudioInfo(AudioInfo info) override {
-    // For video encoder, we can ignore audio info
-    // Video parameters come from RTSPFormat
+    // Video encoder: dimensions/framerate come from the RTSPFormat, not
+    // AudioInfo
+    (void)info;
   }
 
-  const char* mime() override {
-    return "video/jpeg";
-  }
+  const char *mime() override { return "video/jpeg"; }
 
   /**
-   * @brief Process JPEG frame data and output RTP fragments
-   * 
+   * @brief Process JPEG frame data and queue the resulting RTP fragments
+   *
    * @param data Pointer to JPEG frame data
    * @param len Length of JPEG frame data
    * @return Number of bytes processed
    */
   size_t write(const uint8_t *data, size_t len) override {
-    if (!m_isStarted || p_stream == nullptr || len == 0) {
+    if (!m_isStarted || len == 0) {
       return 0;
     }
 
-    LOGD("JPEGRtpEncoder: Processing %d bytes of JPEG data", len);
-
-    // Accumulate complete JPEG frame
     if (m_frameComplete) {
       m_currentFrame.clear();
-      m_fragmentOffset = 0;
       m_frameComplete = false;
     }
 
-    // Add data to current frame buffer
-    for (size_t i = 0; i < len; i++) {
-      uint8_t byte = data[i];
-      m_currentFrame.push_back(byte);
-    }
+    size_t oldSize = m_currentFrame.size();
+    m_currentFrame.resize(oldSize + len);
+    memcpy(m_currentFrame.data() + oldSize, data, len);
 
-    // Check if we have a complete JPEG frame
     if (isCompleteJpegFrame()) {
       processCompleteFrame();
       m_frameComplete = true;
@@ -117,156 +142,249 @@ class JPEGRtpEncoder : public AudioEncoder {
     return len;
   }
 
-  operator bool() override {
-    return m_isStarted;
-  }
+  operator bool() override { return m_isStarted; }
 
  protected:
-  Stream *p_stream = nullptr;
+  RTSPFormat *p_format = nullptr;
+  RTSPFormatMJPEG default_format;  // fallback so getFormat() is never null
+
   bool m_isStarted = false;
   size_t m_maxFragmentSize = 1400;  // Typical MTU minus IP/UDP/RTP headers
-  bool m_stripHeaders = false;      // JPEG header stripping optimization
-  
-  // Frame processing state
+
+  // Frame accumulation state
   Vector<uint8_t> m_currentFrame;
-  size_t m_fragmentOffset = 0;
   bool m_frameComplete = true;
+
+  // Reused scratch buffer for building one fragment at a time
+  Vector<uint8_t> m_scratch;
 
   /**
    * @brief Check if current buffer contains a complete JPEG frame
    * @return true if frame is complete (ends with 0xFF 0xD9)
    */
   bool isCompleteJpegFrame() {
-    if (m_currentFrame.size() < 2) return false;
-    
-    // Look for JPEG end marker (0xFF 0xD9)
     size_t size = m_currentFrame.size();
-    return (m_currentFrame[size-2] == 0xFF && m_currentFrame[size-1] == 0xD9);
+    if (size < 4) return false;
+    return (m_currentFrame[size - 2] == 0xFF && m_currentFrame[size - 1] == 0xD9);
   }
 
   /**
-   * @brief Process a complete JPEG frame and fragment it for RTP transmission
-   */
-  void processCompleteFrame() {
-    LOGI("Processing complete JPEG frame: %d bytes", m_currentFrame.size());
-    
-    uint8_t *frameData = m_currentFrame.data();
-    size_t frameSize = m_currentFrame.size();
-    size_t processedOffset = 0;
-
-    // Optional: Strip standard JPEG headers for bandwidth optimization
-    if (m_stripHeaders) {
-      size_t headerSize = findJpegDataStart();
-      if (headerSize > 0) {
-        frameData += headerSize;
-        frameSize -= headerSize;
-        LOGD("Stripped %d bytes of JPEG headers", headerSize);
-      }
-    }
-
-    // Fragment the frame into RTP packets
-    size_t totalFragments = (frameSize + m_maxFragmentSize - 1) / m_maxFragmentSize;
-    LOGD("Fragmenting into %d RTP packets", totalFragments);
-
-    for (size_t fragmentIndex = 0; fragmentIndex < totalFragments; fragmentIndex++) {
-      size_t fragmentSize = min(m_maxFragmentSize, frameSize - processedOffset);
-      bool isLastFragment = (fragmentIndex == totalFragments - 1);
-      
-      // Create RTP packet with JPEG fragment
-      createRtpFragment(frameData + processedOffset, fragmentSize, 
-                       processedOffset, isLastFragment);
-      
-      processedOffset += fragmentSize;
-    }
-
-    LOGI("JPEG frame fragmentation complete: %d fragments sent", totalFragments);
-  }
-
-  /**
-   * @brief Find the start of actual JPEG image data (after headers)
-   * @return Offset to image data, or 0 if headers should not be stripped
+   * @brief Find the start of the entropy-coded scan data, i.e. the first
+   * byte after the SOS (Start Of Scan) marker segment. RFC 2435 requires
+   * everything before this point (SOI/APPn/DQT/SOF/SOS) to be stripped from
+   * the RTP payload.
+   * @return Offset to the scan data, or 0 if no SOS marker was found
    */
   size_t findJpegDataStart() {
-    // Look for Start of Scan (0xFF 0xDA) marker
-    for (size_t i = 0; i < m_currentFrame.size() - 1; i++) {
-      if (m_currentFrame[i] == 0xFF && m_currentFrame[i+1] == 0xDA) {
-        // Skip the SOS marker and length field to get to actual image data
-        if (i + 4 < m_currentFrame.size()) {
-          size_t sosLength = (m_currentFrame[i+2] << 8) | m_currentFrame[i+3];
-          return i + 2 + sosLength;
-        }
+    size_t size = m_currentFrame.size();
+    if (size < 4) return 0;
+    for (size_t i = 0; i + 4 <= size; i++) {
+      if (m_currentFrame[i] == 0xFF && m_currentFrame[i + 1] == 0xDA) {
+        size_t sosLength = (m_currentFrame[i + 2] << 8) | m_currentFrame[i + 3];
+        size_t dataStart = i + 2 + sosLength;
+        return dataStart <= size ? dataStart : 0;
       }
     }
-    return 0; // Don't strip if we can't find proper markers
+    return 0;
   }
 
   /**
-   * @brief Create and output an RTP packet fragment
-   * 
-   * @param fragmentData Pointer to fragment payload data
-   * @param fragmentSize Size of fragment payload
-   * @param fragmentOffset Byte offset of this fragment within the frame
-   * @param isLastFragment True if this is the last fragment of the frame
+   * @brief Extract the (8-bit precision) quantization tables 0 and 1 from
+   * the JPEG DQT segments found in [data, data+headerLen). RFC 2435 expects
+   * table 0 (luma) followed by table 1 (chroma), each 64 bytes in zigzag
+   * order exactly as stored in the JPEG - no reordering needed.
+   * @return Number of bytes written to out (0, 64 or 128), 0 if no usable
+   * 8-bit-precision table was found
    */
-  void createRtpFragment(const uint8_t *fragmentData, size_t fragmentSize,
-                        size_t fragmentOffset, bool isLastFragment) {
-    
-    // Calculate total packet size: JPEG RTP header + payload
-    const size_t JPEG_RTP_HEADER_SIZE = 8;
-    size_t totalPacketSize = JPEG_RTP_HEADER_SIZE + fragmentSize;
-    
-    // Create packet buffer
-    Vector<uint8_t> packet;
-    packet.resize(totalPacketSize);
-    
-    // Build JPEG RTP header (RFC 2435)
-    buildJpegRtpHeader(packet.data(), fragmentOffset);
-    
-    // Copy fragment payload
-    memcpy(packet.data() + JPEG_RTP_HEADER_SIZE, fragmentData, fragmentSize);
-    
-    // Special marker for RTP layer to handle timestamp and marker bit
-    if (isLastFragment) {
-      // Add special marker to indicate this is the last fragment
-      // The RTP layer will set the marker bit appropriately
-      packet.push_back(0xFF); // Special end-of-frame marker
-      packet.push_back(0xEF); // "End Frame" marker
+  int extractQuantTables(const uint8_t *data, size_t headerLen, uint8_t *out) {
+    uint8_t table0[64];
+    uint8_t table1[64];
+    bool has0 = false, has1 = false;
+
+    size_t i = 2;  // skip SOI (0xFFD8)
+    while (i + 4 <= headerLen) {
+      if (data[i] != 0xFF) {
+        ++i;
+        continue;
+      }
+      uint8_t marker = data[i + 1];
+      if (marker == 0xD8 || marker == 0x01 || (marker >= 0xD0 && marker <= 0xD7)) {
+        i += 2;
+        continue;
+      }
+      size_t segLen = (data[i + 2] << 8) | data[i + 3];
+      if (segLen < 2 || i + 2 + segLen > headerLen) break;
+
+      if (marker == 0xDB) {  // DQT
+        size_t p = i + 4;
+        size_t segEnd = i + 2 + segLen;
+        while (p < segEnd) {
+          uint8_t pqtq = data[p++];
+          uint8_t precision = pqtq >> 4;
+          uint8_t id = pqtq & 0x0F;
+          size_t tableBytes = precision == 0 ? 64 : 128;
+          if (p + tableBytes > segEnd) break;
+          if (precision == 0) {
+            if (id == 0 && !has0) {
+              memcpy(table0, data + p, 64);
+              has0 = true;
+            } else if (id == 1 && !has1) {
+              memcpy(table1, data + p, 64);
+              has1 = true;
+            }
+          }
+          p += tableBytes;
+        }
+      } else if (marker == 0xDA) {
+        break;  // reached scan data, no more tables before it
+      }
+      i += 2 + segLen;
     }
-    
-    // Output the packet to the stream
-    size_t written = p_stream->write(packet.data(), packet.size());
-    LOGD("RTP fragment sent: offset=%d, size=%d, last=%s, written=%d",
-         fragmentOffset, fragmentSize, isLastFragment ? "yes" : "no", written);
+
+    int len = 0;
+    if (has0) {
+      memcpy(out, table0, 64);
+      len += 64;
+    }
+    if (has1) {
+      memcpy(out + len, table1, 64);
+      len += 64;
+    }
+    return len;
   }
 
   /**
-   * @brief Build JPEG RTP header per RFC 2435
-   * 
-   * @param buffer Buffer to write header to (must be at least 8 bytes)
-   * @param fragmentOffset Byte offset of this fragment within the frame
+   * @brief Determine the RFC 2435 Type (0 = 4:2:2, 1 = 4:2:0) from the
+   * JPEG's SOF0/SOF1 marker so the receiver reconstructs the correct chroma
+   * subsampling. Defaults to 0 (4:2:2) if it cannot be determined.
    */
-  void buildJpegRtpHeader(uint8_t *buffer, size_t fragmentOffset) {
-    memset(buffer, 0, 8);
-    
-    // Type-specific field (0 for baseline JPEG)
-    buffer[0] = 0;
-    
-    // Fragment offset (24-bit, network byte order)
+  uint8_t detectJpegType(const uint8_t *data, size_t headerLen) {
+    size_t i = 2;
+    while (i + 4 <= headerLen) {
+      if (data[i] != 0xFF) {
+        ++i;
+        continue;
+      }
+      uint8_t marker = data[i + 1];
+      if (marker == 0xD8 || marker == 0x01 || (marker >= 0xD0 && marker <= 0xD7)) {
+        i += 2;
+        continue;
+      }
+      size_t segLen = (data[i + 2] << 8) | data[i + 3];
+      if (segLen < 2 || i + 2 + segLen > headerLen) break;
+
+      if (marker == 0xC0 || marker == 0xC1) {  // SOF0 / SOF1 (baseline)
+        size_t p = i + 4;
+        size_t segEnd = i + 2 + segLen;
+        // layout from p: precision(1) Y(2) X(2) Nf(1) [Cid(1) HV(1) Tq(1)]...
+        if (p + 8 <= segEnd) {
+          uint8_t hv = data[p + 7];
+          uint8_t h = hv >> 4;
+          uint8_t v = hv & 0x0F;
+          if (h == 2 && v == 1) return 0;  // 4:2:2
+          if (h == 2 && v == 2) return 1;  // 4:2:0
+          LOGW(
+              "JPEGRtpEncoder: unsupported chroma subsampling H=%d V=%d; "
+              "assuming 4:2:2",
+              h, v);
+        }
+        return 0;
+      }
+      if (marker == 0xDA) break;
+      i += 2 + segLen;
+    }
+    LOGW("JPEGRtpEncoder: SOF0 marker not found; assuming 4:2:2 subsampling");
+    return 0;
+  }
+
+  void buildJpegRtpHeader(uint8_t *buffer, size_t fragmentOffset, int width,
+                          int height, uint8_t type, uint8_t qValue) {
+    buffer[0] = 0;  // Type-specific field (0 for baseline JPEG)
     buffer[1] = (fragmentOffset >> 16) & 0xFF;
     buffer[2] = (fragmentOffset >> 8) & 0xFF;
     buffer[3] = fragmentOffset & 0xFF;
-    
-    // Type (JPEG type - 0 for baseline)
-    buffer[4] = 0;
-    
-    // Q (quantization table ID - 128+ means standard tables)
-    buffer[5] = 128;
-    
-    // Width/Height (in 8-pixel blocks) - these should come from format
-    // For now, use default values - this should be configured externally
-    buffer[6] = 80;  // 640/8
-    buffer[7] = 60;  // 480/8
+    buffer[4] = type;
+    buffer[5] = qValue;
+    buffer[6] = (uint8_t)((width / 8) & 0xFF);
+    buffer[7] = (uint8_t)((height / 8) & 0xFF);
+  }
+
+  /// RFC 2435 Quantization Table header (only present on the first fragment
+  /// of a frame when Q >= 128)
+  void writeQuantTableHeader(uint8_t *buffer, const uint8_t *qTable, int qTableLen) {
+    buffer[0] = 0;  // MBZ
+    buffer[1] = 0;  // Precision: 0 = 8-bit for all tables
+    buffer[2] = (qTableLen >> 8) & 0xFF;
+    buffer[3] = qTableLen & 0xFF;
+    memcpy(buffer + 4, qTable, qTableLen);
+  }
+
+  /**
+   * @brief Strip the JPEG headers, fragment the scan data and queue one RFC
+   * 2435 RTP payload per fragment.
+   */
+  void processCompleteFrame() {
+    if (p_format == nullptr) {
+      LOGE("JPEGRtpEncoder: no RTSPFormat configured (call setFormat()); dropping frame");
+      return;
+    }
+
+    size_t headerSize = findJpegDataStart();
+    if (headerSize == 0 || headerSize >= m_currentFrame.size()) {
+      LOGW("JPEGRtpEncoder: could not locate JPEG scan data (SOS marker); dropping frame");
+      return;
+    }
+
+    uint8_t qTable[128];
+    int qTableLen = extractQuantTables(m_currentFrame.data(), headerSize, qTable);
+    uint8_t qValue = qTableLen > 0 ? 255 : 127;
+    if (qTableLen == 0) {
+      LOGW(
+          "JPEGRtpEncoder: could not extract quantization tables from frame; "
+          "using approximate standard tables (Q=%d)",
+          qValue);
+    }
+    uint8_t type = detectJpegType(m_currentFrame.data(), headerSize);
+
+    VideoInfo vi = p_format->videoInfo();
+    int width = vi.width;
+    int height = vi.height;
+
+    const uint8_t *frameData = m_currentFrame.data() + headerSize;
+    size_t frameSize = m_currentFrame.size() - headerSize;
+    size_t processedOffset = 0;
+    int fragmentCount = 0;
+
+    while (processedOffset < frameSize) {
+      bool isFirst = (processedOffset == 0);
+      size_t qLen = isFirst ? (size_t)qTableLen : 0;
+      size_t qHeaderLen = qLen > 0 ? 4 + qLen : 0;
+
+      if (m_maxFragmentSize <= 8 + qHeaderLen) {
+        LOGE("JPEGRtpEncoder: maxFragmentSize too small to fit RTP/JPEG headers");
+        return;
+      }
+      size_t maxData = m_maxFragmentSize - 8 - qHeaderLen;
+      size_t chunk = frameSize - processedOffset;
+      if (chunk > maxData) chunk = maxData;
+      bool isLast = (processedOffset + chunk >= frameSize);
+
+      m_scratch.resize(8 + qHeaderLen + chunk);
+      buildJpegRtpHeader(m_scratch.data(), processedOffset, width, height, type, qValue);
+      if (qHeaderLen > 0) {
+        writeQuantTableHeader(m_scratch.data() + 8, qTable, qTableLen);
+      }
+      memcpy(m_scratch.data() + 8 + qHeaderLen, frameData + processedOffset, chunk);
+
+      appendFragment(m_scratch.data(), m_scratch.size(), isLast);
+
+      processedOffset += chunk;
+      ++fragmentCount;
+    }
+
+    LOGI("JPEGRtpEncoder: queued %d RTP fragments for %u byte frame",
+         fragmentCount, (unsigned)frameSize);
   }
 };
 
-} // namespace audio_tools
+}  // namespace audio_tools

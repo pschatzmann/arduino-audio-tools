@@ -129,6 +129,19 @@ class RTSPFormat {
   virtual void setUseRfc2250Header(bool /*enable*/) {}
   virtual bool useRfc2250Header() const { return false; }
 
+  /// Optional: receives base64-encoded SPS/PPS once an encoder has learned
+  /// them (H.264 sprop-parameter-sets). Default no-op; only RTSPFormatH264
+  /// acts on it. Declared here (rather than only on RTSPFormatH264) so
+  /// video encoders (see RTSPVideoEncoder) can push this through a generic
+  /// RTSPFormat* without needing to know the concrete format type.
+  virtual void setSpropParameterSets(const char * /*base64Sps*/,
+                                     const char * /*base64Pps*/) {}
+
+  /// Optional: receives the 3-byte profile-level-id (as 6 hex digits) once
+  /// an encoder has parsed it from the SPS. Default no-op; only
+  /// RTSPFormatH264 acts on it.
+  virtual void setProfileLevelId(const char * /*hex6*/) {}
+
  protected:
   const char *STD_URL_PRE_SUFFIX = "trackID";
   // for sample rate 16000
@@ -750,8 +763,6 @@ class RTSPFormatMJPEG : public RTSPFormat {
     video_cfg = VideoInfo(width, height, framerate, VIDEO_MJPEG, 24);
     // Calculate timer period based on framerate
     setTimerPeriodUs((int)(1000000.0f / framerate));
-    // Set a reasonable fragment size for JPEG frames
-    setFragmentSize(8192);  // 8KB chunks for JPEG data
   }
 
   /// Override media type for video
@@ -813,41 +824,150 @@ class RTSPFormatMJPEG : public RTSPFormat {
   /// Get framerate
   float getFramerate() const { return video_framerate; }
 
-  /// JPEG over RTP requires special header (RFC 2435)
-  int readHeader(uint8_t *buffer) override {
-    return readHeader(buffer, 0);  // Default: no fragmentation
-  }
-
-  /// JPEG RTP header with fragmentation support (RFC 2435)
-  int readHeader(uint8_t *buffer, uint32_t fragmentOffset) {
-    // RFC 2435 JPEG RTP header (8 bytes minimum)
-    memset(buffer, 0, 8);
-    
-    // Type-specific field (0 for baseline JPEG)
-    buffer[0] = 0;
-    
-    // Fragment offset (24-bit, network byte order) 
-    buffer[1] = (fragmentOffset >> 16) & 0xFF;  // Upper 8 bits
-    buffer[2] = (fragmentOffset >> 8) & 0xFF;   // Middle 8 bits  
-    buffer[3] = fragmentOffset & 0xFF;          // Lower 8 bits
-    
-    // Type (JPEG type - 0 for baseline)
-    buffer[4] = 0;
-    
-    // Q (quantization table ID - 128+ means standard tables)
-    buffer[5] = 128;  // Standard quantization tables
-    
-    // Width/Height (in 8-pixel blocks)
-    buffer[6] = (video_width / 8) & 0xFF;
-    buffer[7] = (video_height / 8) & 0xFF;
-    
-    return 8;
-  }
+  // Note: the RFC 2435 JPEG/RTP header (fragment offset, Q value,
+  // width/height, quantization-table sub-header) is built by
+  // JPEGRtpEncoder, which is a packetized IMediaSource and therefore
+  // bypasses RTSPFormat::readHeader() entirely. Keeping a second
+  // implementation here previously caused the two to drift apart and
+  // produce duplicated, inconsistent headers on the wire.
 
  protected:
   int video_width = 640;
   int video_height = 480;
   float video_framerate = 30.0f;
+};
+
+/**
+ * @brief H.264 (AVC) format for RTSP video streaming, per RFC 6184.
+ *
+ * Unlike JPEG's static payload type 26, H.264 has no static RTP payload
+ * type, so this uses a dynamic one (96) with packetization-mode=1
+ * (non-interleaved: single-NAL-unit packets plus FU-A fragmentation for
+ * large NALs, no STAP-A aggregation).
+ *
+ * The `sprop-parameter-sets`/`profile-level-id` SDP attributes need the
+ * stream's actual SPS/PPS, but most H.264 encoders (including
+ * codec-h264-ESP32S3) only emit SPS/PPS embedded in the first encoded IDR
+ * frame - there is no way to query them ahead of time. H264RtpEncoder pushes
+ * them into this format via setSpropParameterSets()/setProfileLevelId() as
+ * soon as they become available; until then, format() simply omits those
+ * attributes. Conformant clients still work either way because
+ * H264RtpEncoder also (re-)sends SPS/PPS in-band before every IDR frame.
+ *
+ * SDP format:
+ * m=video 0 RTP/AVP 96
+ * a=rtpmap:96 H264/90000
+ * a=fmtp:96 packetization-mode=1[;profile-level-id=...;sprop-parameter-sets=...]
+ *
+ * @ingroup rtsp
+ * @author Phil Schatzmann
+ */
+class RTSPFormatH264 : public RTSPFormat {
+ public:
+  RTSPFormatH264(int width = 1280, int height = 720, float framerate = 15.0f) {
+    video_width = width;
+    video_height = height;
+    video_framerate = framerate;
+    video_cfg = VideoInfo(width, height, framerate, VIDEO_H264, 24);
+    setTimerPeriodUs((int)(1000000.0f / framerate));
+  }
+
+  /// Override media type for video
+  MediaType mediaType() override { return MEDIA_VIDEO; }
+
+  const char *format(char *buffer, int len) override {
+    TRACEI();
+    int payload_type = 96;  // Dynamic payload type (RFC 3551: 96-127)
+    if (sprop_parameter_sets.length() > 0) {
+      snprintf(buffer, len,
+               "s=%s\r\n"
+               "c=IN IP4 0.0.0.0\r\n"
+               "t=0 0\r\n"
+               "m=video 0 RTP/AVP %d\r\n"
+               "a=rtpmap:%d H264/90000\r\n"
+               "a=framerate:%.1f\r\n"
+               "a=fmtp:%d packetization-mode=1;profile-level-id=%s;"
+               "sprop-parameter-sets=%s\r\n",
+               name(), payload_type, payload_type, video_framerate,
+               payload_type, profile_level_id.c_str(),
+               sprop_parameter_sets.c_str());
+    } else {
+      // SPS/PPS not captured yet (no frame encoded so far): rely on
+      // in-band parameter sets instead - H264RtpEncoder re-sends SPS/PPS
+      // before every IDR frame.
+      snprintf(buffer, len,
+               "s=%s\r\n"
+               "c=IN IP4 0.0.0.0\r\n"
+               "t=0 0\r\n"
+               "m=video 0 RTP/AVP %d\r\n"
+               "a=rtpmap:%d H264/90000\r\n"
+               "a=framerate:%.1f\r\n"
+               "a=fmtp:%d packetization-mode=1\r\n",
+               name(), payload_type, payload_type, video_framerate,
+               payload_type);
+    }
+    return (const char *)buffer;
+  }
+
+  AudioInfo defaultConfig() override {
+    AudioInfo cfg(0, 0, 0);
+    return cfg;
+  }
+
+  VideoInfo defaultVideoConfig() override {
+    return VideoInfo(video_width, video_height, video_framerate, VIDEO_H264, 24);
+  }
+
+  int rtpPayloadType() override { return 96; }
+
+  /// Override timestamp increment for video (90kHz clock)
+  int timestampIncrement() override {
+    return (int)(90000.0f / video_framerate);
+  }
+
+  /// Set video dimensions
+  void setVideoDimensions(int width, int height) {
+    video_width = width;
+    video_height = height;
+    video_cfg = VideoInfo(width, height, video_framerate, VIDEO_H264, 24);
+  }
+
+  /// Set video framerate
+  void setFramerate(float fps) {
+    video_framerate = fps;
+    video_cfg = VideoInfo(video_width, video_height, fps, VIDEO_H264, 24);
+    setTimerPeriodUs((int)(1000000.0f / fps));
+  }
+
+  /// Get video width
+  int getWidth() const { return video_width; }
+
+  /// Get video height
+  int getHeight() const { return video_height; }
+
+  /// Get framerate
+  float getFramerate() const { return video_framerate; }
+
+  /// Called by H264RtpEncoder once it has extracted SPS/PPS from the
+  /// stream, so DESCRIBE responses can advertise sprop-parameter-sets.
+  void setSpropParameterSets(const char *base64Sps, const char *base64Pps) override {
+    sprop_parameter_sets = base64Sps;
+    sprop_parameter_sets += ",";
+    sprop_parameter_sets += base64Pps;
+  }
+
+  /// Called by H264RtpEncoder with the 3-byte profile-level-id (as 6 hex
+  /// digits) parsed from the SPS.
+  void setProfileLevelId(const char *hex6) override { profile_level_id = hex6; }
+
+ protected:
+  int video_width = 1280;
+  int video_height = 720;
+  float video_framerate = 15.0f;
+  String sprop_parameter_sets;
+  // Conservative default (Constrained Baseline, level 3.0) used only until
+  // the real value parsed from the stream's SPS is available.
+  String profile_level_id = "42E01E";
 };
 
 }  // namespace audio_tools

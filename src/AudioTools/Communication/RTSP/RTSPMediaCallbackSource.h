@@ -35,10 +35,20 @@ class RTSPMediaCallbackSource : public IMediaSource {
   /// @param userData Optional user data pointer passed to callback
   /// @return Number of bytes written (0 = no data available, -1 = error)
   typedef int (*read_callback_t)(uint8_t* buffer, int maxBytes, void* userData);
-  
+
   /// Callback function type for source lifecycle management
   /// @param userData Optional user data pointer passed to callback
   typedef void (*lifecycle_callback_t)(void* userData);
+
+  /// Callback function type for reporting the size of the next queued,
+  /// ready-to-send fragment - only needed for packetized (video) sources
+  /// that hand out already RTP-payload-ready fragments (e.g. H264RtpEncoder,
+  /// JPEGRtpEncoder) instead of a plain byte stream. See
+  /// IMediaSource::packetSize() for the exact contract.
+  /// @param userData Optional user data pointer passed to callback
+  /// @return 0 if packetized but nothing queued right now, otherwise the
+  /// size in bytes of the next fragment
+  typedef int (*packet_size_callback_t)(void* userData);
   
   /**
    * @brief Default constructor
@@ -47,6 +57,7 @@ class RTSPMediaCallbackSource : public IMediaSource {
     read_callback = nullptr;
     start_callback = nullptr;
     stop_callback = nullptr;
+    packet_size_callback = nullptr;
     user_data = nullptr;
     p_format = &default_format;
     is_active = false;
@@ -102,6 +113,21 @@ class RTSPMediaCallbackSource : public IMediaSource {
   void setStopCallback(lifecycle_callback_t callback) {
     stop_callback = callback;
   }
+
+  /**
+   * @brief Set the callback reporting the size of the next already-
+   * fragmented, ready-to-send packet. Configuring this switches
+   * packetSize() from the default "not packetized" (-1) to forwarding the
+   * callback's result, which in turn switches RTSPMediaStreamer to the
+   * packetized send path (see IMediaSource::packetSize()) - use this for
+   * video sources whose fragmentation/RTP payload framing is done
+   * externally (e.g. by an H264RtpEncoder/JPEGRtpEncoder that the read
+   * callback pulls from).
+   * @param callback Function that reports the next fragment's size
+   */
+  void setPacketSizeCallback(packet_size_callback_t callback) {
+    packet_size_callback = callback;
+  }
   
   /**
    * @brief Set the RTSP format configuration
@@ -147,7 +173,20 @@ class RTSPMediaCallbackSource : public IMediaSource {
     
     return result;
   }
-  
+
+  /**
+   * @brief Report the size of the next queued fragment via the configured
+   * packet-size callback (packetized/video sources only)
+   * @return -1 if no packet-size callback is configured (falls back to the
+   * generic byte-stream path in RTSPMediaStreamer), 0 if packetized but
+   * nothing is queued right now, otherwise the size of the next fragment
+   */
+  int packetSize() override {
+    if (packet_size_callback == nullptr) return -1;
+    if (!is_active) return 0;
+    return packet_size_callback(user_data);
+  }
+
   /**
    * @brief Start the media source
    * Calls the optional start callback if configured
@@ -209,6 +248,7 @@ class RTSPMediaCallbackSource : public IMediaSource {
   read_callback_t read_callback;
   lifecycle_callback_t start_callback;
   lifecycle_callback_t stop_callback;
+  packet_size_callback_t packet_size_callback;
   void* user_data;
   RTSPFormat* p_format;
   RTSPFormatPCM default_format;
@@ -221,6 +261,7 @@ class RTSPMediaCallbackSource : public IMediaSource {
 namespace RTSPCallbacks {
   using ReadCallback = RTSPMediaCallbackSource::read_callback_t;
   using LifecycleCallback = RTSPMediaCallbackSource::lifecycle_callback_t;
+  using PacketSizeCallback = RTSPMediaCallbackSource::packet_size_callback_t;
 }
 
 } // namespace audio_tools
