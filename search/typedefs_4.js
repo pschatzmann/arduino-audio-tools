@@ -5,7 +5,7 @@ var searchData=
   ['echo_5fuint16_5ft_2',['echo_uint16_t',['../namespaceaudio__tools.html#a1d203e37d9a83712d19115102df7d6d2',1,'audio_tools']]],
   ['echo_5fuint32_5ft_3',['echo_uint32_t',['../namespaceaudio__tools.html#aeaef611f8c0a6da262120cd6300522e5',1,'audio_tools']]],
   ['effect_5ft_4',['effect_t',['../namespaceaudio__tools.html#a22141edfb51175c26033a5ddd3a847d0',1,'audio_tools']]],
-  ['effectsuite_5ft_5',['effectsuite_t',['../namespaceaudio__tools.html#aacf4f3e6e5e9133e22e4e702cf0ec18c',1,'audio_tools']]],
+  ['effectsuite_5ft_5fdefault_5',['effectsuite_t_default',['../namespaceaudio__tools.html#a5a4bb95785c4352312ae2f8d03d8f3e1',1,'audio_tools']]],
   ['encodedaudioprint_6',['EncodedAudioPrint',['../group__codecs.html#ga0ad0f49a5ac1d91312aeabca49bbc8ce',1,'audio_tools']]],
   ['equalizer3bands_7',['Equalizer3Bands',['../group__equilizer.html#gac3f450477c3a8f8ed76bc9d90a7a3797',1,'audio_tools']]],
   ['equalizer3bandsperchannel_8',['Equalizer3BandsPerChannel',['../group__equilizer.html#gad237b02d8704acbc8e4738bf0c26dff3',1,'audio_tools']]],

@@ -77,8 +77,7 @@ $(function() {
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#define-members">Macros</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle"><div class="title">AudioEffectsSuite.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -86,43 +85,44 @@ $(function() {
 <code>#include &lt;cstdint&gt;</code><br />
 <code>#include &lt;iostream&gt;</code><br />
 <code>#include &quot;<a class="el" href="_audio_effect_8h_source.html">AudioTools/CoreAudio/AudioEffects/AudioEffect.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="soft__float__t_8h_source.html">AudioTools/CoreAudio/AudioBasic/soft_float_t.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_audio_streams_8h_source.html">AudioTools/CoreAudio/AudioStreams.h</a>&quot;</code><br />
 </div>
 <p><a href="_audio_effects_suite_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_delay_effect_base.html">DelayEffectBase</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_delay_effect_base.html">DelayEffectBase&lt; effectsuite_t &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A Base class for delay based digital effects. Provides the basic methods that are shared amongst Flanger, <a class="el" href="classaudio__tools_1_1_delay.html" title="Delay/Echo AudioEffect. See https://wiki.analog.com/resources/tools-software/sharc-audio-module/barem...">Delay</a>, Chorus and Phaser.  <a href="classaudio__tools_1_1_delay_effect_base.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_effect_suite_base.html">EffectSuiteBase</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_effect_suite_base.html">EffectSuiteBase&lt; effectsuite_t &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base Class for Effects.  <a href="classaudio__tools_1_1_effect_suite_base.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_envelope_filter.html">EnvelopeFilter</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_envelope_filter.html">EnvelopeFilter&lt; effectsuite_t &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_envelope_filter.html" title="EnvelopeFilter.">EnvelopeFilter</a>.  <a href="classaudio__tools_1_1_envelope_filter.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_filtered_delay.html">FilteredDelay</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_filtered_delay.html">FilteredDelay&lt; effectsuite_t &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_delay.html" title="Delay/Echo AudioEffect. See https://wiki.analog.com/resources/tools-software/sharc-audio-module/barem...">Delay</a> effect that filters the repeat delay.  <a href="classaudio__tools_1_1_filtered_delay.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_filter_effect_base.html">FilterEffectBase</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_filter_effect_base.html">FilterEffectBase&lt; effectsuite_t &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A Base class for filter based effects including methods for simple high, low and band pass filtering.  <a href="classaudio__tools_1_1_filter_effect_base.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_modulation_base_class.html">ModulationBaseClass</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_modulation_base_class.html">ModulationBaseClass&lt; effectsuite_t &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class provides a wave table that can be populated with a number of preallocated waveforms. These can be used to generate audio in themselves or to modulate The parameters of another effect. Class initialised with sample rate.  <a href="classaudio__tools_1_1_modulation_base_class.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_simple_chorus.html">SimpleChorus</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_simple_chorus.html">SimpleChorus&lt; effectsuite_t &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple Chorus effect with a single delay voice and mono output Chorus is effective between 15 and 20 miliseconds delay of original audio. Requires the sample rate when initialising.  <a href="classaudio__tools_1_1_simple_chorus.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_simple_delay.html">SimpleDelay</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_simple_delay.html">SimpleDelay&lt; effectsuite_t &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple <a class="el" href="classaudio__tools_1_1_delay.html" title="Delay/Echo AudioEffect. See https://wiki.analog.com/resources/tools-software/sharc-audio-module/barem...">Delay</a> effect consiting of a single tap delay with Effect Gain and feed back controls Constructor requires internal delay in samples.  <a href="classaudio__tools_1_1_simple_delay.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_simple_flanger.html">SimpleFlanger</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_simple_flanger.html">SimpleFlanger&lt; effectsuite_t &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple Flanger Effect Consistig of a single voice flanger The flanger has an effective range between 0 and 15 miliseconds in this case dleay buffer should be set to sampleRate*3/200 Constructor requires internal delay in samples.  <a href="classaudio__tools_1_1_simple_flanger.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_simple_l_p_f.html">SimpleLPF</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_simple_l_p_f.html">SimpleLPF&lt; effectsuite_t &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_simple_l_p_f.html" title="SimpleLPF.">SimpleLPF</a>.  <a href="classaudio__tools_1_1_simple_l_p_f.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator_modulation.html">SoundGeneratorModulation&lt; T &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator_modulation.html">SoundGeneratorModulation&lt; T, effectsuite_t &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_sound_generator.html" title="Base class to define the abstract interface for the sound generating classes.">SoundGenerator</a> using the <a class="el" href="classaudio__tools_1_1_modulation_base_class.html" title="Class provides a wave table that can be populated with a number of preallocated waveforms....">ModulationBaseClass</a> to generate the samples.  <a href="classaudio__tools_1_1_sound_generator_modulation.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -139,14 +139,8 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:aacf4f3e6e5e9133e22e4e702cf0ec18c" id="r_aacf4f3e6e5e9133e22e4e702cf0ec18c"><td class="memItemLeft" align="right" valign="top">typedef float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aacf4f3e6e5e9133e22e4e702cf0ec18c">effectsuite_t</a></td></tr>
-<tr class="separator:aacf4f3e6e5e9133e22e4e702cf0ec18c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a6a8099d013ab0669c1f915584b0ed32e" id="r_a6a8099d013ab0669c1f915584b0ed32e"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespaceaudio__tools.html#aacf4f3e6e5e9133e22e4e702cf0ec18c">effectsuite_t</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a6a8099d013ab0669c1f915584b0ed32e">interpolationTable</a> = nullptr</td></tr>
-<tr class="memdesc:a6a8099d013ab0669c1f915584b0ed32e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Table of interpolation values as a 2D array indexed by interpolationTable[pointIndex][alphaIndex].  <br /></td></tr>
-<tr class="separator:a6a8099d013ab0669c1f915584b0ed32e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a4bb95785c4352312ae2f8d03d8f3e1" id="r_a5a4bb95785c4352312ae2f8d03d8f3e1"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a5a4bb95785c4352312ae2f8d03d8f3e1">effectsuite_t_default</a> = float</td></tr>
+<tr class="separator:a5a4bb95785c4352312ae2f8d03d8f3e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a598a3330b3c21701223ee0ca14316eca" name="a598a3330b3c21701223ee0ca14316eca"></a>
