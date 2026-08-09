@@ -339,13 +339,13 @@ class AudioEffectStreamT : public ModifyingStream {
             }
         }
 
-        size_t result_size = total_samples * sizeof(T);
+        size_t written_samples = 0;
         if (p_io!=nullptr){
-            p_io->write((const uint8_t*)out, result_size);
+            written_samples = writeDataT<T, Stream>(p_io, out, total_samples);
         } else if (p_print!=nullptr){
-            p_print->write((const uint8_t*)out, result_size);
+            written_samples = writeDataT<T, Print>(p_print, out, total_samples);
         }
-        return result_size;
+        return written_samples * sizeof(T);
     }
 
     int available() override {
