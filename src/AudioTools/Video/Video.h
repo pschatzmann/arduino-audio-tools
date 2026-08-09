@@ -11,51 +11,126 @@
 
 namespace audio_tools {
 
+/// @brief Which track write() feeds, for muxers (MuxerAVI, MuxerMP4) that
+/// double as a plain, generic Print-like sink for both tracks - see
+/// setStreamType()/streamType() on those classes.
+/// @ingroup video
+enum StreamContentType { Audio, Video };
+
+/// @brief Video codec identifier for the (single) video stream of a
+/// container, shared by DemuxerAVI/MuxerAVI and DemuxerMP4 (much like
+/// AudioFormat is shared across the audio demuxers, despite its
+/// WAV-flavored name). H264 is the primary target for both; the others
+/// are AVI-specific conveniences.
+/// - H264/MPEG4: compressed, variable frame size -> use addVideoFrame()
+/// - MJPEG: one complete JPEG image per frame -> use addJpegFrame()
+/// - RAW: uncompressed 24-bit BGR -> use addVideoFrame()
+/// - YUV422: packed 4:2:2 (YUY2/YUYV), 16 bit/pixel -> use addYUV422Frame()
+/// - RGB565: uncompressed 16-bit RGB (5-6-5) -> use addRGB565Frame()
+/// - I420: planar 4:2:0 YUV (aka IYUV), 12 bit/pixel -> use addI420Frame()
+/// - UNKNOWN: decoder only - the codec did not match any of the above
+/// @ingroup video
+enum class VideoFormat { H264, MJPEG, MPEG4, RAW, YUV422, RGB565, I420, UNKNOWN };
+
+/// @brief Fixed per-frame size (bytes) for a raw/uncompressed VideoFormat
+/// at the given resolution - 0 for compressed formats (H264/MJPEG/MPEG4) or
+/// VideoFormat::UNKNOWN, since their frame size varies per frame.
+/// @ingroup video
+inline size_t videoFrameSizeBytes(VideoFormat format, uint16_t width,
+                                  uint16_t height) {
+  size_t px = (size_t)width * (size_t)height;
+  switch (format) {
+    case VideoFormat::RAW:
+      return px * 3;
+    case VideoFormat::YUV422:
+    case VideoFormat::RGB565:
+      return px * 2;
+    case VideoFormat::I420:
+      return px + px / 2;
+    default:
+      return 0;
+  }
+}
+
+/**
+ * @brief Basic video information (width/height/codec/frame size), analogous
+ * to AudioInfo - common to both DemuxerAVI and DemuxerMP4, accessible via
+ * their getVideoInfo() getter.
+ * @ingroup video
+ */
+struct VideoInfo {
+  /// Frame width in pixels
+  uint16_t width = 0;
+  /// Frame height in pixels
+  uint16_t height = 0;
+  /// Video codec - VideoFormat::UNKNOWN if not (yet) determined
+  VideoFormat format = VideoFormat::UNKNOWN;
+  /// Fixed size of a single frame in bytes - only meaningful for
+  /// uncompressed formats (RAW/YUV422/RGB565/I420); 0 for compressed
+  /// formats (H264/MJPEG/MPEG4), whose frame size varies per frame.
+  uint32_t frame_size = 0;
+  /// Total size of the container file/stream in bytes, if known. For
+  /// DemuxerAVI this comes from the RIFF header's declared size (0 if the
+  /// stream is unbounded/streamed). MP4 has no equivalent declared field,
+  /// so DemuxerMP4 reports the number of bytes received so far instead
+  /// (only equal to the true total once the whole stream has been fed in).
+  uint32_t total_file_size = 0;
+
+  bool operator==(const VideoInfo &alt) const {
+    return width == alt.width && height == alt.height &&
+           format == alt.format && frame_size == alt.frame_size &&
+           total_file_size == alt.total_file_size;
+  }
+  bool operator!=(const VideoInfo &alt) const { return !(*this == alt); }
+  /// True if width/height are both defined
+  operator bool() const { return width > 0 && height > 0; }
+  void logInfo(const char *source = "") {
+    LOGI("%s width: %d / height: %d / format: %d / frame_size: %d / "
+         "total_file_size: %d",
+         source, (int)width, (int)height, (int)format, (int)frame_size,
+         (int)total_file_size);
+  }
+};
+
 /**
  * @brief Abstract class for video playback. This class is used to assemble a
- * complete video frame in memory
+ * complete video frame in memory. A video frame is written via one or more
+ * write() calls, then finalized with flush() - implementations use flush()
+ * to know a frame is complete (there is no separate frame-size hint, unlike
+ * a length-prefixed chunk format).
  * @ingroup video
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class VideoOutput {
+class VideoOutput : public Print {
  public:
-  virtual void beginFrame(size_t size) = 0;
-  virtual size_t write(const uint8_t *data, size_t len) = 0;
-  virtual uint32_t endFrame() = 0;
+  size_t write(uint8_t c) override { return write(&c, 1); }
+  virtual size_t write(const uint8_t *data, size_t len) override = 0;
 };
 
 /**
  * @brief Simple in-memory VideoOutput sink that assembles a single video
- * frame of at most a fixed maximum size. Connect it to any
- * beginFrame()/write()/endFrame() producer (e.g. a decoder), then, once
- * endFrame() has been called, read the assembled frame back via data() and
- * available() (or register a setOnEnd() callback to be notified instead of
- * polling).
+ * frame of at most a fixed maximum size. Connect it to any write()/flush()
+ * producer (e.g. a decoder), then, once flush() has been called, read the
+ * assembled frame back via data() and available() (or register a
+ * setOnEnd() callback to be notified instead of polling).
  * @ingroup video
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 class VideoFrame : public VideoOutput {
  public:
-  /// Callback signature for setOnEnd(): invoked from endFrame() with a
+  /// Callback signature for setOnEnd(): invoked from flush() with a
   /// reference to the VideoFrame whose frame was just completed.
   using VideoFrameCallback = void (*)(VideoFrame &frame);
 
   /// @param maxSize maximum frame size in bytes that this instance can hold
   VideoFrame(size_t maxSize) : max_size(maxSize) { buffer.resize(max_size); }
 
-  /// Registers a callback that is invoked from endFrame(), once the frame
-  /// has been fully assembled, receiving a reference to this VideoFrame so
-  /// it can read data()/available().
+  /// Registers a callback that is invoked from flush(), once the frame has
+  /// been fully assembled, receiving a reference to this VideoFrame so it
+  /// can read data()/available().
   void setOnEnd(VideoFrameCallback callback) { on_end_cb = callback; }
-
-  /// Starts a new frame: resets the write position. 'size' must not exceed
-  /// the maxSize provided to the constructor.
-  void beginFrame(size_t size) override {
-    assert(size <= max_size);
-    pos = 0;
-  }
 
   /// Appends data to the frame; truncates (rather than overflowing the
   /// buffer) if it would exceed maxSize. Returns the number of bytes
@@ -67,12 +142,12 @@ class VideoFrame : public VideoOutput {
     return to_write;
   }
 
-  /// Ends the frame, invokes the setOnEnd() callback (if any) with a
-  /// reference to this VideoFrame, and returns the number of bytes
-  /// assembled
-  uint32_t endFrame() override {
+  /// Finalizes the frame: invokes the setOnEnd() callback (if any) with a
+  /// reference to this VideoFrame, then resets the write position so the
+  /// next write() call starts a fresh frame.
+  void flush() override {
     if (on_end_cb != nullptr) on_end_cb(*this);
-    return pos;
+    pos = 0;
   }
 
   /// Number of bytes currently assembled in the frame

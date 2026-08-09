@@ -14,18 +14,20 @@
 #include "AudioTools/Communication/AudioHttp.h"
 
 URLStream url("ssid","password"); // input
-AudioBoardStream out(AudioKitEs8388V1); 
-DecoderL8 l8(false);             
-AVIDecoder codec(&l8);
-EncodedAudioStream avi(&out, &codec);
+AudioBoardStream out(AudioKitEs8388V1);
+DecoderL8 l8(false);
+EncodedAudioStream audioOut(&out, &l8);  // decodes L8 -> 16 bit -> out
+DemuxerAVI codec;
+EncodedAudioOutput avi(&codec);  // bridges raw AVI bytes -> codec.write()
 StreamCopy copier(avi, url);
 
 void setup() {
   Serial.begin(115200);
   AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
- 
+
   // setup output using default settings
   out.begin(out.defaultConfig());
+  codec.setOutputAudio(audioOut);
 
   // open url
   url.begin("https://archive.org/download/Test_Avi/MVI_0043.AVI");
@@ -37,8 +39,9 @@ void setup() {
 }
 
 void loop() {
-  // Process data if audio is PCM  
-  if (codec.audioFormat()==AudioFormat::PCM && codec.audioInfo().bits_per_sample==8){
+  // Process data if audio is PCM
+  AudioInfoFormat info = codec.getAudioInfo();
+  if (info.format==AudioFormat::PCM && info.bits_per_sample==8){
       copier.copy();
-  }  
+  }
 }

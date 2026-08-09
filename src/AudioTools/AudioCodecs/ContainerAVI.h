@@ -3,6 +3,8 @@
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
 #include "AudioTools/CoreAudio/AudioBasic/Str.h"
 #include "AudioTools/AudioCodecs/AudioFormat.h"
+#include "AudioTools/AudioCodecs/CodecWAV.h"
+#include "AudioTools/AudioCodecs/ContainerCommon.h"
 #include "AudioTools/Video/Video.h"
 #include "AudioTools/CoreAudio/Buffers.h"
 
@@ -143,8 +145,6 @@ struct WAVFormatX {
 //   uint16_t nBlockAlign;
 // };
 
-enum StreamContentType { Audio, Video };
-
 enum ParseObjectType { AVIList, AVIChunk, AVIStreamData };
 
 enum ParseState {
@@ -217,7 +217,7 @@ public:
     return (AVIStreamHeader *)ptr;
   }
   WAVFormatX *asAVIAudioFormat(void *ptr) { return (WAVFormatX *)ptr; }
-  BitmapInfoHeader *asAVIVideoFormat(void *ptr) {
+  BitmapInfoHeader *asVideoFormat(void *ptr) {
     return (BitmapInfoHeader *)ptr;
   }
 
@@ -254,21 +254,6 @@ protected:
   ParseObjectType object_type;
 };
 
-/// @brief Video codec identifier for the (single) video stream of an AVI
-/// file, used by both AVIEncoder (to write the video track) and AVIDecoder
-/// (AVIDecoder::videoFormatType(), decoded from the 'strf' biCompression
-/// field - see https://www.fourcc.org). H264 is the primary encoder target;
-/// the others are provided for convenience.
-/// - H264/MPEG4: compressed, variable frame size -> use addVideoFrame()
-/// - MJPEG: one complete JPEG image per frame -> use addJpegFrame()
-/// - RAW: uncompressed 24-bit BGR -> use addVideoFrame()
-/// - YUV422: packed 4:2:2 (YUY2/YUYV), 16 bit/pixel -> use addYUV422Frame()
-/// - RGB565: uncompressed 16-bit RGB (5-6-5) -> use addRGB565Frame()
-/// - I420: planar 4:2:0 YUV (aka IYUV), 12 bit/pixel -> use addI420Frame()
-/// - UNKNOWN: decoder only - the codec did not match any of the above
-/// @ingroup video
-enum class AVIVideoFormat { H264, MJPEG, MPEG4, RAW, YUV422, RGB565, I420, UNKNOWN };
-
 /**
  * @brief AVI Container Decoder which can be fed with small chunks of data. The
  * minimum length must be bigger then the header size! The file structure is
@@ -281,27 +266,33 @@ enum class AVIVideoFormat { H264, MJPEG, MPEG4, RAW, YUV422, RGB565, I420, UNKNO
  * @copyright GPLv3
  */
 
-class AVIDecoder : public ContainerDecoder {
+class DemuxerAVI : public Demuxer {
 public:
-  AVIDecoder(int bufferSize = 1024) {
+  /// @param bufferSize internal parse buffer size.
+  ///
+  /// This class only demuxes - it does not decode audio itself. Point
+  /// setOutputAudio() at an EncodedAudioStream (wrapping whatever
+  /// AudioDecoder matches the AVI's audio format) if you need the audio
+  /// track decoded; the raw payload is written through as-is otherwise.
+  /// Point setOutputVideo() at a Print (e.g. a VideoOutput) to receive the
+  /// demuxed video track; leave unset to ignore video.
+  DemuxerAVI(int bufferSize = 1024) {
     parse_buffer.resize(bufferSize);
-    p_decoder = &copy_decoder;
-    p_output_audio = new EncodedAudioOutput(&copy_decoder);
   }
 
-  AVIDecoder(AudioDecoder *audioDecoder, VideoOutput *videoOut = nullptr,
-             int bufferSize = 1024) {
-    parse_buffer.resize(bufferSize);
-    p_decoder = audioDecoder;
-    p_output_audio = new EncodedAudioOutput(audioDecoder);
-    if (videoOut != nullptr) {
-      setOutputVideoStream(*videoOut);
-    }
-  }
+  const char *mime() override { return "video/avi"; }
 
-  ~AVIDecoder() {
-    if (p_output_audio != nullptr)
-      delete p_output_audio;
+  /// Overrides the automatic decision of whether a synthetic WAV header
+  /// (matching the parsed 'strf' audio format) is sent to the audio output
+  /// before any audio payload. By default this is decided automatically
+  /// from the parsed format: on whenever isWavFormat() of the parsed 'strf'
+  /// format is true (PCM/ADPCM, i.e. audio that needs to go through a
+  /// WAVDecoder), off
+  /// otherwise (e.g. compressed formats with their own decoder that don't
+  /// expect a WAV header). Call this to force it either way instead.
+  void setSendWavHeader(bool flag) override {
+    send_wav_header = flag;
+    send_wav_header_explicit = true;
   }
 
   bool begin() override {
@@ -312,19 +303,30 @@ public:
     header_is_avi = false;
     stream_header_idx = -1;
     is_metadata_ready = false;
+    is_wav_header_sent = false;
+    riff_file_size = 0;
     return true;
   }
 
-  /// Defines the audio output stream - usually called by EncodedAudioStream
+  /// Defines the audio output stream - e.g. an EncodedAudioStream wrapping
+  /// an AudioDecoder that matches the AVI's audio format, or any other
+  /// Print if you want the raw payload as-is.
+  void setOutputAudio(Print &out_stream) override {
+    p_output_audio = &out_stream;
+  }
+
+  /// Satisfies the AudioWriter/AudioDecoder interface - needed so
+  /// EncodedAudioOutput/EncodedAudioStream's polymorphic AudioDecoder*
+  /// wiring (which calls setOutput() through that base class pointer) still
+  /// reaches the audio output correctly; delegates to setOutputAudio().
   virtual void setOutput(Print &out_stream) override {
-    // p_output_audio = &out_stream;
-    p_output_audio->setOutput(&out_stream);
+    setOutputAudio(out_stream);
   }
 
   ///
   void setMute(bool mute) { is_mute = mute; }
 
-  virtual void setOutputVideoStream(VideoOutput &out_stream) {
+  virtual void setOutputVideo(Print &out_stream) override {
     p_output_video = &out_stream;
   }
 
@@ -354,36 +356,58 @@ public:
   void end() override { is_parsing_active = false; };
 
   /// Provides the information from the main header chunk
-  AVIMainHeader mainHeader() { return main_header; }
+  AVIMainHeader aviMainHeader() { return main_header; }
 
   /// Provides the information from the stream header chunks
-  AVIStreamHeader streamHeader(int idx) { return stream_header[idx]; }
+  AVIStreamHeader aviStreamHeader(int idx) { return stream_header[idx]; }
 
   /// Provides the video information
   BitmapInfoHeader aviVideoInfo() { return video_info; };
 
-  const char *videoFormat() { return video_format; }
-
-  /// Provides the video codec as a typed AVIVideoFormat - the same enum
-  /// used by AVIEncoder - decoded from the 'strf' biCompression field
-  /// (the authoritative codec id; more reliable than the 'strh' handler
-  /// text for third-party files). Returns AVIVideoFormat::UNKNOWN for any
-  /// codec not covered by the enum.
-  AVIVideoFormat videoFormatType() {
-    return toAVIVideoFormat(video_info.biCompression, video_info.biBitCount);
-  }
+  const char *aviVideoFormat() { return video_format; }
 
   /// Provides the audio information
   WAVFormatX aviAudioInfo() { return audio_info; }
 
-  /// Provides the  audio_info.wFormatTag
-  AudioFormat audioFormat() { return audio_info.wFormatTag; }
+  /// Common video info (width/height/format/frame_size/total_file_size),
+  /// analogous to audioInfo() - the same VideoInfo type is also provided
+  /// by DemuxerMP4. format is decoded from the 'strf' biCompression field
+  /// (the authoritative codec id; more reliable than the 'strh' handler
+  /// text for third-party files, available separately via videoFormat());
+  /// VideoFormat::UNKNOWN for any codec not covered by the enum.
+  VideoInfo getVideoInfo() override {
+    VideoInfo result;
+    result.width = (uint16_t)video_info.biWidth;
+    result.height = (uint16_t)video_info.biHeight;
+    result.format =
+        toVideoFormat(video_info.biCompression, video_info.biBitCount);
+    result.frame_size =
+        (uint32_t)videoFrameSizeBytes(result.format, result.width, result.height);
+    result.total_file_size = riff_file_size;
+    return result;
+  }
+
+
+  /// Common audio info (sample_rate/channels/bits_per_sample), extended
+  /// with the parsed 'strf' format tag - the same AudioInfoFormat type is
+  /// also provided by DemuxerMP4. Named getAudioInfo() rather than
+  /// audioInfo() because AudioDecoder already declares a virtual
+  /// AudioInfo audioInfo() (returning the plain, unextended type by
+  /// value) - by-value virtual returns can't be covariantly widened in
+  /// C++, so reusing that name for a subclass-returning version isn't
+  /// possible (it would be a hard "invalid covariant return type" error,
+  /// not silent hiding).
+  AudioInfoFormat getAudioInfo() override {
+    AudioInfoFormat result(info);
+    result.format = audio_info.wFormatTag;
+    return result;
+  }
 
   /// Returns true if all metadata has been parsed and is available
   bool isMetadataReady() { return is_metadata_ready; }
   /// Register a validation callback which is called after parsing just before
   /// playing the audio
-  void setValidationCallback(bool (*cb)(AVIDecoder &avi)) {
+  void setValidationCallback(bool (*cb)(DemuxerAVI &avi)) {
     validation_cb = cb;
   }
 
@@ -406,8 +430,9 @@ protected:
   Vector<StreamContentType> content_types;
   Stack<ParseObject> object_stack;
   ParseObject current_stream_data;
-  EncodedAudioOutput *p_output_audio = nullptr;
-  VideoOutput *p_output_video = nullptr;
+  Print *p_output_audio = nullptr;
+  Print *p_output_video = nullptr;
+  long video_frame_start_ms = 0;
   long open_subchunk_len = 0;
   long current_pos = 0;
   long movi_end_pos = 0;
@@ -415,10 +440,15 @@ protected:
   Str str;
   char video_format[5] = {0};
   bool is_metadata_ready = false;
-  bool (*validation_cb)(AVIDecoder &avi) = nullptr;
+  bool (*validation_cb)(DemuxerAVI &avi) = nullptr;
   bool is_mute = false;
-  CopyDecoder copy_decoder;
-  AudioDecoder *p_decoder = nullptr;
+  bool send_wav_header = false;
+  bool send_wav_header_explicit = false;
+  bool is_wav_header_sent = false;
+  /// Total file size (bytes) declared by the RIFF header, normalized from
+  /// its chunk_size (= file_size - 8) field; 0 if not yet parsed or the
+  /// declared size looks like an unbounded/streamed placeholder.
+  uint32_t riff_file_size = 0;
   int video_seconds = 0;
   VideoAudioSync defaultSynch;
   VideoAudioSync *p_synch = &defaultSynch;
@@ -474,13 +504,14 @@ protected:
       if (isCurrentStreamAudio()) {
         audio_info = *(strf.asAVIAudioFormat(parse_buffer.data()));
         setupAudioInfo();
-        LOGI("audioFormat: %d (%x)", (int)audioFormat(),(int)audioFormat());
+        LOGI("audioFormat: %d (%x)", (int)audio_info.wFormatTag,
+             (int)audio_info.wFormatTag);
         content_types.push_back(Audio);
         consume(strf.size());
       } else if (isCurrentStreamVideo()) {
-        video_info = *(strf.asAVIVideoFormat(parse_buffer.data()));
+        video_info = *(strf.asVideoFormat(parse_buffer.data()));
         setupVideoInfo();
-        LOGI("videoFormat: %s", videoFormat());
+        LOGI("videoFormat: %s", aviVideoFormat());
         content_types.push_back(Video);
         video_format[4] = 0;
         consume(strf.size());
@@ -541,8 +572,7 @@ protected:
       if (current_stream_data.isVideo()) {
         LOGI("video:[%d]->[%d]", (int)current_stream_data.start_pos,
              (int)current_stream_data.end_pos);
-        if (p_output_video != nullptr)
-          p_output_video->beginFrame(current_stream_data.declaredSize());
+        video_frame_start_ms = millis();
       } else if (current_stream_data.isAudio()) {
         LOGI("audio:[%d]->[%d]", (int)current_stream_data.start_pos,
              (int)current_stream_data.end_pos);
@@ -556,7 +586,8 @@ protected:
       writeData();
       if (open_subchunk_len == 0) {
         if (current_stream_data.isVideo() && p_output_video != nullptr) {
-          uint32_t time_used_ms = p_output_video->endFrame();
+          p_output_video->flush();
+          uint32_t time_used_ms = (uint32_t)(millis() - video_frame_start_ms);
           p_synch->delayVideoFrame(main_header.dwMicroSecPerFrame, time_used_ms);
         }
         if (tryParseChunk("idx").isValid()) {
@@ -590,12 +621,30 @@ protected:
     info.bits_per_sample = audio_info.wBitsPerSample;
     info.sample_rate = audio_info.nSamplesPerSec;
     info.logInfo();
-    // adjust the audio info if necessary
-    if (p_decoder != nullptr) {
-      p_decoder->setAudioInfo(info);
-      info = p_decoder->audioInfo();
-    }
+    if (!send_wav_header_explicit)
+      send_wav_header = isWavFormat(audio_info.wFormatTag);
+    if (send_wav_header) sendWavHeader();
     notifyAudioChange(info);
+  }
+
+  /// Synthesizes a valid WAV header (via the shared WAVHeader writer - also
+  /// correctly handles ADPCM's extra 'fmt ' extension + 'fact' chunk) from
+  /// the parsed 'strf' audio_info and sends it to p_output_audio, once,
+  /// before any real audio payload - so a WAVDecoder-based output can
+  /// bootstrap itself from it. Length is written as streamed/unknown, since
+  /// the AVI's audio track length is not known upfront while demuxing.
+  void sendWavHeader() {
+    if (is_wav_header_sent || p_output_audio == nullptr) return;
+    WAVAudioInfo winfo(info);
+    winfo.format = audio_info.wFormatTag;
+    winfo.is_streamed = true;
+    winfo.block_align = audio_info.nBlockAlign;
+    winfo.byte_rate = audio_info.nAvgBytesPerSec;
+    winfo.ext_adpcm_header = true;
+    WAVHeader wav_header;
+    wav_header.setAudioInfo(winfo);
+    wav_header.writeHeader(p_output_audio);
+    is_wav_header_sent = true;
   }
 
   void setupVideoInfo() {
@@ -610,33 +659,33 @@ protected:
   }
 
   /// Maps a 'strf' biCompression value (+ biBitCount, to disambiguate
-  /// BI_BITFIELDS) to the corresponding AVIVideoFormat. Covers what
-  /// AVIEncoder writes plus a few common real-world FOURCC aliases seen in
+  /// BI_BITFIELDS) to the corresponding VideoFormat. Covers what
+  /// MuxerAVI writes plus a few common real-world FOURCC aliases seen in
   /// third-party AVI files.
-  static AVIVideoFormat toAVIVideoFormat(uint32_t biCompression,
+  static VideoFormat toVideoFormat(uint32_t biCompression,
                                          uint16_t biBitCount) {
-    if (biCompression == 0) return AVIVideoFormat::RAW;  // BI_RGB
+    if (biCompression == 0) return VideoFormat::RAW;  // BI_RGB
     if (biCompression == 3)  // BI_BITFIELDS
-      return biBitCount == 16 ? AVIVideoFormat::RGB565 : AVIVideoFormat::RAW;
+      return biBitCount == 16 ? VideoFormat::RGB565 : VideoFormat::RAW;
 
     auto is = [biCompression](const char *fourcc) {
       return memcmp(&biCompression, fourcc, 4) == 0;
     };
     if (is("H264") || is("h264") || is("X264") || is("x264") ||
         is("avc1") || is("AVC1"))
-      return AVIVideoFormat::H264;
+      return VideoFormat::H264;
     if (is("MJPG") || is("mjpg"))
-      return AVIVideoFormat::MJPEG;
+      return VideoFormat::MJPEG;
     if (is("FMP4") || is("XVID") || is("DIVX") || is("DX50") ||
         is("mp4v"))
-      return AVIVideoFormat::MPEG4;
+      return VideoFormat::MPEG4;
     if (is("YUY2") || is("YUYV") || is("yuy2") || is("yuyv"))
-      return AVIVideoFormat::YUV422;
+      return VideoFormat::YUV422;
     if (is("I420") || is("IYUV"))
-      return AVIVideoFormat::I420;
+      return VideoFormat::I420;
     if (is("RGBP"))
-      return AVIVideoFormat::RGB565;
-    return AVIVideoFormat::UNKNOWN;
+      return VideoFormat::RGB565;
+    return VideoFormat::UNKNOWN;
   }
 
   void writeData() {
@@ -652,7 +701,7 @@ protected:
 
     if (current_stream_data.isAudio()) {
       LOGD("audio %d", (int)to_write);
-      if (!is_mute && payload_to_write > 0){
+      if (!is_mute && payload_to_write > 0 && p_output_audio != nullptr){
         p_synch->writeAudio(p_output_audio, parse_buffer.data(), payload_to_write);
       }
       open_subchunk_len -= to_write;
@@ -675,6 +724,11 @@ protected:
     if (getStr(0, 4).equals("RIFF")) {
       ParseObject result;
       uint32_t header_file_size = getInt(4);
+      // chunk_size = file_size - 8; treat a near-max value (unbounded/
+      // streamed placeholder, mirroring WAVHeader's own convention) as
+      // "unknown" rather than wrapping around when normalizing to file_size
+      riff_file_size =
+          header_file_size >= 0xFFFFFFF0 ? 0 : header_file_size + 8;
       header_is_avi = getStr(8, 4).equals("AVI ");
       result.set(current_pos, "AVI ", header_file_size, AVIChunk);
       processStack(result);
@@ -797,18 +851,8 @@ protected:
   }
 };
 
-/// @brief Configuration for the (single) video track written by AVIEncoder
+/// @brief Configuration for the (single) video track written by MuxerAVI
 /// @ingroup video
-struct AVIEncoderVideoConfig {
-  uint16_t width = 320;
-  uint16_t height = 240;
-  float fps = 25.0f;
-  AVIVideoFormat format = AVIVideoFormat::RGB565;
-  /// Optional: overrides the FOURCC derived from 'format'. Must point to (at
-  /// least) 4 characters and stay valid until begin() is called.
-  const char *fourcc = nullptr;
-};
-
 /**
  * @brief AVI Container Encoder: muxes an already-encoded video stream (e.g.
  * H.264 access units) and an optional PCM/compressed audio stream into a
@@ -831,11 +875,13 @@ struct AVIEncoderVideoConfig {
  *
  * Usage:
  * @code
- * AVIEncoder avi(client); // any Print: File, WiFiClient, ...
- * avi.videoConfig().width = 640;
- * avi.videoConfig().height = 480;
- * avi.videoConfig().fps = 25;
- * avi.videoConfig().format = AVIVideoFormat::H264;
+ * MuxerAVI avi(client); // any Print: File, WiFiClient, ...
+ * MuxerVideoConfig cfg;
+ * cfg.width = 640;
+ * cfg.height = 480;
+ * cfg.fps = 25;
+ * cfg.format = VideoFormat::H264;
+ * avi.setVideoInfo(cfg);
  * avi.begin();
  * // for each encoded H.264 access unit:
  * avi.addVideoFrame(h264_data, h264_len);
@@ -847,33 +893,38 @@ struct AVIEncoderVideoConfig {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AVIEncoder : public VideoOutput {
+class MuxerAVI : public Muxer {
  public:
-  AVIEncoder() = default;
-  AVIEncoder(Print &out) { setOutput(out); }
+  MuxerAVI() { audio_info.format = AudioFormat::PCM; }
+  MuxerAVI(Print &out) : MuxerAVI() { setOutput(out); }
+
+  const char *mime() override { return "video/avi"; }
 
   /// Defines the output: e.g. a local File or a network Client
-  void setOutput(Print &out) { p_out = &out; }
+  void setOutput(Print &out) override { p_out = &out; }
 
-  /// Provides read/write access to the video track configuration - update
-  /// before calling begin()
-  AVIEncoderVideoConfig &videoConfig() { return video_cfg; }
+  /// Defines the video track configuration - call before begin()
+  void setVideoInfo(MuxerVideoConfig config) override { video_cfg = config; }
 
-  /// Adds an (optional) interleaved audio track. Call before begin().
-  void setAudioInfo(AudioInfo info) {
+  /// Provides the video track configuration, analogous to DemuxerAVI's
+  /// getVideoInfo() getter.
+  MuxerVideoConfig getVideoInfo() override { return video_cfg; }
+
+  /// Adds an (optional) interleaved audio track. 'info.format' selects the
+  /// WAVEFORMATEX tag written for the audio track (default:
+  /// AudioFormat::PCM). Only uncompressed PCM has been validated for
+  /// playback in common players; other tags are written through as-is.
+  /// Call before begin().
+  void setAudioInfo(AudioInfoFormat info) override {
     audio_info = info;
     has_audio = true;
   }
-  /// Provides read/write access to the audio track's AudioInfo
-  AudioInfo &audioInfo() { return audio_info; }
-  /// Defines the WAVEFORMATEX tag written for the audio track (default:
-  /// AudioFormat::PCM). Only uncompressed PCM has been validated for
-  /// playback in common players; other tags are written through as-is.
-  void setAudioFormat(AudioFormat fmt) { audio_format = fmt; }
+  /// Provides read/write access to the audio track's AudioInfoFormat
+  AudioInfoFormat &audioInfo() override { return audio_info; }
 
   /// Writes the RIFF/AVI header. Call after configuring video (and audio, if
   /// any) and before writing any frames.
-  bool begin() {
+  bool begin() override {
     if (p_out == nullptr) {
       LOGE("output not defined");
       return false;
@@ -893,18 +944,21 @@ class AVIEncoder : public VideoOutput {
 
   /// Selects whether write() feeds the video or the audio track. Defaults
   /// to StreamContentType::Video; switch to StreamContentType::Audio (and
-  /// back) around calls when using AVIEncoder as a plain sink for both.
-  void setStreamType(StreamContentType type) { write_stream_type = type; }
+  /// back) around calls when using MuxerAVI as a plain sink for both.
+  void setStreamType(StreamContentType type) override { write_stream_type = type; }
   /// The track write() currently targets (see setStreamType())
-  StreamContentType streamType() { return write_stream_type; }
+  StreamContentType streamType() override { return write_stream_type; }
 
   /// Closes the encoder: no trailer is written (streaming AVI has no idx1)
-  void end() { is_open = false; }
+  void end() override { is_open = false; }
 
-  operator bool() { return is_open; }
+  operator bool() override { return is_open; }
 
-  /// VideoOutput API: starts a new video ('00dc') chunk of the given size
-  void beginFrame(size_t size) override {
+  /// Starts a new video ('00dc') chunk of the given size. This is MuxerAVI's
+  /// own API for incremental frame construction (not part of the VideoOutput
+  /// interface - RIFF chunks are length-prefixed, so the size must be known
+  /// upfront, unlike the write()/flush() contract VideoOutput consumers use).
+  void beginFrame(size_t size) {
     if (!is_open) return;
     writeChunkHeader("00dc", (uint32_t)size);
     frame_open = true;
@@ -912,11 +966,11 @@ class AVIEncoder : public VideoOutput {
     frame_pad = (size % 2) != 0;
   }
 
-  /// VideoOutput API: appends data to the currently open video frame -
-  /// requires a prior beginFrame() (and a later endFrame()); use this for
-  /// incremental/streaming sources that hand over a frame in pieces. For a
-  /// single complete frame per call, use write() (dispatches by
-  /// videoConfig().format) or one of the addXxxFrame() methods instead.
+  /// Appends data to the currently open video frame - requires a prior
+  /// beginFrame() (and a later endFrame()); use this for incremental/
+  /// streaming sources that hand over a frame in pieces. For a single
+  /// complete frame per call, use write() (dispatches by
+  /// getVideoInfo().format) or one of the addXxxFrame() methods instead.
   size_t writeFrame(const uint8_t *data, size_t len) {
     if (!is_open || !frame_open) return 0;
     size_t to_write = len < frame_remaining ? len : frame_remaining;
@@ -925,8 +979,8 @@ class AVIEncoder : public VideoOutput {
     return written;
   }
 
-  /// VideoOutput API: closes the current video frame (word-aligns the chunk)
-  uint32_t endFrame() override {
+  /// Closes the current video frame (word-aligns the chunk)
+  uint32_t endFrame() {
     if (frame_open && frame_pad) p_out->write((uint8_t)0);
     frame_open = false;
     video_frame_count++;
@@ -935,8 +989,8 @@ class AVIEncoder : public VideoOutput {
 
   /// VideoOutput API / generic sink: writes one complete frame to whichever
   /// track streamType() currently selects (see setStreamType()). For video,
-  /// dispatches to the addXxxFrame() matching videoConfig().format; for
-  /// audio, calls addAudioFrame(). Lets AVIEncoder be used as a plain
+  /// dispatches to the addXxxFrame() matching getVideoInfo().format; for
+  /// audio, calls addAudioFrame(). Lets MuxerAVI be used as a plain
   /// one-call-per-frame Print-like sink (e.g. from a camera driver, or an
   /// audio encoder) without the caller needing to know which addXxxFrame()
   /// applies.
@@ -945,13 +999,13 @@ class AVIEncoder : public VideoOutput {
       return addAudioFrame(data, len);
     }
     switch (video_cfg.format) {
-      case AVIVideoFormat::MJPEG:
+      case VideoFormat::MJPEG:
         return addJpegFrame(data, len);
-      case AVIVideoFormat::YUV422:
+      case VideoFormat::YUV422:
         return addYUV422Frame(data, len);
-      case AVIVideoFormat::RGB565:
+      case VideoFormat::RGB565:
         return addRGB565Frame(data, len);
-      case AVIVideoFormat::I420:
+      case VideoFormat::I420:
         return addI420Frame(data, len);
       default:
         return addVideoFrame(data, len);
@@ -960,10 +1014,14 @@ class AVIEncoder : public VideoOutput {
 
   /// Convenience: writes one complete, already-encoded video frame (e.g. one
   /// H.264 access unit, or one raw pixel buffer) as a single '00dc' chunk.
-  /// Works for any AVIVideoFormat - the format-specific addXxxFrame()
+  /// Works for any VideoFormat - the format-specific addXxxFrame()
   /// methods below are thin wrappers that additionally validate the format
   /// and (for fixed-size raw formats) the buffer length.
-  size_t addVideoFrame(const uint8_t *data, size_t len) {
+  /// @param isKeyFrame accepted for interface compatibility with
+  /// Muxer::addVideoFrame() - AVI has no per-frame sync-sample flag to
+  /// write it into, so it is ignored.
+  size_t addVideoFrame(const uint8_t *data, size_t len,
+                       bool isKeyFrame = true) override {
     beginFrame(len);
     size_t written = writeFrame(data, len);
     endFrame();
@@ -974,36 +1032,36 @@ class AVIEncoder : public VideoOutput {
   /// image (e.g. as produced by an ESP32-CAM or other hardware JPEG
   /// encoder). Length is inherently variable, so only the configured
   /// format is validated, not the size.
-  size_t addJpegFrame(const uint8_t *data, size_t len) {
-    checkVideoFormat(AVIVideoFormat::MJPEG);
+  size_t addJpegFrame(const uint8_t *data, size_t len) override {
+    checkVideoFormat(VideoFormat::MJPEG);
     return addVideoFrame(data, len);
   }
 
   /// Writes one packed 4:2:2 YUV frame (YUY2/YUYV byte order). Expects
   /// exactly width*height*2 bytes.
-  size_t addYUV422Frame(const uint8_t *data, size_t len) {
-    checkRawFrame(AVIVideoFormat::YUV422, len);
+  size_t addYUV422Frame(const uint8_t *data, size_t len) override {
+    checkRawFrame(VideoFormat::YUV422, len);
     return addVideoFrame(data, len);
   }
 
   /// Writes one uncompressed RGB565 (16-bit, 5-6-5) frame. Expects exactly
   /// width*height*2 bytes.
-  size_t addRGB565Frame(const uint8_t *data, size_t len) {
-    checkRawFrame(AVIVideoFormat::RGB565, len);
+  size_t addRGB565Frame(const uint8_t *data, size_t len) override {
+    checkRawFrame(VideoFormat::RGB565, len);
     return addVideoFrame(data, len);
   }
 
   /// Writes one planar 4:2:0 YUV (I420/IYUV) frame: a full-resolution Y
   /// plane followed by quarter-resolution U and V planes. Expects exactly
   /// width*height*3/2 bytes.
-  size_t addI420Frame(const uint8_t *data, size_t len) {
-    checkRawFrame(AVIVideoFormat::I420, len);
+  size_t addI420Frame(const uint8_t *data, size_t len) override {
+    checkRawFrame(VideoFormat::I420, len);
     return addVideoFrame(data, len);
   }
 
   /// Writes one interleaved audio block as a single '01wb' chunk. Ignored
   /// (returns 0) if no audio track was configured via setAudioInfo().
-  size_t addAudioFrame(const uint8_t *data, size_t len) {
+  size_t addAudioFrame(const uint8_t *data, size_t len) override {
     if (!is_open || !has_audio) return 0;
     writeChunkHeader("01wb", (uint32_t)len);
     size_t written = p_out->write(data, len);
@@ -1021,10 +1079,9 @@ class AVIEncoder : public VideoOutput {
   static const uint32_t AVIF_ISINTERLEAVED = 0x00000100;
 
   Print *p_out = nullptr;
-  AVIEncoderVideoConfig video_cfg;
+  MuxerVideoConfig video_cfg;
   StreamContentType write_stream_type = StreamContentType::Video;
-  AudioInfo audio_info;
-  AudioFormat audio_format = AudioFormat::PCM;
+  AudioInfoFormat audio_info;
   bool has_audio = false;
   bool is_open = false;
   bool frame_open = false;
@@ -1036,21 +1093,21 @@ class AVIEncoder : public VideoOutput {
   const char *fourCC() {
     if (video_cfg.fourcc != nullptr) return video_cfg.fourcc;
     switch (video_cfg.format) {
-      case AVIVideoFormat::H264:
+      case VideoFormat::H264:
         return "H264";
-      case AVIVideoFormat::MJPEG:
+      case VideoFormat::MJPEG:
         return "MJPG";
-      case AVIVideoFormat::MPEG4:
+      case VideoFormat::MPEG4:
         return "FMP4";
-      case AVIVideoFormat::RAW:
+      case VideoFormat::RAW:
         return "DIB ";
-      case AVIVideoFormat::YUV422:
+      case VideoFormat::YUV422:
         return "YUY2";
-      case AVIVideoFormat::RGB565:
+      case VideoFormat::RGB565:
         return "RGBP";
-      case AVIVideoFormat::I420:
+      case VideoFormat::I420:
         return "I420";
-      case AVIVideoFormat::UNKNOWN:
+      case VideoFormat::UNKNOWN:
         return "H264";
     }
     return "H264";
@@ -1058,18 +1115,18 @@ class AVIEncoder : public VideoOutput {
 
   /// True if this format is written as uncompressed RGB565 using
   /// BI_BITFIELDS (which needs 3 extra DWORD color masks in 'strf')
-  bool isBitfields() { return video_cfg.format == AVIVideoFormat::RGB565; }
+  bool isBitfields() { return video_cfg.format == VideoFormat::RGB565; }
 
   /// Bits per pixel written into biBitCount; purely informational for
   /// compressed formats
   uint16_t biBitCount() {
     switch (video_cfg.format) {
-      case AVIVideoFormat::RAW:
+      case VideoFormat::RAW:
         return 24;
-      case AVIVideoFormat::YUV422:
-      case AVIVideoFormat::RGB565:
+      case VideoFormat::YUV422:
+      case VideoFormat::RGB565:
         return 16;
-      case AVIVideoFormat::I420:
+      case VideoFormat::I420:
         return 12;
       default:
         return 24;
@@ -1079,15 +1136,15 @@ class AVIEncoder : public VideoOutput {
   /// Number of raw bytes a single frame must have for the given
   /// (uncompressed, fixed-size) format; 0 for compressed/variable-size
   /// formats where this check does not apply
-  size_t expectedRawFrameSize(AVIVideoFormat format) {
+  size_t expectedRawFrameSize(VideoFormat format) {
     size_t px = (size_t)video_cfg.width * (size_t)video_cfg.height;
     switch (format) {
-      case AVIVideoFormat::RAW:
+      case VideoFormat::RAW:
         return px * 3;
-      case AVIVideoFormat::YUV422:
-      case AVIVideoFormat::RGB565:
+      case VideoFormat::YUV422:
+      case VideoFormat::RGB565:
         return px * 2;
-      case AVIVideoFormat::I420:
+      case VideoFormat::I420:
         return px + px / 2;
       default:
         return 0;
@@ -1101,26 +1158,26 @@ class AVIEncoder : public VideoOutput {
   /// Writes the biCompression field: numeric BI_RGB(0)/BI_BITFIELDS(3) for
   /// uncompressed RGB, or the FOURCC codec tag for everything else
   void writeBiCompression() {
-    if (video_cfg.format == AVIVideoFormat::RAW) {
+    if (video_cfg.format == VideoFormat::RAW) {
       writeU32(0);  // BI_RGB
-    } else if (video_cfg.format == AVIVideoFormat::RGB565) {
+    } else if (video_cfg.format == VideoFormat::RGB565) {
       writeU32(3);  // BI_BITFIELDS
     } else {
       writeFourCC(fourCC());  // e.g. H264, MJPG, FMP4, YUY2, I420
     }
   }
 
-  /// Logs a warning if videoConfig().format was not set to the format that
+  /// Logs a warning if getVideoInfo().format was not set to the format that
   /// an addXxxFrame() convenience method was called for
-  void checkVideoFormat(AVIVideoFormat expected) {
+  void checkVideoFormat(VideoFormat expected) {
     if (video_cfg.format != expected) {
-      LOGW("videoConfig().format does not match the addXxxFrame() called");
+      LOGW("getVideoInfo().format does not match the addXxxFrame() called");
     }
   }
 
   /// Validates both the configured format and (for fixed-size raw formats)
   /// that len matches width*height based expectations
-  void checkRawFrame(AVIVideoFormat expected, size_t len) {
+  void checkRawFrame(VideoFormat expected, size_t len) {
     checkVideoFormat(expected);
     size_t expected_size = expectedRawFrameSize(expected);
     if (expected_size > 0 && len != expected_size) {
@@ -1251,7 +1308,7 @@ class AVIEncoder : public VideoOutput {
 
     // strf (WAVEFORMATEX)
     writeChunkHeader("strf", 18);
-    writeU16((uint16_t)audio_format);            // wFormatTag
+    writeU16((uint16_t)audio_info.format);       // wFormatTag
     writeU16(audio_info.channels);               // nChannels
     writeU32((uint32_t)audio_info.sample_rate);  // nSamplesPerSec
     writeU32(byte_rate);                         // nAvgBytesPerSec

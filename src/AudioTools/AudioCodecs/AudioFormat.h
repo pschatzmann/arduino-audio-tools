@@ -9,6 +9,8 @@
  * 
  */
 #pragma once
+#include <cstring>
+#include "AudioTools/CoreAudio/AudioTypes.h"
 
 namespace audio_tools {
 
@@ -244,6 +246,9 @@ enum class AudioFormat : uint16_t {
   // F3COM_NBX = 0x7000, /* 3COM Corp. */
   // OPUS = 0x704F, /* Opus */
   // FAAD_AAC = 0x706D,
+  MP3 = 0x0055,  /* ISO/MPEG Layer3 Format Tag (alias of MPEGLAYER3) */
+  ALAC = 0x6C61, /* Apple Lossless */
+  AAC = 0xA106,  /* ISO/MPEG-4 AAC (alias of MPEG4_AAC) */
   // AMR_NB = 0x7361, /* AMR Narrowband */
   // AMR_WB = 0x7362, /* AMR Wideband */
   // AMR_WP = 0x7363, /* AMR Wideband Plus */
@@ -287,6 +292,93 @@ enum class AudioFormat : uint16_t {
   // FRACE_TELECOM_G729 = 0xA123, /* France Telecom */
   // CODIAN = 0xA124, /* CODIAN */
   // FLAC = 0xF1AC, /* flac.sourceforge.net */
+};
+
+/// @brief Provides the mime type for a AudioFormat wav code, or nullptr if
+/// not known/mapped.
+/// @ingroup video
+inline const char* toMime(AudioFormat format) {
+  switch (format) {
+    // PCM and all ADPCM variants are handled via the WAV decoder
+    case AudioFormat::PCM:
+    case AudioFormat::ADPCM:
+    case AudioFormat::OKI_ADPCM:
+    case AudioFormat::DVI_ADPCM:  // == IMA_ADPCM (same wav code, alias)
+    case AudioFormat::MEDIASPACE_ADPCM:
+    case AudioFormat::SIERRA_ADPCM:
+    case AudioFormat::G723_ADPCM:
+    case AudioFormat::DIALOGIC_OKI_ADPCM:
+    case AudioFormat::MEDIAVISION_ADPCM:
+    case AudioFormat::YAMAHA_ADPCM:
+    case AudioFormat::ANTEX_ADPCME:
+    case AudioFormat::DIGIADPCM:
+    case AudioFormat::NMS_VBXADPCM:
+    case AudioFormat::CS_IMAADPCM:
+    case AudioFormat::ROCKWELL_ADPCM:
+    case AudioFormat::G721_ADPCM:
+    case AudioFormat::G726_ADPCM:
+    case AudioFormat::G722_ADPCM:
+    case AudioFormat::INFOCOM_ITS_G721_ADPCM:
+    case AudioFormat::ZYXEL_ADPCM:
+    case AudioFormat::RHETOREX_ADPCM:
+    case AudioFormat::SANYO_LD_ADPCM:
+    case AudioFormat::G726ADPCM:
+    case AudioFormat::UNISYS_NAP_ADPCM:
+      return "audio/wav";
+    case AudioFormat::IEEE_FLOAT:
+      return "audio/l32f";
+    case AudioFormat::ALAW:
+      return "audio/alaw";
+    case AudioFormat::MULAW:
+      return "audio/mulaw";
+    case AudioFormat::MP3:
+      return "audio/mpeg";
+    case AudioFormat::AAC:
+      return "audio/aac";
+    case AudioFormat::ALAC:
+      return "audio/alac";
+    default:
+      return nullptr;
+  }
+}
+
+/// @brief True if the wav code is handled via the WAV decoder (i.e.
+/// toMime() maps it to "audio/wav": PCM and all ADPCM variants).
+/// @ingroup video
+inline bool isWavFormat(AudioFormat format) {
+  const char* mime = toMime(format);
+  return mime != nullptr && strcmp(mime, "audio/wav") == 0;
+}
+
+/**
+ * @brief AudioInfo extended with a WAVEFORMATEX-style codec tag (the "wav
+ * code"): identifies the codec (PCM, AAC, ALAC, ...) - AudioFormat::UNKNOWN
+ * if not determined. mime() derives the corresponding mime type from
+ * format - not a separately stored field, so it can never go stale.
+ *
+ * Not merged directly into AudioInfo because AudioInfo is treated as a raw,
+ * byte-serializable struct in some places (e.g. AudioLoRa, ContainerOgg,
+ * ContainerBinary, the BLE sandbox client); adding fields there changes
+ * that wire layout for all of them. Returned by DemuxerAVI/DemuxerMP4's
+ * getAudioInfo(), mirroring the existing WAVAudioInfo : AudioInfo
+ * pattern (CodecWAV.h) used for WAV header parsing/writing.
+ * @ingroup codecs
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+struct AudioInfoFormat : public AudioInfo {
+  AudioInfoFormat() = default;
+  AudioInfoFormat(const AudioInfo &from) : AudioInfo(from) {}
+  AudioInfoFormat(sample_rate_t sampleRate, uint16_t channelCount,
+                  uint8_t bitsPerSample,
+                  AudioFormat audioFormat = AudioFormat::UNKNOWN)
+      : AudioInfo(sampleRate, channelCount, bitsPerSample),
+        format(audioFormat) {}
+
+  AudioFormat format = AudioFormat::UNKNOWN;
+
+  /// Mime type corresponding to format (see toMime()), nullptr if unmapped
+  const char *mime() const { return toMime(format); }
 };
 
 }

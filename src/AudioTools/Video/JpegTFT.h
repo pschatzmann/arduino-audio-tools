@@ -18,42 +18,30 @@ class JpegTFT : public VideoOutput {
 public:
   JpegTFT(TFT_eSPI &TFTscreen) { p_screen = &TFTscreen; }
 
-  // Allocate memory and create window
-  void beginFrame(size_t jpegSize) override {
-    if (start == 0l)
-      start = millis();
-    LOGI("jpegSize: %d", (int)jpegSize);
-    // prevent memory fragmentation, change size only if more memory is needed
-    if (img_vector.size() < jpegSize) {
-      img_vector.resize(jpegSize);
-    }
-    this->pos = 0;
-    this->open = jpegSize;
-    this->size = jpegSize;
-  }
-
-  /// dipsplay a single jpeg image, provides the milliseconds since the begin
-  /// frame to calculate the necessary delay
-  uint32_t endFrame() override {
-    assert(open == 0);
-    jpeg_decoder.decodeArray((const uint8_t *)&img_vector[0], size);
-    renderJPEG(0, 0);
-    return millis() - start;
-  }
-
-  // Add some more data to the image vector
+  // Accumulates jpeg bytes for the frame currently being assembled
   size_t write(const uint8_t *data, size_t len) override {
+    if (pos == 0) start = millis();
+    // prevent memory fragmentation, change size only if more memory is needed
+    if (img_vector.size() < pos + len) {
+      img_vector.resize(pos + len);
+    }
     memcpy(&img_vector[pos], data, len);
     pos += len;
-    open -= len;
     return len;
+  }
+
+  /// Decodes and displays the assembled jpeg image, then resets for the
+  /// next frame
+  void flush() override {
+    if (pos == 0) return;
+    jpeg_decoder.decodeArray((const uint8_t *)&img_vector[0], pos);
+    renderJPEG(0, 0);
+    pos = 0;
   }
 
 protected:
   Vector<uint8_t> img_vector;
   size_t pos = 0;
-  size_t size = 0;
-  int open = 0;
   uint64_t start = 0;
   JPEGDecoder jpeg_decoder;
   TFT_eSPI *p_screen = nullptr;

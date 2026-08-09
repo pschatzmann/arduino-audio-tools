@@ -16,14 +16,18 @@
 
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/ContainerAVI.h"
+#include "AudioTools/AudioCodecs/CodecHelix.h"
 #include "AudioTools/Disk/FileSystem.h"
 #include "AudioTools/AudioLibs/PortAudioStream.h"
 #include "Video/JpegOpenCV.h"
 
 PortAudioStream out;   // Output of sound on desktop
 JpegOpenCV jpegDisplay;
-AVIDecoder codec(new DecoderL8(), &jpegDisplay);
-EncodedAudioOutput avi(&out, &codec);
+DemuxerAVI codec;
+DecoderHelix multiDecoder;  // WAV/AAC/MP3, auto-selected by mime (DecoderHelix
+                            // bundles WAVDecoder + AACDecoderHelix + MP3DecoderHelix)
+EncodedAudioStream audioOut(&out, &multiDecoder);  // decodes PCM/AAC/MP3 -> out
+EncodedAudioOutput avi(&audioOut, &codec);
 File file;
 StreamCopy copier(avi, file);
 VideoAudioBufferedSync videoSync(10*1024, -20);
@@ -31,8 +35,9 @@ VideoAudioBufferedSync videoSync(10*1024, -20);
 
 void setup() {
   AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
+  multiDecoder.begin();
   file.open("/data/resources/test1.avi",FILE_READ);
-  codec.setOutputVideoStream(jpegDisplay);
+  codec.setOutputVideo(jpegDisplay);
   codec.setVideoAudioSync(&videoSync);
   //codec.setMute(true);
 }
