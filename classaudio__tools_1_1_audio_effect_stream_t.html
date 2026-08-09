@@ -232,6 +232,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:aa66a35e5edf58ce00047afcd1d4f455e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03c996f9fcf0e10baeb3e700be0c409a" id="r_a03c996f9fcf0e10baeb3e700be0c409a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a03c996f9fcf0e10baeb3e700be0c409a">active</a> = false</td></tr>
 <tr class="separator:a03c996f9fcf0e10baeb3e700be0c409a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a547c574a3f9b70e622344912643c5c4f" id="r_a547c574a3f9b70e622344912643c5c4f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a547c574a3f9b70e622344912643c5c4f">buffer_out</a></td></tr>
+<tr class="separator:a547c574a3f9b70e622344912643c5c4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64f46d5e77810b356ffcd58f3cc166bb" id="r_a64f46d5e77810b356ffcd58f3cc166bb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_audio_effect_common.html">AudioEffectCommon</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a64f46d5e77810b356ffcd58f3cc166bb">channel_effects</a></td></tr>
 <tr class="separator:a64f46d5e77810b356ffcd58f3cc166bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aabf82b9d0d68dbcf9120221076b05b01" id="r_aabf82b9d0d68dbcf9120221076b05b01"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_audio_effect_common.html">AudioEffectCommon</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#aabf82b9d0d68dbcf9120221076b05b01">effects</a></td></tr>
@@ -1627,7 +1629,7 @@ template&lt;class T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Writes the samples passed in the buffer and applies the effects before writing the result to the output defined in the constructor. </p>
+<p>Writes the samples passed in the buffer and applies the effects before writing the result to the output defined in the constructor. The processed block is written in a single call to the downstream Stream/Print (instead of one call per sample) to avoid the per-sample dispatch overhead that would otherwise starve a real-time producer such as a Bluetooth A2DP sink. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_stream.html#a016bb39af201e717c1975551b7ecc1b3">AudioStream</a>.</p>
 
@@ -1725,6 +1727,30 @@ template&lt;class T &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">bool active = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a547c574a3f9b70e622344912643c5c4f" name="a547c574a3f9b70e622344912643c5c4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a547c574a3f9b70e622344912643c5c4f">&#9670;&#160;</a></span>buffer_out</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;T&gt; buffer_out</td>
         </tr>
       </table>
   </td>
