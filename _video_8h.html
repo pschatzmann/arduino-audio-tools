@@ -75,7 +75,9 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">Video.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -94,10 +96,13 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logic to Synchronize video and audio output: This is the minimum implementatin which actually does not synchronize, but directly processes the data. No additinal memory is used! Provide your own optimized platform specific implementation.  <a href="classaudio__tools_1_1_video_audio_sync.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_frame.html">VideoFrame</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple in-memory <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory.">VideoOutput</a> sink that assembles a single video frame of at most a fixed maximum size. Connect it to any <a class="el" href="classaudio__tools_1_1_video_frame.html#abd410811ee391c7d4531142bc2a1365a">beginFrame()</a>/write()/endFrame() producer (e.g. a decoder), then, once <a class="el" href="classaudio__tools_1_1_video_frame.html#a6045acdc41b4fc3d1b3d55a6ec60eadb">endFrame()</a> has been called, read the assembled frame back via <a class="el" href="classaudio__tools_1_1_video_frame.html#a99c07c946023f413991a249db8b99ab0" title="Pointer to the assembled frame data.">data()</a> and <a class="el" href="classaudio__tools_1_1_video_frame.html#a946aef1a9634871bd728edb663075543" title="Number of bytes currently assembled in the frame.">available()</a> (or register a <a class="el" href="classaudio__tools_1_1_video_frame.html#a26375f36e4f5430e0ef7f3775195a996">setOnEnd()</a> callback to be notified instead of polling).  <a href="classaudio__tools_1_1_video_frame.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple in-memory <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> sink that assembles a single video frame of at most a fixed maximum size. Connect it to any <a class="el" href="classaudio__tools_1_1_video_frame.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>/flush() producer (e.g. a decoder), then, once <a class="el" href="classaudio__tools_1_1_video_frame.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a> has been called, read the assembled frame back via <a class="el" href="classaudio__tools_1_1_video_frame.html#a99c07c946023f413991a249db8b99ab0" title="Pointer to the assembled frame data.">data()</a> and <a class="el" href="classaudio__tools_1_1_video_frame.html#a946aef1a9634871bd728edb663075543" title="Number of bytes currently assembled in the frame.">available()</a> (or register a <a class="el" href="classaudio__tools_1_1_video_frame.html#a26375f36e4f5430e0ef7f3775195a996">setOnEnd()</a> callback to be notified instead of polling).  <a href="classaudio__tools_1_1_video_frame.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_video_info.html">VideoInfo</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Basic video information (width/height/codec/frame size), analogous to <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> - common to both <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html" title="AVI Container Decoder which can be fed with small chunks of data. The minimum length must be bigger t...">DemuxerAVI</a> and <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html" title="DemuxerMP4 extracts both the audio and (H.264) video track from a general, interleaved MP4/ISO-BMFF s...">DemuxerMP4</a>, accessible via their getVideoInfo() getter.  <a href="structaudio__tools_1_1_video_info.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract class for video playback. This class is used to assemble a complete video frame in memory.  <a href="classaudio__tools_1_1_video_output.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract class for video playback. This class is used to assemble a complete video frame in memory. A video frame is written via one or more <a class="el" href="classaudio__tools_1_1_video_output.html#a1e40195a444e7f20508961cfeacc9b04">write()</a> calls, then finalized with <a class="el" href="class_print.html#ad3aed50bc3b4459454ccb8c64f5ced5a">flush()</a> - implementations use <a class="el" href="class_print.html#ad3aed50bc3b4459454ccb8c64f5ced5a">flush()</a> to know a frame is complete (there is no separate frame-size hint, unlike a length-prefixed chunk format).  <a href="classaudio__tools_1_1_video_output.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
@@ -105,6 +110,34 @@ Namespaces</h2></td></tr>
 <tr class="memitem:namespaceaudio__tools" id="r_namespaceaudio__tools"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></td></tr>
 <tr class="memdesc:namespaceaudio__tools"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic Implementation of sound input and output for desktop environments using portaudio. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:ga3529160d6b73e5a63e0a95afeb424659" id="r_ga3529160d6b73e5a63e0a95afeb424659"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__video.html#ga3529160d6b73e5a63e0a95afeb424659">StreamContentType</a> { <a class="el" href="group__video.html#gga3529160d6b73e5a63e0a95afeb424659ad3c111fe8a0e835609a6187d6e9d2e57">Audio</a>
+, <a class="el" href="group__video.html#gga3529160d6b73e5a63e0a95afeb424659aff13e87d7cbbe18fface435a5b84aaec">Video</a>
+ }</td></tr>
+<tr class="memdesc:ga3529160d6b73e5a63e0a95afeb424659"><td class="mdescLeft">&#160;</td><td class="mdescRight">Which track write() feeds, for muxers (MuxerAVI, MuxerMP4) that double as a plain, generic Print-like sink for both tracks - see setStreamType()/streamType() on those classes.  <a href="group__video.html#ga3529160d6b73e5a63e0a95afeb424659">More...</a><br /></td></tr>
+<tr class="separator:ga3529160d6b73e5a63e0a95afeb424659"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga216a5d43d2a518325c84f100ed7735a5" id="r_ga216a5d43d2a518325c84f100ed7735a5"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a> { <br />
+&#160;&#160;<a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a8ba63b54352f7053b055235a9ec7ac09">H264</a>
+, <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a0a5417ce14732e9bdb402be642ebe9ea">MJPEG</a>
+, <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a36476ddbd35c20ef7cbbea0bbb32b897">MPEG4</a>
+, <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a633d6abff0a3fc22404347728d195059">RAW</a>
+, <br />
+&#160;&#160;<a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5ae2ebd9cc5a78afc028dd47f2443affea">YUV422</a>
+, <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a3b73e4d15701467ed72f157ffaff680a">RGB565</a>
+, <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5acd1ea458818d68e388b9356fd528d67a">I420</a>
+, <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a696b031073e74bf2cb98e5ef201d4aa3">UNKNOWN</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:ga216a5d43d2a518325c84f100ed7735a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Video codec identifier for the (single) video stream of a container, shared by DemuxerAVI/MuxerAVI and DemuxerMP4 (much like AudioFormat is shared across the audio demuxers, despite its WAV-flavored name). H264 is the primary target for both; the others are AVI-specific conveniences.  <a href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">More...</a><br /></td></tr>
+<tr class="separator:ga216a5d43d2a518325c84f100ed7735a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ga4ab9376d6536f49ea113459040337375" id="r_ga4ab9376d6536f49ea113459040337375"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__video.html#ga4ab9376d6536f49ea113459040337375">videoFrameSizeBytes</a> (<a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a> format, uint16_t width, uint16_t height)</td></tr>
+<tr class="memdesc:ga4ab9376d6536f49ea113459040337375"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fixed per-frame size (bytes) for a raw/uncompressed VideoFormat at the given resolution - 0 for compressed formats (H264/MJPEG/MPEG4) or <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a696b031073e74bf2cb98e5ef201d4aa3">VideoFormat::UNKNOWN</a>, since their frame size varies per frame.  <br /></td></tr>
+<tr class="separator:ga4ab9376d6536f49ea113459040337375"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -71,7 +71,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#enum-members">Enumerations</a>  </div>
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">Video<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a></div></div></div>
 </div><!--header-->
 <div class="contents">
@@ -81,20 +82,32 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_v_i_decoder.html">AVIDecoder</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">AVI Container Decoder which can be fed with small chunks of data. The minimum length must be bigger then the header size! The file structure is documented at <a href="https://learn.microsoft.com/en-us/windows/win32/directshow/avi-riff-file-reference">https://learn.microsoft.com/en-us/windows/win32/directshow/avi-riff-file-reference</a>.  <a href="classaudio__tools_1_1_a_v_i_decoder.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer.html">Demuxer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Common interface for demuxers (<a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html" title="AVI Container Decoder which can be fed with small chunks of data. The minimum length must be bigger t...">DemuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html" title="DemuxerMP4 extracts both the audio and (H.264) video track from a general, interleaved MP4/ISO-BMFF s...">DemuxerMP4</a>) that split a container's video and (optional) audio tracks apart. Write code against this interface instead of a concrete class if it should work with either container format.  <a href="classaudio__tools_1_1_demuxer.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_v_i_encoder.html">AVIEncoder</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">AVI Container Encoder: muxes an already-encoded video stream (e.g. H.264 access units) and an optional PCM/compressed audio stream into a RIFF/AVI container written to a <a class="el" href="class_print.html">Print</a> (a local File to record, or e.g. a network <a class="el" href="class_client.html">Client</a> to publish a live stream to an HTTP/TCP client).  <a href="classaudio__tools_1_1_a_v_i_encoder.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html">DemuxerAVI</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">AVI Container Decoder which can be fed with small chunks of data. The minimum length must be bigger then the header size! The file structure is documented at <a href="https://learn.microsoft.com/en-us/windows/win32/directshow/avi-riff-file-reference">https://learn.microsoft.com/en-us/windows/win32/directshow/avi-riff-file-reference</a>.  <a href="classaudio__tools_1_1_demuxer_a_v_i.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_a_v_i_encoder_video_config.html">AVIEncoderVideoConfig</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration for the (single) video track written by <a class="el" href="classaudio__tools_1_1_a_v_i_encoder.html" title="AVI Container Encoder: muxes an already-encoded video stream (e.g. H.264 access units) and an optiona...">AVIEncoder</a>.  <a href="structaudio__tools_1_1_a_v_i_encoder_video_config.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html">DemuxerMP4</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html" title="DemuxerMP4 extracts both the audio and (H.264) video track from a general, interleaved MP4/ISO-BMFF s...">DemuxerMP4</a> extracts both the audio and (H.264) video track from a general, interleaved MP4/ISO-BMFF stream - unlike M4AAudioDemuxer/ <a class="el" href="classaudio__tools_1_1_m4_a_audio_file_demuxer.html" title="Demuxer for M4A/MP4 files to extract audio data using an Arduino File. This class locates the mdat an...">M4AAudioFileDemuxer</a>, which only handle a single (audio) track.  <a href="classaudio__tools_1_1_demuxer_m_p4.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_jpeg_open_c_v.html">JpegOpenCV</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display image with opencv to be used on the desktop.  <a href="classaudio__tools_1_1_jpeg_open_c_v.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_jpeg_t_f_t.html">JpegTFT</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display jpeg image using <a href="https://github.com/Bodmer/TFT_eSPI">https://github.com/Bodmer/TFT_eSPI</a> and <a href="https://github.com/Bodmer/JPEGDecoder">https://github.com/Bodmer/JPEGDecoder</a>.  <a href="classaudio__tools_1_1_jpeg_t_f_t.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer.html">Muxer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Common interface for muxers (<a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html" title="Configuration for the (single) video track written by MuxerAVI.">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html" title="Video track configuration for MuxerMP4 - update before calling begin().">MuxerMP4</a>) that combine an already-encoded video track (and optionally an audio track) into a container written to a <a class="el" href="class_print.html">Print</a> (a local File to record, or e.g. a network <a class="el" href="class_client.html">Client</a> to publish a live stream to an HTTP/TCP client). Write code against this interface instead of a concrete class if it should work with either container format.  <a href="classaudio__tools_1_1_muxer.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html">MuxerAVI</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration for the (single) video track written by <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html" title="Configuration for the (single) video track written by MuxerAVI.">MuxerAVI</a>.  <a href="classaudio__tools_1_1_muxer_a_v_i.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer_m_p4.html">MuxerMP4</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Video track configuration for <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html" title="Video track configuration for MuxerMP4 - update before calling begin().">MuxerMP4</a> - update before calling <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#acba365cc28eb702040c382646cfb0a7a">begin()</a>.  <a href="classaudio__tools_1_1_muxer_m_p4.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_muxer_video_config.html">MuxerVideoConfig</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shared video track configuration for muxers (<a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html" title="Configuration for the (single) video track written by MuxerAVI.">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html" title="Video track configuration for MuxerMP4 - update before calling begin().">MuxerMP4</a>) - call before begin().  <a href="structaudio__tools_1_1_muxer_video_config.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_buffered_sync.html">VideoAudioBufferedSync</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logic to Synchronize video and audio output: we use a buffer to store the audio and instead of delaying the frames with <a class="el" href="namespaceaudio__tools.html#a7f2dfce1046bdd2a2b753643726c2346">delay()</a> we play audio. The bufferSize defines the audio buffer in bytes. The correctionMs is used to slow down or speed up the playback of the video to prevent any audio buffer underflows.  <a href="classaudio__tools_1_1_video_audio_buffered_sync.html#details">More...</a><br /></td></tr>
@@ -103,10 +116,13 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logic to Synchronize video and audio output: This is the minimum implementatin which actually does not synchronize, but directly processes the data. No additinal memory is used! Provide your own optimized platform specific implementation.  <a href="classaudio__tools_1_1_video_audio_sync.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_frame.html">VideoFrame</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple in-memory <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory.">VideoOutput</a> sink that assembles a single video frame of at most a fixed maximum size. Connect it to any <a class="el" href="classaudio__tools_1_1_video_frame.html#abd410811ee391c7d4531142bc2a1365a">beginFrame()</a>/write()/endFrame() producer (e.g. a decoder), then, once <a class="el" href="classaudio__tools_1_1_video_frame.html#a6045acdc41b4fc3d1b3d55a6ec60eadb">endFrame()</a> has been called, read the assembled frame back via <a class="el" href="classaudio__tools_1_1_video_frame.html#a99c07c946023f413991a249db8b99ab0" title="Pointer to the assembled frame data.">data()</a> and <a class="el" href="classaudio__tools_1_1_video_frame.html#a946aef1a9634871bd728edb663075543" title="Number of bytes currently assembled in the frame.">available()</a> (or register a <a class="el" href="classaudio__tools_1_1_video_frame.html#a26375f36e4f5430e0ef7f3775195a996">setOnEnd()</a> callback to be notified instead of polling).  <a href="classaudio__tools_1_1_video_frame.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple in-memory <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> sink that assembles a single video frame of at most a fixed maximum size. Connect it to any <a class="el" href="classaudio__tools_1_1_video_frame.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>/flush() producer (e.g. a decoder), then, once <a class="el" href="classaudio__tools_1_1_video_frame.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a> has been called, read the assembled frame back via <a class="el" href="classaudio__tools_1_1_video_frame.html#a99c07c946023f413991a249db8b99ab0" title="Pointer to the assembled frame data.">data()</a> and <a class="el" href="classaudio__tools_1_1_video_frame.html#a946aef1a9634871bd728edb663075543" title="Number of bytes currently assembled in the frame.">available()</a> (or register a <a class="el" href="classaudio__tools_1_1_video_frame.html#a26375f36e4f5430e0ef7f3775195a996">setOnEnd()</a> callback to be notified instead of polling).  <a href="classaudio__tools_1_1_video_frame.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_video_info.html">VideoInfo</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Basic video information (width/height/codec/frame size), analogous to <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> - common to both <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html" title="AVI Container Decoder which can be fed with small chunks of data. The minimum length must be bigger t...">DemuxerAVI</a> and <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html" title="DemuxerMP4 extracts both the audio and (H.264) video track from a general, interleaved MP4/ISO-BMFF s...">DemuxerMP4</a>, accessible via their getVideoInfo() getter.  <a href="structaudio__tools_1_1_video_info.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract class for video playback. This class is used to assemble a complete video frame in memory.  <a href="classaudio__tools_1_1_video_output.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract class for video playback. This class is used to assemble a complete video frame in memory. A video frame is written via one or more <a class="el" href="classaudio__tools_1_1_video_output.html#a1e40195a444e7f20508961cfeacc9b04">write()</a> calls, then finalized with <a class="el" href="class_print.html#ad3aed50bc3b4459454ccb8c64f5ced5a">flush()</a> - implementations use <a class="el" href="class_print.html#ad3aed50bc3b4459454ccb8c64f5ced5a">flush()</a> to know a frame is complete (there is no separate frame-size hint, unlike a length-prefixed chunk format).  <a href="classaudio__tools_1_1_video_output.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
@@ -148,24 +164,44 @@ Enumerations</h2></td></tr>
 , <a class="el" href="group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1ac155faf850ade2d91168dac31e37f5ad">G726ADPCM</a> = 0x0140
 , <br />
 &#160;&#160;<a class="el" href="group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1a16c2a17526e85de193cdd60f67ff81f2">UNISYS_NAP_ADPCM</a> = 0x0170
+, <a class="el" href="group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1a27bcd310c52f6445cf4b93b90f52f5ef">MP3</a> = 0x0055
+, <a class="el" href="group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1a039ea4e8bb04948343a7376e44df1c17">ALAC</a> = 0x6C61
+, <a class="el" href="group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1a6409dac0c80c79ddf61858be7f2c699b">AAC</a> = 0xA106
 <br />
  }</td></tr>
 <tr class="memdesc:ga4fcb46758e1356d5ff7c6523c52810c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Audio format codes used by Microsoft e.g. in avi or wav files.  <a href="group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1">More...</a><br /></td></tr>
 <tr class="separator:ga4fcb46758e1356d5ff7c6523c52810c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaac961b2fad4045ebc23ed70f727d3bd5" id="r_gaac961b2fad4045ebc23ed70f727d3bd5"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__video.html#gaac961b2fad4045ebc23ed70f727d3bd5">AVIVideoFormat</a> { <br />
-&#160;&#160;<a class="el" href="group__video.html#ggaac961b2fad4045ebc23ed70f727d3bd5a8ba63b54352f7053b055235a9ec7ac09">H264</a>
-, <a class="el" href="group__video.html#ggaac961b2fad4045ebc23ed70f727d3bd5a0a5417ce14732e9bdb402be642ebe9ea">MJPEG</a>
-, <a class="el" href="group__video.html#ggaac961b2fad4045ebc23ed70f727d3bd5a36476ddbd35c20ef7cbbea0bbb32b897">MPEG4</a>
-, <a class="el" href="group__video.html#ggaac961b2fad4045ebc23ed70f727d3bd5a633d6abff0a3fc22404347728d195059">RAW</a>
+<tr class="memitem:ga3529160d6b73e5a63e0a95afeb424659" id="r_ga3529160d6b73e5a63e0a95afeb424659"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__video.html#ga3529160d6b73e5a63e0a95afeb424659">StreamContentType</a> { <a class="el" href="group__video.html#gga3529160d6b73e5a63e0a95afeb424659ad3c111fe8a0e835609a6187d6e9d2e57">Audio</a>
+, <a class="el" href="group__video.html#gga3529160d6b73e5a63e0a95afeb424659aff13e87d7cbbe18fface435a5b84aaec">Video</a>
+ }</td></tr>
+<tr class="memdesc:ga3529160d6b73e5a63e0a95afeb424659"><td class="mdescLeft">&#160;</td><td class="mdescRight">Which track write() feeds, for muxers (MuxerAVI, MuxerMP4) that double as a plain, generic Print-like sink for both tracks - see setStreamType()/streamType() on those classes.  <a href="group__video.html#ga3529160d6b73e5a63e0a95afeb424659">More...</a><br /></td></tr>
+<tr class="separator:ga3529160d6b73e5a63e0a95afeb424659"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga216a5d43d2a518325c84f100ed7735a5" id="r_ga216a5d43d2a518325c84f100ed7735a5"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a> { <br />
+&#160;&#160;<a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a8ba63b54352f7053b055235a9ec7ac09">H264</a>
+, <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a0a5417ce14732e9bdb402be642ebe9ea">MJPEG</a>
+, <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a36476ddbd35c20ef7cbbea0bbb32b897">MPEG4</a>
+, <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a633d6abff0a3fc22404347728d195059">RAW</a>
 , <br />
-&#160;&#160;<a class="el" href="group__video.html#ggaac961b2fad4045ebc23ed70f727d3bd5ae2ebd9cc5a78afc028dd47f2443affea">YUV422</a>
-, <a class="el" href="group__video.html#ggaac961b2fad4045ebc23ed70f727d3bd5a3b73e4d15701467ed72f157ffaff680a">RGB565</a>
-, <a class="el" href="group__video.html#ggaac961b2fad4045ebc23ed70f727d3bd5acd1ea458818d68e388b9356fd528d67a">I420</a>
-, <a class="el" href="group__video.html#ggaac961b2fad4045ebc23ed70f727d3bd5a696b031073e74bf2cb98e5ef201d4aa3">UNKNOWN</a>
+&#160;&#160;<a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5ae2ebd9cc5a78afc028dd47f2443affea">YUV422</a>
+, <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a3b73e4d15701467ed72f157ffaff680a">RGB565</a>
+, <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5acd1ea458818d68e388b9356fd528d67a">I420</a>
+, <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a696b031073e74bf2cb98e5ef201d4aa3">UNKNOWN</a>
 <br />
  }</td></tr>
-<tr class="memdesc:gaac961b2fad4045ebc23ed70f727d3bd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Video codec identifier for the (single) video stream of an AVI file, used by both AVIEncoder (to write the video track) and AVIDecoder (AVIDecoder::videoFormatType(), decoded from the 'strf' biCompression field - see <a href="https://www.fourcc.org">https://www.fourcc.org</a>). H264 is the primary encoder target; the others are provided for convenience.  <a href="group__video.html#gaac961b2fad4045ebc23ed70f727d3bd5">More...</a><br /></td></tr>
-<tr class="separator:gaac961b2fad4045ebc23ed70f727d3bd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:ga216a5d43d2a518325c84f100ed7735a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Video codec identifier for the (single) video stream of a container, shared by DemuxerAVI/MuxerAVI and DemuxerMP4 (much like AudioFormat is shared across the audio demuxers, despite its WAV-flavored name). H264 is the primary target for both; the others are AVI-specific conveniences.  <a href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">More...</a><br /></td></tr>
+<tr class="separator:ga216a5d43d2a518325c84f100ed7735a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:gac56f1ce047268d2e2a8ad23ceaabfc33" id="r_gac56f1ce047268d2e2a8ad23ceaabfc33"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__video.html#gac56f1ce047268d2e2a8ad23ceaabfc33">isWavFormat</a> (<a class="el" href="group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1">AudioFormat</a> format)</td></tr>
+<tr class="memdesc:gac56f1ce047268d2e2a8ad23ceaabfc33"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if the wav code is handled via the WAV decoder (i.e. <a class="el" href="group__video.html#ga97ce8b97f4fff29a15349ad04bafba32" title="Provides the mime type for a AudioFormat wav code, or nullptr if not known/mapped.">toMime()</a> maps it to "audio/wav": PCM and all ADPCM variants).  <br /></td></tr>
+<tr class="separator:gac56f1ce047268d2e2a8ad23ceaabfc33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga97ce8b97f4fff29a15349ad04bafba32" id="r_ga97ce8b97f4fff29a15349ad04bafba32"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__video.html#ga97ce8b97f4fff29a15349ad04bafba32">toMime</a> (<a class="el" href="group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1">AudioFormat</a> format)</td></tr>
+<tr class="memdesc:ga97ce8b97f4fff29a15349ad04bafba32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the mime type for a AudioFormat wav code, or nullptr if not known/mapped.  <br /></td></tr>
+<tr class="separator:ga97ce8b97f4fff29a15349ad04bafba32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4ab9376d6536f49ea113459040337375" id="r_ga4ab9376d6536f49ea113459040337375"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__video.html#ga4ab9376d6536f49ea113459040337375">videoFrameSizeBytes</a> (<a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a> format, uint16_t width, uint16_t height)</td></tr>
+<tr class="memdesc:ga4ab9376d6536f49ea113459040337375"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fixed per-frame size (bytes) for a raw/uncompressed VideoFormat at the given resolution - 0 for compressed formats (H264/MJPEG/MPEG4) or <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a696b031073e74bf2cb98e5ef201d4aa3">VideoFormat::UNKNOWN</a>, since their frame size varies per frame.  <br /></td></tr>
+<tr class="separator:ga4ab9376d6536f49ea113459040337375"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Video playback. </p>
@@ -221,12 +257,35 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><a id="gga4fcb46758e1356d5ff7c6523c52810c1a3c35d6546cbdc225a8e1443cbc3461ec" name="gga4fcb46758e1356d5ff7c6523c52810c1a3c35d6546cbdc225a8e1443cbc3461ec"></a>SANYO_LD_ADPCM&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="gga4fcb46758e1356d5ff7c6523c52810c1ac155faf850ade2d91168dac31e37f5ad" name="gga4fcb46758e1356d5ff7c6523c52810c1ac155faf850ade2d91168dac31e37f5ad"></a>G726ADPCM&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="gga4fcb46758e1356d5ff7c6523c52810c1a16c2a17526e85de193cdd60f67ff81f2" name="gga4fcb46758e1356d5ff7c6523c52810c1a16c2a17526e85de193cdd60f67ff81f2"></a>UNISYS_NAP_ADPCM&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="gga4fcb46758e1356d5ff7c6523c52810c1a27bcd310c52f6445cf4b93b90f52f5ef" name="gga4fcb46758e1356d5ff7c6523c52810c1a27bcd310c52f6445cf4b93b90f52f5ef"></a>MP3&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="gga4fcb46758e1356d5ff7c6523c52810c1a039ea4e8bb04948343a7376e44df1c17" name="gga4fcb46758e1356d5ff7c6523c52810c1a039ea4e8bb04948343a7376e44df1c17"></a>ALAC&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="gga4fcb46758e1356d5ff7c6523c52810c1a6409dac0c80c79ddf61858be7f2c699b" name="gga4fcb46758e1356d5ff7c6523c52810c1a6409dac0c80c79ddf61858be7f2c699b"></a>AAC&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>
 </div>
-<a id="gaac961b2fad4045ebc23ed70f727d3bd5" name="gaac961b2fad4045ebc23ed70f727d3bd5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaac961b2fad4045ebc23ed70f727d3bd5">&#9670;&#160;</a></span>AVIVideoFormat</h2>
+<a id="ga3529160d6b73e5a63e0a95afeb424659" name="ga3529160d6b73e5a63e0a95afeb424659"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3529160d6b73e5a63e0a95afeb424659">&#9670;&#160;</a></span>StreamContentType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="group__video.html#ga3529160d6b73e5a63e0a95afeb424659">StreamContentType</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Which track write() feeds, for muxers (<a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html" title="Configuration for the (single) video track written by MuxerAVI.">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html" title="Video track configuration for MuxerMP4 - update before calling begin().">MuxerMP4</a>) that double as a plain, generic Print-like sink for both tracks - see setStreamType()/streamType() on those classes. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga3529160d6b73e5a63e0a95afeb424659ad3c111fe8a0e835609a6187d6e9d2e57" name="gga3529160d6b73e5a63e0a95afeb424659ad3c111fe8a0e835609a6187d6e9d2e57"></a>Audio&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="gga3529160d6b73e5a63e0a95afeb424659aff13e87d7cbbe18fface435a5b84aaec" name="gga3529160d6b73e5a63e0a95afeb424659aff13e87d7cbbe18fface435a5b84aaec"></a>Video&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<a id="ga216a5d43d2a518325c84f100ed7735a5" name="ga216a5d43d2a518325c84f100ed7735a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga216a5d43d2a518325c84f100ed7735a5">&#9670;&#160;</a></span>VideoFormat</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -235,7 +294,7 @@ Enumerations</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">enum class <a class="el" href="group__video.html#gaac961b2fad4045ebc23ed70f727d3bd5">AVIVideoFormat</a></td>
+          <td class="memname">enum class <a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a></td>
         </tr>
       </table>
   </td>
@@ -245,7 +304,7 @@ Enumerations</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Video codec identifier for the (single) video stream of an AVI file, used by both <a class="el" href="classaudio__tools_1_1_a_v_i_encoder.html" title="AVI Container Encoder: muxes an already-encoded video stream (e.g. H.264 access units) and an optiona...">AVIEncoder</a> (to write the video track) and <a class="el" href="classaudio__tools_1_1_a_v_i_decoder.html" title="AVI Container Decoder which can be fed with small chunks of data. The minimum length must be bigger t...">AVIDecoder</a> (<a class="el" href="classaudio__tools_1_1_a_v_i_decoder.html#a9b518951e06fa6fe62e53177f6d01d18">AVIDecoder::videoFormatType()</a>, decoded from the 'strf' biCompression field - see <a href="https://www.fourcc.org">https://www.fourcc.org</a>). H264 is the primary encoder target; the others are provided for convenience. </p>
+<p>Video codec identifier for the (single) video stream of a container, shared by DemuxerAVI/MuxerAVI and <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html" title="DemuxerMP4 extracts both the audio and (H.264) video track from a general, interleaved MP4/ISO-BMFF s...">DemuxerMP4</a> (much like AudioFormat is shared across the audio demuxers, despite its WAV-flavored name). H264 is the primary target for both; the others are AVI-specific conveniences. </p>
 <ul>
 <li>H264/MPEG4: compressed, variable frame size -&gt; use addVideoFrame()</li>
 <li>MJPEG: one complete JPEG image per frame -&gt; use addJpegFrame()</li>
@@ -256,15 +315,116 @@ Enumerations</h2></td></tr>
 <li>UNKNOWN: decoder only - the codec did not match any of the above </li>
 </ul>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ggaac961b2fad4045ebc23ed70f727d3bd5a8ba63b54352f7053b055235a9ec7ac09" name="ggaac961b2fad4045ebc23ed70f727d3bd5a8ba63b54352f7053b055235a9ec7ac09"></a>H264&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ggaac961b2fad4045ebc23ed70f727d3bd5a0a5417ce14732e9bdb402be642ebe9ea" name="ggaac961b2fad4045ebc23ed70f727d3bd5a0a5417ce14732e9bdb402be642ebe9ea"></a>MJPEG&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ggaac961b2fad4045ebc23ed70f727d3bd5a36476ddbd35c20ef7cbbea0bbb32b897" name="ggaac961b2fad4045ebc23ed70f727d3bd5a36476ddbd35c20ef7cbbea0bbb32b897"></a>MPEG4&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ggaac961b2fad4045ebc23ed70f727d3bd5a633d6abff0a3fc22404347728d195059" name="ggaac961b2fad4045ebc23ed70f727d3bd5a633d6abff0a3fc22404347728d195059"></a>RAW&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ggaac961b2fad4045ebc23ed70f727d3bd5ae2ebd9cc5a78afc028dd47f2443affea" name="ggaac961b2fad4045ebc23ed70f727d3bd5ae2ebd9cc5a78afc028dd47f2443affea"></a>YUV422&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ggaac961b2fad4045ebc23ed70f727d3bd5a3b73e4d15701467ed72f157ffaff680a" name="ggaac961b2fad4045ebc23ed70f727d3bd5a3b73e4d15701467ed72f157ffaff680a"></a>RGB565&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ggaac961b2fad4045ebc23ed70f727d3bd5acd1ea458818d68e388b9356fd528d67a" name="ggaac961b2fad4045ebc23ed70f727d3bd5acd1ea458818d68e388b9356fd528d67a"></a>I420&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ggaac961b2fad4045ebc23ed70f727d3bd5a696b031073e74bf2cb98e5ef201d4aa3" name="ggaac961b2fad4045ebc23ed70f727d3bd5a696b031073e74bf2cb98e5ef201d4aa3"></a>UNKNOWN&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga216a5d43d2a518325c84f100ed7735a5a8ba63b54352f7053b055235a9ec7ac09" name="gga216a5d43d2a518325c84f100ed7735a5a8ba63b54352f7053b055235a9ec7ac09"></a>H264&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="gga216a5d43d2a518325c84f100ed7735a5a0a5417ce14732e9bdb402be642ebe9ea" name="gga216a5d43d2a518325c84f100ed7735a5a0a5417ce14732e9bdb402be642ebe9ea"></a>MJPEG&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="gga216a5d43d2a518325c84f100ed7735a5a36476ddbd35c20ef7cbbea0bbb32b897" name="gga216a5d43d2a518325c84f100ed7735a5a36476ddbd35c20ef7cbbea0bbb32b897"></a>MPEG4&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="gga216a5d43d2a518325c84f100ed7735a5a633d6abff0a3fc22404347728d195059" name="gga216a5d43d2a518325c84f100ed7735a5a633d6abff0a3fc22404347728d195059"></a>RAW&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="gga216a5d43d2a518325c84f100ed7735a5ae2ebd9cc5a78afc028dd47f2443affea" name="gga216a5d43d2a518325c84f100ed7735a5ae2ebd9cc5a78afc028dd47f2443affea"></a>YUV422&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="gga216a5d43d2a518325c84f100ed7735a5a3b73e4d15701467ed72f157ffaff680a" name="gga216a5d43d2a518325c84f100ed7735a5a3b73e4d15701467ed72f157ffaff680a"></a>RGB565&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="gga216a5d43d2a518325c84f100ed7735a5acd1ea458818d68e388b9356fd528d67a" name="gga216a5d43d2a518325c84f100ed7735a5acd1ea458818d68e388b9356fd528d67a"></a>I420&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="gga216a5d43d2a518325c84f100ed7735a5a696b031073e74bf2cb98e5ef201d4aa3" name="gga216a5d43d2a518325c84f100ed7735a5a696b031073e74bf2cb98e5ef201d4aa3"></a>UNKNOWN&#160;</td><td class="fielddoc"></td></tr>
 </table>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="gac56f1ce047268d2e2a8ad23ceaabfc33" name="gac56f1ce047268d2e2a8ad23ceaabfc33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac56f1ce047268d2e2a8ad23ceaabfc33">&#9670;&#160;</a></span>isWavFormat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isWavFormat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1">AudioFormat</a>&#160;</td>
+          <td class="paramname"><em>format</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>True if the wav code is handled via the WAV decoder (i.e. <a class="el" href="group__video.html#ga97ce8b97f4fff29a15349ad04bafba32" title="Provides the mime type for a AudioFormat wav code, or nullptr if not known/mapped.">toMime()</a> maps it to "audio/wav": PCM and all ADPCM variants). </p>
+
+</div>
+</div>
+<a id="ga97ce8b97f4fff29a15349ad04bafba32" name="ga97ce8b97f4fff29a15349ad04bafba32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga97ce8b97f4fff29a15349ad04bafba32">&#9670;&#160;</a></span>toMime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * toMime </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1">AudioFormat</a>&#160;</td>
+          <td class="paramname"><em>format</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Provides the mime type for a AudioFormat wav code, or nullptr if not known/mapped. </p>
+
+</div>
+</div>
+<a id="ga4ab9376d6536f49ea113459040337375" name="ga4ab9376d6536f49ea113459040337375"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4ab9376d6536f49ea113459040337375">&#9670;&#160;</a></span>videoFrameSizeBytes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t videoFrameSizeBytes </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a>&#160;</td>
+          <td class="paramname"><em>format</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>height</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Fixed per-frame size (bytes) for a raw/uncompressed VideoFormat at the given resolution - 0 for compressed formats (H264/MJPEG/MPEG4) or <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a696b031073e74bf2cb98e5ef201d4aa3">VideoFormat::UNKNOWN</a>, since their frame size varies per frame. </p>
 
 </div>
 </div>

@@ -6,5 +6,6 @@ var searchData=
   ['vbanprotocol_3',['VBanProtocol',['../vban_8h.html#aa58d140748e17e9f46ae519d899a8811',1,'vban.h']]],
   ['vbansamplerates_4',['VBanSampleRates',['../vban_8h.html#a2d4346edd12308b3746233e7bf46a26f',1,'vban.h']]],
   ['vbanstreamtype_5',['VBanStreamType',['../vban_8h.html#aec5b692b4e67571a79d7ee3847476bc2',1,'vban.h']]],
-  ['vs1053mode_6',['VS1053Mode',['../namespaceaudio__tools.html#ae01ff26451004d25dd832a9e3a178b1a',1,'audio_tools']]]
+  ['videoformat_6',['VideoFormat',['../group__video.html#ga216a5d43d2a518325c84f100ed7735a5',1,'audio_tools']]],
+  ['vs1053mode_7',['VS1053Mode',['../namespaceaudio__tools.html#ae01ff26451004d25dd832a9e3a178b1a',1,'audio_tools']]]
 ];

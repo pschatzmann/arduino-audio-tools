@@ -1,12 +1,12 @@
 var searchData=
 [
   ['ram_0',['RAM',['../group__basic.html#gga462bfa9dfea81692463ecb192183dd01a4e7c1c21b6fbbb620bd79131aabc22ab',1,'audio_tools']]],
-  ['raw_1',['RAW',['../group__video.html#ggaac961b2fad4045ebc23ed70f727d3bd5a633d6abff0a3fc22404347728d195059',1,'audio_tools']]],
+  ['raw_1',['RAW',['../group__video.html#gga216a5d43d2a518325c84f100ed7735a5a633d6abff0a3fc22404347728d195059',1,'audio_tools']]],
   ['receive_2',['Receive',['../namespaceaudio__tools.html#ac5cfc25b1f32277d802a787556d072b2a5639d3df5aea3d9e78027b843ee3cbb2',1,'audio_tools']]],
   ['receiver_3',['Receiver',['../namespaceaudio__tools.html#a39767e1d5e989bc1c5719791db129efaaa9d093d11bc6e98b0c8e586ffa545c85',1,'audio_tools']]],
   ['receiving_4',['RECEIVING',['../classaudio__tools_1_1_h_d_l_c_stream.html#afa22e66eb5ea0daab0f0cd0360936f82a59e11bc4b2a068db07d35733ec8c8da0',1,'audio_tools::HDLCStream']]],
   ['release_5',['Release',['../classaudio__tools_1_1_a_d_s_r.html#a2737f3f07a2ab466c31c627a1aa8d592a203c091eb36ddf3292775fd77fbd4f65',1,'audio_tools::ADSR']]],
-  ['rgb565_6',['RGB565',['../group__video.html#ggaac961b2fad4045ebc23ed70f727d3bd5a3b73e4d15701467ed72f157ffaff680a',1,'audio_tools']]],
+  ['rgb565_6',['RGB565',['../group__video.html#gga216a5d43d2a518325c84f100ed7735a5a3b73e4d15701467ed72f157ffaff680a',1,'audio_tools']]],
   ['rhetorex_5fadpcm_7',['RHETOREX_ADPCM',['../group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1a3ec538110eaa51fe7ccc6ea0ad4066cc',1,'audio_tools']]],
   ['right_8',['Right',['../namespaceaudio__tools.html#ac7e19a69c5927b90d045e091376d1119a92b09c7c48c520c3c55e497875da437c',1,'audio_tools']]],
   ['rightisempty_9',['RightIsEmpty',['../group__convert.html#gga077b71bccfdb0bda598c8ec04372c474aa4a87297f45f0f2f65c7802d5dafb67d',1,'audio_tools']]],

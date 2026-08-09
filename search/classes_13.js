@@ -19,8 +19,9 @@ var searchData=
   ['timedstream_16',['TimedStream',['../classaudio__tools_1_1_timed_stream.html',1,'audio_tools']]],
   ['timercallbackaudiostream_17',['TimerCallbackAudioStream',['../classaudio__tools_1_1_timer_callback_audio_stream.html',1,'audio_tools']]],
   ['timercallbackaudiostreaminfo_18',['TimerCallbackAudioStreamInfo',['../structaudio__tools_1_1_timer_callback_audio_stream_info.html',1,'audio_tools']]],
-  ['transformationreader_19',['TransformationReader',['../classaudio__tools_1_1_transformation_reader.html',1,'audio_tools']]],
-  ['transformationreader_3c_20audio_5ftools_3a_3areformatbasestream_20_3e_20',['TransformationReader&lt; audio_tools::ReformatBaseStream &gt;',['../classaudio__tools_1_1_transformation_reader.html',1,'audio_tools']]],
-  ['tremolo_21',['Tremolo',['../classaudio__tools_1_1_tremolo.html',1,'audio_tools']]],
-  ['triangle_22',['Triangle',['../classaudio__tools_1_1_triangle.html',1,'audio_tools']]]
+  ['track_19',['Track',['../structaudio__tools_1_1_demuxer_m_p4_1_1_track.html',1,'audio_tools::DemuxerMP4']]],
+  ['transformationreader_20',['TransformationReader',['../classaudio__tools_1_1_transformation_reader.html',1,'audio_tools']]],
+  ['transformationreader_3c_20audio_5ftools_3a_3areformatbasestream_20_3e_21',['TransformationReader&lt; audio_tools::ReformatBaseStream &gt;',['../classaudio__tools_1_1_transformation_reader.html',1,'audio_tools']]],
+  ['tremolo_22',['Tremolo',['../classaudio__tools_1_1_tremolo.html',1,'audio_tools']]],
+  ['triangle_23',['Triangle',['../classaudio__tools_1_1_triangle.html',1,'audio_tools']]]
 ];

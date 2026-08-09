@@ -8,6 +8,7 @@ var searchData=
   ['zero_5fbyte_5',['zero_byte',['../structaudio__tools_1_1_i_d3v1.html#af253de510634e93c3912fafba0a70ef7',1,'audio_tools::ID3v1']]],
   ['zero_5fread_5fdelay_5fms_6',['zero_read_delay_ms',['../classaudio__tools_1_1_transformation_reader.html#ab02e7abb267436f5258b4f29fba8bba2',1,'audio_tools::TransformationReader']]],
   ['zerocount_7',['zeroCount',['../classaudio__tools_1_1_a_d_s_r.html#a13cb33a0f9319ab34cd56185bfdc0589',1,'audio_tools::ADSR']]],
-  ['zloge_8',['ZLOGE',['../_arduino_8h.html#adcf34aa935f702ce12dbaf6dbc29f954',1,'Arduino.h']]],
-  ['zyxel_5fadpcm_9',['ZYXEL_ADPCM',['../group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1ae715abfca832faf983ebabcaf613843c',1,'audio_tools']]]
+  ['zeros_8',['zeros',['../classaudio__tools_1_1_m_p4_box_writer.html#a31a35c2754c790e842a9fb5772861cd6',1,'audio_tools::MP4BoxWriter']]],
+  ['zloge_9',['ZLOGE',['../_arduino_8h.html#adcf34aa935f702ce12dbaf6dbc29f954',1,'Arduino.h']]],
+  ['zyxel_5fadpcm_10',['ZYXEL_ADPCM',['../group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1ae715abfca832faf983ebabcaf613843c',1,'audio_tools']]]
 ];
