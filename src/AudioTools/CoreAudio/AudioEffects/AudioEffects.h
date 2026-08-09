@@ -310,32 +310,40 @@ class AudioEffectStreamT : public ModifyingStream {
 
     /**
      * Writes the samples passed in the buffer and applies the effects before writing the
-     * result to the output defined in the constructor.
+     * result to the output defined in the constructor. The processed block is written in a
+     * single call to the downstream Stream/Print (instead of one call per sample) to avoid
+     * the per-sample dispatch overhead that would otherwise starve a real-time producer such
+     * as a Bluetooth A2DP sink.
     */
     size_t write(const uint8_t *data, size_t len) override {
         if (!active)return 0;
         // length must be multple of channels
         assert(len % (sizeof(T)*info.channels)==0);
         int frames = len / sizeof(T) / info.channels;
-        size_t result_size = 0;
+        int total_samples = frames * info.channels;
+
+        buffer_out.resize(total_samples);
+        T* out = buffer_out.data();
 
         // process all samples
         for (int f=0;f<frames;f++){
             const T* p_buffer = ((const T*)data) + (f*info.channels);
+            T* p_out = out + (f*info.channels);
             for (int ch=0;ch<info.channels;ch++){
                 T sample = p_buffer[ch];
                 AudioEffectCommon &chain = channel_effects[ch];
                 for (int j=0; j<chain.size(); j++){
                     sample = chain[j]->process(sample);
                 }
-
-                if (p_io!=nullptr){
-                    p_io->write((uint8_t*)&sample, sizeof(T));
-                } else if (p_print!=nullptr){
-                    p_print->write((uint8_t*)&sample, sizeof(T));
-                }
-                result_size += sizeof(T);
+                p_out[ch] = sample;
             }
+        }
+
+        size_t result_size = total_samples * sizeof(T);
+        if (p_io!=nullptr){
+            p_io->write((const uint8_t*)out, result_size);
+        } else if (p_print!=nullptr){
+            p_print->write((const uint8_t*)out, result_size);
         }
         return result_size;
     }
@@ -427,6 +435,7 @@ class AudioEffectStreamT : public ModifyingStream {
     AudioEffectCommon effects;                  // template chain populated via addEffect()
     Vector<AudioEffectCommon> channel_effects;   // one independent chain per channel, cloned from `effects`
     Vector<AudioEffect*> owned_clones;           // clones created internally; ours to delete
+    Vector<T> buffer_out;                        // reused scratch buffer for write(): avoids per-sample writes
     bool active = false;
     Stream *p_io=nullptr;
     Print *p_print=nullptr;
