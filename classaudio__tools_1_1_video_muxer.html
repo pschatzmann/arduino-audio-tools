@@ -105,6 +105,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a3dc260cfb8753fd89fe456db457b5f07"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e283a9495aaf265739336829d45e215" id="r_a5e283a9495aaf265739336829d45e215"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_muxer.html#a5e283a9495aaf265739336829d45e215">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info)</td></tr>
 <tr class="separator:a5e283a9495aaf265739336829d45e215"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3bf5767eccd52f4e16cc6677f4d380e" id="r_ae3bf5767eccd52f4e16cc6677f4d380e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_muxer.html#ae3bf5767eccd52f4e16cc6677f4d380e">setAudioSource</a> (<a class="el" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a> &amp;out)</td></tr>
+<tr class="memdesc:ae3bf5767eccd52f4e16cc6677f4d380e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the <a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.">AudioSource</a> that we can configure with <a class="el" href="classaudio__tools_1_1_video_muxer.html#a5e283a9495aaf265739336829d45e215">setAudioInfo()</a>  <br /></td></tr>
+<tr class="separator:ae3bf5767eccd52f4e16cc6677f4d380e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51e2da14c15e255e78d718a7bbab6540" id="r_a51e2da14c15e255e78d718a7bbab6540"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_muxer.html#a51e2da14c15e255e78d718a7bbab6540">setAudioSource</a> (<a class="el" href="class_stream.html">Stream</a> &amp;pcm)</td></tr>
 <tr class="separator:a51e2da14c15e255e78d718a7bbab6540"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41dab3c4724e7306fcd9970f305b6e1e" id="r_a41dab3c4724e7306fcd9970f305b6e1e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_muxer.html#a41dab3c4724e7306fcd9970f305b6e1e">setMuxer</a> (<a class="el" href="classaudio__tools_1_1_muxer.html">Muxer</a> &amp;muxer)</td></tr>
@@ -142,6 +145,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ac32dc031c385790e577c6c3f48aca5cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a8e6cbb8ec8efa08b5935867ac6952a" id="r_a2a8e6cbb8ec8efa08b5935867ac6952a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_muxer.html">Muxer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_muxer.html#a2a8e6cbb8ec8efa08b5935867ac6952a">p_muxer</a> = nullptr</td></tr>
 <tr class="separator:a2a8e6cbb8ec8efa08b5935867ac6952a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a982ee5d843fc2789610fedbad838860c" id="r_a982ee5d843fc2789610fedbad838860c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_muxer.html#a982ee5d843fc2789610fedbad838860c">p_source_audio_info</a> = nullptr</td></tr>
+<tr class="separator:a982ee5d843fc2789610fedbad838860c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed05932db76835ef351c21efcbb14b3c" id="r_aed05932db76835ef351c21efcbb14b3c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_video_frame_source.html">VideoFrameSource</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_muxer.html#aed05932db76835ef351c21efcbb14b3c">p_video</a> = nullptr</td></tr>
 <tr class="separator:aed05932db76835ef351c21efcbb14b3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1eabe4059fb5e05aa3108b3e2c5be3e7" id="r_a1eabe4059fb5e05aa3108b3e2c5be3e7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_video_encoder.html">VideoEncoder</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_muxer.html#a1eabe4059fb5e05aa3108b3e2c5be3e7">p_video_encoder</a> = nullptr</td></tr>
@@ -432,8 +437,36 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ae3bf5767eccd52f4e16cc6677f4d380e" name="ae3bf5767eccd52f4e16cc6677f4d380e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3bf5767eccd52f4e16cc6677f4d380e">&#9670;&#160;</a></span>setAudioSource() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setAudioSource </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a> &amp;&#160;</td>
+          <td class="paramname"><em>out</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Defines the <a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.">AudioSource</a> that we can configure with <a class="el" href="classaudio__tools_1_1_video_muxer.html#a5e283a9495aaf265739336829d45e215">setAudioInfo()</a> </p>
+
+</div>
+</div>
 <a id="a51e2da14c15e255e78d718a7bbab6540" name="a51e2da14c15e255e78d718a7bbab6540"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a51e2da14c15e255e78d718a7bbab6540">&#9670;&#160;</a></span>setAudioSource()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a51e2da14c15e255e78d718a7bbab6540">&#9670;&#160;</a></span>setAudioSource() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -729,6 +762,28 @@ Static Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classaudio__tools_1_1_muxer.html">Muxer</a>* p_muxer = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a982ee5d843fc2789610fedbad838860c" name="a982ee5d843fc2789610fedbad838860c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a982ee5d843fc2789610fedbad838860c">&#9670;&#160;</a></span>p_source_audio_info</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a>* p_source_audio_info = nullptr</td>
         </tr>
       </table>
   </td>
