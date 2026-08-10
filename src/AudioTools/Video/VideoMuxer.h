@@ -50,10 +50,24 @@ class VideoMuxer {
   /// in that case.
   void setAudioSource(Stream& pcm) { p_audio = &pcm; }
 
+  /// Defines the AudioSource that we can configure with setAudioInfo()
+  void setAudioSource(AudioStream& out) {
+    p_audio = &out;
+    p_source_audio_info = &out;
+    audio_info = out.audioInfo();
+  }
+
   /// Defines the sample_rate/channels/bits_per_sample of setAudioSource()'s
   /// PCM data - only used (instead of AudioEncoder::audioInfo()) when no
   /// setAudioEncoder() was called. Call before begin().
-  void setAudioInfo(AudioInfo info) { audio_info = info; }
+  void setAudioInfo(AudioInfo info) {
+    audio_info = info;
+    if (p_source_audio_info) {
+      p_source_audio_info->setAudioInfo(info);
+    } else {
+      LOGI("VideoMuxer: setAudioInfo() source not updated");
+    }
+  }
 
   /// Defines the (optional) encoder each PCM chunk is handed to -
   /// responsible for framing and writing the encoded result to the Muxer
@@ -112,7 +126,7 @@ class VideoMuxer {
     if (have_audio) {
       AudioInfoFormat muxer_audio_info;
       if (p_audio_encoder != nullptr) {
-        muxer_audio_info = AudioInfoFormat(p_audio_encoder->audioInfo());
+        muxer_audio_info = AudioInfoFormat(audio_info);
         AudioFormat mime_format = fromMime(p_audio_encoder->mime());
         muxer_audio_info.format = mime_format != AudioFormat::UNKNOWN
                                       ? mime_format
@@ -140,6 +154,7 @@ class VideoMuxer {
       p_video_encoder->begin();
     }
     if (have_audio && p_audio_encoder != nullptr) {
+      p_audio_encoder->setAudioInfo(audio_info);
       p_audio_encoder->setOutput(*p_muxer);
       p_audio_encoder->begin();
     }
@@ -175,6 +190,7 @@ class VideoMuxer {
   Stream* p_audio = nullptr;
   AudioEncoder* p_audio_encoder = nullptr;
   AudioInfo audio_info;
+  AudioInfoSupport* p_source_audio_info = nullptr;
   VideoFrameSource* p_video = nullptr;
   VideoEncoder* p_video_encoder = nullptr;
   MuxerVideoSink video_sink;
