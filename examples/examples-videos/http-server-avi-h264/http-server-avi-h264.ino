@@ -9,7 +9,7 @@
  * `vlc http://<esp32-ip-address>/`
  *
  * On an ESP32-S3 board, swap H264Encoder for H264EncoderESP32S3
- * (AudioTools/AudioCodecs/CodecH264ESP32S3.h) to use the hardware/esp_h264
+ * (AudioTools/Video/CodecH264ESP32S3.h) to use the hardware/esp_h264
  * backend (https://github.com/pschatzmann/ESP32S3-h264) instead - it also
  * offers a built-in camera-capture loop (see that library's own
  * CameraEncoderUDP example) if you don't need MuxerAVI/HTTP.
@@ -34,7 +34,7 @@
 #include "AudioTools.h"
 #include "AudioTools/Communication/AudioHttp.h"
 #include "AudioTools/AudioCodecs/ContainerAVI.h"
-#include "AudioTools/AudioCodecs/CodecH264.h"
+#include "AudioTools/Video/CodecH264.h"
 #include "esp_camera.h"
 
 // ---- WiFi ----
@@ -94,7 +94,7 @@ bool setupCamera() {
   config.xclk_freq_hz = 20000000;
   config.ledc_timer = LEDC_TIMER_0;
   config.ledc_channel = LEDC_CHANNEL_0;
-  config.pixel_format = PIXFORMAT_YUV422;  // H264Encoder::encodeFrameYuv422()
+  config.pixel_format = PIXFORMAT_YUV422;  // matches h264Encoder.setVideoFormat(VideoFormat::YUV422) below
   config.frame_size = camera_frame_size;
   config.fb_count = 2;
   config.fb_location = CAMERA_FB_IN_PSRAM;
@@ -122,6 +122,7 @@ void sendVideo(Print *out) {
 
   h264Encoder.setOutput(muxer);  // encoded NAL units go straight into the
                                  // 'video/avi' container as they're produced
+  h264Encoder.setVideoFormat(VideoFormat::YUV422);  // matches the camera's raw output
   h264Encoder.setSize(video_width, video_height);
   h264Encoder.setKeyframeInterval((int)video_fps);  // one keyframe/sec
   h264Encoder.setQp(30);
@@ -137,7 +138,7 @@ void sendVideo(Print *out) {
       continue;
     }
     if (fb->format == PIXFORMAT_YUV422) {
-      h264Encoder.encodeFrameYuv422(fb->buf);
+      h264Encoder.write(fb->buf, fb->len);
     }
     esp_camera_fb_return(fb);
 

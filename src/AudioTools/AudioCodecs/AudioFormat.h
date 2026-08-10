@@ -350,6 +350,26 @@ inline bool isWavFormat(AudioFormat format) {
   return mime != nullptr && strcmp(mime, "audio/wav") == 0;
 }
 
+/// @brief Best-effort inverse of toMime(): maps a mime type (e.g. an
+/// AudioEncoder's mime()) back to the AudioFormat wav code it came from -
+/// AudioFormat::UNKNOWN if `mime` is null or doesn't match any of
+/// toMime()'s mappings (most codecs - Opus, FLAC, GSM, ... - have no wav
+/// code at all, so this can never be exhaustive; "audio/wav" itself maps
+/// back to PCM specifically, even though toMime() also uses it for every
+/// ADPCM variant, since PCM is the common case).
+/// @ingroup video
+inline AudioFormat fromMime(const char* mime) {
+  if (mime == nullptr) return AudioFormat::UNKNOWN;
+  if (strcmp(mime, "audio/wav") == 0) return AudioFormat::PCM;
+  if (strcmp(mime, "audio/l32f") == 0) return AudioFormat::IEEE_FLOAT;
+  if (strcmp(mime, "audio/alaw") == 0) return AudioFormat::ALAW;
+  if (strcmp(mime, "audio/mulaw") == 0) return AudioFormat::MULAW;
+  if (strcmp(mime, "audio/mpeg") == 0) return AudioFormat::MP3;
+  if (strcmp(mime, "audio/aac") == 0) return AudioFormat::AAC;
+  if (strcmp(mime, "audio/alac") == 0) return AudioFormat::ALAC;
+  return AudioFormat::UNKNOWN;
+}
+
 /**
  * @brief AudioInfo extended with a WAVEFORMATEX-style codec tag (the "wav
  * code"): identifies the codec (PCM, AAC, ALAC, ...) - AudioFormat::UNKNOWN

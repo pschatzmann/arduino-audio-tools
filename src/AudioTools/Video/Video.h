@@ -17,20 +17,38 @@ namespace audio_tools {
 /// @ingroup video
 enum StreamContentType { Audio, Video };
 
-/// @brief Video codec identifier for the (single) video stream of a
-/// container, shared by DemuxerAVI/MuxerAVI and DemuxerMP4 (much like
-/// AudioFormat is shared across the audio demuxers, despite its
-/// WAV-flavored name). H264 is the primary target for both; the others
-/// are AVI-specific conveniences.
+/// @brief Video codec/pixel-format identifier, shared by two unrelated
+/// uses: the (single) video stream of a container (DemuxerAVI/MuxerAVI and
+/// DemuxerMP4 - much like AudioFormat is shared across the audio demuxers,
+/// despite its WAV-flavored name), and the decoded-picture pixel format
+/// VideoDecoder::setVideoFormat() selects. H264 is the primary target for
+/// muxing; the others are AVI-specific conveniences or decoder-only.
 /// - H264/MPEG4: compressed, variable frame size -> use addVideoFrame()
 /// - MJPEG: one complete JPEG image per frame -> use addJpegFrame()
 /// - RAW: uncompressed 24-bit BGR -> use addVideoFrame()
 /// - YUV422: packed 4:2:2 (YUY2/YUYV), 16 bit/pixel -> use addYUV422Frame()
 /// - RGB565: uncompressed 16-bit RGB (5-6-5) -> use addRGB565Frame()
-/// - I420: planar 4:2:0 YUV (aka IYUV), 12 bit/pixel -> use addI420Frame()
+/// - RGB666: uncompressed 18-bit RGB, 3 bytes/pixel (each byte's 6
+///   significant bits left-justified) - decoder pixel output only, no
+///   dedicated Muxer addXxxFrame()
+/// - RGB888: uncompressed 24-bit RGB, 3 bytes/pixel, full precision -
+///   decoder pixel output only, no dedicated Muxer addXxxFrame()
+/// - I420: planar 4:2:0 YUV (aka IYUV/YUV420), 12 bit/pixel ->
+///   use addI420Frame()
 /// - UNKNOWN: decoder only - the codec did not match any of the above
 /// @ingroup video
-enum class VideoFormat { H264, MJPEG, MPEG4, RAW, YUV422, RGB565, I420, UNKNOWN };
+enum class VideoFormat {
+  H264,
+  MJPEG,
+  MPEG4,
+  RAW,
+  YUV422,
+  RGB565,
+  RGB666,
+  RGB888,
+  I420,
+  UNKNOWN
+};
 
 /// @brief Fixed per-frame size (bytes) for a raw/uncompressed VideoFormat
 /// at the given resolution - 0 for compressed formats (H264/MJPEG/MPEG4) or
@@ -41,6 +59,8 @@ inline size_t videoFrameSizeBytes(VideoFormat format, uint16_t width,
   size_t px = (size_t)width * (size_t)height;
   switch (format) {
     case VideoFormat::RAW:
+    case VideoFormat::RGB666:
+    case VideoFormat::RGB888:
       return px * 3;
     case VideoFormat::YUV422:
     case VideoFormat::RGB565:
@@ -50,6 +70,23 @@ inline size_t videoFrameSizeBytes(VideoFormat format, uint16_t width,
     default:
       return 0;
   }
+}
+
+/// @brief True if the given Annex-B H.264 access unit contains an IDR
+/// slice NAL unit (nal_unit_type 5) - the reliable way to tell a real
+/// keyframe/sync-sample apart from a P-frame, since nothing in the byte
+/// layout itself says so without inspecting NAL headers. Used e.g. to
+/// determine Muxer::addVideoFrame()'s isKeyFrame argument for an
+/// already-encoded VideoFormat::H264 frame.
+/// @ingroup video
+inline bool isH264KeyFrame(const uint8_t *data, size_t len) {
+  for (size_t i = 0; i + 3 < len; i++) {
+    if (data[i] == 0 && data[i + 1] == 0 && data[i + 2] == 1) {
+      if ((data[i + 3] & 0x1F) == 5) return true;  // IDR slice
+      i += 2;
+    }
+  }
+  return false;
 }
 
 /**
@@ -63,6 +100,9 @@ struct VideoInfo {
   uint16_t width = 0;
   /// Frame height in pixels
   uint16_t height = 0;
+  /// Frames/sec, if known - 0 if not (e.g. not yet determined, or a
+  /// VideoFrameSource that doesn't have a fixed rate).
+  float fps = 0;
   /// Video codec - VideoFormat::UNKNOWN if not (yet) determined
   VideoFormat format = VideoFormat::UNKNOWN;
   /// Fixed size of a single frame in bytes - only meaningful for
@@ -77,7 +117,7 @@ struct VideoInfo {
   uint32_t total_file_size = 0;
 
   bool operator==(const VideoInfo &alt) const {
-    return width == alt.width && height == alt.height &&
+    return width == alt.width && height == alt.height && fps == alt.fps &&
            format == alt.format && frame_size == alt.frame_size &&
            total_file_size == alt.total_file_size;
   }
@@ -85,9 +125,9 @@ struct VideoInfo {
   /// True if width/height are both defined
   operator bool() const { return width > 0 && height > 0; }
   void logInfo(const char *source = "") {
-    LOGI("%s width: %d / height: %d / format: %d / frame_size: %d / "
+    LOGI("%s width: %d / height: %d / fps: %f / format: %d / frame_size: %d / "
          "total_file_size: %d",
-         source, (int)width, (int)height, (int)format, (int)frame_size,
+         source, (int)width, (int)height, fps, (int)format, (int)frame_size,
          (int)total_file_size);
   }
 };
@@ -106,6 +146,118 @@ class VideoOutput : public Print {
  public:
   size_t write(uint8_t c) override { return write(&c, 1); }
   virtual size_t write(const uint8_t *data, size_t len) override = 0;
+};
+
+/**
+ * @brief Common interface for video decoders (e.g. H264Decoder,
+ * H264DecoderESP32S3 - CodecH264.h/CodecH264ESP32S3.h) - standardizes
+ * lifecycle (begin()/end()), the Print target decoded pictures are
+ * written to, and the pixel format they're written in (setVideoFormat()),
+ * on top of VideoOutput's write()/flush() (the encoded-bitstream input
+ * side, inherited unchanged). Concrete decoders may still expose their
+ * own additional config knobs beyond this shared surface.
+ * @ingroup video
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class VideoDecoder : public VideoOutput {
+ public:
+  virtual ~VideoDecoder() = default;
+  /// Defines the target each decoded picture is written to.
+  virtual void setOutput(Print &out) = 0;
+  /// Selects the pixel format written to setOutput()'s target - e.g.
+  /// VideoFormat::RGB565 (the common TFT wire format), RGB666/RGB888 for
+  /// higher color depth displays, or I420 to pass the decoded planes
+  /// through unconverted. Not every decoder backend supports every value
+  /// (e.g. RGB666/RGB888 are TinyH264-only, not available on the
+  /// esp_h264 backend) - unsupported values are logged and ignored (the
+  /// previously selected format stays in effect); see the concrete
+  /// class for exactly which ones it supports. Call before begin().
+  virtual void setVideoFormat(VideoFormat format) = 0;
+  /// Reports the format/dimensions of the picture written to
+  /// setOutput()'s target - VideoInfo::format is always the format most
+  /// recently selected via setVideoFormat() (RGB565 if never called),
+  /// the reliable way to determine it (rather than assuming); width/
+  /// height reflect the most recently decoded picture, 0 before any
+  /// picture has been decoded.
+  virtual VideoInfo videoInfo() = 0;
+  /// Initializes the decoder (allocates its picture buffers, etc).
+  virtual bool begin() = 0;
+  /// Releases the decoder's resources.
+  virtual void end() = 0;
+};
+
+/**
+ * @brief Common interface for video encoders (e.g. H264Encoder,
+ * H264EncoderESP32S3 - CodecH264.h/CodecH264ESP32S3.h) - standardizes
+ * lifecycle (begin()/end()), the Print target the encoded bitstream is
+ * written to, the raw-picture input format (setVideoFormat()), and a
+ * single write() that encodes one picture in that format and writes the
+ * result to setOutput()'s target - one write() call per picture, mirroring
+ * VideoOutput's write()-per-frame convention on the decoder side. Concrete
+ * encoders may still expose their own additional config knobs (e.g.
+ * bitrate/QP) beyond this shared surface.
+ * @ingroup video
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class VideoEncoder {
+ public:
+  virtual ~VideoEncoder() = default;
+  /// Defines the target the encoded bitstream is written to.
+  virtual void setOutput(Print &out) = 0;
+  /// Selects the raw picture format write() expects - e.g.
+  /// VideoFormat::I420 (planar Y/U/V, concatenated in one buffer),
+  /// YUV422 (packed YUYV), RGB565/RGB666/RGB888 (packed). Not every
+  /// encoder backend supports every value - unsupported values are
+  /// logged and ignored (the previously selected format stays in
+  /// effect); see the concrete class for exactly which ones it supports.
+  /// Call before the first write().
+  virtual void setVideoFormat(VideoFormat format) = 0;
+  /// Reports the format/dimensions of the bitstream written to
+  /// setOutput()'s target - VideoInfo::format is the actual encoded
+  /// codec (e.g. VideoFormat::H264), NOT setVideoFormat()'s raw input
+  /// format, the reliable way to determine it (rather than assuming);
+  /// width/height match the encoder's configured picture size (e.g.
+  /// setSize()), 0 if that was never called.
+  virtual VideoInfo videoInfo() = 0;
+  /// Initializes the encoder (allocates its picture buffers, etc).
+  virtual bool begin() = 0;
+  /// Releases the encoder's resources.
+  virtual void end() = 0;
+  /// Encodes one raw picture (in setVideoFormat()'s format, sized for
+  /// the encoder's configured width/height) and writes the result to
+  /// setOutput()'s target, returning the number of bytes written (0 if
+  /// nothing was, e.g. setOutput()/size wasn't configured, or the
+  /// format is unsupported).
+  virtual size_t write(const uint8_t *data, size_t len) = 0;
+};
+
+/**
+ * @brief Pull-based provider of one already-encoded video/image frame at a
+ * time - e.g. wraps a camera capture + H264Encoder/MJPEG capture pipeline.
+ * Used by VideoMuxerWithTasks's video task, which calls nextFrame() once
+ * per iteration, at the rate given by videoInfo().fps. Implementations
+ * should produce/capture the frame here directly (not defer it): a slow
+ * nextFrame() only delays whatever is pulling from it.
+ * @ingroup video
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class VideoFrameSource {
+ public:
+  virtual ~VideoFrameSource() = default;
+  /// Provides the next encoded frame: return a pointer to the frame's
+  /// bytes (only required to stay valid until the next nextFrame() call)
+  /// and set `len` to its size - or return nullptr if no frame is
+  /// available yet, in which case the caller skips this iteration.
+  virtual const uint8_t *nextFrame(size_t &len) = 0;
+  /// Provides the width/height/fps/format (and, if known, frame_size/
+  /// total_file_size) of the frames returned by nextFrame() - width,
+  /// height, fps and format must be set, since VideoMuxerWithTasks uses
+  /// them directly to configure the Muxer it writes to instead of
+  /// requiring the caller to duplicate the same values there.
+  virtual VideoInfo videoInfo() = 0;
 };
 
 /**

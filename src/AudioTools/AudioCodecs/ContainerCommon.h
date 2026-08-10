@@ -119,6 +119,38 @@ class Muxer : public VideoOutput {
 };
 
 /**
+ * @brief Print sink that writes each frame it receives to a Muxer's video
+ * track via addVideoFrame(), determining a real isKeyFrame value instead
+ * of relying on that method's isKeyFrame=true default - via
+ * isH264KeyFrame() (Video.h) when the Muxer's video track is
+ * VideoFormat::H264, otherwise always true (correct for e.g. MJPEG, where
+ * every frame is independently decodable).
+ *
+ * Meant as the setOutput() target for a VideoEncoder whose write() would
+ * otherwise stream straight to the Muxer's own generic, format-dispatching
+ * write() (which has no isKeyFrame parameter at all) - or for any other
+ * already-encoded-frame producer that only has a plain Print to write to.
+ * @ingroup video
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class MuxerVideoSink : public Print {
+ public:
+  void begin(Muxer &muxer) { p_muxer = &muxer; }
+  size_t write(uint8_t c) override { return write(&c, 1); }
+  size_t write(const uint8_t *data, size_t len) override {
+    bool is_key = true;
+    if (p_muxer->getVideoInfo().format == VideoFormat::H264) {
+      is_key = isH264KeyFrame(data, len);
+    }
+    return p_muxer->addVideoFrame(data, len, is_key);
+  }
+
+ protected:
+  Muxer *p_muxer = nullptr;
+};
+
+/**
  * @brief Common interface for demuxers (DemuxerAVI, DemuxerMP4) that
  * split a container's video and (optional) audio tracks apart. Write
  * code against this interface instead of a concrete class if it should

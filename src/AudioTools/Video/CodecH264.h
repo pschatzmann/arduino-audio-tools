@@ -12,13 +12,20 @@
  * @brief H.264 encoding/decoding using https://github.com/pschatzmann/TinyH264
  */
 
-namespace audio_tools {
+/// Allocator H264Decoder uses for its decoded picture buffers - PSRAM
+/// (falling back to the regular heap if absent/exhausted) on ESP32, the
+/// regular heap elsewhere. Define this yourself before including this
+/// header to override (e.g. to force the regular heap on an ESP32 board
+/// without PSRAM).
+#ifndef H264_DECODER_DEFAULT_ALLOCATOR
+#ifdef ESP32
+#define H264_DECODER_DEFAULT_ALLOCATOR tinyh264::PSRAMAllocatorESP32<uint8_t>
+#else
+#define H264_DECODER_DEFAULT_ALLOCATOR std::allocator<uint8_t>
+#endif
+#endif
 
-/// @brief Pixel format H264Decoder writes decoded pictures to setOutput()
-/// in - see TinyH264Decoder's toRGB565()/toRGB666()/toRGB888()/toYUV420()
-/// for exactly what each one produces.
-/// @ingroup h264
-enum class H264PixelFormat { RGB565, RGB666, RGB888, YUV420 };
+namespace audio_tools {
 
 /**
  * @brief H.264 video decoder: wraps TinyH264Decoder
@@ -26,8 +33,8 @@ enum class H264PixelFormat { RGB565, RGB666, RGB888, YUV420 };
  * plugged directly into e.g. DemuxerAVI::setOutputVideo()/
  * DemuxerMP4::setOutputVideo(). Consumes an Annex-B H.264 bitstream via
  * write() and, once a complete picture has been decoded, writes it -
- * converted to setPixelFormat()'s format (RGB565 by default, the common TFT
- * wire format) - to the Print target configured via setOutput(), one
+ * converted to setVideoFormat()'s format (RGB565 by default, the common
+ * TFT wire format) - to the Print target configured via setOutput(), one
  * write() call per decoded picture.
  *
  * write()/flush() implement the VideoOutput contract (see Video.h): write()
@@ -38,34 +45,55 @@ enum class H264PixelFormat { RGB565, RGB666, RGB888, YUV420 };
  * because some producers (e.g. DemuxerAVI/DemuxerMP4) call it
  * unconditionally after each frame.
  *
- * The Allocator template parameter is forwarded to TinyH264Decoder - pass a
- * PSRAM allocator (e.g. PSRAMAllocatorESP32<uint8_t>, from
- * TinyH264/src/PSRAMAllocatorESP32.h) to place the decoded picture buffers
- * there instead of the default heap; see TinyH264Decoder.h's own file
- * comment.
+ * Uses H264_DECODER_DEFAULT_ALLOCATOR for the decoded picture buffers -
+ * see that macro's own comment above for the PSRAM-on-ESP32/heap-
+ * elsewhere default it picks, and how to override it.
  *
  * @ingroup h264
  * @ingroup decoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-template <typename Allocator = std::allocator<uint8_t>>
-class H264Decoder : public VideoOutput {
+class H264Decoder : public VideoDecoder {
  public:
   H264Decoder() { decoder_.setCallback(onFrame, this); }
 
   /// Defines the target the decoded picture is written to, one write()
   /// call per decoded picture, in the format selected via
-  /// setPixelFormat() (RGB565 by default).
-  void setOutput(Print &out) { p_out = &out; }
+  /// setVideoFormat() (RGB565 by default).
+  void setOutput(Print &out) override { p_out = &out; }
 
   /// Selects the pixel format written to setOutput()'s target - RGB565
   /// (the default) is what most TFT display libraries expect; RGB666/
-  /// RGB888 for higher color depth displays; YUV420 to pass the decoded
-  /// planes through unconverted (tightly packed I420: Y bytes, then U
-  /// bytes, then V bytes, no row padding - see
-  /// TinyH264Decoder::toYUV420()).
-  void setPixelFormat(H264PixelFormat format) { pixel_format = format; }
+  /// RGB888 for higher color depth displays; I420 to pass the decoded
+  /// planes through unconverted (tightly packed: Y bytes, then U bytes,
+  /// then V bytes, no row padding - see TinyH264Decoder::toYUV420()).
+  /// Any other VideoFormat is logged and ignored (previous format kept).
+  void setVideoFormat(VideoFormat format) override {
+    switch (format) {
+      case VideoFormat::RGB565:
+      case VideoFormat::RGB666:
+      case VideoFormat::RGB888:
+      case VideoFormat::I420:
+        pixel_format = format;
+        break;
+      default:
+        LOGW("H264Decoder: unsupported VideoFormat %d", (int)format);
+        break;
+    }
+  }
+
+  /// Reports the format/dimensions of the picture written to
+  /// setOutput()'s target - format is setVideoFormat()'s most recently
+  /// selected value (RGB565 if never called); width/height are the most
+  /// recently decoded picture's (0 before any picture has been decoded).
+  VideoInfo videoInfo() override {
+    VideoInfo info;
+    info.format = pixel_format;
+    info.width = (uint16_t)decoder_.width();
+    info.height = (uint16_t)decoder_.height();
+    return info;
+  }
 
   /// Runtime-active maximum stored reference pictures - see
   /// TinyH264Decoder::setMaxRefFrames().
@@ -73,13 +101,13 @@ class H264Decoder : public VideoOutput {
 
   /// Reserves the decoder's picture buffers up front - see
   /// TinyH264Decoder::begin().
-  bool begin() {
+  bool begin() override {
     decoder_.begin();
     return true;
   }
 
   /// Releases the decoder's picture buffers - see TinyH264Decoder::end().
-  void end() { decoder_.end(); }
+  void end() override { decoder_.end(); }
 
   /// Feeds one chunk of Annex-B H.264 data - may be called more than once
   /// per frame (e.g. from a demuxer that hands over payload in pieces).
@@ -100,15 +128,15 @@ class H264Decoder : public VideoOutput {
 
   /// Direct access to the wrapped TinyH264Decoder, e.g. for its width()/
   /// height()/y()/u()/v()/getY()/getU()/getV() accessors.
-  tinyh264::TinyH264Decoder<Allocator> &driver() { return decoder_; }
+  tinyh264::TinyH264Decoder<H264_DECODER_DEFAULT_ALLOCATOR> &driver() { return decoder_; }
 
  protected:
-  tinyh264::TinyH264Decoder<Allocator> decoder_;
+  tinyh264::TinyH264Decoder<H264_DECODER_DEFAULT_ALLOCATOR> decoder_;
   Print *p_out = nullptr;
-  H264PixelFormat pixel_format = H264PixelFormat::RGB565;
+  VideoFormat pixel_format = VideoFormat::RGB565;
   Vector<uint8_t> frame_buffer;
 
-  static void onFrame(tinyh264::TinyH264Decoder<Allocator> &decoder,
+  static void onFrame(tinyh264::TinyH264Decoder<H264_DECODER_DEFAULT_ALLOCATOR> &decoder,
                        void *userData) {
     static_cast<H264Decoder *>(userData)->writeFrame();
   }
@@ -119,34 +147,36 @@ class H264Decoder : public VideoOutput {
     size_t h = decoder_.height();
     size_t n = 0;
     switch (pixel_format) {
-      case H264PixelFormat::RGB565: {
+      case VideoFormat::RGB565: {
         size_t needed = w * h;
         if (frame_buffer.size() < needed * 2) frame_buffer.resize(needed * 2);
         n = decoder_.toRGB565((uint16_t *)frame_buffer.data(), needed);
         if (n > 0) p_out->write(frame_buffer.data(), n * 2);
         break;
       }
-      case H264PixelFormat::RGB666: {
+      case VideoFormat::RGB666: {
         size_t needed = w * h * 3;
         if (frame_buffer.size() < needed) frame_buffer.resize(needed);
         n = decoder_.toRGB666(frame_buffer.data(), needed);
         if (n > 0) p_out->write(frame_buffer.data(), n);
         break;
       }
-      case H264PixelFormat::RGB888: {
+      case VideoFormat::RGB888: {
         size_t needed = w * h * 3;
         if (frame_buffer.size() < needed) frame_buffer.resize(needed);
         n = decoder_.toRGB888(frame_buffer.data(), needed);
         if (n > 0) p_out->write(frame_buffer.data(), n);
         break;
       }
-      case H264PixelFormat::YUV420: {
+      case VideoFormat::I420: {
         size_t needed = w * h + 2 * (w / 2) * (h / 2);
         if (frame_buffer.size() < needed) frame_buffer.resize(needed);
         n = decoder_.toYUV420(frame_buffer.data(), needed);
         if (n > 0) p_out->write(frame_buffer.data(), n);
         break;
       }
+      default:
+        break;
     }
   }
 };
@@ -154,12 +184,13 @@ class H264Decoder : public VideoOutput {
 /**
  * @brief H.264 video encoder: wraps TinyH264Encoder
  * (https://github.com/pschatzmann/TinyH264). Configure via setSize()/
- * setQp() (or setTargetBitrate() for rate control) same as TinyH264Encoder,
- * then feed raw pictures via encodeFrame()/encodeFrameRgb888()/
- * encodeFrameRgb666()/encodeFrameRgb565()/encodeFrameYuv422() - the
- * resulting Annex-B bitstream is written to the Print target configured via
- * setOutput() (e.g. a Muxer's addVideoFrame() by way of an adapter, or any
- * other Print) instead of a caller-supplied buffer.
+ * setQp() (or setTargetBitrate() for rate control) same as TinyH264Encoder
+ * and setVideoFormat() for the raw picture format write() expects (I420 -
+ * planar Y/U/V concatenated in one buffer - by default), then feed raw
+ * pictures via write() - the resulting Annex-B bitstream is written to the
+ * Print target configured via setOutput() (e.g. a Muxer's addVideoFrame()
+ * by way of an adapter, or any other Print) instead of a caller-supplied
+ * buffer.
  *
  * The internal bitstream scratch buffer starts at
  * kDefaultBitstreamBufferSize and grows (doubling, up to a few attempts)
@@ -180,21 +211,62 @@ class H264Decoder : public VideoOutput {
  * @copyright GPLv3
  */
 template <typename Allocator = std::allocator<uint8_t>>
-class H264Encoder {
+class H264Encoder : public VideoEncoder {
  public:
   /// Default size (bytes) of the internal bitstream scratch buffer -
   /// see setBitstreamBufferSize().
   static constexpr size_t kDefaultBitstreamBufferSize = 16384;
 
   H264Encoder(int width = 0, int height = 0, int keyframeInterval = 0)
-      : encoder_(width, height, keyframeInterval) {}
+      : encoder_(width, height, keyframeInterval) {
+    width_ = width;
+    height_ = height;
+  }
 
   /// Defines the target the encoded bitstream is written to, one write()
-  /// call per encodeFrame()-family call that actually produced output.
-  void setOutput(Print &out) { p_out = &out; }
+  /// call per write() call that actually produced output.
+  void setOutput(Print &out) override { p_out = &out; }
+
+  /// Selects the raw picture format write() expects - VideoFormat::I420
+  /// (the default: planar Y/U/V, concatenated Y then U then V in one
+  /// buffer, split via setSize()'s width/height), YUV422 (packed YUYV),
+  /// RGB565/RGB666/RGB888 (packed) - see TinyH264Encoder's own
+  /// encodeFrame()-family doc comments (h264_encoder.h) for exactly what
+  /// each byte layout is. Any other VideoFormat is logged and ignored
+  /// (previous format kept).
+  void setVideoFormat(VideoFormat format) override {
+    switch (format) {
+      case VideoFormat::I420:
+      case VideoFormat::YUV422:
+      case VideoFormat::RGB565:
+      case VideoFormat::RGB666:
+      case VideoFormat::RGB888:
+        input_format = format;
+        break;
+      default:
+        LOGW("H264Encoder: unsupported VideoFormat %d", (int)format);
+        break;
+    }
+  }
+
+  /// Reports the codec/dimensions of the bitstream written to
+  /// setOutput()'s target - format is always VideoFormat::H264 (NOT
+  /// setVideoFormat()'s raw input format); width/height match setSize()
+  /// (0 if that was never called).
+  VideoInfo videoInfo() override {
+    VideoInfo info;
+    info.format = VideoFormat::H264;
+    info.width = (uint16_t)width_;
+    info.height = (uint16_t)height_;
+    return info;
+  }
 
   /// See TinyH264Encoder::setSize()
-  void setSize(int width, int height) { encoder_.setSize(width, height); }
+  void setSize(int width, int height) {
+    width_ = width;
+    height_ = height;
+    encoder_.setSize(width, height);
+  }
   /// See TinyH264Encoder::setQp()
   void setQp(int qp) { encoder_.setQp(qp); }
   /// See TinyH264Encoder::setTargetBitrate()
@@ -221,50 +293,62 @@ class H264Encoder {
     if (size > bitstream.size()) bitstream.resize(size);
   }
 
+  /// See TinyH264Encoder::begin() - equivalent to
+  /// begin(reserveColorConversionScratch=false); see that overload if you
+  /// need to pass true.
+  bool begin() override { return begin(false); }
   /// See TinyH264Encoder::begin()
-  bool begin(bool reserveColorConversionScratch = false) {
+  bool begin(bool reserveColorConversionScratch) {
     encoder_.begin(reserveColorConversionScratch);
     return true;
   }
   /// See TinyH264Encoder::end()
-  void end() { encoder_.end(); }
+  void end() override { encoder_.end(); }
 
-  /// The QP actually used by the most recent encodeFrame()-family call.
+  /// The QP actually used by the most recent write() call.
   int lastQp() const { return encoder_.lastQp(); }
 
-  /// See TinyH264Encoder::encodeFrame() - writes the result to setOutput()
-  /// instead of a caller-supplied buffer; returns the number of bytes
-  /// written (0 if nothing was, e.g. setSize()/setOutput() was never
-  /// called).
-  size_t encodeFrame(const uint8_t *srcY, const uint8_t *srcU,
-                      const uint8_t *srcV) {
-    return writeOut([&](uint8_t *dst, size_t cap) {
-      return encoder_.encodeFrame(srcY, srcU, srcV, dst, cap);
-    });
-  }
-  /// See TinyH264Encoder::encodeFrameRgb888()
-  size_t encodeFrameRgb888(const uint8_t *rgb) {
-    return writeOut([&](uint8_t *dst, size_t cap) {
-      return encoder_.encodeFrameRgb888(rgb, dst, cap);
-    });
-  }
-  /// See TinyH264Encoder::encodeFrameRgb666()
-  size_t encodeFrameRgb666(const uint8_t *rgb666) {
-    return writeOut([&](uint8_t *dst, size_t cap) {
-      return encoder_.encodeFrameRgb666(rgb666, dst, cap);
-    });
-  }
-  /// See TinyH264Encoder::encodeFrameRgb565()
-  size_t encodeFrameRgb565(const uint16_t *rgb565) {
-    return writeOut([&](uint8_t *dst, size_t cap) {
-      return encoder_.encodeFrameRgb565(rgb565, dst, cap);
-    });
-  }
-  /// See TinyH264Encoder::encodeFrameYuv422()
-  size_t encodeFrameYuv422(const uint8_t *yuyv) {
-    return writeOut([&](uint8_t *dst, size_t cap) {
-      return encoder_.encodeFrameYuv422(yuyv, dst, cap);
-    });
+  /// Encodes one raw picture, in setVideoFormat()'s format (I420 by
+  /// default), sized for setSize()'s width/height, and writes the
+  /// resulting Annex-B bitstream to setOutput() - returns the number of
+  /// bytes written (0 if nothing was, e.g. setSize()/setOutput() was
+  /// never called, or `len` doesn't match the configured format/size).
+  /// `len` is only used to validate the I420 case (the other formats are
+  /// packed buffers TinyH264Encoder itself size-checks internally); see
+  /// TinyH264Encoder's own encodeFrame()-family doc comments
+  /// (h264_encoder.h) for exactly what each byte layout/size is.
+  size_t write(const uint8_t *data, size_t len) override {
+    switch (input_format) {
+      case VideoFormat::I420: {
+        size_t ySize = (size_t)width_ * height_;
+        size_t cSize = (size_t)(width_ / 2) * (height_ / 2);
+        if (len < ySize + 2 * cSize) return 0;
+        const uint8_t *srcY = data;
+        const uint8_t *srcU = data + ySize;
+        const uint8_t *srcV = data + ySize + cSize;
+        return writeOut([&](uint8_t *dst, size_t cap) {
+          return encoder_.encodeFrame(srcY, srcU, srcV, dst, cap);
+        });
+      }
+      case VideoFormat::YUV422:
+        return writeOut([&](uint8_t *dst, size_t cap) {
+          return encoder_.encodeFrameYuv422(data, dst, cap);
+        });
+      case VideoFormat::RGB565:
+        return writeOut([&](uint8_t *dst, size_t cap) {
+          return encoder_.encodeFrameRgb565((const uint16_t *)data, dst, cap);
+        });
+      case VideoFormat::RGB666:
+        return writeOut([&](uint8_t *dst, size_t cap) {
+          return encoder_.encodeFrameRgb666(data, dst, cap);
+        });
+      case VideoFormat::RGB888:
+        return writeOut([&](uint8_t *dst, size_t cap) {
+          return encoder_.encodeFrameRgb888(data, dst, cap);
+        });
+      default:
+        return 0;
+    }
   }
 
   /// Direct access to the wrapped TinyH264Encoder, e.g. for its
@@ -279,6 +363,9 @@ class H264Encoder {
   tinyh264::TinyH264Encoder<Allocator> encoder_;
   Print *p_out = nullptr;
   Vector<uint8_t> bitstream;
+  VideoFormat input_format = VideoFormat::I420;
+  int width_ = 0;
+  int height_ = 0;
 
   template <typename Fn>
   size_t writeOut(Fn encodeInto) {

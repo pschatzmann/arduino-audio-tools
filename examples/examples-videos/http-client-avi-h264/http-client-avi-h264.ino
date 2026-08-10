@@ -12,7 +12,7 @@
  *      \-> H264Decoder (H.264 decode -> RGB565) -> TFTOutput (draw) (video)
  *
  * On an ESP32-S3 board, swap H264Decoder for H264DecoderESP32S3
- * (AudioTools/AudioCodecs/CodecH264ESP32S3.h) to use the hardware/esp_h264
+ * (AudioTools/Video/CodecH264ESP32S3.h) to use the hardware/esp_h264
  * backend (https://github.com/pschatzmann/ESP32S3-h264) instead - same
  * setOutput()/setPixelFormat() surface, no other change needed below.
  *
@@ -28,7 +28,7 @@
 #include "AudioTools/Communication/AudioHttp.h"
 #include "AudioTools/AudioCodecs/ContainerAVI.h"
 #include "AudioTools/AudioCodecs/CodecHelix.h"
-#include "AudioTools/AudioCodecs/CodecH264.h"
+#include "AudioTools/Video/CodecH264.h"
 #include <TFT_eSPI.h>
 
 // ---- WiFi ----
@@ -43,7 +43,7 @@ const char *video_url = "http://192.168.1.100/";
 /// its class comment), so this can push the whole frame in one go.
 class TFTOutput : public Print {
  public:
-  TFTOutput(TFT_eSPI &tft, H264Decoder<> &decoder)
+  TFTOutput(TFT_eSPI &tft, H264Decoder &decoder)
       : p_tft(&tft), p_decoder(&decoder) {}
   size_t write(uint8_t c) override { return write(&c, 1); }
   size_t write(const uint8_t *data, size_t len) override {
@@ -54,11 +54,11 @@ class TFTOutput : public Print {
 
  protected:
   TFT_eSPI *p_tft;
-  H264Decoder<> *p_decoder;
+  H264Decoder *p_decoder;
 };
 
 TFT_eSPI tft = TFT_eSPI();
-H264Decoder<> h264Decoder;
+H264Decoder h264Decoder;
 TFTOutput tftOutput(tft, h264Decoder);
 
 I2SStream i2s;
