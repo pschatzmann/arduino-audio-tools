@@ -25,5 +25,7 @@ var searchData=
   ['oscsincos_22',['OscSinCos',['../classffft_1_1_osc_sin_cos.html',1,'ffft']]],
   ['ourrtspclient_23',['OurRTSPClient',['../classaudiotools__rtsp_1_1_our_r_t_s_p_client.html',1,'audiotools_rtsp']]],
   ['oursink_24',['OurSink',['../classaudiotools__rtsp_1_1_our_sink.html',1,'audiotools_rtsp']]],
-  ['outputmixer_25',['OutputMixer',['../classaudio__tools_1_1_output_mixer.html',1,'audio_tools']]]
+  ['outputmixer_25',['OutputMixer',['../classaudio__tools_1_1_output_mixer.html',1,'audio_tools']]],
+  ['outputopencv_26',['OutputOpenCV',['../classaudio__tools_1_1_output_open_c_v.html',1,'audio_tools']]],
+  ['outputtft_27',['OutputTFT',['../classaudio__tools_1_1_output_t_f_t.html',1,'audio_tools']]]
 ];

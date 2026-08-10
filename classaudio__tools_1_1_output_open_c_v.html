@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: JpegOpenCV Class Reference</title>
+<title>arduino-audio-tools: OutputOpenCV Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,7 +69,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_jpeg_open_c_v.html">JpegOpenCV</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_output_open_c_v.html">OutputOpenCV</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -77,67 +77,81 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="classaudio__tools_1_1_jpeg_open_c_v-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">JpegOpenCV Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__video.html">Video</a></div></div></div>
+<a href="classaudio__tools_1_1_output_open_c_v-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">OutputOpenCV Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__video.html">Video</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Display image with opencv to be used on the desktop.  
- <a href="classaudio__tools_1_1_jpeg_open_c_v.html#details">More...</a></p>
+<p>Display a video frame with OpenCV, to be used on the desktop - <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a0a5417ce14732e9bdb402be642ebe9ea">VideoFormat::MJPEG</a> (the default) expects one complete, already-encoded JPEG image assembled across <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> calls and closed off by <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a>, as produced by e.g. <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html" title="AVI Container Decoder which can be fed with small chunks of data. The minimum length must be bigger t...">DemuxerAVI</a>. Any other <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#aa49f2579ff22bf881ce2988162b6d7a1" title="Selects the format of the data passed to write() - see class comment.">setVideoFormat()</a> value (e.g. RGB565, the common raw picture format decoders like <a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a> produce) expects one complete, already-decoded picture per <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call instead - <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a661d9a2bd192a6e1427cc59c59217f9c">setSize()</a> must be called too in that case, since unlike JPEG a raw picture doesn't carry its own dimensions.  
+ <a href="classaudio__tools_1_1_output_open_c_v.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_jpeg_open_c_v_8h_source.html">JpegOpenCV.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_output_open_c_v_8h_source.html">OutputOpenCV.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for JpegOpenCV:</div>
+Inheritance diagram for OutputOpenCV:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classaudio__tools_1_1_jpeg_open_c_v.png" usemap="#JpegOpenCV_map" alt=""/>
-  <map id="JpegOpenCV_map" name="JpegOpenCV_map">
-<area href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="VideoOutput" shape="rect" coords="0,56,89,80"/>
-<area href="class_print.html" alt="Print" shape="rect" coords="0,0,89,24"/>
+  <img src="classaudio__tools_1_1_output_open_c_v.png" usemap="#OutputOpenCV_map" alt=""/>
+  <map id="OutputOpenCV_map" name="OutputOpenCV_map">
+<area href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="VideoOutput" shape="rect" coords="0,56,98,80"/>
+<area href="class_print.html" alt="Print" shape="rect" coords="0,0,98,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a21800b8762708bc34c299a400584a870" id="r_a21800b8762708bc34c299a400584a870"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_jpeg_open_c_v.html#a21800b8762708bc34c299a400584a870">JpegOpenCV</a> ()=default</td></tr>
-<tr class="separator:a21800b8762708bc34c299a400584a870"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e6548c671b963642887f5db3fc8af57" id="r_a2e6548c671b963642887f5db3fc8af57"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a2e6548c671b963642887f5db3fc8af57">OutputOpenCV</a> ()=default</td></tr>
+<tr class="separator:a2e6548c671b963642887f5db3fc8af57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a473a08fbb41a997860a55213bc367d44" id="r_a473a08fbb41a997860a55213bc367d44"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_print.html#a473a08fbb41a997860a55213bc367d44">availableForWrite</a> ()</td></tr>
 <tr class="separator:a473a08fbb41a997860a55213bc367d44"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a04f2540d940cc37b5c2538ed8e5b54be" id="r_a04f2540d940cc37b5c2538ed8e5b54be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_jpeg_open_c_v.html#a04f2540d940cc37b5c2538ed8e5b54be">flush</a> () override</td></tr>
-<tr class="memdesc:a04f2540d940cc37b5c2538ed8e5b54be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays the assembled jpeg image, then resets for the next frame.  <br /></td></tr>
+<tr class="memitem:a04f2540d940cc37b5c2538ed8e5b54be" id="r_a04f2540d940cc37b5c2538ed8e5b54be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a04f2540d940cc37b5c2538ed8e5b54be">flush</a> () override</td></tr>
 <tr class="separator:a04f2540d940cc37b5c2538ed8e5b54be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_jpeg_open_c_v.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
+<tr class="memitem:a661d9a2bd192a6e1427cc59c59217f9c" id="r_a661d9a2bd192a6e1427cc59c59217f9c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a661d9a2bd192a6e1427cc59c59217f9c">setSize</a> (uint16_t <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#ad0eab1042455a2067c812ab8071d5376">width</a>, uint16_t <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a81c9f8d0b8c3b49d770be14dbe9f0d37">height</a>)</td></tr>
+<tr class="separator:a661d9a2bd192a6e1427cc59c59217f9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa49f2579ff22bf881ce2988162b6d7a1" id="r_aa49f2579ff22bf881ce2988162b6d7a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_open_c_v.html#aa49f2579ff22bf881ce2988162b6d7a1">setVideoFormat</a> (<a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a> format)</td></tr>
+<tr class="memdesc:aa49f2579ff22bf881ce2988162b6d7a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects the format of the data passed to <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> - see class comment.  <br /></td></tr>
+<tr class="separator:aa49f2579ff22bf881ce2988162b6d7a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e40195a444e7f20508961cfeacc9b04" id="r_a1e40195a444e7f20508961cfeacc9b04"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a1e40195a444e7f20508961cfeacc9b04">write</a> (uint8_t c) override</td></tr>
 <tr class="separator:a1e40195a444e7f20508961cfeacc9b04"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a1e5b20fed15743656bb6d2e6a6ea6269" id="r_a1e5b20fed15743656bb6d2e6a6ea6269"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_jpeg_open_c_v.html#a1e5b20fed15743656bb6d2e6a6ea6269">display</a> ()</td></tr>
-<tr class="separator:a1e5b20fed15743656bb6d2e6a6ea6269"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a6ed553f95c529ddfeae0c763e32078" id="r_a5a6ed553f95c529ddfeae0c763e32078"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a5a6ed553f95c529ddfeae0c763e32078">displayJpeg</a> ()</td></tr>
+<tr class="separator:a5a6ed553f95c529ddfeae0c763e32078"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1cfbeb3973b6a9e39956ecfd2d5ecc2" id="r_ae1cfbeb3973b6a9e39956ecfd2d5ecc2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_open_c_v.html#ae1cfbeb3973b6a9e39956ecfd2d5ecc2">displayRaw</a> (const uint8_t *data, size_t len)</td></tr>
+<tr class="separator:ae1cfbeb3973b6a9e39956ecfd2d5ecc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ac2ebcb1f61447b4e89c39d7cd6cc12" id="r_a1ac2ebcb1f61447b4e89c39d7cd6cc12"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a1ac2ebcb1f61447b4e89c39d7cd6cc12">ensureWindow</a> ()</td></tr>
+<tr class="separator:a1ac2ebcb1f61447b4e89c39d7cd6cc12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:aa66a35e5edf58ce00047afcd1d4f455e" id="r_aa66a35e5edf58ce00047afcd1d4f455e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_print.html#aa66a35e5edf58ce00047afcd1d4f455e">_timeout</a> = 10</td></tr>
 <tr class="separator:aa66a35e5edf58ce00047afcd1d4f455e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a04375848f50fa5be8a927c3a6446af67" id="r_a04375848f50fa5be8a927c3a6446af67"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_jpeg_open_c_v.html#a04375848f50fa5be8a927c3a6446af67">create_window</a> = true</td></tr>
+<tr class="memitem:a04375848f50fa5be8a927c3a6446af67" id="r_a04375848f50fa5be8a927c3a6446af67"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a04375848f50fa5be8a927c3a6446af67">create_window</a> = true</td></tr>
 <tr class="separator:a04375848f50fa5be8a927c3a6446af67"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a92e38be459d53b661c2ca4a882ba2043" id="r_a92e38be459d53b661c2ca4a882ba2043"><td class="memItemLeft" align="right" valign="top">std::vector&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_jpeg_open_c_v.html#a92e38be459d53b661c2ca4a882ba2043">img_vector</a></td></tr>
+<tr class="memitem:a81c9f8d0b8c3b49d770be14dbe9f0d37" id="r_a81c9f8d0b8c3b49d770be14dbe9f0d37"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a81c9f8d0b8c3b49d770be14dbe9f0d37">height</a> = 0</td></tr>
+<tr class="separator:a81c9f8d0b8c3b49d770be14dbe9f0d37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92e38be459d53b661c2ca4a882ba2043" id="r_a92e38be459d53b661c2ca4a882ba2043"><td class="memItemLeft" align="right" valign="top">std::vector&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a92e38be459d53b661c2ca4a882ba2043">img_vector</a></td></tr>
 <tr class="separator:a92e38be459d53b661c2ca4a882ba2043"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5438a597ee291f523ae04a9fe355924f" id="r_a5438a597ee291f523ae04a9fe355924f"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_jpeg_open_c_v.html#a5438a597ee291f523ae04a9fe355924f">pos</a> = 0</td></tr>
+<tr class="memitem:a5438a597ee291f523ae04a9fe355924f" id="r_a5438a597ee291f523ae04a9fe355924f"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a5438a597ee291f523ae04a9fe355924f">pos</a> = 0</td></tr>
 <tr class="separator:a5438a597ee291f523ae04a9fe355924f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a51e9baeec9b06ae477cf6475efc71d" id="r_a6a51e9baeec9b06ae477cf6475efc71d"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_jpeg_open_c_v.html#a6a51e9baeec9b06ae477cf6475efc71d">start</a> = 0</td></tr>
+<tr class="memitem:a6a51e9baeec9b06ae477cf6475efc71d" id="r_a6a51e9baeec9b06ae477cf6475efc71d"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a6a51e9baeec9b06ae477cf6475efc71d">start</a> = 0</td></tr>
 <tr class="separator:a6a51e9baeec9b06ae477cf6475efc71d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a1fd97d51d689b2cbf19aae6f42487b" id="r_a2a1fd97d51d689b2cbf19aae6f42487b"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_jpeg_open_c_v.html#a2a1fd97d51d689b2cbf19aae6f42487b">window</a> = &quot;Movie&quot;</td></tr>
+<tr class="memitem:a78488f66cffa4ae5504bf610518c52ce" id="r_a78488f66cffa4ae5504bf610518c52ce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a78488f66cffa4ae5504bf610518c52ce">video_format</a> = <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a0a5417ce14732e9bdb402be642ebe9ea">VideoFormat::MJPEG</a></td></tr>
+<tr class="separator:a78488f66cffa4ae5504bf610518c52ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0eab1042455a2067c812ab8071d5376" id="r_ad0eab1042455a2067c812ab8071d5376"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_open_c_v.html#ad0eab1042455a2067c812ab8071d5376">width</a> = 0</td></tr>
+<tr class="separator:ad0eab1042455a2067c812ab8071d5376"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a1fd97d51d689b2cbf19aae6f42487b" id="r_a2a1fd97d51d689b2cbf19aae6f42487b"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a2a1fd97d51d689b2cbf19aae6f42487b">window</a> = &quot;Movie&quot;</td></tr>
 <tr class="separator:a2a1fd97d51d689b2cbf19aae6f42487b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Display image with opencv to be used on the desktop. </p>
+<div class="textblock"><p>Display a video frame with OpenCV, to be used on the desktop - <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a0a5417ce14732e9bdb402be642ebe9ea">VideoFormat::MJPEG</a> (the default) expects one complete, already-encoded JPEG image assembled across <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> calls and closed off by <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a>, as produced by e.g. <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html" title="AVI Container Decoder which can be fed with small chunks of data. The minimum length must be bigger t...">DemuxerAVI</a>. Any other <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#aa49f2579ff22bf881ce2988162b6d7a1" title="Selects the format of the data passed to write() - see class comment.">setVideoFormat()</a> value (e.g. RGB565, the common raw picture format decoders like <a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a> produce) expects one complete, already-decoded picture per <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call instead - <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a661d9a2bd192a6e1427cc59c59217f9c">setSize()</a> must be called too in that case, since unlike JPEG a raw picture doesn't carry its own dimensions. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a21800b8762708bc34c299a400584a870" name="a21800b8762708bc34c299a400584a870"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a21800b8762708bc34c299a400584a870">&#9670;&#160;</a></span>JpegOpenCV()</h2>
+<a id="a2e6548c671b963642887f5db3fc8af57" name="a2e6548c671b963642887f5db3fc8af57"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e6548c671b963642887f5db3fc8af57">&#9670;&#160;</a></span>OutputOpenCV()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -146,7 +160,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_jpeg_open_c_v.html">JpegOpenCV</a> </td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_output_open_c_v.html">OutputOpenCV</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -189,8 +203,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a1e5b20fed15743656bb6d2e6a6ea6269" name="a1e5b20fed15743656bb6d2e6a6ea6269"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1e5b20fed15743656bb6d2e6a6ea6269">&#9670;&#160;</a></span>display()</h2>
+<a id="a5a6ed553f95c529ddfeae0c763e32078" name="a5a6ed553f95c529ddfeae0c763e32078"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a6ed553f95c529ddfeae0c763e32078">&#9670;&#160;</a></span>displayJpeg()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -199,7 +213,69 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void display </td>
+          <td class="memname">void displayJpeg </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae1cfbeb3973b6a9e39956ecfd2d5ecc2" name="ae1cfbeb3973b6a9e39956ecfd2d5ecc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1cfbeb3973b6a9e39956ecfd2d5ecc2">&#9670;&#160;</a></span>displayRaw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void displayRaw </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Wraps one complete, already-decoded raw picture (no copy - OpenCV reads directly out of 'data') and converts it to OpenCV's native BGR for display. Not every VideoFormat OpenCV could conceivably display is covered here - see the switch below for exactly which ones are. </p>
+
+</div>
+</div>
+<a id="a1ac2ebcb1f61447b4e89c39d7cd6cc12" name="a1ac2ebcb1f61447b4e89c39d7cd6cc12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ac2ebcb1f61447b4e89c39d7cd6cc12">&#9670;&#160;</a></span>ensureWindow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ensureWindow </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -236,10 +312,74 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Displays the assembled jpeg image, then resets for the next frame. </p>
+<p>Displays the assembled jpeg image, then resets for the next frame - only relevant for <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a0a5417ce14732e9bdb402be642ebe9ea">VideoFormat::MJPEG</a>; raw formats display immediately from <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> instead (one complete picture per call), so this is a no-op for those. </p>
 
 <p>Reimplemented from <a class="el" href="class_print.html#ad3aed50bc3b4459454ccb8c64f5ced5a">Print</a>.</p>
+
+</div>
+</div>
+<a id="a661d9a2bd192a6e1427cc59c59217f9c" name="a661d9a2bd192a6e1427cc59c59217f9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a661d9a2bd192a6e1427cc59c59217f9c">&#9670;&#160;</a></span>setSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setSize </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>height</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Defines the picture size - only needed (and used) for raw, non-MJPEG formats (see class comment). Call before the first <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>. </p>
+
+</div>
+</div>
+<a id="aa49f2579ff22bf881ce2988162b6d7a1" name="aa49f2579ff22bf881ce2988162b6d7a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa49f2579ff22bf881ce2988162b6d7a1">&#9670;&#160;</a></span>setVideoFormat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setVideoFormat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a>&#160;</td>
+          <td class="paramname"><em>format</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Selects the format of the data passed to <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> - see class comment. </p>
 
 </div>
 </div>
@@ -352,6 +492,28 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a81c9f8d0b8c3b49d770be14dbe9f0d37" name="a81c9f8d0b8c3b49d770be14dbe9f0d37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81c9f8d0b8c3b49d770be14dbe9f0d37">&#9670;&#160;</a></span>height</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t height = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a92e38be459d53b661c2ca4a882ba2043" name="a92e38be459d53b661c2ca4a882ba2043"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a92e38be459d53b661c2ca4a882ba2043">&#9670;&#160;</a></span>img_vector</h2>
 
@@ -418,6 +580,50 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a78488f66cffa4ae5504bf610518c52ce" name="a78488f66cffa4ae5504bf610518c52ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78488f66cffa4ae5504bf610518c52ce">&#9670;&#160;</a></span>video_format</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a> video_format = <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a0a5417ce14732e9bdb402be642ebe9ea">VideoFormat::MJPEG</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad0eab1042455a2067c812ab8071d5376" name="ad0eab1042455a2067c812ab8071d5376"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0eab1042455a2067c812ab8071d5376">&#9670;&#160;</a></span>width</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t width = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a2a1fd97d51d689b2cbf19aae6f42487b" name="a2a1fd97d51d689b2cbf19aae6f42487b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2a1fd97d51d689b2cbf19aae6f42487b">&#9670;&#160;</a></span>window</h2>
 
@@ -441,7 +647,7 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/Video/<a class="el" href="_jpeg_open_c_v_8h_source.html">JpegOpenCV.h</a></li>
+<li>src/AudioTools/Video/<a class="el" href="_output_open_c_v_8h_source.html">OutputOpenCV.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

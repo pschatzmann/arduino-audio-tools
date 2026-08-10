@@ -84,6 +84,15 @@ $(function() {
  <a href="classaudio__tools_1_1_video_frame_source.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_video_8h_source.html">Video.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for VideoFrameSource:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classaudio__tools_1_1_video_frame_source.png" usemap="#VideoFrameSource_map" alt=""/>
+  <map id="VideoFrameSource_map" name="VideoFrameSource_map">
+<area href="classaudio__tools_1_1_camera_frame_source.html" title="VideoFrameSource that pulls frames from the ESP32 camera (esp_camera.h, the Arduino-ESP32 &quot;esp32-came..." alt="CameraFrameSource" shape="rect" coords="0,56,133,80"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -150,6 +159,8 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Provides the next encoded frame: return a pointer to the frame's bytes (only required to stay valid until the next <a class="el" href="classaudio__tools_1_1_video_frame_source.html#a0fe4d53a942330f3836650dcf0da5135">nextFrame()</a> call) and set <code>len</code> to its size - or return nullptr if no frame is available yet, in which case the caller skips this iteration. </p>
 
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_camera_frame_source.html#a65342e56ec7323be91d38c5196dce8a7">CameraFrameSource</a>.</p>
+
 </div>
 </div>
 <a id="aeab7b6810b52140c3c3a60bf92ca92ba" name="aeab7b6810b52140c3c3a60bf92ca92ba"></a>
@@ -175,6 +186,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Provides the width/height/fps/format (and, if known, frame_size/ total_file_size) of the frames returned by <a class="el" href="classaudio__tools_1_1_video_frame_source.html#a0fe4d53a942330f3836650dcf0da5135">nextFrame()</a> - width, height, fps and format must be set, since <a class="el" href="classaudio__tools_1_1_video_muxer_with_tasks.html" title="Feeds a Muxer (MuxerAVI, MuxerMP4, ...) from two background Tasks instead of a single loop()/copy() c...">VideoMuxerWithTasks</a> uses them directly to configure the <a class="el" href="classaudio__tools_1_1_muxer.html" title="Common interface for muxers (MuxerAVI, MuxerMP4) that combine an already-encoded video track (and opt...">Muxer</a> it writes to instead of requiring the caller to duplicate the same values there. </p>
+
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_camera_frame_source.html#a0a026655e20010414e4d162042f5c413">CameraFrameSource</a>.</p>
 
 </div>
 </div>
