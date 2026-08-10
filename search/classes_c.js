@@ -70,5 +70,6 @@ var searchData=
   ['muxer_67',['Muxer',['../classaudio__tools_1_1_muxer.html',1,'audio_tools']]],
   ['muxeravi_68',['MuxerAVI',['../classaudio__tools_1_1_muxer_a_v_i.html',1,'audio_tools']]],
   ['muxermp4_69',['MuxerMP4',['../classaudio__tools_1_1_muxer_m_p4.html',1,'audio_tools']]],
-  ['muxervideoconfig_70',['MuxerVideoConfig',['../structaudio__tools_1_1_muxer_video_config.html',1,'audio_tools']]]
+  ['muxervideoconfig_70',['MuxerVideoConfig',['../structaudio__tools_1_1_muxer_video_config.html',1,'audio_tools']]],
+  ['muxervideosink_71',['MuxerVideoSink',['../classaudio__tools_1_1_muxer_video_sink.html',1,'audio_tools']]]
 ];

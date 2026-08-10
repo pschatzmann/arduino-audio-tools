@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: src/AudioTools/AudioCodecs/CodecH264.h File Reference</title>
+<title>arduino-audio-tools: src/AudioTools/Video/CodecH264.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,14 +69,14 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_1da2968dceb4970321e6828643b37a8c.html">AudioCodecs</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_5b72a003bd77e493bea652d681fed874.html">Video</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#enum-members">Enumerations</a>  </div>
+<a href="#define-members">Macros</a>  </div>
   <div class="headertitle"><div class="title">CodecH264.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -89,11 +89,11 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html">H264Decoder&lt; Allocator &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">H.264 video decoder: wraps TinyH264Decoder (<a href="https://github.com/pschatzmann/TinyH264">https://github.com/pschatzmann/TinyH264</a>) as a <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a>, so it can be plugged directly into e.g. <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#aa9139d7cd7756a3bf8603981959afb53">DemuxerAVI::setOutputVideo()</a>/ <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#aee3d456e79d27d60f9b6ade892fcc88c">DemuxerMP4::setOutputVideo()</a>. Consumes an Annex-B H.264 bitstream via <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> and, once a complete picture has been decoded, writes it - converted to <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a8f7aaeaf3b848d9ab794e0c7fa0912b1">setPixelFormat()</a>'s format (RGB565 by default, the common TFT wire format) - to the <a class="el" href="class_print.html">Print</a> target configured via <a class="el" href="classaudio__tools_1_1_h264_decoder.html#ae1220e7e3542f5a84c21fe2f7cef194c">setOutput()</a>, one <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call per decoded picture.  <a href="classaudio__tools_1_1_h264_decoder.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html">H264Decoder</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">H.264 video decoder: wraps TinyH264Decoder (<a href="https://github.com/pschatzmann/TinyH264">https://github.com/pschatzmann/TinyH264</a>) as a <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a>, so it can be plugged directly into e.g. <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#aa9139d7cd7756a3bf8603981959afb53">DemuxerAVI::setOutputVideo()</a>/ <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#aee3d456e79d27d60f9b6ade892fcc88c">DemuxerMP4::setOutputVideo()</a>. Consumes an Annex-B H.264 bitstream via <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> and, once a complete picture has been decoded, writes it - converted to <a class="el" href="classaudio__tools_1_1_h264_decoder.html#ab4305de559192cc500fbd0587b2748ea">setVideoFormat()</a>'s format (RGB565 by default, the common TFT wire format) - to the <a class="el" href="class_print.html">Print</a> target configured via <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput()</a>, one <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call per decoded picture.  <a href="classaudio__tools_1_1_h264_decoder.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder.html">H264Encoder&lt; Allocator &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">H.264 video encoder: wraps TinyH264Encoder (<a href="https://github.com/pschatzmann/TinyH264">https://github.com/pschatzmann/TinyH264</a>). Configure via <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a2e0ba07bec2a8049e7a7e76fff1451df" title="See TinyH264Encoder::setSize()">setSize()</a>/ <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a8156449cd6893dde2a143c9d7b9b523b" title="See TinyH264Encoder::setQp()">setQp()</a> (or <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a799e221c278c1bc4fb460beb2c9c4324" title="See TinyH264Encoder::setTargetBitrate()">setTargetBitrate()</a> for rate control) same as TinyH264Encoder, then feed raw pictures via <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a389a91fc40cee25852fdc4f96cbd8b29">encodeFrame()</a>/encodeFrameRgb888()/ <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a1ec709c13161b771809dca4e98845f74" title="See TinyH264Encoder::encodeFrameRgb666()">encodeFrameRgb666()</a>/encodeFrameRgb565()/encodeFrameYuv422() - the resulting Annex-B bitstream is written to the <a class="el" href="class_print.html">Print</a> target configured via <a class="el" href="classaudio__tools_1_1_h264_encoder.html#ae1220e7e3542f5a84c21fe2f7cef194c">setOutput()</a> (e.g. a <a class="el" href="classaudio__tools_1_1_muxer.html" title="Common interface for muxers (MuxerAVI, MuxerMP4) that combine an already-encoded video track (and opt...">Muxer</a>'s addVideoFrame() by way of an adapter, or any other <a class="el" href="class_print.html">Print</a>) instead of a caller-supplied buffer.  <a href="classaudio__tools_1_1_h264_encoder.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">H.264 video encoder: wraps TinyH264Encoder (<a href="https://github.com/pschatzmann/TinyH264">https://github.com/pschatzmann/TinyH264</a>). Configure via <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a2e0ba07bec2a8049e7a7e76fff1451df" title="See TinyH264Encoder::setSize()">setSize()</a>/ <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a8156449cd6893dde2a143c9d7b9b523b" title="See TinyH264Encoder::setQp()">setQp()</a> (or <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a799e221c278c1bc4fb460beb2c9c4324" title="See TinyH264Encoder::setTargetBitrate()">setTargetBitrate()</a> for rate control) same as TinyH264Encoder and <a class="el" href="classaudio__tools_1_1_h264_encoder.html#ab4305de559192cc500fbd0587b2748ea">setVideoFormat()</a> for the raw picture format <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> expects (I420 - planar Y/U/V concatenated in one buffer - by default), then feed raw pictures via <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> - the resulting Annex-B bitstream is written to the <a class="el" href="class_print.html">Print</a> target configured via <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput()</a> (e.g. a <a class="el" href="classaudio__tools_1_1_muxer.html" title="Common interface for muxers (MuxerAVI, MuxerMP4) that combine an already-encoded video track (and opt...">Muxer</a>'s addVideoFrame() by way of an adapter, or any other <a class="el" href="class_print.html">Print</a>) instead of a caller-supplied buffer.  <a href="classaudio__tools_1_1_h264_encoder.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
@@ -102,16 +102,27 @@ Namespaces</h2></td></tr>
 <tr class="memdesc:namespaceaudio__tools"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic Implementation of sound input and output for desktop environments using portaudio. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:gacc9708a221ef12a8ff822f91867de1e4" id="r_gacc9708a221ef12a8ff822f91867de1e4"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__h264.html#gacc9708a221ef12a8ff822f91867de1e4">H264PixelFormat</a> { <a class="el" href="group__h264.html#ggacc9708a221ef12a8ff822f91867de1e4a3b73e4d15701467ed72f157ffaff680a">RGB565</a>
-, <a class="el" href="group__h264.html#ggacc9708a221ef12a8ff822f91867de1e4a429bc6ce52e01a5ecd3ae1b27249e6da">RGB666</a>
-, <a class="el" href="group__h264.html#ggacc9708a221ef12a8ff822f91867de1e4a30ff380a3be74628024063a99fba10f0">RGB888</a>
-, <a class="el" href="group__h264.html#ggacc9708a221ef12a8ff822f91867de1e4a7e1d7a172afeb2743e03365a92cfd7e1">YUV420</a>
- }</td></tr>
-<tr class="memdesc:gacc9708a221ef12a8ff822f91867de1e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pixel format H264Decoder writes decoded pictures to setOutput() in - see TinyH264Decoder's toRGB565()/toRGB666()/toRGB888()/toYUV420() for exactly what each one produces.  <a href="group__h264.html#gacc9708a221ef12a8ff822f91867de1e4">More...</a><br /></td></tr>
-<tr class="separator:gacc9708a221ef12a8ff822f91867de1e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:ac6589570c3e38257f005e59e8922f61e" id="r_ac6589570c3e38257f005e59e8922f61e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_codec_h264_8h.html#ac6589570c3e38257f005e59e8922f61e">H264_DECODER_DEFAULT_ALLOCATOR</a>&#160;&#160;&#160;tinyh264::PSRAMAllocatorESP32&lt;uint8_t&gt;</td></tr>
+<tr class="separator:ac6589570c3e38257f005e59e8922f61e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="ac6589570c3e38257f005e59e8922f61e" name="ac6589570c3e38257f005e59e8922f61e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6589570c3e38257f005e59e8922f61e">&#9670;&#160;</a></span>H264_DECODER_DEFAULT_ALLOCATOR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define H264_DECODER_DEFAULT_ALLOCATOR&#160;&#160;&#160;tinyh264::PSRAMAllocatorESP32&lt;uint8_t&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Allocator H264Decoder uses for its decoded picture buffers - PSRAM (falling back to the regular heap if absent/exhausted) on ESP32, the regular heap elsewhere. Define this yourself before including this header to override (e.g. to force the regular heap on an ESP32 board without PSRAM). </p>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

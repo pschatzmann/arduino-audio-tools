@@ -81,43 +81,52 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>H.264 video encoder for ESP32-S3: wraps esp_h264::H264Encoder (<a href="https://github.com/pschatzmann/ESP32S3-h264">https://github.com/pschatzmann/ESP32S3-h264</a>) - the ESP32-S3-specific counterpart of <a class="el" href="classaudio__tools_1_1_h264_encoder.html" title="H.264 video encoder: wraps TinyH264Encoder (https://github.com/pschatzmann/TinyH264)....">H264Encoder</a> (<a class="el" href="_codec_h264_8h.html">CodecH264.h</a>, the portable TinyH264-based encoder). Configure via <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a2e0ba07bec2a8049e7a7e76fff1451df">setSize()</a>/setFrameRate()/setBitrate()/ <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#ae79c247d671a304071dba1f67e0ddfc4">setGop()</a>/setQpRange(), then feed raw pictures via <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a72212e810a6250fe9fe51c42ce61462b">encodeFrame()</a> (I420)/encodeFrameRgb565()/encodeFrameYuv422() - each writes the resulting Annex-B bitstream straight to the <a class="el" href="class_print.html">Print</a> target passed to <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#ae1220e7e3542f5a84c21fe2f7cef194c">setOutput()</a> (the underlying esp_h264::H264Encoder methods already take a <a class="el" href="class_print.html">Print</a>&amp; and handle the write, retrying on partial writes - see H264Encoder.h's encode()).  
+<p>H.264 video encoder for ESP32-S3: wraps esp_h264::H264Encoder (<a href="https://github.com/pschatzmann/ESP32S3-h264">https://github.com/pschatzmann/ESP32S3-h264</a>) - the ESP32-S3-specific counterpart of <a class="el" href="classaudio__tools_1_1_h264_encoder.html" title="H.264 video encoder: wraps TinyH264Encoder (https://github.com/pschatzmann/TinyH264)....">H264Encoder</a> (<a class="el" href="_codec_h264_8h.html">CodecH264.h</a>, the portable TinyH264-based encoder). Configure via <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a2e0ba07bec2a8049e7a7e76fff1451df">setSize()</a>/setFrameRate()/setBitrate()/ <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#ae79c247d671a304071dba1f67e0ddfc4">setGop()</a>/setQpRange()/setVideoFormat() (I420 - the default -, RGB565 or YUV422), then feed raw pictures via <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> - it writes the resulting Annex-B bitstream straight to the <a class="el" href="class_print.html">Print</a> target passed to <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput()</a> (the underlying esp_h264::H264Encoder methods already take a <a class="el" href="class_print.html">Print</a>&amp; and handle the write, retrying on partial writes - see H264Encoder.h's encode()).  
  <a href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_codec_h264_e_s_p32_s3_8h_source.html">CodecH264ESP32S3.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for H264EncoderESP32S3&lt; Alloc &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.png" usemap="#H264EncoderESP32S3_3C_20Alloc_20_3E_map" alt=""/>
+  <map id="H264EncoderESP32S3_3C_20Alloc_20_3E_map" name="H264EncoderESP32S3_3C_20Alloc_20_3E_map">
+<area href="classaudio__tools_1_1_video_encoder.html" title="Common interface for video encoders (e.g. H264Encoder, H264EncoderESP32S3 - CodecH264...." alt="VideoEncoder" shape="rect" coords="0,0,196,24"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ab4adc7af857102645dda0fba1305ce5f" id="r_ab4adc7af857102645dda0fba1305ce5f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#ab4adc7af857102645dda0fba1305ce5f">H264EncoderESP32S3</a> ()</td></tr>
 <tr class="separator:ab4adc7af857102645dda0fba1305ce5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a601fb7cf1fc15db50c71a826f084f934" id="r_a601fb7cf1fc15db50c71a826f084f934"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a601fb7cf1fc15db50c71a826f084f934">begin</a> ()</td></tr>
-<tr class="memdesc:a601fb7cf1fc15db50c71a826f084f934"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the encoder - see esp_h264::H264Encoder::begin().  <br /></td></tr>
-<tr class="separator:a601fb7cf1fc15db50c71a826f084f934"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acba365cc28eb702040c382646cfb0a7a" id="r_acba365cc28eb702040c382646cfb0a7a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#acba365cc28eb702040c382646cfb0a7a">begin</a> () override</td></tr>
+<tr class="memdesc:acba365cc28eb702040c382646cfb0a7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the encoder - see esp_h264::H264Encoder::begin().  <br /></td></tr>
+<tr class="separator:acba365cc28eb702040c382646cfb0a7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea1eda897229e222661637686b85f484" id="r_aea1eda897229e222661637686b85f484"><td class="memItemLeft" align="right" valign="top">esp_h264::H264Encoder&lt; Alloc &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#aea1eda897229e222661637686b85f484">driver</a> ()</td></tr>
 <tr class="separator:aea1eda897229e222661637686b85f484"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72212e810a6250fe9fe51c42ce61462b" id="r_a72212e810a6250fe9fe51c42ce61462b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a72212e810a6250fe9fe51c42ce61462b">encodeFrame</a> (const uint8_t *i420, size_t len)</td></tr>
-<tr class="separator:a72212e810a6250fe9fe51c42ce61462b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a53b1d1332ae13cb72f3bb4a9f288340b" id="r_a53b1d1332ae13cb72f3bb4a9f288340b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a53b1d1332ae13cb72f3bb4a9f288340b">encodeFrameRgb565</a> (const uint8_t *rgb565, size_t len)</td></tr>
-<tr class="separator:a53b1d1332ae13cb72f3bb4a9f288340b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0cf71ea78efd865047834fdd751ea435" id="r_a0cf71ea78efd865047834fdd751ea435"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a0cf71ea78efd865047834fdd751ea435">encodeFrameYuv422</a> (const uint8_t *yuyv, size_t len)</td></tr>
-<tr class="separator:a0cf71ea78efd865047834fdd751ea435"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf81d3fdaf258088d7692fa70cece087" id="r_aaf81d3fdaf258088d7692fa70cece087"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#aaf81d3fdaf258088d7692fa70cece087">end</a> ()</td></tr>
-<tr class="memdesc:aaf81d3fdaf258088d7692fa70cece087"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases the encoder's resources - see esp_h264::H264Encoder::end().  <br /></td></tr>
-<tr class="separator:aaf81d3fdaf258088d7692fa70cece087"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64e9fa75beda50a9e8400ee0d4e61984" id="r_a64e9fa75beda50a9e8400ee0d4e61984"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a> () override</td></tr>
+<tr class="memdesc:a64e9fa75beda50a9e8400ee0d4e61984"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases the encoder's resources - see esp_h264::H264Encoder::end().  <br /></td></tr>
+<tr class="separator:a64e9fa75beda50a9e8400ee0d4e61984"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae47d7fcdb35cd09d1fc93137089aa987" id="r_ae47d7fcdb35cd09d1fc93137089aa987"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#ae47d7fcdb35cd09d1fc93137089aa987">setBitrate</a> (int bitsPerSecond)</td></tr>
 <tr class="separator:ae47d7fcdb35cd09d1fc93137089aa987"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab5e4f351cd94cfd4a2237c827d10095f" id="r_ab5e4f351cd94cfd4a2237c827d10095f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#ab5e4f351cd94cfd4a2237c827d10095f">setFrameRate</a> (int fps)</td></tr>
 <tr class="separator:ab5e4f351cd94cfd4a2237c827d10095f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae79c247d671a304071dba1f67e0ddfc4" id="r_ae79c247d671a304071dba1f67e0ddfc4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#ae79c247d671a304071dba1f67e0ddfc4">setGop</a> (int gop)</td></tr>
 <tr class="separator:ae79c247d671a304071dba1f67e0ddfc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1220e7e3542f5a84c21fe2f7cef194c" id="r_ae1220e7e3542f5a84c21fe2f7cef194c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#ae1220e7e3542f5a84c21fe2f7cef194c">setOutput</a> (<a class="el" href="class_print.html">Print</a> &amp;out)</td></tr>
-<tr class="separator:ae1220e7e3542f5a84c21fe2f7cef194c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05ff4cf361d54457ed8586e8c14aa922" id="r_a05ff4cf361d54457ed8586e8c14aa922"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput</a> (<a class="el" href="class_print.html">Print</a> &amp;out) override</td></tr>
+<tr class="separator:a05ff4cf361d54457ed8586e8c14aa922"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af877902bb7890a031fd284db22c96ccc" id="r_af877902bb7890a031fd284db22c96ccc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#af877902bb7890a031fd284db22c96ccc">setOutputBufferSize</a> (size_t size)</td></tr>
 <tr class="separator:af877902bb7890a031fd284db22c96ccc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59213f485a2baecbd4bb5cafe42211ba" id="r_a59213f485a2baecbd4bb5cafe42211ba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a59213f485a2baecbd4bb5cafe42211ba">setQpRange</a> (int qpMin, int qpMax)</td></tr>
 <tr class="separator:a59213f485a2baecbd4bb5cafe42211ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e0ba07bec2a8049e7a7e76fff1451df" id="r_a2e0ba07bec2a8049e7a7e76fff1451df"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a2e0ba07bec2a8049e7a7e76fff1451df">setSize</a> (int width, int height)</td></tr>
 <tr class="separator:a2e0ba07bec2a8049e7a7e76fff1451df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4305de559192cc500fbd0587b2748ea" id="r_ab4305de559192cc500fbd0587b2748ea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#ab4305de559192cc500fbd0587b2748ea">setVideoFormat</a> (<a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a> format) override</td></tr>
+<tr class="separator:ab4305de559192cc500fbd0587b2748ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a026655e20010414e4d162042f5c413" id="r_a0a026655e20010414e4d162042f5c413"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_video_info.html">VideoInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a0a026655e20010414e4d162042f5c413">videoInfo</a> () override</td></tr>
+<tr class="separator:a0a026655e20010414e4d162042f5c413"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
+<tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -125,14 +134,16 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ae68dfe086e1993955126f9dbad9cb1f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85989d24f2fdc7504da72bc4b393fd10" id="r_a85989d24f2fdc7504da72bc4b393fd10"><td class="memItemLeft" align="right" valign="top">esp_h264::H264Encoder&lt; Alloc &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a85989d24f2fdc7504da72bc4b393fd10">encoder_</a></td></tr>
 <tr class="separator:a85989d24f2fdc7504da72bc4b393fd10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ce2d3c6f063a7d072a698f771f728a7" id="r_a1ce2d3c6f063a7d072a698f771f728a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a1ce2d3c6f063a7d072a698f771f728a7">input_format</a> = <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5acd1ea458818d68e388b9356fd528d67a">VideoFormat::I420</a></td></tr>
+<tr class="separator:a1ce2d3c6f063a7d072a698f771f728a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa42c30e02e51ec7cc38ea4ab215e0db4" id="r_aa42c30e02e51ec7cc38ea4ab215e0db4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#aa42c30e02e51ec7cc38ea4ab215e0db4">p_out</a> = nullptr</td></tr>
 <tr class="separator:aa42c30e02e51ec7cc38ea4ab215e0db4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename Alloc = H264_DEFAULT_ALLOCATOR&gt;<br />
-class audio_tools::H264EncoderESP32S3&lt; Alloc &gt;</div><p>H.264 video encoder for ESP32-S3: wraps esp_h264::H264Encoder (<a href="https://github.com/pschatzmann/ESP32S3-h264">https://github.com/pschatzmann/ESP32S3-h264</a>) - the ESP32-S3-specific counterpart of <a class="el" href="classaudio__tools_1_1_h264_encoder.html" title="H.264 video encoder: wraps TinyH264Encoder (https://github.com/pschatzmann/TinyH264)....">H264Encoder</a> (<a class="el" href="_codec_h264_8h.html">CodecH264.h</a>, the portable TinyH264-based encoder). Configure via <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a2e0ba07bec2a8049e7a7e76fff1451df">setSize()</a>/setFrameRate()/setBitrate()/ <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#ae79c247d671a304071dba1f67e0ddfc4">setGop()</a>/setQpRange(), then feed raw pictures via <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a72212e810a6250fe9fe51c42ce61462b">encodeFrame()</a> (I420)/encodeFrameRgb565()/encodeFrameYuv422() - each writes the resulting Annex-B bitstream straight to the <a class="el" href="class_print.html">Print</a> target passed to <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#ae1220e7e3542f5a84c21fe2f7cef194c">setOutput()</a> (the underlying esp_h264::H264Encoder methods already take a <a class="el" href="class_print.html">Print</a>&amp; and handle the write, retrying on partial writes - see H264Encoder.h's encode()). </p>
+class audio_tools::H264EncoderESP32S3&lt; Alloc &gt;</div><p>H.264 video encoder for ESP32-S3: wraps esp_h264::H264Encoder (<a href="https://github.com/pschatzmann/ESP32S3-h264">https://github.com/pschatzmann/ESP32S3-h264</a>) - the ESP32-S3-specific counterpart of <a class="el" href="classaudio__tools_1_1_h264_encoder.html" title="H.264 video encoder: wraps TinyH264Encoder (https://github.com/pschatzmann/TinyH264)....">H264Encoder</a> (<a class="el" href="_codec_h264_8h.html">CodecH264.h</a>, the portable TinyH264-based encoder). Configure via <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a2e0ba07bec2a8049e7a7e76fff1451df">setSize()</a>/setFrameRate()/setBitrate()/ <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#ae79c247d671a304071dba1f67e0ddfc4">setGop()</a>/setQpRange()/setVideoFormat() (I420 - the default -, RGB565 or YUV422), then feed raw pictures via <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> - it writes the resulting Annex-B bitstream straight to the <a class="el" href="class_print.html">Print</a> target passed to <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput()</a> (the underlying esp_h264::H264Encoder methods already take a <a class="el" href="class_print.html">Print</a>&amp; and handle the write, retrying on partial writes - see H264Encoder.h's encode()). </p>
 <p>Unlike esp_h264::H264Encoder itself, this wrapper does not drive an attached camera (its use_camera/pin/captureH264() surface) - it only covers the encode-a-buffer-you-already-have path, matching <a class="el" href="classaudio__tools_1_1_h264_encoder.html" title="H.264 video encoder: wraps TinyH264Encoder (https://github.com/pschatzmann/TinyH264)....">H264Encoder</a>'s (<a class="el" href="_codec_h264_8h.html">CodecH264.h</a>) scope; use esp_h264::H264Encoder directly (via <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#aea1eda897229e222661637686b85f484">driver()</a>) if you want its built-in camera capture loop instead.</p>
-<p>The Alloc template parameter is forwarded to esp_h264::H264Encoder - see that class's own file comment (H264Encoder.h) for the PSRAM- vs. internal-RAM allocator choice (H264EncoderPSRAM/H264EncoderRAM aliases).</p>
+<p>The Alloc template parameter is forwarded to esp_h264::H264Encoder - see that class's own file comment (H264Encoder.h) for the PSRAM- vs. internal-RAM allocator choice (H264EncoderPSRAM/H264EncoderRAM aliases). Defaults to H264_DEFAULT_ALLOCATOR.</p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -164,8 +175,8 @@ template&lt;typename Alloc  = H264_DEFAULT_ALLOCATOR&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a601fb7cf1fc15db50c71a826f084f934" name="a601fb7cf1fc15db50c71a826f084f934"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a601fb7cf1fc15db50c71a826f084f934">&#9670;&#160;</a></span>begin()</h2>
+<a id="acba365cc28eb702040c382646cfb0a7a" name="acba365cc28eb702040c382646cfb0a7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acba365cc28eb702040c382646cfb0a7a">&#9670;&#160;</a></span>begin()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -184,12 +195,14 @@ template&lt;typename Alloc  = H264_DEFAULT_ALLOCATOR&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Initializes the encoder - see esp_h264::H264Encoder::begin(). </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_video_encoder.html#ae8a0d9ca63f8bb3de100e347c3f3bca4">VideoEncoder</a>.</p>
 
 </div>
 </div>
@@ -217,129 +230,12 @@ template&lt;typename Alloc  = H264_DEFAULT_ALLOCATOR&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Direct access to the wrapped esp_h264::H264Encoder, e.g. for its camera-capture surface (<a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a601fb7cf1fc15db50c71a826f084f934" title="Initializes the encoder - see esp_h264::H264Encoder::begin().">begin()</a> with use_camera/pin fields set, captureH264()) - not exposed through this wrapper. </p>
+<p>Direct access to the wrapped esp_h264::H264Encoder, e.g. for its camera-capture surface (<a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#acba365cc28eb702040c382646cfb0a7a" title="Initializes the encoder - see esp_h264::H264Encoder::begin().">begin()</a> with use_camera/pin fields set, captureH264()) - not exposed through this wrapper. </p>
 
 </div>
 </div>
-<a id="a72212e810a6250fe9fe51c42ce61462b" name="a72212e810a6250fe9fe51c42ce61462b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a72212e810a6250fe9fe51c42ce61462b">&#9670;&#160;</a></span>encodeFrame()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc  = H264_DEFAULT_ALLOCATOR&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool encodeFrame </td>
-          <td>(</td>
-          <td class="paramtype">const uint8_t *&#160;</td>
-          <td class="paramname"><em>i420</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>len</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Encodes one I420 (YUV420 planar: Y, then U, then V, no row padding) picture and writes the result to <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#ae1220e7e3542f5a84c21fe2f7cef194c">setOutput()</a> - <code>len</code> must be at least width*height*3/2 (see esp_h264::H264Encoder::encode()). </p>
-
-</div>
-</div>
-<a id="a53b1d1332ae13cb72f3bb4a9f288340b" name="a53b1d1332ae13cb72f3bb4a9f288340b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a53b1d1332ae13cb72f3bb4a9f288340b">&#9670;&#160;</a></span>encodeFrameRgb565()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc  = H264_DEFAULT_ALLOCATOR&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool encodeFrameRgb565 </td>
-          <td>(</td>
-          <td class="paramtype">const uint8_t *&#160;</td>
-          <td class="paramname"><em>rgb565</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>len</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Encodes one RGB565 (16-bit, 5-6-5 packed, little-endian) picture - converted internally to I420 before encoding - and writes the result to <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#ae1220e7e3542f5a84c21fe2f7cef194c">setOutput()</a>. <code>len</code> must be at least width*height*2. </p>
-
-</div>
-</div>
-<a id="a0cf71ea78efd865047834fdd751ea435" name="a0cf71ea78efd865047834fdd751ea435"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0cf71ea78efd865047834fdd751ea435">&#9670;&#160;</a></span>encodeFrameYuv422()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc  = H264_DEFAULT_ALLOCATOR&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool encodeFrameYuv422 </td>
-          <td>(</td>
-          <td class="paramtype">const uint8_t *&#160;</td>
-          <td class="paramname"><em>yuyv</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>len</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Encodes one YUYV-order packed YUV 4:2:2 picture (the common camera- module convention) - converted internally to I420 before encoding - and writes the result to <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#ae1220e7e3542f5a84c21fe2f7cef194c">setOutput()</a>. <code>len</code> must be at least width*height*2. </p>
-
-</div>
-</div>
-<a id="aaf81d3fdaf258088d7692fa70cece087" name="aaf81d3fdaf258088d7692fa70cece087"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaf81d3fdaf258088d7692fa70cece087">&#9670;&#160;</a></span>end()</h2>
+<a id="a64e9fa75beda50a9e8400ee0d4e61984" name="a64e9fa75beda50a9e8400ee0d4e61984"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64e9fa75beda50a9e8400ee0d4e61984">&#9670;&#160;</a></span>end()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -358,12 +254,14 @@ template&lt;typename Alloc  = H264_DEFAULT_ALLOCATOR&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Releases the encoder's resources - see esp_h264::H264Encoder::end(). </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_video_encoder.html#aa540e86022c1f72380d1014d98f38f43">VideoEncoder</a>.</p>
 
 </div>
 </div>
@@ -392,7 +290,7 @@ template&lt;typename Alloc  = H264_DEFAULT_ALLOCATOR&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Target bitrate (bits/sec) - defaults to width*height*fps*30/100 if never called. Call before <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a601fb7cf1fc15db50c71a826f084f934" title="Initializes the encoder - see esp_h264::H264Encoder::begin().">begin()</a>. </p>
+<p>Target bitrate (bits/sec) - defaults to width*height*fps*30/100 if never called. Call before <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#acba365cc28eb702040c382646cfb0a7a" title="Initializes the encoder - see esp_h264::H264Encoder::begin().">begin()</a>. </p>
 
 </div>
 </div>
@@ -421,7 +319,7 @@ template&lt;typename Alloc  = H264_DEFAULT_ALLOCATOR&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Target frames/sec - also the default GOP size (see <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#ae79c247d671a304071dba1f67e0ddfc4">setGop()</a>) unless overridden. Call before <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a601fb7cf1fc15db50c71a826f084f934" title="Initializes the encoder - see esp_h264::H264Encoder::begin().">begin()</a>. </p>
+<p>Target frames/sec - also the default GOP size (see <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#ae79c247d671a304071dba1f67e0ddfc4">setGop()</a>) unless overridden. Call before <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#acba365cc28eb702040c382646cfb0a7a" title="Initializes the encoder - see esp_h264::H264Encoder::begin().">begin()</a>. </p>
 
 </div>
 </div>
@@ -450,12 +348,12 @@ template&lt;typename Alloc  = H264_DEFAULT_ALLOCATOR&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Group-of-Pictures size (keyframe interval, in frames) - defaults to <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#ab5e4f351cd94cfd4a2237c827d10095f">setFrameRate()</a>'s fps if never called. Call before <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a601fb7cf1fc15db50c71a826f084f934" title="Initializes the encoder - see esp_h264::H264Encoder::begin().">begin()</a>. </p>
+<p>Group-of-Pictures size (keyframe interval, in frames) - defaults to <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#ab5e4f351cd94cfd4a2237c827d10095f">setFrameRate()</a>'s fps if never called. Call before <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#acba365cc28eb702040c382646cfb0a7a" title="Initializes the encoder - see esp_h264::H264Encoder::begin().">begin()</a>. </p>
 
 </div>
 </div>
-<a id="ae1220e7e3542f5a84c21fe2f7cef194c" name="ae1220e7e3542f5a84c21fe2f7cef194c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae1220e7e3542f5a84c21fe2f7cef194c">&#9670;&#160;</a></span>setOutput()</h2>
+<a id="a05ff4cf361d54457ed8586e8c14aa922" name="a05ff4cf361d54457ed8586e8c14aa922"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05ff4cf361d54457ed8586e8c14aa922">&#9670;&#160;</a></span>setOutput()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -475,11 +373,13 @@ template&lt;typename Alloc  = H264_DEFAULT_ALLOCATOR&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Defines the target each <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a72212e810a6250fe9fe51c42ce61462b">encodeFrame()</a>-family call writes its encoded bitstream to. </p>
+<p>Defines the target each <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call writes its encoded bitstream to. </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_video_encoder.html#ac68081867afc8798c70a2e83599098e6">VideoEncoder</a>.</p>
 
 </div>
 </div>
@@ -508,7 +408,7 @@ template&lt;typename Alloc  = H264_DEFAULT_ALLOCATOR&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Output buffer size (bytes) the wrapped encoder allocates for the encoded bitstream - defaults to one uncompressed I420 frame's worth if never called. Call before <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a601fb7cf1fc15db50c71a826f084f934" title="Initializes the encoder - see esp_h264::H264Encoder::begin().">begin()</a>. </p>
+<p>Output buffer size (bytes) the wrapped encoder allocates for the encoded bitstream - defaults to one uncompressed I420 frame's worth if never called. Call before <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#acba365cc28eb702040c382646cfb0a7a" title="Initializes the encoder - see esp_h264::H264Encoder::begin().">begin()</a>. </p>
 
 </div>
 </div>
@@ -547,7 +447,7 @@ template&lt;typename Alloc  = H264_DEFAULT_ALLOCATOR&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Quantizer parameter range [0, 51] the encoder's rate control stays within - lower is better quality/higher bitrate. Defaults to [28, 30] if never called. Call before <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a601fb7cf1fc15db50c71a826f084f934" title="Initializes the encoder - see esp_h264::H264Encoder::begin().">begin()</a>. </p>
+<p>Quantizer parameter range [0, 51] the encoder's rate control stays within - lower is better quality/higher bitrate. Defaults to [28, 30] if never called. Call before <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#acba365cc28eb702040c382646cfb0a7a" title="Initializes the encoder - see esp_h264::H264Encoder::begin().">begin()</a>. </p>
 
 </div>
 </div>
@@ -586,7 +486,109 @@ template&lt;typename Alloc  = H264_DEFAULT_ALLOCATOR&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Picture size - must match the raw frame data passed to the <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a72212e810a6250fe9fe51c42ce61462b">encodeFrame()</a>-family methods. Call before <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a601fb7cf1fc15db50c71a826f084f934" title="Initializes the encoder - see esp_h264::H264Encoder::begin().">begin()</a>. </p>
+<p>Picture size - must match the raw frame data passed to <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>. Call before <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#acba365cc28eb702040c382646cfb0a7a" title="Initializes the encoder - see esp_h264::H264Encoder::begin().">begin()</a>. </p>
+
+</div>
+</div>
+<a id="ab4305de559192cc500fbd0587b2748ea" name="ab4305de559192cc500fbd0587b2748ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4305de559192cc500fbd0587b2748ea">&#9670;&#160;</a></span>setVideoFormat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Alloc  = H264_DEFAULT_ALLOCATOR&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setVideoFormat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a>&#160;</td>
+          <td class="paramname"><em>format</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Selects the raw picture format <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> expects - this backend (esp_h264) supports <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5acd1ea458818d68e388b9356fd528d67a">VideoFormat::I420</a> (the default: planar Y/U/V, no row padding), RGB565 (16-bit, 5-6-5 packed, little-endian) and YUV422 (packed YUYV); any other value is logged and ignored (the previously selected format stays in effect). Call before the first <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>. </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_video_encoder.html#af3e841cd4cb4b9dd800d7c3be096fa16">VideoEncoder</a>.</p>
+
+</div>
+</div>
+<a id="a0a026655e20010414e4d162042f5c413" name="a0a026655e20010414e4d162042f5c413"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a026655e20010414e4d162042f5c413">&#9670;&#160;</a></span>videoInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Alloc  = H264_DEFAULT_ALLOCATOR&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_video_info.html">VideoInfo</a> videoInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Reports the codec/dimensions of the bitstream written to <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput()</a>'s target - format is always <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a8ba63b54352f7053b055235a9ec7ac09">VideoFormat::H264</a> (NOT <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#ab4305de559192cc500fbd0587b2748ea">setVideoFormat()</a>'s raw input format); width/height match <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a2e0ba07bec2a8049e7a7e76fff1451df">setSize()</a> (0 if that was never called). </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_video_encoder.html#aeab7b6810b52140c3c3a60bf92ca92ba">VideoEncoder</a>.</p>
+
+</div>
+</div>
+<a id="a7597ef706dd1aa590903ce9e095db20a" name="a7597ef706dd1aa590903ce9e095db20a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7597ef706dd1aa590903ce9e095db20a">&#9670;&#160;</a></span>write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Alloc  = H264_DEFAULT_ALLOCATOR&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t write </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Encodes one raw picture, in <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#ab4305de559192cc500fbd0587b2748ea">setVideoFormat()</a>'s format (I420 by default: Y, then U, then V, no row padding; RGB565 - converted internally to I420 - or YUV422, likewise), and writes the result to <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput()</a> - <code>len</code> must be at least width*height*3/2 (I420) or width*height*2 (RGB565/YUV422). Returns the number of bytes written on success (see class comment - not an exact byte count, the underlying esp_h264::H264Encoder only reports success/failure), or 0 on failure (e.g. <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput()</a> wasn't configured, <code>len</code> too small, or the format is unsupported). </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_video_encoder.html#a4f016ab9037bd654f538f107eb1d8f78">VideoEncoder</a>.</p>
 
 </div>
 </div>
@@ -639,6 +641,30 @@ template&lt;typename Alloc  = H264_DEFAULT_ALLOCATOR&gt; </div>
 
 </div>
 </div>
+<a id="a1ce2d3c6f063a7d072a698f771f728a7" name="a1ce2d3c6f063a7d072a698f771f728a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ce2d3c6f063a7d072a698f771f728a7">&#9670;&#160;</a></span>input_format</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Alloc  = H264_DEFAULT_ALLOCATOR&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a> input_format = <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5acd1ea458818d68e388b9356fd528d67a">VideoFormat::I420</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aa42c30e02e51ec7cc38ea4ab215e0db4" name="aa42c30e02e51ec7cc38ea4ab215e0db4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa42c30e02e51ec7cc38ea4ab215e0db4">&#9670;&#160;</a></span>p_out</h2>
 
@@ -664,7 +690,7 @@ template&lt;typename Alloc  = H264_DEFAULT_ALLOCATOR&gt; </div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/AudioCodecs/<a class="el" href="_codec_h264_e_s_p32_s3_8h_source.html">CodecH264ESP32S3.h</a></li>
+<li>src/AudioTools/Video/<a class="el" href="_codec_h264_e_s_p32_s3_8h_source.html">CodecH264ESP32S3.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

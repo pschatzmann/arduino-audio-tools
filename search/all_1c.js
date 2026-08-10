@@ -10,6 +10,5 @@ var searchData=
   ['yh_7',['Yh',['../structaudio__tools_1_1_echo_state.html#a302ab144b74a925e4be2b99cb5900d75',1,'audio_tools::EchoState']]],
   ['yield_8',['yield',['../namespaceaudio__tools.html#a58c8b2ad0ea491a6642e5e1cbd358c89',1,'audio_tools']]],
   ['ym_9',['ym',['../classaudio__tools_1_1_logarithmic_volume_control.html#a5a6beb9ca2904e494863187b0026004c',1,'audio_tools::LogarithmicVolumeControl']]],
-  ['yuv420_10',['YUV420',['../group__h264.html#ggacc9708a221ef12a8ff822f91867de1e4a7e1d7a172afeb2743e03365a92cfd7e1',1,'audio_tools']]],
-  ['yuv422_11',['YUV422',['../group__video.html#gga216a5d43d2a518325c84f100ed7735a5ae2ebd9cc5a78afc028dd47f2443affea',1,'audio_tools']]]
+  ['yuv422_10',['YUV422',['../group__video.html#gga216a5d43d2a518325c84f100ed7735a5ae2ebd9cc5a78afc028dd47f2443affea',1,'audio_tools']]]
 ];

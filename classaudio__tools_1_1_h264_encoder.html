@@ -84,47 +84,44 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>H.264 video encoder: wraps TinyH264Encoder (<a href="https://github.com/pschatzmann/TinyH264">https://github.com/pschatzmann/TinyH264</a>). Configure via <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a2e0ba07bec2a8049e7a7e76fff1451df" title="See TinyH264Encoder::setSize()">setSize()</a>/ <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a8156449cd6893dde2a143c9d7b9b523b" title="See TinyH264Encoder::setQp()">setQp()</a> (or <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a799e221c278c1bc4fb460beb2c9c4324" title="See TinyH264Encoder::setTargetBitrate()">setTargetBitrate()</a> for rate control) same as TinyH264Encoder, then feed raw pictures via <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a389a91fc40cee25852fdc4f96cbd8b29">encodeFrame()</a>/encodeFrameRgb888()/ <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a1ec709c13161b771809dca4e98845f74" title="See TinyH264Encoder::encodeFrameRgb666()">encodeFrameRgb666()</a>/encodeFrameRgb565()/encodeFrameYuv422() - the resulting Annex-B bitstream is written to the <a class="el" href="class_print.html">Print</a> target configured via <a class="el" href="classaudio__tools_1_1_h264_encoder.html#ae1220e7e3542f5a84c21fe2f7cef194c">setOutput()</a> (e.g. a <a class="el" href="classaudio__tools_1_1_muxer.html" title="Common interface for muxers (MuxerAVI, MuxerMP4) that combine an already-encoded video track (and opt...">Muxer</a>'s addVideoFrame() by way of an adapter, or any other <a class="el" href="class_print.html">Print</a>) instead of a caller-supplied buffer.  
+<p>H.264 video encoder: wraps TinyH264Encoder (<a href="https://github.com/pschatzmann/TinyH264">https://github.com/pschatzmann/TinyH264</a>). Configure via <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a2e0ba07bec2a8049e7a7e76fff1451df" title="See TinyH264Encoder::setSize()">setSize()</a>/ <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a8156449cd6893dde2a143c9d7b9b523b" title="See TinyH264Encoder::setQp()">setQp()</a> (or <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a799e221c278c1bc4fb460beb2c9c4324" title="See TinyH264Encoder::setTargetBitrate()">setTargetBitrate()</a> for rate control) same as TinyH264Encoder and <a class="el" href="classaudio__tools_1_1_h264_encoder.html#ab4305de559192cc500fbd0587b2748ea">setVideoFormat()</a> for the raw picture format <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> expects (I420 - planar Y/U/V concatenated in one buffer - by default), then feed raw pictures via <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> - the resulting Annex-B bitstream is written to the <a class="el" href="class_print.html">Print</a> target configured via <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput()</a> (e.g. a <a class="el" href="classaudio__tools_1_1_muxer.html" title="Common interface for muxers (MuxerAVI, MuxerMP4) that combine an already-encoded video track (and opt...">Muxer</a>'s addVideoFrame() by way of an adapter, or any other <a class="el" href="class_print.html">Print</a>) instead of a caller-supplied buffer.  
  <a href="classaudio__tools_1_1_h264_encoder.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_codec_h264_8h_source.html">CodecH264.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for H264Encoder&lt; Allocator &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classaudio__tools_1_1_h264_encoder.png" usemap="#H264Encoder_3C_20Allocator_20_3E_map" alt=""/>
+  <map id="H264Encoder_3C_20Allocator_20_3E_map" name="H264Encoder_3C_20Allocator_20_3E_map">
+<area href="classaudio__tools_1_1_video_encoder.html" title="Common interface for video encoders (e.g. H264Encoder, H264EncoderESP32S3 - CodecH264...." alt="VideoEncoder" shape="rect" coords="0,0,165,24"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a267a064ad855ccf21cc09bd6b8375fb3" id="r_a267a064ad855ccf21cc09bd6b8375fb3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder.html#a267a064ad855ccf21cc09bd6b8375fb3">H264Encoder</a> (int width=0, int height=0, int keyframeInterval=0)</td></tr>
 <tr class="separator:a267a064ad855ccf21cc09bd6b8375fb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01ddb0bc37223831347bfb74041c4c13" id="r_a01ddb0bc37223831347bfb74041c4c13"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder.html#a01ddb0bc37223831347bfb74041c4c13">begin</a> (bool reserveColorConversionScratch=false)</td></tr>
-<tr class="memdesc:a01ddb0bc37223831347bfb74041c4c13"><td class="mdescLeft">&#160;</td><td class="mdescRight">See TinyH264Encoder::begin()  <br /></td></tr>
-<tr class="separator:a01ddb0bc37223831347bfb74041c4c13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acba365cc28eb702040c382646cfb0a7a" id="r_acba365cc28eb702040c382646cfb0a7a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder.html#acba365cc28eb702040c382646cfb0a7a">begin</a> () override</td></tr>
+<tr class="separator:acba365cc28eb702040c382646cfb0a7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b81347b904c4a72687dc13b8a65977d" id="r_a2b81347b904c4a72687dc13b8a65977d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder.html#a2b81347b904c4a72687dc13b8a65977d">begin</a> (bool reserveColorConversionScratch)</td></tr>
+<tr class="memdesc:a2b81347b904c4a72687dc13b8a65977d"><td class="mdescLeft">&#160;</td><td class="mdescRight">See TinyH264Encoder::begin()  <br /></td></tr>
+<tr class="separator:a2b81347b904c4a72687dc13b8a65977d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7966bd6d90b7dbb2a6b74e88dfa744e" id="r_ab7966bd6d90b7dbb2a6b74e88dfa744e"><td class="memItemLeft" align="right" valign="top">tinyh264::TinyH264Encoder&lt; <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder.html#ab7966bd6d90b7dbb2a6b74e88dfa744e">driver</a> ()</td></tr>
 <tr class="separator:ab7966bd6d90b7dbb2a6b74e88dfa744e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a389a91fc40cee25852fdc4f96cbd8b29" id="r_a389a91fc40cee25852fdc4f96cbd8b29"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder.html#a389a91fc40cee25852fdc4f96cbd8b29">encodeFrame</a> (const uint8_t *srcY, const uint8_t *srcU, const uint8_t *srcV)</td></tr>
-<tr class="separator:a389a91fc40cee25852fdc4f96cbd8b29"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac377026410b7cd04fe6802207c12a744" id="r_ac377026410b7cd04fe6802207c12a744"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder.html#ac377026410b7cd04fe6802207c12a744">encodeFrameRgb565</a> (const uint16_t *rgb565)</td></tr>
-<tr class="memdesc:ac377026410b7cd04fe6802207c12a744"><td class="mdescLeft">&#160;</td><td class="mdescRight">See TinyH264Encoder::encodeFrameRgb565()  <br /></td></tr>
-<tr class="separator:ac377026410b7cd04fe6802207c12a744"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1ec709c13161b771809dca4e98845f74" id="r_a1ec709c13161b771809dca4e98845f74"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder.html#a1ec709c13161b771809dca4e98845f74">encodeFrameRgb666</a> (const uint8_t *rgb666)</td></tr>
-<tr class="memdesc:a1ec709c13161b771809dca4e98845f74"><td class="mdescLeft">&#160;</td><td class="mdescRight">See TinyH264Encoder::encodeFrameRgb666()  <br /></td></tr>
-<tr class="separator:a1ec709c13161b771809dca4e98845f74"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a934b9434a6860af55f5bf8cf9f4356ee" id="r_a934b9434a6860af55f5bf8cf9f4356ee"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder.html#a934b9434a6860af55f5bf8cf9f4356ee">encodeFrameRgb888</a> (const uint8_t *rgb)</td></tr>
-<tr class="memdesc:a934b9434a6860af55f5bf8cf9f4356ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">See TinyH264Encoder::encodeFrameRgb888()  <br /></td></tr>
-<tr class="separator:a934b9434a6860af55f5bf8cf9f4356ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e58aa76096129a16c784640d19e1c9a" id="r_a7e58aa76096129a16c784640d19e1c9a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder.html#a7e58aa76096129a16c784640d19e1c9a">encodeFrameYuv422</a> (const uint8_t *yuyv)</td></tr>
-<tr class="memdesc:a7e58aa76096129a16c784640d19e1c9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">See TinyH264Encoder::encodeFrameYuv422()  <br /></td></tr>
-<tr class="separator:a7e58aa76096129a16c784640d19e1c9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf81d3fdaf258088d7692fa70cece087" id="r_aaf81d3fdaf258088d7692fa70cece087"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder.html#aaf81d3fdaf258088d7692fa70cece087">end</a> ()</td></tr>
-<tr class="memdesc:aaf81d3fdaf258088d7692fa70cece087"><td class="mdescLeft">&#160;</td><td class="mdescRight">See TinyH264Encoder::end()  <br /></td></tr>
-<tr class="separator:aaf81d3fdaf258088d7692fa70cece087"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64e9fa75beda50a9e8400ee0d4e61984" id="r_a64e9fa75beda50a9e8400ee0d4e61984"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a> () override</td></tr>
+<tr class="memdesc:a64e9fa75beda50a9e8400ee0d4e61984"><td class="mdescLeft">&#160;</td><td class="mdescRight">See TinyH264Encoder::end()  <br /></td></tr>
+<tr class="separator:a64e9fa75beda50a9e8400ee0d4e61984"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8da61ec048c8e8a2f73ebe48224375f" id="r_ab8da61ec048c8e8a2f73ebe48224375f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder.html#ab8da61ec048c8e8a2f73ebe48224375f">lastQp</a> () const</td></tr>
-<tr class="memdesc:ab8da61ec048c8e8a2f73ebe48224375f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The QP actually used by the most recent <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a389a91fc40cee25852fdc4f96cbd8b29">encodeFrame()</a>-family call.  <br /></td></tr>
+<tr class="memdesc:ab8da61ec048c8e8a2f73ebe48224375f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The QP actually used by the most recent <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call.  <br /></td></tr>
 <tr class="separator:ab8da61ec048c8e8a2f73ebe48224375f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0cf1414b6bb5f8e3b5392843da2eaec9" id="r_a0cf1414b6bb5f8e3b5392843da2eaec9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder.html#a0cf1414b6bb5f8e3b5392843da2eaec9">setBitstreamBufferSize</a> (size_t size)</td></tr>
 <tr class="separator:a0cf1414b6bb5f8e3b5392843da2eaec9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1ba550810bf4fda0ade3ae7f3a5f6eb" id="r_ad1ba550810bf4fda0ade3ae7f3a5f6eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder.html#ad1ba550810bf4fda0ade3ae7f3a5f6eb">setKeyframeInterval</a> (int frames)</td></tr>
 <tr class="memdesc:ad1ba550810bf4fda0ade3ae7f3a5f6eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">See TinyH264Encoder::setKeyframeInterval()  <br /></td></tr>
 <tr class="separator:ad1ba550810bf4fda0ade3ae7f3a5f6eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1220e7e3542f5a84c21fe2f7cef194c" id="r_ae1220e7e3542f5a84c21fe2f7cef194c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder.html#ae1220e7e3542f5a84c21fe2f7cef194c">setOutput</a> (<a class="el" href="class_print.html">Print</a> &amp;out)</td></tr>
-<tr class="separator:ae1220e7e3542f5a84c21fe2f7cef194c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05ff4cf361d54457ed8586e8c14aa922" id="r_a05ff4cf361d54457ed8586e8c14aa922"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput</a> (<a class="el" href="class_print.html">Print</a> &amp;out) override</td></tr>
+<tr class="separator:a05ff4cf361d54457ed8586e8c14aa922"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28ad00116e79daca44f2c9573b7a16d0" id="r_a28ad00116e79daca44f2c9573b7a16d0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder.html#a28ad00116e79daca44f2c9573b7a16d0">setPackedStride</a> (int stride)</td></tr>
 <tr class="memdesc:a28ad00116e79daca44f2c9573b7a16d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">See TinyH264Encoder::setPackedStride()  <br /></td></tr>
 <tr class="separator:a28ad00116e79daca44f2c9573b7a16d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -140,6 +137,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a799e221c278c1bc4fb460beb2c9c4324" id="r_a799e221c278c1bc4fb460beb2c9c4324"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder.html#a799e221c278c1bc4fb460beb2c9c4324">setTargetBitrate</a> (int bitsPerSecond, double fps)</td></tr>
 <tr class="memdesc:a799e221c278c1bc4fb460beb2c9c4324"><td class="mdescLeft">&#160;</td><td class="mdescRight">See TinyH264Encoder::setTargetBitrate()  <br /></td></tr>
 <tr class="separator:a799e221c278c1bc4fb460beb2c9c4324"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4305de559192cc500fbd0587b2748ea" id="r_ab4305de559192cc500fbd0587b2748ea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder.html#ab4305de559192cc500fbd0587b2748ea">setVideoFormat</a> (<a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a> format) override</td></tr>
+<tr class="separator:ab4305de559192cc500fbd0587b2748ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a026655e20010414e4d162042f5c413" id="r_a0a026655e20010414e4d162042f5c413"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_video_info.html">VideoInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder.html#a0a026655e20010414e4d162042f5c413">videoInfo</a> () override</td></tr>
+<tr class="separator:a0a026655e20010414e4d162042f5c413"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
+<tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -158,8 +161,14 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a0b21d1bf7a59015c7a3b2b880c114c2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25ede19be8f8128c3dc33b594e47b4ef" id="r_a25ede19be8f8128c3dc33b594e47b4ef"><td class="memItemLeft" align="right" valign="top">tinyh264::TinyH264Encoder&lt; <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder.html#a25ede19be8f8128c3dc33b594e47b4ef">encoder_</a></td></tr>
 <tr class="separator:a25ede19be8f8128c3dc33b594e47b4ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45a159d389017b03a58e3508186fb445" id="r_a45a159d389017b03a58e3508186fb445"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder.html#a45a159d389017b03a58e3508186fb445">height_</a> = 0</td></tr>
+<tr class="separator:a45a159d389017b03a58e3508186fb445"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ce2d3c6f063a7d072a698f771f728a7" id="r_a1ce2d3c6f063a7d072a698f771f728a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder.html#a1ce2d3c6f063a7d072a698f771f728a7">input_format</a> = <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5acd1ea458818d68e388b9356fd528d67a">VideoFormat::I420</a></td></tr>
+<tr class="separator:a1ce2d3c6f063a7d072a698f771f728a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa42c30e02e51ec7cc38ea4ab215e0db4" id="r_aa42c30e02e51ec7cc38ea4ab215e0db4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder.html#aa42c30e02e51ec7cc38ea4ab215e0db4">p_out</a> = nullptr</td></tr>
 <tr class="separator:aa42c30e02e51ec7cc38ea4ab215e0db4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2af7588ca87bfadebd74fb4939e64dc" id="r_ad2af7588ca87bfadebd74fb4939e64dc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder.html#ad2af7588ca87bfadebd74fb4939e64dc">width_</a> = 0</td></tr>
+<tr class="separator:ad2af7588ca87bfadebd74fb4939e64dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
@@ -168,9 +177,9 @@ Static Protected Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> = std::allocator&lt;uint8_t&gt;&gt;<br />
-class audio_tools::H264Encoder&lt; Allocator &gt;</div><p>H.264 video encoder: wraps TinyH264Encoder (<a href="https://github.com/pschatzmann/TinyH264">https://github.com/pschatzmann/TinyH264</a>). Configure via <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a2e0ba07bec2a8049e7a7e76fff1451df" title="See TinyH264Encoder::setSize()">setSize()</a>/ <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a8156449cd6893dde2a143c9d7b9b523b" title="See TinyH264Encoder::setQp()">setQp()</a> (or <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a799e221c278c1bc4fb460beb2c9c4324" title="See TinyH264Encoder::setTargetBitrate()">setTargetBitrate()</a> for rate control) same as TinyH264Encoder, then feed raw pictures via <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a389a91fc40cee25852fdc4f96cbd8b29">encodeFrame()</a>/encodeFrameRgb888()/ <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a1ec709c13161b771809dca4e98845f74" title="See TinyH264Encoder::encodeFrameRgb666()">encodeFrameRgb666()</a>/encodeFrameRgb565()/encodeFrameYuv422() - the resulting Annex-B bitstream is written to the <a class="el" href="class_print.html">Print</a> target configured via <a class="el" href="classaudio__tools_1_1_h264_encoder.html#ae1220e7e3542f5a84c21fe2f7cef194c">setOutput()</a> (e.g. a <a class="el" href="classaudio__tools_1_1_muxer.html" title="Common interface for muxers (MuxerAVI, MuxerMP4) that combine an already-encoded video track (and opt...">Muxer</a>'s addVideoFrame() by way of an adapter, or any other <a class="el" href="class_print.html">Print</a>) instead of a caller-supplied buffer. </p>
+class audio_tools::H264Encoder&lt; Allocator &gt;</div><p>H.264 video encoder: wraps TinyH264Encoder (<a href="https://github.com/pschatzmann/TinyH264">https://github.com/pschatzmann/TinyH264</a>). Configure via <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a2e0ba07bec2a8049e7a7e76fff1451df" title="See TinyH264Encoder::setSize()">setSize()</a>/ <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a8156449cd6893dde2a143c9d7b9b523b" title="See TinyH264Encoder::setQp()">setQp()</a> (or <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a799e221c278c1bc4fb460beb2c9c4324" title="See TinyH264Encoder::setTargetBitrate()">setTargetBitrate()</a> for rate control) same as TinyH264Encoder and <a class="el" href="classaudio__tools_1_1_h264_encoder.html#ab4305de559192cc500fbd0587b2748ea">setVideoFormat()</a> for the raw picture format <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> expects (I420 - planar Y/U/V concatenated in one buffer - by default), then feed raw pictures via <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> - the resulting Annex-B bitstream is written to the <a class="el" href="class_print.html">Print</a> target configured via <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput()</a> (e.g. a <a class="el" href="classaudio__tools_1_1_muxer.html" title="Common interface for muxers (MuxerAVI, MuxerMP4) that combine an already-encoded video track (and opt...">Muxer</a>'s addVideoFrame() by way of an adapter, or any other <a class="el" href="class_print.html">Print</a>) instead of a caller-supplied buffer. </p>
 <p>The internal bitstream scratch buffer starts at kDefaultBitstreamBufferSize and grows (doubling, up to a few attempts) whenever an encode call comes back short - the same "call again with a
-bigger buffer" recovery TinyH264Encoder's own <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a389a91fc40cee25852fdc4f96cbd8b29">encodeFrame()</a> family documents, done automatically so callers don't need to size it by hand. Use <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a0cf1414b6bb5f8e3b5392843da2eaec9">setBitstreamBufferSize()</a> to pre-size it (e.g. to avoid the first frame paying for a grow-and-retry).</p>
+bigger buffer" recovery TinyH264Encoder's own encodeFrame() family documents, done automatically so callers don't need to size it by hand. Use <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a0cf1414b6bb5f8e3b5392843da2eaec9">setBitstreamBufferSize()</a> to pre-size it (e.g. to avoid the first frame paying for a grow-and-retry).</p>
 <p>The <a class="el" href="classaudio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc.">Allocator</a> template parameter is forwarded to TinyH264Encoder - pass a PSRAM allocator to place the encoder's internal reconstructed-picture buffers there instead of the default heap; see TinyH264Encoder.h's own file comment.</p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
@@ -220,8 +229,38 @@ template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">A
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a01ddb0bc37223831347bfb74041c4c13" name="a01ddb0bc37223831347bfb74041c4c13"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a01ddb0bc37223831347bfb74041c4c13">&#9670;&#160;</a></span>begin()</h2>
+<a id="acba365cc28eb702040c382646cfb0a7a" name="acba365cc28eb702040c382646cfb0a7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acba365cc28eb702040c382646cfb0a7a">&#9670;&#160;</a></span>begin() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>  = std::allocator&lt;uint8_t&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool begin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>See TinyH264Encoder::begin() - equivalent to begin(reserveColorConversionScratch=false); see that overload if you need to pass true. </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_video_encoder.html#ae8a0d9ca63f8bb3de100e347c3f3bca4">VideoEncoder</a>.</p>
+
+</div>
+</div>
+<a id="a2b81347b904c4a72687dc13b8a65977d" name="a2b81347b904c4a72687dc13b8a65977d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b81347b904c4a72687dc13b8a65977d">&#9670;&#160;</a></span>begin() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -235,7 +274,7 @@ template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">A
           <td class="memname">bool begin </td>
           <td>(</td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>reserveColorConversionScratch</em> = <code>false</code></td><td>)</td>
+          <td class="paramname"><em>reserveColorConversionScratch</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -278,173 +317,8 @@ template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">A
 
 </div>
 </div>
-<a id="a389a91fc40cee25852fdc4f96cbd8b29" name="a389a91fc40cee25852fdc4f96cbd8b29"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a389a91fc40cee25852fdc4f96cbd8b29">&#9670;&#160;</a></span>encodeFrame()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>  = std::allocator&lt;uint8_t&gt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">size_t encodeFrame </td>
-          <td>(</td>
-          <td class="paramtype">const uint8_t *&#160;</td>
-          <td class="paramname"><em>srcY</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const uint8_t *&#160;</td>
-          <td class="paramname"><em>srcU</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const uint8_t *&#160;</td>
-          <td class="paramname"><em>srcV</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>See TinyH264Encoder::encodeFrame() - writes the result to <a class="el" href="classaudio__tools_1_1_h264_encoder.html#ae1220e7e3542f5a84c21fe2f7cef194c">setOutput()</a> instead of a caller-supplied buffer; returns the number of bytes written (0 if nothing was, e.g. <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a2e0ba07bec2a8049e7a7e76fff1451df" title="See TinyH264Encoder::setSize()">setSize()</a>/setOutput() was never called). </p>
-
-</div>
-</div>
-<a id="ac377026410b7cd04fe6802207c12a744" name="ac377026410b7cd04fe6802207c12a744"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac377026410b7cd04fe6802207c12a744">&#9670;&#160;</a></span>encodeFrameRgb565()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>  = std::allocator&lt;uint8_t&gt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">size_t encodeFrameRgb565 </td>
-          <td>(</td>
-          <td class="paramtype">const uint16_t *&#160;</td>
-          <td class="paramname"><em>rgb565</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>See TinyH264Encoder::encodeFrameRgb565() </p>
-
-</div>
-</div>
-<a id="a1ec709c13161b771809dca4e98845f74" name="a1ec709c13161b771809dca4e98845f74"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1ec709c13161b771809dca4e98845f74">&#9670;&#160;</a></span>encodeFrameRgb666()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>  = std::allocator&lt;uint8_t&gt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">size_t encodeFrameRgb666 </td>
-          <td>(</td>
-          <td class="paramtype">const uint8_t *&#160;</td>
-          <td class="paramname"><em>rgb666</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>See TinyH264Encoder::encodeFrameRgb666() </p>
-
-</div>
-</div>
-<a id="a934b9434a6860af55f5bf8cf9f4356ee" name="a934b9434a6860af55f5bf8cf9f4356ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a934b9434a6860af55f5bf8cf9f4356ee">&#9670;&#160;</a></span>encodeFrameRgb888()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>  = std::allocator&lt;uint8_t&gt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">size_t encodeFrameRgb888 </td>
-          <td>(</td>
-          <td class="paramtype">const uint8_t *&#160;</td>
-          <td class="paramname"><em>rgb</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>See TinyH264Encoder::encodeFrameRgb888() </p>
-
-</div>
-</div>
-<a id="a7e58aa76096129a16c784640d19e1c9a" name="a7e58aa76096129a16c784640d19e1c9a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e58aa76096129a16c784640d19e1c9a">&#9670;&#160;</a></span>encodeFrameYuv422()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>  = std::allocator&lt;uint8_t&gt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">size_t encodeFrameYuv422 </td>
-          <td>(</td>
-          <td class="paramtype">const uint8_t *&#160;</td>
-          <td class="paramname"><em>yuyv</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>See TinyH264Encoder::encodeFrameYuv422() </p>
-
-</div>
-</div>
-<a id="aaf81d3fdaf258088d7692fa70cece087" name="aaf81d3fdaf258088d7692fa70cece087"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaf81d3fdaf258088d7692fa70cece087">&#9670;&#160;</a></span>end()</h2>
+<a id="a64e9fa75beda50a9e8400ee0d4e61984" name="a64e9fa75beda50a9e8400ee0d4e61984"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64e9fa75beda50a9e8400ee0d4e61984">&#9670;&#160;</a></span>end()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -463,12 +337,14 @@ template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">A
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>See TinyH264Encoder::end() </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_video_encoder.html#aa540e86022c1f72380d1014d98f38f43">VideoEncoder</a>.</p>
 
 </div>
 </div>
@@ -497,7 +373,7 @@ template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">A
 </table>
 </div><div class="memdoc">
 
-<p>The QP actually used by the most recent <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a389a91fc40cee25852fdc4f96cbd8b29">encodeFrame()</a>-family call. </p>
+<p>The QP actually used by the most recent <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call. </p>
 
 </div>
 </div>
@@ -526,7 +402,7 @@ template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">A
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Pre-sizes the internal bitstream scratch buffer <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a389a91fc40cee25852fdc4f96cbd8b29">encodeFrame()</a> and its color-format siblings encode into before writing the result to <a class="el" href="classaudio__tools_1_1_h264_encoder.html#ae1220e7e3542f5a84c21fe2f7cef194c">setOutput()</a> - call before the first encode call to avoid paying for the automatic grow-and-retry on it (see class comment). Shrinks are ignored (the buffer never releases memory on its own). </p>
+<p>Pre-sizes the internal bitstream scratch buffer encodeFrame() and its color-format siblings encode into before writing the result to <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput()</a> - call before the first encode call to avoid paying for the automatic grow-and-retry on it (see class comment). Shrinks are ignored (the buffer never releases memory on its own). </p>
 
 </div>
 </div>
@@ -560,8 +436,8 @@ template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">A
 
 </div>
 </div>
-<a id="ae1220e7e3542f5a84c21fe2f7cef194c" name="ae1220e7e3542f5a84c21fe2f7cef194c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae1220e7e3542f5a84c21fe2f7cef194c">&#9670;&#160;</a></span>setOutput()</h2>
+<a id="a05ff4cf361d54457ed8586e8c14aa922" name="a05ff4cf361d54457ed8586e8c14aa922"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05ff4cf361d54457ed8586e8c14aa922">&#9670;&#160;</a></span>setOutput()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -581,11 +457,13 @@ template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">A
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Defines the target the encoded bitstream is written to, one write() call per <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a389a91fc40cee25852fdc4f96cbd8b29">encodeFrame()</a>-family call that actually produced output. </p>
+<p>Defines the target the encoded bitstream is written to, one <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call per <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call that actually produced output. </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_video_encoder.html#ac68081867afc8798c70a2e83599098e6">VideoEncoder</a>.</p>
 
 </div>
 </div>
@@ -769,6 +647,108 @@ template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">A
 
 </div>
 </div>
+<a id="ab4305de559192cc500fbd0587b2748ea" name="ab4305de559192cc500fbd0587b2748ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4305de559192cc500fbd0587b2748ea">&#9670;&#160;</a></span>setVideoFormat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>  = std::allocator&lt;uint8_t&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setVideoFormat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a>&#160;</td>
+          <td class="paramname"><em>format</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Selects the raw picture format <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> expects - <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5acd1ea458818d68e388b9356fd528d67a">VideoFormat::I420</a> (the default: planar Y/U/V, concatenated Y then U then V in one buffer, split via <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a2e0ba07bec2a8049e7a7e76fff1451df" title="See TinyH264Encoder::setSize()">setSize()</a>'s width/height), YUV422 (packed YUYV), RGB565/RGB666/RGB888 (packed) - see TinyH264Encoder's own encodeFrame()-family doc comments (h264_encoder.h) for exactly what each byte layout is. Any other VideoFormat is logged and ignored (previous format kept). </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_video_encoder.html#af3e841cd4cb4b9dd800d7c3be096fa16">VideoEncoder</a>.</p>
+
+</div>
+</div>
+<a id="a0a026655e20010414e4d162042f5c413" name="a0a026655e20010414e4d162042f5c413"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a026655e20010414e4d162042f5c413">&#9670;&#160;</a></span>videoInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>  = std::allocator&lt;uint8_t&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_video_info.html">VideoInfo</a> videoInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Reports the codec/dimensions of the bitstream written to <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput()</a>'s target - format is always <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a8ba63b54352f7053b055235a9ec7ac09">VideoFormat::H264</a> (NOT <a class="el" href="classaudio__tools_1_1_h264_encoder.html#ab4305de559192cc500fbd0587b2748ea">setVideoFormat()</a>'s raw input format); width/height match <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a2e0ba07bec2a8049e7a7e76fff1451df" title="See TinyH264Encoder::setSize()">setSize()</a> (0 if that was never called). </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_video_encoder.html#aeab7b6810b52140c3c3a60bf92ca92ba">VideoEncoder</a>.</p>
+
+</div>
+</div>
+<a id="a7597ef706dd1aa590903ce9e095db20a" name="a7597ef706dd1aa590903ce9e095db20a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7597ef706dd1aa590903ce9e095db20a">&#9670;&#160;</a></span>write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>  = std::allocator&lt;uint8_t&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t write </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Encodes one raw picture, in <a class="el" href="classaudio__tools_1_1_h264_encoder.html#ab4305de559192cc500fbd0587b2748ea">setVideoFormat()</a>'s format (I420 by default), sized for <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a2e0ba07bec2a8049e7a7e76fff1451df" title="See TinyH264Encoder::setSize()">setSize()</a>'s width/height, and writes the resulting Annex-B bitstream to <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput()</a> - returns the number of bytes written (0 if nothing was, e.g. <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a2e0ba07bec2a8049e7a7e76fff1451df" title="See TinyH264Encoder::setSize()">setSize()</a>/setOutput() was never called, or <code>len</code> doesn't match the configured format/size). <code>len</code> is only used to validate the I420 case (the other formats are packed buffers TinyH264Encoder itself size-checks internally); see TinyH264Encoder's own encodeFrame()-family doc comments (h264_encoder.h) for exactly what each byte layout/size is. </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_video_encoder.html#a4f016ab9037bd654f538f107eb1d8f78">VideoEncoder</a>.</p>
+
+</div>
+</div>
 <a id="a4cd10a6a59dce0566f64c649af69595f" name="a4cd10a6a59dce0566f64c649af69595f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4cd10a6a59dce0566f64c649af69595f">&#9670;&#160;</a></span>writeOut()</h2>
 
@@ -837,6 +817,54 @@ template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">A
       <table class="memname">
         <tr>
           <td class="memname">tinyh264::TinyH264Encoder&lt;<a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>&gt; encoder_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a45a159d389017b03a58e3508186fb445" name="a45a159d389017b03a58e3508186fb445"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45a159d389017b03a58e3508186fb445">&#9670;&#160;</a></span>height_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>  = std::allocator&lt;uint8_t&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int height_ = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1ce2d3c6f063a7d072a698f771f728a7" name="a1ce2d3c6f063a7d072a698f771f728a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ce2d3c6f063a7d072a698f771f728a7">&#9670;&#160;</a></span>input_format</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>  = std::allocator&lt;uint8_t&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a> input_format = <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5acd1ea458818d68e388b9356fd528d67a">VideoFormat::I420</a></td>
         </tr>
       </table>
   </td>
@@ -922,8 +950,32 @@ template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">A
 
 </div>
 </div>
+<a id="ad2af7588ca87bfadebd74fb4939e64dc" name="ad2af7588ca87bfadebd74fb4939e64dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2af7588ca87bfadebd74fb4939e64dc">&#9670;&#160;</a></span>width_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>  = std::allocator&lt;uint8_t&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int width_ = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/AudioCodecs/<a class="el" href="_codec_h264_8h_source.html">CodecH264.h</a></li>
+<li>src/AudioTools/Video/<a class="el" href="_codec_h264_8h_source.html">CodecH264.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
