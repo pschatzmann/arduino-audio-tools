@@ -2,10 +2,13 @@
  * @file ContainerBinary.h
  * @author Phil Schatzmann
  * @brief  A lean and efficient container format which provides Header records
- * with audio info, Audio records with the audio and Meta which
- * can contain any additional information. This can be used together with a
- * codec which does not transmit the audio information or has variable frame
- * lengths. We expect that a single write() is providing full frames.
+ * with audio info, Audio records with the audio, VideoHeader records with
+ * video info, Video records with already-encoded video/image frames (e.g.
+ * one H.264 access unit or one complete JPEG image - see writeVideo()/
+ * setOutputVideo()), and Meta which can contain any additional information.
+ * This can be used together with a codec which does not transmit the audio
+ * information or has variable frame lengths. We expect that a single
+ * write()/writeVideo() call is providing full frames.
  *
  * @version 0.1
  * @date 2022-05-04
@@ -18,6 +21,7 @@
 
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
 #include "AudioTools/CoreAudio/AudioBasic/StrView.h"
+#include "AudioTools/Video/Video.h"
 
 namespace audio_tools {
 
@@ -25,6 +29,8 @@ enum class ContainerType : uint8_t {
   Header = 1,
   Audio = 2,
   Meta = 3,
+  VideoHeader = 4,
+  Video = 5,
   Undefined = 0
 };
 
@@ -52,6 +58,16 @@ struct SimpleContainerDataHeader {
 
 struct SimpleContainerMetaDataHeader {
   CommonHeader common{ContainerType::Meta, 0};
+};
+
+struct SimpleContainerVideoConfig {
+  SimpleContainerVideoConfig() = default;
+  CommonHeader common{ContainerType::VideoHeader, sizeof(VideoInfo)};
+  VideoInfo info;
+};
+
+struct SimpleContainerVideoDataHeader {
+  CommonHeader common{ContainerType::Video, 0};
 };
 
 // struct ProcessedResult {
@@ -104,6 +120,7 @@ public:
     bool rc = p_codec->begin();
     p_codec->setAudioInfo(cfg.info);
     is_beginning = true;
+    is_video_beginning = true;
     return rc;
   }
 
@@ -115,6 +132,16 @@ public:
   }
 
   AudioInfo audioInfo() override { return cfg.info; }
+
+  /// Defines the video track configuration (width/height/format/...) - the
+  /// VideoHeader segment is (re-)sent before the next writeVideo() call.
+  void setVideoInfo(VideoInfo info) {
+    TRACED();
+    video_cfg.info = info;
+    is_video_beginning = true;
+  }
+
+  VideoInfo videoInfo() { return video_cfg.info; }
 
   /// Adds meta data segment
   size_t writeMeta(const uint8_t *data, size_t len) {
@@ -138,6 +165,23 @@ public:
     return len;
   }
 
+  /// Adds one already-encoded video/image frame (e.g. one H.264 access
+  /// unit or one complete JPEG image) as a Video segment - a single call
+  /// must provide the full frame. On the first call (or after
+  /// setVideoInfo()) a VideoHeader segment is emitted first.
+  size_t writeVideo(const uint8_t *data, size_t len) {
+    LOGD("BinaryContainerEncoder::writeVideo: %d", (int)len);
+    if (is_video_beginning) {
+      writeVideoHeader();
+      is_video_beginning = false;
+    }
+    video_dh.common.len = len + sizeof(CommonHeader);
+    video_dh.common.checksum = checkSum(data, len);
+    output((uint8_t *)&video_dh, sizeof(video_dh));
+    output(data, len);
+    return len;
+  }
+
   void end() { p_codec->end(); }
 
   operator bool() { return true; };
@@ -147,10 +191,13 @@ public:
 protected:
   uint64_t packet_count = 0;
   bool is_beginning = true;
+  bool is_video_beginning = true;
   int repeat_header;
   SimpleContainerConfig cfg;
   SimpleContainerDataHeader dh;
   SimpleContainerMetaDataHeader meta;
+  SimpleContainerVideoConfig video_cfg;
+  SimpleContainerVideoDataHeader video_dh;
   AudioEncoder *p_codec = nullptr;
   Print *p_out = nullptr;
 
@@ -175,6 +222,11 @@ protected:
   void writeHeader() {
     LOGD("writeHeader");
     output((uint8_t *)&cfg, sizeof(cfg));
+  }
+
+  void writeVideoHeader() {
+    LOGD("writeVideoHeader");
+    output((uint8_t *)&video_cfg, sizeof(video_cfg));
   }
 
   size_t output(const uint8_t *data, size_t len) {
@@ -215,6 +267,25 @@ public:
   void setMetaCallback(void (*callback)(uint8_t*, int, void*)) {
     meta_callback = callback;
   }
+
+  /// Defines the video output - e.g. a VideoOutput implementation
+  /// (H264Decoder, JpegTFT, ...), or any other Print if you want the raw
+  /// frame payload as-is.
+  void setOutputVideo(Print &out) {
+    LOGD("BinaryContainerDecoder::setOutputVideo");
+    p_out_video = &out;
+  }
+
+  /// Registers a callback invoked once a VideoHeader segment has been
+  /// parsed, providing the track's VideoInfo (width/height/format/...).
+  void setVideoInfoCallback(void (*callback)(VideoInfo info, void* ref)) {
+    video_info_callback = callback;
+  }
+
+  /// Common video info (width/height/format/...) parsed from the most
+  /// recent VideoHeader segment - VideoInfo::operator bool() is false if
+  /// none has been received yet.
+  VideoInfo videoInfo() { return video_info; }
 
   bool begin() {
     TRACED();
@@ -262,7 +333,10 @@ protected:
   AudioDecoder *p_codec = nullptr;
   SingleBuffer<uint8_t> buffer{0};
   Print *p_out = nullptr;
+  Print *p_out_video = nullptr;
+  VideoInfo video_info;
   void (*meta_callback)(uint8_t* data, int len, void* ref) = nullptr;
+  void (*video_info_callback)(VideoInfo info, void* ref) = nullptr;
   void (*error_handler)(BinaryContainerEncoderError error, BinaryContainerDecoder* source, void* ref) = nullptr;
   bool ignore_write_errors = true;
   void * reference = nullptr;
@@ -362,6 +436,34 @@ protected:
       buffer.clearArray(data_len);
       rc = true;
     } break;
+
+    case ContainerType::VideoHeader: {
+      LOGD("VideoHeader");
+      SimpleContainerVideoConfig config;
+      buffer.readArray((uint8_t *)&config, sizeof(config));
+      video_info = config.info;
+      if (video_info_callback) video_info_callback(video_info, reference);
+      video_info.logInfo();
+      rc = true;
+    } break;
+
+    case ContainerType::Video: {
+      LOGD("Video");
+      buffer.clearArray(sizeof(header));
+      int data_len = header.len - header_size;
+      uint8_t crc = checkSum(buffer.data(), data_len);
+      if (header.checksum == crc) {
+        outputVideo(buffer.data(), data_len);
+        buffer.clearArray(data_len);
+      } else {
+        LOGW("invalid video checksum");
+        if (error_handler) error_handler(InvalidChecksum, this, reference);
+        // move to next record
+        nextRecord();
+        return false;
+      }
+      rc = true;
+    } break;
     }
     return rc;
   }
@@ -374,6 +476,10 @@ protected:
       return true;
     case ContainerType::Meta:
       return header.checksum == 0;
+    case ContainerType::VideoHeader:
+      return header.checksum == 0;
+    case ContainerType::Video:
+      return true;
     }
     return false;
   }
@@ -399,6 +505,18 @@ protected:
       p_out->write((uint8_t *)data, len);
     else
       LOGW("output not defined");
+
+    return len;
+  }
+
+  // writes a decoded video frame to setOutputVideo()'s target - no codec
+  // is involved (video frames are already-encoded, see writeVideo())
+  size_t outputVideo(uint8_t *data, size_t len) {
+    LOGD("outputVideo: %d", (int)len);
+    if (p_out_video != nullptr)
+      p_out_video->write((uint8_t *)data, len);
+    else
+      LOGW("output video not defined");
 
     return len;
   }
