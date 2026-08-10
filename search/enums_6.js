@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['kind_0',['kind',['../structaudio__tools_1_1_demuxer_m_p4_1_1_track.html#aa10c9e8951b8ccf714a59ec321bdac5b',1,'audio_tools::DemuxerMP4::Track::Kind'],['../classaudio__tools_1_1_multi_output.html#aa10c9e8951b8ccf714a59ec321bdac5b',1,'audio_tools::MultiOutput::Kind']]]
+  ['i2schannelselect_0',['I2SChannelSelect',['../namespaceaudio__tools.html#ac7e19a69c5927b90d045e091376d1119',1,'audio_tools']]],
+  ['i2sformat_1',['I2SFormat',['../namespaceaudio__tools.html#a720616ce211566d808f3e441f9b18cda',1,'audio_tools']]],
+  ['i2ssignaltype_2',['I2SSignalType',['../namespaceaudio__tools.html#a1d3846b210a1698eaf7cdb7258fcc3e1',1,'audio_tools']]],
+  ['id3typeselection_3',['ID3TypeSelection',['../group__metadata.html#ga27477aa4d162c65da12c7ffd964f5779',1,'audio_tools']]]
 ];

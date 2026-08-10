@@ -136,12 +136,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a46f2c85361f5459bb6a58dc28dc3ee9a" id="r_a46f2c85361f5459bb6a58dc28dc3ee9a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_binary_container_encoder.html#a46f2c85361f5459bb6a58dc28dc3ee9a">setOutput</a> (<a class="el" href="class_print.html">Print</a> &amp;outStream)</td></tr>
 <tr class="memdesc:a46f2c85361f5459bb6a58dc28dc3ee9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default output assignment (encoders may override to store <a class="el" href="class_print.html">Print</a> reference)  <br /></td></tr>
 <tr class="separator:a46f2c85361f5459bb6a58dc28dc3ee9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4314004ac5b3ede54d47b6814008d35" id="r_ac4314004ac5b3ede54d47b6814008d35"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_binary_container_encoder.html#ac4314004ac5b3ede54d47b6814008d35">setVideoInfo</a> (<a class="el" href="structaudio__tools_1_1_video_info.html">VideoInfo</a> <a class="el" href="classaudio__tools_1_1_audio_encoder.html#a47385aa19435f5fca9d3083a748258c5">info</a>)</td></tr>
+<tr class="separator:ac4314004ac5b3ede54d47b6814008d35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77471bca1a5bac93978ec0c65484135f" id="r_a77471bca1a5bac93978ec0c65484135f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_video_info.html">VideoInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_binary_container_encoder.html#a77471bca1a5bac93978ec0c65484135f">videoInfo</a> ()</td></tr>
+<tr class="separator:a77471bca1a5bac93978ec0c65484135f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd7270e10d851383ff7b53c1241f6ba1" id="r_afd7270e10d851383ff7b53c1241f6ba1"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_binary_container_encoder.html#afd7270e10d851383ff7b53c1241f6ba1">write</a> (const uint8_t *data, size_t len)</td></tr>
 <tr class="memdesc:afd7270e10d851383ff7b53c1241f6ba1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add data segment. On first write we also add a <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> header.  <br /></td></tr>
 <tr class="separator:afd7270e10d851383ff7b53c1241f6ba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43a30da913185727325494f8d559f939" id="r_a43a30da913185727325494f8d559f939"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_binary_container_encoder.html#a43a30da913185727325494f8d559f939">writeMeta</a> (const uint8_t *data, size_t len)</td></tr>
 <tr class="memdesc:a43a30da913185727325494f8d559f939"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds meta data segment.  <br /></td></tr>
 <tr class="separator:a43a30da913185727325494f8d559f939"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a290aa808a5217f6fe74ac662f162300d" id="r_a290aa808a5217f6fe74ac662f162300d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_binary_container_encoder.html#a290aa808a5217f6fe74ac662f162300d">writeVideo</a> (const uint8_t *data, size_t len)</td></tr>
+<tr class="separator:a290aa808a5217f6fe74ac662f162300d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -153,6 +159,8 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a2e475070d3df18395c90a10c9d38eb0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e19c2ee025cf0d8494654f6baa42176" id="r_a2e19c2ee025cf0d8494654f6baa42176"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_binary_container_encoder.html#a2e19c2ee025cf0d8494654f6baa42176">writeHeader</a> ()</td></tr>
 <tr class="separator:a2e19c2ee025cf0d8494654f6baa42176"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae376001fa15e68bf349d586d7839ec2c" id="r_ae376001fa15e68bf349d586d7839ec2c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_binary_container_encoder.html#ae376001fa15e68bf349d586d7839ec2c">writeVideoHeader</a> ()</td></tr>
+<tr class="separator:ae376001fa15e68bf349d586d7839ec2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -164,6 +172,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a47385aa19435f5fca9d3083a748258c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa3de28cc1401a7913306c2f47b4d1a1e" id="r_aa3de28cc1401a7913306c2f47b4d1a1e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_binary_container_encoder.html#aa3de28cc1401a7913306c2f47b4d1a1e">is_beginning</a> = true</td></tr>
 <tr class="separator:aa3de28cc1401a7913306c2f47b4d1a1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afceb7ce242f7d0644699be4c9b6e19d2" id="r_afceb7ce242f7d0644699be4c9b6e19d2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_binary_container_encoder.html#afceb7ce242f7d0644699be4c9b6e19d2">is_video_beginning</a> = true</td></tr>
+<tr class="separator:afceb7ce242f7d0644699be4c9b6e19d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a20474c170471f9b3d24b915be857f3aa" id="r_a20474c170471f9b3d24b915be857f3aa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_simple_container_meta_data_header.html">SimpleContainerMetaDataHeader</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_binary_container_encoder.html#a20474c170471f9b3d24b915be857f3aa">meta</a></td></tr>
 <tr class="separator:a20474c170471f9b3d24b915be857f3aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a125b8f635f2405b891164572c2a578cd" id="r_a125b8f635f2405b891164572c2a578cd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_audio_encoder.html">AudioEncoder</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_binary_container_encoder.html#a125b8f635f2405b891164572c2a578cd">p_codec</a> = nullptr</td></tr>
@@ -174,6 +184,10 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ac533968d25054bb4834354d63a27d1b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65552e693ebce50b934496e2c76dc935" id="r_a65552e693ebce50b934496e2c76dc935"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_binary_container_encoder.html#a65552e693ebce50b934496e2c76dc935">repeat_header</a></td></tr>
 <tr class="separator:a65552e693ebce50b934496e2c76dc935"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6a02dea5b919471d765b212d5125e9c" id="r_ae6a02dea5b919471d765b212d5125e9c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_simple_container_video_config.html">SimpleContainerVideoConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_binary_container_encoder.html#ae6a02dea5b919471d765b212d5125e9c">video_cfg</a></td></tr>
+<tr class="separator:ae6a02dea5b919471d765b212d5125e9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d2e444e600d91da257107fb37f6a836" id="r_a8d2e444e600d91da257107fb37f6a836"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_simple_container_video_data_header.html">SimpleContainerVideoDataHeader</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_binary_container_encoder.html#a8d2e444e600d91da257107fb37f6a836">video_dh</a></td></tr>
+<tr class="separator:a8d2e444e600d91da257107fb37f6a836"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Wraps the encoded data into Config, Data, and <a class="el" href="class_meta.html" title="minimial implementtion of Meta which just ignores the data">Meta</a> segments so that we can recover the audio configuration and orignial segments if this is relevant. We assume that a full segment is written with each call of <a class="el" href="classaudio__tools_1_1_binary_container_encoder.html#afd7270e10d851383ff7b53c1241f6ba1" title="Add data segment. On first write we also add a AudioInfo header.">write()</a>; The segments are separated with a new line character. </p>
@@ -633,6 +647,58 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ac4314004ac5b3ede54d47b6814008d35" name="ac4314004ac5b3ede54d47b6814008d35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4314004ac5b3ede54d47b6814008d35">&#9670;&#160;</a></span>setVideoInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setVideoInfo </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structaudio__tools_1_1_video_info.html">VideoInfo</a>&#160;</td>
+          <td class="paramname"><em>info</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Defines the video track configuration (width/height/format/...) - the VideoHeader segment is (re-)sent before the next <a class="el" href="classaudio__tools_1_1_binary_container_encoder.html#a290aa808a5217f6fe74ac662f162300d">writeVideo()</a> call. </p>
+
+</div>
+</div>
+<a id="a77471bca1a5bac93978ec0c65484135f" name="a77471bca1a5bac93978ec0c65484135f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77471bca1a5bac93978ec0c65484135f">&#9670;&#160;</a></span>videoInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_video_info.html">VideoInfo</a> videoInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="afd7270e10d851383ff7b53c1241f6ba1" name="afd7270e10d851383ff7b53c1241f6ba1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afd7270e10d851383ff7b53c1241f6ba1">&#9670;&#160;</a></span>write()</h2>
 
@@ -814,6 +880,68 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a290aa808a5217f6fe74ac662f162300d" name="a290aa808a5217f6fe74ac662f162300d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a290aa808a5217f6fe74ac662f162300d">&#9670;&#160;</a></span>writeVideo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t writeVideo </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Adds one already-encoded video/image frame (e.g. one H.264 access unit or one complete JPEG image) as a Video segment - a single call must provide the full frame. On the first call (or after <a class="el" href="classaudio__tools_1_1_binary_container_encoder.html#ac4314004ac5b3ede54d47b6814008d35">setVideoInfo()</a>) a VideoHeader segment is emitted first. </p>
+
+</div>
+</div>
+<a id="ae376001fa15e68bf349d586d7839ec2c" name="ae376001fa15e68bf349d586d7839ec2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae376001fa15e68bf349d586d7839ec2c">&#9670;&#160;</a></span>writeVideoHeader()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void writeVideoHeader </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="ae0145874b7517a634fc2b46f72e299f3" name="ae0145874b7517a634fc2b46f72e299f3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae0145874b7517a634fc2b46f72e299f3">&#9670;&#160;</a></span>cfg</h2>
@@ -892,6 +1020,28 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">bool is_beginning = true</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afceb7ce242f7d0644699be4c9b6e19d2" name="afceb7ce242f7d0644699be4c9b6e19d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afceb7ce242f7d0644699be4c9b6e19d2">&#9670;&#160;</a></span>is_video_beginning</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool is_video_beginning = true</td>
         </tr>
       </table>
   </td>
@@ -1002,6 +1152,50 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">int repeat_header</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae6a02dea5b919471d765b212d5125e9c" name="ae6a02dea5b919471d765b212d5125e9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6a02dea5b919471d765b212d5125e9c">&#9670;&#160;</a></span>video_cfg</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_simple_container_video_config.html">SimpleContainerVideoConfig</a> video_cfg</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8d2e444e600d91da257107fb37f6a836" name="a8d2e444e600d91da257107fb37f6a836"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d2e444e600d91da257107fb37f6a836">&#9670;&#160;</a></span>video_dh</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_simple_container_video_data_header.html">SimpleContainerVideoDataHeader</a> video_dh</td>
         </tr>
       </table>
   </td>

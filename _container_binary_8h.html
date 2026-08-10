@@ -82,11 +82,12 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>A lean and efficient container format which provides Header records with audio info, Audio records with the audio and <a class="el" href="class_meta.html" title="minimial implementtion of Meta which just ignores the data">Meta</a> which can contain any additional information. This can be used together with a codec which does not transmit the audio information or has variable frame lengths. We expect that a single write() is providing full frames.  
+<p>A lean and efficient container format which provides Header records with audio info, Audio records with the audio, VideoHeader records with video info, Video records with already-encoded video/image frames (e.g. one H.264 access unit or one complete JPEG image - see writeVideo()/ setOutputVideo()), and <a class="el" href="class_meta.html" title="minimial implementtion of Meta which just ignores the data">Meta</a> which can contain any additional information. This can be used together with a codec which does not transmit the audio information or has variable frame lengths. We expect that a single write()/writeVideo() call is providing full frames.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;string.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="_audio_codecs_base_8h_source.html">AudioTools/AudioCodecs/AudioCodecsBase.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_str_view_8h_source.html">AudioTools/CoreAudio/AudioBasic/StrView.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_video_8h_source.html">AudioTools/Video/Video.h</a>&quot;</code><br />
 </div>
 <p><a href="_container_binary_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -106,6 +107,10 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_simple_container_meta_data_header.html">SimpleContainerMetaDataHeader</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_simple_container_video_config.html">SimpleContainerVideoConfig</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_simple_container_video_data_header.html">SimpleContainerVideoDataHeader</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
@@ -121,10 +126,15 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:acb4c9518c39bac13fb1a2cfd9185540a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Error types.  <a href="namespaceaudio__tools.html#acb4c9518c39bac13fb1a2cfd9185540a">More...</a><br /></td></tr>
 <tr class="separator:acb4c9518c39bac13fb1a2cfd9185540a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4dd4453d1994a706c0eb2350ffa55372" id="r_a4dd4453d1994a706c0eb2350ffa55372"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a4dd4453d1994a706c0eb2350ffa55372">ContainerType</a> : uint8_t { <a class="el" href="namespaceaudio__tools.html#a4dd4453d1994a706c0eb2350ffa55372abf50d5e661106d0abe925af3c2e6f7e7">Header</a> = 1
+<tr class="memitem:a4dd4453d1994a706c0eb2350ffa55372" id="r_a4dd4453d1994a706c0eb2350ffa55372"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a4dd4453d1994a706c0eb2350ffa55372">ContainerType</a> : uint8_t { <br />
+&#160;&#160;<a class="el" href="namespaceaudio__tools.html#a4dd4453d1994a706c0eb2350ffa55372abf50d5e661106d0abe925af3c2e6f7e7">Header</a> = 1
 , <a class="el" href="namespaceaudio__tools.html#a4dd4453d1994a706c0eb2350ffa55372ab22f0418e8ac915eb66f829d262d14a2">Audio</a> = 2
 , <a class="el" href="namespaceaudio__tools.html#a4dd4453d1994a706c0eb2350ffa55372ab6755d218d5f4e1cef9cce9cc39aeda9">Meta</a> = 3
+, <a class="el" href="namespaceaudio__tools.html#a4dd4453d1994a706c0eb2350ffa55372a0b3665c059d92f144f19aa2657f6666f">VideoHeader</a> = 4
+, <br />
+&#160;&#160;<a class="el" href="namespaceaudio__tools.html#a4dd4453d1994a706c0eb2350ffa55372a34e2d1989a1dbf75cd631596133ee5ee">Video</a> = 5
 , <a class="el" href="namespaceaudio__tools.html#a4dd4453d1994a706c0eb2350ffa55372aec0fc0100c4fc1ce4eea230c3dc10360">Undefined</a> = 0
+<br />
  }</td></tr>
 <tr class="separator:a4dd4453d1994a706c0eb2350ffa55372"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -135,7 +145,7 @@ Functions</h2></td></tr>
 <tr class="separator:a3c150cee18b03b247267e3579589d3dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A lean and efficient container format which provides Header records with audio info, Audio records with the audio and <a class="el" href="class_meta.html" title="minimial implementtion of Meta which just ignores the data">Meta</a> which can contain any additional information. This can be used together with a codec which does not transmit the audio information or has variable frame lengths. We expect that a single write() is providing full frames. </p>
+<div class="textblock"><p>A lean and efficient container format which provides Header records with audio info, Audio records with the audio, VideoHeader records with video info, Video records with already-encoded video/image frames (e.g. one H.264 access unit or one complete JPEG image - see writeVideo()/ setOutputVideo()), and <a class="el" href="class_meta.html" title="minimial implementtion of Meta which just ignores the data">Meta</a> which can contain any additional information. This can be used together with a codec which does not transmit the audio information or has variable frame lengths. We expect that a single write()/writeVideo() call is providing full frames. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>0.1 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2022-05-04</dd></dl>
