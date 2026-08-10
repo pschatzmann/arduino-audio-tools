@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AudioTools/Video/Video.h"
+#include "AudioTools/Video/CodecVideo.h"
 #include "H264Decoder.h"
 #include "H264Encoder.h"
 

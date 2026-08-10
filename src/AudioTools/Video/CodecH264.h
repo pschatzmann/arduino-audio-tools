@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
-#include "AudioTools/Video/Video.h"
+#include "AudioTools/Video/CodecVideo.h"
 #include "TinyH264Decoder.h"
 #include "TinyH264Encoder.h"
 

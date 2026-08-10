@@ -9,7 +9,7 @@
  * Pipeline: URLStream (HTTP, chunked) -> EncodedAudioOutput (Print bridge)
  * -> DemuxerAVI (demux)
  *      -> EncodedAudioStream (DecoderHelix: WAV/AAC/MP3) -> I2SStream (audio)
- *      \-> H264Decoder (H.264 decode -> RGB565) -> TFTOutput (draw) (video)
+ *      \-> H264Decoder (H.264 decode -> RGB565) -> OutputTFT (draw) (video)
  *
  * On an ESP32-S3 board, swap H264Decoder for H264DecoderESP32S3
  * (AudioTools/Video/CodecH264ESP32S3.h) to use the hardware/esp_h264
@@ -29,48 +29,24 @@
 #include "AudioTools/AudioCodecs/ContainerAVI.h"
 #include "AudioTools/AudioCodecs/CodecHelix.h"
 #include "AudioTools/Video/CodecH264.h"
-#include <TFT_eSPI.h>
+#include "AudioTools/Video/OutputTFT.h"
 
 // ---- WiFi ----
 const char *ssid = "ssid";
 const char *password = "password";
-
-// ---- Video source: the IP address printed by the H264-in-AVI server sketch ----
 const char *video_url = "http://192.168.1.100/";
 
-/// Bridges H264Decoder's decoded-RGB565-frame write() calls to the TFT -
-/// H264Decoder always hands over one complete frame per write() call (see
-/// its class comment), so this can push the whole frame in one go.
-class TFTOutput : public Print {
- public:
-  TFTOutput(TFT_eSPI &tft, H264Decoder &decoder)
-      : p_tft(&tft), p_decoder(&decoder) {}
-  size_t write(uint8_t c) override { return write(&c, 1); }
-  size_t write(const uint8_t *data, size_t len) override {
-    p_tft->pushImage(0, 0, p_decoder->driver().width(),
-                     p_decoder->driver().height(), (uint16_t *)data);
-    return len;
-  }
-
- protected:
-  TFT_eSPI *p_tft;
-  H264Decoder *p_decoder;
-};
 
 TFT_eSPI tft = TFT_eSPI();
 H264Decoder h264Decoder;
-TFTOutput tftOutput(tft, h264Decoder);
-
+OutputTFT tftOutput(tft, h264Decoder);
 I2SStream i2s;
-DecoderHelix multiDecoder;  // auto-selects WAV/AAC/MP3 by mime (whichever the
-                            // 'strf' audio format turns out to be)
+DecoderHelix multiDecoder;  
 EncodedAudioStream audioOut(&i2s, &multiDecoder);  // decodes PCM/AAC/MP3 -> I2S
-
 DemuxerAVI aviDecoder;
 EncodedAudioOutput aviInput(&aviDecoder);  // bridges raw bytes -> DemuxerAVI::write()
-
 URLStream url(ssid, password);
-StreamCopy copier;
+StreamCopy copier(aviInput, url);
 
 void setup() {
   Serial.begin(115200);
@@ -86,7 +62,7 @@ void setup() {
   multiDecoder.begin();
 
   h264Decoder.setOutput(tftOutput);  // RGB565 (the default) matches
-                                     // pushImage()'s expected format
+                                      // pushImage()'s expected format
   h264Decoder.begin();
 
   aviDecoder.setOutputAudio(audioOut);
@@ -105,7 +81,7 @@ void loop() {
   if (url) {
     // pumps bytes from the HTTP stream into DemuxerAVI, which routes
     // decoded audio to I2S and demuxed H.264 frames to H264Decoder, which
-    // in turn pushes decoded RGB565 frames to the TFT via TFTOutput
+    // in turn pushes decoded RGB565 frames to the TFT via OutputTFT
     copier.copy();
   } else {
     Serial.println("Disconnected - reconnecting...");

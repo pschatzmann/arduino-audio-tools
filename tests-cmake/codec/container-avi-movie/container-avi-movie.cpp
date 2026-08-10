@@ -19,10 +19,10 @@
 #include "AudioTools/AudioCodecs/CodecHelix.h"
 #include "AudioTools/Disk/FileSystem.h"
 #include "AudioTools/AudioLibs/PortAudioStream.h"
-#include "Video/JpegOpenCV.h"
+#include "AudioTools/Video/OutputOpenCV.h"
 
 PortAudioStream out;   // Output of sound on desktop
-JpegOpenCV jpegDisplay;
+OutputOpenCV jpegDisplay;
 DemuxerAVI codec;
 DecoderHelix multiDecoder;  // WAV/AAC/MP3, auto-selected by mime (DecoderHelix
                             // bundles WAVDecoder + AACDecoderHelix + MP3DecoderHelix)

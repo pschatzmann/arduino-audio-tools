@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AudioTools/AudioCodecs/ContainerCommon.h"
+#include "AudioTools/Video/CodecVideo.h"
 
 namespace audio_tools {
 

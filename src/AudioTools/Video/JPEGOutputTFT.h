@@ -1,8 +1,12 @@
 #pragma once
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
 #include "JPEGDecoder.h" // https://github.com/Bodmer/JPEGDecoder
+// JPEGDecoder.h leaves '#define SPIFFS LittleFS' active (its own ESP32/RP2040
+// flash-FS support) with no matching #undef - left in place, it corrupts
+// TFT_eSPI.h's own (unrelated) SPIFFS.h include below.
+#undef SPIFFS
 #include "TFT_eSPI.h"    // https://github.com/Bodmer/TFT_eSPI
-#include "Video/Video.h"
+#include "AudioTools/Video/Video.h"
 #include <algorithm> // std::min
 
 namespace audio_tools {
@@ -14,9 +18,9 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class JpegTFT : public VideoOutput {
+class JPEGOutputTFT : public VideoOutput {
 public:
-  JpegTFT(TFT_eSPI &TFTscreen) { p_screen = &TFTscreen; }
+  JPEGOutputTFT(TFT_eSPI &TFTscreen) { p_screen = &TFTscreen; }
 
   // Accumulates jpeg bytes for the frame currently being assembled
   size_t write(const uint8_t *data, size_t len) override {
@@ -122,6 +126,6 @@ protected:
     drawTime = millis() - drawTime; // Calculate the time it took
     return drawTime;
   }
-};  // JpegTFT
+};  // JPEGOutputTFT
 
 } // namespace audio_tools

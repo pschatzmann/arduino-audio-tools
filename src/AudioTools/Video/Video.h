@@ -133,107 +133,6 @@ struct VideoInfo {
 };
 
 /**
- * @brief Abstract class for video playback. This class is used to assemble a
- * complete video frame in memory. A video frame is written via one or more
- * write() calls, then finalized with flush() - implementations use flush()
- * to know a frame is complete (there is no separate frame-size hint, unlike
- * a length-prefixed chunk format).
- * @ingroup video
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-class VideoOutput : public Print {
- public:
-  size_t write(uint8_t c) override { return write(&c, 1); }
-  virtual size_t write(const uint8_t *data, size_t len) override = 0;
-};
-
-/**
- * @brief Common interface for video decoders (e.g. H264Decoder,
- * H264DecoderESP32S3 - CodecH264.h/CodecH264ESP32S3.h) - standardizes
- * lifecycle (begin()/end()), the Print target decoded pictures are
- * written to, and the pixel format they're written in (setVideoFormat()),
- * on top of VideoOutput's write()/flush() (the encoded-bitstream input
- * side, inherited unchanged). Concrete decoders may still expose their
- * own additional config knobs beyond this shared surface.
- * @ingroup video
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-class VideoDecoder : public VideoOutput {
- public:
-  virtual ~VideoDecoder() = default;
-  /// Defines the target each decoded picture is written to.
-  virtual void setOutput(Print &out) = 0;
-  /// Selects the pixel format written to setOutput()'s target - e.g.
-  /// VideoFormat::RGB565 (the common TFT wire format), RGB666/RGB888 for
-  /// higher color depth displays, or I420 to pass the decoded planes
-  /// through unconverted. Not every decoder backend supports every value
-  /// (e.g. RGB666/RGB888 are TinyH264-only, not available on the
-  /// esp_h264 backend) - unsupported values are logged and ignored (the
-  /// previously selected format stays in effect); see the concrete
-  /// class for exactly which ones it supports. Call before begin().
-  virtual void setVideoFormat(VideoFormat format) = 0;
-  /// Reports the format/dimensions of the picture written to
-  /// setOutput()'s target - VideoInfo::format is always the format most
-  /// recently selected via setVideoFormat() (RGB565 if never called),
-  /// the reliable way to determine it (rather than assuming); width/
-  /// height reflect the most recently decoded picture, 0 before any
-  /// picture has been decoded.
-  virtual VideoInfo videoInfo() = 0;
-  /// Initializes the decoder (allocates its picture buffers, etc).
-  virtual bool begin() = 0;
-  /// Releases the decoder's resources.
-  virtual void end() = 0;
-};
-
-/**
- * @brief Common interface for video encoders (e.g. H264Encoder,
- * H264EncoderESP32S3 - CodecH264.h/CodecH264ESP32S3.h) - standardizes
- * lifecycle (begin()/end()), the Print target the encoded bitstream is
- * written to, the raw-picture input format (setVideoFormat()), and a
- * single write() that encodes one picture in that format and writes the
- * result to setOutput()'s target - one write() call per picture, mirroring
- * VideoOutput's write()-per-frame convention on the decoder side. Concrete
- * encoders may still expose their own additional config knobs (e.g.
- * bitrate/QP) beyond this shared surface.
- * @ingroup video
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-class VideoEncoder {
- public:
-  virtual ~VideoEncoder() = default;
-  /// Defines the target the encoded bitstream is written to.
-  virtual void setOutput(Print &out) = 0;
-  /// Selects the raw picture format write() expects - e.g.
-  /// VideoFormat::I420 (planar Y/U/V, concatenated in one buffer),
-  /// YUV422 (packed YUYV), RGB565/RGB666/RGB888 (packed). Not every
-  /// encoder backend supports every value - unsupported values are
-  /// logged and ignored (the previously selected format stays in
-  /// effect); see the concrete class for exactly which ones it supports.
-  /// Call before the first write().
-  virtual void setVideoFormat(VideoFormat format) = 0;
-  /// Reports the format/dimensions of the bitstream written to
-  /// setOutput()'s target - VideoInfo::format is the actual encoded
-  /// codec (e.g. VideoFormat::H264), NOT setVideoFormat()'s raw input
-  /// format, the reliable way to determine it (rather than assuming);
-  /// width/height match the encoder's configured picture size (e.g.
-  /// setSize()), 0 if that was never called.
-  virtual VideoInfo videoInfo() = 0;
-  /// Initializes the encoder (allocates its picture buffers, etc).
-  virtual bool begin() = 0;
-  /// Releases the encoder's resources.
-  virtual void end() = 0;
-  /// Encodes one raw picture (in setVideoFormat()'s format, sized for
-  /// the encoder's configured width/height) and writes the result to
-  /// setOutput()'s target, returning the number of bytes written (0 if
-  /// nothing was, e.g. setOutput()/size wasn't configured, or the
-  /// format is unsupported).
-  virtual size_t write(const uint8_t *data, size_t len) = 0;
-};
-
-/**
  * @brief Pull-based provider of one already-encoded video/image frame at a
  * time - e.g. wraps a camera capture + H264Encoder/MJPEG capture pipeline.
  * Used by VideoMuxerWithTasks's video task, which calls nextFrame() once
@@ -260,71 +159,23 @@ class VideoFrameSource {
   virtual VideoInfo videoInfo() = 0;
 };
 
+
 /**
- * @brief Simple in-memory VideoOutput sink that assembles a single video
- * frame of at most a fixed maximum size. Connect it to any write()/flush()
- * producer (e.g. a decoder), then, once flush() has been called, read the
- * assembled frame back via data() and available() (or register a
- * setOnEnd() callback to be notified instead of polling).
+ * @brief Abstract class for video playback. This class is used to assemble a
+ * complete video frame in memory. A video frame is written via one or more
+ * write() calls, then finalized with flush() - implementations use flush()
+ * to know a frame is complete (there is no separate frame-size hint, unlike
+ * a length-prefixed chunk format).
  * @ingroup video
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class VideoFrame : public VideoOutput {
+class VideoOutput : public Print {
  public:
-  /// Callback signature for setOnEnd(): invoked from flush() with a
-  /// reference to the VideoFrame whose frame was just completed.
-  using VideoFrameCallback = void (*)(VideoFrame &frame);
-
-  /// @param maxSize maximum frame size in bytes that this instance can hold
-  VideoFrame(size_t maxSize) : max_size(maxSize) { buffer.resize(max_size); }
-
-  /// Registers a callback that is invoked from flush(), once the frame has
-  /// been fully assembled, receiving a reference to this VideoFrame so it
-  /// can read data()/available().
-  void setOnEnd(VideoFrameCallback callback) { on_end_cb = callback; }
-
-  /// Appends data to the frame; truncates (rather than overflowing the
-  /// buffer) if it would exceed maxSize. Returns the number of bytes
-  /// actually written.
-  size_t write(const uint8_t *data, size_t len) override {
-    size_t to_write = pos + len <= max_size ? len : max_size - pos;
-    memcpy(buffer.data() + pos, data, to_write);
-    pos += to_write;
-    return to_write;
-  }
-
-  /// Finalizes the frame: invokes the setOnEnd() callback (if any) with a
-  /// reference to this VideoFrame, then resets the write position so the
-  /// next write() call starts a fresh frame.
-  void flush() override {
-    if (on_end_cb != nullptr) on_end_cb(*this);
-    pos = 0;
-  }
-
-  /// Number of bytes currently assembled in the frame
-  size_t available() { return pos; }
-
-  /// Manually declares how many bytes of the frame are valid, e.g. after
-  /// writing directly into data() from an external source (DMA buffer,
-  /// camera driver, ...) instead of going through write(). Clamped to
-  /// size().
-  void setAvailable(size_t available) {
-    pos = available <= max_size ? available : max_size;
-  }
-
-  /// Pointer to the assembled frame data
-  uint8_t *data() { return buffer.data(); }
-
-  /// Maximum frame size (bytes) this instance can hold
-  size_t size() { return max_size; }
-
- protected:
-  Vector<uint8_t> buffer;
-  size_t max_size;
-  size_t pos = 0;
-  VideoFrameCallback on_end_cb = nullptr;
+  size_t write(uint8_t c) override { return write(&c, 1); }
+  virtual size_t write(const uint8_t *data, size_t len) override = 0;
 };
+
 
 /**
  * @brief Logic to Synchronize video and audio output: This is the minimum

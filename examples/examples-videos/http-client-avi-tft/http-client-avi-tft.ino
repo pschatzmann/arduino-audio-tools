@@ -2,7 +2,7 @@
  * @file http-client-avi-tft.ino
  * @brief Companion client for http-server-avi.ino: connects to the MJPEG-in-AVI
  * HTTP stream published by that sketch, demuxes it with DemuxerAVI, and
- * displays the decoded JPEG frames live on a TFT screen with JpegTFT. Also
+ * displays the decoded JPEG frames live on a TFT screen with JPEGOutputTFT. Also
  * plays the audio track through I2S, if the stream has one - http-server-avi.ino
  * currently only sends video, but DemuxerAVI's audio format is only known
  * once the 'strf' header is parsed, so this client is written to handle
@@ -11,7 +11,7 @@
  * Pipeline: URLStream (HTTP, chunked) -> EncodedAudioOutput (Print bridge)
  * -> DemuxerAVI (demux)
  *      -> EncodedAudioStream (DecoderHelix: WAV/AAC/MP3) -> I2SStream (audio)
- *      \-> JpegTFT (JPEG decode + draw) (video)
+ *      \-> JPEGOutputTFT (JPEG decode + draw) (video)
  *
  * Dependencies (install via Library Manager):
  * - https://github.com/Bodmer/TFT_eSPI (configure your display's pins/driver
@@ -25,28 +25,23 @@
 #include "AudioTools/Communication/AudioHttp.h"
 #include "AudioTools/AudioCodecs/ContainerAVI.h"
 #include "AudioTools/AudioCodecs/CodecHelix.h"
-#include "AudioTools/Video/JpegTFT.h"
+#include "AudioTools/Video/JPEGOutputTFT.h"
 
 // ---- WiFi ----
 const char *ssid = "ssid";
 const char *password = "password";
-
-// ---- Video source: the IP address printed by http-server-avi.ino ----
 const char *video_url = "http://192.168.1.100/";
 
 TFT_eSPI tft = TFT_eSPI();
-JpegTFT jpegOutput(tft);
-
+JPEGOutputTFT jpegOutput(tft);
 I2SStream i2s;
-DecoderHelix multiDecoder;  // auto-selects WAV/AAC/MP3 by mime (whichever the
-                            // 'strf' audio format turns out to be)
+DecoderHelix multiDecoder;  
 EncodedAudioStream audioOut(&i2s, &multiDecoder);  // decodes PCM/AAC/MP3 -> I2S
-
 DemuxerAVI aviDecoder;
 EncodedAudioOutput aviInput(&aviDecoder);  // bridges raw bytes -> DemuxerAVI::write()
 
 URLStream url(ssid, password);
-StreamCopy copier;
+StreamCopy copier(aviInput, url);
 
 void setup() {
   Serial.begin(115200);
@@ -69,13 +64,12 @@ void setup() {
     while (true) delay(1000);
   }
 
-  copier.begin(aviInput, url);
 }
 
 void loop() {
   if (url) {
     // pumps bytes from the HTTP stream into DemuxerAVI, which routes
-    // decoded audio to I2S and demuxed JPEG frames to JpegTFT for display
+    // decoded audio to I2S and demuxed JPEG frames to JPEGOutputTFT for display
     copier.copy();
   } else {
     Serial.println("Disconnected - reconnecting...");
