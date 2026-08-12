@@ -103,6 +103,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a0fe4d53a942330f3836650dcf0da5135"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeab7b6810b52140c3c3a60bf92ca92ba" id="r_aeab7b6810b52140c3c3a60bf92ca92ba"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structaudio__tools_1_1_video_info.html">VideoInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_frame_source.html#aeab7b6810b52140c3c3a60bf92ca92ba">videoInfo</a> ()=0</td></tr>
 <tr class="separator:aeab7b6810b52140c3c3a60bf92ca92ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf56e2cb7e8636670b44347e22aed2b6" id="r_aaf56e2cb7e8636670b44347e22aed2b6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_frame_source.html#aaf56e2cb7e8636670b44347e22aed2b6">writeTo</a> (<a class="el" href="class_print.html">Print</a> &amp;out)</td></tr>
+<tr class="memdesc:aaf56e2cb7e8636670b44347e22aed2b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write the frame to the indicated destination.  <br /></td></tr>
+<tr class="separator:aaf56e2cb7e8636670b44347e22aed2b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Pull-based provider of one already-encoded video/image frame at a time - e.g. wraps a camera capture + H264Encoder/MJPEG capture pipeline. Used by <a class="el" href="classaudio__tools_1_1_video_muxer_with_tasks.html" title="Feeds a Muxer (MuxerAVI, MuxerMP4, ...) from two background Tasks instead of a single loop()/copy() c...">VideoMuxerWithTasks</a>'s video task, which calls <a class="el" href="classaudio__tools_1_1_video_frame_source.html#a0fe4d53a942330f3836650dcf0da5135">nextFrame()</a> once per iteration, at the rate given by <a class="el" href="classaudio__tools_1_1_video_frame_source.html#aeab7b6810b52140c3c3a60bf92ca92ba">videoInfo()</a>.fps. Implementations should produce/capture the frame here directly (not defer it): a slow <a class="el" href="classaudio__tools_1_1_video_frame_source.html#a0fe4d53a942330f3836650dcf0da5135">nextFrame()</a> only delays whatever is pulling from it. </p>
@@ -189,6 +192,34 @@ Public Member Functions</h2></td></tr>
 <p>Provides the width/height/fps/format (and, if known, frame_size/ total_file_size) of the frames returned by <a class="el" href="classaudio__tools_1_1_video_frame_source.html#a0fe4d53a942330f3836650dcf0da5135">nextFrame()</a> - width, height, fps and format must be set, since <a class="el" href="classaudio__tools_1_1_video_muxer_with_tasks.html" title="Feeds a Muxer (MuxerAVI, MuxerMP4, ...) from two background Tasks instead of a single loop()/copy() c...">VideoMuxerWithTasks</a> uses them directly to configure the <a class="el" href="classaudio__tools_1_1_muxer.html" title="Common interface for muxers (MuxerAVI, MuxerMP4) that combine an already-encoded video track (and opt...">Muxer</a> it writes to instead of requiring the caller to duplicate the same values there. </p>
 
 <p>Implemented in <a class="el" href="classaudio__tools_1_1_camera_frame_source.html#a0a026655e20010414e4d162042f5c413">CameraFrameSource</a>, and <a class="el" href="classaudio__tools_1_1_camera_frame_source_open_c_v.html#a0a026655e20010414e4d162042f5c413">CameraFrameSourceOpenCV</a>.</p>
+
+</div>
+</div>
+<a id="aaf56e2cb7e8636670b44347e22aed2b6" name="aaf56e2cb7e8636670b44347e22aed2b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf56e2cb7e8636670b44347e22aed2b6">&#9670;&#160;</a></span>writeTo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool writeTo </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_print.html">Print</a> &amp;&#160;</td>
+          <td class="paramname"><em>out</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Write the frame to the indicated destination. </p>
 
 </div>
 </div>
