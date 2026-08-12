@@ -17,11 +17,11 @@
 /// regular heap elsewhere. Define this yourself before including this
 /// header to override (e.g. to force the regular heap on an ESP32 board
 /// without PSRAM).
-#ifndef H264_DECODER_DEFAULT_ALLOCATOR
+#ifndef H264_DEFAULT_ALLOCATOR
 #ifdef ESP32
-#define H264_DECODER_DEFAULT_ALLOCATOR tinyh264::PSRAMAllocatorESP32<uint8_t>
+#define H264_DEFAULT_ALLOCATOR tinyh264::PSRAMAllocatorESP32<uint8_t>
 #else
-#define H264_DECODER_DEFAULT_ALLOCATOR std::allocator<uint8_t>
+#define H264_DEFAULT_ALLOCATOR tinyh264::StdAllocator<uint8_t>
 #endif
 #endif
 
@@ -45,7 +45,7 @@ namespace audio_tools {
  * because some producers (e.g. DemuxerAVI/DemuxerMP4) call it
  * unconditionally after each frame.
  *
- * Uses H264_DECODER_DEFAULT_ALLOCATOR for the decoded picture buffers -
+ * Uses H264_DEFAULT_ALLOCATOR for the decoded picture buffers -
  * see that macro's own comment above for the PSRAM-on-ESP32/heap-
  * elsewhere default it picks, and how to override it.
  *
@@ -128,15 +128,15 @@ class H264Decoder : public VideoDecoder {
 
   /// Direct access to the wrapped TinyH264Decoder, e.g. for its width()/
   /// height()/y()/u()/v()/getY()/getU()/getV() accessors.
-  tinyh264::TinyH264Decoder<H264_DECODER_DEFAULT_ALLOCATOR> &driver() { return decoder_; }
+  tinyh264::TinyH264Decoder<H264_DEFAULT_ALLOCATOR> &driver() { return decoder_; }
 
  protected:
-  tinyh264::TinyH264Decoder<H264_DECODER_DEFAULT_ALLOCATOR> decoder_;
+  tinyh264::TinyH264Decoder<H264_DEFAULT_ALLOCATOR> decoder_;
   Print *p_out = nullptr;
   VideoFormat pixel_format = VideoFormat::RGB565;
   Vector<uint8_t> frame_buffer;
 
-  static void onFrame(tinyh264::TinyH264Decoder<H264_DECODER_DEFAULT_ALLOCATOR> &decoder,
+  static void onFrame(tinyh264::TinyH264Decoder<H264_DEFAULT_ALLOCATOR> &decoder,
                        void *userData) {
     static_cast<H264Decoder *>(userData)->writeFrame();
   }
@@ -149,28 +149,52 @@ class H264Decoder : public VideoDecoder {
     switch (pixel_format) {
       case VideoFormat::RGB565: {
         size_t needed = w * h;
-        if (frame_buffer.size() < needed * 2) frame_buffer.resize(needed * 2);
+        if (frame_buffer.size() < needed * 2) {
+          frame_buffer.resize(needed * 2);
+          if (frame_buffer.data() == nullptr) {
+            LOGE("H264Decoder: frame buffer allocation failed (RGB565)");
+            return;
+          }
+        }
         n = decoder_.toRGB565((uint16_t *)frame_buffer.data(), needed);
         if (n > 0) p_out->write(frame_buffer.data(), n * 2);
         break;
       }
       case VideoFormat::RGB666: {
         size_t needed = w * h * 3;
-        if (frame_buffer.size() < needed) frame_buffer.resize(needed);
+        if (frame_buffer.size() < needed) {
+          frame_buffer.resize(needed);
+          if (frame_buffer.data() == nullptr) {
+            LOGE("H264Decoder: frame buffer allocation failed (RGB666)");
+            return;
+          }
+        }
         n = decoder_.toRGB666(frame_buffer.data(), needed);
         if (n > 0) p_out->write(frame_buffer.data(), n);
         break;
       }
       case VideoFormat::RGB888: {
         size_t needed = w * h * 3;
-        if (frame_buffer.size() < needed) frame_buffer.resize(needed);
+        if (frame_buffer.size() < needed) {
+          frame_buffer.resize(needed);
+          if (frame_buffer.data() == nullptr) {
+            LOGE("H264Decoder: frame buffer allocation failed (RGB888)");
+            return;
+          }
+        }
         n = decoder_.toRGB888(frame_buffer.data(), needed);
         if (n > 0) p_out->write(frame_buffer.data(), n);
         break;
       }
       case VideoFormat::I420: {
         size_t needed = w * h + 2 * (w / 2) * (h / 2);
-        if (frame_buffer.size() < needed) frame_buffer.resize(needed);
+        if (frame_buffer.size() < needed) {
+          frame_buffer.resize(needed);
+          if (frame_buffer.data() == nullptr) {
+            LOGE("H264Decoder: frame buffer allocation failed (I420)");
+            return;
+          }
+        }
         n = decoder_.toYUV420(frame_buffer.data(), needed);
         if (n > 0) p_out->write(frame_buffer.data(), n);
         break;
@@ -200,17 +224,12 @@ class H264Decoder : public VideoDecoder {
  * Use setBitstreamBufferSize() to pre-size it (e.g. to avoid the first
  * frame paying for a grow-and-retry).
  *
- * The Allocator template parameter is forwarded to TinyH264Encoder - pass a
- * PSRAM allocator to place the encoder's internal reconstructed-picture
- * buffers there instead of the default heap; see TinyH264Encoder.h's own
- * file comment.
  *
  * @ingroup h264
  * @ingroup encoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-template <typename Allocator = std::allocator<uint8_t>>
 class H264Encoder : public VideoEncoder {
  public:
   /// Default size (bytes) of the internal bitstream scratch buffer -
@@ -290,7 +309,12 @@ class H264Encoder : public VideoEncoder {
   /// the automatic grow-and-retry on it (see class comment). Shrinks are
   /// ignored (the buffer never releases memory on its own).
   void setBitstreamBufferSize(size_t size) {
-    if (size > bitstream.size()) bitstream.resize(size);
+    if (size > bitstream.size()) {
+      bitstream.resize(size);
+      if (bitstream.data() == nullptr) {
+        LOGE("H264Encoder: bitstream buffer allocation failed");
+      }
+    }
   }
 
   /// See TinyH264Encoder::begin() - equivalent to
@@ -353,14 +377,14 @@ class H264Encoder : public VideoEncoder {
 
   /// Direct access to the wrapped TinyH264Encoder, e.g. for its
   /// width()/height()/y()/u()/v() reconstructed-picture accessors.
-  tinyh264::TinyH264Encoder<Allocator> &driver() { return encoder_; }
+  tinyh264::TinyH264Encoder<H264_DEFAULT_ALLOCATOR> &driver() { return encoder_; }
 
  protected:
   /// Number of times to double the bitstream buffer and retry an
   /// undersized encode call before giving up (see class comment).
   static constexpr int kMaxGrowRetries = 4;
 
-  tinyh264::TinyH264Encoder<Allocator> encoder_;
+  tinyh264::TinyH264Encoder<H264_DEFAULT_ALLOCATOR> encoder_;
   Print *p_out = nullptr;
   Vector<uint8_t> bitstream;
   VideoFormat input_format = VideoFormat::I420;
@@ -370,10 +394,20 @@ class H264Encoder : public VideoEncoder {
   template <typename Fn>
   size_t writeOut(Fn encodeInto) {
     if (p_out == nullptr) return 0;
-    if (bitstream.size() == 0) bitstream.resize(kDefaultBitstreamBufferSize);
+    if (bitstream.size() == 0) {
+      bitstream.resize(kDefaultBitstreamBufferSize);
+      if (bitstream.data() == nullptr) {
+        LOGE("H264Encoder: bitstream buffer allocation failed");
+        return 0;
+      }
+    }
     size_t n = encodeInto(bitstream.data(), bitstream.size());
     for (int attempt = 0; n == 0 && attempt < kMaxGrowRetries; ++attempt) {
       bitstream.resize(bitstream.size() * 2);
+      if (bitstream.data() == nullptr) {
+        LOGE("H264Encoder: bitstream buffer grow failed");
+        return 0;
+      }
       n = encodeInto(bitstream.data(), bitstream.size());
     }
     if (n > 0) p_out->write(bitstream.data(), n);

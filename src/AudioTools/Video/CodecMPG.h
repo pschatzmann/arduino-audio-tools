@@ -4,39 +4,18 @@
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
 #include "AudioTools/Video/CodecVideo.h"
 
-#if __has_include("TinyMPGDecoder.h")
 #include "TinyMPGDecoder.h"
-#define AUDIO_TOOLS_HAS_TINY_MPG_DECODER
-#endif
-
-#if __has_include("TinyMPGEncoder.h")
 #include "TinyMPGEncoder.h"
-#define AUDIO_TOOLS_HAS_TINY_MPG_ENCODER
-#endif
 
-#if !defined(AUDIO_TOOLS_HAS_TINY_MPG_DECODER)
-#error "CodecMPG.h requires TinyMPGDecoder.h. Install TinyMPG: https://github.com/pschatzmann/TinyMPG"
-#endif
 
-#if !defined(AUDIO_TOOLS_HAS_TINY_MPG_ENCODER)
-#error "CodecMPG.h requires TinyMPGEncoder.h. Install TinyMPG: https://github.com/pschatzmann/TinyMPG"
-#endif
-
-#ifndef MPG_DECODER_DEFAULT_ALLOCATOR
+#ifndef MPG_DEFAULT_ALLOCATOR
 #ifdef ESP32
-#define MPG_DECODER_DEFAULT_ALLOCATOR tinympg::PSRAMAllocatorESP32<uint8_t>
+#  define MPG_DEFAULT_ALLOCATOR tinympg::PSRAMAllocatorESP32<uint8_t>
 #else
-#define MPG_DECODER_DEFAULT_ALLOCATOR std::allocator<uint8_t>
+#  define MPG_DEFAULT_ALLOCATOR tinympg::StdAllocator<uint8_t>
 #endif
 #endif
 
-#ifndef MPG_ENCODER_DEFAULT_ALLOCATOR
-#ifdef ESP32
-#define MPG_ENCODER_DEFAULT_ALLOCATOR tinympg::PSRAMAllocatorESP32<uint8_t>
-#else
-#define MPG_ENCODER_DEFAULT_ALLOCATOR std::allocator<uint8_t>
-#endif
-#endif
 
 /**
  * @defgroup mpg MPG
@@ -66,7 +45,6 @@ namespace audio_tools {
  * @ingroup mpg
  * @ingroup decoder
  */
-template <typename Allocator = MPG_DECODER_DEFAULT_ALLOCATOR>
 class MPGDecoder : public VideoDecoder {
  public:
   MPGDecoder() { decoder_.setCallback(onFrame, this); }
@@ -110,20 +88,20 @@ class MPGDecoder : public VideoDecoder {
 
   bool hasError() { return decoder_.hasError(); }
 
-  tinympg::TinyMPGDecoder<Allocator> &driver() { return decoder_; }
+  tinympg::TinyMPGDecoder<MPG_DEFAULT_ALLOCATOR> &driver() { return decoder_; }
 
  protected:
-  tinympg::TinyMPGDecoder<Allocator> decoder_;
+  tinympg::TinyMPGDecoder<MPG_DEFAULT_ALLOCATOR> decoder_;
   Print *p_out = nullptr;
   VideoFormat pixel_format = VideoFormat::RGB565;
   Vector<uint8_t> frame_buffer;
 
-  static void onFrame(tinympg::TinyMPGDecoder<Allocator> &decoder,
+  static void onFrame(tinympg::TinyMPGDecoder<MPG_DEFAULT_ALLOCATOR> &decoder,
                       void *userData) {
     static_cast<MPGDecoder *>(userData)->writeFrame(decoder);
   }
 
-  void writeFrame(tinympg::TinyMPGDecoder<Allocator> &decoder) {
+  void writeFrame(tinympg::TinyMPGDecoder<MPG_DEFAULT_ALLOCATOR> &decoder) {
     if (p_out == nullptr) return;
 
     size_t w = decoder.width();
@@ -133,21 +111,39 @@ class MPGDecoder : public VideoDecoder {
     switch (pixel_format) {
       case VideoFormat::RGB565: {
         size_t needed = w * h;
-        if (frame_buffer.size() < needed * 2) frame_buffer.resize(needed * 2);
+        if (frame_buffer.size() < needed * 2) {
+          frame_buffer.resize(needed * 2);
+          if (frame_buffer.data() == nullptr) {
+            LOGE("MPGDecoder: frame buffer allocation failed (RGB565)");
+            return;
+          }
+        }
         n = decoder.toRGB565((uint16_t *)frame_buffer.data(), needed);
         if (n > 0) p_out->write(frame_buffer.data(), n * 2);
         break;
       }
       case VideoFormat::RGB888: {
         size_t needed = w * h * 3;
-        if (frame_buffer.size() < needed) frame_buffer.resize(needed);
+        if (frame_buffer.size() < needed) {
+          frame_buffer.resize(needed);
+          if (frame_buffer.data() == nullptr) {
+            LOGE("MPGDecoder: frame buffer allocation failed (RGB888)");
+            return;
+          }
+        }
         n = decoder.toRGB888(frame_buffer.data(), needed);
         if (n > 0) p_out->write(frame_buffer.data(), n);
         break;
       }
       case VideoFormat::I420: {
         size_t needed = w * h + 2 * (w / 2) * (h / 2);
-        if (frame_buffer.size() < needed) frame_buffer.resize(needed);
+        if (frame_buffer.size() < needed) {
+          frame_buffer.resize(needed);
+          if (frame_buffer.data() == nullptr) {
+            LOGE("MPGDecoder: frame buffer allocation failed (I420)");
+            return;
+          }
+        }
         n = decoder.toYUV420(frame_buffer.data(), needed);
         if (n > 0) p_out->write(frame_buffer.data(), n);
         break;
@@ -170,12 +166,16 @@ class MPGDecoder : public VideoDecoder {
  * @ingroup mpg
  * @ingroup encoder
  */
-template <typename Allocator = MPG_ENCODER_DEFAULT_ALLOCATOR>
 class MPGEncoder : public VideoEncoder {
  public:
-  MPGEncoder(int width = 0, int height = 0) : encoder_(width, height) {
+  MPGEncoder(int width = 0, int height = 0) {
     width_ = width;
     height_ = height;
+    encoder_.setQp(8);
+    if (width_ > 0 && height_ > 0) {
+      encoder_.setSize(width_, height_);
+      ensureBitstreamBuffer();
+    }
   }
 
   void setOutput(Print &out) override { p_out = &out; }
@@ -183,9 +183,6 @@ class MPGEncoder : public VideoEncoder {
   void setVideoFormat(VideoFormat format) override {
     switch (format) {
       case VideoFormat::I420:
-      case VideoFormat::YUV422:
-      case VideoFormat::RGB565:
-      case VideoFormat::RGB888:
         input_format = format;
         break;
       default:
@@ -206,25 +203,92 @@ class MPGEncoder : public VideoEncoder {
     width_ = width;
     height_ = height;
     encoder_.setSize(width, height);
+    ensureBitstreamBuffer();
   }
 
-  bool begin() override { return encoder_.begin(); }
+  void setQp(int qscale) { encoder_.setQp(qscale); }
 
-  void end() override { encoder_.end(); }
+  void setFrameRate(int fps) { encoder_.setFrameRate(fps); }
+
+  void setBitstreamBufferSize(size_t bytes) {
+    bitstream_buffer.resize(bytes);
+    if (bitstream_buffer.data() == nullptr && bytes > 0) {
+      LOGE("MPGEncoder: bitstream buffer allocation failed");
+    }
+  }
+
+  bool begin() override {
+    if (width_ <= 0 || height_ <= 0) {
+      LOGE("MPGEncoder: invalid size - call setSize() first");
+      return false;
+    }
+    if (!ensureBitstreamBuffer()){
+      LOGE("MPGEncoder: failed to allocate bitstream buffer");
+      return false;
+    }
+    return true;
+  }
+
+  void end() override {}
 
   size_t write(const uint8_t *data, size_t len) override {
     if (p_out == nullptr) return 0;
-    return encoder_.encode(data, len, *p_out, input_format);
+    if (input_format != VideoFormat::I420) {
+      LOGE("MPGEncoder: only VideoFormat::I420 is supported");
+      return 0;
+    }
+    if (width_ <= 0 || height_ <= 0) {
+      LOGE("MPGEncoder: invalid size - call setSize() first");
+      return 0;
+    }
+    if (!ensureBitstreamBuffer()) {
+      LOGE("MPGEncoder: bitstream buffer not available");
+      return 0;
+    }
+
+    size_t y_size = (size_t)width_ * (size_t)height_;
+    size_t uv_size = y_size / 4;
+    size_t min_size = y_size + uv_size + uv_size;
+    if (len < min_size) {
+      LOGE("MPGEncoder: input buffer too small for I420 frame");
+      return 0;
+    }
+
+    const uint8_t *srcY = data;
+    const uint8_t *srcU = data + y_size;
+    const uint8_t *srcV = data + y_size + uv_size;
+    size_t encoded = encoder_.encodeFrame(srcY, srcU, srcV,
+                                          bitstream_buffer.data(),
+                                          bitstream_buffer.size());
+    if (encoded == 0) {
+      LOGE("MPGEncoder: encodeFrame failed (status=%d)",
+           (int)encoder_.lastStatus());
+      return 0;
+    }
+    return p_out->write(bitstream_buffer.data(), encoded);
   }
 
-  tinympg::TinyMPGEncoder<Allocator> &driver() { return encoder_; }
+  tinympg::TinyMPGEncoder<MPG_DEFAULT_ALLOCATOR> &driver() { return encoder_; }
 
  protected:
-  tinympg::TinyMPGEncoder<Allocator> encoder_;
+  tinympg::TinyMPGEncoder<MPG_DEFAULT_ALLOCATOR> encoder_;
   Print *p_out = nullptr;
   VideoFormat input_format = VideoFormat::I420;
   int width_ = 0;
   int height_ = 0;
+  Vector<uint8_t> bitstream_buffer;
+
+  bool ensureBitstreamBuffer() {
+    if (width_ <= 0 || height_ <= 0) return false;
+    size_t needed = (size_t)width_ * (size_t)height_ * 2 + 4096;
+    if (bitstream_buffer.size() < needed) {
+      bitstream_buffer.resize(needed);
+      if (bitstream_buffer.data() == nullptr) {
+        return false;
+      }
+    }
+    return bitstream_buffer.data() != nullptr;
+  }
 };
 
 }  // namespace audio_tools
