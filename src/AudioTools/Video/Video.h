@@ -35,6 +35,8 @@ enum StreamContentType { Audio, Video };
 ///   decoder pixel output only, no dedicated Muxer addXxxFrame()
 /// - I420: planar 4:2:0 YUV (aka IYUV/YUV420), 12 bit/pixel ->
 ///   use addI420Frame()
+/// - MPEG1: ISO/IEC 11172-2 compressed video, variable frame size -> use
+///   addVideoFrame() (ContainerMPG's MuxerMPG/DemuxerMPG)
 /// - UNKNOWN: decoder only - the codec did not match any of the above
 /// @ingroup video
 enum class VideoFormat {
@@ -47,6 +49,7 @@ enum class VideoFormat {
   RGB666,
   RGB888,
   I420,
+  MPEG1,
   UNKNOWN
 };
 
