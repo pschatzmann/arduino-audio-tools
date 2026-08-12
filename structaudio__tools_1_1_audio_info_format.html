@@ -77,12 +77,12 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="structaudio__tools_1_1_audio_info_format-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">AudioInfoFormat Struct Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__codecs.html">Codecs</a></div></div></div>
+  <div class="headertitle"><div class="title">AudioInfoFormat Struct Reference<span class="mlabels"><span class="mlabel">abstract</span></span><div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__codecs.html">Codecs</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
 <p><a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> extended with a WAVEFORMATEX-style codec tag (the "wav
-code"): identifies the codec (PCM, AAC, ALAC, ...) - <a class="el" href="group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1a696b031073e74bf2cb98e5ef201d4aa3">AudioFormat::UNKNOWN</a> if not determined. <a class="el" href="structaudio__tools_1_1_audio_info_format.html#a424296cc6316328a2ff7da0039b0dc28" title="Mime type corresponding to format (see toMime()), nullptr if unmapped.">mime()</a> derives the corresponding mime type from format - not a separately stored field, so it can never go stale.  
+code"): identifies the codec (PCM, AAC, ALAC, ...) - <a class="el" href="group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1a696b031073e74bf2cb98e5ef201d4aa3">AudioFormat::UNKNOWN</a> if not determined. <a class="el" href="classaudio__tools_1_1_mime_source.html#ae63fc244d9e1605f728c7f089d861524" title="Get the MIME type string.">mime()</a> derives the corresponding mime type from format - not a separately stored field, so it can never go stale.  
  <a href="structaudio__tools_1_1_audio_info_format.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_audio_format_8h_source.html">AudioFormat.h</a>&gt;</code></p>
@@ -93,6 +93,7 @@ Inheritance diagram for AudioInfoFormat:</div>
   <img src="structaudio__tools_1_1_audio_info_format.png" usemap="#AudioInfoFormat_map" alt=""/>
   <map id="AudioInfoFormat_map" name="AudioInfoFormat_map">
 <area href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="AudioInfo" shape="rect" coords="0,0,105,24"/>
+<area href="classaudio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information." alt="MimeSource" shape="rect" coords="115,0,220,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -120,6 +121,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a424296cc6316328a2ff7da0039b0dc28" id="r_a424296cc6316328a2ff7da0039b0dc28"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_audio_info_format.html#a424296cc6316328a2ff7da0039b0dc28">mime</a> () const</td></tr>
 <tr class="memdesc:a424296cc6316328a2ff7da0039b0dc28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mime type corresponding to format (see <a class="el" href="group__video.html#ga97ce8b97f4fff29a15349ad04bafba32" title="Provides the mime type for a AudioFormat wav code, or nullptr if not known/mapped.">toMime()</a>), nullptr if unmapped.  <br /></td></tr>
 <tr class="separator:a424296cc6316328a2ff7da0039b0dc28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae63fc244d9e1605f728c7f089d861524" id="r_ae63fc244d9e1605f728c7f089d861524"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_mime_source.html#ae63fc244d9e1605f728c7f089d861524">mime</a> ()=0</td></tr>
+<tr class="memdesc:ae63fc244d9e1605f728c7f089d861524"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the MIME type string.  <br /></td></tr>
+<tr class="separator:ae63fc244d9e1605f728c7f089d861524"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b3baad8c612d81b96e46f84d7e97580" id="r_a9b3baad8c612d81b96e46f84d7e97580"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_audio_info.html#a9b3baad8c612d81b96e46f84d7e97580">operator bool</a> ()</td></tr>
 <tr class="memdesc:a9b3baad8c612d81b96e46f84d7e97580"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if all components are defined (no component is 0)  <br /></td></tr>
 <tr class="separator:a9b3baad8c612d81b96e46f84d7e97580"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -152,7 +156,7 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> extended with a WAVEFORMATEX-style codec tag (the "wav
-code"): identifies the codec (PCM, AAC, ALAC, ...) - <a class="el" href="group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1a696b031073e74bf2cb98e5ef201d4aa3">AudioFormat::UNKNOWN</a> if not determined. <a class="el" href="structaudio__tools_1_1_audio_info_format.html#a424296cc6316328a2ff7da0039b0dc28" title="Mime type corresponding to format (see toMime()), nullptr if unmapped.">mime()</a> derives the corresponding mime type from format - not a separately stored field, so it can never go stale. </p>
+code"): identifies the codec (PCM, AAC, ALAC, ...) - <a class="el" href="group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1a696b031073e74bf2cb98e5ef201d4aa3">AudioFormat::UNKNOWN</a> if not determined. <a class="el" href="classaudio__tools_1_1_mime_source.html#ae63fc244d9e1605f728c7f089d861524" title="Get the MIME type string.">mime()</a> derives the corresponding mime type from format - not a separately stored field, so it can never go stale. </p>
 <p>Not merged directly into <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> because <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> is treated as a raw, byte-serializable struct in some places (e.g. <a class="el" href="classaudio__tools_1_1_audio_lo_ra.html" title="Sends and receives audio over a LoRa radio link (via the sandeepmistry/arduino-LoRa library) as a reg...">AudioLoRa</a>, ContainerOgg, ContainerBinary, the BLE sandbox client); adding fields there changes that wire layout for all of them. Returned by DemuxerAVI/DemuxerMP4's getAudioInfo(), mirroring the existing <a class="el" href="structaudio__tools_1_1_w_a_v_audio_info.html" title="Sound information which is available in the WAV header.">WAVAudioInfo</a> : <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> pattern (<a class="el" href="_codec_w_a_v_8h.html">CodecWAV.h</a>) used for WAV header parsing/writing.</p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
@@ -395,7 +399,7 @@ code"): identifies the codec (PCM, AAC, ALAC, ...) - <a class="el" href="group__
 </div>
 </div>
 <a id="a424296cc6316328a2ff7da0039b0dc28" name="a424296cc6316328a2ff7da0039b0dc28"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a424296cc6316328a2ff7da0039b0dc28">&#9670;&#160;</a></span>mime()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a424296cc6316328a2ff7da0039b0dc28">&#9670;&#160;</a></span>mime() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -418,6 +422,38 @@ code"): identifies the codec (PCM, AAC, ALAC, ...) - <a class="el" href="group__
 </div><div class="memdoc">
 
 <p>Mime type corresponding to format (see <a class="el" href="group__video.html#ga97ce8b97f4fff29a15349ad04bafba32" title="Provides the mime type for a AudioFormat wav code, or nullptr if not known/mapped.">toMime()</a>), nullptr if unmapped. </p>
+
+</div>
+</div>
+<a id="ae63fc244d9e1605f728c7f089d861524" name="ae63fc244d9e1605f728c7f089d861524"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae63fc244d9e1605f728c7f089d861524">&#9670;&#160;</a></span>mime() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const char * mime </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the MIME type string. </p>
+<p>Pure virtual method that must be implemented by derived classes to return the appropriate MIME type string for the current context.</p>
+<dl class="section return"><dt>Returns</dt><dd>const char* Pointer to a null-terminated string containing the MIME type. The string should follow standard MIME type format (e.g., "audio/mpeg"). Returns nullptr if MIME type cannot be determined.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The returned pointer should remain valid for the lifetime of the object or until the next call to this method. </dd></dl>
+
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_codec_n_o_p.html#a7ee61e13e56c4f7123d8dc7efa2e5422">CodecNOP</a>, <a class="el" href="classaudio__tools_1_1_a_m_r_n_b_encoder.html#a77f23963852259a883d9811944a3bd7a">AMRNBEncoder</a>, <a class="el" href="classaudio__tools_1_1_a_m_r_w_b_encoder.html#a77f23963852259a883d9811944a3bd7a">AMRWBEncoder</a>, <a class="el" href="classaudio__tools_1_1_a_p_t_x_encoder.html#a7ee61e13e56c4f7123d8dc7efa2e5422">APTXEncoder</a>, <a class="el" href="classaudio__tools_1_1_codec_chain.html#a77f23963852259a883d9811944a3bd7a">CodecChain</a>, <a class="el" href="classaudio__tools_1_1_codec2_encoder.html#a7ee61e13e56c4f7123d8dc7efa2e5422">Codec2Encoder</a>, <a class="el" href="classaudio__tools_1_1_copy_encoder.html#a77f23963852259a883d9811944a3bd7a">CopyEncoder</a>, <a class="el" href="classaudio__tools_1_1_g722_encoder.html#a7ee61e13e56c4f7123d8dc7efa2e5422">G722Encoder</a>, <a class="el" href="classaudio__tools_1_1_g_s_m_encoder.html#a7ee61e13e56c4f7123d8dc7efa2e5422">GSMEncoder</a>, <a class="el" href="classaudio__tools_1_1_i_l_b_c_encoder.html#a7ee61e13e56c4f7123d8dc7efa2e5422">ILBCEncoder</a>, <a class="el" href="classaudio__tools_1_1_l_c3_encoder.html#a7ee61e13e56c4f7123d8dc7efa2e5422">LC3Encoder</a>, <a class="el" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#a77f23963852259a883d9811944a3bd7a">MP3EncoderLAME</a>, <a class="el" href="classaudio__tools_1_1_encoder_network_format.html#a77f23963852259a883d9811944a3bd7a">EncoderNetworkFormat</a>, <a class="el" href="classaudio__tools_1_1_s_b_c_encoder.html#a7ee61e13e56c4f7123d8dc7efa2e5422">SBCEncoder</a>, <a class="el" href="classaudio__tools_1_1_binary_container_encoder.html#a7ee61e13e56c4f7123d8dc7efa2e5422">BinaryContainerEncoder</a>, <a class="el" href="classaudio__tools_1_1_o_s_c_container_encoder.html#a7ee61e13e56c4f7123d8dc7efa2e5422">OSCContainerEncoder</a>, <a class="el" href="classaudio__tools_1_1_mime_detector.html#a77f23963852259a883d9811944a3bd7a">MimeDetector</a>, <a class="el" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#ab233b9d1b86c9d2a2c009d6473aa8938">AACEncoderFDK</a>, <a class="el" href="classaudio__tools_1_1_a_a_c_encoder_v_o.html#ab233b9d1b86c9d2a2c009d6473aa8938">AACEncoderVO</a>, <a class="el" href="classaudio__tools_1_1_a_d_p_c_m_encoder.html#ab233b9d1b86c9d2a2c009d6473aa8938">ADPCMEncoder</a>, <a class="el" href="classaudio__tools_1_1_a_d_p_c_m_encoder_x_q.html#ab233b9d1b86c9d2a2c009d6473aa8938">ADPCMEncoderXQ</a>, <a class="el" href="classaudio__tools_1_1_encoder_a_l_a_c.html#ab233b9d1b86c9d2a2c009d6473aa8938">EncoderALAC</a>, <a class="el" href="classaudio__tools_1_1_encoder_base64.html#ab233b9d1b86c9d2a2c009d6473aa8938">EncoderBase64</a>, <a class="el" href="classaudio__tools_1_1_encoder_basic.html#ab233b9d1b86c9d2a2c009d6473aa8938">EncoderBasic</a>, <a class="el" href="classaudio__tools_1_1_d_s_f_encoder.html#ab233b9d1b86c9d2a2c009d6473aa8938">DSFEncoder</a>, <a class="el" href="classaudio__tools_1_1_f_l_a_c_encoder.html#ab233b9d1b86c9d2a2c009d6473aa8938">FLACEncoder</a>, <a class="el" href="classaudio__tools_1_1_encoder_float.html#ab233b9d1b86c9d2a2c009d6473aa8938">EncoderFloat</a>, <a class="el" href="classaudio__tools_1_1_g729_encoder.html#ab233b9d1b86c9d2a2c009d6473aa8938">G729Encoder</a>, <a class="el" href="classaudio__tools_1_1_g7xx_encoder.html#ab233b9d1b86c9d2a2c009d6473aa8938">G7xxEncoder</a>, <a class="el" href="classaudio__tools_1_1_encoder_l16.html#ab233b9d1b86c9d2a2c009d6473aa8938">EncoderL16</a>, <a class="el" href="classaudio__tools_1_1_encoder_l8.html#ab233b9d1b86c9d2a2c009d6473aa8938">EncoderL8</a>, <a class="el" href="classaudio__tools_1_1_m_p3_encoder_shine.html#ab233b9d1b86c9d2a2c009d6473aa8938">MP3EncoderShine</a>, <a class="el" href="classaudio__tools_1_1_opus_audio_encoder.html#ab233b9d1b86c9d2a2c009d6473aa8938">OpusAudioEncoder</a>, <a class="el" href="classaudio__tools_1_1_opus_multi_stream_audio_encoder.html#ab233b9d1b86c9d2a2c009d6473aa8938">OpusMultiStreamAudioEncoder</a>, <a class="el" href="classaudio__tools_1_1_opus_ogg_encoder.html#ab233b9d1b86c9d2a2c009d6473aa8938">OpusOggEncoder</a>, <a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#ab233b9d1b86c9d2a2c009d6473aa8938">WAVEncoder</a>, <a class="el" href="classaudio__tools_1_1_ogg_container_encoder.html#ab233b9d1b86c9d2a2c009d6473aa8938">OggContainerEncoder</a>, <a class="el" href="classaudio__tools_1_1_m_p3_parser_encoder.html#a7222a1cf620195bfb18b270df982d61e">MP3ParserEncoder</a>, <a class="el" href="classaudio__tools_1_1_abstract_u_r_l_stream.html#ab233b9d1b86c9d2a2c009d6473aa8938">AbstractURLStream</a>, <a class="el" href="classaudio__tools_1_1_meta_data_filter_encoder.html#ab233b9d1b86c9d2a2c009d6473aa8938">MetaDataFilterEncoder</a>, and <a class="el" href="classaudio__tools_1_1_audio_encoder.html#ae63fc244d9e1605f728c7f089d861524">AudioEncoder</a>.</p>
 
 </div>
 </div>
