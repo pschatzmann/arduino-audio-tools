@@ -597,6 +597,9 @@ size_t size)</a> and <a class="el" href="classaudio__tools_1_1_base_stream.html#
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_camera_frame_source.html">CameraFrameSource</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_video_frame_source.html" title="Pull-based provider of one already-encoded video/image frame at a time - e.g. wraps a camera capture ...">VideoFrameSource</a> that pulls frames from the ESP32 camera (esp_camera.h, the Arduino-ESP32 "esp32-camera" component) - <a class="el" href="classaudio__tools_1_1_camera_frame_source.html#a65342e56ec7323be91d38c5196dce8a7">nextFrame()</a> returns esp_camera_fb_get()'s buffer, releasing the previous frame (esp_camera_fb_return()) first; as with any <a class="el" href="classaudio__tools_1_1_video_frame_source.html" title="Pull-based provider of one already-encoded video/image frame at a time - e.g. wraps a camera capture ...">VideoFrameSource</a>, the returned pointer is only valid until the next <a class="el" href="classaudio__tools_1_1_camera_frame_source.html#a65342e56ec7323be91d38c5196dce8a7">nextFrame()</a> call.  <a href="classaudio__tools_1_1_camera_frame_source.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_camera_frame_source_open_c_v.html">CameraFrameSourceOpenCV</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_video_frame_source.html" title="Pull-based provider of one already-encoded video/image frame at a time - e.g. wraps a camera capture ...">VideoFrameSource</a> that pulls frames from an OpenCV cv::VideoCapture (e.g. a USB/CSI webcam via V4L2 on Linux/Raspberry Pi, or any other OpenCV-supported backend) - the desktop/Linux counterpart to <a class="el" href="classaudio__tools_1_1_camera_frame_source.html" title="VideoFrameSource that pulls frames from the ESP32 camera (esp_camera.h, the Arduino-ESP32 &quot;esp32-came...">CameraFrameSource</a>, which targets the ESP32 esp_camera.h driver instead.  <a href="classaudio__tools_1_1_camera_frame_source_open_c_v.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_cat_stream.html">CatStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides data from a concatenation of Streams. Please note that the provided Streams can be played only once! You will need to reset them (e.g. moving the file pointer to the beginning) and read them back if you want to process them a second time. The default timeout on the <a class="el" href="classaudio__tools_1_1_cat_stream.html#a692e2b18b3c2452e38e3f558ad87e9a5">available()</a> method is set to 0. This might be too small if you use e.g. a <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a>. If you set beginReset to true in the constructor, the system will automatically reset the streams when <a class="el" href="classaudio__tools_1_1_cat_stream.html#acba365cc28eb702040c382646cfb0a7a">begin()</a> is called.  <a href="classaudio__tools_1_1_cat_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2394,6 +2397,8 @@ Typedefs</h2></td></tr>
 <tr class="memitem:ae4a5cd97442eb14f9966936adcc47210" id="r_ae4a5cd97442eb14f9966936adcc47210"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ae4a5cd97442eb14f9966936adcc47210">CallbackConverter</a> = <a class="el" href="classaudio__tools_1_1_callback_converter_t.html">CallbackConverterT</a>&lt; int16_t &gt;</td></tr>
 <tr class="memdesc:ae4a5cd97442eb14f9966936adcc47210"><td class="mdescLeft">&#160;</td><td class="mdescRight">CallbackConverter with int16_t as default type.  <br /></td></tr>
 <tr class="separator:ae4a5cd97442eb14f9966936adcc47210"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68140fa08b9136427fdb3ae71c0ffbc4" id="r_a68140fa08b9136427fdb3ae71c0ffbc4"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a68140fa08b9136427fdb3ae71c0ffbc4">CameraFrameSource</a> = CameraFrameSourceESP32</td></tr>
+<tr class="separator:a68140fa08b9136427fdb3ae71c0ffbc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga99bc7077b04cd39e72f3b82b652b6d24" id="r_ga99bc7077b04cd39e72f3b82b652b6d24"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__io.html#ga99bc7077b04cd39e72f3b82b652b6d24">Chart</a> = <a class="el" href="classaudio__tools_1_1_chart_t.html">ChartT</a>&lt; int16_t &gt;</td></tr>
 <tr class="memdesc:ga99bc7077b04cd39e72f3b82b652b6d24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default chart type for Jupyter integration.  <br /></td></tr>
 <tr class="separator:ga99bc7077b04cd39e72f3b82b652b6d24"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -3681,6 +3686,20 @@ template&lt;class T &gt; </div>
 </div><div class="memdoc">
 
 <p>CallbackConverter with int16_t as default type. </p>
+
+</div>
+</div>
+<a id="a68140fa08b9136427fdb3ae71c0ffbc4" name="a68140fa08b9136427fdb3ae71c0ffbc4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68140fa08b9136427fdb3ae71c0ffbc4">&#9670;&#160;</a></span>CameraFrameSource</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="classaudio__tools_1_1_camera_frame_source_open_c_v.html">CameraFrameSourceOpenCV</a> <a class="el" href="classaudio__tools_1_1_camera_frame_source.html">CameraFrameSource</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>

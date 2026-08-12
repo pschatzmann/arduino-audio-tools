@@ -12,7 +12,7 @@ var searchData=
   ['next_5fchar_9',['next_char',['../classaudio__tools_1_1_r_t_t_t_l_output.html#a455f40351d37ca8c6ba639cd23b61d3c',1,'audio_tools::RTTTLOutput']]],
   ['nextemptyindex_10',['nextEmptyIndex',['../classaudio__tools_1_1_input_mixer.html#a3c15d3c28f2b6cacd5108e058cab55c5',1,'audio_tools::InputMixer']]],
   ['nextfilename_11',['nextFileName',['../classaudio__tools_1_1_n_buffer_file.html#a0feaf0057c0cd0d4a59fdea9b2e4e0fc',1,'audio_tools::NBufferFile']]],
-  ['nextframe_12',['nextframe',['../classaudio__tools_1_1_camera_frame_source.html#a65342e56ec7323be91d38c5196dce8a7',1,'audio_tools::CameraFrameSource::nextFrame()'],['../classaudio__tools_1_1_video_frame_source.html#a0fe4d53a942330f3836650dcf0da5135',1,'audio_tools::VideoFrameSource::nextFrame()']]],
+  ['nextframe_12',['nextframe',['../classaudio__tools_1_1_video_frame_source.html#a0fe4d53a942330f3836650dcf0da5135',1,'audio_tools::VideoFrameSource::nextFrame()'],['../classaudio__tools_1_1_camera_frame_source_open_c_v.html#a65342e56ec7323be91d38c5196dce8a7',1,'audio_tools::CameraFrameSourceOpenCV::nextFrame()'],['../classaudio__tools_1_1_camera_frame_source.html#a65342e56ec7323be91d38c5196dce8a7',1,'audio_tools::CameraFrameSource::nextFrame()']]],
   ['nextindex_13',['nextIndex',['../classaudio__tools_1_1_ring_buffer.html#a5ddcabccfd758938e21ee08d7eb330f7',1,'audio_tools::RingBuffer']]],
   ['nextptsticks_14',['nextPtsTicks',['../structaudio__tools_1_1_demuxer_m_p4_1_1_track.html#a87d47bf087f3e108b401353580f8176f',1,'audio_tools::DemuxerMP4::Track']]],
   ['nextrecord_15',['nextRecord',['../classaudio__tools_1_1_binary_container_decoder.html#adbbc7f80d3ca9b46e908ec10c922c842',1,'audio_tools::BinaryContainerDecoder']]],

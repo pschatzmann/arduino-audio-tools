@@ -73,29 +73,13 @@ $(function() {
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle"><div class="title">CameraFrameSource.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="_video_8h_source.html">AudioTools/Video/Video.h</a>&quot;</code><br />
-<code>#include &quot;esp_camera.h&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="_audio_tools_config_8h_source.html">AudioToolsConfig.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_camera_frame_source_e_s_p32_8h_source.html">Camera/CameraFrameSourceESP32.h</a>&quot;</code><br />
 </div>
 <p><a href="_camera_frame_source_8h_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_camera_frame_source.html">CameraFrameSource</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_video_frame_source.html" title="Pull-based provider of one already-encoded video/image frame at a time - e.g. wraps a camera capture ...">VideoFrameSource</a> that pulls frames from the ESP32 camera (esp_camera.h, the Arduino-ESP32 "esp32-camera" component) - <a class="el" href="classaudio__tools_1_1_camera_frame_source.html#a65342e56ec7323be91d38c5196dce8a7">nextFrame()</a> returns esp_camera_fb_get()'s buffer, releasing the previous frame (esp_camera_fb_return()) first; as with any <a class="el" href="classaudio__tools_1_1_video_frame_source.html" title="Pull-based provider of one already-encoded video/image frame at a time - e.g. wraps a camera capture ...">VideoFrameSource</a>, the returned pointer is only valid until the next <a class="el" href="classaudio__tools_1_1_camera_frame_source.html#a65342e56ec7323be91d38c5196dce8a7">nextFrame()</a> call.  <a href="classaudio__tools_1_1_camera_frame_source.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:namespaceaudio__tools" id="r_namespaceaudio__tools"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></td></tr>
-<tr class="memdesc:namespaceaudio__tools"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic Implementation of sound input and output for desktop environments using portaudio. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
