@@ -386,7 +386,7 @@ inline AudioFormat fromMime(const char* mime) {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-struct AudioInfoFormat : public AudioInfo {
+struct AudioInfoFormat : public AudioInfo, public MimeSource {
   AudioInfoFormat() = default;
   AudioInfoFormat(const AudioInfo &from) : AudioInfo(from) {}
   AudioInfoFormat(sample_rate_t sampleRate, uint16_t channelCount,

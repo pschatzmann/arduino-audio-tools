@@ -95,7 +95,7 @@ class ContainerDecoder : public AudioDecoder {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioEncoder : public AudioWriter {
+class AudioEncoder : public AudioWriter, public MimeSource {
  public:
   AudioEncoder() = default;
   virtual ~AudioEncoder() = default;
