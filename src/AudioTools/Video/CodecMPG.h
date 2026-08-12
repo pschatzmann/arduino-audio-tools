@@ -54,6 +54,7 @@ class MPGDecoder : public VideoDecoder {
   void setVideoFormat(VideoFormat format) override {
     switch (format) {
       case VideoFormat::RGB565:
+      case VideoFormat::RGB666:
       case VideoFormat::RGB888:
       case VideoFormat::I420:
         pixel_format = format;
@@ -135,6 +136,19 @@ class MPGDecoder : public VideoDecoder {
         if (n > 0) p_out->write(frame_buffer.data(), n);
         break;
       }
+      case VideoFormat::RGB666: {
+        size_t needed = w * h * 3;
+        if (frame_buffer.size() < needed) {
+          frame_buffer.resize(needed);
+          if (frame_buffer.data() == nullptr) {
+            LOGE("MPGDecoder: frame buffer allocation failed (RGB666)");
+            return;
+          }
+        }
+        n = decoder.toRGB666(frame_buffer.data(), needed);
+        if (n > 0) p_out->write(frame_buffer.data(), n);
+        break;
+      }
       case VideoFormat::I420: {
         size_t needed = w * h + 2 * (w / 2) * (h / 2);
         if (frame_buffer.size() < needed) {
@@ -183,6 +197,10 @@ class MPGEncoder : public VideoEncoder {
   void setVideoFormat(VideoFormat format) override {
     switch (format) {
       case VideoFormat::I420:
+      case VideoFormat::YUV422:
+      case VideoFormat::RGB565:
+      case VideoFormat::RGB666:
+      case VideoFormat::RGB888:
         input_format = format;
         break;
       default:
@@ -233,10 +251,6 @@ class MPGEncoder : public VideoEncoder {
 
   size_t write(const uint8_t *data, size_t len) override {
     if (p_out == nullptr) return 0;
-    if (input_format != VideoFormat::I420) {
-      LOGE("MPGEncoder: only VideoFormat::I420 is supported");
-      return 0;
-    }
     if (width_ <= 0 || height_ <= 0) {
       LOGE("MPGEncoder: invalid size - call setSize() first");
       return 0;
@@ -246,37 +260,74 @@ class MPGEncoder : public VideoEncoder {
       return 0;
     }
 
-    size_t y_size = (size_t)width_ * (size_t)height_;
-    size_t uv_size = y_size / 4;
-    size_t min_size = y_size + uv_size + uv_size;
-    if (len < min_size) {
-      LOGE("MPGEncoder: input buffer too small for I420 frame");
-      return 0;
+    switch (input_format) {
+      case VideoFormat::I420: {
+        size_t y_size = (size_t)width_ * (size_t)height_;
+        size_t uv_size = y_size / 4;
+        size_t min_size = y_size + uv_size + uv_size;
+        if (len < min_size) {
+          LOGE("MPGEncoder: input buffer too small for I420 frame");
+          return 0;
+        }
+        const uint8_t *srcY = data;
+        const uint8_t *srcU = data + y_size;
+        const uint8_t *srcV = data + y_size + uv_size;
+        return writeOut([&](uint8_t *dst, size_t cap) {
+          return encoder_.encodeFrame(srcY, srcU, srcV, dst, cap);
+        });
+      }
+      case VideoFormat::YUV422:
+        return writeOut([&](uint8_t *dst, size_t cap) {
+          return encoder_.encodeFrameYuv422(data, dst, cap);
+        });
+      case VideoFormat::RGB565:
+        return writeOut([&](uint8_t *dst, size_t cap) {
+          return encoder_.encodeFrameRgb565((const uint16_t *)data, dst, cap);
+        });
+      case VideoFormat::RGB666:
+        return writeOut([&](uint8_t *dst, size_t cap) {
+          return encoder_.encodeFrameRgb666(data, dst, cap);
+        });
+      case VideoFormat::RGB888:
+        return writeOut([&](uint8_t *dst, size_t cap) {
+          return encoder_.encodeFrameRgb888(data, dst, cap);
+        });
+      default:
+        LOGE("MPGEncoder: unsupported VideoFormat %d", (int)input_format);
+        return 0;
     }
-
-    const uint8_t *srcY = data;
-    const uint8_t *srcU = data + y_size;
-    const uint8_t *srcV = data + y_size + uv_size;
-    size_t encoded = encoder_.encodeFrame(srcY, srcU, srcV,
-                                          bitstream_buffer.data(),
-                                          bitstream_buffer.size());
-    if (encoded == 0) {
-      LOGE("MPGEncoder: encodeFrame failed (status=%d)",
-           (int)encoder_.lastStatus());
-      return 0;
-    }
-    return p_out->write(bitstream_buffer.data(), encoded);
   }
 
   tinympg::TinyMPGEncoder<MPG_DEFAULT_ALLOCATOR> &driver() { return encoder_; }
 
  protected:
+  static constexpr int kMaxGrowRetries = 4;
+
   tinympg::TinyMPGEncoder<MPG_DEFAULT_ALLOCATOR> encoder_;
   Print *p_out = nullptr;
   VideoFormat input_format = VideoFormat::I420;
   int width_ = 0;
   int height_ = 0;
   Vector<uint8_t> bitstream_buffer;
+
+  template <typename Fn>
+  size_t writeOut(Fn encodeInto) {
+    if (p_out == nullptr) return 0;
+    size_t encoded = encodeInto(bitstream_buffer.data(), bitstream_buffer.size());
+    for (int attempt = 0; encoded == 0 && attempt < kMaxGrowRetries; ++attempt) {
+      bitstream_buffer.resize(bitstream_buffer.size() * 2);
+      if (bitstream_buffer.data() == nullptr) {
+        LOGE("MPGEncoder: bitstream buffer grow failed");
+        return 0;
+      }
+      encoded = encodeInto(bitstream_buffer.data(), bitstream_buffer.size());
+    }
+    if (encoded == 0) {
+      LOGE("MPGEncoder: encode failed (status=%d)", (int)encoder_.lastStatus());
+      return 0;
+    }
+    return p_out->write(bitstream_buffer.data(), encoded);
+  }
 
   bool ensureBitstreamBuffer() {
     if (width_ <= 0 || height_ <= 0) return false;
