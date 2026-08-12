@@ -8,6 +8,7 @@
 #  define USE_TIMER
 #  define USE_CPP_TASK
 #  define USE_STD_CONCURRENCY
+#  define USE_OPENCV
 #  ifndef EXIT_ON_STOP
 #    define EXIT_ON_STOP
 #  endif
@@ -18,6 +19,7 @@
 #  define USE_TIMER
 #  define USE_CPP_TASK
 #  define USE_STD_CONCURRENCY
+#  define USE_OPENCV
 #  ifndef EXIT_ON_STOP
 #    define EXIT_ON_STOP
 #  endif
@@ -37,6 +39,7 @@
 #  define USE_TIMER
 #  define USE_CPP_TASK
 #  define USE_STD_CONCURRENCY
+#  define USE_OPENCV
 //#  define USE_3BYTE_INT24
 typedef WiFiClient WiFiClientSecure;
 #elif defined(ESP32_CMAKE)
