@@ -160,6 +160,15 @@ class VideoFrameSource {
   /// them directly to configure the Muxer it writes to instead of
   /// requiring the caller to duplicate the same values there.
   virtual VideoInfo videoInfo() = 0;
+
+  /// @brief Write the frame to the indicated destination
+  bool writeTo(Print &out) {
+    size_t len;
+    const uint8_t *frame = nextFrame(len);
+    if (frame == nullptr || len == 0) return false;
+    size_t written = out.write(frame, len);
+    return written = len;
+  }
 };
 
 
