@@ -1,2 +1,2 @@
 
-We provide some simple classes that support the playing of videos
+We provide some simple classes that support the recording and playing of videos
