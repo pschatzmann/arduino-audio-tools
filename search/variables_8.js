@@ -3,7 +3,7 @@ var searchData=
   ['haac_0',['hAac',['../classaudio__tools_1_1_a_a_c_decoder_f_a_a_d.html#ac1fd5060bf8afdebc9a6b609d6e1bd50',1,'audio_tools::AACDecoderFAAD']]],
   ['handshake_5ftimeout_1',['handshake_timeout',['../classaudio__tools_1_1_u_r_l_stream.html#adba4583d1de52bf6fc5030247fa9107a',1,'audio_tools::URLStream']]],
   ['hann_2',['hann',['../classaudio__tools_1_1_f_f_t_effect.html#ac4b942065e46dade6960ba3a6adccb30',1,'audio_tools::FFTEffect']]],
-  ['has_5faudio_3',['has_audio',['../classaudio__tools_1_1_muxer_a_v_i.html#a46c91a84b136523874557efb2c08c376',1,'audio_tools::MuxerAVI::has_audio'],['../classaudio__tools_1_1_muxer_m_p4.html#a46c91a84b136523874557efb2c08c376',1,'audio_tools::MuxerMP4::has_audio']]],
+  ['has_5faudio_3',['has_audio',['../classaudio__tools_1_1_muxer_a_v_i.html#a46c91a84b136523874557efb2c08c376',1,'audio_tools::MuxerAVI::has_audio'],['../classaudio__tools_1_1_muxer_m_p4.html#a46c91a84b136523874557efb2c08c376',1,'audio_tools::MuxerMP4::has_audio'],['../classaudio__tools_1_1_muxer_m_p_g.html#a46c91a84b136523874557efb2c08c376',1,'audio_tools::MuxerMPG::has_audio']]],
   ['has_5fended_4',['has_ended',['../classaudio__tools_1_1_http_chunk_reader.html#a18d761cb8ab8315d237eb87613efb83b',1,'audio_tools::HttpChunkReader']]],
   ['has_5finput_5',['has_input',['../classaudio__tools_1_1_pipeline.html#a87e79ea59f24d693b7e3b5a8f6585cc9',1,'audio_tools::Pipeline']]],
   ['has_5foutput_6',['has_output',['../classaudio__tools_1_1_pipeline.html#a3d87ae77cc63b9dcecf5c854e8ecb2de',1,'audio_tools::Pipeline']]],

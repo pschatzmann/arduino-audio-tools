@@ -91,10 +91,11 @@ Inheritance diagram for Muxer:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_muxer.png" usemap="#Muxer_map" alt=""/>
   <map id="Muxer_map" name="Muxer_map">
-<area href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="VideoOutput" shape="rect" coords="46,56,128,80"/>
-<area href="class_print.html" alt="Print" shape="rect" coords="46,0,128,24"/>
+<area href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="VideoOutput" shape="rect" coords="92,56,174,80"/>
+<area href="class_print.html" alt="Print" shape="rect" coords="92,0,174,24"/>
 <area href="classaudio__tools_1_1_muxer_a_v_i.html" title="Configuration for the (single) video track written by MuxerAVI." alt="MuxerAVI" shape="rect" coords="0,168,82,192"/>
 <area href="classaudio__tools_1_1_muxer_m_p4.html" title="Video track configuration for MuxerMP4 - update before calling begin()." alt="MuxerMP4" shape="rect" coords="92,168,174,192"/>
+<area href="classaudio__tools_1_1_muxer_m_p_g.html" title="MPEG-1 System (Program) Stream Encoder, as defined by ISO/IEC 11172-1: muxes an already-encoded MPEG-..." alt="MuxerMPG" shape="rect" coords="184,168,266,192"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -200,7 +201,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Writes one complete audio frame/block. Meaning is container- and codec-specific (e.g. one raw AAC frame vs. an arbitrary PCM block); see the concrete class. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a74ac0ef0c67231a5e660801fe350683d">MuxerAVI</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a74ac0ef0c67231a5e660801fe350683d">MuxerMP4</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a74ac0ef0c67231a5e660801fe350683d">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a74ac0ef0c67231a5e660801fe350683d">MuxerMP4</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a74ac0ef0c67231a5e660801fe350683d">MuxerMPG</a>.</p>
 
 </div>
 </div>
@@ -239,7 +240,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Writes one planar 4:2:0 YUV (I420/IYUV) frame. Expects exactly width*height*3/2 bytes. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#aa11c2470d63b264e063c5014f2f3140e">MuxerAVI</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#aa11c2470d63b264e063c5014f2f3140e">MuxerMP4</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#aa11c2470d63b264e063c5014f2f3140e">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#aa11c2470d63b264e063c5014f2f3140e">MuxerMP4</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#aa11c2470d63b264e063c5014f2f3140e">MuxerMPG</a>.</p>
 
 </div>
 </div>
@@ -278,7 +279,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Writes one complete Motion-JPEG frame (a full, already-encoded JPEG image). </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a2a952fb597dd191aa79a99230c53ca3e">MuxerAVI</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a2a952fb597dd191aa79a99230c53ca3e">MuxerMP4</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a2a952fb597dd191aa79a99230c53ca3e">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a2a952fb597dd191aa79a99230c53ca3e">MuxerMP4</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a2a952fb597dd191aa79a99230c53ca3e">MuxerMPG</a>.</p>
 
 </div>
 </div>
@@ -317,7 +318,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Writes one uncompressed RGB565 (16-bit, 5-6-5) frame. Expects exactly width*height*2 bytes. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#aaef61b72b719ea9786bab1764c837337">MuxerAVI</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#aaef61b72b719ea9786bab1764c837337">MuxerMP4</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#aaef61b72b719ea9786bab1764c837337">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#aaef61b72b719ea9786bab1764c837337">MuxerMP4</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#aaef61b72b719ea9786bab1764c837337">MuxerMPG</a>.</p>
 
 </div>
 </div>
@@ -367,7 +368,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a23a19d752e2d606a96229c332dc15877">MuxerAVI</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a23a19d752e2d606a96229c332dc15877">MuxerMP4</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a23a19d752e2d606a96229c332dc15877">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a23a19d752e2d606a96229c332dc15877">MuxerMP4</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a23a19d752e2d606a96229c332dc15877">MuxerMPG</a>.</p>
 
 </div>
 </div>
@@ -406,7 +407,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Writes one packed 4:2:2 YUV frame (YUY2/YUYV byte order). Expects exactly width*height*2 bytes. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a9b94a714d4c9cf950b45f0f9ad569455">MuxerAVI</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a9b94a714d4c9cf950b45f0f9ad569455">MuxerMP4</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a9b94a714d4c9cf950b45f0f9ad569455">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a9b94a714d4c9cf950b45f0f9ad569455">MuxerMP4</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a9b94a714d4c9cf950b45f0f9ad569455">MuxerMPG</a>.</p>
 
 </div>
 </div>
@@ -435,7 +436,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Provides read/write access to the audio track's <a class="el" href="structaudio__tools_1_1_audio_info_format.html" title="AudioInfo extended with a WAVEFORMATEX-style codec tag (the &quot;wav code&quot;): identifies the codec (PCM,...">AudioInfoFormat</a>. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a5d18b4899373c39da0c9a50c4aa130b6">MuxerAVI</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a5d18b4899373c39da0c9a50c4aa130b6">MuxerMP4</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a5d18b4899373c39da0c9a50c4aa130b6">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a5d18b4899373c39da0c9a50c4aa130b6">MuxerMP4</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a5d18b4899373c39da0c9a50c4aa130b6">MuxerMPG</a>.</p>
 
 </div>
 </div>
@@ -490,7 +491,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Writes the container header. Call after configuring video (and audio, if any) and before writing any frames. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#acba365cc28eb702040c382646cfb0a7a">MuxerAVI</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#acba365cc28eb702040c382646cfb0a7a">MuxerMP4</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#acba365cc28eb702040c382646cfb0a7a">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#acba365cc28eb702040c382646cfb0a7a">MuxerMP4</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#acba365cc28eb702040c382646cfb0a7a">MuxerMPG</a>.</p>
 
 </div>
 </div>
@@ -519,7 +520,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Closes the muxer. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a64e9fa75beda50a9e8400ee0d4e61984">MuxerAVI</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a64e9fa75beda50a9e8400ee0d4e61984">MuxerMP4</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a64e9fa75beda50a9e8400ee0d4e61984">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a64e9fa75beda50a9e8400ee0d4e61984">MuxerMP4</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a64e9fa75beda50a9e8400ee0d4e61984">MuxerMPG</a>.</p>
 
 </div>
 </div>
@@ -601,7 +602,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Provides the video track configuration. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#aee186f7c22ebcdab3091cef0d4396ac5">MuxerAVI</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#aee186f7c22ebcdab3091cef0d4396ac5">MuxerMP4</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#aee186f7c22ebcdab3091cef0d4396ac5">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#aee186f7c22ebcdab3091cef0d4396ac5">MuxerMP4</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#aee186f7c22ebcdab3091cef0d4396ac5">MuxerMPG</a>.</p>
 
 </div>
 </div>
@@ -629,7 +630,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>The container's MIME type (e.g. "video/avi", "video/mp4") - useful for e.g. an HTTP Content-Type header when streaming the muxed output to a client. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#ab233b9d1b86c9d2a2c009d6473aa8938">MuxerAVI</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#ab233b9d1b86c9d2a2c009d6473aa8938">MuxerMP4</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#ab233b9d1b86c9d2a2c009d6473aa8938">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#ab233b9d1b86c9d2a2c009d6473aa8938">MuxerMP4</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#ab233b9d1b86c9d2a2c009d6473aa8938">MuxerMPG</a>.</p>
 
 </div>
 </div>
@@ -656,7 +657,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a90622bd78258a36bbcf63426b28307ac">MuxerAVI</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a90622bd78258a36bbcf63426b28307ac">MuxerMP4</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a90622bd78258a36bbcf63426b28307ac">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a90622bd78258a36bbcf63426b28307ac">MuxerMP4</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a90622bd78258a36bbcf63426b28307ac">MuxerMPG</a>.</p>
 
 </div>
 </div>
@@ -685,7 +686,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Adds an (optional) interleaved audio track, including the codec selection (the 'format' field) - which AudioFormat values are actually supported (and what they mean, e.g. default codec if unset) is container-specific; see the concrete class. Call before <a class="el" href="classaudio__tools_1_1_muxer.html#ae8a0d9ca63f8bb3de100e347c3f3bca4">begin()</a>. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a7b96e47d1d1bf3dc49d33db187454702">MuxerAVI</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a7b96e47d1d1bf3dc49d33db187454702">MuxerMP4</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a7b96e47d1d1bf3dc49d33db187454702">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a7b96e47d1d1bf3dc49d33db187454702">MuxerMP4</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a7b96e47d1d1bf3dc49d33db187454702">MuxerMPG</a>.</p>
 
 </div>
 </div>
@@ -715,7 +716,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Defines the output: e.g. a local File or a network <a class="el" href="class_client.html">Client</a>. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a05ff4cf361d54457ed8586e8c14aa922">MuxerAVI</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a05ff4cf361d54457ed8586e8c14aa922">MuxerMP4</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a05ff4cf361d54457ed8586e8c14aa922">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a05ff4cf361d54457ed8586e8c14aa922">MuxerMP4</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a05ff4cf361d54457ed8586e8c14aa922">MuxerMPG</a>.</p>
 
 </div>
 </div>
@@ -745,7 +746,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Selects whether <a class="el" href="classaudio__tools_1_1_video_output.html#a1e40195a444e7f20508961cfeacc9b04">write()</a> feeds the video or the audio track. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a6806d9e5ebac77ff537da77a35a25141">MuxerAVI</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a6806d9e5ebac77ff537da77a35a25141">MuxerMP4</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a6806d9e5ebac77ff537da77a35a25141">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a6806d9e5ebac77ff537da77a35a25141">MuxerMP4</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a6806d9e5ebac77ff537da77a35a25141">MuxerMPG</a>.</p>
 
 </div>
 </div>
@@ -775,7 +776,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Defines the video track configuration - call before <a class="el" href="classaudio__tools_1_1_muxer.html#ae8a0d9ca63f8bb3de100e347c3f3bca4">begin()</a> </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a66e0cb04577d49e7c26d66ad714b3aae">MuxerAVI</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a66e0cb04577d49e7c26d66ad714b3aae">MuxerMP4</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a66e0cb04577d49e7c26d66ad714b3aae">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a66e0cb04577d49e7c26d66ad714b3aae">MuxerMP4</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a66e0cb04577d49e7c26d66ad714b3aae">MuxerMPG</a>.</p>
 
 </div>
 </div>
@@ -804,7 +805,7 @@ Protected Attributes</h2></td></tr>
 
 <p>The track <a class="el" href="classaudio__tools_1_1_video_output.html#a1e40195a444e7f20508961cfeacc9b04">write()</a> currently targets (see <a class="el" href="classaudio__tools_1_1_muxer.html#aca7ee6461963788ac0c3a5cb9d31d9d9" title="Selects whether write() feeds the video or the audio track.">setStreamType()</a>) </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a2902d7fd71678a3c90ac06a7700c2784">MuxerAVI</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a2902d7fd71678a3c90ac06a7700c2784">MuxerMP4</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a2902d7fd71678a3c90ac06a7700c2784">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a2902d7fd71678a3c90ac06a7700c2784">MuxerMP4</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a2902d7fd71678a3c90ac06a7700c2784">MuxerMPG</a>.</p>
 
 </div>
 </div>
@@ -844,7 +845,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_print.html#a8b8471dbbdc5527cdf9bfd31612cc973">Print</a>.</p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a7597ef706dd1aa590903ce9e095db20a">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a7597ef706dd1aa590903ce9e095db20a">MuxerMP4</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">H264Decoder</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a7597ef706dd1aa590903ce9e095db20a">H264DecoderESP32S3&lt; Alloc &gt;</a>, <a class="el" href="classaudio__tools_1_1_j_p_e_g_output_t_f_t.html#a7597ef706dd1aa590903ce9e095db20a">JPEGOutputTFT</a>, <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a7597ef706dd1aa590903ce9e095db20a">OutputOpenCV</a>, and <a class="el" href="classaudio__tools_1_1_output_t_f_t.html#a7597ef706dd1aa590903ce9e095db20a">OutputTFT</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a7597ef706dd1aa590903ce9e095db20a">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a7597ef706dd1aa590903ce9e095db20a">MuxerMP4</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a7597ef706dd1aa590903ce9e095db20a">MuxerMPG</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">H264Decoder</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a7597ef706dd1aa590903ce9e095db20a">H264DecoderESP32S3&lt; Alloc &gt;</a>, <a class="el" href="classaudio__tools_1_1_j_p_e_g_output_t_f_t.html#a7597ef706dd1aa590903ce9e095db20a">JPEGOutputTFT</a>, <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a7597ef706dd1aa590903ce9e095db20a">OutputOpenCV</a>, and <a class="el" href="classaudio__tools_1_1_output_t_f_t.html#a7597ef706dd1aa590903ce9e095db20a">OutputTFT</a>.</p>
 
 </div>
 </div>
