@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['e_0',['e',['../structaudio__tools_1_1_echo_state.html#a556a9563ae7d5f0ab9d538d3c32e2d1e',1,'audio_tools::EchoState::E'],['../structaudio__tools_1_1_echo_state.html#a72d969434f82c5acbf1435c7c2662242',1,'audio_tools::EchoState::e']]],
+  ['e_0',['e',['../structaudio__tools_1_1_echo_state.html#a72d969434f82c5acbf1435c7c2662242',1,'audio_tools::EchoState::e'],['../structaudio__tools_1_1_echo_state.html#a556a9563ae7d5f0ab9d538d3c32e2d1e',1,'audio_tools::EchoState::E']]],
   ['effect_5fvalue_1',['effect_value',['../classaudio__tools_1_1_pitch_shift.html#aadbca1011884df66c3dcca2932eef2d8',1,'audio_tools::PitchShift']]],
   ['effectgain_2',['effectGain',['../classaudio__tools_1_1_simple_flanger.html#aefc0405dcc62ff631b2ca54f74da93a0',1,'audio_tools::SimpleFlanger']]],
   ['effects_3',['effects',['../classaudio__tools_1_1_audio_effect_common.html#a582a43eb372fcf56ab01bb61996c150e',1,'audio_tools::AudioEffectCommon::effects'],['../classaudio__tools_1_1_audio_effects.html#aabf82b9d0d68dbcf9120221076b05b01',1,'audio_tools::AudioEffects::effects'],['../classaudio__tools_1_1_audio_effect_stream_t.html#aabf82b9d0d68dbcf9120221076b05b01',1,'audio_tools::AudioEffectStreamT::effects'],['../classaudio__tools_1_1_default_synthesizer_channel.html#aabf82b9d0d68dbcf9120221076b05b01',1,'audio_tools::DefaultSynthesizerChannel::effects']]],
@@ -26,7 +26,7 @@ var searchData=
   ['encoded_5fstream_23',['encoded_stream',['../classaudio__tools_1_1_audio_encoder_server_t.html#ad7faffedf733515580117b07b504aa69',1,'audio_tools::AudioEncoderServerT']]],
   ['encoded_5fwrite_5fcallback_24',['encoded_write_callback',['../classaudio__tools_1_1_o_s_c_container_encoder_1_1_o_s_c_output.html#a9daeab1f3d8d81361fd3bd8a0d98ec5a',1,'audio_tools::OSCContainerEncoder::OSCOutput']]],
   ['encoder_25',['encoder',['../classaudio__tools_1_1_encoder_basic.html#a6616ccf93c2f094f73da5e33ee4ff248',1,'audio_tools::EncoderBasic::encoder'],['../classaudio__tools_1_1_audio_encoder_server_t.html#a93fb3f6e67a25431b96567b28a228f90',1,'audio_tools::AudioEncoderServerT::encoder']]],
-  ['encoder_5f_26',['encoder_',['../classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a85989d24f2fdc7504da72bc4b393fd10',1,'audio_tools::H264EncoderESP32S3::encoder_'],['../classaudio__tools_1_1_m_p_g_encoder.html#a68d2a4dd0442b06f692f5e3bb49527dc',1,'audio_tools::MPGEncoder::encoder_'],['../classaudio__tools_1_1_h264_encoder.html#a25ede19be8f8128c3dc33b594e47b4ef',1,'audio_tools::H264Encoder::encoder_']]],
+  ['encoder_5f_26',['encoder_',['../classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a85989d24f2fdc7504da72bc4b393fd10',1,'audio_tools::H264EncoderESP32S3::encoder_'],['../classaudio__tools_1_1_m_p_g_encoder.html#ac3c5dd0996651acd546892d226edd3f7',1,'audio_tools::MPGEncoder::encoder_'],['../classaudio__tools_1_1_h264_encoder.html#a57d934c9e4a343c1807a86be00983806',1,'audio_tools::H264Encoder::encoder_']]],
   ['encoder_5fctx_27',['encoder_ctx',['../classaudio__tools_1_1_g729_encoder.html#a46fd05163f36847054cbc08d90837d4c',1,'audio_tools::G729Encoder']]],
   ['encoder_5fptr_28',['encoder_ptr',['../classaudio__tools_1_1_encoded_audio_output.html#a459cc07c9d5e49d23638f13cc5d442bd',1,'audio_tools::EncodedAudioOutput']]],
   ['encoders_29',['encoders',['../classaudio__tools_1_1_codec_factory.html#ac80a8beed7792808f4ea31e77289bacc',1,'audio_tools::CodecFactory']]],

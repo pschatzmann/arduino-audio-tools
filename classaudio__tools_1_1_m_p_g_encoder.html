@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: MPGEncoder&lt; Allocator &gt; Class Template Reference</title>
+<title>arduino-audio-tools: MPGEncoder Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -75,9 +75,10 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_m_p_g_encoder-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">MPGEncoder&lt; Allocator &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__codecs.html">Codecs</a> &#124; <a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__video.html">Video</a> &raquo; <a class="el" href="group__mpg.html">MPG</a> &#124; <a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__codecs.html">Codecs</a> &raquo; <a class="el" href="group__encoder.html">Encoder</a></div></div></div>
+  <div class="headertitle"><div class="title">MPGEncoder Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__codecs.html">Codecs</a> &#124; <a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__video.html">Video</a> &raquo; <a class="el" href="group__mpg.html">MPG</a> &#124; <a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__codecs.html">Codecs</a> &raquo; <a class="el" href="group__encoder.html">Encoder</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -86,12 +87,12 @@ $(function() {
 
 <p><code>#include &lt;<a class="el" href="_codec_m_p_g_8h_source.html">CodecMPG.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for MPGEncoder&lt; Allocator &gt;:</div>
+Inheritance diagram for MPGEncoder:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classaudio__tools_1_1_m_p_g_encoder.png" usemap="#MPGEncoder_3C_20Allocator_20_3E_map" alt=""/>
-  <map id="MPGEncoder_3C_20Allocator_20_3E_map" name="MPGEncoder_3C_20Allocator_20_3E_map">
-<area href="classaudio__tools_1_1_video_encoder.html" title="Common interface for video encoders (e.g. H264Encoder, H264EncoderESP32S3 - CodecH264...." alt="VideoEncoder" shape="rect" coords="0,0,163,24"/>
+  <img src="classaudio__tools_1_1_m_p_g_encoder.png" usemap="#MPGEncoder_map" alt=""/>
+  <map id="MPGEncoder_map" name="MPGEncoder_map">
+<area href="classaudio__tools_1_1_video_encoder.html" title="Common interface for video encoders (e.g. H264Encoder, H264EncoderESP32S3 - CodecH264...." alt="VideoEncoder" shape="rect" coords="0,0,93,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -102,14 +103,20 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:acba365cc28eb702040c382646cfb0a7a" id="r_acba365cc28eb702040c382646cfb0a7a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_encoder.html#acba365cc28eb702040c382646cfb0a7a">begin</a> () override</td></tr>
 <tr class="memdesc:acba365cc28eb702040c382646cfb0a7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the encoder (allocates its picture buffers, etc).  <br /></td></tr>
 <tr class="separator:acba365cc28eb702040c382646cfb0a7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2cc686b08bbb3d11b841662c9e621ea6" id="r_a2cc686b08bbb3d11b841662c9e621ea6"><td class="memItemLeft" align="right" valign="top">tinympg::TinyMPGEncoder&lt; <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_encoder.html#a2cc686b08bbb3d11b841662c9e621ea6">driver</a> ()</td></tr>
-<tr class="separator:a2cc686b08bbb3d11b841662c9e621ea6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6353abd056b1b3eb56adb5ec0c1a4f7d" id="r_a6353abd056b1b3eb56adb5ec0c1a4f7d"><td class="memItemLeft" align="right" valign="top">tinympg::TinyMPGEncoder&lt; tinympg::PSRAMAllocatorESP32&lt; uint8_t &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_encoder.html#a6353abd056b1b3eb56adb5ec0c1a4f7d">driver</a> ()</td></tr>
+<tr class="separator:a6353abd056b1b3eb56adb5ec0c1a4f7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64e9fa75beda50a9e8400ee0d4e61984" id="r_a64e9fa75beda50a9e8400ee0d4e61984"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_encoder.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a> () override</td></tr>
 <tr class="memdesc:a64e9fa75beda50a9e8400ee0d4e61984"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases the encoder's resources.  <br /></td></tr>
 <tr class="separator:a64e9fa75beda50a9e8400ee0d4e61984"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfa7acaa0ef71bda16ce35f6fba6731c" id="r_adfa7acaa0ef71bda16ce35f6fba6731c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_encoder.html#adfa7acaa0ef71bda16ce35f6fba6731c">setBitstreamBufferSize</a> (size_t bytes)</td></tr>
+<tr class="separator:adfa7acaa0ef71bda16ce35f6fba6731c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5e4f351cd94cfd4a2237c827d10095f" id="r_ab5e4f351cd94cfd4a2237c827d10095f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_encoder.html#ab5e4f351cd94cfd4a2237c827d10095f">setFrameRate</a> (int fps)</td></tr>
+<tr class="separator:ab5e4f351cd94cfd4a2237c827d10095f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05ff4cf361d54457ed8586e8c14aa922" id="r_a05ff4cf361d54457ed8586e8c14aa922"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_encoder.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput</a> (<a class="el" href="class_print.html">Print</a> &amp;out) override</td></tr>
 <tr class="memdesc:a05ff4cf361d54457ed8586e8c14aa922"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the target the encoded bitstream is written to.  <br /></td></tr>
 <tr class="separator:a05ff4cf361d54457ed8586e8c14aa922"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0ed3f289e422bb6b56e53d654e50f29" id="r_ad0ed3f289e422bb6b56e53d654e50f29"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_encoder.html#ad0ed3f289e422bb6b56e53d654e50f29">setQp</a> (int qscale)</td></tr>
+<tr class="separator:ad0ed3f289e422bb6b56e53d654e50f29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e0ba07bec2a8049e7a7e76fff1451df" id="r_a2e0ba07bec2a8049e7a7e76fff1451df"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_encoder.html#a2e0ba07bec2a8049e7a7e76fff1451df">setSize</a> (int width, int height)</td></tr>
 <tr class="separator:a2e0ba07bec2a8049e7a7e76fff1451df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4305de559192cc500fbd0587b2748ea" id="r_ab4305de559192cc500fbd0587b2748ea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_encoder.html#ab4305de559192cc500fbd0587b2748ea">setVideoFormat</a> (<a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a> format) override</td></tr>
@@ -119,10 +126,17 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_encoder.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:ae8d6e1007932b883acdb5d8f6a07ff96" id="r_ae8d6e1007932b883acdb5d8f6a07ff96"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_encoder.html#ae8d6e1007932b883acdb5d8f6a07ff96">ensureBitstreamBuffer</a> ()</td></tr>
+<tr class="separator:ae8d6e1007932b883acdb5d8f6a07ff96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a68d2a4dd0442b06f692f5e3bb49527dc" id="r_a68d2a4dd0442b06f692f5e3bb49527dc"><td class="memItemLeft" align="right" valign="top">tinympg::TinyMPGEncoder&lt; <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_encoder.html#a68d2a4dd0442b06f692f5e3bb49527dc">encoder_</a></td></tr>
-<tr class="separator:a68d2a4dd0442b06f692f5e3bb49527dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab39488a53ba71d5594857beb380653cb" id="r_ab39488a53ba71d5594857beb380653cb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_encoder.html#ab39488a53ba71d5594857beb380653cb">bitstream_buffer</a></td></tr>
+<tr class="separator:ab39488a53ba71d5594857beb380653cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3c5dd0996651acd546892d226edd3f7" id="r_ac3c5dd0996651acd546892d226edd3f7"><td class="memItemLeft" align="right" valign="top">tinympg::TinyMPGEncoder&lt; tinympg::PSRAMAllocatorESP32&lt; uint8_t &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_encoder.html#ac3c5dd0996651acd546892d226edd3f7">encoder_</a></td></tr>
+<tr class="separator:ac3c5dd0996651acd546892d226edd3f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45a159d389017b03a58e3508186fb445" id="r_a45a159d389017b03a58e3508186fb445"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_encoder.html#a45a159d389017b03a58e3508186fb445">height_</a> = 0</td></tr>
 <tr class="separator:a45a159d389017b03a58e3508186fb445"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ce2d3c6f063a7d072a698f771f728a7" id="r_a1ce2d3c6f063a7d072a698f771f728a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_encoder.html#a1ce2d3c6f063a7d072a698f771f728a7">input_format</a> = <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5acd1ea458818d68e388b9356fd528d67a">VideoFormat::I420</a></td></tr>
@@ -133,8 +147,7 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ad2af7588ca87bfadebd74fb4939e64dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> = tinympg::PSRAMAllocatorESP32&lt;uint8_t&gt;&gt;<br />
-class audio_tools::MPGEncoder&lt; Allocator &gt;</div><p>MPEG-1 part 2 video encoder wrapper around TinyMPGEncoder. </p>
+<div class="textblock"><p>MPEG-1 part 2 video encoder wrapper around TinyMPGEncoder. </p>
 <p>This mirrors the API shape of <a class="el" href="classaudio__tools_1_1_h264_encoder.html" title="H.264 video encoder: wraps TinyH264Encoder (https://github.com/pschatzmann/TinyH264)....">H264Encoder</a> in <a class="el" href="_codec_h264_8h.html">CodecH264.h</a>.</p>
 <p>Note: Requires TinyMPG (<code>TinyMPGEncoder.h</code>) to be installed and reachable by the compiler include path: <a href="https://github.com/pschatzmann/TinyMPG">https://github.com/pschatzmann/TinyMPG</a> </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -143,8 +156,6 @@ class audio_tools::MPGEncoder&lt; Allocator &gt;</div><p>MPEG-1 part 2 video enc
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>  = tinympg::PSRAMAllocatorESP32&lt;uint8_t&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -182,8 +193,6 @@ template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">A
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>  = tinympg::PSRAMAllocatorESP32&lt;uint8_t&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -208,19 +217,17 @@ template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">A
 
 </div>
 </div>
-<a id="a2cc686b08bbb3d11b841662c9e621ea6" name="a2cc686b08bbb3d11b841662c9e621ea6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2cc686b08bbb3d11b841662c9e621ea6">&#9670;&#160;</a></span>driver()</h2>
+<a id="a6353abd056b1b3eb56adb5ec0c1a4f7d" name="a6353abd056b1b3eb56adb5ec0c1a4f7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6353abd056b1b3eb56adb5ec0c1a4f7d">&#9670;&#160;</a></span>driver()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>  = tinympg::PSRAMAllocatorESP32&lt;uint8_t&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">tinympg::TinyMPGEncoder&lt; <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &gt; &amp; driver </td>
+          <td class="memname">tinympg::TinyMPGEncoder&lt; tinympg::PSRAMAllocatorESP32&lt; uint8_t &gt; &gt; &amp; driver </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -240,8 +247,6 @@ template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">A
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>  = tinympg::PSRAMAllocatorESP32&lt;uint8_t&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -266,13 +271,88 @@ template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">A
 
 </div>
 </div>
+<a id="ae8d6e1007932b883acdb5d8f6a07ff96" name="ae8d6e1007932b883acdb5d8f6a07ff96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8d6e1007932b883acdb5d8f6a07ff96">&#9670;&#160;</a></span>ensureBitstreamBuffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ensureBitstreamBuffer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adfa7acaa0ef71bda16ce35f6fba6731c" name="adfa7acaa0ef71bda16ce35f6fba6731c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adfa7acaa0ef71bda16ce35f6fba6731c">&#9670;&#160;</a></span>setBitstreamBufferSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setBitstreamBufferSize </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>bytes</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab5e4f351cd94cfd4a2237c827d10095f" name="ab5e4f351cd94cfd4a2237c827d10095f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5e4f351cd94cfd4a2237c827d10095f">&#9670;&#160;</a></span>setFrameRate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setFrameRate </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fps</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a05ff4cf361d54457ed8586e8c14aa922" name="a05ff4cf361d54457ed8586e8c14aa922"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a05ff4cf361d54457ed8586e8c14aa922">&#9670;&#160;</a></span>setOutput()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>  = tinympg::PSRAMAllocatorESP32&lt;uint8_t&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -298,13 +378,37 @@ template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">A
 
 </div>
 </div>
+<a id="ad0ed3f289e422bb6b56e53d654e50f29" name="ad0ed3f289e422bb6b56e53d654e50f29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0ed3f289e422bb6b56e53d654e50f29">&#9670;&#160;</a></span>setQp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setQp </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>qscale</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a2e0ba07bec2a8049e7a7e76fff1451df" name="a2e0ba07bec2a8049e7a7e76fff1451df"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2e0ba07bec2a8049e7a7e76fff1451df">&#9670;&#160;</a></span>setSize()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>  = tinympg::PSRAMAllocatorESP32&lt;uint8_t&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -341,8 +445,6 @@ template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">A
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>  = tinympg::PSRAMAllocatorESP32&lt;uint8_t&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -372,8 +474,6 @@ template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">A
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>  = tinympg::PSRAMAllocatorESP32&lt;uint8_t&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -402,8 +502,6 @@ template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">A
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>  = tinympg::PSRAMAllocatorESP32&lt;uint8_t&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -439,19 +537,39 @@ template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">A
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a68d2a4dd0442b06f692f5e3bb49527dc" name="a68d2a4dd0442b06f692f5e3bb49527dc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a68d2a4dd0442b06f692f5e3bb49527dc">&#9670;&#160;</a></span>encoder_</h2>
+<a id="ab39488a53ba71d5594857beb380653cb" name="ab39488a53ba71d5594857beb380653cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab39488a53ba71d5594857beb380653cb">&#9670;&#160;</a></span>bitstream_buffer</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>  = tinympg::PSRAMAllocatorESP32&lt;uint8_t&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">tinympg::TinyMPGEncoder&lt;<a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>&gt; encoder_</td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;uint8_t&gt; bitstream_buffer</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac3c5dd0996651acd546892d226edd3f7" name="ac3c5dd0996651acd546892d226edd3f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3c5dd0996651acd546892d226edd3f7">&#9670;&#160;</a></span>encoder_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tinympg::TinyMPGEncoder&lt; tinympg::PSRAMAllocatorESP32&lt;uint8_t&gt; &gt; encoder_</td>
         </tr>
       </table>
   </td>
@@ -468,8 +586,6 @@ template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">A
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>  = tinympg::PSRAMAllocatorESP32&lt;uint8_t&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -492,8 +608,6 @@ template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">A
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>  = tinympg::PSRAMAllocatorESP32&lt;uint8_t&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -516,8 +630,6 @@ template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">A
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>  = tinympg::PSRAMAllocatorESP32&lt;uint8_t&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -540,8 +652,6 @@ template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">A
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>  = tinympg::PSRAMAllocatorESP32&lt;uint8_t&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">

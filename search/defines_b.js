@@ -17,13 +17,12 @@ var searchData=
   ['minimp3_5fimplementation_14',['MINIMP3_IMPLEMENTATION',['../_codec_m_p3_m_a_d_8h.html#a93d9f478ed42d99875e4c837734975ae',1,'CodecMP3MAD.h']]],
   ['minimp3_5fmax_5fsample_5frate_15',['MINIMP3_MAX_SAMPLE_RATE',['../_codec_m_p3_mini_8h.html#a5318e204197580b8583d4bcc6f46229e',1,'CodecMP3Mini.h']]],
   ['minimp3_5fno_5fstdio_16',['minimp3_no_stdio',['../_codec_m_p3_m_a_d_8h.html#a4d81f9d4db32377f1816a10ef06749b2',1,'MINIMP3_NO_STDIO:&#160;CodecMP3MAD.h'],['../_codec_m_p3_mini_8h.html#a4d81f9d4db32377f1816a10ef06749b2',1,'MINIMP3_NO_STDIO:&#160;CodecMP3Mini.h']]],
-  ['mpg_5fdecoder_5fdefault_5fallocator_17',['MPG_DECODER_DEFAULT_ALLOCATOR',['../_codec_m_p_g_8h.html#a621bf5d7d1aaa801d1b58263a15f3b22',1,'CodecMPG.h']]],
-  ['mpg_5fencoder_5fdefault_5fallocator_18',['MPG_ENCODER_DEFAULT_ALLOCATOR',['../_codec_m_p_g_8h.html#a5d4f632c13c2077e2ce248cbf48e1722',1,'CodecMPG.h']]],
-  ['msg_5fcnt_19',['MSG_CNT',['../rs_8hpp.html#ab7c3a72061bf11c6e7220b86ed9126c8',1,'rs.hpp']]],
-  ['mts_5fprint_5fpids_5flen_20',['MTS_PRINT_PIDS_LEN',['../_codec_t_s_demux_8h.html#a2f963ad694bd8276b89cb96d9bd66528',1,'CodecTSDemux.h']]],
-  ['mts_5funderflow_5flimit_21',['MTS_UNDERFLOW_LIMIT',['../_codec_t_s_demux_8h.html#ac35aef7e480f9f111a9824ae393ba9e2',1,'CodecTSDemux.h']]],
-  ['mts_5fwrite_5fbuffer_5fsize_22',['mts_write_buffer_size',['../_codec_m_t_s_8h.html#ad3ab10daa3ebe5b53704e14ddb781a89',1,'MTS_WRITE_BUFFER_SIZE:&#160;CodecMTS.h'],['../_codec_t_s_demux_8h.html#ad3ab10daa3ebe5b53704e14ddb781a89',1,'MTS_WRITE_BUFFER_SIZE:&#160;CodecTSDemux.h']]],
-  ['my_5fesp_5fnow_5fbuffer_5fcount_23',['MY_ESP_NOW_BUFFER_COUNT',['../_e_s_p_now_stream_8h.html#a8b92a627d903e2e21e1804bd4c3d4028',1,'ESPNowStream.h']]],
-  ['my_5fesp_5fnow_5fbuffer_5fsize_24',['MY_ESP_NOW_BUFFER_SIZE',['../_e_s_p_now_stream_8h.html#a7856157655e385ecbdb11eecaa0b493f',1,'ESPNowStream.h']]],
-  ['my_5fesp_5fnow_5fmax_5flen_25',['MY_ESP_NOW_MAX_LEN',['../_e_s_p_now_stream_8h.html#a2701686b061d9df310d4a0fdc129ead0',1,'ESPNowStream.h']]]
+  ['mpg_5fdefault_5fallocator_17',['MPG_DEFAULT_ALLOCATOR',['../_codec_m_p_g_8h.html#a822d8a45212fb484641828898b5a15a7',1,'CodecMPG.h']]],
+  ['msg_5fcnt_18',['MSG_CNT',['../rs_8hpp.html#ab7c3a72061bf11c6e7220b86ed9126c8',1,'rs.hpp']]],
+  ['mts_5fprint_5fpids_5flen_19',['MTS_PRINT_PIDS_LEN',['../_codec_t_s_demux_8h.html#a2f963ad694bd8276b89cb96d9bd66528',1,'CodecTSDemux.h']]],
+  ['mts_5funderflow_5flimit_20',['MTS_UNDERFLOW_LIMIT',['../_codec_t_s_demux_8h.html#ac35aef7e480f9f111a9824ae393ba9e2',1,'CodecTSDemux.h']]],
+  ['mts_5fwrite_5fbuffer_5fsize_21',['mts_write_buffer_size',['../_codec_m_t_s_8h.html#ad3ab10daa3ebe5b53704e14ddb781a89',1,'MTS_WRITE_BUFFER_SIZE:&#160;CodecMTS.h'],['../_codec_t_s_demux_8h.html#ad3ab10daa3ebe5b53704e14ddb781a89',1,'MTS_WRITE_BUFFER_SIZE:&#160;CodecTSDemux.h']]],
+  ['my_5fesp_5fnow_5fbuffer_5fcount_22',['MY_ESP_NOW_BUFFER_COUNT',['../_e_s_p_now_stream_8h.html#a8b92a627d903e2e21e1804bd4c3d4028',1,'ESPNowStream.h']]],
+  ['my_5fesp_5fnow_5fbuffer_5fsize_23',['MY_ESP_NOW_BUFFER_SIZE',['../_e_s_p_now_stream_8h.html#a7856157655e385ecbdb11eecaa0b493f',1,'ESPNowStream.h']]],
+  ['my_5fesp_5fnow_5fmax_5flen_24',['MY_ESP_NOW_MAX_LEN',['../_e_s_p_now_stream_8h.html#a2701686b061d9df310d4a0fdc129ead0',1,'ESPNowStream.h']]]
 ];

@@ -83,15 +83,17 @@ $(function() {
 <div class="textblock"><code>#include &lt;memory&gt;</code><br />
 <code>#include &quot;<a class="el" href="_vector_8h_source.html">AudioTools/CoreAudio/AudioBasic/Collections/Vector.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_codec_video_8h_source.html">AudioTools/Video/CodecVideo.h</a>&quot;</code><br />
+<code>#include &quot;TinyMPGDecoder.h&quot;</code><br />
+<code>#include &quot;TinyMPGEncoder.h&quot;</code><br />
 </div>
 <p><a href="_codec_m_p_g_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html">MPGDecoder&lt; Allocator &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html">MPGDecoder</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">MPEG-1 (part 2) video decoder wrapper around TinyMPGDecoder.  <a href="classaudio__tools_1_1_m_p_g_decoder.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_encoder.html">MPGEncoder&lt; Allocator &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_encoder.html">MPGEncoder</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">MPEG-1 part 2 video encoder wrapper around TinyMPGEncoder.  <a href="classaudio__tools_1_1_m_p_g_encoder.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -103,34 +105,18 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a621bf5d7d1aaa801d1b58263a15f3b22" id="r_a621bf5d7d1aaa801d1b58263a15f3b22"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_codec_m_p_g_8h.html#a621bf5d7d1aaa801d1b58263a15f3b22">MPG_DECODER_DEFAULT_ALLOCATOR</a>&#160;&#160;&#160;tinympg::PSRAMAllocatorESP32&lt;uint8_t&gt;</td></tr>
-<tr class="separator:a621bf5d7d1aaa801d1b58263a15f3b22"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d4f632c13c2077e2ce248cbf48e1722" id="r_a5d4f632c13c2077e2ce248cbf48e1722"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_codec_m_p_g_8h.html#a5d4f632c13c2077e2ce248cbf48e1722">MPG_ENCODER_DEFAULT_ALLOCATOR</a>&#160;&#160;&#160;tinympg::PSRAMAllocatorESP32&lt;uint8_t&gt;</td></tr>
-<tr class="separator:a5d4f632c13c2077e2ce248cbf48e1722"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a822d8a45212fb484641828898b5a15a7" id="r_a822d8a45212fb484641828898b5a15a7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_codec_m_p_g_8h.html#a822d8a45212fb484641828898b5a15a7">MPG_DEFAULT_ALLOCATOR</a>&#160;&#160;&#160;tinympg::PSRAMAllocatorESP32&lt;uint8_t&gt;</td></tr>
+<tr class="separator:a822d8a45212fb484641828898b5a15a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a621bf5d7d1aaa801d1b58263a15f3b22" name="a621bf5d7d1aaa801d1b58263a15f3b22"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a621bf5d7d1aaa801d1b58263a15f3b22">&#9670;&#160;</a></span>MPG_DECODER_DEFAULT_ALLOCATOR</h2>
+<a id="a822d8a45212fb484641828898b5a15a7" name="a822d8a45212fb484641828898b5a15a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a822d8a45212fb484641828898b5a15a7">&#9670;&#160;</a></span>MPG_DEFAULT_ALLOCATOR</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define MPG_DECODER_DEFAULT_ALLOCATOR&#160;&#160;&#160;tinympg::PSRAMAllocatorESP32&lt;uint8_t&gt;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a5d4f632c13c2077e2ce248cbf48e1722" name="a5d4f632c13c2077e2ce248cbf48e1722"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d4f632c13c2077e2ce248cbf48e1722">&#9670;&#160;</a></span>MPG_ENCODER_DEFAULT_ALLOCATOR</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define MPG_ENCODER_DEFAULT_ALLOCATOR&#160;&#160;&#160;tinympg::PSRAMAllocatorESP32&lt;uint8_t&gt;</td>
+          <td class="memname">#define MPG_DEFAULT_ALLOCATOR&#160;&#160;&#160;tinympg::PSRAMAllocatorESP32&lt;uint8_t&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
