@@ -92,6 +92,7 @@ Inheritance diagram for VideoEncoder:</div>
   <map id="VideoEncoder_map" name="VideoEncoder_map">
 <area href="classaudio__tools_1_1_h264_encoder.html" title="H.264 video encoder: wraps TinyH264Encoder (https://github.com/pschatzmann/TinyH264)...." alt="H264Encoder&lt; Allocator &gt;" shape="rect" coords="0,56,196,80"/>
 <area href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html" title="H.264 video encoder for ESP32-S3: wraps esp_h264::H264Encoder (https://github.com/pschatzmann/ESP32S3..." alt="H264EncoderESP32S3&lt; Alloc &gt;" shape="rect" coords="206,56,402,80"/>
+<area href="classaudio__tools_1_1_m_p_g_encoder.html" title="MPEG-1 part 2 video encoder wrapper around TinyMPGEncoder." alt="MPGEncoder&lt; Allocator &gt;" shape="rect" coords="412,56,608,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -171,7 +172,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Initializes the encoder (allocates its picture buffers, etc). </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_h264_encoder.html#acba365cc28eb702040c382646cfb0a7a">H264Encoder&lt; Allocator &gt;</a>, and <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#acba365cc28eb702040c382646cfb0a7a">H264EncoderESP32S3&lt; Alloc &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_h264_encoder.html#acba365cc28eb702040c382646cfb0a7a">H264Encoder&lt; Allocator &gt;</a>, <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#acba365cc28eb702040c382646cfb0a7a">H264EncoderESP32S3&lt; Alloc &gt;</a>, and <a class="el" href="classaudio__tools_1_1_m_p_g_encoder.html#acba365cc28eb702040c382646cfb0a7a">MPGEncoder&lt; Allocator &gt;</a>.</p>
 
 </div>
 </div>
@@ -200,7 +201,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Releases the encoder's resources. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a64e9fa75beda50a9e8400ee0d4e61984">H264Encoder&lt; Allocator &gt;</a>, and <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a64e9fa75beda50a9e8400ee0d4e61984">H264EncoderESP32S3&lt; Alloc &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a64e9fa75beda50a9e8400ee0d4e61984">H264Encoder&lt; Allocator &gt;</a>, <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a64e9fa75beda50a9e8400ee0d4e61984">H264EncoderESP32S3&lt; Alloc &gt;</a>, and <a class="el" href="classaudio__tools_1_1_m_p_g_encoder.html#a64e9fa75beda50a9e8400ee0d4e61984">MPGEncoder&lt; Allocator &gt;</a>.</p>
 
 </div>
 </div>
@@ -230,7 +231,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Defines the target the encoded bitstream is written to. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a05ff4cf361d54457ed8586e8c14aa922">H264Encoder&lt; Allocator &gt;</a>, and <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a05ff4cf361d54457ed8586e8c14aa922">H264EncoderESP32S3&lt; Alloc &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a05ff4cf361d54457ed8586e8c14aa922">H264Encoder&lt; Allocator &gt;</a>, <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a05ff4cf361d54457ed8586e8c14aa922">H264EncoderESP32S3&lt; Alloc &gt;</a>, and <a class="el" href="classaudio__tools_1_1_m_p_g_encoder.html#a05ff4cf361d54457ed8586e8c14aa922">MPGEncoder&lt; Allocator &gt;</a>.</p>
 
 </div>
 </div>
@@ -259,7 +260,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Selects the raw picture format <a class="el" href="classaudio__tools_1_1_video_encoder.html#a4f016ab9037bd654f538f107eb1d8f78">write()</a> expects - e.g. <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5acd1ea458818d68e388b9356fd528d67a">VideoFormat::I420</a> (planar Y/U/V, concatenated in one buffer), YUV422 (packed YUYV), RGB565/RGB666/RGB888 (packed). Not every encoder backend supports every value - unsupported values are logged and ignored (the previously selected format stays in effect); see the concrete class for exactly which ones it supports. Call before the first <a class="el" href="classaudio__tools_1_1_video_encoder.html#a4f016ab9037bd654f538f107eb1d8f78">write()</a>. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_h264_encoder.html#ab4305de559192cc500fbd0587b2748ea">H264Encoder&lt; Allocator &gt;</a>, and <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#ab4305de559192cc500fbd0587b2748ea">H264EncoderESP32S3&lt; Alloc &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_h264_encoder.html#ab4305de559192cc500fbd0587b2748ea">H264Encoder&lt; Allocator &gt;</a>, <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#ab4305de559192cc500fbd0587b2748ea">H264EncoderESP32S3&lt; Alloc &gt;</a>, and <a class="el" href="classaudio__tools_1_1_m_p_g_encoder.html#ab4305de559192cc500fbd0587b2748ea">MPGEncoder&lt; Allocator &gt;</a>.</p>
 
 </div>
 </div>
@@ -287,7 +288,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Reports the format/dimensions of the bitstream written to <a class="el" href="classaudio__tools_1_1_video_encoder.html#ac68081867afc8798c70a2e83599098e6" title="Defines the target the encoded bitstream is written to.">setOutput()</a>'s target - <a class="el" href="structaudio__tools_1_1_video_info.html#ae1a2d5f854b9e6c1303c18462609f77b" title="Video codec - VideoFormat::UNKNOWN if not (yet) determined.">VideoInfo::format</a> is the actual encoded codec (e.g. <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a8ba63b54352f7053b055235a9ec7ac09">VideoFormat::H264</a>), NOT <a class="el" href="classaudio__tools_1_1_video_encoder.html#af3e841cd4cb4b9dd800d7c3be096fa16">setVideoFormat()</a>'s raw input format, the reliable way to determine it (rather than assuming); width/height match the encoder's configured picture size (e.g. setSize()), 0 if that was never called. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a0a026655e20010414e4d162042f5c413">H264Encoder&lt; Allocator &gt;</a>, and <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a0a026655e20010414e4d162042f5c413">H264EncoderESP32S3&lt; Alloc &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a0a026655e20010414e4d162042f5c413">H264Encoder&lt; Allocator &gt;</a>, <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a0a026655e20010414e4d162042f5c413">H264EncoderESP32S3&lt; Alloc &gt;</a>, and <a class="el" href="classaudio__tools_1_1_m_p_g_encoder.html#a0a026655e20010414e4d162042f5c413">MPGEncoder&lt; Allocator &gt;</a>.</p>
 
 </div>
 </div>
@@ -326,7 +327,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Encodes one raw picture (in <a class="el" href="classaudio__tools_1_1_video_encoder.html#af3e841cd4cb4b9dd800d7c3be096fa16">setVideoFormat()</a>'s format, sized for the encoder's configured width/height) and writes the result to <a class="el" href="classaudio__tools_1_1_video_encoder.html#ac68081867afc8798c70a2e83599098e6" title="Defines the target the encoded bitstream is written to.">setOutput()</a>'s target, returning the number of bytes written (0 if nothing was, e.g. <a class="el" href="classaudio__tools_1_1_video_encoder.html#ac68081867afc8798c70a2e83599098e6" title="Defines the target the encoded bitstream is written to.">setOutput()</a>/size wasn't configured, or the format is unsupported). </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a7597ef706dd1aa590903ce9e095db20a">H264Encoder&lt; Allocator &gt;</a>, and <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a7597ef706dd1aa590903ce9e095db20a">H264EncoderESP32S3&lt; Alloc &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_h264_encoder.html#a7597ef706dd1aa590903ce9e095db20a">H264Encoder&lt; Allocator &gt;</a>, <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a7597ef706dd1aa590903ce9e095db20a">H264EncoderESP32S3&lt; Alloc &gt;</a>, and <a class="el" href="classaudio__tools_1_1_m_p_g_encoder.html#a7597ef706dd1aa590903ce9e095db20a">MPGEncoder&lt; Allocator &gt;</a>.</p>
 
 </div>
 </div>
