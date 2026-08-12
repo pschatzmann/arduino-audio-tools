@@ -77,6 +77,7 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pro-static-attribs">Static Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_m_p_g_encoder-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">MPGEncoder Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__codecs.html">Codecs</a> &#124; <a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__video.html">Video</a> &raquo; <a class="el" href="group__mpg.html">MPG</a> &#124; <a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__codecs.html">Codecs</a> &raquo; <a class="el" href="group__encoder.html">Encoder</a></div></div></div>
 </div><!--header-->
@@ -130,6 +131,9 @@ Public Member Functions</h2></td></tr>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:ae8d6e1007932b883acdb5d8f6a07ff96" id="r_ae8d6e1007932b883acdb5d8f6a07ff96"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_encoder.html#ae8d6e1007932b883acdb5d8f6a07ff96">ensureBitstreamBuffer</a> ()</td></tr>
 <tr class="separator:ae8d6e1007932b883acdb5d8f6a07ff96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cd10a6a59dce0566f64c649af69595f" id="r_a4cd10a6a59dce0566f64c649af69595f"><td class="memTemplParams" colspan="2">template&lt;typename Fn &gt; </td></tr>
+<tr class="memitem:a4cd10a6a59dce0566f64c649af69595f"><td class="memTemplItemLeft" align="right" valign="top">size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_encoder.html#a4cd10a6a59dce0566f64c649af69595f">writeOut</a> (Fn encodeInto)</td></tr>
+<tr class="separator:a4cd10a6a59dce0566f64c649af69595f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -145,6 +149,11 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:aa42c30e02e51ec7cc38ea4ab215e0db4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad2af7588ca87bfadebd74fb4939e64dc" id="r_ad2af7588ca87bfadebd74fb4939e64dc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_encoder.html#ad2af7588ca87bfadebd74fb4939e64dc">width_</a> = 0</td></tr>
 <tr class="separator:ad2af7588ca87bfadebd74fb4939e64dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
+Static Protected Attributes</h2></td></tr>
+<tr class="memitem:a7de5c5f1fb00b51c974ea8e1504dbe04" id="r_a7de5c5f1fb00b51c974ea8e1504dbe04"><td class="memItemLeft" align="right" valign="top">static constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_encoder.html#a7de5c5f1fb00b51c974ea8e1504dbe04">kMaxGrowRetries</a> = 4</td></tr>
+<tr class="separator:a7de5c5f1fb00b51c974ea8e1504dbe04"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>MPEG-1 part 2 video encoder wrapper around TinyMPGEncoder. </p>
@@ -536,6 +545,34 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a4cd10a6a59dce0566f64c649af69595f" name="a4cd10a6a59dce0566f64c649af69595f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cd10a6a59dce0566f64c649af69595f">&#9670;&#160;</a></span>writeOut()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Fn &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t writeOut </td>
+          <td>(</td>
+          <td class="paramtype">Fn&#160;</td>
+          <td class="paramname"><em>encodeInto</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="ab39488a53ba71d5594857beb380653cb" name="ab39488a53ba71d5594857beb380653cb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab39488a53ba71d5594857beb380653cb">&#9670;&#160;</a></span>bitstream_buffer</h2>
@@ -619,6 +656,28 @@ Protected Attributes</h2></td></tr>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7de5c5f1fb00b51c974ea8e1504dbe04" name="a7de5c5f1fb00b51c974ea8e1504dbe04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7de5c5f1fb00b51c974ea8e1504dbe04">&#9670;&#160;</a></span>kMaxGrowRetries</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr int kMaxGrowRetries = 4</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

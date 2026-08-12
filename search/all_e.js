@@ -52,7 +52,7 @@ var searchData=
   ['kit_49',['kit',['../classaudio__tools_1_1_audio_kit_stream.html#ab0c034f0991a293c7173f43c37360316',1,'audio_tools::AudioKitStream']]],
   ['kkeepsamplesize_50',['kKeepSampleSize',['../classaudio__tools_1_1_tf_lite_micro_speach_writer.html#ad2c2ccc32601cb982cb5d1397125bf8d',1,'audio_tools::TfLiteMicroSpeachWriter']]],
   ['kmaxaudiosamplesize_51',['kMaxAudioSampleSize',['../classaudio__tools_1_1_tf_lite_micro_speach_writer.html#afb473c97b88b4f03f49b8d5438a3405e',1,'audio_tools::TfLiteMicroSpeachWriter']]],
-  ['kmaxgrowretries_52',['kMaxGrowRetries',['../classaudio__tools_1_1_h264_encoder.html#a7de5c5f1fb00b51c974ea8e1504dbe04',1,'audio_tools::H264Encoder']]],
+  ['kmaxgrowretries_52',['kmaxgrowretries',['../classaudio__tools_1_1_m_p_g_encoder.html#a7de5c5f1fb00b51c974ea8e1504dbe04',1,'audio_tools::MPGEncoder::kMaxGrowRetries'],['../classaudio__tools_1_1_h264_encoder.html#a7de5c5f1fb00b51c974ea8e1504dbe04',1,'audio_tools::H264Encoder::kMaxGrowRetries']]],
   ['kmaxtaillen_53',['kMaxTailLen',['../classaudio__tools_1_1_meta_data_filter.html#aadf2288b8adbfcc19ba7f1f038572d68',1,'audio_tools::MetaDataFilter']]],
   ['kp_54',['kp',['../classaudio__tools_1_1_p_i_d_controller.html#a1f7add0f84d583bc2eceb290d6c4cc06',1,'audio_tools::PIDController']]],
   ['kscale_55',['kScale',['../classaudio__tools_1_1q1__14__t.html#ade273aeb95896a586d66a88c1de184c1',1,'audio_tools::q1_14_t']]],
