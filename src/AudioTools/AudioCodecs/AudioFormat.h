@@ -398,7 +398,7 @@ struct AudioInfoFormat : public AudioInfo, public MimeSource {
   AudioFormat format = AudioFormat::UNKNOWN;
 
   /// Mime type corresponding to format (see toMime()), nullptr if unmapped
-  const char *mime() const { return toMime(format); }
+  const char *mime() override { return toMime(format); }
 };
 
 }
