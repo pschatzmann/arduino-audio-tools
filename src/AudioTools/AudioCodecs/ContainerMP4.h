@@ -98,21 +98,11 @@ class DemuxerMP4 : public Demuxer {
 
   operator bool() override { return is_active; }
 
+
   /// Defines the audio output stream - e.g. an EncodedAudioStream wrapping
   /// an AudioDecoder that matches the audio track's codec, or any other
   /// Print if you want the raw payload as-is.
   void setOutputAudio(Print& out) override { p_output_audio = &out; }
-
-  /// Overrides the automatic decision of whether a synthetic WAV header is
-  /// sent to the audio output before any audio payload. By default this is
-  /// decided automatically from the parsed codec: on whenever
-  /// isWavFormat() of the parsed format is true (raw PCM), off otherwise
-  /// (AAC/ALAC, which have their own decoder and don't expect a WAV
-  /// header). Call this to force it either way instead.
-  void setSendWavHeader(bool flag) override {
-    send_wav_header = flag;
-    send_wav_header_explicit = true;
-  }
 
   /// Satisfies the AudioWriter/AudioDecoder interface - needed so
   /// EncodedAudioOutput/EncodedAudioStream's polymorphic AudioDecoder*
@@ -547,6 +537,17 @@ class DemuxerMP4 : public Demuxer {
     if (!send_wav_header_explicit) send_wav_header = isWavFormat(audio_format);
     if (send_wav_header) sendWavHeader();
     notifyAudioChange(info);
+  }
+  
+  /// Overrides the automatic decision of whether a synthetic WAV header is
+  /// sent to the audio output before any audio payload. By default this is
+  /// decided automatically from the parsed codec: on whenever
+  /// isWavFormat() of the parsed format is true (raw PCM), off otherwise
+  /// (AAC/ALAC, which have their own decoder and don't expect a WAV
+  /// header). Call this to force it either way instead.
+  void setSendWavHeader(bool flag) override {
+    send_wav_header = flag;
+    send_wav_header_explicit = true;
   }
 
   /// Synthesizes a valid WAV header (via the shared WAVHeader writer) from
