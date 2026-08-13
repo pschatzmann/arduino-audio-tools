@@ -186,8 +186,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a59ba90092c99ea7626cc58d70c8ed8f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee3d456e79d27d60f9b6ade892fcc88c" id="r_aee3d456e79d27d60f9b6ade892fcc88c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#aee3d456e79d27d60f9b6ade892fcc88c">setOutputVideo</a> (<a class="el" href="class_print.html">Print</a> &amp;out) override</td></tr>
 <tr class="separator:aee3d456e79d27d60f9b6ade892fcc88c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac81448c41c28170abdb6579e0359be2c" id="r_ac81448c41c28170abdb6579e0359be2c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#ac81448c41c28170abdb6579e0359be2c">setSendWavHeader</a> (bool flag) override</td></tr>
-<tr class="separator:ac81448c41c28170abdb6579e0359be2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -256,6 +254,8 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a2d8a4144da8df1399d6a197856a8f946"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75bda75c27a87c385d6efaf1d854804d" id="r_a75bda75c27a87c385d6efaf1d854804d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a75bda75c27a87c385d6efaf1d854804d">sendWavHeader</a> ()</td></tr>
 <tr class="separator:a75bda75c27a87c385d6efaf1d854804d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac81448c41c28170abdb6579e0359be2c" id="r_ac81448c41c28170abdb6579e0359be2c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#ac81448c41c28170abdb6579e0359be2c">setSendWavHeader</a> (bool flag) override</td></tr>
+<tr class="separator:ac81448c41c28170abdb6579e0359be2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad83dcd66e8e7e4f2d75930ffb018ec8e" id="r_ad83dcd66e8e7e4f2d75930ffb018ec8e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#ad83dcd66e8e7e4f2d75930ffb018ec8e">setupAudioInfo</a> (<a class="el" href="group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1">AudioFormat</a> format, const uint8_t *entryData, size_t entrySize)</td></tr>
 <tr class="separator:ad83dcd66e8e7e4f2d75930ffb018ec8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1cc60b3a4df401561156a2ac3ec151cb" id="r_a1cc60b3a4df401561156a2ac3ec151cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a1cc60b3a4df401561156a2ac3ec151cb">setupParser</a> ()</td></tr>
@@ -1994,7 +1994,7 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
