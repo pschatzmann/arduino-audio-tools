@@ -363,7 +363,8 @@ class Vector {
       T *oldData = p_data;
       int oldBufferLen = this->bufferLen;
       p_data = newArray(newSize);  // new T[newSize+1];
-      assert(p_data != nullptr);
+      bool out_of_memory = p_data == nullptr;
+      assert(!out_of_memory);
       this->bufferLen = newSize;
       if (oldData != nullptr) {
         if (copy && this->len > 0) {
