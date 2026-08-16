@@ -4,5 +4,6 @@ var searchData=
   ['management_1',['Memory Management',['../group__memorymgmt.html',1,'']]],
   ['memory_20management_2',['Memory Management',['../group__memorymgmt.html',1,'']]],
   ['metadata_3',['Metadata',['../group__metadata.html',1,'']]],
-  ['mpg_4',['MPG',['../group__mpg.html',1,'']]]
+  ['mjpeg_4',['MJPEG',['../group__mjpeg.html',1,'']]],
+  ['mpg_5',['MPG',['../group__mpg.html',1,'']]]
 ];

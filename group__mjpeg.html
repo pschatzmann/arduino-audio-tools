@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: Class Members</title>
+<title>arduino-audio-tools: MJPEG</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -68,21 +68,24 @@ $(function() {
 </div>
 </div>
 
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a>  </div>
+  <div class="headertitle"><div class="title">MJPEG<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__codecs.html">Codecs</a> &#124; <a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__video.html">Video</a></div></div></div>
+</div><!--header-->
 <div class="contents">
-<div class="textblock">Here is a list of all class members with links to the classes they belong to:</div>
 
-<h3><a id="index_y" name="index_y"></a>- y -</h3><ul>
-<li>y&#160;:&#160;<a class="el" href="structaudio__tools_1_1_echo_state.html#a822ceed8792de92a4c94263da2ed5a94">EchoState&lt; T, SampleType &gt;</a></li>
-<li>Y&#160;:&#160;<a class="el" href="structaudio__tools_1_1_echo_state.html#a6cd4199914c5ca3d29ab362478840f1d">EchoState&lt; T, SampleType &gt;</a></li>
-<li>y&#160;:&#160;<a class="el" href="structaudio__tools_1_1_l_e_d_output_config.html#a0a2f84ed7838f07779ae24c5a9086d33">LEDOutputConfig</a>, <a class="el" href="structaudio__tools_1_1_l_e_d_output_uno_r4_config.html#a0a2f84ed7838f07779ae24c5a9086d33">LEDOutputUnoR4Config</a>, <a class="el" href="classaudio__tools_1_1_simulated_audio_pot.html#aa4f0d3eebc3c443f9be81bf48561a217">SimulatedAudioPot</a></li>
-<li>y_1&#160;:&#160;<a class="el" href="classaudio__tools_1_1_bi_quad_d_f1.html#a435ad02615972ebf3621ba921c0b0eb3">BiQuadDF1&lt; T &gt;</a></li>
-<li>y_2&#160;:&#160;<a class="el" href="classaudio__tools_1_1_bi_quad_d_f1.html#a16a6b2c21c0f4055b1a3a520df1c28aa">BiQuadDF1&lt; T &gt;</a></li>
-<li>y_mirror&#160;:&#160;<a class="el" href="structaudio__tools_1_1_l_e_d_output_uno_r4_config.html#afa757062d785457a773a042ce11eab8c">LEDOutputUnoR4Config</a></li>
-<li>year&#160;:&#160;<a class="el" href="structaudio__tools_1_1_i_d3v1.html#aecd82c173ce8a51c3765454db363901c">ID3v1</a></li>
-<li>Yf&#160;:&#160;<a class="el" href="structaudio__tools_1_1_echo_state.html#a2bf57f07f01dd984746b327ef712d357">EchoState&lt; T, SampleType &gt;</a></li>
-<li>Yh&#160;:&#160;<a class="el" href="structaudio__tools_1_1_echo_state.html#a302ab144b74a925e4be2b99cb5900d75">EchoState&lt; T, SampleType &gt;</a></li>
-<li>ym&#160;:&#160;<a class="el" href="classaudio__tools_1_1_logarithmic_volume_control.html#a5a6beb9ca2904e494863187b0026004c">LogarithmicVolumeControl</a></li>
-</ul>
+<p>Motion-JPEG decoding using <a href="https://github.com/Bodmer/JPEGDecoder">https://github.com/Bodmer/JPEGDecoder</a>.  
+<a href="#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html">MJPEGDecoder</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Motion-JPEG video decoder: wraps JPEGDecoder (<a href="https://github.com/Bodmer/JPEGDecoder">https://github.com/Bodmer/JPEGDecoder</a>) as a <a class="el" href="classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 - CodecH264....">VideoDecoder</a>, so it can be plugged directly into e.g. <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#aa9139d7cd7756a3bf8603981959afb53">DemuxerAVI::setOutputVideo()</a>/ <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#aee3d456e79d27d60f9b6ade892fcc88c">DemuxerMP4::setOutputVideo()</a> - the same role <a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a> (<a class="el" href="_codec_h264_8h.html">CodecH264.h</a>) and <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html" title="MPEG-1 (part 2) video decoder wrapper around TinyMPGDecoder.">MPGDecoder</a> (<a class="el" href="_codec_m_p_g_8h.html">CodecMPG.h</a>) play for their own codecs. Named "MJPEGDecoder" rather than reusing JPEGDecoder's own name to avoid shadowing that (global-namespace) class from within this one.  <a href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<p>Motion-JPEG decoding using <a href="https://github.com/Bodmer/JPEGDecoder">https://github.com/Bodmer/JPEGDecoder</a>. </p>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

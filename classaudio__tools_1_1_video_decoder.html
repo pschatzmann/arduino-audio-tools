@@ -90,10 +90,11 @@ Inheritance diagram for VideoDecoder:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_video_decoder.png" usemap="#VideoDecoder_map" alt=""/>
   <map id="VideoDecoder_map" name="VideoDecoder_map">
-<area href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="VideoOutput" shape="rect" coords="207,0,404,24"/>
+<area href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="VideoOutput" shape="rect" coords="310,0,507,24"/>
 <area href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput..." alt="H264Decoder" shape="rect" coords="0,112,197,136"/>
 <area href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html" title="H.264 video decoder for ESP32-S3: wraps esp_h264::H264Decoder (https://github.com/pschatzmann/ESP32S3..." alt="H264DecoderESP32S3&lt; Alloc &gt;" shape="rect" coords="207,112,404,136"/>
-<area href="classaudio__tools_1_1_m_p_g_decoder.html" title="MPEG-1 (part 2) video decoder wrapper around TinyMPGDecoder." alt="MPGDecoder" shape="rect" coords="414,112,611,136"/>
+<area href="classaudio__tools_1_1_m_j_p_e_g_decoder.html" title="Motion-JPEG video decoder: wraps JPEGDecoder (https://github.com/Bodmer/JPEGDecoder) as a VideoDecode..." alt="MJPEGDecoder" shape="rect" coords="414,112,611,136"/>
+<area href="classaudio__tools_1_1_m_p_g_decoder.html" title="MPEG-1 (part 2) video decoder wrapper around TinyMPGDecoder." alt="MPGDecoder" shape="rect" coords="621,112,818,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -175,7 +176,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Initializes the decoder (allocates its picture buffers, etc). </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_h264_decoder.html#acba365cc28eb702040c382646cfb0a7a">H264Decoder</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#acba365cc28eb702040c382646cfb0a7a">H264DecoderESP32S3&lt; Alloc &gt;</a>, and <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#acba365cc28eb702040c382646cfb0a7a">MPGDecoder</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_h264_decoder.html#acba365cc28eb702040c382646cfb0a7a">H264Decoder</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#acba365cc28eb702040c382646cfb0a7a">H264DecoderESP32S3&lt; Alloc &gt;</a>, <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#acba365cc28eb702040c382646cfb0a7a">MJPEGDecoder</a>, and <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#acba365cc28eb702040c382646cfb0a7a">MPGDecoder</a>.</p>
 
 </div>
 </div>
@@ -204,7 +205,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Releases the decoder's resources. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">H264Decoder</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a64e9fa75beda50a9e8400ee0d4e61984">H264DecoderESP32S3&lt; Alloc &gt;</a>, and <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">MPGDecoder</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">H264Decoder</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a64e9fa75beda50a9e8400ee0d4e61984">H264DecoderESP32S3&lt; Alloc &gt;</a>, <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">MJPEGDecoder</a>, and <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">MPGDecoder</a>.</p>
 
 </div>
 </div>
@@ -232,7 +233,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Finalizes the frame most recently written via one or more <a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">write()</a> calls - see class comment. Default no-op for implementations that display/decode synchronously in <a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">write()</a> instead. </p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_muxer.html#ad3aed50bc3b4459454ccb8c64f5ced5a">Muxer</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a04f2540d940cc37b5c2538ed8e5b54be">H264Decoder</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a04f2540d940cc37b5c2538ed8e5b54be">H264DecoderESP32S3&lt; Alloc &gt;</a>, <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a04f2540d940cc37b5c2538ed8e5b54be">MPGDecoder</a>, <a class="el" href="classaudio__tools_1_1_j_p_e_g_output_t_f_t.html#a04f2540d940cc37b5c2538ed8e5b54be">JPEGOutputTFT</a>, and <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a04f2540d940cc37b5c2538ed8e5b54be">OutputOpenCV</a>.</p>
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_muxer.html#ad3aed50bc3b4459454ccb8c64f5ced5a">Muxer</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a04f2540d940cc37b5c2538ed8e5b54be">H264Decoder</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a04f2540d940cc37b5c2538ed8e5b54be">H264DecoderESP32S3&lt; Alloc &gt;</a>, <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#a04f2540d940cc37b5c2538ed8e5b54be">MJPEGDecoder</a>, <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a04f2540d940cc37b5c2538ed8e5b54be">MPGDecoder</a>, and <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a04f2540d940cc37b5c2538ed8e5b54be">OutputOpenCV</a>.</p>
 
 </div>
 </div>
@@ -262,7 +263,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Defines the target each decoded picture is written to. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_h264_decoder.html#ae1220e7e3542f5a84c21fe2f7cef194c">H264Decoder</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a05ff4cf361d54457ed8586e8c14aa922">H264DecoderESP32S3&lt; Alloc &gt;</a>, and <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a05ff4cf361d54457ed8586e8c14aa922">MPGDecoder</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_h264_decoder.html#ae1220e7e3542f5a84c21fe2f7cef194c">H264Decoder</a>, <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#ae1220e7e3542f5a84c21fe2f7cef194c">MJPEGDecoder</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a05ff4cf361d54457ed8586e8c14aa922">H264DecoderESP32S3&lt; Alloc &gt;</a>, and <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a05ff4cf361d54457ed8586e8c14aa922">MPGDecoder</a>.</p>
 
 </div>
 </div>
@@ -291,7 +292,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Selects the pixel format written to <a class="el" href="classaudio__tools_1_1_video_decoder.html#ac68081867afc8798c70a2e83599098e6" title="Defines the target each decoded picture is written to.">setOutput()</a>'s target - e.g. <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a3b73e4d15701467ed72f157ffaff680a">VideoFormat::RGB565</a> (the common TFT wire format), RGB666/RGB888 for higher color depth displays, or I420 to pass the decoded planes through unconverted. Not every decoder backend supports every value (e.g. RGB666/RGB888 are TinyH264-only, not available on the esp_h264 backend) - unsupported values are logged and ignored (the previously selected format stays in effect); see the concrete class for exactly which ones it supports. Call before <a class="el" href="classaudio__tools_1_1_video_decoder.html#ae8a0d9ca63f8bb3de100e347c3f3bca4" title="Initializes the decoder (allocates its picture buffers, etc).">begin()</a>. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_h264_decoder.html#ab4305de559192cc500fbd0587b2748ea">H264Decoder</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#ab4305de559192cc500fbd0587b2748ea">H264DecoderESP32S3&lt; Alloc &gt;</a>, and <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#ab4305de559192cc500fbd0587b2748ea">MPGDecoder</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_h264_decoder.html#ab4305de559192cc500fbd0587b2748ea">H264Decoder</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#ab4305de559192cc500fbd0587b2748ea">H264DecoderESP32S3&lt; Alloc &gt;</a>, <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#ab4305de559192cc500fbd0587b2748ea">MJPEGDecoder</a>, and <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#ab4305de559192cc500fbd0587b2748ea">MPGDecoder</a>.</p>
 
 </div>
 </div>
@@ -319,7 +320,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Reports the format/dimensions of the picture written to <a class="el" href="classaudio__tools_1_1_video_decoder.html#ac68081867afc8798c70a2e83599098e6" title="Defines the target each decoded picture is written to.">setOutput()</a>'s target - <a class="el" href="structaudio__tools_1_1_video_info.html#ae1a2d5f854b9e6c1303c18462609f77b" title="Video codec - VideoFormat::UNKNOWN if not (yet) determined.">VideoInfo::format</a> is always the format most recently selected via <a class="el" href="classaudio__tools_1_1_video_decoder.html#af3e841cd4cb4b9dd800d7c3be096fa16">setVideoFormat()</a> (RGB565 if never called), the reliable way to determine it (rather than assuming); width/ height reflect the most recently decoded picture, 0 before any picture has been decoded. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a0a026655e20010414e4d162042f5c413">H264Decoder</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a0a026655e20010414e4d162042f5c413">H264DecoderESP32S3&lt; Alloc &gt;</a>, and <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a0a026655e20010414e4d162042f5c413">MPGDecoder</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a0a026655e20010414e4d162042f5c413">H264Decoder</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a0a026655e20010414e4d162042f5c413">H264DecoderESP32S3&lt; Alloc &gt;</a>, <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#a0a026655e20010414e4d162042f5c413">MJPEGDecoder</a>, and <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a0a026655e20010414e4d162042f5c413">MPGDecoder</a>.</p>
 
 </div>
 </div>
@@ -357,7 +358,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a7597ef706dd1aa590903ce9e095db20a">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a7597ef706dd1aa590903ce9e095db20a">MuxerMP4</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a7597ef706dd1aa590903ce9e095db20a">MuxerMPG</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">H264Decoder</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a7597ef706dd1aa590903ce9e095db20a">H264DecoderESP32S3&lt; Alloc &gt;</a>, <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a7597ef706dd1aa590903ce9e095db20a">MPGDecoder</a>, <a class="el" href="classaudio__tools_1_1_j_p_e_g_output_t_f_t.html#a7597ef706dd1aa590903ce9e095db20a">JPEGOutputTFT</a>, <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a7597ef706dd1aa590903ce9e095db20a">OutputOpenCV</a>, <a class="el" href="classaudio__tools_1_1_output_t_f_t__e_s_p_i.html#a7597ef706dd1aa590903ce9e095db20a">OutputTFT_eSPI</a>, and <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a7597ef706dd1aa590903ce9e095db20a">OutputTinyGPU</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a7597ef706dd1aa590903ce9e095db20a">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a7597ef706dd1aa590903ce9e095db20a">MuxerMP4</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a7597ef706dd1aa590903ce9e095db20a">MuxerMPG</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">H264Decoder</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a7597ef706dd1aa590903ce9e095db20a">H264DecoderESP32S3&lt; Alloc &gt;</a>, <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#a7597ef706dd1aa590903ce9e095db20a">MJPEGDecoder</a>, <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a7597ef706dd1aa590903ce9e095db20a">MPGDecoder</a>, <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a7597ef706dd1aa590903ce9e095db20a">OutputOpenCV</a>, <a class="el" href="classaudio__tools_1_1_output_t_f_t__e_s_p_i.html#a7597ef706dd1aa590903ce9e095db20a">OutputTFT_eSPI</a>, and <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a7597ef706dd1aa590903ce9e095db20a">OutputTinyGPU</a>.</p>
 
 </div>
 </div>
