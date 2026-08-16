@@ -1,0 +1,50 @@
+cmake_minimum_required(VERSION 3.20)
+
+# set the project name
+project(decode-avi)
+set (CMAKE_CXX_STANDARD 11)
+set (DCMAKE_CXX_FLAGS "-Werror")
+
+include(FetchContent)
+option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
+
+# Add Portaudio for desktop audio output
+add_compile_options(-DIS_DESKTOP)
+FetchContent_Declare(portaudio GIT_REPOSITORY "https://github.com/PortAudio/portaudio.git" GIT_TAG v19.7.0 )
+FetchContent_GetProperties(portaudio)
+if(NOT portaudio_POPULATED)
+    FetchContent_Populate(portaudio)
+    add_subdirectory(${portaudio_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/portaudio)
+endif()
+
+# provide audio-tools
+if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../../.. ${CMAKE_CURRENT_BINARY_DIR}/arduino-audio-tools )
+endif()
+
+# No TinyH264 needed here - this example decodes MJPEG, which OutputOpenCV
+# handles itself (cv::imdecode); see decode-mp4/CMakeLists.txt for the
+# H264Decoder+TinyH264 pairing.
+
+# OpenCV - display backend for OutputOpenCV
+find_package( OpenCV REQUIRED )
+include_directories( ${OpenCV_INCLUDE_DIRS} )
+
+# build sketch as executable
+set_source_files_properties(decode-avi.ino PROPERTIES LANGUAGE CXX)
+add_executable (decode-avi decode-avi.ino)
+
+# set preprocessor defines
+target_compile_definitions(arduino_emulator PUBLIC -DDEFINE_MAIN)
+target_compile_definitions(decode-avi PUBLIC -DARDUINO -DUSE_PORTAUDIO -DIS_DESKTOP)
+target_compile_options(decode-avi PRIVATE -Wno-multichar)
+
+# set compile optioins
+target_compile_options(arduino-audio-tools INTERFACE -Wno-inconsistent-missing-override)
+
+# specify libraries
+target_link_libraries(decode-avi PRIVATE
+    arduino_emulator
+    arduino-audio-tools
+    portaudio
+    ${OpenCV_LIBS})
