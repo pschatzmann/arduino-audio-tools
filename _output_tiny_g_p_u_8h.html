@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: src/AudioTools/Video/OutputTFT.h File Reference</title>
+<title>arduino-audio-tools: src/AudioTools/Video/OutputTinyGPU.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -76,18 +76,20 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a>  </div>
-  <div class="headertitle"><div class="title">OutputTFT.h File Reference</div></div>
+  <div class="headertitle"><div class="title">OutputTinyGPU.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="_codec_video_8h_source.html">AudioTools/Video/CodecVideo.h</a>&quot;</code><br />
-<code>#include &lt;TFT_eSPI.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;TinyGPU.h&gt;</code><br />
+<code>#include &lt;TinyGPU/DisplayDriverSPI.h&gt;</code><br />
+<code>#include &lt;TinyGPU/SurfaceWithExternalBuffer.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="_codec_video_8h_source.html">AudioTools/Video/CodecVideo.h</a>&quot;</code><br />
 </div>
-<p><a href="_output_t_f_t_8h_source.html">Go to the source code of this file.</a></p>
+<p><a href="_output_tiny_g_p_u_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_t_f_t.html">OutputTFT</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bridges <a class="el" href="classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 - CodecH264....">VideoDecoder</a>'s <a class="el" href="classaudio__tools_1_1_output_t_f_t.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> calls to the TFT - <a class="el" href="classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 - CodecH264....">VideoDecoder</a> always hands over one complete frame per <a class="el" href="classaudio__tools_1_1_output_t_f_t.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call (see its class comment), so this can push the whole frame in one go. Usually the data is in RGB565 format, but other formats are supported as well.  <a href="classaudio__tools_1_1_output_t_f_t.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html">OutputTinyGPU</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bridges <a class="el" href="classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 - CodecH264....">VideoDecoder</a>'s <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> calls to a TinyGPU ILI9341Driver - <a class="el" href="classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 - CodecH264....">VideoDecoder</a> always hands over one complete frame per <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call (see its class comment), so this can push the whole frame in one go. Usually the data is in RGB565 format, but other formats are supported as well.  <a href="classaudio__tools_1_1_output_tiny_g_p_u.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>

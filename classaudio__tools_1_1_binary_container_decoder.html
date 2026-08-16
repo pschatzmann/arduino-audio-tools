@@ -165,6 +165,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a46f2c85361f5459bb6a58dc28dc3ee9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba39b1b297202a5d302a9b9b063ca61f" id="r_aba39b1b297202a5d302a9b9b063ca61f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_binary_container_decoder.html#aba39b1b297202a5d302a9b9b063ca61f">setOutputVideo</a> (<a class="el" href="class_print.html">Print</a> &amp;out)</td></tr>
 <tr class="separator:aba39b1b297202a5d302a9b9b063ca61f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2644833aaa44ccfbc40f6651d8be2831" id="r_a2644833aaa44ccfbc40f6651d8be2831"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_binary_container_decoder.html#a2644833aaa44ccfbc40f6651d8be2831">setOutputVideo</a> (<a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;out)</td></tr>
+<tr class="separator:a2644833aaa44ccfbc40f6651d8be2831"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99d57924ad8bf6c8765005de08b3a214" id="r_a99d57924ad8bf6c8765005de08b3a214"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_binary_container_decoder.html#a99d57924ad8bf6c8765005de08b3a214">setReference</a> (void *ref)</td></tr>
 <tr class="memdesc:a99d57924ad8bf6c8765005de08b3a214"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide additional information for callback.  <br /></td></tr>
 <tr class="separator:a99d57924ad8bf6c8765005de08b3a214"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -230,6 +232,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:aa42c30e02e51ec7cc38ea4ab215e0db4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6175105d914cd64fdd636d611fc4aacd" id="r_a6175105d914cd64fdd636d611fc4aacd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_binary_container_decoder.html#a6175105d914cd64fdd636d611fc4aacd">p_out_video</a> = nullptr</td></tr>
 <tr class="separator:a6175105d914cd64fdd636d611fc4aacd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7b7975b87ad46ccfea34033c913a96f" id="r_ad7b7975b87ad46ccfea34033c913a96f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_binary_container_decoder.html#ad7b7975b87ad46ccfea34033c913a96f">p_out_video_video</a> = nullptr</td></tr>
+<tr class="separator:ad7b7975b87ad46ccfea34033c913a96f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdad90adc3ba71f7b1e16444c23b5502" id="r_acdad90adc3ba71f7b1e16444c23b5502"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#acdad90adc3ba71f7b1e16444c23b5502">p_print</a> = nullptr</td></tr>
 <tr class="separator:acdad90adc3ba71f7b1e16444c23b5502"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae58508818260a10b97c074d9443a7203" id="r_ae58508818260a10b97c074d9443a7203"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_binary_container_decoder.html#ae58508818260a10b97c074d9443a7203">reference</a> = nullptr</td></tr>
@@ -1153,7 +1157,7 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <a id="aba39b1b297202a5d302a9b9b063ca61f" name="aba39b1b297202a5d302a9b9b063ca61f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aba39b1b297202a5d302a9b9b063ca61f">&#9670;&#160;</a></span>setOutputVideo()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aba39b1b297202a5d302a9b9b063ca61f">&#9670;&#160;</a></span>setOutputVideo() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1176,6 +1180,32 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Defines the video output - e.g. a <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> implementation (<a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a>, <a class="el" href="classaudio__tools_1_1_j_p_e_g_output_t_f_t.html" title="Display jpeg image using https://github.com/Bodmer/TFT_eSPI and https://github.com/Bodmer/JPEGDecoder...">JPEGOutputTFT</a>, ...), or any other <a class="el" href="class_print.html">Print</a> if you want the raw frame payload as-is. </p>
+
+</div>
+</div>
+<a id="a2644833aaa44ccfbc40f6651d8be2831" name="a2644833aaa44ccfbc40f6651d8be2831"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2644833aaa44ccfbc40f6651d8be2831">&#9670;&#160;</a></span>setOutputVideo() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setOutputVideo </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;&#160;</td>
+          <td class="paramname"><em>out</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -1640,6 +1670,28 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="class_print.html">Print</a>* p_out_video = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad7b7975b87ad46ccfea34033c913a96f" name="ad7b7975b87ad46ccfea34033c913a96f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7b7975b87ad46ccfea34033c913a96f">&#9670;&#160;</a></span>p_out_video_video</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a>* p_out_video_video = nullptr</td>
         </tr>
       </table>
   </td>

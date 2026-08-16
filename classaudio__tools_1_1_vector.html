@@ -177,6 +177,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a3fb8c4f54b0e9997cce834c9d7e4c9f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad8327ff7ceb14054f0644f6cd43a07cc" id="r_ad8327ff7ceb14054f0644f6cd43a07cc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_vector.html#ad8327ff7ceb14054f0644f6cd43a07cc">resize</a> (size_t newSize, T value)</td></tr>
 <tr class="separator:ad8327ff7ceb14054f0644f6cd43a07cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afce3cb29a8fda876f412bf744547fa64" id="r_afce3cb29a8fda876f412bf744547fa64"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_vector.html#afce3cb29a8fda876f412bf744547fa64">setAllocAssertActive</a> (bool flag)</td></tr>
+<tr class="separator:afce3cb29a8fda876f412bf744547fa64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acbc460f38e651d12700e4842d332948c" id="r_acbc460f38e651d12700e4842d332948c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_vector.html#acbc460f38e651d12700e4842d332948c">setAllocator</a> (<a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;allocator)</td></tr>
 <tr class="separator:acbc460f38e651d12700e4842d332948c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f16304f80b6fb253c7b0ead3e16dd18" id="r_a5f16304f80b6fb253c7b0ead3e16dd18"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_vector.html#a5f16304f80b6fb253c7b0ead3e16dd18">shrink_to_fit</a> ()</td></tr>
@@ -203,6 +205,8 @@ Protected Member Functions</h2></td></tr>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a52a25bb51473f2562b9d2b921d68ac52" id="r_a52a25bb51473f2562b9d2b921d68ac52"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_vector.html#a52a25bb51473f2562b9d2b921d68ac52">bufferLen</a> = 0</td></tr>
 <tr class="separator:a52a25bb51473f2562b9d2b921d68ac52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d6225ed8e9c81bb50af7a860cc17df8" id="r_a7d6225ed8e9c81bb50af7a860cc17df8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_vector.html#a7d6225ed8e9c81bb50af7a860cc17df8">is_alloc_assert_active</a> = true</td></tr>
+<tr class="separator:a7d6225ed8e9c81bb50af7a860cc17df8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afed088663f8704004425cdae2120b9b3" id="r_afed088663f8704004425cdae2120b9b3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_vector.html#afed088663f8704004425cdae2120b9b3">len</a> = 0</td></tr>
 <tr class="separator:afed088663f8704004425cdae2120b9b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f4bdc4efb8ed50fea52af4107cdf545" id="r_a2f4bdc4efb8ed50fea52af4107cdf545"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_vector.html#a2f4bdc4efb8ed50fea52af4107cdf545">p_allocator</a> = &amp;<a class="el" href="namespaceaudio__tools.html#a02e30d9ec0ddcc5d9e9f1d2324b8cca8">DefaultAllocator</a></td></tr>
@@ -1433,6 +1437,34 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
+<a id="afce3cb29a8fda876f412bf744547fa64" name="afce3cb29a8fda876f412bf744547fa64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afce3cb29a8fda876f412bf744547fa64">&#9670;&#160;</a></span>setAllocAssertActive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setAllocAssertActive </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>flag</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="acbc460f38e651d12700e4842d332948c" name="acbc460f38e651d12700e4842d332948c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acbc460f38e651d12700e4842d332948c">&#9670;&#160;</a></span>setAllocator()</h2>
 
@@ -1585,6 +1617,30 @@ template&lt;class T &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">int bufferLen = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7d6225ed8e9c81bb50af7a860cc17df8" name="a7d6225ed8e9c81bb50af7a860cc17df8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d6225ed8e9c81bb50af7a860cc17df8">&#9670;&#160;</a></span>is_alloc_assert_active</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool is_alloc_assert_active = true</td>
         </tr>
       </table>
   </td>

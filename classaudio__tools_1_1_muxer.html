@@ -91,11 +91,10 @@ Inheritance diagram for Muxer:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_muxer.png" usemap="#Muxer_map" alt=""/>
   <map id="Muxer_map" name="Muxer_map">
-<area href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="VideoOutput" shape="rect" coords="92,56,174,80"/>
-<area href="class_print.html" alt="Print" shape="rect" coords="92,0,174,24"/>
-<area href="classaudio__tools_1_1_muxer_a_v_i.html" title="Configuration for the (single) video track written by MuxerAVI." alt="MuxerAVI" shape="rect" coords="0,168,82,192"/>
-<area href="classaudio__tools_1_1_muxer_m_p4.html" title="Video track configuration for MuxerMP4 - update before calling begin()." alt="MuxerMP4" shape="rect" coords="92,168,174,192"/>
-<area href="classaudio__tools_1_1_muxer_m_p_g.html" title="MPEG-1 System (Program) Stream Encoder, as defined by ISO/IEC 11172-1: muxes an already-encoded MPEG-..." alt="MuxerMPG" shape="rect" coords="184,168,266,192"/>
+<area href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="VideoOutput" shape="rect" coords="92,0,174,24"/>
+<area href="classaudio__tools_1_1_muxer_a_v_i.html" title="Configuration for the (single) video track written by MuxerAVI." alt="MuxerAVI" shape="rect" coords="0,112,82,136"/>
+<area href="classaudio__tools_1_1_muxer_m_p4.html" title="Video track configuration for MuxerMP4 - update before calling begin()." alt="MuxerMP4" shape="rect" coords="92,112,174,136"/>
+<area href="classaudio__tools_1_1_muxer_m_p_g.html" title="MPEG-1 System (Program) Stream Encoder, as defined by ISO/IEC 11172-1: muxes an already-encoded MPEG-..." alt="MuxerMPG" shape="rect" coords="184,112,266,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -116,8 +115,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:add249ca8022f537c6e3832c7347d2be7" id="r_add249ca8022f537c6e3832c7347d2be7"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structaudio__tools_1_1_audio_info_format.html">AudioInfoFormat</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer.html#add249ca8022f537c6e3832c7347d2be7">audioInfo</a> ()=0</td></tr>
 <tr class="memdesc:add249ca8022f537c6e3832c7347d2be7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides read/write access to the audio track's <a class="el" href="structaudio__tools_1_1_audio_info_format.html" title="AudioInfo extended with a WAVEFORMATEX-style codec tag (the &quot;wav code&quot;): identifies the codec (PCM,...">AudioInfoFormat</a>.  <br /></td></tr>
 <tr class="separator:add249ca8022f537c6e3832c7347d2be7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a473a08fbb41a997860a55213bc367d44" id="r_a473a08fbb41a997860a55213bc367d44"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_print.html#a473a08fbb41a997860a55213bc367d44">availableForWrite</a> ()</td></tr>
-<tr class="separator:a473a08fbb41a997860a55213bc367d44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8a0d9ca63f8bb3de100e347c3f3bca4" id="r_ae8a0d9ca63f8bb3de100e347c3f3bca4"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer.html#ae8a0d9ca63f8bb3de100e347c3f3bca4">begin</a> ()=0</td></tr>
 <tr class="separator:ae8a0d9ca63f8bb3de100e347c3f3bca4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa540e86022c1f72380d1014d98f38f43" id="r_aa540e86022c1f72380d1014d98f38f43"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer.html#aa540e86022c1f72380d1014d98f38f43">end</a> ()=0</td></tr>
@@ -140,29 +137,25 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ac68081867afc8798c70a2e83599098e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the output: e.g. a local File or a network <a class="el" href="class_client.html">Client</a>.  <br /></td></tr>
 <tr class="separator:ac68081867afc8798c70a2e83599098e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca7ee6461963788ac0c3a5cb9d31d9d9" id="r_aca7ee6461963788ac0c3a5cb9d31d9d9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer.html#aca7ee6461963788ac0c3a5cb9d31d9d9">setStreamType</a> (<a class="el" href="group__video.html#ga3529160d6b73e5a63e0a95afeb424659">StreamContentType</a> type)=0</td></tr>
-<tr class="memdesc:aca7ee6461963788ac0c3a5cb9d31d9d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects whether <a class="el" href="classaudio__tools_1_1_video_output.html#a1e40195a444e7f20508961cfeacc9b04">write()</a> feeds the video or the audio track.  <br /></td></tr>
+<tr class="memdesc:aca7ee6461963788ac0c3a5cb9d31d9d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects whether <a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">write()</a> feeds the video or the audio track.  <br /></td></tr>
 <tr class="separator:aca7ee6461963788ac0c3a5cb9d31d9d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2fe33c51c2b02b8408f8771a7797c2a7" id="r_a2fe33c51c2b02b8408f8771a7797c2a7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer.html#a2fe33c51c2b02b8408f8771a7797c2a7">setVideoInfo</a> (<a class="el" href="structaudio__tools_1_1_muxer_video_config.html">MuxerVideoConfig</a> config)=0</td></tr>
 <tr class="memdesc:a2fe33c51c2b02b8408f8771a7797c2a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the video track configuration - call before <a class="el" href="classaudio__tools_1_1_muxer.html#ae8a0d9ca63f8bb3de100e347c3f3bca4">begin()</a>  <br /></td></tr>
 <tr class="separator:a2fe33c51c2b02b8408f8771a7797c2a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add440be5fd77fdd11db82757ecf6c28d" id="r_add440be5fd77fdd11db82757ecf6c28d"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="group__video.html#ga3529160d6b73e5a63e0a95afeb424659">StreamContentType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer.html#add440be5fd77fdd11db82757ecf6c28d">streamType</a> ()=0</td></tr>
-<tr class="memdesc:add440be5fd77fdd11db82757ecf6c28d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The track <a class="el" href="classaudio__tools_1_1_video_output.html#a1e40195a444e7f20508961cfeacc9b04">write()</a> currently targets (see <a class="el" href="classaudio__tools_1_1_muxer.html#aca7ee6461963788ac0c3a5cb9d31d9d9" title="Selects whether write() feeds the video or the audio track.">setStreamType()</a>)  <br /></td></tr>
+<tr class="memdesc:add440be5fd77fdd11db82757ecf6c28d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The track <a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">write()</a> currently targets (see <a class="el" href="classaudio__tools_1_1_muxer.html#aca7ee6461963788ac0c3a5cb9d31d9d9" title="Selects whether write() feeds the video or the audio track.">setStreamType()</a>)  <br /></td></tr>
 <tr class="separator:add440be5fd77fdd11db82757ecf6c28d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1f174f043746b4c057475c45b6678ad" id="r_ae1f174f043746b4c057475c45b6678ad"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#ae1f174f043746b4c057475c45b6678ad">write</a> (const uint8_t *data, size_t len) override=0</td></tr>
-<tr class="separator:ae1f174f043746b4c057475c45b6678ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e40195a444e7f20508961cfeacc9b04" id="r_a1e40195a444e7f20508961cfeacc9b04"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a1e40195a444e7f20508961cfeacc9b04">write</a> (uint8_t c) override</td></tr>
-<tr class="separator:a1e40195a444e7f20508961cfeacc9b04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f016ab9037bd654f538f107eb1d8f78" id="r_a4f016ab9037bd654f538f107eb1d8f78"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">write</a> (const uint8_t *data, size_t len)=0</td></tr>
+<tr class="separator:a4f016ab9037bd654f538f107eb1d8f78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:aa66a35e5edf58ce00047afcd1d4f455e" id="r_aa66a35e5edf58ce00047afcd1d4f455e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_print.html#aa66a35e5edf58ce00047afcd1d4f455e">_timeout</a> = 10</td></tr>
-<tr class="separator:aa66a35e5edf58ce00047afcd1d4f455e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdad90adc3ba71f7b1e16444c23b5502" id="r_acdad90adc3ba71f7b1e16444c23b5502"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer.html#acdad90adc3ba71f7b1e16444c23b5502">p_print</a> = nullptr</td></tr>
 <tr class="separator:acdad90adc3ba71f7b1e16444c23b5502"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Common interface for muxers (<a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html" title="Configuration for the (single) video track written by MuxerAVI.">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html" title="Video track configuration for MuxerMP4 - update before calling begin().">MuxerMP4</a>) that combine an already-encoded video track (and optionally an audio track) into a container written to a <a class="el" href="class_print.html">Print</a> (a local File to record, or e.g. a network <a class="el" href="class_client.html">Client</a> to publish a live stream to an HTTP/TCP client). Write code against this interface instead of a concrete class if it should work with either container format. </p>
-<p><a class="el" href="classaudio__tools_1_1_video_output.html#a1e40195a444e7f20508961cfeacc9b04">write()</a> (<a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a>) treats each call as one complete, already-encoded frame for both <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html" title="Configuration for the (single) video track written by MuxerAVI.">MuxerAVI</a> and <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html" title="Video track configuration for MuxerMP4 - update before calling begin().">MuxerMP4</a> - callers must hand over the full frame in a single call, not build it up incrementally across several <a class="el" href="classaudio__tools_1_1_video_output.html#a1e40195a444e7f20508961cfeacc9b04">write()</a> calls. <a class="el" href="classaudio__tools_1_1_muxer.html#ad3aed50bc3b4459454ccb8c64f5ced5a">flush()</a> is a no-op for both.</p>
+<p><a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">write()</a> (<a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a>) treats each call as one complete, already-encoded frame for both <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html" title="Configuration for the (single) video track written by MuxerAVI.">MuxerAVI</a> and <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html" title="Video track configuration for MuxerMP4 - update before calling begin().">MuxerMP4</a> - callers must hand over the full frame in a single call, not build it up incrementally across several <a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">write()</a> calls. <a class="el" href="classaudio__tools_1_1_muxer.html#ad3aed50bc3b4459454ccb8c64f5ced5a">flush()</a> is a no-op for both.</p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
@@ -440,33 +433,6 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a473a08fbb41a997860a55213bc367d44" name="a473a08fbb41a997860a55213bc367d44"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a473a08fbb41a997860a55213bc367d44">&#9670;&#160;</a></span>availableForWrite()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual int availableForWrite </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_audio_e_s_p32_u_l_p.html#a86aa7db83a28e2662e01c57a36681cb0">AudioESP32ULP</a>, <a class="el" href="classaudio__tools_1_1_audio_lo_ra.html#a86aa7db83a28e2662e01c57a36681cb0">AudioLoRa</a>, <a class="el" href="classaudio__tools_1_1_r_t_s_p_output.html#a86aa7db83a28e2662e01c57a36681cb0">RTSPOutput&lt; Platform &gt;</a>, <a class="el" href="classaudio__tools_1_1_s_p_i_audio_master.html#a86aa7db83a28e2662e01c57a36681cb0">SPIAudioMaster</a>, <a class="el" href="classaudio__tools_1_1_u_d_p_stream.html#a86aa7db83a28e2662e01c57a36681cb0">UDPStream</a>, <a class="el" href="classaudio__tools_1_1_v_b_a_n_stream.html#a86aa7db83a28e2662e01c57a36681cb0">VBANStream</a>, <a class="el" href="classaudio__tools_1_1_audio_stream_wrapper.html#a473a08fbb41a997860a55213bc367d44">AudioStreamWrapper</a>, <a class="el" href="classaudio__tools_1_1_converter_stream.html#a473a08fbb41a997860a55213bc367d44">ConverterStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_encoded_audio_output.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">EncodedAudioOutput</a>, <a class="el" href="classaudio__tools_1_1_encoded_audio_stream.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">EncodedAudioStream</a>, <a class="el" href="classaudio__tools_1_1_faust_stream.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">FaustStream&lt; DSP &gt;</a>, <a class="el" href="classaudio__tools_1_1_file_output.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">FileOutput</a>, <a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html#a6ff0d6d1b0f3f9b652c9d5298ed0863c">I2SCodecStream</a>, <a class="el" href="classaudio__tools_1_1_mini_audio_stream.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">MiniAudioStream</a>, <a class="el" href="classaudio__tools_1_1_stdio_stream.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">StdioStream</a>, <a class="el" href="classaudio__tools_1_1_a2_d_p_stream.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">A2DPStream</a>, <a class="el" href="classaudio__tools_1_1_audio_server_ex.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">AudioServerEx</a>, <a class="el" href="classaudio__tools_1_1_audio_sync_writer.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">AudioSyncWriter</a>, <a class="el" href="classaudio__tools_1_1_e_s_p_now_stream.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">ESPNowStream</a>, <a class="el" href="classaudio__tools_1_1_hamming_f_e_c.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">HammingFEC&lt; bytecount, block_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_abstract_u_r_l_stream.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">AbstractURLStream</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">URLStreamESP32</a>, <a class="el" href="classaudio__tools_1_1_n_r_f24_stream.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">NRF24Stream</a>, <a class="el" href="classaudio__tools_1_1_readio_head_stream.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">ReadioHeadStream</a>, <a class="el" href="classaudio__tools_1_1_reed_solomon_f_e_c.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">ReedSolomonFEC&lt; bytecount, additional_bytes &gt;</a>, <a class="el" href="classaudio__tools_1_1_s_p_i_audio_slave.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">SPIAudioSlave</a>, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">USBAudioDeviceBase</a>, <a class="el" href="classaudio__tools_1_1_synchronized_stream.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">SynchronizedStream</a>, <a class="el" href="classaudio__tools_1_1_analog_audio_stream.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">AnalogAudioStream</a>, <a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">AudioEffectStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_audio_effect_stream.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">AudioEffectStream</a>, <a class="el" href="classaudio__tools_1_1_equalizer3_bands_t.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">Equalizer3BandsT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_equalizer3_bands_per_channel_t.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">Equalizer3BandsPerChannelT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_i2_s_stream.html#a6ff0d6d1b0f3f9b652c9d5298ed0863c">I2SStream</a>, <a class="el" href="classaudio__tools_1_1_reformat_base_stream.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">ReformatBaseStream</a>, <a class="el" href="classaudio__tools_1_1_adapter_audio_stream_to_audio_output.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">AdapterAudioStreamToAudioOutput</a>, <a class="el" href="classaudio__tools_1_1_timed_stream.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">TimedStream</a>, <a class="el" href="classaudio__tools_1_1_audio_output.html#a6ff0d6d1b0f3f9b652c9d5298ed0863c">AudioOutput</a>, <a class="el" href="classaudio__tools_1_1_csv_output.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">CsvOutput&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_output_mixer.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">OutputMixer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_memory_output.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">MemoryOutput</a>, <a class="el" href="classaudio__tools_1_1_p_w_m_audio_output.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">PWMAudioOutput&lt; PWMDriverT &gt;</a>, <a class="el" href="classaudio__tools_1_1_memory_stream.html#a6ff0d6d1b0f3f9b652c9d5298ed0863c">MemoryStream</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer_stream.html#a6ff0d6d1b0f3f9b652c9d5298ed0863c">RingBufferStream</a>, <a class="el" href="classaudio__tools_1_1_measuring_stream.html#a6ff0d6d1b0f3f9b652c9d5298ed0863c">MeasuringStream</a>, <a class="el" href="classaudio__tools_1_1_progress_stream.html#a6ff0d6d1b0f3f9b652c9d5298ed0863c">ProgressStream</a>, <a class="el" href="classaudio__tools_1_1_throttle.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">Throttle</a>, <a class="el" href="classaudio__tools_1_1_filtered_stream.html#a6ff0d6d1b0f3f9b652c9d5298ed0863c">FilteredStream&lt; T, TF &gt;</a>, <a class="el" href="classaudio__tools_1_1_filtered_stream.html#a6ff0d6d1b0f3f9b652c9d5298ed0863c">FilteredStream&lt; int16_t, int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_channel_format_converter_stream_t.html#a6ff0d6d1b0f3f9b652c9d5298ed0863c">ChannelFormatConverterStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_channel_format_converter_stream.html#a6ff0d6d1b0f3f9b652c9d5298ed0863c">ChannelFormatConverterStream</a>, <a class="el" href="classaudio__tools_1_1_number_format_converter_stream_t.html#a6ff0d6d1b0f3f9b652c9d5298ed0863c">NumberFormatConverterStreamT&lt; TFrom, TTo &gt;</a>, <a class="el" href="classaudio__tools_1_1_number_format_converter_stream.html#a6ff0d6d1b0f3f9b652c9d5298ed0863c">NumberFormatConverterStream</a>, <a class="el" href="classaudio__tools_1_1_base_stream.html#a6ff0d6d1b0f3f9b652c9d5298ed0863c">BaseStream</a>, <a class="el" href="classaudio__tools_1_1_queue_stream.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">QueueStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_queue_stream.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">QueueStream&lt; uint8_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_dynamic_memory_stream.html#a6ff0d6d1b0f3f9b652c9d5298ed0863c">DynamicMemoryStream</a>, <a class="el" href="classaudio__tools_1_1_fade_stream.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">FadeStream</a>, <a class="el" href="classaudio__tools_1_1_frequency_detector_auto_correlation.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">FrequencyDetectorAutoCorrelation</a>, <a class="el" href="classaudio__tools_1_1_frequency_detector_zero_crossing.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">FrequencyDetectorZeroCrossing</a>, <a class="el" href="classaudio__tools_1_1_pipeline.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">Pipeline</a>, <a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">QualityAnalysisStream</a>, <a class="el" href="classaudio__tools_1_1_volume_stream.html#a6ff0d6d1b0f3f9b652c9d5298ed0863c">VolumeStream</a>, <a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">AudioFFTBase</a>, <a class="el" href="classaudio__tools_1_1_audio_b_l_e_client.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">AudioBLEClient</a>, <a class="el" href="classaudio__tools_1_1_audio_b_l_e_client.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">AudioBLEClient</a>, <a class="el" href="classaudio__tools_1_1_audio_b_l_e_server.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">AudioBLEServer</a>, and <a class="el" href="classaudio__tools_1_1_audio_b_l_e_server.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">AudioBLEServer</a>.</p>
-
-</div>
-</div>
 <a id="ae8a0d9ca63f8bb3de100e347c3f3bca4" name="ae8a0d9ca63f8bb3de100e347c3f3bca4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae8a0d9ca63f8bb3de100e347c3f3bca4">&#9670;&#160;</a></span>begin()</h2>
 
@@ -546,8 +512,9 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Finalizes the frame most recently written via one or more <a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">write()</a> calls - see class comment. Default no-op for implementations that display/decode synchronously in <a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">write()</a> instead. </p>
 
-<p>Reimplemented from <a class="el" href="class_print.html#ad3aed50bc3b4459454ccb8c64f5ced5a">Print</a>.</p>
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_output.html#ad3aed50bc3b4459454ccb8c64f5ced5a">VideoOutput</a>.</p>
 
 </div>
 </div>
@@ -744,7 +711,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Selects whether <a class="el" href="classaudio__tools_1_1_video_output.html#a1e40195a444e7f20508961cfeacc9b04">write()</a> feeds the video or the audio track. </p>
+<p>Selects whether <a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">write()</a> feeds the video or the audio track. </p>
 
 <p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a6806d9e5ebac77ff537da77a35a25141">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a6806d9e5ebac77ff537da77a35a25141">MuxerMP4</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a6806d9e5ebac77ff537da77a35a25141">MuxerMPG</a>.</p>
 
@@ -803,14 +770,14 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>The track <a class="el" href="classaudio__tools_1_1_video_output.html#a1e40195a444e7f20508961cfeacc9b04">write()</a> currently targets (see <a class="el" href="classaudio__tools_1_1_muxer.html#aca7ee6461963788ac0c3a5cb9d31d9d9" title="Selects whether write() feeds the video or the audio track.">setStreamType()</a>) </p>
+<p>The track <a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">write()</a> currently targets (see <a class="el" href="classaudio__tools_1_1_muxer.html#aca7ee6461963788ac0c3a5cb9d31d9d9" title="Selects whether write() feeds the video or the audio track.">setStreamType()</a>) </p>
 
 <p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a2902d7fd71678a3c90ac06a7700c2784">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a2902d7fd71678a3c90ac06a7700c2784">MuxerMP4</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a2902d7fd71678a3c90ac06a7700c2784">MuxerMPG</a>.</p>
 
 </div>
 </div>
-<a id="ae1f174f043746b4c057475c45b6678ad" name="ae1f174f043746b4c057475c45b6678ad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae1f174f043746b4c057475c45b6678ad">&#9670;&#160;</a></span>write() <span class="overload">[1/2]</span></h2>
+<a id="a4f016ab9037bd654f538f107eb1d8f78" name="a4f016ab9037bd654f538f107eb1d8f78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f016ab9037bd654f538f107eb1d8f78">&#9670;&#160;</a></span>write()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -838,66 +805,16 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">pure virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">pure virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_print.html#a8b8471dbbdc5527cdf9bfd31612cc973">Print</a>.</p>
-
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a7597ef706dd1aa590903ce9e095db20a">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a7597ef706dd1aa590903ce9e095db20a">MuxerMP4</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a7597ef706dd1aa590903ce9e095db20a">MuxerMPG</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">H264Decoder</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a7597ef706dd1aa590903ce9e095db20a">H264DecoderESP32S3&lt; Alloc &gt;</a>, <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a7597ef706dd1aa590903ce9e095db20a">MPGDecoder</a>, <a class="el" href="classaudio__tools_1_1_j_p_e_g_output_t_f_t.html#a7597ef706dd1aa590903ce9e095db20a">JPEGOutputTFT</a>, <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a7597ef706dd1aa590903ce9e095db20a">OutputOpenCV</a>, and <a class="el" href="classaudio__tools_1_1_output_t_f_t.html#a7597ef706dd1aa590903ce9e095db20a">OutputTFT</a>.</p>
-
-</div>
-</div>
-<a id="a1e40195a444e7f20508961cfeacc9b04" name="a1e40195a444e7f20508961cfeacc9b04"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1e40195a444e7f20508961cfeacc9b04">&#9670;&#160;</a></span>write() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">size_t write </td>
-          <td>(</td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>c</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">inherited</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a7597ef706dd1aa590903ce9e095db20a">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a7597ef706dd1aa590903ce9e095db20a">MuxerMP4</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a7597ef706dd1aa590903ce9e095db20a">MuxerMPG</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">H264Decoder</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a7597ef706dd1aa590903ce9e095db20a">H264DecoderESP32S3&lt; Alloc &gt;</a>, <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a7597ef706dd1aa590903ce9e095db20a">MPGDecoder</a>, <a class="el" href="classaudio__tools_1_1_j_p_e_g_output_t_f_t.html#a7597ef706dd1aa590903ce9e095db20a">JPEGOutputTFT</a>, <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a7597ef706dd1aa590903ce9e095db20a">OutputOpenCV</a>, <a class="el" href="classaudio__tools_1_1_output_t_f_t__e_s_p_i.html#a7597ef706dd1aa590903ce9e095db20a">OutputTFT_eSPI</a>, and <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a7597ef706dd1aa590903ce9e095db20a">OutputTinyGPU</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="aa66a35e5edf58ce00047afcd1d4f455e" name="aa66a35e5edf58ce00047afcd1d4f455e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa66a35e5edf58ce00047afcd1d4f455e">&#9670;&#160;</a></span>_timeout</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int _timeout = 10</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="acdad90adc3ba71f7b1e16444c23b5502" name="acdad90adc3ba71f7b1e16444c23b5502"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acdad90adc3ba71f7b1e16444c23b5502">&#9670;&#160;</a></span>p_print</h2>
 

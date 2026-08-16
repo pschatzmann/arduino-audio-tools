@@ -10,7 +10,7 @@ var searchData=
   ['analog_5fconfig_7',['analog_config',['../_analog_config_zephyr_8h.html#a0de7280b2e75fdfd926b8bac8581712a',1,'ANALOG_CONFIG:&#160;AnalogConfigZephyr.h'],['../_analog_config_e_s_p32_v1_8h.html#a0de7280b2e75fdfd926b8bac8581712a',1,'ANALOG_CONFIG:&#160;AnalogConfigESP32V1.h'],['../_analog_config_e_s_p32_8h.html#a0de7280b2e75fdfd926b8bac8581712a',1,'ANALOG_CONFIG:&#160;AnalogConfigESP32.h'],['../_analog_config_std_8h.html#a0de7280b2e75fdfd926b8bac8581712a',1,'ANALOG_CONFIG:&#160;AnalogConfigStd.h']]],
   ['analog_5fmax_5fout_5fchannels_8',['analog_max_out_channels',['../_analog_config_std_8h.html#ab5b05638016df67fca9c4f90bd4ba730',1,'ANALOG_MAX_OUT_CHANNELS:&#160;AnalogConfigStd.h'],['../_analog_config_zephyr_8h.html#ab5b05638016df67fca9c4f90bd4ba730',1,'ANALOG_MAX_OUT_CHANNELS:&#160;AnalogConfigZephyr.h'],['../unor4_8h.html#ab5b05638016df67fca9c4f90bd4ba730',1,'ANALOG_MAX_OUT_CHANNELS:&#160;unor4.h']]],
   ['analog_5fmax_5fsample_5frate_9',['ANALOG_MAX_SAMPLE_RATE',['../unor4_8h.html#a3947897b5d664749a9ca4965981959b5',1,'unor4.h']]],
-  ['arduino_10',['ARDUINO',['../_platform_config_2_desktop_8h.html#a5deccebbf24e21ddc073c8774179f1b3',1,'desktop.h']]],
+  ['arduino_10',['ARDUINO',['../_platform_config_2desktop_8h.html#a5deccebbf24e21ddc073c8774179f1b3',1,'desktop.h']]],
   ['assert_11',['assert',['../avr_8h.html#ab2851d907b12a2233b89f8f2c2f7346a',1,'avr.h']]],
   ['audio_5finclude_5fcore_12',['AUDIO_INCLUDE_CORE',['../_audio_tools_config_8h.html#a7dad175829588936f3c83dce9f6596b7',1,'AudioToolsConfig.h']]],
   ['audio_5ftools_5finit_5flogging_13',['AUDIO_TOOLS_INIT_LOGGING',['../_audio_logger_zephyr_8h.html#ae82427a7ab8985b9cb245b6207fe3a36',1,'AudioLoggerZephyr.h']]],

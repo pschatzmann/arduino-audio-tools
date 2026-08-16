@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: src/AudioTools/AudioCodecs/CodecCopy.h File Reference</title>
+<title>arduino-audio-tools: src/AudioTools/Video/OutputTFT_eSPI.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,28 +69,25 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_1da2968dceb4970321e6828643b37a8c.html">AudioCodecs</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_5b72a003bd77e493bea652d681fed874.html">Video</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#typedef-members">Typedefs</a>  </div>
-  <div class="headertitle"><div class="title">CodecCopy.h File Reference</div></div>
+<a href="#namespaces">Namespaces</a>  </div>
+  <div class="headertitle"><div class="title">OutputTFT_eSPI.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="_audio_codecs_base_8h_source.html">AudioTools/AudioCodecs/AudioCodecsBase.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;TFT_eSPI.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="_codec_video_8h_source.html">AudioTools/Video/CodecVideo.h</a>&quot;</code><br />
 </div>
-<p><a href="_codec_copy_8h_source.html">Go to the source code of this file.</a></p>
+<p><a href="_output_t_f_t__e_s_p_i_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_copy_decoder.html">CopyDecoder</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dummy Decoder which just copies the provided data to the output. You can define if it is PCM data.  <a href="classaudio__tools_1_1_copy_decoder.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_copy_encoder.html">CopyEncoder</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dummy Encoder which just copies the provided data to the output.  <a href="classaudio__tools_1_1_copy_encoder.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_t_f_t__e_s_p_i.html">OutputTFT_eSPI</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bridges <a class="el" href="classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 - CodecH264....">VideoDecoder</a>'s <a class="el" href="classaudio__tools_1_1_output_t_f_t__e_s_p_i.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> calls to the TFT - <a class="el" href="classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 - CodecH264....">VideoDecoder</a> always hands over one complete frame per <a class="el" href="classaudio__tools_1_1_output_t_f_t__e_s_p_i.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call (see its class comment), so this can push the whole frame in one go. Usually the data is in RGB565 format, but other formats are supported as well.  <a href="classaudio__tools_1_1_output_t_f_t__e_s_p_i.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
@@ -98,15 +95,6 @@ Namespaces</h2></td></tr>
 <tr class="memitem:namespaceaudio__tools" id="r_namespaceaudio__tools"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></td></tr>
 <tr class="memdesc:namespaceaudio__tools"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic Implementation of sound input and output for desktop environments using portaudio. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:gac8159db40d58758d6ccbbb593ae6ce4e" id="r_gac8159db40d58758d6ccbbb593ae6ce4e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__codecs.html#gac8159db40d58758d6ccbbb593ae6ce4e">PCMDecoder</a> = <a class="el" href="classaudio__tools_1_1_copy_decoder.html">CopyDecoder</a></td></tr>
-<tr class="memdesc:gac8159db40d58758d6ccbbb593ae6ce4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias for <a class="el" href="classaudio__tools_1_1_copy_decoder.html" title="Dummy Decoder which just copies the provided data to the output. You can define if it is PCM data.">CopyDecoder</a> to handle PCM audio decoding (no actual decoding)  <br /></td></tr>
-<tr class="separator:gac8159db40d58758d6ccbbb593ae6ce4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4518d29ee6ab03a5a2f0af2aacf6d1bb" id="r_ga4518d29ee6ab03a5a2f0af2aacf6d1bb"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__codecs.html#ga4518d29ee6ab03a5a2f0af2aacf6d1bb">PCMEncoder</a> = <a class="el" href="classaudio__tools_1_1_copy_encoder.html">CopyEncoder</a></td></tr>
-<tr class="memdesc:ga4518d29ee6ab03a5a2f0af2aacf6d1bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias for <a class="el" href="classaudio__tools_1_1_copy_encoder.html" title="Dummy Encoder which just copies the provided data to the output.">CopyEncoder</a> to handle PCM audio encoding (no actual encoding)  <br /></td></tr>
-<tr class="separator:ga4518d29ee6ab03a5a2f0af2aacf6d1bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

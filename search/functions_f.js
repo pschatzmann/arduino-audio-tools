@@ -105,7 +105,8 @@ var searchData=
   ['outputmono_102',['outputMono',['../classaudio__tools_1_1_analog_driver_e_s_p32.html#a7ddc150f76f49be2cd5ed64a43691398',1,'audio_tools::AnalogDriverESP32']]],
   ['outputopencv_103',['OutputOpenCV',['../classaudio__tools_1_1_output_open_c_v.html#a2e6548c671b963642887f5db3fc8af57',1,'audio_tools::OutputOpenCV']]],
   ['outputstereo_104',['outputStereo',['../classaudio__tools_1_1_analog_driver_e_s_p32.html#af94f972c1be14534d7009e282fa573cb',1,'audio_tools::AnalogDriverESP32']]],
-  ['outputtft_105',['OutputTFT',['../classaudio__tools_1_1_output_t_f_t.html#aa63c482fa98b6e0064b6487a8738d537',1,'audio_tools::OutputTFT']]],
-  ['outputvideo_106',['outputVideo',['../classaudio__tools_1_1_binary_container_decoder.html#a21d67a01493f2260fe0a8be739c736e7',1,'audio_tools::BinaryContainerDecoder']]],
-  ['ovopen_107',['ovOpen',['../classaudio__tools_1_1_vorbis_decoder.html#a56649c39ccde510b32286997f44fa6dd',1,'audio_tools::VorbisDecoder']]]
+  ['outputtft_5fespi_105',['OutputTFT_eSPI',['../classaudio__tools_1_1_output_t_f_t__e_s_p_i.html#a9ff9e98a3500c1b7dd6b734d970a3077',1,'audio_tools::OutputTFT_eSPI']]],
+  ['outputtinygpu_106',['OutputTinyGPU',['../classaudio__tools_1_1_output_tiny_g_p_u.html#aae8be4425f88ba9d130b00ab8cca61eb',1,'audio_tools::OutputTinyGPU']]],
+  ['outputvideo_107',['outputVideo',['../classaudio__tools_1_1_binary_container_decoder.html#a21d67a01493f2260fe0a8be739c736e7',1,'audio_tools::BinaryContainerDecoder']]],
+  ['ovopen_108',['ovOpen',['../classaudio__tools_1_1_vorbis_decoder.html#a56649c39ccde510b32286997f44fa6dd',1,'audio_tools::VorbisDecoder']]]
 ];

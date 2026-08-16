@@ -163,6 +163,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a59ba90092c99ea7626cc58d70c8ed8f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee3d456e79d27d60f9b6ade892fcc88c" id="r_aee3d456e79d27d60f9b6ade892fcc88c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html#aee3d456e79d27d60f9b6ade892fcc88c">setOutputVideo</a> (<a class="el" href="class_print.html">Print</a> &amp;out) override</td></tr>
 <tr class="separator:aee3d456e79d27d60f9b6ade892fcc88c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2644833aaa44ccfbc40f6651d8be2831" id="r_a2644833aaa44ccfbc40f6651d8be2831"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html#a2644833aaa44ccfbc40f6651d8be2831">setOutputVideo</a> (<a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;out)</td></tr>
+<tr class="separator:a2644833aaa44ccfbc40f6651d8be2831"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac81448c41c28170abdb6579e0359be2c" id="r_ac81448c41c28170abdb6579e0359be2c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html#ac81448c41c28170abdb6579e0359be2c">setSendWavHeader</a> (bool flag) override</td></tr>
 <tr class="separator:ac81448c41c28170abdb6579e0359be2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
@@ -230,6 +232,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a437811d72489685600cdd7d69898b383"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a569dd65d4d73469fda3d3918a42202b3" id="r_a569dd65d4d73469fda3d3918a42202b3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html#a569dd65d4d73469fda3d3918a42202b3">p_output_video</a> = nullptr</td></tr>
 <tr class="separator:a569dd65d4d73469fda3d3918a42202b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bd120d22aaaae73281fc2129ebe7d15" id="r_a4bd120d22aaaae73281fc2129ebe7d15"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html#a4bd120d22aaaae73281fc2129ebe7d15">p_output_video_video</a> = nullptr</td></tr>
+<tr class="separator:a4bd120d22aaaae73281fc2129ebe7d15"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdad90adc3ba71f7b1e16444c23b5502" id="r_acdad90adc3ba71f7b1e16444c23b5502"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#acdad90adc3ba71f7b1e16444c23b5502">p_print</a> = nullptr</td></tr>
 <tr class="separator:acdad90adc3ba71f7b1e16444c23b5502"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a075f8e95ca1c47e9cdd457251a473292" id="r_a075f8e95ca1c47e9cdd457251a473292"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_m_p_g_parse_buffer.html">MPGParseBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html#a075f8e95ca1c47e9cdd457251a473292">parse_buffer</a></td></tr>
@@ -272,10 +276,10 @@ Static Protected Attributes</h2></td></tr>
 <div class="line"><span class="comment">// feed raw .mpg bytes:</span></div>
 <div class="line">demuxer.<a class="code hl_function" href="classaudio__tools_1_1_demuxer_m_p_g.html#a7597ef706dd1aa590903ce9e095db20a">write</a>(mpgData, len);</div>
 <div class="ttc" id="aclassaudio__tools_1_1_demuxer_m_p_g_html"><div class="ttname"><a href="classaudio__tools_1_1_demuxer_m_p_g.html">audio_tools::DemuxerMPG</a></div><div class="ttdoc">MPEG-1 System (Program) Stream Demuxer, as defined by ISO/IEC 11172-1: splits the pack_header/system_...</div><div class="ttdef"><b>Definition</b> ContainerMPG.h:111</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_demuxer_m_p_g_html_a59ba90092c99ea7626cc58d70c8ed8f8"><div class="ttname"><a href="classaudio__tools_1_1_demuxer_m_p_g.html#a59ba90092c99ea7626cc58d70c8ed8f8">audio_tools::DemuxerMPG::setOutputAudio</a></div><div class="ttdeci">void setOutputAudio(Print &amp;out) override</div><div class="ttdef"><b>Definition</b> ContainerMPG.h:150</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_demuxer_m_p_g_html_a7597ef706dd1aa590903ce9e095db20a"><div class="ttname"><a href="classaudio__tools_1_1_demuxer_m_p_g.html#a7597ef706dd1aa590903ce9e095db20a">audio_tools::DemuxerMPG::write</a></div><div class="ttdeci">size_t write(const uint8_t *data, size_t len) override</div><div class="ttdef"><b>Definition</b> ContainerMPG.h:192</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_demuxer_m_p_g_html_a59ba90092c99ea7626cc58d70c8ed8f8"><div class="ttname"><a href="classaudio__tools_1_1_demuxer_m_p_g.html#a59ba90092c99ea7626cc58d70c8ed8f8">audio_tools::DemuxerMPG::setOutputAudio</a></div><div class="ttdeci">void setOutputAudio(Print &amp;out) override</div><div class="ttdef"><b>Definition</b> ContainerMPG.h:153</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_demuxer_m_p_g_html_a7597ef706dd1aa590903ce9e095db20a"><div class="ttname"><a href="classaudio__tools_1_1_demuxer_m_p_g.html#a7597ef706dd1aa590903ce9e095db20a">audio_tools::DemuxerMPG::write</a></div><div class="ttdeci">size_t write(const uint8_t *data, size_t len) override</div><div class="ttdef"><b>Definition</b> ContainerMPG.h:196</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_demuxer_m_p_g_html_acba365cc28eb702040c382646cfb0a7a"><div class="ttname"><a href="classaudio__tools_1_1_demuxer_m_p_g.html#acba365cc28eb702040c382646cfb0a7a">audio_tools::DemuxerMPG::begin</a></div><div class="ttdeci">bool begin() override</div><div class="ttdef"><b>Definition</b> ContainerMPG.h:119</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_demuxer_m_p_g_html_aee3d456e79d27d60f9b6ade892fcc88c"><div class="ttname"><a href="classaudio__tools_1_1_demuxer_m_p_g.html#aee3d456e79d27d60f9b6ade892fcc88c">audio_tools::DemuxerMPG::setOutputVideo</a></div><div class="ttdeci">void setOutputVideo(Print &amp;out) override</div><div class="ttdef"><b>Definition</b> ContainerMPG.h:160</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_demuxer_m_p_g_html_aee3d456e79d27d60f9b6ade892fcc88c"><div class="ttname"><a href="classaudio__tools_1_1_demuxer_m_p_g.html#aee3d456e79d27d60f9b6ade892fcc88c">audio_tools::DemuxerMPG::setOutputVideo</a></div><div class="ttdeci">void setOutputVideo(Print &amp;out) override</div><div class="ttdef"><b>Definition</b> ContainerMPG.h:163</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_encoded_audio_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_encoded_audio_stream.html">audio_tools::EncodedAudioStream</a></div><div class="ttdoc">A more natural Stream class to process encoded data (aac, wav, mp3...) which also supports the decodi...</div><div class="ttdef"><b>Definition</b> AudioEncoded.h:282</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_m_p3_decoder_helix_html"><div class="ttname"><a href="classaudio__tools_1_1_m_p3_decoder_helix.html">audio_tools::MP3DecoderHelix</a></div><div class="ttdoc">MP3 Decoder using libhelix: https://github.com/pschatzmann/arduino-libhelix This is basically just a ...</div><div class="ttdef"><b>Definition</b> CodecMP3Helix.h:20</div></div>
 </div><!-- fragment --><dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
@@ -1245,7 +1249,7 @@ Static Protected Attributes</h2></td></tr>
 </div>
 </div>
 <a id="aee3d456e79d27d60f9b6ade892fcc88c" name="aee3d456e79d27d60f9b6ade892fcc88c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aee3d456e79d27d60f9b6ade892fcc88c">&#9670;&#160;</a></span>setOutputVideo()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aee3d456e79d27d60f9b6ade892fcc88c">&#9670;&#160;</a></span>setOutputVideo() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1270,6 +1274,32 @@ Static Protected Attributes</h2></td></tr>
 <p>Defines the video output - e.g. a <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> implementation, or any other <a class="el" href="class_print.html">Print</a> if you want the raw MPEG-1 video ES as-is. </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_demuxer.html#a2496b8bc5466cbe153490729f4bc1eb3">Demuxer</a>.</p>
+
+</div>
+</div>
+<a id="a2644833aaa44ccfbc40f6651d8be2831" name="a2644833aaa44ccfbc40f6651d8be2831"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2644833aaa44ccfbc40f6651d8be2831">&#9670;&#160;</a></span>setOutputVideo() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setOutputVideo </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;&#160;</td>
+          <td class="paramname"><em>out</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -1660,6 +1690,28 @@ Static Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="class_print.html">Print</a>* p_output_video = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4bd120d22aaaae73281fc2129ebe7d15" name="a4bd120d22aaaae73281fc2129ebe7d15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4bd120d22aaaae73281fc2129ebe7d15">&#9670;&#160;</a></span>p_output_video_video</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a>* p_output_video_video = nullptr</td>
         </tr>
       </table>
   </td>
