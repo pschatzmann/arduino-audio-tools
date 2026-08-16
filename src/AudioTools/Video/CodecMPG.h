@@ -45,7 +45,7 @@ namespace audio_tools {
  * @ingroup mpg
  * @ingroup decoder
  */
-class MPGDecoder : public VideoDecoder {
+class MPGDecoder : public VideoDecoder, public VideoInfoSource {
  public:
   MPGDecoder() { decoder_.setCallback(onFrame, this); }
 

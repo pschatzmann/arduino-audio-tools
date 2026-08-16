@@ -54,8 +54,10 @@ No camera or WiFi needed; SD card only. Confirms demux → decode → display
 | # | Sketch | Exercises | Status |
 |---|--------|-----------|--------|
 | 1.1 | `mp4/sd-mp4-audio/sd-mp4-audio.ino` | `DemuxerMP4`, AAC audio only (video track ignored) | ✅ compiles |
-| 1.2 | `mp4/sd-mp4-video/sd-mp4-video.ino` | `DemuxerMP4` (via `CodecCopy`), `H264Decoder`, `OutputTFT_eSPI`, video only | ✅ compiles (verified via `arduino-cli`) |
+| 1.2 | `mp4/sd-mp4-video/sd-mp4-video.ino` | `DemuxerMP4` (via `CodecCopy`), `H264Decoder`, `OutputTFT_eSPI`, video only | ✅ compiles (fixed a pre-existing bug this session: `setup()` never called `SD.begin()`/`SD.open()`, so `file` stayed unopened and the sketch never actually played anything) |
 | 1.3 | `mp4/sd-mp4-audio-video/sd-mp4-audio-video.ino` | Combined: `DemuxerMP4` dispatch to both `H264Decoder`→`OutputTFT_eSPI` and AAC→I2S — the real A/V sync test | ✅ compiles (verified via `arduino-cli`) |
+| 1.4 | `avi/sd-avi-video/sd-avi-video.ino` | `DemuxerAVI` (via `CodecCopy`), `H264Decoder`, `OutputTFT_eSPI`, video only — new this session | ✅ compiles (verified via `arduino-cli`) |
+| 1.5 | `mpg/sd-mpg-video/sd-mpg-video.ino` | `DemuxerMPG` (via `CodecCopy`), `MPGDecoder`, `OutputTFT_eSPI`, video only — new this session | ✅ compiles (verified via `arduino-cli`) |
 
 **Checklist per sketch** (see §6 for the full template):
 - [ ] Compiles for Board B's FQBN
@@ -67,7 +69,10 @@ No camera or WiFi needed; SD card only. Confirms demux → decode → display
 - [ ] Clean end-of-file handling (`file.close()`, no hang/reboot)
 
 Run 1.1 before 1.2/1.3 — it isolates the audio decode path so an A/V sync
-problem in 1.3 can be attributed to video, not audio.
+problem in 1.3 can be attributed to video, not audio. 1.4/1.5 are
+video-only, same shape as 1.2, just swapping the container/codec — useful
+to confirm a decode problem is codec/container-specific rather than a
+`OutputTFT_eSPI`/display issue common to all three.
 
 ---
 
@@ -83,6 +88,7 @@ isolate Board A problems from Board B problems.
 | 2.1 | `avi/http-server-avi/http-server-avi.ino` | Camera(JPEG) → `MuxerAVI` (MJPEG passthrough, no video encoder) → `AudioServer` HTTP | ✅ compiles (verified) |
 | 2.2 | `avi/http-server-avi-h264/http-server-avi-h264.ino` | Camera(YUV422) → `H264Encoder` (TinyH264, software) → `MuxerAVI` → HTTP | ✅ compiles (fixed a pre-existing bug this session: `H264Encoder<> h264Encoder;` treated the non-template `H264Encoder` as a template — only `H264EncoderESP32S3` is templated) |
 | 2.2b | Same file, swap `H264Encoder`→`H264EncoderESP32S3` | Hardware `esp_h264` encode path (S3-only) | not compile-verified — requires editing the sketch to swap the class |
+| 2.3 | `mpg/http-server-mpg/http-server-mpg.ino` | Camera(YUV422) → `MPGEncoder` (TinyMPG, MPEG-1) → `MuxerMPG` (self-contained Program Stream, no AVI/MP4 wrapper) → HTTP — new this session | ✅ compiles (verified via `arduino-cli`) |
 
 **Checklist**:
 - [ ] `esp_camera_init()` succeeds (check Serial log)
@@ -103,7 +109,8 @@ Both boards on the same network, Board A serving, Board B consuming.
 |---|---|---|---|
 | 3.1 | `avi/http-server-avi/http-server-avi.ino` | `avi/http-client-avi-tft/http-client-avi-tft.ino` | MJPEG-in-AVI end-to-end: `DemuxerAVI` → `JPEGOutputTFT` — both ends ✅ compile (verified) |
 | 3.2 | `avi/http-server-avi-h264/http-server-avi-h264.ino` | `avi/http-client-avi-h264/http-client-avi-h264.ino` | H.264-in-AVI end-to-end: `DemuxerAVI` → `H264Decoder` → `OutputTFT_eSPI` — ✅ client compiles (verified, 97% flash on esp32s3 — tight; recheck on Board B's actual FQBN/partition table) |
-| 3.3 | *(gap — see §5)* | `mp4/http-client-mp4/http-client-mp4.ino` | H.264+AAC-in-MP4 over HTTP: `DemuxerMP4` → `H264Decoder`/AAC — ✅ client compiles (verified). No MP4-serving example exists yet (Board A only mux to AVI today) — workaround below. |
+| 3.3 | *(gap — see §5)* | `mp4/http-client-mp4/http-client-mp4.ino` | H.264+AAC-in-MP4 over HTTP: `DemuxerMP4` → `H264Decoder`/AAC — ✅ client compiles (verified). No MP4-serving example exists yet (Board A only mux to AVI/MPG today) — workaround below. |
+| 3.4 | `mpg/http-server-mpg/http-server-mpg.ino` | `mpg/http-client-mpg/http-client-mpg.ino` | MPEG-1 Program Stream end-to-end: `DemuxerMPG` → `MPGDecoder` → `OutputTFT_eSPI` — new this session, both ends ✅ compile (verified) |
 
 **3.3 workaround** (no MP4 server example exists): serve a static
 faststart MP4 from a desktop machine instead of Board A —
@@ -162,6 +169,12 @@ These are real, tested-by-compile library features with **zero example
 sketch** exercising them today. Not blocking for the plan above, but worth
 knowing about if you want fuller coverage:
 
+*Closed this session:* `ContainerMPG`/`MPGEncoder`/`MPGDecoder` now has
+full example coverage (2.3, 3.4, 1.5) — see the tables above. Also fixed a
+gap it hit along the way: `MPGDecoder` didn't implement `VideoInfoSource`
+(only `H264Decoder` did), so it couldn't be passed to
+`OutputTFT_eSPI::setVideoInfoSource()` — added.
+
 - **`MuxerMP4`** (write H.264+AAC to MP4) — no example writes MP4 at all;
   only reading (`DemuxerMP4`) is exercised. Would need a new Board A sketch
   (camera → `H264Encoder` → `MuxerMP4` → SD or HTTP), which would also
@@ -170,10 +183,6 @@ knowing about if you want fuller coverage:
   higher-level "pull frames on a timer, mux automatically" API layer has no
   example at all (`http-server-avi*.ino` both drive the camera→encoder→muxer
   loop by hand instead). Worth a smoke test if you plan to rely on this API.
-- **`ContainerMPG` / `MPGEncoder` / `MPGDecoder`** (MPEG-1) — no example;
-  the AVI H.264 examples (2.2/3.2) are a reasonable template to adapt
-  (swap `H264Encoder`/`H264Decoder` for `MPGEncoder`/`MPGDecoder`,
-  `DemuxerAVI`'s `VideoFormat::MPEG1`).
 - **`ContainerBinary` carrying video** — existing `ContainerBinary`
   examples (`examples/tests/codecs/test-container-binary*`) are audio-only;
   its video path (`setOutputVideo`/`outputVideo()`) is untested by any

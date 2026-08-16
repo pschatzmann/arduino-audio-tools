@@ -1,24 +1,30 @@
 /**
- * @file sd-mp4-video.ino
- * @brief Plays just the video (H.264) track of a local .mp4 file on an SD
- * card: demuxes it live with DemuxerMP4, decodes the video track with
+ * @file sd-avi-video.ino
+ * @brief Plays just the video (H.264) track of a local .avi file on an SD
+ * card: demuxes it live with DemuxerAVI, decodes the video track with
  * H264Decoder (TinyH264, https://github.com/pschatzmann/TinyH264 - pure
  * software, works on any board) and displays the result live on a TFT
- * screen with TFT_eSPI. The audio track (if any) is discarded (see
- * sd-mp4-audio-video.ino for a version that also plays it through I2S).
- * Same "faststart" MP4 (moov before mdat) DemuxerMP4 requires everywhere
- * else, e.g.:
- *   ffmpeg -i in.mp4 -c:v libx264 -c:a aac -movflags +faststart out.mp4
+ * screen with TFT_eSPI. The audio track (if any) is ignored - DemuxerAVI
+ * only decodes/forwards it if setOutputAudio() is called, which this
+ * sketch doesn't do.
  *
- * Pipeline: File (SD) -> CodecCopy -> DemuxerMP4 (demux)
+ * DemuxerAVI needs the video track's biCompression FOURCC to be H264/h264/
+ * X264/x264/avc1/AVC1 and its payload to be a raw Annex-B bitstream (start
+ * codes, not AVCC length-prefixed NAL units - unlike DemuxerMP4, which
+ * converts AVCC to Annex-B itself). http-server-avi-h264.ino (this
+ * project's own AVI+H.264 encoder) already writes exactly that; to build a
+ * compatible file from an existing .mp4 instead:
+ *   ffmpeg -i in.mp4 -c:v libx264 -bsf:v h264_mp4toannexb -an out.avi
+ *
+ * Pipeline: File (SD) -> CodecCopy -> DemuxerAVI (demux)
  *   \-> H264Decoder (H.264 decode -> RGB565) -> OutputTFT_eSPI (draw)
  *
- * DemuxerMP4 is a *streaming* (forward-only) demuxer - it does not need a
+ * DemuxerAVI is a *streaming* (forward-only) demuxer - it does not need a
  * seekable source, so a File read sequentially with CodecCopy (the same
- * way http-client-mp4.ino feeds it from a live HTTP download, via
- * StreamCopy) works fine. See sd-mp4-audio.ino for an audio-only version of
- * this same file, sd-mp4-audio-video.ino for both tracks, and
- * http-client-mp4.ino for the network (HTTP) equivalent of this one.
+ * way http-client-avi-h264.ino feeds it from a live HTTP download, via
+ * StreamCopy) works fine. See sd-mp4-video.ino for the MP4 equivalent of
+ * this file, and http-client-avi-h264.ino for the network (HTTP)
+ * equivalent.
  *
  * On an ESP32-S3 board, swap H264Decoder for H264DecoderESP32S3
  * (AudioTools/Video/CodecH264ESP32S3.h) to use the hardware/esp_h264
@@ -34,24 +40,22 @@
  * @copyright GPLv3
  */
 #include "AudioTools.h"
-#include "AudioTools/AudioCodecs/ContainerMP4.h"
-#include "AudioTools/AudioCodecs/CodecAACHelix.h"
+#include "AudioTools/AudioCodecs/ContainerAVI.h"
 #include "AudioTools/Video/CodecH264.h"
 #include "AudioTools/Video/OutputTFT_eSPI.h"
 #include "SD.h"
 
 // ---- File on the SD card to play ----
-const char *file_path = "/video.mp4";
+const char *file_path = "/video.avi";
 
-// File -cop-> DemuxerMP4 -> H264Decoder -> OutputTFT
+// File -copy-> DemuxerAVI -> H264Decoder -> OutputTFT_eSPI
 
 TFT_eSPI tft = TFT_eSPI();
 OutputTFT_eSPI tftOutput(tft);
 H264Decoder h264Decoder(tftOutput);
-NullStream audio;
-DemuxerMP4 mp4Demuxer(h264Decoder, audio);
+DemuxerAVI aviDemuxer;
 File file;
-CodecCopy copier(mp4Demuxer, file);
+CodecCopy copier(aviDemuxer, file);
 
 
 void setup() {
@@ -71,7 +75,9 @@ void setup() {
   tftOutput.setVideoInfoSource(h264Decoder);
   tftOutput.begin();
   h264Decoder.begin();
-  mp4Demuxer.begin();
+
+  aviDemuxer.setOutputVideo(h264Decoder);
+  aviDemuxer.begin();
 }
 
 
