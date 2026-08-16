@@ -10,7 +10,7 @@
  * Pipeline: URLStream (HTTP) -> EncodedAudioOutput (Print bridge) ->
  * DemuxerMP4 (interleaved demux)
  *   -> EncodedAudioStream (AACDecoderHelix) -> I2SStream (audio)
- *   \-> H264Decoder (H.264 decode -> RGB565) -> OutputTFT (draw) (video)
+ *   \-> H264Decoder (H.264 decode -> RGB565) -> OutputTFT_eSPI (draw) (video)
  *
  * DemuxerMP4 only demuxes - it does not own or configure an audio decoder
  * itself; setOutputAudio() just points it at a plain Print, so any decoder
@@ -41,7 +41,7 @@
 #include "AudioTools/AudioCodecs/ContainerMP4.h"
 #include "AudioTools/AudioCodecs/CodecAACHelix.h"
 #include "AudioTools/Video/CodecH264.h"
-#include "AudioTools/Video/OutputTFT.h"
+#include "AudioTools/Video/OutputTFT_eSPI.h"
 
 // ---- WiFi ----
 const char *ssid = "ssid";
@@ -50,7 +50,7 @@ const char *video_url = "http://192.168.1.100/video.mp4";
 
 TFT_eSPI tft = TFT_eSPI();
 H264Decoder h264Decoder;
-OutputTFT tftOutput(tft, h264Decoder);
+OutputTFT_eSPI tftOutput(tft);
 I2SStream i2s;
 AACDecoderHelix aacDecoder;
 EncodedAudioStream audioOut(&i2s, &aacDecoder);  // decodes AAC -> I2S
@@ -76,7 +76,8 @@ void setup() {
   audioOut.begin();
 
   h264Decoder.setOutput(tftOutput);
-  h264Decoder.setVideoFormat(VideoFormat::RGB565);  
+  h264Decoder.setVideoFormat(VideoFormat::RGB565);
+  tftOutput.setVideoInfoSource(h264Decoder);
   h264Decoder.begin();
 
   mp4Demuxer.setOutputAudio(audioOut);
@@ -93,7 +94,7 @@ void loop() {
   if (url) {
     // pumps bytes from the HTTP stream into DemuxerMP4, which routes
     // decoded AAC audio to I2S and demuxed H.264 frames to H264Decoder,
-    // which in turn pushes decoded RGB565 frames to the TFT via OutputTFT
+    // which in turn pushes decoded RGB565 frames to the TFT via OutputTFT_eSPI
     copier.copy();
   } else {
     Serial.println("Disconnected - reconnecting...");

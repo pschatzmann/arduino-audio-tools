@@ -66,9 +66,21 @@ class DemuxerMP4 : public Demuxer {
   /// track; leave unset to ignore video.
   DemuxerMP4() { setupParser(); }
 
+  DemuxerMP4(Print& video_out, Print& audio_out) {
+    setupParser();
+    setOutputAudio(audio_out);
+    setOutputVideo(video_out);
+  }
+
+  DemuxerMP4(VideoOutput& video_out, Print& audio_out) {
+    setupParser();
+    setOutputAudio(audio_out);
+    setOutputVideo(video_out);
+  }
+
   ~DemuxerMP4() { freeTracks(); }
 
-  const char *mime() override { return "video/mp4"; }
+  const char* mime() override { return "video/mp4"; }
 
   bool begin() override {
     freeTracks();
@@ -98,7 +110,6 @@ class DemuxerMP4 : public Demuxer {
 
   operator bool() override { return is_active; }
 
-
   /// Defines the audio output stream - e.g. an EncodedAudioStream wrapping
   /// an AudioDecoder that matches the audio track's codec, or any other
   /// Print if you want the raw payload as-is.
@@ -111,6 +122,7 @@ class DemuxerMP4 : public Demuxer {
   void setOutput(Print& out) override { setOutputAudio(out); }
 
   void setOutputVideo(Print& out) override { p_video_out = &out; }
+  void setOutputVideo(VideoOutput& out) { p_video_out_video = &out; }
 
   /// Common video info (width/height/format/frame_size/total_file_size),
   /// analogous to audioInfo() - the same VideoInfo type is also provided
@@ -287,6 +299,7 @@ class DemuxerMP4 : public Demuxer {
 
   Print* p_output_audio = nullptr;
   Print* p_video_out = nullptr;
+  VideoOutput* p_video_out_video = nullptr;
   /// Codec format tag of the (first) audio track - AudioFormat::UNKNOWN
   /// until its 'stsd' has been parsed. Kept separately from AudioInfo
   /// (see AudioInfoFormat) since AudioInfo itself has no format field.
@@ -538,7 +551,7 @@ class DemuxerMP4 : public Demuxer {
     if (send_wav_header) sendWavHeader();
     notifyAudioChange(info);
   }
-  
+
   /// Overrides the automatic decision of whether a synthetic WAV header is
   /// sent to the audio output before any audio payload. By default this is
   /// decided automatically from the parsed codec: on whenever
@@ -910,7 +923,9 @@ class DemuxerMP4 : public Demuxer {
     // the track's timing cursor correct regardless of what we do below -
     // call it before any early return.
     uint64_t ptsTicks = t.nextPtsTicks();
-    if (p_video_out == nullptr || t.is_hevc_unsupported) return;
+    if ((p_video_out == nullptr && p_video_out_video == nullptr) ||
+        t.is_hevc_unsupported)
+      return;
 
     if (t.timescale > 0 && !t.stts.empty()) {
       uint32_t scheduledMs = (uint32_t)((ptsTicks * 1000) / t.timescale);
@@ -951,11 +966,24 @@ class DemuxerMP4 : public Demuxer {
     bool prependConfig =
         isFirst && !t.avc_config_sent && t.sps_pps_annexb.size() > 0;
     if (prependConfig) {
-      p_video_out->write(t.sps_pps_annexb.data(), t.sps_pps_annexb.size());
+      writeVideo(t.sps_pps_annexb.data(), t.sps_pps_annexb.size());
       t.avc_config_sent = true;
     }
-    if (nal_tmp.size() > 0) p_video_out->write(nal_tmp.data(), nal_tmp.size());
-    p_video_out->flush();
+    if (nal_tmp.size() > 0) writeVideo(nal_tmp.data(), nal_tmp.size());
+    flushVideo();
+  }
+
+  void writeVideo(uint8_t* data, size_t size) {
+    if (p_video_out == nullptr && p_video_out_video == nullptr) return;
+    if (size > 0) {
+      if (p_video_out != nullptr) p_video_out->write(data, size);
+      if (p_video_out_video != nullptr) p_video_out_video->write(data, size);
+    }
+  }
+
+  void flushVideo() {
+    if (p_video_out != nullptr) p_video_out->flush();
+    if (p_video_out_video != nullptr) p_video_out_video->flush();
   }
 
   void dispatchAudio(Track& t, const uint8_t* data, size_t size, bool isFirst) {

@@ -1,6 +1,7 @@
 #pragma once
 #include "AudioTools/CoreAudio/AudioOutput.h"
 #include "AudioTools/CoreAudio/Buffers.h"
+#include "AudioTools/Video/CodecCopy.h"
 #include "stdint.h"
 
 /**
@@ -172,6 +173,12 @@ class VideoFrameSource {
 };
 
 
+class VideoInfoSource {
+ public:
+  virtual VideoInfo videoInfo() = 0;
+};
+
+
 /**
  * @brief Abstract class for video playback. This class is used to assemble a
  * complete video frame in memory. A video frame is written via one or more
@@ -182,10 +189,13 @@ class VideoFrameSource {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class VideoOutput : public Print {
- public:
-  size_t write(uint8_t c) override { return write(&c, 1); }
-  virtual size_t write(const uint8_t *data, size_t len) override = 0;
+class VideoOutput {
+  public:
+  virtual size_t write(const uint8_t *data, size_t len) = 0;
+  /// Finalizes the frame most recently written via one or more write()
+  /// calls - see class comment. Default no-op for implementations that
+  /// display/decode synchronously in write() instead.
+  virtual void flush() {}
 };
 
 

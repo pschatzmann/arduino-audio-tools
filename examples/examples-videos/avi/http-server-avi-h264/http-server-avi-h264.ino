@@ -71,7 +71,7 @@ const float video_fps = 10;
 
 AudioServer server(ssid, password);  // AudioServerT<WiFiClient, WiFiServer>
 MuxerAVI muxer;
-H264Encoder<> h264Encoder;
+H264Encoder h264Encoder;
 
 bool setupCamera() {
   camera_config_t config = {};

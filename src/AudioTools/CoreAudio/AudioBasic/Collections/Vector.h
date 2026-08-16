@@ -351,11 +351,14 @@ class Vector {
     p_data = nullptr;
   }
 
+  void setAllocAssertActive(bool flag) { is_alloc_assert_active = flag; }
+
  protected:
   int bufferLen = 0;
   int len = 0;
   T *p_data = nullptr;
   Allocator *p_allocator = &DefaultAllocator;
+  bool is_alloc_assert_active = true;
 
   void resize_internal(int newSize, bool copy, bool shrink = false) {
     if (newSize <= 0) return;
@@ -364,7 +367,15 @@ class Vector {
       int oldBufferLen = this->bufferLen;
       p_data = newArray(newSize);  // new T[newSize+1];
       bool out_of_memory = p_data == nullptr;
-      assert(!out_of_memory);
+      if (is_alloc_assert_active) {
+        assert(!out_of_memory);
+      }
+      if (out_of_memory){
+        this->bufferLen = 0;
+        this->len = 0;
+        deleteArray(oldData, oldBufferLen);  // delete [] oldData;
+        return;
+      }
       this->bufferLen = newSize;
       if (oldData != nullptr) {
         if (copy && this->len > 0) {

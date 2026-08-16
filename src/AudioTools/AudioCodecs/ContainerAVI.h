@@ -329,6 +329,9 @@ public:
   virtual void setOutputVideo(Print &out_stream) override {
     p_output_video = &out_stream;
   }
+  void setOutputVideo(VideoOutput &out_stream) {
+    p_output_video_video = &out_stream;
+  }
 
   virtual size_t write(const uint8_t *data, size_t len) override {
     LOGD("write: %d", (int)len);
@@ -432,6 +435,7 @@ protected:
   ParseObject current_stream_data;
   Print *p_output_audio = nullptr;
   Print *p_output_video = nullptr;
+  VideoOutput *p_output_video_video = nullptr;
   long video_frame_start_ms = 0;
   long open_subchunk_len = 0;
   long current_pos = 0;
@@ -585,8 +589,10 @@ protected:
     case SubChunkContinue: {
       writeData();
       if (open_subchunk_len == 0) {
-        if (current_stream_data.isVideo() && p_output_video != nullptr) {
-          p_output_video->flush();
+        if (current_stream_data.isVideo() &&
+            (p_output_video != nullptr || p_output_video_video != nullptr)) {
+          if (p_output_video != nullptr) p_output_video->flush();
+          if (p_output_video_video != nullptr) p_output_video_video->flush();
           uint32_t time_used_ms = (uint32_t)(millis() - video_frame_start_ms);
           p_synch->delayVideoFrame(main_header.dwMicroSecPerFrame, time_used_ms);
         }
@@ -709,8 +715,12 @@ protected:
       consume(to_write);
     } else if (current_stream_data.isVideo()) {
       LOGD("video %d", (int)to_write);
-      if (p_output_video != nullptr && payload_to_write > 0)
-        p_output_video->write(parse_buffer.data(), payload_to_write);
+      if (payload_to_write > 0) {
+        if (p_output_video != nullptr)
+          p_output_video->write(parse_buffer.data(), payload_to_write);
+        if (p_output_video_video != nullptr)
+          p_output_video_video->write(parse_buffer.data(), payload_to_write);
+      }
       open_subchunk_len -= to_write;
       cleanupStack();
       consume(to_write);

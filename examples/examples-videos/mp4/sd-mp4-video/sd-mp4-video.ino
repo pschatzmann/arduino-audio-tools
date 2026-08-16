@@ -12,7 +12,7 @@
  * Pipeline: File (SD) -> EncodedAudioOutput (Print bridge) -> DemuxerMP4
  * (demux)
  *   -> EncodedAudioStream (AACDecoderHelix) -> I2SStream (audio)
- *   \-> H264Decoder (H.264 decode -> RGB565) -> OutputTFT_eSPI (draw) (video)
+ *   \-> H264Decoder (H.264 decode -> RGB565) -> OutputTFT (draw) (video)
  *
  * DemuxerMP4 is a *streaming* (forward-only) demuxer - it does not need a
  * seekable source, so a File read sequentially with StreamCopy (the same
@@ -43,51 +43,25 @@
 // ---- File on the SD card to play ----
 const char *file_path = "/video.mp4";
 
+// File -cop-> DemuxerMP4 -> H264Decoder -> OutputTFT
+
 TFT_eSPI tft = TFT_eSPI();
-H264Decoder h264Decoder;
 OutputTFT_eSPI tftOutput(tft);
-I2SStream i2s;
-AACDecoderHelix aacDecoder;
-EncodedAudioStream audioOut(&i2s, &aacDecoder);  // decodes AAC -> I2S
-
-DemuxerMP4 mp4Demuxer;
-EncodedAudioOutput mp4Input(&mp4Demuxer);  // bridges raw file bytes -> DemuxerMP4::write()
-
+H264Decoder h264Decoder(tftOutput);
+NullStream audio;
+DemuxerMP4 mp4Demuxer(h264Decoder, audio);
 File file;
-StreamCopy copier(mp4Input, file);
+CodecCopy copier(mp4Demuxer, file);
+
 
 void setup() {
   Serial.begin(115200);
-  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
-
-  if (!SD.begin()) {
-    Serial.println("SD Card initialization failed!");
-    return;
-  }
-  file = SD.open(file_path);
-  if (!file) {
-    Serial.print("Could not open ");
-    Serial.println(file_path);
-    return;
-  }
-
-  tft.init();
-  tft.setRotation(1);
-  tft.fillScreen(TFT_BLACK);
-
-  auto cfg = i2s.defaultConfig(TX_MODE);
-  i2s.begin(cfg);
-  audioOut.begin();
-
-  h264Decoder.setOutput(tftOutput);
-  h264Decoder.setVideoFormat(VideoFormat::RGB565);  // matches pushImage()'s expected format
   tftOutput.setVideoInfoSource(h264Decoder);
+  tftOutput.begin();
   h264Decoder.begin();
-
-  mp4Demuxer.setOutputAudio(audioOut);
-  mp4Demuxer.setOutputVideo(h264Decoder);
-  mp4Input.begin();
+  mp4Demuxer.begin();
 }
+
 
 void loop() {
   if (file && !copier.copy()) {

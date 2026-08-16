@@ -9,7 +9,7 @@
  * Pipeline: URLStream (HTTP, chunked) -> EncodedAudioOutput (Print bridge)
  * -> DemuxerAVI (demux)
  *      -> EncodedAudioStream (DecoderHelix: WAV/AAC/MP3) -> I2SStream (audio)
- *      \-> H264Decoder (H.264 decode -> RGB565) -> OutputTFT (draw) (video)
+ *      \-> H264Decoder (H.264 decode -> RGB565) -> OutputTFT_eSPI (draw) (video)
  *
  * On an ESP32-S3 board, swap H264Decoder for H264DecoderESP32S3
  * (AudioTools/Video/CodecH264ESP32S3.h) to use the hardware/esp_h264
@@ -29,7 +29,7 @@
 #include "AudioTools/AudioCodecs/ContainerAVI.h"
 #include "AudioTools/AudioCodecs/CodecHelix.h"
 #include "AudioTools/Video/CodecH264.h"
-#include "AudioTools/Video/OutputTFT.h"
+#include "AudioTools/Video/OutputTFT_eSPI.h"
 
 // ---- WiFi ----
 const char *ssid = "ssid";
@@ -39,7 +39,7 @@ const char *video_url = "http://192.168.1.100/";
 
 TFT_eSPI tft = TFT_eSPI();
 H264Decoder h264Decoder;
-OutputTFT tftOutput(tft, h264Decoder);
+OutputTFT_eSPI tftOutput(tft);
 I2SStream i2s;
 DecoderHelix multiDecoder;  
 EncodedAudioStream audioOut(&i2s, &multiDecoder);  // decodes PCM/AAC/MP3 -> I2S
@@ -63,6 +63,7 @@ void setup() {
 
   h264Decoder.setOutput(tftOutput);  // RGB565 (the default) matches
                                       // pushImage()'s expected format
+  tftOutput.setVideoInfoSource(h264Decoder);
   h264Decoder.begin();
 
   aviDecoder.setOutputAudio(audioOut);
@@ -81,7 +82,7 @@ void loop() {
   if (url) {
     // pumps bytes from the HTTP stream into DemuxerAVI, which routes
     // decoded audio to I2S and demuxed H.264 frames to H264Decoder, which
-    // in turn pushes decoded RGB565 frames to the TFT via OutputTFT
+    // in turn pushes decoded RGB565 frames to the TFT via OutputTFT_eSPI
     copier.copy();
   } else {
     Serial.println("Disconnected - reconnecting...");

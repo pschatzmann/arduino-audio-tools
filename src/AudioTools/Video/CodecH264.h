@@ -54,14 +54,20 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class H264Decoder : public VideoDecoder {
+class H264Decoder : public VideoDecoder, public VideoInfoSource {
  public:
   H264Decoder() { decoder_.setCallback(onFrame, this); }
+
+  H264Decoder(Print &out) : H264Decoder() { setOutput(out); }
+
+  H264Decoder(VideoOutput &out) : H264Decoder() { setOutput(out); }
 
   /// Defines the target the decoded picture is written to, one write()
   /// call per decoded picture, in the format selected via
   /// setVideoFormat() (RGB565 by default).
-  void setOutput(Print &out) override { p_out = &out; }
+  void setOutput(Print &out)  { p_out = &out; }
+  void setOutput(VideoOutput &out)  { p_out_video = &out; }
+ 
 
   /// Selects the pixel format written to setOutput()'s target - RGB565
   /// (the default) is what most TFT display libraries expect; RGB666/
@@ -133,16 +139,17 @@ class H264Decoder : public VideoDecoder {
  protected:
   tinyh264::TinyH264Decoder<H264_DEFAULT_ALLOCATOR> decoder_;
   Print *p_out = nullptr;
+  VideoOutput *p_out_video = nullptr;
   VideoFormat pixel_format = VideoFormat::RGB565;
   Vector<uint8_t> frame_buffer;
 
   static void onFrame(tinyh264::TinyH264Decoder<H264_DEFAULT_ALLOCATOR> &decoder,
                        void *userData) {
-    static_cast<H264Decoder *>(userData)->writeFrame();
+    static_cast<H264Decoder *>(userData)->writeToOutput();
   }
 
-  void writeFrame() {
-    if (p_out == nullptr) return;
+  void writeToOutput() {
+    if (p_out == nullptr && p_out_video == nullptr) return;
     size_t w = decoder_.width();
     size_t h = decoder_.height();
     size_t n = 0;
@@ -157,7 +164,7 @@ class H264Decoder : public VideoDecoder {
           }
         }
         n = decoder_.toRGB565((uint16_t *)frame_buffer.data(), needed);
-        if (n > 0) p_out->write(frame_buffer.data(), n * 2);
+        if (n > 0) writeToOutput(frame_buffer.data(), n * 2);
         break;
       }
       case VideoFormat::RGB666: {
@@ -170,7 +177,7 @@ class H264Decoder : public VideoDecoder {
           }
         }
         n = decoder_.toRGB666(frame_buffer.data(), needed);
-        if (n > 0) p_out->write(frame_buffer.data(), n);
+        if (n > 0) writeToOutput(frame_buffer.data(), n);
         break;
       }
       case VideoFormat::RGB888: {
@@ -183,7 +190,7 @@ class H264Decoder : public VideoDecoder {
           }
         }
         n = decoder_.toRGB888(frame_buffer.data(), needed);
-        if (n > 0) p_out->write(frame_buffer.data(), n);
+        if (n > 0) writeToOutput(frame_buffer.data(), n);
         break;
       }
       case VideoFormat::I420: {
@@ -196,12 +203,19 @@ class H264Decoder : public VideoDecoder {
           }
         }
         n = decoder_.toYUV420(frame_buffer.data(), needed);
-        if (n > 0) p_out->write(frame_buffer.data(), n);
+        if (n > 0) writeToOutput(frame_buffer.data(), n);
         break;
       }
       default:
         break;
     }
+  }
+
+  size_t writeToOutput(uint8_t *data, size_t len) {
+    size_t result = 0;
+    if (p_out != nullptr) result = p_out->write((const uint8_t *)data, len);
+    if (p_out_video != nullptr) result += p_out_video->write((const uint8_t *)data, len);
+    return result;
   }
 };
 
@@ -242,9 +256,18 @@ class H264Encoder : public VideoEncoder {
     height_ = height;
   }
 
+  H264Encoder(Print &out) {
+    setOutput(out);
+  }
+
+  H264Encoder(VideoOutput &out) {
+    setOutput(out);
+  }
+
   /// Defines the target the encoded bitstream is written to, one write()
   /// call per write() call that actually produced output.
   void setOutput(Print &out) override { p_out = &out; }
+  void setOutput(VideoOutput &out)  { p_out_video = &out; }
 
   /// Selects the raw picture format write() expects - VideoFormat::I420
   /// (the default: planar Y/U/V, concatenated Y then U then V in one
@@ -386,6 +409,7 @@ class H264Encoder : public VideoEncoder {
 
   tinyh264::TinyH264Encoder<H264_DEFAULT_ALLOCATOR> encoder_;
   Print *p_out = nullptr;
+  VideoOutput *p_out_video = nullptr;
   Vector<uint8_t> bitstream;
   VideoFormat input_format = VideoFormat::I420;
   int width_ = 0;
@@ -393,7 +417,7 @@ class H264Encoder : public VideoEncoder {
 
   template <typename Fn>
   size_t writeOut(Fn encodeInto) {
-    if (p_out == nullptr) return 0;
+    if (p_out == nullptr && p_out_video == nullptr) return 0;
     if (bitstream.size() == 0) {
       bitstream.resize(kDefaultBitstreamBufferSize);
       if (bitstream.data() == nullptr) {
@@ -410,7 +434,8 @@ class H264Encoder : public VideoEncoder {
       }
       n = encodeInto(bitstream.data(), bitstream.size());
     }
-    if (n > 0) p_out->write(bitstream.data(), n);
+    if (p_out !=nullptr && n > 0) p_out->write(bitstream.data(), n);
+    if (p_out_video !=nullptr && n > 0) p_out_video->write(bitstream.data(), n);
     return n;
   }
 };

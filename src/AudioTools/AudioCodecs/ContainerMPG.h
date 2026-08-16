@@ -137,7 +137,10 @@ class DemuxerMPG : public Demuxer {
   }
 
   void end() override {
-    if (video_frame_open && p_output_video != nullptr) p_output_video->flush();
+    if (video_frame_open) {
+      if (p_output_video != nullptr) p_output_video->flush();
+      if (p_output_video_video != nullptr) p_output_video_video->flush();
+    }
     video_frame_open = false;
     is_parsing_active = false;
   }
@@ -158,6 +161,7 @@ class DemuxerMPG : public Demuxer {
   /// Defines the video output - e.g. a VideoOutput implementation, or any
   /// other Print if you want the raw MPEG-1 video ES as-is.
   void setOutputVideo(Print &out) override { p_output_video = &out; }
+  void setOutputVideo(VideoOutput &out) { p_output_video_video = &out; }
 
   /// Not applicable: MPEG-1 audio (Layer I/II/III) is compressed and
   /// self-framed (its own sync word), unlike PCM - it never needs a
@@ -204,6 +208,7 @@ class DemuxerMPG : public Demuxer {
   MPGParseBuffer parse_buffer;
   Print *p_output_audio = nullptr;
   Print *p_output_video = nullptr;
+  VideoOutput *p_output_video_video = nullptr;
   uint32_t total_bytes = 0;
 
   // current streamed unit (PES payload, or a skipped block's payload)
@@ -253,8 +258,10 @@ class DemuxerMPG : public Demuxer {
     if (id == MPG_SYSTEM_HEADER_START_CODE) return parseSystemHeader();
     if (id == MPG_PROGRAM_END_CODE) {
       parse_buffer.consume(4);
-      if (video_frame_open && p_output_video != nullptr)
-        p_output_video->flush();
+      if (video_frame_open) {
+        if (p_output_video != nullptr) p_output_video->flush();
+        if (p_output_video_video != nullptr) p_output_video_video->flush();
+      }
       video_frame_open = false;
       LOGI("MPEG_program_end_code");
       return true;
@@ -349,8 +356,10 @@ class DemuxerMPG : public Demuxer {
     if (isVideo && has_pts) {
       // a PTS marks the first fragment of a new access unit - close out
       // the previous one
-      if (video_frame_open && p_output_video != nullptr)
-        p_output_video->flush();
+      if (video_frame_open) {
+        if (p_output_video != nullptr) p_output_video->flush();
+        if (p_output_video_video != nullptr) p_output_video_video->flush();
+      }
       video_frame_open = true;
     }
 
@@ -396,6 +405,7 @@ class DemuxerMPG : public Demuxer {
     if (is_video_unit) {
       if (!video_header_parsed) probeVideoHeader(data, len);
       if (p_output_video != nullptr) p_output_video->write(data, len);
+      if (p_output_video_video != nullptr) p_output_video_video->write(data, len);
     } else {
       if (!audio_header_parsed) probeAudioHeader(data, len);
       if (p_output_audio != nullptr) p_output_audio->write(data, len);

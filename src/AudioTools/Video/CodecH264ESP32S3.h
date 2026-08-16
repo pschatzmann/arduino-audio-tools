@@ -53,16 +53,24 @@ class H264DecoderESP32S3 : public VideoDecoder {
     config_.output_format = ESP_H264_RAW_FMT_RGB565_LE;
     config_.frame_callback = [this](const uint8_t *frame, uint32_t w,
                                      uint32_t h, esp_h264_raw_format_t fmt) {
-      if (p_out == nullptr) return;
+      if (p_out == nullptr && p_out_video == nullptr) return;
       size_t bytes = (size_t)(w * h * ESP_H264_GET_BPP_BY_PIC_TYPE(fmt));
-      p_out->write(frame, bytes);
+      if (p_out != nullptr) p_out->write(frame, bytes);
+      if (p_out_video != nullptr) p_out_video->write(frame, bytes);
     };
+  }
+
+  H264DecoderESP32S3(Print &out) : H264DecoderESP32S3() { setOutput(out); }
+
+  H264DecoderESP32S3(VideoOutput &out) : H264DecoderESP32S3() {
+    setOutput(out);
   }
 
   /// Defines the target the decoded picture is written to, one write()
   /// call per decoded picture, in the format selected via
   /// setVideoFormat() (RGB565 by default). Call before begin().
   void setOutput(Print &out) override { p_out = &out; }
+  void setOutput(VideoOutput &out) { p_out_video = &out; }
 
   /// Selects the pixel format written to setOutput()'s target - this
   /// backend (esp_h264) only supports VideoFormat::RGB565 (the default)
@@ -141,6 +149,7 @@ class H264DecoderESP32S3 : public VideoDecoder {
   esp_h264::H264Decoder<Alloc> decoder_;
   typename esp_h264::H264Decoder<Alloc>::Config config_;
   Print *p_out = nullptr;
+  VideoOutput *p_out_video = nullptr;
 };
 
 /**
@@ -173,12 +182,50 @@ class H264DecoderESP32S3 : public VideoDecoder {
  */
 template <typename Alloc = H264_DEFAULT_ALLOCATOR>
 class H264EncoderESP32S3 : public VideoEncoder {
+ protected:
+  /// esp_h264::H264Encoder's encode()/encodeRGB565()/encodeYUV422() write
+  /// straight to a Print& internally (there's no "return the buffer"
+  /// variant) - this fans that single Print target out to whichever of
+  /// setOutput(Print&)/setOutput(VideoOutput&) are configured, mirroring
+  /// H264Encoder's (CodecH264.h) dual p_out/p_out_video write.
+  class DualOutputPrint : public Print {
+   public:
+    void setTargets(Print *out, VideoOutput *outVideo) {
+      p_out = out;
+      p_out_video = outVideo;
+    }
+    size_t write(uint8_t c) override { return write(&c, 1); }
+    size_t write(const uint8_t *data, size_t len) override {
+      size_t result = 0;
+      if (p_out != nullptr) result = p_out->write(data, len);
+      if (p_out_video != nullptr) result = p_out_video->write(data, len);
+      return result;
+    }
+
+   protected:
+    Print *p_out = nullptr;
+    VideoOutput *p_out_video = nullptr;
+  };
+
  public:
   H264EncoderESP32S3() { config_ = encoder_.defaultConfig(); }
 
+  H264EncoderESP32S3(Print &out) : H264EncoderESP32S3() { setOutput(out); }
+
+  H264EncoderESP32S3(VideoOutput &out) : H264EncoderESP32S3() {
+    setOutput(out);
+  }
+
   /// Defines the target each write() call writes its encoded bitstream
   /// to.
-  void setOutput(Print &out) override { p_out = &out; }
+  void setOutput(Print &out) override {
+    p_out = &out;
+    dual_out_.setTargets(p_out, p_out_video);
+  }
+  void setOutput(VideoOutput &out) {
+    p_out_video = &out;
+    dual_out_.setTargets(p_out, p_out_video);
+  }
 
   /// Selects the raw picture format write() expects - this backend
   /// (esp_h264) supports VideoFormat::I420 (the default: planar Y/U/V,
@@ -254,17 +301,17 @@ class H264EncoderESP32S3 : public VideoEncoder {
   /// on failure (e.g. setOutput() wasn't configured, `len` too small, or
   /// the format is unsupported).
   size_t write(const uint8_t *data, size_t len) override {
-    if (p_out == nullptr) return 0;
+    if (p_out == nullptr && p_out_video == nullptr) return 0;
     bool ok = false;
     switch (input_format) {
       case VideoFormat::I420:
-        ok = encoder_.encode(data, len, *p_out);
+        ok = encoder_.encode(data, len, dual_out_);
         break;
       case VideoFormat::RGB565:
-        ok = encoder_.encodeRGB565(data, len, *p_out);
+        ok = encoder_.encodeRGB565(data, len, dual_out_);
         break;
       case VideoFormat::YUV422:
-        ok = encoder_.encodeYUV422(data, len, *p_out);
+        ok = encoder_.encodeYUV422(data, len, dual_out_);
         break;
       default:
         break;
@@ -281,6 +328,8 @@ class H264EncoderESP32S3 : public VideoEncoder {
   esp_h264::H264Encoder<Alloc> encoder_;
   typename esp_h264::H264Encoder<Alloc>::Config config_;
   Print *p_out = nullptr;
+  VideoOutput *p_out_video = nullptr;
+  DualOutputPrint dual_out_;
   VideoFormat input_format = VideoFormat::I420;
 };
 

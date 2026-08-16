@@ -49,7 +49,12 @@ class MPGDecoder : public VideoDecoder {
  public:
   MPGDecoder() { decoder_.setCallback(onFrame, this); }
 
+  MPGDecoder(Print &out) : MPGDecoder() { setOutput(out); }
+
+  MPGDecoder(VideoOutput &out) : MPGDecoder() { setOutput(out); }
+
   void setOutput(Print &out) override { p_out = &out; }
+  void setOutput(VideoOutput &out) { p_out_video = &out; }
 
   void setVideoFormat(VideoFormat format) override {
     switch (format) {
@@ -94,6 +99,7 @@ class MPGDecoder : public VideoDecoder {
  protected:
   tinympg::TinyMPGDecoder<MPG_DEFAULT_ALLOCATOR> decoder_;
   Print *p_out = nullptr;
+  VideoOutput *p_out_video = nullptr;
   VideoFormat pixel_format = VideoFormat::RGB565;
   Vector<uint8_t> frame_buffer;
 
@@ -103,7 +109,7 @@ class MPGDecoder : public VideoDecoder {
   }
 
   void writeFrame(tinympg::TinyMPGDecoder<MPG_DEFAULT_ALLOCATOR> &decoder) {
-    if (p_out == nullptr) return;
+    if (p_out == nullptr && p_out_video == nullptr) return;
 
     size_t w = decoder.width();
     size_t h = decoder.height();
@@ -120,7 +126,7 @@ class MPGDecoder : public VideoDecoder {
           }
         }
         n = decoder.toRGB565((uint16_t *)frame_buffer.data(), needed);
-        if (n > 0) p_out->write(frame_buffer.data(), n * 2);
+        if (n > 0) writeToOutput(frame_buffer.data(), n * 2);
         break;
       }
       case VideoFormat::RGB888: {
@@ -133,7 +139,7 @@ class MPGDecoder : public VideoDecoder {
           }
         }
         n = decoder.toRGB888(frame_buffer.data(), needed);
-        if (n > 0) p_out->write(frame_buffer.data(), n);
+        if (n > 0) writeToOutput(frame_buffer.data(), n);
         break;
       }
       case VideoFormat::RGB666: {
@@ -146,7 +152,7 @@ class MPGDecoder : public VideoDecoder {
           }
         }
         n = decoder.toRGB666(frame_buffer.data(), needed);
-        if (n > 0) p_out->write(frame_buffer.data(), n);
+        if (n > 0) writeToOutput(frame_buffer.data(), n);
         break;
       }
       case VideoFormat::I420: {
@@ -159,12 +165,19 @@ class MPGDecoder : public VideoDecoder {
           }
         }
         n = decoder.toYUV420(frame_buffer.data(), needed);
-        if (n > 0) p_out->write(frame_buffer.data(), n);
+        if (n > 0) writeToOutput(frame_buffer.data(), n);
         break;
       }
       default:
         break;
     }
+  }
+
+  size_t writeToOutput(uint8_t *data, size_t len) {
+    size_t result = 0;
+    if (p_out != nullptr) result = p_out->write((const uint8_t *)data, len);
+    if (p_out_video != nullptr) result += p_out_video->write((const uint8_t *)data, len);
+    return result;
   }
 };
 
@@ -192,7 +205,12 @@ class MPGEncoder : public VideoEncoder {
     }
   }
 
+  MPGEncoder(Print &out) { setOutput(out); }
+
+  MPGEncoder(VideoOutput &out) { setOutput(out); }
+
   void setOutput(Print &out) override { p_out = &out; }
+  void setOutput(VideoOutput &out) { p_out_video = &out; }
 
   void setVideoFormat(VideoFormat format) override {
     switch (format) {
@@ -250,7 +268,7 @@ class MPGEncoder : public VideoEncoder {
   void end() override {}
 
   size_t write(const uint8_t *data, size_t len) override {
-    if (p_out == nullptr) return 0;
+    if (p_out == nullptr && p_out_video == nullptr) return 0;
     if (width_ <= 0 || height_ <= 0) {
       LOGE("MPGEncoder: invalid size - call setSize() first");
       return 0;
@@ -305,6 +323,7 @@ class MPGEncoder : public VideoEncoder {
 
   tinympg::TinyMPGEncoder<MPG_DEFAULT_ALLOCATOR> encoder_;
   Print *p_out = nullptr;
+  VideoOutput *p_out_video = nullptr;
   VideoFormat input_format = VideoFormat::I420;
   int width_ = 0;
   int height_ = 0;
@@ -312,7 +331,7 @@ class MPGEncoder : public VideoEncoder {
 
   template <typename Fn>
   size_t writeOut(Fn encodeInto) {
-    if (p_out == nullptr) return 0;
+    if (p_out == nullptr && p_out_video == nullptr) return 0;
     size_t encoded = encodeInto(bitstream_buffer.data(), bitstream_buffer.size());
     for (int attempt = 0; encoded == 0 && attempt < kMaxGrowRetries; ++attempt) {
       bitstream_buffer.resize(bitstream_buffer.size() * 2);
@@ -326,7 +345,9 @@ class MPGEncoder : public VideoEncoder {
       LOGE("MPGEncoder: encode failed (status=%d)", (int)encoder_.lastStatus());
       return 0;
     }
-    return p_out->write(bitstream_buffer.data(), encoded);
+    if (p_out != nullptr) p_out->write(bitstream_buffer.data(), encoded);
+    if (p_out_video != nullptr) p_out_video->write(bitstream_buffer.data(), encoded);
+    return encoded;
   }
 
   bool ensureBitstreamBuffer() {

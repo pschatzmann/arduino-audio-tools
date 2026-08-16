@@ -275,6 +275,10 @@ public:
     LOGD("BinaryContainerDecoder::setOutputVideo");
     p_out_video = &out;
   }
+  void setOutputVideo(VideoOutput &out) {
+    LOGD("BinaryContainerDecoder::setOutputVideo");
+    p_out_video_video = &out;
+  }
 
   /// Registers a callback invoked once a VideoHeader segment has been
   /// parsed, providing the track's VideoInfo (width/height/format/...).
@@ -334,6 +338,7 @@ protected:
   SingleBuffer<uint8_t> buffer{0};
   Print *p_out = nullptr;
   Print *p_out_video = nullptr;
+  VideoOutput *p_out_video_video = nullptr;
   VideoInfo video_info;
   void (*meta_callback)(uint8_t* data, int len, void* ref) = nullptr;
   void (*video_info_callback)(VideoInfo info, void* ref) = nullptr;
@@ -515,7 +520,9 @@ protected:
     LOGD("outputVideo: %d", (int)len);
     if (p_out_video != nullptr)
       p_out_video->write((uint8_t *)data, len);
-    else
+    if (p_out_video_video != nullptr)
+      p_out_video_video->write((uint8_t *)data, len);
+    if (p_out_video == nullptr && p_out_video_video == nullptr)
       LOGW("output video not defined");
 
     return len;
