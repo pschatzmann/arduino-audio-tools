@@ -269,7 +269,7 @@ public:
   }
 
   /// Defines the video output - e.g. a VideoOutput implementation
-  /// (H264Decoder, JPEGOutputTFT, ...), or any other Print if you want the raw
+  /// (H264Decoder, MJPEGDecoder, ...), or any other Print if you want the raw
   /// frame payload as-is.
   void setOutputVideo(Print &out) {
     LOGD("BinaryContainerDecoder::setOutputVideo");

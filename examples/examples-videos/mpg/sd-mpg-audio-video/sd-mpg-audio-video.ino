@@ -4,7 +4,7 @@
  * Program Stream (.mpg) file on an SD card: demuxes it live with
  * DemuxerMPG, decodes the video track with MPGDecoder (TinyMPG,
  * https://github.com/pschatzmann/TinyMPG - pure software, works on any
- * board) and displays the result live on a TFT screen with TFT_eSPI, while
+ * board) and displays the result live on a TinyGPU-driven TFT, while
  * playing the audio track (a raw MPEG-1 Layer I/II/III elementary stream)
  * through I2S via MP3DecoderHelix - the same choice ContainerMPG.h's own
  * file comment uses.
@@ -12,7 +12,7 @@
  * Pipeline: File (SD) -> EncodedAudioOutput (Print bridge) -> DemuxerMPG
  * (demux)
  *   -> EncodedAudioStream (MP3DecoderHelix) -> I2SStream (audio)
- *   \-> MPGDecoder (MPEG-1 decode -> RGB565) -> OutputTFT_eSPI (draw) (video)
+ *   \-> MPGDecoder (MPEG-1 decode -> RGB565) -> OutputTinyGPU (draw) (video)
  *
  * DemuxerMPG is a *streaming* (forward-only) demuxer - it does not need a
  * seekable source, so a File read sequentially with StreamCopy (the same
@@ -22,8 +22,8 @@
  * (HTTP) equivalent.
  *
  * Dependencies (install via Library Manager):
- * - https://github.com/Bodmer/TFT_eSPI (configure your display's pins/driver
- *   in that library's User_Setup.h - not done in this sketch)
+ * - https://github.com/pschatzmann/TinyGPU (SPI/display pins below match its
+ *   bouncing-ball example - adjust for your own wiring)
  * - https://github.com/pschatzmann/TinyMPG
  *
  * @author Phil Schatzmann
@@ -33,15 +33,30 @@
 #include "AudioTools/AudioCodecs/ContainerMPG.h"
 #include "AudioTools/AudioCodecs/CodecMP3Helix.h"
 #include "AudioTools/Video/CodecMPG.h"
-#include "AudioTools/Video/OutputTFT_eSPI.h"
+#include "AudioTools/Video/OutputTinyGPU.h"
 #include "SD.h"
 
 // ---- File on the SD card to play ----
 const char *file_path = "/video.mpg";
 
-TFT_eSPI tft = TFT_eSPI();
+// ---- SPI / display pins (adjust for your wiring) ----
+constexpr int8_t kPinMosi = 13;
+constexpr int8_t kPinMiso = 12;
+constexpr int8_t kPinSclk = 14;
+constexpr int8_t kPinCs = 15;
+constexpr int8_t kPinDc = 2;
+constexpr int8_t kPinRst = -1;
+constexpr int8_t kPinBacklight = 27;
+
+// display resolution - used by OutputTinyGPU's begin()/clearScreen()
+// sizing; the actual per-frame size still comes from MPGDecoder via
+// setVideoInfoSource()
+const uint16_t video_width = 320;
+const uint16_t video_height = 240;
+
+ILI9341Driver<RGB565> tftDriver(SPI, kPinCs, kPinDc, kPinRst);
 MPGDecoder mpgDecoder;
-OutputTFT_eSPI tftOutput(tft);
+OutputTinyGPU tftOutput(tftDriver, video_width, video_height, kPinBacklight);
 I2SStream i2s;
 MP3DecoderHelix mp3Decoder;
 EncodedAudioStream audioOut(&i2s, &mp3Decoder);  // decodes MP3/MP2 -> I2S
@@ -67,9 +82,8 @@ void setup() {
     return;
   }
 
-  tft.init();
-  tft.setRotation(1);
-  tft.fillScreen(TFT_BLACK);
+  SPI.begin(kPinSclk, kPinMiso, kPinMosi, kPinCs);
+  tftOutput.begin();
 
   auto cfg = i2s.defaultConfig(TX_MODE);
   i2s.begin(cfg);

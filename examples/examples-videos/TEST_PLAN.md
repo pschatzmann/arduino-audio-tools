@@ -24,12 +24,11 @@ lists functionality that has **no existing example** to exercise it yet.
   hardware encode/decode path (S3-only).
 
 ### Board B (ESP32, no PSRAM + display)
-- TFT display supported by [TFT_eSPI](https://github.com/Bodmer/TFT_eSPI)
-  (configure pins/driver in that library's `User_Setup.h` — not done in any
-  sketch). If instead testing the `OutputTinyGPU` path, use a
-  [TinyGPU](https://github.com/pschatzmann/TinyGPU)-supported driver
-  (e.g. `ILI9341Driver`) instead of TFT_eSPI.
-- Libraries: TFT_eSPI, [JPEGDecoder](https://github.com/Bodmer/JPEGDecoder),
+- TFT display driven by [TinyGPU](https://github.com/pschatzmann/TinyGPU)'s
+  `ILI9341Driver` (all examples wire up `SPI`/`kPinCs`/`kPinDc`/`kPinRst`/
+  `kPinBacklight` constants at the top of the sketch — adjust for your own
+  wiring; the defaults match TinyGPU's own bouncing-ball example pin-out).
+- Libraries: TinyGPU, [JPEGDecoder](https://github.com/Bodmer/JPEGDecoder),
   TinyH264, SD (for local-file tests).
 - SD card (FAT32) with a **faststart** test MP4:
   ```
@@ -54,10 +53,14 @@ No camera or WiFi needed; SD card only. Confirms demux → decode → display
 | # | Sketch | Exercises | Status |
 |---|--------|-----------|--------|
 | 1.1 | `mp4/sd-mp4-audio/sd-mp4-audio.ino` | `DemuxerMP4`, AAC audio only (video track ignored) | ✅ compiles |
-| 1.2 | `mp4/sd-mp4-video/sd-mp4-video.ino` | `DemuxerMP4` (via `CodecCopy`), `H264Decoder`, `OutputTFT_eSPI`, video only | ✅ compiles (fixed a pre-existing bug this session: `setup()` never called `SD.begin()`/`SD.open()`, so `file` stayed unopened and the sketch never actually played anything) |
-| 1.3 | `mp4/sd-mp4-audio-video/sd-mp4-audio-video.ino` | Combined: `DemuxerMP4` dispatch to both `H264Decoder`→`OutputTFT_eSPI` and AAC→I2S — the real A/V sync test | ✅ compiles (verified via `arduino-cli`) |
-| 1.4 | `avi/sd-avi-video/sd-avi-video.ino` | `DemuxerAVI` (via `CodecCopy`), `H264Decoder`, `OutputTFT_eSPI`, video only — new this session | ✅ compiles (verified via `arduino-cli`) |
-| 1.5 | `mpg/sd-mpg-video/sd-mpg-video.ino` | `DemuxerMPG` (via `CodecCopy`), `MPGDecoder`, `OutputTFT_eSPI`, video only — new this session | ✅ compiles (verified via `arduino-cli`) |
+| 1.2 | `mp4/sd-mp4-video/sd-mp4-video.ino` | `DemuxerMP4` (via `CodecCopy`), `H264Decoder`, `OutputTinyGPU`, video only | ✅ compiles (fixed a pre-existing bug this session: `setup()` never called `SD.begin()`/`SD.open()`, so `file` stayed unopened and the sketch never actually played anything) |
+| 1.3 | `mp4/sd-mp4-audio-video/sd-mp4-audio-video.ino` | Combined: `DemuxerMP4` dispatch to both `H264Decoder`→`OutputTinyGPU` and AAC→I2S — the real A/V sync test | ✅ compiles (verified via `arduino-cli`) |
+| 1.4 | `avi/sd-avi-video/sd-avi-video.ino` | `DemuxerAVI` (via `CodecCopy`), `H264Decoder`, `OutputTinyGPU`, video only — new this session | ✅ compiles (verified via `arduino-cli`) |
+| 1.5 | `mpg/sd-mpg-video/sd-mpg-video.ino` | `DemuxerMPG` (via `CodecCopy`), `MPGDecoder`, `OutputTinyGPU`, video only — new this session | ✅ compiles (verified via `arduino-cli`) |
+| 1.6 | `avi/sd-avi-audio/sd-avi-audio.ino` | `DemuxerAVI`, `DecoderHelix` (auto-detects WAV/AAC/MP3), audio only — new this session | ✅ compiles (verified via `arduino-cli`) |
+| 1.7 | `avi/sd-avi-audio-video/sd-avi-audio-video.ino` | Combined: `DemuxerAVI` dispatch to `H264Decoder`→`OutputTinyGPU` and `DecoderHelix`→I2S — new this session | ✅ compiles (verified via `arduino-cli`) |
+| 1.8 | `mpg/sd-mpg-audio/sd-mpg-audio.ino` | `DemuxerMPG`, `MP3DecoderHelix`, audio only — new this session | ✅ compiles (verified via `arduino-cli`) |
+| 1.9 | `mpg/sd-mpg-audio-video/sd-mpg-audio-video.ino` | Combined: `DemuxerMPG` dispatch to `MPGDecoder`→`OutputTinyGPU` and `MP3DecoderHelix`→I2S — new this session | ✅ compiles (verified via `arduino-cli`) |
 
 **Checklist per sketch** (see §6 for the full template):
 - [ ] Compiles for Board B's FQBN
@@ -72,7 +75,7 @@ Run 1.1 before 1.2/1.3 — it isolates the audio decode path so an A/V sync
 problem in 1.3 can be attributed to video, not audio. 1.4/1.5 are
 video-only, same shape as 1.2, just swapping the container/codec — useful
 to confirm a decode problem is codec/container-specific rather than a
-`OutputTFT_eSPI`/display issue common to all three.
+`OutputTinyGPU`/display issue common to all three.
 
 ---
 
@@ -107,17 +110,10 @@ Both boards on the same network, Board A serving, Board B consuming.
 
 | # | Server (Board A) | Client (Board B) | Path |
 |---|---|---|---|
-| 3.1 | `avi/http-server-avi/http-server-avi.ino` | `avi/http-client-avi-tft/http-client-avi-tft.ino` | MJPEG-in-AVI end-to-end: `DemuxerAVI` → `JPEGOutputTFT` — both ends ✅ compile (verified) |
-| 3.2 | `avi/http-server-avi-h264/http-server-avi-h264.ino` | `avi/http-client-avi-h264/http-client-avi-h264.ino` | H.264-in-AVI end-to-end: `DemuxerAVI` → `H264Decoder` → `OutputTFT_eSPI` — ✅ client compiles (verified, 97% flash on esp32s3 — tight; recheck on Board B's actual FQBN/partition table) |
-| 3.3 | *(gap — see §5)* | `mp4/http-client-mp4/http-client-mp4.ino` | H.264+AAC-in-MP4 over HTTP: `DemuxerMP4` → `H264Decoder`/AAC — ✅ client compiles (verified). No MP4-serving example exists yet (Board A only mux to AVI/MPG today) — workaround below. |
-| 3.4 | `mpg/http-server-mpg/http-server-mpg.ino` | `mpg/http-client-mpg/http-client-mpg.ino` | MPEG-1 Program Stream end-to-end: `DemuxerMPG` → `MPGDecoder` → `OutputTFT_eSPI` — new this session, both ends ✅ compile (verified) |
-
-**3.3 workaround** (no MP4 server example exists): serve a static
-faststart MP4 from a desktop machine instead of Board A —
-`python3 -m http.server` in the directory holding the test file, point
-`video_url` at `http://<desktop-ip>:8000/out.mp4`. This still fully
-exercises Board B's `DemuxerMP4` HTTP-client path; it just doesn't
-exercise Board A's (currently nonexistent) MP4 muxing.
+| 3.1 | `avi/http-server-avi/http-server-avi.ino` | `avi/http-client-avi-tft/http-client-avi-tft.ino` | MJPEG-in-AVI end-to-end: `DemuxerAVI` → `MJPEGDecoder` → `OutputTinyGPU` — both ends ✅ compile (verified) |
+| 3.2 | `avi/http-server-avi-h264/http-server-avi-h264.ino` | `avi/http-client-avi-h264/http-client-avi-h264.ino` | H.264-in-AVI end-to-end: `DemuxerAVI` → `H264Decoder` → `OutputTinyGPU` — ✅ client compiles (verified, 97% flash on esp32s3 — tight; recheck on Board B's actual FQBN/partition table) |
+| 3.3 | `mp4/http-server-mp4/http-server-mp4.ino` | `mp4/http-client-mp4/http-client-mp4.ino` | H.264-in-fMP4 end-to-end: `DemuxerMP4` → `H264Decoder` → `OutputTinyGPU` — server new this session (closes the former gap: Board A only muxed to AVI before), both ends ✅ compile (verified) |
+| 3.4 | `mpg/http-server-mpg/http-server-mpg.ino` | `mpg/http-client-mpg/http-client-mpg.ino` | MPEG-1 Program Stream end-to-end: `DemuxerMPG` → `MPGDecoder` → `OutputTinyGPU` — new this session, both ends ✅ compile (verified) |
 
 **Checklist**:
 - [ ] Board B connects and renders within a few seconds
@@ -138,8 +134,8 @@ robustness on both.
       `begin()`, and every N frames during a 10+ minute continuous playback
       (any Suite 1 or 3 sketch). Free heap should plateau, not trend down —
       a steady decline means a leak (check `H264Decoder`'s `frame_buffer`/
-      `Vector` growth logic, and confirm `OutputTinyGPU`/`OutputTFT_eSPI`
-      aren't accidentally re-allocating per frame).
+      `Vector` growth logic, and confirm `OutputTinyGPU` isn't accidentally
+      re-allocating per frame).
 - [ ] **Oversized/undersized frame into `OutputTinyGPU`**: feed a `write()`
       call with `len` smaller than `width*height*2` — confirm it logs and
       returns 0 (the bounds check added recently) rather than asserting/
@@ -169,16 +165,20 @@ These are real, tested-by-compile library features with **zero example
 sketch** exercising them today. Not blocking for the plan above, but worth
 knowing about if you want fuller coverage:
 
-*Closed this session:* `ContainerMPG`/`MPGEncoder`/`MPGDecoder` now has
-full example coverage (2.3, 3.4, 1.5) — see the tables above. Also fixed a
-gap it hit along the way: `MPGDecoder` didn't implement `VideoInfoSource`
-(only `H264Decoder` did), so it couldn't be passed to
-`OutputTFT_eSPI::setVideoInfoSource()` — added.
+*Closed this session:* `ContainerMPG`/`MPGEncoder`/`MPGDecoder` and
+`MuxerMP4` now both have full example coverage (SD playback, audio-only,
+audio+video, and HTTP client/server pairs — see the tables above). Also
+fixed a gap `ContainerMPG` hit along the way: `MPGDecoder` didn't implement
+`VideoInfoSource` (only `H264Decoder` did), so it couldn't be passed to
+`OutputTinyGPU::setVideoInfoSource()` — added. Separately, every example in
+§1–§3 was switched from TFT_eSPI to TinyGPU (`OutputTinyGPU`), and the old
+`JPEGOutputTFT`/`JPEGOutputTinyGPU` classes (which each conflated MJPEG
+decode with rendering to one specific display backend) were replaced by a
+single `MJPEGDecoder` (`AudioTools/Video/CodecJPEG.h`) - a real `VideoDecoder`
+shaped exactly like `H264Decoder`/`MPGDecoder`, decoding once and feeding
+whichever `VideoOutput` is configured via `setOutput()`, same as the other
+two codecs. `OutputTinyGPU` end-to-end coverage is no longer a gap.
 
-- **`MuxerMP4`** (write H.264+AAC to MP4) — no example writes MP4 at all;
-  only reading (`DemuxerMP4`) is exercised. Would need a new Board A sketch
-  (camera → `H264Encoder` → `MuxerMP4` → SD or HTTP), which would also
-  close the Suite 3.3 gap above.
 - **`VideoMuxer` / `VideoMuxerWithTasks` / `CameraFrameSource`** — the
   higher-level "pull frames on a timer, mux automatically" API layer has no
   example at all (`http-server-avi*.ino` both drive the camera→encoder→muxer
@@ -192,11 +192,6 @@ gap it hit along the way: `MPGDecoder` didn't implement `VideoInfoSource`
   the best available check is headless: decode a known clip and confirm no
   `hasError()`/crash and correct reported `videoInfo()` dimensions, logged
   over Serial rather than viewed.
-- **`OutputTinyGPU`** end-to-end — the class itself is compile-verified
-  (including the zero-copy `write()` path), but no example sketch wires it
-  into a full decode pipeline the way `OutputTFT_eSPI`/`JPEGOutputTFT` are
-  in Suites 1/3. Only relevant if Board B's display uses a TinyGPU driver
-  instead of TFT_eSPI.
 - **`OutputOpenCV`** — desktop-only (OpenCV), not applicable to either
   board; skip unless you also want a desktop-side sanity check.
 

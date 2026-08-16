@@ -4,13 +4,13 @@
  * audio, "faststart" muxed so moov comes before mdat), demuxes it live with
  * DemuxerMP4, decodes the H.264 video track with H264Decoder (TinyH264,
  * https://github.com/pschatzmann/TinyH264 - pure software, works on any
- * board) and displays the result live on a TFT screen with TFT_eSPI. Also
+ * board) and displays the result live on a TinyGPU-driven TFT. Also
  * plays the audio track through I2S.
  *
  * Pipeline: URLStream (HTTP) -> EncodedAudioOutput (Print bridge) ->
  * DemuxerMP4 (interleaved demux)
  *   -> EncodedAudioStream (AACDecoderHelix) -> I2SStream (audio)
- *   \-> H264Decoder (H.264 decode -> RGB565) -> OutputTFT_eSPI (draw) (video)
+ *   \-> H264Decoder (H.264 decode -> RGB565) -> OutputTinyGPU (draw) (video)
  *
  * DemuxerMP4 only demuxes - it does not own or configure an audio decoder
  * itself; setOutputAudio() just points it at a plain Print, so any decoder
@@ -29,8 +29,8 @@
  * setOutput()/setVideoFormat() surface, no other change needed below.
  *
  * Dependencies (install via Library Manager):
- * - https://github.com/Bodmer/TFT_eSPI (configure your display's pins/driver
- *   in that library's User_Setup.h - not done in this sketch)
+ * - https://github.com/pschatzmann/TinyGPU (SPI/display pins below match its
+ *   bouncing-ball example - adjust for your own wiring)
  * - https://github.com/pschatzmann/TinyH264
  *
  * @author Phil Schatzmann
@@ -41,16 +41,31 @@
 #include "AudioTools/AudioCodecs/ContainerMP4.h"
 #include "AudioTools/AudioCodecs/CodecAACHelix.h"
 #include "AudioTools/Video/CodecH264.h"
-#include "AudioTools/Video/OutputTFT_eSPI.h"
+#include "AudioTools/Video/OutputTinyGPU.h"
 
 // ---- WiFi ----
 const char *ssid = "ssid";
 const char *password = "password";
 const char *video_url = "http://192.168.1.100/video.mp4";
 
-TFT_eSPI tft = TFT_eSPI();
+// ---- SPI / display pins (adjust for your wiring) ----
+constexpr int8_t kPinMosi = 13;
+constexpr int8_t kPinMiso = 12;
+constexpr int8_t kPinSclk = 14;
+constexpr int8_t kPinCs = 15;
+constexpr int8_t kPinDc = 2;
+constexpr int8_t kPinRst = -1;
+constexpr int8_t kPinBacklight = 27;
+
+// display resolution - used by OutputTinyGPU's begin()/clearScreen()
+// sizing; the actual per-frame size still comes from H264Decoder via
+// setVideoInfoSource()
+const uint16_t video_width = 320;
+const uint16_t video_height = 240;
+
+ILI9341Driver<RGB565> tftDriver(SPI, kPinCs, kPinDc, kPinRst);
 H264Decoder h264Decoder;
-OutputTFT_eSPI tftOutput(tft);
+OutputTinyGPU tftOutput(tftDriver, video_width, video_height, kPinBacklight);
 I2SStream i2s;
 AACDecoderHelix aacDecoder;
 EncodedAudioStream audioOut(&i2s, &aacDecoder);  // decodes AAC -> I2S
@@ -67,9 +82,8 @@ void setup() {
   Serial.begin(115200);
   AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
-  tft.init();
-  tft.setRotation(1);
-  tft.fillScreen(TFT_BLACK);
+  SPI.begin(kPinSclk, kPinMiso, kPinMosi, kPinCs);
+  tftOutput.begin();
 
   auto cfg = i2s.defaultConfig(TX_MODE);
   i2s.begin(cfg);
@@ -94,7 +108,7 @@ void loop() {
   if (url) {
     // pumps bytes from the HTTP stream into DemuxerMP4, which routes
     // decoded AAC audio to I2S and demuxed H.264 frames to H264Decoder,
-    // which in turn pushes decoded RGB565 frames to the TFT via OutputTFT_eSPI
+    // which in turn pushes decoded RGB565 frames to the TFT via OutputTinyGPU
     copier.copy();
   } else {
     Serial.println("Disconnected - reconnecting...");

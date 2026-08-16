@@ -3,9 +3,9 @@
  * @brief Plays a local MPEG-1 Program Stream (.mpg) file on an SD card:
  * demuxes it live with DemuxerMPG, decodes the video track with MPGDecoder
  * (TinyMPG, https://github.com/pschatzmann/TinyMPG - pure software, works
- * on any board) and displays the result live on a TFT screen with
- * TFT_eSPI. The audio track (if any) is ignored - DemuxerMPG only decodes/
- * forwards it if setOutputAudio() is called, which this sketch doesn't do.
+ * on any board) and displays the result live on a TinyGPU-driven TFT. The
+ * audio track (if any) is ignored - DemuxerMPG only decodes/forwards it if
+ * setOutputAudio() is called, which this sketch doesn't do.
  *
  * Unlike DemuxerAVI/DemuxerMP4, DemuxerMPG needs no external wrapper
  * format - ISO/IEC 11172-1's own pack_header/system_header/PES_packet
@@ -15,7 +15,7 @@
  * save its HTTP output to a file).
  *
  * Pipeline: File (SD) -> CodecCopy -> DemuxerMPG (demux)
- *   \-> MPGDecoder (MPEG-1 decode -> RGB565) -> OutputTFT_eSPI (draw)
+ *   \-> MPGDecoder (MPEG-1 decode -> RGB565) -> OutputTinyGPU (draw)
  *
  * DemuxerMPG is a *streaming* (forward-only) demuxer - it does not need a
  * seekable source, so a File read sequentially with CodecCopy (the same
@@ -25,8 +25,8 @@
  * network (HTTP) equivalent.
  *
  * Dependencies (install via Library Manager):
- * - https://github.com/Bodmer/TFT_eSPI (configure your display's pins/driver
- *   in that library's User_Setup.h - not done in this sketch)
+ * - https://github.com/pschatzmann/TinyGPU (SPI/display pins below match its
+ *   bouncing-ball example - adjust for your own wiring)
  * - https://github.com/pschatzmann/TinyMPG
  *
  * @author Phil Schatzmann
@@ -35,16 +35,31 @@
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/ContainerMPG.h"
 #include "AudioTools/Video/CodecMPG.h"
-#include "AudioTools/Video/OutputTFT_eSPI.h"
+#include "AudioTools/Video/OutputTinyGPU.h"
 #include "SD.h"
 
 // ---- File on the SD card to play ----
 const char *file_path = "/video.mpg";
 
-// File -copy-> DemuxerMPG -> MPGDecoder -> OutputTFT_eSPI
+// File -copy-> DemuxerMPG -> MPGDecoder -> OutputTinyGPU
 
-TFT_eSPI tft = TFT_eSPI();
-OutputTFT_eSPI tftOutput(tft);
+// ---- SPI / display pins (adjust for your wiring) ----
+constexpr int8_t kPinMosi = 13;
+constexpr int8_t kPinMiso = 12;
+constexpr int8_t kPinSclk = 14;
+constexpr int8_t kPinCs = 15;
+constexpr int8_t kPinDc = 2;
+constexpr int8_t kPinRst = -1;
+constexpr int8_t kPinBacklight = 27;
+
+// display resolution - used by OutputTinyGPU's begin()/clearScreen()
+// sizing; the actual per-frame size still comes from MPGDecoder via
+// setVideoInfoSource()
+const uint16_t video_width = 320;
+const uint16_t video_height = 240;
+
+ILI9341Driver<RGB565> tftDriver(SPI, kPinCs, kPinDc, kPinRst);
+OutputTinyGPU tftOutput(tftDriver, video_width, video_height, kPinBacklight);
 MPGDecoder mpgDecoder(tftOutput);
 DemuxerMPG mpgDemuxer;
 File file;
@@ -65,6 +80,7 @@ void setup() {
     return;
   }
 
+  SPI.begin(kPinSclk, kPinMiso, kPinMosi, kPinCs);
   tftOutput.setVideoInfoSource(mpgDecoder);
   tftOutput.begin();
   mpgDecoder.begin();

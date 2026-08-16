@@ -3,8 +3,8 @@
  * @brief Plays just the video (H.264) track of a local .avi file on an SD
  * card: demuxes it live with DemuxerAVI, decodes the video track with
  * H264Decoder (TinyH264, https://github.com/pschatzmann/TinyH264 - pure
- * software, works on any board) and displays the result live on a TFT
- * screen with TFT_eSPI. The audio track (if any) is ignored - DemuxerAVI
+ * software, works on any board) and displays the result live on a
+ * TinyGPU-driven TFT. The audio track (if any) is ignored - DemuxerAVI
  * only decodes/forwards it if setOutputAudio() is called, which this
  * sketch doesn't do.
  *
@@ -17,7 +17,7 @@
  *   ffmpeg -i in.mp4 -c:v libx264 -bsf:v h264_mp4toannexb -an out.avi
  *
  * Pipeline: File (SD) -> CodecCopy -> DemuxerAVI (demux)
- *   \-> H264Decoder (H.264 decode -> RGB565) -> OutputTFT_eSPI (draw)
+ *   \-> H264Decoder (H.264 decode -> RGB565) -> OutputTinyGPU (draw)
  *
  * DemuxerAVI is a *streaming* (forward-only) demuxer - it does not need a
  * seekable source, so a File read sequentially with CodecCopy (the same
@@ -32,8 +32,8 @@
  * setOutput()/setVideoFormat() surface, no other change needed below.
  *
  * Dependencies (install via Library Manager):
- * - https://github.com/Bodmer/TFT_eSPI (configure your display's pins/driver
- *   in that library's User_Setup.h - not done in this sketch)
+ * - https://github.com/pschatzmann/TinyGPU (SPI/display pins below match its
+ *   bouncing-ball example - adjust for your own wiring)
  * - https://github.com/pschatzmann/TinyH264
  *
  * @author Phil Schatzmann
@@ -42,16 +42,31 @@
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/ContainerAVI.h"
 #include "AudioTools/Video/CodecH264.h"
-#include "AudioTools/Video/OutputTFT_eSPI.h"
+#include "AudioTools/Video/OutputTinyGPU.h"
 #include "SD.h"
 
 // ---- File on the SD card to play ----
 const char *file_path = "/video.avi";
 
-// File -copy-> DemuxerAVI -> H264Decoder -> OutputTFT_eSPI
+// File -copy-> DemuxerAVI -> H264Decoder -> OutputTinyGPU
 
-TFT_eSPI tft = TFT_eSPI();
-OutputTFT_eSPI tftOutput(tft);
+// ---- SPI / display pins (adjust for your wiring) ----
+constexpr int8_t kPinMosi = 13;
+constexpr int8_t kPinMiso = 12;
+constexpr int8_t kPinSclk = 14;
+constexpr int8_t kPinCs = 15;
+constexpr int8_t kPinDc = 2;
+constexpr int8_t kPinRst = -1;
+constexpr int8_t kPinBacklight = 27;
+
+// display resolution - used by OutputTinyGPU's begin()/clearScreen()
+// sizing; the actual per-frame size still comes from H264Decoder via
+// setVideoInfoSource()
+const uint16_t video_width = 320;
+const uint16_t video_height = 240;
+
+ILI9341Driver<RGB565> tftDriver(SPI, kPinCs, kPinDc, kPinRst);
+OutputTinyGPU tftOutput(tftDriver, video_width, video_height, kPinBacklight);
 H264Decoder h264Decoder(tftOutput);
 DemuxerAVI aviDemuxer;
 File file;
@@ -72,6 +87,7 @@ void setup() {
     return;
   }
 
+  SPI.begin(kPinSclk, kPinMiso, kPinMosi, kPinCs);
   tftOutput.setVideoInfoSource(h264Decoder);
   tftOutput.begin();
   h264Decoder.begin();
