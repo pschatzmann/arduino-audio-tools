@@ -273,4 +273,54 @@ class VideoAudioBufferedSync : public VideoAudioSync {
   int correction_ms = 0;
 };
 
+/**
+ * @brief Logic to Synchronize video and audio output: mirrors DemuxerMP4's
+ * approach (dispatchVideo() in ContainerMP4.h) rather than using a ring
+ * buffer - audio is written straight through (the default writeAudio() is
+ * kept as-is), relying on the audio output itself (e.g. PortAudioStream's
+ * blocking write) to set the real-time pace. Video pacing is computed
+ * against a wall-clock schedule anchored at the first frame instead of a
+ * fixed delay() every call: if we're already behind schedule, no delay is
+ * added (letting the pipeline catch up instead of falling further behind);
+ * if we're ahead, only the remaining time until the next scheduled frame is
+ * waited out.
+ *
+ * Unlike DemuxerMP4 (which can skip decoding/writing a late frame entirely
+ * before it's ever dispatched), delayVideoFrame() is only called after the
+ * frame has already been written and flushed to the output - so this can't
+ * save the decode/render cost of a late frame, only avoid needlessly
+ * oversleeping on top of an existing lag.
+ * @ingroup video
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class VideoAudioClockSync : public VideoAudioSync {
+ public:
+  /// Waits only for the remaining time until the next frame's scheduled
+  /// wall-clock instant - if already behind schedule, returns immediately
+  /// instead of adding a full fixed delay on top of the lag.
+  void delayVideoFrame(int32_t microsecondsPerFrame,
+                        uint32_t time_used_ms) override {
+    uint32_t nowMs = millis();
+    if (!playback_start_set) {
+      playback_start_ms = nowMs;
+      playback_start_set = true;
+      frame_index = 0;
+    }
+    uint32_t scheduledWallMs =
+        playback_start_ms +
+        (uint32_t)((uint64_t)frame_index * microsecondsPerFrame / 1000);
+    frame_index++;
+    if (nowMs < scheduledWallMs) {
+      delay(scheduledWallMs - nowMs);
+    }
+    // else: already behind schedule - don't add to the lag
+  }
+
+ protected:
+  bool playback_start_set = false;
+  uint32_t playback_start_ms = 0;
+  uint32_t frame_index = 0;
+};
+
 }  // namespace audio_tools

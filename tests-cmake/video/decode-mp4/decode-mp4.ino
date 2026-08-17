@@ -48,7 +48,7 @@
 #include "SD.h"
 
 // ---- File to play ----
-const char *file_path = "/media/pschatzmann/External/Videos/output176x144-remuxed.mp4";
+const char *file_path = "/media/pschatzmann/External/Videos/output176x144.mp4";
 
 H264Decoder h264Decoder;
 OutputOpenCV videoOut;

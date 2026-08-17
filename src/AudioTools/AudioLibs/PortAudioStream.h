@@ -30,6 +30,17 @@ class PortAudioConfig : public AudioInfo {
 
   bool is_input = false;
   bool is_output = true;
+  /// Size of a single buffer in bytes and the number of buffers - same
+  /// buffer_size/buffer_count pattern used by I2SConfig/MiniAudioConfig.
+  /// Together they define PortAudio's total internal buffering
+  /// (buffer_size * buffer_count bytes, converted to frames per buffer
+  /// internally) - a larger total adds latency but absorbs more jitter
+  /// from a slow/bursty producer (e.g. this project's synchronous
+  /// demux+decode+write loops), reducing "output underflowed" warnings.
+  /// buffer_size 0 (default) leaves it to PortAudio's own default
+  /// (paFramesPerBufferUnspecified).
+  int buffer_size = 0;
+  int buffer_count = 1;
 };
 
 /**
@@ -106,9 +117,17 @@ class PortAudioStream : public AudioStream {
         return false;
       }
 
-      // calculate frames
+      // calculate frames: buffer_size * buffer_count (bytes, buffer_size 0
+      // = let PortAudio/the host API pick its own default) converted to
+      // frames per buffer - a larger total adds latency but absorbs more
+      // jitter from a slow/bursty producer (e.g. this project's
+      // synchronous demux+decode+write loops), reducing "output
+      // underflowed" warnings.
       int buffer_frames =
-          paFramesPerBufferUnspecified;  // buffer_size / bytes / info.channels;
+          info.buffer_size > 0
+              ? (info.buffer_size * info.buffer_count) / bytesPerSample() /
+                    info.channels
+              : paFramesPerBufferUnspecified;
 
       // Open an audio I/O stream.
       LOGD("Pa_OpenDefaultStream");
@@ -160,6 +179,15 @@ class PortAudioStream : public AudioStream {
       if (err == paNoError) {
         LOGD("Pa_WriteStream: %zu", len);
         result = len;
+      } else if (err == paOutputUnderflowed) {
+        // Advisory, not a failure: per PortAudio's own docs, this means
+        // silence was inserted for a gap *before* this call - the data
+        // passed to *this* call was still written. Reporting result=0 here
+        // would make the caller believe the data was rejected and drop it,
+        // permanently losing audio and compounding the underrun that
+        // triggered the warning in the first place.
+        LOGW("PortAudio: output underflowed");
+        result = len;
       } else {
         LOGE("PortAudio error: %s", Pa_GetErrorText(err));
       }
@@ -191,7 +219,6 @@ class PortAudioStream : public AudioStream {
   PaError err = paNoError;
   PortAudioConfig info;
   bool stream_started = false;
-  int buffer_size = 10 * 1024;
 
   int bytesPerSample() {
     // return info.bits_per_sample / 8;

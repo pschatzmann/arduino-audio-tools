@@ -114,7 +114,11 @@ class DemuxerMPG : public Demuxer {
   /// least one full pack_header/system_header/PES header (a few dozen bytes)
   DemuxerMPG(int bufferSize = 1024) { parse_buffer.resize(bufferSize); }
 
-  const char *mime() override { return "video/mpeg"; }
+  /// Provides the container mime
+  const char *mimeVideo() override { return "video/mpeg"; }
+  /// Provides the audio mime - MPEG-1 Program Stream audio is always
+  /// treated as generic MPEG audio here (see getAudioInfo())
+  const char *mime() override { return toMime(AudioFormat::MP3); }
 
   bool begin() override {
     parse_buffer.clear();
@@ -572,7 +576,7 @@ class MuxerMPG : public Muxer {
   }
   MuxerMPG(Print &out) : MuxerMPG() { setOutput(out); }
 
-  const char *mime() override { return "video/mpeg"; }
+  const char *mimeVideo() override { return "video/mpeg"; }
 
   /// Defines the output: e.g. a local File or a network Client
   void setOutput(Print &out) override { p_out = &out; }

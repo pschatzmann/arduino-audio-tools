@@ -110,7 +110,7 @@ Both boards on the same network, Board A serving, Board B consuming.
 
 | # | Server (Board A) | Client (Board B) | Path |
 |---|---|---|---|
-| 3.1 | `avi/http-server-avi/http-server-avi.ino` | `avi/http-client-avi-tft/http-client-avi-tft.ino` | MJPEG-in-AVI end-to-end: `DemuxerAVI` → `MJPEGDecoder` → `OutputTinyGPU` — both ends ✅ compile (verified) |
+| 3.1 | `avi/http-server-avi/http-server-avi.ino` | `avi/http-client-avi-tft/http-client-avi-tft.ino` | MJPEG-in-AVI end-to-end: `DemuxerAVI` → `MJPEGDecoder` → `OutputTinyGPU` — both ends ✅ compile (verified, client 97% flash on esp32s3 — tight, same as 3.2; recheck on Board B's actual FQBN/partition table) |
 | 3.2 | `avi/http-server-avi-h264/http-server-avi-h264.ino` | `avi/http-client-avi-h264/http-client-avi-h264.ino` | H.264-in-AVI end-to-end: `DemuxerAVI` → `H264Decoder` → `OutputTinyGPU` — ✅ client compiles (verified, 97% flash on esp32s3 — tight; recheck on Board B's actual FQBN/partition table) |
 | 3.3 | `mp4/http-server-mp4/http-server-mp4.ino` | `mp4/http-client-mp4/http-client-mp4.ino` | H.264-in-fMP4 end-to-end: `DemuxerMP4` → `H264Decoder` → `OutputTinyGPU` — server new this session (closes the former gap: Board A only muxed to AVI before), both ends ✅ compile (verified) |
 | 3.4 | `mpg/http-server-mpg/http-server-mpg.ino` | `mpg/http-client-mpg/http-client-mpg.ino` | MPEG-1 Program Stream end-to-end: `DemuxerMPG` → `MPGDecoder` → `OutputTinyGPU` — new this session, both ends ✅ compile (verified) |

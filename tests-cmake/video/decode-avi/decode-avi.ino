@@ -1,40 +1,32 @@
 /**
  * @file decode-avi.ino
- * @brief Desktop counterpart of sd-avi-audio-video.ino: plays both the
- * audio and video tracks of a local .avi file, demuxing it live with
- * DemuxerAVI and displaying the result live in a window via OutputOpenCV,
- * while playing the audio track through PortAudio. Same pipeline shape as
- * the embedded version - only the two output classes (display, audio) are
- * swapped for their desktop equivalents: OutputTinyGPU -> OutputOpenCV,
- * I2SStream -> PortAudioStream. SD.h/File keep working unchanged - the
- * Arduino-Emulator's own SD.h shim maps them straight onto real filesystem
- * access.
+ * @brief Desktop counterpart of sd-avi-audio-video.ino: plays a local .avi
+ * file's audio and video tracks, demuxed live with DemuxerAVI. Display/
+ * audio are swapped for their desktop equivalents: OutputTinyGPU ->
+ * OutputOpenCV, I2SStream -> PortAudioStream.
  *
- * Unlike sd-avi-audio-video.ino this decodes MJPEG, not H.264: a plain
- * `ffmpeg -vf scale=... in.mkv out.avi` (no explicit -c:v) defaults to
- * MPEG-4 Part 2 for AVI, which neither H264Decoder nor any other codec in
- * this project decodes - `ffmpeg ... -c:v mjpeg out.avi` is the AVI+codec
- * pairing this project can actually decode without an extra decoder step:
- * OutputOpenCV's default mode already decodes MJPEG itself (cv::imdecode),
- * the same way the older container-avi-movie.cpp in this same tests-cmake
- * tree does. See sd-avi-video.ino's own comment for how to produce an
- * H.264-in-AVI file instead, if you want to exercise H264Decoder here too
- * (swap videoOut for an H264Decoder->OutputOpenCV(RGB565) pair, the same
- * way decode-mp4.ino does).
+ * Decodes MJPEG, not H.264 - OutputOpenCV's default mode decodes MJPEG
+ * itself (cv::imdecode); see sd-avi-video.ino for producing an H.264-in-AVI
+ * file instead. Audio codec is auto-detected via DecoderHelix (multi-format:
+ * WAV/AAC/MP3), fed DemuxerAVI's parsed mime type directly via
+ * multiDecoder.setMimeSource(aviDemuxer).
  *
- * AVI's audio format varies per file (PCM/WAV, AAC, MP3 are all valid
- * 'strf' choices), so this uses DecoderHelix - a multi-format decoder that
- * auto-detects which one it's looking at - rather than assuming a specific
- * codec. The test file's own 'strf' reports audio format tag 0x55 (MP3),
- * which DecoderHelix's bundled MP3DecoderHelix picks up automatically.
+ * File feeding uses CodecCopy rather than StreamCopy; its write() must
+ * retry on a partial accept (DemuxerAVI's parse buffer only has so much
+ * room per call) - dropping the unwritten remainder desyncs the demuxer
+ * from the real chunk boundaries. ContainerAVI.h itself needs enough bytes
+ * buffered before reading a chunk header, else it can read stale/garbage
+ * data past what's been written. Both are fixed at the library level
+ * (CodecCopy.h, ContainerAVI.h) - not sketch-specific workarounds.
  *
- * Verified via a standalone DemuxerAVI parse of the real file: header
- * parses correctly (176x144, MJPG, MP3/48kHz/stereo) and both tracks
- * dispatch continuously once fed past the ~10KB header (17 video + 31
- * audio calls in the first ~20KB alone) - no stalls, no parse errors.
+ * Audio/video sync: DemuxerAVI now defaults to VideoAudioClockSync (mirrors
+ * DemuxerMP4's wall-clock approach) - it waits only the remaining time
+ * until each frame's scheduled instant, instead of a blind delay() that
+ * underruns audio once a frame (JPEG decode + cv::imshow) takes longer
+ * than expected. Audio is written straight through; PortAudioStream's
+ * blocking write sets the real-time pace.
  *
-
- * Pipeline: File -> EncodedAudioOutput (Print bridge) -> DemuxerAVI (demux)
+ * Pipeline: File -> CodecCopy -> DemuxerAVI (demux)
  *   -> EncodedAudioStream (DecoderHelix: WAV/AAC/MP3) -> PortAudioStream (audio)
  *   \-> OutputOpenCV (MJPEG decode + draw) (video)
  *
@@ -50,6 +42,7 @@
 #include "AudioTools/AudioCodecs/CodecHelix.h"
 #include "AudioTools/AudioLibs/PortAudioStream.h"
 #include "AudioTools/Video/OutputOpenCV.h"
+#include "AudioTools/Video/OutputTest.h"
 #include "SD.h"
 
 // ---- File to play ----
@@ -61,10 +54,8 @@ DecoderHelix multiDecoder;
 EncodedAudioStream audioOut(&out, &multiDecoder);  // decodes PCM/AAC/MP3 -> PortAudio
 
 DemuxerAVI aviDemuxer;
-EncodedAudioOutput aviInput(&aviDemuxer);  // bridges raw file bytes -> DemuxerAVI::write()
-
 File file;
-StreamCopy copier(aviInput, file);
+CodecCopy copier(aviDemuxer, file);
 
 void setup() {
   AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
@@ -76,14 +67,18 @@ void setup() {
     exit(1);
   }
 
-  auto cfg = out.defaultConfig(TX_MODE);
-  out.begin(cfg);
+  auto audio_cfg = out.defaultConfig(TX_MODE);
+  audio_cfg.buffer_size = 1024;
+  audio_cfg.buffer_count = 10;
+  out.begin(audio_cfg);
   audioOut.begin();
+  multiDecoder.setMimeSource(aviDemuxer);
   multiDecoder.begin();
 
   aviDemuxer.setOutputAudio(audioOut);
   aviDemuxer.setOutputVideo(videoOut);
-  aviInput.begin();
+  aviDemuxer.begin();
+
 }
 
 void loop() {

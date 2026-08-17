@@ -80,7 +80,11 @@ class DemuxerMP4 : public Demuxer {
 
   ~DemuxerMP4() { freeTracks(); }
 
-  const char* mime() override { return "video/mp4"; }
+  /// Provides the container mime
+  const char* mimeVideo() override { return "video/mp4"; }
+  /// Provides the audio mime (AudioFormat::UNKNOWN/nullptr until the audio
+  /// track's 'stsd' has been parsed - see getAudioInfo())
+  const char* mime() override { return toMime(audio_format); }
 
   bool begin() override {
     freeTracks();
@@ -1165,7 +1169,7 @@ class MuxerMP4 : public Muxer {
   MuxerMP4() { audio_info.format = AudioFormat::AAC; }
   MuxerMP4(Print& out) : MuxerMP4() { setOutput(out); }
 
-  const char* mime() override { return "video/mp4"; }
+  const char* mimeVideo() override { return "video/mp4"; }
 
   /// Defines the output: e.g. a local File or a network Client
   void setOutput(Print& out) override { p_out = &out; }

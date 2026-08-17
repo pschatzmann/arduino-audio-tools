@@ -266,7 +266,7 @@ protected:
  * @copyright GPLv3
  */
 
-class DemuxerAVI : public Demuxer {
+class DemuxerAVI : public Demuxer, public MimeSource {
 public:
   /// @param bufferSize internal parse buffer size.
   ///
@@ -280,7 +280,11 @@ public:
     parse_buffer.resize(bufferSize);
   }
 
-  const char *mime() override { return "video/avi"; }
+  /// Provides the video mime
+  const char *mimeVideo() { return "video/avi"; }
+
+  /// provides the audio mime
+  const char *mime() override { return toMime(audio_info.wFormatTag); }
 
   /// Overrides the automatic decision of whether a synthetic WAV header
   /// (matching the parsed 'strf' audio format) is sent to the audio output
@@ -336,11 +340,20 @@ public:
   virtual size_t write(const uint8_t *data, size_t len) override {
     LOGD("write: %d", (int)len);
     int result = parse_buffer.writeArray((uint8_t *)data, len);
-    if (is_parsing_active) {
+    // Reading any chunk/stream-data header needs up to LIST_HEADER_SIZE (12)
+    // bytes (parseList()/tryParseList() read offsets 0-11; parseAVIStreamData
+    // /parseChunk only need 8) - none of those getInt()/getStr() calls guard
+    // against running past what's actually buffered. Calling parse() with
+    // fewer bytes available reads stale leftover bytes past
+    // available_byte_count (consume() shifts via memmove but never zeroes
+    // the vacated tail), producing a garbage FOURCC/size - exactly the
+    // "unknown subchunk"/huge-bogus-size corruption this avoids by simply
+    // waiting for more data to accumulate instead of parsing prematurely.
+    if (is_parsing_active && parse_buffer.available() >= LIST_HEADER_SIZE) {
       // we expect the first parse to succeed
       if (parse()) {
         // if so we process the parse_buffer
-        while (parse_buffer.available() > 4) {
+        while (parse_buffer.available() >= LIST_HEADER_SIZE) {
           if (!parse())
             break;
         }
@@ -454,7 +467,7 @@ protected:
   /// declared size looks like an unbounded/streamed placeholder.
   uint32_t riff_file_size = 0;
   int video_seconds = 0;
-  VideoAudioSync defaultSynch;
+  VideoAudioClockSync defaultSynch;
   VideoAudioSync *p_synch = &defaultSynch;
 
   bool isCurrentStreamAudio() {
@@ -508,8 +521,8 @@ protected:
       if (isCurrentStreamAudio()) {
         audio_info = *(strf.asAVIAudioFormat(parse_buffer.data()));
         setupAudioInfo();
-        LOGI("audioFormat: %d (%x)", (int)audio_info.wFormatTag,
-             (int)audio_info.wFormatTag);
+        LOGI("audioFormat: %d (%x) - %s", (int)audio_info.wFormatTag,
+             (int)audio_info.wFormatTag, toMime(audio_info.wFormatTag));
         content_types.push_back(Audio);
         consume(strf.size());
       } else if (isCurrentStreamVideo()) {
@@ -581,7 +594,10 @@ protected:
         LOGI("audio:[%d]->[%d]", (int)current_stream_data.start_pos,
              (int)current_stream_data.end_pos);
       } else {
-        LOGW("unknown subchunk at %d", (int)current_pos);
+        // Not fatal - writeData() (SubChunkContinue) skips its payload below.
+        LOGW("unknown subchunk '%s' at %d, skipping %d bytes",
+             current_stream_data.id(), (int)current_pos,
+             (int)current_stream_data.open);
       }
 
     } break;
@@ -724,6 +740,15 @@ protected:
       open_subchunk_len -= to_write;
       cleanupStack();
       consume(to_write);
+    } else {
+      // Unknown subchunk (not audio/video, e.g. an index or padding chunk) -
+      // skip its payload without delivering it anywhere, using the same
+      // word-aligned length already parsed, so the demuxer keeps making
+      // progress instead of getting stuck reprocessing it.
+      LOGD("skipping unknown subchunk %d", (int)to_write);
+      open_subchunk_len -= to_write;
+      cleanupStack();
+      consume(to_write);
     }
   }
 
@@ -814,10 +839,14 @@ protected:
     ParseObject result;
     int size = getInt(4);
     result.set(current_pos, getStr(0, 4), size, AVIStreamData);
-    if (result.isValid()) {
-      processStack(result);
-      consume(8);
-    }
+    // Always consume the 8-byte chunk header, even for a FOURCC we don't
+    // recognize as audio/video (e.g. an OpenDML 'ix00'/'ix01' index chunk or
+    // 'JUNK' padding embedded inside 'movi') - otherwise current_pos never
+    // advances past it and every subsequent parse() call re-reads the same
+    // unknown header forever (writeData() has nothing to consume for it),
+    // stalling the whole demuxer.
+    processStack(result);
+    consume(8);
     return result;
   }
 
@@ -908,7 +937,7 @@ class MuxerAVI : public Muxer {
   MuxerAVI() { audio_info.format = AudioFormat::PCM; }
   MuxerAVI(Print &out) : MuxerAVI() { setOutput(out); }
 
-  const char *mime() override { return "video/avi"; }
+  const char *mimeVideo() override { return "video/avi"; }
 
   /// Defines the output: e.g. a local File or a network Client
   void setOutput(Print &out) override { p_out = &out; }

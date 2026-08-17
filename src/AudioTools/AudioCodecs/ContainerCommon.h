@@ -44,7 +44,7 @@ class Muxer : public VideoOutput {
   /// The container's MIME type (e.g. "video/avi", "video/mp4") - useful
   /// for e.g. an HTTP Content-Type header when streaming the muxed
   /// output to a client.
-  virtual const char *mime() = 0;
+  virtual const char *mimeVideo() = 0;
 
   /// Defines the output: e.g. a local File or a network Client
   virtual void setOutput(Print &out) = 0;
@@ -164,6 +164,8 @@ class MuxerVideoSink : public Print {
 class Demuxer : public ContainerDecoder {
  public:
   /// The container's MIME type (e.g. "video/avi", "video/mp4").
+  virtual const char *mimeVideo() = 0;
+  /// Provides the MIME type of the audio track (e.g. "audio/wav", "audio/aac")
   virtual const char *mime() = 0;
 
   /// Defines the audio output stream - e.g. an EncodedAudioStream
