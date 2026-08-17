@@ -266,7 +266,7 @@ protected:
  * @copyright GPLv3
  */
 
-class DemuxerAVI : public Demuxer, public MimeSource {
+class DemuxerAVI : public Demuxer {
 public:
   /// @param bufferSize internal parse buffer size.
   ///

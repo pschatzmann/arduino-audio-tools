@@ -28,14 +28,32 @@ public:
   void setVideoFormat(VideoFormat format) { video_format = format; }
 
   /// Defines the picture size - only needed (and used) for raw, non-MJPEG
-  /// formats (see class comment). Call before the first write().
+  /// formats (see class comment). Call before the first write(), or use
+  /// setVideoInfoSource() instead to pick it up automatically.
   void setSize(uint16_t width, uint16_t height) {
     this->width = width;
     this->height = height;
   }
 
+  /// Refreshes width/height from 'source' on every write() instead of
+  /// requiring the caller to poll it (e.g. a DemuxerMP4/DemuxerAVI, or a
+  /// decoder like H264Decoder) - removes the need for setSize() once the
+  /// source knows its own dimensions. Deliberately only syncs
+  /// width/height, not 'format': a container-level source (e.g. a
+  /// Demuxer) reports its own encoded codec (H264, MJPEG, ...), which is
+  /// not necessarily what actually gets written here once a decoder sits
+  /// in between - format still comes from setVideoFormat().
+  void setVideoInfoSource(VideoInfoSource &source) { p_info = &source; }
+
   size_t write(const uint8_t *data, size_t len) override {
     ensureWindow();
+    if (p_info != nullptr) {
+      VideoInfo info = p_info->videoInfo();
+      if (info.width > 0 && info.height > 0) {
+        width = info.width;
+        height = info.height;
+      }
+    }
     if (video_format != VideoFormat::MJPEG) {
       displayRaw(data, len);
       return len;
@@ -62,6 +80,7 @@ public:
   }
 
 protected:
+  VideoInfoSource *p_info = nullptr;
   VideoFormat video_format = VideoFormat::MJPEG;
   uint16_t width = 0;
   uint16_t height = 0;

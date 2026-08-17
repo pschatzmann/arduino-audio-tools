@@ -8,6 +8,7 @@
 #include "AudioTools/AudioCodecs/ContainerCommon.h"
 #include "AudioTools/AudioCodecs/M4ACommonDemuxer.h"
 #include "AudioTools/AudioCodecs/MP4Parser.h"
+#include "AudioTools/AudioCodecs/SampleTableStore.h"
 #include "AudioTools/CoreAudio/Buffers.h"
 #include "AudioTools/Video/Video.h"
 
@@ -78,7 +79,51 @@ class DemuxerMP4 : public Demuxer {
     setOutputVideo(video_out);
   }
 
+  /// 'seekSource' wraps the same open file this instance will be fed
+  /// from (e.g. via FileSeekableSource<File>(myFile)) - when set, newly
+  /// discovered tracks' sample tables (stsz/stco/stsc/stts) are backed by
+  /// SourceSeekSampleTableStore instead of the RAM-backed default,
+  /// trading the ~4.5MB (for a feature-length file) RAM cost for small
+  /// repeated seeks back into 'seekSource' during playback. Must stay
+  /// valid and open for the lifetime of playback. See setSeekSource().
+  DemuxerMP4(SeekableSource& seekSource) {
+    setupParser();
+    setSeekSource(seekSource);
+  }
+
+  /// 'spoolFactory' provides a fresh SpoolStorage for each of a track's
+  /// four sample tables as tracks are discovered - when set, backs new
+  /// tracks' sample tables with SpoolFileSampleTableStore instead of the
+  /// RAM-backed default. Unlike the SeekableSource overload above, this
+  /// needs no seekability in the original MP4 source at all (it writes
+  /// its own local copy as data streams past), at the cost of real disk
+  /// I/O for both the writes during 'moov' parsing and the seek+reads
+  /// during 'mdat' playback. See setSpoolStorageFactory().
+  DemuxerMP4(SpoolStorageFactory& spoolFactory) {
+    setupParser();
+    setSpoolStorageFactory(spoolFactory);
+  }
+
   ~DemuxerMP4() { freeTracks(); }
+
+  /// See the SeekableSource constructor overload above - can also be
+  /// called any time before begin(), instead of via the constructor.
+  void setSeekSource(SeekableSource& seekSource) { p_seek_source = &seekSource; }
+
+  /// See the SpoolStorageFactory constructor overload above - can also be
+  /// called any time before begin(), instead of via the constructor.
+  void setSpoolStorageFactory(SpoolStorageFactory& spoolFactory) {
+    p_spool_factory = &spoolFactory;
+  }
+
+  /// Replace the audio/video pacing logic - see VideoAudioBufferedSync
+  /// (the default) and dispatchAudio()/dispatchVideo() for why this
+  /// exists: writing decoded audio straight through, in bursts, starves
+  /// PortAudio (or any other real-time sink) between bursts even though
+  /// the total data rate is sufficient. The default buffers audio into a
+  /// ring buffer and drains it steadily during dispatchVideo()'s wait
+  /// instead of dumping it all at once.
+  void setVideoAudioSync(VideoAudioSync* yourSync) { p_synch = yourSync; }
 
   /// Provides the container mime
   const char* mimeVideo() override { return "video/mp4"; }
@@ -88,12 +133,11 @@ class DemuxerMP4 : public Demuxer {
 
   bool begin() override {
     freeTracks();
-    schedule.clear();
     current_track = nullptr;
     p_video_track = nullptr;
     p_audio_track = nullptr;
-    schedule_index = 0;
-    samples_left_in_entry = 0;
+    current_chunk_track = nullptr;
+    samples_left_in_chunk = 0;
     mdat_seen = false;
     box_accum_active = false;
     box_accum.clear();
@@ -102,6 +146,7 @@ class DemuxerMP4 : public Demuxer {
     sample_buffer_filled = 0;
     current_sample_size = 0;
     current_sample_track = nullptr;
+    dispatched_sample_count = 0;
     is_wav_header_sent = false;
     total_bytes_received = 0;
     playback_start_set = false;
@@ -203,7 +248,13 @@ class DemuxerMP4 : public Demuxer {
 
   /// One track (audio or video) as found in 'moov'
   struct Track {
-    enum class Kind { Unknown, Audio, Video } kind = Kind::Unknown;
+    // Kind alias kept for source compatibility with any existing
+    // Track::Kind::X references - the real type is TrackKind
+    // (SampleTableStore.h), shared with SpoolStorageFactory.
+    using Kind = TrackKind;
+    TrackKind kind = TrackKind::Unknown;
+    /// Guards DemuxerMP4::configureSpoolStores() against running twice.
+    bool spool_configured = false;
 
     // audio
     Codec audio_codec = Codec::Unknown;
@@ -217,21 +268,41 @@ class DemuxerMP4 : public Demuxer {
     bool avc_config_sent = false;
     bool is_hevc_unsupported = false;
 
-    // sample tables, populated while parsing 'moov'
-    Vector<uint32_t> sample_sizes;
+    // sample tables, populated while parsing 'moov' - RAM-backed
+    // (chunked allocation, see ChunkedSampleTableStore) by default; see
+    // DemuxerMP4::setSeekSource()/onTrak() for the alternative that
+    // re-reads entries from the original file on demand instead of
+    // keeping them all resident
+    SampleTableStore<uint32_t>* sample_sizes = new ChunkedSampleTableStore<uint32_t>();
     uint32_t fixed_sample_size = 0;
     uint32_t fixed_sample_count = 0;
-    Vector<StscEntry> stsc;
-    Vector<uint64_t> chunk_offsets;
+    SampleTableStore<StscEntry>* stsc = new ChunkedSampleTableStore<StscEntry>();
+    SampleTableStore<uint64_t>* chunk_offsets = new ChunkedSampleTableStore<uint64_t>();
 
     // playback timing: this track's own 'mdhd' timescale (ticks/second)
     // and its 'stts' time-to-sample table - both needed to turn a sample
     // index into a scheduled presentation time.
     uint32_t timescale = 0;
-    Vector<SttsEntry> stts;
+    SampleTableStore<SttsEntry>* stts = new ChunkedSampleTableStore<SttsEntry>();
+
+    ~Track() {
+      delete sample_sizes;
+      delete stsc;
+      delete chunk_offsets;
+      delete stts;
+    }
 
     // runtime cursor, used while walking the merge schedule
     uint32_t next_sample_index = 0;
+
+    // runtime cursor into chunk_offsets - which chunk of this track is
+    // next up for the incremental cross-track merge (see
+    // DemuxerMP4::advanceChunkIfNeeded())
+    uint32_t next_chunk_index = 0;
+    // runtime cursor into stsc for samplesInChunk() - valid only under
+    // monotonically increasing chunkIndex0 calls (true for the sequential
+    // per-chunk consumption above)
+    uint32_t stsc_cursor = 0;
 
     // runtime cursor for nextPtsTicks(), advanced once per dispatched
     // sample - kept separate from next_sample_index so it stays valid
@@ -242,13 +313,13 @@ class DemuxerMP4 : public Demuxer {
 
     uint32_t sampleSize(uint32_t idx) {
       if (fixed_sample_size > 0) return fixed_sample_size;
-      if (idx >= sample_sizes.size()) return 0;
-      return sample_sizes[idx];
+      if (idx >= sample_sizes->size()) return 0;
+      return sample_sizes->get(idx);
     }
 
     uint32_t sampleCount() {
       return fixed_sample_size > 0 ? fixed_sample_count
-                                   : (uint32_t)sample_sizes.size();
+                                   : (uint32_t)sample_sizes->size();
     }
 
     /// Returns the next sample's scheduled presentation time (in this
@@ -258,10 +329,13 @@ class DemuxerMP4 : public Demuxer {
     /// wasn't parsed.
     uint64_t nextPtsTicks() {
       uint64_t pts = next_pts_ticks;
-      if (stts_entry_idx < stts.size()) {
-        if (stts_entry_remaining == 0)
-          stts_entry_remaining = stts[stts_entry_idx].sample_count;
-        next_pts_ticks += stts[stts_entry_idx].sample_delta;
+      if (stts_entry_idx < stts->size()) {
+        // fetch once - a single call regardless of store implementation
+        // (RAM: cheap either way; source-seek/spool: avoids a second
+        // seek+read for the same entry)
+        SttsEntry entry = stts->get(stts_entry_idx);
+        if (stts_entry_remaining == 0) stts_entry_remaining = entry.sample_count;
+        next_pts_ticks += entry.sample_delta;
         if (stts_entry_remaining > 0) {
           stts_entry_remaining--;
           if (stts_entry_remaining == 0) stts_entry_idx++;
@@ -269,13 +343,6 @@ class DemuxerMP4 : public Demuxer {
       }
       return pts;
     }
-  };
-
-  /// One entry of the merge schedule: "next up is this track's next N
-  /// samples" (N samples = 1 chunk)
-  struct ScheduleEntry {
-    Track* track;
-    uint32_t sample_count;
   };
 
   MP4Parser parser;
@@ -295,10 +362,29 @@ class DemuxerMP4 : public Demuxer {
   }
   Track* p_video_track = nullptr;  ///< first video track found
   Track* p_audio_track = nullptr;  ///< first audio track found
+  /// Set via setSeekSource()/the SeekableSource constructor - when set,
+  /// onTrak() backs new tracks' sample tables with
+  /// SourceSeekSampleTableStore instead of the RAM-backed default.
+  SeekableSource* p_seek_source = nullptr;
+  /// Set via setSpoolStorageFactory()/the SpoolStorageFactory constructor
+  /// - when set, onHdlr() (once a track's kind is known) backs its
+  /// sample tables with SpoolFileSampleTableStore instead of the
+  /// RAM-backed default.
+  SpoolStorageFactory* p_spool_factory = nullptr;
 
-  Vector<ScheduleEntry> schedule;
-  size_t schedule_index = 0;  ///< index into 'schedule'
-  uint32_t samples_left_in_entry = 0;
+  // Audio/video pacing - see setVideoAudioSync(). VideoAudioBufferedSync
+  // (not VideoAudioClockSync, DemuxerAVI's default) because MP4's problem
+  // is bursty audio dispatch, which only a buffering sync actually
+  // addresses - a pure wall-clock sync doesn't touch audio pacing at all.
+  VideoAudioBufferedSync defaultSynch{10 * 1024, -20};
+  VideoAudioSync* p_synch = &defaultSynch;
+
+  // Incremental cross-track merge state (replaces a precomputed
+  // whole-file schedule - see advanceChunkIfNeeded()): which track's
+  // chunk is currently being consumed, and how many of its samples are
+  // still left in that chunk.
+  Track* current_chunk_track = nullptr;
+  uint32_t samples_left_in_chunk = 0;
   bool mdat_seen = false;
 
   Print* p_output_audio = nullptr;
@@ -329,6 +415,7 @@ class DemuxerMP4 : public Demuxer {
   uint32_t current_sample_size = 0;
   Track* current_sample_track = nullptr;
   bool current_sample_is_first_for_track = false;
+  uint32_t dispatched_sample_count = 0;
 
   // scratch accumulation buffer, reused sequentially for stsz/stsc/stco/co64
   // (only one of these is ever "in progress" at a time in a linear parse)
@@ -341,6 +428,9 @@ class DemuxerMP4 : public Demuxer {
   // available()==0 in that case would be misread as a fresh box starting.
   bool box_accum_active = false;
   bool stsz_header_pending = true;
+  /// Absolute file offset of the current box_accum-accumulating box's own
+  /// header - see beginBoxAccum().
+  uint64_t box_start_file_offset = 0;
 
   /// Call at the top of every box_accum-using handler. Returns true the
   /// first time it's called for a given box (i.e. right when accumulation
@@ -351,6 +441,17 @@ class DemuxerMP4 : public Demuxer {
     box_accum.resize(box.size);
     box_accum.clear();
     box_accum_active = true;
+    // box.file_offset is the absolute file offset of *this box's own*
+    // 8-byte header (size+type) - captured only here, on the box's FIRST
+    // delivery, because MP4Parser advances it per incremental delivery
+    // (see startIncrementalBox()/continueIncrementalBox() in
+    // MP4Parser.h): by the time a large box (e.g. a 147K-entry stco) is
+    // fully accumulated and its entries are actually iterated, box.file_
+    // offset reflects only the *last* delivery's start, not the box's -
+    // capturing it here instead of computing it later from
+    // total_bytes_received/box_accum.available() is what makes
+    // SourceSeekSampleTableStore's offsets land correctly.
+    box_start_file_offset = box.file_offset;
     return true;
   }
 
@@ -369,6 +470,22 @@ class DemuxerMP4 : public Demuxer {
     return ((uint64_t)readU32(p) << 32) | readU32(p + 4);
   }
   static uint16_t readU16(const uint8_t* p) { return (p[0] << 8) | p[1]; }
+
+  // decoder callbacks for SourceSeekSampleTableStore - see its comment on
+  // why get() can't just memcpy raw on-disk bytes into T
+  static uint64_t readU32Widened(const uint8_t* p) { return (uint64_t)readU32(p); }
+  static StscEntry readStscEntry(const uint8_t* p) {
+    StscEntry e;
+    e.first_chunk = readU32(p);
+    e.samples_per_chunk = readU32(p + 4);
+    return e;
+  }
+  static SttsEntry readSttsEntry(const uint8_t* p) {
+    SttsEntry e;
+    e.sample_count = readU32(p);
+    e.sample_delta = readU32(p + 4);
+    return e;
+  }
 
   void setupParser() {
     parser.setReference(this);
@@ -491,6 +608,37 @@ class DemuxerMP4 : public Demuxer {
 
   void onTrak() {
     Track* t = new Track();
+    if (p_seek_source != nullptr) {
+      // RAM-backed defaults from Track's own member initializers aren't
+      // needed when a seek source is configured - swap them for
+      // SourceSeekSampleTableStore instead of paying for both.
+      delete t->sample_sizes;
+      t->sample_sizes = new SourceSeekSampleTableStore<uint32_t>(
+          *p_seek_source, sizeof(uint32_t), readU32);
+      delete t->chunk_offsets;
+      // on-disk width (4 bytes for 'stco', 8 for 'co64') isn't known yet
+      // here - defaults to 'stco' width and is corrected in onStco() via
+      // setOnDiskEntrySize() once the actual box type is seen, always
+      // before any get() call (which only happens much later, during
+      // 'mdat' playback).
+      t->chunk_offsets = new SourceSeekSampleTableStore<uint64_t>(
+          *p_seek_source, sizeof(uint32_t), readU32Widened);
+      delete t->stsc;
+      // stsc's on-disk entries are 12 bytes (first_chunk, samples_per_chunk,
+      // sample_description_index - all u32), matching onStsc()'s own i*12
+      // parsing stride below, even though readStscEntry() only decodes the
+      // first two fields into StscEntry. Passing 8 here previously
+      // (2 fields' worth) misaligned every get() past index 0, since
+      // get()'s offset math is entries*onDiskSize - reproducibly corrupted
+      // chunk-to-sample mapping for any track whose stsc has more than one
+      // entry (typically audio, not video, since a video track commonly
+      // only ever needs one stsc entry for the whole file).
+      t->stsc = new SourceSeekSampleTableStore<StscEntry>(
+          *p_seek_source, sizeof(uint32_t) * 3, readStscEntry);
+      delete t->stts;
+      t->stts = new SourceSeekSampleTableStore<SttsEntry>(
+          *p_seek_source, sizeof(uint32_t) * 2, readSttsEntry);
+    }
     tracks.push_back(t);
     current_track = t;
   }
@@ -508,7 +656,35 @@ class DemuxerMP4 : public Demuxer {
       current_track->kind = Track::Kind::Audio;
       if (p_audio_track == nullptr) p_audio_track = current_track;
     }
+    // Spool-backed tables need to know the track's kind (to name/select
+    // spool files) - unlike source-seek, which is set up eagerly in
+    // onTrak() since it doesn't care about kind, this can only happen
+    // here, once 'hdlr' has actually told us what this track is.
+    if (p_spool_factory != nullptr && current_track->kind != Track::Kind::Unknown) {
+      configureSpoolStores(*current_track);
+    }
     endBoxAccum();
+  }
+
+  /// Swaps a track's four sample tables for spool-backed stores, one
+  /// SpoolStorage per table obtained from p_spool_factory. Guarded so it
+  /// only ever runs once per track even if onHdlr() somehow saw its kind
+  /// change or got called again.
+  void configureSpoolStores(Track& t) {
+    if (t.spool_configured) return;
+    t.spool_configured = true;
+    delete t.sample_sizes;
+    t.sample_sizes = new SpoolFileSampleTableStore<uint32_t>(
+        *p_spool_factory->createSpoolStorage(t.kind, SampleTableKind::SampleSizes));
+    delete t.chunk_offsets;
+    t.chunk_offsets = new SpoolFileSampleTableStore<uint64_t>(
+        *p_spool_factory->createSpoolStorage(t.kind, SampleTableKind::ChunkOffsets));
+    delete t.stsc;
+    t.stsc = new SpoolFileSampleTableStore<StscEntry>(
+        *p_spool_factory->createSpoolStorage(t.kind, SampleTableKind::Stsc));
+    delete t.stts;
+    t.stts = new SpoolFileSampleTableStore<SttsEntry>(
+        *p_spool_factory->createSpoolStorage(t.kind, SampleTableKind::Stts));
   }
 
   void onStsd(MP4Parser::Box& box) {
@@ -692,6 +868,29 @@ class DemuxerMP4 : public Demuxer {
     endBoxAccum();
   }
 
+  /// Absolute file offset of the first byte of this box's *payload*
+  /// (box_accum's content), i.e. right after the box's own 8-byte
+  /// size+type header - used, plus each table's own sub-header size on
+  /// top, to tell a SourceSeekSampleTableStore where a table's first
+  /// entry lives on disk.
+  ///
+  /// Deliberately based on box_start_file_offset (captured once, at the
+  /// box's first delivery - see beginBoxAccum()) rather than computed
+  /// from total_bytes_received/box_accum.available() at entry-iteration
+  /// time: MP4Parser advances its own internal fileOffset to the box's
+  /// *end* as soon as an incremental box starts (see
+  /// startIncrementalBox() in MP4Parser.h), before the box is actually
+  /// fully delivered - a formula relying on "bytes received so far" at
+  /// the time entries are iterated (which only happens on the box's
+  /// *last* delivery) silently used the wrong file position for any box
+  /// large enough to span multiple write() calls (which every sample
+  /// table in a feature-length file is) - confirmed by hex-dumping the
+  /// file at the computed offset and finding it landed inside 'mdat',
+  /// nowhere near the actual table.
+  uint64_t boxPayloadFileOffset() {
+    return box_start_file_offset + 8;
+  }
+
   /// 'stts' (time-to-sample): run-length list of {sample_count,
   /// sample_delta} - see Track::nextPtsTicks().
   void onStts(MP4Parser::Box& box) {
@@ -704,14 +903,18 @@ class DemuxerMP4 : public Demuxer {
       return;
     }
     uint32_t entryCount = readU32(box_accum.data() + 4);
+    LOGD("DemuxerMP4: stts entryCount=%u", (unsigned)entryCount);
     const uint8_t* p = box_accum.data() + 8;
     size_t avail = box_accum.available() - 8;
     for (uint32_t i = 0; i < entryCount && (i + 1) * 8 <= avail; i++) {
       SttsEntry e;
       e.sample_count = readU32(p + i * 8);
       e.sample_delta = readU32(p + i * 8 + 4);
-      current_track->stts.push_back(e);
+      // +8: this table's own version/flags+entryCount sub-header
+      current_track->stts->setNextEntryOffset(boxPayloadFileOffset() + 8);
+      current_track->stts->append(e);
     }
+    LOGD("DemuxerMP4: stts parsed %u entries", (unsigned)current_track->stts->size());
     endBoxAccum();
   }
 
@@ -735,26 +938,39 @@ class DemuxerMP4 : public Demuxer {
       Track* t = current_track;
       uint32_t sampleSize = readU32(box_accum.data() + 4);
       uint32_t sampleCount = readU32(box_accum.data() + 8);
+      LOGD("DemuxerMP4: stsz sampleSize=%u sampleCount=%u", (unsigned)sampleSize,
+           (unsigned)sampleCount);
       box_accum.clearArray(12);
       stsz_header_pending = false;
       if (sampleSize != 0) {
         t->fixed_sample_size = sampleSize;
         t->fixed_sample_count = sampleCount;
       }
-      // else: sample_sizes is filled below via push_back, one entry at a
-      // time as bytes arrive - do NOT pre-resize it (Vector::push_back
-      // always appends, unlike BaseBuffer::write() which fills pre-sized
-      // capacity in place)
+      // else: sample_sizes is filled below via append(), one entry at a
+      // time as bytes arrive - do NOT pre-resize it (a RAM-backed store's
+      // Vector::push_back always appends, unlike BaseBuffer::write()
+      // which fills pre-sized capacity in place)
     }
     // incrementally consume per-sample sizes (fixed-size case has none left
     // to read; the table is only present in the box when sampleSize==0)
     if (current_track->fixed_sample_size == 0) {
       while (box_accum.available() >= 4) {
-        current_track->sample_sizes.push_back(readU32(box_accum.data()));
+        // +12: this table's own version/flags+sampleSize+sampleCount
+        // sub-header (already drained from box_accum via clearArray(12)
+        // above, but boxPayloadFileOffset() itself doesn't know that)
+        current_track->sample_sizes->setNextEntryOffset(boxPayloadFileOffset() + 12);
+        current_track->sample_sizes->append(readU32(box_accum.data()));
         box_accum.clearArray(4);
+        size_t n = current_track->sample_sizes->size();
+        if (n % 20000 == 0)
+          LOGD("DemuxerMP4: stsz sample_sizes progress: %u", (unsigned)n);
       }
     }
-    if (box.is_complete) endBoxAccum();
+    if (box.is_complete) {
+      LOGD("DemuxerMP4: stsz complete, %u sample_sizes",
+           (unsigned)current_track->sample_sizes->size());
+      endBoxAccum();
+    }
   }
 
   void onStsc(MP4Parser::Box& box) {
@@ -767,14 +983,18 @@ class DemuxerMP4 : public Demuxer {
       return;
     }
     uint32_t entryCount = readU32(box_accum.data() + 4);
+    LOGD("DemuxerMP4: stsc entryCount=%u", (unsigned)entryCount);
     const uint8_t* p = box_accum.data() + 8;
     size_t avail = box_accum.available() - 8;
     for (uint32_t i = 0; i < entryCount && (i + 1) * 12 <= avail; i++) {
       StscEntry e;
       e.first_chunk = readU32(p + i * 12);
       e.samples_per_chunk = readU32(p + i * 12 + 4);
-      current_track->stsc.push_back(e);
+      // +8: this table's own version/flags+entryCount sub-header
+      current_track->stsc->setNextEntryOffset(boxPayloadFileOffset() + 8);
+      current_track->stsc->append(e);
     }
+    LOGD("DemuxerMP4: stsc parsed %u entries", (unsigned)current_track->stsc->size());
     endBoxAccum();
   }
 
@@ -788,13 +1008,26 @@ class DemuxerMP4 : public Demuxer {
       return;
     }
     uint32_t entryCount = readU32(box_accum.data() + 4);
+    LOGD("DemuxerMP4: %s entryCount=%u", is64 ? "co64" : "stco",
+         (unsigned)entryCount);
+    // no-op unless a SourceSeekSampleTableStore is active (see onTrak());
+    // corrects its assumed on-disk stride if this turns out to be 'co64'
+    // rather than the default 'stco' - always before any get() call.
+    current_track->chunk_offsets->setOnDiskEntrySize(is64 ? 8 : 4);
     const uint8_t* p = box_accum.data() + 8;
     size_t avail = box_accum.available() - 8;
     size_t entrySize = is64 ? 8 : 4;
     for (uint32_t i = 0; i < entryCount && (i + 1) * entrySize <= avail; i++) {
       uint64_t off = is64 ? readU64(p + i * 8) : readU32(p + i * 4);
-      current_track->chunk_offsets.push_back(off);
+      // +8: this table's own version/flags+entryCount sub-header
+      current_track->chunk_offsets->setNextEntryOffset(boxPayloadFileOffset() + 8);
+      current_track->chunk_offsets->append(off);
+      size_t n = current_track->chunk_offsets->size();
+      if (n % 20000 == 0)
+        LOGD("DemuxerMP4: chunk_offsets progress: %u", (unsigned)n);
     }
+    LOGD("DemuxerMP4: stco parsed %u chunk_offsets",
+         (unsigned)current_track->chunk_offsets->size());
     endBoxAccum();
   }
 
@@ -803,88 +1036,78 @@ class DemuxerMP4 : public Demuxer {
   void onMdat(MP4Parser::Box& box) {
     if (!mdat_seen) {
       mdat_seen = true;
-      buildSchedule();
+      LOGI("DemuxerMP4: mdat reached");
     }
     feed(box.data, box.available);
   }
 
-  /// Merge all tracks' (chunk_offset, samples_in_chunk) entries, sorted
-  /// ascending by chunk_offset, into a single consumption order.
-  void buildSchedule() {
-    // (track*, chunk_index, offset) working list
-    struct Item {
-      Track* track;
-      uint32_t chunk_index;
-      uint64_t offset;
-    };
-    Vector<Item> items;
-    for (size_t ti = 0; ti < tracks.size(); ti++) {
-      Track* t = tracks[ti];
-      if (t->kind == Track::Kind::Unknown) continue;
-      if (t->kind == Track::Kind::Video && t != p_video_track) continue;
-      if (t->kind == Track::Kind::Audio && t != p_audio_track) continue;
-      for (size_t ci = 0; ci < t->chunk_offsets.size(); ci++) {
-        items.push_back({t, (uint32_t)ci, t->chunk_offsets[ci]});
-      }
-    }
-    // simple insertion sort by offset (small N: chunk count is typically
-    // well under a few thousand for embedded-relevant clip lengths)
-    for (size_t i = 1; i < items.size(); i++) {
-      Item key = items[i];
-      long j = (long)i - 1;
-      while (j >= 0 && items[j].offset > key.offset) {
-        items[j + 1] = items[j];
-        j--;
-      }
-      items[j + 1] = key;
-    }
-    for (size_t i = 0; i < items.size(); i++) {
-      Track* t = items[i].track;
-      uint32_t samples = samplesInChunk(*t, items[i].chunk_index);
-      if (samples > 0) schedule.push_back({t, samples});
-    }
-    schedule_index = 0;
-    samples_left_in_entry = schedule.size() > 0 ? schedule[0].sample_count : 0;
-  }
-
-  /// Number of samples in the given (0-based) chunk index, per 'stsc'
+  /// Number of samples in the given (0-based) chunk index, per 'stsc'.
+  /// Keeps a per-track cursor rather than rescanning 'stsc' from the start
+  /// every call - correct as long as chunkIndex0 is non-decreasing across
+  /// calls for a given track, which holds for the sequential per-chunk
+  /// consumption in advanceChunkIfNeeded()/feed().
   uint32_t samplesInChunk(Track& t, uint32_t chunkIndex0) {
+    if (t.stsc->size() == 0) return 0;
     uint32_t chunk1 = chunkIndex0 + 1;  // stsc uses 1-based chunk numbers
-    uint32_t result = 0;
-    for (size_t i = 0; i < t.stsc.size(); i++) {
-      if (t.stsc[i].first_chunk <= chunk1) {
-        result = t.stsc[i].samples_per_chunk;
-      } else {
-        break;
-      }
+    while (t.stsc_cursor + 1 < t.stsc->size() &&
+           t.stsc->get(t.stsc_cursor + 1).first_chunk <= chunk1) {
+      t.stsc_cursor++;
     }
-    return result;
+    return t.stsc->get(t.stsc_cursor).samples_per_chunk;
   }
 
-  /// Advances to the next schedule entry once the current one is exhausted
-  void advanceScheduleIfNeeded() {
-    while (samples_left_in_entry == 0 && schedule_index < schedule.size()) {
-      schedule_index++;
-      samples_left_in_entry = schedule_index < schedule.size()
-                                  ? schedule[schedule_index].sample_count
-                                  : 0;
+  /// Picks whichever track's next not-yet-consumed chunk comes first in
+  /// the file (by chunk_offset) and makes it the active chunk - an
+  /// incremental two-way merge instead of precomputing a whole-file
+  /// schedule: each track's own chunk_offsets are already ascending (a
+  /// muxer writes each track's chunks in file order), so the merged
+  /// cross-track order falls out of comparing just the next pending
+  /// chunk_offset per track, in O(1) per call instead of materializing
+  /// and sorting every chunk from every track upfront.
+  void advanceChunkIfNeeded() {
+    while (samples_left_in_chunk == 0) {
+      Track* next = nullptr;
+      uint64_t best_offset = 0;
+      if (p_video_track != nullptr &&
+          p_video_track->next_chunk_index < p_video_track->chunk_offsets->size()) {
+        best_offset = p_video_track->chunk_offsets->get(p_video_track->next_chunk_index);
+        next = p_video_track;
+      }
+      if (p_audio_track != nullptr &&
+          p_audio_track->next_chunk_index < p_audio_track->chunk_offsets->size()) {
+        uint64_t off = p_audio_track->chunk_offsets->get(p_audio_track->next_chunk_index);
+        if (next == nullptr || off < best_offset) {
+          best_offset = off;
+          next = p_audio_track;
+        }
+      }
+      if (next == nullptr) {
+        current_chunk_track = nullptr;  // nothing more expected
+        return;
+      }
+      uint32_t samples = samplesInChunk(*next, next->next_chunk_index);
+      next->next_chunk_index++;
+      if (samples == 0) continue;  // empty chunk entry - keep looking
+      current_chunk_track = next;
+      samples_left_in_chunk = samples;
     }
   }
 
   /// Feeds raw mdat bytes; accumulates until the current sample is
   /// complete, dispatches it, and moves on - possibly switching tracks at
-  /// chunk boundaries per the merge schedule.
+  /// chunk boundaries per the incremental cross-track merge (see
+  /// advanceChunkIfNeeded()).
   void feed(const uint8_t* data, size_t len) {
     size_t pos = 0;
     while (pos < len) {
       if (current_sample_track == nullptr) {
-        advanceScheduleIfNeeded();
-        if (schedule_index >= schedule.size()) return;  // nothing more expected
-        Track* t = schedule[schedule_index].track;
+        advanceChunkIfNeeded();
+        if (current_chunk_track == nullptr) return;  // nothing more expected
+        Track* t = current_chunk_track;
         uint32_t size = t->sampleSize(t->next_sample_index);
         if (size == 0) {
           // no more sizes for this track - stop
-          samples_left_in_entry = 0;
+          samples_left_in_chunk = 0;
           continue;
         }
         current_sample_track = t;
@@ -907,8 +1130,13 @@ class DemuxerMP4 : public Demuxer {
         dispatchSample(*current_sample_track, sample_buffer.data(),
                        sample_buffer_filled, current_sample_is_first_for_track);
         current_sample_track->next_sample_index++;
-        samples_left_in_entry--;
+        samples_left_in_chunk--;
         current_sample_track = nullptr;
+        dispatched_sample_count++;
+        if (dispatched_sample_count % 5000 == 0) {
+          LOGI("DemuxerMP4: dispatched %u samples so far",
+               (unsigned)dispatched_sample_count);
+        }
       }
     }
   }
@@ -931,7 +1159,7 @@ class DemuxerMP4 : public Demuxer {
         t.is_hevc_unsupported)
       return;
 
-    if (t.timescale > 0 && !t.stts.empty()) {
+    if (t.timescale > 0 && t.stts->size() > 0) {
       uint32_t scheduledMs = (uint32_t)((ptsTicks * 1000) / t.timescale);
       uint32_t nowMs = millis();
       if (!playback_start_set) {
@@ -944,8 +1172,15 @@ class DemuxerMP4 : public Demuxer {
              (unsigned)(nowMs - scheduledWallMs));
         return;
       } else if (nowMs < scheduledWallMs) {
-        LOGI("DemuxerMP4: video frame %u ms early",
-             (unsigned)(scheduledWallMs - nowMs));
+        // Spend the slack draining buffered audio steadily instead of
+        // idling (or, previously, doing nothing at all and letting the
+        // pipeline race ahead) - this is what actually fixes bursty
+        // audio delivery; see setVideoAudioSync(). Capped at 200ms so a
+        // very early frame (e.g. right after a moov-parsing-driven
+        // pause) can't stall video for unreasonably long.
+        uint32_t waitMs = scheduledWallMs - nowMs;
+        LOGI("DemuxerMP4: video frame %u ms early", (unsigned)waitMs);
+        p_synch->delayVideoFrame((int32_t)(std::min(waitMs, 200u) * 1000), 0);
       }
     }
 
@@ -992,17 +1227,20 @@ class DemuxerMP4 : public Demuxer {
 
   void dispatchAudio(Track& t, const uint8_t* data, size_t size, bool isFirst) {
     if (p_output_audio == nullptr) return;
+    // routed through p_synch instead of writing p_output_audio directly -
+    // see setVideoAudioSync(): the default buffers this instead of
+    // handing it straight to a (likely real-time) sink in bursts.
     if (t.audio_codec == Codec::AAC) {
       uint8_t adts[7];
       writeAdtsHeader(adts, t.aacProfile, t.sampleRateIdx, t.channelCfg,
                       (int)size);
-      p_output_audio->write(adts, sizeof(adts));
-      p_output_audio->write(data, size);
+      p_synch->writeAudio(p_output_audio, adts, sizeof(adts));
+      p_synch->writeAudio(p_output_audio, const_cast<uint8_t*>(data), size);
     } else {
       // ALAC (magic cookie is exposed via audioALACMagicCookie() for the
       // caller to configure their own decoder with) and any other codec:
       // raw payload as-is.
-      p_output_audio->write(data, size);
+      p_synch->writeAudio(p_output_audio, const_cast<uint8_t*>(data), size);
     }
   }
 

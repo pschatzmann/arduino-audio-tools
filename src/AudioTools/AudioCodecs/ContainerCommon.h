@@ -161,12 +161,15 @@ class MuxerVideoSink : public Print {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class Demuxer : public ContainerDecoder {
+class Demuxer : public ContainerDecoder, public MimeSource, public VideoInfoSource {
  public:
   /// The container's MIME type (e.g. "video/avi", "video/mp4").
   virtual const char *mimeVideo() = 0;
-  /// Provides the MIME type of the audio track (e.g. "audio/wav", "audio/aac")
-  virtual const char *mime() = 0;
+  /// Provides the MIME type of the audio track (e.g. "audio/wav",
+  /// "audio/aac") - fulfills MimeSource::mime(), so any Demuxer can be
+  /// passed directly to e.g. MultiDecoder::setMimeSource() to hint the
+  /// audio codec instead of relying on sniffing the raw byte stream.
+  const char *mime() override = 0;
 
   /// Defines the audio output stream - e.g. an EncodedAudioStream
   /// wrapping an AudioDecoder that matches the track's codec, or any
@@ -178,6 +181,14 @@ class Demuxer : public ContainerDecoder {
 
   /// Common video info (width/height/format/frame_size/total_file_size)
   virtual VideoInfo getVideoInfo() = 0;
+  /// Fulfills VideoInfoSource::videoInfo(), so any Demuxer can be passed
+  /// directly to e.g. OutputOpenCV::setVideoInfoSource() - note the
+  /// reported 'format' is the *container's* codec (e.g. H264), not
+  /// necessarily what ends up written to a raw-picture VideoOutput/Print
+  /// (that depends on whatever decoder sits between the demuxer and the
+  /// output); consumers that care about the decoded format should still
+  /// set it explicitly and rely on this only for width/height.
+  VideoInfo videoInfo() override { return getVideoInfo(); }
   /// Common audio info (sample_rate/channels/bits_per_sample), extended
   /// with the parsed codec format tag.
   virtual AudioInfoFormat getAudioInfo() = 0;

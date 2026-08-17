@@ -71,9 +71,9 @@ void setup() {
   audio_cfg.buffer_size = 1024;
   audio_cfg.buffer_count = 10;
   out.begin(audio_cfg);
-  audioOut.begin();
+
   multiDecoder.setMimeSource(aviDemuxer);
-  multiDecoder.begin();
+  audioOut.begin();
 
   aviDemuxer.setOutputAudio(audioOut);
   aviDemuxer.setOutputVideo(videoOut);

@@ -41,7 +41,7 @@
  */
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/ContainerMP4.h"
-#include "AudioTools/AudioCodecs/CodecAACHelix.h"
+#include "AudioTools/AudioCodecs/CodecHelix.h"
 #include "AudioTools/AudioLibs/PortAudioStream.h"
 #include "AudioTools/Video/CodecH264.h"
 #include "AudioTools/Video/OutputOpenCV.h"
@@ -50,33 +50,14 @@
 // ---- File to play ----
 const char *file_path = "/media/pschatzmann/External/Videos/output176x144.mp4";
 
-H264Decoder h264Decoder;
 OutputOpenCV videoOut;
+H264Decoder h264Decoder(videoOut);
 PortAudioStream out;
-AACDecoderHelix aacDecoder;
-EncodedAudioStream audioOut(&out, &aacDecoder);  // decodes AAC -> PortAudio
-
+DecoderHelix multiDecoder;
+EncodedAudioStream audioOut(&out, &multiDecoder);  // decodes AAC -> PortAudio
 DemuxerMP4 mp4Demuxer;
-EncodedAudioOutput mp4Input(&mp4Demuxer);  // bridges raw file bytes -> DemuxerMP4::write()
-
 File file;
-StreamCopy copier(mp4Input, file);
-
-// OutputOpenCV needs setSize() before it can display a raw (non-MJPEG)
-// frame - unlike OutputTinyGPU/OutputTFT_eSPI it has no setVideoInfoSource()
-// dynamic-binding, so this polls DemuxerMP4's parsed VideoInfo once per
-// loop() and configures it as soon as the video track's sample entry has
-// been parsed.
-bool video_size_set = false;
-void configureVideoSizeOnceKnown() {
-  if (video_size_set) return;
-  VideoInfo vi = mp4Demuxer.getVideoInfo();
-  if (vi.width > 0 && vi.height > 0) {
-    videoOut.setVideoFormat(VideoFormat::RGB565);
-    videoOut.setSize(vi.width, vi.height);
-    video_size_set = true;
-  }
-}
+CodecCopy copier(mp4Demuxer, file);
 
 void setup() {
   AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
@@ -88,22 +69,34 @@ void setup() {
     exit(1);
   }
 
-  auto cfg = out.defaultConfig(TX_MODE);
-  out.begin(cfg);
+  /// Define audio mime
+  multiDecoder.setMimeSource(mp4Demuxer);
+
+  // OutputOpenCV needs a picture size before it can display a raw
+  // (non-MJPEG) frame - pulls width/height from DemuxerMP4 automatically
+  // on every write() instead of polling for it in loop().
+  videoOut.setVideoFormat(VideoFormat::RGB565);
+  videoOut.setVideoInfoSource(mp4Demuxer);
+
+  // PortAudioStream
+  auto audio_cfg = out.defaultConfig(TX_MODE);
+  audio_cfg.buffer_size = 1024;
+  audio_cfg.buffer_count = 10;
+  out.begin(audio_cfg);
+
+  // EncodedAudioStream
   audioOut.begin();
 
-  h264Decoder.setOutput(videoOut);
-  h264Decoder.setVideoFormat(VideoFormat::RGB565);
-  h264Decoder.begin();
-
+  // DemuxerMP4
   mp4Demuxer.setOutputAudio(audioOut);
   mp4Demuxer.setOutputVideo(h264Decoder);
-  mp4Input.begin();
+  mp4Demuxer.begin();
 }
 
 void loop() {
   if (file && copier.copy()) {
-    configureVideoSizeOnceKnown();
+    // no-op - OutputOpenCV pulls its size from mp4Demuxer via
+    // setVideoInfoSource(), no manual polling needed here anymore
   } else {
     Serial.println("Done");
     file.close();

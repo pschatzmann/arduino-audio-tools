@@ -251,19 +251,43 @@ class VideoAudioBufferedSync : public VideoAudioSync {
       p_out->write(audio, bytes_to_play);
     }
     size_t written = ring_buffer.writeArray(data, size);
-    assert(written = size);
+    assert(written == size);
   }
 
   /// Adds a delay after playing a frame to process with the correct frame rate.
   /// If the playing is too slow we return the mod to select the frames
   void delayVideoFrame(int32_t microsecondsPerFrame, uint32_t time_used_ms) {
+    // p_out is only ever set inside writeAudio() - if this is called
+    // before any audio has been written yet (e.g. a file's first few
+    // dispatched chunks happen to be video-only), there's nothing to
+    // drain and no sink to drain it to; skip the wait entirely rather
+    // than dereferencing a null p_out in the loop below.
+    if (p_out == nullptr) return;
     uint32_t delay_ms = microsecondsPerFrame / 1000;
     uint64_t timeout = millis() + delay_ms + correction_ms;
-    uint8_t audio[8];
-    // output audio
+
+    // 'p_out' here is the same Print DemuxerMP4::setOutputAudio() was
+    // given - for an encoded codec (AAC, MP3, ...) that's a decoder's
+    // input, not a raw PCM sink, so what's buffered in ring_buffer is
+    // still-encoded bitstream bytes. Draining it 8 bytes at a time
+    // (the previous approach) fed those bytes into the decoder in
+    // fragments far smaller than one ADTS/frame boundary, repeated
+    // thousands of times a second - reproducibly desynced libhelix's AAC
+    // decoder on a real HE-AAC/SBR file, sending it down a path that
+    // computed garbage (negative) band-count parameters and hung
+    // indefinitely inside its SBR patch-building code. Draining the
+    // current backlog in one shot (in generously-sized gulps, not
+    // byte-by-byte) keeps writes closer to how the bytes were originally
+    // framed by dispatchAudio() and avoided the hang in testing; only the
+    // wait for the remaining window is spun out afterwards, with no
+    // further writes into the decoder.
+    uint8_t audio[512];
+    int n;
+    while ((n = ring_buffer.readArray(audio, sizeof(audio))) > 0) {
+      p_out->write(audio, n);
+    }
     while (millis() < timeout) {
-      ring_buffer.readArray(audio, 8);
-      p_out->write(audio, 8);
+      delay(1);
     }
   }
 
