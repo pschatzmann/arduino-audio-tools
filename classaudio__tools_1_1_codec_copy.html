@@ -75,6 +75,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_codec_copy-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">CodecCopy Class Reference</div></div>
@@ -91,6 +92,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aecb44a6d385121be2179187d45520331"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8b25927df173fb6030111ecf0895e4d" id="r_af8b25927df173fb6030111ecf0895e4d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_codec_copy.html#af8b25927df173fb6030111ecf0895e4d">copy</a> (int len)</td></tr>
 <tr class="separator:af8b25927df173fb6030111ecf0895e4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:ae9bebfc3501626ca99535fa770fe8b80" id="r_ae9bebfc3501626ca99535fa770fe8b80"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_codec_copy.html#ae9bebfc3501626ca99535fa770fe8b80">writeAll</a> (uint8_t *data, size_t len)</td></tr>
+<tr class="separator:ae9bebfc3501626ca99535fa770fe8b80"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -193,6 +199,45 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae9bebfc3501626ca99535fa770fe8b80" name="ae9bebfc3501626ca99535fa770fe8b80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9bebfc3501626ca99535fa770fe8b80">&#9670;&#160;</a></span>writeAll()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t writeAll </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>write() (e.g. DemuxerAVI/DemuxerMP4/DemuxerMPG) may only accept part of a buffer in one call when its internal parse buffer is momentarily full</p><ul>
+<li>retry with the remainder (parsing that happens inside write() itself drains it further) instead of silently dropping the unwritten tail, which desyncs the demuxer from the real byte stream and corrupts parsing further in. Only bails on a genuine stall (write() returns 0). </li>
+</ul>
 
 </div>
 </div>

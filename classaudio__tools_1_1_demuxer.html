@@ -134,8 +134,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> update is active.  <br /></td></tr>
 <tr class="separator:a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae63fc244d9e1605f728c7f089d861524" id="r_ae63fc244d9e1605f728c7f089d861524"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer.html#ae63fc244d9e1605f728c7f089d861524">mime</a> ()=0</td></tr>
-<tr class="memdesc:ae63fc244d9e1605f728c7f089d861524"><td class="mdescLeft">&#160;</td><td class="mdescRight">The container's MIME type (e.g. "video/avi", "video/mp4").  <br /></td></tr>
+<tr class="memdesc:ae63fc244d9e1605f728c7f089d861524"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the MIME type of the audio track (e.g. "audio/wav", "audio/aac")  <br /></td></tr>
 <tr class="separator:ae63fc244d9e1605f728c7f089d861524"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aced75ddf7c3d9219e473a495bce41204" id="r_aced75ddf7c3d9219e473a495bce41204"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer.html#aced75ddf7c3d9219e473a495bce41204">mimeVideo</a> ()=0</td></tr>
+<tr class="memdesc:aced75ddf7c3d9219e473a495bce41204"><td class="mdescLeft">&#160;</td><td class="mdescRight">The container's MIME type (e.g. "video/avi", "video/mp4").  <br /></td></tr>
+<tr class="separator:aced75ddf7c3d9219e473a495bce41204"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac496133545cba767b45c6ce8df3587e7" id="r_ac496133545cba767b45c6ce8df3587e7"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_writer.html#ac496133545cba767b45c6ce8df3587e7">operator bool</a> ()=0</td></tr>
 <tr class="separator:ac496133545cba767b45c6ce8df3587e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5b1cdb06807ff2dc37acbaff63410b9" id="r_aa5b1cdb06807ff2dc37acbaff63410b9"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#aa5b1cdb06807ff2dc37acbaff63410b9">removeNotifyAudioChange</a> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;bi)</td></tr>
@@ -535,9 +538,38 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>The container's MIME type (e.g. "video/avi", "video/mp4"). </p>
+<p>Provides the MIME type of the audio track (e.g. "audio/wav", "audio/aac") </p>
 
 <p>Implemented in <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#ab233b9d1b86c9d2a2c009d6473aa8938">DemuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#ab233b9d1b86c9d2a2c009d6473aa8938">DemuxerMP4</a>, and <a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html#ab233b9d1b86c9d2a2c009d6473aa8938">DemuxerMPG</a>.</p>
+
+</div>
+</div>
+<a id="aced75ddf7c3d9219e473a495bce41204" name="aced75ddf7c3d9219e473a495bce41204"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aced75ddf7c3d9219e473a495bce41204">&#9670;&#160;</a></span>mimeVideo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const char * mimeVideo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The container's MIME type (e.g. "video/avi", "video/mp4"). </p>
+
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#a50ba09f6717094bf182e9ee5052370ea">DemuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#ae125d7c8cee8961766e6e5486aa860de">DemuxerMP4</a>, and <a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html#ae125d7c8cee8961766e6e5486aa860de">DemuxerMPG</a>.</p>
 
 </div>
 </div>

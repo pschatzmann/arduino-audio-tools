@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['e_0',['e',['../structaudio__tools_1_1_echo_state.html#a72d969434f82c5acbf1435c7c2662242',1,'audio_tools::EchoState::e'],['../structaudio__tools_1_1_echo_state.html#a556a9563ae7d5f0ab9d538d3c32e2d1e',1,'audio_tools::EchoState::E']]],
+  ['e_0',['e',['../structaudio__tools_1_1_echo_state.html#a556a9563ae7d5f0ab9d538d3c32e2d1e',1,'audio_tools::EchoState::E'],['../structaudio__tools_1_1_echo_state.html#a72d969434f82c5acbf1435c7c2662242',1,'audio_tools::EchoState::e']]],
   ['effect_5fvalue_1',['effect_value',['../classaudio__tools_1_1_pitch_shift.html#aadbca1011884df66c3dcca2932eef2d8',1,'audio_tools::PitchShift']]],
   ['effectgain_2',['effectGain',['../classaudio__tools_1_1_simple_flanger.html#aefc0405dcc62ff631b2ca54f74da93a0',1,'audio_tools::SimpleFlanger']]],
   ['effects_3',['effects',['../classaudio__tools_1_1_audio_effect_common.html#a582a43eb372fcf56ab01bb61996c150e',1,'audio_tools::AudioEffectCommon::effects'],['../classaudio__tools_1_1_audio_effects.html#aabf82b9d0d68dbcf9120221076b05b01',1,'audio_tools::AudioEffects::effects'],['../classaudio__tools_1_1_audio_effect_stream_t.html#aabf82b9d0d68dbcf9120221076b05b01',1,'audio_tools::AudioEffectStreamT::effects'],['../classaudio__tools_1_1_default_synthesizer_channel.html#aabf82b9d0d68dbcf9120221076b05b01',1,'audio_tools::DefaultSynthesizerChannel::effects']]],

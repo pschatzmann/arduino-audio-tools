@@ -137,6 +137,10 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:aa65c89fa8336bfdc4f8d916d9d415a9f" id="r_aa65c89fa8336bfdc4f8d916d9d415a9f"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> = <a class="el" href="_audio_tools_config_8h.html#a006e76f29a44f81e1166abae76a2e3f8">DEFAULT_BITS_PER_SAMPLE</a></td></tr>
 <tr class="memdesc:aa65c89fa8336bfdc4f8d916d9d415a9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of bits per sample (int16_t = 16 bits)  <br /></td></tr>
 <tr class="separator:aa65c89fa8336bfdc4f8d916d9d415a9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1604207c5fe93cc8e5d75e1e1ef1ee46" id="r_a1604207c5fe93cc8e5d75e1e1ef1ee46"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_port_audio_config.html#a1604207c5fe93cc8e5d75e1e1ef1ee46">buffer_count</a> = 1</td></tr>
+<tr class="separator:a1604207c5fe93cc8e5d75e1e1ef1ee46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af22ff4ab7a026e6c3b4b08eafb2df027" id="r_af22ff4ab7a026e6c3b4b08eafb2df027"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_port_audio_config.html#af22ff4ab7a026e6c3b4b08eafb2df027">buffer_size</a> = 0</td></tr>
+<tr class="separator:af22ff4ab7a026e6c3b4b08eafb2df027"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ac7822956f57069d76da865d6b33c55" id="r_a1ac7822956f57069d76da865d6b33c55"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> = <a class="el" href="_audio_tools_config_8h.html#a56c31d7b1dab0427b51c034e798b4722">DEFAULT_CHANNELS</a></td></tr>
 <tr class="memdesc:a1ac7822956f57069d76da865d6b33c55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of channels: 2=stereo, 1=mono.  <br /></td></tr>
 <tr class="separator:a1ac7822956f57069d76da865d6b33c55"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -527,6 +531,35 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Number of bits per sample (int16_t = 16 bits) </p>
+
+</div>
+</div>
+<a id="a1604207c5fe93cc8e5d75e1e1ef1ee46" name="a1604207c5fe93cc8e5d75e1e1ef1ee46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1604207c5fe93cc8e5d75e1e1ef1ee46">&#9670;&#160;</a></span>buffer_count</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int buffer_count = 1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af22ff4ab7a026e6c3b4b08eafb2df027" name="af22ff4ab7a026e6c3b4b08eafb2df027"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af22ff4ab7a026e6c3b4b08eafb2df027">&#9670;&#160;</a></span>buffer_size</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int buffer_size = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Size of a single buffer in bytes and the number of buffers - same buffer_size/buffer_count pattern used by I2SConfig/MiniAudioConfig. Together they define PortAudio's total internal buffering (buffer_size * buffer_count bytes, converted to frames per buffer internally) - a larger total adds latency but absorbs more jitter from a slow/bursty producer (e.g. this project's synchronous demux+decode+write loops), reducing "output underflowed" warnings. buffer_size 0 (default) leaves it to PortAudio's own default (paFramesPerBufferUnspecified). </p>
 
 </div>
 </div>

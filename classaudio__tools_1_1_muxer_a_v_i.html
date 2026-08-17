@@ -138,8 +138,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac6cd68f2b6ec1e5a134411abad010ead"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee186f7c22ebcdab3091cef0d4396ac5" id="r_aee186f7c22ebcdab3091cef0d4396ac5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_muxer_video_config.html">MuxerVideoConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#aee186f7c22ebcdab3091cef0d4396ac5">getVideoInfo</a> () override</td></tr>
 <tr class="separator:aee186f7c22ebcdab3091cef0d4396ac5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab233b9d1b86c9d2a2c009d6473aa8938" id="r_ab233b9d1b86c9d2a2c009d6473aa8938"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#ab233b9d1b86c9d2a2c009d6473aa8938">mime</a> () override</td></tr>
-<tr class="separator:ab233b9d1b86c9d2a2c009d6473aa8938"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae125d7c8cee8961766e6e5486aa860de" id="r_ae125d7c8cee8961766e6e5486aa860de"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#ae125d7c8cee8961766e6e5486aa860de">mimeVideo</a> () override</td></tr>
+<tr class="separator:ae125d7c8cee8961766e6e5486aa860de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a90622bd78258a36bbcf63426b28307ac" id="r_a90622bd78258a36bbcf63426b28307ac"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a90622bd78258a36bbcf63426b28307ac">operator bool</a> () override</td></tr>
 <tr class="separator:a90622bd78258a36bbcf63426b28307ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b96e47d1d1bf3dc49d33db187454702" id="r_a7b96e47d1d1bf3dc49d33db187454702"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a7b96e47d1d1bf3dc49d33db187454702">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_info_format.html">AudioInfoFormat</a> info) override</td></tr>
@@ -257,7 +257,7 @@ Static Protected Attributes</h2></td></tr>
 <div class="line">avi.begin();</div>
 <div class="line"><span class="comment">// for each encoded H.264 access unit:</span></div>
 <div class="line">avi.addVideoFrame(h264_data, h264_len);</div>
-<div class="ttc" id="aclassaudio__tools_1_1_muxer_a_v_i_html"><div class="ttname"><a href="classaudio__tools_1_1_muxer_a_v_i.html">audio_tools::MuxerAVI</a></div><div class="ttdoc">Configuration for the (single) video track written by MuxerAVI.</div><div class="ttdef"><b>Definition</b> ContainerAVI.h:906</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_muxer_a_v_i_html"><div class="ttname"><a href="classaudio__tools_1_1_muxer_a_v_i.html">audio_tools::MuxerAVI</a></div><div class="ttdoc">Configuration for the (single) video track written by MuxerAVI.</div><div class="ttdef"><b>Definition</b> ContainerAVI.h:935</div></div>
 <div class="ttc" id="agroup__video_html_gga216a5d43d2a518325c84f100ed7735a5a8ba63b54352f7053b055235a9ec7ac09"><div class="ttname"><a href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a8ba63b54352f7053b055235a9ec7ac09">audio_tools::VideoFormat::H264</a></div><div class="ttdeci">@ H264</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_muxer_video_config_html"><div class="ttname"><a href="structaudio__tools_1_1_muxer_video_config.html">audio_tools::MuxerVideoConfig</a></div><div class="ttdoc">Shared video track configuration for muxers (MuxerAVI, MuxerMP4) - call before begin().</div><div class="ttdef"><b>Definition</b> ContainerCommon.h:11</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_muxer_video_config_html_a4f50e96f11c68d45dc109185efe011ad"><div class="ttname"><a href="structaudio__tools_1_1_muxer_video_config.html#a4f50e96f11c68d45dc109185efe011ad">audio_tools::MuxerVideoConfig::fps</a></div><div class="ttdeci">float fps</div><div class="ttdef"><b>Definition</b> ContainerCommon.h:14</div></div>
@@ -1033,8 +1033,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ab233b9d1b86c9d2a2c009d6473aa8938" name="ab233b9d1b86c9d2a2c009d6473aa8938"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab233b9d1b86c9d2a2c009d6473aa8938">&#9670;&#160;</a></span>mime()</h2>
+<a id="ae125d7c8cee8961766e6e5486aa860de" name="ae125d7c8cee8961766e6e5486aa860de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae125d7c8cee8961766e6e5486aa860de">&#9670;&#160;</a></span>mimeVideo()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1043,7 +1043,7 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const char * mime </td>
+          <td class="memname">const char * mimeVideo </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1057,7 +1057,7 @@ Static Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>The container's MIME type (e.g. "video/avi", "video/mp4") - useful for e.g. an HTTP Content-Type header when streaming the muxed output to a client. </p>
 
-<p>Implements <a class="el" href="classaudio__tools_1_1_muxer.html#ae63fc244d9e1605f728c7f089d861524">Muxer</a>.</p>
+<p>Implements <a class="el" href="classaudio__tools_1_1_muxer.html#aced75ddf7c3d9219e473a495bce41204">Muxer</a>.</p>
 
 </div>
 </div>

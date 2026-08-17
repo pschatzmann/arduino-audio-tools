@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: Member List</title>
+<title>arduino-audio-tools: src/AudioTools/Video/OutputTest.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,24 +69,33 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_codec_copy.html">CodecCopy</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_5b72a003bd77e493bea652d681fed874.html">Video</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="headertitle"><div class="title">CodecCopy Member List</div></div>
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a>  </div>
+  <div class="headertitle"><div class="title">OutputTest.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p>This is the complete list of members for <a class="el" href="classaudio__tools_1_1_codec_copy.html">CodecCopy</a>, including all inherited members.</p>
-<table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="classaudio__tools_1_1_codec_copy.html#a8856616e3fa45184d60513cefb82e649">buffer_len</a></td><td class="entry"><a class="el" href="classaudio__tools_1_1_codec_copy.html">CodecCopy</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classaudio__tools_1_1_codec_copy.html#a186bcea5e7a6758a8bf965b784026685">CodecCopy</a>(AudioWriter &amp;to, Stream &amp;from, int len=1024)</td><td class="entry"><a class="el" href="classaudio__tools_1_1_codec_copy.html">CodecCopy</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classaudio__tools_1_1_codec_copy.html#aecb44a6d385121be2179187d45520331">copy</a>()</td><td class="entry"><a class="el" href="classaudio__tools_1_1_codec_copy.html">CodecCopy</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classaudio__tools_1_1_codec_copy.html#af8b25927df173fb6030111ecf0895e4d">copy</a>(int len)</td><td class="entry"><a class="el" href="classaudio__tools_1_1_codec_copy.html">CodecCopy</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classaudio__tools_1_1_codec_copy.html#a2aba0f6e1d4d655d35ee4168b9e49f0b">p_in</a></td><td class="entry"><a class="el" href="classaudio__tools_1_1_codec_copy.html">CodecCopy</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classaudio__tools_1_1_codec_copy.html#ad266adcac58264b32e46e2759109278e">p_out</a></td><td class="entry"><a class="el" href="classaudio__tools_1_1_codec_copy.html">CodecCopy</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classaudio__tools_1_1_codec_copy.html#ae9bebfc3501626ca99535fa770fe8b80">writeAll</a>(uint8_t *data, size_t len)</td><td class="entry"><a class="el" href="classaudio__tools_1_1_codec_copy.html">CodecCopy</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">protected</span></td></tr>
-</table></div><!-- contents -->
+<div class="textblock"><code>#include &quot;Print.h&quot;</code><br />
+</div>
+<p><a href="_output_test_8h_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_test.html">OutputTest</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_print.html">Print</a> sink that logs the length and a hex preview (first/last 10 bytes) of every <a class="el" href="classaudio__tools_1_1_output_test.html#a1e40195a444e7f20508961cfeacc9b04">write()</a> call instead of actually outputting the data - useful for verifying that video/audio codecs and containers are feeding plausible data without needing a real display or audio device.  <a href="classaudio__tools_1_1_output_test.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespaceaudio__tools" id="r_namespaceaudio__tools"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></td></tr>
+<tr class="memdesc:namespaceaudio__tools"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic Implementation of sound input and output for desktop environments using portaudio. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8

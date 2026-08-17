@@ -63,7 +63,7 @@ var searchData=
   ['defaultchannel_60',['defaultChannel',['../classaudio__tools_1_1_synthesizer.html#a72967f8a0f8a84e11e48371626ba46dd',1,'audio_tools::Synthesizer']]],
   ['defaultchunkoffsets_61',['defaultChunkOffsets',['../classaudio__tools_1_1_m4_a_common_demuxer_1_1_sample_extractor.html#a78e23f498b8a42e5fa67e9f979e11386',1,'audio_tools::M4ACommonDemuxer::SampleExtractor']]],
   ['defaultsamplesizes_62',['defaultSampleSizes',['../classaudio__tools_1_1_m4_a_common_demuxer_1_1_sample_extractor.html#a7abe4c0140b91477c77d300d0017d2a4',1,'audio_tools::M4ACommonDemuxer::SampleExtractor']]],
-  ['defaultsynch_63',['defaultSynch',['../classaudio__tools_1_1_demuxer_a_v_i.html#aea79e213de06fb09dee6d675b41dd1d3',1,'audio_tools::DemuxerAVI']]],
+  ['defaultsynch_63',['defaultSynch',['../classaudio__tools_1_1_demuxer_a_v_i.html#a304f03ff3471b3000f344ed724dac214',1,'audio_tools::DemuxerAVI']]],
   ['delay_5fafter_5ffailed_5fwrite_5fms_64',['delay_after_failed_write_ms',['../structaudio__tools_1_1_e_s_p_now_stream_config.html#a10331a40abe86f76fb46956d63203988',1,'audio_tools::ESPNowStreamConfig']]],
   ['delay_5fafter_5fupdating_5fmac_5fms_65',['delay_after_updating_mac_ms',['../structaudio__tools_1_1_e_s_p_now_stream_config.html#a68192659c24a1a960aeca2fc1dc517a1',1,'audio_tools::ESPNowStreamConfig']]],
   ['delay_5fif_5ffull_66',['delay_if_full',['../classaudio__tools_1_1_audio_player.html#a0d0764efde8bf28e259cca58b2ac10a8',1,'audio_tools::AudioPlayer']]],

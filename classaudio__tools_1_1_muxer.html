@@ -127,8 +127,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3b73e8501728e887aec7399c3cfee14d" id="r_a3b73e8501728e887aec7399c3cfee14d"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structaudio__tools_1_1_muxer_video_config.html">MuxerVideoConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer.html#a3b73e8501728e887aec7399c3cfee14d">getVideoInfo</a> ()=0</td></tr>
 <tr class="memdesc:a3b73e8501728e887aec7399c3cfee14d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the video track configuration.  <br /></td></tr>
 <tr class="separator:a3b73e8501728e887aec7399c3cfee14d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae63fc244d9e1605f728c7f089d861524" id="r_ae63fc244d9e1605f728c7f089d861524"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer.html#ae63fc244d9e1605f728c7f089d861524">mime</a> ()=0</td></tr>
-<tr class="separator:ae63fc244d9e1605f728c7f089d861524"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aced75ddf7c3d9219e473a495bce41204" id="r_aced75ddf7c3d9219e473a495bce41204"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer.html#aced75ddf7c3d9219e473a495bce41204">mimeVideo</a> ()=0</td></tr>
+<tr class="separator:aced75ddf7c3d9219e473a495bce41204"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac496133545cba767b45c6ce8df3587e7" id="r_ac496133545cba767b45c6ce8df3587e7"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer.html#ac496133545cba767b45c6ce8df3587e7">operator bool</a> ()=0</td></tr>
 <tr class="separator:ac496133545cba767b45c6ce8df3587e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f59fea1b0cf8e5e817244aa0e6e9b02" id="r_a4f59fea1b0cf8e5e817244aa0e6e9b02"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer.html#a4f59fea1b0cf8e5e817244aa0e6e9b02">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_info_format.html">AudioInfoFormat</a> info)=0</td></tr>
@@ -573,8 +573,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ae63fc244d9e1605f728c7f089d861524" name="ae63fc244d9e1605f728c7f089d861524"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae63fc244d9e1605f728c7f089d861524">&#9670;&#160;</a></span>mime()</h2>
+<a id="aced75ddf7c3d9219e473a495bce41204" name="aced75ddf7c3d9219e473a495bce41204"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aced75ddf7c3d9219e473a495bce41204">&#9670;&#160;</a></span>mimeVideo()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -583,7 +583,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual const char * mime </td>
+          <td class="memname">virtual const char * mimeVideo </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -597,7 +597,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>The container's MIME type (e.g. "video/avi", "video/mp4") - useful for e.g. an HTTP Content-Type header when streaming the muxed output to a client. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#ab233b9d1b86c9d2a2c009d6473aa8938">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#ab233b9d1b86c9d2a2c009d6473aa8938">MuxerMP4</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#ab233b9d1b86c9d2a2c009d6473aa8938">MuxerMPG</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#ae125d7c8cee8961766e6e5486aa860de">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#ae125d7c8cee8961766e6e5486aa860de">MuxerMP4</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#ae125d7c8cee8961766e6e5486aa860de">MuxerMPG</a>.</p>
 
 </div>
 </div>
