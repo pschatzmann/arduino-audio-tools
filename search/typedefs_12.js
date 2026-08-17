@@ -1,5 +1,9 @@
 var searchData=
 [
-  ['volumeoutput_0',['VolumeOutput',['../group__io.html#gaa72f7a57e74e8025d4e74dd1fbdad318',1,'audio_tools']]],
-  ['volumeprint_1',['VolumePrint',['../group__io.html#gaf4e68a4279940f276a39f4a0cd2d2a29',1,'audio_tools']]]
+  ['udp_0',['UDP',['../namespaceaudio__tools.html#ae79683a32908fdf4f2d0fbf0197353f2',1,'audio_tools']]],
+  ['udpsockettype_1',['UdpSocketType',['../classaudio__tools_1_1_r_t_s_p_platform.html#a70a8d763fe23ad3632c581213af002f8',1,'audio_tools::RTSPPlatform']]],
+  ['urlstream_2',['URLStream',['../namespaceaudio__tools.html#a92d0d465f437b08e277a04f713152350',1,'audio_tools']]],
+  ['urlstreambuffered_3',['URLStreamBuffered',['../namespaceaudio__tools.html#a232c92c7540e23a629afa3a4b1c54c4c',1,'audio_tools']]],
+  ['urlstreambufferedesp32_4',['URLStreamBufferedESP32',['../namespaceaudio__tools.html#a22b64bd5d45692fb5db35650e3fd1c0f',1,'audio_tools']]],
+  ['usbaudiostream_5',['USBAudioStream',['../group__usb.html#ga43a0ff637dbf8c8e3d47f575c950f2fd',1,'audio_tools']]]
 ];

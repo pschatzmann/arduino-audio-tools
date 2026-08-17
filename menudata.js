@@ -247,6 +247,7 @@ var menudata={children:[
 {text:"c",url:"functions_type.html#index_c"},
 {text:"d",url:"functions_type.html#index_d"},
 {text:"f",url:"functions_type.html#index_f"},
+{text:"k",url:"functions_type.html#index_k"},
 {text:"m",url:"functions_type.html#index_m"},
 {text:"n",url:"functions_type.html#index_n"},
 {text:"o",url:"functions_type.html#index_o"},

@@ -96,8 +96,10 @@ Inheritance diagram for DemuxerMP4:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_demuxer_m_p4.png" usemap="#DemuxerMP4_map" alt=""/>
   <map id="DemuxerMP4_map" name="DemuxerMP4_map">
-<area href="classaudio__tools_1_1_demuxer.html" title="Common interface for demuxers (DemuxerAVI, DemuxerMP4) that split a container&#39;s video and (optional) ..." alt="Demuxer" shape="rect" coords="63,224,179,248"/>
+<area href="classaudio__tools_1_1_demuxer.html" title="Common interface for demuxers (DemuxerAVI, DemuxerMP4) that split a container&#39;s video and (optional) ..." alt="Demuxer" shape="rect" coords="189,224,305,248"/>
 <area href="classaudio__tools_1_1_container_decoder.html" title="Parent class for all container formats." alt="ContainerDecoder" shape="rect" coords="63,168,179,192"/>
+<area href="classaudio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information." alt="MimeSource" shape="rect" coords="189,168,305,192"/>
+<area href="classaudio__tools_1_1_video_info_source.html" alt="VideoInfoSource" shape="rect" coords="315,168,431,192"/>
 <area href="classaudio__tools_1_1_audio_decoder.html" title="Decoding of encoded audio into PCM data." alt="AudioDecoder" shape="rect" coords="63,112,179,136"/>
 <area href="classaudio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="AudioWriter" shape="rect" coords="0,56,116,80"/>
 <area href="classaudio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="AudioInfoSource" shape="rect" coords="126,56,242,80"/>
@@ -107,8 +109,6 @@ Inheritance diagram for DemuxerMP4:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_demuxer_m_p4_1_1_schedule_entry.html">ScheduleEntry</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_demuxer_m_p4_1_1_stsc_entry.html">StscEntry</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">sample-to-chunk table entry (stsc)  <a href="structaudio__tools_1_1_demuxer_m_p4_1_1_stsc_entry.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -129,6 +129,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab19ccf601a675f0c51f0537ddfb5ce76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae29f3a7c9d58519c7879e371e4879b8a" id="r_ae29f3a7c9d58519c7879e371e4879b8a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#ae29f3a7c9d58519c7879e371e4879b8a">DemuxerMP4</a> (<a class="el" href="class_print.html">Print</a> &amp;video_out, <a class="el" href="class_print.html">Print</a> &amp;audio_out)</td></tr>
 <tr class="separator:ae29f3a7c9d58519c7879e371e4879b8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a229a8fd8baaca99979c896057aa02397" id="r_a229a8fd8baaca99979c896057aa02397"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a229a8fd8baaca99979c896057aa02397">DemuxerMP4</a> (<a class="el" href="classaudio__tools_1_1_seekable_source.html">SeekableSource</a> &amp;seekSource)</td></tr>
+<tr class="separator:a229a8fd8baaca99979c896057aa02397"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8e7dab6d64a3403b79993b5cf221114" id="r_ab8e7dab6d64a3403b79993b5cf221114"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#ab8e7dab6d64a3403b79993b5cf221114">DemuxerMP4</a> (<a class="el" href="classaudio__tools_1_1_spool_storage_factory.html">SpoolStorageFactory</a> &amp;spoolFactory)</td></tr>
+<tr class="separator:ab8e7dab6d64a3403b79993b5cf221114"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d4c883a6b59b81698655578070ab693" id="r_a2d4c883a6b59b81698655578070ab693"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a2d4c883a6b59b81698655578070ab693">DemuxerMP4</a> (<a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;video_out, <a class="el" href="class_print.html">Print</a> &amp;audio_out)</td></tr>
 <tr class="separator:a2d4c883a6b59b81698655578070ab693"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37263c61255bf52832ab965f61a6ea1f" id="r_a37263c61255bf52832ab965f61a6ea1f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a37263c61255bf52832ab965f61a6ea1f">~DemuxerMP4</a> ()</td></tr>
@@ -194,6 +198,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aee3d456e79d27d60f9b6ade892fcc88c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2644833aaa44ccfbc40f6651d8be2831" id="r_a2644833aaa44ccfbc40f6651d8be2831"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a2644833aaa44ccfbc40f6651d8be2831">setOutputVideo</a> (<a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;out)</td></tr>
 <tr class="separator:a2644833aaa44ccfbc40f6651d8be2831"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4aaf41e18a1cbdb207398ed6cf018d75" id="r_a4aaf41e18a1cbdb207398ed6cf018d75"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a4aaf41e18a1cbdb207398ed6cf018d75">setSeekSource</a> (<a class="el" href="classaudio__tools_1_1_seekable_source.html">SeekableSource</a> &amp;seekSource)</td></tr>
+<tr class="separator:a4aaf41e18a1cbdb207398ed6cf018d75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41163c7c4cc05139b5e52eb582102cb6" id="r_a41163c7c4cc05139b5e52eb582102cb6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a41163c7c4cc05139b5e52eb582102cb6">setSpoolStorageFactory</a> (<a class="el" href="classaudio__tools_1_1_spool_storage_factory.html">SpoolStorageFactory</a> &amp;spoolFactory)</td></tr>
+<tr class="separator:a41163c7c4cc05139b5e52eb582102cb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36ac3357eb6beaf0d441641cdafb3195" id="r_a36ac3357eb6beaf0d441641cdafb3195"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a36ac3357eb6beaf0d441641cdafb3195">setVideoAudioSync</a> (<a class="el" href="classaudio__tools_1_1_video_audio_sync.html">VideoAudioSync</a> *yourSync)</td></tr>
+<tr class="separator:a36ac3357eb6beaf0d441641cdafb3195"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a026655e20010414e4d162042f5c413" id="r_a0a026655e20010414e4d162042f5c413"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_video_info.html">VideoInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer.html#a0a026655e20010414e4d162042f5c413">videoInfo</a> () override</td></tr>
+<tr class="separator:a0a026655e20010414e4d162042f5c413"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -205,13 +217,14 @@ Public Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a77d149bbcd4cc5ff7922e7ac7b23e175" id="r_a77d149bbcd4cc5ff7922e7ac7b23e175"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a77d149bbcd4cc5ff7922e7ac7b23e175">advanceScheduleIfNeeded</a> ()</td></tr>
-<tr class="memdesc:a77d149bbcd4cc5ff7922e7ac7b23e175"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advances to the next schedule entry once the current one is exhausted.  <br /></td></tr>
-<tr class="separator:a77d149bbcd4cc5ff7922e7ac7b23e175"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22d5bed05159806ac9702723b44873df" id="r_a22d5bed05159806ac9702723b44873df"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a22d5bed05159806ac9702723b44873df">advanceChunkIfNeeded</a> ()</td></tr>
+<tr class="separator:a22d5bed05159806ac9702723b44873df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a262b3bba6574debe6f8ef0d6def23b7d" id="r_a262b3bba6574debe6f8ef0d6def23b7d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a262b3bba6574debe6f8ef0d6def23b7d">beginBoxAccum</a> (const <a class="el" href="structaudio__tools_1_1_m_p4_parser_1_1_box.html">MP4Parser::Box</a> &amp;box)</td></tr>
 <tr class="separator:a262b3bba6574debe6f8ef0d6def23b7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f4f74ed1f6e60e51694afc423cd26a3" id="r_a1f4f74ed1f6e60e51694afc423cd26a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a1f4f74ed1f6e60e51694afc423cd26a3">buildSchedule</a> ()</td></tr>
-<tr class="separator:a1f4f74ed1f6e60e51694afc423cd26a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc1fff379cfaca6ceec062f12f076cba" id="r_afc1fff379cfaca6ceec062f12f076cba"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#afc1fff379cfaca6ceec062f12f076cba">boxPayloadFileOffset</a> ()</td></tr>
+<tr class="separator:afc1fff379cfaca6ceec062f12f076cba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d5b4e85be8838a2627d7ef9e47862d6" id="r_a3d5b4e85be8838a2627d7ef9e47862d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a3d5b4e85be8838a2627d7ef9e47862d6">configureSpoolStores</a> (<a class="el" href="structaudio__tools_1_1_demuxer_m_p4_1_1_track.html">Track</a> &amp;t)</td></tr>
+<tr class="separator:a3d5b4e85be8838a2627d7ef9e47862d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a96c9ebecaa1ef15b200e7bc09fde2623" id="r_a96c9ebecaa1ef15b200e7bc09fde2623"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a96c9ebecaa1ef15b200e7bc09fde2623">dispatchAudio</a> (<a class="el" href="structaudio__tools_1_1_demuxer_m_p4_1_1_track.html">Track</a> &amp;t, const uint8_t *data, size_t size, bool isFirst)</td></tr>
 <tr class="separator:a96c9ebecaa1ef15b200e7bc09fde2623"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44a73ad01f33997e39df095f9aac0df5" id="r_a44a73ad01f33997e39df095f9aac0df5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a44a73ad01f33997e39df095f9aac0df5">dispatchSample</a> (<a class="el" href="structaudio__tools_1_1_demuxer_m_p4_1_1_track.html">Track</a> &amp;t, const uint8_t *data, size_t size, bool isFirst)</td></tr>
@@ -260,7 +273,6 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a10daf6027b086b12670b0003c3bc2cf3" id="r_a10daf6027b086b12670b0003c3bc2cf3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a10daf6027b086b12670b0003c3bc2cf3">onTrak</a> ()</td></tr>
 <tr class="separator:a10daf6027b086b12670b0003c3bc2cf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d8a4144da8df1399d6a197856a8f946" id="r_a2d8a4144da8df1399d6a197856a8f946"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a2d8a4144da8df1399d6a197856a8f946">samplesInChunk</a> (<a class="el" href="structaudio__tools_1_1_demuxer_m_p4_1_1_track.html">Track</a> &amp;t, uint32_t chunkIndex0)</td></tr>
-<tr class="memdesc:a2d8a4144da8df1399d6a197856a8f946"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of samples in the given (0-based) chunk index, per 'stsc'.  <br /></td></tr>
 <tr class="separator:a2d8a4144da8df1399d6a197856a8f946"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75bda75c27a87c385d6efaf1d854804d" id="r_a75bda75c27a87c385d6efaf1d854804d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a75bda75c27a87c385d6efaf1d854804d">sendWavHeader</a> ()</td></tr>
 <tr class="separator:a75bda75c27a87c385d6efaf1d854804d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -277,10 +289,16 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:a04e158fe019eb01fc215b2d459cb04ce" id="r_a04e158fe019eb01fc215b2d459cb04ce"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structaudio__tools_1_1_demuxer_m_p4_1_1_stsc_entry.html">StscEntry</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a04e158fe019eb01fc215b2d459cb04ce">readStscEntry</a> (const uint8_t *p)</td></tr>
+<tr class="separator:a04e158fe019eb01fc215b2d459cb04ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adafa711687cffcb0b7fb0921f0bec428" id="r_adafa711687cffcb0b7fb0921f0bec428"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structaudio__tools_1_1_demuxer_m_p4_1_1_stts_entry.html">SttsEntry</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#adafa711687cffcb0b7fb0921f0bec428">readSttsEntry</a> (const uint8_t *p)</td></tr>
+<tr class="separator:adafa711687cffcb0b7fb0921f0bec428"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace0eb676f4def35519005c33b62a504d" id="r_ace0eb676f4def35519005c33b62a504d"><td class="memItemLeft" align="right" valign="top">static uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#ace0eb676f4def35519005c33b62a504d">readU16</a> (const uint8_t *p)</td></tr>
 <tr class="separator:ace0eb676f4def35519005c33b62a504d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a4ecf2a0b4382712125bd85e84bf19d" id="r_a7a4ecf2a0b4382712125bd85e84bf19d"><td class="memItemLeft" align="right" valign="top">static uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a7a4ecf2a0b4382712125bd85e84bf19d">readU32</a> (const uint8_t *p)</td></tr>
 <tr class="separator:a7a4ecf2a0b4382712125bd85e84bf19d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0e3754cf2b92144ec83d3288e55b93a" id="r_aa0e3754cf2b92144ec83d3288e55b93a"><td class="memItemLeft" align="right" valign="top">static uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#aa0e3754cf2b92144ec83d3288e55b93a">readU32Widened</a> (const uint8_t *p)</td></tr>
+<tr class="separator:aa0e3754cf2b92144ec83d3288e55b93a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9cc72145b5234a810909f632d4660ec1" id="r_a9cc72145b5234a810909f632d4660ec1"><td class="memItemLeft" align="right" valign="top">static uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a9cc72145b5234a810909f632d4660ec1">readU64</a> (const uint8_t *p)</td></tr>
 <tr class="separator:a9cc72145b5234a810909f632d4660ec1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a478484aa3d5b45f67917c065d04238da" id="r_a478484aa3d5b45f67917c065d04238da"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a478484aa3d5b45f67917c065d04238da">writeAdtsHeader</a> (uint8_t *adts, int aacProfile, int sampleRateIdx, int channelCfg, int frameLen)</td></tr>
@@ -294,6 +312,10 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:aca7ae47391a46e0f9def4a2828e09727"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e51cca168445ae9148be825e21af3b2" id="r_a5e51cca168445ae9148be825e21af3b2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a5e51cca168445ae9148be825e21af3b2">box_accum_active</a> = false</td></tr>
 <tr class="separator:a5e51cca168445ae9148be825e21af3b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33c6222c2d079d75c220d4d1ac287fa8" id="r_a33c6222c2d079d75c220d4d1ac287fa8"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a33c6222c2d079d75c220d4d1ac287fa8">box_start_file_offset</a> = 0</td></tr>
+<tr class="separator:a33c6222c2d079d75c220d4d1ac287fa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24b00ee2ca7309ada32a676adcbfd736" id="r_a24b00ee2ca7309ada32a676adcbfd736"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_demuxer_m_p4_1_1_track.html">Track</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a24b00ee2ca7309ada32a676adcbfd736">current_chunk_track</a> = nullptr</td></tr>
+<tr class="separator:a24b00ee2ca7309ada32a676adcbfd736"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac672764c9598b3df4344435f268258b4" id="r_ac672764c9598b3df4344435f268258b4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#ac672764c9598b3df4344435f268258b4">current_sample_is_first_for_track</a> = false</td></tr>
 <tr class="separator:ac672764c9598b3df4344435f268258b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9ae00db75454d595b4e6676cba6839f" id="r_ad9ae00db75454d595b4e6676cba6839f"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#ad9ae00db75454d595b4e6676cba6839f">current_sample_size</a> = 0</td></tr>
@@ -303,6 +325,10 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:ac72be176b8560f764e3c6e55af7eec21" id="r_ac72be176b8560f764e3c6e55af7eec21"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_demuxer_m_p4_1_1_track.html">Track</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#ac72be176b8560f764e3c6e55af7eec21">current_track</a></td></tr>
 <tr class="memdesc:ac72be176b8560f764e3c6e55af7eec21"><td class="mdescLeft">&#160;</td><td class="mdescRight">track currently being parsed (scoped by 'trak')  <br /></td></tr>
 <tr class="separator:ac72be176b8560f764e3c6e55af7eec21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08e6f01d8ce74ceb71043b30c78068ac" id="r_a08e6f01d8ce74ceb71043b30c78068ac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_video_audio_buffered_sync.html">VideoAudioBufferedSync</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a08e6f01d8ce74ceb71043b30c78068ac">defaultSynch</a> {10 * 1024, -20}</td></tr>
+<tr class="separator:a08e6f01d8ce74ceb71043b30c78068ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0996ed3b307f47eed0d5d5619739ddfb" id="r_a0996ed3b307f47eed0d5d5619739ddfb"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a0996ed3b307f47eed0d5d5619739ddfb">dispatched_sample_count</a> = 0</td></tr>
+<tr class="separator:a0996ed3b307f47eed0d5d5619739ddfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47385aa19435f5fca9d3083a748258c5" id="r_a47385aa19435f5fca9d3083a748258c5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#a47385aa19435f5fca9d3083a748258c5">info</a></td></tr>
 <tr class="separator:a47385aa19435f5fca9d3083a748258c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a407c3efba665d276a38229f905bef352" id="r_a407c3efba665d276a38229f905bef352"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a407c3efba665d276a38229f905bef352">is_active</a> = false</td></tr>
@@ -319,12 +345,17 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:ad35c4e2ef458c36e8d36676958cc9cd3" id="r_ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#ad35c4e2ef458c36e8d36676958cc9cd3">notify_vector</a></td></tr>
 <tr class="separator:ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab96686f5ff06ca147924779b44e21f77" id="r_ab96686f5ff06ca147924779b44e21f77"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_demuxer_m_p4_1_1_track.html">Track</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#ab96686f5ff06ca147924779b44e21f77">p_audio_track</a> = nullptr</td></tr>
-<tr class="memdesc:ab96686f5ff06ca147924779b44e21f77"><td class="mdescLeft">&#160;</td><td class="mdescRight">first audio track found  <br /></td></tr>
 <tr class="separator:ab96686f5ff06ca147924779b44e21f77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a437811d72489685600cdd7d69898b383" id="r_a437811d72489685600cdd7d69898b383"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a437811d72489685600cdd7d69898b383">p_output_audio</a> = nullptr</td></tr>
 <tr class="separator:a437811d72489685600cdd7d69898b383"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdad90adc3ba71f7b1e16444c23b5502" id="r_acdad90adc3ba71f7b1e16444c23b5502"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#acdad90adc3ba71f7b1e16444c23b5502">p_print</a> = nullptr</td></tr>
 <tr class="separator:acdad90adc3ba71f7b1e16444c23b5502"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a354f06b03871fe21e4f74808076bc852" id="r_a354f06b03871fe21e4f74808076bc852"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_seekable_source.html">SeekableSource</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a354f06b03871fe21e4f74808076bc852">p_seek_source</a> = nullptr</td></tr>
+<tr class="separator:a354f06b03871fe21e4f74808076bc852"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adec77e8f36cf9366a364221113c08d42" id="r_adec77e8f36cf9366a364221113c08d42"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_spool_storage_factory.html">SpoolStorageFactory</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#adec77e8f36cf9366a364221113c08d42">p_spool_factory</a> = nullptr</td></tr>
+<tr class="separator:adec77e8f36cf9366a364221113c08d42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a02b6c2884074954ca637d0f015709e" id="r_a5a02b6c2884074954ca637d0f015709e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_video_audio_sync.html">VideoAudioSync</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a5a02b6c2884074954ca637d0f015709e">p_synch</a> = &amp;<a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a08e6f01d8ce74ceb71043b30c78068ac">defaultSynch</a></td></tr>
+<tr class="separator:a5a02b6c2884074954ca637d0f015709e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab1d54b9268396da5bbefd6fd5e11a5c6" id="r_ab1d54b9268396da5bbefd6fd5e11a5c6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#ab1d54b9268396da5bbefd6fd5e11a5c6">p_video_out</a> = nullptr</td></tr>
 <tr class="separator:ab1d54b9268396da5bbefd6fd5e11a5c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a702aaf54f819a7d0226c8437c338616c" id="r_a702aaf54f819a7d0226c8437c338616c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a702aaf54f819a7d0226c8437c338616c">p_video_out_video</a> = nullptr</td></tr>
@@ -342,13 +373,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a2c6459dbc14b4a36bea6e8bae99fb10c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a27b526c418dd599bb9eac7289603d8a1" id="r_a27b526c418dd599bb9eac7289603d8a1"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a27b526c418dd599bb9eac7289603d8a1">sample_buffer_filled</a> = 0</td></tr>
 <tr class="separator:a27b526c418dd599bb9eac7289603d8a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a244731cc6843f9fdd7fbd58704a4a879" id="r_a244731cc6843f9fdd7fbd58704a4a879"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a244731cc6843f9fdd7fbd58704a4a879">samples_left_in_entry</a> = 0</td></tr>
-<tr class="separator:a244731cc6843f9fdd7fbd58704a4a879"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0887e75d8f25509d558a882bc3824b50" id="r_a0887e75d8f25509d558a882bc3824b50"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="structaudio__tools_1_1_demuxer_m_p4_1_1_schedule_entry.html">ScheduleEntry</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a0887e75d8f25509d558a882bc3824b50">schedule</a></td></tr>
-<tr class="separator:a0887e75d8f25509d558a882bc3824b50"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e763b1f7d96a49502afae754f23ea1c" id="r_a1e763b1f7d96a49502afae754f23ea1c"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a1e763b1f7d96a49502afae754f23ea1c">schedule_index</a> = 0</td></tr>
-<tr class="memdesc:a1e763b1f7d96a49502afae754f23ea1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">index into 'schedule'  <br /></td></tr>
-<tr class="separator:a1e763b1f7d96a49502afae754f23ea1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8216ad88d2feb24c8ce57c20560330ee" id="r_a8216ad88d2feb24c8ce57c20560330ee"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a8216ad88d2feb24c8ce57c20560330ee">samples_left_in_chunk</a> = 0</td></tr>
+<tr class="separator:a8216ad88d2feb24c8ce57c20560330ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50c604e476456fbcbe2c2be392d2221b" id="r_a50c604e476456fbcbe2c2be392d2221b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a50c604e476456fbcbe2c2be392d2221b">send_wav_header</a> = false</td></tr>
 <tr class="separator:a50c604e476456fbcbe2c2be392d2221b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4ec130a8a39dcb0ec6bb64b885b0073" id="r_ae4ec130a8a39dcb0ec6bb64b885b0073"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#ae4ec130a8a39dcb0ec6bb64b885b0073">send_wav_header_explicit</a> = false</td></tr>
@@ -387,7 +413,7 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ab19ccf601a675f0c51f0537ddfb5ce76" name="ab19ccf601a675f0c51f0537ddfb5ce76"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab19ccf601a675f0c51f0537ddfb5ce76">&#9670;&#160;</a></span>DemuxerMP4() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab19ccf601a675f0c51f0537ddfb5ce76">&#9670;&#160;</a></span>DemuxerMP4() <span class="overload">[1/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -413,7 +439,7 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
 </div>
 </div>
 <a id="ae29f3a7c9d58519c7879e371e4879b8a" name="ae29f3a7c9d58519c7879e371e4879b8a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae29f3a7c9d58519c7879e371e4879b8a">&#9670;&#160;</a></span>DemuxerMP4() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae29f3a7c9d58519c7879e371e4879b8a">&#9670;&#160;</a></span>DemuxerMP4() <span class="overload">[2/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -449,7 +475,7 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
 </div>
 </div>
 <a id="a2d4c883a6b59b81698655578070ab693" name="a2d4c883a6b59b81698655578070ab693"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2d4c883a6b59b81698655578070ab693">&#9670;&#160;</a></span>DemuxerMP4() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d4c883a6b59b81698655578070ab693">&#9670;&#160;</a></span>DemuxerMP4() <span class="overload">[3/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -481,6 +507,60 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a229a8fd8baaca99979c896057aa02397" name="a229a8fd8baaca99979c896057aa02397"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a229a8fd8baaca99979c896057aa02397">&#9670;&#160;</a></span>DemuxerMP4() <span class="overload">[4/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html">DemuxerMP4</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_seekable_source.html">SeekableSource</a> &amp;&#160;</td>
+          <td class="paramname"><em>seekSource</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>'seekSource' wraps the same open file this instance will be fed from (e.g. via FileSeekableSource&lt;File&gt;(myFile)) - when set, newly discovered tracks' sample tables (stsz/stco/stsc/stts) are backed by <a class="el" href="classaudio__tools_1_1_source_seek_sample_table_store.html" title="Discards every value right after appending it, keeping only the file offset of the first entry - get(...">SourceSeekSampleTableStore</a> instead of the RAM-backed default, trading the ~4.5MB (for a feature-length file) RAM cost for small repeated seeks back into 'seekSource' during playback. Must stay valid and open for the lifetime of playback. See <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a4aaf41e18a1cbdb207398ed6cf018d75">setSeekSource()</a>. </p>
+
+</div>
+</div>
+<a id="ab8e7dab6d64a3403b79993b5cf221114" name="ab8e7dab6d64a3403b79993b5cf221114"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8e7dab6d64a3403b79993b5cf221114">&#9670;&#160;</a></span>DemuxerMP4() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html">DemuxerMP4</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_spool_storage_factory.html">SpoolStorageFactory</a> &amp;&#160;</td>
+          <td class="paramname"><em>spoolFactory</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>'spoolFactory' provides a fresh <a class="el" href="classaudio__tools_1_1_spool_storage.html" title="Minimal seek+read+write interface a SpoolFileSampleTableStore needs from its scratch file - SeekableS...">SpoolStorage</a> for each of a track's four sample tables as tracks are discovered - when set, backs new tracks' sample tables with <a class="el" href="classaudio__tools_1_1_spool_file_sample_table_store.html" title="Writes every entry to a caller-provided scratch file as it&#39;s appended, instead of keeping it in RAM -...">SpoolFileSampleTableStore</a> instead of the RAM-backed default. Unlike the <a class="el" href="classaudio__tools_1_1_seekable_source.html" title="Minimal seek+read interface a SourceSeekSampleTableStore needs from &quot;the original MP4 source&quot; - kept ...">SeekableSource</a> overload above, this needs no seekability in the original MP4 source at all (it writes its own local copy as data streams past), at the cost of real disk I/O for both the writes during 'moov' parsing and the seek+reads during 'mdat' playback. See <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a41163c7c4cc05139b5e52eb582102cb6">setSpoolStorageFactory()</a>. </p>
 
 </div>
 </div>
@@ -540,8 +620,8 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
 
 </div>
 </div>
-<a id="a77d149bbcd4cc5ff7922e7ac7b23e175" name="a77d149bbcd4cc5ff7922e7ac7b23e175"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a77d149bbcd4cc5ff7922e7ac7b23e175">&#9670;&#160;</a></span>advanceScheduleIfNeeded()</h2>
+<a id="a22d5bed05159806ac9702723b44873df" name="a22d5bed05159806ac9702723b44873df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22d5bed05159806ac9702723b44873df">&#9670;&#160;</a></span>advanceChunkIfNeeded()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -550,7 +630,7 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void advanceScheduleIfNeeded </td>
+          <td class="memname">void advanceChunkIfNeeded </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -562,8 +642,7 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Advances to the next schedule entry once the current one is exhausted. </p>
+<p>Picks whichever track's next not-yet-consumed chunk comes first in the file (by chunk_offset) and makes it the active chunk - an incremental two-way merge instead of precomputing a whole-file schedule: each track's own chunk_offsets are already ascending (a muxer writes each track's chunks in file order), so the merged cross-track order falls out of comparing just the next pending chunk_offset per track, in O(1) per call instead of materializing and sorting every chunk from every track upfront. </p>
 
 </div>
 </div>
@@ -736,8 +815,8 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
 
 </div>
 </div>
-<a id="a1f4f74ed1f6e60e51694afc423cd26a3" name="a1f4f74ed1f6e60e51694afc423cd26a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1f4f74ed1f6e60e51694afc423cd26a3">&#9670;&#160;</a></span>buildSchedule()</h2>
+<a id="afc1fff379cfaca6ceec062f12f076cba" name="afc1fff379cfaca6ceec062f12f076cba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc1fff379cfaca6ceec062f12f076cba">&#9670;&#160;</a></span>boxPayloadFileOffset()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -746,7 +825,7 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void buildSchedule </td>
+          <td class="memname">uint64_t boxPayloadFileOffset </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -758,7 +837,8 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Merge all tracks' (chunk_offset, samples_in_chunk) entries, sorted ascending by chunk_offset, into a single consumption order. </p>
+<p>Absolute file offset of the first byte of this box's <em>payload</em> (box_accum's content), i.e. right after the box's own 8-byte size+type header - used, plus each table's own sub-header size on top, to tell a <a class="el" href="classaudio__tools_1_1_source_seek_sample_table_store.html" title="Discards every value right after appending it, keeping only the file offset of the first entry - get(...">SourceSeekSampleTableStore</a> where a table's first entry lives on disk.</p>
+<p>Deliberately based on box_start_file_offset (captured once, at the box's first delivery - see <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a262b3bba6574debe6f8ef0d6def23b7d">beginBoxAccum()</a>) rather than computed from total_bytes_received/box_accum.available() at entry-iteration time: <a class="el" href="classaudio__tools_1_1_m_p4_parser.html" title="MP4Parser is a class that parses MP4 container files and extracts boxes (atoms). It provides a callba...">MP4Parser</a> advances its own internal fileOffset to the box's <em>end</em> as soon as an incremental box starts (see startIncrementalBox() in <a class="el" href="_m_p4_parser_8h.html">MP4Parser.h</a>), before the box is actually fully delivered - a formula relying on "bytes received so far" at the time entries are iterated (which only happens on the box's <em>last</em> delivery) silently used the wrong file position for any box large enough to span multiple <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> calls (which every sample table in a feature-length file is) - confirmed by hex-dumping the file at the computed offset and finding it landed inside 'mdat', nowhere near the actual table. </p>
 
 </div>
 </div>
@@ -788,6 +868,33 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
 <p>Deletes all change notify subscriptions. </p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_r_t_s_p_client.html#ae1a875c01380562f27970cab11f8c375">RTSPClient&lt; TcpClient, UdpSocket &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a3d5b4e85be8838a2627d7ef9e47862d6" name="a3d5b4e85be8838a2627d7ef9e47862d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d5b4e85be8838a2627d7ef9e47862d6">&#9670;&#160;</a></span>configureSpoolStores()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void configureSpoolStores </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structaudio__tools_1_1_demuxer_m_p4_1_1_track.html">Track</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Swaps a track's four sample tables for spool-backed stores, one <a class="el" href="classaudio__tools_1_1_spool_storage.html" title="Minimal seek+read+write interface a SpoolFileSampleTableStore needs from its scratch file - SeekableS...">SpoolStorage</a> per table obtained from p_spool_factory. Guarded so it only ever runs once per track even if <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a510051ed7d73614f0fb1abcb30f5fbaa">onHdlr()</a> somehow saw its kind change or got called again. </p>
 
 </div>
 </div>
@@ -1022,7 +1129,7 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Feeds raw mdat bytes; accumulates until the current sample is complete, dispatches it, and moves on - possibly switching tracks at chunk boundaries per the merge schedule. </p>
+<p>Feeds raw mdat bytes; accumulates until the current sample is complete, dispatches it, and moves on - possibly switching tracks at chunk boundaries per the incremental cross-track merge (see <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a22d5bed05159806ac9702723b44873df">advanceChunkIfNeeded()</a>). </p>
 
 </div>
 </div>
@@ -1208,7 +1315,7 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
 </div><div class="memdoc">
 <p>Provides the audio mime (<a class="el" href="group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1a696b031073e74bf2cb98e5ef201d4aa3">AudioFormat::UNKNOWN</a>/nullptr until the audio track's 'stsd' has been parsed - see <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a532faa1829fc9ff1598e30f0e91e92bf">getAudioInfo()</a>) </p>
 
-<p>Implements <a class="el" href="classaudio__tools_1_1_demuxer.html#ae63fc244d9e1605f728c7f089d861524">Demuxer</a>.</p>
+<p>Implements <a class="el" href="classaudio__tools_1_1_demuxer.html#a43e293c2a862eefd65ac2c0057dab087">Demuxer</a>.</p>
 
 </div>
 </div>
@@ -1695,6 +1802,58 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
 
 </div>
 </div>
+<a id="a04e158fe019eb01fc215b2d459cb04ce" name="a04e158fe019eb01fc215b2d459cb04ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04e158fe019eb01fc215b2d459cb04ce">&#9670;&#160;</a></span>readStscEntry()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="structaudio__tools_1_1_demuxer_m_p4_1_1_stsc_entry.html">StscEntry</a> readStscEntry </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adafa711687cffcb0b7fb0921f0bec428" name="adafa711687cffcb0b7fb0921f0bec428"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adafa711687cffcb0b7fb0921f0bec428">&#9670;&#160;</a></span>readSttsEntry()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="structaudio__tools_1_1_demuxer_m_p4_1_1_stts_entry.html">SttsEntry</a> readSttsEntry </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ace0eb676f4def35519005c33b62a504d" name="ace0eb676f4def35519005c33b62a504d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ace0eb676f4def35519005c33b62a504d">&#9670;&#160;</a></span>readU16()</h2>
 
@@ -1732,6 +1891,32 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
       <table class="memname">
         <tr>
           <td class="memname">static uint32_t readU32 </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa0e3754cf2b92144ec83d3288e55b93a" name="aa0e3754cf2b92144ec83d3288e55b93a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0e3754cf2b92144ec83d3288e55b93a">&#9670;&#160;</a></span>readU32Widened()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static uint64_t readU32Widened </td>
           <td>(</td>
           <td class="paramtype">const uint8_t *&#160;</td>
           <td class="paramname"><em>p</em></td><td>)</td>
@@ -1836,8 +2021,7 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Number of samples in the given (0-based) chunk index, per 'stsc'. </p>
+<p>Number of samples in the given (0-based) chunk index, per 'stsc'. Keeps a per-track cursor rather than rescanning 'stsc' from the start every call - correct as long as chunkIndex0 is non-decreasing across calls for a given track, which holds for the sequential per-chunk consumption in <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a22d5bed05159806ac9702723b44873df">advanceChunkIfNeeded()</a>/feed(). </p>
 
 </div>
 </div>
@@ -2140,6 +2324,33 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
 
 </div>
 </div>
+<a id="a4aaf41e18a1cbdb207398ed6cf018d75" name="a4aaf41e18a1cbdb207398ed6cf018d75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4aaf41e18a1cbdb207398ed6cf018d75">&#9670;&#160;</a></span>setSeekSource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setSeekSource </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_seekable_source.html">SeekableSource</a> &amp;&#160;</td>
+          <td class="paramname"><em>seekSource</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>See the <a class="el" href="classaudio__tools_1_1_seekable_source.html" title="Minimal seek+read interface a SourceSeekSampleTableStore needs from &quot;the original MP4 source&quot; - kept ...">SeekableSource</a> constructor overload above - can also be called any time before <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#acba365cc28eb702040c382646cfb0a7a">begin()</a>, instead of via the constructor. </p>
+
+</div>
+</div>
 <a id="ac81448c41c28170abdb6579e0359be2c" name="ac81448c41c28170abdb6579e0359be2c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac81448c41c28170abdb6579e0359be2c">&#9670;&#160;</a></span>setSendWavHeader()</h2>
 
@@ -2166,6 +2377,33 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
 <p>Overrides the automatic decision of whether a synthetic WAV header is sent to the audio output before any audio payload. By default this is decided automatically from the parsed codec: on whenever <a class="el" href="group__video.html#gac56f1ce047268d2e2a8ad23ceaabfc33" title="True if the wav code is handled via the WAV decoder (i.e. toMime() maps it to &quot;audio/wav&quot;: PCM and al...">isWavFormat()</a> of the parsed format is true (raw PCM), off otherwise (AAC/ALAC, which have their own decoder and don't expect a WAV header). Call this to force it either way instead. </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_demuxer.html#ad255a6bfa4daf69f5f93d3cbe86ddd0e">Demuxer</a>.</p>
+
+</div>
+</div>
+<a id="a41163c7c4cc05139b5e52eb582102cb6" name="a41163c7c4cc05139b5e52eb582102cb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41163c7c4cc05139b5e52eb582102cb6">&#9670;&#160;</a></span>setSpoolStorageFactory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setSpoolStorageFactory </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_spool_storage_factory.html">SpoolStorageFactory</a> &amp;&#160;</td>
+          <td class="paramname"><em>spoolFactory</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>See the <a class="el" href="classaudio__tools_1_1_spool_storage_factory.html" title="Factory DemuxerMP4 calls once per table, per track, to obtain a SpoolStorage for spool-backed sample ...">SpoolStorageFactory</a> constructor overload above - can also be called any time before <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#acba365cc28eb702040c382646cfb0a7a">begin()</a>, instead of via the constructor. </p>
 
 </div>
 </div>
@@ -2234,6 +2472,61 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a36ac3357eb6beaf0d441641cdafb3195" name="a36ac3357eb6beaf0d441641cdafb3195"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36ac3357eb6beaf0d441641cdafb3195">&#9670;&#160;</a></span>setVideoAudioSync()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setVideoAudioSync </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_video_audio_sync.html">VideoAudioSync</a> *&#160;</td>
+          <td class="paramname"><em>yourSync</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Replace the audio/video pacing logic - see <a class="el" href="classaudio__tools_1_1_video_audio_buffered_sync.html" title="Logic to Synchronize video and audio output: we use a buffer to store the audio and instead of delayi...">VideoAudioBufferedSync</a> (the default) and <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a96c9ebecaa1ef15b200e7bc09fde2623">dispatchAudio()</a>/dispatchVideo() for why this exists: writing decoded audio straight through, in bursts, starves PortAudio (or any other real-time sink) between bursts even though the total data rate is sufficient. The default buffers audio into a ring buffer and drains it steadily during <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a1ad3de674249f5cd68c409adc84984f5">dispatchVideo()</a>'s wait instead of dumping it all at once. </p>
+
+</div>
+</div>
+<a id="a0a026655e20010414e4d162042f5c413" name="a0a026655e20010414e4d162042f5c413"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a026655e20010414e4d162042f5c413">&#9670;&#160;</a></span>videoInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_video_info.html">VideoInfo</a> videoInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Fulfills <a class="el" href="classaudio__tools_1_1_video_info_source.html#aeab7b6810b52140c3c3a60bf92ca92ba">VideoInfoSource::videoInfo()</a>, so any <a class="el" href="classaudio__tools_1_1_demuxer.html" title="Common interface for demuxers (DemuxerAVI, DemuxerMP4) that split a container&#39;s video and (optional) ...">Demuxer</a> can be passed directly to e.g. <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#ab848f87085dcf8ecc7343e4c4d690306">OutputOpenCV::setVideoInfoSource()</a> - note the reported 'format' is the <em>container's</em> codec (e.g. H264), not necessarily what ends up written to a raw-picture VideoOutput/Print (that depends on whatever decoder sits between the demuxer and the output); consumers that care about the decoded format should still set it explicitly and rely on this only for width/height. </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_video_info_source.html#aeab7b6810b52140c3c3a60bf92ca92ba">VideoInfoSource</a>.</p>
 
 </div>
 </div>
@@ -2476,6 +2769,51 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
 
 </div>
 </div>
+<a id="a33c6222c2d079d75c220d4d1ac287fa8" name="a33c6222c2d079d75c220d4d1ac287fa8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33c6222c2d079d75c220d4d1ac287fa8">&#9670;&#160;</a></span>box_start_file_offset</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t box_start_file_offset = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Absolute file offset of the current box_accum-accumulating box's own header - see <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a262b3bba6574debe6f8ef0d6def23b7d">beginBoxAccum()</a>. </p>
+
+</div>
+</div>
+<a id="a24b00ee2ca7309ada32a676adcbfd736" name="a24b00ee2ca7309ada32a676adcbfd736"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24b00ee2ca7309ada32a676adcbfd736">&#9670;&#160;</a></span>current_chunk_track</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_demuxer_m_p4_1_1_track.html">Track</a>* current_chunk_track = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ac672764c9598b3df4344435f268258b4" name="ac672764c9598b3df4344435f268258b4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac672764c9598b3df4344435f268258b4">&#9670;&#160;</a></span>current_sample_is_first_for_track</h2>
 
@@ -2565,6 +2903,50 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
 <div class="line">      <span class="keyword">nullptr</span></div>
 </div><!-- fragment -->
 <p>track currently being parsed (scoped by 'trak') </p>
+
+</div>
+</div>
+<a id="a08e6f01d8ce74ceb71043b30c78068ac" name="a08e6f01d8ce74ceb71043b30c78068ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08e6f01d8ce74ceb71043b30c78068ac">&#9670;&#160;</a></span>defaultSynch</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_video_audio_buffered_sync.html">VideoAudioBufferedSync</a> defaultSynch {10 * 1024, -20}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0996ed3b307f47eed0d5d5619739ddfb" name="a0996ed3b307f47eed0d5d5619739ddfb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0996ed3b307f47eed0d5d5619739ddfb">&#9670;&#160;</a></span>dispatched_sample_count</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t dispatched_sample_count = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -2767,7 +3149,6 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
   </tr>
 </table>
 </div><div class="memdoc">
-
 <p>first audio track found </p>
 
 </div>
@@ -2810,6 +3191,76 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a354f06b03871fe21e4f74808076bc852" name="a354f06b03871fe21e4f74808076bc852"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a354f06b03871fe21e4f74808076bc852">&#9670;&#160;</a></span>p_seek_source</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_seekable_source.html">SeekableSource</a>* p_seek_source = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Set via <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a4aaf41e18a1cbdb207398ed6cf018d75">setSeekSource()</a>/the <a class="el" href="classaudio__tools_1_1_seekable_source.html" title="Minimal seek+read interface a SourceSeekSampleTableStore needs from &quot;the original MP4 source&quot; - kept ...">SeekableSource</a> constructor - when set, <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a10daf6027b086b12670b0003c3bc2cf3">onTrak()</a> backs new tracks' sample tables with <a class="el" href="classaudio__tools_1_1_source_seek_sample_table_store.html" title="Discards every value right after appending it, keeping only the file offset of the first entry - get(...">SourceSeekSampleTableStore</a> instead of the RAM-backed default. </p>
+
+</div>
+</div>
+<a id="adec77e8f36cf9366a364221113c08d42" name="adec77e8f36cf9366a364221113c08d42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adec77e8f36cf9366a364221113c08d42">&#9670;&#160;</a></span>p_spool_factory</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_spool_storage_factory.html">SpoolStorageFactory</a>* p_spool_factory = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Set via <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a41163c7c4cc05139b5e52eb582102cb6">setSpoolStorageFactory()</a>/the <a class="el" href="classaudio__tools_1_1_spool_storage_factory.html" title="Factory DemuxerMP4 calls once per table, per track, to obtain a SpoolStorage for spool-backed sample ...">SpoolStorageFactory</a> constructor</p><ul>
+<li>when set, <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a510051ed7d73614f0fb1abcb30f5fbaa">onHdlr()</a> (once a track's kind is known) backs its sample tables with <a class="el" href="classaudio__tools_1_1_spool_file_sample_table_store.html" title="Writes every entry to a caller-provided scratch file as it&#39;s appended, instead of keeping it in RAM -...">SpoolFileSampleTableStore</a> instead of the RAM-backed default. </li>
+</ul>
+
+</div>
+</div>
+<a id="a5a02b6c2884074954ca637d0f015709e" name="a5a02b6c2884074954ca637d0f015709e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a02b6c2884074954ca637d0f015709e">&#9670;&#160;</a></span>p_synch</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_video_audio_sync.html">VideoAudioSync</a>* p_synch = &amp;<a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a08e6f01d8ce74ceb71043b30c78068ac">defaultSynch</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -2994,8 +3445,8 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
 
 </div>
 </div>
-<a id="a244731cc6843f9fdd7fbd58704a4a879" name="a244731cc6843f9fdd7fbd58704a4a879"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a244731cc6843f9fdd7fbd58704a4a879">&#9670;&#160;</a></span>samples_left_in_entry</h2>
+<a id="a8216ad88d2feb24c8ce57c20560330ee" name="a8216ad88d2feb24c8ce57c20560330ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8216ad88d2feb24c8ce57c20560330ee">&#9670;&#160;</a></span>samples_left_in_chunk</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3004,7 +3455,7 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t samples_left_in_entry = 0</td>
+          <td class="memname">uint32_t samples_left_in_chunk = 0</td>
         </tr>
       </table>
   </td>
@@ -3013,52 +3464,6 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
   </tr>
 </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<a id="a0887e75d8f25509d558a882bc3824b50" name="a0887e75d8f25509d558a882bc3824b50"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0887e75d8f25509d558a882bc3824b50">&#9670;&#160;</a></span>schedule</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;<a class="el" href="structaudio__tools_1_1_demuxer_m_p4_1_1_schedule_entry.html">ScheduleEntry</a>&gt; schedule</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a1e763b1f7d96a49502afae754f23ea1c" name="a1e763b1f7d96a49502afae754f23ea1c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1e763b1f7d96a49502afae754f23ea1c">&#9670;&#160;</a></span>schedule_index</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">size_t schedule_index = 0</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>index into 'schedule' </p>
 
 </div>
 </div>

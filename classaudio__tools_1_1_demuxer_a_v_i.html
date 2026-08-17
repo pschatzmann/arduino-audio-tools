@@ -94,9 +94,10 @@ Inheritance diagram for DemuxerAVI:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_demuxer_a_v_i.png" usemap="#DemuxerAVI_map" alt=""/>
   <map id="DemuxerAVI_map" name="DemuxerAVI_map">
-<area href="classaudio__tools_1_1_demuxer.html" title="Common interface for demuxers (DemuxerAVI, DemuxerMP4) that split a container&#39;s video and (optional) ..." alt="Demuxer" shape="rect" coords="63,224,179,248"/>
-<area href="classaudio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information." alt="MimeSource" shape="rect" coords="189,224,305,248"/>
+<area href="classaudio__tools_1_1_demuxer.html" title="Common interface for demuxers (DemuxerAVI, DemuxerMP4) that split a container&#39;s video and (optional) ..." alt="Demuxer" shape="rect" coords="189,224,305,248"/>
 <area href="classaudio__tools_1_1_container_decoder.html" title="Parent class for all container formats." alt="ContainerDecoder" shape="rect" coords="63,168,179,192"/>
+<area href="classaudio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information." alt="MimeSource" shape="rect" coords="189,168,305,192"/>
+<area href="classaudio__tools_1_1_video_info_source.html" alt="VideoInfoSource" shape="rect" coords="315,168,431,192"/>
 <area href="classaudio__tools_1_1_audio_decoder.html" title="Decoding of encoded audio into PCM data." alt="AudioDecoder" shape="rect" coords="63,112,179,136"/>
 <area href="classaudio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="AudioWriter" shape="rect" coords="0,56,116,80"/>
 <area href="classaudio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="AudioInfoSource" shape="rect" coords="126,56,242,80"/>
@@ -194,6 +195,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a36ac3357eb6beaf0d441641cdafb3195" id="r_a36ac3357eb6beaf0d441641cdafb3195"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#a36ac3357eb6beaf0d441641cdafb3195">setVideoAudioSync</a> (<a class="el" href="classaudio__tools_1_1_video_audio_sync.html">VideoAudioSync</a> *yourSync)</td></tr>
 <tr class="memdesc:a36ac3357eb6beaf0d441641cdafb3195"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replace the synchronization logic with your implementation.  <br /></td></tr>
 <tr class="separator:a36ac3357eb6beaf0d441641cdafb3195"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a026655e20010414e4d162042f5c413" id="r_a0a026655e20010414e4d162042f5c413"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_video_info.html">VideoInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer.html#a0a026655e20010414e4d162042f5c413">videoInfo</a> () override</td></tr>
+<tr class="separator:a0a026655e20010414e4d162042f5c413"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a69e59074343653b1c99551ca65bc9c13" id="r_a69e59074343653b1c99551ca65bc9c13"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#a69e59074343653b1c99551ca65bc9c13">videoSeconds</a> ()</td></tr>
 <tr class="memdesc:a69e59074343653b1c99551ca65bc9c13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide the length of the video in seconds.  <br /></td></tr>
 <tr class="separator:a69e59074343653b1c99551ca65bc9c13"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1043,7 +1046,7 @@ Protected Attributes</h2></td></tr>
 
 <p>provides the audio mime </p>
 
-<p>Implements <a class="el" href="classaudio__tools_1_1_demuxer.html#ae63fc244d9e1605f728c7f089d861524">Demuxer</a>.</p>
+<p>Implements <a class="el" href="classaudio__tools_1_1_demuxer.html#a43e293c2a862eefd65ac2c0057dab087">Demuxer</a>.</p>
 
 </div>
 </div>
@@ -1915,6 +1918,34 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0a026655e20010414e4d162042f5c413" name="a0a026655e20010414e4d162042f5c413"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a026655e20010414e4d162042f5c413">&#9670;&#160;</a></span>videoInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_video_info.html">VideoInfo</a> videoInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Fulfills <a class="el" href="classaudio__tools_1_1_video_info_source.html#aeab7b6810b52140c3c3a60bf92ca92ba">VideoInfoSource::videoInfo()</a>, so any <a class="el" href="classaudio__tools_1_1_demuxer.html" title="Common interface for demuxers (DemuxerAVI, DemuxerMP4) that split a container&#39;s video and (optional) ...">Demuxer</a> can be passed directly to e.g. <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#ab848f87085dcf8ecc7343e4c4d690306">OutputOpenCV::setVideoInfoSource()</a> - note the reported 'format' is the <em>container's</em> codec (e.g. H264), not necessarily what ends up written to a raw-picture VideoOutput/Print (that depends on whatever decoder sits between the demuxer and the output); consumers that care about the decoded format should still set it explicitly and rely on this only for width/height. </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_video_info_source.html#aeab7b6810b52140c3c3a60bf92ca92ba">VideoInfoSource</a>.</p>
 
 </div>
 </div>
