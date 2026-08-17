@@ -26,6 +26,15 @@ endif()
 # handles itself (cv::imdecode); see decode-mp4/CMakeLists.txt for the
 # H264Decoder+TinyH264 pairing.
 
+# Build with libhelix - DecoderHelix (AudioTools/AudioCodecs/CodecHelix.h)
+# bundles AACDecoderHelix/MP3DecoderHelix/WAVDecoder for the AVI audio track
+FetchContent_Declare(helix GIT_REPOSITORY "https://github.com/pschatzmann/arduino-libhelix.git" GIT_TAG main )
+FetchContent_GetProperties(helix)
+if(NOT helix_POPULATED)
+    FetchContent_Populate(helix)
+    add_subdirectory(${helix_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/helix)
+endif()
+
 # OpenCV - display backend for OutputOpenCV
 find_package( OpenCV REQUIRED )
 include_directories( ${OpenCV_INCLUDE_DIRS} )
@@ -46,5 +55,6 @@ target_compile_options(arduino-audio-tools INTERFACE -Wno-inconsistent-missing-o
 target_link_libraries(decode-avi PRIVATE
     arduino_emulator
     arduino-audio-tools
+    arduino_helix
     portaudio
     ${OpenCV_LIBS})
