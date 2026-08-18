@@ -70,6 +70,13 @@ class MPGDecoder : public VideoDecoder, public VideoInfoSource {
     }
   }
 
+  /// See tinympg::TinyMPGDecoder::setIgnorePFrames() - when set, P-pictures
+  /// are silently discarded (no slices decoded, no callback fired, no
+  /// error status) instead of being decoded; I- and B-pictures are
+  /// unaffected. Off by default.
+  void setIgnorePFrames(bool active) { decoder_.setIgnorePFrames(active); }
+  bool ignorePFrames() const { return decoder_.ignorePFrames(); }
+
   VideoInfo videoInfo() override {
     VideoInfo info;
     info.format = pixel_format;

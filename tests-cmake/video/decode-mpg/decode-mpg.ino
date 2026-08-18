@@ -77,6 +77,7 @@ void setup() {
   multiDecoder.setMimeSource(mpgDemuxer);
   audioOut.begin();
 
+  mpgDecoder.setIgnorePFrames(true);  // skip P-pictures, only decode I/B for speed
   mpgDecoder.setOutput(videoOut);
   mpgDecoder.begin();
 
