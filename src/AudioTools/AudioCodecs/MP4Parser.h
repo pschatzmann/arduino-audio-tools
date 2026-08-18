@@ -102,22 +102,34 @@ class MP4Parser {
 
   /**
    * @brief Initializes the parser.
+   * @param startFileOffset Absolute file offset the next written byte
+   * corresponds to - 0 for a normal parse from the start of the file, or
+   * an arbitrary offset to resume parsing elsewhere (e.g. DemuxerMP4's
+   * moov-at-end quick start, which begin()s twice for two disjoint byte
+   * ranges) so Box::file_offset stays correct.
    * @return true on success.
    */
-  bool begin() {
+  bool begin(uint64_t startFileOffset = 0) {
     buffer.clear();
     if (buffer.size() == 0) buffer.resize(2 * 1024);
     parseOffset = 0;
-    fileOffset = 0;
+    fileOffset = startFileOffset;
     levelStack.clear();
     box.is_complete = true;  // Start with no open box
     box.data = nullptr;
     box.size = 0;
     box.level = 0;
-    box.file_offset = 0;
+    box.file_offset = startFileOffset;
     box.id = 0;
     box.is_incremental = false;
     box.is_complete = true;
+    // reset incremental-box state too, in case begin() is called again
+    // mid-parse (see startFileOffset above)
+    box_in_progress = false;
+    box_bytes_received = 0;
+    box_bytes_expected = 0;
+    box_seq = 0;
+    incremental_offset = 0;
     return true;
   }
 

@@ -1,8 +1,41 @@
 #pragma once
+#include <type_traits>
+#include <utility>
+
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
 
 namespace audio_tools {
+
+/// @brief SFINAE helper for FileSeekableSource's auto-quickStart: calls
+/// writer.quickStart() if that method exists, no-op otherwise - most
+/// WriterT types (e.g. an AVI/WAV decoder) don't have one.
+/// @ingroup video
+namespace quickstart_detail {
+template <typename T>
+class HasQuickStart {
+  template <typename U>
+  static auto test(int)
+      -> decltype(std::declval<U&>().quickStart(), std::true_type());
+  template <typename U>
+  static std::false_type test(...);
+
+ public:
+  static const bool value = decltype(test<T>(0))::value;
+};
+
+template <typename T>
+typename std::enable_if<HasQuickStart<T>::value, bool>::type
+callQuickStartIfAvailable(T& writer) {
+  return writer.quickStart();
+}
+
+template <typename T>
+typename std::enable_if<!HasQuickStart<T>::value, bool>::type
+callQuickStartIfAvailable(T&) {
+  return false;
+}
+}  // namespace quickstart_detail
 
 /// @brief Video vs. audio track classification - lives here (rather than
 /// nested inside DemuxerMP4::Track, where it conceptually belongs) purely
@@ -166,6 +199,11 @@ class SeekableSource {
  * than a fixed AudioWriter&/DemuxerMP4&) purely to avoid this header
  * having to depend on ContainerMP4.h, which itself depends on this
  * header - a hard circular include otherwise.
+ *
+ * 'quickStart' (constructor arg, default true): if WriterT has a
+ * quickStart() method (e.g. DemuxerMP4's), the first copy() call invokes
+ * it automatically. No-op for any WriterT without one. Set to false to
+ * skip that check or call writer.quickStart() manually yourself.
  * @ingroup video
  */
 template <typename FileT, typename WriterT>
@@ -174,9 +212,14 @@ class FileSeekableSource : public SeekableSource {
   /// 'file' must already be open, positioned at the start (byte 0) of
   /// the MP4. 'writer' is both what copy() feeds decoded bytes into, and
   /// gets wired up automatically here via writer.setSeekSource(*this) -
-  /// no separate setSeekSource() call needed in the sketch.
-  FileSeekableSource(FileT& file, WriterT& writer, int bufferSize = 1024)
-      : p_file(&file), p_writer(&writer), buffer_len(bufferSize) {
+  /// no separate setSeekSource() call needed in the sketch. See the
+  /// class comment above for 'quickStart'.
+  FileSeekableSource(FileT& file, WriterT& writer, int bufferSize = 1024,
+                     bool quickStart = true)
+      : p_file(&file),
+        p_writer(&writer),
+        buffer_len(bufferSize),
+        quick_start_enabled(quickStart) {
     writer.setSeekSource(*this);
   }
 
@@ -213,7 +256,16 @@ class FileSeekableSource : public SeekableSource {
   /// CodecCopy/StreamCopy follow, since DemuxerMP4::write() (like most
   /// Print::write() implementations) may accept fewer bytes than
   /// requested in one call. Returns 0 once the file is exhausted.
+  ///
+  /// On the first call, if enabled (see 'quickStart'), runs
+  /// writer.quickStart() first - not done in the constructor since it
+  /// must run after writer.begin(), which typically hasn't happened yet
+  /// at construction time.
   size_t copy() {
+    if (quick_start_enabled && !quick_start_done) {
+      quick_start_done = true;
+      quickstart_detail::callQuickStartIfAvailable(*p_writer);
+    }
     uint8_t buffer[buffer_len];
     size_t to_read = p_file->readBytes((char*)buffer, buffer_len);
     if (to_read == 0) return 0;
@@ -240,6 +292,8 @@ class FileSeekableSource : public SeekableSource {
   WriterT* p_writer;
   int buffer_len;
   size_t saved_pos = 0;
+  bool quick_start_enabled;
+  bool quick_start_done = false;
 };
 
 /**

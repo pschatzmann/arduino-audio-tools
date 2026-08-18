@@ -128,6 +128,14 @@ class ADTSParser {
       LOGW(ERROR_FMT, "channels", (int)header.channel_cfg);
       is_valid = false;
     }
+    // ADTS always sets the (historic MPEG) layer field to 0: a non-zero
+    // value here means we are actually looking at an MP3 frame header,
+    // whose overlapping sync pattern (0xFFE-0xFFF) is otherwise
+    // indistinguishable from ADTS at this point.
+    if (header.layer != 0) {
+      LOGW(ERROR_FMT, "layer", (int)header.layer);
+      is_valid = false;
+    }
     if (header.frame_length > 8191) {  // tymically <= 768
       LOGW(ERROR_FMT, "frame_length", (int)header.frame_length);
       is_valid = false;

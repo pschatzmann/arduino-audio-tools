@@ -100,15 +100,22 @@ class MimeDetector : public MimeSource {
     if (memcmp(start + 4, "ftypM4A", 7) == 0) {
       return true;
     }
-    // check for streaming
+    // check for streaming: locate an ADTS synch word ...
     HeaderParserAAC aac;
-    // it should start with a synch word
     int pos = aac.findSyncWord((const uint8_t*)start, len);
     if (pos == -1) {
       return false;
     }
-    // make sure that it is not an mp3
-    if (aac.isValid(start + pos, len - pos)) {
+    // ... and confirm it is a valid, consistent ADTS header (this also
+    // rejects MP3 frames since ADTS requires the layer field to be 0, which
+    // real MP3 frames never have)
+    if (!aac.isValid(start + pos, len - pos)) {
+      return false;
+    }
+    // extra safety net: if the same data is unambiguously a valid MP3
+    // stream, it can not be AAC
+    HeaderParserMP3 mp3;
+    if (mp3.isValid(start, len)) {
       return false;
     }
     return true;
