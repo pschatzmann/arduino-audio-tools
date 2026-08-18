@@ -172,6 +172,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ae125d7c8cee8961766e6e5486aa860de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a90622bd78258a36bbcf63426b28307ac" id="r_a90622bd78258a36bbcf63426b28307ac"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a90622bd78258a36bbcf63426b28307ac">operator bool</a> () override</td></tr>
 <tr class="separator:a90622bd78258a36bbcf63426b28307ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb15850092ab389b5362456cc7d7a3f9" id="r_aeb15850092ab389b5362456cc7d7a3f9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#aeb15850092ab389b5362456cc7d7a3f9">quickStart</a> ()</td></tr>
+<tr class="separator:aeb15850092ab389b5362456cc7d7a3f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5b1cdb06807ff2dc37acbaff63410b9" id="r_aa5b1cdb06807ff2dc37acbaff63410b9"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#aa5b1cdb06807ff2dc37acbaff63410b9">removeNotifyAudioChange</a> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;bi)</td></tr>
 <tr class="memdesc:aa5b1cdb06807ff2dc37acbaff63410b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a target in order not to be notified about audio changes.  <br /></td></tr>
 <tr class="separator:aa5b1cdb06807ff2dc37acbaff63410b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -369,6 +371,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ac282bedcc3123eddbb27a4fb842917c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ec16976226ccdaa5062d6d4372d712d" id="r_a1ec16976226ccdaa5062d6d4372d712d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a1ec16976226ccdaa5062d6d4372d712d">playback_start_set</a> = false</td></tr>
 <tr class="separator:a1ec16976226ccdaa5062d6d4372d712d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a431312d92a306fe4e466d9ff331b3756" id="r_a431312d92a306fe4e466d9ff331b3756"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a431312d92a306fe4e466d9ff331b3756">quickstart_bytes_remaining</a> = -1</td></tr>
+<tr class="separator:a431312d92a306fe4e466d9ff331b3756"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c6459dbc14b4a36bea6e8bae99fb10c" id="r_a2c6459dbc14b4a36bea6e8bae99fb10c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a2c6459dbc14b4a36bea6e8bae99fb10c">sample_buffer</a></td></tr>
 <tr class="separator:a2c6459dbc14b4a36bea6e8bae99fb10c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a27b526c418dd599bb9eac7289603d8a1" id="r_a27b526c418dd599bb9eac7289603d8a1"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a27b526c418dd599bb9eac7289603d8a1">sample_buffer_filled</a> = 0</td></tr>
@@ -1799,6 +1803,34 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
 </div><div class="memdoc">
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_audio_writer.html#ac496133545cba767b45c6ce8df3587e7">AudioWriter</a>.</p>
+
+</div>
+</div>
+<a id="aeb15850092ab389b5362456cc7d7a3f9" name="aeb15850092ab389b5362456cc7d7a3f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb15850092ab389b5362456cc7d7a3f9">&#9670;&#160;</a></span>quickStart()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool quickStart </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Speeds up startup for a "non-faststart" MP4 (moov written after mdat) by locating and parsing 'moov' directly via seek()/readBytes() on the configured <a class="el" href="classaudio__tools_1_1_seekable_source.html" title="Minimal seek+read interface a SourceSeekSampleTableStore needs from &quot;the original MP4 source&quot; - kept ...">SeekableSource</a> (<a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a4aaf41e18a1cbdb207398ed6cf018d75">setSeekSource()</a>), instead of streaming through 'mdat' first to reach it. Only box headers (8 bytes each) are read - the payload is skipped via seek() - so this costs a handful of tiny reads regardless of 'mdat's size.</p>
+<p>Call after <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#acba365cc28eb702040c382646cfb0a7a">begin()</a>, before feeding data via <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> - or just let <a class="el" href="classaudio__tools_1_1_file_seekable_source.html" title="Adapts a single concrete file/stream (Arduino&#39;s File, or anything else exposing position(),...">FileSeekableSource</a> call it automatically (its default behavior).</p>
+<p>On success, leaves the <a class="el" href="classaudio__tools_1_1_seekable_source.html" title="Minimal seek+read interface a SourceSeekSampleTableStore needs from &quot;the original MP4 source&quot; - kept ...">SeekableSource</a> positioned at 'mdat', ready for the normal <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>-loop to resume there. Returns false (no side effects) if already faststart, no <a class="el" href="classaudio__tools_1_1_seekable_source.html" title="Minimal seek+read interface a SourceSeekSampleTableStore needs from &quot;the original MP4 source&quot; - kept ...">SeekableSource</a> is configured, or a box form this scan doesn't understand (64-bit or "extends to EOF" size) is encountered. </p>
 
 </div>
 </div>
@@ -3398,6 +3430,29 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a431312d92a306fe4e466d9ff331b3756" name="a431312d92a306fe4e466d9ff331b3756"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a431312d92a306fe4e466d9ff331b3756">&#9670;&#160;</a></span>quickstart_bytes_remaining</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int64_t quickstart_bytes_remaining = -1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Set by <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#aeb15850092ab389b5362456cc7d7a3f9">quickStart()</a> on success, to 'mdat's declared size. -1 (the <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#acba365cc28eb702040c382646cfb0a7a">begin()</a> default) means no boundary active - see <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>. </p>
 
 </div>
 </div>

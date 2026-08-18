@@ -8,5 +8,6 @@ var searchData=
   ['queuelockfree_5',['QueueLockFree',['../classaudio__tools_1_1_queue_lock_free.html#af308f0ee2f137c3d6245f76ae36b766d',1,'audio_tools::QueueLockFree']]],
   ['queuertos_6',['QueueRTOS',['../classaudio__tools_1_1_queue_r_t_o_s.html#ad2483fd4246ea4e0768b2379c0a53d3c',1,'audio_tools::QueueRTOS']]],
   ['queuestream_7',['queuestream',['../classaudio__tools_1_1_queue_stream.html#a75905919639808f0ba57198104c1f994',1,'audio_tools::QueueStream::QueueStream()=default'],['../classaudio__tools_1_1_queue_stream.html#ace6de8cfb5e9e65a2334bfebab5ad02e',1,'audio_tools::QueueStream::QueueStream(int bufferSize, int bufferCount, bool autoRemoveOldestDataIfFull=false)'],['../classaudio__tools_1_1_queue_stream.html#a2c4af342bac39f9371388d08aa2f45c7',1,'audio_tools::QueueStream::QueueStream(BaseBuffer&lt; T &gt; &amp;buffer)']]],
-  ['queuezephyr_8',['QueueZephyr',['../classaudio__tools_1_1_queue_zephyr.html#a2008d5a06d71b6b1d1f96dcf558bb1c0',1,'audio_tools::QueueZephyr']]]
+  ['queuezephyr_8',['QueueZephyr',['../classaudio__tools_1_1_queue_zephyr.html#a2008d5a06d71b6b1d1f96dcf558bb1c0',1,'audio_tools::QueueZephyr']]],
+  ['quickstart_9',['quickStart',['../classaudio__tools_1_1_demuxer_m_p4.html#aeb15850092ab389b5362456cc7d7a3f9',1,'audio_tools::DemuxerMP4']]]
 ];

@@ -76,11 +76,14 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#enum-members">Enumerations</a>  </div>
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">SampleTableStore.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="_vector_8h_source.html">AudioTools/CoreAudio/AudioBasic/Collections/Vector.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;type_traits&gt;</code><br />
+<code>#include &lt;utility&gt;</code><br />
+<code>#include &quot;<a class="el" href="_vector_8h_source.html">AudioTools/CoreAudio/AudioBasic/Collections/Vector.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_audio_tools_2_core_audio_2_audio_logger_8h_source.html">AudioTools/CoreAudio/AudioLogger.h</a>&quot;</code><br />
 </div>
 <p><a href="_sample_table_store_8h_source.html">Go to the source code of this file.</a></p>
@@ -95,6 +98,8 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_file_spool_storage.html">FileSpoolStorage&lt; FileT &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adapts any concrete file/stream type to <a class="el" href="classaudio__tools_1_1_spool_storage.html" title="Minimal seek+read+write interface a SpoolFileSampleTableStore needs from its scratch file - SeekableS...">SpoolStorage</a> - same role as <a class="el" href="classaudio__tools_1_1_file_seekable_source.html" title="Adapts a single concrete file/stream (Arduino&#39;s File, or anything else exposing position(),...">FileSeekableSource</a>, just adding <a class="el" href="classaudio__tools_1_1_file_spool_storage.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>. This is the one place the concrete file type appears for spool-backed storage.  <a href="classaudio__tools_1_1_file_spool_storage.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1quickstart__detail_1_1_has_quick_start.html">HasQuickStart&lt; T &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_ram_sample_table_store.html">RamSampleTableStore&lt; T &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keeps every entry in RAM (a plain Vector&lt;T&gt;) - the simplest and fastest option, but scales with the track's total sample/chunk count (e.g. ~4.5MB total for a 102-minute movie's stsz+stco tables). Default if no other <a class="el" href="classaudio__tools_1_1_sample_table_store.html" title="Sequential-access storage for one MP4 sample table (e.g. stsz sample sizes, stco chunk offsets,...">SampleTableStore</a> is configured.  <a href="classaudio__tools_1_1_ram_sample_table_store.html#details">More...</a><br /></td></tr>
@@ -123,6 +128,9 @@ Namespaces</h2></td></tr>
 <tr class="memitem:namespaceaudio__tools" id="r_namespaceaudio__tools"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></td></tr>
 <tr class="memdesc:namespaceaudio__tools"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic Implementation of sound input and output for desktop environments using portaudio. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespaceaudio__tools_1_1quickstart__detail" id="r_namespaceaudio__tools_1_1quickstart__detail"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools_1_1quickstart__detail.html">audio_tools::quickstart_detail</a></td></tr>
+<tr class="memdesc:namespaceaudio__tools_1_1quickstart__detail"><td class="mdescLeft">&#160;</td><td class="mdescRight">SFINAE helper for <a class="el" href="classaudio__tools_1_1_file_seekable_source.html" title="Adapts a single concrete file/stream (Arduino&#39;s File, or anything else exposing position(),...">FileSeekableSource</a>'s auto-quickStart: calls writer.quickStart() if that method exists, no-op otherwise - most WriterT types (e.g. an AVI/WAV decoder) don't have one. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -139,6 +147,15 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:gaf8c65084215807a0aa0121960a93ec92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Video vs. audio track classification - lives here (rather than nested inside DemuxerMP4::Track, where it conceptually belongs) purely so SpoolStorageFactory can reference it: this header is included before DemuxerMP4/Track are defined, so a nested type wouldn't be visible yet. DemuxerMP4::Track::kind uses this same type.  <a href="group__video.html#gaf8c65084215807a0aa0121960a93ec92">More...</a><br /></td></tr>
 <tr class="separator:gaf8c65084215807a0aa0121960a93ec92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:aeaa5b07a8ba061b0e4a98873ab41c54f" id="r_aeaa5b07a8ba061b0e4a98873ab41c54f"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:aeaa5b07a8ba061b0e4a98873ab41c54f"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if&lt;!<a class="el" href="classaudio__tools_1_1quickstart__detail_1_1_has_quick_start.html">HasQuickStart</a>&lt; T &gt;::value, bool &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools_1_1quickstart__detail.html#aeaa5b07a8ba061b0e4a98873ab41c54f">callQuickStartIfAvailable</a> (T &amp;)</td></tr>
+<tr class="separator:aeaa5b07a8ba061b0e4a98873ab41c54f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3b7d49f908e8647cc09acec19b2ceee" id="r_af3b7d49f908e8647cc09acec19b2ceee"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:af3b7d49f908e8647cc09acec19b2ceee"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if&lt; <a class="el" href="classaudio__tools_1_1quickstart__detail_1_1_has_quick_start.html">HasQuickStart</a>&lt; T &gt;::value, bool &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools_1_1quickstart__detail.html#af3b7d49f908e8647cc09acec19b2ceee">callQuickStartIfAvailable</a> (T &amp;writer)</td></tr>
+<tr class="separator:af3b7d49f908e8647cc09acec19b2ceee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

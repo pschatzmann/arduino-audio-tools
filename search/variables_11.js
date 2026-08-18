@@ -7,5 +7,8 @@ var searchData=
   ['queue_5fbuffer_4',['queue_buffer',['../classaudio__tools_1_1_queue_r_t_o_s.html#a34cbd8d084572179ca1ddcbfe33c9a13',1,'audio_tools::QueueRTOS']]],
   ['queue_5fsize_5',['queue_size',['../structaudio__tools_1_1_s_p_i_audio_slave_config.html#ab0b4be2fd9dc1775c8685aab70045dcd',1,'audio_tools::SPIAudioSlaveConfig::queue_size'],['../classaudio__tools_1_1_queue_r_t_o_s.html#ab0b4be2fd9dc1775c8685aab70045dcd',1,'audio_tools::QueueRTOS::queue_size'],['../classaudio__tools_1_1_queue_zephyr.html#ab0b4be2fd9dc1775c8685aab70045dcd',1,'audio_tools::QueueZephyr::queue_size']]],
   ['queue_5fstream_6',['queue_stream',['../classaudio__tools_1_1_adaptive_resampling_buffer.html#a8d5556d386203d2a01b52be93b1c1851',1,'audio_tools::AdaptiveResamplingBuffer']]],
-  ['queuestream_7',['queueStream',['../classaudio__tools_1_1_audio_player_protocol_server.html#a18ea1b1911b8f2e121f5c0ed9987eeb9',1,'audio_tools::AudioPlayerProtocolServer']]]
+  ['queuestream_7',['queueStream',['../classaudio__tools_1_1_audio_player_protocol_server.html#a18ea1b1911b8f2e121f5c0ed9987eeb9',1,'audio_tools::AudioPlayerProtocolServer']]],
+  ['quick_5fstart_5fdone_8',['quick_start_done',['../classaudio__tools_1_1_file_seekable_source.html#ae7218b2d2752bcf74a0f44f418ec40d9',1,'audio_tools::FileSeekableSource']]],
+  ['quick_5fstart_5fenabled_9',['quick_start_enabled',['../classaudio__tools_1_1_file_seekable_source.html#abf9ffb0a4927dccf7cf1ff871bef38cb',1,'audio_tools::FileSeekableSource']]],
+  ['quickstart_5fbytes_5fremaining_10',['quickstart_bytes_remaining',['../classaudio__tools_1_1_demuxer_m_p4.html#a431312d92a306fe4e466d9ff331b3756',1,'audio_tools::DemuxerMP4']]]
 ];

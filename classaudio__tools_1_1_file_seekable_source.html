@@ -98,8 +98,8 @@ Inheritance diagram for FileSeekableSource&lt; FileT, WriterT &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8d670a7b9acf3cf6fa6f4a6b6af03161" id="r_a8d670a7b9acf3cf6fa6f4a6b6af03161"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_file_seekable_source.html#a8d670a7b9acf3cf6fa6f4a6b6af03161">FileSeekableSource</a> (FileT &amp;file, WriterT &amp;writer, int bufferSize=1024)</td></tr>
-<tr class="separator:a8d670a7b9acf3cf6fa6f4a6b6af03161"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79346023244f884cf660a2f365593046" id="r_a79346023244f884cf660a2f365593046"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_file_seekable_source.html#a79346023244f884cf660a2f365593046">FileSeekableSource</a> (FileT &amp;file, WriterT &amp;writer, int bufferSize=1024, bool quickStart=true)</td></tr>
+<tr class="separator:a79346023244f884cf660a2f365593046"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aecb44a6d385121be2179187d45520331" id="r_aecb44a6d385121be2179187d45520331"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_file_seekable_source.html#aecb44a6d385121be2179187d45520331">copy</a> ()</td></tr>
 <tr class="separator:aecb44a6d385121be2179187d45520331"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c5c6275ddee80eb02839356b6185c0b" id="r_a4c5c6275ddee80eb02839356b6185c0b"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_file_seekable_source.html#a4c5c6275ddee80eb02839356b6185c0b">readBytes</a> (uint8_t *data, size_t len) override</td></tr>
@@ -120,6 +120,10 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a65aef93f6d5799474458e51b4375e759"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af073268af27b9eab950e1370d8423495" id="r_af073268af27b9eab950e1370d8423495"><td class="memItemLeft" align="right" valign="top">WriterT *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_file_seekable_source.html#af073268af27b9eab950e1370d8423495">p_writer</a></td></tr>
 <tr class="separator:af073268af27b9eab950e1370d8423495"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7218b2d2752bcf74a0f44f418ec40d9" id="r_ae7218b2d2752bcf74a0f44f418ec40d9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_file_seekable_source.html#ae7218b2d2752bcf74a0f44f418ec40d9">quick_start_done</a> = false</td></tr>
+<tr class="separator:ae7218b2d2752bcf74a0f44f418ec40d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf9ffb0a4927dccf7cf1ff871bef38cb" id="r_abf9ffb0a4927dccf7cf1ff871bef38cb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_file_seekable_source.html#abf9ffb0a4927dccf7cf1ff871bef38cb">quick_start_enabled</a></td></tr>
+<tr class="separator:abf9ffb0a4927dccf7cf1ff871bef38cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea5b36a7996be76dfd15054f5308db89" id="r_aea5b36a7996be76dfd15054f5308db89"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_file_seekable_source.html#aea5b36a7996be76dfd15054f5308db89">saved_pos</a> = 0</td></tr>
 <tr class="separator:aea5b36a7996be76dfd15054f5308db89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -130,10 +134,11 @@ class audio_tools::FileSeekableSource&lt; FileT, WriterT &gt;</div><p>Adapts a s
 <li><a class="el" href="classaudio__tools_1_1_file_seekable_source.html#a12da23ef57e476f79ec6adc973249576">seek()</a> remembers the file's current position before jumping away, and <a class="el" href="classaudio__tools_1_1_file_seekable_source.html#a4c5c6275ddee80eb02839356b6185c0b">readBytes()</a> restores it immediately after reading, so <a class="el" href="classaudio__tools_1_1_file_seekable_source.html#aecb44a6d385121be2179187d45520331">copy()</a>'s own sequential progress through the file is never disturbed by a table lookup happening in between two <a class="el" href="classaudio__tools_1_1_file_seekable_source.html#aecb44a6d385121be2179187d45520331">copy()</a> calls.</li>
 </ul>
 <p>This is the one place the concrete file type appears, isolating SD.h/FS.h's include-order requirements to wherever the including sketch instantiates this adapter (after it has already included SD.h), rather than to this header or to <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html" title="DemuxerMP4 extracts both the audio and (H.264) video track from a general, interleaved MP4/ISO-BMFF s...">DemuxerMP4</a> itself.</p>
-<p>WriterT is templated (duck-typed on write()+setSeekSource(), rather than a fixed <a class="el" href="classaudio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders.">AudioWriter</a>&amp;/DemuxerMP4&amp;) purely to avoid this header having to depend on <a class="el" href="_container_m_p4_8h.html">ContainerMP4.h</a>, which itself depends on this header - a hard circular include otherwise. </p>
+<p>WriterT is templated (duck-typed on write()+setSeekSource(), rather than a fixed <a class="el" href="classaudio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders.">AudioWriter</a>&amp;/DemuxerMP4&amp;) purely to avoid this header having to depend on <a class="el" href="_container_m_p4_8h.html">ContainerMP4.h</a>, which itself depends on this header - a hard circular include otherwise.</p>
+<p>'quickStart' (constructor arg, default true): if WriterT has a quickStart() method (e.g. <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html" title="DemuxerMP4 extracts both the audio and (H.264) video track from a general, interleaved MP4/ISO-BMFF s...">DemuxerMP4</a>'s), the first <a class="el" href="classaudio__tools_1_1_file_seekable_source.html#aecb44a6d385121be2179187d45520331">copy()</a> call invokes it automatically. No-op for any WriterT without one. Set to false to skip that check or call writer.quickStart() manually yourself. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a8d670a7b9acf3cf6fa6f4a6b6af03161" name="a8d670a7b9acf3cf6fa6f4a6b6af03161"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8d670a7b9acf3cf6fa6f4a6b6af03161">&#9670;&#160;</a></span>FileSeekableSource()</h2>
+<a id="a79346023244f884cf660a2f365593046" name="a79346023244f884cf660a2f365593046"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79346023244f884cf660a2f365593046">&#9670;&#160;</a></span>FileSeekableSource()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -159,7 +164,13 @@ template&lt;typename FileT , typename WriterT &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>bufferSize</em> = <code>1024</code>&#160;</td>
+          <td class="paramname"><em>bufferSize</em> = <code>1024</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>quickStart</em> = <code>true</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -173,7 +184,7 @@ template&lt;typename FileT , typename WriterT &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>'file' must already be open, positioned at the start (byte 0) of the MP4. 'writer' is both what <a class="el" href="classaudio__tools_1_1_file_seekable_source.html#aecb44a6d385121be2179187d45520331">copy()</a> feeds decoded bytes into, and gets wired up automatically here via writer.setSeekSource(*this) - no separate setSeekSource() call needed in the sketch. </p>
+<p>'file' must already be open, positioned at the start (byte 0) of the MP4. 'writer' is both what <a class="el" href="classaudio__tools_1_1_file_seekable_source.html#aecb44a6d385121be2179187d45520331">copy()</a> feeds decoded bytes into, and gets wired up automatically here via writer.setSeekSource(*this) - no separate setSeekSource() call needed in the sketch. See the class comment above for 'quickStart'. </p>
 
 </div>
 </div>
@@ -202,7 +213,8 @@ template&lt;typename FileT , typename WriterT &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Reads the next chunk from the file and feeds it to the configured <a class="el" href="classaudio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders.">AudioWriter</a>, retrying on a partial write - the same contract CodecCopy/StreamCopy follow, since <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a7597ef706dd1aa590903ce9e095db20a">DemuxerMP4::write()</a> (like most <a class="el" href="class_print.html#a8b8471dbbdc5527cdf9bfd31612cc973">Print::write()</a> implementations) may accept fewer bytes than requested in one call. Returns 0 once the file is exhausted. </p>
+<p>Reads the next chunk from the file and feeds it to the configured <a class="el" href="classaudio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders.">AudioWriter</a>, retrying on a partial write - the same contract CodecCopy/StreamCopy follow, since <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a7597ef706dd1aa590903ce9e095db20a">DemuxerMP4::write()</a> (like most <a class="el" href="class_print.html#a8b8471dbbdc5527cdf9bfd31612cc973">Print::write()</a> implementations) may accept fewer bytes than requested in one call. Returns 0 once the file is exhausted.</p>
+<p>On the first call, if enabled (see 'quickStart'), runs writer.quickStart() first - not done in the constructor since it must run after writer.begin(), which typically hasn't happened yet at construction time. </p>
 
 </div>
 </div>
@@ -355,6 +367,54 @@ template&lt;typename FileT , typename WriterT &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">WriterT* p_writer</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae7218b2d2752bcf74a0f44f418ec40d9" name="ae7218b2d2752bcf74a0f44f418ec40d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7218b2d2752bcf74a0f44f418ec40d9">&#9670;&#160;</a></span>quick_start_done</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename FileT , typename WriterT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool quick_start_done = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abf9ffb0a4927dccf7cf1ff871bef38cb" name="abf9ffb0a4927dccf7cf1ff871bef38cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf9ffb0a4927dccf7cf1ff871bef38cb">&#9670;&#160;</a></span>quick_start_enabled</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename FileT , typename WriterT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool quick_start_enabled</td>
         </tr>
       </table>
   </td>
