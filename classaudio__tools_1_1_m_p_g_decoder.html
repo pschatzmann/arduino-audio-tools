@@ -113,7 +113,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:abd79939cbb47412a2321dc1a2d2d86d9" id="r_abd79939cbb47412a2321dc1a2d2d86d9"><td class="memItemLeft" align="right" valign="top">tinympg::TinyMPGDecoder&lt; tinympg::PSRAMAllocatorESP32&lt; uint8_t &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#abd79939cbb47412a2321dc1a2d2d86d9">driver</a> ()</td></tr>
 <tr class="separator:abd79939cbb47412a2321dc1a2d2d86d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64e9fa75beda50a9e8400ee0d4e61984" id="r_a64e9fa75beda50a9e8400ee0d4e61984"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a> () override</td></tr>
-<tr class="memdesc:a64e9fa75beda50a9e8400ee0d4e61984"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases the decoder's resources.  <br /></td></tr>
 <tr class="separator:a64e9fa75beda50a9e8400ee0d4e61984"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04f2540d940cc37b5c2538ed8e5b54be" id="r_a04f2540d940cc37b5c2538ed8e5b54be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a04f2540d940cc37b5c2538ed8e5b54be">flush</a> () override</td></tr>
 <tr class="separator:a04f2540d940cc37b5c2538ed8e5b54be"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -319,8 +318,8 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Releases the decoder's resources. </p>
+<p>Releases any picture still held back for display-order reordering (see TinyMPGDecoder's docs/decoding.md, "Frame delivery order and
+latency") before resetting the decoder - without this, the last anchor picture (or two, if the stream has B-pictures) of a session that ends here would never reach the frame callback at all, since <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> below deliberately never triggers that release on its own (see its own comment). </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_video_decoder.html#aa540e86022c1f72380d1014d98f38f43">VideoDecoder</a>.</p>
 
@@ -348,7 +347,8 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Finalizes the frame most recently written via one or more <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> calls - see class comment. Default no-op for implementations that display/decode synchronously in <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> instead. </p>
+<p>Deliberately a no-op, not wired to TinyMPGDecoder in any way: this is called once per picture boundary by <a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html" title="MPEG-1 System (Program) Stream Demuxer, as defined by ISO/IEC 11172-1: splits the pack_header/system_...">DemuxerMPG</a> (<a class="el" href="_container_m_p_g_8h.html">ContainerMPG.h</a>), not just at genuine end-of-stream, so treating it as "no more data
+is coming" (the way <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">end()</a> above does) would release every anchor picture the moment its own data finishes decoding instead of holding it back for correct B-picture reordering - that release only happens once <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">end()</a> runs, or once a genuine following picture's data arrives via <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_output.html#ad3aed50bc3b4459454ccb8c64f5ced5a">VideoOutput</a>.</p>
 
@@ -613,6 +613,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Forwards to TinyMPGDecoder::write() with the default isLastChunk=true ("this buffer is one whole, self-contained unit"). Correct because <a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html" title="MPEG-1 System (Program) Stream Demuxer, as defined by ISO/IEC 11172-1: splits the pack_header/system_...">DemuxerMPG</a> (<a class="el" href="_container_m_p_g_8h.html">ContainerMPG.h</a>) now accumulates every fragment of a picture (across PES boundaries and its own small parse buffer) into one complete access unit before ever calling <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> here - each call really does receive exactly one whole picture, never a boundary-split partial one. (Previously, before that buffering existed, <a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html" title="MPEG-1 System (Program) Stream Demuxer, as defined by ISO/IEC 11172-1: splits the pack_header/system_...">DemuxerMPG</a> forwarded video data in whatever increments happened to be buffered, and this needed isLastChunk=false to avoid TinyMPGDecoder treating a split unit as complete and silently reconstructing it from stale/wrong macroblocks - see <a class="el" href="_container_m_p_g_8h.html">ContainerMPG.h</a>'s own video_unit_buffer comment.) </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">VideoOutput</a>.</p>
 
