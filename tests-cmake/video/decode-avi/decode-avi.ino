@@ -1,13 +1,16 @@
 /**
  * @file decode-avi.ino
  * @brief Desktop counterpart of sd-avi-audio-video.ino: plays a local .avi
- * file's audio and video tracks, demuxed live with DemuxerAVI. Display/
- * audio are swapped for their desktop equivalents: OutputTinyGPU ->
- * OutputOpenCV, I2SStream -> PortAudioStream.
+ * file's audio + H.264 video tracks, demuxed live with DemuxerAVI and
+ * decoded with H264Decoder (TinyH264). Display/audio are swapped for their
+ * desktop equivalents: OutputTinyGPU -> OutputOpenCV, I2SStream ->
+ * PortAudioStream.
  *
- * Decodes MJPEG, not H.264 - OutputOpenCV's default mode decodes MJPEG
- * itself (cv::imdecode); see sd-avi-video.ino for producing an H.264-in-AVI
- * file instead. Audio codec is auto-detected via DecoderHelix (multi-format:
+ * H264Decoder outputs already-decoded RGB565 frames (its default pixel
+ * format) - videoOut.setVideoFormat(VideoFormat::RGB565) tells OutputOpenCV
+ * to display those directly instead of its default MJPEG-accumulate mode
+ * (which just buffers bytes waiting for a flush() that raw decoders never
+ * call). Audio codec is auto-detected via DecoderHelix (multi-format:
  * WAV/AAC/MP3), fed DemuxerAVI's parsed mime type directly via
  * multiDecoder.setMimeSource(aviDemuxer).
  *
@@ -19,16 +22,16 @@
  * data past what's been written. Both are fixed at the library level
  * (CodecCopy.h, ContainerAVI.h) - not sketch-specific workarounds.
  *
- * Audio/video sync: DemuxerAVI now defaults to VideoAudioClockSync (mirrors
+ * Audio/video sync: DemuxerAVI defaults to VideoAudioClockSync (mirrors
  * DemuxerMP4's wall-clock approach) - it waits only the remaining time
  * until each frame's scheduled instant, instead of a blind delay() that
- * underruns audio once a frame (JPEG decode + cv::imshow) takes longer
+ * underruns audio once a frame (H.264 decode + cv::imshow) takes longer
  * than expected. Audio is written straight through; PortAudioStream's
  * blocking write sets the real-time pace.
  *
  * Pipeline: File -> CodecCopy -> DemuxerAVI (demux)
  *   -> EncodedAudioStream (DecoderHelix: WAV/AAC/MP3) -> PortAudioStream (audio)
- *   \-> OutputOpenCV (MJPEG decode + draw) (video)
+ *   \-> H264Decoder (H.264 decode -> RGB565) -> OutputOpenCV (draw) (video)
  *
  * To build & run:
  * - mkdir build && cd build && cmake .. && make
@@ -41,14 +44,16 @@
 #include "AudioTools/AudioCodecs/ContainerAVI.h"
 #include "AudioTools/AudioCodecs/CodecHelix.h"
 #include "AudioTools/AudioLibs/PortAudioStream.h"
+#include "AudioTools/Video/CodecH264.h"
 #include "AudioTools/Video/OutputOpenCV.h"
 #include "AudioTools/Video/OutputTest.h"
 #include "SD.h"
 
 // ---- File to play ----
-const char *file_path = "/media/pschatzmann/External/Videos/output176x144-mjpeg.avi";
+const char *file_path = "/media/pschatzmann/External/Videos/output176x144.avi";
 
 OutputOpenCV videoOut;  // default mode is MJPEG - decodes the JPEG itself
+H264Decoder h264Decoder(videoOut);
 PortAudioStream out;
 DecoderHelix multiDecoder;
 EncodedAudioStream audioOut(&out, &multiDecoder);  // decodes PCM/AAC/MP3 -> PortAudio
@@ -73,10 +78,16 @@ void setup() {
   out.begin(audio_cfg);
 
   multiDecoder.setMimeSource(aviDemuxer);
+  // H264Decoder outputs already-decoded RGB565 frames (its default pixel
+  // format), not MJPEG bytes - OutputOpenCV defaults to MJPEG mode (which
+  // just accumulates bytes waiting for flush(), never called here), so
+  // without this it silently never displays anything.
+  videoOut.setVideoFormat(VideoFormat::RGB565);
+  videoOut.setVideoInfoSource(aviDemuxer);
   audioOut.begin();
 
   aviDemuxer.setOutputAudio(audioOut);
-  aviDemuxer.setOutputVideo(videoOut);
+  aviDemuxer.setOutputVideo(h264Decoder);
   aviDemuxer.begin();
 
 }

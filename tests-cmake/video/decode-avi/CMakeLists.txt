@@ -17,14 +17,19 @@ if(NOT portaudio_POPULATED)
     add_subdirectory(${portaudio_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/portaudio)
 endif()
 
+# Build with TinyH264 - the H.264 decoder H264Decoder (AudioTools/Video/CodecH264.h) wraps
+FetchContent_Declare(tinyh264 GIT_REPOSITORY "https://github.com/pschatzmann/TinyH264.git" GIT_TAG main )
+FetchContent_GetProperties(tinyh264)
+if(NOT tinyh264_POPULATED)
+    FetchContent_Populate(tinyh264)
+    add_subdirectory(${tinyh264_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/tinyh264)
+endif()
+
 # provide audio-tools
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../../.. ${CMAKE_CURRENT_BINARY_DIR}/arduino-audio-tools )
 endif()
 
-# No TinyH264 needed here - this example decodes MJPEG, which OutputOpenCV
-# handles itself (cv::imdecode); see decode-mp4/CMakeLists.txt for the
-# H264Decoder+TinyH264 pairing.
 
 # Build with libhelix - DecoderHelix (AudioTools/AudioCodecs/CodecHelix.h)
 # bundles AACDecoderHelix/MP3DecoderHelix/WAVDecoder for the AVI audio track
@@ -56,5 +61,6 @@ target_link_libraries(decode-avi PRIVATE
     arduino_emulator
     arduino-audio-tools
     arduino_helix
+    TinyH264::TinyH264
     portaudio
     ${OpenCV_LIBS})
