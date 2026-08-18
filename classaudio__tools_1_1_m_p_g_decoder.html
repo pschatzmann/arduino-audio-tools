@@ -119,6 +119,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a04f2540d940cc37b5c2538ed8e5b54be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9649a3c36b3d2060e9b8bf174f9048e" id="r_ae9649a3c36b3d2060e9b8bf174f9048e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#ae9649a3c36b3d2060e9b8bf174f9048e">hasError</a> ()</td></tr>
 <tr class="separator:ae9649a3c36b3d2060e9b8bf174f9048e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ed71d94f20e455f1918935eb607496f" id="r_a9ed71d94f20e455f1918935eb607496f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a9ed71d94f20e455f1918935eb607496f">ignorePFrames</a> () const</td></tr>
+<tr class="separator:a9ed71d94f20e455f1918935eb607496f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb93084288d9cee359601e113bf836f6" id="r_afb93084288d9cee359601e113bf836f6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#afb93084288d9cee359601e113bf836f6">setIgnorePFrames</a> (bool active)</td></tr>
+<tr class="separator:afb93084288d9cee359601e113bf836f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05ff4cf361d54457ed8586e8c14aa922" id="r_a05ff4cf361d54457ed8586e8c14aa922"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput</a> (<a class="el" href="class_print.html">Print</a> &amp;out) override</td></tr>
 <tr class="memdesc:a05ff4cf361d54457ed8586e8c14aa922"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the target each decoded picture is written to.  <br /></td></tr>
 <tr class="separator:a05ff4cf361d54457ed8586e8c14aa922"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -375,6 +379,31 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a9ed71d94f20e455f1918935eb607496f" name="a9ed71d94f20e455f1918935eb607496f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ed71d94f20e455f1918935eb607496f">&#9670;&#160;</a></span>ignorePFrames()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ignorePFrames </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a823689e984921a66863624613a065328" name="a823689e984921a66863624613a065328"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a823689e984921a66863624613a065328">&#9670;&#160;</a></span>onFrame()</h2>
 
@@ -408,6 +437,33 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="afb93084288d9cee359601e113bf836f6" name="afb93084288d9cee359601e113bf836f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb93084288d9cee359601e113bf836f6">&#9670;&#160;</a></span>setIgnorePFrames()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setIgnorePFrames </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>active</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>See tinympg::TinyMPGDecoder::setIgnorePFrames() - when set, P-pictures are silently discarded (no slices decoded, no callback fired, no error status) instead of being decoded; I- and B-pictures are unaffected. Off by default. </p>
 
 </div>
 </div>
