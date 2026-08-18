@@ -150,6 +150,7 @@ class DemuxerMP4 : public Demuxer {
     is_wav_header_sent = false;
     total_bytes_received = 0;
     playback_start_set = false;
+    quickstart_bytes_remaining = -1;
     parser.begin();
     is_active = true;
     return true;
@@ -226,9 +227,103 @@ class DemuxerMP4 : public Demuxer {
   /// again with the remainder, exactly like the underlying Print contract.
   size_t write(const uint8_t* data, size_t len) override {
     if (!is_active) return 0;
-    size_t written = parser.write(data, len);
+    // After quickStart(), 'moov' still physically trails 'mdat' on disk
+    // (only relocated logically) - cap feeding at 'mdat's declared size
+    // and discard the trailing, already-parsed 'moov' bytes instead of
+    // re-parsing them.
+    size_t feed_len = len;
+    bool truncated = false;
+    if (quickstart_bytes_remaining >= 0 &&
+        (int64_t)feed_len > quickstart_bytes_remaining) {
+      feed_len = (size_t)quickstart_bytes_remaining;
+      truncated = true;
+    }
+    size_t written = feed_len > 0 ? parser.write(data, feed_len) : 0;
     total_bytes_received += written;
-    return written;
+    if (quickstart_bytes_remaining >= 0) quickstart_bytes_remaining -= written;
+    // Only swallow the truncated remainder if 'feed_len' was fully
+    // accepted - otherwise this is an ordinary partial write.
+    return (truncated && written == feed_len) ? len : written;
+  }
+
+  /// Speeds up startup for a "non-faststart" MP4 (moov written after
+  /// mdat) by locating and parsing 'moov' directly via seek()/readBytes()
+  /// on the configured SeekableSource (setSeekSource()), instead of
+  /// streaming through 'mdat' first to reach it. Only box headers (8
+  /// bytes each) are read - the payload is skipped via seek() - so this
+  /// costs a handful of tiny reads regardless of 'mdat's size.
+  ///
+  /// Call after begin(), before feeding data via write() - or just let
+  /// FileSeekableSource call it automatically (its default behavior).
+  ///
+  /// On success, leaves the SeekableSource positioned at 'mdat', ready
+  /// for the normal write()-loop to resume there. Returns false (no
+  /// side effects) if already faststart, no SeekableSource is
+  /// configured, or a box form this scan doesn't understand (64-bit or
+  /// "extends to EOF" size) is encountered.
+  bool quickStart() {
+    if (p_seek_source == nullptr) return false;
+
+    uint64_t pos = 0, moov_offset = 0, moov_size = 0, mdat_offset = 0,
+             mdat_size = 0;
+    bool moov_found = false, mdat_found = false;
+    const int max_top_level_boxes = 64;  // safety bound against a corrupt file
+
+    for (int i = 0; i < max_top_level_boxes; i++) {
+      uint8_t hdr[8];
+      if (!p_seek_source->seek((size_t)pos)) break;
+      if (p_seek_source->readBytes(hdr, 8) < 8) break;
+      uint64_t box_size = readU32(hdr);
+      // 64-bit ('size'==1) and "extends to EOF" ('size'==0) boxes aren't
+      // understood here or by MP4Parser's own walker - bail out and let
+      // the caller fall back to normal sequential parsing.
+      if (box_size < 8) break;
+
+      if (memcmp(hdr + 4, "moov", 4) == 0) {
+        moov_offset = pos;
+        moov_size = box_size;
+        moov_found = true;
+      } else if (memcmp(hdr + 4, "mdat", 4) == 0) {
+        mdat_offset = pos;
+        mdat_size = box_size;
+        mdat_found = true;
+      }
+      if (moov_found && mdat_found) break;
+      pos += box_size;
+    }
+
+    if (!moov_found || !mdat_found || moov_offset < mdat_offset) {
+      return false;  // nothing found, or already faststart
+    }
+
+    LOGI("DemuxerMP4::quickStart: moov at %u (size %u), mdat at %u - "
+         "parsing moov directly",
+         (unsigned)moov_offset, (unsigned)moov_size, (unsigned)mdat_offset);
+
+    // Feed exactly 'moov's bytes through the same callback-driven parser
+    // used for normal streaming - just sourced via seek()+readBytes().
+    parser.begin(moov_offset);
+    uint8_t buf[512];
+    uint64_t remaining = moov_size;
+    uint64_t off = moov_offset;
+    while (remaining > 0) {
+      size_t chunk = (size_t)std::min<uint64_t>(remaining, sizeof(buf));
+      if (!p_seek_source->seek((size_t)off)) break;
+      size_t got = p_seek_source->readBytes(buf, chunk);
+      if (got == 0) break;
+      parser.write(buf, got);
+      off += got;
+      remaining -= got;
+    }
+
+    // Hand off: reset the parser's box state machine to expect a fresh
+    // box at 'mdat's offset, and reposition the seek source there so the
+    // caller's normal write()-loop resumes from 'mdat', not offset 0.
+    parser.begin(mdat_offset);
+    p_seek_source->seek((size_t)mdat_offset);
+    // caps write() at 'mdat's size so the trailing 'moov' isn't re-parsed
+    quickstart_bytes_remaining = (int64_t)mdat_size;
+    return true;
   }
 
  protected:
@@ -371,6 +466,10 @@ class DemuxerMP4 : public Demuxer {
   /// sample tables with SpoolFileSampleTableStore instead of the
   /// RAM-backed default.
   SpoolStorageFactory* p_spool_factory = nullptr;
+
+  /// Set by quickStart() on success, to 'mdat's declared size. -1 (the
+  /// begin() default) means no boundary active - see write().
+  int64_t quickstart_bytes_remaining = -1;
 
   // Audio/video pacing - see setVideoAudioSync(). VideoAudioBufferedSync
   // (not VideoAudioClockSync, DemuxerAVI's default) because MP4's problem
