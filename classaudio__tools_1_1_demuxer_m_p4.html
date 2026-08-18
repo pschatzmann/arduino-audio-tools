@@ -291,6 +291,8 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:ad3b408a6e6bf326cca57eb517030127a" id="r_ad3b408a6e6bf326cca57eb517030127a"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#ad3b408a6e6bf326cca57eb517030127a">isSafeToSkipAvcc</a> (const uint8_t *data, size_t size, size_t lenSize)</td></tr>
+<tr class="separator:ad3b408a6e6bf326cca57eb517030127a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04e158fe019eb01fc215b2d459cb04ce" id="r_a04e158fe019eb01fc215b2d459cb04ce"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structaudio__tools_1_1_demuxer_m_p4_1_1_stsc_entry.html">StscEntry</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a04e158fe019eb01fc215b2d459cb04ce">readStscEntry</a> (const uint8_t *p)</td></tr>
 <tr class="separator:a04e158fe019eb01fc215b2d459cb04ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adafa711687cffcb0b7fb0921f0bec428" id="r_adafa711687cffcb0b7fb0921f0bec428"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structaudio__tools_1_1_demuxer_m_p4_1_1_stts_entry.html">SttsEntry</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#adafa711687cffcb0b7fb0921f0bec428">readSttsEntry</a> (const uint8_t *p)</td></tr>
@@ -1292,6 +1294,49 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
 </div><div class="memdoc">
 
 <p>Checks if the automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> update is active. </p>
+
+</div>
+</div>
+<a id="ad3b408a6e6bf326cca57eb517030127a" name="ad3b408a6e6bf326cca57eb517030127a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3b408a6e6bf326cca57eb517030127a">&#9670;&#160;</a></span>isSafeToSkipAvcc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool isSafeToSkipAvcc </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>lenSize</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Checks every NAL unit in one AVCC length-prefixed video sample for nal_ref_idc (bits 5-6 of each NAL header byte, right after the length prefix) - 0 means that NAL is never used as a prediction reference by any other frame, so it's safe to drop entirely. Used before skipping a late frame in <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a1ad3de674249f5cd68c409adc84984f5">dispatchVideo()</a>: unlike MP4 samples in a sample table (independently addressable, seekable past), an H.264 bitstream has real inter-frame dependencies - dropping an I or (referenced) P-frame corrupts every later frame's decode until the next keyframe, not just the one skipped. A single referenced NAL anywhere in the sample makes the whole sample unsafe to skip. </p>
 
 </div>
 </div>

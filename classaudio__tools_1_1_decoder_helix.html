@@ -75,6 +75,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
@@ -148,7 +149,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:aa5b1cdb06807ff2dc37acbaff63410b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a target in order not to be notified about audio changes.  <br /></td></tr>
 <tr class="separator:aa5b1cdb06807ff2dc37acbaff63410b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43e932d48021b3527f68b4e1c70024cd" id="r_a43e932d48021b3527f68b4e1c70024cd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_decoder.html#a43e932d48021b3527f68b4e1c70024cd">selectDecoder</a> (const char *mime)</td></tr>
-<tr class="memdesc:a43e932d48021b3527f68b4e1c70024cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects the actual decoder by MIME type.  <br /></td></tr>
 <tr class="separator:a43e932d48021b3527f68b4e1c70024cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a34cda25db0d21cf8dc0f9402187fb3f8" id="r_a34cda25db0d21cf8dc0f9402187fb3f8"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_decoder.html#a34cda25db0d21cf8dc0f9402187fb3f8">selectedMime</a> ()</td></tr>
 <tr class="memdesc:a34cda25db0d21cf8dc0f9402187fb3f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the MIME type that was detected and selected.  <br /></td></tr>
@@ -177,6 +177,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="memdesc:a7597ef706dd1aa590903ce9e095db20a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes encoded audio data to be decoded.  <br /></td></tr>
 <tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a78b3de860923a6b7c34679c46ca1298b" id="r_a78b3de860923a6b7c34679c46ca1298b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_decoder.html#a78b3de860923a6b7c34679c46ca1298b">baseMimeType</a> (const char *mime, char *out, size_t outSize)</td></tr>
+<tr class="memdesc:a78b3de860923a6b7c34679c46ca1298b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects the actual decoder by MIME type.  <br /></td></tr>
+<tr class="separator:a78b3de860923a6b7c34679c46ca1298b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -445,6 +451,58 @@ Protected Attributes</h2></td></tr>
 <p>provides the actual output <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>: this is usually the same as <a class="el" href="classaudio__tools_1_1_audio_decoder.html#aed4bf0d5ce93f27242be485943d0b37d" title="provides the actual input AudioInfo">audioInfo()</a> unless we use a transforming stream </p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_m_p3_encoder_shine.html#ab5af4066a6ef92716fc14eaf50926f72">MP3EncoderShine</a>, <a class="el" href="classaudio__tools_1_1_pure_data_stream.html#ab5af4066a6ef92716fc14eaf50926f72">PureDataStream</a>, <a class="el" href="classaudio__tools_1_1_p_w_m_audio_output.html#ab5af4066a6ef92716fc14eaf50926f72">PWMAudioOutput&lt; PWMDriverT &gt;</a>, <a class="el" href="classaudio__tools_1_1_channel_format_converter_stream_t.html#ab5af4066a6ef92716fc14eaf50926f72">ChannelFormatConverterStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_channel_format_converter_stream.html#ab5af4066a6ef92716fc14eaf50926f72">ChannelFormatConverterStream</a>, <a class="el" href="classaudio__tools_1_1_number_format_converter_stream_t.html#ab5af4066a6ef92716fc14eaf50926f72">NumberFormatConverterStreamT&lt; TFrom, TTo &gt;</a>, <a class="el" href="classaudio__tools_1_1_number_format_converter_stream.html#ab5af4066a6ef92716fc14eaf50926f72">NumberFormatConverterStream</a>, <a class="el" href="classaudio__tools_1_1_format_converter_stream.html#ab5af4066a6ef92716fc14eaf50926f72">FormatConverterStream</a>, <a class="el" href="classaudio__tools_1_1_pipeline.html#ab5af4066a6ef92716fc14eaf50926f72">Pipeline</a>, <a class="el" href="classaudio__tools_1_1_resample_stream.html#ab5af4066a6ef92716fc14eaf50926f72">ResampleStream</a>, and <a class="el" href="classaudio__tools_1_1_resample_stream_t.html#ab5af4066a6ef92716fc14eaf50926f72">ResampleStreamT&lt; TInterpolator &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a78b3de860923a6b7c34679c46ca1298b" name="a78b3de860923a6b7c34679c46ca1298b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78b3de860923a6b7c34679c46ca1298b">&#9670;&#160;</a></span>baseMimeType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void baseMimeType </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>mime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>outSize</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Selects the actual decoder by MIME type. </p>
+<p>Searches through registered decoders to find one that matches the specified MIME type, then initializes it for use. This method is usually called automatically from the determined MIME type during the first <a class="el" href="classaudio__tools_1_1_multi_decoder.html#a7597ef706dd1aa590903ce9e095db20a" title="Writes encoded audio data to be decoded.">write()</a> operation.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mime</td><td>The MIME type string to match against registered decoders </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if a matching decoder was found and initialized, false otherwise Copies 'mime' into 'out' with any ";...parameters" trimmed off (and trailing whitespace before the ';' removed), e.g. "audio/mpeg; codecs=\"mpeg1-layer2\"" -&gt; "audio/mpeg". Used by <a class="el" href="classaudio__tools_1_1_multi_decoder.html#a43e932d48021b3527f68b4e1c70024cd">selectDecoder()</a> so a source that adds a codecs parameter still matches a decoder registered under the plain base type. </dd></dl>
 
 </div>
 </div>
@@ -787,16 +845,6 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Selects the actual decoder by MIME type. </p>
-<p>Searches through registered decoders to find one that matches the specified MIME type, then initializes it for use. This method is usually called automatically from the determined MIME type during the first <a class="el" href="classaudio__tools_1_1_multi_decoder.html#a7597ef706dd1aa590903ce9e095db20a" title="Writes encoded audio data to be decoded.">write()</a> operation.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">mime</td><td>The MIME type string to match against registered decoders </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if a matching decoder was found and initialized, false otherwise </dd></dl>
 
 </div>
 </div>
