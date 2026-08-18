@@ -196,6 +196,8 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:acb4727d30757c8df0b1d1f7bb8e700d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a67c3378ca1fe3f214477001a647cbd4d" id="r_a67c3378ca1fe3f214477001a647cbd4d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html#a67c3378ca1fe3f214477001a647cbd4d">flushVideoUnit</a> ()</td></tr>
 <tr class="separator:a67c3378ca1fe3f214477001a647cbd4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05ddcc821489caf822066d839da98a8c" id="r_a05ddcc821489caf822066d839da98a8c"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html#a05ddcc821489caf822066d839da98a8c">indexOfContainerStartCode</a> (size_t from=0)</td></tr>
+<tr class="separator:a05ddcc821489caf822066d839da98a8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a9a665a387a8c4fbf7fed14bbbfc093" id="r_a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a6a9a665a387a8c4fbf7fed14bbbfc093">notifyAudioChange</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> <a class="el" href="classaudio__tools_1_1_audio_decoder.html#a47385aa19435f5fca9d3083a748258c5">info</a>)</td></tr>
 <tr class="separator:a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e17a5c9f8b518e6aea8ba0adb9113c4" id="r_a1e17a5c9f8b518e6aea8ba0adb9113c4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html#a1e17a5c9f8b518e6aea8ba0adb9113c4">parse</a> ()</td></tr>
@@ -217,6 +219,8 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:ab29e5566ff862c1e16dfd19d9176b8fe" id="r_ab29e5566ff862c1e16dfd19d9176b8fe"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html#ab29e5566ff862c1e16dfd19d9176b8fe">isContainerLevelStartCode</a> (uint8_t <a class="el" href="classaudio__tools_1_1_audio_decoder.html#a7441ef0865bcb3db9b8064dd7375c1ea">id</a>)</td></tr>
+<tr class="separator:ab29e5566ff862c1e16dfd19d9176b8fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adea97710aa484b8e93839ac5bf218bd7" id="r_adea97710aa484b8e93839ac5bf218bd7"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html#adea97710aa484b8e93839ac5bf218bd7">peekPictureCodingType</a> (const uint8_t *data, size_t len)</td></tr>
 <tr class="separator:adea97710aa484b8e93839ac5bf218bd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4db57078a66cedef2f5cafda36b50afe" id="r_a4db57078a66cedef2f5cafda36b50afe"><td class="memItemLeft" align="right" valign="top">static uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html#a4db57078a66cedef2f5cafda36b50afe">readTimestamp</a> (const uint8_t *p)</td></tr>
@@ -774,6 +778,60 @@ Static Protected Attributes</h2></td></tr>
 <p>Common video info (width/height/fps/format), parsed from the video ES's own sequence_header (ISO/IEC 11172-2) once seen - all zero/ <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a61c156fe2a3c9fe7eb28bd017d95a618">VideoFormat::MPEG1</a> until then. </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_demuxer.html#ab09ea61f8a664e0ebefece7d2587b54f">Demuxer</a>.</p>
+
+</div>
+</div>
+<a id="a05ddcc821489caf822066d839da98a8c" name="a05ddcc821489caf822066d839da98a8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05ddcc821489caf822066d839da98a8c">&#9670;&#160;</a></span>indexOfContainerStartCode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">long indexOfContainerStartCode </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>from</em> = <code>0</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Like parse_buffer.indexOfStartCode(), but skips past any start code that isn't a genuine container-level boundary (see <a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html#ab29e5566ff862c1e16dfd19d9176b8fe">isContainerLevelStartCode()</a>) - needed for unbounded video PES payloads (PES_packet_length==0, ISO/IEC 11172-1's convention for a video access unit whose length isn't known up front): the payload is only terminated by the <em>next</em> container-level unit, per spec, but it's also full of the video ES's own internal start codes (picture/slice/sequence/GOP) that plain indexOfStartCode() can't tell apart from that - mistaking one for the payload's end would drop it into the "reserved/unrecognized id" fallback in <a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html#a1e17a5c9f8b518e6aea8ba0adb9113c4">parse()</a>, silently corrupting the video ES one byte at a time from there. </p>
+
+</div>
+</div>
+<a id="ab29e5566ff862c1e16dfd19d9176b8fe" name="ab29e5566ff862c1e16dfd19d9176b8fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab29e5566ff862c1e16dfd19d9176b8fe">&#9670;&#160;</a></span>isContainerLevelStartCode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool isContainerLevelStartCode </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>True if 'id' (the byte after a 00 00 01 start-code prefix) marks a genuine container-level unit boundary (a new pack_header/ system_header/program_end/program_stream_map/private or padding stream/audio or video PES) rather than something internal to the video ES itself (a picture_start_code, a slice, or a sequence_header/ GOP/extension/user_data code - ISO/IEC 11172-2's own 0x00-0xB8 range). See <a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html#a05ddcc821489caf822066d839da98a8c">indexOfContainerStartCode()</a>. </p>
 
 </div>
 </div>
