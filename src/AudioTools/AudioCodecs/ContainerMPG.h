@@ -444,7 +444,17 @@ class DemuxerMPG : public Demuxer {
       uint32_t scheduledMs = (uint32_t)(pts * 1000 / MPG_CLOCK_HZ);
       uint32_t nowMs = millis();
       if (!playback_start_set) {
-        playback_start_ms = nowMs;
+        // Anchor so this *first* frame's own PTS lines up with "now",
+        // not so PTS==0 does - a Program Stream's PTS values commonly
+        // don't start at 0 at all (this project's own MuxerMPG derives
+        // them from a running frame/sample counter that does, but a
+        // real-world encoder's first PTS is routinely a few hundred ms
+        // in - e.g. ffprobe reports ~540ms for a typical test file).
+        // Anchoring to nowMs directly would bake that whole offset into
+        // every single later frame's schedule as extra, permanent
+        // "earliness", making every wait longer than it should be for
+        // the entire rest of playback, not just the first frame.
+        playback_start_ms = nowMs >= scheduledMs ? nowMs - scheduledMs : 0;
         playback_start_set = true;
       }
       uint32_t scheduledWallMs = playback_start_ms + scheduledMs;
@@ -479,9 +489,45 @@ class DemuxerMPG : public Demuxer {
     return continuePayload();
   }
 
+  /// True if 'id' (the byte after a 00 00 01 start-code prefix) marks a
+  /// genuine container-level unit boundary (a new pack_header/
+  /// system_header/program_end/program_stream_map/private or padding
+  /// stream/audio or video PES) rather than something internal to the
+  /// video ES itself (a picture_start_code, a slice, or a sequence_header/
+  /// GOP/extension/user_data code - ISO/IEC 11172-2's own 0x00-0xB8
+  /// range). See indexOfContainerStartCode().
+  static bool isContainerLevelStartCode(uint8_t id) {
+    return id == MPG_PACK_START_CODE || id == MPG_SYSTEM_HEADER_START_CODE ||
+           id == MPG_PROGRAM_END_CODE || id == MPG_PROGRAM_STREAM_MAP ||
+           id == MPG_PRIVATE_STREAM_1 || id == MPG_PADDING_STREAM ||
+           id == MPG_PRIVATE_STREAM_2 || (id >= 0xC0 && id <= 0xEF);
+  }
+
+  /// Like parse_buffer.indexOfStartCode(), but skips past any start code
+  /// that isn't a genuine container-level boundary (see
+  /// isContainerLevelStartCode()) - needed for unbounded video PES
+  /// payloads (PES_packet_length==0, ISO/IEC 11172-1's convention for a
+  /// video access unit whose length isn't known up front): the payload
+  /// is only terminated by the *next* container-level unit, per spec, but
+  /// it's also full of the video ES's own internal start codes
+  /// (picture/slice/sequence/GOP) that plain indexOfStartCode() can't
+  /// tell apart from that - mistaking one for the payload's end would
+  /// drop it into the "reserved/unrecognized id" fallback in parse(),
+  /// silently corrupting the video ES one byte at a time from there.
+  long indexOfContainerStartCode(size_t from = 0) {
+    long idx = parse_buffer.indexOfStartCode(from);
+    while (idx >= 0) {
+      size_t idPos = (size_t)idx + 3;
+      if (idPos >= parse_buffer.available()) return -1;  // id byte not buffered yet
+      if (isContainerLevelStartCode(parse_buffer.data()[idPos])) return idx;
+      idx = parse_buffer.indexOfStartCode((size_t)idx + 3);
+    }
+    return -1;
+  }
+
   bool continuePayload() {
     if (unbounded) {
-      long idx = parse_buffer.indexOfStartCode();
+      long idx = indexOfContainerStartCode();
       size_t avail = parse_buffer.available();
       if (idx >= 0) {
         deliver((size_t)idx);
