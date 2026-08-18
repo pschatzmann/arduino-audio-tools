@@ -140,10 +140,8 @@ void setup() {
   display.begin();
   // This panel's color filter needs the ILI9341 inversion bit set, or every
   // color comes out as its photographic negative (RED<->CYAN, GREEN<->
-  // MAGENTA, BLUE<->YELLOW) - confirmed on real hardware. writeCommand() is
-  // re-exposed public by ILI9341Driver for exactly this kind of one-off
-  // panel-specific command.
-  tftDriver.writeCommand(0x21);  // DINVON - display inversion on
+  // MAGENTA, BLUE<->YELLOW) - confirmed on real hardware.
+  tftDriver.setInvertColor(true);
 
   Wire.begin(kPinTouchSda, kPinTouchScl);
   delay(50);
