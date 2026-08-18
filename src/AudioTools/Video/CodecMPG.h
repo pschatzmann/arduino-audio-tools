@@ -90,13 +90,43 @@ class MPGDecoder : public VideoDecoder, public VideoInfoSource {
     return true;
   }
 
-  void end() override { decoder_.end(); }
+  /// Releases any picture still held back for display-order reordering
+  /// (see TinyMPGDecoder's docs/decoding.md, "Frame delivery order and
+  /// latency") before resetting the decoder - without this, the last
+  /// anchor picture (or two, if the stream has B-pictures) of a session
+  /// that ends here would never reach the frame callback at all, since
+  /// write() below deliberately never triggers that release on its own
+  /// (see its own comment).
+  void end() override {
+    decoder_.write(nullptr, 0);
+    decoder_.end();
+  }
 
+  /// Forwards to TinyMPGDecoder::write() with the default isLastChunk=true
+  /// ("this buffer is one whole, self-contained unit"). Correct because
+  /// DemuxerMPG (ContainerMPG.h) now accumulates every fragment of a
+  /// picture (across PES boundaries and its own small parse buffer) into
+  /// one complete access unit before ever calling write() here - each
+  /// call really does receive exactly one whole picture, never a
+  /// boundary-split partial one. (Previously, before that buffering
+  /// existed, DemuxerMPG forwarded video data in whatever increments
+  /// happened to be buffered, and this needed isLastChunk=false to avoid
+  /// TinyMPGDecoder treating a split unit as complete and silently
+  /// reconstructing it from stale/wrong macroblocks - see
+  /// ContainerMPG.h's own video_unit_buffer comment.)
   size_t write(const uint8_t *data, size_t len) override {
     decoder_.write(data, len);
     return len;
   }
 
+  /// Deliberately a no-op, not wired to TinyMPGDecoder in any way: this
+  /// is called once per picture boundary by DemuxerMPG (ContainerMPG.h),
+  /// not just at genuine end-of-stream, so treating it as "no more data
+  /// is coming" (the way end() above does) would release every anchor
+  /// picture the moment its own data finishes decoding instead of
+  /// holding it back for correct B-picture reordering - that release only
+  /// happens once end() runs, or once a genuine following picture's data
+  /// arrives via write().
   void flush() override {}
 
   bool hasError() { return decoder_.hasError(); }
