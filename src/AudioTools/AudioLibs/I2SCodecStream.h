@@ -250,6 +250,12 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
       return false;
     }
 
+    // setVolume()/setMute()/setAudioInfo() all gate on is_active - without
+    // this, they silently no-op forever (including the cached-volume
+    // reapply right below), regardless of whether the caller sets the
+    // volume before or after begin().
+    is_active = true;
+
     // if setvolume was called before begin
     float tobeVol = VolumeSupport::volume();
     if (tobeVol >= 0.0f) {
