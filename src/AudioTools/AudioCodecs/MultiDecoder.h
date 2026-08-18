@@ -207,32 +207,38 @@ class MultiDecoder : public AudioDecoder {
 
     // A source may report a MIME type with an RFC 6381-style "codecs"
     // (or other) parameter, e.g. "audio/mpeg; codecs=\"mpeg1-layer2\"" -
-    // decoders are registered under the plain base type ("audio/mpeg"),
-    // so an exact match would otherwise silently fail to find one.
+    // a decoder registered for that exact parameterized type (a more
+    // specific match) must win over one only registered for the plain
+    // base type ("audio/mpeg"). Two passes, not one combined check: a
+    // single pass stops at the first entry that matches *either* way, so
+    // a generic base-type decoder registered before the specific one
+    // would otherwise shadow it purely by list order.
     char base[64];
     baseMimeType(mime, base, sizeof(base));
+    int exact_j = -1, base_j = -1;
+    for (int j = 0; j < decoders.size(); j++) {
+      if (StrView(decoders[j].mime).equalsIgnoreCase(mime)) { exact_j = j; break; }
+      if (base_j < 0 && StrView(decoders[j].mime).equalsIgnoreCase(base)) base_j = j;
+    }
+    int match_j = exact_j >= 0 ? exact_j : base_j;
 
     // find the corresponding decoder
     selected_mime = nullptr;
-    for (int j = 0; j < decoders.size(); j++) {
-      DecoderInfo info = decoders[j];
-      if (StrView(info.mime).equalsIgnoreCase(mime) ||
-          StrView(info.mime).equalsIgnoreCase(base)) {
-        LOGI("Using decoder for %s (%s)", info.mime, mime);
-        actual_decoder = info;
-        // define output if it has not been defined
-        if (p_print != nullptr && actual_decoder.decoder != this 
-          && actual_decoder.decoder->getOutput() == nullptr) {
-          actual_decoder.decoder->setOutput(*p_print);
-        }
-        if (!*actual_decoder.decoder) {
-          actual_decoder.decoder->begin();
-          LOGI("Decoder %s started", actual_decoder.mime);
-        }
-        result = true;
-        selected_mime = mime;
-        break;
+    if (match_j >= 0) {
+      DecoderInfo info = decoders[match_j];
+      LOGI("Using decoder for %s (%s)", info.mime, mime);
+      actual_decoder = info;
+      // define output if it has not been defined
+      if (p_print != nullptr && actual_decoder.decoder != this
+        && actual_decoder.decoder->getOutput() == nullptr) {
+        actual_decoder.decoder->setOutput(*p_print);
       }
+      if (!*actual_decoder.decoder) {
+        actual_decoder.decoder->begin();
+        LOGI("Decoder %s started", actual_decoder.mime);
+      }
+      result = true;
+      selected_mime = mime;
     }
     is_first = false;
     return result;

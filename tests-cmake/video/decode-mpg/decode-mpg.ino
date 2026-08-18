@@ -3,8 +3,11 @@
  * @brief Desktop counterpart of sd-mpg-audio-video.ino: plays a local MPEG-1
  * Program Stream (.mpg) file - video via DemuxerMPG -> MPGDecoder (TinyMPG)
  * -> OutputOpenCV, audio via DecoderHelix (auto-selects MP3/AAC/WAV from
- * DemuxerMPG's mime()) -> PortAudioStream. Same pipeline as the embedded
- * version, with OutputTinyGPU/I2SStream swapped for their desktop
+ * DemuxerMPG's mime()) -> PortAudioStream. A dedicated MP2Decoder (TinyMP2)
+ * is registered on top for Layer II specifically - see DemuxerMPG::mime(),
+ * which reports Layer II with an explicit codecs parameter so it resolves
+ * to this decoder instead of Helix's MP3 decoder. Same pipeline as the
+ * embedded version, with OutputTinyGPU/I2SStream swapped for their desktop
  * equivalents.
  *
  * File feeding uses CodecCopy, like decode-avi.ino/decode-mp4-file.ino -
@@ -32,6 +35,7 @@
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/ContainerMPG.h"
 #include "AudioTools/AudioCodecs/CodecHelix.h"
+#include "AudioTools/AudioCodecs/CodecMP2.h"
 #include "AudioTools/AudioLibs/PortAudioStream.h"
 #include "AudioTools/Video/CodecMPG.h"
 #include "AudioTools/Video/OutputOpenCV.h"
@@ -43,6 +47,7 @@ const char *file_path = "/media/pschatzmann/External/Videos/output176x144-mp3.mp
 MPGDecoder mpgDecoder;
 OutputOpenCV videoOut;
 PortAudioStream out;
+MP2Decoder mp2Decoder;
 DecoderHelix multiDecoder;
 EncodedAudioStream audioOut(&out, &multiDecoder);  // decodes MP3/AAC/WAV -> PortAudio
 
@@ -52,6 +57,11 @@ CodecCopy copier(mpgDemuxer, file);
 
 void setup() {
   AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
+
+  // add support for mp2 audio (dedicated TinyMP2 decoder, registered
+  // under the specific codecs-parameterized mime DemuxerMPG reports for
+  // Layer II - see DemuxerMPG::mime())
+  multiDecoder.addDecoder(mp2Decoder, "audio/mpeg; codecs=\"mpeg1-layer2\"");
 
   file = SD.open(file_path);
   if (!file) {

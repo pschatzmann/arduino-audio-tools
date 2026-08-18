@@ -38,6 +38,14 @@ if(NOT tinympg_POPULATED)
     add_subdirectory(${tinympg_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/tinympg)
 endif()
 
+# Build with TinyMP2 - the MPEG-1 Layer II decoder MP2Decoder (AudioTools/AudioCodecs/CodecMP2.h) wraps
+FetchContent_Declare(tinymp2 GIT_REPOSITORY "https://github.com/pschatzmann/TinyMP2.git" GIT_TAG main )
+FetchContent_GetProperties(tinymp2)
+if(NOT tinymp2_POPULATED)
+    FetchContent_Populate(tinymp2)
+    add_subdirectory(${tinymp2_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/tinymp2)
+endif()
+
 # OpenCV - display backend for OutputOpenCV
 find_package( OpenCV REQUIRED )
 include_directories( ${OpenCV_INCLUDE_DIRS} )
@@ -59,6 +67,7 @@ target_link_libraries(decode-mpg PRIVATE
     arduino_emulator
     arduino-audio-tools
     TinyMPG::TinyMPG
+    TinyMP2::TinyMP2
     arduino_helix
     portaudio
     ${OpenCV_LIBS})
