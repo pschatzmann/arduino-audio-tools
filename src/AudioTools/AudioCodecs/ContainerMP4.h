@@ -471,6 +471,30 @@ class DemuxerMP4 : public Demuxer {
   }
   static uint16_t readU16(const uint8_t* p) { return (p[0] << 8) | p[1]; }
 
+  /// Checks every NAL unit in one AVCC length-prefixed video sample for
+  /// nal_ref_idc (bits 5-6 of each NAL header byte, right after the
+  /// length prefix) - 0 means that NAL is never used as a prediction
+  /// reference by any other frame, so it's safe to drop entirely. Used
+  /// before skipping a late frame in dispatchVideo(): unlike MP4 samples
+  /// in a sample table (independently addressable, seekable past), an
+  /// H.264 bitstream has real inter-frame dependencies - dropping an
+  /// I or (referenced) P-frame corrupts every later frame's decode until
+  /// the next keyframe, not just the one skipped. A single referenced NAL
+  /// anywhere in the sample makes the whole sample unsafe to skip.
+  static bool isSafeToSkipAvcc(const uint8_t* data, size_t size, size_t lenSize) {
+    size_t pos = 0;
+    while (pos + lenSize <= size) {
+      uint32_t nalLen = 0;
+      for (size_t i = 0; i < lenSize; i++) nalLen = (nalLen << 8) | data[pos + i];
+      pos += lenSize;
+      if (nalLen == 0 || pos + nalLen > size) break;
+      uint8_t nal_ref_idc = (data[pos] >> 5) & 0x03;
+      if (nal_ref_idc != 0) return false;
+      pos += nalLen;
+    }
+    return true;
+  }
+
   // decoder callbacks for SourceSeekSampleTableStore - see its comment on
   // why get() can't just memcpy raw on-disk bytes into T
   static uint64_t readU32Widened(const uint8_t* p) { return (uint64_t)readU32(p); }
@@ -1168,9 +1192,19 @@ class DemuxerMP4 : public Demuxer {
       }
       uint32_t scheduledWallMs = playback_start_ms + scheduledMs;
       if (nowMs > scheduledWallMs) {
-        LOGW("DemuxerMP4: video frame %u ms late - skipping",
+        // Only skip if nothing else references this sample (see
+        // isSafeToSkipAvcc()) - dropping a referenced I/P-frame here
+        // would corrupt every later frame's decode until the next
+        // keyframe, not just this one. An unsafe-to-skip late frame is
+        // decoded immediately instead (no wait either, since we're
+        // already behind).
+        if (isSafeToSkipAvcc(data, size, t.nal_length_size)) {
+          LOGW("DemuxerMP4: video frame %u ms late - skipping (non-reference)",
+               (unsigned)(nowMs - scheduledWallMs));
+          return;
+        }
+        LOGW("DemuxerMP4: video frame %u ms late - decoding anyway (referenced by later frames)",
              (unsigned)(nowMs - scheduledWallMs));
-        return;
       } else if (nowMs < scheduledWallMs) {
         // Spend the slack draining buffered audio steadily instead of
         // idling (or, previously, doing nothing at all and letting the

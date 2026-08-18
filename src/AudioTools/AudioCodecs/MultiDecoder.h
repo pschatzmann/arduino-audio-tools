@@ -1,6 +1,7 @@
 
 #pragma once
 
+#include <cstring>
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
 #include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 #include "AudioTools/Communication/HTTP/AbstractURLStream.h"
@@ -180,6 +181,19 @@ class MultiDecoder : public AudioDecoder {
    * @param mime The MIME type string to match against registered decoders
    * @return true if a matching decoder was found and initialized, false otherwise
    */
+  /// Copies 'mime' into 'out' with any ";...parameters" trimmed off (and
+  /// trailing whitespace before the ';' removed), e.g.
+  /// "audio/mpeg; codecs=\"mpeg1-layer2\"" -> "audio/mpeg". Used by
+  /// selectDecoder() so a source that adds a codecs parameter still
+  /// matches a decoder registered under the plain base type.
+  static void baseMimeType(const char* mime, char* out, size_t outSize) {
+    size_t len = 0;
+    while (mime[len] != '\0' && mime[len] != ';' && len < outSize - 1) len++;
+    while (len > 0 && (mime[len - 1] == ' ' || mime[len - 1] == '\t')) len--;
+    memcpy(out, mime, len);
+    out[len] = '\0';
+  }
+
   bool selectDecoder(const char* mime) {
     bool result = false;
     if (mime == nullptr) return false;
@@ -188,14 +202,22 @@ class MultiDecoder : public AudioDecoder {
       is_first = false;
       return true;
     }
-    // close actual decoder 
+    // close actual decoder
     if (actual_decoder.decoder != this) end();
+
+    // A source may report a MIME type with an RFC 6381-style "codecs"
+    // (or other) parameter, e.g. "audio/mpeg; codecs=\"mpeg1-layer2\"" -
+    // decoders are registered under the plain base type ("audio/mpeg"),
+    // so an exact match would otherwise silently fail to find one.
+    char base[64];
+    baseMimeType(mime, base, sizeof(base));
 
     // find the corresponding decoder
     selected_mime = nullptr;
     for (int j = 0; j < decoders.size(); j++) {
       DecoderInfo info = decoders[j];
-      if (StrView(info.mime).equalsIgnoreCase(mime)) {
+      if (StrView(info.mime).equalsIgnoreCase(mime) ||
+          StrView(info.mime).equalsIgnoreCase(base)) {
         LOGI("Using decoder for %s (%s)", info.mime, mime);
         actual_decoder = info;
         // define output if it has not been defined
