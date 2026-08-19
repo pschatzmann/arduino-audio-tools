@@ -38,7 +38,13 @@
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
 #include "AudioTools/AudioCodecs/ContainerAVI.h"
 #include "AudioTools/AudioCodecs/CodecHelix.h"
-#include "AudioTools/Video/CodecH264.h"
+// Experiment: H264DecoderESP32S3 wraps the ESP32S3-h264 library (a trimmed
+// Arduino port of Espressif's esp_h264 component, linking a precompiled
+// OpenH264-based static lib) instead of the portable, pure-C++ TinyH264
+// H264Decoder (CodecH264.h) - testing whether it explains the ~120-135ms/
+// frame pure-decode cost measured with TinyH264 vs a reported 62.3fps
+// decode-only benchmark on similar hardware.
+#include "AudioTools/Video/CodecH264ESP32S3.h"
 #include "AudioTools/Video/OutputTinyGPU.h"
 #include <SD_MMC.h>
 #include <Adafruit_NeoPixel.h>
@@ -81,13 +87,24 @@ constexpr int8_t kPinRst = -1;  // shared with the board's EN/reset line
 constexpr int8_t kPinBacklight = 45;
 
 // panel resolution - used by OutputTinyGPU's begin()/clearScreen() sizing;
-// the actual per-frame size still comes from H264Decoder via
-// setVideoInfoSource()
-const uint16_t video_width = 240;
-const uint16_t video_height = 320;
+// landscape (320x240, matching the rotation passed to tftDriver below) so
+// the video fills the panel's long axis instead of playing in a small
+// portrait-shaped area. The actual per-frame source size still comes from
+// H264Decoder via setVideoInfoSource(); OutputTinyGPU::setScaleToFit(true)
+// (see setup()) stretches each decoded frame from that native size up to
+// this one.
+const uint16_t video_width = 320;
+const uint16_t video_height = 240;
 
-ILI9341Driver<RGB565> tftDriver(SPI, kPinCs, kPinDc, kPinRst);
-H264Decoder h264Decoder;
+// ILI9341's datasheet max SPI write clock is 10MHz officially, but these
+// clone panels are commonly run well beyond spec - 40MHz worked reliably;
+// 80MHz (the ESP32-S3's SPI peripheral max, half of its 160MHz base clock)
+// roughly halves the per-frame SPI transfer time again. Drop back to
+// 40000000 if this shows tearing/glitches on your specific panel.
+ILI9341Driver<RGB565> tftDriver(SPI, kPinCs, kPinDc, kPinRst,
+                                ILI9341Driver<RGB565>::Rotation::kLandscape,
+                                80000000);
+H264DecoderESP32S3<> h264Decoder;
 OutputTinyGPU tftOutput(tftDriver, video_width, video_height, kPinBacklight);
 AudioBoardStream out(ESP32S3HosyondDisplay);
 DecoderHelix multiDecoder;
@@ -96,6 +113,10 @@ EncodedAudioStream audioOut(&out, &multiDecoder);  // decodes PCM/AAC/MP3 -> out
 File file;
 DemuxerAVI aviDemuxer;
 CodecCopy copier(aviDemuxer, file);
+// Owned here (rather than left as aviDemuxer's internal default) so the
+// stats it accumulates - totalFrames()/totalDecodeWriteMs(), see loop() -
+// are reachable from the sketch; wired in via setVideoAudioSync() below.
+VideoAudioClockSync videoSync;
 
 void setup() {
   Serial.begin(115200);
@@ -105,14 +126,27 @@ void setup() {
   statusLed.begin();
   statusLed.setBrightness(64);
 
+  Serial.printf("DIAG: PSRAM size=%u free=%u\n", (unsigned)ESP.getPsramSize(),
+                (unsigned)ESP.getFreePsram());
+
   setStage(Stage::AudioCodec, "audio codec (out.begin)");
   auto cfg = out.defaultConfig(TX_MODE);
   cfg.sdmmc_active = true;  // board's begin() calls SD_MMC.setPins()+begin()
+  // Default I2S DMA buffer (512 * 6 = 3072 bytes => ~16ms @ 48kHz stereo)
+  // is far shorter than a single video chunk's blocking decode time
+  // (~100ms on this MCU) - confirmed on hardware that a bigger buffer only
+  // delays the first underrun, it doesn't eliminate the breakup: decode is
+  // ~2-3x too slow for real-time on average, so any fixed buffer
+  // eventually drains regardless of size. Kept enlarged (1024 * 64 =
+  // 65536 bytes => ~340ms) since it's still strictly better than the
+  // default, but the real fix is reducing decode cost (see H264Decoder).
+  cfg.buffer_size = 1024;
+  cfg.buffer_count = 64;
   if (!out.begin(cfg)) {
     Serial.println("AudioBoardStream begin() failed");
     stop();
   }
-  out.setVolume(0.5f);
+  out.setVolume(0.4f);
 
   setStage(Stage::SdOpen, "SD file open");
   file = SD_MMC.open(file_path);
@@ -121,14 +155,20 @@ void setup() {
     Serial.println(file_path);
     stop();
   }
+  Serial.printf("opened %s: %u bytes\n", file_path, (unsigned)file.size());
 
   setStage(Stage::Display, "display (tftOutput.begin)");
   SPI.begin(kPinSclk, kPinMiso, kPinMosi, kPinCs);
-  tftDriver.setInvertColor(true);
   if (!tftOutput.begin()) {
     Serial.println("OutputTinyGPU begin() failed");
     stop();
   }
+  // Must come AFTER tftOutput.begin(): it calls tftDriver.begin(), which
+  // does an ILI9341 SWRESET that resets every register - including
+  // inversion - back to power-on defaults, wiping out any setInvertColor()
+  // call made before it.
+  tftDriver.setInvertColor(true);
+  tftOutput.setScaleToFit(true);  // stretch the decoded 176x144 frame to fill the 320x240 landscape panel
 
   setStage(Stage::AudioStream, "audio stream (audioOut.begin)");
   multiDecoder.setMimeSource(aviDemuxer);
@@ -140,7 +180,14 @@ void setup() {
   setStage(Stage::VideoDecoder, "video decoder (h264Decoder.begin)");
   h264Decoder.setOutput(tftOutput);
   tftOutput.setVideoInfoSource(h264Decoder);
-  tftOutput.setVideoFormat(VideoFormat::RGB565);
+  h264Decoder.setInputBufferSize(64 * 1024);   // generous for QCIF frames
+  // This library's software (non-hardware) decode path only supports I420
+  // output - ESP_H264_RAW_FMT_RGB565_LE (the wrapper's default) fails
+  // begin() with "Un-supported h264 picture type parameter". OutputTinyGPU
+  // converts I420->RGB565 itself (see its writeI420()), so this is just
+  // format selection, not a display limitation.
+  h264Decoder.setVideoFormat(VideoFormat::I420);
+  h264Decoder.setOutputBufferSize(video_width * video_height * 3 / 2);
 
   if (!h264Decoder.begin()) {
     Serial.println("H264Decoder begin() failed");
@@ -149,22 +196,37 @@ void setup() {
 
   setStage(Stage::Demuxer, "AVI demuxer (aviDemuxer.begin)");
   aviDemuxer.setOutputAudio(audioOut);
+  aviDemuxer.setVideoAudioSync(&videoSync);
   aviDemuxer.setOutputVideo(h264Decoder);
   if (!aviDemuxer.begin()) {
     Serial.println("DemuxerAVI begin() failed");
     stop();
   }
 
+  videoSync.setMaxConsecutiveRenderSkips(1);
+
   setStage(Stage::Running, "playing");
 }
 
 void loop() {
-  if (file && copier.copy()) {
-    // continue
-  } else {
-    setStage(Stage::Done, "done");
-    Serial.println("Done");
-    file.close();
-    stop();
+  static uint32_t diagLast = 0;
+  if (millis() - diagLast > 1000) {
+    uint32_t frames = videoSync.totalFrames();
+    uint64_t decodeWriteMs = videoSync.totalDecodeWriteMs();
+    Serial.printf(
+        "DIAG: decodeErrors=%u decoded=%u | frames=%u framesPerSec=%.2f | "
+        "avgDecodeWriteMs(incl.SD+demux)=%.1f\n",
+        (unsigned)h264Decoder.decodeErrors(), (unsigned)h264Decoder.frameCount(),
+        (unsigned)frames, millis() > 0 ? frames * 1000.0 / millis() : 0.0,
+        frames > 0 ? (double)decodeWriteMs / frames : 0.0);
+    diagLast = millis();
+  }
+  if (file) {
+    if (copier.copy() == 0) {
+      setStage(Stage::Done, "done");
+      Serial.println("Done");
+      file.close();
+      stop();
+    }
   }
 }

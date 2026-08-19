@@ -46,7 +46,7 @@ namespace audio_tools {
  * @copyright GPLv3
  */
 template <typename Alloc = H264_DEFAULT_ALLOCATOR>
-class H264DecoderESP32S3 : public VideoDecoder {
+class H264DecoderESP32S3 : public VideoDecoder, public VideoInfoSource {
  public:
   H264DecoderESP32S3() {
     config_ = decoder_.defaultConfig();
@@ -54,6 +54,16 @@ class H264DecoderESP32S3 : public VideoDecoder {
     config_.frame_callback = [this](const uint8_t *frame, uint32_t w,
                                      uint32_t h, esp_h264_raw_format_t fmt) {
       if (p_out == nullptr && p_out_video == nullptr) return;
+      // This backend decodes fast enough to never need to skip decoding a
+      // frame outright (unlike H264Decoder/TinyH264's tiered
+      // shouldAdmitFrame() - see Video.h) - but the display refresh that
+      // follows can still be the slower half of the pipeline, so the
+      // cheapest tier (VideoOutput::setSkipRender()) still applies here:
+      // every frame is always decoded (keeping any internal reference
+      // state correct), only the panel write is skipped when behind.
+      if (p_sync_ != nullptr && p_out_video != nullptr) {
+        p_out_video->setSkipRender(p_sync_->shouldSkipRender());
+      }
       size_t bytes = (size_t)(w * h * ESP_H264_GET_BPP_BY_PIC_TYPE(fmt));
       if (p_out != nullptr) p_out->write(frame, bytes);
       if (p_out_video != nullptr) p_out_video->write(frame, bytes);
@@ -145,11 +155,19 @@ class H264DecoderESP32S3 : public VideoDecoder {
   /// Direct access to the wrapped esp_h264::H264Decoder.
   esp_h264::H264Decoder<Alloc> &driver() { return decoder_; }
 
+  /// Wires the demuxer's frame-pacing object in, so the frame callback
+  /// (see constructor) can consult isBehindSchedule() before writing a
+  /// decoded picture - see VideoOutput::setSyncSource(). Called
+  /// automatically by DemuxerAVI/DemuxerMP4/DemuxerMPG's
+  /// setOutputVideo(VideoOutput&).
+  void setSyncSource(VideoAudioSync *sync) override { p_sync_ = sync; }
+
  protected:
   esp_h264::H264Decoder<Alloc> decoder_;
   typename esp_h264::H264Decoder<Alloc>::Config config_;
   Print *p_out = nullptr;
   VideoOutput *p_out_video = nullptr;
+  VideoAudioSync *p_sync_ = nullptr;
 };
 
 /**

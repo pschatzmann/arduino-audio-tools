@@ -179,6 +179,8 @@ class VideoInfoSource {
 };
 
 
+class VideoAudioSync;
+
 /**
  * @brief Abstract class for video playback. This class is used to assemble a
  * complete video frame in memory. A video frame is written via one or more
@@ -196,6 +198,24 @@ class VideoOutput {
   /// calls - see class comment. Default no-op for implementations that
   /// display/decode synchronously in write() instead.
   virtual void flush() {}
+  /// Hint to skip the expensive part of displaying the next frame(s) (e.g.
+  /// the panel refresh) while still accepting and fully processing write()
+  /// calls - used to recover from falling behind the playback schedule
+  /// without breaking a codec's decode state (e.g. H.264 inter-prediction
+  /// reference chain, which requires every frame to still be decoded even
+  /// if it's never shown). Default no-op: implementations that can't skip
+  /// rendering cheaply just ignore it and always render.
+  virtual void setSkipRender(bool skip) {}
+  /// Optional: a demuxer that owns a VideoAudioSync (frame pacing) calls
+  /// this once, typically from its setOutputVideo(VideoOutput&), so a
+  /// decoder implementation can consult the sync object's admission policy
+  /// (VideoAudioSync::shouldAdmitFrame()) before spending decode time on a
+  /// frame, and its render-skip policy (isBehindSchedule()) before handing
+  /// a decoded picture to its own downstream VideoOutput - see H264Decoder
+  /// for the concrete use. Default no-op: most VideoOutput implementations
+  /// (e.g. a raw display sink) don't need pacing awareness themselves,
+  /// only decoders sitting between a demuxer and a display do.
+  virtual void setSyncSource(VideoAudioSync *sync) {}
 };
 
 
@@ -222,6 +242,53 @@ class VideoAudioSync {
     uint32_t delay_ms = microsecondsPerFrame / 1000;
     delay(delay_ms);
   }
+
+  /// True if the last delayVideoFrame() call found playback already behind
+  /// the target wall-clock schedule (nothing left to wait out) - a plain,
+  /// honest state query with no side effects. For deciding whether to
+  /// actually skip a frame's display refresh, use shouldSkipRender()
+  /// instead: unlike this method, it never recommends skipping forever.
+  /// Default false: this base class has no schedule to fall behind on.
+  virtual bool isBehindSchedule() const { return false; }
+
+  /// Render-skip policy, consulted by a decoder (via
+  /// VideoOutput::setSyncSource()) right before handing a freshly decoded
+  /// picture to its display output - the cheapest defense against
+  /// falling behind: the frame is always fully decoded regardless (so any
+  /// reference chain a codec maintains stays correct), only the display
+  /// refresh itself is skipped. Unlike a plain isBehindSchedule() check,
+  /// this must never recommend skipping indefinitely: with nothing ever
+  /// rendered, delayVideoFrame()'s wall-clock schedule can look
+  /// perpetually "behind" even once the pipeline has actually caught up,
+  /// since nothing decoded further ever proves it - the exact trap
+  /// shouldAdmitFrame() also has to guard against (see its comment).
+  /// Mutates state (unlike isBehindSchedule()): call it at most once per
+  /// frame. Default false: this base class never skips.
+  virtual bool shouldSkipRender() { return false; }
+
+  /// Signed lateness from the last delayVideoFrame() call: positive = this
+  /// far ahead of schedule (about to wait that long), negative = this far
+  /// behind. Finer-grained than isBehindSchedule(), for policies that need
+  /// to distinguish "mildly late" from "badly late" (see
+  /// shouldAdmitFrame()). Default 0: this base class has no schedule.
+  virtual int32_t latenessMs() const { return 0; }
+
+  /// Frame-admission policy, consulted by a decoder (via
+  /// VideoOutput::setSyncSource()) before it spends decode time on a
+  /// frame - lets sustained CPU pressure be handled by dropping decode
+  /// work itself, not just the display refresh (see
+  /// VideoOutput::setSkipRender() for that cheaper first line of
+  /// defense). `isKeyFrame` is the decoder's codec-specific answer to "can
+  /// this frame be decoded on its own, resetting any inter-frame
+  /// dependency chain" (e.g. an H.264 IDR slice) - a decoder that has no
+  /// such notion (e.g. MJPEG, where every frame is independent) can just
+  /// always pass true. Returning false means the decoder must skip this
+  /// frame's decode entirely (not even a partial attempt), so any
+  /// reference chain the codec maintains will drift/degrade until the
+  /// next isKeyFrame==true frame is admitted - an accepted trade-off for
+  /// staying in real time, not a bug. Default true: this base class never
+  /// drops frames.
+  virtual bool shouldAdmitFrame(bool isKeyFrame) { return true; }
 };
 
 /**
@@ -309,11 +376,23 @@ class VideoAudioBufferedSync : public VideoAudioSync {
  * if we're ahead, only the remaining time until the next scheduled frame is
  * waited out.
  *
- * Unlike DemuxerMP4 (which can skip decoding/writing a late frame entirely
- * before it's ever dispatched), delayVideoFrame() is only called after the
- * frame has already been written and flushed to the output - so this can't
- * save the decode/render cost of a late frame, only avoid needlessly
- * oversleeping on top of an existing lag.
+ * Also owns the frame-admission policy (shouldAdmitFrame()): on top of
+ * delayVideoFrame()'s after-the-fact pacing, a decoder can ask *before*
+ * spending decode time on a frame whether to bother at all. Three
+ * escalating tiers, cheapest first:
+ *   1. Mildly behind (isBehindSchedule()): still decode every frame (the
+ *      reference chain stays intact), just skip the display refresh -
+ *      see VideoOutput::setSkipRender().
+ *   2. Behind by more than pFrameSkipLatenessMs: stop decoding non-key
+ *      frames for the rest of the current GOP - cheaper than #1 alone,
+ *      but the decoder's reference chain now drifts until the next key
+ *      frame, so this trades a slightly wrong picture for actually
+ *      catching up.
+ *   3. Still behind by more than gopSkipLatenessMs right as a new key
+ *      frame arrives: skip that entire GOP's decode, key frame included.
+ * Tiers 2-3 are visible on screen (drift/frozen picture) in exchange for
+ * never blocking audio delivery on video decode that's already too slow
+ * to matter - see setFrameAdmissionThresholds() to tune or disable them.
  * @ingroup video
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -335,16 +414,134 @@ class VideoAudioClockSync : public VideoAudioSync {
         playback_start_ms +
         (uint32_t)((uint64_t)frame_index * microsecondsPerFrame / 1000);
     frame_index++;
+    // Positive: this frame is ahead of schedule by this many ms (about to
+    // wait that long); negative: already late by this many ms (playback
+    // is lagging - decode/render is taking longer than the frame period).
+    int32_t aheadMs = (int32_t)scheduledWallMs - (int32_t)nowMs;
+    LOGI("video frame %u: %s%d ms (decode+render took %u ms)", frame_index,
+         aheadMs >= 0 ? "early by " : "late by ",
+         aheadMs >= 0 ? aheadMs : -aheadMs, (unsigned)time_used_ms);
+    last_ahead_ms = aheadMs;
+    total_frames++;
+    total_decode_write_ms += time_used_ms;
+    if (aheadMs < p_frame_skip_lateness_ms) skip_p_frames_in_gop = true;
     if (nowMs < scheduledWallMs) {
       delay(scheduledWallMs - nowMs);
     }
     // else: already behind schedule - don't add to the lag
   }
 
+  /// Running count of delayVideoFrame() calls since this object was
+  /// created - one per video frame the demuxer has finished dispatching,
+  /// including frames whose decode was skipped by shouldAdmitFrame() (see
+  /// its class comment): delayVideoFrame() still runs for those, to keep
+  /// frame_index in sync with the real stream position.
+  uint32_t totalFrames() const { return total_frames; }
+
+  /// Sum of every delayVideoFrame() call's time_used_ms - the wall-clock
+  /// cost of decoding+writing each frame, NOT including the pacing
+  /// delay() this class may add on top. Divide by totalFrames() for the
+  /// true average per-frame processing cost, independent of how much idle
+  /// waiting happened around it.
+  uint64_t totalDecodeWriteMs() const { return total_decode_write_ms; }
+
+  /// Reflects whether the *previous* frame's delayVideoFrame() call found
+  /// playback behind schedule - checked by the demuxer before starting the
+  /// *next* frame's decode, so it doubles as "were we already late going
+  /// into this frame".
+  bool isBehindSchedule() const override { return last_ahead_ms < 0; }
+
+  int32_t latenessMs() const override { return last_ahead_ms; }
+
+  /// Duty-cycled render-skip decision - see the base class comment for
+  /// why a plain isBehindSchedule() check isn't safe here. Forces a
+  /// render through at least every maxConsecutiveRenderSkips+1'th call
+  /// regardless of lateness (tunable via setFrameAdmissionThresholds()),
+  /// mirroring shouldAdmitFrame()'s tier-3 GOP duty cycle.
+  bool shouldSkipRender() override {
+    bool wantSkip = last_ahead_ms < 0;
+    if (wantSkip && consecutive_render_skips >= max_consecutive_render_skips) {
+      wantSkip = false;
+    }
+    consecutive_render_skips = wantSkip ? consecutive_render_skips + 1 : 0;
+    return wantSkip;
+  }
+
+  /// See the class comment for tiers 2-3. `isKeyFrame` starting a new GOP
+  /// re-evaluates both the P-frame cutoff (reset) and the whole-GOP
+  /// decision (from the lateness seen at this exact boundary); a false
+  /// result for a non-key frame reflects a cutoff latched by an earlier
+  /// delayVideoFrame() call within the *same* GOP, not necessarily the
+  /// current lateness.
+  ///
+  /// Skipping every key frame's decode is deliberately never allowed to
+  /// latch forever: lateness is measured against a wall-clock schedule
+  /// that only advances by actually decoding+rendering, so once nothing
+  /// is admitted, there is no way left for the pipeline to prove it has
+  /// caught up and the lockout would never lift on its own - the picture
+  /// would freeze permanently on the last decoded frame while audio kept
+  /// playing normally forever after. maxConsecutiveGopSkips (see
+  /// setFrameAdmissionThresholds()) forces a GOP through periodically
+  /// regardless of measured lateness, trading a bit of decode cost for a
+  /// guarantee the picture keeps refreshing - and giving the pipeline an
+  /// actual chance to observe whether it's caught up.
+  bool shouldAdmitFrame(bool isKeyFrame) override {
+    if (isKeyFrame) {
+      skip_p_frames_in_gop = false;
+      bool wantSkip = last_ahead_ms < gop_skip_lateness_ms;
+      if (wantSkip && consecutive_gop_skips >= max_consecutive_gop_skips) {
+        wantSkip = false;
+      }
+      skip_gop = wantSkip;
+      consecutive_gop_skips = skip_gop ? consecutive_gop_skips + 1 : 0;
+    }
+    if (skip_gop) return false;
+    if (!isKeyFrame && skip_p_frames_in_gop) return false;
+    return true;
+  }
+
+  /// Tunes tiers 2-3 (see class comment) - both lateness thresholds in ms,
+  /// both expected <= 0 (0 disables that tier: it triggers on any
+  /// lateness at all). gopSkipMs should be more negative than
+  /// pFrameSkipMs (a whole GOP is only worth sacrificing once cutting
+  /// P-frames alone isn't enough) - not enforced, but an inverted pair
+  /// means tier 3 fires before tier 2 ever gets a chance to.
+  /// maxConsecutiveGopSkips caps how many GOPs in a row tier 3 may skip
+  /// before one is forced through regardless of lateness (see
+  /// shouldAdmitFrame()'s comment on why this must never be unbounded) -
+  /// e.g. 5 means at least 1 GOP in every 6 is always decoded.
+  void setFrameAdmissionThresholds(int32_t pFrameSkipMs, int32_t gopSkipMs,
+                                    int maxConsecutiveGopSkips = 5) {
+    p_frame_skip_lateness_ms = pFrameSkipMs;
+    gop_skip_lateness_ms = gopSkipMs;
+    max_consecutive_gop_skips = maxConsecutiveGopSkips;
+  }
+
+  /// Caps how many display refreshes in a row shouldSkipRender() may skip
+  /// before one is forced through regardless of lateness - e.g. 10 (the
+  /// default) means at least 1 render in every 11 always happens. Lower
+  /// this for a more frequently-updating (but slower-to-catch-up) picture
+  /// under sustained overload; see shouldSkipRender()'s comment for why a
+  /// finite cap is required, not just a good idea.
+  void setMaxConsecutiveRenderSkips(int maxSkips) {
+    max_consecutive_render_skips = maxSkips;
+  }
+
  protected:
   bool playback_start_set = false;
   uint32_t playback_start_ms = 0;
   uint32_t frame_index = 0;
+  int32_t last_ahead_ms = 0;
+  bool skip_p_frames_in_gop = false;
+  bool skip_gop = false;
+  int consecutive_gop_skips = 0;
+  uint32_t total_frames = 0;
+  uint64_t total_decode_write_ms = 0;
+  int32_t p_frame_skip_lateness_ms = -150;
+  int32_t gop_skip_lateness_ms = -400;
+  int max_consecutive_gop_skips = 5;
+  int consecutive_render_skips = 0;
+  int max_consecutive_render_skips = 10;
 };
 
 }  // namespace audio_tools

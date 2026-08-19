@@ -123,7 +123,11 @@ class DemuxerMP4 : public Demuxer {
   /// the total data rate is sufficient. The default buffers audio into a
   /// ring buffer and drains it steadily during dispatchVideo()'s wait
   /// instead of dumping it all at once.
-  void setVideoAudioSync(VideoAudioSync* yourSync) { p_synch = yourSync; }
+  void setVideoAudioSync(VideoAudioSync* yourSync) {
+    p_synch = yourSync;
+    // Re-wire regardless of call order relative to setOutputVideo().
+    if (p_video_out_video != nullptr) p_video_out_video->setSyncSource(p_synch);
+  }
 
   /// Provides the container mime
   const char* mimeVideo() override { return "video/mp4"; }
@@ -172,7 +176,10 @@ class DemuxerMP4 : public Demuxer {
   void setOutput(Print& out) override { setOutputAudio(out); }
 
   void setOutputVideo(Print& out) override { p_video_out = &out; }
-  void setOutputVideo(VideoOutput& out) { p_video_out_video = &out; }
+  void setOutputVideo(VideoOutput& out) {
+    p_video_out_video = &out;
+    out.setSyncSource(p_synch);
+  }
 
   /// Common video info (width/height/format/frame_size/total_file_size),
   /// analogous to audioInfo() - the same VideoInfo type is also provided

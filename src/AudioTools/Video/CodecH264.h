@@ -119,24 +119,114 @@ class H264Decoder : public VideoDecoder, public VideoInfoSource {
   /// per frame (e.g. from a demuxer that hands over payload in pieces).
   /// Decodes immediately, invoking setOutput()'s Print once per completed
   /// picture from within this call (not deferred to flush()).
+  ///
+  /// If setSyncSource() has been called, the *first* write() of a frame
+  /// (i.e. right after the previous flush()) also asks the sync object's
+  /// shouldAdmitFrame() whether to bother decoding this frame at all - see
+  /// VideoAudioSync::shouldAdmitFrame() for why. That decision is latched
+  /// (via decided_this_frame_) so a frame split across multiple write()
+  /// calls isn't re-evaluated mid-frame, which would leave the decoder
+  /// looking at bytes it can no longer make sense of as a NAL header.
   size_t write(const uint8_t *data, size_t len) override {
+    bool isNewFrame = false;
+    if (p_sync_ != nullptr) {
+      if (!decided_this_frame_) {
+        bool isKey = isIdrFrame(data, len);
+        frame_count_++;
+        if (isKey) key_frame_count_++;
+        admit_current_frame_ = p_sync_->shouldAdmitFrame(isKey);
+        decided_this_frame_ = true;
+        isNewFrame = true;
+      }
+      if (!admit_current_frame_) return len;
+    }
+    // Isolates pure CAVLC/reconstruction cost from everything the caller's
+    // own timing (e.g. DemuxerAVI's video_frame_start_ms) also bundles in
+    // - SD reads for this chunk, demux state-machine overhead - since that
+    // timer starts before this frame's bytes were even read, not here.
+    uint32_t decodeStart = millis();
     decoder_.write(data, len);
+    total_decode_ms_ += millis() - decodeStart;
+    if (isNewFrame) admitted_frame_count_++;
     return len;
   }
 
-  /// No-op - kept to satisfy the VideoOutput/Print contract; decoding
-  /// already happens synchronously in write() (see class comment).
-  void flush() override {}
+  /// Kept to satisfy the VideoOutput/Print contract - decoding already
+  /// happens synchronously in write() (see class comment) - but also
+  /// marks the frame boundary that re-arms the admission check above for
+  /// the next frame's first write() call.
+  void flush() override { decided_this_frame_ = false; }
 
   /// True if the most recent write() call ended in a bitstream error or
   /// hit an unsupported stream feature.
   bool hasError() { return decoder_.hasError(); }
 
+  /// Total frames seen so far (via write()'s NAL-type peek - only counted
+  /// when setSyncSource() is active, since that's what triggers the peek)
+  /// - regardless of whether shouldAdmitFrame() actually admitted each
+  /// one. Together with keyFrameCount(), gives the stream's average GOP
+  /// length (frameCount() / keyFrameCount()) without needing a separate
+  /// bitstream inspection pass.
+  uint32_t frameCount() const { return frame_count_; }
+  /// Of frameCount() frames seen, how many were IDR (key) frames.
+  uint32_t keyFrameCount() const { return key_frame_count_; }
+
+  /// Of frameCount() frames seen, how many were actually admitted (not
+  /// dropped by shouldAdmitFrame()) and so had at least one decoder_.
+  /// write() call made for them.
+  uint32_t admittedFrameCount() const { return admitted_frame_count_; }
+  /// Sum of time spent purely inside decoder_.write() (CAVLC decode +
+  /// reconstruction), across all admitted frames - excludes SD reads and
+  /// demux overhead that a caller's own outer timing (e.g. DemuxerAVI's
+  /// video_frame_start_ms-based time_used_ms, see VideoAudioSync::
+  /// totalDecodeWriteMs()) bundles in alongside it. Divide by
+  /// admittedFrameCount() for the true average pure-decode cost per
+  /// frame, to compare against that outer, coarser measurement.
+  uint64_t totalDecodeMs() const { return total_decode_ms_; }
+
   /// Direct access to the wrapped TinyH264Decoder, e.g. for its width()/
   /// height()/y()/u()/v()/getY()/getU()/getV() accessors.
   tinyh264::TinyH264Decoder<H264_DEFAULT_ALLOCATOR> &driver() { return decoder_; }
 
+  /// Wires the demuxer's frame-pacing object in, so write() can consult
+  /// its admission policy - see the class comment on VideoAudioSync's
+  /// shouldAdmitFrame(). Called automatically by
+  /// DemuxerAVI/DemuxerMP4/DemuxerMPG's setOutputVideo(VideoOutput&).
+  void setSyncSource(VideoAudioSync *sync) override { p_sync_ = sync; }
+
  protected:
+  /// Scans an Annex-B buffer for the first VCL NAL (slice type 1 or 5),
+  /// skipping over non-VCL NALs (SPS/PPS/SEI/AUD/...), and reports
+  /// whether it's an IDR (type 5, decodable on its own / starts a new
+  /// GOP) rather than a non-IDR slice (type 1, depends on prior frames).
+  /// Returns false (treat as non-IDR) if no VCL NAL is found at all -
+  /// conservative, so a malformed/empty buffer is never mistaken for a
+  /// GOP boundary and skipped as if it were safe to drop.
+  static bool isIdrFrame(const uint8_t *data, size_t len) {
+    size_t i = 0;
+    while (i + 3 <= len) {
+      if (data[i] == 0 && data[i + 1] == 0 && data[i + 2] == 1) {
+        size_t nalStart = i + 3;
+        if (nalStart >= len) break;
+        uint8_t nalType = data[nalStart] & 0x1F;
+        if (nalType == 1) return false;
+        if (nalType == 5) return true;
+        i = nalStart;
+      } else {
+        i++;
+      }
+    }
+    return false;
+  }
+
+  VideoAudioSync *p_sync_ = nullptr;
+  bool decided_this_frame_ = false;
+  bool admit_current_frame_ = true;
+  uint32_t frame_count_ = 0;
+  uint32_t key_frame_count_ = 0;
+  uint32_t admitted_frame_count_ = 0;
+  uint64_t total_decode_ms_ = 0;
+
   tinyh264::TinyH264Decoder<H264_DEFAULT_ALLOCATOR> decoder_;
   Print *p_out = nullptr;
   VideoOutput *p_out_video = nullptr;
@@ -150,6 +240,14 @@ class H264Decoder : public VideoDecoder, public VideoInfoSource {
 
   void writeToOutput() {
     if (p_out == nullptr && p_out_video == nullptr) return;
+    // No render-skip hint here: shouldAdmitFrame() (see write()) already
+    // decides whether a frame is worth decoding at all under sustained
+    // lateness - once we've reached its bounded steady-state lag, every
+    // *admitted* frame is exactly the amount of work the pipeline can
+    // afford, and isBehindSchedule() would stay true forever at that
+    // equilibrium (any nonzero lag still counts as "behind"), permanently
+    // skipping the render of the few frames that DO get decoded. So any
+    // frame that makes it this far is always shown.
     size_t w = decoder_.width();
     size_t h = decoder_.height();
     size_t n = 0;

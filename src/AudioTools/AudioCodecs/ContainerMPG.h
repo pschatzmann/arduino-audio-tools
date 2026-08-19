@@ -178,7 +178,10 @@ class DemuxerMPG : public Demuxer {
   /// Defines the video output - e.g. a VideoOutput implementation, or any
   /// other Print if you want the raw MPEG-1 video ES as-is.
   void setOutputVideo(Print &out) override { p_output_video = &out; }
-  void setOutputVideo(VideoOutput &out) { p_output_video_video = &out; }
+  void setOutputVideo(VideoOutput &out) {
+    p_output_video_video = &out;
+    out.setSyncSource(p_synch);
+  }
 
   /// Not applicable: MPEG-1 audio (Layer I/II/III) is compressed and
   /// self-framed (its own sync word), unlike PCM - it never needs a
@@ -190,7 +193,11 @@ class DemuxerMPG : public Demuxer {
   /// so this container gets the same real-time pacing MP4 does instead of
   /// dispatching audio/video as fast as bytes can be parsed (previously the
   /// PES PTS was parsed and immediately discarded - see parsePes()).
-  void setVideoAudioSync(VideoAudioSync &sync) { p_synch = &sync; }
+  void setVideoAudioSync(VideoAudioSync &sync) {
+    p_synch = &sync;
+    // Re-wire regardless of call order relative to setOutputVideo().
+    if (p_output_video_video != nullptr) p_output_video_video->setSyncSource(p_synch);
+  }
 
   /// Common video info (width/height/fps/format), parsed from the video
   /// ES's own sequence_header (ISO/IEC 11172-2) once seen - all zero/

@@ -221,11 +221,17 @@ public:
     return (BitmapInfoHeader *)ptr;
   }
 
-  size_t open;
-  size_t end_pos;
-  size_t start_pos;
-  size_t data_size;
-  size_t declared_size;
+  // Zero-initialized so a default-constructed/not-yet-set() ParseObject is
+  // deterministically "empty" (open==0 => isValid()==false for the default
+  // AVIChunk object_type below) instead of reading whatever was previously
+  // on the stack at this memory - the same uninitialized-read hazard that
+  // caused a real, platform-dependent infinite loop in cleanupStack() (see
+  // its own comment) when it read an unset ParseObject's end_pos.
+  size_t open = 0;
+  size_t end_pos = 0;
+  size_t start_pos = 0;
+  size_t data_size = 0;
+  size_t declared_size = 0;
 
   // for AVIStreamData
   int streamNumber() {
@@ -251,7 +257,13 @@ public:
 protected:
   // ParseBuffer data_buffer;
   char chunk_id[5] = {};
-  ParseObjectType object_type;
+  // Default is AVIChunk (not e.g. AVIList, whose isValid() is
+  // unconditionally true) so that a default-constructed/not-yet-set()
+  // ParseObject deterministically reports isValid()==false via the
+  // open==0 default above, instead of depending on whatever this member
+  // would otherwise be left as (see the class comment on the members
+  // above - this mirrors that fix).
+  ParseObjectType object_type = AVIChunk;
 };
 
 /**
@@ -335,6 +347,7 @@ public:
   }
   void setOutputVideo(VideoOutput &out_stream) {
     p_output_video_video = &out_stream;
+    out_stream.setSyncSource(p_synch);
   }
 
   virtual size_t write(const uint8_t *data, size_t len) override {
@@ -431,7 +444,12 @@ public:
   int videoSeconds() { return video_seconds; }
 
   /// Replace the synchronization logic with your implementation
-  void setVideoAudioSync(VideoAudioSync *yourSync) { p_synch = yourSync; }
+  void setVideoAudioSync(VideoAudioSync *yourSync) {
+    p_synch = yourSync;
+    // Re-wire regardless of call order relative to setOutputVideo().
+    if (p_output_video_video != nullptr)
+      p_output_video_video->setSyncSource(p_synch);
+  }
 
 protected:
   bool header_is_avi = false;
@@ -449,6 +467,15 @@ protected:
   Print *p_output_audio = nullptr;
   Print *p_output_video = nullptr;
   VideoOutput *p_output_video_video = nullptr;
+  /// Accumulates one whole video chunk (one frame's worth of Annex-B NAL
+  /// data) across however many writeData() calls it takes to stream the
+  /// chunk in - see writeData()'s own comment for why: video decoders
+  /// (e.g. H264Decoder/TinyH264) aren't guaranteed to handle a NAL unit
+  /// arriving split across separate write() calls, so this only ever
+  /// hands them one complete chunk per write() call, the same way
+  /// DemuxerMP4 already does (it can, trivially, since MP4's sample table
+  /// gives it each frame's exact size up front).
+  Vector<uint8_t> video_accumulator;
   long video_frame_start_ms = 0;
   long open_subchunk_len = 0;
   long current_pos = 0;
@@ -587,11 +614,11 @@ protected:
       parse_state = SubChunkContinue;
       open_subchunk_len = current_stream_data.open;
       if (current_stream_data.isVideo()) {
-        LOGI("video:[%d]->[%d]", (int)current_stream_data.start_pos,
+        LOGD("video:[%d]->[%d]", (int)current_stream_data.start_pos,
              (int)current_stream_data.end_pos);
         video_frame_start_ms = millis();
       } else if (current_stream_data.isAudio()) {
-        LOGI("audio:[%d]->[%d]", (int)current_stream_data.start_pos,
+        LOGD("audio:[%d]->[%d]", (int)current_stream_data.start_pos,
              (int)current_stream_data.end_pos);
       } else {
         // Not fatal - writeData() (SubChunkContinue) skips its payload below.
@@ -731,13 +758,39 @@ protected:
       consume(to_write);
     } else if (current_stream_data.isVideo()) {
       LOGD("video %d", (int)to_write);
+      // Accumulate rather than forward each piece immediately: a video
+      // chunk (one whole encoded frame) is routinely bigger than
+      // parse_buffer's capacity, so writeData() runs several times per
+      // chunk as more bytes stream in - forwarding each piece straight to
+      // p_output_video as it arrived used to split H.264 NAL units across
+      // separate write() calls at arbitrary byte offsets. TinyH264's
+      // NalReader resets fresh on every write() with no memory of an
+      // incomplete trailing NAL, so a mid-NAL split silently truncated
+      // that NAL and discarded its real continuation bytes - confirmed by
+      // byte-diffing exactly what H264Decoder received against a known-
+      // good ffmpeg extraction of the same stream (identical content,
+      // wrong call boundaries). Buffering the whole chunk here and
+      // delivering it in one write() call once open_subchunk_len reaches
+      // 0 below sidesteps that entirely - the same "one complete
+      // NAL-aligned buffer per frame" delivery DemuxerMP4 already does
+      // (trivially, since MP4's sample table gives it each frame's exact
+      // size up front).
       if (payload_to_write > 0) {
-        if (p_output_video != nullptr)
-          p_output_video->write(parse_buffer.data(), payload_to_write);
-        if (p_output_video_video != nullptr)
-          p_output_video_video->write(parse_buffer.data(), payload_to_write);
+        size_t offset = video_accumulator.size();
+        video_accumulator.resize(offset + payload_to_write);
+        memcpy(video_accumulator.data() + offset, parse_buffer.data(),
+               payload_to_write);
       }
       open_subchunk_len -= to_write;
+      if (open_subchunk_len == 0 && video_accumulator.size() > 0) {
+        if (p_output_video != nullptr)
+          p_output_video->write(video_accumulator.data(),
+                                 video_accumulator.size());
+        if (p_output_video_video != nullptr)
+          p_output_video_video->write(video_accumulator.data(),
+                                       video_accumulator.size());
+        video_accumulator.clear();
+      }
       cleanupStack();
       consume(to_write);
     } else {
@@ -860,11 +913,17 @@ protected:
 
   void cleanupStack() {
     ParseObject current;
-    // make sure that we remove the object from the stack of we past the end
-    object_stack.peek(current);
-    while (current.end_pos <= current_pos) {
+    // make sure that we remove the object from the stack if we past the end.
+    // peek() returns false (leaving 'current' untouched) once the stack is
+    // empty - checking that return value, not just current.end_pos, avoids
+    // reading current's garbage initial value on an empty stack (e.g. the
+    // very first call, before anything has ever been pushed): that garbage
+    // is platform/compiler-dependent, and this loop previously kept
+    // spinning forever on some builds (observed hanging on ESP32-S3 while
+    // an x86-64 desktop build of the exact same source/input happened not
+    // to) whenever it looked <= current_pos.
+    while (object_stack.peek(current) && current.end_pos <= current_pos) {
       object_stack.pop(current);
-      object_stack.peek(current);
     }
   }
 
