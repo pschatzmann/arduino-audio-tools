@@ -101,6 +101,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8cf172d57be330b5c7119b538d07fea2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab185a032a2de20c9a22b393096dcee76" id="r_ab185a032a2de20c9a22b393096dcee76"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_buffered_sync.html#ab185a032a2de20c9a22b393096dcee76">delayVideoFrame</a> (int32_t microsecondsPerFrame, uint32_t time_used_ms)</td></tr>
 <tr class="separator:ab185a032a2de20c9a22b393096dcee76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a400489d3efee77606cecffa2017eac1c" id="r_a400489d3efee77606cecffa2017eac1c"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync.html#a400489d3efee77606cecffa2017eac1c">isBehindSchedule</a> () const</td></tr>
+<tr class="separator:a400489d3efee77606cecffa2017eac1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8d6540382adef8b9754a90be966da10" id="r_ac8d6540382adef8b9754a90be966da10"><td class="memItemLeft" align="right" valign="top">virtual int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync.html#ac8d6540382adef8b9754a90be966da10">latenessMs</a> () const</td></tr>
+<tr class="separator:ac8d6540382adef8b9754a90be966da10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf0c3df2b08623da9a6b46f0bf68abaf" id="r_abf0c3df2b08623da9a6b46f0bf68abaf"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync.html#abf0c3df2b08623da9a6b46f0bf68abaf">shouldAdmitFrame</a> (bool isKeyFrame)</td></tr>
+<tr class="separator:abf0c3df2b08623da9a6b46f0bf68abaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3abb4ac23bf04ca1a56a6569ef2d891" id="r_aa3abb4ac23bf04ca1a56a6569ef2d891"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync.html#aa3abb4ac23bf04ca1a56a6569ef2d891">shouldSkipRender</a> ()</td></tr>
+<tr class="separator:aa3abb4ac23bf04ca1a56a6569ef2d891"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac3cf31a4852aa3d77849a3b64904083a" id="r_ac3cf31a4852aa3d77849a3b64904083a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_buffered_sync.html#ac3cf31a4852aa3d77849a3b64904083a">writeAudio</a> (<a class="el" href="class_print.html">Print</a> *out, uint8_t *data, size_t size)</td></tr>
 <tr class="memdesc:ac3cf31a4852aa3d77849a3b64904083a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process the audio data.  <br /></td></tr>
 <tr class="separator:ac3cf31a4852aa3d77849a3b64904083a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -192,6 +200,121 @@ Protected Attributes</h2></td></tr>
 <p>Adds a delay after playing a frame to process with the correct frame rate. If the playing is too slow we return the mod to select the frames </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_audio_sync.html#a82d0d8428e0c5ffb4049739d01ac753a">VideoAudioSync</a>.</p>
+
+</div>
+</div>
+<a id="a400489d3efee77606cecffa2017eac1c" name="a400489d3efee77606cecffa2017eac1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a400489d3efee77606cecffa2017eac1c">&#9670;&#160;</a></span>isBehindSchedule()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool isBehindSchedule </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>True if the last <a class="el" href="classaudio__tools_1_1_video_audio_buffered_sync.html#ab185a032a2de20c9a22b393096dcee76">delayVideoFrame()</a> call found playback already behind the target wall-clock schedule (nothing left to wait out) - a plain, honest state query with no side effects. For deciding whether to actually skip a frame's display refresh, use <a class="el" href="classaudio__tools_1_1_video_audio_sync.html#aa3abb4ac23bf04ca1a56a6569ef2d891">shouldSkipRender()</a> instead: unlike this method, it never recommends skipping forever. Default false: this base class has no schedule to fall behind on. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#ae73cbdb4963d704095c4081189176919">VideoAudioClockSync</a>.</p>
+
+</div>
+</div>
+<a id="ac8d6540382adef8b9754a90be966da10" name="ac8d6540382adef8b9754a90be966da10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8d6540382adef8b9754a90be966da10">&#9670;&#160;</a></span>latenessMs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual int32_t latenessMs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Signed lateness from the last <a class="el" href="classaudio__tools_1_1_video_audio_buffered_sync.html#ab185a032a2de20c9a22b393096dcee76">delayVideoFrame()</a> call: positive = this far ahead of schedule (about to wait that long), negative = this far behind. Finer-grained than <a class="el" href="classaudio__tools_1_1_video_audio_sync.html#a400489d3efee77606cecffa2017eac1c">isBehindSchedule()</a>, for policies that need to distinguish "mildly late" from "badly late" (see <a class="el" href="classaudio__tools_1_1_video_audio_sync.html#abf0c3df2b08623da9a6b46f0bf68abaf">shouldAdmitFrame()</a>). Default 0: this base class has no schedule. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#a330da6faf20be2c52d86c66b230c1f40">VideoAudioClockSync</a>.</p>
+
+</div>
+</div>
+<a id="abf0c3df2b08623da9a6b46f0bf68abaf" name="abf0c3df2b08623da9a6b46f0bf68abaf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf0c3df2b08623da9a6b46f0bf68abaf">&#9670;&#160;</a></span>shouldAdmitFrame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool shouldAdmitFrame </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isKeyFrame</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Frame-admission policy, consulted by a decoder (via <a class="el" href="classaudio__tools_1_1_video_output.html#a0788e6d8a8ec277be17ad0141b310e05">VideoOutput::setSyncSource()</a>) before it spends decode time on a frame - lets sustained CPU pressure be handled by dropping decode work itself, not just the display refresh (see <a class="el" href="classaudio__tools_1_1_video_output.html#ab4d364d9800016345ae6980424817214">VideoOutput::setSkipRender()</a> for that cheaper first line of defense). <code>isKeyFrame</code> is the decoder's codec-specific answer to "can
+this frame be decoded on its own, resetting any inter-frame
+dependency chain" (e.g. an H.264 IDR slice) - a decoder that has no such notion (e.g. MJPEG, where every frame is independent) can just always pass true. Returning false means the decoder must skip this frame's decode entirely (not even a partial attempt), so any reference chain the codec maintains will drift/degrade until the next isKeyFrame==true frame is admitted - an accepted trade-off for staying in real time, not a bug. Default true: this base class never drops frames. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#ae9517a695bca6cc32906baaf66631813">VideoAudioClockSync</a>.</p>
+
+</div>
+</div>
+<a id="aa3abb4ac23bf04ca1a56a6569ef2d891" name="aa3abb4ac23bf04ca1a56a6569ef2d891"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3abb4ac23bf04ca1a56a6569ef2d891">&#9670;&#160;</a></span>shouldSkipRender()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool shouldSkipRender </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Render-skip policy, consulted by a decoder (via <a class="el" href="classaudio__tools_1_1_video_output.html#a0788e6d8a8ec277be17ad0141b310e05">VideoOutput::setSyncSource()</a>) right before handing a freshly decoded picture to its display output - the cheapest defense against falling behind: the frame is always fully decoded regardless (so any reference chain a codec maintains stays correct), only the display refresh itself is skipped. Unlike a plain <a class="el" href="classaudio__tools_1_1_video_audio_sync.html#a400489d3efee77606cecffa2017eac1c">isBehindSchedule()</a> check, this must never recommend skipping indefinitely: with nothing ever rendered, <a class="el" href="classaudio__tools_1_1_video_audio_buffered_sync.html#ab185a032a2de20c9a22b393096dcee76">delayVideoFrame()</a>'s wall-clock schedule can look perpetually "behind" even once the pipeline has actually caught up, since nothing decoded further ever proves it - the exact trap <a class="el" href="classaudio__tools_1_1_video_audio_sync.html#abf0c3df2b08623da9a6b46f0bf68abaf">shouldAdmitFrame()</a> also has to guard against (see its comment). Mutates state (unlike <a class="el" href="classaudio__tools_1_1_video_audio_sync.html#a400489d3efee77606cecffa2017eac1c">isBehindSchedule()</a>): call it at most once per frame. Default false: this base class never skips. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#ac997ad1b2957c12012faaeb57d7ee230">VideoAudioClockSync</a>.</p>
 
 </div>
 </div>

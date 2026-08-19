@@ -24,10 +24,11 @@ var searchData=
   ['genres_21',['genres',['../namespaceaudio__tools.html#a1c8c26908307dcc9ed5243051454e9ed',1,'audio_tools']]],
   ['get_5freq_5fep_5fcb_5f_22',['get_req_ep_cb_',['../classaudio__tools_1_1_u_s_b_audio_device_base.html#a42c656e79a6c1ab799d0a2acf1e5041f',1,'audio_tools::USBAudioDeviceBase']]],
   ['get_5freq_5fitf_5fcb_5f_23',['get_req_itf_cb_',['../classaudio__tools_1_1_u_s_b_audio_device_base.html#aed04d6315b37f5ce38184ae468eb1406',1,'audio_tools::USBAudioDeviceBase']]],
-  ['gpio_24',['gpio',['../structaudio__tools_1_1_pin_info_e_s_p32.html#a9526af66d4e7f0276f5b025afa6c445d',1,'audio_tools::PinInfoESP32']]],
-  ['gpio_5fhigh_25',['gpio_high',['../structaudio__tools_1_1_pin_info_e_s_p32_compl.html#ab30771d2c1bf6ea3f4321bb8147e5520',1,'audio_tools::PinInfoESP32Compl']]],
-  ['gpio_5flow_26',['gpio_low',['../structaudio__tools_1_1_pin_info_e_s_p32_compl.html#a319d7c74f63085195ac17985883912f7',1,'audio_tools::PinInfoESP32Compl']]],
-  ['gpio_5fnone_27',['GPIO_NONE',['../namespaceaudio__tools.html#a3f5182f70c2f0f77262bcbbd05d55b79',1,'audio_tools']]],
-  ['gps_5fposition_28',['gps_position',['../struct_v_b_a_n___p_i_n_g0.html#acad92cbad90ebb0f856a7df7ceae463e',1,'VBAN_PING0::GPS_Position'],['../vban_8h.html#acad92cbad90ebb0f856a7df7ceae463e',1,'GPS_Position:&#160;vban.h']]],
-  ['granulepos_29',['granulepos',['../classaudio__tools_1_1_ogg_container_output.html#a033864495874bf05599d7d0fc8b6b992',1,'audio_tools::OggContainerOutput']]]
+  ['gop_5fskip_5flateness_5fms_24',['gop_skip_lateness_ms',['../classaudio__tools_1_1_video_audio_clock_sync.html#a059fac058b0af339140fa416f1c36358',1,'audio_tools::VideoAudioClockSync']]],
+  ['gpio_25',['gpio',['../structaudio__tools_1_1_pin_info_e_s_p32.html#a9526af66d4e7f0276f5b025afa6c445d',1,'audio_tools::PinInfoESP32']]],
+  ['gpio_5fhigh_26',['gpio_high',['../structaudio__tools_1_1_pin_info_e_s_p32_compl.html#ab30771d2c1bf6ea3f4321bb8147e5520',1,'audio_tools::PinInfoESP32Compl']]],
+  ['gpio_5flow_27',['gpio_low',['../structaudio__tools_1_1_pin_info_e_s_p32_compl.html#a319d7c74f63085195ac17985883912f7',1,'audio_tools::PinInfoESP32Compl']]],
+  ['gpio_5fnone_28',['GPIO_NONE',['../namespaceaudio__tools.html#a3f5182f70c2f0f77262bcbbd05d55b79',1,'audio_tools']]],
+  ['gps_5fposition_29',['gps_position',['../struct_v_b_a_n___p_i_n_g0.html#acad92cbad90ebb0f856a7df7ceae463e',1,'VBAN_PING0::GPS_Position'],['../vban_8h.html#acad92cbad90ebb0f856a7df7ceae463e',1,'GPS_Position:&#160;vban.h']]],
+  ['granulepos_30',['granulepos',['../classaudio__tools_1_1_ogg_container_output.html#a033864495874bf05599d7d0fc8b6b992',1,'audio_tools::OggContainerOutput']]]
 ];

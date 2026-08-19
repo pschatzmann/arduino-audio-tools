@@ -99,22 +99,64 @@ Inheritance diagram for VideoAudioClockSync:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a77746a84d6a3b905817376b7bfeddb25" id="r_a77746a84d6a3b905817376b7bfeddb25"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#a77746a84d6a3b905817376b7bfeddb25">delayVideoFrame</a> (int32_t microsecondsPerFrame, uint32_t time_used_ms) override</td></tr>
 <tr class="separator:a77746a84d6a3b905817376b7bfeddb25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae73cbdb4963d704095c4081189176919" id="r_ae73cbdb4963d704095c4081189176919"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#ae73cbdb4963d704095c4081189176919">isBehindSchedule</a> () const override</td></tr>
+<tr class="separator:ae73cbdb4963d704095c4081189176919"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a330da6faf20be2c52d86c66b230c1f40" id="r_a330da6faf20be2c52d86c66b230c1f40"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#a330da6faf20be2c52d86c66b230c1f40">latenessMs</a> () const override</td></tr>
+<tr class="separator:a330da6faf20be2c52d86c66b230c1f40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50155b2d040257d6f8916e6efa0336cd" id="r_a50155b2d040257d6f8916e6efa0336cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#a50155b2d040257d6f8916e6efa0336cd">setFrameAdmissionThresholds</a> (int32_t pFrameSkipMs, int32_t gopSkipMs, int maxConsecutiveGopSkips=5)</td></tr>
+<tr class="separator:a50155b2d040257d6f8916e6efa0336cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa275b42fbc559d34a61d68b035496df2" id="r_aa275b42fbc559d34a61d68b035496df2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#aa275b42fbc559d34a61d68b035496df2">setMaxConsecutiveRenderSkips</a> (int maxSkips)</td></tr>
+<tr class="separator:aa275b42fbc559d34a61d68b035496df2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9517a695bca6cc32906baaf66631813" id="r_ae9517a695bca6cc32906baaf66631813"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#ae9517a695bca6cc32906baaf66631813">shouldAdmitFrame</a> (bool isKeyFrame) override</td></tr>
+<tr class="separator:ae9517a695bca6cc32906baaf66631813"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac997ad1b2957c12012faaeb57d7ee230" id="r_ac997ad1b2957c12012faaeb57d7ee230"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#ac997ad1b2957c12012faaeb57d7ee230">shouldSkipRender</a> () override</td></tr>
+<tr class="separator:ac997ad1b2957c12012faaeb57d7ee230"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab53932a542590664feec37917f11f319" id="r_ab53932a542590664feec37917f11f319"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#ab53932a542590664feec37917f11f319">totalDecodeWriteMs</a> () const</td></tr>
+<tr class="separator:ab53932a542590664feec37917f11f319"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a251d69b4626b7fb9a1fb8b3b5001d487" id="r_a251d69b4626b7fb9a1fb8b3b5001d487"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#a251d69b4626b7fb9a1fb8b3b5001d487">totalFrames</a> () const</td></tr>
+<tr class="separator:a251d69b4626b7fb9a1fb8b3b5001d487"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa689e59e312ea8466171526e60d85f9e" id="r_aa689e59e312ea8466171526e60d85f9e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync.html#aa689e59e312ea8466171526e60d85f9e">writeAudio</a> (<a class="el" href="class_print.html">Print</a> *out, uint8_t *data, size_t size)</td></tr>
 <tr class="memdesc:aa689e59e312ea8466171526e60d85f9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process the audio data.  <br /></td></tr>
 <tr class="separator:aa689e59e312ea8466171526e60d85f9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:a504d37ff1eb21fefb01ea88bb3f83e4c" id="r_a504d37ff1eb21fefb01ea88bb3f83e4c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#a504d37ff1eb21fefb01ea88bb3f83e4c">consecutive_gop_skips</a> = 0</td></tr>
+<tr class="separator:a504d37ff1eb21fefb01ea88bb3f83e4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8dd0bad19a68de5c86da1171783051a" id="r_aa8dd0bad19a68de5c86da1171783051a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#aa8dd0bad19a68de5c86da1171783051a">consecutive_render_skips</a> = 0</td></tr>
+<tr class="separator:aa8dd0bad19a68de5c86da1171783051a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05f60adb7ca73495905c236f23d474d6" id="r_a05f60adb7ca73495905c236f23d474d6"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#a05f60adb7ca73495905c236f23d474d6">frame_index</a> = 0</td></tr>
 <tr class="separator:a05f60adb7ca73495905c236f23d474d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a059fac058b0af339140fa416f1c36358" id="r_a059fac058b0af339140fa416f1c36358"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#a059fac058b0af339140fa416f1c36358">gop_skip_lateness_ms</a> = -400</td></tr>
+<tr class="separator:a059fac058b0af339140fa416f1c36358"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb5472980288b9437a7df25c10929171" id="r_adb5472980288b9437a7df25c10929171"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#adb5472980288b9437a7df25c10929171">last_ahead_ms</a> = 0</td></tr>
+<tr class="separator:adb5472980288b9437a7df25c10929171"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5aa33fb3c87989e0b218fdf24617fbd" id="r_ab5aa33fb3c87989e0b218fdf24617fbd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#ab5aa33fb3c87989e0b218fdf24617fbd">max_consecutive_gop_skips</a> = 5</td></tr>
+<tr class="separator:ab5aa33fb3c87989e0b218fdf24617fbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17fc846c8090ac5b139df2200ac00bfe" id="r_a17fc846c8090ac5b139df2200ac00bfe"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#a17fc846c8090ac5b139df2200ac00bfe">max_consecutive_render_skips</a> = 10</td></tr>
+<tr class="separator:a17fc846c8090ac5b139df2200ac00bfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34bef2d40c6414ec6123ac40e311c4b9" id="r_a34bef2d40c6414ec6123ac40e311c4b9"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#a34bef2d40c6414ec6123ac40e311c4b9">p_frame_skip_lateness_ms</a> = -150</td></tr>
+<tr class="separator:a34bef2d40c6414ec6123ac40e311c4b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac282bedcc3123eddbb27a4fb842917c2" id="r_ac282bedcc3123eddbb27a4fb842917c2"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#ac282bedcc3123eddbb27a4fb842917c2">playback_start_ms</a> = 0</td></tr>
 <tr class="separator:ac282bedcc3123eddbb27a4fb842917c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ec16976226ccdaa5062d6d4372d712d" id="r_a1ec16976226ccdaa5062d6d4372d712d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#a1ec16976226ccdaa5062d6d4372d712d">playback_start_set</a> = false</td></tr>
 <tr class="separator:a1ec16976226ccdaa5062d6d4372d712d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ba85c5b95174bfaaa849664b7ef7b22" id="r_a7ba85c5b95174bfaaa849664b7ef7b22"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#a7ba85c5b95174bfaaa849664b7ef7b22">skip_gop</a> = false</td></tr>
+<tr class="separator:a7ba85c5b95174bfaaa849664b7ef7b22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e60c636b838a0d9983f725d702daf7a" id="r_a4e60c636b838a0d9983f725d702daf7a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#a4e60c636b838a0d9983f725d702daf7a">skip_p_frames_in_gop</a> = false</td></tr>
+<tr class="separator:a4e60c636b838a0d9983f725d702daf7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae742ff104a06963f0e57dd3b9f64bb6f" id="r_ae742ff104a06963f0e57dd3b9f64bb6f"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#ae742ff104a06963f0e57dd3b9f64bb6f">total_decode_write_ms</a> = 0</td></tr>
+<tr class="separator:ae742ff104a06963f0e57dd3b9f64bb6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f4d201125ca5e1ef41c3e75cb510a54" id="r_a3f4d201125ca5e1ef41c3e75cb510a54"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#a3f4d201125ca5e1ef41c3e75cb510a54">total_frames</a> = 0</td></tr>
+<tr class="separator:a3f4d201125ca5e1ef41c3e75cb510a54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Logic to Synchronize video and audio output: mirrors <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html" title="DemuxerMP4 extracts both the audio and (H.264) video track from a general, interleaved MP4/ISO-BMFF s...">DemuxerMP4</a>'s approach (dispatchVideo() in <a class="el" href="_container_m_p4_8h.html">ContainerMP4.h</a>) rather than using a ring buffer - audio is written straight through (the default <a class="el" href="classaudio__tools_1_1_video_audio_sync.html#aa689e59e312ea8466171526e60d85f9e" title="Process the audio data.">writeAudio()</a> is kept as-is), relying on the audio output itself (e.g. <a class="el" href="classaudio__tools_1_1_port_audio_stream.html" title="Arduino Audio Stream using PortAudio.">PortAudioStream</a>'s blocking write) to set the real-time pace. Video pacing is computed against a wall-clock schedule anchored at the first frame instead of a fixed <a class="el" href="namespaceaudio__tools.html#a7f2dfce1046bdd2a2b753643726c2346">delay()</a> every call: if we're already behind schedule, no delay is added (letting the pipeline catch up instead of falling further behind); if we're ahead, only the remaining time until the next scheduled frame is waited out. </p>
-<p>Unlike <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html" title="DemuxerMP4 extracts both the audio and (H.264) video track from a general, interleaved MP4/ISO-BMFF s...">DemuxerMP4</a> (which can skip decoding/writing a late frame entirely before it's ever dispatched), <a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#a77746a84d6a3b905817376b7bfeddb25">delayVideoFrame()</a> is only called after the frame has already been written and flushed to the output - so this can't save the decode/render cost of a late frame, only avoid needlessly oversleeping on top of an existing lag.</p>
+<p>Also owns the frame-admission policy (<a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#ae9517a695bca6cc32906baaf66631813">shouldAdmitFrame()</a>): on top of <a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#a77746a84d6a3b905817376b7bfeddb25">delayVideoFrame()</a>'s after-the-fact pacing, a decoder can ask <em>before</em> spending decode time on a frame whether to bother at all. Three escalating tiers, cheapest first:</p><ol type="1">
+<li>Mildly behind (<a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#ae73cbdb4963d704095c4081189176919">isBehindSchedule()</a>): still decode every frame (the reference chain stays intact), just skip the display refresh - see <a class="el" href="classaudio__tools_1_1_video_output.html#ab4d364d9800016345ae6980424817214">VideoOutput::setSkipRender()</a>.</li>
+<li>Behind by more than pFrameSkipLatenessMs: stop decoding non-key frames for the rest of the current GOP - cheaper than #1 alone, but the decoder's reference chain now drifts until the next key frame, so this trades a slightly wrong picture for actually catching up.</li>
+<li>Still behind by more than gopSkipLatenessMs right as a new key frame arrives: skip that entire GOP's decode, key frame included. Tiers 2-3 are visible on screen (drift/frozen picture) in exchange for never blocking audio delivery on video decode that's already too slow to matter - see <a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#a50155b2d040257d6f8916e6efa0336cd">setFrameAdmissionThresholds()</a> to tune or disable them.</li>
+</ol>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
@@ -154,6 +196,243 @@ Protected Attributes</h2></td></tr>
 <p>Waits only for the remaining time until the next frame's scheduled wall-clock instant - if already behind schedule, returns immediately instead of adding a full fixed delay on top of the lag. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_audio_sync.html#a82d0d8428e0c5ffb4049739d01ac753a">VideoAudioSync</a>.</p>
+
+</div>
+</div>
+<a id="ae73cbdb4963d704095c4081189176919" name="ae73cbdb4963d704095c4081189176919"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae73cbdb4963d704095c4081189176919">&#9670;&#160;</a></span>isBehindSchedule()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isBehindSchedule </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Reflects whether the <em>previous</em> frame's <a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#a77746a84d6a3b905817376b7bfeddb25">delayVideoFrame()</a> call found playback behind schedule - checked by the demuxer before starting the <em>next</em> frame's decode, so it doubles as "were we already late going
+into this frame". </p>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_audio_sync.html#a400489d3efee77606cecffa2017eac1c">VideoAudioSync</a>.</p>
+
+</div>
+</div>
+<a id="a330da6faf20be2c52d86c66b230c1f40" name="a330da6faf20be2c52d86c66b230c1f40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a330da6faf20be2c52d86c66b230c1f40">&#9670;&#160;</a></span>latenessMs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t latenessMs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Signed lateness from the last <a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#a77746a84d6a3b905817376b7bfeddb25">delayVideoFrame()</a> call: positive = this far ahead of schedule (about to wait that long), negative = this far behind. Finer-grained than <a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#ae73cbdb4963d704095c4081189176919">isBehindSchedule()</a>, for policies that need to distinguish "mildly late" from "badly late" (see <a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#ae9517a695bca6cc32906baaf66631813">shouldAdmitFrame()</a>). Default 0: this base class has no schedule. </p>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_audio_sync.html#ac8d6540382adef8b9754a90be966da10">VideoAudioSync</a>.</p>
+
+</div>
+</div>
+<a id="a50155b2d040257d6f8916e6efa0336cd" name="a50155b2d040257d6f8916e6efa0336cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50155b2d040257d6f8916e6efa0336cd">&#9670;&#160;</a></span>setFrameAdmissionThresholds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setFrameAdmissionThresholds </td>
+          <td>(</td>
+          <td class="paramtype">int32_t&#160;</td>
+          <td class="paramname"><em>pFrameSkipMs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int32_t&#160;</td>
+          <td class="paramname"><em>gopSkipMs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>maxConsecutiveGopSkips</em> = <code>5</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Tunes tiers 2-3 (see class comment) - both lateness thresholds in ms, both expected &lt;= 0 (0 disables that tier: it triggers on any lateness at all). gopSkipMs should be more negative than pFrameSkipMs (a whole GOP is only worth sacrificing once cutting P-frames alone isn't enough) - not enforced, but an inverted pair means tier 3 fires before tier 2 ever gets a chance to. maxConsecutiveGopSkips caps how many GOPs in a row tier 3 may skip before one is forced through regardless of lateness (see <a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#ae9517a695bca6cc32906baaf66631813">shouldAdmitFrame()</a>'s comment on why this must never be unbounded) - e.g. 5 means at least 1 GOP in every 6 is always decoded. </p>
+
+</div>
+</div>
+<a id="aa275b42fbc559d34a61d68b035496df2" name="aa275b42fbc559d34a61d68b035496df2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa275b42fbc559d34a61d68b035496df2">&#9670;&#160;</a></span>setMaxConsecutiveRenderSkips()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setMaxConsecutiveRenderSkips </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>maxSkips</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Caps how many display refreshes in a row <a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#ac997ad1b2957c12012faaeb57d7ee230">shouldSkipRender()</a> may skip before one is forced through regardless of lateness - e.g. 10 (the default) means at least 1 render in every 11 always happens. Lower this for a more frequently-updating (but slower-to-catch-up) picture under sustained overload; see <a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#ac997ad1b2957c12012faaeb57d7ee230">shouldSkipRender()</a>'s comment for why a finite cap is required, not just a good idea. </p>
+
+</div>
+</div>
+<a id="ae9517a695bca6cc32906baaf66631813" name="ae9517a695bca6cc32906baaf66631813"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9517a695bca6cc32906baaf66631813">&#9670;&#160;</a></span>shouldAdmitFrame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool shouldAdmitFrame </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isKeyFrame</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>See the class comment for tiers 2-3. <code>isKeyFrame</code> starting a new GOP re-evaluates both the P-frame cutoff (reset) and the whole-GOP decision (from the lateness seen at this exact boundary); a false result for a non-key frame reflects a cutoff latched by an earlier <a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#a77746a84d6a3b905817376b7bfeddb25">delayVideoFrame()</a> call within the <em>same</em> GOP, not necessarily the current lateness.</p>
+<p>Skipping every key frame's decode is deliberately never allowed to latch forever: lateness is measured against a wall-clock schedule that only advances by actually decoding+rendering, so once nothing is admitted, there is no way left for the pipeline to prove it has caught up and the lockout would never lift on its own - the picture would freeze permanently on the last decoded frame while audio kept playing normally forever after. maxConsecutiveGopSkips (see <a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#a50155b2d040257d6f8916e6efa0336cd">setFrameAdmissionThresholds()</a>) forces a GOP through periodically regardless of measured lateness, trading a bit of decode cost for a guarantee the picture keeps refreshing - and giving the pipeline an actual chance to observe whether it's caught up. </p>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_audio_sync.html#abf0c3df2b08623da9a6b46f0bf68abaf">VideoAudioSync</a>.</p>
+
+</div>
+</div>
+<a id="ac997ad1b2957c12012faaeb57d7ee230" name="ac997ad1b2957c12012faaeb57d7ee230"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac997ad1b2957c12012faaeb57d7ee230">&#9670;&#160;</a></span>shouldSkipRender()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool shouldSkipRender </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Duty-cycled render-skip decision - see the base class comment for why a plain <a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#ae73cbdb4963d704095c4081189176919">isBehindSchedule()</a> check isn't safe here. Forces a render through at least every maxConsecutiveRenderSkips+1'th call regardless of lateness (tunable via <a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#a50155b2d040257d6f8916e6efa0336cd">setFrameAdmissionThresholds()</a>), mirroring <a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#ae9517a695bca6cc32906baaf66631813">shouldAdmitFrame()</a>'s tier-3 GOP duty cycle. </p>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_audio_sync.html#aa3abb4ac23bf04ca1a56a6569ef2d891">VideoAudioSync</a>.</p>
+
+</div>
+</div>
+<a id="ab53932a542590664feec37917f11f319" name="ab53932a542590664feec37917f11f319"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab53932a542590664feec37917f11f319">&#9670;&#160;</a></span>totalDecodeWriteMs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t totalDecodeWriteMs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Sum of every <a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#a77746a84d6a3b905817376b7bfeddb25">delayVideoFrame()</a> call's time_used_ms - the wall-clock cost of decoding+writing each frame, NOT including the pacing <a class="el" href="namespaceaudio__tools.html#a7f2dfce1046bdd2a2b753643726c2346">delay()</a> this class may add on top. Divide by <a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#a251d69b4626b7fb9a1fb8b3b5001d487">totalFrames()</a> for the true average per-frame processing cost, independent of how much idle waiting happened around it. </p>
+
+</div>
+</div>
+<a id="a251d69b4626b7fb9a1fb8b3b5001d487" name="a251d69b4626b7fb9a1fb8b3b5001d487"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a251d69b4626b7fb9a1fb8b3b5001d487">&#9670;&#160;</a></span>totalFrames()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t totalFrames </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Running count of <a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#a77746a84d6a3b905817376b7bfeddb25">delayVideoFrame()</a> calls since this object was created - one per video frame the demuxer has finished dispatching, including frames whose decode was skipped by <a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#ae9517a695bca6cc32906baaf66631813">shouldAdmitFrame()</a> (see its class comment): <a class="el" href="classaudio__tools_1_1_video_audio_clock_sync.html#a77746a84d6a3b905817376b7bfeddb25">delayVideoFrame()</a> still runs for those, to keep frame_index in sync with the real stream position. </p>
 
 </div>
 </div>
@@ -204,6 +483,50 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a504d37ff1eb21fefb01ea88bb3f83e4c" name="a504d37ff1eb21fefb01ea88bb3f83e4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a504d37ff1eb21fefb01ea88bb3f83e4c">&#9670;&#160;</a></span>consecutive_gop_skips</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int consecutive_gop_skips = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa8dd0bad19a68de5c86da1171783051a" name="aa8dd0bad19a68de5c86da1171783051a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8dd0bad19a68de5c86da1171783051a">&#9670;&#160;</a></span>consecutive_render_skips</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int consecutive_render_skips = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a05f60adb7ca73495905c236f23d474d6" name="a05f60adb7ca73495905c236f23d474d6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a05f60adb7ca73495905c236f23d474d6">&#9670;&#160;</a></span>frame_index</h2>
 
@@ -215,6 +538,116 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">uint32_t frame_index = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a059fac058b0af339140fa416f1c36358" name="a059fac058b0af339140fa416f1c36358"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a059fac058b0af339140fa416f1c36358">&#9670;&#160;</a></span>gop_skip_lateness_ms</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t gop_skip_lateness_ms = -400</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adb5472980288b9437a7df25c10929171" name="adb5472980288b9437a7df25c10929171"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb5472980288b9437a7df25c10929171">&#9670;&#160;</a></span>last_ahead_ms</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t last_ahead_ms = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab5aa33fb3c87989e0b218fdf24617fbd" name="ab5aa33fb3c87989e0b218fdf24617fbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5aa33fb3c87989e0b218fdf24617fbd">&#9670;&#160;</a></span>max_consecutive_gop_skips</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int max_consecutive_gop_skips = 5</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a17fc846c8090ac5b139df2200ac00bfe" name="a17fc846c8090ac5b139df2200ac00bfe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17fc846c8090ac5b139df2200ac00bfe">&#9670;&#160;</a></span>max_consecutive_render_skips</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int max_consecutive_render_skips = 10</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a34bef2d40c6414ec6123ac40e311c4b9" name="a34bef2d40c6414ec6123ac40e311c4b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34bef2d40c6414ec6123ac40e311c4b9">&#9670;&#160;</a></span>p_frame_skip_lateness_ms</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t p_frame_skip_lateness_ms = -150</td>
         </tr>
       </table>
   </td>
@@ -259,6 +692,94 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">bool playback_start_set = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7ba85c5b95174bfaaa849664b7ef7b22" name="a7ba85c5b95174bfaaa849664b7ef7b22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ba85c5b95174bfaaa849664b7ef7b22">&#9670;&#160;</a></span>skip_gop</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool skip_gop = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4e60c636b838a0d9983f725d702daf7a" name="a4e60c636b838a0d9983f725d702daf7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e60c636b838a0d9983f725d702daf7a">&#9670;&#160;</a></span>skip_p_frames_in_gop</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool skip_p_frames_in_gop = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae742ff104a06963f0e57dd3b9f64bb6f" name="ae742ff104a06963f0e57dd3b9f64bb6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae742ff104a06963f0e57dd3b9f64bb6f">&#9670;&#160;</a></span>total_decode_write_ms</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t total_decode_write_ms = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3f4d201125ca5e1ef41c3e75cb510a54" name="a3f4d201125ca5e1ef41c3e75cb510a54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f4d201125ca5e1ef41c3e75cb510a54">&#9670;&#160;</a></span>total_frames</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t total_frames = 0</td>
         </tr>
       </table>
   </td>

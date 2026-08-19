@@ -92,6 +92,7 @@ Inheritance diagram for H264DecoderESP32S3&lt; Alloc &gt;:</div>
   <img src="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.png" usemap="#H264DecoderESP32S3_3C_20Alloc_20_3E_map" alt=""/>
   <map id="H264DecoderESP32S3_3C_20Alloc_20_3E_map" name="H264DecoderESP32S3_3C_20Alloc_20_3E_map">
 <area href="classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 - CodecH264...." alt="VideoDecoder" shape="rect" coords="0,56,197,80"/>
+<area href="classaudio__tools_1_1_video_info_source.html" alt="VideoInfoSource" shape="rect" coords="207,56,404,80"/>
 <area href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="VideoOutput" shape="rect" coords="0,0,197,24"/>
   </map>
 </div></div>
@@ -129,6 +130,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8e9c9d6d2876f620f49313a51c39f5b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af877902bb7890a031fd284db22c96ccc" id="r_af877902bb7890a031fd284db22c96ccc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#af877902bb7890a031fd284db22c96ccc">setOutputBufferSize</a> (size_t size)</td></tr>
 <tr class="separator:af877902bb7890a031fd284db22c96ccc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4d364d9800016345ae6980424817214" id="r_ab4d364d9800016345ae6980424817214"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#ab4d364d9800016345ae6980424817214">setSkipRender</a> (bool skip)</td></tr>
+<tr class="separator:ab4d364d9800016345ae6980424817214"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0108fbf4ffc3c786f9359fa676424118" id="r_a0108fbf4ffc3c786f9359fa676424118"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a0108fbf4ffc3c786f9359fa676424118">setSyncSource</a> (<a class="el" href="classaudio__tools_1_1_video_audio_sync.html">VideoAudioSync</a> *sync) override</td></tr>
+<tr class="separator:a0108fbf4ffc3c786f9359fa676424118"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4305de559192cc500fbd0587b2748ea" id="r_ab4305de559192cc500fbd0587b2748ea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#ab4305de559192cc500fbd0587b2748ea">setVideoFormat</a> (<a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a> format) override</td></tr>
 <tr class="separator:ab4305de559192cc500fbd0587b2748ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a026655e20010414e4d162042f5c413" id="r_a0a026655e20010414e4d162042f5c413"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_video_info.html">VideoInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a0a026655e20010414e4d162042f5c413">videoInfo</a> () override</td></tr>
@@ -146,6 +151,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:aa42c30e02e51ec7cc38ea4ab215e0db4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f9b668b9f2805f1dcca5a9ffc0cb15c" id="r_a2f9b668b9f2805f1dcca5a9ffc0cb15c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a2f9b668b9f2805f1dcca5a9ffc0cb15c">p_out_video</a> = nullptr</td></tr>
 <tr class="separator:a2f9b668b9f2805f1dcca5a9ffc0cb15c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19deb4927e431a0bbc5c64a4a22bfa94" id="r_a19deb4927e431a0bbc5c64a4a22bfa94"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_video_audio_sync.html">VideoAudioSync</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a19deb4927e431a0bbc5c64a4a22bfa94">p_sync_</a> = nullptr</td></tr>
+<tr class="separator:a19deb4927e431a0bbc5c64a4a22bfa94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename Alloc = H264_DEFAULT_ALLOCATOR&gt;<br />
@@ -535,6 +542,66 @@ template&lt;typename Alloc  = H264_DEFAULT_ALLOCATOR&gt; </div>
 
 </div>
 </div>
+<a id="ab4d364d9800016345ae6980424817214" name="ab4d364d9800016345ae6980424817214"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4d364d9800016345ae6980424817214">&#9670;&#160;</a></span>setSkipRender()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void setSkipRender </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>skip</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Hint to skip the expensive part of displaying the next frame(s) (e.g. the panel refresh) while still accepting and fully processing <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> calls - used to recover from falling behind the playback schedule without breaking a codec's decode state (e.g. H.264 inter-prediction reference chain, which requires every frame to still be decoded even if it's never shown). Default no-op: implementations that can't skip rendering cheaply just ignore it and always render. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a94f8728be362b736be4cb10a4253d201">OutputTinyGPU</a>.</p>
+
+</div>
+</div>
+<a id="a0108fbf4ffc3c786f9359fa676424118" name="a0108fbf4ffc3c786f9359fa676424118"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0108fbf4ffc3c786f9359fa676424118">&#9670;&#160;</a></span>setSyncSource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Alloc  = H264_DEFAULT_ALLOCATOR&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setSyncSource </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_video_audio_sync.html">VideoAudioSync</a> *&#160;</td>
+          <td class="paramname"><em>sync</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Wires the demuxer's frame-pacing object in, so the frame callback (see constructor) can consult isBehindSchedule() before writing a decoded picture - see <a class="el" href="classaudio__tools_1_1_video_output.html#a0788e6d8a8ec277be17ad0141b310e05">VideoOutput::setSyncSource()</a>. Called automatically by DemuxerAVI/DemuxerMP4/DemuxerMPG's setOutputVideo(VideoOutput&amp;). </p>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_output.html#a0788e6d8a8ec277be17ad0141b310e05">VideoOutput</a>.</p>
+
+</div>
+</div>
 <a id="ab4305de559192cc500fbd0587b2748ea" name="ab4305de559192cc500fbd0587b2748ea"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab4305de559192cc500fbd0587b2748ea">&#9670;&#160;</a></span>setVideoFormat()</h2>
 
@@ -723,6 +790,30 @@ template&lt;typename Alloc  = H264_DEFAULT_ALLOCATOR&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a>* p_out_video = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a19deb4927e431a0bbc5c64a4a22bfa94" name="a19deb4927e431a0bbc5c64a4a22bfa94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19deb4927e431a0bbc5c64a4a22bfa94">&#9670;&#160;</a></span>p_sync_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Alloc  = H264_DEFAULT_ALLOCATOR&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_video_audio_sync.html">VideoAudioSync</a>* p_sync_ = nullptr</td>
         </tr>
       </table>
   </td>

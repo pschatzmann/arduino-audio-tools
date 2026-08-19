@@ -75,6 +75,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_output_tiny_g_p_u-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">OutputTinyGPU Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__video.html">Video</a></div></div></div>
@@ -105,6 +106,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9d7e8af417b6d543da691e9c0e2f6f9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3aed50bc3b4459454ccb8c64f5ced5a" id="r_ad3aed50bc3b4459454ccb8c64f5ced5a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#ad3aed50bc3b4459454ccb8c64f5ced5a">flush</a> ()</td></tr>
 <tr class="separator:ad3aed50bc3b4459454ccb8c64f5ced5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba37de7b679bd80208a870f1815f8a86" id="r_aba37de7b679bd80208a870f1815f8a86"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#aba37de7b679bd80208a870f1815f8a86">setScaleToFit</a> (bool enable)</td></tr>
+<tr class="separator:aba37de7b679bd80208a870f1815f8a86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94f8728be362b736be4cb10a4253d201" id="r_a94f8728be362b736be4cb10a4253d201"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a94f8728be362b736be4cb10a4253d201">setSkipRender</a> (bool skip) override</td></tr>
+<tr class="separator:a94f8728be362b736be4cb10a4253d201"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0788e6d8a8ec277be17ad0141b310e05" id="r_a0788e6d8a8ec277be17ad0141b310e05"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a0788e6d8a8ec277be17ad0141b310e05">setSyncSource</a> (<a class="el" href="classaudio__tools_1_1_video_audio_sync.html">VideoAudioSync</a> *sync)</td></tr>
+<tr class="separator:a0788e6d8a8ec277be17ad0141b310e05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4314004ac5b3ede54d47b6814008d35" id="r_ac4314004ac5b3ede54d47b6814008d35"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#ac4314004ac5b3ede54d47b6814008d35">setVideoInfo</a> (<a class="el" href="structaudio__tools_1_1_video_info.html">VideoInfo</a> info)</td></tr>
 <tr class="memdesc:ac4314004ac5b3ede54d47b6814008d35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the video format and dimensions - call before <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a> if you.  <br /></td></tr>
 <tr class="separator:ac4314004ac5b3ede54d47b6814008d35"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -113,11 +120,22 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab848f87085dcf8ecc7343e4c4d690306"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b5873fe8a11695dc332ba0568305a05" id="r_a6b5873fe8a11695dc332ba0568305a05"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a6b5873fe8a11695dc332ba0568305a05">writeI420</a> (const uint8_t *data, int srcW, int srcH)</td></tr>
+<tr class="separator:a6b5873fe8a11695dc332ba0568305a05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8319bf464519754d81e8c232e06b2a5" id="r_ab8319bf464519754d81e8c232e06b2a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#ab8319bf464519754d81e8c232e06b2a5">writeScaled</a> (const uint8_t *data, int srcW, int srcH)</td></tr>
+<tr class="separator:ab8319bf464519754d81e8c232e06b2a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:adae0f3e05bf786de90d4f36ed7d51d6e" id="r_adae0f3e05bf786de90d4f36ed7d51d6e"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a3b73e4d15701467ed72f157ffaff680a">RGB565</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#adae0f3e05bf786de90d4f36ed7d51d6e">yuvToRgb565</a> (uint8_t Y, uint8_t U, uint8_t V)</td></tr>
+<tr class="separator:adae0f3e05bf786de90d4f36ed7d51d6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:ad12fc34ce789bce6c8a05d8a17138534" id="r_ad12fc34ce789bce6c8a05d8a17138534"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#ad12fc34ce789bce6c8a05d8a17138534">height</a> = 240</td></tr>
 <tr class="separator:ad12fc34ce789bce6c8a05d8a17138534"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5843011f37b82a1039ed4aad50c46cd1" id="r_a5843011f37b82a1039ed4aad50c46cd1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a3b73e4d15701467ed72f157ffaff680a">RGB565</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a5843011f37b82a1039ed4aad50c46cd1">i420_rgb_buf_</a></td></tr>
+<tr class="separator:a5843011f37b82a1039ed4aad50c46cd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44b789c49133c2e125825ccddb37d541" id="r_a44b789c49133c2e125825ccddb37d541"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_video_info.html">VideoInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a44b789c49133c2e125825ccddb37d541">info_</a></td></tr>
 <tr class="separator:a44b789c49133c2e125825ccddb37d541"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3cb6ff02b18302276375a5c7dc8fc601" id="r_a3cb6ff02b18302276375a5c7dc8fc601"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a3cb6ff02b18302276375a5c7dc8fc601">kBandHeight</a></td></tr>
@@ -126,6 +144,12 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a4f8d1b2b2f2e27e2e3a00d3a18bbdbb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a249016cdb76ca8bc26f6dbb708d5351a" id="r_a249016cdb76ca8bc26f6dbb708d5351a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_video_info_source.html">VideoInfoSource</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a249016cdb76ca8bc26f6dbb708d5351a">p_info</a> = nullptr</td></tr>
 <tr class="separator:a249016cdb76ca8bc26f6dbb708d5351a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9dc5e51fbf5fef8ab405c892ca15459" id="r_ac9dc5e51fbf5fef8ab405c892ca15459"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a3b73e4d15701467ed72f157ffaff680a">RGB565</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#ac9dc5e51fbf5fef8ab405c892ca15459">scale_line_</a></td></tr>
+<tr class="separator:ac9dc5e51fbf5fef8ab405c892ca15459"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abeea080c3b6781e0ca6c177b857a7d4f" id="r_abeea080c3b6781e0ca6c177b857a7d4f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#abeea080c3b6781e0ca6c177b857a7d4f">scale_to_fit</a> = false</td></tr>
+<tr class="separator:abeea080c3b6781e0ca6c177b857a7d4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81959f172bdc37e874cc2a2201fb449a" id="r_a81959f172bdc37e874cc2a2201fb449a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a81959f172bdc37e874cc2a2201fb449a">skip_render</a> = false</td></tr>
+<tr class="separator:a81959f172bdc37e874cc2a2201fb449a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6947b9cbb797c31ea4b1da215054bf6b" id="r_a6947b9cbb797c31ea4b1da215054bf6b"><td class="memItemLeft" align="right" valign="top">ILI9341Driver&lt; <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a3b73e4d15701467ed72f157ffaff680a">RGB565</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a6947b9cbb797c31ea4b1da215054bf6b">tftDriver</a></td></tr>
 <tr class="separator:a6947b9cbb797c31ea4b1da215054bf6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2474a5474cbff19523a51eb1de01cda4" id="r_a2474a5474cbff19523a51eb1de01cda4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a2474a5474cbff19523a51eb1de01cda4">width</a> = 320</td></tr>
@@ -276,6 +300,91 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="aba37de7b679bd80208a870f1815f8a86" name="aba37de7b679bd80208a870f1815f8a86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba37de7b679bd80208a870f1815f8a86">&#9670;&#160;</a></span>setScaleToFit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setScaleToFit </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>enable</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>When enabled, a decoded frame whose size doesn't match the panel's configured width/height (the constructor's width/height, adjusted for tftDriver's rotation) is nearest-neighbor scaled to fill it exactly - the aspect ratio is NOT preserved, the source is stretched to the panel's own aspect ratio. Off by default (direct 1:1 write at (0,0), e.g. a QCIF video shown at native size in the corner of a larger panel). Scaling is done one output row at a time (no full-frame scratch buffer) to keep RAM use independent of resolution. </p>
+
+</div>
+</div>
+<a id="a94f8728be362b736be4cb10a4253d201" name="a94f8728be362b736be4cb10a4253d201"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94f8728be362b736be4cb10a4253d201">&#9670;&#160;</a></span>setSkipRender()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setSkipRender </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>skip</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Skips the actual panel refresh (the SPI-bound part) on the next and subsequent <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> calls, while still validating the frame and returning len as if it had been shown - used to recover from falling behind the playback schedule without breaking a codec's decode state (the caller must still get a normal "success" return so its own frame-complete bookkeeping isn't disturbed). Call again with false to resume rendering. </p>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_output.html#ab4d364d9800016345ae6980424817214">VideoOutput</a>.</p>
+
+</div>
+</div>
+<a id="a0788e6d8a8ec277be17ad0141b310e05" name="a0788e6d8a8ec277be17ad0141b310e05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0788e6d8a8ec277be17ad0141b310e05">&#9670;&#160;</a></span>setSyncSource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void setSyncSource </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_video_audio_sync.html">VideoAudioSync</a> *&#160;</td>
+          <td class="paramname"><em>sync</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Optional: a demuxer that owns a <a class="el" href="classaudio__tools_1_1_video_audio_sync.html" title="Logic to Synchronize video and audio output: This is the minimum implementatin which actually does no...">VideoAudioSync</a> (frame pacing) calls this once, typically from its setOutputVideo(VideoOutput&amp;), so a decoder implementation can consult the sync object's admission policy (<a class="el" href="classaudio__tools_1_1_video_audio_sync.html#abf0c3df2b08623da9a6b46f0bf68abaf">VideoAudioSync::shouldAdmitFrame()</a>) before spending decode time on a frame, and its render-skip policy (isBehindSchedule()) before handing a decoded picture to its own downstream <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> - see <a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a> for the concrete use. Default no-op: most <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> implementations (e.g. a raw display sink) don't need pacing awareness themselves, only decoders sitting between a demuxer and a display do. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a0108fbf4ffc3c786f9359fa676424118">H264Decoder</a>, and <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a0108fbf4ffc3c786f9359fa676424118">H264DecoderESP32S3&lt; Alloc &gt;</a>.</p>
+
+</div>
+</div>
 <a id="ac4314004ac5b3ede54d47b6814008d35" name="ac4314004ac5b3ede54d47b6814008d35"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac4314004ac5b3ede54d47b6814008d35">&#9670;&#160;</a></span>setVideoInfo()</h2>
 
@@ -370,6 +479,135 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a6b5873fe8a11695dc332ba0568305a05" name="a6b5873fe8a11695dc332ba0568305a05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b5873fe8a11695dc332ba0568305a05">&#9670;&#160;</a></span>writeI420()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void writeI420 </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>srcW</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>srcH</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Converts one planar I420 frame (srcW x srcH: full-size Y plane followed by two (srcW/2)x(srcH/2) U/V planes) to RGB565 and writes it to the driver. The YUV-&gt;RGB conversion (several integer multiplies + clamps per pixel - not free) always runs exactly once per <em>source</em> pixel, into i420_rgb_buf_ at native resolution; scale_to_fit then reuses <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#ab8319bf464519754d81e8c232e06b2a5">writeScaled()</a>'s existing (conversion-free, just array indexing) RGB565 upscale path instead of redoing the YUV math once per <em>output</em> pixel - on this panel (320x240 vs a 176x144 source) that's the difference between ~25k and ~77k conversions per frame. </p>
+
+</div>
+</div>
+<a id="ab8319bf464519754d81e8c232e06b2a5" name="ab8319bf464519754d81e8c232e06b2a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8319bf464519754d81e8c232e06b2a5">&#9670;&#160;</a></span>writeScaled()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void writeScaled </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>srcW</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>srcH</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Nearest-neighbor scales a source frame (srcW x srcH, RGB565, tightly packed) up/down to exactly width x height, one output row at a time: build one scaled row into scale_line_, then hand it to the driver as a 1-row-tall surface. Costs one extra small SPI transaction per output row versus the unscaled single-transaction path, but needs only a single row's worth of scratch RAM regardless of resolution. </p>
+
+</div>
+</div>
+<a id="adae0f3e05bf786de90d4f36ed7d51d6e" name="adae0f3e05bf786de90d4f36ed7d51d6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adae0f3e05bf786de90d4f36ed7d51d6e">&#9670;&#160;</a></span>yuvToRgb565()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a3b73e4d15701467ed72f157ffaff680a">RGB565</a> yuvToRgb565 </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>Y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>U</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>V</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>BT.601 (limited-range) integer YUV-&gt;RGB565 conversion - the standard fixed-point formula (avoids per-pixel float math), same coefficients used by most embedded YUV converters. </p>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="ad12fc34ce789bce6c8a05d8a17138534" name="ad12fc34ce789bce6c8a05d8a17138534"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad12fc34ce789bce6c8a05d8a17138534">&#9670;&#160;</a></span>height</h2>
@@ -390,6 +628,29 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5843011f37b82a1039ed4aad50c46cd1" name="a5843011f37b82a1039ed4aad50c46cd1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5843011f37b82a1039ed4aad50c46cd1">&#9670;&#160;</a></span>i420_rgb_buf_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;<a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a3b73e4d15701467ed72f157ffaff680a">RGB565</a>&gt; i420_rgb_buf_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Native-resolution scratch buffer for <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a6b5873fe8a11695dc332ba0568305a05">writeI420()</a>'s YUV-&gt;RGB565 conversion - unlike scale_line_ (one row), this holds a full frame, since the conversion must run before scaling can reuse <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#ab8319bf464519754d81e8c232e06b2a5">writeScaled()</a>. Only allocated once an I420 frame is actually written. </p>
 
 </div>
 </div>
@@ -470,6 +731,72 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classaudio__tools_1_1_video_info_source.html">VideoInfoSource</a>* p_info = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac9dc5e51fbf5fef8ab405c892ca15459" name="ac9dc5e51fbf5fef8ab405c892ca15459"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9dc5e51fbf5fef8ab405c892ca15459">&#9670;&#160;</a></span>scale_line_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;<a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a3b73e4d15701467ed72f157ffaff680a">RGB565</a>&gt; scale_line_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abeea080c3b6781e0ca6c177b857a7d4f" name="abeea080c3b6781e0ca6c177b857a7d4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abeea080c3b6781e0ca6c177b857a7d4f">&#9670;&#160;</a></span>scale_to_fit</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool scale_to_fit = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a81959f172bdc37e874cc2a2201fb449a" name="a81959f172bdc37e874cc2a2201fb449a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81959f172bdc37e874cc2a2201fb449a">&#9670;&#160;</a></span>skip_render</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool skip_render = false</td>
         </tr>
       </table>
   </td>

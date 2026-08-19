@@ -142,9 +142,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a05ff4cf361d54457ed8586e8c14aa922" id="r_a05ff4cf361d54457ed8586e8c14aa922"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput</a> (<a class="el" href="class_print.html">Print</a> &amp;out) override</td></tr>
 <tr class="memdesc:a05ff4cf361d54457ed8586e8c14aa922"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the output: e.g. a local File or a network <a class="el" href="class_client.html">Client</a>.  <br /></td></tr>
 <tr class="separator:a05ff4cf361d54457ed8586e8c14aa922"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4d364d9800016345ae6980424817214" id="r_ab4d364d9800016345ae6980424817214"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#ab4d364d9800016345ae6980424817214">setSkipRender</a> (bool skip)</td></tr>
+<tr class="separator:ab4d364d9800016345ae6980424817214"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6806d9e5ebac77ff537da77a35a25141" id="r_a6806d9e5ebac77ff537da77a35a25141"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a6806d9e5ebac77ff537da77a35a25141">setStreamType</a> (<a class="el" href="group__video.html#ga3529160d6b73e5a63e0a95afeb424659">StreamContentType</a> type) override</td></tr>
 <tr class="memdesc:a6806d9e5ebac77ff537da77a35a25141"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects whether <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> feeds the video or the audio track.  <br /></td></tr>
 <tr class="separator:a6806d9e5ebac77ff537da77a35a25141"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0788e6d8a8ec277be17ad0141b310e05" id="r_a0788e6d8a8ec277be17ad0141b310e05"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a0788e6d8a8ec277be17ad0141b310e05">setSyncSource</a> (<a class="el" href="classaudio__tools_1_1_video_audio_sync.html">VideoAudioSync</a> *sync)</td></tr>
+<tr class="separator:a0788e6d8a8ec277be17ad0141b310e05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a66e0cb04577d49e7c26d66ad714b3aae" id="r_a66e0cb04577d49e7c26d66ad714b3aae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a66e0cb04577d49e7c26d66ad714b3aae">setVideoInfo</a> (<a class="el" href="structaudio__tools_1_1_muxer_video_config.html">MuxerVideoConfig</a> config) override</td></tr>
 <tr class="separator:a66e0cb04577d49e7c26d66ad714b3aae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2902d7fd71678a3c90ac06a7700c2784" id="r_a2902d7fd71678a3c90ac06a7700c2784"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__video.html#ga3529160d6b73e5a63e0a95afeb424659">StreamContentType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a2902d7fd71678a3c90ac06a7700c2784">streamType</a> () override</td></tr>
@@ -224,7 +228,7 @@ Static Protected Attributes</h2></td></tr>
 <div class="line"><span class="comment">// for each encoded MPEG-1 picture (a run of ES bytes up to the next</span></div>
 <div class="line"><span class="comment">// picture_start_code):</span></div>
 <div class="line">mpg.addVideoFrame(mpeg1_picture_data, len);</div>
-<div class="ttc" id="aclassaudio__tools_1_1_muxer_m_p_g_html"><div class="ttname"><a href="classaudio__tools_1_1_muxer_m_p_g.html">audio_tools::MuxerMPG</a></div><div class="ttdoc">MPEG-1 System (Program) Stream Encoder, as defined by ISO/IEC 11172-1: muxes an already-encoded MPEG-...</div><div class="ttdef"><b>Definition</b> ContainerMPG.h:798</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_muxer_m_p_g_html"><div class="ttname"><a href="classaudio__tools_1_1_muxer_m_p_g.html">audio_tools::MuxerMPG</a></div><div class="ttdoc">MPEG-1 System (Program) Stream Encoder, as defined by ISO/IEC 11172-1: muxes an already-encoded MPEG-...</div><div class="ttdef"><b>Definition</b> ContainerMPG.h:805</div></div>
 <div class="ttc" id="agroup__video_html_gga216a5d43d2a518325c84f100ed7735a5a61c156fe2a3c9fe7eb28bd017d95a618"><div class="ttname"><a href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a61c156fe2a3c9fe7eb28bd017d95a618">audio_tools::VideoFormat::MPEG1</a></div><div class="ttdeci">@ MPEG1</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_muxer_video_config_html"><div class="ttname"><a href="structaudio__tools_1_1_muxer_video_config.html">audio_tools::MuxerVideoConfig</a></div><div class="ttdoc">Shared video track configuration for muxers (MuxerAVI, MuxerMP4) - call before begin().</div><div class="ttdef"><b>Definition</b> ContainerCommon.h:11</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_muxer_video_config_html_a4f50e96f11c68d45dc109185efe011ad"><div class="ttname"><a href="structaudio__tools_1_1_muxer_video_config.html#a4f50e96f11c68d45dc109185efe011ad">audio_tools::MuxerVideoConfig::fps</a></div><div class="ttdeci">float fps</div><div class="ttdef"><b>Definition</b> ContainerCommon.h:14</div></div>
@@ -905,6 +909,35 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ab4d364d9800016345ae6980424817214" name="ab4d364d9800016345ae6980424817214"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4d364d9800016345ae6980424817214">&#9670;&#160;</a></span>setSkipRender()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void setSkipRender </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>skip</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Hint to skip the expensive part of displaying the next frame(s) (e.g. the panel refresh) while still accepting and fully processing <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> calls - used to recover from falling behind the playback schedule without breaking a codec's decode state (e.g. H.264 inter-prediction reference chain, which requires every frame to still be decoded even if it's never shown). Default no-op: implementations that can't skip rendering cheaply just ignore it and always render. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a94f8728be362b736be4cb10a4253d201">OutputTinyGPU</a>.</p>
+
+</div>
+</div>
 <a id="a6806d9e5ebac77ff537da77a35a25141" name="a6806d9e5ebac77ff537da77a35a25141"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6806d9e5ebac77ff537da77a35a25141">&#9670;&#160;</a></span>setStreamType()</h2>
 
@@ -932,6 +965,35 @@ Static Protected Attributes</h2></td></tr>
 <p>Selects whether <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> feeds the video or the audio track. </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_muxer.html#aca7ee6461963788ac0c3a5cb9d31d9d9">Muxer</a>.</p>
+
+</div>
+</div>
+<a id="a0788e6d8a8ec277be17ad0141b310e05" name="a0788e6d8a8ec277be17ad0141b310e05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0788e6d8a8ec277be17ad0141b310e05">&#9670;&#160;</a></span>setSyncSource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void setSyncSource </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_video_audio_sync.html">VideoAudioSync</a> *&#160;</td>
+          <td class="paramname"><em>sync</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Optional: a demuxer that owns a <a class="el" href="classaudio__tools_1_1_video_audio_sync.html" title="Logic to Synchronize video and audio output: This is the minimum implementatin which actually does no...">VideoAudioSync</a> (frame pacing) calls this once, typically from its setOutputVideo(VideoOutput&amp;), so a decoder implementation can consult the sync object's admission policy (<a class="el" href="classaudio__tools_1_1_video_audio_sync.html#abf0c3df2b08623da9a6b46f0bf68abaf">VideoAudioSync::shouldAdmitFrame()</a>) before spending decode time on a frame, and its render-skip policy (isBehindSchedule()) before handing a decoded picture to its own downstream <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> - see <a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a> for the concrete use. Default no-op: most <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> implementations (e.g. a raw display sink) don't need pacing awareness themselves, only decoders sitting between a demuxer and a display do. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a0108fbf4ffc3c786f9359fa676424118">H264Decoder</a>, and <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a0108fbf4ffc3c786f9359fa676424118">H264DecoderESP32S3&lt; Alloc &gt;</a>.</p>
 
 </div>
 </div>

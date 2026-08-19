@@ -333,6 +333,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a957b525cb54ba060d25a31f6cd928bd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4af6517091293ab9d620ef83639a0719" id="r_a4af6517091293ab9d620ef83639a0719"><td class="memItemLeft" align="right" valign="top">bool(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#a4af6517091293ab9d620ef83639a0719">validation_cb</a> )(<a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html">DemuxerAVI</a> &amp;avi) = nullptr</td></tr>
 <tr class="separator:a4af6517091293ab9d620ef83639a0719"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa62b0a13691c2aa2def42d44c8155985" id="r_aa62b0a13691c2aa2def42d44c8155985"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#aa62b0a13691c2aa2def42d44c8155985">video_accumulator</a></td></tr>
+<tr class="separator:aa62b0a13691c2aa2def42d44c8155985"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ac94e596326d1711852e270b0adecd4" id="r_a8ac94e596326d1711852e270b0adecd4"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#a8ac94e596326d1711852e270b0adecd4">video_format</a> [5] = {0}</td></tr>
 <tr class="separator:a8ac94e596326d1711852e270b0adecd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10ea02eb9cfeb23fde2198a4f682195c" id="r_a10ea02eb9cfeb23fde2198a4f682195c"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#a10ea02eb9cfeb23fde2198a4f682195c">video_frame_start_ms</a> = 0</td></tr>
@@ -2808,6 +2810,29 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa62b0a13691c2aa2def42d44c8155985" name="aa62b0a13691c2aa2def42d44c8155985"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa62b0a13691c2aa2def42d44c8155985">&#9670;&#160;</a></span>video_accumulator</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;uint8_t&gt; video_accumulator</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Accumulates one whole video chunk (one frame's worth of Annex-B NAL data) across however many <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#ace9ff262e1947e3791efa6f27cdc4418">writeData()</a> calls it takes to stream the chunk in - see <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#ace9ff262e1947e3791efa6f27cdc4418">writeData()</a>'s own comment for why: video decoders (e.g. H264Decoder/TinyH264) aren't guaranteed to handle a NAL unit arriving split across separate <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#a016bb39af201e717c1975551b7ecc1b3">write()</a> calls, so this only ever hands them one complete chunk per <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#a016bb39af201e717c1975551b7ecc1b3">write()</a> call, the same way <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html" title="DemuxerMP4 extracts both the audio and (H.264) video track from a general, interleaved MP4/ISO-BMFF s...">DemuxerMP4</a> already does (it can, trivially, since MP4's sample table gives it each frame's exact size up front). </p>
 
 </div>
 </div>
