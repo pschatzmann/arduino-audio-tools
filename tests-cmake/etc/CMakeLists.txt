@@ -18,3 +18,5 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/miniaudio ${CMAKE_CURRENT_BINARY_DI
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/pipeline)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/player-wav)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stt ${CMAKE_CURRENT_BINARY_DIR}/stt)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/strview-matches ${CMAKE_CURRENT_BINARY_DIR}/strview-matches)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/audioplayer-mime-source-from-file ${CMAKE_CURRENT_BINARY_DIR}/audioplayer-mime-source-from-file)
