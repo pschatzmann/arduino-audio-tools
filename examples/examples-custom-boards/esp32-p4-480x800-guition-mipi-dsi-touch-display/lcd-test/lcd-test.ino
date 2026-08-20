@@ -1,111 +1,173 @@
 /**
  * @file lcd-test.ino
- * @brief Display + touch diagnostic for the Guition JC4880P443C_I_W
- * (ESP32-P4, ST7701S 480x800 MIPI-DSI panel + GT911 capacitive touch).
+ * @brief SpriteDisplay-based hardware color diagnostic for the Guition
+ * JC4880P443C_I_W (ESP32-P4, ST7701S 480x800 MIPI-DSI panel + GT911
+ * capacitive touch), following the same RGB-test/greyscale-test pattern
+ * as this repo's other lcd-test.ino examples.
  *
- * UNTESTED - written without access to this hardware. The display/touch
- * bring-up itself is not this file's code: it's entirely delegated to
- * the guition-jc4880p4-bsp library (MIT, https://github.com/ultramcu/
- * guition-jc4880p4-bsp), which does a from-scratch ST7701S MIPI-DSI init
- * (no esp_lcd_st7701 vendor component) plus GT911 touch bring-up. This
- * file only calls that library's public API (board_p4.h) and draws a
- * simple test pattern.
+ * Two tests, tap the screen to switch between them:
+ *  - RGB test: red/green/blue bands - reveals a panel that doesn't honor
+ *    the RGB/BGR field wiring correctly.
+ *  - Greyscale test: 20-band ramp from black to white - reveals a visible
+ *    color tint in near-black tones even when RGB field wiring is correct.
  *
- * IMPORTANT: the BSP's own example comments flag that this board's
- * ESP32-P4 is an ENGINEERING-SAMPLE chip (rev v1.3) that needs
- * `"chip_variant": "esp32p4_es"` and a specific pinned toolchain
- * (pioarduino 55.03.36-1) under PlatformIO, or it hits "Illegal
- * instruction" at the 2nd-stage bootloader. This example instead uses
- * arduino-cli's generic `esp32:esp32:esp32p4` target, which has not
- * been confirmed to handle the engineering-sample silicon the same way
- * - if it doesn't boot, that pinned-toolchain requirement is the first
- * thing to check. See the BSP's README for the full story.
+ * This board's ST7701S MIPI-DSI panel needed a new TinyGPU driver
+ * (DisplayDriverDSI.h's ST7701Driver) - see that file for the panel's
+ * init sequence and its guition-jc4880p4-bsp attribution. Touch needed no
+ * new code: GT911 is plain I2C, so TinyGPU's existing TouchDriverGT911
+ * works unchanged.
  *
- * Draws 8 vertical color bars, then polls touch and prints native
- * (480x800 portrait) coordinates over Serial.
+ * UNTESTED - written without access to this hardware, same as every other
+ * example in this board folder. This board's ESP32-P4 is also an
+ * engineering-sample chip (rev v1.3) that guition-jc4880p4-bsp documents
+ * as needing a pinned PlatformIO toolchain or it hits "Illegal
+ * instruction" at boot - see that BSP's README if this doesn't boot.
  *
  * Dependencies:
- * - https://github.com/ultramcu/guition-jc4880p4-bsp (this repo's
- *   `library.properties` names `esp_lcd_touch_gt911` as a dependency,
- *   but that's not a registered Arduino Library Manager entry - it
- *   needs to be vendored manually. See this board folder's README.)
+ * - https://github.com/pschatzmann/TinyGPU
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-#include <Arduino.h>
-#include "board_p4.h"
+#include <TinyGPU.h>
+#include <TinyGPU/DisplayDriverDSI.h>
+#include <TinyGPU/SpriteDisplay.h>
 
-// 8 vertical color bars across the 480-wide native panel, RGB565.
-constexpr uint16_t kBarColors[8] = {
-    0xF800,  // red
-    0x07E0,  // green
-    0x001F,  // blue
-    0xFFE0,  // yellow
-    0x07FF,  // cyan
-    0xF81F,  // magenta
-    0xFFFF,  // white
-    0x0000,  // black
-};
+using PixelT = RGB565;
 
-void drawColorBars() {
-  uint16_t* fb = board_p4_get_framebuffer();
-  if (fb == nullptr) {
-    Serial.println("framebuffer is NULL - display init failed?");
-    return;
+// --- display geometry (native portrait) --------------------------------
+constexpr int kDisplayWidth = 480;
+constexpr int kDisplayHeight = 800;
+
+// --- Display pins/config (ST7701S MIPI-DSI), from
+// guition-jc4880p4-bsp's board_p4_pins.h/board_p4.c ---------------------
+constexpr int8_t kPinLcdRst = 5;
+constexpr int8_t kPinLcdBacklight = 23;
+constexpr int8_t kDsiPhyLdoChan = 3;
+constexpr uint16_t kDsiPhyLdoMv = 2500;
+
+// --- Touch I2C pins (GT911), same source ---------------------------------
+constexpr int8_t kPinTouchSda = 7;
+constexpr int8_t kPinTouchScl = 8;
+constexpr int8_t kPinTouchRst = 3;
+constexpr int8_t kPinTouchInt = -1;  // unused/polled on this board
+
+ST7701Driver<PixelT> tftDriver(kPinLcdRst, kPinLcdBacklight, kDisplayWidth,
+                               kDisplayHeight, kDsiPhyLdoChan, kDsiPhyLdoMv);
+SpriteDisplay<PixelT> display(kDisplayWidth, kDisplayHeight, tftDriver,
+                              PixelT::fromRGB(0, 0, 0));
+TouchDriverGT911 touchDriver(Wire, kPinTouchRst, kPinTouchInt);
+BitmapFont<PixelT> font;
+
+// Draws a solid band with a text label burned into it. Safe against the
+// dangling-pointer trap of SpriteDisplay::addSprite(x, y, surface&) - the
+// surface is heap-allocated and ownership is handed to SpriteDisplay via
+// isSurfaceAutoDelete, the same pattern SpriteDisplay's own
+// addSprite(x, y, maxX, maxY, color) overload uses internally.
+void addLabeledBand(size_t x, size_t y, size_t w, size_t h, PixelT bgColor,
+                    PixelT textColor, const char* label) {
+  auto sprite = std::make_unique<Sprite<PixelT>>(w, h, font);
+  sprite->begin();
+  sprite->clear(bgColor);
+  sprite->drawText(4, static_cast<int16_t>(h / 2 - 4), label, textColor, bgColor,
+                   true);
+  auto& info = display.addSprite(x, y, *sprite);
+  info.isSurfaceAutoDelete = true;
+  sprite.release();
+}
+
+void showRgbTest() {
+  display.clear();
+  const size_t bandHeight = kDisplayHeight / 3;
+  const size_t lastBandHeight = kDisplayHeight - 2 * bandHeight;
+
+  addLabeledBand(0, 0 * bandHeight, kDisplayWidth, bandHeight,
+                PixelT::fromRGB(255, 0, 0), PixelT::fromRGB(255, 255, 255),
+                "RED (255,0,0)");
+  addLabeledBand(0, 1 * bandHeight, kDisplayWidth, bandHeight,
+                PixelT::fromRGB(0, 255, 0), PixelT::fromRGB(0, 0, 0),
+                "GREEN (0,255,0)");
+  addLabeledBand(0, 2 * bandHeight, kDisplayWidth, lastBandHeight,
+                PixelT::fromRGB(0, 0, 255), PixelT::fromRGB(255, 255, 255),
+                "BLUE (0,0,255)");
+
+  Serial.println(
+      "RGB test: top=RED(255,0,0) mid=GREEN(0,255,0) bottom=BLUE(0,0,255)");
+}
+
+void showGreyscaleTest() {
+  display.clear();
+  constexpr int kBandCount = 20;
+  const size_t bandHeight = kDisplayHeight / kBandCount;
+
+  Serial.println("Greyscale test: 20 bands, top=0 (black) to bottom=255 (white)");
+  for (int i = 0; i < kBandCount; ++i) {
+    const uint8_t value = static_cast<uint8_t>((255 * i) / (kBandCount - 1));
+    const PixelT color = PixelT::fromRGB(value, value, value);
+    const PixelT textColor =
+        (value > 127) ? PixelT::fromRGB(0, 0, 0) : PixelT::fromRGB(255, 255, 255);
+    char label[16];
+    snprintf(label, sizeof(label), "%2d: %3d", i, value);
+    addLabeledBand(0, i * bandHeight, kDisplayWidth, bandHeight, color,
+                  textColor, label);
   }
+}
 
-  constexpr int w = BOARD_P4_LCD_H_RES;  // 480
-  constexpr int h = BOARD_P4_LCD_V_RES;  // 800
-  constexpr int barWidth = w / 8;
+bool showingGreyscale = false;
 
-  for (int y = 0; y < h; ++y) {
-    uint16_t* row = fb + static_cast<size_t>(y) * w;
-    for (int x = 0; x < w; ++x) {
-      int bar = x / barWidth;
-      if (bar > 7) bar = 7;  // clamp the remainder column
-      row[x] = kBarColors[bar];
-    }
+void toggleTest() {
+  showingGreyscale = !showingGreyscale;
+  if (showingGreyscale) {
+    showGreyscaleTest();
+  } else {
+    showRgbTest();
   }
-
-  board_p4_flush_region(0, 0, w, h, fb);
-  board_p4_present();
-  Serial.println("color bars drawn");
 }
 
 void setup() {
   Serial.begin(115200);
-  delay(200);
-  Serial.println("Guition JC4880P443 (ESP32-P4) lcd-test");
 
-  esp_err_t err = board_p4_display_init();
-  if (err != ESP_OK) {
-    Serial.printf("board_p4_display_init failed: %d\n", static_cast<int>(err));
-  }
-  board_p4_set_brightness(200);
-
-  err = board_p4_touch_init();
-  if (err != ESP_OK) {
-    Serial.printf("board_p4_touch_init failed: %d\n", static_cast<int>(err));
+  if (!display.begin()) {
+    Serial.println("display.begin() failed - check DSI bus/init sequence");
+    while (true) delay(1000);
   }
 
-  drawColorBars();
-  Serial.println("setup done - touch the screen");
+  Wire.begin(kPinTouchSda, kPinTouchScl);
+  delay(50);
+  Serial.println("I2C scan (touch bus):");
+  for (uint8_t addr = 1; addr < 127; addr++) {
+    Wire.beginTransmission(addr);
+    if (Wire.endTransmission() == 0) {
+      Serial.printf("  found device at 0x%02X\n", addr);
+    }
+  }
+  bool touchOk = touchDriver.begin();
+  Serial.printf("touch begin(): %s\n", touchOk ? "OK" : "FAILED (no I2C ack from GT911)");
+  display.setTouchDriver(touchDriver);
+
+  showRgbTest();
 }
 
 void loop() {
-  static uint32_t lastPrintMs = 0;
+  static bool wasTouched = false;
+  static uint32_t lastHeartbeat = 0;
+  const bool touched = touchDriver.isTouched();
 
-  int x = 0, y = 0;
-  bool pressed = false;
-  board_p4_touch_read(&x, &y, &pressed);
-
-  if (pressed) {
-    const uint32_t now = millis();
-    if (now - lastPrintMs >= 100) {  // throttle to ~10Hz
-      Serial.printf("touch: x=%d y=%d\n", x, y);
-      lastPrintMs = now;
-    }
+  if (millis() - lastHeartbeat > 1000) {
+    Serial.printf("heartbeat: isTouched()=%d\n", touched);
+    lastHeartbeat = millis();
   }
 
-  delay(10);
+  if (touched) {
+    Point p;
+    if (touchDriver.getPoint(p)) {
+      Serial.printf("touch: x=%d y=%d pressure=%u\n", p.x, p.y, p.pressure);
+    } else {
+      Serial.println("touch: isTouched() true but getPoint() failed");
+    }
+  }
+  if (touched && !wasTouched) {
+    toggleTest();
+  }
+  wasTouched = touched;
+  delay(30);
 }

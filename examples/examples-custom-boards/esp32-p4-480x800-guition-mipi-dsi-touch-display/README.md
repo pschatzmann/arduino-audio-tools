@@ -21,21 +21,25 @@ below before relying on this.
 
 This board's ESP32-P4 is an **engineering-sample chip (rev v1.3)**. The
 [guition-jc4880p4-bsp](https://github.com/ultramcu/guition-jc4880p4-bsp)
-library that provides display/touch bring-up documents that under
-PlatformIO this requires `"chip_variant": "esp32p4_es"` and a pinned
-toolchain (`pioarduino 55.03.36-1`), or the board hits "Illegal
-instruction" at the 2nd-stage bootloader. These examples instead
-target arduino-cli's generic `esp32:esp32:esp32p4` board - both compile
-clean against it, but whether that target's toolchain handles this
-specific engineering-sample silicon the same way is unconfirmed. If a
-board doesn't boot, this is the first thing to check.
+library - not itself a dependency of these examples (see Dependencies
+below), but the source of the pin map and ST7701S init sequence facts
+used here - documents that under PlatformIO this board requires
+`"chip_variant": "esp32p4_es"` and a pinned toolchain
+(`pioarduino 55.03.36-1`), or it hits "Illegal instruction" at the
+2nd-stage bootloader. These examples instead target arduino-cli's
+generic `esp32:esp32:esp32p4` board - all compile clean against it, but
+whether that target's toolchain handles this specific engineering-sample
+silicon the same way is unconfirmed. If a board doesn't boot, this is
+the first thing to check.
 
 ## Pins
 
 Source: [board_p4_pins.h](https://github.com/ultramcu/guition-jc4880p4-bsp/blob/main/src/board_p4_pins.h)
 in guition-jc4880p4-bsp - documented there as "on-hardware VERIFIED" for
 display/touch/SD/Wi-Fi; the audio pins are board-documented but "not
-driven by the core BSP" (i.e. not exercised by that library).
+driven by the core BSP" (i.e. not exercised by that library). These
+examples only reuse the pin/timing/register facts, not the library
+itself - see Dependencies below.
 
 | Function             | Pins |
 | --------------------- | ---- |
@@ -49,39 +53,31 @@ driven by the core BSP" (i.e. not exercised by that library).
 
 ## Setup
 
-1.  Install [guition-jc4880p4-bsp](https://github.com/ultramcu/guition-jc4880p4-bsp)
-    as an Arduino library (not in Library Manager - clone it into your
-    sketchbook's `libraries/` folder).
-2.  Install its `esp_lcd_touch_gt911` dependency. It's not a registered
-    Arduino library either - the BSP vendors its own copy per-example
-    for PlatformIO at `examples/DisplayTouchTest/lib/esp_lcd_touch_gt911/`.
-    For Arduino IDE/arduino-cli, copy that folder's `esp_lcd_touch.c`,
-    `esp_lcd_touch_gt911.c`, and the two headers from its `include/`
-    subfolder into a new library folder (e.g.
-    `libraries/esp_lcd_touch_gt911/`), with the headers at the folder's
-    top level, not nested under `include/` - Arduino's legacy library
-    layout doesn't add an `include/` subfolder to the compiler's search
-    path the way PlatformIO does.
-3.  That header also needs one small patch to build under Arduino: it
-    uses `CONFIG_ESP_LCD_TOUCH_MAX_POINTS`, a Kconfig macro that only
-    exists in a real ESP-IDF/sdkconfig build. Add a fallback near the
-    top of `esp_lcd_touch.h` (GT911 supports up to 5 points, matching
-    ESP-IDF's own default):
-    ```c
-    #ifndef CONFIG_ESP_LCD_TOUCH_MAX_POINTS
-    #define CONFIG_ESP_LCD_TOUCH_MAX_POINTS 5
-    #endif
-    ```
-4.  Build with FQBN `esp32:esp32:esp32p4` (or your board manager's
+1.  Install [TinyGPU](https://github.com/pschatzmann/TinyGPU) as an
+    Arduino library (needed by `lcd-test`).
+2.  Build with FQBN `esp32:esp32:esp32p4` (or your board manager's
     equivalent).
+
+No other third-party libraries are needed - none of these examples
+depend on guition-jc4880p4-bsp or its `esp_lcd_touch_gt911` vendoring
+(earlier versions of `lcd-test` did; see Examples below).
 
 ## Examples
 
--   `lcd-test` - draws 8 vertical color bars via
-    guition-jc4880p4-bsp's framebuffer API, then polls GT911 touch and
-    prints native (480x800 portrait) coordinates over Serial. All
-    display/touch bring-up is delegated to that library; this file only
-    calls its public `board_p4.h` API.
+-   `lcd-test` - the same `SpriteDisplay` RGB-test/greyscale-test pattern
+    as this repo's other `lcd-test` examples (tap to toggle between a
+    red/green/blue band test and a 20-band greyscale ramp), via
+    [TinyGPU](https://github.com/pschatzmann/TinyGPU) rather than
+    guition-jc4880p4-bsp's own framebuffer/touch API: this board's
+    ST7701S MIPI-DSI panel drove the addition of a new
+    `DisplayDriverDSI`/`ST7701Driver` to TinyGPU itself (DBI
+    command-channel + DPI video-channel plumbing, plus this panel's init
+    register sequence - transcribed verbatim from the BSP's
+    `board_p4_st7701_init.h`/`board_p4.c`, which documents it as
+    VERIFIED-ON-HARDWARE on this exact board), and touch needed no new
+    TinyGPU code at all - GT911 is a plain I2C part, and TinyGPU's
+    existing `TouchDriverGT911` (already proven on a different GT911
+    board in this repo) is entirely MCU/BSP-agnostic.
 -   `audio-out` - sine wave playback through the ES8311/NS4150 path via
     `I2SCodecStream`. No existing `arduino-audio-driver` board entry
     covers this board, so the example uses the driver's `GenericES8311`
@@ -119,8 +115,10 @@ driven by the core BSP" (i.e. not exercised by that library).
     (`audio-out`, `audio-in`, `player-sdmmc`)
 -   [arduino-libhelix](https://github.com/pschatzmann/arduino-libhelix)
     (`player-sdmmc`)
--   [guition-jc4880p4-bsp](https://github.com/ultramcu/guition-jc4880p4-bsp)
-    (`lcd-test`)
--   `esp_lcd_touch_gt911` (`lcd-test`) - see Setup above
--   `wifi-test` needs no extra library - arduino-esp32's bundled `WiFi`
-    library and its `esp32-hal-hosted.h` ESP-Hosted API are enough.
+-   [TinyGPU](https://github.com/pschatzmann/TinyGPU) (`lcd-test`)
+-   `sdmmc-test`, `wifi-test` need no extra library beyond what
+    arduino-esp32 itself bundles (`SD_MMC`, `WiFi`/`esp32-hal-hosted.h`).
+
+## Further Info
+
+-   https://github.com/ultramcu/guition-jc4880p4-bsp

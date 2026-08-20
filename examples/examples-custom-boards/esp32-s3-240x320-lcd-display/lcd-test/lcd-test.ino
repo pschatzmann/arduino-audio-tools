@@ -55,11 +55,10 @@ SpriteDisplay<PixelT> display(kDisplayWidth, kDisplayHeight, tftDriver,
 // status register directly is simpler and costs nothing.
 //
 // NOTE: on real hardware (2026-08-18), the FT6336G ACKs on I2C (0x38) and
-// begin() succeeds, but TD_STATUS stays 0x00 even while holding a tap -
-// confirmed via the raw register dump in dumpTouchRegisters() below, which
-// bypasses this driver entirely, so it isn't a driver/register-map bug.
-// Points at the touch panel's FPC connector not being seated - re-test
-// once that's been checked.
+// begin() succeeds, but TD_STATUS stays 0x00 even while holding a tap - a
+// raw register dump bypassing this driver entirely showed the same thing,
+// so it isn't a driver/register-map bug. Points at the touch panel's FPC
+// connector not being seated - re-test once that's been checked.
 TouchDriverFT6236 touchDriver(Wire, kPinTouchRst, -1);
 BitmapFont<PixelT> font;
 
@@ -159,28 +158,6 @@ void setup() {
   showRgbTest();
 }
 
-// Raw register dump, bypassing TouchDriverFT6236 entirely, to tell apart
-// "the chip really reports 0 touches" from "something in the driver's I2C
-// read is silently failing" - registers 0x00 (DEVICE_MODE), 0x02
-// (TD_STATUS), 0x03-0x06 (P1 X/Y).
-void dumpTouchRegisters() {
-  Wire.beginTransmission(0x38);
-  Wire.write((uint8_t)0x00);
-  if (Wire.endTransmission(false) != 0) {
-    Serial.println("  raw: endTransmission failed");
-    return;
-  }
-  uint8_t n = Wire.requestFrom(0x38, 7);
-  if (n != 7) {
-    Serial.printf("  raw: requestFrom got %d/7 bytes\n", n);
-    return;
-  }
-  uint8_t buf[7];
-  for (int i = 0; i < 7; i++) buf[i] = Wire.read();
-  Serial.printf("  raw: MODE=%02X GEST=%02X STATUS=%02X P1_XH=%02X P1_XL=%02X P1_YH=%02X P1_YL=%02X\n",
-                buf[0], buf[1], buf[2], buf[3], buf[4], buf[5], buf[6]);
-}
-
 void loop() {
   static bool wasTouched = false;
   static uint32_t lastHeartbeat = 0;
@@ -188,7 +165,6 @@ void loop() {
 
   if (millis() - lastHeartbeat > 1000) {
     Serial.printf("heartbeat: isTouched()=%d\n", touched);
-    dumpTouchRegisters();
     lastHeartbeat = millis();
   }
 
