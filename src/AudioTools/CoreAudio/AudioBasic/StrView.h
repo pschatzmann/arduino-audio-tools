@@ -188,17 +188,62 @@ class StrView {
     return strncmp_i(this->chars + (len - endlen), str, endlen) == 0;
   }
 
-  /// file matching supporting * and ? - replacing regex which is not supported
-  /// in all environments
+  /// file matching supporting * and ?, with multiple alternative patterns
+  /// separated by ',', ';' or '|' (e.g. "*.mp3;*.MP3;*.wav") - returns true
+  /// if the string matches any one of the alternatives. Replaces regex,
+  /// which is not supported in all environments.
   virtual bool matches(const char* pattern) {
+    if (pattern == nullptr) return false;
+    // a completely empty pattern is a single (trivial) alternative that
+    // only matches an empty line - handle it before the splitting loop
+    // below, which assumes at least one non-empty alternative.
+    if (*pattern == '\0') return matchesGlob(this->chars, "");
+    const char* alt_start = pattern;
+    for (;;) {
+      // skip leading separators/whitespace
+      while (*alt_start == ',' || *alt_start == ';' || *alt_start == '|' ||
+             *alt_start == ' ') {
+        alt_start++;
+      }
+      if (*alt_start == '\0') return false;
+
+      // find the end of this alternative
+      const char* alt_end = alt_start;
+      while (*alt_end != '\0' && *alt_end != ',' && *alt_end != ';' &&
+             *alt_end != '|') {
+        alt_end++;
+      }
+      // trim trailing whitespace
+      const char* trimmed_end = alt_end;
+      while (trimmed_end > alt_start && *(trimmed_end - 1) == ' ') {
+        trimmed_end--;
+      }
+
+      size_t alt_len = trimmed_end - alt_start;
+      if (alt_len > 0) {
+        char buffer[64];
+        if (alt_len >= sizeof(buffer)) alt_len = sizeof(buffer) - 1;
+        memcpy(buffer, alt_start, alt_len);
+        buffer[alt_len] = '\0';
+        if (matchesGlob(this->chars, buffer)) return true;
+      }
+
+      if (*alt_end == '\0') return false;
+      alt_start = alt_end + 1;
+    }
+  }
+
+ protected:
+  /// matches a single glob pattern (supporting * and ?, no alternatives)
+  /// against the given line.
+  static bool matchesGlob(const char* line, const char* pattern) {
     /// returns 1 (true) if there is a match
     /// returns 0 if the pattern is not whitin the line
     int wildcard = 0;
-    const char* line = this->chars;
 
     const char* last_pattern_start = 0;
     const char* last_line_start = 0;
-    do {
+    while (*line) {
       if (*pattern == *line) {
         if (wildcard == 1) last_line_start = line + 1;
 
@@ -231,22 +276,17 @@ class StrView {
         } else {
           line++;
         }
+      } else if (last_pattern_start != 0) {  /// try to restart the mask on the rest
+        pattern = last_pattern_start;
+        line = last_line_start;
+        last_line_start = 0;
       } else {
-        if ((*pattern) == '\0' && (*line) == '\0')  /// end of mask
-          return 1;  /// if the line also ends here then the pattern match
-        else {
-          if (last_pattern_start != 0)  /// try to restart the mask on the rest
-          {
-            pattern = last_pattern_start;
-            line = last_line_start;
-            last_line_start = 0;
-          } else {
-            return false;
-          }
-        }
+        return false;
       }
+    }
 
-    } while (*line);
+    // consume any trailing '*' left in the pattern: it matches the (now empty) rest of the line
+    while (*pattern == '*') pattern++;
 
     if (*pattern == '\0') {
       return true;
@@ -254,6 +294,8 @@ class StrView {
       return false;
     }
   }
+
+ public:
 
   /// provides the position of the the indicated character after the indicated
   /// start position
