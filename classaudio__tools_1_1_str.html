@@ -363,6 +363,8 @@ Static Protected Member Functions</h2></td></tr>
 <tr class="separator:a0d75d7c6ab4aee67ed4d35be230aeb72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fd29a76f776c3536016aaf8f3337cbd" id="r_a4fd29a76f776c3536016aaf8f3337cbd"><td class="memItemLeft" align="right" valign="top">static char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_str_view.html#a4fd29a76f776c3536016aaf8f3337cbd">itoa</a> (int n, char s[])</td></tr>
 <tr class="separator:a4fd29a76f776c3536016aaf8f3337cbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad11cd6b183107c8c3dc7d08cf755cc49" id="r_ad11cd6b183107c8c3dc7d08cf755cc49"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_str_view.html#ad11cd6b183107c8c3dc7d08cf755cc49">matchesGlob</a> (const char *line, const char *pattern)</td></tr>
+<tr class="separator:ad11cd6b183107c8c3dc7d08cf755cc49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a82a9ab90b6d08cf01d78f37e44c65547" id="r_a82a9ab90b6d08cf01d78f37e44c65547"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_str_view.html#a82a9ab90b6d08cf01d78f37e44c65547">reverse</a> (char s[])</td></tr>
 <tr class="separator:a82a9ab90b6d08cf01d78f37e44c65547"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a66365afd37b85d5a7e45d46a9f9073" id="r_a0a66365afd37b85d5a7e45d46a9f9073"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_str_view.html#a0a66365afd37b85d5a7e45d46a9f9073">strncmp_i</a> (const char *s1, const char *s2, int n)</td></tr>
@@ -1585,11 +1587,46 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>file matching supporting * and ? - replacing regex which is not supported in all environments </p>
+<p>file matching supporting * and ?, with multiple alternative patterns separated by ',', ';' or '|' (e.g. "*.mp3;*.MP3;*.wav") - returns true if the string matches any one of the alternatives. Replaces regex, which is not supported in all environments. </p>
+
+</div>
+</div>
+<a id="ad11cd6b183107c8c3dc7d08cf755cc49" name="ad11cd6b183107c8c3dc7d08cf755cc49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad11cd6b183107c8c3dc7d08cf755cc49">&#9670;&#160;</a></span>matchesGlob()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool matchesGlob </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>pattern</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>matches a single glob pattern (supporting * and ?, no alternatives) against the given line. </p>
 <p>returns 1 (true) if there is a match returns 0 if the pattern is not whitin the line</p>
 <p>the line is ended but char was expected</p>
-<p>end of mask</p>
-<p>if the line also ends here then the pattern match</p>
 <p>try to restart the mask on the rest</p>
 
 </div>
