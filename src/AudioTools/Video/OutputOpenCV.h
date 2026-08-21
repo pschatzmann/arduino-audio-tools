@@ -46,6 +46,7 @@ public:
   void setVideoInfoSource(VideoInfoSource &source) { p_info = &source; }
 
   size_t write(const uint8_t *data, size_t len) override {
+    auto start = millis();
     ensureWindow();
     if (p_info != nullptr) {
       VideoInfo info = p_info->videoInfo();
@@ -66,6 +67,7 @@ public:
     }
     memcpy(&img_vector[pos], data, len);
     pos += len;
+    write_time_ms = millis() - start;
     return len;
   }
 
@@ -79,6 +81,8 @@ public:
     pos = 0;
   }
 
+  uint32_t getWriteTimeMs() const override { return write_time_ms; }
+
 protected:
   VideoInfoSource *p_info = nullptr;
   VideoFormat video_format = VideoFormat::MJPEG;
@@ -89,6 +93,7 @@ protected:
   const char *window = "Movie";
   size_t pos = 0;
   uint64_t start = 0;
+  uint32_t write_time_ms = 0;
 
   void ensureWindow() {
     if (create_window) {

@@ -36,6 +36,7 @@ class OutputTFT_eSPI : public VideoOutput {
   } 
 
   size_t write(const uint8_t* data, size_t len) override {
+    auto start = millis();
     if (p_info != nullptr) {
       info_ = p_info->videoInfo();
     }
@@ -45,13 +46,18 @@ class OutputTFT_eSPI : public VideoOutput {
       return 0;
     }
     tft_.pushImage(0, 0, info_.width, info_.height, (uint16_t*)data);
+    write_time_ms = millis() - start;
     return len;
   }
+
+  uint32_t getWriteTimeMs() const { return write_time_ms; }
+
 
  protected:
   TFT_eSPI& tft_;
   VideoInfoSource* p_info = nullptr;
   VideoInfo info_;
+  uint32_t write_time_ms = 0;
 };
 
 }  // namespace audio_tools

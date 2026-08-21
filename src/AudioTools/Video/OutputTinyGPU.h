@@ -1,6 +1,7 @@
 #pragma once
 #include <TinyGPU.h>  // https://github.com/pschatzmann/TinyGPU
 #include <TinyGPU/DisplayDriverSPI.h>  // ILI9341Driver
+#include <TinyGPU/LCDBoards.h>  // LCDBoard
 #include <TinyGPU/SurfaceWithExternalBuffer.h>  // zero-copy write() path
 
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
@@ -9,9 +10,11 @@
 namespace audio_tools {
 
 /**
- * @brief Bridges VideoDecoder's write() calls to a TinyGPU ILI9341Driver -
- * VideoDecoder always hands over one complete frame per write() call (see
- * its class comment), so this can push the whole frame in one go.
+ * @brief Bridges VideoDecoder's write() calls to a TinyGPU DisplayDriver
+ * (e.g. ILI9341Driver, or any board wrapped in an LCDBoard - see the
+ * LCDBoard constructor) - VideoDecoder always hands over one complete
+ * frame per write() call (see its class comment), so this can push the
+ * whole frame in one go.
  * Usually the data is in RGB565 format, but other formats are supported as well
  *
  * write() never allocates or copies a full-frame buffer of its own: it
@@ -26,28 +29,55 @@ namespace audio_tools {
  */
 class OutputTinyGPU : public VideoOutput {
  public:
+  /// @param driver Any TinyGPU DisplayDriver<RGB565> - e.g. ILI9341Driver.
+  /// Its own width()/height() (rotation-aware - see DisplayDriver.h) are
+  /// queried fresh wherever needed (scale_to_fit's target, clearScreen()'s
+  /// band loop), so a later setRotation() call is picked up automatically.
   /// @param bandHeight height (in pixels) of the strip used to clear the
   /// screen in begin() - kept small (default 40) so the clear buffer stays
   /// a small, single allocation instead of a full-screen framebuffer; see
   /// TinyGPU's bouncing-ball example for the same technique.
-  OutputTinyGPU(ILI9341Driver<RGB565>& driver, int width, int height,
-                int pinBacklight, int bandHeight = 40)
+  OutputTinyGPU(DisplayDriver<RGB565>& driver, int pinBacklight,
+                int bandHeight = 40)
       : tftDriver(driver),
-        width(width),
-        height(height),
         kPinBacklight(pinBacklight),
         kBandHeight(bandHeight) {}
 
+  /// @param board Bundles the display driver (and, on concrete boards,
+  /// touch/I2S/LED pin assignments) behind one begin() call - see
+  /// TinyGPU's LCDBoards.h. begin() calls board.begin() instead of
+  /// separately managing a backlight pin and the driver's own begin(),
+  /// since the board's begin() already brings up its backlight/bus/
+  /// display (and touch, if present) together.
+  OutputTinyGPU(LCDBoard& board, int bandHeight = 40)
+      : tftDriver(board.display()),
+        kPinBacklight(-1),
+        kBandHeight(bandHeight),
+        p_board(&board) {}
+
   bool begin() {
-    if (kPinBacklight >= 0) {
-      pinMode(kPinBacklight, OUTPUT);
-      digitalWrite(kPinBacklight, HIGH);
+    if (p_board != nullptr) {
+      if (!p_board->begin()) return false;
+    } else {
+      if (kPinBacklight >= 0) {
+        pinMode(kPinBacklight, OUTPUT);
+        digitalWrite(kPinBacklight, HIGH);
+      }
+      tftDriver.begin();
     }
-    tftDriver.begin();
     clearScreen();
 
     return true;
   }
+
+  /// Changes the panel's rotation after begin() - forwards to the
+  /// underlying driver (see DisplayDriver::setRotation()); a no-op if
+  /// that driver doesn't support rotation. Nothing else to do here:
+  /// scale_to_fit's target and clearScreen()'s band loop read
+  /// tftDriver.width()/height() fresh each time, and those are already
+  /// rotation-aware (see DisplayDriver.h), so they pick up the change
+  /// automatically.
+  void setRotation(DisplayRotation rotation) { tftDriver.setRotation(rotation); }
 
   /// Defines the source of the video information (width, height, fps, format)
   void setVideoInfoSource(VideoInfoSource& source) { p_info = &source; }
@@ -56,8 +86,8 @@ class OutputTinyGPU : public VideoOutput {
   void setVideoInfo(VideoInfo info) { info_ = info; }
 
   /// When enabled, a decoded frame whose size doesn't match the panel's
-  /// configured width/height (the constructor's width/height, adjusted for
-  /// tftDriver's rotation) is nearest-neighbor scaled to fill it exactly -
+  /// current width/height (tftDriver.width()/height(), rotation-aware -
+  /// see DisplayDriver.h) is nearest-neighbor scaled to fill it exactly -
   /// the aspect ratio is NOT preserved, the source is stretched to the
   /// panel's own aspect ratio. Off by default (direct 1:1 write at (0,0),
   /// e.g. a QCIF video shown at native size in the corner of a larger
@@ -75,6 +105,7 @@ class OutputTinyGPU : public VideoOutput {
   void setSkipRender(bool skip) override { skip_render = skip; }
 
   size_t write(const uint8_t* data, size_t len) override {
+    auto start = millis();
     if (p_info != nullptr) {
       info_ = p_info->videoInfo();
     }
@@ -107,11 +138,14 @@ class OutputTinyGPU : public VideoOutput {
       // conversion is unavoidable regardless of whether scaling also
       // happens in the same pass.
       writeI420(data, info_.width, info_.height);
+      write_time_ms = millis() - start;
       return len;
     }
 
-    if (scale_to_fit && (info_.width != width || info_.height != height)) {
+    if (scale_to_fit && (info_.width != (int)tftDriver.width() ||
+                          info_.height != (int)tftDriver.height())) {
       writeScaled(data, info_.width, info_.height);
+      write_time_ms = millis() - start;
       return len;
     }
 
@@ -120,6 +154,7 @@ class OutputTinyGPU : public VideoOutput {
     frame.setExternalBuffer(const_cast<uint8_t*>(data), len);
     frame.resize(info_.width, info_.height);
     tftDriver.writeData(frame, 0, 0);
+    write_time_ms = millis() - start;
 
     return len;
   }
@@ -131,6 +166,8 @@ class OutputTinyGPU : public VideoOutput {
   /// row versus the unscaled single-transaction path, but needs only a
   /// single row's worth of scratch RAM regardless of resolution.
   void writeScaled(const uint8_t* data, int srcW, int srcH) {
+    int width = (int)tftDriver.width();
+    int height = (int)tftDriver.height();
     if ((int)scale_line_.size() != width) scale_line_.resize(width);
     const RGB565* src = (const RGB565*)data;
     for (int y = 0; y < height; y++) {
@@ -173,7 +210,8 @@ class OutputTinyGPU : public VideoOutput {
       }
     }
 
-    if (scale_to_fit && (srcW != width || srcH != height)) {
+    if (scale_to_fit && (srcW != (int)tftDriver.width() ||
+                          srcH != (int)tftDriver.height())) {
       writeScaled((const uint8_t*)i420_rgb_buf_.data(), srcW, srcH);
       return;
     }
@@ -201,6 +239,8 @@ class OutputTinyGPU : public VideoOutput {
   }
 
   void clearScreen() {
+    int width = (int)tftDriver.width();
+    int height = (int)tftDriver.height();
     SurfaceRGB565 band(width, kBandHeight, FontRGB565);
     band.begin();
     band.clear(RGB565(0, 0, 0));
@@ -210,14 +250,15 @@ class OutputTinyGPU : public VideoOutput {
     band.end();
   }
 
+  uint32_t getWriteTimeMs() const { return write_time_ms; }
+
  protected:
-  int width = 320;
-  int height = 240;
   int kPinBacklight;
   int kBandHeight;
   VideoInfoSource* p_info = nullptr;
   VideoInfo info_;
-  ILI9341Driver<RGB565>& tftDriver;
+  DisplayDriver<RGB565>& tftDriver;
+  LCDBoard* p_board = nullptr;
   bool scale_to_fit = false;
   bool skip_render = false;
   Vector<RGB565> scale_line_;
@@ -226,6 +267,7 @@ class OutputTinyGPU : public VideoOutput {
   /// since the conversion must run before scaling can reuse writeScaled().
   /// Only allocated once an I420 frame is actually written.
   Vector<RGB565> i420_rgb_buf_;
+  uint32_t write_time_ms = 0;
 };
 
 }  // namespace audio_tools
