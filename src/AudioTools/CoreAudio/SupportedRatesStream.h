@@ -54,10 +54,16 @@ class SupportedRatesStream : public AudioStream {
   /// notifications
   void setOutput(AudioOutput &out) { resampler.setOutput(out); }
   /// Defines/Changes the input & output
-  void setStream(Stream &io) { resampler.setStream(io); }
+  void setStream(Stream &io) {
+    p_source = &io;
+    resampler.setStream(io);
+  }
   /// Defines/Changes the input & output and registers for audio change
   /// notifications
-  void setStream(AudioStream &io) { resampler.setStream(io); }
+  void setStream(AudioStream &io) {
+    p_source = &io;
+    resampler.setStream(io);
+  }
 
   bool begin() override { return begin(audioInfo()); }
 
@@ -71,7 +77,11 @@ class SupportedRatesStream : public AudioStream {
   void setAudioInfo(AudioInfo newInfo) override {
     info = newInfo;
     // pick the closest supported rate and resample to it
-    resampler.setTargetSampleRate(closestSampleRate(newInfo.sample_rate));
+    int target = closestSampleRate(newInfo.sample_rate);
+    // rate already supported: readBytes()/available() can bypass the
+    // resampler and its extra buffering, reading straight from the source
+    needs_resample = (target != newInfo.sample_rate);
+    resampler.setTargetSampleRate(target);
     resampler.setAudioInfo(newInfo);
     notifyAudioChange(audioInfoOut());
   }
@@ -83,10 +93,22 @@ class SupportedRatesStream : public AudioStream {
   }
 
   size_t readBytes(uint8_t *data, size_t len) override {
+    if (!needs_resample && p_source != nullptr) {
+      return p_source->readBytes(data, len);
+    }
     return resampler.readBytes(data, len);
   }
 
-  int available() override { return resampler.available(); }
+  // available() must take the same bypass path as readBytes(): the
+  // resampler's available() pulls bytes from the source into its own
+  // queue as a side effect, which would silently steal data from a
+  // readBytes() call that bypasses the resampler.
+  int available() override {
+    if (!needs_resample && p_source != nullptr) {
+      return p_source->available();
+    }
+    return resampler.available();
+  }
 
   int availableForWrite() override { return resampler.availableForWrite(); }
 
@@ -94,7 +116,9 @@ class SupportedRatesStream : public AudioStream {
 
  protected:
   ResampleStream resampler;
+  Stream *p_source = nullptr;
   std::vector<int> supported_rates;
+  bool needs_resample = true;
 
   /// Determines the supported sample rate closest to the requested rate
   int closestSampleRate(int rate) {
