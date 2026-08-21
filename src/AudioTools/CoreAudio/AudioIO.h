@@ -1010,4 +1010,97 @@ class ChannelsSelectOutput : public AudioOutput {
   }
 };
 
+/** 
+ * @brief AudioTimeSourceStream: A stream that provides time information based
+ * on the audio data processed. It implements the TimeSource interface.
+ * @ingroup io
+ * @author Phil Schatzmann
+ */
+
+class AudioTimeSourceStream : public AudioStream, public TimeSource {
+ public:
+  AudioTimeSourceStream() = default;
+  AudioTimeSourceStream(AudioStream& stream) { setStream(stream); }
+  AudioTimeSourceStream(AudioOutput& out)  { setOutput(out); }
+  AudioTimeSourceStream(Print& print)  { setOutput(print); }
+  AudioTimeSourceStream(Stream& stream) { setStream(stream); }
+
+  bool begin() {
+    bool result = AudioStream::begin();
+    if (result) {
+      resetTime();
+    }
+    return result;
+  }
+
+  size_t readBytes(uint8_t* data, size_t len) override {
+    if (time_callback_before != nullptr) {
+      time_callback_before(current_time_ms);
+    }
+    size_t result = AudioStream::readBytes(data, len);
+    if (result > 0) {
+      updateTime(result);
+    }
+    return result;
+  }
+
+  size_t write(const uint8_t* data, size_t len) override {
+    if (time_callback_before != nullptr) {
+      time_callback_before(current_time_ms);
+    }
+    size_t result = AudioStream::write(data, len);
+    if (result > 0) {
+      updateTime(result);
+    }
+    return result;
+  }
+
+  /// Provides the current time in milliseconds based on the audio data
+  /// processed
+  uint32_t millis() override { return current_time_ms; }
+
+  void setOutput(Print& out)  {
+    p_out = &out;
+  }
+  void setOutput(AudioOutput& out)  {
+    p_out = &out;
+    addNotifyAudioChange(out);
+  }
+  void setStream(Stream& stream)  {
+    p_stream = &stream;
+    p_out = &stream;
+  }
+  void setStream(AudioStream& stream)  {
+    p_stream = &stream;
+    p_out = &stream;
+    addNotifyAudioChange(stream);
+  }
+  /// Defines a callback function to be called whenever the time is updated
+  void setTimeCallback(void (*cb)(uint32_t time_ms)) { time_callback_before = cb; }
+  /// Defines a callback function to be called whenever the time is updated
+  void setTimeCallbackAfter(void (*cb)(uint32_t time_ms)) { time_callback_after = cb; }
+
+ protected:
+  Print *p_out = nullptr;
+  Stream *p_stream = nullptr;
+  uint32_t current_time_ms = 0;
+  void (*time_callback_before)(uint32_t time_ms) = nullptr;
+  void (*time_callback_after)(uint32_t time_ms) = nullptr;
+
+  void resetTime() { current_time_ms = 0; }
+  void (*cb)(uint32_t time_ms);
+
+  void updateTime(size_t bytes) {
+    AudioInfo info = audioInfo();
+    uint32_t bytes_per_second = info.sample_rate * info.channels * info.bits_per_sample / 8;
+    uint32_t time_ms = (bytes * 1000) / bytes_per_second;
+
+    current_time_ms += time_ms;
+    if (time_callback_after != nullptr) {
+      time_callback_after(current_time_ms);
+    }
+  }
+};
+
+
 }  // namespace audio_tools
