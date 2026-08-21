@@ -11,6 +11,7 @@
 #include "AudioTools/CoreAudio/AudioIO.h"
 #include "AudioTools/CoreAudio/ResampleStream.h"
 #include "AudioTools/CoreAudio/ResampleStreamT.h"
+#include "AudioTools/CoreAudio/SupportedRatesStream.h"
 #include "AudioTools/CoreAudio/StreamCopy.h"
 #include "AudioTools/CoreAudio/MusicalNotes.h"
 #include "AudioTools/CoreAudio/Fade.h"
