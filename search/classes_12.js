@@ -90,11 +90,12 @@ var searchData=
   ['strview_87',['StrView',['../classaudio__tools_1_1_str_view.html',1,'audio_tools']]],
   ['stscentry_88',['StscEntry',['../structaudio__tools_1_1_demuxer_m_p4_1_1_stsc_entry.html',1,'audio_tools::DemuxerMP4']]],
   ['sttsentry_89',['SttsEntry',['../structaudio__tools_1_1_demuxer_m_p4_1_1_stts_entry.html',1,'audio_tools::DemuxerMP4']]],
-  ['synchronizedbuffer_90',['SynchronizedBuffer',['../classaudio__tools_1_1_synchronized_buffer.html',1,'audio_tools']]],
-  ['synchronizednbufferrtost_91',['SynchronizedNBufferRTOST',['../classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html',1,'audio_tools']]],
-  ['synchronizednbufferzephyrt_92',['SynchronizedNBufferZephyrT',['../classaudio__tools_1_1_synchronized_n_buffer_zephyr_t.html',1,'audio_tools']]],
-  ['synchronizedqueue_93',['SynchronizedQueue',['../classaudio__tools_1_1_synchronized_queue.html',1,'audio_tools']]],
-  ['synchronizedstream_94',['SynchronizedStream',['../classaudio__tools_1_1_synchronized_stream.html',1,'audio_tools']]],
-  ['synthesizer_95',['Synthesizer',['../classaudio__tools_1_1_synthesizer.html',1,'audio_tools']]],
-  ['synthesizerkey_96',['SynthesizerKey',['../structaudio__tools_1_1_synthesizer_key.html',1,'audio_tools']]]
+  ['supportedratesstream_90',['SupportedRatesStream',['../classaudio__tools_1_1_supported_rates_stream.html',1,'audio_tools']]],
+  ['synchronizedbuffer_91',['SynchronizedBuffer',['../classaudio__tools_1_1_synchronized_buffer.html',1,'audio_tools']]],
+  ['synchronizednbufferrtost_92',['SynchronizedNBufferRTOST',['../classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html',1,'audio_tools']]],
+  ['synchronizednbufferzephyrt_93',['SynchronizedNBufferZephyrT',['../classaudio__tools_1_1_synchronized_n_buffer_zephyr_t.html',1,'audio_tools']]],
+  ['synchronizedqueue_94',['SynchronizedQueue',['../classaudio__tools_1_1_synchronized_queue.html',1,'audio_tools']]],
+  ['synchronizedstream_95',['SynchronizedStream',['../classaudio__tools_1_1_synchronized_stream.html',1,'audio_tools']]],
+  ['synthesizer_96',['Synthesizer',['../classaudio__tools_1_1_synthesizer.html',1,'audio_tools']]],
+  ['synthesizerkey_97',['SynthesizerKey',['../structaudio__tools_1_1_synthesizer_key.html',1,'audio_tools']]]
 ];

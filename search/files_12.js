@@ -19,10 +19,11 @@ var searchData=
   ['streamcopy_2eh_16',['StreamCopy.h',['../_stream_copy_8h.html',1,'']]],
   ['streamingdecoder_2eh_17',['StreamingDecoder.h',['../_streaming_decoder_8h.html',1,'']]],
   ['strview_2eh_18',['StrView.h',['../_str_view_8h.html',1,'']]],
-  ['synchronizedbuffer_2eh_19',['SynchronizedBuffer.h',['../_synchronized_buffer_8h.html',1,'']]],
-  ['synchronizednbufferrtos_2eh_20',['SynchronizedNBufferRTOS.h',['../_synchronized_n_buffer_r_t_o_s_8h.html',1,'']]],
-  ['synchronizednbufferzephyr_2eh_21',['SynchronizedNBufferZephyr.h',['../_synchronized_n_buffer_zephyr_8h.html',1,'']]],
-  ['synchronizedqueue_2eh_22',['SynchronizedQueue.h',['../_synchronized_queue_8h.html',1,'']]],
-  ['synchronizedstream_2eh_23',['SynchronizedStream.h',['../_synchronized_stream_8h.html',1,'']]],
-  ['synthesizer_2eh_24',['Synthesizer.h',['../_synthesizer_8h.html',1,'']]]
+  ['supportedratesstream_2eh_19',['SupportedRatesStream.h',['../_supported_rates_stream_8h.html',1,'']]],
+  ['synchronizedbuffer_2eh_20',['SynchronizedBuffer.h',['../_synchronized_buffer_8h.html',1,'']]],
+  ['synchronizednbufferrtos_2eh_21',['SynchronizedNBufferRTOS.h',['../_synchronized_n_buffer_r_t_o_s_8h.html',1,'']]],
+  ['synchronizednbufferzephyr_2eh_22',['SynchronizedNBufferZephyr.h',['../_synchronized_n_buffer_zephyr_8h.html',1,'']]],
+  ['synchronizedqueue_2eh_23',['SynchronizedQueue.h',['../_synchronized_queue_8h.html',1,'']]],
+  ['synchronizedstream_2eh_24',['SynchronizedStream.h',['../_synchronized_stream_8h.html',1,'']]],
+  ['synthesizer_2eh_25',['Synthesizer.h',['../_synthesizer_8h.html',1,'']]]
 ];
