@@ -7,8 +7,8 @@
 #endif
 
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
-#include "AudioTools/CoreAudio/AudioLogger.h"
 #include "AudioTools/CoreAudio/AudioBasic/int24_t.h"
+#include "AudioTools/CoreAudio/AudioLogger.h"
 // Some top level functions: stop(), checkMemory()
 #include "AudioTools/CoreAudio/AudioRuntime.h"
 
@@ -109,7 +109,8 @@ struct AudioInfo {
 #endif
   /// Returns true if all components are defined (no component is 0)
   operator bool() {
-    return sample_rate > 0 && sample_rate <= 192000 && channels > 0 && channels < 20 && bits_per_sample > 0 && bits_per_sample <= 64;
+    return sample_rate > 0 && sample_rate <= 192000 && channels > 0 &&
+           channels < 20 && bits_per_sample > 0 && bits_per_sample <= 64;
   }
 
   virtual void clear() {
@@ -559,6 +560,28 @@ class MimeSource {
    * object or until the next call to this method.
    */
   virtual const char* mime() = 0;
+};
+
+/**
+ * @brief Interface for classes that can provide time information.
+ *
+ * This class defines a simple interface for objects that can provide time
+ * information in milliseconds. It serves as a base class for various time
+ * tracking and source identification implementations within the audio tools
+ * framework.
+ *
+ * Classes implementing this interface should provide logic to determine the
+ * appropriate time value based on their specific context (e.g., audio stream
+ * processing, event timing, etc.).
+ *
+ * @note This is a pure virtual interface class and cannot be instantiated
+ * directly.
+ * @ingroup basic
+ * @author Phil Schatzmann
+ */
+class TimeSource {
+ public:
+  virtual uint32_t millis() { return millis(); }
 };
 
 }  // namespace audio_tools
