@@ -3,15 +3,7 @@
  * @brief MP3 player for the Guition JC4880P443C_I_W (ESP32-P4): reads
  * files off the microSD card (SD_MMC, 4-bit) and plays them through the
  * ES8311/NS4150 speaker path via I2SCodecStream.
- *
- * UNTESTED - written without access to this hardware. See sdmmc-test.ino
- * for why `SD_MMC.setPowerChannel(4)` is needed before `begin()` on this
- * board (TF_VCC is powered from an on-chip LDO channel, not a GPIO), and
- * audio-out.ino for why this uses arduino-audio-driver's `GenericES8311`
- * (no predefined pins - no board-specific entry covers this hardware)
- * with manual `Wire.begin()`/I2S pin setup and manual NS4150 amp-enable
- * handling.
- *
+ * 
  * Dependencies:
  * - https://github.com/pschatzmann/arduino-audio-tools
  * - https://github.com/pschatzmann/arduino-audio-driver

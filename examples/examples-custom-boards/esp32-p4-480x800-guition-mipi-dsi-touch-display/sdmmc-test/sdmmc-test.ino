@@ -2,9 +2,7 @@
  * @file sdmmc-test.ino
  * @brief MicroSD card test for the Guition JC4880P443C_I_W (ESP32-P4),
  * over SD_MMC in 4-bit mode.
- *
- * UNTESTED - written without access to this hardware.
- *
+ * *
  * This board's SD rail (TF_VCC) is powered from an on-chip LDO channel
  * (VO4 @ 3.3V), not a GPIO - per guition-jc4880p4-bsp's board_p4.c, the
  * card won't mount without it (a documented "0x107 timeout" gotcha).

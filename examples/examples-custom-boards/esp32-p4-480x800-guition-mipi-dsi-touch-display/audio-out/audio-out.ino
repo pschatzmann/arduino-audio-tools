@@ -3,13 +3,6 @@
  * @brief Sine wave playback for the Guition JC4880P443C_I_W (ESP32-P4)
  * onboard ES8311 codec + NS4150 speaker amp, via I2SCodecStream.
  *
- * UNTESTED - written without access to this hardware, from the pin map
- * documented in guition-jc4880p4-bsp's board_p4_pins.h (a header that's
- * itself explicit that these audio pins are "not driven by the core
- * BSP" - i.e. board-documented, not exercised by that library, since it
- * only handles display/touch). This example is the first thing in this
- * repo to actually drive them.
- *
  * There's no arduino-audio-driver board entry for this board, so this
  * uses arduino-audio-driver's `GenericES8311` (no predefined pins - the
  * same pattern the wiki documents for `GenericWM8960`/ES8388: `Wire`
