@@ -16,19 +16,12 @@ namespace audio_tools {
  * @ingroup transform
  * @copyright GPLv3
  */
-class SupportedRatesStream : public ResampleStream {
+class SupportedRatesStream : public AudioStream {
  public:
   SupportedRatesStream() = default;
 
-  SupportedRatesStream(std::vector<int> rates) { setSupportedSampleRates(rates); }
-
   /// Support for resampling via write.
   SupportedRatesStream(Print &out) { setOutput(out); }
-  /// Support for resampling via write.
-  SupportedRatesStream(std::vector<int> rates, Print &out) {
-    setSupportedSampleRates(rates);
-    setOutput(out);
-  }
 
   /// Support for resampling via write. The audio information is copied from
   /// the io
@@ -36,32 +29,13 @@ class SupportedRatesStream : public ResampleStream {
     setAudioInfo(out.audioInfo());
     setOutput(out);
   }
-  /// Support for resampling via write. The audio information is copied from
-  /// the io
-  SupportedRatesStream(std::vector<int> rates, AudioOutput &out) {
-    setSupportedSampleRates(rates);
-    setAudioInfo(out.audioInfo());
-    setOutput(out);
-  }
 
   /// Support for resampling via write and read.
   SupportedRatesStream(Stream &io) { setStream(io); }
-  /// Support for resampling via write and read.
-  SupportedRatesStream(std::vector<int> rates, Stream &io) {
-    setSupportedSampleRates(rates);
-    setStream(io);
-  }
 
   /// Support for resampling via write and read. The audio information is
   /// copied from the io
   SupportedRatesStream(AudioStream &io) {
-    setAudioInfo(io.audioInfo());
-    setStream(io);
-  }
-  /// Support for resampling via write and read. The audio information is
-  /// copied from the io
-  SupportedRatesStream(std::vector<int> rates, AudioStream &io) {
-    setSupportedSampleRates(rates);
     setAudioInfo(io.audioInfo());
     setStream(io);
   }
@@ -74,20 +48,52 @@ class SupportedRatesStream : public ResampleStream {
   /// Provides the list of supported sample rates
   std::vector<int> &supportedSampleRates() { return supported_rates; }
 
-  void setAudioInfo(AudioInfo newInfo) override {
-    // pick the closest supported rate and resample to it
-    setTargetSampleRate(closestSampleRate(newInfo.sample_rate));
-    ResampleStream::setAudioInfo(newInfo);
+  /// Defines/Changes the output target
+  void setOutput(Print &out) { resampler.setOutput(out); }
+  /// Defines/Changes the output target and registers for audio change
+  /// notifications
+  void setOutput(AudioOutput &out) { resampler.setOutput(out); }
+  /// Defines/Changes the input & output
+  void setStream(Stream &io) { resampler.setStream(io); }
+  /// Defines/Changes the input & output and registers for audio change
+  /// notifications
+  void setStream(AudioStream &io) { resampler.setStream(io); }
+
+  bool begin() override { return begin(audioInfo()); }
+
+  bool begin(AudioInfo newInfo) {
+    setAudioInfo(newInfo);
+    return resampler.begin(newInfo);
   }
 
-  bool begin(AudioInfo info) override {
-    // make sure the target rate is determined before the base class
-    // (re)builds the resampler from it
-    setTargetSampleRate(closestSampleRate(info.sample_rate));
-    return ResampleStream::begin(info);
+  void end() override { resampler.end(); }
+
+  void setAudioInfo(AudioInfo newInfo) override {
+    info = newInfo;
+    // pick the closest supported rate and resample to it
+    resampler.setTargetSampleRate(closestSampleRate(newInfo.sample_rate));
+    resampler.setAudioInfo(newInfo);
+    notifyAudioChange(audioInfoOut());
   }
+
+  AudioInfo audioInfoOut() override { return resampler.audioInfoOut(); }
+
+  size_t write(const uint8_t *data, size_t len) override {
+    return resampler.write(data, len);
+  }
+
+  size_t readBytes(uint8_t *data, size_t len) override {
+    return resampler.readBytes(data, len);
+  }
+
+  int available() override { return resampler.available(); }
+
+  int availableForWrite() override { return resampler.availableForWrite(); }
+
+  void flush() override { resampler.flush(); }
 
  protected:
+  ResampleStream resampler;
   std::vector<int> supported_rates;
 
   /// Determines the supported sample rate closest to the requested rate
