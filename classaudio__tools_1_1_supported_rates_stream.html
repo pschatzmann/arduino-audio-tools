@@ -204,8 +204,12 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a47385aa19435f5fca9d3083a748258c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeaba7fcedcb403536c79ee7f04de17fc" id="r_aeaba7fcedcb403536c79ee7f04de17fc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#aeaba7fcedcb403536c79ee7f04de17fc">is_notify_active</a> = true</td></tr>
 <tr class="separator:aeaba7fcedcb403536c79ee7f04de17fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8088cf1133b679596371a160671edd7" id="r_ab8088cf1133b679596371a160671edd7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_supported_rates_stream.html#ab8088cf1133b679596371a160671edd7">needs_resample</a> = true</td></tr>
+<tr class="separator:ab8088cf1133b679596371a160671edd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad35c4e2ef458c36e8d36676958cc9cd3" id="r_ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#ad35c4e2ef458c36e8d36676958cc9cd3">notify_vector</a></td></tr>
 <tr class="separator:ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4aedeeafffe3a4f1acc85e1004001908" id="r_a4aedeeafffe3a4f1acc85e1004001908"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_supported_rates_stream.html#a4aedeeafffe3a4f1acc85e1004001908">p_source</a> = nullptr</td></tr>
+<tr class="separator:a4aedeeafffe3a4f1acc85e1004001908"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac9cd76ae8a735e6cdfc74596cf64bb51" id="r_ac9cd76ae8a735e6cdfc74596cf64bb51"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_resample_stream.html">ResampleStream</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_supported_rates_stream.html#ac9cd76ae8a735e6cdfc74596cf64bb51">resampler</a></td></tr>
 <tr class="separator:ac9cd76ae8a735e6cdfc74596cf64bb51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a020c7d1aeb3b9948264667e7ef279bdd" id="r_a020c7d1aeb3b9948264667e7ef279bdd"><td class="memItemLeft" align="right" valign="top">std::vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_supported_rates_stream.html#a020c7d1aeb3b9948264667e7ef279bdd">supported_rates</a></td></tr>
@@ -1324,6 +1328,28 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ab8088cf1133b679596371a160671edd7" name="ab8088cf1133b679596371a160671edd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8088cf1133b679596371a160671edd7">&#9670;&#160;</a></span>needs_resample</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool needs_resample = true</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ad35c4e2ef458c36e8d36676958cc9cd3" name="ad35c4e2ef458c36e8d36676958cc9cd3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad35c4e2ef458c36e8d36676958cc9cd3">&#9670;&#160;</a></span>notify_vector</h2>
 
@@ -1340,6 +1366,28 @@ Protected Attributes</h2></td></tr>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4aedeeafffe3a4f1acc85e1004001908" name="a4aedeeafffe3a4f1acc85e1004001908"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4aedeeafffe3a4f1acc85e1004001908">&#9670;&#160;</a></span>p_source</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_stream.html">Stream</a>* p_source = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
