@@ -5,13 +5,6 @@
  * CSV - open the Arduino IDE's Serial Plotter to see the waveform, or
  * just watch for non-zero values while talking near the board.
  *
- * UNTESTED - written without access to this hardware. ES8311 has an
- * integrated ADC, and the DIN pin (codec -> P4, GPIO48) is wired per
- * board_p4_pins.h, but nothing in the BSP or its docs confirms whether
- * an actual microphone is physically populated on this board feeding
- * that ADC input - unlike audio-out.ino's speaker path, which is
- * explicitly documented hardware (ES8311 + NS4150 amp).
- *
  * Uses arduino-audio-driver's `GenericES8311` (no predefined pins) - see
  * audio-out.ino for why, and for this board's I2S/I2C pins.
  *

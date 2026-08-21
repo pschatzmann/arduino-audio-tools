@@ -1,6 +1,7 @@
 docs/html/
 build/
 _deps/
+build_check/
 .*
 .*/
 miniaudio.h

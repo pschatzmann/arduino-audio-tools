@@ -55,12 +55,10 @@ constexpr int8_t kPinBacklight = 27;
 // display resolution - used by OutputTinyGPU's begin()/clearScreen()
 // sizing; the actual per-frame size still comes from H264Decoder via
 // setVideoInfoSource()
-const uint16_t video_width = 320;
-const uint16_t video_height = 240;
 
 ILI9341Driver<RGB565> tftDriver(SPI, kPinCs, kPinDc, kPinRst);
 H264Decoder h264Decoder;
-OutputTinyGPU tftOutput(tftDriver, video_width, video_height, kPinBacklight);
+OutputTinyGPU tftOutput(tftDriver, kPinBacklight);
 I2SStream i2s;
 AACDecoderHelix aacDecoder;
 EncodedAudioStream audioOut(&i2s, &aacDecoder);  // decodes AAC -> I2S

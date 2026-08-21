@@ -51,12 +51,10 @@ constexpr int8_t kPinBacklight = 27;
 // display resolution - used by OutputTinyGPU's begin()/clearScreen()
 // sizing; the actual per-frame size still comes from MPGDecoder via
 // setVideoInfoSource()
-const uint16_t video_width = 320;
-const uint16_t video_height = 240;
 
 ILI9341Driver<RGB565> tftDriver(SPI, kPinCs, kPinDc, kPinRst);
 MPGDecoder mpgDecoder;
-OutputTinyGPU tftOutput(tftDriver, video_width, video_height, kPinBacklight);
+OutputTinyGPU tftOutput(tftDriver, kPinBacklight);
 I2SStream i2s;
 MP3DecoderHelix mp3Decoder;
 EncodedAudioStream audioOut(&i2s, &mp3Decoder);  // decodes MP3/MP2 -> I2S
