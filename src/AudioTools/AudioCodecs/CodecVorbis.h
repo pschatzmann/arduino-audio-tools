@@ -8,6 +8,11 @@
 // #include "ivorbiscodec.h"
 // #include "ivorbisfile.h"
 
+// the ESP32 does not have any optimization flags set by default, so we can enable O3 for better performance
+#ifdef ARDUINO
+#pragma GCC optimize("O3")
+#endif
+
 namespace audio_tools {
 
 #ifndef VARBIS_MAX_READ_SIZE
