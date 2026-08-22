@@ -35,7 +35,7 @@ constexpr int kPinI2sWs = 10;
 constexpr int kPinI2sDout = 9;
 constexpr int kPinCodecScl = 8;
 constexpr int kPinCodecSda = 7;
-constexpr int kPinAmpEnable = 11;  // unverified polarity - see audio-out.ino
+constexpr int kPinAmpEnable = 11;  // NS4150 PA_EN, active-high - see audio-out.ino
 
 const char *startFilePath = "/";
 const char *ext = "mp3";

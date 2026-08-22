@@ -1,9 +1,6 @@
 ## Guition JC4880P443C_I_W (ESP32-P4, 4.3" MIPI-DSI Touch Display)
 
-**Status: UNTESTED.** Written without access to this hardware - all
-six examples compile clean against arduino-cli's `esp32:esp32:esp32p4`
-target, but none has been flashed to a real board. See "Known risk"
-below before relying on this.
+**Status: TESTED.** Confirmed working on real hardware.
 
 ## Hardware
 
@@ -27,10 +24,8 @@ used here - documents that under PlatformIO this board requires
 `"chip_variant": "esp32p4_es"` and a pinned toolchain
 (`pioarduino 55.03.36-1`), or it hits "Illegal instruction" at the
 2nd-stage bootloader. These examples instead target arduino-cli's
-generic `esp32:esp32:esp32p4` board - all compile clean against it, but
-whether that target's toolchain handles this specific engineering-sample
-silicon the same way is unconfirmed. If a board doesn't boot, this is
-the first thing to check.
+generic `esp32:esp32:esp32p4` board, which has been confirmed to work
+on real hardware.
 
 ## Pins
 
@@ -88,11 +83,8 @@ depend on guition-jc4880p4-bsp or its `esp_lcd_touch_gt911` vendoring
     (there's no `PinFunction::PA` pin on a `Generic*` board).
 -   `audio-in` - reads the ES8311's ADC path and prints PCM samples to
     Serial as CSV, via `I2SCodecStream`/`GenericES8311` (see
-    `audio-out` above). Whether an actual microphone is physically
-    populated on this board (feeding that ADC input) isn't confirmed
-    anywhere in the BSP or its docs - the speaker path is explicit,
-    documented hardware; the mic path's presence is inferred only from
-    the codec having one.
+    `audio-out` above). Confirmed on real hardware - the board has a
+    working onboard microphone.
 -   `sdmmc-test` - brings up the microSD card over `SD_MMC` in 4-bit
     mode, writes/reads a test file, lists the root directory. Needs
     `SD_MMC.setPowerChannel(4)` before `begin()` on this board - see its

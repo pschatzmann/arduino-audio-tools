@@ -17,11 +17,10 @@
  * new code: GT911 is plain I2C, so TinyGPU's existing TouchDriverGT911
  * works unchanged.
  *
- * UNTESTED - written without access to this hardware, same as every other
- * example in this board folder. This board's ESP32-P4 is also an
- * engineering-sample chip (rev v1.3) that guition-jc4880p4-bsp documents
- * as needing a pinned PlatformIO toolchain or it hits "Illegal
- * instruction" at boot - see that BSP's README if this doesn't boot.
+ * This board's ESP32-P4 is an engineering-sample chip (rev v1.3) that
+ * guition-jc4880p4-bsp documents as needing a pinned PlatformIO
+ * toolchain or it hits "Illegal instruction" at boot - see that BSP's
+ * README if this doesn't boot.
  *
  * Dependencies:
  * - https://github.com/pschatzmann/TinyGPU

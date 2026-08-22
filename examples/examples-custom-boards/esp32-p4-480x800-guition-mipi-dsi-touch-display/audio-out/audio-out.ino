@@ -11,11 +11,8 @@
  *
  * `GenericES8311` has no `PinFunction::PA` pin, so unlike a
  * board-specific entry it does not toggle the NS4150 amp-enable pin for
- * you - this file does that manually. UNVERIFIED GUESS: PA_EN (GPIO11)
- * is driven active-HIGH here, based on NS4150's datasheet SD (shutdown)
- * pin being active-low - i.e. HIGH = enabled. board_p4_pins.h doesn't
- * state the polarity; if there's no audio but the codec itself looks
- * configured correctly, try driving it LOW instead.
+ * you - this file does that manually. PA_EN (GPIO11) is driven
+ * active-HIGH, confirmed on real hardware.
  *
  * Dependencies:
  * - https://github.com/pschatzmann/arduino-audio-tools
@@ -34,7 +31,7 @@ constexpr int kPinI2sWs = 10;
 constexpr int kPinI2sDout = 9;   // P4 -> codec
 constexpr int kPinCodecScl = 8;  // shared with GT911 touch bus
 constexpr int kPinCodecSda = 7;
-constexpr int kPinAmpEnable = 11;  // NS4150 PA_EN - see UNVERIFIED note above
+constexpr int kPinAmpEnable = 11;  // NS4150 PA_EN, active-high
 
 AudioInfo info(44100, 2, 16);
 SineWaveGenerator<int16_t> sineWave;
@@ -47,7 +44,7 @@ void setup(void) {
   AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   pinMode(kPinAmpEnable, OUTPUT);
-  digitalWrite(kPinAmpEnable, HIGH);  // enable NS4150 - see UNVERIFIED note above
+  digitalWrite(kPinAmpEnable, HIGH);  // enable NS4150
 
   Wire.begin(kPinCodecSda, kPinCodecScl);
 
