@@ -145,10 +145,11 @@ var searchData=
   ['audiotimerdriverrenesas_142',['AudioTimerDriverRenesas',['../classaudio__tools_1_1_audio_timer_driver_renesas.html',1,'audio_tools']]],
   ['audiotimerdriverstm32_143',['AudioTimerDriverSTM32',['../classaudio__tools_1_1_audio_timer_driver_s_t_m32.html',1,'audio_tools']]],
   ['audiotimerdriverzephyr_144',['AudioTimerDriverZephyr',['../classaudio__tools_1_1_audio_timer_driver_zephyr.html',1,'audio_tools']]],
-  ['audiowavserverex_145',['AudioWAVServerEx',['../classaudio__tools_1_1_audio_w_a_v_server_ex.html',1,'audio_tools']]],
-  ['audiowavservert_146',['AudioWAVServerT',['../classaudio__tools_1_1_audio_w_a_v_server_t.html',1,'audio_tools']]],
-  ['audiowriter_147',['AudioWriter',['../classaudio__tools_1_1_audio_writer.html',1,'audio_tools']]],
-  ['audiowritertoaudiooutput_148',['AudioWriterToAudioOutput',['../classaudio__tools_1_1_audio_writer_to_audio_output.html',1,'audio_tools']]],
-  ['avimainheader_149',['AVIMainHeader',['../structaudio__tools_1_1_a_v_i_main_header.html',1,'audio_tools']]],
-  ['avistreamheader_150',['AVIStreamHeader',['../structaudio__tools_1_1_a_v_i_stream_header.html',1,'audio_tools']]]
+  ['audiotimesourcestream_145',['AudioTimeSourceStream',['../classaudio__tools_1_1_audio_time_source_stream.html',1,'audio_tools']]],
+  ['audiowavserverex_146',['AudioWAVServerEx',['../classaudio__tools_1_1_audio_w_a_v_server_ex.html',1,'audio_tools']]],
+  ['audiowavservert_147',['AudioWAVServerT',['../classaudio__tools_1_1_audio_w_a_v_server_t.html',1,'audio_tools']]],
+  ['audiowriter_148',['AudioWriter',['../classaudio__tools_1_1_audio_writer.html',1,'audio_tools']]],
+  ['audiowritertoaudiooutput_149',['AudioWriterToAudioOutput',['../classaudio__tools_1_1_audio_writer_to_audio_output.html',1,'audio_tools']]],
+  ['avimainheader_150',['AVIMainHeader',['../structaudio__tools_1_1_a_v_i_main_header.html',1,'audio_tools']]],
+  ['avistreamheader_151',['AVIStreamHeader',['../structaudio__tools_1_1_a_v_i_stream_header.html',1,'audio_tools']]]
 ];

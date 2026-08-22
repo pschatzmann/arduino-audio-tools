@@ -81,6 +81,7 @@ $(function() {
 <div class="contents">
 <div class="textblock"><code>#include &lt;TinyGPU.h&gt;</code><br />
 <code>#include &lt;TinyGPU/DisplayDriverSPI.h&gt;</code><br />
+<code>#include &lt;TinyGPU/LCDBoards.h&gt;</code><br />
 <code>#include &lt;TinyGPU/SurfaceWithExternalBuffer.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="_vector_8h_source.html">AudioTools/CoreAudio/AudioBasic/Collections/Vector.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_codec_video_8h_source.html">AudioTools/Video/CodecVideo.h</a>&quot;</code><br />
@@ -90,7 +91,7 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html">OutputTinyGPU</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bridges <a class="el" href="classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 - CodecH264....">VideoDecoder</a>'s <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> calls to a TinyGPU ILI9341Driver - <a class="el" href="classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 - CodecH264....">VideoDecoder</a> always hands over one complete frame per <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call (see its class comment), so this can push the whole frame in one go. Usually the data is in RGB565 format, but other formats are supported as well.  <a href="classaudio__tools_1_1_output_tiny_g_p_u.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bridges <a class="el" href="classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 - CodecH264....">VideoDecoder</a>'s <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> calls to a TinyGPU DisplayDriver (e.g. ILI9341Driver, or any board wrapped in an LCDBoard - see the LCDBoard constructor) - <a class="el" href="classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 - CodecH264....">VideoDecoder</a> always hands over one complete frame per <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call (see its class comment), so this can push the whole frame in one go. Usually the data is in RGB565 format, but other formats are supported as well.  <a href="classaudio__tools_1_1_output_tiny_g_p_u.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>

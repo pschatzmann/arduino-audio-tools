@@ -82,7 +82,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Bridges <a class="el" href="classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 - CodecH264....">VideoDecoder</a>'s <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> calls to a TinyGPU ILI9341Driver - <a class="el" href="classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 - CodecH264....">VideoDecoder</a> always hands over one complete frame per <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call (see its class comment), so this can push the whole frame in one go. Usually the data is in RGB565 format, but other formats are supported as well.  
+<p>Bridges <a class="el" href="classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 - CodecH264....">VideoDecoder</a>'s <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> calls to a TinyGPU DisplayDriver (e.g. ILI9341Driver, or any board wrapped in an LCDBoard - see the LCDBoard constructor) - <a class="el" href="classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 - CodecH264....">VideoDecoder</a> always hands over one complete frame per <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call (see its class comment), so this can push the whole frame in one go. Usually the data is in RGB565 format, but other formats are supported as well.  
  <a href="classaudio__tools_1_1_output_tiny_g_p_u.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_output_tiny_g_p_u_8h_source.html">OutputTinyGPU.h</a>&gt;</code></p>
@@ -98,14 +98,20 @@ Inheritance diagram for OutputTinyGPU:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aae8be4425f88ba9d130b00ab8cca61eb" id="r_aae8be4425f88ba9d130b00ab8cca61eb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#aae8be4425f88ba9d130b00ab8cca61eb">OutputTinyGPU</a> (ILI9341Driver&lt; <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a3b73e4d15701467ed72f157ffaff680a">RGB565</a> &gt; &amp;driver, int <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a2474a5474cbff19523a51eb1de01cda4">width</a>, int <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#ad12fc34ce789bce6c8a05d8a17138534">height</a>, int pinBacklight, int bandHeight=40)</td></tr>
-<tr class="separator:aae8be4425f88ba9d130b00ab8cca61eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a917cf7dee6b781edece2749e40ca7a05" id="r_a917cf7dee6b781edece2749e40ca7a05"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a917cf7dee6b781edece2749e40ca7a05">OutputTinyGPU</a> (DisplayDriver&lt; <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a3b73e4d15701467ed72f157ffaff680a">RGB565</a> &gt; &amp;driver, int pinBacklight, int bandHeight=40)</td></tr>
+<tr class="separator:a917cf7dee6b781edece2749e40ca7a05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c2fc1b7ff3182e4b0a34773a4bcdae9" id="r_a0c2fc1b7ff3182e4b0a34773a4bcdae9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a0c2fc1b7ff3182e4b0a34773a4bcdae9">OutputTinyGPU</a> (LCDBoard &amp;board, int bandHeight=40)</td></tr>
+<tr class="separator:a0c2fc1b7ff3182e4b0a34773a4bcdae9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a601fb7cf1fc15db50c71a826f084f934" id="r_a601fb7cf1fc15db50c71a826f084f934"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a601fb7cf1fc15db50c71a826f084f934">begin</a> ()</td></tr>
 <tr class="separator:a601fb7cf1fc15db50c71a826f084f934"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d7e8af417b6d543da691e9c0e2f6f9f" id="r_a9d7e8af417b6d543da691e9c0e2f6f9f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a9d7e8af417b6d543da691e9c0e2f6f9f">clearScreen</a> ()</td></tr>
 <tr class="separator:a9d7e8af417b6d543da691e9c0e2f6f9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3aed50bc3b4459454ccb8c64f5ced5a" id="r_ad3aed50bc3b4459454ccb8c64f5ced5a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#ad3aed50bc3b4459454ccb8c64f5ced5a">flush</a> ()</td></tr>
 <tr class="separator:ad3aed50bc3b4459454ccb8c64f5ced5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5efb8ccd37b8cc2749358e5da69adddc" id="r_a5efb8ccd37b8cc2749358e5da69adddc"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a5efb8ccd37b8cc2749358e5da69adddc">getWriteTimeMs</a> () const</td></tr>
+<tr class="separator:a5efb8ccd37b8cc2749358e5da69adddc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae391257cfb1624868156cfab8d8b4c9b" id="r_ae391257cfb1624868156cfab8d8b4c9b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#ae391257cfb1624868156cfab8d8b4c9b">setRotation</a> (DisplayRotation rotation)</td></tr>
+<tr class="separator:ae391257cfb1624868156cfab8d8b4c9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba37de7b679bd80208a870f1815f8a86" id="r_aba37de7b679bd80208a870f1815f8a86"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#aba37de7b679bd80208a870f1815f8a86">setScaleToFit</a> (bool enable)</td></tr>
 <tr class="separator:aba37de7b679bd80208a870f1815f8a86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a94f8728be362b736be4cb10a4253d201" id="r_a94f8728be362b736be4cb10a4253d201"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a94f8728be362b736be4cb10a4253d201">setSkipRender</a> (bool skip) override</td></tr>
@@ -132,8 +138,6 @@ Static Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:ad12fc34ce789bce6c8a05d8a17138534" id="r_ad12fc34ce789bce6c8a05d8a17138534"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#ad12fc34ce789bce6c8a05d8a17138534">height</a> = 240</td></tr>
-<tr class="separator:ad12fc34ce789bce6c8a05d8a17138534"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5843011f37b82a1039ed4aad50c46cd1" id="r_a5843011f37b82a1039ed4aad50c46cd1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a3b73e4d15701467ed72f157ffaff680a">RGB565</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a5843011f37b82a1039ed4aad50c46cd1">i420_rgb_buf_</a></td></tr>
 <tr class="separator:a5843011f37b82a1039ed4aad50c46cd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44b789c49133c2e125825ccddb37d541" id="r_a44b789c49133c2e125825ccddb37d541"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_video_info.html">VideoInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a44b789c49133c2e125825ccddb37d541">info_</a></td></tr>
@@ -142,6 +146,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a3cb6ff02b18302276375a5c7dc8fc601"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f8d1b2b2f2e27e2e3a00d3a18bbdbb8" id="r_a4f8d1b2b2f2e27e2e3a00d3a18bbdbb8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a4f8d1b2b2f2e27e2e3a00d3a18bbdbb8">kPinBacklight</a></td></tr>
 <tr class="separator:a4f8d1b2b2f2e27e2e3a00d3a18bbdbb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a8005b6a640b5a969597a04b83d215b" id="r_a7a8005b6a640b5a969597a04b83d215b"><td class="memItemLeft" align="right" valign="top">LCDBoard *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a7a8005b6a640b5a969597a04b83d215b">p_board</a> = nullptr</td></tr>
+<tr class="separator:a7a8005b6a640b5a969597a04b83d215b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a249016cdb76ca8bc26f6dbb708d5351a" id="r_a249016cdb76ca8bc26f6dbb708d5351a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_video_info_source.html">VideoInfoSource</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a249016cdb76ca8bc26f6dbb708d5351a">p_info</a> = nullptr</td></tr>
 <tr class="separator:a249016cdb76ca8bc26f6dbb708d5351a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac9dc5e51fbf5fef8ab405c892ca15459" id="r_ac9dc5e51fbf5fef8ab405c892ca15459"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a3b73e4d15701467ed72f157ffaff680a">RGB565</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#ac9dc5e51fbf5fef8ab405c892ca15459">scale_line_</a></td></tr>
@@ -150,19 +156,19 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:abeea080c3b6781e0ca6c177b857a7d4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a81959f172bdc37e874cc2a2201fb449a" id="r_a81959f172bdc37e874cc2a2201fb449a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a81959f172bdc37e874cc2a2201fb449a">skip_render</a> = false</td></tr>
 <tr class="separator:a81959f172bdc37e874cc2a2201fb449a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6947b9cbb797c31ea4b1da215054bf6b" id="r_a6947b9cbb797c31ea4b1da215054bf6b"><td class="memItemLeft" align="right" valign="top">ILI9341Driver&lt; <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a3b73e4d15701467ed72f157ffaff680a">RGB565</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a6947b9cbb797c31ea4b1da215054bf6b">tftDriver</a></td></tr>
-<tr class="separator:a6947b9cbb797c31ea4b1da215054bf6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2474a5474cbff19523a51eb1de01cda4" id="r_a2474a5474cbff19523a51eb1de01cda4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a2474a5474cbff19523a51eb1de01cda4">width</a> = 320</td></tr>
-<tr class="separator:a2474a5474cbff19523a51eb1de01cda4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb9604558a01e96f5740ab39bccc0881" id="r_acb9604558a01e96f5740ab39bccc0881"><td class="memItemLeft" align="right" valign="top">DisplayDriver&lt; <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a3b73e4d15701467ed72f157ffaff680a">RGB565</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#acb9604558a01e96f5740ab39bccc0881">tftDriver</a></td></tr>
+<tr class="separator:acb9604558a01e96f5740ab39bccc0881"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0be1717bd57d1cc5448df02edaa8d5d6" id="r_a0be1717bd57d1cc5448df02edaa8d5d6"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a0be1717bd57d1cc5448df02edaa8d5d6">write_time_ms</a> = 0</td></tr>
+<tr class="separator:a0be1717bd57d1cc5448df02edaa8d5d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Bridges <a class="el" href="classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 - CodecH264....">VideoDecoder</a>'s <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> calls to a TinyGPU ILI9341Driver - <a class="el" href="classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 - CodecH264....">VideoDecoder</a> always hands over one complete frame per <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call (see its class comment), so this can push the whole frame in one go. Usually the data is in RGB565 format, but other formats are supported as well. </p>
+<div class="textblock"><p>Bridges <a class="el" href="classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 - CodecH264....">VideoDecoder</a>'s <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> calls to a TinyGPU DisplayDriver (e.g. ILI9341Driver, or any board wrapped in an LCDBoard - see the LCDBoard constructor) - <a class="el" href="classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 - CodecH264....">VideoDecoder</a> always hands over one complete frame per <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call (see its class comment), so this can push the whole frame in one go. Usually the data is in RGB565 format, but other formats are supported as well. </p>
 <p><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> never allocates or copies a full-frame buffer of its own: it wraps the caller's already-decoded frame in a SurfaceWithExternalBuffer (a TinyGPU view over externally-owned memory) and hands that straight to the display driver, so RAM use stays independent of the frame size - only <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a9d7e8af417b6d543da691e9c0e2f6f9f">clearScreen()</a>'s small band buffer (kBandHeight rows) is actually owned/allocated here.</p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aae8be4425f88ba9d130b00ab8cca61eb" name="aae8be4425f88ba9d130b00ab8cca61eb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aae8be4425f88ba9d130b00ab8cca61eb">&#9670;&#160;</a></span>OutputTinyGPU()</h2>
+<a id="a917cf7dee6b781edece2749e40ca7a05" name="a917cf7dee6b781edece2749e40ca7a05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a917cf7dee6b781edece2749e40ca7a05">&#9670;&#160;</a></span>OutputTinyGPU() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -173,20 +179,8 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html">OutputTinyGPU</a> </td>
           <td>(</td>
-          <td class="paramtype">ILI9341Driver&lt; <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a3b73e4d15701467ed72f157ffaff680a">RGB565</a> &gt; &amp;&#160;</td>
+          <td class="paramtype">DisplayDriver&lt; <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a3b73e4d15701467ed72f157ffaff680a">RGB565</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>driver</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>width</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>height</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -214,7 +208,50 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">driver</td><td>Any TinyGPU DisplayDriver&lt;RGB565&gt; - e.g. ILI9341Driver. Its own width()/height() (rotation-aware - see DisplayDriver.h) are queried fresh wherever needed (scale_to_fit's target, <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a9d7e8af417b6d543da691e9c0e2f6f9f">clearScreen()</a>'s band loop), so a later <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#ae391257cfb1624868156cfab8d8b4c9b">setRotation()</a> call is picked up automatically. </td></tr>
     <tr><td class="paramname">bandHeight</td><td>height (in pixels) of the strip used to clear the screen in <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a> - kept small (default 40) so the clear buffer stays a small, single allocation instead of a full-screen framebuffer; see TinyGPU's bouncing-ball example for the same technique. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a0c2fc1b7ff3182e4b0a34773a4bcdae9" name="a0c2fc1b7ff3182e4b0a34773a4bcdae9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c2fc1b7ff3182e4b0a34773a4bcdae9">&#9670;&#160;</a></span>OutputTinyGPU() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html">OutputTinyGPU</a> </td>
+          <td>(</td>
+          <td class="paramtype">LCDBoard &amp;&#160;</td>
+          <td class="paramname"><em>board</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>bandHeight</em> = <code>40</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">board</td><td>Bundles the display driver (and, on concrete boards, touch/I2S/LED pin assignments) behind one <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a> call - see TinyGPU's LCDBoards.h. <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a> calls board.begin() instead of separately managing a backlight pin and the driver's own <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a>, since the board's <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a> already brings up its backlight/bus/ display (and touch, if present) together. </td></tr>
   </table>
   </dd>
 </dl>
@@ -300,6 +337,58 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a5efb8ccd37b8cc2749358e5da69adddc" name="a5efb8ccd37b8cc2749358e5da69adddc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5efb8ccd37b8cc2749358e5da69adddc">&#9670;&#160;</a></span>getWriteTimeMs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t getWriteTimeMs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae391257cfb1624868156cfab8d8b4c9b" name="ae391257cfb1624868156cfab8d8b4c9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae391257cfb1624868156cfab8d8b4c9b">&#9670;&#160;</a></span>setRotation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setRotation </td>
+          <td>(</td>
+          <td class="paramtype">DisplayRotation&#160;</td>
+          <td class="paramname"><em>rotation</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Changes the panel's rotation after <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a> - forwards to the underlying driver (see DisplayDriver::setRotation()); a no-op if that driver doesn't support rotation. Nothing else to do here: scale_to_fit's target and <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a9d7e8af417b6d543da691e9c0e2f6f9f">clearScreen()</a>'s band loop read tftDriver.width()/height() fresh each time, and those are already rotation-aware (see DisplayDriver.h), so they pick up the change automatically. </p>
+
+</div>
+</div>
 <a id="aba37de7b679bd80208a870f1815f8a86" name="aba37de7b679bd80208a870f1815f8a86"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aba37de7b679bd80208a870f1815f8a86">&#9670;&#160;</a></span>setScaleToFit()</h2>
 
@@ -323,7 +412,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>When enabled, a decoded frame whose size doesn't match the panel's configured width/height (the constructor's width/height, adjusted for tftDriver's rotation) is nearest-neighbor scaled to fill it exactly - the aspect ratio is NOT preserved, the source is stretched to the panel's own aspect ratio. Off by default (direct 1:1 write at (0,0), e.g. a QCIF video shown at native size in the corner of a larger panel). Scaling is done one output row at a time (no full-frame scratch buffer) to keep RAM use independent of resolution. </p>
+<p>When enabled, a decoded frame whose size doesn't match the panel's current width/height (tftDriver.width()/height(), rotation-aware - see DisplayDriver.h) is nearest-neighbor scaled to fill it exactly - the aspect ratio is NOT preserved, the source is stretched to the panel's own aspect ratio. Off by default (direct 1:1 write at (0,0), e.g. a QCIF video shown at native size in the corner of a larger panel). Scaling is done one output row at a time (no full-frame scratch buffer) to keep RAM use independent of resolution. </p>
 
 </div>
 </div>
@@ -609,28 +698,6 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="ad12fc34ce789bce6c8a05d8a17138534" name="ad12fc34ce789bce6c8a05d8a17138534"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad12fc34ce789bce6c8a05d8a17138534">&#9670;&#160;</a></span>height</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int height = 240</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a5843011f37b82a1039ed4aad50c46cd1" name="a5843011f37b82a1039ed4aad50c46cd1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5843011f37b82a1039ed4aad50c46cd1">&#9670;&#160;</a></span>i420_rgb_buf_</h2>
 
@@ -709,6 +776,28 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">int kPinBacklight</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7a8005b6a640b5a969597a04b83d215b" name="a7a8005b6a640b5a969597a04b83d215b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a8005b6a640b5a969597a04b83d215b">&#9670;&#160;</a></span>p_board</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">LCDBoard* p_board = nullptr</td>
         </tr>
       </table>
   </td>
@@ -808,8 +897,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a6947b9cbb797c31ea4b1da215054bf6b" name="a6947b9cbb797c31ea4b1da215054bf6b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6947b9cbb797c31ea4b1da215054bf6b">&#9670;&#160;</a></span>tftDriver</h2>
+<a id="acb9604558a01e96f5740ab39bccc0881" name="acb9604558a01e96f5740ab39bccc0881"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb9604558a01e96f5740ab39bccc0881">&#9670;&#160;</a></span>tftDriver</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -818,7 +907,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">ILI9341Driver&lt;<a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a3b73e4d15701467ed72f157ffaff680a">RGB565</a>&gt;&amp; tftDriver</td>
+          <td class="memname">DisplayDriver&lt;<a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a3b73e4d15701467ed72f157ffaff680a">RGB565</a>&gt;&amp; tftDriver</td>
         </tr>
       </table>
   </td>
@@ -830,8 +919,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a2474a5474cbff19523a51eb1de01cda4" name="a2474a5474cbff19523a51eb1de01cda4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2474a5474cbff19523a51eb1de01cda4">&#9670;&#160;</a></span>width</h2>
+<a id="a0be1717bd57d1cc5448df02edaa8d5d6" name="a0be1717bd57d1cc5448df02edaa8d5d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0be1717bd57d1cc5448df02edaa8d5d6">&#9670;&#160;</a></span>write_time_ms</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -840,7 +929,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int width = 320</td>
+          <td class="memname">uint32_t write_time_ms = 0</td>
         </tr>
       </table>
   </td>

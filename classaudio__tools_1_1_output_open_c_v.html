@@ -102,6 +102,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a2e6548c671b963642887f5db3fc8af57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04f2540d940cc37b5c2538ed8e5b54be" id="r_a04f2540d940cc37b5c2538ed8e5b54be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a04f2540d940cc37b5c2538ed8e5b54be">flush</a> () override</td></tr>
 <tr class="separator:a04f2540d940cc37b5c2538ed8e5b54be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3d58e56c2b7dc75a50b36b357ffef93" id="r_ae3d58e56c2b7dc75a50b36b357ffef93"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_open_c_v.html#ae3d58e56c2b7dc75a50b36b357ffef93">getWriteTimeMs</a> () const override</td></tr>
+<tr class="separator:ae3d58e56c2b7dc75a50b36b357ffef93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a661d9a2bd192a6e1427cc59c59217f9c" id="r_a661d9a2bd192a6e1427cc59c59217f9c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a661d9a2bd192a6e1427cc59c59217f9c">setSize</a> (uint16_t <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#ad0eab1042455a2067c812ab8071d5376">width</a>, uint16_t <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a81c9f8d0b8c3b49d770be14dbe9f0d37">height</a>)</td></tr>
 <tr class="separator:a661d9a2bd192a6e1427cc59c59217f9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4d364d9800016345ae6980424817214" id="r_ab4d364d9800016345ae6980424817214"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#ab4d364d9800016345ae6980424817214">setSkipRender</a> (bool skip)</td></tr>
@@ -145,6 +147,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ad0eab1042455a2067c812ab8071d5376"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a1fd97d51d689b2cbf19aae6f42487b" id="r_a2a1fd97d51d689b2cbf19aae6f42487b"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a2a1fd97d51d689b2cbf19aae6f42487b">window</a> = &quot;Movie&quot;</td></tr>
 <tr class="separator:a2a1fd97d51d689b2cbf19aae6f42487b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0be1717bd57d1cc5448df02edaa8d5d6" id="r_a0be1717bd57d1cc5448df02edaa8d5d6"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a0be1717bd57d1cc5448df02edaa8d5d6">write_time_ms</a> = 0</td></tr>
+<tr class="separator:a0be1717bd57d1cc5448df02edaa8d5d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Display a video frame with OpenCV, to be used on the desktop - <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a0a5417ce14732e9bdb402be642ebe9ea">VideoFormat::MJPEG</a> (the default) expects one complete, already-encoded JPEG image assembled across <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> calls and closed off by <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a>, as produced by e.g. <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html" title="AVI Container Decoder which can be fed with small chunks of data. The minimum length must be bigger t...">DemuxerAVI</a>. Any other <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#aa49f2579ff22bf881ce2988162b6d7a1" title="Selects the format of the data passed to write() - see class comment.">setVideoFormat()</a> value (e.g. RGB565, the common raw picture format decoders like <a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a> produce) expects one complete, already-decoded picture per <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call instead - <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a661d9a2bd192a6e1427cc59c59217f9c">setSize()</a> must be called too in that case, since unlike JPEG a raw picture doesn't carry its own dimensions. </p>
@@ -289,6 +293,31 @@ Protected Attributes</h2></td></tr>
 <p>Displays the assembled jpeg image, then resets for the next frame - only relevant for <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a0a5417ce14732e9bdb402be642ebe9ea">VideoFormat::MJPEG</a>; raw formats display immediately from <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> instead (one complete picture per call), so this is a no-op for those. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_output.html#ad3aed50bc3b4459454ccb8c64f5ced5a">VideoOutput</a>.</p>
+
+</div>
+</div>
+<a id="ae3d58e56c2b7dc75a50b36b357ffef93" name="ae3d58e56c2b7dc75a50b36b357ffef93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3d58e56c2b7dc75a50b36b357ffef93">&#9670;&#160;</a></span>getWriteTimeMs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t getWriteTimeMs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -668,6 +697,28 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">const char* window = &quot;Movie&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0be1717bd57d1cc5448df02edaa8d5d6" name="a0be1717bd57d1cc5448df02edaa8d5d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0be1717bd57d1cc5448df02edaa8d5d6">&#9670;&#160;</a></span>write_time_ms</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t write_time_ms = 0</td>
         </tr>
       </table>
   </td>

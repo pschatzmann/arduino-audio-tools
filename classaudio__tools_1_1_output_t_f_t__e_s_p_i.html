@@ -103,6 +103,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a601fb7cf1fc15db50c71a826f084f934"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3aed50bc3b4459454ccb8c64f5ced5a" id="r_ad3aed50bc3b4459454ccb8c64f5ced5a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#ad3aed50bc3b4459454ccb8c64f5ced5a">flush</a> ()</td></tr>
 <tr class="separator:ad3aed50bc3b4459454ccb8c64f5ced5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5efb8ccd37b8cc2749358e5da69adddc" id="r_a5efb8ccd37b8cc2749358e5da69adddc"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_t_f_t__e_s_p_i.html#a5efb8ccd37b8cc2749358e5da69adddc">getWriteTimeMs</a> () const</td></tr>
+<tr class="separator:a5efb8ccd37b8cc2749358e5da69adddc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4d364d9800016345ae6980424817214" id="r_ab4d364d9800016345ae6980424817214"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#ab4d364d9800016345ae6980424817214">setSkipRender</a> (bool skip)</td></tr>
 <tr class="separator:ab4d364d9800016345ae6980424817214"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0788e6d8a8ec277be17ad0141b310e05" id="r_a0788e6d8a8ec277be17ad0141b310e05"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a0788e6d8a8ec277be17ad0141b310e05">setSyncSource</a> (<a class="el" href="classaudio__tools_1_1_video_audio_sync.html">VideoAudioSync</a> *sync)</td></tr>
@@ -124,6 +126,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a249016cdb76ca8bc26f6dbb708d5351a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac277032a78edb7c0c2d5924791bf3353" id="r_ac277032a78edb7c0c2d5924791bf3353"><td class="memItemLeft" align="right" valign="top">TFT_eSPI &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_t_f_t__e_s_p_i.html#ac277032a78edb7c0c2d5924791bf3353">tft_</a></td></tr>
 <tr class="separator:ac277032a78edb7c0c2d5924791bf3353"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0be1717bd57d1cc5448df02edaa8d5d6" id="r_a0be1717bd57d1cc5448df02edaa8d5d6"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_t_f_t__e_s_p_i.html#a0be1717bd57d1cc5448df02edaa8d5d6">write_time_ms</a> = 0</td></tr>
+<tr class="separator:a0be1717bd57d1cc5448df02edaa8d5d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Bridges <a class="el" href="classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 - CodecH264....">VideoDecoder</a>'s <a class="el" href="classaudio__tools_1_1_output_t_f_t__e_s_p_i.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> calls to the TFT - <a class="el" href="classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 - CodecH264....">VideoDecoder</a> always hands over one complete frame per <a class="el" href="classaudio__tools_1_1_output_t_f_t__e_s_p_i.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call (see its class comment), so this can push the whole frame in one go. Usually the data is in RGB565 format, but other formats are supported as well. </p>
@@ -207,6 +211,31 @@ Protected Attributes</h2></td></tr>
 <p>Finalizes the frame most recently written via one or more <a class="el" href="classaudio__tools_1_1_output_t_f_t__e_s_p_i.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> calls - see class comment. Default no-op for implementations that display/decode synchronously in <a class="el" href="classaudio__tools_1_1_output_t_f_t__e_s_p_i.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> instead. </p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_muxer.html#ad3aed50bc3b4459454ccb8c64f5ced5a">Muxer</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a04f2540d940cc37b5c2538ed8e5b54be">H264Decoder</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a04f2540d940cc37b5c2538ed8e5b54be">H264DecoderESP32S3&lt; Alloc &gt;</a>, <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#a04f2540d940cc37b5c2538ed8e5b54be">MJPEGDecoder</a>, <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a04f2540d940cc37b5c2538ed8e5b54be">MPGDecoder</a>, and <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a04f2540d940cc37b5c2538ed8e5b54be">OutputOpenCV</a>.</p>
+
+</div>
+</div>
+<a id="a5efb8ccd37b8cc2749358e5da69adddc" name="a5efb8ccd37b8cc2749358e5da69adddc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5efb8ccd37b8cc2749358e5da69adddc">&#9670;&#160;</a></span>getWriteTimeMs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t getWriteTimeMs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -418,6 +447,28 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">TFT_eSPI&amp; tft_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0be1717bd57d1cc5448df02edaa8d5d6" name="a0be1717bd57d1cc5448df02edaa8d5d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0be1717bd57d1cc5448df02edaa8d5d6">&#9670;&#160;</a></span>write_time_ms</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t write_time_ms = 0</td>
         </tr>
       </table>
   </td>
