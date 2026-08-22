@@ -13,7 +13,7 @@
  */
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/CodecMP3Helix.h"
-#include "AudioTools/AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioLibs/I2SCodecStream.h"
 #include "AudioTools/Communication/AudioHttp.h"
 #include "TinyGPU.h"
 #include "TinyGPU/LCDBoardsESP32.h"
