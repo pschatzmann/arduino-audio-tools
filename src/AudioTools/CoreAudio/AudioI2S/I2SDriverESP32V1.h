@@ -175,7 +175,7 @@ class I2SDriverESP32V1 : public I2SDriverBase {
   /// on_sent callback (ISR context): a DMA buffer of event->size bytes has
   /// just finished physically transmitting. Nested classes have access to
   /// enclosing-class members in C++, so DriverI2S can call this directly.
-  static bool onSentCb(i2s_chan_handle_t handle, i2s_event_data_t *event,
+  static IRAM_ATTR bool onSentCb(i2s_chan_handle_t handle, i2s_event_data_t *event,
                        void *user_ctx) {
     auto *self = static_cast<I2SDriverESP32V1 *>(user_ctx);
     self->bytes_sent_.fetch_add((uint32_t)event->size,
