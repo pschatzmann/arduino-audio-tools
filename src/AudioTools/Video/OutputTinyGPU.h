@@ -1,7 +1,7 @@
 #pragma once
 #include <TinyGPU.h>  // https://github.com/pschatzmann/TinyGPU
 #include <TinyGPU/DisplayDriverSPI.h>  // ILI9341Driver
-#include <TinyGPU/LCDBoards.h>  // LCDBoard
+#include <TinyGPU/Boards.h>  // LCDBoard
 #include <TinyGPU/SurfaceWithExternalBuffer.h>  // zero-copy write() path
 
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
