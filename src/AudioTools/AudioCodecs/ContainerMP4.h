@@ -1320,7 +1320,7 @@ class DemuxerMP4 : public Demuxer {
         // pause) can't stall video for unreasonably long.
         uint32_t waitMs = scheduledWallMs - nowMs;
         LOGI("DemuxerMP4: video frame %u ms early", (unsigned)waitMs);
-        p_synch->delayVideoFrame((int32_t)(std::min(waitMs, 200u) * 1000), 0);
+        p_synch->delayVideoFrame((int32_t)(std::min(waitMs, 200lu) * 1000), 0);
       }
     }
 
