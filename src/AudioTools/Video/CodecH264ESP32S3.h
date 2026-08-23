@@ -168,6 +168,11 @@ class H264DecoderESP32S3 : public VideoDecoder, public VideoInfoSource {
   /// Number of decode errors since begin().
   uint32_t decodeErrors() const { return decoder_.getDecodeErrors(); }
 
+  /// See VideoOutput::isKeyFrame() - scans for an Annex-B IDR slice NAL.
+  bool isKeyFrame(const uint8_t *data, size_t len) override {
+    return isH264KeyFrame(data, len);
+  }
+
   /// Direct access to the wrapped esp_h264::H264Decoder.
   esp_h264::H264Decoder<Alloc> &driver() { return decoder_; }
 

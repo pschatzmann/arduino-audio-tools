@@ -131,6 +131,11 @@ class H264Decoder : public VideoDecoder, public VideoInfoSource {
   /// hit an unsupported stream feature.
   bool hasError() { return decoder_.hasError(); }
 
+  /// See VideoOutput::isKeyFrame() - scans for an Annex-B IDR slice NAL.
+  bool isKeyFrame(const uint8_t *data, size_t len) override {
+    return isH264KeyFrame(data, len);
+  }
+
   /// Sum of time spent purely inside decoder_.write() (CAVLC decode +
   /// reconstruction) since begin() - excludes SD reads and demux overhead
   /// a caller's own outer timing bundles in alongside it.

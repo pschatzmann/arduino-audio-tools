@@ -131,6 +131,13 @@ class MPGDecoder : public VideoDecoder, public VideoInfoSource {
 
   bool hasError() { return decoder_.hasError(); }
 
+  /// See VideoOutput::isKeyFrame() - true only for an I-picture
+  /// (picture_coding_type == 1); P- and B-pictures both depend on other
+  /// frames, so neither counts as self-contained here.
+  bool isKeyFrame(const uint8_t *data, size_t len) override {
+    return isMpeg1KeyFrame(data, len);
+  }
+
   tinympg::TinyMPGDecoder<MPG_DEFAULT_ALLOCATOR> &driver() { return decoder_; }
 
  protected:

@@ -37,6 +37,17 @@ namespace audio_tools {
  * OutputOpenCV, ...) works unchanged regardless of which codec produced
  * the picture.
  *
+ * Drives JPEGDecoder's global JpegDec instance (declared extern in
+ * JPEGDecoder.h) rather than a locally constructed JPEGDecoder object:
+ * the library's picojpeg byte-supply callback is a static function
+ * hardwired to JpegDec.thisPtr regardless of which instance's
+ * decodeArray() is actually running (see JPEGDecoder.cpp's
+ * pjpeg_callback()), so any other instance's decode silently starves for
+ * input (JpegDec's own file-source state is never configured) and fails
+ * instantly with width/height left at 0 - only the global instance
+ * actually works. Fine here since a sketch only ever decodes one MJPEG
+ * stream at a time.
+ *
  * @ingroup mjpeg
  * @ingroup decoder
  * @author Phil Schatzmann
@@ -63,6 +74,17 @@ class MJPEGDecoder : public VideoDecoder, public VideoInfoSource {
       return;
     }
   }
+
+  /// Swaps the two bytes of every decoded RGB565 pixel before it reaches
+  /// setOutput()'s target - on by default. JpegDec.read() packs each
+  /// pixel in the CPU's native uint16_t byte order (little-endian on
+  /// ESP32/most Arduino targets), but SPI TFT panels (ILI9341 etc.)
+  /// expect RGB565 transmitted big-endian - without the swap, colors come
+  /// out visibly wrong (channels scrambled, not just a hue shift). Turn
+  /// off only if your VideoOutput target already performs its own
+  /// byte-swap (e.g. some display libraries' pushColors() variants).
+  void setByteSwap(bool active) { byte_swap = active; }
+  bool byteSwap() const { return byte_swap; }
 
   /// Reports the dimensions of the most recently decoded picture - 0
   /// before any picture has been decoded.
@@ -100,9 +122,9 @@ class MJPEGDecoder : public VideoDecoder, public VideoInfoSource {
       pos = 0;
       return;
     }
-    jpeg_decoder.decodeArray((const uint8_t *)&img_vector[0], pos);
-    width_ = jpeg_decoder.width;
-    height_ = jpeg_decoder.height;
+    JpegDec.decodeArray((const uint8_t *)&img_vector[0], pos);
+    width_ = JpegDec.width;
+    height_ = JpegDec.height;
     decodeToFrameBuffer();
     size_t needed = (size_t)width_ * height_ * 2;
     if (needed > 0 && frame_buffer.size() >= needed) {
@@ -111,15 +133,27 @@ class MJPEGDecoder : public VideoDecoder, public VideoInfoSource {
     pos = 0;
   }
 
+  /// See VideoOutput::isKeyFrame() - always true: Motion-JPEG is an
+  /// all-intra format, every frame is a complete, independently decodable
+  /// image with no inter-frame prediction (the same property that makes an
+  /// H.264 IDR frame or an MPEG-1 I-picture "key", just true of every
+  /// frame here instead of periodically). This matters beyond
+  /// classification - VideoAudioSyncTask's awaiting_keyframe recovery
+  /// latch (set after a resync) only clears once a frame reports
+  /// isKeyFrame()==true; returning false here would leave every frame
+  /// classified as non-key, so once any resync ever fired, that latch
+  /// would never clear and rendering would silently stall forever.
+  bool isKeyFrame(const uint8_t *data, size_t len) override { return true; }
+
  protected:
   Vector<uint8_t> img_vector;
   size_t pos = 0;
   uint64_t start_ms = 0;
-  JPEGDecoder jpeg_decoder;
   Print *p_out = nullptr;
   VideoOutput *p_out_video = nullptr;
   uint16_t width_ = 0;
   uint16_t height_ = 0;
+  bool byte_swap = true;  // see setByteSwap()
   Vector<uint8_t> frame_buffer;  // tightly packed RGB565, 2 bytes/pixel
 
   /// Reads every MCU block JPEGDecoder produces for the image just handed
@@ -128,10 +162,10 @@ class MJPEGDecoder : public VideoDecoder, public VideoInfoSource {
   /// narrower/shorter than that - only its top-left corner holds valid
   /// pixels - so a straight linear copy would misalign those edge blocks).
   void decodeToFrameBuffer() {
-    uint16_t mcu_w = jpeg_decoder.MCUWidth;
-    uint16_t mcu_h = jpeg_decoder.MCUHeight;
-    uint32_t max_x = jpeg_decoder.width;
-    uint32_t max_y = jpeg_decoder.height;
+    uint16_t mcu_w = JpegDec.MCUWidth;
+    uint16_t mcu_h = JpegDec.MCUHeight;
+    uint32_t max_x = JpegDec.width;
+    uint32_t max_y = JpegDec.height;
     size_t needed = (size_t)max_x * max_y * 2;
     if (frame_buffer.size() < needed) {
       frame_buffer.resize(needed);
@@ -141,15 +175,23 @@ class MJPEGDecoder : public VideoDecoder, public VideoInfoSource {
       }
     }
     uint16_t *dst = (uint16_t *)frame_buffer.data();
-    while (jpeg_decoder.read()) {
-      uint16_t *src = jpeg_decoder.pImage;
-      uint32_t mcu_x = jpeg_decoder.MCUx * mcu_w;
-      uint32_t mcu_y = jpeg_decoder.MCUy * mcu_h;
+    while (JpegDec.read()) {
+      uint16_t *src = JpegDec.pImage;
+      uint32_t mcu_x = JpegDec.MCUx * mcu_w;
+      uint32_t mcu_y = JpegDec.MCUy * mcu_h;
       uint32_t win_w = std::min((uint32_t)mcu_w, max_x - mcu_x);
       uint32_t win_h = std::min((uint32_t)mcu_h, max_y - mcu_y);
       for (uint32_t row = 0; row < win_h; row++) {
-        memcpy(dst + (mcu_y + row) * max_x + mcu_x, src + row * mcu_w,
-               win_w * sizeof(uint16_t));
+        uint16_t *d = dst + (mcu_y + row) * max_x + mcu_x;
+        uint16_t *s = src + row * mcu_w;
+        if (byte_swap) {
+          for (uint32_t col = 0; col < win_w; col++) {
+            uint16_t v = s[col];
+            d[col] = (uint16_t)((v << 8) | (v >> 8));
+          }
+        } else {
+          memcpy(d, s, win_w * sizeof(uint16_t));
+        }
       }
     }
   }

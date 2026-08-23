@@ -256,8 +256,6 @@ class VideoAudioSyncTask : public VideoOutput {
     uint32_t this_frame = frame_index;
     uint32_t target_ms = (uint32_t)((double)frame_index * frame_period_ms);
     frame_index++;
-    // See isKeyFrame()'s own comment for why this only really
-    // discriminates for H.264 payloads.
     bool is_key = isKeyFrame(data, len);
 
     FrameHeader header;
@@ -510,12 +508,13 @@ class VideoAudioSyncTask : public VideoOutput {
   /// Falls back to wall-clock millis() when no audio clock is set.
   uint32_t clockMs() { return p_clock != nullptr ? p_clock->playbackTime() : millis(); }
 
-  /// Best-effort I/P classification - scans for an H.264 Annex-B IDR
-  /// slice NAL (see isH264KeyFrame()). Meaningful for H264Decoder targets
-  /// only; other codecs just never match, so every frame counts as "P" -
-  /// harmless, just not a real split for those formats.
-  static bool isKeyFrame(const uint8_t* data, size_t len) {
-    return isH264KeyFrame(data, len);
+  /// I/P classification, both for the frameCountI()/frameCountP() stats
+  /// and for deciding which frames write()/a resync may ever drop -
+  /// delegates to the target's own VideoOutput::isKeyFrame() (see its
+  /// comment), since the target is the one that actually knows its
+  /// bitstream format.
+  bool isKeyFrame(const uint8_t* data, size_t len) {
+    return p_target->isKeyFrame(data, len);
   }
 
   /// How often drainQueueKeepingLastKeyframe() yields (delay(1)) instead

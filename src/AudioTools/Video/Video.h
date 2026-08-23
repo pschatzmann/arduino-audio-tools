@@ -93,6 +93,25 @@ inline bool isH264KeyFrame(const uint8_t* data, size_t len) {
   return false;
 }
 
+/// @brief True if the given MPEG-1/2 video access unit's picture header
+/// declares picture_coding_type == 1 (I-picture) - the MPEG equivalent of
+/// isH264KeyFrame(). Layout (ISO/IEC 11172-2): a 00 00 01 00
+/// picture_start_code is immediately followed by temporal_reference (10
+/// bits) then picture_coding_type (3 bits), so the type field always
+/// falls in bits 5-3 of the byte right after the 2-byte
+/// temporal_reference span (i.e. 6 bytes into the access unit, counting
+/// the start code).
+/// @ingroup video
+inline bool isMpeg1KeyFrame(const uint8_t* data, size_t len) {
+  for (size_t i = 0; i + 5 < len; i++) {
+    if (data[i] == 0 && data[i + 1] == 0 && data[i + 2] == 1 &&
+        data[i + 3] == 0x00) {
+      return ((data[i + 5] >> 3) & 0x07) == 1;  // I-picture
+    }
+  }
+  return false;
+}
+
 /**
  * @brief Basic video information (width/height/codec/frame size), analogous
  * to AudioInfo - common to both DemuxerAVI and DemuxerMP4, accessible via
@@ -203,6 +222,20 @@ class VideoOutput {
   /// if it's never shown). Default no-op: implementations that can't skip
   /// rendering cheaply just ignore it and always render.
   virtual void setSkipRender(bool skip) {}
+
+  /// True if `data` (one complete encoded frame, as handed to write())
+  /// is a keyframe/sync-sample - self-contained, decodable without any
+  /// earlier frame. Used e.g. by VideoAudioSyncTask to decide which
+  /// frames are safe to drop, and whether it's safe to resume decoding
+  /// after abandoning a backlog (see its own class comment). Default
+  /// false: a plain VideoOutput doesn't know or care about codec
+  /// structure - override this in a decoder for the bitstream format it
+  /// actually parses (see H264Decoder/H264DecoderESP32S3's
+  /// isH264KeyFrame()-based override, MPGDecoder's isMpeg1KeyFrame()-
+  /// based one). Getting this right matters beyond bookkeeping: a target
+  /// whose frames are never recognized as keyframes can leave a caller
+  /// like VideoAudioSyncTask unable to ever resume after a resync.
+  virtual bool isKeyFrame(const uint8_t* data, size_t len) { return false; }
 
   /// Optional: returns the time (ms) spent in the last write() call
   virtual uint32_t getWriteTimeMs() const { return 0; }
