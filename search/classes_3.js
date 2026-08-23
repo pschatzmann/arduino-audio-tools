@@ -15,7 +15,7 @@ var searchData=
   ['decoderfactoryline_12',['DecoderFactoryLine',['../structaudio__tools_1_1_codec_factory_1_1_decoder_factory_line.html',1,'audio_tools::CodecFactory']]],
   ['decoderfloat_13',['DecoderFloat',['../classaudio__tools_1_1_decoder_float.html',1,'audio_tools']]],
   ['decoderhelix_14',['DecoderHelix',['../classaudio__tools_1_1_decoder_helix.html',1,'audio_tools']]],
-  ['decoderinfo_15',['decoderinfo',['../structaudio__tools_1_1_multi_decoder_1_1_decoder_info.html',1,'MultiDecoder::DecoderInfo'],['../structaudio__tools_1_1_multi_streaming_decoder_1_1_decoder_info.html',1,'MultiStreamingDecoder::DecoderInfo']]],
+  ['decoderinfo_15',['decoderinfo',['../structaudio__tools_1_1_multi_decoder_1_1_decoder_info.html',1,'MultiDecoder::DecoderInfo'],['../structaudio__tools_1_1_multi_streaming_decoder_1_1_decoder_info.html',1,'MultiStreamingDecoder::DecoderInfo'],['../structaudio__tools_1_1_multi_video_decoder_1_1_decoder_info.html',1,'MultiVideoDecoder::DecoderInfo']]],
   ['decoderl16_16',['DecoderL16',['../classaudio__tools_1_1_decoder_l16.html',1,'audio_tools']]],
   ['decoderl8_17',['DecoderL8',['../classaudio__tools_1_1_decoder_l8.html',1,'audio_tools']]],
   ['decodernetworkformat_18',['DecoderNetworkFormat',['../classaudio__tools_1_1_decoder_network_format.html',1,'audio_tools']]],

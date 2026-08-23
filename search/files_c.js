@@ -23,9 +23,10 @@ var searchData=
   ['mp3parser_2eh_20',['MP3Parser.h',['../_m_p3_parser_8h.html',1,'']]],
   ['mp4parser_2eh_21',['MP4Parser.h',['../_m_p4_parser_8h.html',1,'']]],
   ['multidecoder_2eh_22',['MultiDecoder.h',['../_multi_decoder_8h.html',1,'']]],
-  ['musicalnotes_2eh_23',['MusicalNotes.h',['../_musical_notes_8h.html',1,'']]],
-  ['mutex_2eh_24',['Mutex.h',['../_mutex_8h.html',1,'']]],
-  ['mutexrp2040_2eh_25',['MutexRP2040.h',['../_mutex_r_p2040_8h.html',1,'']]],
-  ['mutexrtos_2eh_26',['MutexRTOS.h',['../_mutex_r_t_o_s_8h.html',1,'']]],
-  ['mutexzephyr_2eh_27',['MutexZephyr.h',['../_mutex_zephyr_8h.html',1,'']]]
+  ['multivideodecoder_2eh_23',['MultiVideoDecoder.h',['../_multi_video_decoder_8h.html',1,'']]],
+  ['musicalnotes_2eh_24',['MusicalNotes.h',['../_musical_notes_8h.html',1,'']]],
+  ['mutex_2eh_25',['Mutex.h',['../_mutex_8h.html',1,'']]],
+  ['mutexrp2040_2eh_26',['MutexRP2040.h',['../_mutex_r_p2040_8h.html',1,'']]],
+  ['mutexrtos_2eh_27',['MutexRTOS.h',['../_mutex_r_t_o_s_8h.html',1,'']]],
+  ['mutexzephyr_2eh_28',['MutexZephyr.h',['../_mutex_zephyr_8h.html',1,'']]]
 ];

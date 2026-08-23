@@ -133,7 +133,7 @@ var searchData=
   ['byte_5fbuffer_130',['byte_buffer',['../classaudio__tools_1_1_w_a_v_decoder.html#aa697e397eb17a824bdd1debf33dd61e4',1,'audio_tools::WAVDecoder']]],
   ['byte_5ffactor_131',['byte_factor',['../classaudio__tools_1_1_encoded_audio_stream.html#a61f3f81b0305417e31494e31cf5abc67',1,'audio_tools::EncodedAudioStream']]],
   ['byte_5frate_132',['byte_rate',['../structaudio__tools_1_1_wav_i_m_a_audio_info.html#aef44d74aa5fd25e34cdd1e1701a23d9c',1,'audio_tools::WavIMAAudioInfo::byte_rate'],['../structaudio__tools_1_1_w_a_v_audio_info.html#aef44d74aa5fd25e34cdd1e1701a23d9c',1,'audio_tools::WAVAudioInfo::byte_rate']]],
-  ['byte_5fswap_133',['byte_swap',['../classaudio__tools_1_1_m_j_p_e_g_decoder.html#a4b93a2a367520377ad6d4d167ac2e35f',1,'audio_tools::MJPEGDecoder']]],
+  ['byte_5fswap_133',['byte_swap',['../classaudio__tools_1_1_m_p_g_decoder.html#a4b93a2a367520377ad6d4d167ac2e35f',1,'audio_tools::MPGDecoder::byte_swap'],['../classaudio__tools_1_1_m_j_p_e_g_decoder.html#a4b93a2a367520377ad6d4d167ac2e35f',1,'audio_tools::MJPEGDecoder::byte_swap']]],
   ['bytes_134',['bytes',['../classaudio__tools_1_1_i_p_address.html#aac9cc4cbc93c66d4b3e0e9e037695d5a',1,'audio_tools::IPAddress']]],
   ['bytes_5fper_5fdecoded_5fblock_135',['bytes_per_decoded_block',['../classaudio__tools_1_1_wav_i_m_a_decoder.html#a6a5e04a7398c9a7ddec1656ed69bea87',1,'audio_tools::WavIMADecoder']]],
   ['bytes_5fper_5fencoded_5fblock_136',['bytes_per_encoded_block',['../classaudio__tools_1_1_wav_i_m_a_decoder.html#ae8f0417d5355301e6ce68e91c17141f3',1,'audio_tools::WavIMADecoder']]],

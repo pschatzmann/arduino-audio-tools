@@ -641,7 +641,7 @@ template&lt;typename Alloc  = H264_DEFAULT_ALLOCATOR&gt; </div>
 </div><div class="memdoc">
 <p>Hint to skip the expensive part of displaying the next frame(s) (e.g. the panel refresh) while still accepting and fully processing <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> calls - used to recover from falling behind the playback schedule without breaking a codec's decode state (e.g. H.264 inter-prediction reference chain, which requires every frame to still be decoded even if it's never shown). Default no-op: implementations that can't skip rendering cheaply just ignore it and always render. </p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a94f8728be362b736be4cb10a4253d201">OutputTinyGPU</a>, <a class="el" href="classaudio__tools_1_1_video_frame_meter.html#a94f8728be362b736be4cb10a4253d201">VideoFrameMeter</a>, and <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a94f8728be362b736be4cb10a4253d201">VideoAudioSyncTask</a>.</p>
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a94f8728be362b736be4cb10a4253d201">MultiVideoDecoder</a>, <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a94f8728be362b736be4cb10a4253d201">OutputTinyGPU</a>, <a class="el" href="classaudio__tools_1_1_video_frame_meter.html#a94f8728be362b736be4cb10a4253d201">VideoFrameMeter</a>, and <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a94f8728be362b736be4cb10a4253d201">VideoAudioSyncTask</a>.</p>
 
 </div>
 </div>

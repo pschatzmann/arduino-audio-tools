@@ -132,6 +132,9 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_file_spool_storage.html">FileSpoolStorage&lt; FileT &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adapts any concrete file/stream type to <a class="el" href="classaudio__tools_1_1_spool_storage.html" title="Minimal seek+read+write interface a SpoolFileSampleTableStore needs from its scratch file - SeekableS...">SpoolStorage</a> - same role as <a class="el" href="classaudio__tools_1_1_file_seekable_source.html" title="Adapts a single concrete file/stream (Arduino&#39;s File, or anything else exposing position(),...">FileSeekableSource</a>, just adding <a class="el" href="classaudio__tools_1_1_file_spool_storage.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>. This is the one place the concrete file type appears for spool-backed storage.  <a href="classaudio__tools_1_1_file_spool_storage.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html">MultiVideoDecoder</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manages multiple VideoDecoders with automatic format detection - the video-side counterpart of <a class="el" href="classaudio__tools_1_1_multi_decoder.html" title="Manage multiple AudioDecoders with automatic format detection.">MultiDecoder</a> (<a class="el" href="_multi_decoder_8h.html">AudioCodecs/MultiDecoder.h</a>).  <a href="classaudio__tools_1_1_multi_video_decoder.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer.html">Muxer</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Common interface for muxers (<a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html" title="Configuration for the (single) video track written by MuxerAVI.">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html" title="Video track configuration for MuxerMP4 - update before calling begin().">MuxerMP4</a>) that combine an already-encoded video track (and optionally an audio track) into a container written to a <a class="el" href="class_print.html">Print</a> (a local File to record, or e.g. a network <a class="el" href="class_client.html">Client</a> to publish a live stream to an HTTP/TCP client). Write code against this interface instead of a concrete class if it should work with either container format.  <a href="classaudio__tools_1_1_muxer.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -300,9 +303,15 @@ Functions</h2></td></tr>
 <tr class="memitem:ga24e3bee07bdb300753b137288bfa33c3" id="r_ga24e3bee07bdb300753b137288bfa33c3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__video.html#ga24e3bee07bdb300753b137288bfa33c3">isH264KeyFrame</a> (const uint8_t *data, size_t len)</td></tr>
 <tr class="memdesc:ga24e3bee07bdb300753b137288bfa33c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if the given Annex-B H.264 access unit contains an IDR slice NAL unit (nal_unit_type 5) - the reliable way to tell a real keyframe/sync-sample apart from a P-frame, since nothing in the byte layout itself says so without inspecting NAL headers. Used e.g. to determine <a class="el" href="classaudio__tools_1_1_muxer.html#a8f5833dcaa31800a36cbe2977a26ed0d">Muxer::addVideoFrame()</a>'s isKeyFrame argument for an already-encoded <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a8ba63b54352f7053b055235a9ec7ac09">VideoFormat::H264</a> frame.  <br /></td></tr>
 <tr class="separator:ga24e3bee07bdb300753b137288bfa33c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf4efa2e998cd0f0ef44a774ef7edac6c" id="r_gaf4efa2e998cd0f0ef44a774ef7edac6c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__video.html#gaf4efa2e998cd0f0ef44a774ef7edac6c">isH264Video</a> (const uint8_t *data, size_t len)</td></tr>
+<tr class="separator:gaf4efa2e998cd0f0ef44a774ef7edac6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae6759cb908639d7c3d7f76157d07ce1e" id="r_gae6759cb908639d7c3d7f76157d07ce1e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__video.html#gae6759cb908639d7c3d7f76157d07ce1e">isMjpegVideo</a> (const uint8_t *data, size_t len)</td></tr>
+<tr class="separator:gae6759cb908639d7c3d7f76157d07ce1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga310900d2a0661bc3d56d33eaa298eb65" id="r_ga310900d2a0661bc3d56d33eaa298eb65"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__video.html#ga310900d2a0661bc3d56d33eaa298eb65">isMpeg1KeyFrame</a> (const uint8_t *data, size_t len)</td></tr>
 <tr class="memdesc:ga310900d2a0661bc3d56d33eaa298eb65"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if the given MPEG-1/2 video access unit's picture header declares picture_coding_type == 1 (I-picture) - the MPEG equivalent of <a class="el" href="group__video.html#ga24e3bee07bdb300753b137288bfa33c3" title="True if the given Annex-B H.264 access unit contains an IDR slice NAL unit (nal_unit_type 5) - the re...">isH264KeyFrame()</a>. Layout (ISO/IEC 11172-2): a 00 00 01 00 picture_start_code is immediately followed by temporal_reference (10 bits) then picture_coding_type (3 bits), so the type field always falls in bits 5-3 of the byte right after the 2-byte temporal_reference span (i.e. 6 bytes into the access unit, counting the start code).  <br /></td></tr>
 <tr class="separator:ga310900d2a0661bc3d56d33eaa298eb65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga74970d46a27372bcbf17233c18e0a2dd" id="r_ga74970d46a27372bcbf17233c18e0a2dd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__video.html#ga74970d46a27372bcbf17233c18e0a2dd">isMpeg1Video</a> (const uint8_t *data, size_t len)</td></tr>
+<tr class="separator:ga74970d46a27372bcbf17233c18e0a2dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gac56f1ce047268d2e2a8ad23ceaabfc33" id="r_gac56f1ce047268d2e2a8ad23ceaabfc33"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__video.html#gac56f1ce047268d2e2a8ad23ceaabfc33">isWavFormat</a> (<a class="el" href="group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1">AudioFormat</a> format)</td></tr>
 <tr class="memdesc:gac56f1ce047268d2e2a8ad23ceaabfc33"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if the wav code is handled via the WAV decoder (i.e. <a class="el" href="group__video.html#ga97ce8b97f4fff29a15349ad04bafba32" title="Provides the mime type for a AudioFormat wav code, or nullptr if not known/mapped.">toMime()</a> maps it to "audio/wav": PCM and all ADPCM variants).  <br /></td></tr>
 <tr class="separator:gac56f1ce047268d2e2a8ad23ceaabfc33"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -569,6 +578,82 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="gaf4efa2e998cd0f0ef44a774ef7edac6c" name="gaf4efa2e998cd0f0ef44a774ef7edac6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf4efa2e998cd0f0ef44a774ef7edac6c">&#9670;&#160;</a></span>isH264Video()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isH264Video </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>True if <code>data</code> starts with an Annex-B start code (00 00 01) followed by a structurally valid NAL header (forbidden_zero_bit == 0, a defined nal_unit_type). Checked after <a class="el" href="group__video.html#ga74970d46a27372bcbf17233c18e0a2dd">isMpeg1Video()</a> (see <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html" title="Manages multiple VideoDecoders with automatic format detection - the video-side counterpart of MultiD...">MultiVideoDecoder</a>'s constructor) since a handful of low NAL-type values numerically overlap MPEG-1's slice_start_code range and are only disambiguated by MPEG-1's own sequence_header having already been ruled out first. </p>
+
+</div>
+</div>
+<a id="gae6759cb908639d7c3d7f76157d07ce1e" name="gae6759cb908639d7c3d7f76157d07ce1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae6759cb908639d7c3d7f76157d07ce1e">&#9670;&#160;</a></span>isMjpegVideo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isMjpegVideo </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>True if <code>data</code> looks like the start of a JPEG image (SOI marker FF D8)</p><ul>
+<li>unambiguous, and reliable even on the very first write() of a stream since a JPEG image always begins at FF D8 regardless of framing. </li>
+</ul>
+
+</div>
+</div>
 <a id="ga310900d2a0661bc3d56d33eaa298eb65" name="ga310900d2a0661bc3d56d33eaa298eb65"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga310900d2a0661bc3d56d33eaa298eb65">&#9670;&#160;</a></span>isMpeg1KeyFrame()</h2>
 
@@ -604,6 +689,43 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>True if the given MPEG-1/2 video access unit's picture header declares picture_coding_type == 1 (I-picture) - the MPEG equivalent of <a class="el" href="group__video.html#ga24e3bee07bdb300753b137288bfa33c3" title="True if the given Annex-B H.264 access unit contains an IDR slice NAL unit (nal_unit_type 5) - the re...">isH264KeyFrame()</a>. Layout (ISO/IEC 11172-2): a 00 00 01 00 picture_start_code is immediately followed by temporal_reference (10 bits) then picture_coding_type (3 bits), so the type field always falls in bits 5-3 of the byte right after the 2-byte temporal_reference span (i.e. 6 bytes into the access unit, counting the start code). </p>
+
+</div>
+</div>
+<a id="ga74970d46a27372bcbf17233c18e0a2dd" name="ga74970d46a27372bcbf17233c18e0a2dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga74970d46a27372bcbf17233c18e0a2dd">&#9670;&#160;</a></span>isMpeg1Video()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isMpeg1Video </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>True if <code>data</code> contains an MPEG-1 sequence_header (00 00 01 B3) - required by spec to precede the first picture of any real MPEG-1 elementary stream, so it's reliably present in the very first access unit a demuxer ever hands to write() (bundled with the first GOP/ picture - see <a class="el" href="_container_m_p_g_8h.html">ContainerMPG.h</a>'s own unit-buffering comment). 0xB3 can never appear as a valid H.264 NAL header byte (forbidden_zero_bit would have to be 1), so this never false-positives on H.264 content. </p>
 
 </div>
 </div>
