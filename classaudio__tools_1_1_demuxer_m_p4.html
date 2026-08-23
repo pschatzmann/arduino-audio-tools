@@ -204,8 +204,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a4aaf41e18a1cbdb207398ed6cf018d75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41163c7c4cc05139b5e52eb582102cb6" id="r_a41163c7c4cc05139b5e52eb582102cb6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a41163c7c4cc05139b5e52eb582102cb6">setSpoolStorageFactory</a> (<a class="el" href="classaudio__tools_1_1_spool_storage_factory.html">SpoolStorageFactory</a> &amp;spoolFactory)</td></tr>
 <tr class="separator:a41163c7c4cc05139b5e52eb582102cb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a36ac3357eb6beaf0d441641cdafb3195" id="r_a36ac3357eb6beaf0d441641cdafb3195"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a36ac3357eb6beaf0d441641cdafb3195">setVideoAudioSync</a> (<a class="el" href="classaudio__tools_1_1_video_audio_sync.html">VideoAudioSync</a> *yourSync)</td></tr>
-<tr class="separator:a36ac3357eb6beaf0d441641cdafb3195"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a026655e20010414e4d162042f5c413" id="r_a0a026655e20010414e4d162042f5c413"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_video_info.html">VideoInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer.html#a0a026655e20010414e4d162042f5c413">videoInfo</a> () override</td></tr>
 <tr class="separator:a0a026655e20010414e4d162042f5c413"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
@@ -291,8 +289,6 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
-<tr class="memitem:ad3b408a6e6bf326cca57eb517030127a" id="r_ad3b408a6e6bf326cca57eb517030127a"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#ad3b408a6e6bf326cca57eb517030127a">isSafeToSkipAvcc</a> (const uint8_t *data, size_t size, size_t lenSize)</td></tr>
-<tr class="separator:ad3b408a6e6bf326cca57eb517030127a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04e158fe019eb01fc215b2d459cb04ce" id="r_a04e158fe019eb01fc215b2d459cb04ce"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structaudio__tools_1_1_demuxer_m_p4_1_1_stsc_entry.html">StscEntry</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a04e158fe019eb01fc215b2d459cb04ce">readStscEntry</a> (const uint8_t *p)</td></tr>
 <tr class="separator:a04e158fe019eb01fc215b2d459cb04ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adafa711687cffcb0b7fb0921f0bec428" id="r_adafa711687cffcb0b7fb0921f0bec428"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structaudio__tools_1_1_demuxer_m_p4_1_1_stts_entry.html">SttsEntry</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#adafa711687cffcb0b7fb0921f0bec428">readSttsEntry</a> (const uint8_t *p)</td></tr>
@@ -329,8 +325,6 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:ac72be176b8560f764e3c6e55af7eec21" id="r_ac72be176b8560f764e3c6e55af7eec21"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_demuxer_m_p4_1_1_track.html">Track</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#ac72be176b8560f764e3c6e55af7eec21">current_track</a></td></tr>
 <tr class="memdesc:ac72be176b8560f764e3c6e55af7eec21"><td class="mdescLeft">&#160;</td><td class="mdescRight">track currently being parsed (scoped by 'trak')  <br /></td></tr>
 <tr class="separator:ac72be176b8560f764e3c6e55af7eec21"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a08e6f01d8ce74ceb71043b30c78068ac" id="r_a08e6f01d8ce74ceb71043b30c78068ac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_video_audio_buffered_sync.html">VideoAudioBufferedSync</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a08e6f01d8ce74ceb71043b30c78068ac">defaultSynch</a> {10 * 1024, -20}</td></tr>
-<tr class="separator:a08e6f01d8ce74ceb71043b30c78068ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0996ed3b307f47eed0d5d5619739ddfb" id="r_a0996ed3b307f47eed0d5d5619739ddfb"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a0996ed3b307f47eed0d5d5619739ddfb">dispatched_sample_count</a> = 0</td></tr>
 <tr class="separator:a0996ed3b307f47eed0d5d5619739ddfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47385aa19435f5fca9d3083a748258c5" id="r_a47385aa19435f5fca9d3083a748258c5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#a47385aa19435f5fca9d3083a748258c5">info</a></td></tr>
@@ -358,8 +352,6 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a354f06b03871fe21e4f74808076bc852"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adec77e8f36cf9366a364221113c08d42" id="r_adec77e8f36cf9366a364221113c08d42"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_spool_storage_factory.html">SpoolStorageFactory</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#adec77e8f36cf9366a364221113c08d42">p_spool_factory</a> = nullptr</td></tr>
 <tr class="separator:adec77e8f36cf9366a364221113c08d42"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a02b6c2884074954ca637d0f015709e" id="r_a5a02b6c2884074954ca637d0f015709e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_video_audio_sync.html">VideoAudioSync</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a5a02b6c2884074954ca637d0f015709e">p_synch</a> = &amp;<a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a08e6f01d8ce74ceb71043b30c78068ac">defaultSynch</a></td></tr>
-<tr class="separator:a5a02b6c2884074954ca637d0f015709e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab1d54b9268396da5bbefd6fd5e11a5c6" id="r_ab1d54b9268396da5bbefd6fd5e11a5c6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#ab1d54b9268396da5bbefd6fd5e11a5c6">p_video_out</a> = nullptr</td></tr>
 <tr class="separator:ab1d54b9268396da5bbefd6fd5e11a5c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a702aaf54f819a7d0226c8437c338616c" id="r_a702aaf54f819a7d0226c8437c338616c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a702aaf54f819a7d0226c8437c338616c">p_video_out_video</a> = nullptr</td></tr>
@@ -369,10 +361,6 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a6a3bae3522a595430b4bd53177ddc55b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03ad2e167852db1649c0f9bfe701aa74" id="r_a03ad2e167852db1649c0f9bfe701aa74"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html">MP4Parser</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a03ad2e167852db1649c0f9bfe701aa74">parser</a></td></tr>
 <tr class="separator:a03ad2e167852db1649c0f9bfe701aa74"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac282bedcc3123eddbb27a4fb842917c2" id="r_ac282bedcc3123eddbb27a4fb842917c2"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#ac282bedcc3123eddbb27a4fb842917c2">playback_start_ms</a> = 0</td></tr>
-<tr class="separator:ac282bedcc3123eddbb27a4fb842917c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1ec16976226ccdaa5062d6d4372d712d" id="r_a1ec16976226ccdaa5062d6d4372d712d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a1ec16976226ccdaa5062d6d4372d712d">playback_start_set</a> = false</td></tr>
-<tr class="separator:a1ec16976226ccdaa5062d6d4372d712d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a431312d92a306fe4e466d9ff331b3756" id="r_a431312d92a306fe4e466d9ff331b3756"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a431312d92a306fe4e466d9ff331b3756">quickstart_bytes_remaining</a> = -1</td></tr>
 <tr class="separator:a431312d92a306fe4e466d9ff331b3756"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c6459dbc14b4a36bea6e8bae99fb10c" id="r_a2c6459dbc14b4a36bea6e8bae99fb10c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a2c6459dbc14b4a36bea6e8bae99fb10c">sample_buffer</a></td></tr>
@@ -1297,49 +1285,6 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
 
 </div>
 </div>
-<a id="ad3b408a6e6bf326cca57eb517030127a" name="ad3b408a6e6bf326cca57eb517030127a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad3b408a6e6bf326cca57eb517030127a">&#9670;&#160;</a></span>isSafeToSkipAvcc()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool isSafeToSkipAvcc </td>
-          <td>(</td>
-          <td class="paramtype">const uint8_t *&#160;</td>
-          <td class="paramname"><em>data</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>lenSize</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Checks every NAL unit in one AVCC length-prefixed video sample for nal_ref_idc (bits 5-6 of each NAL header byte, right after the length prefix) - 0 means that NAL is never used as a prediction reference by any other frame, so it's safe to drop entirely. Used before skipping a late frame in <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a1ad3de674249f5cd68c409adc84984f5">dispatchVideo()</a>: unlike MP4 samples in a sample table (independently addressable, seekable past), an H.264 bitstream has real inter-frame dependencies - dropping an I or (referenced) P-frame corrupts every later frame's decode until the next keyframe, not just the one skipped. A single referenced NAL anywhere in the sample makes the whole sample unsafe to skip. </p>
-
-</div>
-</div>
 <a id="ab233b9d1b86c9d2a2c009d6473aa8938" name="ab233b9d1b86c9d2a2c009d6473aa8938"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab233b9d1b86c9d2a2c009d6473aa8938">&#9670;&#160;</a></span>mime()</h2>
 
@@ -1795,7 +1740,7 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
   </tr>
 </table>
 </div><div class="memdoc">
-<p>'stts' (time-to-sample): run-length list of {sample_count, sample_delta} - see <a class="el" href="structaudio__tools_1_1_demuxer_m_p4_1_1_track.html#a87d47bf087f3e108b401353580f8176f">Track::nextPtsTicks()</a>. </p>
+<p>'stts' (time-to-sample): run-length list of {sample_count, sample_delta} - see <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a4f959e3d631e13a15a0827aef1a16ff4">getVideoInfo()</a>, which derives fps from the first entry's sample_delta. </p>
 
 </div>
 </div>
@@ -2552,33 +2497,6 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
 
 </div>
 </div>
-<a id="a36ac3357eb6beaf0d441641cdafb3195" name="a36ac3357eb6beaf0d441641cdafb3195"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a36ac3357eb6beaf0d441641cdafb3195">&#9670;&#160;</a></span>setVideoAudioSync()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void setVideoAudioSync </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_video_audio_sync.html">VideoAudioSync</a> *&#160;</td>
-          <td class="paramname"><em>yourSync</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Replace the audio/video pacing logic - see <a class="el" href="classaudio__tools_1_1_video_audio_buffered_sync.html" title="Logic to Synchronize video and audio output: we use a buffer to store the audio and instead of delayi...">VideoAudioBufferedSync</a> (the default) and <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a96c9ebecaa1ef15b200e7bc09fde2623">dispatchAudio()</a>/dispatchVideo() for why this exists: writing decoded audio straight through, in bursts, starves PortAudio (or any other real-time sink) between bursts even though the total data rate is sufficient. The default buffers audio into a ring buffer and drains it steadily during <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a1ad3de674249f5cd68c409adc84984f5">dispatchVideo()</a>'s wait instead of dumping it all at once. </p>
-
-</div>
-</div>
 <a id="a0a026655e20010414e4d162042f5c413" name="a0a026655e20010414e4d162042f5c413"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0a026655e20010414e4d162042f5c413">&#9670;&#160;</a></span>videoInfo()</h2>
 
@@ -2983,28 +2901,6 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
 
 </div>
 </div>
-<a id="a08e6f01d8ce74ceb71043b30c78068ac" name="a08e6f01d8ce74ceb71043b30c78068ac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a08e6f01d8ce74ceb71043b30c78068ac">&#9670;&#160;</a></span>defaultSynch</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_video_audio_buffered_sync.html">VideoAudioBufferedSync</a> defaultSynch {10 * 1024, -20}</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a0996ed3b307f47eed0d5d5619739ddfb" name="a0996ed3b307f47eed0d5d5619739ddfb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0996ed3b307f47eed0d5d5619739ddfb">&#9670;&#160;</a></span>dispatched_sample_count</h2>
 
@@ -3322,28 +3218,6 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
 
 </div>
 </div>
-<a id="a5a02b6c2884074954ca637d0f015709e" name="a5a02b6c2884074954ca637d0f015709e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a02b6c2884074954ca637d0f015709e">&#9670;&#160;</a></span>p_synch</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_video_audio_sync.html">VideoAudioSync</a>* p_synch = &amp;<a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a08e6f01d8ce74ceb71043b30c78068ac">defaultSynch</a></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="ab1d54b9268396da5bbefd6fd5e11a5c6" name="ab1d54b9268396da5bbefd6fd5e11a5c6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab1d54b9268396da5bbefd6fd5e11a5c6">&#9670;&#160;</a></span>p_video_out</h2>
 
@@ -3423,50 +3297,6 @@ schedule" (which track's chunk comes next, and how many samples it holds) is com
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html">MP4Parser</a> parser</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ac282bedcc3123eddbb27a4fb842917c2" name="ac282bedcc3123eddbb27a4fb842917c2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac282bedcc3123eddbb27a4fb842917c2">&#9670;&#160;</a></span>playback_start_ms</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t playback_start_ms = 0</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a1ec16976226ccdaa5062d6d4372d712d" name="a1ec16976226ccdaa5062d6d4372d712d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1ec16976226ccdaa5062d6d4372d712d">&#9670;&#160;</a></span>playback_start_set</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool playback_start_set = false</td>
         </tr>
       </table>
   </td>

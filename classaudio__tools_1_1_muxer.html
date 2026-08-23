@@ -127,6 +127,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3b73e8501728e887aec7399c3cfee14d" id="r_a3b73e8501728e887aec7399c3cfee14d"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structaudio__tools_1_1_muxer_video_config.html">MuxerVideoConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer.html#a3b73e8501728e887aec7399c3cfee14d">getVideoInfo</a> ()=0</td></tr>
 <tr class="memdesc:a3b73e8501728e887aec7399c3cfee14d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the video track configuration.  <br /></td></tr>
 <tr class="separator:a3b73e8501728e887aec7399c3cfee14d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8419abee0c4d380be1cb8ff963fb8d0a" id="r_a8419abee0c4d380be1cb8ff963fb8d0a"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a8419abee0c4d380be1cb8ff963fb8d0a">getWriteTimeMs</a> () const</td></tr>
+<tr class="memdesc:a8419abee0c4d380be1cb8ff963fb8d0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional: returns the time (ms) spent in the last <a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">write()</a> call.  <br /></td></tr>
+<tr class="separator:a8419abee0c4d380be1cb8ff963fb8d0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aced75ddf7c3d9219e473a495bce41204" id="r_aced75ddf7c3d9219e473a495bce41204"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer.html#aced75ddf7c3d9219e473a495bce41204">mimeVideo</a> ()=0</td></tr>
 <tr class="separator:aced75ddf7c3d9219e473a495bce41204"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac496133545cba767b45c6ce8df3587e7" id="r_ac496133545cba767b45c6ce8df3587e7"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer.html#ac496133545cba767b45c6ce8df3587e7">operator bool</a> ()=0</td></tr>
@@ -141,8 +144,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aca7ee6461963788ac0c3a5cb9d31d9d9" id="r_aca7ee6461963788ac0c3a5cb9d31d9d9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer.html#aca7ee6461963788ac0c3a5cb9d31d9d9">setStreamType</a> (<a class="el" href="group__video.html#ga3529160d6b73e5a63e0a95afeb424659">StreamContentType</a> type)=0</td></tr>
 <tr class="memdesc:aca7ee6461963788ac0c3a5cb9d31d9d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects whether <a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">write()</a> feeds the video or the audio track.  <br /></td></tr>
 <tr class="separator:aca7ee6461963788ac0c3a5cb9d31d9d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0788e6d8a8ec277be17ad0141b310e05" id="r_a0788e6d8a8ec277be17ad0141b310e05"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a0788e6d8a8ec277be17ad0141b310e05">setSyncSource</a> (<a class="el" href="classaudio__tools_1_1_video_audio_sync.html">VideoAudioSync</a> *sync)</td></tr>
-<tr class="separator:a0788e6d8a8ec277be17ad0141b310e05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2fe33c51c2b02b8408f8771a7797c2a7" id="r_a2fe33c51c2b02b8408f8771a7797c2a7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer.html#a2fe33c51c2b02b8408f8771a7797c2a7">setVideoInfo</a> (<a class="el" href="structaudio__tools_1_1_muxer_video_config.html">MuxerVideoConfig</a> config)=0</td></tr>
 <tr class="memdesc:a2fe33c51c2b02b8408f8771a7797c2a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the video track configuration - call before <a class="el" href="classaudio__tools_1_1_muxer.html#ae8a0d9ca63f8bb3de100e347c3f3bca4">begin()</a>  <br /></td></tr>
 <tr class="separator:a2fe33c51c2b02b8408f8771a7797c2a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -577,6 +578,35 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a8419abee0c4d380be1cb8ff963fb8d0a" name="a8419abee0c4d380be1cb8ff963fb8d0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8419abee0c4d380be1cb8ff963fb8d0a">&#9670;&#160;</a></span>getWriteTimeMs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual uint32_t getWriteTimeMs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Optional: returns the time (ms) spent in the last <a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">write()</a> call. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_output_t_f_t__e_s_p_i.html#a5efb8ccd37b8cc2749358e5da69adddc">OutputTFT_eSPI</a>, <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a5efb8ccd37b8cc2749358e5da69adddc">OutputTinyGPU</a>, and <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#ae3d58e56c2b7dc75a50b36b357ffef93">OutputOpenCV</a>.</p>
+
+</div>
+</div>
 <a id="aced75ddf7c3d9219e473a495bce41204" name="aced75ddf7c3d9219e473a495bce41204"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aced75ddf7c3d9219e473a495bce41204">&#9670;&#160;</a></span>mimeVideo()</h2>
 
@@ -716,7 +746,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Hint to skip the expensive part of displaying the next frame(s) (e.g. the panel refresh) while still accepting and fully processing <a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">write()</a> calls - used to recover from falling behind the playback schedule without breaking a codec's decode state (e.g. H.264 inter-prediction reference chain, which requires every frame to still be decoded even if it's never shown). Default no-op: implementations that can't skip rendering cheaply just ignore it and always render. </p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a94f8728be362b736be4cb10a4253d201">OutputTinyGPU</a>.</p>
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a94f8728be362b736be4cb10a4253d201">OutputTinyGPU</a>, <a class="el" href="classaudio__tools_1_1_video_frame_meter.html#a94f8728be362b736be4cb10a4253d201">VideoFrameMeter</a>, and <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a94f8728be362b736be4cb10a4253d201">VideoAudioSyncTask</a>.</p>
 
 </div>
 </div>
@@ -747,35 +777,6 @@ Protected Attributes</h2></td></tr>
 <p>Selects whether <a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">write()</a> feeds the video or the audio track. </p>
 
 <p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a6806d9e5ebac77ff537da77a35a25141">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a6806d9e5ebac77ff537da77a35a25141">MuxerMP4</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a6806d9e5ebac77ff537da77a35a25141">MuxerMPG</a>.</p>
-
-</div>
-</div>
-<a id="a0788e6d8a8ec277be17ad0141b310e05" name="a0788e6d8a8ec277be17ad0141b310e05"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0788e6d8a8ec277be17ad0141b310e05">&#9670;&#160;</a></span>setSyncSource()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void setSyncSource </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_video_audio_sync.html">VideoAudioSync</a> *&#160;</td>
-          <td class="paramname"><em>sync</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Optional: a demuxer that owns a <a class="el" href="classaudio__tools_1_1_video_audio_sync.html" title="Logic to Synchronize video and audio output: This is the minimum implementatin which actually does no...">VideoAudioSync</a> (frame pacing) calls this once, typically from its setOutputVideo(VideoOutput&amp;), so a decoder implementation can consult the sync object's admission policy (<a class="el" href="classaudio__tools_1_1_video_audio_sync.html#abf0c3df2b08623da9a6b46f0bf68abaf">VideoAudioSync::shouldAdmitFrame()</a>) before spending decode time on a frame, and its render-skip policy (isBehindSchedule()) before handing a decoded picture to its own downstream <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> - see <a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a> for the concrete use. Default no-op: most <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> implementations (e.g. a raw display sink) don't need pacing awareness themselves, only decoders sitting between a demuxer and a display do. </p>
-
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a0108fbf4ffc3c786f9359fa676424118">H264Decoder</a>, and <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a0108fbf4ffc3c786f9359fa676424118">H264DecoderESP32S3&lt; Alloc &gt;</a>.</p>
 
 </div>
 </div>
@@ -872,7 +873,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a7597ef706dd1aa590903ce9e095db20a">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a7597ef706dd1aa590903ce9e095db20a">MuxerMP4</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a7597ef706dd1aa590903ce9e095db20a">MuxerMPG</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">H264Decoder</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a7597ef706dd1aa590903ce9e095db20a">H264DecoderESP32S3&lt; Alloc &gt;</a>, <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#a7597ef706dd1aa590903ce9e095db20a">MJPEGDecoder</a>, <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a7597ef706dd1aa590903ce9e095db20a">MPGDecoder</a>, <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a7597ef706dd1aa590903ce9e095db20a">OutputOpenCV</a>, <a class="el" href="classaudio__tools_1_1_output_t_f_t__e_s_p_i.html#a7597ef706dd1aa590903ce9e095db20a">OutputTFT_eSPI</a>, and <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a7597ef706dd1aa590903ce9e095db20a">OutputTinyGPU</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a7597ef706dd1aa590903ce9e095db20a">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a7597ef706dd1aa590903ce9e095db20a">MuxerMP4</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a7597ef706dd1aa590903ce9e095db20a">MuxerMPG</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">H264Decoder</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a7597ef706dd1aa590903ce9e095db20a">H264DecoderESP32S3&lt; Alloc &gt;</a>, <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#a7597ef706dd1aa590903ce9e095db20a">MJPEGDecoder</a>, <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a7597ef706dd1aa590903ce9e095db20a">MPGDecoder</a>, <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a7597ef706dd1aa590903ce9e095db20a">OutputOpenCV</a>, <a class="el" href="classaudio__tools_1_1_output_t_f_t__e_s_p_i.html#a7597ef706dd1aa590903ce9e095db20a">OutputTFT_eSPI</a>, <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a7597ef706dd1aa590903ce9e095db20a">OutputTinyGPU</a>, <a class="el" href="classaudio__tools_1_1_video_frame_meter.html#a7597ef706dd1aa590903ce9e095db20a">VideoFrameMeter</a>, and <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">VideoAudioSyncTask</a>.</p>
 
 </div>
 </div>

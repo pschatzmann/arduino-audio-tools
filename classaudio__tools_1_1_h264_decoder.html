@@ -107,8 +107,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac90e2ee08755e954d4dfa3d71048e4f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92226d7ea32d7ca6a4faa340b5fc756d" id="r_a92226d7ea32d7ca6a4faa340b5fc756d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#a92226d7ea32d7ca6a4faa340b5fc756d">H264Decoder</a> (<a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;out)</td></tr>
 <tr class="separator:a92226d7ea32d7ca6a4faa340b5fc756d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46d7e3bfc282761882c80eee53fe4100" id="r_a46d7e3bfc282761882c80eee53fe4100"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#a46d7e3bfc282761882c80eee53fe4100">admittedFrameCount</a> () const</td></tr>
-<tr class="separator:a46d7e3bfc282761882c80eee53fe4100"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acba365cc28eb702040c382646cfb0a7a" id="r_acba365cc28eb702040c382646cfb0a7a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#acba365cc28eb702040c382646cfb0a7a">begin</a> () override</td></tr>
 <tr class="separator:acba365cc28eb702040c382646cfb0a7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44136aabbf31fb115c41e907acd1272a" id="r_a44136aabbf31fb115c41e907acd1272a"><td class="memItemLeft" align="right" valign="top">tinyh264::TinyH264Decoder&lt; tinyh264::PSRAMAllocatorESP32&lt; uint8_t &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#a44136aabbf31fb115c41e907acd1272a">driver</a> ()</td></tr>
@@ -116,15 +114,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a64e9fa75beda50a9e8400ee0d4e61984" id="r_a64e9fa75beda50a9e8400ee0d4e61984"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a> () override</td></tr>
 <tr class="memdesc:a64e9fa75beda50a9e8400ee0d4e61984"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases the decoder's picture buffers - see TinyH264Decoder::end().  <br /></td></tr>
 <tr class="separator:a64e9fa75beda50a9e8400ee0d4e61984"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a04f2540d940cc37b5c2538ed8e5b54be" id="r_a04f2540d940cc37b5c2538ed8e5b54be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#a04f2540d940cc37b5c2538ed8e5b54be">flush</a> () override</td></tr>
-<tr class="separator:a04f2540d940cc37b5c2538ed8e5b54be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f1f94e0964e9fe78701eef6cb81dc3f" id="r_a5f1f94e0964e9fe78701eef6cb81dc3f"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#a5f1f94e0964e9fe78701eef6cb81dc3f">frameCount</a> () const</td></tr>
-<tr class="separator:a5f1f94e0964e9fe78701eef6cb81dc3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3aed50bc3b4459454ccb8c64f5ced5a" id="r_ad3aed50bc3b4459454ccb8c64f5ced5a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#ad3aed50bc3b4459454ccb8c64f5ced5a">flush</a> ()</td></tr>
+<tr class="separator:ad3aed50bc3b4459454ccb8c64f5ced5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8419abee0c4d380be1cb8ff963fb8d0a" id="r_a8419abee0c4d380be1cb8ff963fb8d0a"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a8419abee0c4d380be1cb8ff963fb8d0a">getWriteTimeMs</a> () const</td></tr>
+<tr class="memdesc:a8419abee0c4d380be1cb8ff963fb8d0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional: returns the time (ms) spent in the last <a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">write()</a> call.  <br /></td></tr>
+<tr class="separator:a8419abee0c4d380be1cb8ff963fb8d0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9649a3c36b3d2060e9b8bf174f9048e" id="r_ae9649a3c36b3d2060e9b8bf174f9048e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#ae9649a3c36b3d2060e9b8bf174f9048e">hasError</a> ()</td></tr>
 <tr class="separator:ae9649a3c36b3d2060e9b8bf174f9048e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae42f7e238fd555d938b70caeb9b549f3" id="r_ae42f7e238fd555d938b70caeb9b549f3"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#ae42f7e238fd555d938b70caeb9b549f3">keyFrameCount</a> () const</td></tr>
-<tr class="memdesc:ae42f7e238fd555d938b70caeb9b549f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Of <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a5f1f94e0964e9fe78701eef6cb81dc3f">frameCount()</a> frames seen, how many were IDR (key) frames.  <br /></td></tr>
-<tr class="separator:ae42f7e238fd555d938b70caeb9b549f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8758c5dbc5f1a35e327670cb8cac90c" id="r_ab8758c5dbc5f1a35e327670cb8cac90c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#ab8758c5dbc5f1a35e327670cb8cac90c">setMaxRefFrames</a> (int n)</td></tr>
 <tr class="separator:ab8758c5dbc5f1a35e327670cb8cac90c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1220e7e3542f5a84c21fe2f7cef194c" id="r_ae1220e7e3542f5a84c21fe2f7cef194c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#ae1220e7e3542f5a84c21fe2f7cef194c">setOutput</a> (<a class="el" href="class_print.html">Print</a> &amp;out)</td></tr>
@@ -133,8 +129,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8e9c9d6d2876f620f49313a51c39f5b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4d364d9800016345ae6980424817214" id="r_ab4d364d9800016345ae6980424817214"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#ab4d364d9800016345ae6980424817214">setSkipRender</a> (bool skip)</td></tr>
 <tr class="separator:ab4d364d9800016345ae6980424817214"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0108fbf4ffc3c786f9359fa676424118" id="r_a0108fbf4ffc3c786f9359fa676424118"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#a0108fbf4ffc3c786f9359fa676424118">setSyncSource</a> (<a class="el" href="classaudio__tools_1_1_video_audio_sync.html">VideoAudioSync</a> *sync) override</td></tr>
-<tr class="separator:a0108fbf4ffc3c786f9359fa676424118"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4305de559192cc500fbd0587b2748ea" id="r_ab4305de559192cc500fbd0587b2748ea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#ab4305de559192cc500fbd0587b2748ea">setVideoFormat</a> (<a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a> format) override</td></tr>
 <tr class="separator:ab4305de559192cc500fbd0587b2748ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad176e01f36ccfcb09a3f03c4bf88f9f1" id="r_ad176e01f36ccfcb09a3f03c4bf88f9f1"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#ad176e01f36ccfcb09a3f03c4bf88f9f1">totalDecodeMs</a> () const</td></tr>
@@ -153,33 +147,19 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
-<tr class="memitem:a7c4ff6b4f9fcb3494923fe75d81372c8" id="r_a7c4ff6b4f9fcb3494923fe75d81372c8"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7c4ff6b4f9fcb3494923fe75d81372c8">isIdrFrame</a> (const uint8_t *data, size_t len)</td></tr>
-<tr class="separator:a7c4ff6b4f9fcb3494923fe75d81372c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afafafc9eb30f9d9b75ca445898744c47" id="r_afafafc9eb30f9d9b75ca445898744c47"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#afafafc9eb30f9d9b75ca445898744c47">onFrame</a> (tinyh264::TinyH264Decoder&lt; tinyh264::PSRAMAllocatorESP32&lt; uint8_t &gt; &gt; &amp;decoder, void *userData)</td></tr>
 <tr class="separator:afafafc9eb30f9d9b75ca445898744c47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:ab629509afd2bcbdf504bf4cf3b60d574" id="r_ab629509afd2bcbdf504bf4cf3b60d574"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#ab629509afd2bcbdf504bf4cf3b60d574">admit_current_frame_</a> = true</td></tr>
-<tr class="separator:ab629509afd2bcbdf504bf4cf3b60d574"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f2dbd9241f17e0b8dca65d00189eb6a" id="r_a3f2dbd9241f17e0b8dca65d00189eb6a"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#a3f2dbd9241f17e0b8dca65d00189eb6a">admitted_frame_count_</a> = 0</td></tr>
-<tr class="separator:a3f2dbd9241f17e0b8dca65d00189eb6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac02b953030ac3051159efaa674b4ae2" id="r_aac02b953030ac3051159efaa674b4ae2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#aac02b953030ac3051159efaa674b4ae2">decided_this_frame_</a> = false</td></tr>
-<tr class="separator:aac02b953030ac3051159efaa674b4ae2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe19f1a0bb11f412ad34292267a775d8" id="r_abe19f1a0bb11f412ad34292267a775d8"><td class="memItemLeft" align="right" valign="top">tinyh264::TinyH264Decoder&lt; tinyh264::PSRAMAllocatorESP32&lt; uint8_t &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#abe19f1a0bb11f412ad34292267a775d8">decoder_</a></td></tr>
 <tr class="separator:abe19f1a0bb11f412ad34292267a775d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8af4e93d1de1594db8accdf886aea05" id="r_af8af4e93d1de1594db8accdf886aea05"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#af8af4e93d1de1594db8accdf886aea05">frame_buffer</a></td></tr>
 <tr class="separator:af8af4e93d1de1594db8accdf886aea05"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6d1174759394cef3f8300311d9f916c2" id="r_a6d1174759394cef3f8300311d9f916c2"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#a6d1174759394cef3f8300311d9f916c2">frame_count_</a> = 0</td></tr>
-<tr class="separator:a6d1174759394cef3f8300311d9f916c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a227c556de9de0fd1b3c19be5f522815c" id="r_a227c556de9de0fd1b3c19be5f522815c"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#a227c556de9de0fd1b3c19be5f522815c">key_frame_count_</a> = 0</td></tr>
-<tr class="separator:a227c556de9de0fd1b3c19be5f522815c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa42c30e02e51ec7cc38ea4ab215e0db4" id="r_aa42c30e02e51ec7cc38ea4ab215e0db4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#aa42c30e02e51ec7cc38ea4ab215e0db4">p_out</a> = nullptr</td></tr>
 <tr class="separator:aa42c30e02e51ec7cc38ea4ab215e0db4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f9b668b9f2805f1dcca5a9ffc0cb15c" id="r_a2f9b668b9f2805f1dcca5a9ffc0cb15c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#a2f9b668b9f2805f1dcca5a9ffc0cb15c">p_out_video</a> = nullptr</td></tr>
 <tr class="separator:a2f9b668b9f2805f1dcca5a9ffc0cb15c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19deb4927e431a0bbc5c64a4a22bfa94" id="r_a19deb4927e431a0bbc5c64a4a22bfa94"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_video_audio_sync.html">VideoAudioSync</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#a19deb4927e431a0bbc5c64a4a22bfa94">p_sync_</a> = nullptr</td></tr>
-<tr class="separator:a19deb4927e431a0bbc5c64a4a22bfa94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf28f4d04ba00db3927aa8f6b0e859e6" id="r_aaf28f4d04ba00db3927aa8f6b0e859e6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#aaf28f4d04ba00db3927aa8f6b0e859e6">pixel_format</a> = <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a3b73e4d15701467ed72f157ffaff680a">VideoFormat::RGB565</a></td></tr>
 <tr class="separator:aaf28f4d04ba00db3927aa8f6b0e859e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab94da99c4b008b36e408511f6cff50d2" id="r_ab94da99c4b008b36e408511f6cff50d2"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#ab94da99c4b008b36e408511f6cff50d2">total_decode_ms_</a> = 0</td></tr>
@@ -187,7 +167,7 @@ Protected Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>H.264 video decoder: wraps TinyH264Decoder (<a href="https://github.com/pschatzmann/TinyH264">https://github.com/pschatzmann/TinyH264</a>) as a <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a>, so it can be plugged directly into e.g. <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#aa9139d7cd7756a3bf8603981959afb53">DemuxerAVI::setOutputVideo()</a>/ <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#aee3d456e79d27d60f9b6ade892fcc88c">DemuxerMP4::setOutputVideo()</a>. Consumes an Annex-B H.264 bitstream via <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> and, once a complete picture has been decoded, writes it - converted to <a class="el" href="classaudio__tools_1_1_h264_decoder.html#ab4305de559192cc500fbd0587b2748ea">setVideoFormat()</a>'s format (RGB565 by default, the common TFT wire format) - to the <a class="el" href="class_print.html">Print</a> target configured via <a class="el" href="classaudio__tools_1_1_h264_decoder.html#ae1220e7e3542f5a84c21fe2f7cef194c">setOutput()</a>, one <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call per decoded picture. </p>
-<p><a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>/flush() implement the <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> contract (see <a class="el" href="_video_8h.html">Video.h</a>): <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> may be called one or more times per frame - bytes are forwarded to the decoder immediately (Annex-B start codes are self-delimiting, so no internal buffering is needed here; a picture may complete partway through any <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call, not just at <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a>). <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a> is a no-op, kept only because some producers (e.g. DemuxerAVI/DemuxerMP4) call it unconditionally after each frame.</p>
+<p><a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>/flush() implement the <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> contract (see <a class="el" href="_video_8h.html">Video.h</a>): <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> may be called one or more times per frame - bytes are forwarded to the decoder immediately (Annex-B start codes are self-delimiting, so no internal buffering is needed here; a picture may complete partway through any <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call, not just at <a class="el" href="classaudio__tools_1_1_video_output.html#ad3aed50bc3b4459454ccb8c64f5ced5a">flush()</a>). <a class="el" href="classaudio__tools_1_1_video_output.html#ad3aed50bc3b4459454ccb8c64f5ced5a">flush()</a> is <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a>'s no-op default - some producers (e.g. DemuxerAVI/DemuxerMP4) call it unconditionally after each frame, but this class has nothing to do with it.</p>
 <p>Uses H264_DEFAULT_ALLOCATOR for the decoded picture buffers - see that macro's own comment above for the PSRAM-on-ESP32/heap- elsewhere default it picks, and how to override it.</p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
@@ -270,32 +250,6 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a46d7e3bfc282761882c80eee53fe4100" name="a46d7e3bfc282761882c80eee53fe4100"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a46d7e3bfc282761882c80eee53fe4100">&#9670;&#160;</a></span>admittedFrameCount()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t admittedFrameCount </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Of <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a5f1f94e0964e9fe78701eef6cb81dc3f">frameCount()</a> frames seen, how many were actually admitted (not dropped by shouldAdmitFrame()) and so had at least one decoder_. <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call made for them. </p>
-
-</div>
-</div>
 <a id="acba365cc28eb702040c382646cfb0a7a" name="acba365cc28eb702040c382646cfb0a7a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acba365cc28eb702040c382646cfb0a7a">&#9670;&#160;</a></span>begin()</h2>
 
@@ -379,8 +333,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a04f2540d940cc37b5c2538ed8e5b54be" name="a04f2540d940cc37b5c2538ed8e5b54be"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a04f2540d940cc37b5c2538ed8e5b54be">&#9670;&#160;</a></span>flush()</h2>
+<a id="ad3aed50bc3b4459454ccb8c64f5ced5a" name="ad3aed50bc3b4459454ccb8c64f5ced5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3aed50bc3b4459454ccb8c64f5ced5a">&#9670;&#160;</a></span>flush()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -389,7 +343,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void flush </td>
+          <td class="memname">virtual void flush </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -397,18 +351,18 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Kept to satisfy the VideoOutput/Print contract - decoding already happens synchronously in <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> (see class comment) - but also marks the frame boundary that re-arms the admission check above for the next frame's first <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call. </p>
+<p>Finalizes the frame most recently written via one or more <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> calls - see class comment. Default no-op for implementations that display/decode synchronously in <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> instead. </p>
 
-<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_output.html#ad3aed50bc3b4459454ccb8c64f5ced5a">VideoOutput</a>.</p>
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_muxer.html#ad3aed50bc3b4459454ccb8c64f5ced5a">Muxer</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a04f2540d940cc37b5c2538ed8e5b54be">H264DecoderESP32S3&lt; Alloc &gt;</a>, <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#a04f2540d940cc37b5c2538ed8e5b54be">MJPEGDecoder</a>, <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a04f2540d940cc37b5c2538ed8e5b54be">MPGDecoder</a>, <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a04f2540d940cc37b5c2538ed8e5b54be">OutputOpenCV</a>, <a class="el" href="classaudio__tools_1_1_video_frame_meter.html#a04f2540d940cc37b5c2538ed8e5b54be">VideoFrameMeter</a>, and <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a04f2540d940cc37b5c2538ed8e5b54be">VideoAudioSyncTask</a>.</p>
 
 </div>
 </div>
-<a id="a5f1f94e0964e9fe78701eef6cb81dc3f" name="a5f1f94e0964e9fe78701eef6cb81dc3f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5f1f94e0964e9fe78701eef6cb81dc3f">&#9670;&#160;</a></span>frameCount()</h2>
+<a id="a8419abee0c4d380be1cb8ff963fb8d0a" name="a8419abee0c4d380be1cb8ff963fb8d0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8419abee0c4d380be1cb8ff963fb8d0a">&#9670;&#160;</a></span>getWriteTimeMs()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -417,7 +371,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t frameCount </td>
+          <td class="memname">virtual uint32_t getWriteTimeMs </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -425,13 +379,14 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Total frames seen so far (via <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>'s NAL-type peek - only counted when <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a0108fbf4ffc3c786f9359fa676424118">setSyncSource()</a> is active, since that's what triggers the peek)</p><ul>
-<li>regardless of whether shouldAdmitFrame() actually admitted each one. Together with <a class="el" href="classaudio__tools_1_1_h264_decoder.html#ae42f7e238fd555d938b70caeb9b549f3" title="Of frameCount() frames seen, how many were IDR (key) frames.">keyFrameCount()</a>, gives the stream's average GOP length (<a class="el" href="classaudio__tools_1_1_h264_decoder.html#a5f1f94e0964e9fe78701eef6cb81dc3f">frameCount()</a> / <a class="el" href="classaudio__tools_1_1_h264_decoder.html#ae42f7e238fd555d938b70caeb9b549f3" title="Of frameCount() frames seen, how many were IDR (key) frames.">keyFrameCount()</a>) without needing a separate bitstream inspection pass. </li>
-</ul>
+
+<p>Optional: returns the time (ms) spent in the last <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_output_t_f_t__e_s_p_i.html#a5efb8ccd37b8cc2749358e5da69adddc">OutputTFT_eSPI</a>, <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a5efb8ccd37b8cc2749358e5da69adddc">OutputTinyGPU</a>, and <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#ae3d58e56c2b7dc75a50b36b357ffef93">OutputOpenCV</a>.</p>
 
 </div>
 </div>
@@ -458,70 +413,6 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>True if the most recent <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call ended in a bitstream error or hit an unsupported stream feature. </p>
-
-</div>
-</div>
-<a id="a7c4ff6b4f9fcb3494923fe75d81372c8" name="a7c4ff6b4f9fcb3494923fe75d81372c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7c4ff6b4f9fcb3494923fe75d81372c8">&#9670;&#160;</a></span>isIdrFrame()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool isIdrFrame </td>
-          <td>(</td>
-          <td class="paramtype">const uint8_t *&#160;</td>
-          <td class="paramname"><em>data</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>len</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Scans an Annex-B buffer for the first VCL NAL (slice type 1 or 5), skipping over non-VCL NALs (SPS/PPS/SEI/AUD/...), and reports whether it's an IDR (type 5, decodable on its own / starts a new GOP) rather than a non-IDR slice (type 1, depends on prior frames). Returns false (treat as non-IDR) if no VCL NAL is found at all - conservative, so a malformed/empty buffer is never mistaken for a GOP boundary and skipped as if it were safe to drop. </p>
-
-</div>
-</div>
-<a id="ae42f7e238fd555d938b70caeb9b549f3" name="ae42f7e238fd555d938b70caeb9b549f3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae42f7e238fd555d938b70caeb9b549f3">&#9670;&#160;</a></span>keyFrameCount()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t keyFrameCount </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Of <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a5f1f94e0964e9fe78701eef6cb81dc3f">frameCount()</a> frames seen, how many were IDR (key) frames. </p>
 
 </div>
 </div>
@@ -668,36 +559,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Hint to skip the expensive part of displaying the next frame(s) (e.g. the panel refresh) while still accepting and fully processing <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> calls - used to recover from falling behind the playback schedule without breaking a codec's decode state (e.g. H.264 inter-prediction reference chain, which requires every frame to still be decoded even if it's never shown). Default no-op: implementations that can't skip rendering cheaply just ignore it and always render. </p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a94f8728be362b736be4cb10a4253d201">OutputTinyGPU</a>.</p>
-
-</div>
-</div>
-<a id="a0108fbf4ffc3c786f9359fa676424118" name="a0108fbf4ffc3c786f9359fa676424118"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0108fbf4ffc3c786f9359fa676424118">&#9670;&#160;</a></span>setSyncSource()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void setSyncSource </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_video_audio_sync.html">VideoAudioSync</a> *&#160;</td>
-          <td class="paramname"><em>sync</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Wires the demuxer's frame-pacing object in, so <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> can consult its admission policy - see the class comment on <a class="el" href="classaudio__tools_1_1_video_audio_sync.html" title="Logic to Synchronize video and audio output: This is the minimum implementatin which actually does no...">VideoAudioSync</a>'s shouldAdmitFrame(). Called automatically by DemuxerAVI/DemuxerMP4/DemuxerMPG's setOutputVideo(VideoOutput&amp;). </p>
-
-<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_output.html#a0788e6d8a8ec277be17ad0141b310e05">VideoOutput</a>.</p>
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a94f8728be362b736be4cb10a4253d201">OutputTinyGPU</a>, <a class="el" href="classaudio__tools_1_1_video_frame_meter.html#a94f8728be362b736be4cb10a4253d201">VideoFrameMeter</a>, and <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a94f8728be362b736be4cb10a4253d201">VideoAudioSyncTask</a>.</p>
 
 </div>
 </div>
@@ -752,7 +614,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Sum of time spent purely inside decoder_.write() (CAVLC decode + reconstruction), across all admitted frames - excludes SD reads and demux overhead that a caller's own outer timing (e.g. <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html" title="AVI Container Decoder which can be fed with small chunks of data. The minimum length must be bigger t...">DemuxerAVI</a>'s video_frame_start_ms-based time_used_ms, see <a class="el" href="classaudio__tools_1_1_video_audio_sync.html" title="Logic to Synchronize video and audio output: This is the minimum implementatin which actually does no...">VideoAudioSync</a>:: totalDecodeWriteMs()) bundles in alongside it. Divide by <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a46d7e3bfc282761882c80eee53fe4100">admittedFrameCount()</a> for the true average pure-decode cost per frame, to compare against that outer, coarser measurement. </p>
+<p>Sum of time spent purely inside decoder_.write() (CAVLC decode + reconstruction) since <a class="el" href="classaudio__tools_1_1_h264_decoder.html#acba365cc28eb702040c382646cfb0a7a">begin()</a> - excludes SD reads and demux overhead a caller's own outer timing bundles in alongside it. </p>
 
 </div>
 </div>
@@ -817,8 +679,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Feeds one chunk of Annex-B H.264 data - may be called more than once per frame (e.g. from a demuxer that hands over payload in pieces). Decodes immediately, invoking <a class="el" href="classaudio__tools_1_1_h264_decoder.html#ae1220e7e3542f5a84c21fe2f7cef194c">setOutput()</a>'s <a class="el" href="class_print.html">Print</a> once per completed picture from within this call (not deferred to <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a>).</p>
-<p>If <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a0108fbf4ffc3c786f9359fa676424118">setSyncSource()</a> has been called, the <em>first</em> <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> of a frame (i.e. right after the previous <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a>) also asks the sync object's shouldAdmitFrame() whether to bother decoding this frame at all - see <a class="el" href="classaudio__tools_1_1_video_audio_sync.html#abf0c3df2b08623da9a6b46f0bf68abaf">VideoAudioSync::shouldAdmitFrame()</a> for why. That decision is latched (via decided_this_frame_) so a frame split across multiple <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> calls isn't re-evaluated mid-frame, which would leave the decoder looking at bytes it can no longer make sense of as a NAL header. </p>
+<p>Feeds one chunk of Annex-B H.264 data - may be called more than once per frame (e.g. from a demuxer that hands over payload in pieces). Decodes immediately, invoking <a class="el" href="classaudio__tools_1_1_h264_decoder.html#ae1220e7e3542f5a84c21fe2f7cef194c">setOutput()</a>'s <a class="el" href="class_print.html">Print</a> once per completed picture from within this call (not deferred to <a class="el" href="classaudio__tools_1_1_video_output.html#ad3aed50bc3b4459454ccb8c64f5ced5a">flush()</a>). </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">VideoOutput</a>.</p>
 
@@ -886,72 +747,6 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="ab629509afd2bcbdf504bf4cf3b60d574" name="ab629509afd2bcbdf504bf4cf3b60d574"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab629509afd2bcbdf504bf4cf3b60d574">&#9670;&#160;</a></span>admit_current_frame_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool admit_current_frame_ = true</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a3f2dbd9241f17e0b8dca65d00189eb6a" name="a3f2dbd9241f17e0b8dca65d00189eb6a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3f2dbd9241f17e0b8dca65d00189eb6a">&#9670;&#160;</a></span>admitted_frame_count_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t admitted_frame_count_ = 0</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aac02b953030ac3051159efaa674b4ae2" name="aac02b953030ac3051159efaa674b4ae2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aac02b953030ac3051159efaa674b4ae2">&#9670;&#160;</a></span>decided_this_frame_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool decided_this_frame_ = false</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="abe19f1a0bb11f412ad34292267a775d8" name="abe19f1a0bb11f412ad34292267a775d8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abe19f1a0bb11f412ad34292267a775d8">&#9670;&#160;</a></span>decoder_</h2>
 
@@ -996,50 +791,6 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a6d1174759394cef3f8300311d9f916c2" name="a6d1174759394cef3f8300311d9f916c2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6d1174759394cef3f8300311d9f916c2">&#9670;&#160;</a></span>frame_count_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t frame_count_ = 0</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a227c556de9de0fd1b3c19be5f522815c" name="a227c556de9de0fd1b3c19be5f522815c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a227c556de9de0fd1b3c19be5f522815c">&#9670;&#160;</a></span>key_frame_count_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t key_frame_count_ = 0</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="aa42c30e02e51ec7cc38ea4ab215e0db4" name="aa42c30e02e51ec7cc38ea4ab215e0db4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa42c30e02e51ec7cc38ea4ab215e0db4">&#9670;&#160;</a></span>p_out</h2>
 
@@ -1073,28 +824,6 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a>* p_out_video = nullptr</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a19deb4927e431a0bbc5c64a4a22bfa94" name="a19deb4927e431a0bbc5c64a4a22bfa94"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a19deb4927e431a0bbc5c64a4a22bfa94">&#9670;&#160;</a></span>p_sync_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_video_audio_sync.html">VideoAudioSync</a>* p_sync_ = nullptr</td>
         </tr>
       </table>
   </td>

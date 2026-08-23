@@ -82,7 +82,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html" title="AudioTimeSourceStream: A stream that provides time information based on the audio data processed....">AudioTimeSourceStream</a>: A stream that provides time information based on the audio data processed. It implements the <a class="el" href="classaudio__tools_1_1_time_source.html" title="Interface for classes that can provide time information.">TimeSource</a> interface.  
+<p><a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html" title="AudioTimeSourceStream: A stream that provides time information based on the audio data actually proce...">AudioTimeSourceStream</a>: A stream that provides time information based on the audio data actually processed - implements the <a class="el" href="classaudio__tools_1_1_time_source.html" title="Interface for classes that can provide time information - two distinct notions of &quot;now&quot;,...">TimeSource</a> interface. <a class="el" href="classaudio__tools_1_1_time_source.html#af6d703440364ac9907137b03765c9199">millis()</a> (inherited, unmodified) is plain wall time; <a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html#a008f9844c7e1731d60e18b642c0f506a">playbackTime()</a> is the audio-derived progress, which is what a consumer that must stay tied to genuine playback (e.g. <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html" title="Buffers a small, configurable amount of video (see setQueueBytes()) and renders it frame by frame fro...">VideoAudioSyncTask</a>) should use instead - see <a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html#a008f9844c7e1731d60e18b642c0f506a">playbackTime()</a>'s own comment for why they can diverge.  
  <a href="classaudio__tools_1_1_audio_time_source_stream.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_audio_i_o_8h_source.html">AudioIO.h</a>&gt;</code></p>
@@ -93,7 +93,7 @@ Inheritance diagram for AudioTimeSourceStream:</div>
   <img src="classaudio__tools_1_1_audio_time_source_stream.png" usemap="#AudioTimeSourceStream_map" alt=""/>
   <map id="AudioTimeSourceStream_map" name="AudioTimeSourceStream_map">
 <area href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="AudioStream" shape="rect" coords="161,168,312,192"/>
-<area href="classaudio__tools_1_1_time_source.html" title="Interface for classes that can provide time information." alt="TimeSource" shape="rect" coords="322,168,473,192"/>
+<area href="classaudio__tools_1_1_time_source.html" title="Interface for classes that can provide time information - two distinct notions of &quot;now&quot;,..." alt="TimeSource" shape="rect" coords="322,168,473,192"/>
 <area href="classaudio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer, size_t size) and readBytes(uint..." alt="BaseStream" shape="rect" coords="0,112,151,136"/>
 <area href="classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="AudioInfoSupport" shape="rect" coords="161,112,312,136"/>
 <area href="classaudio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="AudioInfoSource" shape="rect" coords="322,112,473,136"/>
@@ -138,10 +138,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a475bc9908ea8a1d67e5cc1c1f67a71b2" id="r_a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a475bc9908ea8a1d67e5cc1c1f67a71b2">isNotifyActive</a> ()</td></tr>
 <tr class="memdesc:a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> update is active.  <br /></td></tr>
 <tr class="separator:a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9dc38093b807cfcf6438feaf8b8cadc0" id="r_a9dc38093b807cfcf6438feaf8b8cadc0"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html#a9dc38093b807cfcf6438feaf8b8cadc0">millis</a> () override</td></tr>
-<tr class="separator:a9dc38093b807cfcf6438feaf8b8cadc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6d703440364ac9907137b03765c9199" id="r_af6d703440364ac9907137b03765c9199"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_time_source.html#af6d703440364ac9907137b03765c9199">millis</a> ()</td></tr>
+<tr class="separator:af6d703440364ac9907137b03765c9199"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d52c0ed98e047d782054fa126b281e5" id="r_a0d52c0ed98e047d782054fa126b281e5"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_stream.html#a0d52c0ed98e047d782054fa126b281e5">operator bool</a> ()</td></tr>
 <tr class="separator:a0d52c0ed98e047d782054fa126b281e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a008f9844c7e1731d60e18b642c0f506a" id="r_a008f9844c7e1731d60e18b642c0f506a"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html#a008f9844c7e1731d60e18b642c0f506a">playbackTime</a> () override</td></tr>
+<tr class="separator:a008f9844c7e1731d60e18b642c0f506a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c5c6275ddee80eb02839356b6185c0b" id="r_a4c5c6275ddee80eb02839356b6185c0b"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html#a4c5c6275ddee80eb02839356b6185c0b">readBytes</a> (uint8_t *data, size_t len) override</td></tr>
 <tr class="separator:a4c5c6275ddee80eb02839356b6185c0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36e26f40121eda38b0042dcba026ab82" id="r_a36e26f40121eda38b0042dcba026ab82"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_stream.html#a36e26f40121eda38b0042dcba026ab82">readSilence</a> (uint8_t *buffer, size_t length)</td></tr>
@@ -164,10 +166,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a5d05266dc1a666b50700eaffc598ba19"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ea3110016f67d3dcb9793fcae72288f" id="r_a4ea3110016f67d3dcb9793fcae72288f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html#a4ea3110016f67d3dcb9793fcae72288f">setStream</a> (<a class="el" href="class_stream.html">Stream</a> &amp;stream)</td></tr>
 <tr class="separator:a4ea3110016f67d3dcb9793fcae72288f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9394baf360b705cc8cecbc349575feaf" id="r_a9394baf360b705cc8cecbc349575feaf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html#a9394baf360b705cc8cecbc349575feaf">setTimeCallback</a> (void(*<a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html#ab388531470c4ba3b467aa65ea9853952">cb</a>)(uint32_t time_ms))</td></tr>
+<tr class="memitem:a9394baf360b705cc8cecbc349575feaf" id="r_a9394baf360b705cc8cecbc349575feaf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html#a9394baf360b705cc8cecbc349575feaf">setTimeCallback</a> (void(*cb)(uint32_t time_ms))</td></tr>
 <tr class="memdesc:a9394baf360b705cc8cecbc349575feaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a callback function to be called whenever the time is updated.  <br /></td></tr>
 <tr class="separator:a9394baf360b705cc8cecbc349575feaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30a1fc60bc07f6661e0cc2a9bdf0cada" id="r_a30a1fc60bc07f6661e0cc2a9bdf0cada"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html#a30a1fc60bc07f6661e0cc2a9bdf0cada">setTimeCallbackAfter</a> (void(*<a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html#ab388531470c4ba3b467aa65ea9853952">cb</a>)(uint32_t time_ms))</td></tr>
+<tr class="memitem:a30a1fc60bc07f6661e0cc2a9bdf0cada" id="r_a30a1fc60bc07f6661e0cc2a9bdf0cada"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html#a30a1fc60bc07f6661e0cc2a9bdf0cada">setTimeCallbackAfter</a> (void(*cb)(uint32_t time_ms))</td></tr>
 <tr class="memdesc:a30a1fc60bc07f6661e0cc2a9bdf0cada"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a callback function to be called whenever the time is updated.  <br /></td></tr>
 <tr class="separator:a30a1fc60bc07f6661e0cc2a9bdf0cada"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adad22dd23fc48a3b338eafe707439deb" id="r_adad22dd23fc48a3b338eafe707439deb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#adad22dd23fc48a3b338eafe707439deb">setWriteBufferSize</a> (int size)</td></tr>
@@ -198,10 +200,6 @@ Protected Member Functions</h2></td></tr>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:aa66a35e5edf58ce00047afcd1d4f455e" id="r_aa66a35e5edf58ce00047afcd1d4f455e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_print.html#aa66a35e5edf58ce00047afcd1d4f455e">_timeout</a> = 10</td></tr>
 <tr class="separator:aa66a35e5edf58ce00047afcd1d4f455e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab388531470c4ba3b467aa65ea9853952" id="r_ab388531470c4ba3b467aa65ea9853952"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html#ab388531470c4ba3b467aa65ea9853952">cb</a> )(uint32_t time_ms)</td></tr>
-<tr class="separator:ab388531470c4ba3b467aa65ea9853952"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a502890914fb052b44ac87ab2c90f5963" id="r_a502890914fb052b44ac87ab2c90f5963"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html#a502890914fb052b44ac87ab2c90f5963">current_time_ms</a> = 0</td></tr>
-<tr class="separator:a502890914fb052b44ac87ab2c90f5963"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47385aa19435f5fca9d3083a748258c5" id="r_a47385aa19435f5fca9d3083a748258c5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_stream.html#a47385aa19435f5fca9d3083a748258c5">info</a></td></tr>
 <tr class="separator:a47385aa19435f5fca9d3083a748258c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeaba7fcedcb403536c79ee7f04de17fc" id="r_aeaba7fcedcb403536c79ee7f04de17fc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#aeaba7fcedcb403536c79ee7f04de17fc">is_notify_active</a> = true</td></tr>
@@ -212,6 +210,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:aa42c30e02e51ec7cc38ea4ab215e0db4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c87619d514c8c9627dc94e5e278a530" id="r_a7c87619d514c8c9627dc94e5e278a530"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html#a7c87619d514c8c9627dc94e5e278a530">p_stream</a> = nullptr</td></tr>
 <tr class="separator:a7c87619d514c8c9627dc94e5e278a530"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6dd88e4861c6ea5f77e83b97da52bcf1" id="r_a6dd88e4861c6ea5f77e83b97da52bcf1"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html#a6dd88e4861c6ea5f77e83b97da52bcf1">playback_time_ms</a> = 0</td></tr>
+<tr class="separator:a6dd88e4861c6ea5f77e83b97da52bcf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9243760e157453b0c022b41e9aaa06a1" id="r_a9243760e157453b0c022b41e9aaa06a1"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html#a9243760e157453b0c022b41e9aaa06a1">time_callback_after</a> )(uint32_t time_ms) = nullptr</td></tr>
 <tr class="separator:a9243760e157453b0c022b41e9aaa06a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6bbc30fbf37f0a507ada11470f762163" id="r_a6bbc30fbf37f0a507ada11470f762163"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html#a6bbc30fbf37f0a507ada11470f762163">time_callback_before</a> )(uint32_t time_ms) = nullptr</td></tr>
@@ -224,7 +224,7 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a7f948c0ac99e632d3a033b85ae54d170"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html" title="AudioTimeSourceStream: A stream that provides time information based on the audio data processed....">AudioTimeSourceStream</a>: A stream that provides time information based on the audio data processed. It implements the <a class="el" href="classaudio__tools_1_1_time_source.html" title="Interface for classes that can provide time information.">TimeSource</a> interface. </p>
+<div class="textblock"><p><a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html" title="AudioTimeSourceStream: A stream that provides time information based on the audio data actually proce...">AudioTimeSourceStream</a>: A stream that provides time information based on the audio data actually processed - implements the <a class="el" href="classaudio__tools_1_1_time_source.html" title="Interface for classes that can provide time information - two distinct notions of &quot;now&quot;,...">TimeSource</a> interface. <a class="el" href="classaudio__tools_1_1_time_source.html#af6d703440364ac9907137b03765c9199">millis()</a> (inherited, unmodified) is plain wall time; <a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html#a008f9844c7e1731d60e18b642c0f506a">playbackTime()</a> is the audio-derived progress, which is what a consumer that must stay tied to genuine playback (e.g. <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html" title="Buffers a small, configurable amount of video (see setQueueBytes()) and renders it frame by frame fro...">VideoAudioSyncTask</a>) should use instead - see <a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html#a008f9844c7e1731d60e18b642c0f506a">playbackTime()</a>'s own comment for why they can diverge. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a434a796e98ad8aafc4abcfc29f50aeef" name="a434a796e98ad8aafc4abcfc29f50aeef"></a>
@@ -526,6 +526,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Optional: explicitly (re)starts <a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html#a008f9844c7e1731d60e18b642c0f506a">playbackTime()</a> at 0 - use this if you need an explicit restart point (e.g. looping/seeking). Not required otherwise: the first byte that actually flows through <a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>/readBytes() anchors it on its own (see <a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html#ae9fc4d2f7562822452daace98e8eb70d">updateTime()</a>) - most callers just wire this in as a plain Print/AudioStream target (e.g. <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#ad9996877508163928b063ff7ab1c05ec">VideoAudioSyncTask::setAudioClock()</a>'s usage pattern) and never call <a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a> on it directly. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_base_stream.html#a50f45551c10ca30a0bc7f447e70188b1">BaseStream</a>.</p>
 
@@ -643,8 +644,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a9dc38093b807cfcf6438feaf8b8cadc0" name="a9dc38093b807cfcf6438feaf8b8cadc0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9dc38093b807cfcf6438feaf8b8cadc0">&#9670;&#160;</a></span>millis()</h2>
+<a id="af6d703440364ac9907137b03765c9199" name="af6d703440364ac9907137b03765c9199"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6d703440364ac9907137b03765c9199">&#9670;&#160;</a></span>millis()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -653,7 +654,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t millis </td>
+          <td class="memname">virtual uint32_t millis </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -661,13 +662,11 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Provides the current time in milliseconds based on the audio data processed </p>
-
-<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_time_source.html#af6d703440364ac9907137b03765c9199">TimeSource</a>.</p>
+<p>Wall-clock elapsed time (ms) - real time passing, regardless of whatever this <a class="el" href="classaudio__tools_1_1_time_source.html" title="Interface for classes that can provide time information - two distinct notions of &quot;now&quot;,...">TimeSource</a> actually tracks. The default implementation just forwards to Arduino's own <a class="el" href="classaudio__tools_1_1_time_source.html#af6d703440364ac9907137b03765c9199">millis()</a>; override only if this <a class="el" href="classaudio__tools_1_1_time_source.html" title="Interface for classes that can provide time information - two distinct notions of &quot;now&quot;,...">TimeSource</a> needs a different wall-clock source - most subclasses should leave this alone and override <a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html#a008f9844c7e1731d60e18b642c0f506a">playbackTime()</a> instead. </p>
 
 </div>
 </div>
@@ -757,6 +756,34 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_a2_d_p_stream.html#a9b3baad8c612d81b96e46f84d7e97580">A2DPStream</a>, <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#a9b3baad8c612d81b96e46f84d7e97580">ICYStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_audio_b_l_e_stream.html#a9b3baad8c612d81b96e46f84d7e97580">AudioBLEStream</a>, <a class="el" href="classaudio__tools_1_1_port_audio_stream.html#a90622bd78258a36bbcf63426b28307ac">PortAudioStream</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#a90622bd78258a36bbcf63426b28307ac">URLStream</a>, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a90622bd78258a36bbcf63426b28307ac">USBAudioDeviceBase</a>, <a class="el" href="classaudio__tools_1_1_i2_s_stream.html#a90622bd78258a36bbcf63426b28307ac">I2SStream</a>, <a class="el" href="classaudio__tools_1_1_adapter_audio_output_to_audio_stream.html#a90622bd78258a36bbcf63426b28307ac">AdapterAudioOutputToAudioStream</a>, <a class="el" href="classaudio__tools_1_1_timed_stream.html#a90622bd78258a36bbcf63426b28307ac">TimedStream</a>, <a class="el" href="classaudio__tools_1_1_memory_stream.html#a90622bd78258a36bbcf63426b28307ac">MemoryStream</a>, <a class="el" href="classaudio__tools_1_1_generated_sound_stream.html#a90622bd78258a36bbcf63426b28307ac">GeneratedSoundStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_generated_sound_stream.html#a90622bd78258a36bbcf63426b28307ac">GeneratedSoundStream&lt; int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_pipeline.html#a90622bd78258a36bbcf63426b28307ac">Pipeline</a>, and <a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#a90622bd78258a36bbcf63426b28307ac">AudioFFTBase</a>.</p>
+
+</div>
+</div>
+<a id="a008f9844c7e1731d60e18b642c0f506a" name="a008f9844c7e1731d60e18b642c0f506a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a008f9844c7e1731d60e18b642c0f506a">&#9670;&#160;</a></span>playbackTime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t playbackTime </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Elapsed playback time (ms): the sum of audio duration (sample_rate/channels/bits_per_sample-derived) actually handed to <a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>/readBytes() so far - see <a class="el" href="classaudio__tools_1_1_time_source.html#ae880a1e9b9f0ead8c1dd57fa4e03834f">TimeSource::playbackTime()</a>. Purely a running total of processed bytes: never extrapolated by, or otherwise dependent on, wall-clock time (see <a class="el" href="classaudio__tools_1_1_time_source.html#af6d703440364ac9907137b03765c9199">millis()</a>, inherited unmodified, for that) - so it stalls exactly when the caller stalls (e.g. busy elsewhere in a shared demux/decode loop) instead of continuing to advance. Returns 0 before the first byte has ever been processed (<a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a> is optional - see its own comment). </p>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_time_source.html#ae880a1e9b9f0ead8c1dd57fa4e03834f">TimeSource</a>.</p>
 
 </div>
 </div>
@@ -1307,50 +1334,6 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ab388531470c4ba3b467aa65ea9853952" name="ab388531470c4ba3b467aa65ea9853952"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab388531470c4ba3b467aa65ea9853952">&#9670;&#160;</a></span>cb</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void(* cb) (uint32_t time_ms)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a502890914fb052b44ac87ab2c90f5963" name="a502890914fb052b44ac87ab2c90f5963"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a502890914fb052b44ac87ab2c90f5963">&#9670;&#160;</a></span>current_time_ms</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t current_time_ms = 0</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a47385aa19435f5fca9d3083a748258c5" name="a47385aa19435f5fca9d3083a748258c5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a47385aa19435f5fca9d3083a748258c5">&#9670;&#160;</a></span>info</h2>
 
@@ -1450,6 +1433,28 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="class_stream.html">Stream</a>* p_stream = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6dd88e4861c6ea5f77e83b97da52bcf1" name="a6dd88e4861c6ea5f77e83b97da52bcf1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6dd88e4861c6ea5f77e83b97da52bcf1">&#9670;&#160;</a></span>playback_time_ms</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t playback_time_ms = 0</td>
         </tr>
       </table>
   </td>

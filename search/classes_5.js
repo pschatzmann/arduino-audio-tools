@@ -72,9 +72,10 @@ var searchData=
   ['formatconverterstream_69',['FormatConverterStream',['../classaudio__tools_1_1_format_converter_stream.html',1,'audio_tools']]],
   ['frame_70',['Frame',['../structaudio__tools_1_1_m4_a_common_demuxer_1_1_frame.html',1,'audio_tools::M4ACommonDemuxer']]],
   ['framebuffer_71',['FrameBuffer',['../classaudio__tools_1_1_frame_buffer.html',1,'audio_tools']]],
-  ['frequencydetectorautocorrelation_72',['FrequencyDetectorAutoCorrelation',['../classaudio__tools_1_1_frequency_detector_auto_correlation.html',1,'audio_tools']]],
-  ['frequencydetectorzerocrossing_73',['FrequencyDetectorZeroCrossing',['../classaudio__tools_1_1_frequency_detector_zero_crossing.html',1,'audio_tools']]],
-  ['frequencyframe_74',['FrequencyFrame',['../structaudio__tools_1_1_frequency_frame.html',1,'audio_tools']]],
-  ['frequencyframe_3c_203_20_3e_75',['FrequencyFrame&lt; 3 &gt;',['../structaudio__tools_1_1_frequency_frame.html',1,'audio_tools']]],
-  ['fuzz_76',['Fuzz',['../classaudio__tools_1_1_fuzz.html',1,'audio_tools']]]
+  ['frameheader_72',['FrameHeader',['../structaudio__tools_1_1_video_audio_sync_task_1_1_frame_header.html',1,'audio_tools::VideoAudioSyncTask']]],
+  ['frequencydetectorautocorrelation_73',['FrequencyDetectorAutoCorrelation',['../classaudio__tools_1_1_frequency_detector_auto_correlation.html',1,'audio_tools']]],
+  ['frequencydetectorzerocrossing_74',['FrequencyDetectorZeroCrossing',['../classaudio__tools_1_1_frequency_detector_zero_crossing.html',1,'audio_tools']]],
+  ['frequencyframe_75',['FrequencyFrame',['../structaudio__tools_1_1_frequency_frame.html',1,'audio_tools']]],
+  ['frequencyframe_3c_203_20_3e_76',['FrequencyFrame&lt; 3 &gt;',['../structaudio__tools_1_1_frequency_frame.html',1,'audio_tools']]],
+  ['fuzz_77',['Fuzz',['../classaudio__tools_1_1_fuzz.html',1,'audio_tools']]]
 ];

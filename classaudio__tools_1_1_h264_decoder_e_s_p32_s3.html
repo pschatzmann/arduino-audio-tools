@@ -122,6 +122,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5f1f94e0964e9fe78701eef6cb81dc3f" id="r_a5f1f94e0964e9fe78701eef6cb81dc3f"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a5f1f94e0964e9fe78701eef6cb81dc3f">frameCount</a> () const</td></tr>
 <tr class="memdesc:a5f1f94e0964e9fe78701eef6cb81dc3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of frames successfully decoded since <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#acba365cc28eb702040c382646cfb0a7a" title="Initializes the decoder - see esp_h264::H264Decoder::begin().">begin()</a>.  <br /></td></tr>
 <tr class="separator:a5f1f94e0964e9fe78701eef6cb81dc3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8419abee0c4d380be1cb8ff963fb8d0a" id="r_a8419abee0c4d380be1cb8ff963fb8d0a"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a8419abee0c4d380be1cb8ff963fb8d0a">getWriteTimeMs</a> () const</td></tr>
+<tr class="memdesc:a8419abee0c4d380be1cb8ff963fb8d0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional: returns the time (ms) spent in the last <a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">write()</a> call.  <br /></td></tr>
+<tr class="separator:a8419abee0c4d380be1cb8ff963fb8d0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae7741dea7b0a1c1eeee10ee5b20482eb" id="r_ae7741dea7b0a1c1eeee10ee5b20482eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#ae7741dea7b0a1c1eeee10ee5b20482eb">setInputBufferSize</a> (size_t size)</td></tr>
 <tr class="separator:ae7741dea7b0a1c1eeee10ee5b20482eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05ff4cf361d54457ed8586e8c14aa922" id="r_a05ff4cf361d54457ed8586e8c14aa922"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput</a> (<a class="el" href="class_print.html">Print</a> &amp;out) override</td></tr>
@@ -132,8 +135,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:af877902bb7890a031fd284db22c96ccc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4d364d9800016345ae6980424817214" id="r_ab4d364d9800016345ae6980424817214"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#ab4d364d9800016345ae6980424817214">setSkipRender</a> (bool skip)</td></tr>
 <tr class="separator:ab4d364d9800016345ae6980424817214"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0108fbf4ffc3c786f9359fa676424118" id="r_a0108fbf4ffc3c786f9359fa676424118"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a0108fbf4ffc3c786f9359fa676424118">setSyncSource</a> (<a class="el" href="classaudio__tools_1_1_video_audio_sync.html">VideoAudioSync</a> *sync) override</td></tr>
-<tr class="separator:a0108fbf4ffc3c786f9359fa676424118"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4305de559192cc500fbd0587b2748ea" id="r_ab4305de559192cc500fbd0587b2748ea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#ab4305de559192cc500fbd0587b2748ea">setVideoFormat</a> (<a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a> format) override</td></tr>
 <tr class="separator:ab4305de559192cc500fbd0587b2748ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a026655e20010414e4d162042f5c413" id="r_a0a026655e20010414e4d162042f5c413"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_video_info.html">VideoInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a0a026655e20010414e4d162042f5c413">videoInfo</a> () override</td></tr>
@@ -151,13 +152,12 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:aa42c30e02e51ec7cc38ea4ab215e0db4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f9b668b9f2805f1dcca5a9ffc0cb15c" id="r_a2f9b668b9f2805f1dcca5a9ffc0cb15c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a2f9b668b9f2805f1dcca5a9ffc0cb15c">p_out_video</a> = nullptr</td></tr>
 <tr class="separator:a2f9b668b9f2805f1dcca5a9ffc0cb15c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19deb4927e431a0bbc5c64a4a22bfa94" id="r_a19deb4927e431a0bbc5c64a4a22bfa94"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_video_audio_sync.html">VideoAudioSync</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a19deb4927e431a0bbc5c64a4a22bfa94">p_sync_</a> = nullptr</td></tr>
-<tr class="separator:a19deb4927e431a0bbc5c64a4a22bfa94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename Alloc = H264_DEFAULT_ALLOCATOR&gt;<br />
 class audio_tools::H264DecoderESP32S3&lt; Alloc &gt;</div><p>H.264 video decoder for ESP32-S3: wraps esp_h264::H264Decoder (<a href="https://github.com/pschatzmann/ESP32S3-h264">https://github.com/pschatzmann/ESP32S3-h264</a>) as a <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a>, so it can be plugged directly into e.g. <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#aa9139d7cd7756a3bf8603981959afb53">DemuxerAVI::setOutputVideo()</a>/ <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#aee3d456e79d27d60f9b6ade892fcc88c">DemuxerMP4::setOutputVideo()</a> - the same role <a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a> (<a class="el" href="_codec_h264_8h.html">CodecH264.h</a>, the portable TinyH264-based decoder) plays, for boards where the ESP32-S3-specific esp_h264 backend is preferred instead. Consumes an Annex-B H.264 bitstream via <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> and, once a complete picture has been decoded, writes it - converted to <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#ab4305de559192cc500fbd0587b2748ea">setVideoFormat()</a>'s format (RGB565 by default, the common TFT wire format) - to the <a class="el" href="class_print.html">Print</a> target configured via <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput()</a>, one <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call per decoded picture. </p>
 <p><a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>/flush() implement the <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> contract (see <a class="el" href="_video_8h.html">Video.h</a>): <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> may be called one or more times per frame - bytes are forwarded to the wrapped decoder's decode() immediately, which invokes the frame callback synchronously for every completed picture found in that call, not deferred to <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a>. <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a> is a no-op, kept only because some producers (e.g. DemuxerAVI/DemuxerMP4) call it unconditionally after each frame.</p>
+<p>No setup beyond <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput()</a> is required before <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#acba365cc28eb702040c382646cfb0a7a" title="Initializes the decoder - see esp_h264::H264Decoder::begin().">begin()</a> - unlike esp_h264::H264Decoder's own defaultConfig() (sized for VGA), this wrapper defaults its input/output buffers to sizes that fit typical small-panel use directly; <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#ae7741dea7b0a1c1eeee10ee5b20482eb">setInputBufferSize()</a>/setOutputBufferSize() exist only as an optional performance tweak (see their own comments).</p>
 <p>The Alloc template parameter is forwarded to esp_h264::H264Decoder - see that class's own file comment (H264Decoder.h) for the PSRAM- vs. internal-RAM allocator choice (H264DecoderPSRAM/H264DecoderRAM aliases). Defaults to H264_DEFAULT_ALLOCATOR.</p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
@@ -425,6 +425,35 @@ template&lt;typename Alloc  = H264_DEFAULT_ALLOCATOR&gt; </div>
 
 </div>
 </div>
+<a id="a8419abee0c4d380be1cb8ff963fb8d0a" name="a8419abee0c4d380be1cb8ff963fb8d0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8419abee0c4d380be1cb8ff963fb8d0a">&#9670;&#160;</a></span>getWriteTimeMs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual uint32_t getWriteTimeMs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Optional: returns the time (ms) spent in the last <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_output_t_f_t__e_s_p_i.html#a5efb8ccd37b8cc2749358e5da69adddc">OutputTFT_eSPI</a>, <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a5efb8ccd37b8cc2749358e5da69adddc">OutputTinyGPU</a>, and <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#ae3d58e56c2b7dc75a50b36b357ffef93">OutputOpenCV</a>.</p>
+
+</div>
+</div>
 <a id="ae7741dea7b0a1c1eeee10ee5b20482eb" name="ae7741dea7b0a1c1eeee10ee5b20482eb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae7741dea7b0a1c1eeee10ee5b20482eb">&#9670;&#160;</a></span>setInputBufferSize()</h2>
 
@@ -450,7 +479,7 @@ template&lt;typename Alloc  = H264_DEFAULT_ALLOCATOR&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Input buffer size (bytes) the wrapped decoder allocates for its own copy of <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>'s data - see esp_h264::H264Decoder::Config:: input_buffer_size. Call before <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#acba365cc28eb702040c382646cfb0a7a" title="Initializes the decoder - see esp_h264::H264Decoder::begin().">begin()</a>. </p>
+<p>Optional: pre-sizes the input buffer the wrapped decoder copies <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>'s data into - purely a performance knob, not a requirement: esp_h264::H264Decoder grows it on demand if a frame ever exceeds it (see H264Decoder::decode()), so a too-small (or never-called) value still decodes correctly, just with an occasional reallocation. Defaults to 64KB (see the constructor's comment). Call before <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#acba365cc28eb702040c382646cfb0a7a" title="Initializes the decoder - see esp_h264::H264Decoder::begin().">begin()</a>. </p>
 
 </div>
 </div>
@@ -538,7 +567,7 @@ template&lt;typename Alloc  = H264_DEFAULT_ALLOCATOR&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Output buffer size (bytes) the wrapped decoder allocates for the decoded/converted picture - must be at least width*height*bytes- per-pixel for <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#ab4305de559192cc500fbd0587b2748ea">setVideoFormat()</a>'s format. Call before <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#acba365cc28eb702040c382646cfb0a7a" title="Initializes the decoder - see esp_h264::H264Decoder::begin().">begin()</a>. </p>
+<p>Optional: pre-sizes the output buffer the wrapped decoder allocates for the decoded/converted picture - purely a performance knob, not a requirement: it grows on demand to fit width*height*bytes-per- pixel for <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#ab4305de559192cc500fbd0587b2748ea">setVideoFormat()</a>'s format if this proves too small (see H264Decoder::processDecodedFrame()). Defaults to 100KB (see the constructor's comment). Call before <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#acba365cc28eb702040c382646cfb0a7a" title="Initializes the decoder - see esp_h264::H264Decoder::begin().">begin()</a>. </p>
 
 </div>
 </div>
@@ -567,38 +596,7 @@ template&lt;typename Alloc  = H264_DEFAULT_ALLOCATOR&gt; </div>
 </div><div class="memdoc">
 <p>Hint to skip the expensive part of displaying the next frame(s) (e.g. the panel refresh) while still accepting and fully processing <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> calls - used to recover from falling behind the playback schedule without breaking a codec's decode state (e.g. H.264 inter-prediction reference chain, which requires every frame to still be decoded even if it's never shown). Default no-op: implementations that can't skip rendering cheaply just ignore it and always render. </p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a94f8728be362b736be4cb10a4253d201">OutputTinyGPU</a>.</p>
-
-</div>
-</div>
-<a id="a0108fbf4ffc3c786f9359fa676424118" name="a0108fbf4ffc3c786f9359fa676424118"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0108fbf4ffc3c786f9359fa676424118">&#9670;&#160;</a></span>setSyncSource()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc  = H264_DEFAULT_ALLOCATOR&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void setSyncSource </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_video_audio_sync.html">VideoAudioSync</a> *&#160;</td>
-          <td class="paramname"><em>sync</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Wires the demuxer's frame-pacing object in, so the frame callback (see constructor) can consult isBehindSchedule() before writing a decoded picture - see <a class="el" href="classaudio__tools_1_1_video_output.html#a0788e6d8a8ec277be17ad0141b310e05">VideoOutput::setSyncSource()</a>. Called automatically by DemuxerAVI/DemuxerMP4/DemuxerMPG's setOutputVideo(VideoOutput&amp;). </p>
-
-<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_output.html#a0788e6d8a8ec277be17ad0141b310e05">VideoOutput</a>.</p>
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a94f8728be362b736be4cb10a4253d201">OutputTinyGPU</a>, <a class="el" href="classaudio__tools_1_1_video_frame_meter.html#a94f8728be362b736be4cb10a4253d201">VideoFrameMeter</a>, and <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a94f8728be362b736be4cb10a4253d201">VideoAudioSyncTask</a>.</p>
 
 </div>
 </div>
@@ -790,30 +788,6 @@ template&lt;typename Alloc  = H264_DEFAULT_ALLOCATOR&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a>* p_out_video = nullptr</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a19deb4927e431a0bbc5c64a4a22bfa94" name="a19deb4927e431a0bbc5c64a4a22bfa94"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a19deb4927e431a0bbc5c64a4a22bfa94">&#9670;&#160;</a></span>p_sync_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc  = H264_DEFAULT_ALLOCATOR&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_video_audio_sync.html">VideoAudioSync</a>* p_sync_ = nullptr</td>
         </tr>
       </table>
   </td>

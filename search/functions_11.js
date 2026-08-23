@@ -4,10 +4,13 @@ var searchData=
   ['qualityanalysisstream_1',['qualityanalysisstream',['../classaudio__tools_1_1_quality_analysis_stream.html#ab761d9917cc23d2b0d1c07d841477358',1,'audio_tools::QualityAnalysisStream::QualityAnalysisStream()=default'],['../classaudio__tools_1_1_quality_analysis_stream.html#a8dd7e0b49bed5a9a08431c55c044f092',1,'audio_tools::QualityAnalysisStream::QualityAnalysisStream(Print &amp;print)'],['../classaudio__tools_1_1_quality_analysis_stream.html#a816925443100addc0977c4517c178afe',1,'audio_tools::QualityAnalysisStream::QualityAnalysisStream(Stream &amp;stream)']]],
   ['quantize_2',['quantize',['../classaudio__tools_1_1_tf_lite_quantizer.html#a418d78a0309643b00c7add25ed4a2c46',1,'audio_tools::TfLiteQuantizer']]],
   ['queue_3',['Queue',['../classaudio__tools_1_1_queue.html#a661ad33bec307cc237c318c39970e78f',1,'audio_tools::Queue']]],
-  ['queuefromvector_4',['QueueFromVector',['../classaudio__tools_1_1_queue_from_vector.html#a345a4ec1577eed7e0017e3b195a2809e',1,'audio_tools::QueueFromVector']]],
-  ['queuelockfree_5',['QueueLockFree',['../classaudio__tools_1_1_queue_lock_free.html#af308f0ee2f137c3d6245f76ae36b766d',1,'audio_tools::QueueLockFree']]],
-  ['queuertos_6',['QueueRTOS',['../classaudio__tools_1_1_queue_r_t_o_s.html#ad2483fd4246ea4e0768b2379c0a53d3c',1,'audio_tools::QueueRTOS']]],
-  ['queuestream_7',['queuestream',['../classaudio__tools_1_1_queue_stream.html#a75905919639808f0ba57198104c1f994',1,'audio_tools::QueueStream::QueueStream()=default'],['../classaudio__tools_1_1_queue_stream.html#ace6de8cfb5e9e65a2334bfebab5ad02e',1,'audio_tools::QueueStream::QueueStream(int bufferSize, int bufferCount, bool autoRemoveOldestDataIfFull=false)'],['../classaudio__tools_1_1_queue_stream.html#a2c4af342bac39f9371388d08aa2f45c7',1,'audio_tools::QueueStream::QueueStream(BaseBuffer&lt; T &gt; &amp;buffer)']]],
-  ['queuezephyr_8',['QueueZephyr',['../classaudio__tools_1_1_queue_zephyr.html#a2008d5a06d71b6b1d1f96dcf558bb1c0',1,'audio_tools::QueueZephyr']]],
-  ['quickstart_9',['quickStart',['../classaudio__tools_1_1_demuxer_m_p4.html#aeb15850092ab389b5362456cc7d7a3f9',1,'audio_tools::DemuxerMP4']]]
+  ['queuecapacitybytes_4',['queueCapacityBytes',['../classaudio__tools_1_1_video_audio_sync_task.html#a7b25e5cb9d21b1b459c96291d865f5dd',1,'audio_tools::VideoAudioSyncTask']]],
+  ['queuedbytes_5',['queuedBytes',['../classaudio__tools_1_1_video_audio_sync_task.html#ab077eee431ac385f6fc9a9ab76baa14c',1,'audio_tools::VideoAudioSyncTask']]],
+  ['queuediframecount_6',['queuedIFrameCount',['../classaudio__tools_1_1_video_audio_sync_task.html#adfdbd6520dc7dd28408822cfdb42ec52',1,'audio_tools::VideoAudioSyncTask']]],
+  ['queuefromvector_7',['QueueFromVector',['../classaudio__tools_1_1_queue_from_vector.html#a345a4ec1577eed7e0017e3b195a2809e',1,'audio_tools::QueueFromVector']]],
+  ['queuelockfree_8',['QueueLockFree',['../classaudio__tools_1_1_queue_lock_free.html#af308f0ee2f137c3d6245f76ae36b766d',1,'audio_tools::QueueLockFree']]],
+  ['queuertos_9',['QueueRTOS',['../classaudio__tools_1_1_queue_r_t_o_s.html#ad2483fd4246ea4e0768b2379c0a53d3c',1,'audio_tools::QueueRTOS']]],
+  ['queuestream_10',['queuestream',['../classaudio__tools_1_1_queue_stream.html#a75905919639808f0ba57198104c1f994',1,'audio_tools::QueueStream::QueueStream()=default'],['../classaudio__tools_1_1_queue_stream.html#ace6de8cfb5e9e65a2334bfebab5ad02e',1,'audio_tools::QueueStream::QueueStream(int bufferSize, int bufferCount, bool autoRemoveOldestDataIfFull=false)'],['../classaudio__tools_1_1_queue_stream.html#a2c4af342bac39f9371388d08aa2f45c7',1,'audio_tools::QueueStream::QueueStream(BaseBuffer&lt; T &gt; &amp;buffer)']]],
+  ['queuezephyr_11',['QueueZephyr',['../classaudio__tools_1_1_queue_zephyr.html#a2008d5a06d71b6b1d1f96dcf558bb1c0',1,'audio_tools::QueueZephyr']]],
+  ['quickstart_12',['quickStart',['../classaudio__tools_1_1_demuxer_m_p4.html#aeb15850092ab389b5362456cc7d7a3f9',1,'audio_tools::DemuxerMP4']]]
 ];

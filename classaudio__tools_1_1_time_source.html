@@ -80,7 +80,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Interface for classes that can provide time information.  
+<p>Interface for classes that can provide time information - two distinct notions of "now", not interchangeable: <a class="el" href="classaudio__tools_1_1_time_source.html#af6d703440364ac9907137b03765c9199">millis()</a> is real wall time; <a class="el" href="classaudio__tools_1_1_time_source.html#ae880a1e9b9f0ead8c1dd57fa4e03834f">playbackTime()</a> is however far actual processing has gotten, which is not the same thing whenever the two can diverge (a consumer blocked/starved, a paused source, ...). A consumer that must stay tied to genuine progress (e.g. <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html" title="Buffers a small, configurable amount of video (see setQueueBytes()) and renders it frame by frame fro...">VideoAudioSyncTask</a> scheduling video against actual decoded-audio playback, not merely time passing) should use <a class="el" href="classaudio__tools_1_1_time_source.html#ae880a1e9b9f0ead8c1dd57fa4e03834f">playbackTime()</a>, not <a class="el" href="classaudio__tools_1_1_time_source.html#af6d703440364ac9907137b03765c9199">millis()</a>.  
  <a href="classaudio__tools_1_1_time_source.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_audio_types_8h_source.html">AudioTypes.h</a>&gt;</code></p>
@@ -90,7 +90,7 @@ Inheritance diagram for TimeSource:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_time_source.png" usemap="#TimeSource_map" alt=""/>
   <map id="TimeSource_map" name="TimeSource_map">
-<area href="classaudio__tools_1_1_audio_time_source_stream.html" title="AudioTimeSourceStream: A stream that provides time information based on the audio data processed...." alt="AudioTimeSourceStream" shape="rect" coords="0,56,151,80"/>
+<area href="classaudio__tools_1_1_audio_time_source_stream.html" title="AudioTimeSourceStream: A stream that provides time information based on the audio data actually proce..." alt="AudioTimeSourceStream" shape="rect" coords="0,56,151,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -98,11 +98,11 @@ Inheritance diagram for TimeSource:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:af6d703440364ac9907137b03765c9199" id="r_af6d703440364ac9907137b03765c9199"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_time_source.html#af6d703440364ac9907137b03765c9199">millis</a> ()</td></tr>
 <tr class="separator:af6d703440364ac9907137b03765c9199"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae880a1e9b9f0ead8c1dd57fa4e03834f" id="r_ae880a1e9b9f0ead8c1dd57fa4e03834f"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_time_source.html#ae880a1e9b9f0ead8c1dd57fa4e03834f">playbackTime</a> ()</td></tr>
+<tr class="separator:ae880a1e9b9f0ead8c1dd57fa4e03834f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Interface for classes that can provide time information. </p>
-<p>This class defines a simple interface for objects that can provide time information in milliseconds. It serves as a base class for various time tracking and source identification implementations within the audio tools framework.</p>
-<p>Classes implementing this interface should provide logic to determine the appropriate time value based on their specific context (e.g., audio stream processing, event timing, etc.).</p>
+<div class="textblock"><p>Interface for classes that can provide time information - two distinct notions of "now", not interchangeable: <a class="el" href="classaudio__tools_1_1_time_source.html#af6d703440364ac9907137b03765c9199">millis()</a> is real wall time; <a class="el" href="classaudio__tools_1_1_time_source.html#ae880a1e9b9f0ead8c1dd57fa4e03834f">playbackTime()</a> is however far actual processing has gotten, which is not the same thing whenever the two can diverge (a consumer blocked/starved, a paused source, ...). A consumer that must stay tied to genuine progress (e.g. <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html" title="Buffers a small, configurable amount of video (see setQueueBytes()) and renders it frame by frame fro...">VideoAudioSyncTask</a> scheduling video against actual decoded-audio playback, not merely time passing) should use <a class="el" href="classaudio__tools_1_1_time_source.html#ae880a1e9b9f0ead8c1dd57fa4e03834f">playbackTime()</a>, not <a class="el" href="classaudio__tools_1_1_time_source.html#af6d703440364ac9907137b03765c9199">millis()</a>. </p>
 <dl class="section note"><dt>Note</dt><dd>This is a pure virtual interface class and cannot be instantiated directly.</dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
@@ -128,8 +128,36 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Wall-clock elapsed time (ms) - real time passing, regardless of whatever this <a class="el" href="classaudio__tools_1_1_time_source.html" title="Interface for classes that can provide time information - two distinct notions of &quot;now&quot;,...">TimeSource</a> actually tracks. The default implementation just forwards to Arduino's own <a class="el" href="classaudio__tools_1_1_time_source.html#af6d703440364ac9907137b03765c9199">millis()</a>; override only if this <a class="el" href="classaudio__tools_1_1_time_source.html" title="Interface for classes that can provide time information - two distinct notions of &quot;now&quot;,...">TimeSource</a> needs a different wall-clock source - most subclasses should leave this alone and override <a class="el" href="classaudio__tools_1_1_time_source.html#ae880a1e9b9f0ead8c1dd57fa4e03834f">playbackTime()</a> instead. </p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html#a9dc38093b807cfcf6438feaf8b8cadc0">AudioTimeSourceStream</a>.</p>
+</div>
+</div>
+<a id="ae880a1e9b9f0ead8c1dd57fa4e03834f" name="ae880a1e9b9f0ead8c1dd57fa4e03834f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae880a1e9b9f0ead8c1dd57fa4e03834f">&#9670;&#160;</a></span>playbackTime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual uint32_t playbackTime </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Elapsed time (ms) derived purely from what this <a class="el" href="classaudio__tools_1_1_time_source.html" title="Interface for classes that can provide time information - two distinct notions of &quot;now&quot;,...">TimeSource</a> has actually processed so far - never extrapolated from, or otherwise dependent on, <a class="el" href="classaudio__tools_1_1_time_source.html#af6d703440364ac9907137b03765c9199">millis()</a>/wall-clock time (see <a class="el" href="classaudio__tools_1_1_time_source.html#af6d703440364ac9907137b03765c9199">millis()</a>'s own comment). Stalls exactly when processing stalls instead of continuing to advance the way <a class="el" href="classaudio__tools_1_1_time_source.html#af6d703440364ac9907137b03765c9199">millis()</a> does. The default implementation just forwards to <a class="el" href="classaudio__tools_1_1_time_source.html#af6d703440364ac9907137b03765c9199">millis()</a> (i.e. "nothing special is tracked, wall time is
+the best available approximation") - override this in any <a class="el" href="classaudio__tools_1_1_time_source.html" title="Interface for classes that can provide time information - two distinct notions of &quot;now&quot;,...">TimeSource</a> that actually tracks processed data instead (see <a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html" title="AudioTimeSourceStream: A stream that provides time information based on the audio data actually proce...">AudioTimeSourceStream</a>, <a class="el" href="_audio_i_o_8h.html">AudioTools/CoreAudio/AudioIO.h</a>). </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html#a008f9844c7e1731d60e18b642c0f506a">AudioTimeSourceStream</a>.</p>
 
 </div>
 </div>

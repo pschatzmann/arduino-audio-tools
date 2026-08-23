@@ -155,6 +155,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab5c9a665996d7df9d11fcad720f4db9c" id="r_ab5c9a665996d7df9d11fcad720f4db9c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_ring_buffer_s_p_s_c.html#ab5c9a665996d7df9d11fcad720f4db9c">resize</a> (size_t capacity) override</td></tr>
 <tr class="memdesc:ab5c9a665996d7df9d11fcad720f4db9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resizes the buffer if supported: returns false if not supported.  <br /></td></tr>
 <tr class="separator:ab5c9a665996d7df9d11fcad720f4db9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acff29ccbec1f64e9dc663bd071d0f058" id="r_acff29ccbec1f64e9dc663bd071d0f058"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_ring_buffer_s_p_s_c.html#acff29ccbec1f64e9dc663bd071d0f058">setUsePSRAM</a> (bool flag)</td></tr>
+<tr class="separator:acff29ccbec1f64e9dc663bd071d0f058"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a128a3f6e587ccc181112bb2892440990" id="r_a128a3f6e587ccc181112bb2892440990"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_ring_buffer_s_p_s_c.html#a128a3f6e587ccc181112bb2892440990">size</a> () override</td></tr>
 <tr class="separator:a128a3f6e587ccc181112bb2892440990"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6026e931dd6de99bbe07fafb875048f1" id="r_a6026e931dd6de99bbe07fafb875048f1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_ring_buffer_s_p_s_c.html#a6026e931dd6de99bbe07fafb875048f1">write</a> (T data) override</td></tr>
@@ -179,6 +181,7 @@ class audio_tools::RingBufferSPSC&lt; T &gt;</div><p>Lock-free Single-Producer S
 <li>readArray / writeArray use memcpy for bulk transfers and split them at the wrap-around point, giving at most two memcpy calls per operation.</li>
 </ul>
 <p>Not suitable for MPMC (multiple producers or consumers); use <a class="el" href="classaudio__tools_1_1_queue_lock_free.html" title="Lock-free MPMC queue.">QueueLockFree</a> for that.</p>
+<p>Backing storage defaults to plain new[]/delete[] (unaffected - existing callers, e.g. the I2S/USB audio TX/RX buffers, see no change at all). setUsePSRAM(true), called before the first <a class="el" href="classaudio__tools_1_1_ring_buffer_s_p_s_c.html#ab5c9a665996d7df9d11fcad720f4db9c" title="Resizes the buffer if supported: returns false if not supported.">resize()</a>, instead allocates from PSRAM via heap_caps_malloc() on ESP32 boards that have it (falls back to the plain new[] path anywhere else, silently) - useful for a buffer sized to soak up bursty backlogs (see e.g. <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html" title="Buffers a small, configurable amount of video (see setQueueBytes()) and renders it frame by frame fro...">VideoAudioSyncTask</a>) where a few hundred KB would be far too much to ask of internal RAM but is a rounding error against multiple MB of PSRAM. Requires a trivially- constructible/destructible T (true for the uint8_t every current caller uses) - heap_caps_malloc()/heap_caps_free() don't run either.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>Element type. Works for any trivially-copyable T; the bulk-copy optimisation is most effective for T=uint8_t (audio streams).</td></tr>
@@ -857,6 +860,34 @@ template&lt;typename T  = uint8_t&gt; </div>
 <p>Resizes the buffer if supported: returns false if not supported. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_base_buffer.html#a3ae9b97a38452cf187897592e1e0968a">BaseBuffer&lt; T &gt;</a>.</p>
+
+</div>
+</div>
+<a id="acff29ccbec1f64e9dc663bd071d0f058" name="acff29ccbec1f64e9dc663bd071d0f058"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acff29ccbec1f64e9dc663bd071d0f058">&#9670;&#160;</a></span>setUsePSRAM()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T  = uint8_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setUsePSRAM </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>flag</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
