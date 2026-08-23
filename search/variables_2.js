@@ -133,13 +133,14 @@ var searchData=
   ['byte_5fbuffer_130',['byte_buffer',['../classaudio__tools_1_1_w_a_v_decoder.html#aa697e397eb17a824bdd1debf33dd61e4',1,'audio_tools::WAVDecoder']]],
   ['byte_5ffactor_131',['byte_factor',['../classaudio__tools_1_1_encoded_audio_stream.html#a61f3f81b0305417e31494e31cf5abc67',1,'audio_tools::EncodedAudioStream']]],
   ['byte_5frate_132',['byte_rate',['../structaudio__tools_1_1_wav_i_m_a_audio_info.html#aef44d74aa5fd25e34cdd1e1701a23d9c',1,'audio_tools::WavIMAAudioInfo::byte_rate'],['../structaudio__tools_1_1_w_a_v_audio_info.html#aef44d74aa5fd25e34cdd1e1701a23d9c',1,'audio_tools::WAVAudioInfo::byte_rate']]],
-  ['bytes_133',['bytes',['../classaudio__tools_1_1_i_p_address.html#aac9cc4cbc93c66d4b3e0e9e037695d5a',1,'audio_tools::IPAddress']]],
-  ['bytes_5fper_5fdecoded_5fblock_134',['bytes_per_decoded_block',['../classaudio__tools_1_1_wav_i_m_a_decoder.html#a6a5e04a7398c9a7ddec1656ed69bea87',1,'audio_tools::WavIMADecoder']]],
-  ['bytes_5fper_5fencoded_5fblock_135',['bytes_per_encoded_block',['../classaudio__tools_1_1_wav_i_m_a_decoder.html#ae8f0417d5355301e6ce68e91c17141f3',1,'audio_tools::WavIMADecoder']]],
-  ['bytes_5fper_5fframe_136',['bytes_per_frame',['../classaudio__tools_1_1_resample_stream.html#aeff5997abcf0c88c9434923e2ffd032b',1,'audio_tools::ResampleStream::bytes_per_frame'],['../classaudio__tools_1_1_faust_stream.html#aeff5997abcf0c88c9434923e2ffd032b',1,'audio_tools::FaustStream::bytes_per_frame']]],
-  ['bytes_5fper_5fsample_137',['bytes_per_sample',['../classaudio__tools_1_1_video_muxer.html#a1635288b4b2e8eefa3fc1a7f3f474bab',1,'audio_tools::VideoMuxer::bytes_per_sample'],['../classaudio__tools_1_1_faust_stream.html#a9459b2e7b5be656d4ff28ea1b274e20b',1,'audio_tools::FaustStream::bytes_per_sample']]],
-  ['bytes_5fper_5fsecond_138',['bytes_per_second',['../classaudio__tools_1_1_measuring_stream.html#a9546d93d065a4d24eaa949f2f179eb0d',1,'audio_tools::MeasuringStream']]],
-  ['bytes_5freceived_139',['bytes_received',['../classaudio__tools_1_1_v_b_a_n_stream.html#a45b8f3efe5394dc3ebb4318f5b476b2b',1,'audio_tools::VBANStream']]],
-  ['bytes_5fsent_5f_140',['bytes_sent_',['../classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#a6dc59e626bdc6f5fda890a7b889bac94',1,'audio_tools::I2SDriverESP32V1']]],
-  ['bytes_5fwritten_5f_141',['bytes_written_',['../classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#a062afc8dc0720c21a065143adf0d26c3',1,'audio_tools::I2SDriverESP32V1']]]
+  ['byte_5fswap_133',['byte_swap',['../classaudio__tools_1_1_m_j_p_e_g_decoder.html#a4b93a2a367520377ad6d4d167ac2e35f',1,'audio_tools::MJPEGDecoder']]],
+  ['bytes_134',['bytes',['../classaudio__tools_1_1_i_p_address.html#aac9cc4cbc93c66d4b3e0e9e037695d5a',1,'audio_tools::IPAddress']]],
+  ['bytes_5fper_5fdecoded_5fblock_135',['bytes_per_decoded_block',['../classaudio__tools_1_1_wav_i_m_a_decoder.html#a6a5e04a7398c9a7ddec1656ed69bea87',1,'audio_tools::WavIMADecoder']]],
+  ['bytes_5fper_5fencoded_5fblock_136',['bytes_per_encoded_block',['../classaudio__tools_1_1_wav_i_m_a_decoder.html#ae8f0417d5355301e6ce68e91c17141f3',1,'audio_tools::WavIMADecoder']]],
+  ['bytes_5fper_5fframe_137',['bytes_per_frame',['../classaudio__tools_1_1_resample_stream.html#aeff5997abcf0c88c9434923e2ffd032b',1,'audio_tools::ResampleStream::bytes_per_frame'],['../classaudio__tools_1_1_faust_stream.html#aeff5997abcf0c88c9434923e2ffd032b',1,'audio_tools::FaustStream::bytes_per_frame']]],
+  ['bytes_5fper_5fsample_138',['bytes_per_sample',['../classaudio__tools_1_1_faust_stream.html#a9459b2e7b5be656d4ff28ea1b274e20b',1,'audio_tools::FaustStream::bytes_per_sample'],['../classaudio__tools_1_1_video_muxer.html#a1635288b4b2e8eefa3fc1a7f3f474bab',1,'audio_tools::VideoMuxer::bytes_per_sample']]],
+  ['bytes_5fper_5fsecond_139',['bytes_per_second',['../classaudio__tools_1_1_measuring_stream.html#a9546d93d065a4d24eaa949f2f179eb0d',1,'audio_tools::MeasuringStream']]],
+  ['bytes_5freceived_140',['bytes_received',['../classaudio__tools_1_1_v_b_a_n_stream.html#a45b8f3efe5394dc3ebb4318f5b476b2b',1,'audio_tools::VBANStream']]],
+  ['bytes_5fsent_5f_141',['bytes_sent_',['../classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#a6dc59e626bdc6f5fda890a7b889bac94',1,'audio_tools::I2SDriverESP32V1']]],
+  ['bytes_5fwritten_5f_142',['bytes_written_',['../classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#a062afc8dc0720c21a065143adf0d26c3',1,'audio_tools::I2SDriverESP32V1']]]
 ];

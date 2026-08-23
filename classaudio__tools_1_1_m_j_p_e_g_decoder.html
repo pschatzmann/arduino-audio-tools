@@ -109,6 +109,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:acba365cc28eb702040c382646cfb0a7a" id="r_acba365cc28eb702040c382646cfb0a7a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#acba365cc28eb702040c382646cfb0a7a">begin</a> () override</td></tr>
 <tr class="memdesc:acba365cc28eb702040c382646cfb0a7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the decoder (allocates its picture buffers, etc).  <br /></td></tr>
 <tr class="separator:acba365cc28eb702040c382646cfb0a7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a156876f86ebc69de4ae0b4bbff826231" id="r_a156876f86ebc69de4ae0b4bbff826231"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#a156876f86ebc69de4ae0b4bbff826231">byteSwap</a> () const</td></tr>
+<tr class="separator:a156876f86ebc69de4ae0b4bbff826231"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64e9fa75beda50a9e8400ee0d4e61984" id="r_a64e9fa75beda50a9e8400ee0d4e61984"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a> () override</td></tr>
 <tr class="memdesc:a64e9fa75beda50a9e8400ee0d4e61984"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases the decoder's resources.  <br /></td></tr>
 <tr class="separator:a64e9fa75beda50a9e8400ee0d4e61984"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -117,6 +119,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8419abee0c4d380be1cb8ff963fb8d0a" id="r_a8419abee0c4d380be1cb8ff963fb8d0a"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a8419abee0c4d380be1cb8ff963fb8d0a">getWriteTimeMs</a> () const</td></tr>
 <tr class="memdesc:a8419abee0c4d380be1cb8ff963fb8d0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional: returns the time (ms) spent in the last <a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">write()</a> call.  <br /></td></tr>
 <tr class="separator:a8419abee0c4d380be1cb8ff963fb8d0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd16630f3db4bcac2f0677b7197f3af9" id="r_abd16630f3db4bcac2f0677b7197f3af9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#abd16630f3db4bcac2f0677b7197f3af9">isKeyFrame</a> (const uint8_t *data, size_t len) override</td></tr>
+<tr class="separator:abd16630f3db4bcac2f0677b7197f3af9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c379b2bb809c0838ca1f6e401230fb0" id="r_a8c379b2bb809c0838ca1f6e401230fb0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#a8c379b2bb809c0838ca1f6e401230fb0">setByteSwap</a> (bool active)</td></tr>
+<tr class="separator:a8c379b2bb809c0838ca1f6e401230fb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1220e7e3542f5a84c21fe2f7cef194c" id="r_ae1220e7e3542f5a84c21fe2f7cef194c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#ae1220e7e3542f5a84c21fe2f7cef194c">setOutput</a> (<a class="el" href="class_print.html">Print</a> &amp;out)</td></tr>
 <tr class="separator:ae1220e7e3542f5a84c21fe2f7cef194c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e9c9d6d2876f620f49313a51c39f5b1" id="r_a8e9c9d6d2876f620f49313a51c39f5b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#a8e9c9d6d2876f620f49313a51c39f5b1">setOutput</a> (<a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;out)</td></tr>
@@ -139,14 +145,14 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:a4b93a2a367520377ad6d4d167ac2e35f" id="r_a4b93a2a367520377ad6d4d167ac2e35f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#a4b93a2a367520377ad6d4d167ac2e35f">byte_swap</a> = true</td></tr>
+<tr class="separator:a4b93a2a367520377ad6d4d167ac2e35f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8af4e93d1de1594db8accdf886aea05" id="r_af8af4e93d1de1594db8accdf886aea05"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#af8af4e93d1de1594db8accdf886aea05">frame_buffer</a></td></tr>
 <tr class="separator:af8af4e93d1de1594db8accdf886aea05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02cf9e3b25a009e9973daf23d6203fd3" id="r_a02cf9e3b25a009e9973daf23d6203fd3"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#a02cf9e3b25a009e9973daf23d6203fd3">height_</a> = 0</td></tr>
 <tr class="separator:a02cf9e3b25a009e9973daf23d6203fd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21840f87780a74e6fb0ce8cb9194f3f3" id="r_a21840f87780a74e6fb0ce8cb9194f3f3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#a21840f87780a74e6fb0ce8cb9194f3f3">img_vector</a></td></tr>
 <tr class="separator:a21840f87780a74e6fb0ce8cb9194f3f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9174504488855f27d1fdb6b2ba7f20ed" id="r_a9174504488855f27d1fdb6b2ba7f20ed"><td class="memItemLeft" align="right" valign="top">JPEGDecoder&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#a9174504488855f27d1fdb6b2ba7f20ed">jpeg_decoder</a></td></tr>
-<tr class="separator:a9174504488855f27d1fdb6b2ba7f20ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa42c30e02e51ec7cc38ea4ab215e0db4" id="r_aa42c30e02e51ec7cc38ea4ab215e0db4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#aa42c30e02e51ec7cc38ea4ab215e0db4">p_out</a> = nullptr</td></tr>
 <tr class="separator:aa42c30e02e51ec7cc38ea4ab215e0db4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f9b668b9f2805f1dcca5a9ffc0cb15c" id="r_a2f9b668b9f2805f1dcca5a9ffc0cb15c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#a2f9b668b9f2805f1dcca5a9ffc0cb15c">p_out_video</a> = nullptr</td></tr>
@@ -161,6 +167,7 @@ Protected Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Motion-JPEG video decoder: wraps JPEGDecoder (<a href="https://github.com/Bodmer/JPEGDecoder">https://github.com/Bodmer/JPEGDecoder</a>) as a <a class="el" href="classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 - CodecH264....">VideoDecoder</a>, so it can be plugged directly into e.g. <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#aa9139d7cd7756a3bf8603981959afb53">DemuxerAVI::setOutputVideo()</a>/ <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#aee3d456e79d27d60f9b6ade892fcc88c">DemuxerMP4::setOutputVideo()</a> - the same role <a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a> (<a class="el" href="_codec_h264_8h.html">CodecH264.h</a>) and <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html" title="MPEG-1 (part 2) video decoder wrapper around TinyMPGDecoder.">MPGDecoder</a> (<a class="el" href="_codec_m_p_g_8h.html">CodecMPG.h</a>) play for their own codecs. Named "MJPEGDecoder" rather than reusing JPEGDecoder's own name to avoid shadowing that (global-namespace) class from within this one. </p>
 <p><a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>/flush() implement the <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> contract (see <a class="el" href="_video_8h.html">Video.h</a>), but unlike H264Decoder/MPGDecoder - which decode incrementally as Annex-B/ PES bytes arrive, with no separate "frame complete" signal needed - a bare JPEG byte stream has no equivalent self-framing a demuxer can use to decode early. <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> therefore just accumulates one JPEG image's bytes, and <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a> (called by e.g. DemuxerAVI/DemuxerMP4 at each frame boundary) decodes the assembled image directly into a full-frame RGB565 buffer and writes it to the target configured via <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#ae1220e7e3542f5a84c21fe2f7cef194c">setOutput()</a>, one <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call per decoded picture - same convention as H264Decoder/ <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html" title="MPEG-1 (part 2) video decoder wrapper around TinyMPGDecoder.">MPGDecoder</a>, so any <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> (<a class="el" href="classaudio__tools_1_1_output_t_f_t__e_s_p_i.html" title="Bridges VideoDecoder&#39;s write() calls to the TFT - VideoDecoder always hands over one complete frame p...">OutputTFT_eSPI</a>, <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html" title="Bridges VideoDecoder&#39;s write() calls to a TinyGPU DisplayDriver (e.g. ILI9341Driver,...">OutputTinyGPU</a>, <a class="el" href="classaudio__tools_1_1_output_open_c_v.html" title="Display a video frame with OpenCV, to be used on the desktop - VideoFormat::MJPEG (the default) expec...">OutputOpenCV</a>, ...) works unchanged regardless of which codec produced the picture.</p>
+<p>Drives JPEGDecoder's global JpegDec instance (declared extern in JPEGDecoder.h) rather than a locally constructed JPEGDecoder object: the library's picojpeg byte-supply callback is a static function hardwired to JpegDec.thisPtr regardless of which instance's decodeArray() is actually running (see JPEGDecoder.cpp's pjpeg_callback()), so any other instance's decode silently starves for input (JpegDec's own file-source state is never configured) and fails instantly with width/height left at 0 - only the global instance actually works. Fine here since a sketch only ever decodes one MJPEG stream at a time.</p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -268,6 +275,31 @@ Protected Attributes</h2></td></tr>
 <p>Initializes the decoder (allocates its picture buffers, etc). </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_video_decoder.html#ae8a0d9ca63f8bb3de100e347c3f3bca4">VideoDecoder</a>.</p>
+
+</div>
+</div>
+<a id="a156876f86ebc69de4ae0b4bbff826231" name="a156876f86ebc69de4ae0b4bbff826231"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a156876f86ebc69de4ae0b4bbff826231">&#9670;&#160;</a></span>byteSwap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool byteSwap </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -380,6 +412,72 @@ Protected Attributes</h2></td></tr>
 <p>Optional: returns the time (ms) spent in the last <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call. </p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_output_t_f_t__e_s_p_i.html#a5efb8ccd37b8cc2749358e5da69adddc">OutputTFT_eSPI</a>, <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a5efb8ccd37b8cc2749358e5da69adddc">OutputTinyGPU</a>, and <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#ae3d58e56c2b7dc75a50b36b357ffef93">OutputOpenCV</a>.</p>
+
+</div>
+</div>
+<a id="abd16630f3db4bcac2f0677b7197f3af9" name="abd16630f3db4bcac2f0677b7197f3af9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd16630f3db4bcac2f0677b7197f3af9">&#9670;&#160;</a></span>isKeyFrame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isKeyFrame </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>See <a class="el" href="classaudio__tools_1_1_video_output.html#ae90cddad4cdc7ab4f54c2f5976e6eabf">VideoOutput::isKeyFrame()</a> - always true: Motion-JPEG is an all-intra format, every frame is a complete, independently decodable image with no inter-frame prediction (the same property that makes an H.264 IDR frame or an MPEG-1 I-picture "key", just true of every frame here instead of periodically). This matters beyond classification - <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html" title="Buffers a small, configurable amount of video (see setQueueBytes()) and renders it frame by frame fro...">VideoAudioSyncTask</a>'s awaiting_keyframe recovery latch (set after a resync) only clears once a frame reports <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#abd16630f3db4bcac2f0677b7197f3af9">isKeyFrame()</a>==true; returning false here would leave every frame classified as non-key, so once any resync ever fired, that latch would never clear and rendering would silently stall forever. </p>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_output.html#ae90cddad4cdc7ab4f54c2f5976e6eabf">VideoOutput</a>.</p>
+
+</div>
+</div>
+<a id="a8c379b2bb809c0838ca1f6e401230fb0" name="a8c379b2bb809c0838ca1f6e401230fb0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c379b2bb809c0838ca1f6e401230fb0">&#9670;&#160;</a></span>setByteSwap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setByteSwap </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>active</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Swaps the two bytes of every decoded RGB565 pixel before it reaches <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#ae1220e7e3542f5a84c21fe2f7cef194c">setOutput()</a>'s target - on by default. JpegDec.read() packs each pixel in the CPU's native uint16_t byte order (little-endian on ESP32/most Arduino targets), but SPI TFT panels (ILI9341 etc.) expect RGB565 transmitted big-endian - without the swap, colors come out visibly wrong (channels scrambled, not just a hue shift). Turn off only if your <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> target already performs its own byte-swap (e.g. some display libraries' pushColors() variants). </p>
 
 </div>
 </div>
@@ -600,6 +698,28 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a4b93a2a367520377ad6d4d167ac2e35f" name="a4b93a2a367520377ad6d4d167ac2e35f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b93a2a367520377ad6d4d167ac2e35f">&#9670;&#160;</a></span>byte_swap</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool byte_swap = true</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="af8af4e93d1de1594db8accdf886aea05" name="af8af4e93d1de1594db8accdf886aea05"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af8af4e93d1de1594db8accdf886aea05">&#9670;&#160;</a></span>frame_buffer</h2>
 
@@ -655,28 +775,6 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;uint8_t&gt; img_vector</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a9174504488855f27d1fdb6b2ba7f20ed" name="a9174504488855f27d1fdb6b2ba7f20ed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9174504488855f27d1fdb6b2ba7f20ed">&#9670;&#160;</a></span>jpeg_decoder</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">JPEGDecoder jpeg_decoder</td>
         </tr>
       </table>
   </td>

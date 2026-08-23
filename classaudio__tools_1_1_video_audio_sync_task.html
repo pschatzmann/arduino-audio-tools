@@ -77,7 +77,6 @@ $(function() {
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
-<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="#pro-static-attribs">Static Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_video_audio_sync_task-members.html">List of all members</a>  </div>
@@ -176,13 +175,10 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:ae1e55cd7dd035d68d8e67d0f9b497254"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9906569f082d51539d28cea425d98067" id="r_a9906569f082d51539d28cea425d98067"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a9906569f082d51539d28cea425d98067">drainQueueKeepingLastKeyframe</a> (uint32_t &amp;out_target_ms)</td></tr>
 <tr class="separator:a9906569f082d51539d28cea425d98067"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa92e4404d636bf4ac4976b017a173cb8" id="r_aa92e4404d636bf4ac4976b017a173cb8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#aa92e4404d636bf4ac4976b017a173cb8">isKeyFrame</a> (const uint8_t *data, size_t len)</td></tr>
+<tr class="separator:aa92e4404d636bf4ac4976b017a173cb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5714552e88585f030d51a3c31c65e53d" id="r_a5714552e88585f030d51a3c31c65e53d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a5714552e88585f030d51a3c31c65e53d">taskLoop</a> ()</td></tr>
 <tr class="separator:a5714552e88585f030d51a3c31c65e53d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
-Static Protected Member Functions</h2></td></tr>
-<tr class="memitem:a1ff5a325c5d3663d316d01321a21f61e" id="r_a1ff5a325c5d3663d316d01321a21f61e"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a1ff5a325c5d3663d316d01321a21f61e">isKeyFrame</a> (const uint8_t *data, size_t len)</td></tr>
-<tr class="separator:a1ff5a325c5d3663d316d01321a21f61e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -644,7 +640,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Number of I-frames (key frames) actually rendered so far - see <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a1ff5a325c5d3663d316d01321a21f61e">isKeyFrame()</a> for how a frame is classified. </p>
+<p>Number of I-frames (key frames) actually rendered so far - see <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#aa92e4404d636bf4ac4976b017a173cb8">isKeyFrame()</a> for how a frame is classified. </p>
 
 </div>
 </div>
@@ -730,8 +726,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a1ff5a325c5d3663d316d01321a21f61e" name="a1ff5a325c5d3663d316d01321a21f61e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1ff5a325c5d3663d316d01321a21f61e">&#9670;&#160;</a></span>isKeyFrame()</h2>
+<a id="aa92e4404d636bf4ac4976b017a173cb8" name="aa92e4404d636bf4ac4976b017a173cb8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa92e4404d636bf4ac4976b017a173cb8">&#9670;&#160;</a></span>isKeyFrame()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -740,7 +736,7 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static bool isKeyFrame </td>
+          <td class="memname">bool isKeyFrame </td>
           <td>(</td>
           <td class="paramtype">const uint8_t *&#160;</td>
           <td class="paramname"><em>data</em>, </td>
@@ -759,11 +755,13 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Best-effort I/P classification - scans for an H.264 Annex-B IDR slice NAL (see <a class="el" href="group__video.html#ga24e3bee07bdb300753b137288bfa33c3" title="True if the given Annex-B H.264 access unit contains an IDR slice NAL unit (nal_unit_type 5) - the re...">isH264KeyFrame()</a>). Meaningful for <a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a> targets only; other codecs just never match, so every frame counts as "P" - harmless, just not a real split for those formats. </p>
+<p>I/P classification, both for the <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a61bb2fabd1c085db6d5a54ae9691f9cb">frameCountI()</a>/frameCountP() stats and for deciding which frames <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>/a resync may ever drop - delegates to the target's own <a class="el" href="classaudio__tools_1_1_video_output.html#ae90cddad4cdc7ab4f54c2f5976e6eabf">VideoOutput::isKeyFrame()</a> (see its comment), since the target is the one that actually knows its bitstream format. </p>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_output.html#ae90cddad4cdc7ab4f54c2f5976e6eabf">VideoOutput</a>.</p>
 
 </div>
 </div>
@@ -1246,7 +1244,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Enqueues one complete frame. Unlike the general <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> contract (<a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> may be called several times per frame, finalized by <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a>), this class requires the whole frame in one call - every current caller (DemuxerAVI/DemuxerMP4/DemuxerMPG) already does this; a producer that split a frame across multiple <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> calls would have each piece enqueued as its own separate, undecodable "frame" - undetected.</p>
-<p>Tags the frame with its scheduled presentation time (frame_index / fps), classifies it I vs P (see <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a1ff5a325c5d3663d316d01321a21f61e">isKeyFrame()</a>), and appends header + bytes to the background task's queue. Never renders inline - only the background task's <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>+<a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a> into the real target does that, once the frame's scheduled time arrives.</p>
+<p>Tags the frame with its scheduled presentation time (frame_index / fps), classifies it I vs P (see <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#aa92e4404d636bf4ac4976b017a173cb8">isKeyFrame()</a>), and appends header + bytes to the background task's queue. Never renders inline - only the background task's <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>+<a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a> into the real target does that, once the frame's scheduled time arrives.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">data</td><td>the complete frame's bytes - copied before this call returns, so the caller can reuse/discard the buffer immediately. </td></tr>

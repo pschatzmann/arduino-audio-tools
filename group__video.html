@@ -300,6 +300,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga24e3bee07bdb300753b137288bfa33c3" id="r_ga24e3bee07bdb300753b137288bfa33c3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__video.html#ga24e3bee07bdb300753b137288bfa33c3">isH264KeyFrame</a> (const uint8_t *data, size_t len)</td></tr>
 <tr class="memdesc:ga24e3bee07bdb300753b137288bfa33c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if the given Annex-B H.264 access unit contains an IDR slice NAL unit (nal_unit_type 5) - the reliable way to tell a real keyframe/sync-sample apart from a P-frame, since nothing in the byte layout itself says so without inspecting NAL headers. Used e.g. to determine <a class="el" href="classaudio__tools_1_1_muxer.html#a8f5833dcaa31800a36cbe2977a26ed0d">Muxer::addVideoFrame()</a>'s isKeyFrame argument for an already-encoded <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a8ba63b54352f7053b055235a9ec7ac09">VideoFormat::H264</a> frame.  <br /></td></tr>
 <tr class="separator:ga24e3bee07bdb300753b137288bfa33c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga310900d2a0661bc3d56d33eaa298eb65" id="r_ga310900d2a0661bc3d56d33eaa298eb65"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__video.html#ga310900d2a0661bc3d56d33eaa298eb65">isMpeg1KeyFrame</a> (const uint8_t *data, size_t len)</td></tr>
+<tr class="memdesc:ga310900d2a0661bc3d56d33eaa298eb65"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if the given MPEG-1/2 video access unit's picture header declares picture_coding_type == 1 (I-picture) - the MPEG equivalent of <a class="el" href="group__video.html#ga24e3bee07bdb300753b137288bfa33c3" title="True if the given Annex-B H.264 access unit contains an IDR slice NAL unit (nal_unit_type 5) - the re...">isH264KeyFrame()</a>. Layout (ISO/IEC 11172-2): a 00 00 01 00 picture_start_code is immediately followed by temporal_reference (10 bits) then picture_coding_type (3 bits), so the type field always falls in bits 5-3 of the byte right after the 2-byte temporal_reference span (i.e. 6 bytes into the access unit, counting the start code).  <br /></td></tr>
+<tr class="separator:ga310900d2a0661bc3d56d33eaa298eb65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gac56f1ce047268d2e2a8ad23ceaabfc33" id="r_gac56f1ce047268d2e2a8ad23ceaabfc33"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__video.html#gac56f1ce047268d2e2a8ad23ceaabfc33">isWavFormat</a> (<a class="el" href="group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1">AudioFormat</a> format)</td></tr>
 <tr class="memdesc:gac56f1ce047268d2e2a8ad23ceaabfc33"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if the wav code is handled via the WAV decoder (i.e. <a class="el" href="group__video.html#ga97ce8b97f4fff29a15349ad04bafba32" title="Provides the mime type for a AudioFormat wav code, or nullptr if not known/mapped.">toMime()</a> maps it to "audio/wav": PCM and all ADPCM variants).  <br /></td></tr>
 <tr class="separator:gac56f1ce047268d2e2a8ad23ceaabfc33"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -563,6 +566,44 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>True if the given Annex-B H.264 access unit contains an IDR slice NAL unit (nal_unit_type 5) - the reliable way to tell a real keyframe/sync-sample apart from a P-frame, since nothing in the byte layout itself says so without inspecting NAL headers. Used e.g. to determine <a class="el" href="classaudio__tools_1_1_muxer.html#a8f5833dcaa31800a36cbe2977a26ed0d">Muxer::addVideoFrame()</a>'s isKeyFrame argument for an already-encoded <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a8ba63b54352f7053b055235a9ec7ac09">VideoFormat::H264</a> frame. </p>
+
+</div>
+</div>
+<a id="ga310900d2a0661bc3d56d33eaa298eb65" name="ga310900d2a0661bc3d56d33eaa298eb65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga310900d2a0661bc3d56d33eaa298eb65">&#9670;&#160;</a></span>isMpeg1KeyFrame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isMpeg1KeyFrame </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>True if the given MPEG-1/2 video access unit's picture header declares picture_coding_type == 1 (I-picture) - the MPEG equivalent of <a class="el" href="group__video.html#ga24e3bee07bdb300753b137288bfa33c3" title="True if the given Annex-B H.264 access unit contains an IDR slice NAL unit (nal_unit_type 5) - the re...">isH264KeyFrame()</a>. Layout (ISO/IEC 11172-2): a 00 00 01 00 picture_start_code is immediately followed by temporal_reference (10 bits) then picture_coding_type (3 bits), so the type field always falls in bits 5-3 of the byte right after the 2-byte temporal_reference span (i.e. 6 bytes into the access unit, counting the start code). </p>
 
 </div>
 </div>

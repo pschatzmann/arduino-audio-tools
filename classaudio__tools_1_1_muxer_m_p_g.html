@@ -112,7 +112,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a2a952fb597dd191aa79a99230c53ca3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaef61b72b719ea9786bab1764c837337" id="r_aaef61b72b719ea9786bab1764c837337"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#aaef61b72b719ea9786bab1764c837337">addRGB565Frame</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="separator:aaef61b72b719ea9786bab1764c837337"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23a19d752e2d606a96229c332dc15877" id="r_a23a19d752e2d606a96229c332dc15877"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a23a19d752e2d606a96229c332dc15877">addVideoFrame</a> (const uint8_t *data, size_t len, bool isKeyFrame=true) override</td></tr>
+<tr class="memitem:a23a19d752e2d606a96229c332dc15877" id="r_a23a19d752e2d606a96229c332dc15877"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a23a19d752e2d606a96229c332dc15877">addVideoFrame</a> (const uint8_t *data, size_t len, bool <a class="el" href="classaudio__tools_1_1_video_output.html#ae90cddad4cdc7ab4f54c2f5976e6eabf">isKeyFrame</a>=true) override</td></tr>
 <tr class="separator:a23a19d752e2d606a96229c332dc15877"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b94a714d4c9cf950b45f0f9ad569455" id="r_a9b94a714d4c9cf950b45f0f9ad569455"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a9b94a714d4c9cf950b45f0f9ad569455">addYUV422Frame</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="separator:a9b94a714d4c9cf950b45f0f9ad569455"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -136,6 +136,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8419abee0c4d380be1cb8ff963fb8d0a" id="r_a8419abee0c4d380be1cb8ff963fb8d0a"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a8419abee0c4d380be1cb8ff963fb8d0a">getWriteTimeMs</a> () const</td></tr>
 <tr class="memdesc:a8419abee0c4d380be1cb8ff963fb8d0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional: returns the time (ms) spent in the last <a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">write()</a> call.  <br /></td></tr>
 <tr class="separator:a8419abee0c4d380be1cb8ff963fb8d0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae90cddad4cdc7ab4f54c2f5976e6eabf" id="r_ae90cddad4cdc7ab4f54c2f5976e6eabf"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#ae90cddad4cdc7ab4f54c2f5976e6eabf">isKeyFrame</a> (const uint8_t *data, size_t len)</td></tr>
+<tr class="separator:ae90cddad4cdc7ab4f54c2f5976e6eabf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae125d7c8cee8961766e6e5486aa860de" id="r_ae125d7c8cee8961766e6e5486aa860de"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#ae125d7c8cee8961766e6e5486aa860de">mimeVideo</a> () override</td></tr>
 <tr class="separator:ae125d7c8cee8961766e6e5486aa860de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a90622bd78258a36bbcf63426b28307ac" id="r_a90622bd78258a36bbcf63426b28307ac"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a90622bd78258a36bbcf63426b28307ac">operator bool</a> () override</td></tr>
@@ -822,6 +824,45 @@ Static Protected Attributes</h2></td></tr>
 <p>Optional: returns the time (ms) spent in the last <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call. </p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_output_t_f_t__e_s_p_i.html#a5efb8ccd37b8cc2749358e5da69adddc">OutputTFT_eSPI</a>, <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a5efb8ccd37b8cc2749358e5da69adddc">OutputTinyGPU</a>, and <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#ae3d58e56c2b7dc75a50b36b357ffef93">OutputOpenCV</a>.</p>
+
+</div>
+</div>
+<a id="ae90cddad4cdc7ab4f54c2f5976e6eabf" name="ae90cddad4cdc7ab4f54c2f5976e6eabf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae90cddad4cdc7ab4f54c2f5976e6eabf">&#9670;&#160;</a></span>isKeyFrame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool isKeyFrame </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>True if <code>data</code> (one complete encoded frame, as handed to <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>) is a keyframe/sync-sample - self-contained, decodable without any earlier frame. Used e.g. by <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html" title="Buffers a small, configurable amount of video (see setQueueBytes()) and renders it frame by frame fro...">VideoAudioSyncTask</a> to decide which frames are safe to drop, and whether it's safe to resume decoding after abandoning a backlog (see its own class comment). Default false: a plain <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> doesn't know or care about codec structure - override this in a decoder for the bitstream format it actually parses (see H264Decoder/H264DecoderESP32S3's <a class="el" href="group__video.html#ga24e3bee07bdb300753b137288bfa33c3" title="True if the given Annex-B H.264 access unit contains an IDR slice NAL unit (nal_unit_type 5) - the re...">isH264KeyFrame()</a>-based override, <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html" title="MPEG-1 (part 2) video decoder wrapper around TinyMPGDecoder.">MPGDecoder</a>'s <a class="el" href="group__video.html#ga310900d2a0661bc3d56d33eaa298eb65" title="True if the given MPEG-1/2 video access unit&#39;s picture header declares picture_coding_type == 1 (I-pi...">isMpeg1KeyFrame()</a>- based one). Getting this right matters beyond bookkeeping: a target whose frames are never recognized as keyframes can leave a caller like <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html" title="Buffers a small, configurable amount of video (see setQueueBytes()) and renders it frame by frame fro...">VideoAudioSyncTask</a> unable to ever resume after a resync. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#aa92e4404d636bf4ac4976b017a173cb8">VideoAudioSyncTask</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder.html#abd16630f3db4bcac2f0677b7197f3af9">H264Decoder</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#abd16630f3db4bcac2f0677b7197f3af9">H264DecoderESP32S3&lt; Alloc &gt;</a>, <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#abd16630f3db4bcac2f0677b7197f3af9">MJPEGDecoder</a>, and <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#abd16630f3db4bcac2f0677b7197f3af9">MPGDecoder</a>.</p>
 
 </div>
 </div>

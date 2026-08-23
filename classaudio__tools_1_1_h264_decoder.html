@@ -121,6 +121,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8419abee0c4d380be1cb8ff963fb8d0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9649a3c36b3d2060e9b8bf174f9048e" id="r_ae9649a3c36b3d2060e9b8bf174f9048e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#ae9649a3c36b3d2060e9b8bf174f9048e">hasError</a> ()</td></tr>
 <tr class="separator:ae9649a3c36b3d2060e9b8bf174f9048e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd16630f3db4bcac2f0677b7197f3af9" id="r_abd16630f3db4bcac2f0677b7197f3af9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#abd16630f3db4bcac2f0677b7197f3af9">isKeyFrame</a> (const uint8_t *data, size_t len) override</td></tr>
+<tr class="memdesc:abd16630f3db4bcac2f0677b7197f3af9"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="classaudio__tools_1_1_video_output.html#ae90cddad4cdc7ab4f54c2f5976e6eabf">VideoOutput::isKeyFrame()</a> - scans for an Annex-B IDR slice NAL.  <br /></td></tr>
+<tr class="separator:abd16630f3db4bcac2f0677b7197f3af9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8758c5dbc5f1a35e327670cb8cac90c" id="r_ab8758c5dbc5f1a35e327670cb8cac90c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#ab8758c5dbc5f1a35e327670cb8cac90c">setMaxRefFrames</a> (int n)</td></tr>
 <tr class="separator:ab8758c5dbc5f1a35e327670cb8cac90c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1220e7e3542f5a84c21fe2f7cef194c" id="r_ae1220e7e3542f5a84c21fe2f7cef194c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#ae1220e7e3542f5a84c21fe2f7cef194c">setOutput</a> (<a class="el" href="class_print.html">Print</a> &amp;out)</td></tr>
@@ -413,6 +416,46 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>True if the most recent <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call ended in a bitstream error or hit an unsupported stream feature. </p>
+
+</div>
+</div>
+<a id="abd16630f3db4bcac2f0677b7197f3af9" name="abd16630f3db4bcac2f0677b7197f3af9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd16630f3db4bcac2f0677b7197f3af9">&#9670;&#160;</a></span>isKeyFrame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isKeyFrame </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>See <a class="el" href="classaudio__tools_1_1_video_output.html#ae90cddad4cdc7ab4f54c2f5976e6eabf">VideoOutput::isKeyFrame()</a> - scans for an Annex-B IDR slice NAL. </p>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_output.html#ae90cddad4cdc7ab4f54c2f5976e6eabf">VideoOutput</a>.</p>
 
 </div>
 </div>
