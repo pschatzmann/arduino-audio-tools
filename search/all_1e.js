@@ -138,7 +138,7 @@ var searchData=
   ['_7equeuezephyr_135',['~QueueZephyr',['../classaudio__tools_1_1_queue_zephyr.html#a16a44bc4e3ec0e293b278218448d2ce7',1,'audio_tools::QueueZephyr']]],
   ['_7ereedsolomon_136',['~ReedSolomon',['../class_r_s_1_1_reed_solomon.html#a9cd2e36ac70495fc50b78688c0ffda80',1,'RS::ReedSolomon']]],
   ['_7eringbufferfile_137',['~RingBufferFile',['../classaudio__tools_1_1_ring_buffer_file.html#a6d122cbd78f2fb090c73c23b7551401d',1,'audio_tools::RingBufferFile']]],
-  ['_7eringbufferspsc_138',['~RingBufferSPSC',['../classaudio__tools_1_1_ring_buffer_s_p_s_c.html#a5da0ea7b783fda28004b992b9b54e74d',1,'audio_tools::RingBufferSPSC']]],
+  ['_7eringbufferspsc_138',['~RingBufferSPSC',['../classaudio__tools_1_1_ring_buffer_s_p_s_c.html#a65962804ee00fd73fbbcc9cc8bdd1c68',1,'audio_tools::RingBufferSPSC']]],
   ['_7ertspaudiosource_139',['~RTSPAudioSource',['../classaudio__tools_1_1_r_t_s_p_audio_source.html#abe7346f8ce2e109594993a4bca003cf3',1,'audio_tools::RTSPAudioSource']]],
   ['_7ertspaudiostreamerbase_140',['~RTSPAudioStreamerBase',['../classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#a75568eebfdebeabc399f3001a93fbe39',1,'audio_tools::RTSPAudioStreamerBase']]],
   ['_7ertspaudiostreamerusingtask_141',['~RTSPAudioStreamerUsingTask',['../classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html#a20bf27cfbc32524df8e728de045287ac',1,'audio_tools::RTSPAudioStreamerUsingTask']]],

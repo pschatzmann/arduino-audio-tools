@@ -102,8 +102,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a01ab730263b97f7a7b478e45452a068e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e1bc177d23963169c11f57e164b8d95" id="r_a5e1bc177d23963169c11f57e164b8d95"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_ring_buffer_s_p_s_c.html#a5e1bc177d23963169c11f57e164b8d95">RingBufferSPSC</a> (size_t capacity)</td></tr>
 <tr class="separator:a5e1bc177d23963169c11f57e164b8d95"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5da0ea7b783fda28004b992b9b54e74d" id="r_a5da0ea7b783fda28004b992b9b54e74d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_ring_buffer_s_p_s_c.html#a5da0ea7b783fda28004b992b9b54e74d">~RingBufferSPSC</a> () override</td></tr>
-<tr class="separator:a5da0ea7b783fda28004b992b9b54e74d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65962804ee00fd73fbbcc9cc8bdd1c68" id="r_a65962804ee00fd73fbbcc9cc8bdd1c68"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_ring_buffer_s_p_s_c.html#a65962804ee00fd73fbbcc9cc8bdd1c68">~RingBufferSPSC</a> () override=default</td></tr>
+<tr class="separator:a65962804ee00fd73fbbcc9cc8bdd1c68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9038db8faec57f3770d30ed8f05270e4" id="r_a9038db8faec57f3770d30ed8f05270e4"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_ring_buffer_s_p_s_c.html#a9038db8faec57f3770d30ed8f05270e4">address</a> () override</td></tr>
 <tr class="memdesc:a9038db8faec57f3770d30ed8f05270e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the address of the start of the physical read buffer  <br /></td></tr>
 <tr class="separator:a9038db8faec57f3770d30ed8f05270e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -181,7 +181,7 @@ class audio_tools::RingBufferSPSC&lt; T &gt;</div><p>Lock-free Single-Producer S
 <li>readArray / writeArray use memcpy for bulk transfers and split them at the wrap-around point, giving at most two memcpy calls per operation.</li>
 </ul>
 <p>Not suitable for MPMC (multiple producers or consumers); use <a class="el" href="classaudio__tools_1_1_queue_lock_free.html" title="Lock-free MPMC queue.">QueueLockFree</a> for that.</p>
-<p>Backing storage defaults to plain new[]/delete[] (unaffected - existing callers, e.g. the I2S/USB audio TX/RX buffers, see no change at all). setUsePSRAM(true), called before the first <a class="el" href="classaudio__tools_1_1_ring_buffer_s_p_s_c.html#ab5c9a665996d7df9d11fcad720f4db9c" title="Resizes the buffer if supported: returns false if not supported.">resize()</a>, instead allocates from PSRAM via heap_caps_malloc() on ESP32 boards that have it (falls back to the plain new[] path anywhere else, silently) - useful for a buffer sized to soak up bursty backlogs (see e.g. <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html" title="Buffers a small, configurable amount of video (see setQueueBytes()) and renders it frame by frame fro...">VideoAudioSyncTask</a>) where a few hundred KB would be far too much to ask of internal RAM but is a rounding error against multiple MB of PSRAM. Requires a trivially- constructible/destructible T (true for the uint8_t every current caller uses) - heap_caps_malloc()/heap_caps_free() don't run either.</p>
+<p>Backing storage is a Vector&lt;T&gt;, using <a class="el" href="classaudio__tools_1_1_vector.html" title="Vector implementation which provides the most important methods as defined by std::vector....">Vector</a>'s own default allocator (plain heap - unaffected, existing callers like the I2S/USB audio TX/RX buffers see no change at all). setUsePSRAM(true), called before the first <a class="el" href="classaudio__tools_1_1_ring_buffer_s_p_s_c.html#ab5c9a665996d7df9d11fcad720f4db9c" title="Resizes the buffer if supported: returns false if not supported.">resize()</a>, switches it to an allocator that prefers PSRAM and falls back to the plain heap silently where PSRAM isn't available - useful for a buffer sized to soak up bursty backlogs (see e.g. <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html" title="Buffers a small, configurable amount of video (see setQueueBytes()) and renders it frame by frame fro...">VideoAudioSyncTask</a>) where a few hundred KB would be far too much to ask of internal RAM but is a rounding error against multiple MB of PSRAM.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>Element type. Works for any trivially-copyable T; the bulk-copy optimisation is most effective for T=uint8_t (audio streams).</td></tr>
@@ -246,8 +246,8 @@ template&lt;typename T  = uint8_t&gt; </div>
 
 </div>
 </div>
-<a id="a5da0ea7b783fda28004b992b9b54e74d" name="a5da0ea7b783fda28004b992b9b54e74d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5da0ea7b783fda28004b992b9b54e74d">&#9670;&#160;</a></span>~RingBufferSPSC()</h2>
+<a id="a65962804ee00fd73fbbcc9cc8bdd1c68" name="a65962804ee00fd73fbbcc9cc8bdd1c68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65962804ee00fd73fbbcc9cc8bdd1c68">&#9670;&#160;</a></span>~RingBufferSPSC()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -266,7 +266,7 @@ template&lt;typename T  = uint8_t&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">default</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
