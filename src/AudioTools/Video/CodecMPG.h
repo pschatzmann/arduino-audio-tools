@@ -77,6 +77,19 @@ class MPGDecoder : public VideoDecoder, public VideoInfoSource {
   void setIgnorePFrames(bool active) { decoder_.setIgnorePFrames(active); }
   bool ignorePFrames() const { return decoder_.ignorePFrames(); }
 
+  /// Swaps the two bytes of every RGB565 pixel before it reaches
+  /// setOutput()'s target - on by default. TinyMPGDecoder::toRGB565()
+  /// (via convertYuv420ToRgb565(), TinyMPG/decoder/mpg_rgb.h) packs each
+  /// pixel into a native uint16_t, which lands little-endian in memory on
+  /// ESP32/most Arduino targets, but SPI TFT panels (ILI9341 etc.) expect
+  /// RGB565 transmitted big-endian - without the swap, colors come out
+  /// visibly wrong. Only affects VideoFormat::RGB565 - RGB666/RGB888/I420
+  /// are unaffected (already byte-oriented, not packed into a uint16_t).
+  /// Turn off only if your VideoOutput target already performs its own
+  /// byte-swap.
+  void setByteSwap(bool active) { byte_swap = active; }
+  bool byteSwap() const { return byte_swap; }
+
   VideoInfo videoInfo() override {
     VideoInfo info;
     info.format = pixel_format;
@@ -145,6 +158,7 @@ class MPGDecoder : public VideoDecoder, public VideoInfoSource {
   Print *p_out = nullptr;
   VideoOutput *p_out_video = nullptr;
   VideoFormat pixel_format = VideoFormat::RGB565;
+  bool byte_swap = true;  // see setByteSwap()
   Vector<uint8_t> frame_buffer;
 
   static void onFrame(tinympg::TinyMPGDecoder<MPG_DEFAULT_ALLOCATOR> &decoder,
@@ -170,7 +184,16 @@ class MPGDecoder : public VideoDecoder, public VideoInfoSource {
           }
         }
         n = decoder.toRGB565((uint16_t *)frame_buffer.data(), needed);
-        if (n > 0) writeToOutput(frame_buffer.data(), n * 2);
+        if (n > 0) {
+          if (byte_swap) {
+            uint16_t *px = (uint16_t *)frame_buffer.data();
+            for (size_t i = 0; i < n; i++) {
+              uint16_t v = px[i];
+              px[i] = (uint16_t)((v << 8) | (v >> 8));
+            }
+          }
+          writeToOutput(frame_buffer.data(), n * 2);
+        }
         break;
       }
       case VideoFormat::RGB888: {

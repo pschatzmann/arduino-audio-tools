@@ -1,111 +1,149 @@
 /**
- * @file sd-mpg-audio-video.ino
+ * @file sd-mpg-video.ino
  * @brief Plays both the audio and video (MPEG-1) tracks of a local MPEG-1
- * Program Stream (.mpg) file on an SD card: demuxes it live with
- * DemuxerMPG, decodes the video track with MPGDecoder (TinyMPG,
- * https://github.com/pschatzmann/TinyMPG - pure software, works on any
- * board) and displays the result live on an SPI TFT, while playing the
- * audio track (a raw MPEG-1 Layer I/II/III elementary stream) through I2S
- * via MP3DecoderHelix - the same choice ContainerMPG.h's own file comment
- * uses.
+ * Program Stream (.mpg) file from the microSD card of the Hosyond 2.8"
+ * ESP32-S3 Display (see that board's audio-out/lcd-test/player-sdmmc
+ * examples): demuxes it live with DemuxerMPG, decodes the video track
+ * with MPGDecoder (TinyMPG, https://github.com/pschatzmann/TinyMPG - pure
+ * software, works on any board) and displays the result live on the
+ * ILI9341 panel, while playing the audio track (a raw MPEG-1 Layer
+ * I/II/III elementary stream) through the ES8311/FM8002E speaker path via
+ * DecoderHelix - a MultiDecoder that auto-selects the right decoder from
+ * DemuxerMPG::mime(): MP2Decoder (TinyMP2,
+ * https://github.com/pschatzmann/TinyMP2) for Layer II, its own built-in
+ * MP3DecoderHelix for Layer III (DemuxerMPG::mime() only distinguishes
+ * Layer II - see its own comment), or AAC/WAV if the file happens to
+ * carry one of those instead.
  *
  * Audio/video sync: DemuxerMPG dispatches audio/video as fast as bytes can
  * be parsed - all real pacing happens in videoSyncTask (VideoAudioSyncTask,
  * see Video/VideoAudioSyncTask.h), which sits between the demuxer and
  * mpgDecoder. It buffers each decoded frame and renders it (MPEG-1 decode
  * + panel refresh) from its own background task, timed against audioClock
- * - an AudioTimeSourceStream inserted between mp3Decoder and i2s that turns
- * "how many decoded PCM bytes have reached the audio device so far" into
- * an elapsed-ms clock, so video is paced to how far audio has actually
- * played rather than a separate wall-clock schedule. Because this all
- * happens off the demuxer's own loop() call, a slow decode/display frame
- * never delays the next audio chunk. videoSyncTask's own diagnostics
- * (frameCount()/avgFrameMs()/inputFPS()/outputFPS()/...) cover throughput
- * monitoring - see logInfo() - so no separate meter is needed.
+ * - an AudioTimeSourceStream inserted between multiDecoder and
+ * AudioBoardStream that turns "how many decoded PCM bytes have reached
+ * the audio device so far" into an elapsed-ms clock, so video is paced to
+ * how far audio has actually played rather than a separate wall-clock
+ * schedule. Because this all happens off the demuxer's own loop() call, a
+ * slow decode/display frame never delays the next audio chunk.
+ * videoSyncTask's own diagnostics (frameCount()/avgFrameMs()/inputFPS()/
+ * outputFPS()/...) cover throughput monitoring - see logInfo() - so no
+ * separate meter is needed.
  *
- * Pipeline: File (SD) -> EncodedAudioOutput (Print bridge) -> DemuxerMPG
- * (demux)
- *   -> EncodedAudioStream (MP3DecoderHelix) -> AudioTimeSourceStream (audio
- *   clock) -> I2SStream (audio)
+ * Pipeline: File (SD_MMC) -> CodecCopy -> DemuxerMPG (demux)
+ *   -> EncodedAudioStream (DecoderHelix) -> AudioTimeSourceStream (audio
+ *   clock) -> AudioBoardStream (audio)
  *   \-> VideoAudioSyncTask (buffer + schedule) -> MPGDecoder (MPEG-1
  *   decode -> RGB565) -> OutputTinyGPU (video, own background task)
  *
  * DemuxerMPG is a *streaming* (forward-only) demuxer - it does not need a
- * seekable source, so a File read sequentially with StreamCopy (the same
- * way http-client-mpg.ino feeds it from a live HTTP download) works fine.
- * See sd-mpg-audio.ino for an audio-only version of this same file,
- * sd-mpg-video.ino for video-only, and http-client-mpg.ino for the network
- * (HTTP) equivalent.
+ * seekable source, so a File read sequentially with CodecCopy works fine
+ * (the same pattern also works from a live HTTP download instead of a
+ * File).
+ * @note transcode file e.g. with ffmpeg -i Casablanca.1942.720.x264.YIFY.mkv
+ -vf "scale=176:144,fps=24" -c:v mpeg1video -g 1 -bf 0 -q:v 5 -c:a mp2 -b:a 128k
+ output176x144-v2.mpg
+
+
+
  *
  * Dependencies (install via Library Manager):
- * - https://github.com/pschatzmann/TinyGPU (SPI/display pins below match its
- *   bouncing-ball example - adjust for your own wiring)
+ * - https://github.com/pschatzmann/arduino-audio-driver
+ * - https://github.com/pschatzmann/TinyGPU
  * - https://github.com/pschatzmann/TinyMPG
+ * - https://github.com/pschatzmann/TinyMP2
  *
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
+#include <SD_MMC.h>
+
 #include "AudioTools.h"
-#include "AudioTools/AudioCodecs/CodecMP3Helix.h"
+#include "AudioTools/AudioCodecs/CodecHelix.h"
+#include "AudioTools/AudioCodecs/CodecMP2.h"
 #include "AudioTools/AudioCodecs/ContainerMPG.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
 #include "AudioTools/Video/CodecMPG.h"
 #include "AudioTools/Video/OutputTinyGPU.h"
-#include "SD.h"
+#include "TinyGPU/Boards.h"
 
 // ---- File on the SD card to play ----
-const char *file_path = "/video.mpg";
+const char* file_path = "/Videos/output176x144.mpg";
 
-// ---- SPI / display pins (adjust for your wiring) ----
-constexpr int8_t kPinMosi = 13;
-constexpr int8_t kPinMiso = 12;
-constexpr int8_t kPinSclk = 14;
-constexpr int8_t kPinCs = 15;
-constexpr int8_t kPinDc = 2;
-constexpr int8_t kPinRst = -1;
-constexpr int8_t kPinBacklight = 27;
-
-ILI9341Driver<RGB565> tftDriver(SPI, kPinCs, kPinDc, kPinRst);
 MPGDecoder mpgDecoder;
-// 3rd arg: scheduling delay compensating for I2SStream's own output
-// buffering (cfg.buffer_size*cfg.buffer_count) - see
-// VideoAudioSyncTask::setSchedulingDelayMs(); tune to match your own
-// I2S buffer configuration.
-VideoAudioSyncTask videoSyncTask(mpgDecoder, 0, 100);
-OutputTinyGPU tftOutput(tftDriver, kPinBacklight);
-I2SStream i2s;
-AudioTimeSourceStream audioClock(i2s);  // decoded-PCM-bytes-based playback clock
-MP3DecoderHelix mp3Decoder;
-EncodedAudioStream audioOut(&audioClock,
-                             &mp3Decoder);  // decodes MP3/MP2 -> audioClock -> i2s
+// 3rd arg: scheduling delay compensating for AudioBoardStream's own
+// output buffering (cfg.buffer_size*cfg.buffer_count) - see
+// VideoAudioSyncTask::setSchedulingDelayMs(); ~115ms matches the ~20KB
+// output buffer below - tune if you change either.
+VideoAudioSyncTask videoSyncTask(mpgDecoder, 0, 115);
+LCDBoardESP32S3_2_8Display board;
+OutputTinyGPU tftOutput(board);
+// Qualified deliberately: TinyGPU.h (pulled in by OutputTinyGPU.h) and
+// I2SCodecStream.h (pulled in by AudioBoardStream.h) each apply their own
+// "using namespace" globally, and both libraries happen to name their
+// board for this exact display "ESP32S3HosyondDisplay" - tinygpu::
+// ESP32S3HosyondDisplay is a *type alias* for LCDBoardESP32S3_2_8Display
+// (unrelated to the board object above), audio_driver::
+// ESP32S3HosyondDisplay is the AudioBoard *object* actually needed here -
+// left unqualified, the two collide and the sketch fails to compile with
+// "reference to 'ESP32S3HosyondDisplay' is ambiguous".
+AudioBoardStream out(audio_driver::ESP32S3HosyondDisplay);
+AudioTimeSourceStream audioClock(
+    out);  // decoded-PCM-bytes-based playback clock
+DecoderHelix
+    multiDecoder;  // MP3/AAC/WAV built in - MP2Decoder added in setup()
+MP2Decoder mp2Decoder;
+EncodedAudioStream audioOut(
+    &audioClock,
+    &multiDecoder);  // decodes MP2/MP3/AAC/WAV -> audioClock -> out
 
 DemuxerMPG mpgDemuxer;
-EncodedAudioOutput mpgInput(
-    &mpgDemuxer);  // bridges raw file bytes -> DemuxerMPG::write()
 
 File file;
-StreamCopy copier(mpgInput, file);
+CodecCopy copier(mpgDemuxer, file);
 
 void setup() {
   Serial.begin(115200);
   AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
-  if (!SD.begin()) {
-    Serial.println("SD Card initialization failed!");
+  auto cfg = out.defaultConfig(TX_MODE);
+  cfg.sdmmc_active = true;  // board's begin() calls SD_MMC.setPins()+begin()
+  cfg.buffer_size = 1024;
+  cfg.buffer_count = 20;  // 1024*20 = 20KB output buffer
+  if (!out.begin(cfg)) {
+    Serial.println("AudioBoardStream begin() failed");
     return;
   }
+  out.setVolume(0.4f);
 
-  file = SD.open(file_path);
+  file = SD_MMC.open(file_path);
   if (!file) {
     Serial.print("Could not open ");
     Serial.println(file_path);
     return;
   }
 
-  SPI.begin(kPinSclk, kPinMiso, kPinMosi, kPinCs);
-  tftOutput.begin();
+  if (!board.begin()) {
+    Serial.println("OutputTinyGPU begin() failed");
+    return;
+  }
+  tftOutput.setRotation(DisplayRotation::kLandscape);
+  // On: upscale the decoded frame to fill the 320x240 panel - costs more
+  // render time (more pixels to convert/write) than leaving this off. See
+  // VideoAudioSyncTask's avgFrameMs()/setScaleSingleBuffer() if render
+  // time needs to come back down.
+  tftOutput.setScaleToFit(true);
 
-  auto cfg = i2s.defaultConfig(TX_MODE);
-  i2s.begin(cfg);
+  // DemuxerMPG::mime() reports "audio/mpeg; codecs=\"mpeg1-layer2\""
+  // specifically for Layer II, falling back to the plain MP3 mime
+  // otherwise (see its own comment) - MultiDecoder::selectDecoder()
+  // matches that exact string first, so this makes multiDecoder pick
+  // mp2Decoder for Layer II while still falling back to its own built-in
+  // MP3DecoderHelix/AACDecoderHelix/WAVDecoder (matched by the plain
+  // base mime) for anything else. Must be registered before the first
+  // write() reaches multiDecoder.
+  multiDecoder.setMimeSource(mpgDemuxer);
+  multiDecoder.addDecoder(mp2Decoder, "audio/mpeg; codecs=\"mpeg1-layer2\"");
 
   if (!audioOut.begin()) {
     Serial.println("EncodedAudioStream begin() failed");
@@ -121,7 +159,7 @@ void setup() {
 
   videoSyncTask.setAudioClock(audioClock);
   // Pin the render task to core 0 - loop() (SD reads + demuxing + the
-  // blocking audioOut.write() into I2S) runs on core 1 by default. Without
+  // blocking out.write() into I2S) runs on core 1 by default. Without
   // this, the video task could land on core 1 too and preempt loop() for
   // the length of a slow render call. Call before begin()/first write().
   videoSyncTask.setTaskParameters(4096, 2, 0);
@@ -129,8 +167,12 @@ void setup() {
   videoSyncTask.setQueueUsePSRAM(true);
 
   mpgDemuxer.setOutputAudio(audioOut);
-  mpgDemuxer.setOutputVideo(videoSyncTask);  // buffer + schedule via videoSyncTask
-  mpgInput.begin();
+  mpgDemuxer.setOutputVideo(
+      videoSyncTask);  // buffer + schedule via videoSyncTask
+  if (!mpgDemuxer.begin()) {
+    Serial.println("DemuxerMPG begin() failed");
+    return;
+  }
 }
 
 void logInfo() {
@@ -161,8 +203,8 @@ void logInfo() {
   Serial.print((unsigned)queueCapacity);
   Serial.print(" bytes (");
   Serial.print(queueCapacity > 0
-                    ? 100.0f * videoSyncTask.queuedBytes() / queueCapacity
-                    : 0.0f);
+                   ? 100.0f * videoSyncTask.queuedBytes() / queueCapacity
+                   : 0.0f);
   Serial.println("% full)");
 #ifdef ESP32
   size_t heapFree = ESP.getFreeHeap();
