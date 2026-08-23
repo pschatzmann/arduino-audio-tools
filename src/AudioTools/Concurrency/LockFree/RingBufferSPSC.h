@@ -2,12 +2,8 @@
 #include <atomic>
 #include <cstring>
 
+#include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
 #include "AudioTools/CoreAudio/Buffers.h"
-
-#if defined(ESP32) && defined(BOARD_HAS_PSRAM)
-#include "esp_heap_caps.h"
-#define AUDIO_TOOLS_RINGBUFFERSPSC_HAS_PSRAM 1
-#endif
 
 namespace audio_tools {
 
@@ -35,16 +31,14 @@ namespace audio_tools {
  * Not suitable for MPMC (multiple producers or consumers); use
  * QueueLockFree for that.
  *
- * Backing storage defaults to plain new[]/delete[] (unaffected - existing
- * callers, e.g. the I2S/USB audio TX/RX buffers, see no change at all).
- * setUsePSRAM(true), called before the first resize(), instead allocates
- * from PSRAM via heap_caps_malloc() on ESP32 boards that have it (falls
- * back to the plain new[] path anywhere else, silently) - useful for a
- * buffer sized to soak up bursty backlogs (see e.g. VideoAudioSyncTask)
- * where a few hundred KB would be far too much to ask of internal RAM but
- * is a rounding error against multiple MB of PSRAM. Requires a trivially-
- * constructible/destructible T (true for the uint8_t every current caller
- * uses) - heap_caps_malloc()/heap_caps_free() don't run either.
+ * Backing storage is a Vector<T>, using Vector's own default allocator
+ * (plain heap - unaffected, existing callers like the I2S/USB audio TX/RX
+ * buffers see no change at all). setUsePSRAM(true), called before the
+ * first resize(), switches it to an allocator that prefers PSRAM and
+ * falls back to the plain heap silently where PSRAM isn't available -
+ * useful for a buffer sized to soak up bursty backlogs (see e.g.
+ * VideoAudioSyncTask) where a few hundred KB would be far too much to ask
+ * of internal RAM but is a rounding error against multiple MB of PSRAM.
  *
  * @tparam T Element type. Works for any trivially-copyable T; the bulk-copy
  *           optimisation is most effective for T=uint8_t (audio streams).
@@ -82,11 +76,12 @@ class RingBufferSPSC : public BaseBuffer<T> {
     size_t n   = (size_t)len < space ? (size_t)len : space;
     if (n == 0) return 0;
 
+    T* buf = buf_.data();
     size_t h_idx = h & mask_;
     size_t first = capacity_ - h_idx;        // bytes until end of physical buffer
     if (first > n) first = n;
-    memcpy(buf_ + h_idx, data,          first * sizeof(T));
-    memcpy(buf_,         data + first, (n - first) * sizeof(T));
+    memcpy(buf + h_idx, data,          first * sizeof(T));
+    memcpy(buf,         data + first, (n - first) * sizeof(T));
 
     head_.store(h + n, std::memory_order_release);
     return (int)n;
@@ -101,11 +96,12 @@ class RingBufferSPSC : public BaseBuffer<T> {
     size_t n   = (size_t)len < avail ? (size_t)len : avail;
     if (n == 0) return 0;
 
+    T* buf = buf_.data();
     size_t t_idx = t & mask_;
     size_t first = capacity_ - t_idx;        // bytes until end of physical buffer
     if (first > n) first = n;
-    memcpy(data,          buf_ + t_idx, first * sizeof(T));
-    memcpy(data + first,  buf_,        (n - first) * sizeof(T));
+    memcpy(data,          buf + t_idx, first * sizeof(T));
+    memcpy(data + first,  buf,        (n - first) * sizeof(T));
 
     tail_.store(t + n, std::memory_order_release);
     return (int)n;
@@ -142,64 +138,28 @@ class RingBufferSPSC : public BaseBuffer<T> {
     // Round up to the next power of two so masking replaces modulo.
     size_t pow2 = 1;
     while (pow2 < capacity) pow2 <<= 1;
-    freeBuf();
-    buf_ = (capacity > 0) ? allocBuf(pow2) : nullptr;
-    capacity_ = (capacity > 0 && buf_ != nullptr) ? pow2 : 0;
+    buf_.setAllocator(use_psram_ ? DefaultAllocator : DefaultAllocatorRAM);
+    buf_.resize(capacity > 0 ? pow2 : 0);
+    capacity_ = (capacity > 0 && buf_.data() != nullptr) ? pow2 : 0;
     mask_     = capacity_ > 0  ? capacity_ - 1 : 0;
     reset();
     return true;
   }
 
-  T*     address() override { return buf_; }
+  T*     address() override { return buf_.data(); }
   size_t size()    override { return capacity_; }
 
-  ~RingBufferSPSC() override { freeBuf(); }
+  ~RingBufferSPSC() override = default;
 
-  // Non-copyable: the buffer owns heap memory and the atomics are not
-  // copyable.
+  // Non-copyable: the atomics are not copyable.
   RingBufferSPSC(const RingBufferSPSC&)            = delete;
   RingBufferSPSC& operator=(const RingBufferSPSC&) = delete;
 
  private:
-  T*     buf_      = nullptr;
+  Vector<T> buf_;
   size_t capacity_ = 0;
   size_t mask_     = 0;
   bool   use_psram_ = false;
-  // Which allocator actually produced buf_ - decided fresh at each
-  // allocBuf() call (not just from use_psram_), so freeBuf() always
-  // matches the real allocation even if use_psram_ was requested but
-  // heap_caps_malloc() then failed (falls back to new[] - see allocBuf()).
-  bool   allocated_via_caps_ = false;
-
-  T* allocBuf(size_t pow2) {
-#ifdef AUDIO_TOOLS_RINGBUFFERSPSC_HAS_PSRAM
-    if (use_psram_) {
-      T* p = (T*)heap_caps_malloc(pow2 * sizeof(T),
-                                   MALLOC_CAP_SPIRAM | MALLOC_CAP_8BIT);
-      if (p != nullptr) {
-        allocated_via_caps_ = true;
-        return p;
-      }
-      // PSRAM exhausted/unavailable at this size - fall through to the
-      // regular heap rather than failing outright.
-    }
-#endif
-    allocated_via_caps_ = false;
-    return new T[pow2];
-  }
-
-  void freeBuf() {
-    if (buf_ == nullptr) return;
-#ifdef AUDIO_TOOLS_RINGBUFFERSPSC_HAS_PSRAM
-    if (allocated_via_caps_) {
-      heap_caps_free(buf_);
-      buf_ = nullptr;
-      return;
-    }
-#endif
-    delete[] buf_;
-    buf_ = nullptr;
-  }
 
   // Separate the two hot atomics onto different 32-byte regions to prevent
   // false sharing on multi-core targets that have a data cache (e.g. ESP32).
