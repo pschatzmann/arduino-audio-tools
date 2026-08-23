@@ -29,18 +29,15 @@
  *   OutputTinyGPU (video, own background task)
  *
  * Notes:
- * - CodecCopy (not StreamCopy) retries on a partial write() accept, so a
- *   full DemuxerAVI parse buffer never desyncs the chunk stream.
- * - SD_MMC (4-bit SDIO, not SPI) is this board's actual card slot, brought
- *   up via cfg.sdmmc_active - see the board's player-sdmmc example.
- * - tftDriver.setInvertColor(true) is required on this panel for correct
- *   colors - see the board's lcd-test example.
  * - Video track must be H264/h264/X264/x264/avc1/AVC1 Annex-B - see
  *   sd-avi-video.ino for building a compatible file with ffmpeg.
  * - The board's WS2812 RGB LED (IO42, see led-test) is set to a distinct
  *   color right before each setup stage starts, so if a stage hangs (never
  *   returns from begin()) rather than cleanly failing, the color still on
  *   the LED tells you which one - no serial capture needed.
+ *   I transcoded the video with ffmpeg -i Casablanca.1942.720.x264.YIFY.mkv -vf
+ * "scale=176:144,fps=7" -pix_fmt yuv420p -c:v libx264 -profile:v baseline
+ * -level 3.0 -g 15 -crf 28 output176x144-v3.avi
  *
  * Dependencies (install via Library Manager):
  * - https://github.com/pschatzmann/arduino-audio-driver
@@ -52,18 +49,18 @@
  * @copyright GPLv3
  */
 #include "AudioTools.h"
-#include "AudioTools/AudioLibs/AudioBoardStream.h"
-#include "AudioTools/AudioCodecs/ContainerAVI.h"
 #include "AudioTools/AudioCodecs/CodecHelix.h"
-//#include "AudioTools/Video/CodecH264ESP32S3.h"
+#include "AudioTools/AudioCodecs/ContainerAVI.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
+// #include "AudioTools/Video/CodecH264ESP32S3.h"
+#include <SD_MMC.h>
+
 #include "AudioTools/Video/CodecH264.h"
 #include "AudioTools/Video/OutputTinyGPU.h"
 #include "TinyGPU/Boards.h"
-#include <SD_MMC.h>
-
 
 // ---- File on the SD card to play ----
-const char *file_path = "/Videos/output176x144.avi";
+const char* file_path = "/Videos/output176x144.avi";
 
 H264Decoder h264Decoder;
 // 3rd arg: scheduling delay compensating for AudioBoardStream's own
@@ -83,9 +80,11 @@ OutputTinyGPU tftOutput(board);
 // left unqualified, the two collide and the sketch fails to compile with
 // "reference to 'ESP32S3HosyondDisplay' is ambiguous".
 AudioBoardStream out(audio_driver::ESP32S3HosyondDisplay);
-AudioTimeSourceStream audioClock(out);  // decoded-PCM-bytes-based playback clock
+AudioTimeSourceStream audioClock(
+    out);  // decoded-PCM-bytes-based playback clock
 DecoderHelix multiDecoder;
-EncodedAudioStream audioOut(&audioClock, &multiDecoder);  // decodes PCM/AAC/MP3 -> audioClock -> out
+EncodedAudioStream audioOut(
+    &audioClock, &multiDecoder);  // decodes PCM/AAC/MP3 -> audioClock -> out
 File file;
 DemuxerAVI aviDemuxer;
 CodecCopy copier(aviDemuxer, file);
@@ -148,11 +147,13 @@ void setup() {
   // this, the video task could land on core 1 too and preempt loop() for
   // the length of a slow render call. Call before begin()/first write().
   videoSyncTask.setTaskParameters(4096, 2, 0);
-  // setQueueUsePSRAM() moves the queue off internal heap onto PSRAM -
-  // call before begin()/first write(). 20KB absorbs a typical I-frame
-  // spike; increase if drops/resyncs are too frequent.
-  videoSyncTask.setQueueUsePSRAM(true);
-  videoSyncTask.setQueueBytes(20 * 1024);
+  // call before begin()/first write(). 256KB: this video's frames can
+  // individually run into several KB (a low-fps, bitrate-preserving
+  // transcode packs more data into each remaining frame), so a queue
+  // sized for the earlier, smaller-frame video left room for only 3-4
+  // frames total - increase further if drops/resyncs are still too
+  // frequent.
+  videoSyncTask.setQueueBytes(40 * 1024);
   // Lowered from the 1.0 default: I-frame decode cost on this video is
   // high enough that the per-GOP backlog compounds over time. Can't
   // reduce I-frame decode cost itself (I-frames are never dropped this
@@ -190,10 +191,11 @@ void logInfo() {
   // decode share (h264Decoder.totalDecodeMs(), CAVLC decode + picture
   // reconstruction only) vs everything after it - tells us which half of
   // the render budget is actually worth optimizing next.
-  uint32_t renderedFrames = videoSyncTask.frameCountI() + videoSyncTask.frameCountP();
+  uint32_t renderedFrames =
+      videoSyncTask.frameCountI() + videoSyncTask.frameCountP();
   float avgDecodeMs = renderedFrames > 0
-                           ? (float)h264Decoder.totalDecodeMs() / renderedFrames
-                           : 0.0f;
+                          ? (float)h264Decoder.totalDecodeMs() / renderedFrames
+                          : 0.0f;
   Serial.print("avg decode ms: ");
   Serial.print(avgDecodeMs);
   Serial.print(" / avg convert+SPI ms: ");
@@ -215,8 +217,8 @@ void logInfo() {
   Serial.print((unsigned)queueCapacity);
   Serial.print(" bytes (");
   Serial.print(queueCapacity > 0
-                    ? 100.0f * videoSyncTask.queuedBytes() / queueCapacity
-                    : 0.0f);
+                   ? 100.0f * videoSyncTask.queuedBytes() / queueCapacity
+                   : 0.0f);
   Serial.println("% full)");
 #ifdef ESP32
   // Internal heap
@@ -229,22 +231,18 @@ void logInfo() {
   size_t psramTotal = ESP.getPsramSize();
   size_t psramUsed = psramTotal - psramFree;
 
-  Serial.printf(
-    "Heap:  total=%u, used=%u, free=%u bytes\n",
-    heapTotal, heapUsed, heapFree);
+  Serial.printf("Heap:  total=%u, used=%u, free=%u bytes\n", heapTotal,
+                heapUsed, heapFree);
 
-  Serial.printf(
-    "PSRAM: total=%u, used=%u, free=%u bytes\n",
-    psramTotal, psramUsed, psramFree);
+  Serial.printf("PSRAM: total=%u, used=%u, free=%u bytes\n", psramTotal,
+                psramUsed, psramFree);
 
   // Largest currently allocatable blocks
-  Serial.printf(
-    "Largest heap block:  %u bytes\n",
-    heap_caps_get_largest_free_block(MALLOC_CAP_INTERNAL));
+  Serial.printf("Largest heap block:  %u bytes\n",
+                heap_caps_get_largest_free_block(MALLOC_CAP_INTERNAL));
 
-  Serial.printf(
-    "Largest PSRAM block: %u bytes\n",
-    heap_caps_get_largest_free_block(MALLOC_CAP_SPIRAM));
+  Serial.printf("Largest PSRAM block: %u bytes\n",
+                heap_caps_get_largest_free_block(MALLOC_CAP_SPIRAM));
 #endif
 }
 
