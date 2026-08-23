@@ -347,7 +347,6 @@ public:
   }
   void setOutputVideo(VideoOutput &out_stream) {
     p_output_video_video = &out_stream;
-    out_stream.setSyncSource(p_synch);
   }
 
   virtual size_t write(const uint8_t *data, size_t len) override {
@@ -413,6 +412,9 @@ public:
     result.frame_size =
         (uint32_t)videoFrameSizeBytes(result.format, result.width, result.height);
     result.total_file_size = riff_file_size;
+    result.fps = main_header.dwMicroSecPerFrame > 0
+                     ? 1000000.0f / main_header.dwMicroSecPerFrame
+                     : 0;
     return result;
   }
 
@@ -443,14 +445,6 @@ public:
   /// Provide the length of the video in seconds
   int videoSeconds() { return video_seconds; }
 
-  /// Replace the synchronization logic with your implementation
-  void setVideoAudioSync(VideoAudioSync *yourSync) {
-    p_synch = yourSync;
-    // Re-wire regardless of call order relative to setOutputVideo().
-    if (p_output_video_video != nullptr)
-      p_output_video_video->setSyncSource(p_synch);
-  }
-
 protected:
   bool header_is_avi = false;
   bool is_parsing_active = true;
@@ -476,7 +470,6 @@ protected:
   /// DemuxerMP4 already does (it can, trivially, since MP4's sample table
   /// gives it each frame's exact size up front).
   Vector<uint8_t> video_accumulator;
-  long video_frame_start_ms = 0;
   long open_subchunk_len = 0;
   long current_pos = 0;
   long movi_end_pos = 0;
@@ -494,8 +487,6 @@ protected:
   /// declared size looks like an unbounded/streamed placeholder.
   uint32_t riff_file_size = 0;
   int video_seconds = 0;
-  VideoAudioClockSync defaultSynch;
-  VideoAudioSync *p_synch = &defaultSynch;
 
   bool isCurrentStreamAudio() {
     return strncmp(stream_header[stream_header_idx].fccType, "auds", 4) == 0;
@@ -616,7 +607,6 @@ protected:
       if (current_stream_data.isVideo()) {
         LOGD("video:[%d]->[%d]", (int)current_stream_data.start_pos,
              (int)current_stream_data.end_pos);
-        video_frame_start_ms = millis();
       } else if (current_stream_data.isAudio()) {
         LOGD("audio:[%d]->[%d]", (int)current_stream_data.start_pos,
              (int)current_stream_data.end_pos);
@@ -636,8 +626,6 @@ protected:
             (p_output_video != nullptr || p_output_video_video != nullptr)) {
           if (p_output_video != nullptr) p_output_video->flush();
           if (p_output_video_video != nullptr) p_output_video_video->flush();
-          uint32_t time_used_ms = (uint32_t)(millis() - video_frame_start_ms);
-          p_synch->delayVideoFrame(main_header.dwMicroSecPerFrame, time_used_ms);
         }
         if (tryParseChunk("idx").isValid()) {
           parse_state = ParseIgnore;
@@ -751,7 +739,7 @@ protected:
     if (current_stream_data.isAudio()) {
       LOGD("audio %d", (int)to_write);
       if (!is_mute && payload_to_write > 0 && p_output_audio != nullptr){
-        p_synch->writeAudio(p_output_audio, parse_buffer.data(), payload_to_write);
+        p_output_audio->write(parse_buffer.data(), payload_to_write);
       }
       open_subchunk_len -= to_write;
       cleanupStack();

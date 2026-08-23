@@ -116,19 +116,6 @@ class DemuxerMP4 : public Demuxer {
     p_spool_factory = &spoolFactory;
   }
 
-  /// Replace the audio/video pacing logic - see VideoAudioBufferedSync
-  /// (the default) and dispatchAudio()/dispatchVideo() for why this
-  /// exists: writing decoded audio straight through, in bursts, starves
-  /// PortAudio (or any other real-time sink) between bursts even though
-  /// the total data rate is sufficient. The default buffers audio into a
-  /// ring buffer and drains it steadily during dispatchVideo()'s wait
-  /// instead of dumping it all at once.
-  void setVideoAudioSync(VideoAudioSync* yourSync) {
-    p_synch = yourSync;
-    // Re-wire regardless of call order relative to setOutputVideo().
-    if (p_video_out_video != nullptr) p_video_out_video->setSyncSource(p_synch);
-  }
-
   /// Provides the container mime
   const char* mimeVideo() override { return "video/mp4"; }
   /// Provides the audio mime (AudioFormat::UNKNOWN/nullptr until the audio
@@ -153,7 +140,6 @@ class DemuxerMP4 : public Demuxer {
     dispatched_sample_count = 0;
     is_wav_header_sent = false;
     total_bytes_received = 0;
-    playback_start_set = false;
     quickstart_bytes_remaining = -1;
     parser.begin();
     is_active = true;
@@ -176,10 +162,7 @@ class DemuxerMP4 : public Demuxer {
   void setOutput(Print& out) override { setOutputAudio(out); }
 
   void setOutputVideo(Print& out) override { p_video_out = &out; }
-  void setOutputVideo(VideoOutput& out) {
-    p_video_out_video = &out;
-    out.setSyncSource(p_synch);
-  }
+  void setOutputVideo(VideoOutput& out) { p_video_out_video = &out; }
 
   /// Common video info (width/height/format/frame_size/total_file_size),
   /// analogous to audioInfo() - the same VideoInfo type is also provided
@@ -204,6 +187,16 @@ class DemuxerMP4 : public Demuxer {
                                                        : VideoFormat::H264;
     result.frame_size = (uint32_t)videoFrameSizeBytes(
         result.format, result.width, result.height);
+    // Constant-frame-rate assumption: fps from the track's timescale and
+    // its first 'stts' entry's sample_delta (ticks/sample) - true for the
+    // overwhelming majority of real-world encoders; a genuinely variable
+    // frame rate would need a per-sample duration, which nothing here
+    // currently schedules against anyway (see VideoAudioSyncTask).
+    if (p_video_track->timescale > 0 && p_video_track->stts->size() > 0) {
+      SttsEntry first = p_video_track->stts->get(0);
+      if (first.sample_delta > 0)
+        result.fps = (float)p_video_track->timescale / first.sample_delta;
+    }
     return result;
   }
   /// Common audio info (sample_rate/channels/bits_per_sample), extended
@@ -406,13 +399,6 @@ class DemuxerMP4 : public Demuxer {
     // per-chunk consumption above)
     uint32_t stsc_cursor = 0;
 
-    // runtime cursor for nextPtsTicks(), advanced once per dispatched
-    // sample - kept separate from next_sample_index so it stays valid
-    // even if next_sample_index is ever used for random access
-    uint32_t stts_entry_idx = 0;
-    uint32_t stts_entry_remaining = 0;
-    uint64_t next_pts_ticks = 0;
-
     uint32_t sampleSize(uint32_t idx) {
       if (fixed_sample_size > 0) return fixed_sample_size;
       if (idx >= sample_sizes->size()) return 0;
@@ -422,28 +408,6 @@ class DemuxerMP4 : public Demuxer {
     uint32_t sampleCount() {
       return fixed_sample_size > 0 ? fixed_sample_count
                                    : (uint32_t)sample_sizes->size();
-    }
-
-    /// Returns the next sample's scheduled presentation time (in this
-    /// track's timescale ticks, i.e. relative to the track's own start)
-    /// and advances the internal cursor - call exactly once per
-    /// dispatched sample, in order. Returns 0 (no pacing) if 'stts'
-    /// wasn't parsed.
-    uint64_t nextPtsTicks() {
-      uint64_t pts = next_pts_ticks;
-      if (stts_entry_idx < stts->size()) {
-        // fetch once - a single call regardless of store implementation
-        // (RAM: cheap either way; source-seek/spool: avoids a second
-        // seek+read for the same entry)
-        SttsEntry entry = stts->get(stts_entry_idx);
-        if (stts_entry_remaining == 0) stts_entry_remaining = entry.sample_count;
-        next_pts_ticks += entry.sample_delta;
-        if (stts_entry_remaining > 0) {
-          stts_entry_remaining--;
-          if (stts_entry_remaining == 0) stts_entry_idx++;
-        }
-      }
-      return pts;
     }
   };
 
@@ -478,13 +442,6 @@ class DemuxerMP4 : public Demuxer {
   /// begin() default) means no boundary active - see write().
   int64_t quickstart_bytes_remaining = -1;
 
-  // Audio/video pacing - see setVideoAudioSync(). VideoAudioBufferedSync
-  // (not VideoAudioClockSync, DemuxerAVI's default) because MP4's problem
-  // is bursty audio dispatch, which only a buffering sync actually
-  // addresses - a pure wall-clock sync doesn't touch audio pacing at all.
-  VideoAudioBufferedSync defaultSynch{10 * 1024, -20};
-  VideoAudioSync* p_synch = &defaultSynch;
-
   // Incremental cross-track merge state (replaces a precomputed
   // whole-file schedule - see advanceChunkIfNeeded()): which track's
   // chunk is currently being consumed, and how many of its samples are
@@ -507,13 +464,6 @@ class DemuxerMP4 : public Demuxer {
   /// total-file-size field to report instead (see getVideoInfo()).
   uint32_t total_bytes_received = 0;
   bool is_active = false;
-
-  // video playback pacing: wall-clock reference captured at the first
-  // dispatched video sample, against which each subsequent sample's
-  // scheduled presentation time (from 'mdhd'+'stts') is compared - see
-  // dispatchVideo().
-  bool playback_start_set = false;
-  uint32_t playback_start_ms = 0;
 
   // sample accumulation (mdat streaming)
   Vector<uint8_t> sample_buffer;
@@ -576,30 +526,6 @@ class DemuxerMP4 : public Demuxer {
     return ((uint64_t)readU32(p) << 32) | readU32(p + 4);
   }
   static uint16_t readU16(const uint8_t* p) { return (p[0] << 8) | p[1]; }
-
-  /// Checks every NAL unit in one AVCC length-prefixed video sample for
-  /// nal_ref_idc (bits 5-6 of each NAL header byte, right after the
-  /// length prefix) - 0 means that NAL is never used as a prediction
-  /// reference by any other frame, so it's safe to drop entirely. Used
-  /// before skipping a late frame in dispatchVideo(): unlike MP4 samples
-  /// in a sample table (independently addressable, seekable past), an
-  /// H.264 bitstream has real inter-frame dependencies - dropping an
-  /// I or (referenced) P-frame corrupts every later frame's decode until
-  /// the next keyframe, not just the one skipped. A single referenced NAL
-  /// anywhere in the sample makes the whole sample unsafe to skip.
-  static bool isSafeToSkipAvcc(const uint8_t* data, size_t size, size_t lenSize) {
-    size_t pos = 0;
-    while (pos + lenSize <= size) {
-      uint32_t nalLen = 0;
-      for (size_t i = 0; i < lenSize; i++) nalLen = (nalLen << 8) | data[pos + i];
-      pos += lenSize;
-      if (nalLen == 0 || pos + nalLen > size) break;
-      uint8_t nal_ref_idc = (data[pos] >> 5) & 0x03;
-      if (nal_ref_idc != 0) return false;
-      pos += nalLen;
-    }
-    return true;
-  }
 
   // decoder callbacks for SourceSeekSampleTableStore - see its comment on
   // why get() can't just memcpy raw on-disk bytes into T
@@ -1022,7 +948,8 @@ class DemuxerMP4 : public Demuxer {
   }
 
   /// 'stts' (time-to-sample): run-length list of {sample_count,
-  /// sample_delta} - see Track::nextPtsTicks().
+  /// sample_delta} - see getVideoInfo(), which derives fps from the
+  /// first entry's sample_delta.
   void onStts(MP4Parser::Box& box) {
     if (current_track == nullptr) return;
     beginBoxAccum(box);
@@ -1281,51 +1208,34 @@ class DemuxerMP4 : public Demuxer {
   }
 
   void dispatchVideo(Track& t, const uint8_t* data, size_t size, bool isFirst) {
-    // nextPtsTicks() must run unconditionally, in sample order, to keep
-    // the track's timing cursor correct regardless of what we do below -
-    // call it before any early return.
-    uint64_t ptsTicks = t.nextPtsTicks();
+    // No wall-clock scheduling or skip decisions here anymore: every
+    // sample is always converted and forwarded immediately, in full.
+    // Pacing/scheduling is the caller's responsibility now - see
+    // VideoAudioSyncTask (Video/VideoAudioSyncTask.h), which schedules
+    // frames from its own background task instead of blocking this
+    // dispatch loop (and, with it, audio delivery) the way an inline
+    // wait here used to.
     if ((p_video_out == nullptr && p_video_out_video == nullptr) ||
         t.is_hevc_unsupported)
       return;
 
-    if (t.timescale > 0 && t.stts->size() > 0) {
-      uint32_t scheduledMs = (uint32_t)((ptsTicks * 1000) / t.timescale);
-      uint32_t nowMs = millis();
-      if (!playback_start_set) {
-        playback_start_ms = nowMs;
-        playback_start_set = true;
-      }
-      uint32_t scheduledWallMs = playback_start_ms + scheduledMs;
-      if (nowMs > scheduledWallMs) {
-        // Only skip if nothing else references this sample (see
-        // isSafeToSkipAvcc()) - dropping a referenced I/P-frame here
-        // would corrupt every later frame's decode until the next
-        // keyframe, not just this one. An unsafe-to-skip late frame is
-        // decoded immediately instead (no wait either, since we're
-        // already behind).
-        if (isSafeToSkipAvcc(data, size, t.nal_length_size)) {
-          LOGW("DemuxerMP4: video frame %u ms late - skipping (non-reference)",
-               (unsigned)(nowMs - scheduledWallMs));
-          return;
-        }
-        LOGW("DemuxerMP4: video frame %u ms late - decoding anyway (referenced by later frames)",
-             (unsigned)(nowMs - scheduledWallMs));
-      } else if (nowMs < scheduledWallMs) {
-        // Spend the slack draining buffered audio steadily instead of
-        // idling (or, previously, doing nothing at all and letting the
-        // pipeline race ahead) - this is what actually fixes bursty
-        // audio delivery; see setVideoAudioSync(). Capped at 200ms so a
-        // very early frame (e.g. right after a moov-parsing-driven
-        // pause) can't stall video for unreasonably long.
-        uint32_t waitMs = scheduledWallMs - nowMs;
-        LOGI("DemuxerMP4: video frame %u ms early", (unsigned)waitMs);
-        p_synch->delayVideoFrame((int32_t)(std::min(waitMs, 200lu) * 1000), 0);
-      }
+    // Prepend the SPS/PPS config (already Annex-B, same start-code
+    // format the conversion below produces - see onAvcC()'s appendUnit())
+    // into the *same* buffer as the frame's own NAL units, rather than a
+    // separate writeVideo() call before them - so a downstream VideoOutput
+    // always gets exactly one write() call per frame (matches DemuxerAVI/
+    // DemuxerMPG; see VideoAudioSyncTask, the only current consumer that
+    // cares about the distinction).
+    nal_tmp.clear();
+    bool prependConfig =
+        isFirst && !t.avc_config_sent && t.sps_pps_annexb.size() > 0;
+    if (prependConfig) {
+      nal_tmp.resize(t.sps_pps_annexb.size());
+      memcpy(nal_tmp.data(), t.sps_pps_annexb.data(), t.sps_pps_annexb.size());
+      t.avc_config_sent = true;
     }
 
     // convert AVCC length-prefixed NAL units to Annex-B start codes
-    nal_tmp.clear();
     size_t pos = 0;
     size_t lenSize = t.nal_length_size;
     while (pos + lenSize <= size) {
@@ -1342,12 +1252,6 @@ class DemuxerMP4 : public Demuxer {
       pos += nalLen;
     }
 
-    bool prependConfig =
-        isFirst && !t.avc_config_sent && t.sps_pps_annexb.size() > 0;
-    if (prependConfig) {
-      writeVideo(t.sps_pps_annexb.data(), t.sps_pps_annexb.size());
-      t.avc_config_sent = true;
-    }
     if (nal_tmp.size() > 0) writeVideo(nal_tmp.data(), nal_tmp.size());
     flushVideo();
   }
@@ -1367,20 +1271,17 @@ class DemuxerMP4 : public Demuxer {
 
   void dispatchAudio(Track& t, const uint8_t* data, size_t size, bool isFirst) {
     if (p_output_audio == nullptr) return;
-    // routed through p_synch instead of writing p_output_audio directly -
-    // see setVideoAudioSync(): the default buffers this instead of
-    // handing it straight to a (likely real-time) sink in bursts.
     if (t.audio_codec == Codec::AAC) {
       uint8_t adts[7];
       writeAdtsHeader(adts, t.aacProfile, t.sampleRateIdx, t.channelCfg,
                       (int)size);
-      p_synch->writeAudio(p_output_audio, adts, sizeof(adts));
-      p_synch->writeAudio(p_output_audio, const_cast<uint8_t*>(data), size);
+      p_output_audio->write(adts, sizeof(adts));
+      p_output_audio->write(data, size);
     } else {
       // ALAC (magic cookie is exposed via audioALACMagicCookie() for the
       // caller to configure their own decoder with) and any other codec:
       // raw payload as-is.
-      p_synch->writeAudio(p_output_audio, const_cast<uint8_t*>(data), size);
+      p_output_audio->write(data, size);
     }
   }
 

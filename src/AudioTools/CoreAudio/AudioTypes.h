@@ -563,16 +563,14 @@ class MimeSource {
 };
 
 /**
- * @brief Interface for classes that can provide time information.
- *
- * This class defines a simple interface for objects that can provide time
- * information in milliseconds. It serves as a base class for various time
- * tracking and source identification implementations within the audio tools
- * framework.
- *
- * Classes implementing this interface should provide logic to determine the
- * appropriate time value based on their specific context (e.g., audio stream
- * processing, event timing, etc.).
+ * @brief Interface for classes that can provide time information - two
+ * distinct notions of "now", not interchangeable: millis() is real wall
+ * time; playbackTime() is however far actual processing has gotten,
+ * which is not the same thing whenever the two can diverge (a consumer
+ * blocked/starved, a paused source, ...). A consumer that must stay tied
+ * to genuine progress (e.g. VideoAudioSyncTask scheduling video against
+ * actual decoded-audio playback, not merely time passing) should use
+ * playbackTime(), not millis().
  *
  * @note This is a pure virtual interface class and cannot be instantiated
  * directly.
@@ -581,7 +579,23 @@ class MimeSource {
  */
 class TimeSource {
  public:
-  virtual uint32_t millis() { return millis(); }
+  /// Wall-clock elapsed time (ms) - real time passing, regardless of
+  /// whatever this TimeSource actually tracks. The default implementation
+  /// just forwards to Arduino's own ::millis(); override only if this
+  /// TimeSource needs a different wall-clock source - most subclasses
+  /// should leave this alone and override playbackTime() instead.
+  virtual uint32_t millis() { return ::millis(); }
+
+  /// Elapsed time (ms) derived purely from what this TimeSource has
+  /// actually processed so far - never extrapolated from, or otherwise
+  /// dependent on, millis()/wall-clock time (see millis()'s own comment).
+  /// Stalls exactly when processing stalls instead of continuing to
+  /// advance the way millis() does. The default implementation just
+  /// forwards to millis() (i.e. "nothing special is tracked, wall time is
+  /// the best available approximation") - override this in any TimeSource
+  /// that actually tracks processed data instead (see
+  /// AudioTimeSourceStream, AudioTools/CoreAudio/AudioIO.h).
+  virtual uint32_t playbackTime() { return millis(); }
 };
 
 }  // namespace audio_tools

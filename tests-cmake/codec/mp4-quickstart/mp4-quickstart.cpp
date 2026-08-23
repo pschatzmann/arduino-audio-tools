@@ -226,13 +226,6 @@ void setup() {
 
     DemuxerMP4 demuxer;
     TestAudioSink audioSink;
-    // Plain pass-through sync instead of the default
-    // VideoAudioBufferedSync: that one only flushes its ring buffer once
-    // it fills or a video frame drains it - neither happens for this
-    // tiny, audio-only, video-less stream, so nothing would ever reach
-    // audioSink. Not related to quickStart() itself.
-    VideoAudioSync plainSync;
-    demuxer.setVideoAudioSync(&plainSync);
     // quickStart=false: FileSeekableSource must NOT also auto-trigger
     // quickStart() here - a second call would re-parse 'moov' into a
     // duplicate Track.
@@ -254,7 +247,7 @@ void setup() {
     }
 
     // dispatchAudio() prepends a synthesized 7-byte ADTS header to each
-    // 10-byte sample, as two separate writeAudio() calls
+    // 10-byte sample, as two separate write() calls
     assert(audioSink.total_bytes == 3 * (7 + 10));
     assert(audioSink.calls == 3 * 2);
     Serial.println("moov-at-end quickStart (manual, auto-disabled) test passed");
@@ -276,8 +269,6 @@ void setup() {
 
     DemuxerMP4 demuxer;
     TestAudioSink audioSink;
-    VideoAudioSync plainSync;
-    demuxer.setVideoAudioSync(&plainSync);
     // default constructor - quickStart defaults to true, no explicit
     // demuxer.quickStart() call anywhere in this scope
     FileSeekableSource<MemFile, DemuxerMP4> src(file, demuxer);
@@ -318,8 +309,6 @@ void setup() {
 
     DemuxerMP4 demuxer;
     TestAudioSink audioSink;
-    VideoAudioSync plainSync;
-    demuxer.setVideoAudioSync(&plainSync);
     FileSeekableSource<MemFile, DemuxerMP4> src(file, demuxer);
     demuxer.setOutputAudio(audioSink);
     demuxer.begin();

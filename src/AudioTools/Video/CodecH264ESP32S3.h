@@ -35,6 +35,12 @@ namespace audio_tools {
  * deferred to flush(). flush() is a no-op, kept only because some producers
  * (e.g. DemuxerAVI/DemuxerMP4) call it unconditionally after each frame.
  *
+ * No setup beyond setOutput() is required before begin() - unlike
+ * esp_h264::H264Decoder's own defaultConfig() (sized for VGA), this
+ * wrapper defaults its input/output buffers to sizes that fit typical
+ * small-panel use directly; setInputBufferSize()/setOutputBufferSize()
+ * exist only as an optional performance tweak (see their own comments).
+ *
  * The Alloc template parameter is forwarded to esp_h264::H264Decoder - see
  * that class's own file comment (H264Decoder.h) for the PSRAM- vs.
  * internal-RAM allocator choice (H264DecoderPSRAM/H264DecoderRAM aliases).
@@ -51,19 +57,22 @@ class H264DecoderESP32S3 : public VideoDecoder, public VideoInfoSource {
   H264DecoderESP32S3() {
     config_ = decoder_.defaultConfig();
     config_.output_format = ESP_H264_RAW_FMT_RGB565_LE;
+    // esp_h264::H264Decoder::defaultConfig() sizes both buffers for VGA
+    // (400KB input, ~450KB output) - both grow on demand via
+    // std::vector::resize() if a frame ever exceeds them anyway (see
+    // decode()/processDecodedFrame() in H264Decoder.h), so nothing
+    // breaks if these prove too small; they only pre-size to avoid a
+    // one-time reallocation. Default to something that fits this
+    // library's actual target (small-panel TFTs, QCIF/CIF-ish streams)
+    // instead of paying for VGA-sized buffers on every board regardless
+    // of what it's actually decoding - override via
+    // setInputBufferSize()/setOutputBufferSize() only if you know you
+    // need more (e.g. a larger panel) and want to skip that reallocation.
+    config_.input_buffer_size = 64 * 1024;
+    config_.output_buffer_size = 100 * 1024;
     config_.frame_callback = [this](const uint8_t *frame, uint32_t w,
                                      uint32_t h, esp_h264_raw_format_t fmt) {
       if (p_out == nullptr && p_out_video == nullptr) return;
-      // This backend decodes fast enough to never need to skip decoding a
-      // frame outright (unlike H264Decoder/TinyH264's tiered
-      // shouldAdmitFrame() - see Video.h) - but the display refresh that
-      // follows can still be the slower half of the pipeline, so the
-      // cheapest tier (VideoOutput::setSkipRender()) still applies here:
-      // every frame is always decoded (keeping any internal reference
-      // state correct), only the panel write is skipped when behind.
-      if (p_sync_ != nullptr && p_out_video != nullptr) {
-        p_out_video->setSkipRender(p_sync_->shouldSkipRender());
-      }
       size_t bytes = (size_t)(w * h * ESP_H264_GET_BPP_BY_PIC_TYPE(fmt));
       if (p_out != nullptr) p_out->write(frame, bytes);
       if (p_out_video != nullptr) p_out_video->write(frame, bytes);
@@ -119,14 +128,21 @@ class H264DecoderESP32S3 : public VideoDecoder, public VideoInfoSource {
     return info;
   }
 
-  /// Input buffer size (bytes) the wrapped decoder allocates for its own
-  /// copy of write()'s data - see esp_h264::H264Decoder::Config::
-  /// input_buffer_size. Call before begin().
+  /// Optional: pre-sizes the input buffer the wrapped decoder copies
+  /// write()'s data into - purely a performance knob, not a requirement:
+  /// esp_h264::H264Decoder grows it on demand if a frame ever exceeds it
+  /// (see H264Decoder::decode()), so a too-small (or never-called) value
+  /// still decodes correctly, just with an occasional reallocation.
+  /// Defaults to 64KB (see the constructor's comment). Call before
+  /// begin().
   void setInputBufferSize(size_t size) { config_.input_buffer_size = size; }
 
-  /// Output buffer size (bytes) the wrapped decoder allocates for the
-  /// decoded/converted picture - must be at least width*height*bytes-
-  /// per-pixel for setVideoFormat()'s format. Call before begin().
+  /// Optional: pre-sizes the output buffer the wrapped decoder allocates
+  /// for the decoded/converted picture - purely a performance knob, not
+  /// a requirement: it grows on demand to fit width*height*bytes-per-
+  /// pixel for setVideoFormat()'s format if this proves too small (see
+  /// H264Decoder::processDecodedFrame()). Defaults to 100KB (see the
+  /// constructor's comment). Call before begin().
   void setOutputBufferSize(size_t size) { config_.output_buffer_size = size; }
 
   /// Initializes the decoder - see esp_h264::H264Decoder::begin().
@@ -155,19 +171,11 @@ class H264DecoderESP32S3 : public VideoDecoder, public VideoInfoSource {
   /// Direct access to the wrapped esp_h264::H264Decoder.
   esp_h264::H264Decoder<Alloc> &driver() { return decoder_; }
 
-  /// Wires the demuxer's frame-pacing object in, so the frame callback
-  /// (see constructor) can consult isBehindSchedule() before writing a
-  /// decoded picture - see VideoOutput::setSyncSource(). Called
-  /// automatically by DemuxerAVI/DemuxerMP4/DemuxerMPG's
-  /// setOutputVideo(VideoOutput&).
-  void setSyncSource(VideoAudioSync *sync) override { p_sync_ = sync; }
-
  protected:
   esp_h264::H264Decoder<Alloc> decoder_;
   typename esp_h264::H264Decoder<Alloc>::Config config_;
   Print *p_out = nullptr;
   VideoOutput *p_out_video = nullptr;
-  VideoAudioSync *p_sync_ = nullptr;
 };
 
 /**

@@ -22,16 +22,26 @@
  * data past what's been written. Both are fixed at the library level
  * (CodecCopy.h, ContainerAVI.h) - not sketch-specific workarounds.
  *
- * Audio/video sync: DemuxerAVI defaults to VideoAudioClockSync (mirrors
- * DemuxerMP4's wall-clock approach) - it waits only the remaining time
- * until each frame's scheduled instant, instead of a blind delay() that
- * underruns audio once a frame (H.264 decode + cv::imshow) takes longer
- * than expected. Audio is written straight through; PortAudioStream's
- * blocking write sets the real-time pace.
+ * Audio/video sync: DemuxerAVI itself just writes audio straight through
+ * and does nothing for video - all real sync work happens in videoSync
+ * (VideoAudioSyncTask, see Video/VideoAudioSyncTask.h), which sits between
+ * the demuxer and h264Decoder.
+ * It buffers each decoded frame and renders it (decode + cv::imshow) from
+ * its own background task, timed against audioClock - an
+ * AudioTimeSourceStream inserted between multiDecoder and PortAudioStream
+ * that turns "how many decoded PCM bytes have reached the audio device so
+ * far" into an elapsed-ms clock. Since PortAudioStream's write() blocks at
+ * the real playback rate, that clock tracks actual audio playback time -
+ * so video is paced to how far audio has actually played, not to a
+ * separate, independent wall-clock schedule. Because this all happens off
+ * the demuxer's own thread, a slow decode/display frame never delays the
+ * next audio chunk the way an inline wait used to.
  *
  * Pipeline: File -> CodecCopy -> DemuxerAVI (demux)
- *   -> EncodedAudioStream (DecoderHelix: WAV/AAC/MP3) -> PortAudioStream (audio)
- *   \-> H264Decoder (H.264 decode -> RGB565) -> OutputOpenCV (draw) (video)
+ *   -> EncodedAudioStream (DecoderHelix: WAV/AAC/MP3) -> AudioTimeSourceStream
+ *   (audio clock) -> PortAudioStream (audio)
+ *   \-> VideoAudioSyncTask (buffer + schedule) -> H264Decoder (H.264 decode
+ *   -> RGB565) -> OutputOpenCV (draw) (video, own background task)
  *
  * To build & run:
  * - mkdir build && cd build && cmake .. && make
@@ -54,9 +64,15 @@ const char *file_path = "/media/pschatzmann/External/Videos/output176x144.avi";
 
 OutputOpenCV videoOut;  // default mode is MJPEG - decodes the JPEG itself
 H264Decoder h264Decoder(videoOut);
+// 3rd arg: scheduling delay compensating for PortAudioStream's own output
+// buffering below (buffer_size*buffer_count bytes) - see
+// VideoAudioSyncTask::setSchedulingDelayMs(); ~50ms is a rough match for
+// 1024*10 bytes of 44.1kHz/16-bit/stereo PCM, tune for your own config.
+VideoAudioSyncTask videoSync(h264Decoder, 0, 50);
 PortAudioStream out;
+AudioTimeSourceStream audioClock(out);  // decoded-PCM-bytes-based playback clock
 DecoderHelix multiDecoder;
-EncodedAudioStream audioOut(&out, &multiDecoder);  // decodes PCM/AAC/MP3 -> PortAudio
+EncodedAudioStream audioOut(&audioClock, &multiDecoder);  // decodes PCM/AAC/MP3 -> audioClock -> PortAudio
 
 DemuxerAVI aviDemuxer;
 File file;
@@ -86,13 +102,32 @@ void setup() {
   videoOut.setVideoInfoSource(aviDemuxer);
   audioOut.begin();
 
-  aviDemuxer.setOutputAudio(audioOut);
-  aviDemuxer.setOutputVideo(h264Decoder);
-  aviDemuxer.begin();
+  videoSync.setAudioClock(audioClock);
 
+  aviDemuxer.setOutputAudio(audioOut);
+  aviDemuxer.setOutputVideo(videoSync);
+  aviDemuxer.begin();
 }
 
 void loop() {
+  // AVI's header (which carries the nominal frame rate) always precedes
+  // the movi data - so this becomes available strictly before the first
+  // video frame ever reaches videoSync, no polling/gating needed beyond
+  // "call it every time, cheaply, until it's non-zero".
+  float fps = aviDemuxer.getVideoInfo().fps;
+  if (fps > 0) videoSync.setFps(fps);
+
+  static uint32_t diagLast = 0;
+  if (millis() - diagLast > 1000) {
+    Serial.print("avg render ms - I: ");
+    Serial.print(videoSync.avgIFrameMs());
+    Serial.print(" / P: ");
+    Serial.print(videoSync.avgPFrameMs());
+    Serial.print(" / overall: ");
+    Serial.println(videoSync.avgFrameMs());
+    diagLast = millis();
+  }
+
   if (file && copier.copy()) {
     // MJPEG frames are self-describing (JPEG header carries width/height),
     // so - unlike decode-mp4.ino/decode-mpg.ino - there's no setSize() to

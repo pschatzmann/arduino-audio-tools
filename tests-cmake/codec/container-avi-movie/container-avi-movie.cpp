@@ -30,7 +30,6 @@ EncodedAudioStream audioOut(&out, &multiDecoder);  // decodes PCM/AAC/MP3 -> out
 EncodedAudioOutput avi(&audioOut, &codec);
 File file;
 StreamCopy copier(avi, file);
-VideoAudioBufferedSync videoSync(10*1024, -20);
 
 
 void setup() {
@@ -38,7 +37,6 @@ void setup() {
   multiDecoder.begin();
   file.open("/data/resources/test1.avi",FILE_READ);
   codec.setOutputVideo(jpegDisplay);
-  codec.setVideoAudioSync(&videoSync);
   //codec.setMute(true);
 }
 

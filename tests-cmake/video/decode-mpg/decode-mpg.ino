@@ -15,15 +15,23 @@
  * (unlike StreamCopy) CodecCopy retries the remainder instead of dropping
  * it, which would desync the demuxer from the real pack/PES byte stream.
  *
- * DemuxerMPG defaults to VideoAudioBufferedSync (same as DemuxerMP4) to
- * pace audio/video against each PES packet's PTS instead of dispatching as
- * fast as bytes can be parsed. OutputOpenCV pulls its picture size from
- * DemuxerMPG via setVideoInfoSource(), same as decode-mp4-file.ino/
- * decode-mp4.ino.
+ * Audio/video sync: DemuxerMPG dispatches audio/video as fast as bytes can
+ * be parsed - all real pacing happens in videoSync (VideoAudioSyncTask,
+ * see Video/VideoAudioSyncTask.h), which sits between the demuxer and
+ * mpgDecoder. It buffers each decoded picture and renders it (decode +
+ * cv::imshow) from its own background task, timed against audioClock - an
+ * AudioTimeSourceStream inserted between multiDecoder and PortAudioStream
+ * that turns "how many decoded PCM bytes have reached the audio device so
+ * far" into an elapsed-ms clock, so video is paced to how far audio has
+ * actually played rather than a separate wall-clock schedule. OutputOpenCV
+ * pulls its picture size from DemuxerMPG via setVideoInfoSource(), same as
+ * decode-mp4-file.ino/decode-mp4.ino.
  *
- * Pipeline: File -> CodecCopy -> DemuxerMPG (demux, paced)
- *   -> EncodedAudioStream (DecoderHelix) -> PortAudioStream (audio)
- *   \-> MPGDecoder (MPEG-1 decode -> RGB565) -> OutputOpenCV (draw) (video)
+ * Pipeline: File -> CodecCopy -> DemuxerMPG (demux)
+ *   -> EncodedAudioStream (DecoderHelix) -> AudioTimeSourceStream (audio
+ *   clock) -> PortAudioStream (audio)
+ *   \-> VideoAudioSyncTask (buffer + schedule) -> MPGDecoder (MPEG-1
+ *   decode -> RGB565) -> OutputOpenCV (draw) (video, own background task)
  *
  * To build & run:
  * - mkdir build && cd build && cmake .. && make
@@ -46,10 +54,15 @@ const char *file_path = "/media/pschatzmann/External/Videos/output176x144-mp3.mp
 
 MPGDecoder mpgDecoder;
 OutputOpenCV videoOut;
+// 3rd arg: scheduling delay compensating for PortAudioStream's own output
+// buffering - see VideoAudioSyncTask::setSchedulingDelayMs(); tune to
+// match your actual audio config (this uses PortAudioStream's defaults).
+VideoAudioSyncTask videoSync(mpgDecoder, 0, 50);
 PortAudioStream out;
+AudioTimeSourceStream audioClock(out);  // decoded-PCM-bytes-based playback clock
 MP2Decoder mp2Decoder;
 DecoderHelix multiDecoder;
-EncodedAudioStream audioOut(&out, &multiDecoder);  // decodes MP3/AAC/WAV -> PortAudio
+EncodedAudioStream audioOut(&audioClock, &multiDecoder);  // decodes MP3/AAC/WAV -> audioClock -> PortAudio
 
 DemuxerMPG mpgDemuxer;
 File file;
@@ -87,12 +100,21 @@ void setup() {
   videoOut.setVideoFormat(VideoFormat::RGB565);
   videoOut.setVideoInfoSource(mpgDemuxer);
 
+  videoSync.setAudioClock(audioClock);
+
   mpgDemuxer.setOutputAudio(audioOut);
-  mpgDemuxer.setOutputVideo(mpgDecoder);
+  mpgDemuxer.setOutputVideo(videoSync);
   mpgDemuxer.begin();
 }
 
 void loop() {
+  // fps is only known once the video ES's sequence_header has streamed in
+  // (see DemuxerMPG::getVideoInfo()) - cheap to just keep checking until
+  // it's non-zero, same as the picture-size polling OutputOpenCV already
+  // relies on via setVideoInfoSource().
+  float fps = mpgDemuxer.getVideoInfo().fps;
+  if (fps > 0) videoSync.setFps(fps);
+
   if (file && copier.copy()) {
     // no-op - OutputOpenCV pulls its size from mpgDemuxer via
     // setVideoInfoSource(), no manual polling needed here anymore

@@ -1,5 +1,4 @@
 #pragma once
-#include <algorithm>
 #include <string.h>
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
 #include "AudioTools/AudioCodecs/AudioFormat.h"
@@ -150,7 +149,6 @@ class DemuxerMPG : public Demuxer {
     audio_channels = 0;
     audio_layer = 0;
     total_bytes = 0;
-    playback_start_set = false;
     return true;
   }
 
@@ -178,26 +176,12 @@ class DemuxerMPG : public Demuxer {
   /// Defines the video output - e.g. a VideoOutput implementation, or any
   /// other Print if you want the raw MPEG-1 video ES as-is.
   void setOutputVideo(Print &out) override { p_output_video = &out; }
-  void setOutputVideo(VideoOutput &out) {
-    p_output_video_video = &out;
-    out.setSyncSource(p_synch);
-  }
+  void setOutputVideo(VideoOutput &out) { p_output_video_video = &out; }
 
   /// Not applicable: MPEG-1 audio (Layer I/II/III) is compressed and
   /// self-framed (its own sync word), unlike PCM - it never needs a
   /// synthetic WAV header. Provided only to satisfy the Demuxer interface.
   void setSendWavHeader(bool flag) override { (void)flag; }
-
-  /// Overrides the audio/video pacing mechanism - same role as
-  /// DemuxerMP4::setVideoAudioSync(); defaults to a VideoAudioBufferedSync
-  /// so this container gets the same real-time pacing MP4 does instead of
-  /// dispatching audio/video as fast as bytes can be parsed (previously the
-  /// PES PTS was parsed and immediately discarded - see parsePes()).
-  void setVideoAudioSync(VideoAudioSync &sync) {
-    p_synch = &sync;
-    // Re-wire regardless of call order relative to setOutputVideo().
-    if (p_output_video_video != nullptr) p_output_video_video->setSyncSource(p_synch);
-  }
 
   /// Common video info (width/height/fps/format), parsed from the video
   /// ES's own sequence_header (ISO/IEC 11172-2) once seen - all zero/
@@ -306,13 +290,6 @@ class DemuxerMPG : public Demuxer {
   Vector<uint8_t> audio_probe;
   static const size_t VIDEO_PROBE_MAX = 64;
 
-  // audio/video pacing (see setVideoAudioSync()) - defaults to the same
-  // buffered strategy DemuxerMP4 uses.
-  VideoAudioBufferedSync default_synch{10 * 1024, -20};
-  VideoAudioSync *p_synch = &default_synch;
-  bool playback_start_set = false;
-  uint32_t playback_start_ms = 0;
-
   /// Parses/consumes as much as is currently buffered; returns true if
   /// progress was made (call again - more units may already be buffered),
   /// false if it needs more data (wait for the next write()).
@@ -415,8 +392,6 @@ class DemuxerMPG : public Demuxer {
     }
     if (parse_buffer.available() < 6 + optional_len) return false;
 
-    uint64_t pts = 0;
-    if (has_pts) pts = readTimestamp(buf + 6);
     parse_buffer.consume(6 + optional_len);
     (void)id;
 
@@ -438,58 +413,21 @@ class DemuxerMPG : public Demuxer {
       audio_frame_open = true;
     }
 
-    bool skip_late_picture = false;
     if (isVideo && has_pts) {
       // a PTS marks the first fragment of a new access unit - close out
       // the previous one
       if (video_frame_open) flushVideoUnit();
       video_frame_open = true;
-
-      // Pace this new picture against wall-clock time using its PTS (a
-      // MPG_CLOCK_HZ=90kHz tick count) - mirrors DemuxerMP4::dispatchVideo()'s
-      // schedule-anchored wait.
-      uint32_t scheduledMs = (uint32_t)(pts * 1000 / MPG_CLOCK_HZ);
-      uint32_t nowMs = millis();
-      if (!playback_start_set) {
-        // Anchor so this *first* frame's own PTS lines up with "now",
-        // not so PTS==0 does - a Program Stream's PTS values commonly
-        // don't start at 0 at all (this project's own MuxerMPG derives
-        // them from a running frame/sample counter that does, but a
-        // real-world encoder's first PTS is routinely a few hundred ms
-        // in - e.g. ffprobe reports ~540ms for a typical test file).
-        // Anchoring to nowMs directly would bake that whole offset into
-        // every single later frame's schedule as extra, permanent
-        // "earliness", making every wait longer than it should be for
-        // the entire rest of playback, not just the first frame.
-        playback_start_ms = nowMs >= scheduledMs ? nowMs - scheduledMs : 0;
-        playback_start_set = true;
-      }
-      uint32_t scheduledWallMs = playback_start_ms + scheduledMs;
-      if (nowMs > scheduledWallMs) {
-        // Only skip if this picture is never used as a reference (a
-        // B-picture, coding_type==3) - see peekPictureCodingType(). An
-        // I/P picture (or a coding type we can't determine yet) is
-        // decoded immediately instead, no wait either since we're
-        // already behind.
-        int codingType = peekPictureCodingType(parse_buffer.data(),
-                                                parse_buffer.available());
-        if (codingType == 3) {
-          LOGW("DemuxerMPG: video picture %u ms late - skipping (B-picture)",
-               (unsigned)(nowMs - scheduledWallMs));
-          skip_late_picture = true;
-        } else {
-          LOGW("DemuxerMPG: video picture %u ms late - decoding anyway (%s)",
-               (unsigned)(nowMs - scheduledWallMs),
-               codingType < 0 ? "coding type unknown" : "referenced by later pictures");
-        }
-      } else if (nowMs < scheduledWallMs) {
-        uint32_t waitMs = scheduledWallMs - nowMs;
-        p_synch->delayVideoFrame((int32_t)(std::min(waitMs, 200u) * 1000), 0);
-      }
+      // No wall-clock scheduling or skip decision here anymore - every
+      // picture is always decoded and forwarded immediately, in full.
+      // Pacing is the caller's responsibility now - see VideoAudioSyncTask
+      // (Video/VideoAudioSyncTask.h), which schedules frames from its own
+      // background task instead of blocking this dispatch loop (and, with
+      // it, audio delivery) the way an inline wait here used to.
     }
 
     unit_open = true;
-    is_skip_unit = skip_late_picture;
+    is_skip_unit = false;
     is_video_unit = isVideo;
     unbounded = is_unbounded;
     remaining = payload_len;
@@ -615,46 +553,14 @@ class DemuxerMPG : public Demuxer {
   }
 
   /// Writes out the accumulated unit_buffer as one single, complete
-  /// write() call (routed through p_synch, same as before - see
-  /// setVideoAudioSync()) if it currently holds an audio frame, then
-  /// resets it for the next unit. A no-op if the buffer currently holds
-  /// video instead - see deliver().
+  /// write() call if it currently holds an audio frame, then resets it
+  /// for the next unit. A no-op if the buffer currently holds video
+  /// instead - see deliver().
   void flushAudioUnit() {
     if (unit_len == 0 || unit_holds_video) return;
     if (p_output_audio != nullptr)
-      p_synch->writeAudio(p_output_audio, unit_buffer.data(), unit_len);
+      p_output_audio->write(unit_buffer.data(), unit_len);
     unit_len = 0;
-  }
-
-  /// Reads a single 5-byte MPEG-1 timestamp field (PTS or DTS - both use
-  /// the same bit layout, only the leading 4-bit id nibble differs, which
-  /// is not part of this 5-byte window) at 'p'.
-  static uint64_t readTimestamp(const uint8_t *p) {
-    uint64_t ts = 0;
-    ts |= ((uint64_t)(p[0] >> 1) & 0x07) << 30;
-    ts |= ((uint64_t)((((uint16_t)p[1] << 8) | p[2]) >> 1) & 0x7FFF) << 15;
-    ts |= (uint64_t)((((uint16_t)p[3] << 8) | p[4]) >> 1) & 0x7FFF;
-    return ts;
-  }
-
-  /// Scans 'data' (the still-buffered start of a new video access unit)
-  /// for the picture_start_code (00 00 01 00, ISO/IEC 11172-2 clause
-  /// 2.4.3.3) and returns its picture_coding_type (1=I, 2=P, 3=B), or -1
-  /// if the picture_start_code isn't within what's currently buffered
-  /// (e.g. a GOP/sequence header ahead of it hasn't fully arrived yet).
-  /// Only B-pictures are never used as a prediction reference by any
-  /// other picture in MPEG-1 - used before skipping a late picture in
-  /// parsePes(): dropping an I or P picture would corrupt every later
-  /// picture's decode until the next keyframe, not just the one skipped
-  /// (same reasoning as DemuxerMP4::isSafeToSkipAvcc()).
-  static int peekPictureCodingType(const uint8_t *data, size_t len) {
-    for (size_t i = 0; i + 6 <= len; i++) {
-      if (data[i] == 0 && data[i + 1] == 0 && data[i + 2] == 1 &&
-          data[i + 3] == 0x00) {
-        return (data[i + 5] >> 3) & 0x07;
-      }
-    }
-    return -1;
   }
 
   /// Accumulates the first bytes of the video ES looking for its

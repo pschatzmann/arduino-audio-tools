@@ -1010,9 +1010,13 @@ class ChannelsSelectOutput : public AudioOutput {
   }
 };
 
-/** 
- * @brief AudioTimeSourceStream: A stream that provides time information based
- * on the audio data processed. It implements the TimeSource interface.
+/**
+ * @brief AudioTimeSourceStream: A stream that provides time information
+ * based on the audio data actually processed - implements the TimeSource
+ * interface. millis() (inherited, unmodified) is plain wall time;
+ * playbackTime() is the audio-derived progress, which is what a consumer
+ * that must stay tied to genuine playback (e.g. VideoAudioSyncTask) should
+ * use instead - see playbackTime()'s own comment for why they can diverge.
  * @ingroup io
  * @author Phil Schatzmann
  */
@@ -1025,6 +1029,13 @@ class AudioTimeSourceStream : public AudioStream, public TimeSource {
   AudioTimeSourceStream(Print& print)  { setOutput(print); }
   AudioTimeSourceStream(Stream& stream) { setStream(stream); }
 
+  /// Optional: explicitly (re)starts playbackTime() at 0 - use this if
+  /// you need an explicit restart point (e.g. looping/seeking). Not
+  /// required otherwise: the first byte that actually flows through
+  /// write()/readBytes() anchors it on its own (see updateTime()) - most
+  /// callers just wire this in as a plain Print/AudioStream target (e.g.
+  /// VideoAudioSyncTask::setAudioClock()'s usage pattern) and never call
+  /// begin() on it directly.
   bool begin() {
     bool result = AudioStream::begin();
     if (result) {
@@ -1035,9 +1046,12 @@ class AudioTimeSourceStream : public AudioStream, public TimeSource {
 
   size_t readBytes(uint8_t* data, size_t len) override {
     if (time_callback_before != nullptr) {
-      time_callback_before(current_time_ms);
+      time_callback_before(playbackTime());
     }
-    size_t result = AudioStream::readBytes(data, len);
+    // Forward to the configured source (set via setStream()) rather than
+    // AudioStream::readBytes(), which is just an "unsupported" stub with
+    // no knowledge of p_stream.
+    size_t result = p_stream != nullptr ? p_stream->readBytes(data, len) : 0;
     if (result > 0) {
       updateTime(result);
     }
@@ -1046,18 +1060,29 @@ class AudioTimeSourceStream : public AudioStream, public TimeSource {
 
   size_t write(const uint8_t* data, size_t len) override {
     if (time_callback_before != nullptr) {
-      time_callback_before(current_time_ms);
+      time_callback_before(playbackTime());
     }
-    size_t result = AudioStream::write(data, len);
+    // Forward to the configured target (set via setOutput()/setStream())
+    // rather than AudioStream::write(), which is just an "unsupported"
+    // stub with no knowledge of p_out - this class exists specifically to
+    // sit transparently between a decoder and the real audio sink.
+    size_t result = p_out != nullptr ? p_out->write(data, len) : 0;
     if (result > 0) {
       updateTime(result);
     }
     return result;
   }
 
-  /// Provides the current time in milliseconds based on the audio data
-  /// processed
-  uint32_t millis() override { return current_time_ms; }
+  /// Elapsed playback time (ms): the sum of audio duration
+  /// (sample_rate/channels/bits_per_sample-derived) actually handed to
+  /// write()/readBytes() so far - see TimeSource::playbackTime(). Purely
+  /// a running total of processed bytes: never extrapolated by, or
+  /// otherwise dependent on, wall-clock time (see millis(), inherited
+  /// unmodified, for that) - so it stalls exactly when the caller stalls
+  /// (e.g. busy elsewhere in a shared demux/decode loop) instead of
+  /// continuing to advance. Returns 0 before the first byte has ever been
+  /// processed (begin() is optional - see its own comment).
+  uint32_t playbackTime() override { return playback_time_ms; }
 
   void setOutput(Print& out)  {
     p_out = &out;
@@ -1083,21 +1108,22 @@ class AudioTimeSourceStream : public AudioStream, public TimeSource {
  protected:
   Print *p_out = nullptr;
   Stream *p_stream = nullptr;
-  uint32_t current_time_ms = 0;
+  // Pure running total of byte-derived durations - see playbackTime().
+  // Never touched by wall-clock time.
+  uint32_t playback_time_ms = 0;
   void (*time_callback_before)(uint32_t time_ms) = nullptr;
   void (*time_callback_after)(uint32_t time_ms) = nullptr;
 
-  void resetTime() { current_time_ms = 0; }
-  void (*cb)(uint32_t time_ms);
+  void resetTime() { playback_time_ms = 0; }
 
   void updateTime(size_t bytes) {
     AudioInfo info = audioInfo();
     uint32_t bytes_per_second = info.sample_rate * info.channels * info.bits_per_sample / 8;
-    uint32_t time_ms = (bytes * 1000) / bytes_per_second;
-
-    current_time_ms += time_ms;
+    if (bytes_per_second == 0) return;
+    uint32_t added_ms = (uint32_t)(((uint64_t)bytes * 1000) / bytes_per_second);
+    playback_time_ms += added_ms;
     if (time_callback_after != nullptr) {
-      time_callback_after(current_time_ms);
+      time_callback_after(playback_time_ms);
     }
   }
 };

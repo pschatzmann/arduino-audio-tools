@@ -1,8 +1,7 @@
 #pragma once
 #include <TinyGPU.h>  // https://github.com/pschatzmann/TinyGPU
-#include <TinyGPU/DisplayDriverSPI.h>  // ILI9341Driver
+#include <TinyGPU/DisplayDriver.h>  // ILI9341Driver
 #include <TinyGPU/Boards.h>  // LCDBoard
-#include <TinyGPU/SurfaceWithExternalBuffer.h>  // zero-copy write() path
 
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
 #include "AudioTools/Video/CodecVideo.h"
@@ -17,12 +16,13 @@ namespace audio_tools {
  * whole frame in one go.
  * Usually the data is in RGB565 format, but other formats are supported as well
  *
- * write() never allocates or copies a full-frame buffer of its own: it
- * wraps the caller's already-decoded frame in a SurfaceWithExternalBuffer
- * (a TinyGPU view over externally-owned memory) and hands that straight to
- * the display driver, so RAM use stays independent of the frame size -
- * only clearScreen()'s small band buffer (kBandHeight rows) is actually
- * owned/allocated here.
+ * write() never allocates or copies a full-frame buffer of its own for the
+ * unscaled path: it wraps the caller's already-decoded frame in a
+ * SurfaceWithExternalBuffer (a TinyGPU view over externally-owned memory)
+ * and hands that straight to the display driver. Scaling (setScaleToFit())
+ * and I420 conversion do need their own scratch buffers - see
+ * setScaleSingleBuffer() for the size/SPI-transaction-count tradeoff those
+ * involve.
  * @ingroup video
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -91,9 +91,23 @@ class OutputTinyGPU : public VideoOutput {
   /// the aspect ratio is NOT preserved, the source is stretched to the
   /// panel's own aspect ratio. Off by default (direct 1:1 write at (0,0),
   /// e.g. a QCIF video shown at native size in the corner of a larger
-  /// panel). Scaling is done one output row at a time (no full-frame
-  /// scratch buffer) to keep RAM use independent of resolution.
+  /// panel). See setScaleSingleBuffer() for how the actual scaling is done.
   void setScaleToFit(bool enable) { scale_to_fit = enable; }
+
+  /// Controls how writeScaled() (the actual scale_to_fit implementation)
+  /// trades RAM for SPI transaction count. true (the default): scale the
+  /// whole frame into one full output-size buffer (scale_frame_buf_ -
+  /// width*height*sizeof(RGB565) bytes, e.g. 150KB at 320x240) and hand it
+  /// to the driver in a single writeData() call, the same one-transaction
+  /// shape as the unscaled path. false: the original one-row-at-a-time
+  /// path - only a single row's worth of RAM (scale_line_), but one
+  /// writeData() call per output row (e.g. 240 small SPI transactions
+  /// instead of 1 at 320x240) - each pays its own fixed per-transaction
+  /// overhead (chip-select, command/address setup, driver call overhead),
+  /// which tends to dominate over the pixel math itself. Call before the
+  /// first scaled frame arrives - changing it afterwards takes effect on
+  /// the next writeScaled() call, not retroactively.
+  void setScaleSingleBuffer(bool enable) { scale_single_buffer = enable; }
 
   /// Skips the actual panel refresh (the SPI-bound part) on the next and
   /// subsequent write() calls, while still validating the frame and
@@ -160,22 +174,47 @@ class OutputTinyGPU : public VideoOutput {
   }
 
   /// Nearest-neighbor scales a source frame (srcW x srcH, RGB565, tightly
-  /// packed) up/down to exactly width x height, one output row at a time:
-  /// build one scaled row into scale_line_, then hand it to the driver as
-  /// a 1-row-tall surface. Costs one extra small SPI transaction per output
-  /// row versus the unscaled single-transaction path, but needs only a
-  /// single row's worth of scratch RAM regardless of resolution.
+  /// packed) up/down to exactly width x height - see setScaleSingleBuffer()
+  /// for the two ways this actually reaches the driver. Each output
+  /// pixel's source column/row comes from scale_x_lut_/scale_y_lut_ (see
+  /// updateScaleLuts()) - a lookup, not a division - since srcW/srcH/
+  /// width/height are the same on every call for a given video+panel.
   void writeScaled(const uint8_t* data, int srcW, int srcH) {
     int width = (int)tftDriver.width();
     int height = (int)tftDriver.height();
-    if ((int)scale_line_.size() != width) scale_line_.resize(width);
+    updateScaleLuts(srcW, srcH, width, height);
     const RGB565* src = (const RGB565*)data;
+    const int* xLut = scale_x_lut_.data();
+    const int* yLut = scale_y_lut_.data();
+
+    if (scale_single_buffer) {
+      size_t pixels = (size_t)width * height;
+      if (scale_frame_buf_.size() != pixels) scale_frame_buf_.resize(pixels);
+      for (int y = 0; y < height; y++) {
+        const RGB565* srcRow = src + (size_t)yLut[y] * srcW;
+        RGB565* dstRow = scale_frame_buf_.data() + (size_t)y * width;
+        for (int x = 0; x < width; x++) {
+          dstRow[x] = srcRow[xLut[x]];
+        }
+      }
+      SurfaceWithExternalBuffer<RGB565> frame;
+      frame.setExternalBuffer((uint8_t*)scale_frame_buf_.data(),
+                               pixels * sizeof(RGB565));
+      frame.resize(width, height);
+      tftDriver.writeData(frame, 0, 0);
+      return;
+    }
+
+    // One row at a time: build one scaled row into scale_line_, then hand
+    // it to the driver as a 1-row-tall surface - one extra small SPI
+    // transaction per output row versus the single-buffer path above, but
+    // needs only a single row's worth of scratch RAM regardless of
+    // resolution.
+    if ((int)scale_line_.size() != width) scale_line_.resize(width);
     for (int y = 0; y < height; y++) {
-      int srcY = (int)((int64_t)y * srcH / height);
-      const RGB565* srcRow = src + (size_t)srcY * srcW;
+      const RGB565* srcRow = src + (size_t)yLut[y] * srcW;
       for (int x = 0; x < width; x++) {
-        int srcX = (int)((int64_t)x * srcW / width);
-        scale_line_[x] = srcRow[srcX];
+        scale_line_[x] = srcRow[xLut[x]];
       }
       SurfaceWithExternalBuffer<RGB565> row;
       row.setExternalBuffer((uint8_t*)scale_line_.data(),
@@ -183,6 +222,30 @@ class OutputTinyGPU : public VideoOutput {
       row.resize(width, 1);
       tftDriver.writeData(row, 0, y);
     }
+  }
+
+  /// Rebuilds scale_x_lut_/scale_y_lut_ (the nearest-neighbor source
+  /// column/row for each output column/row) - a no-op unless srcW/srcH/
+  /// width/height actually changed since the last call (the common case:
+  /// same video, same panel, every frame), so the division this replaces
+  /// runs at most once per resolution change instead of once per pixel.
+  void updateScaleLuts(int srcW, int srcH, int width, int height) {
+    if (srcW == scale_lut_src_w_ && srcH == scale_lut_src_h_ &&
+        width == scale_lut_dst_w_ && height == scale_lut_dst_h_) {
+      return;
+    }
+    scale_x_lut_.resize(width);
+    for (int x = 0; x < width; x++) {
+      scale_x_lut_[x] = (int)((int64_t)x * srcW / width);
+    }
+    scale_y_lut_.resize(height);
+    for (int y = 0; y < height; y++) {
+      scale_y_lut_[y] = (int)((int64_t)y * srcH / height);
+    }
+    scale_lut_src_w_ = srcW;
+    scale_lut_src_h_ = srcH;
+    scale_lut_dst_w_ = width;
+    scale_lut_dst_h_ = height;
   }
 
   /// Converts one planar I420 frame (srcW x srcH: full-size Y plane
@@ -260,13 +323,40 @@ class OutputTinyGPU : public VideoOutput {
   DisplayDriver<RGB565>& tftDriver;
   LCDBoard* p_board = nullptr;
   bool scale_to_fit = false;
+  bool scale_single_buffer = true;
   bool skip_render = false;
-  Vector<RGB565> scale_line_;
+  /// All the scratch buffers below are forced onto internal RAM (via
+  /// DefaultESP32AllocatorRAM - Allocator.h - instead of Vector's own
+  /// default, which tries PSRAM first) rather than internal SRAM's default
+  /// Vector allocator (which tries PSRAM first, via ps_malloc) - every one
+  /// of them is read/written in a tight per-pixel loop, tens of thousands
+  /// of times a frame, and PSRAM's higher per-access latency costs far
+  /// more there than its extra capacity is worth for buffers this size.
+
+  /// Full output-size scratch buffer for writeScaled()'s single-buffer
+  /// path (see setScaleSingleBuffer(), the default) - only allocated once
+  /// a scaled frame is actually written.
+  Vector<RGB565> scale_frame_buf_{0, DefaultESP32AllocatorRAM};
+  /// Single-row scratch buffer for writeScaled()'s row-at-a-time path
+  /// (setScaleSingleBuffer(false)) - only allocated if that path is used.
+  Vector<RGB565> scale_line_{0, DefaultESP32AllocatorRAM};
+  /// Nearest-neighbor source column/row for each output column/row - see
+  /// updateScaleLuts(). scale_lut_* below records what resolution these
+  /// were last built for, so a resolution change (not every frame) is
+  /// what triggers a rebuild. Read once per output pixel (the innermost
+  /// loop in writeScaled()) - the single hottest access of any buffer
+  /// here, so keeping it off PSRAM matters most for these two.
+  Vector<int> scale_x_lut_{0, DefaultESP32AllocatorRAM};
+  Vector<int> scale_y_lut_{0, DefaultESP32AllocatorRAM};
+  int scale_lut_src_w_ = -1;
+  int scale_lut_src_h_ = -1;
+  int scale_lut_dst_w_ = -1;
+  int scale_lut_dst_h_ = -1;
   /// Native-resolution scratch buffer for writeI420()'s YUV->RGB565
   /// conversion - unlike scale_line_ (one row), this holds a full frame,
   /// since the conversion must run before scaling can reuse writeScaled().
   /// Only allocated once an I420 frame is actually written.
-  Vector<RGB565> i420_rgb_buf_;
+  Vector<RGB565> i420_rgb_buf_{0, DefaultESP32AllocatorRAM};
   uint32_t write_time_ms = 0;
 };
 
