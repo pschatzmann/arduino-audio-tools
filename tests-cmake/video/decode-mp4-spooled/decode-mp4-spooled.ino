@@ -29,16 +29,16 @@
  * Pacing: DemuxerMP4 dispatches video as fast as bytes can be parsed - with
  * no decoder in between to pace it, frames would decode/display as fast as
  * the CPU allows instead of at the file's real frame rate. videoSync
- * (VideoAudioSyncTask, see Video/VideoAudioSyncTask.h) sits between the
+ * (PacedVideoOutput, see Video/PacedVideoOutput.h) sits between the
  * demuxer and h264Decoder to fix that. It's never given an audio clock
  * (setAudioClock() not called) since this test file has no audio track to
- * derive one from - see VideoAudioSyncTask::clockMs(), it falls back to
+ * derive one from - see PacedVideoOutput::clockMs(), it falls back to
  * wall-clock millis() in that case, which is exactly what's needed here.
  *
  * Pipeline: File -> EncodedAudioOutput (Print bridge) -> DemuxerMP4 (demux,
  *   spool-backed tables) -> EncodedAudioStream (AACDecoderHelix) ->
  *   PortAudioStream (audio)
- *   \-> VideoAudioSyncTask (buffer + schedule against wall clock) ->
+ *   \-> PacedVideoOutput (buffer + schedule against wall clock) ->
  *   H264Decoder (H.264 decode -> RGB565) -> OutputOpenCV (draw) (video, own
  *   background task)
  *
@@ -63,7 +63,7 @@ const char *file_path = "/media/pschatzmann/External/Videos/output176x144.mp4";
 OutputOpenCV videoOut;
 H264Decoder h264Decoder(videoOut);
 // No audio clock (see the pacing note above) - scheduling delay stays 0.
-VideoAudioSyncTask videoSync(h264Decoder);
+PacedVideoOutput videoSync(h264Decoder);
 PortAudioStream out;
 DecoderHelix multiDecoder;
 EncodedAudioStream audioOut(&out, &multiDecoder);  // decodes AAC -> PortAudio

@@ -1015,7 +1015,7 @@ class ChannelsSelectOutput : public AudioOutput {
  * based on the audio data actually processed - implements the TimeSource
  * interface. millis() (inherited, unmodified) is plain wall time;
  * playbackTime() is the audio-derived progress, which is what a consumer
- * that must stay tied to genuine playback (e.g. VideoAudioSyncTask) should
+ * that must stay tied to genuine playback (e.g. PacedVideoOutput) should
  * use instead - see playbackTime()'s own comment for why they can diverge.
  * @ingroup io
  * @author Phil Schatzmann
@@ -1034,7 +1034,7 @@ class AudioTimeSourceStream : public AudioStream, public TimeSource {
   /// required otherwise: the first byte that actually flows through
   /// write()/readBytes() anchors it on its own (see updateTime()) - most
   /// callers just wire this in as a plain Print/AudioStream target (e.g.
-  /// VideoAudioSyncTask::setAudioClock()'s usage pattern) and never call
+  /// PacedVideoOutput::setAudioClock()'s usage pattern) and never call
   /// begin() on it directly.
   bool begin() {
     bool result = AudioStream::begin();

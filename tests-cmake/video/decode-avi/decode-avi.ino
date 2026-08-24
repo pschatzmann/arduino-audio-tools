@@ -28,7 +28,7 @@
  *
  * Audio/video sync: DemuxerAVI itself just writes audio straight through
  * and does nothing for video - all real sync work happens in videoSync
- * (VideoAudioSyncTask, see Video/VideoAudioSyncTask.h), which sits between
+ * (PacedVideoOutput, see Video/PacedVideoOutput.h), which sits between
  * the demuxer and h264Decoder.
  * It buffers each decoded frame and renders it (decode + cv::imshow) from
  * its own background task, timed against audioClock - an
@@ -44,7 +44,7 @@
  * Pipeline: File -> CodecCopy -> DemuxerAVI (demux)
  *   -> EncodedAudioStream (DecoderHelix: WAV/AAC/MP3) -> AudioTimeSourceStream
  *   (audio clock) -> PortAudioStream (audio)
- *   \-> VideoAudioSyncTask (buffer + schedule) -> MultiVideoDecoderFull
+ *   \-> PacedVideoOutput (buffer + schedule) -> MultiVideoDecoderFull
  *   (H.264 or MJPEG, auto-detected -> RGB565) -> OutputOpenCV (draw)
  *   (video, own background task)
  *
@@ -71,9 +71,9 @@ OutputOpenCV videoOut;  // default mode is MJPEG - decodes the JPEG itself
 MultiVideoDecoderFull videoDecoder;
 // 3rd arg: scheduling delay compensating for PortAudioStream's own output
 // buffering below (buffer_size*buffer_count bytes) - see
-// VideoAudioSyncTask::setSchedulingDelayMs(); ~50ms is a rough match for
+// PacedVideoOutput::setSchedulingDelayMs(); ~50ms is a rough match for
 // 1024*10 bytes of 44.1kHz/16-bit/stereo PCM, tune for your own config.
-VideoAudioSyncTask videoSync(videoDecoder, 0, 50);
+PacedVideoOutput videoSync(videoDecoder, 0, 50);
 PortAudioStream out;
 AudioTimeSourceStream audioClock(out);  // decoded-PCM-bytes-based playback clock
 DecoderHelix multiDecoder;

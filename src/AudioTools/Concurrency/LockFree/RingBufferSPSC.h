@@ -37,7 +37,7 @@ namespace audio_tools {
  * first resize(), switches it to an allocator that prefers PSRAM and
  * falls back to the plain heap silently where PSRAM isn't available -
  * useful for a buffer sized to soak up bursty backlogs (see e.g.
- * VideoAudioSyncTask) where a few hundred KB would be far too much to ask
+ * PacedVideoOutput) where a few hundred KB would be far too much to ask
  * of internal RAM but is a rounding error against multiple MB of PSRAM.
  *
  * @tparam T Element type. Works for any trivially-copyable T; the bulk-copy

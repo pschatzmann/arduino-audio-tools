@@ -225,7 +225,7 @@ class VideoOutput {
 
   /// True if `data` (one complete encoded frame, as handed to write())
   /// is a keyframe/sync-sample - self-contained, decodable without any
-  /// earlier frame. Used e.g. by VideoAudioSyncTask to decide which
+  /// earlier frame. Used e.g. by PacedVideoOutput to decide which
   /// frames are safe to drop, and whether it's safe to resume decoding
   /// after abandoning a backlog (see its own class comment). Default
   /// false: a plain VideoOutput doesn't know or care about codec
@@ -234,7 +234,7 @@ class VideoOutput {
   /// isH264KeyFrame()-based override, MPGDecoder's isMpeg1KeyFrame()-
   /// based one). Getting this right matters beyond bookkeeping: a target
   /// whose frames are never recognized as keyframes can leave a caller
-  /// like VideoAudioSyncTask unable to ever resume after a resync.
+  /// like PacedVideoOutput unable to ever resume after a resync.
   virtual bool isKeyFrame(const uint8_t* data, size_t len) { return false; }
 
   /// Optional: returns the time (ms) spent in the last write() call
@@ -248,7 +248,7 @@ class VideoOutput {
   /// emitting a picture during that same call - e.g. MPGDecoder, whose
   /// B-picture display-order reordering can hold a just-decoded picture
   /// back and instead emit an earlier one (or nothing at all) from a
-  /// given write(), see its own override. Used by VideoAudioSyncTask to
+  /// given write(), see its own override. Used by PacedVideoOutput to
   /// avoid counting/timing a call that did no real rendering work as a
   /// rendered frame - without this, its outputFPS()/frameCountI()/
   /// frameCountP()/avgFrameMs() would overcount for such a decoder.
@@ -395,8 +395,8 @@ class VideoFrameMeter : public VideoOutput {
 
 }  // namespace audio_tools
 
-// VideoAudioSync/VideoAudioSyncTask derive from VideoOutput (defined above),
-// so this must come after the closing brace - see VideoAudioSyncTask.h's
+// PacedVideoOutput derives from VideoOutput (defined above), so this must
+// come after the closing brace - see PacedVideoOutput.h's
 // own #include "AudioTools/Video/Video.h" for the other half of this
 // mutually-including-but-order-safe-via-pragma-once pair.
-#include "AudioTools/Video/VideoAudioSyncTask.h"
+#include "AudioTools/Video/PacedVideoOutput.h"

@@ -13,7 +13,7 @@
  *
  * Audio/video sync: DemuxerMP4 dispatches audio/video as fast as bytes
  * can be parsed - all real pacing happens in videoSyncTask
- * (VideoAudioSyncTask, see Video/VideoAudioSyncTask.h), which sits
+ * (PacedVideoOutput, see Video/PacedVideoOutput.h), which sits
  * between the demuxer and h264Decoder. It buffers each decoded frame and
  * renders it (H.264 decode + panel refresh) from its own background
  * task, timed against audioClock - an AudioTimeSourceStream inserted
@@ -30,7 +30,7 @@
  * Pipeline: File (SD_MMC) -> CodecCopy -> DemuxerMP4 (demux)
  *   -> EncodedAudioStream (AACDecoderHelix) -> AudioTimeSourceStream
  *   (audio clock) -> AudioBoardStream (audio)
- *   \-> VideoAudioSyncTask (buffer + schedule) -> H264Decoder (H.264
+ *   \-> PacedVideoOutput (buffer + schedule) -> H264Decoder (H.264
  *   decode -> RGB565) -> OutputTinyGPU (video, own background task)
  *
  * DemuxerMP4 is a *streaming* (forward-only) demuxer - it does not need
@@ -66,9 +66,9 @@ const char *file_path = "/Videos/output.mp4";
 H264Decoder h264Decoder;
 // 3rd arg: scheduling delay compensating for AudioBoardStream's own
 // output buffering (cfg.buffer_size*cfg.buffer_count) - see
-// VideoAudioSyncTask::setSchedulingDelayMs(); ~115ms matches the ~20KB
+// PacedVideoOutput::setSchedulingDelayMs(); ~115ms matches the ~20KB
 // output buffer below - tune if you change either.
-VideoAudioSyncTask videoSyncTask(h264Decoder, 0, 115);
+PacedVideoOutput videoSyncTask(h264Decoder, 0, 115);
 LCDBoardESP32S3_2_8Display board;
 OutputTinyGPU tftOutput(board);
 // Qualified deliberately: TinyGPU.h (pulled in by OutputTinyGPU.h) and
@@ -120,7 +120,7 @@ void setup() {
   tftOutput.setRotation(DisplayRotation::kLandscape);
   // On: upscale the decoded frame to fill the 320x240 panel - costs more
   // render time (more pixels to convert/write) than leaving this off. See
-  // VideoAudioSyncTask's avgFrameMs()/setScaleSingleBuffer() if render
+  // PacedVideoOutput's avgFrameMs()/setScaleSingleBuffer() if render
   // time needs to come back down.
   tftOutput.setScaleToFit(true);
 

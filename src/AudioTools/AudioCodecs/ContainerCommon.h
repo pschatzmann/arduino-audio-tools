@@ -179,7 +179,7 @@ class Demuxer : public ContainerDecoder, public MimeSource, public VideoInfoSour
   /// any other Print if you want the raw payload as-is.
   virtual void setOutputVideo(Print &out) = 0;
   /// Defines the video output - the VideoOutput-specific counterpart of
-  /// setOutputVideo(Print&), for a target like VideoAudioSyncTask/
+  /// setOutputVideo(Print&), for a target like PacedVideoOutput/
   /// OutputTinyGPU/OutputOpenCV that implements VideoOutput but not Print
   /// (the two are unrelated types - see VideoFrameMeter's own comment).
   /// Part of the base interface (unlike other concrete-class-specific

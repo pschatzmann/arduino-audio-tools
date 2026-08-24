@@ -428,8 +428,8 @@ class DemuxerMPG : public Demuxer {
       video_frame_open = true;
       // No wall-clock scheduling or skip decision here anymore - every
       // picture is always decoded and forwarded immediately, in full.
-      // Pacing is the caller's responsibility now - see VideoAudioSyncTask
-      // (Video/VideoAudioSyncTask.h), which schedules frames from its own
+      // Pacing is the caller's responsibility now - see PacedVideoOutput
+      // (Video/PacedVideoOutput.h), which schedules frames from its own
       // background task instead of blocking this dispatch loop (and, with
       // it, audio delivery) the way an inline wait here used to.
     }
@@ -557,7 +557,7 @@ class DemuxerMPG : public Demuxer {
   /// into one access unit, which then reaches the decoder as one huge,
   /// multi-picture write() call instead of one call per picture (breaking
   /// every caller downstream that assumes that 1:1 correspondence, e.g.
-  /// VideoAudioSyncTask's per-frame scheduling/counting).
+  /// PacedVideoOutput's per-frame scheduling/counting).
   ///
   /// The *first* picture_start_code seen in a fresh unit is never a split
   /// point (it stays attached to any preceding sequence_header/

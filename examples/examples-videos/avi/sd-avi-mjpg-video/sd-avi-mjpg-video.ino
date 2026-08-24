@@ -9,8 +9,8 @@
  * AudioBoardStream.
  *
  * Audio/video sync: DemuxerAVI dispatches audio/video as fast as bytes can
- * be parsed - all real pacing happens in videoSyncTask (VideoAudioSyncTask,
- * see Video/VideoAudioSyncTask.h), which sits between the demuxer and
+ * be parsed - all real pacing happens in videoSyncTask (PacedVideoOutput,
+ * see Video/PacedVideoOutput.h), which sits between the demuxer and
  * mjpegDecoder. It buffers each decoded frame and renders it (MJPEG decode
  * + panel refresh) from its own background task, timed against audioClock
  * - an AudioTimeSourceStream inserted between multiDecoder and
@@ -26,7 +26,7 @@
  * Pipeline: File (SD_MMC) -> CodecCopy -> DemuxerAVI (demux)
  *   -> EncodedAudioStream (DecoderHelix) -> AudioTimeSourceStream (audio
  *   clock) -> AudioBoardStream (audio)
- *   \-> VideoAudioSyncTask (buffer + schedule) -> MJPEGDecoder ->
+ *   \-> PacedVideoOutput (buffer + schedule) -> MJPEGDecoder ->
  *   OutputTinyGPU (video, own background task)
  *
  * Notes:
@@ -36,7 +36,7 @@
  *   independently decodable image
  *   (no inter-frame prediction) - MJPEGDecoder::isKeyFrame() therefore
  *   always returns true (MJPEG is effectively "all I-frames"), never
- *   dropped by VideoAudioSyncTask's proactive catch-up path; a persistent
+ *   dropped by PacedVideoOutput's proactive catch-up path; a persistent
  *   backlog instead falls to its byte-fill/lateness resync (see
  *   setMaxQueuedIFrames(0) below).
  * - e.g. ffmpeg -i input.mkv -vf "scale=176:144,fps=7" -c:v mjpeg -q:v 5
@@ -66,9 +66,9 @@ const char* file_path = "/Videos/output176x144-mjpeg.avi";
 MJPEGDecoder mjpegDecoder;
 // 3rd arg: scheduling delay compensating for AudioBoardStream's own
 // output buffering (cfg.buffer_size*cfg.buffer_count) - see
-// VideoAudioSyncTask::setSchedulingDelayMs(); ~115ms matches the ~20KB
+// PacedVideoOutput::setSchedulingDelayMs(); ~115ms matches the ~20KB
 // output buffer below - tune if you change either.
-VideoAudioSyncTask videoSyncTask(mjpegDecoder, 0, 115);
+PacedVideoOutput videoSyncTask(mjpegDecoder, 0, 115);
 LCDBoardESP32S3_2_8Display board;
 OutputTinyGPU tftOutput(board);
 // Qualified deliberately: TinyGPU.h (pulled in by OutputTinyGPU.h) and
@@ -124,7 +124,7 @@ void setup() {
   tftOutput.setRotation(DisplayRotation::kLandscape);
   // On: upscale the decoded frame to fill the 320x240 panel - costs more
   // render time (more pixels to convert/write) than leaving this off. See
-  // VideoAudioSyncTask's avgFrameMs()/setScaleSingleBuffer() if render
+  // PacedVideoOutput's avgFrameMs()/setScaleSingleBuffer() if render
   // time needs to come back down.
   tftOutput.setScaleToFit(true);
 

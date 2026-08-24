@@ -2,7 +2,7 @@
  * @file decode-avi-player.ino
  * @brief Same pipeline/test file as decode-avi.ino, but driven through
  * AudioTools/Video/VideoPlayer.h instead of wiring CodecCopy,
- * MultiVideoDecoder, DecoderHelix and VideoAudioSyncTask together by hand -
+ * MultiVideoDecoder, DecoderHelix and PacedVideoOutput together by hand -
  * see decode-avi.ino's own class comment for the pipeline this replaces
  * (identical end to end; VideoPlayer just owns the wiring).
  *

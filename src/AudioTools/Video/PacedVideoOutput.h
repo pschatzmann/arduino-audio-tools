@@ -59,7 +59,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class VideoAudioSyncTask : public VideoOutput {
+class PacedVideoOutput : public VideoOutput {
  public:
   /// @param target every frame is eventually forwarded here (write() +
   /// flush()), from the background task only - never from the caller's
@@ -70,7 +70,7 @@ class VideoAudioSyncTask : public VideoOutput {
   /// the first write().
   /// @param schedulingDelayMs see setSchedulingDelayMs() - 0 (the
   /// default) applies no correction.
-  VideoAudioSyncTask(VideoOutput& target, float fps = 0,
+  PacedVideoOutput(VideoOutput& target, float fps = 0,
                       uint32_t schedulingDelayMs = 0)
       : p_target(&target), scheduling_delay_ms(schedulingDelayMs) {
     setFps(fps);
@@ -211,12 +211,12 @@ class VideoAudioSyncTask : public VideoOutput {
     } else {
       queue.reset();
     }
-    task.create("VideoAudioSyncTask", task_stack_size, task_priority,
+    task.create("PacedVideoOutput", task_stack_size, task_priority,
                 task_core);
     bool ok = task.begin([this]() { taskLoop(); });
     task_started = task_started || ok;
     LOGI(
-        "VideoAudioSyncTask: %s (fps=%.2f, clock=%s, scheduling delay=%u ms, "
+        "PacedVideoOutput: %s (fps=%.2f, clock=%s, scheduling delay=%u ms, "
         "queue=%u bytes, stack=%u words, priority=%u)",
         ok ? "render task started" : "render task failed to start",
         frame_period_ms > 0 ? 1000.0f / frame_period_ms : 0.0f,
@@ -231,7 +231,7 @@ class VideoAudioSyncTask : public VideoOutput {
     task.end();
     task_started = false;
     LOGI(
-        "VideoAudioSyncTask: render task stopped (%u frames rendered - %u "
+        "PacedVideoOutput: render task stopped (%u frames rendered - %u "
         "I / %u P, %u P dropped / %u I dropped, input=%.2f fps, "
         "output=%.2f fps)",
         (unsigned)frame_count, (unsigned)i_frame_count.load(),
@@ -316,7 +316,7 @@ class VideoAudioSyncTask : public VideoOutput {
       // fix.
       if (!logged_drop_burst) {
         LOGW(
-            "VideoAudioSyncTask: dropping P frames starting at #%u - %s "
+            "PacedVideoOutput: dropping P frames starting at #%u - %s "
             "(%d/%u bytes free, need %u, render %d ms behind)",
             (unsigned)this_frame,
             queue_full ? "render queue full" : "catching up",
@@ -332,7 +332,7 @@ class VideoAudioSyncTask : public VideoOutput {
     while ((size_t)queue.availableForWrite() < needed) {
       if (!logged_wait) {
         LOGW(
-            "VideoAudioSyncTask: write() blocked on frame #%u - render "
+            "PacedVideoOutput: write() blocked on frame #%u - render "
             "queue full (%d/%u bytes free, need %u)",
             (unsigned)this_frame, queue.availableForWrite(),
             (unsigned)queue.size(), (unsigned)needed);
@@ -344,7 +344,7 @@ class VideoAudioSyncTask : public VideoOutput {
     queue.writeArray(data, len);
     if (is_key) queued_i_frame_count++;
     LOGD(
-        "VideoAudioSyncTask: queued frame #%u (%s, %u bytes, target=%u ms, "
+        "PacedVideoOutput: queued frame #%u (%s, %u bytes, target=%u ms, "
         "%d bytes free)",
         (unsigned)this_frame, is_key ? "I" : "P", (unsigned)len,
         (unsigned)target_ms, queue.availableForWrite());
@@ -659,7 +659,7 @@ class VideoAudioSyncTask : public VideoOutput {
     if (!start_set) {
       start_ms = clockMs();
       start_set = true;
-      LOGI("VideoAudioSyncTask: playback anchored at %u ms (%s clock)",
+      LOGI("PacedVideoOutput: playback anchored at %u ms (%s clock)",
            (unsigned)start_ms, p_clock != nullptr ? "external audio" : "wall");
     }
     // scheduling_delay_ms (see setSchedulingDelayMs()) only ever pushes
@@ -701,7 +701,7 @@ class VideoAudioSyncTask : public VideoOutput {
       uint32_t new_target_ms = target_ms;
       bool found_fresher_key = drainQueueKeepingLastKeyframe(new_target_ms);
       LOGW(
-          "VideoAudioSyncTask: resyncing (%s) - %s instead of trying to "
+          "PacedVideoOutput: resyncing (%s) - %s instead of trying to "
           "catch up",
           lateness_resync
               ? "lateness"
@@ -769,20 +769,20 @@ class VideoAudioSyncTask : public VideoOutput {
         p_frame_total_ms += processMs;
       }
       LOGD(
-          "VideoAudioSyncTask: rendered %s frame - scheduled=%u actual=%u "
+          "PacedVideoOutput: rendered %s frame - scheduled=%u actual=%u "
           "(%d ms late), process=%u ms",
           is_key ? "I" : "P", (unsigned)scheduled_ms, (unsigned)clockMs(),
           (int)lateness_ms, (unsigned)processMs);
     } else {
       LOGD(
-          "VideoAudioSyncTask: decoded %s frame, no picture emitted yet "
+          "PacedVideoOutput: decoded %s frame, no picture emitted yet "
           "(scheduled=%u actual=%u, %d ms late), process=%u ms",
           is_key ? "I" : "P", (unsigned)scheduled_ms, (unsigned)clockMs(),
           (int)lateness_ms, (unsigned)processMs);
     }
     if (frame_period_ms > 0 && processMs > (uint32_t)frame_period_ms) {
       LOGW(
-          "VideoAudioSyncTask: %s frame took %u ms to render - longer than "
+          "PacedVideoOutput: %s frame took %u ms to render - longer than "
           "the %.1f ms frame period, falling behind",
           is_key ? "I" : "P", (unsigned)processMs, frame_period_ms);
     }

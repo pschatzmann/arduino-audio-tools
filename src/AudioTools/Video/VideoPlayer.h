@@ -14,7 +14,7 @@ namespace audio_tools {
  * @brief High-level video playback pipeline and controller - the video
  * counterpart of AudioPlayer (CoreAudio/AudioPlayer.h). Wraps every class
  * a video playback example otherwise wires by hand (a container Demuxer,
- * a VideoDecoder driven through a VideoAudioSyncTask, and optionally an
+ * a VideoDecoder driven through a PacedVideoOutput, and optionally an
  * audio decode chain synced against it) behind one object driven by a
  * single copy() call per loop() iteration.
  *
@@ -75,11 +75,11 @@ namespace audio_tools {
  *   (demux)
  *   -> EncodedAudioStream (AudioDecoder) -> [AudioTimeSourceStream (audio
  *   clock), see setUseAudioClock()] -> audio output
- *   \-> VideoAudioSyncTask (buffer + schedule) -> VideoDecoder -> video
+ *   \-> PacedVideoOutput (buffer + schedule) -> VideoDecoder -> video
  *   output (own background task)
  *
  * Audio clock: scheduling video against real playback progress
- * (VideoAudioSyncTask::setAudioClock()) needs an audio clock that's
+ * (PacedVideoOutput::setAudioClock()) needs an audio clock that's
  * actually advancing - wiring one against a track that never delivers any
  * bytes (silent/absent audio) would stall video forever waiting for a
  * clock that never moves (see decode-mp4.ino's own history for exactly
@@ -222,7 +222,7 @@ class VideoPlayer {
   void setBufferSize(int size) { buffer_size = size; }
 
   /// Wires the full pipeline (video decoder -> output via
-  /// VideoAudioSyncTask; audio decoder -> [audio clock ->] output, if an
+  /// PacedVideoOutput; audio decoder -> [audio clock ->] output, if an
   /// audio output was given) and starts the demuxer. `source` (e.g. an
   /// open File) is read from on every subsequent copy() call - the caller
   /// owns it and is responsible for closing it once copy()/copyAll()
@@ -365,7 +365,7 @@ class VideoPlayer {
   /// setTaskParameters()/setQueueBytes()/setMaxQueuedIFrames()/
   /// setIgnorePFrames()/setSchedulingDelayMs(), or the frameCount()/
   /// avgFrameMs()/outputFPS() family of diagnostics.
-  VideoAudioSyncTask& videoSyncTask() { return video_sync; }
+  PacedVideoOutput& videoSyncTask() { return video_sync; }
   /// The Stream given to begin() - nullptr before the first begin() call.
   Stream* getStream() { return p_source; }
 
@@ -387,7 +387,7 @@ class VideoPlayer {
   // addAudioDecoder().
   MultiDecoder default_audio_decoder;
 
-  VideoAudioSyncTask video_sync{default_video_decoder};
+  PacedVideoOutput video_sync{default_video_decoder};
   AudioTimeSourceStream audio_clock;
   EncodedAudioStream audio_out;
 

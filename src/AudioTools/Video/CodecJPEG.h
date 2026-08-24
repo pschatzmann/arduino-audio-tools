@@ -172,7 +172,7 @@ class MJPEGDecoder : public VideoDecoder, public VideoInfoSource {
   /// image with no inter-frame prediction (the same property that makes an
   /// H.264 IDR frame or an MPEG-1 I-picture "key", just true of every
   /// frame here instead of periodically). This matters beyond
-  /// classification - VideoAudioSyncTask's awaiting_keyframe recovery
+  /// classification - PacedVideoOutput's awaiting_keyframe recovery
   /// latch (set after a resync) only clears once a frame reports
   /// isKeyFrame()==true; returning false here would leave every frame
   /// classified as non-key, so once any resync ever fired, that latch

@@ -16,8 +16,8 @@
  * it, which would desync the demuxer from the real pack/PES byte stream.
  *
  * Audio/video sync: DemuxerMPG dispatches audio/video as fast as bytes can
- * be parsed - all real pacing happens in videoSync (VideoAudioSyncTask,
- * see Video/VideoAudioSyncTask.h), which sits between the demuxer and
+ * be parsed - all real pacing happens in videoSync (PacedVideoOutput,
+ * see Video/PacedVideoOutput.h), which sits between the demuxer and
  * mpgDecoder. It buffers each decoded picture and renders it (decode +
  * cv::imshow) from its own background task, timed against audioClock - an
  * AudioTimeSourceStream inserted between multiDecoder and PortAudioStream
@@ -30,7 +30,7 @@
  * Pipeline: File -> CodecCopy -> DemuxerMPG (demux)
  *   -> EncodedAudioStream (DecoderHelix) -> AudioTimeSourceStream (audio
  *   clock) -> PortAudioStream (audio)
- *   \-> VideoAudioSyncTask (buffer + schedule) -> MPGDecoder (MPEG-1
+ *   \-> PacedVideoOutput (buffer + schedule) -> MPGDecoder (MPEG-1
  *   decode -> RGB565) -> OutputOpenCV (draw) (video, own background task)
  *
  * To build & run:
@@ -55,9 +55,9 @@ const char *file_path = "/media/pschatzmann/External/Videos/output176x144-v2.mpg
 MPGDecoder mpgDecoder;
 OutputOpenCV videoOut;
 // 3rd arg: scheduling delay compensating for PortAudioStream's own output
-// buffering - see VideoAudioSyncTask::setSchedulingDelayMs(); tune to
+// buffering - see PacedVideoOutput::setSchedulingDelayMs(); tune to
 // match your actual audio config (this uses PortAudioStream's defaults).
-VideoAudioSyncTask videoSync(mpgDecoder, 0, 50);
+PacedVideoOutput videoSync(mpgDecoder, 0, 50);
 PortAudioStream out;
 AudioTimeSourceStream audioClock(out);  // decoded-PCM-bytes-based playback clock
 MP2Decoder mp2Decoder;

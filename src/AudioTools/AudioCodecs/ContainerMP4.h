@@ -191,7 +191,7 @@ class DemuxerMP4 : public Demuxer {
     // its first 'stts' entry's sample_delta (ticks/sample) - true for the
     // overwhelming majority of real-world encoders; a genuinely variable
     // frame rate would need a per-sample duration, which nothing here
-    // currently schedules against anyway (see VideoAudioSyncTask).
+    // currently schedules against anyway (see PacedVideoOutput).
     if (p_video_track->timescale > 0 && p_video_track->stts->size() > 0) {
       SttsEntry first = p_video_track->stts->get(0);
       if (first.sample_delta > 0)
@@ -1211,7 +1211,7 @@ class DemuxerMP4 : public Demuxer {
     // No wall-clock scheduling or skip decisions here anymore: every
     // sample is always converted and forwarded immediately, in full.
     // Pacing/scheduling is the caller's responsibility now - see
-    // VideoAudioSyncTask (Video/VideoAudioSyncTask.h), which schedules
+    // PacedVideoOutput (Video/PacedVideoOutput.h), which schedules
     // frames from its own background task instead of blocking this
     // dispatch loop (and, with it, audio delivery) the way an inline
     // wait here used to.
@@ -1224,7 +1224,7 @@ class DemuxerMP4 : public Demuxer {
     // into the *same* buffer as the frame's own NAL units, rather than a
     // separate writeVideo() call before them - so a downstream VideoOutput
     // always gets exactly one write() call per frame (matches DemuxerAVI/
-    // DemuxerMPG; see VideoAudioSyncTask, the only current consumer that
+    // DemuxerMPG; see PacedVideoOutput, the only current consumer that
     // cares about the distinction).
     nal_tmp.clear();
     bool prependConfig =

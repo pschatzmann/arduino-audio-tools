@@ -86,7 +86,7 @@ add_executable (decode-avi decode-avi.ino)
 
 # decode-avi-player: same pipeline/test file as decode-avi, but driven
 # through AudioTools/Video/VideoPlayer.h instead of wiring CodecCopy/
-# MultiVideoDecoder/DecoderHelix/VideoAudioSyncTask by hand - exercises
+# MultiVideoDecoder/DecoderHelix/PacedVideoOutput by hand - exercises
 # VideoPlayer end-to-end against a real .avi file.
 set_source_files_properties(decode-avi-player.ino PROPERTIES LANGUAGE CXX)
 add_executable (decode-avi-player decode-avi-player.ino)

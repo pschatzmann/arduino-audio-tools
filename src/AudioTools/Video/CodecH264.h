@@ -185,8 +185,8 @@ class H264Decoder : public VideoDecoder, public VideoInfoSource {
 
   void writeToOutput() {
     if (p_out == nullptr && p_out_video == nullptr) return;
-    // Every decoded picture is always shown - see VideoAudioSyncTask
-    // (Video/VideoAudioSyncTask.h) for how pacing/scheduling actually
+    // Every decoded picture is always shown - see PacedVideoOutput
+    // (Video/PacedVideoOutput.h) for how pacing/scheduling actually
     // happens.
     size_t w = decoder_.width();
     size_t h = decoder_.height();

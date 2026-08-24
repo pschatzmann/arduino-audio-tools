@@ -568,7 +568,7 @@ class MimeSource {
  * time; playbackTime() is however far actual processing has gotten,
  * which is not the same thing whenever the two can diverge (a consumer
  * blocked/starved, a paused source, ...). A consumer that must stay tied
- * to genuine progress (e.g. VideoAudioSyncTask scheduling video against
+ * to genuine progress (e.g. PacedVideoOutput scheduling video against
  * actual decoded-audio playback, not merely time passing) should use
  * playbackTime(), not millis().
  *
