@@ -34,8 +34,8 @@ namespace audio_tools {
  * AACDecoderHelix aacDecoder;
  * void setup() {
  *   ...
- *   player.addVideoDecoder(h264Decoder, VideoFormat::H264);
- *   player.addVideoDecoder(mjpegDecoder, VideoFormat::MJPEG);
+ *   player.addVideoDecoder(h264Decoder);
+ *   player.addVideoDecoder(mjpegDecoder);
  *   player.addAudioDecoder(mp3Decoder, "audio/mpeg");
  *   player.addAudioDecoder(aacDecoder, "audio/aac");
  *   player.begin(file);
@@ -159,12 +159,12 @@ class VideoPlayer {
   void setDemuxer(Demuxer& demuxer) { p_demuxer = &demuxer; }
 
   /// Registers a video codec with the built-in (initially empty)
-  /// MultiVideoDecoder - see MultiVideoDecoder::addDecoder(). Nothing is
-  /// registered by default (see the class comment), so this needs at
-  /// least one call per codec your content's video track actually uses.
-  /// Call before begin().
-  void addVideoDecoder(VideoDecoder& decoder, VideoFormat format) {
-    default_video_decoder.addDecoder(decoder, format);
+  /// MultiVideoDecoder, under its own VideoDecoder::codecFormat() - see
+  /// MultiVideoDecoder::addDecoder(). Nothing is registered by default
+  /// (see the class comment), so this needs at least one call per codec
+  /// your content's video track actually uses. Call before begin().
+  void addVideoDecoder(VideoDecoder& decoder) {
+    default_video_decoder.addDecoder(decoder);
   }
 
   /// Defines the final video display target (e.g. OutputTinyGPU,

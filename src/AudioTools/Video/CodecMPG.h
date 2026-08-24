@@ -53,6 +53,8 @@ class MPGDecoder : public VideoDecoder, public VideoInfoSource {
 
   MPGDecoder(VideoOutput &out) : MPGDecoder() { setOutput(out); }
 
+  VideoFormat codecFormat() override { return VideoFormat::MPEG1; }
+
   /// True if `data` contains an MPEG-1 sequence_header (00 00 01 B3) -
   /// required by spec to precede the first picture of any real MPEG-1
   /// elementary stream, so it's reliably present in the very first access

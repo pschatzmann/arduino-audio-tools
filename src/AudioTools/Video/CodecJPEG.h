@@ -60,6 +60,8 @@ class MJPEGDecoder : public VideoDecoder, public VideoInfoSource {
   MJPEGDecoder(Print &out) : MJPEGDecoder() { setOutput(out); }
   MJPEGDecoder(VideoOutput &out) : MJPEGDecoder() { setOutput(out); }
 
+  VideoFormat codecFormat() override { return VideoFormat::MJPEG; }
+
   /// True if `data` looks like the start of a JPEG image (SOI marker FF
   /// D8) - unambiguous, and reliable even on the very first write() of a
   /// stream since a JPEG image always begins at FF D8 regardless of

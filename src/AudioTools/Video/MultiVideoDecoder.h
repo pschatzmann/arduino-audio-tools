@@ -58,20 +58,21 @@ namespace audio_tools {
  */
 class MultiVideoDecoder : public VideoDecoder, public VideoInfoSource {
  public:
-  /// Registers a decoder for `format` - see the class comment for when/
-  /// how it's later selected (VideoInfoSource match, or its own
-  /// VideoDecoder::isValid() as a content-sniffing fallback). Call before
-  /// the first write() reaches this object.
+  /// Registers a decoder under its own VideoDecoder::codecFormat() - see
+  /// the class comment for when/how it's later selected (VideoInfoSource
+  /// match, or its own VideoDecoder::isValid() as a content-sniffing
+  /// fallback). Call before the first write() reaches this object.
   ///
   /// Replaces, rather than adds to, any decoder already registered for
-  /// `format` - at most one entry per format, so e.g. registering
-  /// H264DecoderESP32S3 for VideoFormat::H264 actually overrides a
+  /// that format - at most one entry per format, so e.g. registering
+  /// H264DecoderESP32S3 (codecFormat() == H264) actually overrides a
   /// previously-registered H264Decoder instead of silently losing to it:
   /// both write()'s VideoInfoSource-format lookup and its isValid()
   /// fallback loop match the first entry found for a format, so a stale
   /// second entry would otherwise be permanently unreachable dead weight,
   /// never actually selected.
-  void addDecoder(VideoDecoder &decoder, VideoFormat format) {
+  void addDecoder(VideoDecoder &decoder) {
+    VideoFormat format = decoder.codecFormat();
     for (int i = 0; i < decoders.size(); i++) {
       if (decoders[i].format == format) {
         decoders.erase(i);
@@ -113,6 +114,13 @@ class MultiVideoDecoder : public VideoDecoder, public VideoInfoSource {
   VideoInfo videoInfo() override {
     return p_selected != nullptr ? p_selected->videoInfo() : VideoInfo{};
   }
+
+  /// The codec of the currently selected decoder - VideoFormat::UNKNOWN
+  /// before the first write()/if none matched. Same value as
+  /// selectedFormat(), just satisfying VideoDecoder's own interface (e.g.
+  /// so a MultiVideoDecoder can itself be registered under another
+  /// MultiVideoDecoder's addDecoder()).
+  VideoFormat codecFormat() override { return p_selected_format; }
 
   /// Defers actual decoder init to the first write() (see class comment)
   /// - always succeeds itself.

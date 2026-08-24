@@ -63,6 +63,8 @@ class H264Decoder : public VideoDecoder, public VideoInfoSource {
 
   H264Decoder(VideoOutput &out) : H264Decoder() { setOutput(out); }
 
+  VideoFormat codecFormat() override { return VideoFormat::H264; }
+
   /// True if `data` starts with an Annex-B start code (00 00 01) followed
   /// by a structurally valid NAL header (forbidden_zero_bit == 0, a
   /// defined nal_unit_type) - see VideoDecoder::isValid(). Checked after

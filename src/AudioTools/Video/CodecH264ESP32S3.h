@@ -85,6 +85,8 @@ class H264DecoderESP32S3 : public VideoDecoder, public VideoInfoSource {
     setOutput(out);
   }
 
+  VideoFormat codecFormat() override { return VideoFormat::H264; }
+
   /// Defines the target the decoded picture is written to, one write()
   /// call per decoded picture, in the format selected via
   /// setVideoFormat() (RGB565 by default). Call before begin().

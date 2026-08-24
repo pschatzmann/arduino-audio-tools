@@ -18,6 +18,14 @@ namespace audio_tools {
 class VideoDecoder : public VideoOutput {
  public:
   virtual ~VideoDecoder() = default;
+  /// The compressed bitstream codec this decoder consumes (e.g.
+  /// VideoFormat::H264, VideoFormat::MJPEG) - NOT the same axis as
+  /// setVideoFormat()/videoInfo().format below, which is the decoded
+  /// *pixel* format this decoder produces. Used by
+  /// MultiVideoDecoder::addDecoder() to register a decoder under its own
+  /// codec instead of the caller having to pass it separately (and
+  /// possibly get it wrong).
+  virtual VideoFormat codecFormat() = 0;
   /// Defines the target each decoded picture is written to.
   virtual void setOutput(Print &out) = 0;
   /// Defines the target each decoded picture is written to - the
