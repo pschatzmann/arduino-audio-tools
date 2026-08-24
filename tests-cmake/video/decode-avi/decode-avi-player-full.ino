@@ -2,10 +2,15 @@
  * @file decode-avi-player-full.ino
  * @brief Same pipeline/test file as decode-avi-player.ino, but via
  * AudioTools/Video/VideoPlayerFull.h (a VideoPlayer subclass that
- * pre-registers DemuxerAVI/DemuxerMP4/DemuxerMPG, H264Decoder/
- * MJPEGDecoder/MPGDecoder, and MP3DecoderHelix/AACDecoderHelix/MP2Decoder
- * itself - see its own class comment) instead of registering the
- * demuxer/codecs by hand.
+ * pre-registers H264Decoder/MJPEGDecoder/MPGDecoder and
+ * MP3DecoderHelix/AACDecoderHelix/MP2Decoder itself - see its own class
+ * comment) instead of registering the codecs by hand. VideoPlayerFull
+ * pre-registers no container demuxer of its own, so this still supplies
+ * one explicitly - a MultiVideoDemuxerFull (Video/MultiVideoDemuxerFull.h)
+ * rather than a plain DemuxerAVI, to demonstrate the "any container
+ * format just works too" pattern VideoPlayerFull's own class comment
+ * recommends (this file happens to only ever feed it an AVI, but the same
+ * player would equally auto-detect an MP4/MPG file).
  *
  * To build & run:
  * - mkdir build && cd build && cmake .. && make
@@ -16,6 +21,7 @@
  */
 #include "AudioTools.h"
 #include "AudioTools/AudioLibs/PortAudioStream.h"
+#include "AudioTools/Video/MultiVideoDemuxerFull.h"
 #include "AudioTools/Video/OutputOpenCV.h"
 #include "AudioTools/Video/VideoPlayerFull.h"
 #include "SD.h"
@@ -25,7 +31,8 @@ const char *file_path = "/media/pschatzmann/External/Videos/output176x144.avi";
 
 OutputOpenCV videoOut;  // default mode is MJPEG - decodes the JPEG itself
 PortAudioStream out;
-VideoPlayerFull player(videoOut, out);
+MultiVideoDemuxerFull demuxer;  // auto-detects AVI/MP4/MPG
+VideoPlayerFull player(demuxer, videoOut, out);
 File file;
 
 void setup() {

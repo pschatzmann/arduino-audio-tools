@@ -3,9 +3,6 @@
 #include "AudioTools/AudioCodecs/CodecAACHelix.h"
 #include "AudioTools/AudioCodecs/CodecMP2.h"
 #include "AudioTools/AudioCodecs/CodecMP3Helix.h"
-#include "AudioTools/AudioCodecs/ContainerAVI.h"
-#include "AudioTools/AudioCodecs/ContainerMP4.h"
-#include "AudioTools/AudioCodecs/ContainerMPG.h"
 #include "AudioTools/Video/CodecH264.h"
 #include "AudioTools/Video/CodecJPEG.h"
 #include "AudioTools/Video/CodecMPG.h"
@@ -14,54 +11,28 @@
 namespace audio_tools {
 
 /**
- * @brief VideoPlayer subclass configured for every container format and
- * codec this library ships a portable software demuxer/decoder for -
- * video AND audio - so it's the "just point it at a file, any common
- * format just works" player, the same convenience MultiVideoDemuxerFull/
- * MultiVideoDecoderFull/DecoderHelix each provide on their own side. Use
- * this instead of the base VideoPlayer unless you specifically want to
- * keep this class's extra dependencies (below) out of your build - the
- * base VideoPlayer's demuxer and video/audio multi-decoders all start
- * empty (see its own class comment), so it has none.
+ * @brief VideoPlayer subclass pre-registered with every video/audio codec
+ * this library ships a portable decoder for - H264/MJPEG/MPEG-1 video,
+ * MP3/AAC/MP2 audio - so it's the "just point it at a file, any common
+ * codec just works" player. Use instead of the base VideoPlayer unless
+ * you want to keep these dependencies out of your build (the base
+ * class's own multi-decoders start empty - see its class comment).
  *
- * Container formats - registered in this subclass's own constructor, the
- * same way MultiVideoDemuxerFull's does (MultiVideoDemuxerFull.h - a
- * plain MultiVideoDemuxer pre-registered the same way, for callers that
- * want this convenience without the rest of VideoPlayer):
- * - AVI (DemuxerAVI)
- * - MP4/M4A (DemuxerMP4)
- * - MPEG Program Stream (DemuxerMPG)
+ * Pre-registers no container demuxer though - still supply one via the
+ * constructor/addDemuxer(), as the base VideoPlayer requires. Pass a
+ * MultiVideoDemuxerFull (Video/MultiVideoDemuxerFull.h) for the same
+ * "any format just works" convenience one layer down (AVI/MP4/MPG):
+ * @code
+ * MultiVideoDemuxerFull demuxer;
+ * VideoPlayerFull player(demuxer, tftOutput, audioOut);
+ * player.begin(file);
+ * @endcode
  *
- * Video codecs - also registered in this subclass's own constructor, the
- * same way MultiVideoDecoderFull's does (MultiVideoDecoderFull.h - a
- * plain MultiVideoDecoder pre-registered the same way, for callers that
- * want this convenience without the rest of VideoPlayer):
- * - H264 (H264Decoder, TinyH264)
- * - Motion-JPEG (MJPEGDecoder, TinyJPEG)
- * - MPEG-1 (MPGDecoder, TinyMPG)
+ * WAV is deliberately not included (no external dependency to justify
+ * bundling it) - register it yourself if needed:
+ * addAudioDecoder(wavDecoder, "audio/vnd.wave").
  *
- * Audio codecs - also registered in this subclass's own constructor,
- * since the base VideoPlayer's audio multi-decoder starts empty on
- * purpose (see its class comment):
- * - "audio/mpeg" -> MP3DecoderHelix
- * - "audio/aac" -> AACDecoderHelix
- * - "audio/mpeg; codecs=\"mpeg1-layer2\"" -> MP2Decoder - the exact mime
- *   DemuxerMPG::mime() reports for Layer II (see its own comment); a
- *   plain "audio/mpeg" match (from any container) still resolves to
- *   MP3DecoderHelix instead (registered first - see MultiDecoder::
- *   selectDecoder()'s base-mime-type fallback), which is correct since
- *   MP2 realistically only shows up in an MPEG-PS (.mpg) container.
- *
- * WAV is deliberately not included - DemuxerAVI/DemuxerMP4 report it too
- * ("audio/vnd.wave"), but AudioTools/AudioCodecs/CodecWAV.h has no
- * external dependency of its own to justify bundling it here; register it
- * yourself (addAudioDecoder(wavDecoder, "audio/vnd.wave")) if your
- * content needs it.
- *
- * Dependencies (install via Library Manager) - all pulled in only by
- * choosing this subclass over the dependency-free base VideoPlayer.
- * DemuxerAVI/DemuxerMP4/DemuxerMPG add none of their own (pure parsing
- * code within this library, unlike the decoders below):
+ * Dependencies (install via Library Manager):
  * - https://github.com/pschatzmann/TinyH264
  * - https://github.com/pschatzmann/TinyMPG
  * - https://github.com/pschatzmann/TinyJPEG
@@ -76,46 +47,17 @@ namespace audio_tools {
 class VideoPlayerFull : public VideoPlayer {
  public:
   VideoPlayerFull() {
-    registerDemuxers();
     registerVideoDecoders();
     registerAudioDecoders();
   }
 
-  VideoPlayerFull(VideoOutput& videoOutput) : VideoPlayer(videoOutput) {
-    registerDemuxers();
-    registerVideoDecoders();
-    registerAudioDecoders();
-  }
-
-  VideoPlayerFull(VideoOutput& videoOutput, AudioOutput& audioOutput)
-      : VideoPlayer(videoOutput, audioOutput) {
-    registerDemuxers();
-    registerVideoDecoders();
-    registerAudioDecoders();
-  }
-
-  VideoPlayerFull(VideoOutput& videoOutput, Print& audioOutput)
-      : VideoPlayer(videoOutput, audioOutput) {
-    registerDemuxers();
-    registerVideoDecoders();
-    registerAudioDecoders();
-  }
-
-  VideoPlayerFull(VideoOutput& videoOutput, AudioStream& audioOutput)
-      : VideoPlayer(videoOutput, audioOutput) {
-    registerDemuxers();
-    registerVideoDecoders();
-    registerAudioDecoders();
-  }
-
-  /// Overloads accepting an extra Demuxer&, mirroring VideoPlayer's own
-  /// constructors - registered in addition to the pre-registered AVI/MP4/
-  /// MPG demuxers below (e.g. for a custom DemuxerMP4 configured with a
-  /// SeekableSource/SpoolStorageFactory - see VideoPlayer's own class
+  /// `demuxer` is registered the same way VideoPlayer's own matching
+  /// constructor does (see its class comment) - pass a
+  /// MultiVideoDemuxerFull here instead of a single concrete demuxer if
+  /// you want every container format supported too (see this class's own
   /// comment).
   VideoPlayerFull(Demuxer& demuxer, VideoOutput& videoOutput)
       : VideoPlayer(demuxer, videoOutput) {
-    registerDemuxers();
     registerVideoDecoders();
     registerAudioDecoders();
   }
@@ -123,7 +65,6 @@ class VideoPlayerFull : public VideoPlayer {
   VideoPlayerFull(Demuxer& demuxer, VideoOutput& videoOutput,
                   AudioOutput& audioOutput)
       : VideoPlayer(demuxer, videoOutput, audioOutput) {
-    registerDemuxers();
     registerVideoDecoders();
     registerAudioDecoders();
   }
@@ -131,7 +72,6 @@ class VideoPlayerFull : public VideoPlayer {
   VideoPlayerFull(Demuxer& demuxer, VideoOutput& videoOutput,
                   Print& audioOutput)
       : VideoPlayer(demuxer, videoOutput, audioOutput) {
-    registerDemuxers();
     registerVideoDecoders();
     registerAudioDecoders();
   }
@@ -139,16 +79,11 @@ class VideoPlayerFull : public VideoPlayer {
   VideoPlayerFull(Demuxer& demuxer, VideoOutput& videoOutput,
                   AudioStream& audioOutput)
       : VideoPlayer(demuxer, videoOutput, audioOutput) {
-    registerDemuxers();
     registerVideoDecoders();
     registerAudioDecoders();
   }
 
  protected:
-  DemuxerAVI avi_demuxer;
-  DemuxerMP4 mp4_demuxer;
-  DemuxerMPG mpg_demuxer;
-
   H264Decoder h264_decoder;
   MJPEGDecoder mjpeg_decoder;
   MPGDecoder mpeg_decoder;
@@ -157,12 +92,6 @@ class VideoPlayerFull : public VideoPlayer {
   AACDecoderHelix aac_decoder;
   MP2Decoder mp2_decoder;
 
-  void registerDemuxers() {
-    addDemuxer(avi_demuxer);
-    addDemuxer(mp4_demuxer);
-    addDemuxer(mpg_demuxer);
-  }
-
   void registerVideoDecoders() {
     addVideoDecoder(h264_decoder);
     addVideoDecoder(mjpeg_decoder);
@@ -170,6 +99,11 @@ class VideoPlayerFull : public VideoPlayer {
   }
 
   void registerAudioDecoders() {
+    // mp3_decoder must be registered before mp2_decoder: a plain
+    // "audio/mpeg" match still resolves to it via MultiDecoder::
+    // selectDecoder()'s base-mime-type fallback, which is correct since
+    // MP2 only shows up in an MPEG-PS (.mpg) container, reporting the
+    // more specific "...codecs=mpeg1-layer2" mime mp2_decoder is keyed on.
     addAudioDecoder(mp3_decoder, "audio/mpeg");
     addAudioDecoder(aac_decoder, "audio/aac");
     addAudioDecoder(mp2_decoder, "audio/mpeg; codecs=\"mpeg1-layer2\"");

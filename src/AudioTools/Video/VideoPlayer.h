@@ -126,32 +126,6 @@ class VideoPlayer {
  public:
   VideoPlayer() = default;
 
-  /// Video-only playback (no audio track), no demuxer registered yet -
-  /// call addDemuxer() before begin(). Auto-detected video codec.
-  VideoPlayer(VideoOutput& videoOutput) { setVideoOutput(videoOutput); }
-
-  /// Video + audio playback (AudioOutput target), no demuxer registered
-  /// yet - call addDemuxer() before begin(). See the demuxer-taking
-  /// overload below and the class comment's "Audio clock" section.
-  VideoPlayer(VideoOutput& videoOutput, AudioOutput& audioOutput) {
-    setVideoOutput(videoOutput);
-    setAudioOutput(audioOutput);
-  }
-
-  /// Video + audio playback (a generic Print target), no demuxer
-  /// registered yet - call addDemuxer() before begin().
-  VideoPlayer(VideoOutput& videoOutput, Print& audioOutput) {
-    setVideoOutput(videoOutput);
-    setAudioOutput(audioOutput);
-  }
-
-  /// Video + audio playback (AudioStream target), no demuxer registered
-  /// yet - call addDemuxer() before begin().
-  VideoPlayer(VideoOutput& videoOutput, AudioStream& audioOutput) {
-    setVideoOutput(videoOutput);
-    setAudioOutput(audioOutput);
-  }
-
   /// Video-only playback (no audio track) - auto-detected video codec.
   /// `demuxer` is registered the same way an addDemuxer() call would
   /// (this is just a convenience for the common single-format case - call
