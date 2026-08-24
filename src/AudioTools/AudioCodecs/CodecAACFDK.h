@@ -35,6 +35,8 @@ class AACDecoderFDK : public AudioDecoder  {
             delete dec;
         }
 
+        const char *mime() override { return "audio/aac"; }
+
         /// Defines the output stream
         void setOutput(Print &out_stream) override {
             dec->setOutput(out_stream);

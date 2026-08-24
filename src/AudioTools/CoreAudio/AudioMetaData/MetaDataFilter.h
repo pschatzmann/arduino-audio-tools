@@ -193,6 +193,8 @@ class MetaDataFilterDecoder : public AudioDecoder {
     filter.setOutput(decoder);
   }
 
+  const char *mime() override { return p_decoder->mime(); }
+
   bool begin() override {
     is_active = true;
     filter.begin();

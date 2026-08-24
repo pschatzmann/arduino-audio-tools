@@ -26,6 +26,8 @@ class AMRNBDecoder : public AudioDecoder {
 
   ~AMRNBDecoder() override = default;
 
+  const char *mime() override { return "audio/amr"; }
+
   void setMode(AMRNB::Mode mode) {
     this->mode = mode;
     amr.setMode(mode);

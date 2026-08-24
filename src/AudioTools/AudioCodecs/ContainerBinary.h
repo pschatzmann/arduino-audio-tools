@@ -256,6 +256,9 @@ public:
     p_codec = decoder;
   }
 
+  /// Provides the mime type of the wrapped codec, or "audio/binary" if none is set
+  const char *mime() override { return p_codec != nullptr ? p_codec->mime() : "audio/binary"; }
+
   // Defines the output: this method is called 2 times: first to define
   // output defined in the EnocdedAudioStream and then to define the
   // real output in the output chain.

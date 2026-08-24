@@ -95,6 +95,8 @@ class DSFDecoder : public AudioDecoder {
   DSFDecoder() = default;
   DSFDecoder(DSFMetadata metaData) { setMetaData(metaData); };
 
+  const char* mime() override { return "audio/dsf"; }
+
   AudioInfo audioInfo() override { return meta; }
 
   void setAudioInfo(AudioInfo from) override {

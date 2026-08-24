@@ -47,6 +47,8 @@ class DecoderALAC : public AudioDecoder {
     //setDefaultConfig();
   }
 
+  const char* mime() override { return "audio/alac"; }
+
   // define ALACSpecificConfig
   bool setCodecConfig(ALACSpecificConfig config) {
     return setCodecConfig((uint8_t*)&config, sizeof(config));

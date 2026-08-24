@@ -30,6 +30,8 @@ class GSMDecoder : public AudioDecoder {
     info.channels = 1;
   }
 
+  virtual const char *mime() override { return "audio/gsm"; }
+
   virtual bool begin() {
     TRACEI();
     // 160 13-bit samples

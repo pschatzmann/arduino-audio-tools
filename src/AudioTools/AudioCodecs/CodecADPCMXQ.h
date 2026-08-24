@@ -30,6 +30,8 @@ class ADPCMDecoderXQ : public AudioDecoder {
     info.bits_per_sample = 16;
   }
 
+  const char *mime() override { return "audio/adpcm"; }
+
   /// set bocksizes as 2^pow: range from 8 to 15
   void setBlockSizePower(int pow) {
     if (pow >= 8 && pow >= 15) {

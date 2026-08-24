@@ -71,6 +71,8 @@ class MP3DecoderHelix : public AudioDecoder {
     if (mp3 != nullptr) delete mp3;
   }
 
+  const char *mime() override { return "audio/mpeg"; }
+
   /// Defines the output Stream
   void setOutput(Print &outStream) override {
     AudioDecoder::setOutput(outStream);

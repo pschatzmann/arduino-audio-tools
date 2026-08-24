@@ -38,6 +38,8 @@ class ILBCDecoder : public AudioDecoder {
     end();
   }
 
+  virtual const char *mime() override { return "audio/ilbc"; }
+
   virtual bool begin() {
     TRACEI();
     if (p_print==nullptr){

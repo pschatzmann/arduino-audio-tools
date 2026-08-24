@@ -58,7 +58,7 @@ class MultiDecoder : public AudioDecoder {
    */
   MultiDecoder(MimeSource& mimeSource) { setMimeSource(mimeSource); }
 
- #ifdef USE_EXPERIMENTAL 
+ #ifdef USE_EXPERIMENTAL
   /**
    * @brief Destructor
    *
@@ -69,9 +69,16 @@ class MultiDecoder : public AudioDecoder {
     for (auto* adapter : adapters) {
       delete adapter;
     }
-    adapters.clear();    
+    adapters.clear();
   }
 #endif
+
+  /**
+   * @brief Provides the MIME type of the currently selected decoder
+   * @return MIME type string of the currently selected decoder, or nullptr
+   *         if no decoder has been selected yet
+   */
+  const char* mime() override { return actual_decoder.mime; }
 
   /**
    * @brief Starts the processing and enables automatic MIME type determination

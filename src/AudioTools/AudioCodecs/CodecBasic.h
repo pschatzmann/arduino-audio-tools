@@ -46,6 +46,8 @@ public:
     addNotifyAudioChange(bi);
   }
 
+  const char *mime() override { return "audio/basic"; }
+
   /// Defines the output Stream
   void setOutput(Print &out_stream) override {
     decoder.setOutput(out_stream);

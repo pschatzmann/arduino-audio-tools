@@ -870,6 +870,12 @@ class DecoderAdapter : public AudioDecoder {
   }
 
   /**
+   * @brief Provides the MIME type of the wrapped StreamingDecoder
+   * @return MIME type string from the wrapped StreamingDecoder
+   */
+  const char* mime() override { return p_dec->mime(); }
+
+  /**
    * @brief Defines the output Stream
    *
    * Sets the output stream for the wrapped StreamingDecoder.

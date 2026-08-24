@@ -30,6 +30,8 @@ class G722Decoder : public AudioDecoder {
  public:
   G722Decoder() = default;
 
+  virtual const char *mime() override { return "audio/g722"; }
+
   /// Defines the options for the G.722 Codec: G722_SAMPLE_RATE_8000,G722_PACKED
   void setOptions(int options){
     this->options = options;

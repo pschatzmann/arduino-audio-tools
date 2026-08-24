@@ -25,6 +25,8 @@ class AMRWBDecoder : public AudioDecoder {
 
   ~AMRWBDecoder() override = default;
 
+  const char *mime() override { return "audio/amr"; }
+
   bool begin() {
     notifyAudioChange(audioInfo());
     buffer.resize(amr.getEncodedFrameSizeBytes());

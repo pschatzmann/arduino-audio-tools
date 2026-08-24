@@ -49,6 +49,8 @@ class G729Decoder : public AudioDecoder {
  public:
   G729Decoder() { AudioDecoder::setAudioInfo(audioInfoG729); }
 
+  const char* mime() override { return "audio/g729"; }
+
   void setAudioInfo(AudioInfo info) override {
     // Check if requested format is valid
     if (info != audioInfoG729) {

@@ -136,6 +136,8 @@ class OpusMultiStreamAudioDecoder : public AudioDecoder {
     setOutput(out_stream);
   }
 
+  const char* mime() override { return "audio/opus"; }
+
   void setOutput(Print& out_stream) override { p_print = &out_stream; }
 
   AudioInfo audioInfo() override { return cfg; }

@@ -46,6 +46,8 @@ class LC3Decoder : public AudioDecoder {
     info.channels = 1;
   }
 
+  virtual const char *mime() override { return "audio/lc3"; }
+
   virtual bool begin() {
     TRACEI();
 

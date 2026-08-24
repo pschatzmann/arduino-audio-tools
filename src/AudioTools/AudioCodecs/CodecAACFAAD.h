@@ -35,6 +35,8 @@ class AACDecoderFAAD : public AudioDecoder {
 
   ~AACDecoderFAAD() { end(); }
 
+  const char *mime() override { return "audio/aac"; }
+
   /// Starts the processing
   bool begin() {
     TRACED();

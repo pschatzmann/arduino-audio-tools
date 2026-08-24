@@ -44,6 +44,8 @@ class MP3DecoderMAD : public AudioDecoder  {
             delete mad;
         }
 
+        const char *mime() override { return "audio/mpeg"; }
+
         void setOutput(Print &out) override {
             TRACED();
             mad->setOutput(out);

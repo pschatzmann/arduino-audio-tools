@@ -201,6 +201,8 @@ class ADTSDecoder : public AudioDecoder {
   ADTSDecoder() = default;
   ADTSDecoder(AudioDecoder &dec) { p_dec = &dec; };
 
+  const char *mime() override { return "audio/aac"; }
+
   bool begin() override {
     parser.begin();
     if (p_dec) p_dec->begin();

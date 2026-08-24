@@ -35,21 +35,26 @@ class G7xxDecoder : public AudioDecoder {
       case g723_24:
           dec_routine = g723_24_decoder;
           dec_bits = 3;
+          p_mime = "audio/g723_24";
           break;
 
       case g721:
           dec_routine = g721_decoder;
           dec_bits = 4;
+          p_mime = "audio/g721";
           break;
 
       case g723_40:
           dec_routine = g723_40_decoder;
           dec_bits = 5;
+          p_mime = "audio/g723_40";
           break;
     }
   }
 
-  void setAudioInfo(AudioInfo info) override { 
+  const char *mime() override { return p_mime; }
+
+  void setAudioInfo(AudioInfo info) override {
     bool ok = true;
     if (info.channels!=1){
       LOGE("channels must be 1 instead of %d", info.channels);
@@ -115,6 +120,7 @@ class G7xxDecoder : public AudioDecoder {
   int dec_bits;
   unsigned int in_buffer = 0;
   int in_bits = 0;
+  const char *p_mime = nullptr;
 
 };
 

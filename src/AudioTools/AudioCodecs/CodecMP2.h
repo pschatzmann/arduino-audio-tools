@@ -28,6 +28,8 @@ class MP2Decoder : public AudioDecoder {
     if (active) end();
   }
 
+  const char *mime() override { return "audio/mpeg"; }
+
   /// Defines the output Stream
   void setOutput(Print &out_stream) override { p_print = &out_stream; }
 

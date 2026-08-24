@@ -38,6 +38,8 @@ public:
       delete[] input_buffer;
   }
 
+  virtual const char *mime() override { return "audio/sbc"; }
+
   virtual bool begin() {
     TRACEI();
     is_first = true;

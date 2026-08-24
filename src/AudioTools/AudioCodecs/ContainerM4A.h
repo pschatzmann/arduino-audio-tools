@@ -32,6 +32,9 @@ class ContainerM4A : public ContainerDecoder {
    */
   ContainerM4A(MultiDecoder& decoder) : ContainerM4A() { setDecoder(decoder); }
 
+  /// Provides "audio/mp4"
+  const char *mime() override { return "audio/mp4"; }
+
   /**
    * @brief Set the output stream for decoded or raw audio.
    * @param out_stream Output AudioStream.

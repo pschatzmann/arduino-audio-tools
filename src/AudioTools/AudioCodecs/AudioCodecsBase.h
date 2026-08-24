@@ -23,6 +23,9 @@ class AudioDecoder : public AudioWriter, public AudioInfoSource {
   AudioDecoder(AudioDecoder const &) = delete;
   AudioDecoder &operator=(AudioDecoder const &) = delete;
 
+  /// Provides the mime type of the data that is expected by this decoder
+  virtual const char *mime() = 0;
+
   AudioInfo audioInfo() override { return info; };
 
   /// for most decoders this is not needed

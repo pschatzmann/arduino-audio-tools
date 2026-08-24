@@ -135,6 +135,8 @@ class OpusAudioDecoder : public AudioDecoder {
     setOutput(out_stream);
   }
 
+  const char *mime() override { return "audio/opus"; }
+
   /// Defines the output Stream
   void setOutput(Print &out_stream) override { p_print = &out_stream; }
 

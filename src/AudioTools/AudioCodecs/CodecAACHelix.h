@@ -70,6 +70,8 @@ class AACDecoderHelix : public AudioDecoder {
     if (aac != nullptr) delete aac;
   }
 
+  const char *mime() override { return "audio/aac"; }
+
   // void setRaw(bool flag){
   //     if (aac!=nullptr) aac->setRaw(flag);
   // }

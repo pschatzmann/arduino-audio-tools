@@ -25,6 +25,8 @@ class ADPCMDecoder : public AudioDecoderExt {
     if (p_decoder) delete p_decoder;
   }
 
+  const char *mime() override { return "audio/adpcm"; }
+
   // (re) defines the codec id: set the block size first
   void setId(AVCodecID id) {
     codec_id = id;
