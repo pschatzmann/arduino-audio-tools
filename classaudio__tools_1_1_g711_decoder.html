@@ -132,6 +132,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2b485ba5b9d96f94384f4a3840f84314" id="r_a2b485ba5b9d96f94384f4a3840f84314"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#a2b485ba5b9d96f94384f4a3840f84314">isResultPCM</a> ()</td></tr>
 <tr class="memdesc:a2b485ba5b9d96f94384f4a3840f84314"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true to indicate that the decoding result is PCM data.  <br /></td></tr>
 <tr class="separator:a2b485ba5b9d96f94384f4a3840f84314"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab233b9d1b86c9d2a2c009d6473aa8938" id="r_ab233b9d1b86c9d2a2c009d6473aa8938"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_g7xx_decoder.html#ab233b9d1b86c9d2a2c009d6473aa8938">mime</a> () override</td></tr>
+<tr class="memdesc:ab233b9d1b86c9d2a2c009d6473aa8938"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the mime type of the data that is expected by this decoder.  <br /></td></tr>
+<tr class="separator:ab233b9d1b86c9d2a2c009d6473aa8938"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b3baad8c612d81b96e46f84d7e97580" id="r_a9b3baad8c612d81b96e46f84d7e97580"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_g7xx_decoder.html#a9b3baad8c612d81b96e46f84d7e97580">operator bool</a> ()</td></tr>
 <tr class="separator:a9b3baad8c612d81b96e46f84d7e97580"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5b1cdb06807ff2dc37acbaff63410b9" id="r_aa5b1cdb06807ff2dc37acbaff63410b9"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#aa5b1cdb06807ff2dc37acbaff63410b9">removeNotifyAudioChange</a> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;bi)</td></tr>
@@ -199,6 +202,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b2e93f2f2db9a65b19a2487c6b1f78b" id="r_a6b2e93f2f2db9a65b19a2487c6b1f78b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_g7xx_decoder.html#a6b2e93f2f2db9a65b19a2487c6b1f78b">out_size</a></td></tr>
 <tr class="separator:a6b2e93f2f2db9a65b19a2487c6b1f78b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a373f78b12690e001253e3f873927b282" id="r_a373f78b12690e001253e3f873927b282"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_g7xx_decoder.html#a373f78b12690e001253e3f873927b282">p_mime</a> = nullptr</td></tr>
+<tr class="separator:a373f78b12690e001253e3f873927b282"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdad90adc3ba71f7b1e16444c23b5502" id="r_acdad90adc3ba71f7b1e16444c23b5502"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_g7xx_decoder.html#acdad90adc3ba71f7b1e16444c23b5502">p_print</a> = nullptr</td></tr>
 <tr class="separator:acdad90adc3ba71f7b1e16444c23b5502"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a846743dbc531b65183d737cc5d472677" id="r_a846743dbc531b65183d737cc5d472677"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_g7xx_decoder.html#a846743dbc531b65183d737cc5d472677">sample</a></td></tr>
@@ -518,6 +523,35 @@ Protected Attributes</h2></td></tr>
 <p>Returns true to indicate that the decoding result is PCM data. </p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_copy_decoder.html#a2b485ba5b9d96f94384f4a3840f84314">CopyDecoder</a>, <a class="el" href="classaudio__tools_1_1_decoder_network_format.html#a2b485ba5b9d96f94384f4a3840f84314">DecoderNetworkFormat</a>, and <a class="el" href="classaudio__tools_1_1_container_m4_a.html#abf7a01101c5d8d183d5f28be4ff6a4f3">ContainerM4A</a>.</p>
+
+</div>
+</div>
+<a id="ab233b9d1b86c9d2a2c009d6473aa8938" name="ab233b9d1b86c9d2a2c009d6473aa8938"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab233b9d1b86c9d2a2c009d6473aa8938">&#9670;&#160;</a></span>mime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * mime </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Provides the mime type of the data that is expected by this decoder. </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_audio_decoder.html#ae63fc244d9e1605f728c7f089d861524">AudioDecoder</a>.</p>
 
 </div>
 </div>
@@ -1172,6 +1206,28 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">int out_size</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a373f78b12690e001253e3f873927b282" name="a373f78b12690e001253e3f873927b282"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a373f78b12690e001253e3f873927b282">&#9670;&#160;</a></span>p_mime</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* p_mime = nullptr</td>
         </tr>
       </table>
   </td>
