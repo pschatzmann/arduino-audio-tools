@@ -63,6 +63,28 @@ class H264Decoder : public VideoDecoder, public VideoInfoSource {
 
   H264Decoder(VideoOutput &out) : H264Decoder() { setOutput(out); }
 
+  /// True if `data` starts with an Annex-B start code (00 00 01) followed
+  /// by a structurally valid NAL header (forbidden_zero_bit == 0, a
+  /// defined nal_unit_type) - see VideoDecoder::isValid(). Checked after
+  /// MPGDecoder::isValid() (CodecMPG.h) by MultiVideoDecoder (see
+  /// MultiVideoDecoderFull's constructor), since a handful of low
+  /// NAL-type values numerically overlap MPEG-1's slice_start_code range
+  /// and are only disambiguated by MPEG-1's own sequence_header having
+  /// already been ruled out first.
+  bool isValid(const uint8_t *data, size_t len) override {
+    for (size_t i = 0; i + 3 < len; i++) {
+      if (data[i] == 0 && data[i + 1] == 0 && data[i + 2] == 1) {
+        uint8_t header = data[i + 3];
+        if ((header & 0x80) == 0) {  // forbidden_zero_bit must be 0
+          uint8_t nal_type = header & 0x1F;
+          if (nal_type >= 1 && nal_type <= 23) return true;
+        }
+        i += 2;
+      }
+    }
+    return false;
+  }
+
   /// Defines the target the decoded picture is written to, one write()
   /// call per decoded picture, in the format selected via
   /// setVideoFormat() (RGB565 by default).

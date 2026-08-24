@@ -50,6 +50,17 @@ class VideoDecoder : public VideoOutput {
   virtual bool begin() = 0;
   /// Releases the decoder's resources.
   virtual void end() = 0;
+  /// True if `data` (the start of an access unit, as handed to write())
+  /// looks like this decoder's own bitstream format - content-sniffing,
+  /// not a guarantee (see the concrete class for exactly what's checked).
+  /// Used by MultiVideoDecoder to auto-select a registered decoder when
+  /// no VideoInfoSource answer is available (see its own class comment);
+  /// not otherwise part of the write()/flush() decode path. Default
+  /// false, matching VideoOutput::isKeyFrame()'s own default - a decoder
+  /// not meant to be auto-detected this way (e.g. a hardware-accelerated
+  /// backend not registered by default, still usable via an explicit
+  /// VideoInfoSource-based selection) simply never overrides it.
+  virtual bool isValid(const uint8_t *data, size_t len) { return false; }
 };
 
 /**

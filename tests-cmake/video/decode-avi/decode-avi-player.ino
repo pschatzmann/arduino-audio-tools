@@ -78,8 +78,8 @@ void setup() {
 
   // Register the codecs this AVI file's tracks may use (see the comment
   // at the top of this file - VideoPlayer's multi-decoders start empty).
-  player.addVideoDecoder(h264Decoder, VideoFormat::H264, isH264Video);
-  player.addVideoDecoder(mjpegDecoder, VideoFormat::MJPEG, isMjpegVideo);
+  player.addVideoDecoder(h264Decoder, VideoFormat::H264);
+  player.addVideoDecoder(mjpegDecoder, VideoFormat::MJPEG);
   player.addAudioDecoder(mp3Decoder, "audio/mpeg");
   player.addAudioDecoder(aacDecoder, "audio/aac");
   player.addAudioDecoder(wavDecoder, "audio/vnd.wave");

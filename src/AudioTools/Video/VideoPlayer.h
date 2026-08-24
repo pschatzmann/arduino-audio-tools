@@ -34,8 +34,8 @@ namespace audio_tools {
  * AACDecoderHelix aacDecoder;
  * void setup() {
  *   ...
- *   player.addVideoDecoder(h264Decoder, VideoFormat::H264, isH264Video);
- *   player.addVideoDecoder(mjpegDecoder, VideoFormat::MJPEG, isMjpegVideo);
+ *   player.addVideoDecoder(h264Decoder, VideoFormat::H264);
+ *   player.addVideoDecoder(mjpegDecoder, VideoFormat::MJPEG);
  *   player.addAudioDecoder(mp3Decoder, "audio/mpeg");
  *   player.addAudioDecoder(aacDecoder, "audio/aac");
  *   player.begin(file);
@@ -61,8 +61,12 @@ namespace audio_tools {
  * player.addAudioDecoder(mp2Decoder, "audio/mpeg; codecs=\"mpeg1-layer2\"");
  * @endcode
  * addVideoDecoder() similarly covers a hardware-accelerated decoder like
- * H264DecoderESP32S3 (CodecH264ESP32S3.h) in place of a portable one.
- * There is no way to replace either multi-decoder wholesale (e.g. with a
+ * H264DecoderESP32S3 (CodecH264ESP32S3.h) in place of a portable one -
+ * note its VideoDecoder::isValid() isn't overridden (see the class
+ * comment on that method), so it only gets selected via a
+ * setVideoInfoSource() answer, not the content-sniffing fallback; set one
+ * (typically the demuxer feeding this player) if you rely on it. There is
+ * no way to replace either multi-decoder wholesale (e.g. with a
  * single-codec decoder) - add to what's already registered instead. A
  * video-only stream needs no audio decoder registered at all - see
  * setAudioOutput()/the class's video-only constructor.
@@ -155,13 +159,12 @@ class VideoPlayer {
   void setDemuxer(Demuxer& demuxer) { p_demuxer = &demuxer; }
 
   /// Registers a video codec with the built-in (initially empty)
-  /// MultiVideoDecoder - see MultiVideoDecoder::addDecoder() for
-  /// `format`/`check`. Nothing is registered by default (see the class
-  /// comment), so this needs at least one call per codec your content's
-  /// video track actually uses. Call before begin().
-  void addVideoDecoder(VideoDecoder& decoder, VideoFormat format,
-                       bool (*check)(const uint8_t* data, size_t len)) {
-    default_video_decoder.addDecoder(decoder, format, check);
+  /// MultiVideoDecoder - see MultiVideoDecoder::addDecoder(). Nothing is
+  /// registered by default (see the class comment), so this needs at
+  /// least one call per codec your content's video track actually uses.
+  /// Call before begin().
+  void addVideoDecoder(VideoDecoder& decoder, VideoFormat format) {
+    default_video_decoder.addDecoder(decoder, format);
   }
 
   /// Defines the final video display target (e.g. OutputTinyGPU,

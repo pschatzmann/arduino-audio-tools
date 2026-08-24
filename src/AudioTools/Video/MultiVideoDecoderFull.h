@@ -35,9 +35,9 @@ namespace audio_tools {
 class MultiVideoDecoderFull : public MultiVideoDecoder {
  public:
   MultiVideoDecoderFull() {
-    addDecoder(mjpeg, VideoFormat::MJPEG, isMjpegVideo);
-    addDecoder(mpeg1, VideoFormat::MPEG1, isMpeg1Video);
-    addDecoder(h264, VideoFormat::H264, isH264Video);
+    addDecoder(mjpeg, VideoFormat::MJPEG);
+    addDecoder(mpeg1, VideoFormat::MPEG1);
+    addDecoder(h264, VideoFormat::H264);
   }
 
  protected:

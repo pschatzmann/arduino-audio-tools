@@ -60,6 +60,14 @@ class MJPEGDecoder : public VideoDecoder, public VideoInfoSource {
   MJPEGDecoder(Print &out) : MJPEGDecoder() { setOutput(out); }
   MJPEGDecoder(VideoOutput &out) : MJPEGDecoder() { setOutput(out); }
 
+  /// True if `data` looks like the start of a JPEG image (SOI marker FF
+  /// D8) - unambiguous, and reliable even on the very first write() of a
+  /// stream since a JPEG image always begins at FF D8 regardless of
+  /// framing - see VideoDecoder::isValid().
+  bool isValid(const uint8_t *data, size_t len) override {
+    return len >= 2 && data[0] == 0xFF && data[1] == 0xD8;
+  }
+
   /// Defines the target the decoded picture is written to, one write()
   /// call per decoded picture (RGB565 - the only format TinyJPEGDecoder
   /// produces).

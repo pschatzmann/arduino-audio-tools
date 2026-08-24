@@ -5,54 +5,6 @@
 
 namespace audio_tools {
 
-/// True if `data` looks like the start of a JPEG image (SOI marker FF D8)
-/// - unambiguous, and reliable even on the very first write() of a stream
-/// since a JPEG image always begins at FF D8 regardless of framing.
-/// @ingroup video
-inline bool isMjpegVideo(const uint8_t *data, size_t len) {
-  return len >= 2 && data[0] == 0xFF && data[1] == 0xD8;
-}
-
-/// True if `data` contains an MPEG-1 sequence_header (00 00 01 B3) -
-/// required by spec to precede the first picture of any real MPEG-1
-/// elementary stream, so it's reliably present in the very first access
-/// unit a demuxer ever hands to write() (bundled with the first GOP/
-/// picture - see ContainerMPG.h's own unit-buffering comment). 0xB3 can
-/// never appear as a valid H.264 NAL header byte (forbidden_zero_bit
-/// would have to be 1), so this never false-positives on H.264 content.
-/// @ingroup video
-inline bool isMpeg1Video(const uint8_t *data, size_t len) {
-  for (size_t i = 0; i + 3 < len; i++) {
-    if (data[i] == 0 && data[i + 1] == 0 && data[i + 2] == 1 &&
-        data[i + 3] == 0xB3) {
-      return true;
-    }
-  }
-  return false;
-}
-
-/// True if `data` starts with an Annex-B start code (00 00 01) followed
-/// by a structurally valid NAL header (forbidden_zero_bit == 0, a
-/// defined nal_unit_type). Checked after isMpeg1Video() (see
-/// MultiVideoDecoderFull's constructor) since a handful of low NAL-type
-/// values numerically overlap MPEG-1's slice_start_code range and are
-/// only disambiguated by MPEG-1's own sequence_header having already
-/// been ruled out first.
-/// @ingroup video
-inline bool isH264Video(const uint8_t *data, size_t len) {
-  for (size_t i = 0; i + 3 < len; i++) {
-    if (data[i] == 0 && data[i + 1] == 0 && data[i + 2] == 1) {
-      uint8_t header = data[i + 3];
-      if ((header & 0x80) == 0) {  // forbidden_zero_bit must be 0
-        uint8_t nal_type = header & 0x1F;
-        if (nal_type >= 1 && nal_type <= 23) return true;
-      }
-      i += 2;
-    }
-  }
-  return false;
-}
-
 /**
  * @brief Manages multiple VideoDecoders with automatic format detection -
  * the video-side counterpart of MultiDecoder (AudioCodecs/MultiDecoder.h).
@@ -68,6 +20,15 @@ inline bool isH264Video(const uint8_t *data, size_t len) {
  * the bitstream's own framing instead of the caller having to know the
  * codec up front.
  *
+ * Content-sniffing detection (the fallback path - see below) is done via
+ * each registered decoder's own VideoDecoder::isValid() - a virtual
+ * method with a default-false implementation, so a decoder only takes
+ * part in auto-detection if it actually overrides it (the built-in
+ * H264Decoder/MJPEGDecoder/MPGDecoder each do - see their own class
+ * comments); a decoder that doesn't (e.g. H264DecoderESP32S3, not
+ * auto-detected by default - see MultiVideoDecoderFull's own comment)
+ * can still be registered and selected via a VideoInfoSource answer.
+ *
  * Detection runs once, on the very first write() call, preferring the
  * container's own answer over guessing from raw bytes: if
  * setVideoInfoSource() was given a source (typically the demuxer feeding
@@ -78,11 +39,11 @@ inline bool isH264Video(const uint8_t *data, size_t len) {
  * videoInfo().format matches a registered decoder, that decoder is
  * selected directly, no sniffing needed. Otherwise (no source set, or its
  * format is UNKNOWN/unregistered) falls back to each registered decoder's
- * check() function, tried in registration order, against that first
- * call's bytes. Reliable either way because every current caller already
- * hands over one complete access unit per write() call. Every subsequent
- * call, plus flush()/isKeyFrame()/setSkipRender(), is forwarded to that
- * same decoder for the rest of the stream - never re-detected.
+ * isValid(), tried in registration order, against that first call's
+ * bytes. Reliable either way because every current caller already hands
+ * over one complete access unit per write() call. Every subsequent call,
+ * plus flush()/isKeyFrame()/setSkipRender(), is forwarded to that same
+ * decoder for the rest of the stream - never re-detected.
  *
  * setOutput()/setVideoFormat() are applied to every registered decoder
  * eagerly (cheap - just stores pointers/an enum, no allocation), but
@@ -97,21 +58,20 @@ inline bool isH264Video(const uint8_t *data, size_t len) {
  */
 class MultiVideoDecoder : public VideoDecoder, public VideoInfoSource {
  public:
-  /// Registers a decoder together with a detection function that
-  /// inspects the first write() call's bytes and returns true if this
-  /// decoder can handle that format - see the class comment for when/how
-  /// this runs. Call before the first write() reaches this object.
+  /// Registers a decoder for `format` - see the class comment for when/
+  /// how it's later selected (VideoInfoSource match, or its own
+  /// VideoDecoder::isValid() as a content-sniffing fallback). Call before
+  /// the first write() reaches this object.
   ///
   /// Replaces, rather than adds to, any decoder already registered for
   /// `format` - at most one entry per format, so e.g. registering
   /// H264DecoderESP32S3 for VideoFormat::H264 actually overrides a
   /// previously-registered H264Decoder instead of silently losing to it:
-  /// both write()'s VideoInfoSource-format lookup and its check()
+  /// both write()'s VideoInfoSource-format lookup and its isValid()
   /// fallback loop match the first entry found for a format, so a stale
   /// second entry would otherwise be permanently unreachable dead weight,
   /// never actually selected.
-  void addDecoder(VideoDecoder &decoder, VideoFormat format,
-                  bool (*check)(const uint8_t *data, size_t len)) {
+  void addDecoder(VideoDecoder &decoder, VideoFormat format) {
     for (int i = 0; i < decoders.size(); i++) {
       if (decoders[i].format == format) {
         decoders.erase(i);
@@ -121,7 +81,6 @@ class MultiVideoDecoder : public VideoDecoder, public VideoInfoSource {
     DecoderInfo info;
     info.decoder = &decoder;
     info.format = format;
-    info.check = check;
     decoders.push_back(info);
   }
 
@@ -188,7 +147,7 @@ class MultiVideoDecoder : public VideoDecoder, public VideoInfoSource {
       }
       if (p_selected == nullptr) {
         for (int i = 0; i < decoders.size(); i++) {
-          if (decoders[i].check(data, len)) {
+          if (decoders[i].decoder->isValid(data, len)) {
             select(decoders[i]);
             break;
           }
@@ -224,7 +183,6 @@ class MultiVideoDecoder : public VideoDecoder, public VideoInfoSource {
   struct DecoderInfo {
     VideoDecoder *decoder = nullptr;
     VideoFormat format = VideoFormat::UNKNOWN;
-    bool (*check)(const uint8_t *data, size_t len) = nullptr;
   };
 
   Vector<DecoderInfo> decoders{0};

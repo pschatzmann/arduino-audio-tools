@@ -53,6 +53,24 @@ class MPGDecoder : public VideoDecoder, public VideoInfoSource {
 
   MPGDecoder(VideoOutput &out) : MPGDecoder() { setOutput(out); }
 
+  /// True if `data` contains an MPEG-1 sequence_header (00 00 01 B3) -
+  /// required by spec to precede the first picture of any real MPEG-1
+  /// elementary stream, so it's reliably present in the very first access
+  /// unit a demuxer ever hands to write() (bundled with the first GOP/
+  /// picture - see ContainerMPG.h's own unit-buffering comment). 0xB3 can
+  /// never appear as a valid H.264 NAL header byte (forbidden_zero_bit
+  /// would have to be 1), so this never false-positives on H.264 content.
+  /// See VideoDecoder::isValid().
+  bool isValid(const uint8_t *data, size_t len) override {
+    for (size_t i = 0; i + 3 < len; i++) {
+      if (data[i] == 0 && data[i + 1] == 0 && data[i + 2] == 1 &&
+          data[i + 3] == 0xB3) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   void setOutput(Print &out) override { p_out = &out; }
   void setOutput(VideoOutput &out) override { p_out_video = &out; }
 

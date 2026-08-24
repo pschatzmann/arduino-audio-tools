@@ -103,9 +103,9 @@ class VideoPlayerFull : public VideoPlayer {
   MP2Decoder mp2_decoder;
 
   void registerVideoDecoders() {
-    addVideoDecoder(h264_decoder, VideoFormat::H264, isH264Video);
-    addVideoDecoder(mjpeg_decoder, VideoFormat::MJPEG, isMjpegVideo);
-    addVideoDecoder(mpeg_decoder, VideoFormat::MPEG1, isMpeg1Video);
+    addVideoDecoder(h264_decoder, VideoFormat::H264);
+    addVideoDecoder(mjpeg_decoder, VideoFormat::MJPEG);
+    addVideoDecoder(mpeg_decoder, VideoFormat::MPEG1);
   }
 
   void registerAudioDecoders() {
