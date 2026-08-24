@@ -29,7 +29,7 @@ class Emulated_TinyUSB;
  * the audio function descriptor block via the ESP32-specific API:
  *
  *  - `ESPUSB` (`USB.*`) — configures VID/PID/strings and starts the stack
- *  - `tinyusb_enable_interface(USB_INTERFACE_AUDIO, …)` — injects the UAC2
+ *  - `tinyusb_enable_interface(USB_INTERFACE_MIDI, …)` — injects the UAC2
  *    descriptor into the configuration descriptor the framework builds
  *
  * @note Timing: On ESP32, `USB.begin()` usually should be called explicitly. We provide a
