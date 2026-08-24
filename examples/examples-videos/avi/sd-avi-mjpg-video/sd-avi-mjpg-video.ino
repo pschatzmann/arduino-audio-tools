@@ -3,7 +3,7 @@
  * @brief Plays a local .avi file's audio + Motion-JPEG video tracks from
  * the microSD card of the Hosyond 2.8" ESP32-S3 Display (see that board's
  * audio-out/lcd-test/player-sdmmc examples): DemuxerAVI demuxes,
- * MJPEGDecoder (wraps https://github.com/Bodmer/JPEGDecoder) decodes video
+ * MJPEGDecoder (wraps https://github.com/pschatzmann/TinyJPEG) decodes video
  * to the ILI9341 panel, DecoderHelix auto-detects and decodes the audio
  * (PCM/AAC/MP3 all valid in AVI) to the ES8311/FM8002E speaker path via
  * AudioBoardStream.
@@ -31,8 +31,9 @@
  *
  * Notes:
  * - Video track must be Motion-JPEG (fourcc MJPG), baseline (non-
- *   progressive) JPEG frames - see JPEGDecoder's own README for its format
- *   limits. Every MJPEG frame is a complete, independently decodable image
+ *   progressive) JPEG frames - see TinyJPEG's own README (it wraps ChaN's
+ *   TJpgDec) for its format limits. Every MJPEG frame is a complete,
+ *   independently decodable image
  *   (no inter-frame prediction) - MJPEGDecoder::isKeyFrame() therefore
  *   always returns true (MJPEG is effectively "all I-frames"), never
  *   dropped by VideoAudioSyncTask's proactive catch-up path; a persistent
@@ -44,7 +45,7 @@
  * Dependencies (install via Library Manager):
  * - https://github.com/pschatzmann/arduino-audio-driver
  * - https://github.com/pschatzmann/TinyGPU
- * - https://github.com/Bodmer/JPEGDecoder
+ * - https://github.com/pschatzmann/TinyJPEG
  *
  * @author Phil Schatzmann
  * @copyright GPLv3
