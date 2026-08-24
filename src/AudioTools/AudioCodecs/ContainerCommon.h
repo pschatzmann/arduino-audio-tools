@@ -207,6 +207,16 @@ class Demuxer : public ContainerDecoder, public MimeSource, public VideoInfoSour
   /// is sent to the audio output before any audio payload - see the
   /// concrete class for the default heuristic.
   virtual void setSendWavHeader(bool flag) = 0;
+
+  /// True if `data` (the start of the stream, as handed to the first
+  /// write()) looks like this demuxer's own container format -
+  /// content-sniffing, not a guarantee (see the concrete class for
+  /// exactly what's checked). Used by MultiVideoDemuxer to auto-select a
+  /// registered demuxer (MultiVideoDemuxer.h); not otherwise part of the
+  /// write()/parse path. Default false, matching VideoDecoder::isValid()'s
+  /// own default - a demuxer not meant to be auto-detected this way
+  /// simply never overrides it.
+  virtual bool isValid(const uint8_t *data, size_t len) { return false; }
 };
 
 }  // namespace audio_tools

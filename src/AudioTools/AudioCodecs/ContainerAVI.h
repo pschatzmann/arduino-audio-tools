@@ -298,6 +298,13 @@ public:
   /// provides the audio mime
   const char *mime() override { return toMime(audio_info.wFormatTag); }
 
+  /// True if `data` starts with a RIFF header declaring an AVI file
+  /// ("RIFF" at offset 0, "AVI " at offset 8) - see Demuxer::isValid().
+  bool isValid(const uint8_t *data, size_t len) override {
+    return len >= 12 && memcmp(data, "RIFF", 4) == 0 &&
+           memcmp(data + 8, "AVI ", 4) == 0;
+  }
+
   /// Overrides the automatic decision of whether a synthetic WAV header
   /// (matching the parsed 'strf' audio format) is sent to the audio output
   /// before any audio payload. By default this is decided automatically

@@ -17,3 +17,4 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/decode-mp4 ${CMAKE_CURRENT_BINARY_D
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/decode-mp4-spooled ${CMAKE_CURRENT_BINARY_DIR}/decode-mp4-spooled)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/decode-mp4-file ${CMAKE_CURRENT_BINARY_DIR}/decode-mp4-file)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/decode-mpg ${CMAKE_CURRENT_BINARY_DIR}/decode-mpg)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/multi-video-demuxer ${CMAKE_CURRENT_BINARY_DIR}/multi-video-demuxer)

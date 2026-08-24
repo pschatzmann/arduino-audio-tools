@@ -122,6 +122,13 @@ class DemuxerMP4 : public Demuxer {
   /// track's 'stsd' has been parsed - see getAudioInfo())
   const char* mime() override { return toMime(audio_format); }
 
+  /// True if `data` starts with an ISO base media 'ftyp' box (4-byte box
+  /// size, then "ftyp" at offset 4) - the standard start of an MP4/M4A
+  /// file - see Demuxer::isValid().
+  bool isValid(const uint8_t* data, size_t len) override {
+    return len >= 8 && memcmp(data + 4, "ftyp", 4) == 0;
+  }
+
   bool begin() override {
     freeTracks();
     current_track = nullptr;

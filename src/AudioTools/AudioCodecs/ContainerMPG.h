@@ -128,6 +128,13 @@ class DemuxerMPG : public Demuxer {
     return toMime(AudioFormat::MP3);
   }
 
+  /// True if `data` starts with an MPEG Program Stream pack_start_code
+  /// (00 00 01 BA) - see Demuxer::isValid().
+  bool isValid(const uint8_t *data, size_t len) override {
+    return len >= 4 && data[0] == 0x00 && data[1] == 0x00 &&
+           data[2] == 0x01 && data[3] == MPG_PACK_START_CODE;
+  }
+
   bool begin() override {
     parse_buffer.clear();
     is_parsing_active = true;
