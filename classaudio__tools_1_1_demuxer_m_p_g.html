@@ -136,6 +136,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a475bc9908ea8a1d67e5cc1c1f67a71b2" id="r_a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a475bc9908ea8a1d67e5cc1c1f67a71b2">isNotifyActive</a> ()</td></tr>
 <tr class="memdesc:a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> update is active.  <br /></td></tr>
 <tr class="separator:a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d303e10275604ba1f2dbf12daecbca7" id="r_a0d303e10275604ba1f2dbf12daecbca7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html#a0d303e10275604ba1f2dbf12daecbca7">isValid</a> (const uint8_t *data, size_t len) override</td></tr>
+<tr class="separator:a0d303e10275604ba1f2dbf12daecbca7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab233b9d1b86c9d2a2c009d6473aa8938" id="r_ab233b9d1b86c9d2a2c009d6473aa8938"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html#ab233b9d1b86c9d2a2c009d6473aa8938">mime</a> () override</td></tr>
 <tr class="separator:ab233b9d1b86c9d2a2c009d6473aa8938"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae125d7c8cee8961766e6e5486aa860de" id="r_ae125d7c8cee8961766e6e5486aa860de"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html#ae125d7c8cee8961766e6e5486aa860de">mimeVideo</a> () override</td></tr>
@@ -310,10 +312,10 @@ Static Protected Attributes</h2></td></tr>
 <div class="line"><span class="comment">// feed raw .mpg bytes:</span></div>
 <div class="line">demuxer.<a class="code hl_function" href="classaudio__tools_1_1_demuxer_m_p_g.html#a7597ef706dd1aa590903ce9e095db20a">write</a>(mpgData, len);</div>
 <div class="ttc" id="aclassaudio__tools_1_1_demuxer_m_p_g_html"><div class="ttname"><a href="classaudio__tools_1_1_demuxer_m_p_g.html">audio_tools::DemuxerMPG</a></div><div class="ttdoc">MPEG-1 System (Program) Stream Demuxer, as defined by ISO/IEC 11172-1: splits the pack_header/system_...</div><div class="ttdef"><b>Definition</b> ContainerMPG.h:111</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_demuxer_m_p_g_html_a59ba90092c99ea7626cc58d70c8ed8f8"><div class="ttname"><a href="classaudio__tools_1_1_demuxer_m_p_g.html#a59ba90092c99ea7626cc58d70c8ed8f8">audio_tools::DemuxerMPG::setOutputAudio</a></div><div class="ttdeci">void setOutputAudio(Print &amp;out) override</div><div class="ttdef"><b>Definition</b> ContainerMPG.h:169</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_demuxer_m_p_g_html_a7597ef706dd1aa590903ce9e095db20a"><div class="ttname"><a href="classaudio__tools_1_1_demuxer_m_p_g.html#a7597ef706dd1aa590903ce9e095db20a">audio_tools::DemuxerMPG::write</a></div><div class="ttdeci">size_t write(const uint8_t *data, size_t len) override</div><div class="ttdef"><b>Definition</b> ContainerMPG.h:212</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_demuxer_m_p_g_html_acba365cc28eb702040c382646cfb0a7a"><div class="ttname"><a href="classaudio__tools_1_1_demuxer_m_p_g.html#acba365cc28eb702040c382646cfb0a7a">audio_tools::DemuxerMPG::begin</a></div><div class="ttdeci">bool begin() override</div><div class="ttdef"><b>Definition</b> ContainerMPG.h:131</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_demuxer_m_p_g_html_aee3d456e79d27d60f9b6ade892fcc88c"><div class="ttname"><a href="classaudio__tools_1_1_demuxer_m_p_g.html#aee3d456e79d27d60f9b6ade892fcc88c">audio_tools::DemuxerMPG::setOutputVideo</a></div><div class="ttdeci">void setOutputVideo(Print &amp;out) override</div><div class="ttdef"><b>Definition</b> ContainerMPG.h:179</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_demuxer_m_p_g_html_a59ba90092c99ea7626cc58d70c8ed8f8"><div class="ttname"><a href="classaudio__tools_1_1_demuxer_m_p_g.html#a59ba90092c99ea7626cc58d70c8ed8f8">audio_tools::DemuxerMPG::setOutputAudio</a></div><div class="ttdeci">void setOutputAudio(Print &amp;out) override</div><div class="ttdef"><b>Definition</b> ContainerMPG.h:176</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_demuxer_m_p_g_html_a7597ef706dd1aa590903ce9e095db20a"><div class="ttname"><a href="classaudio__tools_1_1_demuxer_m_p_g.html#a7597ef706dd1aa590903ce9e095db20a">audio_tools::DemuxerMPG::write</a></div><div class="ttdeci">size_t write(const uint8_t *data, size_t len) override</div><div class="ttdef"><b>Definition</b> ContainerMPG.h:219</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_demuxer_m_p_g_html_acba365cc28eb702040c382646cfb0a7a"><div class="ttname"><a href="classaudio__tools_1_1_demuxer_m_p_g.html#acba365cc28eb702040c382646cfb0a7a">audio_tools::DemuxerMPG::begin</a></div><div class="ttdeci">bool begin() override</div><div class="ttdef"><b>Definition</b> ContainerMPG.h:138</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_demuxer_m_p_g_html_aee3d456e79d27d60f9b6ade892fcc88c"><div class="ttname"><a href="classaudio__tools_1_1_demuxer_m_p_g.html#aee3d456e79d27d60f9b6ade892fcc88c">audio_tools::DemuxerMPG::setOutputVideo</a></div><div class="ttdeci">void setOutputVideo(Print &amp;out) override</div><div class="ttdef"><b>Definition</b> ContainerMPG.h:186</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_encoded_audio_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_encoded_audio_stream.html">audio_tools::EncodedAudioStream</a></div><div class="ttdoc">A more natural Stream class to process encoded data (aac, wav, mp3...) which also supports the decodi...</div><div class="ttdef"><b>Definition</b> AudioEncoded.h:282</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_m_p3_decoder_helix_html"><div class="ttname"><a href="classaudio__tools_1_1_m_p3_decoder_helix.html">audio_tools::MP3DecoderHelix</a></div><div class="ttdoc">MP3 Decoder using libhelix: https://github.com/pschatzmann/arduino-libhelix This is basically just a ...</div><div class="ttdef"><b>Definition</b> CodecMP3Helix.h:20</div></div>
 </div><!-- fragment --><dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
@@ -930,6 +932,45 @@ Static Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Checks if the automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> update is active. </p>
+
+</div>
+</div>
+<a id="a0d303e10275604ba1f2dbf12daecbca7" name="a0d303e10275604ba1f2dbf12daecbca7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d303e10275604ba1f2dbf12daecbca7">&#9670;&#160;</a></span>isValid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isValid </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>True if <code>data</code> starts with an MPEG Program <a class="el" href="class_stream.html">Stream</a> pack_start_code (00 00 01 BA) - see <a class="el" href="classaudio__tools_1_1_demuxer.html#a1d917cf8a29af24e8beaa22306cfffe2">Demuxer::isValid()</a>. </p>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_demuxer.html#a1d917cf8a29af24e8beaa22306cfffe2">Demuxer</a>.</p>
 
 </div>
 </div>
