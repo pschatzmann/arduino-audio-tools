@@ -25,11 +25,34 @@ if(NOT tinyh264_POPULATED)
     add_subdirectory(${tinyh264_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/tinyh264)
 endif()
 
+# Build with TinyMPG - the MPEG-1 decoder MPGDecoder (AudioTools/Video/CodecMPG.h) wraps -
+# MultiVideoDecoder (AudioTools/Video/MultiVideoDecoder.h) pulls in all three video
+# codec decoders (H264Decoder/MPGDecoder/MJPEGDecoder) regardless of which one a
+# given .avi file actually uses.
+FetchContent_Declare(tinympg GIT_REPOSITORY "https://github.com/pschatzmann/TinyMPG.git" GIT_TAG main )
+FetchContent_GetProperties(tinympg)
+if(NOT tinympg_POPULATED)
+    FetchContent_Populate(tinympg)
+    add_subdirectory(${tinympg_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/tinympg)
+endif()
+
+# Build with TinyJPEG - the Motion-JPEG decoder MJPEGDecoder
+# (AudioTools/Video/CodecJPEG.h) wraps. Native CMake support (header-only
+# INTERFACE target, TinyJPEG::TinyJPEG) and no Arduino.h/SD.h dependency at
+# all in the array-based decodeArray() path MJPEGDecoder actually uses, so
+# unlike the JPEGDecoder library this replaced, no desktop-emulator
+# workarounds are needed here.
+FetchContent_Declare(tinyjpeg GIT_REPOSITORY "https://github.com/pschatzmann/TinyJPEG.git" GIT_TAG main )
+FetchContent_GetProperties(tinyjpeg)
+if(NOT tinyjpeg_POPULATED)
+    FetchContent_Populate(tinyjpeg)
+    add_subdirectory(${tinyjpeg_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/tinyjpeg)
+endif()
+
 # provide audio-tools
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../../.. ${CMAKE_CURRENT_BINARY_DIR}/arduino-audio-tools )
 endif()
-
 
 # Build with libhelix - DecoderHelix (AudioTools/AudioCodecs/CodecHelix.h)
 # bundles AACDecoderHelix/MP3DecoderHelix/WAVDecoder for the AVI audio track
@@ -48,10 +71,19 @@ include_directories( ${OpenCV_INCLUDE_DIRS} )
 set_source_files_properties(decode-avi.ino PROPERTIES LANGUAGE CXX)
 add_executable (decode-avi decode-avi.ino)
 
+# decode-avi-player: same pipeline/test file as decode-avi, but driven
+# through AudioTools/Video/VideoPlayer.h instead of wiring CodecCopy/
+# MultiVideoDecoder/DecoderHelix/VideoAudioSyncTask by hand - exercises
+# VideoPlayer end-to-end against a real .avi file.
+set_source_files_properties(decode-avi-player.ino PROPERTIES LANGUAGE CXX)
+add_executable (decode-avi-player decode-avi-player.ino)
+
 # set preprocessor defines
 target_compile_definitions(arduino_emulator PUBLIC -DDEFINE_MAIN)
 target_compile_definitions(decode-avi PUBLIC -DARDUINO -DUSE_PORTAUDIO -DIS_DESKTOP)
 target_compile_options(decode-avi PRIVATE -Wno-multichar)
+target_compile_definitions(decode-avi-player PUBLIC -DARDUINO -DUSE_PORTAUDIO -DIS_DESKTOP)
+target_compile_options(decode-avi-player PRIVATE -Wno-multichar)
 
 # set compile optioins
 target_compile_options(arduino-audio-tools INTERFACE -Wno-inconsistent-missing-override)
@@ -62,5 +94,17 @@ target_link_libraries(decode-avi PRIVATE
     arduino-audio-tools
     arduino_helix
     TinyH264::TinyH264
+    TinyMPG::TinyMPG
+    TinyJPEG::TinyJPEG
+    portaudio
+    ${OpenCV_LIBS})
+
+target_link_libraries(decode-avi-player PRIVATE
+    arduino_emulator
+    arduino-audio-tools
+    arduino_helix
+    TinyH264::TinyH264
+    TinyMPG::TinyMPG
+    TinyJPEG::TinyJPEG
     portaudio
     ${OpenCV_LIBS})

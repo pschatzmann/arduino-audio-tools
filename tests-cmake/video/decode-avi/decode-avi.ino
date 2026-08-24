@@ -1,18 +1,22 @@
 /**
  * @file decode-avi.ino
- * @brief Desktop counterpart of sd-avi-audio-video.ino: plays a local .avi
- * file's audio + H.264 video tracks, demuxed live with DemuxerAVI and
- * decoded with H264Decoder (TinyH264). Display/audio are swapped for their
- * desktop equivalents: OutputTinyGPU -> OutputOpenCV, I2SStream ->
+ * @brief Desktop counterpart of sd-avi-mjpg-video.ino/sd-avi-h264-video.ino:
+ * plays a local .avi file's audio + video tracks, demuxed live with
+ * DemuxerAVI. Video codec is auto-detected via MultiVideoDecoder (AVI can
+ * carry either H.264 or Motion-JPEG - see its own class comment), fed
+ * DemuxerAVI's parsed VideoInfo::format directly via
+ * videoDecoder.setVideoInfoSource(aviDemuxer), same pattern as
+ * multiDecoder's audio auto-detection below. Display/audio are swapped for
+ * their desktop equivalents: OutputTinyGPU -> OutputOpenCV, I2SStream ->
  * PortAudioStream.
  *
- * H264Decoder outputs already-decoded RGB565 frames (its default pixel
- * format) - videoOut.setVideoFormat(VideoFormat::RGB565) tells OutputOpenCV
- * to display those directly instead of its default MJPEG-accumulate mode
- * (which just buffers bytes waiting for a flush() that raw decoders never
- * call). Audio codec is auto-detected via DecoderHelix (multi-format:
- * WAV/AAC/MP3), fed DemuxerAVI's parsed mime type directly via
- * multiDecoder.setMimeSource(aviDemuxer).
+ * Both H264Decoder and MJPEGDecoder output already-decoded RGB565 frames
+ * (their default pixel format) - videoOut.setVideoFormat(VideoFormat::
+ * RGB565) tells OutputOpenCV to display those directly instead of its
+ * default MJPEG-accumulate mode (which just buffers bytes waiting for a
+ * flush() that a raw decoder never calls). Audio codec is auto-detected via
+ * DecoderHelix (multi-format: WAV/AAC/MP3), fed DemuxerAVI's parsed mime
+ * type directly via multiDecoder.setMimeSource(aviDemuxer).
  *
  * File feeding uses CodecCopy rather than StreamCopy; its write() must
  * retry on a partial accept (DemuxerAVI's parse buffer only has so much
@@ -40,8 +44,9 @@
  * Pipeline: File -> CodecCopy -> DemuxerAVI (demux)
  *   -> EncodedAudioStream (DecoderHelix: WAV/AAC/MP3) -> AudioTimeSourceStream
  *   (audio clock) -> PortAudioStream (audio)
- *   \-> VideoAudioSyncTask (buffer + schedule) -> H264Decoder (H.264 decode
- *   -> RGB565) -> OutputOpenCV (draw) (video, own background task)
+ *   \-> VideoAudioSyncTask (buffer + schedule) -> MultiVideoDecoder (H.264
+ *   or MJPEG, auto-detected -> RGB565) -> OutputOpenCV (draw) (video, own
+ *   background task)
  *
  * To build & run:
  * - mkdir build && cd build && cmake .. && make
@@ -54,7 +59,7 @@
 #include "AudioTools/AudioCodecs/ContainerAVI.h"
 #include "AudioTools/AudioCodecs/CodecHelix.h"
 #include "AudioTools/AudioLibs/PortAudioStream.h"
-#include "AudioTools/Video/CodecH264.h"
+#include "AudioTools/Video/MultiVideoDecoder.h"
 #include "AudioTools/Video/OutputOpenCV.h"
 #include "AudioTools/Video/OutputTest.h"
 #include "SD.h"
@@ -63,12 +68,12 @@
 const char *file_path = "/media/pschatzmann/External/Videos/output176x144.avi";
 
 OutputOpenCV videoOut;  // default mode is MJPEG - decodes the JPEG itself
-H264Decoder h264Decoder(videoOut);
+MultiVideoDecoder videoDecoder;
 // 3rd arg: scheduling delay compensating for PortAudioStream's own output
 // buffering below (buffer_size*buffer_count bytes) - see
 // VideoAudioSyncTask::setSchedulingDelayMs(); ~50ms is a rough match for
 // 1024*10 bytes of 44.1kHz/16-bit/stereo PCM, tune for your own config.
-VideoAudioSyncTask videoSync(h264Decoder, 0, 50);
+VideoAudioSyncTask videoSync(videoDecoder, 0, 50);
 PortAudioStream out;
 AudioTimeSourceStream audioClock(out);  // decoded-PCM-bytes-based playback clock
 DecoderHelix multiDecoder;
@@ -94,13 +99,23 @@ void setup() {
   out.begin(audio_cfg);
 
   multiDecoder.setMimeSource(aviDemuxer);
-  // H264Decoder outputs already-decoded RGB565 frames (its default pixel
-  // format), not MJPEG bytes - OutputOpenCV defaults to MJPEG mode (which
-  // just accumulates bytes waiting for flush(), never called here), so
-  // without this it silently never displays anything.
+  // Both H264Decoder and MJPEGDecoder output already-decoded RGB565
+  // frames (their default pixel format), not MJPEG bytes - OutputOpenCV
+  // defaults to MJPEG mode (which just accumulates bytes waiting for
+  // flush(), never called here), so without this it silently never
+  // displays anything.
   videoOut.setVideoFormat(VideoFormat::RGB565);
   videoOut.setVideoInfoSource(aviDemuxer);
   audioOut.begin();
+
+  videoDecoder.setOutput(videoOut);
+  videoDecoder.setVideoFormat(VideoFormat::RGB565);
+  // See MultiVideoDecoder's class comment: DemuxerAVI parses the real
+  // codec from the AVI stream header's FOURCC (ContainerAVI.h) and
+  // reports it via getVideoInfo().format - this makes detection exact
+  // instead of sniffing bitstream bytes.
+  videoDecoder.setVideoInfoSource(aviDemuxer);
+  videoDecoder.begin();
 
   videoSync.setAudioClock(audioClock);
 

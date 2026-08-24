@@ -20,6 +20,16 @@ class VideoDecoder : public VideoOutput {
   virtual ~VideoDecoder() = default;
   /// Defines the target each decoded picture is written to.
   virtual void setOutput(Print &out) = 0;
+  /// Defines the target each decoded picture is written to - the
+  /// VideoOutput-specific counterpart of setOutput(Print&), for a target
+  /// like OutputTinyGPU/OutputOpenCV that implements VideoOutput but not
+  /// Print (the two are unrelated types - see VideoFrameMeter's own
+  /// comment). Part of the base interface (unlike other decoder-specific
+  /// extras) so code holding only a VideoDecoder& (e.g. VideoPlayer) can
+  /// wire it to an arbitrary VideoOutput& without knowing the concrete
+  /// decoder type - every current decoder already implemented this
+  /// identically before it was pulled up into the interface.
+  virtual void setOutput(VideoOutput &out) = 0;
   /// Selects the pixel format written to setOutput()'s target - e.g.
   /// VideoFormat::RGB565 (the common TFT wire format), RGB666/RGB888 for
   /// higher color depth displays, or I420 to pass the decoded planes

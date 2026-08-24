@@ -94,6 +94,7 @@ protected:
   size_t pos = 0;
   uint64_t start = 0;
   uint32_t write_time_ms = 0;
+  std::vector<uint8_t> swap_buffer;  // see displayRaw()'s RGB565 case
 
   void ensureWindow() {
     if (create_window) {
@@ -124,7 +125,24 @@ protected:
     cv::Mat bgr;
     switch (video_format) {
       case VideoFormat::RGB565: {
-        cv::Mat raw(height, width, CV_8UC2, (void *)data);
+        // Every RGB565 producer here (H264Decoder, MPGDecoder,
+        // MJPEGDecoder) packs each pixel into a native uint16
+        // ((r<<8)|(g<<3)|(b>>3)) - little-endian in memory on a desktop
+        // x86/ARM build - but cv::COLOR_BGR5652BGR expects it
+        // byte-swapped, the same transmission order real SPI TFT panels
+        // need (see e.g. MPGDecoder::setByteSwap()/MJPEGDecoder's own).
+        // Swapped into a scratch buffer since 'data' isn't ours to
+        // modify in place.
+        size_t needed = (size_t)width * height * 2;
+        if (swap_buffer.size() < needed) swap_buffer.resize(needed);
+        const uint16_t *src = (const uint16_t *)data;
+        uint16_t *dst = (uint16_t *)swap_buffer.data();
+        size_t n = (size_t)width * height;
+        for (size_t i = 0; i < n; i++) {
+          uint16_t v = src[i];
+          dst[i] = (uint16_t)((v << 8) | (v >> 8));
+        }
+        cv::Mat raw(height, width, CV_8UC2, (void *)swap_buffer.data());
         cv::cvtColor(raw, bgr, cv::COLOR_BGR5652BGR);
         break;
       }

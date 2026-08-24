@@ -239,6 +239,20 @@ class VideoOutput {
 
   /// Optional: returns the time (ms) spent in the last write() call
   virtual uint32_t getWriteTimeMs() const { return 0; }
+
+  /// True if the most recent write()+flush() call actually produced a
+  /// displayable picture - default true, matching every synchronous
+  /// decoder (H264Decoder, MJPEGDecoder, ...), which always decodes and
+  /// pushes pixels fully within that one call. Override this only if
+  /// your decoder can legitimately accept/decode a frame's bytes without
+  /// emitting a picture during that same call - e.g. MPGDecoder, whose
+  /// B-picture display-order reordering can hold a just-decoded picture
+  /// back and instead emit an earlier one (or nothing at all) from a
+  /// given write(), see its own override. Used by VideoAudioSyncTask to
+  /// avoid counting/timing a call that did no real rendering work as a
+  /// rendered frame - without this, its outputFPS()/frameCountI()/
+  /// frameCountP()/avgFrameMs() would overcount for such a decoder.
+  virtual bool hadOutput() const { return true; }
 };
 
 

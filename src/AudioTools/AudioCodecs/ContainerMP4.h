@@ -162,7 +162,7 @@ class DemuxerMP4 : public Demuxer {
   void setOutput(Print& out) override { setOutputAudio(out); }
 
   void setOutputVideo(Print& out) override { p_video_out = &out; }
-  void setOutputVideo(VideoOutput& out) { p_video_out_video = &out; }
+  void setOutputVideo(VideoOutput& out) override { p_video_out_video = &out; }
 
   /// Common video info (width/height/format/frame_size/total_file_size),
   /// analogous to audioInfo() - the same VideoInfo type is also provided

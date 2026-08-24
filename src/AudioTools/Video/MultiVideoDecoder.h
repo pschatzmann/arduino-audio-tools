@@ -62,7 +62,7 @@ inline bool isH264Video(const uint8_t *data, size_t len) {
  *
  * Comes pre-registered with every video codec this library ships a
  * portable (no hardware-specific backend) software decoder for:
- * MJPEGDecoder (Motion-JPEG, JPEGDecoder, CodecJPEG.h), MPGDecoder
+ * MJPEGDecoder (Motion-JPEG, TinyJPEG, CodecJPEG.h), MPGDecoder
  * (MPEG-1, TinyMPG, CodecMPG.h), H264Decoder (H.264 Annex-B, TinyH264,
  * CodecH264.h) - drop it into a demuxer's setOutputVideo() the same way
  * any single decoder would go, and it self-selects the right one from
@@ -100,7 +100,7 @@ inline bool isH264Video(const uint8_t *data, size_t len) {
  * uses:
  * - https://github.com/pschatzmann/TinyH264
  * - https://github.com/pschatzmann/TinyMPG
- * - https://github.com/Bodmer/JPEGDecoder
+ * - https://github.com/pschatzmann/TinyJPEG
  *
  * @ingroup video
  * @ingroup decoder
@@ -141,12 +141,11 @@ class MultiVideoDecoder : public VideoDecoder, public VideoInfoSource {
     for (int i = 0; i < decoders.size(); i++) decoders[i].decoder->setOutput(out);
   }
 
-  /// See VideoDecoder::setOutput() - the VideoOutput overload every
-  /// current video example actually uses (e.g. wiring to OutputTinyGPU).
-  /// Not part of VideoDecoder's virtual interface (each concrete decoder
-  /// exposes it as its own additional overload), so forwarded manually
-  /// to every registered decoder here instead of through a virtual call.
-  void setOutput(VideoOutput &out) {
+  /// See VideoDecoder::setOutput(VideoOutput&) - forwarded to every
+  /// registered decoder eagerly (same rationale as the Print& overload
+  /// above), so whichever one gets selected on the first write() is
+  /// already wired.
+  void setOutput(VideoOutput &out) override {
     mjpeg.setOutput(out);
     mpeg1.setOutput(out);
     h264.setOutput(out);

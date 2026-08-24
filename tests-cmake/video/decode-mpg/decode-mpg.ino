@@ -50,7 +50,7 @@
 #include "SD.h"
 
 // ---- File to play ----
-const char *file_path = "/media/pschatzmann/External/Videos/output176x144-mp3.mpg";
+const char *file_path = "/media/pschatzmann/External/Videos/output176x144-v2.mpg";
 
 MPGDecoder mpgDecoder;
 OutputOpenCV videoOut;

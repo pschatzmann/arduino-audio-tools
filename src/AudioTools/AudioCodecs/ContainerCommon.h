@@ -178,6 +178,16 @@ class Demuxer : public ContainerDecoder, public MimeSource, public VideoInfoSour
   /// Defines the video output - e.g. a VideoOutput implementation, or
   /// any other Print if you want the raw payload as-is.
   virtual void setOutputVideo(Print &out) = 0;
+  /// Defines the video output - the VideoOutput-specific counterpart of
+  /// setOutputVideo(Print&), for a target like VideoAudioSyncTask/
+  /// OutputTinyGPU/OutputOpenCV that implements VideoOutput but not Print
+  /// (the two are unrelated types - see VideoFrameMeter's own comment).
+  /// Part of the base interface (unlike other concrete-class-specific
+  /// extras) so code holding only a Demuxer& (e.g. VideoPlayer) can wire
+  /// it to an arbitrary VideoOutput& without knowing the concrete
+  /// container format - every current demuxer already implemented this
+  /// identically before it was pulled up into the interface.
+  virtual void setOutputVideo(VideoOutput &out) = 0;
 
   /// Common video info (width/height/format/frame_size/total_file_size)
   virtual VideoInfo getVideoInfo() = 0;

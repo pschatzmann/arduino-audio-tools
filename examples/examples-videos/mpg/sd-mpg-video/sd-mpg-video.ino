@@ -41,8 +41,9 @@
  * (the same pattern also works from a live HTTP download instead of a
  * File).
  * @note transcode file e.g. with ffmpeg -i Casablanca.1942.720.x264.YIFY.mkv
- -vf "scale=176:144,fps=24" -c:v mpeg1video -g 1 -bf 0 -q:v 5 -c:a mp2 -b:a 128k
- output176x144-v2.mpg
+ -vf "scale=176:144,fps=24" -c:v mpeg1video -g 15 -bf 0 -q:v 5 -c:a mp2 -b:a
+ 128k output176x144-v2.mpg
+
 
 
 
@@ -157,6 +158,8 @@ void setup() {
     return;
   }
 
+  // delta frames are too slow, so just ignore them ?
+  videoSyncTask.setIgnorePFrames(true);
   videoSyncTask.setAudioClock(audioClock);
   // Pin the render task to core 0 - loop() (SD reads + demuxing + the
   // blocking out.write() into I2S) runs on core 1 by default. Without

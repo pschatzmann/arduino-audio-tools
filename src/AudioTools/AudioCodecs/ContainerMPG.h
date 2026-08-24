@@ -136,8 +136,9 @@ class DemuxerMPG : public Demuxer {
     unbounded = false;
     video_frame_open = false;
     audio_frame_open = false;
-    unit_len = 0;
-    unit_holds_video = false;
+    video_unit_len = 0;
+    audio_unit_len = 0;
+    video_unit_seen_picture = false;
     video_header_parsed = false;
     audio_header_parsed = false;
     video_probe.clear();
@@ -176,7 +177,7 @@ class DemuxerMPG : public Demuxer {
   /// Defines the video output - e.g. a VideoOutput implementation, or any
   /// other Print if you want the raw MPEG-1 video ES as-is.
   void setOutputVideo(Print &out) override { p_output_video = &out; }
-  void setOutputVideo(VideoOutput &out) { p_output_video_video = &out; }
+  void setOutputVideo(VideoOutput &out) override { p_output_video_video = &out; }
 
   /// Not applicable: MPEG-1 audio (Layer I/II/III) is compressed and
   /// self-framed (its own sync word), unlike PCM - it never needs a
@@ -252,20 +253,23 @@ class DemuxerMPG : public Demuxer {
   // failing cleanly - see that project's own TinyMPGDecoder::write() doc
   // comment, which calls this exact demuxer out by name.
   //
-  // One buffer shared between audio and video rather than one each: a
-  // muxer (see MuxerMPG) writes one access unit's PES fragments back to
-  // back, so in practice audio and video are never both mid-unit at the
-  // same time - one buffer, sized to whichever unit turns out biggest
-  // (routinely a video picture, far larger than one audio frame), covers
-  // both. unit_holds_video says which type currently owns its contents
-  // (only meaningful while unit_len > 0); if some other encoder's output
-  // ever *did* interleave the two mid-unit, deliver() flushes whichever
-  // unit is already in the buffer first rather than letting the new
-  // bytes corrupt it - a premature flush of that one unit, not silent
-  // corruption.
+  // Separate buffers for audio/video rather than one shared one: a real
+  // encoder (ffmpeg's MPEG-PS muxer among them, confirmed by testing
+  // against files it produced) routinely interleaves audio PES packets
+  // in the middle of a video picture's own PES fragments, before that
+  // picture's bytes are complete - unlike MuxerMPG (this project's own
+  // encoder), which happens to write one access unit's fragments back to
+  // back. A single shared buffer can't survive that: whichever unit was
+  // mid-accumulation would have to be flushed the moment the other type's
+  // bytes arrived, truncating it and permanently losing/misaligning
+  // whatever hadn't arrived yet - confirmed by testing (a truncated video
+  // unit's trailing bytes reappear, unprefixed by their own start code,
+  // corrupting the *next* unit too). Two independent buffers mean
+  // real interleaving no longer needs any special-casing at all - each
+  // side just keeps accumulating exactly where it left off.
   //
-  // unit_len is tracked separately from the Vector's own size(), which is
-  // deliberately over-allocated for amortized growth - Vector::resize()
+  // *_unit_len is tracked separately from each Vector's own size(), which
+  // is deliberately over-allocated for amortized growth - Vector::resize()
   // always allocates exactly the requested size with no spare capacity
   // (AudioBasic/Collections/Vector.h), so resizing it to the exact new
   // length on every single delivered fragment - one picture can need a
@@ -273,9 +277,13 @@ class DemuxerMPG : public Demuxer {
   // far *every single call*, the same O(N^2) cost this project's
   // ChunkedSampleTableStore (SampleTableStore.h) exists to avoid for
   // MP4's sample tables.
-  Vector<uint8_t> unit_buffer;
-  size_t unit_len = 0;
-  bool unit_holds_video = false;
+  Vector<uint8_t> video_unit_buffer;
+  size_t video_unit_len = 0;
+  Vector<uint8_t> audio_unit_buffer;
+  size_t audio_unit_len = 0;
+  // Whether the current (not yet flushed) video unit has already seen its
+  // first internal picture_start_code - see deliverVideo().
+  bool video_unit_seen_picture = false;
 
   // lazily parsed from the elementary streams themselves
   bool video_header_parsed = false;
@@ -498,69 +506,125 @@ class DemuxerMPG : public Demuxer {
     return false;
   }
 
-  /// Appends one delivered fragment to the shared access-unit accumulator
-  /// instead of writing it straight through - see unit_buffer's comment.
-  /// The unit is only actually written once it's complete, from
-  /// flushVideoUnit()/flushAudioUnit().
+  /// Appends one delivered fragment to the appropriate access-unit
+  /// accumulator instead of writing it straight through - see
+  /// video_unit_buffer's comment. The unit is only actually written once
+  /// it's complete, from flushVideoUnit()/flushAudioUnit().
   void deliver(size_t len) {
     if (len == 0 || is_skip_unit) return;
     uint8_t *data = parse_buffer.data();
-    // Defensive: the buffer already holds an in-progress unit of the
-    // *other* type - real interleaving, not expected from MuxerMPG's own
-    // output but not this demuxer's to assume of every encoder. Flush it
-    // now rather than let these bytes corrupt it.
-    if (unit_len > 0 && unit_holds_video != is_video_unit) {
-      if (unit_holds_video) flushVideoUnit(); else flushAudioUnit();
-    }
     if (is_video_unit) {
       if (!video_header_parsed) probeVideoHeader(data, len);
+      deliverVideo(data, len);
     } else {
       if (!audio_header_parsed) probeAudioHeader(data, len);
+      appendToAudio(data, len);
     }
-    unit_holds_video = is_video_unit;
-    appendTo(data, len);
   }
 
-  /// Appends to unit_buffer with amortized (doubling) growth - see its
-  /// comment for why an exact-size resize() per call would be O(N^2).
-  void appendTo(const uint8_t *data, size_t len) {
-    size_t needed = unit_len + len;
-    if (needed > (size_t)unit_buffer.size()) {
-      size_t newCap = unit_buffer.size() == 0 ? 8192 : (size_t)unit_buffer.size() * 2;
+  /// Appends to video_unit_buffer with amortized (doubling) growth - see
+  /// its comment for why an exact-size resize() per call would be O(N^2).
+  void appendToVideo(const uint8_t *data, size_t len) {
+    size_t needed = video_unit_len + len;
+    if (needed > (size_t)video_unit_buffer.size()) {
+      size_t newCap = video_unit_buffer.size() == 0 ? 8192 : (size_t)video_unit_buffer.size() * 2;
       if (newCap < needed) newCap = needed;
-      unit_buffer.resize(newCap);
+      video_unit_buffer.resize(newCap);
     }
-    memcpy(unit_buffer.data() + unit_len, data, len);
-    unit_len += len;
+    memcpy(video_unit_buffer.data() + video_unit_len, data, len);
+    video_unit_len += len;
   }
 
-  /// Writes out the accumulated unit_buffer as one single, complete
-  /// write() call if it currently holds a video picture, then resets it
-  /// for the next unit. Call once a picture is known to be complete (a
-  /// new video PES with a PTS starts, or the stream/end() is closing) -
-  /// never mid-picture. A no-op (other than the downstream flush() call)
-  /// if the buffer currently holds audio instead - see deliver().
-  void flushVideoUnit() {
-    if (unit_len > 0 && unit_holds_video) {
-      if (p_output_video != nullptr)
-        p_output_video->write(unit_buffer.data(), unit_len);
-      if (p_output_video_video != nullptr)
-        p_output_video_video->write(unit_buffer.data(), unit_len);
-      unit_len = 0;
+  /// Same as appendToVideo(), for audio_unit_buffer.
+  void appendToAudio(const uint8_t *data, size_t len) {
+    size_t needed = audio_unit_len + len;
+    if (needed > (size_t)audio_unit_buffer.size()) {
+      size_t newCap = audio_unit_buffer.size() == 0 ? 4096 : (size_t)audio_unit_buffer.size() * 2;
+      if (newCap < needed) newCap = needed;
+      audio_unit_buffer.resize(newCap);
     }
+    memcpy(audio_unit_buffer.data() + audio_unit_len, data, len);
+    audio_unit_len += len;
+  }
+
+  /// Appends video bytes to video_unit_buffer, splitting off a new access
+  /// unit whenever an internal picture_start_code (00 00 01 00) marks the
+  /// start of a NEW picture - needed because flushVideoUnit()'s other
+  /// caller (see parsePes()) only flushes when a new video PES arrives
+  /// with a PTS, which some encoders don't set on every single picture's
+  /// PES packet (e.g. only once per GOP) - relying on that alone can
+  /// silently bundle many pictures (an entire GOP, in the worst case)
+  /// into one access unit, which then reaches the decoder as one huge,
+  /// multi-picture write() call instead of one call per picture (breaking
+  /// every caller downstream that assumes that 1:1 correspondence, e.g.
+  /// VideoAudioSyncTask's per-frame scheduling/counting).
+  ///
+  /// The *first* picture_start_code seen in a fresh unit is never a split
+  /// point (it stays attached to any preceding sequence_header/
+  /// GOP_header, matching what flushVideoUnit()'s own doc comment already
+  /// assumes) - only the second and later ones are. video_unit_seen_picture
+  /// tracks whether the current (not yet flushed) unit has seen its first
+  /// one yet; reset to false by flushVideoUnit() itself once a unit is
+  /// actually emptied, and re-set to true here immediately after an
+  /// internal split (the retained remainder already starts with one).
+  void deliverVideo(const uint8_t *data, size_t len) {
+    size_t old_len = video_unit_len;
+    appendToVideo(data, len);
+    // 3-byte lookback so a start code split across the previously
+    // buffered tail and this call's newly appended bytes is still found -
+    // video_unit_buffer now holds both contiguously, no separate boundary
+    // handling needed.
+    size_t search_from = old_len > 3 ? old_len - 3 : 0;
+    uint8_t *buf = video_unit_buffer.data();
+    while (true) {
+      long idx = -1;
+      for (size_t i = search_from; i + 3 < video_unit_len; i++) {
+        if (buf[i] == 0 && buf[i + 1] == 0 && buf[i + 2] == 1 && buf[i + 3] == 0) {
+          idx = (long)i;
+          break;
+        }
+      }
+      if (idx < 0) break;
+      if (!video_unit_seen_picture) {
+        video_unit_seen_picture = true;
+        search_from = (size_t)idx + 4;
+        continue;
+      }
+      size_t remaining = video_unit_len - (size_t)idx;
+      video_unit_len = (size_t)idx;
+      flushVideoUnit();  // writes [0, idx), resets video_unit_len to 0
+      memmove(buf, buf + idx, remaining);
+      video_unit_len = remaining;
+      video_unit_seen_picture = true;  // the retained remainder already starts with one
+      search_from = 4;  // skip the start code now sitting at offset 0
+    }
+  }
+
+  /// Writes out video_unit_buffer as one single, complete write() call if
+  /// it currently holds anything, then resets it for the next unit. Call
+  /// once a picture is known to be complete (a new video PES with a PTS
+  /// starts, an internal picture_start_code marks a new one - see
+  /// deliverVideo() - or the stream/end() is closing) - never mid-picture.
+  void flushVideoUnit() {
+    if (video_unit_len > 0) {
+      if (p_output_video != nullptr)
+        p_output_video->write(video_unit_buffer.data(), video_unit_len);
+      if (p_output_video_video != nullptr)
+        p_output_video_video->write(video_unit_buffer.data(), video_unit_len);
+      video_unit_len = 0;
+    }
+    video_unit_seen_picture = false;
     if (p_output_video != nullptr) p_output_video->flush();
     if (p_output_video_video != nullptr) p_output_video_video->flush();
   }
 
-  /// Writes out the accumulated unit_buffer as one single, complete
-  /// write() call if it currently holds an audio frame, then resets it
-  /// for the next unit. A no-op if the buffer currently holds video
-  /// instead - see deliver().
+  /// Writes out audio_unit_buffer as one single, complete write() call if
+  /// it currently holds anything, then resets it for the next unit.
   void flushAudioUnit() {
-    if (unit_len == 0 || unit_holds_video) return;
+    if (audio_unit_len == 0) return;
     if (p_output_audio != nullptr)
-      p_output_audio->write(unit_buffer.data(), unit_len);
-    unit_len = 0;
+      p_output_audio->write(audio_unit_buffer.data(), audio_unit_len);
+    audio_unit_len = 0;
   }
 
   /// Accumulates the first bytes of the video ES looking for its

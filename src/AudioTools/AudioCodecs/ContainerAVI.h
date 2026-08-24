@@ -342,10 +342,10 @@ public:
   ///
   void setMute(bool mute) { is_mute = mute; }
 
-  virtual void setOutputVideo(Print &out_stream) override {
+  void setOutputVideo(Print &out_stream) override {
     p_output_video = &out_stream;
   }
-  void setOutputVideo(VideoOutput &out_stream) {
+  void setOutputVideo(VideoOutput &out_stream) override {
     p_output_video_video = &out_stream;
   }
 

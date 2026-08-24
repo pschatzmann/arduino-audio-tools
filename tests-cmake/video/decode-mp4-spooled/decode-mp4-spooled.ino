@@ -26,10 +26,21 @@
  * 147560 audio chunks, 13259 stsc entries) - see SampleTableStore.h for
  * the storage strategies themselves.
  *
+ * Pacing: DemuxerMP4 dispatches video as fast as bytes can be parsed - with
+ * no decoder in between to pace it, frames would decode/display as fast as
+ * the CPU allows instead of at the file's real frame rate. videoSync
+ * (VideoAudioSyncTask, see Video/VideoAudioSyncTask.h) sits between the
+ * demuxer and h264Decoder to fix that. It's never given an audio clock
+ * (setAudioClock() not called) since this test file has no audio track to
+ * derive one from - see VideoAudioSyncTask::clockMs(), it falls back to
+ * wall-clock millis() in that case, which is exactly what's needed here.
+ *
  * Pipeline: File -> EncodedAudioOutput (Print bridge) -> DemuxerMP4 (demux,
  *   spool-backed tables) -> EncodedAudioStream (AACDecoderHelix) ->
  *   PortAudioStream (audio)
- *   \-> H264Decoder (H.264 decode -> RGB565) -> OutputOpenCV (draw) (video)
+ *   \-> VideoAudioSyncTask (buffer + schedule against wall clock) ->
+ *   H264Decoder (H.264 decode -> RGB565) -> OutputOpenCV (draw) (video, own
+ *   background task)
  *
  * To build & run:
  * - mkdir build && cd build && cmake .. && make
@@ -51,6 +62,8 @@ const char *file_path = "/media/pschatzmann/External/Videos/output176x144.mp4";
 
 OutputOpenCV videoOut;
 H264Decoder h264Decoder(videoOut);
+// No audio clock (see the pacing note above) - scheduling delay stays 0.
+VideoAudioSyncTask videoSync(h264Decoder);
 PortAudioStream out;
 DecoderHelix multiDecoder;
 EncodedAudioStream audioOut(&out, &multiDecoder);  // decodes AAC -> PortAudio
@@ -127,11 +140,16 @@ void setup() {
   // DemuxerMP4 - spool-backed sample tables instead of the RAM default
   mp4Demuxer.setSpoolStorageFactory(spoolFactory);
   mp4Demuxer.setOutputAudio(audioOut);
-  mp4Demuxer.setOutputVideo(h264Decoder);
+  mp4Demuxer.setOutputVideo(videoSync);
   mp4Demuxer.begin();
 }
 
 void loop() {
+  // fps is only known once 'moov' has been parsed (strictly before any
+  // 'mdat' sample is dispatched) - see DemuxerMP4::getVideoInfo().
+  float fps = mp4Demuxer.getVideoInfo().fps;
+  if (fps > 0) videoSync.setFps(fps);
+
   if (file && copier.copy()) {
     // no-op - OutputOpenCV pulls its size from mp4Demuxer via
     // setVideoInfoSource(), no manual polling needed here anymore

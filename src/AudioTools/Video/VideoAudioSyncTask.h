@@ -110,6 +110,18 @@ class VideoAudioSyncTask : public VideoOutput {
     catch_up_threshold_frames = frames;
   }
 
+  /// Unconditionally drops every non-keyframe in write() itself, before
+  /// it's even queued - codec-agnostic (works for H264Decoder/MPGDecoder/
+  /// MJPEGDecoder/MultiVideoDecoder alike, unlike a decoder-specific flag
+  /// such as MPGDecoder::setIgnorePFrames()) and cheaper than letting the
+  /// decoder no-op an ignored frame after it: the bytes never get copied
+  /// into the queue or scheduled at all. Off by default. See
+  /// ignoredFrameCount() for how many this has skipped. Independent of
+  /// setCatchUpThresholdFrames()'s own conditional dropping, which still
+  /// applies when this is off.
+  void setIgnorePFrames(bool active) { ignore_p_frames = active; }
+  bool ignorePFrames() const { return ignore_p_frames; }
+
   /// How far behind schedule (ms) the render task must fall before it
   /// stops trying to catch up and instead jumps the schedule anchor
   /// forward to the current clock time (see taskLoop()) - dropping frames
@@ -178,6 +190,7 @@ class VideoAudioSyncTask : public VideoOutput {
     frame_count = 0;
     dropped_frame_count = 0;
     dropped_i_frame_count = 0;
+    ignored_frame_count = 0;
     queued_i_frame_count = 0;
     logged_drop_burst = false;
     awaiting_keyframe = false;
@@ -257,6 +270,20 @@ class VideoAudioSyncTask : public VideoOutput {
     uint32_t target_ms = (uint32_t)((double)frame_index * frame_period_ms);
     frame_index++;
     bool is_key = isKeyFrame(data, len);
+
+    // See setIgnorePFrames() - unconditional, independent of queue/
+    // lateness state, and checked before the header/queue-space bookkeeping
+    // below since a dropped-here frame never touches any of that. Counts
+    // into droppedFrameCount() too (same externally visible effect as any
+    // other dropped P-frame - never rendered), with ignoredFrameCount()
+    // as the more specific breakdown of how many were dropped for this
+    // reason rather than backlog.
+    if (ignore_p_frames && !is_key) {
+      ignored_frame_count++;
+      dropped_frame_count++;
+      frame_count++;
+      return len;
+    }
 
     FrameHeader header;
     header.size = (uint32_t)len;
@@ -338,13 +365,19 @@ class VideoAudioSyncTask : public VideoOutput {
   uint32_t frameCount() const { return frame_count; }
 
   /// Number of P-frames write() dropped instead of enqueueing - queue
-  /// was full, or the render task had fallen behind schedule (see
-  /// write()'s own comment). 0 under normal operation; a rising count
-  /// means decode+render can't sustain the recording frame rate - each
-  /// dropped frame is simply never shown, the next queued one still
-  /// renders at its own correct time, so this doesn't desync the
-  /// audio/video clock.
+  /// was full, the render task had fallen behind schedule (see write()'s
+  /// own comment), or setIgnorePFrames() is on (see ignoredFrameCount()
+  /// for that specific subset). 0 under normal operation with
+  /// setIgnorePFrames() off; a rising count otherwise means decode+render
+  /// can't sustain the recording frame rate - each dropped frame is
+  /// simply never shown, the next queued one still renders at its own
+  /// correct time, so this doesn't desync the audio/video clock.
   uint32_t droppedFrameCount() const { return dropped_frame_count; }
+
+  /// Number of this stream's droppedFrameCount() specifically caused by
+  /// setIgnorePFrames() rather than backlog (queue-full/falling-behind) -
+  /// always 0 unless that's on.
+  uint32_t ignoredFrameCount() const { return ignored_frame_count; }
 
   /// Number of keyframes discarded by a resync instead of being
   /// rendered. 0 under normal operation - unlike droppedFrameCount(),
@@ -425,6 +458,7 @@ class VideoAudioSyncTask : public VideoOutput {
   float frame_period_ms = 0;
   uint32_t scheduling_delay_ms = 0;  // see setSchedulingDelayMs()
   float catch_up_threshold_frames = 1.0f;  // see setCatchUpThresholdFrames()
+  bool ignore_p_frames = false;  // see setIgnorePFrames()
   uint32_t resync_threshold_ms = 2000;  // see setResyncThresholdMs()
   float resync_queue_fill_fraction = 0.8f;  // see setResyncQueueFillFraction()
   int max_queued_i_frames = 4;  // see setMaxQueuedIFrames()
@@ -432,6 +466,7 @@ class VideoAudioSyncTask : public VideoOutput {
   uint32_t frame_count = 0;
   uint32_t dropped_frame_count = 0;  // see droppedFrameCount()
   uint32_t dropped_i_frame_count = 0;  // consumer-thread-only; see droppedIFrameCount()
+  uint32_t ignored_frame_count = 0;  // write()-thread-only; see ignoredFrameCount()
   // Keyframes currently queued, not yet consumed - incremented by
   // write(), decremented by taskLoop()/drainQueueKeepingLastKeyframe();
   // atomic since producer and consumer both touch it. See
@@ -713,22 +748,38 @@ class VideoAudioSyncTask : public VideoOutput {
     p_target->write(frame_buf.data(), frame_buf.size());
     p_target->flush();
     uint32_t processMs = millis() - processStart;
-    if (!output_start_set) {
-      output_start_ms = millis();
-      output_start_set = true;
-    }
-    if (is_key) {
-      i_frame_count++;
-      i_frame_total_ms += processMs;
+    // See VideoOutput::hadOutput() - true for every synchronous decoder
+    // (the common case), but a decoder like MPGDecoder can legitimately
+    // do real decode work here without a picture actually reaching the
+    // screen yet (held back for B-picture display-order reordering), or
+    // emit an earlier held picture instead. Only count/time this call as
+    // a rendered frame when a picture was actually produced - otherwise
+    // outputFPS()/frameCountI()/frameCountP()/avgFrameMs() would
+    // overcount calls that did no real rendering work.
+    if (p_target->hadOutput()) {
+      if (!output_start_set) {
+        output_start_ms = millis();
+        output_start_set = true;
+      }
+      if (is_key) {
+        i_frame_count++;
+        i_frame_total_ms += processMs;
+      } else {
+        p_frame_count++;
+        p_frame_total_ms += processMs;
+      }
+      LOGD(
+          "VideoAudioSyncTask: rendered %s frame - scheduled=%u actual=%u "
+          "(%d ms late), process=%u ms",
+          is_key ? "I" : "P", (unsigned)scheduled_ms, (unsigned)clockMs(),
+          (int)lateness_ms, (unsigned)processMs);
     } else {
-      p_frame_count++;
-      p_frame_total_ms += processMs;
+      LOGD(
+          "VideoAudioSyncTask: decoded %s frame, no picture emitted yet "
+          "(scheduled=%u actual=%u, %d ms late), process=%u ms",
+          is_key ? "I" : "P", (unsigned)scheduled_ms, (unsigned)clockMs(),
+          (int)lateness_ms, (unsigned)processMs);
     }
-    LOGD(
-        "VideoAudioSyncTask: rendered %s frame - scheduled=%u actual=%u "
-        "(%d ms late), process=%u ms",
-        is_key ? "I" : "P", (unsigned)scheduled_ms, (unsigned)clockMs(),
-        (int)lateness_ms, (unsigned)processMs);
     if (frame_period_ms > 0 && processMs > (uint32_t)frame_period_ms) {
       LOGW(
           "VideoAudioSyncTask: %s frame took %u ms to render - longer than "

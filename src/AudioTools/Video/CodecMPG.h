@@ -54,7 +54,7 @@ class MPGDecoder : public VideoDecoder, public VideoInfoSource {
   MPGDecoder(VideoOutput &out) : MPGDecoder() { setOutput(out); }
 
   void setOutput(Print &out) override { p_out = &out; }
-  void setOutput(VideoOutput &out) { p_out_video = &out; }
+  void setOutput(VideoOutput &out) override { p_out_video = &out; }
 
   void setVideoFormat(VideoFormat format) override {
     switch (format) {
@@ -128,6 +128,7 @@ class MPGDecoder : public VideoDecoder, public VideoInfoSource {
   /// reconstructing it from stale/wrong macroblocks - see
   /// ContainerMPG.h's own video_unit_buffer comment.)
   size_t write(const uint8_t *data, size_t len) override {
+    frame_emitted = false;
     decoder_.write(data, len);
     return len;
   }
@@ -151,6 +152,16 @@ class MPGDecoder : public VideoDecoder, public VideoInfoSource {
     return isMpeg1KeyFrame(data, len);
   }
 
+  /// See VideoOutput::hadOutput() - TinyMPGDecoder's B-picture display-
+  /// order reordering means a given write() can decode a new picture
+  /// without emitting it yet (held back), or emit an earlier held
+  /// picture instead - either way "write()+flush() was called" doesn't
+  /// reliably mean "a picture was just pushed to the output" the way it
+  /// does for a synchronous decoder. Reflects whether writeFrame() (only
+  /// ever invoked from TinyMPGDecoder's frame callback, i.e. only when a
+  /// picture was actually ready) ran during the most recent write() call.
+  bool hadOutput() const override { return frame_emitted; }
+
   tinympg::TinyMPGDecoder<MPG_DEFAULT_ALLOCATOR> &driver() { return decoder_; }
 
  protected:
@@ -159,6 +170,7 @@ class MPGDecoder : public VideoDecoder, public VideoInfoSource {
   VideoOutput *p_out_video = nullptr;
   VideoFormat pixel_format = VideoFormat::RGB565;
   bool byte_swap = true;  // see setByteSwap()
+  bool frame_emitted = false;  // see hadOutput()
   Vector<uint8_t> frame_buffer;
 
   static void onFrame(tinympg::TinyMPGDecoder<MPG_DEFAULT_ALLOCATOR> &decoder,
@@ -238,6 +250,7 @@ class MPGDecoder : public VideoDecoder, public VideoInfoSource {
       default:
         break;
     }
+    if (n > 0) frame_emitted = true;
   }
 
   size_t writeToOutput(uint8_t *data, size_t len) {

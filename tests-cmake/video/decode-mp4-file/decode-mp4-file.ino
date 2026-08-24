@@ -26,22 +26,25 @@
  * demuxer via writer.setSeekSource(*this), so no separate setSeekSource()
  * call is needed in setup().
  *
- * Audio/video sync: DemuxerMP4 dispatches audio/video as fast as bytes can
- * be parsed - all real pacing happens in videoSync (VideoAudioSyncTask,
- * see Video/VideoAudioSyncTask.h), which sits between the demuxer and
+ * Pacing: DemuxerMP4 dispatches audio/video as fast as bytes can be parsed
+ * - all real pacing happens in videoSync (VideoAudioSyncTask, see
+ * Video/VideoAudioSyncTask.h), which sits between the demuxer and
  * h264Decoder. It buffers each decoded frame and renders it (decode +
- * cv::imshow) from its own background task, timed against audioClock - an
- * AudioTimeSourceStream inserted between multiDecoder and PortAudioStream
- * that turns "how many decoded PCM bytes have reached the audio device so
- * far" into an elapsed-ms clock, so video is paced to how far audio has
- * actually played rather than a separate wall-clock schedule.
+ * cv::imshow) from its own background task. This test file has no audio
+ * track (see decode-mp4.ino), so setAudioClock() is deliberately never
+ * called; VideoAudioSyncTask falls back to wall-clock millis() in that
+ * case (see its clockMs()), which is exactly what's needed here. (A real
+ * audio track would instead be wired via an AudioTimeSourceStream between
+ * multiDecoder and PortAudioStream, turning "how many decoded PCM bytes
+ * have reached the audio device so far" into an elapsed-ms clock passed to
+ * videoSync.setAudioClock() - see decode-avi.ino for that pattern.)
  *
  * Pipeline: File -> FileSeekableSource::copy() -> DemuxerMP4 (demux,
  *   seek-backed tables, reading from the same File) ->
- *   EncodedAudioStream (AACDecoderHelix) -> AudioTimeSourceStream (audio
- *   clock) -> PortAudioStream (audio)
- *   \-> VideoAudioSyncTask (buffer + schedule) -> H264Decoder (H.264
- *   decode -> RGB565) -> OutputOpenCV (draw) (video, own background task)
+ *   EncodedAudioStream (AACDecoderHelix) -> PortAudioStream (audio)
+ *   \-> VideoAudioSyncTask (buffer + schedule against wall clock) ->
+ *   H264Decoder (H.264 decode -> RGB565) -> OutputOpenCV (draw) (video, own
+ *   background task)
  *
  * To build & run:
  * - mkdir build && cd build && cmake .. && make
@@ -63,15 +66,11 @@ const char *file_path = "/media/pschatzmann/External/Videos/output176x144.mp4";
 
 OutputOpenCV videoOut;
 H264Decoder h264Decoder(videoOut);
-// 3rd arg: scheduling delay compensating for PortAudioStream's own output
-// buffering below (buffer_size*buffer_count bytes) - see
-// VideoAudioSyncTask::setSchedulingDelayMs(); ~50ms is a rough match for
-// 1024*10 bytes of 44.1kHz/16-bit/stereo PCM, tune for your own config.
-VideoAudioSyncTask videoSync(h264Decoder, 0, 50);
+// No audio clock (see the pacing note above) - scheduling delay stays 0.
+VideoAudioSyncTask videoSync(h264Decoder);
 PortAudioStream out;
-AudioTimeSourceStream audioClock(out);  // decoded-PCM-bytes-based playback clock
 DecoderHelix multiDecoder;
-EncodedAudioStream audioOut(&audioClock, &multiDecoder);  // decodes AAC -> audioClock -> PortAudio
+EncodedAudioStream audioOut(&out, &multiDecoder);  // decodes AAC -> PortAudio
 DemuxerMP4 mp4Demuxer;
 
 // Single File, doing double duty: sequential forward feed (copy()) and
@@ -109,8 +108,6 @@ void setup() {
 
   // EncodedAudioStream
   audioOut.begin();
-
-  videoSync.setAudioClock(audioClock);
 
   // DemuxerMP4 - seek-backed sample tables instead of the RAM default
   mp4Demuxer.setOutputAudio(audioOut);

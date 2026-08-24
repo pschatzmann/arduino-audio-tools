@@ -66,8 +66,8 @@ class H264Decoder : public VideoDecoder, public VideoInfoSource {
   /// Defines the target the decoded picture is written to, one write()
   /// call per decoded picture, in the format selected via
   /// setVideoFormat() (RGB565 by default).
-  void setOutput(Print &out)  { p_out = &out; }
-  void setOutput(VideoOutput &out)  { p_out_video = &out; }
+  void setOutput(Print &out) override { p_out = &out; }
+  void setOutput(VideoOutput &out) override { p_out_video = &out; }
  
 
   /// Selects the pixel format written to setOutput()'s target - RGB565
