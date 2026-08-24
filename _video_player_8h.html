@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: src/AudioTools/Video/CodecJPEG.h File Reference</title>
+<title>arduino-audio-tools: src/AudioTools/Video/VideoPlayer.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -76,20 +76,23 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a>  </div>
-  <div class="headertitle"><div class="title">CodecJPEG.h File Reference</div></div>
+  <div class="headertitle"><div class="title">VideoPlayer.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;algorithm&gt;</code><br />
-<code>#include &quot;<a class="el" href="_vector_8h_source.html">AudioTools/CoreAudio/AudioBasic/Collections/Vector.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_codec_video_8h_source.html">AudioTools/Video/CodecVideo.h</a>&quot;</code><br />
-<code>#include &quot;TinyJPEGDecoder.h&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="_audio_codecs_base_8h_source.html">AudioTools/AudioCodecs/AudioCodecsBase.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_audio_encoded_8h_source.html">AudioTools/AudioCodecs/AudioEncoded.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_container_common_8h_source.html">AudioTools/AudioCodecs/ContainerCommon.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_multi_decoder_8h_source.html">AudioTools/AudioCodecs/MultiDecoder.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_audio_i_o_8h_source.html">AudioTools/CoreAudio/AudioIO.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_multi_video_decoder_8h_source.html">AudioTools/Video/MultiVideoDecoder.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_video_8h_source.html">AudioTools/Video/Video.h</a>&quot;</code><br />
 </div>
-<p><a href="_codec_j_p_e_g_8h_source.html">Go to the source code of this file.</a></p>
+<p><a href="_video_player_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html">MJPEGDecoder</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Motion-JPEG video decoder: wraps TinyJPEGDecoder (<a href="https://github.com/pschatzmann/TinyJPEG">https://github.com/pschatzmann/TinyJPEG</a>, a header-only port of ChaN's TJpgDec) as a <a class="el" href="classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 - CodecH264....">VideoDecoder</a>, so it can be plugged directly into e.g. <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#ab54510fc95b760fb7adb69274d61bb24">DemuxerAVI::setOutputVideo()</a>/DemuxerMP4::setOutputVideo() - the same role <a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a> (<a class="el" href="_codec_h264_8h.html">CodecH264.h</a>) and <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html" title="MPEG-1 (part 2) video decoder wrapper around TinyMPGDecoder.">MPGDecoder</a> (<a class="el" href="_codec_m_p_g_8h.html">CodecMPG.h</a>) play for their own codecs. Named "MJPEGDecoder" rather than reusing TinyJPEGDecoder's own name to avoid shadowing that class from within this one.  <a href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html">VideoPlayer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">High-level video playback pipeline and controller - the video counterpart of <a class="el" href="classaudio__tools_1_1_audio_player.html" title="High-level audio playback pipeline and controller.">AudioPlayer</a> (<a class="el" href="_audio_player_8h.html">CoreAudio/AudioPlayer.h</a>). Wraps every class a video playback example otherwise wires by hand (a container <a class="el" href="classaudio__tools_1_1_demuxer.html" title="Common interface for demuxers (DemuxerAVI, DemuxerMP4) that split a container&#39;s video and (optional) ...">Demuxer</a>, a <a class="el" href="classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 - CodecH264....">VideoDecoder</a> driven through a <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html" title="Buffers a small, configurable amount of video (see setQueueBytes()) and renders it frame by frame fro...">VideoAudioSyncTask</a>, and optionally an audio decode chain synced against it) behind one object driven by a single <a class="el" href="classaudio__tools_1_1_video_player.html#aecb44a6d385121be2179187d45520331">copy()</a> call per <a class="el" href="_main_8h.html#afe461d27b9c48d5921c00d521181f12f">loop()</a> iteration.  <a href="classaudio__tools_1_1_video_player.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>

@@ -184,10 +184,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:accd4a0f8bb385180e8006fd543aef936"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec325e2573d575633b59e43669da6f1f" id="r_aec325e2573d575633b59e43669da6f1f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#aec325e2573d575633b59e43669da6f1f">setOutputAudio</a> (<a class="el" href="class_print.html">Print</a> &amp;out_stream) override</td></tr>
 <tr class="separator:aec325e2573d575633b59e43669da6f1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa9139d7cd7756a3bf8603981959afb53" id="r_aa9139d7cd7756a3bf8603981959afb53"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#aa9139d7cd7756a3bf8603981959afb53">setOutputVideo</a> (<a class="el" href="class_print.html">Print</a> &amp;out_stream) override</td></tr>
-<tr class="separator:aa9139d7cd7756a3bf8603981959afb53"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6d44ff869588eb74ee87333249869aa9" id="r_a6d44ff869588eb74ee87333249869aa9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#a6d44ff869588eb74ee87333249869aa9">setOutputVideo</a> (<a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;out_stream)</td></tr>
-<tr class="separator:a6d44ff869588eb74ee87333249869aa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab54510fc95b760fb7adb69274d61bb24" id="r_ab54510fc95b760fb7adb69274d61bb24"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#ab54510fc95b760fb7adb69274d61bb24">setOutputVideo</a> (<a class="el" href="class_print.html">Print</a> &amp;out_stream) override</td></tr>
+<tr class="separator:ab54510fc95b760fb7adb69274d61bb24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abdbd21f1f2b7459b2148abd5c87001ea" id="r_abdbd21f1f2b7459b2148abd5c87001ea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#abdbd21f1f2b7459b2148abd5c87001ea">setOutputVideo</a> (<a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;out_stream) override</td></tr>
+<tr class="separator:abdbd21f1f2b7459b2148abd5c87001ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac81448c41c28170abdb6579e0359be2c" id="r_ac81448c41c28170abdb6579e0359be2c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#ac81448c41c28170abdb6579e0359be2c">setSendWavHeader</a> (bool flag) override</td></tr>
 <tr class="separator:ac81448c41c28170abdb6579e0359be2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afbbbb2ec2a213475e2a5f9d419cd6082" id="r_afbbbb2ec2a213475e2a5f9d419cd6082"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#afbbbb2ec2a213475e2a5f9d419cd6082">setValidationCallback</a> (bool(*cb)(<a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html">DemuxerAVI</a> &amp;avi))</td></tr>
@@ -369,7 +369,7 @@ Protected Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<p>This class only demuxes - it does not decode audio itself. Point <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#aec325e2573d575633b59e43669da6f1f">setOutputAudio()</a> at an <a class="el" href="classaudio__tools_1_1_encoded_audio_stream.html" title="A more natural Stream class to process encoded data (aac, wav, mp3...) which also supports the decodi...">EncodedAudioStream</a> (wrapping whatever <a class="el" href="classaudio__tools_1_1_audio_decoder.html" title="Decoding of encoded audio into PCM data.">AudioDecoder</a> matches the AVI's audio format) if you need the audio track decoded; the raw payload is written through as-is otherwise. Point <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#aa9139d7cd7756a3bf8603981959afb53">setOutputVideo()</a> at a <a class="el" href="class_print.html">Print</a> (e.g. a <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a>) to receive the demuxed video track; leave unset to ignore video. </p>
+<p>This class only demuxes - it does not decode audio itself. Point <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#aec325e2573d575633b59e43669da6f1f">setOutputAudio()</a> at an <a class="el" href="classaudio__tools_1_1_encoded_audio_stream.html" title="A more natural Stream class to process encoded data (aac, wav, mp3...) which also supports the decodi...">EncodedAudioStream</a> (wrapping whatever <a class="el" href="classaudio__tools_1_1_audio_decoder.html" title="Decoding of encoded audio into PCM data.">AudioDecoder</a> matches the AVI's audio format) if you need the audio track decoded; the raw payload is written through as-is otherwise. Point <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#ab54510fc95b760fb7adb69274d61bb24">setOutputVideo()</a> at a <a class="el" href="class_print.html">Print</a> (e.g. a <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a>) to receive the demuxed video track; leave unset to ignore video. </p>
 
 </div>
 </div>
@@ -1582,8 +1582,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aa9139d7cd7756a3bf8603981959afb53" name="aa9139d7cd7756a3bf8603981959afb53"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa9139d7cd7756a3bf8603981959afb53">&#9670;&#160;</a></span>setOutputVideo() <span class="overload">[1/2]</span></h2>
+<a id="ab54510fc95b760fb7adb69274d61bb24" name="ab54510fc95b760fb7adb69274d61bb24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab54510fc95b760fb7adb69274d61bb24">&#9670;&#160;</a></span>setOutputVideo() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1592,7 +1592,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void setOutputVideo </td>
+          <td class="memname">void setOutputVideo </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_print.html">Print</a> &amp;&#160;</td>
           <td class="paramname"><em>out</em></td><td>)</td>
@@ -1611,8 +1611,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a6d44ff869588eb74ee87333249869aa9" name="a6d44ff869588eb74ee87333249869aa9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6d44ff869588eb74ee87333249869aa9">&#9670;&#160;</a></span>setOutputVideo() <span class="overload">[2/2]</span></h2>
+<a id="abdbd21f1f2b7459b2148abd5c87001ea" name="abdbd21f1f2b7459b2148abd5c87001ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abdbd21f1f2b7459b2148abd5c87001ea">&#9670;&#160;</a></span>setOutputVideo() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1624,16 +1624,19 @@ Protected Attributes</h2></td></tr>
           <td class="memname">void setOutputVideo </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;&#160;</td>
-          <td class="paramname"><em>out_stream</em></td><td>)</td>
+          <td class="paramname"><em>out</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Defines the video output - the VideoOutput-specific counterpart of <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#ab54510fc95b760fb7adb69274d61bb24">setOutputVideo(Print&amp;)</a>, for a target like VideoAudioSyncTask/ OutputTinyGPU/OutputOpenCV that implements <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> but not <a class="el" href="class_print.html">Print</a> (the two are unrelated types - see <a class="el" href="classaudio__tools_1_1_video_frame_meter.html" title="Transparent write() wrapper that measures throughput/turnaround while forwarding every call unchanged...">VideoFrameMeter</a>'s own comment). Part of the base interface (unlike other concrete-class-specific extras) so code holding only a <a class="el" href="classaudio__tools_1_1_demuxer.html" title="Common interface for demuxers (DemuxerAVI, DemuxerMP4) that split a container&#39;s video and (optional) ...">Demuxer</a>&amp; (e.g. <a class="el" href="classaudio__tools_1_1_video_player.html" title="High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A...">VideoPlayer</a>) can wire it to an arbitrary <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a>&amp; without knowing the concrete container format - every current demuxer already implemented this identically before it was pulled up into the interface. </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_demuxer.html#a6981ff741a3bcf30e5d5d8d1492f2572">Demuxer</a>.</p>
 
 </div>
 </div>

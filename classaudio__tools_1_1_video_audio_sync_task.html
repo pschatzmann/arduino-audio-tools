@@ -134,6 +134,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8419abee0c4d380be1cb8ff963fb8d0a" id="r_a8419abee0c4d380be1cb8ff963fb8d0a"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a8419abee0c4d380be1cb8ff963fb8d0a">getWriteTimeMs</a> () const</td></tr>
 <tr class="memdesc:a8419abee0c4d380be1cb8ff963fb8d0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional: returns the time (ms) spent in the last <a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">write()</a> call.  <br /></td></tr>
 <tr class="separator:a8419abee0c4d380be1cb8ff963fb8d0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b9d7d37dfa865711aa1474be238da12" id="r_a6b9d7d37dfa865711aa1474be238da12"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a6b9d7d37dfa865711aa1474be238da12">hadOutput</a> () const</td></tr>
+<tr class="separator:a6b9d7d37dfa865711aa1474be238da12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3c5436b29a2a83d048ee81116870b83" id="r_aa3c5436b29a2a83d048ee81116870b83"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#aa3c5436b29a2a83d048ee81116870b83">ignoredFrameCount</a> () const</td></tr>
+<tr class="separator:aa3c5436b29a2a83d048ee81116870b83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ed71d94f20e455f1918935eb607496f" id="r_a9ed71d94f20e455f1918935eb607496f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a9ed71d94f20e455f1918935eb607496f">ignorePFrames</a> () const</td></tr>
+<tr class="separator:a9ed71d94f20e455f1918935eb607496f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c65abcfd07cb9f2a527823b271f1b0e" id="r_a4c65abcfd07cb9f2a527823b271f1b0e"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a4c65abcfd07cb9f2a527823b271f1b0e">inputFPS</a> ()</td></tr>
 <tr class="separator:a4c65abcfd07cb9f2a527823b271f1b0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac2245652fe2a9df612f6a7e2ef2b502e" id="r_ac2245652fe2a9df612f6a7e2ef2b502e"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#ac2245652fe2a9df612f6a7e2ef2b502e">outputFPS</a> ()</td></tr>
@@ -150,6 +156,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac309555187efbd405acbdf128f332276"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf51046626a731cffc6f19bf03e0493b" id="r_aaf51046626a731cffc6f19bf03e0493b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#aaf51046626a731cffc6f19bf03e0493b">setFps</a> (float fps)</td></tr>
 <tr class="separator:aaf51046626a731cffc6f19bf03e0493b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb93084288d9cee359601e113bf836f6" id="r_afb93084288d9cee359601e113bf836f6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#afb93084288d9cee359601e113bf836f6">setIgnorePFrames</a> (bool active)</td></tr>
+<tr class="separator:afb93084288d9cee359601e113bf836f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a875146acf297f244d9ca2fcd65bd8d43" id="r_a875146acf297f244d9ca2fcd65bd8d43"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a875146acf297f244d9ca2fcd65bd8d43">setMaxQueuedIFrames</a> (int count)</td></tr>
 <tr class="separator:a875146acf297f244d9ca2fcd65bd8d43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1ae0a0bc12d541205343335e5c82ef8" id="r_af1ae0a0bc12d541205343335e5c82ef8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#af1ae0a0bc12d541205343335e5c82ef8">setQueueBytes</a> (size_t bytes)</td></tr>
@@ -206,6 +214,10 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:aee1699b8034e4277bd1e25251815a283"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a172f9aa35c92323cb51f2c002034588a" id="r_a172f9aa35c92323cb51f2c002034588a"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; uint64_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a172f9aa35c92323cb51f2c002034588a">i_frame_total_ms</a> {0}</td></tr>
 <tr class="separator:a172f9aa35c92323cb51f2c002034588a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3753a305e148d6be8884f906bed2e854" id="r_a3753a305e148d6be8884f906bed2e854"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a3753a305e148d6be8884f906bed2e854">ignore_p_frames</a> = false</td></tr>
+<tr class="separator:a3753a305e148d6be8884f906bed2e854"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd2f35d1c4d1daff9d24a62c62c79e50" id="r_afd2f35d1c4d1daff9d24a62c62c79e50"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#afd2f35d1c4d1daff9d24a62c62c79e50">ignored_frame_count</a> = 0</td></tr>
+<tr class="separator:afd2f35d1c4d1daff9d24a62c62c79e50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d7ad099ac6f3da0f5365f8318c1eff2" id="r_a0d7ad099ac6f3da0f5365f8318c1eff2"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a0d7ad099ac6f3da0f5365f8318c1eff2">input_start_ms</a> = 0</td></tr>
 <tr class="separator:a0d7ad099ac6f3da0f5365f8318c1eff2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4640e7ef21176f2042038e78ac3c3fcb" id="r_a4640e7ef21176f2042038e78ac3c3fcb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a4640e7ef21176f2042038e78ac3c3fcb">input_start_set</a> = false</td></tr>
@@ -507,7 +519,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Number of P-frames <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> dropped instead of enqueueing - queue was full, or the render task had fallen behind schedule (see <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>'s own comment). 0 under normal operation; a rising count means decode+render can't sustain the recording frame rate - each dropped frame is simply never shown, the next queued one still renders at its own correct time, so this doesn't desync the audio/video clock. </p>
+<p>Number of P-frames <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> dropped instead of enqueueing - queue was full, the render task had fallen behind schedule (see <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>'s own comment), or <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#afb93084288d9cee359601e113bf836f6">setIgnorePFrames()</a> is on (see <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#aa3c5436b29a2a83d048ee81116870b83">ignoredFrameCount()</a> for that specific subset). 0 under normal operation with <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#afb93084288d9cee359601e113bf836f6">setIgnorePFrames()</a> off; a rising count otherwise means decode+render can't sustain the recording frame rate - each dropped frame is simply never shown, the next queued one still renders at its own correct time, so this doesn't desync the audio/video clock. </p>
 
 </div>
 </div>
@@ -697,6 +709,85 @@ Static Protected Attributes</h2></td></tr>
 <p>Optional: returns the time (ms) spent in the last <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call. </p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_output_t_f_t__e_s_p_i.html#a5efb8ccd37b8cc2749358e5da69adddc">OutputTFT_eSPI</a>, <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a5efb8ccd37b8cc2749358e5da69adddc">OutputTinyGPU</a>, and <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#ae3d58e56c2b7dc75a50b36b357ffef93">OutputOpenCV</a>.</p>
+
+</div>
+</div>
+<a id="a6b9d7d37dfa865711aa1474be238da12" name="a6b9d7d37dfa865711aa1474be238da12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b9d7d37dfa865711aa1474be238da12">&#9670;&#160;</a></span>hadOutput()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool hadOutput </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>True if the most recent <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>+<a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a> call actually produced a displayable picture - default true, matching every synchronous decoder (<a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a>, <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html" title="Motion-JPEG video decoder: wraps TinyJPEGDecoder (https://github.com/pschatzmann/TinyJPEG,...">MJPEGDecoder</a>, ...), which always decodes and pushes pixels fully within that one call. Override this only if your decoder can legitimately accept/decode a frame's bytes without emitting a picture during that same call - e.g. <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html" title="MPEG-1 (part 2) video decoder wrapper around TinyMPGDecoder.">MPGDecoder</a>, whose B-picture display-order reordering can hold a just-decoded picture back and instead emit an earlier one (or nothing at all) from a given <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>, see its own override. Used by <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html" title="Buffers a small, configurable amount of video (see setQueueBytes()) and renders it frame by frame fro...">VideoAudioSyncTask</a> to avoid counting/timing a call that did no real rendering work as a rendered frame - without this, its <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#ac2245652fe2a9df612f6a7e2ef2b502e">outputFPS()</a>/frameCountI()/ <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#aa04cc257205a46ece9e2c012baec4882" title="Number of P-frames (non-key frames) actually rendered so far.">frameCountP()</a>/avgFrameMs() would overcount for such a decoder. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a623879add1ad12aa604c56ac50d41009">MPGDecoder</a>.</p>
+
+</div>
+</div>
+<a id="aa3c5436b29a2a83d048ee81116870b83" name="aa3c5436b29a2a83d048ee81116870b83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3c5436b29a2a83d048ee81116870b83">&#9670;&#160;</a></span>ignoredFrameCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t ignoredFrameCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Number of this stream's <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a711a5b933ec68da2d43cc16fcc46372e">droppedFrameCount()</a> specifically caused by <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#afb93084288d9cee359601e113bf836f6">setIgnorePFrames()</a> rather than backlog (queue-full/falling-behind) - always 0 unless that's on. </p>
+
+</div>
+</div>
+<a id="a9ed71d94f20e455f1918935eb607496f" name="a9ed71d94f20e455f1918935eb607496f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ed71d94f20e455f1918935eb607496f">&#9670;&#160;</a></span>ignorePFrames()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ignorePFrames </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -947,6 +1038,33 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Sets/overrides the nominal frame rate frames are scheduled against - safe to call anytime, including before <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a>. </p>
+
+</div>
+</div>
+<a id="afb93084288d9cee359601e113bf836f6" name="afb93084288d9cee359601e113bf836f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb93084288d9cee359601e113bf836f6">&#9670;&#160;</a></span>setIgnorePFrames()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setIgnorePFrames </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>active</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Unconditionally drops every non-keyframe in <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> itself, before it's even queued - codec-agnostic (works for H264Decoder/MPGDecoder/ MJPEGDecoder/MultiVideoDecoder alike, unlike a decoder-specific flag such as <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#afb93084288d9cee359601e113bf836f6">MPGDecoder::setIgnorePFrames()</a>) and cheaper than letting the decoder no-op an ignored frame after it: the bytes never get copied into the queue or scheduled at all. Off by default. See <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#aa3c5436b29a2a83d048ee81116870b83">ignoredFrameCount()</a> for how many this has skipped. Independent of <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#ac309555187efbd405acbdf128f332276">setCatchUpThresholdFrames()</a>'s own conditional dropping, which still applies when this is off. </p>
 
 </div>
 </div>
@@ -1513,6 +1631,50 @@ Static Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">std::atomic&lt;uint64_t&gt; i_frame_total_ms {0}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3753a305e148d6be8884f906bed2e854" name="a3753a305e148d6be8884f906bed2e854"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3753a305e148d6be8884f906bed2e854">&#9670;&#160;</a></span>ignore_p_frames</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ignore_p_frames = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afd2f35d1c4d1daff9d24a62c62c79e50" name="afd2f35d1c4d1daff9d24a62c62c79e50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd2f35d1c4d1daff9d24a62c62c79e50">&#9670;&#160;</a></span>ignored_frame_count</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t ignored_frame_count = 0</td>
         </tr>
       </table>
   </td>

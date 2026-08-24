@@ -83,7 +83,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>H.264 video decoder: wraps TinyH264Decoder (<a href="https://github.com/pschatzmann/TinyH264">https://github.com/pschatzmann/TinyH264</a>) as a <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a>, so it can be plugged directly into e.g. <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#aa9139d7cd7756a3bf8603981959afb53">DemuxerAVI::setOutputVideo()</a>/ <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#aee3d456e79d27d60f9b6ade892fcc88c">DemuxerMP4::setOutputVideo()</a>. Consumes an Annex-B H.264 bitstream via <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> and, once a complete picture has been decoded, writes it - converted to <a class="el" href="classaudio__tools_1_1_h264_decoder.html#ab4305de559192cc500fbd0587b2748ea">setVideoFormat()</a>'s format (RGB565 by default, the common TFT wire format) - to the <a class="el" href="class_print.html">Print</a> target configured via <a class="el" href="classaudio__tools_1_1_h264_decoder.html#ae1220e7e3542f5a84c21fe2f7cef194c">setOutput()</a>, one <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call per decoded picture.  
+<p>H.264 video decoder: wraps TinyH264Decoder (<a href="https://github.com/pschatzmann/TinyH264">https://github.com/pschatzmann/TinyH264</a>) as a <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a>, so it can be plugged directly into e.g. <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#ab54510fc95b760fb7adb69274d61bb24">DemuxerAVI::setOutputVideo()</a>/ <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#aee3d456e79d27d60f9b6ade892fcc88c">DemuxerMP4::setOutputVideo()</a>. Consumes an Annex-B H.264 bitstream via <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> and, once a complete picture has been decoded, writes it - converted to <a class="el" href="classaudio__tools_1_1_h264_decoder.html#ab4305de559192cc500fbd0587b2748ea">setVideoFormat()</a>'s format (RGB565 by default, the common TFT wire format) - to the <a class="el" href="class_print.html">Print</a> target configured via <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput()</a>, one <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call per decoded picture.  
  <a href="classaudio__tools_1_1_h264_decoder.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_codec_h264_8h_source.html">CodecH264.h</a>&gt;</code></p>
@@ -119,6 +119,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8419abee0c4d380be1cb8ff963fb8d0a" id="r_a8419abee0c4d380be1cb8ff963fb8d0a"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a8419abee0c4d380be1cb8ff963fb8d0a">getWriteTimeMs</a> () const</td></tr>
 <tr class="memdesc:a8419abee0c4d380be1cb8ff963fb8d0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional: returns the time (ms) spent in the last <a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">write()</a> call.  <br /></td></tr>
 <tr class="separator:a8419abee0c4d380be1cb8ff963fb8d0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b9d7d37dfa865711aa1474be238da12" id="r_a6b9d7d37dfa865711aa1474be238da12"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a6b9d7d37dfa865711aa1474be238da12">hadOutput</a> () const</td></tr>
+<tr class="separator:a6b9d7d37dfa865711aa1474be238da12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9649a3c36b3d2060e9b8bf174f9048e" id="r_ae9649a3c36b3d2060e9b8bf174f9048e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#ae9649a3c36b3d2060e9b8bf174f9048e">hasError</a> ()</td></tr>
 <tr class="separator:ae9649a3c36b3d2060e9b8bf174f9048e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd16630f3db4bcac2f0677b7197f3af9" id="r_abd16630f3db4bcac2f0677b7197f3af9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#abd16630f3db4bcac2f0677b7197f3af9">isKeyFrame</a> (const uint8_t *data, size_t len) override</td></tr>
@@ -126,10 +128,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:abd16630f3db4bcac2f0677b7197f3af9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8758c5dbc5f1a35e327670cb8cac90c" id="r_ab8758c5dbc5f1a35e327670cb8cac90c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#ab8758c5dbc5f1a35e327670cb8cac90c">setMaxRefFrames</a> (int n)</td></tr>
 <tr class="separator:ab8758c5dbc5f1a35e327670cb8cac90c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1220e7e3542f5a84c21fe2f7cef194c" id="r_ae1220e7e3542f5a84c21fe2f7cef194c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#ae1220e7e3542f5a84c21fe2f7cef194c">setOutput</a> (<a class="el" href="class_print.html">Print</a> &amp;out)</td></tr>
-<tr class="separator:ae1220e7e3542f5a84c21fe2f7cef194c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e9c9d6d2876f620f49313a51c39f5b1" id="r_a8e9c9d6d2876f620f49313a51c39f5b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#a8e9c9d6d2876f620f49313a51c39f5b1">setOutput</a> (<a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;out)</td></tr>
-<tr class="separator:a8e9c9d6d2876f620f49313a51c39f5b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05ff4cf361d54457ed8586e8c14aa922" id="r_a05ff4cf361d54457ed8586e8c14aa922"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput</a> (<a class="el" href="class_print.html">Print</a> &amp;out) override</td></tr>
+<tr class="separator:a05ff4cf361d54457ed8586e8c14aa922"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace176beabb81a42a289774a5b0c16f07" id="r_ace176beabb81a42a289774a5b0c16f07"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#ace176beabb81a42a289774a5b0c16f07">setOutput</a> (<a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;out) override</td></tr>
+<tr class="separator:ace176beabb81a42a289774a5b0c16f07"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4d364d9800016345ae6980424817214" id="r_ab4d364d9800016345ae6980424817214"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#ab4d364d9800016345ae6980424817214">setSkipRender</a> (bool skip)</td></tr>
 <tr class="separator:ab4d364d9800016345ae6980424817214"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4305de559192cc500fbd0587b2748ea" id="r_ab4305de559192cc500fbd0587b2748ea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#ab4305de559192cc500fbd0587b2748ea">setVideoFormat</a> (<a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a> format) override</td></tr>
@@ -169,7 +171,7 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ab94da99c4b008b36e408511f6cff50d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>H.264 video decoder: wraps TinyH264Decoder (<a href="https://github.com/pschatzmann/TinyH264">https://github.com/pschatzmann/TinyH264</a>) as a <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a>, so it can be plugged directly into e.g. <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#aa9139d7cd7756a3bf8603981959afb53">DemuxerAVI::setOutputVideo()</a>/ <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#aee3d456e79d27d60f9b6ade892fcc88c">DemuxerMP4::setOutputVideo()</a>. Consumes an Annex-B H.264 bitstream via <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> and, once a complete picture has been decoded, writes it - converted to <a class="el" href="classaudio__tools_1_1_h264_decoder.html#ab4305de559192cc500fbd0587b2748ea">setVideoFormat()</a>'s format (RGB565 by default, the common TFT wire format) - to the <a class="el" href="class_print.html">Print</a> target configured via <a class="el" href="classaudio__tools_1_1_h264_decoder.html#ae1220e7e3542f5a84c21fe2f7cef194c">setOutput()</a>, one <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call per decoded picture. </p>
+<div class="textblock"><p>H.264 video decoder: wraps TinyH264Decoder (<a href="https://github.com/pschatzmann/TinyH264">https://github.com/pschatzmann/TinyH264</a>) as a <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a>, so it can be plugged directly into e.g. <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#ab54510fc95b760fb7adb69274d61bb24">DemuxerAVI::setOutputVideo()</a>/ <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#aee3d456e79d27d60f9b6ade892fcc88c">DemuxerMP4::setOutputVideo()</a>. Consumes an Annex-B H.264 bitstream via <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> and, once a complete picture has been decoded, writes it - converted to <a class="el" href="classaudio__tools_1_1_h264_decoder.html#ab4305de559192cc500fbd0587b2748ea">setVideoFormat()</a>'s format (RGB565 by default, the common TFT wire format) - to the <a class="el" href="class_print.html">Print</a> target configured via <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput()</a>, one <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call per decoded picture. </p>
 <p><a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>/flush() implement the <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> contract (see <a class="el" href="_video_8h.html">Video.h</a>): <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> may be called one or more times per frame - bytes are forwarded to the decoder immediately (Annex-B start codes are self-delimiting, so no internal buffering is needed here; a picture may complete partway through any <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call, not just at <a class="el" href="classaudio__tools_1_1_video_output.html#ad3aed50bc3b4459454ccb8c64f5ced5a">flush()</a>). <a class="el" href="classaudio__tools_1_1_video_output.html#ad3aed50bc3b4459454ccb8c64f5ced5a">flush()</a> is <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a>'s no-op default - some producers (e.g. DemuxerAVI/DemuxerMP4) call it unconditionally after each frame, but this class has nothing to do with it.</p>
 <p>Uses H264_DEFAULT_ALLOCATOR for the decoded picture buffers - see that macro's own comment above for the PSRAM-on-ESP32/heap- elsewhere default it picks, and how to override it.</p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
@@ -393,6 +395,34 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a6b9d7d37dfa865711aa1474be238da12" name="a6b9d7d37dfa865711aa1474be238da12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b9d7d37dfa865711aa1474be238da12">&#9670;&#160;</a></span>hadOutput()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool hadOutput </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>True if the most recent <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>+<a class="el" href="classaudio__tools_1_1_video_output.html#ad3aed50bc3b4459454ccb8c64f5ced5a">flush()</a> call actually produced a displayable picture - default true, matching every synchronous decoder (<a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a>, <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html" title="Motion-JPEG video decoder: wraps TinyJPEGDecoder (https://github.com/pschatzmann/TinyJPEG,...">MJPEGDecoder</a>, ...), which always decodes and pushes pixels fully within that one call. Override this only if your decoder can legitimately accept/decode a frame's bytes without emitting a picture during that same call - e.g. <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html" title="MPEG-1 (part 2) video decoder wrapper around TinyMPGDecoder.">MPGDecoder</a>, whose B-picture display-order reordering can hold a just-decoded picture back and instead emit an earlier one (or nothing at all) from a given <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>, see its own override. Used by <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html" title="Buffers a small, configurable amount of video (see setQueueBytes()) and renders it frame by frame fro...">VideoAudioSyncTask</a> to avoid counting/timing a call that did no real rendering work as a rendered frame - without this, its outputFPS()/frameCountI()/ frameCountP()/avgFrameMs() would overcount for such a decoder. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a623879add1ad12aa604c56ac50d41009">MPGDecoder</a>.</p>
+
+</div>
+</div>
 <a id="ae9649a3c36b3d2060e9b8bf174f9048e" name="ae9649a3c36b3d2060e9b8bf174f9048e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae9649a3c36b3d2060e9b8bf174f9048e">&#9670;&#160;</a></span>hasError()</h2>
 
@@ -522,8 +552,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ae1220e7e3542f5a84c21fe2f7cef194c" name="ae1220e7e3542f5a84c21fe2f7cef194c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae1220e7e3542f5a84c21fe2f7cef194c">&#9670;&#160;</a></span>setOutput() <span class="overload">[1/2]</span></h2>
+<a id="a05ff4cf361d54457ed8586e8c14aa922" name="a05ff4cf361d54457ed8586e8c14aa922"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05ff4cf361d54457ed8586e8c14aa922">&#9670;&#160;</a></span>setOutput() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -541,7 +571,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -551,8 +581,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a8e9c9d6d2876f620f49313a51c39f5b1" name="a8e9c9d6d2876f620f49313a51c39f5b1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8e9c9d6d2876f620f49313a51c39f5b1">&#9670;&#160;</a></span>setOutput() <span class="overload">[2/2]</span></h2>
+<a id="ace176beabb81a42a289774a5b0c16f07" name="ace176beabb81a42a289774a5b0c16f07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace176beabb81a42a289774a5b0c16f07">&#9670;&#160;</a></span>setOutput() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -570,10 +600,13 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Defines the target each decoded picture is written to - the VideoOutput-specific counterpart of <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput(Print&amp;)</a>, for a target like OutputTinyGPU/OutputOpenCV that implements <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> but not <a class="el" href="class_print.html">Print</a> (the two are unrelated types - see <a class="el" href="classaudio__tools_1_1_video_frame_meter.html" title="Transparent write() wrapper that measures throughput/turnaround while forwarding every call unchanged...">VideoFrameMeter</a>'s own comment). Part of the base interface (unlike other decoder-specific extras) so code holding only a <a class="el" href="classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 - CodecH264....">VideoDecoder</a>&amp; (e.g. <a class="el" href="classaudio__tools_1_1_video_player.html" title="High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A...">VideoPlayer</a>) can wire it to an arbitrary <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a>&amp; without knowing the concrete decoder type - every current decoder already implemented this identically before it was pulled up into the interface. </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_video_decoder.html#a746ceb53f48f97ec523f5d464fbed422">VideoDecoder</a>.</p>
 
 </div>
 </div>
@@ -629,7 +662,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Selects the pixel format written to <a class="el" href="classaudio__tools_1_1_h264_decoder.html#ae1220e7e3542f5a84c21fe2f7cef194c">setOutput()</a>'s target - RGB565 (the default) is what most TFT display libraries expect; RGB666/ RGB888 for higher color depth displays; I420 to pass the decoded planes through unconverted (tightly packed: Y bytes, then U bytes, then V bytes, no row padding - see TinyH264Decoder::toYUV420()). Any other VideoFormat is logged and ignored (previous format kept). </p>
+<p>Selects the pixel format written to <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput()</a>'s target - RGB565 (the default) is what most TFT display libraries expect; RGB666/ RGB888 for higher color depth displays; I420 to pass the decoded planes through unconverted (tightly packed: Y bytes, then U bytes, then V bytes, no row padding - see TinyH264Decoder::toYUV420()). Any other VideoFormat is logged and ignored (previous format kept). </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_video_decoder.html#af3e841cd4cb4b9dd800d7c3be096fa16">VideoDecoder</a>.</p>
 
@@ -683,7 +716,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Reports the format/dimensions of the picture written to <a class="el" href="classaudio__tools_1_1_h264_decoder.html#ae1220e7e3542f5a84c21fe2f7cef194c">setOutput()</a>'s target - format is <a class="el" href="classaudio__tools_1_1_h264_decoder.html#ab4305de559192cc500fbd0587b2748ea">setVideoFormat()</a>'s most recently selected value (RGB565 if never called); width/height are the most recently decoded picture's (0 before any picture has been decoded). </p>
+<p>Reports the format/dimensions of the picture written to <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput()</a>'s target - format is <a class="el" href="classaudio__tools_1_1_h264_decoder.html#ab4305de559192cc500fbd0587b2748ea">setVideoFormat()</a>'s most recently selected value (RGB565 if never called); width/height are the most recently decoded picture's (0 before any picture has been decoded). </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_video_decoder.html#aeab7b6810b52140c3c3a60bf92ca92ba">VideoDecoder</a>.</p>
 
@@ -722,7 +755,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Feeds one chunk of Annex-B H.264 data - may be called more than once per frame (e.g. from a demuxer that hands over payload in pieces). Decodes immediately, invoking <a class="el" href="classaudio__tools_1_1_h264_decoder.html#ae1220e7e3542f5a84c21fe2f7cef194c">setOutput()</a>'s <a class="el" href="class_print.html">Print</a> once per completed picture from within this call (not deferred to <a class="el" href="classaudio__tools_1_1_video_output.html#ad3aed50bc3b4459454ccb8c64f5ced5a">flush()</a>). </p>
+<p>Feeds one chunk of Annex-B H.264 data - may be called more than once per frame (e.g. from a demuxer that hands over payload in pieces). Decodes immediately, invoking <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput()</a>'s <a class="el" href="class_print.html">Print</a> once per completed picture from within this call (not deferred to <a class="el" href="classaudio__tools_1_1_video_output.html#ad3aed50bc3b4459454ccb8c64f5ced5a">flush()</a>). </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">VideoOutput</a>.</p>
 

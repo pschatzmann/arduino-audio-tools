@@ -14,8 +14,9 @@ var searchData=
   ['videoaudiosynctask_2eh_11',['VideoAudioSyncTask.h',['../_video_audio_sync_task_8h.html',1,'']]],
   ['videomuxer_2eh_12',['VideoMuxer.h',['../_video_muxer_8h.html',1,'']]],
   ['videomuxerwithtasks_2eh_13',['VideoMuxerWithTasks.h',['../_video_muxer_with_tasks_8h.html',1,'']]],
-  ['volumecontrol_2eh_14',['VolumeControl.h',['../_volume_control_8h.html',1,'']]],
-  ['volumestream_2eh_15',['VolumeStream.h',['../_volume_stream_8h.html',1,'']]],
-  ['vorbisdecoder_2eh_16',['VorbisDecoder.h',['../_vorbis_decoder_8h.html',1,'']]],
-  ['vs1053stream_2eh_17',['VS1053Stream.h',['../_v_s1053_stream_8h.html',1,'']]]
+  ['videoplayer_2eh_14',['VideoPlayer.h',['../_video_player_8h.html',1,'']]],
+  ['volumecontrol_2eh_15',['VolumeControl.h',['../_volume_control_8h.html',1,'']]],
+  ['volumestream_2eh_16',['VolumeStream.h',['../_volume_stream_8h.html',1,'']]],
+  ['vorbisdecoder_2eh_17',['VorbisDecoder.h',['../_vorbis_decoder_8h.html',1,'']]],
+  ['vs1053stream_2eh_18',['VS1053Stream.h',['../_v_s1053_stream_8h.html',1,'']]]
 ];

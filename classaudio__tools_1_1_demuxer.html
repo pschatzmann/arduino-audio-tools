@@ -167,6 +167,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac00f56c05e6176a91dcd54420d6f6081"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2496b8bc5466cbe153490729f4bc1eb3" id="r_a2496b8bc5466cbe153490729f4bc1eb3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer.html#a2496b8bc5466cbe153490729f4bc1eb3">setOutputVideo</a> (<a class="el" href="class_print.html">Print</a> &amp;out)=0</td></tr>
 <tr class="separator:a2496b8bc5466cbe153490729f4bc1eb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6981ff741a3bcf30e5d5d8d1492f2572" id="r_a6981ff741a3bcf30e5d5d8d1492f2572"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer.html#a6981ff741a3bcf30e5d5d8d1492f2572">setOutputVideo</a> (<a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;out)=0</td></tr>
+<tr class="separator:a6981ff741a3bcf30e5d5d8d1492f2572"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad255a6bfa4daf69f5f93d3cbe86ddd0e" id="r_ad255a6bfa4daf69f5f93d3cbe86ddd0e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer.html#ad255a6bfa4daf69f5f93d3cbe86ddd0e">setSendWavHeader</a> (bool flag)=0</td></tr>
 <tr class="separator:ad255a6bfa4daf69f5f93d3cbe86ddd0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a026655e20010414e4d162042f5c413" id="r_a0a026655e20010414e4d162042f5c413"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_video_info.html">VideoInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer.html#a0a026655e20010414e4d162042f5c413">videoInfo</a> () override</td></tr>
@@ -882,7 +884,7 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <a id="a2496b8bc5466cbe153490729f4bc1eb3" name="a2496b8bc5466cbe153490729f4bc1eb3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2496b8bc5466cbe153490729f4bc1eb3">&#9670;&#160;</a></span>setOutputVideo()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a2496b8bc5466cbe153490729f4bc1eb3">&#9670;&#160;</a></span>setOutputVideo() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -906,7 +908,36 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Defines the video output - e.g. a <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> implementation, or any other <a class="el" href="class_print.html">Print</a> if you want the raw payload as-is. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#aee3d456e79d27d60f9b6ade892fcc88c">DemuxerMP4</a>, <a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html#aee3d456e79d27d60f9b6ade892fcc88c">DemuxerMPG</a>, and <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#aa9139d7cd7756a3bf8603981959afb53">DemuxerAVI</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#aee3d456e79d27d60f9b6ade892fcc88c">DemuxerMP4</a>, <a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html#aee3d456e79d27d60f9b6ade892fcc88c">DemuxerMPG</a>, and <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#ab54510fc95b760fb7adb69274d61bb24">DemuxerAVI</a>.</p>
+
+</div>
+</div>
+<a id="a6981ff741a3bcf30e5d5d8d1492f2572" name="a6981ff741a3bcf30e5d5d8d1492f2572"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6981ff741a3bcf30e5d5d8d1492f2572">&#9670;&#160;</a></span>setOutputVideo() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void setOutputVideo </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;&#160;</td>
+          <td class="paramname"><em>out</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Defines the video output - the VideoOutput-specific counterpart of <a class="el" href="classaudio__tools_1_1_demuxer.html#a2496b8bc5466cbe153490729f4bc1eb3">setOutputVideo(Print&amp;)</a>, for a target like VideoAudioSyncTask/ OutputTinyGPU/OutputOpenCV that implements <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> but not <a class="el" href="class_print.html">Print</a> (the two are unrelated types - see <a class="el" href="classaudio__tools_1_1_video_frame_meter.html" title="Transparent write() wrapper that measures throughput/turnaround while forwarding every call unchanged...">VideoFrameMeter</a>'s own comment). Part of the base interface (unlike other concrete-class-specific extras) so code holding only a <a class="el" href="classaudio__tools_1_1_demuxer.html" title="Common interface for demuxers (DemuxerAVI, DemuxerMP4) that split a container&#39;s video and (optional) ...">Demuxer</a>&amp; (e.g. <a class="el" href="classaudio__tools_1_1_video_player.html" title="High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A...">VideoPlayer</a>) can wire it to an arbitrary <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a>&amp; without knowing the concrete container format - every current demuxer already implemented this identically before it was pulled up into the interface. </p>
+
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a11b686e4a93e5a34e04f7cdd736ce4e6">DemuxerMP4</a>, <a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html#a11b686e4a93e5a34e04f7cdd736ce4e6">DemuxerMPG</a>, and <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#abdbd21f1f2b7459b2148abd5c87001ea">DemuxerAVI</a>.</p>
 
 </div>
 </div>

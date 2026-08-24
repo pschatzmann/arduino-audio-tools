@@ -105,6 +105,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae3d58e56c2b7dc75a50b36b357ffef93" id="r_ae3d58e56c2b7dc75a50b36b357ffef93"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_open_c_v.html#ae3d58e56c2b7dc75a50b36b357ffef93">getWriteTimeMs</a> () const override</td></tr>
 <tr class="memdesc:ae3d58e56c2b7dc75a50b36b357ffef93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional: returns the time (ms) spent in the last <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call.  <br /></td></tr>
 <tr class="separator:ae3d58e56c2b7dc75a50b36b357ffef93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b9d7d37dfa865711aa1474be238da12" id="r_a6b9d7d37dfa865711aa1474be238da12"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a6b9d7d37dfa865711aa1474be238da12">hadOutput</a> () const</td></tr>
+<tr class="separator:a6b9d7d37dfa865711aa1474be238da12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae90cddad4cdc7ab4f54c2f5976e6eabf" id="r_ae90cddad4cdc7ab4f54c2f5976e6eabf"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#ae90cddad4cdc7ab4f54c2f5976e6eabf">isKeyFrame</a> (const uint8_t *data, size_t len)</td></tr>
 <tr class="separator:ae90cddad4cdc7ab4f54c2f5976e6eabf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a661d9a2bd192a6e1427cc59c59217f9c" id="r_a661d9a2bd192a6e1427cc59c59217f9c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a661d9a2bd192a6e1427cc59c59217f9c">setSize</a> (uint16_t <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#ad0eab1042455a2067c812ab8071d5376">width</a>, uint16_t <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a81c9f8d0b8c3b49d770be14dbe9f0d37">height</a>)</td></tr>
@@ -142,6 +144,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a5438a597ee291f523ae04a9fe355924f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a51e9baeec9b06ae477cf6475efc71d" id="r_a6a51e9baeec9b06ae477cf6475efc71d"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a6a51e9baeec9b06ae477cf6475efc71d">start</a> = 0</td></tr>
 <tr class="separator:a6a51e9baeec9b06ae477cf6475efc71d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeaf832c001a035c998046629f2fc8f1e" id="r_aeaf832c001a035c998046629f2fc8f1e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_open_c_v.html#aeaf832c001a035c998046629f2fc8f1e">swap_buffer</a></td></tr>
+<tr class="separator:aeaf832c001a035c998046629f2fc8f1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a78488f66cffa4ae5504bf610518c52ce" id="r_a78488f66cffa4ae5504bf610518c52ce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a78488f66cffa4ae5504bf610518c52ce">video_format</a> = <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a0a5417ce14732e9bdb402be642ebe9ea">VideoFormat::MJPEG</a></td></tr>
 <tr class="separator:a78488f66cffa4ae5504bf610518c52ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad0eab1042455a2067c812ab8071d5376" id="r_ad0eab1042455a2067c812ab8071d5376"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_open_c_v.html#ad0eab1042455a2067c812ab8071d5376">width</a> = 0</td></tr>
@@ -323,6 +327,34 @@ Protected Attributes</h2></td></tr>
 <p>Optional: returns the time (ms) spent in the last <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_output.html#a8419abee0c4d380be1cb8ff963fb8d0a">VideoOutput</a>.</p>
+
+</div>
+</div>
+<a id="a6b9d7d37dfa865711aa1474be238da12" name="a6b9d7d37dfa865711aa1474be238da12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b9d7d37dfa865711aa1474be238da12">&#9670;&#160;</a></span>hadOutput()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool hadOutput </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>True if the most recent <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>+<a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a> call actually produced a displayable picture - default true, matching every synchronous decoder (<a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a>, <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html" title="Motion-JPEG video decoder: wraps TinyJPEGDecoder (https://github.com/pschatzmann/TinyJPEG,...">MJPEGDecoder</a>, ...), which always decodes and pushes pixels fully within that one call. Override this only if your decoder can legitimately accept/decode a frame's bytes without emitting a picture during that same call - e.g. <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html" title="MPEG-1 (part 2) video decoder wrapper around TinyMPGDecoder.">MPGDecoder</a>, whose B-picture display-order reordering can hold a just-decoded picture back and instead emit an earlier one (or nothing at all) from a given <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>, see its own override. Used by <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html" title="Buffers a small, configurable amount of video (see setQueueBytes()) and renders it frame by frame fro...">VideoAudioSyncTask</a> to avoid counting/timing a call that did no real rendering work as a rendered frame - without this, its outputFPS()/frameCountI()/ frameCountP()/avgFrameMs() would overcount for such a decoder. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a623879add1ad12aa604c56ac50d41009">MPGDecoder</a>.</p>
 
 </div>
 </div>
@@ -646,6 +678,28 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">uint64_t start = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aeaf832c001a035c998046629f2fc8f1e" name="aeaf832c001a035c998046629f2fc8f1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeaf832c001a035c998046629f2fc8f1e">&#9670;&#160;</a></span>swap_buffer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;uint8_t&gt; swap_buffer</td>
         </tr>
       </table>
   </td>

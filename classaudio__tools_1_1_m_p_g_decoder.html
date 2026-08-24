@@ -121,6 +121,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8419abee0c4d380be1cb8ff963fb8d0a" id="r_a8419abee0c4d380be1cb8ff963fb8d0a"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a8419abee0c4d380be1cb8ff963fb8d0a">getWriteTimeMs</a> () const</td></tr>
 <tr class="memdesc:a8419abee0c4d380be1cb8ff963fb8d0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional: returns the time (ms) spent in the last <a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">write()</a> call.  <br /></td></tr>
 <tr class="separator:a8419abee0c4d380be1cb8ff963fb8d0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a623879add1ad12aa604c56ac50d41009" id="r_a623879add1ad12aa604c56ac50d41009"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a623879add1ad12aa604c56ac50d41009">hadOutput</a> () const override</td></tr>
+<tr class="separator:a623879add1ad12aa604c56ac50d41009"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9649a3c36b3d2060e9b8bf174f9048e" id="r_ae9649a3c36b3d2060e9b8bf174f9048e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#ae9649a3c36b3d2060e9b8bf174f9048e">hasError</a> ()</td></tr>
 <tr class="separator:ae9649a3c36b3d2060e9b8bf174f9048e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ed71d94f20e455f1918935eb607496f" id="r_a9ed71d94f20e455f1918935eb607496f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a9ed71d94f20e455f1918935eb607496f">ignorePFrames</a> () const</td></tr>
@@ -134,8 +136,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a05ff4cf361d54457ed8586e8c14aa922" id="r_a05ff4cf361d54457ed8586e8c14aa922"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput</a> (<a class="el" href="class_print.html">Print</a> &amp;out) override</td></tr>
 <tr class="memdesc:a05ff4cf361d54457ed8586e8c14aa922"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the target each decoded picture is written to.  <br /></td></tr>
 <tr class="separator:a05ff4cf361d54457ed8586e8c14aa922"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e9c9d6d2876f620f49313a51c39f5b1" id="r_a8e9c9d6d2876f620f49313a51c39f5b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a8e9c9d6d2876f620f49313a51c39f5b1">setOutput</a> (<a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;out)</td></tr>
-<tr class="separator:a8e9c9d6d2876f620f49313a51c39f5b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace176beabb81a42a289774a5b0c16f07" id="r_ace176beabb81a42a289774a5b0c16f07"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#ace176beabb81a42a289774a5b0c16f07">setOutput</a> (<a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;out) override</td></tr>
+<tr class="separator:ace176beabb81a42a289774a5b0c16f07"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4d364d9800016345ae6980424817214" id="r_ab4d364d9800016345ae6980424817214"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#ab4d364d9800016345ae6980424817214">setSkipRender</a> (bool skip)</td></tr>
 <tr class="separator:ab4d364d9800016345ae6980424817214"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4305de559192cc500fbd0587b2748ea" id="r_ab4305de559192cc500fbd0587b2748ea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#ab4305de559192cc500fbd0587b2748ea">setVideoFormat</a> (<a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a> format) override</td></tr>
@@ -165,6 +167,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ae944957332abeac7dd1495e23629e98e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8af4e93d1de1594db8accdf886aea05" id="r_af8af4e93d1de1594db8accdf886aea05"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#af8af4e93d1de1594db8accdf886aea05">frame_buffer</a></td></tr>
 <tr class="separator:af8af4e93d1de1594db8accdf886aea05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85e196f6d7576c37c9aaf8d85120d928" id="r_a85e196f6d7576c37c9aaf8d85120d928"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a85e196f6d7576c37c9aaf8d85120d928">frame_emitted</a> = false</td></tr>
+<tr class="separator:a85e196f6d7576c37c9aaf8d85120d928"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa42c30e02e51ec7cc38ea4ab215e0db4" id="r_aa42c30e02e51ec7cc38ea4ab215e0db4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#aa42c30e02e51ec7cc38ea4ab215e0db4">p_out</a> = nullptr</td></tr>
 <tr class="separator:aa42c30e02e51ec7cc38ea4ab215e0db4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f9b668b9f2805f1dcca5a9ffc0cb15c" id="r_a2f9b668b9f2805f1dcca5a9ffc0cb15c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a2f9b668b9f2805f1dcca5a9ffc0cb15c">p_out_video</a> = nullptr</td></tr>
@@ -421,6 +425,34 @@ is coming" (the way <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html
 
 </div>
 </div>
+<a id="a623879add1ad12aa604c56ac50d41009" name="a623879add1ad12aa604c56ac50d41009"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a623879add1ad12aa604c56ac50d41009">&#9670;&#160;</a></span>hadOutput()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool hadOutput </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>See <a class="el" href="classaudio__tools_1_1_video_output.html#a6b9d7d37dfa865711aa1474be238da12">VideoOutput::hadOutput()</a> - TinyMPGDecoder's B-picture display- order reordering means a given <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> can decode a new picture without emitting it yet (held back), or emit an earlier held picture instead - either way "write()+flush() was called" doesn't reliably mean "a picture was just pushed to the output" the way it does for a synchronous decoder. Reflects whether <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a8886ad6c5e0b1dc7e6aa593d88d7d180">writeFrame()</a> (only ever invoked from TinyMPGDecoder's frame callback, i.e. only when a picture was actually ready) ran during the most recent <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call. </p>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_output.html#a6b9d7d37dfa865711aa1474be238da12">VideoOutput</a>.</p>
+
+</div>
+</div>
 <a id="ae9649a3c36b3d2060e9b8bf174f9048e" name="ae9649a3c36b3d2060e9b8bf174f9048e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae9649a3c36b3d2060e9b8bf174f9048e">&#9670;&#160;</a></span>hasError()</h2>
 
@@ -630,8 +662,8 @@ is coming" (the way <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html
 
 </div>
 </div>
-<a id="a8e9c9d6d2876f620f49313a51c39f5b1" name="a8e9c9d6d2876f620f49313a51c39f5b1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8e9c9d6d2876f620f49313a51c39f5b1">&#9670;&#160;</a></span>setOutput() <span class="overload">[2/2]</span></h2>
+<a id="ace176beabb81a42a289774a5b0c16f07" name="ace176beabb81a42a289774a5b0c16f07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace176beabb81a42a289774a5b0c16f07">&#9670;&#160;</a></span>setOutput() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -649,10 +681,13 @@ is coming" (the way <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Defines the target each decoded picture is written to - the VideoOutput-specific counterpart of <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a05ff4cf361d54457ed8586e8c14aa922" title="Defines the target each decoded picture is written to.">setOutput(Print&amp;)</a>, for a target like OutputTinyGPU/OutputOpenCV that implements <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> but not <a class="el" href="class_print.html">Print</a> (the two are unrelated types - see <a class="el" href="classaudio__tools_1_1_video_frame_meter.html" title="Transparent write() wrapper that measures throughput/turnaround while forwarding every call unchanged...">VideoFrameMeter</a>'s own comment). Part of the base interface (unlike other decoder-specific extras) so code holding only a <a class="el" href="classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 - CodecH264....">VideoDecoder</a>&amp; (e.g. <a class="el" href="classaudio__tools_1_1_video_player.html" title="High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A...">VideoPlayer</a>) can wire it to an arbitrary <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a>&amp; without knowing the concrete decoder type - every current decoder already implemented this identically before it was pulled up into the interface. </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_video_decoder.html#a746ceb53f48f97ec523f5d464fbed422">VideoDecoder</a>.</p>
 
 </div>
 </div>
@@ -899,6 +934,28 @@ is coming" (the way <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;uint8_t&gt; frame_buffer</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a85e196f6d7576c37c9aaf8d85120d928" name="a85e196f6d7576c37c9aaf8d85120d928"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85e196f6d7576c37c9aaf8d85120d928">&#9670;&#160;</a></span>frame_emitted</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool frame_emitted = false</td>
         </tr>
       </table>
   </td>

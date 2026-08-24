@@ -116,12 +116,13 @@ var searchData=
   ['videomuxer_113',['VideoMuxer',['../classaudio__tools_1_1_video_muxer.html',1,'audio_tools']]],
   ['videomuxerwithtasks_114',['VideoMuxerWithTasks',['../classaudio__tools_1_1_video_muxer_with_tasks.html',1,'audio_tools']]],
   ['videooutput_115',['VideoOutput',['../classaudio__tools_1_1_video_output.html',1,'audio_tools']]],
-  ['volumecontrol_116',['VolumeControl',['../classaudio__tools_1_1_volume_control.html',1,'audio_tools']]],
-  ['volumemeter_117',['VolumeMeter',['../classaudio__tools_1_1_volume_meter.html',1,'audio_tools']]],
-  ['volumestream_118',['VolumeStream',['../classaudio__tools_1_1_volume_stream.html',1,'audio_tools']]],
-  ['volumestreamconfig_119',['VolumeStreamConfig',['../structaudio__tools_1_1_volume_stream_config.html',1,'audio_tools']]],
-  ['volumesupport_120',['VolumeSupport',['../classaudio__tools_1_1_volume_support.html',1,'audio_tools']]],
-  ['vorbisdecoder_121',['VorbisDecoder',['../classaudio__tools_1_1_vorbis_decoder.html',1,'audio_tools']]],
-  ['vs1053config_122',['VS1053Config',['../classaudio__tools_1_1_v_s1053_config.html',1,'audio_tools']]],
-  ['vs1053stream_123',['VS1053Stream',['../classaudio__tools_1_1_v_s1053_stream.html',1,'audio_tools']]]
+  ['videoplayer_116',['VideoPlayer',['../classaudio__tools_1_1_video_player.html',1,'audio_tools']]],
+  ['volumecontrol_117',['VolumeControl',['../classaudio__tools_1_1_volume_control.html',1,'audio_tools']]],
+  ['volumemeter_118',['VolumeMeter',['../classaudio__tools_1_1_volume_meter.html',1,'audio_tools']]],
+  ['volumestream_119',['VolumeStream',['../classaudio__tools_1_1_volume_stream.html',1,'audio_tools']]],
+  ['volumestreamconfig_120',['VolumeStreamConfig',['../structaudio__tools_1_1_volume_stream_config.html',1,'audio_tools']]],
+  ['volumesupport_121',['VolumeSupport',['../classaudio__tools_1_1_volume_support.html',1,'audio_tools']]],
+  ['vorbisdecoder_122',['VorbisDecoder',['../classaudio__tools_1_1_vorbis_decoder.html',1,'audio_tools']]],
+  ['vs1053config_123',['VS1053Config',['../classaudio__tools_1_1_v_s1053_config.html',1,'audio_tools']]],
+  ['vs1053stream_124',['VS1053Stream',['../classaudio__tools_1_1_v_s1053_stream.html',1,'audio_tools']]]
 ];

@@ -120,6 +120,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8419abee0c4d380be1cb8ff963fb8d0a" id="r_a8419abee0c4d380be1cb8ff963fb8d0a"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a8419abee0c4d380be1cb8ff963fb8d0a">getWriteTimeMs</a> () const</td></tr>
 <tr class="memdesc:a8419abee0c4d380be1cb8ff963fb8d0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional: returns the time (ms) spent in the last <a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">write()</a> call.  <br /></td></tr>
 <tr class="separator:a8419abee0c4d380be1cb8ff963fb8d0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b9d7d37dfa865711aa1474be238da12" id="r_a6b9d7d37dfa865711aa1474be238da12"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a6b9d7d37dfa865711aa1474be238da12">hadOutput</a> () const</td></tr>
+<tr class="separator:a6b9d7d37dfa865711aa1474be238da12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd16630f3db4bcac2f0677b7197f3af9" id="r_abd16630f3db4bcac2f0677b7197f3af9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#abd16630f3db4bcac2f0677b7197f3af9">isKeyFrame</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="separator:abd16630f3db4bcac2f0677b7197f3af9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a529b58cb0a20b285552ee3fe692bf507" id="r_a529b58cb0a20b285552ee3fe692bf507"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a529b58cb0a20b285552ee3fe692bf507">selectedFormat</a> () const</td></tr>
@@ -127,8 +129,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a05ff4cf361d54457ed8586e8c14aa922" id="r_a05ff4cf361d54457ed8586e8c14aa922"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput</a> (<a class="el" href="class_print.html">Print</a> &amp;out) override</td></tr>
 <tr class="memdesc:a05ff4cf361d54457ed8586e8c14aa922"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the target each decoded picture is written to.  <br /></td></tr>
 <tr class="separator:a05ff4cf361d54457ed8586e8c14aa922"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e9c9d6d2876f620f49313a51c39f5b1" id="r_a8e9c9d6d2876f620f49313a51c39f5b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a8e9c9d6d2876f620f49313a51c39f5b1">setOutput</a> (<a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;out)</td></tr>
-<tr class="separator:a8e9c9d6d2876f620f49313a51c39f5b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace176beabb81a42a289774a5b0c16f07" id="r_ace176beabb81a42a289774a5b0c16f07"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#ace176beabb81a42a289774a5b0c16f07">setOutput</a> (<a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;out) override</td></tr>
+<tr class="separator:ace176beabb81a42a289774a5b0c16f07"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a94f8728be362b736be4cb10a4253d201" id="r_a94f8728be362b736be4cb10a4253d201"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a94f8728be362b736be4cb10a4253d201">setSkipRender</a> (bool skip) override</td></tr>
 <tr class="separator:a94f8728be362b736be4cb10a4253d201"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4305de559192cc500fbd0587b2748ea" id="r_ab4305de559192cc500fbd0587b2748ea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#ab4305de559192cc500fbd0587b2748ea">setVideoFormat</a> (<a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a> format) override</td></tr>
@@ -166,13 +168,13 @@ Protected Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Manages multiple VideoDecoders with automatic format detection - the video-side counterpart of <a class="el" href="classaudio__tools_1_1_multi_decoder.html" title="Manage multiple AudioDecoders with automatic format detection.">MultiDecoder</a> (<a class="el" href="_multi_decoder_8h.html">AudioCodecs/MultiDecoder.h</a>). </p>
-<p>Comes pre-registered with every video codec this library ships a portable (no hardware-specific backend) software decoder for: <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html" title="Motion-JPEG video decoder: wraps JPEGDecoder (https://github.com/Bodmer/JPEGDecoder) as a VideoDecode...">MJPEGDecoder</a> (Motion-JPEG, JPEGDecoder, <a class="el" href="_codec_j_p_e_g_8h.html">CodecJPEG.h</a>), <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html" title="MPEG-1 (part 2) video decoder wrapper around TinyMPGDecoder.">MPGDecoder</a> (MPEG-1, TinyMPG, <a class="el" href="_codec_m_p_g_8h.html">CodecMPG.h</a>), <a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a> (H.264 Annex-B, TinyH264, <a class="el" href="_codec_h264_8h.html">CodecH264.h</a>) - drop it into a demuxer's setOutputVideo() the same way any single decoder would go, and it self-selects the right one from the bitstream's own framing instead of the caller having to know the codec up front. Extend with <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a76ac48538c8911b59230d4ebbd62990c">addDecoder()</a> for anything else (e.g. <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html" title="H.264 video decoder for ESP32-S3: wraps esp_h264::H264Decoder (https://github.com/pschatzmann/ESP32S3...">H264DecoderESP32S3</a>'s hardware-accelerated backend - not pre-registered here since it's ESP32-S3-only and needs its own library/header).</p>
+<p>Comes pre-registered with every video codec this library ships a portable (no hardware-specific backend) software decoder for: <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html" title="Motion-JPEG video decoder: wraps TinyJPEGDecoder (https://github.com/pschatzmann/TinyJPEG,...">MJPEGDecoder</a> (Motion-JPEG, TinyJPEG, <a class="el" href="_codec_j_p_e_g_8h.html">CodecJPEG.h</a>), <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html" title="MPEG-1 (part 2) video decoder wrapper around TinyMPGDecoder.">MPGDecoder</a> (MPEG-1, TinyMPG, <a class="el" href="_codec_m_p_g_8h.html">CodecMPG.h</a>), <a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a> (H.264 Annex-B, TinyH264, <a class="el" href="_codec_h264_8h.html">CodecH264.h</a>) - drop it into a demuxer's setOutputVideo() the same way any single decoder would go, and it self-selects the right one from the bitstream's own framing instead of the caller having to know the codec up front. Extend with <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a76ac48538c8911b59230d4ebbd62990c">addDecoder()</a> for anything else (e.g. <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html" title="H.264 video decoder for ESP32-S3: wraps esp_h264::H264Decoder (https://github.com/pschatzmann/ESP32S3...">H264DecoderESP32S3</a>'s hardware-accelerated backend - not pre-registered here since it's ESP32-S3-only and needs its own library/header).</p>
 <p>Detection runs once, on the very first <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call, preferring the container's own answer over guessing from raw bytes: if <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#ab848f87085dcf8ecc7343e4c4d690306">setVideoInfoSource()</a> was given a source (typically the demuxer feeding this object - DemuxerAVI/DemuxerMP4/DemuxerMPG all implement <a class="el" href="classaudio__tools_1_1_video_info_source.html">VideoInfoSource</a> and already parse the real codec from their own container metadata, e.g. <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#a4f959e3d631e13a15a0827aef1a16ff4">DemuxerAVI::getVideoInfo()</a>.format from the AVI 'strf' chunk's FOURCC - see <a class="el" href="_container_a_v_i_8h.html">ContainerAVI.h</a>'s own comment) and its <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a0a026655e20010414e4d162042f5c413">videoInfo()</a>.format matches a registered decoder, that decoder is selected directly, no sniffing needed. Otherwise (no source set, or its format is UNKNOWN/unregistered) falls back to each registered decoder's check() function, tried in registration order (MJPEG, then MPEG-1, then H.264 - see <a class="el" href="group__video.html#gae6759cb908639d7c3d7f76157d07ce1e">isMjpegVideo()</a>/isMpeg1Video()/isH264Video() above) against that first call's bytes. Reliable either way because every current caller already hands over one complete access unit per <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call. Every subsequent call, plus <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a>/isKeyFrame()/ <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a94f8728be362b736be4cb10a4253d201">setSkipRender()</a>, is forwarded to that same decoder for the rest of the stream - never re-detected.</p>
 <p><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a05ff4cf361d54457ed8586e8c14aa922" title="Defines the target each decoded picture is written to.">setOutput()</a>/setVideoFormat() are applied to all registered decoders eagerly (cheap - just stores pointers/an enum, no allocation), but <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#acba365cc28eb702040c382646cfb0a7a">begin()</a> is only ever called on the one decoder actually selected - matching <a class="el" href="classaudio__tools_1_1_multi_decoder.html" title="Manage multiple AudioDecoders with automatic format detection.">MultiDecoder</a>'s own memory-efficient lazy-init rationale, since a decoder's <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#acba365cc28eb702040c382646cfb0a7a">begin()</a> is what allocates its picture buffers.</p>
 <p>Dependencies (install via Library Manager) - all three are required to build this header, regardless of which formats your content actually uses:</p><ul>
 <li><a href="https://github.com/pschatzmann/TinyH264">https://github.com/pschatzmann/TinyH264</a></li>
 <li><a href="https://github.com/pschatzmann/TinyMPG">https://github.com/pschatzmann/TinyMPG</a></li>
-<li><a href="https://github.com/Bodmer/JPEGDecoder">https://github.com/Bodmer/JPEGDecoder</a></li>
+<li><a href="https://github.com/pschatzmann/TinyJPEG">https://github.com/pschatzmann/TinyJPEG</a></li>
 </ul>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
@@ -362,6 +364,34 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a6b9d7d37dfa865711aa1474be238da12" name="a6b9d7d37dfa865711aa1474be238da12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b9d7d37dfa865711aa1474be238da12">&#9670;&#160;</a></span>hadOutput()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool hadOutput </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>True if the most recent <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>+<a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a> call actually produced a displayable picture - default true, matching every synchronous decoder (<a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a>, <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html" title="Motion-JPEG video decoder: wraps TinyJPEGDecoder (https://github.com/pschatzmann/TinyJPEG,...">MJPEGDecoder</a>, ...), which always decodes and pushes pixels fully within that one call. Override this only if your decoder can legitimately accept/decode a frame's bytes without emitting a picture during that same call - e.g. <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html" title="MPEG-1 (part 2) video decoder wrapper around TinyMPGDecoder.">MPGDecoder</a>, whose B-picture display-order reordering can hold a just-decoded picture back and instead emit an earlier one (or nothing at all) from a given <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>, see its own override. Used by <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html" title="Buffers a small, configurable amount of video (see setQueueBytes()) and renders it frame by frame fro...">VideoAudioSyncTask</a> to avoid counting/timing a call that did no real rendering work as a rendered frame - without this, its outputFPS()/frameCountI()/ frameCountP()/avgFrameMs() would overcount for such a decoder. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a623879add1ad12aa604c56ac50d41009">MPGDecoder</a>.</p>
+
+</div>
+</div>
 <a id="abd16630f3db4bcac2f0677b7197f3af9" name="abd16630f3db4bcac2f0677b7197f3af9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abd16630f3db4bcac2f0677b7197f3af9">&#9670;&#160;</a></span>isKeyFrame()</h2>
 
@@ -483,8 +513,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a8e9c9d6d2876f620f49313a51c39f5b1" name="a8e9c9d6d2876f620f49313a51c39f5b1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8e9c9d6d2876f620f49313a51c39f5b1">&#9670;&#160;</a></span>setOutput() <span class="overload">[2/2]</span></h2>
+<a id="ace176beabb81a42a289774a5b0c16f07" name="ace176beabb81a42a289774a5b0c16f07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace176beabb81a42a289774a5b0c16f07">&#9670;&#160;</a></span>setOutput() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -502,11 +532,13 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>See <a class="el" href="classaudio__tools_1_1_video_decoder.html#ac68081867afc8798c70a2e83599098e6" title="Defines the target each decoded picture is written to.">VideoDecoder::setOutput()</a> - the <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> overload every current video example actually uses (e.g. wiring to <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html" title="Bridges VideoDecoder&#39;s write() calls to a TinyGPU DisplayDriver (e.g. ILI9341Driver,...">OutputTinyGPU</a>). Not part of <a class="el" href="classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 - CodecH264....">VideoDecoder</a>'s virtual interface (each concrete decoder exposes it as its own additional overload), so forwarded manually to every registered decoder here instead of through a virtual call. </p>
+<p>See <a class="el" href="classaudio__tools_1_1_video_decoder.html#a746ceb53f48f97ec523f5d464fbed422">VideoDecoder::setOutput(VideoOutput&amp;)</a> - forwarded to every registered decoder eagerly (same rationale as the <a class="el" href="class_print.html">Print</a>&amp; overload above), so whichever one gets selected on the first <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> is already wired. </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_video_decoder.html#a746ceb53f48f97ec523f5d464fbed422">VideoDecoder</a>.</p>
 
 </div>
 </div>

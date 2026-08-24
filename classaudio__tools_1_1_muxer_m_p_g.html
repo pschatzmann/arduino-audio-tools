@@ -136,6 +136,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8419abee0c4d380be1cb8ff963fb8d0a" id="r_a8419abee0c4d380be1cb8ff963fb8d0a"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a8419abee0c4d380be1cb8ff963fb8d0a">getWriteTimeMs</a> () const</td></tr>
 <tr class="memdesc:a8419abee0c4d380be1cb8ff963fb8d0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional: returns the time (ms) spent in the last <a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">write()</a> call.  <br /></td></tr>
 <tr class="separator:a8419abee0c4d380be1cb8ff963fb8d0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b9d7d37dfa865711aa1474be238da12" id="r_a6b9d7d37dfa865711aa1474be238da12"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a6b9d7d37dfa865711aa1474be238da12">hadOutput</a> () const</td></tr>
+<tr class="separator:a6b9d7d37dfa865711aa1474be238da12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae90cddad4cdc7ab4f54c2f5976e6eabf" id="r_ae90cddad4cdc7ab4f54c2f5976e6eabf"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#ae90cddad4cdc7ab4f54c2f5976e6eabf">isKeyFrame</a> (const uint8_t *data, size_t len)</td></tr>
 <tr class="separator:ae90cddad4cdc7ab4f54c2f5976e6eabf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae125d7c8cee8961766e6e5486aa860de" id="r_ae125d7c8cee8961766e6e5486aa860de"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#ae125d7c8cee8961766e6e5486aa860de">mimeVideo</a> () override</td></tr>
@@ -231,7 +233,7 @@ Static Protected Attributes</h2></td></tr>
 <div class="line"><span class="comment">// for each encoded MPEG-1 picture (a run of ES bytes up to the next</span></div>
 <div class="line"><span class="comment">// picture_start_code):</span></div>
 <div class="line">mpg.addVideoFrame(mpeg1_picture_data, len);</div>
-<div class="ttc" id="aclassaudio__tools_1_1_muxer_m_p_g_html"><div class="ttname"><a href="classaudio__tools_1_1_muxer_m_p_g.html">audio_tools::MuxerMPG</a></div><div class="ttdoc">MPEG-1 System (Program) Stream Encoder, as defined by ISO/IEC 11172-1: muxes an already-encoded MPEG-...</div><div class="ttdef"><b>Definition</b> ContainerMPG.h:711</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_muxer_m_p_g_html"><div class="ttname"><a href="classaudio__tools_1_1_muxer_m_p_g.html">audio_tools::MuxerMPG</a></div><div class="ttdoc">MPEG-1 System (Program) Stream Encoder, as defined by ISO/IEC 11172-1: muxes an already-encoded MPEG-...</div><div class="ttdef"><b>Definition</b> ContainerMPG.h:775</div></div>
 <div class="ttc" id="agroup__video_html_gga216a5d43d2a518325c84f100ed7735a5a61c156fe2a3c9fe7eb28bd017d95a618"><div class="ttname"><a href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a61c156fe2a3c9fe7eb28bd017d95a618">audio_tools::VideoFormat::MPEG1</a></div><div class="ttdeci">@ MPEG1</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_muxer_video_config_html"><div class="ttname"><a href="structaudio__tools_1_1_muxer_video_config.html">audio_tools::MuxerVideoConfig</a></div><div class="ttdoc">Shared video track configuration for muxers (MuxerAVI, MuxerMP4) - call before begin().</div><div class="ttdef"><b>Definition</b> ContainerCommon.h:11</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_muxer_video_config_html_a4f50e96f11c68d45dc109185efe011ad"><div class="ttname"><a href="structaudio__tools_1_1_muxer_video_config.html#a4f50e96f11c68d45dc109185efe011ad">audio_tools::MuxerVideoConfig::fps</a></div><div class="ttdeci">float fps</div><div class="ttdef"><b>Definition</b> ContainerCommon.h:14</div></div>
@@ -824,6 +826,34 @@ Static Protected Attributes</h2></td></tr>
 <p>Optional: returns the time (ms) spent in the last <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call. </p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_output_t_f_t__e_s_p_i.html#a5efb8ccd37b8cc2749358e5da69adddc">OutputTFT_eSPI</a>, <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a5efb8ccd37b8cc2749358e5da69adddc">OutputTinyGPU</a>, and <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#ae3d58e56c2b7dc75a50b36b357ffef93">OutputOpenCV</a>.</p>
+
+</div>
+</div>
+<a id="a6b9d7d37dfa865711aa1474be238da12" name="a6b9d7d37dfa865711aa1474be238da12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b9d7d37dfa865711aa1474be238da12">&#9670;&#160;</a></span>hadOutput()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool hadOutput </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>True if the most recent <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>+<a class="el" href="classaudio__tools_1_1_muxer.html#ad3aed50bc3b4459454ccb8c64f5ced5a">flush()</a> call actually produced a displayable picture - default true, matching every synchronous decoder (<a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a>, <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html" title="Motion-JPEG video decoder: wraps TinyJPEGDecoder (https://github.com/pschatzmann/TinyJPEG,...">MJPEGDecoder</a>, ...), which always decodes and pushes pixels fully within that one call. Override this only if your decoder can legitimately accept/decode a frame's bytes without emitting a picture during that same call - e.g. <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html" title="MPEG-1 (part 2) video decoder wrapper around TinyMPGDecoder.">MPGDecoder</a>, whose B-picture display-order reordering can hold a just-decoded picture back and instead emit an earlier one (or nothing at all) from a given <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>, see its own override. Used by <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html" title="Buffers a small, configurable amount of video (see setQueueBytes()) and renders it frame by frame fro...">VideoAudioSyncTask</a> to avoid counting/timing a call that did no real rendering work as a rendered frame - without this, its outputFPS()/frameCountI()/ frameCountP()/avgFrameMs() would overcount for such a decoder. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a623879add1ad12aa604c56ac50d41009">MPGDecoder</a>.</p>
 
 </div>
 </div>
