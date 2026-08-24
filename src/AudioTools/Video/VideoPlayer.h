@@ -18,22 +18,24 @@ namespace audio_tools {
  * audio decode chain synced against it) behind one object driven by a
  * single copy() call per loop() iteration.
  *
- * Always decodes video through a built-in MultiVideoDecoder, pre-
- * registered with every video codec this library ships a portable
- * software decoder for (H264/MJPEG/MPEG-1 - see its own class comment) -
- * no video decoder setup needed for those. Audio decoding, however,
- * starts with NO codecs registered at all (a plain MultiDecoder) - unlike
- * the video side, this class doesn't force a dependency on any one audio
- * codec library (e.g. arduino-libhelix): register whatever the content
- * actually needs via addAudioDecoder(), exactly as DecoderHelix's own
- * constructor (AudioCodecs/CodecHelix.h) does internally:
+ * Decodes video through a built-in MultiVideoDecoder and audio through a
+ * built-in MultiDecoder - both start with NO codecs registered (see each
+ * one's own class comment) and neither pulls in any codec library on its
+ * own, so including this header alone adds no external dependency at all.
+ * Register whatever your content actually needs via addVideoDecoder()/
+ * addAudioDecoder(), exactly as MultiVideoDecoderFull's/DecoderHelix's own
+ * constructors do internally:
  * @code
  * DemuxerAVI aviDemuxer;
  * VideoPlayer player(aviDemuxer, tftOutput, audioOut);
+ * H264Decoder h264Decoder;
+ * MJPEGDecoder mjpegDecoder;
  * MP3DecoderHelix mp3Decoder;
  * AACDecoderHelix aacDecoder;
  * void setup() {
  *   ...
+ *   player.addVideoDecoder(h264Decoder, VideoFormat::H264, isH264Video);
+ *   player.addVideoDecoder(mjpegDecoder, VideoFormat::MJPEG, isMjpegVideo);
  *   player.addAudioDecoder(mp3Decoder, "audio/mpeg");
  *   player.addAudioDecoder(aacDecoder, "audio/aac");
  *   player.begin(file);
@@ -42,7 +44,14 @@ namespace audio_tools {
  *   if (player.copy() == 0) { file.close(); ... }
  * }
  * @endcode
- * matching sd-avi-mjpg-video.ino/decode-avi.ino's own pipeline exactly.
+ * matching sd-avi-mjpg-video.ino/decode-avi.ino's own pipeline. Use
+ * VideoPlayerFull (VideoPlayerFull.h) instead for the "just point it at a
+ * file, any common codec just works" convenience with no registration
+ * code of your own needed - it pre-registers every video codec
+ * (H264/MJPEG/MPEG-1) and the most common audio ones (MP3/AAC/MP2), at
+ * the cost of pulling in every one of their codec libraries
+ * unconditionally (see its own class comment).
+ *
  * addAudioDecoder() also covers a codec the DemuxerXxx::mime() this
  * class's demuxer reports precisely but a plain byte-sniffing
  * MimeDetector wouldn't otherwise recognize, e.g. MP2Decoder (TinyMP2)
@@ -51,14 +60,12 @@ namespace audio_tools {
  * @code
  * player.addAudioDecoder(mp2Decoder, "audio/mpeg; codecs=\"mpeg1-layer2\"");
  * @endcode
- * addVideoDecoder() extends the video multi-decoder the same way, beyond
- * its three built-ins - e.g. a hardware-accelerated decoder like
- * H264DecoderESP32S3 (CodecH264ESP32S3.h) in place of/alongside the
- * portable H264Decoder. There is no way to replace either multi-decoder
- * wholesale (e.g. with a single-codec decoder) - add to what's already
- * registered instead. A video-only stream needs no audio decoder
- * registered at all - see setAudioOutput()/the class's video-only
- * constructor.
+ * addVideoDecoder() similarly covers a hardware-accelerated decoder like
+ * H264DecoderESP32S3 (CodecH264ESP32S3.h) in place of a portable one.
+ * There is no way to replace either multi-decoder wholesale (e.g. with a
+ * single-codec decoder) - add to what's already registered instead. A
+ * video-only stream needs no audio decoder registered at all - see
+ * setAudioOutput()/the class's video-only constructor.
  *
  * Pipeline: Stream (source) -> copy() (CodecCopy-equivalent) -> Demuxer
  *   (demux)
@@ -89,16 +96,10 @@ namespace audio_tools {
  * Operation model: call copy() regularly (non-blocking) in loop(), or
  * copyAll() for blocking end-to-end playback.
  *
- * Dependencies (install via Library Manager) - required to build this
- * header regardless of which video codec your content actually uses,
- * since the built-in MultiVideoDecoder pulls all three in unconditionally
- * (see its own class comment for the same tradeoff):
- * - https://github.com/pschatzmann/TinyH264
- * - https://github.com/pschatzmann/TinyMPG
- * - https://github.com/pschatzmann/TinyJPEG
- * Nothing audio-specific is required by this header itself - bring
- * whatever audio codec library your content needs (e.g. arduino-libhelix
- * for AAC/MP3/WAV) and register it via addAudioDecoder().
+ * Dependencies: none - this header itself doesn't pull in any codec
+ * library (see above). Bring whichever video/audio codec libraries your
+ * content actually needs and register them via addVideoDecoder()/
+ * addAudioDecoder(), or use VideoPlayerFull for all of them at once.
  *
  * @ingroup player
  * @ingroup video
@@ -153,10 +154,11 @@ class VideoPlayer {
   /// DemuxerMPG/...). Call before begin().
   void setDemuxer(Demuxer& demuxer) { p_demuxer = &demuxer; }
 
-  /// Registers an additional video codec with the built-in
-  /// MultiVideoDecoder, alongside its own pre-registered H264/MJPEG/
-  /// MPEG-1 - see MultiVideoDecoder::addDecoder() for `format`/`check`.
-  /// Call before begin().
+  /// Registers a video codec with the built-in (initially empty)
+  /// MultiVideoDecoder - see MultiVideoDecoder::addDecoder() for
+  /// `format`/`check`. Nothing is registered by default (see the class
+  /// comment), so this needs at least one call per codec your content's
+  /// video track actually uses. Call before begin().
   void addVideoDecoder(VideoDecoder& decoder, VideoFormat format,
                        bool (*check)(const uint8_t* data, size_t len)) {
     default_video_decoder.addDecoder(decoder, format, check);
@@ -358,8 +360,9 @@ class VideoPlayer {
 
   /// The Demuxer given to setDemuxer()/the constructor.
   Demuxer& demuxer() { return *p_demuxer; }
-  /// The built-in video multi-decoder - addVideoDecoder() registers
-  /// against this; also useful for diagnostics (e.g. selectedFormat()).
+  /// The built-in video multi-decoder (empty until addVideoDecoder() is
+  /// called - see the class comment) - also useful for diagnostics (e.g.
+  /// selectedFormat()).
   MultiVideoDecoder& videoDecoder() { return default_video_decoder; }
   /// The built-in audio multi-decoder (empty until addAudioDecoder() is
   /// called - see the class comment) - also useful for diagnostics (e.g.

@@ -2,8 +2,8 @@
  * @file decode-avi.ino
  * @brief Desktop counterpart of sd-avi-mjpg-video.ino/sd-avi-h264-video.ino:
  * plays a local .avi file's audio + video tracks, demuxed live with
- * DemuxerAVI. Video codec is auto-detected via MultiVideoDecoder (AVI can
- * carry either H.264 or Motion-JPEG - see its own class comment), fed
+ * DemuxerAVI. Video codec is auto-detected via MultiVideoDecoderFull (AVI
+ * can carry either H.264 or Motion-JPEG - see its own class comment), fed
  * DemuxerAVI's parsed VideoInfo::format directly via
  * videoDecoder.setVideoInfoSource(aviDemuxer), same pattern as
  * multiDecoder's audio auto-detection below. Display/audio are swapped for
@@ -44,9 +44,9 @@
  * Pipeline: File -> CodecCopy -> DemuxerAVI (demux)
  *   -> EncodedAudioStream (DecoderHelix: WAV/AAC/MP3) -> AudioTimeSourceStream
  *   (audio clock) -> PortAudioStream (audio)
- *   \-> VideoAudioSyncTask (buffer + schedule) -> MultiVideoDecoder (H.264
- *   or MJPEG, auto-detected -> RGB565) -> OutputOpenCV (draw) (video, own
- *   background task)
+ *   \-> VideoAudioSyncTask (buffer + schedule) -> MultiVideoDecoderFull
+ *   (H.264 or MJPEG, auto-detected -> RGB565) -> OutputOpenCV (draw)
+ *   (video, own background task)
  *
  * To build & run:
  * - mkdir build && cd build && cmake .. && make
@@ -59,7 +59,7 @@
 #include "AudioTools/AudioCodecs/ContainerAVI.h"
 #include "AudioTools/AudioCodecs/CodecHelix.h"
 #include "AudioTools/AudioLibs/PortAudioStream.h"
-#include "AudioTools/Video/MultiVideoDecoder.h"
+#include "AudioTools/Video/MultiVideoDecoderFull.h"
 #include "AudioTools/Video/OutputOpenCV.h"
 #include "AudioTools/Video/OutputTest.h"
 #include "SD.h"
@@ -68,7 +68,7 @@
 const char *file_path = "/media/pschatzmann/External/Videos/output176x144.avi";
 
 OutputOpenCV videoOut;  // default mode is MJPEG - decodes the JPEG itself
-MultiVideoDecoder videoDecoder;
+MultiVideoDecoderFull videoDecoder;
 // 3rd arg: scheduling delay compensating for PortAudioStream's own output
 // buffering below (buffer_size*buffer_count bytes) - see
 // VideoAudioSyncTask::setSchedulingDelayMs(); ~50ms is a rough match for

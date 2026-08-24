@@ -54,13 +54,26 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../../.. ${CMAKE_CURRENT_BINARY_DIR}/arduino-audio-tools )
 endif()
 
-# Build with libhelix - DecoderHelix (AudioTools/AudioCodecs/CodecHelix.h)
-# bundles AACDecoderHelix/MP3DecoderHelix/WAVDecoder for the AVI audio track
+# Build with libhelix - AACDecoderHelix/MP3DecoderHelix
+# (AudioTools/AudioCodecs/CodecAACHelix.h/CodecMP3Helix.h), registered
+# individually against decode-avi-player.ino/decode-avi-player-full.ino's
+# VideoPlayer/VideoPlayerFull (VideoPlayer's own audio multi-decoder has
+# no codecs pre-registered - see its class comment)
 FetchContent_Declare(helix GIT_REPOSITORY "https://github.com/pschatzmann/arduino-libhelix.git" GIT_TAG main )
 FetchContent_GetProperties(helix)
 if(NOT helix_POPULATED)
     FetchContent_Populate(helix)
     add_subdirectory(${helix_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/helix)
+endif()
+
+# Build with TinyMP2 - the MPEG-1 Layer II decoder MP2Decoder
+# (AudioTools/AudioCodecs/CodecMP2.h) wraps - only needed by
+# decode-avi-player-full.ino's VideoPlayerFull (see its own class comment)
+FetchContent_Declare(tinymp2 GIT_REPOSITORY "https://github.com/pschatzmann/TinyMP2.git" GIT_TAG main )
+FetchContent_GetProperties(tinymp2)
+if(NOT tinymp2_POPULATED)
+    FetchContent_Populate(tinymp2)
+    add_subdirectory(${tinymp2_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/tinymp2)
 endif()
 
 # OpenCV - display backend for OutputOpenCV
@@ -78,12 +91,21 @@ add_executable (decode-avi decode-avi.ino)
 set_source_files_properties(decode-avi-player.ino PROPERTIES LANGUAGE CXX)
 add_executable (decode-avi-player decode-avi-player.ino)
 
+# decode-avi-player-full: same as decode-avi-player, but via
+# AudioTools/Video/VideoPlayerFull.h (VideoPlayer subclass that
+# pre-registers MP3/AAC/MP2 itself) instead of registering the audio
+# codecs by hand.
+set_source_files_properties(decode-avi-player-full.ino PROPERTIES LANGUAGE CXX)
+add_executable (decode-avi-player-full decode-avi-player-full.ino)
+
 # set preprocessor defines
 target_compile_definitions(arduino_emulator PUBLIC -DDEFINE_MAIN)
 target_compile_definitions(decode-avi PUBLIC -DARDUINO -DUSE_PORTAUDIO -DIS_DESKTOP)
 target_compile_options(decode-avi PRIVATE -Wno-multichar)
 target_compile_definitions(decode-avi-player PUBLIC -DARDUINO -DUSE_PORTAUDIO -DIS_DESKTOP)
 target_compile_options(decode-avi-player PRIVATE -Wno-multichar)
+target_compile_definitions(decode-avi-player-full PUBLIC -DARDUINO -DUSE_PORTAUDIO -DIS_DESKTOP)
+target_compile_options(decode-avi-player-full PRIVATE -Wno-multichar)
 
 # set compile optioins
 target_compile_options(arduino-audio-tools INTERFACE -Wno-inconsistent-missing-override)
@@ -106,5 +128,16 @@ target_link_libraries(decode-avi-player PRIVATE
     TinyH264::TinyH264
     TinyMPG::TinyMPG
     TinyJPEG::TinyJPEG
+    portaudio
+    ${OpenCV_LIBS})
+
+target_link_libraries(decode-avi-player-full PRIVATE
+    arduino_emulator
+    arduino-audio-tools
+    arduino_helix
+    TinyH264::TinyH264
+    TinyMPG::TinyMPG
+    TinyJPEG::TinyJPEG
+    TinyMP2::TinyMP2
     portaudio
     ${OpenCV_LIBS})

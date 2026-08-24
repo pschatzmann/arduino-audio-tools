@@ -11,10 +11,14 @@
  * wall-clock default - see VideoPlayer's own class comment ("Audio
  * clock") for why that's opt-in rather than automatic.
  *
- * VideoPlayer's audio multi-decoder starts empty (no forced dependency on
- * any one audio codec library - see its own class comment), so the same
- * MP3/AAC/WAV trio DecoderHelix bundles by default are registered here
- * explicitly via addAudioDecoder().
+ * VideoPlayer's video AND audio multi-decoders both start empty (no
+ * forced dependency on any one codec library - see its own class
+ * comment), so the codecs this AVI file's tracks may use (H.264/MJPEG
+ * video, MP3/AAC/WAV audio - the same trio DecoderHelix bundles by
+ * default) are registered here explicitly via addVideoDecoder()/
+ * addAudioDecoder(). VideoPlayerFull (see decode-avi-player-full.ino)
+ * does this same registration internally, if you don't want to repeat it
+ * per sketch.
  *
  * To build & run:
  * - mkdir build && cd build && cmake .. && make
@@ -29,6 +33,8 @@
 #include "AudioTools/AudioCodecs/CodecWAV.h"
 #include "AudioTools/AudioCodecs/ContainerAVI.h"
 #include "AudioTools/AudioLibs/PortAudioStream.h"
+#include "AudioTools/Video/CodecH264.h"
+#include "AudioTools/Video/CodecJPEG.h"
 #include "AudioTools/Video/OutputOpenCV.h"
 #include "AudioTools/Video/VideoPlayer.h"
 #include "SD.h"
@@ -40,6 +46,8 @@ OutputOpenCV videoOut;  // default mode is MJPEG - decodes the JPEG itself
 PortAudioStream out;
 DemuxerAVI aviDemuxer;
 VideoPlayer player(aviDemuxer, videoOut, out);
+H264Decoder h264Decoder;
+MJPEGDecoder mjpegDecoder;
 MP3DecoderHelix mp3Decoder;
 AACDecoderHelix aacDecoder;
 WAVDecoder wavDecoder;
@@ -68,9 +76,10 @@ void setup() {
   videoOut.setVideoFormat(VideoFormat::RGB565);
   videoOut.setVideoInfoSource(aviDemuxer);
 
-  // Register the audio codecs this AVI file's track may use (see the
-  // comment at the top of this file - VideoPlayer's audio multi-decoder
-  // starts empty).
+  // Register the codecs this AVI file's tracks may use (see the comment
+  // at the top of this file - VideoPlayer's multi-decoders start empty).
+  player.addVideoDecoder(h264Decoder, VideoFormat::H264, isH264Video);
+  player.addVideoDecoder(mjpegDecoder, VideoFormat::MJPEG, isMjpegVideo);
   player.addAudioDecoder(mp3Decoder, "audio/mpeg");
   player.addAudioDecoder(aacDecoder, "audio/aac");
   player.addAudioDecoder(wavDecoder, "audio/vnd.wave");
