@@ -101,7 +101,7 @@ class USBAudioDeviceESP32 : public USBAudioDeviceBase {
     static uint8_t desc[USB_DESCR_MAX_LEN];
     uint16_t audio_len = getDescriptor(desc);
     assert(audio_len <= USB_DESCR_MAX_LEN);
-    tinyusb_enable_interface(USB_INTERFACE_AUDIO, audio_len,
+    tinyusb_enable_interface(USB_INTERFACE_MIDI, audio_len,
                              descriptorCallback);
     return true;
   }
