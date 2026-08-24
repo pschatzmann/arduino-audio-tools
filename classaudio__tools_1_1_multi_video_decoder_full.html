@@ -82,7 +82,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html" title="Manages multiple VideoDecoders with automatic format detection - the video-side counterpart of MultiD...">MultiVideoDecoder</a> pre-registered with every video codec this library ships a portable (no hardware-specific backend) software decoder for: <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html" title="Motion-JPEG video decoder: wraps TinyJPEGDecoder (https://github.com/pschatzmann/TinyJPEG,...">MJPEGDecoder</a> (Motion-JPEG, TinyJPEG, <a class="el" href="_codec_j_p_e_g_8h.html">CodecJPEG.h</a>), <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html" title="MPEG-1 (part 2) video decoder wrapper around TinyMPGDecoder.">MPGDecoder</a> (MPEG-1, TinyMPG, <a class="el" href="_codec_m_p_g_8h.html">CodecMPG.h</a>), <a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a> (H.264 Annex-B, TinyH264, <a class="el" href="_codec_h264_8h.html">CodecH264.h</a>) - drop it into a demuxer's setOutputVideo() the same way any single decoder would go, and it self-selects the right one from the bitstream's own framing instead of the caller having to know the codec up front. Use the plain <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html" title="Manages multiple VideoDecoders with automatic format detection - the video-side counterpart of MultiD...">MultiVideoDecoder</a> (<a class="el" href="_multi_video_decoder_8h.html">MultiVideoDecoder.h</a>) instead if you don't want all three codec libraries pulled in unconditionally - register only what your content actually needs via its own <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a3aa86325c88f51b41f55c77335059fab">addDecoder()</a>.  
+<p><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html" title="Manages multiple VideoDecoders with automatic format detection - the video-side counterpart of MultiD...">MultiVideoDecoder</a> pre-registered with every video codec this library ships a portable (no hardware-specific backend) software decoder for: <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html" title="Motion-JPEG video decoder: wraps TinyJPEGDecoder (https://github.com/pschatzmann/TinyJPEG,...">MJPEGDecoder</a> (Motion-JPEG, TinyJPEG, <a class="el" href="_codec_j_p_e_g_8h.html">CodecJPEG.h</a>), <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html" title="MPEG-1 (part 2) video decoder wrapper around TinyMPGDecoder.">MPGDecoder</a> (MPEG-1, TinyMPG, <a class="el" href="_codec_m_p_g_8h.html">CodecMPG.h</a>), <a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a> (H.264 Annex-B, TinyH264, <a class="el" href="_codec_h264_8h.html">CodecH264.h</a>) - drop it into a demuxer's setOutputVideo() the same way any single decoder would go, and it self-selects the right one from the bitstream's own framing instead of the caller having to know the codec up front. Use the plain <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html" title="Manages multiple VideoDecoders with automatic format detection - the video-side counterpart of MultiD...">MultiVideoDecoder</a> (<a class="el" href="_multi_video_decoder_8h.html">MultiVideoDecoder.h</a>) instead if you don't want all three codec libraries pulled in unconditionally - register only what your content actually needs via its own <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a85c86ffbf77746b476aa27f4bec3b685">addDecoder()</a>.  
  <a href="classaudio__tools_1_1_multi_video_decoder_full.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_multi_video_decoder_full_8h_source.html">MultiVideoDecoderFull.h</a>&gt;</code></p>
@@ -103,10 +103,12 @@ Inheritance diagram for MultiVideoDecoderFull:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a38cec71f16552e04a8cdc97566a46ac7" id="r_a38cec71f16552e04a8cdc97566a46ac7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_video_decoder_full.html#a38cec71f16552e04a8cdc97566a46ac7">MultiVideoDecoderFull</a> ()</td></tr>
 <tr class="separator:a38cec71f16552e04a8cdc97566a46ac7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3aa86325c88f51b41f55c77335059fab" id="r_a3aa86325c88f51b41f55c77335059fab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a3aa86325c88f51b41f55c77335059fab">addDecoder</a> (<a class="el" href="classaudio__tools_1_1_video_decoder.html">VideoDecoder</a> &amp;decoder, <a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a> format)</td></tr>
-<tr class="separator:a3aa86325c88f51b41f55c77335059fab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85c86ffbf77746b476aa27f4bec3b685" id="r_a85c86ffbf77746b476aa27f4bec3b685"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a85c86ffbf77746b476aa27f4bec3b685">addDecoder</a> (<a class="el" href="classaudio__tools_1_1_video_decoder.html">VideoDecoder</a> &amp;decoder)</td></tr>
+<tr class="separator:a85c86ffbf77746b476aa27f4bec3b685"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acba365cc28eb702040c382646cfb0a7a" id="r_acba365cc28eb702040c382646cfb0a7a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#acba365cc28eb702040c382646cfb0a7a">begin</a> () override</td></tr>
 <tr class="separator:acba365cc28eb702040c382646cfb0a7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f252060baaa59354fa1677c8fef34d8" id="r_a7f252060baaa59354fa1677c8fef34d8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a7f252060baaa59354fa1677c8fef34d8">codecFormat</a> () override</td></tr>
+<tr class="separator:a7f252060baaa59354fa1677c8fef34d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64e9fa75beda50a9e8400ee0d4e61984" id="r_a64e9fa75beda50a9e8400ee0d4e61984"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a> () override</td></tr>
 <tr class="memdesc:a64e9fa75beda50a9e8400ee0d4e61984"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases the decoder's resources.  <br /></td></tr>
 <tr class="separator:a64e9fa75beda50a9e8400ee0d4e61984"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -164,7 +166,7 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:abebc17bb47a45eb84b0afed6eb87ac60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html" title="Manages multiple VideoDecoders with automatic format detection - the video-side counterpart of MultiD...">MultiVideoDecoder</a> pre-registered with every video codec this library ships a portable (no hardware-specific backend) software decoder for: <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html" title="Motion-JPEG video decoder: wraps TinyJPEGDecoder (https://github.com/pschatzmann/TinyJPEG,...">MJPEGDecoder</a> (Motion-JPEG, TinyJPEG, <a class="el" href="_codec_j_p_e_g_8h.html">CodecJPEG.h</a>), <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html" title="MPEG-1 (part 2) video decoder wrapper around TinyMPGDecoder.">MPGDecoder</a> (MPEG-1, TinyMPG, <a class="el" href="_codec_m_p_g_8h.html">CodecMPG.h</a>), <a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a> (H.264 Annex-B, TinyH264, <a class="el" href="_codec_h264_8h.html">CodecH264.h</a>) - drop it into a demuxer's setOutputVideo() the same way any single decoder would go, and it self-selects the right one from the bitstream's own framing instead of the caller having to know the codec up front. Use the plain <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html" title="Manages multiple VideoDecoders with automatic format detection - the video-side counterpart of MultiD...">MultiVideoDecoder</a> (<a class="el" href="_multi_video_decoder_8h.html">MultiVideoDecoder.h</a>) instead if you don't want all three codec libraries pulled in unconditionally - register only what your content actually needs via its own <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a3aa86325c88f51b41f55c77335059fab">addDecoder()</a>. </p>
+<div class="textblock"><p><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html" title="Manages multiple VideoDecoders with automatic format detection - the video-side counterpart of MultiD...">MultiVideoDecoder</a> pre-registered with every video codec this library ships a portable (no hardware-specific backend) software decoder for: <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html" title="Motion-JPEG video decoder: wraps TinyJPEGDecoder (https://github.com/pschatzmann/TinyJPEG,...">MJPEGDecoder</a> (Motion-JPEG, TinyJPEG, <a class="el" href="_codec_j_p_e_g_8h.html">CodecJPEG.h</a>), <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html" title="MPEG-1 (part 2) video decoder wrapper around TinyMPGDecoder.">MPGDecoder</a> (MPEG-1, TinyMPG, <a class="el" href="_codec_m_p_g_8h.html">CodecMPG.h</a>), <a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a> (H.264 Annex-B, TinyH264, <a class="el" href="_codec_h264_8h.html">CodecH264.h</a>) - drop it into a demuxer's setOutputVideo() the same way any single decoder would go, and it self-selects the right one from the bitstream's own framing instead of the caller having to know the codec up front. Use the plain <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html" title="Manages multiple VideoDecoders with automatic format detection - the video-side counterpart of MultiD...">MultiVideoDecoder</a> (<a class="el" href="_multi_video_decoder_8h.html">MultiVideoDecoder.h</a>) instead if you don't want all three codec libraries pulled in unconditionally - register only what your content actually needs via its own <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a85c86ffbf77746b476aa27f4bec3b685">addDecoder()</a>. </p>
 <p>Dependencies (install via Library Manager) - all three are required to build this header, regardless of which formats your content actually uses:</p><ul>
 <li><a href="https://github.com/pschatzmann/TinyH264">https://github.com/pschatzmann/TinyH264</a></li>
 <li><a href="https://github.com/pschatzmann/TinyMPG">https://github.com/pschatzmann/TinyMPG</a></li>
@@ -199,8 +201,8 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a3aa86325c88f51b41f55c77335059fab" name="a3aa86325c88f51b41f55c77335059fab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3aa86325c88f51b41f55c77335059fab">&#9670;&#160;</a></span>addDecoder()</h2>
+<a id="a85c86ffbf77746b476aa27f4bec3b685" name="a85c86ffbf77746b476aa27f4bec3b685"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85c86ffbf77746b476aa27f4bec3b685">&#9670;&#160;</a></span>addDecoder()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -212,18 +214,8 @@ Protected Attributes</h2></td></tr>
           <td class="memname">void addDecoder </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classaudio__tools_1_1_video_decoder.html">VideoDecoder</a> &amp;&#160;</td>
-          <td class="paramname"><em>decoder</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>decoder</em></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a>&#160;</td>
-          <td class="paramname"><em>format</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -232,8 +224,8 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Registers a decoder for <code>format</code> - see the class comment for when/ how it's later selected (<a class="el" href="classaudio__tools_1_1_video_info_source.html">VideoInfoSource</a> match, or its own <a class="el" href="classaudio__tools_1_1_video_decoder.html#a1d917cf8a29af24e8beaa22306cfffe2">VideoDecoder::isValid()</a> as a content-sniffing fallback). Call before the first <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> reaches this object.</p>
-<p>Replaces, rather than adds to, any decoder already registered for <code>format</code> - at most one entry per format, so e.g. registering <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html" title="H.264 video decoder for ESP32-S3: wraps esp_h264::H264Decoder (https://github.com/pschatzmann/ESP32S3...">H264DecoderESP32S3</a> for <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a8ba63b54352f7053b055235a9ec7ac09">VideoFormat::H264</a> actually overrides a previously-registered <a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a> instead of silently losing to it: both <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>'s VideoInfoSource-format lookup and its <a class="el" href="classaudio__tools_1_1_video_decoder.html#a1d917cf8a29af24e8beaa22306cfffe2">isValid()</a> fallback loop match the first entry found for a format, so a stale second entry would otherwise be permanently unreachable dead weight, never actually selected. </p>
+<p>Registers a decoder under its own <a class="el" href="classaudio__tools_1_1_video_decoder.html#a026a65495e56c1a8844bd8dabe5301b7">VideoDecoder::codecFormat()</a> - see the class comment for when/how it's later selected (<a class="el" href="classaudio__tools_1_1_video_info_source.html">VideoInfoSource</a> match, or its own <a class="el" href="classaudio__tools_1_1_video_decoder.html#a1d917cf8a29af24e8beaa22306cfffe2">VideoDecoder::isValid()</a> as a content-sniffing fallback). Call before the first <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> reaches this object.</p>
+<p>Replaces, rather than adds to, any decoder already registered for that format - at most one entry per format, so e.g. registering <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html" title="H.264 video decoder for ESP32-S3: wraps esp_h264::H264Decoder (https://github.com/pschatzmann/ESP32S3...">H264DecoderESP32S3</a> (<a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a7f252060baaa59354fa1677c8fef34d8">codecFormat()</a> == H264) actually overrides a previously-registered <a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a> instead of silently losing to it: both <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>'s VideoInfoSource-format lookup and its <a class="el" href="classaudio__tools_1_1_video_decoder.html#a1d917cf8a29af24e8beaa22306cfffe2">isValid()</a> fallback loop match the first entry found for a format, so a stale second entry would otherwise be permanently unreachable dead weight, never actually selected. </p>
 
 </div>
 </div>
@@ -264,6 +256,34 @@ Protected Attributes</h2></td></tr>
 </ul>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_video_decoder.html#ae8a0d9ca63f8bb3de100e347c3f3bca4">VideoDecoder</a>.</p>
+
+</div>
+</div>
+<a id="a7f252060baaa59354fa1677c8fef34d8" name="a7f252060baaa59354fa1677c8fef34d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f252060baaa59354fa1677c8fef34d8">&#9670;&#160;</a></span>codecFormat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a> codecFormat </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The codec of the currently selected decoder - <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a696b031073e74bf2cb98e5ef201d4aa3">VideoFormat::UNKNOWN</a> before the first <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>/if none matched. Same value as <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a529b58cb0a20b285552ee3fe692bf507">selectedFormat()</a>, just satisfying <a class="el" href="classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 - CodecH264....">VideoDecoder</a>'s own interface (e.g. so a <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html" title="Manages multiple VideoDecoders with automatic format detection - the video-side counterpart of MultiD...">MultiVideoDecoder</a> can itself be registered under another <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html" title="Manages multiple VideoDecoders with automatic format detection - the video-side counterpart of MultiD...">MultiVideoDecoder</a>'s <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a85c86ffbf77746b476aa27f4bec3b685">addDecoder()</a>). </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_video_decoder.html#a026a65495e56c1a8844bd8dabe5301b7">VideoDecoder</a>.</p>
 
 </div>
 </div>

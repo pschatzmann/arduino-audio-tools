@@ -110,8 +110,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a013986255c36ae17127f2cd55a65b108"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaebffd5021d232c04301a199cedba261" id="r_aaebffd5021d232c04301a199cedba261"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#aaebffd5021d232c04301a199cedba261">addAudioDecoder</a> (<a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> &amp;decoder, const char *mime=nullptr)</td></tr>
 <tr class="separator:aaebffd5021d232c04301a199cedba261"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af6ffa274fe817475e7543e3718224017" id="r_af6ffa274fe817475e7543e3718224017"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#af6ffa274fe817475e7543e3718224017">addVideoDecoder</a> (<a class="el" href="classaudio__tools_1_1_video_decoder.html">VideoDecoder</a> &amp;decoder, <a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a> format)</td></tr>
-<tr class="separator:af6ffa274fe817475e7543e3718224017"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99f508f351c0e18a748c74c9373bacdc" id="r_a99f508f351c0e18a748c74c9373bacdc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#a99f508f351c0e18a748c74c9373bacdc">addVideoDecoder</a> (<a class="el" href="classaudio__tools_1_1_video_decoder.html">VideoDecoder</a> &amp;decoder)</td></tr>
+<tr class="separator:a99f508f351c0e18a748c74c9373bacdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8fadece467c8260a5bbe1b68b4a7bd1" id="r_ae8fadece467c8260a5bbe1b68b4a7bd1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_multi_decoder.html">MultiDecoder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#ae8fadece467c8260a5bbe1b68b4a7bd1">audioDecoder</a> ()</td></tr>
 <tr class="separator:ae8fadece467c8260a5bbe1b68b4a7bd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af3226abe4456a403c63c393293b69933" id="r_af3226abe4456a403c63c393293b69933"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#af3226abe4456a403c63c393293b69933">begin</a> (<a class="el" href="class_stream.html">Stream</a> &amp;source)</td></tr>
@@ -457,8 +457,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="af6ffa274fe817475e7543e3718224017" name="af6ffa274fe817475e7543e3718224017"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af6ffa274fe817475e7543e3718224017">&#9670;&#160;</a></span>addVideoDecoder()</h2>
+<a id="a99f508f351c0e18a748c74c9373bacdc" name="a99f508f351c0e18a748c74c9373bacdc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99f508f351c0e18a748c74c9373bacdc">&#9670;&#160;</a></span>addVideoDecoder()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -470,18 +470,8 @@ Protected Attributes</h2></td></tr>
           <td class="memname">void addVideoDecoder </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classaudio__tools_1_1_video_decoder.html">VideoDecoder</a> &amp;&#160;</td>
-          <td class="paramname"><em>decoder</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>decoder</em></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a>&#160;</td>
-          <td class="paramname"><em>format</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -490,7 +480,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Registers a video codec with the built-in (initially empty) <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html" title="Manages multiple VideoDecoders with automatic format detection - the video-side counterpart of MultiD...">MultiVideoDecoder</a> - see <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a3aa86325c88f51b41f55c77335059fab">MultiVideoDecoder::addDecoder()</a>. Nothing is registered by default (see the class comment), so this needs at least one call per codec your content's video track actually uses. Call before <a class="el" href="classaudio__tools_1_1_video_player.html#af3226abe4456a403c63c393293b69933">begin()</a>. </p>
+<p>Registers a video codec with the built-in (initially empty) <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html" title="Manages multiple VideoDecoders with automatic format detection - the video-side counterpart of MultiD...">MultiVideoDecoder</a>, under its own <a class="el" href="classaudio__tools_1_1_video_decoder.html#a026a65495e56c1a8844bd8dabe5301b7">VideoDecoder::codecFormat()</a> - see <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a85c86ffbf77746b476aa27f4bec3b685">MultiVideoDecoder::addDecoder()</a>. Nothing is registered by default (see the class comment), so this needs at least one call per codec your content's video track actually uses. Call before <a class="el" href="classaudio__tools_1_1_video_player.html#af3226abe4456a403c63c393293b69933">begin()</a>. </p>
 
 </div>
 </div>
@@ -1044,7 +1034,7 @@ AudioOutput&amp;)/setStream(<a class="el" href="classaudio__tools_1_1_audio_stre
   </tr>
 </table>
 </div><div class="memdoc">
-<p>The built-in video multi-decoder (empty until <a class="el" href="classaudio__tools_1_1_video_player.html#af6ffa274fe817475e7543e3718224017">addVideoDecoder()</a> is called - see the class comment) - also useful for diagnostics (e.g. selectedFormat()). </p>
+<p>The built-in video multi-decoder (empty until <a class="el" href="classaudio__tools_1_1_video_player.html#a99f508f351c0e18a748c74c9373bacdc">addVideoDecoder()</a> is called - see the class comment) - also useful for diagnostics (e.g. selectedFormat()). </p>
 
 </div>
 </div>

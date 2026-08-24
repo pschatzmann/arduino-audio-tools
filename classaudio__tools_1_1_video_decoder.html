@@ -107,6 +107,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae8a0d9ca63f8bb3de100e347c3f3bca4" id="r_ae8a0d9ca63f8bb3de100e347c3f3bca4"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_decoder.html#ae8a0d9ca63f8bb3de100e347c3f3bca4">begin</a> ()=0</td></tr>
 <tr class="memdesc:ae8a0d9ca63f8bb3de100e347c3f3bca4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the decoder (allocates its picture buffers, etc).  <br /></td></tr>
 <tr class="separator:ae8a0d9ca63f8bb3de100e347c3f3bca4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a026a65495e56c1a8844bd8dabe5301b7" id="r_a026a65495e56c1a8844bd8dabe5301b7"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_decoder.html#a026a65495e56c1a8844bd8dabe5301b7">codecFormat</a> ()=0</td></tr>
+<tr class="separator:a026a65495e56c1a8844bd8dabe5301b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa540e86022c1f72380d1014d98f38f43" id="r_aa540e86022c1f72380d1014d98f38f43"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_decoder.html#aa540e86022c1f72380d1014d98f38f43">end</a> ()=0</td></tr>
 <tr class="memdesc:aa540e86022c1f72380d1014d98f38f43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases the decoder's resources.  <br /></td></tr>
 <tr class="separator:aa540e86022c1f72380d1014d98f38f43"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -192,6 +194,34 @@ Public Member Functions</h2></td></tr>
 <p>Initializes the decoder (allocates its picture buffers, etc). </p>
 
 <p>Implemented in <a class="el" href="classaudio__tools_1_1_h264_decoder.html#acba365cc28eb702040c382646cfb0a7a">H264Decoder</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#acba365cc28eb702040c382646cfb0a7a">H264DecoderESP32S3&lt; Alloc &gt;</a>, <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#acba365cc28eb702040c382646cfb0a7a">MJPEGDecoder</a>, <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#acba365cc28eb702040c382646cfb0a7a">MPGDecoder</a>, and <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#acba365cc28eb702040c382646cfb0a7a">MultiVideoDecoder</a>.</p>
+
+</div>
+</div>
+<a id="a026a65495e56c1a8844bd8dabe5301b7" name="a026a65495e56c1a8844bd8dabe5301b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a026a65495e56c1a8844bd8dabe5301b7">&#9670;&#160;</a></span>codecFormat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a> codecFormat </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The compressed bitstream codec this decoder consumes (e.g. <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a8ba63b54352f7053b055235a9ec7ac09">VideoFormat::H264</a>, <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a0a5417ce14732e9bdb402be642ebe9ea">VideoFormat::MJPEG</a>) - NOT the same axis as <a class="el" href="classaudio__tools_1_1_video_decoder.html#af3e841cd4cb4b9dd800d7c3be096fa16">setVideoFormat()</a>/videoInfo().format below, which is the decoded <em>pixel</em> format this decoder produces. Used by <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a85c86ffbf77746b476aa27f4bec3b685">MultiVideoDecoder::addDecoder()</a> to register a decoder under its own codec instead of the caller having to pass it separately (and possibly get it wrong). </p>
+
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7f252060baaa59354fa1677c8fef34d8">H264Decoder</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a7f252060baaa59354fa1677c8fef34d8">H264DecoderESP32S3&lt; Alloc &gt;</a>, <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#a7f252060baaa59354fa1677c8fef34d8">MJPEGDecoder</a>, <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a7f252060baaa59354fa1677c8fef34d8">MPGDecoder</a>, and <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a7f252060baaa59354fa1677c8fef34d8">MultiVideoDecoder</a>.</p>
 
 </div>
 </div>

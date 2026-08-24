@@ -112,6 +112,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:acba365cc28eb702040c382646cfb0a7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a156876f86ebc69de4ae0b4bbff826231" id="r_a156876f86ebc69de4ae0b4bbff826231"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a156876f86ebc69de4ae0b4bbff826231">byteSwap</a> () const</td></tr>
 <tr class="separator:a156876f86ebc69de4ae0b4bbff826231"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f252060baaa59354fa1677c8fef34d8" id="r_a7f252060baaa59354fa1677c8fef34d8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a7f252060baaa59354fa1677c8fef34d8">codecFormat</a> () override</td></tr>
+<tr class="separator:a7f252060baaa59354fa1677c8fef34d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd79939cbb47412a2321dc1a2d2d86d9" id="r_abd79939cbb47412a2321dc1a2d2d86d9"><td class="memItemLeft" align="right" valign="top">tinympg::TinyMPGDecoder&lt; tinympg::PSRAMAllocatorESP32&lt; uint8_t &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#abd79939cbb47412a2321dc1a2d2d86d9">driver</a> ()</td></tr>
 <tr class="separator:abd79939cbb47412a2321dc1a2d2d86d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64e9fa75beda50a9e8400ee0d4e61984" id="r_a64e9fa75beda50a9e8400ee0d4e61984"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a> () override</td></tr>
@@ -312,6 +314,34 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7f252060baaa59354fa1677c8fef34d8" name="a7f252060baaa59354fa1677c8fef34d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f252060baaa59354fa1677c8fef34d8">&#9670;&#160;</a></span>codecFormat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a> codecFormat </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The compressed bitstream codec this decoder consumes (e.g. <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a8ba63b54352f7053b055235a9ec7ac09">VideoFormat::H264</a>, <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a0a5417ce14732e9bdb402be642ebe9ea">VideoFormat::MJPEG</a>) - NOT the same axis as <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#ab4305de559192cc500fbd0587b2748ea">setVideoFormat()</a>/videoInfo().format below, which is the decoded <em>pixel</em> format this decoder produces. Used by <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a85c86ffbf77746b476aa27f4bec3b685">MultiVideoDecoder::addDecoder()</a> to register a decoder under its own codec instead of the caller having to pass it separately (and possibly get it wrong). </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_video_decoder.html#a026a65495e56c1a8844bd8dabe5301b7">VideoDecoder</a>.</p>
 
 </div>
 </div>

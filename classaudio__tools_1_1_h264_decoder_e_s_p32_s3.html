@@ -108,6 +108,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:acba365cc28eb702040c382646cfb0a7a" id="r_acba365cc28eb702040c382646cfb0a7a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#acba365cc28eb702040c382646cfb0a7a">begin</a> () override</td></tr>
 <tr class="memdesc:acba365cc28eb702040c382646cfb0a7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the decoder - see esp_h264::H264Decoder::begin().  <br /></td></tr>
 <tr class="separator:acba365cc28eb702040c382646cfb0a7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f252060baaa59354fa1677c8fef34d8" id="r_a7f252060baaa59354fa1677c8fef34d8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a7f252060baaa59354fa1677c8fef34d8">codecFormat</a> () override</td></tr>
+<tr class="separator:a7f252060baaa59354fa1677c8fef34d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a234b08aae9be1b346de8b26060f9b1f8" id="r_a234b08aae9be1b346de8b26060f9b1f8"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a234b08aae9be1b346de8b26060f9b1f8">decodeErrors</a> () const</td></tr>
 <tr class="memdesc:a234b08aae9be1b346de8b26060f9b1f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of decode errors since <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#acba365cc28eb702040c382646cfb0a7a" title="Initializes the decoder - see esp_h264::H264Decoder::begin().">begin()</a>.  <br /></td></tr>
 <tr class="separator:a234b08aae9be1b346de8b26060f9b1f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -281,6 +283,36 @@ template&lt;typename Alloc  = H264_DEFAULT_ALLOCATOR&gt; </div>
 <p>Initializes the decoder - see esp_h264::H264Decoder::begin(). </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_video_decoder.html#ae8a0d9ca63f8bb3de100e347c3f3bca4">VideoDecoder</a>.</p>
+
+</div>
+</div>
+<a id="a7f252060baaa59354fa1677c8fef34d8" name="a7f252060baaa59354fa1677c8fef34d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f252060baaa59354fa1677c8fef34d8">&#9670;&#160;</a></span>codecFormat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Alloc  = H264_DEFAULT_ALLOCATOR&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a> codecFormat </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The compressed bitstream codec this decoder consumes (e.g. <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a8ba63b54352f7053b055235a9ec7ac09">VideoFormat::H264</a>, <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a0a5417ce14732e9bdb402be642ebe9ea">VideoFormat::MJPEG</a>) - NOT the same axis as <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#ab4305de559192cc500fbd0587b2748ea">setVideoFormat()</a>/videoInfo().format below, which is the decoded <em>pixel</em> format this decoder produces. Used by <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a85c86ffbf77746b476aa27f4bec3b685">MultiVideoDecoder::addDecoder()</a> to register a decoder under its own codec instead of the caller having to pass it separately (and possibly get it wrong). </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_video_decoder.html#a026a65495e56c1a8844bd8dabe5301b7">VideoDecoder</a>.</p>
 
 </div>
 </div>
