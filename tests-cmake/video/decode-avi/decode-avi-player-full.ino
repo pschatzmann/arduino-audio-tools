@@ -2,8 +2,10 @@
  * @file decode-avi-player-full.ino
  * @brief Same pipeline/test file as decode-avi-player.ino, but via
  * AudioTools/Video/VideoPlayerFull.h (a VideoPlayer subclass that
- * pre-registers MP3DecoderHelix/AACDecoderHelix/MP2Decoder itself - see
- * its own class comment) instead of registering the audio codecs by hand.
+ * pre-registers DemuxerAVI/DemuxerMP4/DemuxerMPG, H264Decoder/
+ * MJPEGDecoder/MPGDecoder, and MP3DecoderHelix/AACDecoderHelix/MP2Decoder
+ * itself - see its own class comment) instead of registering the
+ * demuxer/codecs by hand.
  *
  * To build & run:
  * - mkdir build && cd build && cmake .. && make
@@ -13,7 +15,6 @@
  * @copyright GPLv3
  */
 #include "AudioTools.h"
-#include "AudioTools/AudioCodecs/ContainerAVI.h"
 #include "AudioTools/AudioLibs/PortAudioStream.h"
 #include "AudioTools/Video/OutputOpenCV.h"
 #include "AudioTools/Video/VideoPlayerFull.h"
@@ -24,8 +25,7 @@ const char *file_path = "/media/pschatzmann/External/Videos/output176x144.avi";
 
 OutputOpenCV videoOut;  // default mode is MJPEG - decodes the JPEG itself
 PortAudioStream out;
-DemuxerAVI aviDemuxer;
-VideoPlayerFull player(aviDemuxer, videoOut, out);
+VideoPlayerFull player(videoOut, out);
 File file;
 
 void setup() {
@@ -49,7 +49,7 @@ void setup() {
   // MJPEG mode (which just accumulates bytes waiting for flush(), never
   // called here), so without this it silently never displays anything.
   videoOut.setVideoFormat(VideoFormat::RGB565);
-  videoOut.setVideoInfoSource(aviDemuxer);
+  videoOut.setVideoInfoSource(player.demuxer());
 
   // This file has a real audio track - schedule video against it instead
   // of wall-clock time (see VideoPlayer's class comment's "Audio clock"

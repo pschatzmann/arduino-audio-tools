@@ -16,9 +16,10 @@
  * comment), so the codecs this AVI file's tracks may use (H.264/MJPEG
  * video, MP3/AAC/WAV audio - the same trio DecoderHelix bundles by
  * default) are registered here explicitly via addVideoDecoder()/
- * addAudioDecoder(). VideoPlayerFull (see decode-avi-player-full.ino)
- * does this same registration internally, if you don't want to repeat it
- * per sketch.
+ * addAudioDecoder() (aviDemuxer itself is registered via the
+ * constructor - see VideoPlayer's own class comment). VideoPlayerFull
+ * (see decode-avi-player-full.ino) does this same registration
+ * internally, if you don't want to repeat it per sketch.
  *
  * To build & run:
  * - mkdir build && cd build && cmake .. && make
@@ -77,7 +78,8 @@ void setup() {
   videoOut.setVideoInfoSource(aviDemuxer);
 
   // Register the codecs this AVI file's tracks may use (see the comment
-  // at the top of this file - VideoPlayer's multi-decoders start empty).
+  // at the top of this file - VideoPlayer's multi-decoders start empty;
+  // aviDemuxer above was already registered via the constructor).
   player.addVideoDecoder(h264Decoder);
   player.addVideoDecoder(mjpegDecoder);
   player.addAudioDecoder(mp3Decoder, "audio/mpeg");

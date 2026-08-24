@@ -13,9 +13,10 @@ namespace audio_tools {
  * AudioCodecs/ContainerAVI.h), DemuxerMP4 (ISO base media/MP4,
  * AudioCodecs/ContainerMP4.h), DemuxerMPG (MPEG Program Stream,
  * AudioCodecs/ContainerMPG.h) - drop it in wherever a plain Demuxer& is
- * expected (e.g. VideoPlayer::setDemuxer()) and it self-selects the right
- * one from the stream's own container signature instead of the caller
- * having to know the file format up front. Use the plain MultiVideoDemuxer
+ * expected (VideoPlayer in fact uses one internally as its own built-in
+ * demuxer) and it self-selects the right one from the stream's own
+ * container signature instead of the caller having to know the file
+ * format up front. Use the plain MultiVideoDemuxer
  * (MultiVideoDemuxer.h) instead if you don't want all three container
  * parsers pulled in unconditionally - register only what your content
  * actually needs via its own addDemuxer().

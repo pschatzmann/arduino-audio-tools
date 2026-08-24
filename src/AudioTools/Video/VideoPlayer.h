@@ -6,6 +6,7 @@
 #include "AudioTools/AudioCodecs/MultiDecoder.h"
 #include "AudioTools/CoreAudio/AudioIO.h"
 #include "AudioTools/Video/MultiVideoDecoder.h"
+#include "AudioTools/Video/MultiVideoDemuxer.h"
 #include "AudioTools/Video/Video.h"
 
 namespace audio_tools {
@@ -18,13 +19,15 @@ namespace audio_tools {
  * audio decode chain synced against it) behind one object driven by a
  * single copy() call per loop() iteration.
  *
- * Decodes video through a built-in MultiVideoDecoder and audio through a
- * built-in MultiDecoder - both start with NO codecs registered (see each
- * one's own class comment) and neither pulls in any codec library on its
- * own, so including this header alone adds no external dependency at all.
- * Register whatever your content actually needs via addVideoDecoder()/
- * addAudioDecoder(), exactly as MultiVideoDecoderFull's/DecoderHelix's own
- * constructors do internally:
+ * Demuxes the container through a built-in MultiVideoDemuxer, decodes
+ * video through a built-in MultiVideoDecoder, and decodes audio through a
+ * built-in MultiDecoder - all three start with NOTHING registered (see
+ * each one's own class comment) and none of them pulls in any
+ * container/codec library on its own, so including this header alone
+ * adds no external dependency at all. Register whatever your content
+ * actually needs via addDemuxer()/addVideoDecoder()/addAudioDecoder(),
+ * exactly as MultiVideoDemuxerFull's/MultiVideoDecoderFull's/
+ * DecoderHelix's own constructors do internally:
  * @code
  * DemuxerAVI aviDemuxer;
  * VideoPlayer player(aviDemuxer, tftOutput, audioOut);
@@ -44,16 +47,20 @@ namespace audio_tools {
  *   if (player.copy() == 0) { file.close(); ... }
  * }
  * @endcode
- * matching sd-avi-mjpg-video.ino/decode-avi.ino's own pipeline. Use
- * VideoPlayerFull (VideoPlayerFull.h) instead for the "just point it at a
- * file, any common codec just works" convenience with no registration
- * code of your own needed - it pre-registers every video codec
- * (H264/MJPEG/MPEG-1) and the most common audio ones (MP3/AAC/MP2), at
- * the cost of pulling in every one of their codec libraries
+ * matching sd-avi-mjpg-video.ino/decode-avi.ino's own pipeline - `demuxer`
+ * is just a convenience for this common single-format case (it's
+ * registered exactly the way an addDemuxer() call would be); call
+ * addDemuxer() separately, as many times as needed, for additional
+ * container formats. Use VideoPlayerFull (VideoPlayerFull.h)
+ * instead for the "just point it at a file, any common format just works"
+ * convenience with no registration code of your own needed - it
+ * pre-registers every container format (AVI/MP4/MPG), every video codec
+ * (H264/MJPEG/MPEG-1), and the most common audio ones (MP3/AAC/MP2), at
+ * the cost of pulling in every one of their parser/codec libraries
  * unconditionally (see its own class comment).
  *
- * addAudioDecoder() also covers a codec the DemuxerXxx::mime() this
- * class's demuxer reports precisely but a plain byte-sniffing
+ * addAudioDecoder() also covers a codec the DemuxerXxx::mime() the
+ * selected demuxer reports precisely but a plain byte-sniffing
  * MimeDetector wouldn't otherwise recognize, e.g. MP2Decoder (TinyMP2)
  * for MPEG-1 Layer II audio, the same way sd-mpg-video.ino's hand-wired
  * pipeline does:
@@ -66,10 +73,11 @@ namespace audio_tools {
  * comment on that method), so it only gets selected via a
  * setVideoInfoSource() answer, not the content-sniffing fallback; set one
  * (typically the demuxer feeding this player) if you rely on it. There is
- * no way to replace either multi-decoder wholesale (e.g. with a
- * single-codec decoder) - add to what's already registered instead. A
- * video-only stream needs no audio decoder registered at all - see
- * setAudioOutput()/the class's video-only constructor.
+ * no way to replace any of the three built-in multi-selectors wholesale
+ * (e.g. with a single-format demuxer/decoder) - add to what's already
+ * registered instead. A video-only stream needs no audio decoder
+ * registered at all - see setAudioOutput()/the class's video-only
+ * constructor.
  *
  * Pipeline: Stream (source) -> copy() (CodecCopy-equivalent) -> Demuxer
  *   (demux)
@@ -93,17 +101,21 @@ namespace audio_tools {
  * the box - the seek-backed/spooled MP4 strategies (see
  * decode-mp4-file.ino/decode-mp4-spooled.ino) feed their Demuxer through
  * their own FileSeekableSource/SpoolStorageFactory machinery instead, for
- * their own memory-optimization reasons, and are not wrapped here; use
- * demuxer() to wire one of those directly and drive it yourself instead of
- * calling copy()/copyAll() on this class.
+ * their own memory-optimization reasons, and are not wrapped here; keep
+ * your own reference to the concrete DemuxerMP4 you construct and pass to
+ * addDemuxer() (it stays fully usable on its own - MultiVideoDemuxer just
+ * forwards write()/setOutputAudio()/setOutputVideo()/... to it once
+ * selected) and drive it directly instead of calling copy()/copyAll() on
+ * this class.
  *
  * Operation model: call copy() regularly (non-blocking) in loop(), or
  * copyAll() for blocking end-to-end playback.
  *
- * Dependencies: none - this header itself doesn't pull in any codec
- * library (see above). Bring whichever video/audio codec libraries your
- * content actually needs and register them via addVideoDecoder()/
- * addAudioDecoder(), or use VideoPlayerFull for all of them at once.
+ * Dependencies: none - this header itself doesn't pull in any
+ * container/codec library (see above). Bring whichever demuxers and
+ * video/audio codec libraries your content actually needs and register
+ * them via addDemuxer()/addVideoDecoder()/addAudioDecoder(), or use
+ * VideoPlayerFull for all of them at once.
  *
  * @ingroup player
  * @ingroup video
@@ -114,9 +126,39 @@ class VideoPlayer {
  public:
   VideoPlayer() = default;
 
+  /// Video-only playback (no audio track), no demuxer registered yet -
+  /// call addDemuxer() before begin(). Auto-detected video codec.
+  VideoPlayer(VideoOutput& videoOutput) { setVideoOutput(videoOutput); }
+
+  /// Video + audio playback (AudioOutput target), no demuxer registered
+  /// yet - call addDemuxer() before begin(). See the demuxer-taking
+  /// overload below and the class comment's "Audio clock" section.
+  VideoPlayer(VideoOutput& videoOutput, AudioOutput& audioOutput) {
+    setVideoOutput(videoOutput);
+    setAudioOutput(audioOutput);
+  }
+
+  /// Video + audio playback (a generic Print target), no demuxer
+  /// registered yet - call addDemuxer() before begin().
+  VideoPlayer(VideoOutput& videoOutput, Print& audioOutput) {
+    setVideoOutput(videoOutput);
+    setAudioOutput(audioOutput);
+  }
+
+  /// Video + audio playback (AudioStream target), no demuxer registered
+  /// yet - call addDemuxer() before begin().
+  VideoPlayer(VideoOutput& videoOutput, AudioStream& audioOutput) {
+    setVideoOutput(videoOutput);
+    setAudioOutput(audioOutput);
+  }
+
   /// Video-only playback (no audio track) - auto-detected video codec.
+  /// `demuxer` is registered the same way an addDemuxer() call would
+  /// (this is just a convenience for the common single-format case - call
+  /// addDemuxer() separately, as many times as needed, for additional
+  /// container formats).
   VideoPlayer(Demuxer& demuxer, VideoOutput& videoOutput) {
-    setDemuxer(demuxer);
+    addDemuxer(demuxer);
     setVideoOutput(videoOutput);
   }
 
@@ -124,26 +166,28 @@ class VideoPlayer {
   /// I2SStream) with auto-detected codecs. See the class comment's "Audio
   /// clock" section - setUseAudioClock(true) still needs to be called
   /// explicitly if the content actually has a real audio track and should
-  /// be scheduled against it.
+  /// be scheduled against it. See the video-only constructor above for
+  /// `demuxer`.
   VideoPlayer(Demuxer& demuxer, VideoOutput& videoOutput, AudioOutput& audioOutput) {
-    setDemuxer(demuxer);
+    addDemuxer(demuxer);
     setVideoOutput(videoOutput);
     setAudioOutput(audioOutput);
   }
 
   /// Video + audio playback (a generic Print target) with auto-detected
-  /// codecs. See the class comment's "Audio clock" section.
+  /// codecs. See the class comment's "Audio clock" section, and the
+  /// video-only constructor above for `demuxer`.
   VideoPlayer(Demuxer& demuxer, VideoOutput& videoOutput, Print& audioOutput) {
-    setDemuxer(demuxer);
+    addDemuxer(demuxer);
     setVideoOutput(videoOutput);
     setAudioOutput(audioOutput);
   }
 
   /// Video + audio playback (AudioStream target, e.g. PortAudioStream)
   /// with auto-detected codecs. See the class comment's "Audio clock"
-  /// section.
+  /// section, and the video-only constructor above for `demuxer`.
   VideoPlayer(Demuxer& demuxer, VideoOutput& videoOutput, AudioStream& audioOutput) {
-    setDemuxer(demuxer);
+    addDemuxer(demuxer);
     setVideoOutput(videoOutput);
     setAudioOutput(audioOutput);
   }
@@ -154,9 +198,13 @@ class VideoPlayer {
   VideoPlayer(VideoPlayer const&) = delete;
   VideoPlayer& operator=(VideoPlayer const&) = delete;
 
-  /// Defines/replaces the container demuxer (DemuxerAVI/DemuxerMP4/
-  /// DemuxerMPG/...). Call before begin().
-  void setDemuxer(Demuxer& demuxer) { p_demuxer = &demuxer; }
+  /// Registers a container demuxer (DemuxerAVI/DemuxerMP4/DemuxerMPG/...)
+  /// with the built-in (initially empty) MultiVideoDemuxer, under its own
+  /// Demuxer::mimeVideo() - see MultiVideoDemuxer::addDemuxer(). Nothing
+  /// is registered by default (see the class comment), so this needs at
+  /// least one call per container format your content actually uses.
+  /// Call before begin().
+  void addDemuxer(Demuxer& demuxer) { default_demuxer.addDemuxer(demuxer); }
 
   /// Registers a video codec with the built-in (initially empty)
   /// MultiVideoDecoder, under its own VideoDecoder::codecFormat() - see
@@ -228,10 +276,6 @@ class VideoPlayer {
   /// owns it and is responsible for closing it once copy()/copyAll()
   /// signal end of stream (return 0).
   bool begin(Stream& source) {
-    if (p_demuxer == nullptr) {
-      LOGE("VideoPlayer: no Demuxer set - call setDemuxer() first");
-      return false;
-    }
     if (p_video_output == nullptr) {
       LOGE("VideoPlayer: no VideoOutput set - call setVideoOutput() first");
       return false;
@@ -242,16 +286,16 @@ class VideoPlayer {
     // (video_sync's target is fixed at construction - see its own member
     // declaration below)
     default_video_decoder.setOutput(*p_video_output);
-    default_video_decoder.setVideoInfoSource(*p_demuxer);
+    default_video_decoder.setVideoInfoSource(default_demuxer);
     if (!default_video_decoder.begin()) {
       LOGE("VideoPlayer: MultiVideoDecoder begin() failed");
       return false;
     }
-    p_demuxer->setOutputVideo(video_sync);
+    default_demuxer.setOutputVideo(video_sync);
 
     // audio (optional - see the class comment's "Audio clock" section)
     if (p_audio_output != nullptr) {
-      default_audio_decoder.setMimeSource(*p_demuxer);
+      default_audio_decoder.setMimeSource(default_demuxer);
       audio_out.setDecoder(&default_audio_decoder);
       if (use_audio_clock) {
         // Route through the most specific overload available (see
@@ -277,11 +321,11 @@ class VideoPlayer {
         LOGE("VideoPlayer: EncodedAudioStream begin() failed");
         return false;
       }
-      p_demuxer->setOutputAudio(audio_out);
+      default_demuxer.setOutputAudio(audio_out);
     }
 
-    if (!p_demuxer->begin()) {
-      LOGE("VideoPlayer: Demuxer begin() failed");
+    if (!default_demuxer.begin()) {
+      LOGE("VideoPlayer: MultiVideoDemuxer begin() failed");
       return false;
     }
     active = true;
@@ -296,7 +340,7 @@ class VideoPlayer {
     video_sync.end();
     default_video_decoder.end();
     if (p_audio_output != nullptr) audio_out.end();
-    if (p_demuxer != nullptr) p_demuxer->end();
+    default_demuxer.end();
   }
 
   /// Reads and demuxes one chunk (setBufferSize(), default 1024 bytes)
@@ -311,8 +355,8 @@ class VideoPlayer {
   /// "0 means stop" convention every current *.ino example already checks
   /// for.
   size_t copy() {
-    if (!active || p_source == nullptr || p_demuxer == nullptr) return 0;
-    float fps = p_demuxer->getVideoInfo().fps;
+    if (!active || p_source == nullptr) return 0;
+    float fps = default_demuxer.getVideoInfo().fps;
     if (fps > 0) video_sync.setFps(fps);
     uint8_t buffer[buffer_size];
     size_t len = p_source->readBytes(buffer, buffer_size);
@@ -324,7 +368,7 @@ class VideoPlayer {
     // before begin(Stream&)'s source is known).
     size_t written = 0;
     while (written < len) {
-      size_t n = p_demuxer->write(buffer + written, len - written);
+      size_t n = default_demuxer.write(buffer + written, len - written);
       if (n == 0) break;
       written += n;
     }
@@ -351,8 +395,10 @@ class VideoPlayer {
   /// end()) - resume with setActive(true).
   void setActive(bool isActive) { active = isActive; }
 
-  /// The Demuxer given to setDemuxer()/the constructor.
-  Demuxer& demuxer() { return *p_demuxer; }
+  /// The built-in demuxer multi-selector (empty until addDemuxer() is
+  /// called - see the class comment) - also useful for diagnostics (e.g.
+  /// selectedDemuxer()/mimeVideo()).
+  MultiVideoDemuxer& demuxer() { return default_demuxer; }
   /// The built-in video multi-decoder (empty until addVideoDecoder() is
   /// called - see the class comment) - also useful for diagnostics (e.g.
   /// selectedFormat()).
@@ -370,7 +416,6 @@ class VideoPlayer {
   Stream* getStream() { return p_source; }
 
  protected:
-  Demuxer* p_demuxer = nullptr;
   VideoOutput* p_video_output = nullptr;
   Print* p_audio_output = nullptr;
   // Set alongside p_audio_output by the matching setAudioOutput()
@@ -380,6 +425,9 @@ class VideoPlayer {
   AudioStream* p_audio_stream = nullptr;
   Stream* p_source = nullptr;
 
+  // Empty by default (see the class comment) - populated via
+  // addDemuxer().
+  MultiVideoDemuxer default_demuxer;
   // Declared before video_sync below, which takes this address at
   // construction time.
   MultiVideoDecoder default_video_decoder;

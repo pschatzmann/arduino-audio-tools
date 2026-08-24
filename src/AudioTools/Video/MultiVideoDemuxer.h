@@ -16,11 +16,12 @@ namespace audio_tools {
  * whichever concrete demuxers (DemuxerAVI/DemuxerMP4/DemuxerMPG) your
  * content actually needs via addDemuxer().
  *
- * Drop it in wherever a plain Demuxer& is expected - e.g.
- * VideoPlayer::setDemuxer()/its own constructors - or feed it via write()
- * directly, and it self-selects the right registered demuxer from the
- * stream's own container signature instead of the caller having to know
- * the file format up front.
+ * Drop it in wherever a plain Demuxer& is expected - VideoPlayer in fact
+ * uses one internally as its own built-in demuxer, with addDemuxer()
+ * registering against it - or feed it via write() directly, and it
+ * self-selects the right registered demuxer from the stream's own
+ * container signature instead of the caller having to know the file
+ * format up front.
  *
  * Detection runs once, on the very first write() call: each registered
  * demuxer's own Demuxer::isValid() (content-sniffing - a virtual method

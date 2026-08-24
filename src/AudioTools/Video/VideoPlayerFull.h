@@ -3,6 +3,9 @@
 #include "AudioTools/AudioCodecs/CodecAACHelix.h"
 #include "AudioTools/AudioCodecs/CodecMP2.h"
 #include "AudioTools/AudioCodecs/CodecMP3Helix.h"
+#include "AudioTools/AudioCodecs/ContainerAVI.h"
+#include "AudioTools/AudioCodecs/ContainerMP4.h"
+#include "AudioTools/AudioCodecs/ContainerMPG.h"
 #include "AudioTools/Video/CodecH264.h"
 #include "AudioTools/Video/CodecJPEG.h"
 #include "AudioTools/Video/CodecMPG.h"
@@ -11,19 +14,28 @@
 namespace audio_tools {
 
 /**
- * @brief VideoPlayer subclass configured for every codec this library
- * ships a portable software decoder for - video AND audio - so it's the
- * "just point it at a file, any common codec just works" player, the same
- * convenience MultiVideoDecoderFull/DecoderHelix each provide on their own
- * side. Use this instead of the base VideoPlayer unless you specifically
- * want to keep this class's extra dependencies (below) out of your build
- * - the base VideoPlayer's video and audio multi-decoders both start
+ * @brief VideoPlayer subclass configured for every container format and
+ * codec this library ships a portable software demuxer/decoder for -
+ * video AND audio - so it's the "just point it at a file, any common
+ * format just works" player, the same convenience MultiVideoDemuxerFull/
+ * MultiVideoDecoderFull/DecoderHelix each provide on their own side. Use
+ * this instead of the base VideoPlayer unless you specifically want to
+ * keep this class's extra dependencies (below) out of your build - the
+ * base VideoPlayer's demuxer and video/audio multi-decoders all start
  * empty (see its own class comment), so it has none.
  *
- * Video codecs - registered in this subclass's own constructor, the same
- * way MultiVideoDecoderFull's does (MultiVideoDecoderFull.h - a plain
- * MultiVideoDecoder pre-registered the same way, for callers that want
- * this convenience without the rest of VideoPlayer):
+ * Container formats - registered in this subclass's own constructor, the
+ * same way MultiVideoDemuxerFull's does (MultiVideoDemuxerFull.h - a
+ * plain MultiVideoDemuxer pre-registered the same way, for callers that
+ * want this convenience without the rest of VideoPlayer):
+ * - AVI (DemuxerAVI)
+ * - MP4/M4A (DemuxerMP4)
+ * - MPEG Program Stream (DemuxerMPG)
+ *
+ * Video codecs - also registered in this subclass's own constructor, the
+ * same way MultiVideoDecoderFull's does (MultiVideoDecoderFull.h - a
+ * plain MultiVideoDecoder pre-registered the same way, for callers that
+ * want this convenience without the rest of VideoPlayer):
  * - H264 (H264Decoder, TinyH264)
  * - Motion-JPEG (MJPEGDecoder, TinyJPEG)
  * - MPEG-1 (MPGDecoder, TinyMPG)
@@ -47,7 +59,9 @@ namespace audio_tools {
  * content needs it.
  *
  * Dependencies (install via Library Manager) - all pulled in only by
- * choosing this subclass over the dependency-free base VideoPlayer:
+ * choosing this subclass over the dependency-free base VideoPlayer.
+ * DemuxerAVI/DemuxerMP4/DemuxerMPG add none of their own (pure parsing
+ * code within this library, unlike the decoders below):
  * - https://github.com/pschatzmann/TinyH264
  * - https://github.com/pschatzmann/TinyMPG
  * - https://github.com/pschatzmann/TinyJPEG
@@ -62,12 +76,46 @@ namespace audio_tools {
 class VideoPlayerFull : public VideoPlayer {
  public:
   VideoPlayerFull() {
+    registerDemuxers();
     registerVideoDecoders();
     registerAudioDecoders();
   }
 
+  VideoPlayerFull(VideoOutput& videoOutput) : VideoPlayer(videoOutput) {
+    registerDemuxers();
+    registerVideoDecoders();
+    registerAudioDecoders();
+  }
+
+  VideoPlayerFull(VideoOutput& videoOutput, AudioOutput& audioOutput)
+      : VideoPlayer(videoOutput, audioOutput) {
+    registerDemuxers();
+    registerVideoDecoders();
+    registerAudioDecoders();
+  }
+
+  VideoPlayerFull(VideoOutput& videoOutput, Print& audioOutput)
+      : VideoPlayer(videoOutput, audioOutput) {
+    registerDemuxers();
+    registerVideoDecoders();
+    registerAudioDecoders();
+  }
+
+  VideoPlayerFull(VideoOutput& videoOutput, AudioStream& audioOutput)
+      : VideoPlayer(videoOutput, audioOutput) {
+    registerDemuxers();
+    registerVideoDecoders();
+    registerAudioDecoders();
+  }
+
+  /// Overloads accepting an extra Demuxer&, mirroring VideoPlayer's own
+  /// constructors - registered in addition to the pre-registered AVI/MP4/
+  /// MPG demuxers below (e.g. for a custom DemuxerMP4 configured with a
+  /// SeekableSource/SpoolStorageFactory - see VideoPlayer's own class
+  /// comment).
   VideoPlayerFull(Demuxer& demuxer, VideoOutput& videoOutput)
       : VideoPlayer(demuxer, videoOutput) {
+    registerDemuxers();
     registerVideoDecoders();
     registerAudioDecoders();
   }
@@ -75,6 +123,7 @@ class VideoPlayerFull : public VideoPlayer {
   VideoPlayerFull(Demuxer& demuxer, VideoOutput& videoOutput,
                   AudioOutput& audioOutput)
       : VideoPlayer(demuxer, videoOutput, audioOutput) {
+    registerDemuxers();
     registerVideoDecoders();
     registerAudioDecoders();
   }
@@ -82,6 +131,7 @@ class VideoPlayerFull : public VideoPlayer {
   VideoPlayerFull(Demuxer& demuxer, VideoOutput& videoOutput,
                   Print& audioOutput)
       : VideoPlayer(demuxer, videoOutput, audioOutput) {
+    registerDemuxers();
     registerVideoDecoders();
     registerAudioDecoders();
   }
@@ -89,11 +139,16 @@ class VideoPlayerFull : public VideoPlayer {
   VideoPlayerFull(Demuxer& demuxer, VideoOutput& videoOutput,
                   AudioStream& audioOutput)
       : VideoPlayer(demuxer, videoOutput, audioOutput) {
+    registerDemuxers();
     registerVideoDecoders();
     registerAudioDecoders();
   }
 
  protected:
+  DemuxerAVI avi_demuxer;
+  DemuxerMP4 mp4_demuxer;
+  DemuxerMPG mpg_demuxer;
+
   H264Decoder h264_decoder;
   MJPEGDecoder mjpeg_decoder;
   MPGDecoder mpeg_decoder;
@@ -101,6 +156,12 @@ class VideoPlayerFull : public VideoPlayer {
   MP3DecoderHelix mp3_decoder;
   AACDecoderHelix aac_decoder;
   MP2Decoder mp2_decoder;
+
+  void registerDemuxers() {
+    addDemuxer(avi_demuxer);
+    addDemuxer(mp4_demuxer);
+    addDemuxer(mpg_demuxer);
+  }
 
   void registerVideoDecoders() {
     addVideoDecoder(h264_decoder);
