@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: MultiVideoDecoder Class Reference</title>
+<title>arduino-audio-tools: MultiVideoDecoderFull Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,44 +69,40 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html">MultiVideoDecoder</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_multi_video_decoder_full.html">MultiVideoDecoderFull</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="classaudio__tools_1_1_multi_video_decoder-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">MultiVideoDecoder Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__video.html">Video</a> &#124; <a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__codecs.html">Codecs</a> &raquo; <a class="el" href="group__decoder.html">Decoder</a></div></div></div>
+<a href="classaudio__tools_1_1_multi_video_decoder_full-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">MultiVideoDecoderFull Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__video.html">Video</a> &#124; <a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__codecs.html">Codecs</a> &raquo; <a class="el" href="group__decoder.html">Decoder</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Manages multiple VideoDecoders with automatic format detection - the video-side counterpart of <a class="el" href="classaudio__tools_1_1_multi_decoder.html" title="Manage multiple AudioDecoders with automatic format detection.">MultiDecoder</a> (<a class="el" href="_multi_decoder_8h.html">AudioCodecs/MultiDecoder.h</a>). No decoders are registered by default and this header has no codec- library dependency of its own - register whatever your content needs via <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a76ac48538c8911b59230d4ebbd62990c">addDecoder()</a>, or use <a class="el" href="classaudio__tools_1_1_multi_video_decoder_full.html" title="MultiVideoDecoder pre-registered with every video codec this library ships a portable (no hardware-sp...">MultiVideoDecoderFull</a> (<a class="el" href="_multi_video_decoder_full_8h.html">MultiVideoDecoderFull.h</a>) for one pre-registered with every video codec this library ships a portable (no hardware-specific backend) software decoder for (H264/MJPEG/MPEG-1).  
- <a href="classaudio__tools_1_1_multi_video_decoder.html#details">More...</a></p>
+<p><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html" title="Manages multiple VideoDecoders with automatic format detection - the video-side counterpart of MultiD...">MultiVideoDecoder</a> pre-registered with every video codec this library ships a portable (no hardware-specific backend) software decoder for: <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html" title="Motion-JPEG video decoder: wraps TinyJPEGDecoder (https://github.com/pschatzmann/TinyJPEG,...">MJPEGDecoder</a> (Motion-JPEG, TinyJPEG, <a class="el" href="_codec_j_p_e_g_8h.html">CodecJPEG.h</a>), <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html" title="MPEG-1 (part 2) video decoder wrapper around TinyMPGDecoder.">MPGDecoder</a> (MPEG-1, TinyMPG, <a class="el" href="_codec_m_p_g_8h.html">CodecMPG.h</a>), <a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a> (H.264 Annex-B, TinyH264, <a class="el" href="_codec_h264_8h.html">CodecH264.h</a>) - drop it into a demuxer's setOutputVideo() the same way any single decoder would go, and it self-selects the right one from the bitstream's own framing instead of the caller having to know the codec up front. Use the plain <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html" title="Manages multiple VideoDecoders with automatic format detection - the video-side counterpart of MultiD...">MultiVideoDecoder</a> (<a class="el" href="_multi_video_decoder_8h.html">MultiVideoDecoder.h</a>) instead if you don't want all three codec libraries pulled in unconditionally - register only what your content actually needs via its own <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a76ac48538c8911b59230d4ebbd62990c">addDecoder()</a>.  
+ <a href="classaudio__tools_1_1_multi_video_decoder_full.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_multi_video_decoder_8h_source.html">MultiVideoDecoder.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_multi_video_decoder_full_8h_source.html">MultiVideoDecoderFull.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for MultiVideoDecoder:</div>
+Inheritance diagram for MultiVideoDecoderFull:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classaudio__tools_1_1_multi_video_decoder.png" usemap="#MultiVideoDecoder_map" alt=""/>
-  <map id="MultiVideoDecoder_map" name="MultiVideoDecoder_map">
+  <img src="classaudio__tools_1_1_multi_video_decoder_full.png" usemap="#MultiVideoDecoderFull_map" alt=""/>
+  <map id="MultiVideoDecoderFull_map" name="MultiVideoDecoderFull_map">
+<area href="classaudio__tools_1_1_multi_video_decoder.html" title="Manages multiple VideoDecoders with automatic format detection - the video-side counterpart of MultiD..." alt="MultiVideoDecoder" shape="rect" coords="76,112,218,136"/>
 <area href="classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 - CodecH264...." alt="VideoDecoder" shape="rect" coords="0,56,142,80"/>
 <area href="classaudio__tools_1_1_video_info_source.html" alt="VideoInfoSource" shape="rect" coords="152,56,294,80"/>
 <area href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="VideoOutput" shape="rect" coords="0,0,142,24"/>
-<area href="classaudio__tools_1_1_multi_video_decoder_full.html" title="MultiVideoDecoder pre-registered with every video codec this library ships a portable (no hardware-sp..." alt="MultiVideoDecoderFull" shape="rect" coords="76,168,218,192"/>
   </map>
 </div></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_multi_video_decoder_1_1_decoder_info.html">DecoderInfo</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a38cec71f16552e04a8cdc97566a46ac7" id="r_a38cec71f16552e04a8cdc97566a46ac7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_video_decoder_full.html#a38cec71f16552e04a8cdc97566a46ac7">MultiVideoDecoderFull</a> ()</td></tr>
+<tr class="separator:a38cec71f16552e04a8cdc97566a46ac7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a76ac48538c8911b59230d4ebbd62990c" id="r_a76ac48538c8911b59230d4ebbd62990c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a76ac48538c8911b59230d4ebbd62990c">addDecoder</a> (<a class="el" href="classaudio__tools_1_1_video_decoder.html">VideoDecoder</a> &amp;decoder, <a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a> format, bool(*check)(const uint8_t *data, size_t len))</td></tr>
 <tr class="separator:a76ac48538c8911b59230d4ebbd62990c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acba365cc28eb702040c382646cfb0a7a" id="r_acba365cc28eb702040c382646cfb0a7a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#acba365cc28eb702040c382646cfb0a7a">begin</a> () override</td></tr>
@@ -150,8 +146,14 @@ Protected Member Functions</h2></td></tr>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a9925038272b180156cf708d898cfdbd5" id="r_a9925038272b180156cf708d898cfdbd5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="structaudio__tools_1_1_multi_video_decoder_1_1_decoder_info.html">DecoderInfo</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a9925038272b180156cf708d898cfdbd5">decoders</a> {0}</td></tr>
 <tr class="separator:a9925038272b180156cf708d898cfdbd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a946f4c2c43bab429f7d08354393258" id="r_a7a946f4c2c43bab429f7d08354393258"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_h264_decoder.html">H264Decoder</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_video_decoder_full.html#a7a946f4c2c43bab429f7d08354393258">h264</a></td></tr>
+<tr class="separator:a7a946f4c2c43bab429f7d08354393258"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c54361cc737ba2d4ea42efe398c924a" id="r_a4c54361cc737ba2d4ea42efe398c924a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a4c54361cc737ba2d4ea42efe398c924a">is_first</a> = true</td></tr>
 <tr class="separator:a4c54361cc737ba2d4ea42efe398c924a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a425f35433221dcdf8997efa89a2972" id="r_a9a425f35433221dcdf8997efa89a2972"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html">MJPEGDecoder</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_video_decoder_full.html#a9a425f35433221dcdf8997efa89a2972">mjpeg</a></td></tr>
+<tr class="separator:a9a425f35433221dcdf8997efa89a2972"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a330f2ff41343745c1e7119c1584fae77" id="r_a330f2ff41343745c1e7119c1584fae77"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html">MPGDecoder</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_video_decoder_full.html#a330f2ff41343745c1e7119c1584fae77">mpeg1</a></td></tr>
+<tr class="separator:a330f2ff41343745c1e7119c1584fae77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a222596cc17a6635ad7d3c0dc7f4f74ba" id="r_a222596cc17a6635ad7d3c0dc7f4f74ba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_video_decoder.html">VideoDecoder</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a222596cc17a6635ad7d3c0dc7f4f74ba">p_selected</a> = nullptr</td></tr>
 <tr class="separator:a222596cc17a6635ad7d3c0dc7f4f74ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afcd4d5447e41509456169fd3f93bcb76" id="r_afcd4d5447e41509456169fd3f93bcb76"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#afcd4d5447e41509456169fd3f93bcb76">p_selected_format</a> = <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a696b031073e74bf2cb98e5ef201d4aa3">VideoFormat::UNKNOWN</a></td></tr>
@@ -160,13 +162,41 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:abebc17bb47a45eb84b0afed6eb87ac60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Manages multiple VideoDecoders with automatic format detection - the video-side counterpart of <a class="el" href="classaudio__tools_1_1_multi_decoder.html" title="Manage multiple AudioDecoders with automatic format detection.">MultiDecoder</a> (<a class="el" href="_multi_decoder_8h.html">AudioCodecs/MultiDecoder.h</a>). No decoders are registered by default and this header has no codec- library dependency of its own - register whatever your content needs via <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a76ac48538c8911b59230d4ebbd62990c">addDecoder()</a>, or use <a class="el" href="classaudio__tools_1_1_multi_video_decoder_full.html" title="MultiVideoDecoder pre-registered with every video codec this library ships a portable (no hardware-sp...">MultiVideoDecoderFull</a> (<a class="el" href="_multi_video_decoder_full_8h.html">MultiVideoDecoderFull.h</a>) for one pre-registered with every video codec this library ships a portable (no hardware-specific backend) software decoder for (H264/MJPEG/MPEG-1). </p>
-<p>Drop it into a demuxer's setOutputVideo() the same way any single decoder would go, and it self-selects the right registered decoder from the bitstream's own framing instead of the caller having to know the codec up front.</p>
-<p>Detection runs once, on the very first <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call, preferring the container's own answer over guessing from raw bytes: if <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#ab848f87085dcf8ecc7343e4c4d690306">setVideoInfoSource()</a> was given a source (typically the demuxer feeding this object - DemuxerAVI/DemuxerMP4/DemuxerMPG all implement <a class="el" href="classaudio__tools_1_1_video_info_source.html">VideoInfoSource</a> and already parse the real codec from their own container metadata, e.g. <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#a4f959e3d631e13a15a0827aef1a16ff4">DemuxerAVI::getVideoInfo()</a>.format from the AVI 'strf' chunk's FOURCC - see <a class="el" href="_container_a_v_i_8h.html">ContainerAVI.h</a>'s own comment) and its <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a0a026655e20010414e4d162042f5c413">videoInfo()</a>.format matches a registered decoder, that decoder is selected directly, no sniffing needed. Otherwise (no source set, or its format is UNKNOWN/unregistered) falls back to each registered decoder's check() function, tried in registration order, against that first call's bytes. Reliable either way because every current caller already hands over one complete access unit per <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call. Every subsequent call, plus <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a>/isKeyFrame()/setSkipRender(), is forwarded to that same decoder for the rest of the stream - never re-detected.</p>
-<p><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a05ff4cf361d54457ed8586e8c14aa922" title="Defines the target each decoded picture is written to.">setOutput()</a>/setVideoFormat() are applied to every registered decoder eagerly (cheap - just stores pointers/an enum, no allocation), but <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#acba365cc28eb702040c382646cfb0a7a">begin()</a> is only ever called on the one decoder actually selected - matching <a class="el" href="classaudio__tools_1_1_multi_decoder.html" title="Manage multiple AudioDecoders with automatic format detection.">MultiDecoder</a>'s own memory-efficient lazy-init rationale, since a decoder's <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#acba365cc28eb702040c382646cfb0a7a">begin()</a> is what allocates its picture buffers.</p>
+<div class="textblock"><p><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html" title="Manages multiple VideoDecoders with automatic format detection - the video-side counterpart of MultiD...">MultiVideoDecoder</a> pre-registered with every video codec this library ships a portable (no hardware-specific backend) software decoder for: <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html" title="Motion-JPEG video decoder: wraps TinyJPEGDecoder (https://github.com/pschatzmann/TinyJPEG,...">MJPEGDecoder</a> (Motion-JPEG, TinyJPEG, <a class="el" href="_codec_j_p_e_g_8h.html">CodecJPEG.h</a>), <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html" title="MPEG-1 (part 2) video decoder wrapper around TinyMPGDecoder.">MPGDecoder</a> (MPEG-1, TinyMPG, <a class="el" href="_codec_m_p_g_8h.html">CodecMPG.h</a>), <a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a> (H.264 Annex-B, TinyH264, <a class="el" href="_codec_h264_8h.html">CodecH264.h</a>) - drop it into a demuxer's setOutputVideo() the same way any single decoder would go, and it self-selects the right one from the bitstream's own framing instead of the caller having to know the codec up front. Use the plain <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html" title="Manages multiple VideoDecoders with automatic format detection - the video-side counterpart of MultiD...">MultiVideoDecoder</a> (<a class="el" href="_multi_video_decoder_8h.html">MultiVideoDecoder.h</a>) instead if you don't want all three codec libraries pulled in unconditionally - register only what your content actually needs via its own <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a76ac48538c8911b59230d4ebbd62990c">addDecoder()</a>. </p>
+<p>Dependencies (install via Library Manager) - all three are required to build this header, regardless of which formats your content actually uses:</p><ul>
+<li><a href="https://github.com/pschatzmann/TinyH264">https://github.com/pschatzmann/TinyH264</a></li>
+<li><a href="https://github.com/pschatzmann/TinyMPG">https://github.com/pschatzmann/TinyMPG</a></li>
+<li><a href="https://github.com/pschatzmann/TinyJPEG">https://github.com/pschatzmann/TinyJPEG</a></li>
+</ul>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a38cec71f16552e04a8cdc97566a46ac7" name="a38cec71f16552e04a8cdc97566a46ac7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38cec71f16552e04a8cdc97566a46ac7">&#9670;&#160;</a></span>MultiVideoDecoderFull()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_multi_video_decoder_full.html">MultiVideoDecoderFull</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="a76ac48538c8911b59230d4ebbd62990c" name="a76ac48538c8911b59230d4ebbd62990c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a76ac48538c8911b59230d4ebbd62990c">&#9670;&#160;</a></span>addDecoder()</h2>
 
@@ -202,7 +232,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -229,7 +259,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -259,7 +289,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -288,7 +318,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -384,7 +414,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -413,7 +443,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -438,7 +468,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -465,7 +495,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -495,7 +525,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -524,7 +554,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -553,7 +583,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -582,7 +612,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -608,7 +638,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -647,7 +677,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -668,6 +698,28 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;<a class="el" href="structaudio__tools_1_1_multi_video_decoder_1_1_decoder_info.html">DecoderInfo</a>&gt; decoders {0}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7a946f4c2c43bab429f7d08354393258" name="a7a946f4c2c43bab429f7d08354393258"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a946f4c2c43bab429f7d08354393258">&#9670;&#160;</a></span>h264</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_h264_decoder.html">H264Decoder</a> h264</td>
         </tr>
       </table>
   </td>
@@ -694,6 +746,50 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9a425f35433221dcdf8997efa89a2972" name="a9a425f35433221dcdf8997efa89a2972"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a425f35433221dcdf8997efa89a2972">&#9670;&#160;</a></span>mjpeg</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html">MJPEGDecoder</a> mjpeg</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a330f2ff41343745c1e7119c1584fae77" name="a330f2ff41343745c1e7119c1584fae77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a330f2ff41343745c1e7119c1584fae77">&#9670;&#160;</a></span>mpeg1</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html">MPGDecoder</a> mpeg1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
@@ -716,7 +812,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -738,7 +834,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -760,7 +856,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -768,7 +864,7 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/Video/<a class="el" href="_multi_video_decoder_8h_source.html">MultiVideoDecoder.h</a></li>
+<li>src/AudioTools/Video/<a class="el" href="_multi_video_decoder_full_8h_source.html">MultiVideoDecoderFull.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

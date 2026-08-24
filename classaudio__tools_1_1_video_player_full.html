@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: VideoPlayer Class Reference</title>
+<title>arduino-audio-tools: VideoPlayerFull Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,47 +69,45 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_video_player.html">VideoPlayer</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_video_player_full.html">VideoPlayerFull</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="classaudio__tools_1_1_video_player-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">VideoPlayer Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__player.html">Player</a> &#124; <a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__video.html">Video</a></div></div></div>
+<a href="classaudio__tools_1_1_video_player_full-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">VideoPlayerFull Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__player.html">Player</a> &#124; <a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__video.html">Video</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>High-level video playback pipeline and controller - the video counterpart of <a class="el" href="classaudio__tools_1_1_audio_player.html" title="High-level audio playback pipeline and controller.">AudioPlayer</a> (<a class="el" href="_audio_player_8h.html">CoreAudio/AudioPlayer.h</a>). Wraps every class a video playback example otherwise wires by hand (a container <a class="el" href="classaudio__tools_1_1_demuxer.html" title="Common interface for demuxers (DemuxerAVI, DemuxerMP4) that split a container&#39;s video and (optional) ...">Demuxer</a>, a <a class="el" href="classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 - CodecH264....">VideoDecoder</a> driven through a <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html" title="Buffers a small, configurable amount of video (see setQueueBytes()) and renders it frame by frame fro...">VideoAudioSyncTask</a>, and optionally an audio decode chain synced against it) behind one object driven by a single <a class="el" href="classaudio__tools_1_1_video_player.html#aecb44a6d385121be2179187d45520331">copy()</a> call per <a class="el" href="_main_8h.html#afe461d27b9c48d5921c00d521181f12f">loop()</a> iteration.  
- <a href="classaudio__tools_1_1_video_player.html#details">More...</a></p>
+<p><a class="el" href="classaudio__tools_1_1_video_player.html" title="High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A...">VideoPlayer</a> subclass configured for every codec this library ships a portable software decoder for - video AND audio - so it's the "just point it at a file, any common codec just works" player, the same convenience MultiVideoDecoderFull/DecoderHelix each provide on their own side. Use this instead of the base <a class="el" href="classaudio__tools_1_1_video_player.html" title="High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A...">VideoPlayer</a> unless you specifically want to keep this class's extra dependencies (below) out of your build.  
+ <a href="classaudio__tools_1_1_video_player_full.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_video_player_8h_source.html">VideoPlayer.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_video_player_full_8h_source.html">VideoPlayerFull.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for VideoPlayer:</div>
+Inheritance diagram for VideoPlayerFull:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classaudio__tools_1_1_video_player.png" usemap="#VideoPlayer_map" alt=""/>
-  <map id="VideoPlayer_map" name="VideoPlayer_map">
-<area href="classaudio__tools_1_1_video_player_full.html" title="VideoPlayer subclass configured for every codec this library ships a portable software decoder for - ..." alt="VideoPlayerFull" shape="rect" coords="0,56,103,80"/>
+  <img src="classaudio__tools_1_1_video_player_full.png" usemap="#VideoPlayerFull_map" alt=""/>
+  <map id="VideoPlayerFull_map" name="VideoPlayerFull_map">
+<area href="classaudio__tools_1_1_video_player.html" title="High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A..." alt="VideoPlayer" shape="rect" coords="0,0,103,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a0f940bc07cf4fd7ced40fd41f60f8509" id="r_a0f940bc07cf4fd7ced40fd41f60f8509"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#a0f940bc07cf4fd7ced40fd41f60f8509">VideoPlayer</a> ()=default</td></tr>
-<tr class="separator:a0f940bc07cf4fd7ced40fd41f60f8509"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a550af908a687287c7f83270abf5a54eb" id="r_a550af908a687287c7f83270abf5a54eb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#a550af908a687287c7f83270abf5a54eb">VideoPlayer</a> (<a class="el" href="classaudio__tools_1_1_demuxer.html">Demuxer</a> &amp;<a class="el" href="classaudio__tools_1_1_video_player.html#a0022938d4950170bca92c7617efe2245">demuxer</a>, <a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;videoOutput)</td></tr>
-<tr class="memdesc:a550af908a687287c7f83270abf5a54eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Video-only playback (no audio track) - auto-detected video codec.  <br /></td></tr>
-<tr class="separator:a550af908a687287c7f83270abf5a54eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4240797764e46639da67f13132c85586" id="r_a4240797764e46639da67f13132c85586"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#a4240797764e46639da67f13132c85586">VideoPlayer</a> (<a class="el" href="classaudio__tools_1_1_demuxer.html">Demuxer</a> &amp;<a class="el" href="classaudio__tools_1_1_video_player.html#a0022938d4950170bca92c7617efe2245">demuxer</a>, <a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;videoOutput, <a class="el" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a> &amp;audioOutput)</td></tr>
-<tr class="separator:a4240797764e46639da67f13132c85586"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5da006930d6dfbd755a910fe52c11892" id="r_a5da006930d6dfbd755a910fe52c11892"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#a5da006930d6dfbd755a910fe52c11892">VideoPlayer</a> (<a class="el" href="classaudio__tools_1_1_demuxer.html">Demuxer</a> &amp;<a class="el" href="classaudio__tools_1_1_video_player.html#a0022938d4950170bca92c7617efe2245">demuxer</a>, <a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;videoOutput, <a class="el" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a> &amp;audioOutput)</td></tr>
-<tr class="separator:a5da006930d6dfbd755a910fe52c11892"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae09e031f4a6ed5d8b8b6fbd1672629e7" id="r_ae09e031f4a6ed5d8b8b6fbd1672629e7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#ae09e031f4a6ed5d8b8b6fbd1672629e7">VideoPlayer</a> (<a class="el" href="classaudio__tools_1_1_demuxer.html">Demuxer</a> &amp;<a class="el" href="classaudio__tools_1_1_video_player.html#a0022938d4950170bca92c7617efe2245">demuxer</a>, <a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;videoOutput, <a class="el" href="class_print.html">Print</a> &amp;audioOutput)</td></tr>
-<tr class="separator:ae09e031f4a6ed5d8b8b6fbd1672629e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af2c49e0f10bfe71d0d3e3c2adfbcaba1" id="r_af2c49e0f10bfe71d0d3e3c2adfbcaba1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#af2c49e0f10bfe71d0d3e3c2adfbcaba1">VideoPlayer</a> (<a class="el" href="classaudio__tools_1_1_video_player.html">VideoPlayer</a> const &amp;)=delete</td></tr>
-<tr class="separator:af2c49e0f10bfe71d0d3e3c2adfbcaba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebffa4348fff6c7ae15df25fc90e5ba1" id="r_aebffa4348fff6c7ae15df25fc90e5ba1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player_full.html#aebffa4348fff6c7ae15df25fc90e5ba1">VideoPlayerFull</a> ()</td></tr>
+<tr class="separator:aebffa4348fff6c7ae15df25fc90e5ba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d761967635365989f7143affb7f0f19" id="r_a0d761967635365989f7143affb7f0f19"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player_full.html#a0d761967635365989f7143affb7f0f19">VideoPlayerFull</a> (<a class="el" href="classaudio__tools_1_1_demuxer.html">Demuxer</a> &amp;<a class="el" href="classaudio__tools_1_1_video_player.html#a0022938d4950170bca92c7617efe2245">demuxer</a>, <a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;videoOutput)</td></tr>
+<tr class="separator:a0d761967635365989f7143affb7f0f19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab8158a04e433654f0e003f4f9e47b94" id="r_aab8158a04e433654f0e003f4f9e47b94"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player_full.html#aab8158a04e433654f0e003f4f9e47b94">VideoPlayerFull</a> (<a class="el" href="classaudio__tools_1_1_demuxer.html">Demuxer</a> &amp;<a class="el" href="classaudio__tools_1_1_video_player.html#a0022938d4950170bca92c7617efe2245">demuxer</a>, <a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;videoOutput, <a class="el" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a> &amp;audioOutput)</td></tr>
+<tr class="separator:aab8158a04e433654f0e003f4f9e47b94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54587658a1bd382d923c03c5b72b27e2" id="r_a54587658a1bd382d923c03c5b72b27e2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player_full.html#a54587658a1bd382d923c03c5b72b27e2">VideoPlayerFull</a> (<a class="el" href="classaudio__tools_1_1_demuxer.html">Demuxer</a> &amp;<a class="el" href="classaudio__tools_1_1_video_player.html#a0022938d4950170bca92c7617efe2245">demuxer</a>, <a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;videoOutput, <a class="el" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a> &amp;audioOutput)</td></tr>
+<tr class="separator:a54587658a1bd382d923c03c5b72b27e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a013986255c36ae17127f2cd55a65b108" id="r_a013986255c36ae17127f2cd55a65b108"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player_full.html#a013986255c36ae17127f2cd55a65b108">VideoPlayerFull</a> (<a class="el" href="classaudio__tools_1_1_demuxer.html">Demuxer</a> &amp;<a class="el" href="classaudio__tools_1_1_video_player.html#a0022938d4950170bca92c7617efe2245">demuxer</a>, <a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;videoOutput, <a class="el" href="class_print.html">Print</a> &amp;audioOutput)</td></tr>
+<tr class="separator:a013986255c36ae17127f2cd55a65b108"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab6f6911289209e3e41cb3d4806a71362" id="r_ab6f6911289209e3e41cb3d4806a71362"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#ab6f6911289209e3e41cb3d4806a71362">addAudioDecoder</a> (<a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> &amp;decoder, const char *mime)</td></tr>
 <tr class="separator:ab6f6911289209e3e41cb3d4806a71362"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a7441a7ac349f32345bd3ba6e3e4f67" id="r_a5a7441a7ac349f32345bd3ba6e3e4f67"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#a5a7441a7ac349f32345bd3ba6e3e4f67">addAudioDecoder</a> (<a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> &amp;decoder, const char *mime, bool(*check)(uint8_t *data, size_t len))</td></tr>
@@ -137,8 +135,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a354c7d206ec624b9bdbb81f3b788f826"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a67b76affb3b5d35fa419ac234144038b" id="r_a67b76affb3b5d35fa419ac234144038b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#a67b76affb3b5d35fa419ac234144038b">operator bool</a> () const</td></tr>
 <tr class="separator:a67b76affb3b5d35fa419ac234144038b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea093e1a474ffe01c5744a6bfcd79904" id="r_aea093e1a474ffe01c5744a6bfcd79904"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_video_player.html">VideoPlayer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#aea093e1a474ffe01c5744a6bfcd79904">operator=</a> (<a class="el" href="classaudio__tools_1_1_video_player.html">VideoPlayer</a> const &amp;)=delete</td></tr>
-<tr class="separator:aea093e1a474ffe01c5744a6bfcd79904"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3efacc385ffaca8b3e0c8858971ae6f" id="r_ad3efacc385ffaca8b3e0c8858971ae6f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#ad3efacc385ffaca8b3e0c8858971ae6f">setActive</a> (bool <a class="el" href="classaudio__tools_1_1_video_player.html#a354c7d206ec624b9bdbb81f3b788f826">isActive</a>)</td></tr>
 <tr class="separator:ad3efacc385ffaca8b3e0c8858971ae6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aebd6248f6719b0f7ccb1396e0432e392" id="r_aebd6248f6719b0f7ccb1396e0432e392"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#aebd6248f6719b0f7ccb1396e0432e392">setAudioOutput</a> (<a class="el" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a> &amp;out)</td></tr>
@@ -162,8 +158,17 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae11cb1876efbff93070bde8ecfb68b97" id="r_ae11cb1876efbff93070bde8ecfb68b97"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html">VideoAudioSyncTask</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#ae11cb1876efbff93070bde8ecfb68b97">videoSyncTask</a> ()</td></tr>
 <tr class="separator:ae11cb1876efbff93070bde8ecfb68b97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a92fa3f0f598b2ca7b4d8c593ec0f5d2d" id="r_a92fa3f0f598b2ca7b4d8c593ec0f5d2d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player_full.html#a92fa3f0f598b2ca7b4d8c593ec0f5d2d">registerAudioDecoders</a> ()</td></tr>
+<tr class="separator:a92fa3f0f598b2ca7b4d8c593ec0f5d2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5a139d851b3094664eff47a8e0843c5" id="r_aa5a139d851b3094664eff47a8e0843c5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player_full.html#aa5a139d851b3094664eff47a8e0843c5">registerVideoDecoders</a> ()</td></tr>
+<tr class="separator:aa5a139d851b3094664eff47a8e0843c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:aa87312d653aa645a999a37285473f72c" id="r_aa87312d653aa645a999a37285473f72c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_a_a_c_decoder_helix.html">AACDecoderHelix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player_full.html#aa87312d653aa645a999a37285473f72c">aac_decoder</a></td></tr>
+<tr class="separator:aa87312d653aa645a999a37285473f72c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03c996f9fcf0e10baeb3e700be0c409a" id="r_a03c996f9fcf0e10baeb3e700be0c409a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#a03c996f9fcf0e10baeb3e700be0c409a">active</a> = false</td></tr>
 <tr class="separator:a03c996f9fcf0e10baeb3e700be0c409a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21ae121154c2bd15cb6331a0f5c9cf2b" id="r_a21ae121154c2bd15cb6331a0f5c9cf2b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html">AudioTimeSourceStream</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#a21ae121154c2bd15cb6331a0f5c9cf2b">audio_clock</a></td></tr>
@@ -176,6 +181,16 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ad617d9163070a29f763ce1d4ef00568f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a270d7c1834854c68a85bbd5312749abf" id="r_a270d7c1834854c68a85bbd5312749abf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html">MultiVideoDecoder</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#a270d7c1834854c68a85bbd5312749abf">default_video_decoder</a></td></tr>
 <tr class="separator:a270d7c1834854c68a85bbd5312749abf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3064406d65ee1c7a97005c30fe414c98" id="r_a3064406d65ee1c7a97005c30fe414c98"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_h264_decoder.html">H264Decoder</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player_full.html#a3064406d65ee1c7a97005c30fe414c98">h264_decoder</a></td></tr>
+<tr class="separator:a3064406d65ee1c7a97005c30fe414c98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25eb2036be3d557a855e5686af689c24" id="r_a25eb2036be3d557a855e5686af689c24"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html">MJPEGDecoder</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player_full.html#a25eb2036be3d557a855e5686af689c24">mjpeg_decoder</a></td></tr>
+<tr class="separator:a25eb2036be3d557a855e5686af689c24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab68b67013fd063b2db9ede9cabce3a85" id="r_ab68b67013fd063b2db9ede9cabce3a85"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_m_p2_decoder.html">MP2Decoder</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player_full.html#ab68b67013fd063b2db9ede9cabce3a85">mp2_decoder</a></td></tr>
+<tr class="separator:ab68b67013fd063b2db9ede9cabce3a85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04d588692921ff510c4b703075f38247" id="r_a04d588692921ff510c4b703075f38247"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_helix.html">MP3DecoderHelix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player_full.html#a04d588692921ff510c4b703075f38247">mp3_decoder</a></td></tr>
+<tr class="separator:a04d588692921ff510c4b703075f38247"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6793f8e3556c2afc14aaf8b7a3baf330" id="r_a6793f8e3556c2afc14aaf8b7a3baf330"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html">MPGDecoder</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player_full.html#a6793f8e3556c2afc14aaf8b7a3baf330">mpeg_decoder</a></td></tr>
+<tr class="separator:a6793f8e3556c2afc14aaf8b7a3baf330"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af6c7c5af6cd2b9e1e3e526d3c862b101" id="r_af6c7c5af6cd2b9e1e3e526d3c862b101"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#af6c7c5af6cd2b9e1e3e526d3c862b101">p_audio_output</a> = nullptr</td></tr>
 <tr class="separator:af6c7c5af6cd2b9e1e3e526d3c862b101"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1af31d2c1d06511cbbf762d3ae662348" id="r_a1af31d2c1d06511cbbf762d3ae662348"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#a1af31d2c1d06511cbbf762d3ae662348">p_audio_output_typed</a> = nullptr</td></tr>
@@ -194,51 +209,33 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ad825067f52860508cd3b3ab8459d2450"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>High-level video playback pipeline and controller - the video counterpart of <a class="el" href="classaudio__tools_1_1_audio_player.html" title="High-level audio playback pipeline and controller.">AudioPlayer</a> (<a class="el" href="_audio_player_8h.html">CoreAudio/AudioPlayer.h</a>). Wraps every class a video playback example otherwise wires by hand (a container <a class="el" href="classaudio__tools_1_1_demuxer.html" title="Common interface for demuxers (DemuxerAVI, DemuxerMP4) that split a container&#39;s video and (optional) ...">Demuxer</a>, a <a class="el" href="classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 - CodecH264....">VideoDecoder</a> driven through a <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html" title="Buffers a small, configurable amount of video (see setQueueBytes()) and renders it frame by frame fro...">VideoAudioSyncTask</a>, and optionally an audio decode chain synced against it) behind one object driven by a single <a class="el" href="classaudio__tools_1_1_video_player.html#aecb44a6d385121be2179187d45520331">copy()</a> call per <a class="el" href="_main_8h.html#afe461d27b9c48d5921c00d521181f12f">loop()</a> iteration. </p>
-<p>Decodes video through a built-in <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html" title="Manages multiple VideoDecoders with automatic format detection - the video-side counterpart of MultiD...">MultiVideoDecoder</a> and audio through a built-in <a class="el" href="classaudio__tools_1_1_multi_decoder.html" title="Manage multiple AudioDecoders with automatic format detection.">MultiDecoder</a> - both start with NO codecs registered (see each one's own class comment) and neither pulls in any codec library on its own, so including this header alone adds no external dependency at all. Register whatever your content actually needs via <a class="el" href="classaudio__tools_1_1_video_player.html#a842ee816367445b57d4aaeed1164cbf1">addVideoDecoder()</a>/ <a class="el" href="classaudio__tools_1_1_video_player.html#ab6f6911289209e3e41cb3d4806a71362">addAudioDecoder()</a>, exactly as <a class="el" href="classaudio__tools_1_1_multi_video_decoder_full.html" title="MultiVideoDecoder pre-registered with every video codec this library ships a portable (no hardware-sp...">MultiVideoDecoderFull</a>'s/DecoderHelix's own constructors do internally: </p><div class="fragment"><div class="line"><a class="code hl_class" href="classaudio__tools_1_1_demuxer_a_v_i.html">DemuxerAVI</a> aviDemuxer;</div>
-<div class="line"><a class="code hl_class" href="classaudio__tools_1_1_video_player.html">VideoPlayer</a> player(aviDemuxer, tftOutput, audioOut);</div>
-<div class="line"><a class="code hl_class" href="classaudio__tools_1_1_h264_decoder.html">H264Decoder</a> h264Decoder;</div>
-<div class="line"><a class="code hl_class" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html">MJPEGDecoder</a> mjpegDecoder;</div>
-<div class="line"><a class="code hl_class" href="classaudio__tools_1_1_m_p3_decoder_helix.html">MP3DecoderHelix</a> mp3Decoder;</div>
-<div class="line"><a class="code hl_class" href="classaudio__tools_1_1_a_a_c_decoder_helix.html">AACDecoderHelix</a> aacDecoder;</div>
-<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="_main_8h.html#a4fc01d736fe50cf5b977f755b675f11d">setup</a>() {</div>
-<div class="line">  ...</div>
-<div class="line">  player.addVideoDecoder(h264Decoder, <a class="code hl_enumvalue" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a8ba63b54352f7053b055235a9ec7ac09">VideoFormat::H264</a>, <a class="code hl_function" href="group__video.html#gaf4efa2e998cd0f0ef44a774ef7edac6c">isH264Video</a>);</div>
-<div class="line">  player.addVideoDecoder(mjpegDecoder, <a class="code hl_enumvalue" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a0a5417ce14732e9bdb402be642ebe9ea">VideoFormat::MJPEG</a>, <a class="code hl_function" href="group__video.html#gae6759cb908639d7c3d7f76157d07ce1e">isMjpegVideo</a>);</div>
-<div class="line">  player.addAudioDecoder(mp3Decoder, <span class="stringliteral">&quot;audio/mpeg&quot;</span>);</div>
-<div class="line">  player.addAudioDecoder(aacDecoder, <span class="stringliteral">&quot;audio/aac&quot;</span>);</div>
-<div class="line">  player.<a class="code hl_function" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#acba365cc28eb702040c382646cfb0a7a">begin</a>(file);</div>
-<div class="line">}</div>
-<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="_main_8h.html#afe461d27b9c48d5921c00d521181f12f">loop</a>() {</div>
-<div class="line">  <span class="keywordflow">if</span> (player.copy() == 0) { file.close(); ... }</div>
-<div class="line">}</div>
-<div class="ttc" id="a_main_8h_html_a4fc01d736fe50cf5b977f755b675f11d"><div class="ttname"><a href="_main_8h.html#a4fc01d736fe50cf5b977f755b675f11d">setup</a></div><div class="ttdeci">void setup()</div></div>
-<div class="ttc" id="a_main_8h_html_afe461d27b9c48d5921c00d521181f12f"><div class="ttname"><a href="_main_8h.html#afe461d27b9c48d5921c00d521181f12f">loop</a></div><div class="ttdeci">void loop()</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_decoder_helix_html"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_decoder_helix.html">audio_tools::AACDecoderHelix</a></div><div class="ttdoc">AAC Decoder using libhelix: https://github.com/pschatzmann/arduino-libhelix This is basically just a ...</div><div class="ttdef"><b>Definition</b> CodecAACHelix.h:20</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_decoder_helix_html_acba365cc28eb702040c382646cfb0a7a"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_decoder_helix.html#acba365cc28eb702040c382646cfb0a7a">audio_tools::AACDecoderHelix::begin</a></div><div class="ttdeci">bool begin() override</div><div class="ttdoc">Starts the processing.</div><div class="ttdef"><b>Definition</b> CodecAACHelix.h:85</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_demuxer_a_v_i_html"><div class="ttname"><a href="classaudio__tools_1_1_demuxer_a_v_i.html">audio_tools::DemuxerAVI</a></div><div class="ttdoc">AVI Container Decoder which can be fed with small chunks of data. The minimum length must be bigger t...</div><div class="ttdef"><b>Definition</b> ContainerAVI.h:281</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_h264_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_h264_decoder.html">audio_tools::H264Decoder</a></div><div class="ttdoc">H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...</div><div class="ttdef"><b>Definition</b> CodecH264.h:58</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_m_j_p_e_g_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_m_j_p_e_g_decoder.html">audio_tools::MJPEGDecoder</a></div><div class="ttdoc">Motion-JPEG video decoder: wraps TinyJPEGDecoder (https://github.com/pschatzmann/TinyJPEG,...</div><div class="ttdef"><b>Definition</b> CodecJPEG.h:53</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_m_p3_decoder_helix_html"><div class="ttname"><a href="classaudio__tools_1_1_m_p3_decoder_helix.html">audio_tools::MP3DecoderHelix</a></div><div class="ttdoc">MP3 Decoder using libhelix: https://github.com/pschatzmann/arduino-libhelix This is basically just a ...</div><div class="ttdef"><b>Definition</b> CodecMP3Helix.h:20</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_video_player_html"><div class="ttname"><a href="classaudio__tools_1_1_video_player.html">audio_tools::VideoPlayer</a></div><div class="ttdoc">High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A...</div><div class="ttdef"><b>Definition</b> VideoPlayer.h:109</div></div>
-<div class="ttc" id="agroup__video_html_gae6759cb908639d7c3d7f76157d07ce1e"><div class="ttname"><a href="group__video.html#gae6759cb908639d7c3d7f76157d07ce1e">audio_tools::isMjpegVideo</a></div><div class="ttdeci">bool isMjpegVideo(const uint8_t *data, size_t len)</div><div class="ttdef"><b>Definition</b> MultiVideoDecoder.h:12</div></div>
-<div class="ttc" id="agroup__video_html_gaf4efa2e998cd0f0ef44a774ef7edac6c"><div class="ttname"><a href="group__video.html#gaf4efa2e998cd0f0ef44a774ef7edac6c">audio_tools::isH264Video</a></div><div class="ttdeci">bool isH264Video(const uint8_t *data, size_t len)</div><div class="ttdef"><b>Definition</b> MultiVideoDecoder.h:42</div></div>
-<div class="ttc" id="agroup__video_html_gga216a5d43d2a518325c84f100ed7735a5a0a5417ce14732e9bdb402be642ebe9ea"><div class="ttname"><a href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a0a5417ce14732e9bdb402be642ebe9ea">audio_tools::VideoFormat::MJPEG</a></div><div class="ttdeci">@ MJPEG</div></div>
-<div class="ttc" id="agroup__video_html_gga216a5d43d2a518325c84f100ed7735a5a8ba63b54352f7053b055235a9ec7ac09"><div class="ttname"><a href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a8ba63b54352f7053b055235a9ec7ac09">audio_tools::VideoFormat::H264</a></div><div class="ttdeci">@ H264</div></div>
-</div><!-- fragment --><p> matching sd-avi-mjpg-video.ino/decode-avi.ino's own pipeline. Use <a class="el" href="classaudio__tools_1_1_video_player_full.html" title="VideoPlayer subclass configured for every codec this library ships a portable software decoder for - ...">VideoPlayerFull</a> (<a class="el" href="_video_player_full_8h.html">VideoPlayerFull.h</a>) instead for the "just point it at a
-file, any common codec just works" convenience with no registration code of your own needed - it pre-registers every video codec (H264/MJPEG/MPEG-1) and the most common audio ones (MP3/AAC/MP2), at the cost of pulling in every one of their codec libraries unconditionally (see its own class comment).</p>
-<p><a class="el" href="classaudio__tools_1_1_video_player.html#ab6f6911289209e3e41cb3d4806a71362">addAudioDecoder()</a> also covers a codec the DemuxerXxx::mime() this class's demuxer reports precisely but a plain byte-sniffing <a class="el" href="classaudio__tools_1_1_mime_detector.html" title="Logic to detemine the mime type from the content. By default the following mime types are supported (...">MimeDetector</a> wouldn't otherwise recognize, e.g. <a class="el" href="classaudio__tools_1_1_m_p2_decoder.html" title="Decoder for MPEG-1 Layer II (MP2) audio using the TinyMP2 library. Compressed data provided via write...">MP2Decoder</a> (TinyMP2) for MPEG-1 Layer II audio, the same way sd-mpg-video.ino's hand-wired pipeline does: </p><div class="fragment"><div class="line">player.addAudioDecoder(mp2Decoder, <span class="stringliteral">&quot;audio/mpeg; codecs=\&quot;mpeg1-layer2\&quot;&quot;</span>);</div>
-</div><!-- fragment --><p> <a class="el" href="classaudio__tools_1_1_video_player.html#a842ee816367445b57d4aaeed1164cbf1">addVideoDecoder()</a> similarly covers a hardware-accelerated decoder like <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html" title="H.264 video decoder for ESP32-S3: wraps esp_h264::H264Decoder (https://github.com/pschatzmann/ESP32S3...">H264DecoderESP32S3</a> (<a class="el" href="_codec_h264_e_s_p32_s3_8h.html">CodecH264ESP32S3.h</a>) in place of a portable one. There is no way to replace either multi-decoder wholesale (e.g. with a single-codec decoder) - add to what's already registered instead. A video-only stream needs no audio decoder registered at all - see <a class="el" href="classaudio__tools_1_1_video_player.html#a7f61d6c44e26898d3c968dc030953116">setAudioOutput()</a>/the class's video-only constructor.</p>
-<p><a class="el" href="classaudio__tools_1_1_pipeline.html" title="We can build a input or an output chain: an input chain starts with setInput(); followed by add() an ...">Pipeline</a>: <a class="el" href="class_stream.html">Stream</a> (source) -&gt; <a class="el" href="classaudio__tools_1_1_video_player.html#aecb44a6d385121be2179187d45520331">copy()</a> (CodecCopy-equivalent) -&gt; <a class="el" href="classaudio__tools_1_1_demuxer.html" title="Common interface for demuxers (DemuxerAVI, DemuxerMP4) that split a container&#39;s video and (optional) ...">Demuxer</a> (demux) -&gt; <a class="el" href="classaudio__tools_1_1_encoded_audio_stream.html" title="A more natural Stream class to process encoded data (aac, wav, mp3...) which also supports the decodi...">EncodedAudioStream</a> (<a class="el" href="classaudio__tools_1_1_audio_decoder.html" title="Decoding of encoded audio into PCM data.">AudioDecoder</a>) -&gt; [<a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html" title="AudioTimeSourceStream: A stream that provides time information based on the audio data actually proce...">AudioTimeSourceStream</a> (audio clock), see <a class="el" href="classaudio__tools_1_1_video_player.html#acd3301df81e4f5df221b5a14d2ece225">setUseAudioClock()</a>] -&gt; audio output -&gt; <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html" title="Buffers a small, configurable amount of video (see setQueueBytes()) and renders it frame by frame fro...">VideoAudioSyncTask</a> (buffer + schedule) -&gt; <a class="el" href="classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 - CodecH264....">VideoDecoder</a> -&gt; video output (own background task)</p>
-<p>Audio clock: scheduling video against real playback progress (<a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#ad9996877508163928b063ff7ab1c05ec">VideoAudioSyncTask::setAudioClock()</a>) needs an audio clock that's actually advancing - wiring one against a track that never delivers any bytes (silent/absent audio) would stall video forever waiting for a clock that never moves (see decode-mp4.ino's own history for exactly this bug). <a class="el" href="classaudio__tools_1_1_video_player.html#acd3301df81e4f5df221b5a14d2ece225">setUseAudioClock()</a> therefore defaults to false: video is scheduled against wall-clock time unless you explicitly opt in once an audio output is wired AND you know the content actually has a real audio track.</p>
-<p>Only covers the common "feed a Demuxer straight from a Stream" case, matching the RAM-backed sample-table default every <a class="el" href="classaudio__tools_1_1_demuxer.html" title="Common interface for demuxers (DemuxerAVI, DemuxerMP4) that split a container&#39;s video and (optional) ...">Demuxer</a> uses out of the box - the seek-backed/spooled MP4 strategies (see decode-mp4-file.ino/decode-mp4-spooled.ino) feed their <a class="el" href="classaudio__tools_1_1_demuxer.html" title="Common interface for demuxers (DemuxerAVI, DemuxerMP4) that split a container&#39;s video and (optional) ...">Demuxer</a> through their own FileSeekableSource/SpoolStorageFactory machinery instead, for their own memory-optimization reasons, and are not wrapped here; use <a class="el" href="classaudio__tools_1_1_video_player.html#a0022938d4950170bca92c7617efe2245" title="The Demuxer given to setDemuxer()/the constructor.">demuxer()</a> to wire one of those directly and drive it yourself instead of calling <a class="el" href="classaudio__tools_1_1_video_player.html#aecb44a6d385121be2179187d45520331">copy()</a>/copyAll() on this class.</p>
-<p>Operation model: call <a class="el" href="classaudio__tools_1_1_video_player.html#aecb44a6d385121be2179187d45520331">copy()</a> regularly (non-blocking) in <a class="el" href="_main_8h.html#afe461d27b9c48d5921c00d521181f12f">loop()</a>, or <a class="el" href="classaudio__tools_1_1_video_player.html#a2460ef7eb9e05626e366f0d03f019ca2" title="Copies until the source is exhausted (blocking).">copyAll()</a> for blocking end-to-end playback.</p>
-<p>Dependencies: none - this header itself doesn't pull in any codec library (see above). Bring whichever video/audio codec libraries your content actually needs and register them via <a class="el" href="classaudio__tools_1_1_video_player.html#a842ee816367445b57d4aaeed1164cbf1">addVideoDecoder()</a>/ <a class="el" href="classaudio__tools_1_1_video_player.html#ab6f6911289209e3e41cb3d4806a71362">addAudioDecoder()</a>, or use <a class="el" href="classaudio__tools_1_1_video_player_full.html" title="VideoPlayer subclass configured for every codec this library ships a portable software decoder for - ...">VideoPlayerFull</a> for all of them at once.</p>
+<div class="textblock"><p><a class="el" href="classaudio__tools_1_1_video_player.html" title="High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A...">VideoPlayer</a> subclass configured for every codec this library ships a portable software decoder for - video AND audio - so it's the "just point it at a file, any common codec just works" player, the same convenience MultiVideoDecoderFull/DecoderHelix each provide on their own side. Use this instead of the base <a class="el" href="classaudio__tools_1_1_video_player.html" title="High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A...">VideoPlayer</a> unless you specifically want to keep this class's extra dependencies (below) out of your build. </p>
+<ul>
+<li>the base <a class="el" href="classaudio__tools_1_1_video_player.html" title="High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A...">VideoPlayer</a>'s video and audio multi-decoders both start empty (see its own class comment), so it has none.</li>
+</ul>
+<p>Video codecs - registered in this subclass's own constructor, the same way <a class="el" href="classaudio__tools_1_1_multi_video_decoder_full.html" title="MultiVideoDecoder pre-registered with every video codec this library ships a portable (no hardware-sp...">MultiVideoDecoderFull</a>'s does (<a class="el" href="_multi_video_decoder_full_8h.html">MultiVideoDecoderFull.h</a> - a plain <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html" title="Manages multiple VideoDecoders with automatic format detection - the video-side counterpart of MultiD...">MultiVideoDecoder</a> pre-registered the same way, for callers that want this convenience without the rest of <a class="el" href="classaudio__tools_1_1_video_player.html" title="High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A...">VideoPlayer</a>):</p><ul>
+<li>H264 (<a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a>, TinyH264)</li>
+<li>Motion-JPEG (<a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html" title="Motion-JPEG video decoder: wraps TinyJPEGDecoder (https://github.com/pschatzmann/TinyJPEG,...">MJPEGDecoder</a>, TinyJPEG)</li>
+<li>MPEG-1 (<a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html" title="MPEG-1 (part 2) video decoder wrapper around TinyMPGDecoder.">MPGDecoder</a>, TinyMPG)</li>
+</ul>
+<p>Audio codecs - also registered in this subclass's own constructor, since the base <a class="el" href="classaudio__tools_1_1_video_player.html" title="High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A...">VideoPlayer</a>'s audio multi-decoder starts empty on purpose (see its class comment):</p><ul>
+<li>"audio/mpeg" -&gt; <a class="el" href="classaudio__tools_1_1_m_p3_decoder_helix.html" title="MP3 Decoder using libhelix: https://github.com/pschatzmann/arduino-libhelix This is basically just a ...">MP3DecoderHelix</a></li>
+<li>"audio/aac" -&gt; <a class="el" href="classaudio__tools_1_1_a_a_c_decoder_helix.html" title="AAC Decoder using libhelix: https://github.com/pschatzmann/arduino-libhelix This is basically just a ...">AACDecoderHelix</a></li>
+<li>"audio/mpeg; codecs=\"mpeg1-layer2\"" -&gt; <a class="el" href="classaudio__tools_1_1_m_p2_decoder.html" title="Decoder for MPEG-1 Layer II (MP2) audio using the TinyMP2 library. Compressed data provided via write...">MP2Decoder</a> - the exact mime <a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html#ab233b9d1b86c9d2a2c009d6473aa8938">DemuxerMPG::mime()</a> reports for Layer II (see its own comment); a plain "audio/mpeg" match (from any container) still resolves to <a class="el" href="classaudio__tools_1_1_m_p3_decoder_helix.html" title="MP3 Decoder using libhelix: https://github.com/pschatzmann/arduino-libhelix This is basically just a ...">MP3DecoderHelix</a> instead (registered first - see <a class="el" href="classaudio__tools_1_1_multi_decoder.html" title="Manage multiple AudioDecoders with automatic format detection.">MultiDecoder</a>:: selectDecoder()'s base-mime-type fallback), which is correct since MP2 realistically only shows up in an MPEG-PS (.mpg) container.</li>
+</ul>
+<p>WAV is deliberately not included - DemuxerAVI/DemuxerMP4 report it too ("audio/vnd.wave"), but <a class="el" href="_codec_w_a_v_8h.html">AudioTools/AudioCodecs/CodecWAV.h</a> has no external dependency of its own to justify bundling it here; register it yourself (addAudioDecoder(wavDecoder, "audio/vnd.wave")) if your content needs it.</p>
+<p>Dependencies (install via Library Manager) - all pulled in only by choosing this subclass over the dependency-free base <a class="el" href="classaudio__tools_1_1_video_player.html" title="High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A...">VideoPlayer</a>:</p><ul>
+<li><a href="https://github.com/pschatzmann/TinyH264">https://github.com/pschatzmann/TinyH264</a></li>
+<li><a href="https://github.com/pschatzmann/TinyMPG">https://github.com/pschatzmann/TinyMPG</a></li>
+<li><a href="https://github.com/pschatzmann/TinyJPEG">https://github.com/pschatzmann/TinyJPEG</a></li>
+<li><a href="https://github.com/pschatzmann/arduino-libhelix">https://github.com/pschatzmann/arduino-libhelix</a></li>
+<li><a href="https://github.com/pschatzmann/TinyMP2">https://github.com/pschatzmann/TinyMP2</a></li>
+</ul>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a0f940bc07cf4fd7ced40fd41f60f8509" name="a0f940bc07cf4fd7ced40fd41f60f8509"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0f940bc07cf4fd7ced40fd41f60f8509">&#9670;&#160;</a></span>VideoPlayer() <span class="overload">[1/6]</span></h2>
+<a id="aebffa4348fff6c7ae15df25fc90e5ba1" name="aebffa4348fff6c7ae15df25fc90e5ba1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebffa4348fff6c7ae15df25fc90e5ba1">&#9670;&#160;</a></span>VideoPlayerFull() <span class="overload">[1/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -247,7 +244,7 @@ file, any common codec just works" convenience with no registration code of your
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_video_player.html">VideoPlayer</a> </td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_video_player_full.html">VideoPlayerFull</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -255,15 +252,15 @@ file, any common codec just works" convenience with no registration code of your
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a550af908a687287c7f83270abf5a54eb" name="a550af908a687287c7f83270abf5a54eb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a550af908a687287c7f83270abf5a54eb">&#9670;&#160;</a></span>VideoPlayer() <span class="overload">[2/6]</span></h2>
+<a id="a0d761967635365989f7143affb7f0f19" name="a0d761967635365989f7143affb7f0f19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d761967635365989f7143affb7f0f19">&#9670;&#160;</a></span>VideoPlayerFull() <span class="overload">[2/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -272,7 +269,7 @@ file, any common codec just works" convenience with no registration code of your
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_video_player.html">VideoPlayer</a> </td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_video_player_full.html">VideoPlayerFull</a> </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classaudio__tools_1_1_demuxer.html">Demuxer</a> &amp;&#160;</td>
           <td class="paramname"><em>demuxer</em>, </td>
@@ -296,12 +293,10 @@ file, any common codec just works" convenience with no registration code of your
 </table>
 </div><div class="memdoc">
 
-<p>Video-only playback (no audio track) - auto-detected video codec. </p>
-
 </div>
 </div>
-<a id="a4240797764e46639da67f13132c85586" name="a4240797764e46639da67f13132c85586"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4240797764e46639da67f13132c85586">&#9670;&#160;</a></span>VideoPlayer() <span class="overload">[3/6]</span></h2>
+<a id="aab8158a04e433654f0e003f4f9e47b94" name="aab8158a04e433654f0e003f4f9e47b94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab8158a04e433654f0e003f4f9e47b94">&#9670;&#160;</a></span>VideoPlayerFull() <span class="overload">[3/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -310,7 +305,7 @@ file, any common codec just works" convenience with no registration code of your
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_video_player.html">VideoPlayer</a> </td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_video_player_full.html">VideoPlayerFull</a> </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classaudio__tools_1_1_demuxer.html">Demuxer</a> &amp;&#160;</td>
           <td class="paramname"><em>demuxer</em>, </td>
@@ -339,13 +334,11 @@ file, any common codec just works" convenience with no registration code of your
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Video + audio playback (<a class="el" href="classaudio__tools_1_1_audio_output.html" title="Abstract Audio Ouptut class.">AudioOutput</a> target, e.g. AudioBoardStream/ <a class="el" href="classaudio__tools_1_1_i2_s_stream.html" title="We support the Stream interface for the I2S access. In addition we allow a separate mute pin which mi...">I2SStream</a>) with auto-detected codecs. See the class comment's "Audio
-clock" section - setUseAudioClock(true) still needs to be called explicitly if the content actually has a real audio track and should be scheduled against it. </p>
 
 </div>
 </div>
-<a id="ae09e031f4a6ed5d8b8b6fbd1672629e7" name="ae09e031f4a6ed5d8b8b6fbd1672629e7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae09e031f4a6ed5d8b8b6fbd1672629e7">&#9670;&#160;</a></span>VideoPlayer() <span class="overload">[4/6]</span></h2>
+<a id="a013986255c36ae17127f2cd55a65b108" name="a013986255c36ae17127f2cd55a65b108"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a013986255c36ae17127f2cd55a65b108">&#9670;&#160;</a></span>VideoPlayerFull() <span class="overload">[4/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -354,7 +347,7 @@ clock" section - setUseAudioClock(true) still needs to be called explicitly if t
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_video_player.html">VideoPlayer</a> </td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_video_player_full.html">VideoPlayerFull</a> </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classaudio__tools_1_1_demuxer.html">Demuxer</a> &amp;&#160;</td>
           <td class="paramname"><em>demuxer</em>, </td>
@@ -383,12 +376,11 @@ clock" section - setUseAudioClock(true) still needs to be called explicitly if t
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Video + audio playback (a generic <a class="el" href="class_print.html">Print</a> target) with auto-detected codecs. See the class comment's "Audio clock" section. </p>
 
 </div>
 </div>
-<a id="a5da006930d6dfbd755a910fe52c11892" name="a5da006930d6dfbd755a910fe52c11892"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5da006930d6dfbd755a910fe52c11892">&#9670;&#160;</a></span>VideoPlayer() <span class="overload">[5/6]</span></h2>
+<a id="a54587658a1bd382d923c03c5b72b27e2" name="a54587658a1bd382d923c03c5b72b27e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54587658a1bd382d923c03c5b72b27e2">&#9670;&#160;</a></span>VideoPlayerFull() <span class="overload">[5/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -397,7 +389,7 @@ clock" section - setUseAudioClock(true) still needs to be called explicitly if t
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_video_player.html">VideoPlayer</a> </td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_video_player_full.html">VideoPlayerFull</a> </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classaudio__tools_1_1_demuxer.html">Demuxer</a> &amp;&#160;</td>
           <td class="paramname"><em>demuxer</em>, </td>
@@ -426,34 +418,6 @@ clock" section - setUseAudioClock(true) still needs to be called explicitly if t
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Video + audio playback (<a class="el" href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...">AudioStream</a> target, e.g. <a class="el" href="classaudio__tools_1_1_port_audio_stream.html" title="Arduino Audio Stream using PortAudio.">PortAudioStream</a>) with auto-detected codecs. See the class comment's "Audio clock" section. </p>
-
-</div>
-</div>
-<a id="af2c49e0f10bfe71d0d3e3c2adfbcaba1" name="af2c49e0f10bfe71d0d3e3c2adfbcaba1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af2c49e0f10bfe71d0d3e3c2adfbcaba1">&#9670;&#160;</a></span>VideoPlayer() <span class="overload">[6/6]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_video_player.html">VideoPlayer</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_video_player.html">VideoPlayer</a> const &amp;&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Non-copyable: video_sync/audio_out below are wired against this object's own member addresses - copying would leave the copy's internal wiring pointing at the original. </p>
 
 </div>
 </div>
@@ -487,7 +451,7 @@ clock" section - setUseAudioClock(true) still needs to be called explicitly if t
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -530,7 +494,7 @@ clock" section - setUseAudioClock(true) still needs to be called explicitly if t
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -575,7 +539,7 @@ clock" section - setUseAudioClock(true) still needs to be called explicitly if t
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -601,7 +565,7 @@ clock" section - setUseAudioClock(true) still needs to be called explicitly if t
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -628,7 +592,7 @@ clock" section - setUseAudioClock(true) still needs to be called explicitly if t
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -654,7 +618,7 @@ clock" section - setUseAudioClock(true) still needs to be called explicitly if t
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -680,7 +644,7 @@ clock" section - setUseAudioClock(true) still needs to be called explicitly if t
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -707,7 +671,7 @@ clock" section - setUseAudioClock(true) still needs to be called explicitly if t
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -734,7 +698,7 @@ clock" section - setUseAudioClock(true) still needs to be called explicitly if t
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -760,7 +724,7 @@ clock" section - setUseAudioClock(true) still needs to be called explicitly if t
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -787,7 +751,7 @@ clock" section - setUseAudioClock(true) still needs to be called explicitly if t
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -813,15 +777,15 @@ clock" section - setUseAudioClock(true) still needs to be called explicitly if t
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="aea093e1a474ffe01c5744a6bfcd79904" name="aea093e1a474ffe01c5744a6bfcd79904"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea093e1a474ffe01c5744a6bfcd79904">&#9670;&#160;</a></span>operator=()</h2>
+<a id="a92fa3f0f598b2ca7b4d8c593ec0f5d2d" name="a92fa3f0f598b2ca7b4d8c593ec0f5d2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92fa3f0f598b2ca7b4d8c593ec0f5d2d">&#9670;&#160;</a></span>registerAudioDecoders()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -830,16 +794,40 @@ clock" section - setUseAudioClock(true) still needs to be called explicitly if t
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_video_player.html">VideoPlayer</a> &amp; operator= </td>
+          <td class="memname">void registerAudioDecoders </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_video_player.html">VideoPlayer</a> const &amp;&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa5a139d851b3094664eff47a8e0843c5" name="aa5a139d851b3094664eff47a8e0843c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5a139d851b3094664eff47a8e0843c5">&#9670;&#160;</a></span>registerVideoDecoders()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void registerVideoDecoders </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -865,7 +853,7 @@ clock" section - setUseAudioClock(true) still needs to be called explicitly if t
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -892,7 +880,7 @@ clock" section - setUseAudioClock(true) still needs to be called explicitly if t
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -918,7 +906,7 @@ clock" section - setUseAudioClock(true) still needs to be called explicitly if t
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -944,7 +932,7 @@ clock" section - setUseAudioClock(true) still needs to be called explicitly if t
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -973,7 +961,7 @@ AudioOutput&amp;)/setStream(<a class="el" href="classaudio__tools_1_1_audio_stre
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1000,7 +988,7 @@ AudioOutput&amp;)/setStream(<a class="el" href="classaudio__tools_1_1_audio_stre
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1027,7 +1015,7 @@ AudioOutput&amp;)/setStream(<a class="el" href="classaudio__tools_1_1_audio_stre
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1054,7 +1042,7 @@ AudioOutput&amp;)/setStream(<a class="el" href="classaudio__tools_1_1_audio_stre
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1080,7 +1068,7 @@ AudioOutput&amp;)/setStream(<a class="el" href="classaudio__tools_1_1_audio_stre
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1105,7 +1093,7 @@ AudioOutput&amp;)/setStream(<a class="el" href="classaudio__tools_1_1_audio_stre
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1131,7 +1119,7 @@ AudioOutput&amp;)/setStream(<a class="el" href="classaudio__tools_1_1_audio_stre
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1140,6 +1128,28 @@ AudioOutput&amp;)/setStream(<a class="el" href="classaudio__tools_1_1_audio_stre
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="aa87312d653aa645a999a37285473f72c" name="aa87312d653aa645a999a37285473f72c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa87312d653aa645a999a37285473f72c">&#9670;&#160;</a></span>aac_decoder</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_a_a_c_decoder_helix.html">AACDecoderHelix</a> aac_decoder</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a03c996f9fcf0e10baeb3e700be0c409a" name="a03c996f9fcf0e10baeb3e700be0c409a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a03c996f9fcf0e10baeb3e700be0c409a">&#9670;&#160;</a></span>active</h2>
 
@@ -1155,7 +1165,7 @@ AudioOutput&amp;)/setStream(<a class="el" href="classaudio__tools_1_1_audio_stre
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1177,7 +1187,7 @@ AudioOutput&amp;)/setStream(<a class="el" href="classaudio__tools_1_1_audio_stre
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1199,7 +1209,7 @@ AudioOutput&amp;)/setStream(<a class="el" href="classaudio__tools_1_1_audio_stre
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1221,7 +1231,7 @@ AudioOutput&amp;)/setStream(<a class="el" href="classaudio__tools_1_1_audio_stre
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1243,7 +1253,7 @@ AudioOutput&amp;)/setStream(<a class="el" href="classaudio__tools_1_1_audio_stre
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1261,6 +1271,116 @@ AudioOutput&amp;)/setStream(<a class="el" href="classaudio__tools_1_1_audio_stre
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html">MultiVideoDecoder</a> default_video_decoder</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3064406d65ee1c7a97005c30fe414c98" name="a3064406d65ee1c7a97005c30fe414c98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3064406d65ee1c7a97005c30fe414c98">&#9670;&#160;</a></span>h264_decoder</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_h264_decoder.html">H264Decoder</a> h264_decoder</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a25eb2036be3d557a855e5686af689c24" name="a25eb2036be3d557a855e5686af689c24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25eb2036be3d557a855e5686af689c24">&#9670;&#160;</a></span>mjpeg_decoder</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html">MJPEGDecoder</a> mjpeg_decoder</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab68b67013fd063b2db9ede9cabce3a85" name="ab68b67013fd063b2db9ede9cabce3a85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab68b67013fd063b2db9ede9cabce3a85">&#9670;&#160;</a></span>mp2_decoder</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_m_p2_decoder.html">MP2Decoder</a> mp2_decoder</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a04d588692921ff510c4b703075f38247" name="a04d588692921ff510c4b703075f38247"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04d588692921ff510c4b703075f38247">&#9670;&#160;</a></span>mp3_decoder</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_helix.html">MP3DecoderHelix</a> mp3_decoder</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6793f8e3556c2afc14aaf8b7a3baf330" name="a6793f8e3556c2afc14aaf8b7a3baf330"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6793f8e3556c2afc14aaf8b7a3baf330">&#9670;&#160;</a></span>mpeg_decoder</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html">MPGDecoder</a> mpeg_decoder</td>
         </tr>
       </table>
   </td>
@@ -1287,7 +1407,7 @@ AudioOutput&amp;)/setStream(<a class="el" href="classaudio__tools_1_1_audio_stre
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1309,7 +1429,7 @@ AudioOutput&amp;)/setStream(<a class="el" href="classaudio__tools_1_1_audio_stre
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1331,7 +1451,7 @@ AudioOutput&amp;)/setStream(<a class="el" href="classaudio__tools_1_1_audio_stre
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1353,7 +1473,7 @@ AudioOutput&amp;)/setStream(<a class="el" href="classaudio__tools_1_1_audio_stre
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1375,7 +1495,7 @@ AudioOutput&amp;)/setStream(<a class="el" href="classaudio__tools_1_1_audio_stre
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1397,7 +1517,7 @@ AudioOutput&amp;)/setStream(<a class="el" href="classaudio__tools_1_1_audio_stre
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1419,7 +1539,7 @@ AudioOutput&amp;)/setStream(<a class="el" href="classaudio__tools_1_1_audio_stre
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1441,7 +1561,7 @@ AudioOutput&amp;)/setStream(<a class="el" href="classaudio__tools_1_1_audio_stre
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1449,7 +1569,7 @@ AudioOutput&amp;)/setStream(<a class="el" href="classaudio__tools_1_1_audio_stre
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/Video/<a class="el" href="_video_player_8h_source.html">VideoPlayer.h</a></li>
+<li>src/AudioTools/Video/<a class="el" href="_video_player_full_8h_source.html">VideoPlayerFull.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
