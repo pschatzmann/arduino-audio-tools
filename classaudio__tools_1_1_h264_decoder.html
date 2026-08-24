@@ -126,6 +126,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:abd16630f3db4bcac2f0677b7197f3af9" id="r_abd16630f3db4bcac2f0677b7197f3af9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#abd16630f3db4bcac2f0677b7197f3af9">isKeyFrame</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="memdesc:abd16630f3db4bcac2f0677b7197f3af9"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="classaudio__tools_1_1_video_output.html#ae90cddad4cdc7ab4f54c2f5976e6eabf">VideoOutput::isKeyFrame()</a> - scans for an Annex-B IDR slice NAL.  <br /></td></tr>
 <tr class="separator:abd16630f3db4bcac2f0677b7197f3af9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d303e10275604ba1f2dbf12daecbca7" id="r_a0d303e10275604ba1f2dbf12daecbca7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#a0d303e10275604ba1f2dbf12daecbca7">isValid</a> (const uint8_t *data, size_t len) override</td></tr>
+<tr class="separator:a0d303e10275604ba1f2dbf12daecbca7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8758c5dbc5f1a35e327670cb8cac90c" id="r_ab8758c5dbc5f1a35e327670cb8cac90c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#ab8758c5dbc5f1a35e327670cb8cac90c">setMaxRefFrames</a> (int n)</td></tr>
 <tr class="separator:ab8758c5dbc5f1a35e327670cb8cac90c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05ff4cf361d54457ed8586e8c14aa922" id="r_a05ff4cf361d54457ed8586e8c14aa922"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput</a> (<a class="el" href="class_print.html">Print</a> &amp;out) override</td></tr>
@@ -486,6 +488,45 @@ Protected Attributes</h2></td></tr>
 <p>See <a class="el" href="classaudio__tools_1_1_video_output.html#ae90cddad4cdc7ab4f54c2f5976e6eabf">VideoOutput::isKeyFrame()</a> - scans for an Annex-B IDR slice NAL. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_output.html#ae90cddad4cdc7ab4f54c2f5976e6eabf">VideoOutput</a>.</p>
+
+</div>
+</div>
+<a id="a0d303e10275604ba1f2dbf12daecbca7" name="a0d303e10275604ba1f2dbf12daecbca7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d303e10275604ba1f2dbf12daecbca7">&#9670;&#160;</a></span>isValid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isValid </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>True if <code>data</code> starts with an Annex-B start code (00 00 01) followed by a structurally valid NAL header (forbidden_zero_bit == 0, a defined nal_unit_type) - see <a class="el" href="classaudio__tools_1_1_video_decoder.html#a1d917cf8a29af24e8beaa22306cfffe2">VideoDecoder::isValid()</a>. Checked after <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a0d303e10275604ba1f2dbf12daecbca7">MPGDecoder::isValid()</a> (<a class="el" href="_codec_m_p_g_8h.html">CodecMPG.h</a>) by <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html" title="Manages multiple VideoDecoders with automatic format detection - the video-side counterpart of MultiD...">MultiVideoDecoder</a> (see <a class="el" href="classaudio__tools_1_1_multi_video_decoder_full.html" title="MultiVideoDecoder pre-registered with every video codec this library ships a portable (no hardware-sp...">MultiVideoDecoderFull</a>'s constructor), since a handful of low NAL-type values numerically overlap MPEG-1's slice_start_code range and are only disambiguated by MPEG-1's own sequence_header having already been ruled out first. </p>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_decoder.html#a1d917cf8a29af24e8beaa22306cfffe2">VideoDecoder</a>.</p>
 
 </div>
 </div>

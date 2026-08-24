@@ -124,6 +124,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a6b9d7d37dfa865711aa1474be238da12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd16630f3db4bcac2f0677b7197f3af9" id="r_abd16630f3db4bcac2f0677b7197f3af9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#abd16630f3db4bcac2f0677b7197f3af9">isKeyFrame</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="separator:abd16630f3db4bcac2f0677b7197f3af9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d303e10275604ba1f2dbf12daecbca7" id="r_a0d303e10275604ba1f2dbf12daecbca7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#a0d303e10275604ba1f2dbf12daecbca7">isValid</a> (const uint8_t *data, size_t len) override</td></tr>
+<tr class="separator:a0d303e10275604ba1f2dbf12daecbca7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c379b2bb809c0838ca1f6e401230fb0" id="r_a8c379b2bb809c0838ca1f6e401230fb0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#a8c379b2bb809c0838ca1f6e401230fb0">setByteSwap</a> (bool active)</td></tr>
 <tr class="separator:a8c379b2bb809c0838ca1f6e401230fb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05ff4cf361d54457ed8586e8c14aa922" id="r_a05ff4cf361d54457ed8586e8c14aa922"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput</a> (<a class="el" href="class_print.html">Print</a> &amp;out) override</td></tr>
@@ -463,6 +465,45 @@ Protected Attributes</h2></td></tr>
 <p>See <a class="el" href="classaudio__tools_1_1_video_output.html#ae90cddad4cdc7ab4f54c2f5976e6eabf">VideoOutput::isKeyFrame()</a> - always true: Motion-JPEG is an all-intra format, every frame is a complete, independently decodable image with no inter-frame prediction (the same property that makes an H.264 IDR frame or an MPEG-1 I-picture "key", just true of every frame here instead of periodically). This matters beyond classification - <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html" title="Buffers a small, configurable amount of video (see setQueueBytes()) and renders it frame by frame fro...">VideoAudioSyncTask</a>'s awaiting_keyframe recovery latch (set after a resync) only clears once a frame reports <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#abd16630f3db4bcac2f0677b7197f3af9">isKeyFrame()</a>==true; returning false here would leave every frame classified as non-key, so once any resync ever fired, that latch would never clear and rendering would silently stall forever. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_output.html#ae90cddad4cdc7ab4f54c2f5976e6eabf">VideoOutput</a>.</p>
+
+</div>
+</div>
+<a id="a0d303e10275604ba1f2dbf12daecbca7" name="a0d303e10275604ba1f2dbf12daecbca7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d303e10275604ba1f2dbf12daecbca7">&#9670;&#160;</a></span>isValid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isValid </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>True if <code>data</code> looks like the start of a JPEG image (SOI marker FF D8) - unambiguous, and reliable even on the very first <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> of a stream since a JPEG image always begins at FF D8 regardless of framing - see <a class="el" href="classaudio__tools_1_1_video_decoder.html#a1d917cf8a29af24e8beaa22306cfffe2">VideoDecoder::isValid()</a>. </p>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_decoder.html#a1d917cf8a29af24e8beaa22306cfffe2">VideoDecoder</a>.</p>
 
 </div>
 </div>

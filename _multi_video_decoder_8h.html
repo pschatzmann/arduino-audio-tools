@@ -75,8 +75,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle"><div class="title">MultiVideoDecoder.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -90,7 +89,7 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_multi_video_decoder_1_1_decoder_info.html">MultiVideoDecoder::DecoderInfo</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html">MultiVideoDecoder</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manages multiple VideoDecoders with automatic format detection - the video-side counterpart of <a class="el" href="classaudio__tools_1_1_multi_decoder.html" title="Manage multiple AudioDecoders with automatic format detection.">MultiDecoder</a> (<a class="el" href="_multi_decoder_8h.html">AudioCodecs/MultiDecoder.h</a>). No decoders are registered by default and this header has no codec- library dependency of its own - register whatever your content needs via <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a76ac48538c8911b59230d4ebbd62990c">addDecoder()</a>, or use <a class="el" href="classaudio__tools_1_1_multi_video_decoder_full.html" title="MultiVideoDecoder pre-registered with every video codec this library ships a portable (no hardware-sp...">MultiVideoDecoderFull</a> (<a class="el" href="_multi_video_decoder_full_8h.html">MultiVideoDecoderFull.h</a>) for one pre-registered with every video codec this library ships a portable (no hardware-specific backend) software decoder for (H264/MJPEG/MPEG-1).  <a href="classaudio__tools_1_1_multi_video_decoder.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manages multiple VideoDecoders with automatic format detection - the video-side counterpart of <a class="el" href="classaudio__tools_1_1_multi_decoder.html" title="Manage multiple AudioDecoders with automatic format detection.">MultiDecoder</a> (<a class="el" href="_multi_decoder_8h.html">AudioCodecs/MultiDecoder.h</a>). No decoders are registered by default and this header has no codec- library dependency of its own - register whatever your content needs via <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a3aa86325c88f51b41f55c77335059fab">addDecoder()</a>, or use <a class="el" href="classaudio__tools_1_1_multi_video_decoder_full.html" title="MultiVideoDecoder pre-registered with every video codec this library ships a portable (no hardware-sp...">MultiVideoDecoderFull</a> (<a class="el" href="_multi_video_decoder_full_8h.html">MultiVideoDecoderFull.h</a>) for one pre-registered with every video codec this library ships a portable (no hardware-specific backend) software decoder for (H264/MJPEG/MPEG-1).  <a href="classaudio__tools_1_1_multi_video_decoder.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
@@ -98,15 +97,6 @@ Namespaces</h2></td></tr>
 <tr class="memitem:namespaceaudio__tools" id="r_namespaceaudio__tools"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></td></tr>
 <tr class="memdesc:namespaceaudio__tools"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic Implementation of sound input and output for desktop environments using portaudio. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:gaf4efa2e998cd0f0ef44a774ef7edac6c" id="r_gaf4efa2e998cd0f0ef44a774ef7edac6c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__video.html#gaf4efa2e998cd0f0ef44a774ef7edac6c">isH264Video</a> (const uint8_t *data, size_t len)</td></tr>
-<tr class="separator:gaf4efa2e998cd0f0ef44a774ef7edac6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae6759cb908639d7c3d7f76157d07ce1e" id="r_gae6759cb908639d7c3d7f76157d07ce1e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__video.html#gae6759cb908639d7c3d7f76157d07ce1e">isMjpegVideo</a> (const uint8_t *data, size_t len)</td></tr>
-<tr class="separator:gae6759cb908639d7c3d7f76157d07ce1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga74970d46a27372bcbf17233c18e0a2dd" id="r_ga74970d46a27372bcbf17233c18e0a2dd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__video.html#ga74970d46a27372bcbf17233c18e0a2dd">isMpeg1Video</a> (const uint8_t *data, size_t len)</td></tr>
-<tr class="separator:ga74970d46a27372bcbf17233c18e0a2dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

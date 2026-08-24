@@ -129,6 +129,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9ed71d94f20e455f1918935eb607496f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd16630f3db4bcac2f0677b7197f3af9" id="r_abd16630f3db4bcac2f0677b7197f3af9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#abd16630f3db4bcac2f0677b7197f3af9">isKeyFrame</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="separator:abd16630f3db4bcac2f0677b7197f3af9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d303e10275604ba1f2dbf12daecbca7" id="r_a0d303e10275604ba1f2dbf12daecbca7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a0d303e10275604ba1f2dbf12daecbca7">isValid</a> (const uint8_t *data, size_t len) override</td></tr>
+<tr class="separator:a0d303e10275604ba1f2dbf12daecbca7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c379b2bb809c0838ca1f6e401230fb0" id="r_a8c379b2bb809c0838ca1f6e401230fb0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a8c379b2bb809c0838ca1f6e401230fb0">setByteSwap</a> (bool active)</td></tr>
 <tr class="separator:a8c379b2bb809c0838ca1f6e401230fb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb93084288d9cee359601e113bf836f6" id="r_afb93084288d9cee359601e113bf836f6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#afb93084288d9cee359601e113bf836f6">setIgnorePFrames</a> (bool active)</td></tr>
@@ -539,6 +541,45 @@ is coming" (the way <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html
 <p>See <a class="el" href="classaudio__tools_1_1_video_output.html#ae90cddad4cdc7ab4f54c2f5976e6eabf">VideoOutput::isKeyFrame()</a> - true only for an I-picture (picture_coding_type == 1); P- and B-pictures both depend on other frames, so neither counts as self-contained here. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_output.html#ae90cddad4cdc7ab4f54c2f5976e6eabf">VideoOutput</a>.</p>
+
+</div>
+</div>
+<a id="a0d303e10275604ba1f2dbf12daecbca7" name="a0d303e10275604ba1f2dbf12daecbca7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d303e10275604ba1f2dbf12daecbca7">&#9670;&#160;</a></span>isValid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isValid </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>True if <code>data</code> contains an MPEG-1 sequence_header (00 00 01 B3) - required by spec to precede the first picture of any real MPEG-1 elementary stream, so it's reliably present in the very first access unit a demuxer ever hands to <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> (bundled with the first GOP/ picture - see <a class="el" href="_container_m_p_g_8h.html">ContainerMPG.h</a>'s own unit-buffering comment). 0xB3 can never appear as a valid H.264 NAL header byte (forbidden_zero_bit would have to be 1), so this never false-positives on H.264 content. See <a class="el" href="classaudio__tools_1_1_video_decoder.html#a1d917cf8a29af24e8beaa22306cfffe2">VideoDecoder::isValid()</a>. </p>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_decoder.html#a1d917cf8a29af24e8beaa22306cfffe2">VideoDecoder</a>.</p>
 
 </div>
 </div>

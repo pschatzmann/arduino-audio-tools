@@ -130,6 +130,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:abd16630f3db4bcac2f0677b7197f3af9" id="r_abd16630f3db4bcac2f0677b7197f3af9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#abd16630f3db4bcac2f0677b7197f3af9">isKeyFrame</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="memdesc:abd16630f3db4bcac2f0677b7197f3af9"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="classaudio__tools_1_1_video_output.html#ae90cddad4cdc7ab4f54c2f5976e6eabf">VideoOutput::isKeyFrame()</a> - scans for an Annex-B IDR slice NAL.  <br /></td></tr>
 <tr class="separator:abd16630f3db4bcac2f0677b7197f3af9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d917cf8a29af24e8beaa22306cfffe2" id="r_a1d917cf8a29af24e8beaa22306cfffe2"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_decoder.html#a1d917cf8a29af24e8beaa22306cfffe2">isValid</a> (const uint8_t *data, size_t len)</td></tr>
+<tr class="separator:a1d917cf8a29af24e8beaa22306cfffe2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae7741dea7b0a1c1eeee10ee5b20482eb" id="r_ae7741dea7b0a1c1eeee10ee5b20482eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#ae7741dea7b0a1c1eeee10ee5b20482eb">setInputBufferSize</a> (size_t size)</td></tr>
 <tr class="separator:ae7741dea7b0a1c1eeee10ee5b20482eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05ff4cf361d54457ed8586e8c14aa922" id="r_a05ff4cf361d54457ed8586e8c14aa922"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput</a> (<a class="el" href="class_print.html">Print</a> &amp;out) override</td></tr>
@@ -526,6 +528,45 @@ template&lt;typename Alloc  = H264_DEFAULT_ALLOCATOR&gt; </div>
 <p>See <a class="el" href="classaudio__tools_1_1_video_output.html#ae90cddad4cdc7ab4f54c2f5976e6eabf">VideoOutput::isKeyFrame()</a> - scans for an Annex-B IDR slice NAL. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_output.html#ae90cddad4cdc7ab4f54c2f5976e6eabf">VideoOutput</a>.</p>
+
+</div>
+</div>
+<a id="a1d917cf8a29af24e8beaa22306cfffe2" name="a1d917cf8a29af24e8beaa22306cfffe2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d917cf8a29af24e8beaa22306cfffe2">&#9670;&#160;</a></span>isValid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool isValid </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>True if <code>data</code> (the start of an access unit, as handed to <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>) looks like this decoder's own bitstream format - content-sniffing, not a guarantee (see the concrete class for exactly what's checked). Used by <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html" title="Manages multiple VideoDecoders with automatic format detection - the video-side counterpart of MultiD...">MultiVideoDecoder</a> to auto-select a registered decoder when no <a class="el" href="classaudio__tools_1_1_video_info_source.html">VideoInfoSource</a> answer is available (see its own class comment); not otherwise part of the <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>/flush() decode path. Default false, matching <a class="el" href="classaudio__tools_1_1_video_output.html#ae90cddad4cdc7ab4f54c2f5976e6eabf">VideoOutput::isKeyFrame()</a>'s own default - a decoder not meant to be auto-detected this way (e.g. a hardware-accelerated backend not registered by default, still usable via an explicit VideoInfoSource-based selection) simply never overrides it. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a0d303e10275604ba1f2dbf12daecbca7">H264Decoder</a>, <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#a0d303e10275604ba1f2dbf12daecbca7">MJPEGDecoder</a>, and <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a0d303e10275604ba1f2dbf12daecbca7">MPGDecoder</a>.</p>
 
 </div>
 </div>
