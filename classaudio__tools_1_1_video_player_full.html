@@ -82,8 +82,8 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classaudio__tools_1_1_video_player.html" title="High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A...">VideoPlayer</a> subclass configured for every container format and codec this library ships a portable software demuxer/decoder for - video AND audio - so it's the "just point it at a file, any common
-format just works" player, the same convenience MultiVideoDemuxerFull/ MultiVideoDecoderFull/DecoderHelix each provide on their own side. Use this instead of the base <a class="el" href="classaudio__tools_1_1_video_player.html" title="High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A...">VideoPlayer</a> unless you specifically want to keep this class's extra dependencies (below) out of your build - the base <a class="el" href="classaudio__tools_1_1_video_player.html" title="High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A...">VideoPlayer</a>'s demuxer and video/audio multi-decoders all start empty (see its own class comment), so it has none.  
+<p><a class="el" href="classaudio__tools_1_1_video_player.html" title="High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A...">VideoPlayer</a> subclass pre-registered with every video/audio codec this library ships a portable decoder for - H264/MJPEG/MPEG-1 video, MP3/AAC/MP2 audio - so it's the "just point it at a file, any common
+codec just works" player. Use instead of the base <a class="el" href="classaudio__tools_1_1_video_player.html" title="High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A...">VideoPlayer</a> unless you want to keep these dependencies out of your build (the base class's own multi-decoders start empty - see its class comment).  
  <a href="classaudio__tools_1_1_video_player_full.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_video_player_full_8h_source.html">VideoPlayerFull.h</a>&gt;</code></p>
@@ -109,14 +109,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a54587658a1bd382d923c03c5b72b27e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a013986255c36ae17127f2cd55a65b108" id="r_a013986255c36ae17127f2cd55a65b108"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player_full.html#a013986255c36ae17127f2cd55a65b108">VideoPlayerFull</a> (<a class="el" href="classaudio__tools_1_1_demuxer.html">Demuxer</a> &amp;<a class="el" href="classaudio__tools_1_1_video_player.html#aafc9ef4697ffb749313389b2b8f6da60">demuxer</a>, <a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;videoOutput, <a class="el" href="class_print.html">Print</a> &amp;audioOutput)</td></tr>
 <tr class="separator:a013986255c36ae17127f2cd55a65b108"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a4e7d9e695d39a6d248003f10d57d3c" id="r_a1a4e7d9e695d39a6d248003f10d57d3c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player_full.html#a1a4e7d9e695d39a6d248003f10d57d3c">VideoPlayerFull</a> (<a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;videoOutput)</td></tr>
-<tr class="separator:a1a4e7d9e695d39a6d248003f10d57d3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5a54a96115837245081d9606445fbc5" id="r_ad5a54a96115837245081d9606445fbc5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player_full.html#ad5a54a96115837245081d9606445fbc5">VideoPlayerFull</a> (<a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;videoOutput, <a class="el" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a> &amp;audioOutput)</td></tr>
-<tr class="separator:ad5a54a96115837245081d9606445fbc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a17a0676f9387ebbd267e0f1bc13928f5" id="r_a17a0676f9387ebbd267e0f1bc13928f5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player_full.html#a17a0676f9387ebbd267e0f1bc13928f5">VideoPlayerFull</a> (<a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;videoOutput, <a class="el" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a> &amp;audioOutput)</td></tr>
-<tr class="separator:a17a0676f9387ebbd267e0f1bc13928f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c3c62b616b7d1f8d8225555117d2da0" id="r_a8c3c62b616b7d1f8d8225555117d2da0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player_full.html#a8c3c62b616b7d1f8d8225555117d2da0">VideoPlayerFull</a> (<a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;videoOutput, <a class="el" href="class_print.html">Print</a> &amp;audioOutput)</td></tr>
-<tr class="separator:a8c3c62b616b7d1f8d8225555117d2da0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaebffd5021d232c04301a199cedba261" id="r_aaebffd5021d232c04301a199cedba261"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#aaebffd5021d232c04301a199cedba261">addAudioDecoder</a> (<a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> &amp;decoder, const char *mime=nullptr)</td></tr>
 <tr class="separator:aaebffd5021d232c04301a199cedba261"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f7d13e44d467521defee2ed034e2850" id="r_a0f7d13e44d467521defee2ed034e2850"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#a0f7d13e44d467521defee2ed034e2850">addDemuxer</a> (<a class="el" href="classaudio__tools_1_1_demuxer.html">Demuxer</a> &amp;<a class="el" href="classaudio__tools_1_1_video_player.html#aafc9ef4697ffb749313389b2b8f6da60">demuxer</a>)</td></tr>
@@ -168,8 +160,6 @@ Public Member Functions</h2></td></tr>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a92fa3f0f598b2ca7b4d8c593ec0f5d2d" id="r_a92fa3f0f598b2ca7b4d8c593ec0f5d2d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player_full.html#a92fa3f0f598b2ca7b4d8c593ec0f5d2d">registerAudioDecoders</a> ()</td></tr>
 <tr class="separator:a92fa3f0f598b2ca7b4d8c593ec0f5d2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e2f333e9bf3c064f9e1158f41f30054" id="r_a4e2f333e9bf3c064f9e1158f41f30054"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player_full.html#a4e2f333e9bf3c064f9e1158f41f30054">registerDemuxers</a> ()</td></tr>
-<tr class="separator:a4e2f333e9bf3c064f9e1158f41f30054"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5a139d851b3094664eff47a8e0843c5" id="r_aa5a139d851b3094664eff47a8e0843c5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player_full.html#aa5a139d851b3094664eff47a8e0843c5">registerVideoDecoders</a> ()</td></tr>
 <tr class="separator:aa5a139d851b3094664eff47a8e0843c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -183,8 +173,6 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a21ae121154c2bd15cb6331a0f5c9cf2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9548762e39b4a06f982fc495aa628507" id="r_a9548762e39b4a06f982fc495aa628507"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_encoded_audio_stream.html">EncodedAudioStream</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#a9548762e39b4a06f982fc495aa628507">audio_out</a></td></tr>
 <tr class="separator:a9548762e39b4a06f982fc495aa628507"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a414850521895109900eb6a9688270417" id="r_a414850521895109900eb6a9688270417"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html">DemuxerAVI</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player_full.html#a414850521895109900eb6a9688270417">avi_demuxer</a></td></tr>
-<tr class="separator:a414850521895109900eb6a9688270417"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af22ff4ab7a026e6c3b4b08eafb2df027" id="r_af22ff4ab7a026e6c3b4b08eafb2df027"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#af22ff4ab7a026e6c3b4b08eafb2df027">buffer_size</a> = 1024</td></tr>
 <tr class="separator:af22ff4ab7a026e6c3b4b08eafb2df027"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad617d9163070a29f763ce1d4ef00568f" id="r_ad617d9163070a29f763ce1d4ef00568f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_multi_decoder.html">MultiDecoder</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#ad617d9163070a29f763ce1d4ef00568f">default_audio_decoder</a></td></tr>
@@ -201,12 +189,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ab68b67013fd063b2db9ede9cabce3a85"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04d588692921ff510c4b703075f38247" id="r_a04d588692921ff510c4b703075f38247"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_helix.html">MP3DecoderHelix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player_full.html#a04d588692921ff510c4b703075f38247">mp3_decoder</a></td></tr>
 <tr class="separator:a04d588692921ff510c4b703075f38247"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af5c138844f499016f5513f32fafdf998" id="r_af5c138844f499016f5513f32fafdf998"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html">DemuxerMP4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player_full.html#af5c138844f499016f5513f32fafdf998">mp4_demuxer</a></td></tr>
-<tr class="separator:af5c138844f499016f5513f32fafdf998"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6793f8e3556c2afc14aaf8b7a3baf330" id="r_a6793f8e3556c2afc14aaf8b7a3baf330"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html">MPGDecoder</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player_full.html#a6793f8e3556c2afc14aaf8b7a3baf330">mpeg_decoder</a></td></tr>
 <tr class="separator:a6793f8e3556c2afc14aaf8b7a3baf330"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa26b1b94013535c9bad923c274f0b072" id="r_aa26b1b94013535c9bad923c274f0b072"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html">DemuxerMPG</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player_full.html#aa26b1b94013535c9bad923c274f0b072">mpg_demuxer</a></td></tr>
-<tr class="separator:aa26b1b94013535c9bad923c274f0b072"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af6c7c5af6cd2b9e1e3e526d3c862b101" id="r_af6c7c5af6cd2b9e1e3e526d3c862b101"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#af6c7c5af6cd2b9e1e3e526d3c862b101">p_audio_output</a> = nullptr</td></tr>
 <tr class="separator:af6c7c5af6cd2b9e1e3e526d3c862b101"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1af31d2c1d06511cbbf762d3ae662348" id="r_a1af31d2c1d06511cbbf762d3ae662348"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#a1af31d2c1d06511cbbf762d3ae662348">p_audio_output_typed</a> = nullptr</td></tr>
@@ -223,25 +207,16 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a88bf80373809f292ec23fccb68fa589d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classaudio__tools_1_1_video_player.html" title="High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A...">VideoPlayer</a> subclass configured for every container format and codec this library ships a portable software demuxer/decoder for - video AND audio - so it's the "just point it at a file, any common
-format just works" player, the same convenience MultiVideoDemuxerFull/ MultiVideoDecoderFull/DecoderHelix each provide on their own side. Use this instead of the base <a class="el" href="classaudio__tools_1_1_video_player.html" title="High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A...">VideoPlayer</a> unless you specifically want to keep this class's extra dependencies (below) out of your build - the base <a class="el" href="classaudio__tools_1_1_video_player.html" title="High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A...">VideoPlayer</a>'s demuxer and video/audio multi-decoders all start empty (see its own class comment), so it has none. </p>
-<p>Container formats - registered in this subclass's own constructor, the same way <a class="el" href="classaudio__tools_1_1_multi_video_demuxer_full.html" title="MultiVideoDemuxer pre-registered with every container format this library ships a demuxer for: Demuxe...">MultiVideoDemuxerFull</a>'s does (<a class="el" href="_multi_video_demuxer_full_8h.html">MultiVideoDemuxerFull.h</a> - a plain <a class="el" href="classaudio__tools_1_1_multi_video_demuxer.html" title="Manages multiple Demuxers with automatic container-format detection - the container-side counterpart ...">MultiVideoDemuxer</a> pre-registered the same way, for callers that want this convenience without the rest of <a class="el" href="classaudio__tools_1_1_video_player.html" title="High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A...">VideoPlayer</a>):</p><ul>
-<li>AVI (<a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html" title="AVI Container Decoder which can be fed with small chunks of data. The minimum length must be bigger t...">DemuxerAVI</a>)</li>
-<li>MP4/M4A (<a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html" title="DemuxerMP4 extracts both the audio and (H.264) video track from a general, interleaved MP4/ISO-BMFF s...">DemuxerMP4</a>)</li>
-<li>MPEG Program <a class="el" href="class_stream.html">Stream</a> (<a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html" title="MPEG-1 System (Program) Stream Demuxer, as defined by ISO/IEC 11172-1: splits the pack_header/system_...">DemuxerMPG</a>)</li>
-</ul>
-<p>Video codecs - also registered in this subclass's own constructor, the same way <a class="el" href="classaudio__tools_1_1_multi_video_decoder_full.html" title="MultiVideoDecoder pre-registered with every video codec this library ships a portable (no hardware-sp...">MultiVideoDecoderFull</a>'s does (<a class="el" href="_multi_video_decoder_full_8h.html">MultiVideoDecoderFull.h</a> - a plain <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html" title="Manages multiple VideoDecoders with automatic format detection - the video-side counterpart of MultiD...">MultiVideoDecoder</a> pre-registered the same way, for callers that want this convenience without the rest of <a class="el" href="classaudio__tools_1_1_video_player.html" title="High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A...">VideoPlayer</a>):</p><ul>
-<li>H264 (<a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a>, TinyH264)</li>
-<li>Motion-JPEG (<a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html" title="Motion-JPEG video decoder: wraps TinyJPEGDecoder (https://github.com/pschatzmann/TinyJPEG,...">MJPEGDecoder</a>, TinyJPEG)</li>
-<li>MPEG-1 (<a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html" title="MPEG-1 (part 2) video decoder wrapper around TinyMPGDecoder.">MPGDecoder</a>, TinyMPG)</li>
-</ul>
-<p>Audio codecs - also registered in this subclass's own constructor, since the base <a class="el" href="classaudio__tools_1_1_video_player.html" title="High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A...">VideoPlayer</a>'s audio multi-decoder starts empty on purpose (see its class comment):</p><ul>
-<li>"audio/mpeg" -&gt; <a class="el" href="classaudio__tools_1_1_m_p3_decoder_helix.html" title="MP3 Decoder using libhelix: https://github.com/pschatzmann/arduino-libhelix This is basically just a ...">MP3DecoderHelix</a></li>
-<li>"audio/aac" -&gt; <a class="el" href="classaudio__tools_1_1_a_a_c_decoder_helix.html" title="AAC Decoder using libhelix: https://github.com/pschatzmann/arduino-libhelix This is basically just a ...">AACDecoderHelix</a></li>
-<li>"audio/mpeg; codecs=\"mpeg1-layer2\"" -&gt; <a class="el" href="classaudio__tools_1_1_m_p2_decoder.html" title="Decoder for MPEG-1 Layer II (MP2) audio using the TinyMP2 library. Compressed data provided via write...">MP2Decoder</a> - the exact mime <a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html#ab233b9d1b86c9d2a2c009d6473aa8938">DemuxerMPG::mime()</a> reports for Layer II (see its own comment); a plain "audio/mpeg" match (from any container) still resolves to <a class="el" href="classaudio__tools_1_1_m_p3_decoder_helix.html" title="MP3 Decoder using libhelix: https://github.com/pschatzmann/arduino-libhelix This is basically just a ...">MP3DecoderHelix</a> instead (registered first - see <a class="el" href="classaudio__tools_1_1_multi_decoder.html" title="Manage multiple AudioDecoders with automatic format detection.">MultiDecoder</a>:: selectDecoder()'s base-mime-type fallback), which is correct since MP2 realistically only shows up in an MPEG-PS (.mpg) container.</li>
-</ul>
-<p>WAV is deliberately not included - DemuxerAVI/DemuxerMP4 report it too ("audio/vnd.wave"), but <a class="el" href="_codec_w_a_v_8h.html">AudioTools/AudioCodecs/CodecWAV.h</a> has no external dependency of its own to justify bundling it here; register it yourself (addAudioDecoder(wavDecoder, "audio/vnd.wave")) if your content needs it.</p>
-<p>Dependencies (install via Library Manager) - all pulled in only by choosing this subclass over the dependency-free base <a class="el" href="classaudio__tools_1_1_video_player.html" title="High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A...">VideoPlayer</a>. DemuxerAVI/DemuxerMP4/DemuxerMPG add none of their own (pure parsing code within this library, unlike the decoders below):</p><ul>
+<div class="textblock"><p><a class="el" href="classaudio__tools_1_1_video_player.html" title="High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A...">VideoPlayer</a> subclass pre-registered with every video/audio codec this library ships a portable decoder for - H264/MJPEG/MPEG-1 video, MP3/AAC/MP2 audio - so it's the "just point it at a file, any common
+codec just works" player. Use instead of the base <a class="el" href="classaudio__tools_1_1_video_player.html" title="High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A...">VideoPlayer</a> unless you want to keep these dependencies out of your build (the base class's own multi-decoders start empty - see its class comment). </p>
+<p>Pre-registers no container demuxer though - still supply one via the constructor/addDemuxer(), as the base <a class="el" href="classaudio__tools_1_1_video_player.html" title="High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A...">VideoPlayer</a> requires. Pass a <a class="el" href="classaudio__tools_1_1_multi_video_demuxer_full.html" title="MultiVideoDemuxer pre-registered with every container format this library ships a demuxer for: Demuxe...">MultiVideoDemuxerFull</a> (<a class="el" href="_multi_video_demuxer_full_8h.html">Video/MultiVideoDemuxerFull.h</a>) for the same "any format just works" convenience one layer down (AVI/MP4/MPG): </p><div class="fragment"><div class="line"><a class="code hl_class" href="classaudio__tools_1_1_multi_video_demuxer_full.html">MultiVideoDemuxerFull</a> <a class="code hl_function" href="classaudio__tools_1_1_video_player.html#aafc9ef4697ffb749313389b2b8f6da60">demuxer</a>;</div>
+<div class="line"><a class="code hl_class" href="classaudio__tools_1_1_video_player_full.html">VideoPlayerFull</a> player(<a class="code hl_function" href="classaudio__tools_1_1_video_player.html#aafc9ef4697ffb749313389b2b8f6da60">demuxer</a>, tftOutput, audioOut);</div>
+<div class="line">player.begin(file);</div>
+<div class="ttc" id="aclassaudio__tools_1_1_multi_video_demuxer_full_html"><div class="ttname"><a href="classaudio__tools_1_1_multi_video_demuxer_full.html">audio_tools::MultiVideoDemuxerFull</a></div><div class="ttdoc">MultiVideoDemuxer pre-registered with every container format this library ships a demuxer for: Demuxe...</div><div class="ttdef"><b>Definition</b> MultiVideoDemuxerFull.h:35</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_video_player_full_html"><div class="ttname"><a href="classaudio__tools_1_1_video_player_full.html">audio_tools::VideoPlayerFull</a></div><div class="ttdoc">VideoPlayer subclass pre-registered with every video/audio codec this library ships a portable decode...</div><div class="ttdef"><b>Definition</b> VideoPlayerFull.h:47</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_video_player_html_aafc9ef4697ffb749313389b2b8f6da60"><div class="ttname"><a href="classaudio__tools_1_1_video_player.html#aafc9ef4697ffb749313389b2b8f6da60">audio_tools::VideoPlayer::demuxer</a></div><div class="ttdeci">MultiVideoDemuxer &amp; demuxer()</div><div class="ttdef"><b>Definition</b> VideoPlayer.h:375</div></div>
+</div><!-- fragment --><p>WAV is deliberately not included (no external dependency to justify bundling it) - register it yourself if needed: addAudioDecoder(wavDecoder, "audio/vnd.wave").</p>
+<p>Dependencies (install via Library Manager):</p><ul>
 <li><a href="https://github.com/pschatzmann/TinyH264">https://github.com/pschatzmann/TinyH264</a></li>
 <li><a href="https://github.com/pschatzmann/TinyMPG">https://github.com/pschatzmann/TinyMPG</a></li>
 <li><a href="https://github.com/pschatzmann/TinyJPEG">https://github.com/pschatzmann/TinyJPEG</a></li>
@@ -252,7 +227,7 @@ format just works" player, the same convenience MultiVideoDemuxerFull/ MultiVide
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aebffa4348fff6c7ae15df25fc90e5ba1" name="aebffa4348fff6c7ae15df25fc90e5ba1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aebffa4348fff6c7ae15df25fc90e5ba1">&#9670;&#160;</a></span>VideoPlayerFull() <span class="overload">[1/9]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aebffa4348fff6c7ae15df25fc90e5ba1">&#9670;&#160;</a></span>VideoPlayerFull() <span class="overload">[1/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -276,142 +251,8 @@ format just works" player, the same convenience MultiVideoDemuxerFull/ MultiVide
 
 </div>
 </div>
-<a id="a1a4e7d9e695d39a6d248003f10d57d3c" name="a1a4e7d9e695d39a6d248003f10d57d3c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1a4e7d9e695d39a6d248003f10d57d3c">&#9670;&#160;</a></span>VideoPlayerFull() <span class="overload">[2/9]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_video_player_full.html">VideoPlayerFull</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;&#160;</td>
-          <td class="paramname"><em>videoOutput</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ad5a54a96115837245081d9606445fbc5" name="ad5a54a96115837245081d9606445fbc5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad5a54a96115837245081d9606445fbc5">&#9670;&#160;</a></span>VideoPlayerFull() <span class="overload">[3/9]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_video_player_full.html">VideoPlayerFull</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;&#160;</td>
-          <td class="paramname"><em>videoOutput</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a> &amp;&#160;</td>
-          <td class="paramname"><em>audioOutput</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a8c3c62b616b7d1f8d8225555117d2da0" name="a8c3c62b616b7d1f8d8225555117d2da0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8c3c62b616b7d1f8d8225555117d2da0">&#9670;&#160;</a></span>VideoPlayerFull() <span class="overload">[4/9]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_video_player_full.html">VideoPlayerFull</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;&#160;</td>
-          <td class="paramname"><em>videoOutput</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_print.html">Print</a> &amp;&#160;</td>
-          <td class="paramname"><em>audioOutput</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a17a0676f9387ebbd267e0f1bc13928f5" name="a17a0676f9387ebbd267e0f1bc13928f5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a17a0676f9387ebbd267e0f1bc13928f5">&#9670;&#160;</a></span>VideoPlayerFull() <span class="overload">[5/9]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_video_player_full.html">VideoPlayerFull</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;&#160;</td>
-          <td class="paramname"><em>videoOutput</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a> &amp;&#160;</td>
-          <td class="paramname"><em>audioOutput</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a0d761967635365989f7143affb7f0f19" name="a0d761967635365989f7143affb7f0f19"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d761967635365989f7143affb7f0f19">&#9670;&#160;</a></span>VideoPlayerFull() <span class="overload">[6/9]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d761967635365989f7143affb7f0f19">&#9670;&#160;</a></span>VideoPlayerFull() <span class="overload">[2/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -443,12 +284,12 @@ format just works" player, the same convenience MultiVideoDemuxerFull/ MultiVide
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Overloads accepting an extra <a class="el" href="classaudio__tools_1_1_demuxer.html" title="Common interface for demuxers (DemuxerAVI, DemuxerMP4) that split a container&#39;s video and (optional) ...">Demuxer</a>&amp;, mirroring <a class="el" href="classaudio__tools_1_1_video_player.html" title="High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A...">VideoPlayer</a>'s own constructors - registered in addition to the pre-registered AVI/MP4/ MPG demuxers below (e.g. for a custom <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html" title="DemuxerMP4 extracts both the audio and (H.264) video track from a general, interleaved MP4/ISO-BMFF s...">DemuxerMP4</a> configured with a SeekableSource/SpoolStorageFactory - see <a class="el" href="classaudio__tools_1_1_video_player.html" title="High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A...">VideoPlayer</a>'s own class comment). </p>
+<p><code>demuxer</code> is registered the same way <a class="el" href="classaudio__tools_1_1_video_player.html" title="High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A...">VideoPlayer</a>'s own matching constructor does (see its class comment) - pass a <a class="el" href="classaudio__tools_1_1_multi_video_demuxer_full.html" title="MultiVideoDemuxer pre-registered with every container format this library ships a demuxer for: Demuxe...">MultiVideoDemuxerFull</a> here instead of a single concrete demuxer if you want every container format supported too (see this class's own comment). </p>
 
 </div>
 </div>
 <a id="aab8158a04e433654f0e003f4f9e47b94" name="aab8158a04e433654f0e003f4f9e47b94"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aab8158a04e433654f0e003f4f9e47b94">&#9670;&#160;</a></span>VideoPlayerFull() <span class="overload">[7/9]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aab8158a04e433654f0e003f4f9e47b94">&#9670;&#160;</a></span>VideoPlayerFull() <span class="overload">[3/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -490,7 +331,7 @@ format just works" player, the same convenience MultiVideoDemuxerFull/ MultiVide
 </div>
 </div>
 <a id="a013986255c36ae17127f2cd55a65b108" name="a013986255c36ae17127f2cd55a65b108"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a013986255c36ae17127f2cd55a65b108">&#9670;&#160;</a></span>VideoPlayerFull() <span class="overload">[8/9]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a013986255c36ae17127f2cd55a65b108">&#9670;&#160;</a></span>VideoPlayerFull() <span class="overload">[4/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -532,7 +373,7 @@ format just works" player, the same convenience MultiVideoDemuxerFull/ MultiVide
 </div>
 </div>
 <a id="a54587658a1bd382d923c03c5b72b27e2" name="a54587658a1bd382d923c03c5b72b27e2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a54587658a1bd382d923c03c5b72b27e2">&#9670;&#160;</a></span>VideoPlayerFull() <span class="overload">[9/9]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a54587658a1bd382d923c03c5b72b27e2">&#9670;&#160;</a></span>VideoPlayerFull() <span class="overload">[5/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -912,31 +753,6 @@ format just works" player, the same convenience MultiVideoDemuxerFull/ MultiVide
       <table class="memname">
         <tr>
           <td class="memname">void registerAudioDecoders </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a4e2f333e9bf3c064f9e1158f41f30054" name="a4e2f333e9bf3c064f9e1158f41f30054"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4e2f333e9bf3c064f9e1158f41f30054">&#9670;&#160;</a></span>registerDemuxers()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void registerDemuxers </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1331,28 +1147,6 @@ AudioOutput&amp;)/setStream(<a class="el" href="classaudio__tools_1_1_audio_stre
 
 </div>
 </div>
-<a id="a414850521895109900eb6a9688270417" name="a414850521895109900eb6a9688270417"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a414850521895109900eb6a9688270417">&#9670;&#160;</a></span>avi_demuxer</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html">DemuxerAVI</a> avi_demuxer</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="af22ff4ab7a026e6c3b4b08eafb2df027" name="af22ff4ab7a026e6c3b4b08eafb2df027"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af22ff4ab7a026e6c3b4b08eafb2df027">&#9670;&#160;</a></span>buffer_size</h2>
 
@@ -1529,28 +1323,6 @@ AudioOutput&amp;)/setStream(<a class="el" href="classaudio__tools_1_1_audio_stre
 
 </div>
 </div>
-<a id="af5c138844f499016f5513f32fafdf998" name="af5c138844f499016f5513f32fafdf998"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af5c138844f499016f5513f32fafdf998">&#9670;&#160;</a></span>mp4_demuxer</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html">DemuxerMP4</a> mp4_demuxer</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a6793f8e3556c2afc14aaf8b7a3baf330" name="a6793f8e3556c2afc14aaf8b7a3baf330"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6793f8e3556c2afc14aaf8b7a3baf330">&#9670;&#160;</a></span>mpeg_decoder</h2>
 
@@ -1562,28 +1334,6 @@ AudioOutput&amp;)/setStream(<a class="el" href="classaudio__tools_1_1_audio_stre
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html">MPGDecoder</a> mpeg_decoder</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aa26b1b94013535c9bad923c274f0b072" name="aa26b1b94013535c9bad923c274f0b072"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa26b1b94013535c9bad923c274f0b072">&#9670;&#160;</a></span>mpg_demuxer</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html">DemuxerMPG</a> mpg_demuxer</td>
         </tr>
       </table>
   </td>
