@@ -102,7 +102,7 @@ var searchData=
   ['out_5fptr_99',['out_ptr',['../classaudio__tools_1_1_audio_server_t.html#a696375c96a64240ef23455df93fb3505',1,'audio_tools::AudioServerT']]],
   ['output_100',['output',['../classaudio__tools_1_1_binary_container_encoder.html#a83d3556c550ee70078cc4d5f3518a077',1,'audio_tools::BinaryContainerEncoder::output()'],['../classaudio__tools_1_1_binary_container_decoder.html#a8c3a2ce0565823aee87298d435b0cef0',1,'audio_tools::BinaryContainerDecoder::output()']]],
   ['outputbuffersize_101',['outputBufferSize',['../classaudio__tools_1_1_decoder_a_l_a_c.html#a4fb05fdbf53d2ab3136d26b0e852fe46',1,'audio_tools::DecoderALAC']]],
-  ['outputfps_102',['outputFPS',['../classaudio__tools_1_1_video_audio_sync_task.html#ac2245652fe2a9df612f6a7e2ef2b502e',1,'audio_tools::VideoAudioSyncTask']]],
+  ['outputfps_102',['outputFPS',['../classaudio__tools_1_1_paced_video_output.html#ac2245652fe2a9df612f6a7e2ef2b502e',1,'audio_tools::PacedVideoOutput']]],
   ['outputmixer_103',['outputmixer',['../classaudio__tools_1_1_output_mixer.html#aaa4c5ca79eccba589e325e26deeadff3',1,'audio_tools::OutputMixer::OutputMixer(Allocator &amp;allocator=DefaultAllocatorRAM)'],['../classaudio__tools_1_1_output_mixer.html#a4f83f24e42225bc5409b94f5f579e1de',1,'audio_tools::OutputMixer::OutputMixer(Print &amp;finalOutput, int outputStreamCount, Allocator &amp;allocator=DefaultAllocatorRAM)']]],
   ['outputmono_104',['outputMono',['../classaudio__tools_1_1_analog_driver_e_s_p32.html#a7ddc150f76f49be2cd5ed64a43691398',1,'audio_tools::AnalogDriverESP32']]],
   ['outputopencv_105',['OutputOpenCV',['../classaudio__tools_1_1_output_open_c_v.html#a2e6548c671b963642887f5db3fc8af57',1,'audio_tools::OutputOpenCV']]],

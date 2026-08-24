@@ -22,7 +22,7 @@ var searchData=
   ['kcontrolstagesetup_19',['kControlStageSetup',['../namespaceaudio__tools.html#ae94f7527e14e2378344a5183c2d2b9fe',1,'audio_tools']]],
   ['kd_20',['kd',['../classaudio__tools_1_1_p_i_d_controller.html#ae7a5c6018507bb1361fcca170e069b9c',1,'audio_tools::PIDController']]],
   ['kdefaultbitstreambuffersize_21',['kDefaultBitstreamBufferSize',['../classaudio__tools_1_1_h264_encoder.html#a7c61e6a1a9854a3ecb5f56bb72d68d3a',1,'audio_tools::H264Encoder']]],
-  ['kdrainyieldevery_22',['kDrainYieldEvery',['../classaudio__tools_1_1_video_audio_sync_task.html#ac3992bbb9c872a3e741894736144fc24',1,'audio_tools::VideoAudioSyncTask']]],
+  ['kdrainyieldevery_22',['kDrainYieldEvery',['../classaudio__tools_1_1_paced_video_output.html#ac3992bbb9c872a3e741894736144fc24',1,'audio_tools::PacedVideoOutput']]],
   ['kernela_23',['kernelA',['../classaudio__tools_1_1_equalizer_n_bands.html#a5b5d3c3aeba03442d7f5f4cda4e8965e',1,'audio_tools::EqualizerNBands']]],
   ['kernelb_24',['kernelB',['../classaudio__tools_1_1_equalizer_n_bands.html#ac481186f025b0e3365faa766547a3084',1,'audio_tools::EqualizerNBands']]],
   ['key_25',['key',['../classaudio__tools_1_1_pink_noise_generator.html#a8e97d4d84f7c25d2ba6644ddae86eea6',1,'audio_tools::PinkNoiseGenerator::key'],['../classaudio__tools_1_1_redis_buffer.html#acd3d88da3c0e0313c3645ff34f62f542',1,'audio_tools::RedisBuffer::key'],['../structaudio__tools_1_1_http_header_line.html#a2389612b5c6b654039d9891010404b25',1,'audio_tools::HttpHeaderLine::key']]],

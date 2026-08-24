@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: src/AudioTools/Video/VideoAudioSyncTask.h File Reference</title>
+<title>arduino-audio-tools: src/AudioTools/Video/PacedVideoOutput.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -76,7 +76,7 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a>  </div>
-  <div class="headertitle"><div class="title">VideoAudioSyncTask.h File Reference</div></div>
+  <div class="headertitle"><div class="title">PacedVideoOutput.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;atomic&gt;</code><br />
@@ -87,14 +87,14 @@ $(function() {
 <code>#include &quot;<a class="el" href="_video_8h_source.html">AudioTools/Video/Video.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_r_t_o_s_2_task_8h_source.html">AudioTools/Concurrency/RTOS/Task.h</a>&quot;</code><br />
 </div>
-<p><a href="_video_audio_sync_task_8h_source.html">Go to the source code of this file.</a></p>
+<p><a href="_paced_video_output_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_video_audio_sync_task_1_1_frame_header.html">VideoAudioSyncTask::FrameHeader</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_paced_video_output_1_1_frame_header.html">PacedVideoOutput::FrameHeader</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html">VideoAudioSyncTask</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffers a small, configurable amount of video (see <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#af1ae0a0bc12d541205343335e5c82ef8">setQueueBytes()</a>) and renders it frame by frame from a dedicated background task, timed against an audio clock - so a demuxer's own dispatch loop never blocks on video pacing. Wrap the real <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> (e.g. <a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a>) in this and pass it to setOutputVideo() instead of the decoder itself.  <a href="classaudio__tools_1_1_video_audio_sync_task.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html">PacedVideoOutput</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffers a small, configurable amount of video (see <a class="el" href="classaudio__tools_1_1_paced_video_output.html#af1ae0a0bc12d541205343335e5c82ef8">setQueueBytes()</a>) and renders it frame by frame from a dedicated background task, timed against an audio clock - so a demuxer's own dispatch loop never blocks on video pacing. Wrap the real <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> (e.g. <a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a>) in this and pass it to setOutputVideo() instead of the decoder itself.  <a href="classaudio__tools_1_1_paced_video_output.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>

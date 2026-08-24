@@ -72,7 +72,7 @@ var searchData=
   ['formatconverterstream_69',['FormatConverterStream',['../classaudio__tools_1_1_format_converter_stream.html',1,'audio_tools']]],
   ['frame_70',['Frame',['../structaudio__tools_1_1_m4_a_common_demuxer_1_1_frame.html',1,'audio_tools::M4ACommonDemuxer']]],
   ['framebuffer_71',['FrameBuffer',['../classaudio__tools_1_1_frame_buffer.html',1,'audio_tools']]],
-  ['frameheader_72',['FrameHeader',['../structaudio__tools_1_1_video_audio_sync_task_1_1_frame_header.html',1,'audio_tools::VideoAudioSyncTask']]],
+  ['frameheader_72',['FrameHeader',['../structaudio__tools_1_1_paced_video_output_1_1_frame_header.html',1,'audio_tools::PacedVideoOutput']]],
   ['frequencydetectorautocorrelation_73',['FrequencyDetectorAutoCorrelation',['../classaudio__tools_1_1_frequency_detector_auto_correlation.html',1,'audio_tools']]],
   ['frequencydetectorzerocrossing_74',['FrequencyDetectorZeroCrossing',['../classaudio__tools_1_1_frequency_detector_zero_crossing.html',1,'audio_tools']]],
   ['frequencyframe_75',['FrequencyFrame',['../structaudio__tools_1_1_frequency_frame.html',1,'audio_tools']]],

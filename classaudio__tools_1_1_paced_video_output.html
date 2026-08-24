@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: VideoAudioSyncTask Class Reference</title>
+<title>arduino-audio-tools: PacedVideoOutput Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,7 +69,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html">VideoAudioSyncTask</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_paced_video_output.html">PacedVideoOutput</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -79,56 +79,56 @@ $(function() {
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="#pro-static-attribs">Static Protected Attributes</a> &#124;
-<a href="classaudio__tools_1_1_video_audio_sync_task-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">VideoAudioSyncTask Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__video.html">Video</a></div></div></div>
+<a href="classaudio__tools_1_1_paced_video_output-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">PacedVideoOutput Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__video.html">Video</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Buffers a small, configurable amount of video (see <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#af1ae0a0bc12d541205343335e5c82ef8">setQueueBytes()</a>) and renders it frame by frame from a dedicated background task, timed against an audio clock - so a demuxer's own dispatch loop never blocks on video pacing. Wrap the real <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> (e.g. <a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a>) in this and pass it to setOutputVideo() instead of the decoder itself.  
- <a href="classaudio__tools_1_1_video_audio_sync_task.html#details">More...</a></p>
+<p>Buffers a small, configurable amount of video (see <a class="el" href="classaudio__tools_1_1_paced_video_output.html#af1ae0a0bc12d541205343335e5c82ef8">setQueueBytes()</a>) and renders it frame by frame from a dedicated background task, timed against an audio clock - so a demuxer's own dispatch loop never blocks on video pacing. Wrap the real <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> (e.g. <a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a>) in this and pass it to setOutputVideo() instead of the decoder itself.  
+ <a href="classaudio__tools_1_1_paced_video_output.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_video_audio_sync_task_8h_source.html">VideoAudioSyncTask.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_paced_video_output_8h_source.html">PacedVideoOutput.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for VideoAudioSyncTask:</div>
+Inheritance diagram for PacedVideoOutput:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classaudio__tools_1_1_video_audio_sync_task.png" usemap="#VideoAudioSyncTask_map" alt=""/>
-  <map id="VideoAudioSyncTask_map" name="VideoAudioSyncTask_map">
-<area href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="VideoOutput" shape="rect" coords="0,0,133,24"/>
+  <img src="classaudio__tools_1_1_paced_video_output.png" usemap="#PacedVideoOutput_map" alt=""/>
+  <map id="PacedVideoOutput_map" name="PacedVideoOutput_map">
+<area href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="VideoOutput" shape="rect" coords="0,0,118,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_video_audio_sync_task_1_1_frame_header.html">FrameHeader</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_paced_video_output_1_1_frame_header.html">FrameHeader</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6041b5b3363ab78eeaa76c6d143da0f8" id="r_a6041b5b3363ab78eeaa76c6d143da0f8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a6041b5b3363ab78eeaa76c6d143da0f8">VideoAudioSyncTask</a> (<a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;target, float fps=0, uint32_t schedulingDelayMs=0)</td></tr>
-<tr class="separator:a6041b5b3363ab78eeaa76c6d143da0f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a002b5eb5dca74f350678e9a56ef1293b" id="r_a002b5eb5dca74f350678e9a56ef1293b"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a002b5eb5dca74f350678e9a56ef1293b">avgFrameMs</a> () const</td></tr>
+<tr class="memitem:a0fbb780a6e20757970d48f9ce7623a2e" id="r_a0fbb780a6e20757970d48f9ce7623a2e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a0fbb780a6e20757970d48f9ce7623a2e">PacedVideoOutput</a> (<a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;target, float fps=0, uint32_t schedulingDelayMs=0)</td></tr>
+<tr class="separator:a0fbb780a6e20757970d48f9ce7623a2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a002b5eb5dca74f350678e9a56ef1293b" id="r_a002b5eb5dca74f350678e9a56ef1293b"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a002b5eb5dca74f350678e9a56ef1293b">avgFrameMs</a> () const</td></tr>
 <tr class="separator:a002b5eb5dca74f350678e9a56ef1293b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4fe4dd288fce886c8ed4d36247fcadf8" id="r_a4fe4dd288fce886c8ed4d36247fcadf8"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a4fe4dd288fce886c8ed4d36247fcadf8">avgIFrameMs</a> () const</td></tr>
+<tr class="memitem:a4fe4dd288fce886c8ed4d36247fcadf8" id="r_a4fe4dd288fce886c8ed4d36247fcadf8"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a4fe4dd288fce886c8ed4d36247fcadf8">avgIFrameMs</a> () const</td></tr>
 <tr class="separator:a4fe4dd288fce886c8ed4d36247fcadf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad0512c028df8a1aed38952aaaca2c3be" id="r_ad0512c028df8a1aed38952aaaca2c3be"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#ad0512c028df8a1aed38952aaaca2c3be">avgPFrameMs</a> () const</td></tr>
+<tr class="memitem:ad0512c028df8a1aed38952aaaca2c3be" id="r_ad0512c028df8a1aed38952aaaca2c3be"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#ad0512c028df8a1aed38952aaaca2c3be">avgPFrameMs</a> () const</td></tr>
 <tr class="separator:ad0512c028df8a1aed38952aaaca2c3be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a601fb7cf1fc15db50c71a826f084f934" id="r_a601fb7cf1fc15db50c71a826f084f934"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a601fb7cf1fc15db50c71a826f084f934">begin</a> ()</td></tr>
+<tr class="memitem:a601fb7cf1fc15db50c71a826f084f934" id="r_a601fb7cf1fc15db50c71a826f084f934"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a601fb7cf1fc15db50c71a826f084f934">begin</a> ()</td></tr>
 <tr class="separator:a601fb7cf1fc15db50c71a826f084f934"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a711a5b933ec68da2d43cc16fcc46372e" id="r_a711a5b933ec68da2d43cc16fcc46372e"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a711a5b933ec68da2d43cc16fcc46372e">droppedFrameCount</a> () const</td></tr>
+<tr class="memitem:a711a5b933ec68da2d43cc16fcc46372e" id="r_a711a5b933ec68da2d43cc16fcc46372e"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a711a5b933ec68da2d43cc16fcc46372e">droppedFrameCount</a> () const</td></tr>
 <tr class="separator:a711a5b933ec68da2d43cc16fcc46372e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a731f4225a85cf844a9632008b9e460" id="r_a2a731f4225a85cf844a9632008b9e460"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a2a731f4225a85cf844a9632008b9e460">droppedIFrameCount</a> () const</td></tr>
+<tr class="memitem:a2a731f4225a85cf844a9632008b9e460" id="r_a2a731f4225a85cf844a9632008b9e460"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a2a731f4225a85cf844a9632008b9e460">droppedIFrameCount</a> () const</td></tr>
 <tr class="separator:a2a731f4225a85cf844a9632008b9e460"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf81d3fdaf258088d7692fa70cece087" id="r_aaf81d3fdaf258088d7692fa70cece087"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#aaf81d3fdaf258088d7692fa70cece087">end</a> ()</td></tr>
+<tr class="memitem:aaf81d3fdaf258088d7692fa70cece087" id="r_aaf81d3fdaf258088d7692fa70cece087"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#aaf81d3fdaf258088d7692fa70cece087">end</a> ()</td></tr>
 <tr class="memdesc:aaf81d3fdaf258088d7692fa70cece087"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the background render task.  <br /></td></tr>
 <tr class="separator:aaf81d3fdaf258088d7692fa70cece087"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a04f2540d940cc37b5c2538ed8e5b54be" id="r_a04f2540d940cc37b5c2538ed8e5b54be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a04f2540d940cc37b5c2538ed8e5b54be">flush</a> () override</td></tr>
+<tr class="memitem:a04f2540d940cc37b5c2538ed8e5b54be" id="r_a04f2540d940cc37b5c2538ed8e5b54be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a04f2540d940cc37b5c2538ed8e5b54be">flush</a> () override</td></tr>
 <tr class="separator:a04f2540d940cc37b5c2538ed8e5b54be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f1f94e0964e9fe78701eef6cb81dc3f" id="r_a5f1f94e0964e9fe78701eef6cb81dc3f"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a5f1f94e0964e9fe78701eef6cb81dc3f">frameCount</a> () const</td></tr>
+<tr class="memitem:a5f1f94e0964e9fe78701eef6cb81dc3f" id="r_a5f1f94e0964e9fe78701eef6cb81dc3f"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a5f1f94e0964e9fe78701eef6cb81dc3f">frameCount</a> () const</td></tr>
 <tr class="separator:a5f1f94e0964e9fe78701eef6cb81dc3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61bb2fabd1c085db6d5a54ae9691f9cb" id="r_a61bb2fabd1c085db6d5a54ae9691f9cb"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a61bb2fabd1c085db6d5a54ae9691f9cb">frameCountI</a> () const</td></tr>
+<tr class="memitem:a61bb2fabd1c085db6d5a54ae9691f9cb" id="r_a61bb2fabd1c085db6d5a54ae9691f9cb"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a61bb2fabd1c085db6d5a54ae9691f9cb">frameCountI</a> () const</td></tr>
 <tr class="separator:a61bb2fabd1c085db6d5a54ae9691f9cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa04cc257205a46ece9e2c012baec4882" id="r_aa04cc257205a46ece9e2c012baec4882"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#aa04cc257205a46ece9e2c012baec4882">frameCountP</a> () const</td></tr>
+<tr class="memitem:aa04cc257205a46ece9e2c012baec4882" id="r_aa04cc257205a46ece9e2c012baec4882"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#aa04cc257205a46ece9e2c012baec4882">frameCountP</a> () const</td></tr>
 <tr class="memdesc:aa04cc257205a46ece9e2c012baec4882"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of P-frames (non-key frames) actually rendered so far.  <br /></td></tr>
 <tr class="separator:aa04cc257205a46ece9e2c012baec4882"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8419abee0c4d380be1cb8ff963fb8d0a" id="r_a8419abee0c4d380be1cb8ff963fb8d0a"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a8419abee0c4d380be1cb8ff963fb8d0a">getWriteTimeMs</a> () const</td></tr>
@@ -136,158 +136,158 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8419abee0c4d380be1cb8ff963fb8d0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b9d7d37dfa865711aa1474be238da12" id="r_a6b9d7d37dfa865711aa1474be238da12"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a6b9d7d37dfa865711aa1474be238da12">hadOutput</a> () const</td></tr>
 <tr class="separator:a6b9d7d37dfa865711aa1474be238da12"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3c5436b29a2a83d048ee81116870b83" id="r_aa3c5436b29a2a83d048ee81116870b83"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#aa3c5436b29a2a83d048ee81116870b83">ignoredFrameCount</a> () const</td></tr>
+<tr class="memitem:aa3c5436b29a2a83d048ee81116870b83" id="r_aa3c5436b29a2a83d048ee81116870b83"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#aa3c5436b29a2a83d048ee81116870b83">ignoredFrameCount</a> () const</td></tr>
 <tr class="separator:aa3c5436b29a2a83d048ee81116870b83"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ed71d94f20e455f1918935eb607496f" id="r_a9ed71d94f20e455f1918935eb607496f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a9ed71d94f20e455f1918935eb607496f">ignorePFrames</a> () const</td></tr>
+<tr class="memitem:a9ed71d94f20e455f1918935eb607496f" id="r_a9ed71d94f20e455f1918935eb607496f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a9ed71d94f20e455f1918935eb607496f">ignorePFrames</a> () const</td></tr>
 <tr class="separator:a9ed71d94f20e455f1918935eb607496f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c65abcfd07cb9f2a527823b271f1b0e" id="r_a4c65abcfd07cb9f2a527823b271f1b0e"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a4c65abcfd07cb9f2a527823b271f1b0e">inputFPS</a> ()</td></tr>
+<tr class="memitem:a4c65abcfd07cb9f2a527823b271f1b0e" id="r_a4c65abcfd07cb9f2a527823b271f1b0e"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a4c65abcfd07cb9f2a527823b271f1b0e">inputFPS</a> ()</td></tr>
 <tr class="separator:a4c65abcfd07cb9f2a527823b271f1b0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2245652fe2a9df612f6a7e2ef2b502e" id="r_ac2245652fe2a9df612f6a7e2ef2b502e"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#ac2245652fe2a9df612f6a7e2ef2b502e">outputFPS</a> ()</td></tr>
+<tr class="memitem:ac2245652fe2a9df612f6a7e2ef2b502e" id="r_ac2245652fe2a9df612f6a7e2ef2b502e"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#ac2245652fe2a9df612f6a7e2ef2b502e">outputFPS</a> ()</td></tr>
 <tr class="separator:ac2245652fe2a9df612f6a7e2ef2b502e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b25e5cb9d21b1b459c96291d865f5dd" id="r_a7b25e5cb9d21b1b459c96291d865f5dd"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7b25e5cb9d21b1b459c96291d865f5dd">queueCapacityBytes</a> ()</td></tr>
+<tr class="memitem:a7b25e5cb9d21b1b459c96291d865f5dd" id="r_a7b25e5cb9d21b1b459c96291d865f5dd"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7b25e5cb9d21b1b459c96291d865f5dd">queueCapacityBytes</a> ()</td></tr>
 <tr class="separator:a7b25e5cb9d21b1b459c96291d865f5dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab077eee431ac385f6fc9a9ab76baa14c" id="r_ab077eee431ac385f6fc9a9ab76baa14c"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#ab077eee431ac385f6fc9a9ab76baa14c">queuedBytes</a> ()</td></tr>
+<tr class="memitem:ab077eee431ac385f6fc9a9ab76baa14c" id="r_ab077eee431ac385f6fc9a9ab76baa14c"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#ab077eee431ac385f6fc9a9ab76baa14c">queuedBytes</a> ()</td></tr>
 <tr class="separator:ab077eee431ac385f6fc9a9ab76baa14c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adfdbd6520dc7dd28408822cfdb42ec52" id="r_adfdbd6520dc7dd28408822cfdb42ec52"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#adfdbd6520dc7dd28408822cfdb42ec52">queuedIFrameCount</a> () const</td></tr>
+<tr class="memitem:adfdbd6520dc7dd28408822cfdb42ec52" id="r_adfdbd6520dc7dd28408822cfdb42ec52"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#adfdbd6520dc7dd28408822cfdb42ec52">queuedIFrameCount</a> () const</td></tr>
 <tr class="separator:adfdbd6520dc7dd28408822cfdb42ec52"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad9996877508163928b063ff7ab1c05ec" id="r_ad9996877508163928b063ff7ab1c05ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#ad9996877508163928b063ff7ab1c05ec">setAudioClock</a> (<a class="el" href="classaudio__tools_1_1_time_source.html">TimeSource</a> &amp;clock)</td></tr>
+<tr class="memitem:ad9996877508163928b063ff7ab1c05ec" id="r_ad9996877508163928b063ff7ab1c05ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#ad9996877508163928b063ff7ab1c05ec">setAudioClock</a> (<a class="el" href="classaudio__tools_1_1_time_source.html">TimeSource</a> &amp;clock)</td></tr>
 <tr class="separator:ad9996877508163928b063ff7ab1c05ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac309555187efbd405acbdf128f332276" id="r_ac309555187efbd405acbdf128f332276"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#ac309555187efbd405acbdf128f332276">setCatchUpThresholdFrames</a> (float frames)</td></tr>
+<tr class="memitem:ac309555187efbd405acbdf128f332276" id="r_ac309555187efbd405acbdf128f332276"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#ac309555187efbd405acbdf128f332276">setCatchUpThresholdFrames</a> (float frames)</td></tr>
 <tr class="separator:ac309555187efbd405acbdf128f332276"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf51046626a731cffc6f19bf03e0493b" id="r_aaf51046626a731cffc6f19bf03e0493b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#aaf51046626a731cffc6f19bf03e0493b">setFps</a> (float fps)</td></tr>
+<tr class="memitem:aaf51046626a731cffc6f19bf03e0493b" id="r_aaf51046626a731cffc6f19bf03e0493b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#aaf51046626a731cffc6f19bf03e0493b">setFps</a> (float fps)</td></tr>
 <tr class="separator:aaf51046626a731cffc6f19bf03e0493b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afb93084288d9cee359601e113bf836f6" id="r_afb93084288d9cee359601e113bf836f6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#afb93084288d9cee359601e113bf836f6">setIgnorePFrames</a> (bool active)</td></tr>
+<tr class="memitem:afb93084288d9cee359601e113bf836f6" id="r_afb93084288d9cee359601e113bf836f6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#afb93084288d9cee359601e113bf836f6">setIgnorePFrames</a> (bool active)</td></tr>
 <tr class="separator:afb93084288d9cee359601e113bf836f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a875146acf297f244d9ca2fcd65bd8d43" id="r_a875146acf297f244d9ca2fcd65bd8d43"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a875146acf297f244d9ca2fcd65bd8d43">setMaxQueuedIFrames</a> (int count)</td></tr>
+<tr class="memitem:a875146acf297f244d9ca2fcd65bd8d43" id="r_a875146acf297f244d9ca2fcd65bd8d43"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a875146acf297f244d9ca2fcd65bd8d43">setMaxQueuedIFrames</a> (int count)</td></tr>
 <tr class="separator:a875146acf297f244d9ca2fcd65bd8d43"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1ae0a0bc12d541205343335e5c82ef8" id="r_af1ae0a0bc12d541205343335e5c82ef8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#af1ae0a0bc12d541205343335e5c82ef8">setQueueBytes</a> (size_t bytes)</td></tr>
+<tr class="memitem:af1ae0a0bc12d541205343335e5c82ef8" id="r_af1ae0a0bc12d541205343335e5c82ef8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#af1ae0a0bc12d541205343335e5c82ef8">setQueueBytes</a> (size_t bytes)</td></tr>
 <tr class="separator:af1ae0a0bc12d541205343335e5c82ef8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc94da7534fa7ec057e73db3bde130e9" id="r_abc94da7534fa7ec057e73db3bde130e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#abc94da7534fa7ec057e73db3bde130e9">setQueueUsePSRAM</a> (bool flag)</td></tr>
+<tr class="memitem:abc94da7534fa7ec057e73db3bde130e9" id="r_abc94da7534fa7ec057e73db3bde130e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#abc94da7534fa7ec057e73db3bde130e9">setQueueUsePSRAM</a> (bool flag)</td></tr>
 <tr class="separator:abc94da7534fa7ec057e73db3bde130e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2d928e2d23f7d8dd6503d4d26daeb62" id="r_ac2d928e2d23f7d8dd6503d4d26daeb62"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#ac2d928e2d23f7d8dd6503d4d26daeb62">setResyncQueueFillFraction</a> (float fraction)</td></tr>
+<tr class="memitem:ac2d928e2d23f7d8dd6503d4d26daeb62" id="r_ac2d928e2d23f7d8dd6503d4d26daeb62"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#ac2d928e2d23f7d8dd6503d4d26daeb62">setResyncQueueFillFraction</a> (float fraction)</td></tr>
 <tr class="separator:ac2d928e2d23f7d8dd6503d4d26daeb62"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a39b10d7425652bf0beb6f57cff30db31" id="r_a39b10d7425652bf0beb6f57cff30db31"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a39b10d7425652bf0beb6f57cff30db31">setResyncThresholdMs</a> (uint32_t ms)</td></tr>
+<tr class="memitem:a39b10d7425652bf0beb6f57cff30db31" id="r_a39b10d7425652bf0beb6f57cff30db31"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a39b10d7425652bf0beb6f57cff30db31">setResyncThresholdMs</a> (uint32_t ms)</td></tr>
 <tr class="separator:a39b10d7425652bf0beb6f57cff30db31"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf68823cf7aeca6608656b20bc6beec9" id="r_aaf68823cf7aeca6608656b20bc6beec9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#aaf68823cf7aeca6608656b20bc6beec9">setSchedulingDelayMs</a> (uint32_t delayMs)</td></tr>
+<tr class="memitem:aaf68823cf7aeca6608656b20bc6beec9" id="r_aaf68823cf7aeca6608656b20bc6beec9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#aaf68823cf7aeca6608656b20bc6beec9">setSchedulingDelayMs</a> (uint32_t delayMs)</td></tr>
 <tr class="separator:aaf68823cf7aeca6608656b20bc6beec9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a94f8728be362b736be4cb10a4253d201" id="r_a94f8728be362b736be4cb10a4253d201"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a94f8728be362b736be4cb10a4253d201">setSkipRender</a> (bool skip) override</td></tr>
+<tr class="memitem:a94f8728be362b736be4cb10a4253d201" id="r_a94f8728be362b736be4cb10a4253d201"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a94f8728be362b736be4cb10a4253d201">setSkipRender</a> (bool skip) override</td></tr>
 <tr class="separator:a94f8728be362b736be4cb10a4253d201"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afb2055856602a67b93f0b0ac399e266f" id="r_afb2055856602a67b93f0b0ac399e266f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#afb2055856602a67b93f0b0ac399e266f">setTaskParameters</a> (uint32_t stackSizeWords, uint8_t priority, int core=-1)</td></tr>
+<tr class="memitem:afb2055856602a67b93f0b0ac399e266f" id="r_afb2055856602a67b93f0b0ac399e266f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#afb2055856602a67b93f0b0ac399e266f">setTaskParameters</a> (uint32_t stackSizeWords, uint8_t priority, int core=-1)</td></tr>
 <tr class="separator:afb2055856602a67b93f0b0ac399e266f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
+<tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:ae1e55cd7dd035d68d8e67d0f9b497254" id="r_ae1e55cd7dd035d68d8e67d0f9b497254"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#ae1e55cd7dd035d68d8e67d0f9b497254">clockMs</a> ()</td></tr>
+<tr class="memitem:ae1e55cd7dd035d68d8e67d0f9b497254" id="r_ae1e55cd7dd035d68d8e67d0f9b497254"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#ae1e55cd7dd035d68d8e67d0f9b497254">clockMs</a> ()</td></tr>
 <tr class="separator:ae1e55cd7dd035d68d8e67d0f9b497254"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9906569f082d51539d28cea425d98067" id="r_a9906569f082d51539d28cea425d98067"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a9906569f082d51539d28cea425d98067">drainQueueKeepingLastKeyframe</a> (uint32_t &amp;out_target_ms)</td></tr>
+<tr class="memitem:a9906569f082d51539d28cea425d98067" id="r_a9906569f082d51539d28cea425d98067"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a9906569f082d51539d28cea425d98067">drainQueueKeepingLastKeyframe</a> (uint32_t &amp;out_target_ms)</td></tr>
 <tr class="separator:a9906569f082d51539d28cea425d98067"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa92e4404d636bf4ac4976b017a173cb8" id="r_aa92e4404d636bf4ac4976b017a173cb8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#aa92e4404d636bf4ac4976b017a173cb8">isKeyFrame</a> (const uint8_t *data, size_t len)</td></tr>
+<tr class="memitem:aa92e4404d636bf4ac4976b017a173cb8" id="r_aa92e4404d636bf4ac4976b017a173cb8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#aa92e4404d636bf4ac4976b017a173cb8">isKeyFrame</a> (const uint8_t *data, size_t len)</td></tr>
 <tr class="separator:aa92e4404d636bf4ac4976b017a173cb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5714552e88585f030d51a3c31c65e53d" id="r_a5714552e88585f030d51a3c31c65e53d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a5714552e88585f030d51a3c31c65e53d">taskLoop</a> ()</td></tr>
+<tr class="memitem:a5714552e88585f030d51a3c31c65e53d" id="r_a5714552e88585f030d51a3c31c65e53d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a5714552e88585f030d51a3c31c65e53d">taskLoop</a> ()</td></tr>
 <tr class="separator:a5714552e88585f030d51a3c31c65e53d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a8f187dda4c763515183802305a3c0074" id="r_a8f187dda4c763515183802305a3c0074"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a8f187dda4c763515183802305a3c0074">awaiting_keyframe</a> = false</td></tr>
+<tr class="memitem:a8f187dda4c763515183802305a3c0074" id="r_a8f187dda4c763515183802305a3c0074"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a8f187dda4c763515183802305a3c0074">awaiting_keyframe</a> = false</td></tr>
 <tr class="separator:a8f187dda4c763515183802305a3c0074"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a25e3f12ea0fb6174469c8daa1b8bf884" id="r_a25e3f12ea0fb6174469c8daa1b8bf884"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a25e3f12ea0fb6174469c8daa1b8bf884">catch_up_threshold_frames</a> = 1.0f</td></tr>
+<tr class="memitem:a25e3f12ea0fb6174469c8daa1b8bf884" id="r_a25e3f12ea0fb6174469c8daa1b8bf884"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a25e3f12ea0fb6174469c8daa1b8bf884">catch_up_threshold_frames</a> = 1.0f</td></tr>
 <tr class="separator:a25e3f12ea0fb6174469c8daa1b8bf884"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaff6efa0f70a2b550c5e7ebf462c9c58" id="r_aaff6efa0f70a2b550c5e7ebf462c9c58"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_video_audio_sync_task_1_1_frame_header.html">FrameHeader</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#aaff6efa0f70a2b550c5e7ebf462c9c58">current_header</a></td></tr>
+<tr class="memitem:aaff6efa0f70a2b550c5e7ebf462c9c58" id="r_aaff6efa0f70a2b550c5e7ebf462c9c58"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_paced_video_output_1_1_frame_header.html">FrameHeader</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#aaff6efa0f70a2b550c5e7ebf462c9c58">current_header</a></td></tr>
 <tr class="separator:aaff6efa0f70a2b550c5e7ebf462c9c58"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb6b977d62dce3e7996e9c01bc7d35c0" id="r_adb6b977d62dce3e7996e9c01bc7d35c0"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#adb6b977d62dce3e7996e9c01bc7d35c0">dropped_frame_count</a> = 0</td></tr>
+<tr class="memitem:adb6b977d62dce3e7996e9c01bc7d35c0" id="r_adb6b977d62dce3e7996e9c01bc7d35c0"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#adb6b977d62dce3e7996e9c01bc7d35c0">dropped_frame_count</a> = 0</td></tr>
 <tr class="separator:adb6b977d62dce3e7996e9c01bc7d35c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf9db86f031a3ce2404e1e2f73993591" id="r_acf9db86f031a3ce2404e1e2f73993591"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#acf9db86f031a3ce2404e1e2f73993591">dropped_i_frame_count</a> = 0</td></tr>
+<tr class="memitem:acf9db86f031a3ce2404e1e2f73993591" id="r_acf9db86f031a3ce2404e1e2f73993591"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#acf9db86f031a3ce2404e1e2f73993591">dropped_i_frame_count</a> = 0</td></tr>
 <tr class="separator:acf9db86f031a3ce2404e1e2f73993591"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15d5fd596a405d55368dd86a1303f5e6" id="r_a15d5fd596a405d55368dd86a1303f5e6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a15d5fd596a405d55368dd86a1303f5e6">frame_buf</a></td></tr>
+<tr class="memitem:a15d5fd596a405d55368dd86a1303f5e6" id="r_a15d5fd596a405d55368dd86a1303f5e6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a15d5fd596a405d55368dd86a1303f5e6">frame_buf</a></td></tr>
 <tr class="separator:a15d5fd596a405d55368dd86a1303f5e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3e00071db1070451c10872b09360cad" id="r_ae3e00071db1070451c10872b09360cad"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#ae3e00071db1070451c10872b09360cad">frame_count</a> = 0</td></tr>
+<tr class="memitem:ae3e00071db1070451c10872b09360cad" id="r_ae3e00071db1070451c10872b09360cad"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#ae3e00071db1070451c10872b09360cad">frame_count</a> = 0</td></tr>
 <tr class="separator:ae3e00071db1070451c10872b09360cad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b9f42d4c57d1fe01c782d735be98074" id="r_a7b9f42d4c57d1fe01c782d735be98074"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7b9f42d4c57d1fe01c782d735be98074">frame_index</a> = 0</td></tr>
+<tr class="memitem:a7b9f42d4c57d1fe01c782d735be98074" id="r_a7b9f42d4c57d1fe01c782d735be98074"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7b9f42d4c57d1fe01c782d735be98074">frame_index</a> = 0</td></tr>
 <tr class="separator:a7b9f42d4c57d1fe01c782d735be98074"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa64ef93d4fa76d7508c0ad5ad741bf41" id="r_aa64ef93d4fa76d7508c0ad5ad741bf41"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#aa64ef93d4fa76d7508c0ad5ad741bf41">frame_period_ms</a> = 0</td></tr>
+<tr class="memitem:aa64ef93d4fa76d7508c0ad5ad741bf41" id="r_aa64ef93d4fa76d7508c0ad5ad741bf41"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#aa64ef93d4fa76d7508c0ad5ad741bf41">frame_period_ms</a> = 0</td></tr>
 <tr class="separator:aa64ef93d4fa76d7508c0ad5ad741bf41"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28651facb1fc5645bcaeb5e5131c5e34" id="r_a28651facb1fc5645bcaeb5e5131c5e34"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a28651facb1fc5645bcaeb5e5131c5e34">have_header</a> = false</td></tr>
+<tr class="memitem:a28651facb1fc5645bcaeb5e5131c5e34" id="r_a28651facb1fc5645bcaeb5e5131c5e34"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a28651facb1fc5645bcaeb5e5131c5e34">have_header</a> = false</td></tr>
 <tr class="separator:a28651facb1fc5645bcaeb5e5131c5e34"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee1699b8034e4277bd1e25251815a283" id="r_aee1699b8034e4277bd1e25251815a283"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#aee1699b8034e4277bd1e25251815a283">i_frame_count</a> {0}</td></tr>
+<tr class="memitem:aee1699b8034e4277bd1e25251815a283" id="r_aee1699b8034e4277bd1e25251815a283"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#aee1699b8034e4277bd1e25251815a283">i_frame_count</a> {0}</td></tr>
 <tr class="separator:aee1699b8034e4277bd1e25251815a283"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a172f9aa35c92323cb51f2c002034588a" id="r_a172f9aa35c92323cb51f2c002034588a"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; uint64_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a172f9aa35c92323cb51f2c002034588a">i_frame_total_ms</a> {0}</td></tr>
+<tr class="memitem:a172f9aa35c92323cb51f2c002034588a" id="r_a172f9aa35c92323cb51f2c002034588a"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; uint64_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a172f9aa35c92323cb51f2c002034588a">i_frame_total_ms</a> {0}</td></tr>
 <tr class="separator:a172f9aa35c92323cb51f2c002034588a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3753a305e148d6be8884f906bed2e854" id="r_a3753a305e148d6be8884f906bed2e854"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a3753a305e148d6be8884f906bed2e854">ignore_p_frames</a> = false</td></tr>
+<tr class="memitem:a3753a305e148d6be8884f906bed2e854" id="r_a3753a305e148d6be8884f906bed2e854"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a3753a305e148d6be8884f906bed2e854">ignore_p_frames</a> = false</td></tr>
 <tr class="separator:a3753a305e148d6be8884f906bed2e854"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd2f35d1c4d1daff9d24a62c62c79e50" id="r_afd2f35d1c4d1daff9d24a62c62c79e50"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#afd2f35d1c4d1daff9d24a62c62c79e50">ignored_frame_count</a> = 0</td></tr>
+<tr class="memitem:afd2f35d1c4d1daff9d24a62c62c79e50" id="r_afd2f35d1c4d1daff9d24a62c62c79e50"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#afd2f35d1c4d1daff9d24a62c62c79e50">ignored_frame_count</a> = 0</td></tr>
 <tr class="separator:afd2f35d1c4d1daff9d24a62c62c79e50"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d7ad099ac6f3da0f5365f8318c1eff2" id="r_a0d7ad099ac6f3da0f5365f8318c1eff2"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a0d7ad099ac6f3da0f5365f8318c1eff2">input_start_ms</a> = 0</td></tr>
+<tr class="memitem:a0d7ad099ac6f3da0f5365f8318c1eff2" id="r_a0d7ad099ac6f3da0f5365f8318c1eff2"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a0d7ad099ac6f3da0f5365f8318c1eff2">input_start_ms</a> = 0</td></tr>
 <tr class="separator:a0d7ad099ac6f3da0f5365f8318c1eff2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4640e7ef21176f2042038e78ac3c3fcb" id="r_a4640e7ef21176f2042038e78ac3c3fcb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a4640e7ef21176f2042038e78ac3c3fcb">input_start_set</a> = false</td></tr>
+<tr class="memitem:a4640e7ef21176f2042038e78ac3c3fcb" id="r_a4640e7ef21176f2042038e78ac3c3fcb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a4640e7ef21176f2042038e78ac3c3fcb">input_start_set</a> = false</td></tr>
 <tr class="separator:a4640e7ef21176f2042038e78ac3c3fcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a6d983869b59a0f164d8036236f6fd3" id="r_a2a6d983869b59a0f164d8036236f6fd3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a2a6d983869b59a0f164d8036236f6fd3">logged_drop_burst</a> = false</td></tr>
+<tr class="memitem:a2a6d983869b59a0f164d8036236f6fd3" id="r_a2a6d983869b59a0f164d8036236f6fd3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a2a6d983869b59a0f164d8036236f6fd3">logged_drop_burst</a> = false</td></tr>
 <tr class="separator:a2a6d983869b59a0f164d8036236f6fd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5f96b4d01d6d613a4ff9bfdb0896b1b" id="r_ab5f96b4d01d6d613a4ff9bfdb0896b1b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#ab5f96b4d01d6d613a4ff9bfdb0896b1b">max_queued_i_frames</a> = 4</td></tr>
+<tr class="memitem:ab5f96b4d01d6d613a4ff9bfdb0896b1b" id="r_ab5f96b4d01d6d613a4ff9bfdb0896b1b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#ab5f96b4d01d6d613a4ff9bfdb0896b1b">max_queued_i_frames</a> = 4</td></tr>
 <tr class="separator:ab5f96b4d01d6d613a4ff9bfdb0896b1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a945160759573dc49a5706b0c3539e9" id="r_a6a945160759573dc49a5706b0c3539e9"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a6a945160759573dc49a5706b0c3539e9">output_start_ms</a> {0}</td></tr>
+<tr class="memitem:a6a945160759573dc49a5706b0c3539e9" id="r_a6a945160759573dc49a5706b0c3539e9"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a6a945160759573dc49a5706b0c3539e9">output_start_ms</a> {0}</td></tr>
 <tr class="separator:a6a945160759573dc49a5706b0c3539e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5dee9e724bc91c2d81f306486dffdba1" id="r_a5dee9e724bc91c2d81f306486dffdba1"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a5dee9e724bc91c2d81f306486dffdba1">output_start_set</a> {false}</td></tr>
+<tr class="memitem:a5dee9e724bc91c2d81f306486dffdba1" id="r_a5dee9e724bc91c2d81f306486dffdba1"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a5dee9e724bc91c2d81f306486dffdba1">output_start_set</a> {false}</td></tr>
 <tr class="separator:a5dee9e724bc91c2d81f306486dffdba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a816d664af596a2411eeea1f31e64d650" id="r_a816d664af596a2411eeea1f31e64d650"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_time_source.html">TimeSource</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a816d664af596a2411eeea1f31e64d650">p_clock</a> = nullptr</td></tr>
+<tr class="memitem:a816d664af596a2411eeea1f31e64d650" id="r_a816d664af596a2411eeea1f31e64d650"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_time_source.html">TimeSource</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a816d664af596a2411eeea1f31e64d650">p_clock</a> = nullptr</td></tr>
 <tr class="separator:a816d664af596a2411eeea1f31e64d650"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a879b2755043aa42ebc98ffea0e7d9cbb" id="r_a879b2755043aa42ebc98ffea0e7d9cbb"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a879b2755043aa42ebc98ffea0e7d9cbb">p_frame_count</a> {0}</td></tr>
+<tr class="memitem:a879b2755043aa42ebc98ffea0e7d9cbb" id="r_a879b2755043aa42ebc98ffea0e7d9cbb"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a879b2755043aa42ebc98ffea0e7d9cbb">p_frame_count</a> {0}</td></tr>
 <tr class="separator:a879b2755043aa42ebc98ffea0e7d9cbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a332dd930569abb093b9be31b07f9c6b9" id="r_a332dd930569abb093b9be31b07f9c6b9"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; uint64_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a332dd930569abb093b9be31b07f9c6b9">p_frame_total_ms</a> {0}</td></tr>
+<tr class="memitem:a332dd930569abb093b9be31b07f9c6b9" id="r_a332dd930569abb093b9be31b07f9c6b9"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; uint64_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a332dd930569abb093b9be31b07f9c6b9">p_frame_total_ms</a> {0}</td></tr>
 <tr class="separator:a332dd930569abb093b9be31b07f9c6b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa05ce62a3136405b84db7c54dc64ed7f" id="r_aa05ce62a3136405b84db7c54dc64ed7f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#aa05ce62a3136405b84db7c54dc64ed7f">p_target</a></td></tr>
+<tr class="memitem:aa05ce62a3136405b84db7c54dc64ed7f" id="r_aa05ce62a3136405b84db7c54dc64ed7f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#aa05ce62a3136405b84db7c54dc64ed7f">p_target</a></td></tr>
 <tr class="separator:aa05ce62a3136405b84db7c54dc64ed7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a294338071e5d9da274754a06b8aadcf9" id="r_a294338071e5d9da274754a06b8aadcf9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_ring_buffer_s_p_s_c.html">RingBufferSPSC</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a294338071e5d9da274754a06b8aadcf9">queue</a></td></tr>
+<tr class="memitem:a294338071e5d9da274754a06b8aadcf9" id="r_a294338071e5d9da274754a06b8aadcf9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_ring_buffer_s_p_s_c.html">RingBufferSPSC</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a294338071e5d9da274754a06b8aadcf9">queue</a></td></tr>
 <tr class="separator:a294338071e5d9da274754a06b8aadcf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0899012a3926992583f514dfa25e6870" id="r_a0899012a3926992583f514dfa25e6870"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a0899012a3926992583f514dfa25e6870">queue_bytes</a> = 32 * 1024</td></tr>
+<tr class="memitem:a0899012a3926992583f514dfa25e6870" id="r_a0899012a3926992583f514dfa25e6870"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a0899012a3926992583f514dfa25e6870">queue_bytes</a> = 32 * 1024</td></tr>
 <tr class="separator:a0899012a3926992583f514dfa25e6870"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73a7f9c44018a26502a0d63264ebf172" id="r_a73a7f9c44018a26502a0d63264ebf172"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a73a7f9c44018a26502a0d63264ebf172">queue_bytes_allocated</a> = 0</td></tr>
+<tr class="memitem:a73a7f9c44018a26502a0d63264ebf172" id="r_a73a7f9c44018a26502a0d63264ebf172"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a73a7f9c44018a26502a0d63264ebf172">queue_bytes_allocated</a> = 0</td></tr>
 <tr class="separator:a73a7f9c44018a26502a0d63264ebf172"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf00a113f78dc379e40a2331009a0954" id="r_adf00a113f78dc379e40a2331009a0954"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#adf00a113f78dc379e40a2331009a0954">queue_use_psram</a> = false</td></tr>
+<tr class="memitem:adf00a113f78dc379e40a2331009a0954" id="r_adf00a113f78dc379e40a2331009a0954"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#adf00a113f78dc379e40a2331009a0954">queue_use_psram</a> = false</td></tr>
 <tr class="separator:adf00a113f78dc379e40a2331009a0954"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4513b091c1a649684018bf63cced6707" id="r_a4513b091c1a649684018bf63cced6707"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; int32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a4513b091c1a649684018bf63cced6707">queued_i_frame_count</a> {0}</td></tr>
+<tr class="memitem:a4513b091c1a649684018bf63cced6707" id="r_a4513b091c1a649684018bf63cced6707"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; int32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a4513b091c1a649684018bf63cced6707">queued_i_frame_count</a> {0}</td></tr>
 <tr class="separator:a4513b091c1a649684018bf63cced6707"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a11cafa3625a9c00f5936c4a7a0fe226c" id="r_a11cafa3625a9c00f5936c4a7a0fe226c"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; int32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a11cafa3625a9c00f5936c4a7a0fe226c">render_lateness_ms</a> {0}</td></tr>
+<tr class="memitem:a11cafa3625a9c00f5936c4a7a0fe226c" id="r_a11cafa3625a9c00f5936c4a7a0fe226c"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; int32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a11cafa3625a9c00f5936c4a7a0fe226c">render_lateness_ms</a> {0}</td></tr>
 <tr class="separator:a11cafa3625a9c00f5936c4a7a0fe226c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a24752e4e4c5234ddad3787194f9af1c1" id="r_a24752e4e4c5234ddad3787194f9af1c1"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a24752e4e4c5234ddad3787194f9af1c1">resync_queue_fill_fraction</a> = 0.8f</td></tr>
+<tr class="memitem:a24752e4e4c5234ddad3787194f9af1c1" id="r_a24752e4e4c5234ddad3787194f9af1c1"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a24752e4e4c5234ddad3787194f9af1c1">resync_queue_fill_fraction</a> = 0.8f</td></tr>
 <tr class="separator:a24752e4e4c5234ddad3787194f9af1c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d00da8a8f821a1303a48cb2c0a0be68" id="r_a3d00da8a8f821a1303a48cb2c0a0be68"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a3d00da8a8f821a1303a48cb2c0a0be68">resync_threshold_ms</a> = 2000</td></tr>
+<tr class="memitem:a3d00da8a8f821a1303a48cb2c0a0be68" id="r_a3d00da8a8f821a1303a48cb2c0a0be68"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a3d00da8a8f821a1303a48cb2c0a0be68">resync_threshold_ms</a> = 2000</td></tr>
 <tr class="separator:a3d00da8a8f821a1303a48cb2c0a0be68"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a349f5f4a7243b584064bf1dd96c3da11" id="r_a349f5f4a7243b584064bf1dd96c3da11"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a349f5f4a7243b584064bf1dd96c3da11">scheduling_delay_ms</a> = 0</td></tr>
+<tr class="memitem:a349f5f4a7243b584064bf1dd96c3da11" id="r_a349f5f4a7243b584064bf1dd96c3da11"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a349f5f4a7243b584064bf1dd96c3da11">scheduling_delay_ms</a> = 0</td></tr>
 <tr class="separator:a349f5f4a7243b584064bf1dd96c3da11"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4908d59991008690c0f55f0334aeafc9" id="r_a4908d59991008690c0f55f0334aeafc9"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a4908d59991008690c0f55f0334aeafc9">start_ms</a> = 0</td></tr>
+<tr class="memitem:a4908d59991008690c0f55f0334aeafc9" id="r_a4908d59991008690c0f55f0334aeafc9"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a4908d59991008690c0f55f0334aeafc9">start_ms</a> = 0</td></tr>
 <tr class="separator:a4908d59991008690c0f55f0334aeafc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa9f3e78446d4f42c3ae4a580081bc972" id="r_aa9f3e78446d4f42c3ae4a580081bc972"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#aa9f3e78446d4f42c3ae4a580081bc972">start_set</a> = false</td></tr>
+<tr class="memitem:aa9f3e78446d4f42c3ae4a580081bc972" id="r_aa9f3e78446d4f42c3ae4a580081bc972"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#aa9f3e78446d4f42c3ae4a580081bc972">start_set</a> = false</td></tr>
 <tr class="separator:aa9f3e78446d4f42c3ae4a580081bc972"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8bcc572b9d73774627be66dd46aa61a8" id="r_a8bcc572b9d73774627be66dd46aa61a8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_task.html">Task</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a8bcc572b9d73774627be66dd46aa61a8">task</a></td></tr>
+<tr class="memitem:a8bcc572b9d73774627be66dd46aa61a8" id="r_a8bcc572b9d73774627be66dd46aa61a8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_task.html">Task</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a8bcc572b9d73774627be66dd46aa61a8">task</a></td></tr>
 <tr class="separator:a8bcc572b9d73774627be66dd46aa61a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28c8055cde540f46d40018d0bde70b9e" id="r_a28c8055cde540f46d40018d0bde70b9e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a28c8055cde540f46d40018d0bde70b9e">task_core</a> = -1</td></tr>
+<tr class="memitem:a28c8055cde540f46d40018d0bde70b9e" id="r_a28c8055cde540f46d40018d0bde70b9e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a28c8055cde540f46d40018d0bde70b9e">task_core</a> = -1</td></tr>
 <tr class="separator:a28c8055cde540f46d40018d0bde70b9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b8b0a9e736ea4bca2bf2a3679f6b201" id="r_a6b8b0a9e736ea4bca2bf2a3679f6b201"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a6b8b0a9e736ea4bca2bf2a3679f6b201">task_priority</a> = 2</td></tr>
+<tr class="memitem:a6b8b0a9e736ea4bca2bf2a3679f6b201" id="r_a6b8b0a9e736ea4bca2bf2a3679f6b201"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a6b8b0a9e736ea4bca2bf2a3679f6b201">task_priority</a> = 2</td></tr>
 <tr class="separator:a6b8b0a9e736ea4bca2bf2a3679f6b201"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7f5b64db7e0956669dd6e9b9e4757b1" id="r_af7f5b64db7e0956669dd6e9b9e4757b1"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#af7f5b64db7e0956669dd6e9b9e4757b1">task_stack_size</a> = 4096</td></tr>
+<tr class="memitem:af7f5b64db7e0956669dd6e9b9e4757b1" id="r_af7f5b64db7e0956669dd6e9b9e4757b1"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#af7f5b64db7e0956669dd6e9b9e4757b1">task_stack_size</a> = 4096</td></tr>
 <tr class="separator:af7f5b64db7e0956669dd6e9b9e4757b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a96824a0831cbef6404ba272c2d6b0e40" id="r_a96824a0831cbef6404ba272c2d6b0e40"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a96824a0831cbef6404ba272c2d6b0e40">task_started</a> = false</td></tr>
+<tr class="memitem:a96824a0831cbef6404ba272c2d6b0e40" id="r_a96824a0831cbef6404ba272c2d6b0e40"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a96824a0831cbef6404ba272c2d6b0e40">task_started</a> = false</td></tr>
 <tr class="separator:a96824a0831cbef6404ba272c2d6b0e40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
-<tr class="memitem:ac3992bbb9c872a3e741894736144fc24" id="r_ac3992bbb9c872a3e741894736144fc24"><td class="memItemLeft" align="right" valign="top">static constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#ac3992bbb9c872a3e741894736144fc24">kDrainYieldEvery</a> = 32</td></tr>
+<tr class="memitem:ac3992bbb9c872a3e741894736144fc24" id="r_ac3992bbb9c872a3e741894736144fc24"><td class="memItemLeft" align="right" valign="top">static constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#ac3992bbb9c872a3e741894736144fc24">kDrainYieldEvery</a> = 32</td></tr>
 <tr class="separator:ac3992bbb9c872a3e741894736144fc24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Buffers a small, configurable amount of video (see <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#af1ae0a0bc12d541205343335e5c82ef8">setQueueBytes()</a>) and renders it frame by frame from a dedicated background task, timed against an audio clock - so a demuxer's own dispatch loop never blocks on video pacing. Wrap the real <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> (e.g. <a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a>) in this and pass it to setOutputVideo() instead of the decoder itself. </p>
-<p><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> requires one whole frame per call, immediately followed by <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a> (a no-op) - every current caller (DemuxerAVI/DemuxerMP4/ <a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html" title="MPEG-1 System (Program) Stream Demuxer, as defined by ISO/IEC 11172-1: splits the pack_header/system_...">DemuxerMPG</a>) already does this. Frame N renders once the audio clock (<a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#ad9996877508163928b063ff7ab1c05ec">setAudioClock()</a>, defaults to wall clock) reaches N / fps (<a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#aaf51046626a731cffc6f19bf03e0493b">setFps()</a>); <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#aaf68823cf7aeca6608656b20bc6beec9">setSchedulingDelayMs()</a> corrects for the audio output's own buffering latency.</p>
-<p>decode+render is assumed to keep up with the recording frame rate <em>on average</em>. When it falls behind, <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> drops non-keyframes instead of blocking - once the queue is full, or proactively once the render task is more than <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#ac309555187efbd405acbdf128f332276">setCatchUpThresholdFrames()</a> frame periods late (see <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>'s own comment). Keyframes are never dropped this way.</p>
-<p>Dropping alone can only prevent the backlog from growing, not shrink it (the producer can't deliver frames faster than real time either). <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a39b10d7425652bf0beb6f57cff30db31">setResyncThresholdMs()</a>, <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#ac2d928e2d23f7d8dd6503d4d26daeb62">setResyncQueueFillFraction()</a>, and <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a875146acf297f244d9ca2fcd65bd8d43">setMaxQueuedIFrames()</a> are the fallback: once any fires, <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a5714552e88585f030d51a3c31c65e53d">taskLoop()</a> gives up on the backlog - keeping the freshest keyframe found in it (see <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a9906569f082d51539d28cea425d98067">drainQueueKeepingLastKeyframe()</a>) and jumping the schedule forward to render it - so playback recovers (a visible jump) instead of lagging indefinitely. Any P-frame after a resync is discarded until the next real keyframe arrives, since a P-frame may reference a picture the decoder no longer holds.</p>
-<p>Thread-safety: <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> (the caller's thread) is the sole producer, the background task the sole consumer of the frame queue - a lock-free <a class="el" href="classaudio__tools_1_1_ring_buffer_s_p_s_c.html" title="Lock-free Single-Producer Single-Consumer ring buffer.">RingBufferSPSC</a>, not a mutex.</p>
-<p>Diagnostics: <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a5f1f94e0964e9fe78701eef6cb81dc3f">frameCount()</a>/frameCountI()/frameCountP()/ <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a711a5b933ec68da2d43cc16fcc46372e">droppedFrameCount()</a>/droppedIFrameCount(), <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a002b5eb5dca74f350678e9a56ef1293b">avgFrameMs()</a>/avgIFrameMs()/ <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#ad0512c028df8a1aed38952aaaca2c3be">avgPFrameMs()</a>, <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a4c65abcfd07cb9f2a527823b271f1b0e">inputFPS()</a>/outputFPS(), <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#ab077eee431ac385f6fc9a9ab76baa14c">queuedBytes()</a>/ <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#adfdbd6520dc7dd28408822cfdb42ec52">queuedIFrameCount()</a>. Also logs its own processing (LOGI lifecycle, LOGD per-frame, LOGW when falling behind/dropping).</p>
+<div class="textblock"><p>Buffers a small, configurable amount of video (see <a class="el" href="classaudio__tools_1_1_paced_video_output.html#af1ae0a0bc12d541205343335e5c82ef8">setQueueBytes()</a>) and renders it frame by frame from a dedicated background task, timed against an audio clock - so a demuxer's own dispatch loop never blocks on video pacing. Wrap the real <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> (e.g. <a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a>) in this and pass it to setOutputVideo() instead of the decoder itself. </p>
+<p><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> requires one whole frame per call, immediately followed by <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a> (a no-op) - every current caller (DemuxerAVI/DemuxerMP4/ <a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html" title="MPEG-1 System (Program) Stream Demuxer, as defined by ISO/IEC 11172-1: splits the pack_header/system_...">DemuxerMPG</a>) already does this. Frame N renders once the audio clock (<a class="el" href="classaudio__tools_1_1_paced_video_output.html#ad9996877508163928b063ff7ab1c05ec">setAudioClock()</a>, defaults to wall clock) reaches N / fps (<a class="el" href="classaudio__tools_1_1_paced_video_output.html#aaf51046626a731cffc6f19bf03e0493b">setFps()</a>); <a class="el" href="classaudio__tools_1_1_paced_video_output.html#aaf68823cf7aeca6608656b20bc6beec9">setSchedulingDelayMs()</a> corrects for the audio output's own buffering latency.</p>
+<p>decode+render is assumed to keep up with the recording frame rate <em>on average</em>. When it falls behind, <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> drops non-keyframes instead of blocking - once the queue is full, or proactively once the render task is more than <a class="el" href="classaudio__tools_1_1_paced_video_output.html#ac309555187efbd405acbdf128f332276">setCatchUpThresholdFrames()</a> frame periods late (see <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>'s own comment). Keyframes are never dropped this way.</p>
+<p>Dropping alone can only prevent the backlog from growing, not shrink it (the producer can't deliver frames faster than real time either). <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a39b10d7425652bf0beb6f57cff30db31">setResyncThresholdMs()</a>, <a class="el" href="classaudio__tools_1_1_paced_video_output.html#ac2d928e2d23f7d8dd6503d4d26daeb62">setResyncQueueFillFraction()</a>, and <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a875146acf297f244d9ca2fcd65bd8d43">setMaxQueuedIFrames()</a> are the fallback: once any fires, <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a5714552e88585f030d51a3c31c65e53d">taskLoop()</a> gives up on the backlog - keeping the freshest keyframe found in it (see <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a9906569f082d51539d28cea425d98067">drainQueueKeepingLastKeyframe()</a>) and jumping the schedule forward to render it - so playback recovers (a visible jump) instead of lagging indefinitely. Any P-frame after a resync is discarded until the next real keyframe arrives, since a P-frame may reference a picture the decoder no longer holds.</p>
+<p>Thread-safety: <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> (the caller's thread) is the sole producer, the background task the sole consumer of the frame queue - a lock-free <a class="el" href="classaudio__tools_1_1_ring_buffer_s_p_s_c.html" title="Lock-free Single-Producer Single-Consumer ring buffer.">RingBufferSPSC</a>, not a mutex.</p>
+<p>Diagnostics: <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a5f1f94e0964e9fe78701eef6cb81dc3f">frameCount()</a>/frameCountI()/frameCountP()/ <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a711a5b933ec68da2d43cc16fcc46372e">droppedFrameCount()</a>/droppedIFrameCount(), <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a002b5eb5dca74f350678e9a56ef1293b">avgFrameMs()</a>/avgIFrameMs()/ <a class="el" href="classaudio__tools_1_1_paced_video_output.html#ad0512c028df8a1aed38952aaaca2c3be">avgPFrameMs()</a>, <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a4c65abcfd07cb9f2a527823b271f1b0e">inputFPS()</a>/outputFPS(), <a class="el" href="classaudio__tools_1_1_paced_video_output.html#ab077eee431ac385f6fc9a9ab76baa14c">queuedBytes()</a>/ <a class="el" href="classaudio__tools_1_1_paced_video_output.html#adfdbd6520dc7dd28408822cfdb42ec52">queuedIFrameCount()</a>. Also logs its own processing (LOGI lifecycle, LOGD per-frame, LOGW when falling behind/dropping).</p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a6041b5b3363ab78eeaa76c6d143da0f8" name="a6041b5b3363ab78eeaa76c6d143da0f8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6041b5b3363ab78eeaa76c6d143da0f8">&#9670;&#160;</a></span>VideoAudioSyncTask()</h2>
+<a id="a0fbb780a6e20757970d48f9ce7623a2e" name="a0fbb780a6e20757970d48f9ce7623a2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fbb780a6e20757970d48f9ce7623a2e">&#9670;&#160;</a></span>PacedVideoOutput()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -296,7 +296,7 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html">VideoAudioSyncTask</a> </td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_paced_video_output.html">PacedVideoOutput</a> </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;&#160;</td>
           <td class="paramname"><em>target</em>, </td>
@@ -327,9 +327,9 @@ Static Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">target</td><td>every frame is eventually forwarded here (<a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> + <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a>), from the background task only - never from the caller's own <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>/flush() calls. </td></tr>
-    <tr><td class="paramname">fps</td><td>nominal frames/second frames are scheduled against - 0 (the default) means "not yet known"; set it later via <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#aaf51046626a731cffc6f19bf03e0493b">setFps()</a> (e.g. once the demuxer's parsed <a class="el" href="structaudio__tools_1_1_video_info.html#a4f50e96f11c68d45dc109185efe011ad">VideoInfo::fps</a> becomes available) before the first <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>. </td></tr>
-    <tr><td class="paramname">schedulingDelayMs</td><td>see <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#aaf68823cf7aeca6608656b20bc6beec9">setSchedulingDelayMs()</a> - 0 (the default) applies no correction. </td></tr>
+    <tr><td class="paramname">target</td><td>every frame is eventually forwarded here (<a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> + <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a>), from the background task only - never from the caller's own <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>/flush() calls. </td></tr>
+    <tr><td class="paramname">fps</td><td>nominal frames/second frames are scheduled against - 0 (the default) means "not yet known"; set it later via <a class="el" href="classaudio__tools_1_1_paced_video_output.html#aaf51046626a731cffc6f19bf03e0493b">setFps()</a> (e.g. once the demuxer's parsed <a class="el" href="structaudio__tools_1_1_video_info.html#a4f50e96f11c68d45dc109185efe011ad">VideoInfo::fps</a> becomes available) before the first <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>. </td></tr>
+    <tr><td class="paramname">schedulingDelayMs</td><td>see <a class="el" href="classaudio__tools_1_1_paced_video_output.html#aaf68823cf7aeca6608656b20bc6beec9">setSchedulingDelayMs()</a> - 0 (the default) applies no correction. </td></tr>
   </table>
   </dd>
 </dl>
@@ -359,7 +359,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Average time (ms) spent in the target's <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>+<a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a> call across all rendered frames (I and P combined), since <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a>. </p>
+<p>Average time (ms) spent in the target's <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>+<a class="el" href="classaudio__tools_1_1_paced_video_output.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a> call across all rendered frames (I and P combined), since <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a>. </p>
 
 </div>
 </div>
@@ -385,7 +385,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Average time (ms) spent in the target's <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>+<a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a> call (i.e. decode+render) for I-frames only, since <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a>. </p>
+<p>Average time (ms) spent in the target's <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>+<a class="el" href="classaudio__tools_1_1_paced_video_output.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a> call (i.e. decode+render) for I-frames only, since <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a>. </p>
 
 </div>
 </div>
@@ -411,7 +411,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Average time (ms) spent in the target's <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>+<a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a> call for P-frames only, since <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a>. </p>
+<p>Average time (ms) spent in the target's <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>+<a class="el" href="classaudio__tools_1_1_paced_video_output.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a> call for P-frames only, since <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a>. </p>
 
 </div>
 </div>
@@ -437,7 +437,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Starts the background render task - optional: <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> calls this itself (idempotently) on first use if you never do, so the common case needs no explicit <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a> at all. Call it yourself only if you need <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#afb2055856602a67b93f0b0ac399e266f">setTaskParameters()</a>/setQueueBytes() to take effect (call those first) before any frame arrives. </p>
+<p>Starts the background render task - optional: <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> calls this itself (idempotently) on first use if you never do, so the common case needs no explicit <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a> at all. Call it yourself only if you need <a class="el" href="classaudio__tools_1_1_paced_video_output.html#afb2055856602a67b93f0b0ac399e266f">setTaskParameters()</a>/setQueueBytes() to take effect (call those first) before any frame arrives. </p>
 
 </div>
 </div>
@@ -463,7 +463,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>playbackTime() (not <a class="el" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1" title="Returns the milliseconds since the start.">millis()</a>) - scheduling against actual audio progress, not just time passing, is the point of <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#ad9996877508163928b063ff7ab1c05ec">setAudioClock()</a>. Falls back to wall-clock <a class="el" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1" title="Returns the milliseconds since the start.">millis()</a> when no audio clock is set. </p>
+<p>playbackTime() (not <a class="el" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1" title="Returns the milliseconds since the start.">millis()</a>) - scheduling against actual audio progress, not just time passing, is the point of <a class="el" href="classaudio__tools_1_1_paced_video_output.html#ad9996877508163928b063ff7ab1c05ec">setAudioClock()</a>. Falls back to wall-clock <a class="el" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1" title="Returns the milliseconds since the start.">millis()</a> when no audio clock is set. </p>
 
 </div>
 </div>
@@ -490,9 +490,9 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Drains every whole frame currently sitting in 'queue' - used by <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a5714552e88585f030d51a3c31c65e53d">taskLoop()</a>'s resync trigger to abandon a backlog. Consumer-thread- only.</p>
+<p>Drains every whole frame currently sitting in 'queue' - used by <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a5714552e88585f030d51a3c31c65e53d">taskLoop()</a>'s resync trigger to abandon a backlog. Consumer-thread- only.</p>
 <p>Keeps the LAST (freshest) keyframe found along the way instead of discarding it too: copies it into frame_buf, reports its schedule time via out_target_ms, returns true. Any keyframe found earlier in the same backlog is superseded (counted into dropped_i_frame_count). Every non-keyframe is discarded (counted into dropped_frame_count). Returns false (frame_buf untouched) if the backlog held no complete keyframe.</p>
-<p>Stops as soon as the queue doesn't hold a complete next record (typically a header whose payload hasn't fully arrived - <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> writes header and payload as two separate, non-atomic writeArray() calls), leaving that partial state for the next call - never touches queue.reset() (unsafe with a producer concurrently active) or discards anything mid-record, which would desync the framing permanently.</p>
+<p>Stops as soon as the queue doesn't hold a complete next record (typically a header whose payload hasn't fully arrived - <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> writes header and payload as two separate, non-atomic writeArray() calls), leaving that partial state for the next call - never touches queue.reset() (unsafe with a producer concurrently active) or discards anything mid-record, which would desync the framing permanently.</p>
 <p>Yields every kDrainYieldEvery frames: this loop is pure memory copies with no hardware wait to implicitly yield the way normal rendering does - running it straight through against a large backlog can starve the FreeRTOS idle task long enough to trip the watchdog. </p>
 
 </div>
@@ -519,7 +519,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Number of P-frames <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> dropped instead of enqueueing - queue was full, the render task had fallen behind schedule (see <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>'s own comment), or <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#afb93084288d9cee359601e113bf836f6">setIgnorePFrames()</a> is on (see <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#aa3c5436b29a2a83d048ee81116870b83">ignoredFrameCount()</a> for that specific subset). 0 under normal operation with <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#afb93084288d9cee359601e113bf836f6">setIgnorePFrames()</a> off; a rising count otherwise means decode+render can't sustain the recording frame rate - each dropped frame is simply never shown, the next queued one still renders at its own correct time, so this doesn't desync the audio/video clock. </p>
+<p>Number of P-frames <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> dropped instead of enqueueing - queue was full, the render task had fallen behind schedule (see <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>'s own comment), or <a class="el" href="classaudio__tools_1_1_paced_video_output.html#afb93084288d9cee359601e113bf836f6">setIgnorePFrames()</a> is on (see <a class="el" href="classaudio__tools_1_1_paced_video_output.html#aa3c5436b29a2a83d048ee81116870b83">ignoredFrameCount()</a> for that specific subset). 0 under normal operation with <a class="el" href="classaudio__tools_1_1_paced_video_output.html#afb93084288d9cee359601e113bf836f6">setIgnorePFrames()</a> off; a rising count otherwise means decode+render can't sustain the recording frame rate - each dropped frame is simply never shown, the next queued one still renders at its own correct time, so this doesn't desync the audio/video clock. </p>
 
 </div>
 </div>
@@ -545,7 +545,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Number of keyframes discarded by a resync instead of being rendered. 0 under normal operation - unlike <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a711a5b933ec68da2d43cc16fcc46372e">droppedFrameCount()</a>, this only ever comes from a resync, never from <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>'s own proactive check. </p>
+<p>Number of keyframes discarded by a resync instead of being rendered. 0 under normal operation - unlike <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a711a5b933ec68da2d43cc16fcc46372e">droppedFrameCount()</a>, this only ever comes from a resync, never from <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>'s own proactive check. </p>
 
 </div>
 </div>
@@ -598,7 +598,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>No-op: <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> (see its own comment) already does all the work as soon as one complete frame arrives - kept only because every current caller still calls this unconditionally right after <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>. </p>
+<p>No-op: <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> (see its own comment) already does all the work as soon as one complete frame arrives - kept only because every current caller still calls this unconditionally right after <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_output.html#ad3aed50bc3b4459454ccb8c64f5ced5a">VideoOutput</a>.</p>
 
@@ -626,7 +626,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Total number of frames handed off via <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> so far - includes dropped frames (see <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a711a5b933ec68da2d43cc16fcc46372e">droppedFrameCount()</a>), since those still count as "handed off", just not enqueued. </p>
+<p>Total number of frames handed off via <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> so far - includes dropped frames (see <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a711a5b933ec68da2d43cc16fcc46372e">droppedFrameCount()</a>), since those still count as "handed off", just not enqueued. </p>
 
 </div>
 </div>
@@ -652,7 +652,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Number of I-frames (key frames) actually rendered so far - see <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#aa92e4404d636bf4ac4976b017a173cb8">isKeyFrame()</a> for how a frame is classified. </p>
+<p>Number of I-frames (key frames) actually rendered so far - see <a class="el" href="classaudio__tools_1_1_paced_video_output.html#aa92e4404d636bf4ac4976b017a173cb8">isKeyFrame()</a> for how a frame is classified. </p>
 
 </div>
 </div>
@@ -706,7 +706,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Optional: returns the time (ms) spent in the last <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call. </p>
+<p>Optional: returns the time (ms) spent in the last <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call. </p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_output_t_f_t__e_s_p_i.html#a5efb8ccd37b8cc2749358e5da69adddc">OutputTFT_eSPI</a>, <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a5efb8ccd37b8cc2749358e5da69adddc">OutputTinyGPU</a>, and <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#ae3d58e56c2b7dc75a50b36b357ffef93">OutputOpenCV</a>.</p>
 
@@ -734,7 +734,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>True if the most recent <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>+<a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a> call actually produced a displayable picture - default true, matching every synchronous decoder (<a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a>, <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html" title="Motion-JPEG video decoder: wraps TinyJPEGDecoder (https://github.com/pschatzmann/TinyJPEG,...">MJPEGDecoder</a>, ...), which always decodes and pushes pixels fully within that one call. Override this only if your decoder can legitimately accept/decode a frame's bytes without emitting a picture during that same call - e.g. <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html" title="MPEG-1 (part 2) video decoder wrapper around TinyMPGDecoder.">MPGDecoder</a>, whose B-picture display-order reordering can hold a just-decoded picture back and instead emit an earlier one (or nothing at all) from a given <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>, see its own override. Used by <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html" title="Buffers a small, configurable amount of video (see setQueueBytes()) and renders it frame by frame fro...">VideoAudioSyncTask</a> to avoid counting/timing a call that did no real rendering work as a rendered frame - without this, its <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#ac2245652fe2a9df612f6a7e2ef2b502e">outputFPS()</a>/frameCountI()/ <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#aa04cc257205a46ece9e2c012baec4882" title="Number of P-frames (non-key frames) actually rendered so far.">frameCountP()</a>/avgFrameMs() would overcount for such a decoder. </p>
+<p>True if the most recent <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>+<a class="el" href="classaudio__tools_1_1_paced_video_output.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a> call actually produced a displayable picture - default true, matching every synchronous decoder (<a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a>, <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html" title="Motion-JPEG video decoder: wraps TinyJPEGDecoder (https://github.com/pschatzmann/TinyJPEG,...">MJPEGDecoder</a>, ...), which always decodes and pushes pixels fully within that one call. Override this only if your decoder can legitimately accept/decode a frame's bytes without emitting a picture during that same call - e.g. <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html" title="MPEG-1 (part 2) video decoder wrapper around TinyMPGDecoder.">MPGDecoder</a>, whose B-picture display-order reordering can hold a just-decoded picture back and instead emit an earlier one (or nothing at all) from a given <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>, see its own override. Used by <a class="el" href="classaudio__tools_1_1_paced_video_output.html" title="Buffers a small, configurable amount of video (see setQueueBytes()) and renders it frame by frame fro...">PacedVideoOutput</a> to avoid counting/timing a call that did no real rendering work as a rendered frame - without this, its <a class="el" href="classaudio__tools_1_1_paced_video_output.html#ac2245652fe2a9df612f6a7e2ef2b502e">outputFPS()</a>/frameCountI()/ <a class="el" href="classaudio__tools_1_1_paced_video_output.html#aa04cc257205a46ece9e2c012baec4882" title="Number of P-frames (non-key frames) actually rendered so far.">frameCountP()</a>/avgFrameMs() would overcount for such a decoder. </p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a623879add1ad12aa604c56ac50d41009">MPGDecoder</a>.</p>
 
@@ -762,7 +762,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Number of this stream's <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a711a5b933ec68da2d43cc16fcc46372e">droppedFrameCount()</a> specifically caused by <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#afb93084288d9cee359601e113bf836f6">setIgnorePFrames()</a> rather than backlog (queue-full/falling-behind) - always 0 unless that's on. </p>
+<p>Number of this stream's <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a711a5b933ec68da2d43cc16fcc46372e">droppedFrameCount()</a> specifically caused by <a class="el" href="classaudio__tools_1_1_paced_video_output.html#afb93084288d9cee359601e113bf836f6">setIgnorePFrames()</a> rather than backlog (queue-full/falling-behind) - always 0 unless that's on. </p>
 
 </div>
 </div>
@@ -813,7 +813,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Rate (frames/sec) frames are being written in, averaged from the first <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> up to <em>now</em> - drops visibly if whatever feeds <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> stalls, instead of freezing. Measured against <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#ad9996877508163928b063ff7ab1c05ec">setAudioClock()</a>'s clock if set, wall clock otherwise - see <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#ae1e55cd7dd035d68d8e67d0f9b497254">clockMs()</a>. Compare against <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#ac2245652fe2a9df612f6a7e2ef2b502e">outputFPS()</a>: input consistently higher means the queue is filling up before <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> has to block. </p>
+<p>Rate (frames/sec) frames are being written in, averaged from the first <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> up to <em>now</em> - drops visibly if whatever feeds <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> stalls, instead of freezing. Measured against <a class="el" href="classaudio__tools_1_1_paced_video_output.html#ad9996877508163928b063ff7ab1c05ec">setAudioClock()</a>'s clock if set, wall clock otherwise - see <a class="el" href="classaudio__tools_1_1_paced_video_output.html#ae1e55cd7dd035d68d8e67d0f9b497254">clockMs()</a>. Compare against <a class="el" href="classaudio__tools_1_1_paced_video_output.html#ac2245652fe2a9df612f6a7e2ef2b502e">outputFPS()</a>: input consistently higher means the queue is filling up before <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> has to block. </p>
 
 </div>
 </div>
@@ -850,7 +850,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>I/P classification, both for the <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a61bb2fabd1c085db6d5a54ae9691f9cb">frameCountI()</a>/frameCountP() stats and for deciding which frames <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>/a resync may ever drop - delegates to the target's own <a class="el" href="classaudio__tools_1_1_video_output.html#ae90cddad4cdc7ab4f54c2f5976e6eabf">VideoOutput::isKeyFrame()</a> (see its comment), since the target is the one that actually knows its bitstream format. </p>
+<p>I/P classification, both for the <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a61bb2fabd1c085db6d5a54ae9691f9cb">frameCountI()</a>/frameCountP() stats and for deciding which frames <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>/a resync may ever drop - delegates to the target's own <a class="el" href="classaudio__tools_1_1_video_output.html#ae90cddad4cdc7ab4f54c2f5976e6eabf">VideoOutput::isKeyFrame()</a> (see its comment), since the target is the one that actually knows its bitstream format. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_output.html#ae90cddad4cdc7ab4f54c2f5976e6eabf">VideoOutput</a>.</p>
 
@@ -878,7 +878,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Rate (frames/sec) frames are actually being rendered - same averaging as <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a4c65abcfd07cb9f2a527823b271f1b0e">inputFPS()</a>, counting the background task's completed render calls. Always measured against wall-clock time regardless of <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#ad9996877508163928b063ff7ab1c05ec">setAudioClock()</a>: answers "how fast can this hardware render", which shouldn't depend on audio's clock (playbackTime() freezes with any audio stall, which would otherwise distort this into an artificial spike on resume). </p>
+<p>Rate (frames/sec) frames are actually being rendered - same averaging as <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a4c65abcfd07cb9f2a527823b271f1b0e">inputFPS()</a>, counting the background task's completed render calls. Always measured against wall-clock time regardless of <a class="el" href="classaudio__tools_1_1_paced_video_output.html#ad9996877508163928b063ff7ab1c05ec">setAudioClock()</a>: answers "how fast can this hardware render", which shouldn't depend on audio's clock (playbackTime() freezes with any audio stall, which would otherwise distort this into an artificial spike on resume). </p>
 
 </div>
 </div>
@@ -930,7 +930,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Bytes currently sitting in the queue, waiting for the render task. 0 most of the time under normal operation; a consistently non-zero value is an early warning sign before <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> has to block. Compare against <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7b25e5cb9d21b1b459c96291d865f5dd">queueCapacityBytes()</a> for a fill-level percentage. </p>
+<p>Bytes currently sitting in the queue, waiting for the render task. 0 most of the time under normal operation; a consistently non-zero value is an early warning sign before <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> has to block. Compare against <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7b25e5cb9d21b1b459c96291d865f5dd">queueCapacityBytes()</a> for a fill-level percentage. </p>
 
 </div>
 </div>
@@ -956,7 +956,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Number of keyframes currently queued, not yet consumed (rendered or dropped) - see <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a875146acf297f244d9ca2fcd65bd8d43">setMaxQueuedIFrames()</a>. 0 or 1 under normal operation; a rising count is an early warning sign of a backlog. </p>
+<p>Number of keyframes currently queued, not yet consumed (rendered or dropped) - see <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a875146acf297f244d9ca2fcd65bd8d43">setMaxQueuedIFrames()</a>. 0 or 1 under normal operation; a rising count is an early warning sign of a backlog. </p>
 
 </div>
 </div>
@@ -1010,7 +1010,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>How many frame periods behind schedule the render task must fall before <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> starts proactively dropping non-keyframes to catch up (see <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>'s own comment), rather than only dropping once the queue is actually full. 1.0 (the default) drops once the most recently rendered frame was at least one frame period late; lower catches up faster at the cost of more drops, higher tolerates more backlog. No effect until <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#aaf51046626a731cffc6f19bf03e0493b">setFps()</a> reports a nonzero rate. </p>
+<p>How many frame periods behind schedule the render task must fall before <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> starts proactively dropping non-keyframes to catch up (see <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>'s own comment), rather than only dropping once the queue is actually full. 1.0 (the default) drops once the most recently rendered frame was at least one frame period late; lower catches up faster at the cost of more drops, higher tolerates more backlog. No effect until <a class="el" href="classaudio__tools_1_1_paced_video_output.html#aaf51046626a731cffc6f19bf03e0493b">setFps()</a> reports a nonzero rate. </p>
 
 </div>
 </div>
@@ -1037,7 +1037,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Sets/overrides the nominal frame rate frames are scheduled against - safe to call anytime, including before <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a>. </p>
+<p>Sets/overrides the nominal frame rate frames are scheduled against - safe to call anytime, including before <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a>. </p>
 
 </div>
 </div>
@@ -1064,7 +1064,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Unconditionally drops every non-keyframe in <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> itself, before it's even queued - codec-agnostic (works for H264Decoder/MPGDecoder/ MJPEGDecoder/MultiVideoDecoder alike, unlike a decoder-specific flag such as <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#afb93084288d9cee359601e113bf836f6">MPGDecoder::setIgnorePFrames()</a>) and cheaper than letting the decoder no-op an ignored frame after it: the bytes never get copied into the queue or scheduled at all. Off by default. See <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#aa3c5436b29a2a83d048ee81116870b83">ignoredFrameCount()</a> for how many this has skipped. Independent of <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#ac309555187efbd405acbdf128f332276">setCatchUpThresholdFrames()</a>'s own conditional dropping, which still applies when this is off. </p>
+<p>Unconditionally drops every non-keyframe in <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> itself, before it's even queued - codec-agnostic (works for H264Decoder/MPGDecoder/ MJPEGDecoder/MultiVideoDecoder alike, unlike a decoder-specific flag such as <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#afb93084288d9cee359601e113bf836f6">MPGDecoder::setIgnorePFrames()</a>) and cheaper than letting the decoder no-op an ignored frame after it: the bytes never get copied into the queue or scheduled at all. Off by default. See <a class="el" href="classaudio__tools_1_1_paced_video_output.html#aa3c5436b29a2a83d048ee81116870b83">ignoredFrameCount()</a> for how many this has skipped. Independent of <a class="el" href="classaudio__tools_1_1_paced_video_output.html#ac309555187efbd405acbdf128f332276">setCatchUpThresholdFrames()</a>'s own conditional dropping, which still applies when this is off. </p>
 
 </div>
 </div>
@@ -1091,7 +1091,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Number of not-yet-consumed keyframes in the queue that triggers the same resync as the other two thresholds - catches a backlog earlier than either: several GOPs' worth of unconsumed keyframes already means none of them are worth rendering in order (see <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a9906569f082d51539d28cea425d98067">drainQueueKeepingLastKeyframe()</a>, shared by all three triggers, for how the freshest one gets kept instead). 3 (the default) is deliberately small; 0 disables this trigger. </p>
+<p>Number of not-yet-consumed keyframes in the queue that triggers the same resync as the other two thresholds - catches a backlog earlier than either: several GOPs' worth of unconsumed keyframes already means none of them are worth rendering in order (see <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a9906569f082d51539d28cea425d98067">drainQueueKeepingLastKeyframe()</a>, shared by all three triggers, for how the freshest one gets kept instead). 3 (the default) is deliberately small; 0 disables this trigger. </p>
 
 </div>
 </div>
@@ -1118,7 +1118,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Byte capacity of the frame queue - default 32KB. Too small behaves like a 1-frame queue (any one-off slow frame blocks <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> immediately); larger absorbs transient jitter at the cost of RAM (and video trailing decode by however many frames end up buffered). Does not change what happens under a <em>sustained</em> mismatch: the queue still eventually fills, just later. Actual capacity may round up to the next power of two (see <a class="el" href="classaudio__tools_1_1_ring_buffer_s_p_s_c.html" title="Lock-free Single-Producer Single-Consumer ring buffer.">RingBufferSPSC</a>). Call before <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a>/the first frame - not supported afterwards. </p>
+<p>Byte capacity of the frame queue - default 32KB. Too small behaves like a 1-frame queue (any one-off slow frame blocks <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> immediately); larger absorbs transient jitter at the cost of RAM (and video trailing decode by however many frames end up buffered). Does not change what happens under a <em>sustained</em> mismatch: the queue still eventually fills, just later. Actual capacity may round up to the next power of two (see <a class="el" href="classaudio__tools_1_1_ring_buffer_s_p_s_c.html" title="Lock-free Single-Producer Single-Consumer ring buffer.">RingBufferSPSC</a>). Call before <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a>/the first frame - not supported afterwards. </p>
 
 </div>
 </div>
@@ -1145,7 +1145,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Opts the frame queue into PSRAM-backed allocation instead of internal heap (see <a class="el" href="classaudio__tools_1_1_ring_buffer_s_p_s_c.html#acff29ccbec1f64e9dc663bd071d0f058">RingBufferSPSC::setUsePSRAM()</a>) - falls back silently on boards without PSRAM. Worth enabling once <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#af1ae0a0bc12d541205343335e5c82ef8">setQueueBytes()</a> is sized in the hundreds of KB+, since internal heap is a scarcer shared resource on most ESP32 boards. Call before <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a>/the first frame - no effect on an already-allocated queue. </p>
+<p>Opts the frame queue into PSRAM-backed allocation instead of internal heap (see <a class="el" href="classaudio__tools_1_1_ring_buffer_s_p_s_c.html#acff29ccbec1f64e9dc663bd071d0f058">RingBufferSPSC::setUsePSRAM()</a>) - falls back silently on boards without PSRAM. Worth enabling once <a class="el" href="classaudio__tools_1_1_paced_video_output.html#af1ae0a0bc12d541205343335e5c82ef8">setQueueBytes()</a> is sized in the hundreds of KB+, since internal heap is a scarcer shared resource on most ESP32 boards. Call before <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a>/the first frame - no effect on an already-allocated queue. </p>
 
 </div>
 </div>
@@ -1172,7 +1172,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Byte-occupancy fraction (0..1) of the queue that triggers the same resync as <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a39b10d7425652bf0beb6f57cff30db31">setResyncThresholdMs()</a>, off a different signal: dropped P-frames can keep the most recently rendered frame's own lateness low even while newer, not-yet-rendered bytes keep piling up, since overall render throughput can still trail the arrival rate. 0.8 (80% full, the default) catches that before the queue_full drop condition (100%) would otherwise be the only thing bounding it. 0 disables this trigger. </p>
+<p>Byte-occupancy fraction (0..1) of the queue that triggers the same resync as <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a39b10d7425652bf0beb6f57cff30db31">setResyncThresholdMs()</a>, off a different signal: dropped P-frames can keep the most recently rendered frame's own lateness low even while newer, not-yet-rendered bytes keep piling up, since overall render throughput can still trail the arrival rate. 0.8 (80% full, the default) catches that before the queue_full drop condition (100%) would otherwise be the only thing bounding it. 0 disables this trigger. </p>
 
 </div>
 </div>
@@ -1199,7 +1199,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>How far behind schedule (ms) the render task must fall before it stops trying to catch up and instead jumps the schedule anchor forward to the current clock time (see <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a5714552e88585f030d51a3c31c65e53d">taskLoop()</a>) - dropping frames alone can't reduce a backlog, only slow its growth, since the producer can't deliver frames faster than real time. Content in the skipped gap is never shown - a visible jump, but playback recovers instead of lagging further. 2000ms (the default); 0 disables resyncing. </p>
+<p>How far behind schedule (ms) the render task must fall before it stops trying to catch up and instead jumps the schedule anchor forward to the current clock time (see <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a5714552e88585f030d51a3c31c65e53d">taskLoop()</a>) - dropping frames alone can't reduce a backlog, only slow its growth, since the producer can't deliver frames faster than real time. Content in the skipped gap is never shown - a visible jump, but playback recovers instead of lagging further. 2000ms (the default); 0 disables resyncing. </p>
 
 </div>
 </div>
@@ -1226,7 +1226,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Corrects for the real audio output's own buffering latency: an <a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html" title="AudioTimeSourceStream: A stream that provides time information based on the audio data actually proce...">AudioTimeSourceStream</a> clock advances as soon as bytes are <em>accepted</em> by <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>, not when they become audible - e.g. ~100ms ahead on a device with ~100ms of internal buffering, which would otherwise show each frame that much early. Delaying every frame's schedule by this amount (added to target_ms, only ever later, never earlier) cancels it out. No way to derive this automatically - pick it to roughly match your audio output's configured buffering latency; 0 (the default) applies no correction. Also settable via the constructor. </p>
+<p>Corrects for the real audio output's own buffering latency: an <a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html" title="AudioTimeSourceStream: A stream that provides time information based on the audio data actually proce...">AudioTimeSourceStream</a> clock advances as soon as bytes are <em>accepted</em> by <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>, not when they become audible - e.g. ~100ms ahead on a device with ~100ms of internal buffering, which would otherwise show each frame that much early. Delaying every frame's schedule by this amount (added to target_ms, only ever later, never earlier) cancels it out. No way to derive this automatically - pick it to roughly match your audio output's configured buffering latency; 0 (the default) applies no correction. Also settable via the constructor. </p>
 
 </div>
 </div>
@@ -1253,7 +1253,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Hint to skip the expensive part of displaying the next frame(s) (e.g. the panel refresh) while still accepting and fully processing <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> calls - used to recover from falling behind the playback schedule without breaking a codec's decode state (e.g. H.264 inter-prediction reference chain, which requires every frame to still be decoded even if it's never shown). Default no-op: implementations that can't skip rendering cheaply just ignore it and always render. </p>
+<p>Hint to skip the expensive part of displaying the next frame(s) (e.g. the panel refresh) while still accepting and fully processing <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> calls - used to recover from falling behind the playback schedule without breaking a codec's decode state (e.g. H.264 inter-prediction reference chain, which requires every frame to still be decoded even if it's never shown). Default no-op: implementations that can't skip rendering cheaply just ignore it and always render. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_output.html#ab4d364d9800016345ae6980424817214">VideoOutput</a>.</p>
 
@@ -1298,7 +1298,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p><a class="el" href="classaudio__tools_1_1_stack.html" title="LIFO Stack which is based on a List.">Stack</a> size (words)/priority/core for the background render task - call before <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a>. </p>
+<p><a class="el" href="classaudio__tools_1_1_stack.html" title="LIFO Stack which is based on a List.">Stack</a> size (words)/priority/core for the background render task - call before <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a>. </p>
 
 </div>
 </div>
@@ -1361,8 +1361,8 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Enqueues one complete frame. Unlike the general <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> contract (<a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> may be called several times per frame, finalized by <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a>), this class requires the whole frame in one call - every current caller (DemuxerAVI/DemuxerMP4/DemuxerMPG) already does this; a producer that split a frame across multiple <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> calls would have each piece enqueued as its own separate, undecodable "frame" - undetected.</p>
-<p>Tags the frame with its scheduled presentation time (frame_index / fps), classifies it I vs P (see <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#aa92e4404d636bf4ac4976b017a173cb8">isKeyFrame()</a>), and appends header + bytes to the background task's queue. Never renders inline - only the background task's <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>+<a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a> into the real target does that, once the frame's scheduled time arrives.</p>
+<p>Enqueues one complete frame. Unlike the general <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> contract (<a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> may be called several times per frame, finalized by <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a>), this class requires the whole frame in one call - every current caller (DemuxerAVI/DemuxerMP4/DemuxerMPG) already does this; a producer that split a frame across multiple <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> calls would have each piece enqueued as its own separate, undecodable "frame" - undetected.</p>
+<p>Tags the frame with its scheduled presentation time (frame_index / fps), classifies it I vs P (see <a class="el" href="classaudio__tools_1_1_paced_video_output.html#aa92e4404d636bf4ac4976b017a173cb8">isKeyFrame()</a>), and appends header + bytes to the background task's queue. Never renders inline - only the background task's <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>+<a class="el" href="classaudio__tools_1_1_paced_video_output.html#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a> into the real target does that, once the frame's scheduled time arrives.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">data</td><td>the complete frame's bytes - copied before this call returns, so the caller can reuse/discard the buffer immediately. </td></tr>
@@ -1370,7 +1370,7 @@ Static Protected Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><code>len</code>, always - even for a dropped frame (see <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a711a5b933ec68da2d43cc16fcc46372e">droppedFrameCount()</a>), so the caller's own bookkeeping sees no difference. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><code>len</code>, always - even for a dropped frame (see <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a711a5b933ec68da2d43cc16fcc46372e">droppedFrameCount()</a>), so the caller's own bookkeeping sees no difference. </dd></dl>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">VideoOutput</a>.</p>
 
@@ -1431,7 +1431,7 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structaudio__tools_1_1_video_audio_sync_task_1_1_frame_header.html">FrameHeader</a> current_header</td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_paced_video_output_1_1_frame_header.html">FrameHeader</a> current_header</td>
         </tr>
       </table>
   </td>
@@ -1506,7 +1506,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Scratch buffer <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a5714552e88585f030d51a3c31c65e53d">taskLoop()</a> reads each frame's payload into - reused across frames, consumer-side-only, same as have_header above. </p>
+<p>Scratch buffer <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a5714552e88585f030d51a3c31c65e53d">taskLoop()</a> reads each frame's payload into - reused across frames, consumer-side-only, same as have_header above. </p>
 
 </div>
 </div>
@@ -1749,7 +1749,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>How often <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a9906569f082d51539d28cea425d98067">drainQueueKeepingLastKeyframe()</a> yields (delay(1)) instead of running straight through - see that method's own comment. </p>
+<p>How often <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a9906569f082d51539d28cea425d98067">drainQueueKeepingLastKeyframe()</a> yields (delay(1)) instead of running straight through - see that method's own comment. </p>
 
 </div>
 </div>
@@ -1948,7 +1948,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Lock-free single-producer (<a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>)/single-consumer (<a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#a5714552e88585f030d51a3c31c65e53d">taskLoop()</a>) byte queue - see <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html#af1ae0a0bc12d541205343335e5c82ef8">setQueueBytes()</a>. Safe without a mutex specifically because there is exactly one writer and one reader (see the class comment) - <a class="el" href="classaudio__tools_1_1_ring_buffer_s_p_s_c.html" title="Lock-free Single-Producer Single-Consumer ring buffer.">RingBufferSPSC</a> is not safe for more than that. </p>
+<p>Lock-free single-producer (<a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>)/single-consumer (<a class="el" href="classaudio__tools_1_1_paced_video_output.html#a5714552e88585f030d51a3c31c65e53d">taskLoop()</a>) byte queue - see <a class="el" href="classaudio__tools_1_1_paced_video_output.html#af1ae0a0bc12d541205343335e5c82ef8">setQueueBytes()</a>. Safe without a mutex specifically because there is exactly one writer and one reader (see the class comment) - <a class="el" href="classaudio__tools_1_1_ring_buffer_s_p_s_c.html" title="Lock-free Single-Producer Single-Consumer ring buffer.">RingBufferSPSC</a> is not safe for more than that. </p>
 
 </div>
 </div>
@@ -2283,7 +2283,7 @@ Static Protected Attributes</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/Video/<a class="el" href="_video_audio_sync_task_8h_source.html">VideoAudioSyncTask.h</a></li>
+<li>src/AudioTools/Video/<a class="el" href="_paced_video_output_8h_source.html">PacedVideoOutput.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

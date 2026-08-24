@@ -48,7 +48,7 @@ var searchData=
   ['video_5fseconds_45',['video_seconds',['../classaudio__tools_1_1_demuxer_a_v_i.html#abe674fae2cd8ddf2c01d944aa16ce16e',1,'audio_tools::DemuxerAVI']]],
   ['video_5fseq_46',['video_seq',['../classaudio__tools_1_1_muxer_m_p4.html#a392f5a87a6f80062ac106aa0fcfae023',1,'audio_tools::MuxerMP4']]],
   ['video_5fsink_47',['video_sink',['../classaudio__tools_1_1_video_muxer.html#a4d58b10fec8e3b1553161b6e0f98c001',1,'audio_tools::VideoMuxer::video_sink'],['../classaudio__tools_1_1_video_muxer_with_tasks.html#a4d58b10fec8e3b1553161b6e0f98c001',1,'audio_tools::VideoMuxerWithTasks::video_sink']]],
-  ['video_5fsync_48',['video_sync',['../classaudio__tools_1_1_video_player.html#ad825067f52860508cd3b3ab8459d2450',1,'audio_tools::VideoPlayer']]],
+  ['video_5fsync_48',['video_sync',['../classaudio__tools_1_1_video_player.html#a88bf80373809f292ec23fccb68fa589d',1,'audio_tools::VideoPlayer']]],
   ['video_5ftask_49',['video_task',['../classaudio__tools_1_1_video_muxer_with_tasks.html#aa36c27dc2476e63f59bf319911ef289b',1,'audio_tools::VideoMuxerWithTasks']]],
   ['video_5ftimescale_50',['video_timescale',['../classaudio__tools_1_1_muxer_m_p4.html#a3b45c1e01f0a037b5ccaa4d342656111',1,'audio_tools::MuxerMP4']]],
   ['video_5funit_5fbuffer_51',['video_unit_buffer',['../classaudio__tools_1_1_demuxer_m_p_g.html#a782212391051ef1c0371562e7f6955a8',1,'audio_tools::DemuxerMPG']]],

@@ -164,5 +164,5 @@ var searchData=
   ['average_161',['average',['../classaudio__tools_1_1_channel_bin_diff_t.html#a55ce3ee1d017c595b94c8d35312d5076',1,'audio_tools::ChannelBinDiffT::average'],['../classaudio__tools_1_1_bin_t.html#a55ce3ee1d017c595b94c8d35312d5076',1,'audio_tools::BinT::average'],['../classaudio__tools_1_1_bin.html#a55ce3ee1d017c595b94c8d35312d5076',1,'audio_tools::Bin::average'],['../classaudio__tools_1_1_channel_bin_diff.html#a55ce3ee1d017c595b94c8d35312d5076',1,'audio_tools::ChannelBinDiff::average']]],
   ['average_5fwindow_5fduration_5fms_162',['average_window_duration_ms',['../structaudio__tools_1_1_tf_lite_config.html#a94de024f2e839b5e1c849513846424bf',1,'audio_tools::TfLiteConfig']]],
   ['avif_5fisinterleaved_163',['AVIF_ISINTERLEAVED',['../classaudio__tools_1_1_muxer_a_v_i.html#aff49a77206fb946d96cbe57fec4fae60',1,'audio_tools::MuxerAVI']]],
-  ['awaiting_5fkeyframe_164',['awaiting_keyframe',['../classaudio__tools_1_1_video_audio_sync_task.html#a8f187dda4c763515183802305a3c0074',1,'audio_tools::VideoAudioSyncTask']]]
+  ['awaiting_5fkeyframe_164',['awaiting_keyframe',['../classaudio__tools_1_1_paced_video_output.html#a8f187dda4c763515183802305a3c0074',1,'audio_tools::PacedVideoOutput']]]
 ];

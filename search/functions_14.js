@@ -2,7 +2,7 @@ var searchData=
 [
   ['task_0',['task',['../classaudio__tools_1_1_task.html#a28206f111a6f856efa0d12bc4b21f6f3',1,'audio_tools::Task::Task()=default'],['../classaudio__tools_1_1_task.html#a826ebd3695c0f200dd3ffc42aa0b63f7',1,'audio_tools::Task::Task(const char *name, int stackSizeWords, int priority=1, int core=-1)']]],
   ['task_5floop_1',['task_loop',['../classaudio__tools_1_1_task_zephyr.html#a705d99ef14b4e544dddb81cda2eccee9',1,'audio_tools::TaskZephyr::task_loop()'],['../classaudio__tools_1_1_task.html#aa6b8ded6c8a1f59e793981943964bcaa',1,'audio_tools::Task::task_loop()']]],
-  ['taskloop_2',['taskLoop',['../classaudio__tools_1_1_video_audio_sync_task.html#a5714552e88585f030d51a3c31c65e53d',1,'audio_tools::VideoAudioSyncTask']]],
+  ['taskloop_2',['taskLoop',['../classaudio__tools_1_1_paced_video_output.html#a5714552e88585f030d51a3c31c65e53d',1,'audio_tools::PacedVideoOutput']]],
   ['taskzephyr_3',['taskzephyr',['../classaudio__tools_1_1_task_zephyr.html#a6e2a1c7d404e724853e7c97c3fbaa49f',1,'audio_tools::TaskZephyr::TaskZephyr(const char *name, int stackSize, int priority=1, int core=-1)'],['../classaudio__tools_1_1_task_zephyr.html#ae1255c4f79f0755dc7907c0e2ff25e6e',1,'audio_tools::TaskZephyr::TaskZephyr()=default']]],
   ['tcpcommit_4',['tcpCommit',['../classaudio__tools_1_1_r_t_s_p_client.html#a45c322dd6320d58d0ce9ef8071447d56',1,'audio_tools::RTSPClient']]],
   ['tcpwrite_5',['tcpWrite',['../classaudio__tools_1_1_r_t_s_p_client.html#af36c69c502ece5f35939bf612e57b846',1,'audio_tools::RTSPClient']]],

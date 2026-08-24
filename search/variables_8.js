@@ -20,7 +20,7 @@ var searchData=
   ['has_5fwritten_17',['has_written',['../classaudio__tools_1_1_redis_buffer.html#aa6ef6999c2d5523f7285f08a788a04f7',1,'audio_tools::RedisBuffer']]],
   ['haspendingpacket_18',['hasPendingPacket',['../classaudio__tools_1_1_opus_ogg_writer.html#a3a885f2e5b6e78bc47eac603a73f2420',1,'audio_tools::OpusOggWriter']]],
   ['have_5faudio_19',['have_audio',['../classaudio__tools_1_1_video_muxer.html#a66e37f29c950547856c317f5892eb7de',1,'audio_tools::VideoMuxer']]],
-  ['have_5fheader_20',['have_header',['../classaudio__tools_1_1_video_audio_sync_task.html#a28651facb1fc5645bcaeb5e5131c5e34',1,'audio_tools::VideoAudioSyncTask']]],
+  ['have_5fheader_20',['have_header',['../classaudio__tools_1_1_paced_video_output.html#a28651facb1fc5645bcaeb5e5131c5e34',1,'audio_tools::PacedVideoOutput']]],
   ['have_5fvideo_21',['have_video',['../classaudio__tools_1_1_video_muxer.html#a21cd16645202bc49f9576040fe8f78b3',1,'audio_tools::VideoMuxer']]],
   ['hdlc_5fesc_22',['HDLC_ESC',['../classaudio__tools_1_1_h_d_l_c_stream.html#aa1c9b008e81be15f88f9feff9de587e8',1,'audio_tools::HDLCStream']]],
   ['hdlc_5fesc_5fxor_23',['HDLC_ESC_XOR',['../classaudio__tools_1_1_h_d_l_c_stream.html#a0c44e583a721068862021d21b3a1e496',1,'audio_tools::HDLCStream']]],

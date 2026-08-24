@@ -453,8 +453,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span>      <a class="code hl_variable" href="classaudio__tools_1_1_demuxer_m_p_g.html#a64b4263d92f53e1321023644106722fa">video_frame_open</a> = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>      <span class="comment">// No wall-clock scheduling or skip decision here anymore - every</span></div>
 <div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span>      <span class="comment">// picture is always decoded and forwarded immediately, in full.</span></div>
-<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span>      <span class="comment">// Pacing is the caller&#39;s responsibility now - see VideoAudioSyncTask</span></div>
-<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span>      <span class="comment">// (Video/VideoAudioSyncTask.h), which schedules frames from its own</span></div>
+<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span>      <span class="comment">// Pacing is the caller&#39;s responsibility now - see PacedVideoOutput</span></div>
+<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span>      <span class="comment">// (Video/PacedVideoOutput.h), which schedules frames from its own</span></div>
 <div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span>      <span class="comment">// background task instead of blocking this dispatch loop (and, with</span></div>
 <div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span>      <span class="comment">// it, audio delivery) the way an inline wait here used to.</span></div>
 <div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span>    }</div>

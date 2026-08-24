@@ -192,7 +192,7 @@ var searchData=
   ['max_5fpayload_189',['max_payload',['../structaudio__tools_1_1_s_p_i_audio_master_config.html#abaa99519ba68760a520dd6b2ddce4f69',1,'audio_tools::SPIAudioMasterConfig']]],
   ['max_5fpes_5fpayload_190',['MAX_PES_PAYLOAD',['../classaudio__tools_1_1_muxer_m_p_g.html#a43ae30b8c21fc191e99e72d507016f07',1,'audio_tools::MuxerMPG']]],
   ['max_5fpower_5fma_191',['max_power_ma',['../structaudio__tools_1_1_u_s_b_audio_config.html#a7eb07813e94ff8bd39c334267f118336',1,'audio_tools::USBAudioConfig']]],
-  ['max_5fqueued_5fi_5fframes_192',['max_queued_i_frames',['../classaudio__tools_1_1_video_audio_sync_task.html#ab5f96b4d01d6d613a4ff9bfdb0896b1b',1,'audio_tools::VideoAudioSyncTask']]],
+  ['max_5fqueued_5fi_5fframes_192',['max_queued_i_frames',['../classaudio__tools_1_1_paced_video_output.html#ab5f96b4d01d6d613a4ff9bfdb0896b1b',1,'audio_tools::PacedVideoOutput']]],
   ['max_5fread_5fsize_193',['max_read_size',['../classaudio__tools_1_1_transformation_reader.html#ac23e6efed600724abc1a44101664dee7',1,'audio_tools::TransformationReader::max_read_size'],['../classaudio__tools_1_1_vorbis_decoder.html#af4c54a139e0b2adb08108bb822d988c3',1,'audio_tools::VorbisDecoder::max_read_size']]],
   ['max_5frecords_194',['max_records',['../classaudio__tools_1_1_dynamic_memory_stream.html#a534afda433db1340c307072f10737b95',1,'audio_tools::DynamicMemoryStream']]],
   ['max_5frepeat_195',['max_repeat',['../classaudio__tools_1_1_generator_from_array.html#a982af3516a02161cb2f1a47ce72b68ba',1,'audio_tools::GeneratorFromArray']]],

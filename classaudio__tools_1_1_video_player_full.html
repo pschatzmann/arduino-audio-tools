@@ -153,8 +153,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a67052870bfbcee512fde1cee8609163e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32022ec3ca6dbab41d36ba592dde6139" id="r_a32022ec3ca6dbab41d36ba592dde6139"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html">MultiVideoDecoder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#a32022ec3ca6dbab41d36ba592dde6139">videoDecoder</a> ()</td></tr>
 <tr class="separator:a32022ec3ca6dbab41d36ba592dde6139"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae11cb1876efbff93070bde8ecfb68b97" id="r_ae11cb1876efbff93070bde8ecfb68b97"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html">VideoAudioSyncTask</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#ae11cb1876efbff93070bde8ecfb68b97">videoSyncTask</a> ()</td></tr>
-<tr class="separator:ae11cb1876efbff93070bde8ecfb68b97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2525cc6338725496014d54a13d3d13df" id="r_a2525cc6338725496014d54a13d3d13df"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_paced_video_output.html">PacedVideoOutput</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#a2525cc6338725496014d54a13d3d13df">videoSyncTask</a> ()</td></tr>
+<tr class="separator:a2525cc6338725496014d54a13d3d13df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -203,8 +203,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:afb70e8bb94463d273c93b053b7b06a25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c203e4711b6fd07d348ee092229715f" id="r_a8c203e4711b6fd07d348ee092229715f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#a8c203e4711b6fd07d348ee092229715f">use_audio_clock</a> = false</td></tr>
 <tr class="separator:a8c203e4711b6fd07d348ee092229715f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad825067f52860508cd3b3ab8459d2450" id="r_ad825067f52860508cd3b3ab8459d2450"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html">VideoAudioSyncTask</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#ad825067f52860508cd3b3ab8459d2450">video_sync</a> {<a class="el" href="classaudio__tools_1_1_video_player.html#a270d7c1834854c68a85bbd5312749abf">default_video_decoder</a>}</td></tr>
-<tr class="separator:ad825067f52860508cd3b3ab8459d2450"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88bf80373809f292ec23fccb68fa589d" id="r_a88bf80373809f292ec23fccb68fa589d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_paced_video_output.html">PacedVideoOutput</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#a88bf80373809f292ec23fccb68fa589d">video_sync</a> {<a class="el" href="classaudio__tools_1_1_video_player.html#a270d7c1834854c68a85bbd5312749abf">default_video_decoder</a>}</td></tr>
+<tr class="separator:a88bf80373809f292ec23fccb68fa589d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classaudio__tools_1_1_video_player.html" title="High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A...">VideoPlayer</a> subclass configured for every codec this library ships a portable software decoder for - video AND audio - so it's the "just point it at a file, any common codec just works" player, the same convenience MultiVideoDecoderFull/DecoderHelix each provide on their own side. Use this instead of the base <a class="el" href="classaudio__tools_1_1_video_player.html" title="High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A...">VideoPlayer</a> unless you specifically want to keep this class's extra dependencies (below) out of your build. </p>
@@ -533,7 +533,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Wires the full pipeline (video decoder -&gt; output via <a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html" title="Buffers a small, configurable amount of video (see setQueueBytes()) and renders it frame by frame fro...">VideoAudioSyncTask</a>; audio decoder -&gt; [audio clock -&gt;] output, if an audio output was given) and starts the demuxer. <code>source</code> (e.g. an open File) is read from on every subsequent <a class="el" href="classaudio__tools_1_1_video_player.html#aecb44a6d385121be2179187d45520331">copy()</a> call - the caller owns it and is responsible for closing it once <a class="el" href="classaudio__tools_1_1_video_player.html#aecb44a6d385121be2179187d45520331">copy()</a>/copyAll() signal end of stream (return 0). </p>
+<p>Wires the full pipeline (video decoder -&gt; output via <a class="el" href="classaudio__tools_1_1_paced_video_output.html" title="Buffers a small, configurable amount of video (see setQueueBytes()) and renders it frame by frame fro...">PacedVideoOutput</a>; audio decoder -&gt; [audio clock -&gt;] output, if an audio output was given) and starts the demuxer. <code>source</code> (e.g. an open File) is read from on every subsequent <a class="el" href="classaudio__tools_1_1_video_player.html#aecb44a6d385121be2179187d45520331">copy()</a> call - the caller owns it and is responsible for closing it once <a class="el" href="classaudio__tools_1_1_video_player.html#aecb44a6d385121be2179187d45520331">copy()</a>/copyAll() signal end of stream (return 0). </p>
 
 </div>
 </div>
@@ -1038,8 +1038,8 @@ AudioOutput&amp;)/setStream(<a class="el" href="classaudio__tools_1_1_audio_stre
 
 </div>
 </div>
-<a id="ae11cb1876efbff93070bde8ecfb68b97" name="ae11cb1876efbff93070bde8ecfb68b97"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae11cb1876efbff93070bde8ecfb68b97">&#9670;&#160;</a></span>videoSyncTask()</h2>
+<a id="a2525cc6338725496014d54a13d3d13df" name="a2525cc6338725496014d54a13d3d13df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2525cc6338725496014d54a13d3d13df">&#9670;&#160;</a></span>videoSyncTask()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1048,7 +1048,7 @@ AudioOutput&amp;)/setStream(<a class="el" href="classaudio__tools_1_1_audio_stre
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html">VideoAudioSyncTask</a> &amp; videoSyncTask </td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_paced_video_output.html">PacedVideoOutput</a> &amp; videoSyncTask </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1483,8 +1483,8 @@ AudioOutput&amp;)/setStream(<a class="el" href="classaudio__tools_1_1_audio_stre
 
 </div>
 </div>
-<a id="ad825067f52860508cd3b3ab8459d2450" name="ad825067f52860508cd3b3ab8459d2450"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad825067f52860508cd3b3ab8459d2450">&#9670;&#160;</a></span>video_sync</h2>
+<a id="a88bf80373809f292ec23fccb68fa589d" name="a88bf80373809f292ec23fccb68fa589d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88bf80373809f292ec23fccb68fa589d">&#9670;&#160;</a></span>video_sync</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1493,7 +1493,7 @@ AudioOutput&amp;)/setStream(<a class="el" href="classaudio__tools_1_1_audio_stre
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_video_audio_sync_task.html">VideoAudioSyncTask</a> video_sync {<a class="el" href="classaudio__tools_1_1_video_player.html#a270d7c1834854c68a85bbd5312749abf">default_video_decoder</a>}</td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_paced_video_output.html">PacedVideoOutput</a> video_sync {<a class="el" href="classaudio__tools_1_1_video_player.html#a270d7c1834854c68a85bbd5312749abf">default_video_decoder</a>}</td>
         </tr>
       </table>
   </td>

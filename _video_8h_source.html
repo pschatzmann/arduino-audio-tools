@@ -329,16 +329,16 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span> </div>
 <div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span> </div>
-<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span><span class="comment">// VideoAudioSync/VideoAudioSyncTask derive from VideoOutput (defined above),</span></div>
-<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span><span class="comment">// so this must come after the closing brace - see VideoAudioSyncTask.h&#39;s</span></div>
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span><span class="comment">// PacedVideoOutput derives from VideoOutput (defined above), so this must</span></div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span><span class="comment">// come after the closing brace - see PacedVideoOutput.h&#39;s</span></div>
 <div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span><span class="comment">// own #include &quot;AudioTools/Video/Video.h&quot; for the other half of this</span></div>
 <div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span><span class="comment">// mutually-including-but-order-safe-via-pragma-once pair.</span></div>
-<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span><span class="preprocessor">#include &quot;<a class="code" href="_video_audio_sync_task_8h.html">AudioTools/Video/VideoAudioSyncTask.h</a>&quot;</span></div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span><span class="preprocessor">#include &quot;<a class="code" href="_paced_video_output_8h.html">AudioTools/Video/PacedVideoOutput.h</a>&quot;</span></div>
 <div class="ttc" id="a_audio_logger_i_d_f_8h_html_a5512e59d578a380a441a70256af997d0"><div class="ttname"><a href="_audio_logger_i_d_f_8h.html#a5512e59d578a380a441a70256af997d0">LOGI</a></div><div class="ttdeci">#define LOGI(...)</div><div class="ttdef"><b>Definition</b> AudioLoggerIDF.h:28</div></div>
 <div class="ttc" id="a_audio_output_8h_html"><div class="ttname"><a href="_audio_output_8h.html">AudioOutput.h</a></div></div>
 <div class="ttc" id="a_buffers_8h_html"><div class="ttname"><a href="_buffers_8h.html">Buffers.h</a></div></div>
+<div class="ttc" id="a_paced_video_output_8h_html"><div class="ttname"><a href="_paced_video_output_8h.html">PacedVideoOutput.h</a></div></div>
 <div class="ttc" id="a_video_2_codec_copy_8h_html"><div class="ttname"><a href="_video_2_codec_copy_8h.html">CodecCopy.h</a></div></div>
-<div class="ttc" id="a_video_audio_sync_task_8h_html"><div class="ttname"><a href="_video_audio_sync_task_8h.html">VideoAudioSyncTask.h</a></div></div>
 <div class="ttc" id="aclass_print_html"><div class="ttname"><a href="class_print.html">Print</a></div><div class="ttdef"><b>Definition</b> Arduino.h:56</div></div>
 <div class="ttc" id="aclass_print_html_a8b8471dbbdc5527cdf9bfd31612cc973"><div class="ttname"><a href="class_print.html#a8b8471dbbdc5527cdf9bfd31612cc973">Print::write</a></div><div class="ttdeci">virtual size_t write(const uint8_t *data, size_t len)</div><div class="ttdef"><b>Definition</b> Arduino.h:120</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_video_frame_meter_1_1_print_view_html"><div class="ttname"><a href="classaudio__tools_1_1_video_frame_meter_1_1_print_view.html">audio_tools::VideoFrameMeter::PrintView</a></div><div class="ttdef"><b>Definition</b> Video.h:374</div></div>
