@@ -178,18 +178,8 @@ class VideoPlayer {
   /// overload). Nothing is registered by default (see the class
   /// comment), so this needs at least one call per codec your content's
   /// audio track actually uses. Call before begin().
-  void addAudioDecoder(AudioDecoder& decoder, const char* mime) {
+  void addAudioDecoder(AudioDecoder& decoder, const char* mime = nullptr) {
     default_audio_decoder.addDecoder(decoder, mime);
-  }
-
-  /// Registers an additional audio codec with custom MIME detection logic
-  /// - see MultiDecoder::addDecoder()'s own `check` overload, e.g. for a
-  /// mime type a container's own DemuxerXxx::mime() already reports
-  /// precisely (no sniffing needed) but the built-in MimeDetector
-  /// wouldn't otherwise recognize. Call before begin().
-  void addAudioDecoder(AudioDecoder& decoder, const char* mime,
-                       bool (*check)(uint8_t* data, size_t len)) {
-    default_audio_decoder.addDecoder(decoder, mime, check);
   }
 
   /// Defines the final audio output target and enables the audio path -

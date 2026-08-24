@@ -124,28 +124,12 @@ class MultiDecoder : public AudioDecoder {
    * @param decoder The AudioDecoder to register
    * @param mime The MIME type string to associate with this decoder
    */
-  void addDecoder(AudioDecoder& decoder, const char* mime) {
-    DecoderInfo info{mime, &decoder};
+  void addDecoder(AudioDecoder& decoder, const char* mime = nullptr) {
+    const char* existing_mime = mime != nullptr ? mime : mime_detector.mime();
+    LOGI("Adding decoder for %s", existing_mime);
+    DecoderInfo info{existing_mime, &decoder};
     decoder.addNotifyAudioChange(*this);
     decoders.push_back(info);
-  }
-
-  /**
-   * @brief Adds a decoder with custom MIME detection logic
-   *
-   * Registers an AudioDecoder with a specific MIME type and provides custom
-   * logic for detecting that MIME type from raw data. This allows for
-   * specialized format detection beyond the standard MimeDetector capabilities.
-   *
-   * @param decoder The AudioDecoder to register
-   * @param mime The MIME type string to associate with this decoder
-   * @param check Custom function that analyzes data to detect this MIME type.
-   *              Should return true if the data matches this format.
-   */
-  void addDecoder(AudioDecoder& decoder, const char* mime,
-                  bool (*check)(uint8_t* data, size_t len)) {
-    addDecoder(decoder, mime);
-    mime_detector.setCheck(mime, check);
   }
 
   /**
