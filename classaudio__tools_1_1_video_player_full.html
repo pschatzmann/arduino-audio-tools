@@ -108,10 +108,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a54587658a1bd382d923c03c5b72b27e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a013986255c36ae17127f2cd55a65b108" id="r_a013986255c36ae17127f2cd55a65b108"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player_full.html#a013986255c36ae17127f2cd55a65b108">VideoPlayerFull</a> (<a class="el" href="classaudio__tools_1_1_demuxer.html">Demuxer</a> &amp;<a class="el" href="classaudio__tools_1_1_video_player.html#a0022938d4950170bca92c7617efe2245">demuxer</a>, <a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;videoOutput, <a class="el" href="class_print.html">Print</a> &amp;audioOutput)</td></tr>
 <tr class="separator:a013986255c36ae17127f2cd55a65b108"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6f6911289209e3e41cb3d4806a71362" id="r_ab6f6911289209e3e41cb3d4806a71362"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#ab6f6911289209e3e41cb3d4806a71362">addAudioDecoder</a> (<a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> &amp;decoder, const char *mime)</td></tr>
-<tr class="separator:ab6f6911289209e3e41cb3d4806a71362"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a7441a7ac349f32345bd3ba6e3e4f67" id="r_a5a7441a7ac349f32345bd3ba6e3e4f67"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#a5a7441a7ac349f32345bd3ba6e3e4f67">addAudioDecoder</a> (<a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> &amp;decoder, const char *mime, bool(*check)(uint8_t *data, size_t len))</td></tr>
-<tr class="separator:a5a7441a7ac349f32345bd3ba6e3e4f67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaebffd5021d232c04301a199cedba261" id="r_aaebffd5021d232c04301a199cedba261"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#aaebffd5021d232c04301a199cedba261">addAudioDecoder</a> (<a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> &amp;decoder, const char *mime=nullptr)</td></tr>
+<tr class="separator:aaebffd5021d232c04301a199cedba261"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af6ffa274fe817475e7543e3718224017" id="r_af6ffa274fe817475e7543e3718224017"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#af6ffa274fe817475e7543e3718224017">addVideoDecoder</a> (<a class="el" href="classaudio__tools_1_1_video_decoder.html">VideoDecoder</a> &amp;decoder, <a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a> format)</td></tr>
 <tr class="separator:af6ffa274fe817475e7543e3718224017"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8fadece467c8260a5bbe1b68b4a7bd1" id="r_ae8fadece467c8260a5bbe1b68b4a7bd1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_multi_decoder.html">MultiDecoder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#ae8fadece467c8260a5bbe1b68b4a7bd1">audioDecoder</a> ()</td></tr>
@@ -422,8 +420,8 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ab6f6911289209e3e41cb3d4806a71362" name="ab6f6911289209e3e41cb3d4806a71362"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab6f6911289209e3e41cb3d4806a71362">&#9670;&#160;</a></span>addAudioDecoder() <span class="overload">[1/2]</span></h2>
+<a id="aaebffd5021d232c04301a199cedba261" name="aaebffd5021d232c04301a199cedba261"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaebffd5021d232c04301a199cedba261">&#9670;&#160;</a></span>addAudioDecoder()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -441,7 +439,7 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>mime</em>&#160;</td>
+          <td class="paramname"><em>mime</em> = <code>nullptr</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -455,52 +453,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Registers an audio codec with the built-in (initially empty) <a class="el" href="classaudio__tools_1_1_multi_decoder.html" title="Manage multiple AudioDecoders with automatic format detection.">MultiDecoder</a> - see <a class="el" href="classaudio__tools_1_1_multi_decoder.html#a817ce4435a7160598436bbe661657576" title="Adds a decoder that will be selected by its MIME type.">MultiDecoder::addDecoder()</a> (the mime-only overload). Nothing is registered by default (see the class comment), so this needs at least one call per codec your content's audio track actually uses. Call before <a class="el" href="classaudio__tools_1_1_video_player.html#af3226abe4456a403c63c393293b69933">begin()</a>. </p>
-
-</div>
-</div>
-<a id="a5a7441a7ac349f32345bd3ba6e3e4f67" name="a5a7441a7ac349f32345bd3ba6e3e4f67"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a7441a7ac349f32345bd3ba6e3e4f67">&#9670;&#160;</a></span>addAudioDecoder() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void addAudioDecoder </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> &amp;&#160;</td>
-          <td class="paramname"><em>decoder</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>mime</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool(*)(uint8_t *data, size_t len)&#160;</td>
-          <td class="paramname"><em>check</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Registers an additional audio codec with custom MIME detection logic</p><ul>
-<li>see <a class="el" href="classaudio__tools_1_1_multi_decoder.html#a817ce4435a7160598436bbe661657576" title="Adds a decoder that will be selected by its MIME type.">MultiDecoder::addDecoder()</a>'s own <code>check</code> overload, e.g. for a mime type a container's own DemuxerXxx::mime() already reports precisely (no sniffing needed) but the built-in <a class="el" href="classaudio__tools_1_1_mime_detector.html" title="Logic to detemine the mime type from the content. By default the following mime types are supported (...">MimeDetector</a> wouldn't otherwise recognize. Call before <a class="el" href="classaudio__tools_1_1_video_player.html#af3226abe4456a403c63c393293b69933">begin()</a>. </li>
-</ul>
+<p>Registers an audio codec with the built-in (initially empty) <a class="el" href="classaudio__tools_1_1_multi_decoder.html" title="Manage multiple AudioDecoders with automatic format detection.">MultiDecoder</a> - see <a class="el" href="classaudio__tools_1_1_multi_decoder.html#af96a9f3a0a8af2f3ddad983afb0dc261" title="Adds a decoder that will be selected by its MIME type.">MultiDecoder::addDecoder()</a> (the mime-only overload). Nothing is registered by default (see the class comment), so this needs at least one call per codec your content's audio track actually uses. Call before <a class="el" href="classaudio__tools_1_1_video_player.html#af3226abe4456a403c63c393293b69933">begin()</a>. </p>
 
 </div>
 </div>
@@ -563,7 +516,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>The built-in audio multi-decoder (empty until <a class="el" href="classaudio__tools_1_1_video_player.html#ab6f6911289209e3e41cb3d4806a71362">addAudioDecoder()</a> is called - see the class comment) - also useful for diagnostics (e.g. selectedMime()). </p>
+<p>The built-in audio multi-decoder (empty until <a class="el" href="classaudio__tools_1_1_video_player.html#aaebffd5021d232c04301a199cedba261">addAudioDecoder()</a> is called - see the class comment) - also useful for diagnostics (e.g. selectedMime()). </p>
 
 </div>
 </div>

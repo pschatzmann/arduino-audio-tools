@@ -106,12 +106,9 @@ Inheritance diagram for DecoderHelix:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ac18a9c22287c550213d8e735f92151ff" id="r_ac18a9c22287c550213d8e735f92151ff"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_decoder_helix.html#ac18a9c22287c550213d8e735f92151ff">DecoderHelix</a> ()</td></tr>
 <tr class="separator:ac18a9c22287c550213d8e735f92151ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a817ce4435a7160598436bbe661657576" id="r_a817ce4435a7160598436bbe661657576"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_decoder.html#a817ce4435a7160598436bbe661657576">addDecoder</a> (<a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> &amp;decoder, const char *<a class="el" href="classaudio__tools_1_1_multi_decoder.html#ab233b9d1b86c9d2a2c009d6473aa8938">mime</a>)</td></tr>
-<tr class="memdesc:a817ce4435a7160598436bbe661657576"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a decoder that will be selected by its MIME type.  <br /></td></tr>
-<tr class="separator:a817ce4435a7160598436bbe661657576"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a559f519d8332873c347fa30b7d81b78f" id="r_a559f519d8332873c347fa30b7d81b78f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_decoder.html#a559f519d8332873c347fa30b7d81b78f">addDecoder</a> (<a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> &amp;decoder, const char *<a class="el" href="classaudio__tools_1_1_multi_decoder.html#ab233b9d1b86c9d2a2c009d6473aa8938">mime</a>, bool(*check)(uint8_t *data, size_t len))</td></tr>
-<tr class="memdesc:a559f519d8332873c347fa30b7d81b78f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a decoder with custom MIME detection logic.  <br /></td></tr>
-<tr class="separator:a559f519d8332873c347fa30b7d81b78f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af96a9f3a0a8af2f3ddad983afb0dc261" id="r_af96a9f3a0a8af2f3ddad983afb0dc261"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_decoder.html#af96a9f3a0a8af2f3ddad983afb0dc261">addDecoder</a> (<a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> &amp;decoder, const char *<a class="el" href="classaudio__tools_1_1_multi_decoder.html#ab233b9d1b86c9d2a2c009d6473aa8938">mime</a>=nullptr)</td></tr>
+<tr class="memdesc:af96a9f3a0a8af2f3ddad983afb0dc261"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a decoder that will be selected by its MIME type.  <br /></td></tr>
+<tr class="separator:af96a9f3a0a8af2f3ddad983afb0dc261"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a727a24459787e1eeeb7a37ba888394a6" id="r_a727a24459787e1eeeb7a37ba888394a6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a727a24459787e1eeeb7a37ba888394a6">addNotifyAudioChange</a> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;bi)</td></tr>
 <tr class="memdesc:a727a24459787e1eeeb7a37ba888394a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds target to be notified about audio changes.  <br /></td></tr>
 <tr class="separator:a727a24459787e1eeeb7a37ba888394a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -269,8 +266,8 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a817ce4435a7160598436bbe661657576" name="a817ce4435a7160598436bbe661657576"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a817ce4435a7160598436bbe661657576">&#9670;&#160;</a></span>addDecoder() <span class="overload">[1/2]</span></h2>
+<a id="af96a9f3a0a8af2f3ddad983afb0dc261" name="af96a9f3a0a8af2f3ddad983afb0dc261"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af96a9f3a0a8af2f3ddad983afb0dc261">&#9670;&#160;</a></span>addDecoder()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -288,7 +285,7 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>mime</em>&#160;</td>
+          <td class="paramname"><em>mime</em> = <code>nullptr</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -309,59 +306,6 @@ Protected Attributes</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">decoder</td><td>The <a class="el" href="classaudio__tools_1_1_audio_decoder.html" title="Decoding of encoded audio into PCM data.">AudioDecoder</a> to register </td></tr>
     <tr><td class="paramname">mime</td><td>The MIME type string to associate with this decoder </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a559f519d8332873c347fa30b7d81b78f" name="a559f519d8332873c347fa30b7d81b78f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a559f519d8332873c347fa30b7d81b78f">&#9670;&#160;</a></span>addDecoder() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void addDecoder </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> &amp;&#160;</td>
-          <td class="paramname"><em>decoder</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>mime</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool(*)(uint8_t *data, size_t len)&#160;</td>
-          <td class="paramname"><em>check</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Adds a decoder with custom MIME detection logic. </p>
-<p>Registers an <a class="el" href="classaudio__tools_1_1_audio_decoder.html" title="Decoding of encoded audio into PCM data.">AudioDecoder</a> with a specific MIME type and provides custom logic for detecting that MIME type from raw data. This allows for specialized format detection beyond the standard <a class="el" href="classaudio__tools_1_1_mime_detector.html" title="Logic to detemine the mime type from the content. By default the following mime types are supported (...">MimeDetector</a> capabilities.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">decoder</td><td>The <a class="el" href="classaudio__tools_1_1_audio_decoder.html" title="Decoding of encoded audio into PCM data.">AudioDecoder</a> to register </td></tr>
-    <tr><td class="paramname">mime</td><td>The MIME type string to associate with this decoder </td></tr>
-    <tr><td class="paramname">check</td><td>Custom function that analyzes data to detect this MIME type. Should return true if the data matches this format. </td></tr>
   </table>
   </dd>
 </dl>
