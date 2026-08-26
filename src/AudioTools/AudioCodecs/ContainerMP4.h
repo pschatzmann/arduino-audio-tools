@@ -44,6 +44,24 @@ namespace audio_tools {
  * DemuxerAVI. No stts/timing support yet - write() dispatches samples as
  * soon as they are complete; pacing is the caller's responsibility.
  *
+ * @note Relationship to ContainerM4A/M4AAudioDemuxer (AudioCodecs/
+ * ContainerM4A.h, AudioCodecs/M4AAudioDemuxer.h): those handle a single
+ * audio-only track and implement ContainerDecoder, so they drop straight
+ * into AudioPlayer/MultiDecoder - use them if you only need audio out of
+ * an .m4a/.mp4. This class is multi-track (audio+video) and implements
+ * Demuxer instead, for the video pipeline (VideoPlayer, PacedVideoOutput,
+ * MultiVideoDemuxer). Both parse the same MP4 boxes for the audio sample
+ * entry (stsd/mp4a/esds for AAC, stsd/alac for ALAC's magic cookie), but
+ * this class keeps its own copy (onStsd/onMp4a/onEsds/onAlac below)
+ * rather than inheriting M4ACommonDemuxer like the M4A classes do -
+ * M4ACommonDemuxer's handlers assume one single-track audio_config,
+ * while this class needs per-track state (current_track) plus
+ * random-access sample tables (SampleTableStore) for the interleave
+ * merge schedule, so folding the two together isn't a straightforward
+ * inheritance change. Kept deliberately separate rather than unified;
+ * a fix to one track-audio-config parsing path may need to be mirrored
+ * in the other.
+ *
  * @ingroup codecs
  * @ingroup decoder
  * @ingroup video
