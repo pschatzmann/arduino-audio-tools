@@ -126,6 +126,8 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:aaee6f229974816d37b7bc11b3b9db370"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a58d3e3bd5425d9560c11e9fbd8b89963" id="r_a58d3e3bd5425d9560c11e9fbd8b89963"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_http_chunk_reader.html#a58d3e3bd5425d9560c11e9fbd8b89963">removeCRLF</a> (<a class="el" href="class_client.html">Client</a> &amp;client)</td></tr>
 <tr class="separator:a58d3e3bd5425d9560c11e9fbd8b89963"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5336bde17ace29dcc8b6cbfade6719a" id="r_ad5336bde17ace29dcc8b6cbfade6719a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_http_chunk_reader.html#ad5336bde17ace29dcc8b6cbfade6719a">waitAndConsume</a> (<a class="el" href="class_client.html">Client</a> &amp;client, char expected)</td></tr>
+<tr class="separator:ad5336bde17ace29dcc8b6cbfade6719a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -133,6 +135,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a18d761cb8ab8315d237eb87613efb83b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab7d7623f48c823838290e473fcbc99b" id="r_aab7d7623f48c823838290e473fcbc99b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_http_reply_header.html">HttpReplyHeader</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_http_chunk_reader.html#aab7d7623f48c823838290e473fcbc99b">http_header_ptr</a> = nullptr</td></tr>
 <tr class="separator:aab7d7623f48c823838290e473fcbc99b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf8fea59c55f2dca575ea4bc6a81e0ea" id="r_acf8fea59c55f2dca575ea4bc6a81e0ea"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_http_chunk_reader.html#acf8fea59c55f2dca575ea4bc6a81e0ea">last_logged_stall_len</a> = -1</td></tr>
+<tr class="separator:acf8fea59c55f2dca575ea4bc6a81e0ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbfe189cc7bfaf3b831c809451320536" id="r_adbfe189cc7bfaf3b831c809451320536"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_http_chunk_reader.html#adbfe189cc7bfaf3b831c809451320536">open_chunk_len</a> = 0</td></tr>
 <tr class="separator:adbfe189cc7bfaf3b831c809451320536"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -448,6 +452,43 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ad5336bde17ace29dcc8b6cbfade6719a" name="ad5336bde17ace29dcc8b6cbfade6719a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5336bde17ace29dcc8b6cbfade6719a">&#9670;&#160;</a></span>waitAndConsume()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void waitAndConsume </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_client.html">Client</a> &amp;&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>expected</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Waits (bounded by a short timeout) for the next byte to arrive and, if it matches <code>expected</code>, consumes it - logs (but does not throw) if a different byte or no byte at all shows up, since that means the stream is already desynced and <a class="el" href="classaudio__tools_1_1_http_chunk_reader.html#aaee6f229974816d37b7bc11b3b9db370">readChunkLen()</a> right after this will detect and report it. </p>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="a18d761cb8ab8315d237eb87613efb83b" name="a18d761cb8ab8315d237eb87613efb83b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a18d761cb8ab8315d237eb87613efb83b">&#9670;&#160;</a></span>has_ended</h2>
@@ -482,6 +523,28 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classaudio__tools_1_1_http_reply_header.html">HttpReplyHeader</a>* http_header_ptr = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acf8fea59c55f2dca575ea4bc6a81e0ea" name="acf8fea59c55f2dca575ea4bc6a81e0ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf8fea59c55f2dca575ea4bc6a81e0ea">&#9670;&#160;</a></span>last_logged_stall_len</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int last_logged_stall_len = -1</td>
         </tr>
       </table>
   </td>

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['d_0',['d',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338af623e75af30e62bbd73d6df5b50bb7b5',1,'audio_tools::D'],['../group__tools.html#gga9715fceb4c700e7e4a610400464e9396a77a6b11f9898c052926f1d49765861e8',1,'audio_tools::MusicalNotes::D'],['../classaudio__tools_1_1_adaptive_resampling_buffer.html#a3fbbd8a3959e76a2bc3455d3bade52dc',1,'audio_tools::AdaptiveResamplingBuffer::d']]],
+  ['d_0',['d',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338af623e75af30e62bbd73d6df5b50bb7b5',1,'audio_tools::D'],['../classaudio__tools_1_1_adaptive_resampling_buffer.html#a3fbbd8a3959e76a2bc3455d3bade52dc',1,'audio_tools::AdaptiveResamplingBuffer::d'],['../group__tools.html#gga9715fceb4c700e7e4a610400464e9396a77a6b11f9898c052926f1d49765861e8',1,'audio_tools::MusicalNotes::D']]],
   ['dac_1',['dac',['../classaudio__tools_1_1_analog_config_zephyr.html#a08162b2b853a8cd0bed37e7ba4043792',1,'audio_tools::AnalogConfigZephyr']]],
   ['dac1_2',['dac1',['../classaudio__tools_1_1_analog_driver_m_b_e_d.html#a4cb84cbfe24c381a2c8999a9f62e05d8',1,'audio_tools::AnalogDriverMBED']]],
   ['dac2_3',['dac2',['../classaudio__tools_1_1_analog_driver_m_b_e_d.html#a3e18cfb7616724b82081f603f5b33338',1,'audio_tools::AnalogDriverMBED']]],
@@ -46,7 +46,7 @@ var searchData=
   ['dec_5fout_43',['dec_out',['../classaudio__tools_1_1_w_a_v_decoder.html#adb88a7977658bc9af3cae6500011adf1',1,'audio_tools::WAVDecoder']]],
   ['dec_5froutine_44',['dec_routine',['../classaudio__tools_1_1_g7xx_decoder.html#a21c77bf7535d405738b9b4f1e419dffd',1,'audio_tools::G7xxDecoder']]],
   ['dec_5fsize_45',['dec_size',['../classaudio__tools_1_1_l_c3_decoder.html#a8048b72280f924d22104ff92be4e6e3d',1,'audio_tools::LC3Decoder']]],
-  ['decay_46',['decay',['../classaudio__tools_1_1_a_d_s_r.html#a856b62007ea6aa18d41158a4521f4d26',1,'audio_tools::ADSR::decay'],['../classaudio__tools_1_1_a_d_s_r.html#a2737f3f07a2ab466c31c627a1aa8d592a8e9be5fa24161e8bf59c0ecb58b2fa80',1,'audio_tools::ADSR::Decay']]],
+  ['decay_46',['decay',['../classaudio__tools_1_1_a_d_s_r.html#a2737f3f07a2ab466c31c627a1aa8d592a8e9be5fa24161e8bf59c0ecb58b2fa80',1,'audio_tools::ADSR::Decay'],['../classaudio__tools_1_1_a_d_s_r.html#a856b62007ea6aa18d41158a4521f4d26',1,'audio_tools::ADSR::decay']]],
   ['decayrate_47',['decayrate',['../classaudio__tools_1_1_a_d_s_r.html#a15d89ea33c361214fb36d20cf9b5623a',1,'audio_tools::ADSR::decayRate()'],['../classaudio__tools_1_1_a_d_s_r_gain.html#a15d89ea33c361214fb36d20cf9b5623a',1,'audio_tools::ADSRGain::decayRate()']]],
   ['decbuf_48',['decbuf',['../classaudio__tools_1_1_opus_audio_decoder.html#a73f40f9ad5372b9570fbe5ea35f96303',1,'audio_tools::OpusAudioDecoder']]],
   ['decimate_49',['decimate',['../classaudio__tools_1_1_p_w_m_driver_base.html#af95335d9d94aa75500d2d81fc447955e',1,'audio_tools::PWMDriverBase::decimate'],['../classaudio__tools_1_1_decimate.html#a3e3e82674e8838d532d54990012185b6',1,'audio_tools::Decimate::Decimate()=default'],['../classaudio__tools_1_1_decimate.html#a89289d538f0e371a255209492d148f9e',1,'audio_tools::Decimate::Decimate(int factor, int channels, int bits_per_sample)'],['../classaudio__tools_1_1_decimate.html',1,'Decimate']]],
