@@ -117,8 +117,6 @@ Public Member Functions</h2></td></tr>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:af2b29dc42c943ce93353a25ee6dd166a" id="r_af2b29dc42c943ce93353a25ee6dd166a"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_queue_from_vector.html#af2b29dc42c943ce93353a25ee6dd166a">_end_pos</a> = 0</td></tr>
 <tr class="separator:af2b29dc42c943ce93353a25ee6dd166a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37963a838f60989a26b949db590363b1" id="r_a37963a838f60989a26b949db590363b1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_queue_from_vector.html#a37963a838f60989a26b949db590363b1">empty_pos</a> = 0</td></tr>
-<tr class="separator:a37963a838f60989a26b949db590363b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7da11fd464bf63fbf0368b2cdaf44f09" id="r_a7da11fd464bf63fbf0368b2cdaf44f09"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_queue_from_vector.html#a7da11fd464bf63fbf0368b2cdaf44f09">null_value</a></td></tr>
 <tr class="separator:a7da11fd464bf63fbf0368b2cdaf44f09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab1cc4f092a38319783360d938518ddbc" id="r_ab1cc4f092a38319783360d938518ddbc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_queue_from_vector.html#ab1cc4f092a38319783360d938518ddbc">vector</a></td></tr>
@@ -392,6 +390,7 @@ template&lt;class T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Grows or shrinks the queue's capacity, keeping any queued elements. If shrinking below the number of currently queued elements, the newest ones (that no longer fit) are dropped. </p>
 
 </div>
 </div>
@@ -491,30 +490,6 @@ template&lt;class T &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">int32_t _end_pos = 0</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a37963a838f60989a26b949db590363b1" name="a37963a838f60989a26b949db590363b1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a37963a838f60989a26b949db590363b1">&#9670;&#160;</a></span>empty_pos</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int empty_pos = 0</td>
         </tr>
       </table>
   </td>
