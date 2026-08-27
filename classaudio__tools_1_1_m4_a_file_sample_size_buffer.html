@@ -154,6 +154,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3ae9b97a38452cf187897592e1e0968a" id="r_a3ae9b97a38452cf187897592e1e0968a"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#a3ae9b97a38452cf187897592e1e0968a">resize</a> (size_t bytes)</td></tr>
 <tr class="memdesc:a3ae9b97a38452cf187897592e1e0968a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resizes the buffer if supported: returns false if not supported.  <br /></td></tr>
 <tr class="separator:a3ae9b97a38452cf187897592e1e0968a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1a1e4ba18213733c8f6016dcb403365" id="r_aa1a1e4ba18213733c8f6016dcb403365"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#aa1a1e4ba18213733c8f6016dcb403365">resize</a> (size_t <a class="el" href="classaudio__tools_1_1_m4_a_file_sample_size_buffer.html#a128a3f6e587ccc181112bb2892440990">size</a>, int count)</td></tr>
+<tr class="memdesc:aa1a1e4ba18213733c8f6016dcb403365"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize the buffer by indicating the size and count (allocated bytes = size * count)  <br /></td></tr>
+<tr class="separator:aa1a1e4ba18213733c8f6016dcb403365"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b40e78aa499c09a778b5cd70f692c43" id="r_a2b40e78aa499c09a778b5cd70f692c43"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_file_sample_size_buffer.html#a2b40e78aa499c09a778b5cd70f692c43">setReadBufferSize</a> (size_t <a class="el" href="classaudio__tools_1_1_m4_a_file_sample_size_buffer.html#a128a3f6e587ccc181112bb2892440990">size</a>)</td></tr>
 <tr class="memdesc:a2b40e78aa499c09a778b5cd70f692c43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines how many samples are buffered with each file read.  <br /></td></tr>
 <tr class="separator:a2b40e78aa499c09a778b5cd70f692c43"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -845,7 +848,7 @@ This class registers a setOnStreamChangeCallback() with the player </dd></dl>
 </div>
 </div>
 <a id="a3ae9b97a38452cf187897592e1e0968a" name="a3ae9b97a38452cf187897592e1e0968a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ae9b97a38452cf187897592e1e0968a">&#9670;&#160;</a></span>resize()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ae9b97a38452cf187897592e1e0968a">&#9670;&#160;</a></span>resize() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -869,6 +872,44 @@ This class registers a setOnStreamChangeCallback() with the player </dd></dl>
 </div><div class="memdoc">
 
 <p>Resizes the buffer if supported: returns false if not supported. </p>
+
+</div>
+</div>
+<a id="aa1a1e4ba18213733c8f6016dcb403365" name="aa1a1e4ba18213733c8f6016dcb403365"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1a1e4ba18213733c8f6016dcb403365">&#9670;&#160;</a></span>resize() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool resize </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Resize the buffer by indicating the size and count (allocated bytes = size * count) </p>
 
 </div>
 </div>

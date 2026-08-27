@@ -161,6 +161,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3ae9b97a38452cf187897592e1e0968a" id="r_a3ae9b97a38452cf187897592e1e0968a"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#a3ae9b97a38452cf187897592e1e0968a">resize</a> (size_t bytes)</td></tr>
 <tr class="memdesc:a3ae9b97a38452cf187897592e1e0968a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resizes the buffer if supported: returns false if not supported.  <br /></td></tr>
 <tr class="separator:a3ae9b97a38452cf187897592e1e0968a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1a1e4ba18213733c8f6016dcb403365" id="r_aa1a1e4ba18213733c8f6016dcb403365"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#aa1a1e4ba18213733c8f6016dcb403365">resize</a> (size_t <a class="el" href="classaudio__tools_1_1_n_buffer_file.html#a128a3f6e587ccc181112bb2892440990">size</a>, int count)</td></tr>
+<tr class="memdesc:aa1a1e4ba18213733c8f6016dcb403365"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize the buffer by indicating the size and count (allocated bytes = size * count)  <br /></td></tr>
+<tr class="separator:aa1a1e4ba18213733c8f6016dcb403365"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a139fcc90971cdda4c5d0f8f42d9702a8" id="r_a139fcc90971cdda4c5d0f8f42d9702a8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_n_buffer_file.html#a139fcc90971cdda4c5d0f8f42d9702a8">setFileDeleteCallback</a> (void(*cb)(const char *filename))</td></tr>
 <tr class="memdesc:a139fcc90971cdda4c5d0f8f42d9702a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define the file delete operation.  <br /></td></tr>
 <tr class="separator:a139fcc90971cdda4c5d0f8f42d9702a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -872,7 +875,7 @@ template&lt;class <a class="el" href="namespaceaudio__tools.html#a64f1320ec184eb
 </div>
 </div>
 <a id="a3ae9b97a38452cf187897592e1e0968a" name="a3ae9b97a38452cf187897592e1e0968a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ae9b97a38452cf187897592e1e0968a">&#9670;&#160;</a></span>resize()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ae9b97a38452cf187897592e1e0968a">&#9670;&#160;</a></span>resize() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -898,6 +901,46 @@ template&lt;class <a class="el" href="namespaceaudio__tools.html#a64f1320ec184eb
 <p>Resizes the buffer if supported: returns false if not supported. </p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_n_buffer.html#a3ae9b97a38452cf187897592e1e0968a">NBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#ae747bd6b2972bb0262b97d9800455e55">RingBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_dynamic_multi_buffer.html#a111e9903b92b4764b2f9999e5d701fe5">DynamicMultiBuffer&lt; T, BufferType &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_p2040_t.html#ae4f8f853ac7c7aaa49e0471d25f5e02c">BufferRP2040T&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#ae4f8f853ac7c7aaa49e0471d25f5e02c">BufferRTOS&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_zephyr.html#ae4f8f853ac7c7aaa49e0471d25f5e02c">BufferZephyr&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#ae4f8f853ac7c7aaa49e0471d25f5e02c">SingleBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer_file.html#ae4f8f853ac7c7aaa49e0471d25f5e02c">RingBufferFile&lt; File, T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_redis_buffer.html#ac5d803a3d1e6f0a5402fd9a25aaa7b61">RedisBuffer&lt; T &gt;</a>.</p>
+
+</div>
+</div>
+<a id="aa1a1e4ba18213733c8f6016dcb403365" name="aa1a1e4ba18213733c8f6016dcb403365"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1a1e4ba18213733c8f6016dcb403365">&#9670;&#160;</a></span>resize() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool resize </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Resize the buffer by indicating the size and count (allocated bytes = size * count) </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html#ad84d73a122848c9d42e8ae2518899a10">SynchronizedNBufferRTOST&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_zephyr_t.html#ad84d73a122848c9d42e8ae2518899a10">SynchronizedNBufferZephyrT&lt; T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_n_buffer.html#aa1a1e4ba18213733c8f6016dcb403365">NBuffer&lt; T &gt;</a>.</p>
 
 </div>
 </div>

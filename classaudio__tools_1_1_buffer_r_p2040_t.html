@@ -153,6 +153,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae4f8f853ac7c7aaa49e0471d25f5e02c" id="r_ae4f8f853ac7c7aaa49e0471d25f5e02c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffer_r_p2040_t.html#ae4f8f853ac7c7aaa49e0471d25f5e02c">resize</a> (size_t <a class="el" href="classaudio__tools_1_1_buffer_r_p2040_t.html#a0b6b70701c46e22849f0f363861351cd">size</a>)</td></tr>
 <tr class="memdesc:ae4f8f853ac7c7aaa49e0471d25f5e02c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Re-Allocats the memory and the queue (size is in entries)  <br /></td></tr>
 <tr class="separator:ae4f8f853ac7c7aaa49e0471d25f5e02c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1a1e4ba18213733c8f6016dcb403365" id="r_aa1a1e4ba18213733c8f6016dcb403365"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#aa1a1e4ba18213733c8f6016dcb403365">resize</a> (size_t <a class="el" href="classaudio__tools_1_1_buffer_r_p2040_t.html#a0b6b70701c46e22849f0f363861351cd">size</a>, int count)</td></tr>
+<tr class="memdesc:aa1a1e4ba18213733c8f6016dcb403365"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize the buffer by indicating the size and count (allocated bytes = size * count)  <br /></td></tr>
+<tr class="separator:aa1a1e4ba18213733c8f6016dcb403365"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f2f77c7e88c0149289e517bfac07f5d" id="r_a1f2f77c7e88c0149289e517bfac07f5d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffer_r_p2040_t.html#a1f2f77c7e88c0149289e517bfac07f5d">setBlockingRead</a> (bool flag)</td></tr>
 <tr class="memdesc:a1f2f77c7e88c0149289e517bfac07f5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">When we use a blockingread, the we wait for the data to be available.  <br /></td></tr>
 <tr class="separator:a1f2f77c7e88c0149289e517bfac07f5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -793,7 +796,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="ae4f8f853ac7c7aaa49e0471d25f5e02c" name="ae4f8f853ac7c7aaa49e0471d25f5e02c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4f8f853ac7c7aaa49e0471d25f5e02c">&#9670;&#160;</a></span>resize()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4f8f853ac7c7aaa49e0471d25f5e02c">&#9670;&#160;</a></span>resize() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -821,6 +824,46 @@ template&lt;typename T &gt; </div>
 <p>Re-Allocats the memory and the queue (size is in entries) </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_base_buffer.html#a3ae9b97a38452cf187897592e1e0968a">BaseBuffer&lt; T &gt;</a>.</p>
+
+</div>
+</div>
+<a id="aa1a1e4ba18213733c8f6016dcb403365" name="aa1a1e4ba18213733c8f6016dcb403365"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1a1e4ba18213733c8f6016dcb403365">&#9670;&#160;</a></span>resize() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool resize </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Resize the buffer by indicating the size and count (allocated bytes = size * count) </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html#ad84d73a122848c9d42e8ae2518899a10">SynchronizedNBufferRTOST&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_zephyr_t.html#ad84d73a122848c9d42e8ae2518899a10">SynchronizedNBufferZephyrT&lt; T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_n_buffer.html#aa1a1e4ba18213733c8f6016dcb403365">NBuffer&lt; T &gt;</a>.</p>
 
 </div>
 </div>

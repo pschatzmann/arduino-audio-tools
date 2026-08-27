@@ -105,7 +105,7 @@ Inheritance diagram for BaseBuffer&lt; T &gt;:</div>
 <area href="classaudio__tools_1_1_single_buffer.html" alt="SingleBuffer&lt; int16_t &gt;" shape="rect" coords="234,728,458,752"/>
 <area href="classaudio__tools_1_1_single_buffer.html" alt="SingleBuffer&lt; int32_t &gt;" shape="rect" coords="234,784,458,808"/>
 <area href="classaudio__tools_1_1_variable_speed_ring_buffer.html" alt="VariableSpeedRingBuffer&lt; int16_t &gt;" shape="rect" coords="234,840,458,864"/>
-<area href="classaudio__tools_1_1_n_buffer.html" title="A lock free N buffer. If count=2 we create a DoubleBuffer, if count=3 a TripleBuffer etc." alt="NBuffer&lt; T &gt;" shape="rect" coords="234,896,458,920"/>
+<area href="classaudio__tools_1_1_n_buffer.html" title="A N buffer. If count=2 we create a DoubleBuffer, if count=3 a TripleBuffer etc." alt="NBuffer&lt; T &gt;" shape="rect" coords="234,896,458,920"/>
 <area href="classaudio__tools_1_1_ring_buffer.html" title="Implements a typed Ringbuffer." alt="RingBuffer&lt; T &gt;" shape="rect" coords="234,952,458,976"/>
 <area href="classaudio__tools_1_1_ring_buffer_s_p_s_c.html" title="Lock-free Single-Producer Single-Consumer ring buffer." alt="RingBufferSPSC&lt; T &gt;" shape="rect" coords="234,1008,458,1032"/>
 <area href="classaudio__tools_1_1_single_buffer.html" title="A simple Buffer implementation which just uses a (dynamically sized) array." alt="SingleBuffer&lt; T &gt;" shape="rect" coords="234,1064,458,1088"/>
@@ -174,6 +174,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3ae9b97a38452cf187897592e1e0968a" id="r_a3ae9b97a38452cf187897592e1e0968a"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#a3ae9b97a38452cf187897592e1e0968a">resize</a> (size_t bytes)</td></tr>
 <tr class="memdesc:a3ae9b97a38452cf187897592e1e0968a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resizes the buffer if supported: returns false if not supported.  <br /></td></tr>
 <tr class="separator:a3ae9b97a38452cf187897592e1e0968a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1a1e4ba18213733c8f6016dcb403365" id="r_aa1a1e4ba18213733c8f6016dcb403365"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#aa1a1e4ba18213733c8f6016dcb403365">resize</a> (size_t <a class="el" href="classaudio__tools_1_1_base_buffer.html#a56d807462b9d24ed3ac7ff22a5418953">size</a>, int count)</td></tr>
+<tr class="memdesc:aa1a1e4ba18213733c8f6016dcb403365"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize the buffer by indicating the size and count (allocated bytes = size * count)  <br /></td></tr>
+<tr class="separator:aa1a1e4ba18213733c8f6016dcb403365"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a56d807462b9d24ed3ac7ff22a5418953" id="r_a56d807462b9d24ed3ac7ff22a5418953"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#a56d807462b9d24ed3ac7ff22a5418953">size</a> ()=0</td></tr>
 <tr class="separator:a56d807462b9d24ed3ac7ff22a5418953"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add0fdb7ecaaeadb3a231119d7d602311" id="r_add0fdb7ecaaeadb3a231119d7d602311"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#add0fdb7ecaaeadb3a231119d7d602311">write</a> (T data)=0</td></tr>
@@ -805,7 +808,7 @@ template&lt;typename T  = uint8_t&gt; </div>
 </div>
 </div>
 <a id="a3ae9b97a38452cf187897592e1e0968a" name="a3ae9b97a38452cf187897592e1e0968a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ae9b97a38452cf187897592e1e0968a">&#9670;&#160;</a></span>resize()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ae9b97a38452cf187897592e1e0968a">&#9670;&#160;</a></span>resize() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -833,6 +836,48 @@ template&lt;typename T  = uint8_t&gt; </div>
 <p>Resizes the buffer if supported: returns false if not supported. </p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_n_buffer.html#a3ae9b97a38452cf187897592e1e0968a">NBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_n_buffer.html#a3ae9b97a38452cf187897592e1e0968a">NBuffer&lt; Frame &gt;</a>, <a class="el" href="classaudio__tools_1_1_n_buffer.html#a3ae9b97a38452cf187897592e1e0968a">NBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_n_buffer.html#a3ae9b97a38452cf187897592e1e0968a">NBuffer&lt; uint8_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer_s_p_s_c.html#ab5c9a665996d7df9d11fcad720f4db9c">RingBufferSPSC&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer_s_p_s_c.html#ab5c9a665996d7df9d11fcad720f4db9c">RingBufferSPSC&lt; uint8_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#ae747bd6b2972bb0262b97d9800455e55">RingBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#ae747bd6b2972bb0262b97d9800455e55">RingBuffer&lt; int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#ae747bd6b2972bb0262b97d9800455e55">RingBuffer&lt; Sample &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#ae747bd6b2972bb0262b97d9800455e55">RingBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#ae747bd6b2972bb0262b97d9800455e55">RingBuffer&lt; uint16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#ae747bd6b2972bb0262b97d9800455e55">RingBuffer&lt; uint8_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_dynamic_multi_buffer.html#a111e9903b92b4764b2f9999e5d701fe5">DynamicMultiBuffer&lt; T, BufferType &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_p2040_t.html#ae4f8f853ac7c7aaa49e0471d25f5e02c">BufferRP2040T&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#ae4f8f853ac7c7aaa49e0471d25f5e02c">BufferRTOS&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#ae4f8f853ac7c7aaa49e0471d25f5e02c">BufferRTOS&lt; uint8_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_zephyr.html#ae4f8f853ac7c7aaa49e0471d25f5e02c">BufferZephyr&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer_simple.html#ae4f8f853ac7c7aaa49e0471d25f5e02c">VariableSpeedRingBufferSimple&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer180.html#ae4f8f853ac7c7aaa49e0471d25f5e02c">VariableSpeedRingBuffer180&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#ae4f8f853ac7c7aaa49e0471d25f5e02c">VariableSpeedRingBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#ae4f8f853ac7c7aaa49e0471d25f5e02c">VariableSpeedRingBuffer&lt; int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#ae4f8f853ac7c7aaa49e0471d25f5e02c">SingleBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#ae4f8f853ac7c7aaa49e0471d25f5e02c">SingleBuffer&lt; float &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#ae4f8f853ac7c7aaa49e0471d25f5e02c">SingleBuffer&lt; int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#ae4f8f853ac7c7aaa49e0471d25f5e02c">SingleBuffer&lt; int32_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#ae4f8f853ac7c7aaa49e0471d25f5e02c">SingleBuffer&lt; stsz_sample_size_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#ae4f8f853ac7c7aaa49e0471d25f5e02c">SingleBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#ae4f8f853ac7c7aaa49e0471d25f5e02c">SingleBuffer&lt; uint32_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#ae4f8f853ac7c7aaa49e0471d25f5e02c">SingleBuffer&lt; uint8_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer_file.html#ae4f8f853ac7c7aaa49e0471d25f5e02c">RingBufferFile&lt; File, T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_redis_buffer.html#ac5d803a3d1e6f0a5402fd9a25aaa7b61">RedisBuffer&lt; T &gt;</a>.</p>
+
+</div>
+</div>
+<a id="aa1a1e4ba18213733c8f6016dcb403365" name="aa1a1e4ba18213733c8f6016dcb403365"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1a1e4ba18213733c8f6016dcb403365">&#9670;&#160;</a></span>resize() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T  = uint8_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool resize </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Resize the buffer by indicating the size and count (allocated bytes = size * count) </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html#ad84d73a122848c9d42e8ae2518899a10">SynchronizedNBufferRTOST&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_zephyr_t.html#ad84d73a122848c9d42e8ae2518899a10">SynchronizedNBufferZephyrT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_n_buffer.html#aa1a1e4ba18213733c8f6016dcb403365">NBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_n_buffer.html#aa1a1e4ba18213733c8f6016dcb403365">NBuffer&lt; Frame &gt;</a>, <a class="el" href="classaudio__tools_1_1_n_buffer.html#aa1a1e4ba18213733c8f6016dcb403365">NBuffer&lt; T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_n_buffer.html#aa1a1e4ba18213733c8f6016dcb403365">NBuffer&lt; uint8_t &gt;</a>.</p>
 
 </div>
 </div>

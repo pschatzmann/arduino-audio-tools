@@ -156,6 +156,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac5d803a3d1e6f0a5402fd9a25aaa7b61" id="r_ac5d803a3d1e6f0a5402fd9a25aaa7b61"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#ac5d803a3d1e6f0a5402fd9a25aaa7b61">resize</a> (size_t <a class="el" href="classaudio__tools_1_1_redis_buffer.html#a128a3f6e587ccc181112bb2892440990">size</a>) override</td></tr>
 <tr class="memdesc:ac5d803a3d1e6f0a5402fd9a25aaa7b61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resizes the maximum buffer size. This operation is only allowed before any write has occurred.  <br /></td></tr>
 <tr class="separator:ac5d803a3d1e6f0a5402fd9a25aaa7b61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1a1e4ba18213733c8f6016dcb403365" id="r_aa1a1e4ba18213733c8f6016dcb403365"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#aa1a1e4ba18213733c8f6016dcb403365">resize</a> (size_t <a class="el" href="classaudio__tools_1_1_redis_buffer.html#a128a3f6e587ccc181112bb2892440990">size</a>, int count)</td></tr>
+<tr class="memdesc:aa1a1e4ba18213733c8f6016dcb403365"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize the buffer by indicating the size and count (allocated bytes = size * count)  <br /></td></tr>
+<tr class="separator:aa1a1e4ba18213733c8f6016dcb403365"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a84b91be149970d91afe46122f4361e" id="r_a5a84b91be149970d91afe46122f4361e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#a5a84b91be149970d91afe46122f4361e">setExpire</a> (int seconds)</td></tr>
 <tr class="memdesc:a5a84b91be149970d91afe46122f4361e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the expiration time (in seconds) for the Redis key. The expiration will be refreshed on every write/flush.  <br /></td></tr>
 <tr class="separator:a5a84b91be149970d91afe46122f4361e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -992,7 +995,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="ac5d803a3d1e6f0a5402fd9a25aaa7b61" name="ac5d803a3d1e6f0a5402fd9a25aaa7b61"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac5d803a3d1e6f0a5402fd9a25aaa7b61">&#9670;&#160;</a></span>resize()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5d803a3d1e6f0a5402fd9a25aaa7b61">&#9670;&#160;</a></span>resize() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1027,6 +1030,46 @@ template&lt;typename T &gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>true if resized, false if any write has already occurred. </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_base_buffer.html#a3ae9b97a38452cf187897592e1e0968a">BaseBuffer&lt; T &gt;</a>.</p>
+
+</div>
+</div>
+<a id="aa1a1e4ba18213733c8f6016dcb403365" name="aa1a1e4ba18213733c8f6016dcb403365"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1a1e4ba18213733c8f6016dcb403365">&#9670;&#160;</a></span>resize() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool resize </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Resize the buffer by indicating the size and count (allocated bytes = size * count) </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html#ad84d73a122848c9d42e8ae2518899a10">SynchronizedNBufferRTOST&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_zephyr_t.html#ad84d73a122848c9d42e8ae2518899a10">SynchronizedNBufferZephyrT&lt; T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_n_buffer.html#aa1a1e4ba18213733c8f6016dcb403365">NBuffer&lt; T &gt;</a>.</p>
 
 </div>
 </div>

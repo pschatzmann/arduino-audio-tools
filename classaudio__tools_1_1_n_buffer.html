@@ -82,7 +82,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>A lock free N buffer. If count=2 we create a DoubleBuffer, if count=3 a TripleBuffer etc.  
+<p>A N buffer. If count=2 we create a DoubleBuffer, if count=3 a TripleBuffer etc.  
  <a href="classaudio__tools_1_1_n_buffer.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_buffers_8h_source.html">Buffers.h</a>&gt;</code></p>
@@ -152,7 +152,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a3ae9b97a38452cf187897592e1e0968a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize the buffer to the next multiple of buffer size.  <br /></td></tr>
 <tr class="separator:a3ae9b97a38452cf187897592e1e0968a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1a1e4ba18213733c8f6016dcb403365" id="r_aa1a1e4ba18213733c8f6016dcb403365"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_n_buffer.html#aa1a1e4ba18213733c8f6016dcb403365">resize</a> (size_t <a class="el" href="classaudio__tools_1_1_n_buffer.html#a0b6b70701c46e22849f0f363861351cd">size</a>, int count)</td></tr>
-<tr class="memdesc:aa1a1e4ba18213733c8f6016dcb403365"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize the buffers by defining a new buffer size and buffer count.  <br /></td></tr>
 <tr class="separator:aa1a1e4ba18213733c8f6016dcb403365"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad713070b5cf8794cf5feb1b054fa3492" id="r_ad713070b5cf8794cf5feb1b054fa3492"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_n_buffer.html#ad713070b5cf8794cf5feb1b054fa3492">sampleRate</a> ()</td></tr>
 <tr class="memdesc:ad713070b5cf8794cf5feb1b054fa3492"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the actual sample rate  <br /></td></tr>
@@ -196,8 +195,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:adef81cbdd1255196a56c8e57816c46dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a1bb49231b6e54b1b87a0cef09adb5e" id="r_a1a1bb49231b6e54b1b87a0cef09adb5e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_queue_from_vector.html">QueueFromVector</a>&lt; <a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_n_buffer.html#a1a1bb49231b6e54b1b87a0cef09adb5e">available_buffers</a> {0, nullptr}</td></tr>
 <tr class="separator:a1a1bb49231b6e54b1b87a0cef09adb5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab49f78864a49891b0f7a9e94bf15efe1" id="r_ab49f78864a49891b0f7a9e94bf15efe1"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_n_buffer.html#ab49f78864a49891b0f7a9e94bf15efe1">buffer_count</a> = 0</td></tr>
-<tr class="separator:ab49f78864a49891b0f7a9e94bf15efe1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44dfcdbec90faa620faf06309fd8d654" id="r_a44dfcdbec90faa620faf06309fd8d654"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_n_buffer.html#a44dfcdbec90faa620faf06309fd8d654">buffer_count</a> = 0</td></tr>
+<tr class="separator:a44dfcdbec90faa620faf06309fd8d654"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af22ff4ab7a026e6c3b4b08eafb2df027" id="r_af22ff4ab7a026e6c3b4b08eafb2df027"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_n_buffer.html#af22ff4ab7a026e6c3b4b08eafb2df027">buffer_size</a> = 1024</td></tr>
 <tr class="separator:af22ff4ab7a026e6c3b4b08eafb2df027"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae165e0f4094ec0f4e38d57d6e38667eb" id="r_ae165e0f4094ec0f4e38d57d6e38667eb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_queue_from_vector.html">QueueFromVector</a>&lt; <a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_n_buffer.html#ae165e0f4094ec0f4e38d57d6e38667eb">filled_buffers</a> {0, nullptr}</td></tr>
@@ -209,7 +208,8 @@ Protected Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T = uint8_t&gt;<br />
-class audio_tools::NBuffer&lt; T &gt;</div><p>A lock free N buffer. If count=2 we create a DoubleBuffer, if count=3 a TripleBuffer etc. </p>
+class audio_tools::NBuffer&lt; T &gt;</div><p>A N buffer. If count=2 we create a DoubleBuffer, if count=3 a TripleBuffer etc. </p>
+<dl class="section note"><dt>Note</dt><dd>This class is not thread safe: the internal queues are plain, non-atomic structures, so concurrent producer/consumer access requires external synchronization. For cross-core/cross-thread SPSC use, see <a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html" title="NBuffer which uses FreeRTOS queues to manage the available and filled buffers, making it safe for cro...">SynchronizedNBufferRTOST</a> or SynchronizedNBufferZephyr instead.</dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -1051,8 +1051,9 @@ template&lt;typename T  = uint8_t&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Resize the buffers by defining a new buffer size and buffer count. Any currently buffered, unread data is drained before the resize and restored afterwards, as far as it fits into the new capacity. </p>
 
-<p>Resize the buffers by defining a new buffer size and buffer count. </p>
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_base_buffer.html#aa1a1e4ba18213733c8f6016dcb403365">BaseBuffer&lt; T &gt;</a>.</p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html#ad84d73a122848c9d42e8ae2518899a10">SynchronizedNBufferRTOST&lt; T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_zephyr_t.html#ad84d73a122848c9d42e8ae2518899a10">SynchronizedNBufferZephyrT&lt; T &gt;</a>.</p>
 
@@ -1307,8 +1308,8 @@ template&lt;typename T  = uint8_t&gt; </div>
 
 </div>
 </div>
-<a id="ab49f78864a49891b0f7a9e94bf15efe1" name="ab49f78864a49891b0f7a9e94bf15efe1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab49f78864a49891b0f7a9e94bf15efe1">&#9670;&#160;</a></span>buffer_count</h2>
+<a id="a44dfcdbec90faa620faf06309fd8d654" name="a44dfcdbec90faa620faf06309fd8d654"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44dfcdbec90faa620faf06309fd8d654">&#9670;&#160;</a></span>buffer_count</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1319,7 +1320,7 @@ template&lt;typename T  = uint8_t&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint16_t buffer_count = 0</td>
+          <td class="memname">size_t buffer_count = 0</td>
         </tr>
       </table>
   </td>
