@@ -439,12 +439,12 @@ class QueueStream : public BaseStream {
       }
     }
 
-    return p_buffer->writeArray(reinterpret_cast<const T *>(data), len / sizeof(T));
+    return p_buffer->writeArray(reinterpret_cast<const T *>(data), len / sizeof(T)) * sizeof(T);
   }
 
   virtual size_t readBytes(uint8_t *data, size_t len) override {
     if (!active) return 0;
-    return p_buffer->readArray(reinterpret_cast<T *>(data), len / sizeof(T));
+    return p_buffer->readArray(reinterpret_cast<T *>(data), len / sizeof(T)) * sizeof(T);
   }
 
   int read() override {
