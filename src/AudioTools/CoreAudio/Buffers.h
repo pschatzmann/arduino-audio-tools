@@ -129,6 +129,11 @@ class BaseBuffer {
     return false;
   }
 
+  /// Resize the buffer by indicating the size and count (allocated bytes = size * count)
+  virtual bool resize(size_t size, int count) {
+    return resize(size * count);
+  }
+
   /// Provides the number of entries that are available to read: -1 does not apply
   virtual int bufferCountFilled() { return -1; }
 
@@ -713,8 +718,12 @@ class RingBufferFile : public BaseBuffer<T> {
 };
 
 /**
- * @brief A lock free N buffer. If count=2 we create a DoubleBuffer, if
+ * @brief A N buffer. If count=2 we create a DoubleBuffer, if
  * count=3 a TripleBuffer etc.
+ * @note This class is not thread safe: the internal queues are plain,
+ * non-atomic structures, so concurrent producer/consumer access requires
+ * external synchronization. For cross-core/cross-thread SPSC use, see
+ * SynchronizedNBufferRTOST or SynchronizedNBufferZephyr instead.
  * @ingroup buffers
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -833,6 +842,12 @@ class NBuffer : public BaseBuffer<T> {
       // get next read buffer
       actual_read_buffer = getNextFilledBuffer();
     }
+    // discard any partially-filled write buffer as well
+    if (actual_write_buffer != nullptr) {
+      actual_write_buffer->reset();
+      addAvailableBuffer(actual_write_buffer);
+      actual_write_buffer = nullptr;
+    }
   }
 
   /// provides the actual sample rate
@@ -855,14 +870,31 @@ class NBuffer : public BaseBuffer<T> {
 
   /// Resize the buffer to the next multiple of buffer size
   virtual bool resize(size_t bytes) {
+    if (buffer_size == 0) {
+      LOGE("resize: buffer_size is 0");
+      return false;
+    }
     int count = bytes / buffer_size;
     if (bytes % buffer_size > 0) count++;
     return resize(buffer_size, count);
   }
 
-  /// Resize the buffers by defining a new buffer size and buffer count
+  /// Resize the buffers by defining a new buffer size and buffer count.
+  /// Any currently buffered, unread data is drained before the resize and
+  /// restored afterwards, as far as it fits into the new capacity.
   virtual bool resize(size_t size, int count) {
     if (buffer_size == size && buffer_count == count) return true;
+
+    // drain any buffered data so it can be restored after the resize
+    size_t old_capacity = (size_t)buffer_size * buffer_count;
+    T *tmp = nullptr;
+    int tmp_len = 0;
+    if (old_capacity > 0) {
+      flush();  // make a partially-written block visible to readArray()
+      tmp = new T[old_capacity];
+      tmp_len = readArray(tmp, old_capacity);
+    }
+
     freeMemory();
     filled_buffers.resize(count);
     available_buffers.resize(count);
@@ -876,6 +908,19 @@ class NBuffer : public BaseBuffer<T> {
       LOGD("new buffer %p", buffer);
       available_buffers.enqueue(buffer);
     }
+
+    if (tmp_len > 0) {
+      size_t new_capacity = size * (size_t)count;
+      size_t to_restore = (size_t)tmp_len;
+      if (to_restore > new_capacity) {
+        LOGW("resize() drops %d buffered element(s): new capacity is smaller",
+             (int)(to_restore - new_capacity));
+        to_restore = new_capacity;
+      }
+      for (size_t i = 0; i < to_restore; i++) write(tmp[i]);
+      flush();  // make the restored data readable without an extra flush() call
+    }
+    delete[] tmp;
     return true;
   }
 
@@ -884,7 +929,7 @@ class NBuffer : public BaseBuffer<T> {
 
  protected:
   int buffer_size = 1024;
-  uint16_t buffer_count = 0;
+  size_t buffer_count = 0;
   BaseBuffer<T> *actual_read_buffer = nullptr;
   BaseBuffer<T> *actual_write_buffer = nullptr;
   QueueFromVector<BaseBuffer<T> *> available_buffers{0, nullptr};
