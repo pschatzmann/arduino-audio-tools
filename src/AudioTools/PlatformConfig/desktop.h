@@ -41,7 +41,15 @@
 #  define USE_STD_CONCURRENCY
 #  define USE_OPENCV
 //#  define USE_3BYTE_INT24
+// Skip this alias if the build already has a real, TLS-capable
+// WiFiClientSecure (e.g. the Arduino-Emulator's own, built with its
+// USE_HTTPS option) - without the guard this silently shadows it, so
+// URLStream's own client_secure allocation (see
+// AudioTools/Communication/HTTP/URLStream.h) ends up using plain,
+// unencrypted WiFiClient for https:// streams instead.
+#ifndef TMD_REAL_WIFICLIENTSECURE
 typedef WiFiClient WiFiClientSecure;
+#endif
 #elif defined(ESP32_CMAKE)
 #  define ESP32
 #  include "esp_idf_version.h"

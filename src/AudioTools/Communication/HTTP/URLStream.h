@@ -396,6 +396,14 @@ class URLStream : public AbstractURLStream {
       if (client_secure == nullptr) {
         client_secure = new WiFiClientSecure();
         client_secure->setTimeout(client_timeout);
+#ifdef TMD_REAL_WIFICLIENTSECURE
+        // Desktop build with a real (not the plain-WiFiClient fallback -
+        // see PlatformConfig/desktop.h) WiFiClientSecure: skip
+        // certificate validation, same demo-level trust this project
+        // already applies on ESP32/RP2040 below - there's no CA bundle
+        // configured here for any of them.
+        client_secure->setInsecure();
+#endif
 #ifdef ESP32
         client_secure->setInsecure();
   #if ESP_ARDUINO_VERSION >= ESP_ARDUINO_VERSION_VAL(3,0,0)

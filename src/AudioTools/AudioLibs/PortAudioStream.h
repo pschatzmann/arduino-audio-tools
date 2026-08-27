@@ -129,6 +129,19 @@ class PortAudioStream : public AudioStream {
                     info.channels
               : paFramesPerBufferUnspecified;
 
+      // setAudioInfo() (below) calls begin() again on its own whenever the
+      // decoder reports audio info - e.g. once per station in a radio
+      // player - without ever having closed whatever stream was already
+      // open. The leaked stream keeps the audio device busy, so the next
+      // Pa_OpenDefaultStream often fails outright, after which every
+      // write() logs "Stream is stopped" forever. Close first if needed.
+      if (stream != nullptr) {
+        Pa_StopStream(stream);
+        Pa_CloseStream(stream);
+        stream = nullptr;
+        stream_started = false;
+      }
+
       // Open an audio I/O stream.
       LOGD("Pa_OpenDefaultStream");
       err = Pa_OpenDefaultStream(
