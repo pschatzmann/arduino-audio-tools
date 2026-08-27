@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cctype>
 #include "HttpHeader.h"
 #include "HttpLineReader.h"
 
@@ -42,8 +43,8 @@ class HttpChunkReader : public HttpLineReader {
     int read_max = len < open_chunk_len ? len : open_chunk_len;
     int len_processed = client.read(str, read_max);
     if (len_processed == -1) {
-      LOGE("HttpChunkReader: client.read result -1, open: %d",open_chunk_len);
-      return -1;
+      LOGI("HttpChunkReader: client.read result -1, open: %d",open_chunk_len);
+      return 0;
     }
     // update current unprocessed chunk
     open_chunk_len -= len_processed;
@@ -91,18 +92,41 @@ class HttpChunkReader : public HttpLineReader {
   int open_chunk_len = 0;
   bool has_ended = false;
   HttpReplyHeader* http_header_ptr = nullptr;
+  int last_logged_stall_len = -1;
 
+  // Every chunk's data is mandatorily followed by CR LF before the next
+  // chunk's length line (RFC 7230 4.1). client.peek() is non-blocking, so
+  // if those 2 bytes haven't physically arrived yet (common over TLS,
+  // where data shows up as discrete decrypted records, or just plain
+  // network jitter), a single peek() silently finds nothing and this
+  // returns having consumed neither byte - readChunkLen() then reads
+  // starting 1-2 bytes behind where it should, permanently desyncing
+  // chunk boundary tracking for the rest of the connection (this is what
+  // eventually surfaces as "readChunkLen: '' is not a valid chunk
+  // length"). Wait briefly for the bytes to actually show up instead of
+  // giving up on the first try.
   void removeCRLF(Client& client) {
     LOGD("HttpChunkReader: %s", "removeCRLF");
+    waitAndConsume(client, '\r');
+    waitAndConsume(client, '\n');
+  }
 
-    // remove traling CR LF from data
-    if (client.peek() == '\r') {
-      LOGD("HttpChunkReader: %s", "removeCR");
-      client.read();
+  /// Waits (bounded by a short timeout) for the next byte to arrive and,
+  /// if it matches `expected`, consumes it - logs (but does not throw)
+  /// if a different byte or no byte at all shows up, since that means
+  /// the stream is already desynced and readChunkLen() right after this
+  /// will detect and report it.
+  void waitAndConsume(Client& client, char expected) {
+    uint32_t timeout = millis() + 2000;
+    int peeked = client.peek();
+    while (peeked < 0 && millis() < timeout) {
+      delay(1);
+      peeked = client.peek();
     }
-    if (client.peek() == '\n') {
-      LOGD("HttpChunkReader: %s", "removeLF");
+    if (peeked == expected) {
       client.read();
+    } else {
+      LOGW("HttpChunkReader: removeCRLF expected '%d' but got '%d'", (int)expected, peeked);
     }
   }
 
@@ -115,6 +139,27 @@ class HttpChunkReader : public HttpLineReader {
       has_ended = true;
       return false;
     }
+
+    // strtol() silently returns 0 for a line that isn't a valid hex
+    // number at all, which is indistinguishable from a legitimate
+    // "0\r\n" last-chunk marker - if our read position has desynced from
+    // the server's actual chunk boundaries (e.g. after a partial/short
+    // read straddling a boundary), this line is actually raw audio
+    // data, not a chunk-length line. Without this check, that garbage
+    // gets accepted as "end of body", and the readExt() call below then
+    // tries to parse the *following* audio bytes as HTTP trailer
+    // headers too - cascading the corruption instead of surfacing it.
+    bool looksLikeHex = len_str[0] != 0;
+    for (uint8_t* p = len_str; *p != 0 && looksLikeHex; ++p) {
+      if (!isxdigit(*p)) looksLikeHex = false;
+    }
+    if (!looksLikeHex) {
+      LOGE("HttpChunkReader::readChunkLen: '%s' is not a valid chunk length - connection desynced", len_str);
+      has_ended = true;
+      open_chunk_len = 0;
+      return false;
+    }
+
     open_chunk_len = strtol((char*)len_str, nullptr, 16);
 
     if (open_chunk_len == 0) {
