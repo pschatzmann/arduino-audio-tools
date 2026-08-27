@@ -59,6 +59,8 @@ class SoundGenerator {
   /// Provides a single sample
   virtual T readSample() = 0;
 
+  
+
   /// Provides the data as byte array with the requested number of channels
   virtual size_t readBytes(uint8_t* data, size_t len) {
     LOGD("readBytes: %d", (int)len);
@@ -70,6 +72,18 @@ class SoundGenerator {
       return readBytesFrames(data, len, frames, channels);
     }
     return readBytesFromBuffer(data, len, frame_size, channels);
+  }
+
+  /// Provides the data as T array (interleaved by channel) with the
+  /// requested number of samples (values, not frames)
+  virtual size_t readSamples(T* data, size_t len) {
+    if (!active) return 0;
+    int channels = audioInfo().channels;
+    int frames = len / channels;
+    if (frames == 0) return 0;
+    return readBytesFrames((uint8_t*)data, frames * sizeof(T) * channels,
+                           frames, channels) /
+          sizeof(T);
   }
 
   /// Provides the default configuration
