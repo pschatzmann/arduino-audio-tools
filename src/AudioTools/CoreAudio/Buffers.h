@@ -129,6 +129,11 @@ class BaseBuffer {
     return false;
   }
 
+  /// Resize the buffer by indicating the size and count (allocated bytes = size * count)
+  virtual bool resize(size_t size, int count) {
+    return resize(size * count);
+  }
+
   /// Provides the number of entries that are available to read: -1 does not apply
   virtual int bufferCountFilled() { return -1; }
 
@@ -713,8 +718,12 @@ class RingBufferFile : public BaseBuffer<T> {
 };
 
 /**
- * @brief A lock free N buffer. If count=2 we create a DoubleBuffer, if
+ * @brief A N buffer. If count=2 we create a DoubleBuffer, if
  * count=3 a TripleBuffer etc.
+ * @note This class is not thread safe: the internal queues are plain,
+ * non-atomic structures, so concurrent producer/consumer access requires
+ * external synchronization. For cross-core/cross-thread SPSC use, see
+ * SynchronizedNBufferRTOST or SynchronizedNBufferZephyr instead.
  * @ingroup buffers
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -833,6 +842,12 @@ class NBuffer : public BaseBuffer<T> {
       // get next read buffer
       actual_read_buffer = getNextFilledBuffer();
     }
+    // discard any partially-filled write buffer as well
+    if (actual_write_buffer != nullptr) {
+      actual_write_buffer->reset();
+      addAvailableBuffer(actual_write_buffer);
+      actual_write_buffer = nullptr;
+    }
   }
 
   /// provides the actual sample rate
@@ -853,27 +868,81 @@ class NBuffer : public BaseBuffer<T> {
   /// Provides the number of entries that are available to write
   virtual int bufferCountEmpty() { return available_buffers.size(); }
 
+  /// Resize the buffer to the next multiple of buffer size
   virtual bool resize(size_t bytes) {
+    if (buffer_size == 0) {
+      LOGE("resize: buffer_size is 0");
+      return false;
+    }
     int count = bytes / buffer_size;
+    if (bytes % buffer_size > 0) count++;
     return resize(buffer_size, count);
   }
 
-  /// Resize the buffers by defining a new buffer size and buffer count
+  /// Resize the buffers by defining a new buffer size and buffer count.
+  /// If the block size changes, existing blocks can't be reused, so all
+  /// buffered data is discarded (with a warning). If only the count
+  /// changes, existing blocks and their data are kept: buffers are just
+  /// allocated or freed to reach the new count.
   virtual bool resize(size_t size, int count) {
     if (buffer_size == size && buffer_count == count) return true;
-    freeMemory();
+
+    if (buffer_size != size) {
+      if (buffer_count > 0) {
+        LOGW("resize() changes buffer_size: discarding buffered data");
+      }
+      freeMemory();
+      filled_buffers.resize(count);
+      available_buffers.resize(count);
+      buffer_count = count;
+      buffer_size = size;
+      for (int j = 0; j < count; j++) {
+        BaseBuffer<T> *buffer = new SingleBuffer<T>(size);
+        LOGD("new buffer %p", buffer);
+        available_buffers.enqueue(buffer);
+      }
+      return true;
+    }
+
+    // same buffer_size: keep existing blocks/data, just grow or shrink
+    // the pool. QueueFromVector::resize() clears its contents, so we
+    // dequeue everything first and re-enqueue it after resizing.
+    Vector<BaseBuffer<T> *> avail;
+    Vector<BaseBuffer<T> *> filled;
+    for (BaseBuffer<T> *b = getNextAvailableBuffer(); b != nullptr;
+         b = getNextAvailableBuffer())
+      avail.push_back(b);
+    for (BaseBuffer<T> *b = getNextFilledBuffer(); b != nullptr;
+         b = getNextFilledBuffer())
+      filled.push_back(b);
+
+    if ((size_t)count > buffer_count) {
+      // grow: add new empty buffers to the available pool
+      for (size_t j = 0; j < (size_t)count - buffer_count; j++) {
+        avail.push_back(new SingleBuffer<T>(size));
+      }
+    } else {
+      // shrink: delete surplus buffers from the available (empty) pool
+      // first; if that's not enough, keep the buffers that still hold data
+      size_t to_remove = buffer_count - (size_t)count;
+      size_t removed = 0;
+      while (removed < to_remove && !avail.empty()) {
+        delete avail[avail.size() - 1];
+        avail.erase(avail.size() - 1);
+        removed++;
+      }
+      if (removed < to_remove) {
+        LOGW("resize() could not shrink to %d buffers: %d still hold data",
+             count, (int)(to_remove - removed));
+        count = (int)(buffer_count - removed);
+      }
+    }
+
     filled_buffers.resize(count);
     available_buffers.resize(count);
-    // filled_buffers.clear();
-    // available_buffers.clear();
-
+    for (int j = 0; j < avail.size(); j++) available_buffers.enqueue(avail[j]);
+    for (int j = 0; j < filled.size(); j++) filled_buffers.enqueue(filled[j]);
     buffer_count = count;
-    buffer_size = size;
-    for (int j = 0; j < count; j++) {
-      BaseBuffer<T> *buffer = new SingleBuffer<T>(size);
-      LOGD("new buffer %p", buffer);
-      available_buffers.enqueue(buffer);
-    }
     return true;
   }
 
@@ -882,7 +951,7 @@ class NBuffer : public BaseBuffer<T> {
 
  protected:
   int buffer_size = 1024;
-  uint16_t buffer_count = 0;
+  size_t buffer_count = 0;
   BaseBuffer<T> *actual_read_buffer = nullptr;
   BaseBuffer<T> *actual_write_buffer = nullptr;
   QueueFromVector<BaseBuffer<T> *> available_buffers{0, nullptr};

@@ -480,6 +480,9 @@ class QueueStream : public BaseStream {
 
   /// Resize the buffer
   bool resize(size_t size) {return p_buffer->resize(size);}
+  
+  /// Resize the buffer by indicating the size and count
+  bool resize(size_t size, int count) { return p_buffer->resize(size, count); }
 
  protected:
   BaseBuffer<T> *p_buffer;
