@@ -880,47 +880,69 @@ class NBuffer : public BaseBuffer<T> {
   }
 
   /// Resize the buffers by defining a new buffer size and buffer count.
-  /// Any currently buffered, unread data is drained before the resize and
-  /// restored afterwards, as far as it fits into the new capacity.
+  /// If the block size changes, existing blocks can't be reused, so all
+  /// buffered data is discarded (with a warning). If only the count
+  /// changes, existing blocks and their data are kept: buffers are just
+  /// allocated or freed to reach the new count.
   virtual bool resize(size_t size, int count) {
     if (buffer_size == size && buffer_count == count) return true;
 
-    // drain any buffered data so it can be restored after the resize
-    size_t old_capacity = (size_t)buffer_size * buffer_count;
-    T *tmp = nullptr;
-    int tmp_len = 0;
-    if (old_capacity > 0) {
-      flush();  // make a partially-written block visible to readArray()
-      tmp = new T[old_capacity];
-      tmp_len = readArray(tmp, old_capacity);
+    if (buffer_size != size) {
+      if (buffer_count > 0) {
+        LOGW("resize() changes buffer_size: discarding buffered data");
+      }
+      freeMemory();
+      filled_buffers.resize(count);
+      available_buffers.resize(count);
+      buffer_count = count;
+      buffer_size = size;
+      for (int j = 0; j < count; j++) {
+        BaseBuffer<T> *buffer = new SingleBuffer<T>(size);
+        LOGD("new buffer %p", buffer);
+        available_buffers.enqueue(buffer);
+      }
+      return true;
     }
 
-    freeMemory();
+    // same buffer_size: keep existing blocks/data, just grow or shrink
+    // the pool. QueueFromVector::resize() clears its contents, so we
+    // dequeue everything first and re-enqueue it after resizing.
+    Vector<BaseBuffer<T> *> avail;
+    Vector<BaseBuffer<T> *> filled;
+    for (BaseBuffer<T> *b = getNextAvailableBuffer(); b != nullptr;
+         b = getNextAvailableBuffer())
+      avail.push_back(b);
+    for (BaseBuffer<T> *b = getNextFilledBuffer(); b != nullptr;
+         b = getNextFilledBuffer())
+      filled.push_back(b);
+
+    if ((size_t)count > buffer_count) {
+      // grow: add new empty buffers to the available pool
+      for (size_t j = 0; j < (size_t)count - buffer_count; j++) {
+        avail.push_back(new SingleBuffer<T>(size));
+      }
+    } else {
+      // shrink: delete surplus buffers from the available (empty) pool
+      // first; if that's not enough, keep the buffers that still hold data
+      size_t to_remove = buffer_count - (size_t)count;
+      size_t removed = 0;
+      while (removed < to_remove && !avail.empty()) {
+        delete avail[avail.size() - 1];
+        avail.erase(avail.size() - 1);
+        removed++;
+      }
+      if (removed < to_remove) {
+        LOGW("resize() could not shrink to %d buffers: %d still hold data",
+             count, (int)(to_remove - removed));
+        count = (int)(buffer_count - removed);
+      }
+    }
+
     filled_buffers.resize(count);
     available_buffers.resize(count);
-    // filled_buffers.clear();
-    // available_buffers.clear();
-
+    for (int j = 0; j < avail.size(); j++) available_buffers.enqueue(avail[j]);
+    for (int j = 0; j < filled.size(); j++) filled_buffers.enqueue(filled[j]);
     buffer_count = count;
-    buffer_size = size;
-    for (int j = 0; j < count; j++) {
-      BaseBuffer<T> *buffer = new SingleBuffer<T>(size);
-      LOGD("new buffer %p", buffer);
-      available_buffers.enqueue(buffer);
-    }
-
-    if (tmp_len > 0) {
-      size_t new_capacity = size * (size_t)count;
-      size_t to_restore = (size_t)tmp_len;
-      if (to_restore > new_capacity) {
-        LOGW("resize() drops %d buffered element(s): new capacity is smaller",
-             (int)(to_restore - new_capacity));
-        to_restore = new_capacity;
-      }
-      for (size_t i = 0; i < to_restore; i++) write(tmp[i]);
-      flush();  // make the restored data readable without an extra flush() call
-    }
-    delete[] tmp;
     return true;
   }
 
