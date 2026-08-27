@@ -131,6 +131,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:adc79c89fc1d63b418c9f074b63f3d651" id="r_adc79c89fc1d63b418c9f074b63f3d651"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_s_t_k_generator.html#adc79c89fc1d63b418c9f074b63f3d651">readSample</a> ()</td></tr>
 <tr class="memdesc:adc79c89fc1d63b418c9f074b63f3d651"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides a single sample.  <br /></td></tr>
 <tr class="separator:adc79c89fc1d63b418c9f074b63f3d651"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58d5eb2a54a9fbda4ef22c4bb3d35977" id="r_a58d5eb2a54a9fbda4ef22c4bb3d35977"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#a58d5eb2a54a9fbda4ef22c4bb3d35977">readSamples</a> (T *data, size_t len)</td></tr>
+<tr class="separator:a58d5eb2a54a9fbda4ef22c4bb3d35977"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd4492eedc1644fc7e48deb4a271a065" id="r_acd4492eedc1644fc7e48deb4a271a065"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_s_t_k_instrument.html#acd4492eedc1644fc7e48deb4a271a065">setAmplitude</a> (float <a class="el" href="classaudio__tools_1_1_s_t_k_instrument.html#a31bef58f966d97b1ace9bd3a58ffd9a6">amplitude</a>)</td></tr>
 <tr class="memdesc:acd4492eedc1644fc7e48deb4a271a065"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the amplitude (0.0 ... 1.0)  <br /></td></tr>
 <tr class="separator:acd4492eedc1644fc7e48deb4a271a065"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -698,6 +700,45 @@ template&lt;class StkCls  = stk::Generator, class T  = int16_t&gt; </div>
 <p>Provides a single sample. </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_sound_generator.html#a1ff01a896ef633c0bdf60dbf1448c2db">SoundGenerator&lt; T &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a58d5eb2a54a9fbda4ef22c4bb3d35977" name="a58d5eb2a54a9fbda4ef22c4bb3d35977"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58d5eb2a54a9fbda4ef22c4bb3d35977">&#9670;&#160;</a></span>readSamples()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T  = int16_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual size_t readSamples </td>
+          <td>(</td>
+          <td class="paramtype">T *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Provides the data as T array (interleaved by channel) with the requested number of samples (values, not frames) </p>
 
 </div>
 </div>
