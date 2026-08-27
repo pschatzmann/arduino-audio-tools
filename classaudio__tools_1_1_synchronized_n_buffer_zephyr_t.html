@@ -1001,7 +1001,7 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Resize the buffers by defining a new buffer size and buffer count. Any currently buffered, unread data is drained before the resize and restored afterwards, as far as it fits into the new capacity. </p>
+<p>Resize the buffers by defining a new buffer size and buffer count. If the block size changes, existing blocks can't be reused, so all buffered data is discarded (with a warning). If only the count changes, existing blocks and their data are kept: buffers are just allocated or freed to reach the new count. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_n_buffer.html#aa1a1e4ba18213733c8f6016dcb403365">NBuffer&lt; T &gt;</a>.</p>
 
