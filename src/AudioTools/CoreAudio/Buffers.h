@@ -853,8 +853,10 @@ class NBuffer : public BaseBuffer<T> {
   /// Provides the number of entries that are available to write
   virtual int bufferCountEmpty() { return available_buffers.size(); }
 
+  /// Resize the buffer to the next multiple of buffer size
   virtual bool resize(size_t bytes) {
     int count = bytes / buffer_size;
+    if (bytes % buffer_size > 0) count++;
     return resize(buffer_size, count);
   }
 
