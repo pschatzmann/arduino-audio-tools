@@ -17,16 +17,18 @@ namespace audio_tools {
  *
  * Design
  * ──────
- * - head_ is the byte-count of everything ever written; only the producer
- *   writes it (release store) and the consumer reads it (acquire load).
- * - tail_ is the byte-count of everything ever read;  only the consumer
+ * - head_ is the element-count of everything ever written; only the
+ *   producer writes it (release store) and the consumer reads it (acquire
+ *   load).
+ * - tail_ is the element-count of everything ever read; only the consumer
  *   writes it (release store) and the producer reads it (acquire load).
  * - No shared mutable counter between the two sides — the shared mutable
  *   state of RingBuffer<T>::_numElems is the classic data race on M0+.
  * - Capacity is rounded up to the next power of two so that index masking
  *   replaces modulo and wrap-around is handled by a single bit-AND.
  * - readArray / writeArray use memcpy for bulk transfers and split them at
- *   the wrap-around point, giving at most two memcpy calls per operation.
+ *   the wrap-around point, giving at most two memcpy calls per operation
+ *   (T=uint8_t makes this a byte copy; for other T it's an element copy).
  *
  * Not suitable for MPMC (multiple producers or consumers); use
  * QueueLockFree for that.
@@ -134,16 +136,54 @@ class RingBufferSPSC : public BaseBuffer<T> {
   // *next* resize() (the current allocation is left exactly as it is).
   void setUsePSRAM(bool flag) { use_psram_ = flag; }
 
+  // NOT safe to call while the producer or consumer side may still be
+  // active - same requirement as reset() above, and for the same reason:
+  // it reallocates buf_ and touches capacity_/mask_ with no atomics/
+  // barriers of its own. Callers must ensure both sides are quiescent
+  // first (e.g. USB bus reset before either endpoint is re-armed).
   bool resize(size_t capacity) override {
-    // Round up to the next power of two so masking replaces modulo.
-    size_t pow2 = 1;
-    while (pow2 < capacity) pow2 <<= 1;
+    // RingBufferSPSC always discards its logical content on resize() (the
+    // reset() call below), so release any existing allocation - under
+    // whichever allocator it was actually made with - before switching
+    // allocators or reallocating. This guarantees a block is never freed
+    // through a different allocator instance than the one that allocated
+    // it (which setUsePSRAM() toggling between resize() calls would
+    // otherwise risk), and avoids Vector wastefully copying bytes forward
+    // across the resize that are about to be discarded anyway. It also
+    // means resize(0) actually releases the buffer instead of leaving the
+    // old allocation in place (Vector::resize(0) alone is a no-op).
+    buf_.reset();
+
+    if (capacity == 0) {
+      capacity_ = 0;
+      mask_ = 0;
+      reset();
+      return true;
+    }
+
+    // Round up to the next power of two so masking replaces modulo, using
+    // the same bounded bit-smear technique as QueueLockFree::resize()
+    // rather than a naive `while (pow2 < capacity) pow2 <<= 1;` - that
+    // loop never terminates once capacity exceeds the largest
+    // representable power of two (pow2 overflows to 0 and the condition
+    // stays true forever). The smear instead comes out as 0 in that case,
+    // which is detected and rejected below.
+    size_t pow2 = capacity - 1;
+    for (size_t i = 1; i <= sizeof(size_t) * 4; i <<= 1) pow2 |= pow2 >> i;
+    pow2 += 1;
+    if (pow2 == 0) {
+      capacity_ = 0;
+      mask_ = 0;
+      reset();
+      return false;
+    }
+
     buf_.setAllocator(use_psram_ ? DefaultAllocator : DefaultAllocatorRAM);
-    buf_.resize(capacity > 0 ? pow2 : 0);
-    capacity_ = (capacity > 0 && buf_.data() != nullptr) ? pow2 : 0;
-    mask_     = capacity_ > 0  ? capacity_ - 1 : 0;
+    bool allocated = buf_.resize(pow2) && buf_.data() != nullptr;
+    capacity_ = allocated ? pow2 : 0;
+    mask_     = capacity_ > 0 ? capacity_ - 1 : 0;
     reset();
-    return true;
+    return allocated;
   }
 
   T*     address() override { return buf_.data(); }

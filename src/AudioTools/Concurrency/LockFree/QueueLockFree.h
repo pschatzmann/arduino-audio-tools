@@ -6,13 +6,17 @@
 #include <cstddef>
 #include <utility>
 
+#include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
+
 namespace audio_tools {
 
 /**
  * @brief Lock-free MPMC queue.
  *
- * T must be move-constructible; default-constructibility is NOT required
- * (element storage is raw bytes — no T object is created until enqueue).
+ * T must be move-constructible and move-assignable (or copy-assignable as a
+ * fallback, since dequeue() assigns the result out via std::move);
+ * default-constructibility is NOT required (element storage is raw bytes —
+ * no T object is created until enqueue).
  */
 template <typename T>
 class QueueLockFree {
@@ -44,13 +48,24 @@ class QueueLockFree {
 
     // Round capacity up to the next power of two so that the bitmask index
     // wrapping always stays within the allocated array.
-    capacity_mask = capacity - 1;
+    size_t new_capacity_mask = capacity - 1;
     for (size_t i = 1; i <= sizeof(void*) * 4; i <<= 1)
-      capacity_mask |= capacity_mask >> i;
-    capacity_value = capacity_mask + 1;
+      new_capacity_mask |= new_capacity_mask >> i;
+    size_t new_capacity_value = new_capacity_mask + 1;
 
-    vector.resize(capacity_value);
+    vector.resize(new_capacity_value);
     p_node = vector.data();
+    if (p_node == nullptr) {
+      // Allocation failed: leave the queue empty rather than dereferencing
+      // a null p_node below.
+      capacity_mask = 0;
+      capacity_value = 0;
+      tail_pos.store(0, std::memory_order_relaxed);
+      head_pos.store(0, std::memory_order_relaxed);
+      return false;
+    }
+    capacity_mask = new_capacity_mask;
+    capacity_value = new_capacity_value;
 
     for (size_t i = 0; i < capacity_value; ++i) {
       p_node[i].tail.store(i, std::memory_order_relaxed);
@@ -82,6 +97,7 @@ class QueueLockFree {
   bool enqueue(T&& data)      { return emplace(std::move(data)); }
 
   bool dequeue(T& result) {
+    if (capacity_value == 0) return false;
     Node* node;
     size_t head = head_pos.load(std::memory_order_relaxed);
     for (;;) {
@@ -122,6 +138,7 @@ class QueueLockFree {
   // Single enqueue implementation for both lvalue and rvalue paths.
   template <typename U>
   bool emplace(U&& val) {
+    if (capacity_value == 0) return false;
     Node* node;
     size_t tail = tail_pos.load(std::memory_order_relaxed);
     for (;;) {
