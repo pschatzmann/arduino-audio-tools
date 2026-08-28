@@ -2163,7 +2163,7 @@ Protected Attributes</h2></td></tr>
 
 <p>assigs a value </p>
 <p>if the <a class="el" href="classaudio__tools_1_1_str.html" title="Str which keeps the data on the heap. We grow the allocated memory only if the copy source is not fit...">Str</a> is a const we replace the pointer</p>
-<p>if the <a class="el" href="classaudio__tools_1_1_str.html" title="Str which keeps the data on the heap. We grow the allocated memory only if the copy source is not fit...">Str</a> is an external buffer we need to copy</p>
+<p>if the <a class="el" href="classaudio__tools_1_1_str.html" title="Str which keeps the data on the heap. We grow the allocated memory only if the copy source is not fit...">Str</a> is an external buffer we need to copy: clamp to the available capacity so a source longer than maxlen can't overflow it</p>
 
 </div>
 </div>
@@ -2219,7 +2219,7 @@ Protected Attributes</h2></td></tr>
 
 <p>assigs from another <a class="el" href="classaudio__tools_1_1_str.html" title="Str which keeps the data on the heap. We grow the allocated memory only if the copy source is not fit...">Str</a> value </p>
 <p>if the <a class="el" href="classaudio__tools_1_1_str.html" title="Str which keeps the data on the heap. We grow the allocated memory only if the copy source is not fit...">Str</a> is a const we replace the pointer</p>
-<p>if the <a class="el" href="classaudio__tools_1_1_str.html" title="Str which keeps the data on the heap. We grow the allocated memory only if the copy source is not fit...">Str</a> is an external buffer we need to copy</p>
+<p>if the <a class="el" href="classaudio__tools_1_1_str.html" title="Str which keeps the data on the heap. We grow the allocated memory only if the copy source is not fit...">Str</a> is an external buffer we need to copy: clamp to the available capacity so a source longer than maxlen can't overflow it</p>
 
 </div>
 </div>
