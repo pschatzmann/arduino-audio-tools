@@ -144,7 +144,7 @@ Protected Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
 class audio_tools::QueueLockFree&lt; T &gt;</div><p>Lock-free MPMC queue. </p>
-<p>T must be move-constructible; default-constructibility is NOT required (element storage is raw bytes — no T object is created until enqueue). </p>
+<p>T must be move-constructible and move-assignable (or copy-assignable as a fallback, since <a class="el" href="classaudio__tools_1_1_queue_lock_free.html#a162a9078a4174de9c2db847127c20d5a">dequeue()</a> assigns the result out via std::move); default-constructibility is NOT required (element storage is raw bytes — no T object is created until enqueue). </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af308f0ee2f137c3d6245f76ae36b766d" name="af308f0ee2f137c3d6245f76ae36b766d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af308f0ee2f137c3d6245f76ae36b766d">&#9670;&#160;</a></span>QueueLockFree()</h2>

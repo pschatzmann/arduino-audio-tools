@@ -161,11 +161,15 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:aa6665eb9e1a54833d05f868bbecfc52a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add81b8c3e9205e26147cc19be6b48f04" id="r_add81b8c3e9205e26147cc19be6b48f04"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_list_lock_free.html#add81b8c3e9205e26147cc19be6b48f04">link</a> ()</td></tr>
 <tr class="separator:add81b8c3e9205e26147cc19be6b48f04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad779a6f40826a9222bc0c26b55dff6bb" id="r_ad779a6f40826a9222bc0c26b55dff6bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_list_lock_free.html#ad779a6f40826a9222bc0c26b55dff6bb">releaseNode</a> (<a class="el" href="structaudio__tools_1_1_list_lock_free_1_1_node.html">Node</a> *p_delete)</td></tr>
+<tr class="separator:ad779a6f40826a9222bc0c26b55dff6bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a269c9de7e571bd6d11bb46e1adfa42a6" id="r_a269c9de7e571bd6d11bb46e1adfa42a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_list_lock_free_1_1_node.html">Node</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_list_lock_free.html#a269c9de7e571bd6d11bb46e1adfa42a6">first</a></td></tr>
 <tr class="separator:a269c9de7e571bd6d11bb46e1adfa42a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada9c757dd1c16189dd4280df0ba0a5f6" id="r_ada9c757dd1c16189dd4280df0ba0a5f6"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; <a class="el" href="structaudio__tools_1_1_list_lock_free_1_1_node.html">Node</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_list_lock_free.html#ada9c757dd1c16189dd4280df0ba0a5f6">free_list</a> {nullptr}</td></tr>
+<tr class="separator:ada9c757dd1c16189dd4280df0ba0a5f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a2620f85a5be6119e9842886622921f" id="r_a3a2620f85a5be6119e9842886622921f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_list_lock_free_1_1_node.html">Node</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_list_lock_free.html#a3a2620f85a5be6119e9842886622921f">last</a></td></tr>
 <tr class="separator:a3a2620f85a5be6119e9842886622921f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f4bdc4efb8ed50fea52af4107cdf545" id="r_a2f4bdc4efb8ed50fea52af4107cdf545"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_list_lock_free.html#a2f4bdc4efb8ed50fea52af4107cdf545">p_allocator</a> = &amp;<a class="el" href="namespaceaudio__tools.html#a02e30d9ec0ddcc5d9e9f1d2324b8cca8">DefaultAllocator</a></td></tr>
@@ -856,6 +860,34 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
+<a id="ad779a6f40826a9222bc0c26b55dff6bb" name="ad779a6f40826a9222bc0c26b55dff6bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad779a6f40826a9222bc0c26b55dff6bb">&#9670;&#160;</a></span>releaseNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void releaseNode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structaudio__tools_1_1_list_lock_free_1_1_node.html">Node</a> *&#160;</td>
+          <td class="paramname"><em>p_delete</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a8c4f8822203d67c01c48be44b900ed1b" name="a8c4f8822203d67c01c48be44b900ed1b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8c4f8822203d67c01c48be44b900ed1b">&#9670;&#160;</a></span>rend()</h2>
 
@@ -963,6 +995,7 @@ template&lt;class T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Swaps the contents of this list with ref by relinking the two chains' boundary pointers. Like the copy constructor, this is NOT safe against concurrent access on either list - callers must ensure exclusive access to both lists while swapping. </p>
 
 </div>
 </div>
@@ -1005,6 +1038,30 @@ template&lt;class T &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structaudio__tools_1_1_list_lock_free_1_1_node.html">Node</a> first</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ada9c757dd1c16189dd4280df0ba0a5f6" name="ada9c757dd1c16189dd4280df0ba0a5f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada9c757dd1c16189dd4280df0ba0a5f6">&#9670;&#160;</a></span>free_list</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::atomic&lt;<a class="el" href="structaudio__tools_1_1_list_lock_free_1_1_node.html">Node</a>*&gt; free_list {nullptr}</td>
         </tr>
       </table>
   </td>
