@@ -11,5 +11,6 @@ var searchData=
   ['float16_2eh_8',['float16.h',['../float16_8h.html',1,'']]],
   ['float32_2eh_9',['float32.h',['../float32_8h.html',1,'']]],
   ['floataudio_2eh_10',['FloatAudio.h',['../_float_audio_8h.html',1,'']]],
-  ['frequencydetector_2eh_11',['FrequencyDetector.h',['../_frequency_detector_8h.html',1,'']]]
+  ['frequencydetectorautocorrelation_2eh_11',['FrequencyDetectorAutoCorrelation.h',['../_frequency_detector_auto_correlation_8h.html',1,'']]],
+  ['frequencydetectorzerocrossing_2eh_12',['FrequencyDetectorZeroCrossing.h',['../_frequency_detector_zero_crossing_8h.html',1,'']]]
 ];
