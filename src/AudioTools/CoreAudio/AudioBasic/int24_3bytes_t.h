@@ -31,7 +31,7 @@ class int24_3bytes_t  {
   }
 
   int24_3bytes_t(const int16_t &in) {
-    value[2] = in > 0 ? 0 : 0xFF;
+    value[2] = in >= 0 ? 0 : 0xFF;
     value[1] = (in >> 8) & 0xFF;
     value[0] = in & 0xFF;
   }
@@ -92,21 +92,21 @@ class int24_3bytes_t  {
 
   /// Standard Conversion to Int
   int toInt() const {
-    int newInt = ((((int32_t)0xFF & value[0]) << 16) | (((int32_t)0xFF & value[1]) << 8) | ((int32_t)0xFF & value[2]));
+    int newInt = ((((int32_t)0xFF & value[2]) << 16) | (((int32_t)0xFF & value[1]) << 8) | ((int32_t)0xFF & value[0]));
     if ((newInt & 0x00800000) > 0) {
       newInt |= 0xFF000000;
     } else {
       newInt &= 0x00FFFFFF;
     }
     return newInt;
-  }  
+  }
 
   /// convert to float
-  float toFloat() const { return int(); }
+  float toFloat() const { return toInt(); }
 
   /// provides value between -32767 and 32767
   int16_t scale16() const {
-    return toInt() * INT16_MAX / INT24_MAX;
+    return (int16_t)((int64_t)toInt() * INT16_MAX / INT24_MAX);
   }
 
   /// provides value between -2,147,483,647 and 2,147,483,647

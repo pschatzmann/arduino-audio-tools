@@ -27,7 +27,7 @@ class float32 {
     float32(const float32 &value){
         this->value = value.value;
     }
-    inline operator float()  {
+    inline operator float() const {
         return as_float(value);
     }
     explicit inline operator double()  {
@@ -40,22 +40,22 @@ class float32 {
          return (int) float32::as_float(value);
     }
     inline bool operator<  (float32 other) const{
-        return float() < (float)other;
+        return (float)*this < (float)other;
     }
     inline bool operator<=  (float32 other) const{
-        return float() <= (float)other;
+        return (float)*this <= (float)other;
     }
     inline bool operator>  (float32 other) const{
-        return float() > (float)other;
+        return (float)*this > (float)other;
     }
     inline bool operator>=  (float32 other) const{
-        return float() >= (float)other;
+        return (float)*this >= (float)other;
     }
     inline bool operator==  (float32 other) const{
-        return float() == (float)other;
+        return (float)*this == (float)other;
     }
     inline bool operator!=  (float32 other) const{
-        return float() != (float)other;
+        return (float)*this != (float)other;
     }
 
   protected:

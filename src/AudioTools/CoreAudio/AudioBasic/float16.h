@@ -28,7 +28,7 @@ class float16 {
   float16() = default;
   float16(float in) { this->value = float16::float_to_half(in); }
   float16(const float16 &value16) { this->value = value16.value; }
-  inline operator float() { return half_to_float(value); }
+  inline operator float() const { return half_to_float(value); }
   explicit inline operator double() {
     return (double)float16::half_to_float(value);
   }
@@ -36,19 +36,19 @@ class float16 {
   explicit inline operator int() const {
     return (int)float16::half_to_float(value);
   }
-  inline bool operator<(float16 other) const { return float() < (float)other; }
+  inline bool operator<(float16 other) const { return (float)*this < (float)other; }
   inline bool operator<=(float16 other) const {
-    return float() <= (float)other;
+    return (float)*this <= (float)other;
   }
-  inline bool operator>(float16 other) const { return float() > (float)other; }
+  inline bool operator>(float16 other) const { return (float)*this > (float)other; }
   inline bool operator>=(float16 other) const {
-    return float() >= (float)other;
+    return (float)*this >= (float)other;
   }
   inline bool operator==(float16 other) const {
-    return float() == (float)other;
+    return (float)*this == (float)other;
   }
   inline bool operator!=(float16 other) const {
-    return float() != (float)other;
+    return (float)*this != (float)other;
   }
 
  protected:
