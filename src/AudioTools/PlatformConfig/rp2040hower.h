@@ -35,7 +35,6 @@
 #define ANALOG_BUFFERS 100
 #endif
 
-//#define USE_CONCURRENCY
 #define USE_SD_SUPPORTS_SPI
 
 // Use fixed point operations for RP2040 only
@@ -70,3 +69,8 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #define ps_calloc(num, size) pcalloc(num, size)
 #define ps_realloc(ptr, size) realloc(ptr, size)
 #endif
+
+// FreeRTOS support
+#ifdef __FREERTOS
+#define USE_CONCURRENCY
+#endif 
