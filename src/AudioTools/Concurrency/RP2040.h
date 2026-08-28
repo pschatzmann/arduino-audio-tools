@@ -8,5 +8,6 @@
 #else
 #  include "AudioTools/Concurrency/RP2040/BufferRP2040.h"
 #  include "AudioTools/Concurrency/RP2040/MutexRP2040.h"
+#  include "AudioTools/Concurrency/BufferBlocking.h"
 #endif
 

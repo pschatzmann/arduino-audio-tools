@@ -229,5 +229,10 @@ class BufferRTOS : public BaseBuffer<T> {
 template <class T>
 using SynchronizedBufferRTOS = BufferRTOS<T>;
 
+/// @brief Default thread-safe, blocking stream buffer for this platform.
+/// @ingroup concurrency
+template <class T>
+using StreamBuffer = BufferRTOS<T>;
+
 }  // namespace audio_tools
 

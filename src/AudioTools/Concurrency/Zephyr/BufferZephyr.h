@@ -225,4 +225,9 @@ using BufferRTOS = BufferZephyr<T>;
 template <class T>
 using SynchronizedBufferRTOS = BufferZephyr<T>;
 
+/// @brief Default thread-safe, blocking stream buffer for this platform.
+/// @ingroup concurrency
+template <class T>
+using StreamBuffer = BufferZephyr<T>;
+
 }  // namespace audio_tools
