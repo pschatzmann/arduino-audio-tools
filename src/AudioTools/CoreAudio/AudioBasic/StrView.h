@@ -49,31 +49,37 @@ class StrView {
       this->len = 0;
     } else {
       int new_len = strlen(alt);
-      grow(new_len);
-      this->len = new_len;
+      grow(new_len + 1);
       if (this->isConst()) {
         /// if the Str is a const we replace the pointer
+        this->len = new_len;
         this->maxlen = this->len;
         this->chars = (char*)alt;
       } else {
-        /// if the Str is an external buffer we need to copy
-        strncpy(this->chars, alt, this->maxlen);
-        this->chars[len] = 0;
+        /// if the Str is an external buffer we need to copy: clamp to the
+        /// available capacity so a source longer than maxlen can't overflow it
+        int copy_len = new_len < this->maxlen ? new_len : this->maxlen - 1;
+        strncpy(this->chars, alt, copy_len);
+        this->chars[copy_len] = 0;
+        this->len = copy_len;
       }
     }
   }
   /// assigs from another Str value
   virtual void set(const StrView& alt) {
-    grow(alt.len);
-    this->len = alt.len;
+    grow(alt.len + 1);
 
     if (this->isConst()) {
       /// if the Str is a const we replace the pointer
+      this->len = alt.len;
       this->chars = alt.chars;
     } else {
-      /// if the Str is an external buffer we need to copy
-      strncpy(this->chars, alt.chars, this->maxlen);
-      this->chars[len] = 0;
+      /// if the Str is an external buffer we need to copy: clamp to the
+      /// available capacity so a source longer than maxlen can't overflow it
+      int copy_len = alt.len < this->maxlen ? alt.len : this->maxlen - 1;
+      strncpy(this->chars, alt.chars, copy_len);
+      this->chars[copy_len] = 0;
+      this->len = copy_len;
     }
   }
 
@@ -125,18 +131,18 @@ class StrView {
   /// adds a int value
   virtual void add(int value) {
     if (!this->isConst()) {
-      grow(this->length() + 11);
-      snprintf(this->chars + len, 10, "%d", value);
-      len = strlen(chars);
+      char buffer[12];  // -2147483648 + '\0'
+      snprintf(buffer, sizeof(buffer), "%d", value);
+      add(buffer);
     }
   }
 
   /// adds a double value
   virtual void add(double value, int precision = 2, int withd = 0) {
     if (!this->isConst()) {
-      grow(this->length() + 20);
-      floatToString(this->chars + len, value, precision, withd);
-      len = strlen(chars);
+      char buffer[128];
+      floatToString(buffer, value, precision, withd);
+      add(buffer);
     }
   }
 
@@ -178,6 +184,7 @@ class StrView {
   virtual bool endsWith(const char* str) {
     if (str == nullptr) return false;
     int endlen = strlen(str);
+    if (endlen > len) return false;
     return strncmp(this->chars + (len - endlen), str, endlen) == 0;
   }
 
@@ -185,6 +192,7 @@ class StrView {
   virtual bool endsWithIgnoreCase(const char* str) {
     if (str == nullptr) return false;
     int endlen = strlen(str);
+    if (endlen > len) return false;
     return strncmp_i(this->chars + (len - endlen), str, endlen) == 0;
   }
 
@@ -520,9 +528,9 @@ class StrView {
   virtual void substring(StrView& from, int start, int end) {
     if (end > start) {
       int len = end - start;
-      grow(len);
+      grow(len + 1);
       if (this->chars != nullptr) {
-        len = len < this->maxlen ? len : this->maxlen;
+        len = len < this->maxlen ? len : this->maxlen - 1;
         strncpy(this->chars, from.chars + start, len);
         this->len = len;
         this->chars[len] = 0;
@@ -534,8 +542,9 @@ class StrView {
   virtual void substring(const char* from, int start, int end) {
     if (end > start) {
       int len = end - start;
-      grow(len);
+      grow(len + 1);
       if (this->chars != nullptr) {
+        len = len < this->maxlen ? len : this->maxlen - 1;
         strncpy(this->chars, from + start, len);
         this->chars[len] = 0;
         this->len = len;
@@ -557,7 +566,7 @@ class StrView {
         return j;
       }
     }
-    return 0;
+    return len;
   }
 
   /// remove leading spaces

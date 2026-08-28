@@ -97,16 +97,17 @@ class Str : public StrView {
     this->maxlen = maxlen == 0 ? len : maxlen;
     grow(this->maxlen);
     if (this->chars != nullptr) {
-      this->len = len;
+      int copy_len = len < this->maxlen ? len : this->maxlen;
+      this->len = copy_len;
       this->is_const = false;
-      memmove(this->chars, source, len);
-      this->chars[len] = 0;
+      memmove(this->chars, source, copy_len);
+      this->chars[copy_len] = 0;
     }
   }
 
   /// Fills the string with len chars
   void setChars(char c, int len) {
-    grow(this->maxlen);
+    grow(len);
     if (this->chars != nullptr) {
       for (int j = 0; j < len; j++) {
         this->chars[j] = c;
@@ -136,7 +137,7 @@ class Str : public StrView {
     // save result
     grow(new_size);
     strcpy(chars, result);
-    this->len = strlen(temp);
+    this->len = strlen(result);
   }
 
   /// decodes a url encoded string
@@ -145,7 +146,7 @@ class Str : public StrView {
     size_t i = 0;
     size_t result_idx = 0;
     while (i < len) {
-      if (chars[i] == '%') {
+      if (chars[i] == '%' && i + 2 < len) {
         szTemp[0] = chars[i + 1];
         szTemp[1] = chars[i + 2];
         chars[result_idx] = strToBin(szTemp);
@@ -154,7 +155,7 @@ class Str : public StrView {
         chars[result_idx] = ' ';
         i++;
       } else {
-        chars[result_idx] += chars[i];
+        chars[result_idx] = chars[i];
         i++;
       }
       result_idx++;

@@ -20,8 +20,8 @@ class Queue {
         }
 
         bool peek(T& data){
-            if (l.end()->prior==nullptr) return false;
-            data = *(l.end()->prior);
+            if (l.empty()) return false;
+            data = l.back();
             return true;
         }
 

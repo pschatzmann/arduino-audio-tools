@@ -320,6 +320,11 @@ class List {
             p_allocator = &allocator;
         }
 
+        /// Provides the first element
+        T& front() {
+            return *begin();
+        }
+
         /// Provides the last element
         T& back() {
             return *rbegin();

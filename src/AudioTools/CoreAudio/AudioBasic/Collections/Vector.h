@@ -194,7 +194,7 @@ class Vector {
   void push_front(T &value) {
     resize_internal(len + 1, true);
     // memmove(p_data,p_data+1,len*sizeof(T));
-    for (int j = len; j >= 0; j--) {
+    for (int j = len - 1; j >= 0; j--) {
       p_data[j + 1] = p_data[j];
     }
     p_data[0] = value;
@@ -204,7 +204,7 @@ class Vector {
   void push_front(T &&value) {
     resize_internal(len + 1, true);
     // memmove(p_data,p_data+1,len*sizeof(T));
-    for (int j = len; j >= 0; j--) {
+    for (int j = len - 1; j >= 0; j--) {
       p_data[j + 1] = p_data[j];
     }
     p_data[0] = value;
