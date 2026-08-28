@@ -130,6 +130,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:adc79c89fc1d63b418c9f074b63f3d651"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a58d5eb2a54a9fbda4ef22c4bb3d35977" id="r_a58d5eb2a54a9fbda4ef22c4bb3d35977"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#a58d5eb2a54a9fbda4ef22c4bb3d35977">readSamples</a> (T *data, size_t len)</td></tr>
 <tr class="separator:a58d5eb2a54a9fbda4ef22c4bb3d35977"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b579b43180c8e33c6c3033cf6c1a715" id="r_a0b579b43180c8e33c6c3033cf6c1a715"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#a0b579b43180c8e33c6c3033cf6c1a715">restart</a> ()</td></tr>
+<tr class="memdesc:a0b579b43180c8e33c6c3033cf6c1a715"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restarts the generator, e.g. after a play time has been defined and reached.  <br /></td></tr>
+<tr class="separator:a0b579b43180c8e33c6c3033cf6c1a715"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd4492eedc1644fc7e48deb4a271a065" id="r_acd4492eedc1644fc7e48deb4a271a065"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sine_from_table.html#acd4492eedc1644fc7e48deb4a271a065">setAmplitude</a> (float <a class="el" href="classaudio__tools_1_1_sine_from_table.html#a31bef58f966d97b1ace9bd3a58ffd9a6">amplitude</a>)</td></tr>
 <tr class="memdesc:acd4492eedc1644fc7e48deb4a271a065"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the new amplitude (volume)  <br /></td></tr>
 <tr class="separator:acd4492eedc1644fc7e48deb4a271a065"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -141,9 +144,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a723ff429227e3ffb51d305c115472180"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad52a35a3e13049686ea5fde677d269cb" id="r_ad52a35a3e13049686ea5fde677d269cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sine_from_table.html#ad52a35a3e13049686ea5fde677d269cb">setMaxAmplitudeStep</a> (float <a class="el" href="classaudio__tools_1_1_sine_from_table.html#a863c86bdfd96bf9c461846689c2614aa">step</a>)</td></tr>
 <tr class="separator:ad52a35a3e13049686ea5fde677d269cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0472837fedcc9128b7cab13fb578aad2" id="r_a0472837fedcc9128b7cab13fb578aad2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#a0472837fedcc9128b7cab13fb578aad2">setPlayTime</a> (uint32_t <a class="el" href="classaudio__tools_1_1_sound_generator.html#a3807da733d5fce809ac890821617e140">playMs</a>, uint8_t <a class="el" href="classaudio__tools_1_1_sound_generator.html#ae3a74a14da1708b3abf20be8252dc1a9">upPercent</a>=20, uint8_t <a class="el" href="classaudio__tools_1_1_sound_generator.html#ae2b104b741d35e43975aaf4f91c228b9">downPercent</a>=30)</td></tr>
-<tr class="memdesc:a0472837fedcc9128b7cab13fb578aad2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the play time in ms and the ramp up and ramp down time in percent.  <br /></td></tr>
-<tr class="separator:a0472837fedcc9128b7cab13fb578aad2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0a0aa3b36d432b2be1e27b29886d5a0" id="r_af0a0aa3b36d432b2be1e27b29886d5a0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#af0a0aa3b36d432b2be1e27b29886d5a0">setPlayTime</a> (uint32_t <a class="el" href="classaudio__tools_1_1_sound_generator.html#a3807da733d5fce809ac890821617e140">playMs</a>, uint8_t <a class="el" href="classaudio__tools_1_1_sound_generator.html#ae3a74a14da1708b3abf20be8252dc1a9">upPercent</a>=20, uint8_t <a class="el" href="classaudio__tools_1_1_sound_generator.html#ae2b104b741d35e43975aaf4f91c228b9">downPercent</a>=30)</td></tr>
+<tr class="memdesc:af0a0aa3b36d432b2be1e27b29886d5a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the play time in ms and the ramp up and ramp down time in percent.  <br /></td></tr>
+<tr class="separator:af0a0aa3b36d432b2be1e27b29886d5a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -860,6 +863,35 @@ template&lt;class T  = int16_t&gt; </div>
 
 </div>
 </div>
+<a id="a0b579b43180c8e33c6c3033cf6c1a715" name="a0b579b43180c8e33c6c3033cf6c1a715"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b579b43180c8e33c6c3033cf6c1a715">&#9670;&#160;</a></span>restart()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T  = int16_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void restart </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Restarts the generator, e.g. after a play time has been defined and reached. </p>
+
+</div>
+</div>
 <a id="acd4492eedc1644fc7e48deb4a271a065" name="acd4492eedc1644fc7e48deb4a271a065"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acd4492eedc1644fc7e48deb4a271a065">&#9670;&#160;</a></span>setAmplitude()</h2>
 
@@ -983,8 +1015,8 @@ template&lt;class T  = int16_t&gt; </div>
 
 </div>
 </div>
-<a id="a0472837fedcc9128b7cab13fb578aad2" name="a0472837fedcc9128b7cab13fb578aad2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0472837fedcc9128b7cab13fb578aad2">&#9670;&#160;</a></span>setPlayTime()</h2>
+<a id="af0a0aa3b36d432b2be1e27b29886d5a0" name="af0a0aa3b36d432b2be1e27b29886d5a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0a0aa3b36d432b2be1e27b29886d5a0">&#9670;&#160;</a></span>setPlayTime()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -995,7 +1027,7 @@ template&lt;class T  = int16_t&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void setPlayTime </td>
+          <td class="memname">virtual void setPlayTime </td>
           <td>(</td>
           <td class="paramtype">uint32_t&#160;</td>
           <td class="paramname"><em>playMs</em>, </td>
@@ -1020,7 +1052,7 @@ template&lt;class T  = int16_t&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
