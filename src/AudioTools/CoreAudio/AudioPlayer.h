@@ -11,7 +11,7 @@
 #include "AudioTools/CoreAudio/Buffers.h"
 #include "AudioTools/CoreAudio/Fade.h"
 #include "AudioTools/CoreAudio/StreamCopy.h"
-#include "AudioTools/CoreAudio/VolumeStream.h"
+#include "AudioTools/CoreAudio/Analysis/VolumeStream.h"
 #include "AudioTools/Disk/AudioSource.h"
 
 /**

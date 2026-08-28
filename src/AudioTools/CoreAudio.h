@@ -7,7 +7,6 @@
 #include "AudioTools/CoreAudio/AudioStreams.h"
 #include "AudioTools/CoreAudio/AudioStreamsConverter.h"
 #include "AudioTools/CoreAudio/AudioOutput.h"
-#include "AudioTools/CoreAudio/VolumeStream.h"
 #include "AudioTools/CoreAudio/AudioIO.h"
 #include "AudioTools/CoreAudio/ResampleStream.h"
 #include "AudioTools/CoreAudio/ResampleStreamT.h"
@@ -24,9 +23,7 @@
 #include "AudioTools/CoreAudio/AnalogAudioStream.h"
 #include "AudioTools/CoreAudio/AudioEffects.h"
 #include "AudioTools/CoreAudio/AudioMetaData.h"
-#include "AudioTools/CoreAudio/FrequencyDetector.h"
-#include "AudioTools/CoreAudio/GoerzelStream.h"
-#include "AudioTools/CoreAudio/QualityAnalysisStream.h"
+#include "AudioTools/CoreAudio/Analysis.h"
 #include "AudioTools/CoreAudio/RTTTLOutput.h"
 
 // Audio Actions only when pin support havs been defined

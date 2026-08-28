@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AudioStreams.h"
+#include "AudioTools/CoreAudio/AudioStreams.h"
 
 namespace audio_tools {
 
@@ -89,16 +89,6 @@ class QualityAnalysisStream : public ModifyingStream {
   void setStream(Stream& io) override {
     p_out = &io;
     p_stream = &io;
-  }
-
-  void setOutput(AudioOutput& out) {
-    addNotifyAudioChange(out);
-    setOutput((Print&)out);
-  }
-
-  void setStream(AudioStream& io) {
-    addNotifyAudioChange(io);
-    setStream((Stream&)io);
   }
 
   size_t write(const uint8_t* data, size_t len) override {
