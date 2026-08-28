@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: src/AudioTools/Concurrency/Mutex.h File Reference</title>
+<title>arduino-audio-tools: src/AudioTools/Concurrency/Desktop/Mutex.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,28 +69,30 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_6e57b9c61a788396f6d83d56e8758cd4.html">Concurrency</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_6e57b9c61a788396f6d83d56e8758cd4.html">Concurrency</a></li><li class="navelem"><a class="el" href="dir_0ea2bb0f44765b9bd3016bb13cdd2fac.html">Desktop</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle"><div class="title">Mutex.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="_audio_tools_config_8h_source.html">AudioToolsConfig.h</a>&quot;</code><br />
-<code>#include &lt;atomic&gt;</code><br />
+<code>#include &quot;<a class="el" href="_mutex_8h_source.html">AudioTools/Concurrency/Mutex.h</a>&quot;</code><br />
+<code>#include &lt;mutex&gt;</code><br />
 </div>
-<p><a href="_mutex_8h_source.html">Go to the source code of this file.</a></p>
+<p><a href="_desktop_2_mutex_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_mutex_base.html">MutexBase</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty Mutex implementation which does nothing.  <a href="classaudio__tools_1_1_mutex_base.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_std_mutex.html">StdMutex</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mutex implemntation based on std::mutex.  <a href="classaudio__tools_1_1_std_mutex.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_spin_lock.html">SpinLock</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Busy-wait lock based on std::atomic - available on all platforms that support &lt;atomic&gt;.  <a href="classaudio__tools_1_1_spin_lock.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_std_recursive_mutex.html">StdRecursiveMutex</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mutex implemntation based on std::mutex.  <a href="classaudio__tools_1_1_std_recursive_mutex.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
@@ -98,6 +100,12 @@ Namespaces</h2></td></tr>
 <tr class="memitem:namespaceaudio__tools" id="r_namespaceaudio__tools"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></td></tr>
 <tr class="memdesc:namespaceaudio__tools"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic Implementation of sound input and output for desktop environments using portaudio. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:ab9038402269b24ab0ccf590f528ced3b" id="r_ab9038402269b24ab0ccf590f528ced3b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ab9038402269b24ab0ccf590f528ced3b">Mutex</a> = <a class="el" href="classaudio__tools_1_1_std_mutex.html">StdMutex</a></td></tr>
+<tr class="memdesc:ab9038402269b24ab0ccf590f528ced3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Mutex implementation using std::mutex.  <br /></td></tr>
+<tr class="separator:ab9038402269b24ab0ccf590f528ced3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

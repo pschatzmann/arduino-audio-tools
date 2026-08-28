@@ -202,7 +202,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Real mutex type used for the default_mutex member (see <a class="el" href="classaudio__tools_1_1_video_muxer_with_tasks.html#a23287fbce0630bc94fea52420ef030d5">setMutex()</a>) - <a class="el" href="namespaceaudio__tools.html#ab9038402269b24ab0ccf590f528ced3b" title="Default Mutex implementation using RP2040 Pico SDK.">audio_tools::Mutex</a> (<a class="el" href="classaudio__tools_1_1_mutex_r_t_o_s.html" title="Mutex implemntation using FreeRTOS.">MutexRTOS</a>) on RTOS platforms, StdMutex on desktop - both real, so two tasks are protected out of the box without requiring <a class="el" href="classaudio__tools_1_1_video_muxer_with_tasks.html#a23287fbce0630bc94fea52420ef030d5">setMutex()</a>. </p>
+<p>Real mutex type used for the default_mutex member (see <a class="el" href="classaudio__tools_1_1_video_muxer_with_tasks.html#a23287fbce0630bc94fea52420ef030d5">setMutex()</a>) - <a class="el" href="namespaceaudio__tools.html#ab9038402269b24ab0ccf590f528ced3b" title="Default Mutex implementation using std::mutex.">audio_tools::Mutex</a> (<a class="el" href="classaudio__tools_1_1_mutex_r_t_o_s.html" title="Mutex implemntation using FreeRTOS.">MutexRTOS</a>) on RTOS platforms, <a class="el" href="classaudio__tools_1_1_std_mutex.html" title="Mutex implemntation based on std::mutex.">StdMutex</a> on desktop - both real, so two tasks are protected out of the box without requiring <a class="el" href="classaudio__tools_1_1_video_muxer_with_tasks.html#a23287fbce0630bc94fea52420ef030d5">setMutex()</a>. </p>
 
 </div>
 </div>

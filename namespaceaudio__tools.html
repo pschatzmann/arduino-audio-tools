@@ -2086,6 +2086,9 @@ size_t size)</a> and <a class="el" href="classaudio__tools_1_1_base_stream.html#
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_s_p_i_audio_slave_config.html">SPIAudioSlaveConfig</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration for <a class="el" href="classaudio__tools_1_1_s_p_i_audio_slave.html" title="SPI Audio Slave endpoint matching SPIAudioMaster protocol.">SPIAudioSlave</a>.  <a href="structaudio__tools_1_1_s_p_i_audio_slave_config.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_spin_lock.html">SpinLock</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Busy-wait lock based on std::atomic - available on all platforms that support &lt;atomic&gt;.  <a href="classaudio__tools_1_1_spin_lock.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_spool_file_sample_table_store.html">SpoolFileSampleTableStore</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes every entry to a caller-provided scratch file as it's appended, instead of keeping it in RAM - <a class="el" href="classaudio__tools_1_1_spool_file_sample_table_store.html#a4cf79c27a5a6f4930c1208b51c432344" title="Reads back entry &#39;index&#39; - index must be &lt; size().">get()</a> seeks that file and reads the entry back. Unlike <a class="el" href="classaudio__tools_1_1_source_seek_sample_table_store.html" title="Discards every value right after appending it, keeping only the file offset of the first entry - get(...">SourceSeekSampleTableStore</a> this needs no knowledge of (or seekability in) the <em>original</em> MP4 source - it works even when that source is a live, non-seekable stream, since it's writing its own local, sequential copy as data streams past. The tradeoff is disk I/O (both a write during parsing and a seek+read during playback) instead of a pure RAM cost.  <a href="classaudio__tools_1_1_spool_file_sample_table_store.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2103,6 +2106,12 @@ size_t size)</a> and <a class="el" href="classaudio__tools_1_1_base_stream.html#
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_stdio_stream.html">StdioStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Direct binary Audio Output to stdout. On linux you can hear the audio e.g. with ./generator | aplay -f cd or reading data from stdin.  <a href="classaudio__tools_1_1_stdio_stream.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_std_mutex.html">StdMutex</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mutex implemntation based on std::mutex.  <a href="classaudio__tools_1_1_std_mutex.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_std_recursive_mutex.html">StdRecursiveMutex</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mutex implemntation based on std::mutex.  <a href="classaudio__tools_1_1_std_recursive_mutex.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_s_t_k_chorus.html">STKChorus</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chorus Effect.  <a href="classaudio__tools_1_1_s_t_k_chorus.html#details">More...</a><br /></td></tr>
@@ -2582,8 +2591,8 @@ Typedefs</h2></td></tr>
 <tr class="memitem:ga07e83073af7df530d17433371106bf74" id="r_ga07e83073af7df530d17433371106bf74"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__codecs.html#ga07e83073af7df530d17433371106bf74">MPEG_TSDecoder</a> = <a class="el" href="classaudio__tools_1_1_m_t_s_decoder.html">MTSDecoder</a></td></tr>
 <tr class="memdesc:ga07e83073af7df530d17433371106bf74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Legacy alias for MPEG Transport <a class="el" href="class_stream.html">Stream</a> decoder.  <br /></td></tr>
 <tr class="separator:ga07e83073af7df530d17433371106bf74"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9038402269b24ab0ccf590f528ced3b" id="r_ab9038402269b24ab0ccf590f528ced3b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ab9038402269b24ab0ccf590f528ced3b">Mutex</a> = <a class="el" href="classaudio__tools_1_1_mutex_r_p2040.html">MutexRP2040</a></td></tr>
-<tr class="memdesc:ab9038402269b24ab0ccf590f528ced3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Mutex implementation using RP2040 Pico SDK.  <br /></td></tr>
+<tr class="memitem:ab9038402269b24ab0ccf590f528ced3b" id="r_ab9038402269b24ab0ccf590f528ced3b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ab9038402269b24ab0ccf590f528ced3b">Mutex</a> = <a class="el" href="classaudio__tools_1_1_std_mutex.html">StdMutex</a></td></tr>
+<tr class="memdesc:ab9038402269b24ab0ccf590f528ced3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Mutex implementation using std::mutex.  <br /></td></tr>
 <tr class="separator:ab9038402269b24ab0ccf590f528ced3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af449cd2517d296236897c01a554a8dec" id="r_af449cd2517d296236897c01a554a8dec"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#af449cd2517d296236897c01a554a8dec">MutexRecursiveRTOS</a> = <a class="el" href="classaudio__tools_1_1_mutex_recursive_zephyr.html">MutexRecursiveZephyr</a></td></tr>
 <tr class="separator:af449cd2517d296236897c01a554a8dec"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -4179,9 +4188,10 @@ template&lt;class T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Default Mutex implementation using RP2040 Pico SDK. </p>
+<p>Default Mutex implementation using std::mutex. </p>
 <p>Default Mutex implementation using Zephyr mutexes.</p>
-<p>Default Mutex implementation using RTOS semaphores. </p>
+<p>Default Mutex implementation using RTOS semaphores.</p>
+<p>Default Mutex implementation using RP2040 Pico SDK. </p>
 
 </div>
 </div>
