@@ -59,8 +59,6 @@ class SoundGenerator {
   /// Provides a single sample
   virtual T readSample() = 0;
 
-  
-
   /// Provides the data as byte array with the requested number of channels
   virtual size_t readBytes(uint8_t* data, size_t len) {
     LOGD("readBytes: %d", (int)len);
@@ -111,7 +109,7 @@ class SoundGenerator {
   }
 
   /// Defines the play time in ms and the ramp up and ramp down time in percent
-  void setPlayTime(uint32_t playMs, uint8_t upPercent = 20,
+  virtual void setPlayTime(uint32_t playMs, uint8_t upPercent = 20,
                    uint8_t downPercent = 30) {
     LOGI("setPlayTime: playMs=%d, upPercent=%d, downPercent=%d", playMs,
          upPercent, downPercent);
@@ -121,6 +119,11 @@ class SoundGenerator {
     currentSample = 0;
     recalculatePlayTime();
     factor = 0.0f;
+  }
+
+  /// Restarts the generator, e.g. after a play time has been defined and reached
+  virtual void restart() {
+    currentSample = 0;
   }
 
  protected:
