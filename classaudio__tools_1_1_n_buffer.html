@@ -104,7 +104,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a22fc87f24c306b9a57d36ab61f7400b1" id="r_a22fc87f24c306b9a57d36ab61f7400b1"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_n_buffer.html#a22fc87f24c306b9a57d36ab61f7400b1">~NBuffer</a> ()</td></tr>
 <tr class="separator:a22fc87f24c306b9a57d36ab61f7400b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adcf0cb0d6e3e2377a2f55efa497fa541" id="r_adcf0cb0d6e3e2377a2f55efa497fa541"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_n_buffer.html#adcf0cb0d6e3e2377a2f55efa497fa541">address</a> ()</td></tr>
-<tr class="memdesc:adcf0cb0d6e3e2377a2f55efa497fa541"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the address of the start of the phsical read buffer  <br /></td></tr>
+<tr class="memdesc:adcf0cb0d6e3e2377a2f55efa497fa541"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the address of the start of the actual physical read buffer  <br /></td></tr>
 <tr class="separator:adcf0cb0d6e3e2377a2f55efa497fa541"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4549a76725f2e4c013e4d57018366109" id="r_a4549a76725f2e4c013e4d57018366109"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_n_buffer.html#a4549a76725f2e4c013e4d57018366109">available</a> ()</td></tr>
 <tr class="memdesc:a4549a76725f2e4c013e4d57018366109"><td class="mdescLeft">&#160;</td><td class="mdescRight">determines the available entries for the current read buffer  <br /></td></tr>
@@ -209,7 +209,9 @@ Protected Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T = uint8_t&gt;<br />
 class audio_tools::NBuffer&lt; T &gt;</div><p>A N buffer. If count=2 we create a DoubleBuffer, if count=3 a TripleBuffer etc. </p>
-<dl class="section note"><dt>Note</dt><dd>This class is not thread safe: the internal queues are plain, non-atomic structures, so concurrent producer/consumer access requires external synchronization. For cross-core/cross-thread SPSC use, see <a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html" title="NBuffer which uses FreeRTOS queues to manage the available and filled buffers, making it safe for cro...">SynchronizedNBufferRTOST</a> or SynchronizedNBufferZephyr instead.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This class is not thread safe: the internal queues are plain, non-atomic structures, so concurrent producer/consumer access requires external synchronization. For cross-core/cross-thread SPSC use, see <a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html" title="NBuffer which uses FreeRTOS queues to manage the available and filled buffers, making it safe for cro...">SynchronizedNBufferRTOST</a> or SynchronizedNBufferZephyr instead. </dd>
+<dd>
+The buffer count must be &gt; 1!</dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -393,7 +395,7 @@ template&lt;typename T  = uint8_t&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>returns the address of the start of the phsical read buffer </p>
+<p>returns the address of the start of the actual physical read buffer </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_base_buffer.html#a485fbc8d52782d5212dba90f78c9db5b">BaseBuffer&lt; T &gt;</a>.</p>
 
