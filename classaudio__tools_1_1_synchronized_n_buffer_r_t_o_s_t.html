@@ -99,7 +99,7 @@ Inheritance diagram for SynchronizedNBufferRTOST&lt; T &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad702a9fad4a00b92bd2ec9066fde592e" id="r_ad702a9fad4a00b92bd2ec9066fde592e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html#ad702a9fad4a00b92bd2ec9066fde592e">SynchronizedNBufferRTOST</a> (int bufferSize, int bufferCount, <a class="el" href="_queue_zephyr_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a> writeMaxWait=1000, <a class="el" href="_queue_zephyr_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a> readMaxWait=1000)</td></tr>
+<tr class="memitem:ad702a9fad4a00b92bd2ec9066fde592e" id="r_ad702a9fad4a00b92bd2ec9066fde592e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html#ad702a9fad4a00b92bd2ec9066fde592e">SynchronizedNBufferRTOST</a> (int bufferSize, int bufferCount, <a class="el" href="_buffer_blocking_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a> writeMaxWait=1000, <a class="el" href="_buffer_blocking_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a> readMaxWait=1000)</td></tr>
 <tr class="separator:ad702a9fad4a00b92bd2ec9066fde592e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc3ff7b14f647e9bbfc82c2d3de38c0f" id="r_afc3ff7b14f647e9bbfc82c2d3de38c0f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html#afc3ff7b14f647e9bbfc82c2d3de38c0f">~SynchronizedNBufferRTOST</a> ()</td></tr>
 <tr class="separator:afc3ff7b14f647e9bbfc82c2d3de38c0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -156,10 +156,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad713070b5cf8794cf5feb1b054fa3492" id="r_ad713070b5cf8794cf5feb1b054fa3492"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_n_buffer.html#ad713070b5cf8794cf5feb1b054fa3492">sampleRate</a> ()</td></tr>
 <tr class="memdesc:ad713070b5cf8794cf5feb1b054fa3492"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the actual sample rate  <br /></td></tr>
 <tr class="separator:ad713070b5cf8794cf5feb1b054fa3492"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa174f6955c8d95a5901d6b67601a06c" id="r_aaa174f6955c8d95a5901d6b67601a06c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html#aaa174f6955c8d95a5901d6b67601a06c">setReadMaxWait</a> (<a class="el" href="_queue_zephyr_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a> ticks)</td></tr>
+<tr class="memitem:aaa174f6955c8d95a5901d6b67601a06c" id="r_aaa174f6955c8d95a5901d6b67601a06c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html#aaa174f6955c8d95a5901d6b67601a06c">setReadMaxWait</a> (<a class="el" href="_buffer_blocking_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a> ticks)</td></tr>
 <tr class="memdesc:aaa174f6955c8d95a5901d6b67601a06c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set how long the reader waits for a filled block (0 = non-blocking)  <br /></td></tr>
 <tr class="separator:aaa174f6955c8d95a5901d6b67601a06c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5db6ccd57ec62d95a97b60920c0441d4" id="r_a5db6ccd57ec62d95a97b60920c0441d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html#a5db6ccd57ec62d95a97b60920c0441d4">setWriteMaxWait</a> (<a class="el" href="_queue_zephyr_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a> ticks)</td></tr>
+<tr class="memitem:a5db6ccd57ec62d95a97b60920c0441d4" id="r_a5db6ccd57ec62d95a97b60920c0441d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html#a5db6ccd57ec62d95a97b60920c0441d4">setWriteMaxWait</a> (<a class="el" href="_buffer_blocking_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a> ticks)</td></tr>
 <tr class="memdesc:a5db6ccd57ec62d95a97b60920c0441d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set how long the writer waits for a free block (0 = non-blocking)  <br /></td></tr>
 <tr class="separator:a5db6ccd57ec62d95a97b60920c0441d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b6b70701c46e22849f0f363861351cd" id="r_a0b6b70701c46e22849f0f363861351cd"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html#a0b6b70701c46e22849f0f363861351cd">size</a> ()</td></tr>
@@ -212,13 +212,13 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ae165e0f4094ec0f4e38d57d6e38667eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ebec82554144ddc6ae2bb08ab3728cd" id="r_a8ebec82554144ddc6ae2bb08ab3728cd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_queue_r_t_o_s.html">QueueRTOS</a>&lt; <a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html#a8ebec82554144ddc6ae2bb08ab3728cd">filled_queue_</a> {0, 1000 , 0}</td></tr>
 <tr class="separator:a8ebec82554144ddc6ae2bb08ab3728cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95ea298882b0a3c400be3c204e4137c4" id="r_a95ea298882b0a3c400be3c204e4137c4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_queue_zephyr_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html#a95ea298882b0a3c400be3c204e4137c4">read_max_wait_</a> = 1000</td></tr>
+<tr class="memitem:a95ea298882b0a3c400be3c204e4137c4" id="r_a95ea298882b0a3c400be3c204e4137c4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_buffer_blocking_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html#a95ea298882b0a3c400be3c204e4137c4">read_max_wait_</a> = 1000</td></tr>
 <tr class="separator:a95ea298882b0a3c400be3c204e4137c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4c1860763a039161b4cde25e751e403" id="r_ae4c1860763a039161b4cde25e751e403"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_n_buffer.html#ae4c1860763a039161b4cde25e751e403">sample_count</a></td></tr>
 <tr class="separator:ae4c1860763a039161b4cde25e751e403"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07795b64998e93a085d14a540fbee91c" id="r_a07795b64998e93a085d14a540fbee91c"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_n_buffer.html#a07795b64998e93a085d14a540fbee91c">start_time</a></td></tr>
 <tr class="separator:a07795b64998e93a085d14a540fbee91c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3efff7ef0b98fa605c77e127c944ceaf" id="r_a3efff7ef0b98fa605c77e127c944ceaf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_queue_zephyr_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html#a3efff7ef0b98fa605c77e127c944ceaf">write_max_wait_</a> = 1000</td></tr>
+<tr class="memitem:a3efff7ef0b98fa605c77e127c944ceaf" id="r_a3efff7ef0b98fa605c77e127c944ceaf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_buffer_blocking_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html#a3efff7ef0b98fa605c77e127c944ceaf">write_max_wait_</a> = 1000</td></tr>
 <tr class="separator:a3efff7ef0b98fa605c77e127c944ceaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -259,13 +259,13 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="_queue_zephyr_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="_buffer_blocking_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a>&#160;</td>
           <td class="paramname"><em>writeMaxWait</em> = <code>1000</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="_queue_zephyr_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="_buffer_blocking_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a>&#160;</td>
           <td class="paramname"><em>readMaxWait</em> = <code>1000</code>&#160;</td>
         </tr>
         <tr>
@@ -1116,7 +1116,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="memname">void setReadMaxWait </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="_queue_zephyr_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="_buffer_blocking_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a>&#160;</td>
           <td class="paramname"><em>ticks</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1146,7 +1146,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="memname">void setWriteMaxWait </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="_queue_zephyr_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="_buffer_blocking_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a>&#160;</td>
           <td class="paramname"><em>ticks</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1259,7 +1259,7 @@ template&lt;typename T &gt; </div>
 
 <p>Fills the buffer data. </p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#abbf71ea4af74621fee6e0dfbed215245">BufferRTOS&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_synchronized_buffer.html#abbf71ea4af74621fee6e0dfbed215245">SynchronizedBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_redis_buffer.html#aad1958ec38b63a35ddc8209d646f1ed0">RedisBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_p2040_t.html#aad1958ec38b63a35ddc8209d646f1ed0">BufferRP2040T&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_zephyr.html#aad1958ec38b63a35ddc8209d646f1ed0">BufferZephyr&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#aad1958ec38b63a35ddc8209d646f1ed0">SingleBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#a253ac722a091f616d55fca934f4c1778">RingBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer_file.html#aad1958ec38b63a35ddc8209d646f1ed0">RingBufferFile&lt; File, T &gt;</a>, <a class="el" href="classaudio__tools_1_1_n_buffer_file.html#aad1958ec38b63a35ddc8209d646f1ed0">NBufferFile&lt; File, T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_dynamic_multi_buffer.html#aad1958ec38b63a35ddc8209d646f1ed0">DynamicMultiBuffer&lt; T, BufferType &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_buffer_blocking.html#abbf71ea4af74621fee6e0dfbed215245">BufferBlocking&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#abbf71ea4af74621fee6e0dfbed215245">BufferRTOS&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_synchronized_buffer.html#abbf71ea4af74621fee6e0dfbed215245">SynchronizedBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_redis_buffer.html#aad1958ec38b63a35ddc8209d646f1ed0">RedisBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_p2040_t.html#aad1958ec38b63a35ddc8209d646f1ed0">BufferRP2040T&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_zephyr.html#aad1958ec38b63a35ddc8209d646f1ed0">BufferZephyr&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#aad1958ec38b63a35ddc8209d646f1ed0">SingleBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#a253ac722a091f616d55fca934f4c1778">RingBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer_file.html#aad1958ec38b63a35ddc8209d646f1ed0">RingBufferFile&lt; File, T &gt;</a>, <a class="el" href="classaudio__tools_1_1_n_buffer_file.html#aad1958ec38b63a35ddc8209d646f1ed0">NBufferFile&lt; File, T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_dynamic_multi_buffer.html#aad1958ec38b63a35ddc8209d646f1ed0">DynamicMultiBuffer&lt; T, BufferType &gt;</a>.</p>
 
 </div>
 </div>
@@ -1494,7 +1494,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="_queue_zephyr_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a> read_max_wait_ = 1000</td>
+          <td class="memname"><a class="el" href="_buffer_blocking_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a> read_max_wait_ = 1000</td>
         </tr>
       </table>
   </td>
@@ -1562,7 +1562,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="_queue_zephyr_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a> write_max_wait_ = 1000</td>
+          <td class="memname"><a class="el" href="_buffer_blocking_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a> write_max_wait_ = 1000</td>
         </tr>
       </table>
   </td>

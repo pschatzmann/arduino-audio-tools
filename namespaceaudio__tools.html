@@ -588,6 +588,9 @@ size_t size)</a> and <a class="el" href="classaudio__tools_1_1_base_stream.html#
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_b_spline_interpolator.html">BSplineInterpolator</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cubic B-spline interpolation using y[0]..y[3].  <a href="structaudio__tools_1_1_b_spline_interpolator.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffer_blocking.html">BufferBlocking</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffer implementation which provides the same blocking, thread-safe semantics as <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html" title="Buffer implementation which is using a FreeRTOS StreamBuffer. The default allocator uses psram is ava...">BufferRTOS</a> (ESP32/STM32) and <a class="el" href="classaudio__tools_1_1_buffer_zephyr.html" title="Buffer implementation using Zephyr semaphores + mutex as a bounded ring buffer.">BufferZephyr</a>, for platforms that have no native blocking stream buffer primitive - built on a SpinLock-protected <a class="el" href="classaudio__tools_1_1_ring_buffer.html" title="Implements a typed Ringbuffer.">RingBuffer</a> plus a delay(1) polling wait loop.  <a href="classaudio__tools_1_1_buffer_blocking.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffered_array.html">BufferedArray</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class which is usfull ot provide incremental data access e.g. for EdgeImpulse which request data with an offset and length starting from 0 up to the buffer length, restarting at 0 again.  <a href="classaudio__tools_1_1_buffered_array.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2511,8 +2514,8 @@ Typedefs</h2></td></tr>
 <tr class="memdesc:ga14694aaf4d36cc9526a528a395f2f258"><td class="mdescLeft">&#160;</td><td class="mdescRight">RP2040 specific buffer for audio data.  <br /></td></tr>
 <tr class="separator:ga14694aaf4d36cc9526a528a395f2f258"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aecc7b53598b3ee622776dcdc48051324" id="r_aecc7b53598b3ee622776dcdc48051324"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:aecc7b53598b3ee622776dcdc48051324"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aecc7b53598b3ee622776dcdc48051324">BufferRTOS</a> = <a class="el" href="classaudio__tools_1_1_buffer_zephyr.html">BufferZephyr</a>&lt; T &gt;</td></tr>
-<tr class="memdesc:aecc7b53598b3ee622776dcdc48051324"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compatibility typedef for RTOS-based buffer naming.  <br /></td></tr>
+<tr class="memitem:aecc7b53598b3ee622776dcdc48051324"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aecc7b53598b3ee622776dcdc48051324">BufferRTOS</a> = <a class="el" href="classaudio__tools_1_1_buffer_blocking.html">BufferBlocking</a>&lt; T &gt;</td></tr>
+<tr class="memdesc:aecc7b53598b3ee622776dcdc48051324"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template alias so code written against <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html" title="Buffer implementation which is using a FreeRTOS StreamBuffer. The default allocator uses psram is ava...">BufferRTOS</a> (ESP32/STM32 FreeRTOS naming) also builds on platforms without FreeRTOS.  <br /></td></tr>
 <tr class="separator:aecc7b53598b3ee622776dcdc48051324"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4a5cd97442eb14f9966936adcc47210" id="r_ae4a5cd97442eb14f9966936adcc47210"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ae4a5cd97442eb14f9966936adcc47210">CallbackConverter</a> = <a class="el" href="classaudio__tools_1_1_callback_converter_t.html">CallbackConverterT</a>&lt; int16_t &gt;</td></tr>
 <tr class="memdesc:ae4a5cd97442eb14f9966936adcc47210"><td class="mdescLeft">&#160;</td><td class="mdescRight">CallbackConverter with int16_t as default type.  <br /></td></tr>
@@ -2655,6 +2658,10 @@ Typedefs</h2></td></tr>
 <tr class="memitem:ga4faf021140b432b9c282f7cd72026390" id="r_ga4faf021140b432b9c282f7cd72026390"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__io.html#ga4faf021140b432b9c282f7cd72026390">SPDIFStream</a> = <a class="el" href="classaudio__tools_1_1_s_p_d_i_f_output.html">SPDIFOutput</a></td></tr>
 <tr class="memdesc:ga4faf021140b432b9c282f7cd72026390"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias for <a class="el" href="classaudio__tools_1_1_s_p_d_i_f_output.html" title="Output as 16 bit stereo SPDIF on the I2S data output pin. For the time beeing only the ESP32 is offic...">SPDIFOutput</a> for backward compatibility.  <br /></td></tr>
 <tr class="separator:ga4faf021140b432b9c282f7cd72026390"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af295a6c00b7c1e6d0d8424fb18979269" id="r_af295a6c00b7c1e6d0d8424fb18979269"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:af295a6c00b7c1e6d0d8424fb18979269"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#af295a6c00b7c1e6d0d8424fb18979269">StreamBuffer</a> = <a class="el" href="classaudio__tools_1_1_buffer_blocking.html">BufferBlocking</a>&lt; T &gt;</td></tr>
+<tr class="memdesc:af295a6c00b7c1e6d0d8424fb18979269"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default thread-safe, blocking stream buffer for this platform.  <br /></td></tr>
+<tr class="separator:af295a6c00b7c1e6d0d8424fb18979269"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaa917267e241cc74cd4610bf8674a6e93" id="r_gaa917267e241cc74cd4610bf8674a6e93"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__tools.html#gaa917267e241cc74cd4610bf8674a6e93">StreamCopy</a> = <a class="el" href="classaudio__tools_1_1_stream_copy_t.html">StreamCopyT</a>&lt; uint8_t &gt;</td></tr>
 <tr class="memdesc:gaa917267e241cc74cd4610bf8674a6e93"><td class="mdescLeft">&#160;</td><td class="mdescRight">We provide the typeless StreamCopy.  <br /></td></tr>
 <tr class="separator:gaa917267e241cc74cd4610bf8674a6e93"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2662,8 +2669,8 @@ Typedefs</h2></td></tr>
 <tr class="memdesc:ga8c13e7f0810a3a24e6da3f1412382dda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sample size type optimized for microcontrollers.  <br /></td></tr>
 <tr class="separator:ga8c13e7f0810a3a24e6da3f1412382dda"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6badb8387c5232569f157da6ee2045f6" id="r_a6badb8387c5232569f157da6ee2045f6"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:a6badb8387c5232569f157da6ee2045f6"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a6badb8387c5232569f157da6ee2045f6">SynchronizedBufferRTOS</a> = <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html">BufferRTOS</a>&lt; T &gt;</td></tr>
-<tr class="memdesc:a6badb8387c5232569f157da6ee2045f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template alias for RTOS-based synchronized buffer.  <br /></td></tr>
+<tr class="memitem:a6badb8387c5232569f157da6ee2045f6"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a6badb8387c5232569f157da6ee2045f6">SynchronizedBufferRTOS</a> = <a class="el" href="classaudio__tools_1_1_buffer_blocking.html">BufferBlocking</a>&lt; T &gt;</td></tr>
+<tr class="memdesc:a6badb8387c5232569f157da6ee2045f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template alias for a synchronized buffer, matching the RTOS naming.  <br /></td></tr>
 <tr class="separator:a6badb8387c5232569f157da6ee2045f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gac80f4c14d351d7280ded69fc83fcddd9" id="r_gac80f4c14d351d7280ded69fc83fcddd9"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__buffers.html#gac80f4c14d351d7280ded69fc83fcddd9">SynchronizedNBuffer</a> = <a class="el" href="group__buffers.html#ga21c5dfc69ca6280a09fa2cd0bf6243d7">SynchronizedNBufferRTOS</a></td></tr>
 <tr class="memdesc:gac80f4c14d351d7280ded69fc83fcddd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default synchronized buffer alias.  <br /></td></tr>
@@ -3441,7 +3448,7 @@ Functions</h2></td></tr>
 <tr class="memitem:a258e123b91169a720b1671dfa473ef7b"><td class="memTemplItemLeft" align="right" valign="top">size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a258e123b91169a720b1671dfa473ef7b">readSamples</a> (<a class="el" href="class_stream.html">Stream</a> *p_stream, T *data, int samples, int retryCount=-1)</td></tr>
 <tr class="memdesc:a258e123b91169a720b1671dfa473ef7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">guaranteed to return the requested data  <br /></td></tr>
 <tr class="separator:a258e123b91169a720b1671dfa473ef7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acdb2313826f685c37f339d355d85fe35" id="r_acdb2313826f685c37f339d355d85fe35"><td class="memItemLeft" align="right" valign="top">k_timeout_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#acdb2313826f685c37f339d355d85fe35">rtosTimeoutFromTicks</a> (<a class="el" href="_queue_zephyr_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a> ticks)</td></tr>
+<tr class="memitem:acdb2313826f685c37f339d355d85fe35" id="r_acdb2313826f685c37f339d355d85fe35"><td class="memItemLeft" align="right" valign="top">k_timeout_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#acdb2313826f685c37f339d355d85fe35">rtosTimeoutFromTicks</a> (<a class="el" href="_buffer_blocking_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a> ticks)</td></tr>
 <tr class="separator:acdb2313826f685c37f339d355d85fe35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga8c528baf37154d347366083f0f816846" id="r_ga8c528baf37154d347366083f0f816846"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__basic.html#ga8c528baf37154d347366083f0f816846">stop</a> ()</td></tr>
 <tr class="memdesc:ga8c528baf37154d347366083f0f816846"><td class="mdescLeft">&#160;</td><td class="mdescRight">stops any further processing by spinning in an endless loop  <br /></td></tr>
@@ -3487,7 +3494,7 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a142a50ac852c3b35cdb5a39b10d7a53b" id="r_a142a50ac852c3b35cdb5a39b10d7a53b"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html">BufferRTOS</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a142a50ac852c3b35cdb5a39b10d7a53b">a2dp_buffer</a> {0, <a class="el" href="_audio_tools_config_8h.html#aacdd025528d20ebb44b66dbc05ba65e0">A2DP_BUFFER_SIZE</a>, <a class="el" href="_queue_zephyr_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a>, <a class="el" href="_queue_zephyr_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a>}</td></tr>
+<tr class="memitem:a142a50ac852c3b35cdb5a39b10d7a53b" id="r_a142a50ac852c3b35cdb5a39b10d7a53b"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html">BufferRTOS</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a142a50ac852c3b35cdb5a39b10d7a53b">a2dp_buffer</a> {0, <a class="el" href="_audio_tools_config_8h.html#aacdd025528d20ebb44b66dbc05ba65e0">A2DP_BUFFER_SIZE</a>, <a class="el" href="_buffer_blocking_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a>, <a class="el" href="_buffer_blocking_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a>}</td></tr>
 <tr class="separator:a142a50ac852c3b35cdb5a39b10d7a53b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae49dcee0fc374b24fca8634e3f50a8a6" id="r_ae49dcee0fc374b24fca8634e3f50a8a6"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classaudio__tools_1_1_a2_d_p_stream.html">A2DPStream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ae49dcee0fc374b24fca8634e3f50a8a6">A2DPStream_self</a> =nullptr</td></tr>
 <tr class="separator:ae49dcee0fc374b24fca8634e3f50a8a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -3829,6 +3836,7 @@ template&lt;class T &gt; </div>
       </table>
 </div><div class="memdoc">
 
+<p>Template alias so code written against <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html" title="Buffer implementation which is using a FreeRTOS StreamBuffer. The default allocator uses psram is ava...">BufferRTOS</a> (ESP32/STM32 FreeRTOS naming) also builds on platforms without FreeRTOS. </p>
 <p>Compatibility typedef for RTOS-based buffer naming. </p>
 
 </div>
@@ -4386,6 +4394,24 @@ template&lt;class T  = int16_t&gt; </div>
 
 </div>
 </div>
+<a id="af295a6c00b7c1e6d0d8424fb18979269" name="af295a6c00b7c1e6d0d8424fb18979269"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af295a6c00b7c1e6d0d8424fb18979269">&#9670;&#160;</a></span>StreamBuffer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespaceaudio__tools.html#af295a6c00b7c1e6d0d8424fb18979269">StreamBuffer</a> =  <a class="el" href="classaudio__tools_1_1_buffer_zephyr.html">BufferZephyr</a>&lt;T&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Default thread-safe, blocking stream buffer for this platform. </p>
+
+</div>
+</div>
 <a id="a6badb8387c5232569f157da6ee2045f6" name="a6badb8387c5232569f157da6ee2045f6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6badb8387c5232569f157da6ee2045f6">&#9670;&#160;</a></span>SynchronizedBufferRTOS</h2>
 
@@ -4400,6 +4426,7 @@ template&lt;class T &gt; </div>
       </table>
 </div><div class="memdoc">
 
+<p>Template alias for a synchronized buffer, matching the RTOS naming. </p>
 <p>Template alias for RTOS-based synchronized buffer. </p>
 
 </div>
@@ -9215,7 +9242,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="memname">k_timeout_t rtosTimeoutFromTicks </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="_queue_zephyr_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="_buffer_blocking_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a>&#160;</td>
           <td class="paramname"><em>ticks</em></td><td>)</td>
           <td></td>
         </tr>
@@ -9553,7 +9580,7 @@ template&lt;typename T , class P &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html">BufferRTOS</a>&lt;uint8_t&gt; a2dp_buffer {0, <a class="el" href="_audio_tools_config_8h.html#aacdd025528d20ebb44b66dbc05ba65e0">A2DP_BUFFER_SIZE</a>, <a class="el" href="_queue_zephyr_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a>, <a class="el" href="_queue_zephyr_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a>}</td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html">BufferRTOS</a>&lt;uint8_t&gt; a2dp_buffer {0, <a class="el" href="_audio_tools_config_8h.html#aacdd025528d20ebb44b66dbc05ba65e0">A2DP_BUFFER_SIZE</a>, <a class="el" href="_buffer_blocking_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a>, <a class="el" href="_buffer_blocking_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a>}</td>
         </tr>
       </table>
   </td>

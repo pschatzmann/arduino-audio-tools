@@ -35,12 +35,13 @@ var searchData=
   ['boost_32',['Boost',['../classaudio__tools_1_1_boost.html',1,'audio_tools']]],
   ['box_33',['Box',['../structaudio__tools_1_1_m_p4_parser_1_1_box.html',1,'audio_tools::MP4Parser']]],
   ['bsplineinterpolator_34',['BSplineInterpolator',['../structaudio__tools_1_1_b_spline_interpolator.html',1,'audio_tools']]],
-  ['bufferedarray_35',['BufferedArray',['../classaudio__tools_1_1_buffered_array.html',1,'audio_tools']]],
-  ['bufferedstream_36',['BufferedStream',['../classaudio__tools_1_1_buffered_stream.html',1,'audio_tools']]],
-  ['bufferedtaskstream_37',['BufferedTaskStream',['../classaudio__tools_1_1_buffered_task_stream.html',1,'audio_tools']]],
-  ['bufferedwindow_38',['BufferedWindow',['../classaudio__tools_1_1_buffered_window.html',1,'audio_tools']]],
-  ['bufferrp2040t_39',['BufferRP2040T',['../classaudio__tools_1_1_buffer_r_p2040_t.html',1,'audio_tools']]],
-  ['bufferrtos_40',['BufferRTOS',['../classaudio__tools_1_1_buffer_r_t_o_s.html',1,'audio_tools']]],
-  ['bufferrtos_3c_20uint8_5ft_20_3e_41',['BufferRTOS&lt; uint8_t &gt;',['../classaudio__tools_1_1_buffer_r_t_o_s.html',1,'audio_tools']]],
-  ['bufferzephyr_42',['BufferZephyr',['../classaudio__tools_1_1_buffer_zephyr.html',1,'audio_tools']]]
+  ['bufferblocking_35',['BufferBlocking',['../classaudio__tools_1_1_buffer_blocking.html',1,'audio_tools']]],
+  ['bufferedarray_36',['BufferedArray',['../classaudio__tools_1_1_buffered_array.html',1,'audio_tools']]],
+  ['bufferedstream_37',['BufferedStream',['../classaudio__tools_1_1_buffered_stream.html',1,'audio_tools']]],
+  ['bufferedtaskstream_38',['BufferedTaskStream',['../classaudio__tools_1_1_buffered_task_stream.html',1,'audio_tools']]],
+  ['bufferedwindow_39',['BufferedWindow',['../classaudio__tools_1_1_buffered_window.html',1,'audio_tools']]],
+  ['bufferrp2040t_40',['BufferRP2040T',['../classaudio__tools_1_1_buffer_r_p2040_t.html',1,'audio_tools']]],
+  ['bufferrtos_41',['BufferRTOS',['../classaudio__tools_1_1_buffer_r_t_o_s.html',1,'audio_tools']]],
+  ['bufferrtos_3c_20uint8_5ft_20_3e_42',['BufferRTOS&lt; uint8_t &gt;',['../classaudio__tools_1_1_buffer_r_t_o_s.html',1,'audio_tools']]],
+  ['bufferzephyr_43',['BufferZephyr',['../classaudio__tools_1_1_buffer_zephyr.html',1,'audio_tools']]]
 ];

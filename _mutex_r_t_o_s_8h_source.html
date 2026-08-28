@@ -112,7 +112,7 @@ $(document).ready(function() { init_codefold(0); });
 </div>
 <div class="foldopen" id="foldopen00034" data-start="{" data-end="}">
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_mutex_r_t_o_s.html#ad81318257fd78328c5c86fa6a3a861dd">   34</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_mutex_r_t_o_s.html#ad81318257fd78328c5c86fa6a3a861dd">lock</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    xSemaphoreTake(<a class="code hl_variable" href="classaudio__tools_1_1_mutex_r_t_o_s.html#a0639b448c4862618f597670523ef9975">xSemaphore</a>, <a class="code hl_define" href="_queue_zephyr_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a>);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    xSemaphoreTake(<a class="code hl_variable" href="classaudio__tools_1_1_mutex_r_t_o_s.html#a0639b448c4862618f597670523ef9975">xSemaphore</a>, <a class="code hl_define" href="_buffer_blocking_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a>);</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  }</div>
 </div>
 <div class="foldopen" id="foldopen00037" data-start="{" data-end="}">
@@ -142,7 +142,7 @@ $(document).ready(function() { init_codefold(0); });
 </div>
 <div class="foldopen" id="foldopen00061" data-start="{" data-end="}">
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_mutex_recursive_r_t_o_s.html#ad81318257fd78328c5c86fa6a3a861dd">   61</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_mutex_recursive_r_t_o_s.html#ad81318257fd78328c5c86fa6a3a861dd">lock</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    xSemaphoreTakeRecursive(<a class="code hl_variable" href="classaudio__tools_1_1_mutex_recursive_r_t_o_s.html#a0639b448c4862618f597670523ef9975">xSemaphore</a>, <a class="code hl_define" href="_queue_zephyr_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a>);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    xSemaphoreTakeRecursive(<a class="code hl_variable" href="classaudio__tools_1_1_mutex_recursive_r_t_o_s.html#a0639b448c4862618f597670523ef9975">xSemaphore</a>, <a class="code hl_define" href="_buffer_blocking_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a>);</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  }</div>
 </div>
 <div class="foldopen" id="foldopen00064" data-start="{" data-end="}">
@@ -161,8 +161,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>}</div>
 <div class="ttc" id="a_audio_tools_config_8h_html"><div class="ttname"><a href="_audio_tools_config_8h.html">AudioToolsConfig.h</a></div></div>
+<div class="ttc" id="a_buffer_blocking_8h_html_a72723ba1e4a85ca14f25c2b9e066613d"><div class="ttname"><a href="_buffer_blocking_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a></div><div class="ttdeci">#define portMAX_DELAY</div><div class="ttdef"><b>Definition</b> BufferBlocking.h:14</div></div>
 <div class="ttc" id="a_mutex_8h_html"><div class="ttname"><a href="_mutex_8h.html">Mutex.h</a></div></div>
-<div class="ttc" id="a_queue_zephyr_8h_html_a72723ba1e4a85ca14f25c2b9e066613d"><div class="ttname"><a href="_queue_zephyr_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a></div><div class="ttdeci">#define portMAX_DELAY</div><div class="ttdef"><b>Definition</b> QueueZephyr.h:14</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_mutex_base_html"><div class="ttname"><a href="classaudio__tools_1_1_mutex_base.html">audio_tools::MutexBase</a></div><div class="ttdoc">Empty Mutex implementation which does nothing.</div><div class="ttdef"><b>Definition</b> Mutex.h:15</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_mutex_r_t_o_s_html"><div class="ttname"><a href="classaudio__tools_1_1_mutex_r_t_o_s.html">audio_tools::MutexRTOS</a></div><div class="ttdoc">Mutex implemntation using FreeRTOS.</div><div class="ttdef"><b>Definition</b> MutexRTOS.h:25</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_mutex_r_t_o_s_html_a0639b448c4862618f597670523ef9975"><div class="ttname"><a href="classaudio__tools_1_1_mutex_r_t_o_s.html#a0639b448c4862618f597670523ef9975">audio_tools::MutexRTOS::xSemaphore</a></div><div class="ttdeci">SemaphoreHandle_t xSemaphore</div><div class="ttdef"><b>Definition</b> MutexRTOS.h:42</div></div>

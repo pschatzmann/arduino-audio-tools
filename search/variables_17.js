@@ -55,7 +55,7 @@ var searchData=
   ['writeheadindex_52',['writeHeadIndex',['../classaudio__tools_1_1_simple_delay.html#a775bf7c801e875bdc3cd6b425c1c2d2a',1,'audio_tools::SimpleDelay']]],
   ['writer_53',['writer',['../structaudio__tools_1_1_tf_lite_config.html#a17e8068657f29a56c68d5124c275a7dd',1,'audio_tools::TfLiteConfig']]],
   ['writer_5fptr_54',['writer_ptr',['../classaudio__tools_1_1_encoded_audio_output.html#a5893e22e84a0f40d771d1d8d0cb8e070',1,'audio_tools::EncodedAudioOutput']]],
-  ['writewait_55',['writewait',['../classaudio__tools_1_1_buffer_r_t_o_s.html#a1d12dbda5da27a49c3a03b730731693e',1,'audio_tools::BufferRTOS::writeWait'],['../classaudio__tools_1_1_buffer_zephyr.html#a7ec9bb4c39399295073761466d0c3b16',1,'audio_tools::BufferZephyr::writeWait']]],
+  ['writewait_55',['writewait',['../classaudio__tools_1_1_buffer_blocking.html#a7ec9bb4c39399295073761466d0c3b16',1,'audio_tools::BufferBlocking::writeWait'],['../classaudio__tools_1_1_buffer_r_t_o_s.html#a1d12dbda5da27a49c3a03b730731693e',1,'audio_tools::BufferRTOS::writeWait'],['../classaudio__tools_1_1_buffer_zephyr.html#a7ec9bb4c39399295073761466d0c3b16',1,'audio_tools::BufferZephyr::writeWait']]],
   ['written_56',['written',['../classaudio__tools_1_1_a_p_t_x_decoder.html#ac7ab1030344ab638a27ba415c914288a',1,'audio_tools::APTXDecoder']]],
   ['wtmp_57',['wtmp',['../structaudio__tools_1_1_echo_state.html#a8c042532a53b6913c83a113278c1ec86',1,'audio_tools::EchoState']]],
   ['wvalue_58',['wValue',['../structaudio__tools_1_1_usb_setup_packet.html#a7383d0165ad8eab48aa239c005199121',1,'audio_tools::UsbSetupPacket']]]

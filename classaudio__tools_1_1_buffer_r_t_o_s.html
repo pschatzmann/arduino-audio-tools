@@ -98,7 +98,7 @@ Inheritance diagram for BufferRTOS&lt; T &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aff67a34e92adcf4b464d55ccf2991f7a" id="r_aff67a34e92adcf4b464d55ccf2991f7a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#aff67a34e92adcf4b464d55ccf2991f7a">BufferRTOS</a> (size_t streamBufferSize, size_t xTriggerLevel=1, <a class="el" href="_queue_zephyr_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a> writeMaxWait=<a class="el" href="_queue_zephyr_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a>, <a class="el" href="_queue_zephyr_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a> readMaxWait=<a class="el" href="_queue_zephyr_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a>, <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;allocator=<a class="el" href="namespaceaudio__tools.html#a02e30d9ec0ddcc5d9e9f1d2324b8cca8">DefaultAllocator</a>)</td></tr>
+<tr class="memitem:aff67a34e92adcf4b464d55ccf2991f7a" id="r_aff67a34e92adcf4b464d55ccf2991f7a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#aff67a34e92adcf4b464d55ccf2991f7a">BufferRTOS</a> (size_t streamBufferSize, size_t xTriggerLevel=1, <a class="el" href="_buffer_blocking_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a> writeMaxWait=<a class="el" href="_buffer_blocking_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a>, <a class="el" href="_buffer_blocking_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a> readMaxWait=<a class="el" href="_buffer_blocking_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a>, <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;allocator=<a class="el" href="namespaceaudio__tools.html#a02e30d9ec0ddcc5d9e9f1d2324b8cca8">DefaultAllocator</a>)</td></tr>
 <tr class="separator:aff67a34e92adcf4b464d55ccf2991f7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1a33d581fbbb387c700aa9bcc181fe6" id="r_ae1a33d581fbbb387c700aa9bcc181fe6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#ae1a33d581fbbb387c700aa9bcc181fe6">~BufferRTOS</a> ()</td></tr>
 <tr class="separator:ae1a33d581fbbb387c700aa9bcc181fe6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -158,11 +158,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aa1a1e4ba18213733c8f6016dcb403365"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e9bf46a66571db956089334e04ef7ec" id="r_a3e9bf46a66571db956089334e04ef7ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#a3e9bf46a66571db956089334e04ef7ec">setReadFromISR</a> (bool active)</td></tr>
 <tr class="separator:a3e9bf46a66571db956089334e04ef7ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa174f6955c8d95a5901d6b67601a06c" id="r_aaa174f6955c8d95a5901d6b67601a06c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#aaa174f6955c8d95a5901d6b67601a06c">setReadMaxWait</a> (<a class="el" href="_queue_zephyr_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a> ticks)</td></tr>
+<tr class="memitem:aaa174f6955c8d95a5901d6b67601a06c" id="r_aaa174f6955c8d95a5901d6b67601a06c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#aaa174f6955c8d95a5901d6b67601a06c">setReadMaxWait</a> (<a class="el" href="_buffer_blocking_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a> ticks)</td></tr>
 <tr class="separator:aaa174f6955c8d95a5901d6b67601a06c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad23fafa6e227a97c43b295ad8fc9aa07" id="r_ad23fafa6e227a97c43b295ad8fc9aa07"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#ad23fafa6e227a97c43b295ad8fc9aa07">setWriteFromISR</a> (bool active)</td></tr>
 <tr class="separator:ad23fafa6e227a97c43b295ad8fc9aa07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5db6ccd57ec62d95a97b60920c0441d4" id="r_a5db6ccd57ec62d95a97b60920c0441d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#a5db6ccd57ec62d95a97b60920c0441d4">setWriteMaxWait</a> (<a class="el" href="_queue_zephyr_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a> ticks)</td></tr>
+<tr class="memitem:a5db6ccd57ec62d95a97b60920c0441d4" id="r_a5db6ccd57ec62d95a97b60920c0441d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#a5db6ccd57ec62d95a97b60920c0441d4">setWriteMaxWait</a> (<a class="el" href="_buffer_blocking_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a> ticks)</td></tr>
 <tr class="separator:a5db6ccd57ec62d95a97b60920c0441d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b6b70701c46e22849f0f363861351cd" id="r_a0b6b70701c46e22849f0f363861351cd"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#a0b6b70701c46e22849f0f363861351cd">size</a> ()</td></tr>
 <tr class="separator:a0b6b70701c46e22849f0f363861351cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -194,7 +194,7 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a8304c4af5da6e830b86d7199dc9a22e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6f67a06e50f87fedb988628f8e2b72f" id="r_aa6f67a06e50f87fedb988628f8e2b72f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#aa6f67a06e50f87fedb988628f8e2b72f">read_from_isr</a> = false</td></tr>
 <tr class="separator:aa6f67a06e50f87fedb988628f8e2b72f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a02327e413b3696c5944c5ee11aacd2" id="r_a9a02327e413b3696c5944c5ee11aacd2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#a9a02327e413b3696c5944c5ee11aacd2">readWait</a> = <a class="el" href="_queue_zephyr_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a></td></tr>
+<tr class="memitem:a9a02327e413b3696c5944c5ee11aacd2" id="r_a9a02327e413b3696c5944c5ee11aacd2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#a9a02327e413b3696c5944c5ee11aacd2">readWait</a> = <a class="el" href="_buffer_blocking_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a></td></tr>
 <tr class="separator:a9a02327e413b3696c5944c5ee11aacd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17bb2ff172a338a93d87534baeeadec0" id="r_a17bb2ff172a338a93d87534baeeadec0"><td class="memItemLeft" align="right" valign="top">StaticStreamBuffer_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#a17bb2ff172a338a93d87534baeeadec0">static_stream_buffer</a></td></tr>
 <tr class="separator:a17bb2ff172a338a93d87534baeeadec0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -202,9 +202,9 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:aa75bad1f2707f138aff57bf2fc0788a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af72d7b8b789a1927b55508cb5e7166ba" id="r_af72d7b8b789a1927b55508cb5e7166ba"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#af72d7b8b789a1927b55508cb5e7166ba">write_from_isr</a> = false</td></tr>
 <tr class="separator:af72d7b8b789a1927b55508cb5e7166ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d12dbda5da27a49c3a03b730731693e" id="r_a1d12dbda5da27a49c3a03b730731693e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#a1d12dbda5da27a49c3a03b730731693e">writeWait</a> = <a class="el" href="_queue_zephyr_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a></td></tr>
+<tr class="memitem:a1d12dbda5da27a49c3a03b730731693e" id="r_a1d12dbda5da27a49c3a03b730731693e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#a1d12dbda5da27a49c3a03b730731693e">writeWait</a> = <a class="el" href="_buffer_blocking_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a></td></tr>
 <tr class="separator:a1d12dbda5da27a49c3a03b730731693e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d9a749ad99ec3d4a6886d5277b9ba87" id="r_a9d9a749ad99ec3d4a6886d5277b9ba87"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_queue_zephyr_8h.html#aa9eb06a38e4c7bf8eaeda3dbd0ae3ebb">BaseType_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#a9d9a749ad99ec3d4a6886d5277b9ba87">xHigherPriorityTaskWoken</a> = <a class="el" href="_queue_zephyr_8h.html#aa56260e937e7e203026707e5ba944273">pdFALSE</a></td></tr>
+<tr class="memitem:a9d9a749ad99ec3d4a6886d5277b9ba87" id="r_a9d9a749ad99ec3d4a6886d5277b9ba87"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_buffer_blocking_8h.html#aa9eb06a38e4c7bf8eaeda3dbd0ae3ebb">BaseType_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#a9d9a749ad99ec3d4a6886d5277b9ba87">xHigherPriorityTaskWoken</a> = <a class="el" href="_buffer_blocking_8h.html#aa56260e937e7e203026707e5ba944273">pdFALSE</a></td></tr>
 <tr class="separator:a9d9a749ad99ec3d4a6886d5277b9ba87"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a731b32e7eeaf5c81459953195bff68c8" id="r_a731b32e7eeaf5c81459953195bff68c8"><td class="memItemLeft" align="right" valign="top">StreamBufferHandle_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#a731b32e7eeaf5c81459953195bff68c8">xStreamBuffer</a> = nullptr</td></tr>
 <tr class="separator:a731b32e7eeaf5c81459953195bff68c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -248,14 +248,14 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="_queue_zephyr_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a>&#160;</td>
-          <td class="paramname"><em>writeMaxWait</em> = <code><a class="el" href="_queue_zephyr_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a></code>, </td>
+          <td class="paramtype"><a class="el" href="_buffer_blocking_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a>&#160;</td>
+          <td class="paramname"><em>writeMaxWait</em> = <code><a class="el" href="_buffer_blocking_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a></code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="_queue_zephyr_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a>&#160;</td>
-          <td class="paramname"><em>readMaxWait</em> = <code><a class="el" href="_queue_zephyr_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a></code>, </td>
+          <td class="paramtype"><a class="el" href="_buffer_blocking_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a>&#160;</td>
+          <td class="paramname"><em>readMaxWait</em> = <code><a class="el" href="_buffer_blocking_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a></code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -961,7 +961,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="memname">void setReadMaxWait </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="_queue_zephyr_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="_buffer_blocking_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a>&#160;</td>
           <td class="paramname"><em>ticks</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1045,7 +1045,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="memname">void setWriteMaxWait </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="_queue_zephyr_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="_buffer_blocking_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a>&#160;</td>
           <td class="paramname"><em>ticks</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1309,7 +1309,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int readWait = <a class="el" href="_queue_zephyr_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a></td>
+          <td class="memname">int readWait = <a class="el" href="_buffer_blocking_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a></td>
         </tr>
       </table>
   </td>
@@ -1405,7 +1405,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int writeWait = <a class="el" href="_queue_zephyr_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a></td>
+          <td class="memname">int writeWait = <a class="el" href="_buffer_blocking_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a></td>
         </tr>
       </table>
   </td>
@@ -1429,7 +1429,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="_queue_zephyr_8h.html#aa9eb06a38e4c7bf8eaeda3dbd0ae3ebb">BaseType_t</a> xHigherPriorityTaskWoken = <a class="el" href="_queue_zephyr_8h.html#aa56260e937e7e203026707e5ba944273">pdFALSE</a></td>
+          <td class="memname"><a class="el" href="_buffer_blocking_8h.html#aa9eb06a38e4c7bf8eaeda3dbd0ae3ebb">BaseType_t</a> xHigherPriorityTaskWoken = <a class="el" href="_buffer_blocking_8h.html#aa56260e937e7e203026707e5ba944273">pdFALSE</a></td>
         </tr>
       </table>
   </td>

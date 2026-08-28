@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: src/AudioTools/Concurrency/Zephyr/QueueZephyr.h File Reference</title>
+<title>arduino-audio-tools: src/AudioTools/Concurrency/BufferBlocking.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,7 +69,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_6e57b9c61a788396f6d83d56e8758cd4.html">Concurrency</a></li><li class="navelem"><a class="el" href="dir_c3b939d46f6766adb16e74ee7f01c97c.html">Zephyr</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_6e57b9c61a788396f6d83d56e8758cd4.html">Concurrency</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -77,22 +77,23 @@ $(function() {
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#define-members">Macros</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
-<a href="#func-members">Functions</a>  </div>
-  <div class="headertitle"><div class="title">QueueZephyr.h File Reference</div></div>
+<a href="#typedef-members">Typedefs</a>  </div>
+  <div class="headertitle"><div class="title">BufferBlocking.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="_allocator_8h_source.html">AudioTools/CoreAudio/AudioBasic/Collections/Allocator.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_audio_tools_config_8h_source.html">AudioToolsConfig.h</a>&quot;</code><br />
-<code>#include &lt;limits.h&gt;</code><br />
-<code>#include &lt;zephyr/kernel.h&gt;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="_audio_tools_config_8h_source.html">AudioToolsConfig.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_audio_tools_2_core_audio_2_audio_logger_8h_source.html">AudioTools/CoreAudio/AudioLogger.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_buffers_8h_source.html">AudioTools/CoreAudio/Buffers.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_allocator_8h_source.html">AudioTools/CoreAudio/AudioBasic/Collections/Allocator.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_mutex_8h_source.html">AudioTools/Concurrency/Mutex.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_lock_guard_8h_source.html">AudioTools/Concurrency/LockGuard.h</a>&quot;</code><br />
 </div>
-<p><a href="_queue_zephyr_8h_source.html">Go to the source code of this file.</a></p>
+<p><a href="_buffer_blocking_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_queue_zephyr.html">QueueZephyr&lt; T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">FIFO <a class="el" href="classaudio__tools_1_1_queue.html" title="FIFO Queue which is based on a List.">Queue</a> implementation based on Zephyr message queues.  <a href="classaudio__tools_1_1_queue_zephyr.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffer_blocking.html">BufferBlocking&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffer implementation which provides the same blocking, thread-safe semantics as <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html" title="Buffer implementation which is using a FreeRTOS StreamBuffer. The default allocator uses psram is ava...">BufferRTOS</a> (ESP32/STM32) and <a class="el" href="classaudio__tools_1_1_buffer_zephyr.html" title="Buffer implementation using Zephyr semaphores + mutex as a bounded ring buffer.">BufferZephyr</a>, for platforms that have no native blocking stream buffer primitive - built on a SpinLock-protected <a class="el" href="classaudio__tools_1_1_ring_buffer.html" title="Implements a typed Ringbuffer.">RingBuffer</a> plus a delay(1) polling wait loop.  <a href="classaudio__tools_1_1_buffer_blocking.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
@@ -103,32 +104,35 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a8285ce53bd6f35d1d0c68cb75af41aac" id="r_a8285ce53bd6f35d1d0c68cb75af41aac"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_queue_zephyr_8h.html#a8285ce53bd6f35d1d0c68cb75af41aac">AUDIO_TOOLS_RTOS_TICK_TYPES_DEFINED</a></td></tr>
+<tr class="memitem:a8285ce53bd6f35d1d0c68cb75af41aac" id="r_a8285ce53bd6f35d1d0c68cb75af41aac"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_buffer_blocking_8h.html#a8285ce53bd6f35d1d0c68cb75af41aac">AUDIO_TOOLS_RTOS_TICK_TYPES_DEFINED</a></td></tr>
 <tr class="separator:a8285ce53bd6f35d1d0c68cb75af41aac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa56260e937e7e203026707e5ba944273" id="r_aa56260e937e7e203026707e5ba944273"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_queue_zephyr_8h.html#aa56260e937e7e203026707e5ba944273">pdFALSE</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memitem:aa56260e937e7e203026707e5ba944273" id="r_aa56260e937e7e203026707e5ba944273"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_buffer_blocking_8h.html#aa56260e937e7e203026707e5ba944273">pdFALSE</a>&#160;&#160;&#160;0</td></tr>
 <tr class="separator:aa56260e937e7e203026707e5ba944273"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7cb1304f96ef54b106ce8071dcefa57" id="r_aa7cb1304f96ef54b106ce8071dcefa57"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_queue_zephyr_8h.html#aa7cb1304f96ef54b106ce8071dcefa57">pdMS_TO_TICKS</a>(ms)&#160;&#160;&#160;(ms)</td></tr>
+<tr class="memitem:aa7cb1304f96ef54b106ce8071dcefa57" id="r_aa7cb1304f96ef54b106ce8071dcefa57"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_buffer_blocking_8h.html#aa7cb1304f96ef54b106ce8071dcefa57">pdMS_TO_TICKS</a>(ms)&#160;&#160;&#160;(ms)</td></tr>
 <tr class="separator:aa7cb1304f96ef54b106ce8071dcefa57"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af268cf937960eb029256bd9c4d949fbe" id="r_af268cf937960eb029256bd9c4d949fbe"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_queue_zephyr_8h.html#af268cf937960eb029256bd9c4d949fbe">pdTRUE</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memitem:af268cf937960eb029256bd9c4d949fbe" id="r_af268cf937960eb029256bd9c4d949fbe"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_buffer_blocking_8h.html#af268cf937960eb029256bd9c4d949fbe">pdTRUE</a>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:af268cf937960eb029256bd9c4d949fbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72723ba1e4a85ca14f25c2b9e066613d" id="r_a72723ba1e4a85ca14f25c2b9e066613d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_queue_zephyr_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a>&#160;&#160;&#160;UINT32_MAX</td></tr>
+<tr class="memitem:a72723ba1e4a85ca14f25c2b9e066613d" id="r_a72723ba1e4a85ca14f25c2b9e066613d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_buffer_blocking_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a>&#160;&#160;&#160;UINT32_MAX</td></tr>
 <tr class="separator:a72723ba1e4a85ca14f25c2b9e066613d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:aa9eb06a38e4c7bf8eaeda3dbd0ae3ebb" id="r_aa9eb06a38e4c7bf8eaeda3dbd0ae3ebb"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_queue_zephyr_8h.html#aa9eb06a38e4c7bf8eaeda3dbd0ae3ebb">BaseType_t</a> = int</td></tr>
+<tr class="memitem:aa9eb06a38e4c7bf8eaeda3dbd0ae3ebb" id="r_aa9eb06a38e4c7bf8eaeda3dbd0ae3ebb"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_buffer_blocking_8h.html#aa9eb06a38e4c7bf8eaeda3dbd0ae3ebb">BaseType_t</a> = int</td></tr>
 <tr class="separator:aa9eb06a38e4c7bf8eaeda3dbd0ae3ebb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a5d245bca6741b3f204c20742ea1e3d" id="r_a5a5d245bca6741b3f204c20742ea1e3d"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:a5a5d245bca6741b3f204c20742ea1e3d"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a5a5d245bca6741b3f204c20742ea1e3d">QueueRTOS</a> = <a class="el" href="classaudio__tools_1_1_queue_zephyr.html">QueueZephyr</a>&lt; T &gt;</td></tr>
-<tr class="memdesc:a5a5d245bca6741b3f204c20742ea1e3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compatibility typedef for RTOS-based queue naming.  <br /></td></tr>
-<tr class="separator:a5a5d245bca6741b3f204c20742ea1e3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af5484fc4c9c5ce77314d8589b5a3bab6" id="r_af5484fc4c9c5ce77314d8589b5a3bab6"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_queue_zephyr_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a> = uint32_t</td></tr>
+<tr class="memitem:aecc7b53598b3ee622776dcdc48051324" id="r_aecc7b53598b3ee622776dcdc48051324"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:aecc7b53598b3ee622776dcdc48051324"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aecc7b53598b3ee622776dcdc48051324">BufferRTOS</a> = <a class="el" href="classaudio__tools_1_1_buffer_blocking.html">BufferBlocking</a>&lt; T &gt;</td></tr>
+<tr class="memdesc:aecc7b53598b3ee622776dcdc48051324"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template alias so code written against <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html" title="Buffer implementation which is using a FreeRTOS StreamBuffer. The default allocator uses psram is ava...">BufferRTOS</a> (ESP32/STM32 FreeRTOS naming) also builds on platforms without FreeRTOS.  <br /></td></tr>
+<tr class="separator:aecc7b53598b3ee622776dcdc48051324"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af295a6c00b7c1e6d0d8424fb18979269" id="r_af295a6c00b7c1e6d0d8424fb18979269"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:af295a6c00b7c1e6d0d8424fb18979269"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#af295a6c00b7c1e6d0d8424fb18979269">StreamBuffer</a> = <a class="el" href="classaudio__tools_1_1_buffer_blocking.html">BufferBlocking</a>&lt; T &gt;</td></tr>
+<tr class="memdesc:af295a6c00b7c1e6d0d8424fb18979269"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default thread-safe, blocking stream buffer for this platform.  <br /></td></tr>
+<tr class="separator:af295a6c00b7c1e6d0d8424fb18979269"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6badb8387c5232569f157da6ee2045f6" id="r_a6badb8387c5232569f157da6ee2045f6"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a6badb8387c5232569f157da6ee2045f6"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a6badb8387c5232569f157da6ee2045f6">SynchronizedBufferRTOS</a> = <a class="el" href="classaudio__tools_1_1_buffer_blocking.html">BufferBlocking</a>&lt; T &gt;</td></tr>
+<tr class="memdesc:a6badb8387c5232569f157da6ee2045f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template alias for a synchronized buffer, matching the RTOS naming.  <br /></td></tr>
+<tr class="separator:a6badb8387c5232569f157da6ee2045f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5484fc4c9c5ce77314d8589b5a3bab6" id="r_af5484fc4c9c5ce77314d8589b5a3bab6"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_buffer_blocking_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a> = uint32_t</td></tr>
 <tr class="separator:af5484fc4c9c5ce77314d8589b5a3bab6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:acdb2313826f685c37f339d355d85fe35" id="r_acdb2313826f685c37f339d355d85fe35"><td class="memItemLeft" align="right" valign="top">k_timeout_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#acdb2313826f685c37f339d355d85fe35">rtosTimeoutFromTicks</a> (<a class="el" href="_buffer_blocking_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a> ticks)</td></tr>
-<tr class="separator:acdb2313826f685c37f339d355d85fe35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a8285ce53bd6f35d1d0c68cb75af41aac" name="a8285ce53bd6f35d1d0c68cb75af41aac"></a>

@@ -14,7 +14,7 @@ var searchData=
   ['assert_11',['assert',['../avr_8h.html#ab2851d907b12a2233b89f8f2c2f7346a',1,'avr.h']]],
   ['audio_5finclude_5fcore_12',['AUDIO_INCLUDE_CORE',['../_audio_tools_config_8h.html#a7dad175829588936f3c83dce9f6596b7',1,'AudioToolsConfig.h']]],
   ['audio_5ftools_5finit_5flogging_13',['AUDIO_TOOLS_INIT_LOGGING',['../_audio_logger_zephyr_8h.html#ae82427a7ab8985b9cb245b6207fe3a36',1,'AudioLoggerZephyr.h']]],
-  ['audio_5ftools_5frtos_5ftick_5ftypes_5fdefined_14',['AUDIO_TOOLS_RTOS_TICK_TYPES_DEFINED',['../_queue_zephyr_8h.html#a8285ce53bd6f35d1d0c68cb75af41aac',1,'QueueZephyr.h']]],
+  ['audio_5ftools_5frtos_5ftick_5ftypes_5fdefined_14',['audio_tools_rtos_tick_types_defined',['../_buffer_blocking_8h.html#a8285ce53bd6f35d1d0c68cb75af41aac',1,'AUDIO_TOOLS_RTOS_TICK_TYPES_DEFINED:&#160;BufferBlocking.h'],['../_queue_zephyr_8h.html#a8285ce53bd6f35d1d0c68cb75af41aac',1,'AUDIO_TOOLS_RTOS_TICK_TYPES_DEFINED:&#160;QueueZephyr.h']]],
   ['audiooutput_15',['AudioOutput',['../_mozzi_stream_8h.html#afc2a2f56c44bd8868cfe3884942637ae',1,'MozziStream.h']]],
   ['audiotools_5fid3_5ftag_5fallow_5fnonascii_16',['AUDIOTOOLS_ID3_TAG_ALLOW_NONASCII',['../_meta_data_i_d3_8h.html#a44805f87d7f39c3ef8b01f9d4b453c35',1,'MetaDataID3.h']]],
   ['audiotools_5fmajor_5fversion_17',['AUDIOTOOLS_MAJOR_VERSION',['../_audio_tools_config_8h.html#a3ed40ae9838f3a20da0ac76a70f08a78',1,'AudioToolsConfig.h']]],
