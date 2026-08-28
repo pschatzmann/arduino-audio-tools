@@ -69,13 +69,17 @@ class KalmanFilter {
    */
   bool begin() {
     X = 0;
+    P = 1.0;
     return true;
   }
 
   /**
    * @brief End or clear the filter (sets the estimate to zero).
    */
-  void end() { X = 0; }
+  void end() {
+    X = 0;
+    P = 1.0;
+  }
 
   /**
    * @brief Updates the filter with a new measurement and returns the filtered

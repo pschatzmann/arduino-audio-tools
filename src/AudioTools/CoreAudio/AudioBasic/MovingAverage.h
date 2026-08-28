@@ -25,9 +25,10 @@ class MovingAverage {
   }
 
   float calculate() {
+    if (this->values.empty()) return 0;
     float sum = 0;
-    for (int i = 0; i < this->values.size(); i++) {
-      sum += this->values[i];
+    for (auto it = this->values.begin(); it != this->values.end(); ++it) {
+      sum += *it;
     }
     return sum / this->values.size();
   }
