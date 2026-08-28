@@ -88,7 +88,7 @@ Macros</h2></td></tr>
 <tr class="memitem:a9f4bf0773c45ad9a9753a1b784a13fbb" id="r_a9f4bf0773c45ad9a9753a1b784a13fbb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_net_8h.html#a9f4bf0773c45ad9a9753a1b784a13fbb">htonll</a>(x)&#160;&#160;&#160;((1==<a class="el" href="_net_8h.html#ae4027a6ad07f13aa12eab285a1b46019">htonl</a>(1)) ? (x) : ((uint64_t)<a class="el" href="_net_8h.html#ae4027a6ad07f13aa12eab285a1b46019">htonl</a>((x) &amp; 0xFFFFFFFF) &lt;&lt; 32) | <a class="el" href="_net_8h.html#ae4027a6ad07f13aa12eab285a1b46019">htonl</a>((x) &gt;&gt; 32))</td></tr>
 <tr class="memdesc:a9f4bf0773c45ad9a9753a1b784a13fbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">support for 64 bytes  <br /></td></tr>
 <tr class="separator:a9f4bf0773c45ad9a9753a1b784a13fbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a51799f5ebb4c7228ef7e95c247030f42" id="r_a51799f5ebb4c7228ef7e95c247030f42"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_net_8h.html#a51799f5ebb4c7228ef7e95c247030f42">htons</a>(x)&#160;&#160;&#160;(((uint16_t)(x)&amp;0xff00) &gt;&gt; 8) | (((uint16_t)(x)&amp;0X00FF) &lt;&lt; 8)</td></tr>
+<tr class="memitem:a51799f5ebb4c7228ef7e95c247030f42" id="r_a51799f5ebb4c7228ef7e95c247030f42"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_net_8h.html#a51799f5ebb4c7228ef7e95c247030f42">htons</a>(x)&#160;&#160;&#160;((((uint16_t)(x)&amp;0xff00) &gt;&gt; 8) | (((uint16_t)(x)&amp;0X00FF) &lt;&lt; 8))</td></tr>
 <tr class="separator:a51799f5ebb4c7228ef7e95c247030f42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac317b3e903719ba02894f1710f7f2439" id="r_ac317b3e903719ba02894f1710f7f2439"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_net_8h.html#ac317b3e903719ba02894f1710f7f2439">ntohl</a>(x)&#160;&#160;&#160;<a class="el" href="_net_8h.html#ae4027a6ad07f13aa12eab285a1b46019">htonl</a>(x)</td></tr>
 <tr class="separator:ac317b3e903719ba02894f1710f7f2439"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -147,7 +147,7 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">x</td><td>)</td>
-          <td>&#160;&#160;&#160;(((uint16_t)(x)&amp;0xff00) &gt;&gt; 8) | (((uint16_t)(x)&amp;0X00FF) &lt;&lt; 8)</td>
+          <td>&#160;&#160;&#160;((((uint16_t)(x)&amp;0xff00) &gt;&gt; 8) | (((uint16_t)(x)&amp;0X00FF) &lt;&lt; 8))</td>
         </tr>
       </table>
 </div><div class="memdoc">
