@@ -724,6 +724,7 @@ class RingBufferFile : public BaseBuffer<T> {
  * non-atomic structures, so concurrent producer/consumer access requires
  * external synchronization. For cross-core/cross-thread SPSC use, see
  * SynchronizedNBufferRTOST or SynchronizedNBufferZephyr instead.
+ * @note The buffer count must be > 1!
  * @ingroup buffers
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -856,7 +857,7 @@ class NBuffer : public BaseBuffer<T> {
     return run_time == 0 ? 0 : sample_count * 1000 / run_time;
   }
 
-  /// returns the address of the start of the phsical read buffer
+  /// returns the address of the start of the actual physical read buffer
   T *address() {
     return actual_read_buffer == nullptr ? nullptr
                                          : actual_read_buffer->address();
@@ -886,6 +887,11 @@ class NBuffer : public BaseBuffer<T> {
   /// allocated or freed to reach the new count.
   virtual bool resize(size_t size, int count) {
     if (buffer_size == size && buffer_count == count) return true;
+
+    if (buffer_count == 1) {
+      LOGE("buffer count=1: not supported, use SingleBuffer or RingBuffer instead");
+      return false;
+    }
 
     if (buffer_size != size) {
       if (buffer_count > 0) {
