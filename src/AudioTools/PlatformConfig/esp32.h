@@ -148,8 +148,8 @@
 #define URL_STREAM_PRIORITY 2
 #define URL_STREAM_BUFFER_COUNT 10
 #define STACK_SIZE 30000
-#define URL_CLIENT_TIMEOUT 60000;
 #define URL_HANDSHAKE_TIMEOUT 120000
+
 
 // // Default LED
 // #ifndef LED_BUILTIN
@@ -212,7 +212,6 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define URL_STREAM_PRIORITY 2
 #define URL_STREAM_BUFFER_COUNT 10
 #define STACK_SIZE 30000
-#define URL_CLIENT_TIMEOUT 60000;
 #define URL_HANDSHAKE_TIMEOUT 120000
 
 // // Default LED
@@ -263,3 +262,9 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 typedef uint32_t eps32_i2s_sample_rate_type;
 
 #endif
+
+
+#ifndef URL_CLIENT_TIMEOUT
+#  define URL_CLIENT_TIMEOUT 60000
+#endif  
+
