@@ -203,7 +203,7 @@ class MTSDecoderTSDemux : public AudioDecoder {
     TSDCode res = TSD_OK;
     int count = 0;
     while (res == TSD_OK && buffer.available() >= limit) {
-      // Unfortunatly we need to reset the demux after each file
+      // Unfortunately we need to reset the demux after each file
       if (is_new_file(buffer.data())) {
         LOGD("parsing new file");
         begin();

@@ -18,7 +18,7 @@ static const char *toStr(MetaDataType t){
     return MetaDataTypeStr[t];
 }
 
-/// unfortunatly strnlen or strnlen_s is not available in all implementations
+/// unfortunately strnlen or strnlen_s is not available in all implementations
 static size_t strnlength (const char* s, size_t n)  { 
     size_t i;
     for (i = 0; i < n && s[i] != '\0'; i++)
