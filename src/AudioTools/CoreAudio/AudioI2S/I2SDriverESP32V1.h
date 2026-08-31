@@ -96,8 +96,16 @@ class I2SDriverESP32V1 : public I2SDriverBase {
   /// was never wired up (e.g. dma_capacity_ still 0 before begin()).
   int availableForWrite() {
     if (dma_capacity_ == 0) return I2S_BUFFER_COUNT * I2S_BUFFER_SIZE;
-    uint32_t backlog = bytes_written_.load(std::memory_order_relaxed) -
-                       bytes_sent_.load(std::memory_order_relaxed);
+    uint32_t written = bytes_written_.load(std::memory_order_relaxed);
+    uint32_t sent = bytes_sent_.load(std::memory_order_relaxed);
+    // sent can exceed written: with auto_clear the driver fills idle DMA
+    // buffers with silence on its own, and on_sent still fires for those
+    // completions even though writeBytes() never ran for them. Saturate
+    // instead of letting the unsigned subtraction wrap to a huge value -
+    // that would get clamped to dma_capacity_ below and permanently report
+    // 0 free space, deadlocking the writer since nothing could call
+    // writeBytes() to let bytes_written_ catch back up.
+    uint32_t backlog = written > sent ? written - sent : 0;
     // Guards against transient over-reads while counters are mid-update
     // across the ISR/task boundary; backlog can never legitimately exceed
     // the DMA capacity itself.
