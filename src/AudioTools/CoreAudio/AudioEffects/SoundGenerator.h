@@ -6,6 +6,8 @@
 #include "AudioTools/CoreAudio/AudioLogger.h"
 #include "AudioTools/CoreAudio/AudioTypes.h"
 #include "AudioTools/CoreAudio/Buffers.h"
+#include "AudioTools/Concurrency/LockFree/RingBufferSPSC.h"
+
 
 /**
  * @defgroup generator Generators
@@ -1292,5 +1294,153 @@ class TestGenerator : public SoundGenerator<T> {
   T value = 0;
   T inc = 1;
 };
+
+/**
+ * @brief Queues SoundGenerators and plays them sequentially. Queued SoundGenerators
+ * must be limited (eg: setPlayTime()) or no later Generator will ever be played.
+ * @ingroup generator
+ * @author Mark Smith, @SmittyHalibut
+ * @copyright GPLv3
+ * @tparam T
+ */
+template <class T = int16_t>
+class GeneratorQueue : public SoundGenerator<T> {
+public:
+  bool begin(uint16_t queue_size=256) {
+    return queue.resize(queue_size) && SoundGenerator<T>::begin();
+  }
+
+  void end() { SoundGenerator<T>::end(); clear(); }
+
+  // Returns the requested number of bytes from the current generator.
+  // If the current generator runs out of bytes before the buffer is filled,
+  // it will move to the next queued generator.  If there are no more generators,
+  // it will stop filling the buffer and return the number of bytes it was able to fill.
+  virtual size_t readBytes(uint8_t *buffer, size_t buf_len) {
+    LOGD("readBytes: %d", (int)buf_len);
+    if (!SoundGenerator<T>::active) return 0;
+    if (queue.available() == 0) return 0;  // Nothing in the queue.
+
+    size_t bytes_read = 0;
+    size_t ret = 0;
+    SoundGenerator<T> *current_generator = nullptr;
+
+    while (bytes_read < buf_len) {
+      if ((current_generator = getCurrentGenerator()) == nullptr) break; // No generator.
+
+      ret = current_generator->readBytes(buffer+bytes_read, buf_len-bytes_read);
+      bytes_read += ret;
+
+      if (ret == 0) {
+        // Done with this generator, move to the next one.
+        removeCurrentGenerator();
+        if (queue.available() == 0) break;  // No more generators
+      }
+    }
+    return bytes_read;
+  }
+
+  // If no bytes are available, will return 0.
+  virtual T readSample() {
+    T buf;
+    if (readBytes((uint8_t *)&buf, sizeof(T)) != sizeof(T)) return (T)0;
+    return buf;
+  }
+
+  virtual inline size_t readSamples(T* data, size_t len) {
+    return (readBytes((uint8_t *)data, len*sizeof(T)) / sizeof(T));
+  }
+
+  // Add a generator to the queue.  The generator MUST be time limited BEFORE adding
+  // to the queue (eg: calling setPlayTime()). Otherwise, the generator will never
+  // run out of bytes and nothing after it will ever play.
+  virtual bool pushGenerator(SoundGenerator<T> *gen) {
+    LOGD("pushGenerator()");
+    if (queue.availableForWrite() == 0) return false;  // Queue is full.
+
+    QNode *node = new QNode;            // Deleted in removeCurrentGenerator;
+    if (node == nullptr) return false;  // new failed
+
+    node->restarted = false;
+    node->generator = gen;
+    if (!queue.write(node)) {
+      delete node;
+      return false;
+    }
+    return true;
+  }
+
+  // GeneratorQueue doesn't do everything other generators do.  We rely on the
+  // queued SoundGenerators to do any shaping.
+  virtual inline void setPlayTime(uint32_t p, uint8_t u = 20, uint8_t d = 30) {
+    LOGW("GeneratorQueue::setPlayTime() does nothing.");
+  }
+  virtual inline void setFrequency(float f) {
+    LOGW("GeneratorQueue::setFrequency() does nothing.");
+  }
+
+  virtual SoundGenerator<T> *peek() {
+    QNode *node;
+    if (!queue.peek(node)) return nullptr;
+    return node->generator;
+  }
+
+  virtual bool clear() {
+    while (removeCurrentGenerator()) {};  // Deletes all the QNodes.
+    return queue.available() == 0;
+  }
+
+  virtual inline size_t size()              { return queue.available(); }
+  virtual inline size_t available()         { return queue.available(); }
+  virtual inline size_t availableForWrite() { return queue.availableForWrite(); }
+  virtual inline bool empty()               { return queue.available() == 0; }
+
+protected:
+  struct QNode {
+    SoundGenerator<T> *generator;
+    bool restarted;
+  };
+
+  RingBufferSPSC<QNode *> queue;
+
+  // Returns the SoundGenerator at the head of the queue,
+  // restarting it if it hasn't been restarted yet.
+  SoundGenerator<T> *getCurrentGenerator() {
+    if (queue.available() == 0) return nullptr;
+
+    QNode *node = nullptr;
+    if (!queue.peek(node) || node == nullptr) return nullptr;
+
+    if (!node->restarted) {
+      node->generator->restart();
+      node->generator->begin();
+      node->restarted = true;      // persistent dynamic objects, this will persist.
+    }
+    return node->generator;
+  }
+
+  // Removes the current SoundGenerator from the queue, and cleans up memory use.
+  bool removeCurrentGenerator() {
+    if (queue.available() == 0) return false;
+
+    QNode *node = nullptr;
+    bool ret = queue.read(node);
+    if (node != nullptr) {
+      delete node;
+    }
+    return ret;
+  }
+
+  // readBytes(), readSample(), and readSamples() have all been reimplemented above
+  // and do not use readBytesFrames(), so this will never be called.  But it's not
+  // virtual in SoundGenerator so I can't overwrite it.
+  //size_t readBytesFrames(uint8_t *b, size_t l, int f, int c) {
+  //    LOGE("GeneratorQueue::readBytesFrames() should never get called.");
+  //    return 0;
+  //}
+
+};
+
+
 
 }  // namespace audio_tools
