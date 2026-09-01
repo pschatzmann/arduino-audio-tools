@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: STKGenerator&lt; StkCls, T &gt; Class Template Reference</title>
+<title>arduino-audio-tools: GeneratorQueue&lt; T &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,65 +69,80 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_s_t_k_generator.html">STKGenerator</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_generator_queue.html">GeneratorQueue</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="classaudio__tools_1_1_s_t_k_generator-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">STKGenerator&lt; StkCls, T &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__dsp.html">DSP</a> &raquo; <a class="el" href="group__generator.html">Generators</a></div></div></div>
+<a href="classaudio__tools_1_1_generator_queue-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">GeneratorQueue&lt; T &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__dsp.html">DSP</a> &raquo; <a class="el" href="group__generator.html">Generators</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>The Synthesis ToolKit in C++ (STK) is a set of open source audio signal processing and algorithmic synthesis classes written in the C++ programming language. You need to install <a href="https://github.com/pschatzmann/Arduino-STK">https://github.com/pschatzmann/Arduino-STK</a>.  
- <a href="classaudio__tools_1_1_s_t_k_generator.html#details">More...</a></p>
+<p>Queues SoundGenerators and plays them sequentially. Queued SoundGenerators must be limited (eg: <a class="el" href="classaudio__tools_1_1_generator_queue.html#a03a4d24c59c53fe9bf89d9b82b3ff0ce" title="Defines the play time in ms and the ramp up and ramp down time in percent.">setPlayTime()</a>) or no later Generator will ever be played.  
+ <a href="classaudio__tools_1_1_generator_queue.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_audio_s_t_k_8h_source.html">AudioSTK.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_sound_generator_8h_source.html">SoundGenerator.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for STKGenerator&lt; StkCls, T &gt;:</div>
+Inheritance diagram for GeneratorQueue&lt; T &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classaudio__tools_1_1_s_t_k_generator.png" usemap="#STKGenerator_3C_20StkCls_2C_20T_20_3E_map" alt=""/>
-  <map id="STKGenerator_3C_20StkCls_2C_20T_20_3E_map" name="STKGenerator_3C_20StkCls_2C_20T_20_3E_map">
-<area href="classaudio__tools_1_1_sound_generator.html" title="Base class to define the abstract interface for the sound generating classes." alt="SoundGenerator&lt; T &gt;" shape="rect" coords="0,0,167,24"/>
-<area href="classaudio__tools_1_1_s_t_k_instrument.html" title="STK Stream for Instrument." alt="STKInstrument&lt; StkCls, T &gt;" shape="rect" coords="0,112,167,136"/>
+  <img src="classaudio__tools_1_1_generator_queue.png" usemap="#GeneratorQueue_3C_20T_20_3E_map" alt=""/>
+  <map id="GeneratorQueue_3C_20T_20_3E_map" name="GeneratorQueue_3C_20T_20_3E_map">
+<area href="classaudio__tools_1_1_sound_generator.html" title="Base class to define the abstract interface for the sound generating classes." alt="SoundGenerator&lt; T &gt;" shape="rect" coords="0,0,166,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_generator_queue_1_1_q_node.html">QNode</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a5b1af81ee473479e2d38a68a39feacbb" id="r_a5b1af81ee473479e2d38a68a39feacbb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_s_t_k_generator.html#a5b1af81ee473479e2d38a68a39feacbb">STKGenerator</a> ()=default</td></tr>
-<tr class="separator:a5b1af81ee473479e2d38a68a39feacbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb2f9219dea9a977362ab3eaa7cdbffc" id="r_adb2f9219dea9a977362ab3eaa7cdbffc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_s_t_k_generator.html#adb2f9219dea9a977362ab3eaa7cdbffc">STKGenerator</a> (StkCls &amp;instrument)</td></tr>
-<tr class="separator:adb2f9219dea9a977362ab3eaa7cdbffc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada56eff2516fb0a4f5091ce06805411a" id="r_ada56eff2516fb0a4f5091ce06805411a"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#ada56eff2516fb0a4f5091ce06805411a">audioInfo</a> ()</td></tr>
 <tr class="memdesc:ada56eff2516fb0a4f5091ce06805411a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>.  <br /></td></tr>
 <tr class="separator:ada56eff2516fb0a4f5091ce06805411a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a592ce6934f59ca20f0324a6a6816968a" id="r_a592ce6934f59ca20f0324a6a6816968a"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generator_queue.html#a592ce6934f59ca20f0324a6a6816968a">available</a> ()</td></tr>
+<tr class="separator:a592ce6934f59ca20f0324a6a6816968a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0435aeda197b17faa2fa7d423f99cc06" id="r_a0435aeda197b17faa2fa7d423f99cc06"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generator_queue.html#a0435aeda197b17faa2fa7d423f99cc06">availableForWrite</a> ()</td></tr>
+<tr class="separator:a0435aeda197b17faa2fa7d423f99cc06"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50f45551c10ca30a0bc7f447e70188b1" id="r_a50f45551c10ca30a0bc7f447e70188b1"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#a50f45551c10ca30a0bc7f447e70188b1">begin</a> ()</td></tr>
 <tr class="memdesc:a50f45551c10ca30a0bc7f447e70188b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the processing.  <br /></td></tr>
 <tr class="separator:a50f45551c10ca30a0bc7f447e70188b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af99303e9bfe78c84f1abd84376477ec7" id="r_af99303e9bfe78c84f1abd84376477ec7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_s_t_k_generator.html#af99303e9bfe78c84f1abd84376477ec7">begin</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> cfg)</td></tr>
-<tr class="memdesc:af99303e9bfe78c84f1abd84376477ec7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the processing.  <br /></td></tr>
-<tr class="separator:af99303e9bfe78c84f1abd84376477ec7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a80e4660b5bd60cf09803f81e3e443644" id="r_a80e4660b5bd60cf09803f81e3e443644"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_s_t_k_generator.html#a80e4660b5bd60cf09803f81e3e443644">defaultConfig</a> ()</td></tr>
-<tr class="memdesc:a80e4660b5bd60cf09803f81e3e443644"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the default configuration  <br /></td></tr>
-<tr class="separator:a80e4660b5bd60cf09803f81e3e443644"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc34417a19a7b70626d19c41072d72a5" id="r_adc34417a19a7b70626d19c41072d72a5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#adc34417a19a7b70626d19c41072d72a5">end</a> ()</td></tr>
-<tr class="memdesc:adc34417a19a7b70626d19c41072d72a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ends the processing.  <br /></td></tr>
-<tr class="separator:adc34417a19a7b70626d19c41072d72a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a419d5bfacb0a1e5bf46b5fbd8d94f446" id="r_a419d5bfacb0a1e5bf46b5fbd8d94f446"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#a419d5bfacb0a1e5bf46b5fbd8d94f446">begin</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> <a class="el" href="classaudio__tools_1_1_sound_generator.html#a47385aa19435f5fca9d3083a748258c5">info</a>)</td></tr>
+<tr class="memdesc:a419d5bfacb0a1e5bf46b5fbd8d94f446"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the processing with the provided <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>.  <br /></td></tr>
+<tr class="separator:a419d5bfacb0a1e5bf46b5fbd8d94f446"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaac9003a73c9897baa68ca652573ebd6" id="r_aaac9003a73c9897baa68ca652573ebd6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generator_queue.html#aaac9003a73c9897baa68ca652573ebd6">begin</a> (uint16_t queue_size=256)</td></tr>
+<tr class="separator:aaac9003a73c9897baa68ca652573ebd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a185df2f323131b27b0ee432fa2074421" id="r_a185df2f323131b27b0ee432fa2074421"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generator_queue.html#a185df2f323131b27b0ee432fa2074421">clear</a> ()</td></tr>
+<tr class="separator:a185df2f323131b27b0ee432fa2074421"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1ae688606d873e5b04c9a7ada020a0d" id="r_af1ae688606d873e5b04c9a7ada020a0d"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#af1ae688606d873e5b04c9a7ada020a0d">defaultConfig</a> ()</td></tr>
+<tr class="memdesc:af1ae688606d873e5b04c9a7ada020a0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the default configuration.  <br /></td></tr>
+<tr class="separator:af1ae688606d873e5b04c9a7ada020a0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3dd5ac911680a71b593b01c804a6a6c6" id="r_a3dd5ac911680a71b593b01c804a6a6c6"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generator_queue.html#a3dd5ac911680a71b593b01c804a6a6c6">empty</a> ()</td></tr>
+<tr class="separator:a3dd5ac911680a71b593b01c804a6a6c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf81d3fdaf258088d7692fa70cece087" id="r_aaf81d3fdaf258088d7692fa70cece087"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generator_queue.html#aaf81d3fdaf258088d7692fa70cece087">end</a> ()</td></tr>
+<tr class="memdesc:aaf81d3fdaf258088d7692fa70cece087"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ends the processing.  <br /></td></tr>
+<tr class="separator:aaf81d3fdaf258088d7692fa70cece087"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a62eb104f87ff88c21fa01af29dbf0ee2" id="r_a62eb104f87ff88c21fa01af29dbf0ee2"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#a62eb104f87ff88c21fa01af29dbf0ee2">isActive</a> ()</td></tr>
 <tr class="memdesc:a62eb104f87ff88c21fa01af29dbf0ee2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the begin method has been called - after <a class="el" href="classaudio__tools_1_1_sound_generator.html#adc34417a19a7b70626d19c41072d72a5" title="Ends the processing.">end()</a> isActive is false.  <br /></td></tr>
 <tr class="separator:a62eb104f87ff88c21fa01af29dbf0ee2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1635579cf4f895eaaded84a513cb90c9" id="r_a1635579cf4f895eaaded84a513cb90c9"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#a1635579cf4f895eaaded84a513cb90c9">readBytes</a> (uint8_t *data, size_t len)</td></tr>
-<tr class="memdesc:a1635579cf4f895eaaded84a513cb90c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the data as byte array with the requested number of channels.  <br /></td></tr>
-<tr class="separator:a1635579cf4f895eaaded84a513cb90c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc79c89fc1d63b418c9f074b63f3d651" id="r_adc79c89fc1d63b418c9f074b63f3d651"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_s_t_k_generator.html#adc79c89fc1d63b418c9f074b63f3d651">readSample</a> ()</td></tr>
-<tr class="memdesc:adc79c89fc1d63b418c9f074b63f3d651"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides a single sample.  <br /></td></tr>
-<tr class="separator:adc79c89fc1d63b418c9f074b63f3d651"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58d5eb2a54a9fbda4ef22c4bb3d35977" id="r_a58d5eb2a54a9fbda4ef22c4bb3d35977"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#a58d5eb2a54a9fbda4ef22c4bb3d35977">readSamples</a> (T *data, size_t len)</td></tr>
+<tr class="memitem:a0a4cbd4e7dc62c42ead79e285bc7e024" id="r_a0a4cbd4e7dc62c42ead79e285bc7e024"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generator_queue.html#a0a4cbd4e7dc62c42ead79e285bc7e024">peek</a> ()</td></tr>
+<tr class="separator:a0a4cbd4e7dc62c42ead79e285bc7e024"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2347b672df8dfc7a3a914e89060eaa5" id="r_ae2347b672df8dfc7a3a914e89060eaa5"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generator_queue.html#ae2347b672df8dfc7a3a914e89060eaa5">pushGenerator</a> (<a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt; T &gt; *gen)</td></tr>
+<tr class="separator:ae2347b672df8dfc7a3a914e89060eaa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab26a2d64aceacef6a885bca812558e68" id="r_ab26a2d64aceacef6a885bca812558e68"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generator_queue.html#ab26a2d64aceacef6a885bca812558e68">readBytes</a> (uint8_t *buffer, size_t buf_len)</td></tr>
+<tr class="memdesc:ab26a2d64aceacef6a885bca812558e68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the data as byte array with the requested number of channels.  <br /></td></tr>
+<tr class="separator:ab26a2d64aceacef6a885bca812558e68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a408eeda85d9e14954a97f2c80e130320" id="r_a408eeda85d9e14954a97f2c80e130320"><td class="memItemLeft" align="right" valign="top">virtual T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generator_queue.html#a408eeda85d9e14954a97f2c80e130320">readSample</a> ()</td></tr>
+<tr class="memdesc:a408eeda85d9e14954a97f2c80e130320"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides a single sample.  <br /></td></tr>
+<tr class="separator:a408eeda85d9e14954a97f2c80e130320"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58d5eb2a54a9fbda4ef22c4bb3d35977" id="r_a58d5eb2a54a9fbda4ef22c4bb3d35977"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generator_queue.html#a58d5eb2a54a9fbda4ef22c4bb3d35977">readSamples</a> (T *data, size_t len)</td></tr>
 <tr class="separator:a58d5eb2a54a9fbda4ef22c4bb3d35977"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b579b43180c8e33c6c3033cf6c1a715" id="r_a0b579b43180c8e33c6c3033cf6c1a715"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#a0b579b43180c8e33c6c3033cf6c1a715">restart</a> ()</td></tr>
 <tr class="memdesc:a0b579b43180c8e33c6c3033cf6c1a715"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restarts the generator, e.g. after a play time has been defined and reached.  <br /></td></tr>
@@ -135,25 +150,29 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a87feead15897a49c7dccb043ac9fcddc" id="r_a87feead15897a49c7dccb043ac9fcddc"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#a87feead15897a49c7dccb043ac9fcddc">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> <a class="el" href="classaudio__tools_1_1_sound_generator.html#a47385aa19435f5fca9d3083a748258c5">info</a>)</td></tr>
 <tr class="memdesc:a87feead15897a49c7dccb043ac9fcddc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines/updates the <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>.  <br /></td></tr>
 <tr class="separator:a87feead15897a49c7dccb043ac9fcddc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ff3c2ef30b2de62b94852b5842fd3f7" id="r_a4ff3c2ef30b2de62b94852b5842fd3f7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#a4ff3c2ef30b2de62b94852b5842fd3f7">setFrequency</a> (float frequency)</td></tr>
-<tr class="memdesc:a4ff3c2ef30b2de62b94852b5842fd3f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract method: not implemented! Just provides an error message...  <br /></td></tr>
-<tr class="separator:a4ff3c2ef30b2de62b94852b5842fd3f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a079dcdd9b402be1b3341fed6ff07fcf8" id="r_a079dcdd9b402be1b3341fed6ff07fcf8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_s_t_k_generator.html#a079dcdd9b402be1b3341fed6ff07fcf8">setInput</a> (StkCls &amp;instrument)</td></tr>
-<tr class="separator:a079dcdd9b402be1b3341fed6ff07fcf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af0a0aa3b36d432b2be1e27b29886d5a0" id="r_af0a0aa3b36d432b2be1e27b29886d5a0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#af0a0aa3b36d432b2be1e27b29886d5a0">setPlayTime</a> (uint32_t <a class="el" href="classaudio__tools_1_1_sound_generator.html#a3807da733d5fce809ac890821617e140">playMs</a>, uint8_t <a class="el" href="classaudio__tools_1_1_sound_generator.html#ae3a74a14da1708b3abf20be8252dc1a9">upPercent</a>=20, uint8_t <a class="el" href="classaudio__tools_1_1_sound_generator.html#ae2b104b741d35e43975aaf4f91c228b9">downPercent</a>=30)</td></tr>
-<tr class="memdesc:af0a0aa3b36d432b2be1e27b29886d5a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the play time in ms and the ramp up and ramp down time in percent.  <br /></td></tr>
-<tr class="separator:af0a0aa3b36d432b2be1e27b29886d5a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80bfd451065feb15f0fdc358cb9cb1c7" id="r_a80bfd451065feb15f0fdc358cb9cb1c7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generator_queue.html#a80bfd451065feb15f0fdc358cb9cb1c7">setFrequency</a> (float f)</td></tr>
+<tr class="memdesc:a80bfd451065feb15f0fdc358cb9cb1c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract method: not implemented! Just provides an error message...  <br /></td></tr>
+<tr class="separator:a80bfd451065feb15f0fdc358cb9cb1c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03a4d24c59c53fe9bf89d9b82b3ff0ce" id="r_a03a4d24c59c53fe9bf89d9b82b3ff0ce"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generator_queue.html#a03a4d24c59c53fe9bf89d9b82b3ff0ce">setPlayTime</a> (uint32_t p, uint8_t u=20, uint8_t d=30)</td></tr>
+<tr class="memdesc:a03a4d24c59c53fe9bf89d9b82b3ff0ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the play time in ms and the ramp up and ramp down time in percent.  <br /></td></tr>
+<tr class="separator:a03a4d24c59c53fe9bf89d9b82b3ff0ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2c7fffd280ddcd6500a065785df0950" id="r_aa2c7fffd280ddcd6500a065785df0950"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generator_queue.html#aa2c7fffd280ddcd6500a065785df0950">size</a> ()</td></tr>
+<tr class="separator:aa2c7fffd280ddcd6500a065785df0950"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a9ff4b9c7913895f6ee1cbc38f0a93f10" id="r_a9ff4b9c7913895f6ee1cbc38f0a93f10"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#a9ff4b9c7913895f6ee1cbc38f0a93f10">applyRamp</a> (T sample)</td></tr>
 <tr class="separator:a9ff4b9c7913895f6ee1cbc38f0a93f10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b0c01b0fd4c73b81de8873878d2cf92" id="r_a2b0c01b0fd4c73b81de8873878d2cf92"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generator_queue.html#a2b0c01b0fd4c73b81de8873878d2cf92">getCurrentGenerator</a> ()</td></tr>
+<tr class="separator:a2b0c01b0fd4c73b81de8873878d2cf92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab531445888201bd1155eb8316f33a33a" id="r_ab531445888201bd1155eb8316f33a33a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#ab531445888201bd1155eb8316f33a33a">readBytesFrames</a> (uint8_t *buffer, size_t lengthBytes, int frames, int channels)</td></tr>
 <tr class="separator:ab531445888201bd1155eb8316f33a33a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1639ce8ceb8a0cb43cb6aa9f500281e" id="r_af1639ce8ceb8a0cb43cb6aa9f500281e"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#af1639ce8ceb8a0cb43cb6aa9f500281e">readBytesFromBuffer</a> (uint8_t *buffer, size_t lengthBytes, int frame_size, int channels)</td></tr>
 <tr class="separator:af1639ce8ceb8a0cb43cb6aa9f500281e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71dfeae180bcd6ea59c9903145ca2ee4" id="r_a71dfeae180bcd6ea59c9903145ca2ee4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#a71dfeae180bcd6ea59c9903145ca2ee4">recalculatePlayTime</a> ()</td></tr>
 <tr class="separator:a71dfeae180bcd6ea59c9903145ca2ee4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94784722b7745fcfbe2e1b3f882e662b" id="r_a94784722b7745fcfbe2e1b3f882e662b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generator_queue.html#a94784722b7745fcfbe2e1b3f882e662b">removeCurrentGenerator</a> ()</td></tr>
+<tr class="separator:a94784722b7745fcfbe2e1b3f882e662b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -169,14 +188,12 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a323c112c11500270be91b7cb353826bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47385aa19435f5fca9d3083a748258c5" id="r_a47385aa19435f5fca9d3083a748258c5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#a47385aa19435f5fca9d3083a748258c5">info</a></td></tr>
 <tr class="separator:a47385aa19435f5fca9d3083a748258c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6fb9edc592dbc53bbdef1de94afa76b4" id="r_a6fb9edc592dbc53bbdef1de94afa76b4"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_s_t_k_generator.html#a6fb9edc592dbc53bbdef1de94afa76b4">max_value</a></td></tr>
-<tr class="separator:a6fb9edc592dbc53bbdef1de94afa76b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5dc6514e157bc365ceccc7346d6fc3b9" id="r_a5dc6514e157bc365ceccc7346d6fc3b9"><td class="memItemLeft" align="right" valign="top">StkCls *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_s_t_k_generator.html#a5dc6514e157bc365ceccc7346d6fc3b9">p_instrument</a> = nullptr</td></tr>
-<tr class="separator:a5dc6514e157bc365ceccc7346d6fc3b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3807da733d5fce809ac890821617e140" id="r_a3807da733d5fce809ac890821617e140"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#a3807da733d5fce809ac890821617e140">playMs</a> = 0</td></tr>
 <tr class="separator:a3807da733d5fce809ac890821617e140"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1c8b800d826f47e6672339aff32fd84" id="r_ad1c8b800d826f47e6672339aff32fd84"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#ad1c8b800d826f47e6672339aff32fd84">playSamples</a> = 0</td></tr>
 <tr class="separator:ad1c8b800d826f47e6672339aff32fd84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff3db0b6c8b8381f50d24ab2e98bcfb2" id="r_aff3db0b6c8b8381f50d24ab2e98bcfb2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_ring_buffer_s_p_s_c.html">RingBufferSPSC</a>&lt; <a class="el" href="structaudio__tools_1_1_generator_queue_1_1_q_node.html">QNode</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generator_queue.html#aff3db0b6c8b8381f50d24ab2e98bcfb2">queue</a></td></tr>
+<tr class="separator:aff3db0b6c8b8381f50d24ab2e98bcfb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c2be41032e0080e3b2c6a84a8251cc3" id="r_a4c2be41032e0080e3b2c6a84a8251cc3"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#a4c2be41032e0080e3b2c6a84a8251cc3">rampDownDec</a> = 0.0</td></tr>
 <tr class="separator:a4c2be41032e0080e3b2c6a84a8251cc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0080f0955a9399ecd1e638d4473fc045" id="r_a0080f0955a9399ecd1e638d4473fc045"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#a0080f0955a9399ecd1e638d4473fc045">rampDownSamples</a> = 0</td></tr>
@@ -191,75 +208,17 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:accc8a955d30963a011cd3d7221b537db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;class StkCls = stk::Generator, class T = int16_t&gt;<br />
-class audio_tools::STKGenerator&lt; StkCls, T &gt;</div><p>The Synthesis ToolKit in C++ (STK) is a set of open source audio signal processing and algorithmic synthesis classes written in the C++ programming language. You need to install <a href="https://github.com/pschatzmann/Arduino-STK">https://github.com/pschatzmann/Arduino-STK</a>. </p>
-<p>You can find further informarmation in the original Readme of the STK Project</p>
-<p>Like many other sound libraries it originates from an University (Princeton) and can look back at a very long history: it was created in 1995. In the 90s the computers had limited processor power and memory available. In todays world we can get some cheap Microcontrollers, which provide almost the same capabilities.</p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;class T = int16_t&gt;<br />
+class audio_tools::GeneratorQueue&lt; T &gt;</div><p>Queues SoundGenerators and plays them sequentially. Queued SoundGenerators must be limited (eg: <a class="el" href="classaudio__tools_1_1_generator_queue.html#a03a4d24c59c53fe9bf89d9b82b3ff0ce" title="Defines the play time in ms and the ramp up and ramp down time in percent.">setPlayTime()</a>) or no later Generator will ever be played. </p>
+<dl class="section author"><dt>Author</dt><dd>Mark Smith, @SmittyHalibut </dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
-<dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a5b1af81ee473479e2d38a68a39feacbb" name="a5b1af81ee473479e2d38a68a39feacbb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5b1af81ee473479e2d38a68a39feacbb">&#9670;&#160;</a></span>STKGenerator() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class StkCls  = stk::Generator, class T  = int16_t&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_s_t_k_generator.html">STKGenerator</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">default</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="adb2f9219dea9a977362ab3eaa7cdbffc" name="adb2f9219dea9a977362ab3eaa7cdbffc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adb2f9219dea9a977362ab3eaa7cdbffc">&#9670;&#160;</a></span>STKGenerator() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class StkCls  = stk::Generator, class T  = int16_t&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_s_t_k_generator.html">STKGenerator</a> </td>
-          <td>(</td>
-          <td class="paramtype">StkCls &amp;&#160;</td>
-          <td class="paramname"><em>instrument</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a9ff4b9c7913895f6ee1cbc38f0a93f10" name="a9ff4b9c7913895f6ee1cbc38f0a93f10"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9ff4b9c7913895f6ee1cbc38f0a93f10">&#9670;&#160;</a></span>applyRamp()</h2>
 
@@ -317,8 +276,62 @@ template&lt;class T  = int16_t&gt; </div>
 
 </div>
 </div>
+<a id="a592ce6934f59ca20f0324a6a6816968a" name="a592ce6934f59ca20f0324a6a6816968a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a592ce6934f59ca20f0324a6a6816968a">&#9670;&#160;</a></span>available()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T  = int16_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual size_t available </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0435aeda197b17faa2fa7d423f99cc06" name="a0435aeda197b17faa2fa7d423f99cc06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0435aeda197b17faa2fa7d423f99cc06">&#9670;&#160;</a></span>availableForWrite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T  = int16_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual size_t availableForWrite </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a50f45551c10ca30a0bc7f447e70188b1" name="a50f45551c10ca30a0bc7f447e70188b1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a50f45551c10ca30a0bc7f447e70188b1">&#9670;&#160;</a></span>begin() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a50f45551c10ca30a0bc7f447e70188b1">&#9670;&#160;</a></span>begin() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -348,13 +361,45 @@ template&lt;class T  = int16_t&gt; </div>
 
 </div>
 </div>
-<a id="af99303e9bfe78c84f1abd84376477ec7" name="af99303e9bfe78c84f1abd84376477ec7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af99303e9bfe78c84f1abd84376477ec7">&#9670;&#160;</a></span>begin() <span class="overload">[2/2]</span></h2>
+<a id="a419d5bfacb0a1e5bf46b5fbd8d94f446" name="a419d5bfacb0a1e5bf46b5fbd8d94f446"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a419d5bfacb0a1e5bf46b5fbd8d94f446">&#9670;&#160;</a></span>begin() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class StkCls  = stk::Generator, class T  = int16_t&gt; </div>
+template&lt;class T  = int16_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool begin </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td>
+          <td class="paramname"><em>info</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Starts the processing with the provided <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_s_t_k_generator.html#af99303e9bfe78c84f1abd84376477ec7">STKGenerator&lt; StkCls, T &gt;</a>, <a class="el" href="classaudio__tools_1_1_s_t_k_generator.html#af99303e9bfe78c84f1abd84376477ec7">STKGenerator&lt; stk::Instrmnt, int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_s_t_k_generator.html#af99303e9bfe78c84f1abd84376477ec7">STKGenerator&lt; StkCls, int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_synthesizer.html#adb1a2c54610f9cdd2ca7688724266d13">Synthesizer</a>, <a class="el" href="classaudio__tools_1_1_generator_fixed_value.html#a419d5bfacb0a1e5bf46b5fbd8d94f446">GeneratorFixedValue&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_sound_generator_modulation.html#ac70f7349fc3915c58de8f2f5493422dc">SoundGeneratorModulation&lt; T, effectsuite_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_float_sine_generator.html#ac70f7349fc3915c58de8f2f5493422dc">FloatSineGenerator&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_float_sine_generator.html#ac70f7349fc3915c58de8f2f5493422dc">FloatSineGenerator&lt; int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_fast_int_sine_generator.html#ac70f7349fc3915c58de8f2f5493422dc">FastIntSineGenerator&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_square_wave_generator.html#ac70f7349fc3915c58de8f2f5493422dc">SquareWaveGenerator&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_saw_tooth_generator.html#ac70f7349fc3915c58de8f2f5493422dc">SawToothGenerator&lt; T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_generator_from_array.html#ac70f7349fc3915c58de8f2f5493422dc">GeneratorFromArray&lt; T &gt;</a>.</p>
+
+</div>
+</div>
+<a id="aaac9003a73c9897baa68ca652573ebd6" name="aaac9003a73c9897baa68ca652573ebd6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaac9003a73c9897baa68ca652573ebd6">&#9670;&#160;</a></span>begin() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -362,37 +407,33 @@ template&lt;class StkCls  = stk::Generator, class T  = int16_t&gt; </div>
         <tr>
           <td class="memname">bool begin </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td>
-          <td class="paramname"><em>cfg</em></td><td>)</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>queue_size</em> = <code>256</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Starts the processing. </p>
-
-<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_sound_generator.html#a419d5bfacb0a1e5bf46b5fbd8d94f446">SoundGenerator&lt; T &gt;</a>.</p>
-
 </div>
 </div>
-<a id="a80e4660b5bd60cf09803f81e3e443644" name="a80e4660b5bd60cf09803f81e3e443644"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a80e4660b5bd60cf09803f81e3e443644">&#9670;&#160;</a></span>defaultConfig()</h2>
+<a id="a185df2f323131b27b0ee432fa2074421" name="a185df2f323131b27b0ee432fa2074421"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a185df2f323131b27b0ee432fa2074421">&#9670;&#160;</a></span>clear()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class StkCls  = stk::Generator, class T  = int16_t&gt; </div>
+template&lt;class T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> defaultConfig </td>
+          <td class="memname">virtual bool clear </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -405,14 +446,10 @@ template&lt;class StkCls  = stk::Generator, class T  = int16_t&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>provides the default configuration </p>
-
-<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_sound_generator.html#af1ae688606d873e5b04c9a7ada020a0d">SoundGenerator&lt; T &gt;</a>.</p>
-
 </div>
 </div>
-<a id="adc34417a19a7b70626d19c41072d72a5" name="adc34417a19a7b70626d19c41072d72a5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adc34417a19a7b70626d19c41072d72a5">&#9670;&#160;</a></span>end()</h2>
+<a id="af1ae688606d873e5b04c9a7ada020a0d" name="af1ae688606d873e5b04c9a7ada020a0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1ae688606d873e5b04c9a7ada020a0d">&#9670;&#160;</a></span>defaultConfig()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -423,7 +460,7 @@ template&lt;class T  = int16_t&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void end </td>
+          <td class="memname">virtual <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> defaultConfig </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -436,9 +473,94 @@ template&lt;class T  = int16_t&gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Provides the default configuration. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_s_t_k_generator.html#a80e4660b5bd60cf09803f81e3e443644">STKGenerator&lt; StkCls, T &gt;</a>, <a class="el" href="classaudio__tools_1_1_s_t_k_generator.html#a80e4660b5bd60cf09803f81e3e443644">STKGenerator&lt; stk::Instrmnt, int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_s_t_k_generator.html#a80e4660b5bd60cf09803f81e3e443644">STKGenerator&lt; StkCls, int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_float_sine_generator.html#aada53b9c289fa42f936f340ec0b81441">FloatSineGenerator&lt; T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_float_sine_generator.html#aada53b9c289fa42f936f340ec0b81441">FloatSineGenerator&lt; int16_t &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a3dd5ac911680a71b593b01c804a6a6c6" name="a3dd5ac911680a71b593b01c804a6a6c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3dd5ac911680a71b593b01c804a6a6c6">&#9670;&#160;</a></span>empty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T  = int16_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool empty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aaf81d3fdaf258088d7692fa70cece087" name="aaf81d3fdaf258088d7692fa70cece087"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf81d3fdaf258088d7692fa70cece087">&#9670;&#160;</a></span>end()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T  = int16_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
 <p>Ends the processing. </p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_generator_queue.html#aaf81d3fdaf258088d7692fa70cece087">GeneratorQueue&lt; T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_generator_from_array.html#a64e9fa75beda50a9e8400ee0d4e61984">GeneratorFromArray&lt; T &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_sound_generator.html#adc34417a19a7b70626d19c41072d72a5">SoundGenerator&lt; T &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a2b0c01b0fd4c73b81de8873878d2cf92" name="a2b0c01b0fd4c73b81de8873878d2cf92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b0c01b0fd4c73b81de8873878d2cf92">&#9670;&#160;</a></span>getCurrentGenerator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T  = int16_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt; T &gt; * getCurrentGenerator </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -467,12 +589,67 @@ template&lt;class T  = int16_t&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Checks if the begin method has been called - after <a class="el" href="classaudio__tools_1_1_sound_generator.html#adc34417a19a7b70626d19c41072d72a5" title="Ends the processing.">end()</a> isActive is false. </p>
+<p>Checks if the begin method has been called - after <a class="el" href="classaudio__tools_1_1_generator_queue.html#aaf81d3fdaf258088d7692fa70cece087" title="Ends the processing.">end()</a> isActive is false. </p>
 
 </div>
 </div>
-<a id="a1635579cf4f895eaaded84a513cb90c9" name="a1635579cf4f895eaaded84a513cb90c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1635579cf4f895eaaded84a513cb90c9">&#9670;&#160;</a></span>readBytes()</h2>
+<a id="a0a4cbd4e7dc62c42ead79e285bc7e024" name="a0a4cbd4e7dc62c42ead79e285bc7e024"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a4cbd4e7dc62c42ead79e285bc7e024">&#9670;&#160;</a></span>peek()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T  = int16_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt; T &gt; * peek </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae2347b672df8dfc7a3a914e89060eaa5" name="ae2347b672df8dfc7a3a914e89060eaa5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2347b672df8dfc7a3a914e89060eaa5">&#9670;&#160;</a></span>pushGenerator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T  = int16_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool pushGenerator </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt; T &gt; *&#160;</td>
+          <td class="paramname"><em>gen</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab26a2d64aceacef6a885bca812558e68" name="ab26a2d64aceacef6a885bca812558e68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab26a2d64aceacef6a885bca812558e68">&#9670;&#160;</a></span>readBytes()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -502,14 +679,14 @@ template&lt;class T  = int16_t&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Provides the data as byte array with the requested number of channels. </p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_generator_queue.html#ab26a2d64aceacef6a885bca812558e68">GeneratorQueue&lt; T &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_sound_generator.html#a1635579cf4f895eaaded84a513cb90c9">SoundGenerator&lt; T &gt;</a>.</p>
 
 </div>
 </div>
@@ -613,19 +790,19 @@ template&lt;class T  = int16_t&gt; </div>
 
 </div>
 </div>
-<a id="adc79c89fc1d63b418c9f074b63f3d651" name="adc79c89fc1d63b418c9f074b63f3d651"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adc79c89fc1d63b418c9f074b63f3d651">&#9670;&#160;</a></span>readSample()</h2>
+<a id="a408eeda85d9e14954a97f2c80e130320" name="a408eeda85d9e14954a97f2c80e130320"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a408eeda85d9e14954a97f2c80e130320">&#9670;&#160;</a></span>readSample()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class StkCls  = stk::Generator, class T  = int16_t&gt; </div>
+template&lt;class T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">T readSample </td>
+          <td class="memname">virtual T readSample </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -675,13 +852,13 @@ template&lt;class T  = int16_t&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 <p>Provides the data as T array (interleaved by channel) with the requested number of samples (values, not frames) </p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_generator_queue.html#a58d5eb2a54a9fbda4ef22c4bb3d35977">GeneratorQueue&lt; T &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_sound_generator.html#a58d5eb2a54a9fbda4ef22c4bb3d35977">SoundGenerator&lt; T &gt;</a>.</p>
 
 </div>
 </div>
@@ -706,6 +883,33 @@ template&lt;class T  = int16_t&gt; </div>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a94784722b7745fcfbe2e1b3f882e662b" name="a94784722b7745fcfbe2e1b3f882e662b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94784722b7745fcfbe2e1b3f882e662b">&#9670;&#160;</a></span>removeCurrentGenerator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T  = int16_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool removeCurrentGenerator </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -773,8 +977,8 @@ template&lt;class T  = int16_t&gt; </div>
 
 </div>
 </div>
-<a id="a4ff3c2ef30b2de62b94852b5842fd3f7" name="a4ff3c2ef30b2de62b94852b5842fd3f7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4ff3c2ef30b2de62b94852b5842fd3f7">&#9670;&#160;</a></span>setFrequency()</h2>
+<a id="a80bfd451065feb15f0fdc358cb9cb1c7" name="a80bfd451065feb15f0fdc358cb9cb1c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80bfd451065feb15f0fdc358cb9cb1c7">&#9670;&#160;</a></span>setFrequency()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -794,47 +998,19 @@ template&lt;class T  = int16_t&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Abstract method: not implemented! Just provides an error message... </p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_generator_queue.html#a80bfd451065feb15f0fdc358cb9cb1c7">GeneratorQueue&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_sine_from_table.html#a723ff429227e3ffb51d305c115472180">SineFromTable&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_s_t_k_instrument.html#a0517b8e9504478c5d7f9c5b39d2853bf">STKInstrument&lt; StkCls, T &gt;</a>, <a class="el" href="classaudio__tools_1_1_float_sine_generator.html#a0517b8e9504478c5d7f9c5b39d2853bf">FloatSineGenerator&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_float_sine_generator.html#a0517b8e9504478c5d7f9c5b39d2853bf">FloatSineGenerator&lt; int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_fast_int_sine_generator.html#a0517b8e9504478c5d7f9c5b39d2853bf">FastIntSineGenerator&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_square_wave_generator.html#a0517b8e9504478c5d7f9c5b39d2853bf">SquareWaveGenerator&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_saw_tooth_generator.html#a0517b8e9504478c5d7f9c5b39d2853bf">SawToothGenerator&lt; T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_generator_from_array.html#a0517b8e9504478c5d7f9c5b39d2853bf">GeneratorFromArray&lt; T &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_sound_generator.html#a4ff3c2ef30b2de62b94852b5842fd3f7">SoundGenerator&lt; T &gt;</a>.</p>
 
 </div>
 </div>
-<a id="a079dcdd9b402be1b3341fed6ff07fcf8" name="a079dcdd9b402be1b3341fed6ff07fcf8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a079dcdd9b402be1b3341fed6ff07fcf8">&#9670;&#160;</a></span>setInput()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class StkCls  = stk::Generator, class T  = int16_t&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void setInput </td>
-          <td>(</td>
-          <td class="paramtype">StkCls &amp;&#160;</td>
-          <td class="paramname"><em>instrument</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="af0a0aa3b36d432b2be1e27b29886d5a0" name="af0a0aa3b36d432b2be1e27b29886d5a0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af0a0aa3b36d432b2be1e27b29886d5a0">&#9670;&#160;</a></span>setPlayTime()</h2>
+<a id="a03a4d24c59c53fe9bf89d9b82b3ff0ce" name="a03a4d24c59c53fe9bf89d9b82b3ff0ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03a4d24c59c53fe9bf89d9b82b3ff0ce">&#9670;&#160;</a></span>setPlayTime()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -870,14 +1046,41 @@ template&lt;class T  = int16_t&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Defines the play time in ms and the ramp up and ramp down time in percent. </p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_generator_queue.html#a03a4d24c59c53fe9bf89d9b82b3ff0ce">GeneratorQueue&lt; T &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_sound_generator.html#af0a0aa3b36d432b2be1e27b29886d5a0">SoundGenerator&lt; T &gt;</a>.</p>
+
+</div>
+</div>
+<a id="aa2c7fffd280ddcd6500a065785df0950" name="aa2c7fffd280ddcd6500a065785df0950"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2c7fffd280ddcd6500a065785df0950">&#9670;&#160;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T  = int16_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual size_t size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -1026,54 +1229,6 @@ template&lt;class T  = int16_t&gt; </div>
 
 </div>
 </div>
-<a id="a6fb9edc592dbc53bbdef1de94afa76b4" name="a6fb9edc592dbc53bbdef1de94afa76b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6fb9edc592dbc53bbdef1de94afa76b4">&#9670;&#160;</a></span>max_value</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class StkCls  = stk::Generator, class T  = int16_t&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">T max_value</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a5dc6514e157bc365ceccc7346d6fc3b9" name="a5dc6514e157bc365ceccc7346d6fc3b9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5dc6514e157bc365ceccc7346d6fc3b9">&#9670;&#160;</a></span>p_instrument</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class StkCls  = stk::Generator, class T  = int16_t&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">StkCls* p_instrument = nullptr</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a3807da733d5fce809ac890821617e140" name="a3807da733d5fce809ac890821617e140"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3807da733d5fce809ac890821617e140">&#9670;&#160;</a></span>playMs</h2>
 
@@ -1116,6 +1271,30 @@ template&lt;class T  = int16_t&gt; </div>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aff3db0b6c8b8381f50d24ab2e98bcfb2" name="aff3db0b6c8b8381f50d24ab2e98bcfb2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff3db0b6c8b8381f50d24ab2e98bcfb2">&#9670;&#160;</a></span>queue</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T  = int16_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_ring_buffer_s_p_s_c.html">RingBufferSPSC</a>&lt;<a class="el" href="structaudio__tools_1_1_generator_queue_1_1_q_node.html">QNode</a> *&gt; queue</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1267,7 +1446,7 @@ template&lt;class T  = int16_t&gt; </div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/AudioLibs/<a class="el" href="_audio_s_t_k_8h_source.html">AudioSTK.h</a></li>
+<li>src/AudioTools/CoreAudio/AudioEffects/<a class="el" href="_sound_generator_8h_source.html">SoundGenerator.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -19,7 +19,7 @@ var searchData=
   ['gains_5flinear_16',['gains_linear',['../classaudio__tools_1_1_f_f_t_equalizer.html#a4646d9c67105e9488a72846ea2e1f94b',1,'audio_tools::FFTEqualizer']]],
   ['gainsdirty_17',['gainsDirty',['../classaudio__tools_1_1_equalizer_n_bands.html#aa740f29e3ebf366e0e76d5008c10bb7e',1,'audio_tools::EqualizerNBands']]],
   ['gate_5fexists_18',['gate_exists',['../classaudio__tools_1_1_faust_stream.html#a855eba1834e1665f145fd03420a66254',1,'audio_tools::FaustStream']]],
-  ['generator_19',['generator',['../classaudio__tools_1_1_s_t_k_stream.html#ac4f697c4e9cadd453a993a6f8566b3ca',1,'audio_tools::STKStream']]],
+  ['generator_19',['generator',['../structaudio__tools_1_1_generator_queue_1_1_q_node.html#a4ebc7a1562b334ed00a3141caaf3da1e',1,'audio_tools::GeneratorQueue::QNode::generator'],['../classaudio__tools_1_1_s_t_k_stream.html#ac4f697c4e9cadd453a993a6f8566b3ca',1,'audio_tools::STKStream::generator']]],
   ['genre_20',['genre',['../structaudio__tools_1_1_i_d3v1_enhanced.html#ad8b088b4257404237bf9026e20fc4a4a',1,'audio_tools::ID3v1Enhanced::genre'],['../structaudio__tools_1_1_i_d3v1.html#a081a1c005eb62b40514079ade4320e38',1,'audio_tools::ID3v1::genre']]],
   ['genres_21',['genres',['../namespaceaudio__tools.html#a1c8c26908307dcc9ed5243051454e9ed',1,'audio_tools']]],
   ['get_5freq_5fep_5fcb_5f_22',['get_req_ep_cb_',['../classaudio__tools_1_1_u_s_b_audio_device_base.html#a42c656e79a6c1ab799d0a2acf1e5041f',1,'audio_tools::USBAudioDeviceBase']]],
