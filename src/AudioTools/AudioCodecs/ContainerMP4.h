@@ -608,6 +608,12 @@ class DemuxerMP4 : public Demuxer {
         },
         false);
     parser.setCallback(
+        "ac-3",
+        [](MP4Parser::Box& box, void* ref) {
+          static_cast<DemuxerMP4*>(ref)->onAc3(box);
+        },
+        false);
+    parser.setCallback(
         "esds",
         [](MP4Parser::Box& box, void* ref) {
           static_cast<DemuxerMP4*>(ref)->onEsds(box);
@@ -867,6 +873,15 @@ class DemuxerMP4 : public Demuxer {
       memcpy(current_track->alacMagicCookie.data(), alac.data + 4,
              alac.data_size - 4);
     }
+  }
+
+  /// AC-3 frames are self-synchronizing (each frame starts with its own
+  /// 0x0B77 sync word and carries its own sample rate/channel info), so -
+  /// unlike onMp4a/onAlac - there is no child config box to parse here.
+  void onAc3(const MP4Parser::Box& box) {
+    if (current_track == nullptr || !box.is_complete) return;
+    current_track->audio_codec = Codec::AC3;
+    setupAudioInfo(AudioFormat::AC3, box.data, box.data_size);
   }
 
   void onAvc1(const MP4Parser::Box& box) {

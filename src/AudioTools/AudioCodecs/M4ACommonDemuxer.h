@@ -24,7 +24,7 @@ using stsz_sample_size_t = uint16_t;
  */
 class M4ACommonDemuxer {
  public:
-  enum class Codec { Unknown, AAC, ALAC, MP3 };
+  enum class Codec { Unknown, AAC, ALAC, MP3, AC3 };
 
   struct Frame {
     Codec codec;
@@ -265,6 +265,9 @@ class M4ACommonDemuxer {
           break;
         case Codec::MP3:
           frame.mime = "audio/mpeg";
+          break;
+        case Codec::AC3:
+          frame.mime = "audio/ac3";
           break;
         default:
           frame.mime = nullptr;
@@ -598,6 +601,19 @@ class M4ACommonDemuxer {
       std::memcpy(audio_config.alacMagicCookie.data(), alac.data + 4,
                   alac.data_size - 4);
     }
+  }
+
+  /**
+   * @brief Handles the ac-3 box (AC-3/Dolby Digital audio sample entry).
+   * Unlike AAC/ALAC, AC-3 frames are self-synchronizing (each frame starts
+   * with its own 0x0B77 sync word and carries its own sample rate/channel
+   * info), so - beyond marking the codec - there is no magic cookie or
+   * config box to extract here.
+   * @param box MP4 box.
+   */
+  void onAc3(const MP4Parser::Box& box) {
+    LOGI("onAc3: %s, size: %zu bytes", box.type, box.data_size);
+    audio_config.codec = Codec::AC3;
   }
 
   /**

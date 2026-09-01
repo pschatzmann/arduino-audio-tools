@@ -95,6 +95,9 @@ class M4AAudioDemuxer : public M4ACommonDemuxer {
     parser.setCallback("alac", [](MP4Parser::Box& box, void* ref) {
       static_cast<M4AAudioDemuxer*>(ref)->onAlac(box);
     });
+    parser.setCallback("ac-3", [](MP4Parser::Box& box, void* ref) {
+      static_cast<M4AAudioDemuxer*>(ref)->onAc3(box);
+    });
 
     // mdat
     parser.setCallback(
