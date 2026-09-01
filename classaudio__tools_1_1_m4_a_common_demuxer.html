@@ -115,10 +115,14 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a87487bf84e831b40083eb736cc1a237c" id="r_a87487bf84e831b40083eb736cc1a237c"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_common_demuxer.html#a87487bf84e831b40083eb736cc1a237c">Codec</a> { <a class="el" href="classaudio__tools_1_1_m4_a_common_demuxer.html#a87487bf84e831b40083eb736cc1a237ca88183b946cc5f0e8c96b2e66e1c74a7e">Unknown</a>
+<tr class="memitem:a87487bf84e831b40083eb736cc1a237c" id="r_a87487bf84e831b40083eb736cc1a237c"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_common_demuxer.html#a87487bf84e831b40083eb736cc1a237c">Codec</a> { <br />
+&#160;&#160;<a class="el" href="classaudio__tools_1_1_m4_a_common_demuxer.html#a87487bf84e831b40083eb736cc1a237ca88183b946cc5f0e8c96b2e66e1c74a7e">Unknown</a>
 , <a class="el" href="classaudio__tools_1_1_m4_a_common_demuxer.html#a87487bf84e831b40083eb736cc1a237ca6409dac0c80c79ddf61858be7f2c699b">AAC</a>
 , <a class="el" href="classaudio__tools_1_1_m4_a_common_demuxer.html#a87487bf84e831b40083eb736cc1a237ca039ea4e8bb04948343a7376e44df1c17">ALAC</a>
 , <a class="el" href="classaudio__tools_1_1_m4_a_common_demuxer.html#a87487bf84e831b40083eb736cc1a237ca27bcd310c52f6445cf4b93b90f52f5ef">MP3</a>
+, <br />
+&#160;&#160;<a class="el" href="classaudio__tools_1_1_m4_a_common_demuxer.html#a87487bf84e831b40083eb736cc1a237cad82b490458537f4291732b24cfe1b1b1">AC3</a>
+<br />
  }</td></tr>
 <tr class="separator:a87487bf84e831b40083eb736cc1a237c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec31796327e9420d513d16249bb7b1d2" id="r_aec31796327e9420d513d16249bb7b1d2"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_common_demuxer.html#aec31796327e9420d513d16249bb7b1d2">FrameCallback</a> = std::function&lt; void(const <a class="el" href="structaudio__tools_1_1_m4_a_common_demuxer_1_1_frame.html">Frame</a> &amp;, void *ref)&gt;</td></tr>
@@ -164,6 +168,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:ada1be014e117824e5eeda0e58f61531c" id="r_ada1be014e117824e5eeda0e58f61531c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_common_demuxer.html#ada1be014e117824e5eeda0e58f61531c">checkType</a> (uint8_t *<a class="el" href="classaudio__tools_1_1_m4_a_common_demuxer.html#aaf0eef2d94f5e586b3d7cd5935560e29">buffer</a>, const char *type, int offset)</td></tr>
 <tr class="memdesc:ada1be014e117824e5eeda0e58f61531c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the buffer at the given offset matches the specified type.  <br /></td></tr>
 <tr class="separator:ada1be014e117824e5eeda0e58f61531c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a6f9f9263ce73bd176d3d3225c5fd6b" id="r_a1a6f9f9263ce73bd176d3d3225c5fd6b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_common_demuxer.html#a1a6f9f9263ce73bd176d3d3225c5fd6b">onAc3</a> (const <a class="el" href="structaudio__tools_1_1_m_p4_parser_1_1_box.html">MP4Parser::Box</a> &amp;box)</td></tr>
+<tr class="memdesc:a1a6f9f9263ce73bd176d3d3225c5fd6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles the ac-3 box (AC-3/Dolby Digital audio sample entry). Unlike AAC/ALAC, AC-3 frames are self-synchronizing (each frame starts with its own 0x0B77 sync word and carries its own sample rate/channel info), so - beyond marking the codec - there is no magic cookie or config box to extract here.  <br /></td></tr>
+<tr class="separator:a1a6f9f9263ce73bd176d3d3225c5fd6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7120c772aa9e1a73298187c3db383355" id="r_a7120c772aa9e1a73298187c3db383355"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_common_demuxer.html#a7120c772aa9e1a73298187c3db383355">onAlac</a> (const <a class="el" href="structaudio__tools_1_1_m_p4_parser_1_1_box.html">MP4Parser::Box</a> &amp;box)</td></tr>
 <tr class="memdesc:a7120c772aa9e1a73298187c3db383355"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles the alac box.  <br /></td></tr>
 <tr class="separator:a7120c772aa9e1a73298187c3db383355"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -267,6 +274,7 @@ Protected Attributes</h2></td></tr>
 <tr><td class="fieldname"><a id="a87487bf84e831b40083eb736cc1a237ca6409dac0c80c79ddf61858be7f2c699b" name="a87487bf84e831b40083eb736cc1a237ca6409dac0c80c79ddf61858be7f2c699b"></a>AAC&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a87487bf84e831b40083eb736cc1a237ca039ea4e8bb04948343a7376e44df1c17" name="a87487bf84e831b40083eb736cc1a237ca039ea4e8bb04948343a7376e44df1c17"></a>ALAC&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a87487bf84e831b40083eb736cc1a237ca27bcd310c52f6445cf4b93b90f52f5ef" name="a87487bf84e831b40083eb736cc1a237ca27bcd310c52f6445cf4b93b90f52f5ef"></a>MP3&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a87487bf84e831b40083eb736cc1a237cad82b490458537f4291732b24cfe1b1b1" name="a87487bf84e831b40083eb736cc1a237cad82b490458537f4291732b24cfe1b1b1"></a>AC3&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>
@@ -477,6 +485,40 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>File offset of stsz box. </p>
+
+</div>
+</div>
+<a id="a1a6f9f9263ce73bd176d3d3225c5fd6b" name="a1a6f9f9263ce73bd176d3d3225c5fd6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a6f9f9263ce73bd176d3d3225c5fd6b">&#9670;&#160;</a></span>onAc3()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void onAc3 </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structaudio__tools_1_1_m_p4_parser_1_1_box.html">MP4Parser::Box</a> &amp;&#160;</td>
+          <td class="paramname"><em>box</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handles the ac-3 box (AC-3/Dolby Digital audio sample entry). Unlike AAC/ALAC, AC-3 frames are self-synchronizing (each frame starts with its own 0x0B77 sync word and carries its own sample rate/channel info), so - beyond marking the codec - there is no magic cookie or config box to extract here. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">box</td><td>MP4 box. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -1174,7 +1216,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">{</div>
 <div class="line">      <a class="code hl_variable" href="classaudio__tools_1_1_m4_a_common_demuxer.html#ab5a0bed0783511d580dfb556fd56c21f">audio_config</a>}</div>
-<div class="ttc" id="aclassaudio__tools_1_1_m4_a_common_demuxer_html_ab5a0bed0783511d580dfb556fd56c21f"><div class="ttname"><a href="classaudio__tools_1_1_m4_a_common_demuxer.html#ab5a0bed0783511d580dfb556fd56c21f">audio_tools::M4ACommonDemuxer::audio_config</a></div><div class="ttdeci">M4AAudioConfig audio_config</div><div class="ttdef"><b>Definition</b> M4ACommonDemuxer.h:445</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_m4_a_common_demuxer_html_ab5a0bed0783511d580dfb556fd56c21f"><div class="ttname"><a href="classaudio__tools_1_1_m4_a_common_demuxer.html#ab5a0bed0783511d580dfb556fd56c21f">audio_tools::M4ACommonDemuxer::audio_config</a></div><div class="ttdeci">M4AAudioConfig audio_config</div><div class="ttdef"><b>Definition</b> M4ACommonDemuxer.h:448</div></div>
 </div><!-- fragment -->
 <p>Extractor for audio samples. </p>
 

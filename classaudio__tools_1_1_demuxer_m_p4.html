@@ -244,6 +244,8 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:abab9eec88f736ff271b2b0761148a2f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a9a665a387a8c4fbf7fed14bbbfc093" id="r_a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a6a9a665a387a8c4fbf7fed14bbbfc093">notifyAudioChange</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> <a class="el" href="classaudio__tools_1_1_audio_decoder.html#a47385aa19435f5fca9d3083a748258c5">info</a>)</td></tr>
 <tr class="separator:a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a6f9f9263ce73bd176d3d3225c5fd6b" id="r_a1a6f9f9263ce73bd176d3d3225c5fd6b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a1a6f9f9263ce73bd176d3d3225c5fd6b">onAc3</a> (const <a class="el" href="structaudio__tools_1_1_m_p4_parser_1_1_box.html">MP4Parser::Box</a> &amp;box)</td></tr>
+<tr class="separator:a1a6f9f9263ce73bd176d3d3225c5fd6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7120c772aa9e1a73298187c3db383355" id="r_a7120c772aa9e1a73298187c3db383355"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a7120c772aa9e1a73298187c3db383355">onAlac</a> (const <a class="el" href="structaudio__tools_1_1_m_p4_parser_1_1_box.html">MP4Parser::Box</a> &amp;box)</td></tr>
 <tr class="separator:a7120c772aa9e1a73298187c3db383355"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6316173297e7b95c63cf07668f3cacb7" id="r_a6316173297e7b95c63cf07668f3cacb7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a6316173297e7b95c63cf07668f3cacb7">onAvc1</a> (const <a class="el" href="structaudio__tools_1_1_m_p4_parser_1_1_box.html">MP4Parser::Box</a> &amp;box)</td></tr>
@@ -1408,6 +1410,33 @@ Relationship to ContainerM4A/M4AAudioDemuxer (AudioCodecs/ <a class="el" href="_
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1a6f9f9263ce73bd176d3d3225c5fd6b" name="a1a6f9f9263ce73bd176d3d3225c5fd6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a6f9f9263ce73bd176d3d3225c5fd6b">&#9670;&#160;</a></span>onAc3()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void onAc3 </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structaudio__tools_1_1_m_p4_parser_1_1_box.html">MP4Parser::Box</a> &amp;&#160;</td>
+          <td class="paramname"><em>box</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>AC-3 frames are self-synchronizing (each frame starts with its own 0x0B77 sync word and carries its own sample rate/channel info), so - unlike onMp4a/onAlac - there is no child config box to parse here. </p>
 
 </div>
 </div>
