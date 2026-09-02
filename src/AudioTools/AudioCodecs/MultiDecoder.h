@@ -35,6 +35,14 @@ namespace audio_tools {
  * which uses a pull-based approach. For streaming scenarios with direct
  * access to input/output streams, consider using MultiStreamingDecoder.
  *
+ * @note A MultiDecoder instance is a single-consumer object: it keeps a
+ * single output pointer and a single "currently selected decoder" slot.
+ * Do not share one MultiDecoder (or its registered inner decoders) between
+ * two AudioPlayer instances - each AudioPlayer::setOutput()/setDecoder()
+ * call overwrites that shared output pointer, so whichever player wires
+ * up last silently steals the decoder's output from the other. Use a
+ * separate MultiDecoder (and separate inner decoders) per AudioPlayer.
+ *
  * @ingroup codecs
  * @ingroup decoder
  * @author Phil Schatzmann
