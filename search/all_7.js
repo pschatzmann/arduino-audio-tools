@@ -205,7 +205,7 @@ var searchData=
   ['descu16_202',['descU16',['../namespaceaudio__tools.html#a808f1ca2b0d4fc01e1d3670021616901',1,'audio_tools']]],
   ['descu32_203',['descU32',['../namespaceaudio__tools.html#a0d52114d91c3210eaf62741b816fb462',1,'audio_tools']]],
   ['desiredgaindb_204',['desiredGainDb',['../classaudio__tools_1_1_automatic_gain_control_stream.html#ad38d495d1b5e29fa35cdfe2121de9820',1,'audio_tools::AutomaticGainControlStream']]],
-  ['desktop_2eh_205',['desktop.h',['../_concurrency_2_desktop_8h.html',1,'(Global Namespace)'],['../_platform_config_2_desktop_8h.html',1,'(Global Namespace)']]],
+  ['desktop_2eh_205',['desktop.h',['../_concurrency_2desktop_8h.html',1,'(Global Namespace)'],['../_platform_config_2desktop_8h.html',1,'(Global Namespace)']]],
   ['desktop_5fmillis_5fdefined_206',['desktop_millis_defined',['../_arduino_8h.html#ac9faf1ee520930849fff2feaf62b1d8a',1,'DESKTOP_MILLIS_DEFINED:&#160;Arduino.h'],['../_time_8h.html#ac9faf1ee520930849fff2feaf62b1d8a',1,'DESKTOP_MILLIS_DEFINED:&#160;Time.h']]],
   ['destroy_207',['destroy',['../classdsp__memory__manager.html#a105a00e96586f86c11e457b26ffa588f',1,'dsp_memory_manager']]],
   ['detach_208',['detach',['../classaudio__tools_1_1_emulated___tiny_u_s_b.html#afc10ea2554b4baa890867a3642aa7d85',1,'audio_tools::Emulated_TinyUSB::detach(void)'],['../classaudio__tools_1_1_emulated___tiny_u_s_b.html#a688ff7ae8b9847aa99340c81337ea80f',1,'audio_tools::Emulated_TinyUSB::detach()']]],
