@@ -457,35 +457,23 @@ class PacedVideoOutput : public VideoOutput {
   /// ESP32 also heap/PSRAM usage) to `out` - handy for a periodic status
   /// line in a sketch, e.g. `videoOutput.logTo(Serial);`.
   void logTo(Print& out) {
-    out.print("input fps: ");
-    out.print(inputFPS());
-    out.print(" / output fps: ");
-    out.println(outputFPS());
-    out.print("avg render ms - I: ");
-    out.print(avgIFrameMs());
-    out.print(" / P: ");
-    out.print(avgPFrameMs());
-    out.print(" / overall: ");
-    out.println(avgFrameMs());
-    out.print("frames - I: ");
-    out.print((int)frameCountI());
-    out.print(" / P: ");
-    out.print((int)frameCountP());
-    out.print(" / dropped P: ");
-    out.print((int)droppedFrameCount());
-    out.print(" / dropped I: ");
-    out.print((int)droppedIFrameCount());
-    out.print(" / queued I: ");
-    out.print(queuedIFrameCount());
+    char buf[160];
+    snprintf(buf, sizeof(buf), "input fps: %.2f / output fps: %.2f",
+             inputFPS(), outputFPS());
+    out.println(buf);
+    snprintf(buf, sizeof(buf), "avg render ms - I: %.2f / P: %.2f / overall: %.2f",
+             avgIFrameMs(), avgPFrameMs(), avgFrameMs());
+    out.println(buf);
     size_t queueCapacity = queueCapacityBytes();
-    out.print(" / queue: ");
-    out.print((int)queuedBytes());
-    out.print("/");
-    out.print((int)queueCapacity);
-    out.print(" bytes (");
-    out.print(queueCapacity > 0 ? 100.0f * queuedBytes() / queueCapacity
-                                 : 0.0f);
-    out.println("% full)");
+    snprintf(buf, sizeof(buf),
+             "frames - I: %d / P: %d / dropped P: %d / dropped I: %d / "
+             "queued I: %d / queue: %d/%d bytes (%.2f%% full)",
+             (int)frameCountI(), (int)frameCountP(), (int)droppedFrameCount(),
+             (int)droppedIFrameCount(), queuedIFrameCount(),
+             (int)queuedBytes(), (int)queueCapacity,
+             queueCapacity > 0 ? 100.0f * queuedBytes() / queueCapacity
+                                : 0.0f);
+    out.println(buf);
     // Splits avgFrameMs() (the whole target write()+flush() call) into its
     // decode share vs everything after it (convert/render/SPI, ...) -
     // tells us which half of the render budget is actually worth
@@ -497,10 +485,9 @@ class PacedVideoOutput : public VideoOutput {
       uint32_t renderedFrames = i_frame_count + p_frame_count;
       float avgDecodeMs =
           renderedFrames > 0 ? (float)decodeMs / renderedFrames : 0.0f;
-      out.print("avg decode ms: ");
-      out.print(avgDecodeMs);
-      out.print(" / avg convert+SPI ms: ");
-      out.println(avgFrameMs() - avgDecodeMs);
+      snprintf(buf, sizeof(buf), "avg decode ms: %.2f / avg convert+SPI ms: %.2f",
+               avgDecodeMs, avgFrameMs() - avgDecodeMs);
+      out.println(buf);
     }
 #ifdef ESP32
     size_t heapFree = ESP.getFreeHeap();
@@ -511,7 +498,6 @@ class PacedVideoOutput : public VideoOutput {
     size_t psramTotal = ESP.getPsramSize();
     size_t psramUsed = psramTotal - psramFree;
 
-    char buf[80];
     snprintf(buf, sizeof(buf), "Heap:  total=%u, used=%u, free=%u bytes",
              (unsigned)heapTotal, (unsigned)heapUsed, (unsigned)heapFree);
     out.println(buf);
