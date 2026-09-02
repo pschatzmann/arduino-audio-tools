@@ -253,6 +253,15 @@ class VideoOutput {
   /// rendered frame - without this, its outputFPS()/frameCountI()/
   /// frameCountP()/avgFrameMs() would overcount for such a decoder.
   virtual bool hadOutput() const { return true; }
+
+  /// Optional: registers where width/height/fps/format (VideoInfo) come
+  /// from - e.g. the demuxer feeding this output, so it can size its own
+  /// buffers/panel setup without the caller having to duplicate that call
+  /// per sketch (VideoPlayer::begin() does this automatically for
+  /// whichever VideoOutput it was given). Default no-op: only
+  /// implementations that actually need VideoInfo (OutputTinyGPU/
+  /// OutputOpenCV/OutputTFT_eSPI) override this.
+  virtual void setVideoInfoSource(VideoInfoSource& source) {}
 };
 
 

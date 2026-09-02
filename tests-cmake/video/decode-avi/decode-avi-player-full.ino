@@ -56,7 +56,6 @@ void setup() {
   // MJPEG mode (which just accumulates bytes waiting for flush(), never
   // called here), so without this it silently never displays anything.
   videoOut.setVideoFormat(VideoFormat::RGB565);
-  videoOut.setVideoInfoSource(player.demuxer());
 
   // This file has a real audio track - schedule video against it instead
   // of wall-clock time (see VideoPlayer's class comment's "Audio clock"

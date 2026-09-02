@@ -452,6 +452,59 @@ class PacedVideoOutput : public VideoOutput {
     return elapsed > 0 ? (1000.0f * count) / elapsed : 0.0f;
   }
 
+  /// Prints a human-readable summary of the diagnostics above (fps,
+  /// average render time, frame/drop counts, queue fill level, and on
+  /// ESP32 also heap/PSRAM usage) to `out` - handy for a periodic status
+  /// line in a sketch, e.g. `videoOutput.logTo(Serial);`.
+  void logTo(Print& out) {
+    out.print("input fps: ");
+    out.print(inputFPS());
+    out.print(" / output fps: ");
+    out.println(outputFPS());
+    out.print("avg render ms - I: ");
+    out.print(avgIFrameMs());
+    out.print(" / P: ");
+    out.print(avgPFrameMs());
+    out.print(" / overall: ");
+    out.println(avgFrameMs());
+    out.print("frames - I: ");
+    out.print(frameCountI());
+    out.print(" / P: ");
+    out.print(frameCountP());
+    out.print(" / dropped P: ");
+    out.print(droppedFrameCount());
+    out.print(" / dropped I: ");
+    out.print(droppedIFrameCount());
+    out.print(" / queued I: ");
+    out.print(queuedIFrameCount());
+    size_t queueCapacity = queueCapacityBytes();
+    out.print(" / queue: ");
+    out.print((unsigned)queuedBytes());
+    out.print("/");
+    out.print((unsigned)queueCapacity);
+    out.print(" bytes (");
+    out.print(queueCapacity > 0 ? 100.0f * queuedBytes() / queueCapacity
+                                 : 0.0f);
+    out.println("% full)");
+#ifdef ESP32
+    size_t heapFree = ESP.getFreeHeap();
+    size_t heapTotal = ESP.getHeapSize();
+    size_t heapUsed = heapTotal - heapFree;
+
+    size_t psramFree = ESP.getFreePsram();
+    size_t psramTotal = ESP.getPsramSize();
+    size_t psramUsed = psramTotal - psramFree;
+
+    char buf[80];
+    snprintf(buf, sizeof(buf), "Heap:  total=%u, used=%u, free=%u bytes",
+             (unsigned)heapTotal, (unsigned)heapUsed, (unsigned)heapFree);
+    out.println(buf);
+    snprintf(buf, sizeof(buf), "PSRAM: total=%u, used=%u, free=%u bytes",
+             (unsigned)psramTotal, (unsigned)psramUsed, (unsigned)psramFree);
+    out.println(buf);
+#endif
+  }
+
  protected:
   VideoOutput* p_target;
   TimeSource* p_clock = nullptr;

@@ -75,7 +75,6 @@ void setup() {
   // MJPEG mode (which just accumulates bytes waiting for flush(), never
   // called here), so without this it silently never displays anything.
   videoOut.setVideoFormat(VideoFormat::RGB565);
-  videoOut.setVideoInfoSource(aviDemuxer);
 
   // Register the codecs this AVI file's tracks may use (see the comment
   // at the top of this file - VideoPlayer's multi-decoders start empty;

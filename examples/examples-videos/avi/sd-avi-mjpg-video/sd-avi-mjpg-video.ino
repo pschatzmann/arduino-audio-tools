@@ -4,30 +4,19 @@
  * the microSD card of the Hosyond 2.8" ESP32-S3 Display (see that board's
  * audio-out/lcd-test/player-sdmmc examples): DemuxerAVI demuxes,
  * MJPEGDecoder (wraps https://github.com/pschatzmann/TinyJPEG) decodes video
- * to the ILI9341 panel, DecoderHelix auto-detects and decodes the audio
- * (PCM/AAC/MP3 all valid in AVI) to the ES8311/FM8002E speaker path via
- * AudioBoardStream.
+ * to the ILI9341 panel, mp3Decoder/aacDecoder/wavDecoder auto-select and
+ * decode the audio (PCM/AAC/MP3 all valid in AVI) to the ES8311/FM8002E
+ * speaker path via AudioBoardStream.
  *
- * Audio/video sync: DemuxerAVI dispatches audio/video as fast as bytes can
- * be parsed - all real pacing happens in videoSyncTask (PacedVideoOutput,
- * see Video/PacedVideoOutput.h), which sits between the demuxer and
- * mjpegDecoder. It buffers each decoded frame and renders it (MJPEG decode
- * + panel refresh) from its own background task, timed against audioClock
- * - an AudioTimeSourceStream inserted between multiDecoder and
- * AudioBoardStream that turns "how many decoded PCM bytes have reached
- * the audio device so far" into an elapsed-ms clock, so video is paced to
- * how far audio has actually played rather than a separate wall-clock
- * schedule. Because this all happens off the demuxer's own loop() call, a
- * slow decode/display frame never delays the next audio chunk.
- * videoSyncTask's own diagnostics (frameCount()/avgFrameMs()/inputFPS()/
- * outputFPS()/...) cover throughput monitoring - see logInfo() - so no
- * separate VideoFrameMeter is needed.
- *
- * Pipeline: File (SD_MMC) -> CodecCopy -> DemuxerAVI (demux)
- *   -> EncodedAudioStream (DecoderHelix) -> AudioTimeSourceStream (audio
- *   clock) -> AudioBoardStream (audio)
- *   \-> PacedVideoOutput (buffer + schedule) -> MJPEGDecoder ->
- *   OutputTinyGPU (video, own background task)
+ * Driven through AudioTools/Video/VideoPlayer.h instead of wiring
+ * CodecCopy, PacedVideoOutput, EncodedAudioStream and AudioTimeSourceStream
+ * together by hand - see VideoPlayer's own class comment for the pipeline
+ * it replaces (identical end to end; VideoPlayer just owns the wiring, and
+ * its copy() already keeps the video schedule's fps in sync with the
+ * demuxer's own parsed rate, so no manual polling is needed in loop()
+ * either). mp3/aac/wav are registered explicitly below since VideoPlayer's
+ * built-in audio multi-decoder starts empty (see its own class comment) -
+ * together they match what DecoderHelix bundles by default.
  *
  * Notes:
  * - Video track must be Motion-JPEG (fourcc MJPG), baseline (non-
@@ -51,44 +40,33 @@
  * @copyright GPLv3
  */
 #include "AudioTools.h"
-#include "AudioTools/AudioCodecs/CodecHelix.h"
+#include "AudioTools/AudioCodecs/CodecAACHelix.h"
+#include "AudioTools/AudioCodecs/CodecMP3Helix.h"
+#include "AudioTools/AudioCodecs/CodecWAV.h"
 #include "AudioTools/AudioCodecs/ContainerAVI.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
 #include <SD_MMC.h>
 
 #include "AudioTools/Video/CodecJPEG.h"
 #include "AudioTools/Video/OutputTinyGPU.h"
+#include "AudioTools/Video/VideoPlayer.h"
 #include "TinyGPU/Boards.h"
 
 // ---- File on the SD card to play ----
 const char* file_path = "/Videos/output176x144-mjpeg.avi";
 
-MJPEGDecoder mjpegDecoder;
-// 3rd arg: scheduling delay compensating for AudioBoardStream's own
-// output buffering (cfg.buffer_size*cfg.buffer_count) - see
-// PacedVideoOutput::setSchedulingDelayMs(); ~115ms matches the ~20KB
-// output buffer below - tune if you change either.
-PacedVideoOutput videoSyncTask(mjpegDecoder, 0, 115);
+DemuxerAVI aviDemuxer;
 LCDBoardESP32S3_2_8Display board;
 OutputTinyGPU tftOutput(board);
-// Qualified deliberately: TinyGPU.h (pulled in by OutputTinyGPU.h) and
-// I2SCodecStream.h (pulled in by AudioBoardStream.h) each apply their own
-// "using namespace" globally, and both libraries happen to name their
-// board for this exact display "ESP32S3HosyondDisplay" - tinygpu::
-// ESP32S3HosyondDisplay is a *type alias* for LCDBoardESP32S3_2_8Display
-// (unrelated to the board object above), audio_driver::
-// ESP32S3HosyondDisplay is the AudioBoard *object* actually needed here -
-// left unqualified, the two collide and the sketch fails to compile with
-// "reference to 'ESP32S3HosyondDisplay' is ambiguous".
 AudioBoardStream out(audio_driver::ESP32S3HosyondDisplay);
-AudioTimeSourceStream audioClock(
-    out);  // decoded-PCM-bytes-based playback clock
-DecoderHelix multiDecoder;
-EncodedAudioStream audioOut(
-    &audioClock, &multiDecoder);  // decodes PCM/AAC/MP3 -> audioClock -> out
+VideoPlayer player(aviDemuxer, tftOutput, out);
+
+MJPEGDecoder mjpegDecoder;
+MP3DecoderHelix mp3Decoder;
+AACDecoderHelix aacDecoder;
+WAVDecoder wavDecoder;
+
 File file;
-DemuxerAVI aviDemuxer;
-CodecCopy copier(aviDemuxer, file);
 
 void setup() {
   Serial.begin(115200);
@@ -128,88 +106,50 @@ void setup() {
   // time needs to come back down.
   tftOutput.setScaleToFit(true);
 
-  multiDecoder.setMimeSource(aviDemuxer);
-  if (!audioOut.begin()) {
-    Serial.println("EncodedAudioStream begin() failed");
-    stop();
-  }
+  player.addVideoDecoder(mjpegDecoder);
+  player.addAudioDecoder(mp3Decoder, "audio/mpeg");
+  player.addAudioDecoder(aacDecoder, "audio/aac");
+  player.addAudioDecoder(wavDecoder, "audio/vnd.wave");
 
-  mjpegDecoder.setOutput(tftOutput);
-  tftOutput.setVideoInfoSource(mjpegDecoder);
+  // This file has a real audio track - schedule video against it instead
+  // of wall-clock time (see VideoPlayer's class comment's "Audio clock"
+  // section).
+  player.setUseAudioClock(true);
 
-  if (!mjpegDecoder.begin()) {
-    Serial.println("MJPEGDecoder begin() failed");
-    stop();
-  }
-
-  videoSyncTask.setAudioClock(audioClock);
+  // Compensates for AudioBoardStream's own output buffering
+  // (cfg.buffer_size*cfg.buffer_count) - see
+  // PacedVideoOutput::setSchedulingDelayMs(); ~115ms matches the ~20KB
+  // output buffer above - tune if you change either.
+  player.setSchedulingDelayMs(115);
   // Pin the render task to core 0 - loop() (SD reads + demuxing + the
   // blocking out.write() into I2S) runs on core 1 by default. Without
   // this, the video task could land on core 1 too and preempt loop() for
   // the length of a slow render call. Call before begin()/first write().
-  videoSyncTask.setTaskParameters(4096, 2, 0);
-  // call before begin()/first write(). No MJPEG-specific hardware timing
-  // data yet to tune this against - increase if write() blocks/resyncs are
-  // too frequent for your own video/board.
-  videoSyncTask.setQueueBytes(40 * 1024);
+  player.setTaskParameters(4096, 2, 0);
+  // No MJPEG-specific hardware timing data yet to tune this against -
+  // increase if write() blocks/resyncs are too frequent for your own
+  // video/board.
+  player.setQueueBytes(40 * 1024);
   // Every MJPEG frame is classified as a keyframe (see MJPEGDecoder::
   // isKeyFrame()), so the default (4) would count total queued frames, not
   // GOPs of backlog - firing on a handful of merely-queued frames instead
   // of a real backlog. Disabled (0); the byte-fill (default 80% via
   // setResyncQueueFillFraction()) and lateness (setResyncThresholdMs())
   // triggers already measure real backlog severity regardless of codec.
-  videoSyncTask.setMaxQueuedIFrames(0);
+  player.setMaxQueuedIFrames(0);
 
-  aviDemuxer.setOutputAudio(audioOut);
-  aviDemuxer.setOutputVideo(videoSyncTask);
-  if (!aviDemuxer.begin()) {
-    Serial.println("DemuxerAVI begin() failed");
+  if (!player.begin(file)) {
+    Serial.println("VideoPlayer begin() failed");
     stop();
   }
 }
 
 void logInfo() {
-  Serial.print("input fps: ");
-  Serial.print(videoSyncTask.inputFPS());
-  Serial.print(" / output fps: ");
-  Serial.println(videoSyncTask.outputFPS());
-  Serial.print("avg render ms (decode+convert+SPI): ");
-  Serial.println(videoSyncTask.avgFrameMs());
-  Serial.print("frames: ");
-  Serial.print(videoSyncTask.frameCount());
-  Serial.print(" / dropped: ");
-  Serial.print(videoSyncTask.droppedFrameCount());
-  size_t queueCapacity = videoSyncTask.queueCapacityBytes();
-  Serial.print(" / queue: ");
-  Serial.print((unsigned)videoSyncTask.queuedBytes());
-  Serial.print("/");
-  Serial.print((unsigned)queueCapacity);
-  Serial.print(" bytes (");
-  Serial.print(queueCapacity > 0
-                   ? 100.0f * videoSyncTask.queuedBytes() / queueCapacity
-                   : 0.0f);
-  Serial.println("% full)");
+  player.logTo(Serial);
 #ifdef ESP32
-  // Internal heap
-  size_t heapFree = ESP.getFreeHeap();
-  size_t heapTotal = ESP.getHeapSize();
-  size_t heapUsed = heapTotal - heapFree;
-
-  // PSRAM
-  size_t psramFree = ESP.getFreePsram();
-  size_t psramTotal = ESP.getPsramSize();
-  size_t psramUsed = psramTotal - psramFree;
-
-  Serial.printf("Heap:  total=%u, used=%u, free=%u bytes\n", heapTotal,
-                heapUsed, heapFree);
-
-  Serial.printf("PSRAM: total=%u, used=%u, free=%u bytes\n", psramTotal,
-                psramUsed, psramFree);
-
   // Largest currently allocatable blocks
   Serial.printf("Largest heap block:  %u bytes\n",
                 heap_caps_get_largest_free_block(MALLOC_CAP_INTERNAL));
-
   Serial.printf("Largest PSRAM block: %u bytes\n",
                 heap_caps_get_largest_free_block(MALLOC_CAP_SPIRAM));
 #endif
@@ -221,18 +161,10 @@ void loop() {
     logInfo();
     diagLast = millis();
   }
-  // AVI's header (which carries the nominal frame rate) always precedes
-  // the movi data - so this becomes available strictly before the first
-  // video frame ever reaches videoSyncTask, no gating needed beyond
-  // "call it every time, cheaply, until it's non-zero".
-  float fps = aviDemuxer.getVideoInfo().fps;
-  if (fps > 0) videoSyncTask.setFps(fps);
 
-  if (file) {
-    if (copier.copy() == 0) {
-      Serial.println("Done");
-      file.close();
-      stop();
-    }
+  if (player.copy() == 0) {
+    Serial.println("Done");
+    file.close();
+    stop();
   }
 }

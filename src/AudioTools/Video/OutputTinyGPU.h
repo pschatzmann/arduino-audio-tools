@@ -80,7 +80,7 @@ class OutputTinyGPU : public VideoOutput {
   void setRotation(DisplayRotation rotation) { tftDriver.setRotation(rotation); }
 
   /// Defines the source of the video information (width, height, fps, format)
-  void setVideoInfoSource(VideoInfoSource& source) { p_info = &source; }
+  void setVideoInfoSource(VideoInfoSource& source) override { p_info = &source; }
 
   /// Defines the video format and dimensions - call before begin() if you
   void setVideoInfo(VideoInfo info) { info_ = info; }

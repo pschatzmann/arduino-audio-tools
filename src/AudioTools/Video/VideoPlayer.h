@@ -243,6 +243,38 @@ class VideoPlayer {
   /// 1024, same as CodecCopy's own default). Call before begin().
   void setBufferSize(int size) { buffer_size = size; }
 
+  /// Convenience forwarders to the built-in PacedVideoOutput (see
+  /// videoSyncTask() for the full escape hatch, including the
+  /// frameCount()/avgFrameMs()/outputFPS() diagnostics not covered here) -
+  /// spares a sketch's own `player.videoSyncTask().setXxx(...)` for the
+  /// tuning calls every current *.ino example already makes. Each mirrors
+  /// PacedVideoOutput's own method of the same name - see there for what
+  /// it does. Call before begin(); setFps()/setAudioClock() are not
+  /// forwarded since VideoPlayer already drives those itself (see copy()/
+  /// setUseAudioClock()).
+  void setSchedulingDelayMs(uint32_t delayMs) {
+    video_sync.setSchedulingDelayMs(delayMs);
+  }
+  void setCatchUpThresholdFrames(float frames) {
+    video_sync.setCatchUpThresholdFrames(frames);
+  }
+  void setIgnorePFrames(bool active) { video_sync.setIgnorePFrames(active); }
+  void setResyncThresholdMs(uint32_t ms) {
+    video_sync.setResyncThresholdMs(ms);
+  }
+  void setResyncQueueFillFraction(float fraction) {
+    video_sync.setResyncQueueFillFraction(fraction);
+  }
+  void setMaxQueuedIFrames(int count) {
+    video_sync.setMaxQueuedIFrames(count);
+  }
+  void setTaskParameters(uint32_t stackSizeWords, uint8_t priority,
+                          int core = -1) {
+    video_sync.setTaskParameters(stackSizeWords, priority, core);
+  }
+  void setQueueBytes(size_t bytes) { video_sync.setQueueBytes(bytes); }
+  void setQueueUsePSRAM(bool flag) { video_sync.setQueueUsePSRAM(flag); }
+
   /// Wires the full pipeline (video decoder -> output via
   /// PacedVideoOutput; audio decoder -> [audio clock ->] output, if an
   /// audio output was given) and starts the demuxer. `source` (e.g. an
@@ -261,6 +293,11 @@ class VideoPlayer {
     // declaration below)
     default_video_decoder.setOutput(*p_video_output);
     default_video_decoder.setVideoInfoSource(default_demuxer);
+    // Default no-op for a VideoOutput that doesn't need it (see
+    // VideoOutput::setVideoInfoSource()'s own comment) - saves every
+    // sketch its own setVideoInfoSource() call for one that does (e.g.
+    // OutputTinyGPU/OutputOpenCV/OutputTFT_eSPI).
+    p_video_output->setVideoInfoSource(default_demuxer);
     if (!default_video_decoder.begin()) {
       LOGE("VideoPlayer: MultiVideoDecoder begin() failed");
       return false;
@@ -388,6 +425,9 @@ class VideoPlayer {
   PacedVideoOutput& videoSyncTask() { return video_sync; }
   /// The Stream given to begin() - nullptr before the first begin() call.
   Stream* getStream() { return p_source; }
+  /// Convenience shortcut for videoSyncTask().logTo(out) - see
+  /// PacedVideoOutput::logTo() for what it prints.
+  void logTo(Print& out) { video_sync.logTo(out); }
 
  protected:
   VideoOutput* p_video_output = nullptr;
