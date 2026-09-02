@@ -175,6 +175,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:aaf28f4d04ba00db3927aa8f6b0e859e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab94da99c4b008b36e408511f6cff50d2" id="r_ab94da99c4b008b36e408511f6cff50d2"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#ab94da99c4b008b36e408511f6cff50d2">total_decode_ms_</a> = 0</td></tr>
 <tr class="separator:ab94da99c4b008b36e408511f6cff50d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a925b91b3c6e0349900fe99b8ac7f064d" id="r_a925b91b3c6e0349900fe99b8ac7f064d"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#a925b91b3c6e0349900fe99b8ac7f064d">total_output_ms_</a> = 0</td></tr>
+<tr class="separator:a925b91b3c6e0349900fe99b8ac7f064d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>H.264 video decoder: wraps TinyH264Decoder (<a href="https://github.com/pschatzmann/TinyH264">https://github.com/pschatzmann/TinyH264</a>) as a <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a>, so it can be plugged directly into e.g. <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html#ab54510fc95b760fb7adb69274d61bb24">DemuxerAVI::setOutputVideo()</a>/ <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#aee3d456e79d27d60f9b6ade892fcc88c">DemuxerMP4::setOutputVideo()</a>. Consumes an Annex-B H.264 bitstream via <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> and, once a complete picture has been decoded, writes it - converted to <a class="el" href="classaudio__tools_1_1_h264_decoder.html#ab4305de559192cc500fbd0587b2748ea">setVideoFormat()</a>'s format (RGB565 by default, the common TFT wire format) - to the <a class="el" href="class_print.html">Print</a> target configured via <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput()</a>, one <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> call per decoded picture. </p>
@@ -396,7 +398,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Finalizes the frame most recently written via one or more <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> calls - see class comment. Default no-op for implementations that display/decode synchronously in <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> instead. </p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_muxer.html#ad3aed50bc3b4459454ccb8c64f5ced5a">Muxer</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a04f2540d940cc37b5c2538ed8e5b54be">H264DecoderESP32S3&lt; Alloc &gt;</a>, <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#a04f2540d940cc37b5c2538ed8e5b54be">MJPEGDecoder</a>, <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a04f2540d940cc37b5c2538ed8e5b54be">MPGDecoder</a>, <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a04f2540d940cc37b5c2538ed8e5b54be">MultiVideoDecoder</a>, <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a04f2540d940cc37b5c2538ed8e5b54be">OutputOpenCV</a>, <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a04f2540d940cc37b5c2538ed8e5b54be">PacedVideoOutput</a>, and <a class="el" href="classaudio__tools_1_1_video_frame_meter.html#a04f2540d940cc37b5c2538ed8e5b54be">VideoFrameMeter</a>.</p>
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_muxer.html#ad3aed50bc3b4459454ccb8c64f5ced5a">Muxer</a>, <a class="el" href="classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a04f2540d940cc37b5c2538ed8e5b54be">H264DecoderESP32S3&lt; Alloc &gt;</a>, <a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#a04f2540d940cc37b5c2538ed8e5b54be">MJPEGDecoder</a>, <a class="el" href="classaudio__tools_1_1_m_p_g_decoder.html#a04f2540d940cc37b5c2538ed8e5b54be">MPGDecoder</a>, <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a04f2540d940cc37b5c2538ed8e5b54be">MultiVideoDecoder</a>, <a class="el" href="classaudio__tools_1_1_output_f_p_s_meter.html#a04f2540d940cc37b5c2538ed8e5b54be">OutputFPSMeter</a>, <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a04f2540d940cc37b5c2538ed8e5b54be">OutputOpenCV</a>, <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a04f2540d940cc37b5c2538ed8e5b54be">PacedVideoOutput</a>, and <a class="el" href="classaudio__tools_1_1_video_frame_meter.html#a04f2540d940cc37b5c2538ed8e5b54be">VideoFrameMeter</a>.</p>
 
 </div>
 </div>
@@ -708,7 +710,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Hint to skip the expensive part of displaying the next frame(s) (e.g. the panel refresh) while still accepting and fully processing <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> calls - used to recover from falling behind the playback schedule without breaking a codec's decode state (e.g. H.264 inter-prediction reference chain, which requires every frame to still be decoded even if it's never shown). Default no-op: implementations that can't skip rendering cheaply just ignore it and always render. </p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a94f8728be362b736be4cb10a4253d201">MultiVideoDecoder</a>, <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a94f8728be362b736be4cb10a4253d201">OutputTinyGPU</a>, <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a94f8728be362b736be4cb10a4253d201">PacedVideoOutput</a>, and <a class="el" href="classaudio__tools_1_1_video_frame_meter.html#a94f8728be362b736be4cb10a4253d201">VideoFrameMeter</a>.</p>
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a94f8728be362b736be4cb10a4253d201">MultiVideoDecoder</a>, <a class="el" href="classaudio__tools_1_1_output_f_p_s_meter.html#a94f8728be362b736be4cb10a4253d201">OutputFPSMeter</a>, <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a94f8728be362b736be4cb10a4253d201">OutputTinyGPU</a>, <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a94f8728be362b736be4cb10a4253d201">PacedVideoOutput</a>, and <a class="el" href="classaudio__tools_1_1_video_frame_meter.html#a94f8728be362b736be4cb10a4253d201">VideoFrameMeter</a>.</p>
 
 </div>
 </div>
@@ -792,7 +794,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Sum of time spent purely inside decoder_.write() (CAVLC decode + reconstruction) since <a class="el" href="classaudio__tools_1_1_h264_decoder.html#acba365cc28eb702040c382646cfb0a7a">begin()</a> - excludes SD reads and demux overhead a caller's own outer timing bundles in alongside it. </p>
+<p>Sum of time spent purely inside decoder_.write() (CAVLC decode + reconstruction) since <a class="el" href="classaudio__tools_1_1_h264_decoder.html#acba365cc28eb702040c382646cfb0a7a">begin()</a> - excludes SD reads and demux overhead a caller's own outer timing bundles in alongside it, AND excludes the picture-ready callback's own cost (pixel-format conversion + pushing the result to <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput()</a>'s target, which decoder_.write() invokes synchronously mid-call - see <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a61cc3ad56e903e58421fa50e2c900b8c">writeToOutput()</a>) - measured separately and subtracted in <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>, so a caller comparing this against its own outer wall-clock time around <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> (e.g. <a class="el" href="classaudio__tools_1_1_output_f_p_s_meter.html" title="Wraps a VideoOutput (typically a codec decoder, e.g. H264Decoder/ MJPEGDecoder/MPGDecoder or a MultiV...">OutputFPSMeter</a>) gets a real decode-vs-render split instead of a number that already secretly includes render. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_output.html#a5cbfd0eb02e54df848e83260a891a15f">VideoOutput</a>.</p>
 
@@ -1048,6 +1050,28 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">uint64_t total_decode_ms_ = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a925b91b3c6e0349900fe99b8ac7f064d" name="a925b91b3c6e0349900fe99b8ac7f064d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a925b91b3c6e0349900fe99b8ac7f064d">&#9670;&#160;</a></span>total_output_ms_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t total_output_ms_ = 0</td>
         </tr>
       </table>
   </td>
