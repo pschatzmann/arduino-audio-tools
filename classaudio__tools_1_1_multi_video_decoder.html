@@ -140,6 +140,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab4305de559192cc500fbd0587b2748ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab848f87085dcf8ecc7343e4c4d690306" id="r_ab848f87085dcf8ecc7343e4c4d690306"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#ab848f87085dcf8ecc7343e4c4d690306">setVideoInfoSource</a> (<a class="el" href="classaudio__tools_1_1_video_info_source.html">VideoInfoSource</a> &amp;source)</td></tr>
 <tr class="separator:ab848f87085dcf8ecc7343e4c4d690306"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09a78dbd193845bddd4c7dbfcf4cc1a3" id="r_a09a78dbd193845bddd4c7dbfcf4cc1a3"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a09a78dbd193845bddd4c7dbfcf4cc1a3">totalDecodeMs</a> () const override</td></tr>
+<tr class="separator:a09a78dbd193845bddd4c7dbfcf4cc1a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a026655e20010414e4d162042f5c413" id="r_a0a026655e20010414e4d162042f5c413"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_video_info.html">VideoInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a0a026655e20010414e4d162042f5c413">videoInfo</a> () override</td></tr>
 <tr class="separator:a0a026655e20010414e4d162042f5c413"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
@@ -645,6 +647,34 @@ Protected Attributes</h2></td></tr>
 <p>Provides the container's own answer for which codec the video track actually is - takes precedence over content-sniffing when set (see the class comment). Pass the demuxer feeding this object, e.g. multiVideoDecoder.setVideoInfoSource(aviDemuxer). Must outlive this object; call before the first <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_output.html#a03d6419c0018dfd2de3fcdb93bc02873">VideoOutput</a>.</p>
+
+</div>
+</div>
+<a id="a09a78dbd193845bddd4c7dbfcf4cc1a3" name="a09a78dbd193845bddd4c7dbfcf4cc1a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09a78dbd193845bddd4c7dbfcf4cc1a3">&#9670;&#160;</a></span>totalDecodeMs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t totalDecodeMs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Optional: sum of time (ms) spent purely decoding (excluding any surrounding convert/render/SPI work a subclass's <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> also does) since <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#acba365cc28eb702040c382646cfb0a7a">begin()</a> - see <a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a>'s own override for the only current implementation. Default 0: only meaningful for a decoder that separates decode time from render time internally: <a class="el" href="classaudio__tools_1_1_paced_video_output.html" title="Buffers a small, configurable amount of video (see setQueueBytes()) and renders it frame by frame fro...">PacedVideoOutput</a>:: logTo() prints a decode-vs-render split under "avg decode ms:" only when this returns nonzero. </p>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_output.html#a5cbfd0eb02e54df848e83260a891a15f">VideoOutput</a>.</p>
 
 </div>
 </div>

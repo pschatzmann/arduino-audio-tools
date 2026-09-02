@@ -156,6 +156,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:add440be5fd77fdd11db82757ecf6c28d" id="r_add440be5fd77fdd11db82757ecf6c28d"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="group__video.html#ga3529160d6b73e5a63e0a95afeb424659">StreamContentType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer.html#add440be5fd77fdd11db82757ecf6c28d">streamType</a> ()=0</td></tr>
 <tr class="memdesc:add440be5fd77fdd11db82757ecf6c28d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The track <a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">write()</a> currently targets (see <a class="el" href="classaudio__tools_1_1_muxer.html#aca7ee6461963788ac0c3a5cb9d31d9d9" title="Selects whether write() feeds the video or the audio track.">setStreamType()</a>)  <br /></td></tr>
 <tr class="separator:add440be5fd77fdd11db82757ecf6c28d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cbfd0eb02e54df848e83260a891a15f" id="r_a5cbfd0eb02e54df848e83260a891a15f"><td class="memItemLeft" align="right" valign="top">virtual uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a5cbfd0eb02e54df848e83260a891a15f">totalDecodeMs</a> () const</td></tr>
+<tr class="separator:a5cbfd0eb02e54df848e83260a891a15f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f016ab9037bd654f538f107eb1d8f78" id="r_a4f016ab9037bd654f538f107eb1d8f78"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">write</a> (const uint8_t *data, size_t len)=0</td></tr>
 <tr class="separator:a4f016ab9037bd654f538f107eb1d8f78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -938,6 +940,34 @@ Protected Attributes</h2></td></tr>
 <p>The track <a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">write()</a> currently targets (see <a class="el" href="classaudio__tools_1_1_muxer.html#aca7ee6461963788ac0c3a5cb9d31d9d9" title="Selects whether write() feeds the video or the audio track.">setStreamType()</a>) </p>
 
 <p>Implemented in <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html#a2902d7fd71678a3c90ac06a7700c2784">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html#a2902d7fd71678a3c90ac06a7700c2784">MuxerMP4</a>, and <a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html#a2902d7fd71678a3c90ac06a7700c2784">MuxerMPG</a>.</p>
+
+</div>
+</div>
+<a id="a5cbfd0eb02e54df848e83260a891a15f" name="a5cbfd0eb02e54df848e83260a891a15f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5cbfd0eb02e54df848e83260a891a15f">&#9670;&#160;</a></span>totalDecodeMs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual uint64_t totalDecodeMs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Optional: sum of time (ms) spent purely decoding (excluding any surrounding convert/render/SPI work a subclass's <a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">write()</a> also does) since <a class="el" href="classaudio__tools_1_1_muxer.html#ae8a0d9ca63f8bb3de100e347c3f3bca4">begin()</a> - see <a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a>'s own override for the only current implementation. Default 0: only meaningful for a decoder that separates decode time from render time internally: <a class="el" href="classaudio__tools_1_1_paced_video_output.html" title="Buffers a small, configurable amount of video (see setQueueBytes()) and renders it frame by frame fro...">PacedVideoOutput</a>:: logTo() prints a decode-vs-render split under "avg decode ms:" only when this returns nonzero. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_h264_decoder.html#a09a78dbd193845bddd4c7dbfcf4cc1a3">H264Decoder</a>, and <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a09a78dbd193845bddd4c7dbfcf4cc1a3">MultiVideoDecoder</a>.</p>
 
 </div>
 </div>

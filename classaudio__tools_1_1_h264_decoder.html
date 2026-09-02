@@ -142,8 +142,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab4305de559192cc500fbd0587b2748ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03d6419c0018dfd2de3fcdb93bc02873" id="r_a03d6419c0018dfd2de3fcdb93bc02873"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a03d6419c0018dfd2de3fcdb93bc02873">setVideoInfoSource</a> (<a class="el" href="classaudio__tools_1_1_video_info_source.html">VideoInfoSource</a> &amp;source)</td></tr>
 <tr class="separator:a03d6419c0018dfd2de3fcdb93bc02873"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad176e01f36ccfcb09a3f03c4bf88f9f1" id="r_ad176e01f36ccfcb09a3f03c4bf88f9f1"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#ad176e01f36ccfcb09a3f03c4bf88f9f1">totalDecodeMs</a> () const</td></tr>
-<tr class="separator:ad176e01f36ccfcb09a3f03c4bf88f9f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09a78dbd193845bddd4c7dbfcf4cc1a3" id="r_a09a78dbd193845bddd4c7dbfcf4cc1a3"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#a09a78dbd193845bddd4c7dbfcf4cc1a3">totalDecodeMs</a> () const override</td></tr>
+<tr class="separator:a09a78dbd193845bddd4c7dbfcf4cc1a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a026655e20010414e4d162042f5c413" id="r_a0a026655e20010414e4d162042f5c413"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_video_info.html">VideoInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#a0a026655e20010414e4d162042f5c413">videoInfo</a> () override</td></tr>
 <tr class="separator:a0a026655e20010414e4d162042f5c413"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
@@ -770,8 +770,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ad176e01f36ccfcb09a3f03c4bf88f9f1" name="ad176e01f36ccfcb09a3f03c4bf88f9f1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad176e01f36ccfcb09a3f03c4bf88f9f1">&#9670;&#160;</a></span>totalDecodeMs()</h2>
+<a id="a09a78dbd193845bddd4c7dbfcf4cc1a3" name="a09a78dbd193845bddd4c7dbfcf4cc1a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09a78dbd193845bddd4c7dbfcf4cc1a3">&#9670;&#160;</a></span>totalDecodeMs()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -788,11 +788,13 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 <p>Sum of time spent purely inside decoder_.write() (CAVLC decode + reconstruction) since <a class="el" href="classaudio__tools_1_1_h264_decoder.html#acba365cc28eb702040c382646cfb0a7a">begin()</a> - excludes SD reads and demux overhead a caller's own outer timing bundles in alongside it. </p>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_output.html#a5cbfd0eb02e54df848e83260a891a15f">VideoOutput</a>.</p>
 
 </div>
 </div>
