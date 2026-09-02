@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['n_0',['n',['../structaudio__tools_1_1fft__state.html#a7722c8ecbb62d99aee7ce68b1752f337',1,'audio_tools::fft_state::N'],['../classaudio__tools_1_1_silence_removal_converter.html#a76f11d9a0a47b94f72c2d0e77fb32240',1,'audio_tools::SilenceRemovalConverter::n'],['../classaudio__tools_1_1_g7xx_decoder.html#a76f11d9a0a47b94f72c2d0e77fb32240',1,'audio_tools::G7xxDecoder::n']]],
+  ['n_0',['n',['../classaudio__tools_1_1_silence_removal_converter.html#a76f11d9a0a47b94f72c2d0e77fb32240',1,'audio_tools::SilenceRemovalConverter::n'],['../classaudio__tools_1_1_g7xx_decoder.html#a76f11d9a0a47b94f72c2d0e77fb32240',1,'audio_tools::G7xxDecoder::n'],['../structaudio__tools_1_1fft__state.html#a7722c8ecbb62d99aee7ce68b1752f337',1,'audio_tools::fft_state::N']]],
   ['n_5fa0_1',['N_A0',['../_musical_notes_8h.html#ac7903b3454f8b1656c706d6f2bfb5ee1',1,'MusicalNotes.h']]],
   ['n_5fa1_2',['N_A1',['../_musical_notes_8h.html#a65f6c9807b8d7e9e42a714bf85f85a78',1,'MusicalNotes.h']]],
   ['n_5fa2_3',['N_A2',['../_musical_notes_8h.html#a224568ad6a0656b29bb86562d03d73da',1,'MusicalNotes.h']]],
@@ -161,7 +161,7 @@ var searchData=
   ['nindexof_158',['nindexof',['../classaudio__tools_1_1_str_view.html#a6b12a09a006bfbf22cf72bd40b186923',1,'audio_tools::StrView::nIndexOf(const char c, int n)'],['../classaudio__tools_1_1_str_view.html#abf0d87db13532ab2153e084d22c85ac5',1,'audio_tools::StrView::nIndexOf(const char *cont, int n)']]],
   ['nms_5fvbxadpcm_159',['NMS_VBXADPCM',['../group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1aea9795ac3f3e2c9a2173aa02d92faf0c',1,'audio_tools']]],
   ['no_5fdecoder_160',['no_decoder',['../classaudio__tools_1_1_audio_player.html#a1b224cfdb500ed86342bcf411c32bac2',1,'audio_tools::AudioPlayer']]],
-  ['no_5finplace_5finit_5fsupport_161',['no_inplace_init_support',['../samd_8h.html#aff81a0f0c25ffd67b69fe60e4aad9e36',1,'NO_INPLACE_INIT_SUPPORT:&#160;samd.h'],['../_platform_config_2zephyr_8h.html#aff81a0f0c25ffd67b69fe60e4aad9e36',1,'NO_INPLACE_INIT_SUPPORT:&#160;zephyr.h'],['../avr_8h.html#aff81a0f0c25ffd67b69fe60e4aad9e36',1,'NO_INPLACE_INIT_SUPPORT:&#160;avr.h'],['../arduino-zephyr_8h.html#aff81a0f0c25ffd67b69fe60e4aad9e36',1,'NO_INPLACE_INIT_SUPPORT:&#160;arduino-zephyr.h']]],
+  ['no_5finplace_5finit_5fsupport_161',['no_inplace_init_support',['../samd_8h.html#aff81a0f0c25ffd67b69fe60e4aad9e36',1,'NO_INPLACE_INIT_SUPPORT:&#160;samd.h'],['../_platform_config_2_zephyr_8h.html#aff81a0f0c25ffd67b69fe60e4aad9e36',1,'NO_INPLACE_INIT_SUPPORT:&#160;zephyr.h'],['../avr_8h.html#aff81a0f0c25ffd67b69fe60e4aad9e36',1,'NO_INPLACE_INIT_SUPPORT:&#160;avr.h'],['../arduino-zephyr_8h.html#aff81a0f0c25ffd67b69fe60e4aad9e36',1,'NO_INPLACE_INIT_SUPPORT:&#160;arduino-zephyr.h']]],
   ['no_5ftrace_162',['NO_TRACE',['../unor4_8h.html#ace2bb0d802a911ea5b057e58286641cc',1,'unor4.h']]],
   ['no_5ftraced_163',['NO_TRACED',['../avr_8h.html#ab4e2e3571d90f4d4112d0224318313b5',1,'avr.h']]],
   ['no_5ftracee_164',['NO_TRACEE',['../avr_8h.html#a6767d474a6b3ce39880b292cc1f0ceb9',1,'avr.h']]],

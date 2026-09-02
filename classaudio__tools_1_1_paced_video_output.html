@@ -250,7 +250,7 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a0899012a3926992583f514dfa25e6870"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73a7f9c44018a26502a0d63264ebf172" id="r_a73a7f9c44018a26502a0d63264ebf172"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a73a7f9c44018a26502a0d63264ebf172">queue_bytes_allocated</a> = 0</td></tr>
 <tr class="separator:a73a7f9c44018a26502a0d63264ebf172"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf00a113f78dc379e40a2331009a0954" id="r_adf00a113f78dc379e40a2331009a0954"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#adf00a113f78dc379e40a2331009a0954">queue_use_psram</a> = false</td></tr>
+<tr class="memitem:adf00a113f78dc379e40a2331009a0954" id="r_adf00a113f78dc379e40a2331009a0954"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#adf00a113f78dc379e40a2331009a0954">queue_use_psram</a> = true</td></tr>
 <tr class="separator:adf00a113f78dc379e40a2331009a0954"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4513b091c1a649684018bf63cced6707" id="r_a4513b091c1a649684018bf63cced6707"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; int32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a4513b091c1a649684018bf63cced6707">queued_i_frame_count</a> {0}</td></tr>
 <tr class="separator:a4513b091c1a649684018bf63cced6707"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1178,7 +1178,8 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Opts the frame queue into PSRAM-backed allocation instead of internal heap (see <a class="el" href="classaudio__tools_1_1_ring_buffer_s_p_s_c.html#acff29ccbec1f64e9dc663bd071d0f058">RingBufferSPSC::setUsePSRAM()</a>) - falls back silently on boards without PSRAM. Worth enabling once <a class="el" href="classaudio__tools_1_1_paced_video_output.html#af1ae0a0bc12d541205343335e5c82ef8">setQueueBytes()</a> is sized in the hundreds of KB+, since internal heap is a scarcer shared resource on most ESP32 boards. Call before <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a>/the first frame - no effect on an already-allocated queue. </p>
+<p>Whether the frame queue is PSRAM-backed instead of internal heap (see <a class="el" href="classaudio__tools_1_1_ring_buffer_s_p_s_c.html#acff29ccbec1f64e9dc663bd071d0f058">RingBufferSPSC::setUsePSRAM()</a>) - falls back silently on boards without PSRAM. On by default: internal heap is a scarcer shared resource on most ESP32 boards, and video decoding needs PSRAM for more than just this queue anyway (decoded picture buffers, scaling scratch buffers, ...) - see the wiki's "PSRAM: essential, not
+optional" section. Call setQueueUsePSRAM(false) to opt back out (e.g. a queue small enough that internal heap is preferable, or a board with no PSRAM where forcing the fallback path is undesired). Call before <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a>/the first frame - no effect on an already-allocated queue. </p>
 
 </div>
 </div>
@@ -2096,7 +2097,7 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool queue_use_psram = false</td>
+          <td class="memname">bool queue_use_psram = true</td>
         </tr>
       </table>
   </td>
