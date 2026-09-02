@@ -3291,6 +3291,8 @@ Functions</h2></td></tr>
 <tr class="separator:a475761dfe415ab1ed370e18943121166"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75e039659cccdd22df1366e4f3892809" id="r_a75e039659cccdd22df1366e4f3892809"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classaudio__tools_1_1_i_p_address.html">IPAddress</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a75e039659cccdd22df1366e4f3892809">INADDR_NONE</a> (0, 0, 0, 0)</td></tr>
 <tr class="separator:a75e039659cccdd22df1366e4f3892809"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdd736ca369679eb5419b94c86c5d0bb" id="r_acdd736ca369679eb5419b94c86c5d0bb"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#acdd736ca369679eb5419b94c86c5d0bb">isADPCMFormat</a> (<a class="el" href="group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1">AudioFormat</a> format)</td></tr>
+<tr class="separator:acdd736ca369679eb5419b94c86c5d0bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga24e3bee07bdb300753b137288bfa33c3" id="r_ga24e3bee07bdb300753b137288bfa33c3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__video.html#ga24e3bee07bdb300753b137288bfa33c3">isH264KeyFrame</a> (const uint8_t *data, size_t len)</td></tr>
 <tr class="memdesc:ga24e3bee07bdb300753b137288bfa33c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if the given Annex-B H.264 access unit contains an IDR slice NAL unit (nal_unit_type 5) - the reliable way to tell a real keyframe/sync-sample apart from a P-frame, since nothing in the byte layout itself says so without inspecting NAL headers. Used e.g. to determine <a class="el" href="classaudio__tools_1_1_muxer.html#a8f5833dcaa31800a36cbe2977a26ed0d">Muxer::addVideoFrame()</a>'s isKeyFrame argument for an already-encoded <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a8ba63b54352f7053b055235a9ec7ac09">VideoFormat::H264</a> frame.  <br /></td></tr>
 <tr class="separator:ga24e3bee07bdb300753b137288bfa33c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -6619,6 +6621,33 @@ template&lt;typename T &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="acdd736ca369679eb5419b94c86c5d0bb" name="acdd736ca369679eb5419b94c86c5d0bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acdd736ca369679eb5419b94c86c5d0bb">&#9670;&#160;</a></span>isADPCMFormat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool isADPCMFormat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1">AudioFormat</a>&#160;</td>
+          <td class="paramname"><em>format</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Determines if the given WAV format tag identifies one of the ADPCM variants that ADPCMEncoder/ADPCMDecoder can actually produce/consume for WAV (MS, IMA/DVI and Yamaha ADPCM - see <a class="el" href="classaudio__tools_1_1_a_d_p_c_m_decoder.html#a44efd4f21a5b52050ea06085e659febd">ADPCMDecoder::wavFormat()</a>). All of these encode 4 bits per sample. <a class="el" href="_audio_format_8h.html" title="WAV Audio Formats used by Microsoft e.g. in AVI video files.">AudioFormat.h</a> defines many further vendor-specific ADPCM WAV tags, but this library has no encoder/decoder mapping to them, so they are intentionally not included here. </p>
 
 </div>
 </div>
