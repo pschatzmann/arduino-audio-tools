@@ -1354,15 +1354,19 @@ public:
   // Add a generator to the queue.  The generator MUST be time limited BEFORE adding
   // to the queue (eg: calling setPlayTime()). Otherwise, the generator will never
   // run out of bytes and nothing after it will ever play.
-  virtual bool pushGenerator(SoundGenerator<T> *gen) {
+  // Callbacks are called in the context of read*() methods, so you probably want them
+  // to be quick and not block on anything.
+  virtual bool pushGenerator(SoundGenerator<T> *gen,
+    void (*start_cb)(SoundGenerator<T> *, const void *) = nullptr,
+    void (*end_cb)(SoundGenerator<T> *, const void *) = nullptr,
+    const void *cb_data = nullptr
+  ) {
     LOGD("pushGenerator()");
     if (queue.availableForWrite() == 0) return false;  // Queue is full.
 
-    QNode *node = new QNode;            // Deleted in removeCurrentGenerator;
+    QNode *node = new QNode(gen, start_cb, end_cb, cb_data); // Deleted in removeCurrentGenerator;
     if (node == nullptr) return false;  // new failed
 
-    node->restarted = false;
-    node->generator = gen;
     if (!queue.write(node)) {
       delete node;
       return false;
@@ -1398,7 +1402,12 @@ public:
 protected:
   struct QNode {
     SoundGenerator<T> *generator;
+    void (*start_cb)(SoundGenerator<T> *, const void *);
+    void (*end_cb)(SoundGenerator<T> *, const void *);
+    const void *cb_data;
     bool restarted;
+    QNode(SoundGenerator<T> *g, void (*s)(SoundGenerator<T> *, const void *), void (*e)(SoundGenerator<T> *, const void *), const void *d) :
+      generator(g), start_cb(s), end_cb(e), cb_data(d) { restarted=false; }
   };
 
   RingBufferSPSC<QNode *> queue;
@@ -1412,6 +1421,9 @@ protected:
     if (!queue.peek(node) || node == nullptr) return nullptr;
 
     if (!node->restarted) {
+      if (node->start_cb) {
+        node->start_cb(node->generator, node->cb_data);
+      }
       node->generator->restart();
       node->generator->begin();
       node->restarted = true;      // persistent dynamic objects, this will persist.
@@ -1426,6 +1438,9 @@ protected:
     QNode *node = nullptr;
     bool ret = queue.read(node);
     if (node != nullptr) {
+      if (node->end_cb) {
+        node->end_cb(node->generator, node->cb_data);
+      }
       delete node;
     }
     return ret;
