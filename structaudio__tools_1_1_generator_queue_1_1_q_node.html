@@ -74,6 +74,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="structaudio__tools_1_1_generator_queue_1_1_q_node-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">GeneratorQueue&lt; T &gt;::QNode Struct Reference</div></div>
@@ -82,14 +83,108 @@ $(function() {
 
 <p><code>#include &lt;<a class="el" href="_sound_generator_8h_source.html">SoundGenerator.h</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a58e07294fe40897ba2166eb11bb6a42f" id="r_a58e07294fe40897ba2166eb11bb6a42f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_generator_queue_1_1_q_node.html#a58e07294fe40897ba2166eb11bb6a42f">QNode</a> (<a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt; T &gt; *g, void(*s)(<a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt; T &gt; *, const void *), void(*e)(<a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt; T &gt; *, const void *), const void *d)</td></tr>
+<tr class="separator:a58e07294fe40897ba2166eb11bb6a42f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr class="memitem:a15e24109f7fa83a2451db7dc481fc874" id="r_a15e24109f7fa83a2451db7dc481fc874"><td class="memItemLeft" align="right" valign="top">const void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_generator_queue_1_1_q_node.html#a15e24109f7fa83a2451db7dc481fc874">cb_data</a></td></tr>
+<tr class="separator:a15e24109f7fa83a2451db7dc481fc874"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8e654f7b6f648c260bde0fc51c0608b" id="r_ab8e654f7b6f648c260bde0fc51c0608b"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_generator_queue_1_1_q_node.html#ab8e654f7b6f648c260bde0fc51c0608b">end_cb</a> )(<a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt; T &gt; *, const void *)</td></tr>
+<tr class="separator:ab8e654f7b6f648c260bde0fc51c0608b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ebc7a1562b334ed00a3141caaf3da1e" id="r_a4ebc7a1562b334ed00a3141caaf3da1e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_generator_queue_1_1_q_node.html#a4ebc7a1562b334ed00a3141caaf3da1e">generator</a></td></tr>
 <tr class="separator:a4ebc7a1562b334ed00a3141caaf3da1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b6e0787c0f32b7d154bd7ae42883c51" id="r_a2b6e0787c0f32b7d154bd7ae42883c51"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_generator_queue_1_1_q_node.html#a2b6e0787c0f32b7d154bd7ae42883c51">restarted</a></td></tr>
 <tr class="separator:a2b6e0787c0f32b7d154bd7ae42883c51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adaabd134de3da62edf46eea73514313b" id="r_adaabd134de3da62edf46eea73514313b"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_generator_queue_1_1_q_node.html#adaabd134de3da62edf46eea73514313b">start_cb</a> )(<a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt; T &gt; *, const void *)</td></tr>
+<tr class="separator:adaabd134de3da62edf46eea73514313b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a58e07294fe40897ba2166eb11bb6a42f" name="a58e07294fe40897ba2166eb11bb6a42f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58e07294fe40897ba2166eb11bb6a42f">&#9670;&#160;</a></span>QNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T  = int16_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_generator_queue_1_1_q_node.html">QNode</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt; T &gt; *&#160;</td>
+          <td class="paramname"><em>g</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void(*)(<a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt; T &gt; *, const void *)&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void(*)(<a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt; T &gt; *, const void *)&#160;</td>
+          <td class="paramname"><em>e</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>d</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a15e24109f7fa83a2451db7dc481fc874" name="a15e24109f7fa83a2451db7dc481fc874"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15e24109f7fa83a2451db7dc481fc874">&#9670;&#160;</a></span>cb_data</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T  = int16_t&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">const void* cb_data</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab8e654f7b6f648c260bde0fc51c0608b" name="ab8e654f7b6f648c260bde0fc51c0608b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8e654f7b6f648c260bde0fc51c0608b">&#9670;&#160;</a></span>end_cb</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T  = int16_t&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* end_cb) (<a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt; T &gt; *, const void *)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a4ebc7a1562b334ed00a3141caaf3da1e" name="a4ebc7a1562b334ed00a3141caaf3da1e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4ebc7a1562b334ed00a3141caaf3da1e">&#9670;&#160;</a></span>generator</h2>
 
@@ -116,6 +211,22 @@ template&lt;class T  = int16_t&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">bool restarted</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adaabd134de3da62edf46eea73514313b" name="adaabd134de3da62edf46eea73514313b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adaabd134de3da62edf46eea73514313b">&#9670;&#160;</a></span>start_cb</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T  = int16_t&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* start_cb) (<a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt; T &gt; *, const void *)</td>
         </tr>
       </table>
 </div><div class="memdoc">

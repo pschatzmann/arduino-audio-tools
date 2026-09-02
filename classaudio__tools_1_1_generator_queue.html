@@ -134,8 +134,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a62eb104f87ff88c21fa01af29dbf0ee2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a4cbd4e7dc62c42ead79e285bc7e024" id="r_a0a4cbd4e7dc62c42ead79e285bc7e024"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generator_queue.html#a0a4cbd4e7dc62c42ead79e285bc7e024">peek</a> ()</td></tr>
 <tr class="separator:a0a4cbd4e7dc62c42ead79e285bc7e024"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae2347b672df8dfc7a3a914e89060eaa5" id="r_ae2347b672df8dfc7a3a914e89060eaa5"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generator_queue.html#ae2347b672df8dfc7a3a914e89060eaa5">pushGenerator</a> (<a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt; T &gt; *gen)</td></tr>
-<tr class="separator:ae2347b672df8dfc7a3a914e89060eaa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a604650e4dd5d37eaf2474ebb8c98ca17" id="r_a604650e4dd5d37eaf2474ebb8c98ca17"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generator_queue.html#a604650e4dd5d37eaf2474ebb8c98ca17">pushGenerator</a> (<a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt; T &gt; *gen, void(*start_cb)(<a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt; T &gt; *, const void *)=nullptr, void(*end_cb)(<a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt; T &gt; *, const void *)=nullptr, const void *cb_data=nullptr)</td></tr>
+<tr class="separator:a604650e4dd5d37eaf2474ebb8c98ca17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab26a2d64aceacef6a885bca812558e68" id="r_ab26a2d64aceacef6a885bca812558e68"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generator_queue.html#ab26a2d64aceacef6a885bca812558e68">readBytes</a> (uint8_t *buffer, size_t buf_len)</td></tr>
 <tr class="memdesc:ab26a2d64aceacef6a885bca812558e68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the data as byte array with the requested number of channels.  <br /></td></tr>
 <tr class="separator:ab26a2d64aceacef6a885bca812558e68"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -620,8 +620,8 @@ template&lt;class T  = int16_t&gt; </div>
 
 </div>
 </div>
-<a id="ae2347b672df8dfc7a3a914e89060eaa5" name="ae2347b672df8dfc7a3a914e89060eaa5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae2347b672df8dfc7a3a914e89060eaa5">&#9670;&#160;</a></span>pushGenerator()</h2>
+<a id="a604650e4dd5d37eaf2474ebb8c98ca17" name="a604650e4dd5d37eaf2474ebb8c98ca17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a604650e4dd5d37eaf2474ebb8c98ca17">&#9670;&#160;</a></span>pushGenerator()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -635,8 +635,30 @@ template&lt;class T  = int16_t&gt; </div>
           <td class="memname">virtual bool pushGenerator </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt; T &gt; *&#160;</td>
-          <td class="paramname"><em>gen</em></td><td>)</td>
+          <td class="paramname"><em>gen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">void(*)(<a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt; T &gt; *, const void *)&#160;</td>
+          <td class="paramname"><em>start_cb</em> = <code>nullptr</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void(*)(<a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt; T &gt; *, const void *)&#160;</td>
+          <td class="paramname"><em>end_cb</em> = <code>nullptr</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>cb_data</em> = <code>nullptr</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
