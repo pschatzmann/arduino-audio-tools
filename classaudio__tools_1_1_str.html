@@ -255,6 +255,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a72bf72375cc4a5f931517d69b42b9d3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e2fe29a762d99bf570d721831194d09" id="r_a9e2fe29a762d99bf570d721831194d09"><td class="memItemLeft" align="right" valign="top">virtual char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_str_view.html#a9e2fe29a762d99bf570d721831194d09">operator[]</a> (int index)</td></tr>
 <tr class="separator:a9e2fe29a762d99bf570d721831194d09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6c8c983aaeeebd2dc377085811fa70d" id="r_ac6c8c983aaeeebd2dc377085811fa70d"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_str_view.html#ac6c8c983aaeeebd2dc377085811fa70d">printf</a> (const char *fmt,...)</td></tr>
+<tr class="separator:ac6c8c983aaeeebd2dc377085811fa70d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae28bed73407bfc585ca56a12503d2e34" id="r_ae28bed73407bfc585ca56a12503d2e34"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_str_view.html#ae28bed73407bfc585ca56a12503d2e34">remove</a> (const char *toRemove)</td></tr>
 <tr class="memdesc:ae28bed73407bfc585ca56a12503d2e34"><td class="mdescLeft">&#160;</td><td class="mdescRight">removes the indicated substring from the string  <br /></td></tr>
 <tr class="separator:ae28bed73407bfc585ca56a12503d2e34"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2238,6 +2240,43 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac6c8c983aaeeebd2dc377085811fa70d" name="ac6c8c983aaeeebd2dc377085811fa70d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6c8c983aaeeebd2dc377085811fa70d">&#9670;&#160;</a></span>printf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const char * printf </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>fmt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>replaces the content with the result of a printf-style formatted string and returns the resulting c-string - e.g. for direct use in Print::println(). If the resulting text does not fit into the available capacity it is truncated (like snprintf). </p>
 
 </div>
 </div>
