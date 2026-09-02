@@ -437,6 +437,10 @@ class M4ACommonDemuxer {
 
   virtual void setupParser() = 0;
 
+  /// Provides access to the underlying MP4Parser, e.g. to call
+  /// setRequireMoovBeforeMdat(false).
+  MP4Parser& getParser() { return parser; }
+
  protected:
   FrameCallback frame_callback = nullptr;
   SampleExtractor sampleExtractor{

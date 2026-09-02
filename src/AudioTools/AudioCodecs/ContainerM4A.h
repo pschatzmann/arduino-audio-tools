@@ -24,6 +24,14 @@ namespace audio_tools {
  * rework. The two share the same box-parsing *shape* (stsd/mp4a/esds
  * for AAC, stsd/alac for ALAC's magic cookie) but not code - keep that
  * in mind if a bug is found in one, it may well apply to the other too.
+ *
+ * @note The underlying MP4Parser expects the moov box (sample/format info) to
+ * come before the mdat box (audio payload) - i.e. the file must be
+ * "faststart", e.g. via 'ffmpeg -movflags +faststart'. If mdat comes first,
+ * decoding fails since the needed format info isn't available yet; by
+ * default this is logged as an error. Call
+ * getDemuxer().getParser().setRequireMoovBeforeMdat(false) to downgrade
+ * that to a warning and attempt to continue anyway.
  * @ingroup codecs
  * @author Phil Schatzmann
  * @copyright GPLv3
