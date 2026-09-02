@@ -13,113 +13,34 @@ namespace audio_tools {
 
 /**
  * @brief High-level video playback pipeline and controller - the video
- * counterpart of AudioPlayer (CoreAudio/AudioPlayer.h). Wraps every class
- * a video playback example otherwise wires by hand (a container Demuxer,
- * a VideoDecoder driven through a PacedVideoOutput, and optionally an
- * audio decode chain synced against it) behind one object driven by a
- * single copy() call per loop() iteration.
+ * counterpart of AudioPlayer (CoreAudio/AudioPlayer.h). Wraps a container
+ * Demuxer, a VideoDecoder driven through a PacedVideoOutput, and
+ * optionally an audio decode chain synced against it, behind one object
+ * driven by a single copy() call per loop() iteration.
  *
- * Demuxes the container through a built-in MultiVideoDemuxer, decodes
- * video through a built-in MultiVideoDecoder, and decodes audio through a
- * built-in MultiDecoder - all three start with NOTHING registered (see
- * each one's own class comment) and none of them pulls in any
- * container/codec library on its own, so including this header alone
- * adds no external dependency at all. Register whatever your content
- * actually needs via addDemuxer()/addVideoDecoder()/addAudioDecoder(),
- * exactly as MultiVideoDemuxerFull's/MultiVideoDecoderFull's/
- * DecoderHelix's own constructors do internally:
+ * Nothing is pre-registered (no container/codec library dependency by
+ * default) - register what your content needs:
  * @code
  * DemuxerAVI aviDemuxer;
  * VideoPlayer player(aviDemuxer, tftOutput, audioOut);
- * H264Decoder h264Decoder;
- * MJPEGDecoder mjpegDecoder;
- * MP3DecoderHelix mp3Decoder;
- * AACDecoderHelix aacDecoder;
- * void setup() {
- *   ...
- *   player.addVideoDecoder(h264Decoder);
- *   player.addVideoDecoder(mjpegDecoder);
- *   player.addAudioDecoder(mp3Decoder, "audio/mpeg");
- *   player.addAudioDecoder(aacDecoder, "audio/aac");
- *   player.begin(file);
- * }
- * void loop() {
- *   if (player.copy() == 0) { file.close(); ... }
- * }
+ * player.addVideoDecoder(h264Decoder);
+ * player.addAudioDecoder(mp3Decoder, "audio/mpeg");
+ * player.begin(file);
+ * // loop(): if (player.copy() == 0) { file.close(); ... }
  * @endcode
- * matching sd-avi-mjpg-video.ino/decode-avi.ino's own pipeline - `demuxer`
- * is just a convenience for this common single-format case (it's
- * registered exactly the way an addDemuxer() call would be); call
- * addDemuxer() separately, as many times as needed, for additional
- * container formats. Use VideoPlayerFull (VideoPlayerFull.h)
- * instead for the "just point it at a file, any common format just works"
- * convenience with no registration code of your own needed - it
- * pre-registers every container format (AVI/MP4/MPG), every video codec
- * (H264/MJPEG/MPEG-1), and the most common audio ones (MP3/AAC/MP2), at
- * the cost of pulling in every one of their parser/codec libraries
- * unconditionally (see its own class comment).
+ * Use VideoPlayerFull (VideoPlayerFull.h) instead to pre-register every
+ * common container/video/audio codec at once, at the cost of pulling in
+ * all of their libraries unconditionally.
  *
- * addAudioDecoder() also covers a codec the DemuxerXxx::mime() the
- * selected demuxer reports precisely but a plain byte-sniffing
- * MimeDetector wouldn't otherwise recognize, e.g. MP2Decoder (TinyMP2)
- * for MPEG-1 Layer II audio, the same way sd-mpg-video.ino's hand-wired
- * pipeline does:
- * @code
- * player.addAudioDecoder(mp2Decoder, "audio/mpeg; codecs=\"mpeg1-layer2\"");
- * @endcode
- * addVideoDecoder() similarly covers a hardware-accelerated decoder like
- * H264DecoderESP32S3 (CodecH264ESP32S3.h) in place of a portable one -
- * note its VideoDecoder::isValid() isn't overridden (see the class
- * comment on that method), so it only gets selected via a
- * setVideoInfoSource() answer, not the content-sniffing fallback; set one
- * (typically the demuxer feeding this player) if you rely on it. There is
- * no way to replace any of the three built-in multi-selectors wholesale
- * (e.g. with a single-format demuxer/decoder) - add to what's already
- * registered instead. A video-only stream needs no audio decoder
- * registered at all - see setAudioOutput()/the class's video-only
- * constructor.
+ * Pipeline: Stream -> copy() -> Demuxer -> [audio: EncodedAudioStream ->
+ * audio output] / [video: PacedVideoOutput -> VideoDecoder -> video
+ * output, own background task].
  *
- * Pipeline: Stream (source) -> copy() (CodecCopy-equivalent) -> Demuxer
- *   (demux)
- *   -> EncodedAudioStream (AudioDecoder) -> [AudioTimeSourceStream (audio
- *   clock), see setUseAudioClock()] -> audio output
- *   \-> PacedVideoOutput (buffer + schedule) -> VideoDecoder -> video
- *   output (own background task)
- *
- * Audio clock: scheduling video against real playback progress
- * (PacedVideoOutput::setAudioClock()) needs an audio clock that's
- * actually advancing. setUseAudioClock() defaults to true: as soon as an
- * audio output is wired (setAudioOutput()/the video+audio constructors),
- * video is scheduled against it - the common case, since most containers
- * that carry both tracks want them kept in sync. Call
- * setUseAudioClock(false) to opt back out to wall-clock scheduling
- * instead - needed if the content's "audio" track never actually
- * delivers bytes (silent/absent audio), which would otherwise stall
- * video forever waiting for a clock that never moves (see
- * decode-mp4.ino's own history for exactly this bug). No effect at all
- * for video-only playback (no audio output wired), which is always
- * scheduled against wall-clock time.
- *
- * Only covers the common "feed a Demuxer straight from a Stream" case,
- * matching the RAM-backed sample-table default every Demuxer uses out of
- * the box - the seek-backed/spooled MP4 strategies (see
- * decode-mp4-file.ino/decode-mp4-spooled.ino) feed their Demuxer through
- * their own FileSeekableSource/SpoolStorageFactory machinery instead, for
- * their own memory-optimization reasons, and are not wrapped here; keep
- * your own reference to the concrete DemuxerMP4 you construct and pass to
- * addDemuxer() (it stays fully usable on its own - MultiVideoDemuxer just
- * forwards write()/setOutputAudio()/setOutputVideo()/... to it once
- * selected) and drive it directly instead of calling copy()/copyAll() on
- * this class.
- *
- * Operation model: call copy() regularly (non-blocking) in loop(), or
- * copyAll() for blocking end-to-end playback.
- *
- * Dependencies: none - this header itself doesn't pull in any
- * container/codec library (see above). Bring whichever demuxers and
- * video/audio codec libraries your content actually needs and register
- * them via addDemuxer()/addVideoDecoder()/addAudioDecoder(), or use
- * VideoPlayerFull for all of them at once.
+ * See the wiki's [Video Playback](
+ * https://github.com/pschatzmann/arduino-audio-tools/wiki/Video-Playback)
+ * page for the full picture: audio-clock scheduling
+ * (setUseAudioClock()), running video decode on its own core
+ * (setTaskParameters()), the seek-backed/spooled MP4 exception, and more.
  *
  * @ingroup player
  * @ingroup video
@@ -273,6 +194,10 @@ class VideoPlayer {
   void setMaxQueuedIFrames(int count) {
     video_sync.setMaxQueuedIFrames(count);
   }
+  /// `core` also pins the video decode/render task to a specific core -
+  /// e.g. core 0, to keep it off whichever core runs copy()/loop() (audio
+  /// decode), giving audio and video decoding separate cores with no
+  /// further setup. See the class comment's "Multicore" section.
   void setTaskParameters(uint32_t stackSizeWords, uint8_t priority,
                           int core = -1) {
     video_sync.setTaskParameters(stackSizeWords, priority, core);
