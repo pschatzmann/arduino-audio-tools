@@ -486,6 +486,22 @@ class PacedVideoOutput : public VideoOutput {
     out.print(queueCapacity > 0 ? 100.0f * queuedBytes() / queueCapacity
                                  : 0.0f);
     out.println("% full)");
+    // Splits avgFrameMs() (the whole target write()+flush() call) into its
+    // decode share vs everything after it (convert/render/SPI, ...) -
+    // tells us which half of the render budget is actually worth
+    // optimizing next. Only printed when the target overrides
+    // VideoOutput::totalDecodeMs() (currently H264Decoder) - 0 otherwise
+    // means "not tracked separately", not "instant decode".
+    uint64_t decodeMs = p_target->totalDecodeMs();
+    if (decodeMs > 0) {
+      uint32_t renderedFrames = i_frame_count + p_frame_count;
+      float avgDecodeMs =
+          renderedFrames > 0 ? (float)decodeMs / renderedFrames : 0.0f;
+      out.print("avg decode ms: ");
+      out.print(avgDecodeMs);
+      out.print(" / avg convert+SPI ms: ");
+      out.println(avgFrameMs() - avgDecodeMs);
+    }
 #ifdef ESP32
     size_t heapFree = ESP.getFreeHeap();
     size_t heapTotal = ESP.getHeapSize();
@@ -501,6 +517,16 @@ class PacedVideoOutput : public VideoOutput {
     out.println(buf);
     snprintf(buf, sizeof(buf), "PSRAM: total=%u, used=%u, free=%u bytes",
              (unsigned)psramTotal, (unsigned)psramUsed, (unsigned)psramFree);
+    out.println(buf);
+
+    // Largest currently allocatable blocks - a low value here despite
+    // plenty of total free bytes above means the heap is fragmented
+    // (e.g. by the queue's own allocation), not actually out of memory.
+    snprintf(buf, sizeof(buf), "Largest heap block:  %u bytes",
+             (unsigned)heap_caps_get_largest_free_block(MALLOC_CAP_INTERNAL));
+    out.println(buf);
+    snprintf(buf, sizeof(buf), "Largest PSRAM block: %u bytes",
+             (unsigned)heap_caps_get_largest_free_block(MALLOC_CAP_SPIRAM));
     out.println(buf);
 #endif
   }

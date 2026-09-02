@@ -148,35 +148,10 @@ void setup() {
   }
 }
 
-void logInfo() {
-  player.logTo(Serial);
-  // Splits avgFrameMs() (the whole p_target->write()+flush() call, i.e.
-  // decode + I420->RGB565 convert + panel SPI write combined) into its
-  // decode share (h264Decoder.totalDecodeMs(), CAVLC decode + picture
-  // reconstruction only) vs everything after it - tells us which half of
-  // the render budget is actually worth optimizing next.
-  uint32_t renderedFrames = player.videoSyncTask().frameCountI() +
-                             player.videoSyncTask().frameCountP();
-  float avgDecodeMs = renderedFrames > 0
-                          ? (float)h264Decoder.totalDecodeMs() / renderedFrames
-                          : 0.0f;
-  Serial.print("avg decode ms: ");
-  Serial.print(avgDecodeMs);
-  Serial.print(" / avg convert+SPI ms: ");
-  Serial.println(player.videoSyncTask().avgFrameMs() - avgDecodeMs);
-#ifdef ESP32
-  // Largest currently allocatable blocks
-  Serial.printf("Largest heap block:  %u bytes\n",
-                heap_caps_get_largest_free_block(MALLOC_CAP_INTERNAL));
-  Serial.printf("Largest PSRAM block: %u bytes\n",
-                heap_caps_get_largest_free_block(MALLOC_CAP_SPIRAM));
-#endif
-}
-
 void loop() {
   static uint32_t diagLast = 0;
   if (millis() - diagLast > 1000) {
-    logInfo();
+    player.logTo(Serial);
     diagLast = millis();
   }
 

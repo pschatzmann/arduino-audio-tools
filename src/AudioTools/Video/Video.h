@@ -262,6 +262,15 @@ class VideoOutput {
   /// implementations that actually need VideoInfo (OutputTinyGPU/
   /// OutputOpenCV/OutputTFT_eSPI) override this.
   virtual void setVideoInfoSource(VideoInfoSource& source) {}
+
+  /// Optional: sum of time (ms) spent purely decoding (excluding any
+  /// surrounding convert/render/SPI work a subclass's write() also does)
+  /// since begin() - see H264Decoder's own override for the only current
+  /// implementation. Default 0: only meaningful for a decoder that
+  /// separates decode time from render time internally: PacedVideoOutput::
+  /// logTo() prints a decode-vs-render split under "avg decode ms:" only
+  /// when this returns nonzero.
+  virtual uint64_t totalDecodeMs() const { return 0; }
 };
 
 

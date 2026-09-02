@@ -163,7 +163,7 @@ class H264Decoder : public VideoDecoder, public VideoInfoSource {
   /// Sum of time spent purely inside decoder_.write() (CAVLC decode +
   /// reconstruction) since begin() - excludes SD reads and demux overhead
   /// a caller's own outer timing bundles in alongside it.
-  uint64_t totalDecodeMs() const { return total_decode_ms_; }
+  uint64_t totalDecodeMs() const override { return total_decode_ms_; }
 
   /// Direct access to the wrapped TinyH264Decoder, e.g. for its width()/
   /// height()/y()/u()/v()/getY()/getU()/getV() accessors.

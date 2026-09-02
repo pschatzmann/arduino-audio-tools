@@ -183,6 +183,10 @@ class MultiVideoDecoder : public VideoDecoder, public VideoInfoSource {
     return p_selected != nullptr ? p_selected->isKeyFrame(data, len) : false;
   }
 
+  uint64_t totalDecodeMs() const override {
+    return p_selected != nullptr ? p_selected->totalDecodeMs() : 0;
+  }
+
   /// The codec detection picked for the current stream -
   /// VideoFormat::UNKNOWN before the first write(), or if none matched.
   VideoFormat selectedFormat() const { return p_selected_format; }
