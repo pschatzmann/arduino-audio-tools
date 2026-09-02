@@ -116,8 +116,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa49f2579ff22bf881ce2988162b6d7a1" id="r_aa49f2579ff22bf881ce2988162b6d7a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_open_c_v.html#aa49f2579ff22bf881ce2988162b6d7a1">setVideoFormat</a> (<a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a> format)</td></tr>
 <tr class="memdesc:aa49f2579ff22bf881ce2988162b6d7a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects the format of the data passed to <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> - see class comment.  <br /></td></tr>
 <tr class="separator:aa49f2579ff22bf881ce2988162b6d7a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab848f87085dcf8ecc7343e4c4d690306" id="r_ab848f87085dcf8ecc7343e4c4d690306"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_open_c_v.html#ab848f87085dcf8ecc7343e4c4d690306">setVideoInfoSource</a> (<a class="el" href="classaudio__tools_1_1_video_info_source.html">VideoInfoSource</a> &amp;source)</td></tr>
-<tr class="separator:ab848f87085dcf8ecc7343e4c4d690306"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae360aee9bd886ebaa5d505675384462e" id="r_ae360aee9bd886ebaa5d505675384462e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_open_c_v.html#ae360aee9bd886ebaa5d505675384462e">setVideoInfoSource</a> (<a class="el" href="classaudio__tools_1_1_video_info_source.html">VideoInfoSource</a> &amp;source) override</td></tr>
+<tr class="separator:ae360aee9bd886ebaa5d505675384462e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -430,7 +430,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Defines the picture size - only needed (and used) for raw, non-MJPEG formats (see class comment). Call before the first <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>, or use <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#ab848f87085dcf8ecc7343e4c4d690306">setVideoInfoSource()</a> instead to pick it up automatically. </p>
+<p>Defines the picture size - only needed (and used) for raw, non-MJPEG formats (see class comment). Call before the first <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>, or use <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#ae360aee9bd886ebaa5d505675384462e">setVideoInfoSource()</a> instead to pick it up automatically. </p>
 
 </div>
 </div>
@@ -491,8 +491,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ab848f87085dcf8ecc7343e4c4d690306" name="ab848f87085dcf8ecc7343e4c4d690306"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab848f87085dcf8ecc7343e4c4d690306">&#9670;&#160;</a></span>setVideoInfoSource()</h2>
+<a id="ae360aee9bd886ebaa5d505675384462e" name="ae360aee9bd886ebaa5d505675384462e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae360aee9bd886ebaa5d505675384462e">&#9670;&#160;</a></span>setVideoInfoSource()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -510,11 +510,13 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 <p>Refreshes width/height from 'source' on every <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> instead of requiring the caller to poll it (e.g. a DemuxerMP4/DemuxerAVI, or a decoder like <a class="el" href="classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput...">H264Decoder</a>) - removes the need for <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#a661d9a2bd192a6e1427cc59c59217f9c">setSize()</a> once the source knows its own dimensions. Deliberately only syncs width/height, not 'format': a container-level source (e.g. a <a class="el" href="classaudio__tools_1_1_demuxer.html" title="Common interface for demuxers (DemuxerAVI, DemuxerMP4) that split a container&#39;s video and (optional) ...">Demuxer</a>) reports its own encoded codec (H264, MJPEG, ...), which is not necessarily what actually gets written here once a decoder sits in between - format still comes from <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#aa49f2579ff22bf881ce2988162b6d7a1" title="Selects the format of the data passed to write() - see class comment.">setVideoFormat()</a>. </p>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_output.html#a03d6419c0018dfd2de3fcdb93bc02873">VideoOutput</a>.</p>
 
 </div>
 </div>

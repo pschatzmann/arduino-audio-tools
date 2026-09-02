@@ -138,6 +138,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab4d364d9800016345ae6980424817214"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4305de559192cc500fbd0587b2748ea" id="r_ab4305de559192cc500fbd0587b2748ea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#ab4305de559192cc500fbd0587b2748ea">setVideoFormat</a> (<a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a> format) override</td></tr>
 <tr class="separator:ab4305de559192cc500fbd0587b2748ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03d6419c0018dfd2de3fcdb93bc02873" id="r_a03d6419c0018dfd2de3fcdb93bc02873"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a03d6419c0018dfd2de3fcdb93bc02873">setVideoInfoSource</a> (<a class="el" href="classaudio__tools_1_1_video_info_source.html">VideoInfoSource</a> &amp;source)</td></tr>
+<tr class="separator:a03d6419c0018dfd2de3fcdb93bc02873"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a026655e20010414e4d162042f5c413" id="r_a0a026655e20010414e4d162042f5c413"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_video_info.html">VideoInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#a0a026655e20010414e4d162042f5c413">videoInfo</a> () override</td></tr>
 <tr class="separator:a0a026655e20010414e4d162042f5c413"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_j_p_e_g_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
@@ -738,6 +740,35 @@ Protected Attributes</h2></td></tr>
 <p>TinyJPEGDecoder only ever produces RGB565 - any other value is logged and ignored. </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_video_decoder.html#af3e841cd4cb4b9dd800d7c3be096fa16">VideoDecoder</a>.</p>
+
+</div>
+</div>
+<a id="a03d6419c0018dfd2de3fcdb93bc02873" name="a03d6419c0018dfd2de3fcdb93bc02873"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03d6419c0018dfd2de3fcdb93bc02873">&#9670;&#160;</a></span>setVideoInfoSource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void setVideoInfoSource </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_video_info_source.html">VideoInfoSource</a> &amp;&#160;</td>
+          <td class="paramname"><em>source</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Optional: registers where width/height/fps/format (<a class="el" href="structaudio__tools_1_1_video_info.html" title="Basic video information (width/height/codec/frame size), analogous to AudioInfo - common to both Demu...">VideoInfo</a>) come from - e.g. the demuxer feeding this output, so it can size its own buffers/panel setup without the caller having to duplicate that call per sketch (<a class="el" href="classaudio__tools_1_1_video_player.html#af3226abe4456a403c63c393293b69933">VideoPlayer::begin()</a> does this automatically for whichever <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> it was given). Default no-op: only implementations that actually need <a class="el" href="structaudio__tools_1_1_video_info.html" title="Basic video information (width/height/codec/frame size), analogous to AudioInfo - common to both Demu...">VideoInfo</a> (OutputTinyGPU/ OutputOpenCV/OutputTFT_eSPI) override this. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#ab848f87085dcf8ecc7343e4c4d690306">MultiVideoDecoder</a>, <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#ae360aee9bd886ebaa5d505675384462e">OutputOpenCV</a>, <a class="el" href="classaudio__tools_1_1_output_t_f_t__e_s_p_i.html#ae360aee9bd886ebaa5d505675384462e">OutputTFT_eSPI</a>, and <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#ae360aee9bd886ebaa5d505675384462e">OutputTinyGPU</a>.</p>
 
 </div>
 </div>

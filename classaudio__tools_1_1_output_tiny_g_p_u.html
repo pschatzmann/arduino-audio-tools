@@ -126,9 +126,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac4314004ac5b3ede54d47b6814008d35" id="r_ac4314004ac5b3ede54d47b6814008d35"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#ac4314004ac5b3ede54d47b6814008d35">setVideoInfo</a> (<a class="el" href="structaudio__tools_1_1_video_info.html">VideoInfo</a> info)</td></tr>
 <tr class="memdesc:ac4314004ac5b3ede54d47b6814008d35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the video format and dimensions - call before <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a> if you.  <br /></td></tr>
 <tr class="separator:ac4314004ac5b3ede54d47b6814008d35"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab848f87085dcf8ecc7343e4c4d690306" id="r_ab848f87085dcf8ecc7343e4c4d690306"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#ab848f87085dcf8ecc7343e4c4d690306">setVideoInfoSource</a> (<a class="el" href="classaudio__tools_1_1_video_info_source.html">VideoInfoSource</a> &amp;source)</td></tr>
-<tr class="memdesc:ab848f87085dcf8ecc7343e4c4d690306"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the source of the video information (width, height, fps, format)  <br /></td></tr>
-<tr class="separator:ab848f87085dcf8ecc7343e4c4d690306"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae360aee9bd886ebaa5d505675384462e" id="r_ae360aee9bd886ebaa5d505675384462e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#ae360aee9bd886ebaa5d505675384462e">setVideoInfoSource</a> (<a class="el" href="classaudio__tools_1_1_video_info_source.html">VideoInfoSource</a> &amp;source) override</td></tr>
+<tr class="memdesc:ae360aee9bd886ebaa5d505675384462e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the source of the video information (width, height, fps, format)  <br /></td></tr>
+<tr class="separator:ae360aee9bd886ebaa5d505675384462e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7a61369025115076151d356ba4b3430" id="r_aa7a61369025115076151d356ba4b3430"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#aa7a61369025115076151d356ba4b3430">updateScaleLuts</a> (int srcW, int srcH, int width, int height)</td></tr>
 <tr class="separator:aa7a61369025115076151d356ba4b3430"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
@@ -594,8 +594,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ab848f87085dcf8ecc7343e4c4d690306" name="ab848f87085dcf8ecc7343e4c4d690306"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab848f87085dcf8ecc7343e4c4d690306">&#9670;&#160;</a></span>setVideoInfoSource()</h2>
+<a id="ae360aee9bd886ebaa5d505675384462e" name="ae360aee9bd886ebaa5d505675384462e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae360aee9bd886ebaa5d505675384462e">&#9670;&#160;</a></span>setVideoInfoSource()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -613,12 +613,14 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Defines the source of the video information (width, height, fps, format) </p>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_output.html#a03d6419c0018dfd2de3fcdb93bc02873">VideoOutput</a>.</p>
 
 </div>
 </div>

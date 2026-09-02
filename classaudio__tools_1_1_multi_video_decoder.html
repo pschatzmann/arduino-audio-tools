@@ -638,11 +638,13 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 <p>Provides the container's own answer for which codec the video track actually is - takes precedence over content-sniffing when set (see the class comment). Pass the demuxer feeding this object, e.g. multiVideoDecoder.setVideoInfoSource(aviDemuxer). Must outlive this object; call before the first <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>. </p>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_video_output.html#a03d6419c0018dfd2de3fcdb93bc02873">VideoOutput</a>.</p>
 
 </div>
 </div>

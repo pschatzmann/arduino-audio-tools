@@ -121,6 +121,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ae90cddad4cdc7ab4f54c2f5976e6eabf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4d364d9800016345ae6980424817214" id="r_ab4d364d9800016345ae6980424817214"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#ab4d364d9800016345ae6980424817214">setSkipRender</a> (bool skip)</td></tr>
 <tr class="separator:ab4d364d9800016345ae6980424817214"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03d6419c0018dfd2de3fcdb93bc02873" id="r_a03d6419c0018dfd2de3fcdb93bc02873"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a03d6419c0018dfd2de3fcdb93bc02873">setVideoInfoSource</a> (<a class="el" href="classaudio__tools_1_1_video_info_source.html">VideoInfoSource</a> &amp;source)</td></tr>
+<tr class="separator:a03d6419c0018dfd2de3fcdb93bc02873"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f016ab9037bd654f538f107eb1d8f78" id="r_a4f016ab9037bd654f538f107eb1d8f78"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">write</a> (const uint8_t *data, size_t len)=0</td></tr>
 <tr class="separator:a4f016ab9037bd654f538f107eb1d8f78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -279,6 +281,35 @@ Public Member Functions</h2></td></tr>
 <p>Hint to skip the expensive part of displaying the next frame(s) (e.g. the panel refresh) while still accepting and fully processing <a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">write()</a> calls - used to recover from falling behind the playback schedule without breaking a codec's decode state (e.g. H.264 inter-prediction reference chain, which requires every frame to still be decoded even if it's never shown). Default no-op: implementations that can't skip rendering cheaply just ignore it and always render. </p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#a94f8728be362b736be4cb10a4253d201">MultiVideoDecoder</a>, <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#a94f8728be362b736be4cb10a4253d201">OutputTinyGPU</a>, <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a94f8728be362b736be4cb10a4253d201">PacedVideoOutput</a>, and <a class="el" href="classaudio__tools_1_1_video_frame_meter.html#a94f8728be362b736be4cb10a4253d201">VideoFrameMeter</a>.</p>
+
+</div>
+</div>
+<a id="a03d6419c0018dfd2de3fcdb93bc02873" name="a03d6419c0018dfd2de3fcdb93bc02873"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03d6419c0018dfd2de3fcdb93bc02873">&#9670;&#160;</a></span>setVideoInfoSource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void setVideoInfoSource </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_video_info_source.html">VideoInfoSource</a> &amp;&#160;</td>
+          <td class="paramname"><em>source</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Optional: registers where width/height/fps/format (<a class="el" href="structaudio__tools_1_1_video_info.html" title="Basic video information (width/height/codec/frame size), analogous to AudioInfo - common to both Demu...">VideoInfo</a>) come from - e.g. the demuxer feeding this output, so it can size its own buffers/panel setup without the caller having to duplicate that call per sketch (<a class="el" href="classaudio__tools_1_1_video_player.html#af3226abe4456a403c63c393293b69933">VideoPlayer::begin()</a> does this automatically for whichever <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> it was given). Default no-op: only implementations that actually need <a class="el" href="structaudio__tools_1_1_video_info.html" title="Basic video information (width/height/codec/frame size), analogous to AudioInfo - common to both Demu...">VideoInfo</a> (OutputTinyGPU/ OutputOpenCV/OutputTFT_eSPI) override this. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#ab848f87085dcf8ecc7343e4c4d690306">MultiVideoDecoder</a>, <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#ae360aee9bd886ebaa5d505675384462e">OutputOpenCV</a>, <a class="el" href="classaudio__tools_1_1_output_t_f_t__e_s_p_i.html#ae360aee9bd886ebaa5d505675384462e">OutputTFT_eSPI</a>, and <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#ae360aee9bd886ebaa5d505675384462e">OutputTinyGPU</a>.</p>
 
 </div>
 </div>

@@ -142,6 +142,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9ed71d94f20e455f1918935eb607496f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c65abcfd07cb9f2a527823b271f1b0e" id="r_a4c65abcfd07cb9f2a527823b271f1b0e"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a4c65abcfd07cb9f2a527823b271f1b0e">inputFPS</a> ()</td></tr>
 <tr class="separator:a4c65abcfd07cb9f2a527823b271f1b0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd2dd94ca9b2413fbb375c4c04bc5907" id="r_acd2dd94ca9b2413fbb375c4c04bc5907"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#acd2dd94ca9b2413fbb375c4c04bc5907">logTo</a> (<a class="el" href="class_print.html">Print</a> &amp;out)</td></tr>
+<tr class="separator:acd2dd94ca9b2413fbb375c4c04bc5907"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac2245652fe2a9df612f6a7e2ef2b502e" id="r_ac2245652fe2a9df612f6a7e2ef2b502e"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#ac2245652fe2a9df612f6a7e2ef2b502e">outputFPS</a> ()</td></tr>
 <tr class="separator:ac2245652fe2a9df612f6a7e2ef2b502e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b25e5cb9d21b1b459c96291d865f5dd" id="r_a7b25e5cb9d21b1b459c96291d865f5dd"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7b25e5cb9d21b1b459c96291d865f5dd">queueCapacityBytes</a> ()</td></tr>
@@ -174,6 +176,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a94f8728be362b736be4cb10a4253d201"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb2055856602a67b93f0b0ac399e266f" id="r_afb2055856602a67b93f0b0ac399e266f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#afb2055856602a67b93f0b0ac399e266f">setTaskParameters</a> (uint32_t stackSizeWords, uint8_t priority, int core=-1)</td></tr>
 <tr class="separator:afb2055856602a67b93f0b0ac399e266f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03d6419c0018dfd2de3fcdb93bc02873" id="r_a03d6419c0018dfd2de3fcdb93bc02873"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a03d6419c0018dfd2de3fcdb93bc02873">setVideoInfoSource</a> (<a class="el" href="classaudio__tools_1_1_video_info_source.html">VideoInfoSource</a> &amp;source)</td></tr>
+<tr class="separator:a03d6419c0018dfd2de3fcdb93bc02873"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -856,6 +860,33 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="acd2dd94ca9b2413fbb375c4c04bc5907" name="acd2dd94ca9b2413fbb375c4c04bc5907"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd2dd94ca9b2413fbb375c4c04bc5907">&#9670;&#160;</a></span>logTo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void logTo </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_print.html">Print</a> &amp;&#160;</td>
+          <td class="paramname"><em>out</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Prints a human-readable summary of the diagnostics above (fps, average render time, frame/drop counts, queue fill level, and on ESP32 also heap/PSRAM usage) to <code>out</code> - handy for a periodic status line in a sketch, e.g. <code>videoOutput.logTo(Serial);</code>. </p>
+
+</div>
+</div>
 <a id="ac2245652fe2a9df612f6a7e2ef2b502e" name="ac2245652fe2a9df612f6a7e2ef2b502e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac2245652fe2a9df612f6a7e2ef2b502e">&#9670;&#160;</a></span>outputFPS()</h2>
 
@@ -1299,6 +1330,35 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p><a class="el" href="classaudio__tools_1_1_stack.html" title="LIFO Stack which is based on a List.">Stack</a> size (words)/priority/core for the background render task - call before <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a601fb7cf1fc15db50c71a826f084f934">begin()</a>. </p>
+
+</div>
+</div>
+<a id="a03d6419c0018dfd2de3fcdb93bc02873" name="a03d6419c0018dfd2de3fcdb93bc02873"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03d6419c0018dfd2de3fcdb93bc02873">&#9670;&#160;</a></span>setVideoInfoSource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void setVideoInfoSource </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_video_info_source.html">VideoInfoSource</a> &amp;&#160;</td>
+          <td class="paramname"><em>source</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Optional: registers where width/height/fps/format (<a class="el" href="structaudio__tools_1_1_video_info.html" title="Basic video information (width/height/codec/frame size), analogous to AudioInfo - common to both Demu...">VideoInfo</a>) come from - e.g. the demuxer feeding this output, so it can size its own buffers/panel setup without the caller having to duplicate that call per sketch (<a class="el" href="classaudio__tools_1_1_video_player.html#af3226abe4456a403c63c393293b69933">VideoPlayer::begin()</a> does this automatically for whichever <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> it was given). Default no-op: only implementations that actually need <a class="el" href="structaudio__tools_1_1_video_info.html" title="Basic video information (width/height/codec/frame size), analogous to AudioInfo - common to both Demu...">VideoInfo</a> (OutputTinyGPU/ OutputOpenCV/OutputTFT_eSPI) override this. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html#ab848f87085dcf8ecc7343e4c4d690306">MultiVideoDecoder</a>, <a class="el" href="classaudio__tools_1_1_output_open_c_v.html#ae360aee9bd886ebaa5d505675384462e">OutputOpenCV</a>, <a class="el" href="classaudio__tools_1_1_output_t_f_t__e_s_p_i.html#ae360aee9bd886ebaa5d505675384462e">OutputTFT_eSPI</a>, and <a class="el" href="classaudio__tools_1_1_output_tiny_g_p_u.html#ae360aee9bd886ebaa5d505675384462e">OutputTinyGPU</a>.</p>
 
 </div>
 </div>
