@@ -234,7 +234,7 @@ codec just works" player. Use instead of the base <a class="el" href="classaudio
 <div class="line">player.begin(file);</div>
 <div class="ttc" id="aclassaudio__tools_1_1_multi_video_demuxer_full_html"><div class="ttname"><a href="classaudio__tools_1_1_multi_video_demuxer_full.html">audio_tools::MultiVideoDemuxerFull</a></div><div class="ttdoc">MultiVideoDemuxer pre-registered with every container format this library ships a demuxer for: Demuxe...</div><div class="ttdef"><b>Definition</b> MultiVideoDemuxerFull.h:35</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_video_player_full_html"><div class="ttname"><a href="classaudio__tools_1_1_video_player_full.html">audio_tools::VideoPlayerFull</a></div><div class="ttdoc">VideoPlayer subclass pre-registered with every video/audio codec this library ships a portable decode...</div><div class="ttdef"><b>Definition</b> VideoPlayerFull.h:47</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_video_player_html_aafc9ef4697ffb749313389b2b8f6da60"><div class="ttname"><a href="classaudio__tools_1_1_video_player.html#aafc9ef4697ffb749313389b2b8f6da60">audio_tools::VideoPlayer::demuxer</a></div><div class="ttdeci">MultiVideoDemuxer &amp; demuxer()</div><div class="ttdef"><b>Definition</b> VideoPlayer.h:417</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_video_player_html_aafc9ef4697ffb749313389b2b8f6da60"><div class="ttname"><a href="classaudio__tools_1_1_video_player.html#aafc9ef4697ffb749313389b2b8f6da60">audio_tools::VideoPlayer::demuxer</a></div><div class="ttdeci">MultiVideoDemuxer &amp; demuxer()</div><div class="ttdef"><b>Definition</b> VideoPlayer.h:342</div></div>
 </div><!-- fragment --><p>WAV is deliberately not included (no external dependency to justify bundling it) - register it yourself if needed: addAudioDecoder(wavDecoder, "audio/vnd.wave").</p>
 <p>Dependencies (install via Library Manager):</p><ul>
 <li><a href="https://github.com/pschatzmann/TinyH264">https://github.com/pschatzmann/TinyH264</a></li>
@@ -1222,6 +1222,7 @@ AudioOutput&amp;)/setStream(<a class="el" href="classaudio__tools_1_1_audio_stre
   </tr>
 </table>
 </div><div class="memdoc">
+<p><code>core</code> also pins the video decode/render task to a specific core - e.g. core 0, to keep it off whichever core runs <a class="el" href="classaudio__tools_1_1_video_player.html#aecb44a6d385121be2179187d45520331">copy()</a>/loop() (audio decode), giving audio and video decoding separate cores with no further setup. See the class comment's "Multicore" section. </p>
 
 </div>
 </div>
