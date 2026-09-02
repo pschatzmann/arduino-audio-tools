@@ -137,6 +137,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a99d57924ad8bf6c8765005de08b3a214" id="r_a99d57924ad8bf6c8765005de08b3a214"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html#a99d57924ad8bf6c8765005de08b3a214">setReference</a> (void *<a class="el" href="classaudio__tools_1_1_m_p4_parser.html#a1830ddb36c14bdd7057683e633f918c8">ref</a>)</td></tr>
 <tr class="memdesc:a99d57924ad8bf6c8765005de08b3a214"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines an optional reference. By default it is the parser itself.  <br /></td></tr>
 <tr class="separator:a99d57924ad8bf6c8765005de08b3a214"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e2d88863ecf73484fc1e614fce7154b" id="r_a3e2d88863ecf73484fc1e614fce7154b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html#a3e2d88863ecf73484fc1e614fce7154b">setRequireMoovBeforeMdat</a> (bool flag)</td></tr>
+<tr class="memdesc:a3e2d88863ecf73484fc1e614fce7154b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines whether an mdat box found before any moov box is treated as an error (LOGE, the default) or downgraded to a warning (LOGW). Set to false to opt out of the moov-before-mdat requirement, e.g. for files from encoders that are known to violate it but still work.  <br /></td></tr>
+<tr class="separator:a3e2d88863ecf73484fc1e614fce7154b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae99ac99cddf376c3ca557b9b4b3301ab" id="r_ae99ac99cddf376c3ca557b9b4b3301ab"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html#ae99ac99cddf376c3ca557b9b4b3301ab">write</a> (const char *data, size_t len)</td></tr>
 <tr class="memdesc:ae99ac99cddf376c3ca557b9b4b3301ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide the data to the parser (in chunks if needed).  <br /></td></tr>
 <tr class="separator:ae99ac99cddf376c3ca557b9b4b3301ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -170,9 +173,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a098728b489663c8b8ac4a320cbae527d" id="r_a098728b489663c8b8ac4a320cbae527d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html#a098728b489663c8b8ac4a320cbae527d">handleCompleteBox</a> (const char *type, const uint8_t *p, size_t headerSize, size_t payload_size, int level)</td></tr>
 <tr class="memdesc:a098728b489663c8b8ac4a320cbae527d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles a complete (non-incremental) box.  <br /></td></tr>
 <tr class="separator:a098728b489663c8b8ac4a320cbae527d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9d5a5bc3fbb500fed774839cc4272d2" id="r_ab9d5a5bc3fbb500fed774839cc4272d2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html#ab9d5a5bc3fbb500fed774839cc4272d2">handleContainerBox</a> (const char *type, uint64_t boxSize, int level)</td></tr>
-<tr class="memdesc:ab9d5a5bc3fbb500fed774839cc4272d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles a container box (box with children).  <br /></td></tr>
-<tr class="separator:ab9d5a5bc3fbb500fed774839cc4272d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0116a2ed489fb3f76dbbc926286c164" id="r_ad0116a2ed489fb3f76dbbc926286c164"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html#ad0116a2ed489fb3f76dbbc926286c164">handleContainerBox</a> (const char *type, uint64_t boxSize, size_t headerSize, int level)</td></tr>
+<tr class="memdesc:ad0116a2ed489fb3f76dbbc926286c164"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles a container box (box with children).  <br /></td></tr>
+<tr class="separator:ad0116a2ed489fb3f76dbbc926286c164"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae817680e4047ee550779b3ac88682439" id="r_ae817680e4047ee550779b3ac88682439"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html#ae817680e4047ee550779b3ac88682439">isContainerBox</a> (const char *type)</td></tr>
 <tr class="memdesc:ae817680e4047ee550779b3ac88682439"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a box type is a container box.  <br /></td></tr>
 <tr class="separator:ae817680e4047ee550779b3ac88682439"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -249,20 +252,28 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a1b569722aa9f03263f96e093c4d507a3" id="r_a1b569722aa9f03263f96e093c4d507a3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; size_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html#a1b569722aa9f03263f96e093c4d507a3">levelStack</a></td></tr>
 <tr class="memdesc:a1b569722aa9f03263f96e093c4d507a3"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_stack.html" title="LIFO Stack which is based on a List.">Stack</a> for container box levels.  <br /></td></tr>
 <tr class="separator:a1b569722aa9f03263f96e093c4d507a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2709a9e14ec775531e636725483683c" id="r_aa2709a9e14ec775531e636725483683c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html#aa2709a9e14ec775531e636725483683c">moov_found</a> = false</td></tr>
+<tr class="memdesc:aa2709a9e14ec775531e636725483683c"><td class="mdescLeft">&#160;</td><td class="mdescRight">True once a top-level moov box has been seen.  <br /></td></tr>
+<tr class="separator:aa2709a9e14ec775531e636725483683c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abfc68c30812c96bcb9c193d6da6e4c83" id="r_abfc68c30812c96bcb9c193d6da6e4c83"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html#abfc68c30812c96bcb9c193d6da6e4c83">parseOffset</a> = 0</td></tr>
 <tr class="memdesc:abfc68c30812c96bcb9c193d6da6e4c83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current parse offset in buffer.  <br /></td></tr>
 <tr class="separator:abfc68c30812c96bcb9c193d6da6e4c83"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1830ddb36c14bdd7057683e633f918c8" id="r_a1830ddb36c14bdd7057683e633f918c8"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html#a1830ddb36c14bdd7057683e633f918c8">ref</a> = this</td></tr>
 <tr class="memdesc:a1830ddb36c14bdd7057683e633f918c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference pointer for callbacks.  <br /></td></tr>
 <tr class="separator:a1830ddb36c14bdd7057683e633f918c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf23fa92ae9084fb5c0ef3925b9d2635" id="r_aaf23fa92ae9084fb5c0ef3925b9d2635"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html#aaf23fa92ae9084fb5c0ef3925b9d2635">require_moov_before_mdat</a> = true</td></tr>
+<tr class="memdesc:aaf23fa92ae9084fb5c0ef3925b9d2635"><td class="mdescLeft">&#160;</td><td class="mdescRight">false: warn instead of error  <br /></td></tr>
+<tr class="separator:aaf23fa92ae9084fb5c0ef3925b9d2635"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classaudio__tools_1_1_m_p4_parser.html" title="MP4Parser is a class that parses MP4 container files and extracts boxes (atoms). It provides a callba...">MP4Parser</a> is a class that parses MP4 container files and extracts boxes (atoms). It provides a callback mechanism to process each box as it is parsed. You can define specific callbacks for individual box types or use a generic callback for the undefined boxes: By default it just prints the box information to Serial. If a container box contains data, it will be processed recursively and if it contains data itself, it might be reported in a second callback call. </p>
-<dl class="section note"><dt>Note</dt><dd>This parser expect the mdat box to be the last box in the file. This can be achieve with the following ffmpeg commands:<ul>
+<dl class="section note"><dt>Note</dt><dd>This parser expects the mdat box to be the last box in the file, and the moov box (which carries the sample/format info needed to decode mdat) to come before it. This layout can be achieved with the following ffmpeg commands:<ul>
 <li>ffmpeg -i ../sine.wav -c:a alac -movflags +faststart alac.m4a</li>
 <li>ffmpeg -i ../sine.wav -c:a aac -movflags +faststart aac.m4a</li>
 </ul>
 </dd></dl>
+<p>If an mdat box is encountered at the top level before any moov box has been parsed, an error is logged (via LOGE) since the file will not be decodable in that state. Call setRequireMoovBeforeMdat(false) to opt out of this requirement, in which case only a warning (LOGW) is logged and parsing continues.</p>
+<p>The parser also supports the ISO/IEC 14496-12 special box-size values that a plain 32-bit size field can't express: a size of 1 indicates a 64-bit "largesize" follows the type field, and a size of 0 means the box extends to the end of the file/stream - both are common for an mdat box written by an encoder that streams the payload without seeking back to patch in the final size. A size-0 mdat is treated as unbounded: it is read incrementally until the input stream ends, since its true length is not known upfront.</p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="afadf71ab17bbb523b1da4b7077345f44" name="afadf71ab17bbb523b1da4b7077345f44"></a>
@@ -695,8 +706,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ab9d5a5bc3fbb500fed774839cc4272d2" name="ab9d5a5bc3fbb500fed774839cc4272d2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab9d5a5bc3fbb500fed774839cc4272d2">&#9670;&#160;</a></span>handleContainerBox()</h2>
+<a id="ad0116a2ed489fb3f76dbbc926286c164" name="ad0116a2ed489fb3f76dbbc926286c164"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0116a2ed489fb3f76dbbc926286c164">&#9670;&#160;</a></span>handleContainerBox()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -715,6 +726,12 @@ Protected Attributes</h2></td></tr>
           <td></td>
           <td class="paramtype">uint64_t&#160;</td>
           <td class="paramname"><em>boxSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>headerSize</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -1194,6 +1211,40 @@ Protected Attributes</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ref</td><td>Pointer to reference object. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3e2d88863ecf73484fc1e614fce7154b" name="a3e2d88863ecf73484fc1e614fce7154b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e2d88863ecf73484fc1e614fce7154b">&#9670;&#160;</a></span>setRequireMoovBeforeMdat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setRequireMoovBeforeMdat </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>flag</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Defines whether an mdat box found before any moov box is treated as an error (LOGE, the default) or downgraded to a warning (LOGW). Set to false to opt out of the moov-before-mdat requirement, e.g. for files from encoders that are known to violate it but still work. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">flag</td><td>true to require moov before mdat (default), false to opt out. </td></tr>
   </table>
   </dd>
 </dl>
@@ -1759,6 +1810,30 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="aa2709a9e14ec775531e636725483683c" name="aa2709a9e14ec775531e636725483683c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2709a9e14ec775531e636725483683c">&#9670;&#160;</a></span>moov_found</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool moov_found = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>True once a top-level moov box has been seen. </p>
+
+</div>
+</div>
 <a id="abfc68c30812c96bcb9c193d6da6e4c83" name="abfc68c30812c96bcb9c193d6da6e4c83"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abfc68c30812c96bcb9c193d6da6e4c83">&#9670;&#160;</a></span>parseOffset</h2>
 
@@ -1804,6 +1879,30 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reference pointer for callbacks. </p>
+
+</div>
+</div>
+<a id="aaf23fa92ae9084fb5c0ef3925b9d2635" name="aaf23fa92ae9084fb5c0ef3925b9d2635"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf23fa92ae9084fb5c0ef3925b9d2635">&#9670;&#160;</a></span>require_moov_before_mdat</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool require_moov_before_mdat = true</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>false: warn instead of error </p>
 
 </div>
 </div>
