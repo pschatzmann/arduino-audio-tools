@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['n_0',['n',['../classaudio__tools_1_1_g7xx_decoder.html#a76f11d9a0a47b94f72c2d0e77fb32240',1,'audio_tools::G7xxDecoder::n'],['../structaudio__tools_1_1fft__state.html#a7722c8ecbb62d99aee7ce68b1752f337',1,'audio_tools::fft_state::N'],['../classaudio__tools_1_1_silence_removal_converter.html#a76f11d9a0a47b94f72c2d0e77fb32240',1,'audio_tools::SilenceRemovalConverter::n']]],
+  ['n_0',['n',['../classaudio__tools_1_1_silence_removal_converter.html#a76f11d9a0a47b94f72c2d0e77fb32240',1,'audio_tools::SilenceRemovalConverter::n'],['../classaudio__tools_1_1_g7xx_decoder.html#a76f11d9a0a47b94f72c2d0e77fb32240',1,'audio_tools::G7xxDecoder::n'],['../structaudio__tools_1_1fft__state.html#a7722c8ecbb62d99aee7ce68b1752f337',1,'audio_tools::fft_state::N']]],
   ['n_5fbytes_5fper_5fsample_5ftx_1',['n_bytes_per_sample_tx',['../structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html#a69afd28847099a6c4fed76944503e7bc',1,'audio_tools::USBAudioDeviceBase::audiod_function_t']]],
   ['n_5fchannels_5ftx_2',['n_channels_tx',['../structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html#ad8571595f0a30d2567bc8433af0313b9',1,'audio_tools::USBAudioDeviceBase::audiod_function_t']]],
   ['n_5fopen_5fread_3',['n_open_read',['../classaudio__tools_1_1_object_stream.html#af293f08dbca33f2cfd26d6fbdd3aca24',1,'audio_tools::ObjectStream']]],

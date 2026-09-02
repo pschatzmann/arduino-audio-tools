@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['c_5fstr_0',['c_str',['../classaudio__tools_1_1_str_view.html#ac4caa99f22b5dbae833b5a0792c52040',1,'audio_tools::StrView']]],
+  ['c_5fstr_0',['c_str',['../classaudio__tools_1_1_str_view.html#ac4caa99f22b5dbae833b5a0792c52040',1,'audio_tools::StrView::c_str()'],['../classstd_1_1_format.html#a6498bb4bec5199f8d89f5baa0d375a43',1,'std::Format::c_str()']]],
   ['cachedvolumecontrol_1',['cachedvolumecontrol',['../classaudio__tools_1_1_cached_volume_control.html#a0e876290334272a0a7b1e751080064fc',1,'audio_tools::CachedVolumeControl::CachedVolumeControl(VolumeControl &amp;vc)'],['../classaudio__tools_1_1_cached_volume_control.html#aa93bcf40e5c4f9f0036f94f99ec6e8c7',1,'audio_tools::CachedVolumeControl::CachedVolumeControl(VolumeControl *vc)']]],
   ['calcmaxpacketsize_2',['calcMaxPacketSize',['../classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#af7ad6a52d36e0c858b9a5ac83caa13dc',1,'audio_tools::USBAudio2DescriptorBuilder']]],
   ['calcpacketsizeforrate_3',['calcPacketSizeForRate',['../classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html#adb3b0158a36c6671513c9388b3bb0f16',1,'audio_tools::USBAudio2DescriptorBuilder']]],
@@ -54,7 +54,7 @@ var searchData=
   ['chart_51',['chart',['../classaudio__tools_1_1_jupyter_audio_t.html#a581102f34878e541c46d11812106613f',1,'audio_tools::JupyterAudioT']]],
   ['chartdata_52',['chartData',['../classaudio__tools_1_1_chart_t.html#aa971fc3eaeed0371b77e42d85eee47ae',1,'audio_tools::ChartT']]],
   ['chartoint_53',['charToInt',['../classaudio__tools_1_1_str.html#a3b0971750eefa857a25eb92c7e9eedc3',1,'audio_tools::Str']]],
-  ['check_54',['check',['../structaudio__tools_1_1_mime_detector_1_1_check.html#a4d7c03a2030618db75bc5c4e208952c5',1,'audio_tools::MimeDetector::Check::Check(const char *mime, bool(*check)(uint8_t *data, size_t len))'],['../structaudio__tools_1_1_mime_detector_1_1_check.html#ab358bf008b69b9edd3820bbb5245226f',1,'audio_tools::MimeDetector::Check::Check()=default'],['../classaudio__tools_1_1_a_d_t_s_parser.html#ae1ee541bb22588b6a71650c807efca90',1,'audio_tools::ADTSParser::check()']]],
+  ['check_54',['check',['../classaudio__tools_1_1_a_d_t_s_parser.html#ae1ee541bb22588b6a71650c807efca90',1,'audio_tools::ADTSParser::check()'],['../structaudio__tools_1_1_mime_detector_1_1_check.html#a4d7c03a2030618db75bc5c4e208952c5',1,'audio_tools::MimeDetector::Check::Check(const char *mime, bool(*check)(uint8_t *data, size_t len))'],['../structaudio__tools_1_1_mime_detector_1_1_check.html#ab358bf008b69b9edd3820bbb5245226f',1,'audio_tools::MimeDetector::Check::Check()=default']]],
   ['checkaac_55',['checkAAC',['../classaudio__tools_1_1_mime_detector.html#aba54ddd8f009137d6be54d95c304af5b',1,'audio_tools::MimeDetector']]],
   ['checkaacext_56',['checkAACExt',['../classaudio__tools_1_1_mime_detector.html#a5af30d29f28d93bf0d8a74dab9fe30de',1,'audio_tools::MimeDetector']]],
   ['checkadcbitspersample_57',['checkadcbitspersample',['../classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#abf97e5d637c743afd2074f927d4c6f46',1,'audio_tools::AnalogDriverESP32V1::checkADCBitsPerSample()'],['../classaudio__tools_1_1_analog_driver_e_s_p32_v2.html#abf97e5d637c743afd2074f927d4c6f46',1,'audio_tools::AnalogDriverESP32V2::checkADCBitsPerSample()']]],
