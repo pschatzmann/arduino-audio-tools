@@ -55,7 +55,7 @@ bool setupDrive() {
   // Use SDFAT's ls method to list files and automatically add file names 
   const char* path = "/Bob Dylan/Bringing It All Back Home";
   NamePrinter namePrinter(source, path);
-  auto dir = sd.open(path, FILE_READ);
+  auto dir = sd.open(path, O_RDONLY);
   dir.ls(&namePrinter, 0);
   dir.close();
 

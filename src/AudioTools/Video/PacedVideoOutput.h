@@ -2,15 +2,11 @@
 #include <atomic>
 #include <string.h>
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
+#include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 #include "AudioTools/CoreAudio/AudioTypes.h"
+#include "AudioTools/Concurrency.h"
 #include "AudioTools/Concurrency/LockFree/RingBufferSPSC.h"
-#include "AudioTools/Video/Video.h"
-
-#ifdef __linux__
-#include "AudioTools/Concurrency/Desktop/Task.h"
-#else
-#include "AudioTools/Concurrency/RTOS/Task.h"
-#endif
+#include "AudioTools/Video/VideoOutput.h"
 
 namespace audio_tools {
 
@@ -172,12 +168,17 @@ class PacedVideoOutput : public VideoOutput {
   /// begin()/the first frame - not supported afterwards.
   void setQueueBytes(size_t bytes) { queue_bytes = bytes > 0 ? bytes : 1; }
 
-  /// Opts the frame queue into PSRAM-backed allocation instead of
-  /// internal heap (see RingBufferSPSC::setUsePSRAM()) - falls back
-  /// silently on boards without PSRAM. Worth enabling once
-  /// setQueueBytes() is sized in the hundreds of KB+, since internal heap
-  /// is a scarcer shared resource on most ESP32 boards. Call before
-  /// begin()/the first frame - no effect on an already-allocated queue.
+  /// Whether the frame queue is PSRAM-backed instead of internal heap
+  /// (see RingBufferSPSC::setUsePSRAM()) - falls back silently on boards
+  /// without PSRAM. On by default: internal heap is a scarcer shared
+  /// resource on most ESP32 boards, and video decoding needs PSRAM for
+  /// more than just this queue anyway (decoded picture buffers, scaling
+  /// scratch buffers, ...) - see the wiki's "PSRAM: essential, not
+  /// optional" section. Call setQueueUsePSRAM(false) to opt back out
+  /// (e.g. a queue small enough that internal heap is preferable, or a
+  /// board with no PSRAM where forcing the fallback path is undesired).
+  /// Call before begin()/the first frame - no effect on an
+  /// already-allocated queue.
   void setQueueUsePSRAM(bool flag) { queue_use_psram = flag; }
 
   /// Starts the background render task - optional: write() calls this
@@ -452,6 +453,71 @@ class PacedVideoOutput : public VideoOutput {
     return elapsed > 0 ? (1000.0f * count) / elapsed : 0.0f;
   }
 
+  /// Prints a human-readable summary of the diagnostics above (fps,
+  /// average render time, frame/drop counts, queue fill level, and on
+  /// ESP32 also heap/PSRAM usage) to `out` - handy for a periodic status
+  /// line in a sketch, e.g. `videoOutput.logTo(Serial);`.
+  void logTo(Print& out) {
+    char buf[160];
+    StrView str(buf, sizeof(buf) - 1);
+
+    out.println(str.printf("input fps: %.2f / output fps: %.2f", inputFPS(),
+                            outputFPS()));
+
+    out.println(str.printf("avg render ms - I: %.2f / P: %.2f / overall: %.2f",
+                            avgIFrameMs(), avgPFrameMs(), avgFrameMs()));
+
+    size_t queueCapacity = queueCapacityBytes();
+    out.println(str.printf(
+        "frames - I: %d / P: %d / dropped P: %d / dropped I: %d / "
+        "queued I: %d / queue: %d/%d bytes (%.2f%% full)",
+        (int)frameCountI(), (int)frameCountP(), (int)droppedFrameCount(),
+        (int)droppedIFrameCount(), queuedIFrameCount(), (int)queuedBytes(),
+        (int)queueCapacity,
+        queueCapacity > 0 ? 100.0f * queuedBytes() / queueCapacity : 0.0f));
+
+    // Splits avgFrameMs() (the whole target write()+flush() call) into its
+    // decode share vs everything after it (convert/render/SPI, ...) -
+    // tells us which half of the render budget is actually worth
+    // optimizing next. Only printed when the target overrides
+    // VideoOutput::totalDecodeMs() (currently H264Decoder) - 0 otherwise
+    // means "not tracked separately", not "instant decode".
+    uint64_t decodeMs = p_target->totalDecodeMs();
+    if (decodeMs > 0) {
+      uint32_t renderedFrames = i_frame_count + p_frame_count;
+      float avgDecodeMs =
+          renderedFrames > 0 ? (float)decodeMs / renderedFrames : 0.0f;
+      out.println(str.printf("avg decode ms: %.2f / avg convert+SPI ms: %.2f",
+                              avgDecodeMs, avgFrameMs() - avgDecodeMs));
+    }
+#ifdef ESP32
+    size_t heapFree = ESP.getFreeHeap();
+    size_t heapTotal = ESP.getHeapSize();
+    size_t heapUsed = heapTotal - heapFree;
+
+    size_t psramFree = ESP.getFreePsram();
+    size_t psramTotal = ESP.getPsramSize();
+    size_t psramUsed = psramTotal - psramFree;
+
+    out.println(str.printf("Heap:  total=%u, used=%u, free=%u bytes",
+                            (unsigned)heapTotal, (unsigned)heapUsed,
+                            (unsigned)heapFree));
+    out.println(str.printf("PSRAM: total=%u, used=%u, free=%u bytes",
+                            (unsigned)psramTotal, (unsigned)psramUsed,
+                            (unsigned)psramFree));
+
+    // Largest currently allocatable blocks - a low value here despite
+    // plenty of total free bytes above means the heap is fragmented
+    // (e.g. by the queue's own allocation), not actually out of memory.
+    out.println(str.printf(
+        "Largest heap block:  %u bytes",
+        (unsigned)heap_caps_get_largest_free_block(MALLOC_CAP_INTERNAL)));
+    out.println(str.printf(
+        "Largest PSRAM block: %u bytes",
+        (unsigned)heap_caps_get_largest_free_block(MALLOC_CAP_SPIRAM)));
+#endif
+  }
+
  protected:
   VideoOutput* p_target;
   TimeSource* p_clock = nullptr;
@@ -502,7 +568,7 @@ class PacedVideoOutput : public VideoOutput {
   RingBufferSPSC<uint8_t> queue;
   size_t queue_bytes = 32 * 1024;      // desired capacity - see setQueueBytes()
   size_t queue_bytes_allocated = 0;    // what 'queue' was last resize()d to
-  bool queue_use_psram = false;        // see setQueueUsePSRAM()
+  bool queue_use_psram = true;         // see setQueueUsePSRAM()
 
   // Consumer-side-only framing state (see taskLoop()): a header already
   // pulled out of 'queue' whose payload isn't fully written yet. Never

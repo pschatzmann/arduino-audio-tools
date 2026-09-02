@@ -15,7 +15,7 @@
 ../examples/examples-player/player-sd_m4a-audiokit -> rc=0
 ../examples/examples-player/player-sdmmc-audiokit -> rc=0
 ../examples/examples-player/player-spiffs-i2s -> rc=0
-../examples/examples-player/player-vector_sdfat-audiokit -> rc=0
+../examples/examples-player/player-vector_sdfat-audiokit -> rc=1
 ../examples/examples-stream/streams-adc-i2s -> rc=0
 ../examples/examples-stream/streams-adc-serial -> rc=0
 ../examples/examples-stream/streams-adsr-i2s -> rc=0
@@ -272,7 +272,7 @@
 ../examples/tests/codecs/test-codec-g723_40 -> rc=0
 ../examples/tests/codecs/test-codec-g729 -> rc=0
 ../examples/tests/codecs/test-codec-gsm -> rc=0
-../examples/tests/codecs/test-codec-iLBC -> rc=0
+../examples/tests/codecs/test-codec-iLBC -> rc=1
 ../examples/tests/codecs/test-codec-l8 -> rc=0
 ../examples/tests/codecs/test-codec-lc3 -> rc=0
 ../examples/tests/codecs/test-codec-opus -> rc=0
@@ -280,7 +280,7 @@
 ../examples/tests/codecs/test-codec-sbc -> rc=0
 ../examples/tests/codecs/test-codec-wav8bit -> rc=0
 ../examples/tests/codecs/test-codec-wav-adpcm -> rc=0
-../examples/tests/codecs/test-compile-all -> rc=0
+../examples/tests/codecs/test-compile-all -> rc=1
 ../examples/tests/codecs/test-container-binary -> rc=0
 ../examples/tests/codecs/test-container-binary-meta -> rc=0
 ../examples/tests/codecs/test-container-ogg -> rc=0
@@ -289,6 +289,7 @@
 ../examples/tests/codecs/test-mp3-helix-reading -> rc=0
 ../examples/tests/codecs/test-mp3-mad -> rc=0
 ../examples/tests/codecs/test-mp3_parser -> rc=0
+../examples/tests/codecs/test-mp3-shine -> rc=0
 ../examples/tests/codecs/test-streaming-adapter -> rc=0
 ../examples/tests/concurrency/audio-test -> rc=0
 ../examples/tests/concurrency/BufferRTOS -> rc=0
@@ -310,6 +311,7 @@
 ../examples/tests/conversion/pipeline-in -> rc=0
 ../examples/tests/conversion/pipeline-out -> rc=0
 ../examples/tests/conversion/resample-mixer-in -> rc=0
+../examples/tests/conversion/resample-performance -> rc=0
 ../examples/tests/conversion/test-panning -> rc=0
 ../examples/tests/conversion/test-resample-in -> rc=0
 ../examples/tests/conversion/test-resample-out -> rc=0

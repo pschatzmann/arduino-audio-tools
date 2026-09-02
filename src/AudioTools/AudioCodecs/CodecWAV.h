@@ -49,6 +49,17 @@ struct WAVAudioInfo : AudioInfo {
 
 static const char *wav_mime = "audio/wav";
 
+/// Determines if the given WAV format tag identifies one of the ADPCM
+/// variants that ADPCMEncoder/ADPCMDecoder can actually produce/consume for
+/// WAV (MS, IMA/DVI and Yamaha ADPCM - see ADPCMDecoder::wavFormat()). All
+/// of these encode 4 bits per sample. AudioFormat.h defines many further
+/// vendor-specific ADPCM WAV tags, but this library has no encoder/decoder
+/// mapping to them, so they are intentionally not included here.
+static bool isADPCMFormat(AudioFormat format) {
+  return format == AudioFormat::ADPCM || format == AudioFormat::DVI_ADPCM ||
+         format == AudioFormat::YAMAHA_ADPCM;
+}
+
 /**
  * @brief Parser for Wav header data
  * for details see https://de.wikipedia.org/wiki/RIFF_WAVE
@@ -165,7 +176,7 @@ class WAVHeader {
     buffer.reset();
     writeRiffHeader(buffer, info);
     writeFMT(buffer, info);
-    if (isADPCM(info.format) && info.ext_adpcm_header) {
+    if (isADPCMFormat(info.format) && info.ext_adpcm_header) {
       writeFactChunk(buffer, info);
     }
     writeDataHeader(buffer, info);
@@ -321,10 +332,18 @@ class WAVHeader {
     // chunk is written: byte_rate is informational (e.g. used by some
     // players for scrubbing/duration estimates) and the linear-PCM-based
     // default in info.byte_rate is misleading for compressed formats
-    if (isADPCM(info.format) && spb > 0 && info.block_align > 0) {
+    if (isADPCMFormat(info.format) && spb > 0 && info.block_align > 0) {
       // average bytes/sec = (sample_rate * block_align) / samples_per_block
       byte_rate = ((uint64_t)info.sample_rate * info.block_align) / spb;
     }
+
+    // wBitsPerSample for ADPCM formats is the number of bits per *coded*
+    // sample (always 4 for MS/IMA WAV ADPCM), not the decoded PCM depth
+    // tracked in info.bits_per_sample (typically 16) - writing 16 here
+    // makes strict decoders (e.g. ffmpeg) reject the stream since it is
+    // outside the codec's valid range
+    uint16_t bits_per_coded_sample =
+        isADPCMFormat(info.format) ? 4 : info.bits_per_sample;
 
     buffer.writeArray((uint8_t *)"fmt ", 4);
     write32(buffer, fmt_len);
@@ -333,7 +352,7 @@ class WAVHeader {
     write32(buffer, info.sample_rate);
     write32(buffer, byte_rate);
     write16(buffer, info.block_align);  // frame size
-    write16(buffer, info.bits_per_sample);
+    write16(buffer, bits_per_coded_sample);
 
     if (is_ima_adpcm) {
       write16(buffer, 2);    // cbSize: size of extra format bytes
@@ -384,10 +403,6 @@ class WAVHeader {
       memset(empty, 0, offset);
       buffer.writeArray(empty, offset);  // resolve issue with wrong aligment
     }
-  }
-
-  static bool isADPCM(AudioFormat format) {
-    return format == AudioFormat::ADPCM || format == AudioFormat::DVI_ADPCM;
   }
 
   /// Number of samples encoded in a single block, for ADPCM formats
@@ -981,7 +996,10 @@ class WAVEncoder : public AudioEncoder {
    */
   WAVEncoder(AudioEncoderExt &enc, AudioFormat fmt) { setEncoder(enc, fmt); };
 
-  /// Associates an external encoder for non-PCM formats
+  /// Associates an external encoder for non-PCM formats. For ADPCM formats
+  /// this automatically enables the extended 'fmt '/'fact' header (see
+  /// setExtADPCMHeader()) once setAudioInfo()/begin() is called, unless it
+  /// was already explicitly overridden via setExtADPCMHeader().
   void setEncoder(AudioEncoderExt &enc, AudioFormat fmt) {
     TRACED();
     wav_info.format = fmt;
@@ -1228,6 +1246,10 @@ class WAVEncoder : public AudioEncoder {
     // depends on wav_info.ext_adpcm_header
     if (has_pending_ext_adpcm_header) {
       wav_info.ext_adpcm_header = pending_ext_adpcm_header;
+    } else if (p_encoder != nullptr && isADPCMFormat(wav_info.format)) {
+      // default to the extended header for ADPCM formats unless the user
+      // explicitly overrode it via setExtADPCMHeader()
+      wav_info.ext_adpcm_header = true;
     }
     if (has_pending_offset) {
       wav_info.offset = pending_offset;

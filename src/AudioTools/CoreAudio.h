@@ -25,6 +25,8 @@
 #include "AudioTools/CoreAudio/AudioMetaData.h"
 #include "AudioTools/CoreAudio/Analysis.h"
 #include "AudioTools/CoreAudio/RTTTLOutput.h"
+#include "AudioTools/CoreAudio/AudioBasic/Str.h"
+#include "AudioTools/CoreAudio/AudioBasic/Format.h"
 
 // Audio Actions only when pin support havs been defined
 #if defined(GPIO_NONE)

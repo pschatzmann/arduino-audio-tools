@@ -4,6 +4,25 @@
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
 #include "faad.h"
 
+// faad's neaacdec.h defines short, common object/header-type macros (RAW,
+// ADIF, ADTS, LATM, MAIN, LC, SSR, LTP, HE_AAC, ER_LC, ER_LTP, LD,
+// DRM_ER_LC) that are not used outside of this header but leak globally and
+// clash with identifiers (e.g. VideoFormat::RAW in ContainerAVI.h) in other
+// audio-tools headers when both are included in the same sketch.
+#undef MAIN
+#undef LC
+#undef SSR
+#undef LTP
+#undef HE_AAC
+#undef ER_LC
+#undef ER_LTP
+#undef LD
+#undef DRM_ER_LC
+#undef RAW
+#undef ADIF
+#undef ADTS
+#undef LATM
+
 #ifndef FAAD_INPUT_BUFFER_SIZE
 #define FAAD_INPUT_BUFFER_SIZE 1024*2
 #endif

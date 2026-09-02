@@ -112,7 +112,7 @@ enum class AudioFormat : uint16_t {
   // CONVEDIA_G729 = 0x008C, /* Convedia Corp. */
   // CONGRUENCY = 0x008D, /* Congruency Inc. */
   // SBC24 = 0x0091, /* Siemens Business Communications Sys */
-  // DOLBY_AC3_SPDIF = 0x0092, /* Sonic Foundry */
+  AC3 = 0x0092, /* Dolby AC-3 (Dolby Digital), aka DOLBY_AC3_SPDIF */
   // MEDIASONIC_G723 = 0x0093, /* MediaSonic */
   // PROSODY_8KBPS = 0x0094, /* Aculab plc */
   ZYXEL_ADPCM = 0x0097, /* ZyXEL Communications, Inc. */
@@ -337,6 +337,8 @@ inline const char* toMime(AudioFormat format) {
       return "audio/aac";
     case AudioFormat::ALAC:
       return "audio/alac";
+    case AudioFormat::AC3:
+      return "audio/ac3";
     default:
       return nullptr;
   }
@@ -367,6 +369,7 @@ inline AudioFormat fromMime(const char* mime) {
   if (strcmp(mime, "audio/mpeg") == 0) return AudioFormat::MP3;
   if (strcmp(mime, "audio/aac") == 0) return AudioFormat::AAC;
   if (strcmp(mime, "audio/alac") == 0) return AudioFormat::ALAC;
+  if (strcmp(mime, "audio/ac3") == 0) return AudioFormat::AC3;
   return AudioFormat::UNKNOWN;
 }
 

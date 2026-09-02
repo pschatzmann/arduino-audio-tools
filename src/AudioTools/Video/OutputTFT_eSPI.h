@@ -26,7 +26,7 @@ class OutputTFT_eSPI : public VideoOutput {
   }
 
   /// Defines the source of the video information (width, height, fps, format)
-  void setVideoInfoSource(VideoInfoSource& source) {
+  void setVideoInfoSource(VideoInfoSource& source) override {
     p_info = &source;
   }
 

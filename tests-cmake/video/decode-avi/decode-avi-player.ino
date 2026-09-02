@@ -6,10 +6,10 @@
  * see decode-avi.ino's own class comment for the pipeline this replaces
  * (identical end to end; VideoPlayer just owns the wiring).
  *
- * This AVI file has a real audio track, so setUseAudioClock(true) is used
- * to schedule video against actual playback progress instead of the
- * wall-clock default - see VideoPlayer's own class comment ("Audio
- * clock") for why that's opt-in rather than automatic.
+ * This AVI file has a real audio track, so VideoPlayer schedules video
+ * against actual playback progress by default (setUseAudioClock(), on by
+ * default - see VideoPlayer's own class comment's "Audio clock" section
+ * for when to opt out instead).
  *
  * VideoPlayer's video AND audio multi-decoders both start empty (no
  * forced dependency on any one codec library - see its own class
@@ -75,7 +75,6 @@ void setup() {
   // MJPEG mode (which just accumulates bytes waiting for flush(), never
   // called here), so without this it silently never displays anything.
   videoOut.setVideoFormat(VideoFormat::RGB565);
-  videoOut.setVideoInfoSource(aviDemuxer);
 
   // Register the codecs this AVI file's tracks may use (see the comment
   // at the top of this file - VideoPlayer's multi-decoders start empty;
@@ -86,9 +85,8 @@ void setup() {
   player.addAudioDecoder(aacDecoder, "audio/aac");
   player.addAudioDecoder(wavDecoder, "audio/vnd.wave");
 
-  // This file has a real audio track - schedule video against it instead
-  // of wall-clock time (see the class comment's "Audio clock" section).
-  player.setUseAudioClock(true);
+  // This file has a real audio track - VideoPlayer schedules video against
+  // it by default (see the class comment's "Audio clock" section).
 
   if (!player.begin(file)) {
     Serial.println("VideoPlayer begin() failed");

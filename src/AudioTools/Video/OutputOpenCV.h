@@ -43,7 +43,7 @@ public:
   /// Demuxer) reports its own encoded codec (H264, MJPEG, ...), which is
   /// not necessarily what actually gets written here once a decoder sits
   /// in between - format still comes from setVideoFormat().
-  void setVideoInfoSource(VideoInfoSource &source) { p_info = &source; }
+  void setVideoInfoSource(VideoInfoSource &source) override { p_info = &source; }
 
   size_t write(const uint8_t *data, size_t len) override {
     auto start = millis();
