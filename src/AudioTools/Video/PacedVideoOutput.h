@@ -463,20 +463,20 @@ class PacedVideoOutput : public VideoOutput {
     out.print(" / overall: ");
     out.println(avgFrameMs());
     out.print("frames - I: ");
-    out.print(frameCountI());
+    out.print((int)frameCountI());
     out.print(" / P: ");
-    out.print(frameCountP());
+    out.print((int)frameCountP());
     out.print(" / dropped P: ");
-    out.print(droppedFrameCount());
+    out.print((int)droppedFrameCount());
     out.print(" / dropped I: ");
-    out.print(droppedIFrameCount());
+    out.print((int)droppedIFrameCount());
     out.print(" / queued I: ");
     out.print(queuedIFrameCount());
     size_t queueCapacity = queueCapacityBytes();
     out.print(" / queue: ");
-    out.print((unsigned)queuedBytes());
+    out.print((int)queuedBytes());
     out.print("/");
-    out.print((unsigned)queueCapacity);
+    out.print((int)queueCapacity);
     out.print(" bytes (");
     out.print(queueCapacity > 0 ? 100.0f * queuedBytes() / queueCapacity
                                  : 0.0f);
