@@ -52,15 +52,6 @@ const char *file_path = "/Videos/output.mp4";
 DemuxerMP4 mp4Demuxer;
 LCDBoardESP32S3_2_8Display board;
 OutputTinyGPU tftOutput(board);
-// Qualified deliberately: TinyGPU.h (pulled in by OutputTinyGPU.h) and
-// I2SCodecStream.h (pulled in by AudioBoardStream.h) each apply their own
-// "using namespace" globally, and both libraries happen to name their
-// board for this exact display "ESP32S3HosyondDisplay" - tinygpu::
-// ESP32S3HosyondDisplay is a *type alias* for LCDBoardESP32S3_2_8Display
-// (unrelated to the board object above), audio_driver::
-// ESP32S3HosyondDisplay is the AudioBoard *object* actually needed here -
-// left unqualified, the two collide and the sketch fails to compile with
-// "reference to 'ESP32S3HosyondDisplay' is ambiguous".
 AudioBoardStream out(audio_driver::ESP32S3HosyondDisplay);
 VideoPlayer player(mp4Demuxer, tftOutput, out);
 
