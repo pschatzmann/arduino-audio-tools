@@ -109,10 +109,9 @@ void setup() {
   player.addAudioDecoder(wavDecoder, "audio/vnd.wave");
   player.addAudioDecoder(mp2Decoder, "audio/mpeg; codecs=\"mpeg1-layer2\"");
 
-  // This file has a real audio track - schedule video against it instead
-  // of wall-clock time (see VideoPlayer's class comment's "Audio clock"
+  // This file has a real audio track - VideoPlayer schedules video against
+  // it by default (see VideoPlayer's class comment's "Audio clock"
   // section).
-  player.setUseAudioClock(true);
 
   // delta frames are too slow, so just ignore them ?
   player.setIgnorePFrames(true);

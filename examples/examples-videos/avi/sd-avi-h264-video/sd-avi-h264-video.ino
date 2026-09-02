@@ -110,10 +110,9 @@ void setup() {
   player.addAudioDecoder(aacDecoder, "audio/aac");
   player.addAudioDecoder(wavDecoder, "audio/vnd.wave");
 
-  // This file has a real audio track - schedule video against it instead
-  // of wall-clock time (see VideoPlayer's class comment's "Audio clock"
+  // This file has a real audio track - VideoPlayer schedules video against
+  // it by default (see VideoPlayer's class comment's "Audio clock"
   // section).
-  player.setUseAudioClock(true);
 
   // Compensates for AudioBoardStream's own output buffering
   // (cfg.buffer_size*cfg.buffer_count) - see

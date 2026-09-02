@@ -88,13 +88,17 @@ namespace audio_tools {
  *
  * Audio clock: scheduling video against real playback progress
  * (PacedVideoOutput::setAudioClock()) needs an audio clock that's
- * actually advancing - wiring one against a track that never delivers any
- * bytes (silent/absent audio) would stall video forever waiting for a
- * clock that never moves (see decode-mp4.ino's own history for exactly
- * this bug). setUseAudioClock() therefore defaults to false: video is
- * scheduled against wall-clock time unless you explicitly opt in once an
- * audio output is wired AND you know the content actually has a real
- * audio track.
+ * actually advancing. setUseAudioClock() defaults to true: as soon as an
+ * audio output is wired (setAudioOutput()/the video+audio constructors),
+ * video is scheduled against it - the common case, since most containers
+ * that carry both tracks want them kept in sync. Call
+ * setUseAudioClock(false) to opt back out to wall-clock scheduling
+ * instead - needed if the content's "audio" track never actually
+ * delivers bytes (silent/absent audio), which would otherwise stall
+ * video forever waiting for a clock that never moves (see
+ * decode-mp4.ino's own history for exactly this bug). No effect at all
+ * for video-only playback (no audio output wired), which is always
+ * scheduled against wall-clock time.
  *
  * Only covers the common "feed a Demuxer straight from a Stream" case,
  * matching the RAM-backed sample-table default every Demuxer uses out of
@@ -137,11 +141,11 @@ class VideoPlayer {
   }
 
   /// Video + audio playback (AudioOutput target, e.g. AudioBoardStream/
-  /// I2SStream) with auto-detected codecs. See the class comment's "Audio
-  /// clock" section - setUseAudioClock(true) still needs to be called
-  /// explicitly if the content actually has a real audio track and should
-  /// be scheduled against it. See the video-only constructor above for
-  /// `demuxer`.
+  /// I2SStream) with auto-detected codecs - video is scheduled against
+  /// this audio output's playback progress by default (see the class
+  /// comment's "Audio clock" section); call setUseAudioClock(false) if the
+  /// content's audio track never actually delivers bytes. See the
+  /// video-only constructor above for `demuxer`.
   VideoPlayer(Demuxer& demuxer, VideoOutput& videoOutput, AudioOutput& audioOutput) {
     addDemuxer(demuxer);
     setVideoOutput(videoOutput);
@@ -233,9 +237,10 @@ class VideoPlayer {
     p_audio_stream = &out;
   }
 
-  /// See the class comment's "Audio clock" section. Off by default;
-  /// setAudioOutput() does not change it - opt in explicitly once you
-  /// know the content has a real audio track. Call before begin().
+  /// See the class comment's "Audio clock" section. On by default;
+  /// setAudioOutput() does not change it - opt out explicitly (false) if
+  /// the content's audio track never actually delivers bytes. Call before
+  /// begin().
   void setUseAudioClock(bool active) { use_audio_clock = active; }
   bool useAudioClock() const { return use_audio_clock; }
 
@@ -453,7 +458,7 @@ class VideoPlayer {
   AudioTimeSourceStream audio_clock;
   EncodedAudioStream audio_out;
 
-  bool use_audio_clock = false;
+  bool use_audio_clock = true;
   int buffer_size = 1024;
   bool active = false;
 };
