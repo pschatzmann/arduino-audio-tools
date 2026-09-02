@@ -76,11 +76,14 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classaudio__tools_1_1_video_info_source-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">VideoInfoSource Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
+  <div class="headertitle"><div class="title">VideoInfoSource Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span><div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__video.html">Video</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="_video_8h_source.html">Video.h</a>&gt;</code></p>
+<p>Provider of <a class="el" href="structaudio__tools_1_1_video_info.html" title="Basic video information (width/height/codec/frame size), analogous to AudioInfo - common to both Demu...">VideoInfo</a> (width/height/fps/format) for whoever needs to size buffers/panel setup against it - e.g. a <a class="el" href="classaudio__tools_1_1_demuxer.html" title="Common interface for demuxers (DemuxerAVI, DemuxerMP4) that split a container&#39;s video and (optional) ...">Demuxer</a> (already parsed from the container's own metadata) handed to <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a>:: setVideoInfoSource().  
+ <a href="classaudio__tools_1_1_video_info_source.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_video_output_8h_source.html">VideoOutput.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for VideoInfoSource:</div>
 <div class="dyncontent">
@@ -107,7 +110,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aeab7b6810b52140c3c3a60bf92ca92ba" id="r_aeab7b6810b52140c3c3a60bf92ca92ba"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structaudio__tools_1_1_video_info.html">VideoInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_info_source.html#aeab7b6810b52140c3c3a60bf92ca92ba">videoInfo</a> ()=0</td></tr>
 <tr class="separator:aeab7b6810b52140c3c3a60bf92ca92ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Provider of <a class="el" href="structaudio__tools_1_1_video_info.html" title="Basic video information (width/height/codec/frame size), analogous to AudioInfo - common to both Demu...">VideoInfo</a> (width/height/fps/format) for whoever needs to size buffers/panel setup against it - e.g. a <a class="el" href="classaudio__tools_1_1_demuxer.html" title="Common interface for demuxers (DemuxerAVI, DemuxerMP4) that split a container&#39;s video and (optional) ...">Demuxer</a> (already parsed from the container's own metadata) handed to <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a>:: setVideoInfoSource(). </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="aeab7b6810b52140c3c3a60bf92ca92ba" name="aeab7b6810b52140c3c3a60bf92ca92ba"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aeab7b6810b52140c3c3a60bf92ca92ba">&#9670;&#160;</a></span>videoInfo()</h2>
 
@@ -136,7 +141,7 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/Video/<a class="el" href="_video_8h_source.html">Video.h</a></li>
+<li>src/AudioTools/Video/<a class="el" href="_video_output_8h_source.html">VideoOutput.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

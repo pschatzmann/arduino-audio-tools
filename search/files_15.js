@@ -13,10 +13,11 @@ var searchData=
   ['video_2eh_10',['Video.h',['../_video_8h.html',1,'']]],
   ['videomuxer_2eh_11',['VideoMuxer.h',['../_video_muxer_8h.html',1,'']]],
   ['videomuxerwithtasks_2eh_12',['VideoMuxerWithTasks.h',['../_video_muxer_with_tasks_8h.html',1,'']]],
-  ['videoplayer_2eh_13',['VideoPlayer.h',['../_video_player_8h.html',1,'']]],
-  ['videoplayerfull_2eh_14',['VideoPlayerFull.h',['../_video_player_full_8h.html',1,'']]],
-  ['volumecontrol_2eh_15',['VolumeControl.h',['../_volume_control_8h.html',1,'']]],
-  ['volumestream_2eh_16',['VolumeStream.h',['../_volume_stream_8h.html',1,'']]],
-  ['vorbisdecoder_2eh_17',['VorbisDecoder.h',['../_vorbis_decoder_8h.html',1,'']]],
-  ['vs1053stream_2eh_18',['VS1053Stream.h',['../_v_s1053_stream_8h.html',1,'']]]
+  ['videooutput_2eh_13',['VideoOutput.h',['../_video_output_8h.html',1,'']]],
+  ['videoplayer_2eh_14',['VideoPlayer.h',['../_video_player_8h.html',1,'']]],
+  ['videoplayerfull_2eh_15',['VideoPlayerFull.h',['../_video_player_full_8h.html',1,'']]],
+  ['volumecontrol_2eh_16',['VolumeControl.h',['../_volume_control_8h.html',1,'']]],
+  ['volumestream_2eh_17',['VolumeStream.h',['../_volume_stream_8h.html',1,'']]],
+  ['vorbisdecoder_2eh_18',['VorbisDecoder.h',['../_vorbis_decoder_8h.html',1,'']]],
+  ['vs1053stream_2eh_19',['VS1053Stream.h',['../_v_s1053_stream_8h.html',1,'']]]
 ];
