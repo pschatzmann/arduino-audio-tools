@@ -221,7 +221,7 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a4aedeeafffe3a4f1acc85e1004001908"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb70e8bb94463d273c93b053b7b06a25" id="r_afb70e8bb94463d273c93b053b7b06a25"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#afb70e8bb94463d273c93b053b7b06a25">p_video_output</a> = nullptr</td></tr>
 <tr class="separator:afb70e8bb94463d273c93b053b7b06a25"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c203e4711b6fd07d348ee092229715f" id="r_a8c203e4711b6fd07d348ee092229715f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#a8c203e4711b6fd07d348ee092229715f">use_audio_clock</a> = false</td></tr>
+<tr class="memitem:a8c203e4711b6fd07d348ee092229715f" id="r_a8c203e4711b6fd07d348ee092229715f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#a8c203e4711b6fd07d348ee092229715f">use_audio_clock</a> = true</td></tr>
 <tr class="separator:a8c203e4711b6fd07d348ee092229715f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88bf80373809f292ec23fccb68fa589d" id="r_a88bf80373809f292ec23fccb68fa589d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_paced_video_output.html">PacedVideoOutput</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_player.html#a88bf80373809f292ec23fccb68fa589d">video_sync</a> {<a class="el" href="classaudio__tools_1_1_video_player.html#a270d7c1834854c68a85bbd5312749abf">default_video_decoder</a>}</td></tr>
 <tr class="separator:a88bf80373809f292ec23fccb68fa589d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -234,7 +234,7 @@ codec just works" player. Use instead of the base <a class="el" href="classaudio
 <div class="line">player.begin(file);</div>
 <div class="ttc" id="aclassaudio__tools_1_1_multi_video_demuxer_full_html"><div class="ttname"><a href="classaudio__tools_1_1_multi_video_demuxer_full.html">audio_tools::MultiVideoDemuxerFull</a></div><div class="ttdoc">MultiVideoDemuxer pre-registered with every container format this library ships a demuxer for: Demuxe...</div><div class="ttdef"><b>Definition</b> MultiVideoDemuxerFull.h:35</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_video_player_full_html"><div class="ttname"><a href="classaudio__tools_1_1_video_player_full.html">audio_tools::VideoPlayerFull</a></div><div class="ttdoc">VideoPlayer subclass pre-registered with every video/audio codec this library ships a portable decode...</div><div class="ttdef"><b>Definition</b> VideoPlayerFull.h:47</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_video_player_html_aafc9ef4697ffb749313389b2b8f6da60"><div class="ttname"><a href="classaudio__tools_1_1_video_player.html#aafc9ef4697ffb749313389b2b8f6da60">audio_tools::VideoPlayer::demuxer</a></div><div class="ttdeci">MultiVideoDemuxer &amp; demuxer()</div><div class="ttdef"><b>Definition</b> VideoPlayer.h:412</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_video_player_html_aafc9ef4697ffb749313389b2b8f6da60"><div class="ttname"><a href="classaudio__tools_1_1_video_player.html#aafc9ef4697ffb749313389b2b8f6da60">audio_tools::VideoPlayer::demuxer</a></div><div class="ttdeci">MultiVideoDemuxer &amp; demuxer()</div><div class="ttdef"><b>Definition</b> VideoPlayer.h:417</div></div>
 </div><!-- fragment --><p>WAV is deliberately not included (no external dependency to justify bundling it) - register it yourself if needed: addAudioDecoder(wavDecoder, "audio/vnd.wave").</p>
 <p>Dependencies (install via Library Manager):</p><ul>
 <li><a href="https://github.com/pschatzmann/TinyH264">https://github.com/pschatzmann/TinyH264</a></li>
@@ -1248,7 +1248,7 @@ AudioOutput&amp;)/setStream(<a class="el" href="classaudio__tools_1_1_audio_stre
   </tr>
 </table>
 </div><div class="memdoc">
-<p>See the class comment's "Audio clock" section. Off by default; <a class="el" href="classaudio__tools_1_1_video_player.html#a7f61d6c44e26898d3c968dc030953116">setAudioOutput()</a> does not change it - opt in explicitly once you know the content has a real audio track. Call before <a class="el" href="classaudio__tools_1_1_video_player.html#af3226abe4456a403c63c393293b69933">begin()</a>. </p>
+<p>See the class comment's "Audio clock" section. On by default; <a class="el" href="classaudio__tools_1_1_video_player.html#a7f61d6c44e26898d3c968dc030953116">setAudioOutput()</a> does not change it - opt out explicitly (false) if the content's audio track never actually delivers bytes. Call before <a class="el" href="classaudio__tools_1_1_video_player.html#af3226abe4456a403c63c393293b69933">begin()</a>. </p>
 
 </div>
 </div>
@@ -1763,7 +1763,7 @@ AudioOutput&amp;)/setStream(<a class="el" href="classaudio__tools_1_1_audio_stre
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool use_audio_clock = false</td>
+          <td class="memname">bool use_audio_clock = true</td>
         </tr>
       </table>
   </td>
