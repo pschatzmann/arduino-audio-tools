@@ -64,7 +64,7 @@
 
 // ---- File on the SD card to measure - any .avi/.mp4/.mpg this library
 // can decode ----
-//const char* file_path = "/Videos/output176x144.avi";
+const char* file_path = "/Videos/output176x144.avi";
 //const char* file_path = "/Videos/output176x144.mp4"; // x264
 //const char* file_path = "/Videos/output176x144-mjpeg.avi"; // mjpeg
 //const char* file_path = "/Videos/output176x144.mpg";
