@@ -13,6 +13,27 @@ git -C ../../ESP32-A2DP pull
 git -C ../../arduino-audio-driver pull
 git -C ../../arduino-libhelix pull
 
+# Examples that are not buildable for esp32:esp32:esp32 by design (wrong
+# platform, or not an arduino-cli sketch at all) and are therefore skipped
+# rather than reported as a build failure.
+EXCLUDE_LIST=(
+  "streams-mp34dt05-serial"   # Nano 33 BLE Sense only (needs PDM.h)
+  "fft-cmsis"                 # ARM Cortex-M only (STM32/RP2040/Renesas)
+  "streams-stk-desktop"       # desktop build via CMake/PortAudio, not an ESP32 sketch
+  "python-post-server"        # Python script, not an Arduino sketch
+)
+
+function is_excluded {
+  local name
+  name=$(basename "$1")
+  for ex in "${EXCLUDE_LIST[@]}"; do
+    if [[ "$name" == "$ex" ]]; then
+      return 0
+    fi
+  done
+  return 1
+}
+
 function compile_example {
   ARCH=$1
   FILES=$2
@@ -23,7 +44,21 @@ function compile_example {
       echo "Skipping README.md file: $f"
       continue
     fi
-    
+
+    if is_excluded "$f"; then
+      echo "Skipping excluded example: $f"
+      continue
+    fi
+
+    # A sketch directory must contain a .ino file with the same base name.
+    # If it doesn't, it's a container of sub-sketches (e.g.
+    # serial/mp3/{send-mp3,receive-mp3}) - recurse into it one level instead
+    # of trying to compile the container itself.
+    if [[ -d "$f" && ! -f "$f/$(basename "$f").ino" ]]; then
+      compile_example "$ARCH" "$f/*"
+      continue
+    fi
+
     echo "Processing $f ..."
     # take action on each file. $f store current file name
     #arduino-cli compile  -b "$ARCH"  "$f"
