@@ -146,8 +146,10 @@ class H264Decoder : public VideoDecoder, public VideoInfoSource {
   /// picture from within this call (not deferred to flush()).
   size_t write(const uint8_t *data, size_t len) override {
     uint32_t decodeStart = millis();
+    uint32_t outputMsBefore = total_output_ms_;
     decoder_.write(data, len);
-    total_decode_ms_ += millis() - decodeStart;
+    uint32_t outputMsDuringThisCall = total_output_ms_ - outputMsBefore;
+    total_decode_ms_ += (millis() - decodeStart) - outputMsDuringThisCall;
     return len;
   }
 
@@ -162,7 +164,14 @@ class H264Decoder : public VideoDecoder, public VideoInfoSource {
 
   /// Sum of time spent purely inside decoder_.write() (CAVLC decode +
   /// reconstruction) since begin() - excludes SD reads and demux overhead
-  /// a caller's own outer timing bundles in alongside it.
+  /// a caller's own outer timing bundles in alongside it, AND excludes
+  /// the picture-ready callback's own cost (pixel-format conversion +
+  /// pushing the result to setOutput()'s target, which decoder_.write()
+  /// invokes synchronously mid-call - see writeToOutput()) - measured
+  /// separately and subtracted in write(), so a caller comparing this
+  /// against its own outer wall-clock time around write() (e.g.
+  /// OutputFPSMeter) gets a real decode-vs-render split instead of a
+  /// number that already secretly includes render.
   uint64_t totalDecodeMs() const override { return total_decode_ms_; }
 
   /// Direct access to the wrapped TinyH264Decoder, e.g. for its width()/
@@ -171,6 +180,12 @@ class H264Decoder : public VideoDecoder, public VideoInfoSource {
 
  protected:
   uint64_t total_decode_ms_ = 0;
+  // Accumulated time spent inside writeToOutput() (pixel conversion +
+  // push to the configured output) since begin() - see totalDecodeMs()'s
+  // own comment. write() reads the delta across its own call and
+  // subtracts it, so total_decode_ms_ stays decode-only regardless of
+  // how expensive the configured output's own write() turns out to be.
+  uint32_t total_output_ms_ = 0;
 
   tinyh264::TinyH264Decoder<H264_DEFAULT_ALLOCATOR> decoder_;
   Print *p_out = nullptr;
@@ -188,6 +203,11 @@ class H264Decoder : public VideoDecoder, public VideoInfoSource {
     // Every decoded picture is always shown - see PacedVideoOutput
     // (Video/PacedVideoOutput.h) for how pacing/scheduling actually
     // happens.
+    // Timed separately from decode (see total_output_ms_'s own comment) -
+    // covers both the pixel-format conversion below and the push to
+    // setOutput()'s target, i.e. render, if that target is a real
+    // display.
+    uint32_t outputStart = millis();
     size_t w = decoder_.width();
     size_t h = decoder_.height();
     size_t n = 0;
@@ -198,7 +218,7 @@ class H264Decoder : public VideoDecoder, public VideoInfoSource {
           frame_buffer.resize(needed * 2);
           if (frame_buffer.data() == nullptr) {
             LOGE("H264Decoder: frame buffer allocation failed (RGB565)");
-            return;
+            break;
           }
         }
         n = decoder_.toRGB565((uint16_t *)frame_buffer.data(), needed);
@@ -211,7 +231,7 @@ class H264Decoder : public VideoDecoder, public VideoInfoSource {
           frame_buffer.resize(needed);
           if (frame_buffer.data() == nullptr) {
             LOGE("H264Decoder: frame buffer allocation failed (RGB666)");
-            return;
+            break;
           }
         }
         n = decoder_.toRGB666(frame_buffer.data(), needed);
@@ -224,7 +244,7 @@ class H264Decoder : public VideoDecoder, public VideoInfoSource {
           frame_buffer.resize(needed);
           if (frame_buffer.data() == nullptr) {
             LOGE("H264Decoder: frame buffer allocation failed (RGB888)");
-            return;
+            break;
           }
         }
         n = decoder_.toRGB888(frame_buffer.data(), needed);
@@ -237,7 +257,7 @@ class H264Decoder : public VideoDecoder, public VideoInfoSource {
           frame_buffer.resize(needed);
           if (frame_buffer.data() == nullptr) {
             LOGE("H264Decoder: frame buffer allocation failed (I420)");
-            return;
+            break;
           }
         }
         n = decoder_.toYUV420(frame_buffer.data(), needed);
@@ -247,6 +267,7 @@ class H264Decoder : public VideoDecoder, public VideoInfoSource {
       default:
         break;
     }
+    total_output_ms_ += millis() - outputStart;
   }
 
   size_t writeToOutput(uint8_t *data, size_t len) {
