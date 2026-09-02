@@ -48,7 +48,7 @@
 #include "TinyGPU/Boards.h"
 
 // ---- File on the SD card to play ----
-const char* file_path = "/Videos/output176x144.mpg";
+const char* file_path = "/Videos/output176x144-v2.mpg";
 
 DemuxerMPG mpgDemuxer;
 LCDBoardESP32S3_2_8Display board;
@@ -74,7 +74,7 @@ void setup() {
   cfg.buffer_count = 20;  // 1024*20 = 20KB output buffer
   if (!out.begin(cfg)) {
     Serial.println("AudioBoardStream begin() failed");
-    return;
+    stop();
   }
   out.setVolume(0.4f);
 
@@ -82,12 +82,12 @@ void setup() {
   if (!file) {
     Serial.print("Could not open ");
     Serial.println(file_path);
-    return;
+    stop();
   }
 
   if (!board.begin()) {
     Serial.println("OutputTinyGPU begin() failed");
-    return;
+    stop();
   }
   tftOutput.setRotation(DisplayRotation::kLandscape);
   // On: upscale the decoded frame to fill the 320x240 panel - costs more
@@ -113,8 +113,6 @@ void setup() {
   // it by default (see VideoPlayer's class comment's "Audio clock"
   // section).
 
-  // delta frames are too slow, so just ignore them ?
-  player.setIgnorePFrames(true);
   // Compensates for AudioBoardStream's own output buffering
   // (cfg.buffer_size*cfg.buffer_count) - see
   // PacedVideoOutput::setSchedulingDelayMs(); ~115ms matches the ~20KB
@@ -126,11 +124,10 @@ void setup() {
   // the length of a slow render call. Call before begin()/first write().
   player.setTaskParameters(4096, 2, 0);
   player.setQueueBytes(40 * 1024);
-  player.setQueueUsePSRAM(true);
 
   if (!player.begin(file)) {
     Serial.println("VideoPlayer begin() failed");
-    return;
+    stop();
   }
 }
 

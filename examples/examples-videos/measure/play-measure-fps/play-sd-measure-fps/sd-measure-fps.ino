@@ -99,19 +99,19 @@ void setup() {
   cfg.sdmmc_active = true;  // board's begin() calls SD_MMC.setPins()+begin()
   if (!out.begin(cfg)) {
     Serial.println("AudioBoardStream begin() failed");
-    return;
+    stop();
   }
 
   file = SD_MMC.open(file_path);
   if (!file) {
     Serial.print("Could not open ");
     Serial.println(file_path);
-    return;
+    stop();
   }
 
   if (!board.begin()) {
     Serial.println("OutputTinyGPU begin() failed");
-    return;
+    stop();
   }
   tftOutput.setRotation(DisplayRotation::kLandscape);
   tftOutput.setScaleToFit(true);
@@ -125,7 +125,7 @@ void setup() {
   videoDecoder.setVideoInfoSource(demuxer);
   if (!videoDecoder.begin()) {
     Serial.println("MultiVideoDecoderFull begin() failed");
-    return;
+    stop();
   }
 
   // No setOutputAudio() call - any audio track is still parsed by the
@@ -134,7 +134,7 @@ void setup() {
   demuxer.setOutputVideo(meter);
   if (!demuxer.begin()) {
     Serial.println("MultiVideoDemuxerFull begin() failed");
-    return;
+    stop();
   }
 
   Serial.println("Decoding at full speed (no pacing, no audio) ...");

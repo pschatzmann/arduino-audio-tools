@@ -29,7 +29,9 @@ namespace audio_tools {
  * auto-detected by default - see MultiVideoDecoderFull's own comment)
  * can still be registered and selected via a VideoInfoSource answer.
  *
- * Detection runs once, on the very first write() call, preferring the
+ * Detection runs once, on the very first write() OR isKeyFrame() call
+ * (whichever comes first - see isKeyFrame()'s own comment for why it
+ * also triggers detection, not just write()), preferring the
  * container's own answer over guessing from raw bytes: if
  * setVideoInfoSource() was given a source (typically the demuxer feeding
  * this object - DemuxerAVI/DemuxerMP4/DemuxerMPG all implement
@@ -140,34 +142,7 @@ class MultiVideoDecoder : public VideoDecoder, public VideoInfoSource {
 
   size_t write(const uint8_t *data, size_t len) override {
     if (len == 0) return 0;
-    if (is_first) {
-      is_first = false;
-      if (p_video_info_source != nullptr) {
-        VideoFormat source_format = p_video_info_source->videoInfo().format;
-        for (int i = 0; i < decoders.size(); i++) {
-          if (decoders[i].format == source_format) {
-            LOGI("MultiVideoDecoder: format %d from VideoInfoSource",
-                 (int)source_format);
-            select(decoders[i]);
-            break;
-          }
-        }
-      }
-      if (p_selected == nullptr) {
-        for (int i = 0; i < decoders.size(); i++) {
-          if (decoders[i].decoder->isValid(data, len)) {
-            select(decoders[i]);
-            break;
-          }
-        }
-      }
-      if (p_selected == nullptr) {
-        LOGE(
-            "MultiVideoDecoder: could not determine video format from "
-            "first %u bytes",
-            (unsigned)len);
-      }
-    }
+    ensureSelected(data, len);
     return p_selected != nullptr ? p_selected->write(data, len) : len;
   }
 
@@ -179,7 +154,17 @@ class MultiVideoDecoder : public VideoDecoder, public VideoInfoSource {
     if (p_selected != nullptr) p_selected->setSkipRender(skip);
   }
 
+  /// Also triggers detection (see ensureSelected()) if it hasn't run yet -
+  /// a caller upstream of write() (e.g. PacedVideoOutput::write(), which
+  /// checks isKeyFrame() before deciding whether to even queue/forward a
+  /// frame - see its own setIgnorePFrames()) can otherwise call this
+  /// first, on the very same bytes write() would have detected from,
+  /// and get a permanent false: no decoder ever selected (since write()
+  /// never runs on a frame classified "drop"), so isKeyFrame() never
+  /// returns true either - a deadlock. Detecting here too, off the exact
+  /// same data/len write() would have used, closes that gap.
   bool isKeyFrame(const uint8_t *data, size_t len) override {
+    ensureSelected(data, len);
     return p_selected != nullptr ? p_selected->isKeyFrame(data, len) : false;
   }
 
@@ -188,7 +173,8 @@ class MultiVideoDecoder : public VideoDecoder, public VideoInfoSource {
   }
 
   /// The codec detection picked for the current stream -
-  /// VideoFormat::UNKNOWN before the first write(), or if none matched.
+  /// VideoFormat::UNKNOWN before the first write()/isKeyFrame(), or if
+  /// none matched.
   VideoFormat selectedFormat() const { return p_selected_format; }
 
  protected:
@@ -208,6 +194,42 @@ class MultiVideoDecoder : public VideoDecoder, public VideoInfoSource {
     p_selected_format = info.format;
     p_selected->begin();
     LOGI("MultiVideoDecoder: selected decoder for format %d", (int)info.format);
+  }
+
+  /// Runs detection (VideoInfoSource match, else each decoder's own
+  /// isValid() as a content-sniffing fallback - see the class comment)
+  /// exactly once, off whichever data/len it's first called with -
+  /// shared by write() and isKeyFrame() so either one can trigger it (see
+  /// isKeyFrame()'s own comment for why that matters). A no-op on every
+  /// call after the first.
+  void ensureSelected(const uint8_t *data, size_t len) {
+    if (!is_first) return;
+    is_first = false;
+    if (p_video_info_source != nullptr) {
+      VideoFormat source_format = p_video_info_source->videoInfo().format;
+      for (int i = 0; i < decoders.size(); i++) {
+        if (decoders[i].format == source_format) {
+          LOGI("MultiVideoDecoder: format %d from VideoInfoSource",
+               (int)source_format);
+          select(decoders[i]);
+          break;
+        }
+      }
+    }
+    if (p_selected == nullptr) {
+      for (int i = 0; i < decoders.size(); i++) {
+        if (decoders[i].decoder->isValid(data, len)) {
+          select(decoders[i]);
+          break;
+        }
+      }
+    }
+    if (p_selected == nullptr) {
+      LOGE(
+          "MultiVideoDecoder: could not determine video format from "
+          "first %u bytes",
+          (unsigned)len);
+    }
   }
 };
 

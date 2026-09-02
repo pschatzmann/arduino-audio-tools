@@ -167,12 +167,17 @@ class PacedVideoOutput : public VideoOutput {
   /// begin()/the first frame - not supported afterwards.
   void setQueueBytes(size_t bytes) { queue_bytes = bytes > 0 ? bytes : 1; }
 
-  /// Opts the frame queue into PSRAM-backed allocation instead of
-  /// internal heap (see RingBufferSPSC::setUsePSRAM()) - falls back
-  /// silently on boards without PSRAM. Worth enabling once
-  /// setQueueBytes() is sized in the hundreds of KB+, since internal heap
-  /// is a scarcer shared resource on most ESP32 boards. Call before
-  /// begin()/the first frame - no effect on an already-allocated queue.
+  /// Whether the frame queue is PSRAM-backed instead of internal heap
+  /// (see RingBufferSPSC::setUsePSRAM()) - falls back silently on boards
+  /// without PSRAM. On by default: internal heap is a scarcer shared
+  /// resource on most ESP32 boards, and video decoding needs PSRAM for
+  /// more than just this queue anyway (decoded picture buffers, scaling
+  /// scratch buffers, ...) - see the wiki's "PSRAM: essential, not
+  /// optional" section. Call setQueueUsePSRAM(false) to opt back out
+  /// (e.g. a queue small enough that internal heap is preferable, or a
+  /// board with no PSRAM where forcing the fallback path is undesired).
+  /// Call before begin()/the first frame - no effect on an
+  /// already-allocated queue.
   void setQueueUsePSRAM(bool flag) { queue_use_psram = flag; }
 
   /// Starts the background render task - optional: write() calls this
@@ -576,7 +581,7 @@ class PacedVideoOutput : public VideoOutput {
   RingBufferSPSC<uint8_t> queue;
   size_t queue_bytes = 32 * 1024;      // desired capacity - see setQueueBytes()
   size_t queue_bytes_allocated = 0;    // what 'queue' was last resize()d to
-  bool queue_use_psram = false;        // see setQueueUsePSRAM()
+  bool queue_use_psram = true;         // see setQueueUsePSRAM()
 
   // Consumer-side-only framing state (see taskLoop()): a header already
   // pulled out of 'queue' whose payload isn't fully written yet. Never
