@@ -3,14 +3,9 @@
 #include <string.h>
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
 #include "AudioTools/CoreAudio/AudioTypes.h"
+#include "AudioTools/Concurrency.h"
 #include "AudioTools/Concurrency/LockFree/RingBufferSPSC.h"
-#include "AudioTools/Video/Video.h"
-
-#ifdef __linux__
-#include "AudioTools/Concurrency/Desktop/Task.h"
-#else
-#include "AudioTools/Concurrency/RTOS/Task.h"
-#endif
+#include "AudioTools/Video/VideoOutput.h"
 
 namespace audio_tools {
 

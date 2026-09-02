@@ -1,13 +1,8 @@
 #pragma once
 
 #include "AudioTools/AudioCodecs/ContainerCommon.h"
+#include "AudioTools/Concurrency.h"
 #include "AudioTools/Video/CodecVideo.h"
-
-#ifdef __linux__
-#include "AudioTools/Concurrency/Desktop.h"
-#else
-#include "AudioTools/Concurrency/RTOS.h"
-#endif
 
 namespace audio_tools {
 
