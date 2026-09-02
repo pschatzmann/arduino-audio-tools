@@ -2,6 +2,7 @@
 #include <atomic>
 #include <string.h>
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
+#include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 #include "AudioTools/CoreAudio/AudioTypes.h"
 #include "AudioTools/Concurrency.h"
 #include "AudioTools/Concurrency/LockFree/RingBufferSPSC.h"
@@ -458,22 +459,23 @@ class PacedVideoOutput : public VideoOutput {
   /// line in a sketch, e.g. `videoOutput.logTo(Serial);`.
   void logTo(Print& out) {
     char buf[160];
-    snprintf(buf, sizeof(buf), "input fps: %.2f / output fps: %.2f",
-             inputFPS(), outputFPS());
-    out.println(buf);
-    snprintf(buf, sizeof(buf), "avg render ms - I: %.2f / P: %.2f / overall: %.2f",
-             avgIFrameMs(), avgPFrameMs(), avgFrameMs());
-    out.println(buf);
+    StrView str(buf, sizeof(buf) - 1);
+
+    out.println(str.printf("input fps: %.2f / output fps: %.2f", inputFPS(),
+                            outputFPS()));
+
+    out.println(str.printf("avg render ms - I: %.2f / P: %.2f / overall: %.2f",
+                            avgIFrameMs(), avgPFrameMs(), avgFrameMs()));
+
     size_t queueCapacity = queueCapacityBytes();
-    snprintf(buf, sizeof(buf),
-             "frames - I: %d / P: %d / dropped P: %d / dropped I: %d / "
-             "queued I: %d / queue: %d/%d bytes (%.2f%% full)",
-             (int)frameCountI(), (int)frameCountP(), (int)droppedFrameCount(),
-             (int)droppedIFrameCount(), queuedIFrameCount(),
-             (int)queuedBytes(), (int)queueCapacity,
-             queueCapacity > 0 ? 100.0f * queuedBytes() / queueCapacity
-                                : 0.0f);
-    out.println(buf);
+    out.println(str.printf(
+        "frames - I: %d / P: %d / dropped P: %d / dropped I: %d / "
+        "queued I: %d / queue: %d/%d bytes (%.2f%% full)",
+        (int)frameCountI(), (int)frameCountP(), (int)droppedFrameCount(),
+        (int)droppedIFrameCount(), queuedIFrameCount(), (int)queuedBytes(),
+        (int)queueCapacity,
+        queueCapacity > 0 ? 100.0f * queuedBytes() / queueCapacity : 0.0f));
+
     // Splits avgFrameMs() (the whole target write()+flush() call) into its
     // decode share vs everything after it (convert/render/SPI, ...) -
     // tells us which half of the render budget is actually worth
@@ -485,9 +487,8 @@ class PacedVideoOutput : public VideoOutput {
       uint32_t renderedFrames = i_frame_count + p_frame_count;
       float avgDecodeMs =
           renderedFrames > 0 ? (float)decodeMs / renderedFrames : 0.0f;
-      snprintf(buf, sizeof(buf), "avg decode ms: %.2f / avg convert+SPI ms: %.2f",
-               avgDecodeMs, avgFrameMs() - avgDecodeMs);
-      out.println(buf);
+      out.println(str.printf("avg decode ms: %.2f / avg convert+SPI ms: %.2f",
+                              avgDecodeMs, avgFrameMs() - avgDecodeMs));
     }
 #ifdef ESP32
     size_t heapFree = ESP.getFreeHeap();
@@ -498,22 +499,22 @@ class PacedVideoOutput : public VideoOutput {
     size_t psramTotal = ESP.getPsramSize();
     size_t psramUsed = psramTotal - psramFree;
 
-    snprintf(buf, sizeof(buf), "Heap:  total=%u, used=%u, free=%u bytes",
-             (unsigned)heapTotal, (unsigned)heapUsed, (unsigned)heapFree);
-    out.println(buf);
-    snprintf(buf, sizeof(buf), "PSRAM: total=%u, used=%u, free=%u bytes",
-             (unsigned)psramTotal, (unsigned)psramUsed, (unsigned)psramFree);
-    out.println(buf);
+    out.println(str.printf("Heap:  total=%u, used=%u, free=%u bytes",
+                            (unsigned)heapTotal, (unsigned)heapUsed,
+                            (unsigned)heapFree));
+    out.println(str.printf("PSRAM: total=%u, used=%u, free=%u bytes",
+                            (unsigned)psramTotal, (unsigned)psramUsed,
+                            (unsigned)psramFree));
 
     // Largest currently allocatable blocks - a low value here despite
     // plenty of total free bytes above means the heap is fragmented
     // (e.g. by the queue's own allocation), not actually out of memory.
-    snprintf(buf, sizeof(buf), "Largest heap block:  %u bytes",
-             (unsigned)heap_caps_get_largest_free_block(MALLOC_CAP_INTERNAL));
-    out.println(buf);
-    snprintf(buf, sizeof(buf), "Largest PSRAM block: %u bytes",
-             (unsigned)heap_caps_get_largest_free_block(MALLOC_CAP_SPIRAM));
-    out.println(buf);
+    out.println(str.printf(
+        "Largest heap block:  %u bytes",
+        (unsigned)heap_caps_get_largest_free_block(MALLOC_CAP_INTERNAL)));
+    out.println(str.printf(
+        "Largest PSRAM block: %u bytes",
+        (unsigned)heap_caps_get_largest_free_block(MALLOC_CAP_SPIRAM)));
 #endif
   }
 

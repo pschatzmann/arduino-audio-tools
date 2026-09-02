@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdio.h>
+#include <stdarg.h>
 #include <string.h>
 #include <stdlib.h>
 #include "AudioTools/CoreAudio/AudioLogger.h"
@@ -156,6 +157,31 @@ class StrView {
       chars[len + n] = 0;
       len = strlen(chars);
     }
+  }
+
+  /// replaces the content with the result of a printf-style formatted string
+  /// and returns the resulting c-string - e.g. for direct use in
+  /// Print::println(). If the resulting text does not fit into the
+  /// available capacity it is truncated (like snprintf).
+  virtual const char* printf(const char* fmt, ...) {
+    if (isConst() || fmt == nullptr) return c_str();
+    va_list args;
+    va_start(args, fmt);
+    va_list args_copy;
+    va_copy(args_copy, args);
+    int needed = vsnprintf(nullptr, 0, fmt, args_copy);
+    va_end(args_copy);
+    if (needed < 0) {
+      va_end(args);
+      return c_str();
+    }
+    grow(needed + 1);
+    if (chars != nullptr) {
+      vsnprintf(chars, maxlen + 1, fmt, args);
+      len = strlen(chars);
+    }
+    va_end(args);
+    return c_str();
   }
 
   /// adds a character
