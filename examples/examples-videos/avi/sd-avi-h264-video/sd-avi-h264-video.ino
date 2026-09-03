@@ -43,13 +43,12 @@
 #include "AudioTools/AudioCodecs/CodecWAV.h"
 #include "AudioTools/AudioCodecs/ContainerAVI.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
-// #include "AudioTools/Video/CodecH264ESP32S3.h"
-#include <SD_MMC.h>
-
 #include "AudioTools/Video/CodecH264.h"
+// #include "AudioTools/Video/CodecH264ESP32S3.h" // alternative codec
 #include "AudioTools/Video/OutputTinyGPU.h"
 #include "AudioTools/Video/VideoPlayer.h"
-#include "TinyGPU/Boards.h"
+#include "TinyGPU/Boards.h" // for LCDBoardESP32S3_2_8Display
+#include <SD_MMC.h>
 
 // ---- File on the SD card to play ----
 const char* file_path = "/Videos/output176x144.avi";
@@ -109,10 +108,6 @@ void setup() {
   player.addAudioDecoder(mp3Decoder, "audio/mpeg");
   player.addAudioDecoder(aacDecoder, "audio/aac");
   player.addAudioDecoder(wavDecoder, "audio/vnd.wave");
-
-  // This file has a real audio track - VideoPlayer schedules video against
-  // it by default (see VideoPlayer's class comment's "Audio clock"
-  // section).
 
   // Compensates for AudioBoardStream's own output buffering
   // (cfg.buffer_size*cfg.buffer_count) - see
