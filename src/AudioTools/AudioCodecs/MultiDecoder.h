@@ -196,9 +196,18 @@ class MultiDecoder : public AudioDecoder {
   bool selectDecoder(const char* mime) {
     bool result = false;
     if (mime == nullptr) return false;
-    // do nothing if no change
+    // Same mime as before (e.g. back-to-back tracks of the same format):
+    // still restart the decoder so state (bit reservoir, frame buffers,
+    // etc.) from the previous track does not leak into the next one -
+    // just keep the already resolved DecoderInfo instead of re-searching
+    // the decoders list.
     if (StrView(mime).equalsIgnoreCase(actual_decoder.mime)) {
       is_first = false;
+      if (actual_decoder.decoder != nullptr) {
+        if (actual_decoder.is_open) actual_decoder.decoder->end();
+        actual_decoder.decoder->begin();
+        actual_decoder.is_open = true;
+      }
       return true;
     }
     // close actual decoder
@@ -236,6 +245,10 @@ class MultiDecoder : public AudioDecoder {
         actual_decoder.decoder->begin();
         LOGI("Decoder %s started", actual_decoder.mime);
       }
+      // mark as open so that a later end()/format switch actually calls
+      // decoder->end() instead of silently skipping it (is_open defaults
+      // to false and was previously only ever set for the 'nop' fallback)
+      actual_decoder.is_open = true;
       result = true;
       selected_mime = mime;
     }

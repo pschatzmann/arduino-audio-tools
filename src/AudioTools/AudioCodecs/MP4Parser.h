@@ -159,9 +159,28 @@ class MP4Parser {
    */
   size_t write(const uint8_t* data, size_t len) {
     if (is_error) return len;  // If an error occurred, skip writing
-    size_t result = buffer.writeArray(data, len);
-    parse();
-    return result;
+    // The accumulation buffer (default 2KB, see begin()) is usually much
+    // smaller than a single caller-side write (e.g. a 16-64KB StreamCopy
+    // chunk): a single writeArray() silently truncates at buffer.size(),
+    // dropping the remainder with no error, which desyncs the parser from
+    // the real byte stream (misread box headers, huge bogus sizes, etc.).
+    // Feed it in buffer-sized slices, parsing (and thereby freeing space)
+    // between each one, until every byte has been accepted.
+    size_t total_written = 0;
+    while (total_written < len) {
+      size_t avail = buffer.availableForWrite();
+      if (avail == 0) {
+        parse();
+        avail = buffer.availableForWrite();
+        if (avail == 0) break;  // parser made no progress: avoid a hang
+      }
+      size_t chunk = std::min(avail, len - total_written);
+      size_t written = buffer.writeArray(data + total_written, chunk);
+      if (written == 0) break;  // safety net, should not happen
+      total_written += written;
+      parse();
+    }
+    return total_written;
   }
 
   /**
