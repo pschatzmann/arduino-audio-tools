@@ -309,6 +309,49 @@ class AudioPlayer : public AudioInfoSupport, public VolumeSupport {
     setActive(false);
   }
 
+  /// Resets the decoder's internal state (bit reservoir, frame buffers,
+  /// etc.) without touching the current AudioSource/stream or its read
+  /// position. Optionally also discards audio bytes that piled up in the
+  /// input stream while paused (drainSource=true).
+  ///
+  /// Use this between stop() and play() for a *streaming* source (internet
+  /// radio, HTTP, ICY) where resuming should mean "continue from now", not
+  /// "replay whatever arrived while paused". Call it either right after
+  /// stop() (drains what came in during the pause) or right before play()
+  /// (drains what accumulated since) - both work, since nothing is being
+  /// actively read while inactive anyway.
+  ///
+  /// Not needed for a local file: the default stop()/play() behavior
+  /// (freeze position, resume exactly where you left off) is what you
+  /// normally want there, and drainSource=true would just throw away
+  /// audio you'd otherwise still hear.
+  ///
+  /// @param drainSource if true, also discard bytes already buffered by
+  /// the input stream (e.g. a live source's socket backlog)
+  void clearBuffers(bool drainSource = false) {
+    TRACED();
+    if (drainSource && p_input_stream != nullptr) {
+      // Snapshot once: a live source keeps receiving new bytes
+      // continuously, so re-checking available() after every read could
+      // never terminate - only discard what had already piled up up to
+      // this point. Anything that arrives during the drain is fresh
+      // ("now") data anyway, so leaving it for normal playback after
+      // resuming is correct, not a bug.
+      int remaining = p_input_stream->available();
+      uint8_t tmp[256];
+      while (remaining > 0) {
+        int to_read = min(remaining, (int)sizeof(tmp));
+        int got = p_input_stream->readBytes(tmp, to_read);
+        if (got <= 0) break;  // stream stalled - stop rather than spin
+        remaining -= got;
+      }
+    }
+    if (p_decoder != nullptr) {
+      p_decoder->end();
+      p_decoder->begin();
+    }
+  }
+
   /// Moves to the next/previous stream by offset (negative supported)
   bool next(int offset = 1) {
     TRACED();
