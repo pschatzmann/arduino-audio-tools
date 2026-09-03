@@ -129,6 +129,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac85bfd2446e9c80c8812b70c1cef901c" id="r_ac85bfd2446e9c80c8812b70c1cef901c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_player.html#ac85bfd2446e9c80c8812b70c1cef901c">begin</a> (int index=0, bool <a class="el" href="classaudio__tools_1_1_audio_player.html#aa1f512ab0fcc05612f8e3d6a4664ce9a">isActive</a>=true)</td></tr>
 <tr class="memdesc:ac85bfd2446e9c80c8812b70c1cef901c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts or restarts playback from the first or given stream index.  <br /></td></tr>
 <tr class="separator:ac85bfd2446e9c80c8812b70c1cef901c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a750162ae427135408ade3707628580e9" id="r_a750162ae427135408ade3707628580e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_player.html#a750162ae427135408ade3707628580e9">clearBuffers</a> (bool drainSource=false)</td></tr>
+<tr class="separator:a750162ae427135408ade3707628580e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aecb44a6d385121be2179187d45520331" id="r_aecb44a6d385121be2179187d45520331"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_player.html#aecb44a6d385121be2179187d45520331">copy</a> ()</td></tr>
 <tr class="separator:aecb44a6d385121be2179187d45520331"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a211f7cdba90ee579bd917f4a7b1917ca" id="r_a211f7cdba90ee579bd917f4a7b1917ca"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_player.html#a211f7cdba90ee579bd917f4a7b1917ca">copy</a> (size_t bytes)</td></tr>
@@ -721,6 +723,41 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Starts or restarts playback from the first or given stream index. </p>
+
+</div>
+</div>
+<a id="a750162ae427135408ade3707628580e9" name="a750162ae427135408ade3707628580e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a750162ae427135408ade3707628580e9">&#9670;&#160;</a></span>clearBuffers()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void clearBuffers </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>drainSource</em> = <code>false</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Resets the decoder's internal state (bit reservoir, frame buffers, etc.) without touching the current AudioSource/stream or its read position. Optionally also discards audio bytes that piled up in the input stream while paused (drainSource=true).</p>
+<p>Use this between <a class="el" href="classaudio__tools_1_1_audio_player.html#a8c528baf37154d347366083f0f816846" title="Halts playback; equivalent to setActive(false)">stop()</a> and <a class="el" href="classaudio__tools_1_1_audio_player.html#a6d58098c6cf63c241ed03bc797256bb1">play()</a> for a <em>streaming</em> source (internet radio, HTTP, ICY) where resuming should mean "continue from now", not "replay whatever arrived while paused". Call it either right after <a class="el" href="classaudio__tools_1_1_audio_player.html#a8c528baf37154d347366083f0f816846" title="Halts playback; equivalent to setActive(false)">stop()</a> (drains what came in during the pause) or right before <a class="el" href="classaudio__tools_1_1_audio_player.html#a6d58098c6cf63c241ed03bc797256bb1">play()</a> (drains what accumulated since) - both work, since nothing is being actively read while inactive anyway.</p>
+<p>Not needed for a local file: the default <a class="el" href="classaudio__tools_1_1_audio_player.html#a8c528baf37154d347366083f0f816846" title="Halts playback; equivalent to setActive(false)">stop()</a>/play() behavior (freeze position, resume exactly where you left off) is what you normally want there, and drainSource=true would just throw away audio you'd otherwise still hear.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">drainSource</td><td>if true, also discard bytes already buffered by the input stream (e.g. a live source's socket backlog) </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
