@@ -35,7 +35,7 @@ var searchData=
   ['dsfmetadata_32',['DSFMetadata',['../structaudio__tools_1_1_d_s_f_metadata.html',1,'audio_tools']]],
   ['dsp_33',['dsp',['../classdsp.html',1,'']]],
   ['dsp_5fmemory_5fmanager_34',['dsp_memory_manager',['../classdsp__memory__manager.html',1,'']]],
-  ['dualoutputprint_35',['DualOutputPrint',['../classaudio__tools_1_1_h264_encoder_e_s_p32_s3_1_1_dual_output_print.html',1,'audio_tools::H264EncoderESP32S3']]],
+  ['dualoutputprint_35',['dualoutputprint',['../classaudio__tools_1_1_h264_encoder_e_s_p32_p4_1_1_dual_output_print.html',1,'H264EncoderESP32P4&lt; Alloc &gt;::DualOutputPrint'],['../classaudio__tools_1_1_h264_encoder_e_s_p32_s3_1_1_dual_output_print.html',1,'H264EncoderESP32S3&lt; Alloc &gt;::DualOutputPrint']]],
   ['dynamicmemorystream_36',['DynamicMemoryStream',['../classaudio__tools_1_1_dynamic_memory_stream.html',1,'audio_tools']]],
   ['dynamicmultibuffer_37',['DynamicMultiBuffer',['../classaudio__tools_1_1_dynamic_multi_buffer.html',1,'audio_tools']]],
   ['dynarray_38',['DynArray',['../classffft_1_1_dyn_array.html',1,'ffft']]],
