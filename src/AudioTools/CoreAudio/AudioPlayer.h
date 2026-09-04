@@ -683,6 +683,18 @@ class AudioPlayer : public AudioInfoSupport, public VolumeSupport {
     // continue
     p_decoder->begin();
     eof_called = false;  // prepare for next stream
+    // Discard whatever of the just-faded-out stream is still sitting in the
+    // output's own buffer (e.g. an I2S DMA buffer) but not yet physically
+    // played. Without this, opening the next stream below can block for a
+    // while (file/network I/O), during which that leftover old-stream audio
+    // keeps playing out on its own - heard as a chunk of the previous track
+    // after the switch instead of a clean cut to the new one. No-op for
+    // outputs that don't support it.
+    if (p_final_print != nullptr) {
+      p_final_print->flush();
+    } else if (p_final_stream != nullptr) {
+      p_final_stream->flush();
+    }
   }
 
   /// Callback implementation which writes to metadata

@@ -138,7 +138,13 @@ class I2SStream : public AudioStream {
   /// Provides the available audio data
   virtual int availableForWrite() override { return p_driver->availableForWrite(); }
 
-  void flush() override {}
+  /// Discards any audio already queued in the driver's output buffer (e.g.
+  /// I2S DMA) but not yet physically played - see
+  /// I2SDriverBase::flush(). No-op if I2S is not active or the concrete
+  /// driver doesn't support it.
+  void flush() override {
+    if (is_active) p_driver->flush();
+  }
 
   /// Provides access to the driver
   I2SDriverBase* driver() { return p_driver; }

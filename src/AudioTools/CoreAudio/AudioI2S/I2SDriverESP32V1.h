@@ -131,6 +131,28 @@ class I2SDriverESP32V1 : public I2SDriverBase {
     is_started = false;
   }
 
+  /**
+   * Discards any audio samples already queued in the TX DMA buffer but not
+   * yet physically output. The new i2s_std/i2s_channel_* API has no direct
+   * equivalent of the legacy driver's i2s_zero_dma_buffer() - instead this
+   * disables and immediately re-enables the TX channel, which halts
+   * transmission of whatever was already queued. Any DMA slots left behind
+   * get auto-filled with silence by the driver itself once transmission
+   * resumes (see I2SConfigESP32V1::auto_clear, on by default), so nothing
+   * stale gets replayed. Much cheaper than a full end()/begin() cycle (no
+   * channel deletion/recreation, no pin/clock reconfiguration - the same
+   * disable/enable pair already used by changeSampleRate() below). No-op
+   * if the TX channel has not been started.
+   */
+  void flush() override {
+    if (tx_chan != nullptr) {
+      i2s_channel_disable(tx_chan);
+      i2s_channel_enable(tx_chan);
+      bytes_written_.store(0, std::memory_order_relaxed);
+      bytes_sent_.store(0, std::memory_order_relaxed);
+    }
+  }
+
   /// provides the actual configuration
   I2SConfigESP32V1 config() { return cfg; }
 
