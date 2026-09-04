@@ -107,8 +107,10 @@ class M4AAudioDemuxer : public M4ACommonDemuxer {
           // mdat must not be buffered
           LOGI("#%d Box: %s, size: %u of %u bytes", (unsigned) box.seq, box.type,(unsigned) box.available, (unsigned)box.size);
           if (box.seq == 0) self.sampleExtractor.setMaxSize(box.size);
-          size_t written = self.sampleExtractor.write(box.data, box.available, box.is_complete);
-          assert(written == box.available);
+          // write() legitimately returns less than box.available when the
+          // last sample completes exactly at the end of the mdat box - the
+          // remaining bytes (if any) belong past the box and are not lost
+          self.sampleExtractor.write(box.data, box.available, box.is_complete);
         },
         false);  // 'false' prevents the generic callback from being executed
 

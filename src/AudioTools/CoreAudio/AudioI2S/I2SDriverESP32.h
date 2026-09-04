@@ -91,6 +91,21 @@ class I2SDriverESP32 : public I2SDriverBase {
     is_started = false;
   }
 
+  /**
+   * Discards any audio samples already queued in the DMA buffer but not
+   * yet physically output, by overwriting the DMA buffer content with
+   * zeros. Much cheaper than a full end()/begin() cycle (no driver
+   * uninstall/reinstall, no pin/clock reconfiguration) and does not stop
+   * the I2S clock, so it does not itself produce an audible pop. No-op if
+   * the driver has not been started.
+   */
+  void flush() override {
+    if (is_started) {
+      LOGD("i2s_zero_dma_buffer");
+      i2s_zero_dma_buffer(i2s_num);
+    }
+  }
+
   /// provides the actual configuration
   I2SConfigESP32 config() { return cfg; }
 

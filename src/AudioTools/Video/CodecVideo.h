@@ -73,7 +73,8 @@ class VideoDecoder : public VideoOutput {
 
 /**
  * @brief Common interface for video encoders (e.g. H264Encoder,
- * H264EncoderESP32S3 - CodecH264.h/CodecH264ESP32S3.h) - standardizes
+ * H264EncoderESP32S3 - CodecH264.h/CodecH264ESP32S3.h; H264EncoderESP32P4
+ * - CodecH264ESP32P4.h) - standardizes
  * lifecycle (begin()/end()), the Print target the encoded bitstream is
  * written to, the raw-picture input format (setVideoFormat()), and a
  * single write() that encodes one picture in that format and writes the

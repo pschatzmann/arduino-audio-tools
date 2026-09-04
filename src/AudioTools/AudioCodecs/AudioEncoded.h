@@ -435,8 +435,8 @@ class EncodedAudioStream : public ReformatBaseStream {
   EncodedAudioStream& operator=(EncodedAudioStream const& src) {
     enc_out = src.enc_out;
     byte_factor = src.byte_factor;
-    p_stream = src.p_stream;
-    p_print = src.p_print;
+    p_io = src.p_io;
+    p_out = src.p_out;
     info = src.info;
     return *this;
   };

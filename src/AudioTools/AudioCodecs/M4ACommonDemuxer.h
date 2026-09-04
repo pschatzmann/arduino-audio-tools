@@ -190,6 +190,9 @@ class M4ACommonDemuxer {
             LOGE("No sample size defined, cannot write data");
             return j;
           }
+          // the next sample can be larger than the one we just finished:
+          // grow the buffer for it now, not only once at the top of write()
+          resize(currentSize);
         }
       }
       return len;
@@ -631,9 +634,12 @@ class M4ACommonDemuxer {
     BaseBuffer<stsz_sample_size_t>& sampleSizes =
         sampleExtractor.getSampleSizesBuffer();
 
-    buffer.resize(box.available);
+    // must fit the leftover bytes from the previous incremental chunk
+    // (not a multiple of 4) plus the new chunk, otherwise writeArray()
+    // silently truncates and corrupts the sample size table
+    buffer.resize(buffer.available() + box.available);
     size_t written = buffer.writeArray(box.data, box.available);
-    assert(written = box.available);
+    assert(written == (size_t)box.available);
 
     // get sample count and size from the box
     if (sample_count == 0 && buffer.available() > 12) {

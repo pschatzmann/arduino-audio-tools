@@ -74,13 +74,13 @@ class EqualizerNBands : public ModifyingStream {
   /// Defines/Changes the input & output stream
   /// @param io Stream to use for both reading and writing audio data
   void setStream(Stream& io) override {
-    p_print = &io;
-    p_stream = &io;
+    p_out = &io;
+    p_io = &io;
   };
 
   /// Defines/Changes the output target
   /// @param out Print stream where processed audio will be written
-  void setOutput(Print& out) override { p_print = &out; }
+  void setOutput(Print& out) override { p_out = &out; }
 
   bool begin(AudioInfo info) {
     setAudioInfo(info);
@@ -106,8 +106,8 @@ class EqualizerNBands : public ModifyingStream {
     initializeKernel(kernelB);
 
     // assign output or source
-    if (p_stream) filtered.setStream(*p_stream);
-    if (p_print) filtered.setOutput(*p_print);
+    if (p_io) filtered.setStream(*p_io);
+    if (p_out) filtered.setOutput(*p_out);
     filtered.begin(audioInfo());
 
     // set filters for all channels
@@ -206,6 +206,8 @@ class EqualizerNBands : public ModifyingStream {
     return filtered.readBytes(data, len);
   }
 
+  void flush() override { filtered.flush(); }
+
  protected:
   // Simple re-entrancy guard: prevents concurrent kernel updates from
   // corrupting scratch buffers / updateKernel.
@@ -296,8 +298,8 @@ class EqualizerNBands : public ModifyingStream {
   float windowCoeffs[NUM_TAPS];  // Pre-calculated Blackman window
   int currentSampleRate = 0;
 
-  Print* p_print = nullptr;        ///< Output stream for write operations
-  Stream* p_stream = nullptr;      ///< Input stream for read operations
+  Print* p_out = nullptr;        ///< Output stream for write operations
+  Stream* p_io = nullptr;      ///< Input stream for read operations
   Vector<EQFIRFilter> fir_vector;  ///< Vector of FIR filters for each channel
   FilteredStream<SampleT, SampleT> filtered;
 

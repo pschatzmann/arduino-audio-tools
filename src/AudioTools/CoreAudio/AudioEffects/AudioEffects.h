@@ -276,12 +276,12 @@ class AudioEffectStreamT : public ModifyingStream {
 
     void setStream(Stream &io) override {
         p_io = &io;
-        p_print = &io;
+        p_out = &io;
     }
 
 
     void setOutput(Print &print) override {
-        p_print = &print;
+        p_out = &print;
     }
 
     /**
@@ -328,22 +328,22 @@ class AudioEffectStreamT : public ModifyingStream {
         // process all samples
         for (int f=0;f<frames;f++){
             const T* p_buffer = ((const T*)data) + (f*info.channels);
-            T* p_out = out + (f*info.channels);
+            T* p_frame_out = out + (f*info.channels);
             for (int ch=0;ch<info.channels;ch++){
                 T sample = p_buffer[ch];
                 AudioEffectCommon &chain = channel_effects[ch];
                 for (int j=0; j<chain.size(); j++){
                     sample = chain[j]->process(sample);
                 }
-                p_out[ch] = sample;
+                p_frame_out[ch] = sample;
             }
         }
 
         size_t written_samples = 0;
         if (p_io!=nullptr){
             written_samples = writeDataT<T, Stream>(p_io, out, total_samples);
-        } else if (p_print!=nullptr){
-            written_samples = writeDataT<T, Print>(p_print, out, total_samples);
+        } else if (p_out!=nullptr){
+            written_samples = writeDataT<T, Print>(p_out, out, total_samples);
         }
         return written_samples * sizeof(T);
     }
@@ -354,9 +354,14 @@ class AudioEffectStreamT : public ModifyingStream {
     }
 
     int availableForWrite() override {
-        if (p_print!=nullptr) return p_print->availableForWrite();
+        if (p_out!=nullptr) return p_out->availableForWrite();
         if (p_io!=nullptr) return p_io->availableForWrite();
         return 0;
+    }
+
+    void flush() override {
+        if (p_out!=nullptr) p_out->flush();
+        else if (p_io!=nullptr) p_io->flush();
     }
 
     /// Adds an effect object (by reference) to the template chain: cloned into every channel
@@ -438,7 +443,7 @@ class AudioEffectStreamT : public ModifyingStream {
     Vector<T> buffer_out;                        // reused scratch buffer for write(): avoids per-sample writes
     bool active = false;
     Stream *p_io=nullptr;
-    Print *p_print=nullptr;
+    Print *p_out=nullptr;
 
     /// clones a single effect into a single channel's chain, tracking ownership
     void cloneInto(int ch, AudioEffect *effect){
@@ -516,8 +521,8 @@ class AudioEffectStream : public ModifyingStream {
                 LOGE("Unspported bits_per_sample: %d", info.bits_per_sample);
                 return false;
         }
-        if (p_print != nullptr) {
-            std::visit( [this](auto&& e) {return e.setOutput(*p_print);}, variant );
+        if (p_out != nullptr) {
+            std::visit( [this](auto&& e) {return e.setOutput(*p_out);}, variant );
         }
         if (p_io != nullptr) {
             std::visit( [this](auto&& e) {return e.setStream(*p_io);}, variant );
@@ -538,11 +543,11 @@ class AudioEffectStream : public ModifyingStream {
     }
 
     void setOutput(Stream &io){
-        p_print = &io;
+        p_out = &io;
     }
 
     void setOutput(Print &print){
-        p_print = &print;
+        p_out = &print;
     }
 
     /**
@@ -567,6 +572,10 @@ class AudioEffectStream : public ModifyingStream {
 
     int availableForWrite() override {
         return std::visit( [](auto&& e) {return e.availableForWrite();}, variant );
+    }
+
+    void flush() override {
+        std::visit( [](auto&& e) {e.flush();}, variant );
     }
 
     /// Adds an effect object (by reference)
@@ -622,7 +631,7 @@ class AudioEffectStream : public ModifyingStream {
   protected:
     std::variant<AudioEffectStreamT<int16_t>, AudioEffectStreamT<int24_t>,AudioEffectStreamT<int32_t>> variant;
     Stream *p_io=nullptr;
-    Print *p_print=nullptr;
+    Print *p_out=nullptr;
 
 };
 

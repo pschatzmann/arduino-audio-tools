@@ -170,7 +170,7 @@ class ResampleStream : public ReformatBaseStream {
   /// Returns the actual step size
   float getStepSize() { return step_size; }
 
-  // int availableForWrite() override { return p_print->availableForWrite(); }
+  // int availableForWrite() override { return p_out->availableForWrite(); }
 
   size_t write(const uint8_t *data, size_t len) override {
     LOGD("ResampleStream::write: %d", (int)len);
@@ -209,16 +209,16 @@ class ResampleStream : public ReformatBaseStream {
       switch (info.bits_per_sample) {
         case 16:
 #if PREFER_FIXEDPOINT
-          writeFixed(p_print, proc_data, whole, written);
+          writeFixed(p_out, proc_data, whole, written);
 #else
-          write<int16_t>(p_print, proc_data, whole, written);
+          write<int16_t>(p_out, proc_data, whole, written);
 #endif
           break;
         case 24:
-          write<int24_t>(p_print, proc_data, whole, written);
+          write<int24_t>(p_out, proc_data, whole, written);
           break;
         case 32:
-          write<int32_t>(p_print, proc_data, whole, written);
+          write<int32_t>(p_out, proc_data, whole, written);
           break;
         default:
           TRACEE();

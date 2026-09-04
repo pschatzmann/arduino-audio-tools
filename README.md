@@ -10,6 +10,7 @@ Some basic __header-only C++ classes__ that can be used for __Audio Processing__
 
 - We provide different ["Audio Sources" and "Audio Sinks"](https://github.com/pschatzmann/arduino-audio-tools/wiki/Audio-Sources-and-Sinks)
 - Support for different [Encoders](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_audio_encoder.html) and [Decoders](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_audio_decoder.html) for MP3, AAC, WAV, FLAC, etc for [EncodedAudioStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_encoded_audio_stream.html)
+- Provides an easy to use [AudioPlayer](https://github.com/pschatzmann/arduino-audio-tools/wiki/The-Audio-Player-Class) and [VideoPlayer](https://github.com/pschatzmann/arduino-audio-tools/wiki/Video-Playback) 
 - Supports input and output of [audio via USB](https://github.com/pschatzmann/arduino-audio-tools/wiki/USB-Audio-Class-2.0)
 - Integrates with different [DSP libraries](https://github.com/pschatzmann/arduino-audio-tools/wiki/DSP-Libraries)
 - Helps to [communicate](https://github.com/pschatzmann/arduino-audio-tools/wiki/Communication) audio over the wire or wirelessly
@@ -71,10 +72,6 @@ I suggest you continue to read the more [detailed introduction](https://github.c
 Further examples can be found in the [Wiki](https://github.com/pschatzmann/arduino-audio-tools/wiki/Examples). 
 
 Dependent on the example you might need to install some [additional libaries](https://github.com/pschatzmann/arduino-audio-tools/wiki/Optional-Libraries)
-
-### AudioPlayer
-
-The library also provides a versatile [AudioPlayer](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_audio_player.html). Further information can be found in the [Wiki](https://github.com/pschatzmann/arduino-audio-tools/wiki/The-Audio-Player-Class)
 
 
 ### Logging

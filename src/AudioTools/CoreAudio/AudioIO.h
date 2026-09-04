@@ -269,32 +269,32 @@ class ReformatBaseStream : public ModifyingStream {
  public:
   virtual void setStream(Stream& stream) override {
     TRACED();
-    p_stream = &stream;
-    p_print = &stream;
+    p_io = &stream;
+    p_out = &stream;
   }
 
   virtual void setStream(AudioStream& stream) {
     TRACED();
-    p_stream = &stream;
-    p_print = &stream;
+    p_io = &stream;
+    p_out = &stream;
     // setNotifyOnOutput(stream);
     addNotifyAudioChange(stream);
   }
 
   virtual void setOutput(AudioOutput& print) {
     TRACED();
-    p_print = &print;
+    p_out = &print;
     addNotifyAudioChange(print);
   }
 
   virtual void setOutput(Print& print) override {
     TRACED();
-    p_print = &print;
+    p_out = &print;
   }
 
-  virtual Print* getPrint() { return p_print; }
+  virtual Print* getPrint() { return p_out; }
 
-  virtual Stream* getStream() { return p_stream; }
+  virtual Stream* getStream() { return p_io; }
 
   size_t readBytes(uint8_t* data, size_t len) override {
     LOGD("ReformatBaseStream::readBytes: %d", (int)len);
@@ -342,8 +342,8 @@ class ReformatBaseStream : public ModifyingStream {
 
  protected:
   TransformationReader<ReformatBaseStream> reader;
-  Stream* p_stream = nullptr;
-  Print* p_print = nullptr;
+  Stream* p_io = nullptr;
+  Print* p_out = nullptr;
 
   void setupReader() {
     if (getStream() != nullptr) {
@@ -393,24 +393,32 @@ class AdapterAudioStreamToAudioOutput : public AudioOutputAdapter {
 
   void setStream(AudioStream& stream) { p_stream = &stream; }
 
-  void setAudioInfo(AudioInfo info) override { p_stream->setAudioInfo(info); }
-
-  AudioInfo audioInfo() override { return p_stream->audioInfo(); }
-
-  size_t write(const uint8_t* data, size_t len) override {
-    return p_stream->write(data, len);
+  void setAudioInfo(AudioInfo info) override {
+    if (p_stream != nullptr) p_stream->setAudioInfo(info);
   }
 
-  int availableForWrite() override { return p_stream->availableForWrite(); }
+  AudioInfo audioInfo() override {
+    return p_stream != nullptr ? p_stream->audioInfo() : AudioInfo();
+  }
 
-  bool begin() override { return p_stream->begin(); }
+  size_t write(const uint8_t* data, size_t len) override {
+    return p_stream != nullptr ? p_stream->write(data, len) : 0;
+  }
 
-  void end() override { p_stream->end(); }
+  int availableForWrite() override {
+    return p_stream != nullptr ? p_stream->availableForWrite() : 0;
+  }
+
+  bool begin() override { return p_stream != nullptr && p_stream->begin(); }
+
+  void end() override {
+    if (p_stream != nullptr) p_stream->end();
+  }
 
   /// If true we need to release the related memory in the destructor
   virtual bool isDeletable() override { return true; }
 
-  operator bool() override { return *p_stream; }
+  operator bool() override { return p_stream != nullptr && *p_stream; }
 
  protected:
   AudioStream* p_stream = nullptr;
@@ -428,22 +436,28 @@ class AdapterAudioOutputToAudioStream : public AudioStream {
 
   void setOutput(AudioOutput& stream) { p_stream = &stream; }
 
-  void setAudioInfo(AudioInfo info) override { p_stream->setAudioInfo(info); }
-
-  AudioInfo audioInfo() override { return p_stream->audioInfo(); }
-
-  size_t write(const uint8_t* data, size_t len) override {
-    return p_stream->write(data, len);
+  void setAudioInfo(AudioInfo info) override {
+    if (p_stream != nullptr) p_stream->setAudioInfo(info);
   }
 
-  bool begin() override { return p_stream->begin(); }
+  AudioInfo audioInfo() override {
+    return p_stream != nullptr ? p_stream->audioInfo() : AudioInfo();
+  }
 
-  void end() override { p_stream->end(); }
+  size_t write(const uint8_t* data, size_t len) override {
+    return p_stream != nullptr ? p_stream->write(data, len) : 0;
+  }
+
+  bool begin() override { return p_stream != nullptr && p_stream->begin(); }
+
+  void end() override {
+    if (p_stream != nullptr) p_stream->end();
+  }
 
   /// If true we need to release the related memory in the destructor
   virtual bool isDeletable() { return true; }
 
-  operator bool() override { return *p_stream; }
+  operator bool() override { return p_stream != nullptr && *p_stream; }
 
  protected:
   AudioOutput* p_stream = nullptr;
@@ -631,29 +645,29 @@ class TimedStream : public ModifyingStream {
   TimedStream() = default;
 
   TimedStream(AudioStream& io, long startSeconds = 0, long endSeconds = -1) {
-    p_stream = &io;
-    p_print = &io;
+    p_io = &io;
+    p_out = &io;
     p_info = &io;
     setStartSec(startSeconds);
     setEndSec(endSeconds);
   }
 
   TimedStream(AudioOutput& o, long startSeconds = 0, long endSeconds = -1) {
-    p_print = &o;
+    p_out = &o;
     p_info = &o;
     setStartSec(startSeconds);
     setEndSec(endSeconds);
   }
 
   TimedStream(Stream& io, long startSeconds = 0, long endSeconds = -1) {
-    p_stream = &io;
-    p_print = &io;
+    p_io = &io;
+    p_out = &io;
     setStartSec(startSeconds);
     setEndSec(endSeconds);
   }
 
   TimedStream(Print& o, long startSeconds = 0, long endSeconds = -1) {
-    p_print = &o;
+    p_out = &o;
     setStartSec(startSeconds);
     setEndSec(endSeconds);
   }
@@ -715,7 +729,7 @@ class TimedStream : public ModifyingStream {
   /// work!
   size_t readBytes(uint8_t* data, size_t len) override {
     // if reading is not supported we stop
-    if (p_stream == nullptr) return 0;
+    if (p_io == nullptr) return 0;
     // Positioin to start
     if (start_bytes > current_bytes) {
       consumeBytes(start_bytes - current_bytes);
@@ -725,7 +739,7 @@ class TimedStream : public ModifyingStream {
     // read the data now
     size_t result = 0;
     do {
-      result = p_stream->readBytes(data, len);
+      result = p_io->readBytes(data, len);
       current_bytes += len;
       // ignore data before start time
     } while (result > 0 && current_bytes < start_bytes);
@@ -737,13 +751,13 @@ class TimedStream : public ModifyingStream {
     if (current_bytes >= end_bytes) return 0;
     current_bytes += len;
     if (current_bytes < start_bytes) return len;
-    return p_print->write(data, len);
+    return p_out->write(data, len);
   }
 
   /// Provides the available bytes until the end time has reached
   int available() override {
-    if (p_stream == nullptr) return 0;
-    return current_bytes < end_bytes ? p_stream->available() : 0;
+    if (p_io == nullptr) return 0;
+    return current_bytes < end_bytes ? p_io->available() : 0;
   }
 
   /// Updates the AudioInfo in the current object and in the source or target
@@ -754,7 +768,11 @@ class TimedStream : public ModifyingStream {
   }
 
   int availableForWrite() override {
-    return current_bytes < end_bytes ? p_print->availableForWrite() : 0;
+    return current_bytes < end_bytes ? p_out->availableForWrite() : 0;
+  }
+
+  void flush() override {
+    if (p_out != nullptr) p_out->flush();
   }
 
   /// Experimental: if used on mp3 you can set the compression ratio e.g. to 11
@@ -766,34 +784,34 @@ class TimedStream : public ModifyingStream {
     return info.sample_rate * info.channels * info.bits_per_sample / 8;
   }
 
-  void setOutput(Print& out) override { p_print = &out; }
+  void setOutput(Print& out) override { p_out = &out; }
 
   void setStream(Stream& stream) override {
-    p_print = &stream;
-    p_stream = &stream;
+    p_out = &stream;
+    p_io = &stream;
   }
 
   void setOutput(AudioOutput& out) {
-    p_print = &out;
+    p_out = &out;
     p_info = &out;
   }
 
   void setStream(AudioOutput& out) {
-    p_print = &out;
+    p_out = &out;
     p_info = &out;
   }
 
   void setStream(AudioStream& stream) {
-    p_print = &stream;
-    p_stream = &stream;
+    p_out = &stream;
+    p_io = &stream;
     p_info = &stream;
   }
 
   size_t size() { return end_bytes - start_bytes; }
 
  protected:
-  Stream* p_stream = nullptr;
-  Print* p_print = nullptr;
+  Stream* p_io = nullptr;
+  Print* p_out = nullptr;
   AudioInfoSupport* p_info = nullptr;
   uint32_t start_ms = 0;
   uint32_t end_ms = UINT32_MAX;
@@ -807,7 +825,7 @@ class TimedStream : public ModifyingStream {
     uint8_t buffer[1024];
     while (open > 0) {
       int toread = min(1024, open);
-      p_stream->readBytes(buffer, toread);
+      p_io->readBytes(buffer, toread);
       open -= toread;
     }
     current_bytes += len;

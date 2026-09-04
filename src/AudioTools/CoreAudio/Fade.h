@@ -302,6 +302,10 @@ public:
     return p_out == nullptr ? 0 : p_out->availableForWrite();
   }
 
+  void flush() override {
+    if (p_out != nullptr) p_out->flush();
+  }
+
   void setFadeInActive(bool flag) { fade.setFadeInActive(flag); }
 
   bool isFadeInActive() { return fade.isFadeInActive(); }

@@ -472,6 +472,9 @@ class QueueStream : public BaseStream {
     }
   }
 
+  /// Clears the data in the buffer and resets the state
+  void flush() override { clear(); }
+
   /// Returns true if active
   operator bool() { return active; }
 

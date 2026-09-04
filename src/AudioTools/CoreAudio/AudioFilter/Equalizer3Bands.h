@@ -202,13 +202,13 @@ class Equalizer3BandsT : public ModifyingStream {
   /// Defines/Changes the input & output stream
   /// @param io Stream to use for both reading and writing audio data
   void setStream(Stream& io) override {
-    p_print = &io;
-    p_stream = &io;
+    p_out = &io;
+    p_io = &io;
   };
 
   /// Defines/Changes the output target
   /// @param out Print stream where processed audio will be written
-  void setOutput(Print& out) override { p_print = &out; }
+  void setOutput(Print& out) override { p_out = &out; }
 
   /// Access to the current configuration
   /// @return Reference to the configuration object
@@ -270,12 +270,16 @@ class Equalizer3BandsT : public ModifyingStream {
   /// @return Number of bytes written
   size_t write(const uint8_t* data, size_t len) override {
     filterSamples(data, len);
-    return p_print->write(data, len);
+    return p_out->write(data, len);
   }
 
   /// Get available space for writing
   /// @return Number of bytes available for writing
-  int availableForWrite() override { return p_print->availableForWrite(); }
+  int availableForWrite() override { return p_out->availableForWrite(); }
+
+  void flush() override {
+    if (p_out != nullptr) p_out->flush();
+  }
 
   /// Read and process audio data through the equalizer
   /// @param data Buffer to store processed audio data
@@ -283,8 +287,8 @@ class Equalizer3BandsT : public ModifyingStream {
   /// @return Number of bytes actually read and processed
   size_t readBytes(uint8_t* data, size_t len) override {
     size_t result = 0;
-    if (p_stream != nullptr) {
-      result = p_stream->readBytes(data, len);
+    if (p_io != nullptr) {
+      result = p_io->readBytes(data, len);
       filterSamples(data, len);
     }
     return result;
@@ -293,7 +297,7 @@ class Equalizer3BandsT : public ModifyingStream {
   /// Get available data for reading
   /// @return Number of bytes available for reading
   int available() override {
-    return p_stream != nullptr ? p_stream->available() : 0;
+    return p_io != nullptr ? p_io->available() : 0;
   }
 
  protected:
@@ -301,8 +305,8 @@ class Equalizer3BandsT : public ModifyingStream {
   ConfigEqualizer3Bands cfg;  ///< Default configuration instance
   ConfigEqualizer3Bands* p_cfg = &cfg;  ///< Pointer to active configuration
   const T vsa = EqDenormalGuard<T>::value();  ///< Denormal-avoidance offset
-  Print* p_print = nullptr;    ///< Output stream for write operations
-  Stream* p_stream = nullptr;  ///< Input/output stream for read operations
+  Print* p_out = nullptr;    ///< Output stream for write operations
+  Stream* p_io = nullptr;  ///< Input/output stream for read operations
   int max_state_count = 0;     ///< Maximum number of allocated channel states
 
   /// Filter state for each channel
@@ -469,12 +473,12 @@ class Equalizer3BandsPerChannelT : public ModifyingStream {
 
   /// Defines/Changes the input & output
   void setStream(Stream& io) override {
-    p_print = &io;
-    p_stream = &io;
+    p_out = &io;
+    p_io = &io;
   };
 
   /// Defines/Changes the output target
-  void setOutput(Print& out) override { p_print = &out; }
+  void setOutput(Print& out) override { p_out = &out; }
 
   ConfigEqualizer3Bands& config() { return *p_cfg; }
 
@@ -606,12 +610,16 @@ class Equalizer3BandsPerChannelT : public ModifyingStream {
   /// @return Number of bytes written
   size_t write(const uint8_t* data, size_t len) override {
     filterSamples(data, len);
-    return p_print->write(data, len);
+    return p_out->write(data, len);
   }
 
   /// Get available space for writing
   /// @return Number of bytes available for writing
-  int availableForWrite() override { return p_print->availableForWrite(); }
+  int availableForWrite() override { return p_out->availableForWrite(); }
+
+  void flush() override {
+    if (p_out != nullptr) p_out->flush();
+  }
 
   /// Read and process audio data through the per-channel equalizer
   /// @param data Buffer to store processed audio data
@@ -619,8 +627,8 @@ class Equalizer3BandsPerChannelT : public ModifyingStream {
   /// @return Number of bytes actually read and processed
   size_t readBytes(uint8_t* data, size_t len) override {
     size_t result = 0;
-    if (p_stream != nullptr) {
-      result = p_stream->readBytes(data, len);
+    if (p_io != nullptr) {
+      result = p_io->readBytes(data, len);
       filterSamples(data, len);
     }
     return result;
@@ -629,7 +637,7 @@ class Equalizer3BandsPerChannelT : public ModifyingStream {
   /// Get available data for reading
   /// @return Number of bytes available for reading
   int available() override {
-    return p_stream != nullptr ? p_stream->available() : 0;
+    return p_io != nullptr ? p_io->available() : 0;
   }
 
  protected:
@@ -637,8 +645,8 @@ class Equalizer3BandsPerChannelT : public ModifyingStream {
   ConfigEqualizer3Bands cfg;            ///< Default configuration instance
   ConfigEqualizer3Bands* p_cfg = &cfg;  ///< Pointer to active configuration
   const T vsa = EqDenormalGuard<T>::value();  ///< Denormal-avoidance offset
-  Print* p_print = nullptr;    ///< Output stream for write operations
-  Stream* p_stream = nullptr;  ///< Input/output stream for read operations
+  Print* p_out = nullptr;    ///< Output stream for write operations
+  Stream* p_io = nullptr;  ///< Input/output stream for read operations
   int max_state_count = 0;     ///< Maximum number of allocated channel states
 
   // Per-channel frequency and gain settings using Vector containers

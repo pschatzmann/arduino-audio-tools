@@ -227,6 +227,10 @@ class AutomaticGainControlStream : public ModifyingStream {
   /// Provides the available data of the input
   int available() override { return p_in == nullptr ? 0 : p_in->available(); }
 
+  void flush() override {
+    if (p_out != nullptr) p_out->flush();
+  }
+
  protected:
   Print* p_out = nullptr;
   Stream* p_in = nullptr;
