@@ -77,6 +77,7 @@ $(function() {
 <ul>
 <li>We provide different <a href="https://github.com/pschatzmann/arduino-audio-tools/wiki/Audio-Sources-and-Sinks">"Audio Sources" and "Audio Sinks"</a></li>
 <li>Support for different <a href="https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_audio_encoder.html">Encoders</a> and <a href="https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_audio_decoder.html">Decoders</a> for MP3, AAC, WAV, FLAC, etc for <a href="https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_encoded_audio_stream.html">EncodedAudioStream</a></li>
+<li>Provides an easy to use <a href="https://github.com/pschatzmann/arduino-audio-tools/wiki/The-Audio-Player-Class">AudioPlayer</a> and <a href="https://github.com/pschatzmann/arduino-audio-tools/wiki/Video-Playback">VideoPlayer</a></li>
 <li>Supports input and output of <a href="https://github.com/pschatzmann/arduino-audio-tools/wiki/USB-Audio-Class-2.0">audio via USB</a></li>
 <li>Integrates with different <a href="https://github.com/pschatzmann/arduino-audio-tools/wiki/DSP-Libraries">DSP libraries</a></li>
 <li>Helps to <a href="https://github.com/pschatzmann/arduino-audio-tools/wiki/Communication">communicate</a> audio over the wire or wirelessly</li>
@@ -134,9 +135,6 @@ Example</h2>
 <p>Further examples can be found in the <a href="https://github.com/pschatzmann/arduino-audio-tools/wiki/Examples">Wiki</a>.</p>
 <p>Dependent on the example you might need to install some <a href="https://github.com/pschatzmann/arduino-audio-tools/wiki/Optional-Libraries">additional libaries</a></p>
 <h2><a class="anchor" id="autotoc_md2"></a>
-AudioPlayer</h2>
-<p>The library also provides a versatile <a href="https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_audio_player.html">AudioPlayer</a>. Further information can be found in the <a href="https://github.com/pschatzmann/arduino-audio-tools/wiki/The-Audio-Player-Class">Wiki</a></p>
-<h2><a class="anchor" id="autotoc_md3"></a>
 Logging</h2>
 <p>The application uses a built in logger: By default we use the log level warning and the logging output is going to Serial. You can change this in your sketch by calling e.g:</p>
 <div class="fragment"><div class="line"> ++</div>
@@ -145,10 +143,10 @@ Logging</h2>
 <p>You can also deactivate the logging by changing USE_AUDIO_LOGGING to false in the AudioConfig.h to decrease the memory usage:</p>
 <div class="fragment"><div class="line"> ++</div>
 <div class="line"><span class="preprocessor">#define USE_AUDIO_LOGGING false</span></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md4"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md3"></a>
 Show and Tell</h1>
 <p>Get some inspiration <a href="https://github.com/pschatzmann/arduino-audio-tools/discussions/categories/show-and-tell">from projects that were using this library</a> or share your projects with the community.</p>
-<h1><a class="anchor" id="autotoc_md5"></a>
+<h1><a class="anchor" id="autotoc_md4"></a>
 Documentation</h1>
 <p>Please use this before you raise any issue or start a discussion!</p>
 <ul>
@@ -158,7 +156,7 @@ Documentation</h1>
 <li>Find your class in <a href="https://pschatzmann.github.io/arduino-audio-tools/namespaceaudio__tools.html">All Classes Alphabetically</a></li>
 <li>You also might find further information in <a href="https://www.pschatzmann.ch/home/category/machine-sound/">one of my Blogs</a></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md6"></a>
+<h1><a class="anchor" id="autotoc_md5"></a>
 Support</h1>
 <p>I spent a lot of time to provide a comprehensive and complete documentation. So please read the documentation first and check the issues and discussions before posting any new ones on Github.</p>
 <p>Open <b>issues only for bugs</b> and if it is not a bug, use a discussion: Provide enough information about</p><ul>
@@ -171,13 +169,13 @@ Support</h1>
 <p>to enable others to understand and reproduce your issue.</p>
 <p>Finally, <b>don't</b> send me any e-mails or post questions on my personal website!</p>
 <p>Please note that discussions and issues which have already been answered before or where the answer can be found in the documentation may get deleted w/o reply.</p>
-<h1><a class="anchor" id="autotoc_md7"></a>
+<h1><a class="anchor" id="autotoc_md6"></a>
 Installation in Arduino</h1>
 <p>You can download the library as zip and call include Library -&gt; zip library. Or you can git clone this project into the Arduino libraries folder e.g. with</p>
 <div class="fragment"><div class="line">cd  ~/Documents/Arduino/libraries</div>
 <div class="line">git clone https://github.com/pschatzmann/arduino-audio-tools.git</div>
 </div><!-- fragment --><p>I recommend to use git because you can easily update to the latest version just by executing the <code>git pull</code> command in the project folder. If you want to use the library on other patforms, you can find <a href="https://github.com/pschatzmann/arduino-audio-tools/wiki">further information in the Wiki</a>.</p>
-<h1><a class="anchor" id="autotoc_md8"></a>
+<h1><a class="anchor" id="autotoc_md7"></a>
 Sponsor Me</h1>
 <p>This software is totally free, but you can make me happy by rewarding me with a treat</p>
 <ul>

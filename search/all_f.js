@@ -133,7 +133,7 @@ var searchData=
   ['logerr_130',['logerr',['../classaudio__tools_1_1_zephyr_s_d_class.html#ae82159086d4e71d608776ff0feb1d6c3',1,'audio_tools::ZephyrSDClass::logErr(int ret, const char *op, const char *a, const char *b)'],['../classaudio__tools_1_1_zephyr_s_d_class.html#a2f85f780c939de6578da49dc3e9801b8',1,'audio_tools::ZephyrSDClass::logErr(int ret, const char *op, const char *path)']]],
   ['logerror_131',['logError',['../classaudio__tools_1_1_v_s1053_stream.html#a1e1378387b87631ff836bc626fc4b34f',1,'audio_tools::VS1053Stream']]],
   ['logged_5fdrop_5fburst_132',['logged_drop_burst',['../classaudio__tools_1_1_paced_video_output.html#a2a6d983869b59a0f164d8036236f6fd3',1,'audio_tools::PacedVideoOutput']]],
-  ['logging_133',['Logging',['../index.html#autotoc_md3',1,'']]],
+  ['logging_133',['Logging',['../index.html#autotoc_md2',1,'']]],
   ['logging_5factive_134',['LOGGING_ACTIVE',['../_codec_m_p3_m_a_d_8h.html#a538bae5cfa2aedabc3dbe923283b728b',1,'CodecMP3MAD.h']]],
   ['logi_135',['logi',['../_audio_logger_zephyr_8h.html#a5512e59d578a380a441a70256af997d0',1,'LOGI:&#160;AudioLoggerZephyr.h'],['../_audio_logger_s_t_d_8h.html#a5512e59d578a380a441a70256af997d0',1,'LOGI:&#160;AudioLoggerSTD.h'],['../_audio_logger_i_d_f_8h.html#a5512e59d578a380a441a70256af997d0',1,'LOGI:&#160;AudioLoggerIDF.h']]],
   ['login_136',['login',['../classaudio__tools_1_1_h_l_s_stream_t.html#af76b7b46958dabf5e4ee9a492f0ec3fa',1,'audio_tools::HLSStreamT::login()'],['../classaudio__tools_1_1_u_r_l_stream.html#a3b482bc6e6c3467309e1b2df213f774f',1,'audio_tools::URLStream::login()'],['../classaudio__tools_1_1_audio_client_r_t_s_p.html#a3b482bc6e6c3467309e1b2df213f774f',1,'audio_tools::AudioClientRTSP::login()']]],
