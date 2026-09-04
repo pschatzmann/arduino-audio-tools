@@ -1573,11 +1573,11 @@ class FilteredStream : public ModifyingStream {
   virtual ~FilteredStream() { end(); }
 
   void setStream(Stream &stream) override {
-    p_stream = &stream;
-    p_print = &stream;
+    p_io = &stream;
+    p_out = &stream;
   }
 
-  void setOutput(Print &stream) override { p_print = &stream; }
+  void setOutput(Print &stream) override { p_out = &stream; }
 
   bool begin(AudioInfo info) {
     setAudioInfo(info);
@@ -1599,26 +1599,30 @@ class FilteredStream : public ModifyingStream {
   }
 
   virtual size_t write(const uint8_t *data, size_t len) override {
-    if (p_print == nullptr) return 0;
+    if (p_out == nullptr) return 0;
     size_t result = converter.convert((uint8_t *)data, len);
-    return p_print->write(data, result);
+    return p_out->write(data, result);
   }
 
   size_t readBytes(uint8_t *data, size_t len) override {
-    if (p_stream == nullptr) return 0;
-    size_t result = p_stream->readBytes(data, len);
+    if (p_io == nullptr) return 0;
+    size_t result = p_io->readBytes(data, len);
     result = converter.convert(data, result);
     return result;
   }
 
   virtual int available() override {
-    if (p_stream == nullptr) return 0;
-    return p_stream->available();
+    if (p_io == nullptr) return 0;
+    return p_io->available();
   }
 
   virtual int availableForWrite() override {
-    if (p_print == nullptr) return 0;
-    return p_print->availableForWrite();
+    if (p_out == nullptr) return 0;
+    return p_out->availableForWrite();
+  }
+
+  virtual void flush() override {
+    if (p_out != nullptr) p_out->flush();
   }
 
   /// defines the filter for an individual channel - the first channel is 0. The
@@ -1637,8 +1641,8 @@ class FilteredStream : public ModifyingStream {
 
  protected:
   int channels = 0;
-  Stream *p_stream = nullptr;
-  Print *p_print = nullptr;
+  Stream *p_io = nullptr;
+  Print *p_out = nullptr;
   ConverterNChannels<T, TF> converter{0};
 };
 

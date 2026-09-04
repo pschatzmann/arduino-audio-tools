@@ -15,8 +15,8 @@ class MeasuringStream : public ModifyingStream {
   MeasuringStream(int count = 10, Print *logOut = nullptr) {
     this->count = count;
     this->max_count = count;
-    p_stream = &null;
-    p_print = &null;
+    p_io = &null;
+    p_out = &null;
     start_time = millis();
     p_logout = logOut;
   }
@@ -42,30 +42,34 @@ class MeasuringStream : public ModifyingStream {
 
   /// Defines/Changes the input & output
   void setStream(Stream &io) override {
-    p_print = &io;
-    p_stream = &io;
+    p_out = &io;
+    p_io = &io;
   };
 
   /// Defines/Changes the output target
-  void setOutput(Print &out) override { p_print = &out; }
+  void setOutput(Print &out) override { p_out = &out; }
 
   /// Provides the data from all streams mixed together
   size_t readBytes(uint8_t *data, size_t len) override {
     total_bytes_since_begin += len;
-    return measure(p_stream->readBytes(data, len));
+    return measure(p_io->readBytes(data, len));
   }
 
-  int available() override { return p_stream->available(); }
+  int available() override { return p_io->available(); }
 
   /// Writes raw PCM audio data, which will be the input for the volume control
   virtual size_t write(const uint8_t *data, size_t len) override {
     total_bytes_since_begin += len;
-    return measure(p_print->write(data, len));
+    return measure(p_out->write(data, len));
   }
 
   /// Provides the nubmer of bytes we can write
   virtual int availableForWrite() override {
-    return p_print->availableForWrite();
+    return p_out->availableForWrite();
+  }
+
+  void flush() override {
+    if (p_out != nullptr) p_out->flush();
   }
 
   /// Returns the actual thrughput in bytes per second
@@ -139,8 +143,8 @@ class MeasuringStream : public ModifyingStream {
  protected:
   int max_count = 0;
   int count = 0;
-  Stream *p_stream = nullptr;
-  Print *p_print = nullptr;
+  Stream *p_io = nullptr;
+  Print *p_out = nullptr;
   uint32_t start_time;
   int total_bytes = 0;
   int bytes_per_second = 0;

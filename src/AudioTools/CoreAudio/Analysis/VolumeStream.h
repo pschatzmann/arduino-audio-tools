@@ -158,8 +158,12 @@ class VolumeStream : public ModifyingStream, public VolumeSupport {
         }
 
         /// Provides the nubmer of bytes we can write
-        virtual int available() override { 
+        virtual int available() override {
             return p_in==nullptr? 0 : p_in->available();
+        }
+
+        virtual void flush() override {
+            if (p_out != nullptr) p_out->flush();
         }
 
         /// Detines the Audio info - The bits_per_sample are critical to work properly!

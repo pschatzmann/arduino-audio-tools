@@ -88,7 +88,7 @@ class QualityAnalysisStream : public ModifyingStream {
 
   void setStream(Stream& io) override {
     p_out = &io;
-    p_stream = &io;
+    p_io = &io;
   }
 
   size_t write(const uint8_t* data, size_t len) override {
@@ -98,18 +98,22 @@ class QualityAnalysisStream : public ModifyingStream {
   }
 
   size_t readBytes(uint8_t* data, size_t len) override {
-    if (p_stream == nullptr) return 0;
-    size_t result = p_stream->readBytes(data, len);
+    if (p_io == nullptr) return 0;
+    size_t result = p_io->readBytes(data, len);
     analyze(data, result);
     return result;
   }
 
   int available() override {
-    return p_stream != nullptr ? p_stream->available() : 0;
+    return p_io != nullptr ? p_io->available() : 0;
   }
 
   int availableForWrite() override {
     return p_out != nullptr ? p_out->availableForWrite() : DEFAULT_BUFFER_SIZE;
+  }
+
+  void flush() override {
+    if (p_out != nullptr) p_out->flush();
   }
 
   /// Sample-to-sample jump threshold as ratio of max value (0.0 to 1.0)
@@ -149,7 +153,7 @@ class QualityAnalysisStream : public ModifyingStream {
 
  protected:
   Print* p_out = nullptr;
-  Stream* p_stream = nullptr;
+  Stream* p_io = nullptr;
 
   QualityStats stats_data;
   QualityCallback callback = nullptr;

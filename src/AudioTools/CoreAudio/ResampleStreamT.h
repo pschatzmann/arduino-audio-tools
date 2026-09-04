@@ -442,13 +442,13 @@ class ResampleStreamT : public ReformatBaseStream {
     size_t written = 0;
     switch (info.bits_per_sample) {
       case 16:
-         writeT<int16_t>(p_print, data, len, written);
+         writeT<int16_t>(p_out, data, len, written);
          break;
       case 24:
-         writeT<int24_t>(p_print, data, len, written);
+         writeT<int24_t>(p_out, data, len, written);
          break;
       case 32:
-         writeT<int32_t>(p_print, data, len, written);
+         writeT<int32_t>(p_out, data, len, written);
          break;
       default:
         TRACEE();
