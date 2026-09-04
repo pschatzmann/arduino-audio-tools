@@ -124,6 +124,10 @@ struct SPDIFConfig : public AudioInfo {
  * @copyright GPLv3
  * 
  * @note Supported only on ESP32 platforms with I2S output!
+ * @note On ESP32 the S/PDIF bit clock is derived from the APLL (use_apll=true),
+ * which is less accurate/jittery for 44.1kHz-family sample rates than for
+ * 48kHz-family ones. If a receiver/DAC fails to lock onto the signal, try a
+ * sample_rate that is a multiple of 48000 (e.g. 48000) instead of 44100.
  *
  */
 class SPDIFOutput : public AudioStream {
