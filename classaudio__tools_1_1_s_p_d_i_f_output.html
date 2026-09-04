@@ -206,7 +206,9 @@ Protected Attributes</h2></td></tr>
 <div class="textblock"><p>Output as 16 bit stereo SPDIF on the I2S data output pin. For the time beeing only the ESP32 is officially supported. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>Supported only on ESP32 platforms with I2S output! </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Supported only on ESP32 platforms with I2S output! </dd>
+<dd>
+On ESP32 the S/PDIF bit clock is derived from the APLL (use_apll=true), which is less accurate/jittery for 44.1kHz-family sample rates than for 48kHz-family ones. If a receiver/DAC fails to lock onto the signal, try a sample_rate that is a multiple of 48000 (e.g. 48000) instead of 44100. </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a8e152c6e69b5a33c99f4b1e93867d7eb" name="a8e152c6e69b5a33c99f4b1e93867d7eb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8e152c6e69b5a33c99f4b1e93867d7eb">&#9670;&#160;</a></span>SPDIFOutput()</h2>
