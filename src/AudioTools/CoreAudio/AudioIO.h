@@ -393,24 +393,32 @@ class AdapterAudioStreamToAudioOutput : public AudioOutputAdapter {
 
   void setStream(AudioStream& stream) { p_stream = &stream; }
 
-  void setAudioInfo(AudioInfo info) override { p_stream->setAudioInfo(info); }
-
-  AudioInfo audioInfo() override { return p_stream->audioInfo(); }
-
-  size_t write(const uint8_t* data, size_t len) override {
-    return p_stream->write(data, len);
+  void setAudioInfo(AudioInfo info) override {
+    if (p_stream != nullptr) p_stream->setAudioInfo(info);
   }
 
-  int availableForWrite() override { return p_stream->availableForWrite(); }
+  AudioInfo audioInfo() override {
+    return p_stream != nullptr ? p_stream->audioInfo() : AudioInfo();
+  }
 
-  bool begin() override { return p_stream->begin(); }
+  size_t write(const uint8_t* data, size_t len) override {
+    return p_stream != nullptr ? p_stream->write(data, len) : 0;
+  }
 
-  void end() override { p_stream->end(); }
+  int availableForWrite() override {
+    return p_stream != nullptr ? p_stream->availableForWrite() : 0;
+  }
+
+  bool begin() override { return p_stream != nullptr && p_stream->begin(); }
+
+  void end() override {
+    if (p_stream != nullptr) p_stream->end();
+  }
 
   /// If true we need to release the related memory in the destructor
   virtual bool isDeletable() override { return true; }
 
-  operator bool() override { return *p_stream; }
+  operator bool() override { return p_stream != nullptr && *p_stream; }
 
  protected:
   AudioStream* p_stream = nullptr;
@@ -428,22 +436,28 @@ class AdapterAudioOutputToAudioStream : public AudioStream {
 
   void setOutput(AudioOutput& stream) { p_stream = &stream; }
 
-  void setAudioInfo(AudioInfo info) override { p_stream->setAudioInfo(info); }
-
-  AudioInfo audioInfo() override { return p_stream->audioInfo(); }
-
-  size_t write(const uint8_t* data, size_t len) override {
-    return p_stream->write(data, len);
+  void setAudioInfo(AudioInfo info) override {
+    if (p_stream != nullptr) p_stream->setAudioInfo(info);
   }
 
-  bool begin() override { return p_stream->begin(); }
+  AudioInfo audioInfo() override {
+    return p_stream != nullptr ? p_stream->audioInfo() : AudioInfo();
+  }
 
-  void end() override { p_stream->end(); }
+  size_t write(const uint8_t* data, size_t len) override {
+    return p_stream != nullptr ? p_stream->write(data, len) : 0;
+  }
+
+  bool begin() override { return p_stream != nullptr && p_stream->begin(); }
+
+  void end() override {
+    if (p_stream != nullptr) p_stream->end();
+  }
 
   /// If true we need to release the related memory in the destructor
   virtual bool isDeletable() { return true; }
 
-  operator bool() override { return *p_stream; }
+  operator bool() override { return p_stream != nullptr && *p_stream; }
 
  protected:
   AudioOutput* p_stream = nullptr;
