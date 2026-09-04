@@ -120,6 +120,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aaf81d3fdaf258088d7692fa70cece087" id="r_aaf81d3fdaf258088d7692fa70cece087"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_driver_zephyr.html#aaf81d3fdaf258088d7692fa70cece087">end</a> ()</td></tr>
 <tr class="memdesc:aaf81d3fdaf258088d7692fa70cece087"><td class="mdescLeft">&#160;</td><td class="mdescRight">stops the I2S interface  <br /></td></tr>
 <tr class="separator:aaf81d3fdaf258088d7692fa70cece087"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3aed50bc3b4459454ccb8c64f5ced5a" id="r_ad3aed50bc3b4459454ccb8c64f5ced5a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_driver_base.html#ad3aed50bc3b4459454ccb8c64f5ced5a">flush</a> ()</td></tr>
+<tr class="separator:ad3aed50bc3b4459454ccb8c64f5ced5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aecdbea3a6aff480653df559eb8097559" id="r_aecdbea3a6aff480653df559eb8097559"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_driver_zephyr.html#aecdbea3a6aff480653df559eb8097559">readBytes</a> (void *dest, size_t size_bytes)</td></tr>
 <tr class="separator:aecdbea3a6aff480653df559eb8097559"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a61750044646f6643180bf5073ed9a32d" id="r_a61750044646f6643180bf5073ed9a32d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_driver_zephyr.html#a61750044646f6643180bf5073ed9a32d">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info)</td></tr>
@@ -461,6 +463,34 @@ Friends</h2></td></tr>
 <p>stops the I2S interface </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_i2_s_driver_base.html#aa540e86022c1f72380d1014d98f38f43">I2SDriverBase</a>.</p>
+
+</div>
+</div>
+<a id="ad3aed50bc3b4459454ccb8c64f5ced5a" name="ad3aed50bc3b4459454ccb8c64f5ced5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3aed50bc3b4459454ccb8c64f5ced5a">&#9670;&#160;</a></span>flush()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void flush </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Discards any audio already queued in the driver's own output buffer (e.g. the I2S DMA buffer) but not yet physically played - useful when switching to unrelated audio content (e.g. <a class="el" href="classaudio__tools_1_1_audio_player.html" title="High-level audio playback pipeline and controller.">AudioPlayer</a> moving to the next track) to stop stale samples from continuing to play out during the switch. Default no-op, since not every backend can support this; override where the underlying driver allows it. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#a04f2540d940cc37b5c2538ed8e5b54be">I2SDriverESP32</a>, and <a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#a04f2540d940cc37b5c2538ed8e5b54be">I2SDriverESP32V1</a>.</p>
 
 </div>
 </div>
