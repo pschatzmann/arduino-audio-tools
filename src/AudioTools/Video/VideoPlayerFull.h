@@ -14,9 +14,10 @@ namespace audio_tools {
  * @brief VideoPlayer subclass pre-registered with every video/audio codec
  * this library ships a portable decoder for - H264/MJPEG/MPEG-1 video,
  * MP3/AAC/MP2 audio - so it's the "just point it at a file, any common
- * codec just works" player. Use instead of the base VideoPlayer unless
- * you want to keep these dependencies out of your build (the base
- * class's own multi-decoders start empty - see its class comment).
+ * codec just works" player. Use instead of the base VideoPlayer unless you
+ * want to keep these dependencies out of your build (the base class's own
+ * multi-decoders start out completely empty, requiring an explicit
+ * addVideoDecoder()/addAudioDecoder() call per codec).
  *
  * Pre-registers no container demuxer though - still supply one via the
  * constructor/addDemuxer(), as the base VideoPlayer requires. Pass a
@@ -46,22 +47,38 @@ namespace audio_tools {
  */
 class VideoPlayerFull : public VideoPlayer {
  public:
+  /**
+   * Registers all bundled video/audio decoders (H264/MJPEG/MPEG-1 video,
+   * MP3/AAC/MP2 audio); wire a Demuxer and VideoOutput/AudioOutput
+   * separately via addDemuxer()/setVideoOutput()/setAudioOutput() before
+   * begin().
+   */
   VideoPlayerFull() {
     registerVideoDecoders();
     registerAudioDecoders();
   }
 
-  /// `demuxer` is registered the same way VideoPlayer's own matching
-  /// constructor does (see its class comment) - pass a
-  /// MultiVideoDemuxerFull here instead of a single concrete demuxer if
-  /// you want every container format supported too (see this class's own
-  /// comment).
+  /**
+   * Video-only playback (no audio track), pre-registered with all bundled
+   * video decoders. `demuxer` is registered the same way VideoPlayer's
+   * own matching constructor does (a plain addDemuxer() call) - pass a
+   * MultiVideoDemuxerFull here instead of a single concrete demuxer if
+   * you also want every container format supported (see this class's own
+   * comment).
+   */
   VideoPlayerFull(Demuxer& demuxer, VideoOutput& videoOutput)
       : VideoPlayer(demuxer, videoOutput) {
     registerVideoDecoders();
     registerAudioDecoders();
   }
 
+  /**
+   * Video + audio playback with an AudioOutput target, pre-registered
+   * with all bundled video/audio decoders - audio-clock-driven video
+   * scheduling applies by default, same as VideoPlayer's matching
+   * constructor; `demuxer` is registered as described in the
+   * video-only constructor above.
+   */
   VideoPlayerFull(Demuxer& demuxer, VideoOutput& videoOutput,
                   AudioOutput& audioOutput)
       : VideoPlayer(demuxer, videoOutput, audioOutput) {
@@ -69,6 +86,13 @@ class VideoPlayerFull : public VideoPlayer {
     registerAudioDecoders();
   }
 
+  /**
+   * Video + audio playback with a generic Print target, pre-registered
+   * with all bundled video/audio decoders - audio-clock-driven video
+   * scheduling applies by default, same as VideoPlayer's matching
+   * constructor; `demuxer` is registered as described in the video-only
+   * constructor above.
+   */
   VideoPlayerFull(Demuxer& demuxer, VideoOutput& videoOutput,
                   Print& audioOutput)
       : VideoPlayer(demuxer, videoOutput, audioOutput) {
@@ -76,6 +100,13 @@ class VideoPlayerFull : public VideoPlayer {
     registerAudioDecoders();
   }
 
+  /**
+   * Video + audio playback with an AudioStream target, pre-registered
+   * with all bundled video/audio decoders - audio-clock-driven video
+   * scheduling applies by default, same as VideoPlayer's matching
+   * constructor; `demuxer` is registered as described in the video-only
+   * constructor above.
+   */
   VideoPlayerFull(Demuxer& demuxer, VideoOutput& videoOutput,
                   AudioStream& audioOutput)
       : VideoPlayer(demuxer, videoOutput, audioOutput) {
@@ -92,12 +123,20 @@ class VideoPlayerFull : public VideoPlayer {
   AACDecoderHelix aac_decoder;
   MP2Decoder mp2_decoder;
 
+  /**
+   * Registers all bundled video decoders (H264/MJPEG/MPEG-1) with the
+   * base VideoPlayer's MultiVideoDecoder - called from every constructor.
+   */
   void registerVideoDecoders() {
     addVideoDecoder(h264_decoder);
     addVideoDecoder(mjpeg_decoder);
     addVideoDecoder(mpeg_decoder);
   }
 
+  /**
+   * Registers all bundled audio decoders (MP3/AAC/MP2) with the base
+   * VideoPlayer's MultiDecoder - called from every constructor.
+   */
   void registerAudioDecoders() {
     // mp3_decoder must be registered before mp2_decoder: a plain
     // "audio/mpeg" match still resolves to it via MultiDecoder::
