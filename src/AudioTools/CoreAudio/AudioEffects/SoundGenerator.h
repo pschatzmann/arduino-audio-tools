@@ -136,29 +136,28 @@ class SoundGenerator {
     this->playMs = playMs;
     this->upPercent = upPercent;
     this->downPercent = downPercent;
+    this->upMs = 0;
+    this->downMs = 0;
     currentSample = 0;
     recalculatePlayTime();
     factor = 0.0f;
   }
 
-  /// Alternative to setPlayTime.  It sets ramp-up and ramp-down times in ms,
-  /// without specifying a play time.   restart();begin(); starts the ramp-up and sustain
+  /// Alternative to setPlayTime.  It sets ramp-up and ramp-down times in ms
+  /// instead of percentages.
+  /// If playMs == 0, it will play indefinitely. restart();begin(); starts the ramp-up and sustain
   /// as normal, but it will sustain forever. end(true) triggers a ramp-down then inactive.
-  virtual void setRampTimes(uint32_t upMs, uint32_t downMs) {
-    LOGI("setRampTimes: upMs=%d, downMs=%d", upMs, downMs);
+  virtual void setRampTimes(uint32_t playMs, uint32_t upMs = 5, uint32_t downMs = 5) {
+    LOGI("setRampTimes: playMs=%u  upMs=%u, downMs=%u", playMs, upMs, downMs);
+
+    this->playMs = playMs;
+    this->upMs = upMs;
+    this->downMs = downMs;
+    this->upPercent = 0;
+    this->downPercent = 0;
 
     currentSample = 0;
-    upSamples = info.sample_rate / 1000 * upMs;
-    downSamples = info.sample_rate / 1000 * downMs;
-    playSamples = 0;  // Play forever
-    rampUpInc = 0;
-    if (upSamples > 0) {
-      rampUpInc = 1.0f / upSamples;
-    }
-    rampDownDec = 0;
-    if (downSamples > 0) {
-      rampDownDec = 1.0f / downSamples;
-    }
+    recalculatePlayTime();
     factor = 0.0f;
     LOGD("setRampTimes() playSamples: %u  playMs: %u  upSamples: %u  downSamples: %u", playSamples, playMs, upSamples, downSamples);
   }
@@ -179,6 +178,8 @@ class SoundGenerator {
   uint32_t playMs = 0;
   uint8_t upPercent = 5;
   uint8_t downPercent = 40;
+  uint32_t upMs = 0;
+  uint32_t downMs = 0;
   uint32_t playSamples = 0;
   uint32_t upSamples = 0;
   uint32_t downSamples = 0;
@@ -188,12 +189,40 @@ class SoundGenerator {
   uint32_t currentSample = 0;
 
   void recalculatePlayTime() {
-    if (upPercent + downPercent > 100) {
-      downPercent = 100 - upPercent;
+    // Enforce exclusion between setPlayTime() and setRampTimes()
+    if ((upPercent || downPercent) && (upMs || downMs)) {
+      LOGE("Only use either: setPlayTime() or setRampTimes(), not both. up%% %u  down%% %u   upMs: %u  downMs: %u",
+        upPercent, downPercent, upMs, downMs);
+      LOGE("Reset the other to zero if switching back and forth.")
+      return;
     }
+
+    // Set playSamples. playMs == 0 results in playSamples == 0 will play
+    // indefinitely, until end() is called. end(true) will ramp-down,
+    // end(false) stops immediately.  Default is false/immediate.
     playSamples = info.sample_rate / 1000 * playMs;
-    upSamples = (playSamples * upPercent) / 100;
-    downSamples = (playSamples * downPercent) / 100;
+
+    // Set up/down samples based on either Percentages or times.
+    if (upMs || downMs) {
+      // Using ramp time in ms
+      upSamples = info.sample_rate / 1000 * upMs;
+      downSamples = info.sample_rate / 1000 * downMs;
+    }
+    else if (upPercent || downPercent) {
+      // Using ramp percentages of play time
+      if (upPercent + downPercent > 100) {
+        downPercent = 100 - upPercent;
+      }
+      upSamples = (playSamples * upPercent) / 100;
+      downSamples = (playSamples * downPercent) / 100;
+    }
+    else {
+      // No ramp specified.
+      upSamples = 0;
+      downSamples = 0;
+    }
+
+    // Turn all that into parameters to use in applyRamp()
     rampUpInc = 0;
     if (upSamples > 0) {
       rampUpInc = 1.0f / upSamples;
