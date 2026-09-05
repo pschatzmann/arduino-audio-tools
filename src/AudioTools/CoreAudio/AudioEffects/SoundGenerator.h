@@ -52,8 +52,26 @@ class SoundGenerator {
     return true;
   }
 
-  /// Ends the processing
-  virtual void end() { active = false; }
+  virtual void end() { end(false); }
+
+  /// Ends the processing. If either setPlayTime() or setRampTimes() have been set, then
+  /// allow_rampdown=true will start a ramp-down instead of stopping immediately.
+  virtual void end(bool allow_rampdown) {
+    if (!active || !allow_rampdown || downSamples == 0) {
+      // No rampdown to do
+      LOGD("end() immediate");
+      active = false;
+    }
+    // Are we already in a rampdown?  If so, don't restart it.
+    else if (currentSample > playSamples && currentSample <= playSamples + downSamples) {
+      LOGD("end() continuing rampdown: %u more samples", playSamples+downSamples-currentSample);  
+    }
+    // Otherwise, trigger the start of ramp down.
+    else {
+      LOGD("end() starting rampdown: %u samples", downSamples);
+      playSamples = currentSample + downSamples;
+    }
+  }
 
   /// Checks if the begin method has been called - after end() isActive is false
   virtual bool isActive() { return active; }
@@ -118,14 +136,37 @@ class SoundGenerator {
     this->playMs = playMs;
     this->upPercent = upPercent;
     this->downPercent = downPercent;
+    this->upMs = 0;
+    this->downMs = 0;
     currentSample = 0;
     recalculatePlayTime();
     factor = 0.0f;
   }
 
+  /// Alternative to setPlayTime.  It sets ramp-up and ramp-down times in ms
+  /// instead of percentages.
+  /// If playMs == 0, it will play indefinitely. restart();begin(); starts the ramp-up and sustain
+  /// as normal, but it will sustain forever. end(true) triggers a ramp-down then inactive.
+  virtual void setRampTimes(uint32_t playMs, uint32_t upMs = 5, uint32_t downMs = 5) {
+    LOGI("setRampTimes: playMs=%u  upMs=%u, downMs=%u", playMs, upMs, downMs);
+
+    this->playMs = playMs;
+    this->upMs = upMs;
+    this->downMs = downMs;
+    this->upPercent = 0;
+    this->downPercent = 0;
+
+    currentSample = 0;
+    recalculatePlayTime();
+    factor = 0.0f;
+    LOGD("setRampTimes() playSamples: %u  playMs: %u  upSamples: %u  downSamples: %u", playSamples, playMs, upSamples, downSamples);
+  }
+
+
   /// Restarts the generator, e.g. after a play time has been defined and reached
   virtual void restart() {
     currentSample = 0;
+    active = true;
   }
 
  protected:
@@ -137,28 +178,58 @@ class SoundGenerator {
   uint32_t playMs = 0;
   uint8_t upPercent = 5;
   uint8_t downPercent = 40;
+  uint32_t upMs = 0;
+  uint32_t downMs = 0;
   uint32_t playSamples = 0;
   uint32_t upSamples = 0;
-  uint32_t rampDownSamples = 0;
+  uint32_t downSamples = 0;
   float rampUpInc = 0.0;
   float rampDownDec = 0.0;
   float factor = 1.0f;
   uint32_t currentSample = 0;
 
   void recalculatePlayTime() {
-    if (upPercent + downPercent > 100) {
-      downPercent = 100 - upPercent;
+    // Enforce exclusion between setPlayTime() and setRampTimes()
+    if ((upPercent || downPercent) && (upMs || downMs)) {
+      LOGE("Only use either: setPlayTime() or setRampTimes(), not both. up%% %u  down%% %u   upMs: %u  downMs: %u",
+        upPercent, downPercent, upMs, downMs);
+      LOGE("Reset the other to zero if switching back and forth.")
+      return;
     }
+
+    // Set playSamples. playMs == 0 results in playSamples == 0 will play
+    // indefinitely, until end() is called. end(true) will ramp-down,
+    // end(false) stops immediately.  Default is false/immediate.
     playSamples = info.sample_rate / 1000 * playMs;
-    upSamples = (playSamples * upPercent) / 100;
-    rampDownSamples = (playSamples * downPercent) / 100;
+
+    // Set up/down samples based on either Percentages or times.
+    if (upMs || downMs) {
+      // Using ramp time in ms
+      upSamples = info.sample_rate / 1000 * upMs;
+      downSamples = info.sample_rate / 1000 * downMs;
+    }
+    else if (upPercent || downPercent) {
+      // Using ramp percentages of play time
+      if (upPercent + downPercent > 100) {
+        downPercent = 100 - upPercent;
+      }
+      upSamples = (playSamples * upPercent) / 100;
+      downSamples = (playSamples * downPercent) / 100;
+    }
+    else {
+      // No ramp specified.
+      upSamples = 0;
+      downSamples = 0;
+    }
+
+    // Turn all that into parameters to use in applyRamp()
     rampUpInc = 0;
     if (upSamples > 0) {
       rampUpInc = 1.0f / upSamples;
     }
     rampDownDec = 0;
-    if (rampDownSamples > 0) {
-      rampDownDec = 1.0f / rampDownSamples;
+    if (downSamples > 0) {
+      rampDownDec = 1.0f / downSamples;
     }
   }
 
@@ -166,15 +237,16 @@ class SoundGenerator {
                          int channels) {
     T* result_buffer = (T*)buffer;
     int frames_written = 0;
-    if (playMs > 0 && currentSample > playSamples) {
+    if (playSamples > 0 && currentSample > playSamples) {
+      active = false;
       return 0;
     }
 
     for (int j = 0; j < frames; j++) {
       T sample = readSample();
 
-      // if we requested a play time
-      if (playMs > 0) {
+      // if we requested a play time or ramp times
+      if (playSamples > 0 || upSamples > 0 || downSamples > 0) {
         currentSample++;
         sample = applyRamp(sample);
       }
@@ -185,7 +257,8 @@ class SoundGenerator {
 
       frames_written++;
       // exit loop if we have reached the requested play time
-      if (playMs > 0 && currentSample > playSamples) {
+      if (playSamples > 0 && currentSample > playSamples) {
+        active = false;
         break;
       }
     }
@@ -202,7 +275,7 @@ class SoundGenerator {
       }
     }
     // Ramp down
-    else if (rampDownDec > 0 && currentSample >= playSamples - rampDownSamples) {
+    else if (rampDownDec > 0 && currentSample >= playSamples - downSamples) {
       factor -= rampDownDec;
       if (factor < 0.0f) {
         factor = 0.0f;
@@ -1306,17 +1379,17 @@ class TestGenerator : public SoundGenerator<T> {
 template <class T = int16_t>
 class GeneratorQueue : public SoundGenerator<T> {
 public:
-  bool begin(uint16_t queue_size=256) {
+  virtual bool begin(uint16_t queue_size=256) {
     return queue.resize(queue_size) && SoundGenerator<T>::begin();
   }
 
-  void end() { SoundGenerator<T>::end(); clear(); }
+  virtual void end() override { SoundGenerator<T>::end(); clear(); }
 
   // Returns the requested number of bytes from the current generator.
   // If the current generator runs out of bytes before the buffer is filled,
   // it will move to the next queued generator.  If there are no more generators,
   // it will stop filling the buffer and return the number of bytes it was able to fill.
-  virtual size_t readBytes(uint8_t *buffer, size_t buf_len) {
+  virtual size_t readBytes(uint8_t *buffer, size_t buf_len) override {
     LOGD("readBytes: %d", (int)buf_len);
     if (!SoundGenerator<T>::active) return 0;
     if (queue.available() == 0) return 0;  // Nothing in the queue.
@@ -1341,13 +1414,13 @@ public:
   }
 
   // If no bytes are available, will return 0.
-  virtual T readSample() {
+  virtual T readSample() override {
     T buf;
     if (readBytes((uint8_t *)&buf, sizeof(T)) != sizeof(T)) return (T)0;
     return buf;
   }
 
-  virtual inline size_t readSamples(T* data, size_t len) {
+  virtual inline size_t readSamples(T* data, size_t len) override {
     return (readBytes((uint8_t *)data, len*sizeof(T)) / sizeof(T));
   }
 
@@ -1376,10 +1449,10 @@ public:
 
   // GeneratorQueue doesn't do everything other generators do.  We rely on the
   // queued SoundGenerators to do any shaping.
-  virtual inline void setPlayTime(uint32_t p, uint8_t u = 20, uint8_t d = 30) {
+  virtual inline void setPlayTime(uint32_t p, uint8_t u = 20, uint8_t d = 30) override {
     LOGW("GeneratorQueue::setPlayTime() does nothing.");
   }
-  virtual inline void setFrequency(float f) {
+  virtual inline void setFrequency(float f) override {
     LOGW("GeneratorQueue::setFrequency() does nothing.");
   }
 
@@ -1397,7 +1470,7 @@ public:
   virtual inline size_t size()              { return queue.available(); }
   virtual inline size_t available()         { return queue.available(); }
   virtual inline size_t availableForWrite() { return queue.availableForWrite(); }
-  virtual inline bool empty()               { return queue.available() == 0; }
+  virtual inline bool   empty()             { return queue.available() == 0; }
 
 protected:
   struct QNode {
@@ -1425,7 +1498,6 @@ protected:
         node->start_cb(node->generator, node->cb_data);
       }
       node->generator->restart();
-      node->generator->begin();
       node->restarted = true;      // persistent dynamic objects, this will persist.
     }
     return node->generator;
