@@ -52,8 +52,18 @@ class SoundGenerator {
     return true;
   }
 
-  /// Ends the processing
-  virtual void end() { active = false; }
+  /// Ends the processing. If either setPlayTime() or setRampTimes() have been set, then
+  /// allow_rampdown=true will start a ramp-down instead of stopping immediately.
+  virtual void end(bool allow_rampdown=false) {
+    if (active && allow_rampdown && (downSamples > 0) && (currentSample < (playSamples-downSamples))) {
+      LOGD("end() starting rampdown: %ums", downSamples);
+      playSamples = currentSample + downSamples;
+    }
+    else {
+      LOGD("end() immediate");
+      active = false;
+    }
+  }
 
   /// Checks if the begin method has been called - after end() isActive is false
   virtual bool isActive() { return active; }
@@ -123,6 +133,27 @@ class SoundGenerator {
     factor = 0.0f;
   }
 
+  /// Alternative to setPlayTime.  It sets ramp-up and ramp-down times in ms, 
+  /// without specifying a play time.   restart();begin(); starts the ramp-up and sustain
+  /// as normal, but it will sustain forever. end(true) triggers a ramp-down then inactive.
+  virtual void setRampTimes(uint8_t upMs, uint8_t downMs) {
+    LOGI("setRampTimes: upMs=%d, downMs=%d", upMs, downMs);
+
+    upSamples = info.sample_rate / 1000 * upMs;
+    downSamples = info.sample_rate / 1000 * downMs;
+    playSamples = 0;  // Play forever
+    rampUpInc = 0;
+    if (upSamples > 0) {
+      rampUpInc = 1.0f / upSamples;
+    }
+    rampDownDec = 0;
+    if (downSamples > 0) {
+      rampDownDec = 1.0f / downSamples;
+    }
+    LOGW("setRampTimes() playSamples: %u  playMs: %u  upSamples: %u  downSamples: %u", playSamples, playMs, upSamples, downSamples);
+  }
+
+
   /// Restarts the generator, e.g. after a play time has been defined and reached
   virtual void restart() {
     currentSample = 0;
@@ -139,7 +170,7 @@ class SoundGenerator {
   uint8_t downPercent = 40;
   uint32_t playSamples = 0;
   uint32_t upSamples = 0;
-  uint32_t rampDownSamples = 0;
+  uint32_t downSamples = 0;
   float rampUpInc = 0.0;
   float rampDownDec = 0.0;
   float factor = 1.0f;
@@ -151,14 +182,14 @@ class SoundGenerator {
     }
     playSamples = info.sample_rate / 1000 * playMs;
     upSamples = (playSamples * upPercent) / 100;
-    rampDownSamples = (playSamples * downPercent) / 100;
+    downSamples = (playSamples * downPercent) / 100;
     rampUpInc = 0;
     if (upSamples > 0) {
       rampUpInc = 1.0f / upSamples;
     }
     rampDownDec = 0;
-    if (rampDownSamples > 0) {
-      rampDownDec = 1.0f / rampDownSamples;
+    if (downSamples > 0) {
+      rampDownDec = 1.0f / downSamples;
     }
   }
 
@@ -166,15 +197,16 @@ class SoundGenerator {
                          int channels) {
     T* result_buffer = (T*)buffer;
     int frames_written = 0;
-    if (playMs > 0 && currentSample > playSamples) {
+    if (playSamples > 0 && currentSample > playSamples) {
+      active = false;
       return 0;
     }
 
     for (int j = 0; j < frames; j++) {
       T sample = readSample();
 
-      // if we requested a play time
-      if (playMs > 0) {
+      // if we requested a play time or ramp times
+      if (playSamples > 0 || upSamples > 0 || downSamples > 0) {
         currentSample++;
         sample = applyRamp(sample);
       }
@@ -185,7 +217,8 @@ class SoundGenerator {
 
       frames_written++;
       // exit loop if we have reached the requested play time
-      if (playMs > 0 && currentSample > playSamples) {
+      if (playSamples > 0 && currentSample > playSamples) {
+        active = false;
         break;
       }
     }
@@ -202,7 +235,7 @@ class SoundGenerator {
       }
     }
     // Ramp down
-    else if (rampDownDec > 0 && currentSample >= playSamples - rampDownSamples) {
+    else if (rampDownDec > 0 && currentSample >= playSamples - downSamples) {
       factor -= rampDownDec;
       if (factor < 0.0f) {
         factor = 0.0f;
