@@ -52,16 +52,24 @@ class SoundGenerator {
     return true;
   }
 
+  virtual void end() { end(false); }
+
   /// Ends the processing. If either setPlayTime() or setRampTimes() have been set, then
   /// allow_rampdown=true will start a ramp-down instead of stopping immediately.
-  virtual void end(bool allow_rampdown=false) {
-    if (active && allow_rampdown && (downSamples > 0) && (currentSample < (playSamples-downSamples))) {
-      LOGD("end() starting rampdown: %ums", downSamples);
-      playSamples = currentSample + downSamples;
-    }
-    else {
+  virtual void end(bool allow_rampdown) {
+    if (!active || !allow_rampdown || downSamples == 0) {
+      // No rampdown to do
       LOGD("end() immediate");
       active = false;
+    }
+    // Are we already in a rampdown?  If so, don't restart it.
+    else if (currentSample > playSamples && currentSample <= playSamples + downSamples) {
+      LOGD("end() continuing rampdown: %u more samples", playSamples+downSamples-currentSample);  
+    }
+    // Otherwise, trigger the start of ramp down.
+    else {
+      LOGD("end() starting rampdown: %u samples", downSamples);
+      playSamples = currentSample + downSamples;
     }
   }
 
@@ -139,6 +147,7 @@ class SoundGenerator {
   virtual void setRampTimes(uint32_t upMs, uint32_t downMs) {
     LOGI("setRampTimes: upMs=%d, downMs=%d", upMs, downMs);
 
+    currentSample = 0;
     upSamples = info.sample_rate / 1000 * upMs;
     downSamples = info.sample_rate / 1000 * downMs;
     playSamples = 0;  // Play forever
@@ -150,6 +159,7 @@ class SoundGenerator {
     if (downSamples > 0) {
       rampDownDec = 1.0f / downSamples;
     }
+    factor = 0.0f;
     LOGD("setRampTimes() playSamples: %u  playMs: %u  upSamples: %u  downSamples: %u", playSamples, playMs, upSamples, downSamples);
   }
 
@@ -157,6 +167,7 @@ class SoundGenerator {
   /// Restarts the generator, e.g. after a play time has been defined and reached
   virtual void restart() {
     currentSample = 0;
+    active = true;
   }
 
  protected:
@@ -1339,17 +1350,17 @@ class TestGenerator : public SoundGenerator<T> {
 template <class T = int16_t>
 class GeneratorQueue : public SoundGenerator<T> {
 public:
-  bool begin(uint16_t queue_size=256) {
+  virtual bool begin(uint16_t queue_size=256) {
     return queue.resize(queue_size) && SoundGenerator<T>::begin();
   }
 
-  void end() { SoundGenerator<T>::end(); clear(); }
+  virtual void end() override { SoundGenerator<T>::end(); clear(); }
 
   // Returns the requested number of bytes from the current generator.
   // If the current generator runs out of bytes before the buffer is filled,
   // it will move to the next queued generator.  If there are no more generators,
   // it will stop filling the buffer and return the number of bytes it was able to fill.
-  virtual size_t readBytes(uint8_t *buffer, size_t buf_len) {
+  virtual size_t readBytes(uint8_t *buffer, size_t buf_len) override {
     LOGD("readBytes: %d", (int)buf_len);
     if (!SoundGenerator<T>::active) return 0;
     if (queue.available() == 0) return 0;  // Nothing in the queue.
@@ -1374,13 +1385,13 @@ public:
   }
 
   // If no bytes are available, will return 0.
-  virtual T readSample() {
+  virtual T readSample() override {
     T buf;
     if (readBytes((uint8_t *)&buf, sizeof(T)) != sizeof(T)) return (T)0;
     return buf;
   }
 
-  virtual inline size_t readSamples(T* data, size_t len) {
+  virtual inline size_t readSamples(T* data, size_t len) override {
     return (readBytes((uint8_t *)data, len*sizeof(T)) / sizeof(T));
   }
 
@@ -1409,10 +1420,10 @@ public:
 
   // GeneratorQueue doesn't do everything other generators do.  We rely on the
   // queued SoundGenerators to do any shaping.
-  virtual inline void setPlayTime(uint32_t p, uint8_t u = 20, uint8_t d = 30) {
+  virtual inline void setPlayTime(uint32_t p, uint8_t u = 20, uint8_t d = 30) override {
     LOGW("GeneratorQueue::setPlayTime() does nothing.");
   }
-  virtual inline void setFrequency(float f) {
+  virtual inline void setFrequency(float f) override {
     LOGW("GeneratorQueue::setFrequency() does nothing.");
   }
 
@@ -1430,7 +1441,7 @@ public:
   virtual inline size_t size()              { return queue.available(); }
   virtual inline size_t available()         { return queue.available(); }
   virtual inline size_t availableForWrite() { return queue.availableForWrite(); }
-  virtual inline bool empty()               { return queue.available() == 0; }
+  virtual inline bool   empty()             { return queue.available() == 0; }
 
 protected:
   struct QNode {

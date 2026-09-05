@@ -253,6 +253,7 @@ class RTTTLOutput : public AudioOutput {
 
     p_generator->setPlayTime(msec, m_ramp_upPercent, m_ramp_downPercent);
     p_generator->setFrequency(freq);
+    p_generator->restart();
     uint8_t buffer[1024];
     size_t len = p_generator->readBytes(buffer, 1024);
     while (len > 0) {
