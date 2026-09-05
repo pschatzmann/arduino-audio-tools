@@ -133,10 +133,10 @@ class SoundGenerator {
     factor = 0.0f;
   }
 
-  /// Alternative to setPlayTime.  It sets ramp-up and ramp-down times in ms, 
+  /// Alternative to setPlayTime.  It sets ramp-up and ramp-down times in ms,
   /// without specifying a play time.   restart();begin(); starts the ramp-up and sustain
   /// as normal, but it will sustain forever. end(true) triggers a ramp-down then inactive.
-  virtual void setRampTimes(uint8_t upMs, uint8_t downMs) {
+  virtual void setRampTimes(uint32_t upMs, uint32_t downMs) {
     LOGI("setRampTimes: upMs=%d, downMs=%d", upMs, downMs);
 
     upSamples = info.sample_rate / 1000 * upMs;
@@ -150,7 +150,7 @@ class SoundGenerator {
     if (downSamples > 0) {
       rampDownDec = 1.0f / downSamples;
     }
-    LOGW("setRampTimes() playSamples: %u  playMs: %u  upSamples: %u  downSamples: %u", playSamples, playMs, upSamples, downSamples);
+    LOGD("setRampTimes() playSamples: %u  playMs: %u  upSamples: %u  downSamples: %u", playSamples, playMs, upSamples, downSamples);
   }
 
 
