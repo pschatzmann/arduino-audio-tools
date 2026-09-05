@@ -1498,7 +1498,6 @@ protected:
         node->start_cb(node->generator, node->cb_data);
       }
       node->generator->restart();
-      node->generator->begin();
       node->restarted = true;      // persistent dynamic objects, this will persist.
     }
     return node->generator;
