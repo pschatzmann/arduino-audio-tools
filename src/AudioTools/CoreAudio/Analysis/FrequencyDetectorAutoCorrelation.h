@@ -22,6 +22,12 @@ namespace audio_tools {
 class FrequencyDetectorAutoCorrelation : public AudioStream {
  public:
   /**
+   * @brief Default constructor. The buffer size is auto-derived from the
+   * AudioInfo passed to begin() unless setBufferSize() is called first.
+   */
+  FrequencyDetectorAutoCorrelation() = default;
+
+  /**
    * @brief Construct with buffer size.
    * @param bufferSize Number of samples to buffer for analysis.
    */
@@ -61,12 +67,25 @@ class FrequencyDetectorAutoCorrelation : public AudioStream {
   }
 
   /**
+   * @brief Sets the analysis buffer size explicitly (in samples). If not
+   * called, begin() derives a size that covers the lowest detectable
+   * frequency (50Hz) for the configured sample rate.
+   */
+  void setBufferSize(int bufferSize) { buffer_size = bufferSize; }
+
+  /**
    * @brief Initialize internal buffers based on audio info.
    * @return true if initialization succeeded.
    */
   bool begin() {
+    if (buffer_size <= 0) {
+      // must be large enough to contain at least one period of the lowest
+      // frequency we try to detect (50Hz, see detectFrequencyForChannel)
+      buffer_size = info.sample_rate / 50 + 16;
+    }
     buffer.resize(buffer_size * info.channels * info.bits_per_sample / 8);
     freq.resize(info.channels);
+    conf.resize(info.channels);
     return AudioStream::begin();
   }
 
@@ -166,6 +185,34 @@ class FrequencyDetectorAutoCorrelation : public AudioStream {
   }
 
   /**
+   * @brief Returns a tonality/periodicity confidence for the given channel,
+   * in the range 0.0 (no periodic structure - noise-like) to 1.0 (strongly
+   * periodic - tone/voiced/music-like). This is the normalized autocorrelation
+   * peak (peak correlation at the detected lag, divided by the signal energy
+   * at lag 0) and can be used to distinguish genuine tonal audio from
+   * broadband noise that merely happens to be loud.
+   * @param channel Channel index.
+   * @return Confidence in [0.0, 1.0], or 0 for an invalid channel.
+   */
+  float confidence(int channel) {
+    if (channel >= info.channels) {
+      LOGE("Invalid channel: %d", channel);
+      return 0;
+    }
+    return conf[channel];
+  }
+
+  /**
+   * @brief Convenience check: is the given channel currently tonal (periodic)
+   * rather than noise-like, based on confidence().
+   * @param channel Channel index.
+   * @param threshold Minimum confidence to be considered tonal (default 0.3).
+   */
+  bool isTonal(int channel, float threshold = 0.3f) {
+    return confidence(channel) >= threshold;
+  }
+
+  /**
    * @brief Returns a default AudioInfo configuration.
    */
   AudioInfo defaultConfig() {
@@ -183,6 +230,7 @@ class FrequencyDetectorAutoCorrelation : public AudioStream {
 
  protected:
   Vector<float> freq;                ///< Stores detected frequency for each channel
+  Vector<float> conf;                ///< Stores tonality confidence (0-1) for each channel
   Print* p_out = nullptr;            ///< Output stream pointer
   Stream* p_in = nullptr;            ///< Input stream pointer
   void (*freq_callback)(int channel, float freq); ///< Frequency callback function
@@ -198,8 +246,11 @@ class FrequencyDetectorAutoCorrelation : public AudioStream {
   template <class T>
   void detect(T* samples, size_t len) {
     freq.resize(info.channels);
+    conf.resize(info.channels);
     for (int ch = 0; ch < info.channels; ch++) {
-      freq[ch] = detectFrequencyForChannel(ch, samples, len);
+      float channel_confidence = 0.0f;
+      freq[ch] = detectFrequencyForChannel(ch, samples, len, channel_confidence);
+      conf[ch] = channel_confidence;
       if (freq_callback) freq_callback(ch, freq[ch]);
     }
   }
@@ -210,11 +261,17 @@ class FrequencyDetectorAutoCorrelation : public AudioStream {
    * @param ch Channel index.
    * @param samples Pointer to audio samples.
    * @param len Number of samples.
+   * @param confidenceOut Set to the normalized autocorrelation peak (0.0-1.0):
+   * how periodic/tonal the block is, independent of its loudness. Values near
+   * 0 indicate noise-like (non-periodic) content; values near 1 indicate a
+   * strong tone/voiced/harmonic signal.
    * @return Detected frequency in Hz.
    */
   template <class T>
-  float detectFrequencyForChannel(int ch, T* samples, size_t len) {
+  float detectFrequencyForChannel(int ch, T* samples, size_t len,
+                                   float& confidenceOut) {
     LOGD("detectFrequencyForChannel: %d / len: %u", ch, (unsigned int)len);
+    confidenceOut = 0.0f;
     // Prepare variables for autocorrelation
     int sample_rate = info.sample_rate;
     int channels = info.channels;
@@ -227,12 +284,20 @@ class FrequencyDetectorAutoCorrelation : public AudioStream {
 
     LOGD("lag min/max: %u / %u", (unsigned)min_lag, (unsigned)max_lag);
 
-    float max_corr = 0.0f;
+    // Energy at lag 0 - used to normalize the correlation peak into a
+    // loudness-independent confidence score
+    double energy = 0.0;
+    for (int i = 0; i < buffer_size; ++i) {
+      double s = (double)samples[i * channels];
+      energy += s * s;
+    }
+
+    double max_corr = 0.0;
     size_t best_lag = 0;
     for (size_t lag = min_lag; lag < max_lag; ++lag) {
-      float sum = 0.0f;
+      double sum = 0.0;
       for (size_t i = 0; i < buffer_size - lag; ++i) {
-        sum += samples[i * channels] * samples[(i + lag) * channels];
+        sum += (double)samples[i * channels] * (double)samples[(i + lag) * channels];
       }
       if (sum > max_corr) {
         max_corr = sum;
@@ -241,6 +306,12 @@ class FrequencyDetectorAutoCorrelation : public AudioStream {
     }
 
     LOGD("best_lag: %u / max_corr: %f", (unsigned)best_lag, max_corr);
+
+    if (energy > 0.0) {
+      confidenceOut = (float)(max_corr / energy);
+      if (confidenceOut > 1.0f) confidenceOut = 1.0f;
+      if (confidenceOut < 0.0f) confidenceOut = 0.0f;
+    }
 
     if (best_lag == 0) return 0.0f;
     return (float)sample_rate / best_lag;
