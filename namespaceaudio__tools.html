@@ -1850,10 +1850,10 @@ size_t size)</a> and <a class="el" href="classaudio__tools_1_1_base_stream.html#
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits (value = raw / 16384.0). Covers the range [-2.0, 1.99993896484375] with a resolution of ~6.1e-5, using only integer add/sub/mul/div &ndash; no hardware floating-point instructions.  <a href="classaudio__tools_1_1q1__14__t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html">QualityAnalysisStream</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Analyzes audio stream quality by detecting clicks/pops, gaps/dropouts, and clipping/corruption.  <a href="classaudio__tools_1_1_quality_analysis_stream.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Analyzes audio stream quality by detecting clicks/pops, gaps/dropouts, clipping/corruption, and whether the signal is genuine audio or just noise.  <a href="classaudio__tools_1_1_quality_analysis_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_quality_stats.html">QualityStats</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Statistics collected by <a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html" title="Analyzes audio stream quality by detecting clicks/pops, gaps/dropouts, and clipping/corruption.">QualityAnalysisStream</a>.  <a href="structaudio__tools_1_1_quality_stats.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Statistics collected by <a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html" title="Analyzes audio stream quality by detecting clicks/pops, gaps/dropouts, clipping/corruption,...">QualityAnalysisStream</a>.  <a href="structaudio__tools_1_1_quality_stats.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_queue.html">Queue</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">FIFO <a class="el" href="classaudio__tools_1_1_queue.html" title="FIFO Queue which is based on a List.">Queue</a> which is based on a <a class="el" href="classaudio__tools_1_1_list.html" title="Double linked list.">List</a>.  <a href="classaudio__tools_1_1_queue.html#details">More...</a><br /></td></tr>
@@ -3038,9 +3038,14 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:ga1857f5fa1f018989102d5a5e3c5cf182"><td class="mdescLeft">&#160;</td><td class="mdescRight">current status of the parsing  <a href="group__metadata-id3.html#ga1857f5fa1f018989102d5a5e3c5cf182">More...</a><br /></td></tr>
 <tr class="separator:ga1857f5fa1f018989102d5a5e3c5cf182"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac1859b3dc5b9119471bd06e89b30d7ad" id="r_gac1859b3dc5b9119471bd06e89b30d7ad"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__dsp.html#gac1859b3dc5b9119471bd06e89b30d7ad">QualityIssue</a> : uint8_t { <a class="el" href="group__dsp.html#ggac1859b3dc5b9119471bd06e89b30d7ada316853cc3718335f11c048e33b9be98a">Click</a>
+<tr class="memitem:gac1859b3dc5b9119471bd06e89b30d7ad" id="r_gac1859b3dc5b9119471bd06e89b30d7ad"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__dsp.html#gac1859b3dc5b9119471bd06e89b30d7ad">QualityIssue</a> : uint8_t { <br />
+&#160;&#160;<a class="el" href="group__dsp.html#ggac1859b3dc5b9119471bd06e89b30d7ada316853cc3718335f11c048e33b9be98a">Click</a>
 , <a class="el" href="group__dsp.html#ggac1859b3dc5b9119471bd06e89b30d7ada09bb9294aa4a843883a3f401aeaf8b5b">Dropout</a>
 , <a class="el" href="group__dsp.html#ggac1859b3dc5b9119471bd06e89b30d7ada182cdffb4101f794ff7cd219bafd0f7b">Clipping</a>
+, <a class="el" href="group__dsp.html#ggac1859b3dc5b9119471bd06e89b30d7ada0045eb142d1f9713a3438aa05f493536">SignalLost</a>
+, <br />
+&#160;&#160;<a class="el" href="group__dsp.html#ggac1859b3dc5b9119471bd06e89b30d7adad12828f362a5df39e3ca38ab1fbae564">SignalDetected</a>
+<br />
  }</td></tr>
 <tr class="memdesc:gac1859b3dc5b9119471bd06e89b30d7ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Quality issues detected by QualityAnalysisStream.  <a href="group__dsp.html#gac1859b3dc5b9119471bd06e89b30d7ad">More...</a><br /></td></tr>
 <tr class="separator:gac1859b3dc5b9119471bd06e89b30d7ad"><td class="memSeparator" colspan="2">&#160;</td></tr>

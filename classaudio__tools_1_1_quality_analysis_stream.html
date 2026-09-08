@@ -82,7 +82,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Analyzes audio stream quality by detecting clicks/pops, gaps/dropouts, and clipping/corruption.  
+<p>Analyzes audio stream quality by detecting clicks/pops, gaps/dropouts, clipping/corruption, and whether the signal is genuine audio or just noise.  
  <a href="classaudio__tools_1_1_quality_analysis_stream.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_quality_analysis_stream_8h_source.html">QualityAnalysisStream.h</a>&gt;</code></p>
@@ -132,6 +132,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac7ec7476159db4e2bb0372e30010fc9e" id="r_ac7ec7476159db4e2bb0372e30010fc9e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#ac7ec7476159db4e2bb0372e30010fc9e">clearStats</a> ()</td></tr>
 <tr class="memdesc:ac7ec7476159db4e2bb0372e30010fc9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset all statistics and detection state.  <br /></td></tr>
 <tr class="separator:ac7ec7476159db4e2bb0372e30010fc9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a189caf68b06d700183c412769373099d" id="r_a189caf68b06d700183c412769373099d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a189caf68b06d700183c412769373099d">clearTonalitySource</a> ()</td></tr>
+<tr class="separator:a189caf68b06d700183c412769373099d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc34417a19a7b70626d19c41072d72a5" id="r_adc34417a19a7b70626d19c41072d72a5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#adc34417a19a7b70626d19c41072d72a5">end</a> ()</td></tr>
 <tr class="separator:adc34417a19a7b70626d19c41072d72a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04f2540d940cc37b5c2538ed8e5b54be" id="r_a04f2540d940cc37b5c2538ed8e5b54be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">flush</a> () override</td></tr>
@@ -139,6 +141,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a475bc9908ea8a1d67e5cc1c1f67a71b2" id="r_a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a475bc9908ea8a1d67e5cc1c1f67a71b2">isNotifyActive</a> ()</td></tr>
 <tr class="memdesc:a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> update is active.  <br /></td></tr>
 <tr class="separator:a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa514da53bab45c5f9acacd6291e93f66" id="r_aa514da53bab45c5f9acacd6291e93f66"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#aa514da53bab45c5f9acacd6291e93f66">isSignalPresent</a> () const</td></tr>
+<tr class="separator:aa514da53bab45c5f9acacd6291e93f66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d52c0ed98e047d782054fa126b281e5" id="r_a0d52c0ed98e047d782054fa126b281e5"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_stream.html#a0d52c0ed98e047d782054fa126b281e5">operator bool</a> ()</td></tr>
 <tr class="separator:a0d52c0ed98e047d782054fa126b281e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c5c6275ddee80eb02839356b6185c0b" id="r_a4c5c6275ddee80eb02839356b6185c0b"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a4c5c6275ddee80eb02839356b6185c0b">readBytes</a> (uint8_t *data, size_t len) override</td></tr>
@@ -167,6 +171,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a915db02bafb8769449f920cf8aeb8414" id="r_a915db02bafb8769449f920cf8aeb8414"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a915db02bafb8769449f920cf8aeb8414">setDropoutMinSamples</a> (int samples)</td></tr>
 <tr class="memdesc:a915db02bafb8769449f920cf8aeb8414"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum consecutive near-silent samples to count as a dropout.  <br /></td></tr>
 <tr class="separator:a915db02bafb8769449f920cf8aeb8414"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7492172fd5e549e6c96bc66811fe65e7" id="r_a7492172fd5e549e6c96bc66811fe65e7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a7492172fd5e549e6c96bc66811fe65e7">setNoiseFloorBlockSize</a> (int samples)</td></tr>
+<tr class="memdesc:a7492172fd5e549e6c96bc66811fe65e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of samples per RMS/noise-floor block (default 256)  <br /></td></tr>
+<tr class="separator:a7492172fd5e549e6c96bc66811fe65e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0c97e28c6c0a2db898e419a70152a87" id="r_ab0c97e28c6c0a2db898e419a70152a87"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#ab0c97e28c6c0a2db898e419a70152a87">setNoiseFloorTracking</a> (float attack, float release)</td></tr>
+<tr class="separator:ab0c97e28c6c0a2db898e419a70152a87"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a909f118906f9cf7024baae224dcd90a7" id="r_a909f118906f9cf7024baae224dcd90a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a909f118906f9cf7024baae224dcd90a7">setNotifyActive</a> (bool flag)</td></tr>
 <tr class="memdesc:a909f118906f9cf7024baae224dcd90a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivate/Reactivate automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> updates: (default is active)  <br /></td></tr>
 <tr class="separator:a909f118906f9cf7024baae224dcd90a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -178,6 +187,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a05ff4cf361d54457ed8586e8c14aa922"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad48a5147a11f7974f2ac86e6d0e64535" id="r_ad48a5147a11f7974f2ac86e6d0e64535"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#ad48a5147a11f7974f2ac86e6d0e64535">setReporting</a> (int period_ms, <a class="el" href="class_print.html">Print</a> &amp;output)</td></tr>
 <tr class="separator:ad48a5147a11f7974f2ac86e6d0e64535"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbce3a9591f13e1daa2f48070b387b11" id="r_adbce3a9591f13e1daa2f48070b387b11"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#adbce3a9591f13e1daa2f48070b387b11">setSignalMargin</a> (float db)</td></tr>
+<tr class="separator:adbce3a9591f13e1daa2f48070b387b11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4aa0f96d6b6de3823ca38b4045d7f8b5" id="r_a4aa0f96d6b6de3823ca38b4045d7f8b5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a4aa0f96d6b6de3823ca38b4045d7f8b5">setSignalPresenceMinBlocks</a> (int blocks)</td></tr>
+<tr class="separator:a4aa0f96d6b6de3823ca38b4045d7f8b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a466dbcaac434314c92981d2d086fda34" id="r_a466dbcaac434314c92981d2d086fda34"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a466dbcaac434314c92981d2d086fda34">setSilenceThreshold</a> (float ratio)</td></tr>
 <tr class="memdesc:a466dbcaac434314c92981d2d086fda34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Samples below this ratio of max value are considered silent.  <br /></td></tr>
 <tr class="separator:a466dbcaac434314c92981d2d086fda34"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -187,11 +200,21 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:adb3b6de56b862417b2d77962d06db58c" id="r_adb3b6de56b862417b2d77962d06db58c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#adb3b6de56b862417b2d77962d06db58c">setStream</a> (<a class="el" href="class_stream.html">Stream</a> &amp;io) override</td></tr>
 <tr class="memdesc:adb3b6de56b862417b2d77962d06db58c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines/Changes the input &amp; output.  <br /></td></tr>
 <tr class="separator:adb3b6de56b862417b2d77962d06db58c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62dfcc210d2eaa9b7c968c91d258d752" id="r_a62dfcc210d2eaa9b7c968c91d258d752"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a62dfcc210d2eaa9b7c968c91d258d752">setTonalityBufferSize</a> (int samples)</td></tr>
+<tr class="separator:a62dfcc210d2eaa9b7c968c91d258d752"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4778d5090abf80bd054da79f15d5d09d" id="r_a4778d5090abf80bd054da79f15d5d09d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a4778d5090abf80bd054da79f15d5d09d">setTonalityEnabled</a> (bool enabled)</td></tr>
+<tr class="separator:a4778d5090abf80bd054da79f15d5d09d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d40a8c75766509cae2a255f54513a90" id="r_a9d40a8c75766509cae2a255f54513a90"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a9d40a8c75766509cae2a255f54513a90">setTonalityMinConfidence</a> (float min_confidence)</td></tr>
+<tr class="separator:a9d40a8c75766509cae2a255f54513a90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c51f1bc88d613ca680aedbee16be7e1" id="r_a9c51f1bc88d613ca680aedbee16be7e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a9c51f1bc88d613ca680aedbee16be7e1">setTonalitySource</a> (<a class="el" href="classaudio__tools_1_1_frequency_detector_auto_correlation.html">FrequencyDetectorAutoCorrelation</a> &amp;detector, float min_confidence=0.3f, int channel=0)</td></tr>
+<tr class="separator:a9c51f1bc88d613ca680aedbee16be7e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adad22dd23fc48a3b338eafe707439deb" id="r_adad22dd23fc48a3b338eafe707439deb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#adad22dd23fc48a3b338eafe707439deb">setWriteBufferSize</a> (int size)</td></tr>
 <tr class="separator:adad22dd23fc48a3b338eafe707439deb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d06a6323f5779402778cc6b9ea1ade1" id="r_a1d06a6323f5779402778cc6b9ea1ade1"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structaudio__tools_1_1_quality_stats.html">QualityStats</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a1d06a6323f5779402778cc6b9ea1ade1">stats</a> () const</td></tr>
 <tr class="memdesc:a1d06a6323f5779402778cc6b9ea1ade1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access the accumulated quality statistics.  <br /></td></tr>
 <tr class="separator:a1d06a6323f5779402778cc6b9ea1ade1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e70fe98652c33bd73ee1087660e213e" id="r_a2e70fe98652c33bd73ee1087660e213e"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a2e70fe98652c33bd73ee1087660e213e">tonalityConfidence</a> () const</td></tr>
+<tr class="separator:a2e70fe98652c33bd73ee1087660e213e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adffba128cba62b029746648f6946945c" id="r_adffba128cba62b029746648f6946945c"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#adffba128cba62b029746648f6946945c">write</a> (uint8_t ch) override</td></tr>
@@ -207,12 +230,16 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a3508caf4d5ecc771324299aee3c30009" id="r_a3508caf4d5ecc771324299aee3c30009"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a3508caf4d5ecc771324299aee3c30009"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a3508caf4d5ecc771324299aee3c30009">analyzeT</a> (const uint8_t *buffer, size_t size)</td></tr>
 <tr class="separator:a3508caf4d5ecc771324299aee3c30009"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e784e40a93243395ab4ecec853e4480" id="r_a9e784e40a93243395ab4ecec853e4480"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a9e784e40a93243395ab4ecec853e4480">initTonality</a> ()</td></tr>
+<tr class="separator:a9e784e40a93243395ab4ecec853e4480"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc00b141650b11fe19d4c7055d96a075" id="r_afc00b141650b11fe19d4c7055d96a075"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_stream.html#afc00b141650b11fe19d4c7055d96a075">not_supported</a> (int out, const char *msg=&quot;&quot;)</td></tr>
 <tr class="separator:afc00b141650b11fe19d4c7055d96a075"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a9a665a387a8c4fbf7fed14bbbfc093" id="r_a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a6a9a665a387a8c4fbf7fed14bbbfc093">notifyAudioChange</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> <a class="el" href="classaudio__tools_1_1_audio_stream.html#a47385aa19435f5fca9d3083a748258c5">info</a>)</td></tr>
 <tr class="separator:a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca692aa7a06b51bd7c1168e14251bef3" id="r_aca692aa7a06b51bd7c1168e14251bef3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#aca692aa7a06b51bd7c1168e14251bef3">printReport</a> ()</td></tr>
 <tr class="separator:aca692aa7a06b51bd7c1168e14251bef3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafac4528c30e0ddc5c7905067cebc60a" id="r_aafac4528c30e0ddc5c7905067cebc60a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#aafac4528c30e0ddc5c7905067cebc60a">processRmsBlock</a> ()</td></tr>
+<tr class="separator:aafac4528c30e0ddc5c7905067cebc60a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5caf99a24686511722c4c9f94c4ec52e" id="r_a5caf99a24686511722c4c9f94c4ec52e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#a5caf99a24686511722c4c9f94c4ec52e">refillReadBuffer</a> ()</td></tr>
 <tr class="memdesc:a5caf99a24686511722c4c9f94c4ec52e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Refill small read buffer (e.g. 8 bytes) to avoid single byte reads when calling read()  <br /></td></tr>
 <tr class="separator:a5caf99a24686511722c4c9f94c4ec52e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -225,6 +252,8 @@ Protected Member Functions</h2></td></tr>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:aa66a35e5edf58ce00047afcd1d4f455e" id="r_aa66a35e5edf58ce00047afcd1d4f455e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_print.html#aa66a35e5edf58ce00047afcd1d4f455e">_timeout</a> = 10</td></tr>
 <tr class="separator:aa66a35e5edf58ce00047afcd1d4f455e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bc433a380cb35ce54e6eb7b727a4a3e" id="r_a0bc433a380cb35ce54e6eb7b727a4a3e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_frequency_detector_auto_correlation.html">FrequencyDetectorAutoCorrelation</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a0bc433a380cb35ce54e6eb7b727a4a3e">auto_tonality</a></td></tr>
+<tr class="separator:a0bc433a380cb35ce54e6eb7b727a4a3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1975ad7242da4e6dbb1c96334be1efb7" id="r_a1975ad7242da4e6dbb1c96334be1efb7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#abbd3799405192c493cf78673ebc2413b">QualityCallback</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a1975ad7242da4e6dbb1c96334be1efb7">callback</a> = nullptr</td></tr>
 <tr class="separator:a1975ad7242da4e6dbb1c96334be1efb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5bfca12c60f17fb591c1ade3a89da8e" id="r_ae5bfca12c60f17fb591c1ade3a89da8e"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#ae5bfca12c60f17fb591c1ade3a89da8e">click_threshold</a> = 0.5f</td></tr>
@@ -235,6 +264,10 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a18019b96dc61cb8f0b9414bdc61ff417"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03ab073b01c0eaa445a73e9216956e8c" id="r_a03ab073b01c0eaa445a73e9216956e8c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a03ab073b01c0eaa445a73e9216956e8c">consecutive_clipped</a> = 0</td></tr>
 <tr class="separator:a03ab073b01c0eaa445a73e9216956e8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa40e6a9e532921df0bb18fe0d8793149" id="r_aa40e6a9e532921df0bb18fe0d8793149"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#aa40e6a9e532921df0bb18fe0d8793149">consecutive_noise_blocks</a> = 0</td></tr>
+<tr class="separator:aa40e6a9e532921df0bb18fe0d8793149"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb8f12b8f1e2d106cec650785ea6dfb5" id="r_adb8f12b8f1e2d106cec650785ea6dfb5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#adb8f12b8f1e2d106cec650785ea6dfb5">consecutive_signal_blocks</a> = 0</td></tr>
+<tr class="separator:adb8f12b8f1e2d106cec650785ea6dfb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41281cc17e26cd9b931763e0744e0bca" id="r_a41281cc17e26cd9b931763e0744e0bca"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a41281cc17e26cd9b931763e0744e0bca">consecutive_silent</a> = 0</td></tr>
 <tr class="separator:a41281cc17e26cd9b931763e0744e0bca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a735dfa9fc225d50f1e21cd6aadd814" id="r_a4a735dfa9fc225d50f1e21cd6aadd814"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a4a735dfa9fc225d50f1e21cd6aadd814">dropout_min_samples</a> = 10</td></tr>
@@ -253,18 +286,38 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a03d7a3822e45303946305d976598c8c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab57d4076e7e499e5da8c1ae500170a02" id="r_ab57d4076e7e499e5da8c1ae500170a02"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#ab57d4076e7e499e5da8c1ae500170a02">max_value</a> = 32767.0f</td></tr>
 <tr class="separator:ab57d4076e7e499e5da8c1ae500170a02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac16c768a5c27c19789a96266815db19b" id="r_ac16c768a5c27c19789a96266815db19b"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#ac16c768a5c27c19789a96266815db19b">noise_floor_attack</a> = 0.3f</td></tr>
+<tr class="separator:ac16c768a5c27c19789a96266815db19b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a453c30664f1e9cd74b3f8287e17348f0" id="r_a453c30664f1e9cd74b3f8287e17348f0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a453c30664f1e9cd74b3f8287e17348f0">noise_floor_initialized</a> = false</td></tr>
+<tr class="separator:a453c30664f1e9cd74b3f8287e17348f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f741c838859848ab5c5ec0e301567da" id="r_a7f741c838859848ab5c5ec0e301567da"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a7f741c838859848ab5c5ec0e301567da">noise_floor_release</a> = 0.01f</td></tr>
+<tr class="separator:a7f741c838859848ab5c5ec0e301567da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad35c4e2ef458c36e8d36676958cc9cd3" id="r_ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#ad35c4e2ef458c36e8d36676958cc9cd3">notify_vector</a></td></tr>
 <tr class="separator:ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade69095b517f9fb3fd72560752f62391" id="r_ade69095b517f9fb3fd72560752f62391"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#ade69095b517f9fb3fd72560752f62391">owns_tonality</a> = true</td></tr>
+<tr class="separator:ade69095b517f9fb3fd72560752f62391"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb1e9a9c69281667d85bc8dfdc46dd95" id="r_afb1e9a9c69281667d85bc8dfdc46dd95"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#afb1e9a9c69281667d85bc8dfdc46dd95">p_io</a> = nullptr</td></tr>
 <tr class="separator:afb1e9a9c69281667d85bc8dfdc46dd95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa42c30e02e51ec7cc38ea4ab215e0db4" id="r_aa42c30e02e51ec7cc38ea4ab215e0db4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#aa42c30e02e51ec7cc38ea4ab215e0db4">p_out</a> = nullptr</td></tr>
 <tr class="separator:aa42c30e02e51ec7cc38ea4ab215e0db4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7515da142325486512e05bafd7c488ca" id="r_a7515da142325486512e05bafd7c488ca"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a7515da142325486512e05bafd7c488ca">p_report</a> = nullptr</td></tr>
 <tr class="separator:a7515da142325486512e05bafd7c488ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cb33514ba0007560c08fa5c7040483c" id="r_a7cb33514ba0007560c08fa5c7040483c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_frequency_detector_auto_correlation.html">FrequencyDetectorAutoCorrelation</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a7cb33514ba0007560c08fa5c7040483c">p_tonality</a> = nullptr</td></tr>
+<tr class="separator:a7cb33514ba0007560c08fa5c7040483c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84c49bf65851f26bc0c72809cda3a707" id="r_a84c49bf65851f26bc0c72809cda3a707"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a84c49bf65851f26bc0c72809cda3a707">prev_sample</a></td></tr>
 <tr class="separator:a84c49bf65851f26bc0c72809cda3a707"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a024a14afbf3aa0886130632d5bcc89b9" id="r_a024a14afbf3aa0886130632d5bcc89b9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a024a14afbf3aa0886130632d5bcc89b9">report_period_ms</a> = 0</td></tr>
 <tr class="separator:a024a14afbf3aa0886130632d5bcc89b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab45f0c83abe52c7af2a1d10f37f2b3d1" id="r_ab45f0c83abe52c7af2a1d10f37f2b3d1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#ab45f0c83abe52c7af2a1d10f37f2b3d1">rms_block_count</a> = 0</td></tr>
+<tr class="separator:ab45f0c83abe52c7af2a1d10f37f2b3d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab08386f0ac87da579e4ceafc1276a04d" id="r_ab08386f0ac87da579e4ceafc1276a04d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#ab08386f0ac87da579e4ceafc1276a04d">rms_block_size</a> = 256</td></tr>
+<tr class="separator:ab08386f0ac87da579e4ceafc1276a04d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54ed17f2e4dff34a889feabf377a1776" id="r_a54ed17f2e4dff34a889feabf377a1776"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a54ed17f2e4dff34a889feabf377a1776">rms_sum_sq</a> = 0</td></tr>
+<tr class="separator:a54ed17f2e4dff34a889feabf377a1776"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75261450cdab68ee603a1e3ce2ded126" id="r_a75261450cdab68ee603a1e3ce2ded126"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a75261450cdab68ee603a1e3ce2ded126">signal_margin_db</a> = 6.0f</td></tr>
+<tr class="separator:a75261450cdab68ee603a1e3ce2ded126"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63d734a80b026c9a82a7c3e58a145889" id="r_a63d734a80b026c9a82a7c3e58a145889"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a63d734a80b026c9a82a7c3e58a145889">signal_present_min_blocks</a> = 3</td></tr>
+<tr class="separator:a63d734a80b026c9a82a7c3e58a145889"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5dc983743b67b6ca0799afd136b64cc3" id="r_a5dc983743b67b6ca0799afd136b64cc3"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a5dc983743b67b6ca0799afd136b64cc3">silence_threshold</a> = 0.01f</td></tr>
 <tr class="separator:a5dc983743b67b6ca0799afd136b64cc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a009db7962aa7a3bb1b87a300c701fff4" id="r_a009db7962aa7a3bb1b87a300c701fff4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_quality_stats.html">QualityStats</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a009db7962aa7a3bb1b87a300c701fff4">stats_data</a></td></tr>
@@ -273,16 +326,25 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:adf64bd29ec689f2d7574efbb63f440bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add363d597c7d8108a5350406105d158d" id="r_add363d597c7d8108a5350406105d158d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#add363d597c7d8108a5350406105d158d">tmp_out</a> {0}</td></tr>
 <tr class="separator:add363d597c7d8108a5350406105d158d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7685a65667e41f1cba7ac70c55d47ea7" id="r_a7685a65667e41f1cba7ac70c55d47ea7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a7685a65667e41f1cba7ac70c55d47ea7">tonality_channel</a> = 0</td></tr>
+<tr class="separator:a7685a65667e41f1cba7ac70c55d47ea7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98848ffcb5a8ea2b02bb443bab99d5ad" id="r_a98848ffcb5a8ea2b02bb443bab99d5ad"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a98848ffcb5a8ea2b02bb443bab99d5ad">tonality_enabled</a> = true</td></tr>
+<tr class="separator:a98848ffcb5a8ea2b02bb443bab99d5ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8aafb91ebea5de42fc8fd6c46704a75" id="r_aa8aafb91ebea5de42fc8fd6c46704a75"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#aa8aafb91ebea5de42fc8fd6c46704a75">tonality_min_confidence</a> = 0.3f</td></tr>
+<tr class="separator:aa8aafb91ebea5de42fc8fd6c46704a75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f948c0ac99e632d3a033b85ae54d170" id="r_a7f948c0ac99e632d3a033b85ae54d170"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#a7f948c0ac99e632d3a033b85ae54d170">write_buffer_size</a> = <a class="el" href="_audio_tools_config_8h.html#a2ef1bdd86c16c6aeef9eec83fd19cbcf">MAX_SINGLE_CHARS</a></td></tr>
 <tr class="separator:a7f948c0ac99e632d3a033b85ae54d170"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Analyzes audio stream quality by detecting clicks/pops, gaps/dropouts, and clipping/corruption. </p>
+<div class="textblock"><p>Analyzes audio stream quality by detecting clicks/pops, gaps/dropouts, clipping/corruption, and whether the signal is genuine audio or just noise. </p>
 <p>Insert this stream into an audio pipeline to monitor signal quality in real time. Data passes through unmodified.</p>
 <ul>
 <li><b>Clicks/Pops</b>: detected when the sample-to-sample delta exceeds a configurable threshold (as a ratio of the maximum sample value).</li>
 <li><b>Gaps/Dropouts</b>: detected when consecutive near-zero samples exceed a configurable minimum length.</li>
 <li><b>Clipping</b>: detected when consecutive samples are at (or near) the maximum representable value.</li>
+<li><p class="startli"><b>Signal vs. noise</b>: the RMS level is computed over rolling blocks of samples and used to track a slowly-adapting noise-floor estimate (it follows the level down quickly but only creeps up slowly, so it isn't fooled by short loud transients). A block is considered a valid signal once its RMS level stays above the noise floor by a configurable margin (<a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#adbce3a9591f13e1daa2f48070b387b11">setSignalMargin()</a>) for a minimum number of blocks (<a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a4aa0f96d6b6de3823ca38b4045d7f8b5">setSignalPresenceMinBlocks()</a>). The resulting SNR estimate, noise floor, RMS level and signal-present flag are all available via <a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a1d06a6323f5779402778cc6b9ea1ade1" title="Access the accumulated quality statistics.">stats()</a>.</p>
+<p class="startli">Level alone cannot tell audio content apart from loud broadband noise (wind, static, hiss) - both simply exceed the noise floor. To also require the signal to be periodic/tonal (voice, music, tones) rather than random, this class owns and feeds an internal <a class="el" href="classaudio__tools_1_1_frequency_detector_auto_correlation.html" title="Detects frequency using autocorrelation on audio samples.">FrequencyDetectorAutoCorrelation</a> by default (enabled out of the box); its normalized autocorrelation confidence is combined with the level gate before signal_present is raised. Autocorrelation is real CPU cost (roughly O(sample_rate^2) per second of audio) - on constrained boards/high sample rates, tune it down with <a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a62dfcc210d2eaa9b7c968c91d258d752">setTonalityBufferSize()</a>, or turn it off entirely with setTonalityEnabled(false) to fall back to the level-only gate. Call <a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a9c51f1bc88d613ca680aedbee16be7e1">setTonalitySource()</a> instead if you want to share an externally-owned/pre-fed detector (e.g. one you already run elsewhere in the pipeline) rather than the built-in one.</p>
+</li>
 </ul>
 <p>Results are available via <a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a1d06a6323f5779402778cc6b9ea1ade1" title="Access the accumulated quality statistics.">stats()</a> or through a callback.</p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
@@ -692,6 +754,32 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="a189caf68b06d700183c412769373099d" name="a189caf68b06d700183c412769373099d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a189caf68b06d700183c412769373099d">&#9670;&#160;</a></span>clearTonalitySource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void clearTonalitySource </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Reverts to the built-in tonality detector (the default), undoing a prior <a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a9c51f1bc88d613ca680aedbee16be7e1">setTonalitySource()</a>. </p>
+
+</div>
+</div>
 <a id="adc34417a19a7b70626d19c41072d72a5" name="adc34417a19a7b70626d19c41072d72a5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adc34417a19a7b70626d19c41072d72a5">&#9670;&#160;</a></span>end()</h2>
 
@@ -746,6 +834,32 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="a9e784e40a93243395ab4ecec853e4480" name="a9e784e40a93243395ab4ecec853e4480"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e784e40a93243395ab4ecec853e4480">&#9670;&#160;</a></span>initTonality()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void initTonality </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>(Re-)initializes the built-in tonality detector to match the current <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>, unless an external one was set via <a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a9c51f1bc88d613ca680aedbee16be7e1">setTonalitySource()</a> or the tonality gate was disabled via setTonalityEnabled(false). </p>
+
+</div>
+</div>
 <a id="a475bc9908ea8a1d67e5cc1c1f67a71b2" name="a475bc9908ea8a1d67e5cc1c1f67a71b2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a475bc9908ea8a1d67e5cc1c1f67a71b2">&#9670;&#160;</a></span>isNotifyActive()</h2>
 
@@ -770,6 +884,32 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 
 <p>Checks if the automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> update is active. </p>
+
+</div>
+</div>
+<a id="aa514da53bab45c5f9acacd6291e93f66" name="aa514da53bab45c5f9acacd6291e93f66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa514da53bab45c5f9acacd6291e93f66">&#9670;&#160;</a></span>isSignalPresent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isSignalPresent </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>True while the signal is currently considered present (see <a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#adbce3a9591f13e1daa2f48070b387b11">setSignalMargin()</a>) </p>
 
 </div>
 </div>
@@ -884,6 +1024,32 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="aafac4528c30e0ddc5c7905067cebc60a" name="aafac4528c30e0ddc5c7905067cebc60a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafac4528c30e0ddc5c7905067cebc60a">&#9670;&#160;</a></span>processRmsBlock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void processRmsBlock </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Called once per rms_block_size samples: updates rms_level, noise_floor, snr_db and the signal_present flag/callbacks. </p>
 
 </div>
 </div>
@@ -1240,6 +1406,71 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="a7492172fd5e549e6c96bc66811fe65e7" name="a7492172fd5e549e6c96bc66811fe65e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7492172fd5e549e6c96bc66811fe65e7">&#9670;&#160;</a></span>setNoiseFloorBlockSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setNoiseFloorBlockSize </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>samples</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of samples per RMS/noise-floor block (default 256) </p>
+
+</div>
+</div>
+<a id="ab0c97e28c6c0a2db898e419a70152a87" name="ab0c97e28c6c0a2db898e419a70152a87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0c97e28c6c0a2db898e419a70152a87">&#9670;&#160;</a></span>setNoiseFloorTracking()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setNoiseFloorTracking </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>attack</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>release</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>How quickly the noise floor tracks a falling level (0.0-1.0, default 0.3). Higher = faster. How slowly it tracks a rising level (0.0-1.0, default 0.01). Lower = slower, so brief loud transients don't raise the estimated floor. </p>
+
+</div>
+</div>
 <a id="a909f118906f9cf7024baae224dcd90a7" name="a909f118906f9cf7024baae224dcd90a7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a909f118906f9cf7024baae224dcd90a7">&#9670;&#160;</a></span>setNotifyActive()</h2>
 
@@ -1371,6 +1602,60 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="adbce3a9591f13e1daa2f48070b387b11" name="adbce3a9591f13e1daa2f48070b387b11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbce3a9591f13e1daa2f48070b387b11">&#9670;&#160;</a></span>setSignalMargin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setSignalMargin </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>db</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>dB the RMS level must stay above the noise floor to count as signal (default 6dB) </p>
+
+</div>
+</div>
+<a id="a4aa0f96d6b6de3823ca38b4045d7f8b5" name="a4aa0f96d6b6de3823ca38b4045d7f8b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4aa0f96d6b6de3823ca38b4045d7f8b5">&#9670;&#160;</a></span>setSignalPresenceMinBlocks()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setSignalPresenceMinBlocks </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>blocks</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Consecutive blocks required above/below the margin before toggling signal_present (default 3) </p>
+
+</div>
+</div>
 <a id="a466dbcaac434314c92981d2d086fda34" name="a466dbcaac434314c92981d2d086fda34"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a466dbcaac434314c92981d2d086fda34">&#9670;&#160;</a></span>setSilenceThreshold()</h2>
 
@@ -1459,6 +1744,137 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="a62dfcc210d2eaa9b7c968c91d258d752" name="a62dfcc210d2eaa9b7c968c91d258d752"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62dfcc210d2eaa9b7c968c91d258d752">&#9670;&#160;</a></span>setTonalityBufferSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setTonalityBufferSize </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>samples</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Analysis buffer size (in samples) used by the built-in tonality detector. Larger = more accurate/expensive, smaller = cheaper/less accurate. Only relevant while using the built-in detector (i.e. before calling <a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a9c51f1bc88d613ca680aedbee16be7e1">setTonalitySource()</a>). Applied on the next <a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#acba365cc28eb702040c382646cfb0a7a">begin()</a>/setAudioInfo(). </p>
+
+</div>
+</div>
+<a id="a4778d5090abf80bd054da79f15d5d09d" name="a4778d5090abf80bd054da79f15d5d09d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4778d5090abf80bd054da79f15d5d09d">&#9670;&#160;</a></span>setTonalityEnabled()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setTonalityEnabled </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>enabled</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Enable/disable the tonality gate (enabled by default using a built-in <a class="el" href="classaudio__tools_1_1_frequency_detector_auto_correlation.html" title="Detects frequency using autocorrelation on audio samples.">FrequencyDetectorAutoCorrelation</a>). When disabled, signal_present depends only on the level/noise-floor gate. Re-enabling restores the built-in detector unless an external one was set via <a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a9c51f1bc88d613ca680aedbee16be7e1">setTonalitySource()</a>. </p>
+
+</div>
+</div>
+<a id="a9d40a8c75766509cae2a255f54513a90" name="a9d40a8c75766509cae2a255f54513a90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d40a8c75766509cae2a255f54513a90">&#9670;&#160;</a></span>setTonalityMinConfidence()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setTonalityMinConfidence </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>min_confidence</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Minimum tonality confidence (0.0-1.0, default 0.3) for a block to count as signal rather than noise. </p>
+
+</div>
+</div>
+<a id="a9c51f1bc88d613ca680aedbee16be7e1" name="a9c51f1bc88d613ca680aedbee16be7e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c51f1bc88d613ca680aedbee16be7e1">&#9670;&#160;</a></span>setTonalitySource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setTonalitySource </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_frequency_detector_auto_correlation.html">FrequencyDetectorAutoCorrelation</a> &amp;&#160;</td>
+          <td class="paramname"><em>detector</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>min_confidence</em> = <code>0.3f</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>channel</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Overrides the built-in tonality detector with an externally-owned one that you feed yourself (e.g. because you already run it elsewhere in the pipeline). You are responsible for calling <a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#acba365cc28eb702040c382646cfb0a7a">begin()</a>/write() on it; this class only reads its confidence(). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">detector</td><td>The autocorrelation detector to query. </td></tr>
+    <tr><td class="paramname">min_confidence</td><td>Minimum tonality confidence (0.0-1.0, default 0.3). </td></tr>
+    <tr><td class="paramname">channel</td><td>Channel to query on the detector (default 0). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="adad22dd23fc48a3b338eafe707439deb" name="adad22dd23fc48a3b338eafe707439deb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adad22dd23fc48a3b338eafe707439deb">&#9670;&#160;</a></span>setWriteBufferSize()</h2>
 
@@ -1509,6 +1925,32 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 
 <p>Access the accumulated quality statistics. </p>
+
+</div>
+</div>
+<a id="a2e70fe98652c33bd73ee1087660e213e" name="a2e70fe98652c33bd73ee1087660e213e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e70fe98652c33bd73ee1087660e213e">&#9670;&#160;</a></span>tonalityConfidence()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float tonalityConfidence </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Last tonality/periodicity confidence reported by the tonality source (0 if none is set), see <a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a9c51f1bc88d613ca680aedbee16be7e1">setTonalitySource()</a> </p>
 
 </div>
 </div>
@@ -1629,6 +2071,28 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="a0bc433a380cb35ce54e6eb7b727a4a3e" name="a0bc433a380cb35ce54e6eb7b727a4a3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bc433a380cb35ce54e6eb7b727a4a3e">&#9670;&#160;</a></span>auto_tonality</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_frequency_detector_auto_correlation.html">FrequencyDetectorAutoCorrelation</a> auto_tonality</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a1975ad7242da4e6dbb1c96334be1efb7" name="a1975ad7242da4e6dbb1c96334be1efb7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1975ad7242da4e6dbb1c96334be1efb7">&#9670;&#160;</a></span>callback</h2>
 
@@ -1728,6 +2192,50 @@ template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">int consecutive_clipped = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa40e6a9e532921df0bb18fe0d8793149" name="aa40e6a9e532921df0bb18fe0d8793149"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa40e6a9e532921df0bb18fe0d8793149">&#9670;&#160;</a></span>consecutive_noise_blocks</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int consecutive_noise_blocks = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adb8f12b8f1e2d106cec650785ea6dfb5" name="adb8f12b8f1e2d106cec650785ea6dfb5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb8f12b8f1e2d106cec650785ea6dfb5">&#9670;&#160;</a></span>consecutive_signal_blocks</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int consecutive_signal_blocks = 0</td>
         </tr>
       </table>
   </td>
@@ -1937,6 +2445,72 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="ac16c768a5c27c19789a96266815db19b" name="ac16c768a5c27c19789a96266815db19b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac16c768a5c27c19789a96266815db19b">&#9670;&#160;</a></span>noise_floor_attack</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float noise_floor_attack = 0.3f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a453c30664f1e9cd74b3f8287e17348f0" name="a453c30664f1e9cd74b3f8287e17348f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a453c30664f1e9cd74b3f8287e17348f0">&#9670;&#160;</a></span>noise_floor_initialized</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool noise_floor_initialized = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7f741c838859848ab5c5ec0e301567da" name="a7f741c838859848ab5c5ec0e301567da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f741c838859848ab5c5ec0e301567da">&#9670;&#160;</a></span>noise_floor_release</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float noise_floor_release = 0.01f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ad35c4e2ef458c36e8d36676958cc9cd3" name="ad35c4e2ef458c36e8d36676958cc9cd3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad35c4e2ef458c36e8d36676958cc9cd3">&#9670;&#160;</a></span>notify_vector</h2>
 
@@ -1953,6 +2527,28 @@ template&lt;typename T &gt; </div>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ade69095b517f9fb3fd72560752f62391" name="ade69095b517f9fb3fd72560752f62391"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade69095b517f9fb3fd72560752f62391">&#9670;&#160;</a></span>owns_tonality</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool owns_tonality = true</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -2025,6 +2621,28 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="a7cb33514ba0007560c08fa5c7040483c" name="a7cb33514ba0007560c08fa5c7040483c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cb33514ba0007560c08fa5c7040483c">&#9670;&#160;</a></span>p_tonality</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_frequency_detector_auto_correlation.html">FrequencyDetectorAutoCorrelation</a>* p_tonality = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a84c49bf65851f26bc0c72809cda3a707" name="a84c49bf65851f26bc0c72809cda3a707"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a84c49bf65851f26bc0c72809cda3a707">&#9670;&#160;</a></span>prev_sample</h2>
 
@@ -2058,6 +2676,116 @@ template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">int report_period_ms = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab45f0c83abe52c7af2a1d10f37f2b3d1" name="ab45f0c83abe52c7af2a1d10f37f2b3d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab45f0c83abe52c7af2a1d10f37f2b3d1">&#9670;&#160;</a></span>rms_block_count</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int rms_block_count = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab08386f0ac87da579e4ceafc1276a04d" name="ab08386f0ac87da579e4ceafc1276a04d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab08386f0ac87da579e4ceafc1276a04d">&#9670;&#160;</a></span>rms_block_size</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int rms_block_size = 256</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a54ed17f2e4dff34a889feabf377a1776" name="a54ed17f2e4dff34a889feabf377a1776"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54ed17f2e4dff34a889feabf377a1776">&#9670;&#160;</a></span>rms_sum_sq</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double rms_sum_sq = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a75261450cdab68ee603a1e3ce2ded126" name="a75261450cdab68ee603a1e3ce2ded126"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75261450cdab68ee603a1e3ce2ded126">&#9670;&#160;</a></span>signal_margin_db</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float signal_margin_db = 6.0f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a63d734a80b026c9a82a7c3e58a145889" name="a63d734a80b026c9a82a7c3e58a145889"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63d734a80b026c9a82a7c3e58a145889">&#9670;&#160;</a></span>signal_present_min_blocks</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int signal_present_min_blocks = 3</td>
         </tr>
       </table>
   </td>
@@ -2151,6 +2879,72 @@ template&lt;typename T &gt; </div>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7685a65667e41f1cba7ac70c55d47ea7" name="a7685a65667e41f1cba7ac70c55d47ea7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7685a65667e41f1cba7ac70c55d47ea7">&#9670;&#160;</a></span>tonality_channel</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int tonality_channel = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a98848ffcb5a8ea2b02bb443bab99d5ad" name="a98848ffcb5a8ea2b02bb443bab99d5ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98848ffcb5a8ea2b02bb443bab99d5ad">&#9670;&#160;</a></span>tonality_enabled</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tonality_enabled = true</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa8aafb91ebea5de42fc8fd6c46704a75" name="aa8aafb91ebea5de42fc8fd6c46704a75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8aafb91ebea5de42fc8fd6c46704a75">&#9670;&#160;</a></span>tonality_min_confidence</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float tonality_min_confidence = 0.3f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

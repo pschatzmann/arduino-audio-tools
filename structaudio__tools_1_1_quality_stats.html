@@ -81,7 +81,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Statistics collected by <a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html" title="Analyzes audio stream quality by detecting clicks/pops, gaps/dropouts, and clipping/corruption.">QualityAnalysisStream</a>.  
+<p>Statistics collected by <a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html" title="Analyzes audio stream quality by detecting clicks/pops, gaps/dropouts, clipping/corruption,...">QualityAnalysisStream</a>.  
  <a href="structaudio__tools_1_1_quality_stats.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_quality_analysis_stream_8h_source.html">QualityAnalysisStream.h</a>&gt;</code></p>
@@ -99,11 +99,30 @@ Public Attributes</h2></td></tr>
 <tr class="separator:afb6090d9bf4fbdd84e0697eba57330ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab1c17a01ea1701a2d78cb14cd0b1e47b" id="r_ab1c17a01ea1701a2d78cb14cd0b1e47b"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_quality_stats.html#ab1c17a01ea1701a2d78cb14cd0b1e47b">dropout_count</a> = 0</td></tr>
 <tr class="separator:ab1c17a01ea1701a2d78cb14cd0b1e47b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae12047562f812eea4634011c05015d8c" id="r_ae12047562f812eea4634011c05015d8c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_quality_stats.html#ae12047562f812eea4634011c05015d8c">noise_floor</a> = 0.0f</td></tr>
+<tr class="memdesc:ae12047562f812eea4634011c05015d8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Slowly tracked noise floor estimate (linear, same scale as rms_level)  <br /></td></tr>
+<tr class="separator:ae12047562f812eea4634011c05015d8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2274b45196aedafd61adad2177f6c71c" id="r_a2274b45196aedafd61adad2177f6c71c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_quality_stats.html#a2274b45196aedafd61adad2177f6c71c">rms_level</a> = 0.0f</td></tr>
+<tr class="memdesc:a2274b45196aedafd61adad2177f6c71c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Most recent block RMS level (linear, same scale as the sample values)  <br /></td></tr>
+<tr class="separator:a2274b45196aedafd61adad2177f6c71c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1183ee6d684e230d1933afd739f9a38f" id="r_a1183ee6d684e230d1933afd739f9a38f"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_quality_stats.html#a1183ee6d684e230d1933afd739f9a38f">signal_detected_count</a> = 0</td></tr>
+<tr class="memdesc:a1183ee6d684e230d1933afd739f9a38f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of times the signal transitioned from lost/absent to present.  <br /></td></tr>
+<tr class="separator:a1183ee6d684e230d1933afd739f9a38f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a750dad4c7388f0bb892d4b16515b734f" id="r_a750dad4c7388f0bb892d4b16515b734f"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_quality_stats.html#a750dad4c7388f0bb892d4b16515b734f">signal_lost_count</a> = 0</td></tr>
+<tr class="memdesc:a750dad4c7388f0bb892d4b16515b734f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of times the signal transitioned from present to lost.  <br /></td></tr>
+<tr class="separator:a750dad4c7388f0bb892d4b16515b734f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4942af5ff2a831ef1674033130a594b2" id="r_a4942af5ff2a831ef1674033130a594b2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_quality_stats.html#a4942af5ff2a831ef1674033130a594b2">signal_present</a> = false</td></tr>
+<tr class="separator:a4942af5ff2a831ef1674033130a594b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28b2ba4cd0389a2c5065443c236adb2c" id="r_a28b2ba4cd0389a2c5065443c236adb2c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_quality_stats.html#a28b2ba4cd0389a2c5065443c236adb2c">snr_db</a> = 0.0f</td></tr>
+<tr class="memdesc:a28b2ba4cd0389a2c5065443c236adb2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Signal-to-noise ratio of the most recent block, in dB.  <br /></td></tr>
+<tr class="separator:a28b2ba4cd0389a2c5065443c236adb2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81e8e8f0cb8406535e9a5e4f3e4c5b94" id="r_a81e8e8f0cb8406535e9a5e4f3e4c5b94"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_quality_stats.html#a81e8e8f0cb8406535e9a5e4f3e4c5b94">tonality_confidence</a> = 0.0f</td></tr>
+<tr class="separator:a81e8e8f0cb8406535e9a5e4f3e4c5b94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35f33a268171062eb678f59dbcf90aaa" id="r_a35f33a268171062eb678f59dbcf90aaa"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_quality_stats.html#a35f33a268171062eb678f59dbcf90aaa">total_samples</a> = 0</td></tr>
 <tr class="separator:a35f33a268171062eb678f59dbcf90aaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Statistics collected by <a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html" title="Analyzes audio stream quality by detecting clicks/pops, gaps/dropouts, and clipping/corruption.">QualityAnalysisStream</a>. </p>
+<div class="textblock"><p>Statistics collected by <a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html" title="Analyzes audio stream quality by detecting clicks/pops, gaps/dropouts, clipping/corruption,...">QualityAnalysisStream</a>. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ac8bb3912a3ce86b15842e79d0b421204" name="ac8bb3912a3ce86b15842e79d0b421204"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac8bb3912a3ce86b15842e79d0b421204">&#9670;&#160;</a></span>clear()</h2>
@@ -170,6 +189,116 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae12047562f812eea4634011c05015d8c" name="ae12047562f812eea4634011c05015d8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae12047562f812eea4634011c05015d8c">&#9670;&#160;</a></span>noise_floor</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float noise_floor = 0.0f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Slowly tracked noise floor estimate (linear, same scale as rms_level) </p>
+
+</div>
+</div>
+<a id="a2274b45196aedafd61adad2177f6c71c" name="a2274b45196aedafd61adad2177f6c71c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2274b45196aedafd61adad2177f6c71c">&#9670;&#160;</a></span>rms_level</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float rms_level = 0.0f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Most recent block RMS level (linear, same scale as the sample values) </p>
+
+</div>
+</div>
+<a id="a1183ee6d684e230d1933afd739f9a38f" name="a1183ee6d684e230d1933afd739f9a38f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1183ee6d684e230d1933afd739f9a38f">&#9670;&#160;</a></span>signal_detected_count</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t signal_detected_count = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Number of times the signal transitioned from lost/absent to present. </p>
+
+</div>
+</div>
+<a id="a750dad4c7388f0bb892d4b16515b734f" name="a750dad4c7388f0bb892d4b16515b734f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a750dad4c7388f0bb892d4b16515b734f">&#9670;&#160;</a></span>signal_lost_count</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t signal_lost_count = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Number of times the signal transitioned from present to lost. </p>
+
+</div>
+</div>
+<a id="a4942af5ff2a831ef1674033130a594b2" name="a4942af5ff2a831ef1674033130a594b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4942af5ff2a831ef1674033130a594b2">&#9670;&#160;</a></span>signal_present</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool signal_present = false</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>True while rms_level is sustained above the noise floor by the configured margin (see setSignalMargin()) AND, if a tonality source is set, the signal is periodic/tonal rather than broadband noise </p>
+
+</div>
+</div>
+<a id="a28b2ba4cd0389a2c5065443c236adb2c" name="a28b2ba4cd0389a2c5065443c236adb2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28b2ba4cd0389a2c5065443c236adb2c">&#9670;&#160;</a></span>snr_db</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float snr_db = 0.0f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Signal-to-noise ratio of the most recent block, in dB. </p>
+
+</div>
+</div>
+<a id="a81e8e8f0cb8406535e9a5e4f3e4c5b94" name="a81e8e8f0cb8406535e9a5e4f3e4c5b94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81e8e8f0cb8406535e9a5e4f3e4c5b94">&#9670;&#160;</a></span>tonality_confidence</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float tonality_confidence = 0.0f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Tonality/periodicity confidence (0-1) from the optional autocorrelation source, see setTonalitySource(). Stays 0 if no source is set. </p>
 
 </div>
 </div>

@@ -64,5 +64,6 @@ var searchData=
   ['owns_5fcfg_61',['owns_cfg',['../classaudio__tools_1_1_audio_source_idx_s_d_f_a_t.html#a24a8f3b40e6ac5880e21669a79c7ae70',1,'audio_tools::AudioSourceIdxSDFAT::owns_cfg'],['../classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a24a8f3b40e6ac5880e21669a79c7ae70',1,'audio_tools::AudioSourceSDFAT::owns_cfg']]],
   ['owns_5fdata_62',['owns_data',['../classaudio__tools_1_1_generator_from_array.html#aa23f8189b8e3a8f40fe3f5deabcbd6df',1,'audio_tools::GeneratorFromArray']]],
   ['owns_5fgenerator_63',['owns_generator',['../classaudio__tools_1_1_audio_effects.html#afc49eca158ad8664634feeb64d5ae7d0',1,'audio_tools::AudioEffects']]],
-  ['owns_5fmemory_64',['owns_memory',['../classaudio__tools_1_1_memory_stream.html#a9c24680fbb45bc25b0e34d9101777db8',1,'audio_tools::MemoryStream']]]
+  ['owns_5fmemory_64',['owns_memory',['../classaudio__tools_1_1_memory_stream.html#a9c24680fbb45bc25b0e34d9101777db8',1,'audio_tools::MemoryStream']]],
+  ['owns_5ftonality_65',['owns_tonality',['../classaudio__tools_1_1_quality_analysis_stream.html#ade69095b517f9fb3fd72560752f62391',1,'audio_tools::QualityAnalysisStream']]]
 ];
