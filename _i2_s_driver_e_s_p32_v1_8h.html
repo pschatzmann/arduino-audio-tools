@@ -77,7 +77,8 @@ $(function() {
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#define-members">Macros</a> &#124;
-<a href="#typedef-members">Typedefs</a>  </div>
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">I2SDriverESP32V1.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -89,6 +90,7 @@ $(function() {
 <code>#include &quot;driver/i2s_tdm.h&quot;</code><br />
 <code>#include &quot;esp_system.h&quot;</code><br />
 <code>#include &lt;atomic&gt;</code><br />
+<code>#include &lt;type_traits&gt;</code><br />
 </div>
 <p><a href="_i2_s_driver_e_s_p32_v1_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -97,6 +99,14 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_i2_s_driver_e_s_p32_v1_1_1_driver_common.html">I2SDriverESP32V1::DriverCommon</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_i2_s_driver_e_s_p32_v1_1_1_driver_i2_s.html">I2SDriverESP32V1::DriverI2S</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1i2s__detail_1_1_has_dma_buffer_in_psram.html">HasDmaBufferInPsram&lt; T, typename &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1i2s__detail_1_1_has_dma_buffer_in_psram_3_01_t_00_01std_1_1void__t_3_01dec80b1c3817e0f7acb26c8d1f84a91f151.html">HasDmaBufferInPsram&lt; T, std::void_t&lt; decltype(std::declval&lt; T &amp; &gt;().dma_buffer_in_psram)&gt; &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1i2s__detail_1_1_has_dma_burst_size.html">HasDmaBurstSize&lt; T, typename &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1i2s__detail_1_1_has_dma_burst_size_3_01_t_00_01std_1_1void__t_3_01decltypee7426b4293f2b91187fd9e7c26026dfe.html">HasDmaBurstSize&lt; T, std::void_t&lt; decltype(std::declval&lt; T &amp; &gt;().dma_burst_size)&gt; &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html">I2SDriverESP32V1</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Basic I2S API for the ESP32 (using the new API). <a href="https://docs.espressif.com/projects/esp-idf/en/v5.0.1/esp32/api-reference/peripherals/i2s.html#i2s-communication-mode">https://docs.espressif.com/projects/esp-idf/en/v5.0.1/esp32/api-reference/peripherals/i2s.html#i2s-communication-mode</a>.  <a href="classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#details">More...</a><br /></td></tr>
@@ -107,10 +117,12 @@ Namespaces</h2></td></tr>
 <tr class="memitem:namespaceaudio__tools" id="r_namespaceaudio__tools"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></td></tr>
 <tr class="memdesc:namespaceaudio__tools"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic Implementation of sound input and output for desktop environments using portaudio. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespaceaudio__tools_1_1i2s__detail" id="r_namespaceaudio__tools_1_1i2s__detail"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools_1_1i2s__detail.html">audio_tools::i2s_detail</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:ad34cac4dc3d231a08c47d398ae654ec6" id="r_ad34cac4dc3d231a08c47d398ae654ec6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i2_s_driver_e_s_p32_v1_8h.html#ad34cac4dc3d231a08c47d398ae654ec6">I2S_CHANNEL_DEFAULT_CONFIG_SAFE</a>(port,  role)&#160;&#160;&#160;I2S_CHANNEL_DEFAULT_CONFIG(port, role)</td></tr>
+<tr class="memitem:ad34cac4dc3d231a08c47d398ae654ec6" id="r_ad34cac4dc3d231a08c47d398ae654ec6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i2_s_driver_e_s_p32_v1_8h.html#ad34cac4dc3d231a08c47d398ae654ec6">I2S_CHANNEL_DEFAULT_CONFIG_SAFE</a>(port,  role)&#160;&#160;&#160;getDefaultChannelConfig(port, role)</td></tr>
 <tr class="separator:ad34cac4dc3d231a08c47d398ae654ec6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9a9b9ef7edcb2091950aa17b9dca2dc" id="r_ad9a9b9ef7edcb2091950aa17b9dca2dc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i2_s_driver_e_s_p32_v1_8h.html#ad9a9b9ef7edcb2091950aa17b9dca2dc">I2S_MCLK_MULTIPLE_192</a>&#160;&#160;&#160;static_cast&lt;i2s_mclk_multiple_t&gt;(192)</td></tr>
 <tr class="separator:ad9a9b9ef7edcb2091950aa17b9dca2dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -121,6 +133,12 @@ Macros</h2></td></tr>
 Typedefs</h2></td></tr>
 <tr class="memitem:aa6bc5429c6a2ad13951e3f7ac14468a9" id="r_aa6bc5429c6a2ad13951e3f7ac14468a9"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aa6bc5429c6a2ad13951e3f7ac14468a9">i2s_port_t</a> = int</td></tr>
 <tr class="separator:aa6bc5429c6a2ad13951e3f7ac14468a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ac3b0b6963183ddfe21b460fc2ef21ced" id="r_ac3b0b6963183ddfe21b460fc2ef21ced"><td class="memTemplParams" colspan="2">template&lt;typename T  = i2s_chan_config_t&gt; </td></tr>
+<tr class="memitem:ac3b0b6963183ddfe21b460fc2ef21ced"><td class="memTemplItemLeft" align="right" valign="top">static i2s_chan_config_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ac3b0b6963183ddfe21b460fc2ef21ced">getDefaultChannelConfig</a> (<a class="el" href="namespaceaudio__tools.html#aa6bc5429c6a2ad13951e3f7ac14468a9">i2s_port_t</a> port, i2s_role_t role)</td></tr>
+<tr class="separator:ac3b0b6963183ddfe21b460fc2ef21ced"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="ad34cac4dc3d231a08c47d398ae654ec6" name="ad34cac4dc3d231a08c47d398ae654ec6"></a>
@@ -144,7 +162,7 @@ Typedefs</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;I2S_CHANNEL_DEFAULT_CONFIG(port, role)</td>
+          <td></td><td>&#160;&#160;&#160;getDefaultChannelConfig(port, role)</td>
         </tr>
       </table>
 </div><div class="memdoc">
