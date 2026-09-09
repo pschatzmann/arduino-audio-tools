@@ -25,25 +25,60 @@ using i2s_port_t = int;
 #define I2S_MCLK_MULTIPLE_192 static_cast<i2s_mclk_multiple_t>(192)
 #endif
 
-// As of ESP-IDF 6.2 (master), I2S_CHANNEL_DEFAULT_CONFIG initializes
-// dma_buffer_in_psram before allow_pd, which does not match i2s_chan_config_t's
-// declaration order and is ill-formed under C++20 aggregate-init rules. Build
-// the struct by assignment instead of relying on the macro's designator order.
-#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(6, 2, 0)
+// Some ESP-IDF development snapshots (e.g. IDF_VERSION already bumped to a
+// release that hasn't shipped yet) initialize dma_buffer_in_psram before
+// allow_pd in I2S_CHANNEL_DEFAULT_CONFIG, which does not match
+// i2s_chan_config_t's declaration order and is ill-formed under C++20/26
+// aggregate-init rules. ESP_IDF_VERSION alone can't reliably tell such a
+// snapshot apart from an older one that predates these optional fields
+// entirely, so detect field presence directly and build the struct by
+// assignment instead of relying on the macro's designator order.
+#if defined(__cpp_if_constexpr) || __cplusplus >= 201703L
+#include <type_traits>
+namespace i2s_detail {
+template <typename T, typename = void>
+struct HasDmaBurstSize : std::false_type {};
+template <typename T>
+struct HasDmaBurstSize<T, std::void_t<decltype(std::declval<T &>().dma_burst_size)>>
+    : std::true_type {};
+
+template <typename T, typename = void>
+struct HasDmaBufferInPsram : std::false_type {};
+template <typename T>
+struct HasDmaBufferInPsram<T, std::void_t<decltype(std::declval<T &>().dma_buffer_in_psram)>>
+    : std::true_type {};
+
+template <typename T, typename = void>
+struct HasTxDestination : std::false_type {};
+template <typename T>
+struct HasTxDestination<T, std::void_t<decltype(std::declval<T &>().tx_destination)>>
+    : std::true_type {};
+}  // namespace i2s_detail
+
+// Templated on T (defaulted to i2s_chan_config_t) so that the field accesses
+// below are dependent expressions: if constexpr only skips semantic checks on
+// a discarded branch inside a templated entity, not in an ordinary function.
+template <typename T = i2s_chan_config_t>
 static inline i2s_chan_config_t getDefaultChannelConfig(i2s_port_t port, i2s_role_t role) {
-  i2s_chan_config_t result{};
+  T result{};
   result.id = port;
   result.role = role;
   result.dma_desc_num = 6;
   result.dma_frame_num = 240;
-  result.dma_burst_size = 0;
+  if constexpr (i2s_detail::HasDmaBurstSize<T>::value) {
+    result.dma_burst_size = 0;
+  }
   result.auto_clear_after_cb = false;
   result.auto_clear_before_cb = false;
-  result.dma_buffer_in_psram = false;
+  if constexpr (i2s_detail::HasDmaBufferInPsram<T>::value) {
+    result.dma_buffer_in_psram = false;
+  }
   result.allow_pd = false;
   result.intr_priority = 0;
-  result.tx_destination = I2S_DESTINATION_DMA;
-  result.rx_destination = I2S_DESTINATION_DMA;
+  if constexpr (i2s_detail::HasTxDestination<T>::value) {
+    result.tx_destination = I2S_DESTINATION_DMA;
+    result.rx_destination = I2S_DESTINATION_DMA;
+  }
   return result;
 }
 #define I2S_CHANNEL_DEFAULT_CONFIG_SAFE(port, role) getDefaultChannelConfig(port, role)
