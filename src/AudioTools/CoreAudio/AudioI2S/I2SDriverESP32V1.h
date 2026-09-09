@@ -22,7 +22,33 @@ using i2s_port_t = int;
 
 // support for Arduino ESP32 v3.0.7
 #if ESP_IDF_VERSION <= ESP_IDF_VERSION_VAL(5, 1, 4)
-#define I2S_MCLK_MULTIPLE_192 static_cast<i2s_mclk_multiple_t>(192)  
+#define I2S_MCLK_MULTIPLE_192 static_cast<i2s_mclk_multiple_t>(192)
+#endif
+
+// As of ESP-IDF 6.2 (master), I2S_CHANNEL_DEFAULT_CONFIG initializes
+// dma_buffer_in_psram before allow_pd, which does not match i2s_chan_config_t's
+// declaration order and is ill-formed under C++20 aggregate-init rules. Build
+// the struct by assignment instead of relying on the macro's designator order.
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(6, 2, 0)
+static inline i2s_chan_config_t getDefaultChannelConfig(i2s_port_t port, i2s_role_t role) {
+  i2s_chan_config_t result{};
+  result.id = port;
+  result.role = role;
+  result.dma_desc_num = 6;
+  result.dma_frame_num = 240;
+  result.dma_burst_size = 0;
+  result.auto_clear_after_cb = false;
+  result.auto_clear_before_cb = false;
+  result.dma_buffer_in_psram = false;
+  result.allow_pd = false;
+  result.intr_priority = 0;
+  result.tx_destination = I2S_DESTINATION_DMA;
+  result.rx_destination = I2S_DESTINATION_DMA;
+  return result;
+}
+#define I2S_CHANNEL_DEFAULT_CONFIG_SAFE(port, role) getDefaultChannelConfig(port, role)
+#else
+#define I2S_CHANNEL_DEFAULT_CONFIG_SAFE(port, role) I2S_CHANNEL_DEFAULT_CONFIG(port, role)
 #endif
 
 
@@ -349,7 +375,7 @@ class I2SDriverESP32V1 : public I2SDriverBase {
 
     i2s_chan_config_t getChannelConfig(I2SConfigESP32V1 &cfg) {
       TRACED();
-      i2s_chan_config_t result = I2S_CHANNEL_DEFAULT_CONFIG(
+      i2s_chan_config_t result = I2S_CHANNEL_DEFAULT_CONFIG_SAFE(
           (i2s_port_t)cfg.port_no,
           cfg.is_master ? I2S_ROLE_MASTER : I2S_ROLE_SLAVE);
       // use the legicy size parameters for frame num
@@ -470,7 +496,7 @@ class I2SDriverESP32V1 : public I2SDriverBase {
     }
 
     i2s_chan_config_t getChannelConfig(I2SConfigESP32V1 &cfg) {
-      return I2S_CHANNEL_DEFAULT_CONFIG(
+      return I2S_CHANNEL_DEFAULT_CONFIG_SAFE(
           (i2s_port_t)cfg.port_no,
           cfg.is_master ? I2S_ROLE_MASTER : I2S_ROLE_SLAVE);
     }
@@ -636,7 +662,7 @@ class I2SDriverESP32V1 : public I2SDriverBase {
     }
 
     i2s_chan_config_t getChannelConfig(I2SConfigESP32V1 &cfg) {
-      return I2S_CHANNEL_DEFAULT_CONFIG(
+      return I2S_CHANNEL_DEFAULT_CONFIG_SAFE(
           (i2s_port_t)cfg.port_no,
           cfg.is_master ? I2S_ROLE_MASTER : I2S_ROLE_SLAVE);
     }

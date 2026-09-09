@@ -254,10 +254,12 @@ protected:
         if (cfg.adc_output_type != ADC_DIGI_OUTPUT_FORMAT_TYPE2) return true;
 
         uint32_t chan_num = sample.type2.channel;
+#ifdef SOC_ADC_CHANNEL_NUM
         if (chan_num >= SOC_ADC_CHANNEL_NUM(cfg.adc_unit)) {
             LOGE("Invalid TYPE2 ADC channel: %u", (unsigned)chan_num);
             return false;
         }
+#endif
 
 #ifdef ADC_CONV_SINGLE_UNIT_1
         if (cfg.adc_conversion_mode == ADC_CONV_SINGLE_UNIT_1 &&
