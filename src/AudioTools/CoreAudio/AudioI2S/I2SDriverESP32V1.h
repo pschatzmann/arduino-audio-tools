@@ -33,7 +33,7 @@ using i2s_port_t = int;
 // snapshot apart from an older one that predates these optional fields
 // entirely, so detect field presence directly and build the struct by
 // assignment instead of relying on the macro's designator order.
-#if defined(__cpp_if_constexpr) || __cplusplus >= 201703L
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(6, 2, 0)
 #include <type_traits>
 namespace i2s_detail {
 template <typename T, typename = void>
@@ -46,12 +46,6 @@ template <typename T, typename = void>
 struct HasDmaBufferInPsram : std::false_type {};
 template <typename T>
 struct HasDmaBufferInPsram<T, std::void_t<decltype(std::declval<T &>().dma_buffer_in_psram)>>
-    : std::true_type {};
-
-template <typename T, typename = void>
-struct HasTxDestination : std::false_type {};
-template <typename T>
-struct HasTxDestination<T, std::void_t<decltype(std::declval<T &>().tx_destination)>>
     : std::true_type {};
 }  // namespace i2s_detail
 
@@ -75,10 +69,9 @@ static inline i2s_chan_config_t getDefaultChannelConfig(i2s_port_t port, i2s_rol
   }
   result.allow_pd = false;
   result.intr_priority = 0;
-  if constexpr (i2s_detail::HasTxDestination<T>::value) {
-    result.tx_destination = I2S_DESTINATION_DMA;
-    result.rx_destination = I2S_DESTINATION_DMA;
-  }
+  // tx_destination/rx_destination (i2s_destination_t), where present, default
+  // to I2S_DESTINATION_DMA == 0, which T result{} already zero-initializes -
+  // no need to name the enumerator (it doesn't exist on older IDF versions).
   return result;
 }
 #define I2S_CHANNEL_DEFAULT_CONFIG_SAFE(port, role) getDefaultChannelConfig(port, role)
