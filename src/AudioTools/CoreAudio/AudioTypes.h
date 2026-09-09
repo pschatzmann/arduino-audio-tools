@@ -41,6 +41,11 @@ static const char* RxTxModeNames[4] = {"UNDEFINED_MODE", "TX_MODE", "RX_MODE",
  * @brief Time Units
  * @ingroup basic
  */
+// Some libc headers (e.g. sys/param.h, pulled in transitively by headers
+// included above) #define HZ - the #undef in AudioToolsConfig.h only guards
+// against pollution before that file's own includes run, not pollution
+// reintroduced by headers included since. Undef again right before use.
+#undef HZ
 enum TimeUnit { MS, US, HZ };
 static const char* TimeUnitStr[3]{"MS", "US", "HZ"};
 
