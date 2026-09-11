@@ -831,6 +831,9 @@ size_t size)</a> and <a class="el" href="classaudio__tools_1_1_base_stream.html#
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html">DemuxerMPG</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">MPEG-1 System (Program) <a class="el" href="class_stream.html">Stream</a> <a class="el" href="classaudio__tools_1_1_demuxer.html" title="Common interface for demuxers (DemuxerAVI, DemuxerMP4) that split a container&#39;s video and (optional) ...">Demuxer</a>, as defined by ISO/IEC 11172-1: splits the pack_header/system_header/PES_packet framing apart and forwards the raw MPEG-1 video (ISO/IEC 11172-2) and MPEG-1 audio (ISO/IEC 11172-3, Layer I/II/III) elementary streams to <a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html#aee3d456e79d27d60f9b6ade892fcc88c">setOutputVideo()</a>/ <a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html#a59ba90092c99ea7626cc58d70c8ed8f8">setOutputAudio()</a>. Both elementary streams are self-delimiting (the video ES has its own picture_start_code sequence, the audio ES its own frame sync word) so, like DemuxerAVI/DemuxerMP4, no separate decoding is done here - point the outputs at whatever decoder understands the codec (e.g. an MPEG1 video decoder, or an <a class="el" href="classaudio__tools_1_1_encoded_audio_stream.html" title="A more natural Stream class to process encoded data (aac, wav, mp3...) which also supports the decodi...">EncodedAudioStream</a> wrapping an MP3/MP2 <a class="el" href="classaudio__tools_1_1_audio_decoder.html" title="Decoding of encoded audio into PCM data.">AudioDecoder</a>).  <a href="classaudio__tools_1_1_demuxer_m_p_g.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_demuxer_m_t_s.html">DemuxerMTS</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ISO/IEC 13818-1 MPEG Transport <a class="el" href="class_stream.html">Stream</a> <a class="el" href="classaudio__tools_1_1_demuxer.html" title="Common interface for demuxers (DemuxerAVI, DemuxerMP4) that split a container&#39;s video and (optional) ...">Demuxer</a>: parses the fixed 188-byte TS packet framing, follows PAT -&gt; PMT to discover the video and (optional) audio elementary stream PIDs and their codec (stream_type), reassembles each PES packet's payload from the TS packets between one payload_unit_start_indicator and the next, and forwards the raw elementary-stream bytes to <a class="el" href="classaudio__tools_1_1_demuxer_m_t_s.html#aee3d456e79d27d60f9b6ade892fcc88c">setOutputVideo()</a>/setOutputAudio() - same scope and design as <a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html" title="MPEG-1 System (Program) Stream Demuxer, as defined by ISO/IEC 11172-1: splits the pack_header/system_...">DemuxerMPG</a> (<a class="el" href="_container_m_p_g_8h.html">ContainerMPG.h</a>): no decoding happens here, point the outputs at whatever decoder understands the codec.  <a href="classaudio__tools_1_1_demuxer_m_t_s.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_distortion.html">Distortion</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_distortion.html" title="Distortion AudioEffect.">Distortion</a> <a class="el" href="classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects.">AudioEffect</a>.  <a href="classaudio__tools_1_1_distortion.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1550,6 +1553,9 @@ size_t size)</a> and <a class="el" href="classaudio__tools_1_1_base_stream.html#
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_t_s_decoder_t_s_demux.html">MTSDecoderTSDemux</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">MPEG-TS (MTS) decoder. Extracts the AAC audio data from a MPEG-TS (MTS) data stream. You can define the relevant stream types via the API. Required dependency: <a href="https://github.com/pschatzmann/arduino-tsdemux">https://github.com/pschatzmann/arduino-tsdemux</a>.  <a href="classaudio__tools_1_1_m_t_s_decoder_t_s_demux.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_t_s_parse_buffer.html">MTSParseBuffer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimal byte accumulator used by <a class="el" href="classaudio__tools_1_1_demuxer_m_t_s.html" title="ISO/IEC 13818-1 MPEG Transport Stream Demuxer: parses the fixed 188-byte TS packet framing,...">DemuxerMTS</a> to buffer incoming bytes until at least one full 188-byte TS packet is available - analogous to <a class="el" href="_container_m_p_g_8h.html">ContainerMPG.h</a>'s <a class="el" href="classaudio__tools_1_1_m_p_g_parse_buffer.html" title="Minimal byte accumulator used by DemuxerMPG to parse start-code delimited units that may straddle wri...">MPGParseBuffer</a>, but without any start-code search (TS packets are fixed-size and found via their own resync logic in <a class="el" href="classaudio__tools_1_1_demuxer_m_t_s.html#a1e17a5c9f8b518e6aea8ba0adb9113c4">DemuxerMTS::parse()</a> instead).  <a href="classaudio__tools_1_1_m_t_s_parse_buffer.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_channel_resampler.html">MultiChannelResampler</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multi-channel resampler that applies a BaseInterpolator-derived algorithm to each channel.  <a href="classaudio__tools_1_1_multi_channel_resampler.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1575,7 +1581,7 @@ size_t size)</a> and <a class="el" href="classaudio__tools_1_1_base_stream.html#
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manages multiple Demuxers with automatic container-format detection - the container-side counterpart of <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html" title="Manages multiple VideoDecoders with automatic format detection - the video-side counterpart of MultiD...">MultiVideoDecoder</a> (<a class="el" href="_multi_video_decoder_8h.html">Video/MultiVideoDecoder.h</a>), which does the same job one layer down for the video elementary stream's own codec. No demuxers are registered by default and this header has no container-parser dependency of its own (it only needs the <a class="el" href="classaudio__tools_1_1_demuxer.html" title="Common interface for demuxers (DemuxerAVI, DemuxerMP4) that split a container&#39;s video and (optional) ...">Demuxer</a> interface, <a class="el" href="_container_common_8h.html">ContainerCommon.h</a>) - register whichever concrete demuxers (DemuxerAVI/DemuxerMP4/DemuxerMPG) your content actually needs via <a class="el" href="classaudio__tools_1_1_multi_video_demuxer.html#a0f7d13e44d467521defee2ed034e2850">addDemuxer()</a>.  <a href="classaudio__tools_1_1_multi_video_demuxer.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_video_demuxer_full.html">MultiVideoDemuxerFull</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_multi_video_demuxer.html" title="Manages multiple Demuxers with automatic container-format detection - the container-side counterpart ...">MultiVideoDemuxer</a> pre-registered with every container format this library ships a demuxer for: <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html" title="AVI Container Decoder which can be fed with small chunks of data. The minimum length must be bigger t...">DemuxerAVI</a> (RIFF/AVI, <a class="el" href="_container_a_v_i_8h.html">AudioCodecs/ContainerAVI.h</a>), <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html" title="DemuxerMP4 extracts both the audio and (H.264) video track from a general, interleaved MP4/ISO-BMFF s...">DemuxerMP4</a> (ISO base media/MP4, <a class="el" href="_container_m_p4_8h.html">AudioCodecs/ContainerMP4.h</a>), <a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html" title="MPEG-1 System (Program) Stream Demuxer, as defined by ISO/IEC 11172-1: splits the pack_header/system_...">DemuxerMPG</a> (MPEG Program <a class="el" href="class_stream.html">Stream</a>, <a class="el" href="_container_m_p_g_8h.html">AudioCodecs/ContainerMPG.h</a>) - drop it in wherever a plain <a class="el" href="classaudio__tools_1_1_demuxer.html" title="Common interface for demuxers (DemuxerAVI, DemuxerMP4) that split a container&#39;s video and (optional) ...">Demuxer</a>&amp; is expected (<a class="el" href="classaudio__tools_1_1_video_player.html" title="High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A...">VideoPlayer</a> in fact uses one internally as its own built-in demuxer) and it self-selects the right one from the stream's own container signature instead of the caller having to know the file format up front. Use the plain <a class="el" href="classaudio__tools_1_1_multi_video_demuxer.html" title="Manages multiple Demuxers with automatic container-format detection - the container-side counterpart ...">MultiVideoDemuxer</a> (<a class="el" href="_multi_video_demuxer_8h.html">MultiVideoDemuxer.h</a>) instead if you don't want all three container parsers pulled in unconditionally - register only what your content actually needs via its own <a class="el" href="classaudio__tools_1_1_multi_video_demuxer.html#a0f7d13e44d467521defee2ed034e2850">addDemuxer()</a>.  <a href="classaudio__tools_1_1_multi_video_demuxer_full.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_multi_video_demuxer.html" title="Manages multiple Demuxers with automatic container-format detection - the container-side counterpart ...">MultiVideoDemuxer</a> pre-registered with every container format this library ships a demuxer for: <a class="el" href="classaudio__tools_1_1_demuxer_a_v_i.html" title="AVI Container Decoder which can be fed with small chunks of data. The minimum length must be bigger t...">DemuxerAVI</a> (RIFF/AVI, <a class="el" href="_container_a_v_i_8h.html">AudioCodecs/ContainerAVI.h</a>), <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html" title="DemuxerMP4 extracts both the audio and (H.264) video track from a general, interleaved MP4/ISO-BMFF s...">DemuxerMP4</a> (ISO base media/MP4, <a class="el" href="_container_m_p4_8h.html">AudioCodecs/ContainerMP4.h</a>), <a class="el" href="classaudio__tools_1_1_demuxer_m_p_g.html" title="MPEG-1 System (Program) Stream Demuxer, as defined by ISO/IEC 11172-1: splits the pack_header/system_...">DemuxerMPG</a> (MPEG Program <a class="el" href="class_stream.html">Stream</a>, <a class="el" href="_container_m_p_g_8h.html">AudioCodecs/ContainerMPG.h</a>), <a class="el" href="classaudio__tools_1_1_demuxer_m_t_s.html" title="ISO/IEC 13818-1 MPEG Transport Stream Demuxer: parses the fixed 188-byte TS packet framing,...">DemuxerMTS</a> (MPEG Transport <a class="el" href="class_stream.html">Stream</a>, <a class="el" href="_container_m_t_s_8h.html">AudioCodecs/ContainerMTS.h</a>) - drop it in wherever a plain <a class="el" href="classaudio__tools_1_1_demuxer.html" title="Common interface for demuxers (DemuxerAVI, DemuxerMP4) that split a container&#39;s video and (optional) ...">Demuxer</a>&amp; is expected (<a class="el" href="classaudio__tools_1_1_video_player.html" title="High-level video playback pipeline and controller - the video counterpart of AudioPlayer (CoreAudio/A...">VideoPlayer</a> in fact uses one internally as its own built-in demuxer) and it self-selects the right one from the stream's own container signature instead of the caller having to know the file format up front. Use the plain <a class="el" href="classaudio__tools_1_1_multi_video_demuxer.html" title="Manages multiple Demuxers with automatic container-format detection - the container-side counterpart ...">MultiVideoDemuxer</a> (<a class="el" href="_multi_video_demuxer_8h.html">MultiVideoDemuxer.h</a>) instead if you don't want all four container parsers pulled in unconditionally - register only what your content actually needs via its own <a class="el" href="classaudio__tools_1_1_multi_video_demuxer.html#a0f7d13e44d467521defee2ed034e2850">addDemuxer()</a>.  <a href="classaudio__tools_1_1_multi_video_demuxer_full.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_musical_notes.html">MusicalNotes</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determination of the frequency of a music note.  <a href="classaudio__tools_1_1_musical_notes.html#details">More...</a><br /></td></tr>
@@ -1609,6 +1615,9 @@ size_t size)</a> and <a class="el" href="classaudio__tools_1_1_base_stream.html#
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer_m_p_g.html">MuxerMPG</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">MPEG-1 System (Program) <a class="el" href="class_stream.html">Stream</a> Encoder, as defined by ISO/IEC 11172-1: muxes an already-encoded MPEG-1 video elementary stream (ISO/IEC 11172-2) and an optional MPEG-1 audio elementary stream (ISO/IEC 11172-3, Layer I/II/III) into pack_header/system_header/PES_packet framing written to a <a class="el" href="class_print.html">Print</a> (a local File to record, or e.g. a network <a class="el" href="class_client.html">Client</a> to publish a live stream).  <a href="classaudio__tools_1_1_muxer_m_p_g.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_muxer_m_t_s.html">MuxerMTS</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ISO/IEC 13818-1 MPEG Transport <a class="el" href="class_stream.html">Stream</a> Encoder: packetizes an already-encoded video elementary stream (H.264 by default - see <a class="el" href="structaudio__tools_1_1_muxer_video_config.html#ae1a2d5f854b9e6c1303c18462609f77b">MuxerVideoConfig::format</a>) and an optional audio elementary stream (AAC ADTS by default - see <a class="el" href="classaudio__tools_1_1_muxer_m_t_s.html#a7b96e47d1d1bf3dc49d33db187454702">setAudioInfo()</a>) into 188-byte TS packets, with a PAT and PMT describing the one program/two streams, written to a <a class="el" href="class_print.html">Print</a> (a local File to record a .ts, or e.g. a network <a class="el" href="class_client.html">Client</a> to publish a live/HLS-segment stream).  <a href="classaudio__tools_1_1_muxer_m_t_s.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_muxer_video_config.html">MuxerVideoConfig</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shared video track configuration for muxers (<a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html" title="Configuration for the (single) video track written by MuxerAVI.">MuxerAVI</a>, <a class="el" href="classaudio__tools_1_1_muxer_m_p4.html" title="Video track configuration for MuxerMP4 - update before calling begin().">MuxerMP4</a>) - call before begin().  <a href="structaudio__tools_1_1_muxer_video_config.html#details">More...</a><br /></td></tr>
@@ -3316,6 +3325,12 @@ Functions</h2></td></tr>
 <tr class="memitem:ga310900d2a0661bc3d56d33eaa298eb65" id="r_ga310900d2a0661bc3d56d33eaa298eb65"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__video.html#ga310900d2a0661bc3d56d33eaa298eb65">isMpeg1KeyFrame</a> (const uint8_t *data, size_t len)</td></tr>
 <tr class="memdesc:ga310900d2a0661bc3d56d33eaa298eb65"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if the given MPEG-1/2 video access unit's picture header declares picture_coding_type == 1 (I-picture) - the MPEG equivalent of <a class="el" href="group__video.html#ga24e3bee07bdb300753b137288bfa33c3" title="True if the given Annex-B H.264 access unit contains an IDR slice NAL unit (nal_unit_type 5) - the re...">isH264KeyFrame()</a>. Layout (ISO/IEC 11172-2): a 00 00 01 00 picture_start_code is immediately followed by temporal_reference (10 bits) then picture_coding_type (3 bits), so the type field always falls in bits 5-3 of the byte right after the 2-byte temporal_reference span (i.e. 6 bytes into the access unit, counting the start code).  <br /></td></tr>
 <tr class="separator:ga310900d2a0661bc3d56d33eaa298eb65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a203a5cd6a42fbdd3ef90e46cd7c36938" id="r_a203a5cd6a42fbdd3ef90e46cd7c36938"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a203a5cd6a42fbdd3ef90e46cd7c36938">isMtsAudioStreamType</a> (uint8_t st)</td></tr>
+<tr class="memdesc:a203a5cd6a42fbdd3ef90e46cd7c36938"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if 'st' is one of the audio stream_type values recognized above.  <br /></td></tr>
+<tr class="separator:a203a5cd6a42fbdd3ef90e46cd7c36938"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf664e0bb9bfe7ac28ca14c1631bb999" id="r_adf664e0bb9bfe7ac28ca14c1631bb999"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#adf664e0bb9bfe7ac28ca14c1631bb999">isMtsVideoStreamType</a> (uint8_t st)</td></tr>
+<tr class="memdesc:adf664e0bb9bfe7ac28ca14c1631bb999"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if 'st' is one of the video stream_type values recognized above.  <br /></td></tr>
+<tr class="separator:adf664e0bb9bfe7ac28ca14c1631bb999"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad39420cdd896dd12c68e36313139d0a5" id="r_ad39420cdd896dd12c68e36313139d0a5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ad39420cdd896dd12c68e36313139d0a5">ISR</a> (TIMER1_COMPA_vect)</td></tr>
 <tr class="memdesc:ad39420cdd896dd12c68e36313139d0a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">timer callback: write the next frame to the pins  <br /></td></tr>
 <tr class="separator:ad39420cdd896dd12c68e36313139d0a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -3331,6 +3346,16 @@ Functions</h2></td></tr>
 <tr class="memitem:adb94fbd930038e1510574dd4bcf07fe1" id="r_adb94fbd930038e1510574dd4bcf07fe1"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">millis</a> ()</td></tr>
 <tr class="memdesc:adb94fbd930038e1510574dd4bcf07fe1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the milliseconds since the start.  <br /></td></tr>
 <tr class="separator:adb94fbd930038e1510574dd4bcf07fe1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abdda1f9e2c003da7fc038a28c6222f52" id="r_abdda1f9e2c003da7fc038a28c6222f52"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1">AudioFormat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#abdda1f9e2c003da7fc038a28c6222f52">mtsAudioFormat</a> (uint8_t st)</td></tr>
+<tr class="separator:abdda1f9e2c003da7fc038a28c6222f52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf3b316227965d0397185f338c349dbc" id="r_abf3b316227965d0397185f338c349dbc"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#abf3b316227965d0397185f338c349dbc">mtsAudioStreamType</a> (<a class="el" href="group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1">AudioFormat</a> format)</td></tr>
+<tr class="separator:abf3b316227965d0397185f338c349dbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a091a5537c8366c3feedacf924045827d" id="r_a091a5537c8366c3feedacf924045827d"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a091a5537c8366c3feedacf924045827d">mtsCrc32</a> (const uint8_t *data, size_t len)</td></tr>
+<tr class="separator:a091a5537c8366c3feedacf924045827d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81c4e974d63fea18e3af48c8448a71ba" id="r_a81c4e974d63fea18e3af48c8448a71ba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a81c4e974d63fea18e3af48c8448a71ba">mtsVideoFormat</a> (uint8_t st)</td></tr>
+<tr class="separator:a81c4e974d63fea18e3af48c8448a71ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7e37d956bd7f9d35842d2d539958486" id="r_aa7e37d956bd7f9d35842d2d539958486"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aa7e37d956bd7f9d35842d2d539958486">mtsVideoStreamType</a> (<a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a> format)</td></tr>
+<tr class="separator:aa7e37d956bd7f9d35842d2d539958486"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7003387e44fc36bcb1ba512a80c3f1b4" id="r_a7003387e44fc36bcb1ba512a80c3f1b4"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a7003387e44fc36bcb1ba512a80c3f1b4">operator!=</a> (<a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">audio_tools::digital_pin_t</a> &amp;a, <a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">audio_tools::digital_pin_t</a> &amp;b)</td></tr>
 <tr class="memdesc:a7003387e44fc36bcb1ba512a80c3f1b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Support for pin compare.  <br /></td></tr>
 <tr class="separator:a7003387e44fc36bcb1ba512a80c3f1b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -3701,6 +3726,42 @@ Variables</h2></td></tr>
 <tr class="memitem:a5a2822fc96e59abe301632435d98c634" id="r_a5a2822fc96e59abe301632435d98c634"><td class="memItemLeft" align="right" valign="top">static const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a5a2822fc96e59abe301632435d98c634">MPG_VIDEO_STREAM_ID</a> = 0xE0</td></tr>
 <tr class="memdesc:a5a2822fc96e59abe301632435d98c634"><td class="mdescLeft">&#160;</td><td class="mdescRight">First (and, in this single-track implementation, only) video stream_id.  <br /></td></tr>
 <tr class="separator:a5a2822fc96e59abe301632435d98c634"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a177d4f029c1b1118ed8a1e671b8ed403" id="r_a177d4f029c1b1118ed8a1e671b8ed403"><td class="memItemLeft" align="right" valign="top">static const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a177d4f029c1b1118ed8a1e671b8ed403">MTS_CLOCK_HZ</a> = 90000</td></tr>
+<tr class="separator:a177d4f029c1b1118ed8a1e671b8ed403"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cbcf4de333b1b3ad5b9ef335793bda8" id="r_a3cbcf4de333b1b3ad5b9ef335793bda8"><td class="memItemLeft" align="right" valign="top">static const size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a3cbcf4de333b1b3ad5b9ef335793bda8">MTS_PACKET_SIZE</a> = 188</td></tr>
+<tr class="separator:a3cbcf4de333b1b3ad5b9ef335793bda8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad18cbde895ff730cb05a83c13c873ee3" id="r_ad18cbde895ff730cb05a83c13c873ee3"><td class="memItemLeft" align="right" valign="top">static const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ad18cbde895ff730cb05a83c13c873ee3">MTS_PID_AUDIO</a> = 0x0101</td></tr>
+<tr class="separator:ad18cbde895ff730cb05a83c13c873ee3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af565099058228bf80daf58ca6f31c719" id="r_af565099058228bf80daf58ca6f31c719"><td class="memItemLeft" align="right" valign="top">static const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#af565099058228bf80daf58ca6f31c719">MTS_PID_PAT</a> = 0x0000</td></tr>
+<tr class="separator:af565099058228bf80daf58ca6f31c719"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b9297fce09efff73492fb5dda2c10b8" id="r_a9b9297fce09efff73492fb5dda2c10b8"><td class="memItemLeft" align="right" valign="top">static const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a9b9297fce09efff73492fb5dda2c10b8">MTS_PID_PMT</a> = 0x1000</td></tr>
+<tr class="separator:a9b9297fce09efff73492fb5dda2c10b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a3cfd29f8520b87677d5ba37fdfe223" id="r_a7a3cfd29f8520b87677d5ba37fdfe223"><td class="memItemLeft" align="right" valign="top">static const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a7a3cfd29f8520b87677d5ba37fdfe223">MTS_PID_VIDEO</a> = 0x0100</td></tr>
+<tr class="separator:a7a3cfd29f8520b87677d5ba37fdfe223"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1bd9e446c021eb56cb7000c1bc221a8" id="r_ab1bd9e446c021eb56cb7000c1bc221a8"><td class="memItemLeft" align="right" valign="top">static const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ab1bd9e446c021eb56cb7000c1bc221a8">MTS_STREAM_ID_AUDIO</a> = 0xC0</td></tr>
+<tr class="separator:ab1bd9e446c021eb56cb7000c1bc221a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab45a3c2e83370bc6b6384d58630e0c70" id="r_ab45a3c2e83370bc6b6384d58630e0c70"><td class="memItemLeft" align="right" valign="top">static const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ab45a3c2e83370bc6b6384d58630e0c70">MTS_STREAM_ID_VIDEO</a> = 0xE0</td></tr>
+<tr class="separator:ab45a3c2e83370bc6b6384d58630e0c70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43444f46b06df95352b2c73aad9c718e" id="r_a43444f46b06df95352b2c73aad9c718e"><td class="memItemLeft" align="right" valign="top">static const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a43444f46b06df95352b2c73aad9c718e">MTS_STREAM_TYPE_AAC_ADTS</a> = 0x0F</td></tr>
+<tr class="separator:a43444f46b06df95352b2c73aad9c718e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec0210020983a52bcbe16986b6283311" id="r_aec0210020983a52bcbe16986b6283311"><td class="memItemLeft" align="right" valign="top">static const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aec0210020983a52bcbe16986b6283311">MTS_STREAM_TYPE_H264</a> = 0x1B</td></tr>
+<tr class="separator:aec0210020983a52bcbe16986b6283311"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c01f9de53fe21cfbd95b2d8f41ee845" id="r_a1c01f9de53fe21cfbd95b2d8f41ee845"><td class="memItemLeft" align="right" valign="top">static const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a1c01f9de53fe21cfbd95b2d8f41ee845">MTS_STREAM_TYPE_MJPEG</a> = <a class="el" href="namespaceaudio__tools.html#aa51743d0a067289676ea284d04f64f27">MTS_STREAM_TYPE_PRIVATE</a></td></tr>
+<tr class="separator:a1c01f9de53fe21cfbd95b2d8f41ee845"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa53d47f09f73c84ef0a33f8ee67ef342" id="r_aa53d47f09f73c84ef0a33f8ee67ef342"><td class="memItemLeft" align="right" valign="top">static const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aa53d47f09f73c84ef0a33f8ee67ef342">MTS_STREAM_TYPE_MPEG1_AUDIO</a> = 0x03</td></tr>
+<tr class="separator:aa53d47f09f73c84ef0a33f8ee67ef342"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0eab89c3f3552848ff45eeae2e3c5c43" id="r_a0eab89c3f3552848ff45eeae2e3c5c43"><td class="memItemLeft" align="right" valign="top">static const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a0eab89c3f3552848ff45eeae2e3c5c43">MTS_STREAM_TYPE_MPEG1_VIDEO</a> = 0x01</td></tr>
+<tr class="separator:a0eab89c3f3552848ff45eeae2e3c5c43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9758d3c4a149d425a9820e1bcd9cb3b" id="r_ab9758d3c4a149d425a9820e1bcd9cb3b"><td class="memItemLeft" align="right" valign="top">static const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ab9758d3c4a149d425a9820e1bcd9cb3b">MTS_STREAM_TYPE_MPEG2_AUDIO</a> = 0x04</td></tr>
+<tr class="separator:ab9758d3c4a149d425a9820e1bcd9cb3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5143edb90149e9764ae149d4b15e002a" id="r_a5143edb90149e9764ae149d4b15e002a"><td class="memItemLeft" align="right" valign="top">static const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a5143edb90149e9764ae149d4b15e002a">MTS_STREAM_TYPE_MPEG2_VIDEO</a> = 0x02</td></tr>
+<tr class="separator:a5143edb90149e9764ae149d4b15e002a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63c8bf210a08d6761ae256bb884c6baa" id="r_a63c8bf210a08d6761ae256bb884c6baa"><td class="memItemLeft" align="right" valign="top">static const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a63c8bf210a08d6761ae256bb884c6baa">MTS_STREAM_TYPE_MPEG4_VIDEO</a> = 0x10</td></tr>
+<tr class="separator:a63c8bf210a08d6761ae256bb884c6baa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa51743d0a067289676ea284d04f64f27" id="r_aa51743d0a067289676ea284d04f64f27"><td class="memItemLeft" align="right" valign="top">static const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aa51743d0a067289676ea284d04f64f27">MTS_STREAM_TYPE_PRIVATE</a> = 0x06</td></tr>
+<tr class="separator:aa51743d0a067289676ea284d04f64f27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34e69a68e1bc6aef97e885b0bed7a142" id="r_a34e69a68e1bc6aef97e885b0bed7a142"><td class="memItemLeft" align="right" valign="top">static const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a34e69a68e1bc6aef97e885b0bed7a142">MTS_SYNC_BYTE</a> = 0x47</td></tr>
+<tr class="separator:a34e69a68e1bc6aef97e885b0bed7a142"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c4337e5662744b392f8c2dc75c39257" id="r_a3c4337e5662744b392f8c2dc75c39257"><td class="memItemLeft" align="right" valign="top">static uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a3c4337e5662744b392f8c2dc75c39257">p_i2s_array</a> = nullptr</td></tr>
 <tr class="separator:a3c4337e5662744b392f8c2dc75c39257"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f7cd589fce95222e361f9e5da299082" id="r_a9f7cd589fce95222e361f9e5da299082"><td class="memItemLeft" align="right" valign="top">static uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a9f7cd589fce95222e361f9e5da299082">p_i2s_array_1</a> = nullptr</td></tr>
@@ -6706,6 +6767,62 @@ template&lt;typename T  = i2s_chan_config_t&gt; </div>
 
 </div>
 </div>
+<a id="a203a5cd6a42fbdd3ef90e46cd7c36938" name="a203a5cd6a42fbdd3ef90e46cd7c36938"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a203a5cd6a42fbdd3ef90e46cd7c36938">&#9670;&#160;</a></span>isMtsAudioStreamType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isMtsAudioStreamType </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>st</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>True if 'st' is one of the audio stream_type values recognized above. </p>
+
+</div>
+</div>
+<a id="adf664e0bb9bfe7ac28ca14c1631bb999" name="adf664e0bb9bfe7ac28ca14c1631bb999"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf664e0bb9bfe7ac28ca14c1631bb999">&#9670;&#160;</a></span>isMtsVideoStreamType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isMtsVideoStreamType </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>st</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>True if 'st' is one of the video stream_type values recognized above. </p>
+
+</div>
+</div>
 <a id="ad39420cdd896dd12c68e36313139d0a5" name="ad39420cdd896dd12c68e36313139d0a5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad39420cdd896dd12c68e36313139d0a5">&#9670;&#160;</a></span>ISR()</h2>
 
@@ -6845,6 +6962,151 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the milliseconds since the start. </p>
+
+</div>
+</div>
+<a id="abdda1f9e2c003da7fc038a28c6222f52" name="abdda1f9e2c003da7fc038a28c6222f52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abdda1f9e2c003da7fc038a28c6222f52">&#9670;&#160;</a></span>mtsAudioFormat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1">AudioFormat</a> mtsAudioFormat </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>st</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Maps a PMT audio stream_type to the AudioFormat this library uses elsewhere - <a class="el" href="group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1a696b031073e74bf2cb98e5ef201d4aa3">AudioFormat::UNKNOWN</a> if not one of the 3 recognized above. </p>
+
+</div>
+</div>
+<a id="abf3b316227965d0397185f338c349dbc" name="abf3b316227965d0397185f338c349dbc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf3b316227965d0397185f338c349dbc">&#9670;&#160;</a></span>mtsAudioStreamType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t mtsAudioStreamType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1">AudioFormat</a>&#160;</td>
+          <td class="paramname"><em>format</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Maps an AudioFormat to the PMT stream_type <a class="el" href="classaudio__tools_1_1_muxer_m_t_s.html" title="ISO/IEC 13818-1 MPEG Transport Stream Encoder: packetizes an already-encoded video elementary stream ...">MuxerMTS</a> writes for it - MTS_STREAM_TYPE_PRIVATE (with a warning) for anything not AAC/MP3. </p>
+
+</div>
+</div>
+<a id="a091a5537c8366c3feedacf924045827d" name="a091a5537c8366c3feedacf924045827d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a091a5537c8366c3feedacf924045827d">&#9670;&#160;</a></span>mtsCrc32()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t mtsCrc32 </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>CRC-32/MPEG-2 (poly 0x04C11DB7, init 0xFFFFFFFF, MSB-first, no reflect, no final XOR) - the checksum PAT/PMT/every other PSI table section carries in its last 4 bytes, needed both to write valid PAT/PMT sections (<a class="el" href="classaudio__tools_1_1_muxer_m_t_s.html" title="ISO/IEC 13818-1 MPEG Transport Stream Encoder: packetizes an already-encoded video elementary stream ...">MuxerMTS</a>) and, in a fuller implementation, to validate ones received (kept available for that even though <a class="el" href="classaudio__tools_1_1_demuxer_m_t_s.html" title="ISO/IEC 13818-1 MPEG Transport Stream Demuxer: parses the fixed 188-byte TS packet framing,...">DemuxerMTS</a> currently trusts the sections it parses without checking it). </p>
+
+</div>
+</div>
+<a id="a81c4e974d63fea18e3af48c8448a71ba" name="a81c4e974d63fea18e3af48c8448a71ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81c4e974d63fea18e3af48c8448a71ba">&#9670;&#160;</a></span>mtsVideoFormat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a> mtsVideoFormat </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>st</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Maps a PMT video stream_type to the VideoFormat this library uses elsewhere - <a class="el" href="group__video.html#gga216a5d43d2a518325c84f100ed7735a5a696b031073e74bf2cb98e5ef201d4aa3">VideoFormat::UNKNOWN</a> if not one of the 5 recognized above (MPEG-2 video has no dedicated VideoFormat value, so it is folded into MPEG1 - close enough for tagging purposes, since this library never decodes either). </p>
+
+</div>
+</div>
+<a id="aa7e37d956bd7f9d35842d2d539958486" name="aa7e37d956bd7f9d35842d2d539958486"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7e37d956bd7f9d35842d2d539958486">&#9670;&#160;</a></span>mtsVideoStreamType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t mtsVideoStreamType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a>&#160;</td>
+          <td class="paramname"><em>format</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Maps a VideoFormat to the PMT stream_type <a class="el" href="classaudio__tools_1_1_muxer_m_t_s.html" title="ISO/IEC 13818-1 MPEG Transport Stream Encoder: packetizes an already-encoded video elementary stream ...">MuxerMTS</a> writes for it - MTS_STREAM_TYPE_PRIVATE (with a warning) for anything not H264/MPEG1/ MPEG4/MJPEG, the only video codecs this container recognizes. </p>
 
 </div>
 </div>
@@ -11597,6 +11859,403 @@ template&lt;typename T , class P &gt; </div>
 </div><div class="memdoc">
 
 <p>First (and, in this single-track implementation, only) video stream_id. </p>
+
+</div>
+</div>
+<a id="a177d4f029c1b1118ed8a1e671b8ed403" name="a177d4f029c1b1118ed8a1e671b8ed403"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a177d4f029c1b1118ed8a1e671b8ed403">&#9670;&#160;</a></span>MTS_CLOCK_HZ</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint32_t MTS_CLOCK_HZ = 90000</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3cbcf4de333b1b3ad5b9ef335793bda8" name="a3cbcf4de333b1b3ad5b9ef335793bda8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cbcf4de333b1b3ad5b9ef335793bda8">&#9670;&#160;</a></span>MTS_PACKET_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const size_t MTS_PACKET_SIZE = 188</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad18cbde895ff730cb05a83c13c873ee3" name="ad18cbde895ff730cb05a83c13c873ee3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad18cbde895ff730cb05a83c13c873ee3">&#9670;&#160;</a></span>MTS_PID_AUDIO</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint16_t MTS_PID_AUDIO = 0x0101</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af565099058228bf80daf58ca6f31c719" name="af565099058228bf80daf58ca6f31c719"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af565099058228bf80daf58ca6f31c719">&#9670;&#160;</a></span>MTS_PID_PAT</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint16_t MTS_PID_PAT = 0x0000</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9b9297fce09efff73492fb5dda2c10b8" name="a9b9297fce09efff73492fb5dda2c10b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b9297fce09efff73492fb5dda2c10b8">&#9670;&#160;</a></span>MTS_PID_PMT</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint16_t MTS_PID_PMT = 0x1000</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7a3cfd29f8520b87677d5ba37fdfe223" name="a7a3cfd29f8520b87677d5ba37fdfe223"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a3cfd29f8520b87677d5ba37fdfe223">&#9670;&#160;</a></span>MTS_PID_VIDEO</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint16_t MTS_PID_VIDEO = 0x0100</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab1bd9e446c021eb56cb7000c1bc221a8" name="ab1bd9e446c021eb56cb7000c1bc221a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1bd9e446c021eb56cb7000c1bc221a8">&#9670;&#160;</a></span>MTS_STREAM_ID_AUDIO</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t MTS_STREAM_ID_AUDIO = 0xC0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab45a3c2e83370bc6b6384d58630e0c70" name="ab45a3c2e83370bc6b6384d58630e0c70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab45a3c2e83370bc6b6384d58630e0c70">&#9670;&#160;</a></span>MTS_STREAM_ID_VIDEO</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t MTS_STREAM_ID_VIDEO = 0xE0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a43444f46b06df95352b2c73aad9c718e" name="a43444f46b06df95352b2c73aad9c718e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43444f46b06df95352b2c73aad9c718e">&#9670;&#160;</a></span>MTS_STREAM_TYPE_AAC_ADTS</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t MTS_STREAM_TYPE_AAC_ADTS = 0x0F</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aec0210020983a52bcbe16986b6283311" name="aec0210020983a52bcbe16986b6283311"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec0210020983a52bcbe16986b6283311">&#9670;&#160;</a></span>MTS_STREAM_TYPE_H264</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t MTS_STREAM_TYPE_H264 = 0x1B</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1c01f9de53fe21cfbd95b2d8f41ee845" name="a1c01f9de53fe21cfbd95b2d8f41ee845"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c01f9de53fe21cfbd95b2d8f41ee845">&#9670;&#160;</a></span>MTS_STREAM_TYPE_MJPEG</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t MTS_STREAM_TYPE_MJPEG = <a class="el" href="namespaceaudio__tools.html#aa51743d0a067289676ea284d04f64f27">MTS_STREAM_TYPE_PRIVATE</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>ISO/IEC 13818-1 reserves 0x06 ("PES packets containing private data") for user-private use - there is no officially registered stream_type for Motion-JPEG. This library (and e.g. ffmpeg's own MPEG-TS muxer) uses that same value for it by convention: fine for a stream produced by <a class="el" href="classaudio__tools_1_1_muxer_m_t_s.html" title="ISO/IEC 13818-1 MPEG Transport Stream Encoder: packetizes an already-encoded video elementary stream ...">MuxerMTS</a> and read back by <a class="el" href="classaudio__tools_1_1_demuxer_m_t_s.html" title="ISO/IEC 13818-1 MPEG Transport Stream Demuxer: parses the fixed 188-byte TS packet framing,...">DemuxerMTS</a>, but it means a third-party .ts file carrying an unrelated private stream on stream_type 0x06 (subtitles, proprietary metadata, ...) would be misidentified as MJPEG video by <a class="el" href="classaudio__tools_1_1_demuxer_m_t_s.html" title="ISO/IEC 13818-1 MPEG Transport Stream Demuxer: parses the fixed 188-byte TS packet framing,...">DemuxerMTS</a> - no descriptor distinguishes the two. </p>
+
+</div>
+</div>
+<a id="aa53d47f09f73c84ef0a33f8ee67ef342" name="aa53d47f09f73c84ef0a33f8ee67ef342"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa53d47f09f73c84ef0a33f8ee67ef342">&#9670;&#160;</a></span>MTS_STREAM_TYPE_MPEG1_AUDIO</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t MTS_STREAM_TYPE_MPEG1_AUDIO = 0x03</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0eab89c3f3552848ff45eeae2e3c5c43" name="a0eab89c3f3552848ff45eeae2e3c5c43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0eab89c3f3552848ff45eeae2e3c5c43">&#9670;&#160;</a></span>MTS_STREAM_TYPE_MPEG1_VIDEO</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t MTS_STREAM_TYPE_MPEG1_VIDEO = 0x01</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab9758d3c4a149d425a9820e1bcd9cb3b" name="ab9758d3c4a149d425a9820e1bcd9cb3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9758d3c4a149d425a9820e1bcd9cb3b">&#9670;&#160;</a></span>MTS_STREAM_TYPE_MPEG2_AUDIO</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t MTS_STREAM_TYPE_MPEG2_AUDIO = 0x04</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5143edb90149e9764ae149d4b15e002a" name="a5143edb90149e9764ae149d4b15e002a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5143edb90149e9764ae149d4b15e002a">&#9670;&#160;</a></span>MTS_STREAM_TYPE_MPEG2_VIDEO</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t MTS_STREAM_TYPE_MPEG2_VIDEO = 0x02</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a63c8bf210a08d6761ae256bb884c6baa" name="a63c8bf210a08d6761ae256bb884c6baa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63c8bf210a08d6761ae256bb884c6baa">&#9670;&#160;</a></span>MTS_STREAM_TYPE_MPEG4_VIDEO</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t MTS_STREAM_TYPE_MPEG4_VIDEO = 0x10</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa51743d0a067289676ea284d04f64f27" name="aa51743d0a067289676ea284d04f64f27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa51743d0a067289676ea284d04f64f27">&#9670;&#160;</a></span>MTS_STREAM_TYPE_PRIVATE</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t MTS_STREAM_TYPE_PRIVATE = 0x06</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a34e69a68e1bc6aef97e885b0bed7a142" name="a34e69a68e1bc6aef97e885b0bed7a142"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34e69a68e1bc6aef97e885b0bed7a142">&#9670;&#160;</a></span>MTS_SYNC_BYTE</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t MTS_SYNC_BYTE = 0x47</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
