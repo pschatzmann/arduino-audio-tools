@@ -40,6 +40,7 @@
 #include "AudioTools/AudioCodecs/CodecLC3.h"
 #include "AudioTools/AudioCodecs/ContainerAVI.h"
 #include "AudioTools/AudioCodecs/ContainerMPG.h"
+#include "AudioTools/AudioCodecs/ContainerMTS.h"
 #include "AudioTools/AudioCodecs/StreamingDecoder.h"
 //#include "AudioTools/AudioCodecs/CodecMP3Mini.h"
 //#include "AudioTools/AudioCodecs/CodecMP2.h"
