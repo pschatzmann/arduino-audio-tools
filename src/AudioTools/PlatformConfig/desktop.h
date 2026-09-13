@@ -51,7 +51,9 @@
 typedef WiFiClient WiFiClientSecure;
 #endif
 #elif defined(ESP32_CMAKE)
-#  define ESP32
+#  ifndef ESP32
+#    define ESP32
+#  endif
 #  include "esp_idf_version.h"
 #  include "AudioTools/AudioLibs/Emulation/Arduino.h"
 #else 
