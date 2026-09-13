@@ -24,7 +24,7 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 endif()
 
 # Build with helix 
-FetchContent_Declare(helix GIT_REPOSITORY "https://github.com/pschatzmann/arduino-libhelix.git" GIT_TAG main )
+FetchContent_Declare(helix GIT_REPOSITORY "https://github.com/pschatzmann/codec-helix.git" GIT_TAG main )
 FetchContent_GetProperties(helix)
 if(NOT helix_POPULATED)
     FetchContent_Populate(helix)

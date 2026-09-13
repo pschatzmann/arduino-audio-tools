@@ -37,7 +37,7 @@ namespace audio_tools {
  * - https://github.com/pschatzmann/TinyH264
  * - https://github.com/pschatzmann/TinyMPG
  * - https://github.com/pschatzmann/TinyJPEG
- * - https://github.com/pschatzmann/arduino-libhelix
+ * - https://github.com/pschatzmann/codec-helix
  * - https://github.com/pschatzmann/TinyMP2
  *
  * @ingroup player

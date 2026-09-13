@@ -4,7 +4,7 @@
 #include "SD.h"
 #include "AudioTools.h"
 #include "AudioTools/Communication/A2DPStream.h" // https://github.com/pschatzmann/ESP32-A2DP
-#include "AudioTools/AudioCodecs/CodecMP3Helix.h" // https://github.com/pschatzmann/arduino-libhelix
+#include "AudioTools/AudioCodecs/CodecMP3Helix.h" // https://github.com/pschatzmann/codec-helix
 //#include "AudioTools/AudioLibs/AudioBoardStream.h" // for SPI pins
 
 File file;

@@ -23,7 +23,7 @@ namespace audio_tools {
 
 /**
  * @brief Vorbis Streaming Decoder using
- * https://github.com/pschatzmann/arduino-libvorbis-tremor
+ * https://github.com/pschatzmann/codec-vorbis-tremor
  * @ingroup codecs
  * @ingroup decoder
  * @author Phil Schatzmann

@@ -23,7 +23,7 @@ struct AudioInfoLAME : public liblame::AudioInfo  {
 
 /**
  * @brief Encodes PCM data to the MP3 format and writes the result to a stream
- * This is basically just a wrapper using https://github.com/pschatzmann/arduino-liblame
+ * This is basically just a wrapper using https://github.com/pschatzmann/codec-lame
  * @ingroup codecs
  * @ingroup encoder
  * @author Phil Schatzmann

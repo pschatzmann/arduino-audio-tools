@@ -1,7 +1,7 @@
 /**
  * @file CodecLC3.h
  * @author Phil Schatzmann
- * @brief Codec for lc3 using https://github.com/pschatzmann/arduino-liblc3
+ * @brief Codec for lc3 using https://github.com/pschatzmann/codec-lc3
  * @version 0.1
  * @date 2022-04-24
  *
@@ -22,7 +22,7 @@ namespace audio_tools {
 
 /**
  * @brief Decoder for LC3. Depends on
- * https://github.com/pschatzmann/arduino-liblc3
+ * https://github.com/pschatzmann/codec-lc3
  * @ingroup codecs
  * @ingroup decoder
  * @author Phil Schatzmann
@@ -179,7 +179,7 @@ class LC3Decoder : public AudioDecoder {
 
 /**
  * @brief Encoder for LC3 - Depends on
- * https://github.com/pschatzmann/arduino-liblc3
+ * https://github.com/pschatzmann/codec-lc3
  * @ingroup codecs
  * @ingroup encoder
  * @author Phil Schatzmann

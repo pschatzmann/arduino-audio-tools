@@ -8,7 +8,7 @@ set (DCMAKE_CXX_FLAGS "-Werror")
 include(FetchContent)
 option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
 
-# Build with arduino-fdk-aac
+# Build with codec-fdk-aac
 FetchContent_Declare(codec-alac GIT_REPOSITORY "https://github.com/pschatzmann/codec-alac.git" GIT_TAG main )
 FetchContent_GetProperties(codec-alac)
 if(NOT codec-alac_POPULATED)

@@ -23,7 +23,7 @@ endif()
 
 
 # Build with libmad 
-FetchContent_Declare(arduino_libmad GIT_REPOSITORY "https://github.com/pschatzmann/arduino-libmad.git" GIT_TAG main )
+FetchContent_Declare(arduino_libmad GIT_REPOSITORY "https://github.com/pschatzmann/codec-mad.git" GIT_TAG main )
 FetchContent_GetProperties(arduino_libmad)
 if(NOT arduino_libmad_POPULATED)
     FetchContent_Populate(arduino_libmad)

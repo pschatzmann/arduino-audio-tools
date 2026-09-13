@@ -29,7 +29,7 @@ XMT  |	3V (or another GPIO PIN which is set to high)
 
 ### Dependencies
 
-- https://github.com/pschatzmann/arduino-libmad
+- https://github.com/pschatzmann/codec-mad
 
 
 

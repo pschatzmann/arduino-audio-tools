@@ -12,8 +12,8 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../../.. ${CMAKE_CURRENT_BINARY_DIR}/arduino-audio-tools )
 endif()
 
-# Build with arduino-fdk-aac
-FetchContent_Declare(fdk_aac GIT_REPOSITORY "https://github.com/pschatzmann/arduino-fdk-aac.git" GIT_TAG main )
+# Build with codec-fdk-aac
+FetchContent_Declare(fdk_aac GIT_REPOSITORY "https://github.com/pschatzmann/codec-fdk-aac.git" GIT_TAG main )
 FetchContent_GetProperties(fdk_aac)
 if(NOT fdk_aac_POPULATED)
     FetchContent_Populate(fdk_aac)

@@ -1,7 +1,7 @@
 /**
  * @file CodecGSM.h
  * @author Phil Schatzmann
- * @brief GSM Codec using  https://github.com/pschatzmann/arduino-libgsm
+ * @brief GSM Codec using  https://github.com/pschatzmann/codec-gsm
  * @version 0.1
  * @date 2022-04-24
  */
@@ -16,7 +16,7 @@ namespace audio_tools {
 
 /**
  * @brief Decoder for GSM. Depends on
- * https://github.com/pschatzmann/arduino-libgsm.
+ * https://github.com/pschatzmann/codec-gsm.
  * Inspired by gsmdec.c
  * @ingroup codecs
  * @ingroup decoder
@@ -123,7 +123,7 @@ class GSMDecoder : public AudioDecoder {
 
 /**
  * @brief Encoder for GSM - Depends on
- * https://github.com/pschatzmann/arduino-libgsm.
+ * https://github.com/pschatzmann/codec-gsm.
  * Inspired by gsmenc.c
  * @ingroup codecs
  * @ingroup encoder

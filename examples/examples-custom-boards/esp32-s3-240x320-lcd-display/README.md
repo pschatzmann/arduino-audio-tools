@@ -75,5 +75,5 @@ All confirmed working on real hardware (2026-08-18) unless noted otherwise.
 -   [TinyGPU](https://github.com/pschatzmann/TinyGPU) (`lcd-test`)
 -   [Adafruit_NeoPixel](https://github.com/adafruit/Adafruit_NeoPixel)
     (`led-test`)
--   [arduino-libhelix](https://github.com/pschatzmann/arduino-libhelix)
+-   [arduino-libhelix](https://github.com/pschatzmann/codec-helix)
     (`player-sdmmc`, MP3 decoding)

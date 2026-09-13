@@ -13,7 +13,7 @@
  */
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/CodecADPCM.h"
-#include "AudioTools/AudioCodecs/CodecMP3Helix.h"  // https://github.com/pschatzmann/arduino-libhelix
+#include "AudioTools/AudioCodecs/CodecMP3Helix.h"  // https://github.com/pschatzmann/codec-helix
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
 #include "AudioTools/Communication/RTSP.h"  // brings RTSPClientWiFi alias
 

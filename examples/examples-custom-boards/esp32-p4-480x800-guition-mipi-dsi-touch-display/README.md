@@ -105,7 +105,7 @@ depend on guition-jc4880p4-bsp or its `esp_lcd_touch_gt911` vendoring
     (`audio-out`, `audio-in`, `player-sdmmc`)
 -   [arduino-audio-driver](https://github.com/pschatzmann/arduino-audio-driver)
     (`audio-out`, `audio-in`, `player-sdmmc`)
--   [arduino-libhelix](https://github.com/pschatzmann/arduino-libhelix)
+-   [arduino-libhelix](https://github.com/pschatzmann/codec-helix)
     (`player-sdmmc`)
 -   [TinyGPU](https://github.com/pschatzmann/TinyGPU) (`lcd-test`)
 -   `sdmmc-test`, `wifi-test` need no extra library beyond what

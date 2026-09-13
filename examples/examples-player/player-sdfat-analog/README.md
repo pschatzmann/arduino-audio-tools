@@ -56,5 +56,5 @@ It should also be possible to connect a headphone to the output pins.
 ## Dependencies
 
 - https://github.com/pschatzmann/arduino-audio-tools
-- https://github.com/pschatzmann/arduino-libhelix
+- https://github.com/pschatzmann/codec-helix
 - https://github.com/greiman/SdFat

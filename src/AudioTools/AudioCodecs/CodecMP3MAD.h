@@ -15,7 +15,7 @@ namespace audio_tools {
 static AudioInfoSupport *audioChangeMAD=nullptr;
 
 /**
- * @brief MP3 Decoder using https://github.com/pschatzmann/arduino-libmad
+ * @brief MP3 Decoder using https://github.com/pschatzmann/codec-mad
  * @ingroup codecs
  * @ingroup decoder
  * @author Phil Schatzmann

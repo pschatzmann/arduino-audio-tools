@@ -10,7 +10,7 @@ namespace audio_tools {
 
 /**
  * @brief AAC Decoder using libhelix:
- * https://github.com/pschatzmann/arduino-libhelix This is basically just a
+ * https://github.com/pschatzmann/codec-helix This is basically just a
  * simple wrapper to provide AudioInfo and AudioInfoSupport
  * @ingroup codecs
  * @ingroup decoder

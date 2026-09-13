@@ -17,7 +17,7 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 endif()
 
 # Build with liblame 
-FetchContent_Declare(arduino_liblame GIT_REPOSITORY "https://github.com/pschatzmann/arduino-liblame.git" GIT_TAG main )
+FetchContent_Declare(arduino_liblame GIT_REPOSITORY "https://github.com/pschatzmann/codec-lame.git" GIT_TAG main )
 FetchContent_GetProperties(arduino_liblame)
 if(NOT arduino_liblame_POPULATED)
     FetchContent_Populate(arduino_liblame)

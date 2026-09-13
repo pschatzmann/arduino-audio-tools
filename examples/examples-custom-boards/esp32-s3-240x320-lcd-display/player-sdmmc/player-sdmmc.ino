@@ -7,7 +7,7 @@
  * Dependencies:
  * - https://github.com/pschatzmann/arduino-audio-tools
  * - https://github.com/pschatzmann/arduino-audio-driver
- * - https://github.com/pschatzmann/arduino-libhelix
+ * - https://github.com/pschatzmann/codec-helix
  * @see https://www.lcdwiki.com/2.8inch_ESP32-S3_Display
  * @author Phil Schatzmann
  * @copyright GPLv3

@@ -1,7 +1,7 @@
 /**
  * @file CodecFLAC.h
  * @author Phil Schatzmann
- * @brief FLAC Codec using  https://github.com/pschatzmann/arduino-libflac
+ * @brief FLAC Codec using  https://github.com/pschatzmann/codec-flac
  * @version 0.1
  * @date 2022-04-24
  */
@@ -25,7 +25,7 @@
 namespace audio_tools {
 
 /**
- * @brief Decoder for FLAC. Depends on https://github.com/pschatzmann/arduino-libflac. We support an efficient streaming API and an very memory intensitiv standard interface. So 
+ * @brief Decoder for FLAC. Depends on https://github.com/pschatzmann/codec-flac. We support an efficient streaming API and an very memory intensitiv standard interface. So 
  * you should prefer the streaming interface where you call setOutput() before the begin and copy() in the loop.
  * Validated with http://www.2l.no/hires/
  * @ingroup codecs

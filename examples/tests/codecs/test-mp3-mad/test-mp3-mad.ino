@@ -2,7 +2,7 @@
  * @brief Testing MP3DecoderMAD
  * 
  */
-// install https://github.com/pschatzmann/arduino-libhelix.git
+// install https://github.com/pschatzmann/codec-helix.git
 
 #include "AudioTools.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"

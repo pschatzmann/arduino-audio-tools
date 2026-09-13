@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2021
  */
 
-// install https://github.com/pschatzmann/arduino-libmad.git
+// install https://github.com/pschatzmann/codec-mad.git
 
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/CodecMP3MAD.h"

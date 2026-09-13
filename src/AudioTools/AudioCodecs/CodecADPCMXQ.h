@@ -1,6 +1,6 @@
 #pragma once
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
-#include "adpcm-lib.h"  // https://github.com/pschatzmann/arduino-adpcm-xq
+#include "adpcm-lib.h"  // https://github.com/pschatzmann/codec-adpcm-xq
 
 #define DEFAULT_NOISE_SHAPING NOISE_SHAPING_OFF
 #define DEFAULT_LOOKAHEAD 0
@@ -16,7 +16,7 @@ enum class ADPCMNoiseShaping {
 
 /**
  * @brief Decoder for ADPCM-XQ. Depends on
- * https://github.com/pschatzmann/arduino-adpcm-xq
+ * https://github.com/pschatzmann/codec-adpcm-xq
  * @ingroup codecs
  * @ingroup decoder
  * @author Phil Schatzmann
@@ -127,7 +127,7 @@ class ADPCMDecoderXQ : public AudioDecoder {
 
 /**
  * @brief Encoder for ADPCM-XQ - Depends on
- * https://github.com/pschatzmann/arduino-adpcm-xq
+ * https://github.com/pschatzmann/codec-adpcm-xq
  * @ingroup codecs
  * @ingroup encoder
  * @author Phil Schatzmann
