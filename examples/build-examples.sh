@@ -11,7 +11,7 @@
 git -C .. pull
 git -C ../../ESP32-A2DP pull
 git -C ../../arduino-audio-driver pull
-git -C ../../arduino-libhelix pull
+git -C ../../codec-helix pull
 
 # Examples that are not buildable for esp32:esp32:esp32 by design (wrong
 # platform, or not an arduino-cli sketch at all) and are therefore skipped
