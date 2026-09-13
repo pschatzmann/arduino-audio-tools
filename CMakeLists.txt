@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.16)
 if (DEFINED ESP_PLATFORM)
 
     # idf component
-    # Determine optional arduino-esp32 dependency 
+    # Determine optional arduino-esp32 dependency
     if(TARGET arduino-esp32::arduino-esp32)
         set(ARDUINO_REQUIRES arduino-esp32)
     else()
@@ -15,6 +15,12 @@ if (DEFINED ESP_PLATFORM)
     set(AAT_REQUIRES esp_common freertos hal log nvs_flash driver esp_adc esp_http_client esp_driver_gpio esp_driver_ledc)
     if(IDF_VERSION_MAJOR GREATER_EQUAL 6)
         list(APPEND AAT_REQUIRES esp_driver_i2s esp_driver_dac)
+    endif()
+
+    # Only depend on arduino-audio-driver if it's actually checked out as a
+    # sibling component (it's an optional add-on, not always present).
+    if(EXISTS "${CMAKE_CURRENT_LIST_DIR}/../arduino-audio-driver/CMakeLists.txt")
+        list(APPEND AAT_REQUIRES arduino-audio-driver)
     endif()
 
     idf_component_register(
