@@ -3,6 +3,7 @@
 [![Arduino Library](https://img.shields.io/badge/Arduino-Library-blue.svg)](https://www.arduino.cc/reference/en/libraries/)
 [![Zephyr Library](https://img.shields.io/badge/Zephyr-Library-blue.svg)](https://github.com/pschatzmann/arduino-audio-driver)
 [![IDF Component](https://img.shields.io/badge/IDF-Component-blue.svg)](https://github.com/pschatzmann/arduino-audio-tools)
+[![CMake](https://img.shields.io/badge/CMake-Supported-blue.svg)](https://github.com/pschatzmann/arduino-audio-tools/blob/main/CMakeLists.txt)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-green.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 
