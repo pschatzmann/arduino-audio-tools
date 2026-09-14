@@ -41,6 +41,7 @@ class URLLoaderHLS {
   bool begin() {
     TRACED();
     buffer.resize(buffer_size * buffer_count);
+    url_stream.httpRequest().setAgent(agent);
 
     active = true;
     return true;
@@ -102,6 +103,13 @@ class URLLoaderHLS {
 
   void setCACert(const char *cert) { url_stream.setCACert(cert); }
 
+  /// Defines the User-Agent header sent with the segment requests (some
+  /// CDNs reject requests that don't carry one)
+  void setAgent(const char *agent) {
+    this->agent = agent;
+    url_stream.httpRequest().setAgent(agent);
+  }
+
  protected:
   Vector<const char *> urls{10};
   RingBuffer<uint8_t> buffer{0};
@@ -110,6 +118,7 @@ class URLLoaderHLS {
   int buffer_count = HLS_BUFFER_COUNT;
   URLStream url_stream;
   const char *url_to_play = nullptr;
+  const char *agent = DEFAULT_AGENT;
 
   /// try to keep the buffer filled
   void bufferRefill() {
@@ -231,6 +240,7 @@ class HLSParser {
     segments_url_str = "";
     bandwidth = 0;
     total_read = 0;
+    url_stream.httpRequest().setAgent(agent);
 
     if (!parseIndex()) {
       TRACEE();
@@ -314,6 +324,14 @@ class HLSParser {
 
   void setPowerSave(bool flag) { url_stream.setPowerSave(flag); }
 
+  /// Defines the User-Agent header sent with the playlist and segment
+  /// requests (some CDNs reject requests that don't carry one)
+  void setAgent(const char *agent) {
+    this->agent = agent;
+    url_stream.httpRequest().setAgent(agent);
+    url_loader.setAgent(agent);
+  }
+
   void setURLResolver(const char *(*cb)(const char *segment,
                                         const char *reqURL)) {
     resolve_url = cb;
@@ -336,6 +354,7 @@ class HLSParser {
   Str segments_url_str;
   Str url_str;
   const char *index_url_str = nullptr;
+  const char *agent = DEFAULT_AGENT;
   URLStream url_stream;
   URLLoaderHLS<URLStream> url_loader;
   URLHistory url_history;
@@ -716,6 +735,11 @@ class HLSStreamT : public AbstractURLStream {
 
   /// Changes the Wifi to power saving mode
   void setPowerSave(bool flag) override { parser.setPowerSave(flag); }
+
+  /// Defines the User-Agent header sent with the playlist and segment
+  /// requests (some CDNs reject requests that don't carry one). Defaults
+  /// to a browser-like user agent.
+  void setAgent(const char *agent) { parser.setAgent(agent); }
 
   /// Custom logic to provide the codec as Content-Type to support the
   /// MultiCodec
