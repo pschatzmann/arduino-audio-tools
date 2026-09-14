@@ -384,7 +384,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (pid == <a class="code hl_variable" href="classaudio__tools_1_1_m_t_s_decoder.html#a5b74afa5cb66357688640d0802b1f37f">pmt_pid</a> &amp;&amp; packet[payloadStart] == 0x02) {</div>
 <div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>      <a class="code hl_function" href="classaudio__tools_1_1_m_t_s_decoder.html#a527aa027933ee994a448b2a18d060d7c">parsePMT</a>(&amp;packet[payloadStart], len);</div>
 <div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>      <a class="code hl_define" href="_audio_logger_i_d_f_8h.html#ae02538a80ad5fc009caec73487d11a8d">LOGE</a>(<span class="stringliteral">&quot;-&gt; Packet ignored for PID 0x%x&quot;</span>, pid);</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>      <a class="code hl_define" href="_audio_logger_i_d_f_8h.html#a07f1b0d507acedeb7550353eba4f6e66">LOGW</a>(<span class="stringliteral">&quot;-&gt; Packet ignored for PID 0x%x&quot;</span>, pid);</div>
 <div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>    }</div>
 <div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>  }</div>
 </div>
