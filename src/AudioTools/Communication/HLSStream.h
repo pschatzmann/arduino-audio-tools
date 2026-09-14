@@ -285,8 +285,10 @@ class HLSParser {
     return result;
   }
 
+  /// Provides the actual url of the index
   const char *indexUrl() { return index_url_str; }
 
+  /// Provides the actual url of the segments
   const char *segmentsUrl() { return segments_url_str.c_str(); }
 
   /// Provides the codec
@@ -317,11 +319,13 @@ class HLSParser {
     url_loader.setBufferSize(size, count);
   }
 
+  /// Defines the certificate 
   void setCACert(const char *cert) {
     url_stream.setCACert(cert);
     url_loader.setCACert(cert);
   }
 
+  /// Changes the Wifi to power saving mode
   void setPowerSave(bool flag) { url_stream.setPowerSave(flag); }
 
   /// Defines the User-Agent header sent with the playlist and segment
@@ -332,10 +336,13 @@ class HLSParser {
     url_loader.setAgent(agent);
   }
 
+  /// The resolving of relative addresses can be quite tricky: you can provide
+  /// your custom resolver implementation
   void setURLResolver(const char *(*cb)(const char *segment,
                                         const char *reqURL)) {
     resolve_url = cb;
   }
+
   /// Provides the hls url as string
   const char *urlStr() { return url_str.c_str(); }
 
