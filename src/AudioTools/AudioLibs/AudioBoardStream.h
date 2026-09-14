@@ -4,6 +4,10 @@
 #include "AudioTools/AudioLibs/I2SCodecStream.h"
 #include "AudioTools/CoreAudio/AudioActions.h"
 
+/// global reference to access from static callback methods
+static void* p_lastAudioBoardStream = nullptr; 
+
+
 namespace audio_tools {
 
 /**
@@ -17,6 +21,7 @@ namespace audio_tools {
  * @copyright GPLv3
  */
 class AudioBoardStream : public I2SCodecStream {
+
   struct AudioBoardAction : public AudioActions::Action {
     AudioBoardAction(AudioBoard &board, AudioDriverKey key) {
       this->key = key;
@@ -24,8 +29,8 @@ class AudioBoardStream : public I2SCodecStream {
     }
     AudioDriverKey key;
     AudioBoard *p_board;
-    int id() override { return key | 0x400; }
-    bool readValue() override { return p_board->isKeyPressed(key); }
+    int id() override { return (int) key | 0x400; }
+    bool readValue() override { return p_board->isKeyPressed((int)key); }
   };
 
  public:
@@ -39,8 +44,9 @@ class AudioBoardStream : public I2SCodecStream {
   AudioBoardStream(audio_driver::AudioBoard &board) : I2SCodecStream(board) {
     // pin mode already set up by driver library
     actions.setPinMode(false);
-    // use the AudioBoard 
-    actions.setReadCallback([this](int pin) { return this->digitalRead(pin); });
+    // use the AudioBoard
+    actions.setReadCallback(readPinCB, this);
+    p_lastAudioBoardStream = this;
   }
 
   bool begin() override { return I2SCodecStream::begin(); }
@@ -57,30 +63,37 @@ class AudioBoardStream : public I2SCodecStream {
     delay(1);
   }
 
-
   /**
    * @brief Defines a new action that is executed when the Button is pressed
    */
-  void addAction(AudioDriverKey key, void (*action)(bool, int, void *),
+  void addAction(AudioDriverKey key, void (*action)(bool, digital_pin_t, void *),
                  void *ref = nullptr) {
       AudioBoardAction *abo = new AudioBoardAction(board(), key);
+      if (abo == nullptr) {
+        LOGE("Failed to allocate AudioBoardAction");
+        return;
+      }
       abo->actionOn = action;
-      abo->ref = (ref == nullptr) ? this : ref; 
-      actions.add(*abo);            
+      abo->ref = (ref == nullptr) ? this : ref;
+      actions.add(*abo);
   }
 
   /**
    * @brief Defines a new action that is executed when the Button is pressed and released
    */
-  void addAction(AudioDriverKey key, void (*actionOn)(bool, int, void *),
-                void (*actionOff)(bool, int, void *),
+  void addAction(AudioDriverKey key, void (*actionOn)(bool, digital_pin_t, void *),
+                void (*actionOff)(bool, digital_pin_t, void *),
                 void *ref = nullptr) {
 
       AudioBoardAction *abo = new AudioBoardAction(board(), key);
+      if (abo == nullptr) {
+        LOGE("Failed to allocate AudioBoardAction");
+        return;
+      }
       abo->actionOn = actionOn;
-      abo->actionOn = actionOff;
-      abo->ref = (ref == nullptr) ? this : ref; 
-      actions.add(*abo);            
+      abo->actionOff = actionOff;
+      abo->ref = (ref == nullptr) ? this : ref;
+      actions.add(*abo);
     }
 
   /**
@@ -91,7 +104,7 @@ class AudioBoardStream : public I2SCodecStream {
    * @param action
    * @param ref
    */
-  void addAction(int pin, void (*action)(bool, int, void *),
+  void addAction(digital_pin_t pin, void (*action)(bool, digital_pin_t, void *),
                  void *ref = nullptr) {
     TRACEI();
     // determine logic from config
@@ -108,7 +121,7 @@ class AudioBoardStream : public I2SCodecStream {
    * @param activeLogic
    * @param ref
    */
-  void addAction(int pin, void (*action)(bool, int, void *),
+  void addAction(digital_pin_t pin, void (*action)(bool, digital_pin_t, void *),
                  AudioActions::ActiveLogic activeLogic, void *ref = nullptr) {
     TRACEI();
     actions.add(pin, action, activeLogic, ref == nullptr ? this : ref);
@@ -135,9 +148,10 @@ class AudioBoardStream : public I2SCodecStream {
    * @brief Increase the volume
    *
    */
-  static void actionVolumeUp(bool, int, void *ref) {
+  static void actionVolumeUp(bool, digital_pin_t, void *ref) {
     TRACEI();
     AudioBoardStream *self = (AudioBoardStream *)ref;
+    if (self == nullptr) self = (AudioBoardStream *)p_lastAudioBoardStream;
     self->incrementVolume(+self->actionVolumeIncrementValue());
   }
 
@@ -145,9 +159,10 @@ class AudioBoardStream : public I2SCodecStream {
    * @brief Decrease the volume
    *
    */
-  static void actionVolumeDown(bool, int, void *ref) {
+  static void actionVolumeDown(bool, digital_pin_t, void *ref) {
     TRACEI();
     AudioBoardStream *self = (AudioBoardStream *)ref;
+    if (self == nullptr) self = (AudioBoardStream *)p_lastAudioBoardStream;
     self->incrementVolume(-self->actionVolumeIncrementValue());
   }
 
@@ -155,9 +170,10 @@ class AudioBoardStream : public I2SCodecStream {
    * @brief Toggle start stop
    *
    */
-  static void actionStartStop(bool, int, void *ref) {
+  static void actionStartStop(bool, digital_pin_t, void *ref) {
     TRACEI();
     AudioBoardStream *self = (AudioBoardStream *)ref;
+    if (self == nullptr) self =  (AudioBoardStream *)p_lastAudioBoardStream;
     self->active = !self->active;
     self->setActive(self->active);
   }
@@ -166,9 +182,10 @@ class AudioBoardStream : public I2SCodecStream {
    * @brief Start
    *
    */
-  static void actionStart(bool, int, void *ref) {
+  static void actionStart(bool, digital_pin_t, void *ref) {
     TRACEI();
     AudioBoardStream *self = (AudioBoardStream *)ref;
+    if (self == nullptr) self =  (AudioBoardStream *)p_lastAudioBoardStream;
     self->active = true;
     self->setActive(self->active);
   }
@@ -176,9 +193,10 @@ class AudioBoardStream : public I2SCodecStream {
   /**
    * @brief Stop
    */
-  static void actionStop(bool, int, void *ref) {
+  static void actionStop(bool, digital_pin_t, void *ref) {
     TRACEI();
     AudioBoardStream *self = (AudioBoardStream *)ref;
+    if (self == nullptr) self =  (AudioBoardStream *)p_lastAudioBoardStream;
     self->active = false;
     self->setActive(self->active);
   }
@@ -188,9 +206,10 @@ class AudioBoardStream : public I2SCodecStream {
    * and switch it on again if the headphone is unplugged.
    * This method complies with the
    */
-  static void actionHeadphoneDetection(bool, int, void *ref) {
+  static void actionHeadphoneDetection(bool, digital_pin_t, void *ref) {
     AudioBoardStream *self = (AudioBoardStream *)ref;
-    if (self->pinHeadphoneDetect() >= 0) {
+    if (self == nullptr) self =  (AudioBoardStream *)p_lastAudioBoardStream;
+    if (self->pinHeadphoneDetect() != GPIO_NONE) {
       // detect changes
       bool isConnected = self->headphoneStatus();
       if (self->headphoneIsConnected != isConnected) {
@@ -212,7 +231,7 @@ class AudioBoardStream : public I2SCodecStream {
    * @return  -1      non-existent
    *          Others  gpio number
    */
-  GpioPin pinAuxin() { return getPinID(PinFunction::AUXIN_DETECT); }
+  digital_pin_t pinAuxin() { return getPinID(PinFunction::AUXIN_DETECT); }
 
   /**
    * @brief  Get the gpio number for headphone detection
@@ -220,7 +239,7 @@ class AudioBoardStream : public I2SCodecStream {
    * @return  -1      non-existent
    *          Others  gpio number
    */
-  GpioPin pinHeadphoneDetect() {
+  digital_pin_t pinHeadphoneDetect() {
     return getPinID(PinFunction::HEADPHONE_DETECT);
   }
 
@@ -230,7 +249,7 @@ class AudioBoardStream : public I2SCodecStream {
    * @return  -1      non-existent
    *          Others  gpio number
    */
-  GpioPin pinPaEnable() { return getPinID(PinFunction::PA); }
+  digital_pin_t pinPaEnable() { return getPinID(PinFunction::PA); }
 
   //   /**
   //    * @brief  Get the gpio number for adc detection
@@ -238,7 +257,7 @@ class AudioBoardStream : public I2SCodecStream {
   //    * @return  -1      non-existent
   //    *          Others  gpio number
   //    */
-  //   GpioPin pinAdcDetect() { return getPin(AUXIN_DETECT); }
+  //   digital_pin_t pinAdcDetect() { return getPin(AUXIN_DETECT); }
 
   /**
    * @brief  Get the record-button id for adc-button
@@ -246,7 +265,7 @@ class AudioBoardStream : public I2SCodecStream {
    * @return  -1      non-existent
    *          Others  button id
    */
-  GpioPin pinInputRec() { return getPinID(PinFunction::KEY, 1); }
+  digital_pin_t pinInputRec() { return getPinID(PinFunction::KEY, 1); }
 
   /**
    * @brief  Get the number for mode-button
@@ -254,7 +273,7 @@ class AudioBoardStream : public I2SCodecStream {
    * @return  -1      non-existent
    *          Others  number
    */
-  GpioPin pinInputMode() { return getPinID(PinFunction::KEY, 2); }
+  digital_pin_t pinInputMode() { return getPinID(PinFunction::KEY, 2); }
 
   /**
    * @brief Get number for set function
@@ -262,7 +281,7 @@ class AudioBoardStream : public I2SCodecStream {
    * @return -1       non-existent
    *         Others   number
    */
-  GpioPin pinInputSet() { return getPinID(PinFunction::KEY, 4); }
+  digital_pin_t pinInputSet() { return getPinID(PinFunction::KEY, 4); }
 
   /**
    * @brief Get number for play function
@@ -270,7 +289,7 @@ class AudioBoardStream : public I2SCodecStream {
    * @return -1       non-existent
    *         Others   number
    */
-  GpioPin pinInputPlay() { return getPinID(PinFunction::KEY, 3); }
+  digital_pin_t pinInputPlay() { return getPinID(PinFunction::KEY, 3); }
 
   /**
    * @brief number for volume up function
@@ -278,7 +297,7 @@ class AudioBoardStream : public I2SCodecStream {
    * @return -1       non-existent
    *         Others   number
    */
-  GpioPin pinVolumeUp() { return getPinID(PinFunction::KEY, 6); }
+  digital_pin_t pinVolumeUp() { return getPinID(PinFunction::KEY, 6); }
 
   /**
    * @brief Get number for volume down function
@@ -286,7 +305,7 @@ class AudioBoardStream : public I2SCodecStream {
    * @return -1       non-existent
    *         Others   number
    */
-  GpioPin pinVolumeDown() { return getPinID(PinFunction::KEY, 5); }
+  digital_pin_t pinVolumeDown() { return getPinID(PinFunction::KEY, 5); }
 
   /**
    * @brief Get LED pin
@@ -294,7 +313,7 @@ class AudioBoardStream : public I2SCodecStream {
    * @return -1       non-existent
    *         Others   gpio number
    */
-  GpioPin pinLed(int idx) { return getPinID(PinFunction::LED, idx); }
+  digital_pin_t pinLed(int idx) { return getPinID(PinFunction::LED, idx); }
 
   /// the same as setPAPower()
   void setSpeakerActive(bool active) { setPAPower(active); }
@@ -306,8 +325,8 @@ class AudioBoardStream : public I2SCodecStream {
    * @return false
    */
   bool headphoneStatus() {
-    int headphoneGpioPin = pinHeadphoneDetect();
-    return headphoneGpioPin > 0 ? !digitalRead(headphoneGpioPin) : false;
+    digital_pin_t headphoneGpioPin = pinHeadphoneDetect();
+    return headphoneGpioPin != GPIO_NONE ? !digitalRead(headphoneGpioPin) : false;
   }
 
   /**
@@ -319,9 +338,9 @@ class AudioBoardStream : public I2SCodecStream {
   void addStartStopAction() {
     // pin conflicts for pinInputMode() with the SD CS pin for AIThinker and
     // buttons
-    int sd_cs = getSdCsPin();
-    int input_mode = pinInputMode();
-    if (input_mode != -1 && (input_mode != sd_cs || !cfg.sd_active)) {
+    digital_pin_t sd_cs = getSdCsPin();
+    digital_pin_t input_mode = pinInputMode();
+    if (input_mode != GPIO_NONE && (input_mode != sd_cs || !cfg.sd_active)) {
       LOGD("actionInputMode")
       addAction(input_mode, actionStartStop);
     }
@@ -329,27 +348,27 @@ class AudioBoardStream : public I2SCodecStream {
 
   /// add volume up and volume down action
   void addVolumeActions() {
-    // pin conflicts with SD Lyrat SD CS GpioPin and buttons / Conflict on
+    // pin conflicts with SD Lyrat SD CS digital_pin_t and buttons / Conflict on
     // Audiokit V. 2957
-    int sd_cs = getSdCsPin();
-    int vol_up = pinVolumeUp();
-    int vol_down = pinVolumeDown();
-    if ((vol_up != -1 && vol_down != -1) &&
+    digital_pin_t sd_cs = getSdCsPin();
+    digital_pin_t vol_up = pinVolumeUp();
+    digital_pin_t vol_down = pinVolumeDown();
+    if ((vol_up != GPIO_NONE && vol_down != GPIO_NONE) &&
         (!cfg.sd_active || (vol_down != sd_cs && vol_up != sd_cs))) {
       LOGD("actionVolumeDown")
       addAction(vol_down, actionVolumeDown);
       LOGD("actionVolumeUp")
       addAction(vol_up, actionVolumeUp);
     } else {
-      LOGW("Volume Buttons ignored because of conflict: %d ", pinVolumeDown());
+      LOGW("Volume Buttons ignored because of conflict");
     }
   }
 
   /// Adds headphone determination
   void addHeadphoneDetectionAction() {
     // pin conflicts with AIThinker A101: key6 and headphone detection
-    int head_phone = pinHeadphoneDetect();
-    if (head_phone != -1 && (getPinID(PinFunction::KEY, 6) != head_phone)) {
+    digital_pin_t head_phone = pinHeadphoneDetect();
+    if (head_phone != GPIO_NONE && (getPinID(PinFunction::KEY, 6) != head_phone)) {
       actions.add(head_phone, actionHeadphoneDetection,
                   AudioActions::ActiveChange, this);
     }
@@ -378,16 +397,23 @@ class AudioBoardStream : public I2SCodecStream {
     return board().isKeyPressed(key);
   }
 
+  /// Defines if we use pin interrupts for audio actions (default: false)
+  void setUsePinInterrupt(bool active) { actions.setUsePinInterrupt(active); }
+
  protected:
+  static bool readPinCB(digital_pin_t pin, void* ref) {
+    return static_cast<AudioBoardStream*>(ref)->digitalRead(pin);
+  }
+
   AudioActions actions;
   bool headphoneIsConnected = false;
   bool active = true;
   float action_increment_value = 0.02;
 
-  int getSdCsPin() {
-    static GpioPin sd_cs = -2;
+  digital_pin_t getSdCsPin() {
+    static digital_pin_t sd_cs = GPIO_NONE;
     // execute only once
-    if (sd_cs != -2) return sd_cs;
+    if (sd_cs != GPIO_NONE) return sd_cs;
 
     auto sd_opt = getPins().getSPIPins(PinFunction::SD);
     if (sd_opt) {
@@ -396,13 +422,13 @@ class AudioBoardStream : public I2SCodecStream {
       // no spi -> no sd
       LOGI("No sd defined -> sd_active=false")
       cfg.sd_active = false;
-      sd_cs = -1;
+      sd_cs = GPIO_NONE;
     }
     return sd_cs;
   }
 
   /// Determines the action logic (ActiveLow or ActiveTouch) for the pin
-  AudioActions::ActiveLogic getActionLogic(int pin) {
+  AudioActions::ActiveLogic getActionLogic(digital_pin_t pin) {
     auto opt = board().getPins().getPin(pin);
     PinLogic logic = PinLogic::Input;
     if (opt) logic = opt.value().pin_logic;

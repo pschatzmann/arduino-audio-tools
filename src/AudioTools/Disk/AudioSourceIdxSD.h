@@ -25,9 +25,13 @@ namespace audio_tools {
  *    D1       -
  *
  *  On the AI Thinker boards the pin settings should be On, On, On, On, On,
+ * 
+ * @note Supported only by Arduino platforms!
+ * 
  * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
+
  */
 class AudioSourceIdxSD : public AudioSource {
 public:
@@ -70,6 +74,7 @@ public:
   }
 
   void end() {
+    file.close();
     SD.end();
     is_sd_setup = false;
   }
@@ -85,6 +90,7 @@ public:
     file_name = idx[index];
     if (file_name==nullptr) return nullptr;
     LOGI("Using file %s", file_name);
+    file.close();
     file = SD.open(file_name);
     return file ? &file : nullptr;
   }
@@ -132,7 +138,7 @@ public:
   }
 
 protected:
-#if defined(USE_SD_NO_NS) 
+#if defined(USE_SD_NO_NS)
   SDIndex<SDClass, File> idx{SD};
 #else
   SDIndex<fs::SDFS,fs::File> idx{SD};

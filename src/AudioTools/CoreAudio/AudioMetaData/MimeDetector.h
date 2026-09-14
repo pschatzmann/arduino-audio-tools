@@ -1,54 +1,18 @@
 #pragma once
 
+#include "AudioTools/CoreAudio/AudioBasic/StrView.h"
+#include "AudioTools/CoreAudio/AudioTypes.h"
 #include "AudioTools/AudioCodecs/HeaderParserAAC.h"
 #include "AudioTools/AudioCodecs/HeaderParserMP3.h"
-#include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 #include "AudioTools/AudioCodecs/CodecWAV.h"
 
 namespace audio_tools {
 
 /**
- * @brief Abstract interface for classes that can provide MIME type information.
- *
- * This class defines a simple interface for objects that can determine and
- * provide MIME type strings. It serves as a base class for various MIME
- * detection and source identification implementations within the audio tools
- * framework.
- *
- * Classes implementing this interface should provide logic to determine the
- * appropriate MIME type based on their specific context (e.g., file content,
- * stream headers, file extensions, etc.).
- *
- * @note This is a pure virtual interface class and cannot be instantiated
- * directly.
- * @ingroup codecs
- * @ingroup decoder
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-class MimeSource {
- public:
-  /**
-   * @brief Get the MIME type string.
-   *
-   * Pure virtual method that must be implemented by derived classes to return
-   * the appropriate MIME type string for the current context.
-   *
-   * @return const char* Pointer to a null-terminated string containing the MIME
-   * type. The string should follow standard MIME type format (e.g.,
-   * "audio/mpeg"). Returns nullptr if MIME type cannot be determined.
-   *
-   * @note The returned pointer should remain valid for the lifetime of the
-   * object or until the next call to this method.
-   */
-  virtual const char* mime() = 0;
-};
-
-/**
  * @brief  Logic to detemine the mime type from the content.
  * By default the following mime types are supported (audio/aac, audio/mpeg,
- * audio/vnd.wave, audio/ogg, audio/flac). You can register your own custom
- * detection logic to cover additional file types.
+ * audio/vnd.wave, audio/ogg, audio/flac, audio/ac3, audio/eac3). You can
+ * register your own custom detection logic to cover additional file types.
  *
  * Please note that the distinction between mp3 and aac is difficult and might
  * fail in some cases. FLAC detection supports both native FLAC and OGG FLAC
@@ -72,7 +36,10 @@ class MimeDetector : public MimeSource {
       setCheck("audio/ogg", checkOGG);
       setCheck("video/MP2T", checkMP2T);
       setCheck("audio/prs.sid", checkSID);
-      setCheck("audio/m4a", checkM4A, false);
+      setCheck("audio/m4a", checkM4A);
+      setCheck("audio/dsf", checkDSF);
+      setCheck("audio/eac3", checkEAC3);
+      setCheck("audio/ac3", checkAC3);
       setCheck("audio/mpeg", checkMP3Ext);
       setCheck("audio/aac", checkAACExt);
     }
@@ -135,15 +102,22 @@ class MimeDetector : public MimeSource {
     if (memcmp(start + 4, "ftypM4A", 7) == 0) {
       return true;
     }
-    // check for streaming
+    // check for streaming: locate an ADTS synch word ...
     HeaderParserAAC aac;
-    // it should start with a synch word
     int pos = aac.findSyncWord((const uint8_t*)start, len);
     if (pos == -1) {
       return false;
     }
-    // make sure that it is not an mp3
-    if (aac.isValid(start + pos, len - pos)) {
+    // ... and confirm it is a valid, consistent ADTS header (this also
+    // rejects MP3 frames since ADTS requires the layer field to be 0, which
+    // real MP3 frames never have)
+    if (!aac.isValid(start + pos, len - pos)) {
+      return false;
+    }
+    // extra safety net: if the same data is unambiguously a valid MP3
+    // stream, it can not be AAC
+    HeaderParserMP3 mp3;
+    if (mp3.isValid(start, len)) {
       return false;
     }
     return true;
@@ -270,6 +244,47 @@ class MimeDetector : public MimeSource {
     return start[0] == 0x47 && start[188] == 0x47;
   }
 
+  /// DSF (DSD Stream File): starts with "DSD " magic
+  static bool checkDSF(uint8_t* start, size_t len) {
+    if (len < 4) return false;
+    return memcmp(start, "DSD ", 4) == 0;
+  }
+
+  /**
+   * @brief Checks for AC-3 (Dolby Digital) format
+   *
+   * AC-3 elementary streams start with a 16 bit sync word (0x0B77)
+   * followed by the bitstream id (bsid) field, which is <= 8 for
+   * standard AC-3 (E-AC-3 uses a higher bsid, see checkEAC3()).
+   *
+   * @param start Pointer to the data buffer
+   * @param len Length of the data buffer
+   * @return true if AC-3 format is detected, false otherwise
+   */
+  static bool checkAC3(uint8_t* start, size_t len) {
+    if (len < 7) return false;
+    if (start[0] != 0x0B || start[1] != 0x77) return false;
+    uint8_t bsid = start[5] >> 3;
+    return bsid <= 8;
+  }
+
+  /**
+   * @brief Checks for Enhanced AC-3 (E-AC-3 / Dolby Digital Plus) format
+   *
+   * E-AC-3 elementary streams start with the same 16 bit sync word
+   * (0x0B77) as AC-3, but use a bitstream id (bsid) between 11 and 16.
+   *
+   * @param start Pointer to the data buffer
+   * @param len Length of the data buffer
+   * @return true if E-AC-3 format is detected, false otherwise
+   */
+  static bool checkEAC3(uint8_t* start, size_t len) {
+    if (len < 7) return false;
+    if (start[0] != 0x0B || start[1] != 0x77) return false;
+    uint8_t bsid = start[5] >> 3;
+    return bsid >= 11 && bsid <= 16;
+  }
+
   /// Commodore 64 SID File
   static bool checkSID(uint8_t* start, size_t len) {
     return memcmp(start, "PSID", 4) == 0 || memcmp(start, "RSID", 4) == 0;
@@ -280,9 +295,6 @@ class MimeDetector : public MimeSource {
 
     // prevent false detecton by mp3 files
     if (memcmp(header, "ID3", 3) == 0) return false;
-
-    // Special hack when we position to start of mdat box
-    if (memcmp(header + 4, "mdat", 4) != 0) return true;
 
     // Check for "ftyp" at offset 4
     if (memcmp(header + 4, "ftyp", 4) != 0) return false;

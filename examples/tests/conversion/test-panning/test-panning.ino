@@ -2,7 +2,7 @@
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 AudioInfo info(44100, 2, 32);
-SineWaveGenerator<int32_t> sineWave;                // subclass of SoundGenerator with max amplitude of 32000
+SineGenerator<int32_t> sineWave;                // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int32_t> sound(sineWave);      // Stream generated from sine wave
 AudioBoardStream out(AudioKitEs8388V1);
 VolumeStream volume(out);

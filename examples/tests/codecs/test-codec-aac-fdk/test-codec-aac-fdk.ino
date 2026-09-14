@@ -4,7 +4,7 @@
 // test case for sine -> aac encoder -> hex output
 AudioInfo info(44100,2,16);
 AACEncoderFDK fdk;
-SineWaveGenerator<int16_t> sineWave;            
+SineGenerator<int16_t> sineWave;            
 GeneratedSoundStream<int16_t> in(sineWave);     
 HexDumpOutput out(Serial);
 EncodedAudioStream encoder(&out, &fdk);
@@ -13,7 +13,7 @@ StreamCopy copier(encoder, in);
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial,AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   auto cfg = encoder.defaultConfig();
   cfg.copyFrom(info);

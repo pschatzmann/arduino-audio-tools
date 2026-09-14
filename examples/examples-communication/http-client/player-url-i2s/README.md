@@ -65,4 +65,4 @@ We use a button to move to the next url.
 ### Dependencies
 
 - https://github.com/pschatzmann/arduino-audio-tools
-- https://github.com/pschatzmann/arduino-libhelix
+- https://github.com/pschatzmann/codec-helix

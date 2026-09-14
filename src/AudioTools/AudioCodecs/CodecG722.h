@@ -1,7 +1,7 @@
 /**
  * @file CodecG.722.h
  * @author Phil Schatzmann
- * @brief G.722 Codec using  https://github.com/pschatzmann/arduino-libg722
+ * @brief G.722 Codec using  https://github.com/pschatzmann/codec-g722
  * @version 0.1
  * @date 2022-04-24
  */
@@ -20,7 +20,7 @@ namespace audio_tools {
 
 /**
  * @brief Decoder for G.722. Depends on
- * https://github.com/pschatzmann/arduino-libg722.
+ * https://github.com/pschatzmann/codec-g722.
  * @ingroup codecs
  * @ingroup decoder
  * @author Phil Schatzmann
@@ -29,6 +29,8 @@ namespace audio_tools {
 class G722Decoder : public AudioDecoder {
  public:
   G722Decoder() = default;
+
+  virtual const char *mime() override { return "audio/g722"; }
 
   /// Defines the options for the G.722 Codec: G722_SAMPLE_RATE_8000,G722_PACKED
   void setOptions(int options){
@@ -107,7 +109,7 @@ class G722Decoder : public AudioDecoder {
 
 /**
  * @brief Encoder for G.722 - Depends on
- * https://github.com/pschatzmann/arduino-libg722.
+ * https://github.com/pschatzmann/codec-g722.
  * Inspired by g722enc.c
  * @ingroup codecs
  * @ingroup encoder

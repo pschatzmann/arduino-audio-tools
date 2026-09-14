@@ -17,10 +17,27 @@ namespace audio_tools {
  * information to Serial. If a container box contains data, it will be processed
  * recursively and if it contains data itself, it might be reported in a second
  * callback call.
- * @note This parser expect the mdat box to be the last box in the file. This
- * can be achieve with the following ffmpeg commands:
+ * @note This parser expects the mdat box to be the last box in the file, and
+ * the moov box (which carries the sample/format info needed to decode mdat)
+ * to come before it. This layout can be achieved with the following ffmpeg
+ * commands:
  * - ffmpeg -i ../sine.wav -c:a alac  -movflags +faststart alac.m4a
  * - ffmpeg -i ../sine.wav -c:a aac  -movflags +faststart aac.m4a
+ *
+ * If an mdat box is encountered at the top level before any moov box has
+ * been parsed, an error is logged (via LOGE) since the file will not be
+ * decodable in that state. Call setRequireMoovBeforeMdat(false) to opt out
+ * of this requirement, in which case only a warning (LOGW) is logged and
+ * parsing continues.
+ *
+ * The parser also supports the ISO/IEC 14496-12 special box-size values
+ * that a plain 32-bit size field can't express: a size of 1 indicates a
+ * 64-bit "largesize" follows the type field, and a size of 0 means the box
+ * extends to the end of the file/stream - both are common for an mdat box
+ * written by an encoder that streams the payload without seeking back to
+ * patch in the final size. A size-0 mdat is treated as unbounded: it is
+ * read incrementally until the input stream ends, since its true length is
+ * not known upfront.
  *
  * @ingroup codecs
  * @author Phil Schatzmann
@@ -102,22 +119,35 @@ class MP4Parser {
 
   /**
    * @brief Initializes the parser.
+   * @param startFileOffset Absolute file offset the next written byte
+   * corresponds to - 0 for a normal parse from the start of the file, or
+   * an arbitrary offset to resume parsing elsewhere (e.g. DemuxerMP4's
+   * moov-at-end quick start, which begin()s twice for two disjoint byte
+   * ranges) so Box::file_offset stays correct.
    * @return true on success.
    */
-  bool begin() {
+  bool begin(uint64_t startFileOffset = 0) {
     buffer.clear();
     if (buffer.size() == 0) buffer.resize(2 * 1024);
     parseOffset = 0;
-    fileOffset = 0;
+    fileOffset = startFileOffset;
     levelStack.clear();
     box.is_complete = true;  // Start with no open box
     box.data = nullptr;
     box.size = 0;
     box.level = 0;
-    box.file_offset = 0;
+    box.file_offset = startFileOffset;
     box.id = 0;
     box.is_incremental = false;
     box.is_complete = true;
+    // reset incremental-box state too, in case begin() is called again
+    // mid-parse (see startFileOffset above)
+    box_in_progress = false;
+    box_bytes_received = 0;
+    box_bytes_expected = 0;
+    box_seq = 0;
+    incremental_offset = 0;
+    moov_found = false;
     return true;
   }
 
@@ -129,9 +159,28 @@ class MP4Parser {
    */
   size_t write(const uint8_t* data, size_t len) {
     if (is_error) return len;  // If an error occurred, skip writing
-    size_t result = buffer.writeArray(data, len);
-    parse();
-    return result;
+    // The accumulation buffer (default 2KB, see begin()) is usually much
+    // smaller than a single caller-side write (e.g. a 16-64KB StreamCopy
+    // chunk): a single writeArray() silently truncates at buffer.size(),
+    // dropping the remainder with no error, which desyncs the parser from
+    // the real byte stream (misread box headers, huge bogus sizes, etc.).
+    // Feed it in buffer-sized slices, parsing (and thereby freeing space)
+    // between each one, until every byte has been accepted.
+    size_t total_written = 0;
+    while (total_written < len) {
+      size_t avail = buffer.availableForWrite();
+      if (avail == 0) {
+        parse();
+        avail = buffer.availableForWrite();
+        if (avail == 0) break;  // parser made no progress: avoid a hang
+      }
+      size_t chunk = std::min(avail, len - total_written);
+      size_t written = buffer.writeArray(data + total_written, chunk);
+      if (written == 0) break;  // safety net, should not happen
+      total_written += written;
+      parse();
+    }
+    return total_written;
   }
 
   /**
@@ -149,6 +198,15 @@ class MP4Parser {
    * @return Number of bytes available for writing.
    */
   int availableForWrite() { return buffer.availableForWrite(); }
+
+  /**
+   * @brief Defines whether an mdat box found before any moov box is treated
+   * as an error (LOGE, the default) or downgraded to a warning (LOGW). Set
+   * to false to opt out of the moov-before-mdat requirement, e.g. for files
+   * from encoders that are known to violate it but still work.
+   * @param flag true to require moov before mdat (default), false to opt out.
+   */
+  void setRequireMoovBeforeMdat(bool flag) { require_moov_before_mdat = flag; }
 
   /**
    * @brief Adds a box name that will be interpreted as a container.
@@ -246,6 +304,8 @@ class MP4Parser {
   void* ref = this;                        ///< Reference pointer for callbacks
   Box box;                                 ///< Current box being processed
   bool is_error = false;                   ///< True if an error occurred
+  bool moov_found = false;  ///< True once a top-level moov box has been seen
+  bool require_moov_before_mdat = true;  ///< false: warn instead of error
 
   /**
    * @brief Structure for container box information.
@@ -297,21 +357,58 @@ protected:
     uint32_t size32 = readU32(p);
     strncpy(type, (char*)(p + 4), 4);
     type[4] = '\0';
+
     uint64_t boxSize = size32;
     size_t headerSize = 8;
+    // A 32-bit size of 0 or 1 are reserved ISO/IEC 14496-12 special cases
+    // that a plain 32-bit compare against headerSize can't handle.
+    bool unbounded = false;
+    if (size32 == 1) {
+      // 64-bit "largesize" follows the type field
+      if (parseOffset + 16 > bufferSize) return false;  // wait for largesize
+      boxSize = readU64(p + 8);
+      headerSize = 16;
+    } else if (size32 == 0) {
+      // box extends to the end of the file/stream (e.g. a streamed mdat
+      // written by an encoder that never seeks back to patch in the size)
+      unbounded = true;
+    }
 
-    if (boxSize < headerSize) return false;
+    if (!unbounded && boxSize < headerSize) return false;
 
     int level = static_cast<int>(levelStack.size());
+
+    // mdat holds the audio payload and must be preceded by moov, otherwise
+    // sample/format info needed to decode it is missing.
+    if (level == 0 && strcmp(type, "mdat") == 0 && !moov_found) {
+      if (require_moov_before_mdat) {
+        LOGE(
+            "mdat box found before moov box: moov must precede mdat (e.g. "
+            "use 'ffmpeg -movflags +faststart') or this file will not play "
+            "correctly");
+      } else {
+        LOGW(
+            "mdat box found before moov box: moov should precede mdat (e.g. "
+            "use 'ffmpeg -movflags +faststart') - continuing anyway since "
+            "the requirement was opted out of");
+      }
+    }
+
     bool is_container = isContainerBox(type);
 
     if (is_container) {
-      handleContainerBox(type, boxSize, level);
+      if (unbounded) {
+        LOGE("Unsupported: container box '%s' with size 0 (extends to EOF)",
+             type);
+        return false;
+      }
+      handleContainerBox(type, boxSize, headerSize, level);
       return true;
     }
 
-    size_t payload_size = static_cast<size_t>(boxSize - headerSize);
-    if (parseOffset + boxSize <= bufferSize) {
+    size_t payload_size =
+        unbounded ? SIZE_MAX : static_cast<size_t>(boxSize - headerSize);
+    if (!unbounded && parseOffset + boxSize <= bufferSize) {
       // start with full buffer!
       handleCompleteBox(type, p, headerSize, payload_size, level);
       parseOffset += boxSize;
@@ -328,11 +425,12 @@ protected:
    * @param boxSize Size of the box.
    * @param level Nesting level of the box.
    */
-  void handleContainerBox(const char* type, uint64_t boxSize, int level) {
+  void handleContainerBox(const char* type, uint64_t boxSize,
+                          size_t headerSize, int level) {
     strcpy(box.type, type);
-    box.id = ++this->box.id;
+    ++box.id;
     box.data = nullptr;
-    box.size = static_cast<size_t>(boxSize - 8);
+    box.size = static_cast<size_t>(boxSize - headerSize);
     box.data_size = 0;
     box.available = 0;
     box.level = level;
@@ -342,11 +440,13 @@ protected:
     box.is_container = true;
     box.seq = 0;
 
+    if (strcmp(type, "moov") == 0) moov_found = true;
+
     processCallback(box);
 
     uint64_t absBoxOffset = fileOffset + parseOffset;
     levelStack.push_back(absBoxOffset + boxSize);
-    parseOffset += 8;
+    parseOffset += headerSize;
   }
 
   /**
@@ -360,7 +460,7 @@ protected:
   void handleCompleteBox(const char* type, const uint8_t* p, size_t headerSize,
                          size_t payload_size, int level) {
     strcpy(box.type, type);
-    box.id = ++this->box.id;
+    ++box.id; 
     box.data = p + headerSize;
     box.size = payload_size;
     box.data_size = payload_size;
@@ -399,7 +499,7 @@ protected:
     if (available_payload > 0) {
       box_bytes_received += available_payload;
       strcpy(box.type, box_type);
-      box.id = ++this->box.id;
+      ++box.id;
       box.data = p + headerSize;
       box.size = box_bytes_expected;
       box.data_size = box_bytes_expected;
@@ -413,7 +513,13 @@ protected:
       processCallback(box);
     }
     // fileOffset += (bufferSize - buffer.available());
-    fileOffset += (parseOffset + payload_size + 8);
+    if (payload_size == SIZE_MAX) {
+      // unbounded box (extends to EOF): its end is unknown, so only
+      // advance past the header that was just consumed
+      fileOffset += (parseOffset + headerSize);
+    } else {
+      fileOffset += (parseOffset + payload_size + headerSize);
+    }
     incremental_offset += available_payload;
     buffer.clear();
     parseOffset = 0;
@@ -429,7 +535,7 @@ protected:
                               (size_t)buffer.available());
     if (to_read == 0) return true;
     strcpy(box.type, box_type);
-    box.id = ++this->box.id;
+    ++box.id;
     box.data = buffer.data();
     box.size = box_bytes_expected;
     box.data_size = box_bytes_expected;

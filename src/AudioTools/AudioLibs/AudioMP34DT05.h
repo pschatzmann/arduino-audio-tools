@@ -7,7 +7,6 @@ namespace audio_tools {
 /**
  * @brief Config for MP34DT05 Microphone. Supported sample rates 16000, 41667,
  * Supported bits_per_sample only 16
- *
  */
 struct AudioMP34DT05Config : public AudioInfo {
   AudioMP34DT05Config() {
@@ -35,6 +34,8 @@ class AudioMP34DT05 *selfAudioMP34DT05 = nullptr;
  * @brief MP34DT05 Microphone of Nano BLE Sense. We provide a proper Stream
  * implementation. See https://github.com/arduino/ArduinoCore-nRF528x-mbedos
  * @ingroup io
+ * 
+ * @note Supported only on platforms that are supported by the ArduinoCore-nRF528x-mbedos library, e.g. Nano BLE Sense.
  */
 class AudioMP34DT05 : public AudioStream {
  public:

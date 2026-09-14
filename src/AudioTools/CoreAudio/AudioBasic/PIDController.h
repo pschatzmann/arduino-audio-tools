@@ -1,5 +1,6 @@
 
 
+#include <cassert>
 #include <cmath>
 
 #pragma once
@@ -28,6 +29,19 @@ class PIDController {
     this->kd = kd;
     this->ki = ki;
     return true;
+  }
+
+  /// Overrides the loop interval time used by the next calculate() call.
+  /// Useful when the actual elapsed time between calls varies at runtime.
+  void setDt(float dt) { this->dt = dt; }
+
+  /// Clears the accumulated integral and derivative history without
+  /// changing the configured dt/max/min/gains. Call this when the
+  /// controlled process is reset/restarted so old error history doesn't
+  /// leak into the new session.
+  void reset() {
+    integral = 0.0f;
+    preerror = 0.0f;
   }
 
   // target = desired process value

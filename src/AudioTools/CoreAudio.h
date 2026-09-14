@@ -7,10 +7,10 @@
 #include "AudioTools/CoreAudio/AudioStreams.h"
 #include "AudioTools/CoreAudio/AudioStreamsConverter.h"
 #include "AudioTools/CoreAudio/AudioOutput.h"
-#include "AudioTools/CoreAudio/VolumeStream.h"
 #include "AudioTools/CoreAudio/AudioIO.h"
 #include "AudioTools/CoreAudio/ResampleStream.h"
 #include "AudioTools/CoreAudio/ResampleStreamT.h"
+#include "AudioTools/CoreAudio/SupportedRatesStream.h"
 #include "AudioTools/CoreAudio/StreamCopy.h"
 #include "AudioTools/CoreAudio/MusicalNotes.h"
 #include "AudioTools/CoreAudio/Fade.h"
@@ -23,6 +23,12 @@
 #include "AudioTools/CoreAudio/AnalogAudioStream.h"
 #include "AudioTools/CoreAudio/AudioEffects.h"
 #include "AudioTools/CoreAudio/AudioMetaData.h"
-#include "AudioTools/CoreAudio/FrequencyDetector.h"
-#include "AudioTools/CoreAudio/GoerzelStream.h"
+#include "AudioTools/CoreAudio/Analysis.h"
 #include "AudioTools/CoreAudio/RTTTLOutput.h"
+#include "AudioTools/CoreAudio/AudioBasic/Str.h"
+#include "AudioTools/CoreAudio/AudioBasic/Format.h"
+
+// Audio Actions only when pin support havs been defined
+#if defined(GPIO_NONE)
+#include "AudioTools/CoreAudio/AudioActions.h"
+#endif

@@ -10,7 +10,7 @@ namespace audio_tools {
 
 /**
  * @brief MP3 Decoder using libhelix:
- * https://github.com/pschatzmann/arduino-libhelix This is basically just a
+ * https://github.com/pschatzmann/codec-helix This is basically just a
  * simple wrapper to provide AudioInfo and AudioInfoSupport
  * @ingroup codecs
  * @ingroup decoder
@@ -71,6 +71,8 @@ class MP3DecoderHelix : public AudioDecoder {
     if (mp3 != nullptr) delete mp3;
   }
 
+  const char *mime() override { return "audio/mpeg"; }
+
   /// Defines the output Stream
   void setOutput(Print &outStream) override {
     AudioDecoder::setOutput(outStream);
@@ -90,7 +92,7 @@ class MP3DecoderHelix : public AudioDecoder {
 
   /// Releases the reserved memory
   void end() override {
-    TRACED();
+    TRACEI();
     if (mp3 != nullptr) mp3->end();
   }
 

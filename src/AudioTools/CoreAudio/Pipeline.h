@@ -323,6 +323,8 @@ class Pipeline : public AudioStream {
       p_out->addNotifyAudioChange(bi);
     }
 
+    void flush() override { p_out->flush(); }
+
    protected:
     ModifyingOutput* p_out = nullptr;
   };

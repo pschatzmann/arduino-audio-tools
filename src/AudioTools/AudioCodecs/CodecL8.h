@@ -50,6 +50,8 @@ class DecoderL8 : public AudioDecoder {
     addNotifyAudioChange(bi);
   }
 
+  const char *mime() override { return "audio/l8"; }
+
   /// By default the encoded values are unsigned, but you can change them to
   /// signed
   void setSigned(bool isSigned) { is_signed = isSigned; }

@@ -43,6 +43,9 @@ class OggContainerDecoder : public ContainerDecoder {
     out.setDecoder(p_codec);
   }
 
+  /// Provides the mime type of the wrapped codec (default: CopyDecoder's)
+  const char *mime() override { return p_codec != nullptr ? p_codec->mime() : nullptr; }
+
   /// Defines the output Stream
   void setOutput(Print &print) override { out.setOutput(&print); }
 

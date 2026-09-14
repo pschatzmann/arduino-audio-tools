@@ -33,7 +33,7 @@ Task task("mp3-copy", 10000, 1, 0);
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   Serial0.begin(115200);
 

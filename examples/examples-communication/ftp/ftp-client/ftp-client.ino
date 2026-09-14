@@ -13,7 +13,7 @@
 #include "WiFi.h"
 #include "FTPClient.h" // install https://github.com/pschatzmann/TinyFTPClient
 #include "AudioTools.h" // https://github.com/pschatzmann/arduino-audio-tools
-#include "AudioTools/AudioCodecs/CodecMP3Helix.h" // https://github.com/pschatzmann/arduino-libhelix
+#include "AudioTools/AudioCodecs/CodecMP3Helix.h" // https://github.com/pschatzmann/codec-helix
 #include "AudioTools/AudioLibs/AudioBoardStream.h" // https://github.com/pschatzmann/arduino-audio-driver
 
 FTPClient<WiFiClient> client;

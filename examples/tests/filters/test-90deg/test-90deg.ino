@@ -5,7 +5,7 @@
 
 AudioInfo from(44100, 2, 32);
 AudioInfo to(44100, 2, 16);
-SineWaveGenerator<int32_t> sineWave;            
+SineGenerator<int32_t> sineWave;            
 GeneratedSoundStream<int32_t> in(sineWave);           
 CsvOutput<int16_t> out;
 FilteredStream<int16_t, float> filtered(out, from.channels); 

@@ -13,7 +13,7 @@
 #include "AudioTools/AudioLibs/PortAudioStream.h"
 
 AudioInfo info(16000, 2, 16);
-SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
+SineGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wave
 //I2SStream out; 
 PortAudioStream out; 

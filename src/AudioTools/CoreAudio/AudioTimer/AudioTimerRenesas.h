@@ -11,16 +11,16 @@ typedef void (*my_repeating_timer_callback_t)(void *obj);
 
 /**
  * @brief Repeating Timer functions for repeated execution: Plaease use the
- * typedef TimerAlarmRepeating. By default we use a new GPT timer. You can
+ * typedef AudioTimer. By default we use a new GPT timer. You can
  * also request 1 AGT timer by calling setTimer(1);
  * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  *
  */
-class TimerAlarmRepeatingDriverRenesas : public TimerAlarmRepeatingDriverBase {
+class AudioTimerDriverRenesas : public AudioTimerDriverBase {
  public:
-  TimerAlarmRepeatingDriverRenesas() {}
+  AudioTimerDriverRenesas() {}
 
   /**
    * Starts the alarm timer
@@ -65,8 +65,8 @@ class TimerAlarmRepeatingDriverRenesas : public TimerAlarmRepeatingDriverBase {
   }
 
   inline static void staticCallback(timer_callback_args_t *ptr) {
-    TimerAlarmRepeatingDriverRenesas *self =
-        (TimerAlarmRepeatingDriverRenesas *)ptr->p_context;
+    AudioTimerDriverRenesas *self =
+        (AudioTimerDriverRenesas *)ptr->p_context;
     self->instanceCallback(self->object);
   }
 
@@ -139,8 +139,8 @@ class TimerAlarmRepeatingDriverRenesas : public TimerAlarmRepeatingDriverBase {
   }
 };
 
-/// @brief use TimerAlarmRepeating! @ingroup timer_rp2040
-using TimerAlarmRepeatingDriver = TimerAlarmRepeatingDriverRenesas;
+/// @brief use AudioTimer! @ingroup timer_rp2040
+using AudioTimerDriver = AudioTimerDriverRenesas;
 
 }  // namespace audio_tools
 

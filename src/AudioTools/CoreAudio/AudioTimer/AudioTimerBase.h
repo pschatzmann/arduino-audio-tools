@@ -19,9 +19,9 @@ enum TimerFunction {
   SimpleThreadLoop
 };
 
-class TimerAlarmRepeatingDriverBase {
+class AudioTimerDriverBase {
  public:
-  virtual ~TimerAlarmRepeatingDriverBase() { end(); }
+  virtual ~AudioTimerDriverBase() { end(); }
 
   virtual bool begin(repeating_timer_callback_t callback_f, uint32_t time,
                      TimeUnit unit = MS) = 0;

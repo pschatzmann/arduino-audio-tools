@@ -41,6 +41,8 @@ public:
     addNotifyAudioChange(bi);
   }
 
+  const char *mime() override { return "audio/l16"; }
+
   /// Defines the output Stream
   void setOutput(Print &out_stream) override { p_print = &out_stream; }
 

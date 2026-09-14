@@ -21,17 +21,18 @@ if(NOT portaudio_POPULATED)
     add_subdirectory(${portaudio_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/portaudio)
 endif()
 
+# Build with arduino-adpcm
+FetchContent_Declare(codec-adcpm GIT_REPOSITORY "https://github.com/pschatzmann/codec-adpcm" GIT_TAG main )
+FetchContent_GetProperties(codec-adcpm)
+if(NOT codec-adcpm_POPULATED)
+    FetchContent_Populate(codec-adcpm)
+    add_subdirectory(${codec-adcpm_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/codec-adcpm)
+endif()
+
+
 # Build with arduino-audio-tools
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../../.. ${CMAKE_CURRENT_BINARY_DIR}/arduino-audio-tools )
-endif()
-
-# Build with arduino-adpcm
-FetchContent_Declare(adpcm_ffmpeg GIT_REPOSITORY "https://github.com/pschatzmann/adpcm" GIT_TAG main )
-FetchContent_GetProperties(adpcm_ffmpeg)
-if(NOT adpcm_ffmpeg)
-    FetchContent_Populate(adpcm_ffmpeg)
-    add_subdirectory(${adpcm_ffmpeg_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/adpcm)
 endif()
 
 # build sketch as executable
@@ -41,5 +42,5 @@ add_executable (adpcm-test adpcm.cpp)
 target_compile_definitions(adpcm-test PUBLIC -DARDUINO -DUSE_PORTAUDIO -DIS_DESKTOP)
 
 # specify libraries
-target_link_libraries(adpcm-test portaudio arduino_emulator adpcm_ffmpeg arduino-audio-tools)
+target_link_libraries(adpcm-test PUBLIC portaudio arduino_emulator codec-adpcm arduino-audio-tools)
 

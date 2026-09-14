@@ -8,6 +8,11 @@
 // #include "ivorbiscodec.h"
 // #include "ivorbisfile.h"
 
+// the ESP32 does not have any optimization flags set by default, so we can enable O3 for better performance
+#ifdef ARDUINO
+#pragma GCC optimize("O3")
+#endif
+
 namespace audio_tools {
 
 #ifndef VARBIS_MAX_READ_SIZE
@@ -18,7 +23,7 @@ namespace audio_tools {
 
 /**
  * @brief Vorbis Streaming Decoder using
- * https://github.com/pschatzmann/arduino-libvorbis-tremor
+ * https://github.com/pschatzmann/codec-vorbis-tremor
  * @ingroup codecs
  * @ingroup decoder
  * @author Phil Schatzmann

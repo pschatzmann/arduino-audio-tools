@@ -1,12 +1,8 @@
 #pragma once
 #include "AudioToolsConfig.h"
-#if defined(USE_ANALOG) 
-#if defined(ESP32) 
-#  include "AnalogConfigESP32.h"
-#  include "AnalogConfigESP32V1.h"
-#else
-#  include "AnalogConfigStd.h"
-#endif
+#if defined(USE_ANALOG)
+
+#include "AnalogConfig.h"
 
 namespace audio_tools {
 

@@ -9,9 +9,9 @@
 
 AudioInfo info_in(8000, 1, 16);
 AudioInfo info_out(8000, 2, 16);
-SineWaveGenerator<int16_t> sineWave1(32000); // subclass of SoundGenerator with max amplitude of 32000
+SineGenerator<int16_t> sineWave1(32000); // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound1(sineWave1);  // Stream generated from sine wave
-SineWaveGenerator<int16_t> sineWave2(32000); // subclass of SoundGenerator with max amplitude of 32000
+SineGenerator<int16_t> sineWave2(32000); // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound2(sineWave2);  // Stream generated from sine wave
 InputMerge<int16_t> imerge;
 PWMAudioOutput pwm;   

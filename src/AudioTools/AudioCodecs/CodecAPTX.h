@@ -32,6 +32,8 @@ class APTXDecoder : public AudioDecoder {
     info.bits_per_sample = isHd ? 24 : 16;
   }
 
+  virtual const char *mime() override { return "audio/aptx"; }
+
   bool begin() override {
     TRACEI();
     ctx = aptx_init(is_hd);

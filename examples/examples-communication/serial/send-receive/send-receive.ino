@@ -17,7 +17,7 @@
 // #include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 AudioInfo info(22000, 1, 16);
-SineWaveGenerator<int16_t> sineWave(32000);
+SineGenerator<int16_t> sineWave(32000);
 GeneratedSoundStream<int16_t> sound(sineWave);
 I2SStream out; // or AnalogAudioStream, AudioBoardStream etc
 auto &serial = Serial2;

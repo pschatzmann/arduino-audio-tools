@@ -38,14 +38,22 @@ class ListLockFree {
                 Iterator(Node* node) : node(node) {}
                 
                 inline Iterator operator++() {
-                    if (node != nullptr) {
+                    if (node != nullptr && owner != nullptr) {
                         Node* next_node = node->next.load(std::memory_order_acquire);
                         if (next_node != nullptr && next_node != &owner->last) {
                             node = next_node;
                             is_eof = false;
                         } else {
+                            // Advance onto the sentinel itself so that
+                            // `it != owner->end()` (which compares by node
+                            // pointer) actually becomes false - otherwise a
+                            // for(it=begin(); it!=end(); ++it) loop never
+                            // terminates once it reaches the last element.
+                            node = &owner->last;
                             is_eof = true;
                         }
+                    } else {
+                        is_eof = true;
                     }
                     return *this;
                 }
@@ -57,14 +65,20 @@ class ListLockFree {
                 }
                 
                 inline Iterator operator--() {
-                    if (node != nullptr) {
+                    if (node != nullptr && owner != nullptr) {
                         Node* prior_node = node->prior.load(std::memory_order_acquire);
                         if (prior_node != nullptr && prior_node != &owner->first) {
                             node = prior_node;
                             is_eof = false;
                         } else {
+                            // See operator++(): land on the sentinel itself
+                            // so reverse iteration against rend() actually
+                            // terminates instead of looping forever.
+                            node = &owner->first;
                             is_eof = true;
                         }
+                    } else {
+                        is_eof = true;
                     }
                     return *this;
                 }
@@ -118,21 +132,23 @@ class ListLockFree {
 
                 Iterator getIteratorAtOffset(int offset) {
                     Node* tmp = node;
-                    if (offset > 0) {
-                        for (int j = 0; j < offset && tmp != nullptr; j++) {
-                            Node* next_node = tmp->next.load(std::memory_order_acquire);
-                            if (next_node == nullptr || next_node == &owner->last) {
-                                break;
+                    if (owner != nullptr) {
+                        if (offset > 0) {
+                            for (int j = 0; j < offset && tmp != nullptr; j++) {
+                                Node* next_node = tmp->next.load(std::memory_order_acquire);
+                                if (next_node == nullptr || next_node == &owner->last) {
+                                    break;
+                                }
+                                tmp = next_node;
                             }
-                            tmp = next_node;
-                        }
-                    } else if (offset < 0) {
-                        for (int j = 0; j < -offset && tmp != nullptr; j++) {
-                            Node* prior_node = tmp->prior.load(std::memory_order_acquire);
-                            if (prior_node == nullptr || prior_node == &owner->first) {
-                                break;
+                        } else if (offset < 0) {
+                            for (int j = 0; j < -offset && tmp != nullptr; j++) {
+                                Node* prior_node = tmp->prior.load(std::memory_order_acquire);
+                                if (prior_node == nullptr || prior_node == &owner->first) {
+                                    break;
+                                }
+                                tmp = prior_node;
                             }
-                            tmp = prior_node;
                         }
                     }
                     Iterator it(tmp);
@@ -168,6 +184,14 @@ class ListLockFree {
 
         ~ListLockFree() {
             clear();
+            // Nothing can still be racing against a destructor call - drain
+            // the recycle list and actually free the nodes now.
+            Node* n = free_list.load(std::memory_order_relaxed);
+            while (n != nullptr) {
+                Node* next = n->next.load(std::memory_order_relaxed);
+                releaseNode(n);
+                n = next;
+            }
         }
 
 #ifdef USE_INITIALIZER_LIST
@@ -179,10 +203,42 @@ class ListLockFree {
         } 
 #endif        
 
+        /// Swaps the contents of this list with ref by relinking the two
+        /// chains' boundary pointers. Like the copy constructor, this is
+        /// NOT safe against concurrent access on either list - callers must
+        /// ensure exclusive access to both lists while swapping.
         bool swap(ListLockFree<T>& ref) {
-            // For simplicity, this is not implemented as fully lock-free
-            // A full implementation would require complex atomic operations
-            return false;
+            if (this == &ref) return true;
+
+            Node* a_begin = first.next.load(std::memory_order_relaxed);
+            Node* a_end   = last.prior.load(std::memory_order_relaxed);
+            Node* b_begin = ref.first.next.load(std::memory_order_relaxed);
+            Node* b_end   = ref.last.prior.load(std::memory_order_relaxed);
+            bool a_empty  = (a_begin == &last);
+            bool b_empty  = (b_begin == &ref.last);
+
+            // Re-point this list's boundary at ref's chain.
+            first.next.store(b_empty ? &last : b_begin, std::memory_order_relaxed);
+            last.prior.store(b_empty ? &first : b_end, std::memory_order_relaxed);
+            if (!b_empty) {
+                b_begin->prior.store(&first, std::memory_order_relaxed);
+                b_end->next.store(&last, std::memory_order_relaxed);
+            }
+
+            // Re-point ref's boundary at this list's original chain.
+            ref.first.next.store(a_empty ? &ref.last : a_begin, std::memory_order_relaxed);
+            ref.last.prior.store(a_empty ? &ref.first : a_end, std::memory_order_relaxed);
+            if (!a_empty) {
+                a_begin->prior.store(&ref.first, std::memory_order_relaxed);
+                a_end->next.store(&ref.last, std::memory_order_relaxed);
+            }
+
+            size_t a_count = record_count.load(std::memory_order_relaxed);
+            size_t b_count = ref.record_count.load(std::memory_order_relaxed);
+            record_count.store(b_count, std::memory_order_relaxed);
+            ref.record_count.store(a_count, std::memory_order_relaxed);
+
+            return true;
         }
 
         bool push_back(const T& data) {
@@ -378,8 +434,12 @@ class ListLockFree {
         }
 
         Iterator begin() {
+            // For an empty list first.next == &last, so this matches end()
+            // exactly and the usual `for (it = begin(); it != end(); ++it)`
+            // idiom correctly skips the loop body instead of dereferencing
+            // a null node.
             Node* first_data = first.next.load(std::memory_order_acquire);
-            Iterator it(first_data == &last ? nullptr : first_data);
+            Iterator it(first_data);
             it.set_owner(this);
             return it;
         }
@@ -391,8 +451,10 @@ class ListLockFree {
         }
 
         Iterator rbegin() {
+            // See begin(): for an empty list last.prior == &first, matching
+            // rend() so reverse iteration over an empty list is a no-op.
             Node* last_data = last.prior.load(std::memory_order_acquire);
-            Iterator it(last_data == &first ? nullptr : last_data);
+            Iterator it(last_data);
             it.set_owner(this);
             return it;
         }
@@ -425,8 +487,10 @@ class ListLockFree {
             for (int j = 0; j < index && n != &last; j++) {
                 n = n->next.load(std::memory_order_acquire);
                 if (n == nullptr) {
-                    static T dummy{};
-                    return dummy;
+                    // Fall back to this list's own dummy sentinel storage
+                    // rather than a function-local static, which would be
+                    // shared (and racily written to) by every instance.
+                    return last.data;
                 }
             }
             return n != &last ? n->data : last.data;
@@ -449,12 +513,29 @@ class ListLockFree {
         }
 
     protected:
-        Node first;  // empty dummy first node 
-        Node last;   // empty dummy last node 
+        Node first;  // empty dummy first node
+        Node last;   // empty dummy last node
         std::atomic<size_t> record_count{0};
         Allocator* p_allocator = &DefaultAllocator;
+        // Retired nodes are recycled here instead of being returned to the
+        // allocator - see deleteNode()/createNode() for why.
+        std::atomic<Node*> free_list{nullptr};
 
         Node* createNode() {
+            // Prefer a recycled node over a fresh allocation: this keeps
+            // unlinked-but-still-referenced nodes "type-stable" memory (see
+            // deleteNode()).
+            Node* head = free_list.load(std::memory_order_acquire);
+            while (head != nullptr) {
+                Node* next = head->next.load(std::memory_order_relaxed);
+                if (free_list.compare_exchange_weak(
+                        head, next, std::memory_order_acquire,
+                        std::memory_order_relaxed)) {
+                    head->next.store(nullptr, std::memory_order_relaxed);
+                    head->prior.store(nullptr, std::memory_order_relaxed);
+                    return head;
+                }
+            }
 #if USE_ALLOCATOR
             Node* node = (Node*) p_allocator->allocate(sizeof(Node));
             if (node != nullptr) {
@@ -466,7 +547,39 @@ class ListLockFree {
             return node;
         }
 
+        // Unlinking a node (pop/erase) races against any other thread that
+        // read a pointer to it *before* it was unlinked and is about to
+        // dereference/CAS through that stale pointer (see push_back()'s
+        // `old_last_prior->next.compare_exchange_weak(...)` and the
+        // equivalent spots in push_front()/erase()). Without hazard
+        // pointers/epochs we cannot know when it's safe to actually free
+        // the node, so instead of releasing it back to the allocator we
+        // recycle it onto free_list: the memory stays a live, correctly
+        // typed Node forever (as long as this list exists), so a racing
+        // thread's stale access reads/CASes against recycled-but-valid
+        // storage instead of freed/reused memory. A CAS through a stale
+        // pointer then simply fails (the expected value no longer matches)
+        // rather than corrupting unrelated heap memory. This does not
+        // eliminate the classic ABA case (the node fully recycled and
+        // re-linked before the stale CAS retries) - a complete fix needs
+        // hazard pointers or epoch-based reclamation - but it removes the
+        // undefined-behavior/use-after-free hazard of touching memory that
+        // may have been returned to the allocator and reused for something
+        // else entirely.
         void deleteNode(Node* p_delete) {
+            if (p_delete == nullptr) return;
+            Node* old_head = free_list.load(std::memory_order_relaxed);
+            do {
+                p_delete->next.store(old_head, std::memory_order_relaxed);
+            } while (!free_list.compare_exchange_weak(
+                old_head, p_delete, std::memory_order_release,
+                std::memory_order_relaxed));
+        }
+
+        // Actually releases a node's memory - only safe once no other
+        // thread can possibly still be operating on the list (e.g. from
+        // the destructor).
+        void releaseNode(Node* p_delete) {
 #if USE_ALLOCATOR
             if (p_delete != nullptr) {
                 p_delete->~Node(); // Explicit destructor call

@@ -14,7 +14,7 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 endif()
 
 # Build with libfaad
-FetchContent_Declare(libfaad GIT_REPOSITORY https://github.com/pschatzmann/arduino-libfaad.git GIT_TAG main  )
+FetchContent_Declare(libfaad GIT_REPOSITORY https://github.com/pschatzmann/codec-faad.git GIT_TAG main  )
 FetchContent_GetProperties(libfaad)
 if(NOT libfaad_POPULATED)
     FetchContent_Populate(libfaad)

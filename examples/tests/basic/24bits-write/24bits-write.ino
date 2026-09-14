@@ -4,7 +4,7 @@
 
 AudioBoardStream out(AudioKitEs8388V1);
 //CsvOutput<int24_t> out(Serial);
-SineWaveGenerator<int24_t> sine_wave;               // subclass of SoundGenerator with max amplitude of 32000
+SineGenerator<int24_t> sine_wave;               // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int24_t> in_stream(sine_wave); // Stream generated from sine wave
 StreamCopy copier(out, in_stream);                  // copies sound to out
 

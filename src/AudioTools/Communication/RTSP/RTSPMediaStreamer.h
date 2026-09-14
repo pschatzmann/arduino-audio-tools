@@ -695,7 +695,7 @@ class RTSPMediaStreamerBase {
  * timer-driven streaming functionality. This class provides:
  *
  * - All base class functionality (audio source, UDP transport, RTP packets)
- * - Automatic periodic streaming using AudioTools TimerAlarmRepeating
+ * - Automatic periodic streaming using AudioTools AudioTimer
  * - Timer safety configuration for ESP32 platforms
  * - Background streaming without manual intervention
  *
@@ -750,7 +750,7 @@ class RTSPMediaStreamer : public RTSPMediaStreamerBase<Platform> {
    *
    * Begins the RTP streaming process by:
    * - Calling base class start() to initialize audio source and buffer
-   * - Creating and configuring the TimerAlarmRepeating for periodic streaming
+   * - Creating and configuring the AudioTimer for periodic streaming
    * - Beginning periodic timer-driven packet transmission
    *
    * @note UDP transport must be initialized before calling this method
@@ -796,7 +796,7 @@ class RTSPMediaStreamer : public RTSPMediaStreamerBase<Platform> {
    * @brief Stop timer-driven RTP streaming
    *
    * Stops the RTP streaming process by:
-   * - Stopping the TimerAlarmRepeating to cease packet transmission
+   * - Stopping the AudioTimer to cease packet transmission
    * - Calling base class stop() to stop the audio source
    *
    * @note Does not release UDP transport or buffers - use
@@ -820,7 +820,7 @@ class RTSPMediaStreamer : public RTSPMediaStreamerBase<Platform> {
   }
 
  protected:
-  audio_tools::TimerAlarmRepeating rtpTimer;
+  audio_tools::AudioTimer rtpTimer;
 };
 
 

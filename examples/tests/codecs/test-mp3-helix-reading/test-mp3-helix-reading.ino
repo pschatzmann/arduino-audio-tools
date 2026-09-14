@@ -2,7 +2,7 @@
  * @brief Tesing the MP3DecoderHelix: Decoding
  * on the input side.
  */
-// install https://github.com/pschatzmann/arduino-libhelix.git
+// install https://github.com/pschatzmann/codec-helix.git
 
 #include "AudioTools.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"

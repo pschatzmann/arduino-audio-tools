@@ -34,6 +34,9 @@ enum UlpDac { ULP_DAC1 = 1, ULP_DAC2 = 2 };
  * @version 0.1
  * @date 2023-03-26
  * @copyright  (C) 2020  Martin Laclaustra, based on bitluni's code
+ * 
+ * @note Supported only on ESP32 platforms with ULP!
+ *
  */
 class AudioESP32ULP : public AudioOutput {
 public:

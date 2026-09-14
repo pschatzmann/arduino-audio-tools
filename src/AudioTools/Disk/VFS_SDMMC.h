@@ -41,7 +41,10 @@ namespace audio_tools {
  * @brief ESP32 Virtual File System for SDMMC. The default mount point is
  * "/sdcard" DRAFT implementation: not tested see
  * https://github.com/espressif/esp-idf/blob/master/examples/storage/sd_card/sdmmc/README.md
- * @ingroup player
+ * 
+ * @note Supported only by ESP32 (Arduino and IDF)
+ * 
+ * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

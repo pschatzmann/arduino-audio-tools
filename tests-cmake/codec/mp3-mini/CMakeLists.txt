@@ -18,7 +18,7 @@ if(NOT portaudio_POPULATED)
 endif()
 
 # provide minimp3
-FetchContent_Declare(arduino_minimp3 GIT_REPOSITORY "https://github.com/pschatzmann/arduino-minimp3.git" )
+FetchContent_Declare(arduino_minimp3 GIT_REPOSITORY "https://github.com/pschatzmann/codec-minimp3.git" )
 FetchContent_GetProperties(arduino_minimp3)
 if(NOT arduino_minimp3_POPULATED)
     FetchContent_Populate(arduino_minimp3)

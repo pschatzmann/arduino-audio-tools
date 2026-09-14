@@ -1,7 +1,7 @@
 // Example for creating a Media Renderer
 
 #include "WiFi.h"
-#include "DLNA.h" // https://github.com/pschatzmann/arduino-dlna
+#include "dlna.h" // https://github.com/pschatzmann/arduino-dlna
 #include "AudioTools.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
 #include "AudioTools/Communication/AudioHttp.h"

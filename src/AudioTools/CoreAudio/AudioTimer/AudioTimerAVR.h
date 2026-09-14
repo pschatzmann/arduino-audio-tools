@@ -5,20 +5,20 @@
 
 namespace audio_tools {
 typedef void (*repeating_timer_callback_t)(void* obj);
-class TimerAlarmRepeatingDriverAVR;
-static TimerAlarmRepeatingDriverAVR* timerAlarmRepeatingRef = nullptr;
+class AudioTimerDriverAVR;
+static AudioTimerDriverAVR* timerAlarmRepeatingRef = nullptr;
 
 /**
  * @brief Repeating Timer functions for repeated execution: Plaease use the
- * typedef TimerAlarmRepeating
+ * typedef AudioTimer
  * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  *
  */
-class TimerAlarmRepeatingDriverAVR : public TimerAlarmRepeatingDriverBase {
+class AudioTimerDriverAVR : public AudioTimerDriverBase {
  public:
-  TimerAlarmRepeatingDriverAVR() { timerAlarmRepeatingRef = this; }
+  AudioTimerDriverAVR() { timerAlarmRepeatingRef = this; }
 
   /**
    * Starts the alarm timer
@@ -91,7 +91,7 @@ class TimerAlarmRepeatingDriverAVR : public TimerAlarmRepeatingDriverBase {
   }
 };
 
-using TimerAlarmRepeatingDriver = TimerAlarmRepeatingDriverAVR;
+using AudioTimerDriver = AudioTimerDriverAVR;
 
 }  // namespace audio_tools
 

@@ -1,0 +1,369 @@
+#pragma once
+
+#include "AudioTools/Video/CodecVideo.h"
+#include "H264Decoder.h"
+#include "H264Encoder.h"
+
+/**
+ * @defgroup h264esp32s3 H264ESP32S3
+ * @ingroup codecs
+ * @ingroup video
+ * @brief H.264 encoding/decoding on ESP32-S3 using
+ * https://github.com/pschatzmann/ESP32S3-h264 (esp_h264, hardware-assisted
+ * where available). ESP32-S3 only - H264Config.h in that library fails the
+ * build on any other target.
+ */
+
+namespace audio_tools {
+
+/**
+ * @brief H.264 video decoder for ESP32-S3: wraps esp_h264::H264Decoder
+ * (https://github.com/pschatzmann/ESP32S3-h264) as a VideoOutput, so it can
+ * be plugged directly into e.g. DemuxerAVI::setOutputVideo()/
+ * DemuxerMP4::setOutputVideo() - the same role H264Decoder (CodecH264.h,
+ * the portable TinyH264-based decoder) plays, for boards where the
+ * ESP32-S3-specific esp_h264 backend is preferred instead. Consumes an
+ * Annex-B H.264 bitstream via write() and, once a complete picture has been
+ * decoded, writes it - converted to setVideoFormat()'s format (RGB565 by
+ * default, the common TFT wire format) - to the Print target configured via
+ * setOutput(), one write() call per decoded picture.
+ *
+ * write()/flush() implement the VideoOutput contract (see Video.h): write()
+ * may be called one or more times per frame - bytes are forwarded to the
+ * wrapped decoder's decode() immediately, which invokes the frame callback
+ * synchronously for every completed picture found in that call, not
+ * deferred to flush(). flush() is a no-op, kept only because some producers
+ * (e.g. DemuxerAVI/DemuxerMP4) call it unconditionally after each frame.
+ *
+ * No setup beyond setOutput() is required before begin() - unlike
+ * esp_h264::H264Decoder's own defaultConfig() (sized for VGA), this
+ * wrapper defaults its input/output buffers to sizes that fit typical
+ * small-panel use directly; setInputBufferSize()/setOutputBufferSize()
+ * exist only as an optional performance tweak (see their own comments).
+ *
+ * The Alloc template parameter is forwarded to esp_h264::H264Decoder - see
+ * that class's own file comment (H264Decoder.h) for the PSRAM- vs.
+ * internal-RAM allocator choice (H264DecoderPSRAM/H264DecoderRAM aliases).
+ * Defaults to H264_DEFAULT_ALLOCATOR.
+ *
+ * @ingroup h264esp32s3
+ * @ingroup decoder
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+template <typename Alloc = H264_DEFAULT_ALLOCATOR>
+class H264DecoderESP32S3 : public VideoDecoder, public VideoInfoSource {
+ public:
+  H264DecoderESP32S3() {
+    config_ = decoder_.defaultConfig();
+    config_.output_format = ESP_H264_RAW_FMT_RGB565_LE;
+    // esp_h264::H264Decoder::defaultConfig() sizes both buffers for VGA
+    // (400KB input, ~450KB output) - both grow on demand via
+    // std::vector::resize() if a frame ever exceeds them anyway (see
+    // decode()/processDecodedFrame() in H264Decoder.h), so nothing
+    // breaks if these prove too small; they only pre-size to avoid a
+    // one-time reallocation. Default to something that fits this
+    // library's actual target (small-panel TFTs, QCIF/CIF-ish streams)
+    // instead of paying for VGA-sized buffers on every board regardless
+    // of what it's actually decoding - override via
+    // setInputBufferSize()/setOutputBufferSize() only if you know you
+    // need more (e.g. a larger panel) and want to skip that reallocation.
+    config_.input_buffer_size = 64 * 1024;
+    config_.output_buffer_size = 100 * 1024;
+    config_.frame_callback = [this](const uint8_t *frame, uint32_t w,
+                                     uint32_t h, esp_h264_raw_format_t fmt) {
+      if (p_out == nullptr && p_out_video == nullptr) return;
+      size_t bytes = (size_t)(w * h * ESP_H264_GET_BPP_BY_PIC_TYPE(fmt));
+      if (p_out != nullptr) p_out->write(frame, bytes);
+      if (p_out_video != nullptr) p_out_video->write(frame, bytes);
+    };
+  }
+
+  H264DecoderESP32S3(Print &out) : H264DecoderESP32S3() { setOutput(out); }
+
+  H264DecoderESP32S3(VideoOutput &out) : H264DecoderESP32S3() {
+    setOutput(out);
+  }
+
+  VideoFormat codecFormat() override { return VideoFormat::H264; }
+
+  /// Defines the target the decoded picture is written to, one write()
+  /// call per decoded picture, in the format selected via
+  /// setVideoFormat() (RGB565 by default). Call before begin().
+  void setOutput(Print &out) override { p_out = &out; }
+  void setOutput(VideoOutput &out) override { p_out_video = &out; }
+
+  /// Selects the pixel format written to setOutput()'s target - this
+  /// backend (esp_h264) only supports VideoFormat::RGB565 (the default)
+  /// and VideoFormat::I420; any other value is logged and ignored (the
+  /// previously selected format stays in effect) - use driver() and
+  /// esp_h264_types.h's other ESP_H264_RAW_FMT_* values directly if you
+  /// need one of those instead. Call before begin().
+  void setVideoFormat(VideoFormat format) override {
+    switch (format) {
+      case VideoFormat::RGB565:
+        config_.output_format = ESP_H264_RAW_FMT_RGB565_LE;
+        break;
+      case VideoFormat::I420:
+        config_.output_format = ESP_H264_RAW_FMT_I420;
+        break;
+      default:
+        LOGW("H264DecoderESP32S3: unsupported VideoFormat %d", (int)format);
+        break;
+    }
+  }
+
+  /// Reports the format/dimensions of the picture written to
+  /// setOutput()'s target - format is setVideoFormat()'s most recently
+  /// selected value (RGB565 if never called); width/height are the most
+  /// recently decoded picture's (0 before any picture has been decoded).
+  VideoInfo videoInfo() override {
+    VideoInfo info;
+    info.format = config_.output_format == ESP_H264_RAW_FMT_I420
+                       ? VideoFormat::I420
+                       : VideoFormat::RGB565;
+    uint32_t w = 0, h = 0;
+    if (decoder_.getFrameDimensions(w, h)) {
+      info.width = (uint16_t)w;
+      info.height = (uint16_t)h;
+    }
+    return info;
+  }
+
+  /// Optional: pre-sizes the input buffer the wrapped decoder copies
+  /// write()'s data into - purely a performance knob, not a requirement:
+  /// esp_h264::H264Decoder grows it on demand if a frame ever exceeds it
+  /// (see H264Decoder::decode()), so a too-small (or never-called) value
+  /// still decodes correctly, just with an occasional reallocation.
+  /// Defaults to 64KB (see the constructor's comment). Call before
+  /// begin().
+  void setInputBufferSize(size_t size) { config_.input_buffer_size = size; }
+
+  /// Optional: pre-sizes the output buffer the wrapped decoder allocates
+  /// for the decoded/converted picture - purely a performance knob, not
+  /// a requirement: it grows on demand to fit width*height*bytes-per-
+  /// pixel for setVideoFormat()'s format if this proves too small (see
+  /// H264Decoder::processDecodedFrame()). Defaults to 100KB (see the
+  /// constructor's comment). Call before begin().
+  void setOutputBufferSize(size_t size) { config_.output_buffer_size = size; }
+
+  /// Initializes the decoder - see esp_h264::H264Decoder::begin().
+  bool begin() override { return decoder_.begin(config_); }
+
+  /// Releases the decoder's resources - see esp_h264::H264Decoder::end().
+  void end() override { decoder_.end(); }
+
+  /// Feeds one chunk of Annex-B H.264 data - may be called more than once
+  /// per frame. Decodes immediately, invoking setOutput()'s Print once per
+  /// completed picture from within this call (not deferred to flush()).
+  size_t write(const uint8_t *data, size_t len) override {
+    decoder_.decode(data, len);
+    return len;
+  }
+
+  /// No-op - kept to satisfy the VideoOutput/Print contract; decoding
+  /// already happens synchronously in write() (see class comment).
+  void flush() override {}
+
+  /// Number of frames successfully decoded since begin().
+  uint32_t frameCount() const { return decoder_.getFrameCount(); }
+  /// Number of decode errors since begin().
+  uint32_t decodeErrors() const { return decoder_.getDecodeErrors(); }
+
+  /// See VideoOutput::isKeyFrame() - scans for an Annex-B IDR slice NAL.
+  bool isKeyFrame(const uint8_t *data, size_t len) override {
+    return isH264KeyFrame(data, len);
+  }
+
+  /// Direct access to the wrapped esp_h264::H264Decoder.
+  esp_h264::H264Decoder<Alloc> &driver() { return decoder_; }
+
+ protected:
+  esp_h264::H264Decoder<Alloc> decoder_;
+  typename esp_h264::H264Decoder<Alloc>::Config config_;
+  Print *p_out = nullptr;
+  VideoOutput *p_out_video = nullptr;
+};
+
+/**
+ * @brief H.264 video encoder for ESP32-S3: wraps esp_h264::H264Encoder
+ * (https://github.com/pschatzmann/ESP32S3-h264) - the ESP32-S3-specific
+ * counterpart of H264Encoder (CodecH264.h, the portable TinyH264-based
+ * encoder). Configure via setSize()/setFrameRate()/setBitrate()/
+ * setGop()/setQpRange()/setVideoFormat() (I420 - the default -, RGB565 or
+ * YUV422), then feed raw pictures via write() - it writes the resulting
+ * Annex-B bitstream straight to the Print target passed to setOutput()
+ * (the underlying esp_h264::H264Encoder methods already take a Print& and
+ * handle the write, retrying on partial writes - see H264Encoder.h's
+ * encode()).
+ *
+ * Unlike esp_h264::H264Encoder itself, this wrapper does not drive an
+ * attached camera (its use_camera/pin/captureH264() surface) - it only
+ * covers the encode-a-buffer-you-already-have path, matching H264Encoder's
+ * (CodecH264.h) scope; use esp_h264::H264Encoder directly (via driver())
+ * if you want its built-in camera capture loop instead.
+ *
+ * The Alloc template parameter is forwarded to esp_h264::H264Encoder - see
+ * that class's own file comment (H264Encoder.h) for the PSRAM- vs.
+ * internal-RAM allocator choice (H264EncoderPSRAM/H264EncoderRAM aliases).
+ * Defaults to H264_DEFAULT_ALLOCATOR.
+ *
+ * @ingroup h264esp32s3
+ * @ingroup encoder
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+template <typename Alloc = H264_DEFAULT_ALLOCATOR>
+class H264EncoderESP32S3 : public VideoEncoder {
+ protected:
+  /// esp_h264::H264Encoder's encode()/encodeRGB565()/encodeYUV422() write
+  /// straight to a Print& internally (there's no "return the buffer"
+  /// variant) - this fans that single Print target out to whichever of
+  /// setOutput(Print&)/setOutput(VideoOutput&) are configured, mirroring
+  /// H264Encoder's (CodecH264.h) dual p_out/p_out_video write.
+  class DualOutputPrint : public Print {
+   public:
+    void setTargets(Print *out, VideoOutput *outVideo) {
+      p_out = out;
+      p_out_video = outVideo;
+    }
+    size_t write(uint8_t c) override { return write(&c, 1); }
+    size_t write(const uint8_t *data, size_t len) override {
+      size_t result = 0;
+      if (p_out != nullptr) result = p_out->write(data, len);
+      if (p_out_video != nullptr) result = p_out_video->write(data, len);
+      return result;
+    }
+
+   protected:
+    Print *p_out = nullptr;
+    VideoOutput *p_out_video = nullptr;
+  };
+
+ public:
+  H264EncoderESP32S3() { config_ = encoder_.defaultConfig(); }
+
+  H264EncoderESP32S3(Print &out) : H264EncoderESP32S3() { setOutput(out); }
+
+  H264EncoderESP32S3(VideoOutput &out) : H264EncoderESP32S3() {
+    setOutput(out);
+  }
+
+  /// Defines the target each write() call writes its encoded bitstream
+  /// to.
+  void setOutput(Print &out) override {
+    p_out = &out;
+    dual_out_.setTargets(p_out, p_out_video);
+  }
+  void setOutput(VideoOutput &out) {
+    p_out_video = &out;
+    dual_out_.setTargets(p_out, p_out_video);
+  }
+
+  /// Selects the raw picture format write() expects - this backend
+  /// (esp_h264) supports VideoFormat::I420 (the default: planar Y/U/V,
+  /// no row padding), RGB565 (16-bit, 5-6-5 packed, little-endian) and
+  /// YUV422 (packed YUYV); any other value is logged and ignored (the
+  /// previously selected format stays in effect). Call before the first
+  /// write().
+  void setVideoFormat(VideoFormat format) override {
+    switch (format) {
+      case VideoFormat::I420:
+      case VideoFormat::RGB565:
+      case VideoFormat::YUV422:
+        input_format = format;
+        break;
+      default:
+        LOGW("H264EncoderESP32S3: unsupported VideoFormat %d", (int)format);
+        break;
+    }
+  }
+
+  /// Reports the codec/dimensions of the bitstream written to
+  /// setOutput()'s target - format is always VideoFormat::H264 (NOT
+  /// setVideoFormat()'s raw input format); width/height match setSize()
+  /// (0 if that was never called).
+  VideoInfo videoInfo() override {
+    VideoInfo info;
+    info.format = VideoFormat::H264;
+    info.width = (uint16_t)config_.width;
+    info.height = (uint16_t)config_.height;
+    return info;
+  }
+
+  /// Picture size - must match the raw frame data passed to write().
+  /// Call before begin().
+  void setSize(int width, int height) {
+    config_.width = width;
+    config_.height = height;
+  }
+  /// Target frames/sec - also the default GOP size (see setGop()) unless
+  /// overridden. Call before begin().
+  void setFrameRate(int fps) { config_.fps = fps; }
+  /// Target bitrate (bits/sec) - defaults to width*height*fps*30/100 if
+  /// never called. Call before begin().
+  void setBitrate(int bitsPerSecond) { config_.bitrate = bitsPerSecond; }
+  /// Group-of-Pictures size (keyframe interval, in frames) - defaults to
+  /// setFrameRate()'s fps if never called. Call before begin().
+  void setGop(int gop) { config_.gop = gop; }
+  /// Quantizer parameter range [0, 51] the encoder's rate control stays
+  /// within - lower is better quality/higher bitrate. Defaults to
+  /// [28, 30] if never called. Call before begin().
+  void setQpRange(int qpMin, int qpMax) {
+    config_.qp_min = qpMin;
+    config_.qp_max = qpMax;
+  }
+  /// Output buffer size (bytes) the wrapped encoder allocates for the
+  /// encoded bitstream - defaults to one uncompressed I420 frame's worth
+  /// if never called. Call before begin().
+  void setOutputBufferSize(size_t size) { config_.outBufferSize = size; }
+
+  /// Initializes the encoder - see esp_h264::H264Encoder::begin().
+  bool begin() override { return encoder_.begin(config_); }
+
+  /// Releases the encoder's resources - see esp_h264::H264Encoder::end().
+  void end() override { encoder_.end(); }
+
+  /// Encodes one raw picture, in setVideoFormat()'s format (I420 by
+  /// default: Y, then U, then V, no row padding; RGB565 - converted
+  /// internally to I420 - or YUV422, likewise), and writes the result to
+  /// setOutput() - `len` must be at least width*height*3/2 (I420) or
+  /// width*height*2 (RGB565/YUV422). Returns the number of bytes written
+  /// on success (see class comment - not an exact byte count, the
+  /// underlying esp_h264::H264Encoder only reports success/failure), or 0
+  /// on failure (e.g. setOutput() wasn't configured, `len` too small, or
+  /// the format is unsupported).
+  size_t write(const uint8_t *data, size_t len) override {
+    if (p_out == nullptr && p_out_video == nullptr) return 0;
+    bool ok = false;
+    switch (input_format) {
+      case VideoFormat::I420:
+        ok = encoder_.encode(data, len, dual_out_);
+        break;
+      case VideoFormat::RGB565:
+        ok = encoder_.encodeRGB565(data, len, dual_out_);
+        break;
+      case VideoFormat::YUV422:
+        ok = encoder_.encodeYUV422(data, len, dual_out_);
+        break;
+      default:
+        break;
+    }
+    return ok ? 1 : 0;
+  }
+
+  /// Direct access to the wrapped esp_h264::H264Encoder, e.g. for its
+  /// camera-capture surface (begin() with use_camera/pin fields set,
+  /// captureH264()) - not exposed through this wrapper.
+  esp_h264::H264Encoder<Alloc> &driver() { return encoder_; }
+
+ protected:
+  esp_h264::H264Encoder<Alloc> encoder_;
+  typename esp_h264::H264Encoder<Alloc>::Config config_;
+  Print *p_out = nullptr;
+  VideoOutput *p_out_video = nullptr;
+  DualOutputPrint dual_out_;
+  VideoFormat input_format = VideoFormat::I420;
+};
+
+}  // namespace audio_tools

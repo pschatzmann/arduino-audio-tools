@@ -13,6 +13,11 @@
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
 #include "iLBC.h"
 
+// iLBC_define.h defines FS as a float constant, which clashes with the
+// ESP32 SD_MMC library's fs::FS class when both are included in a sketch.
+#ifdef FS
+#  undef FS
+#endif
 
 namespace audio_tools {
 
@@ -37,6 +42,8 @@ class ILBCDecoder : public AudioDecoder {
   ~ILBCDecoder(){
     end();
   }
+
+  virtual const char *mime() override { return "audio/ilbc"; }
 
   virtual bool begin() {
     TRACEI();

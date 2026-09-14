@@ -9,7 +9,7 @@
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 AudioBoardStream kit(AudioKitEs8388V1);
-SineWaveGenerator<int16_t> sine;
+SineGenerator<int16_t> sine;
 GeneratedSoundStream<int16_t> in(sine); 
 StreamCopy copier(kit, in); 
 
@@ -38,13 +38,13 @@ void setupActions(){
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial,AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   // Setup output
   auto cfg = kit.defaultConfig(TX_MODE);
   cfg.sd_active = false;
   kit.begin(cfg);
-  kit.setVolume(80);
+  kit.setVolume(0.8f);
 
   // Setup sound generation based on AudioKit settins
   in.begin(cfg);

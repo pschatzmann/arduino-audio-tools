@@ -1,6 +1,9 @@
 #pragma once
+
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
+#include "AudioTools/CoreAudio/AudioRuntime.h"
+#include "AudioTools/CoreAudio/AudioTypes.h"
 
 #ifndef TOUCH_LIMIT
 #define TOUCH_LIMIT 20
@@ -10,16 +13,13 @@
 #define DEBOUNCE_DELAY 500
 #endif
 
-#if defined(IS_MIN_DESKTOP)
-extern "C" void pinMode(int, int);
-extern "C" int digitalRead(int);
-#endif
-
 namespace audio_tools {
 
-// global reference to access from static callback methods
-class AudioActions;
-static AudioActions* selfAudioActions = nullptr;
+#if defined(IS_MIN_DESKTOP)
+extern void pinMode(int, int);
+extern int digitalRead(int);
+#endif
+
 
 /**
  * @brief A simple class to assign functions to gpio pins e.g. to implement a
@@ -28,6 +28,7 @@ static AudioActions* selfAudioActions = nullptr;
  */
 class AudioActions {
  public:
+  /// Defines the logic for the action execution
   enum ActiveLogic : uint8_t {
     ActiveLow,
     ActiveHigh,
@@ -35,12 +36,13 @@ class AudioActions {
     ActiveTouch
   };
 
+  /// Action definition per pin
   struct Action {
     Action() = default;
     virtual ~Action() {}
-    int16_t pin = -1;
-    void (*actionOn)(bool pinStatus, int pin, void* ref) = nullptr;
-    void (*actionOff)(bool pinStatus, int pin, void* ref) = nullptr;
+    digital_pin_t pin = GPIO_NONE;
+    void (*actionOn)(bool pinStatus, digital_pin_t pin, void* ref) = nullptr;
+    void (*actionOff)(bool pinStatus, digital_pin_t pin, void* ref) = nullptr;
     void* ref = nullptr;
     unsigned long debounceTimeout = 0;
     ActiveLogic activeLogic = ActiveHigh;
@@ -50,10 +52,11 @@ class AudioActions {
     /// determines the value for the action
     int debounceDelayValue = DEBOUNCE_DELAY;
     int touchLimit = TOUCH_LIMIT;
-    std::function<bool(int)> read_cb = nullptr;
+    bool (*read_cb)(digital_pin_t, void*) = nullptr;
+    void* read_cb_ref = nullptr;
 
-    virtual int id() { return pin; }
-
+    // public  methods
+    virtual int id() { return GPIO_TO_INT(pin); }
     virtual bool readValue() {
 #if defined(USE_TOUCH_READ)
       bool result;
@@ -94,11 +97,9 @@ class AudioActions {
           }
         } else if (this->activeLogic == ActiveChange) {
           bool active = value;
-          // reports pin state
           if (value != this->lastState && millis() > this->debounceTimeout) {
-            // LOGI("processActions: ActiveChange");
-            //   execute action
-            this->actionOn(active, this->pin, this->ref);
+            if (this->actionOn != nullptr)
+              this->actionOn(active, this->pin, this->ref);
             this->lastState = value;
             this->debounceTimeout = millis() + debounceDelayValue;
           }
@@ -106,9 +107,8 @@ class AudioActions {
           bool active = (this->activeLogic == ActiveLow) ? !value : value;
           if (active &&
               (active != this->lastState || millis() > this->debounceTimeout)) {
-            // LOGI("processActions: %d Active %d - %d", this->pin, value,
-            //  execute action
-            this->actionOn(active, this->pin, this->ref);
+            if (this->actionOn != nullptr)
+              this->actionOn(active, this->pin, this->ref);
             this->lastState = active;
             this->debounceTimeout = millis() + debounceDelayValue;
           }
@@ -117,9 +117,9 @@ class AudioActions {
     }
 
    protected:
-    bool readPin(int pin) {
+    bool readPin(digital_pin_t pin) {
       if (read_cb) {
-        return read_cb(pin);
+        return read_cb(pin, read_cb_ref);
       } else {
         return (bool)::digitalRead(pin);
       }
@@ -136,74 +136,101 @@ class AudioActions {
   virtual ~AudioActions() { clear(); }
 
   /// Adds an Action
-  void add(Action& action) { insertAction(action); }
+  void add(Action& action) { insertAction(&action); }
 
   /// Adds an action
-  void add(int pin, void (*actionOn)(bool pinStatus, int pin, void* ref),
+  void add(digital_pin_t pin,
+           void (*actionOn)(bool pinStatus, digital_pin_t pin, void* ref),
            ActiveLogic activeLogic = ActiveLow, void* ref = nullptr) {
     add(pin, actionOn, nullptr, activeLogic, ref);
   }
 
   /// Adds an action
-  void add(int pin, void (*actionOn)(bool pinStatus, int pin, void* ref),
-           void (*actionOff)(bool pinStatus, int pin, void* ref),
+  void add(digital_pin_t pin,
+           void (*actionOn)(bool pinStatus, digital_pin_t pin, void* ref),
+           void (*actionOff)(bool pinStatus, digital_pin_t pin, void* ref),
            ActiveLogic activeLogicPar = ActiveLow, void* ref = nullptr) {
-    LOGI("ActionLogic::add pin: %d / logic: %d", pin, activeLogicPar);
-    if (pin >= 0) {
+    LOGI("ActionLogic::add pin: %d / logic: %d", GPIO_TO_INT(pin),
+         activeLogicPar);
+
+    if (pin != GPIO_NONE) {
       // setup pin mode
       setupPin(pin, activeLogicPar);
 
       // add value
-      Action& action = *new Action();
-      action.pin = pin;
-      action.actionOn = actionOn;
-      action.actionOff = actionOff;
-      action.activeLogic = activeLogicPar;
-      action.ref = ref;
-      action.debounceDelayValue = debounceDelayValue;
-      action.touchLimit = touchLimit;
-      action.read_cb = read_cb;
+      Action* p_action = new Action();
+      if (p_action == nullptr) {
+        LOGE("Failed to allocate Action for pin %d", GPIO_TO_INT(pin));
+        return;
+      }
+      p_action->pin = pin;
+      p_action->actionOn = actionOn;
+      p_action->actionOff = actionOff;
+      p_action->activeLogic = activeLogicPar;
+      p_action->ref = ref;
+      p_action->debounceDelayValue = debounceDelayValue;
+      p_action->touchLimit = touchLimit;
+      p_action->read_cb = read_cb;
+      p_action->read_cb_ref = read_cb_ref;
 
-      insertAction(action);
+      insertAction(p_action);
     } else {
-      LOGW("pin %d -> Ignored", pin);
+      LOGW("pin %d -> Ignored", GPIO_TO_INT(pin));
     }
   }
 
   /// enable/disable pin actions
-  void setEnabled(int pin, bool enabled) {
-    Action* p_action = findAction(pin);
+  void setEnabled(digital_pin_t pin, bool enabled) {
+    Action* p_action = findActionByPin(pin);
     if (p_action) {
       p_action->enabled = enabled;
     }
   }
 
   /**
-   * @brief Execute all actions if the corresponding pin is low
-   * To minimize the runtime: With each call we process a different pin
+   * @brief Execute all actions if the corresponding pin is low.
+   * To minimize the runtime: With each call we process a different pin.
+   * When interrupts are enabled, all actions are processed when a pin change
+   * is detected.
    */
   void processActions() {
-    static int pos = 0;
     if (actions.empty()) return;
-    // execute action
-    actions[pos]->process();
-    pos++;
-    if (pos >= actions.size()) {
-      pos = 0;
+    if (use_pin_interrupt) {
+      if (!interrupt_pending) return;
+      interrupt_pending = false;
+      processAllActions();
+    } else {
+      static int pos = 0;
+      auto action = actions[pos];
+      if (action != nullptr && action->enabled) action->process();
+      pos++;
+      if (pos >= actions.size()) {
+        pos = 0;
+      }
     }
   }
 
   /// Execute all actions
   void processAllActions() {
     for (Action* action : actions) {
+      if (action == nullptr || !action->enabled) continue;
       action->process();
     }
   }
 
   /// Determines the action for the pin/id
-  Action* findAction(int id) {
+  Action* findActionById(int id) {
     for (Action* action : actions) {
-      if (action->id() == id) {
+      if (action != nullptr && action->id() == id) {
+        return action;
+      }
+    }
+    return nullptr;
+  }
+
+  Action* findActionByPin(digital_pin_t pin) {
+    for (Action* action : actions) {
+      if (action != nullptr && action->pin == pin) {
         return action;
       }
     }
@@ -214,6 +241,7 @@ class AudioActions {
   int findActionIdx(int id) {
     int pos = 0;
     for (Action* action : actions) {
+      if (action == nullptr) continue;
       if (action->id() == id) {
         return pos;
       }
@@ -227,7 +255,13 @@ class AudioActions {
   /// Defines the touch limit (Default 20)
   void setTouchLimit(int value) { touchLimit = value; }
   /// Use interrupts instead of processActions() call in loop
-  void setUsePinInterrupt(bool active) { use_pin_interrupt = active; }
+  void setUsePinInterrupt(bool active) {
+    use_pin_interrupt = active;
+    for (Action* action : actions) {
+      if (action == nullptr) continue;
+      setupInterrupt(action->pin);
+    }
+  }
   /// setup pin mode when true
   void setPinMode(bool active) { use_pin_mode = active; }
 
@@ -239,47 +273,93 @@ class AudioActions {
   }
 
   /// Sets a callback function to read the pin state
-  void setReadCallback(std::function<bool(int)> read_cb_par) { read_cb = read_cb_par; }
+  void setReadCallback(bool (*read_cb_par)(digital_pin_t, void*),
+                       void* ref = nullptr) {
+    read_cb = read_cb_par;
+    read_cb_ref = ref;
+  }
 
  protected:
+  inline static AudioActions* selfAudioActions = nullptr;
   int debounceDelayValue = DEBOUNCE_DELAY;
   int touchLimit = TOUCH_LIMIT;
   bool use_pin_interrupt = false;
   bool use_pin_mode = true;
+  volatile bool interrupt_pending = false;
   Vector<Action*> actions{0};
-  std::function<bool(int)> read_cb = nullptr;
+  bool (*read_cb)(digital_pin_t, void*) = nullptr;
+  void* read_cb_ref = nullptr;
 
-  void insertAction(Action& action) {
-    int idx = findActionIdx(action.id());
+  void insertAction(Action* p) {
+    if (p == nullptr) {
+      LOGE("insertAction: refusing to add nullptr");
+      return;
+    }
+    int idx = findActionIdx(p->id());
     if (idx >= 0) {
-      // replace old action
       delete (actions[idx]);
-      actions[idx] = &action;
+      actions[idx] = p;
     } else {
-      // add new action
-      actions.push_back(&action);
+      actions.push_back(p);
     }
   }
 
-  static void audioActionsISR() { selfAudioActions->processAllActions(); }
+#if defined(IS_ZEPHYR)
+  static struct gpio_callback button_cb_data;
 
-  void setupPin(int pin, ActiveLogic logic) {
-    // in the audio-driver library the pins are already set up
+  static void audioActionsISRZephyr(const struct device* dev,
+                                    struct gpio_callback* cb, uint32_t pins) {
+    (void)dev;
+    (void)cb;
+    (void)pins;
+    if (selfAudioActions != nullptr)
+      selfAudioActions->interrupt_pending = true;
+  }
+
+  /**
+   * @brief Setup GPIO interrupt for a given pin
+   */
+  void setupISR(digital_pin_t button) {
+    int ret;
+
+    ret = gpio_pin_interrupt_configure_dt(&button, GPIO_INT_EDGE_BOTH);
+    if (ret != 0) {
+      LOGE("Error %d: failed to enable interrupt", ret);
+      return;
+    }
+
+    gpio_init_callback(&button_cb_data, audioActionsISRZephyr, BIT(button.pin));
+
+    gpio_add_callback(button.port, &button_cb_data);
+  }
+#else
+  static void audioActionsISR() {
+    if (selfAudioActions != nullptr)
+      selfAudioActions->interrupt_pending = true;
+  }
+
+#endif
+
+  void setupInterrupt(digital_pin_t pin) {
+    if (!use_pin_interrupt) return;
+#if defined(ARDUINO) && (!defined(IS_MIN_DESKTOP) && !defined(IS_DESKTOP))
+    attachInterrupt(digitalPinToInterrupt(pin), audioActionsISR, CHANGE);
+#elif defined(IS_ZEPHYR)
+    setupISR(pin);
+#endif
+  }
+
+  void setupPin(digital_pin_t pin, ActiveLogic logic) {
     if (use_pin_mode) {
       if (logic == ActiveLow) {
         pinMode(pin, INPUT_PULLUP);
-        LOGI("pin %d -> INPUT_PULLUP", pin);
+        LOGI("pin %d -> INPUT_PULLUP", GPIO_TO_INT(pin));
       } else {
         pinMode(pin, INPUT);
-        LOGI("pin %d -> INPUT", pin);
+        LOGI("pin %d -> INPUT", GPIO_TO_INT(pin));
       }
     }
-
-#if defined(ARDUINO) && !defined(IS_MIN_DESKTOP)
-    if (use_pin_interrupt) {
-      attachInterrupt(digitalPinToInterrupt(pin), audioActionsISR, CHANGE);
-    }
-#endif
+    setupInterrupt(pin);
   }
 };
 

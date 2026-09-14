@@ -1,7 +1,7 @@
 
 #include "AudioTools.h"
 
-SineWaveGenerator<int16_t> sine_wave(32000);      // subclass of SoundGenerator with max amplitude of 32000
+SineGenerator<int16_t> sine_wave(32000);      // subclass of SoundGenerator with max amplitude of 32000
 SineFromTable<int16_t> sine_table(32000);         // subclass of SoundGenerator with max amplitude of 32000
 FastSineGenerator<int16_t> sine_fast(32000);  
 
@@ -28,7 +28,7 @@ void setup(){
 }
 
 void loop(){
-    Serial.print(resultStr("SineWaveGenerator", measure(&sine_wave)));
+    Serial.print(resultStr("SineGenerator", measure(&sine_wave)));
     Serial.print(" - ");
     Serial.print(resultStr("SineFromTable", measure(&sine_table)));
     Serial.print(" - ");

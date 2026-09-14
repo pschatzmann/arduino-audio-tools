@@ -46,6 +46,8 @@ class VorbisDecoder : public AudioDecoder {
    */
   ~VorbisDecoder() { end(); }
 
+  const char *mime() override { return "audio/vorbis"; }
+
   /**
    * @brief Resets decoder state and prepares for new Vorbis stream
    *

@@ -1,5 +1,5 @@
 #pragma once
-#include "ADPCM.h"  // https://github.com/pschatzmann/adpcm
+#include "ADPCM.h"  // https://github.com/pschatzmann/codec-adpcm
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
 
 namespace audio_tools {
@@ -24,6 +24,8 @@ class ADPCMDecoder : public AudioDecoderExt {
   ~ADPCMDecoder() {
     if (p_decoder) delete p_decoder;
   }
+
+  const char *mime() override { return "audio/adpcm"; }
 
   // (re) defines the codec id: set the block size first
   void setId(AVCodecID id) {
@@ -100,6 +102,23 @@ class ADPCMDecoder : public AudioDecoderExt {
   }
 
   operator bool() override { return is_started; }
+
+  /// Maps the codec id to the corresponding WAV format tag, for the codec
+  /// ids that are actually defined WAV format tags. Most AVCodecID values
+  /// are game/container specific variants that have no WAV format tag, so
+  /// they return AudioFormat::UNKNOWN and must be registered explicitly.
+  AudioFormat wavFormat() override {
+    switch (codec_id) {
+      case AV_CODEC_ID_ADPCM_MS:
+        return AudioFormat::ADPCM;
+      case AV_CODEC_ID_ADPCM_IMA_WAV:
+        return AudioFormat::IMA_ADPCM;
+      case AV_CODEC_ID_ADPCM_YAMAHA:
+        return AudioFormat::YAMAHA_ADPCM;
+      default:
+        return AudioFormat::UNKNOWN;
+    }
+  }
 
  protected:
   adpcm_ffmpeg::ADPCMDecoder *p_decoder = nullptr;

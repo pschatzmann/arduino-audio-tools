@@ -30,6 +30,8 @@ class DecoderNetworkFormat : public AudioDecoder {
 
   ~DecoderNetworkFormat() {}
 
+  const char *mime() override { return "audio/pcm"; }
+
   virtual void setOutput(Print &out_stream) { pt_print = &out_stream; }
 
   bool begin() { return true; }

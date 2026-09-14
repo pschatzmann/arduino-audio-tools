@@ -1,7 +1,7 @@
 
 #include "AudioTools.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
-#include "AudioTools/AudioLibs/AudioRealFFT.h" // or AudioKissFFT
+#include "AudioTools/FFT/AudioRealFFT.h" // or AudioKissFFT
 
 AudioBoardStream kit(AudioKitEs8388V1);  // Audio source
 AudioRealFFT fft; // or AudioKissFFT

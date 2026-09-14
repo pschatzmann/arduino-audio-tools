@@ -1,11 +1,8 @@
 #pragma once
+#include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/Buffers.h"
 #include "AudioTools/CoreAudio/AudioTypes.h"
 #include "AudioTools/CoreAudio/BaseConverter.h"
-
-#ifdef ARDUINO
-#include "Stream.h"
-#endif
 
 #ifdef USE_STREAM_WRITE_OVERRIDE
 #define STREAM_WRITE_OVERRIDE override
@@ -95,10 +92,11 @@ class BaseStream : public Stream {
   void setWriteBufferSize(int size) { write_buffer_size = size;}
 
  protected:
-  RingBuffer<uint8_t> tmp_in{0};
+  RingBuffer<uint8_t> tmp_in{0}; 
   RingBuffer<uint8_t> tmp_out{0};
   int write_buffer_size = MAX_SINGLE_CHARS;
 
+  /// Refill small read buffer (e.g. 8 bytes) to avoid single byte reads when calling read()
   void refillReadBuffer() {
     tmp_in.resize(DEFAULT_BUFFER_SIZE);
     if (tmp_in.isEmpty()) {
@@ -188,30 +186,46 @@ class AudioStream : public BaseStream, public AudioInfoSupport, public AudioInfo
  * moving the file pointer to the beginning) and read them back if you want to
  * process them a second time. The default timeout on the available() method is
  * set to 0. This might be too small if you use e.g. a URLStream.
+ * If you set beginReset to true in the constructor, the system will automatically 
+ * reset the streams when begin() is called. 
  * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 class CatStream : public BaseStream {
  public:
-  CatStream() = default;
+  CatStream(bool beginReset = false) : begin_reset(beginReset) {}
 
-  void add(Stream *stream) { input_streams.push_back(stream); }
-  void add(Stream &stream) { input_streams.push_back(&stream); }
+  void add(Stream *stream) { 
+    if (begin_reset)
+      all_streams.push_back(stream); 
+    else
+      input_streams.push_back(stream); 
+  }
+  void add(Stream &stream) { add(&stream); }
 
   bool begin() override {
+    if (begin_reset) {
+      // Restore working list from master so we start at the first stream again
+      input_streams.clear();
+      for (auto s : all_streams) input_streams.push_back(s);
+    }
+    p_current_stream = nullptr;
     is_active = true;
     return true;
   }
 
-  void end() override { is_active = false; }
+  void end() override {
+    is_active = false;
+    p_current_stream = nullptr;
+  }
 
   int available() override {
     if (!is_active) return 0;
     if (!moveToNextStreamOnEnd()) {
       return 0;
     }
-    return availableWithTimout();
+    return availableWithTimeout();
   }
 
   size_t readBytes(uint8_t *data, size_t len) override {
@@ -219,42 +233,71 @@ class CatStream : public BaseStream {
     if (!moveToNextStreamOnEnd()) {
       return 0;
     }
-    return p_current_stream->readBytes(data, len);
+    size_t result = p_current_stream->readBytes(data, len);
+    if (result == 0) {
+      // Some stream implementations can return available()>0 even when they
+      // already reached the end and return 0 on readBytes(). In this case we
+      // force the switch to the next stream.
+      if (moveToNextStreamOnEnd(true)) {
+        result = p_current_stream->readBytes(data, len);
+      }
+    }
+    return result;
   }
 
   /// Returns true if active and we still have data
   operator bool() { return is_active && available() > 0; }
 
+  /// Defines the callback which is called when a new stream is started
   void setOnBeginCallback(void (*callback)(Stream *stream)) {
     begin_callback = callback;
   }
+
+  /// Defines the callback which is called when a stream is finished
   void setOnEndCallback(void (*callback)(Stream *stream)) {
     end_callback = callback;
   }
 
-  /// Defines the timout the system waits for data when moving to the next stream
+  /// Defines the callback used to determine available bytes for a stream
+  void setAvailableCallback(int (*callback)(Stream *stream)) {
+    available_callback = callback;
+  }
+
+  /// Defines the timout in ms the system waits for data when moving to the next stream
   void setTimeout(size_t t) { _timeout = t; }
 
   /// not supported
   size_t write(const uint8_t *data, size_t size) override { return 0;};
 
+  /// clear
+  void clear() {
+    all_streams.clear();
+    input_streams.clear();
+    p_current_stream = nullptr;
+  }
+
  protected:
-  Vector<Stream *> input_streams;
+  Vector<Stream *> all_streams;      // master list — never consumed
+  Vector<Stream *> input_streams;    // working list — consumed by pop_front
   Stream *p_current_stream = nullptr;
   bool is_active = false;
   void (*begin_callback)(Stream *stream) = nullptr;
   void (*end_callback)(Stream *stream) = nullptr;
-  size_t _timeout = 0;
+  int (*available_callback)(Stream *stream) = nullptr;
+  bool begin_reset = false;
 
   /// moves to the next stream if necessary: returns true if we still have a
   /// valid stream
-  bool moveToNextStreamOnEnd() {
+  bool moveToNextStreamOnEnd(bool force_next_stream = false) {
     // keep on running
-    if (p_current_stream != nullptr && p_current_stream->available() > 0)
+    if (!force_next_stream && p_current_stream != nullptr &&
+        streamAvailable(p_current_stream) > 0)
       return true;
     // at end?
-    if ((p_current_stream == nullptr || availableWithTimout() == 0)) {
+    if ((p_current_stream == nullptr || force_next_stream ||
+         availableWithTimeout() == 0)) {
       if (end_callback && p_current_stream) end_callback(p_current_stream);
+      if (p_current_stream) p_current_stream->flush();
       if (!input_streams.empty()) {
         LOGI("using next stream");
         p_current_stream = input_streams[0];
@@ -269,16 +312,21 @@ class CatStream : public BaseStream {
     return p_current_stream != nullptr;
   }
 
-  int availableWithTimout() {
-    int result = p_current_stream->available();
+  int availableWithTimeout() {
+    int result = streamAvailable(p_current_stream);
     if (result == 0) {
       for (int j = 0; j < _timeout / 10; j++) {
         delay(10);
-        result = p_current_stream->available();
+        result = streamAvailable(p_current_stream);
         if (result != 0) break;
       }
     }
     return result;
+  }
+
+  int streamAvailable(Stream *stream) {
+    if (stream == nullptr) return 0;
+    return available_callback ? available_callback(stream) : stream->available();
   }
 };
 
@@ -391,12 +439,12 @@ class QueueStream : public BaseStream {
       }
     }
 
-    return p_buffer->writeArray(data, len / sizeof(T));
+    return p_buffer->writeArray(reinterpret_cast<const T *>(data), len / sizeof(T)) * sizeof(T);
   }
 
   virtual size_t readBytes(uint8_t *data, size_t len) override {
     if (!active) return 0;
-    return p_buffer->readArray(data, len / sizeof(T));
+    return p_buffer->readArray(reinterpret_cast<T *>(data), len / sizeof(T)) * sizeof(T);
   }
 
   int read() override {
@@ -424,6 +472,9 @@ class QueueStream : public BaseStream {
     }
   }
 
+  /// Clears the data in the buffer and resets the state
+  void flush() override { clear(); }
+
   /// Returns true if active
   operator bool() { return active; }
 
@@ -431,7 +482,10 @@ class QueueStream : public BaseStream {
   int levelPercent() {return p_buffer->levelPercent();}
 
   /// Resize the buffer
-  bool resize(int size) {return p_buffer->resize(size);}
+  bool resize(size_t size) {return p_buffer->resize(size);}
+  
+  /// Resize the buffer by indicating the size and count
+  bool resize(size_t size, int count) { return p_buffer->resize(size, count); }
 
  protected:
   BaseBuffer<T> *p_buffer;

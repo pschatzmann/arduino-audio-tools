@@ -20,7 +20,7 @@
 // #include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 AudioInfo info(8000, 1, 16);
-SineWaveGenerator<int16_t> sineWave(32000);
+SineGenerator<int16_t> sineWave(32000);
 GeneratedSoundStream<int16_t> sound(sineWave);
 Throttle throttle(sound);
 I2SStream out;
@@ -31,7 +31,7 @@ StreamCopy copierIn(out, hdlc_dec, 256);
 
 void setup() {
   Serial2.begin(115200);
-  AudioLogger::instance().begin(Serial2, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial2, AudioToolsLogLevel::Warning);
   hdlc_enc.begin();
   hdlc_dec.begin();
 

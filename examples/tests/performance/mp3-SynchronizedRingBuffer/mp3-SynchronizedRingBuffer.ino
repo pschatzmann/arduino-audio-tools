@@ -12,7 +12,7 @@
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/CodecMP3Helix.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
-#include "AudioTools/AudioLibs/Concurrency.h"
+#include "AudioTools/Concurrency.h"
 #include "AudioTools/Disk/AudioSourceSDFAT.h"
 
 const int buffer_count = 30;

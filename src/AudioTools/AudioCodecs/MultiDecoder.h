@@ -1,6 +1,7 @@
 
 #pragma once
 
+#include <cstring>
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
 #include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 #include "AudioTools/Communication/HTTP/AbstractURLStream.h"
@@ -34,6 +35,14 @@ namespace audio_tools {
  * which uses a pull-based approach. For streaming scenarios with direct
  * access to input/output streams, consider using MultiStreamingDecoder.
  *
+ * @note A MultiDecoder instance is a single-consumer object: it keeps a
+ * single output pointer and a single "currently selected decoder" slot.
+ * Do not share one MultiDecoder (or its registered inner decoders) between
+ * two AudioPlayer instances - each AudioPlayer::setOutput()/setDecoder()
+ * call overwrites that shared output pointer, so whichever player wires
+ * up last silently steals the decoder's output from the other. Use a
+ * separate MultiDecoder (and separate inner decoders) per AudioPlayer.
+ *
  * @ingroup codecs
  * @ingroup decoder
  * @author Phil Schatzmann
@@ -57,7 +66,7 @@ class MultiDecoder : public AudioDecoder {
    */
   MultiDecoder(MimeSource& mimeSource) { setMimeSource(mimeSource); }
 
- #ifdef USE_EXPERIMENTAL 
+ #ifdef USE_EXPERIMENTAL
   /**
    * @brief Destructor
    *
@@ -68,9 +77,16 @@ class MultiDecoder : public AudioDecoder {
     for (auto* adapter : adapters) {
       delete adapter;
     }
-    adapters.clear();    
+    adapters.clear();
   }
 #endif
+
+  /**
+   * @brief Provides the MIME type of the currently selected decoder
+   * @return MIME type string of the currently selected decoder, or nullptr
+   *         if no decoder has been selected yet
+   */
+  const char* mime() override { return actual_decoder.mime; }
 
   /**
    * @brief Starts the processing and enables automatic MIME type determination
@@ -116,28 +132,12 @@ class MultiDecoder : public AudioDecoder {
    * @param decoder The AudioDecoder to register
    * @param mime The MIME type string to associate with this decoder
    */
-  void addDecoder(AudioDecoder& decoder, const char* mime) {
-    DecoderInfo info{mime, &decoder};
+  void addDecoder(AudioDecoder& decoder, const char* mime = nullptr) {
+    const char* existing_mime = mime != nullptr ? mime : mime_detector.mime();
+    LOGI("Adding decoder for %s", existing_mime);
+    DecoderInfo info{existing_mime, &decoder};
     decoder.addNotifyAudioChange(*this);
     decoders.push_back(info);
-  }
-
-  /**
-   * @brief Adds a decoder with custom MIME detection logic
-   *
-   * Registers an AudioDecoder with a specific MIME type and provides custom
-   * logic for detecting that MIME type from raw data. This allows for
-   * specialized format detection beyond the standard MimeDetector capabilities.
-   *
-   * @param decoder The AudioDecoder to register
-   * @param mime The MIME type string to associate with this decoder
-   * @param check Custom function that analyzes data to detect this MIME type.
-   *              Should return true if the data matches this format.
-   */
-  void addDecoder(AudioDecoder& decoder, const char* mime,
-                  bool (*check)(uint8_t* data, size_t len)) {
-    addDecoder(decoder, mime);
-    mime_detector.setCheck(mime, check);
   }
 
   /**
@@ -180,37 +180,77 @@ class MultiDecoder : public AudioDecoder {
    * @param mime The MIME type string to match against registered decoders
    * @return true if a matching decoder was found and initialized, false otherwise
    */
+  /// Copies 'mime' into 'out' with any ";...parameters" trimmed off (and
+  /// trailing whitespace before the ';' removed), e.g.
+  /// "audio/mpeg; codecs=\"mpeg1-layer2\"" -> "audio/mpeg". Used by
+  /// selectDecoder() so a source that adds a codecs parameter still
+  /// matches a decoder registered under the plain base type.
+  static void baseMimeType(const char* mime, char* out, size_t outSize) {
+    size_t len = 0;
+    while (mime[len] != '\0' && mime[len] != ';' && len < outSize - 1) len++;
+    while (len > 0 && (mime[len - 1] == ' ' || mime[len - 1] == '\t')) len--;
+    memcpy(out, mime, len);
+    out[len] = '\0';
+  }
+
   bool selectDecoder(const char* mime) {
     bool result = false;
     if (mime == nullptr) return false;
-    // do nothing if no change
+    // Same mime as before (e.g. back-to-back tracks of the same format):
+    // still restart the decoder so state (bit reservoir, frame buffers,
+    // etc.) from the previous track does not leak into the next one -
+    // just keep the already resolved DecoderInfo instead of re-searching
+    // the decoders list.
     if (StrView(mime).equalsIgnoreCase(actual_decoder.mime)) {
       is_first = false;
+      if (actual_decoder.decoder != nullptr) {
+        if (actual_decoder.is_open) actual_decoder.decoder->end();
+        actual_decoder.decoder->begin();
+        actual_decoder.is_open = true;
+      }
       return true;
     }
-    // close actual decoder 
+    // close actual decoder
     if (actual_decoder.decoder != this) end();
+
+    // A source may report a MIME type with an RFC 6381-style "codecs"
+    // (or other) parameter, e.g. "audio/mpeg; codecs=\"mpeg1-layer2\"" -
+    // a decoder registered for that exact parameterized type (a more
+    // specific match) must win over one only registered for the plain
+    // base type ("audio/mpeg"). Two passes, not one combined check: a
+    // single pass stops at the first entry that matches *either* way, so
+    // a generic base-type decoder registered before the specific one
+    // would otherwise shadow it purely by list order.
+    char base[64];
+    baseMimeType(mime, base, sizeof(base));
+    int exact_j = -1, base_j = -1;
+    for (int j = 0; j < decoders.size(); j++) {
+      if (StrView(decoders[j].mime).equalsIgnoreCase(mime)) { exact_j = j; break; }
+      if (base_j < 0 && StrView(decoders[j].mime).equalsIgnoreCase(base)) base_j = j;
+    }
+    int match_j = exact_j >= 0 ? exact_j : base_j;
 
     // find the corresponding decoder
     selected_mime = nullptr;
-    for (int j = 0; j < decoders.size(); j++) {
-      DecoderInfo info = decoders[j];
-      if (StrView(info.mime).equalsIgnoreCase(mime)) {
-        LOGI("Using decoder for %s (%s)", info.mime, mime);
-        actual_decoder = info;
-        // define output if it has not been defined
-        if (p_print != nullptr && actual_decoder.decoder != this 
-          && actual_decoder.decoder->getOutput() == nullptr) {
-          actual_decoder.decoder->setOutput(*p_print);
-        }
-        if (!*actual_decoder.decoder) {
-          actual_decoder.decoder->begin();
-          LOGI("Decoder %s started", actual_decoder.mime);
-        }
-        result = true;
-        selected_mime = mime;
-        break;
+    if (match_j >= 0) {
+      DecoderInfo info = decoders[match_j];
+      LOGI("Using decoder for %s (%s)", info.mime, mime);
+      actual_decoder = info;
+      // define output if it has not been defined
+      if (p_print != nullptr && actual_decoder.decoder != this
+        && actual_decoder.decoder->getOutput() == nullptr) {
+        actual_decoder.decoder->setOutput(*p_print);
       }
+      if (!*actual_decoder.decoder) {
+        actual_decoder.decoder->begin();
+        LOGI("Decoder %s started", actual_decoder.mime);
+      }
+      // mark as open so that a later end()/format switch actually calls
+      // decoder->end() instead of silently skipping it (is_open defaults
+      // to false and was previously only ever set for the 'nop' fallback)
+      actual_decoder.is_open = true;
+      result = true;
+      selected_mime = mime;
     }
     is_first = false;
     return result;

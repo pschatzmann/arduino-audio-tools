@@ -10,6 +10,8 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @ingroup io
  * @copyright GPLv3
+ * 
+ * @note Supported only on platforms with a standard input and output (read, write), e.g. linux, windows, macos...
  */
 class StdioStream : public BaseStream {
 public:

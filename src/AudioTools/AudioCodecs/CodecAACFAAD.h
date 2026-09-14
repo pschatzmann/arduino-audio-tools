@@ -4,6 +4,25 @@
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
 #include "faad.h"
 
+// faad's neaacdec.h defines short, common object/header-type macros (RAW,
+// ADIF, ADTS, LATM, MAIN, LC, SSR, LTP, HE_AAC, ER_LC, ER_LTP, LD,
+// DRM_ER_LC) that are not used outside of this header but leak globally and
+// clash with identifiers (e.g. VideoFormat::RAW in ContainerAVI.h) in other
+// audio-tools headers when both are included in the same sketch.
+#undef MAIN
+#undef LC
+#undef SSR
+#undef LTP
+#undef HE_AAC
+#undef ER_LC
+#undef ER_LTP
+#undef LD
+#undef DRM_ER_LC
+#undef RAW
+#undef ADIF
+#undef ADTS
+#undef LATM
+
 #ifndef FAAD_INPUT_BUFFER_SIZE
 #define FAAD_INPUT_BUFFER_SIZE 1024*2
 #endif
@@ -17,7 +36,7 @@
 namespace audio_tools {
 
 /**
- * @brief AAC Decoder using faad: https://github.com/pschatzmann/arduino-libfaad
+ * @brief AAC Decoder using faad: https://github.com/pschatzmann/codec-faad
  * This needs a stack of around 60000 and you need to make sure that memory is allocated on PSRAM.
  * See https://www.pschatzmann.ch/home/2023/09/12/arduino-audio-tools-faat-aac-decoder/
  * @ingroup codecs
@@ -34,6 +53,8 @@ class AACDecoderFAAD : public AudioDecoder {
   };
 
   ~AACDecoderFAAD() { end(); }
+
+  const char *mime() override { return "audio/aac"; }
 
   /// Starts the processing
   bool begin() {

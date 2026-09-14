@@ -3,6 +3,7 @@
 #  include "InitializerList.h" 
 #endif
 #include <stddef.h>
+#include <assert.h>
 #include "Allocator.h"
 
 namespace audio_tools {
@@ -320,6 +321,11 @@ class List {
             p_allocator = &allocator;
         }
 
+        /// Provides the first element
+        T& front() {
+            return *begin();
+        }
+
         /// Provides the last element
         T& back() {
             return *rbegin();
@@ -366,8 +372,8 @@ class List {
             assert(first.next!=nullptr);
             assert(last.prior!=nullptr);
             if (empty()){
-                assert(first.next = &last);
-                assert(last.prior = &first);
+                assert(first.next == &last);
+                assert(last.prior == &first);
             }
         }
 

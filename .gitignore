@@ -1,8 +1,7 @@
 docs/html/
 build/
-build_check/
-.vscode/
 _deps/
-.ipynb_checkpoints/
-.DS_Store
+build_check/
+.*
+.*/
 miniaudio.h

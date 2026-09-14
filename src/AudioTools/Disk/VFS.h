@@ -8,7 +8,10 @@ namespace audio_tools {
  * @brief Base class which uses c++ file functions. It is also used as base
  * class for  an ESP32 Virtual File System. After initializing the VFS the
  * regular c file operations are supported.
- * @ingroup player
+ * 
+ * @note Supported only by ESP32 (Arduino and IDF)
+ * 
+ * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

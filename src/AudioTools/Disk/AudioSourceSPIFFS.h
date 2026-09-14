@@ -9,6 +9,9 @@ namespace audio_tools {
 
 /**
  * @brief ESP32 AudioSource for AudioPlayer using an the SPIFFS file system
+ * 
+ * @note Supported only by Arduino platforms that support SPIFFS (e.g. ESP32)!
+ * 
  * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -20,7 +23,7 @@ public:
     start_path = startFilePath;
     exension = ext;
   }
-  
+
   virtual ~AudioSourceSPIFFS() {
     end();
   }

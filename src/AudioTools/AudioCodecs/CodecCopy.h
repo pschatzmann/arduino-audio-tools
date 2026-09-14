@@ -28,6 +28,12 @@ public:
 
   ~CopyDecoder() {}
 
+  /// Provides the mime type of the data
+  const char *mime() override {return mime_type;}
+
+  /// Defines the mime type
+  void setMime(const char *mime) { mime_type = mime; }
+
   virtual void setOutput(Print &out_stream) {pt_print=&out_stream;}
 
   bool begin() { return true; }
@@ -54,6 +60,7 @@ public:
 protected:
   Print *pt_print=nullptr;
   bool is_pcm = false;
+  const char *mime_type = "audio/pcm";
 };
 
 /**

@@ -2,7 +2,7 @@
 
 AudioInfo from_info(44100, 2, 32);
 AudioInfo to_info(44100, 2, 16);
-SineWaveGenerator<int32_t> sine_wave;                         // subclass of SoundGenerator with max amplitude of 32000
+SineGenerator<int32_t> sine_wave;                         // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int32_t> in_stream(sine_wave);                  // Stream generated from sine wave
 CsvOutput<int16_t> out(Serial);                         // Output to Serial
 FormatConverterStream conv(in_stream);

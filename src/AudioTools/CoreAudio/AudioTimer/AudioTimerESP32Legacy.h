@@ -93,20 +93,20 @@ static IRAM_ATTR void timerCallback3() { timerCallbackArray[3].call(); }
  * @brief Repeating Timer functions for simple scheduling of repeated execution.
  * The basic logic is taken from
  * https://www.toptal.com/embedded/esp32-audio-sampling. Plaease use the typedef
- * TimerAlarmRepeating.
+ * AudioTimer.
  * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  *
  */
-class TimerAlarmRepeatingDriverESP32Legacy : public TimerAlarmRepeatingDriverBase {
+class AudioTimerDriverESP32Legacy : public AudioTimerDriverBase {
  public:
-  TimerAlarmRepeatingDriverESP32Legacy() {
+  AudioTimerDriverESP32Legacy() {
     setTimerFunction(DirectTimerCallback);
     setTimer(0);
   }
 
-  TimerAlarmRepeatingDriverESP32Legacy(int timer, TimerFunction function) {
+  AudioTimerDriverESP32Legacy(int timer, TimerFunction function) {
     setTimerFunction(function);
     setTimer(timer);
   }
@@ -262,7 +262,7 @@ class TimerAlarmRepeatingDriverESP32Legacy : public TimerAlarmRepeatingDriverBas
     // we record the callback method and user data
     user_callback.setup(callback_f, object, false);
     // setup the timercallback
-    xTaskCreatePinnedToCore(complexTaskHandler, "TimerAlarmRepeatingTask",
+    xTaskCreatePinnedToCore(complexTaskHandler, "AudioTimerTask",
                             configMINIMAL_STACK_SIZE + 10000, &user_callback,
                             priority, &handler_task, core);
     LOGI("Task created on core %d", core);
@@ -280,7 +280,7 @@ class TimerAlarmRepeatingDriverESP32Legacy : public TimerAlarmRepeatingDriverBas
   void setupSimpleThreadLoop(repeating_timer_callback_t callback_f) {
     TRACED();
     user_callback.setup(callback_f, object, false);
-    xTaskCreatePinnedToCore(simpleTaskLoop, "TimerAlarmRepeatingTask",
+    xTaskCreatePinnedToCore(simpleTaskLoop, "AudioTimerTask",
                             configMINIMAL_STACK_SIZE + 10000, this, priority,
                             &handler_task, core);
     LOGI("Task created on core %d", core);
@@ -308,8 +308,8 @@ class TimerAlarmRepeatingDriverESP32Legacy : public TimerAlarmRepeatingDriverBas
   /// in a separate task.
   static void simpleTaskLoop(void *param) {
     TRACEI();
-    TimerAlarmRepeatingDriverESP32Legacy *ta =
-        (TimerAlarmRepeatingDriverESP32Legacy *)param;
+    AudioTimerDriverESP32Legacy *ta =
+        (AudioTimerDriverESP32Legacy *)param;
 
     while (true) {
       unsigned long end = micros() + ta->timeUs;
@@ -327,8 +327,8 @@ class TimerAlarmRepeatingDriverESP32Legacy : public TimerAlarmRepeatingDriverBas
 };
 
 #if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0, 0)
-/// @brief  use TimerAlarmRepeating!  @ingroup timer_esp32
-using TimerAlarmRepeatingDriver = TimerAlarmRepeatingDriverESP32Legacy;
+/// @brief  use AudioTimer!  @ingroup timer_esp32
+using AudioTimerDriver = AudioTimerDriverESP32Legacy;
 #endif
 
 }  // namespace audio_tools

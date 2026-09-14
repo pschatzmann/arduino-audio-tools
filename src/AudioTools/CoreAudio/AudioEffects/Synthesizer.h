@@ -39,7 +39,7 @@ class AbstractSynthesizerChannel {
 
 /**
  * @brief Default implementation for a Channel. You can provide the Sound Generator as parameter to the effects: e.g.
- * DefaultSynthesizerChannel<AudioEffects<SineWaveGenerator<int16_t>>> *channel = new DefaultSynthesizerChannel<AudioEffects<SineWaveGenerator<int16_t>>>();
+ * DefaultSynthesizerChannel<AudioEffects<SineGenerator<int16_t>>> *channel = new DefaultSynthesizerChannel<AudioEffects<SineGenerator<int16_t>>>();
 
  * @author Phil Schatzmann
  * @copyright GPLv3

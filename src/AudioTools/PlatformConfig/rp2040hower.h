@@ -35,8 +35,14 @@
 #define ANALOG_BUFFERS 100
 #endif
 
-//#define USE_CONCURRENCY
 #define USE_SD_SUPPORTS_SPI
+
+// Use fixed point operations for RP2040 only
+#if defined(PICO_RP2350)
+#  define PREFER_FIXEDPOINT false
+#else
+#  define PREFER_FIXEDPOINT true
+#endif
 
 // default pins for VS1053 shield
 #define VS1053_CS 17 
@@ -63,3 +69,8 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #define ps_calloc(num, size) pcalloc(num, size)
 #define ps_realloc(ptr, size) realloc(ptr, size)
 #endif
+
+// FreeRTOS support
+#ifdef __FREERTOS
+#define USE_CONCURRENCY
+#endif 

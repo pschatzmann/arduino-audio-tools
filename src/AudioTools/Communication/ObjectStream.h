@@ -1,7 +1,7 @@
 #include "AudioTools/CoreAudio/BaseStream.h"
 namespace audio_tools {
 /**
- * @brief A Arduino Stream which makes sure that we read back the same size
+ * @brief An Arduino Stream which makes sure that we read back the same size
  * as we wrote. It adds a size prefix to the data stream.
  * @ingroup communications
  * @author Phil Schatzmann

@@ -4,10 +4,6 @@
 #include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 #include "AudioToolsConfig.h"
 
-#ifndef AUDIOTOOLS_METADATA_ICY_ASCII_ONLY
-#define AUDIOTOOLS_METADATA_ICY_ASCII_ONLY true
-#endif
-
 namespace audio_tools {
 
 /**
@@ -112,7 +108,7 @@ class MetaDataICY : public AbstractMetaData {
         metaDataLen = metaSize(ch);
         LOGI("metaDataLen: %d", metaDataLen);
         if (metaDataLen > 0) {
-          if (metaDataLen > 200) {
+          if (metaDataLen > maxLimit) {
             LOGI("Unexpected metaDataLen -> processed as data");
             nextStatus = ProcessData;
           } else {
@@ -141,6 +137,9 @@ class MetaDataICY : public AbstractMetaData {
   /// Sets whether to only accept ASCII characters in metadata (default is true)
   void setAsciiOnly(bool value) { is_ascii = value; }
 
+  /// Sets the maximum allowed metadata length (default is 400)
+  void setMaxMetaDataLimit(int limit) { maxLimit = limit; }
+
  protected:
   Status nextStatus = ProcessData;
   Status currentStatus = ProcessData;
@@ -158,6 +157,7 @@ class MetaDataICY : public AbstractMetaData {
   int dataLen = 0;
   int dataPos = 0;
   bool is_ascii = AUDIOTOOLS_METADATA_ICY_ASCII_ONLY;
+  int maxLimit = AUDIOTOOLS_METADATA_ICY_LIMIT;
 
   virtual void clear() {
     nextStatus = ProcessData;

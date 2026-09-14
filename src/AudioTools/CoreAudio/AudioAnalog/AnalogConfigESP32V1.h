@@ -7,8 +7,24 @@
 #include "esp_adc/adc_cali_scheme.h"
 #include "esp_adc/adc_continuous.h"
 #ifdef ARDUINO
-#include "esp32-hal-periman.h"
+#  include "esp32-hal-periman.h"
 #endif
+
+// Not available in IDF 6.2 any more
+#ifndef SOC_ADC_SAMPLE_FREQ_THRES_HIGH
+#  define SOC_ADC_SAMPLE_FREQ_THRES_HIGH          (2000000)
+#endif
+#ifndef SOC_ADC_SAMPLE_FREQ_THRES_LOW
+#  define SOC_ADC_SAMPLE_FREQ_THRES_LOW           (20000)
+#endif
+
+// Prevent compile error in ARDUINO
+#ifdef ARDUINO
+    #ifndef perimanClearPinBus
+        #define perimanClearPinBus(p) perimanSetPinBus(p, ESP32_BUS_TYPE_INIT, NULL)
+    #endif
+#endif
+
 
 #if CONFIG_IDF_TARGET_ESP32
 #define ADC_CONV_MODE ADC_CONV_SINGLE_UNIT_1
@@ -22,7 +38,7 @@
 #define HAS_ESP32_DAC
 #define ADC_CHANNEL_TYPE uint16_t
 #define ADC_DATA_TYPE uint16_t
-#elif CONFIG_IDF_TARGET_ESP32S2
+#elif CONFIG_IDF_TARGET_ESP32S2 
 #define ADC_CONV_MODE ADC_CONV_SINGLE_UNIT_1
 #define ADC_OUTPUT_TYPE ADC_DIGI_OUTPUT_FORMAT_TYPE2
 #define AUDIO_ADC_GET_CHANNEL(p_data) ((p_data)->type2.channel)
@@ -56,7 +72,7 @@
 #define NUM_ADC_CHANNELS 7
 #define ADC_CHANNEL_TYPE uint32_t
 #define ADC_DATA_TYPE uint32_t
-#elif CONFIG_IDF_TARGET_ESP32S3
+#elif CONFIG_IDF_TARGET_ESP32S3 || CONFIG_IDF_TARGET_ESP32S31
 #define ADC_CONV_MODE ADC_CONV_SINGLE_UNIT_1
 #define ADC_OUTPUT_TYPE ADC_DIGI_OUTPUT_FORMAT_TYPE2
 #define AUDIO_ADC_GET_CHANNEL(p_data) ((p_data)->type2.channel)

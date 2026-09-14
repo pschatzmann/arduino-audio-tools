@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdio.h>
+#include <stdarg.h>
 #include <string.h>
 #include <stdlib.h>
 #include "AudioTools/CoreAudio/AudioLogger.h"
@@ -49,31 +50,37 @@ class StrView {
       this->len = 0;
     } else {
       int new_len = strlen(alt);
-      grow(new_len);
-      this->len = new_len;
+      grow(new_len + 1);
       if (this->isConst()) {
         /// if the Str is a const we replace the pointer
+        this->len = new_len;
         this->maxlen = this->len;
         this->chars = (char*)alt;
       } else {
-        /// if the Str is an external buffer we need to copy
-        strncpy(this->chars, alt, this->maxlen);
-        this->chars[len] = 0;
+        /// if the Str is an external buffer we need to copy: clamp to the
+        /// available capacity so a source longer than maxlen can't overflow it
+        int copy_len = new_len < this->maxlen ? new_len : this->maxlen - 1;
+        strncpy(this->chars, alt, copy_len);
+        this->chars[copy_len] = 0;
+        this->len = copy_len;
       }
     }
   }
   /// assigs from another Str value
   virtual void set(const StrView& alt) {
-    grow(alt.len);
-    this->len = alt.len;
+    grow(alt.len + 1);
 
     if (this->isConst()) {
       /// if the Str is a const we replace the pointer
+      this->len = alt.len;
       this->chars = alt.chars;
     } else {
-      /// if the Str is an external buffer we need to copy
-      strncpy(this->chars, alt.chars, this->maxlen);
-      this->chars[len] = 0;
+      /// if the Str is an external buffer we need to copy: clamp to the
+      /// available capacity so a source longer than maxlen can't overflow it
+      int copy_len = alt.len < this->maxlen ? alt.len : this->maxlen - 1;
+      strncpy(this->chars, alt.chars, copy_len);
+      this->chars[copy_len] = 0;
+      this->len = copy_len;
     }
   }
 
@@ -125,18 +132,18 @@ class StrView {
   /// adds a int value
   virtual void add(int value) {
     if (!this->isConst()) {
-      grow(this->length() + 11);
-      snprintf(this->chars + len, 10, "%d", value);
-      len = strlen(chars);
+      char buffer[12];  // -2147483648 + '\0'
+      snprintf(buffer, sizeof(buffer), "%d", value);
+      add(buffer);
     }
   }
 
   /// adds a double value
   virtual void add(double value, int precision = 2, int withd = 0) {
     if (!this->isConst()) {
-      grow(this->length() + 20);
-      floatToString(this->chars + len, value, precision, withd);
-      len = strlen(chars);
+      char buffer[128];
+      floatToString(buffer, value, precision, withd);
+      add(buffer);
     }
   }
 
@@ -150,6 +157,31 @@ class StrView {
       chars[len + n] = 0;
       len = strlen(chars);
     }
+  }
+
+  /// replaces the content with the result of a printf-style formatted string
+  /// and returns the resulting c-string - e.g. for direct use in
+  /// Print::println(). If the resulting text does not fit into the
+  /// available capacity it is truncated (like snprintf).
+  virtual const char* printf(const char* fmt, ...) {
+    if (isConst() || fmt == nullptr) return c_str();
+    va_list args;
+    va_start(args, fmt);
+    va_list args_copy;
+    va_copy(args_copy, args);
+    int needed = vsnprintf(nullptr, 0, fmt, args_copy);
+    va_end(args_copy);
+    if (needed < 0) {
+      va_end(args);
+      return c_str();
+    }
+    grow(needed + 1);
+    if (chars != nullptr) {
+      vsnprintf(chars, maxlen + 1, fmt, args);
+      len = strlen(chars);
+    }
+    va_end(args);
+    return c_str();
   }
 
   /// adds a character
@@ -178,6 +210,7 @@ class StrView {
   virtual bool endsWith(const char* str) {
     if (str == nullptr) return false;
     int endlen = strlen(str);
+    if (endlen > len) return false;
     return strncmp(this->chars + (len - endlen), str, endlen) == 0;
   }
 
@@ -185,20 +218,66 @@ class StrView {
   virtual bool endsWithIgnoreCase(const char* str) {
     if (str == nullptr) return false;
     int endlen = strlen(str);
+    if (endlen > len) return false;
     return strncmp_i(this->chars + (len - endlen), str, endlen) == 0;
   }
 
-  /// file matching supporting * and ? - replacing regex which is not supported
-  /// in all environments
+  /// file matching supporting * and ?, with multiple alternative patterns
+  /// separated by ',', ';' or '|' (e.g. "*.mp3;*.MP3;*.wav") - returns true
+  /// if the string matches any one of the alternatives. Replaces regex,
+  /// which is not supported in all environments.
   virtual bool matches(const char* pattern) {
+    if (pattern == nullptr) return false;
+    // a completely empty pattern is a single (trivial) alternative that
+    // only matches an empty line - handle it before the splitting loop
+    // below, which assumes at least one non-empty alternative.
+    if (*pattern == '\0') return matchesGlob(this->chars, "");
+    const char* alt_start = pattern;
+    for (;;) {
+      // skip leading separators/whitespace
+      while (*alt_start == ',' || *alt_start == ';' || *alt_start == '|' ||
+             *alt_start == ' ') {
+        alt_start++;
+      }
+      if (*alt_start == '\0') return false;
+
+      // find the end of this alternative
+      const char* alt_end = alt_start;
+      while (*alt_end != '\0' && *alt_end != ',' && *alt_end != ';' &&
+             *alt_end != '|') {
+        alt_end++;
+      }
+      // trim trailing whitespace
+      const char* trimmed_end = alt_end;
+      while (trimmed_end > alt_start && *(trimmed_end - 1) == ' ') {
+        trimmed_end--;
+      }
+
+      size_t alt_len = trimmed_end - alt_start;
+      if (alt_len > 0) {
+        char buffer[64];
+        if (alt_len >= sizeof(buffer)) alt_len = sizeof(buffer) - 1;
+        memcpy(buffer, alt_start, alt_len);
+        buffer[alt_len] = '\0';
+        if (matchesGlob(this->chars, buffer)) return true;
+      }
+
+      if (*alt_end == '\0') return false;
+      alt_start = alt_end + 1;
+    }
+  }
+
+ protected:
+  /// matches a single glob pattern (supporting * and ?, no alternatives)
+  /// against the given line.
+  static bool matchesGlob(const char* line, const char* pattern) {
     /// returns 1 (true) if there is a match
     /// returns 0 if the pattern is not whitin the line
     int wildcard = 0;
-    const char* line = this->chars;
 
     const char* last_pattern_start = 0;
     const char* last_line_start = 0;
-    do {
+    while (*line) {
       if (*pattern == *line) {
         if (wildcard == 1) last_line_start = line + 1;
 
@@ -231,22 +310,17 @@ class StrView {
         } else {
           line++;
         }
+      } else if (last_pattern_start != 0) {  /// try to restart the mask on the rest
+        pattern = last_pattern_start;
+        line = last_line_start;
+        last_line_start = 0;
       } else {
-        if ((*pattern) == '\0' && (*line) == '\0')  /// end of mask
-          return 1;  /// if the line also ends here then the pattern match
-        else {
-          if (last_pattern_start != 0)  /// try to restart the mask on the rest
-          {
-            pattern = last_pattern_start;
-            line = last_line_start;
-            last_line_start = 0;
-          } else {
-            return false;
-          }
-        }
+        return false;
       }
+    }
 
-    } while (*line);
+    // consume any trailing '*' left in the pattern: it matches the (now empty) rest of the line
+    while (*pattern == '*') pattern++;
 
     if (*pattern == '\0') {
       return true;
@@ -254,6 +328,8 @@ class StrView {
       return false;
     }
   }
+
+ public:
 
   /// provides the position of the the indicated character after the indicated
   /// start position
@@ -330,14 +406,15 @@ class StrView {
   /// we can assign an int
   virtual void operator=(int value) { set(value); }
 
-  /// shift characters to the right -> we just move the pointer
+  /// shift characters to the left -> we just move the pointer
   virtual void operator<<(int n) {
+    if (n <= 0 || n > len) return;
     if (isConst()) {
       this->chars += n;
-      this->len -= n;
     } else {
-      memmove(this->chars, this->chars + n, len + 1);
+      memmove(this->chars, this->chars + n, len - n + 1);
     }
+    this->len -= n;
   }
 
   virtual char operator[](int index) { return chars[index]; }
@@ -477,9 +554,9 @@ class StrView {
   virtual void substring(StrView& from, int start, int end) {
     if (end > start) {
       int len = end - start;
-      grow(len);
+      grow(len + 1);
       if (this->chars != nullptr) {
-        len = len < this->maxlen ? len : this->maxlen;
+        len = len < this->maxlen ? len : this->maxlen - 1;
         strncpy(this->chars, from.chars + start, len);
         this->len = len;
         this->chars[len] = 0;
@@ -491,8 +568,9 @@ class StrView {
   virtual void substring(const char* from, int start, int end) {
     if (end > start) {
       int len = end - start;
-      grow(len);
+      grow(len + 1);
       if (this->chars != nullptr) {
+        len = len < this->maxlen ? len : this->maxlen - 1;
         strncpy(this->chars, from + start, len);
         this->chars[len] = 0;
         this->len = len;
@@ -514,7 +592,7 @@ class StrView {
         return j;
       }
     }
-    return 0;
+    return len;
   }
 
   /// remove leading spaces
@@ -526,9 +604,9 @@ class StrView {
 
   /// remove trailing spaces
   virtual void rtrim() {
-    if (chars == nullptr) return;
+    if (chars == nullptr || len == 0) return;
     if (!isConst()) {
-      while (isspace(chars[len])) {
+      while (len > 0 && isspace(chars[len - 1])) {
         len--;
         chars[len] = 0;
       }

@@ -1,7 +1,7 @@
 #include "AudioTools.h"
 
 using target_t = uint32_t; // uint8_t, int8_t, int16_t, uint16_t, int24_t, uint32_t, int32_t, FloatAudio
-SineWaveGenerator<int16_t> sineWave;                // subclass of SoundGenerator with max amplitude of 32000
+SineGenerator<int16_t> sineWave;                // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound(sineWave);             // Stream generated from sine wave
 CsvOutput<target_t> out(Serial, sound.audioInfo().channels);
 NumberFormatConverterStreamT<int16_t, target_t> nfc(out);

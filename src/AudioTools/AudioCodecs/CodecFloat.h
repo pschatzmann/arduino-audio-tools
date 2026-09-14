@@ -39,6 +39,11 @@ class DecoderFloat : public AudioDecoder {
             addNotifyAudioChange(bi);
         }
 
+        /// Provides "audio/pcm"
+        const char* mime() override {
+            return mime_pcm;
+        }
+
         /// Defines the output Stream
         void setOutput(Print &out_stream) override {
             p_print = &out_stream;

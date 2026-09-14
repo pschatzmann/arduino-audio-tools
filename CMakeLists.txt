@@ -3,13 +3,33 @@ cmake_minimum_required(VERSION 3.16)
 if (DEFINED ESP_PLATFORM)
 
     # idf component
+    # Determine optional arduino-esp32 dependency
+    if(TARGET arduino-esp32::arduino-esp32)
+        set(ARDUINO_REQUIRES arduino-esp32)
+    else()
+        set(ARDUINO_REQUIRES "")
+    endif()
+
+
+    # esp_driver_i2s esp_driver_dac needed starting idf v6.0.0
+    set(AAT_REQUIRES esp_common freertos hal log nvs_flash driver esp_adc esp_http_client esp_driver_gpio esp_driver_ledc)
+    if(IDF_VERSION_MAJOR GREATER_EQUAL 6)
+        list(APPEND AAT_REQUIRES esp_driver_i2s esp_driver_dac)
+    endif()
+
+    # Only depend on arduino-audio-driver if it's actually checked out as a
+    # sibling component (it's an optional add-on, not always present).
+    if(EXISTS "${CMAKE_CURRENT_LIST_DIR}/../arduino-audio-driver/CMakeLists.txt")
+        list(APPEND AAT_REQUIRES arduino-audio-driver)
+    endif()
+
     idf_component_register(
         # SRC_DIRS src
-        INCLUDE_DIRS src 
-        REQUIRES bt esp_common freertos hal log nvs_flash driver esp_adc esp_http_client
+        INCLUDE_DIRS src
+        REQUIRES ${AAT_REQUIRES} ${ARDUINO_REQUIRES}
     )
 
-    target_compile_options(${COMPONENT_LIB} INTERFACE -DESP32_CMAKE=1 -Wno-error -Wno-format -fpermissive)
+    target_compile_options(${COMPONENT_LIB} INTERFACE -DESP32_CMAKE=1 -Wno-format )
 
 else()
 
@@ -22,6 +42,7 @@ else()
     include(FetchContent)
 
     add_library(arduino-audio-tools INTERFACE)
+    target_compile_options(arduino-audio-tools INTERFACE  -Wno-format )
 
     option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
     option(ADD_PORTAUDIO "Add Portaudio Library" OFF)
@@ -30,6 +51,7 @@ else()
 
     # make include directory available to calling projects 
     target_include_directories (arduino-audio-tools INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/src)
+    target_compile_options(arduino-audio-tools INTERFACE  -Wno-format)
 
     # installation of all header files
     install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/src/" # source directory

@@ -5,9 +5,10 @@
 #ifdef ARDUINO
 #  include "FS.h"
 #  define READTYPE char
-#else 
+#else
 #  define READTYPE uint8_t
 #endif
+
 namespace audio_tools {
 
 /**
@@ -15,7 +16,7 @@ namespace audio_tools {
  * In order to support different file implementation the file class
  * is a template parameter. The number of loops can be defined by
  * calling setLoopCount().
- * You can also optinally limit the total looping file size by calling 
+ * You can also optinally limit the total looping file size by calling
  * setSize();
  * @ingroup io
  * @author Phil Schatzmann
@@ -48,9 +49,9 @@ public:
   }
 
   // closes the file
-  void end()  { 
+  void end()  {
     TRACEI();
-    current_file.close(); 
+    current_file.close();
   }
 
   /// defines the file that is used for looping
@@ -77,7 +78,7 @@ public:
     return total_size == -1 ? current_file.size() : total_size;
   }
 
-  /// You can be notified about a rewind 
+  /// You can be notified about a rewind
   void setCallback(void (*cb)(FileLoopT &loop)){
     callback = cb;
   }
@@ -97,7 +98,7 @@ public:
     LOGD("FileLoopT::readBytes %d at %d", (int)len, (int)current_file.position());
     if (!current_file)
       return 0;
-    
+
     // limit the copy size if necessary
     int copy_len = len;
     if (total_size!=-1){
@@ -154,7 +155,7 @@ protected:
  * @brief A simple class which implements a automatic looping file.
  * The file needs to be of the class File from FS.h. The number of loops can be
  * defined by calling setLoopCount().
- * You can also optinally limit the total looping file size by calling 
+ * You can also optinally limit the total looping file size by calling
  * setSize();
  * @ingroup io
  * @author Phil Schatzmann

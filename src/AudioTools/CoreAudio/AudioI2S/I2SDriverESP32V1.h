@@ -1,0 +1,785 @@
+#pragma once
+
+#include "AudioToolsConfig.h"
+#if defined(ESP32) && !USE_LEGACY_I2S || defined(DOXYGEN)
+
+#include "AudioTools/CoreAudio/AudioI2S/I2SConfig.h"
+#include "AudioTools/CoreAudio/AudioI2S/I2SDriverBase.h"
+#include "driver/i2s_pdm.h"
+#include "driver/i2s_std.h"
+#include "driver/i2s_tdm.h"
+#include "esp_system.h"
+#include <atomic>
+
+#define IS_I2S_IMPLEMENTED
+
+namespace audio_tools {
+
+// i2s_port_t not valid any more in ESP-IDF v6, but we keep it for compatibility  
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(6, 0, 0)
+using i2s_port_t = int;  
+#endif
+
+// support for Arduino ESP32 v3.0.7
+#if ESP_IDF_VERSION <= ESP_IDF_VERSION_VAL(5, 1, 4)
+#define I2S_MCLK_MULTIPLE_192 static_cast<i2s_mclk_multiple_t>(192)
+#endif
+
+// Some ESP-IDF development snapshots (e.g. IDF_VERSION already bumped to a
+// release that hasn't shipped yet) initialize dma_buffer_in_psram before
+// allow_pd in I2S_CHANNEL_DEFAULT_CONFIG, which does not match
+// i2s_chan_config_t's declaration order and is ill-formed under C++20/26
+// aggregate-init rules. ESP_IDF_VERSION alone can't reliably tell such a
+// snapshot apart from an older one that predates these optional fields
+// entirely, so detect field presence directly and build the struct by
+// assignment instead of relying on the macro's designator order.
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(6, 2, 0)
+#include <type_traits>
+namespace i2s_detail {
+template <typename T, typename = void>
+struct HasDmaBurstSize : std::false_type {};
+template <typename T>
+struct HasDmaBurstSize<T, std::void_t<decltype(std::declval<T &>().dma_burst_size)>>
+    : std::true_type {};
+
+template <typename T, typename = void>
+struct HasDmaBufferInPsram : std::false_type {};
+template <typename T>
+struct HasDmaBufferInPsram<T, std::void_t<decltype(std::declval<T &>().dma_buffer_in_psram)>>
+    : std::true_type {};
+}  // namespace i2s_detail
+
+// Templated on T (defaulted to i2s_chan_config_t) so that the field accesses
+// below are dependent expressions: if constexpr only skips semantic checks on
+// a discarded branch inside a templated entity, not in an ordinary function.
+template <typename T = i2s_chan_config_t>
+static inline i2s_chan_config_t getDefaultChannelConfig(i2s_port_t port, i2s_role_t role) {
+  T result{};
+  result.id = port;
+  result.role = role;
+  result.dma_desc_num = 6;
+  result.dma_frame_num = 240;
+  if constexpr (i2s_detail::HasDmaBurstSize<T>::value) {
+    result.dma_burst_size = 0;
+  }
+  result.auto_clear_after_cb = false;
+  result.auto_clear_before_cb = false;
+  if constexpr (i2s_detail::HasDmaBufferInPsram<T>::value) {
+    result.dma_buffer_in_psram = false;
+  }
+  result.allow_pd = false;
+  result.intr_priority = 0;
+  // tx_destination/rx_destination (i2s_destination_t), where present, default
+  // to I2S_DESTINATION_DMA == 0, which T result{} already zero-initializes -
+  // no need to name the enumerator (it doesn't exist on older IDF versions).
+  return result;
+}
+#define I2S_CHANNEL_DEFAULT_CONFIG_SAFE(port, role) getDefaultChannelConfig(port, role)
+#else
+#define I2S_CHANNEL_DEFAULT_CONFIG_SAFE(port, role) I2S_CHANNEL_DEFAULT_CONFIG(port, role)
+#endif
+
+
+/**
+ * @brief Basic I2S API for the ESP32 (using the new API).
+ * https://docs.espressif.com/projects/esp-idf/en/v5.0.1/esp32/api-reference/peripherals/i2s.html#i2s-communication-mode
+ * @ingroup platform
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class I2SDriverESP32V1 : public I2SDriverBase {
+ public:
+  /// Provides the default configuration
+  I2SConfigESP32V1 defaultConfig(RxTxMode mode) {
+    I2SConfigESP32V1 c(mode);
+    return c;
+  }
+  /// Potentially updates the sample rate (if supported)
+  bool setAudioInfo(AudioInfo info) {
+    // nothing to do
+    if (is_started) {
+      if (info.equals(cfg)) return true;
+      if (info.equalsExSampleRate(cfg)) {
+        cfg.sample_rate = info.sample_rate;
+        LOGI("i2s_set_sample_rates: %d", (int)info.sample_rate);
+        return getDriver(cfg).changeSampleRate(cfg, rx_chan, tx_chan);
+      }
+    } else {
+      LOGE("not started");
+    }
+    return false;
+  }
+
+  /// starts the DAC with the default config
+  bool begin(RxTxMode mode) { return begin(defaultConfig(mode)); }
+
+  /// starts the DAC with the current config - if not started yet. If I2S has
+  /// been started there is no action and we return true
+  bool begin() { return (!is_started) ? begin(cfg) : true; }
+
+  /// starts the DAC
+  bool begin(I2SConfigESP32V1 cfg) {
+    TRACED();
+    this->cfg = cfg;
+
+    // stop if it is already open
+    if (is_started) end();
+
+    switch (cfg.rx_tx_mode) {
+      case TX_MODE:
+        return begin(cfg, cfg.pin_data, I2S_GPIO_UNUSED);
+      case RX_MODE:
+        // usually we expet cfg.pin_data but if the used assinged rx we might
+        // consider this one
+        return begin(cfg, I2S_GPIO_UNUSED,
+                     cfg.pin_data_rx != I2S_GPIO_UNUSED ? cfg.pin_data_rx
+                                                        : cfg.pin_data);
+      default:
+        return begin(cfg, cfg.pin_data, cfg.pin_data_rx);
+    }
+    LOGE("Did not expect go get here");
+  }
+
+  /// we assume the data is already available in the buffer
+  int available() { return I2S_BUFFER_COUNT * I2S_BUFFER_SIZE; }
+
+  /// Reports the real free space in the TX DMA queue: capacity minus the
+  /// backlog of bytes handed to i2s_channel_write() but not yet reported
+  /// back as sent by the on_sent event callback (see DriverI2S::startChannels
+  /// and onSentCb below). Falls back to the old constant if the callback
+  /// was never wired up (e.g. dma_capacity_ still 0 before begin()).
+  int availableForWrite() {
+    if (dma_capacity_ == 0) return I2S_BUFFER_COUNT * I2S_BUFFER_SIZE;
+    uint32_t written = bytes_written_.load(std::memory_order_relaxed);
+    uint32_t sent = bytes_sent_.load(std::memory_order_relaxed);
+    // sent can exceed written: with auto_clear the driver fills idle DMA
+    // buffers with silence on its own, and on_sent still fires for those
+    // completions even though writeBytes() never ran for them. Saturate
+    // instead of letting the unsigned subtraction wrap to a huge value -
+    // that would get clamped to dma_capacity_ below and permanently report
+    // 0 free space, deadlocking the writer since nothing could call
+    // writeBytes() to let bytes_written_ catch back up.
+    uint32_t backlog = written > sent ? written - sent : 0;
+    // Guards against transient over-reads while counters are mid-update
+    // across the ISR/task boundary; backlog can never legitimately exceed
+    // the DMA capacity itself.
+    if (backlog > dma_capacity_) backlog = dma_capacity_;
+    return (int)(dma_capacity_ - backlog);
+  }
+
+  /// stops the I2C and unistalls the driver
+  void end() {
+    TRACED();
+    if (rx_chan != nullptr) {
+      i2s_channel_disable(rx_chan);
+      i2s_del_channel(rx_chan);
+      rx_chan = nullptr;
+    }
+    if (tx_chan != nullptr) {
+      i2s_channel_disable(tx_chan);
+      i2s_del_channel(tx_chan);
+      tx_chan = nullptr;
+    }
+
+    dma_capacity_ = 0;
+    is_started = false;
+  }
+
+  /**
+   * Discards any audio samples already queued in the TX DMA buffer but not
+   * yet physically output. The new i2s_std/i2s_channel_* API has no direct
+   * equivalent of the legacy driver's i2s_zero_dma_buffer() - instead this
+   * disables and immediately re-enables the TX channel, which halts
+   * transmission of whatever was already queued. Any DMA slots left behind
+   * get auto-filled with silence by the driver itself once transmission
+   * resumes (see I2SConfigESP32V1::auto_clear, on by default), so nothing
+   * stale gets replayed. Much cheaper than a full end()/begin() cycle (no
+   * channel deletion/recreation, no pin/clock reconfiguration - the same
+   * disable/enable pair already used by changeSampleRate() below). No-op
+   * if the TX channel has not been started.
+   */
+  void flush() override {
+    if (tx_chan != nullptr) {
+      i2s_channel_disable(tx_chan);
+      i2s_channel_enable(tx_chan);
+      bytes_written_.store(0, std::memory_order_relaxed);
+      bytes_sent_.store(0, std::memory_order_relaxed);
+    }
+  }
+
+  /// provides the actual configuration
+  I2SConfigESP32V1 config() { return cfg; }
+
+  /// writes the data to the I2S interface
+  size_t writeBytes(const void *src, size_t size_bytes) {
+    TRACED();
+    size_t result = 0;
+    assert(tx_chan != nullptr);
+    if (i2s_channel_write(tx_chan, src, size_bytes, &result,
+                          ticks_to_wait_write) != ESP_OK) {
+      TRACEE();
+    }
+    bytes_written_.fetch_add((uint32_t)result, std::memory_order_relaxed);
+    return result;
+  }
+
+  size_t readBytes(void *dest, size_t size_bytes) {
+    size_t result = 0;
+    if (i2s_channel_read(rx_chan, dest, size_bytes, &result,
+                         ticks_to_wait_read) != ESP_OK) {
+      TRACEE();
+    }
+    return result;
+  }
+
+  void setWaitTimeReadMs(TickType_t ms) {
+    ticks_to_wait_read = pdMS_TO_TICKS(ms);
+  }
+  void setWaitTimeWriteMs(TickType_t ms) {
+    ticks_to_wait_write = pdMS_TO_TICKS(ms);
+  }
+
+ protected:
+  I2SConfigESP32V1 cfg = defaultConfig(RXTX_MODE);
+  i2s_std_config_t i2s_config;
+  i2s_chan_handle_t tx_chan = nullptr;  // I2S tx channel handler
+  i2s_chan_handle_t rx_chan = nullptr;  // I2S rx channel handler
+  bool is_started = false;
+  TickType_t ticks_to_wait_read = portMAX_DELAY;
+  TickType_t ticks_to_wait_write = portMAX_DELAY;
+
+  // Real TX DMA backlog tracking for availableForWrite() -- see
+  // DriverI2S::startChannels() for where onSentCb gets registered, and
+  // newChannels() for where dma_capacity_ is computed from the actual
+  // dma_desc_num/dma_frame_num ESP-IDF ends up allocating.
+  std::atomic<uint32_t> bytes_written_{0};
+  std::atomic<uint32_t> bytes_sent_{0};
+  uint32_t dma_capacity_ = 0;
+
+  /// on_sent callback (ISR context): a DMA buffer of event->size bytes has
+  /// just finished physically transmitting. Nested classes have access to
+  /// enclosing-class members in C++, so DriverI2S can call this directly.
+  static IRAM_ATTR bool onSentCb(i2s_chan_handle_t handle, i2s_event_data_t *event,
+                       void *user_ctx) {
+    auto *self = static_cast<I2SDriverESP32V1 *>(user_ctx);
+    self->bytes_sent_.fetch_add((uint32_t)event->size,
+                                std::memory_order_relaxed);
+    return false;  // no higher-priority task to wake
+  }
+
+  struct DriverCommon {
+    virtual bool startChannels(I2SConfigESP32V1 &cfg,
+                               i2s_chan_handle_t &tx_chan,
+                               i2s_chan_handle_t &rx_chan, int txPin,
+                               int rxPin, I2SDriverESP32V1 *self) = 0;
+
+    virtual i2s_chan_config_t getChannelConfig(I2SConfigESP32V1 &cfg) = 0;
+    // changes the sample rate
+    virtual bool changeSampleRate(I2SConfigESP32V1 &cfg,
+                                  i2s_chan_handle_t &tx_chan,
+                                  i2s_chan_handle_t &rx_chan) {
+      return false;
+    }
+
+   protected:
+    /// 24 bits are stored in a 32 bit integer
+    int get_bits_eff(int bits) { return (bits == 24) ? 32 : bits; }
+  };
+
+  struct DriverI2S : public DriverCommon {
+    bool startChannels(I2SConfigESP32V1 &cfg, i2s_chan_handle_t &tx_chan,
+                       i2s_chan_handle_t &rx_chan, int txPin, int rxPin,
+                       I2SDriverESP32V1 *self) {
+      TRACED();
+      LOGI("tx: %d, rx: %d", txPin, rxPin);
+      i2s_std_config_t std_cfg;
+      std_cfg.clk_cfg = getClockConfig(cfg);
+      std_cfg.slot_cfg = getSlotConfig(cfg);
+      std_cfg.gpio_cfg = {
+                  .mclk = (gpio_num_t)cfg.pin_mck,
+                  .bclk = (gpio_num_t)cfg.pin_bck,
+                  .ws = (gpio_num_t)cfg.pin_ws,
+                  .dout = (gpio_num_t)txPin,
+                  .din = (gpio_num_t)rxPin,
+                  .invert_flags =
+                      {
+                          .mclk_inv = false,
+                          .bclk_inv = false,
+                          .ws_inv = false,
+                      },
+      };
+
+
+      if (cfg.rx_tx_mode == RXTX_MODE || cfg.rx_tx_mode == TX_MODE) {
+        if (i2s_channel_init_std_mode(tx_chan, &std_cfg) != ESP_OK) {
+          LOGE("i2s_channel_init_std_mode %s", "tx");
+          return false;
+        }
+        // Must register while the channel is REGISTERED/READY, i.e. before
+        // i2s_channel_enable() below transitions it to RUNNING.
+        i2s_event_callbacks_t cbs = {};
+        cbs.on_sent = &I2SDriverESP32V1::onSentCb;
+        if (i2s_channel_register_event_callback(tx_chan, &cbs, self) != ESP_OK) {
+          LOGE("i2s_channel_register_event_callback %s", "tx");
+        } else {
+          // Real DMA capacity for availableForWrite(): read back the
+          // dma_desc_num/dma_frame_num ESP-IDF actually allocated (from the
+          // same getChannelConfig() computation newChannels() used to call
+          // i2s_new_channel()) rather than assuming
+          // cfg.buffer_size * cfg.buffer_count -- getChannelConfig() doesn't
+          // always set dma_desc_num explicitly, in which case it falls back
+          // to the I2S_CHANNEL_DEFAULT_CONFIG macro default (6).
+          i2s_chan_config_t chan_cfg = getChannelConfig(cfg);
+          int frame_size =
+              ((cfg.bits_per_sample == 24) ? 32 : cfg.bits_per_sample) *
+              cfg.channels / 8;
+          if (frame_size <= 0) frame_size = 1;
+          self->dma_capacity_ = (uint32_t)chan_cfg.dma_desc_num *
+                                chan_cfg.dma_frame_num * frame_size;
+          self->bytes_written_ = 0;
+          self->bytes_sent_ = 0;
+        }
+        if (i2s_channel_enable(tx_chan) != ESP_OK) {
+          LOGE("i2s_channel_enable %s", "tx");
+          return false;
+        }
+      }
+
+      if (cfg.rx_tx_mode == RXTX_MODE || cfg.rx_tx_mode == RX_MODE) {
+        if (i2s_channel_init_std_mode(rx_chan, &std_cfg) != ESP_OK) {
+          LOGE("i2s_channel_init_std_mode %s", "rx");
+          return false;
+        }
+        if (i2s_channel_enable(rx_chan) != ESP_OK) {
+          LOGE("i2s_channel_enable %s", "rx");
+          return false;
+        }
+      }
+
+      LOGD("%s - %s", __func__, "started");
+      return true;
+    }
+
+   protected:
+    i2s_std_slot_config_t getSlotConfig(I2SConfigESP32V1 &cfg) {
+      TRACED();
+      i2s_std_slot_config_t result;
+      switch (cfg.i2s_format) {
+        case I2S_LEFT_JUSTIFIED_FORMAT:
+        case I2S_MSB_FORMAT:
+          result = I2S_STD_MSB_SLOT_DEFAULT_CONFIG(
+              (i2s_data_bit_width_t)cfg.bits_per_sample,
+              (i2s_slot_mode_t)cfg.channels);
+          break;
+        case I2S_PCM:
+          result = I2S_STD_PCM_SLOT_DEFAULT_CONFIG(
+              (i2s_data_bit_width_t)cfg.bits_per_sample,
+              (i2s_slot_mode_t)cfg.channels);
+          break;
+        default:
+          result = I2S_STD_PHILIPS_SLOT_DEFAULT_CONFIG(
+              (i2s_data_bit_width_t)cfg.bits_per_sample,
+              (i2s_slot_mode_t)cfg.channels);
+      }
+
+      // Update slot_mask if only one channel
+      if (cfg.channels == 1) {
+        switch (cfg.channel_format) {
+          case I2SChannelSelect::Left:
+            result.slot_mask = I2S_STD_SLOT_LEFT;
+            break;
+          case I2SChannelSelect::Right:
+            result.slot_mask = I2S_STD_SLOT_RIGHT;
+            break;
+          default:
+            LOGW("Using channel_format: I2SChannelSelect::Left for mono");
+            result.slot_mask = I2S_STD_SLOT_LEFT;
+            break;
+        }
+      }
+
+      return result;
+    }
+
+    i2s_chan_config_t getChannelConfig(I2SConfigESP32V1 &cfg) {
+      TRACED();
+      i2s_chan_config_t result = I2S_CHANNEL_DEFAULT_CONFIG_SAFE(
+          (i2s_port_t)cfg.port_no,
+          cfg.is_master ? I2S_ROLE_MASTER : I2S_ROLE_SLAVE);
+      // use the legicy size parameters for frame num
+      int size = cfg.buffer_size * cfg.buffer_count;
+      int frame_size = get_bits_eff(cfg.bits_per_sample) * cfg.channels / 8;
+      frame_size = (frame_size == 0) ? 1 : frame_size;
+      if (size > 0) result.dma_frame_num = size / frame_size;
+      if (result.dma_frame_num == 0) result.dma_frame_num = 1;
+      LOGI("frame_size: %d", (int)frame_size);
+      LOGI("dma_frame_num: %d", (int)result.dma_frame_num);
+      LOGI("total buffer size: %d", (int)(result.dma_frame_num * frame_size));
+      result.auto_clear = cfg.auto_clear;
+      return result;
+    }
+
+    i2s_std_clk_config_t getClockConfig(I2SConfigESP32V1 &cfg) {
+      TRACED();
+      i2s_std_clk_config_t clk_cfg;// = I2S_STD_CLK_DEFAULT_CONFIG((uint32_t)cfg.sample_rate);
+      memset(&clk_cfg, 0, sizeof(i2s_std_clk_config_t));
+      clk_cfg.sample_rate_hz = cfg.sample_rate;
+      clk_cfg.clk_src = getClockSource(cfg);
+      // clk_cfg.ext_clk_freq_hz = 0;
+
+      if (cfg.mclk_multiple > 0) {
+        clk_cfg.mclk_multiple = (i2s_mclk_multiple_t)cfg.mclk_multiple;
+        LOGI("mclk_multiple=%d", clk_cfg.mclk_multiple);
+      } else {
+        if (cfg.bits_per_sample == 24) {
+          // mclk_multiple' should be the multiple of 3 while using 24-bit
+          // using the apll seems to double the frequency
+          clk_cfg.mclk_multiple = cfg.use_apll ? I2S_MCLK_MULTIPLE_192: I2S_MCLK_MULTIPLE_384;
+          LOGI("mclk_multiple=384");
+        } else {
+          // when use_appll is true, the multiple of 128 gives 256kHz
+          // using the apll seems to double the frequency
+          clk_cfg.mclk_multiple = cfg.use_apll ? I2S_MCLK_MULTIPLE_128 : I2S_MCLK_MULTIPLE_256;
+          LOGI("mclk_multiple=%d", clk_cfg.mclk_multiple);
+        }
+      }
+
+      return clk_cfg;
+    }
+
+    /// select clock source dependent on is_master and use_apll
+    soc_periph_i2s_clk_src_t getClockSource(I2SConfigESP32V1 &cfg){
+      soc_periph_i2s_clk_src_t result = I2S_CLK_SRC_DEFAULT;
+      // use mclk pin as input in slave mode if supported
+      if (cfg.pin_mck != -1 && !cfg.is_master) {
+#if SOC_I2S_HW_VERSION_2
+          LOGI("pin_mclk is input");
+          result = I2S_CLK_SRC_EXTERNAL;
+          return result;
+#else
+          LOGE("pin_mclk as input not supported");
+#endif
+      }
+
+      // select APLL clock if possible
+      if (cfg.use_apll) {
+          // select clock source
+#if SOC_I2S_SUPPORTS_APLL
+            result = I2S_CLK_SRC_APLL;
+            LOGI("clk_src is I2S_CLK_SRC_APLL");
+#elif SOC_I2S_SUPPORTS_PLL_F160M
+            result = I2S_CLK_SRC_PLL_160M;
+            LOGI("clk_src is I2S_CLK_SRC_PLL_160M");
+#endif
+      }
+
+      return result;
+    }
+
+    bool changeSampleRate(I2SConfigESP32V1 &cfg, i2s_chan_handle_t &tx_chan,
+                          i2s_chan_handle_t &rx_chan) override {
+      bool rc = false;
+      auto clock_cfg = getClockConfig(cfg);
+      if (tx_chan != nullptr) {
+        i2s_channel_disable(tx_chan);
+        rc = i2s_channel_reconfig_std_clock(tx_chan, &clock_cfg) == ESP_OK;
+        i2s_channel_enable(tx_chan);
+      }
+      if (rx_chan != nullptr) {
+        i2s_channel_disable(rx_chan);
+        rc = i2s_channel_reconfig_std_clock(rx_chan, &clock_cfg) == ESP_OK;
+        i2s_channel_enable(rx_chan);
+      }
+      return rc;
+    }
+
+  } i2s;
+
+#ifdef USE_PDM
+
+  struct DriverPDM : public DriverCommon {
+    bool startChannels(I2SConfigESP32V1 &cfg, i2s_chan_handle_t &tx_chan,
+                       i2s_chan_handle_t &rx_chan, int txPin, int rxPin,
+                       I2SDriverESP32V1 * /*self*/) {
+      if (cfg.rx_tx_mode == TX_MODE) {
+        return startTX(cfg, tx_chan, txPin);
+      } else if (cfg.rx_tx_mode == RX_MODE) {
+        return startRX(cfg, rx_chan, rxPin);
+      }
+      LOGE("Only RX and TX is supported for PDM")
+      return false;
+    }
+
+   protected:
+    i2s_pdm_tx_slot_config_t getTxSlotConfig(I2SConfigESP32V1 &cfg) {
+#ifdef SOC_I2S_HW_VERSION_2
+      return I2S_PDM_TX_SLOT_DAC_DEFAULT_CONFIG(
+          (i2s_data_bit_width_t)cfg.bits_per_sample,
+          (i2s_slot_mode_t)cfg.channels);
+#else
+      return I2S_PDM_TX_SLOT_DEFAULT_CONFIG(
+          (i2s_data_bit_width_t)cfg.bits_per_sample,
+          (i2s_slot_mode_t)cfg.channels);
+#endif
+    }
+
+    i2s_chan_config_t getChannelConfig(I2SConfigESP32V1 &cfg) {
+      return I2S_CHANNEL_DEFAULT_CONFIG_SAFE(
+          (i2s_port_t)cfg.port_no,
+          cfg.is_master ? I2S_ROLE_MASTER : I2S_ROLE_SLAVE);
+    }
+
+    i2s_pdm_tx_clk_config_t getTxClockConfig(I2SConfigESP32V1 &cfg) {
+#if defined(I2S_PDM_TX_CLK_DAC_DEFAULT_CONFIG)
+      return I2S_PDM_TX_CLK_DAC_DEFAULT_CONFIG((uint32_t)cfg.sample_rate);
+#else
+      return I2S_PDM_TX_CLK_DEFAULT_CONFIG((uint32_t)cfg.sample_rate);
+#endif
+    }
+
+    bool startTX(I2SConfigESP32V1 &cfg, i2s_chan_handle_t &tx_chan, int txPin) {
+      i2s_pdm_tx_config_t pdm_tx_cfg = {
+          .clk_cfg = getTxClockConfig(cfg),
+          .slot_cfg = getTxSlotConfig(cfg),
+          .gpio_cfg =
+              {
+                  .clk = (gpio_num_t)cfg.pin_bck,
+                  .dout = (gpio_num_t)txPin,
+#if SOC_I2S_PDM_MAX_TX_LINES > 1
+                  .dout2 = I2S_GPIO_UNUSED,   // required in IDF v6+
+#endif
+                  .invert_flags =
+                      {
+                          .clk_inv = false,
+                      },
+              },
+      };
+
+      if (i2s_channel_init_pdm_tx_mode(tx_chan, &pdm_tx_cfg) != ESP_OK) {
+        LOGE("i2s_channel_init_pdm_tx_mode %s", "tx");
+        return false;
+      }
+      if (i2s_channel_enable(tx_chan) != ESP_OK) {
+        LOGE("i2s_channel_enable %s", "tx");
+        return false;
+      }
+      return true;
+    }
+
+#if defined(USE_PDM_RX)
+    i2s_pdm_rx_slot_config_t getRxSlotConfig(I2SConfigESP32V1 &cfg) {
+      return I2S_PDM_RX_SLOT_DEFAULT_CONFIG(
+          (i2s_data_bit_width_t)cfg.bits_per_sample,
+          (i2s_slot_mode_t)cfg.channels);
+    }
+    i2s_pdm_rx_clk_config_t getRxClockConfig(I2SConfigESP32V1 &cfg) {
+      return I2S_PDM_RX_CLK_DEFAULT_CONFIG((uint32_t)cfg.sample_rate);
+    }
+    bool startRX(I2SConfigESP32V1 &cfg, i2s_chan_handle_t &rx_chan, int rxPin) {
+      i2s_pdm_rx_config_t pdm_rx_cfg = {
+          .clk_cfg = getRxClockConfig(cfg),
+          .slot_cfg = getRxSlotConfig(cfg),
+          .gpio_cfg =
+              {
+                  .clk = (gpio_num_t)cfg.pin_bck,
+                  .din = (gpio_num_t)rxPin,
+                  .invert_flags =
+                      {
+                          .clk_inv = false,
+                      },
+              },
+      };
+
+      if (i2s_channel_init_pdm_rx_mode(rx_chan, &pdm_rx_cfg) != ESP_OK) {
+        LOGE("i2s_channel_init_pdm_rx_mode %s", "rx");
+        return false;
+      }
+      if (i2s_channel_enable(rx_chan) != ESP_OK) {
+        LOGE("i2s_channel_enable %s", "tx");
+        return false;
+      }
+      return true;
+    }
+#else
+    bool startRX(I2SConfigESP32V1 &cfg, i2s_chan_handle_t &rx_chan, int rxPin) {
+      LOGE("PDM RX not supported");
+      return false;
+    }
+#endif
+  } pdm;
+
+#endif
+
+#ifdef USE_TDM
+  // example at
+  // https://github.com/espressif/esp-idf/blob/v5.3-dev/examples/peripherals/i2s/i2s_basic/i2s_tdm/main/i2s_tdm_example_main.c
+  struct DriverTDM : public DriverCommon {
+    bool startChannels(I2SConfigESP32V1 &cfg, i2s_chan_handle_t &tx_chan,
+                       i2s_chan_handle_t &rx_chan, int txPin, int rxPin,
+                       I2SDriverESP32V1 * /*self*/) {
+      i2s_tdm_config_t tdm_cfg = {
+          .clk_cfg = getClockConfig(cfg),
+          .slot_cfg = getSlotConfig(cfg),
+          .gpio_cfg =
+              {
+                  .mclk = (gpio_num_t)cfg.pin_mck,
+                  .bclk = (gpio_num_t)cfg.pin_bck,
+                  .ws = (gpio_num_t)cfg.pin_ws,
+                  .dout = (gpio_num_t)txPin,
+                  .din = (gpio_num_t)rxPin,
+                  .invert_flags =
+                      {
+                          .mclk_inv = false,
+                          .bclk_inv = false,
+                          .ws_inv = false,
+                      },
+              },
+      };
+
+      if (cfg.rx_tx_mode == TX_MODE || cfg.rx_tx_mode == RXTX_MODE) {
+        if (i2s_channel_init_tdm_mode(tx_chan, &tdm_cfg) != ESP_OK) {
+          LOGE("i2s_channel_init_tdm_tx_mode %s", "tx");
+          return false;
+        }
+      }
+      if (cfg.rx_tx_mode == RX_MODE || cfg.rx_tx_mode == RXTX_MODE) {
+        if (i2s_channel_init_tdm_mode(rx_chan, &tdm_cfg) != ESP_OK) {
+          LOGE("i2s_channel_init_tdm_tx_mode %s", "rx");
+          return false;
+        }
+      }
+      return true;
+    }
+
+   protected:
+    i2s_tdm_slot_config_t getSlotConfig(I2SConfigESP32V1 &cfg) {
+      int slots = 0;
+      for (int j = 0; j < cfg.channels; j++) {
+        slots |= 1 << j;
+      }
+      // setup default format
+      i2s_tdm_slot_config_t slot_cfg = I2S_TDM_PHILIPS_SLOT_DEFAULT_CONFIG(
+          (i2s_data_bit_width_t)cfg.bits_per_sample, I2S_SLOT_MODE_STEREO,
+          (i2s_tdm_slot_mask_t)slots);
+
+      switch (cfg.i2s_format) {
+        case I2S_RIGHT_JUSTIFIED_FORMAT:
+        case I2S_LSB_FORMAT:
+        case I2S_PHILIPS_FORMAT:
+        case I2S_STD_FORMAT:
+          slot_cfg = I2S_TDM_PHILIPS_SLOT_DEFAULT_CONFIG(
+              (i2s_data_bit_width_t)cfg.bits_per_sample, I2S_SLOT_MODE_STEREO,
+              (i2s_tdm_slot_mask_t)slots);
+          break;
+        case I2S_LEFT_JUSTIFIED_FORMAT:
+        case I2S_MSB_FORMAT:
+          slot_cfg = I2S_TDM_MSB_SLOT_DEFAULT_CONFIG(
+              (i2s_data_bit_width_t)cfg.bits_per_sample, I2S_SLOT_MODE_STEREO,
+              (i2s_tdm_slot_mask_t)slots);
+          break;
+        case I2S_PCM:
+          slot_cfg = I2S_TDM_PCM_LONG_SLOT_DEFAULT_CONFIG(
+              (i2s_data_bit_width_t)cfg.bits_per_sample, I2S_SLOT_MODE_STEREO,
+              (i2s_tdm_slot_mask_t)slots);
+          break;
+        default:
+          LOGE("TDM: Unsupported format");
+      }
+
+      return slot_cfg;
+    }
+
+    i2s_chan_config_t getChannelConfig(I2SConfigESP32V1 &cfg) {
+      return I2S_CHANNEL_DEFAULT_CONFIG_SAFE(
+          (i2s_port_t)cfg.port_no,
+          cfg.is_master ? I2S_ROLE_MASTER : I2S_ROLE_SLAVE);
+    }
+
+    i2s_tdm_clk_config_t getClockConfig(I2SConfigESP32V1 &cfg) {
+      return I2S_TDM_CLK_DEFAULT_CONFIG((uint32_t)cfg.sample_rate);
+    }
+
+  } tdm;
+
+#endif
+
+  /// -> protected methods from I2SDriverESP32V1
+
+  /// starts I2S
+  bool begin(I2SConfigESP32V1 cfg, int txPin, int rxPin) {
+    TRACED();
+    cfg.logInfo();
+    this->cfg = cfg;
+    if (cfg.channels <= 0 || cfg.channels > 2) {
+      LOGE("invalid channels: %d", cfg.channels);
+      return false;
+    }
+
+    DriverCommon &driver = getDriver(cfg);
+    if (!newChannels(cfg, driver)) {
+      end();
+      return false;
+    }
+
+    is_started = driver.startChannels(cfg, tx_chan, rx_chan, txPin, rxPin, this);
+    if (!is_started) {
+      end();
+      LOGE("Channels not started");
+    }
+    return is_started;
+  }
+
+  bool newChannels(I2SConfigESP32V1 &cfg, DriverCommon &driver) {
+    i2s_chan_config_t chan_cfg = driver.getChannelConfig(cfg);
+    // dma_capacity_/counters are only set up in DriverI2S::startChannels()
+    // (the only driver that registers the on_sent callback crediting
+    // bytes_sent_ back) -- leave them at 0 here for PDM/TDM so
+    // availableForWrite() keeps using the old constant fallback for those.
+    switch (cfg.rx_tx_mode) {
+      case RX_MODE:
+        if (i2s_new_channel(&chan_cfg, NULL, &rx_chan) != ESP_OK) {
+          LOGE("i2s_channel");
+          return false;
+        }
+        break;
+      case TX_MODE:
+        if (i2s_new_channel(&chan_cfg, &tx_chan, NULL) != ESP_OK) {
+          LOGE("i2s_channel");
+          return false;
+        }
+        break;
+      default:
+        if (i2s_new_channel(&chan_cfg, &tx_chan, &rx_chan) != ESP_OK) {
+          LOGE("i2s_channel");
+          return false;
+        }
+    }
+    return true;
+  }
+
+  DriverCommon &getDriver(I2SConfigESP32V1 &cfg) {
+    switch (cfg.signal_type) {
+      case Digital:
+        return i2s;
+#ifdef USE_PDM
+      case Analog:
+      case PDM:
+        return pdm;
+#endif
+#ifdef USE_TDM
+      case TDM:
+        return tdm;
+#endif
+      default:
+        break;
+    }
+    LOGE("Unsupported signal_type");
+    return i2s;
+  }
+};
+
+using I2SDriver = I2SDriverESP32V1;
+
+}  // namespace audio_tools
+
+#endif

@@ -2,7 +2,7 @@
 
 int hz = 200;
 AudioInfo info(44100, 1, 16);
-SineWaveGenerator<int16_t> sine;
+SineGenerator<int16_t> sine;
 GeneratedSoundStream<int16_t> gen(sine); 
 AudioEffectStream effects(gen); // apply effects to input: reading from gen
 CsvOutput<int16_t> out(Serial);

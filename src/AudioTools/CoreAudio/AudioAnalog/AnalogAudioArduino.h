@@ -2,7 +2,7 @@
 
 
 #include "AnalogConfigStd.h"
-#if defined(USE_ANALOG) 
+#if defined(USE_ANALOG) && defined(ARDUINO)
 
 #include "AudioTools/CoreAudio/AudioAnalog/AnalogDriverBase.h"
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimer.h"
@@ -167,7 +167,7 @@ class AnalogAudioArduino : public AudioStream {
 
  protected:
   AnalogConfigStd config;
-  TimerAlarmRepeating timer;
+  AudioTimer timer;
   BaseBuffer<uint8_t> *buffer = nullptr;
   int avg_value, min, max, count;
   bool is_combined_channels = false;

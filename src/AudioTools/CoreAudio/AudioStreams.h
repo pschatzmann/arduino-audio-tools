@@ -1,4 +1,5 @@
 #pragma once
+#include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/AudioEffects/SoundGenerator.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
 #include "AudioTools/CoreAudio/AudioOutput.h"
@@ -7,7 +8,6 @@
 #include "AudioTools/CoreAudio/BaseConverter.h"
 #include "AudioTools/CoreAudio/BaseStream.h"
 #include "AudioTools/CoreAudio/Buffers.h"
-#include "AudioToolsConfig.h"
 
 #ifndef IRAM_ATTR
 #define IRAM_ATTR
@@ -55,7 +55,7 @@ class AudioStreamWrapper : public AudioStream {
 
  protected:
   Stream *p_stream;
-  int32_t clientTimeout = URL_CLIENT_TIMEOUT;  // 60000;
+  int32_t clientTimeout = URL_CLIENT_TIMEOUT;  // 10000;
 };
 
 /**
@@ -71,6 +71,18 @@ class ModifyingStream : public AudioStream {
   virtual void setStream(Stream &in) = 0;
   /// Defines/Changes the output target
   virtual void setOutput(Print &out) = 0;
+
+  /// Defines/Changes the input & output and registers for audio change notifications
+  virtual void setStream(AudioStream &io) {
+    setStream(static_cast<Stream&>(io));
+    addNotifyAudioChange(io);
+  }
+
+  /// Defines/Changes the output target and registers for audio change notifications
+  virtual void setOutput(AudioOutput &out) {
+    setOutput(static_cast<Print&>(out));
+    addNotifyAudioChange(out);
+  }
 };
 
 /**
@@ -134,7 +146,7 @@ class MemoryStream : public AudioStream {
     return begin();
   }
 
-  /// resets the read pointer
+  /// resets the read pointer and write pointer if the memory is changeable
   bool begin() override {
     TRACED();
     write_pos = memoryCanChange() ? 0 : buffer_size;
@@ -144,6 +156,13 @@ class MemoryStream : public AudioStream {
     read_pos = 0;
     is_active = this->buffer != nullptr;
     return is_active;
+  }
+
+  /// Resets the read pointer
+  void rewind() {
+    if (buffer != nullptr && buffer_size > 0) {
+      read_pos = 0;
+    }
   }
 
   virtual size_t write(uint8_t byte) override {
@@ -181,7 +200,7 @@ class MemoryStream : public AudioStream {
       read_pos = rewind_pos;
       result = write_pos - read_pos;
       // call callback
-      if (rewind != nullptr) rewind();
+      if (rewind_cb != nullptr) rewind_cb();
     }
     return is_loop ? DEFAULT_BUFFER_SIZE : result;
   }
@@ -290,10 +309,17 @@ class MemoryStream : public AudioStream {
   virtual uint8_t *data() { return buffer; }
 
   /// update the write_pos (e.g. when we used data() to update the array)
-  virtual void setAvailable(size_t len) { this->write_pos = len; }
+  virtual bool setAvailable(size_t len) { 
+    if (len <= buffer_size) {
+      write_pos = len;
+      if (read_pos > write_pos) read_pos = write_pos;
+      return true;
+    }
+    return false;
+  }
 
   /// Callback which is executed when we rewind (in loop mode) to the beginning
-  void setRewindCallback(void (*cb)()) { this->rewind = cb; }
+  void setRewindCallback(void (*cb)()) { this->rewind_cb = cb; }
 
   /// Update the values  (buffer and size)
   void setValue(const uint8_t *buffer, int buffer_size,
@@ -313,7 +339,7 @@ class MemoryStream : public AudioStream {
   uint8_t *buffer = nullptr;
   MemoryType memory_type = RAM;
   bool is_loop = false;
-  void (*rewind)() = nullptr;
+  void (*rewind_cb)() = nullptr;
   bool is_active = false;
   bool owns_memory = true;
 
@@ -321,13 +347,44 @@ class MemoryStream : public AudioStream {
 
   void copy(MemoryStream &source) {
     if (this == &source) return;
-    if (source.memory_type == FLASH_RAM) {
-      setValue(source.buffer, source.buffer_size, source.memory_type);
-    } else {
-      setValue(nullptr, source.buffer_size, source.memory_type);
-      resize(buffer_size);
-      memcpy(buffer, source.buffer, buffer_size);
+
+    // Release currently owned mutable buffer.
+    if (memoryCanChange() && owns_memory && buffer != nullptr) {
+      free(buffer);
+      buffer = nullptr;
     }
+
+    // Shallow copy for FLASH memory source.
+    if (source.memory_type == FLASH_RAM) {
+      owns_memory = false;
+      setValue(source.buffer, source.buffer_size, source.memory_type);
+      is_active = source.is_active;
+      is_loop = source.is_loop;
+      rewind_pos = source.rewind_pos;
+      return;
+    }
+
+    // Deep copy for mutable source memory.
+    owns_memory = true;
+    setValue(nullptr, source.buffer_size, source.memory_type);
+    if (!resize(source.buffer_size)) {
+      setValue(nullptr, 0, source.memory_type);
+      is_active = false;
+      return;
+    }
+
+    if (source.buffer != nullptr && source.buffer_size > 0) {
+      memcpy(buffer, source.buffer, source.buffer_size);
+    }
+
+    write_pos = source.write_pos;
+    read_pos = source.read_pos;
+    if (write_pos > buffer_size) write_pos = buffer_size;
+    if (read_pos > write_pos) read_pos = write_pos;
+
+    is_active = source.is_active;
+    is_loop = source.is_loop;
+    rewind_pos = source.rewind_pos;
   }
 };
 
@@ -404,27 +461,36 @@ class GeneratedSoundStream : public AudioStream {
   }
 
   void setInput(SoundGenerator<T> &generator) {
-    this->generator_ptr = &generator;
+    this->p_generator = &generator;
   }
 
-  AudioInfo defaultConfig() { return this->generator_ptr->defaultConfig(); }
+  AudioInfo defaultConfig() {
+    if (p_generator == nullptr) {
+      LOGW("%s", source_not_defined_error);
+      return AudioInfo();
+    }
+    return this->p_generator->defaultConfig();
+  }
 
   void setAudioInfo(AudioInfo newInfo) override {
     if (newInfo.bits_per_sample != sizeof(T) * 8) {
       LOGE("Wrong bits_per_sample: %d", newInfo.bits_per_sample);
     }
+    if (p_generator != nullptr) {
+      p_generator->setAudioInfo(newInfo);
+    } 
     AudioStream::setAudioInfo(newInfo);
   }
 
   /// start the processing
   bool begin() override {
     TRACED();
-    if (generator_ptr == nullptr) {
+    if (p_generator == nullptr) {
       LOGE("%s", source_not_defined_error);
       return false;
     }
-    generator_ptr->begin();
-    notifyAudioChange(generator_ptr->audioInfo());
+    p_generator->begin();
+    notifyAudioChange(p_generator->audioInfo());
     active = true;
     return active;
   }
@@ -432,12 +498,12 @@ class GeneratedSoundStream : public AudioStream {
   /// start the processing
   bool begin(AudioInfo cfg) {
     TRACED();
-    if (generator_ptr == nullptr) {
+    if (p_generator == nullptr) {
       LOGE("%s", source_not_defined_error);
       return false;
     }
-    generator_ptr->begin(cfg);
-    notifyAudioChange(generator_ptr->audioInfo());
+    p_generator->begin(cfg);
+    notifyAudioChange(p_generator->audioInfo());
     active = true;
     return active;
   }
@@ -445,11 +511,19 @@ class GeneratedSoundStream : public AudioStream {
   /// stop the processing
   void end() override {
     TRACED();
-    generator_ptr->end();
+    if (p_generator != nullptr) {
+      p_generator->end();
+    }
     active = true;  // legacy support - most sketches do not call begin
   }
 
-  AudioInfo audioInfo() override { return generator_ptr->audioInfo(); }
+  AudioInfo audioInfo() override {
+    if (p_generator == nullptr) {
+      LOGE("%s", source_not_defined_error);
+      return AudioStream::audioInfo();
+    }
+    return p_generator->audioInfo();
+  }
 
   /// This is unbounded so we just return the buffer size
   virtual int available() override { return active ? buffer_size : 0; }
@@ -457,11 +531,17 @@ class GeneratedSoundStream : public AudioStream {
   /// privide the data as byte stream
   size_t readBytes(uint8_t *data, size_t len) override {
     if (!active) return 0;
+    if (p_generator == nullptr) {
+      return 0;
+    }
     LOGD("GeneratedSoundStream::readBytes: %u", (unsigned int)len);
-    return generator_ptr->readBytes(data, len);
+    return p_generator->readBytes(data, len);
   }
 
-  bool isActive() { return active && generator_ptr->isActive(); }
+  bool isActive() { 
+    if (p_generator == nullptr) return false;
+    return active && p_generator->isActive(); 
+  }
 
   operator bool() override { return isActive(); }
 
@@ -472,7 +552,7 @@ class GeneratedSoundStream : public AudioStream {
 
  protected:
   bool active = true;  // support for legacy sketches
-  SoundGenerator<T> *generator_ptr;
+  SoundGenerator<T> *p_generator = nullptr;
   int buffer_size =
       DEFAULT_BUFFER_SIZE * 100;  // there is no reason to limit this
   const char *source_not_defined_error = "Source not defined";
@@ -705,187 +785,6 @@ class ConverterStream : public ModifyingStream {
   Stream *p_stream = nullptr;
   Print *p_out = nullptr;
   BaseConverter *p_converter;
-};
-
-/**
- * @brief Class which measures the thruput
- * @author Phil Schatzmann
- * @copyright GPLv3
- * @ingroup io
- */
-class MeasuringStream : public ModifyingStream {
- public:
-  MeasuringStream(int count = 10, Print *logOut = nullptr) {
-    this->count = count;
-    this->max_count = count;
-    p_stream = &null;
-    p_print = &null;
-    start_time = millis();
-    p_logout = logOut;
-  }
-
-  MeasuringStream(Print &print, int count = 10, Print *logOut = nullptr) {
-    this->count = count;
-    this->max_count = count;
-    setOutput(print);
-    start_time = millis();
-    p_logout = logOut;
-  }
-
-  MeasuringStream(Stream &stream, int count = 10, Print *logOut = nullptr) {
-    this->count = count;
-    this->max_count = count;
-    setStream(stream);
-    start_time = millis();
-    p_logout = logOut;
-  }
-
-  /// Defines the logging output
-  void setLogOutput(Print &out) { p_logout = &out; }
-
-  /// Defines/Changes the input & output
-  void setStream(Stream &io) override {
-    p_print = &io;
-    p_stream = &io;
-  };
-
-  /// Defines/Changes the output target
-  void setOutput(Print &out) override { p_print = &out; }
-
-  /// Provides the data from all streams mixed together
-  size_t readBytes(uint8_t *data, size_t len) override {
-    total_bytes_since_begin += len;
-    return measure(p_stream->readBytes(data, len));
-  }
-
-  int available() override { return p_stream->available(); }
-
-  /// Writes raw PCM audio data, which will be the input for the volume control
-  virtual size_t write(const uint8_t *data, size_t len) override {
-    total_bytes_since_begin += len;
-    return measure(p_print->write(data, len));
-  }
-
-  /// Provides the nubmer of bytes we can write
-  virtual int availableForWrite() override {
-    return p_print->availableForWrite();
-  }
-
-  /// Returns the actual thrughput in bytes per second
-  int bytesPerSecond() { return bytes_per_second; }
-
-  /// Returns the actual thrughput in frames (samples) per second
-  int framesPerSecond() {
-    if (frame_size == 0) return 0;
-    return bytes_per_second / frame_size;
-  }
-
-  /// Provides the time when the last measurement was started
-  uint32_t startTime() { return start_time; }
-
-  void setAudioInfo(AudioInfo info) override {
-    AudioStream::info = info;
-    setFrameSize(info.bits_per_sample / 8 * info.channels);
-  }
-
-  bool begin() override {
-    total_bytes_since_begin = 0;
-    ms_at_begin = millis();
-    return AudioStream::begin();
-  }
-
-  bool begin(AudioInfo info) {
-    setAudioInfo(info);
-    return begin();
-  }
-
-  /// Trigger reporting in frames (=samples) per second
-  void setFrameSize(int size) { frame_size = size; }
-
-  /// Report in bytes instead of samples
-  void setReportBytes(bool flag) { report_bytes = flag; }
-
-  void setName(const char *name) { this->name = name; }
-
-  /// Provides the time in ms since the last call of begin()
-  uint32_t timeSinceBegin() { return millis() - ms_at_begin; }
-
-  /// Provides the total processed bytes since the last call of begin()
-  uint32_t bytesSinceBegin() { return total_bytes_since_begin; }
-
-  /// Provides the estimated runtime in milliseconds for the indicated total
-  uint32_t estimatedTotalTimeFor(uint32_t totalBytes) {
-    if (bytesSinceBegin() == 0) return 0;
-    return static_cast<float>(timeSinceBegin()) / bytesSinceBegin() *
-           totalBytes;
-  }
-
-  /// Provides the estimated time from now to the end in ms
-  uint32_t estimatedOpenTimeFor(uint32_t totalBytes) {
-    if (bytesSinceBegin() == 0) return 0;
-    return estimatedTotalTimeFor(totalBytes) - timeSinceBegin();
-  }
-
-  /// Alternative update method: e.g report actual file positon: returns true if
-  /// the file position was increased
-  bool setProcessedBytes(uint32_t pos) {
-    bool is_regular_update = true;
-    if (pos < total_bytes_since_begin) {
-      begin();
-      is_regular_update = false;
-    }
-    total_bytes_since_begin = pos;
-    return is_regular_update;
-  }
-
- protected:
-  int max_count = 0;
-  int count = 0;
-  Stream *p_stream = nullptr;
-  Print *p_print = nullptr;
-  uint32_t start_time;
-  int total_bytes = 0;
-  int bytes_per_second = 0;
-  int frame_size = 0;
-  NullStream null;
-  Print *p_logout = nullptr;
-  bool report_bytes = false;
-  const char *name = "";
-  uint32_t ms_at_begin = 0;
-  uint32_t total_bytes_since_begin = 0;
-
-  size_t measure(size_t len) {
-    count--;
-    total_bytes += len;
-
-    if (count <= 0) {
-      uint32_t end_time = millis();
-      int time_diff = end_time - start_time;  // in ms
-      if (time_diff > 0) {
-        bytes_per_second = total_bytes / time_diff * 1000;
-        printResult();
-        count = max_count;
-        total_bytes = 0;
-        start_time = end_time;
-      }
-    }
-    return len;
-  }
-
-  void printResult() {
-    char msg[70];
-    if (report_bytes || frame_size == 0) {
-      snprintf(msg, 70, "%s ==> Bytes per second: %d", name, bytes_per_second);
-    } else {
-      snprintf(msg, 70, "%s ==> Samples per second: %d", name,
-               bytes_per_second / frame_size);
-    }
-    if (p_logout != nullptr) {
-      p_logout->println(msg);
-    } else {
-      LOGI("%s", msg);
-    }
-  }
 };
 
 /**
@@ -1172,7 +1071,7 @@ class Throttle : public ModifyingStream {
  * @copyright GPLv3
  */
 
-template <typename T>
+template <typename T=int16_t, typename SumT=float>
 class InputMixer : public AudioStream {
  public:
   InputMixer() = default;
@@ -1181,7 +1080,7 @@ class InputMixer : public AudioStream {
   int add(Stream &in, int weight = 100) {
     streams.push_back(&in);
     weights.push_back(weight);
-    total_weights += weight;
+    recalculateWeights();
     return streams.indexOf(&in);
   }
 
@@ -1219,6 +1118,7 @@ class InputMixer : public AudioStream {
   void end() override {
     streams.clear();
     weights.clear();
+    gains.clear();
     result_vect.clear();
     current_vect.clear();
     total_weights = 0.0;
@@ -1242,12 +1142,20 @@ class InputMixer : public AudioStream {
 
     if (len > 0) {
       // result_len must be full frames
-      result_len = len * frame_size / frame_size;
+      result_len = (len / frame_size) * frame_size;;
       // replace sample based with vector based implementation
       // readBytesSamples((T*)data, result_len));
       result_len = readBytesVector((T *)data, result_len);
     }
     return result_len;
+  }
+
+  /// Reports 0 when no streams are mixed in, otherwise the combined available
+  /// bytes (bounded by the least-available stream when limit_available_data
+  /// is set)
+  int available() override {
+    if (total_weights == 0 || streams.empty()) return 0;
+    return limit_available_data ? availableBytes() : DEFAULT_BUFFER_SIZE;
   }
 
   /// Limit the copy to the available data of all streams: stops to provide data
@@ -1305,11 +1213,12 @@ class InputMixer : public AudioStream {
  protected:
   Vector<Stream *> streams{0};
   Vector<int> weights{0};
+  Vector<float> gains{0};
   int total_weights = 0;
   int frame_size = 4;
   bool limit_available_data = false;
   int retry_count = 5;
-  Vector<int> result_vect;
+  Vector<SumT> result_vect;
   Vector<T> current_vect;
 
   /// Recalculate the weights
@@ -1319,31 +1228,31 @@ class InputMixer : public AudioStream {
       total += weights[j];
     }
     total_weights = total;
+    gains.resize(weights.size());
+    for (int j = 0; j < weights.size(); j++) {
+      gains[j] = total_weights == 0 ? 0.0f : static_cast<float>(weights[j]) / total_weights;
+    }
   }
 
   /// mixing using a vector of samples
   int readBytesVector(T *p_data, int byteCount) {
     int samples = byteCount / sizeof(T);
-    result_vect.resize(samples);
-    current_vect.resize(samples);
+    if (result_vect.size() < samples) result_vect.resize(samples);
+    if (current_vect.size() < samples) current_vect.resize(samples);
     int stream_count = size();
-    resultClear();
+    resultClear(samples);
     int samples_eff_max = 0;
     for (int j = 0; j < stream_count; j++) {
       if (weights[j] > 0) {
         int samples_eff =
             readSamples(streams[j], current_vect.data(), samples, retry_count);
         if (samples_eff > samples_eff_max) samples_eff_max = samples_eff;
-        // if all weights are 0.0 we stop to output
-        float factor = total_weights == 0.0f
-                           ? 0.0f
-                           : static_cast<float>(weights[j]) / total_weights;
-        resultAdd(factor);
+        resultAdd(MixGain<T>(gains[j]), samples_eff);
       }
     }
     // copy result
-    for (int j = 0; j < samples; j++) {
-      p_data[j] = result_vect[j];
+    for (int j = 0; j < samples_eff_max; j++) {
+      p_data[j] = static_cast<T>(result_vect[j]);
     }
     return samples_eff_max * sizeof(T);
   }
@@ -1357,15 +1266,15 @@ class InputMixer : public AudioStream {
     return result;
   }
 
-  void resultAdd(float fact) {
-    for (int j = 0; j < current_vect.size(); j++) {
-      current_vect[j] *= fact;
-      result_vect[j] += current_vect[j];
+  void resultAdd(MixGain<T> factor, int samples_eff) {
+    // only accumulate samples that were actually read; tail is already zeroed
+    for (int j = 0; j < samples_eff; j++) {
+      result_vect[j] += static_cast<SumT>(factor.scale(current_vect[j]));
     }
   }
 
-  void resultClear() {
-    memset(result_vect.data(), 0, sizeof(int) * result_vect.size());
+  void resultClear(int samples) {
+    memset(result_vect.data(), 0, sizeof(SumT) * samples);
   }
 };
 
@@ -1414,7 +1323,7 @@ class InputMerge : public AudioStream {
   size_t readBytes(uint8_t *data, size_t len) override {
     LOGD("readBytes: %d", (int)len);
     T *p_data = (T *)data;
-    int result_len = MIN(available(), len);
+    int result_len = min((size_t)available(), len);
     int frames = result_len / (sizeof(T) * total_channel_count);
     int result_idx = 0;
     for (int j = 0; j < frames; j++) {
@@ -1481,7 +1390,8 @@ class InputMerge : public AudioStream {
 
 /**
  * @brief CallbackStream: A Stream that allows to register callback methods for
- * accessing and providing data. The callbacks can be lambda expressions.
+ * accessing and providing and updating data. The callbacks can be lambda expressions.
+ * The update callback can also be used just to read the data without changing it.
  * Warning: this class does not propagate audio info changes to the target
  * stream. You need to do this manually.
  * @ingroup io
@@ -1512,14 +1422,17 @@ class CallbackStream : public ModifyingStream {
     setReadCallback(cb_read);
   }
 
+  /// Instead of writing to the output stream we call this method
   void setWriteCallback(size_t (*cb_write)(const uint8_t *data, size_t len)) {
     this->cb_write = cb_write;
   }
 
+  /// Instead of reading from the input stream we call this method
   void setReadCallback(size_t (*cb_read)(uint8_t *data, size_t len)) {
     this->cb_read = cb_read;
   }
 
+  /// After Reading or before writing we call this method to allow to modify the data
   void setUpdateCallback(size_t (*cb_update)(uint8_t *data, size_t len)) {
     this->cb_update = cb_update;
   }
@@ -1648,31 +1561,27 @@ class FilteredStream : public ModifyingStream {
   FilteredStream(Stream &stream, int channels) : ModifyingStream() {
     this->channels = channels;
     setStream(stream);
-    p_converter = new ConverterNChannels<T, TF>(channels);
+    converter.setChannels(channels);
   }
   FilteredStream(Print &stream) : ModifyingStream() { setOutput(stream); }
   FilteredStream(Print &stream, int channels) : ModifyingStream() {
     this->channels = channels;
     setOutput(stream);
-    p_converter = new ConverterNChannels<T, TF>(channels);
+    converter.setChannels(channels);
   }
 
   virtual ~FilteredStream() { end(); }
 
   void setStream(Stream &stream) override {
-    p_stream = &stream;
-    p_print = &stream;
+    p_io = &stream;
+    p_out = &stream;
   }
 
-  void setOutput(Print &stream) override { p_print = &stream; }
+  void setOutput(Print &stream) override { p_out = &stream; }
 
   bool begin(AudioInfo info) {
     setAudioInfo(info);
     this->channels = info.channels;
-    if (p_converter != nullptr && p_converter->getChannels() != channels) {
-      LOGE("Inconsistent number of channels");
-      return false;
-    }
     return begin();
   }
 
@@ -1681,52 +1590,46 @@ class FilteredStream : public ModifyingStream {
       LOGE("channels must not be 0");
       return false;
     }
-    if (p_converter == nullptr) {
-      p_converter = new ConverterNChannels<T, TF>(channels);
-    }
+    converter.setChannels(channels);
     return AudioStream::begin();
   }
 
   void end() override {
     ModifyingStream::end();
-    if (p_converter != nullptr) {
-      delete p_converter;
-      p_converter = nullptr;
-    }
   }
 
   virtual size_t write(const uint8_t *data, size_t len) override {
-    if (p_converter == nullptr) return 0;
-    size_t result = p_converter->convert((uint8_t *)data, len);
-    return p_print->write(data, result);
+    if (p_out == nullptr) return 0;
+    size_t result = converter.convert((uint8_t *)data, len);
+    return p_out->write(data, result);
   }
 
   size_t readBytes(uint8_t *data, size_t len) override {
-    if (p_converter == nullptr) return 0;
-    if (p_stream == nullptr) return 0;
-    size_t result = p_stream->readBytes(data, len);
-    result = p_converter->convert(data, result);
+    if (p_io == nullptr) return 0;
+    size_t result = p_io->readBytes(data, len);
+    result = converter.convert(data, result);
     return result;
   }
 
   virtual int available() override {
-    if (p_stream == nullptr) return 0;
-    return p_stream->available();
+    if (p_io == nullptr) return 0;
+    return p_io->available();
   }
 
   virtual int availableForWrite() override {
-    return p_print->availableForWrite();
+    if (p_out == nullptr) return 0;
+    return p_out->availableForWrite();
+  }
+
+  virtual void flush() override {
+    if (p_out != nullptr) p_out->flush();
   }
 
   /// defines the filter for an individual channel - the first channel is 0. The
   /// number of channels must have been defined before we can call this
   /// function.
   void setFilter(int channel, Filter<TF> *filter) {
-    if (p_converter != nullptr) {
-      p_converter->setFilter(channel, filter);
-    } else {
-      LOGE("p_converter is null");
-    }
+    converter.setFilter(channel, filter);
   }
 
   /// defines the filter for an individual channel - the first channel is 0. The
@@ -1738,9 +1641,9 @@ class FilteredStream : public ModifyingStream {
 
  protected:
   int channels = 0;
-  Stream *p_stream = nullptr;
-  Print *p_print = nullptr;
-  ConverterNChannels<T, TF> *p_converter = nullptr;
+  Stream *p_io = nullptr;
+  Print *p_out = nullptr;
+  ConverterNChannels<T, TF> converter{0};
 };
 
 /// Callback function type for activity state changes
@@ -2262,7 +2165,7 @@ class TimerCallbackAudioStream : public BufferedStream {
       frameSize = cfg.bits_per_sample * cfg.channels / 8;
       frame = new uint8_t[frameSize];
       buffer = new RingBuffer<uint8_t>(cfg.buffer_size);
-      timer = new TimerAlarmRepeating();
+      timer = new AudioTimer();
       timer->setTimerFunction(cfg.timer_function);
       if (cfg.timer_id >= 0) {
         timer->setTimer(cfg.timer_id);
@@ -2307,7 +2210,7 @@ class TimerCallbackAudioStream : public BufferedStream {
   bool active = false;
   uint16_t (*frameCallback)(uint8_t *data, uint16_t len);
   // below only relevant with timer
-  TimerAlarmRepeating *timer = nullptr;
+  AudioTimer *timer = nullptr;
   RingBuffer<uint8_t> *buffer = nullptr;
   uint8_t *frame = nullptr;
   uint16_t frameSize = 0;

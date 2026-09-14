@@ -10,7 +10,7 @@ namespace audio_tools {
 
 /**
  * @brief AAC Decoder using libhelix:
- * https://github.com/pschatzmann/arduino-libhelix This is basically just a
+ * https://github.com/pschatzmann/codec-helix This is basically just a
  * simple wrapper to provide AudioInfo and AudioInfoSupport
  * @ingroup codecs
  * @ingroup decoder
@@ -69,6 +69,8 @@ class AACDecoderHelix : public AudioDecoder {
     TRACED();
     if (aac != nullptr) delete aac;
   }
+
+  const char *mime() override { return "audio/aac"; }
 
   // void setRaw(bool flag){
   //     if (aac!=nullptr) aac->setRaw(flag);

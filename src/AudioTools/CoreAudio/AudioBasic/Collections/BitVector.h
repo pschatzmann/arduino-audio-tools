@@ -25,8 +25,8 @@ public:
     if (index < 0)
       return false;
     bool result = false;
-    int offset = index / sizeof(uint64_t);
-    int bit = index % sizeof(uint64_t);
+    int offset = index / (sizeof(uint64_t) * 8);
+    int bit = index % (sizeof(uint64_t) * 8);
     if (offset < vector.size()) {
       uint64_t value = vector[offset];
       // get bit
@@ -39,8 +39,8 @@ public:
     if (index < 0)
       return;
     max_idx = max(max_idx, index + 1);
-    int offset = index / sizeof(uint64_t);
-    int bit = index % sizeof(uint64_t);
+    int offset = index / (sizeof(uint64_t) * 8);
+    int bit = index % (sizeof(uint64_t) * 8);
     while (offset >= vector.size()) {
       vector.push_back(0l);
     }
@@ -77,13 +77,16 @@ public:
   }
 
   /// Defines the size of the bit vector
-  void resize(int size) {
+  bool resize(size_t size) {
     max_idx = size;
     int round_up = size % 64 != 0;
-    vector.resize(size / 64 + round_up);
+    if (!vector.resize(size / 64 + round_up)) {
+      return false;
+    }
     for (int j=0;j<max_idx;j++){
       set(j, 0);
     }
+    return true;
   }
 
   // shifts n bits: + to the right; - to the left
@@ -97,7 +100,7 @@ public:
   }
   /// Extracts an integer 
   template <typename T> T toInt(int n) {
-    T result;
+    T result = 0;
     for (int j = 0; j < sizeof(T) * 8; j++) {
       bool x = get(n);
       // set bit at pos

@@ -24,7 +24,7 @@ using stsz_sample_size_t = uint16_t;
  */
 class M4ACommonDemuxer {
  public:
-  enum class Codec { Unknown, AAC, ALAC, MP3 };
+  enum class Codec { Unknown, AAC, ALAC, MP3, AC3 };
 
   struct Frame {
     Codec codec;
@@ -190,6 +190,9 @@ class M4ACommonDemuxer {
             LOGE("No sample size defined, cannot write data");
             return j;
           }
+          // the next sample can be larger than the one we just finished:
+          // grow the buffer for it now, not only once at the top of write()
+          resize(currentSize);
         }
       }
       return len;
@@ -266,6 +269,9 @@ class M4ACommonDemuxer {
         case Codec::MP3:
           frame.mime = "audio/mpeg";
           break;
+        case Codec::AC3:
+          frame.mime = "audio/ac3";
+          break;
         default:
           frame.mime = nullptr;
           break;
@@ -307,10 +313,11 @@ class M4ACommonDemuxer {
      * @brief Resizes the internal buffer if needed.
      * @param newSize New buffer size.
      */
-    void resize(size_t newSize) {
+    bool resize(size_t newSize) {
       if (buffer.size() < newSize) {
-        buffer.resize(newSize);
+        return buffer.resize(newSize);
       }
+      return true;
     }
 
     /**
@@ -413,11 +420,12 @@ class M4ACommonDemuxer {
 
   M4AAudioConfig getM4AAudioConfig() { return audio_config; }
 
-  void resize(int size) {
+  bool resize(size_t size) {
     default_size = size;
     if (buffer.size() < size) {
-      buffer.resize(size);
+      return buffer.resize(size);
     }
+    return true;
   }
 
   /// File offset of stsz box
@@ -431,6 +439,10 @@ class M4ACommonDemuxer {
   }
 
   virtual void setupParser() = 0;
+
+  /// Provides access to the underlying MP4Parser, e.g. to call
+  /// setRequireMoovBeforeMdat(false).
+  MP4Parser& getParser() { return parser; }
 
  protected:
   FrameCallback frame_callback = nullptr;
@@ -599,6 +611,19 @@ class M4ACommonDemuxer {
   }
 
   /**
+   * @brief Handles the ac-3 box (AC-3/Dolby Digital audio sample entry).
+   * Unlike AAC/ALAC, AC-3 frames are self-synchronizing (each frame starts
+   * with its own 0x0B77 sync word and carries its own sample rate/channel
+   * info), so - beyond marking the codec - there is no magic cookie or
+   * config box to extract here.
+   * @param box MP4 box.
+   */
+  void onAc3(const MP4Parser::Box& box) {
+    LOGI("onAc3: %s, size: %zu bytes", box.type, box.data_size);
+    audio_config.codec = Codec::AC3;
+  }
+
+  /**
    * @brief Handles the stsz (Sample Size) box.
    * @param box MP4 box.
    */
@@ -609,9 +634,12 @@ class M4ACommonDemuxer {
     BaseBuffer<stsz_sample_size_t>& sampleSizes =
         sampleExtractor.getSampleSizesBuffer();
 
-    buffer.resize(box.available);
+    // must fit the leftover bytes from the previous incremental chunk
+    // (not a multiple of 4) plus the new chunk, otherwise writeArray()
+    // silently truncates and corrupts the sample size table
+    buffer.resize(buffer.available() + box.available);
     size_t written = buffer.writeArray(box.data, box.available);
-    assert(written = box.available);
+    assert(written == (size_t)box.available);
 
     // get sample count and size from the box
     if (sample_count == 0 && buffer.available() > 12) {

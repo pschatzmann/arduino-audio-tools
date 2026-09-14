@@ -7,8 +7,8 @@
  */
 
 #include "AudioTools.h"
-#include "AudioTools/AudioLibs/AudioRealFFT.h" // or any other supported inplementation
-#include "BluetoothA2DPSink.h"
+#include "AudioTools/FFT/AudioRealFFT.h" // or any other supported inplementation
+#include "BluetoothA2DPSink.h" // https://github.com/pschatzmann/ESP32-A2DP
 
 BluetoothA2DPSink a2dp_sink;
 AudioRealFFT fft; // or any other supported inplementation

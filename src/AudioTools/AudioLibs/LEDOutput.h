@@ -2,8 +2,8 @@
 #include <FastLED.h>
 
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
-#include "AudioTools/AudioLibs/AudioFFT.h"
-#include "FFTDisplay.h"
+#include "AudioTools/FFT/AudioFFT.h"
+#include "AudioTools/FFT/FFTDisplay.h"
 
 namespace audio_tools {
 

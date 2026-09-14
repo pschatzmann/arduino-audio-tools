@@ -26,6 +26,9 @@ namespace audio_tools {
  *    D1       4
  *
  *  On the AI Thinker boards the pin settings should be On, On, On, On, On,
+ *
+ * @note Supported only by Arduino ESP32 platforms!
+ *
  * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -54,6 +57,7 @@ public:
   }
 
   void end() {
+    file.close();
     SD_MMC.end();
     is_sd_setup = false;
   }
@@ -69,6 +73,7 @@ public:
     file_name = idx[index];
     if (file_name==nullptr) return nullptr;
     LOGI("Using file %s", file_name);
+    file.close();
     file = SD_MMC.open(file_name);
     return file ? &file : nullptr;
   }

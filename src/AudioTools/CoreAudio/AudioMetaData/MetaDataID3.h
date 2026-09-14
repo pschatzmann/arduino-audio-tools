@@ -394,11 +394,12 @@ class MetaDataID3V2 : public MetaDataID3Base  {
     }
 
     /// Defines the result buffer size (default is 256);
-    void resize(int size){
+    bool resize(size_t size){
         result_size = size;
         if (result.size()==0) {
-            result.resize(result_size);
+            return result.resize(result_size);
         }
+        return true;
     }
 
   protected:
@@ -608,8 +609,8 @@ class MetaDataID3 : public AbstractMetaData {
     }
 
     /// Defines the ID3V3 result buffer size (default is 256);
-    void resize(int size){
-        id3v2.resize(size);
+    bool resize(size_t size){
+        return id3v2.resize(size);
     }
 
   protected:

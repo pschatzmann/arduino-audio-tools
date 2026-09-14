@@ -2,10 +2,7 @@
 
 #include "AudioToolsConfig.h"
 
-#ifdef USE_STD_CONCURRENCY
 #include <atomic>
-#include <mutex>
-#endif
 
 namespace audio_tools {
 
@@ -21,10 +18,16 @@ class MutexBase {
   virtual void unlock() {}
 };
 
-#if defined(USE_STD_CONCURRENCY)
-
+/**
+ * @brief Busy-wait lock based on std::atomic - available on all platforms
+ * that support <atomic>.
+ * @ingroup concurrency
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
 class SpinLock : public MutexBase {
-  void lock() {
+ public:
+  void lock() override {
     for (;;) {
       // Optimistically assume the lock is free on the first try
       if (!lock_.exchange(true, std::memory_order_acquire)) {
@@ -47,44 +50,10 @@ class SpinLock : public MutexBase {
            !lock_.exchange(true, std::memory_order_acquire);
   }
 
-  void unlock() { lock_.store(false, std::memory_order_release); }
+  void unlock() override { lock_.store(false, std::memory_order_release); }
 
  protected:
-  volatile std::atomic<bool> lock_ = {0};
+  std::atomic<bool> lock_ = {false};
 };
-
-
-/**
- * @brief Mutex implemntation based on std::mutex
- * @ingroup concurrency
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-class StdMutex : public MutexBase {
- public:
-  void lock() override { std_mutex.lock(); }
-  void unlock() override { std_mutex.unlock(); }
-
- protected:
-  std::mutex std_mutex;
-};
-
-/**
- * @brief Mutex implemntation based on std::mutex
- * @ingroup concurrency
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-class StdRecursiveMutex : public MutexBase {
- public:
-  void lock() override { std_mutex.lock(); }
-  void unlock() override { std_mutex.unlock(); }
-
- protected:
-  std::recursive_mutex std_mutex;
-};
-
-
-#endif
 
 }  // namespace audio_tools

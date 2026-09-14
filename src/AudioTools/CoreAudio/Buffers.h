@@ -1,5 +1,6 @@
 #pragma once
 
+#include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/AudioBasic/Collections.h"
 #include "AudioTools/CoreAudio/AudioBasic/Str.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
@@ -18,13 +19,13 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-template <typename T = int16_t>
+template <typename T = uint8_t>
 class BaseBuffer {
  public:
   BaseBuffer() = default;
   virtual ~BaseBuffer() = default;
-  BaseBuffer(BaseBuffer&) = default;
-  BaseBuffer &operator=(BaseBuffer &) = default;
+  BaseBuffer(const BaseBuffer&) = default;
+  BaseBuffer &operator=(const BaseBuffer &) = default;
 
   /// reads a single value
   virtual bool read(T &result) = 0;
@@ -94,6 +95,10 @@ class BaseBuffer {
   ///  same as reset
   void clear() { reset(); }
 
+  /// Submit any partially-filled write buffer so the reader can access it.
+  /// Only meaningful for NBuffer-style block pools; no-op for ring buffers.
+  virtual void flush() {}
+
   /// provides the number of entries that are available to read
   virtual int available() = 0;
 
@@ -113,17 +118,34 @@ class BaseBuffer {
            static_cast<float>(size());
   }
 
+  /// Returns the free space of the buffer in %
+  virtual float freePercent() {
+    return 100.0 - levelPercent();
+  }
+
   /// Resizes the buffer if supported: returns false if not supported
-  virtual bool resize(int bytes) {
+  virtual bool resize(size_t bytes) {
     LOGE("resize not implemented for this buffer");
     return false;
   }
+
+  /// Resize the buffer by indicating the size and count (allocated bytes = size * count)
+  virtual bool resize(size_t size, int count) {
+    return resize(size * count);
+  }
+
+  /// Provides the number of entries that are available to read: -1 does not apply
+  virtual int bufferCountFilled() { return -1; }
+
+  /// Provides the number of entries that are available to write: -1 does not apply
+  virtual int bufferCountEmpty() { return -1; }
+
 };
 
 /**
  * @brief A FrameBuffer reads multiple values for array of 2 dimensional frames
  */
-template <typename T = int16_t>
+template <typename T = uint8_t>
 class FrameBuffer {
  public:
   FrameBuffer(BaseBuffer<T> &buffer) { p_buffer = &buffer; }
@@ -168,7 +190,7 @@ class FrameBuffer {
  * @copyright GPLv3
  */
 
-template <typename T = int16_t>
+template <typename T = uint8_t>
 class SingleBuffer : public BaseBuffer<T> {
  public:
   /**
@@ -182,8 +204,8 @@ class SingleBuffer : public BaseBuffer<T> {
     reset();
   }
 
-  SingleBuffer(SingleBuffer&) = default;
-  SingleBuffer& operator=(SingleBuffer&) = default;
+  SingleBuffer(const SingleBuffer&) = default;
+  SingleBuffer& operator=(const SingleBuffer&) = default;
 
   /**
    * @brief Construct a new Single Buffer w/o allocating any memory
@@ -302,10 +324,10 @@ class SingleBuffer : public BaseBuffer<T> {
 
   size_t size() override { return buffer.size(); }
 
-  bool resize(int size) {
+  bool resize(size_t size) {
     if (buffer.size() < size) {
       TRACED();
-      buffer.resize(size);
+      return buffer.resize(size);
     }
     return true;
   }
@@ -337,7 +359,7 @@ class SingleBuffer : public BaseBuffer<T> {
  * @ingroup buffers
  * @tparam T
  */
-template <typename T = int16_t>
+template <typename T = uint8_t>
 class RingBuffer : public BaseBuffer<T> {
  public:
   RingBuffer(int size, Allocator &allocator = DefaultAllocator) : _allocator(allocator) {
@@ -382,6 +404,49 @@ class RingBuffer : public BaseBuffer<T> {
     return result;
   }
 
+  // Bulk read: the inherited BaseBuffer<T>::readArray() calls read() once
+  // per element - a virtual call plus a modulo (nextIndex()) for every
+  // single byte, which is expensive on MCUs without hardware integer
+  // divide (e.g. RP2040's Cortex-M0+). Copy in at most two contiguous
+  // runs (handling ring wraparound) instead.
+  virtual int readArray(T data[], int len) override {
+    if (data == nullptr) {
+      LOGE("NPE");
+      return 0;
+    }
+    int to_read = min(len, available());
+    if (to_read <= 0) return 0;
+    int first = min(to_read, max_size - _iTail);
+    memcpy(data, _aucBuffer.data() + _iTail, first * sizeof(T));
+    int second = to_read - first;
+    if (second > 0) {
+      memcpy(data + first, _aucBuffer.data(), second * sizeof(T));
+    }
+    _iTail = (_iTail + to_read) % max_size;
+    _numElems -= to_read;
+    return to_read;
+  }
+
+  // Bulk write: see readArray() above for why this avoids the inherited
+  // per-element BaseBuffer<T>::writeArray() loop.
+  virtual int writeArray(const T data[], int len) override {
+    if (data == nullptr) {
+      LOGE("NPE");
+      return 0;
+    }
+    int to_write = min(len, availableForWrite());
+    if (to_write <= 0) return 0;
+    int first = min(to_write, max_size - _iHead);
+    memcpy(_aucBuffer.data() + _iHead, data, first * sizeof(T));
+    int second = to_write - first;
+    if (second > 0) {
+      memcpy(_aucBuffer.data(), data + first, second * sizeof(T));
+    }
+    _iHead = (_iHead + to_write) % max_size;
+    _numElems += to_write;
+    return to_write;
+  }
+
   // checks if the buffer is full
   virtual bool isFull() override { return available() == max_size; }
 
@@ -415,7 +480,7 @@ class RingBuffer : public BaseBuffer<T> {
   // returns the address of the start of the physical read buffer
   virtual T *address() override { return _aucBuffer.data(); }
 
-  virtual bool resize(int len) {
+  virtual bool resize(size_t len) {
     if (max_size != len && len > 0) {
       LOGI("resize: %d", len);
       _aucBuffer.resize(len);
@@ -573,7 +638,7 @@ class RingBufferFile : public BaseBuffer<T> {
   size_t size() override { return max_size; }
 
   /// Defines the capacity
-  bool resize(int size) {
+  bool resize(size_t size) {
     max_size = size;
     return true;
   }
@@ -653,13 +718,18 @@ class RingBufferFile : public BaseBuffer<T> {
 };
 
 /**
- * @brief A lock free N buffer. If count=2 we create a DoubleBuffer, if
+ * @brief A N buffer. If count=2 we create a DoubleBuffer, if
  * count=3 a TripleBuffer etc.
+ * @note This class is not thread safe: the internal queues are plain,
+ * non-atomic structures, so concurrent producer/consumer access requires
+ * external synchronization. For cross-core/cross-thread SPSC use, see
+ * SynchronizedNBufferRTOST or SynchronizedNBufferZephyr instead.
+ * @note The buffer count must be > 1!
  * @ingroup buffers
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-template <typename T = int16_t>
+template <typename T = uint8_t>
 class NBuffer : public BaseBuffer<T> {
  public:
   NBuffer(int size, int count) { resize(size, count); }
@@ -670,6 +740,19 @@ class NBuffer : public BaseBuffer<T> {
   bool read(T &result) override {
     if (available() == 0) return false;
     return actual_read_buffer->read(result);
+  }
+
+  /// Reads up to len entries, spanning across multiple blocks.
+  /// BaseBuffer::readArray stops at the first block boundary because it
+  /// calls available() once.  This override keeps reading across blocks.
+  int readArray(T data[], int len) override {
+    int count = 0;
+    while (count < len) {
+      if (available() == 0) break;
+      actual_read_buffer->read(data[count]);
+      count++;
+    }
+    return count;
   }
 
   /// peeks the actual entry from the buffer
@@ -741,6 +824,16 @@ class NBuffer : public BaseBuffer<T> {
     return actual_write_buffer->availableForWrite();
   }
 
+  /// Submit the partially-filled write buffer to the filled queue so
+  /// the reader can access it immediately.  Call after writeArray() when
+  /// the writer won't add more data to the current block for a while.
+  void flush() {
+    if (actual_write_buffer != nullptr && actual_write_buffer->available() > 0) {
+      addFilledBuffer(actual_write_buffer);
+      actual_write_buffer = nullptr;
+    }
+  }
+
   /// resets all buffers
   void reset() {
     TRACED();
@@ -750,6 +843,12 @@ class NBuffer : public BaseBuffer<T> {
       // get next read buffer
       actual_read_buffer = getNextFilledBuffer();
     }
+    // discard any partially-filled write buffer as well
+    if (actual_write_buffer != nullptr) {
+      actual_write_buffer->reset();
+      addAvailableBuffer(actual_write_buffer);
+      actual_write_buffer = nullptr;
+    }
   }
 
   /// provides the actual sample rate
@@ -758,7 +857,7 @@ class NBuffer : public BaseBuffer<T> {
     return run_time == 0 ? 0 : sample_count * 1000 / run_time;
   }
 
-  /// returns the address of the start of the phsical read buffer
+  /// returns the address of the start of the actual physical read buffer
   T *address() {
     return actual_read_buffer == nullptr ? nullptr
                                          : actual_read_buffer->address();
@@ -770,27 +869,86 @@ class NBuffer : public BaseBuffer<T> {
   /// Provides the number of entries that are available to write
   virtual int bufferCountEmpty() { return available_buffers.size(); }
 
-  virtual bool resize(int bytes) {
+  /// Resize the buffer to the next multiple of buffer size
+  virtual bool resize(size_t bytes) {
+    if (buffer_size == 0) {
+      LOGE("resize: buffer_size is 0");
+      return false;
+    }
     int count = bytes / buffer_size;
+    if (bytes % buffer_size > 0) count++;
     return resize(buffer_size, count);
   }
 
-  /// Resize the buffers by defining a new buffer size and buffer count
-  virtual bool resize(int size, int count) {
+  /// Resize the buffers by defining a new buffer size and buffer count.
+  /// If the block size changes, existing blocks can't be reused, so all
+  /// buffered data is discarded (with a warning). If only the count
+  /// changes, existing blocks and their data are kept: buffers are just
+  /// allocated or freed to reach the new count.
+  virtual bool resize(size_t size, int count) {
     if (buffer_size == size && buffer_count == count) return true;
-    freeMemory();
+
+    if (buffer_count == 1) {
+      LOGE("buffer count=1: not supported, use SingleBuffer or RingBuffer instead");
+      return false;
+    }
+
+    if (buffer_size != size) {
+      if (buffer_count > 0) {
+        LOGW("resize() changes buffer_size: discarding buffered data");
+      }
+      freeMemory();
+      filled_buffers.resize(count);
+      available_buffers.resize(count);
+      buffer_count = count;
+      buffer_size = size;
+      for (int j = 0; j < count; j++) {
+        BaseBuffer<T> *buffer = new SingleBuffer<T>(size);
+        LOGD("new buffer %p", buffer);
+        available_buffers.enqueue(buffer);
+      }
+      return true;
+    }
+
+    // same buffer_size: keep existing blocks/data, just grow or shrink
+    // the pool. QueueFromVector::resize() clears its contents, so we
+    // dequeue everything first and re-enqueue it after resizing.
+    Vector<BaseBuffer<T> *> avail;
+    Vector<BaseBuffer<T> *> filled;
+    for (BaseBuffer<T> *b = getNextAvailableBuffer(); b != nullptr;
+         b = getNextAvailableBuffer())
+      avail.push_back(b);
+    for (BaseBuffer<T> *b = getNextFilledBuffer(); b != nullptr;
+         b = getNextFilledBuffer())
+      filled.push_back(b);
+
+    if ((size_t)count > buffer_count) {
+      // grow: add new empty buffers to the available pool
+      for (size_t j = 0; j < (size_t)count - buffer_count; j++) {
+        avail.push_back(new SingleBuffer<T>(size));
+      }
+    } else {
+      // shrink: delete surplus buffers from the available (empty) pool
+      // first; if that's not enough, keep the buffers that still hold data
+      size_t to_remove = buffer_count - (size_t)count;
+      size_t removed = 0;
+      while (removed < to_remove && !avail.empty()) {
+        delete avail[avail.size() - 1];
+        avail.erase(avail.size() - 1);
+        removed++;
+      }
+      if (removed < to_remove) {
+        LOGW("resize() could not shrink to %d buffers: %d still hold data",
+             count, (int)(to_remove - removed));
+        count = (int)(buffer_count - removed);
+      }
+    }
+
     filled_buffers.resize(count);
     available_buffers.resize(count);
-    // filled_buffers.clear();
-    // available_buffers.clear();
-
+    for (int j = 0; j < avail.size(); j++) available_buffers.enqueue(avail[j]);
+    for (int j = 0; j < filled.size(); j++) filled_buffers.enqueue(filled[j]);
     buffer_count = count;
-    buffer_size = size;
-    for (int j = 0; j < count; j++) {
-      BaseBuffer<T> *buffer = new SingleBuffer<T>(size);
-      LOGD("new buffer %p", buffer);
-      available_buffers.enqueue(buffer);
-    }
     return true;
   }
 
@@ -799,7 +957,7 @@ class NBuffer : public BaseBuffer<T> {
 
  protected:
   int buffer_size = 1024;
-  uint16_t buffer_count = 0;
+  size_t buffer_count = 0;
   BaseBuffer<T> *actual_read_buffer = nullptr;
   BaseBuffer<T> *actual_write_buffer = nullptr;
   QueueFromVector<BaseBuffer<T> *> available_buffers{0, nullptr};
@@ -875,7 +1033,7 @@ class NBuffer : public BaseBuffer<T> {
  * @ingroup buffers
  * @tparam T: buffered data type
  */
-template <typename T = int16_t>
+template <typename T = uint8_t>
 class NBufferExt : public NBuffer<T> {
  public:
   NBufferExt(int size, int count) { resize(size, count); }
@@ -1083,7 +1241,7 @@ class NBufferFile : public BaseBuffer<T> {
  * @copyright GPLv3
  */
 
-template <typename T = int16_t>
+template <typename T = uint8_t>
 class BufferedArray {
  public:
   BufferedArray(Stream &input, int len) {

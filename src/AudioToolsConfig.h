@@ -6,15 +6,25 @@
  */
 #pragma once
 
-#define AUDIOTOOLS_VERSION "1.1.3"
+// Prevent warnings
+#pragma GCC diagnostic ignored "-Wunused-variable"
+#pragma GCC diagnostic ignored "-Wunused-function"
+#pragma GCC diagnostic ignored "-Wvla"
+#pragma GCC diagnostic ignored "-Wsign-compare"
+#pragma GCC diagnostic ignored "-Woverloaded-virtual"
+#pragma GCC diagnostic ignored "-Wdouble-promotion"
+
+#define AUDIOTOOLS_VERSION "1.2.4"
 #define AUDIOTOOLS_MAJOR_VERSION 1
-#define AUDIOTOOLS_MINOR_VERSION 1
+#define AUDIOTOOLS_MINOR_VERSION 2
+
+// Prevent compile errors for rewind function on some platforms
+#undef rewind
+// fix compile error for ESP32 C3
+#undef HZ
 
 // Setup for desktop builds
 #include "AudioTools/PlatformConfig/desktop.h"
-
-// Some top level functions: stop(), checkMemory()
-#include "AudioTools/CoreAudio/AudioRuntime.h"
 
 // If you don't want to use all the settings from here you can define your own local config settings in AudioConfigLocal.h
 #if __has_include("AudioConfigLocal.h") 
@@ -24,11 +34,6 @@
 // Automatically include all core audio functionality
 #ifndef AUDIO_INCLUDE_CORE
 #  define AUDIO_INCLUDE_CORE true
-#endif
-
-// Use fixed point multiplication instead float for VolumeStream for slightly better performance on platforms without float hardware. Tested on RP2040 at 16 bit per second (still too slow for 32bit)
-#ifndef PREFER_FIXEDPOINT
-#  define PREFER_FIXEDPOINT false 
 #endif
 
 // Add automatic using namespace audio_tools;
@@ -41,7 +46,7 @@
  * Logging Configuration in Arduino -> set USE_AUDIO_LOGGING to false if you want to deactivate Logging.
  * When using cmake you can set -DUSE_AUDIO_LOGGING=false
  * You can also change the LOG_LEVEL and LOG_STREAM here.
- * However it is recommended to do it in your Sketch e.g with AudioLogger::instance().begin(Serial,AudioLogger::Warning);
+ * However it is recommended to do it in your Sketch e.g with AudioToolsLogger().begin(Serial,AudioLogger::Warning);
  */
  
 #ifndef USE_AUDIO_LOGGING 
@@ -168,6 +173,16 @@
 #  define PWM_AUDIO_FREQUENCY 30000
 #endif
 
+// ICY Metadata 
+#ifndef AUDIOTOOLS_METADATA_ICY_ASCII_ONLY
+#define AUDIOTOOLS_METADATA_ICY_ASCII_ONLY true
+#endif
+
+#ifndef AUDIOTOOLS_METADATA_ICY_LIMIT
+#define AUDIOTOOLS_METADATA_ICY_LIMIT 400
+#endif
+
+
 // Activate Networking for All Processors
 // #define USE_ETHERNET
 // #define USE_AUDIO_SERVER
@@ -177,10 +192,14 @@
  * ------------------------------------------------------------------------- 
  * @brief Platform specific Settings
  */
+#ifdef ARDUINO
+#  include "Arduino.h"
+#endif
 
- #ifdef ESP32
- #  include "AudioTools/PlatformConfig/esp32.h"
- #endif
+
+#ifdef ESP32
+#  include "AudioTools/PlatformConfig/esp32.h"
+#endif
 
 //----- ESP8266 -----------
 #ifdef ESP8266
@@ -237,7 +256,10 @@
 #endif
 
 // ------ Zephyr -------
-#ifdef ARDUINO_ARCH_ZEPHYR
+#ifdef __ZEPHYR__
+#include <zephyr/kernel.h>
+#include <zephyr/sys/util.h>
+#  include "AudioTools/PlatformConfig/zephyr.h"
 #endif
 
 //------ VS1053 ----------
@@ -260,6 +282,11 @@
 //----------------
 // Fallback defined if nothing was defined in the platform
 
+// Use fixed point multiplication instead float for VolumeStream for slightly better performance on platforms without float hardware. Tested on RP2040 at 16 bit per second (still too slow for 32bit)
+#ifndef PREFER_FIXEDPOINT
+#  define PREFER_FIXEDPOINT false 
+#endif
+
 #ifndef ARDUINO
 #  define USE_STREAM_WRITE_OVERRIDE
 #endif
@@ -274,6 +301,9 @@
 
 #ifndef URL_CLIENT_TIMEOUT
 #  define URL_CLIENT_TIMEOUT 60000;
+#endif
+
+#ifndef URL_HANDSHAKE_TIMEOUT
 #  define URL_HANDSHAKE_TIMEOUT 120000
 #endif
 
@@ -302,19 +332,6 @@
 #  define ESP_IDF_VERSION_VAL(a, b , c) 0
 #endif
 
-#if USE_CHECK_MEMORY
-#  define CHECK_MEMORY() checkMemory(true)
-#else
-#  define CHECK_MEMORY() 
-#endif
-
-#pragma GCC diagnostic ignored "-Wunused-variable"
-#pragma GCC diagnostic ignored "-Wunused-function"
-#pragma GCC diagnostic ignored "-Wvla"
-#pragma GCC diagnostic ignored "-Wsign-compare"
-#pragma GCC diagnostic ignored "-Woverloaded-virtual"
-#pragma GCC diagnostic ignored "-Wdouble-promotion"
-
 #ifdef USE_NO_MEMACCESS
 #pragma GCC diagnostic ignored "-Wclass-memaccess"
 #endif
@@ -323,20 +340,12 @@
 #pragma GCC diagnostic ignored "-Wnarrowing"
 #endif
 
-#undef rewind
+#if USE_CHECK_MEMORY
+#  define CHECK_MEMORY() checkMemory(true)
+#else
+#  define CHECK_MEMORY() 
+#endif
 
-// select int24 implementation
-#include "AudioTools/CoreAudio/AudioBasic/Int24_3bytes_t.h"
-#include "AudioTools/CoreAudio/AudioBasic/Int24_4bytes_t.h"
-#include "AudioTools/CoreAudio/AudioBasic/FloatAudio.h"
-
-namespace audio_tools {
-    #ifdef USE_3BYTE_INT24
-        using int24_t = audio_tools::int24_3bytes_t;
-    #else
-        using int24_t = audio_tools::int24_4bytes_t;
-    #endif
-}
 
 /**
  * ------------------------------------------------------------------------- 
@@ -344,6 +353,7 @@ namespace audio_tools {
  * 
  */
 #if USE_AUDIOTOOLS_NS
+namespace audio_tools {}
 using namespace audio_tools;  
 #endif
 

@@ -9,7 +9,7 @@
 #include "AudioTools/AudioLibs/R2ROutput.h"
 
 AudioInfo info(8000, 1, 16);
-SineWaveGenerator<int16_t> sineWave;                       // subclass of SoundGenerator with max amplitude of 32000
+SineGenerator<int16_t> sineWave;                       // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound(sineWave);             // Stream generated from sine wave
 R2ROutput out; 
 StreamCopy copier(out, sound);                             // copies sound into i2s

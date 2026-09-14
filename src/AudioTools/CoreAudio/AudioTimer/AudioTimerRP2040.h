@@ -15,15 +15,15 @@ typedef void (*my_repeating_timer_callback_t)(void *obj);
 
 /**
  * @brief Repeating Timer functions for repeated execution: Plaease use the
- * typedef TimerAlarmRepeating
+ * typedef AudioTimer
  * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  *
  */
-class TimerAlarmRepeatingDriverRP2040 : public TimerAlarmRepeatingDriverBase {
+class AudioTimerDriverRP2040 : public AudioTimerDriverBase {
  public:
-  TimerAlarmRepeatingDriverRP2040() {
+  AudioTimerDriverRP2040() {
     alarm_pool_init_default();
     ap = alarm_pool_get_default();
   }
@@ -59,8 +59,8 @@ class TimerAlarmRepeatingDriverRP2040 : public TimerAlarmRepeatingDriverBase {
   }
 
   inline static bool staticCallback(repeating_timer *ptr) {
-    TimerAlarmRepeatingDriverRP2040 *self =
-        (TimerAlarmRepeatingDriverRP2040 *)ptr->user_data;
+    AudioTimerDriverRP2040 *self =
+        (AudioTimerDriverRP2040 *)ptr->user_data;
     self->instanceCallback(self->object);
     return true;
   }
@@ -74,8 +74,8 @@ class TimerAlarmRepeatingDriverRP2040 : public TimerAlarmRepeatingDriverBase {
   my_repeating_timer_callback_t instanceCallback = nullptr;
 };
 
-/// @brief use TimerAlarmRepeating! @ingroup timer_rp2040
-using TimerAlarmRepeatingDriver = TimerAlarmRepeatingDriverRP2040;
+/// @brief use AudioTimer! @ingroup timer_rp2040
+using AudioTimerDriver = AudioTimerDriverRP2040;
 
 }  // namespace audio_tools
 

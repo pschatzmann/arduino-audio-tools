@@ -14,6 +14,8 @@ namespace audio_tools {
  * with external memory. This sets the limit between the two, as well as generally
  * enabling allocation in external memory.
  * @ingroup memorymgmt
+ * 
+ * @note Supported only on ESP32 platforms with external PSRAM!
  */
 class MemoryManager {
 public:

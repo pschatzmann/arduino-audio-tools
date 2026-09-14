@@ -54,7 +54,7 @@ void play() {
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial,AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   if(!SD_MMC.begin("/sdcard", true)){    // 1-bit mode
     LOGE("Could not open SD_MMC");

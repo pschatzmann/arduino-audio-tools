@@ -15,7 +15,7 @@ namespace audio_tools {
 static AudioInfoSupport *audioChangeMAD=nullptr;
 
 /**
- * @brief MP3 Decoder using https://github.com/pschatzmann/arduino-libmad
+ * @brief MP3 Decoder using https://github.com/pschatzmann/codec-mad
  * @ingroup codecs
  * @ingroup decoder
  * @author Phil Schatzmann
@@ -43,6 +43,8 @@ class MP3DecoderMAD : public AudioDecoder  {
             TRACED();
             delete mad;
         }
+
+        const char *mime() override { return "audio/mpeg"; }
 
         void setOutput(Print &out) override {
             TRACED();

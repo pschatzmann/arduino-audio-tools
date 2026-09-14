@@ -70,8 +70,18 @@ class ResampleStream : public ReformatBaseStream {
     setStepSize(cfg.step_size);
     is_first = true;
     idx = 0;
+#if PREFER_FIXEDPOINT
+    idx_fixed = 0;
+    // Q16.16 step_size_fixed is an int32_t: a ratio at or beyond +/-32768
+    // overflows it. Real resampling ratios are nowhere near this (e.g.
+    // 192000/8000 = 24), so this only catches misconfiguration.
+    if (cfg.step_size >= 32768.0f || cfg.step_size <= -32768.0f) {
+      LOGE("step_size %f is out of range for fixed point (+/-32768) - falling back is not implemented, output will wrap", cfg.step_size);
+    }
+#endif
     // step_dirty = true;
     bytes_per_frame = info.bits_per_sample / 8 * info.channels;
+    carry_len = 0;
 
     setupReader();
 
@@ -144,6 +154,9 @@ class ResampleStream : public ReformatBaseStream {
   void setStepSize(float step) {
     LOGI("setStepSize: %f", step);
     step_size = step;
+#if PREFER_FIXEDPOINT
+    step_size_fixed = (int32_t) lround(step * 65536.0f);
+#endif
   }
 
   void setTargetSampleRate(int rate) { to_sample_rate = rate; }
@@ -157,23 +170,72 @@ class ResampleStream : public ReformatBaseStream {
   /// Returns the actual step size
   float getStepSize() { return step_size; }
 
-  // int availableForWrite() override { return p_print->availableForWrite(); }
+  // int availableForWrite() override { return p_out->availableForWrite(); }
 
   size_t write(const uint8_t *data, size_t len) override {
     LOGD("ResampleStream::write: %d", (int)len);
     //addNotifyOnFirstWrite();
-    size_t written = 0;
-    switch (info.bits_per_sample) {
-      case 16:
-        return write<int16_t>(p_print, data, len, written);
-      case 24:
-        return write<int24_t>(p_print, data, len, written);
-      case 32:
-        return write<int32_t>(p_print, data, len, written);
-      default:
-        TRACEE();
+    int frame_bytes = info.bits_per_sample / 8 * info.channels;
+    if (frame_bytes <= 0) {
+      TRACEE();
+      return 0;
     }
-    return 0;
+
+    const uint8_t *proc_data = data;
+    size_t proc_len = len;
+    // Combine any partial-frame remainder carried over from a previous
+    // call (e.g. the source delivered a byte count that wasn't a whole
+    // number of frames - a short/malformed USB packet, for instance) with
+    // the new data, instead of processing len on its own. write<T>()/
+    // writeFixed() below only ever consume whole frames; without this,
+    // any remainder they leave behind would be silently dropped by the
+    // caller (see TransformationReader::fillResultQueue(), which advances
+    // past exactly `len` bytes on the source regardless of how much we
+    // report back) - permanently shifting every following sample by the
+    // gap and turning a single hiccup into session-long scrambled audio.
+    if (carry_len > 0) {
+      combine_buffer.resize(carry_len + len);
+      memcpy(combine_buffer.data(), carry.data(), carry_len);
+      memcpy(combine_buffer.data() + carry_len, data, len);
+      proc_data = combine_buffer.data();
+      proc_len = combine_buffer.size();
+    }
+
+    size_t whole = (proc_len / (size_t)frame_bytes) * (size_t)frame_bytes;
+    size_t leftover = proc_len - whole;
+
+    if (whole > 0) {
+      size_t written = 0;
+      switch (info.bits_per_sample) {
+        case 16:
+#if PREFER_FIXEDPOINT
+          writeFixed(p_out, proc_data, whole, written);
+#else
+          write<int16_t>(p_out, proc_data, whole, written);
+#endif
+          break;
+        case 24:
+          write<int24_t>(p_out, proc_data, whole, written);
+          break;
+        case 32:
+          write<int32_t>(p_out, proc_data, whole, written);
+          break;
+        default:
+          TRACEE();
+          return 0;
+      }
+    }
+
+    carry_len = leftover;
+    if (leftover > 0) {
+      carry.resize(leftover);
+      memcpy(carry.data(), proc_data + whole, leftover);
+    }
+
+    // The remainder is safely carried forward (to be completed by the
+    // next call) rather than dropped, so all of the caller's new bytes
+    // count as accounted for.
+    return len;
   }
 
   /// Activates buffering to avoid small incremental writes
@@ -203,6 +265,18 @@ class ResampleStream : public ReformatBaseStream {
   float step_size = 1.0;
   int to_sample_rate = 0;
   int bytes_per_frame = 0;
+  // Partial-frame remainder left over from a write() whose byte count
+  // wasn't a whole number of frames - see write() for why this must be
+  // carried forward rather than dropped.
+  Vector<uint8_t> carry{0};
+  size_t carry_len = 0;
+  Vector<uint8_t> combine_buffer{0};  // scratch space for carry+new data
+#if PREFER_FIXEDPOINT
+  // Q16.16 fixed-point read position and step size, used for the 16-bit fast
+  // path: avoids soft-float add/div/round() on FPU-less MCUs (e.g. RP2040).
+  int32_t idx_fixed = 0;
+  int32_t step_size_fixed = 1 << 16;
+#endif
   // optional buffering
   bool is_buffer_active = USE_RESAMPLE_BUFFER;
   SingleBuffer<uint8_t> out_buffer{0};
@@ -289,6 +363,96 @@ class ResampleStream : public ReformatBaseStream {
     return frames * info.channels * sizeof(T);
   }
 
+#if PREFER_FIXEDPOINT
+  /// Fixed-point (Q16.16) equivalent of write<int16_t>(): avoids float
+  /// add/div/round() in the per-sample loop on FPU-less MCUs (e.g. RP2040).
+  size_t writeFixed(Print *p_out, const uint8_t *buffer, size_t bytes,
+                     size_t &written) {
+    this->p_out = p_out;
+    if (step_size == 1.0f) {
+      written = p_out->write(buffer, bytes);
+      return written;
+    }
+    // prevent npe
+    if (info.channels == 0) {
+      LOGE("channels is 0");
+      return 0;
+    }
+    int16_t *data = (int16_t *)buffer;
+    int samples = bytes / sizeof(int16_t);
+    size_t frames = samples / info.channels;
+    written = 0;
+
+    // avoid noise if audio does not start with 0
+    if (is_first) {
+      is_first = false;
+      setupLastSamples<int16_t>(data, 0);
+    }
+
+    int16_t frame[info.channels];
+    size_t frame_size = sizeof(frame);
+
+    int32_t frames_fixed = ((int32_t)frames - 1) << 16;
+    // process all samples
+    while (idx_fixed < frames_fixed) {
+      for (int ch = 0; ch < info.channels; ch++) {
+        frame[ch] = getValueFixed(data, idx_fixed, ch);
+      }
+
+      if (is_buffer_active) {
+        // if buffer is full we send it to output
+        if (out_buffer.availableForWrite() <= frame_size) {
+          flush();
+        }
+
+        // we use a buffer to minimize the number of output calls
+        int tmp_written =
+            out_buffer.writeArray((const uint8_t *)&frame, frame_size);
+        written += tmp_written;
+        if (frame_size != tmp_written) {
+          TRACEE();
+        }
+      } else {
+        int tmp = p_out->write((const uint8_t *)&frame, frame_size);
+        written += tmp;
+        if (tmp != frame_size) {
+          LOGE("Failed to write %d bytes: %d", (int)frame_size, tmp);
+        }
+      }
+
+      idx_fixed += step_size_fixed;
+    }
+
+    flush();
+
+    // save last samples to be made available at index position -1;
+    setupLastSamples<int16_t>(data, frames - 1);
+    idx_fixed -= (int32_t)frames << 16;
+
+    // returns requested bytes to avoid rewriting of processed bytes
+    return frames * info.channels * sizeof(int16_t);
+  }
+
+  /// Fixed-point (Q16.16 position / Q0.8 interpolation weight) equivalent of
+  /// getValue<int16_t>().
+  int16_t getValueFixed(int16_t *data, int32_t frame_idx_fixed, int channel) {
+    // arithmetic shift floors toward -infinity, which correctly handles the
+    // [-1, 0) range without the truncate-then-patch needed for float
+    int32_t frame_idx0 = frame_idx_fixed >> 16;
+    int32_t frame_idx1 = frame_idx0 + 1;
+    int16_t val0 = lookup<int16_t>(data, frame_idx0, channel);
+    int16_t val1 = lookup<int16_t>(data, frame_idx1, channel);
+
+    // top 8 bits of the 16-bit fraction: keeps diff * weight within 32 bits
+    // (a single MULS on Cortex-M0+) instead of needing a 64-bit intermediate
+    int32_t weight = (frame_idx_fixed >> 8) & 0xFF;
+    int32_t diff = (int32_t)val1 - (int32_t)val0;
+    // round-half-up instead of floor, to avoid a systematic bias
+    int32_t result = (int32_t)val0 + (((diff * weight) + (1 << 7)) >> 8);
+    return (int16_t)result;
+  }
+#endif
+
   /// get the interpolated value for indicated (float) index value
   template <typename T>
   T getValue(T *data, float frame_idx, int channel) {
@@ -300,10 +464,14 @@ class ResampleStream : public ReformatBaseStream {
     T val0 = lookup<T>(data, frame_idx0, channel);
     T val1 = lookup<T>(data, frame_idx1, channel);
 
-    float result = mapT<float>(frame_idx, frame_idx0, frame_idx1, val0, val1);
+    // direct 2-point lerp: frame_idx1 - frame_idx0 is always 1, so the
+    // generic mapT() divide by (in_max - in_min) is a wasted division here;
+    // and a manual +/-0.5 round avoids a libm round() call.
+    float frac = frame_idx - frame_idx0;
+    float result = val0 + frac * (val1 - val0);
     LOGD("getValue idx: %d:%d / val: %d:%d / %f -> %f", frame_idx0, frame_idx1,
          (int)val0, (int)val1, frame_idx, result)
-    return (float)round(result);
+    return (T)(result + (result >= 0 ? 0.5f : -0.5f));
   }
 
   /// lookup value for indicated frame & channel: index starts with -1;

@@ -1,7 +1,7 @@
 /**
  * @file CodecCodec2.h
  * @author Phil Schatzmann
- * @brief Codec2 Codec using  https://github.com/pschatzmann/arduino-codec2
+ * @brief Codec2 Codec using  https://github.com/pschatzmann/codec-codec2
  * The codec was developed by David Grant Rowe, with support and cooperation of
  * other researchers (e.g., Jean-Marc Valin from Opus). Codec 2 consists of
  * 3200, 2400, 1600, 1400, 1300, 1200, 700 and 450 bit/s codec modes. It
@@ -66,6 +66,9 @@ class Codec2Decoder : public AudioDecoder {
     info.bits_per_sample = 16;
     setBitsPerSecond(bps);
   }
+
+  virtual const char *mime() override { return "audio/codec2"; }
+
   /// sets bits per second: 3200, 2400, 1600, 1400, 1300, 1200, 700 and 450
   /// bit/s
   virtual void setBitsPerSecond(int bps) { bits_per_second = bps; }

@@ -26,7 +26,7 @@ public:
     return sample;
   };
 protected:
-  SineWaveGenerator<int16_t> gen_sine;
+  SineGenerator<int16_t> gen_sine;
   WhiteNoiseGenerator<int16_t> gen_noise;
   size_t count = 0;
 } testSound;

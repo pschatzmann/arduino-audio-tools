@@ -16,13 +16,13 @@ SynthesizerKey keys[] = {{kit.getKey(1), N_C3},{kit.getKey(2), N_D3},{kit.getKey
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial,AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   // Setup output
   auto cfg = kit.defaultConfig(TX_MODE);
   cfg.sd_active = false;
   kit.begin(cfg);
-  kit.setVolume(80);
+  kit.setVolume(0.8f);
 
   // define synthesizer keys for AudioKit
   synthesizer.setKeys(kit.audioActions(), keys, AudioActions::ActiveLow);

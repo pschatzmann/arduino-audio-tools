@@ -10,7 +10,7 @@
  * 
  */
 #include "AudioTools.h" // https://github.com/pschatzmann/arduino-audio-tools
-#include "AudioTools/AudioCodecs/CodecMP3Helix.h" // https://github.com/pschatzmann/arduino-libhelix
+#include "AudioTools/AudioCodecs/CodecMP3Helix.h" // https://github.com/pschatzmann/codec-helix
 #include "AudioTools/AudioLibs/AudioBoardStream.h" // https://github.com/pschatzmann/arduino-audio-driver
 #include "AudioTools/Communication/RTSPClient555.h" // install https://github.com/pschatzmann/arduino-live555 
 

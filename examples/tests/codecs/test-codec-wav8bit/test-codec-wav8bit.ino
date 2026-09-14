@@ -5,7 +5,7 @@
 // 8bit wav must be unsigned, so we convert from signed 16bit to unsigned 8bit
 
 AudioInfo info(8000, 1, 16);
-SineWaveGenerator<int16_t> sineWave(32000);
+SineGenerator<int16_t> sineWave(32000);
 GeneratedSoundStream<int16_t> sound(sineWave);
 HexDumpOutput out(Serial);
 WAVEncoder wav;

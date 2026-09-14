@@ -21,7 +21,7 @@ static PWMDriverAVR *accessAudioPWM = nullptr;
  * @copyright GPLv3
  */
 
-class PWMDriverAVR : public DriverPWMBase {
+class PWMDriverAVR : public PWMDriverBase {
   friend void defaultPWMAudioOutputCallback();
 
  public:
@@ -140,7 +140,7 @@ void defaultPWMAudioOutputCallback() {
 /// timer callback: write the next frame to the pins
 ISR(TIMER1_COMPA_vect) {
   defaultPWMAudioOutputCallback();
-  TimerAlarmRepeatingDriverAVR::tickerCallback();
+  AudioTimerDriverAVR::tickerCallback();
 }
 
 }  // namespace audio_tools

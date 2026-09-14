@@ -15,7 +15,7 @@ namespace audio_tools {
 
 /**
  * @brief We access the files directy with an index. The index is determined by
- * a recurseve tree walk thru the directory. Unfortunatly the SDTFAT library has
+ * a recurseve tree walk thru the directory. Unfortunately the SDTFAT library has
  * it's own API which is incompatible with the SD API
  */
 template <class SDT, class FileT>

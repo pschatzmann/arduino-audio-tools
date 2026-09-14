@@ -4,6 +4,7 @@
 
 #include "AudioLogger.h"
 #include "AudioParameters.h"
+#include "AudioTools/CoreAudio/AudioBasic/q1_14_t.h"
 #include "AudioTools/CoreAudio/AudioOutput.h"
 #include "AudioTools/CoreAudio/AudioTypes.h"
 #include "PitchShift.h"
@@ -81,14 +82,34 @@ class Boost : public AudioEffect, public VolumeSupport {
 
   Boost(const Boost& copy) = default;
 
+  /// define the actual volume in the range of 0.0f to 1.0f (values > 1.0f
+  /// boost the signal, capped to q1_14_t's ~1.99994 range when
+  /// PREFER_FIXEDPOINT is active)
+  bool setVolume(float volume) override {
+    bool result = VolumeSupport::setVolume(volume);
+#if PREFER_FIXEDPOINT
+    factor_q = q1_14_t(volume);
+#endif
+    return result;
+  }
+
   effect_t process(effect_t input) {
     if (!active()) return input;
+#if PREFER_FIXEDPOINT
+    return factor_q.scale(input);
+#else
     int32_t result = volume() * input;
     // clip to int16_t
     return clip(result);
+#endif
   }
 
   Boost* clone() { return new Boost(*this); }
+
+ protected:
+#if PREFER_FIXEDPOINT
+  q1_14_t factor_q{1.0f};
+#endif
 };
 
 /**
@@ -141,13 +162,19 @@ class Fuzz : public AudioEffect {
  public:
   /// Fuzz Constructor: use e.g. effectValue=6.5; maxOut = 300
   Fuzz(float fuzzEffectValue = 6.5, uint16_t maxOut = 300) {
-    p_effect_value = fuzzEffectValue;
+    setFuzzEffectValue(fuzzEffectValue);
     max_out = maxOut;
   }
 
   Fuzz(const Fuzz& copy) = default;
 
-  void setFuzzEffectValue(float v) { p_effect_value = v; }
+  void setFuzzEffectValue(float v) {
+    p_effect_value = v;
+    // Q8.8: p_effect_value can exceed q1_14_t's +-2.0 range (default 6.5),
+    // so a plain 8-fractional-bit integer scale is used instead -- still
+    // integer-only in process(), just with a wider (+-128) integer range.
+    v_fixed = (int32_t)(v * 256.0f + (v >= 0 ? 0.5f : -0.5f));
+  }
 
   float fuzzEffectValue() { return p_effect_value; }
 
@@ -157,15 +184,22 @@ class Fuzz : public AudioEffect {
 
   effect_t process(effect_t input) {
     if (!active()) return input;
+#if PREFER_FIXEDPOINT
+    int32_t result = clip((v_fixed * input) >> 8);
+    int32_t result2 = (result * v_fixed) >> 8;
+    return map(result2, -32768, +32767, -max_out, max_out);
+#else
     float v = p_effect_value;
     int32_t result = clip(v * input);
     return map(result * v, -32768, +32767, -max_out, max_out);
+#endif
   }
 
   Fuzz* clone() { return new Fuzz(*this); }
 
  protected:
   float p_effect_value;
+  int32_t v_fixed;  // Q8.8 fixed-point mirror of p_effect_value
   uint16_t max_out;
 };
 
@@ -187,6 +221,7 @@ class Tremolo : public AudioEffect {
     this->p_percent = depthPercent;
     int32_t rate_count = sampleRate * duration_ms / 1000;
     rate_count_half = rate_count / 2;
+    recalculate();
   }
 
   Tremolo(const Tremolo& copy) = default;
@@ -195,23 +230,36 @@ class Tremolo : public AudioEffect {
     this->duration_ms = ms;
     int32_t rate_count = sampleRate * ms / 1000;
     rate_count_half = rate_count / 2;
+    // tremolo_factor (float path) depends on rate_count_half too
+    recalculate();
   }
 
   int16_t duration() { return duration_ms; }
 
-  void setDepth(uint8_t percent) { p_percent = percent; }
+  void setDepth(uint8_t percent) {
+    p_percent = percent;
+    recalculate();
+  }
 
   uint8_t depth() { return p_percent; }
 
   effect_t process(effect_t input) {
     if (!active()) return input;
+    // guards the division below; also matches the float path's original
+    // (silent, non-crashing) behavior for this misconfiguration
+    if (rate_count_half <= 0) return input;
 
-    // limit value to max 100% and calculate factors
-    float tremolo_depth = p_percent > 100 ? 1.0 : 0.01 * p_percent;
-    float signal_depth = (100.0 - p_percent) / 100.0;
-
-    float tremolo_factor = tremolo_depth / rate_count_half;
-    int32_t out = (signal_depth * input) + (tremolo_factor * count * input);
+#if PREFER_FIXEDPOINT
+    // triangle-wave position weight (count/rate_count_half) applied to the
+    // depth-scaled sample, all integer -- no per-sample float division
+    int32_t out =
+        signal_depth_q.scale(input) +
+        (int32_t)(((int64_t)tremolo_depth_q.scale(input) * count) /
+                   rate_count_half);
+#else
+    int32_t out = (int32_t)(signal_depth * input) +
+                   (int32_t)(tremolo_factor * count * input);
+#endif
 
     // saw tooth shaped counter
     count += inc;
@@ -233,6 +281,29 @@ class Tremolo : public AudioEffect {
   int16_t inc = 1;
   int32_t rate_count_half;  // number of samples for on raise and fall
   uint8_t p_percent;
+#if PREFER_FIXEDPOINT
+  q1_14_t signal_depth_q{1.0f};
+  q1_14_t tremolo_depth_q{0.0f};
+#else
+  float signal_depth = 1.0f;
+  float tremolo_depth = 0.0f;
+  float tremolo_factor = 0.0f;
+#endif
+
+  // p_percent only changes on setDepth(), so the depth split is computed
+  // once here instead of every process() call
+  void recalculate() {
+    float td = p_percent > 100 ? 1.0f : 0.01f * p_percent;
+    float sd = (100.0f - p_percent) / 100.0f;
+#if PREFER_FIXEDPOINT
+    tremolo_depth_q = q1_14_t(td);
+    signal_depth_q = q1_14_t(sd);
+#else
+    tremolo_depth = td;
+    signal_depth = sd;
+    tremolo_factor = rate_count_half > 0 ? tremolo_depth / rate_count_half : 0.0f;
+#endif
+  }
 };
 
 /**
@@ -272,6 +343,10 @@ class Delay : public AudioEffect {
     depth = value;
     if (depth > 1.0f) depth = 1.0f;
     if (depth < 0.0f) depth = 0.0f;
+#if PREFER_FIXEDPOINT
+    depth_q = q1_14_t(depth);
+    inv_depth_q = q1_14_t(1.0f) - depth_q;
+#endif
   }
 
   float getDepth() { return depth; }
@@ -280,6 +355,9 @@ class Delay : public AudioEffect {
     feedback = feed;
     if (feedback > 1.0f) feedback = 1.0f;
     if (feedback < 0.0f) feedback = 0.0f;
+#if PREFER_FIXEDPOINT
+    feedback_q = q1_14_t(feedback);
+#endif
   }
 
   float getFeedback() { return feedback; }
@@ -295,8 +373,17 @@ class Delay : public AudioEffect {
     if (!active()) return input;
 
     // Read last audio sample in each delay line
-    int32_t delayed_value = buffer[delay_line_index];
+    effect_t delayed_value = buffer[delay_line_index];
 
+#if PREFER_FIXEDPOINT
+    // Mix the above with current audio and write the results back to output
+    int32_t out = inv_depth_q.scale(input) + depth_q.scale(delayed_value);
+
+    // Update each delay line
+    // write = input + feedback * delayed_value (typical delay feedback);
+    // scale() already rounds to nearest -- integer-only, no FPU needed
+    int32_t write_int = (int32_t)input + feedback_q.scale(delayed_value);
+#else
     // Mix the above with current audio and write the results back to output
     int32_t out = ((1.0f - depth) * input) + (depth * delayed_value);
 
@@ -305,6 +392,7 @@ class Delay : public AudioEffect {
     float write_val = (float)input + feedback * (float)delayed_value;
     // round to nearest integer to avoid truncation bias
     int32_t write_int = (int32_t)roundf(write_val);
+#endif
     // clip to allowed range and store
     buffer[delay_line_index] = clip(write_int);
 
@@ -322,6 +410,9 @@ class Delay : public AudioEffect {
   float feedback = 0.0f, duration = 0.0f, sampleRate = 0.0f, depth = 0.0f;
   size_t delay_len_samples = 0;
   size_t delay_line_index = 0;
+#if PREFER_FIXEDPOINT
+  q1_14_t feedback_q{0.0f}, depth_q{0.0f}, inv_depth_q{1.0f};
+#endif
 
   void updateBufferSize() {
     if (sampleRate > 0 && duration > 0) {
@@ -355,13 +446,13 @@ class ADSRGain : public AudioEffect {
  public:
   ADSRGain(float attack = 0.001, float decay = 0.001, float sustainLevel = 0.5,
            float release = 0.005, float boostFactor = 1.0) {
-    this->factor = boostFactor;
+    setFactor(boostFactor);
     adsr = new ADSR(attack, decay, sustainLevel, release);
   }
 
   ADSRGain(const ADSRGain& ref) {
     adsr = new ADSR(*(ref.adsr));
-    factor = ref.factor;
+    setFactor(ref.factor);
     copyParent((AudioEffect*)&ref);
   };
 
@@ -389,8 +480,13 @@ class ADSRGain : public AudioEffect {
 
   effect_t process(effect_t input) {
     if (!active()) return input;
+#if PREFER_FIXEDPOINT
+    q1_14_t gain = factor_q * adsr->tickFixed();
+    return gain.scale(input);
+#else
     effect_t result = factor * adsr->tick() * input;
     return result;
+#endif
   }
 
   bool isActive() { return adsr->isActive(); }
@@ -400,6 +496,16 @@ class ADSRGain : public AudioEffect {
  protected:
   ADSR* adsr;
   float factor;
+#if PREFER_FIXEDPOINT
+  q1_14_t factor_q{1.0f};
+#endif
+
+  void setFactor(float f) {
+    factor = f;
+#if PREFER_FIXEDPOINT
+    factor_q = q1_14_t(f);
+#endif
+  }
 };
 
 /**
@@ -475,9 +581,7 @@ class Compressor : public AudioEffect {
     release_count = sample_rate * releaseMs / 1000;
     hold_count = sample_rate * holdMs / 1000;
 
-    // threshold -20dB below limit -> 0.1 * 2^31
-    threshold =
-        0.01f * thresholdPercent * NumberConverter::maxValueT<effect_t>();
+    setThresholdPercent(thresholdPercent);
     // compression ratio: 6:1 -> -6dB = 0.5
     gainreduce = compressionRatio;
     // initial gain = 1.0 -> no compression
@@ -505,8 +609,10 @@ class Compressor : public AudioEffect {
 
   /// Defines the threshod in %
   void setThresholdPercent(uint8_t thresholdPercent) {
-    threshold =
-        0.01f * thresholdPercent * NumberConverter::maxValueT<effect_t>();
+    // exact integer fraction of full-scale -- no float needed regardless of
+    // platform (threshold -20dB below limit -> 10% of 2^15)
+    threshold = (int32_t)NumberConverter::maxValueT<effect_t>() *
+                thresholdPercent / 100;
   }
 
   /// Defines the compression ratio from 0 to 1
@@ -530,16 +636,38 @@ class Compressor : public AudioEffect {
   enum CompStates state = S_NoOperation;
 
   int32_t attack_count, release_count, hold_count, timeout;
-  float gainreduce, gain_step_attack, gain_step_release, gain, threshold;
+  int32_t threshold;  // exact fraction of full-scale -- pure integer
   uint32_t sample_rate;
+#if PREFER_FIXEDPOINT
+  // Q1.14's ~6.1e-5 resolution on gain_step_attack/release (added every
+  // sample for attack_count/release_count samples) accumulates a bounded
+  // gain error of a few percent under fast/extreme attack-release cycling
+  // -- acceptable for this musical effect, and far cheaper than a per-sample
+  // float multiply-add chain on an FPU-less MCU.
+  q1_14_t gainreduce{0.5f}, gain_step_attack{0.0f}, gain_step_release{0.0f},
+      gain{1.0f};
+#else
+  float gainreduce, gain_step_attack, gain_step_release, gain;
+#endif
 
   void recalculate() {
-    gain_step_attack = (1.0f - gainreduce) / attack_count;
-    gain_step_release = (1.0f - gainreduce) / release_count;
+    // done once per parameter change, not per sample -- float here is fine
+    // even under PREFER_FIXEDPOINT (see VolumeStream::setVolume() for the
+    // same pattern)
+    float step_a = (1.0f - (float)gainreduce) / attack_count;
+    float step_r = (1.0f - (float)gainreduce) / release_count;
+#if PREFER_FIXEDPOINT
+    gain_step_attack = q1_14_t(step_a);
+    gain_step_release = q1_14_t(step_r);
+#else
+    gain_step_attack = step_a;
+    gain_step_release = step_r;
+#endif
   }
 
-  float compress(float inSampleF) {
-    if (fabs(inSampleF) > threshold) {
+  effect_t compress(effect_t inSample) {
+    int32_t mag = inSample < 0 ? -(int32_t)inSample : (int32_t)inSample;
+    if (mag > threshold) {
       if (gain >= gainreduce) {
         if (state == S_NoOperation) {
           state = S_Attack;
@@ -552,7 +680,7 @@ class Compressor : public AudioEffect {
       if (state == S_GainReduction) timeout = hold_count;
     }
 
-    if (fabs(inSampleF) < threshold && gain <= 1.0f) {
+    if (mag < threshold && gain <= 1.0f) {
       if (timeout == 0 && state == S_GainReduction) {
         state = S_Release;
         timeout = release_count;
@@ -596,8 +724,11 @@ class Compressor : public AudioEffect {
         break;
     }
 
-    float outSampleF = gain * inSampleF;
-    return outSampleF;
+#if PREFER_FIXEDPOINT
+    return gain.scale(inSample);
+#else
+    return (effect_t)(gain * inSample);
+#endif
   }
 };
 

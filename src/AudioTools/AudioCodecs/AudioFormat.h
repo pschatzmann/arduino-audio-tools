@@ -9,6 +9,8 @@
  * 
  */
 #pragma once
+#include <cstring>
+#include "AudioTools/CoreAudio/AudioTypes.h"
 
 namespace audio_tools {
 
@@ -31,7 +33,7 @@ enum class AudioFormat : uint16_t {
   // WMAVOICE10 = 0x000B, /* Microsoft Corporation */
   OKI_ADPCM = 0x0010, /* OKI */
   DVI_ADPCM = 0x0011, /* Intel Corporation */
-  //IMA_ADPCM(DVI_ADPCM), /*  Intel Corporation */
+  IMA_ADPCM = DVI_ADPCM, /* alias: same WAVE format tag as DVI_ADPCM */
   MEDIASPACE_ADPCM = 0x0012, /* Videologic */
   SIERRA_ADPCM = 0x0013, /* Sierra Semiconductor Corp */
   G723_ADPCM = 0x0014, /* Antex Electronics Corporation */
@@ -110,7 +112,7 @@ enum class AudioFormat : uint16_t {
   // CONVEDIA_G729 = 0x008C, /* Convedia Corp. */
   // CONGRUENCY = 0x008D, /* Congruency Inc. */
   // SBC24 = 0x0091, /* Siemens Business Communications Sys */
-  // DOLBY_AC3_SPDIF = 0x0092, /* Sonic Foundry */
+  AC3 = 0x0092, /* Dolby AC-3 (Dolby Digital), aka DOLBY_AC3_SPDIF */
   // MEDIASONIC_G723 = 0x0093, /* MediaSonic */
   // PROSODY_8KBPS = 0x0094, /* Aculab plc */
   ZYXEL_ADPCM = 0x0097, /* ZyXEL Communications, Inc. */
@@ -244,6 +246,9 @@ enum class AudioFormat : uint16_t {
   // F3COM_NBX = 0x7000, /* 3COM Corp. */
   // OPUS = 0x704F, /* Opus */
   // FAAD_AAC = 0x706D,
+  MP3 = 0x0055,  /* ISO/MPEG Layer3 Format Tag (alias of MPEGLAYER3) */
+  ALAC = 0x6C61, /* Apple Lossless */
+  AAC = 0xA106,  /* ISO/MPEG-4 AAC (alias of MPEG4_AAC) */
   // AMR_NB = 0x7361, /* AMR Narrowband */
   // AMR_WB = 0x7362, /* AMR Wideband */
   // AMR_WP = 0x7363, /* AMR Wideband Plus */
@@ -287,6 +292,116 @@ enum class AudioFormat : uint16_t {
   // FRACE_TELECOM_G729 = 0xA123, /* France Telecom */
   // CODIAN = 0xA124, /* CODIAN */
   // FLAC = 0xF1AC, /* flac.sourceforge.net */
+};
+
+/// @brief Provides the mime type for a AudioFormat wav code, or nullptr if
+/// not known/mapped.
+/// @ingroup video
+inline const char* toMime(AudioFormat format) {
+  switch (format) {
+    // PCM and all ADPCM variants are handled via the WAV decoder
+    case AudioFormat::PCM:
+    case AudioFormat::ADPCM:
+    case AudioFormat::OKI_ADPCM:
+    case AudioFormat::DVI_ADPCM:  // == IMA_ADPCM (same wav code, alias)
+    case AudioFormat::MEDIASPACE_ADPCM:
+    case AudioFormat::SIERRA_ADPCM:
+    case AudioFormat::G723_ADPCM:
+    case AudioFormat::DIALOGIC_OKI_ADPCM:
+    case AudioFormat::MEDIAVISION_ADPCM:
+    case AudioFormat::YAMAHA_ADPCM:
+    case AudioFormat::ANTEX_ADPCME:
+    case AudioFormat::DIGIADPCM:
+    case AudioFormat::NMS_VBXADPCM:
+    case AudioFormat::CS_IMAADPCM:
+    case AudioFormat::ROCKWELL_ADPCM:
+    case AudioFormat::G721_ADPCM:
+    case AudioFormat::G726_ADPCM:
+    case AudioFormat::G722_ADPCM:
+    case AudioFormat::INFOCOM_ITS_G721_ADPCM:
+    case AudioFormat::ZYXEL_ADPCM:
+    case AudioFormat::RHETOREX_ADPCM:
+    case AudioFormat::SANYO_LD_ADPCM:
+    case AudioFormat::G726ADPCM:
+    case AudioFormat::UNISYS_NAP_ADPCM:
+      return "audio/wav";
+    case AudioFormat::IEEE_FLOAT:
+      return "audio/l32f";
+    case AudioFormat::ALAW:
+      return "audio/alaw";
+    case AudioFormat::MULAW:
+      return "audio/mulaw";
+    case AudioFormat::MP3:
+      return "audio/mpeg";
+    case AudioFormat::AAC:
+      return "audio/aac";
+    case AudioFormat::ALAC:
+      return "audio/alac";
+    case AudioFormat::AC3:
+      return "audio/ac3";
+    default:
+      return nullptr;
+  }
+}
+
+/// @brief True if the wav code is handled via the WAV decoder (i.e.
+/// toMime() maps it to "audio/wav": PCM and all ADPCM variants).
+/// @ingroup video
+inline bool isWavFormat(AudioFormat format) {
+  const char* mime = toMime(format);
+  return mime != nullptr && strcmp(mime, "audio/wav") == 0;
+}
+
+/// @brief Best-effort inverse of toMime(): maps a mime type (e.g. an
+/// AudioEncoder's mime()) back to the AudioFormat wav code it came from -
+/// AudioFormat::UNKNOWN if `mime` is null or doesn't match any of
+/// toMime()'s mappings (most codecs - Opus, FLAC, GSM, ... - have no wav
+/// code at all, so this can never be exhaustive; "audio/wav" itself maps
+/// back to PCM specifically, even though toMime() also uses it for every
+/// ADPCM variant, since PCM is the common case).
+/// @ingroup video
+inline AudioFormat fromMime(const char* mime) {
+  if (mime == nullptr) return AudioFormat::UNKNOWN;
+  if (strcmp(mime, "audio/wav") == 0) return AudioFormat::PCM;
+  if (strcmp(mime, "audio/l32f") == 0) return AudioFormat::IEEE_FLOAT;
+  if (strcmp(mime, "audio/alaw") == 0) return AudioFormat::ALAW;
+  if (strcmp(mime, "audio/mulaw") == 0) return AudioFormat::MULAW;
+  if (strcmp(mime, "audio/mpeg") == 0) return AudioFormat::MP3;
+  if (strcmp(mime, "audio/aac") == 0) return AudioFormat::AAC;
+  if (strcmp(mime, "audio/alac") == 0) return AudioFormat::ALAC;
+  if (strcmp(mime, "audio/ac3") == 0) return AudioFormat::AC3;
+  return AudioFormat::UNKNOWN;
+}
+
+/**
+ * @brief AudioInfo extended with a WAVEFORMATEX-style codec tag (the "wav
+ * code"): identifies the codec (PCM, AAC, ALAC, ...) - AudioFormat::UNKNOWN
+ * if not determined. mime() derives the corresponding mime type from
+ * format - not a separately stored field, so it can never go stale.
+ *
+ * Not merged directly into AudioInfo because AudioInfo is treated as a raw,
+ * byte-serializable struct in some places (e.g. AudioLoRa, ContainerOgg,
+ * ContainerBinary, the BLE sandbox client); adding fields there changes
+ * that wire layout for all of them. Returned by DemuxerAVI/DemuxerMP4's
+ * getAudioInfo(), mirroring the existing WAVAudioInfo : AudioInfo
+ * pattern (CodecWAV.h) used for WAV header parsing/writing.
+ * @ingroup codecs
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+struct AudioInfoFormat : public AudioInfo, public MimeSource {
+  AudioInfoFormat() = default;
+  AudioInfoFormat(const AudioInfo &from) : AudioInfo(from) {}
+  AudioInfoFormat(sample_rate_t sampleRate, uint16_t channelCount,
+                  uint8_t bitsPerSample,
+                  AudioFormat audioFormat = AudioFormat::UNKNOWN)
+      : AudioInfo(sampleRate, channelCount, bitsPerSample),
+        format(audioFormat) {}
+
+  AudioFormat format = AudioFormat::UNKNOWN;
+
+  /// Mime type corresponding to format (see toMime()), nullptr if unmapped
+  const char *mime() override { return toMime(format); }
 };
 
 }

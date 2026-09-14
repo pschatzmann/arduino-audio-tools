@@ -10,7 +10,7 @@
 #include "AudioTools/Communication/AudioHttp.h"
 
 AudioInfo info(44100, 2, 16);
-SineWaveGenerator<int16_t> sineWave(32000);
+SineGenerator<int16_t> sineWave(32000);
 GeneratedSoundStream<int16_t> sound(sineWave);
 TimedStream timed(sound);
 URLStream url("ssid", "password");

@@ -38,7 +38,7 @@ struct AllocSize {
 /**
  * @brief MPEG-TS (MTS) decoder. Extracts the AAC audio data from a MPEG-TS
  * (MTS) data stream. You can define the relevant stream types via the API.
- * Required dependency: https://github.com/pschatzmann/arduino-tsdemux
+ * Required dependency: https://github.com/pschatzmann/codec-tsdemux
  * @ingroup codecs
  * @ingroup decoder
  * @author Phil Schatzmann
@@ -203,7 +203,7 @@ class MTSDecoderTSDemux : public AudioDecoder {
     TSDCode res = TSD_OK;
     int count = 0;
     while (res == TSD_OK && buffer.available() >= limit) {
-      // Unfortunatly we need to reset the demux after each file
+      // Unfortunately we need to reset the demux after each file
       if (is_new_file(buffer.data())) {
         LOGD("parsing new file");
         begin();
@@ -295,7 +295,7 @@ class MTSDecoderTSDemux : public AudioDecoder {
            (unsigned long)pes->dts);
       // print out the PES Packet data if it's in our print list
       int i;
-      AudioLogger logger = AudioLogger::instance();
+      AudioLogger logger = AudioToolsLogger;
       for (i = 0; i < MTS_PRINT_PIDS_LEN; ++i) {
         if (print_pids[i] == pid) {
           // log data

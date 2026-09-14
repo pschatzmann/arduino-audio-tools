@@ -1,7 +1,7 @@
 #pragma once
 #include "AudioToolsConfig.h"
 #if defined(USE_CONCURRENCY)
-#include "AudioTools/AudioLibs/Concurrency.h"
+#include "AudioTools/Concurrency.h"
 #include "AudioTools/Communication/HTTP/AbstractURLStream.h"
 #include "AudioTools/CoreAudio/BaseStream.h"
 
@@ -60,6 +60,7 @@ class BufferedTaskStream : public AudioStream {
   virtual void end() {
     TRACED();
     task.end();
+    buffers.clear();
     active = false;
     ready = false;
   }
@@ -109,6 +110,11 @@ class BufferedTaskStream : public AudioStream {
     int result = 0;
     result = buffers.available();
     return result;
+  }
+
+  /// Clears the buffer
+  void clear() {
+    buffers.clear();
   }
 
  protected:
@@ -270,6 +276,11 @@ class URLStreamBufferedT : public AbstractURLStream {
   /// waits for some data - returns false if the request has failed
   bool waitForData(int timeout) override {
     return urlStream.waitForData(timeout);
+  }
+
+  /// Clears the buffer
+  void clear() {
+    taskStream.clear();
   }
  
  protected:

@@ -15,7 +15,7 @@
 ../examples/examples-player/player-sd_m4a-audiokit -> rc=0
 ../examples/examples-player/player-sdmmc-audiokit -> rc=0
 ../examples/examples-player/player-spiffs-i2s -> rc=0
-../examples/examples-player/player-vector_sdfat-audiokit -> rc=0
+../examples/examples-player/player-vector_sdfat-audiokit -> rc=1
 ../examples/examples-stream/streams-adc-i2s -> rc=0
 ../examples/examples-stream/streams-adc-serial -> rc=0
 ../examples/examples-stream/streams-adsr-i2s -> rc=0
@@ -66,6 +66,7 @@
 ../examples/examples-audiokit/streams-audiokit-sd_wav -> rc=0
 ../examples/examples-audiokit/streams-audiokit-serial -> rc=0
 ../examples/examples-audiokit/streams-audiokit-tf -> rc=0
+../examples/examples-audiokit/streams-catstream-audiokit -> rc=0
 ../examples/examples-audiokit/streams-file_loop-audiokit -> rc=0
 ../examples/examples-audiokit/streams-generator-audiokit -> rc=0
 ../examples/examples-audiokit/streams-generator_fromarray-audiokit -> rc=0
@@ -181,7 +182,7 @@
 ../examples/examples-communication/vban/streams-generator-vban -> rc=0
 ../examples/examples-communication/vban/streams-vban-audiokit -> rc=0
 ../examples/examples-communication/rtsp/communication-audiokit-rtsp -> rc=0
-../examples/examples-communication/rtsp/communication-codec-rtsp -> rc=1
+../examples/examples-communication/rtsp/communication-codec-rtsp -> rc=0
 ../examples/examples-communication/rtsp/communication-generator-rtsp -> rc=0
 ../examples/examples-communication/rtsp/communication-player_mp3-rtsp -> rc=0
 ../examples/examples-communication/rtsp/communication-player_mp3-rtsp_adcpm -> rc=0
@@ -241,6 +242,13 @@
 ../examples/tests/adc/read-csv_unsigned -> rc=0
 ../examples/tests/adc/read-esp32-multi-channel-csv -> rc=0
 ../examples/tests/adc/read-speed -> rc=0
+../examples/tests/adc/test-esp32-rx-available-multichannel -> rc=0
+../examples/tests/adc/test-esp32-rx-buffer-count -> rc=0
+../examples/tests/adc/test-esp32-rx-frame-alignment -> rc=0
+../examples/tests/adc/test-esp32-rx-v1-acceptance -> rc=0
+../examples/tests/adc/test-esp32-rx-v1-bin-oversampling -> rc=0
+../examples/tests/adc/test-esp32-rx-v1-multichannel-soak -> rc=0
+../examples/tests/adc/test-esp32-rx-v1-powerline-rms-stress -> rc=0
 ../examples/tests/basic/24bits-write -> rc=0
 ../examples/tests/basic/test-allocator -> rc=0
 ../examples/tests/basic/test-buffer -> rc=0
@@ -262,15 +270,17 @@
 ../examples/tests/codecs/test-codec-g722 -> rc=0
 ../examples/tests/codecs/test-codec-g723_24 -> rc=0
 ../examples/tests/codecs/test-codec-g723_40 -> rc=0
+../examples/tests/codecs/test-codec-g729 -> rc=0
 ../examples/tests/codecs/test-codec-gsm -> rc=0
-../examples/tests/codecs/test-codec-iLBC -> rc=0
+../examples/tests/codecs/test-codec-iLBC -> rc=1
 ../examples/tests/codecs/test-codec-l8 -> rc=0
 ../examples/tests/codecs/test-codec-lc3 -> rc=0
 ../examples/tests/codecs/test-codec-opus -> rc=0
 ../examples/tests/codecs/test-codec-opusogg -> rc=0
 ../examples/tests/codecs/test-codec-sbc -> rc=0
+../examples/tests/codecs/test-codec-wav8bit -> rc=0
 ../examples/tests/codecs/test-codec-wav-adpcm -> rc=0
-../examples/tests/codecs/test-compile-all -> rc=0
+../examples/tests/codecs/test-compile-all -> rc=1
 ../examples/tests/codecs/test-container-binary -> rc=0
 ../examples/tests/codecs/test-container-binary-meta -> rc=0
 ../examples/tests/codecs/test-container-ogg -> rc=0
@@ -279,6 +289,7 @@
 ../examples/tests/codecs/test-mp3-helix-reading -> rc=0
 ../examples/tests/codecs/test-mp3-mad -> rc=0
 ../examples/tests/codecs/test-mp3_parser -> rc=0
+../examples/tests/codecs/test-mp3-shine -> rc=0
 ../examples/tests/codecs/test-streaming-adapter -> rc=0
 ../examples/tests/concurrency/audio-test -> rc=0
 ../examples/tests/concurrency/BufferRTOS -> rc=0
@@ -300,6 +311,7 @@
 ../examples/tests/conversion/pipeline-in -> rc=0
 ../examples/tests/conversion/pipeline-out -> rc=0
 ../examples/tests/conversion/resample-mixer-in -> rc=0
+../examples/tests/conversion/resample-performance -> rc=0
 ../examples/tests/conversion/test-panning -> rc=0
 ../examples/tests/conversion/test-resample-in -> rc=0
 ../examples/tests/conversion/test-resample-out -> rc=0
@@ -315,6 +327,7 @@
 ../examples/tests/etc/test-ringbufferfile -> rc=0
 ../examples/tests/etc/test-tdm -> rc=0
 ../examples/tests/etc/test-write-memory -> rc=0
+../examples/tests/etc/wav-file-size -> rc=0
 ../examples/tests/fft/fft-cmsis -> rc=1
 ../examples/tests/fft/fft-esp32 -> rc=0
 ../examples/tests/fft/fft-espressif -> rc=0

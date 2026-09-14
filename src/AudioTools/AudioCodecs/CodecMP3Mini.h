@@ -36,6 +36,8 @@ class MP3DecoderMini : public AudioDecoder {
     }
   }
 
+  const char *mime() override { return "audio/mpeg"; }
+
   void setBufferLength(int len) { buffer_size = len; }
 
   /// Starts the processing

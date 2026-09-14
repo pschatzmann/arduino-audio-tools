@@ -25,7 +25,7 @@ const char *password = "password";
 AudioInfo info(16000, 1, 16);
 OpusOggEncoder ogg;
 AudioEncoderServer server(&ogg, ssid, password);
-SineWaveGenerator<int16_t> sineWave;
+SineGenerator<int16_t> sineWave;
 GeneratedSoundStream<int16_t> in(sineWave);  // Stream generated from sine wave
 
 void setup() {

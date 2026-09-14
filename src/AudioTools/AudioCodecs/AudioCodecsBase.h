@@ -2,6 +2,7 @@
 
 #include "AudioToolsConfig.h"
 #include "AudioLogger.h"
+#include "AudioTools/AudioCodecs/AudioFormat.h"
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
 #include "AudioTools/CoreAudio/AudioTypes.h"
 #include "AudioTools/CoreAudio/BaseStream.h"
@@ -21,6 +22,9 @@ class AudioDecoder : public AudioWriter, public AudioInfoSource {
   virtual ~AudioDecoder() = default;
   AudioDecoder(AudioDecoder const &) = delete;
   AudioDecoder &operator=(AudioDecoder const &) = delete;
+
+  /// Provides the mime type of the data that is expected by this decoder
+  virtual const char *mime() = 0;
 
   AudioInfo audioInfo() override { return info; };
 
@@ -94,7 +98,7 @@ class ContainerDecoder : public AudioDecoder {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioEncoder : public AudioWriter {
+class AudioEncoder : public AudioWriter, public MimeSource {
  public:
   AudioEncoder() = default;
   virtual ~AudioEncoder() = default;
@@ -116,11 +120,20 @@ class AudioEncoder : public AudioWriter {
   AudioInfo info;
 };
 
+/// @brief  Extended AudioDecoder interface to support block size configuration
 class AudioDecoderExt : public AudioDecoder {
  public:
   virtual void setBlockSize(int blockSize) = 0;
+  /// Provides the WAV format tag (see AudioFormat) that this decoder
+  /// handles, if it corresponds to a well defined WAV format tag. Used by
+  /// WAVDecoder::setDecoder()/addDecoder() to auto-detect the format when
+  /// it is not explicitly provided. Returns AudioFormat::UNKNOWN if the
+  /// decoder does not (always) map to a single WAV format tag - in this
+  /// case the format must be provided explicitly.
+  virtual AudioFormat wavFormat() { return AudioFormat::UNKNOWN; }
 };
 
+/// @brief  Extended AudioEncoder interface to support block size configuration
 class AudioEncoderExt : public AudioEncoder {
  public:
   virtual int blockSize() = 0;

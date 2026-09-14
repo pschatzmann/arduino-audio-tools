@@ -6,10 +6,10 @@
 */
 
 #include "AudioTools.h"
-#include "AudioTools/Communication/A2DPStream.h"
+#include "AudioTools/Communication/A2DPStream.h" // https://github.com/pschatzmann/ESP32-A2DP
 
 const char* name = "LEXON MINO L";                        // Replace with your bluetooth speaker name  
-SineWaveGenerator<int16_t> sineWave(15000);               // subclass of SoundGenerator, set max amplitude (=volume)
+SineGenerator<int16_t> sineWave(15000);               // subclass of SoundGenerator, set max amplitude (=volume)
 GeneratedSoundStream<int16_t> in_stream(sineWave);        // Stream generated from sine wave
 BluetoothA2DPSource a2dp_source;                          // A2DP Sender
 

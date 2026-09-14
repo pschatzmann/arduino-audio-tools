@@ -9,7 +9,7 @@
  * 
  */
 #include "AudioTools.h"
-#include "AudioTools/AudioCodecs/CodecG7xx.h" // https://github.com/pschatzmann/arduino-libg7xx.git
+#include "AudioTools/AudioCodecs/CodecG7xx.h" // https://github.com/pschatzmann/codec-g7xx.git
 #define USE_RTSP_LOGIN // activate RTSP login support
 #include "AudioTools/Communication/RTSP.h"
 
@@ -27,7 +27,7 @@ G711_ULAWEncoder encoder;
 RTSPOutput<RTSPPlatformWiFi> rtsp_stream(format, encoder);
 StreamCopy copier(rtsp_stream, sound);  // rtsp to sine
 // Server
-RTSPServer<RTSPPlatformWiFi>  rtsp(*rtsp_stream.streamer(), port);
+RTSPServer<RTSPPlatformWiFi> rtsp(rtsp_stream.streamer(), port);
 
 
 void setup() {

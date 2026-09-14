@@ -6,7 +6,7 @@ Currently we provide multiple mp3 decoders
 - libhelix 
 - tinymp3
 
-Unfortunatly non of those are currently stable in all environments....
+Unfortunately non of those are currently stable in all environments....
 
 
 ### Output Device: Earphone

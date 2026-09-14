@@ -10,7 +10,7 @@ namespace audio_tools {
 
 /**
  * @brief MP3 and AAC Decoder using libhelix:
- * https://github.com/pschatzmann/arduino-libhelix. We dynamically create a MP3
+ * https://github.com/pschatzmann/codec-helix. We dynamically create a MP3
  * or AAC decoder dependent on the provided audio format. In addition WAV files
  * are also supported
  * @ingroup codecs

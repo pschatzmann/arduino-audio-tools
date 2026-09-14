@@ -5,23 +5,23 @@
 
 namespace audio_tools {
 
-class TimerAlarmRepeatingDriverSTM32;
-static TimerAlarmRepeatingDriverSTM32 *timerAlarmRepeating = nullptr;
+class AudioTimerDriverSTM32;
+static AudioTimerDriverSTM32 *timerAlarmRepeating = nullptr;
 typedef void (*repeating_timer_callback_t)(void *obj);
 
 /**
  * @brief STM32 Repeating Timer functions for repeated execution: Please use
- * the typedef TimerAlarmRepeating.
+ * the typedef AudioTimer.
  * By default the TIM1 is used.
  * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class TimerAlarmRepeatingDriverSTM32 : public TimerAlarmRepeatingDriverBase {
+class AudioTimerDriverSTM32 : public AudioTimerDriverBase {
  public:
-  TimerAlarmRepeatingDriverSTM32() { setTimer(1); }
+  AudioTimerDriverSTM32() { setTimer(1); }
 
-  ~TimerAlarmRepeatingDriverSTM32() {
+  ~AudioTimerDriverSTM32() {
     end();
     delete this->timer;
   }
@@ -82,8 +82,8 @@ class TimerAlarmRepeatingDriverSTM32 : public TimerAlarmRepeatingDriverBase {
   TIM_TypeDef *timers[6] = {TIM1, TIM2, TIM3, TIM4, TIM5};
 };
 
-///  @brief use TimerAlarmRepeating!  @ingroup timer_stm32
-using TimerAlarmRepeatingDriver = TimerAlarmRepeatingDriverSTM32;
+///  @brief use AudioTimer!  @ingroup timer_stm32
+using AudioTimerDriver = AudioTimerDriverSTM32;
 
 }  // namespace audio_tools
 

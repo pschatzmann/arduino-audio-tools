@@ -23,6 +23,6 @@ Here is the information how to wire the SD card to the ESP32
 ## Dependencies
 
 - https://github.com/pschatzmann/arduino-audio-tools
-- https://github.com/pschatzmann/arduino-libhelix
+- https://github.com/pschatzmann/codec-helix
 - https://github.com/greiman/SdFat
 - https://github.com/pschatzmann/ESP32-A2DP

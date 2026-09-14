@@ -1,4 +1,5 @@
 #pragma once
+#include <algorithm>
 #include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/AudioTypes.h"
 #include "AudioTools/CoreAudio/Buffers.h"
@@ -37,7 +38,7 @@ public:
   int readArray(T data[], int len) {
     TRACED();
     LockGuard guard(p_mutex);
-    int lenResult = MIN(len, available());
+    int lenResult = std::min(len, available());
     return p_buffer->readArray(data, lenResult);
   }
 

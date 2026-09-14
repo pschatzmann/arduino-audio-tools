@@ -9,7 +9,7 @@
 #include "AudioTools.h"
 
 AudioInfo info(8000, 1, 16);
-SineWaveGenerator<int16_t> sineWave(32000); // subclass of SoundGenerator with max amplitude of 32000
+SineGenerator<int16_t> sineWave(32000); // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound(sineWave);  // Stream generated from sine wave
 PWMAudioOutput pwm;                  
 StreamCopy copier(pwm, sound);    // copy in to out
@@ -28,9 +28,16 @@ void setup() {
   //config.resolution = 8;  // must be between 8 and 11 -> drives pwm frequency (8 is default)
   // alternative 1
   //config.start_pin = 3;
+  //--
   // alternative 2
   //int pins[] = {3};
-  // alternative 3
+  //config.setPins(pins); 
+  //--
+  // alternative 3 -
+  //Pins pins = Pins({3});
+  //config.setPins(pins); 
+  //--
+  // alternative 4 - Note: for this the USE_INITIALIZER_LIST must be defined for your platform!
   //Pins pins = {3};
   //config.setPins(pins); 
   pwm.begin(config);

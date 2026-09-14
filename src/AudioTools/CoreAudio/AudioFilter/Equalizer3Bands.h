@@ -1,9 +1,12 @@
 #pragma once
 #include <math.h>
 
+#include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/AudioOutput.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"
-#include "AudioToolsConfig.h"
+#include "AudioTools/CoreAudio/BaseConverter.h"
+#include "AudioTools/CoreAudio/AudioBasic/soft_float_t.h"
+#include "AudioTools/CoreAudio/AudioBasic/q1_14_t.h"
 
 /**
  * @defgroup equilizer Equalizer
@@ -58,6 +61,80 @@ struct ConfigEqualizer3Bands : public AudioInfo {
   float gain_high = 1.0;
 };
 
+/// @cond DO_NOT_DOCUMENT
+
+/**
+ * @brief Assigns a coefficient computed in float (e.g. 2*sin(...), which is
+ * always in the range [-2, 2)) into the equalizer's arithmetic type T,
+ * logging via LOGE if it doesn't survive the round trip -- e.g. a bounded
+ * fixed-point type like q1_14_t (range ~[-2,2)) silently clamping a value at
+ * the edge of that range instead of representing it.
+ * @ingroup equilizer
+ */
+template <typename T>
+T eqAssignCoeff(float value, const char* name) {
+  T t = value;
+  float roundtrip = (float)t;
+  if (fabs(roundtrip - value) > fabs(value) * 0.01f + 1e-4f) {
+    LOGE(
+        "Equalizer coefficient %s=%f does not fit in the range of T (stored "
+        "as %f) - the equalizer will be inaccurate",
+        name, value, roundtrip);
+  }
+  return t;
+}
+
+/**
+ * @brief Denormal-avoidance offset added on every low/high-pass update
+ * (`+ vsa`) to stop a native `float`/`double` FPU from stalling on denormal
+ * numbers as the filter state decays toward zero. Bounded fixed-point/
+ * software-float types (q1_14_t, soft_float_t) don't have this hardware
+ * slowdown, so the offset is a no-op zero for them.
+ * @ingroup equilizer
+ */
+template <typename T>
+struct EqDenormalGuard {
+  static T value() { return T(0); }
+};
+template <>
+struct EqDenormalGuard<float> {
+  static float value() { return 1.0f / 4294967295.0f; }
+};
+template <>
+struct EqDenormalGuard<double> {
+  static double value() { return 1.0 / 4294967295.0; }
+};
+
+/**
+ * @brief Converts a raw PCM sample (type IntT) to/from the equalizer's
+ * arithmetic type T. Defaults to FilterSampleConverter (see BaseConverter.h),
+ * which is correct for T=soft_float_t (raw-magnitude convention, same as
+ * float) and T=q1_14_t (bit-shifted into/out of its bounded ~[-2,2) range).
+ * Specialized for T=float to keep the equalizer's original
+ * NumberConverter-based, normalized-to-unity-range convention unchanged.
+ * @ingroup equilizer
+ */
+template <typename IntT, typename T>
+struct EqSampleConverter {
+  static T toEqType(IntT sample, int bits) {
+    return FilterSampleConverter<IntT, T>::toFilterType(sample);
+  }
+  static IntT fromEqType(T value, int bits) {
+    return FilterSampleConverter<IntT, T>::fromFilterType(value);
+  }
+};
+template <typename IntT>
+struct EqSampleConverter<IntT, float> {
+  static float toEqType(IntT sample, int bits) {
+    return NumberConverter::toFloat((int32_t)sample, bits);
+  }
+  static IntT fromEqType(float value, int bits) {
+    return (IntT)NumberConverter::fromFloat(value, bits);
+  }
+};
+
+/// @endcond
+
 /**
  * @brief 3 Band Equalizer with identical settings for all channels
  *
@@ -79,49 +156,59 @@ struct ConfigEqualizer3Bands : public AudioInfo {
  * the freq. parameters, you need to call begin() again.
  * @warning begin(ConfigEqualizer3Bands&) needs a reference, so do not provide
  * it any stack objects!
+ *
+ * @tparam T Arithmetic type used for the filter state and coefficients.
+ * Defaults to `float`. On a microcontroller without an FPU (e.g. RP2040),
+ * use `q1_14_t` or `soft_float_t` instead (both in AudioBasic/) to avoid
+ * software-emulated float instructions -- see the "Fixed-Point and
+ * Software-Float Filter Types" section on the Filters wiki page. `Equalizer3Bands`
+ * (no template argument) is a `float`-based alias kept for backwards
+ * compatibility; instantiate `Equalizer3BandsT<q1_14_t>` or
+ * `Equalizer3BandsT<soft_float_t>` directly for the fixed-point variants.
  * @ingroup equilizer
  * @author pschatzmann
  */
-class Equalizer3Bands : public ModifyingStream {
+template <typename T = float>
+class Equalizer3BandsT : public ModifyingStream {
  public:
   /// Constructor with Print output stream
   /// @param out Print stream where processed audio will be written
-  Equalizer3Bands(Print& out) { setOutput(out); }
+  Equalizer3BandsT(Print& out) { setOutput(out); }
 
   /// Constructor with bidirectional Stream
   /// @param in Stream for both input and output
-  Equalizer3Bands(Stream& in) { setStream(in); }
+  Equalizer3BandsT(Stream& in) { setStream(in); }
 
   /// Constructor with AudioOutput (includes automatic audio format
   /// notifications)
   /// @param out AudioOutput where processed audio will be written
-  Equalizer3Bands(AudioOutput& out) {
+  Equalizer3BandsT(AudioOutput& out) {
     setOutput(out);
-    out.addNotifyAudioChange(*this);
+    addNotifyAudioChange(out);
   }
 
   /// Constructor with AudioStream (includes automatic audio format
   /// notifications)
   /// @param stream AudioStream for both input and output
-  Equalizer3Bands(AudioStream& stream) {
+  Equalizer3BandsT(AudioStream& stream) {
     setStream(stream);
-    stream.addNotifyAudioChange(*this);
+    addNotifyAudioChange(stream);
   }
 
-  ~Equalizer3Bands() {
+  ~Equalizer3BandsT() {
     if (state != nullptr) delete[] state;
   }
 
   /// Defines/Changes the input & output stream
   /// @param io Stream to use for both reading and writing audio data
   void setStream(Stream& io) override {
-    p_print = &io;
-    p_stream = &io;
+    p_out = &io;
+    p_io = &io;
   };
 
   /// Defines/Changes the output target
   /// @param out Print stream where processed audio will be written
-  void setOutput(Print& out) override { p_print = &out; }
+  void setOutput(Print& out) override { p_out = &out; }
 
   /// Access to the current configuration
   /// @return Reference to the configuration object
@@ -140,6 +227,8 @@ class Equalizer3Bands : public ModifyingStream {
   }
 
   bool begin() {
+    ModifyingStream::setAudioInfo(*p_cfg);
+
     if (p_cfg->channels > max_state_count) {
       if (state != nullptr) delete[] state;
       state = new EQSTATE[p_cfg->channels];
@@ -148,14 +237,17 @@ class Equalizer3Bands : public ModifyingStream {
 
     // Setup state
     for (int j = 0; j < max_state_count; j++) {
-      memset(&state[j], 0, sizeof(EQSTATE));
+      state[j] = EQSTATE();
 
       // Calculate filter cutoff frequencies
-      state[j].lf =
-          2 *
-          sin((float)PI * ((float)p_cfg->freq_low / (float)p_cfg->sample_rate));
-      state[j].hf = 2 * sin((float)PI * ((float)p_cfg->freq_high /
-                                         (float)p_cfg->sample_rate));
+      state[j].lf = eqAssignCoeff<T>(
+          2 * sin((float)PI * ((float)p_cfg->freq_low /
+                                (float)p_cfg->sample_rate)),
+          "lf");
+      state[j].hf = eqAssignCoeff<T>(
+          2 * sin((float)PI * ((float)p_cfg->freq_high /
+                                (float)p_cfg->sample_rate)),
+          "hf");
     }
     is_active = true;
     return true;
@@ -178,12 +270,16 @@ class Equalizer3Bands : public ModifyingStream {
   /// @return Number of bytes written
   size_t write(const uint8_t* data, size_t len) override {
     filterSamples(data, len);
-    return p_print->write(data, len);
+    return p_out->write(data, len);
   }
 
   /// Get available space for writing
   /// @return Number of bytes available for writing
-  int availableForWrite() override { return p_print->availableForWrite(); }
+  int availableForWrite() override { return p_out->availableForWrite(); }
+
+  void flush() override {
+    if (p_out != nullptr) p_out->flush();
+  }
 
   /// Read and process audio data through the equalizer
   /// @param data Buffer to store processed audio data
@@ -191,8 +287,8 @@ class Equalizer3Bands : public ModifyingStream {
   /// @return Number of bytes actually read and processed
   size_t readBytes(uint8_t* data, size_t len) override {
     size_t result = 0;
-    if (p_stream != nullptr) {
-      result = p_stream->readBytes(data, len);
+    if (p_io != nullptr) {
+      result = p_io->readBytes(data, len);
       filterSamples(data, len);
     }
     return result;
@@ -201,39 +297,38 @@ class Equalizer3Bands : public ModifyingStream {
   /// Get available data for reading
   /// @return Number of bytes available for reading
   int available() override {
-    return p_stream != nullptr ? p_stream->available() : 0;
+    return p_io != nullptr ? p_io->available() : 0;
   }
 
  protected:
   bool is_active = false;     ///< Indicates if the equalizer is active
   ConfigEqualizer3Bands cfg;  ///< Default configuration instance
   ConfigEqualizer3Bands* p_cfg = &cfg;  ///< Pointer to active configuration
-  const float vsa =
-      (1.0 / 4294967295.0);    ///< Very small amount for denormal fix
-  Print* p_print = nullptr;    ///< Output stream for write operations
-  Stream* p_stream = nullptr;  ///< Input/output stream for read operations
+  const T vsa = EqDenormalGuard<T>::value();  ///< Denormal-avoidance offset
+  Print* p_out = nullptr;    ///< Output stream for write operations
+  Stream* p_io = nullptr;  ///< Input/output stream for read operations
   int max_state_count = 0;     ///< Maximum number of allocated channel states
 
   /// Filter state for each channel
   struct EQSTATE {
     // Filter #1 (Low band) - 4-pole low-pass filter
-    float lf;    ///< Low frequency cutoff coefficient
-    float f1p0;  ///< Filter pole 0
-    float f1p1;  ///< Filter pole 1
-    float f1p2;  ///< Filter pole 2
-    float f1p3;  ///< Filter pole 3
+    T lf;    ///< Low frequency cutoff coefficient
+    T f1p0;  ///< Filter pole 0
+    T f1p1;  ///< Filter pole 1
+    T f1p2;  ///< Filter pole 2
+    T f1p3;  ///< Filter pole 3
 
     // Filter #2 (High band) - 4-pole high-pass filter
-    float hf;    ///< High frequency cutoff coefficient
-    float f2p0;  ///< Filter pole 0
-    float f2p1;  ///< Filter pole 1
-    float f2p2;  ///< Filter pole 2
-    float f2p3;  ///< Filter pole 3
+    T hf;    ///< High frequency cutoff coefficient
+    T f2p0;  ///< Filter pole 0
+    T f2p1;  ///< Filter pole 1
+    T f2p2;  ///< Filter pole 2
+    T f2p3;  ///< Filter pole 3
 
     // Sample history buffer for filter calculations
-    float sdm1;  ///< Sample data minus 1 (previous sample)
-    float sdm2;  ///< Sample data minus 2
-    float sdm3;  ///< Sample data minus 3
+    T sdm1;  ///< Sample data minus 1 (previous sample)
+    T sdm2;  ///< Sample data minus 2
+    T sdm3;  ///< Sample data minus 3
 
   }* state = nullptr;
 
@@ -251,9 +346,9 @@ class Equalizer3Bands : public ModifyingStream {
         size_t sample_count = len / sizeof(int16_t);
         for (size_t j = 0; j < sample_count; j += p_cfg->channels) {
           for (int ch = 0; ch < p_cfg->channels; ch++) {
-            p_dataT[j + ch] = NumberConverter::fromFloat(
-                sample(state[ch],
-                       NumberConverter::toFloat(p_dataT[j + ch], 16)),
+            p_dataT[j + ch] = EqSampleConverter<int16_t, T>::fromEqType(
+                sample(state[ch], EqSampleConverter<int16_t, T>::toEqType(
+                                       p_dataT[j + ch], 16)),
                 16);
           }
         }
@@ -263,9 +358,9 @@ class Equalizer3Bands : public ModifyingStream {
         size_t sample_count = len / sizeof(int24_t);
         for (size_t j = 0; j < sample_count; j += p_cfg->channels) {
           for (int ch = 0; ch < p_cfg->channels; ch++) {
-            p_dataT[j + ch] = NumberConverter::fromFloat(
-                sample(state[ch],
-                       NumberConverter::toFloat(p_dataT[j + ch], 24)),
+            p_dataT[j + ch] = EqSampleConverter<int24_t, T>::fromEqType(
+                sample(state[ch], EqSampleConverter<int24_t, T>::toEqType(
+                                       p_dataT[j + ch], 24)),
                 24);
           }
         }
@@ -275,9 +370,9 @@ class Equalizer3Bands : public ModifyingStream {
         size_t sample_count = len / sizeof(int32_t);
         for (size_t j = 0; j < sample_count; j += p_cfg->channels) {
           for (int ch = 0; ch < p_cfg->channels; ch++) {
-            p_dataT[j + ch] = NumberConverter::fromFloat(
-                sample(state[ch],
-                       NumberConverter::toFloat(p_dataT[j + ch], 32)),
+            p_dataT[j + ch] = EqSampleConverter<int32_t, T>::fromEqType(
+                sample(state[ch], EqSampleConverter<int32_t, T>::toEqType(
+                                       p_dataT[j + ch], 32)),
                 32);
           }
         }
@@ -291,11 +386,11 @@ class Equalizer3Bands : public ModifyingStream {
 
   /// Process a single audio sample through the 3-band equalizer
   /// @param es Reference to the filter state for this channel
-  /// @param sample Input sample value (normalized float)
+  /// @param sample Input sample value
   /// @return Processed sample value with equalization applied
-  float sample(EQSTATE& es, float sample) {
+  T sample(EQSTATE& es, T sample) {
     // Locals
-    float l, m, h;  // Low / Mid / High - Sample Values
+    T l, m, h;  // Low / Mid / High - Sample Values
     // Filter #1 (lowpass)
     es.f1p0 += (es.lf * (sample - es.f1p0)) + vsa;
     es.f1p1 += (es.lf * (es.f1p0 - es.f1p1));
@@ -314,9 +409,9 @@ class Equalizer3Bands : public ModifyingStream {
     // Calculate midrange (signal - (low + high))
     m = es.sdm3 - (h + l);
     // Scale, Combine and store
-    l *= p_cfg->gain_low;
-    m *= p_cfg->gain_medium;
-    h *= p_cfg->gain_high;
+    l = l * p_cfg->gain_low;
+    m = m * p_cfg->gain_medium;
+    h = h * p_cfg->gain_high;
 
     // Shuffle history buffer
     es.sdm3 = es.sdm2;
@@ -328,28 +423,38 @@ class Equalizer3Bands : public ModifyingStream {
   }
 };
 
+/// `float`-based alias kept for backwards compatibility; see Equalizer3BandsT
+/// for the templated version used on FPU-less microcontrollers.
+/// @ingroup equilizer
+using Equalizer3Bands = Equalizer3BandsT<float>;
+
 /**
  * @brief 3 Band Equalizer with per-channel frequency and gain control
  * Allows independent frequency and gain settings for each audio channel.
  * Each channel can have different low/high frequency cutoffs and different
  * gain values for low, medium, and high frequency bands.
+ *
+ * @tparam T Arithmetic type used for the filter state and coefficients; see
+ * Equalizer3BandsT for details. `Equalizer3BandsPerChannel` (no template
+ * argument) is a `float`-based alias kept for backwards compatibility.
  * @ingroup equilizer
  * @author pschatzmann
  */
-class Equalizer3BandsPerChannel : public ModifyingStream {
+template <typename T = float>
+class Equalizer3BandsPerChannelT : public ModifyingStream {
  public:
   /// Constructor with Print output
   /// @param out Print stream for output
-  Equalizer3BandsPerChannel(Print& out) { setOutput(out); }
+  Equalizer3BandsPerChannelT(Print& out) { setOutput(out); }
 
   /// Constructor with Stream input
   /// @param in Stream for input
-  Equalizer3BandsPerChannel(Stream& in) { setStream(in); }
+  Equalizer3BandsPerChannelT(Stream& in) { setStream(in); }
 
   /// Constructor with AudioOutput
   /// @param out AudioOutput for output with automatic audio change
   /// notifications
-  Equalizer3BandsPerChannel(AudioOutput& out) {
+  Equalizer3BandsPerChannelT(AudioOutput& out) {
     setOutput(out);
     out.addNotifyAudioChange(*this);
   }
@@ -357,23 +462,23 @@ class Equalizer3BandsPerChannel : public ModifyingStream {
   /// Constructor with AudioStream
   /// @param stream AudioStream for input/output with automatic audio change
   /// notifications
-  Equalizer3BandsPerChannel(AudioStream& stream) {
+  Equalizer3BandsPerChannelT(AudioStream& stream) {
     setStream(stream);
     stream.addNotifyAudioChange(*this);
   }
 
-  ~Equalizer3BandsPerChannel() {
+  ~Equalizer3BandsPerChannelT() {
     if (state != nullptr) delete[] state;
   }
 
   /// Defines/Changes the input & output
   void setStream(Stream& io) override {
-    p_print = &io;
-    p_stream = &io;
+    p_out = &io;
+    p_io = &io;
   };
 
   /// Defines/Changes the output target
-  void setOutput(Print& out) override { p_print = &out; }
+  void setOutput(Print& out) override { p_out = &out; }
 
   ConfigEqualizer3Bands& config() { return *p_cfg; }
 
@@ -390,6 +495,7 @@ class Equalizer3BandsPerChannel : public ModifyingStream {
   /// Initialize the equalizer using the current configuration
   /// @return true if initialization was successful
   bool begin() {
+    ModifyingStream::setAudioInfo(*p_cfg);
     // Ensure per-channel arrays are allocated
     ensureChannelArraysAllocated();
 
@@ -402,13 +508,17 @@ class Equalizer3BandsPerChannel : public ModifyingStream {
 
     // Setup state for each channel with its own parameters
     for (int j = 0; j < p_cfg->channels; j++) {
-      memset(&state[j], 0, sizeof(EQSTATE));
+      state[j] = EQSTATE();
 
       // Calculate filter cutoff frequencies per channel
-      state[j].lf =
-          2 * sin((float)PI * ((float)freq_low[j] / (float)p_cfg->sample_rate));
-      state[j].hf = 2 * sin((float)PI *
-                            ((float)freq_high[j] / (float)p_cfg->sample_rate));
+      state[j].lf = eqAssignCoeff<T>(
+          2 * sin((float)PI *
+                  ((float)freq_low[j] / (float)p_cfg->sample_rate)),
+          "lf");
+      state[j].hf = eqAssignCoeff<T>(
+          2 * sin((float)PI *
+                  ((float)freq_high[j] / (float)p_cfg->sample_rate)),
+          "hf");
     }
     is_active = true;
     return true;
@@ -435,12 +545,14 @@ class Equalizer3BandsPerChannel : public ModifyingStream {
 
       // Recalculate filter coefficients for this channel
       if (state != nullptr) {
-        state[channel].lf =
-            2 *
-            sin((float)PI * ((float)freq_low_val / (float)p_cfg->sample_rate));
-        state[channel].hf =
-            2 *
-            sin((float)PI * ((float)freq_high_val / (float)p_cfg->sample_rate));
+        state[channel].lf = eqAssignCoeff<T>(
+            2 * sin((float)PI *
+                    ((float)freq_low_val / (float)p_cfg->sample_rate)),
+            "lf");
+        state[channel].hf = eqAssignCoeff<T>(
+            2 * sin((float)PI *
+                    ((float)freq_high_val / (float)p_cfg->sample_rate)),
+            "hf");
       }
     }
   }
@@ -498,12 +610,16 @@ class Equalizer3BandsPerChannel : public ModifyingStream {
   /// @return Number of bytes written
   size_t write(const uint8_t* data, size_t len) override {
     filterSamples(data, len);
-    return p_print->write(data, len);
+    return p_out->write(data, len);
   }
 
   /// Get available space for writing
   /// @return Number of bytes available for writing
-  int availableForWrite() override { return p_print->availableForWrite(); }
+  int availableForWrite() override { return p_out->availableForWrite(); }
+
+  void flush() override {
+    if (p_out != nullptr) p_out->flush();
+  }
 
   /// Read and process audio data through the per-channel equalizer
   /// @param data Buffer to store processed audio data
@@ -511,8 +627,8 @@ class Equalizer3BandsPerChannel : public ModifyingStream {
   /// @return Number of bytes actually read and processed
   size_t readBytes(uint8_t* data, size_t len) override {
     size_t result = 0;
-    if (p_stream != nullptr) {
-      result = p_stream->readBytes(data, len);
+    if (p_io != nullptr) {
+      result = p_io->readBytes(data, len);
       filterSamples(data, len);
     }
     return result;
@@ -521,17 +637,16 @@ class Equalizer3BandsPerChannel : public ModifyingStream {
   /// Get available data for reading
   /// @return Number of bytes available for reading
   int available() override {
-    return p_stream != nullptr ? p_stream->available() : 0;
+    return p_io != nullptr ? p_io->available() : 0;
   }
 
  protected:
   bool is_active = false;
   ConfigEqualizer3Bands cfg;            ///< Default configuration instance
   ConfigEqualizer3Bands* p_cfg = &cfg;  ///< Pointer to active configuration
-  const float vsa =
-      (1.0 / 4294967295.0);    ///< Very small amount for denormal fix
-  Print* p_print = nullptr;    ///< Output stream for write operations
-  Stream* p_stream = nullptr;  ///< Input/output stream for read operations
+  const T vsa = EqDenormalGuard<T>::value();  ///< Denormal-avoidance offset
+  Print* p_out = nullptr;    ///< Output stream for write operations
+  Stream* p_io = nullptr;  ///< Input/output stream for read operations
   int max_state_count = 0;     ///< Maximum number of allocated channel states
 
   // Per-channel frequency and gain settings using Vector containers
@@ -543,23 +658,23 @@ class Equalizer3BandsPerChannel : public ModifyingStream {
 
   struct EQSTATE {
     // Filter #1 (Low band)
-    float lf;    // Frequency
-    float f1p0;  // Poles ...
-    float f1p1;
-    float f1p2;
-    float f1p3;
+    T lf;    // Frequency
+    T f1p0;  // Poles ...
+    T f1p1;
+    T f1p2;
+    T f1p3;
 
     // Filter #2 (High band)
-    float hf;    // Frequency
-    float f2p0;  // Poles ...
-    float f2p1;
-    float f2p2;
-    float f2p3;
+    T hf;    // Frequency
+    T f2p0;  // Poles ...
+    T f2p1;
+    T f2p2;
+    T f2p3;
 
     // Sample history buffer
-    float sdm1;  // Sample data minus 1
-    float sdm2;  //                   2
-    float sdm3;  //                   3
+    T sdm1;  // Sample data minus 1
+    T sdm2;  //                   2
+    T sdm3;  //                   3
 
   }* state = nullptr;
 
@@ -601,8 +716,10 @@ class Equalizer3BandsPerChannel : public ModifyingStream {
         size_t sample_count = len / sizeof(int16_t);
         for (size_t j = 0; j < sample_count; j += p_cfg->channels) {
           for (int ch = 0; ch < p_cfg->channels; ch++) {
-            p_dataT[j + ch] = NumberConverter::fromFloat(
-                sample(ch, NumberConverter::toFloat(p_dataT[j + ch], 16)), 16);
+            p_dataT[j + ch] = EqSampleConverter<int16_t, T>::fromEqType(
+                sample(ch, EqSampleConverter<int16_t, T>::toEqType(
+                               p_dataT[j + ch], 16)),
+                16);
           }
         }
       } break;
@@ -611,8 +728,10 @@ class Equalizer3BandsPerChannel : public ModifyingStream {
         size_t sample_count = len / sizeof(int24_t);
         for (size_t j = 0; j < sample_count; j += p_cfg->channels) {
           for (int ch = 0; ch < p_cfg->channels; ch++) {
-            p_dataT[j + ch] = NumberConverter::fromFloat(
-                sample(ch, NumberConverter::toFloat(p_dataT[j + ch], 24)), 24);
+            p_dataT[j + ch] = EqSampleConverter<int24_t, T>::fromEqType(
+                sample(ch, EqSampleConverter<int24_t, T>::toEqType(
+                               p_dataT[j + ch], 24)),
+                24);
           }
         }
       } break;
@@ -621,8 +740,10 @@ class Equalizer3BandsPerChannel : public ModifyingStream {
         size_t sample_count = len / sizeof(int32_t);
         for (size_t j = 0; j < sample_count; j += p_cfg->channels) {
           for (int ch = 0; ch < p_cfg->channels; ch++) {
-            p_dataT[j + ch] = NumberConverter::fromFloat(
-                sample(ch, NumberConverter::toFloat(p_dataT[j + ch], 32)), 32);
+            p_dataT[j + ch] = EqSampleConverter<int32_t, T>::fromEqType(
+                sample(ch, EqSampleConverter<int32_t, T>::toEqType(
+                               p_dataT[j + ch], 32)),
+                32);
           }
         }
       } break;
@@ -638,11 +759,11 @@ class Equalizer3BandsPerChannel : public ModifyingStream {
   /// @param channel The channel number to process
   /// @param sample_val The input sample value
   /// @return The processed sample value with per-channel equalization applied
-  float sample(int channel, float sample_val) {
+  T sample(int channel, T sample_val) {
     EQSTATE& es = state[channel];
 
     // Locals
-    float l, m, h;  // Low / Mid / High - Sample Values
+    T l, m, h;  // Low / Mid / High - Sample Values
 
     // Filter #1 (lowpass)
     es.f1p0 += (es.lf * (sample_val - es.f1p0)) + vsa;
@@ -664,9 +785,9 @@ class Equalizer3BandsPerChannel : public ModifyingStream {
     m = es.sdm3 - (h + l);
 
     // Scale with per-channel gains
-    l *= gain_low[channel];
-    m *= gain_medium[channel];
-    h *= gain_high[channel];
+    l = l * gain_low[channel];
+    m = m * gain_medium[channel];
+    h = h * gain_high[channel];
 
     // Shuffle history buffer
     es.sdm3 = es.sdm2;
@@ -677,5 +798,11 @@ class Equalizer3BandsPerChannel : public ModifyingStream {
     return (l + m + h);
   }
 };
+
+/// `float`-based alias kept for backwards compatibility; see
+/// Equalizer3BandsPerChannelT for the templated version used on FPU-less
+/// microcontrollers.
+/// @ingroup equilizer
+using Equalizer3BandsPerChannel = Equalizer3BandsPerChannelT<float>;
 
 }  // namespace audio_tools

@@ -1,13 +1,8 @@
-#include "SPI.h"
-#include "SD.h"
 #include "SD_MMC.h"
 
-#define PIN_AUDIO_KIT_SD_CARD_CS 13
-#define PIN_AUDIO_KIT_SD_CARD_MISO 2
-#define PIN_AUDIO_KIT_SD_CARD_MOSI 15
-#define PIN_AUDIO_KIT_SD_CARD_CLK 14
 
-uint8_t data[1024 * 100];
+const size_t max_len = 1024 * 100;
+uint8_t* data = nullptr;
 int len[] = { 1, 5, 10, 25, 100, 256, 512, 1024, 1024 * 10, 1024 * 100 };
 size_t totalSize = 1024 * 1024 * 1;
 const char* test_file = "/test.txt";
@@ -64,6 +59,9 @@ void testFS(const char* name, SD& sd, Open write, Open read) {
 
 void setup() {
   Serial.begin(115200);
+
+  data = new uint8_t[max_len];
+  assert(data!=nullptr);
 
   while (!SD_MMC.begin()) {
     Serial.println("SDMMC error");

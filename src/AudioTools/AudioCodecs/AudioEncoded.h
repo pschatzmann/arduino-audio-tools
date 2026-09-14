@@ -73,7 +73,10 @@ class EncodedAudioOutput : public ModifyingOutput {
   /// Define object which need to be notified if the basinfo is changing
   void addNotifyAudioChange(AudioInfoSupport &bi) override {
     TRACEI();
-    decoder_ptr->addNotifyAudioChange(bi);
+    AudioOutput::addNotifyAudioChange(bi);
+    if (decoder_ptr != undefined) {
+      decoder_ptr->addNotifyAudioChange(bi);
+    }
   }
 
   AudioInfo defaultConfig() {
@@ -146,6 +149,9 @@ class EncodedAudioOutput : public ModifyingOutput {
     writer_ptr = decoder;
     if (ptr_out != nullptr) {
       decoder_ptr->setOutput(*ptr_out);
+    }
+    for (auto n : notify_vector) {
+      if (n != nullptr) decoder_ptr->addNotifyAudioChange(*n);
     }
   }
 
@@ -228,6 +234,9 @@ class EncodedAudioOutput : public ModifyingOutput {
   /// Is Available for Write check activated ?
   bool isCheckAvailableForWrite() { return check_available_for_write; }
 
+  /// Activate/Deactivate the Available for Write check: if activated, the write
+  void setCheckAvailableForWrite(bool check) { check_available_for_write = check; }
+
   /// defines the size of the decoded frame in bytes
   void setFrameSize(int size) { frame_size = size; }
 
@@ -243,6 +252,8 @@ class EncodedAudioOutput : public ModifyingOutput {
     return *this;
   }
 
+  bool isEncoder() { return encoder_ptr != undefined; }
+  bool isDecoder() { return decoder_ptr != undefined; }
 
  protected:
   // AudioInfo info;
@@ -364,14 +375,43 @@ class EncodedAudioStream : public ReformatBaseStream {
   }
 
   void end() override {
+    // In read-side mode (decoder reading from stream, output wired to same stream),
+    // redirect decoder output to sink BEFORE flushing, so buffered data 
+    // doesn't write back to the input source stream
+    Print* original_output = nullptr;
+    if (getStream() != nullptr && getPrint() == getStream() && reader.getTotalBytesRead() > 0) {
+      original_output = getPrint();
+      enc_out.setOutput(&null_stream);
+    }
+
+    // Now end the encoder/decoder and reader
     enc_out.end();
     reader.end();
+
+    // Restore the original output
+    if (original_output != nullptr) {
+      enc_out.setOutput(original_output);
+    }
+  }
+
+  /// Flushes the encoder without tearing down the reader infrastructure.
+  /// Called by TransformationReader on EOF so that final encoded bytes are
+  /// written into the result_queue while it is still the active output.
+  void flush() override {
+    if (enc_out.isEncoder()) {
+      enc_out.encoder().end();
+      enc_out.encoder().begin();
+    }
+    if (enc_out.isDecoder()) {
+      enc_out.decoder().end();
+      enc_out.decoder().begin();
+    }
   }
 
   int availableForWrite() override { return enc_out.availableForWrite(); }
 
   size_t write(const uint8_t *data, size_t len) override {
-    // addNotifyOnFirstWrite();
+    // addNotifyOnFirshtWrite();
     return enc_out.write(data, len);
   }
 
@@ -385,6 +425,8 @@ class EncodedAudioStream : public ReformatBaseStream {
 
   /// approx compression factor: e.g. mp3 is around 4
   float getByteFactor() override { return byte_factor; }
+
+  /// Define the compression factor: e.g. mp3 is around 4
   void setByteFactor(float factor) { byte_factor = factor; }
 
   /// defines the size of the decoded frame in bytes
@@ -393,8 +435,8 @@ class EncodedAudioStream : public ReformatBaseStream {
   EncodedAudioStream& operator=(EncodedAudioStream const& src) {
     enc_out = src.enc_out;
     byte_factor = src.byte_factor;
-    p_stream = src.p_stream;
-    p_print = src.p_print;
+    p_io = src.p_io;
+    p_out = src.p_out;
     info = src.info;
     return *this;
   };
@@ -410,7 +452,8 @@ class EncodedAudioStream : public ReformatBaseStream {
 
  protected:
   EncodedAudioOutput enc_out;
-  float byte_factor = 2.0f;
+  float byte_factor = 3.0f;
+  NullStream null_stream;
 };
 
 /**

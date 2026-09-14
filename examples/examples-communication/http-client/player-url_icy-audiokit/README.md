@@ -17,5 +17,5 @@ I also demonstrate how to assign your own actions to the buttons of the audio ki
 ### Dependencies
 
 - https://github.com/pschatzmann/arduino-audio-tools
-- https://github.com/pschatzmann/arduino-libhelix
+- https://github.com/pschatzmann/codec-helix
 - https://github.com/pschatzmann/arduino-audio-driver

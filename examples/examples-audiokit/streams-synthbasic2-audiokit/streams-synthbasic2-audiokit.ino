@@ -10,7 +10,7 @@
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 AudioBoardStream kit(AudioKitEs8388V1);
-SineWaveGenerator<int16_t> sine;
+SineGenerator<int16_t> sine;
 GeneratedSoundStream<int16_t> sine_stream(sine); 
 AudioEffectStream effects(sine_stream);
 ADSRGain adsr(0.0001,0.0001, 0.9 , 0.0002);
@@ -43,7 +43,7 @@ void setupActions(){
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial,AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   // setup effects
   effects.addEffect(adsr);
@@ -52,7 +52,7 @@ void setup() {
   auto cfg = kit.defaultConfig(TX_MODE);
   cfg.sd_active = false;
   kit.begin(cfg);
-  kit.setVolume(80);
+  kit.setVolume(0.8f);
 
   // Setup sound generation based on AudioKit settins
   sine.begin(cfg, 0);

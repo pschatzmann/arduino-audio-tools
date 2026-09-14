@@ -34,6 +34,12 @@
  */
 
 /**
+ * @defgroup usb USB
+ * @ingroup communications
+ * @brief USB Audio V 2.0
+ */
+
+/**
  * @defgroup transform Converting Streams
  * @ingroup main
  * @brief Stream classes which change the input or output
@@ -51,7 +57,7 @@
  * @brief Platform specific implementations.
  * Do not use any of theses classes directly and use the related platform independent
  * typedef instead: 
- * - TimerAlarmRepeating
+ * - AudioTimer
  * - I2SStrem
  * - PWMStream
  */
@@ -62,13 +68,25 @@
  * @brief Basic Concepts
  */
 
+/**
+ * @defgroup dsp DSP
+ * @ingroup main
+ * @brief Digital Signal Processing
+ **/
+
+/**
+ * @defgroup aec AEC
+ * @ingroup dsp
+ * @brief Automatic Echo Cancellation
+ **/
+
 
 #include "AudioToolsConfig.h"
 
 #if AUDIO_INCLUDE_CORE
 
 #ifdef USE_CONCURRENCY
-#  include "AudioTools/AudioLibs/Concurrency.h"
+#  include "AudioTools/Concurrency.h"
 #endif
 
 #include "AudioTools/CoreAudio.h"

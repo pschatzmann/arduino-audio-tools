@@ -9,14 +9,14 @@
 
 namespace audio_tools {
 
-
-
 /**
  * @brief ESP8266Audio AudioOutput class which stores the data in a temporary
  * buffer. The buffer can be consumed e.g. by a callback function by calling
  * read();
  * Dependencies: ESP8266Audio Library
  * Dependencies: ESP32-A2DP Library
+ * 
+ * @note Supported only on platforms that are suppored by the ESP8266Audio Library.
  * 
  * @author Phil Schatzmann
  * @copyright GPLv3

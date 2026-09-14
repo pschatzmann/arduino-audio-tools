@@ -7,7 +7,7 @@
  */
 
 
-// Install https://github.com/pschatzmann/arduino-libhelix.git
+// Install https://github.com/pschatzmann/codec-helix.git
 
 #include "Arduino.h"
 #include "AudioTools.h"

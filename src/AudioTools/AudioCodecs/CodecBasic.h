@@ -7,7 +7,7 @@ namespace audio_tools {
 
 /**
  * @brief DecoderBasic - supports mime type audio/basic
- * Requires https://github.com/pschatzmann/arduino-libg7xx
+ * Requires https://github.com/pschatzmann/codec-g7xx
  * The content of the "audio/basic" subtype is single channel audio
  * encoded using 8bit ISDN mu-law [PCM] at a sample rate of 8000 Hz.
  * @ingroup codecs
@@ -46,6 +46,8 @@ public:
     addNotifyAudioChange(bi);
   }
 
+  const char *mime() override { return "audio/basic"; }
+
   /// Defines the output Stream
   void setOutput(Print &out_stream) override {
     decoder.setOutput(out_stream);
@@ -83,7 +85,7 @@ protected:
  * @brief EncoderBasic - supports mime type audio/basic.
  *  The content of the "audio/basic" subtype is single channel audio
  *  encoded using 8bit ISDN mu-law [PCM] at a sample rate of 8000 Hz.
- * Requires https://github.com/pschatzmann/arduino-libg7xx
+ * Requires https://github.com/pschatzmann/codec-g7xx
  * @ingroup codecs
  * @ingroup encoder
  * @author Phil Schatzmann

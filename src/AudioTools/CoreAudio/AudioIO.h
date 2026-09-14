@@ -1,6 +1,7 @@
 #pragma once
 #include "AudioTools/CoreAudio/AudioOutput.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"
+#include "AudioTools/Communication/HTTP/AudioClient.h"  // for Client
 
 #ifndef MAX_ZERO_READ_COUNT
 #define MAX_ZERO_READ_COUNT 3
@@ -28,6 +29,9 @@ class TransformationReader {
   void begin(T* transform, Stream* source) {
     TRACED();
     active = true;
+    is_eof = false;
+    total_bytes_read = 0;
+    last_setup_buffer_size = 0;
     p_stream = source;
     p_transform = transform;
     if (transform == nullptr) {
@@ -38,14 +42,6 @@ class TransformationReader {
       LOGE("p_stream is NULL");
       active = false;
     }
-  }
-
-  /// Defines the read buffer size for individual reads
-  void resizeReadBuffer(int size) { buffer.resize(size); }
-  /// Defines the queue size for result
-  void resizeResultQueue(int size) {
-    result_queue_buffer.resize(size);
-    result_queue.begin();
   }
 
   size_t readBytes(uint8_t* data, size_t len) {
@@ -59,11 +55,117 @@ class TransformationReader {
       return 0;
     }
 
+    setupBuffers(len);
+
+    if (!is_eof) {
+      fillResultQueue(len);
+    }
+
+    int result_len = min((int)len, result_queue.available());
+    result_len = result_queue.readBytes(data, result_len);
+    LOGD("TransformationReader::readBytes: %d -> %d", (int)len, result_len);
+    total_bytes_read += result_len;
+    return result_len;
+  }
+
+  /// Fills the internal queue up to at least DEFAULT_BUFFER_SIZE bytes (if possible) and
+  /// reports the currently available queue size limited by max_read_size.
+  int available() {
+    if (!active || p_stream == nullptr || p_transform == nullptr) return 0;
+    if (is_eof) return result_queue.available();
+    setupBuffers(max_read_size);
+    fillResultQueue(max_read_size);
+    int available_bytes = result_queue.available();
+    LOGD("TransformationReader::available: %d", available_bytes);
+    return available_bytes > max_read_size ? max_read_size : available_bytes;
+  }
+
+  void end() {
+    result_queue_buffer.resize(0);
+    buffer.resize(0);
+    total_bytes_read = 0;
+    active = false;
+  }
+
+  /// Defines the queue size dependent on the read size
+  void setResultQueueFactor(int factor) { result_queue_factor = factor; }
+
+  /// Defines the queue size for result
+  void resizeResultQueue(int size) {
+    result_queue_buffer.resize(size);
+    result_queue.begin();
+  }
+
+  void setMaxReadSize(int size) { max_read_size = size; }
+
+  size_t getTotalBytesRead() const { return total_bytes_read; }
+
+  /// Defines how a run of MAX_ZERO_READ_COUNT consecutive empty reads from
+  /// the source is interpreted:
+  /// - true (default): the source is treated as finished (e.g. end of file)
+  ///   and is_eof latches permanently - matches the historical behavior for
+  ///   decoders/encoders reading a finite stream.
+  /// - false: the source is treated as a live/continuous producer that is
+  ///   just momentarily empty (a buffer underflow). is_eof is never set, so
+  ///   the next call simply tries again once more data has arrived.
+  void setEofOnZeroReads(bool flag) { eof_on_zero_reads = flag; }
+
+  /// Defines how long fillResultQueue() blocks in delay() after each empty
+  /// read from the source, before retrying (up to MAX_ZERO_READ_COUNT
+  /// times). Default is 5ms, matching historical behavior. For a live
+  /// producer read from the same thread/task that also has to keep some
+  /// other time-critical consumer fed (e.g. an I2S output pump driven from
+  /// the same loop()), blocking here for up to MAX_ZERO_READ_COUNT * this
+  /// value on every transient underflow can itself starve that consumer -
+  /// set this to 0 in that case so a momentarily-empty source just returns
+  /// immediately with whatever's available instead of stalling the caller.
+  void setZeroReadDelay(uint32_t delay_ms) { zero_read_delay_ms = delay_ms; }
+
+ protected:
+  RingBuffer<uint8_t> result_queue_buffer{0};
+  QueueStream<uint8_t> result_queue{result_queue_buffer};  //
+  Stream* p_stream = nullptr;
+  Vector<uint8_t> buffer{0};  // we allocate memory only when needed
+  T* p_transform = nullptr;
+  bool active = false;
+  int result_queue_factor = 5;
+  int max_read_size = DEFAULT_BUFFER_SIZE;
+  int last_setup_buffer_size = 0;
+  float last_byte_factor = 0.0f;
+  bool is_eof = false;
+  bool eof_on_zero_reads = true;
+  uint32_t zero_read_delay_ms = 5;
+  size_t total_bytes_read = 0;
+
+  /// Defines the read buffer size for individual reads
+  void resizeReadBuffer(int size) { buffer.resize(size); }
+
+  void setupBuffers(size_t len) {
+    float byte_factor = p_transform->getByteFactor();
+    if (byte_factor <= 0.0f) {
+      LOGE("Invalid byte factor: %f", byte_factor);
+      byte_factor = 1.0f;
+    }
+    // Recompute if the requested length changed, or if the transform's byte
+    // factor drifted meaningfully since the read chunk size was last sized
+    // (e.g. a live-adjusted resampling step size). For a transform with a
+    // constant byte factor (the common decoder/encoder case) this check
+    // never re-triggers after the first call, so behavior there is
+    // unchanged; it only matters for transforms whose byte factor changes
+    // at runtime, where a stale chunk size would otherwise silently distort
+    // the consumption/production ratio.
+    bool byte_factor_changed =
+        fabsf(byte_factor - last_byte_factor) > 0.01f * last_byte_factor;
+    if (len == last_setup_buffer_size && !byte_factor_changed) return;
+    LOGD("setupBuffers: %d", (int)len);
+    last_byte_factor = byte_factor;
+
     // we read half the necessary bytes
-    if (buffer.size() == 0) {
-      int size = (0.5f / p_transform->getByteFactor() * len);
-      // process full samples/frames
-      size = size / 4 * 4;
+    int size = (0.5f / byte_factor * len);
+    // process full samples/frames
+    size = size / 4 * 4;
+    if (size <= 0) size = 4;
+    if (buffer.size() < size) {
       LOGI("read size: %d", size);
       buffer.resize(size);
     }
@@ -75,56 +177,71 @@ class TransformationReader {
       result_queue_buffer.resize(rb_size);
       result_queue.begin();
     }
+    last_setup_buffer_size = len;
+  }
 
-    if (result_queue.available() < len) {
-      Print* tmp = setupOutput();
-      int zero_count = 0;
-      while (result_queue.available() < len) {
-        int read_eff = p_stream->readBytes(buffer.data(), buffer.size());
-        if (read_eff > 0) {
-          zero_count = 0;  // reset 0 count
-          if (read_eff != buffer.size()) {
-            LOGD("readBytes %d -> %d", buffer.size(), read_eff);
-          }
-          int write_eff = p_transform->write(buffer.data(), read_eff);
-          if (write_eff != read_eff) {
-            LOGE("TransformationReader::write %d -> %d", read_eff, write_eff);
-          }
-        } else {
-          // limit the number of reads which provide 0;
-          if (++zero_count > MAX_ZERO_READ_COUNT) {
-            break;
-          }
-          // wait for some more data
-          delay(5);
-        }
-      }
-      restoreOutput(tmp);
+  /// Fills the result queue until at least len bytes are available or no more
+  /// input data arrives.
+  void fillResultQueue(size_t len) {
+    if (is_eof) return;
+    if (result_queue.available() >= len) return;
+    LOGD("fillResultQueue: %d", (int)len);
+
+    // Detect misconfigured buffer: if the ring buffer capacity is smaller than
+    // the requested len bytes we can never satisfy the condition and will loop
+    // forever. Issue an error and bail out early.
+    if ((int)len > result_queue_buffer.size()) {
+      LOGE("fillResultQueue: result_queue_buffer too small: %d < %d. "
+           "Increase result_queue_factor or call resizeReadResultQueue().",
+           result_queue_buffer.size(), (int)len);
+      return;
     }
 
-    int result_len = min((int)len, result_queue.available());
-    result_len = result_queue.readBytes(data, result_len);
-    LOGD("TransformationReader::readBytes: %d -> %d", (int)len, result_len);
-
-    return result_len;
+    Print* tmp = setupOutput();
+    int zero_count = 0;
+    while (result_queue.available() < len) {
+      // Detect buffer-full stall: if we can't write any more data but the
+      // queue is still below len, we must stop to avoid an endless loop.
+      if (result_queue.available() >= result_queue_buffer.size()) {
+        LOGE("fillResultQueue: result_queue full (%d) but target not reached "
+             "(%d/%d). Increase result_queue_factor or call "
+             "resizeReadResultQueue().",
+             result_queue_buffer.size(), result_queue.available(), (int)len);
+        break;
+      }
+      int read_size = buffer.size();
+      int read_eff = p_stream->readBytes(buffer.data(), read_size);
+      LOGD("readBytes from source: %d -> %d", read_size,read_eff);
+      if (read_eff > 0) {
+        zero_count = 0;  // reset 0 count
+        if (read_eff != buffer.size()) {
+          LOGD("readBytes %d -> %d", buffer.size(), read_eff);
+        }
+        int write_eff = p_transform->write(buffer.data(), read_eff);
+        if (write_eff != read_eff) {
+          LOGE("TransformationReader::write %d -> %d", read_eff, write_eff);
+        }
+      } else {
+        // limit the number of reads which provide 0;
+        if (++zero_count > MAX_ZERO_READ_COUNT) {
+          if (eof_on_zero_reads) {
+            is_eof = true;
+            // Flush any buffered/final encoder bytes into result_queue.
+            p_transform->flush();
+          }
+          // Otherwise the source is just a momentarily empty live
+          // producer (buffer underflow, not end of stream): stop trying
+          // for this call, but leave is_eof false so the next call
+          // retries once more data has arrived.
+          break;
+        }
+        // wait for some more data
+        if (zero_read_delay_ms > 0) delay(zero_read_delay_ms);
+      }
+    }
+    LOGD("fillResultQueue available: %d", result_queue.available());
+    restoreOutput(tmp);
   }
-
-  void end() {
-    result_queue_buffer.resize(0);
-    buffer.resize(0);
-  }
-
-  /// Defines the queue size dependent on the read size
-  void setResultQueueFactor(int factor) { result_queue_factor = factor; }
-
- protected:
-  RingBuffer<uint8_t> result_queue_buffer{0};
-  QueueStream<uint8_t> result_queue{result_queue_buffer};  //
-  Stream* p_stream = nullptr;
-  Vector<uint8_t> buffer{0};  // we allocate memory only when needed
-  T* p_transform = nullptr;
-  bool active = false;
-  int result_queue_factor = 5;
 
   /// Makes sure that the data  is written to the array
   /// @param data
@@ -152,32 +269,32 @@ class ReformatBaseStream : public ModifyingStream {
  public:
   virtual void setStream(Stream& stream) override {
     TRACED();
-    p_stream = &stream;
-    p_print = &stream;
+    p_io = &stream;
+    p_out = &stream;
   }
 
   virtual void setStream(AudioStream& stream) {
     TRACED();
-    p_stream = &stream;
-    p_print = &stream;
+    p_io = &stream;
+    p_out = &stream;
     // setNotifyOnOutput(stream);
     addNotifyAudioChange(stream);
   }
 
   virtual void setOutput(AudioOutput& print) {
     TRACED();
-    p_print = &print;
+    p_out = &print;
     addNotifyAudioChange(print);
   }
 
   virtual void setOutput(Print& print) override {
     TRACED();
-    p_print = &print;
+    p_out = &print;
   }
 
-  virtual Print* getPrint() { return p_print; }
+  virtual Print* getPrint() { return p_out; }
 
-  virtual Stream* getStream() { return p_stream; }
+  virtual Stream* getStream() { return p_io; }
 
   size_t readBytes(uint8_t* data, size_t len) override {
     LOGD("ReformatBaseStream::readBytes: %d", (int)len);
@@ -185,7 +302,7 @@ class ReformatBaseStream : public ModifyingStream {
   }
 
   int available() override {
-    return DEFAULT_BUFFER_SIZE;  // reader.availableForWrite();
+    return reader.available();
   }
 
   int availableForWrite() override {
@@ -193,6 +310,13 @@ class ReformatBaseStream : public ModifyingStream {
   }
 
   virtual float getByteFactor() = 0;
+
+  /// Called by TransformationReader when EOF is detected on the source stream.
+  /// Override in subclasses to flush any internally buffered encoder/decoder
+  /// data into the current output (which at that point is the result_queue).
+  /// Do NOT call the full end()/begin() cycle here – that would destroy the
+  /// reader's own buffers and reset the is_eof flag.
+  virtual void flush() {}
 
   void end() override {
     TRACED();
@@ -204,15 +328,22 @@ class ReformatBaseStream : public ModifyingStream {
   /// transformationReader().resizeResultQueue(size)
   void resizeReadResultQueue(int size) { reader.resizeResultQueue(size); }
 
+  /// same as resizeReadResultQueue(size)
+  void setReadResultQueueSize(int size) { reader.resizeResultQueue(size); }
+
+  /// Defines the read buffer size for individual reads: same as transformationReader().setMaxReadSize(size)
+  void setMaxReadSize(int size) { reader.setMaxReadSize(size); }
+
   /// Provides access to the TransformationReader
   virtual TransformationReader<ReformatBaseStream>& transformationReader() {
     return reader;
   }
 
+
  protected:
   TransformationReader<ReformatBaseStream> reader;
-  Stream* p_stream = nullptr;
-  Print* p_print = nullptr;
+  Stream* p_io = nullptr;
+  Print* p_out = nullptr;
 
   void setupReader() {
     if (getStream() != nullptr) {
@@ -262,24 +393,32 @@ class AdapterAudioStreamToAudioOutput : public AudioOutputAdapter {
 
   void setStream(AudioStream& stream) { p_stream = &stream; }
 
-  void setAudioInfo(AudioInfo info) override { p_stream->setAudioInfo(info); }
-
-  AudioInfo audioInfo() override { return p_stream->audioInfo(); }
-
-  size_t write(const uint8_t* data, size_t len) override {
-    return p_stream->write(data, len);
+  void setAudioInfo(AudioInfo info) override {
+    if (p_stream != nullptr) p_stream->setAudioInfo(info);
   }
 
-  int availableForWrite() override { return p_stream->availableForWrite(); }
+  AudioInfo audioInfo() override {
+    return p_stream != nullptr ? p_stream->audioInfo() : AudioInfo();
+  }
 
-  bool begin() override { return p_stream->begin(); }
+  size_t write(const uint8_t* data, size_t len) override {
+    return p_stream != nullptr ? p_stream->write(data, len) : 0;
+  }
 
-  void end() override { p_stream->end(); }
+  int availableForWrite() override {
+    return p_stream != nullptr ? p_stream->availableForWrite() : 0;
+  }
+
+  bool begin() override { return p_stream != nullptr && p_stream->begin(); }
+
+  void end() override {
+    if (p_stream != nullptr) p_stream->end();
+  }
 
   /// If true we need to release the related memory in the destructor
   virtual bool isDeletable() override { return true; }
 
-  operator bool() override { return *p_stream; }
+  operator bool() override { return p_stream != nullptr && *p_stream; }
 
  protected:
   AudioStream* p_stream = nullptr;
@@ -297,22 +436,28 @@ class AdapterAudioOutputToAudioStream : public AudioStream {
 
   void setOutput(AudioOutput& stream) { p_stream = &stream; }
 
-  void setAudioInfo(AudioInfo info) override { p_stream->setAudioInfo(info); }
-
-  AudioInfo audioInfo() override { return p_stream->audioInfo(); }
-
-  size_t write(const uint8_t* data, size_t len) override {
-    return p_stream->write(data, len);
+  void setAudioInfo(AudioInfo info) override {
+    if (p_stream != nullptr) p_stream->setAudioInfo(info);
   }
 
-  bool begin() override { return p_stream->begin(); }
+  AudioInfo audioInfo() override {
+    return p_stream != nullptr ? p_stream->audioInfo() : AudioInfo();
+  }
 
-  void end() override { p_stream->end(); }
+  size_t write(const uint8_t* data, size_t len) override {
+    return p_stream != nullptr ? p_stream->write(data, len) : 0;
+  }
+
+  bool begin() override { return p_stream != nullptr && p_stream->begin(); }
+
+  void end() override {
+    if (p_stream != nullptr) p_stream->end();
+  }
 
   /// If true we need to release the related memory in the destructor
   virtual bool isDeletable() { return true; }
 
-  operator bool() override { return *p_stream; }
+  operator bool() override { return p_stream != nullptr && *p_stream; }
 
  protected:
   AudioOutput* p_stream = nullptr;
@@ -358,34 +503,50 @@ class MultiOutput : public ModifyingOutput {
   virtual ~MultiOutput() { clear(); }
 
   /// Add an additional AudioOutput output
-  void add(AudioOutput& out) { vector.push_back(&out); }
+  void add(AudioOutput& out) {
+    vector.push_back({&out, &out, Kind::AudioOutputKind});
+  }
 
   /// Add an AudioStream to the output
   void add(AudioStream& stream) {
-    AdapterAudioStreamToAudioOutput* out =
-        new AdapterAudioStreamToAudioOutput(stream);
-    vector.push_back(out);
+    vector.push_back({&stream, &stream, Kind::AudioStreamKind});
   }
 
-  void add(Print& print) {
-    AdapterPrintToAudioOutput* out = new AdapterPrintToAudioOutput(print);
-    vector.push_back(out);
+  /// Add a (network) Client as output: e.g. WiFiClient, EthernetClient...
+  void add(Client& client) {
+    vector.push_back({&client, nullptr, Kind::ClientKind});
+  }
+
+  /// Add a generic Print output: Warning no support for AudioInfo
+  /// notifications. It is recommended to use one of the other add() methods.
+  void add(Print& print) { vector.push_back({&print, nullptr, Kind::PrintKind}); }
+
+  /// Removes the indicated output
+  void remove(Print& print) {
+    for (int j = 0; j < vector.size(); j++) {
+      if (vector[j].print == &print) {
+        vector.erase(j);
+        return;
+      }
+    }
   }
 
   void flush() {
     for (int j = 0; j < vector.size(); j++) {
-      vector[j]->flush();
+      vector[j].print->flush();
     }
   }
 
   void setAudioInfo(AudioInfo info) {
     for (int j = 0; j < vector.size(); j++) {
-      vector[j]->setAudioInfo(info);
+      if (vector[j].info != nullptr) {
+        vector[j].info->setAudioInfo(info);
+      }
     }
   }
 
   size_t write(const uint8_t* data, size_t len) override {
-    for (auto& out : vector) {
+    for (auto& rec : vector) {
       int open = len;
       int start = 0;
       // create copy of data to avoid that one output changes the data for the
@@ -393,7 +554,7 @@ class MultiOutput : public ModifyingOutput {
       uint8_t copy[len];
       memcpy(copy, data, len);
       while (open > 0) {
-        int written = out->write(copy + start, open);
+        int written = rec.print->write(copy + start, open);
         open -= written;
         start += written;
       }
@@ -405,24 +566,66 @@ class MultiOutput : public ModifyingOutput {
     for (int j = 0; j < vector.size(); j++) {
       int open = 1;
       while (open > 0) {
-        open -= vector[j]->write(ch);
+        open -= vector[j].print->write(ch);
       }
     }
     return 1;
   }
 
-  /// Removes all output components
-  void clear() {
-    for (auto& tmp : vector) {
-      if (tmp != nullptr && tmp->isDeletable()) {
-        delete tmp;
+  /// Removes all output components: the referenced Print/AudioOutput/
+  /// AudioStream/Client objects are never owned by MultiOutput, so no
+  /// memory needs to be released here.
+  void clear() { vector.clear(); }
+
+  /// Removes all outputs which are no longer active. Client, AudioStream and
+  /// AudioOutput provide an operator bool() which is used to determine if the
+  /// output is still active; plain Print outputs cannot be checked and are
+  /// always kept.
+  void clearInactive() {
+    for (int j = vector.size() - 1; j >= 0; j--) {
+      if (!isActive(vector[j])) {
+        vector.erase(j);
       }
     }
-    vector.clear();
   }
 
  protected:
-  Vector<AudioOutput*> vector;
+  /// Identifies the actual type behind the stored Print pointer so that
+  /// clearInactive() can safely static_cast back to call operator bool()
+  enum class Kind { PrintKind, ClientKind, AudioStreamKind, AudioOutputKind };
+
+  /// Record describing a single replicated output
+  struct MultiOutputRecord {
+    /// Target to which the data is actually written
+    Print* print;
+    /// Optional AudioInfoSupport interface: only set when the added object
+    /// also supports AudioInfo notifications (AudioOutput, AudioStream)
+    AudioInfoSupport* info;
+    /// Actual type of the object behind print
+    Kind kind;
+
+    MultiOutputRecord(Print* print = nullptr, AudioInfoSupport* info = nullptr,
+                       Kind kind = Kind::PrintKind)
+        : print(print), info(info), kind(kind) {}
+  };
+
+  Vector<MultiOutputRecord> vector;
+
+  /// Determines if the output is still active: Client, AudioStream and
+  /// AudioOutput support this via their operator bool(); plain Print
+  /// outputs cannot be checked and are always reported as active.
+  bool isActive(MultiOutputRecord& rec) {
+    switch (rec.kind) {
+      case Kind::ClientKind:
+        return (bool)*static_cast<Client*>(rec.print);
+      case Kind::AudioStreamKind:
+        return (bool)*static_cast<AudioStream*>(rec.print);
+      case Kind::AudioOutputKind:
+        return (bool)*static_cast<AudioOutput*>(rec.print);
+      default:
+        return true;
+    }
+  }
 
   /// support for Pipleline
   void setOutput(Print& out) { add(out); }
@@ -442,29 +645,29 @@ class TimedStream : public ModifyingStream {
   TimedStream() = default;
 
   TimedStream(AudioStream& io, long startSeconds = 0, long endSeconds = -1) {
-    p_stream = &io;
-    p_print = &io;
+    p_io = &io;
+    p_out = &io;
     p_info = &io;
     setStartSec(startSeconds);
     setEndSec(endSeconds);
   }
 
   TimedStream(AudioOutput& o, long startSeconds = 0, long endSeconds = -1) {
-    p_print = &o;
+    p_out = &o;
     p_info = &o;
     setStartSec(startSeconds);
     setEndSec(endSeconds);
   }
 
   TimedStream(Stream& io, long startSeconds = 0, long endSeconds = -1) {
-    p_stream = &io;
-    p_print = &io;
+    p_io = &io;
+    p_out = &io;
     setStartSec(startSeconds);
     setEndSec(endSeconds);
   }
 
   TimedStream(Print& o, long startSeconds = 0, long endSeconds = -1) {
-    p_print = &o;
+    p_out = &o;
     setStartSec(startSeconds);
     setEndSec(endSeconds);
   }
@@ -526,7 +729,7 @@ class TimedStream : public ModifyingStream {
   /// work!
   size_t readBytes(uint8_t* data, size_t len) override {
     // if reading is not supported we stop
-    if (p_stream == nullptr) return 0;
+    if (p_io == nullptr) return 0;
     // Positioin to start
     if (start_bytes > current_bytes) {
       consumeBytes(start_bytes - current_bytes);
@@ -536,7 +739,7 @@ class TimedStream : public ModifyingStream {
     // read the data now
     size_t result = 0;
     do {
-      result = p_stream->readBytes(data, len);
+      result = p_io->readBytes(data, len);
       current_bytes += len;
       // ignore data before start time
     } while (result > 0 && current_bytes < start_bytes);
@@ -548,13 +751,13 @@ class TimedStream : public ModifyingStream {
     if (current_bytes >= end_bytes) return 0;
     current_bytes += len;
     if (current_bytes < start_bytes) return len;
-    return p_print->write(data, len);
+    return p_out->write(data, len);
   }
 
   /// Provides the available bytes until the end time has reached
   int available() override {
-    if (p_stream == nullptr) return 0;
-    return current_bytes < end_bytes ? p_stream->available() : 0;
+    if (p_io == nullptr) return 0;
+    return current_bytes < end_bytes ? p_io->available() : 0;
   }
 
   /// Updates the AudioInfo in the current object and in the source or target
@@ -565,7 +768,11 @@ class TimedStream : public ModifyingStream {
   }
 
   int availableForWrite() override {
-    return current_bytes < end_bytes ? p_print->availableForWrite() : 0;
+    return current_bytes < end_bytes ? p_out->availableForWrite() : 0;
+  }
+
+  void flush() override {
+    if (p_out != nullptr) p_out->flush();
   }
 
   /// Experimental: if used on mp3 you can set the compression ratio e.g. to 11
@@ -577,34 +784,34 @@ class TimedStream : public ModifyingStream {
     return info.sample_rate * info.channels * info.bits_per_sample / 8;
   }
 
-  void setOutput(Print& out) override { p_print = &out; }
+  void setOutput(Print& out) override { p_out = &out; }
 
   void setStream(Stream& stream) override {
-    p_print = &stream;
-    p_stream = &stream;
+    p_out = &stream;
+    p_io = &stream;
   }
 
   void setOutput(AudioOutput& out) {
-    p_print = &out;
+    p_out = &out;
     p_info = &out;
   }
 
   void setStream(AudioOutput& out) {
-    p_print = &out;
+    p_out = &out;
     p_info = &out;
   }
 
   void setStream(AudioStream& stream) {
-    p_print = &stream;
-    p_stream = &stream;
+    p_out = &stream;
+    p_io = &stream;
     p_info = &stream;
   }
 
   size_t size() { return end_bytes - start_bytes; }
 
  protected:
-  Stream* p_stream = nullptr;
-  Print* p_print = nullptr;
+  Stream* p_io = nullptr;
+  Print* p_out = nullptr;
   AudioInfoSupport* p_info = nullptr;
   uint32_t start_ms = 0;
   uint32_t end_ms = UINT32_MAX;
@@ -618,7 +825,7 @@ class TimedStream : public ModifyingStream {
     uint8_t buffer[1024];
     while (open > 0) {
       int toread = min(1024, open);
-      p_stream->readBytes(buffer, toread);
+      p_io->readBytes(buffer, toread);
       open -= toread;
     }
     current_bytes += len;
@@ -820,5 +1027,124 @@ class ChannelsSelectOutput : public AudioOutput {
     return defaultChannels;
   }
 };
+
+/**
+ * @brief AudioTimeSourceStream: A stream that provides time information
+ * based on the audio data actually processed - implements the TimeSource
+ * interface. millis() (inherited, unmodified) is plain wall time;
+ * playbackTime() is the audio-derived progress, which is what a consumer
+ * that must stay tied to genuine playback (e.g. PacedVideoOutput) should
+ * use instead - see playbackTime()'s own comment for why they can diverge.
+ * @ingroup io
+ * @author Phil Schatzmann
+ */
+
+class AudioTimeSourceStream : public AudioStream, public TimeSource {
+ public:
+  AudioTimeSourceStream() = default;
+  AudioTimeSourceStream(AudioStream& stream) { setStream(stream); }
+  AudioTimeSourceStream(AudioOutput& out)  { setOutput(out); }
+  AudioTimeSourceStream(Print& print)  { setOutput(print); }
+  AudioTimeSourceStream(Stream& stream) { setStream(stream); }
+
+  /// Optional: explicitly (re)starts playbackTime() at 0 - use this if
+  /// you need an explicit restart point (e.g. looping/seeking). Not
+  /// required otherwise: the first byte that actually flows through
+  /// write()/readBytes() anchors it on its own (see updateTime()) - most
+  /// callers just wire this in as a plain Print/AudioStream target (e.g.
+  /// PacedVideoOutput::setAudioClock()'s usage pattern) and never call
+  /// begin() on it directly.
+  bool begin() {
+    bool result = AudioStream::begin();
+    if (result) {
+      resetTime();
+    }
+    return result;
+  }
+
+  size_t readBytes(uint8_t* data, size_t len) override {
+    if (time_callback_before != nullptr) {
+      time_callback_before(playbackTime());
+    }
+    // Forward to the configured source (set via setStream()) rather than
+    // AudioStream::readBytes(), which is just an "unsupported" stub with
+    // no knowledge of p_stream.
+    size_t result = p_stream != nullptr ? p_stream->readBytes(data, len) : 0;
+    if (result > 0) {
+      updateTime(result);
+    }
+    return result;
+  }
+
+  size_t write(const uint8_t* data, size_t len) override {
+    if (time_callback_before != nullptr) {
+      time_callback_before(playbackTime());
+    }
+    // Forward to the configured target (set via setOutput()/setStream())
+    // rather than AudioStream::write(), which is just an "unsupported"
+    // stub with no knowledge of p_out - this class exists specifically to
+    // sit transparently between a decoder and the real audio sink.
+    size_t result = p_out != nullptr ? p_out->write(data, len) : 0;
+    if (result > 0) {
+      updateTime(result);
+    }
+    return result;
+  }
+
+  /// Elapsed playback time (ms): the sum of audio duration
+  /// (sample_rate/channels/bits_per_sample-derived) actually handed to
+  /// write()/readBytes() so far - see TimeSource::playbackTime(). Purely
+  /// a running total of processed bytes: never extrapolated by, or
+  /// otherwise dependent on, wall-clock time (see millis(), inherited
+  /// unmodified, for that) - so it stalls exactly when the caller stalls
+  /// (e.g. busy elsewhere in a shared demux/decode loop) instead of
+  /// continuing to advance. Returns 0 before the first byte has ever been
+  /// processed (begin() is optional - see its own comment).
+  uint32_t playbackTime() override { return playback_time_ms; }
+
+  void setOutput(Print& out)  {
+    p_out = &out;
+  }
+  void setOutput(AudioOutput& out)  {
+    p_out = &out;
+    addNotifyAudioChange(out);
+  }
+  void setStream(Stream& stream)  {
+    p_stream = &stream;
+    p_out = &stream;
+  }
+  void setStream(AudioStream& stream)  {
+    p_stream = &stream;
+    p_out = &stream;
+    addNotifyAudioChange(stream);
+  }
+  /// Defines a callback function to be called whenever the time is updated
+  void setTimeCallback(void (*cb)(uint32_t time_ms)) { time_callback_before = cb; }
+  /// Defines a callback function to be called whenever the time is updated
+  void setTimeCallbackAfter(void (*cb)(uint32_t time_ms)) { time_callback_after = cb; }
+
+ protected:
+  Print *p_out = nullptr;
+  Stream *p_stream = nullptr;
+  // Pure running total of byte-derived durations - see playbackTime().
+  // Never touched by wall-clock time.
+  uint32_t playback_time_ms = 0;
+  void (*time_callback_before)(uint32_t time_ms) = nullptr;
+  void (*time_callback_after)(uint32_t time_ms) = nullptr;
+
+  void resetTime() { playback_time_ms = 0; }
+
+  void updateTime(size_t bytes) {
+    AudioInfo info = audioInfo();
+    uint32_t bytes_per_second = info.sample_rate * info.channels * info.bits_per_sample / 8;
+    if (bytes_per_second == 0) return;
+    uint32_t added_ms = (uint32_t)(((uint64_t)bytes * 1000) / bytes_per_second);
+    playback_time_ms += added_ms;
+    if (time_callback_after != nullptr) {
+      time_callback_after(playback_time_ms);
+    }
+  }
+};
+
 
 }  // namespace audio_tools

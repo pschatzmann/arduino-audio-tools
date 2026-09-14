@@ -10,8 +10,9 @@
 #define HLS_BUFFER_COUNT 2
 #define HLS_MAX_NO_READ 2
 #define HLS_MAX_URL_LEN 256
-#define HLS_TIMEOUT 5000
+#define HLS_TIMEOUT 4000
 #define HLS_UNDER_OVERFLOW_WAIT_TIME 10
+#define HLS_RELOAD_RETRY_DELAY 2000
 
 /// hide hls implementation in it's own namespace
 
@@ -41,6 +42,7 @@ class URLLoaderHLS {
   bool begin() {
     TRACED();
     buffer.resize(buffer_size * buffer_count);
+    url_stream.httpRequest().setAgent(agent);
 
     active = true;
     return true;
@@ -102,6 +104,13 @@ class URLLoaderHLS {
 
   void setCACert(const char *cert) { url_stream.setCACert(cert); }
 
+  /// Defines the User-Agent header sent with the segment requests (some
+  /// CDNs reject requests that don't carry one)
+  void setAgent(const char *agent) {
+    this->agent = agent;
+    url_stream.httpRequest().setAgent(agent);
+  }
+
  protected:
   Vector<const char *> urls{10};
   RingBuffer<uint8_t> buffer{0};
@@ -110,6 +119,7 @@ class URLLoaderHLS {
   int buffer_count = HLS_BUFFER_COUNT;
   URLStream url_stream;
   const char *url_to_play = nullptr;
+  const char *agent = DEFAULT_AGENT;
 
   /// try to keep the buffer filled
   void bufferRefill() {
@@ -231,6 +241,7 @@ class HLSParser {
     segments_url_str = "";
     bandwidth = 0;
     total_read = 0;
+    url_stream.httpRequest().setAgent(agent);
 
     if (!parseIndex()) {
       TRACEE();
@@ -275,8 +286,10 @@ class HLSParser {
     return result;
   }
 
+  /// Provides the actual url of the index
   const char *indexUrl() { return index_url_str; }
 
+  /// Provides the actual url of the segments
   const char *segmentsUrl() { return segments_url_str.c_str(); }
 
   /// Provides the codec
@@ -307,17 +320,30 @@ class HLSParser {
     url_loader.setBufferSize(size, count);
   }
 
+  /// Defines the certificate 
   void setCACert(const char *cert) {
     url_stream.setCACert(cert);
     url_loader.setCACert(cert);
   }
 
+  /// Changes the Wifi to power saving mode
   void setPowerSave(bool flag) { url_stream.setPowerSave(flag); }
 
+  /// Defines the User-Agent header sent with the playlist and segment
+  /// requests (some CDNs reject requests that don't carry one)
+  void setAgent(const char *agent) {
+    this->agent = agent;
+    url_stream.httpRequest().setAgent(agent);
+    url_loader.setAgent(agent);
+  }
+
+  /// The resolving of relative addresses can be quite tricky: you can provide
+  /// your custom resolver implementation
   void setURLResolver(const char *(*cb)(const char *segment,
                                         const char *reqURL)) {
     resolve_url = cb;
   }
+
   /// Provides the hls url as string
   const char *urlStr() { return url_str.c_str(); }
 
@@ -336,6 +362,7 @@ class HLSParser {
   Str segments_url_str;
   Str url_str;
   const char *index_url_str = nullptr;
+  const char *agent = DEFAULT_AGENT;
   URLStream url_stream;
   URLLoaderHLS<URLStream> url_loader;
   URLHistory url_history;
@@ -346,6 +373,7 @@ class HLSParser {
   uint64_t next_sement_load_time_planned = 0;
   float play_time = 0;
   uint64_t next_sement_load_time = 0;
+  uint64_t next_retry_time = 0;
   const char *(*resolve_url)(const char *segment,
                              const char *reqURL) = resolveURL;
 
@@ -487,8 +515,20 @@ class HLSParser {
       return false;
     }
 
-    // make sure that we load at relevant schedule
-    if (millis() < next_sement_load_time && url_loader.urlCount() > 1) {
+    // back off after a failed reload attempt (e.g. server did not publish a
+    // new playlist yet) to avoid hammering the server and starving the
+    // watchdog with a tight retry loop
+    if (millis() < next_retry_time) {
+      delay(1);
+      return false;
+    }
+
+    // make sure that we load at relevant schedule: this pacing only applies
+    // once we are actually playing - while we are still buffering the
+    // initial segments (!active) we need to fetch as fast as possible so
+    // that we cross START_URLS_LIMIT and can start playback
+    if (active && millis() < next_sement_load_time &&
+        url_loader.urlCount() > 1) {
       delay(1);
       return false;
     }
@@ -513,9 +553,8 @@ class HLSParser {
 
     segment_count = 0;
     if (!parseSegmentLines()) {
-      TRACEE();
+      // e.g. the playlist has not been updated yet: not an error
       parse_segments_active = false;
-      // do not display as error
       return true;
     }
 
@@ -581,6 +620,9 @@ class HLSParser {
         LOGI("media_sequence: %d", new_media_sequence);
         if (new_media_sequence == media_sequence) {
           LOGW("MEDIA-SEQUENCE already loaded: %d", media_sequence);
+          // the server has not published a new playlist yet: back off
+          // before retrying instead of reloading in a tight loop
+          next_retry_time = millis() + HLS_RELOAD_RETRY_DELAY;
           return false;
         }
         media_sequence = new_media_sequence;
@@ -716,6 +758,11 @@ class HLSStreamT : public AbstractURLStream {
 
   /// Changes the Wifi to power saving mode
   void setPowerSave(bool flag) override { parser.setPowerSave(flag); }
+
+  /// Defines the User-Agent header sent with the playlist and segment
+  /// requests (some CDNs reject requests that don't carry one). Defaults
+  /// to a browser-like user agent.
+  void setAgent(const char *agent) { parser.setAgent(agent); }
 
   /// Custom logic to provide the codec as Content-Type to support the
   /// MultiCodec

@@ -7,14 +7,10 @@
 #endif
 
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
+#include "AudioTools/CoreAudio/AudioBasic/int24_t.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
-
-// fix compile error for ESP32 C3
-#undef HZ
-
-// MIN
-#undef MIN
-#define MIN(A, B) ((A) < (B) ? (A) : (B))
+// Some top level functions: stop(), checkMemory()
+#include "AudioTools/CoreAudio/AudioRuntime.h"
 
 namespace audio_tools {
 
@@ -45,6 +41,11 @@ static const char* RxTxModeNames[4] = {"UNDEFINED_MODE", "TX_MODE", "RX_MODE",
  * @brief Time Units
  * @ingroup basic
  */
+// Some libc headers (e.g. sys/param.h, pulled in transitively by headers
+// included above) #define HZ - the #undef in AudioToolsConfig.h only guards
+// against pollution before that file's own includes run, not pollution
+// reintroduced by headers included since. Undef again right before use.
+#undef HZ
 enum TimeUnit { MS, US, HZ };
 static const char* TimeUnitStr[3]{"MS", "US", "HZ"};
 
@@ -113,7 +114,8 @@ struct AudioInfo {
 #endif
   /// Returns true if all components are defined (no component is 0)
   operator bool() {
-    return sample_rate > 0 && sample_rate <= 100000 && channels > 0 && channels < 20 && bits_per_sample > 0 && bits_per_sample <= 64;
+    return sample_rate > 0 && sample_rate <= 192000 && channels > 0 &&
+           channels < 20 && bits_per_sample > 0 && bits_per_sample <= 64;
   }
 
   virtual void clear() {
@@ -527,5 +529,78 @@ inline void waitFor(bool& flag) { while (!flag); }
 /// @brief Type alias for a collection of pin numbers
 /// @ingroup basic
 using Pins = Vector<int>;
+
+/**
+ * @brief Abstract interface for classes that can provide MIME type information.
+ *
+ * This class defines a simple interface for objects that can determine and
+ * provide MIME type strings. It serves as a base class for various MIME
+ * detection and source identification implementations within the audio tools
+ * framework.
+ *
+ * Classes implementing this interface should provide logic to determine the
+ * appropriate MIME type based on their specific context (e.g., file content,
+ * stream headers, file extensions, etc.).
+ *
+ * @note This is a pure virtual interface class and cannot be instantiated
+ * directly.
+ * @ingroup codecs
+ * @ingroup decoder
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class MimeSource {
+ public:
+  /**
+   * @brief Get the MIME type string.
+   *
+   * Pure virtual method that must be implemented by derived classes to return
+   * the appropriate MIME type string for the current context.
+   *
+   * @return const char* Pointer to a null-terminated string containing the MIME
+   * type. The string should follow standard MIME type format (e.g.,
+   * "audio/mpeg"). Returns nullptr if MIME type cannot be determined.
+   *
+   * @note The returned pointer should remain valid for the lifetime of the
+   * object or until the next call to this method.
+   */
+  virtual const char* mime() = 0;
+};
+
+/**
+ * @brief Interface for classes that can provide time information - two
+ * distinct notions of "now", not interchangeable: millis() is real wall
+ * time; playbackTime() is however far actual processing has gotten,
+ * which is not the same thing whenever the two can diverge (a consumer
+ * blocked/starved, a paused source, ...). A consumer that must stay tied
+ * to genuine progress (e.g. PacedVideoOutput scheduling video against
+ * actual decoded-audio playback, not merely time passing) should use
+ * playbackTime(), not millis().
+ *
+ * @note This is a pure virtual interface class and cannot be instantiated
+ * directly.
+ * @ingroup basic
+ * @author Phil Schatzmann
+ */
+class TimeSource {
+ public:
+  /// Wall-clock elapsed time (ms) - real time passing, regardless of
+  /// whatever this TimeSource actually tracks. The default implementation
+  /// just forwards to Arduino's own ::millis(); override only if this
+  /// TimeSource needs a different wall-clock source - most subclasses
+  /// should leave this alone and override playbackTime() instead.
+  virtual uint32_t millis() { return ::millis(); }
+
+  /// Elapsed time (ms) derived purely from what this TimeSource has
+  /// actually processed so far - never extrapolated from, or otherwise
+  /// dependent on, millis()/wall-clock time (see millis()'s own comment).
+  /// Stalls exactly when processing stalls instead of continuing to
+  /// advance the way millis() does. The default implementation just
+  /// forwards to millis() (i.e. "nothing special is tracked, wall time is
+  /// the best available approximation") - override this in any TimeSource
+  /// that actually tracks processed data instead (see
+  /// AudioTimeSourceStream, AudioTools/CoreAudio/AudioIO.h).
+  virtual uint32_t playbackTime() { return millis(); }
+};
 
 }  // namespace audio_tools

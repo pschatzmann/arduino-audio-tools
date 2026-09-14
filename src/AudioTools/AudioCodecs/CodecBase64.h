@@ -52,6 +52,8 @@ class DecoderBase64 : public AudioDecoder {
     setOutput(out);
   }
 
+  const char *mime() override { return "text/base64"; }
+
   /// Defines the output Stream
   void setOutput(Print &out) override { p_print = &out; }
 

@@ -13,7 +13,7 @@
 
 int application = OPUS_APPLICATION_AUDIO; // Opus application
 AudioInfo info(24000, 1, 16);
-SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
+SineGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wave
 CsvOutput<int16_t> out(Serial);   // Output of sound on desktop 
 OpusOggEncoder enc;

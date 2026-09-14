@@ -365,6 +365,48 @@ class HexDumpOutput : public AudioOutput {
  * @copyright GPLv3
  * @tparam T Audio sample data type (e.g., int16_t, int32_t, float)
  */
+
+/**
+ * @brief Applies a normalized [0,1] mixing gain to a full-range sample T,
+ * used by OutputMixer and InputMixer. The default (float) multiply works
+ * for any T, including T=float. Specialized for T=int16_t/int24_t/int32_t
+ * under PREFER_FIXEDPOINT to go through q1_14_t::scale() (integer-only)
+ * instead of a per-sample float multiply -- the same technique used for
+ * VolumeStream's fixed-point volume path.
+ * @ingroup transform
+ */
+template <typename T>
+struct MixGain {
+  float value = 0;
+  MixGain() = default;
+  MixGain(float f) : value(f) {}
+  T scale(T sample) const { return static_cast<T>(value * sample); }
+};
+
+#if PREFER_FIXEDPOINT
+template <>
+struct MixGain<int16_t> {
+  q1_14_t value;
+  MixGain() = default;
+  MixGain(float f) : value(f) {}
+  int16_t scale(int16_t sample) const { return value.scale(sample); }
+};
+template <>
+struct MixGain<int24_t> {
+  q1_14_t value;
+  MixGain() = default;
+  MixGain(float f) : value(f) {}
+  int24_t scale(int24_t sample) const { return value.scale(sample); }
+};
+template <>
+struct MixGain<int32_t> {
+  q1_14_t value;
+  MixGain() = default;
+  MixGain(float f) : value(f) {}
+  int32_t scale(int32_t sample) const { return value.scale(sample); }
+};
+#endif
+
 template <typename T = int16_t>
 class OutputMixer : public Print {
  public:
@@ -393,11 +435,20 @@ class OutputMixer : public Print {
     setOutputCount(outputStreamCount);
   }
 
+  ~OutputMixer() { free_buffers(); }
+
   /// Sets the final output destination for mixed audio
   void setOutput(Print &finalOutput) { p_final_output = &finalOutput; }
 
-  /// Sets the number of input streams to mix
+  /// Sets the number of streams to mix
   void setOutputCount(int count) {
+    // release any buffers allocated for a previous configuration
+    for (int i = 0; i < buffers.size(); i++) {
+      if (buffers[i] != nullptr) {
+        delete buffers[i];
+        buffers[i] = nullptr;
+      }
+    }
     output_count = count;
     buffers.resize(count);
     for (int i = 0; i < count; i++) {
@@ -414,7 +465,7 @@ class OutputMixer : public Print {
   /// Defines a new weight for the indicated channel: If you set it to 0.0 it is
   /// muted. The initial value is 1.0
   void setWeight(int channel, float weight) {
-    if (channel < size()) {
+    if (channel >= 0 && channel < size()) {
       weights[channel] = weight;
     } else {
       LOGE("Invalid channel %d - max is %d", channel, size() - 1);
@@ -427,6 +478,7 @@ class OutputMixer : public Print {
     is_active = true;
     size_bytes = copy_buffer_size_bytes;
     stream_idx = 0;
+    update_total_weights();
     allocate_buffers(size_bytes);
     return true;
   }
@@ -463,8 +515,12 @@ class OutputMixer : public Print {
   size_t write(int idx, const uint8_t *buffer_c, size_t bytes) {
     LOGD("write idx %d: %d", idx, (int)bytes);
     size_t result = 0;
-    BaseBuffer<T> *p_buffer = idx < output_count ? buffers[idx] : nullptr;
-    assert(p_buffer != nullptr);
+    BaseBuffer<T> *p_buffer =
+        (idx >= 0 && idx < output_count) ? buffers[idx] : nullptr;
+    if (p_buffer == nullptr) {
+      LOGE("Invalid stream idx %d - max is %d", idx, output_count - 1);
+      return 0;
+    }
     size_t samples = bytes / sizeof(T);
     if (p_buffer->availableForWrite() >= samples) {
       result = p_buffer->writeArray((T *)buffer_c, samples) * sizeof(T);
@@ -485,6 +541,7 @@ class OutputMixer : public Print {
 
   /// Provides the bytes available to write for the indicated stream index
   int availableForWrite(int idx) {
+    if (idx < 0 || idx >= output_count) return 0;
     BaseBuffer<T> *p_buffer = buffers[idx];
     if (p_buffer == nullptr) return 0;
     return p_buffer->availableForWrite() * sizeof(T);
@@ -492,6 +549,7 @@ class OutputMixer : public Print {
 
   /// Provides the available bytes in the buffer
   int available(int idx) {
+    if (idx < 0 || idx >= output_count) return 0;
     BaseBuffer<T> *p_buffer = buffers[idx];
     if (p_buffer == nullptr) return 0;
     return p_buffer->available() * sizeof(T);
@@ -501,8 +559,11 @@ class OutputMixer : public Print {
   int availablePercent(int idx) { return 100.0 * available(idx) / size_bytes; }
 
   /// Force output to final destination
-  void flushMixer() {
+  bool flushMixer() {
     LOGD("flush");
+    if (p_final_output == nullptr) {
+      return false;
+    }
     bool result = false;
 
     // determine ringbuffer with mininum available data
@@ -516,29 +577,32 @@ class OutputMixer : public Print {
       p_final_output->write((uint8_t *)output.data(), samples * sizeof(T));
     }
     stream_idx = 0;
-    return;
+    return result;
   }
 
 
 
   /// Returns the minimum number of samples available across all buffers
   int availableSamples() {
-    size_t samples = 0;
+    if (output_count == 0) return 0;
+    size_t samples = size_bytes / sizeof(T);
     for (int j = 0; j < output_count; j++) {
-      int available_samples = buffers[j]->available();
-      if (available_samples > 0) {
-        samples = MIN(size_bytes / sizeof(T), (size_t)available_samples);
-      }
+      size_t available_samples = buffers[j]->available();
+      samples = min(samples, available_samples);
     }
     return samples;
   }
 
   /// Resizes the buffer to the indicated number of bytes
-  void resize(int sizeBytes) {
+  bool resize(size_t sizeBytes) {
+    bool result = true;
     if (sizeBytes != size_bytes) {
-      allocate_buffers(sizeBytes);
+      result = allocate_buffers(sizeBytes);
+      if (result) {
+        size_bytes = sizeBytes;
+      }
     }
-    size_bytes = sizeBytes;
+    return result;
   }
 
   /// Writes silence to the current stream buffer
@@ -573,7 +637,7 @@ class OutputMixer : public Print {
 
   /// Provides the write buffer for the indicated index
   BaseBuffer<T> *getBuffer(int idx) {
-    return idx < output_count ? buffers[idx] : nullptr;
+    return (idx >= 0 && idx < output_count) ? buffers[idx] : nullptr;
   }
 
  protected:
@@ -605,7 +669,7 @@ class OutputMixer : public Print {
     float temp[samples] = {0.0f};
 
     for (uint8_t j = 0; j < output_count; j++) {
-        const float factor = weights[j] / total_weights;
+        const float factor = total_weights != 0.0f ? weights[j] / total_weights : 0.0f;
         // Read int16_t samples and convert to float
         for (uint16_t i = 0; i < samples; i++) {
             T s = 0;
@@ -626,11 +690,11 @@ class OutputMixer : public Print {
     output.resize(samples);
     memset(output.data(), 0, samples * sizeof(T));
     for (int j = 0; j < output_count; j++) {
-      float factor = weights[j] / total_weights;
+      MixGain<T> factor(total_weights != 0.0f ? weights[j] / total_weights : 0.0f);
       for (int i = 0; i < samples; i++) {
         T sample = 0;
         buffers[j]->read(sample);
-        output[i] += static_cast<T>(factor * sample);
+        output[i] += factor.scale(sample);
       }
     }
 #endif
@@ -645,14 +709,18 @@ class OutputMixer : public Print {
   }
 
   /// Allocates ring buffers for all input streams
-  void allocate_buffers(int sizeBytes) {
+  bool allocate_buffers(int sizeBytes) {
     // allocate ringbuffers for each output
     for (int j = 0; j < output_count; j++) {
       if (buffers[j] != nullptr) {
         delete buffers[j];
       }
       buffers[j] = create_buffer(sizeBytes, allocator);
+      if (buffers[j] == nullptr) {
+        return false;
+      }
     }
+    return true;
   }
 
   /// Releases memory for all ring buffers

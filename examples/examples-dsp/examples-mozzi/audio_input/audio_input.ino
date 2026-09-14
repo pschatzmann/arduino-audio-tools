@@ -14,7 +14,7 @@ const int sample_rate = 16000;
 AudioInfo info(sample_rate, 1, 16);
 AudioBoardStream i2s(AudioKitEs8388V1);  // final output of decoded stream
 MozziStream mozzi;
-SineWaveGenerator<int16_t> sineWave;                // subclass of SoundGenerator with max amplitude of 32000
+SineGenerator<int16_t> sineWave;                // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound(sineWave);             // Stream generated from sine wave
 
 StreamCopy copier(i2s, mozzi);

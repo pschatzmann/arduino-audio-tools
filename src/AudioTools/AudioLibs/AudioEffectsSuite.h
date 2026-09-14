@@ -21,6 +21,7 @@
 #include <cstdint>
 #include <iostream>
 #include "AudioTools/CoreAudio/AudioEffects/AudioEffect.h"
+#include "AudioTools/CoreAudio/AudioBasic/soft_float_t.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"
 
 #ifndef PI
@@ -29,26 +30,43 @@
 
 namespace audio_tools {
 
-typedef float effectsuite_t;
-
-/**
- * @brief Table of interpolation values as a 2D array indexed by
- * interpolationTable[pointIndex][alphaIndex]
- */
-static effectsuite_t **interpolationTable = nullptr;
+// soft_float_t: integer mantissa/exponent under the hood, so the whole
+// suite's per-sample delay/filter/modulation arithmetic (the vast bulk of
+// this file's float use) avoids the FPU on FPU-less MCUs. It keeps float's
+// wide dynamic range (unlike q1_14_t's bounded +-2.0), which this file
+// needs: delay-buffer indices run up to sampleRate, filter coefficients
+// vary widely with cutoff. Setup-time-only transcendental calls (sin/cos/
+// pow/sqrt/...) still go through soft_float_t's implicit float conversion,
+// which is fine since they aren't in the per-sample hot path -- except
+// EnvelopeFilter::processFloat(), which recomputes a full Chebyshev filter
+// (multiple sin/cos/sqrt/log/pow calls) every sample; that's expensive on
+// any platform and isn't something this typedef swap can fix.
+//
+// Every class below is templated on the numeric type it uses internally --
+// named `effectsuite_t` (shadowing this default alias) so the class bodies
+// below don't need renaming. This lets both SimpleLPF<float> and
+// SimpleLPF<soft_float_t> (etc.) be instantiated side by side in the same
+// program, e.g. to compare their output directly, rather than requiring two
+// separate builds gated by PREFER_FIXEDPOINT. The macro only picks the
+// *default* -- what you get when you don't specify a type explicitly.
+#if PREFER_FIXEDPOINT
+using effectsuite_t_default = soft_float_t;
+#else
+using effectsuite_t_default = float;
+#endif
 
 /**
  * @brief Base Class for Effects
  * @ingroup effects
  */
-
+template <typename effectsuite_t = effectsuite_t_default>
 class EffectSuiteBase  : public AudioEffect {
   /**
    * @brief Main process block for applying audio effect
    * @param inputSample The input audio sample for the effect to be applied to
    * @returns an audio sample as a effectsuite_t with effect applied
    */
-  virtual effectsuite_t processDouble(effectsuite_t inputSample) = 0;
+  virtual effectsuite_t processFloat(effectsuite_t inputSample) = 0;
 
   /**
    * Main process block for applying audio effect
@@ -56,7 +74,7 @@ class EffectSuiteBase  : public AudioEffect {
    * @returns an audio sample as a int16_t with effect applied
    */
   virtual effect_t process(effect_t inputSample) override {
-    return active_flag ? 32767.0f * processDouble(static_cast<effectsuite_t>(inputSample)/32767.0f) : inputSample;
+    return this->active_flag ? (effect_t)(32767.0f * processFloat(static_cast<effectsuite_t>(inputSample)/32767.0f)) : inputSample;
   }
 
 };
@@ -71,12 +89,27 @@ class EffectSuiteBase  : public AudioEffect {
  * @ingroup effects
  * @copyright MIT License
  */
+template <typename effectsuite_t = effectsuite_t_default>
 class ModulationBaseClass {
 public:
   /** Constructor */
   ModulationBaseClass() { srand(static_cast<unsigned>(time(0))); }
 
-  ModulationBaseClass(ModulationBaseClass &copy) = default; 
+  // deep-copies waveTable (owned) -- the compiler-generated (shallow) copy
+  // this replaces would leave clone and original pointing at the *same*
+  // waveTable, which breaks AudioEffectStreamT's per-channel cloning for
+  // stereo: each channel's clone must own independent state.
+  ModulationBaseClass(ModulationBaseClass &copy) {
+    sampleRate = copy.sampleRate;
+    timeStep = copy.timeStep;
+    tableIndex = copy.tableIndex;
+    is_noise = copy.is_noise;
+    memcpy(interpTable, copy.interpTable, sizeof(interpTable));
+    if (copy.waveTable != nullptr) {
+      waveTable = new effectsuite_t[sampleRate];
+      std::copy(copy.waveTable, copy.waveTable + sampleRate, waveTable);
+    }
+  }
 
   ModulationBaseClass(effectsuite_t extSampRate) {
     this->sampleRate = extSampRate;
@@ -86,7 +119,7 @@ public:
     srand(static_cast<unsigned>(time(0)));
   }
   /** Destructor */
-  ~ModulationBaseClass() = default;
+  ~ModulationBaseClass() { delete[] waveTable; }
 
   /**
    * @brief setup the class with a given sample rate. Basically reperforming the
@@ -354,7 +387,9 @@ public:
   /** time between samples: 1/sampRate */
   effectsuite_t timeStep;
   /** store modulation signal as*/
-  effectsuite_t *waveTable;
+  // was uninitialized in the default (no-arg) constructor -- the new
+  // destructor's delete[] would then free indeterminate memory
+  effectsuite_t *waveTable = nullptr;
 
 protected:
   static const int order = 4;
@@ -369,10 +404,10 @@ protected:
  * @ingroup effects
  * @tparam T 
  */
- template <class T>
+ template <class T, typename effectsuite_t = effectsuite_t_default>
  class SoundGeneratorModulation : public SoundGenerator<T>{
     public:
-      SoundGeneratorModulation(ModulationBaseClass &mod, int freq){
+      SoundGeneratorModulation(ModulationBaseClass<effectsuite_t> &mod, int freq){
         p_mod = &mod;
         this->freq = freq;
       }
@@ -383,9 +418,9 @@ protected:
       virtual  T readSample() override {
         return p_mod->isNoise() ? max_value * p_mod->readNoise() : max_value * p_mod->readTable(freq);
       }
-      
+
   protected:
-    ModulationBaseClass *p_mod=nullptr;
+    ModulationBaseClass<effectsuite_t> *p_mod=nullptr;
     int freq;
     float max_value=32767;
 };
@@ -400,12 +435,31 @@ protected:
  * @ingroup effects
  * @copyright MIT License
  */
+template <typename effectsuite_t = effectsuite_t_default>
 class DelayEffectBase  {
 public:
   /** Constructor. */
   DelayEffectBase() = default;
 
-  DelayEffectBase(DelayEffectBase &copy) = default;
+  // deep-copies delayBuffer (owned) -- the compiler-generated (shallow) copy
+  // this replaces would leave clone and original pointing at the *same*
+  // delayBuffer, which breaks AudioEffectStreamT's per-channel cloning for
+  // stereo (and would double-free delayBuffer when both are destroyed,
+  // since ~DelayEffectBase() below does free it). interpolationTable is a
+  // shared *static* lookup table -- one per DelayEffectBase<effectsuite_t>
+  // instantiation, not per-instance state -- so it's correctly left alone
+  // here.
+  DelayEffectBase(DelayEffectBase &copy) {
+    maxDelayBufferSize = copy.maxDelayBufferSize;
+    delayTimeSamples = copy.delayTimeSamples;
+    currentDelayWriteIndex = copy.currentDelayWriteIndex;
+    currentDelayReadIndex = copy.currentDelayReadIndex;
+    error = copy.error;
+    if (copy.delayBuffer != nullptr) {
+      delayBuffer = new effectsuite_t[maxDelayBufferSize];
+      std::copy(copy.delayBuffer, copy.delayBuffer + maxDelayBufferSize, delayBuffer);
+    }
+  }
 
   DelayEffectBase(int bufferSizeSamples) {
     error = setDelayBuffer(bufferSizeSamples);
@@ -622,10 +676,21 @@ protected: // member variables
   effectsuite_t currentDelayReadIndex = 0;
   static const int interpOrder = 4;
   static const int interpResolution = 1000;
+  /**
+   * @brief Table of interpolation values as a 2D array indexed by
+   * interpolationTable[pointIndex][alphaIndex]. One instance per
+   * DelayEffectBase<effectsuite_t> instantiation (previously a single
+   * namespace-scope global shared -- and type-mismatched -- across every
+   * effectsuite_t choice).
+   */
+  static effectsuite_t **interpolationTable;
 
   /** internal class error boolean*/
   bool error;
 };
+
+template <typename effectsuite_t>
+effectsuite_t **DelayEffectBase<effectsuite_t>::interpolationTable = nullptr;
 
 /**
  * @brief A Base class for filter based effects including methods for simple
@@ -635,15 +700,72 @@ protected: // member variables
  * @ingroup effects
  * @copyright MIT License
  */
-class FilterEffectBase : public EffectSuiteBase  {
+template <typename effectsuite_t = effectsuite_t_default>
+class FilterEffectBase : public EffectSuiteBase<effectsuite_t>  {
 public:
   /** Constructor. */
   FilterEffectBase() { std::fill(rmsBuffer, rmsBuffer + rmsWindowSize, 0); }
 
-  FilterEffectBase(FilterEffectBase &copy) = default;
+  // deep-copies the owned filter/rms buffers -- the compiler-generated
+  // (shallow) copy this replaces would leave clone and original pointing
+  // at the *same* buffers, which breaks AudioEffectStreamT's per-channel
+  // cloning for stereo (each channel's IIR filter state must be
+  // independent, or one channel's audio corrupts the other's).
+  FilterEffectBase(FilterEffectBase &copy) {
+    bufferIndex = copy.bufferIndex;
+    filterOrder = copy.filterOrder;
+    samplingRate = copy.samplingRate;
+    rmsBufferIndex = copy.rmsBufferIndex;
+
+    // firCoefficients/iirCoefficients/firBuffer/iirBuffer may be allocated
+    // wider than filterOrder (allocateBufferMemory() allocates coefficient
+    // arrays at a fixed 22), but applyFilter() and everything downstream of
+    // setup only ever reads indices [0, filterOrder), so copying exactly
+    // filterOrder elements is always enough to preserve behavior.
+    if (filterOrder > 0 && copy.firCoefficients != nullptr) {
+      firCoefficients = new float[filterOrder];
+      std::copy(copy.firCoefficients, copy.firCoefficients + filterOrder, firCoefficients);
+    }
+    if (filterOrder > 0 && copy.iirCoefficients != nullptr) {
+      iirCoefficients = new float[filterOrder];
+      std::copy(copy.iirCoefficients, copy.iirCoefficients + filterOrder, iirCoefficients);
+    }
+    if (filterOrder > 0 && copy.firBuffer != nullptr) {
+      firBuffer = new float[filterOrder];
+      std::copy(copy.firBuffer, copy.firBuffer + filterOrder, firBuffer);
+    }
+    if (filterOrder > 0 && copy.iirBuffer != nullptr) {
+      iirBuffer = new float[filterOrder];
+      std::copy(copy.iirBuffer, copy.iirBuffer + filterOrder, iirBuffer);
+    }
+    // firTemp/iirTemp are pure scratch space used only transiently inside
+    // setChebyICoefficients() (overwritten from firCoefficients/
+    // iirCoefficients at the start of every use there), so the clone just
+    // needs its own 22-element scratch buffers, not copies of the old
+    // contents.
+    if (copy.firTemp != nullptr) {
+      firTemp = new float[22];
+      std::fill(firTemp, firTemp + 22, 0);
+    }
+    if (copy.iirTemp != nullptr) {
+      iirTemp = new float[22];
+      std::fill(iirTemp, iirTemp + 22, 0);
+    }
+
+    rmsBuffer = new effectsuite_t[rmsWindowSize];
+    std::copy(copy.rmsBuffer, copy.rmsBuffer + rmsWindowSize, rmsBuffer);
+  }
 
   /** Destructor. */
-  ~FilterEffectBase() = default;
+  ~FilterEffectBase() {
+    delete[] firCoefficients;
+    delete[] iirCoefficients;
+    delete[] firTemp;
+    delete[] iirTemp;
+    delete[] firBuffer;
+    delete[] iirBuffer;
+    delete[] rmsBuffer;
+  }
 
   /**
    * with the current filter coefficients this method filters a
@@ -652,8 +774,10 @@ public:
    * @returns filtered audio sample
    */
   virtual effectsuite_t applyFilter(effectsuite_t sampVal) {
-    effectsuite_t outSample = 0;
-    firBuffer[bufferIndex] = sampVal;
+    // native float in/out at this boundary; see the member declarations
+    // below for why the IIR recursion itself stays float
+    float outSample = 0;
+    firBuffer[bufferIndex] = (float)sampVal;
 
     for (int j = 0; j < filterOrder; j++) {
       int i = ((bufferIndex - j) + filterOrder) % filterOrder;
@@ -667,13 +791,13 @@ public:
     return outSample;
   }
 
-  virtual effectsuite_t processDouble(effectsuite_t inputSample) override {
+  virtual effectsuite_t processFloat(effectsuite_t inputSample) override {
     return applyFilter(inputSample);
   }
 
   /// see applyFilter
   virtual effect_t process(effect_t inputSample) override {
-    return active_flag ? 32767.0 * processDouble(static_cast<effectsuite_t>(inputSample)/32767.0) : inputSample;
+    return this->active_flag ? (effect_t)(32767.0 * processFloat(static_cast<effectsuite_t>(inputSample)/32767.0)) : inputSample;
   }
 
   /**
@@ -710,19 +834,29 @@ public:
    * @params ripple		percentage ripple (<.2929)
    * @returns boolean false on error and true on success
    */
-  bool setChebyICoefficients(effectsuite_t cutFreq, bool shelfType, effectsuite_t ripple) {
+  // Coefficient derivation chains dozens of transcendental calls and
+  // differences of near-equal quantities -- but it only runs at
+  // setup/reconfiguration time, never per-sample (EnvelopeFilter is the
+  // one exception, and it's already documented as a separate, unresolved
+  // hotspot), so it costs nothing to keep it in native float, matching
+  // firCoefficients/iirCoefficients' own type (see their declarations for
+  // why applyFilter()'s IIR recursion needs float precision).
+  bool setChebyICoefficients(effectsuite_t cutFreqIn, bool shelfType, effectsuite_t rippleIn) {
+    const float cutFreq = (float)cutFreqIn;
+    const float ripple = (float)rippleIn;
+
     // NOTE: coefficient buffers must be cleared as are additive in the
     // following 		code
     std::fill(firCoefficients, firCoefficients + 22, 0);
     std::fill(iirCoefficients, iirCoefficients + 22, 0);
 
-    effectsuite_t poles = (effectsuite_t)filterOrder - 1;
+    float poles = (float)filterOrder - 1;
     int order = (int)poles;
 
     firCoefficients[2] = 1;
     iirCoefficients[2] = 1;
 
-    effectsuite_t Es, Vx, Kx;
+    float Es, Vx, Kx;
     if (ripple != 0) {
       Es = sqrt(pow(1 / (1 - ripple), 2) - 1);
       Vx = (1 / poles) * log(1 / Es + sqrt(1 / (pow(Es, 2)) + 1));
@@ -733,26 +867,26 @@ public:
       Kx = 1;
     }
 
-    const effectsuite_t T = 2.0f * tan(.5f);
-    const effectsuite_t W = 2.0f * PI * cutFreq;
+    const float T = 2.0f * tan(.5f);
+    const float W = 2.0f * (float)PI * cutFreq;
 
-    effectsuite_t K;
+    float K;
 
     if (shelfType == 0) //// if low pass
     {
-      K = sin(.5 - W / 2) / sin(.5 + W / 2);
+      K = sin(.5f - W / 2) / sin(.5f + W / 2);
     } else //// if high pass
     {
 
-      K = -cos(.5 + W / 2) / cos(W / 2 - .5);
+      K = -cos(.5f + W / 2) / cos(W / 2 - .5f);
     }
 
     ////// main algorithm
     for (int i = 0; i < (order / 2); i++) {
       ////// Sub routine
-      const effectsuite_t alpha = PI / (2 * poles) + (i - 1) * (PI / poles);
+      const float alpha = (float)PI / (2 * poles) + (i - 1) * ((float)PI / poles);
 
-      effectsuite_t Rp, Ip;
+      float Rp, Ip;
       if (ripple != 0) {
         Rp = -cos(alpha) * sinh(Vx) / Kx;
         Ip = sin(alpha) * cosh(Vx) / Kx;
@@ -761,25 +895,25 @@ public:
         Ip = sin(alpha);
       }
 
-      const effectsuite_t M = pow(Rp, 2) + pow(Ip, 2);
-      const effectsuite_t D = 4 - 4 * Rp * T + M * T;
+      const float M = pow(Rp, 2) + pow(Ip, 2);
+      const float D = 4 - 4 * Rp * T + M * T;
 
-      const effectsuite_t X0 = (pow(T, 2)) / D;
-      const effectsuite_t X1 = (2 * pow(T, 2)) / D;
-      const effectsuite_t X2 = X0;
+      const float X0 = (pow(T, 2)) / D;
+      const float X1 = (2 * pow(T, 2)) / D;
+      const float X2 = X0;
 
-      const effectsuite_t Y1 = (8 - (2 * M * pow(T, 2))) / D;
-      const effectsuite_t Y2 = (-4 - 4 * Rp * T - M * T) / D;
+      const float Y1 = (8 - (2 * M * pow(T, 2))) / D;
+      const float Y2 = (-4 - 4 * Rp * T - M * T) / D;
 
       // renamed and inverted from original algorithm
-      const effectsuite_t _D1 = 1 / (1 + Y1 * K - Y2 * pow(K, 2));
+      const float _D1 = 1 / (1 + Y1 * K - Y2 * pow(K, 2));
 
-      const effectsuite_t _A0 = (X0 - X1 * K + X2 * pow(K, 2)) * _D1;
-      effectsuite_t _A1 = (-2 * X0 * K + X1 + X1 * pow(K, 2) - 2 * X2 * K) * _D1;
-      const effectsuite_t _A2 = (X0 * pow(K, 2) - X1 * K + X2) * _D1;
+      const float _A0 = (X0 - X1 * K + X2 * pow(K, 2)) * _D1;
+      float _A1 = (-2 * X0 * K + X1 + X1 * pow(K, 2) - 2 * X2 * K) * _D1;
+      const float _A2 = (X0 * pow(K, 2) - X1 * K + X2) * _D1;
 
-      effectsuite_t _B1 = (2 * K + Y1 + Y1 * pow(K, 2) - 2 * Y2 * K) * _D1;
-      const effectsuite_t B2 = (-(pow(K, 2)) - Y1 * K + Y2) * _D1;
+      float _B1 = (2 * K + Y1 + Y1 * pow(K, 2) - 2 * Y2 * K) * _D1;
+      const float B2 = (-(pow(K, 2)) - Y1 * K + Y2) * _D1;
 
       if (shelfType == 1) {
         _A1 = -_A1;
@@ -804,8 +938,8 @@ public:
       iirCoefficients[j] = -iirCoefficients[j + 2];
     }
     //////// Normalising
-    effectsuite_t SA = 0;
-    effectsuite_t SB = 0;
+    float SA = 0;
+    float SB = 0;
     if (shelfType == 0) {
       for (int j = 0; j < filterOrder; j++) {
         SA += firCoefficients[j];
@@ -818,7 +952,7 @@ public:
       }
     }
 
-    const effectsuite_t gain = SA / (1 - SB);
+    const float gain = SA / (1 - SB);
     for (int j = 0; j < filterOrder; j++) {
       firCoefficients[j] /= gain;
     }
@@ -855,11 +989,11 @@ protected:
     filterOrder = order;
     clearMemory();
     allocateBufferMemory();
-    firCoefficients = new effectsuite_t[filterOrder];
-    iirCoefficients = new effectsuite_t[filterOrder];
+    firCoefficients = new float[filterOrder];
+    iirCoefficients = new float[filterOrder];
     std::fill(iirCoefficients, iirCoefficients + filterOrder, 0);
     int coef = 1;
-    effectsuite_t gain = 0;
+    float gain = 0;
     for (int j = 0; j < filterOrder; j++) {
       if (j == 0) {
         coef = 1;
@@ -867,11 +1001,14 @@ protected:
         coef = coef * (filterOrder - j) / j;
       }
 
-      firCoefficients[j] = (effectsuite_t)coef;
+      firCoefficients[j] = (float)coef;
       gain += firCoefficients[j];
     }
 
-    for (int j = 0; j <= filterOrder; j++) {
+    // was `<=`: an off-by-one that wrote one element past the
+    // filterOrder-sized array (pre-existing, unrelated to the float type
+    // change on this line)
+    for (int j = 0; j < filterOrder; j++) {
       firCoefficients[j] /= gain;
     }
 
@@ -911,8 +1048,8 @@ protected:
     if (iirBuffer) {
       delete[] iirBuffer;
     }
-    firBuffer = new effectsuite_t[filterOrder];
-    iirBuffer = new effectsuite_t[filterOrder];
+    firBuffer = new float[filterOrder];
+    iirBuffer = new float[filterOrder];
     std::fill(firBuffer, firBuffer + filterOrder, 0);
     std::fill(iirBuffer, iirBuffer + filterOrder, 0);
 
@@ -932,10 +1069,10 @@ protected:
       delete[] iirTemp;
     }
 
-    firCoefficients = new effectsuite_t[22];
-    iirCoefficients = new effectsuite_t[22];
-    firTemp = new effectsuite_t[22];
-    iirTemp = new effectsuite_t[22];
+    firCoefficients = new float[22];
+    iirCoefficients = new float[22];
+    firTemp = new float[22];
+    iirTemp = new float[22];
     std::fill(firCoefficients, firCoefficients + 22, 0);
     std::fill(iirCoefficients, iirCoefficients + 22, 0);
     std::fill(firTemp, firTemp + 22, 0);
@@ -962,25 +1099,35 @@ protected:
   }
 
 protected:
+  // These stay native float regardless of PREFER_FIXEDPOINT, unlike the
+  // rest of this file: applyFilter()'s IIR recursion feeds firBuffer/
+  // iirBuffer back into itself every sample, and soft_float_t's ~15-bit
+  // mantissa (vs float's ~24-bit) lets that feedback state slowly diverge
+  // from a real-FPU reference -- measured ~11% peak drift, growing over
+  // the run, for a Chebyshev filter's feedback state. Filter *design*
+  // (setChebyICoefficients(), setSimpleLpf()) only runs at
+  // setup/reconfiguration time, never per-sample, so there's no per-sample
+  // FPU cost being traded away by keeping these float either.
+
   /** Numerator coefficients in delay filter
           firCoefficients[0] z^0 coeffcieint
           firCoefficients[1] z^-1 coefficient
    */
-  effectsuite_t *firCoefficients = 0;
+  float *firCoefficients = 0;
   /** Denomiator coefficients in delay filter
           @see firCoefficients
    */
-  effectsuite_t *iirCoefficients = 0;
+  float *iirCoefficients = 0;
   /** hold temporary values for fir coeffcient buffer*/
-  effectsuite_t *firTemp = 0;
+  float *firTemp = 0;
   /** hold temporary values for iir coeffcient buffer*/
-  effectsuite_t *iirTemp = 0;
+  float *iirTemp = 0;
   /** buffer to hold forward delay sample data
    */
-  effectsuite_t *firBuffer = 0;
+  float *firBuffer = 0;
   /** buffer to hold backward delay sample data
    */
-  effectsuite_t *iirBuffer = 0;
+  float *iirBuffer = 0;
   /**current buffer index*/
   int bufferIndex = 0;
   /** order of delay filter including the zero delay coefficients*/
@@ -1002,7 +1149,8 @@ protected:
  * @ingroup effects
  * @copyright MIT License
  */
-class SimpleLPF : public FilterEffectBase {
+template <typename effectsuite_t = effectsuite_t_default>
+class SimpleLPF : public FilterEffectBase<effectsuite_t> {
 public:
   /**
    * Constructor: Intialised with the order of FIR filter
@@ -1011,7 +1159,7 @@ public:
    * @param order	filter order
    */
   SimpleLPF(effectsuite_t cutoff, int order) {
-    changeChebyICoefficients(cutoff, false, .1, order);
+    this->changeChebyICoefficients(cutoff, false, .1, order);
   };
 
   SimpleLPF(SimpleLPF &copy) = default;
@@ -1033,9 +1181,10 @@ public:
  * @author Matthew Hamilton
  * @copyright MIT License
  **/
-class SimpleChorus : public DelayEffectBase,
-                     public ModulationBaseClass,
-                     public SimpleLPF{
+template <typename effectsuite_t = effectsuite_t_default>
+class SimpleChorus : public DelayEffectBase<effectsuite_t>,
+                     public ModulationBaseClass<effectsuite_t>,
+                     public SimpleLPF<effectsuite_t>{
 public:
   /**
    * Constructor: initialises the effect parameters
@@ -1044,12 +1193,12 @@ public:
    */
 //  SimpleChorus() : SimpleLPF(0.0001, 4) {}
   SimpleChorus(int extSampleRate=44100) :
-        DelayEffectBase(static_cast<int>(0.031 * extSampleRate)), 
-        ModulationBaseClass(extSampleRate),
-        SimpleLPF(0.0001, 4) {
-    swing = 0.005 * sampleRate;
-    base = 0.015 * sampleRate;
-    if (sampleRate != 0)
+        DelayEffectBase<effectsuite_t>(static_cast<int>(0.031 * extSampleRate)),
+        ModulationBaseClass<effectsuite_t>(extSampleRate),
+        SimpleLPF<effectsuite_t>(0.0001, 4) {
+    swing = 0.005 * this->sampleRate;
+    base = 0.015 * this->sampleRate;
+    if (this->sampleRate != 0)
       setRandLfo();
   }
 
@@ -1062,15 +1211,15 @@ public:
    * @param inputSample input audio sample
    * @return processed audio sample
    */
-  virtual effectsuite_t processDouble(effectsuite_t inputSample) override {
-    delaySample(inputSample);
+  virtual effectsuite_t processFloat(effectsuite_t inputSample) override {
+    this->delaySample(inputSample);
     const effectsuite_t waveDelay = getModSignal();
     const effectsuite_t delayAmount =
-        ((int(currentDelayWriteIndex - waveDelay) + delayTimeSamples) %
-         delayTimeSamples) +
-        ((currentDelayWriteIndex - waveDelay) -
-         trunc(currentDelayWriteIndex - waveDelay));
-    const effectsuite_t out = .0 * inputSample + 1. * getInterpolatedOut(delayAmount);
+        ((int(this->currentDelayWriteIndex - waveDelay) + this->delayTimeSamples) %
+         this->delayTimeSamples) +
+        ((this->currentDelayWriteIndex - waveDelay) -
+         trunc(this->currentDelayWriteIndex - waveDelay));
+    const effectsuite_t out = .0 * inputSample + 1. * this->getInterpolatedOut(delayAmount);
     return out;
   }
 
@@ -1079,10 +1228,10 @@ public:
    * @param extSampleRate external sample rate
    */
   void setupChorus(effectsuite_t extSampleRate) {
-    setupModulationBaseClass(extSampleRate);
-    setupDelayEffectBase(effectsuite_t(extSampleRate) * .1);
+    this->setupModulationBaseClass(extSampleRate);
+    this->setupDelayEffectBase(effectsuite_t(extSampleRate) * .1);
     //    SimpleLPF(0.0004,4)
-    setChebyICoefficients(0.00005, false, 0);
+    this->setChebyICoefficients(0.00005, false, 0);
 
     swing = readSpeed * extSampleRate * 5;
     base = readSpeed * extSampleRate * 20;
@@ -1094,13 +1243,13 @@ public:
    * signal
    * @param swingAmount <#swingAmount description#>
    */
-  void setSwing(effectsuite_t swingAmount) { swing = swingAmount * sampleRate; }
+  void setSwing(effectsuite_t swingAmount) { swing = swingAmount * this->sampleRate; }
 
   /**
    * sets the 'base' of the chorus: the minimum delay in the signal.
    * @param baseAmount <#baseAmount description#>
    */
-  void setBase(effectsuite_t baseAmount) { base = baseAmount * sampleRate; }
+  void setBase(effectsuite_t baseAmount) { base = baseAmount * this->sampleRate; }
 
   SimpleChorus* clone() override {
     return new SimpleChorus(*this);
@@ -1119,33 +1268,33 @@ protected:
   effectsuite_t modMax = .5;
   /** the normalising factor of the random delay signal*/
   effectsuite_t modNorm = 1 / (modMax - modMin);
-  const effectsuite_t readSpeed = ((readNoise() + 1) * .5) * .0005;
+  const effectsuite_t readSpeed = ((this->readNoise() + 1) * .5) * .0005;
 
   /**
    * modulation signal scaling equation: ((n - modMin)*modNorm*swing) + base
    * modulates a random white noise signal by lowpass filtering then
    * scaling to a range between 15 to 25 miliseconds of delay.
    **/
-  effectsuite_t getModSignal() { return (readTable(readSpeed) * swing) + base; }
+  effectsuite_t getModSignal() { return (this->readTable(readSpeed) * swing) + base; }
 
   void setRandLfo() {
-    std::fill(iirBuffer, iirBuffer + filterOrder, .5);
-    for (int i = 0; i < sampleRate; i++) {
-      waveTable[i] = (readNoise() + 1) * .5;
+    std::fill(this->iirBuffer, this->iirBuffer + this->filterOrder, .5);
+    for (int i = 0; i < this->sampleRate; i++) {
+      this->waveTable[i] = (this->readNoise() + 1) * .5;
       //        waveTable[i] = applyFilter((readNoise()+1)*.5);
-      if (waveTable[i] < modMin)
-        modMin = waveTable[i];
-      if (waveTable[i] > modMax) {
-        modMax = waveTable[i];
+      if (this->waveTable[i] < modMin)
+        modMin = this->waveTable[i];
+      if (this->waveTable[i] > modMax) {
+        modMax = this->waveTable[i];
       }
     }
 
     modNorm = 1 / (modMax - modMin);
 
     // normalises the delay signal
-    for (int i = 0; i < sampleRate; i++) {
-      waveTable[i] -= modMin;
-      waveTable[i] *= modNorm;
+    for (int i = 0; i < this->sampleRate; i++) {
+      this->waveTable[i] -= modMin;
+      this->waveTable[i] *= modNorm;
     }
 
     //  setOffSine();
@@ -1168,12 +1317,13 @@ protected:
  * @author Matthew Hamilton
  * @copyright MIT License
  */
-class FilteredDelay : public DelayEffectBase, public FilterEffectBase {
+template <typename effectsuite_t = effectsuite_t_default>
+class FilteredDelay : public DelayEffectBase<effectsuite_t>, public FilterEffectBase<effectsuite_t> {
 public:
   /** Constructor */
-  FilteredDelay(int delayInSamples, int sample_rate=44100) : DelayEffectBase(sample_rate) {
-    delayTimeSamples = delayInSamples;
-    changeChebyICoefficients(.05, true, .1, 4);
+  FilteredDelay(int delayInSamples, int sample_rate=44100) : DelayEffectBase<effectsuite_t>(sample_rate) {
+    this->delayTimeSamples = delayInSamples;
+    this->changeChebyICoefficients(.05, true, .1, 4);
   };
 
   FilteredDelay(FilteredDelay&copy) = default;
@@ -1205,16 +1355,16 @@ public:
   }
 
   /**apply the DSP effect*/
-  effectsuite_t processDouble(effectsuite_t inputSample) override {
-    delaySample(
-        applyFilter((inputSample * delayGain) +
-                    feedbackGain * getInterpolatedOut(currentDelayWriteIndex)));
-    const effectsuite_t out = getInterpolatedOut(currentDelayWriteIndex) + inputSample;
+  effectsuite_t processFloat(effectsuite_t inputSample) override {
+    this->delaySample(
+        this->applyFilter((inputSample * delayGain) +
+                    feedbackGain * this->getInterpolatedOut(this->currentDelayWriteIndex)));
+    const effectsuite_t out = this->getInterpolatedOut(this->currentDelayWriteIndex) + inputSample;
     return out;
   }
 
   effect_t process(effect_t inputSample) override {
-    return active_flag ? 32767.0 * processDouble(static_cast<effectsuite_t>(inputSample)/32767.0) : inputSample;
+    return this->active_flag ? (effect_t)(32767.0 * processFloat(static_cast<effectsuite_t>(inputSample)/32767.0)) : inputSample;
   }
 
   FilteredDelay *clone() override {
@@ -1248,14 +1398,20 @@ protected:
  * @author Matthew Hamilton
  * @copyright MIT License
  */
-class SimpleDelay : public DelayEffectBase, public EffectSuiteBase {
+template <typename effectsuite_t = effectsuite_t_default>
+class SimpleDelay : public DelayEffectBase<effectsuite_t>, public EffectSuiteBase<effectsuite_t> {
 public:
   /**
    * Constructor: DigitalEffect Base Must Be initialised
    * @param delayInSamples Set the amount of delay in samples
    * @see DelayEffectBase constructor
    */
-  SimpleDelay(int maxDelayInSamples=8810, int samplingRate=44100) {
+  // was missing the DelayEffectBase(maxDelayInSamples) base-constructor
+  // call entirely -- delayBuffer stayed null and processFloat() below
+  // dereferenced it immediately (pre-existing bug, fixed here since this
+  // constructor needed touching for the template conversion anyway)
+  SimpleDelay(int maxDelayInSamples=8810, int samplingRate=44100)
+      : DelayEffectBase<effectsuite_t>(maxDelayInSamples) {
     writeHeadIndex = 0;
     readHeadIndex = 1;
     currentDelaySamples = maxDelayInSamples;
@@ -1297,11 +1453,11 @@ public:
    * @param inputSample <#inputSample description#>
    * @return <#return value description#>
    */
-  effectsuite_t processDouble(effectsuite_t inputSample) override {
+  effectsuite_t processFloat(effectsuite_t inputSample) override {
     // write sample
-    delayBuffer[writeHeadIndex] = inputSample;
+    this->delayBuffer[writeHeadIndex] = inputSample;
     writeHeadIndex++;
-    writeHeadIndex %= maxDelayBufferSize;
+    writeHeadIndex %= this->maxDelayBufferSize;
 
     // read sample
     effectsuite_t outSample = getSplineOut(readHeadIndex) + (inputSample * 1);
@@ -1311,21 +1467,23 @@ public:
       const effectsuite_t increment = delayIncrement * (difference / fabs(difference));
       currentDelaySamples -= increment;
       readHeadIndex += 1 + increment;
-      readHeadIndex = std::fmod(readHeadIndex, maxDelayBufferSize);
+      readHeadIndex = std::fmod(readHeadIndex, this->maxDelayBufferSize);
       if (count > floor(delayTransitionTimeInSamples)) {
         currentDelaySamples = targetDelaySamples;
         readHeadIndex = floor(readHeadIndex);
         delayTimeChanged = false;
       }
     } else {
-      readHeadIndex++;
-      readHeadIndex = std::fmod(readHeadIndex, maxDelayBufferSize);
+      // soft_float_t doesn't implement operator++ (no other call site in
+      // the codebase needs it, so the class doesn't carry the extra API)
+      readHeadIndex = readHeadIndex + 1;
+      readHeadIndex = std::fmod(readHeadIndex, this->maxDelayBufferSize);
     }
     return outSample;
   }
 
   effect_t process(effect_t inputSample) override {
-    return active_flag ? 32767.0 * processDouble(static_cast<effectsuite_t>(inputSample)/32767.0) : inputSample;
+    return this->active_flag ? (effect_t)(32767.0 * processFloat(static_cast<effectsuite_t>(inputSample)/32767.0)) : inputSample;
   }
 
   /**
@@ -1333,7 +1491,7 @@ public:
    @param delayInSamples <#delayInSamples description#>
    */
   void setupSimpleDelay(int delayInSamples) {
-    setupDelayEffectBase(delayInSamples);
+    this->setupDelayEffectBase(delayInSamples);
   }
   /**
    <#Description#>
@@ -1382,15 +1540,15 @@ protected:
    */
   effectsuite_t getSplineOut(effectsuite_t bufferIndex) {
     const int n0 = floor(bufferIndex);
-    const int n1 = (n0 + 1) % maxDelayBufferSize;
-    const int n2 = (n0 + 2) % maxDelayBufferSize;
+    const int n1 = (n0 + 1) % this->maxDelayBufferSize;
+    const int n2 = (n0 + 2) % this->maxDelayBufferSize;
     const effectsuite_t alpha = bufferIndex - n0;
 
-    const effectsuite_t a = delayBuffer[n1];
-    const effectsuite_t c = ((3 * (delayBuffer[n2] - delayBuffer[n1])) -
-                      (3 * (delayBuffer[n1] - delayBuffer[n0]))) *
+    const effectsuite_t a = this->delayBuffer[n1];
+    const effectsuite_t c = ((3 * (this->delayBuffer[n2] - this->delayBuffer[n1])) -
+                      (3 * (this->delayBuffer[n1] - this->delayBuffer[n0]))) *
                      0.25;
-    const effectsuite_t b = (delayBuffer[n2] - delayBuffer[n1]) - (2 * c * 0.33333);
+    const effectsuite_t b = (this->delayBuffer[n2] - this->delayBuffer[n1]) - (2 * c * 0.33333);
     const effectsuite_t d = (-c) * 0.33333;
     return a + (b * alpha) + (c * alpha * alpha) + (d * alpha * alpha * alpha);
   }
@@ -1426,7 +1584,8 @@ protected: // member vairables
  * @author Matthew Hamilton
  * @copyright MIT License
  */
-class SimpleFlanger : public DelayEffectBase, public EffectSuiteBase {
+template <typename effectsuite_t = effectsuite_t_default>
+class SimpleFlanger : public DelayEffectBase<effectsuite_t>, public EffectSuiteBase<effectsuite_t> {
 public:
   /**
    * Constructor: DigitalEffect Base Must Be initialised
@@ -1435,7 +1594,7 @@ public:
   SimpleFlanger() = default;
   SimpleFlanger(SimpleFlanger&copy) = default;
   SimpleFlanger(effectsuite_t extSampleRate=44100)
-      : DelayEffectBase(static_cast<int>(extSampleRate * 0.02)) {}
+      : DelayEffectBase<effectsuite_t>(static_cast<int>(extSampleRate * 0.02)) {}
 
   /** Destructor. */
   ~SimpleFlanger() = default;
@@ -1453,8 +1612,8 @@ public:
    * @param depth <#depth description#>
    */
   void setDepth(const effectsuite_t depth) {
-    if (depth > effectsuite_t(delayTimeSamples))
-      modulationDepth = effectsuite_t(delayTimeSamples) - 1;
+    if (depth > effectsuite_t(this->delayTimeSamples))
+      modulationDepth = effectsuite_t(this->delayTimeSamples) - 1;
     else
       modulationDepth = depth;
   }
@@ -1481,16 +1640,16 @@ public:
   }
 
   /**Apply the DSP effect*/
-  effectsuite_t processDouble(effectsuite_t inputSample) override {
-    delaySample(inputSample);
+  effectsuite_t processFloat(effectsuite_t inputSample) override {
+    this->delaySample(inputSample);
     const effectsuite_t out = ((1 - fabs(effectGain * .2)) * (inputSample) +
-                        (effectGain * getInterpolatedOut(modulationIndex)));
+                        (effectGain * this->getInterpolatedOut(modulationIndex)));
     updateModulation();
     return out;
   }
 
   void setupSimpleFlanger(effectsuite_t extSampleRate) {
-    setupDelayEffectBase(extSampleRate * .02);
+    this->setupDelayEffectBase(extSampleRate * .02);
     timeStep = 1. / extSampleRate;
     setEffectParams(.707, extSampleRate * .02, .1);
   }
@@ -1526,11 +1685,11 @@ protected:
    **/
   void updateModulation() {
     modulationAngle += angleDelta;
-    modulationIndex = (currentDelayWriteIndex -
+    modulationIndex = (this->currentDelayWriteIndex -
                        (modulationDepth * (1 + (sin(modulationAngle))))) -
                       12;
     modulationIndex =
-        ((int(modulationIndex) + delayTimeSamples) % delayTimeSamples) +
+        ((int(modulationIndex) + this->delayTimeSamples) % this->delayTimeSamples) +
         (modulationIndex - floor(modulationIndex));
   }
 
@@ -1557,13 +1716,14 @@ protected:
  * @ingroup effects
  * @copyright MIT License
  */
-class EnvelopeFilter : public FilterEffectBase {
+template <typename effectsuite_t = effectsuite_t_default>
+class EnvelopeFilter : public FilterEffectBase<effectsuite_t> {
 public:
   /** Constructor */
   EnvelopeFilter() : envelopeFollower(.00006, 4) {
     // NOTE: Initialising chebyshev coeffcients allocates memory, perhaps alter
     // so that memory is already pre allocated
-    changeChebyICoefficients(.01, false, .1, 4);
+    this->changeChebyICoefficients(.01, false, .1, 4);
     envelopeFollower.setChebyICoefficients(.00006, false, 0);
   };
 
@@ -1575,10 +1735,14 @@ public:
    * @params sample		incoming signal sample value
    * @returns processed sample value
    */
-  effectsuite_t processDouble(effectsuite_t sample) {
-    setChebyICoefficients(0.001 + envelopeFollower.envelope(2 * sample), false,
+  effectsuite_t processFloat(effectsuite_t sample) {
+    this->setChebyICoefficients(0.001 + envelopeFollower.envelope(2 * sample), false,
                           .1); // Offset avoids zero cutoff value
-    return applyFilter(sample);
+    return this->applyFilter(sample);
+  }
+
+  EnvelopeFilter* clone() override {
+    return new EnvelopeFilter(*this);
   }
 
 protected:
@@ -1586,7 +1750,7 @@ protected:
    * this follows the signal envelope and alters the internallow pass filter
    * cutoff
    */
-  SimpleLPF envelopeFollower;
+  SimpleLPF<effectsuite_t> envelopeFollower;
 };
 
 } // namespace effectsuite_tools

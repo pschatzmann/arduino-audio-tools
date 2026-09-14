@@ -1,6 +1,9 @@
 #pragma once
+#include "AudioToolsConfig.h"
 #include "AudioFilter/Filter.h"
 #include "AudioTools/CoreAudio/AudioBasic/Collections.h"
+#include "AudioTools/CoreAudio/AudioBasic/q1_14_t.h"
+#include "AudioTools/CoreAudio/AudioBasic/soft_float_t.h"
 #include "AudioTypes.h"
 
 /**
@@ -55,23 +58,36 @@ template <typename T = int16_t>
 class ConverterScaler : public BaseConverter {
  public:
   ConverterScaler(float factor, T offset, T maxValue, int channels = 2) {
-    this->factor_value = factor;
     this->maxValue = maxValue;
     this->offset_value = offset;
     this->channels = channels;
+    setFactor(factor);
   }
 
   size_t convert(uint8_t *src, size_t byte_count) {
     T *sample = (T *)src;
     int size = byte_count / channels / sizeof(T);
+    // routed through plain int (rather than T directly) so this works
+    // uniformly for every T -- soft_float_t (and, for the else branch,
+    // avoiding a second implicit conversion) only has constructors for
+    // fundamental numeric types, not for class types like int24_t
+    int mv = (int)maxValue;
+    int off = (int)offset_value;
     for (size_t j = 0; j < size; j++) {
       for (int i = 0; i < channels; i++) {
-        *sample = (*sample + offset_value) * factor_value;
-        if (*sample > maxValue) {
-          *sample = maxValue;
-        } else if (*sample < -maxValue) {
-          *sample = -maxValue;
+        int in = (int)(*sample) + off;
+        // soft_float_t: integer mantissa/exponent under the hood, no
+        // per-sample FPU multiply
+        acc_t scaled = acc_t(in) * factor_value;
+        // clip in the wide intermediate type -- narrowing an out-of-range
+        // value straight into T (as the original code did) is undefined
+        // behavior for float-to-integer conversions
+        if (scaled > mv) {
+          scaled = mv;
+        } else if (scaled < -mv) {
+          scaled = -mv;
         }
+        *sample = (T)(int)scaled;
         sample++;
       }
     }
@@ -91,8 +107,18 @@ class ConverterScaler : public BaseConverter {
   T offset() { return offset_value; }
 
  protected:
+#if PREFER_FIXEDPOINT
+  using acc_t = soft_float_t;
+#else
+  using acc_t = float;
+#endif
   int channels;
-  float factor_value;
+  // acc_t (not float): unlike q1_14_t's saturating +-2.0 range, soft_float_t
+  // has float's full dynamic range (just ~4-5 significant digits of
+  // precision), so round-tripping the getter through it doesn't risk the
+  // "set 3.0, get back a clamped 2.0" surprise that would justify keeping a
+  // separate float copy alongside it.
+  acc_t factor_value{0.0f};
   T maxValue;
   T offset_value;
 };
@@ -122,16 +148,16 @@ class ConverterAutoCenterT : public BaseConverter {
       if (!is_dynamic) {
         for (size_t j = 0; j < size; j++) {
           for (int ch = 0; ch < channels; ch++) {
-            sample[(j * channels) + ch] =
-                sample[(j * channels) + ch] - offset_to[ch];
+            sample[(j * channels) + ch] = (T)(int)(
+                acc_t((int)sample[(j * channels) + ch]) - offset_to[ch]);
           }
         }
       } else {
         for (size_t j = 0; j < size; j++) {
           for (int ch = 0; ch < channels; ch++) {
-            sample[(j * channels) + ch] = sample[(j * channels) + ch] -
-                                          offset_from[ch] +
-                                          (offset_step[ch] * size);
+            sample[(j * channels) + ch] =
+                (T)(int)(acc_t((int)sample[(j * channels) + ch]) -
+                         offset_from[ch] + dynamic_delta[ch]);
           }
         }
       }
@@ -140,12 +166,20 @@ class ConverterAutoCenterT : public BaseConverter {
   }
 
  protected:
-  Vector<float> offset_from{0};
-  Vector<float> offset_to{0};
-  Vector<float> offset_step{0};
-  Vector<float> total{0};
-  float left = 0.0;
-  float right = 0.0;
+#if PREFER_FIXEDPOINT
+  // soft_float_t: integer mantissa/exponent under the hood, no per-sample
+  // FPU add/subtract
+  using acc_t = soft_float_t;
+#else
+  using acc_t = float;
+#endif
+  Vector<acc_t> offset_from{0};
+  Vector<acc_t> offset_to{0};
+  // = offset_to - offset_from, precomputed once per block in setup() instead
+  // of every sample (the original recomputed offset_step[ch] * size --
+  // constant across the whole loop -- on every single iteration)
+  Vector<acc_t> dynamic_delta{0};
+  Vector<acc_t> total{0};
   bool is_setup = false;
   bool is_dynamic;
   int channels;
@@ -153,10 +187,8 @@ class ConverterAutoCenterT : public BaseConverter {
   void resetState() {
     offset_from.clear();
     offset_to.clear();
-    offset_step.clear();
+    dynamic_delta.clear();
     total.clear();
-    left = 0.0;
-    right = 0.0;
     is_setup = false;
   }
 
@@ -166,25 +198,34 @@ class ConverterAutoCenterT : public BaseConverter {
       if (offset_from.size() == 0) {
         offset_from.resize(channels);
         offset_to.resize(channels);
-        offset_step.resize(channels);
+        dynamic_delta.resize(channels);
         total.resize(channels);
+        // Vector::resize() allocates via `new T[]`, which does not
+        // zero-initialize -- without this, the "save last offset" loop
+        // below would read indeterminate memory as offset_to on this very
+        // first call.
+        for (int ch = 0; ch < channels; ch++) {
+          offset_from[ch] = 0;
+          offset_to[ch] = 0;
+          dynamic_delta[ch] = 0;
+        }
       }
 
       // save last offset
       for (int ch = 0; ch < channels; ch++) {
         offset_from[ch] = offset_to[ch];
-        total[ch] = 0.0;
+        total[ch] = 0;
       }
 
       // calculate new offset
       for (size_t j = 0; j < size; j++) {
         for (int ch = 0; ch < channels; ch++) {
-          total[ch] += src[(j * channels) + ch];
+          total[ch] += (int)src[(j * channels) + ch];
         }
       }
       for (int ch = 0; ch < channels; ch++) {
-        offset_to[ch] = total[ch] / size;
-        offset_step[ch] = (offset_to[ch] - offset_from[ch]) / size;
+        offset_to[ch] = total[ch] / (int)size;
+        dynamic_delta[ch] = offset_to[ch] - offset_from[ch];
       }
       is_setup = true;
     }
@@ -1060,7 +1101,14 @@ class ChannelDiff : public BaseConverter {
  * @ingroup convert
  * @tparam T
  */
+#if PREFER_FIXEDPOINT
+// soft_float_t: integer mantissa/exponent under the hood, so the per-sample
+// accumulation avoids the FPU without a per-bit-depth dispatch (like
+// ChannelAvg's) being needed here
+template <typename T = int16_t, typename SumT = soft_float_t>
+#else
 template <typename T = int16_t, typename SumT = float>
+#endif
 class ChannelMixer : public BaseConverter {
  public:
   ChannelMixer(int channels = 2) { this->channels = channels; }
@@ -1073,9 +1121,9 @@ class ChannelMixer : public BaseConverter {
     for (int j = 0; j < samples; j += channels) {
       SumT sum = 0;
       for (int ch = 0; ch < channels; ch++) {
-        sum += srcT[j + ch];
+        sum += (SumT)srcT[j + ch];
       }
-      T avg = sum / channels;
+      T avg = (T)(sum / channels);
       for (int ch = 0; ch < channels; ch++) {
         targetT[j + ch] = avg;
       }
@@ -1158,7 +1206,7 @@ class ChannelAvg : public BaseConverter {
   size_t convert(uint8_t *src, size_t size) { return convert(src, src, size); }
   size_t convert(uint8_t *target, uint8_t *src, size_t size) {
     switch (bits) {
-#ifdef PREFER_FIXEDPOINT
+#if PREFER_FIXEDPOINT
       case 8: {
         ChannelAvgT<int8_t, int16_t> ca8;
         return ca8.convert(target, src, size);
@@ -1170,6 +1218,10 @@ class ChannelAvg : public BaseConverter {
       case 24: {
         ChannelAvgT<int24_t, int32_t> ca24;
         return ca24.convert(target, src, size);
+      }
+      case 32: {
+        ChannelAvgT<int32_t, int64_t> ca32;
+        return ca32.convert(target, src, size);
       }
 #else
       case 8: {
@@ -1184,11 +1236,11 @@ class ChannelAvg : public BaseConverter {
         ChannelAvgT<int24_t, float> ca24;
         return ca24.convert(target, src, size);
       }
-#endif
       case 32: {
         ChannelAvgT<int32_t, float> ca32;
         return ca32.convert(target, src, size);
       }
+#endif
       default: {
         LOGE("Number of bits %d not supported.", bits);
         return 0;
@@ -1681,6 +1733,49 @@ class Converter1Channel : public BaseConverter {
 };
 
 /**
+ * @brief Converts a raw sample (type T) to/from a filter's arithmetic type
+ * (FT) for ConverterNChannels. The default just casts the raw sample
+ * straight through -- this matches the traditional convention used here,
+ * where FT=float and filter coefficients are calibrated against the
+ * sample's raw magnitude (e.g. up to +-32767 for 16-bit audio), so no
+ * rescaling is wanted. Specialized below for FT=q1_14_t, whose bounded
+ * ~[-2,2) range means a plain (q1_14_t)sample cast would misinterpret the
+ * raw PCM magnitude as a literal Q1.14 value and saturate almost
+ * immediately; q1_14_t::fromIntNN()/toIntNN() do the correct bit-shift
+ * scaling instead.
+ * @ingroup convert
+ */
+template <typename T, typename FT>
+struct FilterSampleConverter {
+  static FT toFilterType(T sample) { return (FT)sample; }
+  static T fromFilterType(FT value) { return (T)value; }
+};
+
+template <>
+struct FilterSampleConverter<int16_t, q1_14_t> {
+  static q1_14_t toFilterType(int16_t sample) {
+    return q1_14_t::fromInt16(sample);
+  }
+  static int16_t fromFilterType(q1_14_t value) { return value.toInt16(); }
+};
+
+template <>
+struct FilterSampleConverter<int24_t, q1_14_t> {
+  static q1_14_t toFilterType(int24_t sample) {
+    return q1_14_t::fromInt24(sample);
+  }
+  static int24_t fromFilterType(q1_14_t value) { return value.toInt24(); }
+};
+
+template <>
+struct FilterSampleConverter<int32_t, q1_14_t> {
+  static q1_14_t toFilterType(int32_t sample) {
+    return q1_14_t::fromInt32(sample);
+  }
+  static int32_t fromFilterType(q1_14_t value) { return value.toInt32(); }
+};
+
+/**
  * @brief Converter for n Channels which applies the indicated Filter
  * @ingroup convert
  * @author pschatzmann
@@ -1692,36 +1787,28 @@ class ConverterNChannels : public BaseConverter {
   /// Default Constructor
   ConverterNChannels(int channels) {
     this->channels = channels;
-    filters = new Filter<FT> *[channels];
-    // make sure that we have 1 filter per channel
+    filters.resize(channels);
     for (int j = 0; j < channels; j++) {
       filters[j] = nullptr;
     }
   }
 
-  /// Destructor
-  ~ConverterNChannels() {
-    for (int j = 0; j < channels; j++) {
-      if (filters[j] != nullptr) {
-        delete filters[j];
-      }
-    }
-    delete[] filters;
-    filters = 0;
-  }
-
   /// defines the filter for an individual channel - the first channel is 0
   void setFilter(int channel, Filter<FT> *filter) {
     if (channel < channels) {
-      if (filters[channel] != nullptr) {
-        delete filters[channel];
-      }
       filters[channel] = filter;
     } else {
       LOGE("Invalid channel nummber %d - max channel is %d", channel,
            channels - 1);
     }
   }
+
+  /// returns the filter for the indicated channel
+  Filter<FT> *getFilter(int channel) {
+    if (channel < channels) return filters[channel];
+    return nullptr;
+  }
+
 
   // convert all samples for each channel separately
   size_t convert(uint8_t *src, size_t size) {
@@ -1730,7 +1817,9 @@ class ConverterNChannels : public BaseConverter {
     for (size_t j = 0; j < count; j++) {
       for (int channel = 0; channel < channels; channel++) {
         if (filters[channel] != nullptr) {
-          *sample = filters[channel]->process(*sample);
+          FT in = FilterSampleConverter<T, FT>::toFilterType(*sample);
+          FT out = filters[channel]->process(in);
+          *sample = FilterSampleConverter<T, FT>::fromFilterType(out);
         }
         sample++;
       }
@@ -1740,9 +1829,22 @@ class ConverterNChannels : public BaseConverter {
 
   int getChannels() { return channels; }
 
+  /// dynamically change the number of channels; existing filters for valid
+  /// indices are preserved, new slots are initialized to nullptr
+  void setChannels(int newChannels) {
+    if (newChannels == channels) return;
+    int oldChannels = channels;
+    channels = newChannels;
+    filters.resize(newChannels);
+    // initialize new slots
+    for (int j = oldChannels; j < newChannels; j++) {
+      filters[j] = nullptr;
+    }
+  }
+
  protected:
-  Filter<FT> **filters = nullptr;
-  int channels;
+  Vector<Filter<FT> *> filters;
+  int channels = 0;
 };
 
 /**
@@ -1998,6 +2100,24 @@ class CopyChannels : public BaseConverter {
 };
 
 /**
+ * @brief Inverts the signal (multiplies every sample by -1)
+ * @ingroup convert
+ * @tparam T
+ */
+template <typename T = int16_t>
+class ConverterInvert : public BaseConverter {
+ public:
+  size_t convert(uint8_t *src, size_t size) override {
+    T *data = (T *)src;
+    int samples = size / sizeof(T);
+    for (int j = 0; j < samples; j++) {
+      data[j] = -data[j];
+    }
+    return size;
+  }
+};
+
+/**
  * @brief You can provide a lambda expression to convert the data
  * @ingroup convert
  * @tparam T
@@ -2005,12 +2125,21 @@ class CopyChannels : public BaseConverter {
 template <typename T = int16_t>
 class CallbackConverterT : public BaseConverter {
  public:
+  CallbackConverterT() = default;
   CallbackConverterT(T (*callback)(T in, int channel), int channels = 2) {
+    setCallback(callback, channels);
+  }
+
+  void setCallback(T (*callback)(T in, int channel), int channels) {
     this->callback = callback;
     this->channels = channels;
   }
 
   size_t convert(uint8_t *src, size_t size) {
+    // no conversion if no callback is provided
+    if (callback == nullptr) {
+      return size;
+    }
     int samples = size / sizeof(T);
     T *srcT = (T *)src;
     for (int j = 0; j < samples; j++) {
@@ -2020,8 +2149,11 @@ class CallbackConverterT : public BaseConverter {
   }
 
  protected:
-  T (*callback)(T in, int channel);
-  int channels;
+  T (*callback)(T in, int channel) = nullptr;
+  int channels = 2;
 };
+
+/// CallbackConverter with int16_t as default type
+using CallbackConverter = CallbackConverterT<int16_t>;
 
 }  // namespace audio_tools

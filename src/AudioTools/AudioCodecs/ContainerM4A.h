@@ -10,6 +10,28 @@ namespace audio_tools {
  * @brief M4A Demuxer that extracts audio from M4A/MP4 containers.
  * The audio is decoded into pcm with the help of the provided decoder.
  * format.
+ *
+ * Audio-only, single-track: a thin ContainerDecoder wrapper around
+ * M4AAudioDemuxer (which itself inherits its MP4-box parsing from
+ * M4ACommonDemuxer), so it plugs directly into AudioPlayer/MultiDecoder
+ * the same way any other AudioDecoder does. If you also need the video
+ * track out of an interleaved .mp4 - or a second, independent audio
+ * track - use DemuxerMP4 (AudioCodecs/ContainerMP4.h) instead; it's a
+ * separate, multi-track implementation (own MP4-box handlers, per-track
+ * state, chunk-offset-based interleave resolution) rather than a
+ * superset of this class, since M4ACommonDemuxer's single-track
+ * audio_config model doesn't extend to per-track state without a
+ * rework. The two share the same box-parsing *shape* (stsd/mp4a/esds
+ * for AAC, stsd/alac for ALAC's magic cookie) but not code - keep that
+ * in mind if a bug is found in one, it may well apply to the other too.
+ *
+ * @note The underlying MP4Parser expects the moov box (sample/format info) to
+ * come before the mdat box (audio payload) - i.e. the file must be
+ * "faststart", e.g. via 'ffmpeg -movflags +faststart'. If mdat comes first,
+ * decoding fails since the needed format info isn't available yet; by
+ * default this is logged as an error. Call
+ * getDemuxer().getParser().setRequireMoovBeforeMdat(false) to downgrade
+ * that to a warning and attempt to continue anyway.
  * @ingroup codecs
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -31,6 +53,9 @@ class ContainerM4A : public ContainerDecoder {
    * @param decoder Reference to a MultiDecoder for PCM output.
    */
   ContainerM4A(MultiDecoder& decoder) : ContainerM4A() { setDecoder(decoder); }
+
+  /// Provides "audio/mp4"
+  const char *mime() override { return "audio/mp4"; }
 
   /**
    * @brief Set the output stream for decoded or raw audio.

@@ -3,6 +3,8 @@
 
 #include "ALAC.h"  // https://github.com/pschatzmann/codec-alac
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
+#include <algorithm>
+
 
 namespace audio_tools {
 
@@ -44,6 +46,8 @@ class DecoderALAC : public AudioDecoder {
     setFrameSize(frameSize);
     //setDefaultConfig();
   }
+
+  const char* mime() override { return "audio/alac"; }
 
   // define ALACSpecificConfig
   bool setCodecConfig(ALACSpecificConfig config) {
@@ -122,7 +126,7 @@ class DecoderALAC : public AudioDecoder {
     int open = outputSize;
     int processed = 0;
     while (open > 0) {
-      int writeSize = MIN(1024, open);
+      int writeSize = std::min(1024, open);
       size_t written =
           p_print->write(result_buffer.data() + processed, writeSize);
       if (writeSize != written) {

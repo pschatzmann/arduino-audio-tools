@@ -8,9 +8,9 @@
 
 #include <FastLED.h> // to prevent conflicts introduced with 3.9
 #include "AudioTools.h"
-#include "AudioTools/AudioLibs/AudioRealFFT.h" // or any other supported inplementation
+#include "AudioTools/FFT/AudioRealFFT.h" // or any other supported inplementation
 #include "AudioTools/AudioLibs/LEDOutput.h"
-#include "BluetoothA2DPSink.h"
+#include "BluetoothA2DPSink.h" // https://github.com/pschatzmann/ESP32-A2DP
 
 #define PIN_LEDS 22
 #define LED_X 32

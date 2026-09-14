@@ -18,14 +18,14 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../../.. ${CMAKE_CURRENT_BINARY_DIR
 endif()
 
 # Build with tms
-FetchContent_Declare(tsdemux GIT_REPOSITORY "https://github.com/pschatzmann/arduino-tsdemux"  )
+FetchContent_Declare(tsdemux GIT_REPOSITORY "https://github.com/pschatzmann/codec-tsdemux"  )
 FetchContent_GetProperties(tsdemux)
 if(NOT tsdemux_POPULATED)
     FetchContent_Populate(tsdemux)
     add_subdirectory(${tsdemux_SOURCE_DIR} tsdemux)
 endif()
 
-FetchContent_Declare(helix GIT_REPOSITORY "https://github.com/pschatzmann/arduino-libhelix.git" GIT_TAG main )
+FetchContent_Declare(helix GIT_REPOSITORY "https://github.com/pschatzmann/codec-helix.git" GIT_TAG main )
 FetchContent_GetProperties(helix)
 if(NOT helix_POPULATED)
     FetchContent_Populate(helix helix)

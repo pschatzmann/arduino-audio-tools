@@ -3,13 +3,19 @@
 #include "AudioToolsConfig.h"
 
 #if defined(USE_WIFI)
-# include "WiFiInclude.h"
+#include "AudioTools/Communication/Network/Network.h"
 #endif
 
 #include "AudioTools/CoreAudio/AudioBasic/Str.h"
 #include "AudioTools/Communication/HTTP/AbstractURLStream.h"
 #include "AudioTools/Communication/HTTP/HttpRequest.h"
 #include "AudioTools/Communication/HTTP/URLStreamBufferedT.h"
+
+// UNO R3 has no WiFiClientSecure implementation, so we need to disable it
+#if !defined(USE_WIFIS3)
+#define HAS_CLIENT_SECURE
+#endif
+
 
 namespace audio_tools {
 
@@ -49,13 +55,15 @@ class URLStream : public AbstractURLStream {
   ~URLStream() {
     TRACED();
     end();
-    if (clientSecure != nullptr) {
-      delete clientSecure;
-      clientSecure = nullptr;
+#if defined(HAS_CLIENT_SECURE)
+    if (client_secure != nullptr) {
+      delete client_secure;
+      client_secure = nullptr;
     }
-    if (clientInsecure != nullptr) {
-      delete clientInsecure;
-      clientInsecure = nullptr;
+#endif
+    if (client_insecure != nullptr) {
+      delete client_insecure;
+      client_insecure = nullptr;
     }
   }
 
@@ -84,15 +92,15 @@ class URLStream : public AbstractURLStream {
     }
     int result = process<const char*>(action, url, reqMime, reqData);
     if (result > 0) {
-      size = request.contentLength();
-      LOGI("contentLength: %d", (int)size);
-      if (size >= 0 && wait_for_data) {
-        waitForData(clientTimeout);
+      content_length = request.contentLength();
+      LOGI("contentLength: %d", (int)content_length);
+      if (content_length >= 0 && wait_for_data) {
+        waitForData(client_timeout);
       }
     }
     total_read = 0;
     active = result == 200;
-    LOGI("==> http status: %d", result);
+    LOGI("==> http result: %d", result);
     return active;
   }
 
@@ -107,10 +115,10 @@ class URLStream : public AbstractURLStream {
     }
     int result = process<Stream&>(action, url, reqMime, reqData, len);
     if (result > 0) {
-      size = request.contentLength();
-      LOGI("size: %d", (int)size);
-      if (size >= 0 && wait_for_data) {
-        waitForData(clientTimeout);
+      content_length = request.contentLength();
+      LOGI("size: %d", (int)content_length);
+      if (content_length >= 0 && wait_for_data) {
+        waitForData(client_timeout);
       }
     }
     total_read = 0;
@@ -119,6 +127,7 @@ class URLStream : public AbstractURLStream {
     return active;
   }
 
+  /// Ends the request and releases the memory
   virtual void end() override {
     if (active) request.stop();
     active = false;
@@ -136,7 +145,7 @@ class URLStream : public AbstractURLStream {
   virtual size_t readBytes(uint8_t* data, size_t len) override {
     if (!active) return 0;
 
-    int read = request.read((uint8_t*)&data[0], len);
+    int read = request.read(data, len);
     if (read < 0) {
       read = 0;
     }
@@ -177,8 +186,8 @@ class URLStream : public AbstractURLStream {
 
   operator bool() override { return active && request.isReady(); }
 
-  /// Defines the client timeout
-  virtual void setTimeout(int ms) { clientTimeout = ms; }
+  /// Defines the client timeout in ms
+  virtual void setTimeout(int ms) { client_timeout = ms; }
 
   /// if set to true, it activates the power save mode which comes at the cost
   /// of performance! - By default this is deactivated. ESP32 Only!
@@ -208,6 +217,7 @@ class URLStream : public AbstractURLStream {
     request.header().put(key, value);
   }
 
+  /// Provides the value of the reply header for the given key
   const char* getReplyHeader(const char* key) override {
     return request.reply().get(key);
   }
@@ -218,12 +228,16 @@ class URLStream : public AbstractURLStream {
     request.setOnConnectCallback(callback);
   }
 
+  /// Defines if the stream should wait for data after the request has been sent
   void setWaitForData(bool flag) { wait_for_data = flag; }
 
-  int contentLength() override { return size; }
+  /// returns the content length
+  int contentLength() override { return content_length; }
 
+  /// returns the total number of bytes read from the stream
   size_t totalRead() override { return total_read; }
-  /// waits for some data - returns false if the request has failed
+
+  /// Waits for some data - returns false if the request has failed
   bool waitForData (int timeout) override{
     TRACED();
     uint32_t end = millis() + timeout;
@@ -232,8 +246,9 @@ class URLStream : public AbstractURLStream {
       while (request.available() == 0) {
         if (millis() > end) break;
         // stop waiting if we got an error
-        if (request.reply().statusCode() >= 300) {
-          LOGE("Error code recieved ... stop waiting for reply");
+        int rc = request.reply().statusCode();
+         if (rc >= 300) {
+          LOGE("Error code %d recieved: stop waiting for reply", rc);
           break;
         }
         delay(500);
@@ -244,36 +259,45 @@ class URLStream : public AbstractURLStream {
     return avail > 0;
   }
 
-
+  /// returns the url as string
   const char* urlStr() override { return url_str.c_str(); }
 
-/// Define the Root PEM Certificate for SSL
+  /// Define the Root PEM Certificate for SSL
   void setCACert(const char* cert) override{
-    if (clientSecure!=nullptr) clientSecure->setCACert(cert);
+#if defined(HAS_CLIENT_SECURE)
+    if (client_secure!=nullptr) client_secure->setCACert(cert);
+#else
+    LOGE("setCACert is not supported on this platform");
+#endif
   }
+
+  /// Returns the content length of the request
+  size_t size() { return content_length; }
 
  protected:
   HttpRequest request;
   Str url_str;
   Url url;
-  long size;
-  long total_read;
+  long content_length = 0;
+  long total_read = 0;
   // buffered single byte read
   Vector<uint8_t> read_buffer{0};
   uint16_t read_buffer_size = DEFAULT_BUFFER_SIZE;
-  uint16_t read_pos;
-  uint16_t read_size;
+  uint16_t read_pos = 0;
+  uint16_t read_size = 0;
   bool active = false;
   bool wait_for_data = true;
+  Client* client = nullptr; // client defined via setClient
+  WiFiClient* client_insecure = nullptr; // wifi client for http
+#if defined(HAS_CLIENT_SECURE)
+  WiFiClientSecure* client_secure = nullptr; // wifi client for https
+#endif
+  int client_timeout = URL_CLIENT_TIMEOUT;                  // 60000;
+  unsigned long handshake_timeout = URL_HANDSHAKE_TIMEOUT;  // 120000
+  bool is_power_save = false;
   // optional
   const char* network = nullptr;
   const char* password = nullptr;
-  Client* client = nullptr; // client defined via setClient
-  WiFiClient* clientInsecure = nullptr; // wifi client for http
-  WiFiClientSecure* clientSecure = nullptr; // wifi client for https
-  int clientTimeout = URL_CLIENT_TIMEOUT;                  // 60000;
-  unsigned long handshakeTimeout = URL_HANDSHAKE_TIMEOUT;  // 120000
-  bool is_power_save = false;
 
   bool preProcess(const char* urlStr, const char* acceptMime) {
     TRACED();
@@ -300,17 +324,9 @@ class URLStream : public AbstractURLStream {
     // setup client
     Client& client = getClient(url.isSecure());
     request.setClient(client);
-
-    // set timeout
-    client.setTimeout(clientTimeout / 1000);
-    request.setTimeout(clientTimeout);
+    request.setTimeout(client_timeout);
 
 #if defined(ESP32)
-    // There is a bug in IDF 4!
-    if (clientSecure != nullptr) {
-      clientSecure->setHandshakeTimeout(handshakeTimeout);
-    }
-
     // Performance optimization for ESP32
     if (!is_power_save) {
       esp_wifi_set_ps(WIFI_PS_NONE);
@@ -352,20 +368,57 @@ class URLStream : public AbstractURLStream {
 
   /// Determines the client
   Client& getClient(bool isSecure) {
+#if defined(HAS_CLIENT_SECURE)
     if (isSecure) {
-      if (clientSecure == nullptr) {
-        clientSecure = new WiFiClientSecure();
-        clientSecure->setInsecure();
-      }
-      LOGI("WiFiClientSecure");
-      return *clientSecure;
+      setupClientSecure();
+      return *client_secure;
     }
-    if (clientInsecure == nullptr) {
-      clientInsecure = new WiFiClient();
+#endif
+    if (client_insecure == nullptr) {
+      client_insecure = new WiFiClient();
+      client_insecure->setTimeout(client_timeout);
+#ifdef ESP32
+  #if ESP_ARDUINO_VERSION >= ESP_ARDUINO_VERSION_VAL(3,0,0)
+      client_insecure->setConnectionTimeout(client_timeout);
+  #else
+      client_insecure->setTimeout(client_timeout);
+  #endif 
+#endif
       LOGI("WiFiClient");
     }
-    return *clientInsecure;
+    return *client_insecure;
   }
+
+#if defined(HAS_CLIENT_SECURE)
+
+  void setupClientSecure() {
+      LOGI("setupClientSecure");
+      if (client_secure == nullptr) {
+        client_secure = new WiFiClientSecure();
+        client_secure->setTimeout(client_timeout);
+#ifdef TMD_REAL_WIFICLIENTSECURE
+        // Desktop build with a real (not the plain-WiFiClient fallback -
+        // see PlatformConfig/desktop.h) WiFiClientSecure: skip
+        // certificate validation, same demo-level trust this project
+        // already applies on ESP32/RP2040 below - there's no CA bundle
+        // configured here for any of them.
+        client_secure->setInsecure();
+#endif
+#ifdef ESP32
+        client_secure->setInsecure();
+  #if ESP_ARDUINO_VERSION >= ESP_ARDUINO_VERSION_VAL(3,0,0)
+        client_secure->setConnectionTimeout(client_timeout);
+  #endif 
+        client_secure->setHandshakeTimeout(handshake_timeout);
+#endif
+#ifdef RP2040_HOWER
+        client_secure->setInsecure();
+        client_secure->setTLSConnectTimeout(client_timeout);
+#endif
+      }
+  }
+
+#endif
 
   inline void fillBuffer() {
     if (isEOS()) {

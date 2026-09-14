@@ -1,12 +1,12 @@
 #include "AudioTools.h"
-#include "AudioTools/AudioLibs/AudioRealFFT.h" // using RealFFT
+#include "AudioTools/FFT/AudioRealFFT.h" // using RealFFT
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 AudioInfo info(8000, 1, 16);
 AudioRealFFT afft; // or AudioKissFFT
 Hann hann;
 BufferedWindow buffered(&hann);
-SineWaveGenerator<int16_t> sineWave(32000);
+SineGenerator<int16_t> sineWave(32000);
 GeneratedSoundStream<int16_t> in(sineWave);
 StreamCopy copier(afft, in);
 //CsvOutput<int16_t> out(Serial);

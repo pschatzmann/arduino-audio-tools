@@ -1,7 +1,7 @@
 /**
  * @file CodecSBC.h
  * @author Phil Schatzmann
- * @brief SBC Codec using  https://github.com/pschatzmann/arduino-libsbc
+ * @brief SBC Codec using  https://github.com/pschatzmann/codec-sbc
  * @version 0.1
  * @date 2022-04-24
  */
@@ -17,7 +17,7 @@ namespace audio_tools {
 
 /**
  * @brief Decoder for SBC. Depends on
- * https://github.com/pschatzmann/arduino-libsbc.
+ * https://github.com/pschatzmann/codec-sbc.
  * Inspired by sbcdec.c
  * @ingroup codecs
  * @ingroup decoder
@@ -37,6 +37,8 @@ public:
     if (input_buffer != nullptr)
       delete[] input_buffer;
   }
+
+  virtual const char *mime() override { return "audio/sbc"; }
 
   virtual bool begin() {
     TRACEI();
@@ -184,7 +186,7 @@ protected:
 
 /**
  * @brief Encoder for SBC - Depends on
- * https://github.com/pschatzmann/arduino-libsbc.
+ * https://github.com/pschatzmann/codec-sbc.
  * Inspired by sbcenc.c
  * @ingroup codecs
  * @ingroup encoder

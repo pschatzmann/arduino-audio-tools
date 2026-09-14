@@ -10,7 +10,7 @@
 #include "AudioTools.h"
 #include "AudioTools/Disk/AudioSourceSD.h"
 #include "AudioTools/AudioCodecs/CodecMP3Helix.h"
-#include "AudioTools/AudioLibs/AudioRealFFT.h" // or AudioKissFFT or others
+#include "AudioTools/FFT/AudioRealFFT.h" // or AudioKissFFT or others
 
 const char *startFilePath="/";
 const char* ext="mp3";

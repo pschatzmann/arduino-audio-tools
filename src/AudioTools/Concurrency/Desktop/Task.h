@@ -8,14 +8,17 @@
 #include <functional>
 #include <mutex>
 #include <thread>
+#include "AudioTools/Concurrency/ITask.h"
 
 namespace audio_tools {
 
 /**
  * @brief Task abstraction for Linux mapped to a std::thread.
  * suspend()/resume() simulated with condition_variable.
+ * 
+ * @note Supported by all Linux platforms with C++11 support
  */
-class Task {
+class Task : public ITask {
  public:
   Task(const char *name, int stackSize, int priority = 1, int core = -1) {
     (void)name;
@@ -78,6 +81,10 @@ class Task {
 
   void setReference(void *r) { ref = r; }
   void *getReference() { return ref; }
+
+  bool isSuspended() { return paused; }
+  bool isEnded() { return terminate_flag.load(); }
+  bool isRunning() { return !paused && !isEnded(); }
 
  protected:
   std::thread running_thread;

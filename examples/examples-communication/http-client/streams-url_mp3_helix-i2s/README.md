@@ -29,6 +29,6 @@ XMT  |	3V (or another GPIO PIN which is set to high)
 
 ### Dependencies
 
-- https://github.com/pschatzmann/arduino-libhelix
+- https://github.com/pschatzmann/codec-helix
 
 

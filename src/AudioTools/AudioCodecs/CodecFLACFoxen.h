@@ -34,6 +34,8 @@ class FLACDecoderFoxen : public AudioDecoder {
   /// Destructor - calls end();
   ~FLACDecoderFoxen() { end(); }
 
+  const char *mime() override { return "audio/flac"; }
+
   bool begin() {
     TRACEI();
     is_active = false;

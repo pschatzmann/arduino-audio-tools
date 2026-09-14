@@ -13,9 +13,6 @@
 I2SStream out; // Replace with desired class e.g. AudioBoardStream, AnalogAudioStream etc.
 SAM sam(out, false);
 
-// Callback which provides the audio data 
-void outputData(Print *out){
-}
 
 void setup(){
   Serial.begin(115200);

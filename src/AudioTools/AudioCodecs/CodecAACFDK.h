@@ -12,7 +12,7 @@ AudioInfoSupport *audioChangeFDK = nullptr;
 
 /**
  * @brief Audio Decoder which decodes AAC into a PCM stream
- * This is basically just a wrapper using https://github.com/pschatzmann/arduino-fdk-aac
+ * This is basically just a wrapper using https://github.com/pschatzmann/codec-fdk-aac
  * which uses AudioInfo and provides the handlig of AudioInfo changes.
  * @ingroup codecs
  * @ingroup decoder
@@ -34,6 +34,8 @@ class AACDecoderFDK : public AudioDecoder  {
         virtual ~AACDecoderFDK(){
             delete dec;
         }
+
+        const char *mime() override { return "audio/aac"; }
 
         /// Defines the output stream
         void setOutput(Print &out_stream) override {
@@ -118,7 +120,7 @@ class AACDecoderFDK : public AudioDecoder  {
 
 /**
  * @brief Encodes PCM data to the AAC format and writes the result to a stream
- * This is basically just a wrapper using https://github.com/pschatzmann/arduino-fdk-aac
+ * This is basically just a wrapper using https://github.com/pschatzmann/codec-fdk-aac
  * @ingroup codecs
  * @ingroup encoder
  * @author Phil Schatzmann

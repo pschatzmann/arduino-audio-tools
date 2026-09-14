@@ -19,12 +19,12 @@ const char *password = "password";
 AudioInfo info(16000,1,16);
 AACEncoderFDK fdk;
 AudioEncoderServer server(&fdk, ssid, password);
-SineWaveGenerator<int16_t> sineWave;            // Subclass of SoundGenerator with max amplitude of 32000
+SineGenerator<int16_t> sineWave;            // Subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> in(sineWave);     // Stream generated from sine wave
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial,AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   // configure FDK to use less RAM (not necessary if you activate PSRAM)
   fdk.setAudioObjectType(2);  // AAC low complexity
