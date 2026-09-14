@@ -66,22 +66,22 @@ class RTSPFormat {
   // Initialize with AudioInfo like data
   virtual void begin(AudioInfo info) { cfg = info; }
   
-  // Initialize with VideoInfo data
-  virtual void begin(VideoInfo info) { video_cfg = info; }
+  // Initialize with RTSPVideoInfo data
+  virtual void begin(RTSPVideoInfo info) { video_cfg = info; }
   
   // Provide a default config (must be overridden by concrete subclass)
   virtual AudioInfo defaultConfig() = 0;
   
   // Provide default video config (override for video formats)
-  virtual VideoInfo defaultVideoConfig() { 
-    return VideoInfo(640, 480, 30.0f, VIDEO_MJPEG, 24); 
+  virtual RTSPVideoInfo defaultVideoConfig() { 
+    return RTSPVideoInfo(640, 480, 30.0f, RTSPVideoFormat::MJPEG, 24); 
   }
   
   // Access current AudioInfo
   virtual AudioInfo audioInfo() { return cfg; }
   
-  // Access current VideoInfo
-  virtual VideoInfo videoInfo() { return video_cfg; }
+  // Access current RTSPVideoInfo
+  virtual RTSPVideoInfo videoInfo() { return video_cfg; }
   
   // Get media type (audio or video)
   virtual MediaType mediaType() { return MEDIA_AUDIO; }
@@ -148,7 +148,7 @@ class RTSPFormat {
   int fragment_size = DEFAULT_PCM_FRAGMENT_SIZE;
   int timer_period_us = 10000;
   AudioInfo cfg{16000, 1, 16};
-  VideoInfo video_cfg{640, 480, 30.0f, VIDEO_MJPEG, 24};
+  RTSPVideoInfo video_cfg{640, 480, 30.0f, RTSPVideoFormat::MJPEG, 24};
   const char *name_str = "RTSPAudioTools";
 };
 
@@ -604,6 +604,20 @@ class RTSPFormatMP3 : public RTSPFormat {
     return RTSPFormat::timerPeriodUs();
   }
 
+  /// Sized to match one actual encoded frame once the encoder has parsed
+  /// one (encoder->frameSize() > 0), instead of the fixed constructor
+  /// guess. A fragment size covering several frames' worth of bytes, sent
+  /// at the one-frame pace of timerPeriodUs(), overruns real-time
+  /// bandwidth - harmless over TCP (just buffers ahead) but causes packet
+  /// loss over UDP, which has no flow control.
+  int fragmentSize() override {
+    if (p_encoder != nullptr) {
+      int actual = p_encoder->frameSize();
+      if (actual > 0) return actual;
+    }
+    return RTSPFormat::fragmentSize();
+  }
+
   virtual int timestampIncrement() {
     if (p_encoder != nullptr) return p_encoder->samplesPerFrame();
     // MP3 frame size is typically 1152 samples
@@ -760,7 +774,7 @@ class RTSPFormatMJPEG : public RTSPFormat {
     video_width = width;
     video_height = height;
     video_framerate = framerate;
-    video_cfg = VideoInfo(width, height, framerate, VIDEO_MJPEG, 24);
+    video_cfg = RTSPVideoInfo(width, height, framerate, RTSPVideoFormat::MJPEG, 24);
     // Calculate timer period based on framerate
     setTimerPeriodUs((int)(1000000.0f / framerate));
   }
@@ -789,8 +803,8 @@ class RTSPFormatMJPEG : public RTSPFormat {
     return cfg;
   }
 
-  VideoInfo defaultVideoConfig() override {
-    return VideoInfo(video_width, video_height, video_framerate, VIDEO_MJPEG, 24);
+  RTSPVideoInfo defaultVideoConfig() override {
+    return RTSPVideoInfo(video_width, video_height, video_framerate, RTSPVideoFormat::MJPEG, 24);
   }
 
   int rtpPayloadType() override { return 26; }
@@ -805,13 +819,13 @@ class RTSPFormatMJPEG : public RTSPFormat {
   void setVideoDimensions(int width, int height) {
     video_width = width;
     video_height = height;
-    video_cfg = VideoInfo(width, height, video_framerate, VIDEO_MJPEG, 24);
+    video_cfg = RTSPVideoInfo(width, height, video_framerate, RTSPVideoFormat::MJPEG, 24);
   }
 
   /// Set video framerate
   void setFramerate(float fps) {
     video_framerate = fps;
-    video_cfg = VideoInfo(video_width, video_height, fps, VIDEO_MJPEG, 24);
+    video_cfg = RTSPVideoInfo(video_width, video_height, fps, RTSPVideoFormat::MJPEG, 24);
     setTimerPeriodUs((int)(1000000.0f / fps));
   }
 
@@ -868,7 +882,7 @@ class RTSPFormatH264 : public RTSPFormat {
     video_width = width;
     video_height = height;
     video_framerate = framerate;
-    video_cfg = VideoInfo(width, height, framerate, VIDEO_H264, 24);
+    video_cfg = RTSPVideoInfo(width, height, framerate, RTSPVideoFormat::H264, 24);
     setTimerPeriodUs((int)(1000000.0f / framerate));
   }
 
@@ -914,8 +928,8 @@ class RTSPFormatH264 : public RTSPFormat {
     return cfg;
   }
 
-  VideoInfo defaultVideoConfig() override {
-    return VideoInfo(video_width, video_height, video_framerate, VIDEO_H264, 24);
+  RTSPVideoInfo defaultVideoConfig() override {
+    return RTSPVideoInfo(video_width, video_height, video_framerate, RTSPVideoFormat::H264, 24);
   }
 
   int rtpPayloadType() override { return 96; }
@@ -929,13 +943,13 @@ class RTSPFormatH264 : public RTSPFormat {
   void setVideoDimensions(int width, int height) {
     video_width = width;
     video_height = height;
-    video_cfg = VideoInfo(width, height, video_framerate, VIDEO_H264, 24);
+    video_cfg = RTSPVideoInfo(width, height, video_framerate, RTSPVideoFormat::H264, 24);
   }
 
   /// Set video framerate
   void setFramerate(float fps) {
     video_framerate = fps;
-    video_cfg = VideoInfo(video_width, video_height, fps, VIDEO_H264, 24);
+    video_cfg = RTSPVideoInfo(video_width, video_height, fps, RTSPVideoFormat::H264, 24);
     setTimerPeriodUs((int)(1000000.0f / fps));
   }
 
@@ -968,6 +982,66 @@ class RTSPFormatH264 : public RTSPFormat {
   // Conservative default (Constrained Baseline, level 3.0) used only until
   // the real value parsed from the stream's SPS is available.
   String profile_level_id = "42E01E";
+};
+
+/**
+ * @brief MPEG-2 Transport Stream (MP2T) format for RTSP streaming of a
+ * pre-muxed audio+video container, per RFC 2250.
+ *
+ * All the other RTSPFormat subclasses carry a single elementary stream, so
+ * a server needs one RTSPServer/RTSPMediaStreamer instance per media type
+ * (audio, video) - there is no multi-track SDP support (no way to combine
+ * separate `m=audio`/`m=video` lines into one session). Muxing audio and
+ * video into MPEG-TS first (e.g. with MuxerMTS, see ContainerMTS.h) and
+ * streaming that as MP2T sidesteps the issue entirely: the interleaved,
+ * PTS-synced container travels as a single "m=video ... RTP/AVP 33" track
+ * that any RTSP client already knows how to demux into its two streams -
+ * no RTSP/SDP changes needed.
+ *
+ * Payload type 33 is static (RFC 3551), so no a=rtpmap is required. The
+ * source feeding this format needs no per-fragment RTP header beyond the
+ * generic one RTSPMediaStreamer already adds - just chunk the muxed byte
+ * stream to a whole number of 188-byte TS packets via setFragmentSize()
+ * (e.g. 7 * 188 = 1316 bytes, comfortably under a typical 1500-byte MTU).
+ *
+ * SDP format:
+ * m=video 0 RTP/AVP 33
+ *
+ * @ingroup rtsp
+ * @author Phil Schatzmann
+ */
+class RTSPFormatMTS : public RTSPFormat {
+ public:
+  /// @param framerate Only used to pace how often one RTP fragment is sent
+  /// (timerPeriodUs()) - unrelated to the muxed stream's own frame rate,
+  /// which MPEG-TS carries internally via PCR/PTS.
+  RTSPFormatMTS(float framerate = 25.0f) { setFramerate(framerate); }
+
+  /// Override media type for video
+  MediaType mediaType() override { return MEDIA_VIDEO; }
+
+  const char *format(char *buffer, int len) override {
+    TRACEI();
+    snprintf(buffer, len,
+             "s=%s\r\n"
+             "c=IN IP4 0.0.0.0\r\n"
+             "t=0 0\r\n"
+             "m=video 0 RTP/AVP %d\r\n",
+             name(), rtpPayloadType());
+    return (const char *)buffer;
+  }
+
+  AudioInfo defaultConfig() override { return AudioInfo(0, 0, 0); }
+
+  int rtpPayloadType() override { return 33; }
+
+  int timerPeriodUs() override { return (int)(1000000.0f / video_framerate); }
+
+  /// Set the fragment pacing rate (see constructor note)
+  void setFramerate(float fps) { video_framerate = fps; }
+
+ protected:
+  float video_framerate = 25.0f;
 };
 
 }  // namespace audio_tools

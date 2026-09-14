@@ -17,8 +17,8 @@
 using namespace audio_tools;
 
 const int port = 8554;
-const int VIDEO_WIDTH = 64;
-const int VIDEO_HEIGHT = 48;
+const int VIDEO_WIDTH = 320;
+const int VIDEO_HEIGHT = 240;
 const float VIDEO_FPS = 5.0f;
 const unsigned long FRAME_DURATION_MS = 1000 / VIDEO_FPS;
 

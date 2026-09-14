@@ -2,8 +2,15 @@
 
 #include "AudioTools/CoreAudio/BaseStream.h"
 #include "AudioTools/CoreAudio/AudioBasic/StrView.h"
-#ifdef ARDUINO
+// IS_DESKTOP (PlatformConfig/desktop.h) #defines ARDUINO for compatibility
+// even though it has no FS.h - File there comes from SD.h instead (already
+// included by whoever uses File/FileLoop on desktop), but its readBytes()
+// still wants char* like every other Arduino-style File, so READTYPE
+// stays char for it too.
+#if defined(ARDUINO) && !defined(IS_DESKTOP)
 #  include "FS.h"
+#endif
+#if defined(ARDUINO)
 #  define READTYPE char
 #else
 #  define READTYPE uint8_t

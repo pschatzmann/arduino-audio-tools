@@ -1,10 +1,9 @@
 cmake_minimum_required(VERSION 3.20)
 
 # set the project name
-project(rtsp-player)
+project(rtsp-mts)
 set (CMAKE_CXX_STANDARD 11)
 set (DCMAKE_CXX_FLAGS "-Werror")
-# add_compile_options(-Wstack-usage=1024)
 
 # Build with arduino-audio-tools
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
@@ -12,10 +11,10 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 endif()
 
 # build sketch as executable
-add_executable (rtsp-player rtsp-player.cpp)
+add_executable (rtsp-mts rtsp-mts.cpp)
 
 # set preprocessor defines
-target_compile_definitions(rtsp-player PUBLIC -DIS_DESKTOP)
+target_compile_definitions(rtsp-mts PUBLIC -DIS_DESKTOP)
 
 # specify libraries
-target_link_libraries(rtsp-player arduino_emulator arduino-audio-tools)
+target_link_libraries(rtsp-mts arduino_emulator arduino-audio-tools)

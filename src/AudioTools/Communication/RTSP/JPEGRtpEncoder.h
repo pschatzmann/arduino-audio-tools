@@ -193,7 +193,16 @@ class JPEGRtpEncoder : public RTSPVideoEncoder, protected RTSPFragmentQueue {
    * the JPEG DQT segments found in [data, data+headerLen). RFC 2435 expects
    * table 0 (luma) followed by table 1 (chroma), each 64 bytes in zigzag
    * order exactly as stored in the JPEG - no reordering needed.
-   * @return Number of bytes written to out (0, 64 or 128), 0 if no usable
+   *
+   * Some encoders emit a single quantization table shared by all components
+   * (SOF Tq=0 for luma and chroma alike) instead of two - a valid standalone
+   * JPEG, but not expressible in RFC 2435's wire format, whose receiver-side
+   * reconstruction (Appendix A) always assumes two distinct tables. Sending
+   * only the one table found would leave the reconstructed chroma table
+   * uninitialized on the receiver, corrupting decode; duplicating table 0
+   * into table 1 is faithful to the source (both components really do use
+   * that table) and satisfies the two-table format.
+   * @return Number of bytes written to out (0 or 128), 0 if no usable
    * 8-bit-precision table was found
    */
   int extractQuantTables(const uint8_t *data, size_t headerLen, uint8_t *out) {
@@ -241,16 +250,10 @@ class JPEGRtpEncoder : public RTSPVideoEncoder, protected RTSPFragmentQueue {
       i += 2 + segLen;
     }
 
-    int len = 0;
-    if (has0) {
-      memcpy(out, table0, 64);
-      len += 64;
-    }
-    if (has1) {
-      memcpy(out + len, table1, 64);
-      len += 64;
-    }
-    return len;
+    if (!has0) return 0;
+    memcpy(out, table0, 64);
+    memcpy(out + 64, has1 ? table1 : table0, 64);
+    return 128;
   }
 
   /**
@@ -346,7 +349,7 @@ class JPEGRtpEncoder : public RTSPVideoEncoder, protected RTSPFragmentQueue {
     }
     uint8_t type = detectJpegType(m_currentFrame.data(), headerSize);
 
-    VideoInfo vi = p_format->videoInfo();
+    RTSPVideoInfo vi = p_format->videoInfo();
     int width = vi.width;
     int height = vi.height;
 
