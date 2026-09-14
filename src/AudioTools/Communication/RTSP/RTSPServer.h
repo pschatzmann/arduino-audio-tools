@@ -8,7 +8,7 @@
  */
 
 #pragma once
-#include "RTSPAudioStreamer.h"
+#include "RTSPMediaStreamer.h"
 #include "RTSPServerBase.h"
 #ifdef ESP32
 #include <WiFi.h>
@@ -27,7 +27,7 @@ namespace audio_tools {
  * client handling on platforms that support threading (e.g., ESP32 with FreeRTOS).
  *
  * Usage:
- *   - Construct with a valid RTSPAudioStreamer and port number.
+ *   - Construct with a valid RTSPMediaStreamer and port number.
  *   - Call begin() to start the server and listen for clients.
  *   - Optionally set a session path callback for custom session handling.
  *
@@ -39,7 +39,7 @@ namespace audio_tools {
 template <typename Platform>
 class RTSPServer : public RTSPServerBase<Platform> {
  public:
-  using streamer_t = RTSPAudioStreamerBase<Platform>;
+  using streamer_t = RTSPMediaStreamerBase<Platform>;
 
   RTSPServer(streamer_t& streamer, int port = 8554, int core = 1)
       : RTSPServerBase<Platform>(streamer, port), core(core) {}

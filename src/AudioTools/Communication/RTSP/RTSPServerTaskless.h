@@ -8,7 +8,7 @@
  */
 #pragma once
 #include "RTSPSession.h"
-#include "RTSPAudioStreamer.h"
+#include "RTSPMediaStreamer.h"
 #include "RTSPServerBase.h"
 #ifdef ESP32
 #include <WiFi.h>
@@ -42,7 +42,9 @@ namespace audio_tools {
 template <typename Platform>
 class RTSPServerTaskless : public RTSPServerBase<Platform> {
  public:
-  RTSPServerTaskless(RTSPAudioStreamerBase<Platform>& streamer, int port = 8554)
+  using streamer_t = RTSPMediaStreamerBase<Platform>;
+
+  RTSPServerTaskless(streamer_t& streamer, int port = 8554)
       : RTSPServerBase<Platform>(streamer, port) {}
 
   ~RTSPServerTaskless() { this->end(); }

@@ -52,6 +52,11 @@ class MP3ParserEncoder : public AudioEncoder {
 
   uint16_t samplesPerFrame() override { return mp3.getSamplesPerFrame(); }
 
+  /// Size (in bytes) of the last parsed MP3 frame, 0 until the first frame
+  /// has been seen. Lets RTSPFormatMP3 size RTP fragments to match one
+  /// frame instead of a fixed guess.
+  int frameSize() override { return mp3.getFrameLength(); }
+
   operator bool() override { return true; }
 
   virtual const char* mime() override { return "audio/mpeg"; }

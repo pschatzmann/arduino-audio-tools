@@ -115,6 +115,15 @@ class AudioEncoder : public AudioWriter, public MimeSource {
   virtual uint32_t frameDurationUs() { return 0;};
   /// Optional rtsp function: provide samples per the frame
   virtual uint16_t samplesPerFrame() { return 0;};
+  /// Optional rtsp function: provide the encoded size (in bytes) of one
+  /// frame, once known (e.g. after the encoder has seen real data). Lets
+  /// an RTSPFormat size its RTP fragments to match one frame instead of a
+  /// fixed guess, so throughput actually tracks frameDurationUs() - a
+  /// fragment size covering several frames' worth of bytes sent at
+  /// one-frame timing overruns real-time bandwidth and, over UDP (no flow
+  /// control), causes packet loss. Returns 0 if not yet known/not
+  /// applicable (fixed-frame-size codecs have no need to override this).
+  virtual int frameSize() { return 0; }
 
  protected:
   AudioInfo info;

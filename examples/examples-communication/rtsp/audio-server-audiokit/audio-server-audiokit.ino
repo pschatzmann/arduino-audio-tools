@@ -1,5 +1,5 @@
 /**
- * @file communication-audiokit-rtsp.ino
+ * @file audio-server-audiokit.ino
  * @author Phil Schatzmann
  * @brief Provide Microphone from AudioKit via RTSP. Depends on https://github.com/pschatzmann/Micro-RTSP-Audio
  * @version 0.1
@@ -16,8 +16,8 @@
 
 int port = 554;
 AudioBoardStream kit(AudioKitEs8388V1);  // Audio source
-RTSPAudioSource source(kit); // IAudioSource for RTSP
-RTSPAudioStreamer<RTSPPlatformWiFi> streamer(source); // Stream audio via RTSP
+RTSPMediaSource source(kit); // IMediaSource for RTSP
+RTSPMediaStreamer<RTSPPlatformWiFi> streamer(source); // Stream media via RTSP
 RTSPServer<RTSPPlatformWiFi> rtsp(streamer, port);
 
 const char* wifi = "wifi";

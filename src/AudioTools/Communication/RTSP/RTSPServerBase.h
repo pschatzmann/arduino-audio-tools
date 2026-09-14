@@ -7,7 +7,7 @@
  */
 #pragma once
 #include "RTSPSession.h"
-#include "RTSPAudioStreamer.h"
+#include "RTSPMediaStreamer.h"
 #ifdef ESP32
 #include <WiFi.h>
 #include <esp_wifi.h>
@@ -29,7 +29,7 @@ template <typename Platform>
 class RTSPServerBase {
  public:
   /// Constructor
-  RTSPServerBase(RTSPAudioStreamerBase<Platform>& streamer, int port = 8554)
+  RTSPServerBase(RTSPMediaStreamerBase<Platform>& streamer, int port = 8554)
       : streamer(&streamer), port(port) {
     server = nullptr;
   }
@@ -64,7 +64,7 @@ class RTSPServerBase {
 
   /// Start server
   virtual bool begin() {
-    streamer->initAudioSource();
+    streamer->initMediaSource();
     if (server == nullptr) {
       server = Platform::createServer(port);
       LOGI("RTSP server started on port %d", port);
@@ -91,12 +91,14 @@ class RTSPServerBase {
   operator bool() { return client_count > 0; }
   /// Set session timeout in milliseconds
   void setSessionTimeoutMs(unsigned long ms) { sessionTimeoutMs = ms; }
+  /// Get the server port number
+  int getPort() { return port; }
 
  protected:
   int port = 554;
   typename Platform::TcpServerType* server = nullptr;
   typename Platform::TcpClientType client;
-  RTSPAudioStreamerBase<Platform>* streamer = nullptr;
+  RTSPMediaStreamerBase<Platform>* streamer = nullptr;
   int client_count = 0;
   RtspSession<Platform>* rtspSession = nullptr;
   bool (*onSessionPathCb)(const char*, void*) = nullptr;

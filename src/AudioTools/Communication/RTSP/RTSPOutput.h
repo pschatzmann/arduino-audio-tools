@@ -10,9 +10,10 @@
 
 #include "AudioTools/CoreAudio/AudioPlayer.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"
-#include "RTSPAudioSource.h"
-#include "RTSPAudioStreamer.h"
+#include "RTSPMediaSource.h"
+#include "RTSPMediaStreamer.h"
 #include "RTSPFormat.h"
+#include "RTSPVideoEncoder.h"
 
 namespace audio_tools {
 
@@ -20,7 +21,7 @@ namespace audio_tools {
  * @brief RTSPOutput - Audio Output Stream for RTSP Streaming
  *
  * Accepts PCM audio data, encodes it using the specified encoder, and makes it
- * available for RTSP streaming via an integrated RTSPAudioStreamer.
+ * available for RTSP streaming via an integrated RTSPMediaStreamer.
  *
  * Data flow: PCM input → encoder → internal queue → RTSP source → RTP packets
  *
@@ -43,8 +44,29 @@ class RTSPOutput : public AudioOutput {
    */
   RTSPOutput(RTSPFormat &format, AudioEncoder &encoder) {
     setFormat(format);
-    rtsp_streamer.setAudioSource(&rtsp_source);
+    rtsp_streamer.setMediaSource(&rtsp_source);
     p_encoder = &encoder;
+  }
+
+  /**
+   * @brief Construct RTSPOutput for video streaming via any RTSPVideoEncoder
+   * (JPEGRtpEncoder, H264RtpEncoder, ...)
+   *
+   * A packetized video encoder performs its own RTP payload construction
+   * (fragmentation, payload-format headers), so this overload wires the
+   * streamer directly to the encoder instead of going through the generic
+   * byte-stream (RTSPMediaSource/DynamicMemoryStream) pipeline used for
+   * PCM/codec audio.
+   *
+   * @param format Format handler providing SDP configuration (e.g.
+   * RTSPFormatMJPEG, RTSPFormatH264)
+   * @param encoder Packetized video encoder matching the format
+   */
+  RTSPOutput(RTSPFormat &format, RTSPVideoEncoder &encoder) {
+    setFormat(format);
+    p_encoder = &encoder;
+    p_video_encoder = &encoder;
+    encoder.setFormat(format);
   }
 
   void setFormat(RTSPFormat &format) {
@@ -63,9 +85,9 @@ class RTSPOutput : public AudioOutput {
   /**
    * @brief Get access to the underlying RTSP streamer
    *
-   * @return Pointer to the RTSPAudioStreamer instance
+   * @return Pointer to the RTSPMediaStreamer instance
    */
-  RTSPAudioStreamer<Platform> &streamer() { return rtsp_streamer; }
+  RTSPMediaStreamer<Platform> &streamer() { return rtsp_streamer; }
 
   /**
    * @brief Initialize RTSPOutput with specific audio configuration
@@ -94,7 +116,17 @@ class RTSPOutput : public AudioOutput {
       LOGE("format is null");
       return false;
     }
-    // setup the RTSPAudioStreamer
+
+    if (p_video_encoder != nullptr) {
+      // Packetized (video) path: the encoder owns fragmentation, framing
+      // and the RTP marker bit; the streamer only forwards its already
+      // ready-to-send fragments.
+      p_encoder->begin();
+      rtsp_streamer.setMediaSource(p_video_encoder);
+      return true;
+    }
+
+    // setup the RTSPMediaStreamer
     cfg.logInfo();
 
     p_encoder->setOutput(memory_stream);
@@ -119,6 +151,10 @@ class RTSPOutput : public AudioOutput {
    * @brief Stop RTSP streaming and cleanup resources
    */
   void end() {
+    if (p_video_encoder != nullptr) {
+      p_video_encoder->stop();
+      return;
+    }
     rtsp_source.stop();
     memory_stream.end();
   }
@@ -129,6 +165,11 @@ class RTSPOutput : public AudioOutput {
    * @return Number of bytes available for writing, 0 if not started
    */
   int availableForWrite() {
+    if (p_video_encoder != nullptr) {
+      // Video frames are pushed on capture, not rate-limited by an
+      // intermediate buffer; report "ready" whenever the encoder is started.
+      return (bool)(*p_video_encoder) ? 0x7FFFFFFF : 0;
+    }
     return rtsp_source.isStarted() ? memory_stream.availableForWrite() : 0;
   }
 
@@ -150,18 +191,23 @@ class RTSPOutput : public AudioOutput {
    *
    * @return true if the RTSP source is active and ready for streaming
    */
-  operator bool() { return rtsp_source.isActive() && memory_stream.availableForWrite() > 0; }
+  operator bool() {
+    if (p_video_encoder != nullptr) return (bool)(*p_video_encoder);
+    return rtsp_source.isActive() && memory_stream.availableForWrite() > 0;
+  }
 
  protected:
   // Core Components
   CopyEncoder copy_encoder;           ///< Pass-through encoder for PCM mode
-  RTSPAudioSource rtsp_source;        ///< Provides encoded audio to streamer
+  RTSPMediaSource rtsp_source;        ///< Provides encoded audio to streamer
   DynamicMemoryStream memory_stream{false, 1024, 10};  ///< Memory stream for internal buffer
   AudioEncoder *p_encoder =
       &copy_encoder;            ///< Active encoder (PCM or codec-specific)
+  RTSPVideoEncoder *p_video_encoder =
+      nullptr;                  ///< Set for a packetized (video) constructor
   RTSPFormatPCM pcm;            ///< Default PCM format handler (merged class)
   RTSPFormat *p_format = &pcm;  ///< Active format handler
-  RTSPAudioStreamer<Platform>
+  RTSPMediaStreamer<Platform>
       rtsp_streamer;  ///< Handles RTP packet transmission
 };
 

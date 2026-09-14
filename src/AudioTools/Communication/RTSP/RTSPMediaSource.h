@@ -9,7 +9,7 @@
 #pragma once
 
 #include "AudioTools/CoreAudio/AudioStreams.h"
-#include "IAudioSource.h"
+#include "IMediaSource.h"
 #include "RTSPFormat.h"
 #include "RTSPPlatform.h"
 
@@ -17,10 +17,10 @@
 namespace audio_tools {
 
 /**
- * @brief Unified RTSP Audio Source - Works with both Stream and AudioStream
+ * @brief Unified RTSP Media Source - Works with both Stream and AudioStream
  *
  * This class can adapt any Arduino Stream or AudioTools AudioStream into an
- * IAudioSource for RTSP streaming. It automatically detects AudioStream
+ * IMediaSource for RTSP streaming. It automatically detects AudioStream
  * capabilities when available and falls back to manual configuration for
  * generic Streams.
  *
@@ -28,14 +28,14 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class RTSPAudioSource : public IAudioSource {
+class RTSPMediaSource : public IMediaSource {
  public:
-  RTSPAudioSource() = default;
+  RTSPMediaSource() = default;
 
   /**
    * @brief Destructor - Clean up resources
    */
-  virtual ~RTSPAudioSource() {
+  virtual ~RTSPMediaSource() {
     TRACEI();
     stop();                // Ensure we're properly stopped
     m_magic = 0xDEADFACE;  // Invalidate magic number
@@ -45,21 +45,21 @@ class RTSPAudioSource : public IAudioSource {
    * @brief Construct from AudioStream with automatic audio info detection
    * @param stream AudioStream that provides audio configuration automatically
    */
-  RTSPAudioSource(AudioStream &stream) { setInput(stream); }
+  RTSPMediaSource(AudioStream &stream) { setInput(stream); }
 
   /**
-   * @brief Construct from generic Stream with explicit audio info
-   * @param stream Any Arduino Stream object
+   * @brief Construct from generic Stream with manual audio configuration
+   * @param stream Generic Stream to read audio data from
    * @param info Audio configuration (sample rate, channels, bit depth)
    */
-  RTSPAudioSource(Stream &stream, AudioInfo info) { setInput(stream, info); }
+  RTSPMediaSource(Stream &stream, AudioInfo info) { setInput(stream, info); }
 
   /**
-   * @brief Construct with custom format
-   * @param stream Input stream (Stream or AudioStream)
-   * @param format Custom RTSP format implementation
+   * @brief Construct from generic Stream with format object
+   * @param stream Generic Stream to read audio data from
+   * @param format RTSPFormat configuration object
    */
-  RTSPAudioSource(Stream &stream, RTSPFormat &format) {
+  RTSPMediaSource(Stream &stream, RTSPFormat &format) {
     setInput(stream);
     setFormat(format);
   }
@@ -118,14 +118,14 @@ class RTSPAudioSource : public IAudioSource {
   int readBytes(void *dest, int byteCount) override {
     // Validate object integrity
     if (m_magic != MAGIC_NUMBER) {
-      LOGE("RTSPAudioSource: invalid magic number 0x%08x, object corrupted",
+      LOGE("RTSPMediaSource: invalid magic number 0x%08x, object corrupted",
            m_magic);
       return 0;
     }
 
     // Validate parameters
     if (dest == nullptr || byteCount <= 0) {
-      LOGW("RTSPAudioSource: invalid parameters dest=%p byteCount=%d", dest,
+      LOGW("RTSPMediaSource: invalid parameters dest=%p byteCount=%d", dest,
            byteCount);
       return 0;
     }
@@ -151,12 +151,12 @@ class RTSPAudioSource : public IAudioSource {
 
     // Validate object integrity
     if (m_magic != MAGIC_NUMBER) {
-      LOGE("RTSPAudioSource: start called on corrupted object, magic=0x%08x",
+      LOGE("RTSPMediaSource: start called on corrupted object, magic=0x%08x",
            m_magic);
       return;
     }
 
-    IAudioSource::start();
+    IMediaSource::start();
     if (p_audiostream) {
       p_audiostream->begin();
     }
@@ -175,12 +175,12 @@ class RTSPAudioSource : public IAudioSource {
     // Validate object integrity (allow stop even if corrupted for cleanup)
     if (m_magic != MAGIC_NUMBER) {
       LOGW(
-          "RTSPAudioSource: stop called on corrupted object, magic=0x%08x, "
+          "RTSPMediaSource: stop called on corrupted object, magic=0x%08x, "
           "proceeding anyway",
           m_magic);
     }
 
-    IAudioSource::stop();
+    IMediaSource::stop();
     started = false;
     if (p_audiostream) {
       p_audiostream->end();

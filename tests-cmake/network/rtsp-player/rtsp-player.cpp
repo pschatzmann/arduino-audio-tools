@@ -21,6 +21,11 @@ void setup() {
   Serial.begin(115200);
   AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
+  // ffmpeg/ffplay expect the optional RFC 2250 4-byte MPEG-audio header on
+  // payload type 14 (VLC doesn't need it); without it every frame boundary
+  // is off by 4 bytes and decodes as garbage.
+  mp3format.setUseRfc2250Header(true);
+
   // delay between mp3 files
   source.setTimeoutAutoNext(1000);
 
