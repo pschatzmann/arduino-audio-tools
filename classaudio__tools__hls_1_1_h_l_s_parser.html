@@ -115,6 +115,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8920918d9e0a1390082b2e660c954c8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acbadd60f6345291d15e7a8657824bf5e" id="r_acbadd60f6345291d15e7a8657824bf5e"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools__hls_1_1_h_l_s_parser.html#acbadd60f6345291d15e7a8657824bf5e">segmentsUrl</a> ()</td></tr>
 <tr class="separator:acbadd60f6345291d15e7a8657824bf5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2189e8bed217666764300f23307aed0b" id="r_a2189e8bed217666764300f23307aed0b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools__hls_1_1_h_l_s_parser.html#a2189e8bed217666764300f23307aed0b">setAgent</a> (const char *<a class="el" href="classaudio__tools__hls_1_1_h_l_s_parser.html#a4f760eb54d39e3aa41e0e05f2aec9360">agent</a>)</td></tr>
+<tr class="separator:a2189e8bed217666764300f23307aed0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03ff69652f9398f6de0fa4d2b27b786c" id="r_a03ff69652f9398f6de0fa4d2b27b786c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools__hls_1_1_h_l_s_parser.html#a03ff69652f9398f6de0fa4d2b27b786c">setBufferSize</a> (int size, int count)</td></tr>
 <tr class="memdesc:a03ff69652f9398f6de0fa4d2b27b786c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Redefines the buffer size.  <br /></td></tr>
 <tr class="separator:a03ff69652f9398f6de0fa4d2b27b786c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -185,6 +187,8 @@ Static Protected Member Functions</h2></td></tr>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a03c996f9fcf0e10baeb3e700be0c409a" id="r_a03c996f9fcf0e10baeb3e700be0c409a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools__hls_1_1_h_l_s_parser.html#a03c996f9fcf0e10baeb3e700be0c409a">active</a> = false</td></tr>
 <tr class="separator:a03c996f9fcf0e10baeb3e700be0c409a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f760eb54d39e3aa41e0e05f2aec9360" id="r_a4f760eb54d39e3aa41e0e05f2aec9360"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools__hls_1_1_h_l_s_parser.html#a4f760eb54d39e3aa41e0e05f2aec9360">agent</a> = DEFAULT_AGENT</td></tr>
+<tr class="separator:a4f760eb54d39e3aa41e0e05f2aec9360"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71b420b9a271ff67fe17d3f93d6a81b1" id="r_a71b420b9a271ff67fe17d3f93d6a81b1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools__hls_1_1_h_l_s_parser.html#a71b420b9a271ff67fe17d3f93d6a81b1">bandwidth</a> = 0</td></tr>
 <tr class="separator:a71b420b9a271ff67fe17d3f93d6a81b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab96654613adbc7d9ef97f420b6bf4509" id="r_ab96654613adbc7d9ef97f420b6bf4509"><td class="memItemLeft" align="right" valign="top">Str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools__hls_1_1_h_l_s_parser.html#ab96654613adbc7d9ef97f420b6bf4509">codec</a></td></tr>
@@ -934,6 +938,35 @@ template&lt;typename URLStream &gt; </div>
 
 </div>
 </div>
+<a id="a2189e8bed217666764300f23307aed0b" name="a2189e8bed217666764300f23307aed0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2189e8bed217666764300f23307aed0b">&#9670;&#160;</a></span>setAgent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename URLStream &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setAgent </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>agent</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Defines the User-Agent header sent with the playlist and segment requests (some CDNs reject requests that don't carry one) </p>
+
+</div>
+</div>
 <a id="a03ff69652f9398f6de0fa4d2b27b786c" name="a03ff69652f9398f6de0fa4d2b27b786c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a03ff69652f9398f6de0fa4d2b27b786c">&#9670;&#160;</a></span>setBufferSize()</h2>
 
@@ -1160,6 +1193,30 @@ template&lt;typename URLStream &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">bool active = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4f760eb54d39e3aa41e0e05f2aec9360" name="a4f760eb54d39e3aa41e0e05f2aec9360"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f760eb54d39e3aa41e0e05f2aec9360">&#9670;&#160;</a></span>agent</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename URLStream &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* agent = DEFAULT_AGENT</td>
         </tr>
       </table>
   </td>

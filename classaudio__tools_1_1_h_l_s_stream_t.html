@@ -167,6 +167,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa5b1cdb06807ff2dc37acbaff63410b9" id="r_aa5b1cdb06807ff2dc37acbaff63410b9"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#aa5b1cdb06807ff2dc37acbaff63410b9">removeNotifyAudioChange</a> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;bi)</td></tr>
 <tr class="memdesc:aa5b1cdb06807ff2dc37acbaff63410b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a target in order not to be notified about audio changes.  <br /></td></tr>
 <tr class="separator:aa5b1cdb06807ff2dc37acbaff63410b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2189e8bed217666764300f23307aed0b" id="r_a2189e8bed217666764300f23307aed0b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html#a2189e8bed217666764300f23307aed0b">setAgent</a> (const char *agent)</td></tr>
+<tr class="separator:a2189e8bed217666764300f23307aed0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acbaca7240bc555603b0da5b7ca11ce10" id="r_acbaca7240bc555603b0da5b7ca11ce10"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_stream.html#acbaca7240bc555603b0da5b7ca11ce10">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> newInfo) override</td></tr>
 <tr class="memdesc:acbaca7240bc555603b0da5b7ca11ce10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the input <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>.  <br /></td></tr>
 <tr class="separator:acbaca7240bc555603b0da5b7ca11ce10"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1197,6 +1199,35 @@ template&lt;typename <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html
 <p>Removes a target in order not to be notified about audio changes. </p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_r_t_s_p_client.html#a53c11dc63fc416d5b4d864f35d763532">RTSPClient&lt; TcpClient, UdpSocket &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a2189e8bed217666764300f23307aed0b" name="a2189e8bed217666764300f23307aed0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2189e8bed217666764300f23307aed0b">&#9670;&#160;</a></span>setAgent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html">URLStream</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setAgent </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>agent</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Defines the User-Agent header sent with the playlist and segment requests (some CDNs reject requests that don't carry one). Defaults to a browser-like user agent. </p>
 
 </div>
 </div>
