@@ -1,13 +1,17 @@
 var searchData=
 [
-  ['uhs_5fddr_0',['UHS_DDR',['../classaudio__tools_1_1_v_f_s___s_d_m_m_c.html#ad57b3fa8e45359906ac229567c209a63a74309429e840324411ba738581363d4c',1,'audio_tools::VFS_SDMMC']]],
-  ['uhs_5fsdr_1',['UHS_SDR',['../classaudio__tools_1_1_v_f_s___s_d_m_m_c.html#ad57b3fa8e45359906ac229567c209a63a334727941bb9dbc2559557f14634d9b7',1,'audio_tools::VFS_SDMMC']]],
-  ['ule_2',['ULE',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338ae29e365fd3b5e59c86218486a0c1c7c1',1,'audio_tools']]],
-  ['ulp_5fdac1_3',['ULP_DAC1',['../namespaceaudio__tools.html#ab54fc3023f2ec29f09d7ff2d004255f2a2202c271e982b10bd838a8a1dd37203e',1,'audio_tools']]],
-  ['ulp_5fdac2_4',['ULP_DAC2',['../namespaceaudio__tools.html#ab54fc3023f2ec29f09d7ff2d004255f2a407d012694a652707830036d0034bc8a',1,'audio_tools']]],
-  ['undefined_5',['undefined',['../namespaceaudio__tools.html#a4dd4453d1994a706c0eb2350ffa55372aec0fc0100c4fc1ce4eea230c3dc10360',1,'audio_tools::Undefined'],['../namespaceaudio__tools.html#ac5cfc25b1f32277d802a787556d072b2aec0fc0100c4fc1ce4eea230c3dc10360',1,'audio_tools::Undefined'],['../_http_types_8h.html#a3a8d8d5989e593d770a33e5cb6c1ae84a605159e8a4c32319fd69b5d151369d93',1,'UNDEFINED:&#160;HttpTypes.h'],['../classaudio__tools__hls_1_1_h_l_s_parser.html#af69e21368a1b58dfa1a6601f6e9539bdaec0fc0100c4fc1ce4eea230c3dc10360',1,'audio_tools_hls::HLSParser::Undefined']]],
-  ['undefined_5fmode_6',['UNDEFINED_MODE',['../group__basic.html#gga8cbd91a8bac9b5ab425112be1620eb49a86e471283504c1e470e4d0e7b8b5842f',1,'audio_tools']]],
-  ['unisys_5fnap_5fadpcm_7',['UNISYS_NAP_ADPCM',['../group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1a16c2a17526e85de193cdd60f67ff81f2',1,'audio_tools']]],
-  ['unknown_8',['unknown',['../classaudio__tools_1_1_m4_a_common_demuxer.html#a87487bf84e831b40083eb736cc1a237ca88183b946cc5f0e8c96b2e66e1c74a7e',1,'audio_tools::M4ACommonDemuxer::Unknown'],['../group__video.html#ggaf8c65084215807a0aa0121960a93ec92a88183b946cc5f0e8c96b2e66e1c74a7e',1,'audio_tools::Unknown'],['../namespaceaudio__tools.html#af21c897fe6ae1bb1a36cf4db2b54f888a88183b946cc5f0e8c96b2e66e1c74a7e',1,'audio_tools::Unknown'],['../group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1a696b031073e74bf2cb98e5ef201d4aa3',1,'audio_tools::UNKNOWN'],['../group__video.html#gga216a5d43d2a518325c84f100ed7735a5a696b031073e74bf2cb98e5ef201d4aa3',1,'audio_tools::UNKNOWN']]],
-  ['us_9',['US',['../group__basic.html#ggadd9fe45e09605eee3e4a39c8a5c4476da56de89a713ba25cddd89edd52fdf2eaa',1,'audio_tools']]]
+  ['tagfoundcomplete_0',['TagFoundComplete',['../group__metadata-id3.html#gga1857f5fa1f018989102d5a5e3c5cf182a7ae8926f5afa6346e0a29fdfe9390a1a',1,'audio_tools']]],
+  ['tagfoundpartial_1',['TagFoundPartial',['../group__metadata-id3.html#gga1857f5fa1f018989102d5a5e3c5cf182a70a8c7fbb30d8391f79b205700465469',1,'audio_tools']]],
+  ['tagnotfound_2',['TagNotFound',['../group__metadata-id3.html#gga1857f5fa1f018989102d5a5e3c5cf182ab74090737b71acbda8b6f236cb81d5c6',1,'audio_tools']]],
+  ['tagprocessed_3',['TagProcessed',['../group__metadata-id3.html#gga1857f5fa1f018989102d5a5e3c5cf182a062e7c19b4dcf820d6390df170a9e845',1,'audio_tools']]],
+  ['tdm_4',['TDM',['../namespaceaudio__tools.html#a1d3846b210a1698eaf7cdb7258fcc3e1a3f6c6f8dc33ec5b79e7963b4dc28c3d3',1,'audio_tools']]],
+  ['timercallbackinthread_5',['TimerCallbackInThread',['../namespaceaudio__tools.html#a1a80d46b1fcf323c58eb596c016434f2a6671c687c9ccc98034b5610ac79031df',1,'audio_tools']]],
+  ['title_6',['Title',['../group__metadata.html#gga6760f423085f8a63374b1e2db102a6d1aae37fab5e18e444f110064c349066675',1,'audio_tools']]],
+  ['trace_7',['TRACE',['../_http_types_8h.html#a3a8d8d5989e593d770a33e5cb6c1ae84a7fa27e82c6c4f69434225ed81e5d151e',1,'HttpTypes.h']]],
+  ['trigo_5fbd_5flimit_8',['TRIGO_BD_LIMIT',['../classffft_1_1_f_f_t_real_fix_len_param.html#abc5c98fcc1211af2b80116dd6e0a035da48986ed13061a50f9dbb6c10d09347d9',1,'ffft::FFTRealFixLenParam']]],
+  ['tx_5fmode_9',['TX_MODE',['../group__basic.html#gga8cbd91a8bac9b5ab425112be1620eb49a736237ce367b7814c763eacd188cf9e5',1,'audio_tools']]],
+  ['txlenhi_10',['TxLenHi',['../classaudio__tools_1_1_s_p_i_audio_slave.html#ac9f1d458299e3a8dda366bb9700ef489a642b013086036e2207b68512c31d4705',1,'audio_tools::SPIAudioSlave']]],
+  ['txlenlo_11',['TxLenLo',['../classaudio__tools_1_1_s_p_i_audio_slave.html#ac9f1d458299e3a8dda366bb9700ef489aeb187b691b19134f12df3128bd874a21',1,'audio_tools::SPIAudioSlave']]],
+  ['txpayload_12',['TxPayload',['../classaudio__tools_1_1_s_p_i_audio_slave.html#ac9f1d458299e3a8dda366bb9700ef489a104b3feecaaaff633000d291ef4b9bab',1,'audio_tools::SPIAudioSlave']]],
+  ['txstatus_13',['TxStatus',['../classaudio__tools_1_1_s_p_i_audio_slave.html#ac9f1d458299e3a8dda366bb9700ef489ae280b220347c3b9d368b902dd1ff9eb6',1,'audio_tools::SPIAudioSlave']]]
 ];

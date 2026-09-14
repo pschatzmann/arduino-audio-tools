@@ -90,6 +90,9 @@ Namespaces</h2></td></tr>
 <tr class="memitem:namespaceaudio__tools_1_1quickstart__detail" id="r_namespaceaudio__tools_1_1quickstart__detail"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools_1_1quickstart__detail.html">quickstart_detail</a></td></tr>
 <tr class="memdesc:namespaceaudio__tools_1_1quickstart__detail"><td class="mdescLeft">&#160;</td><td class="mdescRight">SFINAE helper for <a class="el" href="classaudio__tools_1_1_file_seekable_source.html" title="Adapts a single concrete file/stream (Arduino&#39;s File, or anything else exposing position(),...">FileSeekableSource</a>'s auto-quickStart: calls writer.quickStart() if that method exists, no-op otherwise - most WriterT types (e.g. an AVI/WAV decoder) don't have one. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespaceaudio__tools_1_1_r_t_s_p_callbacks" id="r_namespaceaudio__tools_1_1_r_t_s_p_callbacks"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools_1_1_r_t_s_p_callbacks.html">RTSPCallbacks</a></td></tr>
+<tr class="memdesc:namespaceaudio__tools_1_1_r_t_s_p_callbacks"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience typedef for callback function signatures. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
@@ -1179,6 +1182,9 @@ size_t size)</a> and <a class="el" href="classaudio__tools_1_1_base_stream.html#
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html">H264EncoderESP32S3</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">H.264 video encoder for ESP32-S3: wraps esp_h264::H264Encoder (<a href="https://github.com/pschatzmann/ESP32S3-h264">https://github.com/pschatzmann/ESP32S3-h264</a>) - the ESP32-S3-specific counterpart of <a class="el" href="classaudio__tools_1_1_h264_encoder.html" title="H.264 video encoder: wraps TinyH264Encoder (https://github.com/pschatzmann/TinyH264)....">H264Encoder</a> (<a class="el" href="_codec_h264_8h.html">CodecH264.h</a>, the portable TinyH264-based encoder). Configure via <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a2e0ba07bec2a8049e7a7e76fff1451df">setSize()</a>/setFrameRate()/setBitrate()/ <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#ae79c247d671a304071dba1f67e0ddfc4">setGop()</a>/setQpRange()/setVideoFormat() (I420 - the default -, RGB565 or YUV422), then feed raw pictures via <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a7597ef706dd1aa590903ce9e095db20a">write()</a> - it writes the resulting Annex-B bitstream straight to the <a class="el" href="class_print.html">Print</a> target passed to <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#a05ff4cf361d54457ed8586e8c14aa922">setOutput()</a> (the underlying esp_h264::H264Encoder methods already take a <a class="el" href="class_print.html">Print</a>&amp; and handle the write, retrying on partial writes - see H264Encoder.h's encode()).  <a href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h264_rtp_encoder.html">H264RtpEncoder</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">H.264 RTP Encoder - Packetizes Annex-B H.264 access units per RFC 6184 for RTSP video streaming.  <a href="classaudio__tools_1_1_h264_rtp_encoder.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_hamming.html">Hamming</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_hamming.html" title="Hamming FFT Window function.">Hamming</a> FFT Window function.  <a href="classaudio__tools_1_1_hamming.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1280,9 +1286,6 @@ size_t size)</a> and <a class="el" href="classaudio__tools_1_1_base_stream.html#
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_stream.html">I2SStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">We support the <a class="el" href="class_stream.html">Stream</a> interface for the I2S access. In addition we allow a separate mute pin which might also be used to drive a LED...  <a href="classaudio__tools_1_1_i2_s_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i_audio_source.html">IAudioSource</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Audio Source Interface - Contract for Audio Data Providers.  <a href="classaudio__tools_1_1_i_audio_source.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i_c_y_stream_buffered.html">ICYStreamBuffered</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffered ICYStream with metadata callback support.  <a href="classaudio__tools_1_1_i_c_y_stream_buffered.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1313,6 +1316,9 @@ size_t size)</a> and <a class="el" href="classaudio__tools_1_1_base_stream.html#
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_i_m_a_state.html">IMAState</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i_media_source.html">IMediaSource</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Media Source Interface - Contract for Media Data Providers.  <a href="classaudio__tools_1_1_i_media_source.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_input_merge.html">InputMerge</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Merges multiple input streams. So if you provide 2 mono channels you get a stereo signal as result with the left channel from channel 0 and the right from channel 1.  <a href="classaudio__tools_1_1_input_merge.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1330,6 +1336,9 @@ size_t size)</a> and <a class="el" href="classaudio__tools_1_1_base_stream.html#
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i_task.html">ITask</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interface for a task that can be started and stopped.  <a href="classaudio__tools_1_1_i_task.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_j_p_e_g_rtp_encoder.html">JPEGRtpEncoder</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">JPEG RTP Encoder - Fragments JPEG frames per RFC 2435 for RTSP video streaming.  <a href="classaudio__tools_1_1_j_p_e_g_rtp_encoder.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_jupyter_audio_t.html">JupyterAudioT</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output to Jupyter. We write the data just to a file from where we can load the data again for different representations.  <a href="classaudio__tools_1_1_jupyter_audio_t.html#details">More...</a><br /></td></tr>
@@ -1943,21 +1952,6 @@ size_t size)</a> and <a class="el" href="classaudio__tools_1_1_base_stream.html#
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_ring_buffer_stream.html">RingBufferStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...">AudioStream</a> backed by a Ringbuffer. We can write to the end and read from the beginning of the stream.  <a href="classaudio__tools_1_1_ring_buffer_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_source.html">RTSPAudioSource</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unified RTSP Audio Source - Works with both <a class="el" href="class_stream.html">Stream</a> and <a class="el" href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...">AudioStream</a>.  <a href="classaudio__tools_1_1_r_t_s_p_audio_source.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer.html">RTSPAudioStreamer</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer.html" title="RTSPAudioStreamer - Timer-driven RTP Audio Streaming Engine.">RTSPAudioStreamer</a> - Timer-driven RTP Audio Streaming Engine.  <a href="classaudio__tools_1_1_r_t_s_p_audio_streamer.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html">RTSPAudioStreamerBase</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html" title="RTSPAudioStreamerBase - Core RTP Audio Streaming Engine.">RTSPAudioStreamerBase</a> - Core RTP Audio Streaming Engine.  <a href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_taskless.html">RTSPAudioStreamerTaskless</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_taskless.html" title="RTSPAudioStreamerTaskless - Manual RTP Audio Streaming Engine (no Task)">RTSPAudioStreamerTaskless</a> - Manual RTP Audio Streaming Engine (no <a class="el" href="classaudio__tools_1_1_task.html" title="FreeRTOS task.">Task</a>)  <a href="classaudio__tools_1_1_r_t_s_p_audio_streamer_taskless.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html">RTSPAudioStreamerUsingTask</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html" title="RTSPAudioStreamerUsingTask - Task-driven RTP Audio Streaming Engine.">RTSPAudioStreamerUsingTask</a> - Task-driven RTP Audio Streaming Engine.  <a href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_client.html">RTSPClient</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Efficient RTSP client for UDP/RTP audio with decoder pipeline.  <a href="classaudio__tools_1_1_r_t_s_p_client.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1979,8 +1973,17 @@ size_t size)</a> and <a class="el" href="classaudio__tools_1_1_base_stream.html#
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_format_g_s_m.html">RTSPFormatGSM</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">GSM format for RTSP <a href="https://en.wikipedia.org/wiki/RTP_payload_formats">https://en.wikipedia.org/wiki/RTP_payload_formats</a>.  <a href="classaudio__tools_1_1_r_t_s_p_format_g_s_m.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_format_h264.html">RTSPFormatH264</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">H.264 (AVC) format for RTSP video streaming, per RFC 6184.  <a href="classaudio__tools_1_1_r_t_s_p_format_h264.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_format_m_j_p_e_g.html">RTSPFormatMJPEG</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">MJPEG (Motion JPEG) format for RTSP video streaming.  <a href="classaudio__tools_1_1_r_t_s_p_format_m_j_p_e_g.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_format_m_p3.html">RTSPFormatMP3</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">MP3 format for RTSP <a href="https://en.wikipedia.org/wiki/RTP_payload_formats">https://en.wikipedia.org/wiki/RTP_payload_formats</a>.  <a href="classaudio__tools_1_1_r_t_s_p_format_m_p3.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_format_m_t_s.html">RTSPFormatMTS</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">MPEG-2 Transport <a class="el" href="class_stream.html">Stream</a> (MP2T) format for RTSP streaming of a pre-muxed audio+video container, per RFC 2250.  <a href="classaudio__tools_1_1_r_t_s_p_format_m_t_s.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_format_opus.html">RTSPFormatOpus</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opus format for RTSP <a href="https://en.wikipedia.org/wiki/RTP_payload_formats">https://en.wikipedia.org/wiki/RTP_payload_formats</a>.  <a href="classaudio__tools_1_1_r_t_s_p_format_opus.html#details">More...</a><br /></td></tr>
@@ -1990,6 +1993,27 @@ size_t size)</a> and <a class="el" href="classaudio__tools_1_1_base_stream.html#
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_format_p_c_m8.html">RTSPFormatPCM8</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">L8 format for RTSP <a href="https://en.wikipedia.org/wiki/RTP_payload_formats">https://en.wikipedia.org/wiki/RTP_payload_formats</a>.  <a href="classaudio__tools_1_1_r_t_s_p_format_p_c_m8.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_fragment_queue.html">RTSPFragmentQueue</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Self-delimited fragment queue shared by packetized RTP video encoders (<a class="el" href="classaudio__tools_1_1_j_p_e_g_rtp_encoder.html" title="JPEG RTP Encoder - Fragments JPEG frames per RFC 2435 for RTSP video streaming.">JPEGRtpEncoder</a>, <a class="el" href="classaudio__tools_1_1_h264_rtp_encoder.html" title="H.264 RTP Encoder - Packetizes Annex-B H.264 access units per RFC 6184 for RTSP video streaming.">H264RtpEncoder</a>, ...).  <a href="classaudio__tools_1_1_r_t_s_p_fragment_queue.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_media_callback_source.html">RTSPMediaCallbackSource</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback-based RTSP Media Source.  <a href="classaudio__tools_1_1_r_t_s_p_media_callback_source.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_media_source.html">RTSPMediaSource</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unified RTSP Media Source - Works with both <a class="el" href="class_stream.html">Stream</a> and <a class="el" href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...">AudioStream</a>.  <a href="classaudio__tools_1_1_r_t_s_p_media_source.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_media_streamer.html">RTSPMediaStreamer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_r_t_s_p_media_streamer.html" title="RTSPMediaStreamer - Timer-driven RTP Media Streaming Engine.">RTSPMediaStreamer</a> - Timer-driven RTP Media Streaming Engine.  <a href="classaudio__tools_1_1_r_t_s_p_media_streamer.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_media_streamer_base.html">RTSPMediaStreamerBase</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_r_t_s_p_media_streamer_base.html" title="RTSPMediaStreamerBase - Core RTP Media Streaming Engine.">RTSPMediaStreamerBase</a> - Core RTP Media Streaming Engine.  <a href="classaudio__tools_1_1_r_t_s_p_media_streamer_base.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_media_streamer_taskless.html">RTSPMediaStreamerTaskless</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_r_t_s_p_media_streamer_taskless.html" title="RTSPMediaStreamerTaskless - Manual RTP Audio Streaming Engine (no Task)">RTSPMediaStreamerTaskless</a> - Manual RTP Audio Streaming Engine (no <a class="el" href="classaudio__tools_1_1_task.html" title="FreeRTOS task.">Task</a>)  <a href="classaudio__tools_1_1_r_t_s_p_media_streamer_taskless.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_media_streamer_using_task.html">RTSPMediaStreamerUsingTask</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_r_t_s_p_media_streamer_using_task.html" title="RTSPMediaStreamerUsingTask - Task-driven RTP Media Streaming Engine.">RTSPMediaStreamerUsingTask</a> - Task-driven RTP Media Streaming Engine.  <a href="classaudio__tools_1_1_r_t_s_p_media_streamer_using_task.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_output.html">RTSPOutput</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_r_t_s_p_output.html" title="RTSPOutput - Audio Output Stream for RTSP Streaming.">RTSPOutput</a> - Audio Output <a class="el" href="class_stream.html">Stream</a> for RTSP Streaming.  <a href="classaudio__tools_1_1_r_t_s_p_output.html#details">More...</a><br /></td></tr>
@@ -2008,6 +2032,15 @@ size_t size)</a> and <a class="el" href="classaudio__tools_1_1_base_stream.html#
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_rtsp_session.html">RtspSession</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">RTSP Session Handler - Individual <a class="el" href="class_client.html">Client</a> Protocol Management.  <a href="classaudio__tools_1_1_rtsp_session.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_video_encoder.html">RTSPVideoEncoder</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Common base for RTP video payloaders (<a class="el" href="classaudio__tools_1_1_j_p_e_g_rtp_encoder.html" title="JPEG RTP Encoder - Fragments JPEG frames per RFC 2435 for RTSP video streaming.">JPEGRtpEncoder</a>, <a class="el" href="classaudio__tools_1_1_h264_rtp_encoder.html" title="H.264 RTP Encoder - Packetizes Annex-B H.264 access units per RFC 6184 for RTSP video streaming.">H264RtpEncoder</a>, ...): an <a class="el" href="classaudio__tools_1_1_audio_encoder.html" title="Encoding of PCM data.">AudioEncoder</a> that accepts complete video frames via <a class="el" href="classaudio__tools_1_1_audio_writer.html#a4f016ab9037bd654f538f107eb1d8f78">write()</a> and, as a packetized <a class="el" href="classaudio__tools_1_1_i_media_source.html" title="Media Source Interface - Contract for Media Data Providers.">IMediaSource</a>, hands the resulting RTP fragments back out through <a class="el" href="classaudio__tools_1_1_i_media_source.html#a6e6549bdc62b1f7cc5116eb948efd9a8" title="Size of the next queued, ready-to-send fragment, for sources that provide already RTP-payload-ready,...">packetSize()</a>/readBytes().  <a href="classaudio__tools_1_1_r_t_s_p_video_encoder.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_r_t_s_p_video_info.html">RTSPVideoInfo</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Video Information Structure.  <a href="structaudio__tools_1_1_r_t_s_p_video_info.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_video_info_support.html">RTSPVideoInfoSupport</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for video information support.  <a href="classaudio__tools_1_1_r_t_s_p_video_info_support.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html">RTTTLOutput</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">RTTTL (Ring Tone Text Transfer Language) parser and player stream.  <a href="classaudio__tools_1_1_r_t_t_t_l_output.html#details">More...</a><br /></td></tr>
@@ -2917,6 +2950,11 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:ga27477aa4d162c65da12c7ffd964f5779"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enum to filter by type of metadata.  <a href="group__metadata.html#ga27477aa4d162c65da12c7ffd964f5779">More...</a><br /></td></tr>
 <tr class="separator:ga27477aa4d162c65da12c7ffd964f5779"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1499e9f8a76cb81b43b7a4b0dbe7e44a" id="r_a1499e9f8a76cb81b43b7a4b0dbe7e44a"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a1499e9f8a76cb81b43b7a4b0dbe7e44a">MediaType</a> { <a class="el" href="namespaceaudio__tools.html#a1499e9f8a76cb81b43b7a4b0dbe7e44aa956654afc5d3b3a4cc179aebe75de24c">MEDIA_AUDIO</a>
+, <a class="el" href="namespaceaudio__tools.html#a1499e9f8a76cb81b43b7a4b0dbe7e44aa0ff786f8351aa195a5fcd311336fe03e">MEDIA_VIDEO</a>
+ }</td></tr>
+<tr class="memdesc:a1499e9f8a76cb81b43b7a4b0dbe7e44a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Media type enumeration for RTSP streams.  <a href="namespaceaudio__tools.html#a1499e9f8a76cb81b43b7a4b0dbe7e44a">More...</a><br /></td></tr>
+<tr class="separator:a1499e9f8a76cb81b43b7a4b0dbe7e44a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga462bfa9dfea81692463ecb192183dd01" id="r_ga462bfa9dfea81692463ecb192183dd01"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__basic.html#ga462bfa9dfea81692463ecb192183dd01">MemoryType</a> { <a class="el" href="group__basic.html#gga462bfa9dfea81692463ecb192183dd01a4e7c1c21b6fbbb620bd79131aabc22ab">RAM</a>
 , <a class="el" href="group__basic.html#gga462bfa9dfea81692463ecb192183dd01acad4cc49fe33cf8034cf2a32a51e63a7">PS_RAM</a>
 , <a class="el" href="group__basic.html#gga462bfa9dfea81692463ecb192183dd01afa43c78758549d224eb6304f7911d6b4">FLASH_RAM</a>
@@ -3083,6 +3121,19 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:a94e969e01854154ac499fa655fe4c470"><td class="mdescLeft">&#160;</td><td class="mdescRight">Supported RTSP command types.  <a href="namespaceaudio__tools.html#a94e969e01854154ac499fa655fe4c470">More...</a><br /></td></tr>
 <tr class="separator:a94e969e01854154ac499fa655fe4c470"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72d488703dc2881a96bed9b9365dcb8e" id="r_a72d488703dc2881a96bed9b9365dcb8e"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a72d488703dc2881a96bed9b9365dcb8e">RTSPVideoFormat</a> { <br />
+&#160;&#160;<a class="el" href="namespaceaudio__tools.html#a72d488703dc2881a96bed9b9365dcb8ea08415b81fed4feed7d982c9919ac08ee">RGB24</a>
+, <a class="el" href="namespaceaudio__tools.html#a72d488703dc2881a96bed9b9365dcb8ea3b73e4d15701467ed72f157ffaff680a">RGB565</a>
+, <a class="el" href="namespaceaudio__tools.html#a72d488703dc2881a96bed9b9365dcb8ea7e1d7a172afeb2743e03365a92cfd7e1">YUV420</a>
+, <a class="el" href="namespaceaudio__tools.html#a72d488703dc2881a96bed9b9365dcb8ea907e06a16862d82ca6907a28a68d0ad6">JPEG</a>
+, <br />
+&#160;&#160;<a class="el" href="namespaceaudio__tools.html#a72d488703dc2881a96bed9b9365dcb8ea0a5417ce14732e9bdb402be642ebe9ea">MJPEG</a>
+, <a class="el" href="namespaceaudio__tools.html#a72d488703dc2881a96bed9b9365dcb8eabfc52a030be6cc5e47fe83a81e3175a0">GRAYSCALE</a>
+, <a class="el" href="namespaceaudio__tools.html#a72d488703dc2881a96bed9b9365dcb8ea8ba63b54352f7053b055235a9ec7ac09">H264</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:a72d488703dc2881a96bed9b9365dcb8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Video format enumeration for different pixel formats.  <a href="namespaceaudio__tools.html#a72d488703dc2881a96bed9b9365dcb8e">More...</a><br /></td></tr>
+<tr class="separator:a72d488703dc2881a96bed9b9365dcb8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga8cbd91a8bac9b5ab425112be1620eb49" id="r_ga8cbd91a8bac9b5ab425112be1620eb49"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">RxTxMode</a> { <a class="el" href="group__basic.html#gga8cbd91a8bac9b5ab425112be1620eb49a86e471283504c1e470e4d0e7b8b5842f">UNDEFINED_MODE</a> = 0
 , <a class="el" href="group__basic.html#gga8cbd91a8bac9b5ab425112be1620eb49a736237ce367b7814c763eacd188cf9e5">TX_MODE</a> = 1
 , <a class="el" href="group__basic.html#gga8cbd91a8bac9b5ab425112be1620eb49ae5e96b5cebd8b31efa34211ac73abc1e">RX_MODE</a> = 2
@@ -5058,6 +5109,28 @@ Norman Ritz </dd></dl>
 
 </div>
 </div>
+<a id="a1499e9f8a76cb81b43b7a4b0dbe7e44a" name="a1499e9f8a76cb81b43b7a4b0dbe7e44a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1499e9f8a76cb81b43b7a4b0dbe7e44a">&#9670;&#160;</a></span>MediaType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespaceaudio__tools.html#a1499e9f8a76cb81b43b7a4b0dbe7e44a">MediaType</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Media type enumeration for RTSP streams. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a1499e9f8a76cb81b43b7a4b0dbe7e44aa956654afc5d3b3a4cc179aebe75de24c" name="a1499e9f8a76cb81b43b7a4b0dbe7e44aa956654afc5d3b3a4cc179aebe75de24c"></a>MEDIA_AUDIO&#160;</td><td class="fielddoc"><p>Audio stream. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a1499e9f8a76cb81b43b7a4b0dbe7e44aa0ff786f8351aa195a5fcd311336fe03e" name="a1499e9f8a76cb81b43b7a4b0dbe7e44aa0ff786f8351aa195a5fcd311336fe03e"></a>MEDIA_VIDEO&#160;</td><td class="fielddoc"><p>Video stream. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
 <a id="ac23a88fb567747dc8436f625400d9f4a" name="ac23a88fb567747dc8436f625400d9f4a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac23a88fb567747dc8436f625400d9f4a">&#9670;&#160;</a></span>opus_channel_mapping_enum_t</h2>
 
@@ -5204,6 +5277,47 @@ Norman Ritz </dd></dl>
 <tr><td class="fieldname"><a id="a94e969e01854154ac499fa655fe4c470ad15cfce9a3abe141cd228144ba5efde7" name="a94e969e01854154ac499fa655fe4c470ad15cfce9a3abe141cd228144ba5efde7"></a>RTSP_PAUSE&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a94e969e01854154ac499fa655fe4c470ac30ce4d66eb975dc36de060c17f1042a" name="a94e969e01854154ac499fa655fe4c470ac30ce4d66eb975dc36de060c17f1042a"></a>RTSP_TEARDOWN&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a94e969e01854154ac499fa655fe4c470ac80ea42e36839de41d195ce13edb68a3" name="a94e969e01854154ac499fa655fe4c470ac80ea42e36839de41d195ce13edb68a3"></a>RTSP_UNKNOWN&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<a id="a72d488703dc2881a96bed9b9365dcb8e" name="a72d488703dc2881a96bed9b9365dcb8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72d488703dc2881a96bed9b9365dcb8e">&#9670;&#160;</a></span>RTSPVideoFormat</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="namespaceaudio__tools.html#a72d488703dc2881a96bed9b9365dcb8e">RTSPVideoFormat</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Video format enumeration for different pixel formats. </p>
+<dl class="section note"><dt>Note</dt><dd>Scoped (and named RTSPVideoFormat, not VideoFormat) to avoid colliding with the unrelated <a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5" title="Video codec/pixel-format identifier, shared by two unrelated uses: the (single) video stream of a con...">audio_tools::VideoFormat</a> enum in <a class="el" href="_video_output_8h.html">AudioTools/Video/VideoOutput.h</a> (used by the container muxers/demuxers) - both live in the <a class="el" href="namespaceaudio__tools.html" title="Generic Implementation of sound input and output for desktop environments using portaudio.">audio_tools</a> namespace, and a translation unit that needs both <a class="el" href="_r_t_s_p_8h.html">RTSP.h</a> and a container header (e.g. to mux audio+video into MPEG-TS before streaming it over RTSP) would otherwise hit a redefinition error. </dd></dl>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a72d488703dc2881a96bed9b9365dcb8ea08415b81fed4feed7d982c9919ac08ee" name="a72d488703dc2881a96bed9b9365dcb8ea08415b81fed4feed7d982c9919ac08ee"></a>RGB24&#160;</td><td class="fielddoc"><p>24-bit RGB (8 bits per channel) </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a72d488703dc2881a96bed9b9365dcb8ea3b73e4d15701467ed72f157ffaff680a" name="a72d488703dc2881a96bed9b9365dcb8ea3b73e4d15701467ed72f157ffaff680a"></a>RGB565&#160;</td><td class="fielddoc"><p>16-bit RGB (5-6-5 bits per channel) </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a72d488703dc2881a96bed9b9365dcb8ea7e1d7a172afeb2743e03365a92cfd7e1" name="a72d488703dc2881a96bed9b9365dcb8ea7e1d7a172afeb2743e03365a92cfd7e1"></a>YUV420&#160;</td><td class="fielddoc"><p>YUV 4:2:0 planar format. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a72d488703dc2881a96bed9b9365dcb8ea907e06a16862d82ca6907a28a68d0ad6" name="a72d488703dc2881a96bed9b9365dcb8ea907e06a16862d82ca6907a28a68d0ad6"></a>JPEG&#160;</td><td class="fielddoc"><p>JPEG compressed format. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a72d488703dc2881a96bed9b9365dcb8ea0a5417ce14732e9bdb402be642ebe9ea" name="a72d488703dc2881a96bed9b9365dcb8ea0a5417ce14732e9bdb402be642ebe9ea"></a>MJPEG&#160;</td><td class="fielddoc"><p>Motion JPEG format. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a72d488703dc2881a96bed9b9365dcb8eabfc52a030be6cc5e47fe83a81e3175a0" name="a72d488703dc2881a96bed9b9365dcb8eabfc52a030be6cc5e47fe83a81e3175a0"></a>GRAYSCALE&#160;</td><td class="fielddoc"><p>8-bit grayscale </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a72d488703dc2881a96bed9b9365dcb8ea8ba63b54352f7053b055235a9ec7ac09" name="a72d488703dc2881a96bed9b9365dcb8ea8ba63b54352f7053b055235a9ec7ac09"></a>H264&#160;</td><td class="fielddoc"><p>H.264/AVC compressed format. </p>
+</td></tr>
 </table>
 
 </div>

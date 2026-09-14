@@ -1,8 +1,22 @@
 var searchData=
 [
-  ['name_0',['Name',['../group__metadata.html#gga6760f423085f8a63374b1e2db102a6d1a923b92502c8f8beef4a620fee49b89ae',1,'audio_tools']]],
-  ['next_1',['Next',['../namespaceaudio__tools.html#a3f9c0ca2a0642d7ef5913a3cc03c093ea10ac3d04253ef7e1ddc73e6091c0cd55',1,'audio_tools']]],
-  ['nms_5fvbxadpcm_2',['NMS_VBXADPCM',['../group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1aea9795ac3f3e2c9a2173aa02d92faf0c',1,'audio_tools']]],
-  ['nocr_3',['NoCR',['../namespaceaudio__tools.html#ab0f1efd62d502b5ca0387fbcb43268e2a4cc3bb5819b69c290f59f7030600cbc1',1,'audio_tools']]],
-  ['none_4',['NONE',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338ab50339a10e1de285ac99d4c3990b8693',1,'audio_tools']]]
+  ['matches_0',['Matches',['../namespaceaudio__tools.html#adf56341f15593a1c3b9b29e001d1c33daa61bbf7ad0ed153cb6c84fe3c8a9f2bb',1,'audio_tools']]],
+  ['max_5fbit_5fdepth_1',['MAX_BIT_DEPTH',['../classffft_1_1_f_f_t_real.html#ab04a0655cd1e3bcac5e8f48c18df1a57ae30341bf7a7c79070d42c723fa9f8d4b',1,'ffft::FFTReal']]],
+  ['media_5faudio_2',['MEDIA_AUDIO',['../namespaceaudio__tools.html#a1499e9f8a76cb81b43b7a4b0dbe7e44aa956654afc5d3b3a4cc179aebe75de24c',1,'audio_tools']]],
+  ['media_5fvideo_3',['MEDIA_VIDEO',['../namespaceaudio__tools.html#a1499e9f8a76cb81b43b7a4b0dbe7e44aa0ff786f8351aa195a5fcd311336fe03e',1,'audio_tools']]],
+  ['mediaspace_5fadpcm_4',['MEDIASPACE_ADPCM',['../group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1a40f3eb2d06718c01cc842d83233c28fe',1,'audio_tools']]],
+  ['mediavision_5fadpcm_5',['MEDIAVISION_ADPCM',['../group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1a6a6467e42662b85e2a7b4ca791859988',1,'audio_tools']]],
+  ['meta_6',['Meta',['../namespaceaudio__tools.html#a4dd4453d1994a706c0eb2350ffa55372ab6755d218d5f4e1cef9cce9cc39aeda9',1,'audio_tools']]],
+  ['metadata_5fdata_5fcarousel_7',['METADATA_DATA_CAROUSEL',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338a14ab5684d4b745279d5818ce2324b4fa',1,'audio_tools']]],
+  ['metadata_5fobj_5fcarousel_8',['METADATA_OBJ_CAROUSEL',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338a3787237d1ef3b368da0ee0e67f69dd19',1,'audio_tools']]],
+  ['metadata_5fsync_5fdownload_9',['METADATA_SYNC_DOWNLOAD',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338a79117634bc651cef429b094f72eafc22',1,'audio_tools']]],
+  ['metdata_5fsections_10',['METDATA_SECTIONS',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338a5fac2a985331eb975c0d3afb3ab32ccc',1,'audio_tools']]],
+  ['mheg_11',['MHEG',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338a751f050b33f75c4298ec73a16f883a61',1,'audio_tools']]],
+  ['midi_5fmode_12',['MIDI_MODE',['../namespaceaudio__tools.html#ae01ff26451004d25dd832a9e3a178b1aaf24815804bee06c18e4eaefcc499d0c4',1,'audio_tools']]],
+  ['mjpeg_13',['mjpeg',['../namespaceaudio__tools.html#a72d488703dc2881a96bed9b9365dcb8ea0a5417ce14732e9bdb402be642ebe9ea',1,'audio_tools::MJPEG'],['../group__video.html#gga216a5d43d2a518325c84f100ed7735a5a0a5417ce14732e9bdb402be642ebe9ea',1,'audio_tools::MJPEG']]],
+  ['mp3_14',['mp3',['../classaudio__tools_1_1_m4_a_common_demuxer.html#a87487bf84e831b40083eb736cc1a237ca27bcd310c52f6445cf4b93b90f52f5ef',1,'audio_tools::M4ACommonDemuxer::MP3'],['../namespaceaudio__tools.html#a320f7b385576131cdae7758303baf7aaa27bcd310c52f6445cf4b93b90f52f5ef',1,'audio_tools::MP3'],['../group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1a27bcd310c52f6445cf4b93b90f52f5ef',1,'audio_tools::MP3']]],
+  ['mpeg1_15',['MPEG1',['../group__video.html#gga216a5d43d2a518325c84f100ed7735a5a61c156fe2a3c9fe7eb28bd017d95a618',1,'audio_tools']]],
+  ['mpeg4_16',['MPEG4',['../group__video.html#gga216a5d43d2a518325c84f100ed7735a5a36476ddbd35c20ef7cbbea0bbb32b897',1,'audio_tools']]],
+  ['ms_17',['MS',['../group__basic.html#ggadd9fe45e09605eee3e4a39c8a5c4476daa30e1fc5e8695e598ffaf20f6dc902bb',1,'audio_tools']]],
+  ['mulaw_18',['MULAW',['../group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1aa491d4ab9a5af333a647e8d4a7017b5b',1,'audio_tools']]]
 ];

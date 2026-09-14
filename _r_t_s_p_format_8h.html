@@ -76,13 +76,15 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#define-members">Macros</a>  </div>
+<a href="#define-members">Macros</a> &#124;
+<a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle"><div class="title">RTSPFormat.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="_audio_codecs_base_8h_source.html">AudioTools/AudioCodecs/AudioCodecsBase.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_audio_streams_8h_source.html">AudioTools/CoreAudio/AudioStreams.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_audio_types_8h_source.html">AudioTools/CoreAudio/AudioTypes.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_video_info_8h_source.html">VideoInfo.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_r_t_s_p_platform_8h_source.html">RTSPPlatform.h</a>&quot;</code><br />
 <code>#include &quot;stdint.h&quot;</code><br />
 </div>
@@ -108,8 +110,17 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_format_g_s_m.html">RTSPFormatGSM</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">GSM format for RTSP <a href="https://en.wikipedia.org/wiki/RTP_payload_formats">https://en.wikipedia.org/wiki/RTP_payload_formats</a>.  <a href="classaudio__tools_1_1_r_t_s_p_format_g_s_m.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_format_h264.html">RTSPFormatH264</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">H.264 (AVC) format for RTSP video streaming, per RFC 6184.  <a href="classaudio__tools_1_1_r_t_s_p_format_h264.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_format_m_j_p_e_g.html">RTSPFormatMJPEG</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">MJPEG (Motion JPEG) format for RTSP video streaming.  <a href="classaudio__tools_1_1_r_t_s_p_format_m_j_p_e_g.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_format_m_p3.html">RTSPFormatMP3</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">MP3 format for RTSP <a href="https://en.wikipedia.org/wiki/RTP_payload_formats">https://en.wikipedia.org/wiki/RTP_payload_formats</a>.  <a href="classaudio__tools_1_1_r_t_s_p_format_m_p3.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_format_m_t_s.html">RTSPFormatMTS</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">MPEG-2 Transport <a class="el" href="class_stream.html">Stream</a> (MP2T) format for RTSP streaming of a pre-muxed audio+video container, per RFC 2250.  <a href="classaudio__tools_1_1_r_t_s_p_format_m_t_s.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_format_opus.html">RTSPFormatOpus</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opus format for RTSP <a href="https://en.wikipedia.org/wiki/RTP_payload_formats">https://en.wikipedia.org/wiki/RTP_payload_formats</a>.  <a href="classaudio__tools_1_1_r_t_s_p_format_opus.html#details">More...</a><br /></td></tr>
@@ -131,6 +142,14 @@ Namespaces</h2></td></tr>
 Macros</h2></td></tr>
 <tr class="memitem:ac4459a88baab0fe257b4e2c94c03d1cc" id="r_ac4459a88baab0fe257b4e2c94c03d1cc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_r_t_s_p_format_8h.html#ac4459a88baab0fe257b4e2c94c03d1cc">DEFAULT_PCM_FRAGMENT_SIZE</a>&#160;&#160;&#160;640</td></tr>
 <tr class="separator:ac4459a88baab0fe257b4e2c94c03d1cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a1499e9f8a76cb81b43b7a4b0dbe7e44a" id="r_a1499e9f8a76cb81b43b7a4b0dbe7e44a"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a1499e9f8a76cb81b43b7a4b0dbe7e44a">MediaType</a> { <a class="el" href="namespaceaudio__tools.html#a1499e9f8a76cb81b43b7a4b0dbe7e44aa956654afc5d3b3a4cc179aebe75de24c">MEDIA_AUDIO</a>
+, <a class="el" href="namespaceaudio__tools.html#a1499e9f8a76cb81b43b7a4b0dbe7e44aa0ff786f8351aa195a5fcd311336fe03e">MEDIA_VIDEO</a>
+ }</td></tr>
+<tr class="memdesc:a1499e9f8a76cb81b43b7a4b0dbe7e44a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Media type enumeration for RTSP streams.  <a href="namespaceaudio__tools.html#a1499e9f8a76cb81b43b7a4b0dbe7e44a">More...</a><br /></td></tr>
+<tr class="separator:a1499e9f8a76cb81b43b7a4b0dbe7e44a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="ac4459a88baab0fe257b4e2c94c03d1cc" name="ac4459a88baab0fe257b4e2c94c03d1cc"></a>
