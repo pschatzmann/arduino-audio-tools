@@ -305,7 +305,7 @@ class MTSDecoder : public AudioDecoder {
     } else if (pid == pmt_pid && packet[payloadStart] == 0x02) {
       parsePMT(&packet[payloadStart], len);
     } else {
-      LOGE("-> Packet ignored for PID 0x%x", pid);
+      LOGW("-> Packet ignored for PID 0x%x", pid);
     }
   }
 

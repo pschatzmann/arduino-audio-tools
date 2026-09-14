@@ -10,8 +10,9 @@
 #define HLS_BUFFER_COUNT 2
 #define HLS_MAX_NO_READ 2
 #define HLS_MAX_URL_LEN 256
-#define HLS_TIMEOUT 5000
+#define HLS_TIMEOUT 4000
 #define HLS_UNDER_OVERFLOW_WAIT_TIME 10
+#define HLS_RELOAD_RETRY_DELAY 2000
 
 /// hide hls implementation in it's own namespace
 
@@ -372,6 +373,7 @@ class HLSParser {
   uint64_t next_sement_load_time_planned = 0;
   float play_time = 0;
   uint64_t next_sement_load_time = 0;
+  uint64_t next_retry_time = 0;
   const char *(*resolve_url)(const char *segment,
                              const char *reqURL) = resolveURL;
 
@@ -513,8 +515,20 @@ class HLSParser {
       return false;
     }
 
-    // make sure that we load at relevant schedule
-    if (millis() < next_sement_load_time && url_loader.urlCount() > 1) {
+    // back off after a failed reload attempt (e.g. server did not publish a
+    // new playlist yet) to avoid hammering the server and starving the
+    // watchdog with a tight retry loop
+    if (millis() < next_retry_time) {
+      delay(1);
+      return false;
+    }
+
+    // make sure that we load at relevant schedule: this pacing only applies
+    // once we are actually playing - while we are still buffering the
+    // initial segments (!active) we need to fetch as fast as possible so
+    // that we cross START_URLS_LIMIT and can start playback
+    if (active && millis() < next_sement_load_time &&
+        url_loader.urlCount() > 1) {
       delay(1);
       return false;
     }
@@ -539,9 +553,8 @@ class HLSParser {
 
     segment_count = 0;
     if (!parseSegmentLines()) {
-      TRACEE();
+      // e.g. the playlist has not been updated yet: not an error
       parse_segments_active = false;
-      // do not display as error
       return true;
     }
 
@@ -607,6 +620,9 @@ class HLSParser {
         LOGI("media_sequence: %d", new_media_sequence);
         if (new_media_sequence == media_sequence) {
           LOGW("MEDIA-SEQUENCE already loaded: %d", media_sequence);
+          // the server has not published a new playlist yet: back off
+          // before retrying instead of reloading in a tight loop
+          next_retry_time = millis() + HLS_RELOAD_RETRY_DELAY;
           return false;
         }
         media_sequence = new_media_sequence;
