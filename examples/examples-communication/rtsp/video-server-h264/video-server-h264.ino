@@ -8,10 +8,11 @@
  * software H.264 encoding, and H264RtpEncoder for RFC 6184 RTP
  * packetization.
  *
- * Unlike a push-style video sketch (where loop() explicitly writes each
- * captured frame into the RTSP pipeline), this example pulls video the same
- * way RTSP audio sources do: RTSPMediaCallbackSource exposes H264RtpEncoder's
- * already-packetized RTP fragments through a read/packetSize callback pair.
+ * H264RtpEncoder is itself an IMediaSource (RTSPVideoEncoder :
+ * AudioEncoder, IMediaSource) - its already-packetized RTP fragments come
+ * straight out through packetSize()/readBytes(), so it goes directly into
+ * RTSPMediaStreamer, no RTSPMediaCallbackSource/callback wrapper needed.
+ * loop() just pushes captured frames into it (captureLoop() below).
  *
  * RTSP request handling runs on RTSPServer's own background tasks (see
  * RTSPServer.h), not in loop() - so loop() is free to just poll capture at
@@ -20,12 +21,12 @@
  * rtspServer.clientCount(), checked directly in loop() - no start/stop
  * callback needed. This is a bit coarser than PLAY/TEARDOWN (a client is
  * "connected" from TCP accept through DESCRIBE/SETUP, before it necessarily
- * PLAYs), but harmless here: RTSPMediaCallbackSource still gates actual RTP
- * sending on its own is_active flag (true only between PLAY/TEARDOWN), so
- * any frame captured a moment early is simply dropped by H264RtpEncoder's
- * 1-frame queue rather than ever being sent. It also keeps
- * h264Encoder.begin()/end() on the same thread as capture (loop()), so
- * there's no cross-thread race against an in-flight capture/encode call.
+ * PLAYs), but harmless here: H264RtpEncoder still gates actual RTP sending
+ * on its own is_active flag (true only between PLAY/TEARDOWN), so any
+ * frame captured a moment early is simply dropped by its 1-frame queue
+ * rather than ever being sent. It also keeps h264Encoder.begin()/end() on
+ * the same thread as capture (loop()), so there's no cross-thread race
+ * against an in-flight capture/encode call.
  *
  * Note: this uses H264Encoder::captureFrame()/encode() rather than the
  * higher-level captureH264(), because captureH264() enforces VIDEO_FPS with
@@ -110,26 +111,10 @@ class EncoderPrintAdapter : public Print {
 };
 EncoderPrintAdapter h264Print(h264Encoder);
 
-int readVideoPacket(uint8_t* buffer, int maxBytes, void* userData);
-int videoPacketSize(void* userData);
 void captureLoop();
 
-// RTSPMediaCallbackSource: pull-based MediaSource wired to H264RtpEncoder's
-// queue - same shape as a callback-based audio source, just packetized
-RTSPMediaCallbackSource videoSource(h264Format, readVideoPacket, &h264Encoder);
-
-RTSPMediaStreamer<RTSPPlatformWiFi> rtspStreamer(videoSource);
+RTSPMediaStreamer<RTSPPlatformWiFi> rtspStreamer(h264Encoder);
 RTSPServer<RTSPPlatformWiFi> rtspServer(rtspStreamer);
-
-// -- RTSPMediaCallbackSource callbacks ------------------------------------
-
-int readVideoPacket(uint8_t* buffer, int maxBytes, void* userData) {
-  return ((H264RtpEncoder*)userData)->readBytes(buffer, maxBytes);
-}
-
-int videoPacketSize(void* userData) {
-  return ((H264RtpEncoder*)userData)->packetSize();
-}
 
 // Called from loop() while captureEnabled; paces itself to VIDEO_FPS using
 // the same non-blocking check as the other video examples (captureFrame()/
@@ -175,8 +160,6 @@ void setup() {
 
   h264Encoder.setFormat(h264Format);
   h264Encoder.setMaxFragmentSize(1400);  // Optimal for most networks
-
-  videoSource.setPacketSizeCallback(videoPacketSize);
 
   // Connect to WiFi
   Serial.println("Connecting to WiFi...");

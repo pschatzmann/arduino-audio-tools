@@ -5,9 +5,10 @@
  * This example demonstrates how to use the JPEGRtpEncoder for proper
  * JPEG frame fragmentation and RTSP streaming from ESP32 camera.
  *
- * Like the RTSP audio sources, video is pulled rather than pushed:
- * RTSPMediaCallbackSource exposes JPEGRtpEncoder's already-packetized RTP
- * fragments through a read/packetSize callback pair.
+ * JPEGRtpEncoder is itself an IMediaSource (RTSPVideoEncoder :
+ * AudioEncoder, IMediaSource) - its already-packetized RTP fragments come
+ * straight out through packetSize()/readBytes(), so it goes directly into
+ * RTSPMediaStreamer, no RTSPMediaCallbackSource/callback wrapper needed.
  *
  * RTSP request handling runs on RTSPServer's own background tasks (see
  * RTSPServer.h), not in loop() - so loop() is free to just poll capture at
@@ -16,12 +17,12 @@
  * checked directly in loop() - no start/stop callback needed. This is a bit
  * coarser than PLAY/TEARDOWN (a client is "connected" from TCP accept
  * through DESCRIBE/SETUP, before it necessarily PLAYs), but harmless here:
- * RTSPMediaCallbackSource still gates actual RTP sending on its own
- * is_active flag (true only between PLAY/TEARDOWN), so any frame captured a
- * moment early is simply dropped by JPEGRtpEncoder's 1-frame queue rather
- * than ever being sent. It also keeps jpegEncoder.begin()/end() on the same
- * thread as capture (loop()), so there's no cross-thread race against an
- * in-flight capture call.
+ * JPEGRtpEncoder still gates actual RTP sending on its own is_active flag
+ * (true only between PLAY/TEARDOWN), so any frame captured a moment early
+ * is simply dropped by its 1-frame queue rather than ever being sent. It
+ * also keeps jpegEncoder.begin()/end() on the same thread as capture
+ * (loop()), so there's no cross-thread race against an in-flight capture
+ * call.
  *
  * Features:
  * - RFC 2435 compliant JPEG over RTP fragmentation
@@ -36,8 +37,8 @@
  *
  * Components demonstrated:
  * - ESP32 Camera API for JPEG frame capture
- * - JPEGRtpEncoder for RFC 2435 compliant frame processing
- * - RTSPMediaCallbackSource as a pull-based MediaSource for video
+ * - JPEGRtpEncoder for RFC 2435 compliant frame processing, used directly
+ *   as RTSPMediaStreamer's IMediaSource
  * - RTSPFormatMJPEG for MJPEG format handling
  * - Real-time video streaming with proper frame fragmentation
  *
@@ -162,29 +163,15 @@ bool beginCamera(size_t bufferSize = 65536) {
 }
 
 // RTP payloader: does the RFC 2435 fragmentation and queues already
-// RTP-ready fragments, retrieved via packetSize()/readBytes()
+// RTP-ready fragments, retrieved via packetSize()/readBytes() - it's
+// itself an IMediaSource, so RTSPMediaStreamer takes it directly.
 RTSPFormatMJPEG mjpegFormat(VIDEO_WIDTH, VIDEO_HEIGHT, VIDEO_FPS);
 JPEGRtpEncoder jpegEncoder;
 
-int readVideoPacket(uint8_t* buffer, int maxBytes, void* userData);
-int videoPacketSize(void* userData);
 void captureLoop();
 
-// RTSPMediaCallbackSource: pull-based MediaSource wired to JPEGRtpEncoder's
-// queue - same shape as a callback-based audio source, just packetized
-RTSPMediaCallbackSource videoSource(mjpegFormat, readVideoPacket, &jpegEncoder);
-RTSPMediaStreamer<RTSPPlatformWiFi> rtspStreamer(videoSource);
+RTSPMediaStreamer<RTSPPlatformWiFi> rtspStreamer(jpegEncoder);
 RTSPServer<RTSPPlatformWiFi> rtspServer(rtspStreamer);
-
-// -- RTSPMediaCallbackSource callbacks ------------------------------------
-
-int readVideoPacket(uint8_t* buffer, int maxBytes, void* userData) {
-  return ((JPEGRtpEncoder*)userData)->readBytes(buffer, maxBytes);
-}
-
-int videoPacketSize(void* userData) {
-  return ((JPEGRtpEncoder*)userData)->packetSize();
-}
 
 // Called from loop() while captureEnabled; paces itself to VIDEO_FPS since
 // esp_camera_fb_get() (unlike H264Encoder::captureH264()) does not do this
@@ -225,8 +212,6 @@ void setup() {
     }
   }
   Serial.println("Camera initialized successfully");
-
-  videoSource.setPacketSizeCallback(videoPacketSize);
 
   // Connect to WiFi
   Serial.println("Connecting to WiFi...");

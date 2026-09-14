@@ -23,18 +23,12 @@ const float VIDEO_FPS = 5.0f;
 const unsigned long FRAME_DURATION_MS = 1000 / VIDEO_FPS;
 
 RTSPFormatMJPEG mjpegFormat(VIDEO_WIDTH, VIDEO_HEIGHT, VIDEO_FPS);
+// JPEGRtpEncoder is itself an IMediaSource (RTSPVideoEncoder : AudioEncoder,
+// IMediaSource), so it can go straight into RTSPMediaStreamer - no
+// RTSPMediaCallbackSource/callback wrapper needed.
 JPEGRtpEncoder jpegEncoder;
 
-int readVideoPacket(uint8_t* buffer, int maxBytes, void* userData) {
-  return ((JPEGRtpEncoder*)userData)->readBytes(buffer, maxBytes);
-}
-
-int videoPacketSize(void* userData) {
-  return ((JPEGRtpEncoder*)userData)->packetSize();
-}
-
-RTSPMediaCallbackSource videoSource(mjpegFormat, readVideoPacket, &jpegEncoder);
-RTSPMediaStreamer<RTSPPlatformWiFi> rtspStreamer(videoSource);
+RTSPMediaStreamer<RTSPPlatformWiFi> rtspStreamer(jpegEncoder);
 RTSPServer<RTSPPlatformWiFi> rtspServer(rtspStreamer, port);
 
 void setup() {
@@ -43,7 +37,6 @@ void setup() {
 
   jpegEncoder.setFormat(mjpegFormat);
   jpegEncoder.setMaxFragmentSize(1400);
-  videoSource.setPacketSizeCallback(videoPacketSize);
 
   rtspServer.begin();
 }
