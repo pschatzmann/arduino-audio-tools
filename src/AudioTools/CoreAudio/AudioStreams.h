@@ -1771,9 +1771,11 @@ class VolumeMeter : public ModifyingStream {
   /// Resets the actual volume
   void clear() {
     f_volume_tmp = 0;
-    for (int j = 0; j < info.channels; j++) {
-      volumes_tmp[j] = 0;
-      sum_tmp[j] = 0;
+    if (volumes_tmp.size() > 0 && sum_tmp.size() > 0) {
+      for (int j = 0; j < info.channels; j++) {
+        volumes_tmp[j] = 0;
+        sum_tmp[j] = 0;
+      }
     }
   }
 
@@ -1876,9 +1878,11 @@ class VolumeMeter : public ModifyingStream {
 
   void commit() {
     f_volume = f_volume_tmp;
-    for (int j = 0; j < info.channels; j++) {
-      volumes[j] = volumes_tmp[j];
-      sum[j] = sum_tmp[j];
+    if (volumes.size() > 0 && sum.size() > 0) {
+      for (int j = 0; j < info.channels; j++) {
+        volumes[j] = volumes_tmp[j];
+        sum[j] = sum_tmp[j];
+      }
     }
     updateActivityState();
   }
