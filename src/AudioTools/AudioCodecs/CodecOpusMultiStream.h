@@ -119,7 +119,7 @@ struct OpusMultiStreamEncoderSettings : public OpusMultiStreamSettings {
  * Supports up to 255 channels by combining multiple Opus streams into a
  * single packet. Each Opus frame must be provided with one write() call.
  *
- * Depends on https://github.com/pschatzmann/arduino-libopus.git
+ * Depends on https://github.com/pschatzmann/codec-opus.git
  *
  * @author Phil Schatzmann
  * @ingroup codecs
@@ -266,7 +266,7 @@ class OpusMultiStreamAudioDecoder : public AudioDecoder {
  * @warning The decoder needs a lot of stack space: SET_LOOP_TASK_STACK_SIZE(16
  * * 1024);
  *
- * Depends on https://github.com/pschatzmann/arduino-libopus.git
+ * Depends on https://github.com/pschatzmann/codec-opus.git
  *
  * @ingroup codecs
  * @ingroup encoder

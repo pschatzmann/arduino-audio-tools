@@ -1,7 +1,7 @@
 /**
  * @file CodecAptx.h
  * @author Phil Schatzmann
- * @brief Codec for aptx using https://github.com/pschatzmann/libopenaptx
+ * @brief Codec for aptx using https://github.com/pschatzmann/codec-openaptx
  * @version 0.1
  * @date 2022-04-24
  *
@@ -17,7 +17,7 @@ namespace audio_tools {
 
 /**
  * @brief Decoder for OpenAptx. Depends on
- * https://github.com/pschatzmann/libopenaptx
+ * https://github.com/pschatzmann/codec-openaptx
  * @ingroup codecs
  * @ingroup decoder
  * @author Phil Schatzmann
@@ -180,7 +180,7 @@ class APTXDecoder : public AudioDecoder {
 
 /**
  * @brief Encoder for OpenAptx - Depends on
- * https://github.com/pschatzmann/libopenaptx
+ * https://github.com/pschatzmann/codec-openaptx
  * @ingroup codecs
  * @ingroup encoder
  * @author Phil Schatzmann

@@ -111,7 +111,7 @@ struct OpusEncoderSettings : public OpusSettings {
  * is usually encapsulated in a container format (e.g., Ogg) that splits
  * the stream into frames.
  *
- * Depends on https://github.com/pschatzmann/arduino-libopus.git
+ * Depends on https://github.com/pschatzmann/codec-opus.git
  *
  * @author Phil Schatzmann
  * @ingroup codecs
@@ -252,7 +252,7 @@ class OpusAudioDecoder : public AudioDecoder {
 /**
  * @brief Encode for Opus audio.
  *
- * Depends on https://github.com/pschatzmann/arduino-libopus.git
+ * Depends on https://github.com/pschatzmann/codec-opus.git
  * Please note that each fully encoded frame is written to the output stream.
  * @ingroup codecs
  * @ingroup encoder

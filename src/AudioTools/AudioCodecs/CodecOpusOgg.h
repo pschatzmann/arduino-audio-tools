@@ -29,7 +29,7 @@ struct __attribute__((packed)) OpusOggCommentHeader {
  * https://datatracker.ietf.org/doc/html/rfc7845. The audio data is transmitted
  * in frames and the header information contains the sampler rate, channels and
  * other critical info.
- * Dependency: https://github.com/pschatzmann/arduino-libopus
+ * Dependency: https://github.com/pschatzmann/codec-opus
  * @ingroup codecs
  * @ingroup decoder
  * @author Phil Schatzmann
@@ -206,7 +206,7 @@ class OpusOggWriter : public OggContainerOutput {
 /**
  * @brief Opus Encoder which uses the Ogg Container: see
  * https://datatracker.ietf.org/doc/html/rfc7845
- * Dependency: https://github.com/pschatzmann/arduino-libopus
+ * Dependency: https://github.com/pschatzmann/codec-opus
  * @ingroup codecs
  * @ingroup encoder
  * @author Phil Schatzmann

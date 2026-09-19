@@ -17,7 +17,7 @@ namespace audio_tools {
  * container. The Ogg begin segment contains the AudioInfo structure. You can
  * subclass and overwrite the beginOfSegment() method to implement your own
  * headers
- * Dependency: https://github.com/pschatzmann/arduino-libopus
+ * Dependency: https://github.com/pschatzmann/codec-opus
  * @ingroup codecs
  * @ingroup decoder
  * @author Phil Schatzmann
@@ -344,7 +344,7 @@ class OggContainerOutput : public AudioOutput {
  * subclass ond overwrite the writeHeader() method to implement your own header
  * logic. When an optional encoder is specified in the constructor we package
  * the encoded data.
- * Dependency: https://github.com/pschatzmann/arduino-libopus
+ * Dependency: https://github.com/pschatzmann/codec-opus
  * @ingroup codecs
  * @ingroup encoder
  * @author Phil Schatzmann
