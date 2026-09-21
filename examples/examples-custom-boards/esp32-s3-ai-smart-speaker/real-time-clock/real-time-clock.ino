@@ -13,7 +13,7 @@
 
 #include "AudioTools.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
-#include "ESP32S3AISmartSpeaker.h"
+
 #include "PCF85063A-SOLDERED.h"
 
 PCF85063A rtc;

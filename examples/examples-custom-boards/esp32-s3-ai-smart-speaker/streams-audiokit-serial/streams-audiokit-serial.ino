@@ -14,7 +14,7 @@
 
 #include "AudioTools.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
-#include "ESP32S3AISmartSpeaker.h"
+
 
 AudioInfo info(44100, 2, 16);
 AudioBoardStream kit(ESP32S3AISmartSpeaker); // Access I2S as stream

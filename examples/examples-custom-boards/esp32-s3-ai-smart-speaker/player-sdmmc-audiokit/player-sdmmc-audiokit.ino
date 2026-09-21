@@ -15,7 +15,7 @@
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
 #include "AudioTools/Disk/AudioSourceSDMMC.h" // or AudioSourceIdxSDMMC.h
 #include "AudioTools/AudioCodecs/CodecMP3Helix.h"
-#include "ESP32S3AISmartSpeaker.h"
+
 
 const char *startFilePath="/";
 const char* ext="mp3";
