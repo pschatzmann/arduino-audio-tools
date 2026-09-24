@@ -24,3 +24,8 @@
 
 // There is not FPU
 #define PREFER_FIXEDPOINT true
+
+// SD: the core bundles the standard Arduino SD library (no fs namespace);
+// the onboard microSD card uses SS as chip select (Tools > SD Card: Enabled)
+#define USE_SD_NO_NS
+#define PIN_CS SS
