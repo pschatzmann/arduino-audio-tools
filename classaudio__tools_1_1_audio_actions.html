@@ -175,6 +175,8 @@ Protected Member Functions</h2></td></tr>
 Static Protected Member Functions</h2></td></tr>
 <tr class="memitem:a248f37d04388cebcd5cdbabb3b4602d0" id="r_a248f37d04388cebcd5cdbabb3b4602d0"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_actions.html#a248f37d04388cebcd5cdbabb3b4602d0">audioActionsISRZephyr</a> (const struct device *dev, struct gpio_callback *cb, uint32_t pins)</td></tr>
 <tr class="separator:a248f37d04388cebcd5cdbabb3b4602d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d769fe695c43f8abe1d1be841973565" id="r_a1d769fe695c43f8abe1d1be841973565"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classaudio__tools_1_1_audio_actions.html">AudioActions</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_actions.html#a1d769fe695c43f8abe1d1be841973565">selfAudioActions</a> ()</td></tr>
+<tr class="separator:a1d769fe695c43f8abe1d1be841973565"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -199,8 +201,6 @@ Protected Attributes</h2></td></tr>
 Static Protected Attributes</h2></td></tr>
 <tr class="memitem:af87c152961b80d006d89268229eccd00" id="r_af87c152961b80d006d89268229eccd00"><td class="memItemLeft" align="right" valign="top">static struct gpio_callback&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_actions.html#af87c152961b80d006d89268229eccd00">button_cb_data</a></td></tr>
 <tr class="separator:af87c152961b80d006d89268229eccd00"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a273f573e9335a753d79a18c8de19bb49" id="r_a273f573e9335a753d79a18c8de19bb49"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classaudio__tools_1_1_audio_actions.html">AudioActions</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_actions.html#a273f573e9335a753d79a18c8de19bb49">selfAudioActions</a> = nullptr</td></tr>
-<tr class="separator:a273f573e9335a753d79a18c8de19bb49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A simple class to assign functions to gpio pins e.g. to implement a simple navigation control or volume control with buttons. </p>
@@ -647,6 +647,31 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a1d769fe695c43f8abe1d1be841973565" name="a1d769fe695c43f8abe1d1be841973565"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d769fe695c43f8abe1d1be841973565">&#9670;&#160;</a></span>selfAudioActions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="classaudio__tools_1_1_audio_actions.html">AudioActions</a> *&amp; selfAudioActions </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a59cea0afb661d3352062cf223b3666c5" name="a59cea0afb661d3352062cf223b3666c5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a59cea0afb661d3352062cf223b3666c5">&#9670;&#160;</a></span>setDebounceDelay()</h2>
 
@@ -1052,28 +1077,6 @@ Static Protected Attributes</h2></td></tr>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a273f573e9335a753d79a18c8de19bb49" name="a273f573e9335a753d79a18c8de19bb49"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a273f573e9335a753d79a18c8de19bb49">&#9670;&#160;</a></span>selfAudioActions</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_audio_actions.html">AudioActions</a>* selfAudioActions = nullptr</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

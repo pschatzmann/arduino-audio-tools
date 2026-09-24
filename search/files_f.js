@@ -23,5 +23,6 @@ var searchData=
   ['pwmdriverrenesas_2eh_20',['PWMDriverRenesas.h',['../_p_w_m_driver_renesas_8h.html',1,'']]],
   ['pwmdriverrp2040_2eh_21',['PWMDriverRP2040.h',['../_p_w_m_driver_r_p2040_8h.html',1,'']]],
   ['pwmdriverstm32_2eh_22',['PWMDriverSTM32.h',['../_p_w_m_driver_s_t_m32_8h.html',1,'']]],
-  ['pwmdriverzephyr_2eh_23',['PWMDriverZephyr.h',['../_p_w_m_driver_zephyr_8h.html',1,'']]]
+  ['pwmdrivertangnano_2eh_23',['PWMDriverTangNano.h',['../_p_w_m_driver_tang_nano_8h.html',1,'']]],
+  ['pwmdriverzephyr_2eh_24',['PWMDriverZephyr.h',['../_p_w_m_driver_zephyr_8h.html',1,'']]]
 ];
