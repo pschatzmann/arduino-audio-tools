@@ -15,3 +15,13 @@ extern "C" void __sync_synchronize(){
 }
 #endif
 
+
+#if defined(ARDUINO_ARCH_TANGNANO20K)
+// The core links without libc: provide the function which is used by assert()
+extern "C" __attribute__((weak)) void __assert_func(const char *file, int line,
+                                                    const char *func,
+                                                    const char *expr) {
+  printf("assert failed: %s:%d %s: %s\n", file, line, func, expr);
+  while (true);
+}
+#endif

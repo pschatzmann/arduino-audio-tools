@@ -255,6 +255,11 @@
 #  include "AudioTools/PlatformConfig/unor4.h"
 #endif
 
+//------ Tang Nano 20K ----------
+#if defined(ARDUINO_ARCH_TANGNANO20K)
+#  include "AudioTools/PlatformConfig/tangnano20k.h"
+#endif
+
 // ------ Zephyr -------
 #ifdef __ZEPHYR__
 #include <zephyr/kernel.h>

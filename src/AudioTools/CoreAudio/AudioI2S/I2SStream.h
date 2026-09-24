@@ -15,6 +15,7 @@
 #include "AudioTools/CoreAudio/AudioI2S/I2SDriverRP2040.h"
 #include "AudioTools/CoreAudio/AudioI2S/I2SDriverSAMD.h"
 #include "AudioTools/CoreAudio/AudioI2S/I2SDriverSTM32.h"
+#include "AudioTools/CoreAudio/AudioI2S/I2SDriverTangNano.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"
 #include "AudioTools/CoreAudio/AudioTypes.h"
 

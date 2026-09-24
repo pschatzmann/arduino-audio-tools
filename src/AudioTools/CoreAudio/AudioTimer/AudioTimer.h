@@ -17,6 +17,7 @@
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimerRP2040.h"
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimerRenesas.h"
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimerSTM32.h"
+#include "AudioTools/CoreAudio/AudioTimer/AudioTimerTangNano.h"
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimerDesktop.h"
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimerZephyr.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"

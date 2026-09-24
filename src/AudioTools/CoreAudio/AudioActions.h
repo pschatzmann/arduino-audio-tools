@@ -128,7 +128,7 @@ class AudioActions {
 
   /// Default constructor
   AudioActions(bool useInterrupt = false) {
-    selfAudioActions = this;
+    selfAudioActions() = this;
     setUsePinInterrupt(useInterrupt);
   }
 
@@ -280,7 +280,10 @@ class AudioActions {
   }
 
  protected:
-  inline static AudioActions* selfAudioActions = nullptr;
+  static AudioActions*& selfAudioActions() {
+    static AudioActions* result = nullptr;
+    return result;
+  }
   int debounceDelayValue = DEBOUNCE_DELAY;
   int touchLimit = TOUCH_LIMIT;
   bool use_pin_interrupt = false;
@@ -312,8 +315,8 @@ class AudioActions {
     (void)dev;
     (void)cb;
     (void)pins;
-    if (selfAudioActions != nullptr)
-      selfAudioActions->interrupt_pending = true;
+    if (selfAudioActions() != nullptr)
+      selfAudioActions()->interrupt_pending = true;
   }
 
   /**
@@ -334,8 +337,8 @@ class AudioActions {
   }
 #else
   static void audioActionsISR() {
-    if (selfAudioActions != nullptr)
-      selfAudioActions->interrupt_pending = true;
+    if (selfAudioActions() != nullptr)
+      selfAudioActions()->interrupt_pending = true;
   }
 
 #endif

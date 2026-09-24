@@ -581,6 +581,10 @@ class FastIntSineGenerator : public SoundGenerator<T> {
       -4808, -4011, -3212, -2410, -1608, -804};
 };
 
+// out of class definition is needed before C++17 (e.g. -std=gnu++14)
+template <class T>
+constexpr int16_t FastIntSineGenerator<T>::sine_table[];
+
 /// Default sine generator: FastIntSineGenerator (no FPU needed) on platforms
 /// that set PREFER_FIXEDPOINT, FloatSineGenerator (sinf() based) otherwise.
 #if PREFER_FIXEDPOINT
