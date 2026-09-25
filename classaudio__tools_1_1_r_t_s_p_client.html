@@ -111,6 +111,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5b5ee12f42b0c33ad73948436f32fcd0" id="r_a5b5ee12f42b0c33ad73948436f32fcd0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_client.html#a5b5ee12f42b0c33ad73948436f32fcd0">RTSPClient</a> (<a class="el" href="class_print.html">Print</a> &amp;out)</td></tr>
 <tr class="memdesc:a5b5ee12f42b0c33ad73948436f32fcd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct with a generic <a class="el" href="class_print.html">Print</a> sink.  <br /></td></tr>
 <tr class="separator:a5b5ee12f42b0c33ad73948436f32fcd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeeb8dd2784f698c7a828f16ecb108534" id="r_aeeb8dd2784f698c7a828f16ecb108534"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_client.html#aeeb8dd2784f698c7a828f16ecb108534">addDecoder</a> (<a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> &amp;decoder)</td></tr>
+<tr class="memdesc:aeeb8dd2784f698c7a828f16ecb108534"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a decoder to be auto-selected for its own MIME type.  <br /></td></tr>
+<tr class="separator:aeeb8dd2784f698c7a828f16ecb108534"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af7cf613ea4f0d2ef5c47a90667cd9334" id="r_af7cf613ea4f0d2ef5c47a90667cd9334"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_client.html#af7cf613ea4f0d2ef5c47a90667cd9334">addDecoder</a> (const char *mimeType, <a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> &amp;decoder)</td></tr>
 <tr class="memdesc:af7cf613ea4f0d2ef5c47a90667cd9334"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a decoder to be auto-selected for the given MIME.  <br /></td></tr>
 <tr class="separator:af7cf613ea4f0d2ef5c47a90667cd9334"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -450,8 +453,44 @@ template&lt;typename TcpClient , typename UdpSocket &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="aeeb8dd2784f698c7a828f16ecb108534" name="aeeb8dd2784f698c7a828f16ecb108534"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeeb8dd2784f698c7a828f16ecb108534">&#9670;&#160;</a></span>addDecoder() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TcpClient , typename UdpSocket &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void addDecoder </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> &amp;&#160;</td>
+          <td class="paramname"><em>decoder</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Register a decoder to be auto-selected for its own MIME type. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">decoder</td><td><a class="el" href="classaudio__tools_1_1_audio_decoder.html" title="Decoding of encoded audio into PCM data.">AudioDecoder</a> instance; its <a class="el" href="classaudio__tools_1_1_r_t_s_p_client.html#a424296cc6316328a2ff7da0039b0dc28" title="Best-effort MIME derived from SDP (e.g. audio/L16, audio/aac).">mime()</a> is used for matching </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="af7cf613ea4f0d2ef5c47a90667cd9334" name="af7cf613ea4f0d2ef5c47a90667cd9334"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af7cf613ea4f0d2ef5c47a90667cd9334">&#9670;&#160;</a></span>addDecoder()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af7cf613ea4f0d2ef5c47a90667cd9334">&#9670;&#160;</a></span>addDecoder() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
