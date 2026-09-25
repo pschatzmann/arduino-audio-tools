@@ -385,6 +385,14 @@ class RTSPClient : public AudioInfoSource, public AudioInfoSupport {
   }
 
   /**
+   * @brief Register a decoder to be auto-selected for its own MIME type.
+   * @param decoder AudioDecoder instance; its mime() is used for matching
+   */
+  void addDecoder(AudioDecoder& decoder) {
+    addDecoder(decoder.mime(), decoder);
+  }
+
+  /**
    * @brief Copy the next buffered RTP payload into the decoder pipeline.
    * Performs initial decoder selection based on SDP MIME.
    * @return Bytes written to decoder, or 0 if none available.

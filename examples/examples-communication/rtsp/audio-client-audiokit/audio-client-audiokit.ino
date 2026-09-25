@@ -54,8 +54,8 @@ void setup() {
   i2s.begin(cfg);
 
   // Start RTSP session
-  client.addDecoder("audio/mpeg", mp3);
-  client.addDecoder("audio/adpcm", adpcm);
+  client.addDecoder(mp3);
+  client.addDecoder(adpcm);
   client.setResampleFactor(1.0);  // no resampling
   // Servers often require a concrete path; also extend header timeout if needed
   client.setHeaderTimeoutMs(8000);
