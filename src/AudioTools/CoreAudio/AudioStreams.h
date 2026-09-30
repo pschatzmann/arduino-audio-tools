@@ -1625,16 +1625,20 @@ class FilteredStream : public ModifyingStream {
     if (p_out != nullptr) p_out->flush();
   }
 
-  /// defines the filter for an individual channel - the first channel is 0. The
-  /// number of channels must have been defined before we can call this
-  /// function.
+  /// defines the filter for an individual channel - the first channel is 0. If
+  /// the number of channels has not been defined yet, it is extended
+  /// automatically.
   void setFilter(int channel, Filter<TF> *filter) {
+    if (channel >= converter.getChannels()) {
+      converter.setChannels(channel + 1);
+      if (channels < channel + 1) channels = channel + 1;
+    }
     converter.setFilter(channel, filter);
   }
 
-  /// defines the filter for an individual channel - the first channel is 0. The
-  /// number of channels must have been defined before we can call this
-  /// function.
+  /// defines the filter for an individual channel - the first channel is 0. If
+  /// the number of channels has not been defined yet, it is extended
+  /// automatically.
   void setFilter(int channel, Filter<TF> &filter) {
     setFilter(channel, &filter);
   }
