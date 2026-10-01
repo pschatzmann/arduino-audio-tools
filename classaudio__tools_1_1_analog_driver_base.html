@@ -75,6 +75,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="classaudio__tools_1_1_analog_driver_base-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">AnalogDriverBase Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
@@ -110,6 +111,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ae595fc4a31607154d91058a709284a36"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a255e750e3f7df0cfa1d472161d252bb4" id="r_a255e750e3f7df0cfa1d472161d252bb4"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_driver_base.html#a255e750e3f7df0cfa1d472161d252bb4">write</a> (const uint8_t *src, size_t size_bytes)</td></tr>
 <tr class="separator:a255e750e3f7df0cfa1d472161d252bb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
+Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:a0d30135fdec0424ca8a67bdd54d2e1b5" id="r_a0d30135fdec0424ca8a67bdd54d2e1b5"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_driver_base.html#a0d30135fdec0424ca8a67bdd54d2e1b5">scaleTo16Bits</a> (uint8_t *data, size_t size_bytes, int adc_bits, bool is_centered)</td></tr>
+<tr class="separator:a0d30135fdec0424ca8a67bdd54d2e1b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="aebd60457902debb30b07971a16f24ebd" name="aebd60457902debb30b07971a16f24ebd"></a>
@@ -256,6 +262,55 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Implemented in <a class="el" href="classaudio__tools_1_1_analog_driver_arduino.html#a4c5c6275ddee80eb02839356b6185c0b">AnalogDriverArduino</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32.html#a445f7d1cc42dc43338929e2229215545">AnalogDriverESP32</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a445f7d1cc42dc43338929e2229215545">AnalogDriverESP32V1</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v2.html#a445f7d1cc42dc43338929e2229215545">AnalogDriverESP32V2</a>, <a class="el" href="classaudio__tools_1_1_analog_driver_m_b_e_d.html#a445f7d1cc42dc43338929e2229215545">AnalogDriverMBED</a>, and <a class="el" href="classaudio__tools_1_1_analog_driver_zephyr.html#ad7121344745cb0beafc8411d43ed6f30">AnalogDriverZephyr</a>.</p>
+
+</div>
+</div>
+<a id="a0d30135fdec0424ca8a67bdd54d2e1b5" name="a0d30135fdec0424ca8a67bdd54d2e1b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d30135fdec0424ca8a67bdd54d2e1b5">&#9670;&#160;</a></span>scaleTo16Bits()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void scaleTo16Bits </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size_bytes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>adc_bits</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>is_centered</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Scales int16_t samples with adc_bits resolution to the full 16 bit range. If the samples are not centered yet, the midpoint of the ADC range is subtracted first. </p>
 
 </div>
 </div>
