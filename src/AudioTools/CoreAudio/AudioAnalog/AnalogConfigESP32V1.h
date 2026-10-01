@@ -163,6 +163,9 @@ class AnalogConfigESP32V1 : public AudioInfo {
   // ADC config parameters
   bool adc_calibration_active = false;
   bool is_auto_center_read = false;
+  /// Scale the adc_bit_width ADC values to the full 16 bit range (ignored when
+  /// adc_calibration_active is set, since the values are then in mV)
+  bool is_scale_to_16bit = false;
   adc_digi_convert_mode_t adc_conversion_mode = ADC_CONV_MODE;
   adc_digi_output_format_t adc_output_type = ADC_OUTPUT_TYPE;
   uint8_t adc_attenuation = ADC_ATTEN_DB_12;  // full voltage range of 3.9V

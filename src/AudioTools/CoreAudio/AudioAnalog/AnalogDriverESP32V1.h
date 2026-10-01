@@ -496,6 +496,11 @@ protected:
             if (bytes_provided > 0 && self->cfg.is_auto_center_read) {
                 self->auto_center.convert(dest, bytes_provided);
             }
+            if (bytes_provided > 0 && self->cfg.is_scale_to_16bit &&
+                !self->cfg.adc_calibration_active) {
+                scaleTo16Bits(dest, bytes_provided, self->cfg.adc_bit_width,
+                              self->cfg.is_auto_center_read);
+            }
             return bytes_provided;
         }
 
@@ -683,6 +688,9 @@ protected:
 
         // Setup up optimal auto center which puts the avg at 0
         auto_center.begin(cfg.channels, cfg.bits_per_sample, true);
+        if (cfg.is_scale_to_16bit && cfg.adc_calibration_active) {
+            LOGW("is_scale_to_16bit ignored: calibrated values are in mV");
+        }
 
         cleanupScratchBuffer();
         rx_result_buffer_bytes = conv_frame_size;

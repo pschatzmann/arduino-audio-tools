@@ -27,6 +27,8 @@ class AnalogConfigESP32 : public AudioInfo {
     RxTxMode rx_tx_mode;
     bool is_blocking_write = true;
     bool is_auto_center_read = true;
+    /// Scale the 12 bit ADC values to the full 16 bit range
+    bool is_scale_to_16bit = false;
 
     // allow ADC to access the protected methods
     friend class AnalogDriverESP32;

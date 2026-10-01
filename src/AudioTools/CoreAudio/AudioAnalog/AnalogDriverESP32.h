@@ -47,7 +47,7 @@ class AnalogDriverESP32  : public AnalogDriverBase {
       TRACEI();
       cfg.logInfo();
 
-      if (adc_config.is_auto_center_read){
+      if (cfg.is_auto_center_read){
         LOGI("auto_center")
         auto_center.begin(cfg.channels, cfg.bits_per_sample);
       }
@@ -190,9 +190,20 @@ class AnalogDriverESP32  : public AnalogDriverBase {
       if (i2s_read(port_no, dest, size_bytes, &result, adc_config.timeout)!=ESP_OK){
         TRACEE();
       }
+      // remove the channel info in the upper 4 bits: we keep the 12 bit value
+      if (adc_config.is_scale_to_16bit){
+        uint16_t *samples = reinterpret_cast<uint16_t *>(dest);
+        for (size_t i = 0; i < result / sizeof(uint16_t); i++) {
+          samples[i] &= 0x0FFF;
+        }
+      }
       // make sure that the center is at 0
       if (adc_config.is_auto_center_read){
         auto_center.convert(dest, result);
+      }
+      // scale 12 bit values to 16 bits
+      if (adc_config.is_scale_to_16bit){
+        scaleTo16Bits(dest, result, 12, adc_config.is_auto_center_read);
       }
       LOGD( "%s - len: %d -> %d", __func__, size_bytes, result);
       return result;
