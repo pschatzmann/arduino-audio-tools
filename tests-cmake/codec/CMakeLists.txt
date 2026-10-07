@@ -15,6 +15,8 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 endif()
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/aac-faad ${CMAKE_CURRENT_BINARY_DIR}/aac-faad)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/aac-faad2 ${CMAKE_CURRENT_BINARY_DIR}/aac-faad2)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/aac-faac-encode ${CMAKE_CURRENT_BINARY_DIR}/aac-faac-encode)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/aac-fdk ${CMAKE_CURRENT_BINARY_DIR}/aac-fdk)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/aac-fdk-encode ${CMAKE_CURRENT_BINARY_DIR}/aac-fdk-encode)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/aac-helix ${CMAKE_CURRENT_BINARY_DIR}/aac-helix)

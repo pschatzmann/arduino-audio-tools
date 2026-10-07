@@ -24,7 +24,10 @@
 #include "AudioTools/AudioCodecs/CodecADTS.h"
 #include "AudioTools/AudioCodecs/CodecILBC.h"
 #include "AudioTools/AudioCodecs/CodecMP3MAD.h"
-#include "AudioTools/AudioCodecs/CodecAACFAAD.h"
+// codec-faad and codec-faad2 cannot be used in the same sketch
+//#include "AudioTools/AudioCodecs/CodecAACFAAD.h"
+#include "AudioTools/AudioCodecs/CodecAACFAAC.h"
+#include "AudioTools/AudioCodecs/CodecAACFAAD2.h"
 #include "AudioTools/AudioCodecs/CodecAPTX.h"
 #include "AudioTools/AudioCodecs/CodecFloat.h"
 #include "AudioTools/AudioCodecs/CodecL16.h"
