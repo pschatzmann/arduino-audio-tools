@@ -51,16 +51,18 @@ class MeasuringStream : public ModifyingStream {
 
   /// Provides the data from all streams mixed together
   size_t readBytes(uint8_t *data, size_t len) override {
-    total_bytes_since_begin += len;
-    return measure(p_io->readBytes(data, len));
+    size_t result = p_io->readBytes(data, len);
+    total_bytes_since_begin += result;
+    return measure(result);
   }
 
   int available() override { return p_io->available(); }
 
   /// Writes raw PCM audio data, which will be the input for the volume control
   virtual size_t write(const uint8_t *data, size_t len) override {
-    total_bytes_since_begin += len;
-    return measure(p_out->write(data, len));
+    size_t result = p_out->write(data, len);
+    total_bytes_since_begin += result;
+    return measure(result);
   }
 
   /// Provides the nubmer of bytes we can write
@@ -164,7 +166,7 @@ class MeasuringStream : public ModifyingStream {
       uint32_t end_time = millis();
       int time_diff = end_time - start_time;  // in ms
       if (time_diff > 0) {
-        bytes_per_second = total_bytes / time_diff * 1000;
+        bytes_per_second = (int64_t)total_bytes * 1000 / time_diff;
         printResult();
         count = max_count;
         total_bytes = 0;
