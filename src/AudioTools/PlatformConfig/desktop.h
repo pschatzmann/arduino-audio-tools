@@ -55,7 +55,9 @@ typedef WiFiClient WiFiClientSecure;
 #    define ESP32
 #  endif
 #  include "esp_idf_version.h"
-#  include "AudioTools/AudioLibs/Emulation/Arduino.h"
+#  ifndef ARDUINO
+#    include "AudioTools/AudioLibs/Emulation/Arduino.h"
+#  endif
 #else 
 //#  include "AudioTools/AudioLibs/Emulation/Arduino.h"
 //#  define USE_CPP_TASK
