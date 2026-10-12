@@ -82,7 +82,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>An <a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.">AudioSource</a> that uses the <a href="https://github.com/pschatzmann/TinyFTPClient">https://github.com/pschatzmann/TinyFTPClient</a> library to retrieve files from a FTP Server. You need to provide an FTPClient object to the constructor and make sure that you open it before you access the files. The storage of the expanded file names is done on the heap, so in order to limit the requested memory we can limit the number of files.  
+<p>An <a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.">AudioSource</a> that uses the <a href="https://github.com/pschatzmann/TinyFTPClient">https://github.com/pschatzmann/TinyFTPClient</a> library to retrieve files from a FTP Server. You need to provide an FTPClient object to the constructor and make sure that you open it before you access the files.  
  <a href="classaudio__tools_1_1_audio_source_f_t_p.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_audio_source_f_t_p_8h_source.html">AudioSourceFTP.h</a>&gt;</code></p>
@@ -98,20 +98,16 @@ Inheritance diagram for AudioSourceFTP&lt; ClientType &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7c53e71b0f8cc77832ea3f246e19ad05" id="r_a7c53e71b0f8cc77832ea3f246e19ad05"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#a7c53e71b0f8cc77832ea3f246e19ad05">AudioSourceFTP</a> (FTPClient&lt; ClientType &gt; &amp;client, const char *path, const char *ext, int <a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#a9925abce2210e4b4207919a672808716">files</a>=0)</td></tr>
-<tr class="memdesc:a7c53e71b0f8cc77832ea3f246e19ad05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor: Provide the client class as template argument e.g. AudioSourceFTP&lt;WiFiClient&gt; source(client, path, ext);.  <br /></td></tr>
+<tr class="memitem:a7c53e71b0f8cc77832ea3f246e19ad05" id="r_a7c53e71b0f8cc77832ea3f246e19ad05"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#a7c53e71b0f8cc77832ea3f246e19ad05">AudioSourceFTP</a> (FTPClient&lt; ClientType &gt; &amp;client, const char *path, const char *ext, int files=0)</td></tr>
 <tr class="separator:a7c53e71b0f8cc77832ea3f246e19ad05"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad66e7f54ff8fb5d0ec7497fd2a4f7483" id="r_ad66e7f54ff8fb5d0ec7497fd2a4f7483"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#ad66e7f54ff8fb5d0ec7497fd2a4f7483">addDirectory</a> (const char *path)</td></tr>
-<tr class="memdesc:ad66e7f54ff8fb5d0ec7497fd2a4f7483"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds all the files of a directory.  <br /></td></tr>
-<tr class="separator:ad66e7f54ff8fb5d0ec7497fd2a4f7483"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acba365cc28eb702040c382646cfb0a7a" id="r_acba365cc28eb702040c382646cfb0a7a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#acba365cc28eb702040c382646cfb0a7a">begin</a> () override</td></tr>
-<tr class="memdesc:acba365cc28eb702040c382646cfb0a7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the actual data.  <br /></td></tr>
+<tr class="memdesc:acba365cc28eb702040c382646cfb0a7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks that the directory contains some files.  <br /></td></tr>
 <tr class="separator:acba365cc28eb702040c382646cfb0a7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf81d3fdaf258088d7692fa70cece087" id="r_aaf81d3fdaf258088d7692fa70cece087"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#aaf81d3fdaf258088d7692fa70cece087">end</a> ()</td></tr>
-<tr class="memdesc:aaf81d3fdaf258088d7692fa70cece087"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the actual data.  <br /></td></tr>
+<tr class="memdesc:aaf81d3fdaf258088d7692fa70cece087"><td class="mdescLeft">&#160;</td><td class="mdescRight">Closes the actual file.  <br /></td></tr>
 <tr class="separator:aaf81d3fdaf258088d7692fa70cece087"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a96c7a604b9792cec79e06bf64809113f" id="r_a96c7a604b9792cec79e06bf64809113f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#a96c7a604b9792cec79e06bf64809113f">index</a> () override</td></tr>
-<tr class="memdesc:a96c7a604b9792cec79e06bf64809113f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves all files and returns the actual index of the stream.  <br /></td></tr>
+<tr class="memdesc:a96c7a604b9792cec79e06bf64809113f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the actual index of the stream.  <br /></td></tr>
 <tr class="separator:a96c7a604b9792cec79e06bf64809113f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1a2ebc04c10e3b7c5704943dc22b1cb" id="r_aa1a2ebc04c10e3b7c5704943dc22b1cb"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#aa1a2ebc04c10e3b7c5704943dc22b1cb">isAutoNext</a> ()</td></tr>
 <tr class="memdesc:aa1a2ebc04c10e3b7c5704943dc22b1cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns default setting go to the next.  <br /></td></tr>
@@ -126,12 +122,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:aea5194e130314c753b4e0a85782ee079"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns previous audio stream.  <br /></td></tr>
 <tr class="separator:aea5194e130314c753b4e0a85782ee079"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d148cac2a78c35061d9a5b739e0e4cf" id="r_a1d148cac2a78c35061d9a5b739e0e4cf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#a1d148cac2a78c35061d9a5b739e0e4cf">selectStream</a> (const char *path) override</td></tr>
-<tr class="memdesc:a1d148cac2a78c35061d9a5b739e0e4cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the FTPFile for the indicated path.  <br /></td></tr>
 <tr class="separator:a1d148cac2a78c35061d9a5b739e0e4cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a252dd1cbe87a0774ea280aa51777813a" id="r_a252dd1cbe87a0774ea280aa51777813a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#a252dd1cbe87a0774ea280aa51777813a">selectStream</a> (int <a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#a96c7a604b9792cec79e06bf64809113f">index</a>) override</td></tr>
 <tr class="separator:a252dd1cbe87a0774ea280aa51777813a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ab8295fdd7c303ed2495e628d521c1e" id="r_a6ab8295fdd7c303ed2495e628d521c1e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a6ab8295fdd7c303ed2495e628d521c1e">setAutoNext</a> (bool flag)</td></tr>
 <tr class="separator:a6ab8295fdd7c303ed2495e628d521c1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6113437200beb3bd7abd98428156f17" id="r_aa6113437200beb3bd7abd98428156f17"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#aa6113437200beb3bd7abd98428156f17">setFileExtension</a> (const char *ext)</td></tr>
+<tr class="memdesc:aa6113437200beb3bd7abd98428156f17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the file extension filter (e.g. "mp3"): nullptr for all files.  <br /></td></tr>
+<tr class="separator:aa6113437200beb3bd7abd98428156f17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95d0bdc3b24e374ecc10df9af1af7333" id="r_a95d0bdc3b24e374ecc10df9af1af7333"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a95d0bdc3b24e374ecc10df9af1af7333">setIndex</a> (int <a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#a96c7a604b9792cec79e06bf64809113f">index</a>)</td></tr>
 <tr class="memdesc:a95d0bdc3b24e374ecc10df9af1af7333"><td class="mdescLeft">&#160;</td><td class="mdescRight">same as selectStream - I just prefer this name  <br /></td></tr>
 <tr class="separator:a95d0bdc3b24e374ecc10df9af1af7333"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -146,51 +144,58 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1d03133fe86ead67820854ef63dadfbd" id="r_a1d03133fe86ead67820854ef63dadfbd"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a1d03133fe86ead67820854ef63dadfbd">setTimeoutAutoNext</a> (int millisec)</td></tr>
 <tr class="separator:a1d03133fe86ead67820854ef63dadfbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b6b70701c46e22849f0f363861351cd" id="r_a0b6b70701c46e22849f0f363861351cd"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#a0b6b70701c46e22849f0f363861351cd">size</a> ()</td></tr>
-<tr class="memdesc:a0b6b70701c46e22849f0f363861351cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of available files.  <br /></td></tr>
+<tr class="memdesc:a0b6b70701c46e22849f0f363861351cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of files that were found by <a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#acba365cc28eb702040c382646cfb0a7a" title="Checks that the directory contains some files.">begin()</a>  <br /></td></tr>
 <tr class="separator:a0b6b70701c46e22849f0f363861351cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac20e50555537a80d3d535eb2225cc738" id="r_ac20e50555537a80d3d535eb2225cc738"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#ac20e50555537a80d3d535eb2225cc738">timeoutAutoNext</a> ()</td></tr>
 <tr class="memdesc:ac20e50555537a80d3d535eb2225cc738"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the timeout which is triggering to move to the next stream.  <br /></td></tr>
 <tr class="separator:ac20e50555537a80d3d535eb2225cc738"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6170543a69c52781dbdb91cfdd8677f7" id="r_a6170543a69c52781dbdb91cfdd8677f7"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#a6170543a69c52781dbdb91cfdd8677f7">toStr</a> () override</td></tr>
-<tr class="memdesc:a6170543a69c52781dbdb91cfdd8677f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the actual stream (e.g. file) name or url  <br /></td></tr>
+<tr class="memdesc:a6170543a69c52781dbdb91cfdd8677f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the actual file name  <br /></td></tr>
 <tr class="separator:a6170543a69c52781dbdb91cfdd8677f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:aea5c85d5b0cec41418a226ccfbb8562a" id="r_aea5c85d5b0cec41418a226ccfbb8562a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#aea5c85d5b0cec41418a226ccfbb8562a">addFiles</a> (FTPFile &amp;dir, int level)</td></tr>
-<tr class="memdesc:aea5c85d5b0cec41418a226ccfbb8562a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds all files recursively.  <br /></td></tr>
-<tr class="separator:aea5c85d5b0cec41418a226ccfbb8562a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ba94da7db769b98d02381d872dd9bbb" id="r_a9ba94da7db769b98d02381d872dd9bbb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#a9ba94da7db769b98d02381d872dd9bbb">count</a> ()</td></tr>
+<tr class="memdesc:a9ba94da7db769b98d02381d872dd9bbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lists the directory and counts the matching files.  <br /></td></tr>
+<tr class="separator:a9ba94da7db769b98d02381d872dd9bbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1057d81ae4a97b942fb7c50ad2f86438" id="r_a1057d81ae4a97b942fb7c50ad2f86438"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#a1057d81ae4a97b942fb7c50ad2f86438">endsWith</a> (const char *<a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#ac431bda355ae8ddb539a8bd96dd23aa8">file</a>, const char *ext)</td></tr>
 <tr class="separator:a1057d81ae4a97b942fb7c50ad2f86438"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7bf5c4b7fb1facf3a5362f3ed37d961" id="r_ab7bf5c4b7fb1facf3a5362f3ed37d961"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#ab7bf5c4b7fb1facf3a5362f3ed37d961">findFile</a> (int <a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#a96c7a604b9792cec79e06bf64809113f">index</a>, <a class="el" href="classaudio__tools_1_1_str.html">Str</a> &amp;path)</td></tr>
+<tr class="memdesc:ab7bf5c4b7fb1facf3a5362f3ed37d961"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lists the directory and provides the path of the n-th matching file.  <br /></td></tr>
+<tr class="separator:ab7bf5c4b7fb1facf3a5362f3ed37d961"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05ec0deac001f3a09bb60ad2ea60fadb" id="r_a05ec0deac001f3a09bb60ad2ea60fadb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#a05ec0deac001f3a09bb60ad2ea60fadb">isValidIdx</a> (int <a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#a96c7a604b9792cec79e06bf64809113f">index</a>)</td></tr>
 <tr class="separator:a05ec0deac001f3a09bb60ad2ea60fadb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ddbff7273d3331f574c9067e4d73fdb" id="r_a0ddbff7273d3331f574c9067e4d73fdb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#a0ddbff7273d3331f574c9067e4d73fdb">openFile</a> (const char *path)</td></tr>
+<tr class="separator:a0ddbff7273d3331f574c9067e4d73fdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b8ce39cff46c8a28047ab3196f58b1e" id="r_a6b8ce39cff46c8a28047ab3196f58b1e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#a6b8ce39cff46c8a28047ab3196f58b1e">toPath</a> (const char *name, <a class="el" href="classaudio__tools_1_1_str.html">Str</a> &amp;result)</td></tr>
+<tr class="memdesc:a6b8ce39cff46c8a28047ab3196f58b1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Some servers list the names with the directory, others without it.  <br /></td></tr>
+<tr class="separator:a6b8ce39cff46c8a28047ab3196f58b1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:adc249d5bb9e8d0abc060f9c21123cb2b" id="r_adc249d5bb9e8d0abc060f9c21123cb2b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#adc249d5bb9e8d0abc060f9c21123cb2b">directory</a></td></tr>
+<tr class="separator:adc249d5bb9e8d0abc060f9c21123cb2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac431bda355ae8ddb539a8bd96dd23aa8" id="r_ac431bda355ae8ddb539a8bd96dd23aa8"><td class="memItemLeft" align="right" valign="top">FTPFile&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#ac431bda355ae8ddb539a8bd96dd23aa8">file</a></td></tr>
 <tr class="separator:ac431bda355ae8ddb539a8bd96dd23aa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9925abce2210e4b4207919a672808716" id="r_a9925abce2210e4b4207919a672808716"><td class="memItemLeft" align="right" valign="top">std::vector&lt; FTPFile &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#a9925abce2210e4b4207919a672808716">files</a></td></tr>
-<tr class="separator:a9925abce2210e4b4207919a672808716"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd3633577cf354ae9e2c69a018cfe999" id="r_abd3633577cf354ae9e2c69a018cfe999"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#abd3633577cf354ae9e2c69a018cfe999">file_count</a> = -1</td></tr>
+<tr class="separator:abd3633577cf354ae9e2c69a018cfe999"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae40354a1051342eb5a9db005715dcfa9" id="r_ae40354a1051342eb5a9db005715dcfa9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#ae40354a1051342eb5a9db005715dcfa9">idx</a> = 0</td></tr>
 <tr class="separator:ae40354a1051342eb5a9db005715dcfa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac88ac2eaea8d71127bcad6887f95f3d4" id="r_ac88ac2eaea8d71127bcad6887f95f3d4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#ac88ac2eaea8d71127bcad6887f95f3d4">is_auto_next</a> = true</td></tr>
 <tr class="separator:ac88ac2eaea8d71127bcad6887f95f3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c54361cc737ba2d4ea42efe398c924a" id="r_a4c54361cc737ba2d4ea42efe398c924a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#a4c54361cc737ba2d4ea42efe398c924a">is_first</a> = true</td></tr>
-<tr class="separator:a4c54361cc737ba2d4ea42efe398c924a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e29479d996177ebc53b73b698e1a134" id="r_a7e29479d996177ebc53b73b698e1a134"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#a7e29479d996177ebc53b73b698e1a134">max_files</a> = 0</td></tr>
 <tr class="separator:a7e29479d996177ebc53b73b698e1a134"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1345a5205ca7bdd6b2e3fc6df58ba233" id="r_a1345a5205ca7bdd6b2e3fc6df58ba233"><td class="memItemLeft" align="right" valign="top">FTPClient&lt; ClientType &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#a1345a5205ca7bdd6b2e3fc6df58ba233">p_client</a> = nullptr</td></tr>
 <tr class="separator:a1345a5205ca7bdd6b2e3fc6df58ba233"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad64dafb2c00a75f814196b2833f1cd4c" id="r_ad64dafb2c00a75f814196b2833f1cd4c"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#ad64dafb2c00a75f814196b2833f1cd4c">p_ext</a> = nullptr</td></tr>
 <tr class="separator:ad64dafb2c00a75f814196b2833f1cd4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a195f689b4b6bc524d5d10c8e8ababc8a" id="r_a195f689b4b6bc524d5d10c8e8ababc8a"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#a195f689b4b6bc524d5d10c8e8ababc8a">p_path</a> = &quot;/&quot;</td></tr>
-<tr class="separator:a195f689b4b6bc524d5d10c8e8ababc8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7062b1e31e4db9ec0ba01f27e7ebc67" id="r_ac7062b1e31e4db9ec0ba01f27e7ebc67"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#ac7062b1e31e4db9ec0ba01f27e7ebc67">timeout_auto_next_value</a> = 500</td></tr>
 <tr class="separator:ac7062b1e31e4db9ec0ba01f27e7ebc67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class ClientType&gt;<br />
-class audio_tools::AudioSourceFTP&lt; ClientType &gt;</div><p>An <a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.">AudioSource</a> that uses the <a href="https://github.com/pschatzmann/TinyFTPClient">https://github.com/pschatzmann/TinyFTPClient</a> library to retrieve files from a FTP Server. You need to provide an FTPClient object to the constructor and make sure that you open it before you access the files. The storage of the expanded file names is done on the heap, so in order to limit the requested memory we can limit the number of files. </p>
+class audio_tools::AudioSourceFTP&lt; ClientType &gt;</div><p>An <a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.">AudioSource</a> that uses the <a href="https://github.com/pschatzmann/TinyFTPClient">https://github.com/pschatzmann/TinyFTPClient</a> library to retrieve files from a FTP Server. You need to provide an FTPClient object to the constructor and make sure that you open it before you access the files. </p>
+<p>The file names are not stored: the directory is listed on the server each time a new file is selected and the n-th matching file is opened. So only the name of the actual file is kept in memory.</p>
 <dl class="section note"><dt>Note</dt><dd>supported only by Arduino platforms!</dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
@@ -242,82 +247,11 @@ template&lt;class ClientType &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
 <p>Default constructor: Provide the client class as template argument e.g. AudioSourceFTP&lt;WiFiClient&gt; source(client, path, ext);. </p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ad66e7f54ff8fb5d0ec7497fd2a4f7483" name="ad66e7f54ff8fb5d0ec7497fd2a4f7483"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad66e7f54ff8fb5d0ec7497fd2a4f7483">&#9670;&#160;</a></span>addDirectory()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ClientType &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool addDirectory </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>path</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Adds all the files of a directory. </p>
-
-</div>
-</div>
-<a id="aea5c85d5b0cec41418a226ccfbb8562a" name="aea5c85d5b0cec41418a226ccfbb8562a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea5c85d5b0cec41418a226ccfbb8562a">&#9670;&#160;</a></span>addFiles()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ClientType &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void addFiles </td>
-          <td>(</td>
-          <td class="paramtype">FTPFile &amp;&#160;</td>
-          <td class="paramname"><em>dir</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>level</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Adds all files recursively. </p>
-
-</div>
-</div>
 <a id="acba365cc28eb702040c382646cfb0a7a" name="acba365cc28eb702040c382646cfb0a7a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acba365cc28eb702040c382646cfb0a7a">&#9670;&#160;</a></span>begin()</h2>
 
@@ -343,9 +277,38 @@ template&lt;class ClientType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Resets the actual data. </p>
+<p>Checks that the directory contains some files. </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_audio_source.html#ae8a0d9ca63f8bb3de100e347c3f3bca4">AudioSource</a>.</p>
+
+</div>
+</div>
+<a id="a9ba94da7db769b98d02381d872dd9bbb" name="a9ba94da7db769b98d02381d872dd9bbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ba94da7db769b98d02381d872dd9bbb">&#9670;&#160;</a></span>count()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ClientType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int count </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Lists the directory and counts the matching files. </p>
 
 </div>
 </div>
@@ -374,7 +337,7 @@ template&lt;class ClientType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Resets the actual data. </p>
+<p>Closes the actual file. </p>
 
 </div>
 </div>
@@ -416,6 +379,46 @@ template&lt;class ClientType &gt; </div>
 
 </div>
 </div>
+<a id="ab7bf5c4b7fb1facf3a5362f3ed37d961" name="ab7bf5c4b7fb1facf3a5362f3ed37d961"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7bf5c4b7fb1facf3a5362f3ed37d961">&#9670;&#160;</a></span>findFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ClientType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool findFile </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_str.html">Str</a> &amp;&#160;</td>
+          <td class="paramname"><em>path</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Lists the directory and provides the path of the n-th matching file. </p>
+
+</div>
+</div>
 <a id="a96c7a604b9792cec79e06bf64809113f" name="a96c7a604b9792cec79e06bf64809113f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a96c7a604b9792cec79e06bf64809113f">&#9670;&#160;</a></span>index()</h2>
 
@@ -441,7 +444,7 @@ template&lt;class ClientType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Retrieves all files and returns the actual index of the stream. </p>
+<p>Returns the actual index of the stream. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_source.html#a05d9a9704b4cdd7447cd163af9e07788">AudioSource</a>.</p>
 
@@ -536,6 +539,34 @@ template&lt;class ClientType &gt; </div>
 
 </div>
 </div>
+<a id="a0ddbff7273d3331f574c9067e4d73fdb" name="a0ddbff7273d3331f574c9067e4d73fdb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ddbff7273d3331f574c9067e4d73fdb">&#9670;&#160;</a></span>openFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ClientType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_stream.html">Stream</a> * openFile </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>path</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ae6f94ab5bac42f3054d5d23b24219ec9" name="ae6f94ab5bac42f3054d5d23b24219ec9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae6f94ab5bac42f3054d5d23b24219ec9">&#9670;&#160;</a></span>operator[]()</h2>
 
@@ -621,8 +652,7 @@ template&lt;class ClientType &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Returns the FTPFile for the indicated path. </p>
+<p>Opens the indicated file: if the path does not match the file extension it is considered to be a directory and the first file is opened. </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_audio_source.html#a1718d4bbd3f6a1c533bf86d202aeda90">AudioSource</a>.</p>
 
@@ -684,6 +714,36 @@ template&lt;class ClientType &gt; </div>
 </div><div class="memdoc">
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_audio_source_callback.html#ab95a620d5801c22d21acd1f259d9ec52">AudioSourceCallback</a>.</p>
+
+</div>
+</div>
+<a id="aa6113437200beb3bd7abd98428156f17" name="aa6113437200beb3bd7abd98428156f17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6113437200beb3bd7abd98428156f17">&#9670;&#160;</a></span>setFileExtension()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ClientType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setFileExtension </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>ext</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Defines the file extension filter (e.g. "mp3"): nullptr for all files. </p>
 
 </div>
 </div>
@@ -865,7 +925,7 @@ template&lt;class ClientType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Returns the number of available files. </p>
+<p>Returns the number of files that were found by <a class="el" href="classaudio__tools_1_1_audio_source_f_t_p.html#acba365cc28eb702040c382646cfb0a7a" title="Checks that the directory contains some files.">begin()</a> </p>
 
 </div>
 </div>
@@ -896,6 +956,46 @@ template&lt;class ClientType &gt; </div>
 
 </div>
 </div>
+<a id="a6b8ce39cff46c8a28047ab3196f58b1e" name="a6b8ce39cff46c8a28047ab3196f58b1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b8ce39cff46c8a28047ab3196f58b1e">&#9670;&#160;</a></span>toPath()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ClientType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void toPath </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_str.html">Str</a> &amp;&#160;</td>
+          <td class="paramname"><em>result</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Some servers list the names with the directory, others without it. </p>
+
+</div>
+</div>
 <a id="a6170543a69c52781dbdb91cfdd8677f7" name="a6170543a69c52781dbdb91cfdd8677f7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6170543a69c52781dbdb91cfdd8677f7">&#9670;&#160;</a></span>toStr()</h2>
 
@@ -921,13 +1021,37 @@ template&lt;class ClientType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>provides the actual stream (e.g. file) name or url </p>
+<p>provides the actual file name </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_source.html#abcb5a6731b503dec41bf6e3052dc73e6">AudioSource</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="adc249d5bb9e8d0abc060f9c21123cb2b" name="adc249d5bb9e8d0abc060f9c21123cb2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc249d5bb9e8d0abc060f9c21123cb2b">&#9670;&#160;</a></span>directory</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ClientType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_str.html">Str</a> directory</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ac431bda355ae8ddb539a8bd96dd23aa8" name="ac431bda355ae8ddb539a8bd96dd23aa8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac431bda355ae8ddb539a8bd96dd23aa8">&#9670;&#160;</a></span>file</h2>
 
@@ -952,8 +1076,8 @@ template&lt;class ClientType &gt; </div>
 
 </div>
 </div>
-<a id="a9925abce2210e4b4207919a672808716" name="a9925abce2210e4b4207919a672808716"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9925abce2210e4b4207919a672808716">&#9670;&#160;</a></span>files</h2>
+<a id="abd3633577cf354ae9e2c69a018cfe999" name="abd3633577cf354ae9e2c69a018cfe999"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd3633577cf354ae9e2c69a018cfe999">&#9670;&#160;</a></span>file_count</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -964,7 +1088,7 @@ template&lt;class ClientType &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;FTPFile&gt; files</td>
+          <td class="memname">int file_count = -1</td>
         </tr>
       </table>
   </td>
@@ -1016,30 +1140,6 @@ template&lt;class ClientType &gt; </div>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a4c54361cc737ba2d4ea42efe398c924a" name="a4c54361cc737ba2d4ea42efe398c924a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4c54361cc737ba2d4ea42efe398c924a">&#9670;&#160;</a></span>is_first</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ClientType &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool is_first = true</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1107,30 +1207,6 @@ template&lt;class ClientType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">const char* p_ext = nullptr</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a195f689b4b6bc524d5d10c8e8ababc8a" name="a195f689b4b6bc524d5d10c8e8ababc8a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a195f689b4b6bc524d5d10c8e8ababc8a">&#9670;&#160;</a></span>p_path</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ClientType &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char* p_path = &quot;/&quot;</td>
         </tr>
       </table>
   </td>

@@ -139,7 +139,7 @@ var searchData=
   ['receivedata_136',['receiveData',['../classaudio__tools_1_1_audio_sync_reader.html#a2809c0419ac7f54685983fd6d3477034',1,'audio_tools::AudioSyncReader']]],
   ['receiver_137',['Receiver',['../namespaceaudio__tools.html#a39767e1d5e989bc1c5719791db129efaaa9d093d11bc6e98b0c8e586ffa545c85',1,'audio_tools']]],
   ['receiving_138',['RECEIVING',['../classaudio__tools_1_1_h_d_l_c_stream.html#afa22e66eb5ea0daab0f0cd0360936f82a59e11bc4b2a068db07d35733ec8c8da0',1,'audio_tools::HDLCStream']]],
-  ['recipient_139',['recipient',['../structaudio__tools_1_1_usb_setup_packet.html#a3fd879125a2df190871652f1f7222526',1,'audio_tools::UsbSetupPacket::recipient() const'],['../structaudio__tools_1_1_usb_setup_packet.html#ae8288d1dc035579e1d28712b41397b2b',1,'audio_tools::UsbSetupPacket::Recipient']]],
+  ['recipient_139',['recipient',['../structaudio__tools_1_1_usb_setup_packet.html#ae8288d1dc035579e1d28712b41397b2b',1,'audio_tools::UsbSetupPacket::Recipient'],['../structaudio__tools_1_1_usb_setup_packet.html#a3fd879125a2df190871652f1f7222526',1,'audio_tools::UsbSetupPacket::recipient() const']]],
   ['recognizecommands_140',['recognizeCommands',['../structaudio__tools_1_1_tf_lite_config.html#a86ad51aeb688906f6be82e9a4a111bc2',1,'audio_tools::TfLiteConfig']]],
   ['reconfigure_5fpending_5f_141',['reconfigure_pending_',['../classaudio__tools_1_1_u_s_b_audio_host_base.html#a5f08e2efd14e3c4ff87327da9024ebd2',1,'audio_tools::USBAudioHostBase']]],
   ['reconfiguring_5f_142',['reconfiguring_',['../classaudio__tools_1_1_u_s_b_audio_host_base.html#a7b08a44309f4d4431e0e868a476f7282',1,'audio_tools::USBAudioHostBase']]],
