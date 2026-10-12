@@ -1137,8 +1137,12 @@ public:
            sizeof(((audiod_function_t*)0)->ctrl_buf_sz);
   }
 
-  // Called by audiod_sof_isr() at the feedback interval.
-  // Computes the current feedback value then claims the EP and sends it.
+  // Called by audiod_sof_isr() at the feedback interval, in the USB
+  // interrupt.  Only computes the feedback value: sending it means claiming
+  // the endpoint, which takes TinyUSB's endpoint mutex, and doing that here
+  // deadlocks if the interrupt arrived while the TinyUSB task held it.  The
+  // value is sent from task context instead, each time the previous feedback
+  // transfer completes (audiod_xfer_cb()), as TinyUSB's own audio driver does.
   void tud_audio_feedback_interval_isr(uint8_t func_id,
                                        uint32_t /*frame_count*/,
                                        uint8_t frame_shift) {
@@ -1228,9 +1232,12 @@ public:
       }
     }
 
-    if (backend().claimEndpoint(audio->rhport, audio->ep_fb)) {
+  }
+
+  // Task context only (see tud_audio_feedback_interval_isr()).
+  void audiod_fb_kick(audiod_function_t* audio) {
+    if (audio->ep_fb && backend().claimEndpoint(audio->rhport, audio->ep_fb))
       audiod_fb_send(audio);
-    }
   }
 
   // USBD Driver API — public so a backend's class-driver registration glue
@@ -1576,8 +1583,9 @@ public:
         return true;
       }
       if (isFeedbackEpEnabled() && audio->ep_fb == ep_addr) {
-        // SOF ISR owns re-sending; just notify the application.
         if (fb_done_cb_) fb_done_cb_(this, func_id);
+        // Queue the next feedback packet with the latest value.
+        audiod_fb_kick(audio);
         return true;
       }
     }
@@ -2252,6 +2260,12 @@ public:
           tud_audio_set_itf_cb_(this, rhport, UsbSetupPacket{});
 
         setupFeedback(audio, func_id, alt);
+        // Start the feedback transfers; each completion queues the next.
+        if (isFeedbackEpEnabled() && audio->ep_fb) {
+          if (audio->feedback.value == 0)
+            audio->feedback.value = audio->feedback.min_value / 2 + audio->feedback.max_value / 2;
+          audiod_fb_kick(audio);
+        }
         return true;
       }
       p_desc = descNext(p_desc);
