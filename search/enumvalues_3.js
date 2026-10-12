@@ -14,8 +14,9 @@ var searchData=
   ['digiadpcm_11',['DIGIADPCM',['../group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1a7be4eeae45b914e2ee006b2379a9ddc3',1,'audio_tools']]],
   ['digital_12',['Digital',['../namespaceaudio__tools.html#a1d3846b210a1698eaf7cdb7258fcc3e1a144c84f4216331667caf031b85dc1cdc',1,'audio_tools']]],
   ['directtimercallback_13',['DirectTimerCallback',['../namespaceaudio__tools.html#a1a80d46b1fcf323c58eb596c016434f2ae258d3dbc13395dd87a28a529d99a454',1,'audio_tools']]],
-  ['dropout_14',['Dropout',['../group__dsp.html#ggac1859b3dc5b9119471bd06e89b30d7ada09bb9294aa4a843883a3f401aeaf8b5b',1,'audio_tools']]],
-  ['ds_15',['DS',['../group__tools.html#gga9715fceb4c700e7e4a610400464e9396ab8092694163a64aa32694a8246d94210',1,'audio_tools::MusicalNotes']]],
-  ['dvb_5fmpe_5ffec_16',['DVB_MPE_FEC',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338a1bc36dc0a93fa35bc9f3801bb8d0c096',1,'audio_tools']]],
-  ['dvi_5fadpcm_17',['DVI_ADPCM',['../group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1ac85f6b9c69883d9812fe85bb4d5240b4',1,'audio_tools']]]
+  ['done_14',['Done',['../classaudio__tools_1_1_u_s_b_audio_host_base.html#a7551b44b443633567069e7f1de6fac65af92965e2c8a7afb3c1b9a5c09a263636',1,'audio_tools::USBAudioHostBase']]],
+  ['dropout_15',['Dropout',['../group__dsp.html#ggac1859b3dc5b9119471bd06e89b30d7ada09bb9294aa4a843883a3f401aeaf8b5b',1,'audio_tools']]],
+  ['ds_16',['DS',['../group__tools.html#gga9715fceb4c700e7e4a610400464e9396ab8092694163a64aa32694a8246d94210',1,'audio_tools::MusicalNotes']]],
+  ['dvb_5fmpe_5ffec_17',['DVB_MPE_FEC',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338a1bc36dc0a93fa35bc9f3801bb8d0c096',1,'audio_tools']]],
+  ['dvi_5fadpcm_18',['DVI_ADPCM',['../group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1ac85f6b9c69883d9812fe85bb4d5240b4',1,'audio_tools']]]
 ];

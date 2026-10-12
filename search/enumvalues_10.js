@@ -23,8 +23,9 @@ var searchData=
   ['rtsp_5funknown_20',['RTSP_UNKNOWN',['../namespaceaudio__tools.html#a94e969e01854154ac499fa655fe4c470ac80ea42e36839de41d195ce13edb68a3',1,'audio_tools']]],
   ['rx_5fmode_21',['RX_MODE',['../group__basic.html#gga8cbd91a8bac9b5ab425112be1620eb49ae5e96b5cebd8b31efa34211ac73abc1e',1,'audio_tools']]],
   ['rxcmd_22',['RxCmd',['../classaudio__tools_1_1_s_p_i_audio_slave.html#ac9f1d458299e3a8dda366bb9700ef489a07addcfdd92b1d7f259ff1219b1e9a9b',1,'audio_tools::SPIAudioSlave']]],
-  ['rxlenhi_23',['RxLenHi',['../classaudio__tools_1_1_s_p_i_audio_slave.html#ac9f1d458299e3a8dda366bb9700ef489a102fadbe40121e27991b00b1b6a6d55c',1,'audio_tools::SPIAudioSlave']]],
-  ['rxlenlo_24',['RxLenLo',['../classaudio__tools_1_1_s_p_i_audio_slave.html#ac9f1d458299e3a8dda366bb9700ef489aaf39adceef835e81035add756dae4968',1,'audio_tools::SPIAudioSlave']]],
-  ['rxpayload_25',['RxPayload',['../classaudio__tools_1_1_s_p_i_audio_slave.html#ac9f1d458299e3a8dda366bb9700ef489a4640112807a34f1580f21b2009f14e77',1,'audio_tools::SPIAudioSlave']]],
-  ['rxtx_5fmode_26',['RXTX_MODE',['../group__basic.html#gga8cbd91a8bac9b5ab425112be1620eb49a6f3b87c1abe374d1d1a5fef79bffeb00',1,'audio_tools']]]
+  ['rxdata_23',['RxData',['../namespaceaudio__tools.html#a5215dca0bf7e06265945b65e039d2f24a9558aabfea60a3c9845c7c8295a743e0',1,'audio_tools']]],
+  ['rxlenhi_24',['RxLenHi',['../classaudio__tools_1_1_s_p_i_audio_slave.html#ac9f1d458299e3a8dda366bb9700ef489a102fadbe40121e27991b00b1b6a6d55c',1,'audio_tools::SPIAudioSlave']]],
+  ['rxlenlo_25',['RxLenLo',['../classaudio__tools_1_1_s_p_i_audio_slave.html#ac9f1d458299e3a8dda366bb9700ef489aaf39adceef835e81035add756dae4968',1,'audio_tools::SPIAudioSlave']]],
+  ['rxpayload_26',['RxPayload',['../classaudio__tools_1_1_s_p_i_audio_slave.html#ac9f1d458299e3a8dda366bb9700ef489a4640112807a34f1580f21b2009f14e77',1,'audio_tools::SPIAudioSlave']]],
+  ['rxtx_5fmode_27',['RXTX_MODE',['../group__basic.html#gga8cbd91a8bac9b5ab425112be1620eb49a6f3b87c1abe374d1d1a5fef79bffeb00',1,'audio_tools']]]
 ];

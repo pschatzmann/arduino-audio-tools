@@ -32,8 +32,9 @@ var searchData=
   ['inputmixer_29',['InputMixer',['../classaudio__tools_1_1_input_mixer.html',1,'audio_tools']]],
   ['int24_5f3bytes_5ft_30',['int24_3bytes_t',['../classaudio__tools_1_1int24__3bytes__t.html',1,'audio_tools']]],
   ['int24_5f4bytes_5ft_31',['int24_4bytes_t',['../classaudio__tools_1_1int24__4bytes__t.html',1,'audio_tools']]],
-  ['io16bit_32',['io16bit',['../classaudio__tools_1_1_analog_driver_e_s_p32_v1_1_1_i_o16_bit.html',1,'AnalogDriverESP32V1::IO16Bit'],['../classaudio__tools_1_1_analog_driver_e_s_p32_v2_1_1_i_o16_bit.html',1,'AnalogDriverESP32V2::IO16Bit']]],
-  ['ipaddress_33',['IPAddress',['../classaudio__tools_1_1_i_p_address.html',1,'audio_tools']]],
-  ['itask_34',['ITask',['../classaudio__tools_1_1_i_task.html',1,'audio_tools']]],
-  ['iterator_35',['iterator',['../classaudio__tools_1_1_list_1_1_iterator.html',1,'List&lt; T &gt;::Iterator'],['../classaudio__tools_1_1_list_lock_free_1_1_iterator.html',1,'ListLockFree&lt; T &gt;::Iterator'],['../classaudio__tools_1_1_vector_1_1iterator.html',1,'Vector&lt; T &gt;::iterator']]]
+  ['interface_32',['Interface',['../structaudio__tools_1_1_u_s_b_audio_host_backend_e_s_p32_1_1_interface.html',1,'audio_tools::USBAudioHostBackendESP32']]],
+  ['io16bit_33',['io16bit',['../classaudio__tools_1_1_analog_driver_e_s_p32_v1_1_1_i_o16_bit.html',1,'AnalogDriverESP32V1::IO16Bit'],['../classaudio__tools_1_1_analog_driver_e_s_p32_v2_1_1_i_o16_bit.html',1,'AnalogDriverESP32V2::IO16Bit']]],
+  ['ipaddress_34',['IPAddress',['../classaudio__tools_1_1_i_p_address.html',1,'audio_tools']]],
+  ['itask_35',['ITask',['../classaudio__tools_1_1_i_task.html',1,'audio_tools']]],
+  ['iterator_36',['iterator',['../classaudio__tools_1_1_list_1_1_iterator.html',1,'List&lt; T &gt;::Iterator'],['../classaudio__tools_1_1_list_lock_free_1_1_iterator.html',1,'ListLockFree&lt; T &gt;::Iterator'],['../classaudio__tools_1_1_vector_1_1iterator.html',1,'Vector&lt; T &gt;::iterator']]]
 ];

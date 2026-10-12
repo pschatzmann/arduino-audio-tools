@@ -97,7 +97,8 @@ Inheritance diagram for USBAudioDeviceRenesas:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_u_s_b_audio_device_renesas.png" usemap="#USBAudioDeviceRenesas_map" alt=""/>
   <map id="USBAudioDeviceRenesas_map" name="USBAudioDeviceRenesas_map">
-<area href="classaudio__tools_1_1_u_s_b_audio_device_base.html" title="USB Audio Device class for audio streaming over USB." alt="USBAudioDeviceBase" shape="rect" coords="250,224,407,248"/>
+<area href="classaudio__tools_1_1_u_s_b_audio_device_base.html" title="USB Audio Device class for audio streaming over USB." alt="USBAudioDeviceBase" shape="rect" coords="250,280,407,304"/>
+<area href="classaudio__tools_1_1_u_s_b_audio_stream_base.html" title="Role-independent front end shared by USB Audio devices (USBAudioDeviceBase, aliased as USBAudioStream..." alt="USBAudioStreamBase" shape="rect" coords="250,224,407,248"/>
 <area href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="AudioStream" shape="rect" coords="167,168,324,192"/>
 <area href="classaudio__tools_1_1_volume_support.html" title="Supports the setting and getting of the volume." alt="VolumeSupport" shape="rect" coords="334,168,491,192"/>
 <area href="classaudio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer, size_t size) and readBytes(uint..." alt="BaseStream" shape="rect" coords="0,112,157,136"/>
@@ -162,10 +163,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:afad0e6ee07d549a584e7b9d45aabc1a4" id="r_afad0e6ee07d549a584e7b9d45aabc1a4"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#afad0e6ee07d549a584e7b9d45aabc1a4">audioPacketSize</a> () const</td></tr>
 <tr class="memdesc:afad0e6ee07d549a584e7b9d45aabc1a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">One isochronous USB packet size in bytes (same formula as the descriptor builder).  <br /></td></tr>
 <tr class="separator:afad0e6ee07d549a584e7b9d45aabc1a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a692e2b18b3c2452e38e3f558ad87e9a5" id="r_a692e2b18b3c2452e38e3f558ad87e9a5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a692e2b18b3c2452e38e3f558ad87e9a5">available</a> () override</td></tr>
+<tr class="memitem:a692e2b18b3c2452e38e3f558ad87e9a5" id="r_a692e2b18b3c2452e38e3f558ad87e9a5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a692e2b18b3c2452e38e3f558ad87e9a5">available</a> () override</td></tr>
 <tr class="memdesc:a692e2b18b3c2452e38e3f558ad87e9a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bytes of received audio waiting in the RX buffer.  <br /></td></tr>
 <tr class="separator:a692e2b18b3c2452e38e3f558ad87e9a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87b51853b7bf1bc90d9efa9f3b8d4fea" id="r_a87b51853b7bf1bc90d9efa9f3b8d4fea"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">availableForWrite</a> () override</td></tr>
+<tr class="memitem:a87b51853b7bf1bc90d9efa9f3b8d4fea" id="r_a87b51853b7bf1bc90d9efa9f3b8d4fea"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">availableForWrite</a> () override</td></tr>
 <tr class="memdesc:a87b51853b7bf1bc90d9efa9f3b8d4fea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bytes of free space in the TX buffer.  <br /></td></tr>
 <tr class="separator:a87b51853b7bf1bc90d9efa9f3b8d4fea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a601fb7cf1fc15db50c71a826f084f934" id="r_a601fb7cf1fc15db50c71a826f084f934"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a601fb7cf1fc15db50c71a826f084f934">begin</a> ()</td></tr>
@@ -183,6 +184,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:affd15675a5e391c34cccefa7181354bb" id="r_affd15675a5e391c34cccefa7181354bb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#affd15675a5e391c34cccefa7181354bb">clearNotifyAudioChange</a> ()</td></tr>
 <tr class="memdesc:affd15675a5e391c34cccefa7181354bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes all change notify subscriptions.  <br /></td></tr>
 <tr class="separator:affd15675a5e391c34cccefa7181354bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9820c309e92fee8182ab3f7a12257f09" id="r_a9820c309e92fee8182ab3f7a12257f09"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html">USBAudioConfig</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a9820c309e92fee8182ab3f7a12257f09">config</a> () const</td></tr>
+<tr class="memdesc:a9820c309e92fee8182ab3f7a12257f09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the active configuration.  <br /></td></tr>
+<tr class="separator:a9820c309e92fee8182ab3f7a12257f09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac17d9d87adeda9f6383daef2af96f31d" id="r_ac17d9d87adeda9f6383daef2af96f31d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html">USBAudioConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ac17d9d87adeda9f6383daef2af96f31d">defaultConfig</a> (<a class="el" href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">RxTxMode</a> mode=<a class="el" href="group__basic.html#gga8cbd91a8bac9b5ab425112be1620eb49a6f3b87c1abe374d1d1a5fef79bffeb00">RXTX_MODE</a>)</td></tr>
 <tr class="memdesc:ac17d9d87adeda9f6383daef2af96f31d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a default configuration pre-filled for the requested direction (RX_MODE, TX_MODE, or RXTX_MODE). Use TX if you write and rx if you want to read audio data. RXTX is for full duplex.  <br /></td></tr>
 <tr class="separator:ac17d9d87adeda9f6383daef2af96f31d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -229,13 +233,13 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac05edd135cb76c872708c50e117da1d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af0397fb4bd854da45954eb10eea12294" id="r_af0397fb4bd854da45954eb10eea12294"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#af0397fb4bd854da45954eb10eea12294">getTxXferredLast</a> () const</td></tr>
 <tr class="separator:af0397fb4bd854da45954eb10eea12294"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a103c2cf02b0309a51532edc61421ef74" id="r_a103c2cf02b0309a51532edc61421ef74"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a103c2cf02b0309a51532edc61421ef74">isEpInEnabled</a> () const</td></tr>
+<tr class="memitem:a103c2cf02b0309a51532edc61421ef74" id="r_a103c2cf02b0309a51532edc61421ef74"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a103c2cf02b0309a51532edc61421ef74">isEpInEnabled</a> () const</td></tr>
 <tr class="memdesc:a103c2cf02b0309a51532edc61421ef74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the IN endpoint is enabled.  <br /></td></tr>
 <tr class="separator:a103c2cf02b0309a51532edc61421ef74"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaabf277aa571ebafc510066859cc6592" id="r_aaabf277aa571ebafc510066859cc6592"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#aaabf277aa571ebafc510066859cc6592">isEpInFlowControlEnabled</a> () const</td></tr>
 <tr class="memdesc:aaabf277aa571ebafc510066859cc6592"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if IN endpoint flow control is enabled. When on, the per-frame isochronous packet size is varied so non-integer sample-per- frame rates (e.g. 44100 Hz) are delivered at the exact average rate.  <br /></td></tr>
 <tr class="separator:aaabf277aa571ebafc510066859cc6592"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1679f7eb5078538336e1c92e0c274a8" id="r_af1679f7eb5078538336e1c92e0c274a8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#af1679f7eb5078538336e1c92e0c274a8">isEpOutEnabled</a> () const</td></tr>
+<tr class="memitem:af1679f7eb5078538336e1c92e0c274a8" id="r_af1679f7eb5078538336e1c92e0c274a8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#af1679f7eb5078538336e1c92e0c274a8">isEpOutEnabled</a> () const</td></tr>
 <tr class="memdesc:af1679f7eb5078538336e1c92e0c274a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the OUT endpoint is enabled.  <br /></td></tr>
 <tr class="separator:af1679f7eb5078538336e1c92e0c274a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add4e918becccc12af545b59b66b270ec" id="r_add4e918becccc12af545b59b66b270ec"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#add4e918becccc12af545b59b66b270ec">isFeedbackEpEnabled</a> () const</td></tr>
@@ -244,35 +248,34 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a973a198af9a14d6b431dbed8a5e134f0" id="r_a973a198af9a14d6b431dbed8a5e134f0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a973a198af9a14d6b431dbed8a5e134f0">isInterruptEpEnabled</a> () const</td></tr>
 <tr class="memdesc:a973a198af9a14d6b431dbed8a5e134f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the interrupt endpoint is enabled.  <br /></td></tr>
 <tr class="separator:a973a198af9a14d6b431dbed8a5e134f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e9d92e1833b48f0f88fa09f09581cd9" id="r_a1e9d92e1833b48f0f88fa09f09581cd9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a1e9d92e1833b48f0f88fa09f09581cd9">isMute</a> (uint8_t channel=0) const</td></tr>
+<tr class="memitem:a1e9d92e1833b48f0f88fa09f09581cd9" id="r_a1e9d92e1833b48f0f88fa09f09581cd9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a1e9d92e1833b48f0f88fa09f09581cd9">isMute</a> (uint8_t channel=0) const</td></tr>
 <tr class="memdesc:a1e9d92e1833b48f0f88fa09f09581cd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current mute state for the given channel.  <br /></td></tr>
 <tr class="separator:a1e9d92e1833b48f0f88fa09f09581cd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a475bc9908ea8a1d67e5cc1c1f67a71b2" id="r_a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a475bc9908ea8a1d67e5cc1c1f67a71b2">isNotifyActive</a> ()</td></tr>
 <tr class="memdesc:a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> update is active.  <br /></td></tr>
 <tr class="separator:a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae50134c7c58b02f9a94d76b9db4766bf" id="r_ae50134c7c58b02f9a94d76b9db4766bf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ae50134c7c58b02f9a94d76b9db4766bf">isStreamingActive</a> () const</td></tr>
-<tr class="memdesc:ae50134c7c58b02f9a94d76b9db4766bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if either IN or OUT streaming endpoint is open.  <br /></td></tr>
+<tr class="memitem:ae50134c7c58b02f9a94d76b9db4766bf" id="r_ae50134c7c58b02f9a94d76b9db4766bf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#ae50134c7c58b02f9a94d76b9db4766bf">isStreamingActive</a> () const</td></tr>
+<tr class="memdesc:ae50134c7c58b02f9a94d76b9db4766bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if either the TX or RX stream is open.  <br /></td></tr>
 <tr class="separator:ae50134c7c58b02f9a94d76b9db4766bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a62005d79099446759a4f59f027622fc2" id="r_a62005d79099446759a4f59f027622fc2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a62005d79099446759a4f59f027622fc2">isStreamingActiveRx</a> () const</td></tr>
-<tr class="memdesc:a62005d79099446759a4f59f027622fc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the host has opened the OUT (playback) stream.  <br /></td></tr>
-<tr class="separator:a62005d79099446759a4f59f027622fc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a41f107086ba56453f124da3597f3b075" id="r_a41f107086ba56453f124da3597f3b075"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a41f107086ba56453f124da3597f3b075">isStreamingActiveTx</a> () const</td></tr>
-<tr class="memdesc:a41f107086ba56453f124da3597f3b075"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the host has opened the IN (capture) stream.  <br /></td></tr>
-<tr class="separator:a41f107086ba56453f124da3597f3b075"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4f63fe3c25d74bfa3ff042011641b43" id="r_ae4f63fe3c25d74bfa3ff042011641b43"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ae4f63fe3c25d74bfa3ff042011641b43">isStreamingActiveRx</a> () const override</td></tr>
+<tr class="memdesc:ae4f63fe3c25d74bfa3ff042011641b43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the host has opened the OUT (playback) stream.  <br /></td></tr>
+<tr class="separator:ae4f63fe3c25d74bfa3ff042011641b43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f60108706f32f85d09adac8e397f4c8" id="r_a3f60108706f32f85d09adac8e397f4c8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a3f60108706f32f85d09adac8e397f4c8">isStreamingActiveTx</a> () const override</td></tr>
+<tr class="memdesc:a3f60108706f32f85d09adac8e397f4c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the host has opened the IN (capture) stream.  <br /></td></tr>
+<tr class="separator:a3f60108706f32f85d09adac8e397f4c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd39001073724fa5d3a189196a531b5e" id="r_abd39001073724fa5d3a189196a531b5e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#abd39001073724fa5d3a189196a531b5e">isTxXferArmed</a> () const</td></tr>
 <tr class="memdesc:abd39001073724fa5d3a189196a531b5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if the initial isochronous IN transfer was armed successfully.  <br /></td></tr>
 <tr class="separator:abd39001073724fa5d3a189196a531b5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a337436c6bdf6589ad69f10cfa1d7bf9d" id="r_a337436c6bdf6589ad69f10cfa1d7bf9d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a337436c6bdf6589ad69f10cfa1d7bf9d">mounted</a> ()</td></tr>
-<tr class="memdesc:a337436c6bdf6589ad69f10cfa1d7bf9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the device is mounted by the USB host.  <br /></td></tr>
-<tr class="separator:a337436c6bdf6589ad69f10cfa1d7bf9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72955d02eb2bfba0634437a2a382f330" id="r_a72955d02eb2bfba0634437a2a382f330"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a72955d02eb2bfba0634437a2a382f330">mounted</a> () override</td></tr>
+<tr class="memdesc:a72955d02eb2bfba0634437a2a382f330"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the device is mounted by the USB host.  <br /></td></tr>
+<tr class="separator:a72955d02eb2bfba0634437a2a382f330"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9eb35e35f8db9942142922d899a98785" id="r_a9eb35e35f8db9942142922d899a98785"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a9eb35e35f8db9942142922d899a98785">numInterfaces</a> () const</td></tr>
 <tr class="memdesc:a9eb35e35f8db9942142922d899a98785"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total number of USB interfaces claimed by the audio function (1 AC + 1 or 2 AS), for use in the bNumInterfaces field of the configuration descriptor.  <br /></td></tr>
 <tr class="separator:a9eb35e35f8db9942142922d899a98785"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a90622bd78258a36bbcf63426b28307ac" id="r_a90622bd78258a36bbcf63426b28307ac"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a90622bd78258a36bbcf63426b28307ac">operator bool</a> () override</td></tr>
-<tr class="memdesc:a90622bd78258a36bbcf63426b28307ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true when <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a601fb7cf1fc15db50c71a826f084f934" title="(Re-)start the USB audio device with the current config.">begin()</a> has been called and the USB host has mounted the device.  <br /></td></tr>
+<tr class="memitem:a90622bd78258a36bbcf63426b28307ac" id="r_a90622bd78258a36bbcf63426b28307ac"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a90622bd78258a36bbcf63426b28307ac">operator bool</a> () override</td></tr>
 <tr class="separator:a90622bd78258a36bbcf63426b28307ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af3322ed0e24d11005573274c1c1d069d" id="r_af3322ed0e24d11005573274c1c1d069d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#af3322ed0e24d11005573274c1c1d069d">readBytes</a> (uint8_t *buffer, size_t bufsize)</td></tr>
-<tr class="memdesc:af3322ed0e24d11005573274c1c1d069d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receive audio data from the host (host → device, speaker/playback). Until <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a8047bb6432da76f639976f03f85686f9" title="Returns the RX audio buffer. Must be overridden by subclasses.">bufferRx()</a> has filled past config.rx_start_fill_percent at least once after <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a601fb7cf1fc15db50c71a826f084f934" title="(Re-)start the USB audio device with the current config.">begin()</a>, no data is returned. This is a one-shot startup prime only &ndash; once reached, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#af3322ed0e24d11005573274c1c1d069d" title="Receive audio data from the host (host → device, speaker/playback). Until bufferRx() has filled past ...">readBytes()</a> keeps draining normally for the rest of the session and is not gated again by later underruns.  <br /></td></tr>
+<tr class="memitem:af3322ed0e24d11005573274c1c1d069d" id="r_af3322ed0e24d11005573274c1c1d069d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#af3322ed0e24d11005573274c1c1d069d">readBytes</a> (uint8_t *buffer, size_t bufsize)</td></tr>
+<tr class="memdesc:af3322ed0e24d11005573274c1c1d069d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receive audio data from the USB peer. Until <a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a8047bb6432da76f639976f03f85686f9" title="Returns the RX audio buffer. Must be overridden by subclasses.">bufferRx()</a> has filled past config.rx_start_fill_percent at least once after <a class="el" href="classaudio__tools_1_1_base_stream.html#a50f45551c10ca30a0bc7f447e70188b1">begin()</a>, no data is returned. This is a one-shot startup prime only &ndash; once reached, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#af3322ed0e24d11005573274c1c1d069d" title="Receive audio data from the USB peer. Until bufferRx() has filled past config.rx_start_fill_percent a...">readBytes()</a> keeps draining normally for the rest of the session and is not gated again by later underruns.  <br /></td></tr>
 <tr class="separator:af3322ed0e24d11005573274c1c1d069d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36e26f40121eda38b0042dcba026ab82" id="r_a36e26f40121eda38b0042dcba026ab82"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_stream.html#a36e26f40121eda38b0042dcba026ab82">readSilence</a> (uint8_t *buffer, size_t length)</td></tr>
 <tr class="memdesc:a36e26f40121eda38b0042dcba026ab82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Source to generate silence: just sets the buffer to 0.  <br /></td></tr>
@@ -313,11 +316,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4bb8d2ba92ddc02611e2c998b63896fa" id="r_a4bb8d2ba92ddc02611e2c998b63896fa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a4bb8d2ba92ddc02611e2c998b63896fa">setItfCloseEpCallback</a> (std::function&lt; bool(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *, uint8_t, <a class="el" href="structaudio__tools_1_1_usb_setup_packet.html">UsbSetupPacket</a> const &amp;)&gt; cb)</td></tr>
 <tr class="memdesc:a4bb8d2ba92ddc02611e2c998b63896fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback for interface close endpoint events.  <br /></td></tr>
 <tr class="separator:a4bb8d2ba92ddc02611e2c998b63896fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa6fc2ad487355e07ecae9c5d2aff70d" id="r_afa6fc2ad487355e07ecae9c5d2aff70d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#afa6fc2ad487355e07ecae9c5d2aff70d">setMute</a> (bool m, uint8_t channel=0)</td></tr>
-<tr class="memdesc:afa6fc2ad487355e07ecae9c5d2aff70d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the mute state for a channel and notify the host.  <br /></td></tr>
+<tr class="memitem:afa6fc2ad487355e07ecae9c5d2aff70d" id="r_afa6fc2ad487355e07ecae9c5d2aff70d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#afa6fc2ad487355e07ecae9c5d2aff70d">setMute</a> (bool m, uint8_t channel=0)</td></tr>
+<tr class="memdesc:afa6fc2ad487355e07ecae9c5d2aff70d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the mute state for a channel and notify the USB peer.  <br /></td></tr>
 <tr class="separator:afa6fc2ad487355e07ecae9c5d2aff70d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8005c19732ff2198d21c2e205810729f" id="r_a8005c19732ff2198d21c2e205810729f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a8005c19732ff2198d21c2e205810729f">setMuteCallback</a> (std::function&lt; void(bool, uint8_t)&gt; cb)</td></tr>
-<tr class="memdesc:a8005c19732ff2198d21c2e205810729f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback invoked when the host (or device) changes the mute state.  <br /></td></tr>
+<tr class="memitem:a8005c19732ff2198d21c2e205810729f" id="r_a8005c19732ff2198d21c2e205810729f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a8005c19732ff2198d21c2e205810729f">setMuteCallback</a> (std::function&lt; void(bool, uint8_t)&gt; cb)</td></tr>
+<tr class="memdesc:a8005c19732ff2198d21c2e205810729f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback invoked when the mute state changes.  <br /></td></tr>
 <tr class="separator:a8005c19732ff2198d21c2e205810729f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a909f118906f9cf7024baae224dcd90a7" id="r_a909f118906f9cf7024baae224dcd90a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a909f118906f9cf7024baae224dcd90a7">setNotifyActive</a> (bool flag)</td></tr>
 <tr class="memdesc:a909f118906f9cf7024baae224dcd90a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivate/Reactivate automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> updates: (default is active)  <br /></td></tr>
@@ -337,11 +340,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a06623665db8a9023cda13dadfd8572ae" id="r_a06623665db8a9023cda13dadfd8572ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a06623665db8a9023cda13dadfd8572ae">setRxDoneCallback</a> (std::function&lt; bool(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *, uint8_t, <a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *, uint16_t)&gt; cb)</td></tr>
 <tr class="memdesc:a06623665db8a9023cda13dadfd8572ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback for RX done events.  <br /></td></tr>
 <tr class="separator:a06623665db8a9023cda13dadfd8572ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abea96ff21e0994267e6200114726b1e8" id="r_abea96ff21e0994267e6200114726b1e8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#abea96ff21e0994267e6200114726b1e8">setSampleRateCallback</a> (std::function&lt; void(uint32_t)&gt; cb)</td></tr>
-<tr class="memdesc:abea96ff21e0994267e6200114726b1e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback invoked when the host (or device) changes the sample rate.  <br /></td></tr>
+<tr class="memitem:abea96ff21e0994267e6200114726b1e8" id="r_abea96ff21e0994267e6200114726b1e8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#abea96ff21e0994267e6200114726b1e8">setSampleRateCallback</a> (std::function&lt; void(uint32_t)&gt; cb)</td></tr>
+<tr class="memdesc:abea96ff21e0994267e6200114726b1e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback invoked when the sample rate changes.  <br /></td></tr>
 <tr class="separator:abea96ff21e0994267e6200114726b1e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae857f5cea73a9723dbd7e313336bebb6" id="r_ae857f5cea73a9723dbd7e313336bebb6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ae857f5cea73a9723dbd7e313336bebb6">setStreamingStateCallback</a> (std::function&lt; void(bool, bool)&gt; cb)</td></tr>
-<tr class="memdesc:ae857f5cea73a9723dbd7e313336bebb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback invoked when the streaming state changes. Fires when the host opens or closes a streaming interface (SET_INTERFACE alt=1 / alt=0).  <br /></td></tr>
+<tr class="memitem:ae857f5cea73a9723dbd7e313336bebb6" id="r_ae857f5cea73a9723dbd7e313336bebb6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#ae857f5cea73a9723dbd7e313336bebb6">setStreamingStateCallback</a> (std::function&lt; void(bool, bool)&gt; cb)</td></tr>
+<tr class="memdesc:ae857f5cea73a9723dbd7e313336bebb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback invoked when the streaming state changes (a streaming interface was opened or closed).  <br /></td></tr>
 <tr class="separator:ae857f5cea73a9723dbd7e313336bebb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8529d82dae52df6888973bec98918854" id="r_a8529d82dae52df6888973bec98918854"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a8529d82dae52df6888973bec98918854">setTudAudioSetItfCallback</a> (std::function&lt; bool(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *, uint8_t, <a class="el" href="structaudio__tools_1_1_usb_setup_packet.html">UsbSetupPacket</a> const &amp;)&gt; cb)</td></tr>
 <tr class="memdesc:a8529d82dae52df6888973bec98918854"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback for interface set requests.  <br /></td></tr>
@@ -349,25 +352,25 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3ed0740aecb84680d34fb1413de32de5" id="r_a3ed0740aecb84680d34fb1413de32de5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a3ed0740aecb84680d34fb1413de32de5">setTxDoneCallback</a> (std::function&lt; bool(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *, uint8_t, <a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *, uint16_t)&gt; cb)</td></tr>
 <tr class="memdesc:a3ed0740aecb84680d34fb1413de32de5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback for TX done events.  <br /></td></tr>
 <tr class="separator:a3ed0740aecb84680d34fb1413de32de5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a06899a7fdf8e4af457f149591b9f350f" id="r_a06899a7fdf8e4af457f149591b9f350f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a06899a7fdf8e4af457f149591b9f350f">setVolume</a> (float vol, uint8_t channel)</td></tr>
-<tr class="memdesc:a06899a7fdf8e4af457f149591b9f350f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the volume for a channel and notify the host.  <br /></td></tr>
+<tr class="memitem:a06899a7fdf8e4af457f149591b9f350f" id="r_a06899a7fdf8e4af457f149591b9f350f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a06899a7fdf8e4af457f149591b9f350f">setVolume</a> (float vol, uint8_t channel)</td></tr>
+<tr class="memdesc:a06899a7fdf8e4af457f149591b9f350f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the volume for a channel and notify the USB peer.  <br /></td></tr>
 <tr class="separator:a06899a7fdf8e4af457f149591b9f350f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a645f14b9b646688d8e8c03f193ab0cf3" id="r_a645f14b9b646688d8e8c03f193ab0cf3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a645f14b9b646688d8e8c03f193ab0cf3">setVolume</a> (float <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a75896c16336462449610b256c8313b4c">volume</a>) override</td></tr>
+<tr class="memitem:a645f14b9b646688d8e8c03f193ab0cf3" id="r_a645f14b9b646688d8e8c03f193ab0cf3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a645f14b9b646688d8e8c03f193ab0cf3">setVolume</a> (float <a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a75896c16336462449610b256c8313b4c">volume</a>) override</td></tr>
 <tr class="memdesc:a645f14b9b646688d8e8c03f193ab0cf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the volume for the master channel (channel 0)  <br /></td></tr>
 <tr class="separator:a645f14b9b646688d8e8c03f193ab0cf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a16ffbd946bb4f5b09c7ef10ba63186cc" id="r_a16ffbd946bb4f5b09c7ef10ba63186cc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a16ffbd946bb4f5b09c7ef10ba63186cc">setVolumeCallback</a> (std::function&lt; void(float, uint8_t)&gt; cb)</td></tr>
-<tr class="memdesc:a16ffbd946bb4f5b09c7ef10ba63186cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback invoked when the host (or device) changes the volume.  <br /></td></tr>
+<tr class="memitem:a16ffbd946bb4f5b09c7ef10ba63186cc" id="r_a16ffbd946bb4f5b09c7ef10ba63186cc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a16ffbd946bb4f5b09c7ef10ba63186cc">setVolumeCallback</a> (std::function&lt; void(float, uint8_t)&gt; cb)</td></tr>
+<tr class="memdesc:a16ffbd946bb4f5b09c7ef10ba63186cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback invoked when the volume changes.  <br /></td></tr>
 <tr class="separator:a16ffbd946bb4f5b09c7ef10ba63186cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adad22dd23fc48a3b338eafe707439deb" id="r_adad22dd23fc48a3b338eafe707439deb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#adad22dd23fc48a3b338eafe707439deb">setWriteBufferSize</a> (int size)</td></tr>
 <tr class="separator:adad22dd23fc48a3b338eafe707439deb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75896c16336462449610b256c8313b4c" id="r_a75896c16336462449610b256c8313b4c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a75896c16336462449610b256c8313b4c">volume</a> () override</td></tr>
+<tr class="memitem:a75896c16336462449610b256c8313b4c" id="r_a75896c16336462449610b256c8313b4c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a75896c16336462449610b256c8313b4c">volume</a> () override</td></tr>
 <tr class="memdesc:a75896c16336462449610b256c8313b4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">gets the volume for the master channel (channel 0)  <br /></td></tr>
 <tr class="separator:a75896c16336462449610b256c8313b4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3fc0d56e95c46e4267f7879772cdea02" id="r_a3fc0d56e95c46e4267f7879772cdea02"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a3fc0d56e95c46e4267f7879772cdea02">volume</a> (uint8_t channel)</td></tr>
+<tr class="memitem:a3fc0d56e95c46e4267f7879772cdea02" id="r_a3fc0d56e95c46e4267f7879772cdea02"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a3fc0d56e95c46e4267f7879772cdea02">volume</a> (uint8_t channel)</td></tr>
 <tr class="memdesc:a3fc0d56e95c46e4267f7879772cdea02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current volume for the given channel.  <br /></td></tr>
 <tr class="separator:a3fc0d56e95c46e4267f7879772cdea02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd7270e10d851383ff7b53c1241f6ba1" id="r_afd7270e10d851383ff7b53c1241f6ba1"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#afd7270e10d851383ff7b53c1241f6ba1">write</a> (const uint8_t *data, size_t len)</td></tr>
-<tr class="memdesc:afd7270e10d851383ff7b53c1241f6ba1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send audio data to the host (device → host, microphone/capture). Silently discards data when the host has not opened the capture device (alt=0) so StreamCopy doesn't report write errors before recording.  <br /></td></tr>
+<tr class="memitem:afd7270e10d851383ff7b53c1241f6ba1" id="r_afd7270e10d851383ff7b53c1241f6ba1"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#afd7270e10d851383ff7b53c1241f6ba1">write</a> (const uint8_t *data, size_t len)</td></tr>
+<tr class="memdesc:afd7270e10d851383ff7b53c1241f6ba1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send audio data to the USB peer. Silently discards data while the TX stream is not open so StreamCopy doesn't report write errors before streaming starts.  <br /></td></tr>
 <tr class="separator:afd7270e10d851383ff7b53c1241f6ba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adffba128cba62b029746648f6946945c" id="r_adffba128cba62b029746648f6946945c"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#adffba128cba62b029746648f6946945c">write</a> (uint8_t ch) override</td></tr>
 <tr class="separator:adffba128cba62b029746648f6946945c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -425,13 +428,13 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:ac77fd21062a0885dec2c83d3d78df9b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37501fb3f041d66d4f0d5d794680ad7f" id="r_a37501fb3f041d66d4f0d5d794680ad7f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a37501fb3f041d66d4f0d5d794680ad7f">closeEpOut</a> (uint8_t rhport, <a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *audio, uint8_t itf, <a class="el" href="structaudio__tools_1_1_usb_setup_packet.html">UsbSetupPacket</a> const &amp;p_request)</td></tr>
 <tr class="separator:a37501fb3f041d66d4f0d5d794680ad7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af2e6a62036e962ab8be4d37483df2624" id="r_af2e6a62036e962ab8be4d37483df2624"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#af2e6a62036e962ab8be4d37483df2624">configChanged</a> (const <a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html">USBAudioConfig</a> &amp;n)</td></tr>
+<tr class="memitem:af2e6a62036e962ab8be4d37483df2624" id="r_af2e6a62036e962ab8be4d37483df2624"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#af2e6a62036e962ab8be4d37483df2624">configChanged</a> (const <a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html">USBAudioConfig</a> &amp;n)</td></tr>
 <tr class="separator:af2e6a62036e962ab8be4d37483df2624"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aefa729de13c32df99838cbb47fb09f90" id="r_aefa729de13c32df99838cbb47fb09f90"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#aefa729de13c32df99838cbb47fb09f90">getCtrlBufSz</a> (uint8_t fn) const</td></tr>
 <tr class="separator:aefa729de13c32df99838cbb47fb09f90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48308719e92033be1b769fb46db7fa9b" id="r_a48308719e92033be1b769fb46db7fa9b"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a48308719e92033be1b769fb46db7fa9b">getDescLen</a> (uint8_t fn) const</td></tr>
 <tr class="separator:a48308719e92033be1b769fb46db7fa9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade6e5a883b7c75646501557f195d9d4c" id="r_ade6e5a883b7c75646501557f195d9d4c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ade6e5a883b7c75646501557f195d9d4c">getVolumeExt</a> (uint8_t channel) const</td></tr>
+<tr class="memitem:ade6e5a883b7c75646501557f195d9d4c" id="r_ade6e5a883b7c75646501557f195d9d4c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#ade6e5a883b7c75646501557f195d9d4c">getVolumeExt</a> (uint8_t channel) const</td></tr>
 <tr class="memdesc:ade6e5a883b7c75646501557f195d9d4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the effective volume for a per-channel index (1-based). Combines master volume (index 0) with per-channel volume and mute.  <br /></td></tr>
 <tr class="separator:ade6e5a883b7c75646501557f195d9d4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5bc6b84af2b55411b5146fb3c6baa02f" id="r_a5bc6b84af2b55411b5146fb3c6baa02f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a5bc6b84af2b55411b5146fb3c6baa02f">handleClockSourceGet</a> (uint8_t rhport, <a class="el" href="structaudio__tools_1_1_usb_setup_packet.html">UsbSetupPacket</a> const &amp;p_request, uint8_t *cb)</td></tr>
@@ -451,8 +454,14 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:afc00b141650b11fe19d4c7055d96a075"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a9a665a387a8c4fbf7fed14bbbfc093" id="r_a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a6a9a665a387a8c4fbf7fed14bbbfc093">notifyAudioChange</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> <a class="el" href="classaudio__tools_1_1_audio_stream.html#a47385aa19435f5fca9d3083a748258c5">info</a>)</td></tr>
 <tr class="separator:a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb898b982d216195ee8e9af56ab27069" id="r_aeb898b982d216195ee8e9af56ab27069"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#aeb898b982d216195ee8e9af56ab27069">notifyStreamingState</a> ()</td></tr>
+<tr class="memitem:aeb898b982d216195ee8e9af56ab27069" id="r_aeb898b982d216195ee8e9af56ab27069"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#aeb898b982d216195ee8e9af56ab27069">notifyStreamingState</a> ()</td></tr>
 <tr class="separator:aeb898b982d216195ee8e9af56ab27069"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a542e85c1d0c595e16f640744c97d1b7c" id="r_a542e85c1d0c595e16f640744c97d1b7c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a542e85c1d0c595e16f640744c97d1b7c">onMuteChanged</a> (uint8_t channel) override</td></tr>
+<tr class="memdesc:a542e85c1d0c595e16f640744c97d1b7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notify the host about a device-initiated mute change.  <br /></td></tr>
+<tr class="separator:a542e85c1d0c595e16f640744c97d1b7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a9bd71f20fceefbeb20dfeed9d5676e" id="r_a1a9bd71f20fceefbeb20dfeed9d5676e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a1a9bd71f20fceefbeb20dfeed9d5676e">onVolumeChanged</a> (uint8_t channel) override</td></tr>
+<tr class="memdesc:a1a9bd71f20fceefbeb20dfeed9d5676e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notify the host about a device-initiated volume change.  <br /></td></tr>
+<tr class="separator:a1a9bd71f20fceefbeb20dfeed9d5676e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95daf4131e3094b526bb2576d7313470" id="r_a95daf4131e3094b526bb2576d7313470"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a95daf4131e3094b526bb2576d7313470">openEndpointsForAltSetting</a> (uint8_t rhport, <a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *audio, uint8_t func_id, uint8_t itf, uint8_t alt)</td></tr>
 <tr class="separator:a95daf4131e3094b526bb2576d7313470"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae05c4c788711f8acd4ce0b292f967e9e" id="r_ae05c4c788711f8acd4ce0b292f967e9e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ae05c4c788711f8acd4ce0b292f967e9e">openEpFeedback</a> (<a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *audio, const <a class="el" href="structaudio__tools_1_1_usb_endpoint_descriptor_view.html">UsbEndpointDescriptorView</a> &amp;desc_ep)</td></tr>
@@ -464,9 +473,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:add33aa23a935c1ab5b815699f0813fd1" id="r_add33aa23a935c1ab5b815699f0813fd1"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#add33aa23a935c1ab5b815699f0813fd1">packetSize</a> () const</td></tr>
 <tr class="separator:add33aa23a935c1ab5b815699f0813fd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5f15532fb13f56f24ea85b864172de7" id="r_af5f15532fb13f56f24ea85b864172de7"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:af5f15532fb13f56f24ea85b864172de7"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#af5f15532fb13f56f24ea85b864172de7">processVolume</a> (T *data, size_t sample_count)</td></tr>
+<tr class="memitem:af5f15532fb13f56f24ea85b864172de7"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#af5f15532fb13f56f24ea85b864172de7">processVolume</a> (T *data, size_t sample_count)</td></tr>
 <tr class="separator:af5f15532fb13f56f24ea85b864172de7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8940a734d138ca963555baa3dc0a50df" id="r_a8940a734d138ca963555baa3dc0a50df"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a8940a734d138ca963555baa3dc0a50df">processVolume</a> (uint8_t *data, size_t len)</td></tr>
+<tr class="memitem:a8940a734d138ca963555baa3dc0a50df" id="r_a8940a734d138ca963555baa3dc0a50df"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a8940a734d138ca963555baa3dc0a50df">processVolume</a> (uint8_t *data, size_t len)</td></tr>
 <tr class="memdesc:a8940a734d138ca963555baa3dc0a50df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process audio data for volume control.  <br /></td></tr>
 <tr class="separator:a8940a734d138ca963555baa3dc0a50df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5caf99a24686511722c4c9f94c4ec52e" id="r_a5caf99a24686511722c4c9f94c4ec52e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#a5caf99a24686511722c4c9f94c4ec52e">refillReadBuffer</a> ()</td></tr>
@@ -478,7 +487,7 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a7422464f7c5c388caad12d04d0e7f7a5" id="r_a7422464f7c5c388caad12d04d0e7f7a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a7422464f7c5c388caad12d04d0e7f7a5">sendInterruptNotification</a> (uint8_t ctrlSel, uint8_t channel, uint8_t entityID)</td></tr>
 <tr class="memdesc:a7422464f7c5c388caad12d04d0e7f7a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send a UAC2 status/change notification via the AC interrupt EP.  <br /></td></tr>
 <tr class="separator:a7422464f7c5c388caad12d04d0e7f7a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a27be07e636d9943c083f6bf6c8ea90" id="r_a4a27be07e636d9943c083f6bf6c8ea90"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a4a27be07e636d9943c083f6bf6c8ea90">setConfig</a> (const <a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html">USBAudioConfig</a> &amp;cfg)</td></tr>
+<tr class="memitem:a4a27be07e636d9943c083f6bf6c8ea90" id="r_a4a27be07e636d9943c083f6bf6c8ea90"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a4a27be07e636d9943c083f6bf6c8ea90">setConfig</a> (const <a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html">USBAudioConfig</a> &amp;cfg)</td></tr>
 <tr class="memdesc:a4a27be07e636d9943c083f6bf6c8ea90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the USB audio configuration (use begin(cfg) instead).  <br /></td></tr>
 <tr class="separator:a4a27be07e636d9943c083f6bf6c8ea90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a90098821bb0105222929a731ca7765ef" id="r_a90098821bb0105222929a731ca7765ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a90098821bb0105222929a731ca7765ef">setSampleRate</a> (uint32_t rate)</td></tr>
@@ -486,23 +495,26 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a90098821bb0105222929a731ca7765ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6315270bcee7537ad32ce3a40aeadbb" id="r_ac6315270bcee7537ad32ce3a40aeadbb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ac6315270bcee7537ad32ce3a40aeadbb">setupFeedback</a> (<a class="el" href="structaudio__tools_1_1_u_s_b_audio_device_base_1_1audiod__function__t.html">audiod_function_t</a> *audio, uint8_t func_id, uint8_t alt)</td></tr>
 <tr class="separator:ac6315270bcee7537ad32ce3a40aeadbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73238577487b3a28599ffacf3d9907af" id="r_a73238577487b3a28599ffacf3d9907af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a73238577487b3a28599ffacf3d9907af">setupVolumeState</a> ()</td></tr>
+<tr class="memdesc:a73238577487b3a28599ffacf3d9907af"><td class="mdescLeft">&#160;</td><td class="mdescRight">(Re)sizes the volume and mute state: master (index 0) + one per channel  <br /></td></tr>
+<tr class="separator:a73238577487b3a28599ffacf3d9907af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9059ba63118400ad647d45f7cc034069" id="r_a9059ba63118400ad647d45f7cc034069"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a9059ba63118400ad647d45f7cc034069">tud_audio_feedback_interval_isr</a> (uint8_t func_id, uint32_t, uint8_t frame_shift)</td></tr>
 <tr class="separator:a9059ba63118400ad647d45f7cc034069"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
-<tr class="memitem:a2c5985b81ca9b8bf4cd58b48dc22655f" id="r_a2c5985b81ca9b8bf4cd58b48dc22655f"><td class="memItemLeft" align="right" valign="top">static int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a2c5985b81ca9b8bf4cd58b48dc22655f">floatToUac2</a> (float vol)</td></tr>
+<tr class="memitem:a2c5985b81ca9b8bf4cd58b48dc22655f" id="r_a2c5985b81ca9b8bf4cd58b48dc22655f"><td class="memItemLeft" align="right" valign="top">static int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a2c5985b81ca9b8bf4cd58b48dc22655f">floatToUac2</a> (float vol)</td></tr>
 <tr class="memdesc:a2c5985b81ca9b8bf4cd58b48dc22655f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert linear volume (0.0–1.0) to UAC2 int16 (1/256 dB). Linear mapping: 0.0 → -100 dB (min), 1.0 → 0 dB (max).  <br /></td></tr>
 <tr class="separator:a2c5985b81ca9b8bf4cd58b48dc22655f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f778894536e5dcb0bd864e8626f4d33" id="r_a8f778894536e5dcb0bd864e8626f4d33"><td class="memItemLeft" align="right" valign="top">static constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a8f778894536e5dcb0bd864e8626f4d33">getResetSize</a> ()</td></tr>
 <tr class="separator:a8f778894536e5dcb0bd864e8626f4d33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af41146f4402897303c595a5baaa2e1a5" id="r_af41146f4402897303c595a5baaa2e1a5"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#af41146f4402897303c595a5baaa2e1a5">isPowerOfTwo</a> (uint32_t value)</td></tr>
 <tr class="separator:af41146f4402897303c595a5baaa2e1a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77ebf0b2134f23c96a6239f0aa590da6" id="r_a77ebf0b2134f23c96a6239f0aa590da6"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a77ebf0b2134f23c96a6239f0aa590da6">isValidBitsPerSample</a> (uint8_t bps)</td></tr>
+<tr class="memitem:a77ebf0b2134f23c96a6239f0aa590da6" id="r_a77ebf0b2134f23c96a6239f0aa590da6"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a77ebf0b2134f23c96a6239f0aa590da6">isValidBitsPerSample</a> (uint8_t bps)</td></tr>
 <tr class="separator:a77ebf0b2134f23c96a6239f0aa590da6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aebbf8b5fb8abe8212b2c197f39ed90e7" id="r_aebbf8b5fb8abe8212b2c197f39ed90e7"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#aebbf8b5fb8abe8212b2c197f39ed90e7">log2Floor</a> (uint32_t value)</td></tr>
 <tr class="separator:aebbf8b5fb8abe8212b2c197f39ed90e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a933d531b84a91b4a11bd8d8cf6fb9b2a" id="r_a933d531b84a91b4a11bd8d8cf6fb9b2a"><td class="memItemLeft" align="right" valign="top">static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a933d531b84a91b4a11bd8d8cf6fb9b2a">uac2ToFloat</a> (int16_t v)</td></tr>
+<tr class="memitem:a933d531b84a91b4a11bd8d8cf6fb9b2a" id="r_a933d531b84a91b4a11bd8d8cf6fb9b2a"><td class="memItemLeft" align="right" valign="top">static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a933d531b84a91b4a11bd8d8cf6fb9b2a">uac2ToFloat</a> (int16_t v)</td></tr>
 <tr class="memdesc:a933d531b84a91b4a11bd8d8cf6fb9b2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert UAC2 int16 (1/256 dB) to linear volume (0.0–1.0). Linear mapping within the -100..0 dB range reported by GET_RANGE.  <br /></td></tr>
 <tr class="separator:a933d531b84a91b4a11bd8d8cf6fb9b2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -522,15 +534,15 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a745c116c11377c1b284f6567d8d6648b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a264972de087b2253024d91f9da160277" id="r_a264972de087b2253024d91f9da160277"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_ring_buffer_s_p_s_c.html">RingBufferSPSC</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_renesas.html#a264972de087b2253024d91f9da160277">buffer_tx_</a></td></tr>
 <tr class="separator:a264972de087b2253024d91f9da160277"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48e2afc8051a00f8a5a1eb034c4161fe" id="r_a48e2afc8051a00f8a5a1eb034c4161fe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html">USBAudioConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a48e2afc8051a00f8a5a1eb034c4161fe">config_</a></td></tr>
+<tr class="memitem:a48e2afc8051a00f8a5a1eb034c4161fe" id="r_a48e2afc8051a00f8a5a1eb034c4161fe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html">USBAudioConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a48e2afc8051a00f8a5a1eb034c4161fe">config_</a></td></tr>
 <tr class="separator:a48e2afc8051a00f8a5a1eb034c4161fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18da1e1fddf1ac92da74aecf88ab2b2e" id="r_a18da1e1fddf1ac92da74aecf88ab2b2e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a18da1e1fddf1ac92da74aecf88ab2b2e">core</a> = -1</td></tr>
+<tr class="memitem:a18da1e1fddf1ac92da74aecf88ab2b2e" id="r_a18da1e1fddf1ac92da74aecf88ab2b2e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a18da1e1fddf1ac92da74aecf88ab2b2e">core</a> = -1</td></tr>
 <tr class="separator:a18da1e1fddf1ac92da74aecf88ab2b2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7de68334055feefe8ab9a6d41c81a12" id="r_ad7de68334055feefe8ab9a6d41c81a12"><td class="memItemLeft" align="right" valign="top">std::vector&lt; uint16_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ad7de68334055feefe8ab9a6d41c81a12">ctrl_buf_sz_</a></td></tr>
 <tr class="separator:ad7de68334055feefe8ab9a6d41c81a12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6c2c7be8affac381b81ab93749f3847" id="r_aa6c2c7be8affac381b81ab93749f3847"><td class="memItemLeft" align="right" valign="top">std::vector&lt; uint16_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#aa6c2c7be8affac381b81ab93749f3847">desc_len_</a></td></tr>
 <tr class="separator:aa6c2c7be8affac381b81ab93749f3847"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afdce0ada78d12cd6fca3b3a3b33a66f4" id="r_afdce0ada78d12cd6fca3b3a3b33a66f4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html">USBAudio2DescriptorBuilder</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#afdce0ada78d12cd6fca3b3a3b33a66f4">descr_builder</a> {<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a48e2afc8051a00f8a5a1eb034c4161fe">config_</a>}</td></tr>
+<tr class="memitem:afdce0ada78d12cd6fca3b3a3b33a66f4" id="r_afdce0ada78d12cd6fca3b3a3b33a66f4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html">USBAudio2DescriptorBuilder</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#afdce0ada78d12cd6fca3b3a3b33a66f4">descr_builder</a> {<a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a48e2afc8051a00f8a5a1eb034c4161fe">config_</a>}</td></tr>
 <tr class="separator:afdce0ada78d12cd6fca3b3a3b33a66f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a307dacfd6ee05739d0bfa9d95f24df97" id="r_a307dacfd6ee05739d0bfa9d95f24df97"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *, uint8_t func_id)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a307dacfd6ee05739d0bfa9d95f24df97">fb_done_cb_</a></td></tr>
 <tr class="separator:a307dacfd6ee05739d0bfa9d95f24df97"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -544,17 +556,17 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:adb2c01b6f629078fa20141387b500204"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae35e4ab6161805aac7d031a5f6aa75d7" id="r_ae35e4ab6161805aac7d031a5f6aa75d7"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ae35e4ab6161805aac7d031a5f6aa75d7">int_notify_buf_</a> [6] = {}</td></tr>
 <tr class="separator:ae35e4ab6161805aac7d031a5f6aa75d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6eaf1abc6903a9ffe52dbde4383a69f1" id="r_a6eaf1abc6903a9ffe52dbde4383a69f1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a6eaf1abc6903a9ffe52dbde4383a69f1">is_active_</a> = false</td></tr>
+<tr class="memitem:a6eaf1abc6903a9ffe52dbde4383a69f1" id="r_a6eaf1abc6903a9ffe52dbde4383a69f1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a6eaf1abc6903a9ffe52dbde4383a69f1">is_active_</a> = false</td></tr>
 <tr class="separator:a6eaf1abc6903a9ffe52dbde4383a69f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeaba7fcedcb403536c79ee7f04de17fc" id="r_aeaba7fcedcb403536c79ee7f04de17fc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#aeaba7fcedcb403536c79ee7f04de17fc">is_notify_active</a> = true</td></tr>
 <tr class="separator:aeaba7fcedcb403536c79ee7f04de17fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e18d28a0288bba814dc64117bdb49c0" id="r_a4e18d28a0288bba814dc64117bdb49c0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a4e18d28a0288bba814dc64117bdb49c0">is_started_</a> = false</td></tr>
+<tr class="memitem:a4e18d28a0288bba814dc64117bdb49c0" id="r_a4e18d28a0288bba814dc64117bdb49c0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a4e18d28a0288bba814dc64117bdb49c0">is_started_</a> = false</td></tr>
 <tr class="separator:a4e18d28a0288bba814dc64117bdb49c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47825321e0c526ee5a8fda20218a0a0b" id="r_a47825321e0c526ee5a8fda20218a0a0b"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a47825321e0c526ee5a8fda20218a0a0b">manual_feedback_percent_</a> = -1</td></tr>
 <tr class="separator:a47825321e0c526ee5a8fda20218a0a0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae136a173bb9342d1d6cbf4f05f45fcf5" id="r_ae136a173bb9342d1d6cbf4f05f45fcf5"><td class="memItemLeft" align="right" valign="top">std::vector&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ae136a173bb9342d1d6cbf4f05f45fcf5">mute_</a></td></tr>
+<tr class="memitem:ae136a173bb9342d1d6cbf4f05f45fcf5" id="r_ae136a173bb9342d1d6cbf4f05f45fcf5"><td class="memItemLeft" align="right" valign="top">std::vector&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#ae136a173bb9342d1d6cbf4f05f45fcf5">mute_</a></td></tr>
 <tr class="separator:ae136a173bb9342d1d6cbf4f05f45fcf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91dec16c42fe8851cc86ed09af593f1d" id="r_a91dec16c42fe8851cc86ed09af593f1d"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(bool, uint8_t)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a91dec16c42fe8851cc86ed09af593f1d">mute_cb_</a></td></tr>
+<tr class="memitem:a91dec16c42fe8851cc86ed09af593f1d" id="r_a91dec16c42fe8851cc86ed09af593f1d"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(bool, uint8_t)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a91dec16c42fe8851cc86ed09af593f1d">mute_cb_</a></td></tr>
 <tr class="separator:a91dec16c42fe8851cc86ed09af593f1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad35c4e2ef458c36e8d36676958cc9cd3" id="r_ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#ad35c4e2ef458c36e8d36676958cc9cd3">notify_vector</a></td></tr>
 <tr class="separator:ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -564,13 +576,13 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:aaa44e7a21843b0ada7f033f10a77f766"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83f536376c6b0d270a088a83511013b7" id="r_a83f536376c6b0d270a088a83511013b7"><td class="memItemLeft" align="right" valign="top">volatile uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a83f536376c6b0d270a088a83511013b7">rx_dropped_bytes_</a> = 0</td></tr>
 <tr class="separator:a83f536376c6b0d270a088a83511013b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a0da3d1e6d01a48890a48c75cf06480" id="r_a5a0da3d1e6d01a48890a48c75cf06480"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a5a0da3d1e6d01a48890a48c75cf06480">rx_primed_</a> = false</td></tr>
+<tr class="memitem:a5a0da3d1e6d01a48890a48c75cf06480" id="r_a5a0da3d1e6d01a48890a48c75cf06480"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a5a0da3d1e6d01a48890a48c75cf06480">rx_primed_</a> = false</td></tr>
 <tr class="separator:a5a0da3d1e6d01a48890a48c75cf06480"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5288bf9051a52c39a999fa8dfaf6ac1a" id="r_a5288bf9051a52c39a999fa8dfaf6ac1a"><td class="memItemLeft" align="right" valign="top">volatile uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a5288bf9051a52c39a999fa8dfaf6ac1a">rx_total_bytes_</a> = 0</td></tr>
 <tr class="separator:a5288bf9051a52c39a999fa8dfaf6ac1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a855651f86cae3504db41a3e3632f978e" id="r_a855651f86cae3504db41a3e3632f978e"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(uint32_t)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a855651f86cae3504db41a3e3632f978e">sample_rate_cb_</a></td></tr>
+<tr class="memitem:a855651f86cae3504db41a3e3632f978e" id="r_a855651f86cae3504db41a3e3632f978e"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(uint32_t)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a855651f86cae3504db41a3e3632f978e">sample_rate_cb_</a></td></tr>
 <tr class="separator:a855651f86cae3504db41a3e3632f978e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7090abde622b6d6ab3dd5963b3d25ba1" id="r_a7090abde622b6d6ab3dd5963b3d25ba1"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(bool, bool)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a7090abde622b6d6ab3dd5963b3d25ba1">streaming_state_cb_</a></td></tr>
+<tr class="memitem:a7090abde622b6d6ab3dd5963b3d25ba1" id="r_a7090abde622b6d6ab3dd5963b3d25ba1"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(bool, bool)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a7090abde622b6d6ab3dd5963b3d25ba1">streaming_state_cb_</a></td></tr>
 <tr class="separator:a7090abde622b6d6ab3dd5963b3d25ba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf64bd29ec689f2d7574efbb63f440bb" id="r_adf64bd29ec689f2d7574efbb63f440bb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#adf64bd29ec689f2d7574efbb63f440bb">tmp_in</a> {0}</td></tr>
 <tr class="separator:adf64bd29ec689f2d7574efbb63f440bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -600,11 +612,11 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a560e48d81bc8e7bc02252f5c3a02a84b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad69c4bafe5ef55641fc67c8c212bbdca" id="r_ad69c4bafe5ef55641fc67c8c212bbdca"><td class="memItemLeft" align="right" valign="top">volatile uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#ad69c4bafe5ef55641fc67c8c212bbdca">tx_xferred_last_</a> = 0</td></tr>
 <tr class="separator:ad69c4bafe5ef55641fc67c8c212bbdca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a558c5e9e276ba28c5fd4190a3b663efa" id="r_a558c5e9e276ba28c5fd4190a3b663efa"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a558c5e9e276ba28c5fd4190a3b663efa">usb_task_active_</a> = false</td></tr>
+<tr class="memitem:a558c5e9e276ba28c5fd4190a3b663efa" id="r_a558c5e9e276ba28c5fd4190a3b663efa"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a558c5e9e276ba28c5fd4190a3b663efa">usb_task_active_</a> = false</td></tr>
 <tr class="separator:a558c5e9e276ba28c5fd4190a3b663efa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d49e90afa25560b9a6c315b94b76f19" id="r_a0d49e90afa25560b9a6c315b94b76f19"><td class="memItemLeft" align="right" valign="top">std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a0d49e90afa25560b9a6c315b94b76f19">volume_</a></td></tr>
+<tr class="memitem:a0d49e90afa25560b9a6c315b94b76f19" id="r_a0d49e90afa25560b9a6c315b94b76f19"><td class="memItemLeft" align="right" valign="top">std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a0d49e90afa25560b9a6c315b94b76f19">volume_</a></td></tr>
 <tr class="separator:a0d49e90afa25560b9a6c315b94b76f19"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0060b5b523cea292a08f07a64aaf71fe" id="r_a0060b5b523cea292a08f07a64aaf71fe"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(float, uint8_t)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a0060b5b523cea292a08f07a64aaf71fe">volume_cb_</a></td></tr>
+<tr class="memitem:a0060b5b523cea292a08f07a64aaf71fe" id="r_a0060b5b523cea292a08f07a64aaf71fe"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(float, uint8_t)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a0060b5b523cea292a08f07a64aaf71fe">volume_cb_</a></td></tr>
 <tr class="separator:a0060b5b523cea292a08f07a64aaf71fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e460a46f786cbf5771335ce4c4148f1" id="r_a0e460a46f786cbf5771335ce4c4148f1"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_volume_support.html#a0e460a46f786cbf5771335ce4c4148f1">volume_value</a> = 1.0f</td></tr>
 <tr class="separator:a0e460a46f786cbf5771335ce4c4148f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -617,7 +629,7 @@ Protected Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
-<tr class="memitem:a0bdee6cf53da95e2d5d5e22acbba636e" id="r_a0bdee6cf53da95e2d5d5e22acbba636e"><td class="memItemLeft" align="right" valign="top">static constexpr int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a0bdee6cf53da95e2d5d5e22acbba636e">kVolumeMinDb256</a> = -25600</td></tr>
+<tr class="memitem:a0bdee6cf53da95e2d5d5e22acbba636e" id="r_a0bdee6cf53da95e2d5d5e22acbba636e"><td class="memItemLeft" align="right" valign="top">static constexpr int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a0bdee6cf53da95e2d5d5e22acbba636e">kVolumeMinDb256</a> = -25600</td></tr>
 <tr class="memdesc:a0bdee6cf53da95e2d5d5e22acbba636e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert AudioTools volume (0.0–1.0) to UAC2 int16 (1/256 dB). 0.0 maps to 0x8000 (silence), 1.0 maps to 0 (0 dB).  <br /></td></tr>
 <tr class="separator:a0bdee6cf53da95e2d5d5e22acbba636e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4132f694948b3397723dc78696c8a5cc" id="r_a4132f694948b3397723dc78696c8a5cc"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html">USBAudioDeviceBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a4132f694948b3397723dc78696c8a5cc">s_active_</a> = nullptr</td></tr>
@@ -631,10 +643,10 @@ Friends</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html" title="USB Audio Device class for audio streaming over USB.">USBAudioDeviceBase</a> subclass for the Arduino UNO R4 / Nano R4 (Renesas RA4M1, <code>arduino:renesas_uno</code> core). </p>
 <p>The core's own <code>USB.cpp</code> runs TinyUSB internally (via its RUSB2 Device Controller Driver), so <code><a class="el" href="classaudio__tools_1_1_u_s_b_audio_backend_tiny_u_s_b.html" title="USBAudioBackend implementation wrapping the real TinyUSB device stack. Injected by the ESP32,...">USBAudioBackendTinyUSB</a></code> is reused as-is here &ndash; this class only supplies the platform-specific descriptor-registration glue, matching the pattern of <code><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html" title="USBAudioDeviceBase subclass for ESP32-S2/S3 using the arduino-esp32 stack.">USBAudioDeviceESP32</a></code>/<code><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html" title="USBAudioDeviceBase subclass for RP2040 / Adafruit TinyUSB.">USBAudioDeviceTinyUSB</a></code>.</p>
-<h2><a class="anchor" id="autotoc_md37"></a>
+<h2><a class="anchor" id="autotoc_md43"></a>
 Requires a core with the &lt;tt&gt;__USBGetCustomInterfaceDescriptor&lt;/tt&gt; hook</h2>
 <p>Stock <code>arduino:renesas_uno</code> (as of release 1.6.0) builds one fixed composite descriptor (CDC + HID + MSD) with no extension point for a third-party class driver &ndash; this class needs the <code>USB.h</code>/<code>USB.cpp</code> hook that lets an external interface append itself (a weak <code><a class="el" href="_u_s_b_audio_device_renesas_8h.html#a7843d7024b52cfe3421142e432f94764">__USBGetCustomInterfaceDescriptor()</a></code> callback, checked and invoked from <code>__SetupUSBDescriptor()</code> the same way HID's <code>__USBGetHIDReport()</code> already is). Without that hook in the core, this file will still compile but the Audio interface will silently never appear in the composite descriptor.</p>
-<h2><a class="anchor" id="autotoc_md38"></a>
+<h2><a class="anchor" id="autotoc_md44"></a>
 Requires building with &lt;tt&gt;-DNO_USB&lt;/tt&gt;</h2>
 <p><code>main.cpp</code> calls <code>__USBStart()</code> (which builds and freezes the composite descriptor) automatically at boot, before the sketch's <code><a class="el" href="_main_8h.html#a4fc01d736fe50cf5b977f755b675f11d">setup()</a></code> runs &ndash; unless the board defines <code>NO_USB</code> (UNO R4 WiFi already does; UNO R4 Minima/Nano R4 do not). Since the descriptor is built lazily but then cached forever (<code>usbd_desc_cfg</code> is only ever assigned once), our Audio interface must be registered <em>before</em> the first build, which means <code><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_renesas.html#a67b0ecd0961d037358f5f1ea75c363d5" title="Starts the RA4M1&#39;s native USB peripheral via the core&#39;s __USBStart(). Endpoint addresses are fixed (s...">beginUSB()</a></code> here has to be the one calling <code>__USBStart()</code> &ndash; after the sketch's <code><a class="el" href="_main_8h.html#a4fc01d736fe50cf5b977f755b675f11d">setup()</a></code> has configured the audio format via <code><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a601fb7cf1fc15db50c71a826f084f934" title="(Re-)start the USB audio device with the current config.">begin()</a></code>. On boards that auto-start USB before <code><a class="el" href="_main_8h.html#a4fc01d736fe50cf5b977f755b675f11d">setup()</a></code> runs (Minima/Nano R4), add <code>-DNO_USB</code> yourself, e.g. via <code>arduino-cli compile --build-property "build.extra_flags=-DNO_USB"</code> or a <code>boards.local.txt</code>/<code>platform.local.txt</code> override. With <code>NO_USB</code> defined, the <code>Serial</code> macro maps to a plain UART instead of native-USB CDC &ndash; use <code>SerialUSB</code> explicitly if you also want USB serial alongside audio (see <code>usb-tx.ino</code>'s composite-device pattern).</p>
 <dl class="section note"><dt>Note</dt><dd>I recommend to use the USBAudioStream type alias instead of this class directly, so that the code is portable to other platforms.</dd></dl>
@@ -1883,7 +1895,7 @@ Requires building with &lt;tt&gt;-DNO_USB&lt;/tt&gt;</h2>
 
 <p>Starts the RA4M1's native USB peripheral via the core's <code>__USBStart()</code>. Endpoint addresses are fixed (see USB_AUDIO_EP_* in <a class="el" href="_u_s_b_audio_config_8h.html">USBAudioConfig.h</a>) since this core has no dynamic endpoint allocator; VID/PID/manufacturer/product/serial in <a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html" title="Configuration for USB Audio (inherits sample_rate / channels / bits_per_sample from AudioInfo).">USBAudioConfig</a> are not applicable here &ndash; the whole composite device (CDC + HID + Audio) shares the one board-level identity the core's USB.cpp compiles in. </p>
 
-<p>Implements <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a8bba33a8c7735af67a10a28dea8da012">USBAudioDeviceBase</a>.</p>
+<p>Implements <a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a8bba33a8c7735af67a10a28dea8da012">USBAudioStreamBase</a>.</p>
 
 </div>
 </div>
@@ -1912,7 +1924,7 @@ Requires building with &lt;tt&gt;-DNO_USB&lt;/tt&gt;</h2>
 
 <p>Returns the RX audio buffer (public to match <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html" title="USBAudioDeviceBase subclass for ESP32-S2/S3 using the arduino-esp32 stack.">USBAudioDeviceESP32</a>, so sketches using the portable USBAudioStream alias can call it on either platform). </p>
 
-<p>Implements <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a8047bb6432da76f639976f03f85686f9">USBAudioDeviceBase</a>.</p>
+<p>Implements <a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a8047bb6432da76f639976f03f85686f9">USBAudioStreamBase</a>.</p>
 
 </div>
 </div>
@@ -1941,7 +1953,7 @@ Requires building with &lt;tt&gt;-DNO_USB&lt;/tt&gt;</h2>
 
 <p>Returns the TX audio buffer (public to match <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html" title="USBAudioDeviceBase subclass for ESP32-S2/S3 using the arduino-esp32 stack.">USBAudioDeviceESP32</a>, so sketches using the portable USBAudioStream alias can call it on either platform). </p>
 
-<p>Implements <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a486e3700882bea8ad136b7e671134dd0">USBAudioDeviceBase</a>.</p>
+<p>Implements <a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a486e3700882bea8ad136b7e671134dd0">USBAudioStreamBase</a>.</p>
 
 </div>
 </div>
@@ -2067,6 +2079,33 @@ Requires building with &lt;tt&gt;-DNO_USB&lt;/tt&gt;</h2>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9820c309e92fee8182ab3f7a12257f09" name="a9820c309e92fee8182ab3f7a12257f09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9820c309e92fee8182ab3f7a12257f09">&#9670;&#160;</a></span>config()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html">USBAudioConfig</a> &amp; config </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Provides the active configuration. </p>
 
 </div>
 </div>
@@ -2284,6 +2323,8 @@ Requires building with &lt;tt&gt;-DNO_USB&lt;/tt&gt;</h2>
 
 <p>Returns the actual core on which the call is running (for RP2040) </p>
 
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#ac8fb7bec4bd5011d8209a59f32127d65">USBAudioStreamBase</a>.</p>
+
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#af830c2c9103a15da634d3ff9aab55475">USBAudioDeviceESP32</a>, and <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html#af830c2c9103a15da634d3ff9aab55475">USBAudioDeviceTinyUSB</a>.</p>
 
 </div>
@@ -2475,7 +2516,7 @@ Requires building with &lt;tt&gt;-DNO_USB&lt;/tt&gt;</h2>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Bytes silently discarded because <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_renesas.html#acb49b3d87009a5a12096e51f330f2921" title="Returns the RX audio buffer (public to match USBAudioDeviceESP32, so sketches using the portable USBA...">bufferRx()</a> was full when they arrived. Non-zero means audio is being lost &ndash; increase fifo_packets or drain <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_renesas.html#acb49b3d87009a5a12096e51f330f2921" title="Returns the RX audio buffer (public to match USBAudioDeviceESP32, so sketches using the portable USBA...">bufferRx()</a> (<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#af3322ed0e24d11005573274c1c1d069d" title="Receive audio data from the host (host → device, speaker/playback). Until bufferRx() has filled past ...">readBytes()</a>) faster/more regularly. </p>
+<p>Bytes silently discarded because <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_renesas.html#acb49b3d87009a5a12096e51f330f2921" title="Returns the RX audio buffer (public to match USBAudioDeviceESP32, so sketches using the portable USBA...">bufferRx()</a> was full when they arrived. Non-zero means audio is being lost &ndash; increase fifo_packets or drain <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_renesas.html#acb49b3d87009a5a12096e51f330f2921" title="Returns the RX audio buffer (public to match USBAudioDeviceESP32, so sketches using the portable USBA...">bufferRx()</a> (<a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#af3322ed0e24d11005573274c1c1d069d" title="Receive audio data from the USB peer. Until bufferRx() has filled past config.rx_start_fill_percent a...">readBytes()</a>) faster/more regularly. </p>
 
 </div>
 </div>
@@ -3245,12 +3286,12 @@ Requires building with &lt;tt&gt;-DNO_USB&lt;/tt&gt;</h2>
 </table>
 </div><div class="memdoc">
 
-<p>Returns true if either IN or OUT streaming endpoint is open. </p>
+<p>Returns true if either the TX or RX stream is open. </p>
 
 </div>
 </div>
-<a id="a62005d79099446759a4f59f027622fc2" name="a62005d79099446759a4f59f027622fc2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a62005d79099446759a4f59f027622fc2">&#9670;&#160;</a></span>isStreamingActiveRx()</h2>
+<a id="ae4f63fe3c25d74bfa3ff042011641b43" name="ae4f63fe3c25d74bfa3ff042011641b43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4f63fe3c25d74bfa3ff042011641b43">&#9670;&#160;</a></span>isStreamingActiveRx()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3267,17 +3308,19 @@ Requires building with &lt;tt&gt;-DNO_USB&lt;/tt&gt;</h2>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Returns true if the host has opened the OUT (playback) stream. </p>
 
+<p>Implements <a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a8b9377710cdfb955b472c8690918953e">USBAudioStreamBase</a>.</p>
+
 </div>
 </div>
-<a id="a41f107086ba56453f124da3597f3b075" name="a41f107086ba56453f124da3597f3b075"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a41f107086ba56453f124da3597f3b075">&#9670;&#160;</a></span>isStreamingActiveTx()</h2>
+<a id="a3f60108706f32f85d09adac8e397f4c8" name="a3f60108706f32f85d09adac8e397f4c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f60108706f32f85d09adac8e397f4c8">&#9670;&#160;</a></span>isStreamingActiveTx()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3294,12 +3337,14 @@ Requires building with &lt;tt&gt;-DNO_USB&lt;/tt&gt;</h2>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Returns true if the host has opened the IN (capture) stream. </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a471f8f3d81d0e17b01be73b5b44344c7">USBAudioStreamBase</a>.</p>
 
 </div>
 </div>
@@ -3382,8 +3427,8 @@ Requires building with &lt;tt&gt;-DNO_USB&lt;/tt&gt;</h2>
 
 </div>
 </div>
-<a id="a337436c6bdf6589ad69f10cfa1d7bf9d" name="a337436c6bdf6589ad69f10cfa1d7bf9d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a337436c6bdf6589ad69f10cfa1d7bf9d">&#9670;&#160;</a></span>mounted()</h2>
+<a id="a72955d02eb2bfba0634437a2a382f330" name="a72955d02eb2bfba0634437a2a382f330"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72955d02eb2bfba0634437a2a382f330">&#9670;&#160;</a></span>mounted()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3400,12 +3445,14 @@ Requires building with &lt;tt&gt;-DNO_USB&lt;/tt&gt;</h2>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Returns true if the device is mounted by the USB host. </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a59992cf1a4c58c5536fe99ccfb0fa33e">USBAudioStreamBase</a>.</p>
 
 </div>
 </div>
@@ -3520,6 +3567,66 @@ Requires building with &lt;tt&gt;-DNO_USB&lt;/tt&gt;</h2>
 </div><div class="memdoc">
 
 <p>Total number of USB interfaces claimed by the audio function (1 AC + 1 or 2 AS), for use in the bNumInterfaces field of the configuration descriptor. </p>
+
+</div>
+</div>
+<a id="a542e85c1d0c595e16f640744c97d1b7c" name="a542e85c1d0c595e16f640744c97d1b7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a542e85c1d0c595e16f640744c97d1b7c">&#9670;&#160;</a></span>onMuteChanged()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void onMuteChanged </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>channel</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">protected</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Notify the host about a device-initiated mute change. </p>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#aaefa5669d9739e6f5e8b7e72feeb0efe">USBAudioStreamBase</a>.</p>
+
+</div>
+</div>
+<a id="a1a9bd71f20fceefbeb20dfeed9d5676e" name="a1a9bd71f20fceefbeb20dfeed9d5676e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a9bd71f20fceefbeb20dfeed9d5676e">&#9670;&#160;</a></span>onVolumeChanged()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void onVolumeChanged </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>channel</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">protected</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Notify the host about a device-initiated volume change. </p>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#ad2b5fddfbb66ea4596c5aed08fedc55d">USBAudioStreamBase</a>.</p>
 
 </div>
 </div>
@@ -3737,8 +3844,7 @@ Requires building with &lt;tt&gt;-DNO_USB&lt;/tt&gt;</h2>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Returns true when <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a601fb7cf1fc15db50c71a826f084f934" title="(Re-)start the USB audio device with the current config.">begin()</a> has been called and the USB host has mounted the device. </p>
+<p>Returns true when <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a601fb7cf1fc15db50c71a826f084f934" title="(Re-)start the USB audio device with the current config.">begin()</a> has been called and the USB connection is established. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_stream.html#a0d52c0ed98e047d782054fa126b281e5">AudioStream</a>.</p>
 
@@ -3879,7 +3985,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Receive audio data from the host (host → device, speaker/playback). Until <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_renesas.html#acb49b3d87009a5a12096e51f330f2921" title="Returns the RX audio buffer (public to match USBAudioDeviceESP32, so sketches using the portable USBA...">bufferRx()</a> has filled past config.rx_start_fill_percent at least once after <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a601fb7cf1fc15db50c71a826f084f934" title="(Re-)start the USB audio device with the current config.">begin()</a>, no data is returned. This is a one-shot startup prime only &ndash; once reached, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#af3322ed0e24d11005573274c1c1d069d" title="Receive audio data from the host (host → device, speaker/playback). Until bufferRx() has filled past ...">readBytes()</a> keeps draining normally for the rest of the session and is not gated again by later underruns. </p>
+<p>Receive audio data from the USB peer. Until <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_renesas.html#acb49b3d87009a5a12096e51f330f2921" title="Returns the RX audio buffer (public to match USBAudioDeviceESP32, so sketches using the portable USBA...">bufferRx()</a> has filled past config.rx_start_fill_percent at least once after <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a601fb7cf1fc15db50c71a826f084f934" title="(Re-)start the USB audio device with the current config.">begin()</a>, no data is returned. This is a one-shot startup prime only &ndash; once reached, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#af3322ed0e24d11005573274c1c1d069d" title="Receive audio data from the USB peer. Until bufferRx() has filled past config.rx_start_fill_percent a...">readBytes()</a> keeps draining normally for the rest of the session and is not gated again by later underruns. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_stream.html#a6406b16cb31ad79201459cb48b1ad6f0">AudioStream</a>.</p>
 
@@ -4005,7 +4111,7 @@ template&lt;typename T &gt; </div>
 
 <p>Resize buffers as block pools: block size = one USB frame at the current sample rate, block count = fifo_packets. </p>
 
-<p>Implements <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#aa84e845b8aa8fcc1ed5d75108aec7c91">USBAudioDeviceBase</a>.</p>
+<p>Implements <a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#aa84e845b8aa8fcc1ed5d75108aec7c91">USBAudioStreamBase</a>.</p>
 
 </div>
 </div>
@@ -4086,7 +4192,7 @@ template&lt;typename T &gt; </div>
 
 <p>No-op: <code>_usbfs_interrupt_handler()</code> in the core's USB.cpp already calls <code>tud_task()</code> directly from the USB ISR on every interrupt, so polling it again here would be redundant (tud_task() is not re-entrant). </p>
 
-<p>Implements <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#af448ed63efb175d73dfbd132928ea88d">USBAudioDeviceBase</a>.</p>
+<p>Implements <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a4b9c867d8e7bf19857c038fe8e12f8ab">USBAudioDeviceBase</a>.</p>
 
 </div>
 </div>
@@ -4482,7 +4588,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Set the mute state for a channel and notify the host. </p>
+<p>Set the mute state for a channel and notify the USB peer. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">m</td><td>true = muted, false = unmuted. </td></tr>
@@ -4518,7 +4624,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Register a callback invoked when the host (or device) changes the mute state. </p>
+<p>Register a callback invoked when the mute state changes. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">cb</td><td>Callback receiving (bool muted, uint8_t channel). </td></tr>
@@ -4784,7 +4890,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Register a callback invoked when the host (or device) changes the sample rate. </p>
+<p>Register a callback invoked when the sample rate changes. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">cb</td><td>Callback receiving the new rate in Hz. </td></tr>
@@ -4818,7 +4924,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Register a callback invoked when the streaming state changes. Fires when the host opens or closes a streaming interface (SET_INTERFACE alt=1 / alt=0). </p>
+<p>Register a callback invoked when the streaming state changes (a streaming interface was opened or closed). </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">cb</td><td>Callback receiving (bool active_tx, bool active_rx). </td></tr>
@@ -4938,6 +5044,33 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="a73238577487b3a28599ffacf3d9907af" name="a73238577487b3a28599ffacf3d9907af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73238577487b3a28599ffacf3d9907af">&#9670;&#160;</a></span>setupVolumeState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setupVolumeState </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>(Re)sizes the volume and mute state: master (index 0) + one per channel </p>
+
+</div>
+</div>
 <a id="a06899a7fdf8e4af457f149591b9f350f" name="a06899a7fdf8e4af457f149591b9f350f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a06899a7fdf8e4af457f149591b9f350f">&#9670;&#160;</a></span>setVolume() <span class="overload">[1/2]</span></h2>
 
@@ -4972,7 +5105,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Set the volume for a channel and notify the host. </p>
+<p>Set the volume for a channel and notify the USB peer. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">vol</td><td>Volume as a float 0.0 (silence) to 1.0 (0 dB). </td></tr>
@@ -5038,7 +5171,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Register a callback invoked when the host (or device) changes the volume. </p>
+<p>Register a callback invoked when the volume changes. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">cb</td><td>Callback receiving (float volume, uint8_t channel). </td></tr>
@@ -5242,7 +5375,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Send audio data to the host (device → host, microphone/capture). Silently discards data when the host has not opened the capture device (alt=0) so StreamCopy doesn't report write errors before recording. </p>
+<p>Send audio data to the USB peer. Silently discards data while the TX stream is not open so StreamCopy doesn't report write errors before streaming starts. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_stream.html#a016bb39af201e717c1975551b7ecc1b3">AudioStream</a>.</p>
 
@@ -5580,7 +5713,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html">USBAudio2DescriptorBuilder</a> descr_builder {<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a48e2afc8051a00f8a5a1eb034c4161fe">config_</a>}</td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html">USBAudio2DescriptorBuilder</a> descr_builder {<a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a48e2afc8051a00f8a5a1eb034c4161fe">config_</a>}</td>
         </tr>
       </table>
   </td>

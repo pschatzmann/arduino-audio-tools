@@ -76,9 +76,7 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#define-members">Macros</a>  </div>
   <div class="headertitle"><div class="title">USBAudioDeviceBase.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -94,6 +92,8 @@ $(function() {
 <code>#include &quot;AudioLogger.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="_base_stream_8h_source.html">AudioTools/CoreAudio/BaseStream.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_u_s_b_audio_backend_8h_source.html">AudioTools/Communication/USB/USBAudioBackend.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_u_s_b_audio_constants_8h_source.html">AudioTools/Communication/USB/USBAudioConstants.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_u_s_b_audio_stream_base_8h_source.html">AudioTools/Communication/USB/USBAudioStreamBase.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_u_s_b_audio2_descriptor_builder_8h_source.html">USBAudio2DescriptorBuilder.h</a>&quot;</code><br />
 </div>
 <p><a href="_u_s_b_audio_device_base_8h_source.html">Go to the source code of this file.</a></p>
@@ -120,56 +120,6 @@ Namespaces</h2></td></tr>
 Macros</h2></td></tr>
 <tr class="memitem:acaef65a3c3a5b05cc8d8228fc4e279db" id="r_acaef65a3c3a5b05cc8d8228fc4e279db"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_u_s_b_audio_device_base_8h.html#acaef65a3c3a5b05cc8d8228fc4e279db">USB_DESCR_MAX_LEN</a>&#160;&#160;&#160;512</td></tr>
 <tr class="separator:acaef65a3c3a5b05cc8d8228fc4e279db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a86c6339f6da13b57540a447567e9eb3d" id="r_a86c6339f6da13b57540a447567e9eb3d"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a86c6339f6da13b57540a447567e9eb3d">u16High</a> (uint16_t v)</td></tr>
-<tr class="separator:a86c6339f6da13b57540a447567e9eb3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6cc24e8a43229b911ca49a915c341b78" id="r_a6cc24e8a43229b911ca49a915c341b78"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a6cc24e8a43229b911ca49a915c341b78">u16Low</a> (uint16_t v)</td></tr>
-<tr class="separator:a6cc24e8a43229b911ca49a915c341b78"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a92faab18f22516a2fa901a361325b238" id="r_a92faab18f22516a2fa901a361325b238"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a92faab18f22516a2fa901a361325b238">AUDIO_FU_CTRL_MUTE</a> = 0x01</td></tr>
-<tr class="separator:a92faab18f22516a2fa901a361325b238"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69fd0f088369a883db7f763cf4b88ac7" id="r_a69fd0f088369a883db7f763cf4b88ac7"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a69fd0f088369a883db7f763cf4b88ac7">AUDIO_FU_CTRL_VOLUME</a> = 0x02</td></tr>
-<tr class="separator:a69fd0f088369a883db7f763cf4b88ac7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ec17388887f5cac77ac008f2a71da1e" id="r_a9ec17388887f5cac77ac008f2a71da1e"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a9ec17388887f5cac77ac008f2a71da1e">kAudioCsAcInputTerminal</a> = 0x02</td></tr>
-<tr class="separator:a9ec17388887f5cac77ac008f2a71da1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34c09e8cbe72093f3e808fe96afbde48" id="r_a34c09e8cbe72093f3e808fe96afbde48"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a34c09e8cbe72093f3e808fe96afbde48">kAudioCsAcOutputTerminal</a> = 0x03</td></tr>
-<tr class="separator:a34c09e8cbe72093f3e808fe96afbde48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad286c63df56ef2f4c07ebe55f38cbf9e" id="r_ad286c63df56ef2f4c07ebe55f38cbf9e"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ad286c63df56ef2f4c07ebe55f38cbf9e">kAudioCsAsFormatType</a> = 0x02</td></tr>
-<tr class="separator:ad286c63df56ef2f4c07ebe55f38cbf9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acd02ea43266d16473248dbb208e2c6f8" id="r_acd02ea43266d16473248dbb208e2c6f8"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#acd02ea43266d16473248dbb208e2c6f8">kAudioCsAsGeneral</a> = 0x01</td></tr>
-<tr class="separator:acd02ea43266d16473248dbb208e2c6f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f2c9acb33f8b4cdacc6d0feaaa0b033" id="r_a8f2c9acb33f8b4cdacc6d0feaaa0b033"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a8f2c9acb33f8b4cdacc6d0feaaa0b033">kAudioCsCtrlClkValid</a> = 0x02</td></tr>
-<tr class="separator:a8f2c9acb33f8b4cdacc6d0feaaa0b033"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05e035faed884443a96614e997c9e440" id="r_a05e035faed884443a96614e997c9e440"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a05e035faed884443a96614e997c9e440">kAudioCsCtrlSamFreq</a> = 0x01</td></tr>
-<tr class="separator:a05e035faed884443a96614e997c9e440"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30149fb226d7ef7cc899c3378f784983" id="r_a30149fb226d7ef7cc899c3378f784983"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a30149fb226d7ef7cc899c3378f784983">kAudioCsReqCur</a> = 0x01</td></tr>
-<tr class="separator:a30149fb226d7ef7cc899c3378f784983"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed27eb81b548e57bacbe9b7c394970eb" id="r_aed27eb81b548e57bacbe9b7c394970eb"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aed27eb81b548e57bacbe9b7c394970eb">kAudioCsReqRange</a> = 0x02</td></tr>
-<tr class="separator:aed27eb81b548e57bacbe9b7c394970eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0da6d824897cb2e42a199eb5d6c847ee" id="r_a0da6d824897cb2e42a199eb5d6c847ee"><td class="memItemLeft" align="right" valign="top">static constexpr uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a0da6d824897cb2e42a199eb5d6c847ee">kAudioDescIadLen</a> = 8</td></tr>
-<tr class="separator:a0da6d824897cb2e42a199eb5d6c847ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d895a110eee6fed2ecd4fa0c9b1737e" id="r_a2d895a110eee6fed2ecd4fa0c9b1737e"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a2d895a110eee6fed2ecd4fa0c9b1737e">kAudioIntProtocolCodeV2</a> = 0x20</td></tr>
-<tr class="separator:a2d895a110eee6fed2ecd4fa0c9b1737e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a035bf0f0cd5de55f14802563ea99707e" id="r_a035bf0f0cd5de55f14802563ea99707e"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a035bf0f0cd5de55f14802563ea99707e">kAudioSubclassControl</a> = 0x01</td></tr>
-<tr class="separator:a035bf0f0cd5de55f14802563ea99707e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ceccd9180130872bc7c51eda112cf4c" id="r_a9ceccd9180130872bc7c51eda112cf4c"><td class="memItemLeft" align="right" valign="top">static constexpr uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a9ceccd9180130872bc7c51eda112cf4c">kAudioTermTypeUsbStreaming</a> = 0x0101</td></tr>
-<tr class="separator:a9ceccd9180130872bc7c51eda112cf4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69ae23bffd1b3498f0df83640e2e7a5d" id="r_a69ae23bffd1b3498f0df83640e2e7a5d"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a69ae23bffd1b3498f0df83640e2e7a5d">kControlStageData</a> = 2</td></tr>
-<tr class="separator:a69ae23bffd1b3498f0df83640e2e7a5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae94f7527e14e2378344a5183c2d2b9fe" id="r_ae94f7527e14e2378344a5183c2d2b9fe"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ae94f7527e14e2378344a5183c2d2b9fe">kControlStageSetup</a> = 1</td></tr>
-<tr class="separator:ae94f7527e14e2378344a5183c2d2b9fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26249c976181af176010e43b94a4f809" id="r_a26249c976181af176010e43b94a4f809"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a26249c976181af176010e43b94a4f809">kUsbClassAudio</a> = 0x01</td></tr>
-<tr class="separator:a26249c976181af176010e43b94a4f809"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaafc6d239ff6424024acac2a6e707a23" id="r_aaafc6d239ff6424024acac2a6e707a23"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aaafc6d239ff6424024acac2a6e707a23">kUsbDescTypeCsInterface</a> = 0x24</td></tr>
-<tr class="separator:aaafc6d239ff6424024acac2a6e707a23"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d0331203c0613596337b1066f66f88a" id="r_a7d0331203c0613596337b1066f66f88a"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a7d0331203c0613596337b1066f66f88a">kUsbDescTypeEndpoint</a> = 0x05</td></tr>
-<tr class="separator:a7d0331203c0613596337b1066f66f88a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac2a2cd297d85dae672fabc4a2c9539d" id="r_aac2a2cd297d85dae672fabc4a2c9539d"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aac2a2cd297d85dae672fabc4a2c9539d">kUsbDescTypeInterface</a> = 0x04</td></tr>
-<tr class="separator:aac2a2cd297d85dae672fabc4a2c9539d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="acaef65a3c3a5b05cc8d8228fc4e279db" name="acaef65a3c3a5b05cc8d8228fc4e279db"></a>

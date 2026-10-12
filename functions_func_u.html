@@ -76,7 +76,8 @@ $(function() {
 <li>u24()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_m_p4_box_writer.html#a5af205130ebbdc0886316bf58b1abfc7">MP4BoxWriter</a></li>
 <li>u32()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_m_p4_box_writer.html#a1d79e0ccb4d5d4903a1e4e2d1c864c8c">MP4BoxWriter</a></li>
 <li>u8()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_m_p4_box_writer.html#a4a3c6881ee01828b9b15dc17b176dded">MP4BoxWriter</a></li>
-<li>uac2ToFloat()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a933d531b84a91b4a11bd8d8cf6fb9b2a">USBAudioDeviceBase</a></li>
+<li>uac2ToFloat()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#a933d531b84a91b4a11bd8d8cf6fb9b2a">USBAudioStreamBase</a></li>
+<li>uacVersion()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_base.html#af5ae553a42a5b94304add6f6443e4d33">USBAudioHostBase</a></li>
 <li>UDPStream()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_u_d_p_stream.html#a90895dd499f4cd561f55da8f9506d9a8">UDPStream</a></li>
 <li>ulaw2linear()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#abd1f0c862c0d5498d02fac2e3f272acc">WAVDecoder</a></li>
 <li>underflowsPerSecond()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_p_w_m_audio_output.html#a2eeec7b20268d0e62fe9a463132505e9">PWMAudioOutput&lt; PWMDriverT &gt;</a>, <a class="el" href="classaudio__tools_1_1_p_w_m_driver_base.html#a2eeec7b20268d0e62fe9a463132505e9">PWMDriverBase</a></li>
@@ -86,7 +87,7 @@ $(function() {
 <li>update_total_weights()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_output_mixer.html#a97de6910b885d3e1d5ee3d78d8a42d42">OutputMixer&lt; T &gt;</a></li>
 <li>updateActivityState()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_volume_meter.html#ac7f6068f712afd4f678b00150200e1e8">VolumeMeter</a></li>
 <li>updateAmplitudeInSteps()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_sine_from_table.html#a3f53c6c6168f41cc63a4305215a2673b">SineFromTable&lt; T &gt;</a></li>
-<li>updateBufferSize()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_delay.html#a6547aa1b4ea2e5bc5ae04a4d6e69f033">Delay</a></li>
+<li>updateBufferSize()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_delay.html#a6547aa1b4ea2e5bc5ae04a4d6e69f033">Delay</a>, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_base.html#a6547aa1b4ea2e5bc5ae04a4d6e69f033">USBAudioHostBase</a></li>
 <li>updateFIRKernel()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_equalizer_n_bands.html#a1bbd596ae5b85c0b7a8965a6693f7335">EqualizerNBands&lt; SampleT, AccT, NUM_TAPS, NUM_BANDS &gt;</a></li>
 <li>updateGain()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_automatic_gain_control_stream.html#a044ba358b19fbe2b435943da48f357e8">AutomaticGainControlStream</a></li>
 <li>updateModulation()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_simple_flanger.html#a0fa8a90f35312752588052b085075ac8">SimpleFlanger&lt; effectsuite_t &gt;</a></li>
@@ -100,7 +101,6 @@ $(function() {
 <li>updateVolume()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_volume_meter.html#ab6007da5c3151b380762d890fcdf3031">VolumeMeter</a></li>
 <li>updateVolumes()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_volume_meter.html#a4a350b829b7038d0d34ce6a8fc7f4c7c">VolumeMeter</a></li>
 <li>updateVolumesT()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_volume_meter.html#a966cb655610f02a20053937cf3eebac4">VolumeMeter</a></li>
-<li>Url()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_url.html#aa9028ce1ab0eae615b25b1b5f98ac06f">Url</a></li>
 <li>url()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_url.html#a3e4728763c8f09ed47d6918fee40409a">Url</a></li>
 <li>Url()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_url.html#af7dc88ba140498e51c9f3f5ec648e614">Url</a></li>
 <li>urlCount()&#160;:&#160;<a class="el" href="classaudio__tools__hls_1_1_u_r_l_loader_h_l_s.html#a2315b128f5a1599b1b4cdb016792a728">URLLoaderHLS&lt; URLStream &gt;</a></li>
@@ -118,9 +118,14 @@ $(function() {
 <li>USBAudioDeviceBase()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a865f41b9e5f0026d797c9fc45b5ffc2e">USBAudioDeviceBase</a></li>
 <li>USBAudioDeviceESP32()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html#a08914ac7214dedb063d5cb7b8e51ec3e">USBAudioDeviceESP32</a></li>
 <li>USBAudioDeviceRenesas()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_renesas.html#a93bca38a3dc3ce14fd978929e9a35f79">USBAudioDeviceRenesas</a></li>
-<li>USBAudioDeviceTinyUSB()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html#a5f5da722b6cf31a8733964879f0eaca9">USBAudioDeviceTinyUSB</a></li>
+<li>USBAudioDeviceTinyUSB()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html#a1b47cbc41b62acdfc976e3abf2430e27">USBAudioDeviceTinyUSB</a></li>
 <li>USBAudioDeviceTinyUSBFreeRTOS()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b_free_r_t_o_s.html#abbf94466d175dce72aa46a47eb64c8dd">USBAudioDeviceTinyUSBFreeRTOS</a></li>
 <li>USBAudioDeviceZephyr()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_zephyr.html#a06c23aaeb920118274293a1b2a261676">USBAudioDeviceZephyr</a></li>
+<li>USBAudioHostBackendTinyUSB()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_backend_tiny_u_s_b.html#a33d62d747834bfa00b954ebafcb966b6">USBAudioHostBackendTinyUSB</a></li>
+<li>USBAudioHostBase()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_base.html#abe9cbf4ae2fd5bfa68349c4f2e30ec9b">USBAudioHostBase</a></li>
+<li>USBAudioHostESP32()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_e_s_p32.html#a141693e6edb603d2375e83c006b48122">USBAudioHostESP32</a></li>
+<li>USBAudioHostTinyUSB()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_tiny_u_s_b.html#ac65744369f13bc36ec1be127e46afaf4">USBAudioHostTinyUSB</a></li>
+<li>USBAudioHostTinyUSBFreeRTOS()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_tiny_u_s_b_free_r_t_o_s.html#a285b4ed12ca86cd5edb642d3f7fa9481">USBAudioHostTinyUSBFreeRTOS</a></li>
 <li>use_buffer()&#160;:&#160;<a class="el" href="classffft_1_1_f_f_t_real.html#a6ad58d5ec31465ad24b2dc8358093575">FFTReal&lt; DT &gt;</a></li>
 <li>useAudioClock()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_video_player.html#a67052870bfbcee512fde1cee8609163e">VideoPlayer</a></li>
 <li>useRfc2250Header()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_r_t_s_p_format.html#a6f45da3e83bead2168b61d18eab2c02d">RTSPFormat</a>, <a class="el" href="classaudio__tools_1_1_r_t_s_p_format_m_p3.html#a3446de54bf80a8f8370140421d9bbb76">RTSPFormatMP3</a></li>

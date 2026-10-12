@@ -76,7 +76,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>USB Audio V 2.0.  
+<p>USB Audio: Device (UAC2) and Host (UAC1/UAC2)  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
@@ -108,6 +108,33 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_zephyr.html">USBAudioDeviceZephyr</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">USB Audio 2.0 device backend for Zephyr RTOS.  <a href="classaudio__tools_1_1_u_s_b_audio_device_zephyr.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_backend.html">USBAudioHostBackend</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract seam for every raw USB host stack call the UAC host class logic (<a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_base.html" title="USB Audio Class (UAC1 and UAC2) host: reads PCM audio from an attached USB microphone and/or writes P...">USBAudioHostBase</a>) needs. Concrete subclasses wrap TinyUSB host (<a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_backend_tiny_u_s_b.html" title="USBAudioHostBackend for the TinyUSB host stack provided by the Adafruit TinyUSB Library (RP2040/RP235...">USBAudioHostBackendTinyUSB</a>) or the ESP-IDF usb_host library (<a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_backend_e_s_p32.html" title="USBAudioHostBackend for the ESP-IDF usb_host library which is part of arduino-esp32 (ESP32-S2,...">USBAudioHostBackendESP32</a>).  <a href="classaudio__tools_1_1_u_s_b_audio_host_backend.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_backend_e_s_p32.html">USBAudioHostBackendESP32</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_backend.html" title="Abstract seam for every raw USB host stack call the UAC host class logic (USBAudioHostBase) needs....">USBAudioHostBackend</a> for the ESP-IDF usb_host library which is part of arduino-esp32 (ESP32-S2, ESP32-S3 and ESP32-P4).  <a href="classaudio__tools_1_1_u_s_b_audio_host_backend_e_s_p32.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_backend_tiny_u_s_b.html">USBAudioHostBackendTinyUSB</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_backend.html" title="Abstract seam for every raw USB host stack call the UAC host class logic (USBAudioHostBase) needs....">USBAudioHostBackend</a> for the TinyUSB host stack provided by the Adafruit TinyUSB Library (RP2040/RP2350 native or Pico-PIO-USB, ESP32-S2/ S3/P4 native OTG, STM32, or a MAX3421E host controller on any platform).  <a href="classaudio__tools_1_1_u_s_b_audio_host_backend_tiny_u_s_b.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_base.html">USBAudioHostBase</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">USB Audio Class (UAC1 and UAC2) host: reads PCM audio from an attached USB microphone and/or writes PCM audio to an attached USB speaker or headset, using the same API as the USB Audio device (USBAudioStream).  <a href="classaudio__tools_1_1_u_s_b_audio_host_base.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_e_s_p32.html">USBAudioHostESP32</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">USB Audio host for ESP32-S2/S3/P4 using the ESP-IDF usb_host library: reads audio from an attached USB microphone and/or writes audio to an attached USB speaker.  <a href="classaudio__tools_1_1_u_s_b_audio_host_e_s_p32.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_events.html">USBAudioHostEvents</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Upcalls from a USB host backend into the stack independent UAC host class logic (<a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_base.html" title="USB Audio Class (UAC1 and UAC2) host: reads PCM audio from an attached USB microphone and/or writes P...">USBAudioHostBase</a>). All methods are called from the USB stack context (TinyUSB: inside tuh_task(); ESP-IDF: the USB host task).  <a href="classaudio__tools_1_1_u_s_b_audio_host_events.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_tiny_u_s_b.html">USBAudioHostTinyUSB</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">USB Audio host for the Adafruit TinyUSB host stack: reads audio from an attached USB microphone and/or writes audio to an attached USB speaker.  <a href="classaudio__tools_1_1_u_s_b_audio_host_tiny_u_s_b.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_tiny_u_s_b_free_r_t_o_s.html">USBAudioHostTinyUSBFreeRTOS</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variant of <a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_tiny_u_s_b.html" title="USB Audio host for the Adafruit TinyUSB host stack: reads audio from an attached USB microphone and/o...">USBAudioHostTinyUSB</a> for FreeRTOS (e.g. RP2040 + FreeRTOS, or ESP32 with the Adafruit TinyUSB host stack).  <a href="classaudio__tools_1_1_u_s_b_audio_host_tiny_u_s_b_free_r_t_o_s.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html">USBAudioStreamBase</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Role-independent front end shared by USB Audio devices (<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html" title="USB Audio Device class for audio streaming over USB.">USBAudioDeviceBase</a>, aliased as USBAudioStream) and USB Audio hosts (<a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_base.html" title="USB Audio Class (UAC1 and UAC2) host: reads PCM audio from an attached USB microphone and/or writes P...">USBAudioHostBase</a>, aliased as USBAudioHostStream).  <a href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -116,7 +143,7 @@ Typedefs</h2></td></tr>
 <tr class="separator:ga43a0ff637dbf8c8e3d47f575c950f2fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p>USB Audio V 2.0. </p>
+<p>USB Audio: Device (UAC2) and Host (UAC1/UAC2) </p>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="ga43a0ff637dbf8c8e3d47f575c950f2fd" name="ga43a0ff637dbf8c8e3d47f575c950f2fd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga43a0ff637dbf8c8e3d47f575c950f2fd">&#9670;&#160;</a></span>USBAudioStream</h2>

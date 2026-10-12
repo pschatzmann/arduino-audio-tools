@@ -56,10 +56,14 @@ var searchData=
   ['vfs_5ffile_5fappend_53',['VFS_FILE_APPEND',['../namespaceaudio__tools.html#a031770da453a180e21dcbef5cf5aeab6ab384a3f34c711dc713ae2ee238d08ddb',1,'audio_tools']]],
   ['vfs_5ffile_5fread_54',['VFS_FILE_READ',['../namespaceaudio__tools.html#a031770da453a180e21dcbef5cf5aeab6a1a597ab198a857a857e25039fc461c91',1,'audio_tools']]],
   ['vfs_5ffile_5fwrite_55',['VFS_FILE_WRITE',['../namespaceaudio__tools.html#a031770da453a180e21dcbef5cf5aeab6a97fabd87f5fdf8610e87afd9354ea13f',1,'audio_tools']]],
-  ['video_56',['video',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338ae60ae31f67ab883c746bb71c7a145c18',1,'audio_tools::VIDEO'],['../group__video.html#gga3529160d6b73e5a63e0a95afeb424659aff13e87d7cbbe18fface435a5b84aaec',1,'audio_tools::Video'],['../namespaceaudio__tools.html#a4dd4453d1994a706c0eb2350ffa55372a34e2d1989a1dbf75cd631596133ee5ee',1,'audio_tools::Video'],['../group__video.html#ggaf8c65084215807a0aa0121960a93ec92a34e2d1989a1dbf75cd631596133ee5ee',1,'audio_tools::Video']]],
+  ['video_56',['video',['../group__video.html#gga3529160d6b73e5a63e0a95afeb424659aff13e87d7cbbe18fface435a5b84aaec',1,'audio_tools::Video'],['../namespaceaudio__tools.html#a4dd4453d1994a706c0eb2350ffa55372a34e2d1989a1dbf75cd631596133ee5ee',1,'audio_tools::Video'],['../group__video.html#ggaf8c65084215807a0aa0121960a93ec92a34e2d1989a1dbf75cd631596133ee5ee',1,'audio_tools::Video'],['../group__basic.html#gga5b1869d184b84711842bfe4f25433338ae60ae31f67ab883c746bb71c7a145c18',1,'audio_tools::VIDEO']]],
   ['video_5favc_57',['VIDEO_AVC',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338a5a63b30a669280e6c747f70c796c53af',1,'audio_tools']]],
   ['video_5fh222_5f0_58',['VIDEO_H222_0',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338a00398da1d4c01718373fcf143c4f746f',1,'audio_tools']]],
   ['video_5fh262_59',['VIDEO_H262',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338a1a91065bdbcec22d8dcd6c682b569f72',1,'audio_tools']]],
   ['videoheader_60',['VideoHeader',['../namespaceaudio__tools.html#a4dd4453d1994a706c0eb2350ffa55372a0b3665c059d92f144f19aa2657f6666f',1,'audio_tools']]],
-  ['visual_61',['VISUAL',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338a8daf3496602a64f00b16ce266e7084dc',1,'audio_tools']]]
+  ['visual_61',['VISUAL',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338a8daf3496602a64f00b16ce266e7084dc',1,'audio_tools']]],
+  ['volumemaxrx_62',['VolumeMaxRx',['../classaudio__tools_1_1_u_s_b_audio_host_base.html#a7551b44b443633567069e7f1de6fac65a9b332d109061742d9653f99a6382419a',1,'audio_tools::USBAudioHostBase']]],
+  ['volumemaxtx_63',['VolumeMaxTx',['../classaudio__tools_1_1_u_s_b_audio_host_base.html#a7551b44b443633567069e7f1de6fac65a4058cfcc2833423a59c8775666d02ae1',1,'audio_tools::USBAudioHostBase']]],
+  ['volumerangerx_64',['VolumeRangeRx',['../classaudio__tools_1_1_u_s_b_audio_host_base.html#a7551b44b443633567069e7f1de6fac65a01e4155ade8406d49f332e1e56cc8199',1,'audio_tools::USBAudioHostBase']]],
+  ['volumerangetx_65',['VolumeRangeTx',['../classaudio__tools_1_1_u_s_b_audio_host_base.html#a7551b44b443633567069e7f1de6fac65aa93ec85d681d399e88c64fd9cdc4738c',1,'audio_tools::USBAudioHostBase']]]
 ];

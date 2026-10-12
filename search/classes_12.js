@@ -84,7 +84,7 @@ var searchData=
   ['stkpitshift_81',['STKPitShift',['../classaudio__tools_1_1_s_t_k_pit_shift.html',1,'audio_tools']]],
   ['stkstream_82',['STKStream',['../classaudio__tools_1_1_s_t_k_stream.html',1,'audio_tools']]],
   ['str_83',['Str',['../classaudio__tools_1_1_str.html',1,'audio_tools']]],
-  ['stream_84',['Stream',['../class_stream.html',1,'']]],
+  ['stream_84',['stream',['../structaudio__tools_1_1_u_s_b_audio_host_backend_e_s_p32_1_1_stream.html',1,'USBAudioHostBackendESP32::Stream'],['../structaudio__tools_1_1_u_s_b_audio_host_backend_tiny_u_s_b_1_1_stream.html',1,'USBAudioHostBackendTinyUSB::Stream'],['../structaudio__tools_1_1_u_s_b_audio_host_base_1_1_stream.html',1,'USBAudioHostBase::Stream'],['../class_stream.html',1,'Stream']]],
   ['streamclientstate_85',['StreamClientState',['../classaudiotools__rtsp_1_1_stream_client_state.html',1,'audiotools_rtsp']]],
   ['streamcopyt_86',['StreamCopyT',['../classaudio__tools_1_1_stream_copy_t.html',1,'audio_tools']]],
   ['streamcopyt_3c_20uint8_5ft_20_3e_87',['StreamCopyT&lt; uint8_t &gt;',['../classaudio__tools_1_1_stream_copy_t.html',1,'audio_tools']]],

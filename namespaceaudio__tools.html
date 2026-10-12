@@ -2364,6 +2364,33 @@ size_t size)</a> and <a class="el" href="classaudio__tools_1_1_base_stream.html#
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_zephyr.html">USBAudioDeviceZephyr</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">USB Audio 2.0 device backend for Zephyr RTOS.  <a href="classaudio__tools_1_1_u_s_b_audio_device_zephyr.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_backend.html">USBAudioHostBackend</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract seam for every raw USB host stack call the UAC host class logic (<a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_base.html" title="USB Audio Class (UAC1 and UAC2) host: reads PCM audio from an attached USB microphone and/or writes P...">USBAudioHostBase</a>) needs. Concrete subclasses wrap TinyUSB host (<a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_backend_tiny_u_s_b.html" title="USBAudioHostBackend for the TinyUSB host stack provided by the Adafruit TinyUSB Library (RP2040/RP235...">USBAudioHostBackendTinyUSB</a>) or the ESP-IDF usb_host library (<a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_backend_e_s_p32.html" title="USBAudioHostBackend for the ESP-IDF usb_host library which is part of arduino-esp32 (ESP32-S2,...">USBAudioHostBackendESP32</a>).  <a href="classaudio__tools_1_1_u_s_b_audio_host_backend.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_backend_e_s_p32.html">USBAudioHostBackendESP32</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_backend.html" title="Abstract seam for every raw USB host stack call the UAC host class logic (USBAudioHostBase) needs....">USBAudioHostBackend</a> for the ESP-IDF usb_host library which is part of arduino-esp32 (ESP32-S2, ESP32-S3 and ESP32-P4).  <a href="classaudio__tools_1_1_u_s_b_audio_host_backend_e_s_p32.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_backend_tiny_u_s_b.html">USBAudioHostBackendTinyUSB</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_backend.html" title="Abstract seam for every raw USB host stack call the UAC host class logic (USBAudioHostBase) needs....">USBAudioHostBackend</a> for the TinyUSB host stack provided by the Adafruit TinyUSB Library (RP2040/RP2350 native or Pico-PIO-USB, ESP32-S2/ S3/P4 native OTG, STM32, or a MAX3421E host controller on any platform).  <a href="classaudio__tools_1_1_u_s_b_audio_host_backend_tiny_u_s_b.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_base.html">USBAudioHostBase</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">USB Audio Class (UAC1 and UAC2) host: reads PCM audio from an attached USB microphone and/or writes PCM audio to an attached USB speaker or headset, using the same API as the USB Audio device (USBAudioStream).  <a href="classaudio__tools_1_1_u_s_b_audio_host_base.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_e_s_p32.html">USBAudioHostESP32</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">USB Audio host for ESP32-S2/S3/P4 using the ESP-IDF usb_host library: reads audio from an attached USB microphone and/or writes audio to an attached USB speaker.  <a href="classaudio__tools_1_1_u_s_b_audio_host_e_s_p32.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_events.html">USBAudioHostEvents</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Upcalls from a USB host backend into the stack independent UAC host class logic (<a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_base.html" title="USB Audio Class (UAC1 and UAC2) host: reads PCM audio from an attached USB microphone and/or writes P...">USBAudioHostBase</a>). All methods are called from the USB stack context (TinyUSB: inside tuh_task(); ESP-IDF: the USB host task).  <a href="classaudio__tools_1_1_u_s_b_audio_host_events.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_tiny_u_s_b.html">USBAudioHostTinyUSB</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">USB Audio host for the Adafruit TinyUSB host stack: reads audio from an attached USB microphone and/or writes audio to an attached USB speaker.  <a href="classaudio__tools_1_1_u_s_b_audio_host_tiny_u_s_b.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_tiny_u_s_b_free_r_t_o_s.html">USBAudioHostTinyUSBFreeRTOS</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variant of <a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_tiny_u_s_b.html" title="USB Audio host for the Adafruit TinyUSB host stack: reads audio from an attached USB microphone and/o...">USBAudioHostTinyUSB</a> for FreeRTOS (e.g. RP2040 + FreeRTOS, or ESP32 with the Adafruit TinyUSB host stack).  <a href="classaudio__tools_1_1_u_s_b_audio_host_tiny_u_s_b_free_r_t_o_s.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_stream_base.html">USBAudioStreamBase</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Role-independent front end shared by USB Audio devices (<a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html" title="USB Audio Device class for audio streaming over USB.">USBAudioDeviceBase</a>, aliased as USBAudioStream) and USB Audio hosts (<a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_base.html" title="USB Audio Class (UAC1 and UAC2) host: reads PCM audio from an attached USB microphone and/or writes P...">USBAudioHostBase</a>, aliased as USBAudioHostStream).  <a href="classaudio__tools_1_1_u_s_b_audio_stream_base.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_usb_endpoint_descriptor_view.html">UsbEndpointDescriptorView</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Backend-agnostic mirror of tusb_desc_endpoint_t (USB 2.0 spec Table 9-13). wMaxPacketSize is kept in its <em>raw</em> little-endian form (bits 10..0 = size, bits 12..11 = high-speed additional transactions per microframe) so it round-trips bit-for-bit back into a real endpoint descriptor for backends that need one; use <a class="el" href="structaudio__tools_1_1_usb_endpoint_descriptor_view.html#add33aa23a935c1ab5b815699f0813fd1">packetSize()</a> for the masked value the UAC2 driver's own sizing logic uses (this mirrors TinyUSB's tu_edpt_packet_size(), which also only masks the low 11 bits and does not apply the HS multiplier).  <a href="structaudio__tools_1_1_usb_endpoint_descriptor_view.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2766,6 +2793,8 @@ Typedefs</h2></td></tr>
 <tr class="memitem:a22b64bd5d45692fb5db35650e3fd1c0f" id="r_a22b64bd5d45692fb5db35650e3fd1c0f"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a22b64bd5d45692fb5db35650e3fd1c0f">URLStreamBufferedESP32</a> = <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html">URLStreamBufferedT</a>&lt; <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html">URLStreamESP32</a> &gt;</td></tr>
 <tr class="memdesc:a22b64bd5d45692fb5db35650e3fd1c0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffered <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a> for ESP32 platform.  <br /></td></tr>
 <tr class="separator:a22b64bd5d45692fb5db35650e3fd1c0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88bd037c299abc005f7759929baca299" id="r_a88bd037c299abc005f7759929baca299"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a88bd037c299abc005f7759929baca299">USBAudioHostStream</a> = <a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_e_s_p32.html">USBAudioHostESP32</a></td></tr>
+<tr class="separator:a88bd037c299abc005f7759929baca299"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga43a0ff637dbf8c8e3d47f575c950f2fd" id="r_ga43a0ff637dbf8c8e3d47f575c950f2fd"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usb.html#ga43a0ff637dbf8c8e3d47f575c950f2fd">USBAudioStream</a> = <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html">USBAudioDeviceESP32</a></td></tr>
 <tr class="memdesc:ga43a0ff637dbf8c8e3d47f575c950f2fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">USBAudioStream type alias for ESP32.  <br /></td></tr>
 <tr class="separator:ga43a0ff637dbf8c8e3d47f575c950f2fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -3206,6 +3235,12 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:a157d05f33287286839e78e8d8116bedd"><td class="mdescLeft">&#160;</td><td class="mdescRight">USB transfer direction, mirrors TinyUSB's TUSB_DIR_OUT/TUSB_DIR_IN (0/1).  <a href="namespaceaudio__tools.html#a157d05f33287286839e78e8d8116bedd">More...</a><br /></td></tr>
 <tr class="separator:a157d05f33287286839e78e8d8116bedd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5215dca0bf7e06265945b65e039d2f24" id="r_a5215dca0bf7e06265945b65e039d2f24"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a5215dca0bf7e06265945b65e039d2f24">UsbHostStreamRole</a> : uint8_t { <a class="el" href="namespaceaudio__tools.html#a5215dca0bf7e06265945b65e039d2f24a9558aabfea60a3c9845c7c8295a743e0">RxData</a> = 0
+, <a class="el" href="namespaceaudio__tools.html#a5215dca0bf7e06265945b65e039d2f24a5bb607fad1b50dc0268075ec00bdca52">TxData</a> = 1
+, <a class="el" href="namespaceaudio__tools.html#a5215dca0bf7e06265945b65e039d2f24abea4c2c8eb82d05891ddd71584881b56">Feedback</a> = 2
+ }</td></tr>
+<tr class="memdesc:a5215dca0bf7e06265945b65e039d2f24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Role of an isochronous endpoint which is streamed by a host backend.  <a href="namespaceaudio__tools.html#a5215dca0bf7e06265945b65e039d2f24">More...</a><br /></td></tr>
+<tr class="separator:a5215dca0bf7e06265945b65e039d2f24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af21c897fe6ae1bb1a36cf4db2b54f888" id="r_af21c897fe6ae1bb1a36cf4db2b54f888"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#af21c897fe6ae1bb1a36cf4db2b54f888">UsbSpeed</a> : uint8_t { <a class="el" href="namespaceaudio__tools.html#af21c897fe6ae1bb1a36cf4db2b54f888abbd47109890259c0127154db1af26c75">Full</a>
 , <a class="el" href="namespaceaudio__tools.html#af21c897fe6ae1bb1a36cf4db2b54f888a655d20c1ca69519ca647684edbb2db35">High</a>
 , <a class="el" href="namespaceaudio__tools.html#af21c897fe6ae1bb1a36cf4db2b54f888a28d0edd045e05cf5af64e35ae0c4c6ef">Low</a>
@@ -3710,6 +3745,20 @@ Variables</h2></td></tr>
 <tr class="separator:ad15653cacfae299036b4d1e0f0a298c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2392d2cf9f9fd71dde3fb54fe41c843f" id="r_a2392d2cf9f9fd71dde3fb54fe41c843f"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a2392d2cf9f9fd71dde3fb54fe41c843f">is_a2dp_active</a> = false</td></tr>
 <tr class="separator:a2392d2cf9f9fd71dde3fb54fe41c843f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4c8e03e48795ff2f087650e0af790fd" id="r_ad4c8e03e48795ff2f087650e0af790fd"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ad4c8e03e48795ff2f087650e0af790fd">kAudio1EpCtrlSamplingFreq</a> = 0x01</td></tr>
+<tr class="separator:ad4c8e03e48795ff2f087650e0af790fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f92c016becab94954a370e7d05ff221" id="r_a3f92c016becab94954a370e7d05ff221"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a3f92c016becab94954a370e7d05ff221">kAudio1ReqGetCur</a> = 0x81</td></tr>
+<tr class="separator:a3f92c016becab94954a370e7d05ff221"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b7cedc15500022c646b64ad8e424cd2" id="r_a6b7cedc15500022c646b64ad8e424cd2"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a6b7cedc15500022c646b64ad8e424cd2">kAudio1ReqGetMax</a> = 0x83</td></tr>
+<tr class="separator:a6b7cedc15500022c646b64ad8e424cd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a029d4347b90a8ba4eeaf43ccf79ac28e" id="r_a029d4347b90a8ba4eeaf43ccf79ac28e"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a029d4347b90a8ba4eeaf43ccf79ac28e">kAudio1ReqGetMin</a> = 0x82</td></tr>
+<tr class="separator:a029d4347b90a8ba4eeaf43ccf79ac28e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae223564c8fa8a81742faa336760825cf" id="r_ae223564c8fa8a81742faa336760825cf"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ae223564c8fa8a81742faa336760825cf">kAudioCsAcClockSource</a> = 0x0A</td></tr>
+<tr class="separator:ae223564c8fa8a81742faa336760825cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a932b62b7b7565c18bdda233fc6d207bb" id="r_a932b62b7b7565c18bdda233fc6d207bb"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a932b62b7b7565c18bdda233fc6d207bb">kAudioCsAcFeatureUnit</a> = 0x06</td></tr>
+<tr class="separator:a932b62b7b7565c18bdda233fc6d207bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9858de88057afebef48dd6420b1db375" id="r_a9858de88057afebef48dd6420b1db375"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a9858de88057afebef48dd6420b1db375">kAudioCsAcHeader</a> = 0x01</td></tr>
+<tr class="separator:a9858de88057afebef48dd6420b1db375"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ec17388887f5cac77ac008f2a71da1e" id="r_a9ec17388887f5cac77ac008f2a71da1e"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a9ec17388887f5cac77ac008f2a71da1e">kAudioCsAcInputTerminal</a> = 0x02</td></tr>
 <tr class="separator:a9ec17388887f5cac77ac008f2a71da1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a34c09e8cbe72093f3e808fe96afbde48" id="r_a34c09e8cbe72093f3e808fe96afbde48"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a34c09e8cbe72093f3e808fe96afbde48">kAudioCsAcOutputTerminal</a> = 0x03</td></tr>
@@ -3728,10 +3777,14 @@ Variables</h2></td></tr>
 <tr class="separator:aed27eb81b548e57bacbe9b7c394970eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0da6d824897cb2e42a199eb5d6c847ee" id="r_a0da6d824897cb2e42a199eb5d6c847ee"><td class="memItemLeft" align="right" valign="top">static constexpr uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a0da6d824897cb2e42a199eb5d6c847ee">kAudioDescIadLen</a> = 8</td></tr>
 <tr class="separator:a0da6d824897cb2e42a199eb5d6c847ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3132a3282b826ae0a877eb3cee7724b5" id="r_a3132a3282b826ae0a877eb3cee7724b5"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a3132a3282b826ae0a877eb3cee7724b5">kAudioFormatTypeI</a> = 0x01</td></tr>
+<tr class="separator:a3132a3282b826ae0a877eb3cee7724b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d895a110eee6fed2ecd4fa0c9b1737e" id="r_a2d895a110eee6fed2ecd4fa0c9b1737e"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a2d895a110eee6fed2ecd4fa0c9b1737e">kAudioIntProtocolCodeV2</a> = 0x20</td></tr>
 <tr class="separator:a2d895a110eee6fed2ecd4fa0c9b1737e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a035bf0f0cd5de55f14802563ea99707e" id="r_a035bf0f0cd5de55f14802563ea99707e"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a035bf0f0cd5de55f14802563ea99707e">kAudioSubclassControl</a> = 0x01</td></tr>
 <tr class="separator:a035bf0f0cd5de55f14802563ea99707e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6219283c3761ff532ee51b100bd25035" id="r_a6219283c3761ff532ee51b100bd25035"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a6219283c3761ff532ee51b100bd25035">kAudioSubclassStreaming</a> = 0x02</td></tr>
+<tr class="separator:a6219283c3761ff532ee51b100bd25035"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ceccd9180130872bc7c51eda112cf4c" id="r_a9ceccd9180130872bc7c51eda112cf4c"><td class="memItemLeft" align="right" valign="top">static constexpr uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a9ceccd9180130872bc7c51eda112cf4c">kAudioTermTypeUsbStreaming</a> = 0x0101</td></tr>
 <tr class="separator:a9ceccd9180130872bc7c51eda112cf4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a69ae23bffd1b3498f0df83640e2e7a5d" id="r_a69ae23bffd1b3498f0df83640e2e7a5d"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a69ae23bffd1b3498f0df83640e2e7a5d">kControlStageData</a> = 2</td></tr>
@@ -3740,12 +3793,20 @@ Variables</h2></td></tr>
 <tr class="separator:ae94f7527e14e2378344a5183c2d2b9fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26249c976181af176010e43b94a4f809" id="r_a26249c976181af176010e43b94a4f809"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a26249c976181af176010e43b94a4f809">kUsbClassAudio</a> = 0x01</td></tr>
 <tr class="separator:a26249c976181af176010e43b94a4f809"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12961a214d5e3c0096a66c832fcee435" id="r_a12961a214d5e3c0096a66c832fcee435"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a12961a214d5e3c0096a66c832fcee435">kUsbDescTypeConfiguration</a> = 0x02</td></tr>
+<tr class="separator:a12961a214d5e3c0096a66c832fcee435"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a244f40135995e530f4f4108e33ede29c" id="r_a244f40135995e530f4f4108e33ede29c"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a244f40135995e530f4f4108e33ede29c">kUsbDescTypeCsEndpoint</a> = 0x25</td></tr>
+<tr class="separator:a244f40135995e530f4f4108e33ede29c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaafc6d239ff6424024acac2a6e707a23" id="r_aaafc6d239ff6424024acac2a6e707a23"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aaafc6d239ff6424024acac2a6e707a23">kUsbDescTypeCsInterface</a> = 0x24</td></tr>
 <tr class="separator:aaafc6d239ff6424024acac2a6e707a23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d0331203c0613596337b1066f66f88a" id="r_a7d0331203c0613596337b1066f66f88a"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a7d0331203c0613596337b1066f66f88a">kUsbDescTypeEndpoint</a> = 0x05</td></tr>
 <tr class="separator:a7d0331203c0613596337b1066f66f88a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa78f60723e3c276a5f63bc0bbf57f9c6" id="r_aa78f60723e3c276a5f63bc0bbf57f9c6"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aa78f60723e3c276a5f63bc0bbf57f9c6">kUsbDescTypeIad</a> = 0x0B</td></tr>
+<tr class="separator:aa78f60723e3c276a5f63bc0bbf57f9c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac2a2cd297d85dae672fabc4a2c9539d" id="r_aac2a2cd297d85dae672fabc4a2c9539d"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aac2a2cd297d85dae672fabc4a2c9539d">kUsbDescTypeInterface</a> = 0x04</td></tr>
 <tr class="separator:aac2a2cd297d85dae672fabc4a2c9539d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3f2190e1074cf2065428c27a1c73767" id="r_af3f2190e1074cf2065428c27a1c73767"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#af3f2190e1074cf2065428c27a1c73767">kUsbReqSetInterface</a> = 0x0B</td></tr>
+<tr class="separator:af3f2190e1074cf2065428c27a1c73767"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab138c7bdee5f06eebb7fb5c997fac350" id="r_ab138c7bdee5f06eebb7fb5c997fac350"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ab138c7bdee5f06eebb7fb5c997fac350">LOCATION</a> = &quot;Location&quot;</td></tr>
 <tr class="separator:ab138c7bdee5f06eebb7fb5c997fac350"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc24da36fe561f8ba8359b1096b3d7dc" id="r_afc24da36fe561f8ba8359b1096b3d7dc"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#afc24da36fe561f8ba8359b1096b3d7dc">MetaDataTypeStr</a> [] = {&quot;Title&quot;, &quot;Artist&quot;, &quot;Album&quot;, &quot;Genre&quot;,&quot;Name&quot;, &quot;Description&quot;, &quot;Corrupted&quot;}</td></tr>
@@ -4712,6 +4773,20 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
+<a id="a88bd037c299abc005f7759929baca299" name="a88bd037c299abc005f7759929baca299"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88bd037c299abc005f7759929baca299">&#9670;&#160;</a></span>USBAudioHostStream</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespaceaudio__tools.html#a88bd037c299abc005f7759929baca299">USBAudioHostStream</a> =  <a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_e_s_p32.html">USBAudioHostESP32</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="adc69dbce3f8125e7ecc45e4011c6feb3" name="adc69dbce3f8125e7ecc45e4011c6feb3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adc69dbce3f8125e7ecc45e4011c6feb3">&#9670;&#160;</a></span>WiFiClient</h2>
 
@@ -5434,6 +5509,38 @@ Norman Ritz </dd></dl>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a157d05f33287286839e78e8d8116bedda7c147cda9e49590f6abe83d118b7353b" name="a157d05f33287286839e78e8d8116bedda7c147cda9e49590f6abe83d118b7353b"></a>Out&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a157d05f33287286839e78e8d8116beddaefeb369cccbd560588a756610865664c" name="a157d05f33287286839e78e8d8116beddaefeb369cccbd560588a756610865664c"></a>In&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<a id="a5215dca0bf7e06265945b65e039d2f24" name="a5215dca0bf7e06265945b65e039d2f24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5215dca0bf7e06265945b65e039d2f24">&#9670;&#160;</a></span>UsbHostStreamRole</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="namespaceaudio__tools.html#a5215dca0bf7e06265945b65e039d2f24">UsbHostStreamRole</a> : uint8_t</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Role of an isochronous endpoint which is streamed by a host backend. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a5215dca0bf7e06265945b65e039d2f24a9558aabfea60a3c9845c7c8295a743e0" name="a5215dca0bf7e06265945b65e039d2f24a9558aabfea60a3c9845c7c8295a743e0"></a>RxData&#160;</td><td class="fielddoc"><p>Audio data from the attached device (microphone): ISO IN. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a5215dca0bf7e06265945b65e039d2f24a5bb607fad1b50dc0268075ec00bdca52" name="a5215dca0bf7e06265945b65e039d2f24a5bb607fad1b50dc0268075ec00bdca52"></a>TxData&#160;</td><td class="fielddoc"><p>Audio data to the attached device (speaker): ISO OUT. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a5215dca0bf7e06265945b65e039d2f24abea4c2c8eb82d05891ddd71584881b56" name="a5215dca0bf7e06265945b65e039d2f24abea4c2c8eb82d05891ddd71584881b56"></a>Feedback&#160;</td><td class="fielddoc"><p>Explicit feedback from the attached speaker: ISO IN. </p>
+</td></tr>
 </table>
 
 </div>
@@ -11221,6 +11328,160 @@ template&lt;typename T , class P &gt; </div>
 
 </div>
 </div>
+<a id="ad4c8e03e48795ff2f087650e0af790fd" name="ad4c8e03e48795ff2f087650e0af790fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4c8e03e48795ff2f087650e0af790fd">&#9670;&#160;</a></span>kAudio1EpCtrlSamplingFreq</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint8_t kAudio1EpCtrlSamplingFreq = 0x01</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3f92c016becab94954a370e7d05ff221" name="a3f92c016becab94954a370e7d05ff221"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f92c016becab94954a370e7d05ff221">&#9670;&#160;</a></span>kAudio1ReqGetCur</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint8_t kAudio1ReqGetCur = 0x81</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6b7cedc15500022c646b64ad8e424cd2" name="a6b7cedc15500022c646b64ad8e424cd2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b7cedc15500022c646b64ad8e424cd2">&#9670;&#160;</a></span>kAudio1ReqGetMax</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint8_t kAudio1ReqGetMax = 0x83</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a029d4347b90a8ba4eeaf43ccf79ac28e" name="a029d4347b90a8ba4eeaf43ccf79ac28e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a029d4347b90a8ba4eeaf43ccf79ac28e">&#9670;&#160;</a></span>kAudio1ReqGetMin</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint8_t kAudio1ReqGetMin = 0x82</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae223564c8fa8a81742faa336760825cf" name="ae223564c8fa8a81742faa336760825cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae223564c8fa8a81742faa336760825cf">&#9670;&#160;</a></span>kAudioCsAcClockSource</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint8_t kAudioCsAcClockSource = 0x0A</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a932b62b7b7565c18bdda233fc6d207bb" name="a932b62b7b7565c18bdda233fc6d207bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a932b62b7b7565c18bdda233fc6d207bb">&#9670;&#160;</a></span>kAudioCsAcFeatureUnit</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint8_t kAudioCsAcFeatureUnit = 0x06</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9858de88057afebef48dd6420b1db375" name="a9858de88057afebef48dd6420b1db375"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9858de88057afebef48dd6420b1db375">&#9670;&#160;</a></span>kAudioCsAcHeader</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint8_t kAudioCsAcHeader = 0x01</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a9ec17388887f5cac77ac008f2a71da1e" name="a9ec17388887f5cac77ac008f2a71da1e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9ec17388887f5cac77ac008f2a71da1e">&#9670;&#160;</a></span>kAudioCsAcInputTerminal</h2>
 
@@ -11419,6 +11680,28 @@ template&lt;typename T , class P &gt; </div>
 
 </div>
 </div>
+<a id="a3132a3282b826ae0a877eb3cee7724b5" name="a3132a3282b826ae0a877eb3cee7724b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3132a3282b826ae0a877eb3cee7724b5">&#9670;&#160;</a></span>kAudioFormatTypeI</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint8_t kAudioFormatTypeI = 0x01</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a2d895a110eee6fed2ecd4fa0c9b1737e" name="a2d895a110eee6fed2ecd4fa0c9b1737e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2d895a110eee6fed2ecd4fa0c9b1737e">&#9670;&#160;</a></span>kAudioIntProtocolCodeV2</h2>
 
@@ -11452,6 +11735,28 @@ template&lt;typename T , class P &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">constexpr uint8_t kAudioSubclassControl = 0x01</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6219283c3761ff532ee51b100bd25035" name="a6219283c3761ff532ee51b100bd25035"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6219283c3761ff532ee51b100bd25035">&#9670;&#160;</a></span>kAudioSubclassStreaming</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint8_t kAudioSubclassStreaming = 0x02</td>
         </tr>
       </table>
   </td>
@@ -11551,6 +11856,50 @@ template&lt;typename T , class P &gt; </div>
 
 </div>
 </div>
+<a id="a12961a214d5e3c0096a66c832fcee435" name="a12961a214d5e3c0096a66c832fcee435"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12961a214d5e3c0096a66c832fcee435">&#9670;&#160;</a></span>kUsbDescTypeConfiguration</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint8_t kUsbDescTypeConfiguration = 0x02</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a244f40135995e530f4f4108e33ede29c" name="a244f40135995e530f4f4108e33ede29c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a244f40135995e530f4f4108e33ede29c">&#9670;&#160;</a></span>kUsbDescTypeCsEndpoint</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint8_t kUsbDescTypeCsEndpoint = 0x25</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aaafc6d239ff6424024acac2a6e707a23" name="aaafc6d239ff6424024acac2a6e707a23"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aaafc6d239ff6424024acac2a6e707a23">&#9670;&#160;</a></span>kUsbDescTypeCsInterface</h2>
 
@@ -11595,6 +11944,28 @@ template&lt;typename T , class P &gt; </div>
 
 </div>
 </div>
+<a id="aa78f60723e3c276a5f63bc0bbf57f9c6" name="aa78f60723e3c276a5f63bc0bbf57f9c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa78f60723e3c276a5f63bc0bbf57f9c6">&#9670;&#160;</a></span>kUsbDescTypeIad</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint8_t kUsbDescTypeIad = 0x0B</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aac2a2cd297d85dae672fabc4a2c9539d" name="aac2a2cd297d85dae672fabc4a2c9539d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aac2a2cd297d85dae672fabc4a2c9539d">&#9670;&#160;</a></span>kUsbDescTypeInterface</h2>
 
@@ -11606,6 +11977,28 @@ template&lt;typename T , class P &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">constexpr uint8_t kUsbDescTypeInterface = 0x04</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af3f2190e1074cf2065428c27a1c73767" name="af3f2190e1074cf2065428c27a1c73767"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3f2190e1074cf2065428c27a1c73767">&#9670;&#160;</a></span>kUsbReqSetInterface</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint8_t kUsbReqSetInterface = 0x0B</td>
         </tr>
       </table>
   </td>
