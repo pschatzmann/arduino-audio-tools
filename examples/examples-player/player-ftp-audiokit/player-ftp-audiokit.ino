@@ -33,8 +33,7 @@ void startStop(bool, int, void*) { player.setActive(!player.isActive()); }
 void setup() {
   Serial.begin(115200);
   AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
-  FTPLogger::setOutput(Serial);
-  FTPLogger::setLogLevel(LOG_DEBUG);
+  FTPLogger.begin(Serial, LOG_INFO);
 
   // connect to WIFI
   WiFi.begin(ssid, ssid_pwd);

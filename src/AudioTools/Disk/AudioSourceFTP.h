@@ -1,6 +1,8 @@
-#include "FTPClient.h"
+#pragma once
+
 #include "AudioSource.h"
-#include "vector"
+#include "AudioTools/CoreAudio/AudioBasic/Str.h"
+#include "FTPClient.h"
 
 namespace audio_tools {
 
@@ -8,12 +10,14 @@ namespace audio_tools {
  * @brief An AudioSource that uses the
  * https://github.com/pschatzmann/TinyFTPClient library to retrieve files from a
  * FTP Server. You need to provide an FTPClient object to the constructor and
- * make sure that you open it before you access the files. The storage of the
- * expanded file names is done on the heap, so in order to limit the requested
- * memory we can limit the number of files.
+ * make sure that you open it before you access the files.
+ *
+ * The file names are not stored: the directory is listed on the server each
+ * time a new file is selected and the n-th matching file is opened. So only
+ * the name of the actual file is kept in memory.
  *
  * @note supported only by Arduino platforms!
- * 
+ *
  * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -22,34 +26,36 @@ namespace audio_tools {
 template <class ClientType>
 class AudioSourceFTP : public AudioSource {
  public:
-  /// Default constructor: Provide the client class as template argument e.g. AudioSourceFTP<WiFiClient> source(client, path, ext);.
-  AudioSourceFTP(FTPClient<ClientType>& client, const char* path, const char* ext,
-                 int files = 0) {
+  /// Default constructor: Provide the client class as template argument e.g.
+  /// AudioSourceFTP<WiFiClient> source(client, path, ext);.
+  AudioSourceFTP(FTPClient<ClientType>& client, const char* path,
+                 const char* ext, int files = 0) {
     p_client = &client;
     timeout_auto_next_value = 5000;
-    if (path) p_path = path;
+    directory = path != nullptr ? path : "/";
+    p_ext = ext;
     setMaxFiles(files);
   }
 
-  /// Resets the actual data
-  bool begin()override {
+  /// Checks that the directory contains some files
+  bool begin() override {
     TRACED();
     idx = 0;
-    files.clear();
-    return addDirectory(p_path);
+    file.close();
+    file_count = count();
+    LOGI("Number of files: %d", file_count);
+    return file_count > 0;
   }
 
-  /// Resets the actual data
+  /// Closes the actual file
   void end() {
     idx = 0;
-    files.clear();
+    file.close();
   }
 
   /// Returns next audio stream
   Stream* nextStream(int offset) override {
-    int tmp_idx = idx + offset;
-    if (!isValidIdx(tmp_idx)) return nullptr;
-    return selectStream(tmp_idx);
+    return selectStream(idx + offset);
   };
 
   /// Returns previous audio stream
@@ -59,79 +65,103 @@ class AudioSourceFTP : public AudioSource {
   /// the first value is 0!)
   Stream* selectStream(int index) override {
     if (!isValidIdx(index)) return nullptr;
-    idx = index;
-    if (file) {
-       file.close();  // close the previous file
+    Str path;
+    if (!findFile(index, path)) {
+      LOGW("No file at index %d", index);
+      return nullptr;
     }
-    file = p_client->open(files[idx].name());
-    return &file;
+    idx = index;
+    return openFile(path.c_str());
   }
 
-  /// Retrieves all files and returns the actual index of the stream
+  /// Returns the actual index of the stream
   int index() override { return idx; }
 
-  /// Returns the FTPFile for the indicated path
+  /// Opens the indicated file: if the path does not match the file extension
+  /// it is considered to be a directory and the first file is opened.
   Stream* selectStream(const char* path) override {
     TRACED();
-    files.clear();
-    idx = 0;
-    addDirectory(path);
+    if (path == nullptr) return nullptr;
+    if (p_ext != nullptr && endsWith(path, p_ext)) return openFile(path);
+    directory = path;
+    if (!begin()) return nullptr;
     return selectStream(0);
   }
 
-  /// provides the actual stream (e.g. file) name or url
-  const char* toStr() override {
-    return file.name();
-  }
+  /// provides the actual file name
+  const char* toStr() override { return file.name(); }
 
   /// Defines the max number of files (if value is >0)
   void setMaxFiles(int maxCount) { max_files = maxCount; }
 
-  /// Adds all the files of a directory
-  bool addDirectory(const char* path) {
-    TRACED();
-    if (p_client == nullptr) return false;
-    FTPFile dir = p_client->open(path);
-    addFiles(dir, 1);
-    return true;
-  }
+  /// Defines the file extension filter (e.g. "mp3"): nullptr for all files
+  void setFileExtension(const char* ext) { p_ext = ext; }
 
-  /// Returns the number of available files
-  size_t size() { return files.size(); }
+  /// Returns the number of files that were found by begin()
+  size_t size() { return file_count < 0 ? 0 : file_count; }
 
  protected:
-  std::vector<FTPFile> files;
   FTPClient<ClientType>* p_client = nullptr;
   FTPFile file;
+  Str directory;
   int idx = 0;
+  int file_count = -1;  // -1: unknown
   size_t max_files = 0;
   const char* p_ext = nullptr;
-  const char* p_path = "/";
-  bool is_first = true;
 
-  /// Adds all files recursively
-  void addFiles(FTPFile& dir, int level) {
-    if (!endsWith(dir.name(), p_ext)) {
-      LOGI("adding file %s", dir.name());
-      files.push_back(std::move(dir));
-    } else {
-      for (const auto& file : p_client->ls(dir.name())) {
-        if (endsWith(file.name(), p_ext)) {
-          LOGI("adding file %s", file.name());
-          files.push_back(std::move(file));
-        }
-        if (max_files > 0 && files.size() >= max_files) {
-          LOGI("max files reached: %d", max_files);
-          return;  // stop if we reached the max number of files
-        }
+  Stream* openFile(const char* path) {
+    file.close();  // close the previous file
+    LOGI("open %s", path);
+    file = p_client->open(path);
+    if (!file) {
+      LOGE("Could not open %s", path);
+      return nullptr;
+    }
+    return &file;
+  }
+
+  /// Lists the directory and provides the path of the n-th matching file
+  bool findFile(int index, Str& path) {
+    if (p_client == nullptr) return false;
+    int n = 0;
+    for (auto it = p_client->ls(directory.c_str()); it != it.end(); ++it) {
+      const char* name = it.fileName();
+      if (!endsWith(name, p_ext)) continue;
+      if (n++ == index) {
+        toPath(name, path);
+        return true;
       }
     }
+    return false;
+  }
+
+  /// Lists the directory and counts the matching files
+  int count() {
+    if (p_client == nullptr) return 0;
+    int n = 0;
+    for (auto it = p_client->ls(directory.c_str()); it != it.end(); ++it) {
+      if (!endsWith(it.fileName(), p_ext)) continue;
+      if (++n >= max_files && max_files > 0) break;
+    }
+    return n;
+  }
+
+  /// Some servers list the names with the directory, others without it
+  void toPath(const char* name, Str& result) {
+    if (strchr(name, '/') != nullptr) {
+      result = name;
+      return;
+    }
+    result = directory.c_str();
+    if (!result.isEmpty() && !result.endsWith("/")) result += "/";
+    result += name;
   }
 
   bool isValidIdx(int index) {
     if (index < 0) return false;
-    if (index >= files.size()) {
-      LOGE("index %d is out of range (size: %d)", index, files.size());
+    if (max_files > 0 && index >= (int)max_files) return false;
+    if (file_count >= 0 && index >= file_count) {
+      LOGW("index %d is out of range (size: %d)", index, file_count);
       return false;
     }
     return true;
@@ -139,8 +169,8 @@ class AudioSourceFTP : public AudioSource {
 
   bool endsWith(const char* file, const char* ext) {
     if (file == nullptr) return false;
-    if (p_ext == nullptr) return true;
-    return (StrView(file).endsWith(ext));
+    if (ext == nullptr) return true;
+    return StrView(file).endsWithIgnoreCase(ext);
   }
 };
 
