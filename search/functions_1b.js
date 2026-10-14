@@ -174,7 +174,7 @@ var searchData=
   ['_7etask_171',['~Task',['../classaudio__tools_1_1_task.html#a1eb733e1621bbf8c6939e1bd2978ddd8',1,'audio_tools::Task']]],
   ['_7etaskzephyr_172',['~TaskZephyr',['../classaudio__tools_1_1_task_zephyr.html#a6154f128a1ddb3400143b1e971b6109f',1,'audio_tools::TaskZephyr']]],
   ['_7etfliteaudiostream_173',['~TfLiteAudioStream',['../classaudio__tools_1_1_tf_lite_audio_stream.html#a8aaaf30c869f61169ff414c35938ef36',1,'audio_tools::TfLiteAudioStream']]],
-  ['_7etflitemicrospeachwriter_174',['~TfLiteMicroSpeachWriter',['../classaudio__tools_1_1_tf_lite_micro_speach_writer.html#a92fd8bc04dbecd74803cf2b8cca8dd00',1,'audio_tools::TfLiteMicroSpeachWriter']]],
+  ['_7etflitemicrospeechwriter_174',['~TfLiteMicroSpeechWriter',['../classaudio__tools_1_1_tf_lite_micro_speech_writer.html#a15b92480fcc71ef8f8301ab0e7879137',1,'audio_tools::TfLiteMicroSpeechWriter']]],
   ['_7etimercallbackaudiostream_175',['~TimerCallbackAudioStream',['../classaudio__tools_1_1_timer_callback_audio_stream.html#aa204e7d2a4cf871dbc8368ed31f508d3',1,'audio_tools::TimerCallbackAudioStream']]],
   ['_7etrack_176',['~Track',['../structaudio__tools_1_1_demuxer_m_p4_1_1_track.html#a8ae57ca1f3263fdd858d0aa4e9c6385a',1,'audio_tools::DemuxerMP4::Track']]],
   ['_7eurlloaderhls_177',['~URLLoaderHLS',['../classaudio__tools__hls_1_1_u_r_l_loader_h_l_s.html#a2f026c2af7d0ee26535d94b1f679bcd4',1,'audio_tools_hls::URLLoaderHLS']]],

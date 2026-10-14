@@ -181,7 +181,7 @@ var searchData=
   ['initial_5fdeltas_178',['initial_deltas',['../classaudio__tools_1_1_a_d_p_c_m_decoder_x_q.html#ae3ae798c154f33dd3c08cebcc2e7b2c2',1,'audio_tools::ADPCMDecoderXQ']]],
   ['initialized_179',['initialized',['../classaudio__tools_1_1_m_d_f_echo_cancellation.html#aedeffc7d23da25d52b9a50045189fe2b',1,'audio_tools::MDFEchoCancellation']]],
   ['initializekernel_180',['initializeKernel',['../classaudio__tools_1_1_equalizer_n_bands.html#abf6c30d3c13e73812716c4bf4fd571e8',1,'audio_tools::EqualizerNBands']]],
-  ['initializemicrofeatures_181',['initializeMicroFeatures',['../classaudio__tools_1_1_tf_lite_micro_speach_writer.html#a7ab293165ad2b72e4184e25ded1689a0',1,'audio_tools::TfLiteMicroSpeachWriter']]],
+  ['initializemicrofeatures_181',['initializeMicroFeatures',['../classaudio__tools_1_1_tf_lite_micro_speech_writer.html#a7ab293165ad2b72e4184e25ded1689a0',1,'audio_tools::TfLiteMicroSpeechWriter']]],
   ['initializerlist_2eh_182',['InitializerList.h',['../_initializer_list_8h.html',1,'']]],
   ['initmediasource_183',['initMediaSource',['../classaudio__tools_1_1_r_t_s_p_media_streamer_base.html#afd67ca254d92922f6c28f4f5d8f8bc3d',1,'audio_tools::RTSPMediaStreamerBase']]],
   ['initslabs_184',['initSlabs',['../classaudio__tools_1_1_i2_s_driver_zephyr.html#a552fc42b7b69c5ab4030e2979d87bf1c',1,'audio_tools::I2SDriverZephyr']]],
