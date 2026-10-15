@@ -147,13 +147,19 @@ class USBAudio2DescriptorBuilder {
 
 
   // True when the explicit-feedback endpoint should appear in the descriptor.
-  // Mirrors isFeedbackEpEnabled() in USBAudioDeviceBase: feedback is only valid
-  // for a pure OUT (speaker) path — with an IN endpoint present the host uses
-  // the IN stream as implicit feedback, and TX-only mode has no OUT EP at all.
+  // Mirrors isFeedbackEpEnabled() in USBAudioDeviceBase.  TX-only mode has no
+  // OUT EP at all.  In RXTX mode it's opt-in (enable_feedback_ep_rxtx): the
+  // host does NOT use the IN stream as implicit feedback here, since that
+  // needs an asynchronous OUT endpoint and an IN endpoint declared as
+  // implicit feedback (usage type 10b), and without this the OUT endpoint is
+  // adaptive (see writeIsoEndpoint()) -- ie: the host ignores the device's
+  // clock entirely.  Platforms that pin ep_fb to the same address as ep_in
+  // (one ISO IN endpoint) can't have both.
   bool enableFeedbackEp() const {
-    return p_config->enable_feedback_ep
-        && p_config->enable_ep_out
-        && !p_config->enable_ep_in;
+    if (!p_config->enable_feedback_ep || !p_config->enable_ep_out) return false;
+    if (!p_config->enable_ep_in) return true;
+    return p_config->enable_feedback_ep_rxtx &&
+           !(p_config->ep_fb >= 0 && p_config->ep_fb == p_config->ep_in);
   }
 
   // Isochronous packet size for one 1 ms frame at a given rate.
