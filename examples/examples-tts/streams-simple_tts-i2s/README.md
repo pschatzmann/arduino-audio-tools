@@ -1,6 +1,6 @@
 # Simple TTS
 
-I am providing a simple sketch which generates sound data with my Simple TTS text to speach engine that 
+I am providing a simple sketch which generates sound data with my Simple TTS text to speech engine that 
 uses a configurable library of prerecorded words.
 
 You need to install https://github.com/pschatzmann/arduino-simple-tts

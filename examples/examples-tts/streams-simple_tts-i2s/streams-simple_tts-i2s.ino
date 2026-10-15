@@ -32,7 +32,7 @@ void setup(){
 
 
 void loop() {
-    // speach output
+    // speech output
     Serial.println("providing data...");
     ntt.say(number);
 

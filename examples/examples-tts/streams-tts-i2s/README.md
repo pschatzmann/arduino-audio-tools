@@ -1,6 +1,6 @@
 # Using SAM Speech to Text
 
-I am providing a simple sketch which generates sound data with the TTS text to speach engine.
+I am providing a simple sketch which generates sound data with the TTS text to speech engine.
 You need to install https://github.com/pschatzmann/tts
 
 In this demo we provide the result as I2SStream but you can easly replace with any other output stream. 
