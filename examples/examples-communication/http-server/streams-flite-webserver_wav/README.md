@@ -1,4 +1,4 @@
-# Using FLITE Speach to Text
+# Using FLITE Speech to Text
 
 I am providing a simple sketch which generates sound data with the Flite text to speach engine.
 You need to install https://github.com/pschatzmann/arduino-flite

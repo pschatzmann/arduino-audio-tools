@@ -1,4 +1,4 @@
-# Using SAM Speach to Text
+# Using SAM Speech to Text
 
 I am providing a simple sketch which generates sound data with the SAM text to speach engine.
 You need to install https://github.com/pschatzmann/SAM
