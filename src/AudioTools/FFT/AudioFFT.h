@@ -101,7 +101,10 @@ class FFTInverseOverlapAdder {
     rfft_max = 0.0;
     // define new size
     len = size;
-    if (!data.resize(size)) {
+    // Vector::resize() also returns false if the size did not change (e.g.
+    // resize(0) from end() when the inverse FFT was never used)
+    data.resize(size);
+    if (size > 0 && data.data() == nullptr) {
       LOGE("Could not resize data");
       return false;
     }
@@ -270,6 +273,8 @@ class AudioFFTBase : public AudioStream {
   /// Just resets the current_pos e.g. to start a new cycle
   void reset() {
     current_pos = 0;
+    // drop partially collected input so the next frame starts from scratch
+    stride_buffer.reset();
     if (cfg.window_function_fft != nullptr) {
       cfg.window_function_fft->begin(cfg.length);
     }
