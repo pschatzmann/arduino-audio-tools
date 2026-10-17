@@ -420,8 +420,8 @@ class AudioFFTBase : public AudioStream {
       const float *weights = mel_weights.data() + filter.weight_offset;
       float mel_sum = 0.0f;
       for (int j = 0; j < filter.count; j++) {
-        float m = magnitude(filter.start_bin + j);
-        mel_sum += (power ? m * m : m) * weights[j];
+        int bin = filter.start_bin + j;
+        mel_sum += (power ? magnitudeFast(bin) : magnitude(bin)) * weights[j];
       }
       mel_bins[i] = mel_sum;
     }
