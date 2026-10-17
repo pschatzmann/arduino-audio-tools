@@ -428,14 +428,14 @@ class AudioFFTBase : public AudioStream {
     if (n_bins <= 0) n_bins = size();
     if (!updateMelFilterbank(n_bins, min_freq, max_freq)) return nullptr;
     mel_bins.resize(n_bins);
+    // one pass over the bins (each bin belongs to up to two filters)
+    const float *mags = power ? magnitudesFast() : magnitudes();
     for (int i = 0; i < n_bins; i++) {
       const MelFilter &filter = mel_filters[i];
       const float *weights = mel_weights.data() + filter.weight_offset;
+      const float *m = mags + filter.start_bin;
       float mel_sum = 0.0f;
-      for (int j = 0; j < filter.count; j++) {
-        int bin = filter.start_bin + j;
-        mel_sum += (power ? magnitudeFast(bin) : magnitude(bin)) * weights[j];
-      }
+      for (int j = 0; j < filter.count; j++) mel_sum += m[j] * weights[j];
       mel_bins[i] = mel_sum;
     }
     return mel_bins.data();
@@ -618,34 +618,45 @@ class AudioFFTBase : public AudioStream {
     float mel_step = (hzToMel(max_freq) - min_mel) / (n_bins + 1);
     float bin_hz = (float)cfg.sample_rate / cfg.length;
 
+    // band edges (n_bins + 2 points) and the bin range of every filter
+    Vector<float> edges;
+    edges.resize(n_bins + 2);
+    for (int i = 0; i < n_bins + 2; i++) edges[i] = melToHz(min_mel + i * mel_step);
     mel_filters.resize(n_bins);
-    mel_weights.clear();
+    int total = 0;
     for (int i = 0; i < n_bins; i++) {
-      float left = melToHz(min_mel + i * mel_step);
-      float center = melToHz(min_mel + (i + 1) * mel_step);
-      float right = melToHz(min_mel + (i + 2) * mel_step);
       MelFilter &filter = mel_filters[i];
-      filter.weight_offset = mel_weights.size();
-      filter.start_bin = -1;
-      filter.count = 0;
-      for (int j = 0; j < bins; j++) {
-        float f = j * bin_hz;
-        if (f <= left || f >= right) continue;
-        float w = f <= center ? (f - left) / (center - left)
-                              : (right - f) / (right - center);
-        if (filter.start_bin < 0) filter.start_bin = j;
-        // keep the run contiguous (bins between are always inside)
-        filter.count = j - filter.start_bin + 1;
-        mel_weights.push_back(w);
-      }
-      if (filter.count == 0) {
+      // bins strictly inside (left, right)
+      int first = (int)(edges[i] / bin_hz) + 1;
+      int last = (int)ceilf(edges[i + 2] / bin_hz) - 1;
+      if (last >= bins) last = bins - 1;
+      if (first <= last) {
+        filter.start_bin = first;
+        filter.count = last - first + 1;
+      } else {
         // narrower than one FFT bin: use the bin closest to the center so
         // the band still carries energy instead of being constant zero
-        int j = (int)(center / bin_hz + 0.5f);
-        if (j >= bins) j = bins - 1;
-        filter.start_bin = j;
+        int j = (int)(edges[i + 1] / bin_hz + 0.5f);
+        filter.start_bin = j >= bins ? bins - 1 : j;
+        filter.count = 0;
+      }
+      filter.weight_offset = total;
+      total += filter.count > 0 ? filter.count : 1;
+    }
+    // one allocation for all weights
+    mel_weights.resize(total);
+    for (int i = 0; i < n_bins; i++) {
+      MelFilter &filter = mel_filters[i];
+      float *w = mel_weights.data() + filter.weight_offset;
+      if (filter.count == 0) {
+        w[0] = 1.0f;
         filter.count = 1;
-        mel_weights.push_back(1.0f);
+        continue;
+      }
+      float left = edges[i], center = edges[i + 1], right = edges[i + 2];
+      for (int k = 0; k < filter.count; k++) {
+        float f = (filter.start_bin + k) * bin_hz;
+        w[k] = f <= center ? (f - left) / (center - left) : (right - f) / (right - center);
       }
     }
     mel_n_bins = n_bins;
@@ -663,32 +674,46 @@ class AudioFFTBase : public AudioStream {
   template <typename T>
   void processSamples(const void *data, size_t count) {
     T *dataT = (T *)data;
+    if (cfg.channels == 1) {
+      // mono: copy contiguous runs instead of one sample per call
+      size_t pos = 0;
+      while (pos < count) {
+        size_t room = stride_buffer.availableForWrite() / sizeof(T);
+        size_t n = count - pos < room ? count - pos : room;
+        stride_buffer.writeArray((uint8_t *)(dataT + pos), n * sizeof(T));
+        pos += n;
+        if (stride_buffer.isFull()) processStrideBuffer<T>();
+      }
+      return;
+    }
     T sample;
     for (int j = 0; j < count; j += cfg.channels) {
       sample = dataT[j + cfg.channel_used];
-      if (writeStrideBuffer((uint8_t *)&sample, sizeof(T))) {
-        // process data if buffer is full
-        T *samples = (T *)stride_buffer.data();
-        int sample_count = stride_buffer.size() / sizeof(T);
-        assert(sample_count == cfg.length);
-        for (int j = 0; j < sample_count; j++) {
-          T out_sample = samples[j];
-          T windowed_sample = windowedSample(out_sample, j);
-          float scaled_sample =
-              1.0f / NumberConverter::maxValueT<T>() * windowed_sample;
-          p_driver->setValue(j, scaled_sample);
-        }
-
-        fft<T>();
-
-        // remove stride samples
-        stride_buffer.clearArray(cfg.stride * sizeof(T));
-
-        // validate available data in stride buffer
-        if (cfg.stride == cfg.length) assert(stride_buffer.available() == 0);
-      }
+      if (writeStrideBuffer((uint8_t *)&sample, sizeof(T))) processStrideBuffer<T>();
     }
   }
+
+  /// FFT of the full stride buffer, then drop `stride` samples
+  template <typename T>
+  void processStrideBuffer() {
+    T *samples = (T *)stride_buffer.data();
+    int sample_count = stride_buffer.size() / sizeof(T);
+    assert(sample_count == cfg.length);
+    const float scale = 1.0f / NumberConverter::maxValueT<T>();
+    for (int j = 0; j < sample_count; j++) {
+      T windowed_sample = windowedSample(samples[j], j);
+      p_driver->setValue(j, scale * windowed_sample);
+    }
+
+    fft<T>();
+
+    // remove stride samples
+    stride_buffer.clearArray(cfg.stride * sizeof(T));
+
+    // validate available data in stride buffer
+    if (cfg.stride == cfg.length) assert(stride_buffer.available() == 0);
+  }
+
 
   template <typename T>
   T windowedSample(T sample, int pos) {
