@@ -167,6 +167,7 @@ class FFTInverseOverlapAdder {
  */
 class FFTDriver {
  public:
+  virtual ~FFTDriver() = default;
   virtual bool begin(int len) = 0;
   virtual void end() = 0;
   /// Sets the real value
@@ -204,9 +205,16 @@ class AudioFFTBase : public AudioStream {
  public:
   /// Default Constructor. The len needs to be of the power of 2 (e.g. 512,
   /// 1024, 2048, 4096, 8192)
+  /// Takes ownership of the driver (allocated with new), which is deleted
+  /// together with this object
   AudioFFTBase(FFTDriver *driver) { p_driver = driver; }
+  AudioFFTBase(const AudioFFTBase &) = delete;
+  AudioFFTBase &operator=(const AudioFFTBase &) = delete;
 
-  ~AudioFFTBase() { end(); }
+  ~AudioFFTBase() {
+    end();
+    delete p_driver;
+  }
 
   /// Provides the default configuration
   AudioFFTConfig defaultConfig(RxTxMode mode = TX_MODE) {
