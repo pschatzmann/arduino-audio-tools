@@ -297,6 +297,9 @@ class AudioFFTBase : public AudioStream {
     rfft_data.resize(0);
     rfft_add.resize(0);
     step_data.resize(0);
+    mel_filters.resize(0);
+    mel_weights.resize(0);
+    mel_n_bins = 0;
   }
 
   /// Provide the audio data as FFT input
@@ -400,74 +403,34 @@ class AudioFFTBase : public AudioStream {
     }
   }
 
-  /// Convert the FFT result to MEL spectrum
-  float *toMEL(int n_bins, float min_freq = 0.0f, float max_freq = 0.0f) {
-    // calculate mel bins
+  /// Convert the FFT result to MEL spectrum. The triangular filterbank uses
+  /// fractional (HTK style) weights, so no filter collapses to zero width,
+  /// and it is computed once and cached until the parameters change.
+  /// @param n_bins number of mel bands (<= 0: size())
+  /// @param min_freq lower edge in Hz (<= 0: frequency(0))
+  /// @param max_freq upper edge in Hz (<= 0: frequency(size() - 1))
+  /// @param power use the power spectrum |X|^2 instead of the magnitude |X|
+  float *toMEL(int n_bins, float min_freq = 0.0f, float max_freq = 0.0f,
+               bool power = false) {
     if (n_bins <= 0) n_bins = size();
-    if (min_freq <= 0.0f) min_freq = frequency(0);
-    if (max_freq <= 0.0f) max_freq = frequency(size() - 1);
+    if (!updateMelFilterbank(n_bins, min_freq, max_freq)) return nullptr;
     mel_bins.resize(n_bins);
-
-    // Convert min and max frequencies to MEL scale
-    float min_mel = 2595.0f * log10(1.0f + (min_freq / 700.0f));
-    float max_mel = 2595.0f * log10(1.0f + (max_freq / 700.0f));
-
-    // Create equally spaced points in the MEL scale
-    Vector<float> mel_points;
-    mel_points.resize(n_bins + 2);  // +2 for the endpoints
-
-    float mel_step = (max_mel - min_mel) / (n_bins + 1);
-    for (int i = 0; i < n_bins + 2; i++) {
-      mel_points[i] = min_mel + i * mel_step;
-    }
-
-    // Convert MEL points back to frequency
-    Vector<float> freq_points;
-    freq_points.resize(n_bins + 2);
-    for (int i = 0; i < n_bins + 2; i++) {
-      freq_points[i] = 700.0f * (pow(10.0f, mel_points[i] / 2595.0f) - 1.0f);
-    }
-
-    // Convert frequency points to FFT bin indices
-    Vector<int> bin_indices;
-    bin_indices.resize(n_bins + 2);
-    for (int i = 0; i < n_bins + 2; i++) {
-      bin_indices[i] = round(freq_points[i] * cfg.length / cfg.sample_rate);
-      // Ensure bin index is within valid range
-      if (bin_indices[i] >= bins) bin_indices[i] = bins - 1;
-      if (bin_indices[i] < 0) bin_indices[i] = 0;
-    }
-
-    // Create and apply triangular filters
     for (int i = 0; i < n_bins; i++) {
+      const MelFilter &filter = mel_filters[i];
+      const float *weights = mel_weights.data() + filter.weight_offset;
       float mel_sum = 0.0f;
-
-      int start_bin = bin_indices[i];
-      int mid_bin = bin_indices[i + 1];
-      int end_bin = bin_indices[i + 2];
-
-      // Apply first half of triangle filter (ascending)
-      for (int j = start_bin; j < mid_bin; j++) {
-        if (j >= bins) break;
-        float weight = (j - start_bin) / float(mid_bin - start_bin);
-        mel_sum += magnitude(j) * weight;
+      for (int j = 0; j < filter.count; j++) {
+        float m = magnitude(filter.start_bin + j);
+        mel_sum += (power ? m * m : m) * weights[j];
       }
-
-      // Apply second half of triangle filter (descending)
-      for (int j = mid_bin; j < end_bin; j++) {
-        if (j >= bins) break;
-        float weight = (end_bin - j) / float(end_bin - mid_bin);
-        mel_sum += magnitude(j) * weight;
-      }
-
       mel_bins[i] = mel_sum;
     }
-
     return mel_bins.data();
   }
 
   /**
-   * @brief Convert MEL spectrum back to linear frequency spectrum
+   * @brief Convert MEL spectrum back to linear frequency spectrum, using the
+   * same (cached) filterbank as toMEL().
    *
    * @param values Pointer to MEL spectrum values
    * @param n_bins Number of MEL bins
@@ -476,82 +439,27 @@ class AudioFFTBase : public AudioStream {
   bool fromMEL(float *values, int n_bins, float min_freq = 0.0f,
                float max_freq = 0.0f) {
     if (n_bins <= 0 || values == nullptr) return false;
-
-    // Use default frequency range if not specified
-    if (min_freq <= 0.0f) min_freq = frequency(0);
-    if (max_freq <= 0.0f) max_freq = frequency(size() - 1);
-
-    // Clear the current magnitude array
-    for (int i = 0; i < bins; i++) {
-      FFTBin bin;
-      bin.clear();
-      setBin(i, bin);
-    }
-
-    // Convert min and max frequencies to MEL scale
-    float min_mel = 2595.0f * log10(1.0f + (min_freq / 700.0f));
-    float max_mel = 2595.0f * log10(1.0f + (max_freq / 700.0f));
-
-    // Create equally spaced points in the MEL scale
-    Vector<float> mel_points;
-    mel_points.resize(n_bins + 2);  // +2 for the endpoints
-
-    float mel_step = (max_mel - min_mel) / (n_bins + 1);
-    for (int i = 0; i < n_bins + 2; i++) {
-      mel_points[i] = min_mel + i * mel_step;
-    }
-
-    // Convert MEL points back to frequency
-    Vector<float> freq_points;
-    freq_points.resize(n_bins + 2);
-    for (int i = 0; i < n_bins + 2; i++) {
-      freq_points[i] = 700.0f * (pow(10.0f, mel_points[i] / 2595.0f) - 1.0f);
-    }
-
-    // Convert frequency points to FFT bin indices
-    Vector<int> bin_indices;
-    bin_indices.resize(n_bins + 2);
-    for (int i = 0; i < n_bins + 2; i++) {
-      bin_indices[i] = round(freq_points[i] * cfg.length / cfg.sample_rate);
-      // Ensure bin index is within valid range
-      if (bin_indices[i] >= bins) bin_indices[i] = bins - 1;
-      if (bin_indices[i] < 0) bin_indices[i] = 0;
-    }
+    if (!updateMelFilterbank(n_bins, min_freq, max_freq)) return false;
 
     // Distribute MEL energy back to linear frequency bins
     Vector<float> linear_magnitudes;
     linear_magnitudes.resize(bins);
-
+    for (int i = 0; i < bins; i++) linear_magnitudes[i] = 0.0f;
     for (int i = 0; i < n_bins; i++) {
-      int start_bin = bin_indices[i];
-      int mid_bin = bin_indices[i + 1];
-      int end_bin = bin_indices[i + 2];
-
-      // Apply first half of triangle (ascending)
-      for (int j = start_bin; j < mid_bin; j++) {
-        if (j >= bins) break;
-        float weight = (j - start_bin) / float(mid_bin - start_bin);
-        linear_magnitudes[j] += values[i] * weight;
-      }
-
-      // Apply second half of triangle (descending)
-      for (int j = mid_bin; j < end_bin; j++) {
-        if (j >= bins) break;
-        float weight = (end_bin - j) / float(end_bin - mid_bin);
-        linear_magnitudes[j] += values[i] * weight;
+      const MelFilter &filter = mel_filters[i];
+      const float *weights = mel_weights.data() + filter.weight_offset;
+      for (int j = 0; j < filter.count; j++) {
+        linear_magnitudes[filter.start_bin + j] += values[i] * weights[j];
       }
     }
 
     // Set magnitude values and create simple phase (all zeros)
     for (int i = 0; i < bins; i++) {
-      if (linear_magnitudes[i] > 0) {
-        FFTBin bin;
-        bin.real = linear_magnitudes[i];
-        bin.img = 0.0f;
-        setBin(i, bin);
-      }
+      FFTBin bin;
+      bin.clear();
+      bin.real = linear_magnitudes[i];
+      setBin(i, bin);
     }
-
     return true;
   }
 
@@ -664,6 +572,76 @@ class AudioFFTBase : public AudioStream {
   Vector<float> l_magnitudes{0};
   Vector<float> step_data{0};
   Vector<float> mel_bins{0};
+  /// One triangular mel filter: weights for bins [start_bin, start_bin+count)
+  struct MelFilter {
+    int start_bin = 0;
+    int count = 0;
+    int weight_offset = 0;
+  };
+  Vector<MelFilter> mel_filters{0};
+  Vector<float> mel_weights{0};
+  int mel_n_bins = 0;
+  float mel_min_freq = -1.0f;
+  float mel_max_freq = -1.0f;
+  int mel_length = 0;
+  int mel_sample_rate = 0;
+
+  static float hzToMel(float hz) { return 2595.0f * log10f(1.0f + hz / 700.0f); }
+  static float melToHz(float mel) {
+    return 700.0f * (powf(10.0f, mel / 2595.0f) - 1.0f);
+  }
+
+  /// (Re)builds the cached sparse filterbank if any parameter changed
+  bool updateMelFilterbank(int n_bins, float min_freq, float max_freq) {
+    if (bins <= 0 || cfg.sample_rate <= 0) return false;
+    if (min_freq <= 0.0f) min_freq = frequency(0);
+    if (max_freq <= 0.0f) max_freq = frequency(size() - 1);
+    if (n_bins == mel_n_bins && min_freq == mel_min_freq &&
+        max_freq == mel_max_freq && cfg.length == mel_length &&
+        (int)cfg.sample_rate == mel_sample_rate)
+      return true;
+
+    float min_mel = hzToMel(min_freq);
+    float mel_step = (hzToMel(max_freq) - min_mel) / (n_bins + 1);
+    float bin_hz = (float)cfg.sample_rate / cfg.length;
+
+    mel_filters.resize(n_bins);
+    mel_weights.clear();
+    for (int i = 0; i < n_bins; i++) {
+      float left = melToHz(min_mel + i * mel_step);
+      float center = melToHz(min_mel + (i + 1) * mel_step);
+      float right = melToHz(min_mel + (i + 2) * mel_step);
+      MelFilter &filter = mel_filters[i];
+      filter.weight_offset = mel_weights.size();
+      filter.start_bin = -1;
+      filter.count = 0;
+      for (int j = 0; j < bins; j++) {
+        float f = j * bin_hz;
+        if (f <= left || f >= right) continue;
+        float w = f <= center ? (f - left) / (center - left)
+                              : (right - f) / (right - center);
+        if (filter.start_bin < 0) filter.start_bin = j;
+        // keep the run contiguous (bins between are always inside)
+        filter.count = j - filter.start_bin + 1;
+        mel_weights.push_back(w);
+      }
+      if (filter.count == 0) {
+        // narrower than one FFT bin: use the bin closest to the center so
+        // the band still carries energy instead of being constant zero
+        int j = (int)(center / bin_hz + 0.5f);
+        if (j >= bins) j = bins - 1;
+        filter.start_bin = j;
+        filter.count = 1;
+        mel_weights.push_back(1.0f);
+      }
+    }
+    mel_n_bins = n_bins;
+    mel_min_freq = min_freq;
+    mel_max_freq = max_freq;
+    mel_length = cfg.length;
+    mel_sample_rate = cfg.sample_rate;
+    return true;
+  }
   SingleBuffer<uint8_t> stride_buffer{0};
   RingBuffer<uint8_t> rfft_data{0};
   bool has_rfft_data = false;
