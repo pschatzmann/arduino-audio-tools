@@ -96,6 +96,17 @@ void setup() {
   for (int i = 0; i < 40; i++) bands[i] = 1.0f;
   CHECK(fft.fromMEL(bands, 40, 0.0f, 8000.0f));
 
+  // BufferedWindow must cache the factors even if the wrapped window was
+  // already started with the same size (regression: empty cache)
+  Hann shared;
+  shared.begin(512);
+  BufferedWindow buffered(&shared);
+  buffered.begin(512);
+  int window_errors = 0;
+  for (int j = 0; j < 512; j++)
+    if (fabsf(buffered.factor(j) - shared.factor(j)) > 1e-6f) window_errors++;
+  CHECK(window_errors == 0);
+
   printf("%s (%d failures)\n", failures == 0 ? "PASS" : "FAIL", failures);
   exit(failures == 0 ? 0 : 1);
 }
