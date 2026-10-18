@@ -85,23 +85,24 @@ class BufferedWindow : public WindowFunction {
   }
 
   virtual void begin(int samples) override {
-    // process only if there is a change
     WindowFunction::begin(samples);
-    if (p_wf->samples() != samples) {
-      p_wf->begin(samples);
-      int to_be_size = i_half_samples + 1;
-      if (buffer.size() != to_be_size) {
-        buffer.resize(to_be_size);
-        for (int j = 0; j <= i_half_samples; j++) {
-          buffer[j] = p_wf->factor(j);
-        }
+    // the wrapped window may already have been started with this size (e.g.
+    // shared with another user): the cache must be filled independently
+    if (p_wf->samples() != samples) p_wf->begin(samples);
+    // process only if there is a change
+    if (buffered_samples != samples) {
+      buffer.resize(i_half_samples + 1);
+      for (int j = 0; j <= i_half_samples; j++) {
+        buffer[j] = p_wf->factor(j);
       }
+      buffered_samples = samples;
     }
   }
 
  protected:
   WindowFunction* p_wf = nullptr;
   Vector<float> buffer{0};
+  int buffered_samples = 0;
 
   float factor_internal(int idx) override {
     if (idx < 0 || idx > i_half_samples) return 0.0;
@@ -151,8 +152,10 @@ class Hann : public WindowFunction {
   Hann() = default;
   const char* name() { return "Hann"; }
 
+  // Hann: 0.5 * (1 - cos(2 pi n / (N - 1))); previously 0.54 * (...), which
+  // peaked at 1.08 and was clipped to 1.0 by factor() (flattened center)
   float factor_internal(int idx) {
-    return 0.54f * (1.0f - cos(twoPi * ratio(idx)));
+    return 0.5f * (1.0f - cos(twoPi * ratio(idx)));
   }
 };
 
