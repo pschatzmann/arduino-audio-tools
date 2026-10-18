@@ -76,6 +76,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_audio_kiss_f_f_t-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">AudioKissFFT Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__dsp.html">DSP</a> &raquo; <a class="el" href="group__fft.html">FFT</a> &raquo; <a class="el" href="group__fft-kiss.html">KISS</a></div></div></div>
@@ -158,7 +159,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a810cc474378b09320f4eb391009e221b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine the bin number from the frequency.  <br /></td></tr>
 <tr class="separator:a810cc474378b09320f4eb391009e221b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaeb66d4f97e16679a7130a4713f1f7ce" id="r_aaeb66d4f97e16679a7130a4713f1f7ce"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#aaeb66d4f97e16679a7130a4713f1f7ce">fromMEL</a> (float *values, int n_bins, float min_freq=0.0f, float max_freq=0.0f)</td></tr>
-<tr class="memdesc:aaeb66d4f97e16679a7130a4713f1f7ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert MEL spectrum back to linear frequency spectrum.  <br /></td></tr>
+<tr class="memdesc:aaeb66d4f97e16679a7130a4713f1f7ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert MEL spectrum back to linear frequency spectrum, using the same (cached) filterbank as <a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#ab2e1d816c3affa225ae8bab6daed909f">toMEL()</a>.  <br /></td></tr>
 <tr class="separator:aaeb66d4f97e16679a7130a4713f1f7ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4ce80be700d9c58e0b07ff0bf3d56d2" id="r_ab4ce80be700d9c58e0b07ff0bf3d56d2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#ab4ce80be700d9c58e0b07ff0bf3d56d2">getBin</a> (int pos, <a class="el" href="structaudio__tools_1_1_f_f_t_bin.html">FFTBin</a> &amp;bin)</td></tr>
 <tr class="memdesc:ab4ce80be700d9c58e0b07ff0bf3d56d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">gets the value of a bin  <br /></td></tr>
@@ -227,9 +228,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af4b57d21919c42d55af03391f91a1c08" id="r_af4b57d21919c42d55af03391f91a1c08"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#af4b57d21919c42d55af03391f91a1c08">size</a> ()</td></tr>
 <tr class="memdesc:af4b57d21919c42d55af03391f91a1c08"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of bins used by the FFT which are relevant for the result.  <br /></td></tr>
 <tr class="separator:af4b57d21919c42d55af03391f91a1c08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af21ab316421e400b8f0bcb8762b94cb3" id="r_af21ab316421e400b8f0bcb8762b94cb3"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#af21ab316421e400b8f0bcb8762b94cb3">toMEL</a> (int n_bins, float min_freq=0.0f, float max_freq=0.0f)</td></tr>
-<tr class="memdesc:af21ab316421e400b8f0bcb8762b94cb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert the FFT result to MEL spectrum.  <br /></td></tr>
-<tr class="separator:af21ab316421e400b8f0bcb8762b94cb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2e1d816c3affa225ae8bab6daed909f" id="r_ab2e1d816c3affa225ae8bab6daed909f"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#ab2e1d816c3affa225ae8bab6daed909f">toMEL</a> (int n_bins, float min_freq=0.0f, float max_freq=0.0f, bool power=false)</td></tr>
+<tr class="separator:ab2e1d816c3affa225ae8bab6daed909f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="memdesc:a7597ef706dd1aa590903ce9e095db20a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide the audio data as FFT input.  <br /></td></tr>
 <tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -259,6 +259,10 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:ad262d6550e410c9a8c6cb2a3adb61970" id="r_ad262d6550e410c9a8c6cb2a3adb61970"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ad262d6550e410c9a8c6cb2a3adb61970"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#ad262d6550e410c9a8c6cb2a3adb61970">processSamples</a> (const void *data, size_t count)</td></tr>
 <tr class="separator:ad262d6550e410c9a8c6cb2a3adb61970"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46eca6335078a004190fe9120e3c37cd" id="r_a46eca6335078a004190fe9120e3c37cd"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a46eca6335078a004190fe9120e3c37cd"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#a46eca6335078a004190fe9120e3c37cd">processStrideBuffer</a> ()</td></tr>
+<tr class="memdesc:a46eca6335078a004190fe9120e3c37cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">FFT of the full stride buffer, then drop <code>stride</code> samples.  <br /></td></tr>
+<tr class="separator:a46eca6335078a004190fe9120e3c37cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5caf99a24686511722c4c9f94c4ec52e" id="r_a5caf99a24686511722c4c9f94c4ec52e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#a5caf99a24686511722c4c9f94c4ec52e">refillReadBuffer</a> ()</td></tr>
 <tr class="memdesc:a5caf99a24686511722c4c9f94c4ec52e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Refill small read buffer (e.g. 8 bytes) to avoid single byte reads when calling read()  <br /></td></tr>
 <tr class="separator:a5caf99a24686511722c4c9f94c4ec52e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -268,6 +272,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:afd68fa8f4a36b2bde768109bce669bee" id="r_afd68fa8f4a36b2bde768109bce669bee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#afd68fa8f4a36b2bde768109bce669bee">rfftWriteData</a> (<a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; uint8_t &gt; &amp;data)</td></tr>
 <tr class="memdesc:afd68fa8f4a36b2bde768109bce669bee"><td class="mdescLeft">&#160;</td><td class="mdescRight">write reverse fft result to buffer to make it available for readBytes  <br /></td></tr>
 <tr class="separator:afd68fa8f4a36b2bde768109bce669bee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5343c9c59d2efe1b0b2a15626a3cd5b4" id="r_a5343c9c59d2efe1b0b2a15626a3cd5b4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#a5343c9c59d2efe1b0b2a15626a3cd5b4">updateMelFilterbank</a> (int n_bins, float min_freq, float max_freq)</td></tr>
+<tr class="memdesc:a5343c9c59d2efe1b0b2a15626a3cd5b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">(Re)builds the cached sparse filterbank if any parameter changed  <br /></td></tr>
+<tr class="separator:a5343c9c59d2efe1b0b2a15626a3cd5b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a177a0e58b5dd80a7abf7aa1e700ef7c1" id="r_a177a0e58b5dd80a7abf7aa1e700ef7c1"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a177a0e58b5dd80a7abf7aa1e700ef7c1"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#a177a0e58b5dd80a7abf7aa1e700ef7c1">windowedSample</a> (T sample, int pos)</td></tr>
 <tr class="separator:a177a0e58b5dd80a7abf7aa1e700ef7c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -276,6 +283,13 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a63640df6aa9eba115f3f8ab619a31457"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28e6469e4f6111dee6db61d12b672064" id="r_a28e6469e4f6111dee6db61d12b672064"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#a28e6469e4f6111dee6db61d12b672064">writeStrideBuffer</a> (uint8_t *buffer, size_t len)</td></tr>
 <tr class="separator:a28e6469e4f6111dee6db61d12b672064"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
+Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:a154bf3b8a4122e15c49460a6a1e91b77" id="r_a154bf3b8a4122e15c49460a6a1e91b77"><td class="memItemLeft" align="right" valign="top">static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#a154bf3b8a4122e15c49460a6a1e91b77">hzToMel</a> (float hz)</td></tr>
+<tr class="separator:a154bf3b8a4122e15c49460a6a1e91b77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3dd871cd934a3d48efb2b50e0a6e2b01" id="r_a3dd871cd934a3d48efb2b50e0a6e2b01"><td class="memItemLeft" align="right" valign="top">static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#a3dd871cd934a3d48efb2b50e0a6e2b01">melToHz</a> (float mel)</td></tr>
+<tr class="separator:a3dd871cd934a3d48efb2b50e0a6e2b01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -297,6 +311,20 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:af9bc3d89ad4e995a0e843feb36edc056"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad922ff6195209f5454e2348f7acde000" id="r_ad922ff6195209f5454e2348f7acde000"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#ad922ff6195209f5454e2348f7acde000">mel_bins</a> {0}</td></tr>
 <tr class="separator:ad922ff6195209f5454e2348f7acde000"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ca52ab65620e40f4621a0ba73083f05" id="r_a0ca52ab65620e40f4621a0ba73083f05"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="structaudio__tools_1_1_audio_f_f_t_base_1_1_mel_filter.html">MelFilter</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#a0ca52ab65620e40f4621a0ba73083f05">mel_filters</a> {0}</td></tr>
+<tr class="separator:a0ca52ab65620e40f4621a0ba73083f05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32a98ac199181587db2f9ff6cbcf0543" id="r_a32a98ac199181587db2f9ff6cbcf0543"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#a32a98ac199181587db2f9ff6cbcf0543">mel_length</a> = 0</td></tr>
+<tr class="separator:a32a98ac199181587db2f9ff6cbcf0543"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe3ac05ecefea597fed6ac4c78591c61" id="r_afe3ac05ecefea597fed6ac4c78591c61"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#afe3ac05ecefea597fed6ac4c78591c61">mel_max_freq</a> = -1.0f</td></tr>
+<tr class="separator:afe3ac05ecefea597fed6ac4c78591c61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2418dfadc98fc6d9ea8fe3303a11605" id="r_af2418dfadc98fc6d9ea8fe3303a11605"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#af2418dfadc98fc6d9ea8fe3303a11605">mel_min_freq</a> = -1.0f</td></tr>
+<tr class="separator:af2418dfadc98fc6d9ea8fe3303a11605"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2de4eb1331b463ef996cdd25176de650" id="r_a2de4eb1331b463ef996cdd25176de650"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#a2de4eb1331b463ef996cdd25176de650">mel_n_bins</a> = 0</td></tr>
+<tr class="separator:a2de4eb1331b463ef996cdd25176de650"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3526a5526164ec4ebb239ecbf925f3d" id="r_ab3526a5526164ec4ebb239ecbf925f3d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#ab3526a5526164ec4ebb239ecbf925f3d">mel_sample_rate</a> = 0</td></tr>
+<tr class="separator:ab3526a5526164ec4ebb239ecbf925f3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb2eb6a113d791dd9518ca431f8f76f8" id="r_abb2eb6a113d791dd9518ca431f8f76f8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#abb2eb6a113d791dd9518ca431f8f76f8">mel_weights</a> {0}</td></tr>
+<tr class="separator:abb2eb6a113d791dd9518ca431f8f76f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad35c4e2ef458c36e8d36676958cc9cd3" id="r_ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#ad35c4e2ef458c36e8d36676958cc9cd3">notify_vector</a></td></tr>
 <tr class="separator:ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4bb5a13140a371fcd3a4aacf3685e0c9" id="r_a4bb5a13140a371fcd3a4aacf3685e0c9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_f_f_t_driver.html">FFTDriver</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#a4bb5a13140a371fcd3a4aacf3685e0c9">p_driver</a> = nullptr</td></tr>
@@ -577,6 +605,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>bytes per sample in the audio data: 24 bit samples use the int24_t representation (4 bytes unless USE_3BYTE_INT24 is defined) </p>
 
 </div>
 </div>
@@ -957,7 +986,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Convert MEL spectrum back to linear frequency spectrum. </p>
+<p>Convert MEL spectrum back to linear frequency spectrum, using the same (cached) filterbank as <a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#ab2e1d816c3affa225ae8bab6daed909f">toMEL()</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">values</td><td>Pointer to MEL spectrum values </td></tr>
@@ -1004,6 +1033,32 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 
 <p>gets the value of a bin </p>
+
+</div>
+</div>
+<a id="a154bf3b8a4122e15c49460a6a1e91b77" name="a154bf3b8a4122e15c49460a6a1e91b77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a154bf3b8a4122e15c49460a6a1e91b77">&#9670;&#160;</a></span>hzToMel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static float hzToMel </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>hz</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -1232,6 +1287,32 @@ template&lt;int N&gt; </div>
 
 </div>
 </div>
+<a id="a3dd871cd934a3d48efb2b50e0a6e2b01" name="a3dd871cd934a3d48efb2b50e0a6e2b01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3dd871cd934a3d48efb2b50e0a6e2b01">&#9670;&#160;</a></span>melToHz()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static float melToHz </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>mel</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="afc00b141650b11fe19d4c7055d96a075" name="afc00b141650b11fe19d4c7055d96a075"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afc00b141650b11fe19d4c7055d96a075">&#9670;&#160;</a></span>not_supported()</h2>
 
@@ -1384,6 +1465,35 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a46eca6335078a004190fe9120e3c37cd" name="a46eca6335078a004190fe9120e3c37cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46eca6335078a004190fe9120e3c37cd">&#9670;&#160;</a></span>processStrideBuffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void processStrideBuffer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>FFT of the full stride buffer, then drop <code>stride</code> samples. </p>
 
 </div>
 </div>
@@ -1936,8 +2046,8 @@ template&lt;int N&gt; </div>
 
 </div>
 </div>
-<a id="af21ab316421e400b8f0bcb8762b94cb3" name="af21ab316421e400b8f0bcb8762b94cb3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af21ab316421e400b8f0bcb8762b94cb3">&#9670;&#160;</a></span>toMEL()</h2>
+<a id="ab2e1d816c3affa225ae8bab6daed909f" name="ab2e1d816c3affa225ae8bab6daed909f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2e1d816c3affa225ae8bab6daed909f">&#9670;&#160;</a></span>toMEL()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1961,7 +2071,13 @@ template&lt;int N&gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>max_freq</em> = <code>0.0f</code>&#160;</td>
+          <td class="paramname"><em>max_freq</em> = <code>0.0f</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>power</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1975,8 +2091,59 @@ template&lt;int N&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Convert the FFT result to MEL spectrum. The triangular filterbank uses fractional (HTK style) weights, so no filter collapses to zero width, and it is computed once and cached until the parameters change. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n_bins</td><td>number of mel bands (&lt;= 0: <a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#af4b57d21919c42d55af03391f91a1c08" title="The number of bins used by the FFT which are relevant for the result.">size()</a>) </td></tr>
+    <tr><td class="paramname">min_freq</td><td>lower edge in Hz (&lt;= 0: frequency(0)) </td></tr>
+    <tr><td class="paramname">max_freq</td><td>upper edge in Hz (&lt;= 0: frequency(<a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#af4b57d21919c42d55af03391f91a1c08" title="The number of bins used by the FFT which are relevant for the result.">size()</a> - 1)) </td></tr>
+    <tr><td class="paramname">power</td><td>use the power spectrum |X|^2 instead of the magnitude |X| </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Convert the FFT result to MEL spectrum. </p>
+</div>
+</div>
+<a id="a5343c9c59d2efe1b0b2a15626a3cd5b4" name="a5343c9c59d2efe1b0b2a15626a3cd5b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5343c9c59d2efe1b0b2a15626a3cd5b4">&#9670;&#160;</a></span>updateMelFilterbank()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool updateMelFilterbank </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n_bins</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>min_freq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>max_freq</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>(Re)builds the cached sparse filterbank if any parameter changed </p>
 
 </div>
 </div>
@@ -2376,6 +2543,160 @@ template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;float&gt; mel_bins {0}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0ca52ab65620e40f4621a0ba73083f05" name="a0ca52ab65620e40f4621a0ba73083f05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ca52ab65620e40f4621a0ba73083f05">&#9670;&#160;</a></span>mel_filters</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;<a class="el" href="structaudio__tools_1_1_audio_f_f_t_base_1_1_mel_filter.html">MelFilter</a>&gt; mel_filters {0}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a32a98ac199181587db2f9ff6cbcf0543" name="a32a98ac199181587db2f9ff6cbcf0543"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32a98ac199181587db2f9ff6cbcf0543">&#9670;&#160;</a></span>mel_length</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int mel_length = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afe3ac05ecefea597fed6ac4c78591c61" name="afe3ac05ecefea597fed6ac4c78591c61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe3ac05ecefea597fed6ac4c78591c61">&#9670;&#160;</a></span>mel_max_freq</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float mel_max_freq = -1.0f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af2418dfadc98fc6d9ea8fe3303a11605" name="af2418dfadc98fc6d9ea8fe3303a11605"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2418dfadc98fc6d9ea8fe3303a11605">&#9670;&#160;</a></span>mel_min_freq</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float mel_min_freq = -1.0f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2de4eb1331b463ef996cdd25176de650" name="a2de4eb1331b463ef996cdd25176de650"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2de4eb1331b463ef996cdd25176de650">&#9670;&#160;</a></span>mel_n_bins</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int mel_n_bins = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab3526a5526164ec4ebb239ecbf925f3d" name="ab3526a5526164ec4ebb239ecbf925f3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3526a5526164ec4ebb239ecbf925f3d">&#9670;&#160;</a></span>mel_sample_rate</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int mel_sample_rate = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abb2eb6a113d791dd9518ca431f8f76f8" name="abb2eb6a113d791dd9518ca431f8f76f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb2eb6a113d791dd9518ca431f8f76f8">&#9670;&#160;</a></span>mel_weights</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;float&gt; mel_weights {0}</td>
         </tr>
       </table>
   </td>

@@ -203,7 +203,6 @@ Public Attributes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a40ccab761fbae35e3eae43acc41be366" id="r_a40ccab761fbae35e3eae43acc41be366"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a40ccab761fbae35e3eae43acc41be366">decodeHeader</a> (uint8_t *in_ptr, size_t in_size)</td></tr>
-<tr class="memdesc:a40ccab761fbae35e3eae43acc41be366"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decodes the header data: Returns the start pos of the data.  <br /></td></tr>
 <tr class="separator:a40ccab761fbae35e3eae43acc41be366"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ff7127223a48d0606570bcc21e0b5b6" id="r_a6ff7127223a48d0606570bcc21e0b5b6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a6ff7127223a48d0606570bcc21e0b5b6">endCurrentDecoder</a> ()</td></tr>
 <tr class="separator:a6ff7127223a48d0606570bcc21e0b5b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -668,8 +667,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Decodes the header data: Returns the start pos of the data. </p>
+<p>Decodes the header data: Returns the start pos of the data Returns the start of the audio data relative to <code>in_ptr</code> (0: header not complete yet) </p>
 
 </div>
 </div>
@@ -2175,7 +2173,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>decoder matching the format of the WAV file currently being processed (selected in <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a40ccab761fbae35e3eae43acc41be366" title="Decodes the header data: Returns the start pos of the data.">decodeHeader()</a> from the registered decoders) </p>
+<p>decoder matching the format of the WAV file currently being processed (selected in <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a40ccab761fbae35e3eae43acc41be366">decodeHeader()</a> from the registered decoders) </p>
 
 </div>
 </div>

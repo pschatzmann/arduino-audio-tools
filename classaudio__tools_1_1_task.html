@@ -147,7 +147,7 @@ Static Protected Member Functions</h2></td></tr>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:ab153441a2052f80aafe00768ea80aee0" id="r_ab153441a2052f80aafe00768ea80aee0"><td class="memItemLeft" align="right" valign="top">std::function&lt; void()&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_task.html#ab153441a2052f80aafe00768ea80aee0">loop_code</a> = <a class="el" href="classaudio__tools_1_1_task.html#a6d85d4307810ddbf4ea8595d782e3498">nop</a></td></tr>
 <tr class="separator:ab153441a2052f80aafe00768ea80aee0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1830ddb36c14bdd7057683e633f918c8" id="r_a1830ddb36c14bdd7057683e633f918c8"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_task.html#a1830ddb36c14bdd7057683e633f918c8">ref</a></td></tr>
+<tr class="memitem:a1830ddb36c14bdd7057683e633f918c8" id="r_a1830ddb36c14bdd7057683e633f918c8"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_task.html#a1830ddb36c14bdd7057683e633f918c8">ref</a> = nullptr</td></tr>
 <tr class="separator:a1830ddb36c14bdd7057683e633f918c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28c8055cde540f46d40018d0bde70b9e" id="r_a28c8055cde540f46d40018d0bde70b9e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_task.html#a28c8055cde540f46d40018d0bde70b9e">task_core</a> = -1</td></tr>
 <tr class="separator:a28c8055cde540f46d40018d0bde70b9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -216,7 +216,7 @@ Protected Attributes</h2></td></tr>
 <p>Defines the task parameters; the actual FreeRTOS task is only created when <a class="el" href="classaudio__tools_1_1_task.html#ac1d9b45dd981a313a51ec91aca72a853">begin()</a> is called (typically from <a class="el" href="_main_8h.html#a4fc01d736fe50cf5b977f755b675f11d">setup()</a>), so that it is safe to declare a <a class="el" href="classaudio__tools_1_1_task.html" title="FreeRTOS task.">Task</a> as a global object. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">name</td><td>task name, used for debugging (e.g. in FreeRTOS trace tools); must stay valid for the lifetime of the task </td></tr>
-    <tr><td class="paramname">stackSizeWords</td><td>stack depth in words, not bytes (stack size in bytes = stackSizeWords * sizeof(StackType_t)); too small a value can cause a stack overflow, which on some platforms (e.g. RP2040/arduino-pico) halts the whole system instead of failing gracefully </td></tr>
+    <tr><td class="paramname">stackSizeWords</td><td>stack depth in words (stack size in bytes = stackSizeWords * sizeof(StackType_t)); note that on ESP32 (ESP-IDF) FreeRTOS takes the stack depth in bytes; too small a value can cause a stack overflow, which on some platforms (e.g. RP2040/arduino-pico) halts the whole system instead of failing gracefully </td></tr>
     <tr><td class="paramname">priority</td><td>FreeRTOS task priority; valid range and meaning are platform-specific (bounded by configMAX_PRIORITIES, which differs a lot between platforms, e.g. RP2040/arduino-pico only goes up to 7) </td></tr>
     <tr><td class="paramname">core</td><td>core to pin the task to (0 or 1), or -1 to let the scheduler decide; only relevant on multi-core targets </td></tr>
   </table>
@@ -349,9 +349,9 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>If you used the empty constructor, you need to call create! </p><dl class="params"><dt>Parameters</dt><dd>
+<p>If you used the empty constructor, you need to call create! Returns false if the task exists already or could not be created. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">stackSizeWords</td><td>stack depth in words, not bytes </td></tr>
+    <tr><td class="paramname">stackSizeWords</td><td>stack depth in words (in bytes on ESP32/ESP-IDF) </td></tr>
   </table>
   </dd>
 </dl>
@@ -674,6 +674,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>suspends the task (no effect if it was not created: a null handle would suspend the calling task) </p>
 
 </div>
 </div>
@@ -736,7 +737,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void* ref</td>
+          <td class="memname">void* ref = nullptr</td>
         </tr>
       </table>
   </td>
