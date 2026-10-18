@@ -317,28 +317,29 @@ class AudioFFTBase : public AudioStream {
 
   /// Provide the audio data as FFT input
   size_t write(const uint8_t *data, size_t len) override {
-    size_t result = 0;
-    if (p_driver->isValid()) {
-      result = len;
-      switch (cfg.bits_per_sample) {
-        case 8:
-          processSamples<int8_t>(data, len);
-          break;
-        case 16:
-          processSamples<int16_t>(data, len / 2);
-          break;
-        case 24:
-          processSamples<int24_t>(data, len / 3);
-          break;
-        case 32:
-          processSamples<int32_t>(data, len / 4);
-          break;
-        default:
-          LOGE("Unsupported bits_per_sample: %d", cfg.bits_per_sample);
-          break;
-      }
+    if (!p_driver->isValid()) return 0;
+    // only complete frames are consumed: a partial frame at the end is
+    // reported as not written (the caller sends it again with the rest)
+    int frame_bytes = bytesPerSample() * cfg.channels;
+    size_t samples = frame_bytes > 0 ? len / frame_bytes * cfg.channels : 0;
+    switch (cfg.bits_per_sample) {
+      case 8:
+        processSamples<int8_t>(data, samples);
+        break;
+      case 16:
+        processSamples<int16_t>(data, samples);
+        break;
+      case 24:
+        processSamples<int24_t>(data, samples);
+        break;
+      case 32:
+        processSamples<int32_t>(data, samples);
+        break;
+      default:
+        LOGE("Unsupported bits_per_sample: %d", cfg.bits_per_sample);
+        return 0;
     }
-    return result;
+    return samples * bytesPerSample();
   }
 
   /// Provides the result of a reverse FFT
@@ -523,7 +524,8 @@ class AudioFFTBase : public AudioStream {
   /// Provides the magnitudes as array of size size(). Please note that this
   /// method is allocating additinal memory!
   float *magnitudes() {
-    if (l_magnitudes.size() == 0) {
+    // the FFT length may have changed with a new begin()
+    if (l_magnitudes.size() != size()) {
       l_magnitudes.resize(size());
     }
     for (int j = 0; j < size(); j++) {
@@ -535,7 +537,8 @@ class AudioFFTBase : public AudioStream {
   /// Provides the magnitudes w/o calling the square root function as array of
   /// size size(). Please note that this method is allocating additinal memory!
   float *magnitudesFast() {
-    if (l_magnitudes.size() == 0) {
+    // the FFT length may have changed with a new begin()
+    if (l_magnitudes.size() != size()) {
       l_magnitudes.resize(size());
     }
     for (int j = 0; j < size(); j++) {
@@ -790,7 +793,11 @@ class AudioFFTBase : public AudioStream {
     }
   }
 
-  inline int bytesPerSample() { return cfg.bits_per_sample / 8; }
+  /// bytes per sample in the audio data: 24 bit samples use the int24_t
+  /// representation (4 bytes unless USE_3BYTE_INT24 is defined)
+  inline int bytesPerSample() {
+    return cfg.bits_per_sample == 24 ? (int)sizeof(int24_t) : cfg.bits_per_sample / 8;
+  }
 
   /// make sure that we do not reuse already found results
   template <int N>

@@ -107,6 +107,55 @@ void setup() {
     if (fabsf(buffered.factor(j) - shared.factor(j)) > 1e-6f) window_errors++;
   CHECK(window_errors == 0);
 
+  // 24 bit input uses the int24_t representation (sizeof(int24_t) bytes)
+  {
+    AudioRealFFT fft24;
+    auto c = fft24.defaultConfig();
+    c.sample_rate = 16000;
+    c.channels = 1;
+    c.bits_per_sample = 24;
+    c.length = 512;
+    c.stride = 256;
+    c.callback = onResult;
+    fft24.begin(c);
+    results = 0;
+    int24_t samples[1024];
+    for (int j = 0; j < 1024; j++) samples[j] = (int32_t)(100000 * sinf(0.1f * j));
+    size_t n = fft24.write((uint8_t *)samples, sizeof(samples));
+    CHECK(n == sizeof(samples));
+    CHECK(results == 3);  // 1024 samples, window 512, hop 256
+  }
+
+  // a partial sample is not consumed
+  {
+    AudioRealFFT fft16;
+    auto c = fft16.defaultConfig();
+    c.sample_rate = 16000;
+    c.channels = 1;
+    c.bits_per_sample = 16;
+    c.length = 256;
+    fft16.begin(c);
+    uint8_t bytes[101] = {0};
+    CHECK(fft16.write(bytes, sizeof(bytes)) == 100);
+    // magnitudes() after begin() with a larger length
+    c.length = 1024;
+    fft16.begin(c);
+    float *m = fft16.magnitudes();
+    CHECK(m != nullptr);
+    CHECK(fft16.size() == 512);
+  }
+
+  // VolumeMeter: average over all samples, max as volume
+  {
+    VolumeMeter vm;
+    vm.begin(AudioInfo(16000, 1, 16));
+    int16_t s[4] = {100, -300, 200, 0};
+    vm.write((uint8_t *)s, sizeof(s));
+    CHECK(fabsf(vm.volume() - 300.0f) < 1e-3f);
+    CHECK(fabsf(vm.volumeAvg() - 150.0f) < 1e-3f);
+    CHECK(fabsf(vm.volumeAvg(0) - 150.0f) < 1e-3f);
+  }
+
   printf("%s (%d failures)\n", failures == 0 ? "PASS" : "FAIL", failures);
   exit(failures == 0 ? 0 : 1);
 }

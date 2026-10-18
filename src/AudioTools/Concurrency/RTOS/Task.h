@@ -30,8 +30,9 @@ class Task : public ITask {
   /// to declare a Task as a global object.
   /// @param name task name, used for debugging (e.g. in FreeRTOS trace
   /// tools); must stay valid for the lifetime of the task
-  /// @param stackSizeWords stack depth in words, not bytes (stack size in
-  /// bytes = stackSizeWords * sizeof(StackType_t)); too small a value can
+  /// @param stackSizeWords stack depth in words (stack size in bytes =
+  /// stackSizeWords * sizeof(StackType_t)); note that on ESP32 (ESP-IDF)
+  /// FreeRTOS takes the stack depth in bytes; too small a value can
   /// cause a stack overflow, which on some platforms (e.g.
   /// RP2040/arduino-pico) halts the whole system instead of failing
   /// gracefully
@@ -50,7 +51,8 @@ class Task : public ITask {
   ~Task() { remove(); }
 
   /// If you used the empty constructor, you need to call create!
-  /// @param stackSizeWords stack depth in words, not bytes
+  /// Returns false if the task exists already or could not be created.
+  /// @param stackSizeWords stack depth in words (in bytes on ESP32/ESP-IDF)
   bool create(const char* name, int stackSizeWords, int priority = 1,
               int core = -1) {
     if (xHandle != 0) return false;
@@ -61,15 +63,29 @@ class Task : public ITask {
        priority = configMAX_PRIORITIES - 1;
        LOGW("clamped task priority to %d ", priority);
     }
+    BaseType_t rc;
 #ifdef ESP32
     if (core >= 0)
-      xTaskCreatePinnedToCore(task_loop, name, stackSizeWords, this, priority,
-                              &xHandle, core);
+      rc = xTaskCreatePinnedToCore(task_loop, name, stackSizeWords, this,
+                                   priority, &xHandle, core);
     else
-      xTaskCreate(task_loop, name, stackSizeWords, this, priority, &xHandle);
+      rc = xTaskCreate(task_loop, name, stackSizeWords, this, priority,
+                       &xHandle);
+    // without a valid handle suspend() would suspend the calling task
+    if (rc != pdPASS || xHandle == nullptr) {
+      LOGE("could not create task %s", name);
+      xHandle = nullptr;
+      return false;
+    }
     suspend();
 #else
-    xTaskCreate(task_loop, name, stackSizeWords, this, priority, &xHandle);
+    rc = xTaskCreate(task_loop, name, stackSizeWords, this, priority,
+                     &xHandle);
+    if (rc != pdPASS || xHandle == nullptr) {
+      LOGE("could not create task %s", name);
+      xHandle = nullptr;
+      return false;
+    }
     suspend();
 #if defined(configUSE_CORE_AFFINITY) && (configUSE_CORE_AFFINITY == 1) && \
     (configNUMBER_OF_CORES > 1)
@@ -92,9 +108,14 @@ class Task : public ITask {
   }
 
   bool begin(std::function<void()> process) {
-    LOGI("staring task");
+    LOGI("starting task");
     if (xHandle == nullptr && task_name != nullptr) {
-      create(task_name, task_stack_size, task_priority, task_core);
+      if (!create(task_name, task_stack_size, task_priority, task_core))
+        return false;
+    }
+    if (xHandle == nullptr) {
+      LOGE("task not created: call create() or use the named constructor");
+      return false;
     }
     loop_code = process;
     resume();
@@ -104,12 +125,16 @@ class Task : public ITask {
   /// suspends the task
   void end() { suspend(); }
 
+  /// suspends the task (no effect if it was not created: a null handle
+  /// would suspend the calling task)
   void suspend() {
+    if (xHandle == nullptr) return;
     vTaskSuspend(xHandle);
     task_suspended = true;
   }
 
   void resume() {
+    if (xHandle == nullptr) return;
     vTaskResume(xHandle);
     task_suspended = false;
   }
@@ -144,7 +169,7 @@ class Task : public ITask {
  protected:
   TaskHandle_t xHandle = nullptr;
   std::function<void()> loop_code = nop;
-  void *ref;
+  void *ref = nullptr;
   const char* task_name = nullptr;
   int task_stack_size = 0;
   int task_priority = 1;
