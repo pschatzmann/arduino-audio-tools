@@ -152,8 +152,10 @@ class Hann : public WindowFunction {
   Hann() = default;
   const char* name() { return "Hann"; }
 
+  // Hann: 0.5 * (1 - cos(2 pi n / (N - 1))); previously 0.54 * (...), which
+  // peaked at 1.08 and was clipped to 1.0 by factor() (flattened center)
   float factor_internal(int idx) {
-    return 0.54f * (1.0f - cos(twoPi * ratio(idx)));
+    return 0.5f * (1.0f - cos(twoPi * ratio(idx)));
   }
 };
 

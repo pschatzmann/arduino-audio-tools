@@ -126,6 +126,19 @@ void setup() {
     CHECK(results == 3);  // 1024 samples, window 512, hop 256
   }
 
+  // Hann window: 0.5 * (1 - cos), symmetric, peak 1.0, zero at the ends
+  {
+    Hann h;
+    h.begin(512);
+    CHECK(fabsf(h.factor(0)) < 1e-6f);
+    CHECK(fabsf(h.factor(511)) < 1e-6f);
+    CHECK(fabsf(h.factor(255) - h.factor(256)) < 1e-6f);
+    float peak = 0;
+    for (int j = 0; j < 512; j++) peak = fmaxf(peak, h.factor(j));
+    CHECK(peak > 0.9999f && peak <= 1.0f);
+    CHECK(fabsf(h.factor(128) - 0.5f * (1.0f - cosf(6.28318531f * 128 / 511.0f))) < 1e-5f);
+  }
+
   // a partial sample is not consumed
   {
     AudioRealFFT fft16;
