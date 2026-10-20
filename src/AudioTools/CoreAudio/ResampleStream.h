@@ -280,7 +280,6 @@ class ResampleStream : public ReformatBaseStream {
   // optional buffering
   bool is_buffer_active = USE_RESAMPLE_BUFFER;
   SingleBuffer<uint8_t> out_buffer{0};
-  Print *p_out = nullptr;
 
   /// Sets up the buffer for the rollover samples
   void setupLastSamples(AudioInfo cfg) {
