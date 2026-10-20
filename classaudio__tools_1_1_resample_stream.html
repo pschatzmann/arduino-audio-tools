@@ -251,10 +251,10 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:ad51c00fbbc5e5e771b6b4a4da3e7075c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec13de98d983457ab0c6986aa40abc8a" id="r_aec13de98d983457ab0c6986aa40abc8a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_reformat_base_stream.html#aec13de98d983457ab0c6986aa40abc8a">setupReader</a> ()</td></tr>
 <tr class="separator:aec13de98d983457ab0c6986aa40abc8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0284c414da66b48385a66b676b2e2356" id="r_a0284c414da66b48385a66b676b2e2356"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a0284c414da66b48385a66b676b2e2356"><td class="memTemplItemLeft" align="right" valign="top">size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_resample_stream.html#a0284c414da66b48385a66b676b2e2356">write</a> (<a class="el" href="class_print.html">Print</a> *<a class="el" href="classaudio__tools_1_1_reformat_base_stream.html#aa42c30e02e51ec7cc38ea4ab215e0db4">p_out</a>, const uint8_t *buffer, size_t bytes, size_t &amp;written)</td></tr>
-<tr class="memdesc:a0284c414da66b48385a66b676b2e2356"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the buffer to defined output after resampling.  <br /></td></tr>
-<tr class="separator:a0284c414da66b48385a66b676b2e2356"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5499918c97d2fac4e9ac8da907fdaf05" id="r_a5499918c97d2fac4e9ac8da907fdaf05"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a5499918c97d2fac4e9ac8da907fdaf05"><td class="memTemplItemLeft" align="right" valign="top">size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_resample_stream.html#a5499918c97d2fac4e9ac8da907fdaf05">write</a> (const uint8_t *buffer, size_t bytes, size_t &amp;written)</td></tr>
+<tr class="memdesc:a5499918c97d2fac4e9ac8da907fdaf05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the buffer to defined output after resampling.  <br /></td></tr>
+<tr class="separator:a5499918c97d2fac4e9ac8da907fdaf05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -1905,8 +1905,54 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="a5499918c97d2fac4e9ac8da907fdaf05" name="a5499918c97d2fac4e9ac8da907fdaf05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5499918c97d2fac4e9ac8da907fdaf05">&#9670;&#160;</a></span>write() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t write </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>bytes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t &amp;&#160;</td>
+          <td class="paramname"><em>written</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Writes the buffer to defined output after resampling. </p>
+
+</div>
+</div>
 <a id="a7597ef706dd1aa590903ce9e095db20a" name="a7597ef706dd1aa590903ce9e095db20a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7597ef706dd1aa590903ce9e095db20a">&#9670;&#160;</a></span>write() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7597ef706dd1aa590903ce9e095db20a">&#9670;&#160;</a></span>write() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1940,58 +1986,6 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_stream.html#a016bb39af201e717c1975551b7ecc1b3">AudioStream</a>.</p>
-
-</div>
-</div>
-<a id="a0284c414da66b48385a66b676b2e2356" name="a0284c414da66b48385a66b676b2e2356"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0284c414da66b48385a66b676b2e2356">&#9670;&#160;</a></span>write() <span class="overload">[2/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">size_t write </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_print.html">Print</a> *&#160;</td>
-          <td class="paramname"><em>p_out</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const uint8_t *&#160;</td>
-          <td class="paramname"><em>buffer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>bytes</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t &amp;&#160;</td>
-          <td class="paramname"><em>written</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Writes the buffer to defined output after resampling. </p>
 
 </div>
 </div>
