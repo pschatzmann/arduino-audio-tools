@@ -193,7 +193,7 @@ class ChannelFormatConverterStream : public ReformatBaseStream {
 
   virtual size_t write(const uint8_t* data, size_t len) override {
     LOGD("ChannelFormatConverterStream::write: %d", (int)len);
-    if (p_out == nullptr) return 0;
+    if (p_out == nullptr || converter == nullptr) return 0;
     // addNotifyOnFirstWrite();
     switch (bits_per_sample) {
       case 8:
@@ -211,6 +211,7 @@ class ChannelFormatConverterStream : public ReformatBaseStream {
 
   size_t readBytes(uint8_t* data, size_t len) override {
     LOGD("ChannelFormatConverterStream::readBytes: %d", (int)len);
+    if (converter == nullptr) return 0;
     switch (bits_per_sample) {
       case 8:
         return getConverter<int8_t>()->readBytes(data, len);
@@ -226,6 +227,7 @@ class ChannelFormatConverterStream : public ReformatBaseStream {
   }
 
   virtual int available() override {
+    if (converter == nullptr) return 0;
     switch (bits_per_sample) {
       case 8:
         return getConverter<int8_t>()->available();
@@ -241,6 +243,7 @@ class ChannelFormatConverterStream : public ReformatBaseStream {
   }
 
   virtual int availableForWrite() override {
+    if (converter == nullptr) return 0;
     switch (bits_per_sample) {
       case 8:
         return getConverter<int8_t>()->availableForWrite();
@@ -304,30 +307,44 @@ class ChannelFormatConverterStream : public ReformatBaseStream {
     }
   }
 
+  /// Creates the converter for the sample type T: it reads from the input
+  /// stream if there is one (setStream()), otherwise it writes to the output
+  /// (setOutput()). Returns nullptr if neither is defined.
+  template <typename T>
+  ChannelFormatConverterStreamT<T>* newConverter(int fromChannels, int toChannels) {
+    ChannelFormatConverterStreamT<T>* result = nullptr;
+    if (p_io != nullptr) {
+      result = new ChannelFormatConverterStreamT<T>(*p_io);
+    } else if (p_out != nullptr) {
+      result = new ChannelFormatConverterStreamT<T>(*p_out);
+    } else {
+      LOGE("ChannelFormatConverterStream: no stream or output defined");
+      return nullptr;
+    }
+    result->begin(fromChannels, toChannels);
+    return result;
+  }
+
   bool setupConverter(int fromChannels, int toChannels) {
-    bool result = true;
     cleanupConverter();
     switch (bits_per_sample) {
       case 8:
-        converter = new ChannelFormatConverterStreamT<int8_t>(*p_io);
-        getConverter<int8_t>()->begin(fromChannels, toChannels);
+        converter = newConverter<int8_t>(fromChannels, toChannels);
         break;
       case 16:
-        converter = new ChannelFormatConverterStreamT<int16_t>(*p_io);
-        getConverter<int16_t>()->begin(fromChannels, toChannels);
+        converter = newConverter<int16_t>(fromChannels, toChannels);
         break;
       case 24:
-        converter = new ChannelFormatConverterStreamT<int24_t>(*p_io);
-        getConverter<int24_t>()->begin(fromChannels, toChannels);
+        converter = newConverter<int24_t>(fromChannels, toChannels);
         break;
       case 32:
-        converter = new ChannelFormatConverterStreamT<int32_t>(*p_io);
-        getConverter<int32_t>()->begin(fromChannels, toChannels);
+        converter = newConverter<int32_t>(fromChannels, toChannels);
         break;
       default:
-        result = false;
+        LOGE("ChannelFormatConverterStream: unsupported bits_per_sample %d", bits_per_sample);
+        return false;
     }
-    return result;
+    return converter != nullptr;
   }
 };
 

@@ -14,3 +14,4 @@ endif()
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/converter-state ${CMAKE_CURRENT_BINARY_DIR}/converter-state)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/converters_fixedpoint ${CMAKE_CURRENT_BINARY_DIR}/converters_fixedpoint)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/channel-format ${CMAKE_CURRENT_BINARY_DIR}/channel-format)
