@@ -212,6 +212,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a6515b57f80707ef3ea29cddbf3abcb03" id="r_a6515b57f80707ef3ea29cddbf3abcb03"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a6515b57f80707ef3ea29cddbf3abcb03"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_channel_format_converter_stream_t.html">ChannelFormatConverterStreamT</a>&lt; T &gt; *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_channel_format_converter_stream.html#a6515b57f80707ef3ea29cddbf3abcb03">getConverter</a> ()</td></tr>
 <tr class="separator:a6515b57f80707ef3ea29cddbf3abcb03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ba048086ffa31eb65fef90dadd064dc" id="r_a3ba048086ffa31eb65fef90dadd064dc"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a3ba048086ffa31eb65fef90dadd064dc"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_channel_format_converter_stream_t.html">ChannelFormatConverterStreamT</a>&lt; T &gt; *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_channel_format_converter_stream.html#a3ba048086ffa31eb65fef90dadd064dc">newConverter</a> (int fromChannels, int toChannels)</td></tr>
+<tr class="separator:a3ba048086ffa31eb65fef90dadd064dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc00b141650b11fe19d4c7055d96a075" id="r_afc00b141650b11fe19d4c7055d96a075"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_stream.html#afc00b141650b11fe19d4c7055d96a075">not_supported</a> (int out, const char *msg=&quot;&quot;)</td></tr>
 <tr class="separator:afc00b141650b11fe19d4c7055d96a075"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a9a665a387a8c4fbf7fed14bbbfc093" id="r_a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a6a9a665a387a8c4fbf7fed14bbbfc093">notifyAudioChange</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> <a class="el" href="classaudio__tools_1_1_audio_stream.html#a47385aa19435f5fca9d3083a748258c5">info</a>)</td></tr>
@@ -899,6 +902,45 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 
 <p>Checks if the automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> update is active. </p>
+
+</div>
+</div>
+<a id="a3ba048086ffa31eb65fef90dadd064dc" name="a3ba048086ffa31eb65fef90dadd064dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ba048086ffa31eb65fef90dadd064dc">&#9670;&#160;</a></span>newConverter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_channel_format_converter_stream_t.html">ChannelFormatConverterStreamT</a>&lt; T &gt; * newConverter </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fromChannels</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>toChannels</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Creates the converter for the sample type T: it reads from the input stream if there is one (<a class="el" href="classaudio__tools_1_1_reformat_base_stream.html#a3175c90bb7d1186fc8eea5d5114a3766" title="Defines/Changes the input &amp; output.">setStream()</a>), otherwise it writes to the output (<a class="el" href="classaudio__tools_1_1_reformat_base_stream.html#a7b8352dd3e4a4107eee3a179e533e1d7" title="Defines/Changes the output target and registers for audio change notifications.">setOutput()</a>). Returns nullptr if neither is defined. </p>
 
 </div>
 </div>
