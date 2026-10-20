@@ -175,6 +175,10 @@ class ResampleStream : public ReformatBaseStream {
   size_t write(const uint8_t *data, size_t len) override {
     LOGD("ResampleStream::write: %d", (int)len);
     //addNotifyOnFirstWrite();
+    if (p_out == nullptr) {
+      LOGE("output not defined");
+      return 0;
+    }
     int frame_bytes = info.bits_per_sample / 8 * info.channels;
     if (frame_bytes <= 0) {
       TRACEE();
@@ -209,16 +213,16 @@ class ResampleStream : public ReformatBaseStream {
       switch (info.bits_per_sample) {
         case 16:
 #if PREFER_FIXEDPOINT
-          writeFixed(p_out, proc_data, whole, written);
+          writeFixed(proc_data, whole, written);
 #else
-          write<int16_t>(p_out, proc_data, whole, written);
+          write<int16_t>(proc_data, whole, written);
 #endif
           break;
         case 24:
-          write<int24_t>(p_out, proc_data, whole, written);
+          write<int24_t>(proc_data, whole, written);
           break;
         case 32:
-          write<int32_t>(p_out, proc_data, whole, written);
+          write<int32_t>(proc_data, whole, written);
           break;
         default:
           TRACEE();
@@ -291,9 +295,7 @@ class ResampleStream : public ReformatBaseStream {
 
   /// Writes the buffer to defined output after resampling
   template <typename T>
-  size_t write(Print *p_out, const uint8_t *buffer, size_t bytes,
-               size_t &written) {
-    this->p_out = p_out;
+  size_t write(const uint8_t *buffer, size_t bytes, size_t &written) {
     if (step_size == 1.0f) {
       written = p_out->write(buffer, bytes);
       return written;
@@ -365,9 +367,7 @@ class ResampleStream : public ReformatBaseStream {
 #if PREFER_FIXEDPOINT
   /// Fixed-point (Q16.16) equivalent of write<int16_t>(): avoids float
   /// add/div/round() in the per-sample loop on FPU-less MCUs (e.g. RP2040).
-  size_t writeFixed(Print *p_out, const uint8_t *buffer, size_t bytes,
-                     size_t &written) {
-    this->p_out = p_out;
+  size_t writeFixed(const uint8_t *buffer, size_t bytes, size_t &written) {
     if (step_size == 1.0f) {
       written = p_out->write(buffer, bytes);
       return written;
