@@ -701,7 +701,13 @@ class MuxerMTS : public Muxer {
   void setAudioInfo(AudioInfoFormat info) override {
     audio_info = info;
     if (audio_info.format == AudioFormat::UNKNOWN) audio_info.format = AudioFormat::AAC;
-    audio_samples_per_frame = (audio_info.format == AudioFormat::MP3) ? 1152 : 1024;
+    // AAC: 1024 samples per frame; MP3: 1152 for MPEG-1 (32 kHz and up),
+    // 576 for the MPEG-2/2.5 frames used at lower sample rates
+    if (audio_info.format == AudioFormat::MP3) {
+      audio_samples_per_frame = audio_info.sample_rate >= 32000 ? 1152 : 576;
+    } else {
+      audio_samples_per_frame = 1024;
+    }
     has_audio = true;
   }
   AudioInfoFormat &audioInfo() override { return audio_info; }
@@ -816,7 +822,7 @@ class MuxerMTS : public Muxer {
   StreamContentType write_stream_type = StreamContentType::Video;
   uint32_t video_frame_count = 0;
   uint32_t audio_frame_count = 0;
-  uint32_t audio_samples_per_frame = 1024;  // AAC: 1024, MP3: 1152
+  uint32_t audio_samples_per_frame = 1024;  // see setAudioInfo()
   bool is_real_time = false;
   uint32_t start_ms = 0;
   // TS packets are collected and written in batches of up to
