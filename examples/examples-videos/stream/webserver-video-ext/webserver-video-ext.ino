@@ -18,7 +18,7 @@
  * in loop(). They all use the muxer and the client list, so they share a
  * mutex. The camera and the audio codec share the board's I2C bus: the
  * camera uses the bus of Wire, which the audio driver starts.
- * Each frame is encoded once and sent to all connected viewers; a viewer
+ * Each frame is encoded once and sent to all connected out_streams; a viewer
  * starts with the next keyframe, which is sent every second. Browsers only
  * autoplay muted videos: unmute it with the player controls.
  *
@@ -52,7 +52,7 @@
 #include "HttpServer.h"
 #include "TinyCameraPins.h"
 
-SET_LOOP_TASK_STACK_SIZE(16 * 1024);
+//SET_LOOP_TASK_STACK_SIZE(16 * 1024);
 
 // Frame rate the camera is captured at: what the encoder can sustain
 constexpr float kFps = 8;
@@ -80,22 +80,31 @@ if (mpegts.getFeatureList().mseLivePlayback) {
 }
 </script></body></html>)";
 
+// web server: serves the player page and the MPEG transport stream
 WiFiServer wifi;
-tinyhttp::HttpServer server(wifi);
-CameraFrameSourceTinyCamera camera;
-H264EncoderESP32P4 encoder;
-I2SCodecStream mic(WaveshareESP32P4WIFI6);
-AACEncoderVO aac;
-MuxerMTS mts;
+HttpServer server(wifi);
+ExtensionStream out_streams("/stream.ts", tinyhttp::T_GET, "video/mp2t");
+
+// Muxer
+MuxerMTS mts(out_streams);
 VideoMuxerWithTasks video(mts);
 Mutex mutex;  // shared by the video task and the web server
 
-// /stream.ts: everything written to it is sent to all connected viewers
-tinyhttp::ExtensionStream viewers("/stream.ts", tinyhttp::T_GET, "video/mp2t");
+// video pipeline: camera -> H.264 encoder -> MuxerMTS
+CameraFrameSourceTinyCamera camera;
+H264EncoderESP32P4 encoder;
+
+// audio pipeline: microphone -> AAC encoder -> MuxerMTS
+I2SCodecStream mic(WaveshareESP32P4WIFI6);
+AACEncoderVO aac;
+
 
 void setup() {
   Serial0.begin(115200);
   AudioToolsLogger.begin(Serial0, AudioToolsLogLevel::Warning);
+
+  while(!Serial0);
+  Serial0.println("starting...");
 
   // microphone: also starts the I2C bus (Wire) for the audio codec
   auto mic_cfg = mic.defaultConfig(RX_MODE);
@@ -126,31 +135,32 @@ void setup() {
   // live stream: timestamps from the capture time, so the player's latency
   // stays constant even if fewer than kFps frames/s get through
   mts.setRealTime(true);
-  mts.setOutput(viewers);
-  video.setVideoSource(camera);
-  video.setVideoEncoder(encoder);
-  video.setAudioSource(mic);
-  video.setAudioEncoder(aac);
-  video.setMutex(mutex);
-  video.setTaskParameters(16 * 1024, 2);  // stack in bytes on ESP32
 
   // web server: player page and stream
   server.on("/", tinyhttp::T_GET, "text/html", kPage);
-  server.addExtension(viewers);
+  server.addExtension(out_streams);
   server.setNoConnectDelay(0);  // loop() waits outside of the mutex instead
-  server.begin(80, ssid, password);  // connects to WiFi
-  WiFi.setSleep(false);              // no power save: it throttles the stream
+  // connects to WiFi (with power save switched off)
+  server.begin(80, ssid, password);
 
   Serial0.print("Open http://");
   Serial0.print(WiFi.localIP());
   Serial0.println("/ in a web browser");
 
   // starts the tasks: video at kFps, audio as the microphone delivers it
+  // config muxer
+  video.setVideoSource(camera);
+  video.setVideoEncoder(encoder);
+  video.setAudioSource(mic);
+  video.setAudioEncoder(aac);
+  video.setMutex(mutex);
+  video.setTaskParameters(16 * 1024, 2);  // stack in bytes on ESP32
   video.begin();
 }
 
 void loop() {
   {
+    // needed because the video task and the web server share the muxer and the client list
     LockGuard guard(mutex);
     server.copy();  // accepts new requests
   }
