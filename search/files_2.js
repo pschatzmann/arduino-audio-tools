@@ -22,7 +22,7 @@ var searchData=
   ['codecbasic_2eh_19',['CodecBasic.h',['../_codec_basic_8h.html',1,'']]],
   ['codecchain_2eh_20',['CodecChain.h',['../_codec_chain_8h.html',1,'']]],
   ['codeccodec2_2eh_21',['CodecCodec2.h',['../_codec_codec2_8h.html',1,'']]],
-  ['codeccopy_2eh_22',['codeccopy.h',['../_audio_codecs_2_codec_copy_8h.html',1,'(Global Namespace)'],['../_video_2_codec_copy_8h.html',1,'(Global Namespace)']]],
+  ['codeccopy_2eh_22',['codeccopy.h',['../_video_2_codec_copy_8h.html',1,'(Global Namespace)'],['../_audio_codecs_2_codec_copy_8h.html',1,'(Global Namespace)']]],
   ['codecdsf_2eh_23',['CodecDSF.h',['../_codec_d_s_f_8h.html',1,'']]],
   ['codecfactory_2eh_24',['CodecFactory.h',['../_codec_factory_8h.html',1,'']]],
   ['codecflac_2eh_25',['CodecFLAC.h',['../_codec_f_l_a_c_8h.html',1,'']]],

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['jpeg_0',['JPEG',['../namespaceaudio__tools.html#a72d488703dc2881a96bed9b9365dcb8ea907e06a16862d82ca6907a28a68d0ad6',1,'audio_tools']]],
+  ['jpeg_0',['jpeg',['../classaudio__tools_1_1_m_j_p_e_g_encoder.html#a484e022b6e857cd3b23be2bdaf8524cc',1,'audio_tools::MJPEGEncoder::jpeg'],['../namespaceaudio__tools.html#a72d488703dc2881a96bed9b9365dcb8ea907e06a16862d82ca6907a28a68d0ad6',1,'audio_tools::JPEG']]],
   ['jpeg_5fbuffer_1',['jpeg_buffer',['../classaudio__tools_1_1_camera_frame_source_open_c_v.html#ad72813f6ff870cd75de1624f6739d753',1,'audio_tools::CameraFrameSourceOpenCV']]],
   ['jpeg_5fquality_2',['jpeg_quality',['../classaudio__tools_1_1_camera_frame_source_open_c_v.html#aec8e09b2b6bb4f8b8b757a1f0e20b379',1,'audio_tools::CameraFrameSourceOpenCV']]],
   ['jpegrtpencoder_3',['jpegrtpencoder',['../classaudio__tools_1_1_j_p_e_g_rtp_encoder.html',1,'JPEGRtpEncoder'],['../classaudio__tools_1_1_j_p_e_g_rtp_encoder.html#afdaf6729fc488622a6dac01e331c2a6b',1,'audio_tools::JPEGRtpEncoder::JPEGRtpEncoder()=default'],['../classaudio__tools_1_1_j_p_e_g_rtp_encoder.html#aa0719c0523100608490a8d72bdf8e067',1,'audio_tools::JPEGRtpEncoder::JPEGRtpEncoder(size_t maxFragmentSize)']]],
