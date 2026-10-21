@@ -1621,15 +1621,31 @@ class MuxerMP4 : public Muxer {
   /// then stripped, since they end up described there instead) as a
   /// single 'moof'+'mdat' fragment. Until SPS/PPS have been seen (from
   /// this or an earlier call), 'moov' cannot be written yet, so the frame
-  /// is dropped (logged) rather than buffered. No-op (returns 0) unless
-  /// getVideoInfo().format is VideoFormat::H264 - use addJpegFrame() for
-  /// VideoFormat::MJPEG instead.
+  /// is dropped (logged) rather than buffered. For the other formats
+  /// (MJPEG, YUV422, RGB565, I420) the frame is forwarded to the matching
+  /// addJpegFrame()/addYUV422Frame()/addRGB565Frame()/addI420Frame(), so
+  /// that generic callers (VideoMuxer, MuxerVideoSink, ...) work with every
+  /// format.
   /// @param isKeyFrame marks the sample as a sync sample (IDR) in the
   /// fragment's 'trun' flags - matters for players seeking into the
   /// stream; pass false for P/B (non-IDR) frames if known.
   size_t addVideoFrame(const uint8_t* data, size_t len,
                        bool isKeyFrame = true) override {
-    if (!is_open || video_cfg.format != VideoFormat::H264) return 0;
+    if (!is_open) return 0;
+    switch (video_cfg.format) {
+      case VideoFormat::H264:
+        break;
+      case VideoFormat::MJPEG:
+        return addJpegFrame(data, len);
+      case VideoFormat::YUV422:
+        return addYUV422Frame(data, len);
+      case VideoFormat::RGB565:
+        return addRGB565Frame(data, len);
+      case VideoFormat::I420:
+        return addI420Frame(data, len);
+      default:
+        return 0;
+    }
     setVideoConfigData(data, len);
     if (!tryWriteMoov()) {
       LOGW("dropping video frame: SPS/PPS not seen yet");

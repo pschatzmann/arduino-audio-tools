@@ -5,12 +5,13 @@
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
 #include "AudioTools/Video/CodecVideo.h"
 #include "TinyJPEGDecoder.h"  // https://github.com/pschatzmann/TinyJPEG
+#include "TinyJPEGEncoder.h"
 
 /**
  * @defgroup mjpeg MJPEG
  * @ingroup codecs
  * @ingroup video
- * @brief Motion-JPEG decoding using https://github.com/pschatzmann/TinyJPEG
+ * @brief Motion-JPEG decoding and encoding using https://github.com/pschatzmann/TinyJPEG
  */
 
 namespace audio_tools {
@@ -227,6 +228,151 @@ class MJPEGDecoder : public VideoDecoder, public VideoInfoSource {
     if (p_out != nullptr) result = p_out->write(data, len);
     if (p_out_video != nullptr) result += p_out_video->write(data, len);
     return result;
+  }
+};
+
+/**
+ * @brief Motion-JPEG video encoder: wraps TinyJPEGEncoder
+ * (https://github.com/pschatzmann/TinyJPEG) as a VideoEncoder - the MJPEG
+ * counterpart of H264Encoder (CodecH264.h), e.g. for VideoMuxer/
+ * VideoMuxerWithTasks with a camera that delivers raw pictures. Configure
+ * it via setSize()/setVideoFormat() (RGB565 - the default -, RGB888 or
+ * RGB666, packed) and optionally setQuality()/setSubsample(), then feed raw
+ * pictures via write(): each one is encoded into one complete JPEG image,
+ * which is written to the target configured via setOutput() in a single
+ * write() call - as the muxers expect one frame per call.
+ *
+ * The encoded image is assembled in an internal buffer, which starts at
+ * kDefaultBufferSize and grows (doubling, up to a few attempts) whenever an
+ * image doesn't fit - so it doesn't need to be sized by hand; use
+ * setBufferSize() to pre-size it.
+ *
+ * @ingroup mjpeg
+ * @ingroup encoder
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class MJPEGEncoder : public VideoEncoder {
+ public:
+  /// Default size (bytes) of the internal JPEG buffer - see setBufferSize().
+  static constexpr size_t kDefaultBufferSize = 16384;
+
+  MJPEGEncoder(int width = 0, int height = 0) { setSize(width, height); }
+  MJPEGEncoder(Print &out) { setOutput(out); }
+  MJPEGEncoder(VideoOutput &out) { setOutput(out); }
+
+  /// Defines the target each encoded JPEG image is written to.
+  void setOutput(Print &out) override { p_out = &out; }
+  void setOutput(VideoOutput &out) { p_out_video = &out; }
+
+  /// Selects the raw picture format write() expects: VideoFormat::RGB565
+  /// (the default), RGB888 or RGB666 (packed). Any other format is logged
+  /// and ignored (previous format kept).
+  void setVideoFormat(VideoFormat format) override {
+    switch (format) {
+      case VideoFormat::RGB565:
+      case VideoFormat::RGB888:
+      case VideoFormat::RGB666:
+        input_format = format;
+        break;
+      default:
+        LOGW("MJPEGEncoder: unsupported VideoFormat %d", (int)format);
+        break;
+    }
+  }
+
+  /// Reports VideoFormat::MJPEG and the size set via setSize().
+  VideoInfo videoInfo() override {
+    VideoInfo info;
+    info.format = VideoFormat::MJPEG;
+    info.width = (uint16_t)width_;
+    info.height = (uint16_t)height_;
+    return info;
+  }
+
+  /// Defines the picture size.
+  void setSize(int width, int height) {
+    width_ = width;
+    height_ = height;
+  }
+  /// JPEG quality: 1 (smallest) to 100 (best) - see TinyJPEGEncoder::setQuality()
+  void setQuality(uint8_t quality) { encoder_.setQuality(quality); }
+  /// 4:2:0 chroma subsampling on/off - see TinyJPEGEncoder::setSubsample()
+  void setSubsample(bool enable) { encoder_.setSubsample(enable); }
+
+  /// Pre-sizes the internal JPEG buffer (see class comment). Shrinks are
+  /// ignored.
+  void setBufferSize(size_t size) {
+    if (size > jpeg.size()) jpeg.resize(size);
+  }
+
+  bool begin() override {
+    if (width_ <= 0 || height_ <= 0) {
+      LOGE("MJPEGEncoder: setSize() was not called");
+      return false;
+    }
+    if (jpeg.size() == 0) jpeg.resize(kDefaultBufferSize);
+    return jpeg.data() != nullptr;
+  }
+
+  void end() override {}
+
+  /// Encodes one raw picture (setVideoFormat()'s format, setSize()'s
+  /// size) and writes the JPEG image to the output - returns its size (0
+  /// if nothing was written, e.g. if `len` doesn't match the configured
+  /// format and size).
+  size_t write(const uint8_t *data, size_t len) override {
+    if (p_out == nullptr && p_out_video == nullptr) return 0;
+    size_t expected = videoFrameSizeBytes(input_format, width_, height_);
+    if (expected == 0 || len < expected) {
+      LOGE("MJPEGEncoder: %u bytes, expected %u", (unsigned)len,
+           (unsigned)expected);
+      return 0;
+    }
+    if (jpeg.size() == 0) jpeg.resize(kDefaultBufferSize);
+    size_t size = 0;
+    JERESULT rc = encode(data, size);
+    // the image didn't fit: grow the buffer and try again
+    for (int attempt = 0; rc == JER_INTR && attempt < kMaxGrowRetries;
+         ++attempt) {
+      jpeg.resize(jpeg.size() * 2);
+      if (jpeg.data() == nullptr) {
+        LOGE("MJPEGEncoder: buffer allocation failed");
+        return 0;
+      }
+      rc = encode(data, size);
+    }
+    if (rc != JER_OK) {
+      LOGE("MJPEGEncoder: encoding failed (%d)", (int)rc);
+      return 0;
+    }
+    if (p_out != nullptr) p_out->write(jpeg.data(), size);
+    if (p_out_video != nullptr) p_out_video->write(jpeg.data(), size);
+    return size;
+  }
+
+  /// Direct access to the wrapped TinyJPEGEncoder.
+  tinyjpeg::TinyJPEGEncoder &driver() { return encoder_; }
+
+ protected:
+  /// Number of times the buffer is doubled before giving up.
+  static constexpr int kMaxGrowRetries = 4;
+
+  tinyjpeg::TinyJPEGEncoder encoder_;
+  Print *p_out = nullptr;
+  VideoOutput *p_out_video = nullptr;
+  Vector<uint8_t> jpeg;
+  VideoFormat input_format = VideoFormat::RGB565;
+  int width_ = 0;
+  int height_ = 0;
+
+  JERESULT encode(const uint8_t *data, size_t &size) {
+    JEPixelFormat format = input_format == VideoFormat::RGB565 ? JE_FMT_RGB565
+                           : input_format == VideoFormat::RGB666
+                               ? JE_FMT_RGB666
+                               : JE_FMT_RGB888;
+    return encoder_.encodeJpg(data, width_, height_, format, jpeg.data(),
+                              jpeg.size(), size);
   }
 };
 
