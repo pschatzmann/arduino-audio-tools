@@ -79,10 +79,11 @@ var searchData=
   ['mutexrtos_76',['MutexRTOS',['../classaudio__tools_1_1_mutex_r_t_o_s.html',1,'audio_tools']]],
   ['mutexzephyr_77',['MutexZephyr',['../classaudio__tools_1_1_mutex_zephyr.html',1,'audio_tools']]],
   ['muxer_78',['Muxer',['../classaudio__tools_1_1_muxer.html',1,'audio_tools']]],
-  ['muxeravi_79',['MuxerAVI',['../classaudio__tools_1_1_muxer_a_v_i.html',1,'audio_tools']]],
-  ['muxermp4_80',['MuxerMP4',['../classaudio__tools_1_1_muxer_m_p4.html',1,'audio_tools']]],
-  ['muxermpg_81',['MuxerMPG',['../classaudio__tools_1_1_muxer_m_p_g.html',1,'audio_tools']]],
-  ['muxermts_82',['MuxerMTS',['../classaudio__tools_1_1_muxer_m_t_s.html',1,'audio_tools']]],
-  ['muxervideoconfig_83',['MuxerVideoConfig',['../structaudio__tools_1_1_muxer_video_config.html',1,'audio_tools']]],
-  ['muxervideosink_84',['MuxerVideoSink',['../classaudio__tools_1_1_muxer_video_sink.html',1,'audio_tools']]]
+  ['muxeraudiosink_79',['MuxerAudioSink',['../classaudio__tools_1_1_muxer_audio_sink.html',1,'audio_tools']]],
+  ['muxeravi_80',['MuxerAVI',['../classaudio__tools_1_1_muxer_a_v_i.html',1,'audio_tools']]],
+  ['muxermp4_81',['MuxerMP4',['../classaudio__tools_1_1_muxer_m_p4.html',1,'audio_tools']]],
+  ['muxermpg_82',['MuxerMPG',['../classaudio__tools_1_1_muxer_m_p_g.html',1,'audio_tools']]],
+  ['muxermts_83',['MuxerMTS',['../classaudio__tools_1_1_muxer_m_t_s.html',1,'audio_tools']]],
+  ['muxervideoconfig_84',['MuxerVideoConfig',['../structaudio__tools_1_1_muxer_video_config.html',1,'audio_tools']]],
+  ['muxervideosink_85',['MuxerVideoSink',['../classaudio__tools_1_1_muxer_video_sink.html',1,'audio_tools']]]
 ];
