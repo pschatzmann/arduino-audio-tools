@@ -90,6 +90,7 @@ $(function() {
 <code>#include &quot;driver/i2s_tdm.h&quot;</code><br />
 <code>#include &quot;esp_system.h&quot;</code><br />
 <code>#include &lt;atomic&gt;</code><br />
+<code>#include &quot;soc/soc_caps.h&quot;</code><br />
 <code>#include &lt;type_traits&gt;</code><br />
 </div>
 <p><a href="_i2_s_driver_e_s_p32_v1_8h_source.html">Go to the source code of this file.</a></p>
@@ -124,8 +125,12 @@ Namespaces</h2></td></tr>
 Macros</h2></td></tr>
 <tr class="memitem:ad34cac4dc3d231a08c47d398ae654ec6" id="r_ad34cac4dc3d231a08c47d398ae654ec6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i2_s_driver_e_s_p32_v1_8h.html#ad34cac4dc3d231a08c47d398ae654ec6">I2S_CHANNEL_DEFAULT_CONFIG_SAFE</a>(port,  role)&#160;&#160;&#160;getDefaultChannelConfig(port, role)</td></tr>
 <tr class="separator:ad34cac4dc3d231a08c47d398ae654ec6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4adac0bebb561b16aae921ad2caac35a" id="r_a4adac0bebb561b16aae921ad2caac35a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i2_s_driver_e_s_p32_v1_8h.html#a4adac0bebb561b16aae921ad2caac35a">I2S_MAX_DMA_BUFFER_BYTES</a>&#160;&#160;&#160;(4095 - 3)</td></tr>
+<tr class="separator:a4adac0bebb561b16aae921ad2caac35a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9a9b9ef7edcb2091950aa17b9dca2dc" id="r_ad9a9b9ef7edcb2091950aa17b9dca2dc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i2_s_driver_e_s_p32_v1_8h.html#ad9a9b9ef7edcb2091950aa17b9dca2dc">I2S_MCLK_MULTIPLE_192</a>&#160;&#160;&#160;static_cast&lt;i2s_mclk_multiple_t&gt;(192)</td></tr>
 <tr class="separator:ad9a9b9ef7edcb2091950aa17b9dca2dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29bd953a6b260ceba6525ad68d8ee3bf" id="r_a29bd953a6b260ceba6525ad68d8ee3bf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i2_s_driver_e_s_p32_v1_8h.html#a29bd953a6b260ceba6525ad68d8ee3bf">I2S_MIN_DMA_DESC_NUM</a>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:a29bd953a6b260ceba6525ad68d8ee3bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25c6f454d3f028e131a6511cd83ae6f4" id="r_a25c6f454d3f028e131a6511cd83ae6f4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i2_s_driver_e_s_p32_v1_8h.html#a25c6f454d3f028e131a6511cd83ae6f4">IS_I2S_IMPLEMENTED</a></td></tr>
 <tr class="separator:a25c6f454d3f028e131a6511cd83ae6f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -169,6 +174,20 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a4adac0bebb561b16aae921ad2caac35a" name="a4adac0bebb561b16aae921ad2caac35a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4adac0bebb561b16aae921ad2caac35a">&#9670;&#160;</a></span>I2S_MAX_DMA_BUFFER_BYTES</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define I2S_MAX_DMA_BUFFER_BYTES&#160;&#160;&#160;(4095 - 3)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ad9a9b9ef7edcb2091950aa17b9dca2dc" name="ad9a9b9ef7edcb2091950aa17b9dca2dc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad9a9b9ef7edcb2091950aa17b9dca2dc">&#9670;&#160;</a></span>I2S_MCLK_MULTIPLE_192</h2>
 
@@ -177,6 +196,20 @@ Functions</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define I2S_MCLK_MULTIPLE_192&#160;&#160;&#160;static_cast&lt;i2s_mclk_multiple_t&gt;(192)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a29bd953a6b260ceba6525ad68d8ee3bf" name="a29bd953a6b260ceba6525ad68d8ee3bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29bd953a6b260ceba6525ad68d8ee3bf">&#9670;&#160;</a></span>I2S_MIN_DMA_DESC_NUM</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define I2S_MIN_DMA_DESC_NUM&#160;&#160;&#160;2</td>
         </tr>
       </table>
 </div><div class="memdoc">
