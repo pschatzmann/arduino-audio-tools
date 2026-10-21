@@ -648,7 +648,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Pulls one frame, encodes/writes it, then sleeps only the remainder of video_interval_ms - compensating for time spent above (a slow encoder otherwise makes the real capture cadence slower than the fps written into the <a class="el" href="classaudio__tools_1_1_muxer.html" title="Common interface for muxers (MuxerAVI, MuxerMP4) that combine an already-encoded video track (and opt...">Muxer</a>'s video track). </p>
+<p>Pulls one frame, encodes/writes it, then sleeps only the remainder of video_interval_ms (but at least 1 ms) - compensating for time spent above (a slow encoder otherwise makes the real capture cadence slower than the fps written into the <a class="el" href="classaudio__tools_1_1_muxer.html" title="Common interface for muxers (MuxerAVI, MuxerMP4) that combine an already-encoded video track (and opt...">Muxer</a>'s video track). </p>
 
 </div>
 </div>

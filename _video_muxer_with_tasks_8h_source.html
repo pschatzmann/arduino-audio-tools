@@ -295,13 +295,16 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>      }</div>
 <div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>    }</div>
 <div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>    uint32_t elapsed = <a class="code hl_function" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">millis</a>() - start;</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>    <span class="keywordflow">if</span> (elapsed &lt; <a class="code hl_variable" href="classaudio__tools_1_1_video_muxer_with_tasks.html#a6a6949a672a3c9c79a4f14ad9307bd1b">video_interval_ms</a>) <a class="code hl_function" href="namespaceaudio__tools.html#a7f2dfce1046bdd2a2b753643726c2346">delay</a>(<a class="code hl_variable" href="classaudio__tools_1_1_video_muxer_with_tasks.html#a6a6949a672a3c9c79a4f14ad9307bd1b">video_interval_ms</a> - elapsed);</div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>  }</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>    <span class="comment">// always yield, even when encoding took longer than the frame interval:</span></div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>    <span class="comment">// otherwise lower priority tasks (e.g. the idle task watched by the</span></div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>    <span class="comment">// task watchdog) never get to run on this core</span></div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>    <a class="code hl_function" href="namespaceaudio__tools.html#a7f2dfce1046bdd2a2b753643726c2346">delay</a>(elapsed &lt; <a class="code hl_variable" href="classaudio__tools_1_1_video_muxer_with_tasks.html#a6a6949a672a3c9c79a4f14ad9307bd1b">video_interval_ms</a> ? <a class="code hl_variable" href="classaudio__tools_1_1_video_muxer_with_tasks.html#a6a6949a672a3c9c79a4f14ad9307bd1b">video_interval_ms</a> - elapsed : 1);</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>  }</div>
 </div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>};</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>};</div>
 </div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span> </div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span> </div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="a_audio_logger_i_d_f_8h_html_a5512e59d578a380a441a70256af997d0"><div class="ttname"><a href="_audio_logger_i_d_f_8h.html#a5512e59d578a380a441a70256af997d0">LOGI</a></div><div class="ttdeci">#define LOGI(...)</div><div class="ttdef"><b>Definition</b> AudioLoggerIDF.h:28</div></div>
 <div class="ttc" id="a_audio_logger_i_d_f_8h_html_ae02538a80ad5fc009caec73487d11a8d"><div class="ttname"><a href="_audio_logger_i_d_f_8h.html#ae02538a80ad5fc009caec73487d11a8d">LOGE</a></div><div class="ttdeci">#define LOGE(...)</div><div class="ttdef"><b>Definition</b> AudioLoggerIDF.h:30</div></div>
 <div class="ttc" id="a_codec_video_8h_html"><div class="ttname"><a href="_codec_video_8h.html">CodecVideo.h</a></div></div>
