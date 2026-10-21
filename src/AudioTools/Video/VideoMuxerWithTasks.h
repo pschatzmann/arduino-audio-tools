@@ -266,7 +266,7 @@ class VideoMuxerWithTasks {
   }
 
   /// Pulls one frame, encodes/writes it, then sleeps only the remainder
-  /// of video_interval_ms - compensating for time spent above (a slow
+  /// of video_interval_ms (but at least 1 ms) - compensating for time spent above (a slow
   /// encoder otherwise makes the real capture cadence slower than the
   /// fps written into the Muxer's video track).
   void videoTaskLoop() {
@@ -288,7 +288,10 @@ class VideoMuxerWithTasks {
       }
     }
     uint32_t elapsed = millis() - start;
-    if (elapsed < video_interval_ms) delay(video_interval_ms - elapsed);
+    // always yield, even when encoding took longer than the frame interval:
+    // otherwise lower priority tasks (e.g. the idle task watched by the
+    // task watchdog) never get to run on this core
+    delay(elapsed < video_interval_ms ? video_interval_ms - elapsed : 1);
   }
 };
 
