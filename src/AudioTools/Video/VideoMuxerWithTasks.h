@@ -185,7 +185,8 @@ class VideoMuxerWithTasks {
     if (have_audio) {
       if (p_audio_encoder != nullptr) {
         p_audio_encoder->setAudioInfo(audio_info);
-        p_audio_encoder->setOutput(*p_muxer);
+        audio_sink.begin(*p_muxer);
+        p_audio_encoder->setOutput(audio_sink);
         p_audio_encoder->begin();
       }
       ok &= audio_task.create("VideoMuxerAudioTask", task_stack_size,
@@ -229,6 +230,7 @@ class VideoMuxerWithTasks {
   VideoFrameSource *p_video = nullptr;
   VideoEncoder *p_video_encoder = nullptr;
   MuxerVideoSink video_sink;
+  MuxerAudioSink audio_sink;
   DefaultMutex default_mutex;
   MutexBase *p_mutex = &default_mutex;
   Task audio_task;
