@@ -74,9 +74,11 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pro-static-attribs">Static Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">MP3EncoderLAME Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__codecs.html">Codecs</a> &#124; <a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__codecs.html">Codecs</a> &raquo; <a class="el" href="group__encoder.html">Encoder</a></div></div></div>
 </div><!--header-->
@@ -99,12 +101,18 @@ Inheritance diagram for MP3EncoderLAME:</div>
   </map>
 </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e_1_1_frame_writer.html">FrameWriter</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receives the output of LAME and passes it on in complete MP3 frames.  <a href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e_1_1_frame_writer.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8be3f76568c6660b20ee79ac41db360b" id="r_a8be3f76568c6660b20ee79ac41db360b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#a8be3f76568c6660b20ee79ac41db360b">MP3EncoderLAME</a> ()</td></tr>
-<tr class="separator:a8be3f76568c6660b20ee79ac41db360b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a38092aa6c15da5cce002bca1047f16a6" id="r_a38092aa6c15da5cce002bca1047f16a6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#a38092aa6c15da5cce002bca1047f16a6">MP3EncoderLAME</a> (<a class="el" href="class_print.html">Print</a> &amp;out_stream)</td></tr>
-<tr class="separator:a38092aa6c15da5cce002bca1047f16a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78ecb1e18516476ed735935eba8aa1c6" id="r_a78ecb1e18516476ed735935eba8aa1c6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#a78ecb1e18516476ed735935eba8aa1c6">MP3EncoderLAME</a> (bool splitFrames=false)</td></tr>
+<tr class="separator:a78ecb1e18516476ed735935eba8aa1c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea99d11888632a2ba0f8f83693fd9bc7" id="r_aea99d11888632a2ba0f8f83693fd9bc7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#aea99d11888632a2ba0f8f83693fd9bc7">MP3EncoderLAME</a> (<a class="el" href="class_print.html">Print</a> &amp;out_stream, bool splitFrames=false)</td></tr>
+<tr class="separator:aea99d11888632a2ba0f8f83693fd9bc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1521d5b690b3e884ff05e5b073f35ba6" id="r_a1521d5b690b3e884ff05e5b073f35ba6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#a1521d5b690b3e884ff05e5b073f35ba6">~MP3EncoderLAME</a> ()</td></tr>
 <tr class="separator:a1521d5b690b3e884ff05e5b073f35ba6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed4bf0d5ce93f27242be485943d0b37d" id="r_aed4bf0d5ce93f27242be485943d0b37d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder.html#aed4bf0d5ce93f27242be485943d0b37d">audioInfo</a> () override</td></tr>
@@ -162,20 +170,33 @@ Protected Member Functions</h2></td></tr>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a81cc6334285d0b8cd395776e1b0590ec" id="r_a81cc6334285d0b8cd395776e1b0590ec"><td class="memItemLeft" align="right" valign="top">liblame::MP3EncoderLAME *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#a81cc6334285d0b8cd395776e1b0590ec">enc</a> =nullptr</td></tr>
 <tr class="separator:a81cc6334285d0b8cd395776e1b0590ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae67d3b98c1a476727ec28365fffa3606" id="r_ae67d3b98c1a476727ec28365fffa3606"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e_1_1_frame_writer.html">FrameWriter</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#ae67d3b98c1a476727ec28365fffa3606">frame_writer</a> {<a class="el" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#a7381a4b28d0a1581a14cbbfe68727a04">frames</a>}</td></tr>
+<tr class="separator:ae67d3b98c1a476727ec28365fffa3606"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7381a4b28d0a1581a14cbbfe68727a04" id="r_a7381a4b28d0a1581a14cbbfe68727a04"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html">HeaderParserMP3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#a7381a4b28d0a1581a14cbbfe68727a04">frames</a></td></tr>
+<tr class="separator:a7381a4b28d0a1581a14cbbfe68727a04"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47385aa19435f5fca9d3083a748258c5" id="r_a47385aa19435f5fca9d3083a748258c5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder.html#a47385aa19435f5fca9d3083a748258c5">info</a></td></tr>
 <tr class="separator:a47385aa19435f5fca9d3083a748258c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab5f14ec3789ff02292937cd2c6251935" id="r_ab5f14ec3789ff02292937cd2c6251935"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_audio_info_l_a_m_e.html">AudioInfoLAME</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#ab5f14ec3789ff02292937cd2c6251935">lame_info</a></td></tr>
 <tr class="separator:ab5f14ec3789ff02292937cd2c6251935"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdad90adc3ba71f7b1e16444c23b5502" id="r_acdad90adc3ba71f7b1e16444c23b5502"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#acdad90adc3ba71f7b1e16444c23b5502">p_print</a> =nullptr</td></tr>
 <tr class="separator:acdad90adc3ba71f7b1e16444c23b5502"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade5bf04345634ccf34fd233711ac5f64" id="r_ade5bf04345634ccf34fd233711ac5f64"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#ade5bf04345634ccf34fd233711ac5f64">split_frames</a> = false</td></tr>
+<tr class="separator:ade5bf04345634ccf34fd233711ac5f64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
+Static Protected Attributes</h2></td></tr>
+<tr class="memitem:abe40eb722c8712aeefe322fe139b23df" id="r_abe40eb722c8712aeefe322fe139b23df"><td class="memItemLeft" align="right" valign="top">static constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#abe40eb722c8712aeefe322fe139b23df">kMaxFrameSize</a> = 2048</td></tr>
+<tr class="memdesc:abe40eb722c8712aeefe322fe139b23df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffer size for the frame splitting: bigger than the largest MP3 frame.  <br /></td></tr>
+<tr class="separator:abe40eb722c8712aeefe322fe139b23df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Encodes PCM data to the MP3 format and writes the result to a stream This is basically just a wrapper using <a href="https://github.com/pschatzmann/codec-lame">https://github.com/pschatzmann/codec-lame</a>. </p>
+<p>LAME delivers its output in arbitrary chunks (zero, one or several MP3 frames per <a class="el" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#afd7270e10d851383ff7b53c1241f6ba1">write()</a>). Pass splitFrames = true to the constructor to get exactly one complete MP3 frame per <a class="el" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#afd7270e10d851383ff7b53c1241f6ba1">write()</a> to the output instead - as e.g. the video muxers (<a class="el" href="classaudio__tools_1_1_muxer_m_t_s.html" title="ISO/IEC 13818-1 MPEG Transport Stream Encoder: packetizes an already-encoded video elementary stream ...">MuxerMTS</a>, <a class="el" href="classaudio__tools_1_1_muxer_a_v_i.html" title="Configuration for the (single) video track written by MuxerAVI.">MuxerAVI</a>, ...) expect it.</p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a8be3f76568c6660b20ee79ac41db360b" name="a8be3f76568c6660b20ee79ac41db360b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8be3f76568c6660b20ee79ac41db360b">&#9670;&#160;</a></span>MP3EncoderLAME() <span class="overload">[1/2]</span></h2>
+<a id="a78ecb1e18516476ed735935eba8aa1c6" name="a78ecb1e18516476ed735935eba8aa1c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78ecb1e18516476ed735935eba8aa1c6">&#9670;&#160;</a></span>MP3EncoderLAME() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -186,7 +207,8 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html">MP3EncoderLAME</a> </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>splitFrames</em> = <code>false</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -196,11 +218,17 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">splitFrames</td><td>true: write exactly one complete MP3 frame per <a class="el" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#afd7270e10d851383ff7b53c1241f6ba1">write()</a> </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
-<a id="a38092aa6c15da5cce002bca1047f16a6" name="a38092aa6c15da5cce002bca1047f16a6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a38092aa6c15da5cce002bca1047f16a6">&#9670;&#160;</a></span>MP3EncoderLAME() <span class="overload">[2/2]</span></h2>
+<a id="aea99d11888632a2ba0f8f83693fd9bc7" name="aea99d11888632a2ba0f8f83693fd9bc7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea99d11888632a2ba0f8f83693fd9bc7">&#9670;&#160;</a></span>MP3EncoderLAME() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -212,8 +240,18 @@ Protected Attributes</h2></td></tr>
           <td class="memname"><a class="el" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html">MP3EncoderLAME</a> </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_print.html">Print</a> &amp;&#160;</td>
-          <td class="paramname"><em>out_stream</em></td><td>)</td>
+          <td class="paramname"><em>out_stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>splitFrames</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -222,6 +260,12 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">splitFrames</td><td>true: write exactly one complete MP3 frame per <a class="el" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#afd7270e10d851383ff7b53c1241f6ba1">write()</a> </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -851,6 +895,50 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ae67d3b98c1a476727ec28365fffa3606" name="ae67d3b98c1a476727ec28365fffa3606"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae67d3b98c1a476727ec28365fffa3606">&#9670;&#160;</a></span>frame_writer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e_1_1_frame_writer.html">FrameWriter</a> frame_writer {<a class="el" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#a7381a4b28d0a1581a14cbbfe68727a04">frames</a>}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7381a4b28d0a1581a14cbbfe68727a04" name="a7381a4b28d0a1581a14cbbfe68727a04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7381a4b28d0a1581a14cbbfe68727a04">&#9670;&#160;</a></span>frames</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html">HeaderParserMP3</a> frames</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a47385aa19435f5fca9d3083a748258c5" name="a47385aa19435f5fca9d3083a748258c5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a47385aa19435f5fca9d3083a748258c5">&#9670;&#160;</a></span>info</h2>
 
@@ -870,6 +958,30 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="abe40eb722c8712aeefe322fe139b23df" name="abe40eb722c8712aeefe322fe139b23df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe40eb722c8712aeefe322fe139b23df">&#9670;&#160;</a></span>kMaxFrameSize</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr int kMaxFrameSize = 2048</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Buffer size for the frame splitting: bigger than the largest MP3 frame. </p>
 
 </div>
 </div>
@@ -906,6 +1018,28 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="class_print.html">Print</a>* p_print =nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ade5bf04345634ccf34fd233711ac5f64" name="ade5bf04345634ccf34fd233711ac5f64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade5bf04345634ccf34fd233711ac5f64">&#9670;&#160;</a></span>split_frames</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool split_frames = false</td>
         </tr>
       </table>
   </td>
