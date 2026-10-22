@@ -15,6 +15,7 @@
 #include "RTSP/RTSPServerTaskless.h"
 #include "RTSP/RTSPMediaSource.h"
 #include "RTSP/RTSPMediaCallbackSource.h"
+#include "RTSP/RTSPMediaSourceMTS.h"
 #include "RTSP/RTSPFormat.h"
 #include "RTSP/RTSPOutput.h"
 #include "RTSP/RTSPMediaStreamer.h"
