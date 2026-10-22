@@ -1,7 +1,7 @@
 var searchData=
 [
   ['objectstream_0',['ObjectStream',['../classaudio__tools_1_1_object_stream.html',1,'audio_tools']]],
-  ['offsetinfo_1',['OffsetInfo',['../structaudio__tools_1_1_ring_buffer_file_1_1_offset_info.html',1,'audio_tools::RingBufferFile']]],
+  ['offsetinfo_1',['OffsetInfo',['../structaudio__tools_1_1audio__tools_1_1_ring_buffer_file_1_1_offset_info.html',1,'RingBufferFile&lt; File, T &gt;::OffsetInfo'],['../structaudio__tools_1_1_ring_buffer_file_1_1_offset_info.html',1,'RingBufferFile&lt; File, T &gt;::OffsetInfo']]],
   ['oggcontainerdecoder_2',['OggContainerDecoder',['../classaudio__tools_1_1_ogg_container_decoder.html',1,'audio_tools']]],
   ['oggcontainerencoder_3',['OggContainerEncoder',['../classaudio__tools_1_1_ogg_container_encoder.html',1,'audio_tools']]],
   ['oggcontaineroutput_4',['OggContainerOutput',['../classaudio__tools_1_1_ogg_container_output.html',1,'audio_tools']]],
@@ -23,12 +23,13 @@ var searchData=
   ['oscdata_20',['OSCData',['../classaudio__tools_1_1_o_s_c_data.html',1,'audio_tools']]],
   ['oscoutput_21',['OSCOutput',['../classaudio__tools_1_1_o_s_c_container_encoder_1_1_o_s_c_output.html',1,'audio_tools::OSCContainerEncoder']]],
   ['oscsincos_22',['OscSinCos',['../classffft_1_1_osc_sin_cos.html',1,'ffft']]],
-  ['ourrtspclient_23',['OurRTSPClient',['../classaudiotools__rtsp_1_1_our_r_t_s_p_client.html',1,'audiotools_rtsp']]],
-  ['oursink_24',['OurSink',['../classaudiotools__rtsp_1_1_our_sink.html',1,'audiotools_rtsp']]],
-  ['outputfpsmeter_25',['OutputFPSMeter',['../classaudio__tools_1_1_output_f_p_s_meter.html',1,'audio_tools']]],
-  ['outputmixer_26',['OutputMixer',['../classaudio__tools_1_1_output_mixer.html',1,'audio_tools']]],
-  ['outputopencv_27',['OutputOpenCV',['../classaudio__tools_1_1_output_open_c_v.html',1,'audio_tools']]],
-  ['outputtest_28',['OutputTest',['../classaudio__tools_1_1_output_test.html',1,'audio_tools']]],
-  ['outputtft_5fespi_29',['OutputTFT_eSPI',['../classaudio__tools_1_1_output_t_f_t__e_s_p_i.html',1,'audio_tools']]],
-  ['outputtinygpu_30',['OutputTinyGPU',['../classaudio__tools_1_1_output_tiny_g_p_u.html',1,'audio_tools']]]
+  ['oscsincos_3c_20datatype_20_3e_23',['OscSinCos&lt; DataType &gt;',['../classffft_1_1_osc_sin_cos.html',1,'ffft']]],
+  ['ourrtspclient_24',['OurRTSPClient',['../classaudiotools__rtsp_1_1_our_r_t_s_p_client.html',1,'audiotools_rtsp']]],
+  ['oursink_25',['OurSink',['../classaudiotools__rtsp_1_1_our_sink.html',1,'audiotools_rtsp']]],
+  ['outputfpsmeter_26',['OutputFPSMeter',['../classaudio__tools_1_1_output_f_p_s_meter.html',1,'audio_tools']]],
+  ['outputmixer_27',['OutputMixer',['../classaudio__tools_1_1audio__tools_1_1_output_mixer.html',1,'OutputMixer&lt; T &gt;'],['../classaudio__tools_1_1_output_mixer.html',1,'OutputMixer&lt; T &gt;']]],
+  ['outputopencv_28',['OutputOpenCV',['../classaudio__tools_1_1_output_open_c_v.html',1,'audio_tools']]],
+  ['outputtest_29',['OutputTest',['../classaudio__tools_1_1_output_test.html',1,'audio_tools']]],
+  ['outputtft_5fespi_30',['OutputTFT_eSPI',['../classaudio__tools_1_1_output_t_f_t__e_s_p_i.html',1,'audio_tools']]],
+  ['outputtinygpu_31',['OutputTinyGPU',['../classaudio__tools_1_1_output_tiny_g_p_u.html',1,'audio_tools']]]
 ];

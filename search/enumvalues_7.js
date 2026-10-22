@@ -3,11 +3,11 @@ var searchData=
   ['h222_5f0_5faux_0',['H222_0_AUX',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338a7bc5d9a122dc9c37df74cfc807d9d7e0',1,'audio_tools']]],
   ['h222_5f0_5fdsm_5fcc_1',['H222_0_DSM_CC',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338a0cd0f5a0d917fd05bbfd7536b5c87285',1,'audio_tools']]],
   ['h222_5f1_2',['H222_1',['../group__basic.html#gga5b1869d184b84711842bfe4f25433338a45b8a607f694866cb8a8228300593d7b',1,'audio_tools']]],
-  ['h264_3',['h264',['../namespaceaudio__tools.html#a72d488703dc2881a96bed9b9365dcb8ea8ba63b54352f7053b055235a9ec7ac09',1,'audio_tools::H264'],['../group__video.html#gga216a5d43d2a518325c84f100ed7735a5a8ba63b54352f7053b055235a9ec7ac09',1,'audio_tools::H264']]],
+  ['h264_3',['H264',['../namespaceaudio__tools_1_1audio__tools.html#a72d488703dc2881a96bed9b9365dcb8ea8ba63b54352f7053b055235a9ec7ac09',1,'audio_tools::audio_tools::H264'],['../namespaceaudio__tools.html#a72d488703dc2881a96bed9b9365dcb8ea8ba63b54352f7053b055235a9ec7ac09',1,'audio_tools::H264'],['../group__video.html#gga216a5d43d2a518325c84f100ed7735a5a8ba63b54352f7053b055235a9ec7ac09',1,'audio_tools::H264']]],
   ['head_4',['HEAD',['../_http_types_8h.html#a3a8d8d5989e593d770a33e5cb6c1ae84a0b0955668575b21eb0ab2272aef49f76',1,'HttpTypes.h']]],
   ['header_5',['Header',['../namespaceaudio__tools.html#a4dd4453d1994a706c0eb2350ffa55372abf50d5e661106d0abe925af3c2e6f7e7',1,'audio_tools']]],
-  ['hex_6',['HEX',['../_arduino_8h.html#ad6c89ce0bc361acabef4cbc9d1e9efb7ad3c20094c5fe3327350484d01c44c137',1,'Arduino.h']]],
+  ['hex_6',['HEX',['../namespaceaudio__tools.html#ad6c89ce0bc361acabef4cbc9d1e9efb7a3f3b2c3d60fd05ff07052de2792330c3',1,'audio_tools::HEX'],['../_arduino_8h.html#ad6c89ce0bc361acabef4cbc9d1e9efb7ad3c20094c5fe3327350484d01c44c137',1,'HEX:&#160;Arduino.h']]],
   ['high_7',['High',['../namespaceaudio__tools.html#af21c897fe6ae1bb1a36cf4db2b54f888a655d20c1ca69519ca647684edbb2db35',1,'audio_tools']]],
   ['hs_8',['HS',['../classaudio__tools_1_1_v_f_s___s_d_m_m_c.html#ad57b3fa8e45359906ac229567c209a63a55a055409207a12d5937b243fd508bde',1,'audio_tools::VFS_SDMMC']]],
-  ['hz_9',['HZ',['../group__basic.html#ggadd9fe45e09605eee3e4a39c8a5c4476da60bcd2a30600425969cffd701375c9f2',1,'audio_tools']]]
+  ['hz_9',['HZ',['../group__basic.html#ggadd9fe45e09605eee3e4a39c8a5c4476da292fcd2e9dd33deb32ef71840d7e8367',1,'audio_tools::audio_tools::HZ'],['../group__basic.html#ggadd9fe45e09605eee3e4a39c8a5c4476da60bcd2a30600425969cffd701375c9f2',1,'audio_tools::HZ']]]
 ];

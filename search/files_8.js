@@ -17,7 +17,7 @@ var searchData=
   ['i2sdriverstm32_2eh_14',['I2SDriverSTM32.h',['../_i2_s_driver_s_t_m32_8h.html',1,'']]],
   ['i2sdrivertangnano_2eh_15',['I2SDriverTangNano.h',['../_i2_s_driver_tang_nano_8h.html',1,'']]],
   ['i2sdriverzephyr_2eh_16',['I2SDriverZephyr.h',['../_i2_s_driver_zephyr_8h.html',1,'']]],
-  ['i2sstream_2eh_17',['i2sstream.h',['../_audio_i2_s_2_i2_s_stream_8h.html',1,'(Global Namespace)'],['../_i2_s_stream_8h.html',1,'(Global Namespace)']]],
+  ['i2sstream_2eh_17',['I2SStream.h',['../_audio_i2_s_2_i2_s_stream_8h.html',1,'(Global Namespace)'],['../_i2_s_stream_8h.html',1,'(Global Namespace)']]],
   ['icystream_2eh_18',['ICYStream.h',['../_i_c_y_stream_8h.html',1,'']]],
   ['icystreamt_2eh_19',['ICYStreamT.h',['../_i_c_y_stream_t_8h.html',1,'']]],
   ['imediasource_2eh_20',['IMediaSource.h',['../_i_media_source_8h.html',1,'']]],

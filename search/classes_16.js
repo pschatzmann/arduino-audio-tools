@@ -12,7 +12,7 @@ var searchData=
   ['wavimaheader_9',['WavIMAHeader',['../classaudio__tools_1_1_wav_i_m_a_header.html',1,'audio_tools']]],
   ['websocketoutput_10',['WebSocketOutput',['../classaudio__tools_1_1_web_socket_output.html',1,'audio_tools']]],
   ['welch_11',['Welch',['../classaudio__tools_1_1_welch.html',1,'audio_tools']]],
-  ['whitenoisegenerator_12',['WhiteNoiseGenerator',['../classaudio__tools_1_1_white_noise_generator.html',1,'audio_tools']]],
+  ['whitenoisegenerator_12',['WhiteNoiseGenerator',['../classaudio__tools_1_1audio__tools_1_1_white_noise_generator.html',1,'WhiteNoiseGenerator&lt; T &gt;'],['../classaudio__tools_1_1_white_noise_generator.html',1,'WhiteNoiseGenerator&lt; T &gt;']]],
   ['wificlientsecurezephyr_13',['WiFiClientSecureZephyr',['../classaudio__tools_1_1_wi_fi_client_secure_zephyr.html',1,'audio_tools']]],
   ['wificlientzephyr_14',['WiFiClientZephyr',['../classaudio__tools_1_1_wi_fi_client_zephyr.html',1,'audio_tools']]],
   ['wifiesp32_15',['WiFiESP32',['../classaudio__tools_1_1_wi_fi_e_s_p32.html',1,'audio_tools']]],

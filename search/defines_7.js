@@ -2,8 +2,8 @@ var searchData=
 [
   ['h264_5fdefault_5fallocator_0',['H264_DEFAULT_ALLOCATOR',['../_codec_h264_8h.html#a20e1dc8d822cad235e0ab211345d8fdd',1,'CodecH264.h']]],
   ['has_5fclient_5fsecure_1',['HAS_CLIENT_SECURE',['../_u_r_l_stream_8h.html#adac5166a4ab2a7a6ad477aff432f5279',1,'URLStream.h']]],
-  ['helix_5fprint_2',['helix_print',['../_codec_a_a_c_helix_8h.html#ad400f8a92e40568532cf4bf203f88036',1,'HELIX_PRINT:&#160;CodecAACHelix.h'],['../_codec_m_p3_helix_8h.html#ad400f8a92e40568532cf4bf203f88036',1,'HELIX_PRINT:&#160;CodecMP3Helix.h']]],
-  ['high_3',['HIGH',['../_arduino_8h.html#a5bb885982ff66a2e0a0a45a8ee9c35e2',1,'Arduino.h']]],
+  ['helix_5fprint_2',['HELIX_PRINT',['../_codec_a_a_c_helix_8h.html#ad400f8a92e40568532cf4bf203f88036',1,'HELIX_PRINT:&#160;CodecAACHelix.h'],['../_codec_m_p3_helix_8h.html#ad400f8a92e40568532cf4bf203f88036',1,'HELIX_PRINT:&#160;CodecMP3Helix.h']]],
+  ['high_3',['HIGH',['../_codec_opus_ogg_8h.html#a5bb885982ff66a2e0a0a45a8ee9c35e2',1,'HIGH:&#160;CodecOpusOgg.h'],['../_codec_t_s_demux_8h.html#a5bb885982ff66a2e0a0a45a8ee9c35e2',1,'HIGH:&#160;CodecTSDemux.h'],['../_arduino_8h.html#a5bb885982ff66a2e0a0a45a8ee9c35e2',1,'HIGH:&#160;CodecOpusOgg.h']]],
   ['hls_5fbuffer_5fcount_4',['HLS_BUFFER_COUNT',['../_h_l_s_stream_8h.html#aeca9c4623ffe581215a56ed2a475283e',1,'HLSStream.h']]],
   ['hls_5fmax_5fno_5fread_5',['HLS_MAX_NO_READ',['../_h_l_s_stream_8h.html#aa7e03ec9a2ad94a5404a4e48e07d4c5c',1,'HLSStream.h']]],
   ['hls_5fmax_5furl_5flen_6',['HLS_MAX_URL_LEN',['../_h_l_s_stream_8h.html#a8807a8de817684e7d481d8d74a7ae17b',1,'HLSStream.h']]],
@@ -13,6 +13,6 @@ var searchData=
   ['htonl_10',['htonl',['../_net_8h.html#ae4027a6ad07f13aa12eab285a1b46019',1,'Net.h']]],
   ['htonll_11',['htonll',['../_net_8h.html#a9f4bf0773c45ad9a9753a1b784a13fbb',1,'Net.h']]],
   ['htons_12',['htons',['../_net_8h.html#a51799f5ebb4c7228ef7e95c247030f42',1,'Net.h']]],
-  ['http_5fchunked_5fsize_5fmax_5flen_13',['HTTP_CHUNKED_SIZE_MAX_LEN',['../_audio_tools_config_8h.html#a7e678a8232ce307a3e1062d88f786e37',1,'AudioToolsConfig.h']]],
-  ['http_5fmax_5flen_14',['HTTP_MAX_LEN',['../_audio_tools_config_8h.html#afd14aef32e8f25b56daa6dc1e219ed16',1,'AudioToolsConfig.h']]]
+  ['http_5fchunked_5fsize_5fmax_5flen_13',['HTTP_CHUNKED_SIZE_MAX_LEN',['../_codec_opus_ogg_8h.html#a7e678a8232ce307a3e1062d88f786e37',1,'HTTP_CHUNKED_SIZE_MAX_LEN:&#160;CodecOpusOgg.h'],['../_codec_t_s_demux_8h.html#a7e678a8232ce307a3e1062d88f786e37',1,'HTTP_CHUNKED_SIZE_MAX_LEN:&#160;CodecTSDemux.h'],['../_audio_tools_config_8h.html#a7e678a8232ce307a3e1062d88f786e37',1,'HTTP_CHUNKED_SIZE_MAX_LEN:&#160;CodecOpusOgg.h']]],
+  ['http_5fmax_5flen_14',['HTTP_MAX_LEN',['../_codec_opus_ogg_8h.html#afd14aef32e8f25b56daa6dc1e219ed16',1,'HTTP_MAX_LEN:&#160;CodecOpusOgg.h'],['../_codec_t_s_demux_8h.html#afd14aef32e8f25b56daa6dc1e219ed16',1,'HTTP_MAX_LEN:&#160;CodecTSDemux.h'],['../_audio_tools_config_8h.html#afd14aef32e8f25b56daa6dc1e219ed16',1,'HTTP_MAX_LEN:&#160;CodecOpusOgg.h']]]
 ];

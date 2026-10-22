@@ -39,7 +39,7 @@ var searchData=
   ['file_5fappend_36',['FILE_APPEND',['../_v_f_s_file_8h.html#abb57841952be5b0be972b4bef8fd5021',1,'VFSFile.h']]],
   ['file_5fread_37',['FILE_READ',['../_v_f_s_file_8h.html#ad52d51659a75e25d96fb04d22ff718cb',1,'VFSFile.h']]],
   ['file_5fwrite_38',['FILE_WRITE',['../_v_f_s_file_8h.html#ace34e503254fa9004599ddf122264c8f',1,'VFSFile.h']]],
-  ['fix_5fsync_5fsynchronize_39',['FIX_SYNC_SYNCHRONIZE',['../rp2040mbed_8h.html#a5b153034d50284ddd2947928535e8b7a',1,'rp2040mbed.h']]],
+  ['fix_5fsync_5fsynchronize_39',['FIX_SYNC_SYNCHRONIZE',['../_codec_opus_ogg_8h.html#a5b153034d50284ddd2947928535e8b7a',1,'FIX_SYNC_SYNCHRONIZE:&#160;CodecOpusOgg.h'],['../_codec_t_s_demux_8h.html#a5b153034d50284ddd2947928535e8b7a',1,'FIX_SYNC_SYNCHRONIZE:&#160;CodecTSDemux.h'],['../rp2040mbed_8h.html#a5b153034d50284ddd2947928535e8b7a',1,'FIX_SYNC_SYNCHRONIZE:&#160;CodecOpusOgg.h']]],
   ['fixed_5fpoint_40',['FIXED_POINT',['../_tf_lite_audio_stream_8h.html#a26db2f437905e35d7c8305cfd9842307',1,'TfLiteAudioStream.h']]],
   ['flac_5fbuffer_5fsize_41',['FLAC_BUFFER_SIZE',['../_codec_f_l_a_c_8h.html#ab1146011e0eb0a6f3aaa60e7abad9c26',1,'CodecFLAC.h']]],
   ['flac_5fread_5ftimeout_5fms_42',['FLAC_READ_TIMEOUT_MS',['../_codec_f_l_a_c_8h.html#ad9186f06603eaa02c07530821d3fadc1',1,'CodecFLAC.h']]],
