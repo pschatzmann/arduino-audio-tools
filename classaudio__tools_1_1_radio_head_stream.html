@@ -77,13 +77,14 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_radio_head_stream-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">RadioHeadStream Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__communications.html">Communications</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Arduino <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> which is using the RadioHead library to send and receive data. We use the river API directly.  
+<p>Arduino <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> which is using the RadioHead library to send and receive data. We use the driver API directly.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_radio_head_stream_8h_source.html">RadioHeadStream.h</a>&gt;</code></p>
@@ -101,35 +102,49 @@ Inheritance diagram for RadioHeadStream:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a57b58d31865f191fd4df51770191ca35" id="r_a57b58d31865f191fd4df51770191ca35"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a57b58d31865f191fd4df51770191ca35">RadioHeadStream</a> (RHGenericDriver &amp;driver)</td></tr>
+<tr class="memitem:a697e4053d9f18187786cc77bf046ece6" id="r_a697e4053d9f18187786cc77bf046ece6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a697e4053d9f18187786cc77bf046ece6">RadioHeadStream</a> (RHGenericDriver &amp;driver, <a class="el" href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">RxTxMode</a> <a class="el" href="#aca05ff9ab728526f003dc9eed9554ae3">mode</a>=<a class="el" href="group__basic.html#gga8cbd91a8bac9b5ab425112be1620eb49a736237ce367b7814c763eacd188cf9e5">TX_MODE</a>)</td></tr>
 <tr class="memitem:a692e2b18b3c2452e38e3f558ad87e9a5" id="r_a692e2b18b3c2452e38e3f558ad87e9a5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a692e2b18b3c2452e38e3f558ad87e9a5">available</a> () override</td></tr>
 <tr class="memitem:a87b51853b7bf1bc90d9efa9f3b8d4fea" id="r_a87b51853b7bf1bc90d9efa9f3b8d4fea"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a87b51853b7bf1bc90d9efa9f3b8d4fea">availableForWrite</a> () override</td></tr>
 <tr class="memitem:a601fb7cf1fc15db50c71a826f084f934" id="r_a601fb7cf1fc15db50c71a826f084f934"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a601fb7cf1fc15db50c71a826f084f934">begin</a> ()</td></tr>
+<tr class="memitem:ab88584f8eaec1d79f5ee7e3ff56a8b5c" id="r_ab88584f8eaec1d79f5ee7e3ff56a8b5c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab88584f8eaec1d79f5ee7e3ff56a8b5c">begin</a> (<a class="el" href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">RxTxMode</a> <a class="el" href="#aca05ff9ab728526f003dc9eed9554ae3">mode</a>)</td></tr>
 <tr class="memitem:aaf81d3fdaf258088d7692fa70cece087" id="r_aaf81d3fdaf258088d7692fa70cece087"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaf81d3fdaf258088d7692fa70cece087">end</a> ()</td></tr>
-<tr class="memitem:ad3aed50bc3b4459454ccb8c64f5ced5a" id="r_ad3aed50bc3b4459454ccb8c64f5ced5a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_print.html#ad3aed50bc3b4459454ccb8c64f5ced5a">flush</a> ()</td></tr>
-<tr class="memitem:ad3aed50bc3b4459454ccb8c64f5ced5a" id="r_ad3aed50bc3b4459454ccb8c64f5ced5a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_print.html#ad3aed50bc3b4459454ccb8c64f5ced5a">flush</a> ()</td></tr>
+<tr class="memitem:a04f2540d940cc37b5c2538ed8e5b54be" id="r_a04f2540d940cc37b5c2538ed8e5b54be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a04f2540d940cc37b5c2538ed8e5b54be">flush</a> () override</td></tr>
+<tr class="memdesc:a04f2540d940cc37b5c2538ed8e5b54be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends the buffered data.  <br /></td></tr>
 <tr class="memitem:a9b3baad8c612d81b96e46f84d7e97580" id="r_a9b3baad8c612d81b96e46f84d7e97580"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_stream.html#a9b3baad8c612d81b96e46f84d7e97580">operator bool</a> ()</td></tr>
 <tr class="memitem:a9b3baad8c612d81b96e46f84d7e97580" id="r_a9b3baad8c612d81b96e46f84d7e97580"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_stream.html#a9b3baad8c612d81b96e46f84d7e97580">operator bool</a> ()</td></tr>
+<tr class="memitem:a5064eb1b12f6c5d12940259c4312b81b" id="r_a5064eb1b12f6c5d12940259c4312b81b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5064eb1b12f6c5d12940259c4312b81b">peek</a> () override</td></tr>
+<tr class="memitem:ad0852e3297f3743332e629b9924c9375" id="r_ad0852e3297f3743332e629b9924c9375"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad0852e3297f3743332e629b9924c9375">read</a> () override</td></tr>
 <tr class="memitem:a4c5c6275ddee80eb02839356b6185c0b" id="r_a4c5c6275ddee80eb02839356b6185c0b"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4c5c6275ddee80eb02839356b6185c0b">readBytes</a> (uint8_t *data, size_t len) override</td></tr>
 <tr class="memitem:ad470756cae805ad8be681d271fb34ff3" id="r_ad470756cae805ad8be681d271fb34ff3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad470756cae805ad8be681d271fb34ff3">setDriver</a> (RHGenericDriver &amp;driver)</td></tr>
+<tr class="memitem:ab41ace0366fa7c8d3a903816f41d19c0" id="r_ab41ace0366fa7c8d3a903816f41d19c0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab41ace0366fa7c8d3a903816f41d19c0">setMode</a> (<a class="el" href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">RxTxMode</a> <a class="el" href="#aca05ff9ab728526f003dc9eed9554ae3">mode</a>)</td></tr>
+<tr class="memdesc:ab41ace0366fa7c8d3a903816f41d19c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines if we send (TX_MODE) or receive (RX_MODE).  <br /></td></tr>
 <tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
+<tr class="memitem:a1e40195a444e7f20508961cfeacc9b04" id="r_a1e40195a444e7f20508961cfeacc9b04"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1e40195a444e7f20508961cfeacc9b04">write</a> (uint8_t c) override</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pro-methods" class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a562369ec2e4ebdf923646b9b261f0f96" id="r_a562369ec2e4ebdf923646b9b261f0f96"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a562369ec2e4ebdf923646b9b261f0f96">receive</a> ()</td></tr>
+<tr class="memdesc:a562369ec2e4ebdf923646b9b261f0f96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies the next received message into the buffer.  <br /></td></tr>
+<tr class="memitem:ae9399f5ec7881c5d18173def8068108e" id="r_ae9399f5ec7881c5d18173def8068108e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae9399f5ec7881c5d18173def8068108e">send</a> ()</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:aa66a35e5edf58ce00047afcd1d4f455e" id="r_aa66a35e5edf58ce00047afcd1d4f455e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_print.html#aa66a35e5edf58ce00047afcd1d4f455e">_timeout</a> = 10</td></tr>
-<tr class="memitem:aca05ff9ab728526f003dc9eed9554ae3" id="r_aca05ff9ab728526f003dc9eed9554ae3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">RxTxMode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aca05ff9ab728526f003dc9eed9554ae3">mode</a></td></tr>
+<tr class="memitem:aaf0eef2d94f5e586b3d7cd5935560e29" id="r_aaf0eef2d94f5e586b3d7cd5935560e29"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaf0eef2d94f5e586b3d7cd5935560e29">buffer</a> {0}</td></tr>
+<tr class="memitem:aca05ff9ab728526f003dc9eed9554ae3" id="r_aca05ff9ab728526f003dc9eed9554ae3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">RxTxMode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aca05ff9ab728526f003dc9eed9554ae3">mode</a> = <a class="el" href="group__basic.html#gga8cbd91a8bac9b5ab425112be1620eb49a736237ce367b7814c763eacd188cf9e5">TX_MODE</a></td></tr>
 <tr class="memitem:af6abbd2af5ae0644b217547a9a269dee" id="r_af6abbd2af5ae0644b217547a9a269dee"><td class="memItemLeft" align="right" valign="top">RHGenericDriver *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af6abbd2af5ae0644b217547a9a269dee">p_driver</a> = nullptr</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Arduino <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> which is using the RadioHead library to send and receive data. We use the river API directly. </p>
+<div class="textblock"><p>Arduino <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> which is using the RadioHead library to send and receive data. We use the driver API directly. </p>
+<p>In TX_MODE the written data is collected and sent in messages of maxMessageLength() bytes: call <a class="el" href="#a04f2540d940cc37b5c2538ed8e5b54be" title="Sends the buffered data.">flush()</a> to send a partially filled message. In RX_MODE each received message is buffered, so that it can be read in chunks of any size.</p>
 <dl class="section note"><dt>Note</dt><dd>Supported only on Arduino platforms with support for the RadioHead library and the related hardware (e.g. ESP32 with LoRa, nRF24L01, etc.)! </dd>
 <dd>
 Requires: 👉 <a href="https://www.airspayce.com/mikem/arduino/RadioHead/">https://www.airspayce.com/mikem/arduino/RadioHead/</a></dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a57b58d31865f191fd4df51770191ca35" name="a57b58d31865f191fd4df51770191ca35"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a57b58d31865f191fd4df51770191ca35">&#9670;&#160;</a></span>RadioHeadStream()</h2>
+<a id="a697e4053d9f18187786cc77bf046ece6" name="a697e4053d9f18187786cc77bf046ece6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a697e4053d9f18187786cc77bf046ece6">&#9670;&#160;</a></span>RadioHeadStream()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -140,8 +155,12 @@ Requires: 👉 <a href="https://www.airspayce.com/mikem/arduino/RadioHead/">http
         <tr>
           <td class="memname">RadioHeadStream </td>
           <td>(</td>
-          <td class="paramtype">RHGenericDriver &amp;</td>          <td class="paramname"><span class="paramname"><em>driver</em></span></td><td>)</td>
+          <td class="paramtype">RHGenericDriver &amp;</td>          <td class="paramname"><span class="paramname"><em>driver</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">RxTxMode</a></td>          <td class="paramname"><span class="paramname"><em>mode</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group__basic.html#gga8cbd91a8bac9b5ab425112be1620eb49a736237ce367b7814c763eacd188cf9e5">TX_MODE</a></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -209,7 +228,7 @@ Requires: 👉 <a href="https://www.airspayce.com/mikem/arduino/RadioHead/">http
 </div>
 </div>
 <a id="a601fb7cf1fc15db50c71a826f084f934" name="a601fb7cf1fc15db50c71a826f084f934"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a601fb7cf1fc15db50c71a826f084f934">&#9670;&#160;</a></span>begin()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a601fb7cf1fc15db50c71a826f084f934">&#9670;&#160;</a></span>begin() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -221,6 +240,31 @@ Requires: 👉 <a href="https://www.airspayce.com/mikem/arduino/RadioHead/">http
           <td class="memname">bool begin </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab88584f8eaec1d79f5ee7e3ff56a8b5c" name="ab88584f8eaec1d79f5ee7e3ff56a8b5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab88584f8eaec1d79f5ee7e3ff56a8b5c">&#9670;&#160;</a></span>begin() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool begin </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">RxTxMode</a></td>          <td class="paramname"><span class="paramname"><em>mode</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -258,8 +302,8 @@ Requires: 👉 <a href="https://www.airspayce.com/mikem/arduino/RadioHead/">http
 
 </div>
 </div>
-<a id="ad3aed50bc3b4459454ccb8c64f5ced5a" name="ad3aed50bc3b4459454ccb8c64f5ced5a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad3aed50bc3b4459454ccb8c64f5ced5a">&#9670;&#160;</a></span>flush() <span class="overload">[1/2]</span></h2>
+<a id="a04f2540d940cc37b5c2538ed8e5b54be" name="a04f2540d940cc37b5c2538ed8e5b54be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04f2540d940cc37b5c2538ed8e5b54be">&#9670;&#160;</a></span>flush()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -268,7 +312,7 @@ Requires: 👉 <a href="https://www.airspayce.com/mikem/arduino/RadioHead/">http
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void flush </td>
+          <td class="memname">void flush </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -276,39 +320,14 @@ Requires: 👉 <a href="https://www.airspayce.com/mikem/arduino/RadioHead/">http
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel virtual">virtual</span><span class="mlabel inherited">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_output.html#ad3aed50bc3b4459454ccb8c64f5ced5a">AudioOutput</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_output.html#ad3aed50bc3b4459454ccb8c64f5ced5a">AudioOutput</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_stream_wrapper.html#ad3aed50bc3b4459454ccb8c64f5ced5a">AudioStreamWrapper</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_stream_wrapper.html#ad3aed50bc3b4459454ccb8c64f5ced5a">AudioStreamWrapper</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">BaseStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">BaseStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_buffered_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">BufferedStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_buffered_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">BufferedStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_encoded_audio_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">EncodedAudioStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_filtered_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">FilteredStream&lt; T, TF &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_filtered_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">FilteredStream&lt; T, TF &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_filtered_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">FilteredStream&lt; int16_t, int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_generated_sound_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">GeneratedSoundStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_generated_sound_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">GeneratedSoundStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_generated_sound_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">GeneratedSoundStream&lt; int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_hex_dump_output.html#a04f2540d940cc37b5c2538ed8e5b54be">HexDumpOutput</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_hex_dump_output.html#a04f2540d940cc37b5c2538ed8e5b54be">HexDumpOutput</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_memory_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">MemoryStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_memory_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">MemoryStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_multi_output.html#adac116554b543b7c4228c018a85882f5">MultiOutput</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_queue_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">QueueStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_queue_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">QueueStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_queue_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">QueueStream&lt; uint8_t &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_reformat_base_stream.html#ad3aed50bc3b4459454ccb8c64f5ced5a">ReformatBaseStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_ring_buffer_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">RingBufferStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_ring_buffer_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">RingBufferStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_timed_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">TimedStream</a>, <a class="el" href="classaudio__tools_1_1_audio_effect_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">AudioEffectStream</a>, <a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a04f2540d940cc37b5c2538ed8e5b54be">AudioEffectStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_audio_output.html#ad3aed50bc3b4459454ccb8c64f5ced5a">AudioOutput</a>, <a class="el" href="classaudio__tools_1_1_audio_stream_wrapper.html#ad3aed50bc3b4459454ccb8c64f5ced5a">AudioStreamWrapper</a>, <a class="el" href="classaudio__tools_1_1_automatic_gain_control_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">AutomaticGainControlStream</a>, <a class="el" href="classaudio__tools_1_1_base_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">BaseStream</a>, <a class="el" href="classaudio__tools_1_1_buffered_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">BufferedStream</a>, <a class="el" href="classaudio__tools_1_1_buffered_task_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">BufferedTaskStream</a>, <a class="el" href="classaudio__tools_1_1_encoded_audio_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">EncodedAudioStream</a>, <a class="el" href="classaudio__tools_1_1_equalizer3_bands_per_channel_t.html#a04f2540d940cc37b5c2538ed8e5b54be">Equalizer3BandsPerChannelT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_equalizer3_bands_per_channel_t.html#a04f2540d940cc37b5c2538ed8e5b54be">Equalizer3BandsPerChannelT&lt; float &gt;</a>, <a class="el" href="classaudio__tools_1_1_equalizer3_bands_t.html#a04f2540d940cc37b5c2538ed8e5b54be">Equalizer3BandsT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_equalizer3_bands_t.html#a04f2540d940cc37b5c2538ed8e5b54be">Equalizer3BandsT&lt; float &gt;</a>, <a class="el" href="classaudio__tools_1_1_equalizer_n_bands.html#a04f2540d940cc37b5c2538ed8e5b54be">EqualizerNBands&lt; SampleT, AccT, NUM_TAPS, NUM_BANDS &gt;</a>, <a class="el" href="classaudio__tools_1_1_fade_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">FadeStream</a>, <a class="el" href="classaudio__tools_1_1_filtered_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">FilteredStream&lt; T, TF &gt;</a>, <a class="el" href="classaudio__tools_1_1_generated_sound_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">GeneratedSoundStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">HDLCStream</a>, <a class="el" href="classaudio__tools_1_1_hex_dump_output.html#a04f2540d940cc37b5c2538ed8e5b54be">HexDumpOutput</a>, <a class="el" href="classaudio__tools_1_1_i2_s_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">I2SStream</a>, <a class="el" href="classaudio__tools_1_1_measuring_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">MeasuringStream</a>, <a class="el" href="classaudio__tools_1_1_memory_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">MemoryStream</a>, <a class="el" href="classaudio__tools_1_1_multi_output.html#adac116554b543b7c4228c018a85882f5">MultiOutput</a>, <a class="el" href="classaudio__tools_1_1_name_printer.html#a04f2540d940cc37b5c2538ed8e5b54be">NamePrinter</a>, <a class="el" href="structaudio__tools_1_1_pipeline_1_1_modifying_stream_adapter.html#a04f2540d940cc37b5c2538ed8e5b54be">Pipeline::ModifyingStreamAdapter</a>, <a class="el" href="classaudio__tools_1_1_pure_data_stream.html#adac116554b543b7c4228c018a85882f5">PureDataStream</a>, <a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">QualityAnalysisStream</a>, <a class="el" href="classaudio__tools_1_1_queue_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">QueueStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_reformat_base_stream.html#ad3aed50bc3b4459454ccb8c64f5ced5a">ReformatBaseStream</a>, <a class="el" href="classaudio__tools_1_1_resample_stream.html#adac116554b543b7c4228c018a85882f5">ResampleStream</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">RingBufferStream</a>, <a class="el" href="classaudio__tools_1_1_supported_rates_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">SupportedRatesStream</a>, <a class="el" href="classaudio__tools_1_1_timed_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">TimedStream</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">URLStream</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#ad3aed50bc3b4459454ccb8c64f5ced5a">URLStreamBufferedT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#ad3aed50bc3b4459454ccb8c64f5ced5a">URLStreamBufferedT&lt; ICYStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#ad3aed50bc3b4459454ccb8c64f5ced5a">URLStreamBufferedT&lt; ICYStreamESP32 &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#ad3aed50bc3b4459454ccb8c64f5ced5a">URLStreamBufferedT&lt; URLStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#ad3aed50bc3b4459454ccb8c64f5ced5a">URLStreamBufferedT&lt; URLStreamESP32 &gt;</a>, <a class="el" href="classaudio__tools_1_1_v_f_s_file.html#af654b48544c195ab99fe27e7bc3ed5fe">VFSFile</a>, <a class="el" href="classaudio__tools_1_1_volume_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">VolumeStream</a>, and <a class="el" href="classaudio__tools_1_1_zephyr_file.html#a04f2540d940cc37b5c2538ed8e5b54be">ZephyrFile</a>.</p>
+<p>Sends the buffered data. </p>
 
-</div>
-</div>
-<a id="ad3aed50bc3b4459454ccb8c64f5ced5a" name="ad3aed50bc3b4459454ccb8c64f5ced5a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad3aed50bc3b4459454ccb8c64f5ced5a">&#9670;&#160;</a></span>flush() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void flush </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel virtual">virtual</span><span class="mlabel inherited">inherited</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_output.html#ad3aed50bc3b4459454ccb8c64f5ced5a">AudioOutput</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_output.html#ad3aed50bc3b4459454ccb8c64f5ced5a">AudioOutput</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_stream_wrapper.html#ad3aed50bc3b4459454ccb8c64f5ced5a">AudioStreamWrapper</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_stream_wrapper.html#ad3aed50bc3b4459454ccb8c64f5ced5a">AudioStreamWrapper</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">BaseStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">BaseStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_buffered_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">BufferedStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_buffered_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">BufferedStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_encoded_audio_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">EncodedAudioStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_filtered_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">FilteredStream&lt; T, TF &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_filtered_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">FilteredStream&lt; T, TF &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_filtered_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">FilteredStream&lt; int16_t, int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_generated_sound_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">GeneratedSoundStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_generated_sound_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">GeneratedSoundStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_generated_sound_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">GeneratedSoundStream&lt; int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_hex_dump_output.html#a04f2540d940cc37b5c2538ed8e5b54be">HexDumpOutput</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_hex_dump_output.html#a04f2540d940cc37b5c2538ed8e5b54be">HexDumpOutput</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_memory_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">MemoryStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_memory_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">MemoryStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_multi_output.html#adac116554b543b7c4228c018a85882f5">MultiOutput</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_queue_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">QueueStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_queue_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">QueueStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_queue_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">QueueStream&lt; uint8_t &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_reformat_base_stream.html#ad3aed50bc3b4459454ccb8c64f5ced5a">ReformatBaseStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_ring_buffer_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">RingBufferStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_ring_buffer_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">RingBufferStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_timed_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">TimedStream</a>, <a class="el" href="classaudio__tools_1_1_audio_effect_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">AudioEffectStream</a>, <a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a04f2540d940cc37b5c2538ed8e5b54be">AudioEffectStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_audio_output.html#ad3aed50bc3b4459454ccb8c64f5ced5a">AudioOutput</a>, <a class="el" href="classaudio__tools_1_1_audio_stream_wrapper.html#ad3aed50bc3b4459454ccb8c64f5ced5a">AudioStreamWrapper</a>, <a class="el" href="classaudio__tools_1_1_automatic_gain_control_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">AutomaticGainControlStream</a>, <a class="el" href="classaudio__tools_1_1_base_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">BaseStream</a>, <a class="el" href="classaudio__tools_1_1_buffered_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">BufferedStream</a>, <a class="el" href="classaudio__tools_1_1_buffered_task_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">BufferedTaskStream</a>, <a class="el" href="classaudio__tools_1_1_encoded_audio_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">EncodedAudioStream</a>, <a class="el" href="classaudio__tools_1_1_equalizer3_bands_per_channel_t.html#a04f2540d940cc37b5c2538ed8e5b54be">Equalizer3BandsPerChannelT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_equalizer3_bands_per_channel_t.html#a04f2540d940cc37b5c2538ed8e5b54be">Equalizer3BandsPerChannelT&lt; float &gt;</a>, <a class="el" href="classaudio__tools_1_1_equalizer3_bands_t.html#a04f2540d940cc37b5c2538ed8e5b54be">Equalizer3BandsT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_equalizer3_bands_t.html#a04f2540d940cc37b5c2538ed8e5b54be">Equalizer3BandsT&lt; float &gt;</a>, <a class="el" href="classaudio__tools_1_1_equalizer_n_bands.html#a04f2540d940cc37b5c2538ed8e5b54be">EqualizerNBands&lt; SampleT, AccT, NUM_TAPS, NUM_BANDS &gt;</a>, <a class="el" href="classaudio__tools_1_1_fade_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">FadeStream</a>, <a class="el" href="classaudio__tools_1_1_filtered_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">FilteredStream&lt; T, TF &gt;</a>, <a class="el" href="classaudio__tools_1_1_generated_sound_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">GeneratedSoundStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">HDLCStream</a>, <a class="el" href="classaudio__tools_1_1_hex_dump_output.html#a04f2540d940cc37b5c2538ed8e5b54be">HexDumpOutput</a>, <a class="el" href="classaudio__tools_1_1_i2_s_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">I2SStream</a>, <a class="el" href="classaudio__tools_1_1_measuring_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">MeasuringStream</a>, <a class="el" href="classaudio__tools_1_1_memory_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">MemoryStream</a>, <a class="el" href="classaudio__tools_1_1_multi_output.html#adac116554b543b7c4228c018a85882f5">MultiOutput</a>, <a class="el" href="classaudio__tools_1_1_name_printer.html#a04f2540d940cc37b5c2538ed8e5b54be">NamePrinter</a>, <a class="el" href="structaudio__tools_1_1_pipeline_1_1_modifying_stream_adapter.html#a04f2540d940cc37b5c2538ed8e5b54be">Pipeline::ModifyingStreamAdapter</a>, <a class="el" href="classaudio__tools_1_1_pure_data_stream.html#adac116554b543b7c4228c018a85882f5">PureDataStream</a>, <a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">QualityAnalysisStream</a>, <a class="el" href="classaudio__tools_1_1_queue_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">QueueStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_reformat_base_stream.html#ad3aed50bc3b4459454ccb8c64f5ced5a">ReformatBaseStream</a>, <a class="el" href="classaudio__tools_1_1_resample_stream.html#adac116554b543b7c4228c018a85882f5">ResampleStream</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">RingBufferStream</a>, <a class="el" href="classaudio__tools_1_1_supported_rates_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">SupportedRatesStream</a>, <a class="el" href="classaudio__tools_1_1_timed_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">TimedStream</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">URLStream</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#ad3aed50bc3b4459454ccb8c64f5ced5a">URLStreamBufferedT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#ad3aed50bc3b4459454ccb8c64f5ced5a">URLStreamBufferedT&lt; ICYStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#ad3aed50bc3b4459454ccb8c64f5ced5a">URLStreamBufferedT&lt; ICYStreamESP32 &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#ad3aed50bc3b4459454ccb8c64f5ced5a">URLStreamBufferedT&lt; URLStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#ad3aed50bc3b4459454ccb8c64f5ced5a">URLStreamBufferedT&lt; URLStreamESP32 &gt;</a>, <a class="el" href="classaudio__tools_1_1_v_f_s_file.html#af654b48544c195ab99fe27e7bc3ed5fe">VFSFile</a>, <a class="el" href="classaudio__tools_1_1_volume_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">VolumeStream</a>, and <a class="el" href="classaudio__tools_1_1_zephyr_file.html#a04f2540d940cc37b5c2538ed8e5b54be">ZephyrFile</a>.</p>
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_print.html#ad3aed50bc3b4459454ccb8c64f5ced5a">Print</a>.</p>
 
 </div>
 </div>
@@ -362,6 +381,56 @@ Requires: 👉 <a href="https://www.airspayce.com/mikem/arduino/RadioHead/">http
 
 </div>
 </div>
+<a id="a5064eb1b12f6c5d12940259c4312b81b" name="a5064eb1b12f6c5d12940259c4312b81b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5064eb1b12f6c5d12940259c4312b81b">&#9670;&#160;</a></span>peek()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int peek </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad0852e3297f3743332e629b9924c9375" name="ad0852e3297f3743332e629b9924c9375"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0852e3297f3743332e629b9924c9375">&#9670;&#160;</a></span>read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int read </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a4c5c6275ddee80eb02839356b6185c0b" name="a4c5c6275ddee80eb02839356b6185c0b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4c5c6275ddee80eb02839356b6185c0b">&#9670;&#160;</a></span>readBytes()</h2>
 
@@ -393,6 +462,58 @@ Requires: 👉 <a href="https://www.airspayce.com/mikem/arduino/RadioHead/">http
 
 </div>
 </div>
+<a id="a562369ec2e4ebdf923646b9b261f0f96" name="a562369ec2e4ebdf923646b9b261f0f96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a562369ec2e4ebdf923646b9b261f0f96">&#9670;&#160;</a></span>receive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool receive </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copies the next received message into the buffer. </p>
+
+</div>
+</div>
+<a id="ae9399f5ec7881c5d18173def8068108e" name="ae9399f5ec7881c5d18173def8068108e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9399f5ec7881c5d18173def8068108e">&#9670;&#160;</a></span>send()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void send </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ad470756cae805ad8be681d271fb34ff3" name="ad470756cae805ad8be681d271fb34ff3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad470756cae805ad8be681d271fb34ff3">&#9670;&#160;</a></span>setDriver()</h2>
 
@@ -418,8 +539,35 @@ Requires: 👉 <a href="https://www.airspayce.com/mikem/arduino/RadioHead/">http
 
 </div>
 </div>
+<a id="ab41ace0366fa7c8d3a903816f41d19c0" name="ab41ace0366fa7c8d3a903816f41d19c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab41ace0366fa7c8d3a903816f41d19c0">&#9670;&#160;</a></span>setMode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setMode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">RxTxMode</a></td>          <td class="paramname"><span class="paramname"><em>mode</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Defines if we send (TX_MODE) or receive (RX_MODE). </p>
+
+</div>
+</div>
 <a id="a7597ef706dd1aa590903ce9e095db20a" name="a7597ef706dd1aa590903ce9e095db20a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7597ef706dd1aa590903ce9e095db20a">&#9670;&#160;</a></span>write()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7597ef706dd1aa590903ce9e095db20a">&#9670;&#160;</a></span>write() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -449,6 +597,31 @@ Requires: 👉 <a href="https://www.airspayce.com/mikem/arduino/RadioHead/">http
 
 </div>
 </div>
+<a id="a1e40195a444e7f20508961cfeacc9b04" name="a1e40195a444e7f20508961cfeacc9b04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e40195a444e7f20508961cfeacc9b04">&#9670;&#160;</a></span>write() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t write </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>c</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
 <a id="aa66a35e5edf58ce00047afcd1d4f455e" name="aa66a35e5edf58ce00047afcd1d4f455e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa66a35e5edf58ce00047afcd1d4f455e">&#9670;&#160;</a></span>_timeout</h2>
@@ -472,6 +645,28 @@ Requires: 👉 <a href="https://www.airspayce.com/mikem/arduino/RadioHead/">http
 
 </div>
 </div>
+<a id="aaf0eef2d94f5e586b3d7cd5935560e29" name="aaf0eef2d94f5e586b3d7cd5935560e29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf0eef2d94f5e586b3d7cd5935560e29">&#9670;&#160;</a></span>buffer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt;uint8_t&gt; buffer {0}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aca05ff9ab728526f003dc9eed9554ae3" name="aca05ff9ab728526f003dc9eed9554ae3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aca05ff9ab728526f003dc9eed9554ae3">&#9670;&#160;</a></span>mode</h2>
 
@@ -482,7 +677,7 @@ Requires: 👉 <a href="https://www.airspayce.com/mikem/arduino/RadioHead/">http
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">RxTxMode</a> mode</td>
+          <td class="memname"><a class="el" href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">RxTxMode</a> mode = <a class="el" href="group__basic.html#gga8cbd91a8bac9b5ab425112be1620eb49a736237ce367b7814c763eacd188cf9e5">TX_MODE</a></td>
         </tr>
       </table>
   </td>
