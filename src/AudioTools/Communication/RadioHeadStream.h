@@ -16,9 +16,9 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class ReadioHeadStream : public Stream {
+class RadioHeadStream : public Stream {
  public:
-  ReadioHeadStream(RHGenericDriver& driver) { setDriver(driver); }
+  RadioHeadStream(RHGenericDriver& driver) { setDriver(driver); }
 
   void setDriver(RHGenericDriver& driver) { p_driver = &driver; }
 
