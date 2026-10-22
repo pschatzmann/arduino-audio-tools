@@ -10,7 +10,7 @@
 #include "AudioTools/Communication/AudioHttp.h"
 
 URLStream url("ssid", "password");  // or replace with ICYStream to get metadata
-StreamCopy copier(Serial1, url);         // copy url to decoder
+StreamCopy copier(Serial2, url);         // copy url to decoder
 // xon/xoff flow control
 const char xon = 17;
 const char xoff = 19;

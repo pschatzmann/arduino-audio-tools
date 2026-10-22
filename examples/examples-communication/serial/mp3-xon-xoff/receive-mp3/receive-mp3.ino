@@ -35,7 +35,7 @@ void setup() {
   Serial.begin(115200);
   AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
-  Serial0.begin(115200);
+  Serial1.begin(115200);
 
   // set up buffer here to allow PSRAM usage
   buffer.resize(1024 * 10);  // 10kB buffer

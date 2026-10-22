@@ -10,7 +10,6 @@
  */
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/CodecG7xx.h" // https://github.com/pschatzmann/codec-g7xx.git
-#define USE_RTSP_LOGIN // activate RTSP login support
 #include "AudioTools/Communication/RTSP.h"
 
 int port = 554;

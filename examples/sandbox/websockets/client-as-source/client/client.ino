@@ -19,7 +19,7 @@ WebSocketOutput out(webSocket);
 AudioInfo info(44100, 2, 16);
 SineGenerator<int16_t> sineWave(32000);
 GeneratedSoundStream<int16_t> sound(sineWave);
-Throttle throttle(out)
+Throttle throttle(out);
 StreamCopy copier(throttle, sound);
 
 void setup() {
