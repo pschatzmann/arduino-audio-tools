@@ -1817,7 +1817,8 @@ Typedefs</h2></td></tr>
 <tr class="memdesc:ga07e83073af7df530d17433371106bf74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Legacy alias for MPEG Transport <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> decoder.  <br /></td></tr>
 <tr class="memitem:a1362e555529a3d29a386fb33a657dbeb" id="r_a1362e555529a3d29a386fb33a657dbeb"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1362e555529a3d29a386fb33a657dbeb">Mutex</a> = <a class="el" href="classaudio__tools_1_1_std_mutex.html">StdMutex</a></td></tr>
 <tr class="memdesc:a1362e555529a3d29a386fb33a657dbeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default <a class="el" href="#a1362e555529a3d29a386fb33a657dbeb" title="Default Mutex implementation using std::mutex.">Mutex</a> implementation using std::mutex.  <br /></td></tr>
-<tr class="memitem:af449cd2517d296236897c01a554a8dec" id="r_af449cd2517d296236897c01a554a8dec"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af449cd2517d296236897c01a554a8dec">MutexRecursiveRTOS</a> = <a class="el" href="classaudio__tools_1_1_mutex_recursive_zephyr.html">MutexRecursiveZephyr</a></td></tr>
+<tr class="memitem:a56f226df958c5086011759a3c15900b5" id="r_a56f226df958c5086011759a3c15900b5"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a56f226df958c5086011759a3c15900b5">MutexRecursive</a> = <a class="el" href="classaudio__tools_1_1_std_recursive_mutex.html">StdRecursiveMutex</a></td></tr>
+<tr class="memdesc:a56f226df958c5086011759a3c15900b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Recursive <a class="el" href="#a1362e555529a3d29a386fb33a657dbeb" title="Default Mutex implementation using std::mutex.">Mutex</a> implementation using std::recursive_mutex.  <br /></td></tr>
 <tr class="memitem:a8565c5a4eb7e3c3e1e650148aea834de" id="r_a8565c5a4eb7e3c3e1e650148aea834de"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8565c5a4eb7e3c3e1e650148aea834de">MutexRTOS</a> = <a class="el" href="classaudio__tools_1_1_mutex_zephyr.html">MutexZephyr</a></td></tr>
 <tr class="memdesc:a8565c5a4eb7e3c3e1e650148aea834de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compatibility typedefs for RTOS-based mutex naming.  <br /></td></tr>
 <tr class="memitem:a56ed0c7c48d16f8dd76c00a8b26eb02a" id="r_a56ed0c7c48d16f8dd76c00a8b26eb02a"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a56ed0c7c48d16f8dd76c00a8b26eb02a">my_repeating_timer_callback_t</a>) (void *obj)</td></tr>
@@ -3162,17 +3163,21 @@ template&lt;class T&gt; </div>
 
 </div>
 </div>
-<a id="af449cd2517d296236897c01a554a8dec" name="af449cd2517d296236897c01a554a8dec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af449cd2517d296236897c01a554a8dec">&#9670;&#160;</a></span>MutexRecursiveRTOS</h2>
+<a id="a56f226df958c5086011759a3c15900b5" name="a56f226df958c5086011759a3c15900b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56f226df958c5086011759a3c15900b5">&#9670;&#160;</a></span>MutexRecursive</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using MutexRecursiveRTOS = <a class="el" href="classaudio__tools_1_1_mutex_recursive_zephyr.html">MutexRecursiveZephyr</a></td>
+          <td class="memname">using <a class="el" href="#a56f226df958c5086011759a3c15900b5">MutexRecursive</a> = <a class="el" href="classaudio__tools_1_1_std_recursive_mutex.html">StdRecursiveMutex</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Default Recursive <a class="el" href="#a1362e555529a3d29a386fb33a657dbeb" title="Default Mutex implementation using std::mutex.">Mutex</a> implementation using std::recursive_mutex. </p>
+<p>Compatibility typedefs for RTOS-based recursive mutex naming.</p>
+<p>Default Recursive <a class="el" href="#a1362e555529a3d29a386fb33a657dbeb" title="Default Mutex implementation using std::mutex.">Mutex</a> implementation using RTOS semaphores. </p>
 
 </div>
 </div>
