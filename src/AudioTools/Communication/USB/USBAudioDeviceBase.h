@@ -345,9 +345,10 @@ public:
   static USBAudioDeviceBase& activeInstance() { return *s_active_; }
 
 
-  /** @brief Returns true if the feedback endpoint is enabled.
-   *  Only meaningful in pure RX (OUT-only) mode: with an IN endpoint present
-   *  the host uses the TX stream as implicit feedback instead. */
+  /** @brief Returns true if the feedback endpoint is enabled: RX-only mode,
+   *  or RXTX mode with enable_feedback_ep_rxtx.  When false the OUT endpoint
+   *  (if any) is adaptive, ie: the host ignores the device's clock, and the
+   *  setFeedback*() calls have no effect. */
   bool isFeedbackEpEnabled() const { return descr_builder.enableFeedbackEp(); }
 
   /** @brief Returns true if IN endpoint flow control is enabled. When on, the
@@ -536,18 +537,43 @@ public:
    * min feedback value), 100 asks it to speed up (max value), and 50
    * approximates the nominal sample rate.
    *
+   * Only has an effect when isFeedbackEpEnabled(); see
+   * enable_feedback_ep_rxtx for RXTX mode.
+   *
+   * Each step is 1% of a +-1 sample per frame range (eg: ~420 ppm at 48 kHz),
+   * much coarser than typical clock differences; see setFeedbackPpm() for
+   * finer control.
+   *
    * @param percent 0..100; values above 100 are clamped.
    */
   void setFeedbackPercent(int percent) {
     int normalized = percent;
     if (normalized < 0) normalized = 0;
     if (normalized > 100) normalized = 100;
+    manual_feedback_ppm_ = INT32_MIN;
     manual_feedback_percent_ = normalized;
   }
 
-  /** @brief Reverts setFeedbackPercent() and restores the automatic
-   *  (FIFO_COUNT) feedback computation. */
-  void setFeedbackAutomatic() { manual_feedback_percent_ = -1; }
+  /**
+   * @brief Like setFeedbackPercent(), but as an offset from the nominal
+   * sample rate in parts per million: positive asks the host to send faster,
+   * negative slower.  Resolution is the feedback format's (~0.3 ppm at
+   * 48 kHz full speed), so a control loop on the application's own buffer
+   * level can match the host's rate closely.  Clamped to the negotiated
+   * +-1 sample per frame range.  Only has an effect when
+   * isFeedbackEpEnabled().
+   */
+  void setFeedbackPpm(int32_t ppm) {
+    manual_feedback_percent_ = -1;
+    manual_feedback_ppm_ = ppm == INT32_MIN ? INT32_MIN + 1 : ppm;
+  }
+
+  /** @brief Reverts setFeedbackPercent()/setFeedbackPpm() and restores the
+   *  automatic (FIFO_COUNT) feedback computation. */
+  void setFeedbackAutomatic() {
+    manual_feedback_percent_ = -1;
+    manual_feedback_ppm_ = INT32_MIN;
+  }
 
 
   /** @brief Stop audio streaming and clear buffers. Does not disconnect USB. */
@@ -694,6 +720,10 @@ public:
   // the caller is driving the feedback value directly via
   // setFeedbackPercent(). See tud_audio_feedback_interval_isr().
   int16_t manual_feedback_percent_ = -1;
+  // setFeedbackPpm() override, or INT32_MIN for none.
+  volatile int32_t manual_feedback_ppm_ = INT32_MIN;
+  // enable_ep_in_rate_tracking: frames to wait before the next correction.
+  uint8_t tx_rate_holdoff_ = 0;
 
   // calculate!
   std::vector<uint16_t> desc_len_;
@@ -813,14 +843,29 @@ public:
            sizeof(((audiod_function_t*)0)->ctrl_buf_sz);
   }
 
-  // Called by audiod_sof_isr() at the feedback interval.
-  // Computes the current feedback value then claims the EP and sends it.
+  // Called by audiod_sof_isr() at the feedback interval, in the USB
+  // interrupt.  Only computes the feedback value: sending it means claiming
+  // the endpoint, which takes TinyUSB's endpoint mutex, and doing that here
+  // deadlocks if the interrupt arrived while the TinyUSB task held it.  The
+  // value is sent from task context instead, each time the previous feedback
+  // transfer completes (audiod_xfer_cb()), as TinyUSB's own audio driver does.
   void tud_audio_feedback_interval_isr(uint8_t func_id,
                                        uint32_t /*frame_count*/,
                                        uint8_t frame_shift) {
     audiod_function_t* audio = &audiod_fct_[func_id];
 
-    if (manual_feedback_percent_ >= 0) {
+    int32_t ppm = manual_feedback_ppm_;
+    if (ppm != INT32_MIN) {
+      // setFeedbackPpm() override: offset from the nominal rate.
+      uint32_t const frame_div = backend().isFullSpeed() ? 1000u : 8000u;
+      int64_t nominal = ((int64_t)config_.sample_rate << 16) / frame_div;
+      int64_t value = nominal + nominal * ppm / 1000000;
+      if (value < (int64_t)audio->feedback.min_value)
+        value = audio->feedback.min_value;
+      if (value > (int64_t)audio->feedback.max_value)
+        value = audio->feedback.max_value;
+      audio->feedback.value = (uint32_t)value;
+    } else if (manual_feedback_percent_ >= 0) {
       // setFeedbackPercent() override: scale linearly across the negotiated
       // [min_value, max_value] range instead of running the automatic
       // compute_method below.
@@ -893,9 +938,12 @@ public:
       }
     }
 
-    if (backend().claimEndpoint(audio->rhport, audio->ep_fb)) {
+  }
+
+  // Task context only (see tud_audio_feedback_interval_isr()).
+  void audiod_fb_kick(audiod_function_t* audio) {
+    if (audio->ep_fb && backend().claimEndpoint(audio->rhport, audio->ep_fb))
       audiod_fb_send(audio);
-    }
   }
 
   // USBD Driver API — public so a backend's class-driver registration glue
@@ -1241,8 +1289,9 @@ public:
         return true;
       }
       if (isFeedbackEpEnabled() && audio->ep_fb == ep_addr) {
-        // SOF ISR owns re-sending; just notify the application.
         if (fb_done_cb_) fb_done_cb_(this, func_id);
+        // Queue the next feedback packet with the latest value.
+        audiod_fb_kick(audio);
         return true;
       }
     }
@@ -1917,6 +1966,12 @@ public:
           tud_audio_set_itf_cb_(this, rhport, UsbSetupPacket{});
 
         setupFeedback(audio, func_id, alt);
+        // Start the feedback transfers; each completion queues the next.
+        if (isFeedbackEpEnabled() && audio->ep_fb) {
+          if (audio->feedback.value == 0)
+            audio->feedback.value = audio->feedback.min_value / 2 + audio->feedback.max_value / 2;
+          audiod_fb_kick(audio);
+        }
         return true;
       }
       p_desc = descNext(p_desc);
@@ -2027,6 +2082,7 @@ public:
 
     // Restart the fractional accumulator for this streaming session.
     audio->tx_sample_acc = 0;
+    tx_rate_holdoff_ = 0;
 
     bool full_speed = backend().isFullSpeed();
     const uint8_t interval =
@@ -2085,11 +2141,34 @@ public:
     const uint32_t interval = full_speed ? iv : (1u << (iv - 1));
 
     audio->tx_sample_acc += audio->sample_rate_tx * interval;
-    const uint32_t samples = audio->tx_sample_acc / denom;
+    uint32_t samples = audio->tx_sample_acc / denom;
     audio->tx_sample_acc -= samples * denom;
 
-    uint32_t bytes =
-        samples * audio->n_channels_tx * audio->n_bytes_per_sample_tx;
+    const uint32_t frame_bytes =
+        audio->n_channels_tx * audio->n_bytes_per_sample_tx;
+    if (config_.enable_ep_in_rate_tracking) {
+      // Asynchronous IN: the application writes bufferTx() at the device's
+      // clock, which differs slightly from the host's.  Follow it by sending
+      // one sample more when the buffer is above half full, one less when
+      // below.  The hold-off limits how quickly corrections come (and so
+      // how much the packet sizes jitter): at most 1 sample per 8 packets,
+      // ie: 2600 ppm at 48 kHz, far more than any crystal's error.
+      if (tx_rate_holdoff_) {
+        tx_rate_holdoff_--;
+      } else {
+        const uint32_t level = (uint32_t)bufferTx().available() / frame_bytes;
+        const uint32_t target = (uint32_t)bufferTx().size() / frame_bytes / 2;
+        if (level > target + 1) {
+          samples++;
+          tx_rate_holdoff_ = 7;
+        } else if (level + 1 < target && samples > 1) {
+          samples--;
+          tx_rate_holdoff_ = 7;
+        }
+      }
+    }
+
+    uint32_t bytes = samples * frame_bytes;
     if (bytes > audio->ep_in_sz) bytes = audio->ep_in_sz;
     return (uint16_t)bytes;
   }

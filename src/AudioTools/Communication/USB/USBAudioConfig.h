@@ -21,8 +21,9 @@ namespace audio_tools {
 //    TinyUSBDevice.allocEndpoint() like on RP2040/SAMD/STM32.
 //  - ep_in and ep_fb both resolve to 0x88 (the same physical IN endpoint),
 //    which is safe because they're mutually exclusive: enableFeedbackEp()
-//    already requires enable_ep_in == false (see USBAudio2DescriptorBuilder),
-//    matching the hardware's single ISO IN + single ISO OUT pair exactly.
+//    refuses an ep_fb equal to ep_in (see USBAudio2DescriptorBuilder), so
+//    enable_feedback_ep_rxtx has no effect here, matching the hardware's
+//    single ISO IN + single ISO OUT pair exactly.
 //  - ep_int (the AC status/change interrupt endpoint) is NOT restricted --
 //    endpoints 1-7 (control/bulk/interrupt) are freely assignable on this
 //    chip -- so it keeps the generic -1 default below and is still allocated
@@ -72,11 +73,11 @@ namespace audio_tools {
 //    variant since none of the built-ins use them.
 //  - The RA4M1's RUSB2 USB peripheral (dcd_rusb2.c) only has 2 isochronous-
 //    capable pipes, so at most 2 ISO endpoints can be open at once. This
-//    matches USBAudioConfig's own constraint that feedback
-//    (enable_feedback_ep) is only active in RX-only mode (no IN endpoint) --
-//    TX-only, RX-only-with-feedback, and RXTX-without-feedback each need
-//    exactly 2 or fewer ISO endpoints, so this hardware limit is never hit
-//    through this library's own configuration surface.
+//    matches USBAudioConfig's default that feedback (enable_feedback_ep)
+//    is only active in RX-only mode (no IN endpoint) -- TX-only,
+//    RX-only-with-feedback, and RXTX-without-feedback each need exactly 2
+//    or fewer ISO endpoints. Don't set enable_feedback_ep_rxtx here: RXTX
+//    with feedback needs 3.
 #if defined(ARDUINO_ARCH_RENESAS)
 #ifndef USB_AUDIO_EP_IN
 #define USB_AUDIO_EP_IN 0x85
@@ -131,7 +132,7 @@ struct USBAudioConfig : public AudioInfo {
   /// you set >= 0 as a pinned address.
   int16_t ep_in = USB_AUDIO_EP_IN;    ///< ISO IN  (device → host, capture/microphone)
   int16_t ep_out = USB_AUDIO_EP_OUT;  ///< ISO OUT (host → device, playback/speaker)
-  int16_t ep_fb = USB_AUDIO_EP_FB;    ///< ISO IN  (explicit feedback, RX-only mode)
+  int16_t ep_fb = USB_AUDIO_EP_FB;    ///< ISO IN  (explicit feedback, see enable_feedback_ep)
   int16_t ep_int = USB_AUDIO_EP_INT;  ///< INT IN  (AC status/change notifications)
 
   // ── Interface numbering ───────────────────────────────────────────────────
@@ -165,7 +166,20 @@ struct USBAudioConfig : public AudioInfo {
 
   // ── Advanced ──────────────────────────────────────────────────────────────
   /// Enable isochronous feedback endpoint so the host can adjust its clock.
+  /// By default this only applies in RX-only mode; see
+  /// enable_feedback_ep_rxtx for full duplex.
   bool enable_feedback_ep = true;
+
+  /// Also use the feedback endpoint in RXTX (full duplex) mode.  Without it,
+  /// an RXTX OUT endpoint is declared adaptive: the host sends at its own
+  /// clock, ignores the device's, and setFeedbackPercent() has no effect, so
+  /// the application must absorb the clock difference itself (eg: by
+  /// resampling).  With it, the OUT endpoint is asynchronous with explicit
+  /// feedback, exactly as in RX-only mode.  Needs three isochronous
+  /// endpoints (OUT, IN, feedback IN), which nRF52 and Renesas RA4M1 don't
+  /// have.  Combine with enable_ep_in_rate_tracking so the IN direction
+  /// also follows the device's clock.
+  bool enable_feedback_ep_rxtx = false;
 
   /// When false (default): the clock source is fixed at sample_rate.
   /// The descriptor reports an internal fixed clock, and GET_RANGE returns
@@ -202,6 +216,17 @@ struct USBAudioConfig : public AudioInfo {
   /// packet every frame, which makes e.g. 44100 Hz run at 45000 Hz effective
   /// (45 samples/ms instead of the required 44.1 average).
   bool enable_ep_in_flow_control = true;
+
+  /// IN endpoint (asynchronous): send one sample more or less per packet as
+  /// needed to keep bufferTx() about half full, so the host receives audio
+  /// at the rate the application writes it (ie: the device's clock), not at
+  /// exactly the nominal rate of the host's clock.  Without it, packets are
+  /// always nominal size, so any difference between the two clocks slowly
+  /// underflows (zero-padded packets) or overflows bufferTx().  Needs
+  /// enable_ep_in_flow_control.  Leave it off if the application writes
+  /// "just in time" (eg: from the TX-done callback) rather than at its own
+  /// clock, since then bufferTx()'s level says nothing about that clock.
+  bool enable_ep_in_rate_tracking = false;
 
 #if defined(FREERTOS_H) || defined(INC_FREERTOS_H)
   // ── FreeRTOS USB task (RP2040 + FreeRTOS only) ───────────────────────────
@@ -286,7 +311,9 @@ struct USBAudioConfig : public AudioInfo {
            max_power_ma == other.max_power_ma &&
 
            enable_feedback_ep == other.enable_feedback_ep &&
+           enable_feedback_ep_rxtx == other.enable_feedback_ep_rxtx &&
            enable_ep_in_flow_control == other.enable_ep_in_flow_control &&
+           enable_ep_in_rate_tracking == other.enable_ep_in_rate_tracking &&
 
            begin_usb == other.begin_usb && terminal_id == other.terminal_id &&
 
