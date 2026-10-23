@@ -45,7 +45,9 @@ class MutexRecursiveZephyr : public MutexBase {
 
 /// @brief Compatibility typedefs for RTOS-based mutex naming
 using MutexRTOS = MutexZephyr;
-using MutexRecursiveRTOS = MutexRecursiveZephyr;
+
+/// @brief Compatibility typedefs for RTOS-based recursive mutex naming
+using MutexRecursive = MutexRecursiveZephyr;
 
 /// @brief Default Mutex implementation using Zephyr mutexes
 /// @ingroup concurrency

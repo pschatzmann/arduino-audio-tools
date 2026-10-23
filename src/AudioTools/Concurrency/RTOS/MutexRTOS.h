@@ -74,4 +74,9 @@ protected:
 /// @ingroup concurrency
 using Mutex = MutexRTOS;
 
+/// @brief Default Recursive Mutex implementation using RTOS semaphores
+/// @ingroup concurrency
+using MutexRecursive = MutexRecursiveRTOS;
+
+
 }
