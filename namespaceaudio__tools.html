@@ -1098,6 +1098,8 @@ size_t size)</a> and <a class="el" href="classaudio__tools_1_1_base_stream.html#
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determination of the frequency of a music note.  <a href="classaudio__tools_1_1_musical_notes.html#details">More...</a><br /></td></tr>
 <tr class="memitem:MutexBase" id="r_MutexBase"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_mutex_base.html">MutexBase</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty <a class="el" href="#a1362e555529a3d29a386fb33a657dbeb" title="Default Mutex implementation using std::mutex.">Mutex</a> implementation which does nothing.  <a href="classaudio__tools_1_1_mutex_base.html#details">More...</a><br /></td></tr>
+<tr class="memitem:MutexRecursiveRP2040" id="r_MutexRecursiveRP2040"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_mutex_recursive_r_p2040.html">MutexRecursiveRP2040</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recursive <a class="el" href="#a1362e555529a3d29a386fb33a657dbeb" title="Default Mutex implementation using std::mutex.">Mutex</a> implementation using the RP2040 Pico SDK: the owning core/task can lock it multiple times and must unlock it the same number of times.  <a href="classaudio__tools_1_1_mutex_recursive_r_p2040.html#details">More...</a><br /></td></tr>
 <tr class="memitem:MutexRecursiveRTOS" id="r_MutexRecursiveRTOS"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_mutex_recursive_r_t_o_s.html">MutexRecursiveRTOS</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recursive <a class="el" href="#a1362e555529a3d29a386fb33a657dbeb" title="Default Mutex implementation using std::mutex.">Mutex</a> implemntation using FreeRTOS.  <a href="classaudio__tools_1_1_mutex_recursive_r_t_o_s.html#details">More...</a><br /></td></tr>
 <tr class="memitem:MutexRecursiveZephyr" id="r_MutexRecursiveZephyr"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_mutex_recursive_zephyr.html">MutexRecursiveZephyr</a></td></tr>
@@ -3177,7 +3179,8 @@ template&lt;class T&gt; </div>
 
 <p>Default Recursive <a class="el" href="#a1362e555529a3d29a386fb33a657dbeb" title="Default Mutex implementation using std::mutex.">Mutex</a> implementation using std::recursive_mutex. </p>
 <p>Compatibility typedefs for RTOS-based recursive mutex naming.</p>
-<p>Default Recursive <a class="el" href="#a1362e555529a3d29a386fb33a657dbeb" title="Default Mutex implementation using std::mutex.">Mutex</a> implementation using RTOS semaphores. </p>
+<p>Default Recursive <a class="el" href="#a1362e555529a3d29a386fb33a657dbeb" title="Default Mutex implementation using std::mutex.">Mutex</a> implementation using RTOS semaphores.</p>
+<p>Default Recursive <a class="el" href="#a1362e555529a3d29a386fb33a657dbeb" title="Default Mutex implementation using std::mutex.">Mutex</a> implementation using RP2040 Pico SDK. </p>
 
 </div>
 </div>

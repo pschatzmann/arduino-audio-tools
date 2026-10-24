@@ -314,7 +314,7 @@ var searchData=
   ['mts_5fstream_5ftype_5fmpeg4_5fvideo_311',['MTS_STREAM_TYPE_MPEG4_VIDEO',['../namespaceaudio__tools.html#a63c8bf210a08d6761ae256bb884c6baa',1,'audio_tools']]],
   ['mts_5fstream_5ftype_5fprivate_312',['MTS_STREAM_TYPE_PRIVATE',['../namespaceaudio__tools.html#aa51743d0a067289676ea284d04f64f27',1,'audio_tools']]],
   ['mts_5fsync_5fbyte_313',['MTS_SYNC_BYTE',['../namespaceaudio__tools.html#a34e69a68e1bc6aef97e885b0bed7a142',1,'audio_tools']]],
-  ['mtx_314',['mtx',['../classaudio__tools_1_1_mutex_r_p2040.html#a5f1394c1d77ba2f8c347dbf2785ec80e',1,'audio_tools::MutexRP2040']]],
+  ['mtx_314',['mtx',['../classaudio__tools_1_1_mutex_r_p2040.html#a5f1394c1d77ba2f8c347dbf2785ec80e',1,'audio_tools::MutexRP2040::mtx'],['../classaudio__tools_1_1_mutex_recursive_r_p2040.html#af52ebb3edb90e6d7074f5242086c34a5',1,'audio_tools::MutexRecursiveRP2040::mtx']]],
   ['mute_5f_315',['mute_',['../classaudio__tools_1_1_u_s_b_audio_stream_base.html#ae136a173bb9342d1d6cbf4f05f45fcf5',1,'audio_tools::USBAudioStreamBase']]],
   ['mute_5fcb_5f_316',['mute_cb_',['../classaudio__tools_1_1_u_s_b_audio_stream_base.html#a91dec16c42fe8851cc86ed09af593f1d',1,'audio_tools::USBAudioStreamBase']]],
   ['mute_5fmask_317',['mute_mask',['../structaudio__tools_1_1_u_s_b_audio_host_base_1_1_entity.html#ae3c0674a9905f31a8168622ae7a4b955',1,'audio_tools::USBAudioHostBase::Entity']]],

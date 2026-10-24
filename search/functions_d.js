@@ -129,13 +129,14 @@ var searchData=
   ['multivideodecoderfull_126',['MultiVideoDecoderFull',['../classaudio__tools_1_1_multi_video_decoder_full.html#a38cec71f16552e04a8cdc97566a46ac7',1,'audio_tools::MultiVideoDecoderFull']]],
   ['multivideodemuxerfull_127',['MultiVideoDemuxerFull',['../classaudio__tools_1_1_multi_video_demuxer_full.html#a25182ecf99fbef677f55c676fd9e2df7',1,'audio_tools::MultiVideoDemuxerFull']]],
   ['mute_128',['mute',['../classaudio__tools_1_1_i2_s_stream.html#a3f81df7be714e88cfc458ccb6a4d8d1a',1,'audio_tools::I2SStream']]],
-  ['mutexrecursivertos_129',['MutexRecursiveRTOS',['../classaudio__tools_1_1_mutex_recursive_r_t_o_s.html#a9ad50cfb22c8d3abb3779a62850655f3',1,'audio_tools::MutexRecursiveRTOS']]],
-  ['mutexrecursivezephyr_130',['MutexRecursiveZephyr',['../classaudio__tools_1_1_mutex_recursive_zephyr.html#a43c1ec5cf21181c298bbefce1115b4e8',1,'audio_tools::MutexRecursiveZephyr']]],
-  ['mutexrp2040_131',['MutexRP2040',['../classaudio__tools_1_1_mutex_r_p2040.html#af0ff1db88598378f0082de9d04753d1b',1,'audio_tools::MutexRP2040']]],
-  ['mutexrtos_132',['MutexRTOS',['../classaudio__tools_1_1_mutex_r_t_o_s.html#abca723f17d810dbf18e98bfa04396961',1,'audio_tools::MutexRTOS']]],
-  ['mutexzephyr_133',['MutexZephyr',['../classaudio__tools_1_1_mutex_zephyr.html#a24c61d4ace476317544d17293d35ac76',1,'audio_tools::MutexZephyr']]],
-  ['muxeravi_134',['MuxerAVI',['../classaudio__tools_1_1_muxer_a_v_i.html#aa41b9d0028c6e1913a0eec90215cf1c0',1,'audio_tools::MuxerAVI::MuxerAVI()'],['../classaudio__tools_1_1_muxer_a_v_i.html#a2fef541215f80176c18f891309b3443f',1,'audio_tools::MuxerAVI::MuxerAVI(Print &amp;out)']]],
-  ['muxermp4_135',['MuxerMP4',['../classaudio__tools_1_1_muxer_m_p4.html#a8201704825cf39302ba30a56358939d7',1,'audio_tools::MuxerMP4::MuxerMP4()'],['../classaudio__tools_1_1_muxer_m_p4.html#aac898787307132eea5e148b3e0db27d2',1,'audio_tools::MuxerMP4::MuxerMP4(Print &amp;out)']]],
-  ['muxermpg_136',['MuxerMPG',['../classaudio__tools_1_1_muxer_m_p_g.html#a2f7a1c204ac8cf7c69a706387594bb24',1,'audio_tools::MuxerMPG::MuxerMPG()'],['../classaudio__tools_1_1_muxer_m_p_g.html#a1bea410dfcd486c8f609260183d06f37',1,'audio_tools::MuxerMPG::MuxerMPG(Print &amp;out)']]],
-  ['muxermts_137',['MuxerMTS',['../classaudio__tools_1_1_muxer_m_t_s.html#a3e61bf7756823c1bba6e0efe681ea250',1,'audio_tools::MuxerMTS::MuxerMTS()'],['../classaudio__tools_1_1_muxer_m_t_s.html#a4eadfd3fdd4ac56474a796c32120c60c',1,'audio_tools::MuxerMTS::MuxerMTS(Print &amp;out)']]]
+  ['mutexrecursiverp2040_129',['MutexRecursiveRP2040',['../classaudio__tools_1_1_mutex_recursive_r_p2040.html#a435883aa2d5c245c36d56ab0abd25755',1,'audio_tools::MutexRecursiveRP2040']]],
+  ['mutexrecursivertos_130',['MutexRecursiveRTOS',['../classaudio__tools_1_1_mutex_recursive_r_t_o_s.html#a9ad50cfb22c8d3abb3779a62850655f3',1,'audio_tools::MutexRecursiveRTOS']]],
+  ['mutexrecursivezephyr_131',['MutexRecursiveZephyr',['../classaudio__tools_1_1_mutex_recursive_zephyr.html#a43c1ec5cf21181c298bbefce1115b4e8',1,'audio_tools::MutexRecursiveZephyr']]],
+  ['mutexrp2040_132',['MutexRP2040',['../classaudio__tools_1_1_mutex_r_p2040.html#af0ff1db88598378f0082de9d04753d1b',1,'audio_tools::MutexRP2040']]],
+  ['mutexrtos_133',['MutexRTOS',['../classaudio__tools_1_1_mutex_r_t_o_s.html#abca723f17d810dbf18e98bfa04396961',1,'audio_tools::MutexRTOS']]],
+  ['mutexzephyr_134',['MutexZephyr',['../classaudio__tools_1_1_mutex_zephyr.html#a24c61d4ace476317544d17293d35ac76',1,'audio_tools::MutexZephyr']]],
+  ['muxeravi_135',['MuxerAVI',['../classaudio__tools_1_1_muxer_a_v_i.html#aa41b9d0028c6e1913a0eec90215cf1c0',1,'audio_tools::MuxerAVI::MuxerAVI()'],['../classaudio__tools_1_1_muxer_a_v_i.html#a2fef541215f80176c18f891309b3443f',1,'audio_tools::MuxerAVI::MuxerAVI(Print &amp;out)']]],
+  ['muxermp4_136',['MuxerMP4',['../classaudio__tools_1_1_muxer_m_p4.html#a8201704825cf39302ba30a56358939d7',1,'audio_tools::MuxerMP4::MuxerMP4()'],['../classaudio__tools_1_1_muxer_m_p4.html#aac898787307132eea5e148b3e0db27d2',1,'audio_tools::MuxerMP4::MuxerMP4(Print &amp;out)']]],
+  ['muxermpg_137',['MuxerMPG',['../classaudio__tools_1_1_muxer_m_p_g.html#a2f7a1c204ac8cf7c69a706387594bb24',1,'audio_tools::MuxerMPG::MuxerMPG()'],['../classaudio__tools_1_1_muxer_m_p_g.html#a1bea410dfcd486c8f609260183d06f37',1,'audio_tools::MuxerMPG::MuxerMPG(Print &amp;out)']]],
+  ['muxermts_138',['MuxerMTS',['../classaudio__tools_1_1_muxer_m_t_s.html#a3e61bf7756823c1bba6e0efe681ea250',1,'audio_tools::MuxerMTS::MuxerMTS()'],['../classaudio__tools_1_1_muxer_m_t_s.html#a4eadfd3fdd4ac56474a796c32120c60c',1,'audio_tools::MuxerMTS::MuxerMTS(Print &amp;out)']]]
 ];
