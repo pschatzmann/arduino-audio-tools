@@ -52,8 +52,9 @@ protected:
 class MutexRecursiveRTOS : public MutexBase {
 public:
   MutexRecursiveRTOS() {
-    xSemaphore = xSemaphoreCreateBinary();
-    unlock();
+    // the recursive take/give functions need a recursive mutex: with a
+    // binary semaphore the first lock() would block forever
+    xSemaphore = xSemaphoreCreateRecursiveMutex();
   }
   virtual ~MutexRecursiveRTOS() {
     vSemaphoreDelete(xSemaphore);
