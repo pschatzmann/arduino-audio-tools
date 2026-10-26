@@ -153,12 +153,13 @@ class USBAudio2DescriptorBuilder {
   // needs an asynchronous OUT endpoint and an IN endpoint declared as
   // implicit feedback (usage type 10b), and without this the OUT endpoint is
   // adaptive (see writeIsoEndpoint()) -- ie: the host ignores the device's
-  // clock entirely.  Platforms that pin ep_fb to the same address as ep_in
-  // (one ISO IN endpoint) can't have both.
+  // clock entirely.  It needs three ISO endpoints, so platforms with fewer
+  // (USB_AUDIO_MAX_ISO_EP) can't have it, and ep_fb can't be the same
+  // endpoint as ep_in.
   bool enableFeedbackEp() const {
     if (!p_config->enable_feedback_ep || !p_config->enable_ep_out) return false;
     if (!p_config->enable_ep_in) return true;
-    return p_config->enable_feedback_ep_rxtx &&
+    return p_config->enable_feedback_ep_rxtx && USB_AUDIO_MAX_ISO_EP >= 3 &&
            !(p_config->ep_fb >= 0 && p_config->ep_fb == p_config->ep_in);
   }
 

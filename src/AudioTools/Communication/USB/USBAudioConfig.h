@@ -20,10 +20,10 @@ namespace audio_tools {
 //    is why ep_in/ep_out/ep_fb are pinned here instead of using
 //    TinyUSBDevice.allocEndpoint() like on RP2040/SAMD/STM32.
 //  - ep_in and ep_fb both resolve to 0x88 (the same physical IN endpoint),
-//    which is safe because they're mutually exclusive: enableFeedbackEp()
-//    refuses an ep_fb equal to ep_in (see USBAudio2DescriptorBuilder), so
-//    enable_feedback_ep_rxtx has no effect here, matching the hardware's
-//    single ISO IN + single ISO OUT pair exactly.
+//    which is safe because they're mutually exclusive: USB_AUDIO_MAX_ISO_EP
+//    is 2, so enableFeedbackEp() (see USBAudio2DescriptorBuilder) is false
+//    in RXTX mode and enable_feedback_ep_rxtx has no effect here, matching
+//    the hardware's single ISO IN + single ISO OUT pair exactly.
 //  - ep_int (the AC status/change interrupt endpoint) is NOT restricted --
 //    endpoints 1-7 (control/bulk/interrupt) are freely assignable on this
 //    chip -- so it keeps the generic -1 default below and is still allocated
@@ -44,6 +44,9 @@ namespace audio_tools {
 #endif
 #ifndef USB_AUDIO_EP_FB
 #define USB_AUDIO_EP_FB 0x88
+#endif
+#ifndef USB_AUDIO_MAX_ISO_EP
+#define USB_AUDIO_MAX_ISO_EP 2
 #endif
 #endif
 
@@ -72,12 +75,10 @@ namespace audio_tools {
 //    in USB.h for the authoritative list). EP5-EP7 are free on every
 //    variant since none of the built-ins use them.
 //  - The RA4M1's RUSB2 USB peripheral (dcd_rusb2.c) only has 2 isochronous-
-//    capable pipes, so at most 2 ISO endpoints can be open at once. This
-//    matches USBAudioConfig's default that feedback (enable_feedback_ep)
-//    is only active in RX-only mode (no IN endpoint) -- TX-only,
-//    RX-only-with-feedback, and RXTX-without-feedback each need exactly 2
-//    or fewer ISO endpoints. Don't set enable_feedback_ep_rxtx here: RXTX
-//    with feedback needs 3.
+//    capable pipes, so at most 2 ISO endpoints can be open at once
+//    (USB_AUDIO_MAX_ISO_EP). TX-only, RX-only-with-feedback, and
+//    RXTX-without-feedback each need 2 or fewer ISO endpoints; RXTX with
+//    feedback needs 3, so enable_feedback_ep_rxtx has no effect here.
 #if defined(ARDUINO_ARCH_RENESAS)
 #ifndef USB_AUDIO_EP_IN
 #define USB_AUDIO_EP_IN 0x85
@@ -90,6 +91,9 @@ namespace audio_tools {
 #endif
 #ifndef USB_AUDIO_EP_INT
 #define USB_AUDIO_EP_INT 0x87
+#endif
+#ifndef USB_AUDIO_MAX_ISO_EP
+#define USB_AUDIO_MAX_ISO_EP 2
 #endif
 #endif
 
@@ -109,6 +113,12 @@ namespace audio_tools {
 #endif
 #ifndef USB_AUDIO_EP_INT
 #define USB_AUDIO_EP_INT -1
+#endif
+// How many isochronous endpoints the USB peripheral can have open at once,
+// counting the feedback endpoint.  Platforms with fewer than 3 (see above)
+// can't have the feedback endpoint in RXTX mode (enable_feedback_ep_rxtx).
+#ifndef USB_AUDIO_MAX_ISO_EP
+#define USB_AUDIO_MAX_ISO_EP 255
 #endif
 
 /**
@@ -176,8 +186,8 @@ struct USBAudioConfig : public AudioInfo {
   /// the application must absorb the clock difference itself (eg: by
   /// resampling).  With it, the OUT endpoint is asynchronous with explicit
   /// feedback, exactly as in RX-only mode.  Needs three isochronous
-  /// endpoints (OUT, IN, feedback IN), which nRF52 and Renesas RA4M1 don't
-  /// have.  Combine with enable_ep_in_rate_tracking so the IN direction
+  /// endpoints (OUT, IN, feedback IN): no effect where USB_AUDIO_MAX_ISO_EP
+  /// is less (nRF52, Renesas RA4M1).  Combine with enable_ep_in_rate_tracking so the IN direction
   /// also follows the device's clock.
   bool enable_feedback_ep_rxtx = false;
 
