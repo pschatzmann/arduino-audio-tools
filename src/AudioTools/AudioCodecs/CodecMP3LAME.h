@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
+#include "AudioTools/AudioCodecs/HeaderParserMP3.h"
 #include "MP3EncoderLAME.h"
 
 namespace audio_tools {
@@ -24,6 +25,11 @@ struct AudioInfoLAME : public liblame::AudioInfo  {
 /**
  * @brief Encodes PCM data to the MP3 format and writes the result to a stream
  * This is basically just a wrapper using https://github.com/pschatzmann/codec-lame
+ *
+ * LAME delivers its output in arbitrary chunks (zero, one or several MP3
+ * frames per write()). Pass splitFrames = true to the constructor to get
+ * exactly one complete MP3 frame per write() to the output instead - as e.g.
+ * the video muxers (MuxerMTS, MuxerAVI, ...) expect it.
  * @ingroup codecs
  * @ingroup encoder
  * @author Phil Schatzmann
@@ -32,13 +38,17 @@ struct AudioInfoLAME : public liblame::AudioInfo  {
 class MP3EncoderLAME : public AudioEncoder {
 
 public:
-    MP3EncoderLAME(){
+    /// @param splitFrames true: write exactly one complete MP3 frame per write()
+    MP3EncoderLAME(bool splitFrames = false){
         TRACED();
+        split_frames = splitFrames;
     }
 
-    MP3EncoderLAME(Print &out_stream){
+    /// @param splitFrames true: write exactly one complete MP3 frame per write()
+    MP3EncoderLAME(Print &out_stream, bool splitFrames = false){
         TRACED();
         p_print = &out_stream;
+        split_frames = splitFrames;
     }
 
     ~MP3EncoderLAME(){
@@ -50,8 +60,13 @@ public:
     void setOutput(Print &out_stream){
         TRACED();
         p_print = &out_stream;
+        if (split_frames) frames.setOutput(out_stream);
         if (enc!=nullptr){
-            enc->setOutput(out_stream);
+            if (split_frames) {
+                enc->setOutput(frame_writer);
+            } else {
+                enc->setOutput(out_stream);
+            }
         }
     }
 
@@ -79,6 +94,10 @@ public:
     bool begin() {
         createEnc();
         if (enc==nullptr) return false;
+        if (split_frames) {
+            frames.resize(kMaxFrameSize);
+            frames.reset();
+        }
         enc->begin();
         return true;
     }
@@ -105,6 +124,7 @@ public:
         TRACED();
         if (enc!=nullptr){
             enc->end();
+            if (split_frames) frames.flush();
             delete enc;
             enc = nullptr;
         }
@@ -115,7 +135,7 @@ public:
     }
 
     const char *mime() {
-        return "audio/mp3";
+        return "audio/mpeg";
     }
 
     virtual operator bool() {
@@ -123,9 +143,29 @@ public:
     }
 
 protected:
+    /// Receives the output of LAME and passes it on in complete MP3 frames
+    class FrameWriter : public Print {
+    public:
+        FrameWriter(HeaderParserMP3 &frames) : frames(frames) {}
+        size_t write(uint8_t c) override { return write(&c, 1); }
+        size_t write(const uint8_t *data, size_t len) override {
+            frames.write(data, len);
+            frames.flush();  // writes all complete frames
+            return len;
+        }
+    protected:
+        HeaderParserMP3 &frames;
+    };
+
+    /// Buffer size for the frame splitting: bigger than the largest MP3 frame
+    static constexpr int kMaxFrameSize = 2048;
+
     liblame::MP3EncoderLAME *enc=nullptr;
     AudioInfoLAME lame_info;
     Print *p_print=nullptr;
+    bool split_frames = false;
+    HeaderParserMP3 frames;
+    FrameWriter frame_writer{frames};
 
     // Create enc only at begin so that we can use psram
     void createEnc(){

@@ -159,8 +159,10 @@ class AudioEncoderExt : public AudioEncoder {
 class CodecNOP : public AudioDecoder, public AudioEncoder {
  public:
   static CodecNOP *instance() {
-    static CodecNOP self;
-    return &self;
+    // never destroyed: it is still used by objects which are destroyed after
+    // the end of main() (e.g. global streams on the desktop)
+    static CodecNOP *self = new CodecNOP();
+    return self;
   }
 
   virtual bool begin() { return true; }

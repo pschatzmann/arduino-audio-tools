@@ -42,3 +42,4 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/wav ${CMAKE_CURRENT_BINARY_DIR}/wav
 
 #add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/container-avi-movie ${CMAKE_CURRENT_BINARY_DIR}/container-avi-movie)
 
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/wav-decoder-chunks ${CMAKE_CURRENT_BINARY_DIR}/wav-decoder-chunks)

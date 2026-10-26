@@ -183,6 +183,8 @@ class Str : public StrView {
     int tmp_maxlen = maxlen;
     len = other.len;
     maxlen = other.maxlen;
+    other.len = tmp_len;
+    other.maxlen = tmp_maxlen;
     vector.swap(other.vector);
     chars = vector.data();
     other.chars = other.vector.data();

@@ -18,7 +18,7 @@
 namespace audio_tools {
 
 /**
- * @brief RTSPServerTaskless - Manual Multi-client RTSP Audio Streaming Server
+ * @brief RTSPServerTaskless - Manual RTSP Audio Streaming Server
  *
  * This class implements an RTSP audio streaming server for platforms like Arduino and ESP32,
  * designed for environments where background tasks or threads are not available or desired.
@@ -29,7 +29,7 @@ namespace audio_tools {
  * session management, and audio streaming.
  *
  * Key Features:
- * - Multi-client RTSP audio streaming over WiFi or Ethernet
+ * - RTSP audio streaming over WiFi or Ethernet (one client at a time)
  * - No background tasks: all server logic is executed synchronously in `doLoop()`
  * - Compatible with platforms where FreeRTOS or threading is unavailable
  * - Inherits all configuration and session management from RTSPServerBase

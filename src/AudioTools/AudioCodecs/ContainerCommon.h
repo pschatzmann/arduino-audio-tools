@@ -151,6 +151,26 @@ class MuxerVideoSink : public Print {
 };
 
 /**
+ * @brief Print adapter that writes each write() call to a Muxer as one
+ * audio frame (Muxer::addAudioFrame()) - e.g. the output of an AudioEncoder,
+ * since a Muxer is a VideoOutput, not a Print.
+ * @ingroup video
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class MuxerAudioSink : public Print {
+ public:
+  void begin(Muxer &muxer) { p_muxer = &muxer; }
+  size_t write(uint8_t c) override { return write(&c, 1); }
+  size_t write(const uint8_t *data, size_t len) override {
+    return p_muxer->addAudioFrame(data, len);
+  }
+
+ protected:
+  Muxer *p_muxer = nullptr;
+};
+
+/**
  * @brief Common interface for demuxers (DemuxerAVI, DemuxerMP4) that
  * split a container's video and (optional) audio tracks apart. Write
  * code against this interface instead of a concrete class if it should

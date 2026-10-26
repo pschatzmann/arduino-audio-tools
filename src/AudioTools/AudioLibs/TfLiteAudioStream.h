@@ -403,16 +403,16 @@ class TfLiteAudioStreamBase : public AudioStream {
 };
 
 /**
- * @brief TfLiteMicroSpeachWriter for Audio Data
+ * @brief TfLiteMicroSpeechWriter for Audio Data
  * @ingroup tflite
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class TfLiteMicroSpeachWriter : public TfLiteWriter {
+class TfLiteMicroSpeechWriter : public TfLiteWriter {
  public:
-  TfLiteMicroSpeachWriter() = default;
+  TfLiteMicroSpeechWriter() = default;
 
-  ~TfLiteMicroSpeachWriter() {
+  ~TfLiteMicroSpeechWriter() {
     if (p_buffer != nullptr) delete p_buffer;
     if (p_audio_samples != nullptr) delete p_audio_samples;
   }
@@ -946,7 +946,7 @@ class TfLiteAudioStream : public TfLiteAudioStreamBase {
 
   virtual bool setupWriter() {
     if (cfg.writer == nullptr) {
-      static TfLiteMicroSpeachWriter writer;
+      static TfLiteMicroSpeechWriter writer;
       cfg.writer = &writer;
     }
     return cfg.writer->begin(this);

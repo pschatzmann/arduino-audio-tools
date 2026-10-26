@@ -43,7 +43,6 @@ class WebSocketOutput : public AudioOutput {
         // broadcast to all clients
         rc = p_ws_server->broadcastBIN(data, len);
       }
-      rc = p_ws_server->broadcastBIN(data, len);
     }
     return rc ? len : 0;
   }

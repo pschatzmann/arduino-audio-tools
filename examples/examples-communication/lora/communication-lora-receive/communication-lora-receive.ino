@@ -10,9 +10,9 @@
  */
 
 #include "AudioTools.h"
-#include "AudioTools/Communication/LoRaStream.h"
+#include "AudioTools/Communication/AudioLoRa.h"
 
-LoRaStream lora;
+AudioLoRa lora;
 MeasuringStream out;  // or CsvOutput<uint8_t>
 StreamCopy copier(out, lora);     
 

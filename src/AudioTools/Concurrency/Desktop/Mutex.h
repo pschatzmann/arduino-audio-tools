@@ -40,6 +40,9 @@ class StdRecursiveMutex : public MutexBase {
 /// @brief Default Mutex implementation using std::mutex
 /// @ingroup concurrency
 using Mutex = StdMutex;
+/// @brief Default Recursive Mutex implementation using std::recursive_mutex
+/// @ingroup concurrency
+using MutexRecursive = StdRecursiveMutex;
 
 
 }  // namespace audio_tools

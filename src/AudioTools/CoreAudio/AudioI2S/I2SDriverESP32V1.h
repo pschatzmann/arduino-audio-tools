@@ -13,6 +13,18 @@
 
 #define IS_I2S_IMPLEMENTED
 
+// Limits of the ESP-IDF I2S driver: min number of DMA descriptors and max
+// bytes per descriptor (4095 minus alignment reserve, see i2s_common.c)
+#define I2S_MIN_DMA_DESC_NUM 2
+#ifndef I2S_MAX_DMA_BUFFER_BYTES
+#  include "soc/soc_caps.h"
+#  if defined(SOC_CACHE_INTERNAL_MEM_VIA_L1CACHE) && SOC_CACHE_INTERNAL_MEM_VIA_L1CACHE
+#    define I2S_MAX_DMA_BUFFER_BYTES (4095 - 63)
+#  else
+#    define I2S_MAX_DMA_BUFFER_BYTES (4095 - 3)
+#  endif
+#endif
+
 namespace audio_tools {
 
 // i2s_port_t not valid any more in ESP-IDF v6, but we keep it for compatibility  
@@ -322,13 +334,10 @@ class I2SDriverESP32V1 : public I2SDriverBase {
         if (i2s_channel_register_event_callback(tx_chan, &cbs, self) != ESP_OK) {
           LOGE("i2s_channel_register_event_callback %s", "tx");
         } else {
-          // Real DMA capacity for availableForWrite(): read back the
-          // dma_desc_num/dma_frame_num ESP-IDF actually allocated (from the
-          // same getChannelConfig() computation newChannels() used to call
-          // i2s_new_channel()) rather than assuming
-          // cfg.buffer_size * cfg.buffer_count -- getChannelConfig() doesn't
-          // always set dma_desc_num explicitly, in which case it falls back
-          // to the I2S_CHANNEL_DEFAULT_CONFIG macro default (6).
+          // Real DMA capacity for availableForWrite(): use the
+          // dma_desc_num/dma_frame_num from the same getChannelConfig()
+          // computation newChannels() used for i2s_new_channel(), so that it
+          // includes the min descriptor count and per descriptor size limit.
           i2s_chan_config_t chan_cfg = getChannelConfig(cfg);
           int frame_size =
               ((cfg.bits_per_sample == 24) ? 32 : cfg.bits_per_sample) *
@@ -406,15 +415,33 @@ class I2SDriverESP32V1 : public I2SDriverBase {
       i2s_chan_config_t result = I2S_CHANNEL_DEFAULT_CONFIG_SAFE(
           (i2s_port_t)cfg.port_no,
           cfg.is_master ? I2S_ROLE_MASTER : I2S_ROLE_SLAVE);
-      // use the legicy size parameters for frame num
-      int size = cfg.buffer_size * cfg.buffer_count;
+      // map the legacy size parameters: buffer_count DMA descriptors of
+      // buffer_size frames each (same meaning as in the legacy I2S driver)
       int frame_size = get_bits_eff(cfg.bits_per_sample) * cfg.channels / 8;
       frame_size = (frame_size == 0) ? 1 : frame_size;
-      if (size > 0) result.dma_frame_num = size / frame_size;
+      if (cfg.buffer_count > 0) result.dma_desc_num = cfg.buffer_count;
+      if (cfg.buffer_size > 0) result.dma_frame_num = cfg.buffer_size;
+      if (result.dma_desc_num < I2S_MIN_DMA_DESC_NUM) {
+        // the driver needs at least 2 descriptors: split the requested total
+        uint32_t total_frames = result.dma_desc_num * result.dma_frame_num;
+        LOGW("dma_desc_num %d too small, using %d", (int)result.dma_desc_num,
+             I2S_MIN_DMA_DESC_NUM);
+        result.dma_desc_num = I2S_MIN_DMA_DESC_NUM;
+        result.dma_frame_num = total_frames / I2S_MIN_DMA_DESC_NUM;
+      }
+      // a single descriptor can only hold a limited number of bytes
+      uint32_t max_frames = I2S_MAX_DMA_BUFFER_BYTES / frame_size;
+      if (result.dma_frame_num > max_frames) {
+        LOGW("dma_frame_num %d exceeds max %d: limited", (int)result.dma_frame_num,
+             (int)max_frames);
+        result.dma_frame_num = max_frames;
+      }
       if (result.dma_frame_num == 0) result.dma_frame_num = 1;
       LOGI("frame_size: %d", (int)frame_size);
       LOGI("dma_frame_num: %d", (int)result.dma_frame_num);
-      LOGI("total buffer size: %d", (int)(result.dma_frame_num * frame_size));
+      LOGI("dma_desc_num: %d", (int)result.dma_desc_num);
+      LOGI("total buffer size: %d",
+           (int)(result.dma_desc_num * result.dma_frame_num * frame_size));
       result.auto_clear = cfg.auto_clear;
       return result;
     }

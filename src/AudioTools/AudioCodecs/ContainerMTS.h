@@ -701,7 +701,13 @@ class MuxerMTS : public Muxer {
   void setAudioInfo(AudioInfoFormat info) override {
     audio_info = info;
     if (audio_info.format == AudioFormat::UNKNOWN) audio_info.format = AudioFormat::AAC;
-    audio_samples_per_frame = (audio_info.format == AudioFormat::MP3) ? 1152 : 1024;
+    // AAC: 1024 samples per frame; MP3: 1152 for MPEG-1 (32 kHz and up),
+    // 576 for the MPEG-2/2.5 frames used at lower sample rates
+    if (audio_info.format == AudioFormat::MP3) {
+      audio_samples_per_frame = audio_info.sample_rate >= 32000 ? 1152 : 576;
+    } else {
+      audio_samples_per_frame = 1024;
+    }
     has_audio = true;
   }
   AudioInfoFormat &audioInfo() override { return audio_info; }
@@ -715,12 +721,15 @@ class MuxerMTS : public Muxer {
     }
     video_frame_count = 0;
     audio_frame_count = 0;
+    out_len = 0;
+    start_ms = millis();
     pat_cc = 0;
     pmt_cc = 0;
     video_cc = 0;
     audio_cc = 0;
     writePat();
     writePmt();
+    flushPackets();
     is_open = true;
     return true;
   }
@@ -750,6 +759,7 @@ class MuxerMTS : public Muxer {
     uint64_t pts = videoPts();
     writeAccessUnit(MTS_PID_VIDEO, MTS_STREAM_ID_VIDEO, video_cc, data, len, pts,
                      /*withPcr=*/true);
+    flushPackets();
     video_frame_count++;
     return len;
   }
@@ -787,9 +797,18 @@ class MuxerMTS : public Muxer {
     uint64_t pts = audioPts();
     writeAccessUnit(MTS_PID_AUDIO, MTS_STREAM_ID_AUDIO, audio_cc, data, len, pts,
                      /*withPcr=*/false);
+    flushPackets();
     audio_frame_count++;
     return len;
   }
+
+  /// Live sources: derive the video PTS/PCR from the time elapsed since
+  /// begin() instead of from frame count / fps - so the timestamps stay
+  /// true to the actual capture time even when frames arrive slower (or
+  /// more irregularly) than MuxerVideoConfig::fps, and a player's latency
+  /// doesn't grow over time. Audio timestamps stay sample based. Call
+  /// before begin().
+  void setRealTime(bool flag) { is_real_time = flag; }
 
   uint32_t videoFrameCount() { return video_frame_count; }
   uint32_t audioFrameCount() { return audio_frame_count; }
@@ -803,11 +822,31 @@ class MuxerMTS : public Muxer {
   StreamContentType write_stream_type = StreamContentType::Video;
   uint32_t video_frame_count = 0;
   uint32_t audio_frame_count = 0;
-  uint32_t audio_samples_per_frame = 1024;  // AAC: 1024, MP3: 1152
+  uint32_t audio_samples_per_frame = 1024;  // see setAudioInfo()
+  bool is_real_time = false;
+  uint32_t start_ms = 0;
+  // TS packets are collected and written in batches of up to
+  // kPacketsPerWrite (7 x 188 = 1316 bytes, the usual network payload):
+  // one write per packet is slow on network clients
+  static const size_t kPacketsPerWrite = 7;
+  uint8_t out_buf[kPacketsPerWrite * MTS_PACKET_SIZE];
+  size_t out_len = 0;
 
   uint8_t pat_cc = 0, pmt_cc = 0, video_cc = 0, audio_cc = 0;
 
+  void writePacket(const uint8_t *pkt) {
+    memcpy(out_buf + out_len, pkt, MTS_PACKET_SIZE);
+    out_len += MTS_PACKET_SIZE;
+    if (out_len == sizeof(out_buf)) flushPackets();
+  }
+
+  void flushPackets() {
+    if (out_len > 0) p_out->write(out_buf, out_len);
+    out_len = 0;
+  }
+
   uint64_t videoPts() {
+    if (is_real_time) return (uint64_t)(millis() - start_ms) * (MTS_CLOCK_HZ / 1000);
     float fps = video_cfg.fps > 0 ? video_cfg.fps : 25.0f;
     return (uint64_t)((double)video_frame_count * MTS_CLOCK_HZ / fps);
   }
@@ -909,7 +948,7 @@ class MuxerMTS : public Muxer {
       copyVirtual(pkt + pos, offset, chunk, header, header_len, payload, payload_len);
       pos += chunk;
       cc = (uint8_t)((cc + 1) & 0x0F);
-      p_out->write(pkt, MTS_PACKET_SIZE);
+      writePacket(pkt);
       offset += chunk;
       first = false;
     } while (offset < total_len);
@@ -984,7 +1023,7 @@ class MuxerMTS : public Muxer {
     pkt[pos++] = (uint8_t)(crc >> 8);
     pkt[pos++] = (uint8_t)crc;
 
-    p_out->write(pkt, MTS_PACKET_SIZE);
+    writePacket(pkt);
   }
 
   /// Writes the Program Map Section: the video track (PCR_PID is always
@@ -1027,7 +1066,7 @@ class MuxerMTS : public Muxer {
     pkt[pos++] = (uint8_t)(crc >> 8);
     pkt[pos++] = (uint8_t)crc;
 
-    p_out->write(pkt, MTS_PACKET_SIZE);
+    writePacket(pkt);
   }
 };
 

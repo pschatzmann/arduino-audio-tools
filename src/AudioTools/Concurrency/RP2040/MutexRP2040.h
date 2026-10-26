@@ -53,8 +53,39 @@ class MutexRP2040 : public MutexBase {
   mutex_t mtx;
 };
 
+/**
+ * @brief Recursive Mutex implementation using the RP2040 Pico SDK: the
+ * owning core/task can lock it multiple times and must unlock it the same
+ * number of times.
+ * @ingroup concurrency
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+
+class MutexRecursiveRP2040 : public MutexBase {
+ public:
+  MutexRecursiveRP2040() {
+    recursive_mutex_init(&mtx);
+  }
+  virtual ~MutexRecursiveRP2040() = default;
+
+  void lock() override {
+    recursive_mutex_enter_blocking(&mtx);
+  }
+  void unlock() override {
+    recursive_mutex_exit(&mtx);
+  }
+
+ protected:
+  recursive_mutex_t mtx;
+};
+
 /// @brief Default Mutex implementation using RP2040 Pico SDK
 /// @ingroup concurrency
 using Mutex = MutexRP2040;
+
+/// @brief Default Recursive Mutex implementation using RP2040 Pico SDK
+/// @ingroup concurrency
+using MutexRecursive = MutexRecursiveRP2040;
 
 }  // namespace audio_tools

@@ -260,6 +260,22 @@ struct USBAudioConfig : public AudioInfo {
   /// interfaces first, then call USB.begin() yourself.
   bool begin_usb = false;
 
+  // ── Host-specific (USBAudioHostStream only, ignored by devices) ───────────
+  /// Only accept an attached audio device with this vendor id (0 = any).
+  uint16_t host_vid = 0;
+  /// Only accept an attached audio device with this product id (0 = any).
+  uint16_t host_pid = 0;
+  /// TinyUSB root hub port used for host mode (e.g. 1 for Pico-PIO-USB).
+  uint8_t host_rhport = 0;
+  /// Timeout for class specific control requests in ms.
+  uint16_t host_ctrl_timeout_ms = 500;
+  /// When true, the format which was negotiated with the attached device is
+  /// stored in the configuration and reported to subscribed listeners via
+  /// setAudioInfo() (e.g. to update the I2S sample rate). When false, an
+  /// attached device which can not provide the requested sample_rate,
+  /// channels and bits_per_sample is not used.
+  bool host_apply_device_format = true;
+
   // ── Zephyr-specific ───────────────────────────────────────────────────────
   /// Terminal ID reported to Zephyr usbd_uac2 callbacks (ignored on TinyUSB).
   /// TX_MODE: Output Terminal ID (device → host, ISO IN).
@@ -299,7 +315,11 @@ struct USBAudioConfig : public AudioInfo {
            enable_ep_in_flow_control == other.enable_ep_in_flow_control &&
            enable_ep_in_rate_tracking == other.enable_ep_in_rate_tracking &&
 
-           begin_usb == other.begin_usb && terminal_id == other.terminal_id;
+           begin_usb == other.begin_usb && terminal_id == other.terminal_id &&
+
+           host_vid == other.host_vid && host_pid == other.host_pid &&
+           host_rhport == other.host_rhport &&
+           host_apply_device_format == other.host_apply_device_format;
   }
 
   bool operator!=(const USBAudioConfig& other) { return !(*this == other); }

@@ -837,7 +837,12 @@ class WAVDecoder : public AudioDecoder {
   }
 
   /// Decodes the header data: Returns the start pos of the data
+  /// Returns the start of the audio data relative to `in_ptr` (0: header
+  /// not complete yet)
   int decodeHeader(uint8_t *in_ptr, size_t in_size) {
+    // bytes of earlier writes that are already in the header buffer: the
+    // data position found below is relative to the start of that buffer
+    int buffered_before = (int)header.available();
     // we expect at least the full header
     header.write(in_ptr, in_size);
     if (!header.isDataComplete()) {
@@ -858,6 +863,8 @@ class WAVDecoder : public AudioDecoder {
       header.dumpHeader();
       return 0;
     }
+    // determine the data start before parse(), which consumes the buffer
+    int data_start = header.getDataPos();
     // parse header
     if (!header.parse()) {
       LOGE("WAV header parsing failed");
@@ -891,7 +898,12 @@ class WAVDecoder : public AudioDecoder {
       LOGE("WAV format not supported: 0x%04X", (unsigned)format);
       logSupportedFormats();
     }
-    return header.getDataPos();
+    // relative to this write (the 'data' tag is never in earlier writes,
+    // otherwise the header would have been complete already)
+    int result = data_start - buffered_before;
+    if (result < 0) result = 0;
+    if (result > (int)in_size) result = (int)in_size;
+    return result;
   }
 
   /// Logs (at error level) the WAV format tags this instance can currently

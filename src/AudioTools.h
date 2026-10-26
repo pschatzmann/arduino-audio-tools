@@ -36,7 +36,7 @@
 /**
  * @defgroup usb USB
  * @ingroup communications
- * @brief USB Audio V 2.0
+ * @brief USB Audio: Device (UAC2) and Host (UAC1/UAC2)
  */
 
 /**

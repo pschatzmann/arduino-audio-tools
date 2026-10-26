@@ -6,7 +6,6 @@
 #  define PIN_I2S_MCK -1
 #endif
 
-
 namespace audio_tools {
 
 /// Select left or right channel when number of channels = 1
@@ -61,9 +60,9 @@ class I2SConfigESP32V1 : public AudioInfo {
     int pin_data = -1; // rx or tx pin dependent on mode: tx pin for RXTX_MODE
     int pin_data_rx = -1; // rx pin for RXTX_MODE
     int pin_mck = PIN_I2S_MCK;
-    /// total buffer is max buffer_count * buffer_size
+    /// number of DMA buffers (total buffer is buffer_count * buffer_size)
     int buffer_count = I2S_BUFFER_COUNT;
-    /// total buffer is max buffer_count * buffer_size
+    /// size of each DMA buffer in frames (total buffer is buffer_count * buffer_size frames)
     int buffer_size = I2S_BUFFER_SIZE;
     bool use_apll = I2S_USE_APLL; 
     bool auto_clear = I2S_AUTO_CLEAR;
@@ -82,7 +81,7 @@ class I2SConfigESP32V1 : public AudioInfo {
       LOGI("number of channels: %d", channels);
       LOGI("signal_type: %s", i2s_signal_types[signal_type]);      
       LOGI("buffer_count:%d", buffer_count);
-      LOGI("buffer_size:%d", buffer_size);
+      LOGI("buffer_size (frames):%d", buffer_size);
       LOGI("auto_clear: %s",auto_clear? "true" : "false");
       if (signal_type==Digital){
         LOGI("i2s_format: %s", i2s_formats[i2s_format]);      

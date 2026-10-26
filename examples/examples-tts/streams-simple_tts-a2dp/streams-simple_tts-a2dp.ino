@@ -46,7 +46,7 @@ void setup(){
 
 
 void loop() {
-    // speach output
+    // speech output
     Serial.print("Providing data: ");
     Serial.println(number);
 

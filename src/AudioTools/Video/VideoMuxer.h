@@ -155,7 +155,8 @@ class VideoMuxer {
     }
     if (have_audio && p_audio_encoder != nullptr) {
       p_audio_encoder->setAudioInfo(audio_info);
-      p_audio_encoder->setOutput(*p_muxer);
+      audio_sink.begin(*p_muxer);
+      p_audio_encoder->setOutput(audio_sink);
       p_audio_encoder->begin();
     }
 
@@ -194,6 +195,7 @@ class VideoMuxer {
   VideoFrameSource* p_video = nullptr;
   VideoEncoder* p_video_encoder = nullptr;
   MuxerVideoSink video_sink;
+  MuxerAudioSink audio_sink;
   bool have_audio = false;
   bool have_video = false;
   float video_fps = 0;

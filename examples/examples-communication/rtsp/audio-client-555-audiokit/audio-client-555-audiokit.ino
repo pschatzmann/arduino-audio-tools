@@ -20,7 +20,7 @@ AudioClientRTSP rtsp(1024);
 
 void setup(){
     rtsp.setLogin("ssid", "password");
-    rtsp.begin("https://samples.mplayerhq.hu/A-codecs/MP3/01%20-%20Charity%20Case.mp3", out_mp3);
+    rtsp.begin("rtsp://192.168.1.38:8554/test.mp3", out_mp3);  // replace with the URL of your RTSP server
 }
 
 void loop() {
