@@ -724,7 +724,7 @@ class ESPNowStream : public BaseStream {
 
 #if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 5, 0)
     if (cfg.oui) {
-      esp_now_set_user_oui((uint8_t*)cfg.oui);
+      esp_now_set_user_oui((uint8_t*)&cfg.oui);
     }
 #endif
 
