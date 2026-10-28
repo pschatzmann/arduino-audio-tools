@@ -16,7 +16,5 @@ var searchData=
   ['rtsp_5fsdp_5fbuffer_5fsize_13',['RTSP_SDP_BUFFER_SIZE',['../_r_t_s_p_session_8h.html#a4a04faa1ed854eca2b95110a63cf8991',1,'RTSPSession.h']]],
   ['rtsp_5fsink_5fbuffer_5fsize_14',['RTSP_SINK_BUFFER_SIZE',['../_r_t_s_p_client555_8h.html#ae931dbfabebc04f74790020823890ae2',1,'RTSPClient555.h']]],
   ['rtsp_5fsmall_5fbuffer_5fsize_15',['RTSP_SMALL_BUFFER_SIZE',['../_r_t_s_p_session_8h.html#a925ffc91f1f8d39f05ac7ade9b3eb372',1,'RTSPSession.h']]],
-  ['rtsp_5furl_5fbuffer_5fsize_16',['RTSP_URL_BUFFER_SIZE',['../_r_t_s_p_session_8h.html#ab7e9e0162fccb2b53c84a5ed1c0be40f',1,'RTSPSession.h']]],
-  ['rx_5fbuffer_5fsize_17',['RX_BUFFER_SIZE',['../_constants_arduino_8h.html#a739a2a1a0047c98ac1b18ecd25dac092',1,'RX_BUFFER_SIZE:&#160;ConstantsArduino.h'],['../_constants_e_s_p32_8h.html#a739a2a1a0047c98ac1b18ecd25dac092',1,'RX_BUFFER_SIZE:&#160;ConstantsESP32.h']]],
-  ['rx_5fcount_18',['RX_COUNT',['../_constants_arduino_8h.html#aa1a4604fce40f5360534b757cb3f3c32',1,'RX_COUNT:&#160;ConstantsArduino.h'],['../_constants_e_s_p32_8h.html#aa1a4604fce40f5360534b757cb3f3c32',1,'RX_COUNT:&#160;ConstantsESP32.h']]]
+  ['rtsp_5furl_5fbuffer_5fsize_16',['RTSP_URL_BUFFER_SIZE',['../_r_t_s_p_session_8h.html#ab7e9e0162fccb2b53c84a5ed1c0be40f',1,'RTSPSession.h']]]
 ];

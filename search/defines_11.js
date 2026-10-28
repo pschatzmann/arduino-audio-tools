@@ -9,7 +9,5 @@ var searchData=
   ['ts_5fpacket_5fsize_6',['TS_PACKET_SIZE',['../_codec_m_t_s_8h.html#af79954e736316ebc4a67ff698abec67a',1,'CodecMTS.h']]],
   ['tu_5faudio_5fedpt_5fxfer_7',['TU_AUDIO_EDPT_XFER',['../_u_s_b_audio_backend_tiny_u_s_b_8h.html#a582fe96fdd14436b3c167b4c8525b7cf',1,'USBAudioBackendTinyUSB.h']]],
   ['tu_5fsof_5fenable_8',['TU_SOF_ENABLE',['../_u_s_b_audio_backend_tiny_u_s_b_8h.html#ac10dce08c408c86f00297a65f2c50246',1,'USBAudioBackendTinyUSB.h']]],
-  ['two_5fpath_9',['TWO_PATH',['../_m_d_f_echo_cancellation_config_8h.html#afb5bcfee6ef2d241fb689d4b6c3d7db0',1,'MDFEchoCancellationConfig.h']]],
-  ['tx_5fbuffer_5fsize_10',['TX_BUFFER_SIZE',['../_constants_arduino_8h.html#a9ab33647617098646990fe263600b650',1,'TX_BUFFER_SIZE:&#160;ConstantsArduino.h'],['../_constants_e_s_p32_8h.html#a9ab33647617098646990fe263600b650',1,'TX_BUFFER_SIZE:&#160;ConstantsESP32.h']]],
-  ['tx_5fcount_11',['TX_COUNT',['../_constants_arduino_8h.html#a578092cda6c6ba1efc57aaf44393adbe',1,'TX_COUNT:&#160;ConstantsArduino.h'],['../_constants_e_s_p32_8h.html#a578092cda6c6ba1efc57aaf44393adbe',1,'TX_COUNT:&#160;ConstantsESP32.h']]]
+  ['two_5fpath_9',['TWO_PATH',['../_m_d_f_echo_cancellation_config_8h.html#afb5bcfee6ef2d241fb689d4b6c3d7db0',1,'MDFEchoCancellationConfig.h']]]
 ];

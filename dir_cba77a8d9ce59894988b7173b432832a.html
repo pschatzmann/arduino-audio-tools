@@ -86,22 +86,22 @@ Files</h2></td></tr>
 <tr class="memitem:rs_2Ehpp" id="r_rs_2Ehpp"><td class="memItemLeft" align="right" valign="top"><a href="rs_8hpp_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rs_8hpp.html">rs.hpp</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md12"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md19"></a>
 Reed-Solomon</h1>
 <p>Reed Solomon BCH encoder and decoder library</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md13"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md20"></a>
 Overview</h1>
 <p>This <a class="el" href="namespace_r_s.html" title="AudioTools internal: Reed-Solomon.">RS</a> implementation was designed for embedded purposes, so all the memory allocations performed on the stack.<br  />
  If somebody wants to reimplement memory management with heap usage, pull requests are welcome</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md14"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md21"></a>
 Getting the source</h1>
 <p>If you want only Reed-Solomon code, just clone repository.<br  />
  If you want to get tests and examples also, do </p><div class="fragment"><div class="line">git clone --recursive git@github.com:mersinvald/Reed-Solomon.git</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md15"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md22"></a>
 Build</h1>
 <p>There is no need in building <a class="el" href="namespace_r_s.html" title="AudioTools internal: Reed-Solomon.">RS</a> library, cause all the implementation is in headers.<br  />
  To build tests and examples simply run <b>make</b> in the folder with cloned repo and executables will emerge in the ./build folder</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md16"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md23"></a>
 Usage</h1>
 <p>All the Reed-Solomon code is in folder <b>include</b>, you just need to include header <b><a class="el" href="rs_8hpp.html">rs.hpp</a></b></p>
 <p>Template class ReedSolomon accepts two template arguments: message length and ecc length. <br  />
@@ -130,10 +130,10 @@ Usage</h1>
 <div class="line">std::cout &lt;&lt; &quot;Repaired:  &quot; &lt;&lt; repaired &lt;&lt; std::endl;</div>
 <div class="line"> </div>
 <div class="line">std::cout &lt;&lt; ((memcmp(message, repaired, msglen) == 0) ? &quot;SUCCESS&quot; : &quot;FAILURE&quot;) &lt;&lt; std::endl;</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md17"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md24"></a>
 Regards</h1>
 <p>Huge thanks to authors of <a href="https://en.wikiversity.org/wiki/Reed–Solomon_codes_for_coders">wikiversity page about Reed-Solomon BCH</a> </p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md18"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md25"></a>
 Related projects</h1>
 <p><a href="https://github.com/simonyipeter/Arduino-FEC">Arduino Reed-Solomon Forward Error Correction library</a> </p>
 </div><!-- contents -->

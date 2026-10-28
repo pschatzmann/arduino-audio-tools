@@ -73,7 +73,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#groups">Topics</a> &#124;
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle"><div class="title">Communications <div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a></div></div></div>
 </div><!--header-->
 <div class="contents">
@@ -104,16 +105,26 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A BaseBuffer&lt;uint8_t&gt; that wraps a raw (unresampled) backing buffer and transparently resamples on read to correct jitter and compensate for the slightly different clock rates between an audio source and audio target. Use separate tasks to write and read the data. Also make sure that you protect the access with a mutex or provide a thread-safe backing buffer!  <a href="classaudio__tools_1_1_adaptive_resampling_buffer.html#details">More...</a><br /></td></tr>
 <tr class="memitem:AdaptiveResamplingStream" id="r_AdaptiveResamplingStream"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_adaptive_resampling_stream.html">AdaptiveResamplingStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">An Audio <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> backed by a buffer (queue) which tries to correct jitter and automatically adjusts for the slightly different clock rates between an audio source and audio target. Use separate tasks to write and read the data. Also make sure that you protect the access with a mutex or provide a thread-safe buffer!  <a href="classaudio__tools_1_1_adaptive_resampling_stream.html#details">More...</a><br /></td></tr>
-<tr class="memitem:AudioBLEClient" id="r_AudioBLEClient"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_b_l_e_client.html">AudioBLEClient</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple BLE client that implements the serial protocol, so that it can be used to send and recevie audio. In BLE terminology this is a Central.  <a href="classaudio__tools_1_1_audio_b_l_e_client.html#details">More...</a><br /></td></tr>
-<tr class="memitem:AudioBLEServer" id="r_AudioBLEServer"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_b_l_e_server.html">AudioBLEServer</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple BLE server that implements the serial protocol, so that it can be used to send and recevie audio. In BLE terminologiy this is a Peripheral. This implementation uses the ArduinoBLE library! This is working only correctly if the client sets the max MTU to a value &gt;= 256. Otherwise some of the transmitted information gets silently dropped.  <a href="classaudio__tools_1_1_audio_b_l_e_server.html#details">More...</a><br /></td></tr>
-<tr class="memitem:AudioBLEStream" id="r_AudioBLEStream"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_b_l_e_stream.html">AudioBLEStream</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transmit and receive data via BLE using a Serial API. The following additional experimental features are offered: setFramed(true) tries to keep the original write sizes; setAudioInfoActive(true) informs about changes in the audio info.  <a href="classaudio__tools_1_1_audio_b_l_e_stream.html#details">More...</a><br /></td></tr>
 <tr class="memitem:AudioClientRTSP" id="r_AudioClientRTSP"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_client_r_t_s_p.html">AudioClientRTSP</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple <a class="el" href="classaudio__tools_1_1_r_t_s_p_client.html" title="Efficient RTSP client for UDP/RTP audio with decoder pipeline.">RTSPClient</a> using <a href="https://github.com/pschatzmann/arduino-live555">https://github.com/pschatzmann/arduino-live555</a>.  <a href="classaudio__tools_1_1_audio_client_r_t_s_p.html#details">More...</a><br /></td></tr>
 <tr class="memitem:AudioLoRa" id="r_AudioLoRa"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_lo_ra.html">AudioLoRa</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends and receives audio over a LoRa radio link (via the sandeepmistry/arduino-LoRa library) as a regular AudioTools <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>, so it can be dropped into a <a class="el" href="group__tools.html#gaa917267e241cc74cd4610bf8674a6e93" title="We provide the typeless StreamCopy.">StreamCopy</a> pipeline like any other audio source/sink &ndash; e.g. <span class="tt"><a class="el" href="group__tools.html#gaa917267e241cc74cd4610bf8674a6e93" title="We provide the typeless StreamCopy.">StreamCopy(audioLoRa, i2sMic)</a></span> to transmit, or <span class="tt"><a class="el" href="group__tools.html#gaa917267e241cc74cd4610bf8674a6e93" title="We provide the typeless StreamCopy.">StreamCopy(i2sSpeaker, audioLoRa)</a></span> to receive. See <a class="el" href="structaudio__tools_1_1_audio_lo_ra_config.html" title="Configuration for AudioLoRa.">AudioLoRaConfig</a>'s documentation first for why, even with its audio-tuned defaults, this only works at all in a narrow envelope (very low bitrate, short clips/bursts).  <a href="classaudio__tools_1_1_audio_lo_ra.html#details">More...</a><br /></td></tr>
+<tr class="memitem:BLESerialClientArduinoBLE" id="r_BLESerialClientArduinoBLE"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_b_l_e_serial_client_arduino_b_l_e.html">BLESerialClientArduinoBLE</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A BLE client that implements a serial protocol, so that it can be used to send and receive audio. In BLE terminology this is a Central. This implementation uses the ArduinoBLE library.  <a href="classaudio__tools_1_1_b_l_e_serial_client_arduino_b_l_e.html#details">More...</a><br /></td></tr>
+<tr class="memitem:BLESerialClientBase" id="r_BLESerialClientBase"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_b_l_e_serial_client_base.html">BLESerialClientBase</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic BLE serial client logic which is independent of the BLE API. In BLE terminology the client is a Central: it scans for a server that provides the service UUID and connects to it.  <a href="classaudio__tools_1_1_b_l_e_serial_client_base.html#details">More...</a><br /></td></tr>
+<tr class="memitem:BLESerialClientESP32" id="r_BLESerialClientESP32"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_b_l_e_serial_client_e_s_p32.html">BLESerialClientESP32</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A BLE client that implements a serial protocol, so that it can be used to send and receive audio. In BLE terminology this is a Central. This implementation uses the BLE library of the ESP32 Arduino core (Bluedroid or NimBLE).  <a href="classaudio__tools_1_1_b_l_e_serial_client_e_s_p32.html#details">More...</a><br /></td></tr>
+<tr class="memitem:BLESerialPacketBuffer" id="r_BLESerialPacketBuffer"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_b_l_e_serial_packet_buffer.html">BLESerialPacketBuffer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">FIFO for BLE packets: in framed mode the packet boundaries are kept, otherwise the data is handled as a byte stream. All methods are protected by the optional mutex, so that the buffer can be filled and consumed by different tasks.  <a href="classaudio__tools_1_1_b_l_e_serial_packet_buffer.html#details">More...</a><br /></td></tr>
+<tr class="memitem:BLESerialServerArduinoBLE" id="r_BLESerialServerArduinoBLE"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_b_l_e_serial_server_arduino_b_l_e.html">BLESerialServerArduinoBLE</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A BLE server that implements a serial protocol, so that it can be used to send and receive audio. In BLE terminology this is a Peripheral. This implementation uses the ArduinoBLE library.  <a href="classaudio__tools_1_1_b_l_e_serial_server_arduino_b_l_e.html#details">More...</a><br /></td></tr>
+<tr class="memitem:BLESerialServerBase" id="r_BLESerialServerBase"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_b_l_e_serial_server_base.html">BLESerialServerBase</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic BLE serial server logic which is independent of the BLE API. In BLE terminology the server is a Peripheral: the client writes the data which is received with <a class="el" href="classaudio__tools_1_1_b_l_e_serial_server_base.html#a4c5c6275ddee80eb02839356b6185c0b">readBytes()</a> and reads the data which was provided with <a class="el" href="classaudio__tools_1_1_b_l_e_serial_server_base.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>.  <a href="classaudio__tools_1_1_b_l_e_serial_server_base.html#details">More...</a><br /></td></tr>
+<tr class="memitem:BLESerialServerESP32" id="r_BLESerialServerESP32"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_b_l_e_serial_server_e_s_p32.html">BLESerialServerESP32</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A BLE server that implements a serial protocol, so that it can be used to send and receive audio. In BLE terminology this is a Peripheral. This implementation uses the BLE library of the ESP32 Arduino core (Bluedroid or NimBLE).  <a href="classaudio__tools_1_1_b_l_e_serial_server_e_s_p32.html#details">More...</a><br /></td></tr>
+<tr class="memitem:BLESerialStream" id="r_BLESerialStream"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_b_l_e_serial_stream.html">BLESerialStream</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Common functionality of the BLE serial server and client: data is exchanged via two characteristics like a serial connection. The audio info can optionally be exchanged via a third characteristic.  <a href="classaudio__tools_1_1_b_l_e_serial_stream.html#details">More...</a><br /></td></tr>
 <tr class="memitem:ESPNowStream" id="r_ESPNowStream"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_e_s_p_now_stream.html">ESPNowStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ESPNow as Arduino <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>. When use_send_ack is true we prevent any buffer overflows by blocking writes until the previous packet has been confirmed. When no acknowledgments are used, you might need to throttle the send speed to prevent any buffer overflow on the receiver side.  <a href="classaudio__tools_1_1_e_s_p_now_stream.html#details">More...</a><br /></td></tr>
 <tr class="memitem:HDLCStream" id="r_HDLCStream"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html">HDLCStream</a></td></tr>
@@ -132,9 +143,49 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">VBAN Audio Source and Sink for the ESP32. For further details please see <a href="https://vb-audio.com/Voicemeeter/vban.htm">https://vb-audio.com/Voicemeeter/vban.htm</a> . Inspired by <a href="https://github.com/rkinnett/ESP32-VBAN-Audio-Source/tree/master">https://github.com/rkinnett/ESP32-VBAN-Audio-Source/tree/master</a> and <a href="https://github.com/rkinnett/ESP32-VBAN-Network-Audio-Player">https://github.com/rkinnett/ESP32-VBAN-Network-Audio-Player</a>.  <a href="classaudio__tools_1_1_v_b_a_n_stream.html#details">More...</a><br /></td></tr>
 <tr class="memitem:WebSocketOutput" id="r_WebSocketOutput"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_web_socket_output.html">WebSocketOutput</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple wrapper class that lets you use the standard Arduino <a class="el" href="classaudio__tools_1_1_print.html">Print</a> class output commands to send audio data over a WebSocket connection. Uses <a href="https://github.com/Links2004/arduinoWebSockets">https://github.com/Links2004/arduinoWebSockets</a>.  <a href="classaudio__tools_1_1_web_socket_output.html#details">More...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:gad10748b13144b9c2bae5cf57e043a73a" id="r_gad10748b13144b9c2bae5cf57e043a73a"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gad10748b13144b9c2bae5cf57e043a73a">BLESerialClient</a> = <a class="el" href="classaudio__tools_1_1_b_l_e_serial_client_e_s_p32.html">BLESerialClientESP32</a></td></tr>
+<tr class="memdesc:gad10748b13144b9c2bae5cf57e043a73a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default BLE serial client for the platform.  <br /></td></tr>
+<tr class="memitem:ga5ace2a0e5b462b9f597a6199f53f1815" id="r_ga5ace2a0e5b462b9f597a6199f53f1815"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga5ace2a0e5b462b9f597a6199f53f1815">BLESerialServer</a> = <a class="el" href="classaudio__tools_1_1_b_l_e_serial_server_e_s_p32.html">BLESerialServerESP32</a></td></tr>
+<tr class="memdesc:ga5ace2a0e5b462b9f597a6199f53f1815"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default BLE serial server for the platform.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <p>Transmit Audio Please note that the standard Arduino WiFiClient and WifiServer (to use TCP/IP), Serial or BluetoothSerial are also supported. </p>
+<a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
+<a id="gad10748b13144b9c2bae5cf57e043a73a" name="gad10748b13144b9c2bae5cf57e043a73a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad10748b13144b9c2bae5cf57e043a73a">&#9670;&#160;</a></span>BLESerialClient</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#gad10748b13144b9c2bae5cf57e043a73a">BLESerialClient</a> = <a class="el" href="classaudio__tools_1_1_b_l_e_serial_client_e_s_p32.html">BLESerialClientESP32</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Default BLE serial client for the platform. </p>
+
+</div>
+</div>
+<a id="ga5ace2a0e5b462b9f597a6199f53f1815" name="ga5ace2a0e5b462b9f597a6199f53f1815"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5ace2a0e5b462b9f597a6199f53f1815">&#9670;&#160;</a></span>BLESerialServer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#ga5ace2a0e5b462b9f597a6199f53f1815">BLESerialServer</a> = <a class="el" href="classaudio__tools_1_1_b_l_e_serial_server_e_s_p32.html">BLESerialServerESP32</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Default BLE serial server for the platform. </p>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

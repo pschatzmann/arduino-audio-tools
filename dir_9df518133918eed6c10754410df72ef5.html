@@ -104,7 +104,7 @@ Files</h2></td></tr>
 <tr class="memitem:USBAudioStreamBase_2Eh" id="r_USBAudioStreamBase_2Eh"><td class="memItemLeft" align="right" valign="top"><a href="_u_s_b_audio_stream_base_8h_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_u_s_b_audio_stream_base_8h.html">USBAudioStreamBase.h</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md41"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md48"></a>
 USB Audio</h1>
 <p>This folder provides USB Audio in both USB roles, with the same stream API:</p>
 <table class="markdownTable">
@@ -126,7 +126,7 @@ USB Audio</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">RXTX_MODE</span>  </td><td class="markdownTableBodyNone">both  </td><td class="markdownTableBodyNone">both (headset)  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md42"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md49"></a>
 USB Audio Host</h1>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_audio_tools_8h.html">AudioTools.h</a>&quot;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_u_s_b_audio_host_stream_8h.html">AudioTools/Communication/USB/USBAudioHostStream.h</a>&quot;</span></div>
@@ -150,13 +150,13 @@ USB Audio Host</h1>
 <div class="ttc" id="a_main_8h_html_afe461d27b9c48d5921c00d521181f12f"><div class="ttname"><a href="_main_8h.html#afe461d27b9c48d5921c00d521181f12f">loop</a></div><div class="ttdeci">void loop()</div></div>
 <div class="ttc" id="a_u_s_b_audio_host_stream_8h_html"><div class="ttname"><a href="_u_s_b_audio_host_stream_8h.html">USBAudioHostStream.h</a></div></div>
 </div><!-- fragment --><p>See the <span class="tt">usb-host-*</span> sketches in <span class="tt">examples/examples-communication/usb</span>.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md43"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md50"></a>
 Format negotiation</h2>
 <p>The requested <span class="tt">sample_rate</span>, <span class="tt">channels</span> and <span class="tt">bits_per_sample</span> are matched against the alternate settings of the attached device. If the device cannot provide them and <span class="tt">host_apply_device_format</span> is true (the default), the closest format is used and reported to the listeners registered with <span class="tt">addNotifyAudioChange()</span>. In <span class="tt">RXTX_MODE</span> the microphone format is reported; use <span class="tt">audioInfoTx()</span> for the speaker format. Set <span class="tt">host_apply_device_format = false</span> to reject a device that does not match.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md44"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md51"></a>
 Volume, mute and sample rate</h2>
 <p><span class="tt">setVolume()</span> and <span class="tt">setMute()</span> are sent to the device's Feature Unit, for all active directions. The 0.0–1.0 volume is mapped linearly onto the dB range the device reports. <span class="tt">setAudioInfo()</span> with a new sample rate re-negotiates the streams (alt setting 0, set the rate, alt setting n).</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md45"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md52"></a>
 Supported platforms</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -175,7 +175,7 @@ Supported platforms</h2>
 <td class="markdownTableBodyNone">Renesas (UNO R4), Zephyr  </td><td class="markdownTableBodyNone">not supported  </td><td class="markdownTableBodyNone">the cores have no USB host stack  </td></tr>
 </table>
 <p>With TinyUSB on a single-threaded platform, the USB stack runs inside <span class="tt">readBytes()</span> and <span class="tt">write()</span> (<span class="tt">serviceUSB()</span>). With <span class="tt">USE_FREERTOS</span>, or on ESP32, a dedicated task runs it instead.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md46"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md53"></a>
 Limitations</h2>
 <ul>
 <li>One audio device at a time (use <span class="tt">host_vid</span> / <span class="tt">host_pid</span> to pick one).</li>
