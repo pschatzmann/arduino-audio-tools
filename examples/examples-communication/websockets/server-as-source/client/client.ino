@@ -14,7 +14,7 @@
 WiFiMulti WiFiMulti;
 WebSocketsClient webSocket;
 // audio
-AudioInfo info(44100, 2, 16);
+AudioInfo info(22050, 1, 16);  // 44100 Hz stereo is too much for most WiFi links
 AudioBoardStream i2s(AudioKitEs8388V1);  // Access I2S as stream
 
 // write audio to i2s
@@ -28,7 +28,7 @@ void setup() {
   Serial.begin(115200);
   AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
-  // connect to wifk
+  // connect to wifi
   WiFiMulti.addAP("SSID", "passpasspass");
   while (WiFiMulti.run() != WL_CONNECTED) {
     delay(100);
@@ -41,7 +41,7 @@ void setup() {
   // event handler
   webSocket.onEvent(webSocketEvent);
 
-  // try ever 5000 again if connection has failed
+  // try every 5000 ms again if connection has failed
   webSocket.setReconnectInterval(5000);
 
   // start i2s

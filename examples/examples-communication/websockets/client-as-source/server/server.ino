@@ -14,7 +14,7 @@
 
 WiFiMulti WiFiMulti;
 WebSocketsServer webSocket(81);
-AudioInfo info(44100, 2, 16);
+AudioInfo info(22050, 1, 16);  // 44100 Hz stereo is too much for most WiFi links
 AudioBoardStream i2s(AudioKitEs8388V1);  // Access I2S as stream
 
 /// Just output the audio data

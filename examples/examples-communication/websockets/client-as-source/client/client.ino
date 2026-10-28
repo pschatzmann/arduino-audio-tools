@@ -1,6 +1,6 @@
 /**
  * @brief A simple WebSocket client sketch that sends out some PCM audio
- * data using the https://github.com/Links2004/arduinoWebSockets library.AdapterAudioStreamToAudioOutput.AdapterAudioStreamToAudioOutput
+ * data using the https://github.com/Links2004/arduinoWebSockets library.
  * The WebSocket API is asynchronous, so we need to slow down the sending
  * to the playback speed, to prevent any buffer overflows at the receiver.
  * @author Phil Schatzmann
@@ -16,7 +16,7 @@ WiFiMulti WiFiMulti;
 WebSocketsClient webSocket;
 WebSocketOutput out(webSocket);
 // audio
-AudioInfo info(44100, 2, 16);
+AudioInfo info(22050, 1, 16);  // 44100 Hz stereo is too much for most WiFi links
 SineGenerator<int16_t> sineWave(32000);
 GeneratedSoundStream<int16_t> sound(sineWave);
 Throttle throttle(out);
@@ -35,7 +35,7 @@ void setup() {
   // start client connecting to server address, port and URL
   webSocket.begin("192.168.1.34", 81, "/");
 
-  // try ever 5000 again if connection has failed
+  // try every 5000 ms again if connection has failed
   webSocket.setReconnectInterval(5000);
 
   sineWave.begin(info, N_B4);

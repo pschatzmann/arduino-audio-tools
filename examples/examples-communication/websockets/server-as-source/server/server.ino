@@ -1,7 +1,7 @@
 /**
  * @brief A simple WebSocket server sketch using the
  * https://github.com/Links2004/arduinoWebSockets library to send out some
- * PCM audio data when some clients are connnected.
+ * PCM audio data when some clients are connected.
  * The WebSocket API is asynchronous, so we need to slow down the sending
  * to the playback speed, to prevent any buffer overflows at the receiver.
  * @author Phil Schatzmann
@@ -18,11 +18,11 @@ WebSocketsServer webSocket(81);
 WebSocketOutput out(webSocket);
 
 // audio
-AudioInfo info(44100, 2, 16);
+AudioInfo info(22050, 1, 16);  // 44100 Hz stereo is too much for most WiFi links
 SineGenerator<int16_t> sineWave(32000);
 GeneratedSoundStream<int16_t> sound(sineWave);
 Throttle throttle(out);
-StreamCopy copier(throttle, sound);  // copies sound into i2s
+StreamCopy copier(throttle, sound);  // copies sound to the websocket
 
 void setup() {
   // Serial.begin(921600);
