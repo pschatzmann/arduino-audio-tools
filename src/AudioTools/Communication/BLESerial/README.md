@@ -123,3 +123,13 @@ buffers of 4096 bytes. You can change the size with `setRxBufferSize()` and
 With ArduinoBLE the BLE events are processed when you call `readBytes()`,
 `available()`, `write()`, `availableForWrite()` or `connected()`: make sure
 you call them regularly in your `loop()`.
+
+## Reconnect
+
+When the connection is lost, the client scans for the server again and tries
+to reconnect. With ArduinoBLE a connection is considered lost after
+`BLE_SERIAL_MAX_READ_ERRORS` (3) failed reads, and a scan that did not find
+the server is restarted after `BLE_SERIAL_SCAN_RESTART_MS` (10 s). Avoid
+outputs that block the loop for a long time on the receiving side (e.g. a
+`CsvOutput` to a USB serial port that is not read by the PC): this can cause
+the loss of the connection.

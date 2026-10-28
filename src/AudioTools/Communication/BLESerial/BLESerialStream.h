@@ -495,7 +495,8 @@ class BLESerialClientBase : public BLESerialStream {
     rx_buffer.clear();
     write_buffer.resize(packetSize());
     write_buffer.reset();
-    read_packet.resize(getMTU());
+    // the server might use a bigger MTU than we requested
+    read_packet.resize(BLE_SERIAL_MAX_VALUE_LEN);
     if (is_audio_info_active) {
       // the side that defined the audio info is the source
       if (is_audio_info_defined) {

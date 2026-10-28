@@ -3,6 +3,16 @@
 #include <ArduinoBLE.h>
 #include "BLESerialStream.h"
 
+/// Number of consecutive failed reads after which we reconnect
+#ifndef BLE_SERIAL_MAX_READ_ERRORS
+#define BLE_SERIAL_MAX_READ_ERRORS 3
+#endif
+
+/// Time in ms after which a scan without result is restarted
+#ifndef BLE_SERIAL_SCAN_RESTART_MS
+#define BLE_SERIAL_SCAN_RESTART_MS 10000
+#endif
+
 namespace audio_tools {
 
 /**
@@ -24,6 +34,7 @@ class BLESerialClientArduinoBLE : public BLESerialClientBase {
     flush();
     is_started = false;
     is_setup = false;
+    is_scanning = false;
     if (peripheral) peripheral.disconnect();
     BLE.end();
   }
@@ -34,6 +45,10 @@ class BLESerialClientArduinoBLE : public BLESerialClientBase {
   BLECharacteristic ch02_char;  // write
   BLECharacteristic info_char;
   bool is_setup = false;
+  bool is_scanning = false;
+  int read_errors = 0;
+  uint32_t scan_start_ms = 0;
+  const char *local_name = "";
 
   static BLESerialClientArduinoBLE *&selfBLESerialClientArduinoBLE() {
     static BLESerialClientArduinoBLE *self = nullptr;
@@ -42,8 +57,11 @@ class BLESerialClientArduinoBLE : public BLESerialClientBase {
 
   bool startClient(const char *localName) override {
     if (!BLE.begin()) return false;
+    local_name = localName;
     BLE.setLocalName(localName);
-    return BLE.scanForUuid(BLE_SERIAL_SERVICE_UUID) != 0;
+    is_scanning = false;
+    startScan();
+    return is_scanning;
   }
 
   bool isConnected() override {
@@ -52,11 +70,14 @@ class BLESerialClientArduinoBLE : public BLESerialClientBase {
   }
 
   bool connect() override {
+    // we lost the connection or the scan could not be started yet
     is_setup = false;
+    startScan();
     BLEDevice device = BLE.available();
     if (!device) return false;
     TRACEI();
     BLE.stopScan();
+    is_scanning = false;
     peripheral = device;
 
     LOGI("BLESerial: connecting to %s", peripheral.address().c_str());
@@ -88,19 +109,50 @@ class BLESerialClientArduinoBLE : public BLESerialClientBase {
     }
 
     LOGI("BLESerial: connected");
+    read_errors = 0;
     is_setup = true;
     return true;
   }
 
   /// disconnect and scan again
   bool reconnectLater() {
+    is_setup = false;
     if (peripheral) peripheral.disconnect();
-    BLE.scanForUuid(BLE_SERIAL_SERVICE_UUID);
+    startScan();
     return false;
   }
 
+  void startScan() {
+    if (is_scanning) {
+      // the scan can get stuck after a lost connection: restart it
+      if (millis() - scan_start_ms < BLE_SERIAL_SCAN_RESTART_MS) return;
+      BLE.stopScan();
+    }
+    // with duplicates: a server that was seen before is reported again
+    is_scanning = BLE.scanForUuid(BLE_SERIAL_SERVICE_UUID, true) != 0;
+    if (!is_scanning && is_started) {
+      // the BLE stack can get stuck after a lost connection: restart it
+      LOGW("BLESerial: scan failed: restarting BLE");
+      BLE.end();
+      if (BLE.begin()) {
+        BLE.setLocalName(local_name);
+        is_scanning = BLE.scanForUuid(BLE_SERIAL_SERVICE_UUID, true) != 0;
+      }
+    }
+    scan_start_ms = millis();
+    if (is_scanning) LOGI("BLESerial: scanning for %s", BLE_SERIAL_SERVICE_UUID);
+  }
+
   int readPacket(uint8_t *data, int maxLen) override {
-    if (!ch01_char.read()) return 0;
+    if (!ch01_char.read()) {
+      // e.g. the server was reset without disconnecting
+      if (++read_errors >= BLE_SERIAL_MAX_READ_ERRORS) {
+        LOGW("BLESerial: %d read errors: reconnecting", read_errors);
+        reconnectLater();
+      }
+      return 0;
+    }
+    read_errors = 0;
     int len = ch01_char.valueLength();
     if (len > maxLen) len = maxLen;
     memcpy(data, ch01_char.value(), len);
