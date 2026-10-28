@@ -97,12 +97,7 @@ class MiniAudioStream : public AudioStream {
         in.channels != config.channels ||
         in.bits_per_sample != config.bits_per_sample) {
       config.copyFrom(in);
-      if (is_active.load()) {
-        is_active.store(false);
-        is_playing.store(false);
-        // This will stop the device so no need to do that manually.
-        ma_device_uninit(&device_ma);
-
+      if (stopDevice()) {
         begin();
       }
     }
@@ -116,6 +111,8 @@ class MiniAudioStream : public AudioStream {
 
   bool begin() override {
     TRACEI();
+    // release an already started device
+    stopDevice();
     setupBuffers(config.buffer_size);
     if (config.is_output && !config.is_input)
       config_ma = ma_device_config_init(ma_device_type_playback);
@@ -165,14 +162,22 @@ class MiniAudioStream : public AudioStream {
   }
 
   void end() override {
-    is_active.store(false);
-    is_playing.store(false);
-    // This will stop the device so no need to do that manually.
-    ma_device_uninit(&device_ma);
+    stopDevice();
     // release buffer memory
     buffer_in.resize(0);
     buffer_out.resize(0);
     is_buffers_setup.store(false);
+  }
+
+  /// Stops and releases the device if it was started: returns true if it was
+  /// active. Not done for a device that was never started: e.g. the destructor
+  /// calls end() also if begin() was never called
+  bool stopDevice() {
+    if (!is_active.exchange(false)) return false;
+    is_playing.store(false);
+    // This will stop the device so no need to do that manually.
+    ma_device_uninit(&device_ma);
+    return true;
   }
 
   int availableForWrite() override {

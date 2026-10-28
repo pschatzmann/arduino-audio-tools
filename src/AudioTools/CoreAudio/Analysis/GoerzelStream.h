@@ -71,13 +71,17 @@ class GoertzelDetector {
     this->config = config;
     this->sample_count = 0;
 
-    if (config.target_frequency == 0.0f) {
+    if (config.target_frequency == 0.0f || config.sample_rate == 0) {
       return false;
     }
 
-    // Calculate the coefficient k and omega
-    float omega = (2.0f * M_PI * config.target_frequency) / config.sample_rate;
-    coeff = 2.0f * cos(omega);
+    // Calculate the coefficient k and omega: the trigonometric functions are
+    // only evaluated here and not for each block
+    double omega =
+        (2.0 * M_PI * config.target_frequency) / config.sample_rate;
+    cos_omega = cos(omega);
+    sin_omega = sin(omega);
+    coeff = 2.0f * cos_omega;
 
     // Reset state variables
     reset();
@@ -100,12 +104,10 @@ class GoertzelDetector {
     // Check if we've processed a complete block
     if (sample_count >= config.block_size) {
       // Calculate magnitude squared
-      float real = s1 - s2 * cos(2.0f * M_PI * config.target_frequency /
-                                 config.sample_rate);
-      float imag =
-          s2 * sin(2.0f * M_PI * config.target_frequency / config.sample_rate);
+      float real = s1 - s2 * cos_omega;
+      float imag = s2 * sin_omega;
       magnitude_squared = (real * real) + (imag * imag);
-      magnitude = sqrt(magnitude_squared);
+      magnitude = sqrtf(magnitude_squared);
       
       // Reset for next block
       reset();
@@ -173,6 +175,8 @@ class GoertzelDetector {
  protected:
   GoertzelConfig config;
   float coeff = 0.0f;
+  float cos_omega = 1.0f;
+  float sin_omega = 0.0f;
   void* reference = nullptr;
 
   // State variables
