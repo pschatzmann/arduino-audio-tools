@@ -87,6 +87,12 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">SPI master endpoint for remote audio sink configuration and PCM data transfer.  <a href="classaudio__tools_1_1_s_p_i_audio_master.html#details">More...</a><br /></td></tr>
 <tr class="memitem:SPIAudioSlave" id="r_SPIAudioSlave"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_s_p_i_audio_slave.html">SPIAudioSlave</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">SPI Audio Slave endpoint matching <a class="el" href="classaudio__tools_1_1_s_p_i_audio_master.html" title="SPI master endpoint for remote audio sink configuration and PCM data transfer.">SPIAudioMaster</a> protocol.  <a href="classaudio__tools_1_1_s_p_i_audio_slave.html#details">More...</a><br /></td></tr>
+<tr class="memitem:SPIRegAudioMaster" id="r_SPIRegAudioMaster"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_s_p_i_reg_audio_master.html">SPIRegAudioMaster</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">SPI master which streams audio to a <a class="el" href="classaudio__tools_1_1_s_p_i_reg_audio_slave.html" title="SPI audio slave based on the TinySPISlave library: the master controls us via a small register map (s...">SPIRegAudioSlave</a> (based on the TinySPISlave library) using its register map: it defines the <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> and the mime type and writes the audio data according to the space which is reported by the available-space register.  <a href="classaudio__tools_1_1_s_p_i_reg_audio_master.html#details">More...</a><br /></td></tr>
+<tr class="memitem:SPIRegAudioMasterConfig" id="r_SPIRegAudioMasterConfig"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_s_p_i_reg_audio_master_config.html">SPIRegAudioMasterConfig</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration for <a class="el" href="classaudio__tools_1_1_s_p_i_reg_audio_master.html" title="SPI master which streams audio to a SPIRegAudioSlave (based on the TinySPISlave library) using its re...">SPIRegAudioMaster</a>.  <a href="structaudio__tools_1_1_s_p_i_reg_audio_master_config.html#details">More...</a><br /></td></tr>
+<tr class="memitem:SPIRegAudioSlaveConfig" id="r_SPIRegAudioSlaveConfig"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_s_p_i_reg_audio_slave_config.html">SPIRegAudioSlaveConfig</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration for <a class="el" href="classaudio__tools_1_1_s_p_i_reg_audio_slave.html" title="SPI audio slave based on the TinySPISlave library: the master controls us via a small register map (s...">SPIRegAudioSlave</a>.  <a href="structaudio__tools_1_1_s_p_i_reg_audio_slave_config.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -101,6 +107,16 @@ Enumerations</h2></td></tr>
 <br />
  }</td></tr>
 <tr class="memdesc:gad86b43537dea2133a2299586f6e954b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">SPI command ids used by SPIAudioMaster.  <a href="#gad86b43537dea2133a2299586f6e954b6">More...</a><br /></td></tr>
+<tr class="memitem:ga143151036f7621b3f7c13a996ecbd7b4" id="r_ga143151036f7621b3f7c13a996ecbd7b4"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga143151036f7621b3f7c13a996ecbd7b4">SPIRegAudioRegister</a> : uint8_t { <br />
+&#160;&#160;<a class="el" href="#gga143151036f7621b3f7c13a996ecbd7b4ab538b66f4c13544cf0fddf2436970b05">SPIREG_NOP</a> = 0x00
+, <a class="el" href="#gga143151036f7621b3f7c13a996ecbd7b4a102fb9d5737a214fa4a872b687e87546">SPIREG_AUDIO_INFO</a> = 0x01
+, <a class="el" href="#gga143151036f7621b3f7c13a996ecbd7b4a0db21f34e55bf99558a1ece3f610adbf">SPIREG_MIME</a> = 0x02
+, <a class="el" href="#gga143151036f7621b3f7c13a996ecbd7b4af6d2a616b5bd4b1efcac6d374362ea37">SPIREG_AVAILABLE</a> = 0x03
+, <br />
+&#160;&#160;<a class="el" href="#gga143151036f7621b3f7c13a996ecbd7b4ab39c79e7cfea5a399ffea2ab5b02b798">SPIREG_DATA</a> = 0x10
+<br />
+ }</td></tr>
+<tr class="memdesc:ga143151036f7621b3f7c13a996ecbd7b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register map shared by SPIRegAudioMaster and SPIRegAudioSlave.  <a href="#ga143151036f7621b3f7c13a996ecbd7b4">More...</a><br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <p>Serial Peripheral Interface (SPI) Audio. </p>
@@ -144,6 +160,42 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><a id="ggad86b43537dea2133a2299586f6e954b6a61a0116761a0b5bfc4e116bb2156a37c" name="ggad86b43537dea2133a2299586f6e954b6a61a0116761a0b5bfc4e116bb2156a37c"></a>GetAvailableBufferSize&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="ggad86b43537dea2133a2299586f6e954b6a24aa46302e44cb620ee55b3ede478064" name="ggad86b43537dea2133a2299586f6e954b6a24aa46302e44cb620ee55b3ede478064"></a>GetFilledBufferSize&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="ggad86b43537dea2133a2299586f6e954b6adc30bc0c7914db5918da4263fce93ad2" name="ggad86b43537dea2133a2299586f6e954b6adc30bc0c7914db5918da4263fce93ad2"></a>Clear&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<a id="ga143151036f7621b3f7c13a996ecbd7b4" name="ga143151036f7621b3f7c13a996ecbd7b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga143151036f7621b3f7c13a996ecbd7b4">&#9670;&#160;</a></span>SPIRegAudioRegister</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="#ga143151036f7621b3f7c13a996ecbd7b4">SPIRegAudioRegister</a> : uint8_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Register map shared by <a class="el" href="classaudio__tools_1_1_s_p_i_reg_audio_master.html" title="SPI master which streams audio to a SPIRegAudioSlave (based on the TinySPISlave library) using its re...">SPIRegAudioMaster</a> and <a class="el" href="classaudio__tools_1_1_s_p_i_reg_audio_slave.html" title="SPI audio slave based on the TinySPISlave library: the master controls us via a small register map (s...">SPIRegAudioSlave</a>. </p>
+<p>Wire protocol (compatible with the TinySPISlave RegisterMap):</p><ul>
+<li>command byte: bit7 = read, bits 0..6 = register address</li>
+<li>write frame: <span class="tt">[cmd][bytes...]</span> (CS low .. CS high)</li>
+<li>read request: <span class="tt">[cmd|0x80][n]</span> (n = number of bytes wanted)</li>
+<li>read reply: a second frame in which the master clocks n bytes (0x00) while the slave shifts out the register content. A short pause (CS high) is required between the two frames.</li>
+</ul>
+<p>Address 0 is reserved: the dummy bytes clocked by the master during the reply frame are ignored by the slave.</p>
+<p>All multi byte values are little endian. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga143151036f7621b3f7c13a996ecbd7b4ab538b66f4c13544cf0fddf2436970b05" name="gga143151036f7621b3f7c13a996ecbd7b4ab538b66f4c13544cf0fddf2436970b05"></a>SPIREG_NOP&#160;</td><td class="fielddoc"><p>Reply clocking / no operation. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga143151036f7621b3f7c13a996ecbd7b4a102fb9d5737a214fa4a872b687e87546" name="gga143151036f7621b3f7c13a996ecbd7b4a102fb9d5737a214fa4a872b687e87546"></a>SPIREG_AUDIO_INFO&#160;</td><td class="fielddoc"><p>8 bytes (rw): sample_rate u32, channels u16, bits_per_sample u8, reserved </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga143151036f7621b3f7c13a996ecbd7b4a0db21f34e55bf99558a1ece3f610adbf" name="gga143151036f7621b3f7c13a996ecbd7b4a0db21f34e55bf99558a1ece3f610adbf"></a>SPIREG_MIME&#160;</td><td class="fielddoc"><p>32 bytes (rw): zero terminated mime type </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga143151036f7621b3f7c13a996ecbd7b4af6d2a616b5bd4b1efcac6d374362ea37" name="gga143151036f7621b3f7c13a996ecbd7b4af6d2a616b5bd4b1efcac6d374362ea37"></a>SPIREG_AVAILABLE&#160;</td><td class="fielddoc"><p>4 bytes (ro): u32 free space in the slave audio buffer in bytes </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga143151036f7621b3f7c13a996ecbd7b4ab39c79e7cfea5a399ffea2ab5b02b798" name="gga143151036f7621b3f7c13a996ecbd7b4ab39c79e7cfea5a399ffea2ab5b02b798"></a>SPIREG_DATA&#160;</td><td class="fielddoc"><p>stream (wo): the bytes of the frame are appended to the audio buffer </p>
+</td></tr>
 </table>
 
 </div>

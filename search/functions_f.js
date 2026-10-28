@@ -22,7 +22,7 @@ var searchData=
   ['onexternalbufferrefilled_19',['onExternalBufferRefilled',['../classaudio__tools_1_1audio__tools_1_1_single_buffer.html#a95d73a37366e2eeb400d74370c9341e0',1,'audio_tools::audio_tools::SingleBuffer::onExternalBufferRefilled(void *data, int len)'],['../classaudio__tools_1_1audio__tools_1_1_single_buffer.html#a95d73a37366e2eeb400d74370c9341e0',1,'audio_tools::audio_tools::SingleBuffer::onExternalBufferRefilled(void *data, int len)'],['../classaudio__tools_1_1_single_buffer.html#a95d73a37366e2eeb400d74370c9341e0',1,'audio_tools::SingleBuffer::onExternalBufferRefilled()']]],
   ['onfeedback_20',['onFeedback',['../classaudio__tools_1_1_u_s_b_audio_host_base.html#ad281720f1c5c3f6158bce8271a730835',1,'audio_tools::USBAudioHostBase']]],
   ['onfilechange_21',['onFileChange',['../classaudio__tools_1_1_m4_a_file_sample_size_buffer.html#a1d4ac20c8a1717851807b1ceb3556d26',1,'audio_tools::M4AFileSampleSizeBuffer']]],
-  ['onframe_22',['onFrame',['../classaudio__tools_1_1_h264_decoder.html#afafafc9eb30f9d9b75ca445898744c47',1,'audio_tools::H264Decoder::onFrame()'],['../classaudio__tools_1_1_m_p_g_decoder.html#a823689e984921a66863624613a065328',1,'audio_tools::MPGDecoder::onFrame()']]],
+  ['onframe_22',['onFrame',['../classaudio__tools_1_1_s_p_i_reg_audio_slave.html#a38e03928545013cf0d90f017fe4ad2f7',1,'audio_tools::SPIRegAudioSlave::onFrame()'],['../classaudio__tools_1_1_h264_decoder.html#afafafc9eb30f9d9b75ca445898744c47',1,'audio_tools::H264Decoder::onFrame()'],['../classaudio__tools_1_1_m_p_g_decoder.html#a823689e984921a66863624613a065328',1,'audio_tools::MPGDecoder::onFrame()']]],
   ['onhdlr_23',['onHdlr',['../classaudio__tools_1_1_demuxer_m_p4.html#a510051ed7d73614f0fb1abcb30f5fbaa',1,'audio_tools::DemuxerMP4']]],
   ['onhevc_24',['onHevc',['../classaudio__tools_1_1_demuxer_m_p4.html#a882c160c6887be7dbf6e78e50db05d19',1,'audio_tools::DemuxerMP4']]],
   ['oninfoupdated_25',['onInfoUpdated',['../classaudio__tools_1_1_audio_b_l_e_client.html#a8463fa0e8be09493d29b03d97839fb7c',1,'audio_tools::AudioBLEClient']]],
@@ -126,5 +126,6 @@ var searchData=
   ['outputtft_5fespi_123',['OutputTFT_eSPI',['../classaudio__tools_1_1_output_t_f_t__e_s_p_i.html#a9ff9e98a3500c1b7dd6b734d970a3077',1,'audio_tools::OutputTFT_eSPI']]],
   ['outputtinygpu_124',['OutputTinyGPU',['../classaudio__tools_1_1_output_tiny_g_p_u.html#a917cf7dee6b781edece2749e40ca7a05',1,'audio_tools::OutputTinyGPU::OutputTinyGPU(DisplayDriver&lt; RGB565 &gt; &amp;driver, int pinBacklight, int bandHeight=40)'],['../classaudio__tools_1_1_output_tiny_g_p_u.html#a0c2fc1b7ff3182e4b0a34773a4bcdae9',1,'audio_tools::OutputTinyGPU::OutputTinyGPU(LCDBoard &amp;board, int bandHeight=40)']]],
   ['outputvideo_125',['outputVideo',['../classaudio__tools_1_1_binary_container_decoder.html#a21d67a01493f2260fe0a8be739c736e7',1,'audio_tools::BinaryContainerDecoder']]],
-  ['ovopen_126',['ovOpen',['../classaudio__tools_1_1_vorbis_decoder.html#a56649c39ccde510b32286997f44fa6dd',1,'audio_tools::VorbisDecoder']]]
+  ['overflowbytes_126',['overflowBytes',['../classaudio__tools_1_1_s_p_i_reg_audio_slave.html#a0daa1c76275ca4277625759e09296ce2',1,'audio_tools::SPIRegAudioSlave']]],
+  ['ovopen_127',['ovOpen',['../classaudio__tools_1_1_vorbis_decoder.html#a56649c39ccde510b32286997f44fa6dd',1,'audio_tools::VorbisDecoder']]]
 ];

@@ -42,7 +42,7 @@ var searchData=
   ['biplanes_39',['biPlanes',['../structaudio__tools_1_1_bitmap_info_header.html#a61bbb1890ce1db2b9103855c4ec7193e',1,'audio_tools::BitmapInfoHeader']]],
   ['bisize_40',['biSize',['../structaudio__tools_1_1_bitmap_info_header.html#a50f3c194a0a1f6b021b6a9081c92f490',1,'audio_tools::BitmapInfoHeader']]],
   ['bisizeimage_41',['biSizeImage',['../structaudio__tools_1_1_bitmap_info_header.html#a00e7559601fafe7059b1d8cbeb5d95f0',1,'audio_tools::BitmapInfoHeader']]],
-  ['bit_5forder_42',['bit_order',['../structaudio__tools_1_1_s_p_i_audio_master_config.html#ab2f5400eb39c8663b5ef005339a888ed',1,'audio_tools::SPIAudioMasterConfig']]],
+  ['bit_5forder_42',['bit_order',['../structaudio__tools_1_1_s_p_i_audio_master_config.html#ab2f5400eb39c8663b5ef005339a888ed',1,'audio_tools::SPIAudioMasterConfig::bit_order'],['../structaudio__tools_1_1_s_p_i_reg_audio_master_config.html#aac0513643d2f3983efc9a60d52758be0',1,'audio_tools::SPIRegAudioMasterConfig::bit_order']]],
   ['bitfeature_43',['bitfeature',['../struct_v_b_a_n___p_i_n_g0.html#a78f8e342e6bf1cdca705a6dd56fe41b8',1,'VBAN_PING0::bitfeature'],['../classaudio__tools_1_1_v_b_a_n_config.html#a78f8e342e6bf1cdca705a6dd56fe41b8',1,'audio_tools::VBANConfig::bitfeature'],['../vban_8h.html#a78f8e342e6bf1cdca705a6dd56fe41b8',1,'bitfeature:&#160;vban.h']]],
   ['bitfeatureex_44',['bitfeatureEx',['../struct_v_b_a_n___p_i_n_g0.html#a8035b3f69f9ef9fbd7875ac8a63f652b',1,'VBAN_PING0::bitfeatureEx'],['../vban_8h.html#a8035b3f69f9ef9fbd7875ac8a63f652b',1,'bitfeatureEx:&#160;vban.h']]],
   ['bitpool_45',['bitpool',['../classaudio__tools_1_1_s_b_c_encoder.html#a62c485934c0137e83d50b866c9649035',1,'audio_tools::SBCEncoder']]],
