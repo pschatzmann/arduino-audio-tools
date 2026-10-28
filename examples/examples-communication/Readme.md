@@ -6,7 +6,7 @@ You can also use [one of the many supported CODECs](https://github.com/pschatzma
 
 ## SPI
 
-`SPIRegAudioMaster` and `SPIRegAudioSlave` transmit audio over SPI. The slave is based on the [TinySPISlave](https://github.com/pschatzmann/TinySPISlave) library (ESP32, RP2040/RP2350, STM32) and is controlled by the master via a small register map:
+`SPIRegAudioMaster` and `SPIRegAudioSlave` transmit audio over SPI. The slave requires the [TinySPISlave](https://github.com/pschatzmann/TinySPISlave) library (ESP32, RP2040/RP2350, STM32), which you need to install; the master does not need it and is controlled by the master via a small register map:
 
 | Address | Register | Access | Content |
 |---|---|---|---|

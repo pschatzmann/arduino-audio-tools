@@ -5,13 +5,14 @@
  * to the available buffer space register. A MultiDecoder with MP3, AAC (Helix)
  * and WAV support is selected by the provided mime type. For audio/pcm the
  * decoder is bypassed and the AudioInfo register defines the output format.
- * Use together with spi-reg-master. Requires the TinySPISlave and
- * arduino-libhelix libraries.
+ * Use together with spi-reg-master. Requires the TinySPISlave
+ * (https://github.com/pschatzmann/TinySPISlave) and arduino-libhelix libraries.
  *
  * Supported mime types: audio/mpeg, audio/aac, audio/wav, audio/pcm
  */
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/CodecHelix.h"
+#include "TinySPISlave.h"  // must be included before SPIRegAudio.h
 #include "AudioTools/Communication/SPI/SPIRegAudio.h"
 
 #if defined(ARDUINO_ARCH_RP2040)
