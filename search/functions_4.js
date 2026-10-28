@@ -20,7 +20,7 @@ var searchData=
   ['decodeaudio_17',['decodeAudio',['../classaudio__tools_1_1_container_m4_a.html#a2b051bdf1b2e18351906c859a2c8bd39',1,'audio_tools::ContainerM4A']]],
   ['decodeaudiopacket_18',['decodeAudioPacket',['../classaudio__tools_1_1_vorbis_decoder.html#a22d6129adeeb4cc9dc34f49d2798d072',1,'audio_tools::VorbisDecoder']]],
   ['decodeblock_19',['DecodeBlock',['../class_r_s_1_1_reed_solomon.html#ad58e67fd2e592bb82c7af0d3fb740e98',1,'RS::ReedSolomon']]],
-  ['decodeblock_20',['decodeBlock',['../classaudio__tools_1_1_wav_i_m_a_decoder.html#a7fd2198e7250e5e56e698253f1431ea6',1,'audio_tools::WavIMADecoder']]],
+  ['decodeblock_20',['decodeBlock',['../classaudio__tools_1_1_wav_i_m_a_decoder.html#a7fd2198e7250e5e56e698253f1431ea6',1,'audio_tools::WavIMADecoder::decodeBlock()'],['../classaudio__tools_1_1_reed_solomon_f_e_c.html#ad5f200fef404f6d1c3e8ea98e16513d6',1,'audio_tools::ReedSolomonFEC::decodeBlock()']]],
   ['decodeendpoint_21',['decodeEndpoint',['../namespaceaudio__tools.html#a2dc0707d9ac4b68963a99afff99ca0ef',1,'audio_tools']]],
   ['decodeerrors_22',['decodeErrors',['../classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html#a234b08aae9be1b346de8b26060f9b1f8',1,'audio_tools::H264DecoderESP32S3']]],
   ['decodeframe_23',['decodeFrame',['../classaudio__tools_1_1_g729_decoder.html#a9962c524288befdde0587b201682ee9f',1,'audio_tools::G729Decoder']]],

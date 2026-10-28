@@ -109,11 +109,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a43954936d575eecef8b1e5b77c1295ee" id="r_a43954936d575eecef8b1e5b77c1295ee"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a43954936d575eecef8b1e5b77c1295ee">ReedSolomonFEC</a> (<a class="el" href="class_print.html">Print</a> &amp;print)</td></tr>
 <tr class="memitem:ae8ea54e02735b6362969a6e401025bf6" id="r_ae8ea54e02735b6362969a6e401025bf6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae8ea54e02735b6362969a6e401025bf6">ReedSolomonFEC</a> (<a class="el" href="class_stream.html">Stream</a> &amp;stream)</td></tr>
 <tr class="memitem:a692e2b18b3c2452e38e3f558ad87e9a5" id="r_a692e2b18b3c2452e38e3f558ad87e9a5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a692e2b18b3c2452e38e3f558ad87e9a5">available</a> () override</td></tr>
+<tr class="memdesc:a692e2b18b3c2452e38e3f558ad87e9a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of decoded bytes which can be read without blocking.  <br /></td></tr>
 <tr class="memitem:a87b51853b7bf1bc90d9efa9f3b8d4fea" id="r_a87b51853b7bf1bc90d9efa9f3b8d4fea"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a87b51853b7bf1bc90d9efa9f3b8d4fea">availableForWrite</a> () override</td></tr>
-<tr class="memitem:a50f45551c10ca30a0bc7f447e70188b1" id="r_a50f45551c10ca30a0bc7f447e70188b1"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#a50f45551c10ca30a0bc7f447e70188b1">begin</a> ()</td></tr>
-<tr class="memitem:a50f45551c10ca30a0bc7f447e70188b1" id="r_a50f45551c10ca30a0bc7f447e70188b1"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#a50f45551c10ca30a0bc7f447e70188b1">begin</a> ()</td></tr>
+<tr class="memdesc:a87b51853b7bf1bc90d9efa9f3b8d4fea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of bytes which can be written until the next block is encoded.  <br /></td></tr>
+<tr class="memitem:acba365cc28eb702040c382646cfb0a7a" id="r_acba365cc28eb702040c382646cfb0a7a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acba365cc28eb702040c382646cfb0a7a">begin</a> () override</td></tr>
 <tr class="memitem:adc34417a19a7b70626d19c41072d72a5" id="r_adc34417a19a7b70626d19c41072d72a5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#adc34417a19a7b70626d19c41072d72a5">end</a> ()</td></tr>
 <tr class="memitem:adc34417a19a7b70626d19c41072d72a5" id="r_adc34417a19a7b70626d19c41072d72a5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#adc34417a19a7b70626d19c41072d72a5">end</a> ()</td></tr>
+<tr class="memitem:a6778740e6f1ee0b0a35117fa218de73d" id="r_a6778740e6f1ee0b0a35117fa218de73d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6778740e6f1ee0b0a35117fa218de73d">failedBlocks</a> ()</td></tr>
+<tr class="memdesc:a6778740e6f1ee0b0a35117fa218de73d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of blocks which could not be corrected.  <br /></td></tr>
 <tr class="memitem:af654b48544c195ab99fe27e7bc3ed5fe" id="r_af654b48544c195ab99fe27e7bc3ed5fe"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">flush</a> () override</td></tr>
 <tr class="memitem:af654b48544c195ab99fe27e7bc3ed5fe" id="r_af654b48544c195ab99fe27e7bc3ed5fe"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">flush</a> () override</td></tr>
 <tr class="memitem:a9b3baad8c612d81b96e46f84d7e97580" id="r_a9b3baad8c612d81b96e46f84d7e97580"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_stream.html#a9b3baad8c612d81b96e46f84d7e97580">operator bool</a> ()</td></tr>
@@ -126,26 +129,37 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-methods" class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:ad5f200fef404f6d1c3e8ea98e16513d6" id="r_ad5f200fef404f6d1c3e8ea98e16513d6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad5f200fef404f6d1c3e8ea98e16513d6">decodeBlock</a> ()</td></tr>
 <tr class="memitem:a5caf99a24686511722c4c9f94c4ec52e" id="r_a5caf99a24686511722c4c9f94c4ec52e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#a5caf99a24686511722c4c9f94c4ec52e">refillReadBuffer</a> ()</td></tr>
 <tr class="memdesc:a5caf99a24686511722c4c9f94c4ec52e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Refill small read buffer (e.g. 8 bytes) to avoid single byte reads when calling read().  <br /></td></tr>
 <tr class="memitem:a5caf99a24686511722c4c9f94c4ec52e" id="r_a5caf99a24686511722c4c9f94c4ec52e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#a5caf99a24686511722c4c9f94c4ec52e">refillReadBuffer</a> ()</td></tr>
 <tr class="memdesc:a5caf99a24686511722c4c9f94c4ec52e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Refill small read buffer (e.g. 8 bytes) to avoid single byte reads when calling read().  <br /></td></tr>
+<tr class="memitem:a87f42abe7d89e56d3de469e33309e1da" id="r_a87f42abe7d89e56d3de469e33309e1da"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a87f42abe7d89e56d3de469e33309e1da">writeBlock</a> ()</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:aa66a35e5edf58ce00047afcd1d4f455e" id="r_aa66a35e5edf58ce00047afcd1d4f455e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_print.html#aa66a35e5edf58ce00047afcd1d4f455e">_timeout</a> = 10</td></tr>
-<tr class="memitem:a59fcbf9affcd52f52496c081e294b777" id="r_a59fcbf9affcd52f52496c081e294b777"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a59fcbf9affcd52f52496c081e294b777">encoded</a> {bytecount+additional_bytes}</td></tr>
+<tr class="memitem:a020f7c28848b914950ea93a55b558974" id="r_a020f7c28848b914950ea93a55b558974"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a020f7c28848b914950ea93a55b558974">decoded</a> [bytecount]</td></tr>
+<tr class="memitem:af8158848711091dc044597462544dd39" id="r_af8158848711091dc044597462544dd39"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af8158848711091dc044597462544dd39">decoded_len</a> = 0</td></tr>
+<tr class="memitem:a7fa06052757771596f02487c848907c5" id="r_a7fa06052757771596f02487c848907c5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7fa06052757771596f02487c848907c5">decoded_pos</a> = 0</td></tr>
+<tr class="memitem:a4bf1f04b7b1d9b771e81add7934083f3" id="r_a4bf1f04b7b1d9b771e81add7934083f3"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4bf1f04b7b1d9b771e81add7934083f3">failed_blocks</a> = 0</td></tr>
+<tr class="memitem:a11547b19062e439ca76516d84e6c2140" id="r_a11547b19062e439ca76516d84e6c2140"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a11547b19062e439ca76516d84e6c2140">max_write_retries</a> = 1000</td></tr>
 <tr class="memitem:acdad90adc3ba71f7b1e16444c23b5502" id="r_acdad90adc3ba71f7b1e16444c23b5502"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acdad90adc3ba71f7b1e16444c23b5502">p_print</a> = nullptr</td></tr>
 <tr class="memitem:a7c87619d514c8c9627dc94e5e278a530" id="r_a7c87619d514c8c9627dc94e5e278a530"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7c87619d514c8c9627dc94e5e278a530">p_stream</a> = nullptr</td></tr>
-<tr class="memitem:afe8c5ab1c7374aa227f393efbcffc265" id="r_afe8c5ab1c7374aa227f393efbcffc265"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afe8c5ab1c7374aa227f393efbcffc265">raw</a> {bytecount}</td></tr>
+<tr class="memitem:a02bc7b790e000d3b80fbfc2ea00210b6" id="r_a02bc7b790e000d3b80fbfc2ea00210b6"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a02bc7b790e000d3b80fbfc2ea00210b6">raw</a> [bytecount]</td></tr>
+<tr class="memitem:a0711d3f8fa3ae2efbfe8ca4d2d8fd088" id="r_a0711d3f8fa3ae2efbfe8ca4d2d8fd088"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0711d3f8fa3ae2efbfe8ca4d2d8fd088">raw_len</a> = 0</td></tr>
 <tr class="memitem:aeb3570aa19a7d886276f01d968e5b7b2" id="r_aeb3570aa19a7d886276f01d968e5b7b2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_r_s_1_1_reed_solomon.html">RS::ReedSolomon</a>&lt; bytecount, additional_bytes &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeb3570aa19a7d886276f01d968e5b7b2">rs</a></td></tr>
+<tr class="memitem:a322aa10a376e47d907f3c5b9f3d46f7a" id="r_a322aa10a376e47d907f3c5b9f3d46f7a"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a322aa10a376e47d907f3c5b9f3d46f7a">rx_encoded</a> [bytecount+additional_bytes]</td></tr>
+<tr class="memitem:aa7fa938839f20c4e03fec56be6aa9058" id="r_aa7fa938839f20c4e03fec56be6aa9058"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa7fa938839f20c4e03fec56be6aa9058">rx_len</a> = 0</td></tr>
 <tr class="memitem:ad1c1138410abe4a0b2e7d80eb425003f" id="r_ad1c1138410abe4a0b2e7d80eb425003f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#ad1c1138410abe4a0b2e7d80eb425003f">tmp_in</a> {0}</td></tr>
 <tr class="memitem:a02259b7e8b05e57f89af8e8736a70fdf" id="r_a02259b7e8b05e57f89af8e8736a70fdf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#a02259b7e8b05e57f89af8e8736a70fdf">tmp_out</a> {0}</td></tr>
+<tr class="memitem:aacce4b115539c1a0e1c22761c18e8a9b" id="r_aacce4b115539c1a0e1c22761c18e8a9b"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aacce4b115539c1a0e1c22761c18e8a9b">tx_encoded</a> [bytecount+additional_bytes]</td></tr>
 <tr class="memitem:a7f948c0ac99e632d3a033b85ae54d170" id="r_a7f948c0ac99e632d3a033b85ae54d170"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#a7f948c0ac99e632d3a033b85ae54d170">write_buffer_size</a> = 8</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;int bytecount, int additional_bytes&gt;<br />
 class audio_tools::ReedSolomonFEC&lt; bytecount, additional_bytes &gt;</div><p>Forward error correction using Reed-Solomon: write is encoding and readBytes does the decoding. </p>
+<p>The written data is split into blocks of bytecount bytes and each block is written with additional_bytes parity bytes. Data is only sent in complete blocks: the bytes of a trailing incomplete block (less than bytecount bytes) are never written. The reader collects the encoded blocks from the stream and corrects up to additional_bytes / 2 wrong bytes per block. If a block can not be corrected, the uncorrected data bytes are provided and <a class="el" href="#a6778740e6f1ee0b0a35117fa218de73d" title="Number of blocks which could not be corrected.">failedBlocks()</a> is incremented. There are no sync markers: if bytes get lost on the link, the block boundaries are wrong until <a class="el" href="#acba365cc28eb702040c382646cfb0a7a">begin()</a> is called on both sides to restart at a block boundary.</p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -229,6 +243,8 @@ template&lt;int bytecount, int additional_bytes&gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Number of decoded bytes which can be read without blocking. </p>
+
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#afbb59a2f946191d7cf2a5c0a00b29ec2">BaseStream</a>.</p>
 
 </div>
@@ -258,21 +274,25 @@ template&lt;int bytecount, int additional_bytes&gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Number of bytes which can be written until the next block is encoded. </p>
+
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#a6ff0d6d1b0f3f9b652c9d5298ed0863c">BaseStream</a>.</p>
 
 </div>
 </div>
-<a id="a50f45551c10ca30a0bc7f447e70188b1" name="a50f45551c10ca30a0bc7f447e70188b1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a50f45551c10ca30a0bc7f447e70188b1">&#9670;&#160;</a></span>begin() <span class="overload">[1/2]</span></h2>
+<a id="acba365cc28eb702040c382646cfb0a7a" name="acba365cc28eb702040c382646cfb0a7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acba365cc28eb702040c382646cfb0a7a">&#9670;&#160;</a></span>begin()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;int bytecount, int additional_bytes&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool begin </td>
+          <td class="memname">bool begin </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -280,26 +300,29 @@ template&lt;int bytecount, int additional_bytes&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel virtual">virtual</span><span class="mlabel inherited">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Resets the encoding and decoding state: can be used to resynchronize the block boundaries (e.g. after lost bytes) </p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_adapter_audio_output_to_audio_stream.html#acba365cc28eb702040c382646cfb0a7a">AdapterAudioOutputToAudioStream</a>, <a class="el" href="classaudio__tools_1_1_adaptive_resampling_stream.html#a601fb7cf1fc15db50c71a826f084f934">AdaptiveResamplingStream</a>, <a class="el" href="classaudio__tools_1_1_analog_audio_stream.html#acba365cc28eb702040c382646cfb0a7a">AnalogAudioStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_adapter_audio_output_to_audio_stream.html#acba365cc28eb702040c382646cfb0a7a">AdapterAudioOutputToAudioStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_input_monitor.html#acba365cc28eb702040c382646cfb0a7a">AudioInputMonitor</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_input_monitor.html#acba365cc28eb702040c382646cfb0a7a">AudioInputMonitor</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_stream_wrapper.html#a50f45551c10ca30a0bc7f447e70188b1">AudioStreamWrapper</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_stream_wrapper.html#a50f45551c10ca30a0bc7f447e70188b1">AudioStreamWrapper</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_time_source_stream.html#a601fb7cf1fc15db50c71a826f084f934">AudioTimeSourceStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_callback_stream.html#a4d2a8f208d69989c8676b0c632c9ea5c">CallbackStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_callback_stream.html#a4d2a8f208d69989c8676b0c632c9ea5c">CallbackStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_cat_stream.html#acba365cc28eb702040c382646cfb0a7a">CatStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_cat_stream.html#acba365cc28eb702040c382646cfb0a7a">CatStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_dynamic_memory_stream.html#a4d2a8f208d69989c8676b0c632c9ea5c">DynamicMemoryStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_dynamic_memory_stream.html#a4d2a8f208d69989c8676b0c632c9ea5c">DynamicMemoryStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_encoded_audio_stream.html#acba365cc28eb702040c382646cfb0a7a">EncodedAudioStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_filtered_stream.html#acba365cc28eb702040c382646cfb0a7a">FilteredStream&lt; T, TF &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_filtered_stream.html#acba365cc28eb702040c382646cfb0a7a">FilteredStream&lt; T, TF &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_generated_sound_stream.html#acba365cc28eb702040c382646cfb0a7a">GeneratedSoundStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_generated_sound_stream.html#acba365cc28eb702040c382646cfb0a7a">GeneratedSoundStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_generated_sound_stream.html#acba365cc28eb702040c382646cfb0a7a">GeneratedSoundStream&lt; int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_input_merge.html#a4d2a8f208d69989c8676b0c632c9ea5c">InputMerge&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_input_merge.html#a4d2a8f208d69989c8676b0c632c9ea5c">InputMerge&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_memory_stream.html#acba365cc28eb702040c382646cfb0a7a">MemoryStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_memory_stream.html#acba365cc28eb702040c382646cfb0a7a">MemoryStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_progress_stream.html#acba365cc28eb702040c382646cfb0a7a">ProgressStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_progress_stream.html#acba365cc28eb702040c382646cfb0a7a">ProgressStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_queue_stream.html#a4d2a8f208d69989c8676b0c632c9ea5c">QueueStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_queue_stream.html#a4d2a8f208d69989c8676b0c632c9ea5c">QueueStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_queue_stream.html#a4d2a8f208d69989c8676b0c632c9ea5c">QueueStream&lt; uint8_t &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_throttle.html#acba365cc28eb702040c382646cfb0a7a">Throttle</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_throttle.html#acba365cc28eb702040c382646cfb0a7a">Throttle</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_timed_stream.html#acba365cc28eb702040c382646cfb0a7a">TimedStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_timer_callback_audio_stream.html#a601fb7cf1fc15db50c71a826f084f934">TimerCallbackAudioStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_timer_callback_audio_stream.html#a601fb7cf1fc15db50c71a826f084f934">TimerCallbackAudioStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_volume_meter.html#acba365cc28eb702040c382646cfb0a7a">VolumeMeter</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_volume_meter.html#acba365cc28eb702040c382646cfb0a7a">VolumeMeter</a>, <a class="el" href="classaudio__tools_1_1_audio_board_stream.html#acba365cc28eb702040c382646cfb0a7a">AudioBoardStream</a>, <a class="el" href="classaudio__tools_1_1_audio_effect_stream.html#a601fb7cf1fc15db50c71a826f084f934">AudioEffectStream</a>, <a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a601fb7cf1fc15db50c71a826f084f934">AudioEffectStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#acba365cc28eb702040c382646cfb0a7a">AudioFFTBase</a>, <a class="el" href="classaudio__tools_1_1_audio_input_monitor.html#acba365cc28eb702040c382646cfb0a7a">AudioInputMonitor</a>, <a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#acba365cc28eb702040c382646cfb0a7a">AudioKitStream</a>, <a class="el" href="classaudio__tools_1_1_audio_lo_ra.html#a601fb7cf1fc15db50c71a826f084f934">AudioLoRa</a>, <a class="el" href="classaudio__tools_1_1_audio_m_p34_d_t05.html#a601fb7cf1fc15db50c71a826f084f934">AudioMP34DT05</a>, <a class="el" href="classaudio__tools_1_1_audio_output_with_callback.html#a50f45551c10ca30a0bc7f447e70188b1">AudioOutputWithCallback</a>, <a class="el" href="classaudio__tools_1_1_audio_stream_wrapper.html#a50f45551c10ca30a0bc7f447e70188b1">AudioStreamWrapper</a>, <a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html#a601fb7cf1fc15db50c71a826f084f934">AudioTimeSourceStream</a>, <a class="el" href="classaudio__tools_1_1_automatic_gain_control_stream.html#acba365cc28eb702040c382646cfb0a7a">AutomaticGainControlStream</a>, <a class="el" href="classaudio__tools_1_1_callback_stream.html#a4d2a8f208d69989c8676b0c632c9ea5c">CallbackStream</a>, <a class="el" href="classaudio__tools_1_1_cat_stream.html#acba365cc28eb702040c382646cfb0a7a">CatStream</a>, <a class="el" href="classaudio__tools_1_1_channel_format_converter_stream.html#acba365cc28eb702040c382646cfb0a7a">ChannelFormatConverterStream</a>, <a class="el" href="classaudio__tools_1_1_channel_format_converter_stream_t.html#acba365cc28eb702040c382646cfb0a7a">ChannelFormatConverterStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_dynamic_memory_stream.html#a4d2a8f208d69989c8676b0c632c9ea5c">DynamicMemoryStream</a>, <a class="el" href="classaudio__tools_1_1_encoded_audio_stream.html#acba365cc28eb702040c382646cfb0a7a">EncodedAudioStream</a>, <a class="el" href="classaudio__tools_1_1_equalizer3_bands_per_channel_t.html#a601fb7cf1fc15db50c71a826f084f934">Equalizer3BandsPerChannelT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_equalizer3_bands_per_channel_t.html#a601fb7cf1fc15db50c71a826f084f934">Equalizer3BandsPerChannelT&lt; float &gt;</a>, <a class="el" href="classaudio__tools_1_1_equalizer3_bands_t.html#a601fb7cf1fc15db50c71a826f084f934">Equalizer3BandsT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_equalizer3_bands_t.html#a601fb7cf1fc15db50c71a826f084f934">Equalizer3BandsT&lt; float &gt;</a>, <a class="el" href="classaudio__tools_1_1_equalizer_n_bands.html#acba365cc28eb702040c382646cfb0a7a">EqualizerNBands&lt; SampleT, AccT, NUM_TAPS, NUM_BANDS &gt;</a>, <a class="el" href="classaudio__tools_1_1_e_s_p_now_stream.html#a601fb7cf1fc15db50c71a826f084f934">ESPNowStream</a>, <a class="el" href="classaudio__tools_1_1_file_loop_t.html#a601fb7cf1fc15db50c71a826f084f934">FileLoopT&lt; FileType &gt;</a>, <a class="el" href="classaudio__tools_1_1_file_loop_t.html#a601fb7cf1fc15db50c71a826f084f934">FileLoopT&lt; File &gt;</a>, <a class="el" href="classaudio__tools_1_1_filtered_stream.html#acba365cc28eb702040c382646cfb0a7a">FilteredStream&lt; T, TF &gt;</a>, <a class="el" href="classaudio__tools_1_1_format_converter_stream.html#acba365cc28eb702040c382646cfb0a7a">FormatConverterStream</a>, <a class="el" href="classaudio__tools_1_1_frequency_detector_auto_correlation.html#a601fb7cf1fc15db50c71a826f084f934">FrequencyDetectorAutoCorrelation</a>, <a class="el" href="classaudio__tools_1_1_generated_sound_stream.html#acba365cc28eb702040c382646cfb0a7a">GeneratedSoundStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_goertzel_stream.html#a601fb7cf1fc15db50c71a826f084f934">GoertzelStream</a>, <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html#acba365cc28eb702040c382646cfb0a7a">HLSStreamT&lt; URLStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html#acba365cc28eb702040c382646cfb0a7a">HLSStreamT&lt; URLStreamESP32 &gt;</a>, <a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html#a601fb7cf1fc15db50c71a826f084f934">I2SCodecStream</a>, <a class="el" href="classaudio__tools_1_1_i2_s_stream.html#a601fb7cf1fc15db50c71a826f084f934">I2SStream</a>, <a class="el" href="classaudio__tools_1_1_input_merge.html#a4d2a8f208d69989c8676b0c632c9ea5c">InputMerge&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_measuring_stream.html#acba365cc28eb702040c382646cfb0a7a">MeasuringStream</a>, <a class="el" href="classaudio__tools_1_1_memory_stream.html#acba365cc28eb702040c382646cfb0a7a">MemoryStream</a>, <a class="el" href="classaudio__tools_1_1_mini_audio_stream.html#acba365cc28eb702040c382646cfb0a7a">MiniAudioStream</a>, <a class="el" href="classaudio__tools_1_1_mozzi_stream.html#a601fb7cf1fc15db50c71a826f084f934">MozziStream</a>, <a class="el" href="classaudio__tools_1_1_n_r_f24_stream.html#acba365cc28eb702040c382646cfb0a7a">NRF24Stream</a>, <a class="el" href="classaudio__tools_1_1_number_format_converter_stream.html#acba365cc28eb702040c382646cfb0a7a">NumberFormatConverterStream</a>, <a class="el" href="classaudio__tools_1_1_number_format_converter_stream_t.html#acba365cc28eb702040c382646cfb0a7a">NumberFormatConverterStreamT&lt; TFrom, TTo &gt;</a>, <a class="el" href="classaudio__tools_1_1_pipeline.html#acba365cc28eb702040c382646cfb0a7a">Pipeline</a>, <a class="el" href="structaudio__tools_1_1_pipeline_1_1_modifying_stream_adapter.html#acba365cc28eb702040c382646cfb0a7a">Pipeline::ModifyingStreamAdapter</a>, <a class="el" href="classaudio__tools_1_1_port_audio_stream.html#acba365cc28eb702040c382646cfb0a7a">PortAudioStream</a>, <a class="el" href="classaudio__tools_1_1_progress_stream.html#acba365cc28eb702040c382646cfb0a7a">ProgressStream</a>, <a class="el" href="classaudio__tools_1_1_pure_data_stream.html#a601fb7cf1fc15db50c71a826f084f934">PureDataStream</a>, <a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#acba365cc28eb702040c382646cfb0a7a">QualityAnalysisStream</a>, <a class="el" href="classaudio__tools_1_1_queue_stream.html#a4d2a8f208d69989c8676b0c632c9ea5c">QueueStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_resample_stream.html#acba365cc28eb702040c382646cfb0a7a">ResampleStream</a>, <a class="el" href="classaudio__tools_1_1_resample_stream_t.html#a601fb7cf1fc15db50c71a826f084f934">ResampleStreamT&lt; TInterpolator &gt;</a>, <a class="el" href="classaudio__tools_1_1_s_p_d_i_f_output.html#a601fb7cf1fc15db50c71a826f084f934">SPDIFOutput</a>, <a class="el" href="classaudio__tools_1_1_stdio_stream.html#acba365cc28eb702040c382646cfb0a7a">StdioStream</a>, <a class="el" href="classaudio__tools_1_1_supported_rates_stream.html#acba365cc28eb702040c382646cfb0a7a">SupportedRatesStream</a>, <a class="el" href="classaudio__tools_1_1_throttle.html#acba365cc28eb702040c382646cfb0a7a">Throttle</a>, <a class="el" href="classaudio__tools_1_1_timed_stream.html#acba365cc28eb702040c382646cfb0a7a">TimedStream</a>, <a class="el" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a601fb7cf1fc15db50c71a826f084f934">TimerCallbackAudioStream</a>, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a601fb7cf1fc15db50c71a826f084f934">USBAudioDeviceBase</a>, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_base.html#a601fb7cf1fc15db50c71a826f084f934">USBAudioHostBase</a>, <a class="el" href="classaudio__tools_1_1_v_b_a_n_stream.html#a601fb7cf1fc15db50c71a826f084f934">VBANStream</a>, <a class="el" href="classaudio__tools_1_1_volume_meter.html#acba365cc28eb702040c382646cfb0a7a">VolumeMeter</a>, <a class="el" href="classaudio__tools_1_1_volume_stream.html#acba365cc28eb702040c382646cfb0a7a">VolumeStream</a>, <a class="el" href="classaudio__tools_1_1_v_s1053_stream.html#a601fb7cf1fc15db50c71a826f084f934">VS1053Stream</a>, and <a class="el" href="classaudio__tools_1_1_w_m8960_stream.html#a601fb7cf1fc15db50c71a826f084f934">WM8960Stream</a>.</p>
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#a50f45551c10ca30a0bc7f447e70188b1">BaseStream</a>.</p>
 
 </div>
 </div>
-<a id="a50f45551c10ca30a0bc7f447e70188b1" name="a50f45551c10ca30a0bc7f447e70188b1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a50f45551c10ca30a0bc7f447e70188b1">&#9670;&#160;</a></span>begin() <span class="overload">[2/2]</span></h2>
+<a id="ad5f200fef404f6d1c3e8ea98e16513d6" name="ad5f200fef404f6d1c3e8ea98e16513d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5f200fef404f6d1c3e8ea98e16513d6">&#9670;&#160;</a></span>decodeBlock()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;int bytecount, int additional_bytes&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool begin </td>
+          <td class="memname">bool decodeBlock </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -307,12 +330,11 @@ template&lt;int bytecount, int additional_bytes&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel virtual">virtual</span><span class="mlabel inherited">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel protected">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_adapter_audio_output_to_audio_stream.html#acba365cc28eb702040c382646cfb0a7a">AdapterAudioOutputToAudioStream</a>, <a class="el" href="classaudio__tools_1_1_adaptive_resampling_stream.html#a601fb7cf1fc15db50c71a826f084f934">AdaptiveResamplingStream</a>, <a class="el" href="classaudio__tools_1_1_analog_audio_stream.html#acba365cc28eb702040c382646cfb0a7a">AnalogAudioStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_adapter_audio_output_to_audio_stream.html#acba365cc28eb702040c382646cfb0a7a">AdapterAudioOutputToAudioStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_input_monitor.html#acba365cc28eb702040c382646cfb0a7a">AudioInputMonitor</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_input_monitor.html#acba365cc28eb702040c382646cfb0a7a">AudioInputMonitor</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_stream_wrapper.html#a50f45551c10ca30a0bc7f447e70188b1">AudioStreamWrapper</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_stream_wrapper.html#a50f45551c10ca30a0bc7f447e70188b1">AudioStreamWrapper</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_time_source_stream.html#a601fb7cf1fc15db50c71a826f084f934">AudioTimeSourceStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_callback_stream.html#a4d2a8f208d69989c8676b0c632c9ea5c">CallbackStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_callback_stream.html#a4d2a8f208d69989c8676b0c632c9ea5c">CallbackStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_cat_stream.html#acba365cc28eb702040c382646cfb0a7a">CatStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_cat_stream.html#acba365cc28eb702040c382646cfb0a7a">CatStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_dynamic_memory_stream.html#a4d2a8f208d69989c8676b0c632c9ea5c">DynamicMemoryStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_dynamic_memory_stream.html#a4d2a8f208d69989c8676b0c632c9ea5c">DynamicMemoryStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_encoded_audio_stream.html#acba365cc28eb702040c382646cfb0a7a">EncodedAudioStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_filtered_stream.html#acba365cc28eb702040c382646cfb0a7a">FilteredStream&lt; T, TF &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_filtered_stream.html#acba365cc28eb702040c382646cfb0a7a">FilteredStream&lt; T, TF &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_generated_sound_stream.html#acba365cc28eb702040c382646cfb0a7a">GeneratedSoundStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_generated_sound_stream.html#acba365cc28eb702040c382646cfb0a7a">GeneratedSoundStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_generated_sound_stream.html#acba365cc28eb702040c382646cfb0a7a">GeneratedSoundStream&lt; int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_input_merge.html#a4d2a8f208d69989c8676b0c632c9ea5c">InputMerge&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_input_merge.html#a4d2a8f208d69989c8676b0c632c9ea5c">InputMerge&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_memory_stream.html#acba365cc28eb702040c382646cfb0a7a">MemoryStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_memory_stream.html#acba365cc28eb702040c382646cfb0a7a">MemoryStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_progress_stream.html#acba365cc28eb702040c382646cfb0a7a">ProgressStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_progress_stream.html#acba365cc28eb702040c382646cfb0a7a">ProgressStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_queue_stream.html#a4d2a8f208d69989c8676b0c632c9ea5c">QueueStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_queue_stream.html#a4d2a8f208d69989c8676b0c632c9ea5c">QueueStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_queue_stream.html#a4d2a8f208d69989c8676b0c632c9ea5c">QueueStream&lt; uint8_t &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_throttle.html#acba365cc28eb702040c382646cfb0a7a">Throttle</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_throttle.html#acba365cc28eb702040c382646cfb0a7a">Throttle</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_timed_stream.html#acba365cc28eb702040c382646cfb0a7a">TimedStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_timer_callback_audio_stream.html#a601fb7cf1fc15db50c71a826f084f934">TimerCallbackAudioStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_timer_callback_audio_stream.html#a601fb7cf1fc15db50c71a826f084f934">TimerCallbackAudioStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_volume_meter.html#acba365cc28eb702040c382646cfb0a7a">VolumeMeter</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_volume_meter.html#acba365cc28eb702040c382646cfb0a7a">VolumeMeter</a>, <a class="el" href="classaudio__tools_1_1_audio_board_stream.html#acba365cc28eb702040c382646cfb0a7a">AudioBoardStream</a>, <a class="el" href="classaudio__tools_1_1_audio_effect_stream.html#a601fb7cf1fc15db50c71a826f084f934">AudioEffectStream</a>, <a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a601fb7cf1fc15db50c71a826f084f934">AudioEffectStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#acba365cc28eb702040c382646cfb0a7a">AudioFFTBase</a>, <a class="el" href="classaudio__tools_1_1_audio_input_monitor.html#acba365cc28eb702040c382646cfb0a7a">AudioInputMonitor</a>, <a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#acba365cc28eb702040c382646cfb0a7a">AudioKitStream</a>, <a class="el" href="classaudio__tools_1_1_audio_lo_ra.html#a601fb7cf1fc15db50c71a826f084f934">AudioLoRa</a>, <a class="el" href="classaudio__tools_1_1_audio_m_p34_d_t05.html#a601fb7cf1fc15db50c71a826f084f934">AudioMP34DT05</a>, <a class="el" href="classaudio__tools_1_1_audio_output_with_callback.html#a50f45551c10ca30a0bc7f447e70188b1">AudioOutputWithCallback</a>, <a class="el" href="classaudio__tools_1_1_audio_stream_wrapper.html#a50f45551c10ca30a0bc7f447e70188b1">AudioStreamWrapper</a>, <a class="el" href="classaudio__tools_1_1_audio_time_source_stream.html#a601fb7cf1fc15db50c71a826f084f934">AudioTimeSourceStream</a>, <a class="el" href="classaudio__tools_1_1_automatic_gain_control_stream.html#acba365cc28eb702040c382646cfb0a7a">AutomaticGainControlStream</a>, <a class="el" href="classaudio__tools_1_1_callback_stream.html#a4d2a8f208d69989c8676b0c632c9ea5c">CallbackStream</a>, <a class="el" href="classaudio__tools_1_1_cat_stream.html#acba365cc28eb702040c382646cfb0a7a">CatStream</a>, <a class="el" href="classaudio__tools_1_1_channel_format_converter_stream.html#acba365cc28eb702040c382646cfb0a7a">ChannelFormatConverterStream</a>, <a class="el" href="classaudio__tools_1_1_channel_format_converter_stream_t.html#acba365cc28eb702040c382646cfb0a7a">ChannelFormatConverterStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_dynamic_memory_stream.html#a4d2a8f208d69989c8676b0c632c9ea5c">DynamicMemoryStream</a>, <a class="el" href="classaudio__tools_1_1_encoded_audio_stream.html#acba365cc28eb702040c382646cfb0a7a">EncodedAudioStream</a>, <a class="el" href="classaudio__tools_1_1_equalizer3_bands_per_channel_t.html#a601fb7cf1fc15db50c71a826f084f934">Equalizer3BandsPerChannelT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_equalizer3_bands_per_channel_t.html#a601fb7cf1fc15db50c71a826f084f934">Equalizer3BandsPerChannelT&lt; float &gt;</a>, <a class="el" href="classaudio__tools_1_1_equalizer3_bands_t.html#a601fb7cf1fc15db50c71a826f084f934">Equalizer3BandsT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_equalizer3_bands_t.html#a601fb7cf1fc15db50c71a826f084f934">Equalizer3BandsT&lt; float &gt;</a>, <a class="el" href="classaudio__tools_1_1_equalizer_n_bands.html#acba365cc28eb702040c382646cfb0a7a">EqualizerNBands&lt; SampleT, AccT, NUM_TAPS, NUM_BANDS &gt;</a>, <a class="el" href="classaudio__tools_1_1_e_s_p_now_stream.html#a601fb7cf1fc15db50c71a826f084f934">ESPNowStream</a>, <a class="el" href="classaudio__tools_1_1_file_loop_t.html#a601fb7cf1fc15db50c71a826f084f934">FileLoopT&lt; FileType &gt;</a>, <a class="el" href="classaudio__tools_1_1_file_loop_t.html#a601fb7cf1fc15db50c71a826f084f934">FileLoopT&lt; File &gt;</a>, <a class="el" href="classaudio__tools_1_1_filtered_stream.html#acba365cc28eb702040c382646cfb0a7a">FilteredStream&lt; T, TF &gt;</a>, <a class="el" href="classaudio__tools_1_1_format_converter_stream.html#acba365cc28eb702040c382646cfb0a7a">FormatConverterStream</a>, <a class="el" href="classaudio__tools_1_1_frequency_detector_auto_correlation.html#a601fb7cf1fc15db50c71a826f084f934">FrequencyDetectorAutoCorrelation</a>, <a class="el" href="classaudio__tools_1_1_generated_sound_stream.html#acba365cc28eb702040c382646cfb0a7a">GeneratedSoundStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_goertzel_stream.html#a601fb7cf1fc15db50c71a826f084f934">GoertzelStream</a>, <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html#acba365cc28eb702040c382646cfb0a7a">HLSStreamT&lt; URLStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html#acba365cc28eb702040c382646cfb0a7a">HLSStreamT&lt; URLStreamESP32 &gt;</a>, <a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html#a601fb7cf1fc15db50c71a826f084f934">I2SCodecStream</a>, <a class="el" href="classaudio__tools_1_1_i2_s_stream.html#a601fb7cf1fc15db50c71a826f084f934">I2SStream</a>, <a class="el" href="classaudio__tools_1_1_input_merge.html#a4d2a8f208d69989c8676b0c632c9ea5c">InputMerge&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_measuring_stream.html#acba365cc28eb702040c382646cfb0a7a">MeasuringStream</a>, <a class="el" href="classaudio__tools_1_1_memory_stream.html#acba365cc28eb702040c382646cfb0a7a">MemoryStream</a>, <a class="el" href="classaudio__tools_1_1_mini_audio_stream.html#acba365cc28eb702040c382646cfb0a7a">MiniAudioStream</a>, <a class="el" href="classaudio__tools_1_1_mozzi_stream.html#a601fb7cf1fc15db50c71a826f084f934">MozziStream</a>, <a class="el" href="classaudio__tools_1_1_n_r_f24_stream.html#acba365cc28eb702040c382646cfb0a7a">NRF24Stream</a>, <a class="el" href="classaudio__tools_1_1_number_format_converter_stream.html#acba365cc28eb702040c382646cfb0a7a">NumberFormatConverterStream</a>, <a class="el" href="classaudio__tools_1_1_number_format_converter_stream_t.html#acba365cc28eb702040c382646cfb0a7a">NumberFormatConverterStreamT&lt; TFrom, TTo &gt;</a>, <a class="el" href="classaudio__tools_1_1_pipeline.html#acba365cc28eb702040c382646cfb0a7a">Pipeline</a>, <a class="el" href="structaudio__tools_1_1_pipeline_1_1_modifying_stream_adapter.html#acba365cc28eb702040c382646cfb0a7a">Pipeline::ModifyingStreamAdapter</a>, <a class="el" href="classaudio__tools_1_1_port_audio_stream.html#acba365cc28eb702040c382646cfb0a7a">PortAudioStream</a>, <a class="el" href="classaudio__tools_1_1_progress_stream.html#acba365cc28eb702040c382646cfb0a7a">ProgressStream</a>, <a class="el" href="classaudio__tools_1_1_pure_data_stream.html#a601fb7cf1fc15db50c71a826f084f934">PureDataStream</a>, <a class="el" href="classaudio__tools_1_1_quality_analysis_stream.html#acba365cc28eb702040c382646cfb0a7a">QualityAnalysisStream</a>, <a class="el" href="classaudio__tools_1_1_queue_stream.html#a4d2a8f208d69989c8676b0c632c9ea5c">QueueStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_resample_stream.html#acba365cc28eb702040c382646cfb0a7a">ResampleStream</a>, <a class="el" href="classaudio__tools_1_1_resample_stream_t.html#a601fb7cf1fc15db50c71a826f084f934">ResampleStreamT&lt; TInterpolator &gt;</a>, <a class="el" href="classaudio__tools_1_1_s_p_d_i_f_output.html#a601fb7cf1fc15db50c71a826f084f934">SPDIFOutput</a>, <a class="el" href="classaudio__tools_1_1_stdio_stream.html#acba365cc28eb702040c382646cfb0a7a">StdioStream</a>, <a class="el" href="classaudio__tools_1_1_supported_rates_stream.html#acba365cc28eb702040c382646cfb0a7a">SupportedRatesStream</a>, <a class="el" href="classaudio__tools_1_1_throttle.html#acba365cc28eb702040c382646cfb0a7a">Throttle</a>, <a class="el" href="classaudio__tools_1_1_timed_stream.html#acba365cc28eb702040c382646cfb0a7a">TimedStream</a>, <a class="el" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a601fb7cf1fc15db50c71a826f084f934">TimerCallbackAudioStream</a>, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#a601fb7cf1fc15db50c71a826f084f934">USBAudioDeviceBase</a>, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_base.html#a601fb7cf1fc15db50c71a826f084f934">USBAudioHostBase</a>, <a class="el" href="classaudio__tools_1_1_v_b_a_n_stream.html#a601fb7cf1fc15db50c71a826f084f934">VBANStream</a>, <a class="el" href="classaudio__tools_1_1_volume_meter.html#acba365cc28eb702040c382646cfb0a7a">VolumeMeter</a>, <a class="el" href="classaudio__tools_1_1_volume_stream.html#acba365cc28eb702040c382646cfb0a7a">VolumeStream</a>, <a class="el" href="classaudio__tools_1_1_v_s1053_stream.html#a601fb7cf1fc15db50c71a826f084f934">VS1053Stream</a>, and <a class="el" href="classaudio__tools_1_1_w_m8960_stream.html#a601fb7cf1fc15db50c71a826f084f934">WM8960Stream</a>.</p>
+<p>Decodes the received block if it is complete: returns false if more data is needed </p>
 
 </div>
 </div>
@@ -367,6 +389,35 @@ template&lt;int bytecount, int additional_bytes&gt; </div>
 </div><div class="memdoc">
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_a2_d_p_stream.html#a64e9fa75beda50a9e8400ee0d4e61984">A2DPStream</a>, <a class="el" href="classaudio__tools_1_1_abstract_u_r_l_stream.html#aef0909968394f3be84f49795d74c1d2b">AbstractURLStream</a>, <a class="el" href="classaudio__tools_1_1_adapter_audio_output_to_audio_stream.html#a64e9fa75beda50a9e8400ee0d4e61984">AdapterAudioOutputToAudioStream</a>, <a class="el" href="classaudio__tools_1_1_adaptive_resampling_stream.html#aaf81d3fdaf258088d7692fa70cece087">AdaptiveResamplingStream</a>, <a class="el" href="classaudio__tools_1_1_analog_audio_stream.html#a64e9fa75beda50a9e8400ee0d4e61984">AnalogAudioStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_adapter_audio_output_to_audio_stream.html#a64e9fa75beda50a9e8400ee0d4e61984">AdapterAudioOutputToAudioStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_stream_wrapper.html#adc34417a19a7b70626d19c41072d72a5">AudioStreamWrapper</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_stream_wrapper.html#adc34417a19a7b70626d19c41072d72a5">AudioStreamWrapper</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_callback_stream.html#a64e9fa75beda50a9e8400ee0d4e61984">CallbackStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_callback_stream.html#a64e9fa75beda50a9e8400ee0d4e61984">CallbackStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_cat_stream.html#a64e9fa75beda50a9e8400ee0d4e61984">CatStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_cat_stream.html#a64e9fa75beda50a9e8400ee0d4e61984">CatStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_dynamic_memory_stream.html#ae827632720ddd6f3037ef1ee69aa3f41">DynamicMemoryStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_dynamic_memory_stream.html#ae827632720ddd6f3037ef1ee69aa3f41">DynamicMemoryStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_encoded_audio_stream.html#a64e9fa75beda50a9e8400ee0d4e61984">EncodedAudioStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_filtered_stream.html#a64e9fa75beda50a9e8400ee0d4e61984">FilteredStream&lt; T, TF &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_filtered_stream.html#a64e9fa75beda50a9e8400ee0d4e61984">FilteredStream&lt; T, TF &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_filtered_stream.html#a64e9fa75beda50a9e8400ee0d4e61984">FilteredStream&lt; int16_t, int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_generated_sound_stream.html#a64e9fa75beda50a9e8400ee0d4e61984">GeneratedSoundStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_generated_sound_stream.html#a64e9fa75beda50a9e8400ee0d4e61984">GeneratedSoundStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_generated_sound_stream.html#a64e9fa75beda50a9e8400ee0d4e61984">GeneratedSoundStream&lt; int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_input_merge.html#a64e9fa75beda50a9e8400ee0d4e61984">InputMerge&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_input_merge.html#a64e9fa75beda50a9e8400ee0d4e61984">InputMerge&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_input_mixer.html#a64e9fa75beda50a9e8400ee0d4e61984">InputMixer&lt; T, SumT &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_input_mixer.html#a64e9fa75beda50a9e8400ee0d4e61984">InputMixer&lt; T, SumT &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_memory_stream.html#ae827632720ddd6f3037ef1ee69aa3f41">MemoryStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_memory_stream.html#ae827632720ddd6f3037ef1ee69aa3f41">MemoryStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_queue_stream.html#ae827632720ddd6f3037ef1ee69aa3f41">QueueStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_queue_stream.html#ae827632720ddd6f3037ef1ee69aa3f41">QueueStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_queue_stream.html#ae827632720ddd6f3037ef1ee69aa3f41">QueueStream&lt; uint8_t &gt;</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_reformat_base_stream.html#a64e9fa75beda50a9e8400ee0d4e61984">ReformatBaseStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_timer_callback_audio_stream.html#aaf81d3fdaf258088d7692fa70cece087">TimerCallbackAudioStream</a>, <a class="el" href="classaudio__tools_1_1audio__tools_1_1_timer_callback_audio_stream.html#aaf81d3fdaf258088d7692fa70cece087">TimerCallbackAudioStream</a>, <a class="el" href="classaudio__tools_1_1_audio_b_l_e_client.html#a64e9fa75beda50a9e8400ee0d4e61984">AudioBLEClient</a>, <a class="el" href="classaudio__tools_1_1_audio_b_l_e_client.html#a64e9fa75beda50a9e8400ee0d4e61984">AudioBLEClient</a>, <a class="el" href="classaudio__tools_1_1_audio_b_l_e_server.html#a64e9fa75beda50a9e8400ee0d4e61984">AudioBLEServer</a>, <a class="el" href="classaudio__tools_1_1_audio_b_l_e_server.html#a64e9fa75beda50a9e8400ee0d4e61984">AudioBLEServer</a>, <a class="el" href="classaudio__tools_1_1_audio_b_l_e_stream.html#aa540e86022c1f72380d1014d98f38f43">AudioBLEStream</a>, <a class="el" href="classaudio__tools_1_1_audio_effect_stream.html#a64e9fa75beda50a9e8400ee0d4e61984">AudioEffectStream</a>, <a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a64e9fa75beda50a9e8400ee0d4e61984">AudioEffectStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#a64e9fa75beda50a9e8400ee0d4e61984">AudioFFTBase</a>, <a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a64e9fa75beda50a9e8400ee0d4e61984">AudioKitStream</a>, <a class="el" href="classaudio__tools_1_1_audio_lo_ra.html#aaf81d3fdaf258088d7692fa70cece087">AudioLoRa</a>, <a class="el" href="classaudio__tools_1_1_audio_m_p34_d_t05.html#aaf81d3fdaf258088d7692fa70cece087">AudioMP34DT05</a>, <a class="el" href="classaudio__tools_1_1_audio_stream_wrapper.html#adc34417a19a7b70626d19c41072d72a5">AudioStreamWrapper</a>, <a class="el" href="classaudio__tools_1_1_automatic_gain_control_stream.html#a64e9fa75beda50a9e8400ee0d4e61984">AutomaticGainControlStream</a>, <a class="el" href="classaudio__tools_1_1_buffered_task_stream.html#adc34417a19a7b70626d19c41072d72a5">BufferedTaskStream</a>, <a class="el" href="classaudio__tools_1_1_callback_stream.html#a64e9fa75beda50a9e8400ee0d4e61984">CallbackStream</a>, <a class="el" href="classaudio__tools_1_1_cat_stream.html#a64e9fa75beda50a9e8400ee0d4e61984">CatStream</a>, <a class="el" href="classaudio__tools_1_1_channel_format_converter_stream.html#a64e9fa75beda50a9e8400ee0d4e61984">ChannelFormatConverterStream</a>, <a class="el" href="classaudio__tools_1_1_dynamic_memory_stream.html#ae827632720ddd6f3037ef1ee69aa3f41">DynamicMemoryStream</a>, <a class="el" href="classaudio__tools_1_1_encoded_audio_stream.html#a64e9fa75beda50a9e8400ee0d4e61984">EncodedAudioStream</a>, <a class="el" href="classaudio__tools_1_1_equalizer3_bands_per_channel_t.html#a64e9fa75beda50a9e8400ee0d4e61984">Equalizer3BandsPerChannelT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_equalizer3_bands_per_channel_t.html#a64e9fa75beda50a9e8400ee0d4e61984">Equalizer3BandsPerChannelT&lt; float &gt;</a>, <a class="el" href="classaudio__tools_1_1_equalizer3_bands_t.html#aaf81d3fdaf258088d7692fa70cece087">Equalizer3BandsT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_equalizer3_bands_t.html#aaf81d3fdaf258088d7692fa70cece087">Equalizer3BandsT&lt; float &gt;</a>, <a class="el" href="classaudio__tools_1_1_equalizer_n_bands.html#aaf81d3fdaf258088d7692fa70cece087">EqualizerNBands&lt; SampleT, AccT, NUM_TAPS, NUM_BANDS &gt;</a>, <a class="el" href="classaudio__tools_1_1_e_s_p_now_stream.html#adc34417a19a7b70626d19c41072d72a5">ESPNowStream</a>, <a class="el" href="classaudio__tools_1_1_faust_stream.html#aaf81d3fdaf258088d7692fa70cece087">FaustStream&lt; DSP &gt;</a>, <a class="el" href="classaudio__tools_1_1_file_loop_t.html#aaf81d3fdaf258088d7692fa70cece087">FileLoopT&lt; FileType &gt;</a>, <a class="el" href="classaudio__tools_1_1_file_loop_t.html#aaf81d3fdaf258088d7692fa70cece087">FileLoopT&lt; File &gt;</a>, <a class="el" href="classaudio__tools_1_1_filtered_stream.html#a64e9fa75beda50a9e8400ee0d4e61984">FilteredStream&lt; T, TF &gt;</a>, <a class="el" href="classaudio__tools_1_1_format_converter_stream.html#aaf81d3fdaf258088d7692fa70cece087">FormatConverterStream</a>, <a class="el" href="classaudio__tools_1_1_generated_sound_stream.html#a64e9fa75beda50a9e8400ee0d4e61984">GeneratedSoundStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_goertzel_stream.html#aaf81d3fdaf258088d7692fa70cece087">GoertzelStream</a>, <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html#a64e9fa75beda50a9e8400ee0d4e61984">HLSStreamT&lt; URLStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html#a64e9fa75beda50a9e8400ee0d4e61984">HLSStreamT&lt; URLStreamESP32 &gt;</a>, <a class="el" href="classaudio__tools_1_1_http_request.html#a64e9fa75beda50a9e8400ee0d4e61984">HttpRequest</a>, <a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html#aaf81d3fdaf258088d7692fa70cece087">I2SCodecStream</a>, <a class="el" href="classaudio__tools_1_1_i2_s_stream.html#aaf81d3fdaf258088d7692fa70cece087">I2SStream</a>, <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#ae827632720ddd6f3037ef1ee69aa3f41">ICYStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#ae827632720ddd6f3037ef1ee69aa3f41">ICYStreamT&lt; URLStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#ae827632720ddd6f3037ef1ee69aa3f41">ICYStreamT&lt; URLStreamESP32 &gt;</a>, <a class="el" href="classaudio__tools_1_1_input_merge.html#a64e9fa75beda50a9e8400ee0d4e61984">InputMerge&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_input_mixer.html#a64e9fa75beda50a9e8400ee0d4e61984">InputMixer&lt; T, SumT &gt;</a>, <a class="el" href="classaudio__tools_1_1_memory_stream.html#ae827632720ddd6f3037ef1ee69aa3f41">MemoryStream</a>, <a class="el" href="classaudio__tools_1_1_mini_audio_stream.html#a64e9fa75beda50a9e8400ee0d4e61984">MiniAudioStream</a>, <a class="el" href="classaudio__tools_1_1_mozzi_stream.html#aaf81d3fdaf258088d7692fa70cece087">MozziStream</a>, <a class="el" href="classaudio__tools_1_1_n_r_f24_stream.html#a64e9fa75beda50a9e8400ee0d4e61984">NRF24Stream</a>, <a class="el" href="classaudio__tools_1_1_number_format_converter_stream.html#a64e9fa75beda50a9e8400ee0d4e61984">NumberFormatConverterStream</a>, <a class="el" href="classaudio__tools_1_1_pipeline.html#a64e9fa75beda50a9e8400ee0d4e61984">Pipeline</a>, <a class="el" href="structaudio__tools_1_1_pipeline_1_1_modifying_stream_adapter.html#a64e9fa75beda50a9e8400ee0d4e61984">Pipeline::ModifyingStreamAdapter</a>, <a class="el" href="classaudio__tools_1_1_port_audio_stream.html#a64e9fa75beda50a9e8400ee0d4e61984">PortAudioStream</a>, <a class="el" href="classaudio__tools_1_1_pure_data_stream.html#aaf81d3fdaf258088d7692fa70cece087">PureDataStream</a>, <a class="el" href="classaudio__tools_1_1_queue_stream.html#ae827632720ddd6f3037ef1ee69aa3f41">QueueStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_reformat_base_stream.html#a64e9fa75beda50a9e8400ee0d4e61984">ReformatBaseStream</a>, <a class="el" href="classaudio__tools_1_1_s_p_d_i_f_output.html#aaf81d3fdaf258088d7692fa70cece087">SPDIFOutput</a>, <a class="el" href="classaudio__tools_1_1_s_p_i_audio_slave.html#a64e9fa75beda50a9e8400ee0d4e61984">SPIAudioSlave</a>, <a class="el" href="classaudio__tools_1_1_stdio_stream.html#a64e9fa75beda50a9e8400ee0d4e61984">StdioStream</a>, <a class="el" href="classaudio__tools_1_1_supported_rates_stream.html#a64e9fa75beda50a9e8400ee0d4e61984">SupportedRatesStream</a>, <a class="el" href="classaudio__tools_1_1_timer_callback_audio_stream.html#aaf81d3fdaf258088d7692fa70cece087">TimerCallbackAudioStream</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#ae827632720ddd6f3037ef1ee69aa3f41">URLStream</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#aaf81d3fdaf258088d7692fa70cece087">URLStreamBufferedT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#aaf81d3fdaf258088d7692fa70cece087">URLStreamBufferedT&lt; ICYStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#aaf81d3fdaf258088d7692fa70cece087">URLStreamBufferedT&lt; ICYStreamESP32 &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#aaf81d3fdaf258088d7692fa70cece087">URLStreamBufferedT&lt; URLStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#aaf81d3fdaf258088d7692fa70cece087">URLStreamBufferedT&lt; URLStreamESP32 &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#ae827632720ddd6f3037ef1ee69aa3f41">URLStreamESP32</a>, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_device_base.html#aaf81d3fdaf258088d7692fa70cece087">USBAudioDeviceBase</a>, <a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_base.html#aaf81d3fdaf258088d7692fa70cece087">USBAudioHostBase</a>, <a class="el" href="classaudio__tools_1_1_volume_stream.html#a64e9fa75beda50a9e8400ee0d4e61984">VolumeStream</a>, <a class="el" href="classaudio__tools_1_1_v_s1053_stream.html#aaf81d3fdaf258088d7692fa70cece087">VS1053Stream</a>, and <a class="el" href="classaudio__tools_1_1_w_m8960_stream.html#aaf81d3fdaf258088d7692fa70cece087">WM8960Stream</a>.</p>
+
+</div>
+</div>
+<a id="a6778740e6f1ee0b0a35117fa218de73d" name="a6778740e6f1ee0b0a35117fa218de73d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6778740e6f1ee0b0a35117fa218de73d">&#9670;&#160;</a></span>failedBlocks()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int bytecount, int additional_bytes&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t failedBlocks </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of blocks which could not be corrected. </p>
 
 </div>
 </div>
@@ -675,6 +726,34 @@ template&lt;int bytecount, int additional_bytes&gt; </div>
 
 </div>
 </div>
+<a id="a87f42abe7d89e56d3de469e33309e1da" name="a87f42abe7d89e56d3de469e33309e1da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87f42abe7d89e56d3de469e33309e1da">&#9670;&#160;</a></span>writeBlock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int bytecount, int additional_bytes&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool writeBlock </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Writes the complete encoded block: a partial block would break the block boundaries of the receiver </p>
+
+</div>
+</div>
 <a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
 <a id="aa66a35e5edf58ce00047afcd1d4f455e" name="aa66a35e5edf58ce00047afcd1d4f455e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa66a35e5edf58ce00047afcd1d4f455e">&#9670;&#160;</a></span>_timeout</h2>
@@ -698,8 +777,8 @@ template&lt;int bytecount, int additional_bytes&gt; </div>
 
 </div>
 </div>
-<a id="a59fcbf9affcd52f52496c081e294b777" name="a59fcbf9affcd52f52496c081e294b777"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a59fcbf9affcd52f52496c081e294b777">&#9670;&#160;</a></span>encoded</h2>
+<a id="a020f7c28848b914950ea93a55b558974" name="a020f7c28848b914950ea93a55b558974"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a020f7c28848b914950ea93a55b558974">&#9670;&#160;</a></span>decoded</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -710,7 +789,103 @@ template&lt;int bytecount, int additional_bytes&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt;uint8_t&gt; encoded {bytecount+additional_bytes}</td>
+          <td class="memname">uint8_t decoded[bytecount]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af8158848711091dc044597462544dd39" name="af8158848711091dc044597462544dd39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8158848711091dc044597462544dd39">&#9670;&#160;</a></span>decoded_len</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int bytecount, int additional_bytes&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int decoded_len = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7fa06052757771596f02487c848907c5" name="a7fa06052757771596f02487c848907c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fa06052757771596f02487c848907c5">&#9670;&#160;</a></span>decoded_pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int bytecount, int additional_bytes&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int decoded_pos = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4bf1f04b7b1d9b771e81add7934083f3" name="a4bf1f04b7b1d9b771e81add7934083f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4bf1f04b7b1d9b771e81add7934083f3">&#9670;&#160;</a></span>failed_blocks</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int bytecount, int additional_bytes&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t failed_blocks = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a11547b19062e439ca76516d84e6c2140" name="a11547b19062e439ca76516d84e6c2140"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11547b19062e439ca76516d84e6c2140">&#9670;&#160;</a></span>max_write_retries</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int bytecount, int additional_bytes&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int max_write_retries = 1000</td>
         </tr>
       </table>
   </td>
@@ -770,8 +945,8 @@ template&lt;int bytecount, int additional_bytes&gt; </div>
 
 </div>
 </div>
-<a id="afe8c5ab1c7374aa227f393efbcffc265" name="afe8c5ab1c7374aa227f393efbcffc265"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe8c5ab1c7374aa227f393efbcffc265">&#9670;&#160;</a></span>raw</h2>
+<a id="a02bc7b790e000d3b80fbfc2ea00210b6" name="a02bc7b790e000d3b80fbfc2ea00210b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02bc7b790e000d3b80fbfc2ea00210b6">&#9670;&#160;</a></span>raw</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -782,7 +957,31 @@ template&lt;int bytecount, int additional_bytes&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt;uint8_t&gt; raw {bytecount}</td>
+          <td class="memname">uint8_t raw[bytecount]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0711d3f8fa3ae2efbfe8ca4d2d8fd088" name="a0711d3f8fa3ae2efbfe8ca4d2d8fd088"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0711d3f8fa3ae2efbfe8ca4d2d8fd088">&#9670;&#160;</a></span>raw_len</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int bytecount, int additional_bytes&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int raw_len = 0</td>
         </tr>
       </table>
   </td>
@@ -807,6 +1006,54 @@ template&lt;int bytecount, int additional_bytes&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="class_r_s_1_1_reed_solomon.html">RS::ReedSolomon</a>&lt;bytecount, additional_bytes&gt; rs</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a322aa10a376e47d907f3c5b9f3d46f7a" name="a322aa10a376e47d907f3c5b9f3d46f7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a322aa10a376e47d907f3c5b9f3d46f7a">&#9670;&#160;</a></span>rx_encoded</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int bytecount, int additional_bytes&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t rx_encoded[bytecount+additional_bytes]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa7fa938839f20c4e03fec56be6aa9058" name="aa7fa938839f20c4e03fec56be6aa9058"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7fa938839f20c4e03fec56be6aa9058">&#9670;&#160;</a></span>rx_len</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int bytecount, int additional_bytes&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int rx_len = 0</td>
         </tr>
       </table>
   </td>
@@ -856,6 +1103,30 @@ template&lt;int bytecount, int additional_bytes&gt; </div>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel protected">protected</span><span class="mlabel inherited">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aacce4b115539c1a0e1c22761c18e8a9b" name="aacce4b115539c1a0e1c22761c18e8a9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacce4b115539c1a0e1c22761c18e8a9b">&#9670;&#160;</a></span>tx_encoded</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int bytecount, int additional_bytes&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t tx_encoded[bytecount+additional_bytes]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

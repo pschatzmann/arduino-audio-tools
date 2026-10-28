@@ -118,12 +118,14 @@ Public Member Functions</h2></td></tr>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a31defd2070218572b20268f42fed598f" id="r_a31defd2070218572b20268f42fed598f"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a31defd2070218572b20268f42fed598f">coeff</a> = 0.0f</td></tr>
 <tr class="memitem:a460db2d6e1fcc24631a0be978694f1d6" id="r_a460db2d6e1fcc24631a0be978694f1d6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_goertzel_config.html">GoertzelConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a460db2d6e1fcc24631a0be978694f1d6">config</a></td></tr>
+<tr class="memitem:a05ece99817252b39d121c6a234c67650" id="r_a05ece99817252b39d121c6a234c67650"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a05ece99817252b39d121c6a234c67650">cos_omega</a> = 1.0f</td></tr>
 <tr class="memitem:a90598eb01c338f4bbab41ad4aab9fcc0" id="r_a90598eb01c338f4bbab41ad4aab9fcc0"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a90598eb01c338f4bbab41ad4aab9fcc0">magnitude</a> = 0.0f</td></tr>
 <tr class="memitem:ae1b97f39026ed414cfa9e916d4fd72ef" id="r_ae1b97f39026ed414cfa9e916d4fd72ef"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae1b97f39026ed414cfa9e916d4fd72ef">magnitude_squared</a> = 0.0f</td></tr>
 <tr class="memitem:ae58508818260a10b97c074d9443a7203" id="r_ae58508818260a10b97c074d9443a7203"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae58508818260a10b97c074d9443a7203">reference</a> = nullptr</td></tr>
 <tr class="memitem:a2b10e3ff8ddc612278a30549f2ee0255" id="r_a2b10e3ff8ddc612278a30549f2ee0255"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2b10e3ff8ddc612278a30549f2ee0255">s1</a> = 0.0f</td></tr>
 <tr class="memitem:a04d3cb303fe7578a89fc4c961c01c06e" id="r_a04d3cb303fe7578a89fc4c961c01c06e"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a04d3cb303fe7578a89fc4c961c01c06e">s2</a> = 0.0f</td></tr>
 <tr class="memitem:a9e0d21871ffe556f58524ae0eab311b4" id="r_a9e0d21871ffe556f58524ae0eab311b4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9e0d21871ffe556f58524ae0eab311b4">sample_count</a> = 0</td></tr>
+<tr class="memitem:a4759c13877e9bb9844cf8cd0e255bdf7" id="r_a4759c13877e9bb9844cf8cd0e255bdf7"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4759c13877e9bb9844cf8cd0e255bdf7">sin_omega</a> = 0.0f</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Single-frequency Goertzel algorithm implementation for tone detection. The Goertzel algorithm is an efficient way to compute the magnitude of a specific frequency component in a signal. It's particularly useful for DTMF (touch-tone) detection and other single-frequency detection applications. </p>
@@ -545,6 +547,28 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a05ece99817252b39d121c6a234c67650" name="a05ece99817252b39d121c6a234c67650"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05ece99817252b39d121c6a234c67650">&#9670;&#160;</a></span>cos_omega</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float cos_omega = 1.0f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a90598eb01c338f4bbab41ad4aab9fcc0" name="a90598eb01c338f4bbab41ad4aab9fcc0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a90598eb01c338f4bbab41ad4aab9fcc0">&#9670;&#160;</a></span>magnitude</h2>
 
@@ -666,6 +690,28 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">int sample_count = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4759c13877e9bb9844cf8cd0e255bdf7" name="a4759c13877e9bb9844cf8cd0e255bdf7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4759c13877e9bb9844cf8cd0e255bdf7">&#9670;&#160;</a></span>sin_omega</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float sin_omega = 0.0f</td>
         </tr>
       </table>
   </td>

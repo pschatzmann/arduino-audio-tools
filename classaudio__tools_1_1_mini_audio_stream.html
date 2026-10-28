@@ -171,6 +171,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a909f118906f9cf7024baae224dcd90a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivate/Reactivate automatic <a class="el" href="structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> updates: (default is active).  <br /></td></tr>
 <tr class="memitem:adad22dd23fc48a3b338eafe707439deb" id="r_adad22dd23fc48a3b338eafe707439deb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#adad22dd23fc48a3b338eafe707439deb">setWriteBufferSize</a> (int size)</td></tr>
 <tr class="memitem:adad22dd23fc48a3b338eafe707439deb" id="r_adad22dd23fc48a3b338eafe707439deb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#adad22dd23fc48a3b338eafe707439deb">setWriteBufferSize</a> (int size)</td></tr>
+<tr class="memitem:a14cc0231b25d428476a7a1e41234b79d" id="r_a14cc0231b25d428476a7a1e41234b79d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a14cc0231b25d428476a7a1e41234b79d">stopDevice</a> ()</td></tr>
 <tr class="memitem:adffba128cba62b029746648f6946945c" id="r_adffba128cba62b029746648f6946945c"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#adffba128cba62b029746648f6946945c">write</a> (uint8_t ch) override</td></tr>
 <tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="memitem:ad89418aeb557f65a8f1a0aed755633b1" id="r_ad89418aeb557f65a8f1a0aed755633b1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_stream.html#ad89418aeb557f65a8f1a0aed755633b1">writeSilence</a> (size_t len)</td></tr>
@@ -1440,6 +1441,32 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a14cc0231b25d428476a7a1e41234b79d" name="a14cc0231b25d428476a7a1e41234b79d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14cc0231b25d428476a7a1e41234b79d">&#9670;&#160;</a></span>stopDevice()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool stopDevice </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Stops and releases the device if it was started: returns true if it was active. Not done for a device that was never started: e.g. the destructor calls <a class="el" href="#a64e9fa75beda50a9e8400ee0d4e61984">end()</a> also if <a class="el" href="#acba365cc28eb702040c382646cfb0a7a">begin()</a> was never called </p>
 
 </div>
 </div>
