@@ -537,6 +537,7 @@ class WAVDecoder : public AudioDecoder {
     byte_buffer.reset();
     buffer24.reset();
     buffer_float16.reset();
+    data_bytes_remaining = 0;
     isFirst = true;
     active = true;
     return true;
@@ -596,20 +597,32 @@ class WAVDecoder : public AudioDecoder {
     TRACED();
     size_t result = 0;
     if (active) {
+      size_t data_start = 0;
       if (isFirst) {
-        int data_start = decodeHeader((uint8_t *)data, len);
+        int header_size = decodeHeader((uint8_t *)data, len);
         // we do not have the complete header yet: need more data
-        if (data_start == 0) return len;
+        if (header_size == 0) return len;
+        data_start = header_size;
+      }
+      if (isValid) {
         // process the outstanding data - only if the format is supported;
         // otherwise report 0 bytes written, consistent with subsequent
         // write() calls once the format has been found to be invalid
-        if (isValid) {
-          result = data_start +
-                   write_out((uint8_t *)data + data_start, len - data_start);
+        size_t audio_size = len - data_start;
+        if (!header.audioInfo().is_streamed) {
+          audio_size = min(audio_size, (size_t)data_bytes_remaining);
         }
 
-      } else if (isValid) {
-        result = write_out((uint8_t *)data, len);
+        size_t written = write_out(data + data_start, audio_size);
+        if (!header.audioInfo().is_streamed) {
+          data_bytes_remaining -= min((uint32_t)written, data_bytes_remaining);
+        }
+        result = data_start + written;
+        if (written == audio_size) {
+          // Ignore bytes after the declared data chunk, but report the entire
+          // input buffer as consumed.
+          result = len;
+        }
       }
     }
     return result;
@@ -660,6 +673,7 @@ class WAVDecoder : public AudioDecoder {
   bool isFirst = true;
   bool isValid = true;
   bool active = false;
+  uint32_t data_bytes_remaining = 0;
   /// decoder matching the format of the WAV file currently being processed
   /// (selected in decodeHeader() from the registered decoders)
   AudioDecoderExt *p_decoder = nullptr;
@@ -837,12 +851,7 @@ class WAVDecoder : public AudioDecoder {
   }
 
   /// Decodes the header data: Returns the start pos of the data
-  /// Returns the start of the audio data relative to `in_ptr` (0: header
-  /// not complete yet)
   int decodeHeader(uint8_t *in_ptr, size_t in_size) {
-    // bytes of earlier writes that are already in the header buffer: the
-    // data position found below is relative to the start of that buffer
-    int buffered_before = (int)header.available();
     // we expect at least the full header
     header.write(in_ptr, in_size);
     if (!header.isDataComplete()) {
@@ -863,8 +872,9 @@ class WAVDecoder : public AudioDecoder {
       header.dumpHeader();
       return 0;
     }
-    // determine the data start before parse(), which consumes the buffer
+    // Save the data offset before parse() clears the buffered header.
     int data_start = header.getDataPos();
+
     // parse header
     if (!header.parse()) {
       LOGE("WAV header parsing failed");
@@ -876,6 +886,7 @@ class WAVDecoder : public AudioDecoder {
     LOGI("WAV sample_rate: %d", (int)header.audioInfo().sample_rate);
     LOGI("WAV data_length: %u", (unsigned)header.audioInfo().data_length);
     LOGI("WAV is_streamed: %d", header.audioInfo().is_streamed);
+    data_bytes_remaining = header.audioInfo().data_length;
 
     // select the decoder matching the format found in the header (if any
     // was registered via setDecoder()/addDecoder()); otherwise fall back to
@@ -898,12 +909,7 @@ class WAVDecoder : public AudioDecoder {
       LOGE("WAV format not supported: 0x%04X", (unsigned)format);
       logSupportedFormats();
     }
-    // relative to this write (the 'data' tag is never in earlier writes,
-    // otherwise the header would have been complete already)
-    int result = data_start - buffered_before;
-    if (result < 0) result = 0;
-    if (result > (int)in_size) result = (int)in_size;
-    return result;
+    return data_start;
   }
 
   /// Logs (at error level) the WAV format tags this instance can currently
