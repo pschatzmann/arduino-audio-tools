@@ -22,5 +22,5 @@ var searchData=
   ['is_5fmbed_19',['IS_MBED',['../giga_8h.html#af966198bce5d27c22368678e186e39fe',1,'IS_MBED:&#160;giga.h'],['../portenta_8h.html#af966198bce5d27c22368678e186e39fe',1,'IS_MBED:&#160;portenta.h']]],
   ['is_5fnoarduino_20',['IS_NOARDUINO',['../_codec_opus_ogg_8h.html#a9c5f32aac90d1c0fdb18eb061321e464',1,'IS_NOARDUINO:&#160;CodecOpusOgg.h'],['../_codec_t_s_demux_8h.html#a9c5f32aac90d1c0fdb18eb061321e464',1,'IS_NOARDUINO:&#160;CodecTSDemux.h'],['../_arduino_8h.html#a9c5f32aac90d1c0fdb18eb061321e464',1,'IS_NOARDUINO:&#160;CodecOpusOgg.h']]],
   ['is_5frenesas_21',['IS_RENESAS',['../_codec_opus_ogg_8h.html#a80382f4849e9981710c649fb7d56c94c',1,'IS_RENESAS:&#160;CodecOpusOgg.h'],['../_codec_t_s_demux_8h.html#a80382f4849e9981710c649fb7d56c94c',1,'IS_RENESAS:&#160;CodecTSDemux.h'],['../unor4_8h.html#a80382f4849e9981710c649fb7d56c94c',1,'IS_RENESAS:&#160;CodecOpusOgg.h']]],
-  ['is_5fzephyr_22',['IS_ZEPHYR',['../arduino-zephyr_8h.html#a830d3c625b0ead2028e9ad9cf0241ef6',1,'IS_ZEPHYR:&#160;arduino-zephyr.h'],['../_platform_config_2zephyr_8h.html#a830d3c625b0ead2028e9ad9cf0241ef6',1,'IS_ZEPHYR:&#160;zephyr.h']]]
+  ['is_5fzephyr_22',['IS_ZEPHYR',['../arduino-zephyr_8h.html#a830d3c625b0ead2028e9ad9cf0241ef6',1,'IS_ZEPHYR:&#160;arduino-zephyr.h'],['../_platform_config_2_zephyr_8h.html#a830d3c625b0ead2028e9ad9cf0241ef6',1,'IS_ZEPHYR:&#160;zephyr.h']]]
 ];
