@@ -140,6 +140,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3b877769d8464c73b2a290b5c89ac5f5" id="r_a3b877769d8464c73b2a290b5c89ac5f5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3b877769d8464c73b2a290b5c89ac5f5">push_back</a> (T &amp;value)</td></tr>
 <tr class="memitem:a584c5816dbb51d8a58a0e3ccfa314c09" id="r_a584c5816dbb51d8a58a0e3ccfa314c09"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a584c5816dbb51d8a58a0e3ccfa314c09">push_front</a> (T &amp;&amp;value)</td></tr>
 <tr class="memitem:a40d005366a41634de00b5c34012e69fd" id="r_a40d005366a41634de00b5c34012e69fd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a40d005366a41634de00b5c34012e69fd">push_front</a> (T &amp;value)</td></tr>
+<tr class="memitem:a61d915531d5a0677e6724c1480107f87" id="r_a61d915531d5a0677e6724c1480107f87"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a61d915531d5a0677e6724c1480107f87">reserve</a> (int newCapacity)</td></tr>
+<tr class="memdesc:a61d915531d5a0677e6724c1480107f87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocates the memory for at least the indicated number of elements.  <br /></td></tr>
 <tr class="memitem:ad20897c5c8bd47f5d4005989bead0e55" id="r_ad20897c5c8bd47f5d4005989bead0e55"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad20897c5c8bd47f5d4005989bead0e55">reset</a> ()</td></tr>
 <tr class="memitem:a3fb8c4f54b0e9997cce834c9d7e4c9f3" id="r_a3fb8c4f54b0e9997cce834c9d7e4c9f3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3fb8c4f54b0e9997cce834c9d7e4c9f3">resize</a> (size_t newSize)</td></tr>
 <tr class="memitem:ad8327ff7ceb14054f0644f6cd43a07cc" id="r_ad8327ff7ceb14054f0644f6cd43a07cc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad8327ff7ceb14054f0644f6cd43a07cc">resize</a> (size_t newSize, T value)</td></tr>
@@ -154,6 +156,7 @@ Public Member Functions</h2></td></tr>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:ab0944d2970c659d10e6cf45e06e37e02" id="r_ab0944d2970c659d10e6cf45e06e37e02"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab0944d2970c659d10e6cf45e06e37e02">cleanup</a> (T *<a class="el" href="#adc1e16b293a89a9ccc9541058b5ca560">data</a>, int from, int to)</td></tr>
 <tr class="memitem:af2039187e350672d251fdd9f6a47cd56" id="r_af2039187e350672d251fdd9f6a47cd56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af2039187e350672d251fdd9f6a47cd56">deleteArray</a> (T *oldData, int oldBufferLen)</td></tr>
+<tr class="memitem:aa0d77094cc708cccf707b63332dea7c6" id="r_aa0d77094cc708cccf707b63332dea7c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa0d77094cc708cccf707b63332dea7c6">grow</a> (int newSize)</td></tr>
 <tr class="memitem:af37b756f600d16f07ce49cc8d4732514" id="r_af37b756f600d16f07ce49cc8d4732514"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af37b756f600d16f07ce49cc8d4732514">newArray</a> (int newSize)</td></tr>
 <tr class="memitem:a92a1834eff62d1b55c1f7011a99da544" id="r_a92a1834eff62d1b55c1f7011a99da544"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a92a1834eff62d1b55c1f7011a99da544">resize_internal</a> (int newSize, bool copy, bool shrink=false)</td></tr>
 </table><table class="memberdecls">
@@ -827,6 +830,34 @@ template&lt;class T&gt; </div>
 
 </div>
 </div>
+<a id="aa0d77094cc708cccf707b63332dea7c6" name="aa0d77094cc708cccf707b63332dea7c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0d77094cc708cccf707b63332dea7c6">&#9670;&#160;</a></span>grow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void grow </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>newSize</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Makes room for appending: the capacity is doubled, so that a sequence of <a class="el" href="#aacd6ab493bb7ee51293656dc10ac015a">push_back()</a> calls copies the data only O(log n) times </p>
+
+</div>
+</div>
 <a id="a695c334e22f775fc3b156f87b4ae9685" name="a695c334e22f775fc3b156f87b4ae9685"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a695c334e22f775fc3b156f87b4ae9685">&#9670;&#160;</a></span>indexOf()</h2>
 
@@ -1179,6 +1210,35 @@ template&lt;class T&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a61d915531d5a0677e6724c1480107f87" name="a61d915531d5a0677e6724c1480107f87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61d915531d5a0677e6724c1480107f87">&#9670;&#160;</a></span>reserve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void reserve </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>newCapacity</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Allocates the memory for at least the indicated number of elements. </p>
 
 </div>
 </div>
