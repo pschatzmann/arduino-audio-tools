@@ -180,19 +180,19 @@ class Vector {
   bool empty() { return size() == 0; }
 
   void push_back(T &&value) {
-    resize_internal(len + 1, true);
+    grow(len + 1);
     p_data[len] = value;
     len++;
   }
 
   void push_back(T &value) {
-    resize_internal(len + 1, true);
+    grow(len + 1);
     p_data[len] = value;
     len++;
   }
 
   void push_front(T &value) {
-    resize_internal(len + 1, true);
+    grow(len + 1);
     // memmove(p_data,p_data+1,len*sizeof(T));
     for (int j = len - 1; j >= 0; j--) {
       p_data[j + 1] = p_data[j];
@@ -202,7 +202,7 @@ class Vector {
   }
 
   void push_front(T &&value) {
-    resize_internal(len + 1, true);
+    grow(len + 1);
     // memmove(p_data,p_data+1,len*sizeof(T));
     for (int j = len - 1; j >= 0; j--) {
       p_data[j + 1] = p_data[j];
@@ -274,6 +274,11 @@ class Vector {
   }
 
   void shrink_to_fit() { resize_internal(this->len, true, true); }
+
+  /// Allocates the memory for at least the indicated number of elements
+  void reserve(int newCapacity) {
+    if (newCapacity > bufferLen) resize_internal(newCapacity, true);
+  }
 
   int capacity() { return this->bufferLen; }
 
@@ -359,6 +364,16 @@ class Vector {
   T *p_data = nullptr;
   Allocator *p_allocator = &DefaultAllocator;
   bool is_alloc_assert_active = true;
+
+  /// Makes room for appending: the capacity is doubled, so that a sequence
+  /// of push_back() calls copies the data only O(log n) times
+  void grow(int newSize) {
+    if (newSize <= bufferLen && p_data != nullptr) return;
+    int newCapacity = bufferLen * 2;
+    if (newCapacity < 4) newCapacity = 4;
+    if (newCapacity < newSize) newCapacity = newSize;
+    resize_internal(newCapacity, true);
+  }
 
   void resize_internal(int newSize, bool copy, bool shrink = false) {
     if (newSize <= 0) return;
