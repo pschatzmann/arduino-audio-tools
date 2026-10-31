@@ -21,6 +21,7 @@ EXCLUDE_LIST=(
   "fft-cmsis"                 # ARM Cortex-M only (STM32/RP2040/Renesas)
   "streams-stk-desktop"       # desktop build via CMake/PortAudio, not an ESP32 sketch
   "python-post-server"        # Python script, not an Arduino sketch
+  "video-server-wireframe-cube-h264" # ESP32-S3 only
 )
 
 function is_excluded {

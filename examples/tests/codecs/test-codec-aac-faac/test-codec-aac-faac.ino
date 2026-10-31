@@ -1,3 +1,4 @@
+// https://github.com/pschatzmann/codec-faac.git
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/CodecAACFAAC.h"
 

@@ -1,4 +1,5 @@
 // faad2 AAC decoding test: psram must be active
+// https://github.com/pschatzmann/codec-faad2.git
 
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/CodecAACFAAD2.h"
