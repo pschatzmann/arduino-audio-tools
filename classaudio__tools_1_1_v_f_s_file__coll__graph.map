@@ -1,8 +1,16 @@
 <map id="VFSFile" name="VFSFile">
-<area shape="rect" id="Node000001" title="Arduino File support using std::fstream." alt="" coords="5,157,74,184"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="5,81,74,109"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="41,123,42,157,37,156,38,126"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="14,5,65,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="31,46,35,81,30,80,30,51"/>
-<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="49,46,49,81,44,80,48,51"/>
+<area shape="rect" id="Node000001" title="Arduino File support using std::fstream." alt="" coords="143,284,211,311"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="5,183,74,211"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="70,217,126,257,161,283,155,283,123,262,68,222"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="14,106,65,134"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="31,146,35,183,30,183,30,152"/>
+<area shape="poly" id="edge4_Node000002_Node000003" title=" " alt="" coords="49,146,49,183,44,182,48,152"/>
+<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="20,5,59,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="40,46,42,106,37,105,39,51"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="98,183,170,211"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="132,224,134,243,139,259,147,271,159,284,154,283,143,274,134,261,129,244,129,228"/>
+<area shape="rect" id="Node000006" href="$classbool.html" title=" " alt="" coords="195,183,244,211"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="210,223,185,285,181,281,206,226"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="280,183,330,211"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="294,223,281,245,265,262,239,278,212,289,211,284,237,273,262,258,277,241,289,226"/>
 </map>

@@ -1,5 +1,16 @@
 <map id="WavIMAAudioInfo" name="WavIMAAudioInfo">
-<area shape="rect" id="Node000001" title="Sound information which is available in the WAV header &#45; adjusted for IMA ADPCM." alt="" coords="5,81,142,109"/>
-<area shape="rect" id="Node000002" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="32,5,115,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="75,47,76,81,71,80,72,51"/>
+<area shape="rect" id="Node000001" title="Sound information which is available in the WAV header &#45; adjusted for IMA ADPCM." alt="" coords="141,316,277,343"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="136,116,219,144"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="184,157,210,316,204,315,180,160"/>
+<area shape="rect" id="Node000003" href="$classuint32__t.html" title=" " alt="" coords="5,5,80,33"/>
+<area shape="poly" id="edge7_Node000001_Node000003" title=" " alt="" coords="35,51,32,98,34,126,41,152,55,180,72,205,113,251,155,288,192,315,186,315,152,292,109,255,68,209,50,182,36,154,29,127,27,98,36,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="56,43,71,63,87,80,114,99,144,114,139,116,112,103,84,84,67,66,57,49"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="147,5,221,33"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="183,46,181,116,175,115,181,50"/>
+<area shape="rect" id="Node000005" href="$classuint8__t.html" title=" " alt="" coords="248,5,314,33"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="274,46,254,84,232,103,208,117,205,113,228,99,250,80,270,50"/>
+<area shape="rect" id="Node000006" href="$classint.html" title=" " alt="" coords="243,116,282,144"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="258,158,215,317,210,314,253,159"/>
+<area shape="rect" id="Node000007" href="$classbool.html" title=" " alt="" coords="382,116,431,144"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="411,157,413,190,410,226,400,262,379,294,363,304,338,312,278,324,277,318,337,307,360,299,375,290,395,260,405,225,408,189,408,161"/>
 </map>

@@ -184,7 +184,7 @@ $(function() {
 </div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span></div>
 <div class="foldopen" id="foldopen00096" data-start="{" data-end="}">
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_m_p3_decoder_m_a_d.html#a7597ef706dd1aa590903ce9e095db20a">   96</a></span>        <span class="keywordtype">size_t</span> <a class="code hl_function" href="classaudio__tools_1_1_m_p3_decoder_m_a_d.html#a7597ef706dd1aa590903ce9e095db20a">write</a>(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_m_p3_decoder_m_a_d.html#a7597ef706dd1aa590903ce9e095db20a">   96</a></span>        <span class="keywordtype">size_t</span> <a class="code hl_function" href="classaudio__tools_1_1_m_p3_decoder_m_a_d.html#a7597ef706dd1aa590903ce9e095db20a">write</a>(<span class="keyword">const</span> <a class="code hl_class" href="classuint8__t.html">uint8_t</a> *data, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>            <a class="code hl_define" href="_codec_opus_ogg_8h.html#a4c626ed1ad7ce63349cc19db0dfaeb7b">TRACED</a>();</div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="classaudio__tools_1_1_m_p3_decoder_m_a_d.html#aa33fdbf4c173649be8659b6ce2239674">mad</a>-&gt;write(data,len);</div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        }</div>
@@ -198,7 +198,7 @@ $(function() {
 </div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span></div>
 <div class="foldopen" id="foldopen00108" data-start="{" data-end="}">
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_m_p3_decoder_m_a_d.html#a90622bd78258a36bbcf63426b28307ac">  108</a></span>        <span class="keyword">operator</span> bool()<span class="keyword"> override</span>{</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_m_p3_decoder_m_a_d.html#a90622bd78258a36bbcf63426b28307ac">  108</a></span>        <span class="keyword">operator</span> <a class="code hl_class" href="classbool.html">bool</a>()<span class="keyword"> override</span>{</div>
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            <span class="keywordflow">return</span> (<span class="keywordtype">bool</span>)*<a class="code hl_variable" href="classaudio__tools_1_1_m_p3_decoder_m_a_d.html#aa33fdbf4c173649be8659b6ce2239674">mad</a>;</div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        }</div>
 </div>
@@ -265,6 +265,8 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_print_html"><div class="ttname"><a href="classaudio__tools_1_1_print.html">audio_tools::Print</a></div><div class="ttdef"><b>Definition</b> CodecOpusOgg.h:57</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1audio__tools_1_1_audio_decoder_html_a47385aa19435f5fca9d3083a748258c5"><div class="ttname"><a href="classaudio__tools_1_1audio__tools_1_1_audio_decoder.html#a47385aa19435f5fca9d3083a748258c5">audio_tools::audio_tools::AudioDecoder::info</a></div><div class="ttdeci">AudioInfo info</div><div class="ttdef"><b>Definition</b> CodecOpusOgg.h:80</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1audio__tools_1_1_audio_decoder_html_ac576f38312091cbb6a45c74bd753f890"><div class="ttname"><a href="classaudio__tools_1_1audio__tools_1_1_audio_decoder.html#ac576f38312091cbb6a45c74bd753f890">audio_tools::audio_tools::AudioDecoder::AudioDecoder</a></div><div class="ttdeci">AudioDecoder()=default</div></div>
+<div class="ttc" id="aclassbool_html"><div class="ttname"><a href="classbool.html">bool</a></div></div>
+<div class="ttc" id="aclassuint8__t_html"><div class="ttname"><a href="classuint8__t.html">uint8_t</a></div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> LMSEchoCancellationStream.h:6</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html_af5d72c65856169d742204d6bed937127"><div class="ttname"><a href="namespaceaudio__tools.html#af5d72c65856169d742204d6bed937127">audio_tools::audioChangeMAD</a></div><div class="ttdeci">static AudioInfoSupport * audioChangeMAD</div><div class="ttdef"><b>Definition</b> CodecMP3MAD.h:15</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html">audio_tools::AudioInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:56</div></div>

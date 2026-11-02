@@ -83,12 +83,24 @@ $(function() {
 <div class="contents">
 
 <p><code>#include &lt;<a class="el" href="_paced_video_output_8h_source.html">PacedVideoOutput.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for PacedVideoOutput::FrameHeader:</div>
+<div class="dyncontent">
+<div class="center"><img src="structaudio__tools_1_1_paced_video_output_1_1_frame_header__coll__graph.png" border="0" usemap="#a_paced_video_output_1_1_frame_header_coll__map" loading="lazy" alt="Collaboration graph"/></div>
+<map name="a_paced_video_output_1_1_frame_header_coll__map" id="a_paced_video_output_1_1_frame_header_coll__map">
+<area shape="rect" title=" " alt="" coords="5,128,242,156"/>
+<area shape="rect" href="classuint32__t.html" title=" " alt="" coords="34,5,109,33"/>
+<area shape="poly" title=" " alt="" coords="67,46,68,76,76,103,86,116,100,128,94,128,82,120,71,106,63,77,65,51"/>
+<area shape="rect" href="classuint8__t.html" title=" " alt="" coords="144,5,210,33"/>
+<area shape="poly" title=" " alt="" coords="171,46,150,106,135,130,131,126,145,103,167,49"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a861b54016b20513ede021d1ba7f6810a" id="r_a861b54016b20513ede021d1ba7f6810a"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a861b54016b20513ede021d1ba7f6810a">is_key</a> = 0</td></tr>
-<tr class="memitem:ab2c6b258f02add8fdf4cfc7c371dd772" id="r_ab2c6b258f02add8fdf4cfc7c371dd772"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab2c6b258f02add8fdf4cfc7c371dd772">size</a> = 0</td></tr>
-<tr class="memitem:ad3e07fe408c82c06ae3e88141a39724c" id="r_ad3e07fe408c82c06ae3e88141a39724c"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad3e07fe408c82c06ae3e88141a39724c">target_ms</a> = 0</td></tr>
+<tr class="memitem:a861b54016b20513ede021d1ba7f6810a" id="r_a861b54016b20513ede021d1ba7f6810a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classuint8__t.html">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a861b54016b20513ede021d1ba7f6810a">is_key</a> = 0</td></tr>
+<tr class="memitem:ab2c6b258f02add8fdf4cfc7c371dd772" id="r_ab2c6b258f02add8fdf4cfc7c371dd772"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab2c6b258f02add8fdf4cfc7c371dd772">size</a> = 0</td></tr>
+<tr class="memitem:ad3e07fe408c82c06ae3e88141a39724c" id="r_ad3e07fe408c82c06ae3e88141a39724c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad3e07fe408c82c06ae3e88141a39724c">target_ms</a> = 0</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Fixed-size POD record prefixed to each frame's bytes in 'queue' - <a class="el" href="classaudio__tools_1_1_ring_buffer_s_p_s_c.html" title="Lock-free Single-Producer Single-Consumer ring buffer.">RingBufferSPSC</a> itself is just a raw byte stream with no concept of "one message", so <a class="el" href="classaudio__tools_1_1_paced_video_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a>/taskLoop() build one on top of it. </p>
@@ -100,7 +112,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t is_key = 0</td>
+          <td class="memname"><a class="el" href="classuint8__t.html">uint8_t</a> is_key = 0</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -114,7 +126,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t size = 0</td>
+          <td class="memname"><a class="el" href="classuint32__t.html">uint32_t</a> size = 0</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -128,7 +140,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t target_ms = 0</td>
+          <td class="memname"><a class="el" href="classuint32__t.html">uint32_t</a> target_ms = 0</td>
         </tr>
       </table>
 </div><div class="memdoc">

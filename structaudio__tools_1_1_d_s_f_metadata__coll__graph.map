@@ -1,5 +1,20 @@
 <map id="DSFMetadata" name="DSFMetadata">
-<area shape="rect" id="Node000001" title="Metadata structure for DSF (DSD Stream File) format." alt="" coords="5,81,115,109"/>
-<area shape="rect" id="Node000002" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="18,5,102,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="62,47,63,81,57,80,58,51"/>
+<area shape="rect" id="Node000001" title="Metadata structure for DSF (DSD Stream File) format." alt="" coords="322,249,431,276"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="189,116,273,144"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="245,155,268,190,298,223,340,248,334,248,295,227,264,193,243,160"/>
+<area shape="rect" id="Node000003" href="$classuint32__t.html" title=" " alt="" coords="21,5,95,33"/>
+<area shape="poly" id="edge5_Node000001_Node000003" title=" " alt="" coords="37,48,24,71,12,99,9,127,11,140,18,152,37,169,67,185,149,213,241,235,324,253,319,253,239,240,147,218,65,190,34,173,14,155,6,141,3,127,7,97,20,69,38,43"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="78,42,122,80,198,114,194,117,119,84,78,47"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="178,5,252,33"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="215,46,220,82,229,116,223,115,214,82,213,51"/>
+<area shape="rect" id="Node000005" href="$classuint8__t.html" title=" " alt="" coords="279,5,346,33"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="304,46,285,84,251,117,247,113,281,80,300,49"/>
+<area shape="rect" id="Node000006" href="$classuint64__t.html" title=" " alt="" coords="297,116,371,144"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="318,155,306,191,305,208,310,223,321,236,338,249,332,248,318,240,305,226,299,208,300,190,314,158"/>
+<area shape="rect" id="Node000007" href="$classfloat.html" title=" " alt="" coords="422,116,472,144"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="444,157,436,192,420,226,397,250,394,246,415,223,431,191,440,160"/>
+<area shape="rect" id="Node000008" href="$classint.html" title=" " alt="" coords="549,116,588,144"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="567,157,557,195,548,212,535,227,512,243,485,254,432,264,431,258,484,248,509,238,532,223,544,209,553,193,563,161"/>
+<area shape="rect" id="Node000009" href="$classbool.html" title=" " alt="" coords="702,116,752,144"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="727,157,718,195,709,212,695,227,675,238,648,246,578,257,501,263,431,264,431,259,500,257,577,252,647,241,673,233,692,223,704,209,713,193,723,160"/>
 </map>

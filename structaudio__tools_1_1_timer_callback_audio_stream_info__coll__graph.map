@@ -1,5 +1,20 @@
 <map id="TimerCallbackAudioStreamInfo" name="TimerCallbackAudioStreamInfo">
-<area shape="rect" id="Node000001" title="TimerCallbackAudioStream Configuration." alt="" coords="5,81,230,109"/>
-<area shape="rect" id="Node000002" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="76,5,159,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="119,47,120,82,115,79,116,51"/>
+<area shape="rect" id="Node000001" title="TimerCallbackAudioStream Configuration." alt="" coords="476,249,700,276"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="193,116,276,144"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="262,151,314,189,377,222,426,238,478,251,473,251,424,243,375,227,311,193,261,156"/>
+<area shape="rect" id="Node000003" href="$classuint32__t.html" title=" " alt="" coords="5,5,80,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="46,45,54,65,65,80,94,100,127,114,161,122,195,127,190,129,160,127,126,119,91,105,61,84,49,67,46,51"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="313,5,388,33"/>
+<area shape="poly" id="edge6_Node000001_Node000004" title=" " alt="" coords="370,43,378,56,388,83,391,107,395,128,408,152,440,184,477,210,516,231,552,249,547,248,514,236,475,215,437,188,404,155,390,130,385,107,382,85,373,58,369,48"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="326,42,312,59,249,118,246,114,308,55,322,45"/>
+<area shape="rect" id="Node000005" href="$classuint8__t.html" title=" " alt="" coords="129,5,196,33"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="158,46,161,65,166,81,182,99,204,115,199,116,178,103,161,83,156,66,157,51"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="497,116,588,144"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="534,156,528,191,529,208,535,223,545,236,559,249,554,247,541,240,530,226,524,209,523,191,530,160"/>
+<area shape="rect" id="Node000007" href="$classbool.html" title=" " alt="" coords="622,116,671,144"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="643,157,634,192,619,226,602,250,599,246,615,223,629,190,639,160"/>
+<area shape="rect" id="Node000008" href="$classint.html" title=" " alt="" coords="791,116,830,144"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="809,157,799,194,789,212,776,227,746,241,701,251,700,246,744,236,773,223,785,209,794,192,805,160"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="853,116,968,144"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="908,157,896,195,885,212,871,227,842,240,800,250,701,260,700,255,799,244,840,235,868,222,881,209,891,193,904,160"/>
 </map>

@@ -1,5 +1,27 @@
 <map id="AnalogConfigESP32V1" name="AnalogConfigESP32V1">
-<area shape="rect" id="Node000001" title="ESP32 specific configuration for i2s input via adc using the adc_continuous API." alt="" coords="5,81,170,109"/>
-<area shape="rect" id="Node000002" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="46,5,129,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="89,47,90,82,85,80,86,51"/>
+<area shape="rect" id="Node000001" title="ESP32 specific configuration for i2s input via adc using the adc_continuous API." alt="" coords="632,379,796,407"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="295,111,378,139"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="392,125,443,132,500,144,558,166,610,197,632,218,651,241,680,293,701,342,712,380,707,378,696,343,676,295,646,245,628,222,606,202,555,171,499,150,442,137,394,130"/>
+<area shape="rect" id="Node000003" href="$classuint32__t.html" title=" " alt="" coords="5,26,80,53"/>
+<area shape="poly" id="edge7_Node000001_Node000003" title=" " alt="" coords="94,31,200,27,266,29,337,36,410,50,482,72,549,104,610,147,635,174,656,205,687,271,705,334,713,380,709,378,700,335,682,273,652,207,631,177,606,151,547,108,480,77,409,55,337,41,266,34,200,32,97,36"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="93,55,104,58,219,89,296,112,292,114,218,94,103,63,95,60"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,104,80,132"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="94,117,296,122,292,126,96,122"/>
+<area shape="rect" id="Node000005" href="$classuint8__t.html" title=" " alt="" coords="9,182,76,209"/>
+<area shape="poly" id="edge11_Node000001_Node000005" title=" " alt="" coords="91,194,381,207,527,219,579,227,609,236,630,250,648,268,677,307,698,347,711,379,706,378,693,349,672,310,644,271,626,254,607,241,578,232,526,224,381,212,92,199"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="90,182,296,132,293,137,92,186"/>
+<area shape="rect" id="Node000006" href="$classint.html" title=" " alt="" coords="317,272,356,300"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="370,283,479,290,545,301,609,320,660,347,699,379,694,378,657,351,607,325,544,306,478,295,372,288"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="291,328,382,356"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="396,344,496,354,608,369,649,378,644,379,608,374,496,359,397,350"/>
+<area shape="rect" id="Node000008" href="$classbool.html" title=" " alt="" coords="312,428,361,456"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="376,445,482,450,545,448,607,439,651,424,687,408,692,406,653,429,609,444,545,453,482,456,377,450"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="243,484,430,512"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="445,505,526,501,568,493,607,481,636,465,662,445,700,408,704,406,665,449,639,470,609,486,569,498,527,506,446,511"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="243,540,430,568"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="445,566,486,565,527,561,568,552,607,536,643,507,671,471,692,435,705,409,709,405,697,438,676,474,646,511,609,540,570,557,528,566,486,571,446,571"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="292,596,380,624"/>
+<area shape="poly" id="edge12_Node000001_Node000011" title=" " alt="" coords="396,621,445,627,500,628,556,619,582,610,607,597,630,578,651,554,681,500,699,446,709,409,712,405,704,448,685,502,655,557,634,581,609,601,584,615,557,624,500,633,445,633,396,626"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="279,652,394,680"/>
+<area shape="poly" id="edge13_Node000001_Node000012" title=" " alt="" coords="402,681,451,689,504,690,558,682,583,673,606,660,636,633,659,601,677,566,690,528,705,458,711,409,714,405,710,458,695,530,682,568,663,604,640,637,610,664,585,678,559,687,505,696,450,694,402,687"/>
 </map>

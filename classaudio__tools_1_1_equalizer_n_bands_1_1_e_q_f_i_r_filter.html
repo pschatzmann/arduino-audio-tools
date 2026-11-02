@@ -100,9 +100,15 @@ Collaboration diagram for EqualizerNBands&lt; SampleT, AccT, NUM_TAPS, NUM_BANDS
 <div class="dyncontent">
 <div class="center"><img src="classaudio__tools_1_1_equalizer_n_bands_1_1_e_q_f_i_r_filter__coll__graph.png" border="0" usemap="#a_equalizer_n_bands_3_01_sample_t_00_01_acc_t_00_01_n_u_m___t_a_p_s_00_01_n_u_m___b_a_n_d_s_01_4_1_1_e_q_f_i_r_filter_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="a_equalizer_n_bands_3_01_sample_t_00_01_acc_t_00_01_n_u_m___t_a_p_s_00_01_n_u_m___b_a_n_d_s_01_4_1_1_e_q_f_i_r_filter_coll__map" id="a_equalizer_n_bands_3_01_sample_t_00_01_acc_t_00_01_n_u_m___t_a_p_s_00_01_n_u_m___b_a_n_d_s_01_4_1_1_e_q_f_i_r_filter_coll__map">
-<area shape="rect" title=" " alt="" coords="5,81,234,143"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_filter.html" title=" " alt="" coords="49,5,190,33"/>
-<area shape="poly" title=" " alt="" coords="121,47,122,81,117,80,118,51"/>
+<area shape="rect" title=" " alt="" coords="142,106,370,168"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_filter.html" title=" " alt="" coords="5,5,147,33"/>
+<area shape="poly" title=" " alt="" coords="110,39,211,104,207,107,108,44"/>
+<area shape="rect" title=" " alt="" coords="170,5,248,33"/>
+<area shape="poly" title=" " alt="" coords="207,46,213,81,227,106,222,105,208,83,204,51"/>
+<area shape="rect" href="classint.html" title=" " alt="" coords="283,5,322,33"/>
+<area shape="poly" title=" " alt="" coords="294,46,270,107,266,104,290,49"/>
+<area shape="rect" href="classint16__t.html" title=" " alt="" coords="355,5,421,33"/>
+<area shape="poly" title=" " alt="" coords="376,45,349,84,317,108,315,103,345,80,372,48"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -112,7 +118,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af6693472ecdef7e12f84d1173e925e9d" id="r_af6693472ecdef7e12f84d1173e925e9d"><td class="memItemLeft" align="right" valign="top">SampleT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af6693472ecdef7e12f84d1173e925e9d">process</a> (SampleT sample) override</td></tr>
 <tr class="memdesc:af6693472ecdef7e12f84d1173e925e9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes the input value and returns the filtered output value.  <br /></td></tr>
 <tr class="memitem:a7b0e029102ad38f4b814c6523aedb53d" id="r_a7b0e029102ad38f4b814c6523aedb53d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_filter.html#a7b0e029102ad38f4b814c6523aedb53d">reset</a> ()</td></tr>
-<tr class="memitem:aca93e7303a8742dd0972bd3892cc7b68" id="r_aca93e7303a8742dd0972bd3892cc7b68"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aca93e7303a8742dd0972bd3892cc7b68">setKernel</a> (volatile int16_t *kernel)</td></tr>
+<tr class="memitem:aca93e7303a8742dd0972bd3892cc7b68" id="r_aca93e7303a8742dd0972bd3892cc7b68"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aca93e7303a8742dd0972bd3892cc7b68">setKernel</a> (volatile <a class="el" href="classint16__t.html">int16_t</a> *kernel)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-static-methods" class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
@@ -120,8 +126,8 @@ Static Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a309da458bc1c1342e9ddef2255fe0f9a" id="r_a309da458bc1c1342e9ddef2255fe0f9a"><td class="memItemLeft" align="right" valign="top">volatile int16_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a309da458bc1c1342e9ddef2255fe0f9a">activeKernel</a> = nullptr</td></tr>
-<tr class="memitem:a6fe8cbca4aa224535d74bb20f1a7bc93" id="r_a6fe8cbca4aa224535d74bb20f1a7bc93"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6fe8cbca4aa224535d74bb20f1a7bc93">idxHist</a> = 0</td></tr>
+<tr class="memitem:a309da458bc1c1342e9ddef2255fe0f9a" id="r_a309da458bc1c1342e9ddef2255fe0f9a"><td class="memItemLeft" align="right" valign="top">volatile <a class="el" href="classint16__t.html">int16_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a309da458bc1c1342e9ddef2255fe0f9a">activeKernel</a> = nullptr</td></tr>
+<tr class="memitem:a6fe8cbca4aa224535d74bb20f1a7bc93" id="r_a6fe8cbca4aa224535d74bb20f1a7bc93"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6fe8cbca4aa224535d74bb20f1a7bc93">idxHist</a> = 0</td></tr>
 <tr class="memitem:a5f288493b3a08429e82a2145f190f52f" id="r_a5f288493b3a08429e82a2145f190f52f"><td class="memItemLeft" align="right" valign="top">SampleT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5f288493b3a08429e82a2145f190f52f">xHistory</a> [NUM_TAPS] = {(SampleT)0}</td></tr>
 </table>
 <a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -131,7 +137,7 @@ Protected Attributes</h2></td></tr>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleT = int16_t, typename AccT = int64_t, int NUM_TAPS = 128, int NUM_BANDS = 12&gt; </div>
+template&lt;typename SampleT = int16_t, typename AccT = int64_t, <a class="el" href="classint.html">int</a> NUM_TAPS = 128, <a class="el" href="classint.html">int</a> NUM_BANDS = 12&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -159,7 +165,7 @@ template&lt;typename SampleT = int16_t, typename AccT = int64_t, int NUM_TAPS = 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleT = int16_t, typename AccT = int64_t, int NUM_TAPS = 128, int NUM_BANDS = 12&gt; </div>
+template&lt;typename SampleT = int16_t, typename AccT = int64_t, <a class="el" href="classint.html">int</a> NUM_TAPS = 128, <a class="el" href="classint.html">int</a> NUM_BANDS = 12&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -186,7 +192,7 @@ template&lt;typename SampleT = int16_t, typename AccT = int64_t, int NUM_TAPS = 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleT = int16_t, typename AccT = int64_t, int NUM_TAPS = 128, int NUM_BANDS = 12&gt; </div>
+template&lt;typename SampleT = int16_t, typename AccT = int64_t, <a class="el" href="classint.html">int</a> NUM_TAPS = 128, <a class="el" href="classint.html">int</a> NUM_BANDS = 12&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -243,7 +249,7 @@ template&lt;typename SampleT = int16_t, typename AccT = int64_t, int NUM_TAPS = 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleT = int16_t, typename AccT = int64_t, int NUM_TAPS = 128, int NUM_BANDS = 12&gt; </div>
+template&lt;typename SampleT = int16_t, typename AccT = int64_t, <a class="el" href="classint.html">int</a> NUM_TAPS = 128, <a class="el" href="classint.html">int</a> NUM_BANDS = 12&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -251,7 +257,7 @@ template&lt;typename SampleT = int16_t, typename AccT = int64_t, int NUM_TAPS = 
         <tr>
           <td class="memname">void setKernel </td>
           <td>(</td>
-          <td class="paramtype">volatile int16_t *</td>          <td class="paramname"><span class="paramname"><em>kernel</em></span></td><td>)</td>
+          <td class="paramtype">volatile <a class="el" href="classint16__t.html">int16_t</a> *</td>          <td class="paramname"><span class="paramname"><em>kernel</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -271,13 +277,13 @@ template&lt;typename SampleT = int16_t, typename AccT = int64_t, int NUM_TAPS = 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleT = int16_t, typename AccT = int64_t, int NUM_TAPS = 128, int NUM_BANDS = 12&gt; </div>
+template&lt;typename SampleT = int16_t, typename AccT = int64_t, <a class="el" href="classint.html">int</a> NUM_TAPS = 128, <a class="el" href="classint.html">int</a> NUM_BANDS = 12&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">volatile int16_t* activeKernel = nullptr</td>
+          <td class="memname">volatile <a class="el" href="classint16__t.html">int16_t</a>* activeKernel = nullptr</td>
         </tr>
       </table>
   </td>
@@ -295,13 +301,13 @@ template&lt;typename SampleT = int16_t, typename AccT = int64_t, int NUM_TAPS = 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleT = int16_t, typename AccT = int64_t, int NUM_TAPS = 128, int NUM_BANDS = 12&gt; </div>
+template&lt;typename SampleT = int16_t, typename AccT = int64_t, <a class="el" href="classint.html">int</a> NUM_TAPS = 128, <a class="el" href="classint.html">int</a> NUM_BANDS = 12&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int idxHist = 0</td>
+          <td class="memname"><a class="el" href="classint.html">int</a> idxHist = 0</td>
         </tr>
       </table>
   </td>
@@ -319,7 +325,7 @@ template&lt;typename SampleT = int16_t, typename AccT = int64_t, int NUM_TAPS = 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleT = int16_t, typename AccT = int64_t, int NUM_TAPS = 128, int NUM_BANDS = 12&gt; </div>
+template&lt;typename SampleT = int16_t, typename AccT = int64_t, <a class="el" href="classint.html">int</a> NUM_TAPS = 128, <a class="el" href="classint.html">int</a> NUM_BANDS = 12&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">

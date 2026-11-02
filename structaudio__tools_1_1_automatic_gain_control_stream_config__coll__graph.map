@@ -1,5 +1,15 @@
 <map id="AutomaticGainControlStreamConfig" name="AutomaticGainControlStreamConfig">
-<area shape="rect" id="Node000001" title="Configuration for AutomaticGainControlStream." alt="" coords="5,81,218,126"/>
-<area shape="rect" id="Node000002" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="70,5,153,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="113,47,114,81,109,79,110,51"/>
+<area shape="rect" id="Node000001" title="Configuration for AutomaticGainControlStream." alt="" coords="147,341,359,385"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="121,106,204,134"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="175,147,248,340,242,340,171,150"/>
+<area shape="rect" id="Node000003" href="$classuint32__t.html" title=" " alt="" coords="5,5,80,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="49,46,59,65,70,80,94,97,123,109,118,111,92,102,66,84,54,67,49,51"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="125,5,200,33"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="163,46,165,106,160,105,162,51"/>
+<area shape="rect" id="Node000005" href="$classuint8__t.html" title=" " alt="" coords="227,5,293,33"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="253,45,245,67,232,84,216,97,198,108,195,104,213,93,229,80,240,64,250,50"/>
+<area shape="rect" id="Node000006" href="$classfloat.html" title=" " alt="" coords="228,106,278,134"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="255,148,256,341,251,339,251,150"/>
+<area shape="rect" id="Node000007" href="$classbool.html" title=" " alt="" coords="395,106,444,134"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="425,147,429,186,427,231,416,277,406,299,393,318,378,332,361,343,359,338,375,328,388,315,401,296,411,275,421,230,424,186,423,151"/>
 </map>

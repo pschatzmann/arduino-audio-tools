@@ -1,9 +1,17 @@
 <map id="ChunkedSampleTableStore&lt; T, ChunkSize &gt;" name="ChunkedSampleTableStore&lt; T, ChunkSize &gt;">
-<area shape="rect" id="Node000001" title="RAM&#45;backed like RamSampleTableStore, but grows by allocating additional fixed&#45;size chunks instead of ..." alt="" coords="18,207,212,251"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_sample_table_store.html" title="Sequential&#45;access storage for one MP4 sample table (e.g. stsz sample sizes, stco chunk offsets,..." alt="" coords="5,106,182,134"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="101,147,113,206,108,206,97,151"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="206,106,317,134"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="234,143,146,208,143,204,229,143"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="222,5,301,33"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="263,46,264,106,259,104,260,51"/>
+<area shape="rect" id="Node000001" title="RAM&#45;backed like RamSampleTableStore, but grows by allocating additional fixed&#45;size chunks instead of ..." alt="" coords="164,229,359,274"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_sample_table_store.html" title="Sequential&#45;access storage for one MP4 sample table (e.g. stsz sample sizes, stco chunk offsets,..." alt="" coords="5,128,182,156"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="128,162,230,227,225,229,126,167"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="206,128,317,156"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="263,170,264,230,259,227,260,174"/>
+<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="101,5,139,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="121,45,128,76,142,102,167,116,208,129,203,130,165,121,139,106,123,78,119,51"/>
+<area shape="rect" id="Node000005" href="$class_t.html" title=" " alt="" coords="201,5,239,33"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="216,46,217,76,224,103,232,116,244,128,239,128,228,119,219,105,212,76,214,51"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="263,5,342,33"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="295,46,268,129,264,126,292,49"/>
+<area shape="rect" id="Node000007" href="$classbool.html" title=" " alt="" coords="389,5,438,33"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="409,46,397,79,377,106,352,119,317,130,315,125,350,114,373,102,393,76,405,50"/>
+<area shape="rect" id="Node000008" href="$classsize__t.html" title=" " alt="" coords="341,128,400,156"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="355,167,323,207,294,231,292,226,320,203,351,170"/>
 </map>

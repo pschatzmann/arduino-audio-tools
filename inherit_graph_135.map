@@ -1,11 +1,3 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classaudio__tools_1_1audio__tools_1_1_filter.html" title=" " alt="" coords="5,84,98,112"/>
-<area shape="rect" id="Node000001" href="$classaudio__tools_1_1_filter_chain.html" title="A cascade of N arbitrary filters applied in series. Each sample is passed through all filters in orde..." alt="" coords="146,5,293,33"/>
-<area shape="poly" id="edge830_Node000000_Node000001" title=" " alt="" coords="88,74,145,43,178,32,173,35,147,48,91,78"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_s_o_s_filter.html" title="Second Order Sections (SOS) filter — a cascade of N BiQuad DF2 stages. Higher&#45;order filters should be..." alt="" coords="151,57,288,85"/>
-<area shape="poly" id="edge831_Node000000_Node000002" title=" " alt="" coords="112,86,153,81,148,83,114,91"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_filter_chain.html" title="A cascade of N arbitrary filters applied in series. Each sample is passed through all filters in orde..." alt="" coords="146,109,293,137"/>
-<area shape="poly" id="edge832_Node000000_Node000003" title=" " alt="" coords="113,104,148,111,143,113,113,110"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_s_o_s_filter.html" title="Second Order Sections (SOS) filter — a cascade of N BiQuad DF2 stages. Higher&#45;order filters should be..." alt="" coords="151,161,288,189"/>
-<area shape="poly" id="edge833_Node000000_Node000004" title=" " alt="" coords="90,117,147,146,178,161,173,161,145,151,89,122"/>
+<area shape="rect" id="Node000000" href="$classaudio__tools_1_1audio__tools_1_1_filter.html" title="Abstract filter interface definition. Subclasses implement process() to transform audio samples one a..." alt="" coords="5,5,98,33"/>
 </map>

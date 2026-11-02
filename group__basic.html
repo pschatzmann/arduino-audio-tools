@@ -113,15 +113,15 @@ Classes</h2></td></tr>
 <tr class="memitem:float16" id="r_float16"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1float16.html">float16</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Half-precision IEEE-754 binary16 float compressed into 2 bytes (1 sign + 5 exponent + 10 mantissa bits, no infinity/NaN encoding), used to halve the memory footprint of large float buffers (e.g. sample or FFT data) at the cost of precision: range +-131008.0, minimum positive normal ~6.1035156E-5, ~3.3 significant decimal digits. Unlike <a class="el" href="classaudio__tools_1_1float32.html" title="A plain 32-bit float&#39;s bit pattern reinterpreted as a uint32_t, so instances can live in memory obtai...">float32</a>, this is a genuinely lossy compression &ndash; converting a value in and back out will generally not return the exact original float.  <a href="classaudio__tools_1_1float16.html#details">More...</a><br /></td></tr>
 <tr class="memitem:float32" id="r_float32"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1float32.html">float32</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A plain 32-bit <span class="tt">float</span>'s bit pattern reinterpreted as a <span class="tt">uint32_t</span>, so instances can live in memory obtained from a capability-specific allocator (e.g. ESP32's MALLOC_CAP_32BIT, which some heap regions require for word-addressed access and won't necessarily hand out for a plain <span class="tt">float</span> array). Conversion to/from <span class="tt">float</span> is a zero-cost bitwise reinterpretation (see <a class="el" href="classaudio__tools_1_1float32.html#a661aa8a3f333ad40a907e412fee98ac3">as_uint()</a>/as_float()), not an encoding &ndash; unlike <a class="el" href="classaudio__tools_1_1float16.html" title="Half-precision IEEE-754 binary16 float compressed into 2 bytes (1 sign + 5 exponent + 10 mantissa bit...">float16</a>, this class is bit-for-bit identical to <span class="tt">float</span> and loses no precision or range; it exists purely to control storage/allocation, not to compress data.  <a href="classaudio__tools_1_1float32.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A plain 32-bit <span class="tt"><a class="el" href="classfloat.html">float</a></span>'s bit pattern reinterpreted as a <span class="tt"><a class="el" href="classuint32__t.html">uint32_t</a></span>, so instances can live in memory obtained from a capability-specific allocator (e.g. ESP32's MALLOC_CAP_32BIT, which some heap regions require for word-addressed access and won't necessarily hand out for a plain <span class="tt"><a class="el" href="classfloat.html">float</a></span> array). Conversion to/from <span class="tt"><a class="el" href="classfloat.html">float</a></span> is a zero-cost bitwise reinterpretation (see <a class="el" href="classaudio__tools_1_1float32.html#a661aa8a3f333ad40a907e412fee98ac3">as_uint()</a>/as_float()), not an encoding &ndash; unlike <a class="el" href="classaudio__tools_1_1float16.html" title="Half-precision IEEE-754 binary16 float compressed into 2 bytes (1 sign + 5 exponent + 10 mantissa bit...">float16</a>, this class is bit-for-bit identical to <span class="tt"><a class="el" href="classfloat.html">float</a></span> and loses no precision or range; it exists purely to control storage/allocation, not to compress data.  <a href="classaudio__tools_1_1float32.html#details">More...</a><br /></td></tr>
 <tr class="memitem:int24_5F3bytes_5Ft" id="r_int24_5F3bytes_5Ft"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1int24__3bytes__t.html">int24_3bytes_t</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">24bit integer which is used for I2S sound processing. The values are really using 3 bytes. It works only on little endian machines!  <a href="classaudio__tools_1_1audio__tools_1_1int24__3bytes__t.html#details">More...</a><br /></td></tr>
 <tr class="memitem:int24_5F3bytes_5Ft" id="r_int24_5F3bytes_5Ft"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1int24__3bytes__t.html">int24_3bytes_t</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">24bit integer which is used for I2S sound processing. The values are really using 3 bytes. It works only on little endian machines!  <a href="classaudio__tools_1_1int24__3bytes__t.html#details">More...</a><br /></td></tr>
 <tr class="memitem:int24_5F4bytes_5Ft" id="r_int24_5F4bytes_5Ft"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1int24__4bytes__t.html">int24_4bytes_t</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">24bit integer which is used for I2S sound processing. The values are represented as int32_t, but only 3 bytes are used. If you assign values which are too big, they are clipped.  <a href="classaudio__tools_1_1audio__tools_1_1int24__4bytes__t.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">24bit integer which is used for I2S sound processing. The values are represented as <a class="el" href="classint32__t.html">int32_t</a>, but only 3 bytes are used. If you assign values which are too big, they are clipped.  <a href="classaudio__tools_1_1audio__tools_1_1int24__4bytes__t.html#details">More...</a><br /></td></tr>
 <tr class="memitem:int24_5F4bytes_5Ft" id="r_int24_5F4bytes_5Ft"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1int24__4bytes__t.html">int24_4bytes_t</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">24bit integer which is used for I2S sound processing. The values are represented as int32_t, but only 3 bytes are used. If you assign values which are too big, they are clipped.  <a href="classaudio__tools_1_1int24__4bytes__t.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">24bit integer which is used for I2S sound processing. The values are represented as <a class="el" href="classint32__t.html">int32_t</a>, but only 3 bytes are used. If you assign values which are too big, they are clipped.  <a href="classaudio__tools_1_1int24__4bytes__t.html#details">More...</a><br /></td></tr>
 <tr class="memitem:MovingAverage_3C_20N_20_3E" id="r_MovingAverage_3C_20N_20_3E"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_moving_average.html">MovingAverage&lt; N &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Caclulates the moving average of a number of values.  <a href="classaudio__tools_1_1_moving_average.html#details">More...</a><br /></td></tr>
 <tr class="memitem:NumberConverter" id="r_NumberConverter"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_number_converter.html">NumberConverter</a></td></tr>
@@ -139,13 +139,13 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:ga39f8cb30fa0daf08249ab5462826a915" id="r_ga39f8cb30fa0daf08249ab5462826a915"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga39f8cb30fa0daf08249ab5462826a915">Pins</a> = <a class="el" href="classaudio__tools_1_1audio__tools_1_1_vector.html">Vector</a>&lt;int&gt;</td></tr>
+<tr class="memitem:ga39f8cb30fa0daf08249ab5462826a915" id="r_ga39f8cb30fa0daf08249ab5462826a915"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga39f8cb30fa0daf08249ab5462826a915">Pins</a> = <a class="el" href="classaudio__tools_1_1audio__tools_1_1_vector.html">Vector</a>&lt;<a class="el" href="classint.html">int</a>&gt;</td></tr>
 <tr class="memdesc:ga39f8cb30fa0daf08249ab5462826a915"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for a collection of pin numbers.  <br /></td></tr>
-<tr class="memitem:ga869d6ee1c77c17df29cad21068f647cc" id="r_ga869d6ee1c77c17df29cad21068f647cc"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga869d6ee1c77c17df29cad21068f647cc">Pins</a> = <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;int&gt;</td></tr>
+<tr class="memitem:ga869d6ee1c77c17df29cad21068f647cc" id="r_ga869d6ee1c77c17df29cad21068f647cc"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga869d6ee1c77c17df29cad21068f647cc">Pins</a> = <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;<a class="el" href="classint.html">int</a>&gt;</td></tr>
 <tr class="memdesc:ga869d6ee1c77c17df29cad21068f647cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for a collection of pin numbers.  <br /></td></tr>
-<tr class="memitem:ga8fbad1f4d5e92608f383fad2041410cb" id="r_ga8fbad1f4d5e92608f383fad2041410cb"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga8fbad1f4d5e92608f383fad2041410cb">sample_rate_t</a> = uint32_t</td></tr>
+<tr class="memitem:ga8fbad1f4d5e92608f383fad2041410cb" id="r_ga8fbad1f4d5e92608f383fad2041410cb"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga8fbad1f4d5e92608f383fad2041410cb">sample_rate_t</a> = <a class="el" href="classuint32__t.html">uint32_t</a></td></tr>
 <tr class="memdesc:ga8fbad1f4d5e92608f383fad2041410cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for sample rate values.  <br /></td></tr>
-<tr class="memitem:ga61cb255f24ebd0bbb95f02eaad61599f" id="r_ga61cb255f24ebd0bbb95f02eaad61599f"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga61cb255f24ebd0bbb95f02eaad61599f">sample_rate_t</a> = uint32_t</td></tr>
+<tr class="memitem:ga61cb255f24ebd0bbb95f02eaad61599f" id="r_ga61cb255f24ebd0bbb95f02eaad61599f"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga61cb255f24ebd0bbb95f02eaad61599f">sample_rate_t</a> = <a class="el" href="classuint32__t.html">uint32_t</a></td></tr>
 <tr class="memdesc:ga61cb255f24ebd0bbb95f02eaad61599f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for sample rate values.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
@@ -302,19 +302,19 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gadb16c7952958e552a99aef97a8c6a5bf" id="r_gadb16c7952958e552a99aef97a8c6a5bf"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gadb16c7952958e552a99aef97a8c6a5bf">checkMemory</a> (bool printMemory=false)</td></tr>
+<tr class="memitem:gadb16c7952958e552a99aef97a8c6a5bf" id="r_gadb16c7952958e552a99aef97a8c6a5bf"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gadb16c7952958e552a99aef97a8c6a5bf">checkMemory</a> (<a class="el" href="classbool.html">bool</a> printMemory=false)</td></tr>
 <tr class="memdesc:gadb16c7952958e552a99aef97a8c6a5bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes heap_caps_check_integrity_all().  <br /></td></tr>
-<tr class="memitem:gadb16c7952958e552a99aef97a8c6a5bf" id="r_gadb16c7952958e552a99aef97a8c6a5bf"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gadb16c7952958e552a99aef97a8c6a5bf">checkMemory</a> (bool printMemory=false)</td></tr>
+<tr class="memitem:gadb16c7952958e552a99aef97a8c6a5bf" id="r_gadb16c7952958e552a99aef97a8c6a5bf"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gadb16c7952958e552a99aef97a8c6a5bf">checkMemory</a> (<a class="el" href="classbool.html">bool</a> printMemory=false)</td></tr>
 <tr class="memdesc:gadb16c7952958e552a99aef97a8c6a5bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes heap_caps_check_integrity_all().  <br /></td></tr>
-<tr class="memitem:ga183090255e5211f67c811a90392eb9ab" id="r_ga183090255e5211f67c811a90392eb9ab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga183090255e5211f67c811a90392eb9ab">printNChar</a> (char ch, int n)</td></tr>
+<tr class="memitem:ga183090255e5211f67c811a90392eb9ab" id="r_ga183090255e5211f67c811a90392eb9ab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga183090255e5211f67c811a90392eb9ab">printNChar</a> (char ch, <a class="el" href="classint.html">int</a> n)</td></tr>
 <tr class="memdesc:ga183090255e5211f67c811a90392eb9ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints n times the character ch and a new line  <br /></td></tr>
 <tr class="memitem:ga8c528baf37154d347366083f0f816846" id="r_ga8c528baf37154d347366083f0f816846"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga8c528baf37154d347366083f0f816846">stop</a> ()</td></tr>
 <tr class="memdesc:ga8c528baf37154d347366083f0f816846"><td class="mdescLeft">&#160;</td><td class="mdescRight">stops any further processing by spinning in an endless loop  <br /></td></tr>
 <tr class="memitem:ga8c528baf37154d347366083f0f816846" id="r_ga8c528baf37154d347366083f0f816846"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga8c528baf37154d347366083f0f816846">stop</a> ()</td></tr>
 <tr class="memdesc:ga8c528baf37154d347366083f0f816846"><td class="mdescLeft">&#160;</td><td class="mdescRight">stops any further processing by spinning in an endless loop  <br /></td></tr>
-<tr class="memitem:ga70cebe1fd6d35a87e3e31dd05ee17664" id="r_ga70cebe1fd6d35a87e3e31dd05ee17664"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga70cebe1fd6d35a87e3e31dd05ee17664">waitFor</a> (bool &amp;flag)</td></tr>
+<tr class="memitem:ga70cebe1fd6d35a87e3e31dd05ee17664" id="r_ga70cebe1fd6d35a87e3e31dd05ee17664"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga70cebe1fd6d35a87e3e31dd05ee17664">waitFor</a> (<a class="el" href="classbool.html">bool</a> &amp;flag)</td></tr>
 <tr class="memdesc:ga70cebe1fd6d35a87e3e31dd05ee17664"><td class="mdescLeft">&#160;</td><td class="mdescRight">wait for flag to be active  <br /></td></tr>
-<tr class="memitem:ga70cebe1fd6d35a87e3e31dd05ee17664" id="r_ga70cebe1fd6d35a87e3e31dd05ee17664"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga70cebe1fd6d35a87e3e31dd05ee17664">waitFor</a> (bool &amp;flag)</td></tr>
+<tr class="memitem:ga70cebe1fd6d35a87e3e31dd05ee17664" id="r_ga70cebe1fd6d35a87e3e31dd05ee17664"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga70cebe1fd6d35a87e3e31dd05ee17664">waitFor</a> (<a class="el" href="classbool.html">bool</a> &amp;flag)</td></tr>
 <tr class="memdesc:ga70cebe1fd6d35a87e3e31dd05ee17664"><td class="mdescLeft">&#160;</td><td class="mdescRight">wait for flag to be active  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
@@ -327,7 +327,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="classaudio__tools_1_1audio__tools_1_1_vector.html">Vector</a>&lt; int &gt; <a class="el" href="#ga39f8cb30fa0daf08249ab5462826a915">Pins</a> = <a class="el" href="classaudio__tools_1_1audio__tools_1_1_vector.html">Vector</a>&lt;int&gt;</td>
+          <td class="memname">typedef <a class="el" href="classaudio__tools_1_1audio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classint.html">int</a> &gt; <a class="el" href="#ga39f8cb30fa0daf08249ab5462826a915">Pins</a> = <a class="el" href="classaudio__tools_1_1audio__tools_1_1_vector.html">Vector</a>&lt;<a class="el" href="classint.html">int</a>&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -343,7 +343,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="#ga869d6ee1c77c17df29cad21068f647cc">Pins</a> = <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;int&gt;</td>
+          <td class="memname">using <a class="el" href="#ga869d6ee1c77c17df29cad21068f647cc">Pins</a> = <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;<a class="el" href="classint.html">int</a>&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -359,7 +359,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef uint32_t <a class="el" href="#ga8fbad1f4d5e92608f383fad2041410cb">sample_rate_t</a> = uint32_t</td>
+          <td class="memname">typedef <a class="el" href="classuint32__t.html">uint32_t</a> <a class="el" href="#ga8fbad1f4d5e92608f383fad2041410cb">sample_rate_t</a> = <a class="el" href="classuint32__t.html">uint32_t</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -375,7 +375,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="#ga61cb255f24ebd0bbb95f02eaad61599f">sample_rate_t</a> = uint32_t</td>
+          <td class="memname">using <a class="el" href="#ga61cb255f24ebd0bbb95f02eaad61599f">sample_rate_t</a> = <a class="el" href="classuint32__t.html">uint32_t</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -684,7 +684,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void checkMemory </td>
           <td>(</td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>printMemory</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classbool.html">bool</a></td>          <td class="paramname"><span class="paramname"><em>printMemory</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -711,7 +711,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void checkMemory </td>
           <td>(</td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>printMemory</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classbool.html">bool</a></td>          <td class="paramname"><span class="paramname"><em>printMemory</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -743,7 +743,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>n</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -823,7 +823,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void waitFor </td>
           <td>(</td>
-          <td class="paramtype">bool &amp;</td>          <td class="paramname"><span class="paramname"><em>flag</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classbool.html">bool</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>flag</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -850,7 +850,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void waitFor </td>
           <td>(</td>
-          <td class="paramtype">bool &amp;</td>          <td class="paramname"><span class="paramname"><em>flag</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classbool.html">bool</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>flag</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>

@@ -93,12 +93,14 @@ Collaboration diagram for NumberReader:</div>
 <div class="dyncontent">
 <div class="center"><img src="classaudio__tools_1_1_number_reader__coll__graph.png" border="0" usemap="#a_number_reader_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="a_number_reader_coll__map" id="a_number_reader_coll__map">
-<area shape="rect" title="Reads n numbers from an Arduino Stream." alt="" coords="5,183,125,211"/>
-<area shape="rect" href="classaudio__tools_1_1_stream.html" title=" " alt="" coords="31,82,99,110"/>
-<area shape="poly" title=" " alt="" coords="67,124,68,183,62,182,63,127"/>
-<area shape="rect" href="classaudio__tools_1_1_print.html" title=" " alt="" coords="39,5,91,33"/>
-<area shape="poly" title=" " alt="" coords="57,46,61,82,55,82,56,51"/>
-<area shape="poly" title=" " alt="" coords="75,46,75,83,69,82,73,51"/>
+<area shape="rect" title="Reads n numbers from an Arduino Stream." alt="" coords="5,284,125,311"/>
+<area shape="rect" href="classaudio__tools_1_1_stream.html" title=" " alt="" coords="31,183,99,211"/>
+<area shape="poly" title=" " alt="" coords="67,225,68,284,62,283,63,228"/>
+<area shape="rect" href="classaudio__tools_1_1_print.html" title=" " alt="" coords="39,106,91,134"/>
+<area shape="poly" title=" " alt="" coords="57,146,61,183,55,182,56,152"/>
+<area shape="poly" title=" " alt="" coords="75,147,75,183,69,182,73,152"/>
+<area shape="rect" href="classint.html" title=" " alt="" coords="46,5,84,33"/>
+<area shape="poly" title=" " alt="" coords="66,46,68,106,62,105,64,51"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -106,13 +108,13 @@ Collaboration diagram for NumberReader:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a1f7316a834bd26bb73b44144beede201" id="r_a1f7316a834bd26bb73b44144beede201"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1f7316a834bd26bb73b44144beede201">NumberReader</a> ()</td></tr>
 <tr class="memitem:a41784707de97a2fba17b138a0f0e5c31" id="r_a41784707de97a2fba17b138a0f0e5c31"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a41784707de97a2fba17b138a0f0e5c31">NumberReader</a> (<a class="el" href="class_stream.html">Stream</a> &amp;in)</td></tr>
-<tr class="memitem:afa827e3774a6bb3c8fff9da7a548f4ea" id="r_afa827e3774a6bb3c8fff9da7a548f4ea"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afa827e3774a6bb3c8fff9da7a548f4ea">read</a> (int inBits, int outBits, bool outSigned, int n, int32_t *result)</td></tr>
-<tr class="memitem:addd2f922007cf3962800b48d6f123dfb" id="r_addd2f922007cf3962800b48d6f123dfb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addd2f922007cf3962800b48d6f123dfb">toNumbers</a> (void *bufferIn, int inBits, int outBits, bool outSigned, int n, int32_t *result)</td></tr>
+<tr class="memitem:afa827e3774a6bb3c8fff9da7a548f4ea" id="r_afa827e3774a6bb3c8fff9da7a548f4ea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afa827e3774a6bb3c8fff9da7a548f4ea">read</a> (<a class="el" href="classint.html">int</a> inBits, <a class="el" href="classint.html">int</a> outBits, <a class="el" href="classbool.html">bool</a> outSigned, <a class="el" href="classint.html">int</a> n, <a class="el" href="classint32__t.html">int32_t</a> *result)</td></tr>
+<tr class="memitem:addd2f922007cf3962800b48d6f123dfb" id="r_addd2f922007cf3962800b48d6f123dfb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addd2f922007cf3962800b48d6f123dfb">toNumbers</a> (void *bufferIn, <a class="el" href="classint.html">int</a> inBits, <a class="el" href="classint.html">int</a> outBits, <a class="el" href="classbool.html">bool</a> outSigned, <a class="el" href="classint.html">int</a> n, <a class="el" href="classint32__t.html">int32_t</a> *result)</td></tr>
 <tr class="memdesc:addd2f922007cf3962800b48d6f123dfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">converts a buffer to a number array  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-methods" class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a9e29648c128bacf632eab24eae54416f" id="r_a9e29648c128bacf632eab24eae54416f"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9e29648c128bacf632eab24eae54416f">scale</a> (int32_t value, int inBits, int outBits, bool outSigned=true)</td></tr>
+<tr class="memitem:a9e29648c128bacf632eab24eae54416f" id="r_a9e29648c128bacf632eab24eae54416f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint32__t.html">int32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9e29648c128bacf632eab24eae54416f">scale</a> (<a class="el" href="classint32__t.html">int32_t</a> value, <a class="el" href="classint.html">int</a> inBits, <a class="el" href="classint.html">int</a> outBits, <a class="el" href="classbool.html">bool</a> outSigned=true)</td></tr>
 <tr class="memdesc:a9e29648c128bacf632eab24eae54416f"><td class="mdescLeft">&#160;</td><td class="mdescRight">scale the value  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -183,29 +185,29 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool read </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> read </td>
           <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>inBits</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>inBits</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>outBits</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>outBits</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>outSigned</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classbool.html">bool</a></td>          <td class="paramname"><span class="paramname"><em>outSigned</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>n</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int32_t *</td>          <td class="paramname"><span class="paramname"><em>result</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classint32__t.html">int32_t</a> *</td>          <td class="paramname"><span class="paramname"><em>result</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -227,24 +229,24 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int32_t scale </td>
+          <td class="memname"><a class="el" href="classint32__t.html">int32_t</a> scale </td>
           <td>(</td>
-          <td class="paramtype">int32_t</td>          <td class="paramname"><span class="paramname"><em>value</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classint32__t.html">int32_t</a></td>          <td class="paramname"><span class="paramname"><em>value</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>inBits</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>inBits</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>outBits</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>outBits</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>outSigned</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classbool.html">bool</a></td>          <td class="paramname"><span class="paramname"><em>outSigned</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -268,34 +270,34 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool toNumbers </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> toNumbers </td>
           <td>(</td>
           <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>bufferIn</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>inBits</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>inBits</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>outBits</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>outBits</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>outSigned</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classbool.html">bool</a></td>          <td class="paramname"><span class="paramname"><em>outSigned</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>n</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int32_t *</td>          <td class="paramname"><span class="paramname"><em>result</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classint32__t.html">int32_t</a> *</td>          <td class="paramname"><span class="paramname"><em>result</em></span>&#160;)</td>
         </tr>
       </table>
   </td>

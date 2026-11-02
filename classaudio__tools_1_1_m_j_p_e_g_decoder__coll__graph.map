@@ -1,16 +1,32 @@
 <map id="MJPEGDecoder" name="MJPEGDecoder">
-<area shape="rect" id="Node000001" title="Motion&#45;JPEG video decoder: wraps TinyJPEGDecoder (https://github.com/pschatzmann/TinyJPEG,..." alt="" coords="258,229,375,257"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 &#45; CodecH264...." alt="" coords="116,106,229,134"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="201,141,303,228,298,229,198,146"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="" coords="5,5,108,33"/>
-<area shape="poly" id="edge7_Node000001_Node000003" title=" " alt="" coords="35,48,25,67,15,89,13,112,20,132,42,158,69,180,100,197,132,211,198,228,260,239,255,239,197,234,130,216,97,202,66,184,39,162,15,135,7,112,10,88,20,64,36,43"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="84,40,159,104,155,106,83,46"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_video_info_source.html" title="Provider of VideoInfo (width/height/fps/format) for whoever needs to size buffers/panel setup against..." alt="" coords="253,106,380,134"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="319,148,319,230,314,227,314,151"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="404,106,541,134"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="447,143,335,231,332,226,441,144"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="433,5,512,33"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="474,47,475,107,470,104,471,51"/>
-<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="566,106,617,134"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="579,145,554,180,521,207,485,223,447,234,376,244,375,239,446,229,483,218,518,203,550,176,574,148"/>
+<area shape="rect" id="Node000001" title="Motion&#45;JPEG video decoder: wraps TinyJPEGDecoder (https://github.com/pschatzmann/TinyJPEG,..." alt="" coords="584,324,701,352"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 &#45; CodecH264...." alt="" coords="319,95,432,122"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="446,119,506,141,536,156,562,176,593,212,616,254,631,293,640,325,635,323,626,295,611,256,588,215,558,180,533,161,504,146,447,125"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="" coords="5,27,108,54"/>
+<area shape="poly" id="edge14_Node000001_Node000003" title=" " alt="" coords="122,29,221,23,279,25,339,32,401,44,460,65,514,94,562,133,581,156,597,182,620,236,635,286,642,325,637,323,630,287,615,238,592,184,576,159,558,137,511,98,457,70,399,50,339,37,278,31,221,29,125,34"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="121,45,200,55,283,73,342,93,337,95,282,78,199,61,124,49"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_video_info_source.html" title="Provider of VideoInfo (width/height/fps/format) for whoever needs to size buffers/panel setup against..." alt="" coords="312,171,439,198"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="454,179,509,187,536,196,562,209,591,235,613,266,639,324,634,323,608,269,587,238,558,213,534,201,508,192,455,184"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="307,279,444,306"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="452,308,468,311,586,330,581,332,468,316,453,313"/>
+<area shape="rect" id="Node000006" href="$classint.html" title=" " alt="" coords="37,128,76,156"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="88,160,133,181,175,190,211,189,246,191,264,198,284,211,295,223,298,236,301,248,309,260,333,278,328,279,305,264,296,250,293,237,290,225,281,215,262,203,245,196,211,194,174,195,131,186,90,165"/>
+<area shape="rect" id="Node000013" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="350,223,401,250"/>
+<area shape="poly" id="edge13_Node000013_Node000006" title=" " alt="" coords="88,127,132,113,183,105,236,108,261,116,284,129,293,138,298,148,299,169,299,189,309,208,328,222,352,231,347,233,326,227,305,212,294,190,294,169,293,150,289,141,281,133,259,121,235,113,183,111,133,119,92,131"/>
+<area shape="rect" id="Node000007" href="$classuint8__t_01_5.html" title=" " alt="" coords="18,223,95,250"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="110,239,192,248,283,263,332,277,327,279,282,268,192,253,112,244"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="17,279,96,306"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="111,290,308,290,304,295,113,295"/>
+<area shape="rect" id="Node000009" href="$classbool.html" title=" " alt="" coords="32,356,81,384"/>
+<area shape="poly" id="edge16_Node000001_Node000009" title=" " alt="" coords="96,366,283,359,585,340,582,344,283,365,97,371"/>
+<area shape="poly" id="edge8_Node000005_Node000009" title=" " alt="" coords="95,361,181,344,282,320,336,305,332,308,283,325,183,349,98,366"/>
+<area shape="rect" id="Node000010" href="$classsize__t.html" title=" " alt="" coords="346,407,405,434"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="420,421,487,418,524,411,559,400,598,377,626,354,631,351,601,381,561,405,525,416,488,423,421,426"/>
+<area shape="rect" id="Node000011" href="$classuint64__t.html" title=" " alt="" coords="338,459,412,486"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="428,475,493,472,527,464,559,450,585,428,607,401,634,354,638,350,611,404,589,432,561,454,529,469,494,477,429,480"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="309,512,442,540"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="457,532,510,526,535,517,558,505,577,489,592,470,615,427,629,384,637,354,641,350,634,386,620,429,596,473,581,493,562,509,537,522,511,531,458,537"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="416,234,486,241,524,250,561,264,602,292,632,324,627,323,599,296,559,268,523,255,485,246,417,239"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="338,591,412,618"/>
+<area shape="poly" id="edge15_Node000001_Node000014" title=" " alt="" coords="428,611,461,612,495,610,529,601,558,584,583,559,602,529,616,496,626,462,637,398,640,354,643,350,642,399,632,464,621,498,607,532,587,563,562,589,531,606,496,615,461,618,428,616"/>
 </map>

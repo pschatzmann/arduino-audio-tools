@@ -1,12 +1,15 @@
 <map id="RingBufferFile&lt; File, T &gt;" name="RingBufferFile&lt; File, T &gt;">
-<area shape="rect" id="Node000001" title="An File backed Ring Buffer that we can use to receive streaming audio. We expect an open file as para..." alt="" coords="5,260,187,288"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="10,159,140,187"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="83,200,96,260,90,259,79,204"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_zephyr_file.html" title="Arduino File API for Zephyr." alt="" coords="164,159,254,187"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="186,197,113,262,110,257,181,197"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="175,82,244,110"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="211,123,212,160,207,158,208,128"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="184,5,235,33"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="202,46,205,83,200,81,200,51"/>
-<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="219,46,219,83,214,81,217,51"/>
+<area shape="rect" id="Node000001" title="An File backed Ring Buffer that we can use to receive streaming audio. We expect an open file as para..." alt="" coords="82,425,264,453"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="5,324,136,352"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,360,162,424,157,425,94,365"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_zephyr_file.html" title="Arduino File API for Zephyr." alt="" coords="251,324,341,352"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="271,361,191,427,188,422,266,362"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="302,215,370,243"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="328,255,303,325,299,322,324,259"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="310,106,362,134"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="329,147,332,215,327,214,326,152"/>
+<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="345,147,344,216,340,213,342,152"/>
+<area shape="rect" id="Node000006" href="$classint.html" title=" " alt="" coords="175,5,214,33"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="186,45,180,82,176,119,176,340,176,426,171,424,170,340,171,118,174,81,184,51"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="226,39,319,104,314,106,226,45"/>
 </map>

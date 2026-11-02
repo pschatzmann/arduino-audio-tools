@@ -1,5 +1,7 @@
 <map id="MutexRecursiveZephyr" name="MutexRecursiveZephyr">
-<area shape="rect" id="Node000001" title="Recursive Mutex implementation using Zephyr kernel mutex." alt="" coords="5,81,178,109"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_mutex_base.html" title="Empty Mutex implementation which does nothing." alt="" coords="44,5,139,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="93,47,94,82,89,80,90,51"/>
+<area shape="rect" id="Node000001" title="Recursive Mutex implementation using Zephyr kernel mutex." alt="" coords="32,106,204,134"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_mutex_base.html" title="Empty Mutex implementation which does nothing." alt="" coords="5,5,100,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="71,44,112,105,106,106,68,48"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="124,5,243,33"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="169,45,129,107,125,104,164,47"/>
 </map>

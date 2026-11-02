@@ -104,11 +104,15 @@ Collaboration diagram for Bin:</div>
 <div class="dyncontent">
 <div class="center"><img src="classaudio__tools_1_1_bin__coll__graph.png" border="0" usemap="#a_bin_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="a_bin_coll__map" id="a_bin_coll__map">
-<area shape="rect" title="Provides reduced sampling rates through binning." alt="" coords="103,106,145,134"/>
+<area shape="rect" title="Provides reduced sampling rates through binning." alt="" coords="192,151,234,178"/>
 <area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="" coords="5,5,123,33"/>
-<area shape="poly" title=" " alt="" coords="81,44,119,105,113,106,78,49"/>
-<area shape="rect" href="structaudio__tools_1_1audio__tools_1_1_bin_1_1_bin_state.html" title=" " alt="" coords="147,5,224,33"/>
-<area shape="poly" title=" " alt="" coords="172,45,134,107,130,104,167,47"/>
+<area shape="poly" title=" " alt="" coords="82,43,114,84,154,125,194,153,189,153,150,129,110,87,80,48"/>
+<area shape="rect" href="classint.html" title=" " alt="" coords="146,5,185,33"/>
+<area shape="poly" title=" " alt="" coords="161,46,160,86,163,107,170,125,180,139,194,152,189,151,176,143,165,128,158,108,155,87,158,50"/>
+<area shape="rect" href="classbool.html" title=" " alt="" coords="238,5,287,33"/>
+<area shape="poly" title=" " alt="" coords="259,47,236,128,223,152,220,148,231,126,255,50"/>
+<area shape="rect" href="structaudio__tools_1_1audio__tools_1_1_bin_1_1_bin_state.html" title=" " alt="" coords="316,5,393,33"/>
+<area shape="poly" title=" " alt="" coords="354,47,345,89,336,110,322,129,302,144,279,154,236,164,235,159,277,149,299,139,318,125,331,108,340,88,350,50"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -120,28 +124,28 @@ Classes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aa20046072d873cc987ccbce319def793" id="r_aa20046072d873cc987ccbce319def793"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa20046072d873cc987ccbce319def793">Bin</a> ()=default</td></tr>
-<tr class="memitem:a7a8d1bb55ae4837277e45704cd9e4149" id="r_a7a8d1bb55ae4837277e45704cd9e4149"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7a8d1bb55ae4837277e45704cd9e4149">Bin</a> (int <a class="el" href="#ac3a94ca1a8a667171980dbc960551e2f">binSize</a>, int <a class="el" href="#a178795099d0608972755dfef8d8367e3">channels</a>, bool <a class="el" href="#a55ce3ee1d017c595b94c8d35312d5076">average</a>, int bits_per_sample)</td></tr>
+<tr class="memitem:a7a8d1bb55ae4837277e45704cd9e4149" id="r_a7a8d1bb55ae4837277e45704cd9e4149"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7a8d1bb55ae4837277e45704cd9e4149">Bin</a> (<a class="el" href="classint.html">int</a> <a class="el" href="#ac3a94ca1a8a667171980dbc960551e2f">binSize</a>, <a class="el" href="classint.html">int</a> <a class="el" href="#a178795099d0608972755dfef8d8367e3">channels</a>, <a class="el" href="classbool.html">bool</a> <a class="el" href="#a55ce3ee1d017c595b94c8d35312d5076">average</a>, <a class="el" href="classint.html">int</a> bits_per_sample)</td></tr>
 <tr class="memitem:a4f2a59af3647d6229b7ec01efb795a43" id="r_a4f2a59af3647d6229b7ec01efb795a43"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4f2a59af3647d6229b7ec01efb795a43">~Bin</a> () override</td></tr>
 <tr class="memitem:ac8bb3912a3ce86b15842e79d0b421204" id="r_ac8bb3912a3ce86b15842e79d0b421204"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac8bb3912a3ce86b15842e79d0b421204">clear</a> ()</td></tr>
-<tr class="memitem:a65ed1c2e44cb48c5294dceeb0d0de040" id="r_a65ed1c2e44cb48c5294dceeb0d0de040"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a65ed1c2e44cb48c5294dceeb0d0de040">convert</a> (uint8_t *src, size_t size)</td></tr>
-<tr class="memitem:ab42262038579ccc4e2b40cbbd4034847" id="r_ab42262038579ccc4e2b40cbbd4034847"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab42262038579ccc4e2b40cbbd4034847">convert</a> (uint8_t *target, uint8_t *src, size_t size)</td></tr>
+<tr class="memitem:a65ed1c2e44cb48c5294dceeb0d0de040" id="r_a65ed1c2e44cb48c5294dceeb0d0de040"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a65ed1c2e44cb48c5294dceeb0d0de040">convert</a> (<a class="el" href="classuint8__t.html">uint8_t</a> *src, <a class="el" href="classsize__t.html">size_t</a> size)</td></tr>
+<tr class="memitem:ab42262038579ccc4e2b40cbbd4034847" id="r_ab42262038579ccc4e2b40cbbd4034847"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab42262038579ccc4e2b40cbbd4034847">convert</a> (<a class="el" href="classuint8__t.html">uint8_t</a> *target, <a class="el" href="classuint8__t.html">uint8_t</a> *src, <a class="el" href="classsize__t.html">size_t</a> size)</td></tr>
 <tr class="memitem:ad20897c5c8bd47f5d4005989bead0e55" id="r_ad20897c5c8bd47f5d4005989bead0e55"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad20897c5c8bd47f5d4005989bead0e55">reset</a> ()</td></tr>
-<tr class="memitem:a49a1155cee2a5d04c3b91dc7286c2bdf" id="r_a49a1155cee2a5d04c3b91dc7286c2bdf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a49a1155cee2a5d04c3b91dc7286c2bdf">setAverage</a> (bool <a class="el" href="#a55ce3ee1d017c595b94c8d35312d5076">average</a>)</td></tr>
-<tr class="memitem:ae589d167a068577fc791a7cf866ccb55" id="r_ae589d167a068577fc791a7cf866ccb55"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae589d167a068577fc791a7cf866ccb55">setBinSize</a> (int <a class="el" href="#ac3a94ca1a8a667171980dbc960551e2f">binSize</a>)</td></tr>
-<tr class="memitem:aeca742f487a243d63e83083e80b93676" id="r_aeca742f487a243d63e83083e80b93676"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeca742f487a243d63e83083e80b93676">setBits</a> (int <a class="el" href="#ad1e28a1a66a25529b0b61b9ca4e66d44">bits</a>)</td></tr>
-<tr class="memitem:ab5a7ba68d6c150f9643e74f3838270a5" id="r_ab5a7ba68d6c150f9643e74f3838270a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab5a7ba68d6c150f9643e74f3838270a5">setChannels</a> (int <a class="el" href="#a178795099d0608972755dfef8d8367e3">channels</a>)</td></tr>
+<tr class="memitem:a49a1155cee2a5d04c3b91dc7286c2bdf" id="r_a49a1155cee2a5d04c3b91dc7286c2bdf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a49a1155cee2a5d04c3b91dc7286c2bdf">setAverage</a> (<a class="el" href="classbool.html">bool</a> <a class="el" href="#a55ce3ee1d017c595b94c8d35312d5076">average</a>)</td></tr>
+<tr class="memitem:ae589d167a068577fc791a7cf866ccb55" id="r_ae589d167a068577fc791a7cf866ccb55"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae589d167a068577fc791a7cf866ccb55">setBinSize</a> (<a class="el" href="classint.html">int</a> <a class="el" href="#ac3a94ca1a8a667171980dbc960551e2f">binSize</a>)</td></tr>
+<tr class="memitem:aeca742f487a243d63e83083e80b93676" id="r_aeca742f487a243d63e83083e80b93676"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeca742f487a243d63e83083e80b93676">setBits</a> (<a class="el" href="classint.html">int</a> <a class="el" href="#ad1e28a1a66a25529b0b61b9ca4e66d44">bits</a>)</td></tr>
+<tr class="memitem:ab5a7ba68d6c150f9643e74f3838270a5" id="r_ab5a7ba68d6c150f9643e74f3838270a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab5a7ba68d6c150f9643e74f3838270a5">setChannels</a> (<a class="el" href="classint.html">int</a> <a class="el" href="#a178795099d0608972755dfef8d8367e3">channels</a>)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-methods" class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:aeb61f04cd3b4b68e8146d85c447d70d1" id="r_aeb61f04cd3b4b68e8146d85c447d70d1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeb61f04cd3b4b68e8146d85c447d70d1">isConfigValid</a> ()</td></tr>
+<tr class="memitem:aeb61f04cd3b4b68e8146d85c447d70d1" id="r_aeb61f04cd3b4b68e8146d85c447d70d1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeb61f04cd3b4b68e8146d85c447d70d1">isConfigValid</a> ()</td></tr>
 <tr class="memitem:a755ee993c2d4e9d422c37990b15afa37" id="r_a755ee993c2d4e9d422c37990b15afa37"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a755ee993c2d4e9d422c37990b15afa37">resetState</a> ()</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a55ce3ee1d017c595b94c8d35312d5076" id="r_a55ce3ee1d017c595b94c8d35312d5076"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a55ce3ee1d017c595b94c8d35312d5076">average</a> = false</td></tr>
-<tr class="memitem:ac3a94ca1a8a667171980dbc960551e2f" id="r_ac3a94ca1a8a667171980dbc960551e2f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac3a94ca1a8a667171980dbc960551e2f">binSize</a> = 1</td></tr>
-<tr class="memitem:ad1e28a1a66a25529b0b61b9ca4e66d44" id="r_ad1e28a1a66a25529b0b61b9ca4e66d44"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad1e28a1a66a25529b0b61b9ca4e66d44">bits</a> = 16</td></tr>
-<tr class="memitem:a178795099d0608972755dfef8d8367e3" id="r_a178795099d0608972755dfef8d8367e3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a178795099d0608972755dfef8d8367e3">channels</a> = 2</td></tr>
+<tr class="memitem:a55ce3ee1d017c595b94c8d35312d5076" id="r_a55ce3ee1d017c595b94c8d35312d5076"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a55ce3ee1d017c595b94c8d35312d5076">average</a> = false</td></tr>
+<tr class="memitem:ac3a94ca1a8a667171980dbc960551e2f" id="r_ac3a94ca1a8a667171980dbc960551e2f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac3a94ca1a8a667171980dbc960551e2f">binSize</a> = 1</td></tr>
+<tr class="memitem:ad1e28a1a66a25529b0b61b9ca4e66d44" id="r_ad1e28a1a66a25529b0b61b9ca4e66d44"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad1e28a1a66a25529b0b61b9ca4e66d44">bits</a> = 16</td></tr>
+<tr class="memitem:a178795099d0608972755dfef8d8367e3" id="r_a178795099d0608972755dfef8d8367e3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a178795099d0608972755dfef8d8367e3">channels</a> = 2</td></tr>
 <tr class="memitem:aa0890a8d845db96f0d2cfd4b9c8a638d" id="r_aa0890a8d845db96f0d2cfd4b9c8a638d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_bin_1_1_bin_state.html">BinState</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa0890a8d845db96f0d2cfd4b9c8a638d">state</a> = nullptr</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
@@ -184,22 +188,22 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">Bin </td>
           <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>binSize</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>binSize</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>channels</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>channels</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>average</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classbool.html">bool</a></td>          <td class="paramname"><span class="paramname"><em>average</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>bits_per_sample</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>bits_per_sample</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -272,14 +276,14 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t convert </td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> convert </td>
           <td>(</td>
-          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>src</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>src</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>size</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>size</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -303,19 +307,19 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t convert </td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> convert </td>
           <td>(</td>
-          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>target</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>target</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>src</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>src</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>size</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>size</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -337,7 +341,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool isConfigValid </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> isConfigValid </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -414,7 +418,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void setAverage </td>
           <td>(</td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>average</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classbool.html">bool</a></td>          <td class="paramname"><span class="paramname"><em>average</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -439,7 +443,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void setBinSize </td>
           <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>binSize</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>binSize</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -464,7 +468,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void setBits </td>
           <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>bits</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>bits</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -489,7 +493,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void setChannels </td>
           <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>channels</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>channels</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -513,7 +517,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool average = false</td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> average = false</td>
         </tr>
       </table>
   </td>
@@ -535,7 +539,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int binSize = 1</td>
+          <td class="memname"><a class="el" href="classint.html">int</a> binSize = 1</td>
         </tr>
       </table>
   </td>
@@ -557,7 +561,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int bits = 16</td>
+          <td class="memname"><a class="el" href="classint.html">int</a> bits = 16</td>
         </tr>
       </table>
   </td>
@@ -579,7 +583,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int channels = 2</td>
+          <td class="memname"><a class="el" href="classint.html">int</a> channels = 2</td>
         </tr>
       </table>
   </td>

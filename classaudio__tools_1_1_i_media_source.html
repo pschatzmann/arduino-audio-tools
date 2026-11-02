@@ -111,9 +111,9 @@ Inheritance diagram for IMediaSource:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a2975040121243c187c77d12f46f98f5e" id="r_a2975040121243c187c77d12f46f98f5e"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classaudio__tools_1_1_r_t_s_p_format.html">RTSPFormat</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2975040121243c187c77d12f46f98f5e">getFormat</a> ()=0</td></tr>
 <tr class="memdesc:a2975040121243c187c77d12f46f98f5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the media format configuration.  <br /></td></tr>
-<tr class="memitem:a6e6549bdc62b1f7cc5116eb948efd9a8" id="r_a6e6549bdc62b1f7cc5116eb948efd9a8"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6e6549bdc62b1f7cc5116eb948efd9a8">packetSize</a> ()</td></tr>
+<tr class="memitem:a6e6549bdc62b1f7cc5116eb948efd9a8" id="r_a6e6549bdc62b1f7cc5116eb948efd9a8"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6e6549bdc62b1f7cc5116eb948efd9a8">packetSize</a> ()</td></tr>
 <tr class="memdesc:a6e6549bdc62b1f7cc5116eb948efd9a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of the next queued, ready-to-send fragment, for sources that provide already RTP-payload-ready, self-delimited fragments (e.g. RFC 2435 JPEG) instead of a continuous byte stream. For these sources, <a class="el" href="#a9e3afde5125e18af0ae2a76be9f248a0" title="Read media data into provided buffer.">readBytes()</a> must always be called with exactly <a class="el" href="#a6e6549bdc62b1f7cc5116eb948efd9a8" title="Size of the next queued, ready-to-send fragment, for sources that provide already RTP-payload-ready,...">packetSize()</a> as maxBytes, so each call retrieves exactly one complete fragment instead of the transport having to guess where one RTP payload ends and the next begins.  <br /></td></tr>
-<tr class="memitem:a9e3afde5125e18af0ae2a76be9f248a0" id="r_a9e3afde5125e18af0ae2a76be9f248a0"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9e3afde5125e18af0ae2a76be9f248a0">readBytes</a> (void *dest, int maxSamples)=0</td></tr>
+<tr class="memitem:a9e3afde5125e18af0ae2a76be9f248a0" id="r_a9e3afde5125e18af0ae2a76be9f248a0"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9e3afde5125e18af0ae2a76be9f248a0">readBytes</a> (void *dest, <a class="el" href="classint.html">int</a> maxSamples)=0</td></tr>
 <tr class="memdesc:a9e3afde5125e18af0ae2a76be9f248a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read media data into provided buffer.  <br /></td></tr>
 <tr class="memitem:a62b63bddf378b0e13a4affa3e8e1bedf" id="r_a62b63bddf378b0e13a4affa3e8e1bedf"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a62b63bddf378b0e13a4affa3e8e1bedf">start</a> ()</td></tr>
 <tr class="memdesc:a62b63bddf378b0e13a4affa3e8e1bedf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize media source for streaming.  <br /></td></tr>
@@ -166,7 +166,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual int packetSize </td>
+          <td class="memname">virtual <a class="el" href="classint.html">int</a> packetSize </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -197,14 +197,14 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual int readBytes </td>
+          <td class="memname">virtual <a class="el" href="classint.html">int</a> readBytes </td>
           <td>(</td>
           <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>dest</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>maxSamples</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>maxSamples</em></span>&#160;)</td>
         </tr>
       </table>
   </td>

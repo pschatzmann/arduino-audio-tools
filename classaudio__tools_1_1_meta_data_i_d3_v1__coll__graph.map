@@ -1,9 +1,21 @@
 <map id="MetaDataID3V1" name="MetaDataID3V1">
-<area shape="rect" id="Node000001" title="Simple ID3 Meta Data API which supports ID3 V1." alt="" coords="137,106,261,134"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_meta_data_i_d3_base.html" title="ID3 Meta Data Common Functionality." alt="" coords="5,5,145,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="104,40,185,104,180,106,102,45"/>
-<area shape="rect" id="Node000003" href="$structaudio__tools_1_1_i_d3v1.html" title=" " alt="" coords="169,5,229,33"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="201,47,201,107,197,104,197,50"/>
-<area shape="rect" id="Node000004" href="$structaudio__tools_1_1_i_d3v1_enhanced.html" title=" " alt="" coords="252,5,375,33"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="290,42,216,108,213,103,285,44"/>
+<area shape="rect" id="Node000001" title="Simple ID3 Meta Data API which supports ID3 V1." alt="" coords="433,419,557,447"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_meta_data_i_d3_base.html" title="ID3 Meta Data Common Functionality." alt="" coords="84,319,224,346"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="183,353,218,375,256,393,301,406,347,416,435,429,430,429,346,421,300,412,254,398,215,379,182,358"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,5,172,67"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="90,80,103,181,114,238,132,294,146,318,140,318,127,296,109,240,97,182,89,85"/>
+<area shape="rect" id="Node000004" href="$classbool.html" title=" " alt="" coords="196,22,245,50"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="224,63,228,111,225,170,215,234,193,296,174,320,170,316,189,293,210,233,220,170,222,111,222,68"/>
+<area shape="rect" id="Node000005" href="$classint.html" title=" " alt="" coords="248,319,286,346"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="262,360,264,379,271,394,296,408,337,418,435,430,430,430,336,423,294,413,267,397,259,380,259,364"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="540,22,589,50"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="554,63,511,175,489,246,473,319,472,347,476,374,491,420,487,417,471,375,467,347,468,318,484,244,506,173,550,66"/>
+<area shape="rect" id="Node000007" href="$structaudio__tools_1_1_i_d3v1.html" title=" " alt="" coords="535,319,594,346"/>
+<area shape="poly" id="edge7_Node000007_Node000006" title=" " alt="" coords="567,64,567,319,562,317,562,67"/>
+<area shape="rect" id="Node000008" href="$structaudio__tools_1_1_i_d3v1_enhanced.html" title=" " alt="" coords="618,319,740,346"/>
+<area shape="poly" id="edge9_Node000008_Node000006" title=" " alt="" coords="603,53,626,69,644,90,660,120,671,152,683,219,685,278,683,320,678,317,680,278,677,219,666,154,655,122,640,92,622,73,603,58"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="549,358,506,421,503,417,544,360"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="648,354,574,398,525,421,524,416,571,393,643,355"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="764,319,861,346"/>
+<area shape="poly" id="edge10_Node000001_Node000009" title=" " alt="" coords="778,353,731,378,680,398,618,414,558,426,558,421,617,409,678,393,729,373,773,355"/>
 </map>

@@ -1,10 +1,19 @@
 <map id="ListLockFree&lt; T &gt;::Iterator" name="ListLockFree&lt; T &gt;::Iterator">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,229,154,274"/>
-<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_list_lock_free_1_1_node.html" title=" " alt="" coords="52,5,107,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="76,46,74,99,73,156,79,229,74,228,68,156,68,98,75,51"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_list_lock_free.html" title="Lock&#45;free double linked list using atomic operations." alt="" coords="123,128,263,156"/>
-<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="100,42,156,102,181,128,176,128,153,106,100,47"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="171,167,104,230,101,226,165,167"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="153,5,232,33"/>
-<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="194,46,195,128,190,127,191,51"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="48,369,196,414"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_list_lock_free_1_1_node.html" title=" " alt="" coords="5,145,61,173"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="31,186,36,240,40,268,49,295,72,335,101,368,96,369,68,338,44,297,35,269,30,240,31,191"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_list_lock_free.html" title="Lock&#45;free double linked list using atomic operations." alt="" coords="171,268,311,296"/>
+<area shape="poly" id="edge6_Node000006_Node000002" title=" " alt="" coords="49,183,77,215,109,242,139,257,173,268,168,270,137,262,107,247,73,218,50,188"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="202,5,381,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="234,60,61,147,58,143,235,55"/>
+<area shape="poly" id="edge9_Node000006_Node000003" title=" " alt="" coords="318,60,345,101,366,149,372,174,373,199,368,223,356,246,337,264,312,275,310,270,334,260,352,243,363,222,368,199,366,175,361,150,340,103,317,65"/>
+<area shape="rect" id="Node000004" href="$class_t.html" title=" " alt="" coords="14,14,52,42"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="33,54,36,145,30,145,33,60"/>
+<area shape="rect" id="Node000005" href="$classbool.html" title=" " alt="" coords="98,268,147,296"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="124,310,125,369,120,368,120,314"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="219,305,176,347,149,371,146,366,173,343,214,308"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="84,145,219,173"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="147,186,150,216,159,243,172,256,190,267,185,268,169,260,155,246,144,217,146,191"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="243,145,322,173"/>
+<area shape="poly" id="edge8_Node000006_Node000008" title=" " alt="" coords="275,186,248,269,243,266,271,189"/>
 </map>

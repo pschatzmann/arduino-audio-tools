@@ -1,5 +1,16 @@
 <map id="MozziConfig" name="MozziConfig">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,81,106,109"/>
-<area shape="rect" id="Node000002" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="14,5,97,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="57,47,58,81,53,80,54,51"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="390,229,490,257"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="193,106,276,134"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="270,139,377,203,419,229,414,228,374,207,268,144"/>
+<area shape="rect" id="Node000003" href="$classuint32__t.html" title=" " alt="" coords="5,5,80,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="45,46,54,65,65,80,86,91,119,100,195,113,190,116,117,105,84,96,61,84,49,68,46,51"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="313,5,388,33"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="370,43,378,56,410,140,438,230,433,228,405,142,373,58,369,48"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="326,42,280,84,252,108,249,103,277,80,322,45"/>
+<area shape="rect" id="Node000005" href="$classuint8__t.html" title=" " alt="" coords="129,5,196,33"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="158,46,160,65,166,81,178,94,195,106,190,106,174,98,161,83,155,66,156,51"/>
+<area shape="rect" id="Node000006" href="$classint.html" title=" " alt="" coords="505,106,543,134"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="500,143,488,159,464,197,447,231,444,227,460,194,484,156,495,146"/>
+<area shape="rect" id="Node000007" href="$classint16__t.html" title=" " alt="" coords="605,106,672,134"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="638,148,630,180,611,207,590,218,560,227,491,239,490,233,559,222,588,213,607,203,625,178,634,151"/>
 </map>

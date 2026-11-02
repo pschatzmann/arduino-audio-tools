@@ -1,7 +1,15 @@
 <map id="HeaderParserAAC" name="HeaderParserAAC">
-<area shape="rect" id="Node000001" title="AAC header parser to check if the data is a valid ADTS aac which can extract some relevant audio info..." alt="" coords="5,229,141,257"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_a_d_t_s_parser.html" title="Structure to hold ADTS header field values." alt="" coords="25,128,121,156"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="75,170,76,229,70,228,71,173"/>
-<area shape="rect" id="Node000003" href="$structaudio__tools_1_1_a_d_t_s_parser_1_1_a_d_t_s_header.html" title=" " alt="" coords="21,5,125,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="74,46,76,128,70,127,72,51"/>
+<area shape="rect" id="Node000001" title="AAC header parser to check if the data is a valid ADTS aac which can extract some relevant audio info..." alt="" coords="122,575,258,603"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_a_d_t_s_parser.html" title="Structure to hold ADTS header field values." alt="" coords="142,475,238,502"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="192,516,192,576,187,574,188,520"/>
+<area shape="rect" id="Node000003" href="$classint.html" title=" " alt="" coords="5,352,44,379"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="26,392,36,423,52,449,72,463,95,473,144,485,139,487,93,478,69,468,49,452,31,425,26,397"/>
+<area shape="rect" id="Node000004" href="$structaudio__tools_1_1_a_d_t_s_parser_1_1_a_d_t_s_header.html" title=" " alt="" coords="138,352,242,379"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="191,393,192,475,187,473,188,397"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="90,5,164,33"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="118,50,109,103,101,175,101,214,105,253,115,291,130,326,141,339,157,350,151,352,138,343,126,329,110,293,100,254,96,214,96,175,104,102,119,45"/>
+<area shape="rect" id="Node000006" href="$classuint8__t.html" title=" " alt="" coords="219,5,286,33"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="256,46,261,102,260,174,249,252,239,291,226,329,208,353,203,350,221,326,234,290,244,251,254,173,256,103,255,51"/>
+<area shape="rect" id="Node000007" href="$classbool.html" title=" " alt="" coords="275,352,324,379"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="297,392,289,425,272,452,255,466,236,476,234,472,252,462,268,449,284,422,294,397"/>
 </map>

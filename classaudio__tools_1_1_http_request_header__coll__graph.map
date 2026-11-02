@@ -1,23 +1,41 @@
 <map id="HttpRequestHeader" name="HttpRequestHeader">
-<area shape="rect" id="Node000001" title="Reading and writing of Http Requests." alt="" coords="158,488,308,516"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_http_header.html" title="In a http request and reply we need to process header information. With this API we can define and qu..." alt="" coords="185,411,281,439"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="235,452,235,489,231,486,231,456"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_str.html" title="Str which keeps the data on the heap. We grow the allocated memory only if the copy source is not fit..." alt="" coords="27,266,66,293"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="43,306,47,349,54,368,65,385,83,396,114,405,187,418,182,421,112,410,81,401,61,389,49,371,42,350,42,312"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_str_view.html" title="A simple wrapper to provide string functions on existing allocated char*. If the underlying char* is ..." alt="" coords="5,156,77,184"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="35,197,42,265,37,265,34,202"/>
-<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="51,197,55,265,49,265,50,202"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="101,156,221,184"/>
-<area shape="poly" id="edge12_Node000002_Node000005" title=" " alt="" coords="166,197,187,293,209,359,230,411,225,410,204,361,182,294,164,202"/>
-<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="127,195,101,219,58,267,54,264,97,215,130,191"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="177,15,257,43"/>
-<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="181,55,165,78,159,98,157,119,161,157,155,156,152,119,153,97,160,75,183,50"/>
-<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_list.html" title=" " alt="" coords="245,148,394,193"/>
-<area shape="poly" id="edge10_Node000007_Node000006" title=" " alt="" coords="231,54,245,75,256,100,270,122,294,147,288,148,266,126,251,102,240,78,231,59"/>
-<area shape="poly" id="edge7_Node000002_Node000007" title=" " alt="" coords="310,206,240,412,235,409,305,208"/>
-<area shape="rect" id="Node000008" href="$structaudio__tools_1_1audio__tools_1_1_list_1_1_node.html" title=" " alt="" coords="355,15,410,43"/>
-<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="378,55,369,91,355,125,340,149,336,146,351,123,364,89,375,60"/>
-<area shape="poly" id="edge9_Node000008_Node000008" title=" " alt="" coords="425,15,434,20,437,29,434,37,428,42,412,45,409,40,426,37,430,34,431,29,430,24,426,20"/>
-<area shape="rect" id="Node000009" href="$classaudio__tools_1_1_http_line_reader.html" title="We read a single line. A terminating 0 is added to the string to make it compliant for c string funct..." alt="" coords="364,266,486,293"/>
-<area shape="poly" id="edge11_Node000002_Node000009" title=" " alt="" coords="408,304,370,348,321,389,274,413,272,408,318,385,366,345,403,307"/>
+<area shape="rect" id="Node000001" title="Reading and writing of Http Requests." alt="" coords="1001,398,1150,425"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_http_header.html" title="In a http request and reply we need to process header information. With this API we can define and qu..." alt="" coords="855,398,952,425"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="967,409,1003,411,998,412,968,414"/>
+<area shape="rect" id="Node000003" href="$classint.html" title=" " alt="" coords="26,98,64,125"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="59,83,80,58,107,38,148,25,182,24,260,38,351,47,432,50,505,52,572,58,636,70,699,93,764,131,833,188,854,212,870,240,892,300,902,356,904,398,900,396,896,357,887,301,866,242,850,215,829,192,761,135,697,98,635,75,571,63,505,58,432,55,351,52,259,43,182,30,149,30,110,43,84,62,64,85"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_str_view.html" title="A simple wrapper to provide string functions on existing allocated char*. If the underlying char* is ..." alt="" coords="308,250,380,277"/>
+<area shape="poly" id="edge9_Node000007_Node000003" title=" " alt="" coords="78,110,179,118,227,126,261,138,290,163,313,193,340,249,335,249,308,196,286,167,258,143,226,132,178,123,81,115"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="284,430,404,457"/>
+<area shape="poly" id="edge12_Node000009_Node000003" title=" " alt="" coords="60,136,82,166,110,191,131,200,150,203,186,200,223,199,242,205,261,217,275,234,279,250,281,267,286,288,340,429,334,429,281,289,276,268,274,251,270,236,258,221,240,209,222,204,187,206,149,209,129,205,107,196,78,170,61,142"/>
+<area shape="rect" id="Node000004" href="$classbool.html" title=" " alt="" coords="20,355,70,383"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="85,368,856,406,854,412,85,373"/>
+<area shape="poly" id="edge8_Node000007_Node000004" title=" " alt="" coords="54,340,75,303,90,286,107,273,132,261,159,254,214,247,265,248,310,255,305,257,265,253,214,252,160,259,134,266,110,278,93,290,79,307,59,341"/>
+<area shape="poly" id="edge15_Node000009_Node000004" title=" " alt="" coords="73,390,110,410,154,424,199,433,286,442,281,445,199,438,152,429,108,415,75,395"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="606,304,690,332"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="705,318,768,327,801,335,833,348,866,370,893,398,888,397,863,375,830,352,799,340,767,332,706,323"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_str.html" title="Str which keeps the data on the heap. We grow the allocated memory only if the copy source is not fit..." alt="" coords="628,250,667,277"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="682,259,717,259,756,264,796,275,833,293,858,317,878,345,900,398,895,396,873,348,854,320,830,298,794,280,755,269,716,265,684,264"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="394,268,519,270,630,267,625,269,520,275,396,273"/>
+<area shape="poly" id="edge10_Node000006_Node000007" title=" " alt="" coords="394,254,520,252,630,258,625,260,519,257,396,259"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="20,456,70,484"/>
+<area shape="poly" id="edge23_Node000002_Node000008" title=" " alt="" coords="83,475,109,478,313,495,396,498,473,498,550,492,632,480,723,462,831,435,871,425,866,427,832,441,725,467,633,486,551,497,474,503,396,504,313,500,108,483,86,480"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="57,442,78,409,107,380,146,358,181,349,217,342,258,326,296,301,329,275,326,279,299,305,261,330,218,347,183,354,148,363,110,384,82,413,62,444"/>
+<area shape="poly" id="edge13_Node000009_Node000008" title=" " alt="" coords="84,471,166,472,259,466,305,456,301,459,260,471,166,478,86,475"/>
+<area shape="poly" id="edge24_Node000002_Node000009" title=" " alt="" coords="419,447,428,447,489,449,549,447,718,433,857,417,852,419,718,438,549,453,489,455,428,453,420,452"/>
+<area shape="poly" id="edge11_Node000006_Node000009" title=" " alt="" coords="419,442,496,438,527,431,547,421,559,407,563,392,561,360,557,327,561,309,571,291,583,280,598,272,630,264,625,267,600,277,586,284,575,294,566,311,562,327,566,360,568,393,563,409,551,425,529,436,497,443,420,448"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="5,567,85,595"/>
+<area shape="poly" id="edge14_Node000009_Node000010" title=" " alt="" coords="98,565,176,539,258,503,295,479,329,455,325,459,298,484,261,508,178,544,101,569"/>
+<area shape="rect" id="Node000011" href="$classaudio__tools_1_1audio__tools_1_1_list.html" title=" " alt="" coords="573,581,722,626"/>
+<area shape="poly" id="edge21_Node000011_Node000010" title=" " alt="" coords="100,580,573,598,572,603,101,585"/>
+<area shape="poly" id="edge16_Node000002_Node000011" title=" " alt="" coords="737,594,786,580,809,570,830,556,857,525,877,488,890,453,898,427,901,424,895,454,882,491,861,528,833,560,812,574,788,585,739,599"/>
+<area shape="rect" id="Node000012" href="$structaudio__tools_1_1audio__tools_1_1_list_1_1_node.html" title=" " alt="" coords="316,723,372,751"/>
+<area shape="poly" id="edge17_Node000011_Node000012" title=" " alt="" coords="386,728,465,707,508,690,547,667,559,652,571,636,588,627,593,625,575,640,563,656,551,671,510,695,467,713,387,733"/>
+<area shape="poly" id="edge18_Node000012_Node000012" title=" " alt="" coords="318,705,327,699,344,696,360,698,370,705,374,714,369,724,365,720,368,714,366,708,358,703,344,702,329,704,320,709"/>
+<area shape="rect" id="Node000013" href="$class_t.html" title=" " alt="" coords="26,723,64,751"/>
+<area shape="poly" id="edge19_Node000012_Node000013" title=" " alt="" coords="80,734,316,734,315,739,80,739"/>
+<area shape="rect" id="Node000014" href="$classsize__t.html" title=" " alt="" coords="314,775,374,803"/>
+<area shape="poly" id="edge20_Node000011_Node000014" title=" " alt="" coords="389,791,427,790,470,785,512,772,547,748,557,735,561,722,560,696,558,667,562,652,571,636,583,628,588,625,575,640,567,654,564,667,565,695,566,723,562,738,551,752,514,777,471,790,428,796,389,796"/>
+<area shape="rect" id="Node000015" href="$classaudio__tools_1_1_http_line_reader.html" title="We read a single line. A terminating 0 is added to the string to make it compliant for c string funct..." alt="" coords="586,650,709,677"/>
+<area shape="poly" id="edge22_Node000002_Node000015" title=" " alt="" coords="724,661,780,650,806,639,830,622,850,600,865,575,886,518,896,465,900,427,904,423,902,465,891,520,870,577,854,603,833,626,809,643,781,655,725,667"/>
 </map>

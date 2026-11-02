@@ -1,6 +1,8 @@
 <map id="ConverterToInternalDACFormat&lt; T &gt;" name="ConverterToInternalDACFormat&lt; T &gt;">
-<area shape="rect" id="Node000001" title="special case for internal DAC output for the ESP32. The incomming PCM buffer needs to be converted fr..." alt="" coords="5,81,267,109"/>
+<area shape="rect" id="Node000001" title="special case for internal DAC output for the ESP32. The incomming PCM buffer needs to be converted fr..." alt="" coords="5,106,267,134"/>
 <area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="" coords="77,5,195,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="129,47,131,82,127,79,125,50"/>
-<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="147,47,145,82,141,79,143,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="130,46,132,106,127,104,126,50"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="146,46,145,106,140,104,142,50"/>
+<area shape="rect" id="Node000003" href="$classint.html" title=" " alt="" coords="218,5,257,33"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="216,43,151,108,148,103,211,44"/>
 </map>

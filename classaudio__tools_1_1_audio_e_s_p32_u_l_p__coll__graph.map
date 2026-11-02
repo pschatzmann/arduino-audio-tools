@@ -1,30 +1,58 @@
 <map id="AudioESP32ULP" name="AudioESP32ULP">
-<area shape="rect" id="Node000001" title="Outputs to ESP32 DAC through the ULP (Ultra&gt; Low Power coprocessor), freeing I2S for other uses...." alt="" coords="1067,100,1190,128"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_audio_output.html" title="Abstract Audio Ouptut class." alt="" coords="915,100,1018,128"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1033,111,1069,114,1064,114,1034,116"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="720,5,771,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="786,30,839,42,893,62,920,79,944,100,939,99,917,83,890,67,837,48,787,36"/>
-<area shape="poly" id="edge8_Node000002_Node000003" title=" " alt="" coords="786,11,838,19,893,38,933,67,961,100,956,99,929,71,890,43,837,24,787,16"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="5,68,139,96"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="154,88,547,105,917,115,913,118,547,110,155,93"/>
-<area shape="poly" id="edge9_Node000002_Node000004" title=" " alt="" coords="154,77,547,87,917,106,913,109,547,93,155,82"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="267,132,517,176"/>
-<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="102,103,132,121,164,135,214,147,268,155,264,157,213,152,162,140,129,126,103,108"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="682,131,809,158"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="824,140,919,128,914,129,825,145"/>
-<area shape="poly" id="edge10_Node000002_Node000005" title=" " alt="" coords="810,125,918,113,912,114,811,130"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="532,147,684,145,679,147,533,153"/>
-<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="32,225,112,253"/>
-<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="126,222,306,174,304,179,127,227"/>
-<area shape="rect" id="Node000009" href="$classaudio__tools_1_1audio__tools_1_1_single_buffer.html" title=" " alt="" coords="658,252,833,280"/>
-<area shape="poly" id="edge15_Node000009_Node000007" title=" " alt="" coords="127,238,348,244,634,255,660,259,655,259,634,260,348,249,127,243"/>
-<area shape="rect" id="Node000011" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="323,287,460,314"/>
-<area shape="poly" id="edge17_Node000011_Node000007" title=" " alt="" coords="110,258,163,280,245,295,325,301,320,302,245,300,162,285,110,264"/>
-<area shape="rect" id="Node000008" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="704,304,787,332"/>
-<area shape="poly" id="edge11_Node000002_Node000008" title=" " alt="" coords="802,304,832,289,876,250,912,204,939,160,956,130,961,127,943,163,916,207,879,254,835,293,803,309"/>
-<area shape="poly" id="edge12_Node000002_Node000009" title=" " alt="" coords="779,241,942,129,947,127,781,245"/>
-<area shape="rect" id="Node000010" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="308,339,476,366"/>
-<area shape="poly" id="edge13_Node000009_Node000010" title=" " alt="" coords="490,341,516,335,633,306,722,281,727,280,635,311,518,340,491,346"/>
-<area shape="poly" id="edge14_Node000009_Node000010" title=" " alt="" coords="433,331,516,311,633,282,655,279,660,278,635,287,518,316,434,336"/>
-<area shape="poly" id="edge16_Node000009_Node000011" title=" " alt="" coords="476,293,634,280,660,280,655,280,634,285,476,299"/>
+<area shape="rect" id="Node000001" title="Outputs to ESP32 DAC through the ULP (Ultra&gt; Low Power coprocessor), freeing I2S for other uses...." alt="" coords="1399,938,1522,965"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_audio_output.html" title="Abstract Audio Ouptut class." alt="" coords="1111,847,1214,874"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1225,877,1415,937,1409,937,1225,882"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="813,903,864,930"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="879,913,996,896,1118,874,1113,876,997,901,880,919"/>
+<area shape="poly" id="edge12_Node000002_Node000003" title=" " alt="" coords="879,901,993,878,1114,862,1109,863,994,884,880,906"/>
+<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="53,723,91,750"/>
+<area shape="poly" id="edge33_Node000001_Node000004" title=" " alt="" coords="105,728,162,718,366,691,628,660,763,649,889,646,1000,651,1048,658,1088,669,1150,694,1209,727,1264,764,1315,804,1398,881,1449,938,1444,936,1394,884,1311,808,1261,769,1206,731,1147,699,1086,674,1046,664,1000,656,889,651,763,655,629,665,366,696,163,723,108,732"/>
+<area shape="poly" id="edge15_Node000002_Node000004" title=" " alt="" coords="85,762,118,810,139,832,164,849,203,864,237,867,271,862,312,849,324,841,337,832,427,807,504,795,574,794,639,799,776,817,857,825,950,829,1019,824,1049,824,1088,829,1135,846,1129,846,1087,834,1049,829,1019,830,950,834,856,831,776,823,639,804,573,799,505,801,428,812,339,836,327,845,315,854,272,867,237,873,202,869,161,854,135,836,114,813,86,767"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="83,762,116,825,138,858,164,887,207,919,244,937,285,948,338,959,407,969,477,971,547,968,615,961,732,941,815,923,810,925,733,946,615,966,548,973,477,976,406,974,337,964,284,954,242,942,204,923,161,891,134,861,111,828,84,768"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="338,726,588,771"/>
+<area shape="poly" id="edge7_Node000007_Node000004" title=" " alt="" coords="105,749,163,765,207,770,251,772,339,768,335,771,251,777,206,776,162,771,107,753"/>
+<area shape="rect" id="Node000014" href="$classaudio__tools_1_1audio__tools_1_1_single_buffer.html" title=" " alt="" coords="751,359,926,386"/>
+<area shape="poly" id="edge23_Node000014_Node000004" title=" " alt="" coords="103,715,162,685,225,665,280,655,377,647,424,644,472,637,526,623,587,600,628,578,667,551,737,489,791,429,826,389,829,385,795,433,741,493,671,555,631,582,589,605,528,629,473,642,424,649,378,652,281,660,226,670,164,690,106,718"/>
+<area shape="rect" id="Node000017" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="394,434,532,461"/>
+<area shape="poly" id="edge28_Node000017_Node000004" title=" " alt="" coords="77,707,87,669,104,625,128,580,161,540,203,510,243,496,285,489,337,477,403,460,399,464,338,482,286,494,244,501,206,514,164,544,132,582,109,627,92,671,82,708"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="5,1115,139,1142"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="154,1132,244,1129,353,1120,470,1106,587,1085,732,1050,842,1015,950,972,1086,912,1122,893,1149,876,1154,874,1125,897,1088,916,952,977,844,1020,733,1055,589,1090,471,1111,353,1126,244,1134,155,1137"/>
+<area shape="poly" id="edge13_Node000002_Node000005" title=" " alt="" coords="154,1115,353,1097,470,1082,587,1061,732,1026,842,991,950,948,1086,888,1115,876,1120,874,1088,892,952,953,844,996,733,1031,589,1066,471,1087,353,1103,155,1120"/>
+<area shape="poly" id="edge8_Node000007_Node000005" title=" " alt="" coords="91,1101,191,980,261,904,336,832,380,798,425,770,422,773,383,802,339,836,264,908,195,983,95,1104"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="775,738,902,765"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="917,759,1002,771,1047,783,1089,800,1120,821,1145,847,1140,846,1116,825,1086,804,1045,788,1001,777,918,764"/>
+<area shape="poly" id="edge14_Node000002_Node000006" title=" " alt="" coords="917,739,1002,748,1047,759,1089,776,1111,790,1131,809,1159,847,1153,846,1127,812,1108,795,1086,780,1045,764,1001,753,918,744"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="603,747,777,750,772,752,604,752"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="32,431,112,458"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="81,471,112,546,135,586,165,621,210,656,260,684,312,707,364,725,359,727,310,711,258,689,207,660,161,625,130,589,107,548,81,476"/>
+<area shape="poly" id="edge26_Node000014_Node000008" title=" " alt="" coords="125,434,170,431,218,433,268,442,315,461,324,470,328,480,331,488,339,495,373,511,404,520,432,524,459,524,517,513,587,495,656,473,721,442,776,411,819,385,815,389,779,415,723,447,658,478,589,500,518,518,460,529,432,530,403,526,371,516,336,500,327,491,323,482,320,473,312,466,267,447,218,438,170,436,129,438"/>
+<area shape="poly" id="edge30_Node000017_Node000008" title=" " alt="" coords="125,432,162,427,238,424,314,427,396,436,391,439,313,433,238,429,163,433,129,436"/>
+<area shape="rect" id="Node000009" href="$classbool.html" title=" " alt="" coords="47,214,97,241"/>
+<area shape="poly" id="edge36_Node000001_Node000009" title=" " alt="" coords="91,200,122,166,161,136,239,93,304,67,373,54,461,50,1164,50,1182,52,1200,59,1234,84,1264,123,1292,173,1318,233,1342,301,1382,451,1413,606,1437,750,1460,938,1455,936,1431,750,1408,607,1376,452,1336,303,1313,235,1288,176,1260,126,1230,88,1198,64,1181,57,1164,55,462,55,374,59,306,72,241,98,164,140,126,170,96,202"/>
+<area shape="poly" id="edge32_Node000002_Node000009" title=" " alt="" coords="109,208,162,185,277,137,326,118,373,105,419,98,469,97,525,105,589,121,698,159,741,179,779,202,814,229,849,261,928,346,964,389,990,428,1009,465,1025,501,1052,579,1090,676,1158,847,1153,845,1085,678,1047,581,1020,503,1005,467,985,431,959,392,924,349,846,264,811,233,776,206,738,184,696,164,587,126,524,110,469,103,420,103,374,110,328,123,279,142,164,190,113,212"/>
+<area shape="poly" id="edge11_Node000006_Node000009" title=" " alt="" coords="110,219,158,214,213,217,267,231,293,243,316,260,326,274,331,289,329,318,326,346,330,359,340,372,369,394,398,403,428,404,458,401,489,397,521,396,554,403,589,420,625,448,650,476,668,505,681,535,707,599,726,633,753,670,788,706,822,737,817,737,784,710,749,673,722,636,703,601,676,537,663,508,646,479,621,452,587,424,553,408,520,402,489,403,458,407,428,410,397,408,367,398,336,376,325,361,321,346,323,317,325,289,321,277,312,264,290,248,266,236,212,222,158,220,114,223"/>
+<area shape="poly" id="edge10_Node000007_Node000009" title=" " alt="" coords="96,250,122,282,141,318,146,343,148,375,146,450,148,522,154,551,165,571,181,584,199,589,235,585,274,580,295,584,315,596,327,610,330,625,332,640,340,655,379,694,423,725,418,727,376,698,336,658,327,641,325,626,322,613,312,600,293,589,274,586,236,591,198,594,179,588,161,574,149,553,143,523,141,450,143,375,141,344,136,320,118,285,98,255"/>
+<area shape="poly" id="edge24_Node000014_Node000009" title=" " alt="" coords="110,218,222,203,296,197,379,196,467,200,557,212,645,233,728,266,760,286,789,311,830,358,824,359,785,315,757,291,726,271,643,238,556,217,467,205,379,201,297,203,222,208,113,222"/>
+<area shape="poly" id="edge31_Node000017_Node000009" title=" " alt="" coords="102,248,132,268,164,285,186,292,206,295,244,295,279,300,297,308,316,323,324,335,328,347,328,370,328,392,332,403,340,413,365,431,396,442,392,444,363,435,336,417,327,405,323,393,323,370,323,347,320,337,312,327,294,313,277,305,243,301,206,301,185,297,162,289,130,272,104,253"/>
+<area shape="rect" id="Node000010" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="797,850,880,877"/>
+<area shape="poly" id="edge16_Node000002_Node000010" title=" " alt="" coords="895,860,1113,860,1108,862,896,866"/>
+<area shape="rect" id="Node000011" href="$classuint32__t.html" title=" " alt="" coords="426,1036,500,1064"/>
+<area shape="poly" id="edge37_Node000001_Node000011" title=" " alt="" coords="511,1067,615,1106,683,1126,759,1144,839,1157,922,1164,1006,1162,1087,1148,1142,1132,1197,1110,1299,1057,1383,1004,1438,967,1443,965,1386,1008,1301,1061,1199,1114,1144,1137,1088,1154,1006,1167,922,1169,838,1163,758,1149,682,1131,614,1111,510,1073"/>
+<area shape="poly" id="edge17_Node000010_Node000011" title=" " alt="" coords="513,1030,587,1001,662,975,692,961,725,934,733,924,736,913,740,901,749,889,772,876,799,869,794,871,774,881,753,893,745,904,741,914,738,926,729,938,695,965,664,980,589,1006,515,1035"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="426,846,500,873"/>
+<area shape="poly" id="edge18_Node000010_Node000012" title=" " alt="" coords="515,857,799,862,794,864,516,863"/>
+<area shape="rect" id="Node000013" href="$classuint8__t.html" title=" " alt="" coords="430,898,496,925"/>
+<area shape="poly" id="edge35_Node000001_Node000013" title=" " alt="" coords="511,905,552,911,572,918,590,929,601,947,602,966,603,983,614,997,641,1012,675,1022,764,1034,871,1034,988,1026,1107,1012,1220,994,1401,964,1396,965,1221,1000,1107,1017,988,1031,871,1039,764,1039,674,1027,639,1016,610,1001,598,985,597,966,596,949,586,933,570,923,551,916,512,911"/>
+<area shape="poly" id="edge19_Node000010_Node000013" title=" " alt="" coords="511,908,611,903,727,890,799,875,794,877,727,895,611,908,512,913"/>
+<area shape="poly" id="edge20_Node000002_Node000014" title=" " alt="" coords="863,396,899,442,929,499,935,544,936,603,939,661,944,684,952,700,967,714,983,720,1015,723,1051,724,1070,729,1089,740,1114,765,1134,794,1159,847,1154,845,1130,796,1110,768,1086,744,1068,734,1050,729,1015,728,981,726,964,718,948,703,939,686,934,662,931,604,930,544,924,500,895,445,863,401"/>
+<area shape="rect" id="Node000015" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="379,258,546,285"/>
+<area shape="poly" id="edge21_Node000014_Node000015" title=" " alt="" coords="549,285,637,299,728,322,766,338,802,358,796,359,764,343,726,327,636,304,551,290"/>
+<area shape="poly" id="edge22_Node000014_Node000015" title=" " alt="" coords="561,266,644,277,728,298,786,326,830,358,824,359,783,330,726,303,643,282,563,270"/>
+<area shape="rect" id="Node000016" href="$classuint64__t.html" title=" " alt="" coords="426,310,500,337"/>
+<area shape="poly" id="edge25_Node000014_Node000016" title=" " alt="" coords="515,328,753,360,748,363,516,333"/>
+<area shape="poly" id="edge27_Node000014_Node000017" title=" " alt="" coords="545,428,767,385,763,389,548,433"/>
+<area shape="rect" id="Node000018" href="$classuint8__t_01_5.html" title=" " alt="" coords="33,331,111,358"/>
+<area shape="poly" id="edge29_Node000017_Node000018" title=" " alt="" coords="125,347,216,362,267,376,315,394,327,404,339,413,396,434,391,436,336,418,324,408,312,399,265,381,215,367,127,352"/>
+<area shape="rect" id="Node000019" title=" " alt="" coords="1128,1219,1197,1246"/>
+<area shape="poly" id="edge34_Node000001_Node000019" title=" " alt="" coords="1212,1243,1251,1249,1293,1250,1336,1242,1355,1235,1373,1224,1401,1196,1422,1163,1437,1126,1447,1089,1456,1017,1458,968,1462,964,1462,1017,1452,1090,1442,1128,1426,1166,1405,1199,1376,1228,1357,1239,1337,1248,1294,1255,1250,1254,1212,1248"/>
 </map>

@@ -1,5 +1,11 @@
 <map id="STKEffect" name="STKEffect">
-<area shape="rect" id="Node000001" title="Use any effect from the STK framework: e.g. Chorus, Echo, FreeVerb, JCRev, PitShift...." alt="" coords="11,81,95,109"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects." alt="" coords="5,5,101,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="55,47,56,81,50,80,51,51"/>
+<area shape="rect" id="Node000001" title="Use any effect from the STK framework: e.g. Chorus, Echo, FreeVerb, JCRev, PitShift...." alt="" coords="96,207,180,234"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects." alt="" coords="37,106,132,134"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="100,145,134,206,128,206,97,149"/>
+<area shape="rect" id="Node000003" href="$classbool.html" title=" " alt="" coords="5,5,55,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="25,46,28,65,33,81,43,93,58,104,53,106,40,97,29,83,23,66,25,51"/>
+<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="120,5,159,33"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="129,45,112,83,97,107,92,104,108,81,126,50"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="157,106,226,134"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="180,146,147,208,143,204,175,148"/>
 </map>

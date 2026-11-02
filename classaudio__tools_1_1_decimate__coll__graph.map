@@ -1,7 +1,9 @@
 <map id="Decimate" name="Decimate">
-<area shape="rect" id="Node000001" title="Provides a reduced sampling rate by taking a sample at every factor location (ingoring factor&#45;1 sampl..." alt="" coords="92,106,177,134"/>
+<area shape="rect" id="Node000001" title="Provides a reduced sampling rate by taking a sample at every factor location (ingoring factor&#45;1 sampl..." alt="" coords="123,151,208,178"/>
 <area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="" coords="5,5,123,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="83,43,128,105,123,106,80,48"/>
-<area shape="rect" id="Node000003" href="$structaudio__tools_1_1audio__tools_1_1_decimate_1_1_decimate_state.html" title=" " alt="" coords="146,5,264,33"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="190,44,146,107,142,103,185,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="84,44,159,149,153,151,81,48"/>
+<area shape="rect" id="Node000003" href="$classint.html" title=" " alt="" coords="146,5,185,33"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="168,47,168,151,163,149,163,50"/>
+<area shape="rect" id="Node000004" href="$structaudio__tools_1_1audio__tools_1_1_decimate_1_1_decimate_state.html" title=" " alt="" coords="209,5,327,33"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="268,47,260,89,252,110,239,128,224,142,206,153,204,148,221,138,235,125,247,107,255,87,264,50"/>
 </map>

@@ -1,7 +1,11 @@
 <map id="ConverterAutoCenter" name="ConverterAutoCenter">
-<area shape="rect" id="Node000001" title="Makes sure that the avg of the signal is set to 0." alt="" coords="5,106,164,134"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="" coords="26,5,143,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="78,47,81,106,76,105,74,50"/>
-<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="95,47,93,106,88,105,90,50"/>
-<area shape="poly" id="edge3_Node000001_Node000002" title=" " alt="" coords="107,43,114,56,116,70,114,83,99,107,95,104,109,81,111,70,109,58,105,49"/>
+<area shape="rect" id="Node000001" title="Makes sure that the avg of the signal is set to 0." alt="" coords="41,128,199,156"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="" coords="5,5,123,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="63,46,85,103,102,128,96,128,80,106,60,50"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="84,45,109,103,123,128,118,127,104,106,81,49"/>
+<area shape="poly" id="edge5_Node000001_Node000002" title=" " alt="" coords="84,43,93,56,109,94,119,128,114,127,104,96,88,58,84,48"/>
+<area shape="rect" id="Node000003" href="$classint.html" title=" " alt="" coords="217,5,255,33"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="232,46,221,78,202,106,184,120,164,130,163,125,181,116,198,103,216,76,228,50"/>
+<area shape="rect" id="Node000004" href="$classbool.html" title=" " alt="" coords="357,5,406,33"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="379,47,369,79,360,94,348,106,323,119,286,128,200,139,199,134,285,123,321,114,345,102,356,91,364,77,375,50"/>
 </map>

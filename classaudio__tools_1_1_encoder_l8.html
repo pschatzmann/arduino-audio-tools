@@ -84,7 +84,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>EncoderL8s - Condenses 16 bit PCM data stream to 8 bits data. Most microcontrollers can not process 8 bit audio data directly. 8 bit data however is very memory efficient and helps if you need to store audio on constrained resources. This encoder translates 16bit data into 8bit data. By default the encoded data is represented as uint8_t, so the values are from 0 to 255.  
+<p>EncoderL8s - Condenses 16 bit PCM data stream to 8 bits data. Most microcontrollers can not process 8 bit audio data directly. 8 bit data however is very memory efficient and helps if you need to store audio on constrained resources. This encoder translates 16bit data into 8bit data. By default the encoded data is represented as <a class="el" href="classuint8__t.html">uint8_t</a>, so the values are from 0 to 255.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_codec_l8_8h_source.html">CodecL8.h</a>&gt;</code></p>
@@ -112,32 +112,46 @@ Collaboration diagram for EncoderL8:</div>
 <div class="dyncontent">
 <div class="center"><img src="classaudio__tools_1_1_encoder_l8__coll__graph.png" border="0" usemap="#a_encoder_l8_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="a_encoder_l8_coll__map" id="a_encoder_l8_coll__map">
-<area shape="rect" title="EncoderL8s &#45; Condenses 16 bit PCM data stream to 8 bits data. Most microcontrollers can not process 8..." alt="" coords="258,284,347,311"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_audio_encoder.html" title="Encoding of PCM data." alt="" coords="141,183,251,211"/>
-<area shape="poly" title=" " alt="" coords="222,219,291,283,286,283,220,224"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="23,82,121,110"/>
-<area shape="poly" title=" " alt="" coords="93,117,175,181,171,184,92,123"/>
-<area shape="poly" title=" " alt="" coords="107,116,188,181,183,183,106,122"/>
+<area shape="rect" title="EncoderL8s &#45; Condenses 16 bit PCM data stream to 8 bits data. Most microcontrollers can not process 8..." alt="" coords="337,349,426,377"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_audio_encoder.html" title="Encoding of PCM data." alt="" coords="141,239,251,266"/>
+<area shape="poly" title=" " alt="" coords="232,272,361,348,356,349,230,277"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="23,106,121,134"/>
+<area shape="poly" title=" " alt="" coords="89,143,181,237,176,239,87,148"/>
+<area shape="poly" title=" " alt="" coords="102,142,192,237,187,239,100,147"/>
 <area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="5,5,139,33"/>
-<area shape="poly" title=" " alt="" coords="64,46,68,82,62,82,63,51"/>
-<area shape="poly" title=" " alt="" coords="81,46,82,82,76,82,80,51"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information." alt="" coords="145,82,247,110"/>
-<area shape="poly" title=" " alt="" coords="189,123,192,183,187,182,186,127"/>
-<area shape="poly" title=" " alt="" coords="206,123,205,183,200,181,203,127"/>
-<area shape="rect" href="structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="272,82,355,110"/>
-<area shape="poly" title=" " alt="" coords="288,119,213,184,210,180,284,122"/>
-<area shape="rect" href="classaudio__tools_1_1_print.html" title=" " alt="" coords="277,183,328,211"/>
-<area shape="poly" title=" " alt="" coords="305,225,305,284,300,282,301,228"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="354,183,483,211"/>
-<area shape="poly" title=" " alt="" coords="401,221,363,262,327,286,325,281,360,258,396,223"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="379,82,458,110"/>
-<area shape="poly" title=" " alt="" coords="420,124,421,184,416,181,417,128"/>
+<area shape="poly" title=" " alt="" coords="64,45,68,106,63,105,63,51"/>
+<area shape="poly" title=" " alt="" coords="81,45,81,106,76,105,80,51"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information." alt="" coords="145,106,247,134"/>
+<area shape="poly" title=" " alt="" coords="190,147,190,196,193,239,188,238,184,197,187,152"/>
+<area shape="poly" title=" " alt="" coords="205,147,208,197,204,239,199,237,202,196,202,152"/>
+<area shape="rect" href="structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="272,106,355,134"/>
+<area shape="poly" title=" " alt="" coords="294,144,210,240,206,237,289,147"/>
+<area shape="rect" href="classuint32__t.html" title=" " alt="" coords="163,5,237,33"/>
+<area shape="poly" title=" " alt="" coords="205,45,213,65,224,80,246,97,274,109,269,111,244,101,220,84,209,67,204,51"/>
+<area shape="rect" title=" " alt="" coords="283,5,357,33"/>
+<area shape="poly" title=" " alt="" coords="319,46,317,106,312,104,317,50"/>
+<area shape="rect" href="classuint8__t.html" title=" " alt="" coords="384,5,450,33"/>
+<area shape="poly" title=" " alt="" coords="411,45,403,67,390,84,373,98,354,108,351,103,370,93,386,80,398,64,407,49"/>
+<area shape="rect" href="classaudio__tools_1_1_print.html" title=" " alt="" coords="498,239,550,266"/>
+<area shape="poly" title=" " alt="" coords="498,275,400,351,397,346,492,277"/>
+<area shape="rect" href="classint.html" title=" " alt="" coords="615,106,654,134"/>
+<area shape="poly" title=" " alt="" coords="605,139,584,159,570,182,558,206,535,240,532,236,554,204,565,179,580,156,600,141"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="618,239,747,266"/>
+<area shape="poly" title=" " alt="" coords="650,145,656,157,682,239,677,237,651,159,648,150"/>
+<area shape="rect" href="classbool.html" title=" " alt="" coords="379,106,429,134"/>
+<area shape="poly" title=" " alt="" coords="389,145,387,158,378,213,376,267,382,350,377,348,370,268,372,212,381,157,386,150"/>
+<area shape="poly" title=" " alt="" coords="395,146,393,178,395,191,402,203,413,211,430,217,476,222,562,226,621,239,615,239,561,232,476,228,429,222,411,216,398,207,390,193,387,178,392,151"/>
+<area shape="poly" title=" " alt="" coords="645,273,586,302,521,328,426,355,425,349,519,323,584,297,640,274"/>
+<area shape="rect" href="classint8__t_01_5.html" title=" " alt="" coords="748,106,817,134"/>
+<area shape="poly" title=" " alt="" coords="776,147,764,178,746,207,727,226,706,241,704,236,723,222,742,203,759,176,772,150"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="842,106,921,134"/>
+<area shape="poly" title=" " alt="" coords="872,146,854,179,828,207,790,229,748,243,747,238,787,224,825,203,850,176,868,149"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a67825149c22455bbec4557a702f06ef3" id="r_a67825149c22455bbec4557a702f06ef3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a67825149c22455bbec4557a702f06ef3">EncoderL8</a> (bool isSigned=false)</td></tr>
+<tr class="memitem:a67825149c22455bbec4557a702f06ef3" id="r_a67825149c22455bbec4557a702f06ef3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a67825149c22455bbec4557a702f06ef3">EncoderL8</a> (<a class="el" href="classbool.html">bool</a> isSigned=false)</td></tr>
 <tr class="memitem:a287b5930b04a66ff467042628f9deb25" id="r_a287b5930b04a66ff467042628f9deb25"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a287b5930b04a66ff467042628f9deb25">EncoderL8</a> (<a class="el" href="class_print.html">Print</a> &amp;out)</td></tr>
 <tr class="memitem:aed4bf0d5ce93f27242be485943d0b37d" id="r_aed4bf0d5ce93f27242be485943d0b37d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_encoder.html#aed4bf0d5ce93f27242be485943d0b37d">audioInfo</a> () override</td></tr>
 <tr class="memdesc:aed4bf0d5ce93f27242be485943d0b37d"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the actual input <a class="el" href="structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>  <br /></td></tr>
@@ -145,21 +159,21 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:aed4bf0d5ce93f27242be485943d0b37d"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the actual input <a class="el" href="structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>  <br /></td></tr>
 <tr class="memitem:a1c77cb3dbe910c765ea439d103bdcbb9" id="r_a1c77cb3dbe910c765ea439d103bdcbb9"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_info_support.html#a1c77cb3dbe910c765ea439d103bdcbb9">audioInfoOut</a> ()</td></tr>
 <tr class="memitem:a1c77cb3dbe910c765ea439d103bdcbb9" id="r_a1c77cb3dbe910c765ea439d103bdcbb9"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_info_support.html#a1c77cb3dbe910c765ea439d103bdcbb9">audioInfoOut</a> ()</td></tr>
-<tr class="memitem:a419d5bfacb0a1e5bf46b5fbd8d94f446" id="r_a419d5bfacb0a1e5bf46b5fbd8d94f446"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_writer.html#a419d5bfacb0a1e5bf46b5fbd8d94f446">begin</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> <a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_encoder.html#a47385aa19435f5fca9d3083a748258c5">info</a>)</td></tr>
-<tr class="memitem:acba365cc28eb702040c382646cfb0a7a" id="r_acba365cc28eb702040c382646cfb0a7a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acba365cc28eb702040c382646cfb0a7a">begin</a> () override</td></tr>
+<tr class="memitem:a419d5bfacb0a1e5bf46b5fbd8d94f446" id="r_a419d5bfacb0a1e5bf46b5fbd8d94f446"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_writer.html#a419d5bfacb0a1e5bf46b5fbd8d94f446">begin</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> <a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_encoder.html#a47385aa19435f5fca9d3083a748258c5">info</a>)</td></tr>
+<tr class="memitem:acba365cc28eb702040c382646cfb0a7a" id="r_acba365cc28eb702040c382646cfb0a7a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acba365cc28eb702040c382646cfb0a7a">begin</a> () override</td></tr>
 <tr class="memdesc:acba365cc28eb702040c382646cfb0a7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">starts the processing using the actual RAWAudioInfo  <br /></td></tr>
-<tr class="memitem:a6e82619a0a3aa2c31962d9a26bb11de0" id="r_a6e82619a0a3aa2c31962d9a26bb11de0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6e82619a0a3aa2c31962d9a26bb11de0">begin</a> (<a class="el" href="class_print.html">Print</a> &amp;out)</td></tr>
+<tr class="memitem:a6e82619a0a3aa2c31962d9a26bb11de0" id="r_a6e82619a0a3aa2c31962d9a26bb11de0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6e82619a0a3aa2c31962d9a26bb11de0">begin</a> (<a class="el" href="class_print.html">Print</a> &amp;out)</td></tr>
 <tr class="memdesc:a6e82619a0a3aa2c31962d9a26bb11de0"><td class="mdescLeft">&#160;</td><td class="mdescRight">starts the processing  <br /></td></tr>
-<tr class="memitem:a1389dc2927aa07b515358574cb205b58" id="r_a1389dc2927aa07b515358574cb205b58"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1389dc2927aa07b515358574cb205b58">convertSample</a> (int16_t sample)</td></tr>
+<tr class="memitem:a1389dc2927aa07b515358574cb205b58" id="r_a1389dc2927aa07b515358574cb205b58"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint16__t.html">int16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1389dc2927aa07b515358574cb205b58">convertSample</a> (<a class="el" href="classint16__t.html">int16_t</a> sample)</td></tr>
 <tr class="memitem:a64e9fa75beda50a9e8400ee0d4e61984" id="r_a64e9fa75beda50a9e8400ee0d4e61984"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a64e9fa75beda50a9e8400ee0d4e61984">end</a> () override</td></tr>
 <tr class="memdesc:a64e9fa75beda50a9e8400ee0d4e61984"><td class="mdescLeft">&#160;</td><td class="mdescRight">stops the processing  <br /></td></tr>
-<tr class="memitem:adfd0d438db34d4e0708738a458d63d8e" id="r_adfd0d438db34d4e0708738a458d63d8e"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_encoder.html#adfd0d438db34d4e0708738a458d63d8e">frameDurationUs</a> ()</td></tr>
+<tr class="memitem:adfd0d438db34d4e0708738a458d63d8e" id="r_adfd0d438db34d4e0708738a458d63d8e"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_encoder.html#adfd0d438db34d4e0708738a458d63d8e">frameDurationUs</a> ()</td></tr>
 <tr class="memdesc:adfd0d438db34d4e0708738a458d63d8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional rtsp function: provide the frame duration in microseconds.  <br /></td></tr>
-<tr class="memitem:adfd0d438db34d4e0708738a458d63d8e" id="r_adfd0d438db34d4e0708738a458d63d8e"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_encoder.html#adfd0d438db34d4e0708738a458d63d8e">frameDurationUs</a> ()</td></tr>
+<tr class="memitem:adfd0d438db34d4e0708738a458d63d8e" id="r_adfd0d438db34d4e0708738a458d63d8e"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_encoder.html#adfd0d438db34d4e0708738a458d63d8e">frameDurationUs</a> ()</td></tr>
 <tr class="memdesc:adfd0d438db34d4e0708738a458d63d8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional rtsp function: provide the frame duration in microseconds.  <br /></td></tr>
-<tr class="memitem:ae29b3d09ddf9caba0eb014afae72a3a4" id="r_ae29b3d09ddf9caba0eb014afae72a3a4"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_encoder.html#ae29b3d09ddf9caba0eb014afae72a3a4">frameSize</a> ()</td></tr>
-<tr class="memitem:ae29b3d09ddf9caba0eb014afae72a3a4" id="r_ae29b3d09ddf9caba0eb014afae72a3a4"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_encoder.html#ae29b3d09ddf9caba0eb014afae72a3a4">frameSize</a> ()</td></tr>
-<tr class="memitem:a3a9ba7594ee74425dd345ecc263a5564" id="r_a3a9ba7594ee74425dd345ecc263a5564"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3a9ba7594ee74425dd345ecc263a5564">isOpen</a> ()</td></tr>
+<tr class="memitem:ae29b3d09ddf9caba0eb014afae72a3a4" id="r_ae29b3d09ddf9caba0eb014afae72a3a4"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_encoder.html#ae29b3d09ddf9caba0eb014afae72a3a4">frameSize</a> ()</td></tr>
+<tr class="memitem:ae29b3d09ddf9caba0eb014afae72a3a4" id="r_ae29b3d09ddf9caba0eb014afae72a3a4"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_encoder.html#ae29b3d09ddf9caba0eb014afae72a3a4">frameSize</a> ()</td></tr>
+<tr class="memitem:a3a9ba7594ee74425dd345ecc263a5564" id="r_a3a9ba7594ee74425dd345ecc263a5564"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3a9ba7594ee74425dd345ecc263a5564">isOpen</a> ()</td></tr>
 <tr class="memitem:ab233b9d1b86c9d2a2c009d6473aa8938" id="r_ab233b9d1b86c9d2a2c009d6473aa8938"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab233b9d1b86c9d2a2c009d6473aa8938">mime</a> () override</td></tr>
 <tr class="memdesc:ab233b9d1b86c9d2a2c009d6473aa8938"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides "audio/pcm".  <br /></td></tr>
 <tr class="memitem:a90622bd78258a36bbcf63426b28307ac" id="r_a90622bd78258a36bbcf63426b28307ac"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a90622bd78258a36bbcf63426b28307ac">operator bool</a> () override</td></tr>
@@ -173,26 +187,26 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a5c749802992efec8bc20ba4a522b027f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the sample rate, number of channels and bits per sample.  <br /></td></tr>
 <tr class="memitem:a065fe4c0d3543644ab523a5d9b5fb9c0" id="r_a065fe4c0d3543644ab523a5d9b5fb9c0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a065fe4c0d3543644ab523a5d9b5fb9c0">setOutput</a> (<a class="el" href="class_print.html">Print</a> &amp;out_stream) override</td></tr>
 <tr class="memdesc:a065fe4c0d3543644ab523a5d9b5fb9c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the output <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>.  <br /></td></tr>
-<tr class="memitem:a0322b050a68a8c578d8a090a932e8bdc" id="r_a0322b050a68a8c578d8a090a932e8bdc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0322b050a68a8c578d8a090a932e8bdc">setSigned</a> (bool isSigned)</td></tr>
+<tr class="memitem:a0322b050a68a8c578d8a090a932e8bdc" id="r_a0322b050a68a8c578d8a090a932e8bdc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0322b050a68a8c578d8a090a932e8bdc">setSigned</a> (<a class="el" href="classbool.html">bool</a> isSigned)</td></tr>
 <tr class="memdesc:a0322b050a68a8c578d8a090a932e8bdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">By default the encoded values are unsigned, but can change them to signed.  <br /></td></tr>
-<tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
+<tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7597ef706dd1aa590903ce9e095db20a">write</a> (const <a class="el" href="classuint8__t.html">uint8_t</a> *data, <a class="el" href="classsize__t.html">size_t</a> len) override</td></tr>
 <tr class="memdesc:a7597ef706dd1aa590903ce9e095db20a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes PCM data to be encoded as RAW.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-methods" class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a2e475070d3df18395c90a10c9d38eb0a" id="r_a2e475070d3df18395c90a10c9d38eb0a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_writer.html#a2e475070d3df18395c90a10c9d38eb0a">writeBlocking</a> (<a class="el" href="class_print.html">Print</a> *out, uint8_t *data, size_t len)</td></tr>
-<tr class="memitem:a2e475070d3df18395c90a10c9d38eb0a" id="r_a2e475070d3df18395c90a10c9d38eb0a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_writer.html#a2e475070d3df18395c90a10c9d38eb0a">writeBlocking</a> (<a class="el" href="class_print.html">Print</a> *out, uint8_t *data, size_t len)</td></tr>
+<tr class="memitem:a2e475070d3df18395c90a10c9d38eb0a" id="r_a2e475070d3df18395c90a10c9d38eb0a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_writer.html#a2e475070d3df18395c90a10c9d38eb0a">writeBlocking</a> (<a class="el" href="class_print.html">Print</a> *out, <a class="el" href="classuint8__t.html">uint8_t</a> *data, <a class="el" href="classsize__t.html">size_t</a> len)</td></tr>
+<tr class="memitem:a2e475070d3df18395c90a10c9d38eb0a" id="r_a2e475070d3df18395c90a10c9d38eb0a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_writer.html#a2e475070d3df18395c90a10c9d38eb0a">writeBlocking</a> (<a class="el" href="class_print.html">Print</a> *out, <a class="el" href="classuint8__t.html">uint8_t</a> *data, <a class="el" href="classsize__t.html">size_t</a> len)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:ac03650a611b99f66e8be6b32514d5002" id="r_ac03650a611b99f66e8be6b32514d5002"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; int8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac03650a611b99f66e8be6b32514d5002">buffer</a></td></tr>
 <tr class="memitem:a47385aa19435f5fca9d3083a748258c5" id="r_a47385aa19435f5fca9d3083a748258c5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_encoder.html#a47385aa19435f5fca9d3083a748258c5">info</a></td></tr>
-<tr class="memitem:a01cdff9fb397966eed50aae3e8f64d81" id="r_a01cdff9fb397966eed50aae3e8f64d81"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a01cdff9fb397966eed50aae3e8f64d81">is_open</a></td></tr>
-<tr class="memitem:a15479def85f83e92a62beeb305202d91" id="r_a15479def85f83e92a62beeb305202d91"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a15479def85f83e92a62beeb305202d91">is_signed</a> = false</td></tr>
+<tr class="memitem:a01cdff9fb397966eed50aae3e8f64d81" id="r_a01cdff9fb397966eed50aae3e8f64d81"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a01cdff9fb397966eed50aae3e8f64d81">is_open</a></td></tr>
+<tr class="memitem:a15479def85f83e92a62beeb305202d91" id="r_a15479def85f83e92a62beeb305202d91"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a15479def85f83e92a62beeb305202d91">is_signed</a> = false</td></tr>
 <tr class="memitem:acdad90adc3ba71f7b1e16444c23b5502" id="r_acdad90adc3ba71f7b1e16444c23b5502"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acdad90adc3ba71f7b1e16444c23b5502">p_print</a> = nullptr</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>EncoderL8s - Condenses 16 bit PCM data stream to 8 bits data. Most microcontrollers can not process 8 bit audio data directly. 8 bit data however is very memory efficient and helps if you need to store audio on constrained resources. This encoder translates 16bit data into 8bit data. By default the encoded data is represented as uint8_t, so the values are from 0 to 255. </p>
+<div class="textblock"><p>EncoderL8s - Condenses 16 bit PCM data stream to 8 bits data. Most microcontrollers can not process 8 bit audio data directly. 8 bit data however is very memory efficient and helps if you need to store audio on constrained resources. This encoder translates 16bit data into 8bit data. By default the encoded data is represented as <a class="el" href="classuint8__t.html">uint8_t</a>, so the values are from 0 to 255. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -208,7 +222,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">EncoderL8 </td>
           <td>(</td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>isSigned</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classbool.html">bool</a></td>          <td class="paramname"><span class="paramname"><em>isSigned</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -375,7 +389,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool <a class="el" href="#acba365cc28eb702040c382646cfb0a7a">begin</a> </td>
+          <td class="memname">virtual <a class="el" href="classbool.html">bool</a> <a class="el" href="#acba365cc28eb702040c382646cfb0a7a">begin</a> </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structaudio__tools_1_1audio__tools_1_1_audio_info.html">AudioInfo</a></td>          <td class="paramname"><span class="paramname"><em>info</em></span></td><td>)</td>
           <td></td>
@@ -402,7 +416,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool begin </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> begin </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -431,7 +445,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool begin </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> begin </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_print.html">Print</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>out</em></span></td><td>)</td>
           <td></td>
@@ -458,9 +472,9 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int16_t convertSample </td>
+          <td class="memname"><a class="el" href="classint16__t.html">int16_t</a> convertSample </td>
           <td>(</td>
-          <td class="paramtype">int16_t</td>          <td class="paramname"><span class="paramname"><em>sample</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classint16__t.html">int16_t</a></td>          <td class="paramname"><span class="paramname"><em>sample</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -512,7 +526,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual uint32_t frameDurationUs </td>
+          <td class="memname">virtual <a class="el" href="classuint32__t.html">uint32_t</a> frameDurationUs </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -541,7 +555,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual uint32_t frameDurationUs </td>
+          <td class="memname">virtual <a class="el" href="classuint32__t.html">uint32_t</a> frameDurationUs </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -570,7 +584,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual int frameSize </td>
+          <td class="memname">virtual <a class="el" href="classint.html">int</a> frameSize </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -598,7 +612,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual int frameSize </td>
+          <td class="memname">virtual <a class="el" href="classint.html">int</a> frameSize </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -626,7 +640,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool isOpen </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> isOpen </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -680,7 +694,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">operator bool </td>
+          <td class="memname">operator <a class="el" href="classbool.html">bool</a> </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -858,7 +872,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void setSigned </td>
           <td>(</td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>isSigned</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classbool.html">bool</a></td>          <td class="paramname"><span class="paramname"><em>isSigned</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -883,14 +897,14 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t write </td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> write </td>
           <td>(</td>
-          <td class="paramtype">const uint8_t *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -923,12 +937,12 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -957,12 +971,12 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -1029,7 +1043,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool is_open</td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> is_open</td>
         </tr>
       </table>
   </td>
@@ -1051,7 +1065,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool is_signed = false</td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> is_signed = false</td>
         </tr>
       </table>
   </td>

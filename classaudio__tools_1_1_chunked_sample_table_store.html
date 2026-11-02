@@ -102,42 +102,50 @@ Collaboration diagram for ChunkedSampleTableStore&lt; T, ChunkSize &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="classaudio__tools_1_1_chunked_sample_table_store__coll__graph.png" border="0" usemap="#a_chunked_sample_table_store_3_01_t_00_01_chunk_size_01_4_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="a_chunked_sample_table_store_3_01_t_00_01_chunk_size_01_4_coll__map" id="a_chunked_sample_table_store_3_01_t_00_01_chunk_size_01_4_coll__map">
-<area shape="rect" title="RAM&#45;backed like RamSampleTableStore, but grows by allocating additional fixed&#45;size chunks instead of ..." alt="" coords="18,207,212,251"/>
-<area shape="rect" href="classaudio__tools_1_1_sample_table_store.html" title="Sequential&#45;access storage for one MP4 sample table (e.g. stsz sample sizes, stco chunk offsets,..." alt="" coords="5,106,182,134"/>
-<area shape="poly" title=" " alt="" coords="101,147,113,206,108,206,97,151"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="206,106,317,134"/>
-<area shape="poly" title=" " alt="" coords="234,143,146,208,143,204,229,143"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="222,5,301,33"/>
-<area shape="poly" title=" " alt="" coords="263,46,264,106,259,104,260,51"/>
+<area shape="rect" title="RAM&#45;backed like RamSampleTableStore, but grows by allocating additional fixed&#45;size chunks instead of ..." alt="" coords="164,229,359,274"/>
+<area shape="rect" href="classaudio__tools_1_1_sample_table_store.html" title="Sequential&#45;access storage for one MP4 sample table (e.g. stsz sample sizes, stco chunk offsets,..." alt="" coords="5,128,182,156"/>
+<area shape="poly" title=" " alt="" coords="128,162,230,227,225,229,126,167"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="206,128,317,156"/>
+<area shape="poly" title=" " alt="" coords="263,170,264,230,259,227,260,174"/>
+<area shape="rect" href="classint.html" title=" " alt="" coords="101,5,139,33"/>
+<area shape="poly" title=" " alt="" coords="121,45,128,76,142,102,167,116,208,129,203,130,165,121,139,106,123,78,119,51"/>
+<area shape="rect" href="class_t.html" title=" " alt="" coords="201,5,239,33"/>
+<area shape="poly" title=" " alt="" coords="216,46,217,76,224,103,232,116,244,128,239,128,228,119,219,105,212,76,214,51"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="263,5,342,33"/>
+<area shape="poly" title=" " alt="" coords="295,46,268,129,264,126,292,49"/>
+<area shape="rect" href="classbool.html" title=" " alt="" coords="389,5,438,33"/>
+<area shape="poly" title=" " alt="" coords="409,46,397,79,377,106,352,119,317,130,315,125,350,114,373,102,393,76,405,50"/>
+<area shape="rect" href="classsize__t.html" title=" " alt="" coords="341,128,400,156"/>
+<area shape="poly" title=" " alt="" coords="355,167,323,207,294,231,292,226,320,203,351,170"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a508dd6195b998a55bf64959e3f3377e8" id="r_a508dd6195b998a55bf64959e3f3377e8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a508dd6195b998a55bf64959e3f3377e8">~ChunkedSampleTableStore</a> ()</td></tr>
-<tr class="memitem:a1c1b490d05f23a6f74e9e60fc57d253e" id="r_a1c1b490d05f23a6f74e9e60fc57d253e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1c1b490d05f23a6f74e9e60fc57d253e">append</a> (T value) override</td></tr>
+<tr class="memitem:a1c1b490d05f23a6f74e9e60fc57d253e" id="r_a1c1b490d05f23a6f74e9e60fc57d253e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1c1b490d05f23a6f74e9e60fc57d253e">append</a> (<a class="el" href="class_t.html">T</a> value) override</td></tr>
 <tr class="memdesc:a1c1b490d05f23a6f74e9e60fc57d253e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Appends one entry - call in file order, once per table entry.  <br /></td></tr>
 <tr class="memitem:aee7cb2065b88d21ac4ad05bc997ecf82" id="r_aee7cb2065b88d21ac4ad05bc997ecf82"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aee7cb2065b88d21ac4ad05bc997ecf82">clear</a> () override</td></tr>
 <tr class="memdesc:aee7cb2065b88d21ac4ad05bc997ecf82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets to empty - call once per begin()/track.  <br /></td></tr>
-<tr class="memitem:a4cf79c27a5a6f4930c1208b51c432344" id="r_a4cf79c27a5a6f4930c1208b51c432344"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4cf79c27a5a6f4930c1208b51c432344">get</a> (size_t index) override</td></tr>
+<tr class="memitem:a4cf79c27a5a6f4930c1208b51c432344" id="r_a4cf79c27a5a6f4930c1208b51c432344"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_t.html">T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4cf79c27a5a6f4930c1208b51c432344">get</a> (<a class="el" href="classsize__t.html">size_t</a> index) override</td></tr>
 <tr class="memdesc:a4cf79c27a5a6f4930c1208b51c432344"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads back entry 'index' - index must be &lt; <a class="el" href="#a128a3f6e587ccc181112bb2892440990" title="Number of entries appended so far.">size()</a>.  <br /></td></tr>
-<tr class="memitem:a978cff8e50f295705fa5aca5b03bbf42" id="r_a978cff8e50f295705fa5aca5b03bbf42"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sample_table_store.html#a978cff8e50f295705fa5aca5b03bbf42">setNextEntryOffset</a> (uint64_t fileOffset)</td></tr>
-<tr class="memitem:af8ad543b4c0595c25293be58b1ea01b0" id="r_af8ad543b4c0595c25293be58b1ea01b0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sample_table_store.html#af8ad543b4c0595c25293be58b1ea01b0">setOnDiskEntrySize</a> (size_t bytes)</td></tr>
-<tr class="memitem:a128a3f6e587ccc181112bb2892440990" id="r_a128a3f6e587ccc181112bb2892440990"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a128a3f6e587ccc181112bb2892440990">size</a> () override</td></tr>
+<tr class="memitem:a978cff8e50f295705fa5aca5b03bbf42" id="r_a978cff8e50f295705fa5aca5b03bbf42"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sample_table_store.html#a978cff8e50f295705fa5aca5b03bbf42">setNextEntryOffset</a> (<a class="el" href="classuint64__t.html">uint64_t</a> fileOffset)</td></tr>
+<tr class="memitem:af8ad543b4c0595c25293be58b1ea01b0" id="r_af8ad543b4c0595c25293be58b1ea01b0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sample_table_store.html#af8ad543b4c0595c25293be58b1ea01b0">setOnDiskEntrySize</a> (<a class="el" href="classsize__t.html">size_t</a> bytes)</td></tr>
+<tr class="memitem:a128a3f6e587ccc181112bb2892440990" id="r_a128a3f6e587ccc181112bb2892440990"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a128a3f6e587ccc181112bb2892440990">size</a> () override</td></tr>
 <tr class="memdesc:a128a3f6e587ccc181112bb2892440990"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of entries appended so far.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a8ba3a27ef1d3f254e5e3f400c8b3f80b" id="r_a8ba3a27ef1d3f254e5e3f400c8b3f80b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; T * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8ba3a27ef1d3f254e5e3f400c8b3f80b">chunks</a></td></tr>
-<tr class="memitem:a76d971a3c552bc58ba9f0d5fceae9806" id="r_a76d971a3c552bc58ba9f0d5fceae9806"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a76d971a3c552bc58ba9f0d5fceae9806">count</a> = 0</td></tr>
+<tr class="memitem:a8ba3a27ef1d3f254e5e3f400c8b3f80b" id="r_a8ba3a27ef1d3f254e5e3f400c8b3f80b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="class_t.html">T</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8ba3a27ef1d3f254e5e3f400c8b3f80b">chunks</a></td></tr>
+<tr class="memitem:a76d971a3c552bc58ba9f0d5fceae9806" id="r_a76d971a3c552bc58ba9f0d5fceae9806"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a76d971a3c552bc58ba9f0d5fceae9806">count</a> = 0</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename T, size_t ChunkSize = 4096&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename <a class="el" href="class_t.html">T</a>, <a class="el" href="classsize__t.html">size_t</a> ChunkSize = 4096&gt;<br />
 class audio_tools::ChunkedSampleTableStore&lt; T, ChunkSize &gt;</div><p>RAM-backed like <a class="el" href="classaudio__tools_1_1_ram_sample_table_store.html" title="Keeps every entry in RAM (a plain Vector&lt;T&gt;) - the simplest and fastest option, but scales with the t...">RamSampleTableStore</a>, but grows by allocating additional fixed-size chunks instead of reallocating and copying one single growing array. </p>
 <p>This project's <a class="el" href="classaudio__tools_1_1_vector.html#aacd6ab493bb7ee51293656dc10ac015a">Vector&lt;T&gt;::push_back()</a> (<a class="el" href="_vector_8h.html">AudioBasic/Collections/Vector.h</a>) allocates exactly the new size on every growth, with no spare capacity</p><ul>
 <li>once the array is full, every single push_back() reallocates <em>and copies everything already in it</em>. For the hundreds of thousands of entries a feature-length movie's stsz/stco tables need, that's O(N) work per append, O(N^2) total, which is real, measured wall-clock time spent before a single frame can play.</li>
 </ul>
-<p>This store sidesteps that by keeping a <a class="el" href="classaudio__tools_1_1_vector.html" title="Vector implementation which provides the most important methods as defined by std::vector....">Vector</a> of chunk pointers rather than a <a class="el" href="classaudio__tools_1_1_vector.html" title="Vector implementation which provides the most important methods as defined by std::vector....">Vector</a> of T directly: growing by one chunk means appending one more pointer (cheap - the pointer vector itself stays tiny, e.g. ~70 pointers for 288K entries at the default chunk size) and allocating a fresh fixed-size block, without ever touching or copying any previously-appended data. Same total memory as <a class="el" href="classaudio__tools_1_1_ram_sample_table_store.html" title="Keeps every entry in RAM (a plain Vector&lt;T&gt;) - the simplest and fastest option, but scales with the t...">RamSampleTableStore</a>, but O(1) amortized append instead of O(N) - the same idea behind this project's <a class="el" href="classaudio__tools_1_1_dynamic_multi_buffer.html" title="Auto-expanding buffer composed of multiple buffer instances.">DynamicMultiBuffer</a> (<a class="el" href="_dynamic_multi_buffer_8h.html">AudioTools/Sandbox/DynamicMultiBuffer.h</a>), reimplemented directly here rather than wrapped: that class's public API is a sequential read()/write() cursor, not the indexed <a class="el" href="#a4cf79c27a5a6f4930c1208b51c432344" title="Reads back entry &#39;index&#39; - index must be &lt; size().">get()</a> <a class="el" href="classaudio__tools_1_1_chunked_sample_table_store.html" title="RAM-backed like RamSampleTableStore, but grows by allocating additional fixed-size chunks instead of ...">ChunkedSampleTableStore</a> needs, and as Sandbox-status code it's not something to take a hard dependency on from a container decoder. </p>
+<p>This store sidesteps that by keeping a <a class="el" href="classaudio__tools_1_1_vector.html" title="Vector implementation which provides the most important methods as defined by std::vector....">Vector</a> of chunk pointers rather than a <a class="el" href="classaudio__tools_1_1_vector.html" title="Vector implementation which provides the most important methods as defined by std::vector....">Vector</a> of <a class="el" href="class_t.html">T</a> directly: growing by one chunk means appending one more pointer (cheap - the pointer vector itself stays tiny, e.g. ~70 pointers for 288K entries at the default chunk size) and allocating a fresh fixed-size block, without ever touching or copying any previously-appended data. Same total memory as <a class="el" href="classaudio__tools_1_1_ram_sample_table_store.html" title="Keeps every entry in RAM (a plain Vector&lt;T&gt;) - the simplest and fastest option, but scales with the t...">RamSampleTableStore</a>, but O(1) amortized append instead of O(N) - the same idea behind this project's <a class="el" href="classaudio__tools_1_1_dynamic_multi_buffer.html" title="Auto-expanding buffer composed of multiple buffer instances.">DynamicMultiBuffer</a> (<a class="el" href="_dynamic_multi_buffer_8h.html">AudioTools/Sandbox/DynamicMultiBuffer.h</a>), reimplemented directly here rather than wrapped: that class's public API is a sequential read()/write() cursor, not the indexed <a class="el" href="#a4cf79c27a5a6f4930c1208b51c432344" title="Reads back entry &#39;index&#39; - index must be &lt; size().">get()</a> <a class="el" href="classaudio__tools_1_1_chunked_sample_table_store.html" title="RAM-backed like RamSampleTableStore, but grows by allocating additional fixed-size chunks instead of ...">ChunkedSampleTableStore</a> needs, and as Sandbox-status code it's not something to take a hard dependency on from a container decoder. </p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a508dd6195b998a55bf64959e3f3377e8" name="a508dd6195b998a55bf64959e3f3377e8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a508dd6195b998a55bf64959e3f3377e8">&#9670;&#160;</a></span>~ChunkedSampleTableStore()</h2>
@@ -145,7 +153,7 @@ class audio_tools::ChunkedSampleTableStore&lt; T, ChunkSize &gt;</div><p>RAM-bac
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t ChunkSize = 4096&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>, <a class="el" href="classsize__t.html">size_t</a> ChunkSize = 4096&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -173,7 +181,7 @@ template&lt;typename T, size_t ChunkSize = 4096&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t ChunkSize = 4096&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>, <a class="el" href="classsize__t.html">size_t</a> ChunkSize = 4096&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -181,7 +189,7 @@ template&lt;typename T, size_t ChunkSize = 4096&gt; </div>
         <tr>
           <td class="memname">void append </td>
           <td>(</td>
-          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_t.html">T</a></td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -204,7 +212,7 @@ template&lt;typename T, size_t ChunkSize = 4096&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t ChunkSize = 4096&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>, <a class="el" href="classsize__t.html">size_t</a> ChunkSize = 4096&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -235,15 +243,15 @@ template&lt;typename T, size_t ChunkSize = 4096&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t ChunkSize = 4096&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>, <a class="el" href="classsize__t.html">size_t</a> ChunkSize = 4096&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">T get </td>
+          <td class="memname"><a class="el" href="class_t.html">T</a> get </td>
           <td>(</td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>index</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>index</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -266,7 +274,7 @@ template&lt;typename T, size_t ChunkSize = 4096&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -274,7 +282,7 @@ template&lt;typename T&gt; </div>
         <tr>
           <td class="memname">virtual void setNextEntryOffset </td>
           <td>(</td>
-          <td class="paramtype">uint64_t</td>          <td class="paramname"><span class="paramname"><em>fileOffset</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classuint64__t.html">uint64_t</a></td>          <td class="paramname"><span class="paramname"><em>fileOffset</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -296,7 +304,7 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -304,7 +312,7 @@ template&lt;typename T&gt; </div>
         <tr>
           <td class="memname">virtual void setOnDiskEntrySize </td>
           <td>(</td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>bytes</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>bytes</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -326,13 +334,13 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t ChunkSize = 4096&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>, <a class="el" href="classsize__t.html">size_t</a> ChunkSize = 4096&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t size </td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> size </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -358,13 +366,13 @@ template&lt;typename T, size_t ChunkSize = 4096&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t ChunkSize = 4096&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>, <a class="el" href="classsize__t.html">size_t</a> ChunkSize = 4096&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;T*&gt; chunks</td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;<a class="el" href="class_t.html">T</a>*&gt; chunks</td>
         </tr>
       </table>
   </td>
@@ -382,13 +390,13 @@ template&lt;typename T, size_t ChunkSize = 4096&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t ChunkSize = 4096&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>, <a class="el" href="classsize__t.html">size_t</a> ChunkSize = 4096&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t count = 0</td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> count = 0</td>
         </tr>
       </table>
   </td>

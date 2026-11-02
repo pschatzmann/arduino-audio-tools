@@ -1,7 +1,29 @@
 <map id="USBAudioHostBackendESP32" name="USBAudioHostBackendESP32">
-<area shape="rect" id="Node000001" title="USBAudioHostBackend for the ESP&#45;IDF usb_host library which is part of arduino&#45;esp32 (ESP32&#45;S2,..." alt="" coords="80,106,290,134"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_u_s_b_audio_host_backend.html" title="Abstract seam for every raw USB host stack call the UAC host class logic (USBAudioHostBase) needs...." alt="" coords="5,5,176,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="115,42,175,105,170,106,112,47"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_u_s_b_audio_host_events.html" title="Upcalls from a USB host backend into the stack independent UAC host class logic (USBAudioHostBase)...." alt="" coords="200,5,360,33"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="260,43,199,108,196,103,254,45"/>
+<area shape="rect" id="Node000001" title="USBAudioHostBackend for the ESP&#45;IDF usb_host library which is part of arduino&#45;esp32 (ESP32&#45;S2,..." alt="" coords="410,358,620,386"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_u_s_b_audio_host_backend.html" title="Abstract seam for every raw USB host stack call the UAC host class logic (USBAudioHostBase) needs...." alt="" coords="29,10,200,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="200,6,247,3,296,6,344,18,387,41,424,75,453,117,475,162,491,209,510,297,516,358,510,357,504,298,486,211,470,164,448,119,420,79,384,45,342,23,295,11,247,8,203,10"/>
+<area shape="rect" id="Node000003" href="$classint.html" title=" " alt="" coords="95,78,134,106"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="148,89,277,94,342,103,368,110,387,119,417,145,442,175,463,209,480,244,502,310,514,358,508,357,497,311,475,246,458,212,438,178,413,148,384,124,366,115,341,108,277,100,151,94"/>
+<area shape="rect" id="Node000004" href="$classsize__t.html" title=" " alt="" coords="85,134,144,162"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="159,146,284,152,345,161,387,175,413,194,435,217,471,268,497,319,512,358,506,357,492,321,467,271,431,220,409,198,384,180,344,166,284,158,161,151"/>
+<area shape="rect" id="Node000005" href="$classbool.html" title=" " alt="" coords="90,190,139,218"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="153,199,203,197,263,201,326,213,387,235,427,262,461,296,507,358,502,358,457,299,424,266,384,240,325,218,262,207,203,203,156,203"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="82,246,147,274"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="161,259,267,268,327,278,387,295,448,324,497,357,492,358,445,329,385,300,326,284,266,273,164,263"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_u_s_b_audio_host_events.html" title="Upcalls from a USB host backend into the stack independent UAC host class logic (USBAudioHostBase)...." alt="" coords="35,302,194,330"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="209,321,386,343,453,357,448,359,385,348,210,327"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="22,358,207,386"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="222,370,411,370,407,374,224,375"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="36,414,193,442"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="207,420,294,412,385,400,463,385,458,388,386,405,295,417,210,425"/>
+<area shape="rect" id="Node000010" href="$classuint8__t.html" title=" " alt="" coords="81,493,148,521"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="162,505,267,498,327,487,385,469,419,451,451,428,498,388,502,385,454,432,422,455,387,474,328,493,268,504,164,510"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="52,549,177,577"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="192,567,238,566,288,561,338,550,384,531,427,498,462,457,488,417,505,388,509,384,493,419,466,460,431,502,387,535,339,555,289,567,239,572,194,572"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="77,602,152,630"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="167,624,217,629,273,629,331,619,359,609,384,596,412,575,436,548,456,519,472,488,495,429,509,389,512,384,501,431,477,490,460,521,440,551,415,578,387,601,361,614,332,624,273,634,216,634,168,629"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="5,655,224,716"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="239,698,277,696,315,690,351,679,384,660,417,631,443,596,464,556,481,516,501,440,511,389,514,384,506,441,486,518,469,559,448,598,421,634,387,665,353,683,316,695,277,702,240,703"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="5,740,224,802"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="239,776,277,772,315,763,352,749,384,728,421,690,450,644,472,594,488,544,506,450,512,388,515,384,511,450,493,545,477,596,455,647,425,693,387,732,354,754,317,768,278,777,239,781"/>
 </map>

@@ -1,10 +1,12 @@
 <map id="MuxerVideoSink" name="MuxerVideoSink">
-<area shape="rect" id="Node000001" title="Print sink that writes each frame it receives to a Muxer&#39;s video track via addVideoFrame(),..." alt="" coords="5,207,132,234"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="30,5,81,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="60,48,70,206,65,206,55,49"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_muxer.html" title="Common interface for muxers (MuxerAVI, MuxerMP4) that combine an already&#45;encoded video track (and opt..." alt="" coords="84,106,146,134"/>
-<area shape="poly" id="edge4_Node000003_Node000002" title=" " alt="" coords="68,45,90,81,107,105,102,106,85,83,68,50"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="105,147,77,207,73,205,100,148"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="" coords="113,5,216,33"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="160,46,148,83,130,107,126,104,143,81,157,50"/>
+<area shape="rect" id="Node000001" title="Print sink that writes each frame it receives to a Muxer&#39;s video track via addVideoFrame(),..." alt="" coords="68,307,194,335"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="140,106,192,134"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="170,147,171,212,166,248,158,284,144,309,140,305,153,282,161,248,165,212,167,151"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_muxer.html" title="Common interface for muxers (MuxerAVI, MuxerMP4) that combine an already&#45;encoded video track (and opt..." alt="" coords="59,207,120,234"/>
+<area shape="poly" id="edge5_Node000004_Node000002" title=" " alt="" coords="125,139,104,159,95,183,92,207,87,205,89,182,100,156,128,135"/>
+<area shape="rect" id="Node000003" href="$classint.html" title=" " alt="" coords="147,5,185,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="167,46,168,106,163,105,165,51"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="87,247,89,266,94,282,102,295,114,307,108,307,98,298,89,284,84,267,85,252"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="" coords="5,106,108,134"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="65,146,78,182,87,206,82,206,73,184,64,151"/>
 </map>

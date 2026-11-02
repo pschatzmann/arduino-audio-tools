@@ -1,7 +1,15 @@
 <map id="MPGParseBuffer" name="MPGParseBuffer">
-<area shape="rect" id="Node000001" title="Minimal byte accumulator used by DemuxerMPG to parse start&#45;code delimited units that may straddle wri..." alt="" coords="11,207,137,234"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="5,106,143,134"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="76,148,77,207,71,205,72,151"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="34,5,114,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="75,46,77,106,71,105,73,51"/>
+<area shape="rect" id="Node000001" title="Minimal byte accumulator used by DemuxerMPG to parse start&#45;code delimited units that may straddle wri..." alt="" coords="167,229,293,257"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="100,128,237,156"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="186,167,224,229,219,228,183,171"/>
+<area shape="rect" id="Node000003" href="$classint.html" title=" " alt="" coords="5,5,44,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="23,45,29,77,35,91,43,102,69,122,102,134,97,136,67,126,39,106,30,93,24,78,23,51"/>
+<area shape="rect" id="Node000004" href="$classuint8__t_01_5.html" title=" " alt="" coords="77,5,154,33"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="115,46,120,76,129,103,151,128,146,128,125,106,115,77,114,51"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="178,5,258,33"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="209,46,176,129,172,126,205,49"/>
+<area shape="rect" id="Node000006" href="$classbool.html" title=" " alt="" coords="299,5,348,33"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="320,46,309,79,289,106,265,122,239,133,237,128,263,118,285,102,304,76,316,50"/>
+<area shape="rect" id="Node000007" href="$classsize__t.html" title=" " alt="" coords="262,128,321,156"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="278,168,240,230,236,226,273,170"/>
 </map>

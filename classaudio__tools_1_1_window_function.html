@@ -118,30 +118,42 @@ Inheritance diagram for WindowFunction:</div>
 <area shape="poly" title=" " alt="" coords="78,305,93,351,114,405,144,461,162,487,183,510,199,522,219,532,214,532,197,526,180,515,158,491,139,464,109,408,88,353,77,310"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for WindowFunction:</div>
+<div class="dyncontent">
+<div class="center"><img src="classaudio__tools_1_1_window_function__coll__graph.png" border="0" usemap="#a_window_function_coll__map" loading="lazy" alt="Collaboration graph"/></div>
+<map name="a_window_function_coll__map" id="a_window_function_coll__map">
+<area shape="rect" title="FFT Window Function." alt="" coords="44,173,172,201"/>
+<area shape="rect" href="classfloat.html" title=" " alt="" coords="5,5,56,33"/>
+<area shape="poly" title=" " alt="" coords="23,46,21,98,24,124,34,148,46,161,63,172,58,173,43,165,30,150,19,125,16,98,23,51"/>
+<area shape="rect" href="classint.html" title=" " alt="" coords="167,5,206,33"/>
+<area shape="poly" title=" " alt="" coords="187,46,181,98,172,125,159,150,147,164,133,175,131,170,144,160,155,148,167,123,176,97,184,50"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a1f01e9fa60473035b20b0dce00e46930" id="r_a1f01e9fa60473035b20b0dce00e46930"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1f01e9fa60473035b20b0dce00e46930">WindowFunction</a> ()=default</td></tr>
-<tr class="memitem:a838612f9ae4330b86d40ebbd7018b8a3" id="r_a838612f9ae4330b86d40ebbd7018b8a3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a838612f9ae4330b86d40ebbd7018b8a3">begin</a> (int <a class="el" href="#a296d0d8ff81677d81815bd49551fdaad">samples</a>)</td></tr>
+<tr class="memitem:a838612f9ae4330b86d40ebbd7018b8a3" id="r_a838612f9ae4330b86d40ebbd7018b8a3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a838612f9ae4330b86d40ebbd7018b8a3">begin</a> (<a class="el" href="classint.html">int</a> <a class="el" href="#a296d0d8ff81677d81815bd49551fdaad">samples</a>)</td></tr>
 <tr class="memdesc:a838612f9ae4330b86d40ebbd7018b8a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup the window function providing the fft length.  <br /></td></tr>
-<tr class="memitem:ac8161847fa3a2b56a5119bcf6964e1ff" id="r_ac8161847fa3a2b56a5119bcf6964e1ff"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac8161847fa3a2b56a5119bcf6964e1ff">factor</a> (int idx)</td></tr>
+<tr class="memitem:ac8161847fa3a2b56a5119bcf6964e1ff" id="r_ac8161847fa3a2b56a5119bcf6964e1ff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac8161847fa3a2b56a5119bcf6964e1ff">factor</a> (<a class="el" href="classint.html">int</a> idx)</td></tr>
 <tr class="memitem:ade300520180ae7669459e7de7108c701" id="r_ade300520180ae7669459e7de7108c701"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ade300520180ae7669459e7de7108c701">name</a> ()=0</td></tr>
-<tr class="memitem:a296d0d8ff81677d81815bd49551fdaad" id="r_a296d0d8ff81677d81815bd49551fdaad"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a296d0d8ff81677d81815bd49551fdaad">samples</a> ()</td></tr>
+<tr class="memitem:a296d0d8ff81677d81815bd49551fdaad" id="r_a296d0d8ff81677d81815bd49551fdaad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a296d0d8ff81677d81815bd49551fdaad">samples</a> ()</td></tr>
 <tr class="memdesc:a296d0d8ff81677d81815bd49551fdaad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the number of samples (fft length).  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-methods" class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a968016483476b685873e8068cbdf3726" id="r_a968016483476b685873e8068cbdf3726"><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a968016483476b685873e8068cbdf3726">factor_internal</a> (int idx)=0</td></tr>
-<tr class="memitem:a57a2b37940b48f5e8ea9ffd1fea79e48" id="r_a57a2b37940b48f5e8ea9ffd1fea79e48"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a57a2b37940b48f5e8ea9ffd1fea79e48">ratio</a> (int idx)</td></tr>
+<tr class="memitem:a968016483476b685873e8068cbdf3726" id="r_a968016483476b685873e8068cbdf3726"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a968016483476b685873e8068cbdf3726">factor_internal</a> (<a class="el" href="classint.html">int</a> idx)=0</td></tr>
+<tr class="memitem:a57a2b37940b48f5e8ea9ffd1fea79e48" id="r_a57a2b37940b48f5e8ea9ffd1fea79e48"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a57a2b37940b48f5e8ea9ffd1fea79e48">ratio</a> (<a class="el" href="classint.html">int</a> idx)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a9c00ef0d6a75a4709ae8cc30798573d7" id="r_a9c00ef0d6a75a4709ae8cc30798573d7"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9c00ef0d6a75a4709ae8cc30798573d7">fourPi</a> = 12.56637061f</td></tr>
-<tr class="memitem:afc28d62fbf906d279b549df710bb984f" id="r_afc28d62fbf906d279b549df710bb984f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afc28d62fbf906d279b549df710bb984f">i_half_samples</a> = 0</td></tr>
-<tr class="memitem:ac6b2af2448f8ff9b3328ed4e98323a29" id="r_ac6b2af2448f8ff9b3328ed4e98323a29"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac6b2af2448f8ff9b3328ed4e98323a29">i_samples</a> = 0</td></tr>
-<tr class="memitem:a97175aba2ced807d61008513bc1b795d" id="r_a97175aba2ced807d61008513bc1b795d"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a97175aba2ced807d61008513bc1b795d">samples_minus_1</a> = 0.0f</td></tr>
-<tr class="memitem:a1103d9adf08fda651cd3a3eede8fa390" id="r_a1103d9adf08fda651cd3a3eede8fa390"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1103d9adf08fda651cd3a3eede8fa390">sixPi</a> = 18.84955593f</td></tr>
-<tr class="memitem:a9d1b7d3bb900175ee122fd20b62906d4" id="r_a9d1b7d3bb900175ee122fd20b62906d4"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9d1b7d3bb900175ee122fd20b62906d4">twoPi</a> = 6.28318531f</td></tr>
+<tr class="memitem:a9c00ef0d6a75a4709ae8cc30798573d7" id="r_a9c00ef0d6a75a4709ae8cc30798573d7"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9c00ef0d6a75a4709ae8cc30798573d7">fourPi</a> = 12.56637061f</td></tr>
+<tr class="memitem:afc28d62fbf906d279b549df710bb984f" id="r_afc28d62fbf906d279b549df710bb984f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afc28d62fbf906d279b549df710bb984f">i_half_samples</a> = 0</td></tr>
+<tr class="memitem:ac6b2af2448f8ff9b3328ed4e98323a29" id="r_ac6b2af2448f8ff9b3328ed4e98323a29"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac6b2af2448f8ff9b3328ed4e98323a29">i_samples</a> = 0</td></tr>
+<tr class="memitem:a97175aba2ced807d61008513bc1b795d" id="r_a97175aba2ced807d61008513bc1b795d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a97175aba2ced807d61008513bc1b795d">samples_minus_1</a> = 0.0f</td></tr>
+<tr class="memitem:a1103d9adf08fda651cd3a3eede8fa390" id="r_a1103d9adf08fda651cd3a3eede8fa390"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1103d9adf08fda651cd3a3eede8fa390">sixPi</a> = 18.84955593f</td></tr>
+<tr class="memitem:a9d1b7d3bb900175ee122fd20b62906d4" id="r_a9d1b7d3bb900175ee122fd20b62906d4"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9d1b7d3bb900175ee122fd20b62906d4">twoPi</a> = 6.28318531f</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>FFT Window Function. </p>
@@ -186,7 +198,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">virtual void begin </td>
           <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>samples</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>samples</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -213,9 +225,9 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">float factor </td>
+          <td class="memname"><a class="el" href="classfloat.html">float</a> factor </td>
           <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>idx</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>idx</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -239,9 +251,9 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual float factor_internal </td>
+          <td class="memname">virtual <a class="el" href="classfloat.html">float</a> factor_internal </td>
           <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>idx</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>idx</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -293,9 +305,9 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">float ratio </td>
+          <td class="memname"><a class="el" href="classfloat.html">float</a> ratio </td>
           <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>idx</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>idx</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -318,7 +330,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int samples </td>
+          <td class="memname"><a class="el" href="classint.html">int</a> samples </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -346,7 +358,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const float fourPi = 12.56637061f</td>
+          <td class="memname">const <a class="el" href="classfloat.html">float</a> fourPi = 12.56637061f</td>
         </tr>
       </table>
   </td>
@@ -368,7 +380,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int i_half_samples = 0</td>
+          <td class="memname"><a class="el" href="classint.html">int</a> i_half_samples = 0</td>
         </tr>
       </table>
   </td>
@@ -390,7 +402,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int i_samples = 0</td>
+          <td class="memname"><a class="el" href="classint.html">int</a> i_samples = 0</td>
         </tr>
       </table>
   </td>
@@ -412,7 +424,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">float samples_minus_1 = 0.0f</td>
+          <td class="memname"><a class="el" href="classfloat.html">float</a> samples_minus_1 = 0.0f</td>
         </tr>
       </table>
   </td>
@@ -434,7 +446,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const float sixPi = 18.84955593f</td>
+          <td class="memname">const <a class="el" href="classfloat.html">float</a> sixPi = 18.84955593f</td>
         </tr>
       </table>
   </td>
@@ -456,7 +468,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const float twoPi = 6.28318531f</td>
+          <td class="memname">const <a class="el" href="classfloat.html">float</a> twoPi = 6.28318531f</td>
         </tr>
       </table>
   </td>

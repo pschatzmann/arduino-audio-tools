@@ -1,11 +1,17 @@
 <map id="VideoFrameMeter" name="VideoFrameMeter">
-<area shape="rect" id="Node000001" title="Transparent write() wrapper that measures throughput/turnaround while forwarding every call unchanged..." alt="" coords="72,183,209,211"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="" coords="5,82,108,110"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="49,123,50,142,55,158,67,171,85,182,79,183,64,175,50,160,44,143,47,128"/>
-<area shape="poly" id="edge3_Node000001_Node000002" title=" " alt="" coords="63,123,72,142,82,157,95,170,113,183,108,183,92,174,77,161,67,144,62,128"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="194,5,245,33"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="219,47,210,103,201,132,187,161,163,185,160,180,182,157,196,130,205,101,216,50"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_video_frame_meter_1_1_print_view.html" title=" " alt="" coords="290,82,373,110"/>
-<area shape="poly" id="edge5_Node000004_Node000003" title=" " alt="" coords="252,39,314,81,309,82,251,44"/>
-<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="299,117,223,161,172,185,170,180,221,157,294,119"/>
+<area shape="rect" id="Node000001" title="Transparent write() wrapper that measures throughput/turnaround while forwarding every call unchanged..." alt="" coords="174,351,312,378"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="" coords="5,183,108,211"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="47,223,43,250,40,276,43,302,54,325,72,337,102,346,176,358,172,360,100,351,70,341,51,328,38,304,35,276,37,249,45,228"/>
+<area shape="poly" id="edge4_Node000001_Node000002" title=" " alt="" coords="54,224,59,277,67,303,81,325,96,334,118,342,177,355,172,356,117,347,93,339,78,329,62,305,54,278,52,229"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="193,106,245,134"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="219,147,218,183,218,210,230,290,243,351,238,349,225,291,213,211,213,183,216,151"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_video_frame_meter_1_1_print_view.html" title=" " alt="" coords="289,183,373,211"/>
+<area shape="poly" id="edge8_Node000007_Node000003" title=" " alt="" coords="251,140,314,182,309,183,251,145"/>
+<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="200,5,238,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="220,46,222,106,217,105,218,51"/>
+<area shape="rect" id="Node000005" href="$classuint32__t.html" title=" " alt="" coords="397,183,471,211"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="422,223,419,236,412,262,409,285,404,307,388,329,352,351,313,362,312,357,350,346,384,325,399,304,404,284,406,261,414,234,418,227"/>
+<area shape="rect" id="Node000006" href="$classbool.html" title=" " alt="" coords="564,183,613,211"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="592,224,593,251,588,279,578,306,561,329,543,340,518,348,453,360,380,365,312,367,312,362,380,360,453,355,517,343,541,335,557,325,574,303,583,278,587,251,589,228"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="313,221,305,236,272,300,250,352,246,348,267,297,301,233,309,225"/>
 </map>

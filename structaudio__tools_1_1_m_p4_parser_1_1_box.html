@@ -87,30 +87,50 @@ $(function() {
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_m_p4_parser_8h_source.html">MP4Parser.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for MP4Parser::Box:</div>
+<div class="dyncontent">
+<div class="center"><img src="structaudio__tools_1_1_m_p4_parser_1_1_box__coll__graph.png" border="0" usemap="#a_m_p4_parser_1_1_box_coll__map" loading="lazy" alt="Collaboration graph"/></div>
+<map name="a_m_p4_parser_1_1_box_coll__map" id="a_m_p4_parser_1_1_box_coll__map">
+<area shape="rect" title="Represents an individual box in the MP4 file." alt="" coords="183,173,306,201"/>
+<area shape="rect" href="classsize__t.html" title=" " alt="" coords="5,5,65,33"/>
+<area shape="poly" title=" " alt="" coords="31,46,35,99,42,125,56,147,76,159,107,168,185,180,180,182,106,173,74,163,52,151,37,127,29,100,30,51"/>
+<area shape="rect" title=" " alt="" coords="105,5,154,33"/>
+<area shape="poly" title=" " alt="" coords="131,46,139,98,148,124,163,147,178,160,197,173,192,172,175,165,159,151,144,126,134,99,128,51"/>
+<area shape="rect" href="classuint8__t.html" title=" " alt="" coords="178,5,244,33"/>
+<area shape="poly" title=" " alt="" coords="208,46,206,96,208,123,215,148,232,174,227,172,210,150,203,124,201,96,204,50"/>
+<area shape="rect" href="classint.html" title=" " alt="" coords="268,5,306,33"/>
+<area shape="poly" title=" " alt="" coords="282,47,250,174,245,171,277,49"/>
+<area shape="rect" href="classuint64__t.html" title=" " alt="" coords="340,5,415,33"/>
+<area shape="poly" title=" " alt="" coords="381,47,375,100,366,127,350,151,330,167,307,178,305,172,327,162,346,147,361,125,370,99,377,51"/>
+<area shape="rect" href="classbool.html" title=" " alt="" coords="456,5,505,33"/>
+<area shape="poly" title=" " alt="" coords="484,47,480,101,470,128,453,151,428,164,391,174,306,185,306,179,390,169,426,159,449,147,465,125,474,99,480,50"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a6a37485bfdca8f2d8b517b6b08cde1b3" id="r_a6a37485bfdca8f2d8b517b6b08cde1b3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6a37485bfdca8f2d8b517b6b08cde1b3">available</a> = 0</td></tr>
+<tr class="memitem:a6a37485bfdca8f2d8b517b6b08cde1b3" id="r_a6a37485bfdca8f2d8b517b6b08cde1b3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6a37485bfdca8f2d8b517b6b08cde1b3">available</a> = 0</td></tr>
 <tr class="memdesc:a6a37485bfdca8f2d8b517b6b08cde1b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of bytes available as data.  <br /></td></tr>
-<tr class="memitem:a579f5164b5b16e18ddcdb0296ef81799" id="r_a579f5164b5b16e18ddcdb0296ef81799"><td class="memItemLeft" align="right" valign="top">const uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a579f5164b5b16e18ddcdb0296ef81799">data</a></td></tr>
+<tr class="memitem:a579f5164b5b16e18ddcdb0296ef81799" id="r_a579f5164b5b16e18ddcdb0296ef81799"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classuint8__t.html">uint8_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a579f5164b5b16e18ddcdb0296ef81799">data</a></td></tr>
 <tr class="memdesc:a579f5164b5b16e18ddcdb0296ef81799"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to box payload (not including header).  <br /></td></tr>
-<tr class="memitem:ad6bc120bffc64dfc5230863a8ba96596" id="r_ad6bc120bffc64dfc5230863a8ba96596"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad6bc120bffc64dfc5230863a8ba96596">data_size</a> = 0</td></tr>
+<tr class="memitem:ad6bc120bffc64dfc5230863a8ba96596" id="r_ad6bc120bffc64dfc5230863a8ba96596"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad6bc120bffc64dfc5230863a8ba96596">data_size</a> = 0</td></tr>
 <tr class="memdesc:ad6bc120bffc64dfc5230863a8ba96596"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of payload (not including header).  <br /></td></tr>
-<tr class="memitem:a6ef7abf04202a28a9caf7da2c1479884" id="r_a6ef7abf04202a28a9caf7da2c1479884"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6ef7abf04202a28a9caf7da2c1479884">file_offset</a> = 0</td></tr>
+<tr class="memitem:a6ef7abf04202a28a9caf7da2c1479884" id="r_a6ef7abf04202a28a9caf7da2c1479884"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classuint64__t.html">uint64_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6ef7abf04202a28a9caf7da2c1479884">file_offset</a> = 0</td></tr>
 <tr class="memdesc:a6ef7abf04202a28a9caf7da2c1479884"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="namespaceaudio__tools.html#a64f1320ec184ebd98b38c3d408650200">File</a> offset where box starts.  <br /></td></tr>
-<tr class="memitem:a3670f4bed50c88882ceba330ffeb095c" id="r_a3670f4bed50c88882ceba330ffeb095c"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3670f4bed50c88882ceba330ffeb095c">id</a> = 0</td></tr>
+<tr class="memitem:a3670f4bed50c88882ceba330ffeb095c" id="r_a3670f4bed50c88882ceba330ffeb095c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3670f4bed50c88882ceba330ffeb095c">id</a> = 0</td></tr>
 <tr class="memdesc:a3670f4bed50c88882ceba330ffeb095c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unique box ID.  <br /></td></tr>
-<tr class="memitem:a8ba80387dac4a2324d41f3958b9e4e97" id="r_a8ba80387dac4a2324d41f3958b9e4e97"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8ba80387dac4a2324d41f3958b9e4e97">is_complete</a> = false</td></tr>
+<tr class="memitem:a8ba80387dac4a2324d41f3958b9e4e97" id="r_a8ba80387dac4a2324d41f3958b9e4e97"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8ba80387dac4a2324d41f3958b9e4e97">is_complete</a> = false</td></tr>
 <tr class="memdesc:a8ba80387dac4a2324d41f3958b9e4e97"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if the box data is complete.  <br /></td></tr>
-<tr class="memitem:a3f58f723263cb462902a7c74a02b1136" id="r_a3f58f723263cb462902a7c74a02b1136"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3f58f723263cb462902a7c74a02b1136">is_container</a> = false</td></tr>
+<tr class="memitem:a3f58f723263cb462902a7c74a02b1136" id="r_a3f58f723263cb462902a7c74a02b1136"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3f58f723263cb462902a7c74a02b1136">is_container</a> = false</td></tr>
 <tr class="memdesc:a3f58f723263cb462902a7c74a02b1136"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if the box is a container.  <br /></td></tr>
-<tr class="memitem:a9175b4e35e0ed5741da491a0ec9c7d47" id="r_a9175b4e35e0ed5741da491a0ec9c7d47"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9175b4e35e0ed5741da491a0ec9c7d47">is_incremental</a> = false</td></tr>
+<tr class="memitem:a9175b4e35e0ed5741da491a0ec9c7d47" id="r_a9175b4e35e0ed5741da491a0ec9c7d47"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9175b4e35e0ed5741da491a0ec9c7d47">is_incremental</a> = false</td></tr>
 <tr class="memdesc:a9175b4e35e0ed5741da491a0ec9c7d47"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if the box is being parsed incrementally.  <br /></td></tr>
-<tr class="memitem:acf4d33ee4cff36f69b924471174dcb11" id="r_acf4d33ee4cff36f69b924471174dcb11"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acf4d33ee4cff36f69b924471174dcb11">level</a> = 0</td></tr>
+<tr class="memitem:acf4d33ee4cff36f69b924471174dcb11" id="r_acf4d33ee4cff36f69b924471174dcb11"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acf4d33ee4cff36f69b924471174dcb11">level</a> = 0</td></tr>
 <tr class="memdesc:acf4d33ee4cff36f69b924471174dcb11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nesting depth.  <br /></td></tr>
-<tr class="memitem:a939440403f49795947bd238a3b0c2deb" id="r_a939440403f49795947bd238a3b0c2deb"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a939440403f49795947bd238a3b0c2deb">seq</a> = 0</td></tr>
+<tr class="memitem:a939440403f49795947bd238a3b0c2deb" id="r_a939440403f49795947bd238a3b0c2deb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a939440403f49795947bd238a3b0c2deb">seq</a> = 0</td></tr>
 <tr class="memdesc:a939440403f49795947bd238a3b0c2deb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sequence number for the box per id.  <br /></td></tr>
-<tr class="memitem:a854352f53b148adc24983a58a1866d66" id="r_a854352f53b148adc24983a58a1866d66"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a854352f53b148adc24983a58a1866d66">size</a></td></tr>
+<tr class="memitem:a854352f53b148adc24983a58a1866d66" id="r_a854352f53b148adc24983a58a1866d66"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a854352f53b148adc24983a58a1866d66">size</a></td></tr>
 <tr class="memdesc:a854352f53b148adc24983a58a1866d66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of payload including subboxes (not including header).  <br /></td></tr>
 <tr class="memitem:a9de36e4b0d83b762775b75f1a3c7d137" id="r_a9de36e4b0d83b762775b75f1a3c7d137"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9de36e4b0d83b762775b75f1a3c7d137">type</a> [5]</td></tr>
 <tr class="memdesc:a9de36e4b0d83b762775b75f1a3c7d137"><td class="mdescLeft">&#160;</td><td class="mdescRight">4-character box type (null-terminated)  <br /></td></tr>
@@ -179,7 +199,7 @@ Friends</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int available = 0</td>
+          <td class="memname"><a class="el" href="classint.html">int</a> available = 0</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -195,7 +215,7 @@ Friends</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const uint8_t* data</td>
+          <td class="memname">const <a class="el" href="classuint8__t.html">uint8_t</a>* data</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -213,7 +233,7 @@ Friends</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">size_t data_size = 0</td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> data_size = 0</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -229,7 +249,7 @@ Friends</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint64_t file_offset = 0</td>
+          <td class="memname"><a class="el" href="classuint64__t.html">uint64_t</a> file_offset = 0</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -245,7 +265,7 @@ Friends</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">size_t id = 0</td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> id = 0</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -261,7 +281,7 @@ Friends</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool is_complete = false</td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> is_complete = false</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -277,7 +297,7 @@ Friends</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool is_container = false</td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> is_container = false</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -293,7 +313,7 @@ Friends</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool is_incremental = false</td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> is_incremental = false</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -309,7 +329,7 @@ Friends</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int level = 0</td>
+          <td class="memname"><a class="el" href="classint.html">int</a> level = 0</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -325,7 +345,7 @@ Friends</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">size_t seq = 0</td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> seq = 0</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -341,7 +361,7 @@ Friends</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">size_t size</td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> size</td>
         </tr>
       </table>
 </div><div class="memdoc">

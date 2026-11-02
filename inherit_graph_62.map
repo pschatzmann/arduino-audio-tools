@@ -1,3 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title="Shared functionality of all buffers." alt="" coords="5,5,136,33"/>
+<area shape="rect" id="Node000000" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="5,36,194,81"/>
+<area shape="rect" id="Node000001" href="$classaudio__tools_1_1audio__tools_1_1_single_buffer.html" title=" " alt="" coords="265,5,406,50"/>
+<area shape="poly" id="edge678_Node000000_Node000001" title=" " alt="" coords="209,41,267,36,262,37,210,47"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_m4_a_file_sample_size_buffer.html" title="A buffer that reads sample sizes from an M4A file using the M4AAudioFileDemuxer. No RAM is used to st..." alt="" coords="242,74,430,102"/>
+<area shape="poly" id="edge679_Node000000_Node000002" title=" " alt="" coords="209,69,244,76,239,76,209,75"/>
 </map>

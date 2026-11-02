@@ -119,46 +119,76 @@ Collaboration diagram for H264RtpEncoder:</div>
 <div class="dyncontent">
 <div class="center"><img src="classaudio__tools_1_1_h264_rtp_encoder__coll__graph.png" border="0" usemap="#a_h264_rtp_encoder_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="a_h264_rtp_encoder_coll__map" id="a_h264_rtp_encoder_coll__map">
-<area shape="rect" title="H.264 RTP Encoder &#45; Packetizes Annex&#45;B H.264 access units per RFC 6184 for RTSP video streaming." alt="" coords="475,426,605,454"/>
-<area shape="rect" href="classaudio__tools_1_1_r_t_s_p_video_encoder.html" title="Common base for RTP video payloaders (JPEGRtpEncoder, H264RtpEncoder, ...): an AudioEncoder that acce..." alt="" coords="193,305,335,332"/>
-<area shape="poly" title=" " alt="" coords="287,341,322,372,365,400,420,419,478,433,472,433,419,425,363,405,319,377,285,346"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_audio_encoder.html" title="Encoding of PCM data." alt="" coords="130,183,240,211"/>
-<area shape="poly" title=" " alt="" coords="203,221,258,304,253,304,201,226"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="23,82,121,110"/>
-<area shape="poly" title=" " alt="" coords="91,118,166,181,161,183,91,123"/>
-<area shape="poly" title=" " alt="" coords="105,117,179,181,174,183,105,122"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="5,5,139,33"/>
-<area shape="poly" title=" " alt="" coords="63,46,68,82,62,82,63,51"/>
-<area shape="poly" title=" " alt="" coords="81,46,82,82,76,82,80,51"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information." alt="" coords="145,82,247,110"/>
-<area shape="poly" title=" " alt="" coords="186,123,183,183,178,182,184,128"/>
-<area shape="poly" title=" " alt="" coords="202,123,196,183,191,182,200,128"/>
-<area shape="rect" href="structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="273,82,356,110"/>
-<area shape="poly" title=" " alt="" coords="277,120,258,136,201,184,197,181,255,132,281,116"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_r_t_s_p_format.html" title="Audio Format Definition &#45; Base class for RTSP audio formats." alt="" coords="397,183,496,211"/>
-<area shape="poly" title=" " alt="" coords="344,117,432,182,426,183,344,122"/>
-<area shape="rect" href="classaudio__tools_1_1_i_media_source.html" title="Media Source Interface &#45; Contract for Media Data Providers." alt="" coords="264,183,373,211"/>
-<area shape="poly" title=" " alt="" coords="309,223,272,306,268,303,305,226"/>
-<area shape="rect" href="classaudio__tools_1_1_r_t_s_p_fragment_queue.html" title="Self&#45;delimited fragment queue shared by packetized RTP video encoders (JPEGRtpEncoder,..." alt="" coords="631,305,788,332"/>
-<area shape="poly" title=" " alt="" coords="699,345,679,377,652,404,629,418,603,428,602,423,626,414,649,400,675,374,694,347"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="722,183,859,211"/>
-<area shape="poly" title=" " alt="" coords="813,221,820,234,824,265,822,299,814,331,802,355,782,375,760,392,708,417,655,432,605,439,605,434,654,426,707,412,757,388,779,371,798,352,809,330,817,298,819,265,815,235,811,226"/>
-<area shape="poly" title=" " alt="" coords="764,219,751,236,730,273,715,307,712,303,725,270,747,233,760,222"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="751,82,830,110"/>
-<area shape="poly" title=" " alt="" coords="792,124,793,184,788,181,789,128"/>
-<area shape="poly" title=" " alt="" coords="428,221,410,252,395,285,388,319,390,336,397,352,416,377,441,397,469,412,497,426,492,425,466,417,438,401,412,380,392,355,385,337,383,319,390,283,405,249,424,225"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_r_t_s_p_format_h264.html" title="H.264 (AVC) format for RTSP video streaming, per RFC 6184." alt="" coords="473,305,607,332"/>
-<area shape="poly" title=" " alt="" coords="467,220,532,304,527,304,465,225"/>
-<area shape="rect" href="structaudio__tools_1_1audio__tools_1_1_r_t_s_p_video_info.html" title="Video Information Structure." alt="" coords="389,82,504,110"/>
-<area shape="poly" title=" " alt="" coords="448,123,449,183,444,181,445,128"/>
-<area shape="poly" title=" " alt="" coords="542,346,542,427,538,424,538,349"/>
+<area shape="rect" title="H.264 RTP Encoder &#45; Packetizes Annex&#45;B H.264 access units per RFC 6184 for RTSP video streaming." alt="" coords="1272,331,1401,358"/>
+<area shape="rect" href="classaudio__tools_1_1_r_t_s_p_video_encoder.html" title="Common base for RTP video payloaders (JPEGRtpEncoder, H264RtpEncoder, ...): an AudioEncoder that acce..." alt="" coords="969,79,1111,106"/>
+<area shape="poly" title=" " alt="" coords="1126,90,1191,103,1222,116,1249,134,1271,156,1289,182,1315,238,1329,291,1336,331,1331,329,1324,292,1310,239,1284,185,1267,160,1246,139,1219,121,1189,108,1127,96"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_audio_encoder.html" title="Encoding of PCM data." alt="" coords="634,60,745,88"/>
+<area shape="poly" title=" " alt="" coords="760,75,971,88,966,90,761,80"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="313,63,412,90"/>
+<area shape="poly" title=" " alt="" coords="426,81,636,80,632,83,428,86"/>
+<area shape="poly" title=" " alt="" coords="426,66,636,66,632,69,428,71"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="7,63,140,90"/>
+<area shape="poly" title=" " alt="" coords="154,82,314,82,311,85,157,87"/>
+<area shape="poly" title=" " alt="" coords="154,66,315,68,311,71,157,71"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information." alt="" coords="311,5,414,33"/>
+<area shape="poly" title=" " alt="" coords="428,33,597,59,636,69,632,71,597,64,429,38"/>
+<area shape="poly" title=" " alt="" coords="428,13,510,21,598,35,637,45,673,59,668,60,636,50,596,40,509,26,430,18"/>
+<area shape="rect" href="structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="321,293,404,321"/>
+<area shape="poly" title=" " alt="" coords="414,286,443,277,489,272,527,276,561,273,578,266,595,252,608,234,612,216,608,179,603,140,607,120,619,99,637,86,633,90,623,102,612,121,609,140,614,178,618,217,613,236,599,255,581,270,563,278,527,281,489,277,445,282,417,290"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_r_t_s_p_format.html" title="Audio Format Definition &#45; Base class for RTSP audio formats." alt="" coords="640,579,739,606"/>
+<area shape="poly" title=" " alt="" coords="419,308,529,317,574,324,599,333,609,351,614,377,615,439,614,502,617,527,623,546,638,563,658,578,653,578,635,567,619,549,612,528,609,502,610,439,609,377,604,353,595,337,573,329,528,322,421,313"/>
+<area shape="rect" href="classuint32__t.html" title=" " alt="" coords="36,433,111,461"/>
+<area shape="poly" title=" " alt="" coords="125,443,214,435,253,427,279,415,289,403,292,389,295,374,302,356,320,336,343,319,339,323,324,340,307,359,300,375,298,390,294,405,282,420,255,432,215,440,128,448"/>
+<area shape="rect" href="structaudio__tools_1_1audio__tools_1_1_r_t_s_p_video_info.html" title="Video Information Structure." alt="" coords="305,612,420,640"/>
+<area shape="poly" title=" " alt="" coords="125,460,166,471,200,477,227,480,253,486,282,502,297,521,307,542,354,612,349,612,302,544,292,523,279,507,251,491,226,485,199,483,165,476,127,465"/>
+<area shape="rect" title=" " alt="" coords="36,556,111,584"/>
+<area shape="poly" title=" " alt="" coords="125,562,221,549,259,541,279,533,294,513,300,493,300,472,297,452,290,407,293,383,302,357,318,336,340,319,337,323,322,339,307,359,298,384,296,407,302,451,305,472,305,493,298,515,282,537,261,546,221,554,128,567"/>
+<area shape="poly" title=" " alt="" coords="116,588,166,605,238,618,307,624,302,626,237,623,165,610,117,593"/>
+<area shape="rect" href="classuint8__t.html" title=" " alt="" coords="40,321,107,349"/>
+<area shape="poly" title=" " alt="" coords="121,328,322,309,318,313,124,333"/>
+<area shape="poly" title=" " alt="" coords="121,344,222,370,282,390,296,410,303,428,303,463,299,500,301,520,307,542,328,580,351,612,346,612,323,583,302,544,296,521,294,500,298,463,297,429,291,412,279,395,221,376,123,349"/>
+<area shape="rect" href="classaudio__tools_1_1_i_media_source.html" title="Media Source Interface &#45; Contract for Media Data Providers." alt="" coords="635,112,744,140"/>
+<area shape="poly" title=" " alt="" coords="759,117,971,98,966,101,761,122"/>
+<area shape="rect" href="classaudio__tools_1_1_r_t_s_p_fragment_queue.html" title="Self&#45;delimited fragment queue shared by packetized RTP video encoders (JPEGRtpEncoder,..." alt="" coords="961,223,1119,250"/>
+<area shape="poly" title=" " alt="" coords="1095,253,1298,330,1293,331,1095,259"/>
+<area shape="rect" href="classsize__t.html" title=" " alt="" coords="660,199,719,226"/>
+<area shape="poly" title=" " alt="" coords="729,189,782,171,877,158,916,157,953,161,1027,178,1120,209,1187,235,1249,272,1289,301,1322,331,1317,330,1286,305,1246,276,1184,240,1118,214,1026,183,952,166,916,162,877,163,783,176,732,194"/>
+<area shape="poly" title=" " alt="" coords="734,228,783,241,828,246,875,248,963,245,958,247,875,253,828,251,782,246,735,233"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="621,309,758,337"/>
+<area shape="poly" title=" " alt="" coords="774,323,1273,341,1269,344,774,329"/>
+<area shape="poly" title=" " alt="" coords="773,311,853,298,936,278,1008,250,1003,252,938,283,854,303,775,316"/>
+<area shape="rect" href="classint.html" title=" " alt="" coords="343,504,382,532"/>
+<area shape="poly" title=" " alt="" coords="395,509,490,483,544,460,595,431,622,408,645,382,678,339,682,335,649,386,626,412,599,435,547,465,492,488,398,514"/>
+<area shape="poly" title=" " alt="" coords="386,541,414,564,445,581,495,595,547,600,597,600,642,599,637,600,597,606,547,606,494,600,443,586,411,568,386,546"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_r_t_s_p_format_h264.html" title="H.264 (AVC) format for RTSP video streaming, per RFC 6184." alt="" coords="973,599,1107,626"/>
+<area shape="poly" title=" " alt="" coords="396,517,625,534,780,553,938,581,997,598,991,598,937,586,779,558,624,540,397,522"/>
+<area shape="rect" href="classuint8__t_01_5.html" title=" " alt="" coords="324,124,401,152"/>
+<area shape="poly" title=" " alt="" coords="415,127,460,125,508,129,556,141,578,151,599,165,612,182,615,199,617,217,623,237,650,276,677,309,672,309,646,279,619,239,612,218,610,200,607,184,595,169,576,156,554,146,507,134,460,130,418,132"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="323,180,402,208"/>
+<area shape="poly" title=" " alt="" coords="417,194,518,203,565,210,598,221,626,240,650,263,683,309,677,309,646,267,623,244,596,226,564,215,518,208,419,199"/>
+<area shape="rect" href="classbool.html" title=" " alt="" coords="338,369,387,397"/>
+<area shape="poly" title=" " alt="" coords="402,382,444,383,597,383,980,366,1274,348,1269,350,980,371,597,388,444,388,404,387"/>
+<area shape="poly" title=" " alt="" coords="402,380,492,374,545,368,596,358,661,336,657,339,598,363,545,373,492,380,404,385"/>
+<area shape="poly" title=" " alt="" coords="754,580,853,561,979,529,1116,484,1183,455,1246,422,1290,389,1321,360,1326,357,1293,393,1249,427,1185,460,1117,489,981,534,855,566,755,585"/>
+<area shape="poly" title=" " alt="" coords="755,594,976,608,970,609,755,599"/>
+<area shape="rect" title=" " alt="" coords="338,707,387,734"/>
+<area shape="poly" title=" " alt="" coords="402,723,445,726,494,725,547,717,596,699,624,679,648,654,679,608,683,605,652,657,627,683,598,704,548,722,495,730,444,731,403,729"/>
+<area shape="poly" title=" " alt="" coords="435,639,514,646,556,644,596,638,634,623,665,608,670,606,637,628,598,643,556,650,514,651,436,644"/>
+<area shape="rect" href="classfloat.html" title=" " alt="" coords="48,741,99,769"/>
+<area shape="poly" title=" " alt="" coords="113,749,193,734,237,721,279,702,320,670,349,641,353,638,323,674,282,706,239,726,194,740,115,754"/>
+<area shape="poly" title=" " alt="" coords="114,753,444,756,521,760,554,761,597,756,717,729,834,693,934,655,1004,628,1009,626,936,660,836,698,719,734,597,761,554,766,521,766,444,761,114,758"/>
+<area shape="rect" title=" " alt="" coords="5,652,142,680"/>
+<area shape="poly" title=" " alt="" coords="156,671,218,670,280,662,310,651,340,639,335,642,312,656,281,667,218,675,158,676"/>
+<area shape="poly" title=" " alt="" coords="1122,622,1154,622,1187,618,1218,609,1246,593,1271,568,1291,538,1306,504,1317,470,1329,405,1333,361,1337,357,1334,406,1322,471,1311,506,1296,540,1276,571,1249,597,1220,614,1188,624,1154,628,1122,628"/>
+<area shape="rect" href="class_string.html" title=" " alt="" coords="660,831,719,858"/>
+<area shape="poly" title=" " alt="" coords="735,855,780,863,833,867,887,861,912,853,936,840,962,819,983,792,999,762,1012,730,1028,670,1036,629,1039,625,1033,671,1017,732,1004,764,987,795,965,822,939,845,914,858,888,866,833,872,779,869,734,860"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a94a36cdb2020fd9af55e12b906d0febf" id="r_a94a36cdb2020fd9af55e12b906d0febf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a94a36cdb2020fd9af55e12b906d0febf">H264RtpEncoder</a> ()=default</td></tr>
-<tr class="memitem:a542a85f966d84ebca4caa98a4d32b594" id="r_a542a85f966d84ebca4caa98a4d32b594"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a542a85f966d84ebca4caa98a4d32b594">H264RtpEncoder</a> (size_t maxFragmentSize)</td></tr>
+<tr class="memitem:a542a85f966d84ebca4caa98a4d32b594" id="r_a542a85f966d84ebca4caa98a4d32b594"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a542a85f966d84ebca4caa98a4d32b594">H264RtpEncoder</a> (<a class="el" href="classsize__t.html">size_t</a> maxFragmentSize)</td></tr>
 <tr class="memdesc:a542a85f966d84ebca4caa98a4d32b594"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with maximum fragment size.  <br /></td></tr>
 <tr class="memitem:aed4bf0d5ce93f27242be485943d0b37d" id="r_aed4bf0d5ce93f27242be485943d0b37d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_encoder.html#aed4bf0d5ce93f27242be485943d0b37d">audioInfo</a> () override</td></tr>
 <tr class="memdesc:aed4bf0d5ce93f27242be485943d0b37d"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the actual input <a class="el" href="structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>  <br /></td></tr>
@@ -166,23 +196,23 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:aed4bf0d5ce93f27242be485943d0b37d"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the actual input <a class="el" href="structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>  <br /></td></tr>
 <tr class="memitem:a1c77cb3dbe910c765ea439d103bdcbb9" id="r_a1c77cb3dbe910c765ea439d103bdcbb9"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_info_support.html#a1c77cb3dbe910c765ea439d103bdcbb9">audioInfoOut</a> ()</td></tr>
 <tr class="memitem:a1c77cb3dbe910c765ea439d103bdcbb9" id="r_a1c77cb3dbe910c765ea439d103bdcbb9"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_info_support.html#a1c77cb3dbe910c765ea439d103bdcbb9">audioInfoOut</a> ()</td></tr>
-<tr class="memitem:a419d5bfacb0a1e5bf46b5fbd8d94f446" id="r_a419d5bfacb0a1e5bf46b5fbd8d94f446"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_writer.html#a419d5bfacb0a1e5bf46b5fbd8d94f446">begin</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> <a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_encoder.html#a47385aa19435f5fca9d3083a748258c5">info</a>)</td></tr>
-<tr class="memitem:acba365cc28eb702040c382646cfb0a7a" id="r_acba365cc28eb702040c382646cfb0a7a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acba365cc28eb702040c382646cfb0a7a">begin</a> () override</td></tr>
+<tr class="memitem:a419d5bfacb0a1e5bf46b5fbd8d94f446" id="r_a419d5bfacb0a1e5bf46b5fbd8d94f446"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_writer.html#a419d5bfacb0a1e5bf46b5fbd8d94f446">begin</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> <a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_encoder.html#a47385aa19435f5fca9d3083a748258c5">info</a>)</td></tr>
+<tr class="memitem:acba365cc28eb702040c382646cfb0a7a" id="r_acba365cc28eb702040c382646cfb0a7a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acba365cc28eb702040c382646cfb0a7a">begin</a> () override</td></tr>
 <tr class="memitem:a64e9fa75beda50a9e8400ee0d4e61984" id="r_a64e9fa75beda50a9e8400ee0d4e61984"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a64e9fa75beda50a9e8400ee0d4e61984">end</a> () override</td></tr>
-<tr class="memitem:adfd0d438db34d4e0708738a458d63d8e" id="r_adfd0d438db34d4e0708738a458d63d8e"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_encoder.html#adfd0d438db34d4e0708738a458d63d8e">frameDurationUs</a> ()</td></tr>
+<tr class="memitem:adfd0d438db34d4e0708738a458d63d8e" id="r_adfd0d438db34d4e0708738a458d63d8e"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_encoder.html#adfd0d438db34d4e0708738a458d63d8e">frameDurationUs</a> ()</td></tr>
 <tr class="memdesc:adfd0d438db34d4e0708738a458d63d8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional rtsp function: provide the frame duration in microseconds.  <br /></td></tr>
-<tr class="memitem:adfd0d438db34d4e0708738a458d63d8e" id="r_adfd0d438db34d4e0708738a458d63d8e"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_encoder.html#adfd0d438db34d4e0708738a458d63d8e">frameDurationUs</a> ()</td></tr>
+<tr class="memitem:adfd0d438db34d4e0708738a458d63d8e" id="r_adfd0d438db34d4e0708738a458d63d8e"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_encoder.html#adfd0d438db34d4e0708738a458d63d8e">frameDurationUs</a> ()</td></tr>
 <tr class="memdesc:adfd0d438db34d4e0708738a458d63d8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional rtsp function: provide the frame duration in microseconds.  <br /></td></tr>
-<tr class="memitem:ae29b3d09ddf9caba0eb014afae72a3a4" id="r_ae29b3d09ddf9caba0eb014afae72a3a4"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_encoder.html#ae29b3d09ddf9caba0eb014afae72a3a4">frameSize</a> ()</td></tr>
-<tr class="memitem:ae29b3d09ddf9caba0eb014afae72a3a4" id="r_ae29b3d09ddf9caba0eb014afae72a3a4"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_encoder.html#ae29b3d09ddf9caba0eb014afae72a3a4">frameSize</a> ()</td></tr>
+<tr class="memitem:ae29b3d09ddf9caba0eb014afae72a3a4" id="r_ae29b3d09ddf9caba0eb014afae72a3a4"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_encoder.html#ae29b3d09ddf9caba0eb014afae72a3a4">frameSize</a> ()</td></tr>
+<tr class="memitem:ae29b3d09ddf9caba0eb014afae72a3a4" id="r_ae29b3d09ddf9caba0eb014afae72a3a4"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_encoder.html#ae29b3d09ddf9caba0eb014afae72a3a4">frameSize</a> ()</td></tr>
 <tr class="memitem:a0a90aea77d80209fc163da0655b9cf86" id="r_a0a90aea77d80209fc163da0655b9cf86"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_r_t_s_p_format.html">RTSPFormat</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0a90aea77d80209fc163da0655b9cf86">getFormat</a> () override</td></tr>
 <tr class="memdesc:a0a90aea77d80209fc163da0655b9cf86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the media format configuration.  <br /></td></tr>
 <tr class="memitem:ab233b9d1b86c9d2a2c009d6473aa8938" id="r_ab233b9d1b86c9d2a2c009d6473aa8938"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab233b9d1b86c9d2a2c009d6473aa8938">mime</a> () override</td></tr>
 <tr class="memdesc:ab233b9d1b86c9d2a2c009d6473aa8938"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the mime type of the encoded result.  <br /></td></tr>
 <tr class="memitem:a90622bd78258a36bbcf63426b28307ac" id="r_a90622bd78258a36bbcf63426b28307ac"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a90622bd78258a36bbcf63426b28307ac">operator bool</a> () override</td></tr>
-<tr class="memitem:a6d18d04f81d9b1e4b02ceb5cdb7ab11d" id="r_a6d18d04f81d9b1e4b02ceb5cdb7ab11d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6d18d04f81d9b1e4b02ceb5cdb7ab11d">packetSize</a> () override</td></tr>
+<tr class="memitem:a6d18d04f81d9b1e4b02ceb5cdb7ab11d" id="r_a6d18d04f81d9b1e4b02ceb5cdb7ab11d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6d18d04f81d9b1e4b02ceb5cdb7ab11d">packetSize</a> () override</td></tr>
 <tr class="memdesc:a6d18d04f81d9b1e4b02ceb5cdb7ab11d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of the next queued, ready-to-send fragment, for sources that provide already RTP-payload-ready, self-delimited fragments (e.g. RFC 2435 JPEG) instead of a continuous byte stream. For these sources, <a class="el" href="#ad6e1f6f9677914f07235940850c931a8">readBytes()</a> must always be called with exactly <a class="el" href="#a6d18d04f81d9b1e4b02ceb5cdb7ab11d" title="Size of the next queued, ready-to-send fragment, for sources that provide already RTP-payload-ready,...">packetSize()</a> as maxBytes, so each call retrieves exactly one complete fragment instead of the transport having to guess where one RTP payload ends and the next begins.  <br /></td></tr>
-<tr class="memitem:ad6e1f6f9677914f07235940850c931a8" id="r_ad6e1f6f9677914f07235940850c931a8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad6e1f6f9677914f07235940850c931a8">readBytes</a> (void *dest, int maxBytes) override</td></tr>
+<tr class="memitem:ad6e1f6f9677914f07235940850c931a8" id="r_ad6e1f6f9677914f07235940850c931a8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad6e1f6f9677914f07235940850c931a8">readBytes</a> (void *dest, <a class="el" href="classint.html">int</a> maxBytes) override</td></tr>
 <tr class="memitem:a5e4411e8fba4f919672d5b3a145f7170" id="r_a5e4411e8fba4f919672d5b3a145f7170"><td class="memItemLeft" align="right" valign="top">virtual uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_encoder.html#a5e4411e8fba4f919672d5b3a145f7170">samplesPerFrame</a> ()</td></tr>
 <tr class="memdesc:a5e4411e8fba4f919672d5b3a145f7170"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional rtsp function: provide samples per the frame.  <br /></td></tr>
 <tr class="memitem:a5e4411e8fba4f919672d5b3a145f7170" id="r_a5e4411e8fba4f919672d5b3a145f7170"><td class="memItemLeft" align="right" valign="top">virtual uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_encoder.html#a5e4411e8fba4f919672d5b3a145f7170">samplesPerFrame</a> ()</td></tr>
@@ -191,9 +221,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a5c749802992efec8bc20ba4a522b027f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the sample rate, number of channels and bits per sample.  <br /></td></tr>
 <tr class="memitem:ad1fdd56031f1195cb221ab855fb6a102" id="r_ad1fdd56031f1195cb221ab855fb6a102"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad1fdd56031f1195cb221ab855fb6a102">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> <a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_encoder.html#a47385aa19435f5fca9d3083a748258c5">info</a>) override</td></tr>
 <tr class="memitem:a13ceb90d90aafb7e6a285a4649bfcd08" id="r_a13ceb90d90aafb7e6a285a4649bfcd08"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a13ceb90d90aafb7e6a285a4649bfcd08">setFormat</a> (<a class="el" href="classaudio__tools_1_1_r_t_s_p_format.html">RTSPFormat</a> &amp;format) override</td></tr>
-<tr class="memitem:ac398c6671724eee41138317c05f55871" id="r_ac398c6671724eee41138317c05f55871"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac398c6671724eee41138317c05f55871">setMaxFragmentSize</a> (size_t size)</td></tr>
+<tr class="memitem:ac398c6671724eee41138317c05f55871" id="r_ac398c6671724eee41138317c05f55871"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac398c6671724eee41138317c05f55871">setMaxFragmentSize</a> (<a class="el" href="classsize__t.html">size_t</a> size)</td></tr>
 <tr class="memdesc:ac398c6671724eee41138317c05f55871"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the maximum RTP payload size per packet.  <br /></td></tr>
-<tr class="memitem:a47c31c9eb4c9f74375429bee9d1adf9c" id="r_a47c31c9eb4c9f74375429bee9d1adf9c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a47c31c9eb4c9f74375429bee9d1adf9c">setMaxQueuedFrames</a> (size_t frames)</td></tr>
+<tr class="memitem:a47c31c9eb4c9f74375429bee9d1adf9c" id="r_a47c31c9eb4c9f74375429bee9d1adf9c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a47c31c9eb4c9f74375429bee9d1adf9c">setMaxQueuedFrames</a> (<a class="el" href="classsize__t.html">size_t</a> frames)</td></tr>
 <tr class="memdesc:a47c31c9eb4c9f74375429bee9d1adf9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum number of complete frames buffered when the consumer falls behind.  <br /></td></tr>
 <tr class="memitem:accd4a0f8bb385180e8006fd543aef936" id="r_accd4a0f8bb385180e8006fd543aef936"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_encoder.html#accd4a0f8bb385180e8006fd543aef936">setOutput</a> (<a class="el" href="class_print.html">Print</a> &amp;out_stream) override</td></tr>
 <tr class="memdesc:accd4a0f8bb385180e8006fd543aef936"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default output assignment (encoders may override to store <a class="el" href="classaudio__tools_1_1_print.html">Print</a> reference).  <br /></td></tr>
@@ -203,45 +233,45 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a5d5d9ebd12cd3a7d268bc98a3fc7bf97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize media source for streaming.  <br /></td></tr>
 <tr class="memitem:ab3536e22848ce87b16a9b96d6d824d45" id="r_ab3536e22848ce87b16a9b96d6d824d45"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab3536e22848ce87b16a9b96d6d824d45">stop</a> () override</td></tr>
 <tr class="memdesc:ab3536e22848ce87b16a9b96d6d824d45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cleanup media source after streaming.  <br /></td></tr>
-<tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
+<tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7597ef706dd1aa590903ce9e095db20a">write</a> (const <a class="el" href="classuint8__t.html">uint8_t</a> *data, <a class="el" href="classsize__t.html">size_t</a> len) override</td></tr>
 <tr class="memdesc:a7597ef706dd1aa590903ce9e095db20a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process one complete Annex-B access unit (all NAL units of one encoded frame) and queue the resulting RTP fragments.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-methods" class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a3487c7e35ae859f4676e4c3fa3e8cbd6" id="r_a3487c7e35ae859f4676e4c3fa3e8cbd6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_fragment_queue.html#a3487c7e35ae859f4676e4c3fa3e8cbd6">appendFragment</a> (const uint8_t *payload, size_t len, bool last)</td></tr>
-<tr class="memitem:a792cf8cdc3c98d090b8c193b6d93e2ed" id="r_a792cf8cdc3c98d090b8c193b6d93e2ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a792cf8cdc3c98d090b8c193b6d93e2ed">cachePps</a> (const uint8_t *nal, size_t len)</td></tr>
-<tr class="memitem:a774ef39fd5f600b7cb517acbbaae9653" id="r_a774ef39fd5f600b7cb517acbbaae9653"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a774ef39fd5f600b7cb517acbbaae9653">cacheSps</a> (const uint8_t *nal, size_t len)</td></tr>
+<tr class="memitem:a3487c7e35ae859f4676e4c3fa3e8cbd6" id="r_a3487c7e35ae859f4676e4c3fa3e8cbd6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_fragment_queue.html#a3487c7e35ae859f4676e4c3fa3e8cbd6">appendFragment</a> (const <a class="el" href="classuint8__t.html">uint8_t</a> *payload, <a class="el" href="classsize__t.html">size_t</a> len, <a class="el" href="classbool.html">bool</a> last)</td></tr>
+<tr class="memitem:a792cf8cdc3c98d090b8c193b6d93e2ed" id="r_a792cf8cdc3c98d090b8c193b6d93e2ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a792cf8cdc3c98d090b8c193b6d93e2ed">cachePps</a> (const <a class="el" href="classuint8__t.html">uint8_t</a> *nal, <a class="el" href="classsize__t.html">size_t</a> len)</td></tr>
+<tr class="memitem:a774ef39fd5f600b7cb517acbbaae9653" id="r_a774ef39fd5f600b7cb517acbbaae9653"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a774ef39fd5f600b7cb517acbbaae9653">cacheSps</a> (const <a class="el" href="classuint8__t.html">uint8_t</a> *nal, <a class="el" href="classsize__t.html">size_t</a> len)</td></tr>
 <tr class="memitem:a7b7f09ace42f57bf958a1a379e935ea9" id="r_a7b7f09ace42f57bf958a1a379e935ea9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_fragment_queue.html#a7b7f09ace42f57bf958a1a379e935ea9">clearQueue</a> ()</td></tr>
 <tr class="memitem:a2fc6ac78a12cbf712208113f7b4078ce" id="r_a2fc6ac78a12cbf712208113f7b4078ce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_fragment_queue.html#a2fc6ac78a12cbf712208113f7b4078ce">dropOldestFrame</a> ()</td></tr>
-<tr class="memitem:a02b3a8d0a486175a762ccb55280ef1c7" id="r_a02b3a8d0a486175a762ccb55280ef1c7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a02b3a8d0a486175a762ccb55280ef1c7">emitNal</a> (const uint8_t *nal, size_t nalLen, bool isLastOfFrame)</td></tr>
+<tr class="memitem:a02b3a8d0a486175a762ccb55280ef1c7" id="r_a02b3a8d0a486175a762ccb55280ef1c7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a02b3a8d0a486175a762ccb55280ef1c7">emitNal</a> (const <a class="el" href="classuint8__t.html">uint8_t</a> *nal, <a class="el" href="classsize__t.html">size_t</a> nalLen, <a class="el" href="classbool.html">bool</a> isLastOfFrame)</td></tr>
 <tr class="memdesc:a02b3a8d0a486175a762ccb55280ef1c7"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_queue.html" title="FIFO Queue which is based on a List.">Queue</a> one NAL unit as a Single NAL Unit packet, or split it into FU-A fragments (RFC 6184 §5.6/§5.8) if it is larger than m_maxFragmentSize.  <br /></td></tr>
-<tr class="memitem:a44570f5631c96423ad1b6cd67cbc92ef" id="r_a44570f5631c96423ad1b6cd67cbc92ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a44570f5631c96423ad1b6cd67cbc92ef">extractNALs</a> (const uint8_t *data, size_t len, <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; size_t &gt; &amp;offsets, <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; size_t &gt; &amp;lengths)</td></tr>
-<tr class="memitem:a3780196025eb1f3bc1888bbb6e169d5a" id="r_a3780196025eb1f3bc1888bbb6e169d5a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3780196025eb1f3bc1888bbb6e169d5a">findStartCode</a> (const uint8_t *data, size_t len, size_t from)</td></tr>
+<tr class="memitem:a44570f5631c96423ad1b6cd67cbc92ef" id="r_a44570f5631c96423ad1b6cd67cbc92ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a44570f5631c96423ad1b6cd67cbc92ef">extractNALs</a> (const <a class="el" href="classuint8__t.html">uint8_t</a> *data, <a class="el" href="classsize__t.html">size_t</a> len, <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classsize__t.html">size_t</a> &gt; &amp;offsets, <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classsize__t.html">size_t</a> &gt; &amp;lengths)</td></tr>
+<tr class="memitem:a3780196025eb1f3bc1888bbb6e169d5a" id="r_a3780196025eb1f3bc1888bbb6e169d5a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3780196025eb1f3bc1888bbb6e169d5a">findStartCode</a> (const <a class="el" href="classuint8__t.html">uint8_t</a> *data, <a class="el" href="classsize__t.html">size_t</a> len, <a class="el" href="classsize__t.html">size_t</a> from)</td></tr>
 <tr class="memdesc:a3780196025eb1f3bc1888bbb6e169d5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Locate the next Annex-B start code (00 00 01 or 00 00 00 01) at or after <span class="tt">from</span>.  <br /></td></tr>
-<tr class="memitem:aae9039aea796a4c091427cedcd6a532d" id="r_aae9039aea796a4c091427cedcd6a532d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_fragment_queue.html#aae9039aea796a4c091427cedcd6a532d">queuePacketSize</a> ()</td></tr>
-<tr class="memitem:a855fd386ed1b6b860b5c3852b91cce6e" id="r_a855fd386ed1b6b860b5c3852b91cce6e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_fragment_queue.html#a855fd386ed1b6b860b5c3852b91cce6e">queueReadBytes</a> (void *dest, int maxBytes)</td></tr>
-<tr class="memitem:a9227007dca2c880c4996857572cc18dd" id="r_a9227007dca2c880c4996857572cc18dd"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_fragment_queue.html#a9227007dca2c880c4996857572cc18dd">readQueueU32</a> (size_t pos)</td></tr>
+<tr class="memitem:aae9039aea796a4c091427cedcd6a532d" id="r_aae9039aea796a4c091427cedcd6a532d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_fragment_queue.html#aae9039aea796a4c091427cedcd6a532d">queuePacketSize</a> ()</td></tr>
+<tr class="memitem:a855fd386ed1b6b860b5c3852b91cce6e" id="r_a855fd386ed1b6b860b5c3852b91cce6e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_fragment_queue.html#a855fd386ed1b6b860b5c3852b91cce6e">queueReadBytes</a> (void *dest, <a class="el" href="classint.html">int</a> maxBytes)</td></tr>
+<tr class="memitem:a9227007dca2c880c4996857572cc18dd" id="r_a9227007dca2c880c4996857572cc18dd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_fragment_queue.html#a9227007dca2c880c4996857572cc18dd">readQueueU32</a> (<a class="el" href="classsize__t.html">size_t</a> pos)</td></tr>
 <tr class="memitem:a39ef8ab5879aee7da0106e033e39a000" id="r_a39ef8ab5879aee7da0106e033e39a000"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a39ef8ab5879aee7da0106e033e39a000">updateSpropParameterSets</a> ()</td></tr>
-<tr class="memitem:a2e475070d3df18395c90a10c9d38eb0a" id="r_a2e475070d3df18395c90a10c9d38eb0a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_writer.html#a2e475070d3df18395c90a10c9d38eb0a">writeBlocking</a> (<a class="el" href="class_print.html">Print</a> *out, uint8_t *data, size_t len)</td></tr>
-<tr class="memitem:a2e475070d3df18395c90a10c9d38eb0a" id="r_a2e475070d3df18395c90a10c9d38eb0a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_writer.html#a2e475070d3df18395c90a10c9d38eb0a">writeBlocking</a> (<a class="el" href="class_print.html">Print</a> *out, uint8_t *data, size_t len)</td></tr>
+<tr class="memitem:a2e475070d3df18395c90a10c9d38eb0a" id="r_a2e475070d3df18395c90a10c9d38eb0a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_writer.html#a2e475070d3df18395c90a10c9d38eb0a">writeBlocking</a> (<a class="el" href="class_print.html">Print</a> *out, <a class="el" href="classuint8__t.html">uint8_t</a> *data, <a class="el" href="classsize__t.html">size_t</a> len)</td></tr>
+<tr class="memitem:a2e475070d3df18395c90a10c9d38eb0a" id="r_a2e475070d3df18395c90a10c9d38eb0a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_writer.html#a2e475070d3df18395c90a10c9d38eb0a">writeBlocking</a> (<a class="el" href="class_print.html">Print</a> *out, <a class="el" href="classuint8__t.html">uint8_t</a> *data, <a class="el" href="classsize__t.html">size_t</a> len)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-static-methods" class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
-<tr class="memitem:aa7444b7c007ce90a064b586cacfa9e36" id="r_aa7444b7c007ce90a064b586cacfa9e36"><td class="memItemLeft" align="right" valign="top">static String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa7444b7c007ce90a064b586cacfa9e36">base64Encode</a> (const uint8_t *data, size_t len)</td></tr>
+<tr class="memitem:aa7444b7c007ce90a064b586cacfa9e36" id="r_aa7444b7c007ce90a064b586cacfa9e36"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa7444b7c007ce90a064b586cacfa9e36">base64Encode</a> (const <a class="el" href="classuint8__t.html">uint8_t</a> *data, <a class="el" href="classsize__t.html">size_t</a> len)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a29097729c631aa523f2fa23798e4bc6a" id="r_a29097729c631aa523f2fa23798e4bc6a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_r_t_s_p_format_h264.html">RTSPFormatH264</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a29097729c631aa523f2fa23798e4bc6a">default_format</a></td></tr>
 <tr class="memitem:a47385aa19435f5fca9d3083a748258c5" id="r_a47385aa19435f5fca9d3083a748258c5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_encoder.html#a47385aa19435f5fca9d3083a748258c5">info</a></td></tr>
-<tr class="memitem:a04b5b6d3587350e5f8834fedeb9cab9e" id="r_a04b5b6d3587350e5f8834fedeb9cab9e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a04b5b6d3587350e5f8834fedeb9cab9e">m_isStarted</a> = false</td></tr>
-<tr class="memitem:af6b477495d56e9b1fe049a56418da649" id="r_af6b477495d56e9b1fe049a56418da649"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af6b477495d56e9b1fe049a56418da649">m_maxFragmentSize</a> = 1400</td></tr>
-<tr class="memitem:afa220347665a3a90faf85f2ad8dd0b3b" id="r_afa220347665a3a90faf85f2ad8dd0b3b"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_fragment_queue.html#afa220347665a3a90faf85f2ad8dd0b3b">m_maxQueuedFrames</a> = 1</td></tr>
-<tr class="memitem:ad5f3dfca0eb3228131e17b05be652785" id="r_ad5f3dfca0eb3228131e17b05be652785"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad5f3dfca0eb3228131e17b05be652785">m_pps</a></td></tr>
-<tr class="memitem:a82b7b2cf9a812f9af39705b852dd8555" id="r_a82b7b2cf9a812f9af39705b852dd8555"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_fragment_queue.html#a82b7b2cf9a812f9af39705b852dd8555">m_queue</a></td></tr>
-<tr class="memitem:aa4d901347e4fa8fb1ce74ed2ef8e2702" id="r_aa4d901347e4fa8fb1ce74ed2ef8e2702"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_fragment_queue.html#aa4d901347e4fa8fb1ce74ed2ef8e2702">m_queuedFrames</a> = 0</td></tr>
-<tr class="memitem:ab6c99f7108c0b4d4496aa9031579739f" id="r_ab6c99f7108c0b4d4496aa9031579739f"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_fragment_queue.html#ab6c99f7108c0b4d4496aa9031579739f">m_queueHead</a> = 0</td></tr>
-<tr class="memitem:a714ed288944dee1130ec7c31b37c8e73" id="r_a714ed288944dee1130ec7c31b37c8e73"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a714ed288944dee1130ec7c31b37c8e73">m_scratch</a></td></tr>
-<tr class="memitem:a1e318be378bc76515ead0fa5bc5081b4" id="r_a1e318be378bc76515ead0fa5bc5081b4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1e318be378bc76515ead0fa5bc5081b4">m_sps</a></td></tr>
+<tr class="memitem:a04b5b6d3587350e5f8834fedeb9cab9e" id="r_a04b5b6d3587350e5f8834fedeb9cab9e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a04b5b6d3587350e5f8834fedeb9cab9e">m_isStarted</a> = false</td></tr>
+<tr class="memitem:af6b477495d56e9b1fe049a56418da649" id="r_af6b477495d56e9b1fe049a56418da649"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af6b477495d56e9b1fe049a56418da649">m_maxFragmentSize</a> = 1400</td></tr>
+<tr class="memitem:afa220347665a3a90faf85f2ad8dd0b3b" id="r_afa220347665a3a90faf85f2ad8dd0b3b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_fragment_queue.html#afa220347665a3a90faf85f2ad8dd0b3b">m_maxQueuedFrames</a> = 1</td></tr>
+<tr class="memitem:ad5f3dfca0eb3228131e17b05be652785" id="r_ad5f3dfca0eb3228131e17b05be652785"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classuint8__t.html">uint8_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad5f3dfca0eb3228131e17b05be652785">m_pps</a></td></tr>
+<tr class="memitem:a82b7b2cf9a812f9af39705b852dd8555" id="r_a82b7b2cf9a812f9af39705b852dd8555"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classuint8__t.html">uint8_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_fragment_queue.html#a82b7b2cf9a812f9af39705b852dd8555">m_queue</a></td></tr>
+<tr class="memitem:aa4d901347e4fa8fb1ce74ed2ef8e2702" id="r_aa4d901347e4fa8fb1ce74ed2ef8e2702"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_fragment_queue.html#aa4d901347e4fa8fb1ce74ed2ef8e2702">m_queuedFrames</a> = 0</td></tr>
+<tr class="memitem:ab6c99f7108c0b4d4496aa9031579739f" id="r_ab6c99f7108c0b4d4496aa9031579739f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_fragment_queue.html#ab6c99f7108c0b4d4496aa9031579739f">m_queueHead</a> = 0</td></tr>
+<tr class="memitem:a714ed288944dee1130ec7c31b37c8e73" id="r_a714ed288944dee1130ec7c31b37c8e73"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classuint8__t.html">uint8_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a714ed288944dee1130ec7c31b37c8e73">m_scratch</a></td></tr>
+<tr class="memitem:a1e318be378bc76515ead0fa5bc5081b4" id="r_a1e318be378bc76515ead0fa5bc5081b4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classuint8__t.html">uint8_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1e318be378bc76515ead0fa5bc5081b4">m_sps</a></td></tr>
 <tr class="memitem:aee9486d2adedbb3593159309760e7c85" id="r_aee9486d2adedbb3593159309760e7c85"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_r_t_s_p_format.html">RTSPFormat</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aee9486d2adedbb3593159309760e7c85">p_format</a> = nullptr</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
@@ -296,7 +326,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">H264RtpEncoder </td>
           <td>(</td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>maxFragmentSize</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>maxFragmentSize</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -330,17 +360,17 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void appendFragment </td>
           <td>(</td>
-          <td class="paramtype">const uint8_t *</td>          <td class="paramname"><span class="paramname"><em>payload</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>payload</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>len</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classbool.html">bool</a></td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -480,14 +510,14 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">String base64Encode </td>
+          <td class="memname"><a class="el" href="class_string.html">String</a> base64Encode </td>
           <td>(</td>
-          <td class="paramtype">const uint8_t *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -509,7 +539,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool <a class="el" href="#acba365cc28eb702040c382646cfb0a7a">begin</a> </td>
+          <td class="memname">virtual <a class="el" href="classbool.html">bool</a> <a class="el" href="#acba365cc28eb702040c382646cfb0a7a">begin</a> </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structaudio__tools_1_1audio__tools_1_1_audio_info.html">AudioInfo</a></td>          <td class="paramname"><span class="paramname"><em>info</em></span></td><td>)</td>
           <td></td>
@@ -536,7 +566,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool begin </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> begin </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -565,12 +595,12 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void cachePps </td>
           <td>(</td>
-          <td class="paramtype">const uint8_t *</td>          <td class="paramname"><span class="paramname"><em>nal</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>nal</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -594,12 +624,12 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void cacheSps </td>
           <td>(</td>
-          <td class="paramtype">const uint8_t *</td>          <td class="paramname"><span class="paramname"><em>nal</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>nal</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -673,17 +703,17 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void emitNal </td>
           <td>(</td>
-          <td class="paramtype">const uint8_t *</td>          <td class="paramname"><span class="paramname"><em>nal</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>nal</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>nalLen</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>nalLen</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>isLastOfFrame</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classbool.html">bool</a></td>          <td class="paramname"><span class="paramname"><em>isLastOfFrame</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -742,22 +772,22 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void extractNALs </td>
           <td>(</td>
-          <td class="paramtype">const uint8_t *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>len</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; size_t &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>offsets</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classsize__t.html">size_t</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>offsets</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; size_t &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>lengths</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classsize__t.html">size_t</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>lengths</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -780,19 +810,19 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t findStartCode </td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> findStartCode </td>
           <td>(</td>
-          <td class="paramtype">const uint8_t *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>len</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>from</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>from</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -817,7 +847,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual uint32_t frameDurationUs </td>
+          <td class="memname">virtual <a class="el" href="classuint32__t.html">uint32_t</a> frameDurationUs </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -846,7 +876,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual uint32_t frameDurationUs </td>
+          <td class="memname">virtual <a class="el" href="classuint32__t.html">uint32_t</a> frameDurationUs </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -875,7 +905,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual int frameSize </td>
+          <td class="memname">virtual <a class="el" href="classint.html">int</a> frameSize </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -903,7 +933,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual int frameSize </td>
+          <td class="memname">virtual <a class="el" href="classint.html">int</a> frameSize </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -993,7 +1023,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">operator bool </td>
+          <td class="memname">operator <a class="el" href="classbool.html">bool</a> </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -1020,7 +1050,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int packetSize </td>
+          <td class="memname"><a class="el" href="classint.html">int</a> packetSize </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -1051,7 +1081,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int queuePacketSize </td>
+          <td class="memname"><a class="el" href="classint.html">int</a> queuePacketSize </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -1076,14 +1106,14 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int queueReadBytes </td>
+          <td class="memname"><a class="el" href="classint.html">int</a> queueReadBytes </td>
           <td>(</td>
           <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>dest</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>maxBytes</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>maxBytes</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -1106,14 +1136,14 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int readBytes </td>
+          <td class="memname"><a class="el" href="classint.html">int</a> readBytes </td>
           <td>(</td>
           <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>dest</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>maxBytes</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>maxBytes</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -1138,9 +1168,9 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t readQueueU32 </td>
+          <td class="memname"><a class="el" href="classuint32__t.html">uint32_t</a> readQueueU32 </td>
           <td>(</td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>pos</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>pos</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1307,7 +1337,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void setMaxFragmentSize </td>
           <td>(</td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>size</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>size</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1334,7 +1364,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void setMaxQueuedFrames </td>
           <td>(</td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>frames</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>frames</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1512,14 +1542,14 @@ Default implementation does nothing (suitable for sources that need no cleanup) 
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t write </td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> write </td>
           <td>(</td>
-          <td class="paramtype">const uint8_t *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -1560,12 +1590,12 @@ Default implementation does nothing (suitable for sources that need no cleanup) 
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -1594,12 +1624,12 @@ Default implementation does nothing (suitable for sources that need no cleanup) 
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -1666,7 +1696,7 @@ Default implementation does nothing (suitable for sources that need no cleanup) 
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool m_isStarted = false</td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> m_isStarted = false</td>
         </tr>
       </table>
   </td>
@@ -1688,7 +1718,7 @@ Default implementation does nothing (suitable for sources that need no cleanup) 
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t m_maxFragmentSize = 1400</td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> m_maxFragmentSize = 1400</td>
         </tr>
       </table>
   </td>
@@ -1710,7 +1740,7 @@ Default implementation does nothing (suitable for sources that need no cleanup) 
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t m_maxQueuedFrames = 1</td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> m_maxQueuedFrames = 1</td>
         </tr>
       </table>
   </td>
@@ -1732,7 +1762,7 @@ Default implementation does nothing (suitable for sources that need no cleanup) 
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;uint8_t&gt; m_pps</td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;<a class="el" href="classuint8__t.html">uint8_t</a>&gt; m_pps</td>
         </tr>
       </table>
   </td>
@@ -1754,7 +1784,7 @@ Default implementation does nothing (suitable for sources that need no cleanup) 
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;uint8_t&gt; m_queue</td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;<a class="el" href="classuint8__t.html">uint8_t</a>&gt; m_queue</td>
         </tr>
       </table>
   </td>
@@ -1776,7 +1806,7 @@ Default implementation does nothing (suitable for sources that need no cleanup) 
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t m_queuedFrames = 0</td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> m_queuedFrames = 0</td>
         </tr>
       </table>
   </td>
@@ -1798,7 +1828,7 @@ Default implementation does nothing (suitable for sources that need no cleanup) 
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t m_queueHead = 0</td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> m_queueHead = 0</td>
         </tr>
       </table>
   </td>
@@ -1820,7 +1850,7 @@ Default implementation does nothing (suitable for sources that need no cleanup) 
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;uint8_t&gt; m_scratch</td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;<a class="el" href="classuint8__t.html">uint8_t</a>&gt; m_scratch</td>
         </tr>
       </table>
   </td>
@@ -1842,7 +1872,7 @@ Default implementation does nothing (suitable for sources that need no cleanup) 
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;uint8_t&gt; m_sps</td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;<a class="el" href="classuint8__t.html">uint8_t</a>&gt; m_sps</td>
         </tr>
       </table>
   </td>

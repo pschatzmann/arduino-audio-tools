@@ -1,5 +1,7 @@
 <map id="SpinLock" name="SpinLock">
-<area shape="rect" id="Node000001" title="Busy&#45;wait lock based on std::atomic &#45; available on all platforms that support &lt;atomic&gt;." alt="" coords="13,81,92,109"/>
+<area shape="rect" id="Node000001" title="Busy&#45;wait lock based on std::atomic &#45; available on all platforms that support &lt;atomic&gt;." alt="" coords="80,106,159,134"/>
 <area shape="rect" id="Node000002" href="$classaudio__tools_1_1_mutex_base.html" title="Empty Mutex implementation which does nothing." alt="" coords="5,5,100,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="54,47,55,81,50,80,51,51"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="71,44,113,105,108,106,68,48"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="124,5,248,33"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="171,45,130,107,126,104,166,47"/>
 </map>

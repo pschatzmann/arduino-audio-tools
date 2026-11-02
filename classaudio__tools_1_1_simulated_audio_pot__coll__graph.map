@@ -1,5 +1,7 @@
 <map id="SimulatedAudioPot" name="SimulatedAudioPot">
-<area shape="rect" id="Node000001" title="Simple simulated audio pot volume control inspired by https://eepower.com/resistor&#45;guide/resistor&#45;typ..." alt="" coords="5,81,151,109"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_volume_control.html" title="Abstract class for handling of the linear input volume to determine the multiplication factor which s..." alt="" coords="19,5,137,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="80,47,81,81,75,80,76,51"/>
+<area shape="rect" id="Node000001" title="Simple simulated audio pot volume control inspired by https://eepower.com/resistor&#45;guide/resistor&#45;typ..." alt="" coords="45,128,190,156"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_volume_control.html" title="Abstract class for handling of the linear input volume to determine the multiplication factor which s..." alt="" coords="5,5,123,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="78,45,114,127,109,128,74,49"/>
+<area shape="rect" id="Node000003" href="$classfloat.html" title=" " alt="" coords="147,5,197,33"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="162,46,125,129,121,126,157,48"/>
 </map>

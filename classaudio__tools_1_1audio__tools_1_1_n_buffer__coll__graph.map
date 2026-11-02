@@ -1,15 +1,26 @@
 <map id="NBuffer&lt; T &gt;" name="NBuffer&lt; T &gt;">
-<area shape="rect" id="Node000001" title="A N buffer. If count=2 we create a DoubleBuffer, if count=3 a TripleBuffer etc." alt="" coords="1055,14,1164,42"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="5,54,173,82"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="187,60,196,59,352,39,508,28,574,27,641,28,872,31,1058,34,1052,35,872,37,641,34,574,32,508,34,352,44,197,64,190,65"/>
-<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="128,48,196,35,352,15,508,4,574,3,641,4,872,9,1058,19,1052,20,872,14,641,10,574,8,508,10,352,20,197,40,131,52"/>
-<area shape="poly" id="edge3_Node000001_Node000002" title=" " alt="" coords="188,67,508,69,575,70,641,69,871,52,1057,34,1052,35,872,57,641,74,575,75,508,74,189,72"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_queue_from_vector.html" title=" " alt="" coords="665,105,887,167"/>
-<area shape="poly" id="edge8_Node000003_Node000002" title=" " alt="" coords="163,84,301,109,493,126,667,135,662,136,493,132,300,115,163,89"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="301,179,484,240"/>
-<area shape="poly" id="edge6_Node000004_Node000002" title=" " alt="" coords="110,92,148,135,172,155,198,172,248,192,303,205,298,205,247,197,195,177,169,160,145,139,109,97"/>
-<area shape="poly" id="edge4_Node000001_Node000003" title=" " alt="" coords="902,155,968,151,1000,144,1030,132,1055,113,1075,89,1101,44,1105,41,1080,92,1059,117,1033,137,1002,149,969,157,903,160"/>
-<area shape="poly" id="edge5_Node000003_Node000004" title=" " alt="" coords="499,195,640,172,668,168,673,167,642,177,500,200"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="49,218,129,246"/>
-<area shape="poly" id="edge7_Node000004_Node000005" title=" " alt="" coords="144,232,208,232,276,228,297,228,303,228,277,233,208,237,144,237"/>
+<area shape="rect" id="Node000001" title="A N buffer. If count=2 we create a DoubleBuffer, if count=3 a TripleBuffer etc." alt="" coords="1126,255,1235,283"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="5,114,173,141"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="160,107,240,85,341,63,458,42,586,29,720,27,787,32,854,42,920,56,984,76,1045,103,1104,136,1133,163,1154,195,1177,256,1172,254,1149,198,1128,166,1101,140,1043,108,982,81,919,61,853,47,787,38,719,33,586,34,458,48,342,68,241,91,164,111"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="132,106,204,80,302,53,421,27,554,9,695,3,767,7,838,15,908,29,976,50,1042,77,1104,112,1121,126,1136,144,1159,183,1173,223,1180,256,1175,253,1168,224,1154,185,1132,147,1118,130,1101,116,1039,82,975,55,907,34,837,20,766,12,695,9,555,14,422,33,303,58,205,86,135,110"/>
+<area shape="poly" id="edge5_Node000001_Node000002" title=" " alt="" coords="187,116,365,109,475,109,596,114,723,125,852,145,980,173,1103,213,1138,232,1166,255,1161,254,1135,236,1101,218,979,179,851,150,722,131,596,119,475,114,365,114,189,121"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_queue_from_vector.html" title=" " alt="" coords="736,238,958,300"/>
+<area shape="poly" id="edge13_Node000005_Node000002" title=" " alt="" coords="187,141,427,182,713,236,738,243,733,244,711,241,426,187,188,146"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="372,238,555,300"/>
+<area shape="poly" id="edge9_Node000006_Node000002" title=" " alt="" coords="116,149,155,178,198,202,238,216,271,222,305,225,348,233,374,241,369,243,347,238,304,230,270,227,237,221,196,207,152,182,118,154"/>
+<area shape="rect" id="Node000003" href="$classint.html" title=" " alt="" coords="70,404,108,432"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="123,418,224,423,347,420,576,391,799,352,990,311,1129,282,1124,283,992,317,800,357,577,396,348,425,224,428,124,424"/>
+<area shape="poly" id="edge8_Node000006_Node000003" title=" " alt="" coords="123,418,172,417,231,411,292,394,320,381,346,364,355,352,358,340,361,326,370,311,385,302,389,299,374,315,366,328,363,341,360,354,349,368,323,385,293,399,232,416,172,423,125,423"/>
+<area shape="rect" id="Node000004" href="$classsize__t.html" title=" " alt="" coords="818,478,877,505"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="892,501,940,510,994,513,1051,506,1077,496,1101,482,1123,462,1140,437,1153,409,1163,380,1174,324,1177,285,1181,281,1179,325,1168,381,1158,411,1145,439,1127,465,1104,487,1079,501,1052,511,995,519,939,515,892,507"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="973,266,1129,268,1123,269,974,272"/>
+<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="570,266,738,268,733,270,571,272"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="49,248,129,276"/>
+<area shape="poly" id="edge10_Node000006_Node000007" title=" " alt="" coords="143,261,373,265,370,269,145,266"/>
+<area shape="rect" id="Node000008" href="$classbool.html" title=" " alt="" coords="64,304,114,332"/>
+<area shape="poly" id="edge11_Node000006_Node000008" title=" " alt="" coords="128,314,228,308,347,294,374,291,369,293,348,299,229,313,130,319"/>
+<area shape="rect" id="Node000009" href="$classint32__t.html" title=" " alt="" coords="430,324,496,352"/>
+<area shape="poly" id="edge12_Node000005_Node000009" title=" " alt="" coords="511,329,712,297,738,294,733,295,712,302,513,334"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="807,554,887,581"/>
+<area shape="poly" id="edge14_Node000001_Node000010" title=" " alt="" coords="902,583,949,592,1002,596,1054,589,1079,580,1101,566,1116,547,1130,515,1153,432,1167,345,1176,285,1180,281,1173,346,1158,433,1135,517,1121,549,1104,570,1081,585,1056,594,1002,601,949,598,902,588"/>
 </map>

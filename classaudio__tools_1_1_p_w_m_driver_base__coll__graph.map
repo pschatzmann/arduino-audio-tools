@@ -1,19 +1,34 @@
 <map id="PWMDriverBase" name="PWMDriverBase">
-<area shape="rect" id="Node000001" title="Base Class for all PWM drivers." alt="" coords="233,207,360,234"/>
-<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_p_w_m_config_a_v_r.html" title="Configuration data for PWM audio output." alt="" coords="129,106,250,134"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="202,145,213,164,227,181,264,206,258,206,223,185,209,167,200,150"/>
-<area shape="rect" id="Node000003" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="5,5,89,33"/>
-<area shape="poly" id="edge4_Node000001_Node000003" title=" " alt="" coords="35,50,28,91,30,113,39,132,57,153,79,170,129,195,183,209,236,218,230,218,182,214,127,200,76,174,53,157,34,135,25,114,23,90,36,45"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="78,39,173,104,168,107,78,44"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="135,5,244,33"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="191,46,192,106,187,105,188,51"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="274,106,441,134"/>
-<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="344,145,306,208,303,204,339,148"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_decimate.html" title="Provides a reduced sampling rate by taking a sample at every factor location (ingoring factor&#45;1 sampl..." alt="" coords="465,106,549,134"/>
-<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="472,141,387,185,331,209,329,204,385,180,467,142"/>
-<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="" coords="448,5,566,33"/>
-<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="501,46,503,107,498,104,497,50"/>
-<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="517,46,516,107,511,104,513,50"/>
-<area shape="rect" id="Node000008" href="$structaudio__tools_1_1audio__tools_1_1_decimate_1_1_decimate_state.html" title=" " alt="" coords="589,5,708,33"/>
-<area shape="poly" id="edge9_Node000006_Node000008" title=" " alt="" coords="620,41,527,108,525,103,615,43"/>
+<area shape="rect" id="Node000001" title="Base Class for all PWM drivers." alt="" coords="591,483,717,511"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_p_w_m_config_a_v_r.html" title="Configuration data for PWM audio output." alt="" coords="425,360,547,388"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="504,398,529,429,560,457,583,470,609,483,604,482,581,475,557,461,525,433,502,403"/>
+<area shape="rect" id="Node000003" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="303,127,386,155"/>
+<area shape="poly" id="edge10_Node000001_Node000003" title=" " alt="" coords="335,167,322,215,312,272,311,302,314,332,321,360,335,387,359,415,387,437,420,455,455,469,526,486,593,496,588,496,525,492,453,474,418,460,385,442,355,418,330,389,317,362,309,333,306,302,307,271,317,213,332,171"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="361,166,463,335,479,361,474,359,458,338,358,170"/>
+<area shape="rect" id="Node000004" href="$classuint32__t.html" title=" " alt="" coords="117,5,191,33"/>
+<area shape="poly" id="edge12_Node000001_Node000004" title=" " alt="" coords="129,47,84,101,58,136,35,175,18,216,9,257,12,297,18,316,29,335,61,375,94,402,129,419,165,429,249,440,297,446,351,457,414,470,478,479,593,493,588,493,477,485,413,475,350,462,296,451,248,445,164,434,127,424,91,406,57,378,24,338,13,319,7,298,4,257,13,215,30,173,54,134,79,98,131,42"/>
+<area shape="poly" id="edge8_Node000002_Node000004" title=" " alt="" coords="150,46,151,109,157,143,169,174,193,211,224,244,259,272,297,296,373,334,440,359,435,360,371,338,294,301,256,276,220,248,189,215,164,177,152,144,146,109,149,51"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="188,39,326,125,322,128,188,44"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="416,5,490,33"/>
+<area shape="poly" id="edge6_Node000002_Node000005" title=" " alt="" coords="481,41,510,70,534,105,544,130,548,151,551,199,558,239,565,271,565,302,551,338,539,352,524,362,521,357,535,348,546,335,560,301,559,271,553,240,546,200,543,152,539,132,529,107,506,73,481,46"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="433,43,358,128,355,125,429,46"/>
+<area shape="rect" id="Node000006" href="$classuint8__t.html" title=" " alt="" coords="616,5,682,33"/>
+<area shape="poly" id="edge7_Node000002_Node000006" title=" " alt="" coords="671,43,678,56,680,69,678,82,668,161,655,224,644,252,628,280,606,308,577,338,558,352,537,362,535,357,556,348,574,334,602,305,624,277,639,250,650,222,663,160,673,82,675,69,673,58,670,49"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="601,41,489,85,444,95,399,108,364,129,361,124,397,104,442,90,488,79,606,38"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="410,127,519,155"/>
+<area shape="poly" id="edge9_Node000002_Node000007" title=" " alt="" coords="467,168,471,245,480,336,485,361,480,359,475,337,466,245,464,172"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="570,360,738,388"/>
+<area shape="poly" id="edge11_Node000001_Node000008" title=" " alt="" coords="656,402,656,484,652,481,652,405"/>
+<area shape="rect" id="Node000009" href="$classbool.html" title=" " alt="" coords="761,360,811,388"/>
+<area shape="poly" id="edge13_Node000001_Node000009" title=" " alt="" coords="768,399,708,461,675,485,674,480,704,457,763,401"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1audio__tools_1_1_decimate.html" title="Provides a reduced sampling rate by taking a sample at every factor location (ingoring factor&#45;1 sampl..." alt="" coords="895,360,979,388"/>
+<area shape="poly" id="edge14_Node000001_Node000010" title=" " alt="" coords="928,401,909,434,881,462,852,473,811,482,718,494,718,488,810,477,850,468,878,457,905,431,923,403"/>
+<area shape="rect" id="Node000011" href="$classaudio__tools_1_1audio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="" coords="814,127,931,155"/>
+<area shape="poly" id="edge15_Node000010_Node000011" title=" " alt="" coords="876,168,902,269,931,361,926,359,897,271,873,172"/>
+<area shape="poly" id="edge16_Node000010_Node000011" title=" " alt="" coords="888,167,920,269,940,361,935,359,914,270,885,172"/>
+<area shape="rect" id="Node000012" href="$classint.html" title=" " alt="" coords="1098,127,1136,155"/>
+<area shape="poly" id="edge19_Node000001_Node000012" title=" " alt="" coords="1121,168,1121,247,1114,293,1101,337,1081,380,1061,412,1035,437,995,462,944,477,870,488,718,497,717,492,870,483,943,472,993,457,1031,433,1057,408,1077,377,1096,335,1109,292,1116,247,1117,172"/>
+<area shape="poly" id="edge17_Node000010_Node000012" title=" " alt="" coords="1098,165,1086,178,1071,185,1057,188,1045,192,1034,201,1023,218,1018,235,1018,267,1018,301,1014,319,1003,338,989,352,972,362,970,357,986,348,999,335,1009,317,1013,300,1013,267,1013,234,1018,216,1030,198,1043,187,1056,183,1069,180,1083,173,1094,167"/>
+<area shape="rect" id="Node000013" href="$structaudio__tools_1_1audio__tools_1_1_decimate_1_1_decimate_state.html" title=" " alt="" coords="955,127,1073,155"/>
+<area shape="poly" id="edge18_Node000010_Node000013" title=" " alt="" coords="988,164,973,183,962,201,947,244,940,289,938,362,934,358,935,289,942,243,957,199,969,180,983,167"/>
 </map>

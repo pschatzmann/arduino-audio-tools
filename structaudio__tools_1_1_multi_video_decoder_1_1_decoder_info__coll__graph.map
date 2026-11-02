@@ -1,7 +1,9 @@
 <map id="MultiVideoDecoder::DecoderInfo" name="MultiVideoDecoder::DecoderInfo">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,183,159,228"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 &#45; CodecH264...." alt="" coords="26,82,138,110"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="84,124,85,183,79,182,80,127"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="" coords="31,5,133,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="83,46,85,82,79,82,81,51"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="70,183,224,228"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 &#45; CodecH264...." alt="" coords="5,82,118,110"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="78,121,104,157,126,182,121,183,99,161,76,126"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="" coords="10,5,113,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="62,46,64,82,59,82,61,51"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="141,82,246,110"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="184,123,158,184,154,181,180,125"/>
 </map>

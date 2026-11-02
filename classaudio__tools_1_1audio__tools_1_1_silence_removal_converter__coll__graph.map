@@ -1,6 +1,12 @@
 <map id="SilenceRemovalConverter&lt; T &gt;" name="SilenceRemovalConverter&lt; T &gt;">
-<area shape="rect" id="Node000001" title="Removes any silence from the buffer that is longer then n samples with a amplitude below the indicate..." alt="" coords="5,81,234,109"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="" coords="61,5,178,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="113,47,115,82,110,80,109,50"/>
-<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="130,47,129,82,124,79,126,50"/>
+<area shape="rect" id="Node000001" title="Removes any silence from the buffer that is longer then n samples with a amplitude below the indicate..." alt="" coords="58,151,286,178"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="" coords="5,5,123,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="78,44,118,99,159,150,154,150,114,103,76,49"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="90,42,135,98,170,150,165,150,131,102,88,47"/>
+<area shape="rect" id="Node000003" href="$classbool.html" title=" " alt="" coords="147,5,197,33"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="174,47,175,151,169,149,170,50"/>
+<area shape="rect" id="Node000004" href="$classuint8__t.html" title=" " alt="" coords="220,5,286,33"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="252,46,244,88,225,128,198,153,195,148,221,125,239,86,249,50"/>
+<area shape="rect" id="Node000005" href="$classint.html" title=" " alt="" coords="310,5,349,33"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="331,47,324,90,315,110,302,129,284,143,263,153,262,148,281,138,298,125,311,108,319,88,327,50"/>
 </map>

@@ -1,21 +1,48 @@
 <map id="RTSPMediaStreamer&lt; Platform &gt;" name="RTSPMediaStreamer&lt; Platform &gt;">
-<area shape="rect" id="Node000001" title="RTSPMediaStreamer &#45; Timer&#45;driven RTP Media Streaming Engine." alt="" coords="257,347,422,391"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_r_t_s_p_media_streamer_base.html" title="RTSPMediaStreamerBase &#45; Core RTP Media Streaming Engine." alt="" coords="165,229,351,274"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="283,284,327,347,321,346,281,289"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="5,106,143,134"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="86,145,106,176,130,203,173,228,168,229,127,207,101,179,86,150"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="34,5,114,33"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="74,46,77,106,71,105,74,51"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_i_media_source.html" title="Media Source Interface &#45; Contract for Media Data Providers." alt="" coords="167,106,277,134"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="219,147,221,176,226,204,240,229,234,228,221,206,215,177,217,151"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_i_p_address.html" title="Arduino&#45;compatible IPAddress class implemented in pure C++." alt="" coords="318,106,403,134"/>
-<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="358,147,349,178,333,207,306,231,303,226,329,203,345,176,354,151"/>
-<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_audio_timer.html" title="Common Interface definition for AudioTimer." alt="" coords="411,238,508,265"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="438,275,363,349,360,344,433,277"/>
-<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_audio_timer_driver_a_v_r.html" title="Repeating Timer functions for repeated execution: Plaease use the typedef AudioTimer." alt="" coords="541,106,703,134"/>
-<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="596,142,477,239,475,235,592,144"/>
-<area shape="rect" id="Node000009" href="$classaudio__tools_1_1audio__tools_1_1_audio_timer_driver_base.html" title=" " alt="" coords="538,5,706,33"/>
-<area shape="poly" id="edge10_Node000007_Node000009" title=" " alt="" coords="559,40,513,67,491,86,473,107,459,141,455,177,456,211,459,238,454,236,450,212,449,177,454,140,468,105,487,82,510,63,564,38"/>
-<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="615,46,618,107,613,104,612,50"/>
-<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="632,46,631,107,626,104,629,50"/>
+<area shape="rect" id="Node000001" title="RTSPMediaStreamer &#45; Timer&#45;driven RTP Media Streaming Engine." alt="" coords="1185,838,1350,883"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_r_t_s_p_media_streamer_base.html" title="RTSPMediaStreamerBase &#45; Core RTP Media Streaming Engine." alt="" coords="888,622,1073,667"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1025,674,1239,838,1234,838,1023,679"/>
+<area shape="rect" id="Node000003" href="$classint.html" title=" " alt="" coords="227,536,265,564"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="279,542,354,532,431,521,465,521,506,533,519,544,530,555,577,573,619,582,657,584,693,583,770,579,814,582,865,592,937,621,932,622,863,598,813,588,770,585,693,588,657,590,618,587,576,578,528,560,515,548,504,537,464,527,431,527,354,538,282,546"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="544,627,682,654"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="279,558,355,580,430,596,506,611,558,625,553,627,504,616,429,601,353,585,281,563"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="696,639,721,640,890,643,885,645,721,645,698,645"/>
+<area shape="rect" id="Node000005" href="$classuint8__t_01_5.html" title=" " alt="" coords="207,627,284,654"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="299,638,546,639,542,642,301,643"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="206,683,286,710"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="300,691,396,683,504,668,570,653,565,656,506,673,397,689,302,696"/>
+<area shape="rect" id="Node000007" href="$classbool.html" title=" " alt="" coords="221,783,270,810"/>
+<area shape="poly" id="edge9_Node000002_Node000007" title=" " alt="" coords="285,797,387,797,446,790,504,775,516,768,528,759,674,717,890,665,885,668,675,722,530,764,519,772,506,780,447,795,387,802,287,802"/>
+<area shape="poly" id="edge7_Node000004_Node000007" title=" " alt="" coords="285,787,406,758,464,738,503,718,512,707,515,696,518,683,527,670,559,653,555,657,531,674,523,686,520,697,516,710,507,722,467,743,407,763,287,791"/>
+<area shape="rect" id="Node000016" href="$classaudio__tools_1_1audio__tools_1_1_audio_timer.html" title="Common Interface definition for AudioTimer." alt="" coords="932,1045,1029,1073"/>
+<area shape="poly" id="edge20_Node000016_Node000007" title=" " alt="" coords="274,818,321,856,382,901,454,946,530,983,934,1050,930,1053,528,988,451,951,379,905,318,860,274,823"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_i_media_source.html" title="Media Source Interface &#45; Contract for Media Data Providers." alt="" coords="558,773,668,801"/>
+<area shape="poly" id="edge8_Node000002_Node000008" title=" " alt="" coords="683,791,726,791,772,787,819,778,863,762,894,742,922,716,963,669,967,665,926,720,898,746,865,766,820,783,772,792,726,796,684,796"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="547,831,679,858"/>
+<area shape="poly" id="edge10_Node000002_Node000009" title=" " alt="" coords="678,859,723,866,770,868,818,861,863,844,886,827,906,806,938,757,959,707,973,669,976,665,964,709,943,760,910,810,889,831,865,849,820,867,771,873,722,871,679,865"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="576,921,650,949"/>
+<area shape="poly" id="edge11_Node000002_Node000010" title=" " alt="" coords="665,951,711,963,763,969,815,964,840,956,862,944,894,916,919,882,939,844,953,803,970,726,977,670,980,665,976,727,958,805,944,846,924,885,898,920,866,948,842,961,816,969,763,974,710,968,665,957"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="578,31,648,58"/>
+<area shape="poly" id="edge12_Node000002_Node000011" title=" " alt="" coords="662,33,710,28,765,30,819,43,844,55,866,72,881,90,895,114,919,177,938,254,953,339,972,506,981,623,976,621,967,506,947,340,932,256,913,179,890,116,877,93,862,76,841,60,817,48,764,35,711,33,665,37"/>
+<area shape="rect" id="Node000012" href="$classuint32__t.html" title=" " alt="" coords="209,207,283,234"/>
+<area shape="poly" id="edge13_Node000002_Node000012" title=" " alt="" coords="297,221,395,228,512,240,622,259,666,271,698,285,750,320,798,363,840,410,877,459,936,552,972,622,966,621,931,555,873,463,836,414,794,367,747,325,696,289,664,276,620,264,511,246,395,233,300,226"/>
+<area shape="rect" id="Node000013" href="$classaudio__tools_1_1_i_p_address.html" title="Arduino&#45;compatible IPAddress class implemented in pure C++." alt="" coords="571,84,655,112"/>
+<area shape="poly" id="edge16_Node000013_Node000012" title=" " alt="" coords="296,201,528,122,572,109,568,113,530,127,299,205"/>
+<area shape="poly" id="edge14_Node000002_Node000013" title=" " alt="" coords="670,96,782,106,832,117,852,124,866,133,892,171,914,226,933,295,948,370,970,517,980,623,975,621,964,518,943,371,928,296,909,228,887,173,862,137,849,129,831,122,781,111,672,101"/>
+<area shape="rect" id="Node000014" href="$classuint8__t.html" title=" " alt="" coords="213,84,279,112"/>
+<area shape="poly" id="edge15_Node000013_Node000014" title=" " alt="" coords="294,95,572,96,569,100,296,100"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="552,136,674,164"/>
+<area shape="poly" id="edge17_Node000002_Node000015" title=" " alt="" coords="688,156,734,166,781,182,827,205,866,237,901,284,929,336,949,391,964,447,979,549,982,623,977,621,974,549,959,448,944,393,924,338,897,287,862,241,824,210,779,187,733,171,690,161"/>
+<area shape="poly" id="edge18_Node000001_Node000016" title=" " alt="" coords="1014,1034,1231,884,1236,882,1016,1038"/>
+<area shape="rect" id="Node000017" title=" " alt="" coords="5,1073,66,1101"/>
+<area shape="poly" id="edge19_Node000016_Node000017" title=" " alt="" coords="79,1077,89,1075,338,1058,581,1052,789,1052,935,1057,929,1058,789,1057,581,1057,338,1063,90,1080,82,1081"/>
+<area shape="rect" id="Node000019" href="$classaudio__tools_1_1audio__tools_1_1_audio_timer_driver_base.html" title=" " alt="" coords="162,1101,330,1129"/>
+<area shape="poly" id="edge23_Node000019_Node000017" title=" " alt="" coords="80,1098,90,1100,163,1110,159,1113,89,1105,82,1103"/>
+<area shape="rect" id="Node000018" href="$classaudio__tools_1_1audio__tools_1_1_audio_timer_driver_a_v_r.html" title="Repeating Timer functions for repeated execution: Plaease use the typedef AudioTimer." alt="" coords="532,1096,694,1124"/>
+<area shape="poly" id="edge21_Node000016_Node000018" title=" " alt="" coords="709,1112,785,1110,863,1100,909,1087,947,1074,952,1073,911,1092,865,1105,785,1115,709,1117"/>
+<area shape="poly" id="edge26_Node000016_Node000019" title=" " alt="" coords="323,1130,401,1144,494,1156,596,1162,697,1157,782,1144,863,1118,913,1095,954,1074,959,1072,916,1100,865,1123,783,1150,697,1163,596,1167,494,1162,400,1149,323,1135"/>
+<area shape="poly" id="edge22_Node000018_Node000019" title=" " alt="" coords="345,1119,534,1118,529,1119,346,1124"/>
+<area shape="poly" id="edge24_Node000018_Node000019" title=" " alt="" coords="345,1103,534,1102,529,1104,346,1108"/>
+<area shape="rect" id="Node000020" title=" " alt="" coords="178,1204,314,1232"/>
+<area shape="poly" id="edge25_Node000018_Node000020" title=" " alt="" coords="314,1197,504,1141,566,1125,571,1123,506,1147,315,1202"/>
 </map>

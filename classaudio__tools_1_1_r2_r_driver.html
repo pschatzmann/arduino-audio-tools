@@ -102,20 +102,26 @@ Collaboration diagram for R2RDriver:</div>
 <div class="dyncontent">
 <div class="center"><img src="classaudio__tools_1_1_r2_r_driver__coll__graph.png" border="0" usemap="#a_r2_r_driver_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="a_r2_r_driver_coll__map" id="a_r2_r_driver_coll__map">
-<area shape="rect" title="R2R driver which uses the Arduino API to setup and write to the digital pins." alt="" coords="75,229,162,257"/>
-<area shape="rect" href="classaudio__tools_1_1_r2_r_driver_base.html" title="R2R driver base class." alt="" coords="5,106,125,134"/>
-<area shape="poly" title=" " alt="" coords="79,146,115,228,110,229,75,150"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="148,106,320,134"/>
-<area shape="poly" title=" " alt="" coords="214,145,133,230,129,226,209,145"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="195,5,274,33"/>
-<area shape="poly" title=" " alt="" coords="236,46,237,106,232,104,233,51"/>
+<area shape="rect" title="R2R driver which uses the Arduino API to setup and write to the digital pins." alt="" coords="43,251,130,279"/>
+<area shape="rect" href="classaudio__tools_1_1_r2_r_driver_base.html" title="R2R driver base class." alt="" coords="5,128,125,156"/>
+<area shape="poly" title=" " alt="" coords="72,170,87,251,81,251,68,173"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="148,128,320,156"/>
+<area shape="poly" title=" " alt="" coords="209,167,104,253,101,249,205,164"/>
+<area shape="rect" href="classint.html" title=" " alt="" coords="63,5,102,33"/>
+<area shape="poly" title=" " alt="" coords="86,46,97,77,114,102,132,116,154,127,149,129,129,120,110,106,92,79,85,51"/>
+<area shape="rect" title=" " alt="" coords="126,5,233,33"/>
+<area shape="poly" title=" " alt="" coords="185,46,195,75,206,103,224,128,219,128,201,106,190,77,184,51"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="257,5,337,33"/>
+<area shape="poly" title=" " alt="" coords="287,45,258,106,244,130,240,126,253,103,283,49"/>
+<area shape="rect" href="classbool.html" title=" " alt="" coords="371,5,420,33"/>
+<area shape="poly" title=" " alt="" coords="393,46,384,79,366,106,345,121,322,131,320,126,342,116,362,102,380,77,390,50"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a61e59c397898dc55e2065fcd7d3d4afa" id="r_a61e59c397898dc55e2065fcd7d3d4afa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a61e59c397898dc55e2065fcd7d3d4afa">setupPins</a> (<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> &gt; &amp;channel1_pins, <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="namespaceaudio__tools.html#a0955c1051f595f6f0428f8efb34a15cb">digital_pin_t</a> &gt; &amp;channel2_pins) override</td></tr>
-<tr class="memitem:aea42ca00ba2cc51337ca9eee721f3c1a" id="r_aea42ca00ba2cc51337ca9eee721f3c1a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aea42ca00ba2cc51337ca9eee721f3c1a">writePins</a> (int channels, int channel, unsigned uvalue) override</td></tr>
+<tr class="memitem:aea42ca00ba2cc51337ca9eee721f3c1a" id="r_aea42ca00ba2cc51337ca9eee721f3c1a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aea42ca00ba2cc51337ca9eee721f3c1a">writePins</a> (<a class="el" href="classint.html">int</a> channels, <a class="el" href="classint.html">int</a> channel, unsigned uvalue) override</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -173,12 +179,12 @@ Supported by Arduino, Zephyr and IDF! </dd></dl>
         <tr>
           <td class="memname">void writePins </td>
           <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>channels</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>channels</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>channel</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>channel</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>

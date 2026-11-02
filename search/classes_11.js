@@ -33,7 +33,7 @@ var searchData=
   ['ringbufferspsc_3c_20audio_5ftools_3a_3ageneratorqueue_3a_3aqnode_20_2a_20_3e_30',['RingBufferSPSC&lt; audio_tools::GeneratorQueue::QNode * &gt;',['../classaudio__tools_1_1audio__tools_1_1_ring_buffer_s_p_s_c.html',1,'audio_tools::audio_tools']]],
   ['ringbufferspsc_3c_20uint8_5ft_20_3e_31',['RingBufferSPSC&lt; uint8_t &gt;',['../classaudio__tools_1_1audio__tools_1_1_ring_buffer_s_p_s_c.html',1,'audio_tools::audio_tools']]],
   ['ringbufferstream_32',['RingBufferStream',['../classaudio__tools_1_1audio__tools_1_1_ring_buffer_stream.html',1,'RingBufferStream'],['../classaudio__tools_1_1_ring_buffer_stream.html',1,'RingBufferStream']]],
-  ['rtspclient_33',['RTSPClient',['../classaudio__tools_1_1_r_t_s_p_client.html',1,'audio_tools']]],
+  ['rtspclient_33',['RTSPClient',['../classaudio__tools_1_1_r_t_s_p_client.html',1,'RTSPClient&lt; TcpClient, UdpSocket &gt;'],['../class_r_t_s_p_client.html',1,'RTSPClient']]],
   ['rtspclient_3c_20ethernetclient_2c_20ethernetudp_20_3e_34',['RTSPClient&lt; EthernetClient, EthernetUDP &gt;',['../classaudio__tools_1_1_r_t_s_p_client.html',1,'audio_tools']]],
   ['rtspclient_3c_20wificlient_2c_20wifiudp_20_3e_35',['RTSPClient&lt; WiFiClient, WiFiUDP &gt;',['../classaudio__tools_1_1_r_t_s_p_client.html',1,'audio_tools']]],
   ['rtspformat_36',['RTSPFormat',['../classaudio__tools_1_1audio__tools_1_1_r_t_s_p_format.html',1,'RTSPFormat'],['../classaudio__tools_1_1_r_t_s_p_format.html',1,'RTSPFormat']]],

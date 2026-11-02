@@ -91,10 +91,10 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aeaa5b07a8ba061b0e4a98873ab41c54f" id="r_aeaa5b07a8ba061b0e4a98873ab41c54f"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:aeaa5b07a8ba061b0e4a98873ab41c54f template"><td class="memItemLeft" align="right" valign="top">std::enable_if&lt;!<a class="el" href="classaudio__tools_1_1quickstart__detail_1_1_has_quick_start.html">HasQuickStart</a>&lt; T &gt;::value, bool &gt;::type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeaa5b07a8ba061b0e4a98873ab41c54f">callQuickStartIfAvailable</a> (T &amp;)</td></tr>
-<tr class="memitem:af3b7d49f908e8647cc09acec19b2ceee" id="r_af3b7d49f908e8647cc09acec19b2ceee"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:af3b7d49f908e8647cc09acec19b2ceee template"><td class="memItemLeft" align="right" valign="top">std::enable_if&lt; <a class="el" href="classaudio__tools_1_1quickstart__detail_1_1_has_quick_start.html">HasQuickStart</a>&lt; T &gt;::value, bool &gt;::type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af3b7d49f908e8647cc09acec19b2ceee">callQuickStartIfAvailable</a> (T &amp;writer)</td></tr>
+<tr class="memitem:aeaa5b07a8ba061b0e4a98873ab41c54f" id="r_aeaa5b07a8ba061b0e4a98873ab41c54f"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </td></tr>
+<tr class="memitem:aeaa5b07a8ba061b0e4a98873ab41c54f template"><td class="memItemLeft" align="right" valign="top">std::enable_if&lt;!<a class="el" href="classaudio__tools_1_1quickstart__detail_1_1_has_quick_start.html">HasQuickStart</a>&lt; <a class="el" href="class_t.html">T</a> &gt;::value, <a class="el" href="classbool.html">bool</a> &gt;::type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeaa5b07a8ba061b0e4a98873ab41c54f">callQuickStartIfAvailable</a> (<a class="el" href="class_t.html">T</a> &amp;)</td></tr>
+<tr class="memitem:af3b7d49f908e8647cc09acec19b2ceee" id="r_af3b7d49f908e8647cc09acec19b2ceee"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </td></tr>
+<tr class="memitem:af3b7d49f908e8647cc09acec19b2ceee template"><td class="memItemLeft" align="right" valign="top">std::enable_if&lt; <a class="el" href="classaudio__tools_1_1quickstart__detail_1_1_has_quick_start.html">HasQuickStart</a>&lt; <a class="el" href="class_t.html">T</a> &gt;::value, <a class="el" href="classbool.html">bool</a> &gt;::type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af3b7d49f908e8647cc09acec19b2ceee">callQuickStartIfAvailable</a> (<a class="el" href="class_t.html">T</a> &amp;writer)</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>SFINAE helper for <a class="el" href="classaudio__tools_1_1_file_seekable_source.html" title="Adapts a single concrete file/stream (Arduino&#39;s File, or anything else exposing position(),...">FileSeekableSource</a>'s auto-quickStart: calls writer.quickStart() if that method exists, no-op otherwise - most WriterT types (e.g. an AVI/WAV decoder) don't have one. </p>
@@ -105,12 +105,12 @@ Functions</h2></td></tr>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">std::enable_if&lt;!<a class="el" href="classaudio__tools_1_1quickstart__detail_1_1_has_quick_start.html">HasQuickStart</a>&lt; T &gt;::value, bool &gt;::type callQuickStartIfAvailable </td>
+          <td class="memname">std::enable_if&lt;!<a class="el" href="classaudio__tools_1_1quickstart__detail_1_1_has_quick_start.html">HasQuickStart</a>&lt; <a class="el" href="class_t.html">T</a> &gt;::value, <a class="el" href="classbool.html">bool</a> &gt;::type callQuickStartIfAvailable </td>
           <td>(</td>
-          <td class="paramtype">T &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_t.html">T</a> &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -124,12 +124,12 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">std::enable_if&lt; <a class="el" href="classaudio__tools_1_1quickstart__detail_1_1_has_quick_start.html">HasQuickStart</a>&lt; T &gt;::value, bool &gt;::type callQuickStartIfAvailable </td>
+          <td class="memname">std::enable_if&lt; <a class="el" href="classaudio__tools_1_1quickstart__detail_1_1_has_quick_start.html">HasQuickStart</a>&lt; <a class="el" href="class_t.html">T</a> &gt;::value, <a class="el" href="classbool.html">bool</a> &gt;::type callQuickStartIfAvailable </td>
           <td>(</td>
-          <td class="paramtype">T &amp;</td>          <td class="paramname"><span class="paramname"><em>writer</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_t.html">T</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>writer</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>

@@ -1,12 +1,18 @@
 <map id="H264DecoderESP32S3&lt; Alloc &gt;" name="H264DecoderESP32S3&lt; Alloc &gt;">
-<area shape="rect" id="Node000001" title="H.264 video decoder for ESP32&#45;S3: wraps esp_h264::H264Decoder (https://github.com/pschatzmann/ESP32S3..." alt="" coords="232,183,398,228"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 &#45; CodecH264...." alt="" coords="151,82,263,110"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="232,118,296,182,291,182,230,123"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="" coords="5,5,108,33"/>
-<area shape="poly" id="edge5_Node000001_Node000003" title=" " alt="" coords="48,45,46,79,48,95,54,109,71,128,90,145,135,170,185,187,235,198,229,199,183,192,133,175,87,149,67,132,50,111,43,96,40,79,46,50"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="97,38,183,80,179,83,97,43"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_video_info_source.html" title="Provider of VideoInfo (width/height/fps/format) for whoever needs to size buffers/panel setup against..." alt="" coords="288,82,415,110"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="344,123,324,184,321,181,340,126"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="439,82,490,110"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="436,119,347,185,344,180,431,120"/>
+<area shape="rect" id="Node000001" title="H.264 video decoder for ESP32&#45;S3: wraps esp_h264::H264Decoder (https://github.com/pschatzmann/ESP32S3..." alt="" coords="559,143,724,187"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 &#45; CodecH264...." alt="" coords="277,69,389,96"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="404,96,536,129,573,142,568,142,534,134,404,101"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="" coords="5,25,108,52"/>
+<area shape="poly" id="edge8_Node000001_Node000003" title=" " alt="" coords="122,30,191,28,272,29,359,37,445,54,492,72,538,94,612,142,607,142,535,99,490,77,443,60,358,42,272,34,191,33,124,35"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="122,46,278,72,275,75,123,51"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_video_info_source.html" title="Provider of VideoInfo (width/height/fps/format) for whoever needs to size buffers/panel setup against..." alt="" coords="269,121,396,148"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="412,139,535,150,561,155,556,156,535,156,412,144"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="222,172,444,217"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="459,182,535,175,561,175,556,176,535,181,460,188"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="302,241,364,268"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="379,246,452,233,534,212,595,189,600,187,536,217,453,238,380,251"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="307,294,358,322"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="374,302,450,289,493,277,534,260,559,244,583,224,619,189,624,187,586,228,562,248,536,264,495,282,451,294,374,307"/>
+<area shape="rect" id="Node000008" href="$classint.html" title=" " alt="" coords="37,294,76,322"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="91,305,307,305,307,310,91,310"/>
 </map>

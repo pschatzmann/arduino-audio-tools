@@ -104,9 +104,21 @@ Collaboration diagram for Compressor:</div>
 <div class="dyncontent">
 <div class="center"><img src="classaudio__tools_1_1_compressor__coll__graph.png" border="0" usemap="#a_compressor_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="a_compressor_coll__map" id="a_compressor_coll__map">
-<area shape="rect" title="Compressor inspired by https://github.com/YetAnotherElectronicsChannel/STM32_DSP_COMPRESSOR/blob/mast..." alt="" coords="5,81,105,109"/>
-<area shape="rect" href="classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects." alt="" coords="7,5,103,33"/>
-<area shape="poly" title=" " alt="" coords="57,47,58,81,52,80,53,51"/>
+<area shape="rect" title="Compressor inspired by https://github.com/YetAnotherElectronicsChannel/STM32_DSP_COMPRESSOR/blob/mast..." alt="" coords="288,296,388,324"/>
+<area shape="rect" href="classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects." alt="" coords="37,106,132,134"/>
+<area shape="poly" title=" " alt="" coords="103,144,157,207,193,241,231,270,259,284,291,297,285,297,257,289,229,274,189,245,154,211,102,149"/>
+<area shape="rect" href="classbool.html" title=" " alt="" coords="5,5,55,33"/>
+<area shape="poly" title=" " alt="" coords="25,46,28,65,33,81,43,93,58,104,53,106,40,97,29,83,23,66,25,51"/>
+<area shape="rect" href="classint.html" title=" " alt="" coords="120,5,159,33"/>
+<area shape="poly" title=" " alt="" coords="126,50,112,83,97,107,92,104,108,81,129,45"/>
+<area shape="rect" title=" " alt="" coords="157,106,298,134"/>
+<area shape="poly" title=" " alt="" coords="234,147,254,208,269,240,288,270,316,296,311,295,284,274,264,243,249,209,232,151"/>
+<area shape="rect" href="classint32__t.html" title=" " alt="" coords="322,106,388,134"/>
+<area shape="poly" title=" " alt="" coords="344,146,342,158,336,197,335,235,339,297,334,294,330,235,331,196,336,157,340,150"/>
+<area shape="rect" href="classuint32__t.html" title=" " alt="" coords="430,106,504,134"/>
+<area shape="poly" title=" " alt="" coords="467,147,459,219,451,251,440,274,417,292,389,303,388,298,414,288,436,270,446,250,453,218,463,151"/>
+<area shape="rect" href="classfloat.html" title=" " alt="" coords="562,106,612,134"/>
+<area shape="poly" title=" " alt="" coords="592,147,594,179,590,212,580,245,560,274,531,289,486,299,389,309,388,304,485,294,529,284,556,270,575,243,585,211,588,178,589,152"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -114,28 +126,28 @@ Collaboration diagram for Compressor:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aab865fd787ef6b2149736a248d0857a3" id="r_aab865fd787ef6b2149736a248d0857a3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aab865fd787ef6b2149736a248d0857a3">Compressor</a> (const Compressor &amp;copy)=default</td></tr>
 <tr class="memdesc:aab865fd787ef6b2149736a248d0857a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy Constructor.  <br /></td></tr>
-<tr class="memitem:a99bcea167878342b636ed584a588e9a7" id="r_a99bcea167878342b636ed584a588e9a7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a99bcea167878342b636ed584a588e9a7">Compressor</a> (uint32_t sampleRate=44100, uint16_t attackMs=30, uint16_t releaseMs=20, uint16_t holdMs=10, uint8_t thresholdPercent=10, float compressionRatio=0.5)</td></tr>
+<tr class="memitem:a99bcea167878342b636ed584a588e9a7" id="r_a99bcea167878342b636ed584a588e9a7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a99bcea167878342b636ed584a588e9a7">Compressor</a> (<a class="el" href="classuint32__t.html">uint32_t</a> sampleRate=44100, uint16_t attackMs=30, uint16_t releaseMs=20, uint16_t holdMs=10, <a class="el" href="classuint8__t.html">uint8_t</a> thresholdPercent=10, <a class="el" href="classfloat.html">float</a> compressionRatio=0.5)</td></tr>
 <tr class="memdesc:a99bcea167878342b636ed584a588e9a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Constructor.  <br /></td></tr>
-<tr class="memitem:a3708b79a6e03c964327c2988b2a70668" id="r_a3708b79a6e03c964327c2988b2a70668"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect.html#a3708b79a6e03c964327c2988b2a70668">active</a> ()</td></tr>
+<tr class="memitem:a3708b79a6e03c964327c2988b2a70668" id="r_a3708b79a6e03c964327c2988b2a70668"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect.html#a3708b79a6e03c964327c2988b2a70668">active</a> ()</td></tr>
 <tr class="memdesc:a3708b79a6e03c964327c2988b2a70668"><td class="mdescLeft">&#160;</td><td class="mdescRight">determines if the effect is active  <br /></td></tr>
 <tr class="memitem:a3d9ce325fd05d576f2184feb22e36c17" id="r_a3d9ce325fd05d576f2184feb22e36c17"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#aab865fd787ef6b2149736a248d0857a3">Compressor</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3d9ce325fd05d576f2184feb22e36c17">clone</a> ()</td></tr>
-<tr class="memitem:a4a716406d3d9d4fdbbe46f100e648f3b" id="r_a4a716406d3d9d4fdbbe46f100e648f3b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect.html#a4a716406d3d9d4fdbbe46f100e648f3b">id</a> ()</td></tr>
+<tr class="memitem:a4a716406d3d9d4fdbbe46f100e648f3b" id="r_a4a716406d3d9d4fdbbe46f100e648f3b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect.html#a4a716406d3d9d4fdbbe46f100e648f3b">id</a> ()</td></tr>
 <tr class="memdesc:a4a716406d3d9d4fdbbe46f100e648f3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allows to identify an effect.  <br /></td></tr>
 <tr class="memitem:a3560bcb309efc4862dfbf1aae406b47d" id="r_a3560bcb309efc4862dfbf1aae406b47d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a22141edfb51175c26033a5ddd3a847d0">effect_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3560bcb309efc4862dfbf1aae406b47d">process</a> (<a class="el" href="namespaceaudio__tools.html#a22141edfb51175c26033a5ddd3a847d0">effect_t</a> input)</td></tr>
 <tr class="memdesc:a3560bcb309efc4862dfbf1aae406b47d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes the sample.  <br /></td></tr>
-<tr class="memitem:a392adf5d7d03b5339b77ec58bca5f9a9" id="r_a392adf5d7d03b5339b77ec58bca5f9a9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect.html#a392adf5d7d03b5339b77ec58bca5f9a9">setActive</a> (bool value)</td></tr>
+<tr class="memitem:a392adf5d7d03b5339b77ec58bca5f9a9" id="r_a392adf5d7d03b5339b77ec58bca5f9a9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect.html#a392adf5d7d03b5339b77ec58bca5f9a9">setActive</a> (<a class="el" href="classbool.html">bool</a> value)</td></tr>
 <tr class="memdesc:a392adf5d7d03b5339b77ec58bca5f9a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the effect active/inactive  <br /></td></tr>
 <tr class="memitem:a27061cfaaa7b2023482764b226337776" id="r_a27061cfaaa7b2023482764b226337776"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a27061cfaaa7b2023482764b226337776">setAttack</a> (uint16_t attackMs)</td></tr>
 <tr class="memdesc:a27061cfaaa7b2023482764b226337776"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the attack duration in ms.  <br /></td></tr>
-<tr class="memitem:ab1f6194d1a670310cb303458c44eedf0" id="r_ab1f6194d1a670310cb303458c44eedf0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab1f6194d1a670310cb303458c44eedf0">setCompressionRatio</a> (float compressionRatio)</td></tr>
+<tr class="memitem:ab1f6194d1a670310cb303458c44eedf0" id="r_ab1f6194d1a670310cb303458c44eedf0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab1f6194d1a670310cb303458c44eedf0">setCompressionRatio</a> (<a class="el" href="classfloat.html">float</a> compressionRatio)</td></tr>
 <tr class="memdesc:ab1f6194d1a670310cb303458c44eedf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the compression ratio from 0 to 1.  <br /></td></tr>
 <tr class="memitem:aa0c9c106f1b8084028e598fabb64518d" id="r_aa0c9c106f1b8084028e598fabb64518d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa0c9c106f1b8084028e598fabb64518d">setHold</a> (uint16_t holdMs)</td></tr>
 <tr class="memdesc:aa0c9c106f1b8084028e598fabb64518d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the hold duration in ms.  <br /></td></tr>
-<tr class="memitem:a3d929477fef71d52c9c6df2ba2d50841" id="r_a3d929477fef71d52c9c6df2ba2d50841"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect.html#a3d929477fef71d52c9c6df2ba2d50841">setId</a> (int <a class="el" href="classaudio__tools_1_1_audio_effect.html#a4a716406d3d9d4fdbbe46f100e648f3b">id</a>)</td></tr>
+<tr class="memitem:a3d929477fef71d52c9c6df2ba2d50841" id="r_a3d929477fef71d52c9c6df2ba2d50841"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect.html#a3d929477fef71d52c9c6df2ba2d50841">setId</a> (<a class="el" href="classint.html">int</a> <a class="el" href="classaudio__tools_1_1_audio_effect.html#a4a716406d3d9d4fdbbe46f100e648f3b">id</a>)</td></tr>
 <tr class="memdesc:a3d929477fef71d52c9c6df2ba2d50841"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allows to identify an effect.  <br /></td></tr>
 <tr class="memitem:a794a1c8a05779649b1061a7f9321e2af" id="r_a794a1c8a05779649b1061a7f9321e2af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a794a1c8a05779649b1061a7f9321e2af">setRelease</a> (uint16_t releaseMs)</td></tr>
 <tr class="memdesc:a794a1c8a05779649b1061a7f9321e2af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the release duration in ms.  <br /></td></tr>
-<tr class="memitem:aed07638c31d319b81b9532e787840077" id="r_aed07638c31d319b81b9532e787840077"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aed07638c31d319b81b9532e787840077">setThresholdPercent</a> (uint8_t thresholdPercent)</td></tr>
+<tr class="memitem:aed07638c31d319b81b9532e787840077" id="r_aed07638c31d319b81b9532e787840077"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aed07638c31d319b81b9532e787840077">setThresholdPercent</a> (<a class="el" href="classuint8__t.html">uint8_t</a> thresholdPercent)</td></tr>
 <tr class="memdesc:aed07638c31d319b81b9532e787840077"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the threshod in %.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-types" class="groupheader"><a id="pro-types" name="pro-types"></a>
@@ -148,7 +160,7 @@ Protected Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-methods" class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:af52bdd0b692ecf558d8bd97fac35bf6b" id="r_af52bdd0b692ecf558d8bd97fac35bf6b"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect.html#af52bdd0b692ecf558d8bd97fac35bf6b">clip</a> (int32_t in, int16_t clipLimit=32767, int16_t resultLimit=32767)</td></tr>
+<tr class="memitem:af52bdd0b692ecf558d8bd97fac35bf6b" id="r_af52bdd0b692ecf558d8bd97fac35bf6b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint16__t.html">int16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect.html#af52bdd0b692ecf558d8bd97fac35bf6b">clip</a> (<a class="el" href="classint32__t.html">int32_t</a> in, <a class="el" href="classint16__t.html">int16_t</a> clipLimit=32767, <a class="el" href="classint16__t.html">int16_t</a> resultLimit=32767)</td></tr>
 <tr class="memdesc:af52bdd0b692ecf558d8bd97fac35bf6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">generic clipping method  <br /></td></tr>
 <tr class="memitem:af7eaa3e3ed45a436a5d0bca928ac995f" id="r_af7eaa3e3ed45a436a5d0bca928ac995f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a22141edfb51175c26033a5ddd3a847d0">effect_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af7eaa3e3ed45a436a5d0bca928ac995f">compress</a> (<a class="el" href="namespaceaudio__tools.html#a22141edfb51175c26033a5ddd3a847d0">effect_t</a> inSample)</td></tr>
 <tr class="memitem:ab09618ef5ecbce364b46a4a0b44de2ef" id="r_ab09618ef5ecbce364b46a4a0b44de2ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect.html#ab09618ef5ecbce364b46a4a0b44de2ef">copyParent</a> (<a class="el" href="classaudio__tools_1_1_audio_effect.html#a88b672b087075e0ab5a7a9e17b61e99d">AudioEffect</a> *copy)</td></tr>
@@ -156,19 +168,19 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a7816e2085c1adaae2c69ed5f65f1d212" id="r_a7816e2085c1adaae2c69ed5f65f1d212"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect.html#a7816e2085c1adaae2c69ed5f65f1d212">active_flag</a> = true</td></tr>
-<tr class="memitem:aa63c5500102aae2af644f4ab973fcf95" id="r_aa63c5500102aae2af644f4ab973fcf95"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa63c5500102aae2af644f4ab973fcf95">attack_count</a></td></tr>
-<tr class="memitem:aca3852dab23cf0066809ecc1997fb58b" id="r_aca3852dab23cf0066809ecc1997fb58b"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aca3852dab23cf0066809ecc1997fb58b">gain</a></td></tr>
-<tr class="memitem:a5c283706867526fcc04b62a2a2ab6b85" id="r_a5c283706867526fcc04b62a2a2ab6b85"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5c283706867526fcc04b62a2a2ab6b85">gain_step_attack</a></td></tr>
-<tr class="memitem:a93a4c745f329a54dfdff579d55c66fcb" id="r_a93a4c745f329a54dfdff579d55c66fcb"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a93a4c745f329a54dfdff579d55c66fcb">gain_step_release</a></td></tr>
-<tr class="memitem:a2b56ecd9dcb36dd9bbdc08d466a625f4" id="r_a2b56ecd9dcb36dd9bbdc08d466a625f4"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2b56ecd9dcb36dd9bbdc08d466a625f4">gainreduce</a></td></tr>
-<tr class="memitem:a038d4ecdd0cff856b86d7bb5a701e2ed" id="r_a038d4ecdd0cff856b86d7bb5a701e2ed"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a038d4ecdd0cff856b86d7bb5a701e2ed">hold_count</a></td></tr>
-<tr class="memitem:a55d6269c0eac19475dd606fe07eb8a48" id="r_a55d6269c0eac19475dd606fe07eb8a48"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect.html#a55d6269c0eac19475dd606fe07eb8a48">id_value</a> = -1</td></tr>
-<tr class="memitem:afdc4e181ba91f172946baacd5f6423d1" id="r_afdc4e181ba91f172946baacd5f6423d1"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afdc4e181ba91f172946baacd5f6423d1">release_count</a></td></tr>
-<tr class="memitem:a2fba55d9442e7dba4623825cd737e520" id="r_a2fba55d9442e7dba4623825cd737e520"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2fba55d9442e7dba4623825cd737e520">sample_rate</a></td></tr>
+<tr class="memitem:a7816e2085c1adaae2c69ed5f65f1d212" id="r_a7816e2085c1adaae2c69ed5f65f1d212"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect.html#a7816e2085c1adaae2c69ed5f65f1d212">active_flag</a> = true</td></tr>
+<tr class="memitem:aa63c5500102aae2af644f4ab973fcf95" id="r_aa63c5500102aae2af644f4ab973fcf95"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint32__t.html">int32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa63c5500102aae2af644f4ab973fcf95">attack_count</a></td></tr>
+<tr class="memitem:aca3852dab23cf0066809ecc1997fb58b" id="r_aca3852dab23cf0066809ecc1997fb58b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aca3852dab23cf0066809ecc1997fb58b">gain</a></td></tr>
+<tr class="memitem:a5c283706867526fcc04b62a2a2ab6b85" id="r_a5c283706867526fcc04b62a2a2ab6b85"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5c283706867526fcc04b62a2a2ab6b85">gain_step_attack</a></td></tr>
+<tr class="memitem:a93a4c745f329a54dfdff579d55c66fcb" id="r_a93a4c745f329a54dfdff579d55c66fcb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a93a4c745f329a54dfdff579d55c66fcb">gain_step_release</a></td></tr>
+<tr class="memitem:a2b56ecd9dcb36dd9bbdc08d466a625f4" id="r_a2b56ecd9dcb36dd9bbdc08d466a625f4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2b56ecd9dcb36dd9bbdc08d466a625f4">gainreduce</a></td></tr>
+<tr class="memitem:a038d4ecdd0cff856b86d7bb5a701e2ed" id="r_a038d4ecdd0cff856b86d7bb5a701e2ed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint32__t.html">int32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a038d4ecdd0cff856b86d7bb5a701e2ed">hold_count</a></td></tr>
+<tr class="memitem:a55d6269c0eac19475dd606fe07eb8a48" id="r_a55d6269c0eac19475dd606fe07eb8a48"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect.html#a55d6269c0eac19475dd606fe07eb8a48">id_value</a> = -1</td></tr>
+<tr class="memitem:afdc4e181ba91f172946baacd5f6423d1" id="r_afdc4e181ba91f172946baacd5f6423d1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint32__t.html">int32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afdc4e181ba91f172946baacd5f6423d1">release_count</a></td></tr>
+<tr class="memitem:a2fba55d9442e7dba4623825cd737e520" id="r_a2fba55d9442e7dba4623825cd737e520"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2fba55d9442e7dba4623825cd737e520">sample_rate</a></td></tr>
 <tr class="memitem:a404649ad0f314e596093c68f4b9c5fa9" id="r_a404649ad0f314e596093c68f4b9c5fa9"><td class="memItemLeft" align="right" valign="top">enum <a class="el" href="#a40fae54087c28f0b289691c9f1f2749e">CompStates</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a404649ad0f314e596093c68f4b9c5fa9">state</a> = <a class="el" href="#a40fae54087c28f0b289691c9f1f2749ea9610700f171cf1c8c82e6eee38ea3b7d">S_NoOperation</a></td></tr>
-<tr class="memitem:ac6bb16831f8103061e123864d8a65b9b" id="r_ac6bb16831f8103061e123864d8a65b9b"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac6bb16831f8103061e123864d8a65b9b">threshold</a></td></tr>
-<tr class="memitem:a0bd2b0741bcd9a9e324e2af56c3c6fe4" id="r_a0bd2b0741bcd9a9e324e2af56c3c6fe4"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0bd2b0741bcd9a9e324e2af56c3c6fe4">timeout</a></td></tr>
+<tr class="memitem:ac6bb16831f8103061e123864d8a65b9b" id="r_ac6bb16831f8103061e123864d8a65b9b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint32__t.html">int32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac6bb16831f8103061e123864d8a65b9b">threshold</a></td></tr>
+<tr class="memitem:a0bd2b0741bcd9a9e324e2af56c3c6fe4" id="r_a0bd2b0741bcd9a9e324e2af56c3c6fe4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint32__t.html">int32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0bd2b0741bcd9a9e324e2af56c3c6fe4">timeout</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classaudio__tools_1_1_compressor.html" title="Compressor inspired by https://github.com/YetAnotherElectronicsChannel/STM32_DSP_COMPRESSOR/blob/mast...">Compressor</a> inspired by <a href="https://github.com/YetAnotherElectronicsChannel/STM32_DSP_COMPRESSOR/blob/master/code/Src/main.c">https://github.com/YetAnotherElectronicsChannel/STM32_DSP_COMPRESSOR/blob/master/code/Src/main.c</a>. </p>
@@ -243,7 +255,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">Compressor </td>
           <td>(</td>
-          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>sampleRate</em></span><span class="paramdefsep"> = </span><span class="paramdefval">44100</span>, </td>
+          <td class="paramtype"><a class="el" href="classuint32__t.html">uint32_t</a></td>          <td class="paramname"><span class="paramname"><em>sampleRate</em></span><span class="paramdefsep"> = </span><span class="paramdefval">44100</span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -263,12 +275,12 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>thresholdPercent</em></span><span class="paramdefsep"> = </span><span class="paramdefval">10</span>, </td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a></td>          <td class="paramname"><span class="paramname"><em>thresholdPercent</em></span><span class="paramdefsep"> = </span><span class="paramdefval">10</span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>compressionRatio</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0.5</span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classfloat.html">float</a></td>          <td class="paramname"><span class="paramname"><em>compressionRatio</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0.5</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -293,7 +305,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool active </td>
+          <td class="memname">virtual <a class="el" href="classbool.html">bool</a> active </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -320,19 +332,19 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int16_t clip </td>
+          <td class="memname"><a class="el" href="classint16__t.html">int16_t</a> clip </td>
           <td>(</td>
-          <td class="paramtype">int32_t</td>          <td class="paramname"><span class="paramname"><em>in</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classint32__t.html">int32_t</a></td>          <td class="paramname"><span class="paramname"><em>in</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int16_t</td>          <td class="paramname"><span class="paramname"><em>clipLimit</em></span><span class="paramdefsep"> = </span><span class="paramdefval">32767</span>, </td>
+          <td class="paramtype"><a class="el" href="classint16__t.html">int16_t</a></td>          <td class="paramname"><span class="paramname"><em>clipLimit</em></span><span class="paramdefsep"> = </span><span class="paramdefval">32767</span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int16_t</td>          <td class="paramname"><span class="paramname"><em>resultLimit</em></span><span class="paramdefsep"> = </span><span class="paramdefval">32767</span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classint16__t.html">int16_t</a></td>          <td class="paramname"><span class="paramname"><em>resultLimit</em></span><span class="paramdefsep"> = </span><span class="paramdefval">32767</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -433,7 +445,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int id </td>
+          <td class="memname"><a class="el" href="classint.html">int</a> id </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -516,7 +528,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">virtual void setActive </td>
           <td>(</td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classbool.html">bool</a></td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -570,7 +582,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void setCompressionRatio </td>
           <td>(</td>
-          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>compressionRatio</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classfloat.html">float</a></td>          <td class="paramname"><span class="paramname"><em>compressionRatio</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -624,7 +636,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void setId </td>
           <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -678,7 +690,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void setThresholdPercent </td>
           <td>(</td>
-          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>thresholdPercent</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a></td>          <td class="paramname"><span class="paramname"><em>thresholdPercent</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -704,7 +716,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool active_flag = true</td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> active_flag = true</td>
         </tr>
       </table>
   </td>
@@ -726,7 +738,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int32_t attack_count</td>
+          <td class="memname"><a class="el" href="classint32__t.html">int32_t</a> attack_count</td>
         </tr>
       </table>
   </td>
@@ -748,7 +760,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">float gain</td>
+          <td class="memname"><a class="el" href="classfloat.html">float</a> gain</td>
         </tr>
       </table>
   </td>
@@ -770,7 +782,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">float gain_step_attack</td>
+          <td class="memname"><a class="el" href="classfloat.html">float</a> gain_step_attack</td>
         </tr>
       </table>
   </td>
@@ -792,7 +804,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">float gain_step_release</td>
+          <td class="memname"><a class="el" href="classfloat.html">float</a> gain_step_release</td>
         </tr>
       </table>
   </td>
@@ -814,7 +826,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">float gainreduce</td>
+          <td class="memname"><a class="el" href="classfloat.html">float</a> gainreduce</td>
         </tr>
       </table>
   </td>
@@ -836,7 +848,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int32_t hold_count</td>
+          <td class="memname"><a class="el" href="classint32__t.html">int32_t</a> hold_count</td>
         </tr>
       </table>
   </td>
@@ -858,7 +870,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int id_value = -1</td>
+          <td class="memname"><a class="el" href="classint.html">int</a> id_value = -1</td>
         </tr>
       </table>
   </td>
@@ -880,7 +892,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int32_t release_count</td>
+          <td class="memname"><a class="el" href="classint32__t.html">int32_t</a> release_count</td>
         </tr>
       </table>
   </td>
@@ -902,7 +914,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t sample_rate</td>
+          <td class="memname"><a class="el" href="classuint32__t.html">uint32_t</a> sample_rate</td>
         </tr>
       </table>
   </td>
@@ -946,7 +958,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int32_t threshold</td>
+          <td class="memname"><a class="el" href="classint32__t.html">int32_t</a> threshold</td>
         </tr>
       </table>
   </td>
@@ -968,7 +980,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int32_t timeout</td>
+          <td class="memname"><a class="el" href="classint32__t.html">int32_t</a> timeout</td>
         </tr>
       </table>
   </td>

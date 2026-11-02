@@ -85,7 +85,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> support for A2DP using <a href="https://github.com/pschatzmann/ESP32-A2DP:">https://github.com/pschatzmann/ESP32-A2DP:</a> begin(TX_MODE) opens a a2dp_source and begin(RX_MODE) a a2dp_sink. The data is in int16_t with 2 channels at 44100 hertz. We support only one instance of the class! Please note that this is a conveniance class that supports the stream api, however this is rather inefficient, beause quite a big buffer needs to be allocated. It is recommended to use the API with the callbacks. Examples can be found in the a2dp examples directory starting with basic.  
+<p><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> support for A2DP using <a href="https://github.com/pschatzmann/ESP32-A2DP:">https://github.com/pschatzmann/ESP32-A2DP:</a> begin(TX_MODE) opens a a2dp_source and begin(RX_MODE) a a2dp_sink. The data is in <a class="el" href="classint16__t.html">int16_t</a> with 2 channels at 44100 hertz. We support only one instance of the class! Please note that this is a conveniance class that supports the stream api, however this is rather inefficient, beause quite a big buffer needs to be allocated. It is recommended to use the API with the callbacks. Examples can be found in the a2dp examples directory starting with basic.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_a2_d_p_stream_8h_source.html">A2DPStream.h</a>&gt;</code></p>
@@ -121,44 +121,81 @@ Collaboration diagram for A2DPStream:</div>
 <div class="dyncontent">
 <div class="center"><img src="classaudio__tools_1_1_a2_d_p_stream__coll__graph.png" border="0" usemap="#a_a2_d_p_stream_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="a_a2_d_p_stream_coll__map" id="a_a2_d_p_stream_coll__map">
-<area shape="rect" title="Stream support for A2DP using https://github.com/pschatzmann/ESP32&#45;A2DP: begin(TX_MODE) opens a a2dp_..." alt="" coords="1320,331,1423,358"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="" coords="1112,279,1218,306"/>
-<area shape="poly" title=" " alt="" coords="1233,307,1322,332,1317,331,1232,312"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="" coords="910,116,1010,144"/>
-<area shape="poly" title=" " alt="" coords="985,152,1062,216,1140,279,1135,278,1059,221,984,157"/>
-<area shape="poly" title=" " alt="" coords="1000,151,1083,216,1154,279,1149,278,1080,220,998,156"/>
-<area shape="rect" href="classaudio__tools_1_1_stream.html" title=" " alt="" coords="596,13,664,41"/>
-<area shape="poly" title=" " alt="" coords="680,38,771,56,823,69,873,86,926,115,921,115,871,91,822,74,770,61,680,44"/>
-<area shape="poly" title=" " alt="" coords="680,20,771,33,823,45,873,62,918,86,952,116,947,115,915,91,871,67,822,50,770,38,680,26"/>
-<area shape="rect" href="classaudio__tools_1_1_print.html" title=" " alt="" coords="271,5,322,33"/>
-<area shape="poly" title=" " alt="" coords="337,24,468,30,598,31,593,33,468,35,338,29"/>
-<area shape="poly" title=" " alt="" coords="337,11,469,12,598,20,593,22,468,17,339,17"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_ring_buffer.html" title=" " alt="" coords="548,116,712,144"/>
-<area shape="poly" title=" " alt="" coords="728,127,912,129,907,131,728,132"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="213,57,380,85"/>
-<area shape="poly" title=" " alt="" coords="357,86,550,122,545,125,358,92"/>
-<area shape="poly" title=" " alt="" coords="395,78,586,114,581,117,396,83"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="5,181,85,209"/>
-<area shape="poly" title=" " alt="" coords="81,172,108,162,226,138,346,126,456,122,550,125,545,127,456,127,346,131,227,144,109,167,85,176"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="228,181,365,209"/>
-<area shape="poly" title=" " alt="" coords="100,193,229,193,226,197,101,198"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="505,265,755,310"/>
-<area shape="poly" title=" " alt="" coords="98,211,154,228,213,243,364,266,507,280,502,282,363,271,212,248,153,233,99,217"/>
-<area shape="poly" title=" " alt="" coords="380,188,480,175,539,159,594,143,589,145,541,165,482,180,381,194"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="230,345,363,373"/>
-<area shape="poly" title=" " alt="" coords="379,363,503,362,664,356,843,345,1023,327,1085,317,1135,307,1140,307,1086,323,1024,332,844,350,664,361,504,367,379,368"/>
-<area shape="poly" title=" " alt="" coords="379,348,664,333,843,321,1023,303,1109,293,1115,292,1024,308,844,326,664,338,379,353"/>
-<area shape="poly" title=" " alt="" coords="368,338,403,330,512,309,507,311,405,335,369,344"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="896,279,1024,306"/>
-<area shape="poly" title=" " alt="" coords="1039,299,1114,300,1109,301,1040,304"/>
-<area shape="poly" title=" " alt="" coords="1039,281,1114,284,1109,285,1040,286"/>
-<area shape="poly" title=" " alt="" coords="771,287,899,291,893,292,771,292"/>
-<area shape="rect" href="structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="918,408,1002,436"/>
-<area shape="poly" title=" " alt="" coords="1017,429,1050,426,1065,421,1079,413,1088,403,1092,392,1092,369,1091,344,1094,331,1103,317,1117,308,1122,306,1107,321,1099,333,1096,345,1097,369,1097,393,1093,405,1082,417,1068,426,1051,432,1017,435"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_volume_support.html" title="Supports the setting and getting of the volume." alt="" coords="1105,331,1225,358"/>
-<area shape="poly" title=" " alt="" coords="1240,342,1322,344,1317,345,1240,347"/>
-<area shape="rect" href="classaudio__tools_1_1_a2_d_p_config.html" title="Configuration for A2DPStream." alt="" coords="1116,383,1214,410"/>
-<area shape="poly" title=" " alt="" coords="1228,386,1295,372,1337,359,1342,358,1297,377,1229,392"/>
+<area shape="rect" title="Stream support for A2DP using https://github.com/pschatzmann/ESP32&#45;A2DP: begin(TX_MODE) opens a a2dp_..." alt="" coords="1670,953,1774,981"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="" coords="1385,423,1490,450"/>
+<area shape="poly" title=" " alt="" coords="1455,462,1716,953,1710,952,1452,466"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="" coords="1095,545,1195,573"/>
+<area shape="poly" title=" " alt="" coords="1208,538,1319,492,1417,450,1412,452,1321,497,1211,542"/>
+<area shape="poly" title=" " alt="" coords="1180,536,1280,491,1388,450,1383,452,1282,496,1183,540"/>
+<area shape="rect" href="classaudio__tools_1_1_stream.html" title=" " alt="" coords="803,620,871,648"/>
+<area shape="poly" title=" " alt="" coords="886,638,973,630,1022,620,1070,607,1105,591,1132,575,1136,572,1108,596,1072,612,1023,626,974,635,888,643"/>
+<area shape="poly" title=" " alt="" coords="886,619,973,606,1022,597,1070,583,1102,572,1097,575,1072,588,1023,602,974,612,888,624"/>
+<area shape="rect" href="classaudio__tools_1_1_print.html" title=" " alt="" coords="437,789,488,817"/>
+<area shape="poly" title=" " alt="" coords="503,816,555,824,615,824,646,819,676,811,704,798,729,780,739,768,743,755,742,729,740,700,743,685,753,671,776,655,805,647,800,649,778,659,757,674,748,687,745,701,747,728,748,756,744,770,733,784,707,803,678,816,647,825,616,829,554,829,504,821"/>
+<area shape="poly" title=" " alt="" coords="504,801,555,803,616,801,647,796,677,787,704,774,729,756,739,744,743,731,742,705,740,676,743,661,753,647,776,631,805,625,800,628,778,636,757,650,748,663,745,677,747,704,748,732,744,746,733,760,707,779,678,792,648,801,616,806,555,809,505,806"/>
+<area shape="rect" href="classint.html" title=" " alt="" coords="53,744,91,772"/>
+<area shape="poly" title=" " alt="" coords="99,780,130,801,164,818,237,841,301,855,358,861,412,863,525,857,670,851,1439,851,1479,854,1519,862,1593,889,1657,922,1703,953,1698,952,1654,927,1591,894,1517,868,1478,859,1439,856,670,856,526,862,412,868,357,867,300,860,236,846,162,823,127,806,101,785"/>
+<area shape="poly" title=" " alt="" coords="106,753,314,737,380,734,439,737,541,743,587,741,633,729,680,706,729,668,738,653,740,638,742,622,753,606,780,592,816,581,909,567,1009,559,1097,559,1092,560,1010,565,910,572,817,587,782,597,757,611,747,624,745,639,743,655,733,671,682,711,635,734,588,746,541,749,438,742,380,739,314,742,108,758"/>
+<area shape="poly" title=" " alt="" coords="103,775,133,789,163,799,240,810,317,813,386,809,439,806,434,808,386,815,317,818,240,816,162,804,131,794,105,780"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_ring_buffer.html" title=" " alt="" coords="755,519,919,546"/>
+<area shape="poly" title=" " alt="" coords="105,750,349,704,487,674,587,647,635,627,671,607,707,586,754,562,800,546,795,548,756,567,709,591,674,612,638,632,589,652,489,680,350,709,107,755"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="394,463,532,490"/>
+<area shape="poly" title=" " alt="" coords="103,736,162,707,185,701,207,699,245,701,279,699,295,691,312,677,325,656,330,636,328,615,323,594,319,572,317,550,322,528,336,505,362,486,396,477,392,481,364,491,340,509,326,530,322,550,324,571,329,593,333,614,335,636,330,658,316,680,298,695,280,704,245,707,207,705,186,706,164,712,107,740"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="338,228,588,272"/>
+<area shape="poly" title=" " alt="" coords="83,729,114,678,136,651,161,629,183,617,204,612,243,612,279,609,295,601,311,586,322,562,327,527,323,440,320,352,324,316,336,290,360,270,357,275,340,293,329,317,325,352,329,440,332,527,328,563,316,589,298,606,280,614,243,617,204,618,185,622,164,633,139,655,118,681,88,731"/>
+<area shape="rect" href="classaudio__tools_1_1_a2_d_p_config.html" title="Configuration for A2DPStream." alt="" coords="414,983,512,1010"/>
+<area shape="poly" title=" " alt="" coords="79,784,92,822,108,863,132,904,164,937,259,957,416,987,411,989,258,962,161,942,128,907,103,865,87,823,79,789"/>
+<area shape="poly" title=" " alt="" coords="934,538,1097,554,1092,556,935,544"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="379,519,546,546"/>
+<area shape="poly" title=" " alt="" coords="562,538,757,539,752,541,563,543"/>
+<area shape="poly" title=" " alt="" coords="562,522,757,524,752,526,563,527"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="32,152,112,180"/>
+<area shape="poly" title=" " alt="" coords="125,147,162,139,238,133,314,139,380,143,438,144,540,144,587,149,633,163,681,189,733,228,763,261,787,300,806,342,819,385,834,463,838,519,833,517,828,464,814,386,801,344,783,303,759,265,729,232,679,193,631,168,586,155,540,149,438,149,380,149,313,144,238,139,163,144,128,151"/>
+<area shape="poly" title=" " alt="" coords="101,187,131,207,164,223,186,229,206,231,243,228,279,228,297,235,315,249,326,261,331,274,333,298,332,323,340,350,363,384,391,415,444,462,439,463,388,419,359,387,335,352,327,323,327,298,326,275,321,264,312,253,294,240,277,234,243,233,206,236,185,235,162,228,129,211,103,192"/>
+<area shape="poly" title=" " alt="" coords="126,167,216,175,314,193,364,207,411,226,406,228,362,212,313,198,215,180,129,171"/>
+<area shape="poly" title=" " alt="" coords="546,480,636,489,731,503,788,517,782,519,731,508,636,494,548,485"/>
+<area shape="rect" href="classuint8__t_01_5.html" title=" " alt="" coords="33,509,111,537"/>
+<area shape="poly" title=" " alt="" coords="125,528,215,532,265,528,313,519,324,513,337,505,395,488,392,491,339,510,327,517,315,524,265,534,215,537,128,533"/>
+<area shape="rect" href="classbool.html" title=" " alt="" coords="47,331,97,358"/>
+<area shape="poly" title=" " alt="" coords="110,352,163,363,240,375,273,381,315,394,385,427,442,461,437,463,383,431,313,399,272,386,239,380,162,368,113,356"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="943,317,1071,345"/>
+<area shape="poly" title=" " alt="" coords="111,340,163,338,609,330,945,330,941,333,609,335,163,343,114,345"/>
+<area shape="poly" title=" " alt="" coords="109,325,162,305,339,270,336,274,163,310,113,329"/>
+<area shape="poly" title=" " alt="" coords="85,370,117,423,139,448,164,469,185,478,204,481,242,476,279,474,298,480,316,495,330,523,337,561,337,657,333,755,334,796,340,828,363,875,393,918,449,982,444,982,389,921,359,877,335,829,329,797,327,755,332,657,332,562,325,524,312,498,295,485,278,479,243,481,204,486,183,483,161,474,135,452,113,426,85,375"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="5,5,139,33"/>
+<area shape="poly" title=" " alt="" coords="153,26,462,29,1146,29,1182,32,1216,43,1246,59,1274,80,1299,105,1322,134,1360,198,1390,265,1412,329,1436,423,1431,421,1407,331,1385,267,1355,201,1317,137,1295,109,1270,84,1243,63,1213,47,1181,37,1146,34,461,34,156,31"/>
+<area shape="poly" title=" " alt="" coords="153,8,461,5,1146,5,1183,8,1218,19,1249,37,1277,59,1303,87,1326,117,1365,185,1394,257,1415,325,1437,423,1432,421,1410,326,1389,259,1360,188,1322,120,1299,90,1274,63,1246,41,1216,24,1182,14,1146,10,462,10,156,12"/>
+<area shape="poly" title=" " alt="" coords="106,39,164,72,206,92,240,105,273,118,315,140,381,183,436,226,431,228,378,187,312,144,271,123,238,110,204,97,161,77,108,44"/>
+<area shape="poly" title=" " alt="" coords="1059,347,1222,390,1387,429,1382,430,1221,395,1060,353"/>
+<area shape="poly" title=" " alt="" coords="1086,341,1252,379,1402,422,1397,423,1251,385,1086,346"/>
+<area shape="poly" title=" " alt="" coords="602,256,756,273,920,301,969,316,964,317,919,306,756,278,604,262"/>
+<area shape="rect" href="structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="1103,709,1186,737"/>
+<area shape="poly" title=" " alt="" coords="1170,697,1317,554,1420,452,1425,449,1321,558,1173,701"/>
+<area shape="rect" href="classuint32__t.html" title=" " alt="" coords="800,728,874,756"/>
+<area shape="poly" title=" " alt="" coords="889,742,975,743,1070,738,1105,734,1100,735,1071,743,975,749,890,747"/>
+<area shape="rect" title=" " alt="" coords="800,784,874,812"/>
+<area shape="poly" title=" " alt="" coords="889,798,976,795,1024,787,1070,774,1102,756,1126,739,1131,736,1104,761,1072,779,1025,792,976,800,890,803"/>
+<area shape="rect" href="classuint8__t.html" title=" " alt="" coords="804,672,870,700"/>
+<area shape="poly" title=" " alt="" coords="885,689,1105,717,1100,719,886,694"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_volume_support.html" title="Supports the setting and getting of the volume." alt="" coords="1378,896,1498,924"/>
+<area shape="poly" title=" " alt="" coords="1513,920,1647,946,1673,954,1667,954,1646,951,1513,925"/>
+<area shape="rect" href="classfloat.html" title=" " alt="" coords="1120,891,1170,918"/>
+<area shape="poly" title=" " alt="" coords="1185,903,1380,908,1374,909,1186,908"/>
+<area shape="poly" title=" " alt="" coords="526,986,668,972,836,965,1439,964,1672,967,1667,967,1439,970,836,970,668,977,527,991"/>
+<area shape="rect" title=" " alt="" coords="11,983,133,1010"/>
+<area shape="poly" title=" " alt="" coords="148,994,415,994,413,999,149,999"/>
+<area shape="rect" title=" " alt="" coords="19,1039,125,1066"/>
+<area shape="poly" title=" " alt="" coords="139,1045,313,1024,416,1007,411,1008,314,1029,141,1050"/>
+<area shape="rect" title=" " alt="" coords="27,1095,117,1122"/>
+<area shape="poly" title=" " alt="" coords="132,1103,219,1094,267,1085,313,1072,383,1041,438,1012,442,1010,386,1046,315,1077,268,1090,220,1099,134,1109"/>
+<area shape="rect" title=" " alt="" coords="47,1151,97,1178"/>
+<area shape="poly" title=" " alt="" coords="112,1164,155,1164,207,1159,261,1149,313,1131,357,1104,396,1070,449,1012,454,1009,399,1074,360,1108,315,1136,262,1154,207,1165,156,1169,112,1169"/>
+<area shape="rect" title=" " alt="" coords="1350,1004,1525,1032"/>
+<area shape="poly" title=" " alt="" coords="1540,1022,1593,1018,1646,1008,1675,995,1700,982,1705,981,1678,1000,1647,1013,1594,1024,1540,1027"/>
+<area shape="rect" title=" " alt="" coords="1358,1056,1517,1084"/>
+<area shape="poly" title=" " alt="" coords="1532,1076,1590,1070,1618,1063,1645,1052,1667,1037,1686,1018,1711,983,1716,980,1690,1021,1670,1041,1648,1057,1620,1068,1591,1076,1532,1081"/>
+<area shape="rect" title=" " alt="" coords="1343,1112,1532,1140"/>
+<area shape="poly" title=" " alt="" coords="1547,1133,1598,1125,1622,1117,1645,1105,1673,1077,1694,1043,1708,1008,1716,983,1720,980,1713,1010,1699,1045,1678,1080,1648,1109,1625,1122,1600,1130,1548,1138"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -177,16 +214,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:aececda97cff151859a8695d30896dd20"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the actual input <a class="el" href="structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>  <br /></td></tr>
 <tr class="memitem:a1c77cb3dbe910c765ea439d103bdcbb9" id="r_a1c77cb3dbe910c765ea439d103bdcbb9"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_info_support.html#a1c77cb3dbe910c765ea439d103bdcbb9">audioInfoOut</a> ()</td></tr>
 <tr class="memitem:a1c77cb3dbe910c765ea439d103bdcbb9" id="r_a1c77cb3dbe910c765ea439d103bdcbb9"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_info_support.html#a1c77cb3dbe910c765ea439d103bdcbb9">audioInfoOut</a> ()</td></tr>
-<tr class="memitem:a692e2b18b3c2452e38e3f558ad87e9a5" id="r_a692e2b18b3c2452e38e3f558ad87e9a5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a692e2b18b3c2452e38e3f558ad87e9a5">available</a> () override</td></tr>
+<tr class="memitem:a692e2b18b3c2452e38e3f558ad87e9a5" id="r_a692e2b18b3c2452e38e3f558ad87e9a5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a692e2b18b3c2452e38e3f558ad87e9a5">available</a> () override</td></tr>
 <tr class="memdesc:a692e2b18b3c2452e38e3f558ad87e9a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the number of bytes available to read.  <br /></td></tr>
-<tr class="memitem:a87b51853b7bf1bc90d9efa9f3b8d4fea" id="r_a87b51853b7bf1bc90d9efa9f3b8d4fea"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a87b51853b7bf1bc90d9efa9f3b8d4fea">availableForWrite</a> () override</td></tr>
+<tr class="memitem:a87b51853b7bf1bc90d9efa9f3b8d4fea" id="r_a87b51853b7bf1bc90d9efa9f3b8d4fea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a87b51853b7bf1bc90d9efa9f3b8d4fea">availableForWrite</a> () override</td></tr>
 <tr class="memdesc:a87b51853b7bf1bc90d9efa9f3b8d4fea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the number of bytes available to write.  <br /></td></tr>
-<tr class="memitem:aee349d45a33f77500a1d59928339d8f2" id="r_aee349d45a33f77500a1d59928339d8f2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aee349d45a33f77500a1d59928339d8f2">begin</a> (<a class="el" href="classaudio__tools_1_1_a2_d_p_config.html">A2DPConfig</a> cfg)</td></tr>
+<tr class="memitem:aee349d45a33f77500a1d59928339d8f2" id="r_aee349d45a33f77500a1d59928339d8f2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aee349d45a33f77500a1d59928339d8f2">begin</a> (<a class="el" href="classaudio__tools_1_1_a2_d_p_config.html">A2DPConfig</a> cfg)</td></tr>
 <tr class="memdesc:aee349d45a33f77500a1d59928339d8f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the processing.  <br /></td></tr>
-<tr class="memitem:ad4e75ebe41d5ba4fafc5f5014ec54f06" id="r_ad4e75ebe41d5ba4fafc5f5014ec54f06"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad4e75ebe41d5ba4fafc5f5014ec54f06">begin</a> (<a class="el" href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">RxTxMode</a> mode, const char *name, bool wait_for_connection=true)</td></tr>
+<tr class="memitem:ad4e75ebe41d5ba4fafc5f5014ec54f06" id="r_ad4e75ebe41d5ba4fafc5f5014ec54f06"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad4e75ebe41d5ba4fafc5f5014ec54f06">begin</a> (<a class="el" href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">RxTxMode</a> mode, const char *name, <a class="el" href="classbool.html">bool</a> wait_for_connection=true)</td></tr>
 <tr class="memdesc:ad4e75ebe41d5ba4fafc5f5014ec54f06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the processing.  <br /></td></tr>
-<tr class="memitem:a50f45551c10ca30a0bc7f447e70188b1" id="r_a50f45551c10ca30a0bc7f447e70188b1"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#a50f45551c10ca30a0bc7f447e70188b1">begin</a> ()</td></tr>
-<tr class="memitem:a8a039781ce83e675e23339af75f12b60" id="r_a8a039781ce83e675e23339af75f12b60"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; uint8_t &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8a039781ce83e675e23339af75f12b60">buffer</a> ()</td></tr>
+<tr class="memitem:a50f45551c10ca30a0bc7f447e70188b1" id="r_a50f45551c10ca30a0bc7f447e70188b1"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#a50f45551c10ca30a0bc7f447e70188b1">begin</a> ()</td></tr>
+<tr class="memitem:a8a039781ce83e675e23339af75f12b60" id="r_a8a039781ce83e675e23339af75f12b60"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; <a class="el" href="classuint8__t.html">uint8_t</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8a039781ce83e675e23339af75f12b60">buffer</a> ()</td></tr>
 <tr class="memdesc:a8a039781ce83e675e23339af75f12b60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides access to the buffer.  <br /></td></tr>
 <tr class="memitem:ac8bb3912a3ce86b15842e79d0b421204" id="r_ac8bb3912a3ce86b15842e79d0b421204"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac8bb3912a3ce86b15842e79d0b421204">clear</a> ()</td></tr>
 <tr class="memdesc:ac8bb3912a3ce86b15842e79d0b421204"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the buffer.  <br /></td></tr>
@@ -198,61 +235,61 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a64e9fa75beda50a9e8400ee0d4e61984" id="r_a64e9fa75beda50a9e8400ee0d4e61984"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a64e9fa75beda50a9e8400ee0d4e61984">end</a> () override</td></tr>
 <tr class="memitem:af654b48544c195ab99fe27e7bc3ed5fe" id="r_af654b48544c195ab99fe27e7bc3ed5fe"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">flush</a> () override</td></tr>
 <tr class="memitem:af654b48544c195ab99fe27e7bc3ed5fe" id="r_af654b48544c195ab99fe27e7bc3ed5fe"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">flush</a> () override</td></tr>
-<tr class="memitem:a772f8f0487e0d3804e9da7585e23a29a" id="r_a772f8f0487e0d3804e9da7585e23a29a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a772f8f0487e0d3804e9da7585e23a29a">isConnected</a> ()</td></tr>
+<tr class="memitem:a772f8f0487e0d3804e9da7585e23a29a" id="r_a772f8f0487e0d3804e9da7585e23a29a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a772f8f0487e0d3804e9da7585e23a29a">isConnected</a> ()</td></tr>
 <tr class="memdesc:a772f8f0487e0d3804e9da7585e23a29a"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if we are connected  <br /></td></tr>
-<tr class="memitem:a475bc9908ea8a1d67e5cc1c1f67a71b2" id="r_a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_info_source.html#a475bc9908ea8a1d67e5cc1c1f67a71b2">isNotifyActive</a> ()</td></tr>
+<tr class="memitem:a475bc9908ea8a1d67e5cc1c1f67a71b2" id="r_a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_info_source.html#a475bc9908ea8a1d67e5cc1c1f67a71b2">isNotifyActive</a> ()</td></tr>
 <tr class="memdesc:a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the automatic <a class="el" href="structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> update is active.  <br /></td></tr>
-<tr class="memitem:a475bc9908ea8a1d67e5cc1c1f67a71b2" id="r_a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_info_source.html#a475bc9908ea8a1d67e5cc1c1f67a71b2">isNotifyActive</a> ()</td></tr>
+<tr class="memitem:a475bc9908ea8a1d67e5cc1c1f67a71b2" id="r_a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_info_source.html#a475bc9908ea8a1d67e5cc1c1f67a71b2">isNotifyActive</a> ()</td></tr>
 <tr class="memdesc:a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the automatic <a class="el" href="structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> update is active.  <br /></td></tr>
-<tr class="memitem:acbed040576a7a18e2d9c46b2f15e0162" id="r_acbed040576a7a18e2d9c46b2f15e0162"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acbed040576a7a18e2d9c46b2f15e0162">isReady</a> ()</td></tr>
+<tr class="memitem:acbed040576a7a18e2d9c46b2f15e0162" id="r_acbed040576a7a18e2d9c46b2f15e0162"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acbed040576a7a18e2d9c46b2f15e0162">isReady</a> ()</td></tr>
 <tr class="memdesc:acbed040576a7a18e2d9c46b2f15e0162"><td class="mdescLeft">&#160;</td><td class="mdescRight">is ready to process data  <br /></td></tr>
 <tr class="memitem:a9b3baad8c612d81b96e46f84d7e97580" id="r_a9b3baad8c612d81b96e46f84d7e97580"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9b3baad8c612d81b96e46f84d7e97580">operator bool</a> ()</td></tr>
 <tr class="memdesc:a9b3baad8c612d81b96e46f84d7e97580"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert to bool  <br /></td></tr>
-<tr class="memitem:a4c5c6275ddee80eb02839356b6185c0b" id="r_a4c5c6275ddee80eb02839356b6185c0b"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4c5c6275ddee80eb02839356b6185c0b">readBytes</a> (uint8_t *data, size_t len) override</td></tr>
+<tr class="memitem:a4c5c6275ddee80eb02839356b6185c0b" id="r_a4c5c6275ddee80eb02839356b6185c0b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4c5c6275ddee80eb02839356b6185c0b">readBytes</a> (<a class="el" href="classuint8__t.html">uint8_t</a> *data, <a class="el" href="classsize__t.html">size_t</a> len) override</td></tr>
 <tr class="memdesc:a4c5c6275ddee80eb02839356b6185c0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the data from the temporary buffer.  <br /></td></tr>
-<tr class="memitem:a36e26f40121eda38b0042dcba026ab82" id="r_a36e26f40121eda38b0042dcba026ab82"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_stream.html#a36e26f40121eda38b0042dcba026ab82">readSilence</a> (uint8_t *<a class="el" href="#a8a039781ce83e675e23339af75f12b60">buffer</a>, size_t length)</td></tr>
+<tr class="memitem:a36e26f40121eda38b0042dcba026ab82" id="r_a36e26f40121eda38b0042dcba026ab82"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_stream.html#a36e26f40121eda38b0042dcba026ab82">readSilence</a> (<a class="el" href="classuint8__t.html">uint8_t</a> *<a class="el" href="#a8a039781ce83e675e23339af75f12b60">buffer</a>, <a class="el" href="classsize__t.html">size_t</a> length)</td></tr>
 <tr class="memdesc:a36e26f40121eda38b0042dcba026ab82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Source to generate silence: just sets the buffer to 0.  <br /></td></tr>
-<tr class="memitem:a36e26f40121eda38b0042dcba026ab82" id="r_a36e26f40121eda38b0042dcba026ab82"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_stream.html#a36e26f40121eda38b0042dcba026ab82">readSilence</a> (uint8_t *<a class="el" href="#a8a039781ce83e675e23339af75f12b60">buffer</a>, size_t length)</td></tr>
+<tr class="memitem:a36e26f40121eda38b0042dcba026ab82" id="r_a36e26f40121eda38b0042dcba026ab82"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_stream.html#a36e26f40121eda38b0042dcba026ab82">readSilence</a> (<a class="el" href="classuint8__t.html">uint8_t</a> *<a class="el" href="#a8a039781ce83e675e23339af75f12b60">buffer</a>, <a class="el" href="classsize__t.html">size_t</a> length)</td></tr>
 <tr class="memdesc:a36e26f40121eda38b0042dcba026ab82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Source to generate silence: just sets the buffer to 0.  <br /></td></tr>
-<tr class="memitem:aa5b1cdb06807ff2dc37acbaff63410b9" id="r_aa5b1cdb06807ff2dc37acbaff63410b9"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_info_source.html#aa5b1cdb06807ff2dc37acbaff63410b9">removeNotifyAudioChange</a> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;bi)</td></tr>
+<tr class="memitem:aa5b1cdb06807ff2dc37acbaff63410b9" id="r_aa5b1cdb06807ff2dc37acbaff63410b9"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_info_source.html#aa5b1cdb06807ff2dc37acbaff63410b9">removeNotifyAudioChange</a> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;bi)</td></tr>
 <tr class="memdesc:aa5b1cdb06807ff2dc37acbaff63410b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a target in order not to be notified about audio changes.  <br /></td></tr>
-<tr class="memitem:aa5b1cdb06807ff2dc37acbaff63410b9" id="r_aa5b1cdb06807ff2dc37acbaff63410b9"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_info_source.html#aa5b1cdb06807ff2dc37acbaff63410b9">removeNotifyAudioChange</a> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;bi)</td></tr>
+<tr class="memitem:aa5b1cdb06807ff2dc37acbaff63410b9" id="r_aa5b1cdb06807ff2dc37acbaff63410b9"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_info_source.html#aa5b1cdb06807ff2dc37acbaff63410b9">removeNotifyAudioChange</a> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;bi)</td></tr>
 <tr class="memdesc:aa5b1cdb06807ff2dc37acbaff63410b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a target in order not to be notified about audio changes.  <br /></td></tr>
 <tr class="memitem:acbaca7240bc555603b0da5b7ca11ce10" id="r_acbaca7240bc555603b0da5b7ca11ce10"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_stream.html#acbaca7240bc555603b0da5b7ca11ce10">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> newInfo) override</td></tr>
 <tr class="memdesc:acbaca7240bc555603b0da5b7ca11ce10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the input <a class="el" href="structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>.  <br /></td></tr>
 <tr class="memitem:acbaca7240bc555603b0da5b7ca11ce10" id="r_acbaca7240bc555603b0da5b7ca11ce10"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_stream.html#acbaca7240bc555603b0da5b7ca11ce10">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> newInfo) override</td></tr>
 <tr class="memdesc:acbaca7240bc555603b0da5b7ca11ce10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the input <a class="el" href="structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>.  <br /></td></tr>
-<tr class="memitem:a909f118906f9cf7024baae224dcd90a7" id="r_a909f118906f9cf7024baae224dcd90a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_info_source.html#a909f118906f9cf7024baae224dcd90a7">setNotifyActive</a> (bool flag)</td></tr>
+<tr class="memitem:a909f118906f9cf7024baae224dcd90a7" id="r_a909f118906f9cf7024baae224dcd90a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_info_source.html#a909f118906f9cf7024baae224dcd90a7">setNotifyActive</a> (<a class="el" href="classbool.html">bool</a> flag)</td></tr>
 <tr class="memdesc:a909f118906f9cf7024baae224dcd90a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivate/Reactivate automatic <a class="el" href="structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> updates: (default is active).  <br /></td></tr>
-<tr class="memitem:a909f118906f9cf7024baae224dcd90a7" id="r_a909f118906f9cf7024baae224dcd90a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_info_source.html#a909f118906f9cf7024baae224dcd90a7">setNotifyActive</a> (bool flag)</td></tr>
+<tr class="memitem:a909f118906f9cf7024baae224dcd90a7" id="r_a909f118906f9cf7024baae224dcd90a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_info_source.html#a909f118906f9cf7024baae224dcd90a7">setNotifyActive</a> (<a class="el" href="classbool.html">bool</a> flag)</td></tr>
 <tr class="memdesc:a909f118906f9cf7024baae224dcd90a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivate/Reactivate automatic <a class="el" href="structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> updates: (default is active).  <br /></td></tr>
-<tr class="memitem:a802eb448e3966f5dce5dd4c8ef3197d8" id="r_a802eb448e3966f5dce5dd4c8ef3197d8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a802eb448e3966f5dce5dd4c8ef3197d8">setSilenceOnNoData</a> (bool silence)</td></tr>
+<tr class="memitem:a802eb448e3966f5dce5dd4c8ef3197d8" id="r_a802eb448e3966f5dce5dd4c8ef3197d8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a802eb448e3966f5dce5dd4c8ef3197d8">setSilenceOnNoData</a> (<a class="el" href="classbool.html">bool</a> silence)</td></tr>
 <tr class="memdesc:a802eb448e3966f5dce5dd4c8ef3197d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manage config.silence_on_nodata dynamically.  <br /></td></tr>
-<tr class="memitem:a645f14b9b646688d8e8c03f193ab0cf3" id="r_a645f14b9b646688d8e8c03f193ab0cf3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a645f14b9b646688d8e8c03f193ab0cf3">setVolume</a> (float <a class="el" href="classaudio__tools_1_1audio__tools_1_1_volume_support.html#a893871d008fd5516565045bb55e60dd8">volume</a>) override</td></tr>
+<tr class="memitem:a645f14b9b646688d8e8c03f193ab0cf3" id="r_a645f14b9b646688d8e8c03f193ab0cf3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a645f14b9b646688d8e8c03f193ab0cf3">setVolume</a> (<a class="el" href="classfloat.html">float</a> <a class="el" href="classaudio__tools_1_1audio__tools_1_1_volume_support.html#a893871d008fd5516565045bb55e60dd8">volume</a>) override</td></tr>
 <tr class="memdesc:a645f14b9b646688d8e8c03f193ab0cf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define the volume (values between 0.0 and 1.0).  <br /></td></tr>
-<tr class="memitem:adad22dd23fc48a3b338eafe707439deb" id="r_adad22dd23fc48a3b338eafe707439deb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#adad22dd23fc48a3b338eafe707439deb">setWriteBufferSize</a> (int size)</td></tr>
-<tr class="memitem:adad22dd23fc48a3b338eafe707439deb" id="r_adad22dd23fc48a3b338eafe707439deb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#adad22dd23fc48a3b338eafe707439deb">setWriteBufferSize</a> (int size)</td></tr>
+<tr class="memitem:adad22dd23fc48a3b338eafe707439deb" id="r_adad22dd23fc48a3b338eafe707439deb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#adad22dd23fc48a3b338eafe707439deb">setWriteBufferSize</a> (<a class="el" href="classint.html">int</a> size)</td></tr>
+<tr class="memitem:adad22dd23fc48a3b338eafe707439deb" id="r_adad22dd23fc48a3b338eafe707439deb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#adad22dd23fc48a3b338eafe707439deb">setWriteBufferSize</a> (<a class="el" href="classint.html">int</a> size)</td></tr>
 <tr class="memitem:aaf27e8a06827e99fb8284a2a76a0a351" id="r_aaf27e8a06827e99fb8284a2a76a0a351"><td class="memItemLeft" align="right" valign="top">BluetoothA2DPSink &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaf27e8a06827e99fb8284a2a76a0a351">sink</a> ()</td></tr>
 <tr class="memdesc:aaf27e8a06827e99fb8284a2a76a0a351"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides access to the BluetoothA2DPSink  <br /></td></tr>
 <tr class="memitem:a0a8cd820d25f7639a6deb68876589a63" id="r_a0a8cd820d25f7639a6deb68876589a63"><td class="memItemLeft" align="right" valign="top">BluetoothA2DPSource &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0a8cd820d25f7639a6deb68876589a63">source</a> ()</td></tr>
 <tr class="memdesc:a0a8cd820d25f7639a6deb68876589a63"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides access to the BluetoothA2DPSource  <br /></td></tr>
-<tr class="memitem:a893871d008fd5516565045bb55e60dd8" id="r_a893871d008fd5516565045bb55e60dd8"><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_volume_support.html#a893871d008fd5516565045bb55e60dd8">volume</a> ()</td></tr>
+<tr class="memitem:a893871d008fd5516565045bb55e60dd8" id="r_a893871d008fd5516565045bb55e60dd8"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_volume_support.html#a893871d008fd5516565045bb55e60dd8">volume</a> ()</td></tr>
 <tr class="memdesc:a893871d008fd5516565045bb55e60dd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the actual volume in the range of 0.0f to 1.0f  <br /></td></tr>
-<tr class="memitem:a893871d008fd5516565045bb55e60dd8" id="r_a893871d008fd5516565045bb55e60dd8"><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_volume_support.html#a893871d008fd5516565045bb55e60dd8">volume</a> ()</td></tr>
+<tr class="memitem:a893871d008fd5516565045bb55e60dd8" id="r_a893871d008fd5516565045bb55e60dd8"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_volume_support.html#a893871d008fd5516565045bb55e60dd8">volume</a> ()</td></tr>
 <tr class="memdesc:a893871d008fd5516565045bb55e60dd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the actual volume in the range of 0.0f to 1.0f  <br /></td></tr>
-<tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
+<tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7597ef706dd1aa590903ce9e095db20a">write</a> (const <a class="el" href="classuint8__t.html">uint8_t</a> *data, <a class="el" href="classsize__t.html">size_t</a> len) override</td></tr>
 <tr class="memdesc:a7597ef706dd1aa590903ce9e095db20a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the data into a temporary send buffer - where it can be picked up by the callback.  <br /></td></tr>
-<tr class="memitem:adffba128cba62b029746648f6946945c" id="r_adffba128cba62b029746648f6946945c"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#adffba128cba62b029746648f6946945c">write</a> (uint8_t ch) override</td></tr>
-<tr class="memitem:ad89418aeb557f65a8f1a0aed755633b1" id="r_ad89418aeb557f65a8f1a0aed755633b1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_stream.html#ad89418aeb557f65a8f1a0aed755633b1">writeSilence</a> (size_t len)</td></tr>
+<tr class="memitem:adffba128cba62b029746648f6946945c" id="r_adffba128cba62b029746648f6946945c"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#adffba128cba62b029746648f6946945c">write</a> (<a class="el" href="classuint8__t.html">uint8_t</a> ch) override</td></tr>
+<tr class="memitem:ad89418aeb557f65a8f1a0aed755633b1" id="r_ad89418aeb557f65a8f1a0aed755633b1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_stream.html#ad89418aeb557f65a8f1a0aed755633b1">writeSilence</a> (<a class="el" href="classsize__t.html">size_t</a> len)</td></tr>
 <tr class="memdesc:ad89418aeb557f65a8f1a0aed755633b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes len bytes of silence (=0).  <br /></td></tr>
-<tr class="memitem:ad89418aeb557f65a8f1a0aed755633b1" id="r_ad89418aeb557f65a8f1a0aed755633b1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_stream.html#ad89418aeb557f65a8f1a0aed755633b1">writeSilence</a> (size_t len)</td></tr>
+<tr class="memitem:ad89418aeb557f65a8f1a0aed755633b1" id="r_ad89418aeb557f65a8f1a0aed755633b1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_stream.html#ad89418aeb557f65a8f1a0aed755633b1">writeSilence</a> (<a class="el" href="classsize__t.html">size_t</a> len)</td></tr>
 <tr class="memdesc:ad89418aeb557f65a8f1a0aed755633b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes len bytes of silence (=0).  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-methods" class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:afc00b141650b11fe19d4c7055d96a075" id="r_afc00b141650b11fe19d4c7055d96a075"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_stream.html#afc00b141650b11fe19d4c7055d96a075">not_supported</a> (int out, const char *msg=&quot;&quot;)</td></tr>
-<tr class="memitem:afc00b141650b11fe19d4c7055d96a075" id="r_afc00b141650b11fe19d4c7055d96a075"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_stream.html#afc00b141650b11fe19d4c7055d96a075">not_supported</a> (int out, const char *msg=&quot;&quot;)</td></tr>
-<tr class="memitem:a135e3e6aa275bd03ad26ba8377c4f29a" id="r_a135e3e6aa275bd03ad26ba8377c4f29a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a135e3e6aa275bd03ad26ba8377c4f29a">notify_base_Info</a> (int rate)</td></tr>
+<tr class="memitem:afc00b141650b11fe19d4c7055d96a075" id="r_afc00b141650b11fe19d4c7055d96a075"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_stream.html#afc00b141650b11fe19d4c7055d96a075">not_supported</a> (<a class="el" href="classint.html">int</a> out, const char *msg=&quot;&quot;)</td></tr>
+<tr class="memitem:afc00b141650b11fe19d4c7055d96a075" id="r_afc00b141650b11fe19d4c7055d96a075"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_stream.html#afc00b141650b11fe19d4c7055d96a075">not_supported</a> (<a class="el" href="classint.html">int</a> out, const char *msg=&quot;&quot;)</td></tr>
+<tr class="memitem:a135e3e6aa275bd03ad26ba8377c4f29a" id="r_a135e3e6aa275bd03ad26ba8377c4f29a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a135e3e6aa275bd03ad26ba8377c4f29a">notify_base_Info</a> (<a class="el" href="classint.html">int</a> rate)</td></tr>
 <tr class="memdesc:a135e3e6aa275bd03ad26ba8377c4f29a"><td class="mdescLeft">&#160;</td><td class="mdescRight">notify subscriber with <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>  <br /></td></tr>
 <tr class="memitem:a6a9a665a387a8c4fbf7fed14bbbfc093" id="r_a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_info_source.html#a6a9a665a387a8c4fbf7fed14bbbfc093">notifyAudioChange</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> <a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_stream.html#a47385aa19435f5fca9d3083a748258c5">info</a>)</td></tr>
 <tr class="memitem:a6a9a665a387a8c4fbf7fed14bbbfc093" id="r_a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_info_source.html#a6a9a665a387a8c4fbf7fed14bbbfc093">notifyAudioChange</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> <a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_stream.html#a47385aa19435f5fca9d3083a748258c5">info</a>)</td></tr>
@@ -264,31 +301,31 @@ Protected Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 id="header-pro-static-methods" class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
 <tr class="memitem:aeaf9efcd5087357e3de7f5c8078dc789" id="r_aeaf9efcd5087357e3de7f5c8078dc789"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeaf9efcd5087357e3de7f5c8078dc789">a2dp_state_callback</a> (esp_a2d_connection_state_t state, void *caller)</td></tr>
-<tr class="memitem:a5fd40866db400c20a40d373779151f7a" id="r_a5fd40866db400c20a40d373779151f7a"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5fd40866db400c20a40d373779151f7a">a2dp_stream_sink_sound_data</a> (const uint8_t *data, uint32_t len)</td></tr>
+<tr class="memitem:a5fd40866db400c20a40d373779151f7a" id="r_a5fd40866db400c20a40d373779151f7a"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5fd40866db400c20a40d373779151f7a">a2dp_stream_sink_sound_data</a> (const <a class="el" href="classuint8__t.html">uint8_t</a> *data, <a class="el" href="classuint32__t.html">uint32_t</a> len)</td></tr>
 <tr class="memdesc:a5fd40866db400c20a40d373779151f7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback used by A2DP to write the sound data  <br /></td></tr>
-<tr class="memitem:a4d251d94f2b28f8a1cf2f2dc2244dd44" id="r_a4d251d94f2b28f8a1cf2f2dc2244dd44"><td class="memItemLeft" align="right" valign="top">static int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4d251d94f2b28f8a1cf2f2dc2244dd44">a2dp_stream_source_sound_data</a> (uint8_t *data, int32_t len)</td></tr>
-<tr class="memitem:ac713c679235ddc451d58dd76f355744e" id="r_ac713c679235ddc451d58dd76f355744e"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac713c679235ddc451d58dd76f355744e">detected_device</a> (const char *ssid, esp_bd_addr_t address, int rssi)</td></tr>
+<tr class="memitem:a4d251d94f2b28f8a1cf2f2dc2244dd44" id="r_a4d251d94f2b28f8a1cf2f2dc2244dd44"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classint32__t.html">int32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4d251d94f2b28f8a1cf2f2dc2244dd44">a2dp_stream_source_sound_data</a> (<a class="el" href="classuint8__t.html">uint8_t</a> *data, <a class="el" href="classint32__t.html">int32_t</a> len)</td></tr>
+<tr class="memitem:ac713c679235ddc451d58dd76f355744e" id="r_ac713c679235ddc451d58dd76f355744e"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac713c679235ddc451d58dd76f355744e">detected_device</a> (const char *ssid, esp_bd_addr_t address, <a class="el" href="classint.html">int</a> rssi)</td></tr>
 <tr class="memitem:a73af513be01f5d51e180082bc55d0d5f" id="r_a73af513be01f5d51e180082bc55d0d5f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a73af513be01f5d51e180082bc55d0d5f">sample_rate_callback</a> (uint16_t rate)</td></tr>
 <tr class="memdesc:a73af513be01f5d51e180082bc55d0d5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback to update audio info with used a2dp sample rate  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:aa66a35e5edf58ce00047afcd1d4f455e" id="r_aa66a35e5edf58ce00047afcd1d4f455e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_print.html#aa66a35e5edf58ce00047afcd1d4f455e">_timeout</a> = 10</td></tr>
+<tr class="memitem:aa66a35e5edf58ce00047afcd1d4f455e" id="r_aa66a35e5edf58ce00047afcd1d4f455e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_print.html#aa66a35e5edf58ce00047afcd1d4f455e">_timeout</a> = 10</td></tr>
 <tr class="memitem:a6a04ba21846bc251f97695f6f73a2e63" id="r_a6a04ba21846bc251f97695f6f73a2e63"><td class="memItemLeft" align="right" valign="top">BluetoothA2DPCommon *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6a04ba21846bc251f97695f6f73a2e63">a2dp</a> =nullptr</td></tr>
-<tr class="memitem:a5680d83f073c892b4a1c975bb91ba9e7" id="r_a5680d83f073c892b4a1c975bb91ba9e7"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5680d83f073c892b4a1c975bb91ba9e7">A2DP_MAX_VOL</a> = 128</td></tr>
+<tr class="memitem:a5680d83f073c892b4a1c975bb91ba9e7" id="r_a5680d83f073c892b4a1c975bb91ba9e7"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5680d83f073c892b4a1c975bb91ba9e7">A2DP_MAX_VOL</a> = 128</td></tr>
 <tr class="memitem:a607be85362e39428b30c0a7150c0725f" id="r_a607be85362e39428b30c0a7150c0725f"><td class="memItemLeft" align="right" valign="top">BluetoothA2DPSink *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a607be85362e39428b30c0a7150c0725f">a2dp_sink</a> = nullptr</td></tr>
 <tr class="memitem:a4c85e0d9d5863813aa863959ed6a844c" id="r_a4c85e0d9d5863813aa863959ed6a844c"><td class="memItemLeft" align="right" valign="top">BluetoothA2DPSource *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4c85e0d9d5863813aa863959ed6a844c">a2dp_source</a> = nullptr</td></tr>
 <tr class="memitem:a88fe6be6085a3bb1b12a94c25c0e4038" id="r_a88fe6be6085a3bb1b12a94c25c0e4038"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_a2_d_p_config.html">A2DPConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a88fe6be6085a3bb1b12a94c25c0e4038">config</a></td></tr>
 <tr class="memitem:a47385aa19435f5fca9d3083a748258c5" id="r_a47385aa19435f5fca9d3083a748258c5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_stream.html#a47385aa19435f5fca9d3083a748258c5">info</a></td></tr>
-<tr class="memitem:aeaba7fcedcb403536c79ee7f04de17fc" id="r_aeaba7fcedcb403536c79ee7f04de17fc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_info_source.html#aeaba7fcedcb403536c79ee7f04de17fc">is_notify_active</a> = true</td></tr>
+<tr class="memitem:aeaba7fcedcb403536c79ee7f04de17fc" id="r_aeaba7fcedcb403536c79ee7f04de17fc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_info_source.html#aeaba7fcedcb403536c79ee7f04de17fc">is_notify_active</a> = true</td></tr>
 <tr class="memitem:af6f525e6e4f504a0b304348f769a60dc" id="r_af6f525e6e4f504a0b304348f769a60dc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_info_source.html#af6f525e6e4f504a0b304348f769a60dc">notify_vector</a></td></tr>
-<tr class="memitem:ad1c1138410abe4a0b2e7d80eb425003f" id="r_ad1c1138410abe4a0b2e7d80eb425003f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#ad1c1138410abe4a0b2e7d80eb425003f">tmp_in</a> {0}</td></tr>
-<tr class="memitem:a02259b7e8b05e57f89af8e8736a70fdf" id="r_a02259b7e8b05e57f89af8e8736a70fdf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#a02259b7e8b05e57f89af8e8736a70fdf">tmp_out</a> {0}</td></tr>
-<tr class="memitem:a0e460a46f786cbf5771335ce4c4148f1" id="r_a0e460a46f786cbf5771335ce4c4148f1"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_volume_support.html#a0e460a46f786cbf5771335ce4c4148f1">volume_value</a> = 1.0f</td></tr>
-<tr class="memitem:a7f948c0ac99e632d3a033b85ae54d170" id="r_a7f948c0ac99e632d3a033b85ae54d170"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#a7f948c0ac99e632d3a033b85ae54d170">write_buffer_size</a> = 8</td></tr>
+<tr class="memitem:ad1c1138410abe4a0b2e7d80eb425003f" id="r_ad1c1138410abe4a0b2e7d80eb425003f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; <a class="el" href="classuint8__t.html">uint8_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#ad1c1138410abe4a0b2e7d80eb425003f">tmp_in</a> {0}</td></tr>
+<tr class="memitem:a02259b7e8b05e57f89af8e8736a70fdf" id="r_a02259b7e8b05e57f89af8e8736a70fdf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; <a class="el" href="classuint8__t.html">uint8_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#a02259b7e8b05e57f89af8e8736a70fdf">tmp_out</a> {0}</td></tr>
+<tr class="memitem:a0e460a46f786cbf5771335ce4c4148f1" id="r_a0e460a46f786cbf5771335ce4c4148f1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_volume_support.html#a0e460a46f786cbf5771335ce4c4148f1">volume_value</a> = 1.0f</td></tr>
+<tr class="memitem:a7f948c0ac99e632d3a033b85ae54d170" id="r_a7f948c0ac99e632d3a033b85ae54d170"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html#a7f948c0ac99e632d3a033b85ae54d170">write_buffer_size</a> = 8</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> support for A2DP using <a href="https://github.com/pschatzmann/ESP32-A2DP:">https://github.com/pschatzmann/ESP32-A2DP:</a> begin(TX_MODE) opens a a2dp_source and begin(RX_MODE) a a2dp_sink. The data is in int16_t with 2 channels at 44100 hertz. We support only one instance of the class! Please note that this is a conveniance class that supports the stream api, however this is rather inefficient, beause quite a big buffer needs to be allocated. It is recommended to use the API with the callbacks. Examples can be found in the a2dp examples directory starting with basic. </p>
+<div class="textblock"><p><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> support for A2DP using <a href="https://github.com/pschatzmann/ESP32-A2DP:">https://github.com/pschatzmann/ESP32-A2DP:</a> begin(TX_MODE) opens a a2dp_source and begin(RX_MODE) a a2dp_sink. The data is in <a class="el" href="classint16__t.html">int16_t</a> with 2 channels at 44100 hertz. We support only one instance of the class! Please note that this is a conveniance class that supports the stream api, however this is rather inefficient, beause quite a big buffer needs to be allocated. It is recommended to use the API with the callbacks. Examples can be found in the a2dp examples directory starting with basic. </p>
 <dl class="section note"><dt>Note</dt><dd>Supported only on EP32 (via Arduino and IDF) </dd>
 <dd>
 Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com/pschatzmann/ESP32-A2DP</a></dd></dl>
@@ -389,12 +426,12 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
         <tr>
           <td class="memname">void a2dp_stream_sink_sound_data </td>
           <td>(</td>
-          <td class="paramtype">const uint8_t *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classuint32__t.html">uint32_t</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -418,14 +455,14 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int32_t a2dp_stream_source_sound_data </td>
+          <td class="memname"><a class="el" href="classint32__t.html">int32_t</a> a2dp_stream_source_sound_data </td>
           <td>(</td>
-          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int32_t</td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classint32__t.html">int32_t</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -623,7 +660,7 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int available </td>
+          <td class="memname"><a class="el" href="classint.html">int</a> available </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -652,7 +689,7 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int availableForWrite </td>
+          <td class="memname"><a class="el" href="classint.html">int</a> availableForWrite </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -681,7 +718,7 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool begin </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> begin </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classaudio__tools_1_1_a2_d_p_config.html">A2DPConfig</a></td>          <td class="paramname"><span class="paramname"><em>cfg</em></span></td><td>)</td>
           <td></td>
@@ -708,7 +745,7 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool begin </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> begin </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">RxTxMode</a></td>          <td class="paramname"><span class="paramname"><em>mode</em></span>, </td>
         </tr>
@@ -720,7 +757,7 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>wait_for_connection</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classbool.html">bool</a></td>          <td class="paramname"><span class="paramname"><em>wait_for_connection</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -744,7 +781,7 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool <a class="el" href="#ad4e75ebe41d5ba4fafc5f5014ec54f06">begin</a> </td>
+          <td class="memname">virtual <a class="el" href="classbool.html">bool</a> <a class="el" href="#ad4e75ebe41d5ba4fafc5f5014ec54f06">begin</a> </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -771,7 +808,7 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; uint8_t &gt; &amp; buffer </td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; <a class="el" href="classuint8__t.html">uint8_t</a> &gt; &amp; buffer </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -908,7 +945,7 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool detected_device </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> detected_device </td>
           <td>(</td>
           <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>ssid</em></span>, </td>
         </tr>
@@ -920,7 +957,7 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>rssi</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>rssi</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -1027,7 +1064,7 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool isConnected </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> isConnected </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -1054,7 +1091,7 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool isNotifyActive </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> isNotifyActive </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -1081,7 +1118,7 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool isNotifyActive </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> isNotifyActive </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -1108,7 +1145,7 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool isReady </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> isReady </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -1135,9 +1172,9 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual int not_supported </td>
+          <td class="memname">virtual <a class="el" href="classint.html">int</a> not_supported </td>
           <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>out</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>out</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -1164,9 +1201,9 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual int not_supported </td>
+          <td class="memname">virtual <a class="el" href="classint.html">int</a> not_supported </td>
           <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>out</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>out</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -1195,7 +1232,7 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
         <tr>
           <td class="memname">void notify_base_Info </td>
           <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>rate</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>rate</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1270,7 +1307,7 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">operator bool </td>
+          <td class="memname">operator <a class="el" href="classbool.html">bool</a> </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -1299,14 +1336,14 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t readBytes </td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> readBytes </td>
           <td>(</td>
-          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -1332,14 +1369,14 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual size_t readSilence </td>
+          <td class="memname">virtual <a class="el" href="classsize__t.html">size_t</a> readSilence </td>
           <td>(</td>
-          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>buffer</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>buffer</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>length</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>length</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -1363,14 +1400,14 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual size_t readSilence </td>
+          <td class="memname">virtual <a class="el" href="classsize__t.html">size_t</a> readSilence </td>
           <td>(</td>
-          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>buffer</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>buffer</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>length</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>length</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -1448,7 +1485,7 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool removeNotifyAudioChange </td>
+          <td class="memname">virtual <a class="el" href="classbool.html">bool</a> removeNotifyAudioChange </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>bi</em></span></td><td>)</td>
           <td></td>
@@ -1475,7 +1512,7 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool removeNotifyAudioChange </td>
+          <td class="memname">virtual <a class="el" href="classbool.html">bool</a> removeNotifyAudioChange </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>bi</em></span></td><td>)</td>
           <td></td>
@@ -1593,7 +1630,7 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
         <tr>
           <td class="memname">void setNotifyActive </td>
           <td>(</td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>flag</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classbool.html">bool</a></td>          <td class="paramname"><span class="paramname"><em>flag</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1620,7 +1657,7 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
         <tr>
           <td class="memname">void setNotifyActive </td>
           <td>(</td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>flag</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classbool.html">bool</a></td>          <td class="paramname"><span class="paramname"><em>flag</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1647,7 +1684,7 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
         <tr>
           <td class="memname">void setSilenceOnNoData </td>
           <td>(</td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>silence</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classbool.html">bool</a></td>          <td class="paramname"><span class="paramname"><em>silence</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1672,9 +1709,9 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool setVolume </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> setVolume </td>
           <td>(</td>
-          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>volume</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classfloat.html">float</a></td>          <td class="paramname"><span class="paramname"><em>volume</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1703,7 +1740,7 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
         <tr>
           <td class="memname">void setWriteBufferSize </td>
           <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>size</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>size</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1728,7 +1765,7 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
         <tr>
           <td class="memname">void setWriteBufferSize </td>
           <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>size</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>size</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1805,7 +1842,7 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual float volume </td>
+          <td class="memname">virtual <a class="el" href="classfloat.html">float</a> volume </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -1834,7 +1871,7 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual float volume </td>
+          <td class="memname">virtual <a class="el" href="classfloat.html">float</a> volume </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -1863,14 +1900,14 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t write </td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> write </td>
           <td>(</td>
-          <td class="paramtype">const uint8_t *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -1896,9 +1933,9 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual size_t <a class="el" href="#a7597ef706dd1aa590903ce9e095db20a">write</a> </td>
+          <td class="memname">virtual <a class="el" href="classsize__t.html">size_t</a> <a class="el" href="#a7597ef706dd1aa590903ce9e095db20a">write</a> </td>
           <td>(</td>
-          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>ch</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a></td>          <td class="paramname"><span class="paramname"><em>ch</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1925,7 +1962,7 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
         <tr>
           <td class="memname">virtual void writeSilence </td>
           <td>(</td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>len</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1952,7 +1989,7 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
         <tr>
           <td class="memname">virtual void writeSilence </td>
           <td>(</td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>len</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1978,7 +2015,7 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int _timeout = 10</td>
+          <td class="memname"><a class="el" href="classint.html">int</a> _timeout = 10</td>
         </tr>
       </table>
   </td>
@@ -2022,7 +2059,7 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const int A2DP_MAX_VOL = 128</td>
+          <td class="memname">const <a class="el" href="classint.html">int</a> A2DP_MAX_VOL = 128</td>
         </tr>
       </table>
   </td>
@@ -2132,7 +2169,7 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool is_notify_active = true</td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> is_notify_active = true</td>
         </tr>
       </table>
   </td>
@@ -2176,7 +2213,7 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt; tmp_in {0}</td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; <a class="el" href="classuint8__t.html">uint8_t</a> &gt; tmp_in {0}</td>
         </tr>
       </table>
   </td>
@@ -2198,7 +2235,7 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt; tmp_out {0}</td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; <a class="el" href="classuint8__t.html">uint8_t</a> &gt; tmp_out {0}</td>
         </tr>
       </table>
   </td>
@@ -2220,7 +2257,7 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">float volume_value = 1.0f</td>
+          <td class="memname"><a class="el" href="classfloat.html">float</a> volume_value = 1.0f</td>
         </tr>
       </table>
   </td>
@@ -2242,7 +2279,7 @@ Requires: <a href="https://github.com/pschatzmann/ESP32-A2DP">https://github.com
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int write_buffer_size = 8</td>
+          <td class="memname"><a class="el" href="classint.html">int</a> write_buffer_size = 8</td>
         </tr>
       </table>
   </td>

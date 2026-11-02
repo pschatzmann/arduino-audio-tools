@@ -1,5 +1,16 @@
 <map id="PWMConfigZephyr" name="PWMConfigZephyr">
-<area shape="rect" id="Node000001" title="Configuration data for PWM audio output. Define the pins as follows: config.pins = {PWM_PIN(pwm_led_0..." alt="" coords="5,81,147,109"/>
-<area shape="rect" id="Node000002" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="34,5,118,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="78,47,79,81,73,80,74,51"/>
+<area shape="rect" id="Node000001" title="Configuration data for PWM audio output. Define the pins as follows: config.pins = {PWM_PIN(pwm_led_0..." alt="" coords="268,226,409,254"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="297,116,380,144"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="340,157,341,227,336,225,337,160"/>
+<area shape="rect" id="Node000003" href="$classuint32__t.html" title=" " alt="" coords="5,5,80,33"/>
+<area shape="poly" id="edge7_Node000001_Node000003" title=" " alt="" coords="40,46,45,101,53,128,68,152,88,171,111,188,163,212,217,226,270,236,265,237,216,232,161,217,108,192,84,175,63,155,48,130,40,102,39,51"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="70,40,105,61,142,80,179,90,209,94,239,96,278,103,308,115,303,116,277,109,239,101,208,99,178,95,141,84,102,66,71,45"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="177,5,252,33"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="206,46,198,99,200,127,209,152,227,176,250,196,303,226,297,226,247,201,223,180,204,155,195,128,193,99,203,50"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="230,44,260,80,284,98,312,115,306,115,281,103,256,84,229,49"/>
+<area shape="rect" id="Node000005" href="$classuint8__t.html" title=" " alt="" coords="368,5,434,33"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="440,40,453,56,456,69,453,83,433,128,406,169,354,228,351,224,401,166,428,125,448,81,451,69,448,58,439,45"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="357,37,338,58,333,72,332,87,336,116,332,114,326,87,328,71,333,56,352,40"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="566,116,748,144"/>
+<area shape="poly" id="edge8_Node000001_Node000006" title=" " alt="" coords="619,150,557,179,489,205,402,228,401,223,487,200,555,174,614,151"/>
 </map>

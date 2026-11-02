@@ -103,30 +103,50 @@ Collaboration diagram for HttpChunkReader:</div>
 <div class="dyncontent">
 <div class="center"><img src="classaudio__tools_1_1_http_chunk_reader__coll__graph.png" border="0" usemap="#a_http_chunk_reader_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="a_http_chunk_reader_coll__map" id="a_http_chunk_reader_coll__map">
-<area shape="rect" title="Http might reply with chunks. So we need to dechunk the data. see https://en.wikipedia...." alt="" coords="14,589,151,616"/>
-<area shape="rect" href="classaudio__tools_1_1_http_line_reader.html" title="We read a single line. A terminating 0 is added to the string to make it compliant for c string funct..." alt="" coords="5,266,128,293"/>
-<area shape="poly" title=" " alt="" coords="71,308,85,588,79,588,65,309"/>
-<area shape="rect" href="classaudio__tools_1_1_http_header.html" title="In a http request and reply we need to process header information. With this API we can define and qu..." alt="" coords="138,411,235,439"/>
-<area shape="poly" title=" " alt="" coords="76,305,98,346,126,385,160,410,155,411,123,389,93,349,76,311"/>
-<area shape="rect" href="classaudio__tools_1_1_http_reply_header.html" title="Reading and Writing of Http Replys." alt="" coords="109,488,242,516"/>
-<area shape="poly" title=" " alt="" coords="156,527,97,590,93,586,151,527"/>
-<area shape="poly" title=" " alt="" coords="184,452,180,489,175,487,181,456"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_str.html" title="Str which keeps the data on the heap. We grow the allocated memory only if the copy source is not fit..." alt="" coords="158,266,197,293"/>
-<area shape="poly" title=" " alt="" coords="180,307,188,411,183,410,178,311"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_str_view.html" title="A simple wrapper to provide string functions on existing allocated char*. If the underlying char* is ..." alt="" coords="131,156,202,184"/>
-<area shape="poly" title=" " alt="" coords="162,197,172,265,167,265,161,202"/>
-<area shape="poly" title=" " alt="" coords="178,197,185,265,179,265,177,202"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="226,156,347,184"/>
-<area shape="poly" title=" " alt="" coords="294,196,302,239,304,288,297,341,288,366,275,389,258,405,237,416,234,411,255,401,271,385,284,363,292,339,299,288,297,239,292,201"/>
-<area shape="poly" title=" " alt="" coords="252,195,226,219,204,243,188,266,183,264,200,240,222,215,255,191"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="303,15,382,43"/>
-<area shape="poly" title=" " alt="" coords="306,55,290,78,284,98,282,119,286,157,281,156,277,119,279,97,285,75,309,50"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_list.html" title=" " alt="" coords="370,148,520,193"/>
-<area shape="poly" title=" " alt="" coords="357,54,370,75,382,100,395,122,419,147,414,148,391,126,377,102,365,78,357,59"/>
-<area shape="poly" title=" " alt="" coords="436,205,420,251,397,295,358,349,337,368,306,389,272,406,236,417,234,412,270,401,304,385,334,364,354,345,392,292,415,249,433,210"/>
-<area shape="rect" href="structaudio__tools_1_1audio__tools_1_1_list_1_1_node.html" title=" " alt="" coords="480,15,536,43"/>
-<area shape="poly" title=" " alt="" coords="503,56,495,91,481,125,465,149,461,146,476,123,490,89,500,60"/>
-<area shape="poly" title=" " alt="" coords="551,15,559,20,562,29,560,37,554,42,537,45,535,40,551,37,555,34,557,29,555,24,551,20"/>
+<area shape="rect" title="Http might reply with chunks. So we need to dechunk the data. see https://en.wikipedia...." alt="" coords="162,656,299,683"/>
+<area shape="rect" href="classaudio__tools_1_1_http_line_reader.html" title="We read a single line. A terminating 0 is added to the string to make it compliant for c string funct..." alt="" coords="219,324,341,352"/>
+<area shape="poly" title=" " alt="" coords="278,366,235,656,230,654,273,368"/>
+<area shape="rect" href="classaudio__tools_1_1_http_header.html" title="In a http request and reply we need to process header information. With this API we can define and qu..." alt="" coords="498,478,595,506"/>
+<area shape="poly" title=" " alt="" coords="290,364,312,419,328,452,357,465,401,475,500,487,495,489,400,480,355,470,324,456,307,421,289,369"/>
+<area shape="rect" href="classint.html" title=" " alt="" coords="365,5,403,33"/>
+<area shape="poly" title=" " alt="" coords="348,29,257,49,143,81,91,101,47,124,18,148,11,160,8,173,8,570,12,593,23,612,39,627,60,639,110,656,164,666,159,667,109,661,58,644,36,631,18,615,7,595,3,570,3,173,6,158,14,144,45,119,89,96,142,76,256,44,352,25"/>
+<area shape="poly" title=" " alt="" coords="383,46,385,184,392,272,407,360,418,411,428,431,446,452,471,469,501,482,496,482,468,474,442,456,423,434,413,413,401,361,386,272,380,184,381,51"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_str_view.html" title="A simple wrapper to provide string functions on existing allocated char*. If the underlying char* is ..." alt="" coords="511,160,582,188"/>
+<area shape="poly" title=" " alt="" coords="397,44,425,85,460,125,486,143,515,159,510,160,483,148,456,129,421,88,397,49"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="748,160,868,188"/>
+<area shape="poly" title=" " alt="" coords="418,21,522,32,574,42,609,55,628,72,638,90,647,108,663,125,705,146,750,162,745,163,702,151,660,129,642,111,633,92,624,75,607,59,572,47,522,37,420,26"/>
+<area shape="rect" href="classbool.html" title=" " alt="" coords="557,5,606,33"/>
+<area shape="poly" title=" " alt="" coords="542,43,530,59,512,91,503,121,501,182,500,211,494,239,480,267,455,294,423,312,391,318,360,315,330,307,300,300,270,296,240,301,208,318,189,338,182,360,182,418,184,570,188,594,197,617,222,656,217,655,192,620,183,596,179,570,177,418,176,359,184,336,205,314,238,296,270,291,301,295,332,302,361,310,391,313,421,307,452,290,476,264,489,237,494,210,495,181,498,121,507,88,526,55,546,39"/>
+<area shape="poly" title=" " alt="" coords="599,44,605,56,619,121,620,173,617,225,620,291,629,338,636,384,643,421,644,437,636,456,618,473,596,483,594,479,615,468,631,452,638,436,638,421,631,385,623,338,615,292,612,225,614,173,614,122,600,58,598,50"/>
+<area shape="poly" title=" " alt="" coords="552,41,544,58,537,85,537,113,545,161,540,159,531,113,532,84,539,56,549,46"/>
+<area shape="poly" title=" " alt="" coords="621,18,680,27,710,38,738,55,751,72,757,89,760,106,769,125,797,160,792,160,764,128,755,108,751,90,747,74,734,59,708,43,679,32,622,23"/>
+<area shape="rect" href="classaudio__tools_1_1_http_reply_header.html" title="Reading and Writing of Http Replys." alt="" coords="399,555,532,583"/>
+<area shape="poly" title=" " alt="" coords="423,589,263,658,261,653,417,589"/>
+<area shape="poly" title=" " alt="" coords="524,515,481,557,478,552,519,518"/>
+<area shape="rect" title=" " alt="" coords="416,324,501,352"/>
+<area shape="poly" title=" " alt="" coords="454,365,453,410,457,432,467,452,481,467,501,479,496,479,478,471,462,456,452,434,448,411,451,369"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_str.html" title="Str which keeps the data on the heap. We grow the allocated memory only if the copy source is not fit..." alt="" coords="527,324,566,352"/>
+<area shape="poly" title=" " alt="" coords="548,365,549,479,544,476,545,369"/>
+<area shape="poly" title=" " alt="" coords="541,201,540,267,544,325,539,323,535,267,538,206"/>
+<area shape="poly" title=" " alt="" coords="555,201,558,267,554,325,549,322,553,267,552,206"/>
+<area shape="rect" title=" " alt="" coords="1030,5,1079,33"/>
+<area shape="poly" title=" " alt="" coords="1093,37,1110,56,1118,75,1120,91,1111,128,1092,171,1073,207,1053,236,1030,261,977,307,907,362,864,396,829,419,790,437,739,457,665,477,596,488,595,483,663,472,738,451,788,432,826,414,861,391,904,358,973,303,1027,257,1049,233,1069,204,1087,169,1105,126,1115,91,1113,76,1106,58,1092,42"/>
+<area shape="poly" title=" " alt="" coords="1012,26,978,38,960,47,945,59,935,75,934,93,931,111,919,129,584,171,582,166,916,124,926,109,928,92,930,74,941,55,958,42,976,33,1017,24"/>
+<area shape="poly" title=" " alt="" coords="1056,46,1050,90,1041,111,1027,129,1000,143,960,155,869,170,868,165,959,150,998,138,1024,125,1036,108,1045,88,1053,51"/>
+<area shape="poly" title=" " alt="" coords="820,201,832,245,832,269,827,293,799,350,767,390,727,422,672,456,634,474,596,485,594,480,632,469,669,452,724,418,763,386,794,347,821,291,827,269,826,246,818,205"/>
+<area shape="poly" title=" " alt="" coords="791,199,777,223,769,243,766,261,760,277,746,294,724,308,700,320,651,334,603,340,567,340,566,335,603,334,649,329,699,315,722,304,742,290,755,275,760,259,764,241,773,221,787,202"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="1211,5,1290,33"/>
+<area shape="poly" title=" " alt="" coords="1226,42,1166,94,1112,129,1049,150,984,164,922,172,869,175,868,170,921,166,983,159,1047,145,1110,124,1163,89,1222,45"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_list.html" title=" " alt="" coords="1201,316,1351,360"/>
+<area shape="poly" title=" " alt="" coords="1282,41,1293,56,1314,119,1317,172,1308,226,1295,292,1287,317,1283,313,1289,291,1303,225,1311,171,1309,120,1288,58,1281,46"/>
+<area shape="poly" title=" " alt="" coords="1252,371,1206,419,1178,440,1146,457,1113,464,1057,470,902,481,595,492,595,487,901,475,1057,465,1112,459,1144,451,1175,435,1203,415,1247,374"/>
+<area shape="rect" href="structaudio__tools_1_1audio__tools_1_1_list_1_1_node.html" title=" " alt="" coords="1415,160,1470,188"/>
+<area shape="poly" title=" " alt="" coords="1423,198,1331,294,1304,318,1301,313,1328,290,1418,201"/>
+<area shape="poly" title=" " alt="" coords="1482,157,1493,163,1497,174,1494,184,1487,190,1467,191,1466,186,1485,185,1490,181,1492,174,1489,166,1481,162"/>
+<area shape="rect" href="class_t.html" title=" " alt="" coords="1423,5,1462,33"/>
+<area shape="poly" title=" " alt="" coords="1444,47,1445,161,1440,159,1441,51"/>
+<area shape="rect" href="classsize__t.html" title=" " alt="" coords="1169,160,1228,188"/>
+<area shape="poly" title=" " alt="" coords="1193,201,1191,247,1194,269,1202,290,1212,303,1226,316,1221,315,1208,307,1198,293,1189,271,1186,247,1190,205"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -136,29 +156,29 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:af042a3a6578702fb51040e9748027303"><td class="mdescLeft">&#160;</td><td class="mdescRight">default constructor  <br /></td></tr>
 <tr class="memitem:ac61a30a93f3075dde40f0cd1be010548" id="r_ac61a30a93f3075dde40f0cd1be010548"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac61a30a93f3075dde40f0cd1be010548">HttpChunkReader</a> (<a class="el" href="classaudio__tools_1_1_http_reply_header.html">HttpReplyHeader</a> &amp;header)</td></tr>
 <tr class="memdesc:ac61a30a93f3075dde40f0cd1be010548"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor for processing final header information  <br /></td></tr>
-<tr class="memitem:a4549a76725f2e4c013e4d57018366109" id="r_a4549a76725f2e4c013e4d57018366109"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4549a76725f2e4c013e4d57018366109">available</a> ()</td></tr>
+<tr class="memitem:a4549a76725f2e4c013e4d57018366109" id="r_a4549a76725f2e4c013e4d57018366109"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4549a76725f2e4c013e4d57018366109">available</a> ()</td></tr>
 <tr class="memdesc:a4549a76725f2e4c013e4d57018366109"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the number of bytes which are still available in the current chunk  <br /></td></tr>
-<tr class="memitem:acc46c09cb8d4514e746b15c6e34b7781" id="r_acc46c09cb8d4514e746b15c6e34b7781"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acc46c09cb8d4514e746b15c6e34b7781">open</a> (<a class="el" href="class_client.html">Client</a> &amp;client)</td></tr>
+<tr class="memitem:acc46c09cb8d4514e746b15c6e34b7781" id="r_acc46c09cb8d4514e746b15c6e34b7781"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acc46c09cb8d4514e746b15c6e34b7781">open</a> (<a class="el" href="class_client.html">Client</a> &amp;client)</td></tr>
 <tr class="memdesc:acc46c09cb8d4514e746b15c6e34b7781"><td class="mdescLeft">&#160;</td><td class="mdescRight">opens the chunk reader and reads the first chunk length  <br /></td></tr>
-<tr class="memitem:aebd00749787579afa0141ab960655ade" id="r_aebd00749787579afa0141ab960655ade"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aebd00749787579afa0141ab960655ade">read</a> (<a class="el" href="class_client.html">Client</a> &amp;client, uint8_t *str, int len)</td></tr>
+<tr class="memitem:aebd00749787579afa0141ab960655ade" id="r_aebd00749787579afa0141ab960655ade"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aebd00749787579afa0141ab960655ade">read</a> (<a class="el" href="class_client.html">Client</a> &amp;client, <a class="el" href="classuint8__t.html">uint8_t</a> *str, <a class="el" href="classint.html">int</a> len)</td></tr>
 <tr class="memdesc:aebd00749787579afa0141ab960655ade"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads a block of data from the chunks  <br /></td></tr>
-<tr class="memitem:a11fa9692e20bc0ef11ef34ec514843b2" id="r_a11fa9692e20bc0ef11ef34ec514843b2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a11fa9692e20bc0ef11ef34ec514843b2">readln</a> (<a class="el" href="class_client.html">Client</a> &amp;client, uint8_t *str, int len, bool incl_nl=true)</td></tr>
+<tr class="memitem:a11fa9692e20bc0ef11ef34ec514843b2" id="r_a11fa9692e20bc0ef11ef34ec514843b2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a11fa9692e20bc0ef11ef34ec514843b2">readln</a> (<a class="el" href="class_client.html">Client</a> &amp;client, <a class="el" href="classuint8__t.html">uint8_t</a> *str, <a class="el" href="classint.html">int</a> len, <a class="el" href="classbool.html">bool</a> incl_nl=true)</td></tr>
 <tr class="memdesc:a11fa9692e20bc0ef11ef34ec514843b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads a single line from the chunks  <br /></td></tr>
-<tr class="memitem:ac8a38528866c46ed49041c59836444bf" id="r_ac8a38528866c46ed49041c59836444bf"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_http_line_reader.html#ac8a38528866c46ed49041c59836444bf">readlnInternal</a> (<a class="el" href="class_stream.html">Stream</a> &amp;client, uint8_t *str, int len, bool incl_nl=true)</td></tr>
+<tr class="memitem:ac8a38528866c46ed49041c59836444bf" id="r_ac8a38528866c46ed49041c59836444bf"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_http_line_reader.html#ac8a38528866c46ed49041c59836444bf">readlnInternal</a> (<a class="el" href="class_stream.html">Stream</a> &amp;client, <a class="el" href="classuint8__t.html">uint8_t</a> *str, <a class="el" href="classint.html">int</a> len, <a class="el" href="classbool.html">bool</a> incl_nl=true)</td></tr>
 <tr class="memdesc:ac8a38528866c46ed49041c59836444bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads up the the next CR LF - but never more then the indicated len.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-methods" class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:aaee6f229974816d37b7bc11b3b9db370" id="r_aaee6f229974816d37b7bc11b3b9db370"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaee6f229974816d37b7bc11b3b9db370">readChunkLen</a> (<a class="el" href="class_client.html">Client</a> &amp;client)</td></tr>
+<tr class="memitem:aaee6f229974816d37b7bc11b3b9db370" id="r_aaee6f229974816d37b7bc11b3b9db370"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaee6f229974816d37b7bc11b3b9db370">readChunkLen</a> (<a class="el" href="class_client.html">Client</a> &amp;client)</td></tr>
 <tr class="memitem:a58d3e3bd5425d9560c11e9fbd8b89963" id="r_a58d3e3bd5425d9560c11e9fbd8b89963"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a58d3e3bd5425d9560c11e9fbd8b89963">removeCRLF</a> (<a class="el" href="class_client.html">Client</a> &amp;client)</td></tr>
 <tr class="memitem:ad5336bde17ace29dcc8b6cbfade6719a" id="r_ad5336bde17ace29dcc8b6cbfade6719a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad5336bde17ace29dcc8b6cbfade6719a">waitAndConsume</a> (<a class="el" href="class_client.html">Client</a> &amp;client, char expected)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a18d761cb8ab8315d237eb87613efb83b" id="r_a18d761cb8ab8315d237eb87613efb83b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a18d761cb8ab8315d237eb87613efb83b">has_ended</a> = false</td></tr>
+<tr class="memitem:a18d761cb8ab8315d237eb87613efb83b" id="r_a18d761cb8ab8315d237eb87613efb83b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a18d761cb8ab8315d237eb87613efb83b">has_ended</a> = false</td></tr>
 <tr class="memitem:aab7d7623f48c823838290e473fcbc99b" id="r_aab7d7623f48c823838290e473fcbc99b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_http_reply_header.html">HttpReplyHeader</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aab7d7623f48c823838290e473fcbc99b">http_header_ptr</a> = nullptr</td></tr>
-<tr class="memitem:acf8fea59c55f2dca575ea4bc6a81e0ea" id="r_acf8fea59c55f2dca575ea4bc6a81e0ea"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acf8fea59c55f2dca575ea4bc6a81e0ea">last_logged_stall_len</a> = -1</td></tr>
-<tr class="memitem:adbfe189cc7bfaf3b831c809451320536" id="r_adbfe189cc7bfaf3b831c809451320536"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adbfe189cc7bfaf3b831c809451320536">open_chunk_len</a> = 0</td></tr>
+<tr class="memitem:acf8fea59c55f2dca575ea4bc6a81e0ea" id="r_acf8fea59c55f2dca575ea4bc6a81e0ea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acf8fea59c55f2dca575ea4bc6a81e0ea">last_logged_stall_len</a> = -1</td></tr>
+<tr class="memitem:adbfe189cc7bfaf3b831c809451320536" id="r_adbfe189cc7bfaf3b831c809451320536"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adbfe189cc7bfaf3b831c809451320536">open_chunk_len</a> = 0</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Http might reply with chunks. So we need to dechunk the data. see <a href="https://en.wikipedia.org/wiki/Chunked_transfer_encoding">https://en.wikipedia.org/wiki/Chunked_transfer_encoding</a>. </p>
@@ -230,7 +250,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int available </td>
+          <td class="memname"><a class="el" href="classint.html">int</a> available </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -257,7 +277,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool open </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> open </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_client.html">Client</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>client</em></span></td><td>)</td>
           <td></td>
@@ -284,19 +304,19 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int read </td>
+          <td class="memname"><a class="el" href="classint.html">int</a> read </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_client.html">Client</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>client</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>str</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>str</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -320,7 +340,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool readChunkLen </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> readChunkLen </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_client.html">Client</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>client</em></span></td><td>)</td>
           <td></td>
@@ -345,24 +365,24 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int readln </td>
+          <td class="memname"><a class="el" href="classint.html">int</a> readln </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_client.html">Client</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>client</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>str</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>str</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>len</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>incl_nl</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classbool.html">bool</a></td>          <td class="paramname"><span class="paramname"><em>incl_nl</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -386,24 +406,24 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual int readlnInternal </td>
+          <td class="memname">virtual <a class="el" href="classint.html">int</a> readlnInternal </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_stream.html">Stream</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>client</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>str</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>str</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>len</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>incl_nl</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classbool.html">bool</a></td>          <td class="paramname"><span class="paramname"><em>incl_nl</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -483,7 +503,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool has_ended = false</td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> has_ended = false</td>
         </tr>
       </table>
   </td>
@@ -527,7 +547,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int last_logged_stall_len = -1</td>
+          <td class="memname"><a class="el" href="classint.html">int</a> last_logged_stall_len = -1</td>
         </tr>
       </table>
   </td>
@@ -549,7 +569,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int open_chunk_len = 0</td>
+          <td class="memname"><a class="el" href="classint.html">int</a> open_chunk_len = 0</td>
         </tr>
       </table>
   </td>

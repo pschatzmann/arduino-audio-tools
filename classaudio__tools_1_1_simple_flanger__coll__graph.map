@@ -1,9 +1,18 @@
 <map id="SimpleFlanger&lt; effectsuite_t &gt;" name="SimpleFlanger&lt; effectsuite_t &gt;">
-<area shape="rect" id="Node000001" title="Simple Flanger Effect Consistig of a single voice flanger The flanger has an effective range between ..." alt="" coords="114,174,341,201"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_delay_effect_base.html" title=" " alt="" coords="5,81,218,126"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="155,132,211,173,206,173,154,137"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_effect_suite_base.html" title=" " alt="" coords="241,81,448,126"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="304,134,248,175,245,171,299,135"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects." alt="" coords="297,5,392,33"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="346,47,347,82,343,79,343,51"/>
+<area shape="rect" id="Node000001" title="Simple Flanger Effect Consistig of a single voice flanger The flanger has an effective range between ..." alt="" coords="924,269,1150,296"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_delay_effect_base.html" title=" " alt="" coords="267,260,479,305"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="494,280,925,281,921,284,495,285"/>
+<area shape="rect" id="Node000003" href="$classfloat.html" title=" " alt="" coords="5,170,56,198"/>
+<area shape="poly" id="edge9_Node000001_Node000003" title=" " alt="" coords="63,161,79,155,124,146,161,145,243,154,451,177,656,207,970,267,965,269,655,213,451,182,242,160,160,151,125,151,80,160,67,164"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="53,206,81,224,151,242,268,264,264,267,150,247,79,229,55,211"/>
+<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="11,499,50,527"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="65,509,164,498,211,487,229,480,241,472,254,454,258,436,253,397,248,357,252,336,265,315,282,303,278,307,269,319,257,338,253,357,259,396,263,436,258,456,245,476,232,485,213,493,165,504,66,514"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects." alt="" coords="325,329,420,356"/>
+<area shape="poly" id="edge8_Node000007_Node000004" title=" " alt="" coords="63,531,80,537,126,549,164,556,200,554,241,537,267,520,290,498,326,446,351,395,365,359,369,355,356,397,331,449,294,501,271,524,244,542,201,559,163,562,125,554,79,542,63,536"/>
+<area shape="rect" id="Node000005" href="$classbool.html" title=" " alt="" coords="6,298,55,326"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="70,306,267,289,265,294,72,311"/>
+<area shape="poly" id="edge7_Node000007_Node000005" title=" " alt="" coords="65,331,80,336,145,347,212,351,273,350,327,348,322,350,274,355,212,357,145,353,79,341,67,336"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_effect_suite_base.html" title=" " alt="" coords="667,320,874,365"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="887,314,975,296,970,298,888,319"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="436,340,669,341,664,343,437,345"/>
 </map>

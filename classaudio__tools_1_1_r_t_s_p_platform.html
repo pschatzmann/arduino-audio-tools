@@ -88,6 +88,18 @@ $(function() {
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_r_t_s_p_platform_8h_source.html">RTSPPlatform.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for RTSPPlatform&lt; TcpServer, TcpClient, UdpSocket &gt;:</div>
+<div class="dyncontent">
+<div class="center"><img src="classaudio__tools_1_1_r_t_s_p_platform__coll__graph.png" border="0" usemap="#a_r_t_s_p_platform_3_01_tcp_server_00_01_tcp_client_00_01_udp_socket_01_4_coll__map" loading="lazy" alt="Collaboration graph"/></div>
+<map name="a_r_t_s_p_platform_3_01_tcp_server_00_01_tcp_client_00_01_udp_socket_01_4_coll__map" id="a_r_t_s_p_platform_3_01_tcp_server_00_01_tcp_client_00_01_udp_socket_01_4_coll__map">
+<area shape="rect" title="Template&#45;based platform abstraction for RTSP networking." alt="" coords="31,106,222,151"/>
+<area shape="rect" title=" " alt="" coords="5,5,86,33"/>
+<area shape="poly" title=" " alt="" coords="41,46,44,65,49,81,59,93,73,105,68,106,55,97,45,83,39,66,40,51"/>
+<area shape="rect" title=" " alt="" coords="163,5,253,33"/>
+<area shape="poly" title=" " alt="" coords="200,46,181,84,157,108,154,103,177,80,196,49"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
@@ -109,11 +121,11 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memdesc:a2ed7e52483a42a99f245b0a3c4e1a7b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get next available client from server.  <br /></td></tr>
 <tr class="memitem:ac8001c153983bd86d36fc1fe44424e44" id="r_ac8001c153983bd86d36fc1fe44424e44"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac8001c153983bd86d36fc1fe44424e44">getSocketPeerAddr</a> (TcpClient *s, <a class="el" href="classaudio__tools_1_1_i_p_address.html">IPAddress</a> *addr, uint16_t *port)</td></tr>
 <tr class="memdesc:ac8001c153983bd86d36fc1fe44424e44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get remote peer address and port from TCP socket.  <br /></td></tr>
-<tr class="memitem:a3d9b18bc993d4e2e8a0554557971976a" id="r_a3d9b18bc993d4e2e8a0554557971976a"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3d9b18bc993d4e2e8a0554557971976a">readSocket</a> (TcpClient *sock, char *buf, size_t buflen, int timeoutmsec)</td></tr>
+<tr class="memitem:a3d9b18bc993d4e2e8a0554557971976a" id="r_a3d9b18bc993d4e2e8a0554557971976a"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3d9b18bc993d4e2e8a0554557971976a">readSocket</a> (TcpClient *sock, char *buf, <a class="el" href="classsize__t.html">size_t</a> buflen, <a class="el" href="classint.html">int</a> timeoutmsec)</td></tr>
 <tr class="memdesc:a3d9b18bc993d4e2e8a0554557971976a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read from TCP socket with timeout.  <br /></td></tr>
-<tr class="memitem:a99e94a93478934c41cbfecedd71443a5" id="r_a99e94a93478934c41cbfecedd71443a5"><td class="memItemLeft" align="right" valign="top">static ssize_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a99e94a93478934c41cbfecedd71443a5">sendSocket</a> (TcpClient *sockfd, const void *buf, size_t len)</td></tr>
+<tr class="memitem:a99e94a93478934c41cbfecedd71443a5" id="r_a99e94a93478934c41cbfecedd71443a5"><td class="memItemLeft" align="right" valign="top">static ssize_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a99e94a93478934c41cbfecedd71443a5">sendSocket</a> (TcpClient *sockfd, const void *buf, <a class="el" href="classsize__t.html">size_t</a> len)</td></tr>
 <tr class="memdesc:a99e94a93478934c41cbfecedd71443a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send data over TCP socket.  <br /></td></tr>
-<tr class="memitem:a5874bbbfe7f47e388d6014c2153864f9" id="r_a5874bbbfe7f47e388d6014c2153864f9"><td class="memItemLeft" align="right" valign="top">static ssize_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5874bbbfe7f47e388d6014c2153864f9">sendUdpSocket</a> (UdpSocket *sockfd, const void *buf, size_t len, <a class="el" href="classaudio__tools_1_1_i_p_address.html">IPAddress</a> destaddr, uint16_t destport)</td></tr>
+<tr class="memitem:a5874bbbfe7f47e388d6014c2153864f9" id="r_a5874bbbfe7f47e388d6014c2153864f9"><td class="memItemLeft" align="right" valign="top">static ssize_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5874bbbfe7f47e388d6014c2153864f9">sendUdpSocket</a> (UdpSocket *sockfd, const void *buf, <a class="el" href="classsize__t.html">size_t</a> len, <a class="el" href="classaudio__tools_1_1_i_p_address.html">IPAddress</a> destaddr, uint16_t destport)</td></tr>
 <tr class="memdesc:a5874bbbfe7f47e388d6014c2153864f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send <a class="el" href="namespaceaudio__tools.html#ae79683a32908fdf4f2d0fbf0197353f2">UDP</a> packet to specified destination.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-attribs" class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
@@ -405,7 +417,7 @@ template&lt;typename TcpServer, typename TcpClient, typename UdpSocket&gt; </div
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int readSocket </td>
+          <td class="memname"><a class="el" href="classint.html">int</a> readSocket </td>
           <td>(</td>
           <td class="paramtype">TcpClient *</td>          <td class="paramname"><span class="paramname"><em>sock</em></span>, </td>
         </tr>
@@ -417,12 +429,12 @@ template&lt;typename TcpServer, typename TcpClient, typename UdpSocket&gt; </div
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>buflen</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>buflen</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>timeoutmsec</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>timeoutmsec</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -470,7 +482,7 @@ template&lt;typename TcpServer, typename TcpClient, typename UdpSocket&gt; </div
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -517,7 +529,7 @@ template&lt;typename TcpServer, typename TcpClient, typename UdpSocket&gt; </div
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>len</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>

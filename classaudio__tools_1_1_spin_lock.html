@@ -102,21 +102,23 @@ Collaboration diagram for SpinLock:</div>
 <div class="dyncontent">
 <div class="center"><img src="classaudio__tools_1_1_spin_lock__coll__graph.png" border="0" usemap="#a_spin_lock_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="a_spin_lock_coll__map" id="a_spin_lock_coll__map">
-<area shape="rect" title="Busy&#45;wait lock based on std::atomic &#45; available on all platforms that support &lt;atomic&gt;." alt="" coords="13,81,92,109"/>
+<area shape="rect" title="Busy&#45;wait lock based on std::atomic &#45; available on all platforms that support &lt;atomic&gt;." alt="" coords="80,106,159,134"/>
 <area shape="rect" href="classaudio__tools_1_1_mutex_base.html" title="Empty Mutex implementation which does nothing." alt="" coords="5,5,100,33"/>
-<area shape="poly" title=" " alt="" coords="54,47,55,81,50,80,51,51"/>
+<area shape="poly" title=" " alt="" coords="71,44,113,105,108,106,68,48"/>
+<area shape="rect" title=" " alt="" coords="124,5,248,33"/>
+<area shape="poly" title=" " alt="" coords="171,45,130,107,126,104,166,47"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ad81318257fd78328c5c86fa6a3a861dd" id="r_ad81318257fd78328c5c86fa6a3a861dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad81318257fd78328c5c86fa6a3a861dd">lock</a> () override</td></tr>
-<tr class="memitem:aa24a64f788f142df670c3abc809d32b6" id="r_aa24a64f788f142df670c3abc809d32b6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa24a64f788f142df670c3abc809d32b6">try_lock</a> ()</td></tr>
+<tr class="memitem:aa24a64f788f142df670c3abc809d32b6" id="r_aa24a64f788f142df670c3abc809d32b6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa24a64f788f142df670c3abc809d32b6">try_lock</a> ()</td></tr>
 <tr class="memitem:a333677ac769a10df2775f24893e07c21" id="r_a333677ac769a10df2775f24893e07c21"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a333677ac769a10df2775f24893e07c21">unlock</a> () override</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:aa1a37bcb8639cecbee4b89cdaec1e8d7" id="r_aa1a37bcb8639cecbee4b89cdaec1e8d7"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa1a37bcb8639cecbee4b89cdaec1e8d7">lock_</a> = {false}</td></tr>
+<tr class="memitem:aa1a37bcb8639cecbee4b89cdaec1e8d7" id="r_aa1a37bcb8639cecbee4b89cdaec1e8d7"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; <a class="el" href="classbool.html">bool</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa1a37bcb8639cecbee4b89cdaec1e8d7">lock_</a> = {false}</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Busy-wait lock based on std::atomic - available on all platforms that support &lt;atomic&gt;. </p>
@@ -160,7 +162,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool try_lock </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> try_lock </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -213,7 +215,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::atomic&lt;bool&gt; lock_ = {false}</td>
+          <td class="memname">std::atomic&lt;<a class="el" href="classbool.html">bool</a>&gt; lock_ = {false}</td>
         </tr>
       </table>
   </td>

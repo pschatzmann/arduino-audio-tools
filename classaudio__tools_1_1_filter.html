@@ -93,17 +93,17 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:abcbedfb9862a43d87c7fff8edf19cbae" id="r_abcbedfb9862a43d87c7fff8edf19cbae"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abcbedfb9862a43d87c7fff8edf19cbae">Filter</a> (Filter const &amp;)=delete</td></tr>
 <tr class="memitem:ae1c65551721afed8f1cbc9713c0f64c8" id="r_ae1c65551721afed8f1cbc9713c0f64c8"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae1c65551721afed8f1cbc9713c0f64c8">~Filter</a> ()=default</td></tr>
 <tr class="memitem:adf48edf467405a65ff01c46ef215643c" id="r_adf48edf467405a65ff01c46ef215643c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a4a4a36f0d116c137ad7c78aa8ff6ab14">Filter</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adf48edf467405a65ff01c46ef215643c">operator=</a> (<a class="el" href="#a4a4a36f0d116c137ad7c78aa8ff6ab14">Filter</a> const &amp;)=delete</td></tr>
-<tr class="memitem:acd1ddbd60df780b8bad4a79ceb0a00e9" id="r_acd1ddbd60df780b8bad4a79ceb0a00e9"><td class="memItemLeft" align="right" valign="top">virtual T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acd1ddbd60df780b8bad4a79ceb0a00e9">process</a> (T in)=0</td></tr>
+<tr class="memitem:acd1ddbd60df780b8bad4a79ceb0a00e9" id="r_acd1ddbd60df780b8bad4a79ceb0a00e9"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_t.html">T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acd1ddbd60df780b8bad4a79ceb0a00e9">process</a> (<a class="el" href="class_t.html">T</a> in)=0</td></tr>
 <tr class="memdesc:acd1ddbd60df780b8bad4a79ceb0a00e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes the input value and returns the filtered output value.  <br /></td></tr>
 <tr class="memitem:a7b0e029102ad38f4b814c6523aedb53d" id="r_a7b0e029102ad38f4b814c6523aedb53d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7b0e029102ad38f4b814c6523aedb53d">reset</a> ()</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename T = float&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename <a class="el" href="class_t.html">T</a> = float&gt;<br />
 class audio_tools::Filter&lt; T &gt;</div><p>Abstract filter interface definition. Subclasses implement <a class="el" href="#acd1ddbd60df780b8bad4a79ceb0a00e9" title="Processes the input value and returns the filtered output value.">process()</a> to transform audio samples one at a time. Use <a class="el" href="#a7b0e029102ad38f4b814c6523aedb53d">reset()</a> to clear internal state (e.g. delay lines) without changing the filter coefficients. </p>
 <dl class="section author"><dt>Author</dt><dd>pschatzmann </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td>sample type (e.g. int16_t, float, double) </td></tr>
+    <tr><td class="paramname"><a class="el" href="class_t.html">T</a></td><td>sample type (e.g. <a class="el" href="classint16__t.html">int16_t</a>, float, double) </td></tr>
   </table>
   </dd>
 </dl>
@@ -114,7 +114,7 @@ class audio_tools::Filter&lt; T &gt;</div><p>Abstract filter interface definitio
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T = float&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a> = float&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -141,7 +141,7 @@ template&lt;typename T = float&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T = float&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a> = float&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -168,7 +168,7 @@ template&lt;typename T = float&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T = float&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a> = float&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -176,7 +176,7 @@ template&lt;typename T = float&gt; </div>
         <tr>
           <td class="memname">Filter </td>
           <td>(</td>
-          <td class="paramtype">Filter&lt; T &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">Filter&lt; <a class="el" href="class_t.html">T</a> &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -196,7 +196,7 @@ template&lt;typename T = float&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T = float&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a> = float&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -204,7 +204,7 @@ template&lt;typename T = float&gt; </div>
         <tr>
           <td class="memname"><a class="el" href="#a4a4a36f0d116c137ad7c78aa8ff6ab14">Filter</a> &amp; operator= </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a4a4a36f0d116c137ad7c78aa8ff6ab14">Filter</a>&lt; T &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a4a4a36f0d116c137ad7c78aa8ff6ab14">Filter</a>&lt; <a class="el" href="class_t.html">T</a> &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -223,15 +223,15 @@ template&lt;typename T = float&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T = float&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a> = float&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual T process </td>
+          <td class="memname">virtual <a class="el" href="class_t.html">T</a> process </td>
           <td>(</td>
-          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>in</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_t.html">T</a></td>          <td class="paramname"><span class="paramname"><em>in</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -252,7 +252,7 @@ template&lt;typename T = float&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T = float&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a> = float&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">

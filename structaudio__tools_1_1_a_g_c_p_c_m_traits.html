@@ -79,7 +79,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename <a class="el" href="class_t.html">T</a>&gt;<br />
 struct audio_tools::AGCPCMTraits&lt; T &gt;</div><p>PCM type traits used by <a class="el" href="classaudio__tools_1_1_automatic_gain_control_stream.html" title="Slow automatic loudness normalization for PCM audio.">AutomaticGainControlStream</a>.</p>
 <p>Declared at namespace scope (rather than as a nested member template) because explicit specialization of a member template inside a class body is not standard C++ and is rejected by some compilers.</p>
 <p>fixed_shift is the right-shift that normalizes a sample to ~16-bit range before squaring in the PREFER_FIXEDPOINT accumulation path, so the sum of squares cannot overflow int64_t even for large blocks. </p>

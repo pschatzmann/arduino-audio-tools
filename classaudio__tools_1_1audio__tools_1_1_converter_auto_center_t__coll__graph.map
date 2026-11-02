@@ -1,10 +1,18 @@
 <map id="ConverterAutoCenterT&lt; T &gt;" name="ConverterAutoCenterT&lt; T &gt;">
-<area shape="rect" id="Node000001" title="Makes sure that the avg of the signal is set to 0." alt="" coords="5,274,210,301"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="" coords="49,106,166,134"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="102,147,101,215,105,274,100,273,96,215,99,151"/>
-<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="116,147,119,215,115,274,110,272,114,215,113,151"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="190,106,316,134"/>
-<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="234,146,121,275,117,271,229,144"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="213,5,292,33"/>
-<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="254,46,255,106,250,104,251,51"/>
+<area shape="rect" id="Node000001" title="Makes sure that the avg of the signal is set to 0." alt="" coords="68,316,273,343"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="" coords="5,138,123,166"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="75,177,117,250,161,315,155,316,113,253,72,182"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="87,176,134,249,170,315,165,315,130,252,85,181"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="261,138,382,166"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="303,178,184,317,180,313,298,178"/>
+<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="174,5,213,33"/>
+<area shape="poly" id="edge9_Node000001_Node000004" title=" " alt="" coords="192,46,186,129,174,316,169,314,181,128,189,51"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="204,45,220,75,241,102,265,121,291,137,286,138,262,126,237,106,216,78,203,50"/>
+<area shape="rect" id="Node000005" href="$classfloat.html" title=" " alt="" coords="286,5,336,33"/>
+<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="313,46,319,104,322,139,317,137,313,105,311,51"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="360,5,440,33"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="394,46,385,77,370,106,339,140,336,136,366,103,380,75,391,50"/>
+<area shape="rect" id="Node000007" href="$classbool.html" title=" " alt="" coords="569,5,618,33"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="633,31,650,41,662,56,670,80,662,105,637,149,610,182,582,208,552,228,481,260,392,294,333,312,274,323,273,318,332,307,390,289,479,255,549,224,579,204,606,179,632,146,658,103,665,80,658,58,646,45,632,36"/>
+<area shape="poly" id="edge7_Node000003_Node000007" title=" " alt="" coords="552,34,532,45,511,59,500,71,495,82,488,94,476,106,431,130,383,144,382,139,429,125,473,102,484,91,490,80,496,68,507,55,529,41,556,31"/>
 </map>

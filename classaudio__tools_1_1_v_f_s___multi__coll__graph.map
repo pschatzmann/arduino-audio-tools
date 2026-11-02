@@ -1,18 +1,30 @@
 <map id="VFS_Multi" name="VFS_Multi">
-<area shape="rect" id="Node000001" title="Define multipe VFS with their mount point." alt="" coords="122,526,207,553"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_v_f_s.html" title="Base class which uses c++ file functions. It is also used as base class for an ESP32 Virtual File Sys..." alt="" coords="163,307,208,335"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="179,348,179,360,171,408,167,526,161,524,166,408,174,358,177,353"/>
-<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="180,408,332,453"/>
-<area shape="poly" id="edge8_Node000007_Node000002" title=" " alt="" coords="182,348,185,367,190,383,213,407,208,408,186,385,180,368,180,353"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_str.html" title="Str which keeps the data on the heap. We grow the allocated memory only if the copy source is not fit..." alt="" coords="166,207,205,234"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="186,248,188,307,183,306,185,252"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_str_view.html" title="A simple wrapper to provide string functions on existing allocated char*. If the underlying char* is ..." alt="" coords="150,106,221,134"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="178,146,182,206,176,206,177,151"/>
-<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="194,146,194,207,189,205,193,151"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="5,106,126,134"/>
-<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="88,142,133,181,168,206,163,208,130,185,89,147"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="122,5,201,33"/>
-<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="137,47,81,107,76,104,139,42"/>
-<area shape="poly" id="edge9_Node000007_Node000006" title=" " alt="" coords="202,39,224,54,243,72,256,93,261,118,261,323,260,408,255,406,256,322,256,119,251,95,238,75,221,58,203,44"/>
-<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="230,464,177,527,174,523,225,465"/>
+<area shape="rect" id="Node000001" title="Define multipe VFS with their mount point." alt="" coords="73,590,158,618"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_v_f_s.html" title="Base class which uses c++ file functions. It is also used as base class for an ESP32 Virtual File Sys..." alt="" coords="93,372,138,399"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="118,414,118,590,113,589,113,416"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="134,472,286,517"/>
+<area shape="poly" id="edge16_Node000010_Node000002" title=" " alt="" coords="122,412,131,431,141,447,169,471,164,472,137,450,127,433,122,417"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,5,55,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="14,50,14,58,9,92,14,126,34,201,62,271,111,371,105,372,57,273,29,202,9,127,4,92,9,56,15,44"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_str_view.html" title="A simple wrapper to provide string functions on existing allocated char*. If the underlying char* is ..." alt="" coords="294,151,366,178"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="21,51,20,88,24,108,34,125,46,131,70,137,141,147,296,160,292,163,141,152,69,142,44,136,30,129,19,110,15,89,22,45"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="390,151,510,178"/>
+<area shape="poly" id="edge11_Node000008_Node000003" title=" " alt="" coords="68,33,110,55,133,74,148,92,163,109,187,124,238,141,280,145,323,144,378,148,392,151,387,153,378,153,323,149,279,150,236,146,185,129,160,113,144,96,129,78,107,59,70,38"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_str.html" title="Str which keeps the data on the heap. We grow the allocated memory only if the copy source is not fit..." alt="" coords="385,261,424,289"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="369,298,367,301,304,327,239,350,140,380,137,376,238,345,302,322,365,296,374,295"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="340,189,392,261,387,261,340,194"/>
+<area shape="poly" id="edge8_Node000004_Node000005" title=" " alt="" coords="355,188,405,261,399,261,354,193"/>
+<area shape="rect" id="Node000006" href="$classbool.html" title=" " alt="" coords="229,5,279,33"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="248,46,247,87,250,107,258,125,274,141,296,153,291,155,271,146,253,128,245,109,242,87,246,51"/>
+<area shape="poly" id="edge13_Node000008_Node000006" title=" " alt="" coords="292,35,319,55,330,74,334,92,337,109,349,125,368,139,392,150,387,152,366,143,345,129,333,111,328,93,325,76,315,59,293,40"/>
+<area shape="poly" id="edge18_Node000010_Node000006" title=" " alt="" coords="242,45,223,101,216,132,213,163,213,387,213,472,207,471,207,387,207,163,210,131,218,99,240,50"/>
+<area shape="rect" id="Node000007" href="$classint.html" title=" " alt="" coords="609,5,648,33"/>
+<area shape="poly" id="edge7_Node000005_Node000007" title=" " alt="" coords="592,26,559,38,541,47,526,59,516,75,514,93,512,111,500,129,470,146,443,150,413,149,378,153,368,156,365,151,378,148,413,144,442,145,468,141,496,125,507,109,509,92,511,74,522,55,538,43,557,33,596,23"/>
+<area shape="poly" id="edge10_Node000008_Node000007" title=" " alt="" coords="630,46,624,90,615,111,601,129,581,144,558,154,512,165,510,160,557,149,579,139,597,125,610,108,619,88,627,51"/>
+<area shape="poly" id="edge15_Node000010_Node000007" title=" " alt="" coords="662,28,684,39,701,55,717,82,722,106,721,163,721,387,717,403,707,418,692,431,672,442,620,461,556,474,414,490,287,496,286,490,414,485,555,469,618,455,669,437,689,427,703,414,712,401,715,387,715,163,717,107,712,84,697,59,681,43,662,33"/>
+<area shape="poly" id="edge9_Node000004_Node000008" title=" " alt="" coords="441,190,412,262,408,259,437,194"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="772,5,851,33"/>
+<area shape="poly" id="edge12_Node000008_Node000009" title=" " alt="" coords="782,41,765,59,748,79,737,97,725,113,703,129,668,141,619,150,512,162,510,157,618,145,667,136,701,124,721,110,733,94,744,75,761,55,778,44"/>
+<area shape="poly" id="edge17_Node000010_Node000009" title=" " alt="" coords="836,42,846,56,858,84,863,108,865,163,865,387,860,413,848,430,830,440,806,444,751,445,692,451,583,471,473,484,287,495,286,489,472,478,582,465,691,446,751,440,806,439,828,435,845,426,855,411,859,387,859,163,858,109,852,86,841,58,835,47"/>
+<area shape="poly" id="edge14_Node000001_Node000010" title=" " alt="" coords="183,528,128,592,125,588,178,529"/>
 </map>

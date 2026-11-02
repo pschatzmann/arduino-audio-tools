@@ -376,5 +376,6 @@ var searchData=
   ['dynarray_373',['DynArray',['../classffft_1_1_dyn_array.html',1,'DynArray&lt; T &gt;'],['../classffft_1_1_dyn_array.html#aad83e212c783439657f43f0618cde737',1,'ffft::DynArray::DynArray()'],['../classffft_1_1_dyn_array.html#ac58c6d089597dbcfe8070133fdc54b84',1,'ffft::DynArray::DynArray(long size)']]],
   ['dynarray_3c_20datatype_20_3e_374',['DynArray&lt; DataType &gt;',['../classffft_1_1_dyn_array.html',1,'ffft']]],
   ['dynarray_3c_20ffft_3a_3aoscsincos_3c_20datatype_20_3e_20_3e_375',['DynArray&lt; ffft::OscSinCos&lt; DataType &gt; &gt;',['../classffft_1_1_dyn_array.html',1,'ffft']]],
-  ['dynarray_3c_20long_20_3e_376',['DynArray&lt; long &gt;',['../classffft_1_1_dyn_array.html',1,'ffft']]]
+  ['dynarray_3c_20float_20_3e_376',['DynArray&lt; float &gt;',['../classffft_1_1_dyn_array.html',1,'ffft']]],
+  ['dynarray_3c_20long_20_3e_377',['DynArray&lt; long &gt;',['../classffft_1_1_dyn_array.html',1,'ffft']]]
 ];

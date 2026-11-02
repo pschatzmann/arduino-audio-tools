@@ -1,0 +1,13 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classaudio__tools_1_1_v_f_s.html" title="Base class which uses c++ file functions. It is also used as base class for an ESP32 Virtual File Sys..." alt="" coords="5,109,51,137"/>
+<area shape="rect" id="Node000001" href="$classaudio__tools_1_1_v_f_s___little_f_s.html" title="ESP32 Virtual File System for the LittleFS. The default mount point is &quot;/littlefs&quot; DRAFT implementati..." alt="" coords="100,5,200,33"/>
+<area shape="poly" id="edge920_Node000000_Node000001" title=" " alt="" coords="46,96,69,69,97,44,119,32,116,36,100,48,73,73,51,99"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_v_f_s___multi.html" title="Define multipe VFS with their mount point." alt="" coords="108,57,193,85"/>
+<area shape="poly" id="edge921_Node000000_Node000002" title=" " alt="" coords="64,105,117,83,114,88,67,110"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_v_f_s___s_d_m_m_c.html" title="ESP32 Virtual File System for SDMMC. The default mount point is &quot;/sdcard&quot; DRAFT implementation: not t..." alt="" coords="99,109,202,137"/>
+<area shape="poly" id="edge922_Node000000_Node000003" title=" " alt="" coords="66,121,100,122,96,125,68,126"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_v_f_s___s_d_s_p_i.html" title="ESP32 Virtual File System for SPI SD. The default mount point is &quot;/sdcard&quot; DRAFT implementation: not ..." alt="" coords="105,161,196,189"/>
+<area shape="poly" id="edge923_Node000000_Node000004" title=" " alt="" coords="65,136,118,159,114,162,65,141"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_v_f_s___s_p_f_f_s.html" title="ESP32 Virtual File System for the SPFFS. The default mount point is &quot;/spiffs&quot; DRAFT implementation: n..." alt="" coords="105,213,196,241"/>
+<area shape="poly" id="edge924_Node000000_Node000005" title=" " alt="" coords="49,146,73,173,100,198,120,213,115,213,97,203,69,177,48,152"/>
+</map>

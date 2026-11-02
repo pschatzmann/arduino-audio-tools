@@ -1,9 +1,25 @@
 <map id="I2SDriverESP8266" name="I2SDriverESP8266">
-<area shape="rect" id="Node000001" title="Basic I2S API &#45; for the ESP8266 Only 16 bits are supported !" alt="" coords="37,183,175,211"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_i2_s_driver_base.html" title=" " alt="" coords="5,82,119,110"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="76,122,103,182,97,183,72,126"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_i2_s_config_std.html" title="Configuration for i2s." alt="" coords="142,82,246,110"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="175,121,120,184,116,180,170,122"/>
-<area shape="rect" id="Node000004" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="152,5,236,33"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="195,46,196,83,192,81,193,51"/>
+<area shape="rect" id="Node000001" title="Basic I2S API &#45; for the ESP8266 Only 16 bits are supported !" alt="" coords="260,464,398,491"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_i2_s_driver_base.html" title=" " alt="" coords="251,363,364,391"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="316,404,329,464,324,462,312,408"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_i2_s_config_std.html" title="Configuration for i2s." alt="" coords="388,363,492,391"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="417,400,345,465,343,461,412,402"/>
+<area shape="rect" id="Node000004" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="121,106,204,134"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="165,146,174,191,187,242,211,294,227,317,247,337,278,355,307,358,338,357,378,360,390,365,385,365,377,366,338,363,306,364,276,360,244,341,223,321,206,297,182,244,168,192,164,151"/>
+<area shape="rect" id="Node000005" href="$classuint32__t.html" title=" " alt="" coords="5,5,80,33"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="48,46,59,65,70,80,94,97,123,109,118,111,92,102,66,84,54,67,49,51"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="125,5,200,33"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="163,46,165,106,160,105,162,51"/>
+<area shape="rect" id="Node000007" href="$classuint8__t.html" title=" " alt="" coords="227,5,293,33"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="253,45,245,67,232,84,216,97,198,107,195,104,213,93,229,80,240,64,250,50"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="228,106,318,134"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="266,146,258,190,254,240,260,292,269,316,282,337,319,348,390,365,385,366,318,353,279,341,264,318,254,293,248,241,253,190,263,151"/>
+<area shape="rect" id="Node000009" href="$classbool.html" title=" " alt="" coords="364,106,414,134"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="383,146,377,188,373,237,377,289,383,314,393,338,402,350,416,363,411,362,399,354,388,340,378,316,372,290,368,237,372,188,380,151"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="448,106,536,134"/>
+<area shape="poly" id="edge9_Node000003_Node000010" title=" " alt="" coords="493,147,488,236,479,288,465,340,452,364,448,360,460,338,474,287,483,235,490,151"/>
+<area shape="rect" id="Node000011" href="$classint.html" title=" " alt="" coords="582,106,620,134"/>
+<area shape="poly" id="edge10_Node000003_Node000011" title=" " alt="" coords="603,147,598,254,589,306,582,326,574,341,556,356,536,366,493,377,492,372,534,361,553,351,570,337,578,324,584,304,593,253,599,151"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="688,106,800,134"/>
+<area shape="poly" id="edge11_Node000003_Node000012" title=" " alt="" coords="751,147,757,191,757,243,745,295,733,320,716,341,700,352,678,360,619,371,552,377,492,378,491,373,552,371,618,366,676,355,698,347,713,337,729,317,740,294,751,242,752,191,748,151"/>
 </map>

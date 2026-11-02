@@ -1,13 +1,16 @@
 <map id="CodecCopy" name="CodecCopy">
-<area shape="rect" id="Node000001" title=" " alt="" coords="82,183,176,211"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="23,82,121,110"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="86,122,106,158,122,183,117,182,102,160,84,126"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="5,5,139,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="64,46,68,82,62,82,63,51"/>
-<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="82,46,82,83,76,81,80,51"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="154,82,222,110"/>
-<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="175,122,139,184,135,181,170,124"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="162,5,214,33"/>
-<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="181,46,184,83,178,81,178,51"/>
-<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="198,46,197,83,193,81,195,51"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="129,307,223,335"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="23,207,121,234"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,246,115,281,151,307,145,307,112,285,85,250"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="5,106,139,134"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="65,146,68,206,63,206,63,151"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="81,146,81,206,76,206,79,151"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="247,207,316,234"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="259,244,192,309,189,305,254,246"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="256,106,307,134"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="275,147,277,207,273,205,272,151"/>
+<area shape="poly" id="edge7_Node000004_Node000005" title=" " alt="" coords="291,147,290,207,285,205,288,151"/>
+<area shape="rect" id="Node000006" href="$classint.html" title=" " alt="" coords="178,5,217,33"/>
+<area shape="poly" id="edge8_Node000001_Node000006" title=" " alt="" coords="198,48,180,307,174,306,193,49"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="219,42,273,105,267,106,218,47"/>
 </map>

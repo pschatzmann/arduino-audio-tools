@@ -102,10 +102,14 @@ Collaboration diagram for OutputFPSMeter:</div>
 <div class="dyncontent">
 <div class="center"><img src="classaudio__tools_1_1_output_f_p_s_meter__coll__graph.png" border="0" usemap="#a_output_f_p_s_meter_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="a_output_f_p_s_meter_coll__map" id="a_output_f_p_s_meter_coll__map">
-<area shape="rect" title="Wraps a VideoOutput (typically a codec decoder, e.g. H264Decoder/ MJPEGDecoder/MPGDecoder or a MultiV..." alt="" coords="5,106,133,134"/>
-<area shape="rect" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="" coords="18,5,120,33"/>
-<area shape="poly" title=" " alt="" coords="68,46,69,57,69,82,70,106,65,105,64,82,64,57,66,51"/>
-<area shape="poly" title=" " alt="" coords="71,47,72,106,66,105,67,50"/>
+<area shape="rect" title="Wraps a VideoOutput (typically a codec decoder, e.g. H264Decoder/ MJPEGDecoder/MPGDecoder or a MultiV..." alt="" coords="65,285,192,312"/>
+<area shape="rect" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="" coords="5,5,108,33"/>
+<area shape="poly" title=" " alt="" coords="48,50,41,92,35,147,39,205,46,233,59,259,70,272,87,284,81,284,67,276,54,262,41,235,33,206,29,147,35,91,48,45"/>
+<area shape="poly" title=" " alt="" coords="57,46,62,162,69,220,81,259,91,272,105,284,100,284,87,276,76,262,64,221,57,162,55,51"/>
+<area shape="rect" href="classbool.html" title=" " alt="" coords="150,5,200,33"/>
+<area shape="poly" title=" " alt="" coords="176,46,170,144,162,203,148,261,138,286,134,282,143,260,157,202,165,143,173,50"/>
+<area shape="rect" href="classuint32__t.html" title=" " alt="" coords="277,5,351,33"/>
+<area shape="poly" title=" " alt="" coords="321,46,328,93,328,151,324,181,316,210,304,238,286,263,271,273,249,281,193,292,192,287,247,276,269,268,283,259,299,235,311,208,319,180,323,150,323,94,318,50"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -113,35 +117,35 @@ Collaboration diagram for OutputFPSMeter:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a4efd73c7bb278deb5100928965fbd699" id="r_a4efd73c7bb278deb5100928965fbd699"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4efd73c7bb278deb5100928965fbd699">OutputFPSMeter</a> (<a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> &amp;target)</td></tr>
 <tr class="memitem:a04f2540d940cc37b5c2538ed8e5b54be" id="r_a04f2540d940cc37b5c2538ed8e5b54be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a04f2540d940cc37b5c2538ed8e5b54be">flush</a> () override</td></tr>
-<tr class="memitem:a5f1f94e0964e9fe78701eef6cb81dc3f" id="r_a5f1f94e0964e9fe78701eef6cb81dc3f"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5f1f94e0964e9fe78701eef6cb81dc3f">frameCount</a> () const</td></tr>
-<tr class="memitem:a61bb2fabd1c085db6d5a54ae9691f9cb" id="r_a61bb2fabd1c085db6d5a54ae9691f9cb"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a61bb2fabd1c085db6d5a54ae9691f9cb">frameCountI</a> () const</td></tr>
+<tr class="memitem:a5f1f94e0964e9fe78701eef6cb81dc3f" id="r_a5f1f94e0964e9fe78701eef6cb81dc3f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5f1f94e0964e9fe78701eef6cb81dc3f">frameCount</a> () const</td></tr>
+<tr class="memitem:a61bb2fabd1c085db6d5a54ae9691f9cb" id="r_a61bb2fabd1c085db6d5a54ae9691f9cb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a61bb2fabd1c085db6d5a54ae9691f9cb">frameCountI</a> () const</td></tr>
 <tr class="memdesc:a61bb2fabd1c085db6d5a54ae9691f9cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of those classified as keyframes (I-frames).  <br /></td></tr>
-<tr class="memitem:aa04cc257205a46ece9e2c012baec4882" id="r_aa04cc257205a46ece9e2c012baec4882"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa04cc257205a46ece9e2c012baec4882">frameCountP</a> () const</td></tr>
+<tr class="memitem:aa04cc257205a46ece9e2c012baec4882" id="r_aa04cc257205a46ece9e2c012baec4882"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa04cc257205a46ece9e2c012baec4882">frameCountP</a> () const</td></tr>
 <tr class="memdesc:aa04cc257205a46ece9e2c012baec4882"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of those classified as non-keyframes (P-frames).  <br /></td></tr>
-<tr class="memitem:a8419abee0c4d380be1cb8ff963fb8d0a" id="r_a8419abee0c4d380be1cb8ff963fb8d0a"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a8419abee0c4d380be1cb8ff963fb8d0a">getWriteTimeMs</a> () const</td></tr>
+<tr class="memitem:a8419abee0c4d380be1cb8ff963fb8d0a" id="r_a8419abee0c4d380be1cb8ff963fb8d0a"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a8419abee0c4d380be1cb8ff963fb8d0a">getWriteTimeMs</a> () const</td></tr>
 <tr class="memdesc:a8419abee0c4d380be1cb8ff963fb8d0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional: returns the time (ms) spent in the last <a class="el" href="classaudio__tools_1_1_video_output.html#a4f016ab9037bd654f538f107eb1d8f78">write()</a> call.  <br /></td></tr>
-<tr class="memitem:a6b9d7d37dfa865711aa1474be238da12" id="r_a6b9d7d37dfa865711aa1474be238da12"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a6b9d7d37dfa865711aa1474be238da12">hadOutput</a> () const</td></tr>
-<tr class="memitem:abd16630f3db4bcac2f0677b7197f3af9" id="r_abd16630f3db4bcac2f0677b7197f3af9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abd16630f3db4bcac2f0677b7197f3af9">isKeyFrame</a> (const uint8_t *data, size_t len) override</td></tr>
+<tr class="memitem:a6b9d7d37dfa865711aa1474be238da12" id="r_a6b9d7d37dfa865711aa1474be238da12"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a6b9d7d37dfa865711aa1474be238da12">hadOutput</a> () const</td></tr>
+<tr class="memitem:abd16630f3db4bcac2f0677b7197f3af9" id="r_abd16630f3db4bcac2f0677b7197f3af9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abd16630f3db4bcac2f0677b7197f3af9">isKeyFrame</a> (const <a class="el" href="classuint8__t.html">uint8_t</a> *data, <a class="el" href="classsize__t.html">size_t</a> len) override</td></tr>
 <tr class="memitem:acd2dd94ca9b2413fbb375c4c04bc5907" id="r_acd2dd94ca9b2413fbb375c4c04bc5907"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acd2dd94ca9b2413fbb375c4c04bc5907">logTo</a> (<a class="el" href="class_print.html">Print</a> &amp;out)</td></tr>
-<tr class="memitem:a94f8728be362b736be4cb10a4253d201" id="r_a94f8728be362b736be4cb10a4253d201"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a94f8728be362b736be4cb10a4253d201">setSkipRender</a> (bool skip) override</td></tr>
+<tr class="memitem:a94f8728be362b736be4cb10a4253d201" id="r_a94f8728be362b736be4cb10a4253d201"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a94f8728be362b736be4cb10a4253d201">setSkipRender</a> (<a class="el" href="classbool.html">bool</a> skip) override</td></tr>
 <tr class="memitem:a03d6419c0018dfd2de3fcdb93bc02873" id="r_a03d6419c0018dfd2de3fcdb93bc02873"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a03d6419c0018dfd2de3fcdb93bc02873">setVideoInfoSource</a> (<a class="el" href="classaudio__tools_1_1_video_info_source.html">VideoInfoSource</a> &amp;source)</td></tr>
-<tr class="memitem:a5cbfd0eb02e54df848e83260a891a15f" id="r_a5cbfd0eb02e54df848e83260a891a15f"><td class="memItemLeft" align="right" valign="top">virtual uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a5cbfd0eb02e54df848e83260a891a15f">totalDecodeMs</a> () const</td></tr>
-<tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
+<tr class="memitem:a5cbfd0eb02e54df848e83260a891a15f" id="r_a5cbfd0eb02e54df848e83260a891a15f"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classuint64__t.html">uint64_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_video_output.html#a5cbfd0eb02e54df848e83260a891a15f">totalDecodeMs</a> () const</td></tr>
+<tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7597ef706dd1aa590903ce9e095db20a">write</a> (const <a class="el" href="classuint8__t.html">uint8_t</a> *data, <a class="el" href="classsize__t.html">size_t</a> len) override</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:ab269314d6a399a9ac3dce2c46fdfcd86" id="r_ab269314d6a399a9ac3dce2c46fdfcd86"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab269314d6a399a9ac3dce2c46fdfcd86">call_ms</a> = 0</td></tr>
-<tr class="memitem:ae3e00071db1070451c10872b09360cad" id="r_ae3e00071db1070451c10872b09360cad"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae3e00071db1070451c10872b09360cad">frame_count</a> = 0</td></tr>
-<tr class="memitem:a655b8eea0c0316ab56bab2d8031ed3de" id="r_a655b8eea0c0316ab56bab2d8031ed3de"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a655b8eea0c0316ab56bab2d8031ed3de">have_pending</a> = false</td></tr>
-<tr class="memitem:a824709d12a608a9be920037f0ac94c95" id="r_a824709d12a608a9be920037f0ac94c95"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a824709d12a608a9be920037f0ac94c95">i_count</a> = 0</td></tr>
-<tr class="memitem:a30c968d5a65576d27e9a1ba02888e592" id="r_a30c968d5a65576d27e9a1ba02888e592"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a30c968d5a65576d27e9a1ba02888e592">i_ms</a> = 0</td></tr>
-<tr class="memitem:ae3bdbafb2ea1bc4c2fafed28f7529174" id="r_ae3bdbafb2ea1bc4c2fafed28f7529174"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae3bdbafb2ea1bc4c2fafed28f7529174">last_ms</a> = 0</td></tr>
-<tr class="memitem:a72bfffc9acc09990385a3899a5ddbc12" id="r_a72bfffc9acc09990385a3899a5ddbc12"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a72bfffc9acc09990385a3899a5ddbc12">p_count</a> = 0</td></tr>
-<tr class="memitem:aaa536140fd648691bcedf21dc57ec02b" id="r_aaa536140fd648691bcedf21dc57ec02b"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaa536140fd648691bcedf21dc57ec02b">p_ms</a> = 0</td></tr>
+<tr class="memitem:ab269314d6a399a9ac3dce2c46fdfcd86" id="r_ab269314d6a399a9ac3dce2c46fdfcd86"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab269314d6a399a9ac3dce2c46fdfcd86">call_ms</a> = 0</td></tr>
+<tr class="memitem:ae3e00071db1070451c10872b09360cad" id="r_ae3e00071db1070451c10872b09360cad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae3e00071db1070451c10872b09360cad">frame_count</a> = 0</td></tr>
+<tr class="memitem:a655b8eea0c0316ab56bab2d8031ed3de" id="r_a655b8eea0c0316ab56bab2d8031ed3de"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a655b8eea0c0316ab56bab2d8031ed3de">have_pending</a> = false</td></tr>
+<tr class="memitem:a824709d12a608a9be920037f0ac94c95" id="r_a824709d12a608a9be920037f0ac94c95"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a824709d12a608a9be920037f0ac94c95">i_count</a> = 0</td></tr>
+<tr class="memitem:a30c968d5a65576d27e9a1ba02888e592" id="r_a30c968d5a65576d27e9a1ba02888e592"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a30c968d5a65576d27e9a1ba02888e592">i_ms</a> = 0</td></tr>
+<tr class="memitem:ae3bdbafb2ea1bc4c2fafed28f7529174" id="r_ae3bdbafb2ea1bc4c2fafed28f7529174"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae3bdbafb2ea1bc4c2fafed28f7529174">last_ms</a> = 0</td></tr>
+<tr class="memitem:a72bfffc9acc09990385a3899a5ddbc12" id="r_a72bfffc9acc09990385a3899a5ddbc12"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a72bfffc9acc09990385a3899a5ddbc12">p_count</a> = 0</td></tr>
+<tr class="memitem:aaa536140fd648691bcedf21dc57ec02b" id="r_aaa536140fd648691bcedf21dc57ec02b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaa536140fd648691bcedf21dc57ec02b">p_ms</a> = 0</td></tr>
 <tr class="memitem:aa05ce62a3136405b84db7c54dc64ed7f" id="r_aa05ce62a3136405b84db7c54dc64ed7f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa05ce62a3136405b84db7c54dc64ed7f">p_target</a></td></tr>
-<tr class="memitem:a104130da6ea9ba7ef6848a895e263aba" id="r_a104130da6ea9ba7ef6848a895e263aba"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a104130da6ea9ba7ef6848a895e263aba">pending_is_key</a> = false</td></tr>
-<tr class="memitem:a4908d59991008690c0f55f0334aeafc9" id="r_a4908d59991008690c0f55f0334aeafc9"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4908d59991008690c0f55f0334aeafc9">start_ms</a> = 0</td></tr>
-<tr class="memitem:a157f139fcbe485453e05338d0d53aa89" id="r_a157f139fcbe485453e05338d0d53aa89"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a157f139fcbe485453e05338d0d53aa89">total_ms</a> = 0</td></tr>
+<tr class="memitem:a104130da6ea9ba7ef6848a895e263aba" id="r_a104130da6ea9ba7ef6848a895e263aba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a104130da6ea9ba7ef6848a895e263aba">pending_is_key</a> = false</td></tr>
+<tr class="memitem:a4908d59991008690c0f55f0334aeafc9" id="r_a4908d59991008690c0f55f0334aeafc9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4908d59991008690c0f55f0334aeafc9">start_ms</a> = 0</td></tr>
+<tr class="memitem:a157f139fcbe485453e05338d0d53aa89" id="r_a157f139fcbe485453e05338d0d53aa89"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a157f139fcbe485453e05338d0d53aa89">total_ms</a> = 0</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Wraps a <a class="el" href="classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory....">VideoOutput</a> (typically a codec decoder, e.g. H264Decoder/ MJPEGDecoder/MPGDecoder or a <a class="el" href="classaudio__tools_1_1_multi_video_decoder.html" title="Manages multiple VideoDecoders with automatic format detection - the video-side counterpart of MultiD...">MultiVideoDecoder</a>) and measures how long decoding+outputting each frame actually takes - forwards every <a class="el" href="#a7597ef706dd1aa590903ce9e095db20a">write()</a>/ <a class="el" href="#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a>/setSkipRender()/isKeyFrame() call unmodified to the wrapped target, but times <a class="el" href="#a7597ef706dd1aa590903ce9e095db20a">write()</a>+<a class="el" href="#a04f2540d940cc37b5c2538ed8e5b54be">flush()</a> together and classifies the result I- vs P-frame via the target's own <a class="el" href="#abd16630f3db4bcac2f0677b7197f3af9">isKeyFrame()</a>, the same way <a class="el" href="classaudio__tools_1_1_paced_video_output.html" title="Buffers a small, configurable amount of video (see setQueueBytes()) and renders it frame by frame fro...">PacedVideoOutput</a> classifies frames for its own <a class="el" href="#a61bb2fabd1c085db6d5a54ae9691f9cb" title="Number of those classified as keyframes (I-frames).">frameCountI()</a>/ <a class="el" href="#aa04cc257205a46ece9e2c012baec4882" title="Number of those classified as non-keyframes (P-frames).">frameCountP()</a> stats. </p>
@@ -224,7 +228,7 @@ nothing were pacing it" - exactly the ceiling <a class="el" href="classaudio__to
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t frameCount </td>
+          <td class="memname"><a class="el" href="classuint32__t.html">uint32_t</a> frameCount </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -250,7 +254,7 @@ nothing were pacing it" - exactly the ceiling <a class="el" href="classaudio__to
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t frameCountI </td>
+          <td class="memname"><a class="el" href="classuint32__t.html">uint32_t</a> frameCountI </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -277,7 +281,7 @@ nothing were pacing it" - exactly the ceiling <a class="el" href="classaudio__to
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t frameCountP </td>
+          <td class="memname"><a class="el" href="classuint32__t.html">uint32_t</a> frameCountP </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -304,7 +308,7 @@ nothing were pacing it" - exactly the ceiling <a class="el" href="classaudio__to
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual uint32_t getWriteTimeMs </td>
+          <td class="memname">virtual <a class="el" href="classuint32__t.html">uint32_t</a> getWriteTimeMs </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -333,7 +337,7 @@ nothing were pacing it" - exactly the ceiling <a class="el" href="classaudio__to
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool hadOutput </td>
+          <td class="memname">virtual <a class="el" href="classbool.html">bool</a> hadOutput </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -361,14 +365,14 @@ nothing were pacing it" - exactly the ceiling <a class="el" href="classaudio__to
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool isKeyFrame </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> isKeyFrame </td>
           <td>(</td>
-          <td class="paramtype">const uint8_t *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -422,7 +426,7 @@ nothing were pacing it" - exactly the ceiling <a class="el" href="classaudio__to
         <tr>
           <td class="memname">void setSkipRender </td>
           <td>(</td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>skip</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classbool.html">bool</a></td>          <td class="paramname"><span class="paramname"><em>skip</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -476,7 +480,7 @@ nothing were pacing it" - exactly the ceiling <a class="el" href="classaudio__to
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual uint64_t totalDecodeMs </td>
+          <td class="memname">virtual <a class="el" href="classuint64__t.html">uint64_t</a> totalDecodeMs </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -504,14 +508,14 @@ nothing were pacing it" - exactly the ceiling <a class="el" href="classaudio__to
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t write </td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> write </td>
           <td>(</td>
-          <td class="paramtype">const uint8_t *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -536,7 +540,7 @@ nothing were pacing it" - exactly the ceiling <a class="el" href="classaudio__to
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t call_ms = 0</td>
+          <td class="memname"><a class="el" href="classuint32__t.html">uint32_t</a> call_ms = 0</td>
         </tr>
       </table>
   </td>
@@ -558,7 +562,7 @@ nothing were pacing it" - exactly the ceiling <a class="el" href="classaudio__to
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t frame_count = 0</td>
+          <td class="memname"><a class="el" href="classuint32__t.html">uint32_t</a> frame_count = 0</td>
         </tr>
       </table>
   </td>
@@ -580,7 +584,7 @@ nothing were pacing it" - exactly the ceiling <a class="el" href="classaudio__to
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool have_pending = false</td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> have_pending = false</td>
         </tr>
       </table>
   </td>
@@ -602,7 +606,7 @@ nothing were pacing it" - exactly the ceiling <a class="el" href="classaudio__to
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t i_count = 0</td>
+          <td class="memname"><a class="el" href="classuint32__t.html">uint32_t</a> i_count = 0</td>
         </tr>
       </table>
   </td>
@@ -624,7 +628,7 @@ nothing were pacing it" - exactly the ceiling <a class="el" href="classaudio__to
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t i_ms = 0</td>
+          <td class="memname"><a class="el" href="classuint32__t.html">uint32_t</a> i_ms = 0</td>
         </tr>
       </table>
   </td>
@@ -646,7 +650,7 @@ nothing were pacing it" - exactly the ceiling <a class="el" href="classaudio__to
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t last_ms = 0</td>
+          <td class="memname"><a class="el" href="classuint32__t.html">uint32_t</a> last_ms = 0</td>
         </tr>
       </table>
   </td>
@@ -668,7 +672,7 @@ nothing were pacing it" - exactly the ceiling <a class="el" href="classaudio__to
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t p_count = 0</td>
+          <td class="memname"><a class="el" href="classuint32__t.html">uint32_t</a> p_count = 0</td>
         </tr>
       </table>
   </td>
@@ -690,7 +694,7 @@ nothing were pacing it" - exactly the ceiling <a class="el" href="classaudio__to
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t p_ms = 0</td>
+          <td class="memname"><a class="el" href="classuint32__t.html">uint32_t</a> p_ms = 0</td>
         </tr>
       </table>
   </td>
@@ -734,7 +738,7 @@ nothing were pacing it" - exactly the ceiling <a class="el" href="classaudio__to
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool pending_is_key = false</td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> pending_is_key = false</td>
         </tr>
       </table>
   </td>
@@ -756,7 +760,7 @@ nothing were pacing it" - exactly the ceiling <a class="el" href="classaudio__to
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t start_ms = 0</td>
+          <td class="memname"><a class="el" href="classuint32__t.html">uint32_t</a> start_ms = 0</td>
         </tr>
       </table>
   </td>
@@ -778,7 +782,7 @@ nothing were pacing it" - exactly the ceiling <a class="el" href="classaudio__to
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t total_ms = 0</td>
+          <td class="memname"><a class="el" href="classuint32__t.html">uint32_t</a> total_ms = 0</td>
         </tr>
       </table>
   </td>

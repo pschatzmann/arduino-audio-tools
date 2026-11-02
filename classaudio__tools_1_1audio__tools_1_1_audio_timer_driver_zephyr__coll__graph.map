@@ -1,6 +1,20 @@
 <map id="AudioTimerDriverZephyr" name="AudioTimerDriverZephyr">
-<area shape="rect" id="Node000001" title="Repeating Timer driver for Zephyr using k_timer." alt="" coords="5,81,188,109"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_audio_timer_driver_base.html" title=" " alt="" coords="12,5,181,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="90,47,92,81,87,80,86,50"/>
-<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="107,47,106,82,101,79,103,50"/>
+<area shape="rect" id="Node000001" title="Repeating Timer driver for Zephyr using k_timer." alt="" coords="492,170,674,198"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_audio_timer_driver_base.html" title=" " alt="" coords="162,16,330,44"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="345,44,408,57,469,80,500,100,527,124,568,170,563,169,523,127,497,104,467,85,407,62,346,49"/>
+<area shape="poly" id="edge3_Node000001_Node000002" title=" " alt="" coords="345,22,408,33,469,56,506,81,537,112,562,142,579,170,574,169,558,146,533,115,502,85,467,61,407,38,346,27"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,16,66,44"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="80,28,163,28,159,32,82,33"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="190,74,302,102"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="317,92,391,104,469,124,518,145,561,169,556,169,516,149,467,129,390,109,318,97"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="191,130,300,158"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="316,149,494,172,489,174,316,155"/>
+<area shape="rect" id="Node000006" href="$classbool.html" title=" " alt="" coords="221,208,270,236"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="285,223,370,225,419,223,468,218,508,208,549,197,544,199,510,213,468,223,419,229,370,230,286,228"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="178,264,314,292"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="329,278,398,272,467,255,495,243,522,227,563,199,568,197,525,232,498,248,469,261,398,277,330,283"/>
+<area shape="rect" id="Node000008" href="$classuint64__t.html" title=" " alt="" coords="209,320,283,348"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="298,336,337,335,380,332,425,322,467,306,502,282,532,252,571,199,576,197,536,255,505,286,469,311,426,328,381,337,337,341,299,341"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="189,376,303,404"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="318,396,355,395,393,391,431,382,467,365,489,348,509,327,541,279,563,232,576,200,580,196,568,235,546,282,513,330,493,352,469,370,433,387,394,396,355,401,318,401"/>
 </map>

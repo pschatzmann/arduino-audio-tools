@@ -82,21 +82,21 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Converts a raw sample (type T) to/from a filter's arithmetic type (FT) for <a class="el" href="classaudio__tools_1_1audio__tools_1_1_converter_n_channels.html" title="Converter for n Channels which applies the indicated Filter.">ConverterNChannels</a>. The default just casts the raw sample straight through &ndash; this matches the traditional convention used here, where FT=float and filter coefficients are calibrated against the sample's raw magnitude (e.g. up to +-32767 for 16-bit audio), so no rescaling is wanted. Specialized below for FT=<a class="el" href="classaudio__tools_1_1audio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a>, whose bounded ~[-2,2) range means a plain (<a class="el" href="classaudio__tools_1_1audio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a>)sample cast would misinterpret the raw PCM magnitude as a literal Q1.14 value and saturate almost immediately; q1_14_t::fromIntNN()/toIntNN() do the correct bit-shift scaling instead.  
+<p>Converts a raw sample (type <a class="el" href="class_t.html">T</a>) to/from a filter's arithmetic type (FT) for <a class="el" href="classaudio__tools_1_1audio__tools_1_1_converter_n_channels.html" title="Converter for n Channels which applies the indicated Filter.">ConverterNChannels</a>. The default just casts the raw sample straight through &ndash; this matches the traditional convention used here, where FT=float and filter coefficients are calibrated against the sample's raw magnitude (e.g. up to +-32767 for 16-bit audio), so no rescaling is wanted. Specialized below for FT=<a class="el" href="classaudio__tools_1_1audio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a>, whose bounded ~[-2,2) range means a plain (<a class="el" href="classaudio__tools_1_1audio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a>)sample cast would misinterpret the raw PCM magnitude as a literal Q1.14 value and saturate almost immediately; q1_14_t::fromIntNN()/toIntNN() do the correct bit-shift scaling instead.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_codec_opus_ogg_8h_source.html">CodecOpusOgg.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a3de14b6c3f456e94e07fe2dd294edb25" id="r_a3de14b6c3f456e94e07fe2dd294edb25"><td class="memItemLeft" align="right" valign="top">static T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3de14b6c3f456e94e07fe2dd294edb25">fromFilterType</a> (FT value)</td></tr>
-<tr class="memitem:a3de14b6c3f456e94e07fe2dd294edb25" id="r_a3de14b6c3f456e94e07fe2dd294edb25"><td class="memItemLeft" align="right" valign="top">static T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3de14b6c3f456e94e07fe2dd294edb25">fromFilterType</a> (FT value)</td></tr>
-<tr class="memitem:a68dd4857bfaeba416072c04876d61a41" id="r_a68dd4857bfaeba416072c04876d61a41"><td class="memItemLeft" align="right" valign="top">static FT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a68dd4857bfaeba416072c04876d61a41">toFilterType</a> (T sample)</td></tr>
-<tr class="memitem:a68dd4857bfaeba416072c04876d61a41" id="r_a68dd4857bfaeba416072c04876d61a41"><td class="memItemLeft" align="right" valign="top">static FT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a68dd4857bfaeba416072c04876d61a41">toFilterType</a> (T sample)</td></tr>
+<tr class="memitem:a3de14b6c3f456e94e07fe2dd294edb25" id="r_a3de14b6c3f456e94e07fe2dd294edb25"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_t.html">T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3de14b6c3f456e94e07fe2dd294edb25">fromFilterType</a> (FT value)</td></tr>
+<tr class="memitem:a3de14b6c3f456e94e07fe2dd294edb25" id="r_a3de14b6c3f456e94e07fe2dd294edb25"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_t.html">T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3de14b6c3f456e94e07fe2dd294edb25">fromFilterType</a> (FT value)</td></tr>
+<tr class="memitem:a68dd4857bfaeba416072c04876d61a41" id="r_a68dd4857bfaeba416072c04876d61a41"><td class="memItemLeft" align="right" valign="top">static FT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a68dd4857bfaeba416072c04876d61a41">toFilterType</a> (<a class="el" href="class_t.html">T</a> sample)</td></tr>
+<tr class="memitem:a68dd4857bfaeba416072c04876d61a41" id="r_a68dd4857bfaeba416072c04876d61a41"><td class="memItemLeft" align="right" valign="top">static FT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a68dd4857bfaeba416072c04876d61a41">toFilterType</a> (<a class="el" href="class_t.html">T</a> sample)</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename T, typename FT&gt;<br />
-struct audio_tools::audio_tools::FilterSampleConverter&lt; T, FT &gt;</div><p>Converts a raw sample (type T) to/from a filter's arithmetic type (FT) for <a class="el" href="classaudio__tools_1_1audio__tools_1_1_converter_n_channels.html" title="Converter for n Channels which applies the indicated Filter.">ConverterNChannels</a>. The default just casts the raw sample straight through &ndash; this matches the traditional convention used here, where FT=float and filter coefficients are calibrated against the sample's raw magnitude (e.g. up to +-32767 for 16-bit audio), so no rescaling is wanted. Specialized below for FT=<a class="el" href="classaudio__tools_1_1audio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a>, whose bounded ~[-2,2) range means a plain (<a class="el" href="classaudio__tools_1_1audio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a>)sample cast would misinterpret the raw PCM magnitude as a literal Q1.14 value and saturate almost immediately; q1_14_t::fromIntNN()/toIntNN() do the correct bit-shift scaling instead. </p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename <a class="el" href="class_t.html">T</a>, typename FT&gt;<br />
+struct audio_tools::audio_tools::FilterSampleConverter&lt; T, FT &gt;</div><p>Converts a raw sample (type <a class="el" href="class_t.html">T</a>) to/from a filter's arithmetic type (FT) for <a class="el" href="classaudio__tools_1_1audio__tools_1_1_converter_n_channels.html" title="Converter for n Channels which applies the indicated Filter.">ConverterNChannels</a>. The default just casts the raw sample straight through &ndash; this matches the traditional convention used here, where FT=float and filter coefficients are calibrated against the sample's raw magnitude (e.g. up to +-32767 for 16-bit audio), so no rescaling is wanted. Specialized below for FT=<a class="el" href="classaudio__tools_1_1audio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a>, whose bounded ~[-2,2) range means a plain (<a class="el" href="classaudio__tools_1_1audio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a>)sample cast would misinterpret the raw PCM magnitude as a literal Q1.14 value and saturate almost immediately; q1_14_t::fromIntNN()/toIntNN() do the correct bit-shift scaling instead. </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="a3de14b6c3f456e94e07fe2dd294edb25" name="a3de14b6c3f456e94e07fe2dd294edb25"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3de14b6c3f456e94e07fe2dd294edb25">&#9670;&#160;</a></span>fromFilterType() <span class="overload">[1/2]</span></h2>
@@ -104,13 +104,13 @@ struct audio_tools::audio_tools::FilterSampleConverter&lt; T, FT &gt;</div><p>Co
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, typename FT&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>, typename FT&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">T fromFilterType </td>
+          <td class="memname"><a class="el" href="class_t.html">T</a> fromFilterType </td>
           <td>(</td>
           <td class="paramtype">FT</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
           <td></td>
@@ -131,13 +131,13 @@ template&lt;typename T, typename FT&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, typename FT&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>, typename FT&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">T fromFilterType </td>
+          <td class="memname"><a class="el" href="class_t.html">T</a> fromFilterType </td>
           <td>(</td>
           <td class="paramtype">FT</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
           <td></td>
@@ -158,7 +158,7 @@ template&lt;typename T, typename FT&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, typename FT&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>, typename FT&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -166,7 +166,7 @@ template&lt;typename T, typename FT&gt; </div>
         <tr>
           <td class="memname">FT toFilterType </td>
           <td>(</td>
-          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>sample</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_t.html">T</a></td>          <td class="paramname"><span class="paramname"><em>sample</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -185,7 +185,7 @@ template&lt;typename T, typename FT&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, typename FT&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>, typename FT&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -193,7 +193,7 @@ template&lt;typename T, typename FT&gt; </div>
         <tr>
           <td class="memname">FT toFilterType </td>
           <td>(</td>
-          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>sample</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_t.html">T</a></td>          <td class="paramname"><span class="paramname"><em>sample</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>

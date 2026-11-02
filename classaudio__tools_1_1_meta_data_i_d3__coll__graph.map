@@ -1,24 +1,51 @@
 <map id="MetaDataID3" name="MetaDataID3">
-<area shape="rect" id="Node000001" title="Simple ID3 Meta Data Parser which supports ID3 V1 and V2 and implements the Stream interface...." alt="" coords="288,307,395,335"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_abstract_meta_data.html" title="Common Metadata methods." alt="" coords="116,207,255,234"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="219,240,323,306,318,307,217,245"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_meta_data_i_d3_v1.html" title="Simple ID3 Meta Data API which supports ID3 V1." alt="" coords="443,207,567,234"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="473,242,364,309,362,304,468,243"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_meta_data_i_d3_base.html" title="ID3 Meta Data Common Functionality." alt="" coords="396,106,535,134"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="478,146,502,207,497,205,475,150"/>
-<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_meta_data_i_d3_v2.html" title="Simple ID3 Meta Data API which supports ID3 V2: We only support the &quot;TALB&quot;, &quot;TOPE&quot;,..." alt="" coords="279,207,403,234"/>
-<area shape="poly" id="edge7_Node000007_Node000004" title=" " alt="" coords="441,143,393,185,361,209,358,204,390,181,436,145"/>
-<area shape="rect" id="Node000005" href="$structaudio__tools_1_1_i_d3v1.html" title=" " alt="" coords="560,106,619,134"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="571,144,518,208,515,204,566,147"/>
-<area shape="rect" id="Node000006" href="$structaudio__tools_1_1_i_d3v1_enhanced.html" title=" " alt="" coords="643,106,765,134"/>
-<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="671,141,593,185,539,209,538,204,591,180,666,143"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="343,248,343,308,339,305,339,252"/>
-<area shape="rect" id="Node000008" href="$structaudio__tools_1_1_i_d3v2.html" title=" " alt="" coords="312,106,371,134"/>
-<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="343,147,344,207,339,205,339,151"/>
-<area shape="rect" id="Node000009" href="$structaudio__tools_1_1_i_d3v2_frame_string.html" title=" " alt="" coords="5,106,144,134"/>
-<area shape="poly" id="edge9_Node000007_Node000009" title=" " alt="" coords="100,141,129,162,160,180,281,207,276,209,159,185,126,167,100,147"/>
-<area shape="rect" id="Node000010" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="168,106,288,134"/>
-<area shape="poly" id="edge10_Node000007_Node000010" title=" " alt="" coords="251,142,293,181,325,206,319,206,289,185,250,147"/>
-<area shape="rect" id="Node000011" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="188,5,268,33"/>
-<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="229,46,230,106,225,105,227,51"/>
+<area shape="rect" id="Node000001" title="Simple ID3 Meta Data Parser which supports ID3 V1 and V2 and implements the Stream interface...." alt="" coords="919,212,1026,240"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_abstract_meta_data.html" title="Common Metadata methods." alt="" coords="688,5,827,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="841,23,871,33,897,49,915,67,930,88,952,134,965,178,972,212,967,211,960,179,947,136,925,91,911,71,893,53,869,38,843,29"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_meta_data_i_d3_v1.html" title="Simple ID3 Meta Data API which supports ID3 V1." alt="" coords="695,383,820,410"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="786,371,956,238,952,242,790,375"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_meta_data_i_d3_base.html" title="ID3 Meta Data Common Functionality." alt="" coords="386,912,525,940"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="503,902,523,887,538,868,551,839,555,811,553,785,547,759,542,733,541,707,547,679,563,650,574,638,586,631,612,625,637,621,649,616,662,607,682,583,699,557,725,501,742,449,752,413,755,409,747,450,730,503,704,560,686,586,666,610,652,621,639,627,613,631,588,635,577,642,567,653,552,681,546,707,548,733,552,758,558,784,560,812,556,840,543,871,526,891,506,906"/>
+<area shape="rect" id="Node000012" href="$classaudio__tools_1_1_meta_data_i_d3_v2.html" title="Simple ID3 Meta Data API which supports ID3 V2: We only support the &quot;TALB&quot;, &quot;TOPE&quot;,..." alt="" coords="695,861,820,889"/>
+<area shape="poly" id="edge14_Node000012_Node000004" title=" " alt="" coords="540,909,697,884,693,887,542,914"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="5,982,172,1043"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="186,1011,266,1005,346,987,395,964,438,938,434,942,398,969,348,992,266,1010,188,1016"/>
+<area shape="rect" id="Node000006" href="$classbool.html" title=" " alt="" coords="64,929,113,957"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="128,947,228,956,287,957,346,952,414,939,409,942,347,957,287,962,228,961,130,952"/>
+<area shape="poly" id="edge17_Node000012_Node000006" title=" " alt="" coords="127,947,152,955,174,968,183,981,185,995,188,1007,197,1017,243,1041,284,1054,324,1058,362,1054,401,1045,443,1031,540,996,598,972,654,942,735,891,739,888,656,947,601,977,542,1001,444,1036,402,1050,363,1060,324,1064,283,1060,241,1046,194,1021,183,1009,180,996,178,984,170,972,150,959,130,952"/>
+<area shape="rect" id="Node000017" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="396,831,516,858"/>
+<area shape="poly" id="edge28_Node000017_Node000006" title=" " alt="" coords="127,931,346,872,406,857,402,860,347,877,130,935"/>
+<area shape="rect" id="Node000007" href="$classint.html" title=" " alt="" coords="69,227,108,254"/>
+<area shape="poly" id="edge30_Node000001_Node000007" title=" " alt="" coords="100,212,137,156,163,128,194,107,247,87,300,72,356,64,412,61,468,63,524,69,633,90,734,119,823,152,947,211,942,212,821,157,733,124,632,95,524,74,468,68,412,67,356,70,302,78,248,92,197,112,166,133,141,159,105,214"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="105,213,142,170,167,149,195,134,236,121,270,118,305,123,347,134,413,156,476,186,537,220,592,257,685,329,744,382,739,383,681,333,589,262,534,225,474,191,411,161,346,139,304,128,270,123,237,126,197,139,170,154,146,173,110,215"/>
+<area shape="poly" id="edge23_Node000012_Node000007" title=" " alt="" coords="109,264,149,305,172,325,197,342,218,351,238,355,275,356,311,358,329,366,349,380,360,399,361,418,363,436,373,452,396,466,431,477,518,490,605,504,640,515,665,531,697,570,721,615,738,663,749,712,759,800,759,862,754,860,754,801,744,713,733,665,716,617,693,573,662,534,638,520,604,509,517,495,430,482,394,471,369,456,357,437,356,418,355,400,345,384,327,370,310,364,275,361,237,361,217,356,194,347,169,330,145,309,110,269"/>
+<area shape="poly" id="edge25_Node000017_Node000007" title=" " alt="" coords="99,266,116,304,136,346,164,389,197,427,217,441,237,449,276,455,314,463,332,474,349,492,360,517,364,551,364,631,363,713,366,746,373,771,384,789,399,804,431,830,426,831,395,808,380,792,368,774,360,747,357,713,359,631,359,551,354,519,344,495,328,478,312,468,275,460,235,454,215,446,194,431,159,392,132,349,111,306,100,272"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="64,685,113,713"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="88,669,94,613,111,542,124,505,142,471,165,439,194,413,233,395,288,383,354,377,426,375,574,379,697,389,692,392,573,384,426,380,354,382,289,389,235,400,197,417,169,443,147,473,129,508,116,543,100,614,93,670"/>
+<area shape="rect" id="Node000009" href="$structaudio__tools_1_1_i_d3v1.html" title=" " alt="" coords="426,580,485,608"/>
+<area shape="poly" id="edge9_Node000009_Node000008" title=" " alt="" coords="127,709,176,719,233,724,292,718,320,709,345,695,355,684,358,670,360,654,369,637,396,616,427,602,424,606,398,620,373,641,365,656,363,671,360,686,348,700,322,714,293,723,233,729,175,724,129,713"/>
+<area shape="rect" id="Node000010" href="$structaudio__tools_1_1_i_d3v1_enhanced.html" title=" " alt="" coords="394,312,517,340"/>
+<area shape="poly" id="edge11_Node000010_Node000008" title=" " alt="" coords="88,670,93,608,109,528,122,487,140,446,164,408,194,376,216,359,240,346,293,329,346,321,396,320,392,323,347,326,294,334,242,351,219,364,197,380,168,412,145,448,127,488,114,530,98,609,93,670"/>
+<area shape="poly" id="edge19_Node000012_Node000008" title=" " alt="" coords="127,706,196,722,329,747,433,763,536,783,665,823,702,840,736,861,731,861,700,845,663,828,535,788,432,768,328,753,195,727,130,711"/>
+<area shape="poly" id="edge26_Node000017_Node000008" title=" " alt="" coords="112,722,152,755,197,784,237,799,270,805,304,808,347,815,400,829,396,831,346,820,303,813,269,810,235,805,194,789,148,759,114,727"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="493,570,539,541,738,409,734,413,542,545,496,574"/>
+<area shape="poly" id="edge10_Node000003_Node000010" title=" " alt="" coords="531,341,697,381,693,383,532,346"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="407,651,504,678"/>
+<area shape="poly" id="edge12_Node000003_Node000011" title=" " alt="" coords="496,641,662,553,693,517,717,477,749,413,752,409,722,479,697,520,665,557,500,645"/>
+<area shape="poly" id="edge18_Node000012_Node000011" title=" " alt="" coords="519,668,593,686,631,701,665,722,698,755,724,794,754,861,749,860,719,796,694,759,662,727,629,706,592,691,521,673"/>
+<area shape="poly" id="edge13_Node000001_Node000012" title=" " alt="" coords="766,845,964,241,969,238,770,848"/>
+<area shape="rect" id="Node000013" href="$structaudio__tools_1_1_i_d3v2.html" title=" " alt="" coords="426,1111,485,1138"/>
+<area shape="poly" id="edge15_Node000012_Node000013" title=" " alt="" coords="500,1129,539,1131,581,1128,624,1118,662,1098,686,1076,705,1049,720,1019,732,989,746,931,753,891,757,887,752,932,737,990,725,1022,709,1052,690,1079,665,1102,626,1123,582,1133,539,1136,501,1134"/>
+<area shape="rect" id="Node000014" href="$classuint8__t.html" title=" " alt="" coords="55,1205,122,1233"/>
+<area shape="poly" id="edge16_Node000013_Node000014" title=" " alt="" coords="136,1207,346,1165,428,1136,423,1139,347,1170,138,1212"/>
+<area shape="rect" id="Node000015" href="$structaudio__tools_1_1_i_d3v2_frame_string.html" title=" " alt="" coords="386,1239,525,1266"/>
+<area shape="poly" id="edge21_Node000015_Node000014" title=" " alt="" coords="127,1238,161,1254,196,1265,245,1272,295,1273,389,1266,383,1267,295,1278,245,1277,195,1270,159,1259,127,1244"/>
+<area shape="poly" id="edge20_Node000012_Node000015" title=" " alt="" coords="539,1232,604,1205,635,1185,662,1161,687,1128,707,1090,723,1051,734,1011,748,939,754,891,757,887,753,940,739,1012,728,1053,712,1092,691,1130,666,1165,638,1189,607,1209,541,1237"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="51,1311,126,1338"/>
+<area shape="poly" id="edge22_Node000015_Node000016" title=" " alt="" coords="141,1329,187,1331,239,1330,294,1321,345,1303,357,1291,369,1277,393,1268,398,1266,372,1281,361,1295,348,1308,295,1326,240,1335,187,1337,141,1334"/>
+<area shape="poly" id="edge24_Node000012_Node000017" title=" " alt="" coords="531,850,697,868,692,870,532,855"/>
+<area shape="rect" id="Node000018" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="49,831,128,858"/>
+<area shape="poly" id="edge27_Node000017_Node000018" title=" " alt="" coords="143,842,397,842,393,847,145,847"/>
+<area shape="rect" id="Node000019" href="$classuint64__t.html" title=" " alt="" coords="418,1291,493,1318"/>
+<area shape="poly" id="edge29_Node000012_Node000019" title=" " alt="" coords="508,1310,546,1312,587,1308,627,1297,662,1275,682,1246,700,1202,715,1147,727,1087,744,970,753,892,756,887,749,970,732,1088,720,1149,705,1204,687,1249,666,1279,629,1302,588,1313,546,1317,508,1315"/>
 </map>

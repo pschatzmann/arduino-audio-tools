@@ -85,7 +85,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Discards every value right after appending it, keeping only the file offset of the first entry - <a class="el" href="#a4cf79c27a5a6f4930c1208b51c432344" title="Reads back entry &#39;index&#39; - index must be &lt; size().">get()</a> seeks back into the original MP4 source and re-reads the entry directly (entries are fixed-size and contiguous on disk, so entry N sits at start_offset + N*sizeof(T)), trading RAM for repeated small seeks.  
+<p>Discards every value right after appending it, keeping only the file offset of the first entry - <a class="el" href="#a4cf79c27a5a6f4930c1208b51c432344" title="Reads back entry &#39;index&#39; - index must be &lt; size().">get()</a> seeks back into the original MP4 source and re-reads the entry directly (entries are fixed-size and contiguous on disk, so entry N sits at start_offset + N*sizeof(<a class="el" href="class_t.html">T</a>)), trading RAM for repeated small seeks.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_sample_table_store_8h_source.html">SampleTableStore.h</a>&gt;</code></p>
@@ -104,55 +104,63 @@ Collaboration diagram for SourceSeekSampleTableStore&lt; T &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="classaudio__tools_1_1_source_seek_sample_table_store__coll__graph.png" border="0" usemap="#a_source_seek_sample_table_store_3_01_t_01_4_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="a_source_seek_sample_table_store_3_01_t_01_4_coll__map" id="a_source_seek_sample_table_store_3_01_t_01_4_coll__map">
-<area shape="rect" title="Discards every value right after appending it, keeping only the file offset of the first entry &#45; get(..." alt="" coords="54,106,306,134"/>
+<area shape="rect" title="Discards every value right after appending it, keeping only the file offset of the first entry &#45; get(..." alt="" coords="306,218,558,245"/>
 <area shape="rect" href="classaudio__tools_1_1_sample_table_store.html" title="Sequential&#45;access storage for one MP4 sample table (e.g. stsz sample sizes, stco chunk offsets,..." alt="" coords="5,5,182,33"/>
-<area shape="poly" title=" " alt="" coords="116,42,171,105,166,106,114,47"/>
-<area shape="rect" href="classaudio__tools_1_1_seekable_source.html" title="Minimal seek+read interface a SourceSeekSampleTableStore needs from &quot;the original MP4 source&quot; &#45; kept ..." alt="" coords="206,5,330,33"/>
-<area shape="poly" title=" " alt="" coords="249,44,194,107,190,103,244,46"/>
+<area shape="poly" title=" " alt="" coords="105,45,123,80,147,120,178,159,216,191,253,205,309,217,303,217,251,210,214,196,174,163,143,123,118,83,104,50"/>
+<area shape="rect" href="classsize__t.html" title=" " alt="" coords="205,5,264,33"/>
+<area shape="poly" title=" " alt="" coords="229,46,225,81,223,120,230,158,237,176,248,192,270,205,309,217,303,217,268,210,244,196,233,179,225,160,218,120,219,81,226,50"/>
+<area shape="rect" href="classaudio__tools_1_1_seekable_source.html" title="Minimal seek+read interface a SourceSeekSampleTableStore needs from &quot;the original MP4 source&quot; &#45; kept ..." alt="" coords="318,5,442,33"/>
+<area shape="poly" title=" " alt="" coords="376,46,373,80,372,117,376,156,389,192,398,205,411,218,406,216,394,209,384,195,371,157,366,117,368,79,373,50"/>
+<area shape="rect" href="class_t.html" title=" " alt="" coords="466,5,505,33"/>
+<area shape="poly" title=" " alt="" coords="485,46,475,116,455,195,442,219,439,215,450,193,470,115,481,50"/>
+<area shape="rect" title=" " alt="" coords="534,5,600,33"/>
+<area shape="poly" title=" " alt="" coords="567,47,560,130,552,169,540,195,523,210,504,220,502,215,520,205,535,192,547,167,555,129,564,50"/>
+<area shape="rect" href="classuint8__t.html" title=" " alt="" coords="647,5,713,33"/>
+<area shape="poly" title=" " alt="" coords="686,46,689,82,686,122,675,161,666,179,653,196,637,206,615,213,559,224,558,219,614,208,635,201,649,192,661,177,670,159,681,121,684,82,683,51"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8cc308d5a202211ac67c957dea47ea6a" id="r_a8cc308d5a202211ac67c957dea47ea6a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8cc308d5a202211ac67c957dea47ea6a">SourceSeekSampleTableStore</a> (<a class="el" href="classaudio__tools_1_1_seekable_source.html">SeekableSource</a> &amp;source, size_t onDiskSize, T(*decoder)(const uint8_t *), size_t cacheEntries=64)</td></tr>
+<tr class="memitem:a8cc308d5a202211ac67c957dea47ea6a" id="r_a8cc308d5a202211ac67c957dea47ea6a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8cc308d5a202211ac67c957dea47ea6a">SourceSeekSampleTableStore</a> (<a class="el" href="classaudio__tools_1_1_seekable_source.html">SeekableSource</a> &amp;source, <a class="el" href="classsize__t.html">size_t</a> onDiskSize, <a class="el" href="class_t.html">T</a>(*decoder)(const <a class="el" href="classuint8__t.html">uint8_t</a> *), <a class="el" href="classsize__t.html">size_t</a> cacheEntries=64)</td></tr>
 <tr class="memitem:a0c5e2bb503a1cabafab08b91e82bea62" id="r_a0c5e2bb503a1cabafab08b91e82bea62"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0c5e2bb503a1cabafab08b91e82bea62">~SourceSeekSampleTableStore</a> ()</td></tr>
-<tr class="memitem:afe9b37e6ad2ba7cf0d48337dc51bc47a" id="r_afe9b37e6ad2ba7cf0d48337dc51bc47a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afe9b37e6ad2ba7cf0d48337dc51bc47a">append</a> (T) override</td></tr>
+<tr class="memitem:afe9b37e6ad2ba7cf0d48337dc51bc47a" id="r_afe9b37e6ad2ba7cf0d48337dc51bc47a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afe9b37e6ad2ba7cf0d48337dc51bc47a">append</a> (<a class="el" href="class_t.html">T</a>) override</td></tr>
 <tr class="memdesc:afe9b37e6ad2ba7cf0d48337dc51bc47a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Appends one entry - call in file order, once per table entry.  <br /></td></tr>
 <tr class="memitem:aee7cb2065b88d21ac4ad05bc997ecf82" id="r_aee7cb2065b88d21ac4ad05bc997ecf82"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aee7cb2065b88d21ac4ad05bc997ecf82">clear</a> () override</td></tr>
 <tr class="memdesc:aee7cb2065b88d21ac4ad05bc997ecf82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets to empty - call once per begin()/track.  <br /></td></tr>
-<tr class="memitem:a4cf79c27a5a6f4930c1208b51c432344" id="r_a4cf79c27a5a6f4930c1208b51c432344"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4cf79c27a5a6f4930c1208b51c432344">get</a> (size_t index) override</td></tr>
+<tr class="memitem:a4cf79c27a5a6f4930c1208b51c432344" id="r_a4cf79c27a5a6f4930c1208b51c432344"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_t.html">T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4cf79c27a5a6f4930c1208b51c432344">get</a> (<a class="el" href="classsize__t.html">size_t</a> index) override</td></tr>
 <tr class="memdesc:a4cf79c27a5a6f4930c1208b51c432344"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads back entry 'index' - index must be &lt; <a class="el" href="#a128a3f6e587ccc181112bb2892440990" title="Number of entries appended so far.">size()</a>.  <br /></td></tr>
-<tr class="memitem:a508dfaa9d772d0177993298394ee7ec9" id="r_a508dfaa9d772d0177993298394ee7ec9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a508dfaa9d772d0177993298394ee7ec9">setNextEntryOffset</a> (uint64_t fileOffset) override</td></tr>
-<tr class="memitem:af6befa4fa7ba6296565c8e0a3a99ced6" id="r_af6befa4fa7ba6296565c8e0a3a99ced6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af6befa4fa7ba6296565c8e0a3a99ced6">setOnDiskEntrySize</a> (size_t bytes) override</td></tr>
-<tr class="memitem:a128a3f6e587ccc181112bb2892440990" id="r_a128a3f6e587ccc181112bb2892440990"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a128a3f6e587ccc181112bb2892440990">size</a> () override</td></tr>
+<tr class="memitem:a508dfaa9d772d0177993298394ee7ec9" id="r_a508dfaa9d772d0177993298394ee7ec9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a508dfaa9d772d0177993298394ee7ec9">setNextEntryOffset</a> (<a class="el" href="classuint64__t.html">uint64_t</a> fileOffset) override</td></tr>
+<tr class="memitem:af6befa4fa7ba6296565c8e0a3a99ced6" id="r_af6befa4fa7ba6296565c8e0a3a99ced6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af6befa4fa7ba6296565c8e0a3a99ced6">setOnDiskEntrySize</a> (<a class="el" href="classsize__t.html">size_t</a> bytes) override</td></tr>
+<tr class="memitem:a128a3f6e587ccc181112bb2892440990" id="r_a128a3f6e587ccc181112bb2892440990"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a128a3f6e587ccc181112bb2892440990">size</a> () override</td></tr>
 <tr class="memdesc:a128a3f6e587ccc181112bb2892440990"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of entries appended so far.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-attribs" class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:ae730d7b3ad47c7f2f6874f27becb6a98" id="r_ae730d7b3ad47c7f2f6874f27becb6a98"><td class="memItemLeft" align="right" valign="top">static constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae730d7b3ad47c7f2f6874f27becb6a98">kMaxOnDiskSize</a> = 16</td></tr>
+<tr class="memitem:ae730d7b3ad47c7f2f6874f27becb6a98" id="r_ae730d7b3ad47c7f2f6874f27becb6a98"><td class="memItemLeft" align="right" valign="top">static constexpr <a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae730d7b3ad47c7f2f6874f27becb6a98">kMaxOnDiskSize</a> = 16</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-methods" class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:ac7e56a26280f02a184f182ff5b975e6c" id="r_ac7e56a26280f02a184f182ff5b975e6c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac7e56a26280f02a184f182ff5b975e6c">refillCache</a> (size_t index)</td></tr>
+<tr class="memitem:ac7e56a26280f02a184f182ff5b975e6c" id="r_ac7e56a26280f02a184f182ff5b975e6c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac7e56a26280f02a184f182ff5b975e6c">refillCache</a> (<a class="el" href="classsize__t.html">size_t</a> index)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:adc97ea715b94ac0261a4d42ec2fc57ef" id="r_adc97ea715b94ac0261a4d42ec2fc57ef"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adc97ea715b94ac0261a4d42ec2fc57ef">cache</a></td></tr>
-<tr class="memitem:a46a123de6cd230e03c445baa3a339fa0" id="r_a46a123de6cd230e03c445baa3a339fa0"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a46a123de6cd230e03c445baa3a339fa0">cache_capacity</a></td></tr>
-<tr class="memitem:a6b10f87371bb0eeca59e91db76685542" id="r_a6b10f87371bb0eeca59e91db76685542"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6b10f87371bb0eeca59e91db76685542">cache_len</a> = 0</td></tr>
-<tr class="memitem:a92b2a3a08f4897386617169bfde4a5d9" id="r_a92b2a3a08f4897386617169bfde4a5d9"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a92b2a3a08f4897386617169bfde4a5d9">cache_start</a> = 0</td></tr>
-<tr class="memitem:a76d971a3c552bc58ba9f0d5fceae9806" id="r_a76d971a3c552bc58ba9f0d5fceae9806"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a76d971a3c552bc58ba9f0d5fceae9806">count</a> = 0</td></tr>
-<tr class="memitem:a90ba5c36d29b5b470998968e6d864e85" id="r_a90ba5c36d29b5b470998968e6d864e85"><td class="memItemLeft" align="right" valign="top">T(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a90ba5c36d29b5b470998968e6d864e85">decode</a> )(const uint8_t *)</td></tr>
-<tr class="memitem:ab5ab58db3d97aa442c0272eb3a618c4f" id="r_ab5ab58db3d97aa442c0272eb3a618c4f"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab5ab58db3d97aa442c0272eb3a618c4f">on_disk_size</a></td></tr>
+<tr class="memitem:adc97ea715b94ac0261a4d42ec2fc57ef" id="r_adc97ea715b94ac0261a4d42ec2fc57ef"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_t.html">T</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adc97ea715b94ac0261a4d42ec2fc57ef">cache</a></td></tr>
+<tr class="memitem:a46a123de6cd230e03c445baa3a339fa0" id="r_a46a123de6cd230e03c445baa3a339fa0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a46a123de6cd230e03c445baa3a339fa0">cache_capacity</a></td></tr>
+<tr class="memitem:a6b10f87371bb0eeca59e91db76685542" id="r_a6b10f87371bb0eeca59e91db76685542"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6b10f87371bb0eeca59e91db76685542">cache_len</a> = 0</td></tr>
+<tr class="memitem:a92b2a3a08f4897386617169bfde4a5d9" id="r_a92b2a3a08f4897386617169bfde4a5d9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a92b2a3a08f4897386617169bfde4a5d9">cache_start</a> = 0</td></tr>
+<tr class="memitem:a76d971a3c552bc58ba9f0d5fceae9806" id="r_a76d971a3c552bc58ba9f0d5fceae9806"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a76d971a3c552bc58ba9f0d5fceae9806">count</a> = 0</td></tr>
+<tr class="memitem:a90ba5c36d29b5b470998968e6d864e85" id="r_a90ba5c36d29b5b470998968e6d864e85"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_t.html">T</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a90ba5c36d29b5b470998968e6d864e85">decode</a> )(const <a class="el" href="classuint8__t.html">uint8_t</a> *)</td></tr>
+<tr class="memitem:ab5ab58db3d97aa442c0272eb3a618c4f" id="r_ab5ab58db3d97aa442c0272eb3a618c4f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab5ab58db3d97aa442c0272eb3a618c4f">on_disk_size</a></td></tr>
 <tr class="memitem:a7e818d760e10031528cc2190e2bb7ae0" id="r_a7e818d760e10031528cc2190e2bb7ae0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_seekable_source.html">SeekableSource</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7e818d760e10031528cc2190e2bb7ae0">p_source</a></td></tr>
-<tr class="memitem:ab33a54f5a7b7ea3d6f2698c1f30d5a7a" id="r_ab33a54f5a7b7ea3d6f2698c1f30d5a7a"><td class="memItemLeft" align="right" valign="top">uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab33a54f5a7b7ea3d6f2698c1f30d5a7a">raw_buf</a></td></tr>
+<tr class="memitem:ab33a54f5a7b7ea3d6f2698c1f30d5a7a" id="r_ab33a54f5a7b7ea3d6f2698c1f30d5a7a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classuint8__t.html">uint8_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab33a54f5a7b7ea3d6f2698c1f30d5a7a">raw_buf</a></td></tr>
 <tr class="memitem:af06eb1d2a1d8c89d4cef9f24d4ae297b" id="r_af06eb1d2a1d8c89d4cef9f24d4ae297b"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af06eb1d2a1d8c89d4cef9f24d4ae297b">start_offset</a> = -1</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
-class audio_tools::SourceSeekSampleTableStore&lt; T &gt;</div><p>Discards every value right after appending it, keeping only the file offset of the first entry - <a class="el" href="#a4cf79c27a5a6f4930c1208b51c432344" title="Reads back entry &#39;index&#39; - index must be &lt; size().">get()</a> seeks back into the original MP4 source and re-reads the entry directly (entries are fixed-size and contiguous on disk, so entry N sits at start_offset + N*sizeof(T)), trading RAM for repeated small seeks. </p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename <a class="el" href="class_t.html">T</a>&gt;<br />
+class audio_tools::SourceSeekSampleTableStore&lt; T &gt;</div><p>Discards every value right after appending it, keeping only the file offset of the first entry - <a class="el" href="#a4cf79c27a5a6f4930c1208b51c432344" title="Reads back entry &#39;index&#39; - index must be &lt; size().">get()</a> seeks back into the original MP4 source and re-reads the entry directly (entries are fixed-size and contiguous on disk, so entry N sits at start_offset + N*sizeof(<a class="el" href="class_t.html">T</a>)), trading RAM for repeated small seeks. </p>
 <p>Needs the original source to (a) support seek()/read() (a local <a class="el" href="namespaceaudio__tools.html#a64f1320ec184ebd98b38c3d408650200">File</a>, not a live network stream) and (b) stay open for the lifetime of playback, since entries are re-read from it on demand while consuming 'mdat' - long after 'moov' parsing has moved past them.</p>
-<p>MP4's on-disk integers are big-endian, and the box handlers already decode them field-by-field (readU32()/readU64()) rather than via a plain memcpy - <a class="el" href="#a4cf79c27a5a6f4930c1208b51c432344" title="Reads back entry &#39;index&#39; - index must be &lt; size().">get()</a> has to reproduce that exact decoding independently later, since it can't call back into the box handler at playback time. A raw byte-for-byte copy into T would silently read wrong values on any little-endian host (i.e. virtually everything). 'decoder' plus 'onDiskSize' let the caller supply the same decoding logic and on-disk width the corresponding box handler used - onDiskSize matters because it isn't always sizeof(T): e.g. chunk offsets are always decoded into a uint64_t in memory, but are 4 bytes on disk for 'stco' vs. 8 for 'co64' - see <a class="el" href="#af6befa4fa7ba6296565c8e0a3a99ced6">setOnDiskEntrySize()</a>.</p>
+<p>MP4's on-disk integers are big-endian, and the box handlers already decode them field-by-field (readU32()/readU64()) rather than via a plain memcpy - <a class="el" href="#a4cf79c27a5a6f4930c1208b51c432344" title="Reads back entry &#39;index&#39; - index must be &lt; size().">get()</a> has to reproduce that exact decoding independently later, since it can't call back into the box handler at playback time. A raw byte-for-byte copy into <a class="el" href="class_t.html">T</a> would silently read wrong values on any little-endian host (i.e. virtually everything). 'decoder' plus 'onDiskSize' let the caller supply the same decoding logic and on-disk width the corresponding box handler used - onDiskSize matters because it isn't always sizeof(T): e.g. chunk offsets are always decoded into a <a class="el" href="classuint64__t.html">uint64_t</a> in memory, but are 4 bytes on disk for 'stco' vs. 8 for 'co64' - see <a class="el" href="#af6befa4fa7ba6296565c8e0a3a99ced6">setOnDiskEntrySize()</a>.</p>
 <p><a class="el" href="#a4cf79c27a5a6f4930c1208b51c432344" title="Reads back entry &#39;index&#39; - index must be &lt; size().">get()</a> is called once per sample, per table, during 'mdat' playback, and real playback access is overwhelmingly sequential (index, then index+1, then index+2, ...) since samples are consumed in roughly presentation order per track. A naive one-seek-one-read-per-get() (the original implementation) turns that into a syscall pair per single 4-8 byte value, which measurably slowed real playback down on a desktop filesystem - so <a class="el" href="#a4cf79c27a5a6f4930c1208b51c432344" title="Reads back entry &#39;index&#39; - index must be &lt; size().">get()</a> keeps a small read-ahead window (cacheEntries decoded values, default 64) instead: a cache miss reads a whole block of consecutive entries in one seek+read and decodes them all at once, so a sequential scan pays that cost only once per 'cacheEntries' calls rather than once per call. Backward/random access still works (a miss just re-centers the window on the new index) but won't benefit from the caching the way sequential access does. </p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a8cc308d5a202211ac67c957dea47ea6a" name="a8cc308d5a202211ac67c957dea47ea6a"></a>
@@ -161,7 +169,7 @@ class audio_tools::SourceSeekSampleTableStore&lt; T &gt;</div><p>Discards every 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -174,17 +182,17 @@ template&lt;typename T&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>onDiskSize</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>onDiskSize</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">T(*</td>          <td class="paramname"><span class="paramname"><em>decoder&#160;</em></span>)(const uint8_t *), </td>
+          <td class="paramtype"><a class="el" href="class_t.html">T</a>(*</td>          <td class="paramname"><span class="paramname"><em>decoder&#160;</em></span>)(const <a class="el" href="classuint8__t.html">uint8_t</a> *), </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>cacheEntries</em></span><span class="paramdefsep"> = </span><span class="paramdefval">64</span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>cacheEntries</em></span><span class="paramdefsep"> = </span><span class="paramdefval">64</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -193,7 +201,7 @@ template&lt;typename T&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>'source' must wrap the same open file <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html" title="DemuxerMP4 extracts both the audio and (H.264) video track from a general, interleaved MP4/ISO-BMFF s...">DemuxerMP4</a> is (directly or indirectly) being fed from, positioned so that byte 0 of the file corresponds to the very first byte ever passed to <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a7597ef706dd1aa590903ce9e095db20a">DemuxerMP4::write()</a> - entry offsets are computed relative to that. 'decoder' converts 'onDiskSize' raw big-endian bytes into a T value. 'cacheEntries' is the read-ahead window size - see the class comment. </p>
+<p>'source' must wrap the same open file <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html" title="DemuxerMP4 extracts both the audio and (H.264) video track from a general, interleaved MP4/ISO-BMFF s...">DemuxerMP4</a> is (directly or indirectly) being fed from, positioned so that byte 0 of the file corresponds to the very first byte ever passed to <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a7597ef706dd1aa590903ce9e095db20a">DemuxerMP4::write()</a> - entry offsets are computed relative to that. 'decoder' converts 'onDiskSize' raw big-endian bytes into a <a class="el" href="class_t.html">T</a> value. 'cacheEntries' is the read-ahead window size - see the class comment. </p>
 
 </div>
 </div>
@@ -203,7 +211,7 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -231,7 +239,7 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -239,7 +247,7 @@ template&lt;typename T&gt; </div>
         <tr>
           <td class="memname">void append </td>
           <td>(</td>
-          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_t.html">T</a></td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -262,7 +270,7 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -293,15 +301,15 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">T get </td>
+          <td class="memname"><a class="el" href="class_t.html">T</a> get </td>
           <td>(</td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>index</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>index</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -324,7 +332,7 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -332,7 +340,7 @@ template&lt;typename T&gt; </div>
         <tr>
           <td class="memname">void refillCache </td>
           <td>(</td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>index</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>index</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -351,7 +359,7 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -359,7 +367,7 @@ template&lt;typename T&gt; </div>
         <tr>
           <td class="memname">void setNextEntryOffset </td>
           <td>(</td>
-          <td class="paramtype">uint64_t</td>          <td class="paramname"><span class="paramname"><em>fileOffset</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classuint64__t.html">uint64_t</a></td>          <td class="paramname"><span class="paramname"><em>fileOffset</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -381,7 +389,7 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -389,7 +397,7 @@ template&lt;typename T&gt; </div>
         <tr>
           <td class="memname">void setOnDiskEntrySize </td>
           <td>(</td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>bytes</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>bytes</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -399,7 +407,7 @@ template&lt;typename T&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Overrides the on-disk entry width assumed by <a class="el" href="#a4cf79c27a5a6f4930c1208b51c432344" title="Reads back entry &#39;index&#39; - index must be &lt; size().">get()</a> - needed only for tables whose on-disk width can differ from sizeof(T) (chunk_offsets: 4 bytes for 'stco', 8 for 'co64', always stored as uint64_t). Safe to call any time before the first <a class="el" href="#a4cf79c27a5a6f4930c1208b51c432344" title="Reads back entry &#39;index&#39; - index must be &lt; size().">get()</a>; has no effect after. </p>
+<p>Overrides the on-disk entry width assumed by <a class="el" href="#a4cf79c27a5a6f4930c1208b51c432344" title="Reads back entry &#39;index&#39; - index must be &lt; size().">get()</a> - needed only for tables whose on-disk width can differ from sizeof(T) (chunk_offsets: 4 bytes for 'stco', 8 for 'co64', always stored as <a class="el" href="classuint64__t.html">uint64_t</a>). Safe to call any time before the first <a class="el" href="#a4cf79c27a5a6f4930c1208b51c432344" title="Reads back entry &#39;index&#39; - index must be &lt; size().">get()</a>; has no effect after. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_sample_table_store.html#af8ad543b4c0595c25293be58b1ea01b0">SampleTableStore&lt; T &gt;</a>.</p>
 
@@ -411,13 +419,13 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t size </td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> size </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -443,13 +451,13 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">T* cache</td>
+          <td class="memname"><a class="el" href="class_t.html">T</a>* cache</td>
         </tr>
       </table>
   </td>
@@ -467,13 +475,13 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t cache_capacity</td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> cache_capacity</td>
         </tr>
       </table>
   </td>
@@ -491,13 +499,13 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t cache_len = 0</td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> cache_len = 0</td>
         </tr>
       </table>
   </td>
@@ -515,13 +523,13 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t cache_start = 0</td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> cache_start = 0</td>
         </tr>
       </table>
   </td>
@@ -539,13 +547,13 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t count = 0</td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> count = 0</td>
         </tr>
       </table>
   </td>
@@ -563,13 +571,13 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">T(* decode) (const uint8_t *)</td>
+          <td class="memname"><a class="el" href="class_t.html">T</a>(* decode) (const <a class="el" href="classuint8__t.html">uint8_t</a> *)</td>
         </tr>
       </table>
   </td>
@@ -587,13 +595,13 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t kMaxOnDiskSize = 16</td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> kMaxOnDiskSize = 16</td>
         </tr>
       </table>
   </td>
@@ -612,13 +620,13 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t on_disk_size</td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> on_disk_size</td>
         </tr>
       </table>
   </td>
@@ -636,7 +644,7 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -660,13 +668,13 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t* raw_buf</td>
+          <td class="memname"><a class="el" href="classuint8__t.html">uint8_t</a>* raw_buf</td>
         </tr>
       </table>
   </td>
@@ -684,7 +692,7 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">

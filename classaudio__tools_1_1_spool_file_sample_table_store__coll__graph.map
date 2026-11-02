@@ -1,9 +1,11 @@
 <map id="SpoolFileSampleTableStore&lt; T &gt;" name="SpoolFileSampleTableStore&lt; T &gt;">
-<area shape="rect" id="Node000001" title="Writes every entry to a caller&#45;provided scratch file as it&#39;s appended, instead of keeping it in RAM &#45;..." alt="" coords="28,183,263,211"/>
+<area shape="rect" id="Node000001" title="Writes every entry to a caller&#45;provided scratch file as it&#39;s appended, instead of keeping it in RAM &#45;..." alt="" coords="141,183,376,211"/>
 <area shape="rect" id="Node000002" href="$classaudio__tools_1_1_sample_table_store.html" title="Sequential&#45;access storage for one MP4 sample table (e.g. stsz sample sizes, stco chunk offsets,..." alt="" coords="5,82,182,110"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="109,121,141,182,136,182,106,126"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="129,116,239,181,234,184,128,121"/>
 <area shape="rect" id="Node000003" href="$classaudio__tools_1_1_spool_storage.html" title="Minimal seek+read+write interface a SpoolFileSampleTableStore needs from its scratch file &#45; SeekableS..." alt="" coords="205,82,312,110"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="235,120,162,185,159,180,230,121"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="261,124,261,184,257,181,257,127"/>
 <area shape="rect" id="Node000004" href="$classaudio__tools_1_1_seekable_source.html" title="Minimal seek+read interface a SourceSeekSampleTableStore needs from &quot;the original MP4 source&quot; &#45; kept ..." alt="" coords="197,5,321,33"/>
 <area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="260,46,261,83,256,81,257,51"/>
+<area shape="rect" id="Node000005" href="$classsize__t.html" title=" " alt="" coords="337,82,396,110"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="354,122,325,161,288,185,286,180,321,157,350,124"/>
 </map>

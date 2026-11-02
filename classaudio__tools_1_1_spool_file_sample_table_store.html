@@ -102,39 +102,41 @@ Collaboration diagram for SpoolFileSampleTableStore&lt; T &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="classaudio__tools_1_1_spool_file_sample_table_store__coll__graph.png" border="0" usemap="#a_spool_file_sample_table_store_3_01_t_01_4_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="a_spool_file_sample_table_store_3_01_t_01_4_coll__map" id="a_spool_file_sample_table_store_3_01_t_01_4_coll__map">
-<area shape="rect" title="Writes every entry to a caller&#45;provided scratch file as it&#39;s appended, instead of keeping it in RAM &#45;..." alt="" coords="28,183,263,211"/>
+<area shape="rect" title="Writes every entry to a caller&#45;provided scratch file as it&#39;s appended, instead of keeping it in RAM &#45;..." alt="" coords="141,183,376,211"/>
 <area shape="rect" href="classaudio__tools_1_1_sample_table_store.html" title="Sequential&#45;access storage for one MP4 sample table (e.g. stsz sample sizes, stco chunk offsets,..." alt="" coords="5,82,182,110"/>
-<area shape="poly" title=" " alt="" coords="109,121,141,182,136,182,106,126"/>
+<area shape="poly" title=" " alt="" coords="129,116,239,181,234,184,128,121"/>
 <area shape="rect" href="classaudio__tools_1_1_spool_storage.html" title="Minimal seek+read+write interface a SpoolFileSampleTableStore needs from its scratch file &#45; SeekableS..." alt="" coords="205,82,312,110"/>
-<area shape="poly" title=" " alt="" coords="235,120,162,185,159,180,230,121"/>
+<area shape="poly" title=" " alt="" coords="261,124,261,184,257,181,257,127"/>
 <area shape="rect" href="classaudio__tools_1_1_seekable_source.html" title="Minimal seek+read interface a SourceSeekSampleTableStore needs from &quot;the original MP4 source&quot; &#45; kept ..." alt="" coords="197,5,321,33"/>
 <area shape="poly" title=" " alt="" coords="260,46,261,83,256,81,257,51"/>
+<area shape="rect" href="classsize__t.html" title=" " alt="" coords="337,82,396,110"/>
+<area shape="poly" title=" " alt="" coords="354,122,325,161,288,185,286,180,321,157,350,124"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ad79a596ca37841e6574c02b70ce62796" id="r_ad79a596ca37841e6574c02b70ce62796"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad79a596ca37841e6574c02b70ce62796">SpoolFileSampleTableStore</a> (<a class="el" href="classaudio__tools_1_1_spool_storage.html">SpoolStorage</a> &amp;spool)</td></tr>
-<tr class="memitem:a1c1b490d05f23a6f74e9e60fc57d253e" id="r_a1c1b490d05f23a6f74e9e60fc57d253e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1c1b490d05f23a6f74e9e60fc57d253e">append</a> (T value) override</td></tr>
+<tr class="memitem:a1c1b490d05f23a6f74e9e60fc57d253e" id="r_a1c1b490d05f23a6f74e9e60fc57d253e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1c1b490d05f23a6f74e9e60fc57d253e">append</a> (<a class="el" href="class_t.html">T</a> value) override</td></tr>
 <tr class="memdesc:a1c1b490d05f23a6f74e9e60fc57d253e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Appends one entry - call in file order, once per table entry.  <br /></td></tr>
 <tr class="memitem:aee7cb2065b88d21ac4ad05bc997ecf82" id="r_aee7cb2065b88d21ac4ad05bc997ecf82"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aee7cb2065b88d21ac4ad05bc997ecf82">clear</a> () override</td></tr>
 <tr class="memdesc:aee7cb2065b88d21ac4ad05bc997ecf82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets to empty - call once per begin()/track.  <br /></td></tr>
-<tr class="memitem:a4cf79c27a5a6f4930c1208b51c432344" id="r_a4cf79c27a5a6f4930c1208b51c432344"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4cf79c27a5a6f4930c1208b51c432344">get</a> (size_t index) override</td></tr>
+<tr class="memitem:a4cf79c27a5a6f4930c1208b51c432344" id="r_a4cf79c27a5a6f4930c1208b51c432344"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_t.html">T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4cf79c27a5a6f4930c1208b51c432344">get</a> (<a class="el" href="classsize__t.html">size_t</a> index) override</td></tr>
 <tr class="memdesc:a4cf79c27a5a6f4930c1208b51c432344"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads back entry 'index' - index must be &lt; <a class="el" href="#a128a3f6e587ccc181112bb2892440990" title="Number of entries appended so far.">size()</a>.  <br /></td></tr>
-<tr class="memitem:a978cff8e50f295705fa5aca5b03bbf42" id="r_a978cff8e50f295705fa5aca5b03bbf42"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sample_table_store.html#a978cff8e50f295705fa5aca5b03bbf42">setNextEntryOffset</a> (uint64_t fileOffset)</td></tr>
-<tr class="memitem:af8ad543b4c0595c25293be58b1ea01b0" id="r_af8ad543b4c0595c25293be58b1ea01b0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sample_table_store.html#af8ad543b4c0595c25293be58b1ea01b0">setOnDiskEntrySize</a> (size_t bytes)</td></tr>
-<tr class="memitem:a128a3f6e587ccc181112bb2892440990" id="r_a128a3f6e587ccc181112bb2892440990"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a128a3f6e587ccc181112bb2892440990">size</a> () override</td></tr>
+<tr class="memitem:a978cff8e50f295705fa5aca5b03bbf42" id="r_a978cff8e50f295705fa5aca5b03bbf42"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sample_table_store.html#a978cff8e50f295705fa5aca5b03bbf42">setNextEntryOffset</a> (<a class="el" href="classuint64__t.html">uint64_t</a> fileOffset)</td></tr>
+<tr class="memitem:af8ad543b4c0595c25293be58b1ea01b0" id="r_af8ad543b4c0595c25293be58b1ea01b0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sample_table_store.html#af8ad543b4c0595c25293be58b1ea01b0">setOnDiskEntrySize</a> (<a class="el" href="classsize__t.html">size_t</a> bytes)</td></tr>
+<tr class="memitem:a128a3f6e587ccc181112bb2892440990" id="r_a128a3f6e587ccc181112bb2892440990"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a128a3f6e587ccc181112bb2892440990">size</a> () override</td></tr>
 <tr class="memdesc:a128a3f6e587ccc181112bb2892440990"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of entries appended so far.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a923736a779e0e6d055415cecb8ee9f62" id="r_a923736a779e0e6d055415cecb8ee9f62"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a923736a779e0e6d055415cecb8ee9f62">entry_count</a> = 0</td></tr>
+<tr class="memitem:a923736a779e0e6d055415cecb8ee9f62" id="r_a923736a779e0e6d055415cecb8ee9f62"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a923736a779e0e6d055415cecb8ee9f62">entry_count</a> = 0</td></tr>
 <tr class="memitem:a3c9de73f2831e1727c3307f2cc20434d" id="r_a3c9de73f2831e1727c3307f2cc20434d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_spool_storage.html">SpoolStorage</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3c9de73f2831e1727c3307f2cc20434d">p_spool</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename <a class="el" href="class_t.html">T</a>&gt;<br />
 class audio_tools::SpoolFileSampleTableStore&lt; T &gt;</div><p>Writes every entry to a caller-provided scratch file as it's appended, instead of keeping it in RAM - <a class="el" href="#a4cf79c27a5a6f4930c1208b51c432344" title="Reads back entry &#39;index&#39; - index must be &lt; size().">get()</a> seeks that file and reads the entry back. Unlike <a class="el" href="classaudio__tools_1_1_source_seek_sample_table_store.html" title="Discards every value right after appending it, keeping only the file offset of the first entry - get(...">SourceSeekSampleTableStore</a> this needs no knowledge of (or seekability in) the <em>original</em> MP4 source - it works even when that source is a live, non-seekable stream, since it's writing its own local, sequential copy as data streams past. The tradeoff is disk I/O (both a write during parsing and a seek+read during playback) instead of a pure RAM cost. </p>
-<p>Unlike <a class="el" href="classaudio__tools_1_1_source_seek_sample_table_store.html" title="Discards every value right after appending it, keeping only the file offset of the first entry - get(...">SourceSeekSampleTableStore</a> there's no endianness/on-disk-width concern here - this store's on-disk layout is its own private format (whatever bytes T's native in-memory representation happens to be), not MP4's, so a plain byte-for-byte round-trip is correct as long as the same host reads back what it wrote (true here - never persisted across runs).</p>
+<p>Unlike <a class="el" href="classaudio__tools_1_1_source_seek_sample_table_store.html" title="Discards every value right after appending it, keeping only the file offset of the first entry - get(...">SourceSeekSampleTableStore</a> there's no endianness/on-disk-width concern here - this store's on-disk layout is its own private format (whatever bytes <a class="el" href="class_t.html">T</a>'s native in-memory representation happens to be), not MP4's, so a plain byte-for-byte round-trip is correct as long as the same host reads back what it wrote (true here - never persisted across runs).</p>
 <p>Each instance needs its own dedicated <a class="el" href="classaudio__tools_1_1_spool_storage.html" title="Minimal seek+read+write interface a SpoolFileSampleTableStore needs from its scratch file - SeekableS...">SpoolStorage</a> - see <a class="el" href="classaudio__tools_1_1_demuxer_m_p4.html#a41163c7c4cc05139b5e52eb582102cb6">DemuxerMP4::setSpoolStorageFactory()</a> for how one gets created per table per track. </p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad79a596ca37841e6574c02b70ce62796" name="ad79a596ca37841e6574c02b70ce62796"></a>
@@ -143,7 +145,7 @@ class audio_tools::SpoolFileSampleTableStore&lt; T &gt;</div><p>Writes every ent
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -172,7 +174,7 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -180,7 +182,7 @@ template&lt;typename T&gt; </div>
         <tr>
           <td class="memname">void append </td>
           <td>(</td>
-          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_t.html">T</a></td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -203,7 +205,7 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -234,15 +236,15 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">T get </td>
+          <td class="memname"><a class="el" href="class_t.html">T</a> get </td>
           <td>(</td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>index</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>index</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -265,7 +267,7 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -273,7 +275,7 @@ template&lt;typename T&gt; </div>
         <tr>
           <td class="memname">virtual void setNextEntryOffset </td>
           <td>(</td>
-          <td class="paramtype">uint64_t</td>          <td class="paramname"><span class="paramname"><em>fileOffset</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classuint64__t.html">uint64_t</a></td>          <td class="paramname"><span class="paramname"><em>fileOffset</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -295,7 +297,7 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -303,7 +305,7 @@ template&lt;typename T&gt; </div>
         <tr>
           <td class="memname">virtual void setOnDiskEntrySize </td>
           <td>(</td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>bytes</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>bytes</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -325,13 +327,13 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t size </td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> size </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -357,13 +359,13 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t entry_count = 0</td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> entry_count = 0</td>
         </tr>
       </table>
   </td>
@@ -381,7 +383,7 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">

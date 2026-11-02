@@ -104,29 +104,37 @@ Collaboration diagram for RTSPFragmentQueue:</div>
 <div class="dyncontent">
 <div class="center"><img src="classaudio__tools_1_1_r_t_s_p_fragment_queue__coll__graph.png" border="0" usemap="#a_r_t_s_p_fragment_queue_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="a_r_t_s_p_fragment_queue_coll__map" id="a_r_t_s_p_fragment_queue_coll__map">
-<area shape="rect" title="Self&#45;delimited fragment queue shared by packetized RTP video encoders (JPEGRtpEncoder,..." alt="" coords="5,207,163,234"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="15,106,153,134"/>
-<area shape="poly" title=" " alt="" coords="86,148,87,207,81,205,82,151"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="44,5,124,33"/>
-<area shape="poly" title=" " alt="" coords="85,46,87,106,81,105,83,51"/>
+<area shape="rect" title="Self&#45;delimited fragment queue shared by packetized RTP video encoders (JPEGRtpEncoder,..." alt="" coords="48,274,206,301"/>
+<area shape="rect" href="classsize__t.html" title=" " alt="" coords="5,128,65,156"/>
+<area shape="poly" title=" " alt="" coords="28,169,27,211,30,230,38,248,51,261,68,272,63,274,48,265,34,251,25,232,21,211,27,174"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="152,128,289,156"/>
+<area shape="poly" title=" " alt="" coords="220,170,213,212,205,232,193,251,179,265,162,276,160,271,175,261,189,248,200,230,208,210,217,173"/>
+<area shape="rect" href="classint.html" title=" " alt="" coords="57,5,96,33"/>
+<area shape="poly" title=" " alt="" coords="75,45,81,77,86,91,95,102,121,122,154,134,149,136,118,126,91,106,82,93,76,78,74,51"/>
+<area shape="rect" href="classuint8__t_01_5.html" title=" " alt="" coords="128,5,206,33"/>
+<area shape="poly" title=" " alt="" coords="167,46,172,76,181,103,203,128,198,128,177,106,167,77,165,51"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="230,5,309,33"/>
+<area shape="poly" title=" " alt="" coords="260,46,228,129,223,126,257,50"/>
+<area shape="rect" href="classbool.html" title=" " alt="" coords="350,5,400,33"/>
+<area shape="poly" title=" " alt="" coords="371,46,361,79,341,106,317,122,291,133,288,128,315,118,337,102,356,76,368,50"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-methods" class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a3487c7e35ae859f4676e4c3fa3e8cbd6" id="r_a3487c7e35ae859f4676e4c3fa3e8cbd6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3487c7e35ae859f4676e4c3fa3e8cbd6">appendFragment</a> (const uint8_t *payload, size_t len, bool last)</td></tr>
+<tr class="memitem:a3487c7e35ae859f4676e4c3fa3e8cbd6" id="r_a3487c7e35ae859f4676e4c3fa3e8cbd6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3487c7e35ae859f4676e4c3fa3e8cbd6">appendFragment</a> (const <a class="el" href="classuint8__t.html">uint8_t</a> *payload, <a class="el" href="classsize__t.html">size_t</a> len, <a class="el" href="classbool.html">bool</a> last)</td></tr>
 <tr class="memitem:a7b7f09ace42f57bf958a1a379e935ea9" id="r_a7b7f09ace42f57bf958a1a379e935ea9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7b7f09ace42f57bf958a1a379e935ea9">clearQueue</a> ()</td></tr>
 <tr class="memitem:a2fc6ac78a12cbf712208113f7b4078ce" id="r_a2fc6ac78a12cbf712208113f7b4078ce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2fc6ac78a12cbf712208113f7b4078ce">dropOldestFrame</a> ()</td></tr>
-<tr class="memitem:aae9039aea796a4c091427cedcd6a532d" id="r_aae9039aea796a4c091427cedcd6a532d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aae9039aea796a4c091427cedcd6a532d">queuePacketSize</a> ()</td></tr>
-<tr class="memitem:a855fd386ed1b6b860b5c3852b91cce6e" id="r_a855fd386ed1b6b860b5c3852b91cce6e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a855fd386ed1b6b860b5c3852b91cce6e">queueReadBytes</a> (void *dest, int maxBytes)</td></tr>
-<tr class="memitem:a9227007dca2c880c4996857572cc18dd" id="r_a9227007dca2c880c4996857572cc18dd"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9227007dca2c880c4996857572cc18dd">readQueueU32</a> (size_t pos)</td></tr>
+<tr class="memitem:aae9039aea796a4c091427cedcd6a532d" id="r_aae9039aea796a4c091427cedcd6a532d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aae9039aea796a4c091427cedcd6a532d">queuePacketSize</a> ()</td></tr>
+<tr class="memitem:a855fd386ed1b6b860b5c3852b91cce6e" id="r_a855fd386ed1b6b860b5c3852b91cce6e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a855fd386ed1b6b860b5c3852b91cce6e">queueReadBytes</a> (void *dest, <a class="el" href="classint.html">int</a> maxBytes)</td></tr>
+<tr class="memitem:a9227007dca2c880c4996857572cc18dd" id="r_a9227007dca2c880c4996857572cc18dd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9227007dca2c880c4996857572cc18dd">readQueueU32</a> (<a class="el" href="classsize__t.html">size_t</a> pos)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:afa220347665a3a90faf85f2ad8dd0b3b" id="r_afa220347665a3a90faf85f2ad8dd0b3b"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afa220347665a3a90faf85f2ad8dd0b3b">m_maxQueuedFrames</a> = 1</td></tr>
-<tr class="memitem:a82b7b2cf9a812f9af39705b852dd8555" id="r_a82b7b2cf9a812f9af39705b852dd8555"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a82b7b2cf9a812f9af39705b852dd8555">m_queue</a></td></tr>
-<tr class="memitem:aa4d901347e4fa8fb1ce74ed2ef8e2702" id="r_aa4d901347e4fa8fb1ce74ed2ef8e2702"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa4d901347e4fa8fb1ce74ed2ef8e2702">m_queuedFrames</a> = 0</td></tr>
-<tr class="memitem:ab6c99f7108c0b4d4496aa9031579739f" id="r_ab6c99f7108c0b4d4496aa9031579739f"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab6c99f7108c0b4d4496aa9031579739f">m_queueHead</a> = 0</td></tr>
+<tr class="memitem:afa220347665a3a90faf85f2ad8dd0b3b" id="r_afa220347665a3a90faf85f2ad8dd0b3b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afa220347665a3a90faf85f2ad8dd0b3b">m_maxQueuedFrames</a> = 1</td></tr>
+<tr class="memitem:a82b7b2cf9a812f9af39705b852dd8555" id="r_a82b7b2cf9a812f9af39705b852dd8555"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classuint8__t.html">uint8_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a82b7b2cf9a812f9af39705b852dd8555">m_queue</a></td></tr>
+<tr class="memitem:aa4d901347e4fa8fb1ce74ed2ef8e2702" id="r_aa4d901347e4fa8fb1ce74ed2ef8e2702"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa4d901347e4fa8fb1ce74ed2ef8e2702">m_queuedFrames</a> = 0</td></tr>
+<tr class="memitem:ab6c99f7108c0b4d4496aa9031579739f" id="r_ab6c99f7108c0b4d4496aa9031579739f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab6c99f7108c0b4d4496aa9031579739f">m_queueHead</a> = 0</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Self-delimited fragment queue shared by packetized RTP video encoders (<a class="el" href="classaudio__tools_1_1_j_p_e_g_rtp_encoder.html" title="JPEG RTP Encoder - Fragments JPEG frames per RFC 2435 for RTSP video streaming.">JPEGRtpEncoder</a>, <a class="el" href="classaudio__tools_1_1_h264_rtp_encoder.html" title="H.264 RTP Encoder - Packetizes Annex-B H.264 access units per RFC 6184 for RTSP video streaming.">H264RtpEncoder</a>, ...). </p>
@@ -135,7 +143,7 @@ Protected Attributes</h2></td></tr>
 last one of its frame").</li>
 </ul>
 <p>The queue is a flat byte buffer of messages laid out as [uint32 payloadLen][uint8 isLast][payloadLen bytes]. The isLast byte is only used internally, to know when a whole frame has been enqueued (see m_queuedFrames / dropOldestFrame) so a slow consumer can be capped to a bounded backlog; it is not exposed through packetSize().</p>
-<p>Framing the queue this way (rather than a <a class="el" href="classaudio__tools_1_1_vector.html" title="Vector implementation which provides the most important methods as defined by std::vector....">Vector</a> of per-fragment Vectors) avoids relying on element-wise move/copy semantics that this codebase's <a class="el" href="classaudio__tools_1_1_vector.html" title="Vector implementation which provides the most important methods as defined by std::vector....">Vector&lt;T&gt;</a> does not provide for non-trivial T (it grows via memmove).</p>
+<p>Framing the queue this way (rather than a <a class="el" href="classaudio__tools_1_1_vector.html" title="Vector implementation which provides the most important methods as defined by std::vector....">Vector</a> of per-fragment Vectors) avoids relying on element-wise move/copy semantics that this codebase's <a class="el" href="classaudio__tools_1_1_vector.html" title="Vector implementation which provides the most important methods as defined by std::vector....">Vector&lt;T&gt;</a> does not provide for non-trivial <a class="el" href="class_t.html">T</a> (it grows via memmove).</p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="a3487c7e35ae859f4676e4c3fa3e8cbd6" name="a3487c7e35ae859f4676e4c3fa3e8cbd6"></a>
@@ -150,17 +158,17 @@ last one of its frame").</li>
         <tr>
           <td class="memname">void appendFragment </td>
           <td>(</td>
-          <td class="paramtype">const uint8_t *</td>          <td class="paramname"><span class="paramname"><em>payload</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>payload</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>len</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classbool.html">bool</a></td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -232,7 +240,7 @@ last one of its frame").</li>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int queuePacketSize </td>
+          <td class="memname"><a class="el" href="classint.html">int</a> queuePacketSize </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -257,14 +265,14 @@ last one of its frame").</li>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int queueReadBytes </td>
+          <td class="memname"><a class="el" href="classint.html">int</a> queueReadBytes </td>
           <td>(</td>
           <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>dest</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>maxBytes</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>maxBytes</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -287,9 +295,9 @@ last one of its frame").</li>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t readQueueU32 </td>
+          <td class="memname"><a class="el" href="classuint32__t.html">uint32_t</a> readQueueU32 </td>
           <td>(</td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>pos</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>pos</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -313,7 +321,7 @@ last one of its frame").</li>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t m_maxQueuedFrames = 1</td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> m_maxQueuedFrames = 1</td>
         </tr>
       </table>
   </td>
@@ -335,7 +343,7 @@ last one of its frame").</li>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;uint8_t&gt; m_queue</td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;<a class="el" href="classuint8__t.html">uint8_t</a>&gt; m_queue</td>
         </tr>
       </table>
   </td>
@@ -357,7 +365,7 @@ last one of its frame").</li>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t m_queuedFrames = 0</td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> m_queuedFrames = 0</td>
         </tr>
       </table>
   </td>
@@ -379,7 +387,7 @@ last one of its frame").</li>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t m_queueHead = 0</td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> m_queueHead = 0</td>
         </tr>
       </table>
   </td>

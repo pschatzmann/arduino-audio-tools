@@ -1,5 +1,16 @@
 <map id="USBAudioHostBase::AltSetting" name="USBAudioHostBase::AltSetting">
-<area shape="rect" id="Node000001" title="One alternate setting of an audio streaming interface." alt="" coords="5,128,225,156"/>
-<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_usb_endpoint_descriptor_view.html" title="Backend&#45;agnostic mirror of tusb_desc_endpoint_t (USB 2.0 spec Table 9&#45;13). wMaxPacketSize is kept in ..." alt="" coords="14,5,216,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="117,47,118,128,112,127,113,50"/>
+<area shape="rect" id="Node000001" title="One alternate setting of an audio streaming interface." alt="" coords="229,472,448,500"/>
+<area shape="rect" id="Node000002" href="$classuint8__t.html" title=" " alt="" coords="20,5,87,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="42,50,26,104,11,177,8,217,10,257,19,295,35,331,56,359,82,384,111,406,142,424,206,451,269,471,263,472,205,456,139,428,108,410,78,388,52,363,30,333,14,297,5,257,3,217,6,177,21,103,42,45"/>
+<area shape="rect" id="Node000004" href="$structaudio__tools_1_1_usb_endpoint_descriptor_view.html" title="Backend&#45;agnostic mirror of tusb_desc_endpoint_t (USB 2.0 spec Table 9&#45;13). wMaxPacketSize is kept in ..." alt="" coords="139,239,341,266"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="60,45,79,96,92,123,108,147,133,175,163,200,218,237,213,239,159,204,130,179,104,151,87,125,74,98,60,51"/>
+<area shape="rect" id="Node000003" href="$classbool.html" title=" " alt="" coords="365,239,414,266"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="386,281,344,473,339,470,381,283"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="245,280,262,359,278,404,300,446,322,472,317,471,295,450,273,406,257,361,242,284"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="183,5,286,33"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="237,46,242,239,237,238,234,50"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="311,5,385,33"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="343,46,330,97,309,150,280,201,252,240,248,237,275,198,304,148,325,95,340,51"/>
+<area shape="rect" id="Node000007" href="$classuint32__t.html" title=" " alt="" coords="450,239,524,266"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="491,279,493,318,489,363,476,409,465,430,451,450,435,464,415,474,414,469,432,460,447,446,461,428,471,407,483,362,488,318,488,284"/>
 </map>

@@ -969,9 +969,9 @@ $(function() {
 <div class="line"><a id="l00874" name="l00874"></a><span class="lineno">  874</span>      <span class="keywordflow">while</span> (precision--) mult *= 10;</div>
 <div class="line"><a id="l00875" name="l00875"></a><span class="lineno">  875</span> </div>
 <div class="line"><a id="l00876" name="l00876"></a><span class="lineno">  876</span>      <span class="keywordflow">if</span> (val &gt;= 0)</div>
-<div class="line"><a id="l00877" name="l00877"></a><span class="lineno">  877</span>        frac = (val - int(val)) * mult;</div>
+<div class="line"><a id="l00877" name="l00877"></a><span class="lineno">  877</span>        frac = (val - <a class="code hl_class" href="classint.html">int</a>(val)) * mult;</div>
 <div class="line"><a id="l00878" name="l00878"></a><span class="lineno">  878</span>      <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00879" name="l00879"></a><span class="lineno">  879</span>        frac = (int(val) - val) * mult;</div>
+<div class="line"><a id="l00879" name="l00879"></a><span class="lineno">  879</span>        frac = (<a class="code hl_class" href="classint.html">int</a>(val) - val) * mult;</div>
 <div class="line"><a id="l00880" name="l00880"></a><span class="lineno">  880</span>      <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> frac1 = frac;</div>
 <div class="line"><a id="l00881" name="l00881"></a><span class="lineno">  881</span> </div>
 <div class="line"><a id="l00882" name="l00882"></a><span class="lineno">  882</span>      <span class="keywordflow">while</span> (frac1 /= 10) padding--;</div>
@@ -1099,6 +1099,7 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_str_view_html_afcff036690f189b220e039afe8b9a0f7"><div class="ttname"><a href="classaudio__tools_1_1_str_view.html#afcff036690f189b220e039afe8b9a0f7">audio_tools::StrView::toUpperCase</a></div><div class="ttdeci">void toUpperCase()</div><div class="ttdoc">Converts the string to uppercase letters.</div><div class="ttdef"><b>Definition</b> StrView.h:705</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_str_view_html_afed088663f8704004425cdae2120b9b3"><div class="ttname"><a href="classaudio__tools_1_1_str_view.html#afed088663f8704004425cdae2120b9b3">audio_tools::StrView::len</a></div><div class="ttdeci">int len</div><div class="ttdef"><b>Definition</b> StrView.h:812</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_str_view_html_afed25c1f44bea77bce830bf9bafc54f0"><div class="ttname"><a href="classaudio__tools_1_1_str_view.html#afed25c1f44bea77bce830bf9bafc54f0">audio_tools::StrView::operator!=</a></div><div class="ttdeci">virtual bool operator!=(const char *alt) const</div><div class="ttdoc">checks if the indicated string is different from the current string</div><div class="ttdef"><b>Definition</b> StrView.h:451</div></div>
+<div class="ttc" id="aclassint_html"><div class="ttname"><a href="classint.html">int</a></div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> LMSEchoCancellationStream.h:6</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

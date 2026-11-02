@@ -1,9 +1,25 @@
 <map id="TfLiteConfig" name="TfLiteConfig">
-<area shape="rect" id="Node000001" title="Configuration settings for TfLiteAudioStream." alt="" coords="133,106,232,134"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_tf_lite_reader.html" title="Input class which provides the next value if the TfLiteAudioStream is treated as an audio sourcce." alt="" coords="5,5,110,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="83,41,129,80,165,105,159,106,126,84,81,46"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_tf_lite_writer.html" title="Output class which interprets audio data if TfLiteAudioStream is treated as audio sink." alt="" coords="134,5,232,33"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="185,47,185,107,180,104,181,50"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_tf_lite_abstract_recognize_commands.html" title="Base class for implementing different primitive decoding models on top of the instantaneous results f..." alt="" coords="256,5,510,33"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="345,40,211,108,208,103,340,40"/>
+<area shape="rect" id="Node000001" title="Configuration settings for TfLiteAudioStream." alt="" coords="494,385,593,413"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="92,39,172,66"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="186,38,251,29,327,29,366,34,404,44,439,60,472,83,488,106,502,140,524,229,537,320,544,385,538,385,532,321,518,230,497,142,484,108,468,86,437,65,402,49,365,40,327,34,252,35,189,42"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_tf_lite_reader.html" title="Input class which provides the next value if the TfLiteAudioStream is treated as an audio sourcce." alt="" coords="80,95,184,122"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="199,109,362,118,432,127,471,138,486,157,499,184,519,256,534,330,543,385,537,384,529,331,514,257,494,186,481,160,468,143,431,132,362,123,201,113"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_tf_lite_writer.html" title="Output class which interprets audio data if TfLiteAudioStream is treated as audio sink." alt="" coords="83,151,181,178"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="195,164,360,173,432,180,471,192,493,213,509,237,531,292,541,345,544,385,539,384,536,346,526,294,504,240,488,216,468,196,431,186,359,178,198,169"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_tf_lite_abstract_recognize_commands.html" title="Base class for implementing different primitive decoding models on top of the instantaneous results f..." alt="" coords="5,207,259,234"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="273,217,390,224,438,234,471,248,488,262,502,279,523,317,536,355,543,385,537,385,531,356,518,319,498,282,484,266,468,252,436,239,389,230,276,221"/>
+<area shape="rect" id="Node000006" href="$classbool.html" title=" " alt="" coords="107,308,157,336"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="171,325,341,349,470,370,510,384,505,386,469,375,341,354,173,330"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="41,360,223,438"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="237,397,495,397,492,401,240,402"/>
+<area shape="rect" id="Node000008" href="$classsize__t.html" title=" " alt="" coords="102,463,162,490"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="176,472,309,458,389,445,469,427,514,412,510,415,470,432,390,450,310,463,179,476"/>
+<area shape="rect" id="Node000009" href="$classint.html" title=" " alt="" coords="113,631,151,658"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="165,652,229,664,309,670,351,668,393,661,432,647,468,625,491,603,508,576,521,546,530,515,538,457,542,416,543,411,544,457,535,516,526,548,513,579,495,606,471,630,435,652,394,666,352,673,309,676,228,669,167,656"/>
+<area shape="rect" id="Node000010" href="$classint32__t.html" title=" " alt="" coords="99,753,165,781"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="179,772,254,781,340,787,418,784,447,778,468,768,487,742,502,702,514,652,523,597,535,488,541,416,542,411,540,489,529,598,519,653,507,704,491,745,471,772,449,783,418,790,339,793,254,786,181,777"/>
+<area shape="rect" id="Node000011" href="$classuint8__t.html" title=" " alt="" coords="99,832,165,860"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="179,850,254,858,340,862,418,858,448,851,468,840,479,827,490,809,507,760,519,700,528,632,537,502,541,416,543,411,543,502,533,633,524,700,512,762,494,812,484,831,471,845,449,856,419,863,340,868,254,863,181,855"/>
+<area shape="rect" id="Node000012" href="$classfloat.html" title=" " alt="" coords="107,1268,157,1296"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="172,1293,237,1310,317,1319,358,1318,398,1310,435,1296,468,1273,479,1255,489,1224,506,1129,518,1004,527,862,537,585,541,416,543,411,542,585,533,862,524,1004,511,1130,494,1225,484,1257,472,1276,438,1301,400,1316,359,1323,317,1325,236,1315,172,1298"/>
 </map>

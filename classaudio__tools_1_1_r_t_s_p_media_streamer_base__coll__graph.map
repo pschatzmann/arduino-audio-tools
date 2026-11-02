@@ -1,11 +1,32 @@
 <map id="RTSPMediaStreamerBase&lt; Platform &gt;" name="RTSPMediaStreamerBase&lt; Platform &gt;">
-<area shape="rect" id="Node000001" title="RTSPMediaStreamerBase &#45; Core RTP Media Streaming Engine." alt="" coords="129,229,315,274"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="5,106,143,134"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="88,144,109,175,134,203,171,228,166,229,131,207,105,178,87,150"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="34,5,114,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="75,46,77,106,71,105,73,51"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_i_media_source.html" title="Media Source Interface &#45; Contract for Media Data Providers." alt="" coords="167,106,277,134"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="224,148,224,230,220,228,220,151"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_i_p_address.html" title="Arduino&#45;compatible IPAddress class implemented in pure C++." alt="" coords="318,106,403,134"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="359,147,351,179,333,207,300,231,297,226,329,203,346,177,355,151"/>
+<area shape="rect" id="Node000001" title="RTSPMediaStreamerBase &#45; Core RTP Media Streaming Engine." alt="" coords="643,685,828,730"/>
+<area shape="rect" id="Node000002" href="$classint.html" title=" " alt="" coords="26,274,64,301"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="77,276,108,269,184,262,260,269,370,284,457,299,497,311,536,330,577,358,621,396,649,430,673,468,692,509,707,550,726,627,734,686,730,684,721,628,702,552,687,511,668,471,645,433,617,400,574,362,534,335,495,316,456,304,369,289,259,274,184,267,109,274,81,279"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="299,419,436,447"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="76,303,110,316,151,328,185,332,219,337,261,352,313,384,354,418,348,419,310,388,259,357,218,343,185,337,150,333,108,322,79,308"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="451,442,494,452,538,467,581,486,620,512,660,553,691,601,714,647,729,686,724,684,709,649,687,603,656,557,617,516,578,491,536,472,492,457,453,447"/>
+<area shape="rect" id="Node000004" href="$classuint8__t_01_5.html" title=" " alt="" coords="6,363,84,391"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="98,380,260,404,316,417,311,420,259,409,100,385"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="5,419,85,447"/>
+<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="99,431,300,431,297,435,101,435"/>
+<area shape="rect" id="Node000006" href="$classbool.html" title=" " alt="" coords="20,498,70,525"/>
+<area shape="poly" id="edge8_Node000001_Node000006" title=" " alt="" coords="84,509,203,508,360,513,513,528,575,541,620,557,657,584,687,618,710,653,726,685,721,684,705,656,682,622,653,588,617,562,573,546,512,533,360,519,203,514,87,513"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="84,501,259,461,320,446,316,449,260,466,87,506"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_i_media_source.html" title="Media Source Interface &#45; Contract for Media Data Providers." alt="" coords="313,580,422,608"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="437,587,526,591,574,599,620,613,648,628,674,646,716,685,711,685,671,650,645,632,618,618,573,604,526,596,439,592"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="302,643,433,671"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="448,662,619,684,645,690,640,691,618,689,449,668"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="330,743,405,771"/>
+<area shape="poly" id="edge10_Node000001_Node000009" title=" " alt="" coords="420,760,513,763,566,761,618,753,655,743,693,729,689,732,657,748,619,759,567,766,513,769,421,765"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="333,795,402,823"/>
+<area shape="poly" id="edge11_Node000001_Node000010" title=" " alt="" coords="417,812,462,815,513,814,566,808,618,794,645,781,670,764,711,732,715,729,674,768,648,786,620,799,567,813,513,819,462,820,418,818"/>
+<area shape="rect" id="Node000011" href="$classuint32__t.html" title=" " alt="" coords="8,926,82,953"/>
+<area shape="poly" id="edge12_Node000001_Node000011" title=" " alt="" coords="97,934,300,918,396,909,451,901,501,886,539,870,574,850,617,820,671,774,713,732,717,729,675,778,620,824,577,854,541,875,503,891,452,907,397,915,301,924,98,939"/>
+<area shape="rect" id="Node000012" href="$classaudio__tools_1_1_i_p_address.html" title="Arduino&#45;compatible IPAddress class implemented in pure C++." alt="" coords="326,964,410,992"/>
+<area shape="poly" id="edge15_Node000012_Node000011" title=" " alt="" coords="97,955,109,958,167,967,226,973,327,978,322,979,226,978,167,972,108,963,98,961"/>
+<area shape="poly" id="edge13_Node000001_Node000012" title=" " alt="" coords="425,987,471,991,521,990,571,980,595,971,617,958,644,935,667,907,685,876,700,843,719,780,730,732,733,728,724,781,705,845,690,878,671,910,648,939,620,963,597,976,573,985,521,995,470,997,425,992"/>
+<area shape="rect" id="Node000013" href="$classuint8__t.html" title=" " alt="" coords="12,1004,78,1032"/>
+<area shape="poly" id="edge14_Node000012_Node000013" title=" " alt="" coords="93,1016,172,1014,259,1005,323,992,328,991,260,1010,172,1019,94,1021"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="307,1016,428,1044"/>
+<area shape="poly" id="edge16_Node000001_Node000014" title=" " alt="" coords="436,1045,480,1051,527,1052,575,1043,597,1035,617,1023,650,992,676,956,695,915,710,873,726,791,732,732,735,728,731,792,715,874,700,917,680,959,654,996,620,1027,599,1039,576,1048,528,1057,479,1056,435,1050"/>
 </map>

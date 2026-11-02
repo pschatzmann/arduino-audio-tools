@@ -103,31 +103,41 @@ Collaboration diagram for FileSeekableSource&lt; FileT, WriterT &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="classaudio__tools_1_1_file_seekable_source__coll__graph.png" border="0" usemap="#a_file_seekable_source_3_01_file_t_00_01_writer_t_01_4_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="a_file_seekable_source_3_01_file_t_00_01_writer_t_01_4_coll__map" id="a_file_seekable_source_3_01_file_t_00_01_writer_t_01_4_coll__map">
-<area shape="rect" title="Adapts a single concrete file/stream (Arduino&#39;s File, or anything else exposing position(),..." alt="" coords="5,81,153,126"/>
-<area shape="rect" href="classaudio__tools_1_1_seekable_source.html" title="Minimal seek+read interface a SourceSeekSampleTableStore needs from &quot;the original MP4 source&quot; &#45; kept ..." alt="" coords="17,5,141,33"/>
-<area shape="poly" title=" " alt="" coords="81,47,82,81,76,80,77,51"/>
+<area shape="rect" title="Adapts a single concrete file/stream (Arduino&#39;s File, or anything else exposing position(),..." alt="" coords="310,151,457,195"/>
+<area shape="rect" href="classaudio__tools_1_1_seekable_source.html" title="Minimal seek+read interface a SourceSeekSampleTableStore needs from &quot;the original MP4 source&quot; &#45; kept ..." alt="" coords="5,5,130,33"/>
+<area shape="poly" title=" " alt="" coords="84,43,120,86,142,107,166,124,201,140,238,152,312,168,307,168,236,157,199,145,164,129,138,111,116,90,83,49"/>
+<area shape="rect" href="classbool.html" title=" " alt="" coords="154,5,203,33"/>
+<area shape="poly" title=" " alt="" coords="174,46,174,88,179,108,189,125,207,137,237,147,312,164,307,164,235,152,205,142,185,129,174,110,169,89,171,51"/>
+<area shape="rect" title=" " alt="" coords="297,5,360,33"/>
+<area shape="poly" title=" " alt="" coords="332,46,339,86,351,126,366,151,361,149,346,128,333,87,329,51"/>
+<area shape="rect" title=" " alt="" coords="385,5,465,33"/>
+<area shape="poly" title=" " alt="" coords="420,47,391,152,387,149,415,50"/>
+<area shape="rect" href="classint.html" title=" " alt="" coords="494,5,532,33"/>
+<area shape="poly" title=" " alt="" coords="513,47,504,89,495,110,483,128,451,153,449,148,479,125,491,107,499,87,509,50"/>
+<area shape="rect" href="classsize__t.html" title=" " alt="" coords="587,5,646,33"/>
+<area shape="poly" title=" " alt="" coords="619,47,612,90,603,111,589,129,568,141,535,152,458,166,457,161,534,146,565,136,586,125,598,108,607,88,615,50"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a79346023244f884cf660a2f365593046" id="r_a79346023244f884cf660a2f365593046"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a79346023244f884cf660a2f365593046">FileSeekableSource</a> (FileT &amp;file, WriterT &amp;writer, int bufferSize=1024, bool quickStart=true)</td></tr>
-<tr class="memitem:aecb44a6d385121be2179187d45520331" id="r_aecb44a6d385121be2179187d45520331"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aecb44a6d385121be2179187d45520331">copy</a> ()</td></tr>
-<tr class="memitem:a4c5c6275ddee80eb02839356b6185c0b" id="r_a4c5c6275ddee80eb02839356b6185c0b"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4c5c6275ddee80eb02839356b6185c0b">readBytes</a> (uint8_t *data, size_t len) override</td></tr>
-<tr class="memitem:a12da23ef57e476f79ec6adc973249576" id="r_a12da23ef57e476f79ec6adc973249576"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a12da23ef57e476f79ec6adc973249576">seek</a> (size_t pos) override</td></tr>
+<tr class="memitem:a79346023244f884cf660a2f365593046" id="r_a79346023244f884cf660a2f365593046"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a79346023244f884cf660a2f365593046">FileSeekableSource</a> (FileT &amp;file, WriterT &amp;writer, <a class="el" href="classint.html">int</a> bufferSize=1024, <a class="el" href="classbool.html">bool</a> quickStart=true)</td></tr>
+<tr class="memitem:aecb44a6d385121be2179187d45520331" id="r_aecb44a6d385121be2179187d45520331"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aecb44a6d385121be2179187d45520331">copy</a> ()</td></tr>
+<tr class="memitem:a4c5c6275ddee80eb02839356b6185c0b" id="r_a4c5c6275ddee80eb02839356b6185c0b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4c5c6275ddee80eb02839356b6185c0b">readBytes</a> (<a class="el" href="classuint8__t.html">uint8_t</a> *data, <a class="el" href="classsize__t.html">size_t</a> len) override</td></tr>
+<tr class="memitem:a12da23ef57e476f79ec6adc973249576" id="r_a12da23ef57e476f79ec6adc973249576"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a12da23ef57e476f79ec6adc973249576">seek</a> (<a class="el" href="classsize__t.html">size_t</a> pos) override</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:af85fa0235214e6e8714493da3f96340a" id="r_af85fa0235214e6e8714493da3f96340a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af85fa0235214e6e8714493da3f96340a">debug_trace</a> = false</td></tr>
+<tr class="memitem:af85fa0235214e6e8714493da3f96340a" id="r_af85fa0235214e6e8714493da3f96340a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af85fa0235214e6e8714493da3f96340a">debug_trace</a> = false</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a8856616e3fa45184d60513cefb82e649" id="r_a8856616e3fa45184d60513cefb82e649"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8856616e3fa45184d60513cefb82e649">buffer_len</a></td></tr>
+<tr class="memitem:a8856616e3fa45184d60513cefb82e649" id="r_a8856616e3fa45184d60513cefb82e649"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8856616e3fa45184d60513cefb82e649">buffer_len</a></td></tr>
 <tr class="memitem:a65aef93f6d5799474458e51b4375e759" id="r_a65aef93f6d5799474458e51b4375e759"><td class="memItemLeft" align="right" valign="top">FileT *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a65aef93f6d5799474458e51b4375e759">p_file</a></td></tr>
 <tr class="memitem:af073268af27b9eab950e1370d8423495" id="r_af073268af27b9eab950e1370d8423495"><td class="memItemLeft" align="right" valign="top">WriterT *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af073268af27b9eab950e1370d8423495">p_writer</a></td></tr>
-<tr class="memitem:ae7218b2d2752bcf74a0f44f418ec40d9" id="r_ae7218b2d2752bcf74a0f44f418ec40d9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae7218b2d2752bcf74a0f44f418ec40d9">quick_start_done</a> = false</td></tr>
-<tr class="memitem:abf9ffb0a4927dccf7cf1ff871bef38cb" id="r_abf9ffb0a4927dccf7cf1ff871bef38cb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abf9ffb0a4927dccf7cf1ff871bef38cb">quick_start_enabled</a></td></tr>
-<tr class="memitem:aea5b36a7996be76dfd15054f5308db89" id="r_aea5b36a7996be76dfd15054f5308db89"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aea5b36a7996be76dfd15054f5308db89">saved_pos</a> = 0</td></tr>
+<tr class="memitem:ae7218b2d2752bcf74a0f44f418ec40d9" id="r_ae7218b2d2752bcf74a0f44f418ec40d9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae7218b2d2752bcf74a0f44f418ec40d9">quick_start_done</a> = false</td></tr>
+<tr class="memitem:abf9ffb0a4927dccf7cf1ff871bef38cb" id="r_abf9ffb0a4927dccf7cf1ff871bef38cb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abf9ffb0a4927dccf7cf1ff871bef38cb">quick_start_enabled</a></td></tr>
+<tr class="memitem:aea5b36a7996be76dfd15054f5308db89" id="r_aea5b36a7996be76dfd15054f5308db89"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aea5b36a7996be76dfd15054f5308db89">saved_pos</a> = 0</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename FileT, typename WriterT&gt;<br />
@@ -163,12 +173,12 @@ template&lt;typename FileT, typename WriterT&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>bufferSize</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1024</span>, </td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>bufferSize</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1024</span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>quickStart</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classbool.html">bool</a></td>          <td class="paramname"><span class="paramname"><em>quickStart</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -194,7 +204,7 @@ template&lt;typename FileT, typename WriterT&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t copy </td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> copy </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -223,14 +233,14 @@ template&lt;typename FileT, typename WriterT&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t readBytes </td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> readBytes </td>
           <td>(</td>
-          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -256,9 +266,9 @@ template&lt;typename FileT, typename WriterT&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool seek </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> seek </td>
           <td>(</td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>pos</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>pos</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -286,7 +296,7 @@ template&lt;typename FileT, typename WriterT&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int buffer_len</td>
+          <td class="memname"><a class="el" href="classint.html">int</a> buffer_len</td>
         </tr>
       </table>
   </td>
@@ -307,7 +317,7 @@ template&lt;typename FileT, typename WriterT&gt; </div>
 template&lt;typename FileT, typename WriterT&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">bool debug_trace = false</td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> debug_trace = false</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -375,7 +385,7 @@ template&lt;typename FileT, typename WriterT&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool quick_start_done = false</td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> quick_start_done = false</td>
         </tr>
       </table>
   </td>
@@ -399,7 +409,7 @@ template&lt;typename FileT, typename WriterT&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool quick_start_enabled</td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> quick_start_enabled</td>
         </tr>
       </table>
   </td>
@@ -423,7 +433,7 @@ template&lt;typename FileT, typename WriterT&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t saved_pos = 0</td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> saved_pos = 0</td>
         </tr>
       </table>
   </td>

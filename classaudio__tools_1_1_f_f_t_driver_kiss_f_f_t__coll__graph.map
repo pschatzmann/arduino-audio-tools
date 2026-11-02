@@ -1,9 +1,18 @@
 <map id="FFTDriverKissFFT" name="FFTDriverKissFFT">
-<area shape="rect" id="Node000001" title="Driver for RealFFT." alt="" coords="28,207,163,234"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_f_f_t_driver.html" title="Abstract Class which defines the basic FFT functionality." alt="" coords="5,106,90,134"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="62,146,92,206,86,206,59,150"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="114,106,283,134"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="177,144,111,208,108,204,171,144"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="158,5,238,33"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="200,46,201,106,196,104,197,51"/>
+<area shape="rect" id="Node000001" title="Driver for RealFFT." alt="" coords="159,251,293,279"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_f_f_t_driver.html" title="Abstract Class which defines the basic FFT functionality." alt="" coords="5,128,90,156"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="71,164,108,195,149,225,196,251,190,251,146,230,104,199,71,169"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="113,128,208,156"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="156,169,156,199,164,226,175,239,191,251,186,250,172,243,159,229,151,200,153,173"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="351,128,520,156"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="409,164,363,198,311,230,261,253,259,248,309,225,360,194,404,166"/>
+<area shape="rect" id="Node000005" href="$classint.html" title=" " alt="" coords="304,5,343,33"/>
+<area shape="poly" id="edge8_Node000001_Node000005" title=" " alt="" coords="321,47,303,146,289,195,275,229,250,253,248,248,271,226,284,193,297,145,317,50"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="329,46,340,76,356,103,372,116,393,128,387,128,370,120,353,106,335,78,327,51"/>
+<area shape="rect" id="Node000006" href="$classkiss__fft__cpx_01_5.html" title=" " alt="" coords="372,5,481,33"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="430,47,437,129,432,127,427,51"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="505,5,584,33"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="533,45,516,77,492,106,461,130,458,125,488,102,511,74,529,49"/>
+<area shape="rect" id="Node000008" href="$classbool.html" title=" " alt="" coords="622,5,671,33"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="643,46,633,79,612,106,575,122,521,133,520,128,573,117,609,102,628,77,639,50"/>
 </map>

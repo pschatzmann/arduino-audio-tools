@@ -1,25 +1,42 @@
 <map id="UDPStream" name="UDPStream">
-<area shape="rect" id="Node000001" title="A UDP class which makes sure that we can use UDP as AudioSource and AudioSink. By default the WiFiUDP..." alt="" coords="143,453,240,480"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="" coords="5,330,106,357"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="83,365,179,451,174,453,80,370"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="21,207,90,234"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="48,247,49,291,52,329,47,329,44,292,47,252"/>
-<area shape="poly" id="edge5_Node000002_Node000003" title=" " alt="" coords="64,247,67,292,64,329,59,329,62,291,63,252"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="30,106,81,134"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="48,146,52,206,46,206,47,151"/>
-<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="64,146,65,206,59,206,63,151"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_ring_buffer.html" title=" " alt="" coords="113,207,278,234"/>
-<area shape="poly" id="edge6_Node000002_Node000005" title=" " alt="" coords="169,247,73,331,69,327,170,242"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="108,106,275,134"/>
-<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="185,146,191,207,186,206,184,151"/>
-<area shape="poly" id="edge8_Node000005_Node000006" title=" " alt="" coords="202,146,204,207,199,205,200,151"/>
-<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="305,5,384,33"/>
-<area shape="poly" id="edge9_Node000005_Node000007" title=" " alt="" coords="336,45,317,91,290,135,251,177,215,208,211,204,248,173,285,132,312,88,333,50"/>
-<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="420,106,558,134"/>
-<area shape="poly" id="edge11_Node000008_Node000007" title=" " alt="" coords="376,39,472,105,467,106,376,44"/>
-<area shape="poly" id="edge10_Node000005_Node000008" title=" " alt="" coords="445,142,343,185,258,208,256,204,341,180,450,139"/>
-<area shape="rect" id="Node000009" href="$classaudio__tools_1_1_wi_fi_u_d_p_zephyr.html" title="WiFiUDP (Zephyr zsock version) This class provides a UDP interface using Zephyr&#39;s socket API (zsock)...." alt="" coords="130,330,253,357"/>
-<area shape="poly" id="edge12_Node000001_Node000009" title=" " alt="" coords="194,371,194,453,189,451,189,375"/>
-<area shape="rect" id="Node000010" href="$classaudio__tools_1_1_i_p_address.html" title="Arduino&#45;compatible IPAddress class implemented in pure C++." alt="" coords="277,330,362,357"/>
-<area shape="poly" id="edge13_Node000001_Node000010" title=" " alt="" coords="315,371,304,403,284,431,264,445,241,456,239,451,261,441,280,427,299,400,311,374"/>
+<area shape="rect" id="Node000001" title="A UDP class which makes sure that we can use UDP as AudioSource and AudioSink. By default the WiFiUDP..." alt="" coords="965,539,1062,567"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="" coords="708,416,809,444"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="789,450,839,482,896,513,968,540,962,540,894,518,836,487,788,456"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="763,293,832,321"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="783,333,769,378,759,418,755,414,764,377,779,337"/>
+<area shape="poly" id="edge6_Node000002_Node000003" title=" " alt="" coords="798,334,786,379,771,418,767,414,781,377,794,338"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="809,160,860,188"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="821,201,807,251,797,295,793,291,802,250,818,205"/>
+<area shape="poly" id="edge5_Node000003_Node000004" title=" " alt="" coords="836,201,825,252,809,295,805,291,819,250,832,205"/>
+<area shape="rect" id="Node000005" href="$classint.html" title=" " alt="" coords="605,5,643,33"/>
+<area shape="poly" id="edge17_Node000002_Node000005" title=" " alt="" coords="635,45,663,128,670,167,673,199,677,230,686,269,721,353,753,417,748,415,716,355,681,270,672,231,668,199,665,168,657,129,633,50"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="657,31,704,55,774,110,825,160,820,160,771,114,701,59,658,36"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_ring_buffer.html" title=" " alt="" coords="312,293,477,321"/>
+<area shape="poly" id="edge16_Node000006_Node000005" title=" " alt="" coords="614,45,573,130,543,177,509,222,462,264,418,295,415,291,459,260,505,219,539,174,568,127,611,49"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="59,160,197,188"/>
+<area shape="poly" id="edge12_Node000009_Node000005" title=" " alt="" coords="587,26,537,39,480,59,463,71,452,83,440,96,421,107,390,117,363,122,315,122,267,120,240,123,209,131,176,145,148,162,144,158,173,141,207,126,239,118,267,115,315,116,362,117,389,112,419,102,436,91,448,80,460,67,478,55,535,34,592,24"/>
+<area shape="poly" id="edge7_Node000002_Node000006" title=" " alt="" coords="437,325,515,357,604,390,711,419,705,419,603,395,513,362,437,330"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="220,160,388,188"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="315,199,349,248,383,293,377,293,345,251,314,204"/>
+<area shape="poly" id="edge9_Node000006_Node000007" title=" " alt="" coords="329,198,366,247,394,293,389,293,362,250,328,203"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="340,5,420,33"/>
+<area shape="poly" id="edge10_Node000006_Node000008" title=" " alt="" coords="408,42,417,56,427,89,431,124,428,193,415,252,402,294,397,291,410,251,422,192,426,124,422,90,412,58,407,47"/>
+<area shape="poly" id="edge14_Node000009_Node000008" title=" " alt="" coords="349,45,337,59,315,84,305,95,289,107,268,117,249,121,231,124,209,131,150,162,147,158,207,126,230,119,248,115,266,112,287,102,301,91,311,81,333,55,353,41"/>
+<area shape="poly" id="edge11_Node000006_Node000009" title=" " alt="" coords="156,195,209,232,271,267,339,292,334,294,269,272,206,236,157,201"/>
+<area shape="rect" id="Node000010" href="$classuint8__t_01_5.html" title=" " alt="" coords="5,5,83,33"/>
+<area shape="poly" id="edge13_Node000009_Node000010" title=" " alt="" coords="50,45,62,75,74,103,95,134,117,159,112,161,91,137,70,106,57,77,51,51"/>
+<area shape="rect" id="Node000011" href="$classbool.html" title=" " alt="" coords="107,5,157,33"/>
+<area shape="poly" id="edge15_Node000009_Node000011" title=" " alt="" coords="132,46,131,160,126,160,131,51"/>
+<area shape="rect" id="Node000012" href="$classaudio__tools_1_1_wi_fi_u_d_p_zephyr.html" title="WiFiUDP (Zephyr zsock version) This class provides a UDP interface using Zephyr&#39;s socket API (zsock)...." alt="" coords="833,416,956,444"/>
+<area shape="poly" id="edge18_Node000001_Node000012" title=" " alt="" coords="900,457,909,487,925,514,944,528,967,541,962,540,941,533,921,517,904,489,896,462"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="980,416,1054,444"/>
+<area shape="poly" id="edge19_Node000001_Node000013" title=" " alt="" coords="1017,457,1017,468,1015,540,1011,537,1012,468,1013,461"/>
+<area shape="rect" id="Node000014" href="$classaudio__tools_1_1_i_p_address.html" title="Arduino&#45;compatible IPAddress class implemented in pure C++." alt="" coords="1118,416,1202,444"/>
+<area shape="poly" id="edge20_Node000001_Node000014" title=" " alt="" coords="1159,458,1151,490,1133,517,1099,538,1062,550,1061,544,1097,534,1129,513,1146,487,1155,461"/>
+<area shape="rect" id="Node000015" href="$classuint8__t.html" title=" " alt="" coords="1174,293,1240,321"/>
+<area shape="poly" id="edge21_Node000014_Node000015" title=" " alt="" coords="1198,334,1167,418,1163,414,1194,337"/>
+<area shape="rect" id="Node000016" href="$classuint32__t.html" title=" " alt="" coords="1075,293,1149,321"/>
+<area shape="poly" id="edge22_Node000014_Node000016" title=" " alt="" coords="1112,334,1115,364,1124,391,1144,417,1139,415,1119,394,1110,365,1109,338"/>
+<area shape="rect" id="Node000017" title=" " alt="" coords="1307,416,1357,444"/>
+<area shape="poly" id="edge23_Node000001_Node000017" title=" " alt="" coords="1331,457,1323,490,1315,505,1303,517,1285,528,1260,536,1196,546,1062,554,1062,549,1195,541,1258,530,1283,523,1300,513,1310,502,1318,488,1327,461"/>
 </map>

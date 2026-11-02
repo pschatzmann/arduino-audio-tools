@@ -1,7 +1,25 @@
 <map id="CameraFrameSourceOpenCV" name="CameraFrameSourceOpenCV">
-<area shape="rect" id="Node000001" title="VideoFrameSource that pulls frames from an OpenCV cv::VideoCapture (e.g. a USB/CSI webcam via V4L2 on..." alt="" coords="40,106,250,134"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_video_frame_source.html" title="Pull&#45;based provider of one already&#45;encoded video/image frame at a time &#45; e.g. wraps a camera capture ..." alt="" coords="5,5,149,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,44,139,105,133,106,93,48"/>
-<area shape="rect" id="Node000003" href="$structaudio__tools_1_1_video_info.html" title="Basic video information (width/height/codec/frame size), analogous to AudioInfo &#45; common to both Demu..." alt="" coords="173,5,256,33"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="199,45,156,107,152,103,194,47"/>
+<area shape="rect" id="Node000001" title="VideoFrameSource that pulls frames from an OpenCV cv::VideoCapture (e.g. a USB/CSI webcam via V4L2 on..." alt="" coords="340,274,550,301"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_video_frame_source.html" title="Pull&#45;based provider of one already&#45;encoded video/image frame at a time &#45; e.g. wraps a camera capture ..." alt="" coords="5,128,149,156"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="105,163,168,207,205,229,245,247,292,262,343,275,337,275,291,267,243,252,203,234,165,211,104,169"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="173,128,282,156"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="242,167,272,209,290,230,311,247,337,261,366,273,361,273,335,266,309,252,287,234,267,213,240,172"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="306,128,352,156"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="342,167,365,208,395,248,425,274,419,273,391,252,360,211,340,172"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="376,128,514,156"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="447,170,447,274,443,272,443,173"/>
+<area shape="rect" id="Node000006" href="$structaudio__tools_1_1_video_info.html" title="Basic video information (width/height/codec/frame size), analogous to AudioInfo &#45; common to both Demu..." alt="" coords="538,128,621,156"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="575,170,561,212,549,233,534,252,515,266,494,276,493,271,512,261,530,248,544,230,556,210,571,173"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="405,5,480,33"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="453,45,470,75,492,102,514,117,540,130,535,130,512,122,489,106,466,78,451,50"/>
+<area shape="rect" id="Node000008" href="$classfloat.html" title=" " alt="" coords="504,5,554,33"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="542,45,577,128,572,127,539,50"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="578,5,682,33"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="622,45,599,105,588,130,584,126,595,103,618,49"/>
+<area shape="rect" id="Node000010" href="$classuint32__t.html" title=" " alt="" coords="706,5,781,33"/>
+<area shape="poly" id="edge9_Node000006_Node000010" title=" " alt="" coords="729,45,705,78,675,106,649,121,623,132,621,127,647,116,671,102,702,74,725,48"/>
+<area shape="rect" id="Node000011" href="$classint.html" title=" " alt="" coords="646,128,684,156"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="655,168,630,220,611,252,582,268,551,279,550,274,580,264,607,248,626,218,650,171"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="759,128,808,156"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="786,170,780,213,771,234,756,252,722,268,670,279,550,289,550,283,670,274,720,263,753,248,766,231,775,212,782,173"/>
 </map>

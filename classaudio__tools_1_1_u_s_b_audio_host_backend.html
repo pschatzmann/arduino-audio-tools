@@ -102,17 +102,17 @@ Inheritance diagram for USBAudioHostBackend:</div>
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a43bbf400f11986fcf626a15778824b07" id="r_a43bbf400f11986fcf626a15778824b07"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a43bbf400f11986fcf626a15778824b07">~USBAudioHostBackend</a> ()=default</td></tr>
-<tr class="memitem:adfcf55e738d702fe481154329eacbfcb" id="r_adfcf55e738d702fe481154329eacbfcb"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adfcf55e738d702fe481154329eacbfcb">begin</a> (<a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_events.html">USBAudioHostEvents</a> *events, const <a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html">USBAudioConfig</a> &amp;cfg)=0</td></tr>
+<tr class="memitem:adfcf55e738d702fe481154329eacbfcb" id="r_adfcf55e738d702fe481154329eacbfcb"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adfcf55e738d702fe481154329eacbfcb">begin</a> (<a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_events.html">USBAudioHostEvents</a> *events, const <a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html">USBAudioConfig</a> &amp;cfg)=0</td></tr>
 <tr class="memdesc:adfcf55e738d702fe481154329eacbfcb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the host stack and register the event receiver.  <br /></td></tr>
-<tr class="memitem:af0604fd7c3bba30e2ecb7774862d1cd0" id="r_af0604fd7c3bba30e2ecb7774862d1cd0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af0604fd7c3bba30e2ecb7774862d1cd0">closeStream</a> (uint8_t daddr, uint8_t ep_addr)=0</td></tr>
+<tr class="memitem:af0604fd7c3bba30e2ecb7774862d1cd0" id="r_af0604fd7c3bba30e2ecb7774862d1cd0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af0604fd7c3bba30e2ecb7774862d1cd0">closeStream</a> (<a class="el" href="classuint8__t.html">uint8_t</a> daddr, <a class="el" href="classuint8__t.html">uint8_t</a> ep_addr)=0</td></tr>
 <tr class="memdesc:af0604fd7c3bba30e2ecb7774862d1cd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop streaming the indicated endpoint.  <br /></td></tr>
-<tr class="memitem:a1bc5e172f6e0ad2bcacf5e3da9eb19e5" id="r_a1bc5e172f6e0ad2bcacf5e3da9eb19e5"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1bc5e172f6e0ad2bcacf5e3da9eb19e5">control</a> (uint8_t daddr, const <a class="el" href="structaudio__tools_1_1_usb_setup_packet.html">UsbSetupPacket</a> &amp;<a class="el" href="_main_8h.html#a4fc01d736fe50cf5b977f755b675f11d">setup</a>, uint8_t *data)=0</td></tr>
+<tr class="memitem:a1bc5e172f6e0ad2bcacf5e3da9eb19e5" id="r_a1bc5e172f6e0ad2bcacf5e3da9eb19e5"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1bc5e172f6e0ad2bcacf5e3da9eb19e5">control</a> (<a class="el" href="classuint8__t.html">uint8_t</a> daddr, const <a class="el" href="structaudio__tools_1_1_usb_setup_packet.html">UsbSetupPacket</a> &amp;<a class="el" href="_main_8h.html#a4fc01d736fe50cf5b977f755b675f11d">setup</a>, <a class="el" href="classuint8__t.html">uint8_t</a> *data)=0</td></tr>
 <tr class="memitem:aa540e86022c1f72380d1014d98f38f43" id="r_aa540e86022c1f72380d1014d98f38f43"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa540e86022c1f72380d1014d98f38f43">end</a> ()=0</td></tr>
 <tr class="memdesc:aa540e86022c1f72380d1014d98f38f43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop all streams (the host stack itself keeps running).  <br /></td></tr>
-<tr class="memitem:a7d692944c03a343965d91955871737c2" id="r_a7d692944c03a343965d91955871737c2"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7d692944c03a343965d91955871737c2">millis</a> () const =0</td></tr>
+<tr class="memitem:a7d692944c03a343965d91955871737c2" id="r_a7d692944c03a343965d91955871737c2"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7d692944c03a343965d91955871737c2">millis</a> () const =0</td></tr>
 <tr class="memdesc:a7d692944c03a343965d91955871737c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Milliseconds since start (for control request timeouts).  <br /></td></tr>
-<tr class="memitem:a4defb951a76b90946a3323cbc9c97c08" id="r_a4defb951a76b90946a3323cbc9c97c08"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4defb951a76b90946a3323cbc9c97c08">openStream</a> (uint8_t daddr, const <a class="el" href="structaudio__tools_1_1_usb_endpoint_descriptor_view.html">UsbEndpointDescriptorView</a> &amp;ep, <a class="el" href="namespaceaudio__tools.html#a5215dca0bf7e06265945b65e039d2f24">UsbHostStreamRole</a> role)=0</td></tr>
-<tr class="memitem:ac7b3bf9a5bd95fa95f82697af2448e8c" id="r_ac7b3bf9a5bd95fa95f82697af2448e8c"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac7b3bf9a5bd95fa95f82697af2448e8c">setInterface</a> (uint8_t daddr, uint8_t itf, uint8_t alt)=0</td></tr>
+<tr class="memitem:a4defb951a76b90946a3323cbc9c97c08" id="r_a4defb951a76b90946a3323cbc9c97c08"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4defb951a76b90946a3323cbc9c97c08">openStream</a> (<a class="el" href="classuint8__t.html">uint8_t</a> daddr, const <a class="el" href="structaudio__tools_1_1_usb_endpoint_descriptor_view.html">UsbEndpointDescriptorView</a> &amp;ep, <a class="el" href="namespaceaudio__tools.html#a5215dca0bf7e06265945b65e039d2f24">UsbHostStreamRole</a> role)=0</td></tr>
+<tr class="memitem:ac7b3bf9a5bd95fa95f82697af2448e8c" id="r_ac7b3bf9a5bd95fa95f82697af2448e8c"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac7b3bf9a5bd95fa95f82697af2448e8c">setInterface</a> (<a class="el" href="classuint8__t.html">uint8_t</a> daddr, <a class="el" href="classuint8__t.html">uint8_t</a> itf, <a class="el" href="classuint8__t.html">uint8_t</a> alt)=0</td></tr>
 <tr class="memitem:a5ed183cf08779fee1f7b453f1556107b" id="r_a5ed183cf08779fee1f7b453f1556107b"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceaudio__tools.html#af21c897fe6ae1bb1a36cf4db2b54f888">UsbSpeed</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5ed183cf08779fee1f7b453f1556107b">speed</a> () const</td></tr>
 <tr class="memdesc:a5ed183cf08779fee1f7b453f1556107b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bus speed of the attached device.  <br /></td></tr>
 <tr class="memitem:a25144bcf4db35620cade066c113286d1" id="r_a25144bcf4db35620cade066c113286d1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a25144bcf4db35620cade066c113286d1">task</a> ()=0</td></tr>
@@ -160,7 +160,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool begin </td>
+          <td class="memname">virtual <a class="el" href="classbool.html">bool</a> begin </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_events.html">USBAudioHostEvents</a> *</td>          <td class="paramname"><span class="paramname"><em>events</em></span>, </td>
         </tr>
@@ -195,12 +195,12 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void closeStream </td>
           <td>(</td>
-          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>daddr</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a></td>          <td class="paramname"><span class="paramname"><em>daddr</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>ep_addr</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a></td>          <td class="paramname"><span class="paramname"><em>ep_addr</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -226,9 +226,9 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool control </td>
+          <td class="memname">virtual <a class="el" href="classbool.html">bool</a> control </td>
           <td>(</td>
-          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>daddr</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a></td>          <td class="paramname"><span class="paramname"><em>daddr</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -238,7 +238,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -292,7 +292,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual uint32_t millis </td>
+          <td class="memname">virtual <a class="el" href="classuint32__t.html">uint32_t</a> millis </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -321,9 +321,9 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool openStream </td>
+          <td class="memname">virtual <a class="el" href="classbool.html">bool</a> openStream </td>
           <td>(</td>
-          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>daddr</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a></td>          <td class="paramname"><span class="paramname"><em>daddr</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -358,19 +358,19 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool setInterface </td>
+          <td class="memname">virtual <a class="el" href="classbool.html">bool</a> setInterface </td>
           <td>(</td>
-          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>daddr</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a></td>          <td class="paramname"><span class="paramname"><em>daddr</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>itf</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a></td>          <td class="paramname"><span class="paramname"><em>itf</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>alt</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a></td>          <td class="paramname"><span class="paramname"><em>alt</em></span>&#160;)</td>
         </tr>
       </table>
   </td>

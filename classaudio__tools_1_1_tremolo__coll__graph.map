@@ -1,5 +1,19 @@
 <map id="Tremolo" name="Tremolo">
-<area shape="rect" id="Node000001" title="Tremolo AudioEffect." alt="" coords="16,81,90,109"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects." alt="" coords="5,5,101,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="55,47,56,81,50,80,51,51"/>
+<area shape="rect" id="Node000001" title="Tremolo AudioEffect." alt="" coords="332,251,405,279"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects." alt="" coords="37,106,132,134"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="101,144,136,187,158,208,182,225,220,241,260,252,334,263,329,264,259,257,218,247,179,230,154,212,132,191,100,149"/>
+<area shape="rect" id="Node000003" href="$classbool.html" title=" " alt="" coords="5,5,55,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="25,46,28,65,33,81,43,93,58,104,53,106,40,97,29,83,23,66,25,51"/>
+<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="120,5,159,33"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="129,45,112,83,97,107,92,104,108,81,126,50"/>
+<area shape="rect" id="Node000005" href="$classint16__t.html" title=" " alt="" coords="157,106,223,134"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="188,147,191,189,197,209,208,225,228,237,260,246,334,260,329,260,259,251,226,242,204,229,192,211,186,190,185,151"/>
+<area shape="rect" id="Node000006" href="$classuint32__t.html" title=" " alt="" coords="273,106,347,134"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="306,147,304,187,307,207,314,226,325,239,340,251,334,250,321,243,310,229,302,209,299,188,302,151"/>
+<area shape="rect" id="Node000007" href="$classint32__t.html" title=" " alt="" coords="394,106,460,134"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="425,147,416,188,400,229,383,253,380,249,396,226,411,186,421,151"/>
+<area shape="rect" id="Node000008" href="$classuint8__t.html" title=" " alt="" coords="534,106,600,134"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="568,147,561,191,551,211,537,229,514,241,480,251,406,263,406,257,479,246,512,236,534,225,547,209,556,189,564,151"/>
+<area shape="rect" id="Node000009" href="$classfloat.html" title=" " alt="" coords="645,106,695,134"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="672,148,666,191,657,212,642,229,625,240,599,248,535,259,406,266,406,261,535,254,598,243,622,235,639,225,652,209,661,190,668,151"/>
 </map>

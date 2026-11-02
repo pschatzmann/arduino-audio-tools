@@ -1,5 +1,9 @@
 <map id="CallbackConverterT&lt; T &gt;" name="CallbackConverterT&lt; T &gt;">
-<area shape="rect" id="Node000001" title="You can provide a lambda expression to convert the data." alt="" coords="5,81,193,109"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="" coords="40,5,158,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="101,47,101,82,97,80,97,51"/>
+<area shape="rect" id="Node000001" title="You can provide a lambda expression to convert the data." alt="" coords="86,106,274,134"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="" coords="5,5,123,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="92,41,167,104,162,106,90,46"/>
+<area shape="rect" id="Node000003" href="$classint16__t.html" title=" " alt="" coords="147,5,213,33"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="182,47,182,107,178,104,178,50"/>
+<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="254,5,293,33"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="267,46,258,67,246,84,212,108,210,103,242,80,254,64,262,50"/>
 </map>

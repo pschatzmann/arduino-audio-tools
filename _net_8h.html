@@ -187,8 +187,9 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">((1==<a class="code hl_define" href="#ae4027a6ad07f13aa12eab285a1b46019">htonl</a>(1)) ? (x) : ((uint64_t)<a class="code hl_define" href="#ae4027a6ad07f13aa12eab285a1b46019">htonl</a>((x) &amp; 0xFFFFFFFF) &lt;&lt; 32) | <a class="code hl_define" href="#ae4027a6ad07f13aa12eab285a1b46019">htonl</a>((x) &gt;&gt; 32))</div>
+<b>Value:</b><div class="fragment"><div class="line">((1==<a class="code hl_define" href="#ae4027a6ad07f13aa12eab285a1b46019">htonl</a>(1)) ? (x) : ((<a class="code hl_class" href="classuint64__t.html">uint64_t</a>)<a class="code hl_define" href="#ae4027a6ad07f13aa12eab285a1b46019">htonl</a>((x) &amp; 0xFFFFFFFF) &lt;&lt; 32) | <a class="code hl_define" href="#ae4027a6ad07f13aa12eab285a1b46019">htonl</a>((x) &gt;&gt; 32))</div>
 <div class="ttc" id="a_net_8h_html_ae4027a6ad07f13aa12eab285a1b46019"><div class="ttname"><a href="#ae4027a6ad07f13aa12eab285a1b46019">htonl</a></div><div class="ttdeci">#define htonl(x)</div><div class="ttdef"><b>Definition</b> Net.h:14</div></div>
+<div class="ttc" id="aclassuint64__t_html"><div class="ttname"><a href="classuint64__t.html">uint64_t</a></div></div>
 </div><!-- fragment -->
 <p>support for 64 bytes </p>
 
@@ -244,7 +245,7 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">((1==<a class="code hl_define" href="#ac317b3e903719ba02894f1710f7f2439">ntohl</a>(1)) ? (x) : ((uint64_t)<a class="code hl_define" href="#ac317b3e903719ba02894f1710f7f2439">ntohl</a>((x) &amp; 0xFFFFFFFF) &lt;&lt; 32) | <a class="code hl_define" href="#ac317b3e903719ba02894f1710f7f2439">ntohl</a>((x) &gt;&gt; 32))</div>
+<b>Value:</b><div class="fragment"><div class="line">((1==<a class="code hl_define" href="#ac317b3e903719ba02894f1710f7f2439">ntohl</a>(1)) ? (x) : ((<a class="code hl_class" href="classuint64__t.html">uint64_t</a>)<a class="code hl_define" href="#ac317b3e903719ba02894f1710f7f2439">ntohl</a>((x) &amp; 0xFFFFFFFF) &lt;&lt; 32) | <a class="code hl_define" href="#ac317b3e903719ba02894f1710f7f2439">ntohl</a>((x) &gt;&gt; 32))</div>
 <div class="ttc" id="a_net_8h_html_ac317b3e903719ba02894f1710f7f2439"><div class="ttname"><a href="#ac317b3e903719ba02894f1710f7f2439">ntohl</a></div><div class="ttdeci">#define ntohl(x)</div><div class="ttdef"><b>Definition</b> Net.h:16</div></div>
 </div><!-- fragment -->
 </div>

@@ -99,7 +99,7 @@ $(function() {
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    }</div>
 </div>
 <div class="foldopen" id="foldopen00030" data-start="{" data-end="}">
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1float32.html#abc4ec9f715112697477f2f425122ce21">   30</a></span>    <span class="keyword">inline</span> <span class="keyword">operator</span> float()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1float32.html#abc4ec9f715112697477f2f425122ce21">   30</a></span>    <span class="keyword">inline</span> <span class="keyword">operator</span> <a class="code hl_class" href="classfloat.html">float</a>()<span class="keyword"> const </span>{</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classaudio__tools_1_1float32.html#ade53f62d748ae63086acf14874696e13">as_float</a>(<a class="code hl_variable" href="classaudio__tools_1_1float32.html#ae7f66047e6e39ba2bb6af8b95f00d1dd">value</a>);</div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    }</div>
 </div>
@@ -109,56 +109,56 @@ $(function() {
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    }</div>
 </div>
 <div class="foldopen" id="foldopen00036" data-start="{" data-end="}">
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1float32.html#a4f4ea421e40bda08a2deca657f640fea">   36</a></span>    <span class="keyword">explicit</span> <span class="keyword">inline</span> <span class="keyword">operator</span> int()  {</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1float32.html#a4f4ea421e40bda08a2deca657f640fea">   36</a></span>    <span class="keyword">explicit</span> <span class="keyword">inline</span> <span class="keyword">operator</span> <a class="code hl_class" href="classint.html">int</a>()  {</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="keywordflow">return</span> (<span class="keywordtype">int</span>) <a class="code hl_function" href="classaudio__tools_1_1float32.html#ade53f62d748ae63086acf14874696e13">float32::as_float</a>(<a class="code hl_variable" href="classaudio__tools_1_1float32.html#ae7f66047e6e39ba2bb6af8b95f00d1dd">value</a>);</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    }</div>
 </div>
 <div class="foldopen" id="foldopen00039" data-start="{" data-end="}">
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1float32.html#a48d27bd92e68c69527589ea65a9af69f">   39</a></span>    <span class="keyword">explicit</span> <span class="keyword">inline</span> <span class="keyword">operator</span> int()<span class="keyword">  const </span>{</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1float32.html#a48d27bd92e68c69527589ea65a9af69f">   39</a></span>    <span class="keyword">explicit</span> <span class="keyword">inline</span> <span class="keyword">operator</span> <a class="code hl_class" href="classint.html">int</a>()<span class="keyword">  const </span>{</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>         <span class="keywordflow">return</span> (<span class="keywordtype">int</span>) <a class="code hl_function" href="classaudio__tools_1_1float32.html#ade53f62d748ae63086acf14874696e13">float32::as_float</a>(<a class="code hl_variable" href="classaudio__tools_1_1float32.html#ae7f66047e6e39ba2bb6af8b95f00d1dd">value</a>);</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    }</div>
 </div>
 <div class="foldopen" id="foldopen00042" data-start="{" data-end="}">
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1float32.html#a8c12f612fcbe101aaaaf0497a79bb538">   42</a></span>    <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1float32.html#a8c12f612fcbe101aaaaf0497a79bb538">operator&lt;  </a>(<a class="code hl_function" href="classaudio__tools_1_1float32.html#a8afbb5ad360cfe076f5286a5b8565ffa">float32</a> other)<span class="keyword"> const</span>{</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="keywordflow">return</span> (<span class="keywordtype">float</span>)*<span class="keyword">this</span> &lt; (float)other;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="keywordflow">return</span> (<span class="keywordtype">float</span>)*<span class="keyword">this</span> &lt; (<a class="code hl_class" href="classfloat.html">float</a>)other;</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    }</div>
 </div>
 <div class="foldopen" id="foldopen00045" data-start="{" data-end="}">
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1float32.html#a25569c47669f417ef47b8da17c2f5fb7">   45</a></span>    <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1float32.html#a25569c47669f417ef47b8da17c2f5fb7">operator&lt;=  </a>(<a class="code hl_function" href="classaudio__tools_1_1float32.html#a8afbb5ad360cfe076f5286a5b8565ffa">float32</a> other)<span class="keyword"> const</span>{</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keywordflow">return</span> (<span class="keywordtype">float</span>)*<span class="keyword">this</span> &lt;= (float)other;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keywordflow">return</span> (<span class="keywordtype">float</span>)*<span class="keyword">this</span> &lt;= (<a class="code hl_class" href="classfloat.html">float</a>)other;</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    }</div>
 </div>
 <div class="foldopen" id="foldopen00048" data-start="{" data-end="}">
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1float32.html#a0b2d3c28da85dd553f20b3fa12bd0eb8">   48</a></span>    <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1float32.html#a0b2d3c28da85dd553f20b3fa12bd0eb8">operator&gt;  </a>(<a class="code hl_function" href="classaudio__tools_1_1float32.html#a8afbb5ad360cfe076f5286a5b8565ffa">float32</a> other)<span class="keyword"> const</span>{</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keywordflow">return</span> (<span class="keywordtype">float</span>)*<span class="keyword">this</span> &gt; (float)other;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keywordflow">return</span> (<span class="keywordtype">float</span>)*<span class="keyword">this</span> &gt; (<a class="code hl_class" href="classfloat.html">float</a>)other;</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    }</div>
 </div>
 <div class="foldopen" id="foldopen00051" data-start="{" data-end="}">
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1float32.html#a03e0fd263d86c7e2a91e3ee8b5524c75">   51</a></span>    <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1float32.html#a03e0fd263d86c7e2a91e3ee8b5524c75">operator&gt;=  </a>(<a class="code hl_function" href="classaudio__tools_1_1float32.html#a8afbb5ad360cfe076f5286a5b8565ffa">float32</a> other)<span class="keyword"> const</span>{</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <span class="keywordflow">return</span> (<span class="keywordtype">float</span>)*<span class="keyword">this</span> &gt;= (float)other;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <span class="keywordflow">return</span> (<span class="keywordtype">float</span>)*<span class="keyword">this</span> &gt;= (<a class="code hl_class" href="classfloat.html">float</a>)other;</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    }</div>
 </div>
 <div class="foldopen" id="foldopen00054" data-start="{" data-end="}">
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1float32.html#a99756ebe415ff196cb3927325d457026">   54</a></span>    <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1float32.html#a99756ebe415ff196cb3927325d457026">operator==  </a>(<a class="code hl_function" href="classaudio__tools_1_1float32.html#a8afbb5ad360cfe076f5286a5b8565ffa">float32</a> other)<span class="keyword"> const</span>{</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="keywordflow">return</span> (<span class="keywordtype">float</span>)*<span class="keyword">this</span> == (float)other;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="keywordflow">return</span> (<span class="keywordtype">float</span>)*<span class="keyword">this</span> == (<a class="code hl_class" href="classfloat.html">float</a>)other;</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    }</div>
 </div>
 <div class="foldopen" id="foldopen00057" data-start="{" data-end="}">
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1float32.html#a4d838e2bed5dc58dd0367377936c3101">   57</a></span>    <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1float32.html#a4d838e2bed5dc58dd0367377936c3101">operator!=  </a>(<a class="code hl_function" href="classaudio__tools_1_1float32.html#a8afbb5ad360cfe076f5286a5b8565ffa">float32</a> other)<span class="keyword"> const</span>{</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordflow">return</span> (<span class="keywordtype">float</span>)*<span class="keyword">this</span> != (float)other;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordflow">return</span> (<span class="keywordtype">float</span>)*<span class="keyword">this</span> != (<a class="code hl_class" href="classfloat.html">float</a>)other;</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    }</div>
 </div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1float32.html#ae7f66047e6e39ba2bb6af8b95f00d1dd">   62</a></span>    uint32_t <a class="code hl_variable" href="classaudio__tools_1_1float32.html#ae7f66047e6e39ba2bb6af8b95f00d1dd">value</a>=0;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1float32.html#ae7f66047e6e39ba2bb6af8b95f00d1dd">   62</a></span>    <a class="code hl_class" href="classuint32__t.html">uint32_t</a> <a class="code hl_variable" href="classaudio__tools_1_1float32.html#ae7f66047e6e39ba2bb6af8b95f00d1dd">value</a>=0;</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
 <div class="foldopen" id="foldopen00064" data-start="{" data-end="}">
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1float32.html#a661aa8a3f333ad40a907e412fee98ac3">   64</a></span>    <span class="keyword">static</span> uint32_t <a class="code hl_function" href="classaudio__tools_1_1float32.html#a661aa8a3f333ad40a907e412fee98ac3">as_uint</a>(<span class="keywordtype">float</span> x) {</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="keywordflow">return</span> *(uint32_t*)&amp;x;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1float32.html#a661aa8a3f333ad40a907e412fee98ac3">   64</a></span>    <span class="keyword">static</span> <a class="code hl_class" href="classuint32__t.html">uint32_t</a> <a class="code hl_function" href="classaudio__tools_1_1float32.html#a661aa8a3f333ad40a907e412fee98ac3">as_uint</a>(<span class="keywordtype">float</span> x) {</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="keywordflow">return</span> *(<a class="code hl_class" href="classuint32__t.html">uint32_t</a>*)&amp;x;</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    }</div>
 </div>
 <div class="foldopen" id="foldopen00067" data-start="{" data-end="}">
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1float32.html#ade53f62d748ae63086acf14874696e13">   67</a></span>    <span class="keyword">static</span> <span class="keywordtype">float</span> <a class="code hl_function" href="classaudio__tools_1_1float32.html#ade53f62d748ae63086acf14874696e13">as_float</a>(uint32_t x) {</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1float32.html#ade53f62d748ae63086acf14874696e13">   67</a></span>    <span class="keyword">static</span> <span class="keywordtype">float</span> <a class="code hl_function" href="classaudio__tools_1_1float32.html#ade53f62d748ae63086acf14874696e13">as_float</a>(<a class="code hl_class" href="classuint32__t.html">uint32_t</a> x) {</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <span class="keywordflow">return</span> *(<span class="keywordtype">float</span>*)&amp;x;</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    }</div>
 </div>
@@ -169,25 +169,25 @@ $(function() {
 <div class="foldopen" id="foldopen00073" data-start="{" data-end="}">
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#aa729503ff1a0651114410b7696ef7bc4">   73</a></span><span class="keyword">inline</span> <span class="keywordtype">float</span> <a class="code hl_function" href="namespaceaudio__tools.html#a476867ace844db5ad537e9026c0829d7">operator+ </a>(<a class="code hl_class" href="classaudio__tools_1_1float32.html">float32</a> one, <a class="code hl_class" href="classaudio__tools_1_1float32.html">float32</a> two) </div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>{</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keywordflow">return</span> (<span class="keywordtype">float</span>)one + (float)two;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keywordflow">return</span> (<span class="keywordtype">float</span>)one + (<a class="code hl_class" href="classfloat.html">float</a>)two;</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>}</div>
 </div>
 <div class="foldopen" id="foldopen00077" data-start="{" data-end="}">
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#a1df2813cb4f6f8b8a79cdcb57c19e27b">   77</a></span><span class="keyword">inline</span> <span class="keywordtype">float</span> <a class="code hl_function" href="namespaceaudio__tools.html#ac3d178134e9aa5689cfecd1e8aa3e37c">operator- </a>(<a class="code hl_class" href="classaudio__tools_1_1float32.html">float32</a> one, <a class="code hl_class" href="classaudio__tools_1_1float32.html">float32</a> two) </div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>{</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keywordflow">return</span> (<span class="keywordtype">float</span>)one - (float)two;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keywordflow">return</span> (<span class="keywordtype">float</span>)one - (<a class="code hl_class" href="classfloat.html">float</a>)two;</div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>}</div>
 </div>
 <div class="foldopen" id="foldopen00081" data-start="{" data-end="}">
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#a3d663f50d79f9b03abdbfb5796e78b65">   81</a></span><span class="keyword">inline</span> <span class="keywordtype">float</span> <a class="code hl_function" href="namespaceaudio__tools.html#af95702bc50c7b9300774623766a9ba30">operator* </a>(<a class="code hl_class" href="classaudio__tools_1_1float32.html">float32</a> one, <a class="code hl_class" href="classaudio__tools_1_1float32.html">float32</a> two) </div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>{</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keywordflow">return</span> (<span class="keywordtype">float</span>)one * (float)two;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keywordflow">return</span> (<span class="keywordtype">float</span>)one * (<a class="code hl_class" href="classfloat.html">float</a>)two;</div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>}</div>
 </div>
 <div class="foldopen" id="foldopen00085" data-start="{" data-end="}">
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#adfc51c5353d8125c51e8c4f3239c2dc8">   85</a></span><span class="keyword">inline</span> <span class="keywordtype">float</span> <a class="code hl_function" href="namespaceaudio__tools.html#a7953402cf810a326790ec4ef16e9d6f7">operator/ </a>(<a class="code hl_class" href="classaudio__tools_1_1float32.html">float32</a> one, <a class="code hl_class" href="classaudio__tools_1_1float32.html">float32</a> two)</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>{</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="keywordflow">return</span> (<span class="keywordtype">float</span>)one / (float)two;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="keywordflow">return</span> (<span class="keywordtype">float</span>)one / (<a class="code hl_class" href="classfloat.html">float</a>)two;</div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>}</div>
 </div>
 <div class="foldopen" id="foldopen00089" data-start="{" data-end="}">
@@ -217,25 +217,25 @@ $(function() {
 <div class="foldopen" id="foldopen00105" data-start="{" data-end="}">
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#a0ead404fd2121896489d7c04d5743c95">  105</a></span><span class="keyword">inline</span> <span class="keywordtype">float</span> <a class="code hl_function" href="namespaceaudio__tools.html#a476867ace844db5ad537e9026c0829d7">operator+ </a>(<span class="keywordtype">float</span> one, <a class="code hl_class" href="classaudio__tools_1_1float32.html">float32</a> two)</div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>{</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <span class="keywordflow">return</span> two + float(one);</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <span class="keywordflow">return</span> two + <a class="code hl_class" href="classfloat.html">float</a>(one);</div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>}</div>
 </div>
 <div class="foldopen" id="foldopen00109" data-start="{" data-end="}">
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#ad32122724ec8d9d5d653acd48337b992">  109</a></span><span class="keyword">inline</span> <span class="keywordtype">float</span> <a class="code hl_function" href="namespaceaudio__tools.html#ac3d178134e9aa5689cfecd1e8aa3e37c">operator- </a>(<span class="keywordtype">float</span> one, <a class="code hl_class" href="classaudio__tools_1_1float32.html">float32</a> two)</div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>{</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="keywordflow">return</span> two - float(one);</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="keywordflow">return</span> two - <a class="code hl_class" href="classfloat.html">float</a>(one);</div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>}</div>
 </div>
 <div class="foldopen" id="foldopen00113" data-start="{" data-end="}">
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#a70d5b5d7e18fb2f08940c7f0bbc142c6">  113</a></span><span class="keyword">inline</span> <span class="keywordtype">float</span> <a class="code hl_function" href="namespaceaudio__tools.html#af95702bc50c7b9300774623766a9ba30">operator* </a>(<span class="keywordtype">float</span> one, <a class="code hl_class" href="classaudio__tools_1_1float32.html">float32</a> two)</div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>{</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="keywordflow">return</span> two * float(one);</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="keywordflow">return</span> two * <a class="code hl_class" href="classfloat.html">float</a>(one);</div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>}</div>
 </div>
 <div class="foldopen" id="foldopen00117" data-start="{" data-end="}">
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#abb664ebaf74c24c61e72bbd12ac461e4">  117</a></span><span class="keyword">inline</span> <span class="keywordtype">float</span> <a class="code hl_function" href="namespaceaudio__tools.html#a7953402cf810a326790ec4ef16e9d6f7">operator/ </a>(<span class="keywordtype">float</span> one, <a class="code hl_class" href="classaudio__tools_1_1float32.html">float32</a> two)</div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>{</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <span class="keywordflow">return</span> two / float(one);</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <span class="keywordflow">return</span> two / <a class="code hl_class" href="classfloat.html">float</a>(one);</div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>}</div>
 </div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
@@ -261,6 +261,9 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1float32_html_abe506a479bec97cdd1f7aa5e7860918d"><div class="ttname"><a href="classaudio__tools_1_1float32.html#abe506a479bec97cdd1f7aa5e7860918d">audio_tools::float32::float32</a></div><div class="ttdeci">float32(float value)</div><div class="ttdef"><b>Definition</b> float32.h:24</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1float32_html_ade53f62d748ae63086acf14874696e13"><div class="ttname"><a href="classaudio__tools_1_1float32.html#ade53f62d748ae63086acf14874696e13">audio_tools::float32::as_float</a></div><div class="ttdeci">static float as_float(uint32_t x)</div><div class="ttdef"><b>Definition</b> float32.h:67</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1float32_html_ae7f66047e6e39ba2bb6af8b95f00d1dd"><div class="ttname"><a href="classaudio__tools_1_1float32.html#ae7f66047e6e39ba2bb6af8b95f00d1dd">audio_tools::float32::value</a></div><div class="ttdeci">uint32_t value</div><div class="ttdef"><b>Definition</b> float32.h:62</div></div>
+<div class="ttc" id="aclassfloat_html"><div class="ttname"><a href="classfloat.html">float</a></div></div>
+<div class="ttc" id="aclassint_html"><div class="ttname"><a href="classint.html">int</a></div></div>
+<div class="ttc" id="aclassuint32__t_html"><div class="ttname"><a href="classuint32__t.html">uint32_t</a></div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> LMSEchoCancellationStream.h:6</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html_a476867ace844db5ad537e9026c0829d7"><div class="ttname"><a href="namespaceaudio__tools.html#a476867ace844db5ad537e9026c0829d7">audio_tools::operator+</a></div><div class="ttdeci">float operator+(float16 one, float16 two)</div><div class="ttdef"><b>Definition</b> float16.h:102</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html_a7953402cf810a326790ec4ef16e9d6f7"><div class="ttname"><a href="namespaceaudio__tools.html#a7953402cf810a326790ec4ef16e9d6f7">audio_tools::operator/</a></div><div class="ttdeci">float operator/(float16 one, float16 two)</div><div class="ttdef"><b>Definition</b> float16.h:111</div></div>

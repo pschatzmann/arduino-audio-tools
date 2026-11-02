@@ -88,29 +88,41 @@ $(function() {
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_fade_8h_source.html">Fade.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for LastSampleFaderT&lt; T &gt;:</div>
+<div class="dyncontent">
+<div class="center"><img src="classaudio__tools_1_1_last_sample_fader_t__coll__graph.png" border="0" usemap="#a_last_sample_fader_t_3_01_t_01_4_coll__map" loading="lazy" alt="Collaboration graph"/></div>
+<map name="a_last_sample_fader_t_3_01_t_01_4_coll__map" id="a_last_sample_fader_t_3_01_t_01_4_coll__map">
+<area shape="rect" title="If we end audio and the last sample is not close to 0 we can hear a popping noise...." alt="" coords="5,106,184,134"/>
+<area shape="rect" href="classint.html" title=" " alt="" coords="27,5,66,33"/>
+<area shape="poly" title=" " alt="" coords="43,46,46,65,51,81,60,93,73,105,68,106,56,97,46,83,41,66,42,51"/>
+<area shape="rect" title=" " alt="" coords="94,5,194,33"/>
+<area shape="poly" title=" " alt="" coords="134,46,117,83,104,107,100,104,112,81,129,49"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1891b4bec7e479ab636081eaae8a206d" id="r_a1891b4bec7e479ab636081eaae8a206d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1891b4bec7e479ab636081eaae8a206d">end</a> (<a class="el" href="class_print.html">Print</a> &amp;print, int steps=200)</td></tr>
+<tr class="memitem:a1891b4bec7e479ab636081eaae8a206d" id="r_a1891b4bec7e479ab636081eaae8a206d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1891b4bec7e479ab636081eaae8a206d">end</a> (<a class="el" href="class_print.html">Print</a> &amp;print, <a class="el" href="classint.html">int</a> steps=200)</td></tr>
 <tr class="memdesc:a1891b4bec7e479ab636081eaae8a206d"><td class="mdescLeft">&#160;</td><td class="mdescRight">When we do not have any data any more to fade out we try to bring the last sample slowly to 0.  <br /></td></tr>
-<tr class="memitem:aa0a1978eec1ecc46530afc55d4e236b5" id="r_aa0a1978eec1ecc46530afc55d4e236b5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa0a1978eec1ecc46530afc55d4e236b5">setChannels</a> (int ch)</td></tr>
-<tr class="memitem:a723cf8bc900b10a6fa6024b249cb180d" id="r_a723cf8bc900b10a6fa6024b249cb180d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a723cf8bc900b10a6fa6024b249cb180d">write</a> (uint8_t *src, size_t size)</td></tr>
+<tr class="memitem:aa0a1978eec1ecc46530afc55d4e236b5" id="r_aa0a1978eec1ecc46530afc55d4e236b5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa0a1978eec1ecc46530afc55d4e236b5">setChannels</a> (<a class="el" href="classint.html">int</a> ch)</td></tr>
+<tr class="memitem:a723cf8bc900b10a6fa6024b249cb180d" id="r_a723cf8bc900b10a6fa6024b249cb180d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a723cf8bc900b10a6fa6024b249cb180d">write</a> (<a class="el" href="classuint8__t.html">uint8_t</a> *src, <a class="el" href="classsize__t.html">size_t</a> size)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-methods" class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a1f79825fdc8024354e449db7a3cc3f0e" id="r_a1f79825fdc8024354e449db7a3cc3f0e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1f79825fdc8024354e449db7a3cc3f0e">storeLastSamples</a> (int frames, uint8_t *src)</td></tr>
+<tr class="memitem:a1f79825fdc8024354e449db7a3cc3f0e" id="r_a1f79825fdc8024354e449db7a3cc3f0e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1f79825fdc8024354e449db7a3cc3f0e">storeLastSamples</a> (<a class="el" href="classint.html">int</a> frames, <a class="el" href="classuint8__t.html">uint8_t</a> *src)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a178795099d0608972755dfef8d8367e3" id="r_a178795099d0608972755dfef8d8367e3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a178795099d0608972755dfef8d8367e3">channels</a> = 0</td></tr>
-<tr class="memitem:af15c959aa9f153c3793f30f0240db521" id="r_af15c959aa9f153c3793f30f0240db521"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af15c959aa9f153c3793f30f0240db521">last</a> {0}</td></tr>
+<tr class="memitem:a178795099d0608972755dfef8d8367e3" id="r_a178795099d0608972755dfef8d8367e3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a178795099d0608972755dfef8d8367e3">channels</a> = 0</td></tr>
+<tr class="memitem:af15c959aa9f153c3793f30f0240db521" id="r_af15c959aa9f153c3793f30f0240db521"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="class_t.html">T</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af15c959aa9f153c3793f30f0240db521">last</a> {0}</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename <a class="el" href="class_t.html">T</a>&gt;<br />
 class audio_tools::LastSampleFaderT&lt; T &gt;</div><p>If we end audio and the last sample is not close to 0 we can hear a popping noise. This functionality brings the last value slowly to 0. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td></td></tr>
+    <tr><td class="paramname"><a class="el" href="class_t.html">T</a></td><td></td></tr>
   </table>
   </dd>
 </dl>
@@ -121,7 +133,7 @@ class audio_tools::LastSampleFaderT&lt; T &gt;</div><p>If we end audio and the l
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -134,7 +146,7 @@ template&lt;typename T&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>steps</em></span><span class="paramdefsep"> = </span><span class="paramdefval">200</span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>steps</em></span><span class="paramdefsep"> = </span><span class="paramdefval">200</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -154,7 +166,7 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -162,7 +174,7 @@ template&lt;typename T&gt; </div>
         <tr>
           <td class="memname">void setChannels </td>
           <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>ch</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>ch</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -181,7 +193,7 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -189,12 +201,12 @@ template&lt;typename T&gt; </div>
         <tr>
           <td class="memname">void storeLastSamples </td>
           <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>frames</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>frames</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>src</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>src</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -212,20 +224,20 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t write </td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> write </td>
           <td>(</td>
-          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>src</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>src</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>size</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>size</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -244,13 +256,13 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int channels = 0</td>
+          <td class="memname"><a class="el" href="classint.html">int</a> channels = 0</td>
         </tr>
       </table>
   </td>
@@ -268,13 +280,13 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;T&gt; last {0}</td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;<a class="el" href="class_t.html">T</a>&gt; last {0}</td>
         </tr>
       </table>
   </td>

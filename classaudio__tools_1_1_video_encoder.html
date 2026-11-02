@@ -108,7 +108,7 @@ Inheritance diagram for VideoEncoder:</div>
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a8b5f4ed810fc33b725bf4a84c30ff798" id="r_a8b5f4ed810fc33b725bf4a84c30ff798"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8b5f4ed810fc33b725bf4a84c30ff798">~VideoEncoder</a> ()=default</td></tr>
-<tr class="memitem:ae8a0d9ca63f8bb3de100e347c3f3bca4" id="r_ae8a0d9ca63f8bb3de100e347c3f3bca4"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae8a0d9ca63f8bb3de100e347c3f3bca4">begin</a> ()=0</td></tr>
+<tr class="memitem:ae8a0d9ca63f8bb3de100e347c3f3bca4" id="r_ae8a0d9ca63f8bb3de100e347c3f3bca4"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae8a0d9ca63f8bb3de100e347c3f3bca4">begin</a> ()=0</td></tr>
 <tr class="memdesc:ae8a0d9ca63f8bb3de100e347c3f3bca4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the encoder (allocates its picture buffers, etc).  <br /></td></tr>
 <tr class="memitem:aa540e86022c1f72380d1014d98f38f43" id="r_aa540e86022c1f72380d1014d98f38f43"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa540e86022c1f72380d1014d98f38f43">end</a> ()=0</td></tr>
 <tr class="memdesc:aa540e86022c1f72380d1014d98f38f43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases the encoder's resources.  <br /></td></tr>
@@ -116,7 +116,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ac68081867afc8798c70a2e83599098e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the target the encoded bitstream is written to.  <br /></td></tr>
 <tr class="memitem:af3e841cd4cb4b9dd800d7c3be096fa16" id="r_af3e841cd4cb4b9dd800d7c3be096fa16"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af3e841cd4cb4b9dd800d7c3be096fa16">setVideoFormat</a> (<a class="el" href="group__video.html#ga216a5d43d2a518325c84f100ed7735a5">VideoFormat</a> format)=0</td></tr>
 <tr class="memitem:aeab7b6810b52140c3c3a60bf92ca92ba" id="r_aeab7b6810b52140c3c3a60bf92ca92ba"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structaudio__tools_1_1_video_info.html">VideoInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeab7b6810b52140c3c3a60bf92ca92ba">videoInfo</a> ()=0</td></tr>
-<tr class="memitem:a4f016ab9037bd654f538f107eb1d8f78" id="r_a4f016ab9037bd654f538f107eb1d8f78"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4f016ab9037bd654f538f107eb1d8f78">write</a> (const uint8_t *data, size_t len)=0</td></tr>
+<tr class="memitem:a4f016ab9037bd654f538f107eb1d8f78" id="r_a4f016ab9037bd654f538f107eb1d8f78"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4f016ab9037bd654f538f107eb1d8f78">write</a> (const <a class="el" href="classuint8__t.html">uint8_t</a> *data, <a class="el" href="classsize__t.html">size_t</a> len)=0</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Common interface for video encoders (e.g. <a class="el" href="classaudio__tools_1_1_h264_encoder.html" title="H.264 video encoder: wraps TinyH264Encoder (https://github.com/pschatzmann/TinyH264)....">H264Encoder</a>, <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html" title="H.264 video encoder for ESP32-S3: wraps esp_h264::H264Encoder (https://github.com/pschatzmann/ESP32S3...">H264EncoderESP32S3</a> - <a class="el" href="_codec_h264_8h.html">CodecH264.h</a>/CodecH264ESP32S3.h; <a class="el" href="classaudio__tools_1_1_h264_encoder_e_s_p32_p4.html" title="H.264 video encoder for ESP32-P4: wraps esp_h264_p4::H264EncoderP4 (https://github....">H264EncoderESP32P4</a>. </p>
@@ -162,7 +162,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool begin </td>
+          <td class="memname">virtual <a class="el" href="classbool.html">bool</a> begin </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -305,14 +305,14 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual size_t write </td>
+          <td class="memname">virtual <a class="el" href="classsize__t.html">size_t</a> write </td>
           <td>(</td>
-          <td class="paramtype">const uint8_t *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
         </tr>
       </table>
   </td>

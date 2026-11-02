@@ -1,21 +1,31 @@
 <map id="StdioStream" name="StdioStream">
-<area shape="rect" id="Node000001" title="Direct binary Audio Output to stdout. On linux you can hear the audio e.g. with ./generator | aplay &#45;..." alt="" coords="5,407,107,434"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="" coords="6,330,106,357"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="58,371,59,407,53,406,54,375"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="22,207,90,234"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="49,247,50,291,53,329,47,329,44,292,48,252"/>
-<area shape="poly" id="edge5_Node000002_Node000003" title=" " alt="" coords="64,247,68,292,64,330,59,328,62,291,63,252"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="30,106,82,134"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="48,146,52,206,47,206,48,151"/>
-<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="65,146,65,206,60,206,64,151"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_ring_buffer.html" title=" " alt="" coords="114,207,278,234"/>
-<area shape="poly" id="edge6_Node000002_Node000005" title=" " alt="" coords="170,247,73,331,69,327,170,242"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="108,106,276,134"/>
-<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="186,146,192,207,186,206,184,151"/>
-<area shape="poly" id="edge8_Node000005_Node000006" title=" " alt="" coords="202,146,204,207,199,205,200,151"/>
-<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="306,5,385,33"/>
-<area shape="poly" id="edge9_Node000005_Node000007" title=" " alt="" coords="336,45,318,91,290,135,252,177,215,208,212,204,248,173,286,132,313,88,333,50"/>
-<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="421,106,558,134"/>
-<area shape="poly" id="edge11_Node000008_Node000007" title=" " alt="" coords="377,39,473,105,467,106,376,44"/>
-<area shape="poly" id="edge10_Node000005_Node000008" title=" " alt="" coords="446,142,344,185,259,208,257,204,342,180,450,139"/>
+<area shape="rect" id="Node000001" title="Direct binary Audio Output to stdout. On linux you can hear the audio e.g. with ./generator | aplay &#45;..." alt="" coords="480,493,581,521"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="" coords="122,416,222,444"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="238,442,482,494,478,497,237,448"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="138,293,206,321"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="166,334,166,378,169,417,164,415,161,378,163,339"/>
+<area shape="poly" id="edge6_Node000002_Node000003" title=" " alt="" coords="181,334,184,378,180,417,176,415,178,378,179,339"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="58,160,110,188"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="96,199,132,243,160,293,155,293,127,246,96,204"/>
+<area shape="poly" id="edge5_Node000003_Node000004" title=" " alt="" coords="114,197,156,243,170,269,179,293,173,293,165,271,151,246,114,202"/>
+<area shape="rect" id="Node000005" href="$classint.html" title=" " alt="" coords="286,5,325,33"/>
+<area shape="poly" id="edge17_Node000002_Node000005" title=" " alt="" coords="269,25,219,35,158,53,126,66,97,83,71,104,49,130,26,166,12,197,9,229,20,268,47,316,83,357,121,390,154,415,149,416,118,394,79,361,43,319,15,270,4,230,7,196,21,163,45,127,67,101,94,79,124,62,156,48,218,30,273,22"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="271,38,202,76,161,102,123,130,95,162,91,159,120,126,158,97,199,71,274,34"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_ring_buffer.html" title=" " alt="" coords="249,293,413,321"/>
+<area shape="poly" id="edge16_Node000006_Node000005" title=" " alt="" coords="310,47,332,293,327,292,306,51"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="578,160,715,188"/>
+<area shape="poly" id="edge12_Node000009_Node000005" title=" " alt="" coords="338,38,447,102,477,111,502,114,528,117,560,126,628,160,622,160,558,131,527,123,502,120,476,116,445,107,338,43"/>
+<area shape="poly" id="edge7_Node000002_Node000006" title=" " alt="" coords="304,329,191,418,188,414,300,332"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="134,160,301,188"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="233,198,317,292,311,293,231,203"/>
+<area shape="poly" id="edge9_Node000006_Node000007" title=" " alt="" coords="245,197,292,246,328,293,323,293,288,250,245,202"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="463,5,542,33"/>
+<area shape="poly" id="edge10_Node000006_Node000008" title=" " alt="" coords="495,46,465,129,441,176,414,222,380,263,347,295,344,291,376,260,410,219,437,174,460,127,492,50"/>
+<area shape="poly" id="edge14_Node000009_Node000008" title=" " alt="" coords="515,45,532,75,553,103,589,134,626,160,620,160,585,138,549,106,528,77,514,50"/>
+<area shape="poly" id="edge11_Node000006_Node000009" title=" " alt="" coords="621,197,567,237,501,272,458,286,414,297,413,292,456,281,499,267,564,233,616,199"/>
+<area shape="rect" id="Node000010" href="$classuint8__t_01_5.html" title=" " alt="" coords="597,5,675,33"/>
+<area shape="poly" id="edge13_Node000009_Node000010" title=" " alt="" coords="637,46,640,104,647,161,642,159,635,105,634,51"/>
+<area shape="rect" id="Node000011" href="$classbool.html" title=" " alt="" coords="782,5,831,33"/>
+<area shape="poly" id="edge18_Node000001_Node000011" title=" " alt="" coords="845,32,861,43,873,55,889,85,894,111,892,173,892,432,890,444,882,454,857,471,819,484,773,494,672,505,582,508,582,503,671,500,772,489,818,479,854,467,878,451,885,441,887,431,887,173,889,112,884,87,869,59,857,47,845,38"/>
+<area shape="poly" id="edge15_Node000009_Node000011" title=" " alt="" coords="765,33,744,44,722,59,657,162,653,158,718,55,741,40,770,30"/>
 </map>

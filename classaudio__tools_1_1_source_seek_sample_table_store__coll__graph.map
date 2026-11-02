@@ -1,7 +1,15 @@
 <map id="SourceSeekSampleTableStore&lt; T &gt;" name="SourceSeekSampleTableStore&lt; T &gt;">
-<area shape="rect" id="Node000001" title="Discards every value right after appending it, keeping only the file offset of the first entry &#45; get(..." alt="" coords="54,106,306,134"/>
+<area shape="rect" id="Node000001" title="Discards every value right after appending it, keeping only the file offset of the first entry &#45; get(..." alt="" coords="306,218,558,245"/>
 <area shape="rect" id="Node000002" href="$classaudio__tools_1_1_sample_table_store.html" title="Sequential&#45;access storage for one MP4 sample table (e.g. stsz sample sizes, stco chunk offsets,..." alt="" coords="5,5,182,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="116,42,171,105,166,106,114,47"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_seekable_source.html" title="Minimal seek+read interface a SourceSeekSampleTableStore needs from &quot;the original MP4 source&quot; &#45; kept ..." alt="" coords="206,5,330,33"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="249,44,194,107,190,103,244,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="105,45,123,80,147,120,178,159,216,191,253,205,309,217,303,217,251,210,214,196,174,163,143,123,118,83,104,50"/>
+<area shape="rect" id="Node000003" href="$classsize__t.html" title=" " alt="" coords="205,5,264,33"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="229,46,225,81,223,120,230,158,237,176,248,192,270,205,309,217,303,217,268,210,244,196,233,179,225,160,218,120,219,81,226,50"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_seekable_source.html" title="Minimal seek+read interface a SourceSeekSampleTableStore needs from &quot;the original MP4 source&quot; &#45; kept ..." alt="" coords="318,5,442,33"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="376,46,373,80,372,117,376,156,389,192,398,205,411,218,406,216,394,209,384,195,371,157,366,117,368,79,373,50"/>
+<area shape="rect" id="Node000005" href="$class_t.html" title=" " alt="" coords="466,5,505,33"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="485,46,475,116,455,195,442,219,439,215,450,193,470,115,481,50"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="534,5,600,33"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="567,47,560,130,552,169,540,195,523,210,504,220,502,215,520,205,535,192,547,167,555,129,564,50"/>
+<area shape="rect" id="Node000007" href="$classuint8__t.html" title=" " alt="" coords="647,5,713,33"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="686,46,689,82,686,122,675,161,666,179,653,196,637,206,615,213,559,224,558,219,614,208,635,201,649,192,661,177,670,159,681,121,684,82,683,51"/>
 </map>

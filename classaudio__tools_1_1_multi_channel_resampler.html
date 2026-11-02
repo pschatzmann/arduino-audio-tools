@@ -92,31 +92,38 @@ Collaboration diagram for MultiChannelResampler&lt; TInterpolator &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="classaudio__tools_1_1_multi_channel_resampler__coll__graph.png" border="0" usemap="#a_multi_channel_resampler_3_01_t_interpolator_01_4_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="a_multi_channel_resampler_3_01_t_interpolator_01_4_coll__map" id="a_multi_channel_resampler_3_01_t_interpolator_01_4_coll__map">
-<area shape="rect" title="Multi&#45;channel resampler that applies a BaseInterpolator&#45;derived algorithm to each channel." alt="" coords="5,207,183,251"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="6,106,182,134"/>
-<area shape="poly" title=" " alt="" coords="96,148,97,207,91,205,92,151"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="54,5,134,33"/>
-<area shape="poly" title=" " alt="" coords="95,46,97,106,91,105,93,51"/>
+<area shape="rect" title="Multi&#45;channel resampler that applies a BaseInterpolator&#45;derived algorithm to each channel." alt="" coords="5,229,183,274"/>
+<area shape="rect" href="classint.html" title=" " alt="" coords="84,5,123,33"/>
+<area shape="poly" title=" " alt="" coords="99,46,88,129,88,156,94,229,89,228,82,156,82,128,96,50"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="170,128,346,156"/>
+<area shape="poly" title=" " alt="" coords="111,45,125,76,145,102,165,116,189,127,184,128,162,120,142,106,121,79,110,50"/>
+<area shape="poly" title=" " alt="" coords="228,165,129,231,126,226,222,165"/>
+<area shape="rect" href="class_t_interpolator_01_5.html" title=" " alt="" coords="148,5,264,33"/>
+<area shape="poly" title=" " alt="" coords="216,45,239,103,252,128,247,128,234,105,213,50"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="288,5,367,33"/>
+<area shape="poly" title=" " alt="" coords="319,46,291,106,272,130,268,126,286,103,315,49"/>
+<area shape="rect" href="classbool.html" title=" " alt="" coords="404,5,453,33"/>
+<area shape="poly" title=" " alt="" coords="427,46,419,79,400,106,375,123,348,134,346,129,373,118,396,102,414,77,423,50"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:acd97d1910318a2ae53028da2bd9a05f2" id="r_acd97d1910318a2ae53028da2bd9a05f2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acd97d1910318a2ae53028da2bd9a05f2">addValue</a> (float value, int channel)</td></tr>
-<tr class="memitem:a5e8e10cc0a1aa9cb61d999f0fc3f8565" id="r_a5e8e10cc0a1aa9cb61d999f0fc3f8565"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5e8e10cc0a1aa9cb61d999f0fc3f8565">addValues</a> (const float *values)</td></tr>
+<tr class="memitem:acd97d1910318a2ae53028da2bd9a05f2" id="r_acd97d1910318a2ae53028da2bd9a05f2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acd97d1910318a2ae53028da2bd9a05f2">addValue</a> (<a class="el" href="classfloat.html">float</a> value, <a class="el" href="classint.html">int</a> channel)</td></tr>
+<tr class="memitem:a5e8e10cc0a1aa9cb61d999f0fc3f8565" id="r_a5e8e10cc0a1aa9cb61d999f0fc3f8565"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5e8e10cc0a1aa9cb61d999f0fc3f8565">addValues</a> (const <a class="el" href="classfloat.html">float</a> *values)</td></tr>
 <tr class="memdesc:a5e8e10cc0a1aa9cb61d999f0fc3f8565"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a new value for each channel.  <br /></td></tr>
-<tr class="memitem:a5b3516fe40da3e5ff7d703490b7160ee" id="r_a5b3516fe40da3e5ff7d703490b7160ee"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5b3516fe40da3e5ff7d703490b7160ee">channels</a> () const</td></tr>
+<tr class="memitem:a5b3516fe40da3e5ff7d703490b7160ee" id="r_a5b3516fe40da3e5ff7d703490b7160ee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5b3516fe40da3e5ff7d703490b7160ee">channels</a> () const</td></tr>
 <tr class="memdesc:a5b3516fe40da3e5ff7d703490b7160ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of channels.  <br /></td></tr>
-<tr class="memitem:a1dc1d2e8398c3d3458d9df8333e870a0" id="r_a1dc1d2e8398c3d3458d9df8333e870a0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1dc1d2e8398c3d3458d9df8333e870a0">getValues</a> (float *out)</td></tr>
+<tr class="memitem:a1dc1d2e8398c3d3458d9df8333e870a0" id="r_a1dc1d2e8398c3d3458d9df8333e870a0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1dc1d2e8398c3d3458d9df8333e870a0">getValues</a> (<a class="el" href="classfloat.html">float</a> *out)</td></tr>
 <tr class="memdesc:a1dc1d2e8398c3d3458d9df8333e870a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the next interpolated value for each channel.  <br /></td></tr>
 <tr class="memitem:a67b76affb3b5d35fa419ac234144038b" id="r_a67b76affb3b5d35fa419ac234144038b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a67b76affb3b5d35fa419ac234144038b">operator bool</a> () const</td></tr>
-<tr class="memitem:ab5a7ba68d6c150f9643e74f3838270a5" id="r_ab5a7ba68d6c150f9643e74f3838270a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab5a7ba68d6c150f9643e74f3838270a5">setChannels</a> (int <a class="el" href="#a5b3516fe40da3e5ff7d703490b7160ee">channels</a>)</td></tr>
-<tr class="memitem:a7694bdde8707e5a9f92c36c905be2e56" id="r_a7694bdde8707e5a9f92c36c905be2e56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7694bdde8707e5a9f92c36c905be2e56">setStepSize</a> (float step)</td></tr>
+<tr class="memitem:ab5a7ba68d6c150f9643e74f3838270a5" id="r_ab5a7ba68d6c150f9643e74f3838270a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab5a7ba68d6c150f9643e74f3838270a5">setChannels</a> (<a class="el" href="classint.html">int</a> <a class="el" href="#a5b3516fe40da3e5ff7d703490b7160ee">channels</a>)</td></tr>
+<tr class="memitem:a7694bdde8707e5a9f92c36c905be2e56" id="r_a7694bdde8707e5a9f92c36c905be2e56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7694bdde8707e5a9f92c36c905be2e56">setStepSize</a> (<a class="el" href="classfloat.html">float</a> step)</td></tr>
 <tr class="memdesc:a7694bdde8707e5a9f92c36c905be2e56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the step size for all channels.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a553fa223481e94b9d0977509490bc17b" id="r_a553fa223481e94b9d0977509490bc17b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a553fa223481e94b9d0977509490bc17b">_channels</a> = 0</td></tr>
+<tr class="memitem:a553fa223481e94b9d0977509490bc17b" id="r_a553fa223481e94b9d0977509490bc17b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a553fa223481e94b9d0977509490bc17b">_channels</a> = 0</td></tr>
 <tr class="memitem:a1f46f07dcdb7a808989c9bdd81198874" id="r_a1f46f07dcdb7a808989c9bdd81198874"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; TInterpolator &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1f46f07dcdb7a808989c9bdd81198874">_resamplers</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
@@ -143,12 +150,12 @@ template&lt;class TInterpolator&gt; </div>
         <tr>
           <td class="memname">void addValue </td>
           <td>(</td>
-          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>value</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classfloat.html">float</a></td>          <td class="paramname"><span class="paramname"><em>value</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>channel</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>channel</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -174,7 +181,7 @@ template&lt;class TInterpolator&gt; </div>
         <tr>
           <td class="memname">void addValues </td>
           <td>(</td>
-          <td class="paramtype">const float *</td>          <td class="paramname"><span class="paramname"><em>values</em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="classfloat.html">float</a> *</td>          <td class="paramname"><span class="paramname"><em>values</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -207,7 +214,7 @@ template&lt;class TInterpolator&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int channels </td>
+          <td class="memname"><a class="el" href="classint.html">int</a> channels </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -236,9 +243,9 @@ template&lt;class TInterpolator&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool getValues </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> getValues </td>
           <td>(</td>
-          <td class="paramtype">float *</td>          <td class="paramname"><span class="paramname"><em>out</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classfloat.html">float</a> *</td>          <td class="paramname"><span class="paramname"><em>out</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -272,7 +279,7 @@ template&lt;class TInterpolator&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">operator bool </td>
+          <td class="memname">operator <a class="el" href="classbool.html">bool</a> </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -301,7 +308,7 @@ template&lt;class TInterpolator&gt; </div>
         <tr>
           <td class="memname">void setChannels </td>
           <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>channels</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>channels</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -328,7 +335,7 @@ template&lt;class TInterpolator&gt; </div>
         <tr>
           <td class="memname">void setStepSize </td>
           <td>(</td>
-          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>step</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classfloat.html">float</a></td>          <td class="paramname"><span class="paramname"><em>step</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -362,7 +369,7 @@ template&lt;class TInterpolator&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int _channels = 0</td>
+          <td class="memname"><a class="el" href="classint.html">int</a> _channels = 0</td>
         </tr>
       </table>
   </td>

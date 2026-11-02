@@ -1,12 +1,24 @@
 <map id="USBAudioHostBackendTinyUSB" name="USBAudioHostBackendTinyUSB">
-<area shape="rect" id="Node000001" title="USBAudioHostBackend for the TinyUSB host stack provided by the Adafruit TinyUSB Library (RP2040/RP235..." alt="" coords="52,207,278,234"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_u_s_b_audio_host_backend.html" title="Abstract seam for every raw USB host stack call the UAC host class logic (USBAudioHostBase) needs...." alt="" coords="5,5,176,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="66,47,54,65,42,87,37,110,42,133,60,156,82,176,132,205,127,207,79,180,56,160,37,135,32,110,37,86,50,63,68,42"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_u_s_b_audio_host_backend_tiny_u_s_b.html" title="USBAudioHostBackend for the TinyUSB host stack provided by the Adafruit TinyUSB Library (RP2040/RP235..." alt="" coords="52,106,278,134"/>
-<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="110,43,158,105,153,106,109,48"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="167,148,168,207,163,205,163,151"/>
-<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="294,111,304,120,296,127,279,131,278,125,294,122,299,120,293,117"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_u_s_b_audio_host_events.html" title="Upcalls from a USB host backend into the stack independent UAC host class logic (USBAudioHostBase)...." alt="" coords="278,5,437,33"/>
-<area shape="poly" id="edge6_Node000001_Node000004" title=" " alt="" coords="379,42,394,64,405,87,409,112,401,135,376,162,346,183,312,198,278,209,277,203,311,193,343,178,373,158,396,132,403,111,400,89,390,66,377,47"/>
-<area shape="poly" id="edge5_Node000003_Node000004" title=" " alt="" coords="316,42,192,108,189,103,320,39"/>
+<area shape="rect" id="Node000001" title="USBAudioHostBackend for the TinyUSB host stack provided by the Adafruit TinyUSB Library (RP2040/RP235..." alt="" coords="712,237,937,264"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_u_s_b_audio_host_backend.html" title="Abstract seam for every raw USB host stack call the UAC host class logic (USBAudioHostBase) needs...." alt="" coords="37,193,207,220"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="165,184,211,166,262,152,339,144,416,145,494,153,568,166,698,201,791,236,786,236,696,206,566,171,493,158,416,150,339,149,263,157,213,171,168,188"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_u_s_b_audio_host_backend_tiny_u_s_b.html" title="USBAudioHostBackend for the TinyUSB host stack provided by the Adafruit TinyUSB Library (RP2040/RP235..." alt="" coords="355,237,580,264"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="222,217,356,235,352,238,223,222"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="595,248,714,250,709,251,596,253"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="436,219,447,213,467,210,486,212,498,218,502,228,497,238,493,234,497,227,494,222,485,217,467,215,449,218,439,224"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="39,9,205,36"/>
+<area shape="poly" id="edge10_Node000001_Node000004" title=" " alt="" coords="219,20,300,23,391,32,487,47,581,72,619,87,655,107,722,153,776,199,813,237,808,236,773,203,719,157,653,111,617,92,579,77,486,53,390,37,299,28,221,25"/>
+<area shape="poly" id="edge5_Node000003_Node000004" title=" " alt="" coords="162,42,240,84,287,109,332,136,400,189,453,236,448,236,397,193,329,141,284,113,237,89,163,47"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_u_s_b_audio_host_events.html" title="Upcalls from a USB host backend into the stack independent UAC host class logic (USBAudioHostBase)...." alt="" coords="42,98,202,126"/>
+<area shape="poly" id="edge11_Node000001_Node000005" title=" " alt="" coords="216,103,318,101,438,108,502,117,566,129,629,146,689,168,753,201,806,236,800,236,751,206,687,173,627,151,565,134,501,122,438,114,318,107,218,107"/>
+<area shape="poly" id="edge6_Node000003_Node000005" title=" " alt="" coords="173,129,432,234,428,238,173,134"/>
+<area shape="rect" id="Node000006" href="$classuint8__t.html" title=" " alt="" coords="89,323,155,351"/>
+<area shape="poly" id="edge12_Node000001_Node000006" title=" " alt="" coords="170,342,249,350,352,357,466,356,523,351,579,343,642,327,701,305,794,266,799,264,703,310,643,332,581,348,524,357,466,361,351,362,249,356,171,347"/>
+<area shape="poly" id="edge7_Node000003_Node000006" title=" " alt="" coords="170,336,248,329,290,320,329,305,341,294,353,282,401,264,397,266,356,286,345,298,332,309,291,325,248,334,172,341"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="37,522,207,550"/>
+<area shape="poly" id="edge13_Node000001_Node000007" title=" " alt="" coords="222,548,302,553,394,551,489,538,535,525,579,508,622,483,662,453,698,418,731,382,782,313,813,266,818,263,787,316,735,385,702,422,665,457,625,488,581,513,537,530,490,543,394,557,302,559,222,553"/>
+<area shape="poly" id="edge8_Node000003_Node000007" title=" " alt="" coords="195,514,231,500,267,481,301,457,328,427,338,409,342,391,338,355,335,320,340,301,353,282,382,263,378,267,357,286,345,303,341,320,344,355,347,391,343,410,333,430,304,461,270,486,233,505,197,519"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="5,396,239,457"/>
+<area shape="poly" id="edge14_Node000001_Node000008" title=" " alt="" coords="197,461,263,483,297,487,330,483,436,459,515,432,591,395,687,343,752,301,803,266,808,264,755,306,689,347,594,400,517,437,437,464,331,488,297,492,262,488,197,467"/>
+<area shape="poly" id="edge9_Node000003_Node000008" title=" " alt="" coords="252,402,294,383,329,356,339,339,340,321,341,301,353,282,386,263,382,266,357,286,346,303,345,321,344,340,333,360,296,388,255,406"/>
 </map>

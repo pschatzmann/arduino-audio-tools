@@ -1,9 +1,25 @@
 <map id="MetaDataICY" name="MetaDataICY">
-<area shape="rect" id="Node000001" title="Icecast/Shoutcast Metadata Handling. Metadata class which splits the data into audio and metadata...." alt="" coords="71,207,178,234"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_abstract_meta_data.html" title="Common Metadata methods." alt="" coords="5,106,145,134"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="90,146,120,206,115,206,87,150"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="168,106,288,134"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="206,144,140,208,137,204,201,145"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="189,5,268,33"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="230,46,231,106,226,104,227,51"/>
+<area shape="rect" id="Node000001" title="Icecast/Shoutcast Metadata Handling. Metadata class which splits the data into audio and metadata...." alt="" coords="592,396,698,424"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_abstract_meta_data.html" title="Common Metadata methods." alt="" coords="297,5,436,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="451,17,483,22,515,31,544,45,570,65,587,91,601,130,624,227,638,326,645,396,640,394,633,326,619,228,596,131,582,94,566,69,541,50,513,36,482,27,453,22"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="335,67,398,94"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="412,90,450,105,517,140,543,160,570,192,602,247,624,305,637,358,644,397,639,395,632,359,619,307,597,249,566,195,539,164,514,144,448,110,413,95"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="284,119,449,181"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="436,187,451,197,509,250,562,307,636,396,630,396,558,310,505,254,447,201,437,192"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="306,464,426,492"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="441,458,567,427,594,422,589,425,569,432,442,463"/>
+<area shape="rect" id="Node000006" href="$classint.html" title=" " alt="" coords="26,375,64,402"/>
+<area shape="poly" id="edge9_Node000001_Node000006" title=" " alt="" coords="78,376,108,370,184,365,260,370,416,383,594,403,589,405,416,388,259,375,184,371,109,375,81,380"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="77,404,110,417,151,429,184,436,260,449,312,462,307,464,259,454,183,441,150,435,108,422,79,409"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="20,464,70,492"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="85,475,308,476,305,480,86,480"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="5,520,85,548"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="99,527,176,519,259,506,323,491,319,494,260,511,176,524,101,532"/>
+<area shape="rect" id="Node000009" href="$classbool.html" title=" " alt="" coords="20,597,70,625"/>
+<area shape="poly" id="edge10_Node000001_Node000009" title=" " alt="" coords="84,611,166,613,259,606,357,587,397,572,448,548,502,517,552,482,626,426,630,423,555,487,504,522,450,553,399,577,358,592,260,611,166,618,86,617"/>
+<area shape="poly" id="edge8_Node000005_Node000009" title=" " alt="" coords="83,604,166,588,213,575,258,556,310,524,349,494,353,490,313,528,261,561,215,580,168,593,86,609"/>
+<area shape="rect" id="Node000010" href="$classuint8__t.html" title=" " alt="" coords="333,681,400,709"/>
+<area shape="poly" id="edge11_Node000001_Node000010" title=" " alt="" coords="415,702,452,706,492,704,531,695,566,675,580,658,593,630,615,557,630,480,640,426,644,422,636,481,620,558,598,632,585,661,570,680,533,700,492,709,451,711,415,708"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="295,733,438,778"/>
+<area shape="poly" id="edge12_Node000001_Node000011" title=" " alt="" coords="454,767,484,767,513,762,542,753,566,737,583,714,597,679,619,587,633,491,641,426,644,422,639,492,625,588,602,681,587,717,570,741,544,757,515,767,484,772,454,772"/>
 </map>

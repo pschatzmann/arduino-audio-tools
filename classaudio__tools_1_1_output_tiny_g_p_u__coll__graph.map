@@ -1,15 +1,36 @@
 <map id="OutputTinyGPU" name="OutputTinyGPU">
-<area shape="rect" id="Node000001" title="Bridges VideoDecoder&#39;s write() calls to a TinyGPU DisplayDriver (e.g. ILI9341Driver,..." alt="" coords="264,251,385,279"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="" coords="5,106,108,134"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="85,141,143,183,214,225,277,251,272,251,211,230,140,188,84,146"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_video_info_source.html" title="Provider of VideoInfo (width/height/fps/format) for whoever needs to size buffers/panel setup against..." alt="" coords="132,106,259,134"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="211,144,239,185,273,225,305,251,299,250,269,229,234,188,209,149"/>
-<area shape="rect" id="Node000004" href="$structaudio__tools_1_1_video_info.html" title="Basic video information (width/height/codec/frame size), analogous to AudioInfo &#45; common to both Demu..." alt="" coords="283,106,366,134"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="327,148,327,252,322,249,322,151"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="390,106,534,134"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="445,145,412,187,372,229,343,253,341,249,368,225,408,183,440,147"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="422,5,502,33"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="463,47,464,107,459,104,460,51"/>
-<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="558,106,667,134"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="609,147,593,191,580,212,562,230,531,243,486,253,386,263,385,258,485,247,529,238,559,225,575,209,588,189,604,150"/>
+<area shape="rect" id="Node000001" title="Bridges VideoDecoder&#39;s write() calls to a TinyGPU DisplayDriver (e.g. ILI9341Driver,..." alt="" coords="686,564,807,592"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="" coords="361,5,463,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="477,22,526,31,576,47,624,71,645,88,664,107,685,145,702,199,716,265,727,336,741,472,747,565,742,562,736,473,722,337,711,266,697,201,680,147,660,110,642,92,621,76,574,52,524,36,479,27"/>
+<area shape="rect" id="Node000003" href="$classint.html" title=" " alt="" coords="38,284,77,312"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="90,288,179,274,233,273,285,279,310,291,363,306,411,313,497,317,537,321,577,331,619,350,664,382,684,403,700,427,725,478,739,527,746,565,741,563,734,528,720,480,696,429,680,406,660,387,616,355,575,336,536,326,496,323,411,319,362,311,308,296,284,284,232,278,180,279,94,292"/>
+<area shape="rect" id="Node000013" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="340,373,484,401"/>
+<area shape="poly" id="edge13_Node000013_Node000003" title=" " alt="" coords="89,310,134,327,209,345,285,358,345,371,340,374,284,363,208,350,133,332,92,315"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_video_info_source.html" title="Provider of VideoInfo (width/height/fps/format) for whoever needs to size buffers/panel setup against..." alt="" coords="348,536,476,564"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="491,554,688,572,683,574,491,559"/>
+<area shape="rect" id="Node000005" href="$structaudio__tools_1_1_video_info.html" title="Basic video information (width/height/codec/frame size), analogous to AudioInfo &#45; common to both Demu..." alt="" coords="370,592,454,620"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="468,606,560,606,662,598,702,591,697,593,662,603,560,611,469,611"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="20,508,95,536"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="109,518,195,525,241,535,286,552,299,562,310,573,340,586,372,597,367,599,338,591,307,577,295,566,283,556,240,540,194,531,111,523"/>
+<area shape="rect" id="Node000007" href="$classfloat.html" title=" " alt="" coords="32,564,83,592"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="98,578,371,600,368,605,99,584"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="5,620,110,648"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="124,631,284,623,372,612,368,615,285,628,126,636"/>
+<area shape="rect" id="Node000009" href="$classuint32__t.html" title=" " alt="" coords="20,720,95,748"/>
+<area shape="poly" id="edge18_Node000001_Node000009" title=" " alt="" coords="109,734,192,735,284,727,411,699,534,661,638,621,716,591,711,593,640,626,535,666,413,704,285,732,193,740,111,740"/>
+<area shape="poly" id="edge8_Node000005_Node000009" title=" " alt="" coords="109,726,193,711,239,700,284,684,344,651,395,618,391,622,347,656,286,689,241,705,194,717,111,731"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="309,773,515,801"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="510,800,548,800,588,796,626,786,660,767,681,749,698,727,722,677,735,628,742,594,746,590,741,630,727,679,702,730,685,753,664,772,628,791,589,801,549,806,510,805"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="364,825,460,853"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="475,854,520,860,569,861,617,853,640,844,660,831,686,806,707,776,721,742,731,707,742,640,744,594,747,590,747,640,737,708,726,744,711,778,691,810,664,836,642,849,619,858,569,866,520,866,475,859"/>
+<area shape="rect" id="Node000012" href="$classbool.html" title=" " alt="" coords="33,148,82,176"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="95,149,176,130,283,117,342,117,402,121,461,133,516,154,547,171,575,192,622,243,661,302,691,365,714,427,730,483,746,564,741,563,725,485,709,429,686,367,656,305,618,247,571,196,544,176,514,159,459,139,401,127,342,122,284,123,177,136,99,153"/>
+<area shape="poly" id="edge16_Node000013_Node000012" title=" " alt="" coords="95,169,141,184,191,206,242,236,287,275,297,292,299,309,301,324,311,340,333,358,360,372,355,374,330,362,307,344,296,326,294,310,292,294,283,278,239,240,189,210,139,189,98,174"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="452,406,663,528,723,563,718,564,661,532,451,412"/>
+<area shape="rect" id="Node000014" href="$class_r_g_b565_01_5.html" title=" " alt="" coords="15,373,100,401"/>
+<area shape="poly" id="edge14_Node000013_Node000014" title=" " alt="" coords="114,385,341,385,337,389,116,390"/>
+<area shape="rect" id="Node000015" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="18,429,97,457"/>
+<area shape="poly" id="edge15_Node000013_Node000015" title=" " alt="" coords="112,437,194,428,284,415,359,400,355,403,285,420,195,433,115,441"/>
+<area shape="rect" id="Node000016" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="357,904,466,932"/>
+<area shape="poly" id="edge17_Node000001_Node000016" title=" " alt="" coords="471,933,517,942,567,945,617,937,639,928,660,915,678,892,694,856,718,761,734,661,742,594,746,590,739,662,723,762,699,858,683,895,664,919,642,933,618,942,567,950,516,947,471,939"/>
 </map>

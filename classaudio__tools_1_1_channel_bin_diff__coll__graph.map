@@ -1,7 +1,11 @@
 <map id="ChannelBinDiff" name="ChannelBinDiff">
-<area shape="rect" id="Node000001" title="Provides combination of binning and subtracting channels." alt="" coords="84,106,202,134"/>
+<area shape="rect" id="Node000001" title="Provides combination of binning and subtracting channels." alt="" coords="154,151,272,178"/>
 <area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="" coords="5,5,123,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="85,43,135,105,130,106,83,48"/>
-<area shape="rect" id="Node000003" href="$structaudio__tools_1_1audio__tools_1_1_channel_bin_diff_1_1_channel_bin_diff_state.html" title=" " alt="" coords="146,5,299,33"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="205,44,155,107,152,103,200,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="82,43,114,84,154,125,190,150,184,150,150,129,110,87,80,48"/>
+<area shape="rect" id="Node000003" href="$classint.html" title=" " alt="" coords="146,5,185,33"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="161,46,160,86,163,107,170,125,179,138,192,151,187,150,175,142,165,128,158,108,155,87,158,50"/>
+<area shape="rect" id="Node000004" href="$classbool.html" title=" " alt="" coords="238,5,287,33"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="259,47,236,128,223,152,220,148,231,126,255,50"/>
+<area shape="rect" id="Node000005" href="$structaudio__tools_1_1audio__tools_1_1_channel_bin_diff_1_1_channel_bin_diff_state.html" title=" " alt="" coords="312,5,464,33"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="379,46,356,90,341,111,322,129,299,143,273,153,272,148,296,138,318,125,337,107,352,87,375,49"/>
 </map>

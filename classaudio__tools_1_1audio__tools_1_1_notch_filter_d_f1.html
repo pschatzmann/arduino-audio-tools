@@ -83,7 +83,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Second-order notch (band-reject) filter (BiQuad DF1). Same coefficients as <a class="el" href="classaudio__tools_1_1audio__tools_1_1_notch_filter.html" title="Second-order notch (band-reject) filter (BiQuad DF2). Rejects frequencies near the center frequency a...">NotchFilter</a>; use this (not <a class="el" href="classaudio__tools_1_1audio__tools_1_1_notch_filter.html" title="Second-order notch (band-reject) filter (BiQuad DF2). Rejects frequencies near the center frequency a...">NotchFilter</a>) when T is a bounded fixed-point type like <a class="el" href="classaudio__tools_1_1audio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a> &ndash; see <a class="el" href="classaudio__tools_1_1audio__tools_1_1_low_pass_filter_d_f1.html" title="Second-order low-pass filter (BiQuad DF1). Same coefficients as LowPassFilter, but built on BiQuadDF1...">LowPassFilterDF1</a> for why.  
+<p>Second-order notch (band-reject) filter (BiQuad DF1). Same coefficients as <a class="el" href="classaudio__tools_1_1audio__tools_1_1_notch_filter.html" title="Second-order notch (band-reject) filter (BiQuad DF2). Rejects frequencies near the center frequency a...">NotchFilter</a>; use this (not <a class="el" href="classaudio__tools_1_1audio__tools_1_1_notch_filter.html" title="Second-order notch (band-reject) filter (BiQuad DF2). Rejects frequencies near the center frequency a...">NotchFilter</a>) when <a class="el" href="class_t.html">T</a> is a bounded fixed-point type like <a class="el" href="classaudio__tools_1_1audio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a> &ndash; see <a class="el" href="classaudio__tools_1_1audio__tools_1_1_low_pass_filter_d_f1.html" title="Second-order low-pass filter (BiQuad DF1). Same coefficients as LowPassFilter, but built on BiQuadDF1...">LowPassFilterDF1</a> for why.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_codec_opus_ogg_8h_source.html">CodecOpusOgg.h</a>&gt;</code></p>
@@ -106,13 +106,15 @@ Collaboration diagram for NotchFilterDF1&lt; T &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="classaudio__tools_1_1audio__tools_1_1_notch_filter_d_f1__coll__graph.png" border="0" usemap="#a_notch_filter_d_f1_3_01_t_01_4_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="a_notch_filter_d_f1_3_01_t_01_4_coll__map" id="a_notch_filter_d_f1_3_01_t_01_4_coll__map">
-<area shape="rect" title="Second&#45;order notch (band&#45;reject) filter (BiQuad DF1). Same coefficients as NotchFilter; use this (not..." alt="" coords="5,157,162,184"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_bi_quad_d_f1.html" title=" " alt="" coords="7,81,160,109"/>
-<area shape="poly" title=" " alt="" coords="77,122,79,157,74,155,73,126"/>
-<area shape="poly" title=" " alt="" coords="94,122,93,157,88,155,90,126"/>
+<area shape="rect" title="Second&#45;order notch (band&#45;reject) filter (BiQuad DF1). Same coefficients as NotchFilter; use this (not..." alt="" coords="5,362,162,389"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_bi_quad_d_f1.html" title=" " alt="" coords="7,285,160,312"/>
+<area shape="poly" title=" " alt="" coords="77,326,79,362,74,361,73,330"/>
+<area shape="poly" title=" " alt="" coords="94,326,93,362,88,360,90,330"/>
 <area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_filter.html" title=" " alt="" coords="27,5,140,33"/>
-<area shape="poly" title=" " alt="" coords="76,46,79,81,74,80,74,51"/>
-<area shape="poly" title=" " alt="" coords="93,46,93,81,88,80,91,51"/>
+<area shape="poly" title=" " alt="" coords="79,46,77,173,82,285,77,284,72,173,77,51"/>
+<area shape="poly" title=" " alt="" coords="90,46,95,173,90,285,85,284,90,173,88,51"/>
+<area shape="rect" href="classfloat.html" title=" " alt="" coords="164,5,214,33"/>
+<area shape="poly" title=" " alt="" coords="185,45,163,145,143,205,116,262,99,286,94,283,112,259,138,203,158,144,183,50"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -120,30 +122,30 @@ Collaboration diagram for NotchFilterDF1&lt; T &gt;:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a2e1285ea23859cbcd72e86bb77db03cb" id="r_a2e1285ea23859cbcd72e86bb77db03cb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2e1285ea23859cbcd72e86bb77db03cb">NotchFilterDF1</a> ()=default</td></tr>
 <tr class="memitem:a2e1285ea23859cbcd72e86bb77db03cb" id="r_a2e1285ea23859cbcd72e86bb77db03cb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2e1285ea23859cbcd72e86bb77db03cb">NotchFilterDF1</a> ()=default</td></tr>
-<tr class="memitem:aca7909ba441a798d8b941c0d73b40112" id="r_aca7909ba441a798d8b941c0d73b40112"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aca7909ba441a798d8b941c0d73b40112">NotchFilterDF1</a> (float frequency, float sampleRate, float q=1.0)</td></tr>
-<tr class="memitem:aca7909ba441a798d8b941c0d73b40112" id="r_aca7909ba441a798d8b941c0d73b40112"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aca7909ba441a798d8b941c0d73b40112">NotchFilterDF1</a> (float frequency, float sampleRate, float q=1.0)</td></tr>
-<tr class="memitem:a921071301e78ddd0e2f674fff87972bb" id="r_a921071301e78ddd0e2f674fff87972bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a921071301e78ddd0e2f674fff87972bb">begin</a> (float frequency, float sampleRate, float q=1.0)</td></tr>
-<tr class="memitem:a921071301e78ddd0e2f674fff87972bb" id="r_a921071301e78ddd0e2f674fff87972bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a921071301e78ddd0e2f674fff87972bb">begin</a> (float frequency, float sampleRate, float q=1.0)</td></tr>
-<tr class="memitem:acd1ddbd60df780b8bad4a79ceb0a00e9" id="r_acd1ddbd60df780b8bad4a79ceb0a00e9"><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_filter.html#acd1ddbd60df780b8bad4a79ceb0a00e9">process</a> (float in)=0</td></tr>
+<tr class="memitem:aca7909ba441a798d8b941c0d73b40112" id="r_aca7909ba441a798d8b941c0d73b40112"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aca7909ba441a798d8b941c0d73b40112">NotchFilterDF1</a> (<a class="el" href="classfloat.html">float</a> frequency, <a class="el" href="classfloat.html">float</a> sampleRate, <a class="el" href="classfloat.html">float</a> q=1.0)</td></tr>
+<tr class="memitem:aca7909ba441a798d8b941c0d73b40112" id="r_aca7909ba441a798d8b941c0d73b40112"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aca7909ba441a798d8b941c0d73b40112">NotchFilterDF1</a> (<a class="el" href="classfloat.html">float</a> frequency, <a class="el" href="classfloat.html">float</a> sampleRate, <a class="el" href="classfloat.html">float</a> q=1.0)</td></tr>
+<tr class="memitem:a921071301e78ddd0e2f674fff87972bb" id="r_a921071301e78ddd0e2f674fff87972bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a921071301e78ddd0e2f674fff87972bb">begin</a> (<a class="el" href="classfloat.html">float</a> frequency, <a class="el" href="classfloat.html">float</a> sampleRate, <a class="el" href="classfloat.html">float</a> q=1.0)</td></tr>
+<tr class="memitem:a921071301e78ddd0e2f674fff87972bb" id="r_a921071301e78ddd0e2f674fff87972bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a921071301e78ddd0e2f674fff87972bb">begin</a> (<a class="el" href="classfloat.html">float</a> frequency, <a class="el" href="classfloat.html">float</a> sampleRate, <a class="el" href="classfloat.html">float</a> q=1.0)</td></tr>
+<tr class="memitem:acd1ddbd60df780b8bad4a79ceb0a00e9" id="r_acd1ddbd60df780b8bad4a79ceb0a00e9"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_filter.html#acd1ddbd60df780b8bad4a79ceb0a00e9">process</a> (<a class="el" href="classfloat.html">float</a> in)=0</td></tr>
 <tr class="memdesc:acd1ddbd60df780b8bad4a79ceb0a00e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes the input value and returns the filtered output value.  <br /></td></tr>
-<tr class="memitem:a048b29c6a000503a52c293e8fd973847" id="r_a048b29c6a000503a52c293e8fd973847"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_bi_quad_d_f1.html#a048b29c6a000503a52c293e8fd973847">process</a> (float value) override</td></tr>
+<tr class="memitem:a048b29c6a000503a52c293e8fd973847" id="r_a048b29c6a000503a52c293e8fd973847"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_bi_quad_d_f1.html#a048b29c6a000503a52c293e8fd973847">process</a> (<a class="el" href="classfloat.html">float</a> value) override</td></tr>
 <tr class="memitem:aebfcdbbd0fe4efbff10b180be50ca6bc" id="r_aebfcdbbd0fe4efbff10b180be50ca6bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_bi_quad_d_f1.html#aebfcdbbd0fe4efbff10b180be50ca6bc">reset</a> () override</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a9c3b7406660c82b019e1a9ef58fc4df4" id="r_a9c3b7406660c82b019e1a9ef58fc4df4"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_bi_quad_d_f1.html#a9c3b7406660c82b019e1a9ef58fc4df4">a_1</a></td></tr>
-<tr class="memitem:a1e9bfede45fa5ec00962668721d4c98f" id="r_a1e9bfede45fa5ec00962668721d4c98f"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_bi_quad_d_f1.html#a1e9bfede45fa5ec00962668721d4c98f">a_2</a></td></tr>
-<tr class="memitem:adc66b4cad2937dcbddca44209a69dcf5" id="r_adc66b4cad2937dcbddca44209a69dcf5"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_bi_quad_d_f1.html#adc66b4cad2937dcbddca44209a69dcf5">b_0</a></td></tr>
-<tr class="memitem:a63befdc9568231c064b4ef2e524824e0" id="r_a63befdc9568231c064b4ef2e524824e0"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_bi_quad_d_f1.html#a63befdc9568231c064b4ef2e524824e0">b_1</a></td></tr>
-<tr class="memitem:a6f1a432b023a8969d43670fb4dacb40b" id="r_a6f1a432b023a8969d43670fb4dacb40b"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_bi_quad_d_f1.html#a6f1a432b023a8969d43670fb4dacb40b">b_2</a></td></tr>
-<tr class="memitem:aa1c3b0c0ef5e48e7fd57f2f5623de9fb" id="r_aa1c3b0c0ef5e48e7fd57f2f5623de9fb"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_bi_quad_d_f1.html#aa1c3b0c0ef5e48e7fd57f2f5623de9fb">x_0</a></td></tr>
-<tr class="memitem:a55b98741895fd0383a51ff6627217a5c" id="r_a55b98741895fd0383a51ff6627217a5c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_bi_quad_d_f1.html#a55b98741895fd0383a51ff6627217a5c">x_1</a></td></tr>
-<tr class="memitem:a435ad02615972ebf3621ba921c0b0eb3" id="r_a435ad02615972ebf3621ba921c0b0eb3"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_bi_quad_d_f1.html#a435ad02615972ebf3621ba921c0b0eb3">y_1</a></td></tr>
-<tr class="memitem:a16a6b2c21c0f4055b1a3a520df1c28aa" id="r_a16a6b2c21c0f4055b1a3a520df1c28aa"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_bi_quad_d_f1.html#a16a6b2c21c0f4055b1a3a520df1c28aa">y_2</a></td></tr>
+<tr class="memitem:a9c3b7406660c82b019e1a9ef58fc4df4" id="r_a9c3b7406660c82b019e1a9ef58fc4df4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_bi_quad_d_f1.html#a9c3b7406660c82b019e1a9ef58fc4df4">a_1</a></td></tr>
+<tr class="memitem:a1e9bfede45fa5ec00962668721d4c98f" id="r_a1e9bfede45fa5ec00962668721d4c98f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_bi_quad_d_f1.html#a1e9bfede45fa5ec00962668721d4c98f">a_2</a></td></tr>
+<tr class="memitem:adc66b4cad2937dcbddca44209a69dcf5" id="r_adc66b4cad2937dcbddca44209a69dcf5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_bi_quad_d_f1.html#adc66b4cad2937dcbddca44209a69dcf5">b_0</a></td></tr>
+<tr class="memitem:a63befdc9568231c064b4ef2e524824e0" id="r_a63befdc9568231c064b4ef2e524824e0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_bi_quad_d_f1.html#a63befdc9568231c064b4ef2e524824e0">b_1</a></td></tr>
+<tr class="memitem:a6f1a432b023a8969d43670fb4dacb40b" id="r_a6f1a432b023a8969d43670fb4dacb40b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_bi_quad_d_f1.html#a6f1a432b023a8969d43670fb4dacb40b">b_2</a></td></tr>
+<tr class="memitem:aa1c3b0c0ef5e48e7fd57f2f5623de9fb" id="r_aa1c3b0c0ef5e48e7fd57f2f5623de9fb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_bi_quad_d_f1.html#aa1c3b0c0ef5e48e7fd57f2f5623de9fb">x_0</a></td></tr>
+<tr class="memitem:a55b98741895fd0383a51ff6627217a5c" id="r_a55b98741895fd0383a51ff6627217a5c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_bi_quad_d_f1.html#a55b98741895fd0383a51ff6627217a5c">x_1</a></td></tr>
+<tr class="memitem:a435ad02615972ebf3621ba921c0b0eb3" id="r_a435ad02615972ebf3621ba921c0b0eb3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_bi_quad_d_f1.html#a435ad02615972ebf3621ba921c0b0eb3">y_1</a></td></tr>
+<tr class="memitem:a16a6b2c21c0f4055b1a3a520df1c28aa" id="r_a16a6b2c21c0f4055b1a3a520df1c28aa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_bi_quad_d_f1.html#a16a6b2c21c0f4055b1a3a520df1c28aa">y_2</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename T = float&gt;<br />
-class audio_tools::audio_tools::NotchFilterDF1&lt; T &gt;</div><p>Second-order notch (band-reject) filter (BiQuad DF1). Same coefficients as <a class="el" href="classaudio__tools_1_1audio__tools_1_1_notch_filter.html" title="Second-order notch (band-reject) filter (BiQuad DF2). Rejects frequencies near the center frequency a...">NotchFilter</a>; use this (not <a class="el" href="classaudio__tools_1_1audio__tools_1_1_notch_filter.html" title="Second-order notch (band-reject) filter (BiQuad DF2). Rejects frequencies near the center frequency a...">NotchFilter</a>) when T is a bounded fixed-point type like <a class="el" href="classaudio__tools_1_1audio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a> &ndash; see <a class="el" href="classaudio__tools_1_1audio__tools_1_1_low_pass_filter_d_f1.html" title="Second-order low-pass filter (BiQuad DF1). Same coefficients as LowPassFilter, but built on BiQuadDF1...">LowPassFilterDF1</a> for why. </p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename <a class="el" href="class_t.html">T</a> = float&gt;<br />
+class audio_tools::audio_tools::NotchFilterDF1&lt; T &gt;</div><p>Second-order notch (band-reject) filter (BiQuad DF1). Same coefficients as <a class="el" href="classaudio__tools_1_1audio__tools_1_1_notch_filter.html" title="Second-order notch (band-reject) filter (BiQuad DF2). Rejects frequencies near the center frequency a...">NotchFilter</a>; use this (not <a class="el" href="classaudio__tools_1_1audio__tools_1_1_notch_filter.html" title="Second-order notch (band-reject) filter (BiQuad DF2). Rejects frequencies near the center frequency a...">NotchFilter</a>) when <a class="el" href="class_t.html">T</a> is a bounded fixed-point type like <a class="el" href="classaudio__tools_1_1audio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a> &ndash; see <a class="el" href="classaudio__tools_1_1audio__tools_1_1_low_pass_filter_d_f1.html" title="Second-order low-pass filter (BiQuad DF1). Same coefficients as LowPassFilter, but built on BiQuadDF1...">LowPassFilterDF1</a> for why. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">frequency</td><td>center frequency to reject in Hz </td></tr>
@@ -156,7 +158,7 @@ class audio_tools::audio_tools::NotchFilterDF1&lt; T &gt;</div><p>Second-order n
 <dl class="section copyright"><dt>Copyright</dt><dd>GNU General Public License v3.0 </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td>sample type (float, double, or a bounded fixed-point type like <a class="el" href="classaudio__tools_1_1audio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a>) </td></tr>
+    <tr><td class="paramname"><a class="el" href="class_t.html">T</a></td><td>sample type (float, double, or a bounded fixed-point type like <a class="el" href="classaudio__tools_1_1audio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a>) </td></tr>
   </table>
   </dd>
 </dl>
@@ -167,7 +169,7 @@ class audio_tools::audio_tools::NotchFilterDF1&lt; T &gt;</div><p>Second-order n
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T = float&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a> = float&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -194,7 +196,7 @@ template&lt;typename T = float&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T = float&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a> = float&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -202,17 +204,17 @@ template&lt;typename T = float&gt; </div>
         <tr>
           <td class="memname">NotchFilterDF1 </td>
           <td>(</td>
-          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>frequency</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classfloat.html">float</a></td>          <td class="paramname"><span class="paramname"><em>frequency</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>sampleRate</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classfloat.html">float</a></td>          <td class="paramname"><span class="paramname"><em>sampleRate</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>q</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1.0</span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classfloat.html">float</a></td>          <td class="paramname"><span class="paramname"><em>q</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1.0</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -230,7 +232,7 @@ template&lt;typename T = float&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T = float&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a> = float&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -257,7 +259,7 @@ template&lt;typename T = float&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T = float&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a> = float&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -265,17 +267,17 @@ template&lt;typename T = float&gt; </div>
         <tr>
           <td class="memname">NotchFilterDF1 </td>
           <td>(</td>
-          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>frequency</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classfloat.html">float</a></td>          <td class="paramname"><span class="paramname"><em>frequency</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>sampleRate</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classfloat.html">float</a></td>          <td class="paramname"><span class="paramname"><em>sampleRate</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>q</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1.0</span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classfloat.html">float</a></td>          <td class="paramname"><span class="paramname"><em>q</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1.0</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -294,7 +296,7 @@ template&lt;typename T = float&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T = float&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a> = float&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -302,17 +304,17 @@ template&lt;typename T = float&gt; </div>
         <tr>
           <td class="memname">void begin </td>
           <td>(</td>
-          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>frequency</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classfloat.html">float</a></td>          <td class="paramname"><span class="paramname"><em>frequency</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>sampleRate</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classfloat.html">float</a></td>          <td class="paramname"><span class="paramname"><em>sampleRate</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>q</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1.0</span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classfloat.html">float</a></td>          <td class="paramname"><span class="paramname"><em>q</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1.0</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -330,7 +332,7 @@ template&lt;typename T = float&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T = float&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a> = float&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -338,17 +340,17 @@ template&lt;typename T = float&gt; </div>
         <tr>
           <td class="memname">void begin </td>
           <td>(</td>
-          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>frequency</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classfloat.html">float</a></td>          <td class="paramname"><span class="paramname"><em>frequency</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>sampleRate</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classfloat.html">float</a></td>          <td class="paramname"><span class="paramname"><em>sampleRate</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>q</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1.0</span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classfloat.html">float</a></td>          <td class="paramname"><span class="paramname"><em>q</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1.0</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -370,9 +372,9 @@ template&lt;typename T = float&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual float process </td>
+          <td class="memname">virtual <a class="el" href="classfloat.html">float</a> process </td>
           <td>(</td>
-          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>in</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classfloat.html">float</a></td>          <td class="paramname"><span class="paramname"><em>in</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -397,9 +399,9 @@ template&lt;typename T = float&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">float process </td>
+          <td class="memname"><a class="el" href="classfloat.html">float</a> process </td>
           <td>(</td>
-          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>in</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classfloat.html">float</a></td>          <td class="paramname"><span class="paramname"><em>in</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -453,7 +455,7 @@ template&lt;typename T = float&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">float a_1</td>
+          <td class="memname"><a class="el" href="classfloat.html">float</a> a_1</td>
         </tr>
       </table>
   </td>
@@ -475,7 +477,7 @@ template&lt;typename T = float&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">float a_2</td>
+          <td class="memname"><a class="el" href="classfloat.html">float</a> a_2</td>
         </tr>
       </table>
   </td>
@@ -497,7 +499,7 @@ template&lt;typename T = float&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">float b_0</td>
+          <td class="memname"><a class="el" href="classfloat.html">float</a> b_0</td>
         </tr>
       </table>
   </td>
@@ -519,7 +521,7 @@ template&lt;typename T = float&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">float b_1</td>
+          <td class="memname"><a class="el" href="classfloat.html">float</a> b_1</td>
         </tr>
       </table>
   </td>
@@ -541,7 +543,7 @@ template&lt;typename T = float&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">float b_2</td>
+          <td class="memname"><a class="el" href="classfloat.html">float</a> b_2</td>
         </tr>
       </table>
   </td>
@@ -563,7 +565,7 @@ template&lt;typename T = float&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">float x_0</td>
+          <td class="memname"><a class="el" href="classfloat.html">float</a> x_0</td>
         </tr>
       </table>
   </td>
@@ -585,7 +587,7 @@ template&lt;typename T = float&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">float x_1</td>
+          <td class="memname"><a class="el" href="classfloat.html">float</a> x_1</td>
         </tr>
       </table>
   </td>
@@ -607,7 +609,7 @@ template&lt;typename T = float&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">float y_1</td>
+          <td class="memname"><a class="el" href="classfloat.html">float</a> y_1</td>
         </tr>
       </table>
   </td>
@@ -629,7 +631,7 @@ template&lt;typename T = float&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">float y_2</td>
+          <td class="memname"><a class="el" href="classfloat.html">float</a> y_2</td>
         </tr>
       </table>
   </td>

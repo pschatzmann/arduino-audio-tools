@@ -1,9 +1,18 @@
 <map id="UI" name="UI">
-<area shape="rect" id="Node000001" title="Minimum implementation of UI parameters. We only support the setting and getting of values." alt="" coords="59,207,98,234"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_vector.html" title=" " alt="" coords="15,106,142,134"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="81,148,81,207,76,205,76,151"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="5,5,61,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="35,46,46,81,65,105,60,106,41,83,34,51"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="85,5,165,33"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="114,45,87,107,82,104,111,49"/>
+<area shape="rect" id="Node000001" title="Minimum implementation of UI parameters. We only support the setting and getting of values." alt="" coords="264,374,302,402"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_vector.html" title=" " alt="" coords="220,274,346,301"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="285,315,285,375,281,372,281,319"/>
+<area shape="rect" id="Node000003" href="$classint.html" title=" " alt="" coords="128,151,166,178"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="143,191,146,222,150,236,157,248,170,260,186,269,222,282,217,283,183,274,167,264,153,251,145,238,141,223,141,196"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="193,151,248,178"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="227,191,237,220,251,248,271,273,265,273,246,251,232,222,225,196"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="5,5,105,33"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="62,46,81,88,93,108,108,124,194,153,190,156,106,129,89,111,76,90,62,51"/>
+<area shape="rect" id="Node000006" href="$classfloat.html" title=" " alt="" coords="128,5,179,33"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="153,46,158,87,163,107,172,125,182,138,197,150,191,151,179,142,167,128,158,109,153,88,151,51"/>
+<area shape="rect" id="Node000007" href="$classbool.html" title=" " alt="" coords="248,5,297,33"/>
+<area shape="poly" id="edge8_Node000002_Node000007" title=" " alt="" coords="295,43,303,56,317,109,320,152,315,196,303,250,293,275,289,271,298,249,310,195,315,152,312,110,298,58,294,48"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="234,45,227,58,219,82,216,107,220,151,215,150,211,107,213,81,222,56,237,40"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="494,151,573,178"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="495,184,311,275,309,271,490,186"/>
 </map>

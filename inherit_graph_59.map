@@ -1,5 +1,15 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="5,5,173,33"/>
-<area shape="rect" id="Node000001" href="$classaudio__tools_1_1audio__tools_1_1_single_buffer.html" title=" " alt="" coords="221,5,396,33"/>
-<area shape="poly" id="edge676_Node000000_Node000001" title=" " alt="" coords="188,17,223,19,217,19,188,22"/>
+<area shape="rect" id="Node000000" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="5,152,173,180"/>
+<area shape="rect" id="Node000001" href="$classaudio__tools_1_1_variable_speed_ring_buffer.html" title=" " alt="" coords="262,5,444,50"/>
+<area shape="poly" id="edge670_Node000000_Node000001" title=" " alt="" coords="113,140,160,99,219,60,264,45,259,48,222,65,163,103,117,143"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_ring_buffer.html" title=" " alt="" coords="271,74,436,102"/>
+<area shape="poly" id="edge671_Node000000_Node000002" title=" " alt="" coords="135,143,220,112,273,100,268,103,221,117,137,148"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_single_buffer.html" title=" " alt="" coords="266,126,441,154"/>
+<area shape="poly" id="edge672_Node000000_Node000003" title=" " alt="" coords="187,154,268,147,263,150,189,159"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_variable_speed_ring_buffer.html" title="Optimized buffer implementation for pitch shifting with interpolation." alt="" coords="243,178,464,206"/>
+<area shape="poly" id="edge673_Node000000_Node000004" title=" " alt="" coords="188,173,245,180,240,182,188,178"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_variable_speed_ring_buffer180.html" title="Variable speed ring buffer with 180&#45;degree phase shifting." alt="" coords="231,230,476,258"/>
+<area shape="poly" id="edge674_Node000000_Node000005" title=" " alt="" coords="137,184,221,214,272,229,267,230,220,220,137,189"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_variable_speed_ring_buffer_simple.html" title="Very Simple Buffer implementation for Pitch Shift." alt="" coords="221,282,486,310"/>
+<area shape="poly" id="edge675_Node000000_Node000006" title=" " alt="" coords="115,189,163,230,191,250,222,267,257,281,252,281,220,271,189,254,159,234,114,194"/>
 </map>

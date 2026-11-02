@@ -1,7 +1,14 @@
 <map id="ListLockFree&lt; T &gt;" name="ListLockFree&lt; T &gt;">
-<area shape="rect" id="Node000001" title="Lock&#45;free double linked list using atomic operations." alt="" coords="8,128,148,156"/>
-<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_list_lock_free_1_1_node.html" title=" " alt="" coords="5,5,61,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="44,46,65,103,75,128,70,128,60,105,41,50"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="85,5,165,33"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="119,46,98,105,87,129,83,126,93,103,114,49"/>
+<area shape="rect" id="Node000001" title="Lock&#45;free double linked list using atomic operations." alt="" coords="223,268,363,296"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_list_lock_free_1_1_node.html" title=" " alt="" coords="180,145,236,173"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="226,183,268,243,286,269,280,267,263,246,223,188"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,5,184,50"/>
+<area shape="poly" id="edge6_Node000001_Node000003" title=" " alt="" coords="90,63,92,118,98,146,109,172,138,205,174,231,212,251,249,268,244,268,210,256,171,236,134,209,105,174,93,148,87,119,88,68"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="120,60,172,120,196,144,191,145,168,123,119,65"/>
+<area shape="rect" id="Node000004" href="$class_t.html" title=" " alt="" coords="207,14,246,42"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="224,55,212,146,207,144,221,59"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="259,145,394,173"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="321,187,299,269,295,266,317,189"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="418,145,497,173"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="451,186,437,219,415,246,391,262,364,272,363,267,389,257,411,242,433,216,447,189"/>
 </map>

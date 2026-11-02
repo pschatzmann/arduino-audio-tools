@@ -103,26 +103,28 @@ Collaboration diagram for CallbackVolumeControl:</div>
 <div class="dyncontent">
 <div class="center"><img src="classaudio__tools_1_1_callback_volume_control__coll__graph.png" border="0" usemap="#a_callback_volume_control_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="a_callback_volume_control_coll__map" id="a_callback_volume_control_coll__map">
-<area shape="rect" title="Provide the volume function as callback method: This is easy to use e.g together with a lamda functio..." alt="" coords="5,81,179,109"/>
-<area shape="rect" href="classaudio__tools_1_1_volume_control.html" title="Abstract class for handling of the linear input volume to determine the multiplication factor which s..." alt="" coords="33,5,151,33"/>
-<area shape="poly" title=" " alt="" coords="94,47,94,82,90,80,90,51"/>
+<area shape="rect" title="Provide the volume function as callback method: This is easy to use e.g together with a lamda functio..." alt="" coords="31,106,204,134"/>
+<area shape="rect" href="classaudio__tools_1_1_volume_control.html" title="Abstract class for handling of the linear input volume to determine the multiplication factor which s..." alt="" coords="5,5,123,33"/>
+<area shape="poly" title=" " alt="" coords="80,44,113,105,108,106,76,49"/>
+<area shape="rect" href="classfloat.html" title=" " alt="" coords="147,5,197,33"/>
+<area shape="poly" title=" " alt="" coords="160,45,127,107,123,104,155,47"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:acf50e09af8cd712176309285e7510fd6" id="r_acf50e09af8cd712176309285e7510fd6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acf50e09af8cd712176309285e7510fd6">CallbackVolumeControl</a> (float(*cb)(float in))</td></tr>
-<tr class="memitem:a4adec6dfd3db79b4d459a6616d376dc2" id="r_a4adec6dfd3db79b4d459a6616d376dc2"><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4adec6dfd3db79b4d459a6616d376dc2">getVolumeFactor</a> (float volume)</td></tr>
+<tr class="memitem:acf50e09af8cd712176309285e7510fd6" id="r_acf50e09af8cd712176309285e7510fd6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acf50e09af8cd712176309285e7510fd6">CallbackVolumeControl</a> (<a class="el" href="classfloat.html">float</a>(*cb)(<a class="el" href="classfloat.html">float</a> in))</td></tr>
+<tr class="memitem:a4adec6dfd3db79b4d459a6616d376dc2" id="r_a4adec6dfd3db79b4d459a6616d376dc2"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4adec6dfd3db79b4d459a6616d376dc2">getVolumeFactor</a> (<a class="el" href="classfloat.html">float</a> volume)</td></tr>
 <tr class="memdesc:a4adec6dfd3db79b4d459a6616d376dc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">determines a multiplication factor (0.0 to 1.0) from an input value (0.0 to 1.0).  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-methods" class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:ace0e1dc6943007f979f702e7b074b60e" id="r_ace0e1dc6943007f979f702e7b074b60e"><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_volume_control.html#ace0e1dc6943007f979f702e7b074b60e">limit</a> (float in)</td></tr>
+<tr class="memitem:ace0e1dc6943007f979f702e7b074b60e" id="r_ace0e1dc6943007f979f702e7b074b60e"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_volume_control.html#ace0e1dc6943007f979f702e7b074b60e">limit</a> (<a class="el" href="classfloat.html">float</a> in)</td></tr>
 <tr class="memdesc:ace0e1dc6943007f979f702e7b074b60e"><td class="mdescLeft">&#160;</td><td class="mdescRight">limits the output to the range of 0 to 1.0  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:af69747444cf8bcd334fea7e79234111b" id="r_af69747444cf8bcd334fea7e79234111b"><td class="memItemLeft" align="right" valign="top">float(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af69747444cf8bcd334fea7e79234111b">callback</a> )(float in) = nullptr</td></tr>
+<tr class="memitem:af69747444cf8bcd334fea7e79234111b" id="r_af69747444cf8bcd334fea7e79234111b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfloat.html">float</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af69747444cf8bcd334fea7e79234111b">callback</a> )(<a class="el" href="classfloat.html">float</a> in) = nullptr</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Provide the volume function as callback method: This is easy to use e.g together with a lamda function! </p>
@@ -141,7 +143,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">CallbackVolumeControl </td>
           <td>(</td>
-          <td class="paramtype">float(*</td>          <td class="paramname"><span class="paramname"><em>cb&#160;</em></span>)(float in)</td><td>)</td>
+          <td class="paramtype"><a class="el" href="classfloat.html">float</a>(*</td>          <td class="paramname"><span class="paramname"><em>cb&#160;</em></span>)(<a class="el" href="classfloat.html">float</a> in)</td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -165,9 +167,9 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual float getVolumeFactor </td>
+          <td class="memname">virtual <a class="el" href="classfloat.html">float</a> getVolumeFactor </td>
           <td>(</td>
-          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>volume</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classfloat.html">float</a></td>          <td class="paramname"><span class="paramname"><em>volume</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -194,9 +196,9 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual float limit </td>
+          <td class="memname">virtual <a class="el" href="classfloat.html">float</a> limit </td>
           <td>(</td>
-          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>in</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classfloat.html">float</a></td>          <td class="paramname"><span class="paramname"><em>in</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -222,7 +224,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">float(* callback) (float in) = nullptr</td>
+          <td class="memname"><a class="el" href="classfloat.html">float</a>(* callback) (<a class="el" href="classfloat.html">float</a> in) = nullptr</td>
         </tr>
       </table>
   </td>

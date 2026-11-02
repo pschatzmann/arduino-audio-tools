@@ -84,16 +84,28 @@ $(function() {
 <div class="contents">
 
 <p><code>#include &lt;<a class="el" href="_mime_detector_8h_source.html">MimeDetector.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for MimeDetector::Check:</div>
+<div class="dyncontent">
+<div class="center"><img src="structaudio__tools_1_1_mime_detector_1_1_check__coll__graph.png" border="0" usemap="#a_mime_detector_1_1_check_coll__map" loading="lazy" alt="Collaboration graph"/></div>
+<map name="a_mime_detector_1_1_check_coll__map" id="a_mime_detector_1_1_check_coll__map">
+<area shape="rect" title=" " alt="" coords="5,128,168,156"/>
+<area shape="rect" title=" " alt="" coords="23,5,72,33"/>
+<area shape="poly" title=" " alt="" coords="44,46,46,76,52,103,71,128,66,128,47,105,41,77,43,51"/>
+<area shape="rect" href="classbool.html" title=" " alt="" coords="100,5,150,33"/>
+<area shape="poly" title=" " alt="" coords="119,47,93,129,88,126,114,49"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ab358bf008b69b9edd3820bbb5245226f" id="r_ab358bf008b69b9edd3820bbb5245226f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab358bf008b69b9edd3820bbb5245226f">Check</a> ()=default</td></tr>
-<tr class="memitem:a4d7c03a2030618db75bc5c4e208952c5" id="r_a4d7c03a2030618db75bc5c4e208952c5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4d7c03a2030618db75bc5c4e208952c5">Check</a> (const char *<a class="el" href="#ae8d4351c34fff5317b75f2dc62ae30df">mime</a>, bool(*<a class="el" href="#ae6fde5ab3c3c333aadc8a7fbf9783422">check</a>)(uint8_t *data, size_t len))</td></tr>
+<tr class="memitem:a4d7c03a2030618db75bc5c4e208952c5" id="r_a4d7c03a2030618db75bc5c4e208952c5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4d7c03a2030618db75bc5c4e208952c5">Check</a> (const char *<a class="el" href="#ae8d4351c34fff5317b75f2dc62ae30df">mime</a>, <a class="el" href="classbool.html">bool</a>(*<a class="el" href="#ae6fde5ab3c3c333aadc8a7fbf9783422">check</a>)(<a class="el" href="classuint8__t.html">uint8_t</a> *data, <a class="el" href="classsize__t.html">size_t</a> len))</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:ae6fde5ab3c3c333aadc8a7fbf9783422" id="r_ae6fde5ab3c3c333aadc8a7fbf9783422"><td class="memItemLeft" align="right" valign="top">bool(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae6fde5ab3c3c333aadc8a7fbf9783422">check</a> )(uint8_t *data, size_t len) = nullptr</td></tr>
-<tr class="memitem:a407c3efba665d276a38229f905bef352" id="r_a407c3efba665d276a38229f905bef352"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a407c3efba665d276a38229f905bef352">is_active</a> = true</td></tr>
+<tr class="memitem:ae6fde5ab3c3c333aadc8a7fbf9783422" id="r_ae6fde5ab3c3c333aadc8a7fbf9783422"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae6fde5ab3c3c333aadc8a7fbf9783422">check</a> )(<a class="el" href="classuint8__t.html">uint8_t</a> *data, <a class="el" href="classsize__t.html">size_t</a> len) = nullptr</td></tr>
+<tr class="memitem:a407c3efba665d276a38229f905bef352" id="r_a407c3efba665d276a38229f905bef352"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a407c3efba665d276a38229f905bef352">is_active</a> = true</td></tr>
 <tr class="memitem:ae8d4351c34fff5317b75f2dc62ae30df" id="r_ae8d4351c34fff5317b75f2dc62ae30df"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae8d4351c34fff5317b75f2dc62ae30df">mime</a> = nullptr</td></tr>
 </table>
 <a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -114,7 +126,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool(*</td>          <td class="paramname"><span class="paramname"><em>check&#160;</em></span>)(uint8_t *data, size_t len)&#160;)</td>
+          <td class="paramtype"><a class="el" href="classbool.html">bool</a>(*</td>          <td class="paramname"><span class="paramname"><em>check&#160;</em></span>)(<a class="el" href="classuint8__t.html">uint8_t</a> *data, <a class="el" href="classsize__t.html">size_t</a> len)&#160;)</td>
         </tr>
       </table>
   </td>
@@ -159,7 +171,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool(* check) (uint8_t *data, size_t len) = nullptr</td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a>(* check) (<a class="el" href="classuint8__t.html">uint8_t</a> *data, <a class="el" href="classsize__t.html">size_t</a> len) = nullptr</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -173,7 +185,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool is_active = true</td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> is_active = true</td>
         </tr>
       </table>
 </div><div class="memdoc">

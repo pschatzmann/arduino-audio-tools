@@ -1,9 +1,21 @@
 <map id="FFTEqualizerConfig" name="FFTEqualizerConfig">
-<area shape="rect" id="Node000001" title="Equalizer FFT Effect Configuration." alt="" coords="38,183,184,211"/>
-<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_f_f_t_effect_config.html" title="Common configuration for FFT effects." alt="" coords="50,106,172,134"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="113,147,113,184,109,182,109,151"/>
-<area shape="rect" id="Node000003" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="5,5,89,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="64,43,105,105,100,106,63,48"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_window_function.html" title="FFT Window Function." alt="" coords="112,5,240,33"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="161,44,122,107,118,104,158,48"/>
+<area shape="rect" id="Node000001" title="Equalizer FFT Effect Configuration." alt="" coords="278,370,423,398"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_f_f_t_effect_config.html" title="Common configuration for FFT effects." alt="" coords="240,293,362,321"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="319,332,345,371,339,369,317,336"/>
+<area shape="rect" id="Node000003" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="468,183,551,210"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="497,222,478,250,453,272,409,292,363,303,362,298,407,287,450,267,474,246,492,225"/>
+<area shape="rect" id="Node000004" href="$classuint32__t.html" title=" " alt="" coords="649,5,724,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="689,47,683,100,673,127,656,151,633,169,606,182,552,195,551,190,604,177,630,165,653,147,668,125,677,99,685,51"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="407,5,481,33"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="439,46,436,97,440,123,448,148,463,166,484,182,478,182,459,170,444,150,434,124,431,97,436,51"/>
+<area shape="rect" id="Node000006" href="$classuint8__t.html" title=" " alt="" coords="508,5,574,33"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="538,47,514,184,509,181,534,50"/>
+<area shape="rect" id="Node000007" href="$classint.html" title=" " alt="" coords="294,5,332,33"/>
+<area shape="poly" id="edge10_Node000001_Node000007" title=" " alt="" coords="325,45,330,56,352,121,365,173,372,225,377,293,377,321,369,348,359,372,355,368,364,347,372,321,372,293,367,226,359,174,346,122,325,58,324,50"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="314,47,304,293,299,292,310,50"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_window_function.html" title="FFT Window Function." alt="" coords="110,183,239,210"/>
+<area shape="poly" id="edge9_Node000008_Node000007" title=" " alt="" coords="276,22,232,32,209,43,191,59,175,89,169,124,170,157,174,183,169,182,165,157,164,123,170,87,186,55,206,38,230,27,281,19"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="169,223,171,248,179,268,191,280,206,289,243,302,237,303,204,294,188,284,174,271,166,249,167,228"/>
+<area shape="rect" id="Node000009" href="$classfloat.html" title=" " alt="" coords="5,5,56,33"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="23,51,22,98,27,124,38,147,53,162,70,173,112,188,107,191,68,178,49,166,34,151,22,126,17,98,24,45"/>
 </map>

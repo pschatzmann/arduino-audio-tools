@@ -1,5 +1,7 @@
 <map id="CallbackVolumeControl" name="CallbackVolumeControl">
-<area shape="rect" id="Node000001" title="Provide the volume function as callback method: This is easy to use e.g together with a lamda functio..." alt="" coords="5,81,179,109"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_volume_control.html" title="Abstract class for handling of the linear input volume to determine the multiplication factor which s..." alt="" coords="33,5,151,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="94,47,94,82,90,80,90,51"/>
+<area shape="rect" id="Node000001" title="Provide the volume function as callback method: This is easy to use e.g together with a lamda functio..." alt="" coords="31,106,204,134"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_volume_control.html" title="Abstract class for handling of the linear input volume to determine the multiplication factor which s..." alt="" coords="5,5,123,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="80,44,113,105,108,106,76,49"/>
+<area shape="rect" id="Node000003" href="$classfloat.html" title=" " alt="" coords="147,5,197,33"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="160,45,127,107,123,104,155,47"/>
 </map>

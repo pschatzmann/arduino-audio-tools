@@ -82,21 +82,31 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Biquad coefficients, always computed in float regardless of the filter's sample type T. Intermediate values like the angular cutoff frequency w0 range up to PI (~3.14) at Nyquist, which overflows bounded fixed-point sample types like <a class="el" href="classaudio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a> (range ~[-2,2)); only the final, range-safe coefficients (typically within [-2,2) for a stable filter) get cast into T when assigned to a BiQuadDF1/BiQuadDF2 instance.  
+<p>Biquad coefficients, always computed in float regardless of the filter's sample type <a class="el" href="class_t.html">T</a>. Intermediate values like the angular cutoff frequency w0 range up to PI (~3.14) at Nyquist, which overflows bounded fixed-point sample types like <a class="el" href="classaudio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a> (range ~[-2,2)); only the final, range-safe coefficients (typically within [-2,2) for a stable filter) get cast into <a class="el" href="class_t.html">T</a> when assigned to a BiQuadDF1/BiQuadDF2 instance.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_filter_8h_source.html">Filter.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for BiQuadCoeffs:</div>
+<div class="dyncontent">
+<div class="center"><img src="structaudio__tools_1_1_bi_quad_coeffs__coll__graph.png" border="0" usemap="#a_bi_quad_coeffs_coll__map" loading="lazy" alt="Collaboration graph"/></div>
+<map name="a_bi_quad_coeffs_coll__map" id="a_bi_quad_coeffs_coll__map">
+<area shape="rect" title="Biquad coefficients, always computed in float regardless of the filter&#39;s sample type T...." alt="" coords="5,195,115,223"/>
+<area shape="rect" href="classfloat.html" title=" " alt="" coords="35,5,85,33"/>
+<area shape="poly" title=" " alt="" coords="63,48,63,195,57,195,57,49"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a7344d9e7d9fe11da9f06f72738bb1a51" id="r_a7344d9e7d9fe11da9f06f72738bb1a51"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7344d9e7d9fe11da9f06f72738bb1a51">a_1</a></td></tr>
-<tr class="memitem:a1885e88ab16f5db78c18706a96a0f058" id="r_a1885e88ab16f5db78c18706a96a0f058"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1885e88ab16f5db78c18706a96a0f058">a_2</a></td></tr>
-<tr class="memitem:a930a99607d3a4f869c6007919461968e" id="r_a930a99607d3a4f869c6007919461968e"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a930a99607d3a4f869c6007919461968e">b_0</a></td></tr>
-<tr class="memitem:a79fa1ef2540ce0054eaca537f6332caa" id="r_a79fa1ef2540ce0054eaca537f6332caa"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a79fa1ef2540ce0054eaca537f6332caa">b_1</a></td></tr>
-<tr class="memitem:ac811a898f3e4b103aef88e72c74ecab2" id="r_ac811a898f3e4b103aef88e72c74ecab2"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac811a898f3e4b103aef88e72c74ecab2">b_2</a></td></tr>
+<tr class="memitem:a7344d9e7d9fe11da9f06f72738bb1a51" id="r_a7344d9e7d9fe11da9f06f72738bb1a51"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7344d9e7d9fe11da9f06f72738bb1a51">a_1</a></td></tr>
+<tr class="memitem:a1885e88ab16f5db78c18706a96a0f058" id="r_a1885e88ab16f5db78c18706a96a0f058"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1885e88ab16f5db78c18706a96a0f058">a_2</a></td></tr>
+<tr class="memitem:a930a99607d3a4f869c6007919461968e" id="r_a930a99607d3a4f869c6007919461968e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a930a99607d3a4f869c6007919461968e">b_0</a></td></tr>
+<tr class="memitem:a79fa1ef2540ce0054eaca537f6332caa" id="r_a79fa1ef2540ce0054eaca537f6332caa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a79fa1ef2540ce0054eaca537f6332caa">b_1</a></td></tr>
+<tr class="memitem:ac811a898f3e4b103aef88e72c74ecab2" id="r_ac811a898f3e4b103aef88e72c74ecab2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac811a898f3e4b103aef88e72c74ecab2">b_2</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Biquad coefficients, always computed in float regardless of the filter's sample type T. Intermediate values like the angular cutoff frequency w0 range up to PI (~3.14) at Nyquist, which overflows bounded fixed-point sample types like <a class="el" href="classaudio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a> (range ~[-2,2)); only the final, range-safe coefficients (typically within [-2,2) for a stable filter) get cast into T when assigned to a BiQuadDF1/BiQuadDF2 instance. </p>
+<div class="textblock"><p>Biquad coefficients, always computed in float regardless of the filter's sample type <a class="el" href="class_t.html">T</a>. Intermediate values like the angular cutoff frequency w0 range up to PI (~3.14) at Nyquist, which overflows bounded fixed-point sample types like <a class="el" href="classaudio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a> (range ~[-2,2)); only the final, range-safe coefficients (typically within [-2,2) for a stable filter) get cast into <a class="el" href="class_t.html">T</a> when assigned to a BiQuadDF1/BiQuadDF2 instance. </p>
 </div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
 <a id="a7344d9e7d9fe11da9f06f72738bb1a51" name="a7344d9e7d9fe11da9f06f72738bb1a51"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7344d9e7d9fe11da9f06f72738bb1a51">&#9670;&#160;</a></span>a_1</h2>
@@ -105,7 +115,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float a_1</td>
+          <td class="memname"><a class="el" href="classfloat.html">float</a> a_1</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -119,7 +129,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float a_2</td>
+          <td class="memname"><a class="el" href="classfloat.html">float</a> a_2</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -133,7 +143,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float b_0</td>
+          <td class="memname"><a class="el" href="classfloat.html">float</a> b_0</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -147,7 +157,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float b_1</td>
+          <td class="memname"><a class="el" href="classfloat.html">float</a> b_1</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -161,7 +171,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float b_2</td>
+          <td class="memname"><a class="el" href="classfloat.html">float</a> b_2</td>
         </tr>
       </table>
 </div><div class="memdoc">

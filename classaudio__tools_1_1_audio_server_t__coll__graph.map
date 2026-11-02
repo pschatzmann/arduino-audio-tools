@@ -1,21 +1,33 @@
 <map id="AudioServerT&lt; Client, Server &gt;" name="AudioServerT&lt; Client, Server &gt;">
-<area shape="rect" id="Node000001" title="A minimal, single&#45;client HTTP server that streams audio (or any other data) to a browser or media pla..." alt="" coords="87,307,253,352"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_client.html" title=" " alt="" coords="108,207,168,234"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="127,247,126,266,128,282,145,307,139,306,123,284,120,266,124,251"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="69,106,137,134"/>
-<area shape="poly" id="edge7_Node000001_Node000003" title=" " alt="" coords="90,145,77,189,75,212,79,233,90,255,105,274,140,307,134,307,101,278,85,258,74,235,70,212,72,188,88,150"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="106,146,130,206,124,206,104,151"/>
-<area shape="poly" id="edge5_Node000002_Node000003" title=" " alt="" coords="122,145,142,206,137,206,120,150"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="78,5,129,33"/>
-<area shape="poly" id="edge6_Node000001_Node000004" title=" " alt="" coords="74,46,50,72,25,106,10,143,8,162,12,182,25,214,40,238,86,281,123,306,118,308,83,285,36,241,20,217,7,183,3,163,5,142,20,103,46,69,76,41"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="96,45,100,106,94,105,95,51"/>
-<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="112,46,112,106,107,105,111,51"/>
-<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_chunked_print.html" title="Wraps a Print target and applies HTTP chunked transfer encoding framing (chunk&#45;size in hex + CRLF + d..." alt="" coords="162,106,269,134"/>
-<area shape="poly" id="edge11_Node000007_Node000004" title=" " alt="" coords="129,40,203,104,198,106,129,46"/>
-<area shape="poly" id="edge12_Node000007_Node000004" title=" " alt="" coords="143,32,180,55,200,80,213,106,208,106,195,83,176,59,144,37"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_stream_copy_t.html" title=" " alt="" coords="338,207,522,234"/>
-<area shape="poly" id="edge8_Node000001_Node000005" title=" " alt="" coords="387,240,224,309,222,304,382,241"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="" coords="546,207,663,234"/>
-<area shape="poly" id="edge9_Node000001_Node000006" title=" " alt="" coords="551,239,392,286,253,316,252,311,391,281,546,240"/>
-<area shape="poly" id="edge10_Node000001_Node000007" title=" " alt="" coords="217,147,214,212,209,248,199,284,187,309,183,305,194,282,203,247,209,211,214,151"/>
+<area shape="rect" id="Node000001" title="A minimal, single&#45;client HTTP server that streams audio (or any other data) to a browser or media pla..." alt="" coords="870,317,1035,361"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="579,24,642,51"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="657,29,701,27,751,30,802,43,826,53,847,68,875,94,897,126,915,160,928,196,945,264,952,317,947,315,940,265,923,197,910,162,893,128,871,98,844,72,823,58,800,48,750,35,701,32,659,34"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_client.html" title=" " alt="" coords="581,198,640,226"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="655,211,746,220,798,232,847,250,895,280,933,317,928,316,892,285,845,255,796,237,745,226,656,216"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="321,184,389,211"/>
+<area shape="poly" id="edge12_Node000001_Node000004" title=" " alt="" coords="403,178,432,171,463,169,494,171,549,170,596,164,677,152,716,150,755,153,799,165,847,187,882,214,910,249,931,285,945,317,940,315,926,287,906,252,879,218,844,192,797,170,755,159,715,155,678,157,596,170,549,175,494,176,463,174,433,176,405,182"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="404,205,496,212,583,216,578,218,496,217,405,210"/>
+<area shape="poly" id="edge7_Node000003_Node000004" title=" " alt="" coords="403,191,496,194,583,204,578,206,496,199,405,196"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="158,184,209,211"/>
+<area shape="poly" id="edge11_Node000001_Node000005" title=" " alt="" coords="214,173,232,164,359,123,413,112,463,107,569,108,703,120,779,123,811,130,847,150,886,188,915,234,935,279,948,317,943,315,930,281,910,236,882,192,844,154,809,135,778,128,703,126,569,113,463,112,413,118,361,129,234,169,218,177"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="224,203,322,203,318,207,226,208"/>
+<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="224,187,322,189,318,192,226,192"/>
+<area shape="rect" id="Node000013" href="$classaudio__tools_1_1_chunked_print.html" title="Wraps a Print target and applies HTTP chunked transfer encoding framing (chunk&#45;size in hex + CRLF + d..." alt="" coords="301,261,408,289"/>
+<area shape="poly" id="edge17_Node000013_Node000005" title=" " alt="" coords="223,213,324,259,320,262,224,218"/>
+<area shape="poly" id="edge18_Node000013_Node000005" title=" " alt="" coords="196,223,213,248,234,267,267,278,303,281,298,284,266,283,232,272,209,251,196,228"/>
+<area shape="rect" id="Node000006" href="$classint.html" title=" " alt="" coords="5,184,44,211"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="58,195,159,196,156,200,61,200"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="581,325,640,353"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="655,336,872,338,867,340,656,342"/>
+<area shape="rect" id="Node000008" href="$classsize__t.html" title=" " alt="" coords="581,404,640,431"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="655,415,744,408,795,401,845,389,880,376,911,363,916,361,882,381,847,394,796,406,745,414,656,420"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="586,460,635,487"/>
+<area shape="poly" id="edge10_Node000001_Node000009" title=" " alt="" coords="650,473,693,473,742,469,795,458,845,440,872,423,896,403,933,363,937,361,900,406,875,428,847,445,796,464,743,474,693,478,651,478"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1_stream_copy_t.html" title=" " alt="" coords="518,516,703,543"/>
+<area shape="poly" id="edge13_Node000001_Node000010" title=" " alt="" coords="718,534,783,525,815,515,844,500,880,470,908,432,928,393,942,363,946,360,933,395,912,435,884,474,847,505,817,520,785,530,719,539"/>
+<area shape="rect" id="Node000011" href="$classaudio__tools_1_1audio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="" coords="552,572,669,599"/>
+<area shape="poly" id="edge14_Node000001_Node000011" title=" " alt="" coords="685,594,724,596,766,592,807,582,844,563,868,543,888,518,918,462,936,406,946,364,950,360,941,407,923,464,892,521,872,546,847,568,809,587,767,597,724,601,685,600"/>
+<area shape="rect" id="Node000012" href="$classbool.html" title=" " alt="" coords="586,628,635,655"/>
+<area shape="poly" id="edge15_Node000001_Node000012" title=" " alt="" coords="651,649,694,655,745,657,798,648,822,639,844,626,873,598,896,565,914,529,927,491,943,418,949,364,952,360,948,418,933,492,919,531,901,568,877,602,847,630,824,644,799,653,746,662,694,660,650,654"/>
+<area shape="poly" id="edge16_Node000001_Node000013" title=" " alt="" coords="423,266,509,261,616,260,732,268,846,287,881,299,915,316,909,316,879,304,845,292,731,273,615,266,510,266,425,271"/>
 </map>

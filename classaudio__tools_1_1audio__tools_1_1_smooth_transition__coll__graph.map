@@ -1,6 +1,12 @@
 <map id="SmoothTransition&lt; T &gt;" name="SmoothTransition&lt; T &gt;">
-<area shape="rect" id="Node000001" title="Changes the samples at the beginning or at the end to slowly ramp up the volume." alt="" coords="5,81,178,109"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="" coords="33,5,150,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="85,47,87,81,82,80,81,50"/>
-<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="102,47,101,82,96,79,98,50"/>
+<area shape="rect" id="Node000001" title="Changes the samples at the beginning or at the end to slowly ramp up the volume." alt="" coords="72,151,245,178"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="" coords="5,5,123,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="75,45,111,100,147,150,142,150,106,103,73,49"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="89,43,128,99,158,150,153,150,124,102,86,48"/>
+<area shape="rect" id="Node000003" href="$classbool.html" title=" " alt="" coords="147,5,197,33"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="164,46,163,57,159,109,160,151,155,149,154,109,158,57,161,50"/>
+<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="281,5,319,33"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="301,47,294,90,286,110,273,129,255,143,234,153,232,148,252,138,269,125,281,108,289,88,297,51"/>
+<area shape="rect" id="Node000005" href="$classfloat.html" title=" " alt="" coords="372,5,422,33"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="399,47,393,90,384,111,370,129,349,140,319,149,246,160,245,155,318,144,347,135,366,125,379,108,388,89,395,51"/>
 </map>

@@ -1,7 +1,14 @@
 <map id="MultiChannelResampler&lt; TInterpolator &gt;" name="MultiChannelResampler&lt; TInterpolator &gt;">
-<area shape="rect" id="Node000001" title="Multi&#45;channel resampler that applies a BaseInterpolator&#45;derived algorithm to each channel." alt="" coords="5,207,183,251"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="6,106,182,134"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,148,97,207,91,205,92,151"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="54,5,134,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="95,46,97,106,91,105,93,51"/>
+<area shape="rect" id="Node000001" title="Multi&#45;channel resampler that applies a BaseInterpolator&#45;derived algorithm to each channel." alt="" coords="5,229,183,274"/>
+<area shape="rect" id="Node000002" href="$classint.html" title=" " alt="" coords="84,5,123,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,46,88,129,88,156,94,229,89,228,82,156,82,128,96,50"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="170,128,346,156"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="111,45,125,76,145,102,165,116,189,127,184,128,162,120,142,106,121,79,110,50"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="228,165,129,231,126,226,222,165"/>
+<area shape="rect" id="Node000004" href="$class_t_interpolator_01_5.html" title=" " alt="" coords="148,5,264,33"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="216,45,239,103,252,128,247,128,234,105,213,50"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="288,5,367,33"/>
+<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="319,46,291,106,272,130,268,126,286,103,315,49"/>
+<area shape="rect" id="Node000006" href="$classbool.html" title=" " alt="" coords="404,5,453,33"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="427,46,419,79,400,106,375,123,348,134,346,129,373,118,396,102,414,77,423,50"/>
 </map>

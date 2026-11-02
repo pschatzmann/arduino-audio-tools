@@ -1,7 +1,25 @@
 <map id="AudioFFTConfig" name="AudioFFTConfig">
-<area shape="rect" id="Node000001" title="Configuration for AudioFFT. If there are more then 1 channel the channel_used is defining which chann..." alt="" coords="50,151,172,178"/>
-<area shape="rect" id="Node000002" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="5,5,89,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="61,46,108,150,102,151,57,49"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_window_function.html" title="FFT Window Function." alt="" coords="112,5,240,33"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="167,47,119,151,115,149,161,48"/>
+<area shape="rect" id="Node000001" title="Configuration for AudioFFT. If there are more then 1 channel the channel_used is defining which chann..." alt="" coords="666,338,787,366"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="170,183,254,210"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="237,219,298,268,336,292,377,311,431,324,508,334,668,348,663,348,507,339,430,329,375,317,333,297,295,272,235,224"/>
+<area shape="rect" id="Node000003" href="$classuint32__t.html" title=" " alt="" coords="5,5,80,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="38,46,42,99,49,125,62,147,85,167,113,180,142,188,172,193,167,195,141,193,111,185,82,171,58,151,44,127,37,100,38,51"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="125,5,200,33"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="158,46,157,97,160,123,167,148,179,166,195,182,190,183,175,169,162,150,154,124,151,97,156,51"/>
+<area shape="rect" id="Node000005" href="$classuint8__t.html" title=" " alt="" coords="293,5,360,33"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="364,40,378,56,389,79,394,100,392,140,391,179,397,198,409,219,435,247,465,270,498,290,533,306,603,329,668,344,663,344,602,334,531,311,496,295,462,275,431,250,405,222,392,200,386,179,386,140,388,101,384,80,374,58,363,45"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="278,42,263,59,249,81,244,101,240,123,233,150,220,184,215,181,228,148,235,122,238,100,244,79,259,55,282,39"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="516,174,679,219"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="606,232,622,274,634,294,648,312,664,325,685,338,680,337,661,330,644,316,629,297,618,276,603,237"/>
+<area shape="rect" id="Node000007" href="$classint.html" title=" " alt="" coords="729,5,767,33"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="747,46,748,57,730,339,725,336,743,57,744,50"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_window_function.html" title="FFT Window Function." alt="" coords="800,183,928,210"/>
+<area shape="poly" id="edge10_Node000008_Node000007" title=" " alt="" coords="746,46,750,98,757,124,769,147,790,167,817,182,812,182,787,171,765,151,752,126,745,99,743,51"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="843,220,821,246,739,340,736,335,818,243,839,223"/>
+<area shape="rect" id="Node000009" href="$classfloat.html" title=" " alt="" coords="883,5,933,33"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="904,47,881,150,870,184,866,181,876,148,900,50"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="952,183,1042,210"/>
+<area shape="poly" id="edge11_Node000001_Node000010" title=" " alt="" coords="994,224,983,278,974,301,964,316,934,331,889,341,788,351,788,346,888,336,932,326,961,312,970,298,978,276,990,228"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="1071,183,1131,210"/>
+<area shape="poly" id="edge12_Node000001_Node000011" title=" " alt="" coords="1104,224,1099,273,1089,296,1073,316,1058,323,1032,329,957,339,788,350,788,345,957,333,1031,324,1057,318,1070,312,1085,294,1094,271,1101,228"/>
 </map>

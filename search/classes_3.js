@@ -42,5 +42,6 @@ var searchData=
   ['dynarray_39',['DynArray',['../classffft_1_1_dyn_array.html',1,'ffft']]],
   ['dynarray_3c_20datatype_20_3e_40',['DynArray&lt; DataType &gt;',['../classffft_1_1_dyn_array.html',1,'ffft']]],
   ['dynarray_3c_20ffft_3a_3aoscsincos_3c_20datatype_20_3e_20_3e_41',['DynArray&lt; ffft::OscSinCos&lt; DataType &gt; &gt;',['../classffft_1_1_dyn_array.html',1,'ffft']]],
-  ['dynarray_3c_20long_20_3e_42',['DynArray&lt; long &gt;',['../classffft_1_1_dyn_array.html',1,'ffft']]]
+  ['dynarray_3c_20float_20_3e_42',['DynArray&lt; float &gt;',['../classffft_1_1_dyn_array.html',1,'ffft']]],
+  ['dynarray_3c_20long_20_3e_43',['DynArray&lt; long &gt;',['../classffft_1_1_dyn_array.html',1,'ffft']]]
 ];

@@ -1,3 +1,11 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classaudio__tools_1_1_stack.html" title="LIFO Stack which is based on a List." alt="" coords="5,5,101,33"/>
+<area shape="rect" id="Node000000" href="$classaudio__tools_1_1_sample_table_store.html" title="Sequential&#45;access storage for one MP4 sample table (e.g. stsz sample sizes, stco chunk offsets,..." alt="" coords="5,100,182,128"/>
+<area shape="rect" id="Node000001" href="$classaudio__tools_1_1_chunked_sample_table_store.html" title="RAM&#45;backed like RamSampleTableStore, but grows by allocating additional fixed&#45;size chunks instead of ..." alt="" coords="259,5,453,50"/>
+<area shape="poly" id="edge901_Node000000_Node000001" title=" " alt="" coords="142,92,229,60,270,49,265,52,231,65,145,97"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_ram_sample_table_store.html" title="Keeps every entry in RAM (a plain Vector&lt;T&gt;) &#45; the simplest and fastest option, but scales with the t..." alt="" coords="253,74,459,102"/>
+<area shape="poly" id="edge902_Node000000_Node000002" title=" " alt="" coords="196,101,255,97,250,99,198,106"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_source_seek_sample_table_store.html" title="Discards every value right after appending it, keeping only the file offset of the first entry &#45; get(..." alt="" coords="230,126,482,154"/>
+<area shape="poly" id="edge903_Node000000_Node000003" title=" " alt="" coords="197,122,232,127,227,128,197,127"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_spool_file_sample_table_store.html" title="Writes every entry to a caller&#45;provided scratch file as it&#39;s appended, instead of keeping it in RAM &#45;..." alt="" coords="238,178,474,206"/>
+<area shape="poly" id="edge904_Node000000_Node000004" title=" " alt="" coords="143,132,230,162,281,177,275,177,229,168,142,137"/>
 </map>

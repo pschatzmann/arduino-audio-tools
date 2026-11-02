@@ -1,5 +1,18 @@
 <map id="AnalogConfigESP32" name="AnalogConfigESP32">
-<area shape="rect" id="Node000001" title="ESP32 specific configuration for i2s input via adc. The default input pin is GPIO34...." alt="" coords="5,81,153,109"/>
-<area shape="rect" id="Node000002" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="37,5,121,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="81,47,82,81,76,80,77,51"/>
+<area shape="rect" id="Node000001" title="ESP32 specific configuration for i2s input via adc. The default input pin is GPIO34...." alt="" coords="165,341,312,368"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="122,106,206,134"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="175,147,237,340,232,340,171,150"/>
+<area shape="rect" id="Node000003" href="$classuint32__t.html" title=" " alt="" coords="5,5,80,33"/>
+<area shape="poly" id="edge5_Node000001_Node000003" title=" " alt="" coords="41,46,45,89,54,133,76,191,98,234,128,272,172,315,209,340,204,340,169,319,124,275,94,236,71,193,49,134,40,90,41,51"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="53,45,66,64,79,80,100,94,124,106,119,108,97,99,76,84,61,67,53,50"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="147,5,221,33"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="179,46,169,106,164,105,177,51"/>
+<area shape="rect" id="Node000005" href="$classuint8__t.html" title=" " alt="" coords="248,5,314,33"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="273,45,264,67,250,84,229,98,208,109,204,104,227,94,246,80,259,64,270,49"/>
+<area shape="rect" id="Node000006" href="$classint.html" title=" " alt="" coords="230,106,268,134"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="243,147,243,158,238,263,240,341,235,339,233,263,238,157,241,151"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="327,106,417,134"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="373,147,367,242,358,287,345,318,329,333,310,343,308,338,326,328,340,315,353,286,361,241,369,151"/>
+<area shape="rect" id="Node000008" href="$classbool.html" title=" " alt="" coords="463,106,512,134"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="494,147,499,187,497,232,486,278,475,300,460,319,436,332,400,342,313,353,312,347,399,337,434,327,457,315,471,297,481,277,492,232,493,187,491,151"/>
 </map>

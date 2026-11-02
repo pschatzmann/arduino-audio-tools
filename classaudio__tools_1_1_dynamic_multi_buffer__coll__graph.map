@@ -1,9 +1,17 @@
 <map id="DynamicMultiBuffer&lt; T, BufferType &gt;" name="DynamicMultiBuffer&lt; T, BufferType &gt;">
-<area shape="rect" id="Node000001" title="Auto&#45;expanding buffer composed of multiple buffer instances." alt="" coords="16,224,168,268"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="5,114,136,142"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="78,156,91,223,85,223,74,159"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="160,106,306,151"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="198,160,120,225,117,221,193,161"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="194,5,273,33"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="235,46,236,106,231,104,232,51"/>
+<area shape="rect" id="Node000001" title="Auto&#45;expanding buffer composed of multiple buffer instances." alt="" coords="139,313,290,358"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="5,137,136,164"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="92,175,200,312,195,314,89,179"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="160,128,306,173"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="220,186,219,197,213,260,215,314,210,311,208,260,214,197,217,190"/>
+<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="73,5,111,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="92,46,100,76,114,103,132,114,162,127,157,129,129,119,110,106,95,78,92,51"/>
+<area shape="rect" id="Node000005" href="$class_t.html" title=" " alt="" coords="173,5,211,33"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="188,46,190,76,196,103,211,128,206,128,191,105,185,76,187,51"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="235,5,314,33"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="267,45,242,129,238,127,264,50"/>
+<area shape="rect" id="Node000007" href="$classbool.html" title=" " alt="" coords="360,5,410,33"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="380,46,370,79,350,106,330,121,308,133,305,128,327,117,346,102,365,76,377,50"/>
+<area shape="rect" id="Node000008" href="$classsize__t.html" title=" " alt="" coords="349,137,408,164"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="382,178,377,235,368,265,351,291,324,312,291,326,290,321,321,308,347,287,363,262,372,234,378,182"/>
 </map>

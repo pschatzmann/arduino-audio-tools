@@ -1,15 +1,38 @@
 <map id="AnalogDriverESP32" name="AnalogDriverESP32">
-<area shape="rect" id="Node000001" title="Please use AnalogAudioStream: A very fast ADC and DAC using the ESP32 I2S interface." alt="" coords="168,207,314,234"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_analog_driver_base.html" title=" " alt="" coords="5,106,144,134"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="111,139,221,205,217,207,109,144"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_analog_config_e_s_p32.html" title="ESP32 specific configuration for i2s input via adc. The default input pin is GPIO34...." alt="" coords="168,106,315,134"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="243,148,243,207,239,205,239,151"/>
-<area shape="rect" id="Node000004" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="200,5,283,33"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="243,47,244,106,239,104,240,51"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_converter_auto_center.html" title="Makes sure that the avg of the signal is set to 0." alt="" coords="339,106,498,134"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="391,142,325,185,275,209,273,204,323,180,385,144"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="" coords="360,5,477,33"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="412,46,414,107,410,104,409,50"/>
-<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="428,46,427,107,423,104,425,50"/>
-<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="441,43,448,56,450,70,448,83,433,107,429,103,443,81,445,70,443,58,439,48"/>
+<area shape="rect" id="Node000001" title="Please use AnalogAudioStream: A very fast ADC and DAC using the ESP32 I2S interface." alt="" coords="842,638,989,666"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_analog_driver_base.html" title=" " alt="" coords="557,301,695,329"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="691,332,707,339,770,374,794,394,820,424,857,482,884,543,903,598,913,639,909,637,898,600,879,545,852,484,816,427,790,398,767,378,704,344,691,337"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_analog_config_e_s_p32.html" title="ESP32 specific configuration for i2s input via adc. The default input pin is GPIO34...." alt="" coords="552,353,700,381"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="657,388,734,453,820,536,869,590,906,639,901,637,865,594,816,539,730,457,657,394"/>
+<area shape="rect" id="Node000004" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="260,114,343,142"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="357,114,399,110,444,112,487,123,507,134,525,148,542,171,548,195,546,219,540,243,534,267,532,291,536,315,549,339,564,352,559,353,545,342,530,316,526,291,529,266,535,242,541,218,542,195,537,173,521,151,504,138,485,128,443,117,399,115,360,118"/>
+<area shape="rect" id="Node000005" href="$classuint32__t.html" title=" " alt="" coords="5,56,80,83"/>
+<area shape="poly" id="edge7_Node000003_Node000005" title=" " alt="" coords="93,53,187,35,244,29,304,28,365,34,424,48,478,73,502,90,525,111,535,130,540,158,539,225,537,293,541,320,549,339,564,352,559,353,545,342,536,321,532,293,534,225,534,158,530,132,521,114,499,94,475,77,422,53,364,39,304,33,244,34,188,40,96,57"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="93,86,104,88,187,107,262,121,257,124,186,112,103,93,96,90"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="5,190,80,218"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="94,204,156,199,188,191,217,179,229,167,241,153,265,140,262,145,244,157,233,171,220,183,189,196,157,204,97,209"/>
+<area shape="rect" id="Node000007" href="$classuint8__t.html" title=" " alt="" coords="9,134,76,162"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="90,148,152,148,218,144,261,137,257,141,219,149,152,153,93,153"/>
+<area shape="rect" id="Node000008" href="$classint.html" title=" " alt="" coords="282,590,321,618"/>
+<area shape="poly" id="edge17_Node000001_Node000008" title=" " alt="" coords="336,602,523,611,695,626,844,643,839,644,695,631,523,616,337,608"/>
+<area shape="poly" id="edge8_Node000003_Node000008" title=" " alt="" coords="334,590,444,548,521,514,554,481,581,444,617,383,620,379,586,447,558,484,525,518,446,553,336,595"/>
+<area shape="rect" id="Node000011" href="$classaudio__tools_1_1audio__tools_1_1_converter_auto_center.html" title="Makes sure that the avg of the signal is set to 0." alt="" coords="547,677,705,705"/>
+<area shape="poly" id="edge14_Node000011_Node000008" title=" " alt="" coords="315,630,343,677,362,698,385,715,421,727,451,728,522,714,581,705,576,706,524,719,451,733,420,732,383,719,359,702,339,680,313,635"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="256,166,346,194"/>
+<area shape="poly" id="edge9_Node000003_Node000009" title=" " alt="" coords="361,177,456,183,497,191,525,205,537,221,542,238,539,272,536,306,539,322,549,338,565,352,560,353,545,342,534,324,530,306,534,272,537,239,533,224,521,209,496,196,455,188,363,182"/>
+<area shape="rect" id="Node000010" href="$classbool.html" title=" " alt="" coords="277,538,326,566"/>
+<area shape="poly" id="edge18_Node000001_Node000010" title=" " alt="" coords="341,550,501,558,603,568,706,583,763,596,819,615,879,638,873,638,817,620,762,602,705,588,603,573,501,564,342,556"/>
+<area shape="poly" id="edge10_Node000003_Node000010" title=" " alt="" coords="307,522,316,492,331,456,353,422,383,394,412,382,455,374,554,367,550,370,456,379,414,387,385,398,357,425,336,459,321,493,311,525"/>
+<area shape="poly" id="edge15_Node000011_Node000010" title=" " alt="" coords="340,565,362,577,386,598,432,622,482,644,573,676,568,677,480,649,430,627,382,602,358,581,340,570"/>
+<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="720,682,818,671,856,666,851,667,819,676,721,687"/>
+<area shape="rect" id="Node000012" href="$classaudio__tools_1_1audio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="" coords="243,817,360,845"/>
+<area shape="poly" id="edge12_Node000011_Node000012" title=" " alt="" coords="356,845,396,848,440,845,483,833,521,810,529,801,533,792,533,772,534,750,537,739,545,728,568,712,591,706,596,705,570,717,549,731,542,741,539,751,539,772,538,793,534,804,525,814,486,838,441,850,396,853,356,850"/>
+<area shape="poly" id="edge13_Node000011_Node000012" title=" " alt="" coords="375,827,412,825,451,819,489,807,521,786,529,777,533,768,533,748,534,726,537,715,545,704,545,706,550,704,549,707,542,717,539,727,539,748,538,769,534,780,525,790,491,812,452,824,413,830,375,832"/>
+<area shape="poly" id="edge16_Node000011_Node000012" title=" " alt="" coords="360,809,383,802,424,792,457,788,488,780,521,759,529,749,533,739,536,727,545,716,565,706,569,704,549,720,541,730,538,740,534,752,525,763,490,785,458,793,425,798,385,807,361,814"/>
+<area shape="rect" id="Node000013" href="$classsize__t.html" title=" " alt="" coords="596,729,656,757"/>
+<area shape="poly" id="edge19_Node000001_Node000013" title=" " alt="" coords="671,739,741,731,780,724,817,712,861,690,895,668,900,666,864,694,819,717,781,729,742,737,672,744"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="582,781,670,809"/>
+<area shape="poly" id="edge20_Node000001_Node000014" title=" " alt="" coords="686,794,751,787,785,778,817,764,846,742,871,715,904,668,909,665,875,719,850,746,820,769,787,783,752,792,686,799"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="565,837,687,865"/>
+<area shape="poly" id="edge21_Node000001_Node000015" title=" " alt="" coords="703,852,762,844,790,835,817,820,836,804,853,785,880,741,898,699,909,668,913,665,903,701,885,744,857,788,840,808,820,825,793,839,763,849,703,857"/>
 </map>

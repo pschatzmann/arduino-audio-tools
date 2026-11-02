@@ -1,7 +1,9 @@
 <map id="FileSpoolStorage&lt; FileT &gt;" name="FileSpoolStorage&lt; FileT &gt;">
-<area shape="rect" id="Node000001" title="Adapts any concrete file/stream type to SpoolStorage &#45; same role as FileSeekableSource,..." alt="" coords="5,157,197,184"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_spool_storage.html" title="Minimal seek+read+write interface a SpoolFileSampleTableStore needs from its scratch file &#45; SeekableS..." alt="" coords="47,81,155,109"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="103,123,103,157,99,155,99,126"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_seekable_source.html" title="Minimal seek+read interface a SourceSeekSampleTableStore needs from &quot;the original MP4 source&quot; &#45; kept ..." alt="" coords="39,5,163,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="102,46,104,81,98,80,100,51"/>
+<area shape="rect" id="Node000001" title="Adapts any concrete file/stream type to SpoolStorage &#45; same role as FileSeekableSource,..." alt="" coords="53,183,244,211"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_spool_storage.html" title="Minimal seek+read+write interface a SpoolFileSampleTableStore needs from its scratch file &#45; SeekableS..." alt="" coords="14,82,121,110"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="89,119,141,182,135,183,86,124"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_seekable_source.html" title="Minimal seek+read interface a SourceSeekSampleTableStore needs from &quot;the original MP4 source&quot; &#45; kept ..." alt="" coords="5,5,130,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="68,46,70,82,65,82,67,51"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="145,82,208,110"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="171,123,155,184,150,181,167,126"/>
 </map>

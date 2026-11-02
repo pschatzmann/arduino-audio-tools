@@ -1,15 +1,56 @@
 <map id="RTSPMediaStreamerUsingTask&lt; Platform &gt;" name="RTSPMediaStreamerUsingTask&lt; Platform &gt;">
-<area shape="rect" id="Node000001" title="RTSPMediaStreamerUsingTask &#45; Task&#45;driven RTP Media Streaming Engine." alt="" coords="195,347,414,391"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_r_t_s_p_media_streamer_base.html" title="RTSPMediaStreamerBase &#45; Core RTP Media Streaming Engine." alt="" coords="129,229,315,274"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="247,284,292,346,287,346,245,289"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="5,106,143,134"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="88,144,109,175,134,203,171,228,166,229,131,207,105,178,88,150"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="34,5,114,33"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="74,46,77,106,71,105,74,51"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_i_media_source.html" title="Media Source Interface &#45; Contract for Media Data Providers." alt="" coords="167,106,277,134"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="224,147,225,230,219,228,220,152"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_i_p_address.html" title="Arduino&#45;compatible IPAddress class implemented in pure C++." alt="" coords="318,106,403,134"/>
-<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="359,147,351,179,333,207,300,231,297,226,329,203,346,177,355,151"/>
-<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_task_zephyr.html" title="Zephyr thread based task." alt="" coords="339,238,436,265"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="372,276,322,348,318,344,367,279"/>
+<area shape="rect" id="Node000001" title="RTSPMediaStreamerUsingTask &#45; Task&#45;driven RTP Media Streaming Engine." alt="" coords="1069,1152,1288,1197"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_r_t_s_p_media_streamer_base.html" title="RTSPMediaStreamerBase &#45; Core RTP Media Streaming Engine." alt="" coords="707,1002,892,1046"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="872,1050,1123,1151,1118,1152,872,1055"/>
+<area shape="rect" id="Node000003" href="$classint.html" title=" " alt="" coords="58,655,96,683"/>
+<area shape="poly" id="edge29_Node000001_Node000003" title=" " alt="" coords="75,639,79,583,93,513,105,477,121,443,143,412,171,386,216,357,258,338,298,329,338,328,379,333,421,345,517,383,585,417,650,457,712,504,770,555,824,609,875,667,965,785,1041,901,1100,1006,1144,1092,1170,1153,1165,1151,1139,1094,1095,1009,1036,904,961,788,871,670,820,613,766,559,708,508,647,462,582,421,515,388,419,350,377,338,338,333,299,334,259,344,218,362,174,390,147,415,126,445,110,479,98,514,85,584,81,640"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="111,666,245,661,425,659,591,664,650,671,684,682,720,715,747,756,768,800,782,847,798,935,801,1002,796,1000,792,936,777,848,763,802,743,758,716,719,681,686,649,676,591,669,425,664,246,666,114,670"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="363,874,500,902"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="108,688,174,733,251,783,325,837,337,849,349,859,377,873,372,874,346,863,333,852,322,841,248,787,171,737,110,693"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="494,906,517,918,529,931,541,942,578,957,610,962,643,965,683,973,751,1001,746,1002,682,978,642,970,609,967,577,963,538,947,526,934,514,922,495,911"/>
+<area shape="rect" id="Node000005" href="$classuint8__t_01_5.html" title=" " alt="" coords="38,977,116,1004"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="129,973,382,900,380,905,132,978"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="37,1033,117,1060"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="131,1047,178,1044,228,1036,278,1019,301,1007,322,991,332,974,334,957,335,938,346,918,375,900,372,904,350,922,340,939,339,957,337,976,326,995,304,1011,281,1024,230,1041,178,1050,134,1051"/>
+<area shape="rect" id="Node000007" href="$classbool.html" title=" " alt="" coords="52,793,102,820"/>
+<area shape="poly" id="edge26_Node000001_Node000007" title=" " alt="" coords="107,782,138,763,172,749,215,741,274,735,421,731,571,738,635,747,684,760,766,798,845,847,918,901,985,959,1044,1017,1094,1070,1162,1152,1157,1151,1090,1074,1040,1020,982,963,915,906,842,851,764,803,682,765,634,752,571,743,421,736,275,741,216,747,173,754,140,768,111,785"/>
+<area shape="poly" id="edge9_Node000002_Node000007" title=" " alt="" coords="100,829,135,861,174,891,220,917,257,933,348,958,495,981,709,1011,704,1013,494,986,347,963,256,938,217,922,171,895,131,865,101,834"/>
+<area shape="poly" id="edge7_Node000004_Node000007" title=" " alt="" coords="108,827,140,846,174,861,222,874,271,881,365,888,360,891,271,887,221,879,172,866,138,851,110,832"/>
+<area shape="rect" id="Node000016" href="$classaudio__tools_1_1_task_zephyr.html" title="Zephyr thread based task." alt="" coords="384,215,480,243"/>
+<area shape="poly" id="edge23_Node000016_Node000007" title=" " alt="" coords="93,778,146,693,422,241,422,246,151,696,98,780"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_i_media_source.html" title="Media Source Interface &#45; Contract for Media Data Providers." alt="" coords="377,1242,486,1270"/>
+<area shape="poly" id="edge8_Node000002_Node000008" title=" " alt="" coords="499,1234,514,1227,526,1217,539,1208,579,1198,613,1198,645,1197,662,1192,681,1183,718,1152,748,1115,771,1077,787,1048,791,1044,775,1079,752,1118,722,1156,684,1187,664,1197,646,1202,613,1203,580,1203,541,1213,529,1222,517,1231,502,1239"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="366,770,497,798"/>
+<area shape="poly" id="edge10_Node000002_Node000009" title=" " alt="" coords="505,799,540,807,581,813,615,814,648,820,684,839,724,876,755,920,778,964,793,1002,788,1001,773,967,751,923,720,880,681,843,646,825,615,820,581,818,539,812,507,804"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="394,1303,469,1331"/>
+<area shape="poly" id="edge30_Node000001_Node000010" title=" " alt="" coords="483,1316,577,1314,682,1304,801,1281,919,1252,1113,1197,1108,1198,920,1257,803,1286,683,1309,577,1319,484,1321"/>
+<area shape="poly" id="edge11_Node000002_Node000010" title=" " alt="" coords="484,1311,603,1299,654,1291,681,1283,708,1258,731,1229,749,1196,764,1162,783,1097,794,1049,797,1044,789,1098,769,1164,754,1199,735,1232,712,1262,684,1288,655,1297,604,1304,485,1316"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="397,822,466,850"/>
+<area shape="poly" id="edge12_Node000002_Node000011" title=" " alt="" coords="481,848,540,864,581,870,614,873,646,878,684,895,716,918,745,946,787,1001,781,1001,741,950,713,922,681,900,645,883,613,878,580,876,539,869,482,853"/>
+<area shape="rect" id="Node000012" href="$classuint32__t.html" title=" " alt="" coords="40,1138,114,1166"/>
+<area shape="poly" id="edge27_Node000001_Node000012" title=" " alt="" coords="105,1173,209,1255,277,1301,349,1340,400,1362,441,1374,540,1390,619,1396,686,1396,745,1388,800,1373,853,1352,910,1326,1044,1258,1098,1226,1144,1198,1149,1196,1101,1231,1046,1262,912,1331,856,1357,802,1378,746,1393,687,1401,619,1402,539,1395,440,1380,398,1367,347,1345,274,1305,206,1260,105,1179"/>
+<area shape="poly" id="edge13_Node000002_Node000012" title=" " alt="" coords="127,1132,172,1119,225,1110,271,1107,350,1109,388,1109,426,1104,468,1092,514,1070,521,1063,525,1056,530,1048,538,1040,579,1024,622,1015,666,1011,709,1012,704,1014,666,1016,623,1020,581,1029,541,1045,534,1051,530,1058,526,1067,517,1074,470,1097,427,1110,388,1115,350,1115,271,1112,225,1115,173,1124,131,1136"/>
+<area shape="rect" id="Node000013" href="$classaudio__tools_1_1_i_p_address.html" title="Arduino&#45;compatible IPAddress class implemented in pure C++." alt="" coords="390,1138,474,1166"/>
+<area shape="poly" id="edge16_Node000013_Node000012" title=" " alt="" coords="129,1149,391,1150,388,1154,130,1154"/>
+<area shape="poly" id="edge14_Node000002_Node000013" title=" " alt="" coords="487,1132,514,1118,526,1107,538,1096,577,1081,609,1076,642,1073,682,1065,745,1045,740,1048,683,1070,643,1079,610,1082,578,1086,541,1101,529,1111,517,1122,490,1136"/>
+<area shape="rect" id="Node000014" href="$classuint8__t.html" title=" " alt="" coords="44,1450,110,1478"/>
+<area shape="poly" id="edge28_Node000001_Node000014" title=" " alt="" coords="125,1464,259,1468,451,1465,559,1457,671,1445,783,1425,891,1399,972,1372,1005,1355,1043,1328,1080,1296,1113,1260,1160,1199,1165,1196,1117,1264,1084,1300,1047,1333,1007,1360,974,1377,893,1404,784,1431,672,1450,560,1463,451,1470,259,1474,126,1470"/>
+<area shape="poly" id="edge15_Node000013_Node000014" title=" " alt="" coords="94,1435,134,1381,192,1312,264,1239,304,1206,346,1176,391,1159,387,1162,349,1181,307,1210,268,1243,196,1315,138,1385,99,1439"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="371,1190,492,1218"/>
+<area shape="poly" id="edge17_Node000002_Node000015" title=" " alt="" coords="502,1181,514,1175,526,1164,538,1152,578,1140,611,1139,644,1138,682,1126,710,1109,737,1088,778,1048,782,1045,740,1092,713,1113,684,1131,644,1143,611,1144,579,1145,541,1157,529,1167,517,1179,505,1186"/>
+<area shape="poly" id="edge18_Node000001_Node000016" title=" " alt="" coords="494,218,613,209,685,210,762,216,840,231,915,255,986,291,1018,314,1047,341,1068,369,1087,406,1103,450,1117,502,1140,618,1157,746,1168,873,1175,990,1179,1153,1175,1150,1169,991,1163,874,1151,746,1135,619,1112,503,1098,452,1082,408,1063,371,1043,344,1014,318,983,296,913,260,838,236,761,222,685,215,613,214,497,222"/>
+<area shape="rect" id="Node000017" title=" " alt="" coords="17,23,137,51"/>
+<area shape="poly" id="edge19_Node000016_Node000017" title=" " alt="" coords="150,28,193,28,238,33,283,45,325,64,346,80,364,98,394,140,415,182,428,215,423,215,411,184,390,143,360,102,342,84,322,69,282,50,237,39,193,34,153,32"/>
+<area shape="rect" id="Node000018" title=" " alt="" coords="44,79,110,107"/>
+<area shape="poly" id="edge20_Node000016_Node000018" title=" " alt="" coords="123,89,169,89,220,93,274,104,325,123,356,143,384,167,423,214,418,215,380,171,353,147,322,128,272,109,219,99,169,94,127,93"/>
+<area shape="rect" id="Node000019" title=" " alt="" coords="8,135,146,163"/>
+<area shape="poly" id="edge21_Node000016_Node000019" title=" " alt="" coords="160,152,241,161,324,179,368,194,406,214,402,216,366,199,323,184,240,166,163,156"/>
+<area shape="rect" id="Node000020" title=" " alt="" coords="47,191,107,219"/>
+<area shape="poly" id="edge22_Node000016_Node000020" title=" " alt="" coords="122,206,385,224,381,228,124,211"/>
+<area shape="rect" id="Node000021" href="$classsize__t.html" title=" " alt="" coords="47,247,107,275"/>
+<area shape="poly" id="edge24_Node000016_Node000021" title=" " alt="" coords="120,260,215,257,323,249,385,239,381,243,324,254,215,263,124,264"/>
+<area shape="rect" id="Node000022" title=" " alt="" coords="5,303,149,331"/>
+<area shape="poly" id="edge25_Node000016_Node000022" title=" " alt="" coords="163,315,242,307,323,289,371,267,413,241,410,246,374,271,325,294,243,312,166,319"/>
+<area shape="rect" id="Node000023" title=" " alt="" coords="759,1523,840,1551"/>
+<area shape="poly" id="edge31_Node000001_Node000023" title=" " alt="" coords="855,1549,900,1556,949,1557,999,1549,1022,1540,1043,1528,1081,1494,1110,1452,1133,1406,1150,1357,1168,1265,1175,1199,1179,1196,1174,1266,1155,1359,1138,1408,1115,1455,1085,1497,1047,1532,1024,1545,1000,1554,950,1562,899,1561,855,1554"/>
 </map>

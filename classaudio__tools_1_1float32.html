@@ -84,38 +84,48 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>A plain 32-bit <span class="tt">float</span>'s bit pattern reinterpreted as a <span class="tt">uint32_t</span>, so instances can live in memory obtained from a capability-specific allocator (e.g. ESP32's MALLOC_CAP_32BIT, which some heap regions require for word-addressed access and won't necessarily hand out for a plain <span class="tt">float</span> array). Conversion to/from <span class="tt">float</span> is a zero-cost bitwise reinterpretation (see <a class="el" href="#a661aa8a3f333ad40a907e412fee98ac3">as_uint()</a>/as_float()), not an encoding &ndash; unlike <a class="el" href="classaudio__tools_1_1float16.html" title="Half-precision IEEE-754 binary16 float compressed into 2 bytes (1 sign + 5 exponent + 10 mantissa bit...">float16</a>, this class is bit-for-bit identical to <span class="tt">float</span> and loses no precision or range; it exists purely to control storage/allocation, not to compress data.  
+<p>A plain 32-bit <span class="tt"><a class="el" href="classfloat.html">float</a></span>'s bit pattern reinterpreted as a <span class="tt"><a class="el" href="classuint32__t.html">uint32_t</a></span>, so instances can live in memory obtained from a capability-specific allocator (e.g. ESP32's MALLOC_CAP_32BIT, which some heap regions require for word-addressed access and won't necessarily hand out for a plain <span class="tt"><a class="el" href="classfloat.html">float</a></span> array). Conversion to/from <span class="tt"><a class="el" href="classfloat.html">float</a></span> is a zero-cost bitwise reinterpretation (see <a class="el" href="#a661aa8a3f333ad40a907e412fee98ac3">as_uint()</a>/as_float()), not an encoding &ndash; unlike <a class="el" href="classaudio__tools_1_1float16.html" title="Half-precision IEEE-754 binary16 float compressed into 2 bytes (1 sign + 5 exponent + 10 mantissa bit...">float16</a>, this class is bit-for-bit identical to <span class="tt"><a class="el" href="classfloat.html">float</a></span> and loses no precision or range; it exists purely to control storage/allocation, not to compress data.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="float32_8h_source.html">float32.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for float32:</div>
+<div class="dyncontent">
+<div class="center"><img src="classaudio__tools_1_1float32__coll__graph.png" border="0" usemap="#afloat32_coll__map" loading="lazy" alt="Collaboration graph"/></div>
+<map name="afloat32_coll__map" id="afloat32_coll__map">
+<area shape="rect" title="A plain 32&#45;bit float&#39;s bit pattern reinterpreted as a uint32_t, so instances can live in memory obtai..." alt="" coords="9,106,76,134"/>
+<area shape="rect" href="classuint32__t.html" title=" " alt="" coords="5,5,80,33"/>
+<area shape="poly" title=" " alt="" coords="45,47,45,106,40,105,40,50"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a8afbb5ad360cfe076f5286a5b8565ffa" id="r_a8afbb5ad360cfe076f5286a5b8565ffa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8afbb5ad360cfe076f5286a5b8565ffa">float32</a> ()=default</td></tr>
 <tr class="memitem:a69efc69b1afc225d2a3e308f15cb0b55" id="r_a69efc69b1afc225d2a3e308f15cb0b55"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a69efc69b1afc225d2a3e308f15cb0b55">float32</a> (const float32 &amp;<a class="el" href="#ae7f66047e6e39ba2bb6af8b95f00d1dd">value</a>)</td></tr>
-<tr class="memitem:abe506a479bec97cdd1f7aa5e7860918d" id="r_abe506a479bec97cdd1f7aa5e7860918d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abe506a479bec97cdd1f7aa5e7860918d">float32</a> (float <a class="el" href="#ae7f66047e6e39ba2bb6af8b95f00d1dd">value</a>)</td></tr>
+<tr class="memitem:abe506a479bec97cdd1f7aa5e7860918d" id="r_abe506a479bec97cdd1f7aa5e7860918d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abe506a479bec97cdd1f7aa5e7860918d">float32</a> (<a class="el" href="classfloat.html">float</a> <a class="el" href="#ae7f66047e6e39ba2bb6af8b95f00d1dd">value</a>)</td></tr>
 <tr class="memitem:aabab268504345fcb036094bc7b5c4438" id="r_aabab268504345fcb036094bc7b5c4438"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aabab268504345fcb036094bc7b5c4438">operator double</a> ()</td></tr>
 <tr class="memitem:abc4ec9f715112697477f2f425122ce21" id="r_abc4ec9f715112697477f2f425122ce21"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abc4ec9f715112697477f2f425122ce21">operator float</a> () const</td></tr>
 <tr class="memitem:a4f4ea421e40bda08a2deca657f640fea" id="r_a4f4ea421e40bda08a2deca657f640fea"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4f4ea421e40bda08a2deca657f640fea">operator int</a> ()</td></tr>
 <tr class="memitem:a48d27bd92e68c69527589ea65a9af69f" id="r_a48d27bd92e68c69527589ea65a9af69f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a48d27bd92e68c69527589ea65a9af69f">operator int</a> () const</td></tr>
-<tr class="memitem:a4d838e2bed5dc58dd0367377936c3101" id="r_a4d838e2bed5dc58dd0367377936c3101"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4d838e2bed5dc58dd0367377936c3101">operator!=</a> (<a class="el" href="#a8afbb5ad360cfe076f5286a5b8565ffa">float32</a> other) const</td></tr>
-<tr class="memitem:a8c12f612fcbe101aaaaf0497a79bb538" id="r_a8c12f612fcbe101aaaaf0497a79bb538"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8c12f612fcbe101aaaaf0497a79bb538">operator&lt;</a> (<a class="el" href="#a8afbb5ad360cfe076f5286a5b8565ffa">float32</a> other) const</td></tr>
-<tr class="memitem:a25569c47669f417ef47b8da17c2f5fb7" id="r_a25569c47669f417ef47b8da17c2f5fb7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a25569c47669f417ef47b8da17c2f5fb7">operator&lt;=</a> (<a class="el" href="#a8afbb5ad360cfe076f5286a5b8565ffa">float32</a> other) const</td></tr>
-<tr class="memitem:a99756ebe415ff196cb3927325d457026" id="r_a99756ebe415ff196cb3927325d457026"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a99756ebe415ff196cb3927325d457026">operator==</a> (<a class="el" href="#a8afbb5ad360cfe076f5286a5b8565ffa">float32</a> other) const</td></tr>
-<tr class="memitem:a0b2d3c28da85dd553f20b3fa12bd0eb8" id="r_a0b2d3c28da85dd553f20b3fa12bd0eb8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0b2d3c28da85dd553f20b3fa12bd0eb8">operator&gt;</a> (<a class="el" href="#a8afbb5ad360cfe076f5286a5b8565ffa">float32</a> other) const</td></tr>
-<tr class="memitem:a03e0fd263d86c7e2a91e3ee8b5524c75" id="r_a03e0fd263d86c7e2a91e3ee8b5524c75"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a03e0fd263d86c7e2a91e3ee8b5524c75">operator&gt;=</a> (<a class="el" href="#a8afbb5ad360cfe076f5286a5b8565ffa">float32</a> other) const</td></tr>
+<tr class="memitem:a4d838e2bed5dc58dd0367377936c3101" id="r_a4d838e2bed5dc58dd0367377936c3101"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4d838e2bed5dc58dd0367377936c3101">operator!=</a> (<a class="el" href="#a8afbb5ad360cfe076f5286a5b8565ffa">float32</a> other) const</td></tr>
+<tr class="memitem:a8c12f612fcbe101aaaaf0497a79bb538" id="r_a8c12f612fcbe101aaaaf0497a79bb538"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8c12f612fcbe101aaaaf0497a79bb538">operator&lt;</a> (<a class="el" href="#a8afbb5ad360cfe076f5286a5b8565ffa">float32</a> other) const</td></tr>
+<tr class="memitem:a25569c47669f417ef47b8da17c2f5fb7" id="r_a25569c47669f417ef47b8da17c2f5fb7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a25569c47669f417ef47b8da17c2f5fb7">operator&lt;=</a> (<a class="el" href="#a8afbb5ad360cfe076f5286a5b8565ffa">float32</a> other) const</td></tr>
+<tr class="memitem:a99756ebe415ff196cb3927325d457026" id="r_a99756ebe415ff196cb3927325d457026"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a99756ebe415ff196cb3927325d457026">operator==</a> (<a class="el" href="#a8afbb5ad360cfe076f5286a5b8565ffa">float32</a> other) const</td></tr>
+<tr class="memitem:a0b2d3c28da85dd553f20b3fa12bd0eb8" id="r_a0b2d3c28da85dd553f20b3fa12bd0eb8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0b2d3c28da85dd553f20b3fa12bd0eb8">operator&gt;</a> (<a class="el" href="#a8afbb5ad360cfe076f5286a5b8565ffa">float32</a> other) const</td></tr>
+<tr class="memitem:a03e0fd263d86c7e2a91e3ee8b5524c75" id="r_a03e0fd263d86c7e2a91e3ee8b5524c75"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a03e0fd263d86c7e2a91e3ee8b5524c75">operator&gt;=</a> (<a class="el" href="#a8afbb5ad360cfe076f5286a5b8565ffa">float32</a> other) const</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-static-methods" class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
-<tr class="memitem:ade53f62d748ae63086acf14874696e13" id="r_ade53f62d748ae63086acf14874696e13"><td class="memItemLeft" align="right" valign="top">static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ade53f62d748ae63086acf14874696e13">as_float</a> (uint32_t x)</td></tr>
-<tr class="memitem:a661aa8a3f333ad40a907e412fee98ac3" id="r_a661aa8a3f333ad40a907e412fee98ac3"><td class="memItemLeft" align="right" valign="top">static uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a661aa8a3f333ad40a907e412fee98ac3">as_uint</a> (float x)</td></tr>
+<tr class="memitem:ade53f62d748ae63086acf14874696e13" id="r_ade53f62d748ae63086acf14874696e13"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ade53f62d748ae63086acf14874696e13">as_float</a> (<a class="el" href="classuint32__t.html">uint32_t</a> x)</td></tr>
+<tr class="memitem:a661aa8a3f333ad40a907e412fee98ac3" id="r_a661aa8a3f333ad40a907e412fee98ac3"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a661aa8a3f333ad40a907e412fee98ac3">as_uint</a> (<a class="el" href="classfloat.html">float</a> x)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:ae7f66047e6e39ba2bb6af8b95f00d1dd" id="r_ae7f66047e6e39ba2bb6af8b95f00d1dd"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae7f66047e6e39ba2bb6af8b95f00d1dd">value</a> =0</td></tr>
+<tr class="memitem:ae7f66047e6e39ba2bb6af8b95f00d1dd" id="r_ae7f66047e6e39ba2bb6af8b95f00d1dd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae7f66047e6e39ba2bb6af8b95f00d1dd">value</a> =0</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A plain 32-bit <span class="tt">float</span>'s bit pattern reinterpreted as a <span class="tt">uint32_t</span>, so instances can live in memory obtained from a capability-specific allocator (e.g. ESP32's MALLOC_CAP_32BIT, which some heap regions require for word-addressed access and won't necessarily hand out for a plain <span class="tt">float</span> array). Conversion to/from <span class="tt">float</span> is a zero-cost bitwise reinterpretation (see <a class="el" href="#a661aa8a3f333ad40a907e412fee98ac3">as_uint()</a>/as_float()), not an encoding &ndash; unlike <a class="el" href="classaudio__tools_1_1float16.html" title="Half-precision IEEE-754 binary16 float compressed into 2 bytes (1 sign + 5 exponent + 10 mantissa bit...">float16</a>, this class is bit-for-bit identical to <span class="tt">float</span> and loses no precision or range; it exists purely to control storage/allocation, not to compress data. </p>
+<div class="textblock"><p>A plain 32-bit <span class="tt"><a class="el" href="classfloat.html">float</a></span>'s bit pattern reinterpreted as a <span class="tt"><a class="el" href="classuint32__t.html">uint32_t</a></span>, so instances can live in memory obtained from a capability-specific allocator (e.g. ESP32's MALLOC_CAP_32BIT, which some heap regions require for word-addressed access and won't necessarily hand out for a plain <span class="tt"><a class="el" href="classfloat.html">float</a></span> array). Conversion to/from <span class="tt"><a class="el" href="classfloat.html">float</a></span> is a zero-cost bitwise reinterpretation (see <a class="el" href="#a661aa8a3f333ad40a907e412fee98ac3">as_uint()</a>/as_float()), not an encoding &ndash; unlike <a class="el" href="classaudio__tools_1_1float16.html" title="Half-precision IEEE-754 binary16 float compressed into 2 bytes (1 sign + 5 exponent + 10 mantissa bit...">float16</a>, this class is bit-for-bit identical to <span class="tt"><a class="el" href="classfloat.html">float</a></span> and loses no precision or range; it exists purely to control storage/allocation, not to compress data. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -156,7 +166,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">float32 </td>
           <td>(</td>
-          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classfloat.html">float</a></td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -205,9 +215,9 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">float as_float </td>
+          <td class="memname"><a class="el" href="classfloat.html">float</a> as_float </td>
           <td>(</td>
-          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classuint32__t.html">uint32_t</a></td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -230,9 +240,9 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t as_uint </td>
+          <td class="memname"><a class="el" href="classuint32__t.html">uint32_t</a> as_uint </td>
           <td>(</td>
-          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classfloat.html">float</a></td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -280,7 +290,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">operator float </td>
+          <td class="memname">operator <a class="el" href="classfloat.html">float</a> </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -305,7 +315,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">operator int </td>
+          <td class="memname">operator <a class="el" href="classint.html">int</a> </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -330,7 +340,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">operator int </td>
+          <td class="memname">operator <a class="el" href="classint.html">int</a> </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -355,7 +365,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool operator!= </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> operator!= </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="#a8afbb5ad360cfe076f5286a5b8565ffa">float32</a></td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
           <td> const</td>
@@ -380,7 +390,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool operator&lt; </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> operator&lt; </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="#a8afbb5ad360cfe076f5286a5b8565ffa">float32</a></td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
           <td> const</td>
@@ -405,7 +415,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool operator&lt;= </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> operator&lt;= </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="#a8afbb5ad360cfe076f5286a5b8565ffa">float32</a></td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
           <td> const</td>
@@ -430,7 +440,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool operator== </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> operator== </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="#a8afbb5ad360cfe076f5286a5b8565ffa">float32</a></td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
           <td> const</td>
@@ -455,7 +465,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool operator&gt; </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> operator&gt; </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="#a8afbb5ad360cfe076f5286a5b8565ffa">float32</a></td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
           <td> const</td>
@@ -480,7 +490,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool operator&gt;= </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> operator&gt;= </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="#a8afbb5ad360cfe076f5286a5b8565ffa">float32</a></td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
           <td> const</td>
@@ -506,7 +516,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t value =0</td>
+          <td class="memname"><a class="el" href="classuint32__t.html">uint32_t</a> value =0</td>
         </tr>
       </table>
   </td>

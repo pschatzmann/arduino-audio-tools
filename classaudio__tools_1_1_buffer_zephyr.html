@@ -103,89 +103,101 @@ Collaboration diagram for BufferZephyr&lt; T &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="classaudio__tools_1_1_buffer_zephyr__coll__graph.png" border="0" usemap="#a_buffer_zephyr_3_01_t_01_4_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="a_buffer_zephyr_3_01_t_01_4_coll__map" id="a_buffer_zephyr_3_01_t_01_4_coll__map">
-<area shape="rect" title="Buffer implementation using Zephyr semaphores + mutex as a bounded ring buffer." alt="" coords="62,106,207,134"/>
+<area shape="rect" title="Buffer implementation using Zephyr semaphores + mutex as a bounded ring buffer." alt="" coords="350,173,495,201"/>
 <area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="5,5,136,33"/>
-<area shape="poly" title=" " alt="" coords="89,44,129,105,123,106,86,48"/>
-<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="160,5,240,33"/>
-<area shape="poly" title=" " alt="" coords="185,45,145,107,141,103,180,47"/>
+<area shape="poly" title=" " alt="" coords="84,44,118,99,141,125,169,147,201,158,247,167,353,181,347,181,246,173,199,163,167,151,138,129,114,102,82,49"/>
+<area shape="rect" href="class_t.html" title=" " alt="" coords="159,5,198,33"/>
+<area shape="poly" title=" " alt="" coords="175,46,175,73,177,99,185,125,199,147,223,160,260,170,353,183,347,183,259,175,221,165,195,151,180,127,172,100,170,73,173,51"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="222,5,301,33"/>
+<area shape="poly" title=" " alt="" coords="258,46,258,99,265,125,278,147,289,155,306,162,353,175,347,175,304,167,286,160,274,151,260,127,253,99,254,50"/>
+<area shape="rect" href="classuint32__t.html" title=" " alt="" coords="335,5,409,33"/>
+<area shape="poly" title=" " alt="" coords="367,46,365,97,368,123,376,148,386,160,399,173,394,172,382,164,371,150,362,124,359,97,364,50"/>
+<area shape="rect" href="classbool.html" title=" " alt="" coords="448,5,498,33"/>
+<area shape="poly" title=" " alt="" coords="471,47,463,97,446,150,433,175,430,170,441,148,457,96,467,50"/>
+<area shape="rect" href="classsize__t.html" title=" " alt="" coords="577,5,636,33"/>
+<area shape="poly" title=" " alt="" coords="609,47,603,100,593,128,576,151,563,160,544,167,495,178,495,173,542,162,561,155,573,147,588,125,598,99,606,50"/>
+<area shape="rect" title=" " alt="" coords="716,5,836,33"/>
+<area shape="poly" title=" " alt="" coords="780,47,780,74,776,101,766,128,748,151,730,162,705,171,639,183,565,188,495,189,495,184,565,183,639,177,703,166,728,157,745,147,761,126,770,100,775,73,776,51"/>
+<area shape="rect" title=" " alt="" coords="859,5,964,33"/>
+<area shape="poly" title=" " alt="" coords="915,47,914,74,909,102,898,129,880,151,860,160,824,167,722,177,495,187,495,182,721,172,823,162,858,155,877,147,894,126,904,100,909,73,911,51"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:afd7d852b0757189568b5206649f7f638" id="r_afd7d852b0757189568b5206649f7f638"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afd7d852b0757189568b5206649f7f638">BufferZephyr</a> (size_t streamBufferSize, size_t xTriggerLevel=1, <a class="el" href="_buffer_blocking_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a> writeMaxWait=<a class="el" href="_buffer_blocking_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a>, <a class="el" href="_buffer_blocking_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a> readMaxWait=<a class="el" href="_buffer_blocking_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a>, <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;allocator=<a class="el" href="namespaceaudio__tools.html#a02e30d9ec0ddcc5d9e9f1d2324b8cca8">DefaultAllocator</a>)</td></tr>
+<tr class="memitem:afd7d852b0757189568b5206649f7f638" id="r_afd7d852b0757189568b5206649f7f638"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afd7d852b0757189568b5206649f7f638">BufferZephyr</a> (<a class="el" href="classsize__t.html">size_t</a> streamBufferSize, <a class="el" href="classsize__t.html">size_t</a> xTriggerLevel=1, <a class="el" href="_buffer_blocking_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a> writeMaxWait=<a class="el" href="_buffer_blocking_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a>, <a class="el" href="_buffer_blocking_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a> readMaxWait=<a class="el" href="_buffer_blocking_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a>, <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;allocator=<a class="el" href="namespaceaudio__tools.html#a02e30d9ec0ddcc5d9e9f1d2324b8cca8">DefaultAllocator</a>)</td></tr>
 <tr class="memitem:aef98e492b31cdafff41f14492d554483" id="r_aef98e492b31cdafff41f14492d554483"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aef98e492b31cdafff41f14492d554483">~BufferZephyr</a> ()</td></tr>
-<tr class="memitem:a9038db8faec57f3770d30ed8f05270e4" id="r_a9038db8faec57f3770d30ed8f05270e4"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9038db8faec57f3770d30ed8f05270e4">address</a> () override</td></tr>
+<tr class="memitem:a9038db8faec57f3770d30ed8f05270e4" id="r_a9038db8faec57f3770d30ed8f05270e4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_t.html">T</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9038db8faec57f3770d30ed8f05270e4">address</a> () override</td></tr>
 <tr class="memdesc:a9038db8faec57f3770d30ed8f05270e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the address of the start of the physical read buffer  <br /></td></tr>
-<tr class="memitem:a692e2b18b3c2452e38e3f558ad87e9a5" id="r_a692e2b18b3c2452e38e3f558ad87e9a5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a692e2b18b3c2452e38e3f558ad87e9a5">available</a> () override</td></tr>
+<tr class="memitem:a692e2b18b3c2452e38e3f558ad87e9a5" id="r_a692e2b18b3c2452e38e3f558ad87e9a5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a692e2b18b3c2452e38e3f558ad87e9a5">available</a> () override</td></tr>
 <tr class="memdesc:a692e2b18b3c2452e38e3f558ad87e9a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the number of entries that are available to read  <br /></td></tr>
-<tr class="memitem:a87b51853b7bf1bc90d9efa9f3b8d4fea" id="r_a87b51853b7bf1bc90d9efa9f3b8d4fea"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a87b51853b7bf1bc90d9efa9f3b8d4fea">availableForWrite</a> () override</td></tr>
+<tr class="memitem:a87b51853b7bf1bc90d9efa9f3b8d4fea" id="r_a87b51853b7bf1bc90d9efa9f3b8d4fea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a87b51853b7bf1bc90d9efa9f3b8d4fea">availableForWrite</a> () override</td></tr>
 <tr class="memdesc:a87b51853b7bf1bc90d9efa9f3b8d4fea"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the number of entries that are available to write  <br /></td></tr>
-<tr class="memitem:a267f8aa1cda7c4bf1cd632b7a3c611f7" id="r_a267f8aa1cda7c4bf1cd632b7a3c611f7"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_buffer.html#a267f8aa1cda7c4bf1cd632b7a3c611f7">bufferCountEmpty</a> ()</td></tr>
+<tr class="memitem:a267f8aa1cda7c4bf1cd632b7a3c611f7" id="r_a267f8aa1cda7c4bf1cd632b7a3c611f7"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_buffer.html#a267f8aa1cda7c4bf1cd632b7a3c611f7">bufferCountEmpty</a> ()</td></tr>
 <tr class="memdesc:a267f8aa1cda7c4bf1cd632b7a3c611f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the number of entries that are available to write: -1 does not apply.  <br /></td></tr>
-<tr class="memitem:aa304bc14aea54a51aaec3705b0a39074" id="r_aa304bc14aea54a51aaec3705b0a39074"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_buffer.html#aa304bc14aea54a51aaec3705b0a39074">bufferCountFilled</a> ()</td></tr>
+<tr class="memitem:aa304bc14aea54a51aaec3705b0a39074" id="r_aa304bc14aea54a51aaec3705b0a39074"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_buffer.html#aa304bc14aea54a51aaec3705b0a39074">bufferCountFilled</a> ()</td></tr>
 <tr class="memdesc:aa304bc14aea54a51aaec3705b0a39074"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the number of entries that are available to read: -1 does not apply.  <br /></td></tr>
 <tr class="memitem:ac8bb3912a3ce86b15842e79d0b421204" id="r_ac8bb3912a3ce86b15842e79d0b421204"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_buffer.html#ac8bb3912a3ce86b15842e79d0b421204">clear</a> ()</td></tr>
 <tr class="memdesc:ac8bb3912a3ce86b15842e79d0b421204"><td class="mdescLeft">&#160;</td><td class="mdescRight">same as reset  <br /></td></tr>
-<tr class="memitem:a5e526a739923663ae76533d9ad9eb656" id="r_a5e526a739923663ae76533d9ad9eb656"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_buffer.html#a5e526a739923663ae76533d9ad9eb656">clearArray</a> (int len)</td></tr>
+<tr class="memitem:a5e526a739923663ae76533d9ad9eb656" id="r_a5e526a739923663ae76533d9ad9eb656"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_buffer.html#a5e526a739923663ae76533d9ad9eb656">clearArray</a> (<a class="el" href="classint.html">int</a> len)</td></tr>
 <tr class="memdesc:a5e526a739923663ae76533d9ad9eb656"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the next len entries.  <br /></td></tr>
 <tr class="memitem:ad3aed50bc3b4459454ccb8c64f5ced5a" id="r_ad3aed50bc3b4459454ccb8c64f5ced5a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_buffer.html#ad3aed50bc3b4459454ccb8c64f5ced5a">flush</a> ()</td></tr>
-<tr class="memitem:a047f603a4a26ab4870619748148c2c71" id="r_a047f603a4a26ab4870619748148c2c71"><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_buffer.html#a047f603a4a26ab4870619748148c2c71">freePercent</a> ()</td></tr>
+<tr class="memitem:a047f603a4a26ab4870619748148c2c71" id="r_a047f603a4a26ab4870619748148c2c71"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_buffer.html#a047f603a4a26ab4870619748148c2c71">freePercent</a> ()</td></tr>
 <tr class="memdesc:a047f603a4a26ab4870619748148c2c71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the free space of the buffer in %.  <br /></td></tr>
-<tr class="memitem:af337ffd75e4f019ce15302c60715d84b" id="r_af337ffd75e4f019ce15302c60715d84b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af337ffd75e4f019ce15302c60715d84b">isEmpty</a> ()</td></tr>
-<tr class="memitem:a91336dd99913834c918d58f4223d7ac4" id="r_a91336dd99913834c918d58f4223d7ac4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a91336dd99913834c918d58f4223d7ac4">isFull</a> () override</td></tr>
+<tr class="memitem:af337ffd75e4f019ce15302c60715d84b" id="r_af337ffd75e4f019ce15302c60715d84b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af337ffd75e4f019ce15302c60715d84b">isEmpty</a> ()</td></tr>
+<tr class="memitem:a91336dd99913834c918d58f4223d7ac4" id="r_a91336dd99913834c918d58f4223d7ac4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a91336dd99913834c918d58f4223d7ac4">isFull</a> () override</td></tr>
 <tr class="memdesc:a91336dd99913834c918d58f4223d7ac4"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if the buffer is full  <br /></td></tr>
-<tr class="memitem:abcd92c9b245692b77908d66e3cbc7bc5" id="r_abcd92c9b245692b77908d66e3cbc7bc5"><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_buffer.html#abcd92c9b245692b77908d66e3cbc7bc5">levelPercent</a> ()</td></tr>
+<tr class="memitem:abcd92c9b245692b77908d66e3cbc7bc5" id="r_abcd92c9b245692b77908d66e3cbc7bc5"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_buffer.html#abcd92c9b245692b77908d66e3cbc7bc5">levelPercent</a> ()</td></tr>
 <tr class="memdesc:abcd92c9b245692b77908d66e3cbc7bc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the level of the buffer in %.  <br /></td></tr>
 <tr class="memitem:a9b3baad8c612d81b96e46f84d7e97580" id="r_a9b3baad8c612d81b96e46f84d7e97580"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9b3baad8c612d81b96e46f84d7e97580">operator bool</a> ()</td></tr>
-<tr class="memitem:a403ee56f3d9b781a21f260a79822a690" id="r_a403ee56f3d9b781a21f260a79822a690"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a403ee56f3d9b781a21f260a79822a690">peek</a> (T &amp;result) override</td></tr>
+<tr class="memitem:a403ee56f3d9b781a21f260a79822a690" id="r_a403ee56f3d9b781a21f260a79822a690"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a403ee56f3d9b781a21f260a79822a690">peek</a> (<a class="el" href="class_t.html">T</a> &amp;result) override</td></tr>
 <tr class="memdesc:a403ee56f3d9b781a21f260a79822a690"><td class="mdescLeft">&#160;</td><td class="mdescRight">peeks the actual entry from the buffer  <br /></td></tr>
-<tr class="memitem:a561678b19e43ad0116146987c3d3392a" id="r_a561678b19e43ad0116146987c3d3392a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a561678b19e43ad0116146987c3d3392a">read</a> (T &amp;result) override</td></tr>
+<tr class="memitem:a561678b19e43ad0116146987c3d3392a" id="r_a561678b19e43ad0116146987c3d3392a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a561678b19e43ad0116146987c3d3392a">read</a> (<a class="el" href="class_t.html">T</a> &amp;result) override</td></tr>
 <tr class="memdesc:a561678b19e43ad0116146987c3d3392a"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads a single value  <br /></td></tr>
-<tr class="memitem:af1938d4e75b82ae0d75408f094611af4" id="r_af1938d4e75b82ae0d75408f094611af4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af1938d4e75b82ae0d75408f094611af4">readArray</a> (T data[], int len) override</td></tr>
+<tr class="memitem:af1938d4e75b82ae0d75408f094611af4" id="r_af1938d4e75b82ae0d75408f094611af4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af1938d4e75b82ae0d75408f094611af4">readArray</a> (<a class="el" href="class_t.html">T</a> data[], <a class="el" href="classint.html">int</a> len) override</td></tr>
 <tr class="memdesc:af1938d4e75b82ae0d75408f094611af4"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads multiple values  <br /></td></tr>
 <tr class="memitem:aebfcdbbd0fe4efbff10b180be50ca6bc" id="r_aebfcdbbd0fe4efbff10b180be50ca6bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aebfcdbbd0fe4efbff10b180be50ca6bc">reset</a> () override</td></tr>
 <tr class="memdesc:aebfcdbbd0fe4efbff10b180be50ca6bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">clears the buffer  <br /></td></tr>
-<tr class="memitem:ae4f8f853ac7c7aaa49e0471d25f5e02c" id="r_ae4f8f853ac7c7aaa49e0471d25f5e02c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae4f8f853ac7c7aaa49e0471d25f5e02c">resize</a> (size_t <a class="el" href="#a128a3f6e587ccc181112bb2892440990">size</a>)</td></tr>
+<tr class="memitem:ae4f8f853ac7c7aaa49e0471d25f5e02c" id="r_ae4f8f853ac7c7aaa49e0471d25f5e02c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae4f8f853ac7c7aaa49e0471d25f5e02c">resize</a> (<a class="el" href="classsize__t.html">size_t</a> <a class="el" href="#a128a3f6e587ccc181112bb2892440990">size</a>)</td></tr>
 <tr class="memdesc:ae4f8f853ac7c7aaa49e0471d25f5e02c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Re-Allocates the memory and queue.  <br /></td></tr>
-<tr class="memitem:a3e9bf46a66571db956089334e04ef7ec" id="r_a3e9bf46a66571db956089334e04ef7ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3e9bf46a66571db956089334e04ef7ec">setReadFromISR</a> (bool active)</td></tr>
+<tr class="memitem:a3e9bf46a66571db956089334e04ef7ec" id="r_a3e9bf46a66571db956089334e04ef7ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3e9bf46a66571db956089334e04ef7ec">setReadFromISR</a> (<a class="el" href="classbool.html">bool</a> active)</td></tr>
 <tr class="memitem:aaa174f6955c8d95a5901d6b67601a06c" id="r_aaa174f6955c8d95a5901d6b67601a06c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaa174f6955c8d95a5901d6b67601a06c">setReadMaxWait</a> (<a class="el" href="_buffer_blocking_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a> ticks)</td></tr>
-<tr class="memitem:ad23fafa6e227a97c43b295ad8fc9aa07" id="r_ad23fafa6e227a97c43b295ad8fc9aa07"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad23fafa6e227a97c43b295ad8fc9aa07">setWriteFromISR</a> (bool active)</td></tr>
+<tr class="memitem:ad23fafa6e227a97c43b295ad8fc9aa07" id="r_ad23fafa6e227a97c43b295ad8fc9aa07"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad23fafa6e227a97c43b295ad8fc9aa07">setWriteFromISR</a> (<a class="el" href="classbool.html">bool</a> active)</td></tr>
 <tr class="memitem:a5db6ccd57ec62d95a97b60920c0441d4" id="r_a5db6ccd57ec62d95a97b60920c0441d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5db6ccd57ec62d95a97b60920c0441d4">setWriteMaxWait</a> (<a class="el" href="_buffer_blocking_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a> ticks)</td></tr>
-<tr class="memitem:a128a3f6e587ccc181112bb2892440990" id="r_a128a3f6e587ccc181112bb2892440990"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a128a3f6e587ccc181112bb2892440990">size</a> () override</td></tr>
-<tr class="memitem:a6026e931dd6de99bbe07fafb875048f1" id="r_a6026e931dd6de99bbe07fafb875048f1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6026e931dd6de99bbe07fafb875048f1">write</a> (T data) override</td></tr>
+<tr class="memitem:a128a3f6e587ccc181112bb2892440990" id="r_a128a3f6e587ccc181112bb2892440990"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a128a3f6e587ccc181112bb2892440990">size</a> () override</td></tr>
+<tr class="memitem:a6026e931dd6de99bbe07fafb875048f1" id="r_a6026e931dd6de99bbe07fafb875048f1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6026e931dd6de99bbe07fafb875048f1">write</a> (<a class="el" href="class_t.html">T</a> data) override</td></tr>
 <tr class="memdesc:a6026e931dd6de99bbe07fafb875048f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">write add an entry to the buffer  <br /></td></tr>
-<tr class="memitem:aad1958ec38b63a35ddc8209d646f1ed0" id="r_aad1958ec38b63a35ddc8209d646f1ed0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aad1958ec38b63a35ddc8209d646f1ed0">writeArray</a> (const T data[], int len) override</td></tr>
+<tr class="memitem:aad1958ec38b63a35ddc8209d646f1ed0" id="r_aad1958ec38b63a35ddc8209d646f1ed0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aad1958ec38b63a35ddc8209d646f1ed0">writeArray</a> (const <a class="el" href="class_t.html">T</a> data[], <a class="el" href="classint.html">int</a> len) override</td></tr>
 <tr class="memdesc:aad1958ec38b63a35ddc8209d646f1ed0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fills the buffer data.  <br /></td></tr>
-<tr class="memitem:a4d3100be7fa69e3ddd9896141f143c99" id="r_a4d3100be7fa69e3ddd9896141f143c99"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_buffer.html#a4d3100be7fa69e3ddd9896141f143c99">writeArrayOverwrite</a> (const T data[], int len)</td></tr>
+<tr class="memitem:a4d3100be7fa69e3ddd9896141f143c99" id="r_a4d3100be7fa69e3ddd9896141f143c99"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1audio__tools_1_1_base_buffer.html#a4d3100be7fa69e3ddd9896141f143c99">writeArrayOverwrite</a> (const <a class="el" href="class_t.html">T</a> data[], <a class="el" href="classint.html">int</a> len)</td></tr>
 <tr class="memdesc:a4d3100be7fa69e3ddd9896141f143c99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fills the buffer data and overwrites the oldest data if the buffer is full.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-methods" class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:aaf81d3fdaf258088d7692fa70cece087" id="r_aaf81d3fdaf258088d7692fa70cece087"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaf81d3fdaf258088d7692fa70cece087">end</a> ()</td></tr>
 <tr class="memdesc:aaf81d3fdaf258088d7692fa70cece087"><td class="mdescLeft">&#160;</td><td class="mdescRight">Release resources: call resize to restart again.  <br /></td></tr>
-<tr class="memitem:a31ee0f0bcdec21d47884e1d3d2a5ff56" id="r_a31ee0f0bcdec21d47884e1d3d2a5ff56"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a31ee0f0bcdec21d47884e1d3d2a5ff56">readOne</a> (T &amp;value)</td></tr>
-<tr class="memitem:af34785948af72a85d60ef0a2cae5cf22" id="r_af34785948af72a85d60ef0a2cae5cf22"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af34785948af72a85d60ef0a2cae5cf22">setup</a> ()</td></tr>
-<tr class="memitem:a8834eb88821e315545a950345f2fce60" id="r_a8834eb88821e315545a950345f2fce60"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8834eb88821e315545a950345f2fce60">writeOne</a> (const T &amp;value)</td></tr>
+<tr class="memitem:a31ee0f0bcdec21d47884e1d3d2a5ff56" id="r_a31ee0f0bcdec21d47884e1d3d2a5ff56"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a31ee0f0bcdec21d47884e1d3d2a5ff56">readOne</a> (<a class="el" href="class_t.html">T</a> &amp;value)</td></tr>
+<tr class="memitem:af34785948af72a85d60ef0a2cae5cf22" id="r_af34785948af72a85d60ef0a2cae5cf22"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af34785948af72a85d60ef0a2cae5cf22">setup</a> ()</td></tr>
+<tr class="memitem:a8834eb88821e315545a950345f2fce60" id="r_a8834eb88821e315545a950345f2fce60"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8834eb88821e315545a950345f2fce60">writeOne</a> (const <a class="el" href="class_t.html">T</a> &amp;value)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a198bc7c31dd1e63d293da4046569e25d" id="r_a198bc7c31dd1e63d293da4046569e25d"><td class="memItemLeft" align="right" valign="top">struct k_mutex&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a198bc7c31dd1e63d293da4046569e25d">buffer_mutex</a></td></tr>
-<tr class="memitem:ab0323e1729bf1f4025c636d4f02eb0b2" id="r_ab0323e1729bf1f4025c636d4f02eb0b2"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab0323e1729bf1f4025c636d4f02eb0b2">buffer_size_public</a> = 0</td></tr>
-<tr class="memitem:a5c1deca62c4de1895ac9fd4f66070ef1" id="r_a5c1deca62c4de1895ac9fd4f66070ef1"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5c1deca62c4de1895ac9fd4f66070ef1">current_size_entries</a> = 0</td></tr>
-<tr class="memitem:a75844ce74940ef333d11ae090e07c9af" id="r_a75844ce74940ef333d11ae090e07c9af"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a75844ce74940ef333d11ae090e07c9af">head</a> = 0</td></tr>
+<tr class="memitem:ab0323e1729bf1f4025c636d4f02eb0b2" id="r_ab0323e1729bf1f4025c636d4f02eb0b2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab0323e1729bf1f4025c636d4f02eb0b2">buffer_size_public</a> = 0</td></tr>
+<tr class="memitem:a5c1deca62c4de1895ac9fd4f66070ef1" id="r_a5c1deca62c4de1895ac9fd4f66070ef1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5c1deca62c4de1895ac9fd4f66070ef1">current_size_entries</a> = 0</td></tr>
+<tr class="memitem:a75844ce74940ef333d11ae090e07c9af" id="r_a75844ce74940ef333d11ae090e07c9af"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a75844ce74940ef333d11ae090e07c9af">head</a> = 0</td></tr>
 <tr class="memitem:a02d150938290d2a1b6bce69194f41b27" id="r_a02d150938290d2a1b6bce69194f41b27"><td class="memItemLeft" align="right" valign="top">struct k_sem&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a02d150938290d2a1b6bce69194f41b27">items_sem</a></td></tr>
 <tr class="memitem:a2f4bdc4efb8ed50fea52af4107cdf545" id="r_a2f4bdc4efb8ed50fea52af4107cdf545"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2f4bdc4efb8ed50fea52af4107cdf545">p_allocator</a> = nullptr</td></tr>
-<tr class="memitem:ab57398b6609a3c44c45d0f034120a01b" id="r_ab57398b6609a3c44c45d0f034120a01b"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab57398b6609a3c44c45d0f034120a01b">p_data</a> = nullptr</td></tr>
-<tr class="memitem:aa6f67a06e50f87fedb988628f8e2b72f" id="r_aa6f67a06e50f87fedb988628f8e2b72f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa6f67a06e50f87fedb988628f8e2b72f">read_from_isr</a> = false</td></tr>
+<tr class="memitem:ab57398b6609a3c44c45d0f034120a01b" id="r_ab57398b6609a3c44c45d0f034120a01b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_t.html">T</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab57398b6609a3c44c45d0f034120a01b">p_data</a> = nullptr</td></tr>
+<tr class="memitem:aa6f67a06e50f87fedb988628f8e2b72f" id="r_aa6f67a06e50f87fedb988628f8e2b72f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa6f67a06e50f87fedb988628f8e2b72f">read_from_isr</a> = false</td></tr>
 <tr class="memitem:a910255ff80011c392939d5eb062585fd" id="r_a910255ff80011c392939d5eb062585fd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_buffer_blocking_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a910255ff80011c392939d5eb062585fd">readWait</a> = <a class="el" href="_buffer_blocking_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a></td></tr>
 <tr class="memitem:a59ef91bd6928f4e83d303f254fbecfbe" id="r_a59ef91bd6928f4e83d303f254fbecfbe"><td class="memItemLeft" align="right" valign="top">struct k_sem&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a59ef91bd6928f4e83d303f254fbecfbe">spaces_sem</a></td></tr>
-<tr class="memitem:ad71c3da585299fa719501f5149814fd7" id="r_ad71c3da585299fa719501f5149814fd7"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad71c3da585299fa719501f5149814fd7">tail</a> = 0</td></tr>
-<tr class="memitem:af72d7b8b789a1927b55508cb5e7166ba" id="r_af72d7b8b789a1927b55508cb5e7166ba"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af72d7b8b789a1927b55508cb5e7166ba">write_from_isr</a> = false</td></tr>
+<tr class="memitem:ad71c3da585299fa719501f5149814fd7" id="r_ad71c3da585299fa719501f5149814fd7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad71c3da585299fa719501f5149814fd7">tail</a> = 0</td></tr>
+<tr class="memitem:af72d7b8b789a1927b55508cb5e7166ba" id="r_af72d7b8b789a1927b55508cb5e7166ba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af72d7b8b789a1927b55508cb5e7166ba">write_from_isr</a> = false</td></tr>
 <tr class="memitem:a7ec9bb4c39399295073761466d0c3b16" id="r_a7ec9bb4c39399295073761466d0c3b16"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_buffer_blocking_8h.html#af5484fc4c9c5ce77314d8589b5a3bab6">TickType_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7ec9bb4c39399295073761466d0c3b16">writeWait</a> = <a class="el" href="_buffer_blocking_8h.html#a72723ba1e4a85ca14f25c2b9e066613d">portMAX_DELAY</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename <a class="el" href="class_t.html">T</a>&gt;<br />
 class audio_tools::BufferZephyr&lt; T &gt;</div><p>Buffer implementation using Zephyr semaphores + mutex as a bounded ring buffer. </p>
 <dl class="section note"><dt>Note</dt><dd>Supported by all Zephyr platforms </dd></dl>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -195,7 +207,7 @@ class audio_tools::BufferZephyr&lt; T &gt;</div><p>Buffer implementation using Z
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -203,12 +215,12 @@ template&lt;typename T&gt; </div>
         <tr>
           <td class="memname">BufferZephyr </td>
           <td>(</td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>streamBufferSize</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>streamBufferSize</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>xTriggerLevel</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1</span>, </td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>xTriggerLevel</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1</span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -241,7 +253,7 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -269,13 +281,13 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">T * address </td>
+          <td class="memname"><a class="el" href="class_t.html">T</a> * address </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -300,13 +312,13 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int available </td>
+          <td class="memname"><a class="el" href="classint.html">int</a> available </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -331,13 +343,13 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int availableForWrite </td>
+          <td class="memname"><a class="el" href="classint.html">int</a> availableForWrite </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -366,7 +378,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual int bufferCountEmpty </td>
+          <td class="memname">virtual <a class="el" href="classint.html">int</a> bufferCountEmpty </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -395,7 +407,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual int bufferCountFilled </td>
+          <td class="memname">virtual <a class="el" href="classint.html">int</a> bufferCountFilled </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -451,9 +463,9 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual int clearArray </td>
+          <td class="memname">virtual <a class="el" href="classint.html">int</a> clearArray </td>
           <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>len</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -476,7 +488,7 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -537,7 +549,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual float freePercent </td>
+          <td class="memname">virtual <a class="el" href="classfloat.html">float</a> freePercent </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -560,13 +572,13 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool isEmpty </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> isEmpty </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -587,13 +599,13 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool isFull </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> isFull </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -622,7 +634,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual float levelPercent </td>
+          <td class="memname">virtual <a class="el" href="classfloat.html">float</a> levelPercent </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -645,13 +657,13 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">operator bool </td>
+          <td class="memname">operator <a class="el" href="classbool.html">bool</a> </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -672,15 +684,15 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool peek </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> peek </td>
           <td>(</td>
-          <td class="paramtype">T &amp;</td>          <td class="paramname"><span class="paramname"><em>result</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_t.html">T</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>result</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -703,15 +715,15 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool read </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> read </td>
           <td>(</td>
-          <td class="paramtype">T &amp;</td>          <td class="paramname"><span class="paramname"><em>result</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_t.html">T</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>result</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -734,20 +746,20 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int readArray </td>
+          <td class="memname"><a class="el" href="classint.html">int</a> readArray </td>
           <td>(</td>
-          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>data</em></span>[], </td>
+          <td class="paramtype"><a class="el" href="class_t.html">T</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span>[], </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -769,15 +781,15 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool readOne </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> readOne </td>
           <td>(</td>
-          <td class="paramtype">T &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_t.html">T</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -796,7 +808,7 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -827,15 +839,15 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool resize </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> resize </td>
           <td>(</td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>size</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>size</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -858,7 +870,7 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -866,7 +878,7 @@ template&lt;typename T&gt; </div>
         <tr>
           <td class="memname">void setReadFromISR </td>
           <td>(</td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>active</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classbool.html">bool</a></td>          <td class="paramname"><span class="paramname"><em>active</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -885,7 +897,7 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -912,13 +924,13 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool setup </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> setup </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -940,7 +952,7 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -948,7 +960,7 @@ template&lt;typename T&gt; </div>
         <tr>
           <td class="memname">void setWriteFromISR </td>
           <td>(</td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>active</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classbool.html">bool</a></td>          <td class="paramname"><span class="paramname"><em>active</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -967,7 +979,7 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -994,13 +1006,13 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t size </td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> size </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -1023,15 +1035,15 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool write </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> write </td>
           <td>(</td>
-          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_t.html">T</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1054,20 +1066,20 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int writeArray </td>
+          <td class="memname"><a class="el" href="classint.html">int</a> writeArray </td>
           <td>(</td>
-          <td class="paramtype">const T</td>          <td class="paramname"><span class="paramname"><em>data</em></span>[], </td>
+          <td class="paramtype">const <a class="el" href="class_t.html">T</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span>[], </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -1093,14 +1105,14 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual int writeArrayOverwrite </td>
+          <td class="memname">virtual <a class="el" href="classint.html">int</a> writeArrayOverwrite </td>
           <td>(</td>
-          <td class="paramtype">const T</td>          <td class="paramname"><span class="paramname"><em>data</em></span>[], </td>
+          <td class="paramtype">const <a class="el" href="class_t.html">T</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span>[], </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classint.html">int</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -1120,15 +1132,15 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool writeOne </td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> writeOne </td>
           <td>(</td>
-          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="class_t.html">T</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1148,7 +1160,7 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1172,13 +1184,13 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t buffer_size_public = 0</td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> buffer_size_public = 0</td>
         </tr>
       </table>
   </td>
@@ -1196,13 +1208,13 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t current_size_entries = 0</td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> current_size_entries = 0</td>
         </tr>
       </table>
   </td>
@@ -1220,13 +1232,13 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t head = 0</td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> head = 0</td>
         </tr>
       </table>
   </td>
@@ -1244,7 +1256,7 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1268,7 +1280,7 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1292,13 +1304,13 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">T* p_data = nullptr</td>
+          <td class="memname"><a class="el" href="class_t.html">T</a>* p_data = nullptr</td>
         </tr>
       </table>
   </td>
@@ -1316,13 +1328,13 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool read_from_isr = false</td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> read_from_isr = false</td>
         </tr>
       </table>
   </td>
@@ -1340,7 +1352,7 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1364,7 +1376,7 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1388,13 +1400,13 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t tail = 0</td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> tail = 0</td>
         </tr>
       </table>
   </td>
@@ -1412,13 +1424,13 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool write_from_isr = false</td>
+          <td class="memname"><a class="el" href="classbool.html">bool</a> write_from_isr = false</td>
         </tr>
       </table>
   </td>
@@ -1436,7 +1448,7 @@ template&lt;typename T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a>&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">

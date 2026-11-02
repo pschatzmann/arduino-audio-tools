@@ -1,5 +1,7 @@
 <map id="BiQuadDF2&lt; T &gt;" name="BiQuadDF2&lt; T &gt;">
-<area shape="rect" id="Node000001" title="Second&#45;order IIR filter in Direct Form II. Uses a single delay line, requiring less memory than DF1...." alt="" coords="5,81,138,109"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_filter.html" title=" " alt="" coords="15,5,128,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="73,47,74,81,69,80,70,51"/>
+<area shape="rect" id="Node000001" title="Second&#45;order IIR filter in Direct Form II. Uses a single delay line, requiring less memory than DF1...." alt="" coords="48,240,180,268"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_filter.html" title=" " alt="" coords="5,5,119,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="71,47,114,239,108,240,66,50"/>
+<area shape="rect" id="Node000003" href="$classfloat.html" title=" " alt="" coords="142,5,192,33"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="164,48,120,240,114,239,158,49"/>
 </map>

@@ -1,5 +1,21 @@
 <map id="USBAudioConfig" name="USBAudioConfig">
-<area shape="rect" id="Node000001" title="Configuration for USB Audio (inherits sample_rate / channels / bits_per_sample from AudioInfo)." alt="" coords="5,81,132,109"/>
-<area shape="rect" id="Node000002" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="27,5,110,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="70,47,71,81,66,80,67,51"/>
+<area shape="rect" id="Node000001" title="Configuration for USB Audio (inherits sample_rate / channels / bits_per_sample from AudioInfo)." alt="" coords="461,651,587,678"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="218,160,302,188"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="261,201,268,286,275,340,287,399,304,460,328,520,360,576,400,625,428,644,463,657,458,657,426,648,397,629,355,579,323,522,299,462,281,400,270,341,262,287,259,206"/>
+<area shape="rect" id="Node000003" href="$classuint32__t.html" title=" " alt="" coords="125,5,200,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="166,46,180,81,212,125,247,159,241,161,208,129,175,83,166,51"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,5,80,33"/>
+<area shape="poly" id="edge8_Node000001_Node000004" title=" " alt="" coords="41,46,44,136,49,189,60,242,91,365,105,416,121,462,142,504,170,544,209,584,260,624,295,638,346,648,463,661,458,661,345,654,293,643,257,629,205,588,166,548,137,507,116,464,100,417,86,366,55,243,44,190,39,136,41,51"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="58,43,78,63,98,80,118,89,136,92,155,95,177,104,217,131,249,159,244,161,214,135,175,108,153,100,135,98,117,94,95,84,74,67,60,48"/>
+<area shape="rect" id="Node000005" href="$classuint8__t.html" title=" " alt="" coords="316,5,382,33"/>
+<area shape="poly" id="edge7_Node000001_Node000005" title=" " alt="" coords="386,40,401,56,409,88,419,153,444,341,469,529,486,626,507,651,502,649,481,628,464,530,439,342,414,154,404,89,396,58,387,45"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="301,42,286,59,272,84,265,112,262,161,257,160,260,111,267,82,281,55,304,38"/>
+<area shape="rect" id="Node000006" href="$classbool.html" title=" " alt="" coords="578,160,627,188"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="591,200,562,245,542,256,534,260,528,268,507,320,495,376,491,433,493,489,507,587,522,651,518,649,502,588,488,490,486,433,490,376,502,319,523,265,531,256,540,251,558,241,587,204"/>
+<area shape="rect" id="Node000007" href="$classint16__t.html" title=" " alt="" coords="651,160,717,188"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="686,202,682,438,673,560,666,604,657,628,642,642,625,652,588,663,587,658,623,647,639,638,652,625,661,602,668,559,676,437,682,205"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="742,160,791,188"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="769,202,765,438,756,561,749,604,739,628,714,643,676,653,588,663,587,658,675,648,712,638,735,625,744,603,751,560,760,438,765,205"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="820,160,966,188"/>
+<area shape="poly" id="edge10_Node000001_Node000009" title=" " alt="" coords="903,201,924,285,933,340,937,400,935,461,924,522,901,579,885,605,866,629,851,636,826,642,754,652,588,663,587,658,753,647,825,637,849,631,862,625,881,602,897,576,918,521,929,461,931,400,927,340,919,286,901,205"/>
 </map>

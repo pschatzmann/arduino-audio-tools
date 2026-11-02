@@ -1,33 +1,58 @@
 <map id="PWMDriverRenesas" name="PWMDriverRenesas">
-<area shape="rect" id="Node000001" title="Audio output to PWM pins for Renesas based Arduino implementations." alt="" coords="848,242,998,269"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_p_w_m_driver_base.html" title="Base Class for all PWM drivers." alt="" coords="614,130,740,157"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="724,162,893,241,888,241,723,167"/>
-<area shape="rect" id="Node000003" href="$structaudio__tools_1_1_p_w_m_config_a_v_r.html" title="Configuration data for PWM audio output." alt="" coords="316,76,437,104"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="452,96,575,114,629,129,623,130,573,120,453,101"/>
-<area shape="rect" id="Node000004" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="48,28,131,56"/>
-<area shape="poly" id="edge5_Node000002_Node000004" title=" " alt="" coords="146,34,232,28,340,29,459,41,518,53,575,70,601,82,625,97,663,129,658,129,622,102,598,87,573,75,517,58,458,46,340,34,232,34,148,38"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="146,49,317,78,313,82,147,54"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="35,94,144,121"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="159,107,268,103,318,99,313,102,269,109,161,112"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="293,130,460,157"/>
-<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="475,141,616,143,611,144,476,146"/>
-<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_decimate.html" title="Provides a reduced sampling rate by taking a sample at every factor location (ingoring factor&#45;1 sampl..." alt="" coords="334,186,418,213"/>
-<area shape="poly" id="edge7_Node000002_Node000007" title=" " alt="" coords="433,192,501,184,573,171,636,157,631,159,575,177,502,189,435,197"/>
-<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="" coords="31,186,148,213"/>
-<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="163,205,336,204,332,208,164,210"/>
-<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="163,189,336,191,332,195,164,194"/>
-<area shape="rect" id="Node000009" href="$structaudio__tools_1_1audio__tools_1_1_decimate_1_1_decimate_state.html" title=" " alt="" coords="30,243,149,271"/>
-<area shape="poly" id="edge10_Node000007_Node000009" title=" " alt="" coords="163,245,268,227,336,212,331,214,269,233,165,251"/>
-<area shape="rect" id="Node000010" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="598,242,756,269"/>
-<area shape="poly" id="edge11_Node000001_Node000010" title=" " alt="" coords="772,253,850,255,845,256,772,258"/>
-<area shape="rect" id="Node000011" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="337,242,416,269"/>
-<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="431,253,600,255,595,256,432,258"/>
-<area shape="rect" id="Node000012" href="$classaudio__tools_1_1audio__tools_1_1_audio_timer.html" title="Common Interface definition for AudioTimer." alt="" coords="629,304,725,332"/>
-<area shape="poly" id="edge13_Node000001_Node000012" title=" " alt="" coords="740,303,824,283,876,271,881,269,825,289,741,308"/>
-<area shape="rect" id="Node000013" href="$classaudio__tools_1_1audio__tools_1_1_audio_timer_driver_a_v_r.html" title="Repeating Timer functions for repeated execution: Plaease use the typedef AudioTimer." alt="" coords="295,366,458,393"/>
-<area shape="poly" id="edge14_Node000012_Node000013" title=" " alt="" coords="473,374,523,369,573,359,613,346,646,333,651,332,615,351,575,365,524,374,473,380"/>
-<area shape="rect" id="Node000014" href="$classaudio__tools_1_1audio__tools_1_1_audio_timer_driver_base.html" title=" " alt="" coords="5,366,174,393"/>
-<area shape="poly" id="edge17_Node000012_Node000014" title=" " alt="" coords="147,358,197,346,318,330,439,321,631,318,626,318,439,326,319,335,198,352,148,364"/>
-<area shape="poly" id="edge15_Node000013_Node000014" title=" " alt="" coords="189,386,297,388,292,388,189,391"/>
-<area shape="poly" id="edge16_Node000013_Node000014" title=" " alt="" coords="189,368,297,371,292,372,189,374"/>
+<area shape="rect" id="Node000001" title="Audio output to PWM pins for Renesas based Arduino implementations." alt="" coords="1229,932,1378,960"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_p_w_m_driver_base.html" title="Base Class for all PWM drivers." alt="" coords="994,610,1121,637"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1080,647,1294,932,1288,931,1077,652"/>
+<area shape="rect" id="Node000003" href="$structaudio__tools_1_1_p_w_m_config_a_v_r.html" title="Configuration data for PWM audio output." alt="" coords="635,228,756,256"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="771,233,817,235,866,242,914,258,956,285,989,323,1015,366,1033,413,1046,461,1058,549,1059,610,1054,608,1052,550,1041,462,1028,415,1010,369,985,326,953,289,912,263,865,247,817,240,773,238"/>
+<area shape="rect" id="Node000004" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="285,270,368,297"/>
+<area shape="poly" id="edge11_Node000002_Node000004" title=" " alt="" coords="383,290,496,312,644,353,724,380,805,414,883,453,956,499,987,525,1014,555,1051,610,1045,609,1009,558,983,529,953,503,880,458,802,418,722,385,642,358,495,317,385,295"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="383,275,637,247,633,251,385,279"/>
+<area shape="rect" id="Node000005" href="$classuint32__t.html" title=" " alt="" coords="5,355,80,383"/>
+<area shape="poly" id="edge13_Node000002_Node000005" title=" " alt="" coords="93,384,247,433,436,485,514,502,581,511,697,522,812,536,878,550,955,572,997,588,1034,609,1029,609,995,593,953,577,877,555,811,541,696,527,581,517,513,507,434,491,245,438,95,389"/>
+<area shape="poly" id="edge9_Node000003_Node000005" title=" " alt="" coords="94,370,239,372,325,366,410,353,661,254,657,258,412,359,325,372,239,377,97,375"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="93,351,286,293,283,298,96,355"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="5,122,80,149"/>
+<area shape="poly" id="edge7_Node000003_Node000006" title=" " alt="" coords="94,133,219,137,316,146,412,163,541,194,650,226,645,229,539,200,410,169,315,152,218,142,97,137"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="83,155,220,233,244,249,287,268,282,271,241,254,217,238,84,160"/>
+<area shape="rect" id="Node000007" href="$classuint8__t.html" title=" " alt="" coords="9,231,76,259"/>
+<area shape="poly" id="edge8_Node000003_Node000007" title=" " alt="" coords="89,239,104,238,219,238,636,240,633,244,219,243,104,243,93,243"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="89,260,104,263,201,276,287,282,283,285,200,282,103,268,92,265"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="272,6,382,33"/>
+<area shape="poly" id="edge10_Node000003_Node000008" title=" " alt="" coords="396,21,443,28,493,40,543,58,590,84,626,118,656,158,678,197,691,228,686,228,673,199,651,161,622,121,586,88,541,63,492,45,442,33,398,26"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="612,638,779,665"/>
+<area shape="poly" id="edge12_Node000002_Node000009" title=" " alt="" coords="794,654,873,653,954,647,1013,637,1008,639,955,652,873,659,796,659"/>
+<area shape="rect" id="Node000010" href="$classbool.html" title=" " alt="" coords="671,1018,720,1045"/>
+<area shape="poly" id="edge14_Node000002_Node000010" title=" " alt="" coords="735,1024,758,1016,777,1003,787,987,789,971,791,953,801,935,821,920,840,911,878,907,916,902,934,895,953,881,977,852,998,819,1028,749,1045,683,1053,640,1056,635,1050,684,1033,750,1003,822,982,855,956,885,937,900,917,908,879,912,842,917,824,924,805,938,796,955,794,971,792,989,781,1007,760,1021,736,1029"/>
+<area shape="rect" id="Node000015" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="978,932,1137,960"/>
+<area shape="poly" id="edge25_Node000015_Node000010" title=" " alt="" coords="736,1031,836,1028,896,1020,953,1006,1000,984,1036,961,1041,959,1003,988,955,1011,897,1025,837,1033,736,1036"/>
+<area shape="rect" id="Node000018" href="$classaudio__tools_1_1audio__tools_1_1_audio_timer.html" title="Common Interface definition for AudioTimer." alt="" coords="1009,1111,1106,1139"/>
+<area shape="poly" id="edge28_Node000018_Node000010" title=" " alt="" coords="735,1041,804,1060,1012,1114,1006,1114,803,1066,735,1046"/>
+<area shape="rect" id="Node000011" href="$classaudio__tools_1_1audio__tools_1_1_decimate.html" title="Provides a reduced sampling rate by taking a sample at every factor location (ingoring factor&#45;1 sampl..." alt="" coords="654,582,738,609"/>
+<area shape="poly" id="edge15_Node000002_Node000011" title=" " alt="" coords="753,597,996,617,991,620,754,602"/>
+<area shape="rect" id="Node000012" href="$classaudio__tools_1_1audio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="" coords="268,562,386,589"/>
+<area shape="poly" id="edge16_Node000011_Node000012" title=" " alt="" coords="400,584,532,593,655,598,651,600,532,598,402,589"/>
+<area shape="poly" id="edge17_Node000011_Node000012" title=" " alt="" coords="400,570,532,575,655,586,651,588,532,580,402,574"/>
+<area shape="rect" id="Node000013" href="$classint.html" title=" " alt="" coords="308,763,346,791"/>
+<area shape="poly" id="edge20_Node000002_Node000013" title=" " alt="" coords="361,774,463,769,588,755,692,736,773,716,953,660,1024,636,1019,639,955,665,774,722,693,741,588,761,463,774,363,779"/>
+<area shape="poly" id="edge18_Node000011_Node000013" title=" " alt="" coords="360,769,485,745,547,726,570,716,586,705,597,686,598,667,599,646,610,624,630,609,655,601,651,604,632,614,614,628,604,647,603,667,602,687,590,708,573,720,549,731,487,750,363,774"/>
+<area shape="poly" id="edge22_Node000015_Node000013" title=" " alt="" coords="360,790,471,838,541,865,613,887,710,908,809,923,981,941,975,943,808,928,709,913,611,892,539,870,469,843,360,795"/>
+<area shape="rect" id="Node000014" href="$structaudio__tools_1_1audio__tools_1_1_decimate_1_1_decimate_state.html" title=" " alt="" coords="268,619,386,647"/>
+<area shape="poly" id="edge19_Node000011_Node000014" title=" " alt="" coords="400,630,491,627,588,618,656,605,651,608,588,623,491,632,403,635"/>
+<area shape="poly" id="edge21_Node000001_Node000015" title=" " alt="" coords="1152,943,1231,946,1225,946,1153,949"/>
+<area shape="rect" id="Node000016" href="$class_pwm_out_01_5_5.html" title=" " alt="" coords="648,803,743,831"/>
+<area shape="poly" id="edge23_Node000015_Node000016" title=" " alt="" coords="757,804,803,801,854,803,906,810,956,828,988,850,1016,878,1051,932,1046,931,1011,881,985,854,953,832,905,816,853,808,803,807,759,810"/>
+<area shape="rect" id="Node000017" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="656,966,735,993"/>
+<area shape="poly" id="edge24_Node000015_Node000017" title=" " alt="" coords="751,977,846,974,954,964,997,960,991,961,955,970,846,979,752,982"/>
+<area shape="poly" id="edge26_Node000001_Node000018" title=" " alt="" coords="1089,1099,1280,961,1285,960,1091,1104"/>
+<area shape="rect" id="Node000019" title=" " alt="" coords="12,1138,73,1165"/>
+<area shape="poly" id="edge27_Node000018_Node000019" title=" " alt="" coords="86,1143,103,1141,372,1126,634,1120,1012,1123,1006,1125,634,1125,372,1131,104,1146,89,1147"/>
+<area shape="rect" id="Node000021" href="$classaudio__tools_1_1audio__tools_1_1_audio_timer_driver_base.html" title=" " alt="" coords="243,1196,411,1224"/>
+<area shape="poly" id="edge31_Node000021_Node000019" title=" " alt="" coords="87,1162,104,1166,244,1194,241,1198,103,1171,88,1167"/>
+<area shape="rect" id="Node000020" href="$classaudio__tools_1_1audio__tools_1_1_audio_timer_driver_a_v_r.html" title="Repeating Timer functions for repeated execution: Plaease use the typedef AudioTimer." alt="" coords="614,1235,777,1263"/>
+<area shape="poly" id="edge29_Node000018_Node000020" title=" " alt="" coords="792,1256,873,1251,914,1243,953,1229,983,1209,1010,1185,1045,1140,1050,1138,1014,1188,987,1214,956,1233,916,1248,874,1256,793,1261"/>
+<area shape="poly" id="edge34_Node000018_Node000021" title=" " alt="" coords="426,1200,779,1166,954,1141,1006,1134,1012,1133,955,1146,780,1171,427,1205"/>
+<area shape="poly" id="edge30_Node000020_Node000021" title=" " alt="" coords="412,1224,617,1247,612,1248,412,1229"/>
+<area shape="poly" id="edge32_Node000020_Node000021" title=" " alt="" coords="427,1210,628,1234,623,1235,426,1215"/>
+<area shape="rect" id="Node000022" title=" " alt="" coords="259,1276,394,1304"/>
+<area shape="poly" id="edge33_Node000020_Node000022" title=" " alt="" coords="410,1282,588,1264,612,1263,618,1263,588,1270,410,1287"/>
 </map>

@@ -1,15 +1,38 @@
 <map id="SynchronizedNBufferZephyrT&lt; T &gt;" name="SynchronizedNBufferZephyrT&lt; T &gt;">
-<area shape="rect" id="Node000001" title="NBuffer using Zephyr queues for available and filled buffers." alt="" coords="737,152,940,196"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_n_buffer.html" title=" " alt="" coords="435,85,543,113"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="558,111,739,152,734,152,558,116"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="51,5,182,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="197,29,288,39,385,59,445,85,440,85,384,64,288,45,198,34"/>
-<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="196,9,288,16,385,35,438,57,479,85,474,85,436,62,384,40,288,21,198,14"/>
-<area shape="poly" id="edge4_Node000002_Node000003" title=" " alt="" coords="146,40,195,74,223,89,252,100,299,109,348,112,437,108,432,109,348,117,299,114,251,105,221,94,192,78,146,46"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_queue_from_vector.html" title=" " alt="" coords="5,147,228,209"/>
-<area shape="poly" id="edge5_Node000002_Node000004" title=" " alt="" coords="243,190,314,188,350,182,384,173,425,148,469,115,474,112,428,152,386,178,351,188,315,193,244,196"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_queue_zephyr.html" title=" " alt="" coords="409,176,569,238"/>
-<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="584,209,648,208,713,203,755,197,761,196,713,208,648,213,584,214"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="77,233,156,261"/>
-<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="171,244,271,241,384,230,405,228,411,228,385,235,271,246,172,250"/>
+<area shape="rect" id="Node000001" title="NBuffer using Zephyr queues for available and filled buffers." alt="" coords="960,372,1164,417"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_n_buffer.html" title=" " alt="" coords="658,251,766,279"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="767,282,1002,371,997,372,766,287"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="275,221,405,248"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="419,248,608,265,660,271,655,273,608,270,421,253"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="420,228,608,241,674,250,669,252,608,246,421,233"/>
+<area shape="poly" id="edge6_Node000002_Node000003" title=" " alt="" coords="372,255,420,284,476,306,512,314,541,316,607,306,648,293,687,278,682,281,650,298,609,311,541,321,511,319,474,311,418,288,373,260"/>
+<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="321,470,359,498"/>
+<area shape="poly" id="edge20_Node000001_Node000004" title=" " alt="" coords="374,480,479,474,608,462,795,437,962,412,957,414,796,442,608,468,479,479,375,485"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="374,477,500,458,564,443,607,425,643,391,671,350,691,310,704,282,708,277,696,312,676,353,647,394,609,430,565,448,501,463,376,482"/>
+<area shape="rect" id="Node000011" href="$classaudio__tools_1_1_queue_zephyr.html" title=" " alt="" coords="632,633,792,695"/>
+<area shape="poly" id="edge16_Node000011_Node000004" title=" " alt="" coords="374,492,476,525,513,533,544,537,574,543,609,559,654,593,690,633,685,632,651,597,607,563,572,548,543,542,513,538,474,530,374,498"/>
+<area shape="rect" id="Node000005" href="$classsize__t.html" title=" " alt="" coords="310,54,370,82"/>
+<area shape="poly" id="edge19_Node000001_Node000005" title=" " alt="" coords="383,56,432,49,488,46,549,49,609,61,681,90,750,127,816,170,876,215,977,303,1043,372,1037,371,973,307,873,219,813,174,747,132,679,95,607,66,549,54,488,51,432,55,386,61"/>
+<area shape="poly" id="edge5_Node000002_Node000005" title=" " alt="" coords="384,73,508,98,568,114,609,132,643,160,670,192,706,251,701,250,666,195,639,163,607,137,566,119,507,103,386,78"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_queue_from_vector.html" title=" " alt="" coords="229,134,451,196"/>
+<area shape="poly" id="edge7_Node000002_Node000006" title=" " alt="" coords="466,182,538,198,609,217,685,250,680,251,607,222,537,203,467,188"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="5,95,106,123"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="120,119,205,136,230,142,226,144,204,141,122,124"/>
+<area shape="rect" id="Node000008" href="$classint32__t.html" title=" " alt="" coords="22,151,89,179"/>
+<area shape="poly" id="edge9_Node000006_Node000008" title=" " alt="" coords="103,163,230,163,226,167,106,167"/>
+<area shape="rect" id="Node000009" href="$class_t.html" title=" " alt="" coords="36,207,75,235"/>
+<area shape="poly" id="edge10_Node000006_Node000009" title=" " alt="" coords="88,214,204,193,230,189,226,192,205,198,92,218"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="284,370,396,398"/>
+<area shape="poly" id="edge11_Node000002_Node000010" title=" " alt="" coords="411,392,457,394,507,392,558,385,607,369,637,350,664,325,700,281,704,277,668,329,641,354,609,373,560,390,508,398,457,399,413,397"/>
+<area shape="poly" id="edge12_Node000001_Node000011" title=" " alt="" coords="806,624,871,591,935,548,969,515,1000,479,1045,418,1049,415,1004,482,973,519,938,552,874,595,808,629"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="283,571,396,599"/>
+<area shape="poly" id="edge13_Node000011_Node000012" title=" " alt="" coords="412,584,506,592,558,600,609,612,657,632,651,632,607,617,557,605,506,597,412,589"/>
+<area shape="rect" id="Node000013" href="$classuint32__t.html" title=" " alt="" coords="303,650,377,678"/>
+<area shape="poly" id="edge14_Node000011_Node000013" title=" " alt="" coords="393,661,634,663,629,665,393,666"/>
+<area shape="rect" id="Node000014" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="300,706,380,734"/>
+<area shape="poly" id="edge15_Node000011_Node000014" title=" " alt="" coords="395,715,494,707,608,691,634,688,629,689,608,697,495,713,395,720"/>
+<area shape="rect" id="Node000015" href="$classuint8__t.html" title=" " alt="" coords="307,762,373,790"/>
+<area shape="poly" id="edge17_Node000011_Node000015" title=" " alt="" coords="388,774,491,768,550,757,607,740,645,719,676,696,681,694,648,723,609,744,551,763,492,773,389,780"/>
+<area shape="rect" id="Node000016" href="$classbool.html" title=" " alt="" coords="315,818,364,846"/>
+<area shape="poly" id="edge18_Node000011_Node000016" title=" " alt="" coords="380,834,429,836,487,834,549,823,579,813,607,800,636,778,660,750,695,696,699,694,665,753,639,782,609,804,581,818,550,828,488,839,428,842,380,839"/>
 </map>

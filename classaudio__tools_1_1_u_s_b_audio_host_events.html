@@ -106,14 +106,14 @@ Inheritance diagram for USBAudioHostEvents:</div>
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a46ab2bdf4e516db93e1de02c7ed1ec37" id="r_a46ab2bdf4e516db93e1de02c7ed1ec37"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a46ab2bdf4e516db93e1de02c7ed1ec37">~USBAudioHostEvents</a> ()=default</td></tr>
-<tr class="memitem:ac0ad7e5eb7e652a36a77bce64ae80aa1" id="r_ac0ad7e5eb7e652a36a77bce64ae80aa1"><td class="memItemLeft" align="right" valign="top">virtual uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac0ad7e5eb7e652a36a77bce64ae80aa1">onAttach</a> (uint8_t daddr, uint16_t vid, uint16_t pid, const uint8_t *desc, uint16_t len)=0</td></tr>
-<tr class="memitem:a8eef3a8610653067a55d59e2a5856ce0" id="r_a8eef3a8610653067a55d59e2a5856ce0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8eef3a8610653067a55d59e2a5856ce0">onConfigured</a> (uint8_t daddr)=0</td></tr>
-<tr class="memitem:aa7b259c3a7010e553b956d926791b9c4" id="r_aa7b259c3a7010e553b956d926791b9c4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa7b259c3a7010e553b956d926791b9c4">onControlComplete</a> (bool ok, uint16_t len)=0</td></tr>
-<tr class="memitem:a2b278e62540529b05b7c565b8aae5f4e" id="r_a2b278e62540529b05b7c565b8aae5f4e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2b278e62540529b05b7c565b8aae5f4e">onDetach</a> (uint8_t daddr)=0</td></tr>
+<tr class="memitem:ac0ad7e5eb7e652a36a77bce64ae80aa1" id="r_ac0ad7e5eb7e652a36a77bce64ae80aa1"><td class="memItemLeft" align="right" valign="top">virtual uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac0ad7e5eb7e652a36a77bce64ae80aa1">onAttach</a> (<a class="el" href="classuint8__t.html">uint8_t</a> daddr, uint16_t vid, uint16_t pid, const <a class="el" href="classuint8__t.html">uint8_t</a> *desc, uint16_t len)=0</td></tr>
+<tr class="memitem:a8eef3a8610653067a55d59e2a5856ce0" id="r_a8eef3a8610653067a55d59e2a5856ce0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8eef3a8610653067a55d59e2a5856ce0">onConfigured</a> (<a class="el" href="classuint8__t.html">uint8_t</a> daddr)=0</td></tr>
+<tr class="memitem:aa7b259c3a7010e553b956d926791b9c4" id="r_aa7b259c3a7010e553b956d926791b9c4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa7b259c3a7010e553b956d926791b9c4">onControlComplete</a> (<a class="el" href="classbool.html">bool</a> ok, uint16_t len)=0</td></tr>
+<tr class="memitem:a2b278e62540529b05b7c565b8aae5f4e" id="r_a2b278e62540529b05b7c565b8aae5f4e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2b278e62540529b05b7c565b8aae5f4e">onDetach</a> (<a class="el" href="classuint8__t.html">uint8_t</a> daddr)=0</td></tr>
 <tr class="memdesc:a2b278e62540529b05b7c565b8aae5f4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The device was removed.  <br /></td></tr>
-<tr class="memitem:a90ed976662e1762c5ab829f94a5c97cd" id="r_a90ed976662e1762c5ab829f94a5c97cd"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a90ed976662e1762c5ab829f94a5c97cd">onIsoIn</a> (<a class="el" href="namespaceaudio__tools.html#a5215dca0bf7e06265945b65e039d2f24">UsbHostStreamRole</a> role, const uint8_t *data, uint16_t len)=0</td></tr>
+<tr class="memitem:a90ed976662e1762c5ab829f94a5c97cd" id="r_a90ed976662e1762c5ab829f94a5c97cd"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a90ed976662e1762c5ab829f94a5c97cd">onIsoIn</a> (<a class="el" href="namespaceaudio__tools.html#a5215dca0bf7e06265945b65e039d2f24">UsbHostStreamRole</a> role, const <a class="el" href="classuint8__t.html">uint8_t</a> *data, uint16_t len)=0</td></tr>
 <tr class="memdesc:a90ed976662e1762c5ab829f94a5c97cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">One isochronous IN packet was received (RxData or Feedback).  <br /></td></tr>
-<tr class="memitem:a2cf963b10ab7cb399e4f4bbe9c08d3ac" id="r_a2cf963b10ab7cb399e4f4bbe9c08d3ac"><td class="memItemLeft" align="right" valign="top">virtual uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2cf963b10ab7cb399e4f4bbe9c08d3ac">onIsoOut</a> (uint8_t *data, uint16_t max)=0</td></tr>
+<tr class="memitem:a2cf963b10ab7cb399e4f4bbe9c08d3ac" id="r_a2cf963b10ab7cb399e4f4bbe9c08d3ac"><td class="memItemLeft" align="right" valign="top">virtual uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2cf963b10ab7cb399e4f4bbe9c08d3ac">onIsoOut</a> (<a class="el" href="classuint8__t.html">uint8_t</a> *data, uint16_t max)=0</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Upcalls from a USB host backend into the stack independent UAC host class logic (<a class="el" href="classaudio__tools_1_1_u_s_b_audio_host_base.html" title="USB Audio Class (UAC1 and UAC2) host: reads PCM audio from an attached USB microphone and/or writes P...">USBAudioHostBase</a>). All methods are called from the USB stack context (TinyUSB: inside tuh_task(); ESP-IDF: the USB host task). </p>
@@ -156,7 +156,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual uint16_t onAttach </td>
           <td>(</td>
-          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>daddr</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a></td>          <td class="paramname"><span class="paramname"><em>daddr</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -171,7 +171,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const uint8_t *</td>          <td class="paramname"><span class="paramname"><em>desc</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>desc</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -203,7 +203,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void onConfigured </td>
           <td>(</td>
-          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>daddr</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a></td>          <td class="paramname"><span class="paramname"><em>daddr</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -231,7 +231,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void onControlComplete </td>
           <td>(</td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>ok</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classbool.html">bool</a></td>          <td class="paramname"><span class="paramname"><em>ok</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -263,7 +263,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void onDetach </td>
           <td>(</td>
-          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>daddr</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a></td>          <td class="paramname"><span class="paramname"><em>daddr</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -297,7 +297,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const uint8_t *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -330,7 +330,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual uint16_t onIsoOut </td>
           <td>(</td>
-          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>

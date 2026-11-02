@@ -113,18 +113,18 @@ Collaboration diagram for ChannelDiffT&lt; T &gt;:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a11376ef1cfb598e91a47e1dfd088be30" id="r_a11376ef1cfb598e91a47e1dfd088be30"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a11376ef1cfb598e91a47e1dfd088be30">ChannelDiffT</a> ()</td></tr>
 <tr class="memitem:a11376ef1cfb598e91a47e1dfd088be30" id="r_a11376ef1cfb598e91a47e1dfd088be30"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a11376ef1cfb598e91a47e1dfd088be30">ChannelDiffT</a> ()</td></tr>
-<tr class="memitem:a9f22cb9d0b657ed5e0c6012038b7ae0d" id="r_a9f22cb9d0b657ed5e0c6012038b7ae0d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9f22cb9d0b657ed5e0c6012038b7ae0d">convert</a> (uint8_t *src, size_t size) override</td></tr>
-<tr class="memitem:a9f22cb9d0b657ed5e0c6012038b7ae0d" id="r_a9f22cb9d0b657ed5e0c6012038b7ae0d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9f22cb9d0b657ed5e0c6012038b7ae0d">convert</a> (uint8_t *src, size_t size) override</td></tr>
-<tr class="memitem:ab42262038579ccc4e2b40cbbd4034847" id="r_ab42262038579ccc4e2b40cbbd4034847"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab42262038579ccc4e2b40cbbd4034847">convert</a> (uint8_t *target, uint8_t *src, size_t size)</td></tr>
-<tr class="memitem:ab42262038579ccc4e2b40cbbd4034847" id="r_ab42262038579ccc4e2b40cbbd4034847"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab42262038579ccc4e2b40cbbd4034847">convert</a> (uint8_t *target, uint8_t *src, size_t size)</td></tr>
+<tr class="memitem:a9f22cb9d0b657ed5e0c6012038b7ae0d" id="r_a9f22cb9d0b657ed5e0c6012038b7ae0d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9f22cb9d0b657ed5e0c6012038b7ae0d">convert</a> (<a class="el" href="classuint8__t.html">uint8_t</a> *src, <a class="el" href="classsize__t.html">size_t</a> size) override</td></tr>
+<tr class="memitem:a9f22cb9d0b657ed5e0c6012038b7ae0d" id="r_a9f22cb9d0b657ed5e0c6012038b7ae0d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9f22cb9d0b657ed5e0c6012038b7ae0d">convert</a> (<a class="el" href="classuint8__t.html">uint8_t</a> *src, <a class="el" href="classsize__t.html">size_t</a> size) override</td></tr>
+<tr class="memitem:ab42262038579ccc4e2b40cbbd4034847" id="r_ab42262038579ccc4e2b40cbbd4034847"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab42262038579ccc4e2b40cbbd4034847">convert</a> (<a class="el" href="classuint8__t.html">uint8_t</a> *target, <a class="el" href="classuint8__t.html">uint8_t</a> *src, <a class="el" href="classsize__t.html">size_t</a> size)</td></tr>
+<tr class="memitem:ab42262038579ccc4e2b40cbbd4034847" id="r_ab42262038579ccc4e2b40cbbd4034847"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsize__t.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab42262038579ccc4e2b40cbbd4034847">convert</a> (<a class="el" href="classuint8__t.html">uint8_t</a> *target, <a class="el" href="classuint8__t.html">uint8_t</a> *src, <a class="el" href="classsize__t.html">size_t</a> size)</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename T = int16_t&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename <a class="el" href="class_t.html">T</a> = int16_t&gt;<br />
 class audio_tools::audio_tools::ChannelDiffT&lt; T &gt;</div><p>We calculate the difference between pairs of channels in a datastream. E.g. if we have 4 channels we end up with 2 channels. The channels will be channel_1 - channel_2 channel_3 - channel_4 This is similar to background subtraction between two channels but will also work for quadric, sexic or octic audio. This will not work if you provide single channel data! </p>
 <dl class="section author"><dt>Author</dt><dd>Urs Utzinger</dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td></td></tr>
+    <tr><td class="paramname"><a class="el" href="class_t.html">T</a></td><td></td></tr>
   </table>
   </dd>
 </dl>
@@ -135,7 +135,7 @@ class audio_tools::audio_tools::ChannelDiffT&lt; T &gt;</div><p>We calculate the
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T = int16_t&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a> = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -162,7 +162,7 @@ template&lt;typename T = int16_t&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T = int16_t&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a> = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -190,20 +190,20 @@ template&lt;typename T = int16_t&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T = int16_t&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a> = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t convert </td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> convert </td>
           <td>(</td>
-          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>src</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>src</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>size</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>size</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -223,20 +223,20 @@ template&lt;typename T = int16_t&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T = int16_t&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a> = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t convert </td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> convert </td>
           <td>(</td>
-          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>src</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>src</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>size</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>size</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -256,25 +256,25 @@ template&lt;typename T = int16_t&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T = int16_t&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a> = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t convert </td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> convert </td>
           <td>(</td>
-          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>target</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>target</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>src</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>src</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>size</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>size</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -292,25 +292,25 @@ template&lt;typename T = int16_t&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T = int16_t&gt; </div>
+template&lt;typename <a class="el" href="class_t.html">T</a> = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t convert </td>
+          <td class="memname"><a class="el" href="classsize__t.html">size_t</a> convert </td>
           <td>(</td>
-          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>target</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>target</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>src</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>src</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>size</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>size</em></span>&#160;)</td>
         </tr>
       </table>
   </td>

@@ -1,9 +1,27 @@
 <map id="AudioClientRTSP" name="AudioClientRTSP">
-<area shape="rect" id="Node000001" title="A simple RTSPClient using https://github.com/pschatzmann/arduino&#45;live555." alt="" coords="56,207,184,234"/>
-<area shape="rect" id="Node000002" href="$classaudiotools__rtsp_1_1_our_r_t_s_p_client.html" title=" " alt="" coords="63,106,178,134"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="122,148,123,207,118,205,118,151"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="5,5,97,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="70,43,114,105,108,106,68,48"/>
-<area shape="rect" id="Node000004" href="$classaudiotools__rtsp_1_1_stream_client_state.html" title=" " alt="" coords="121,5,261,33"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="175,43,132,107,128,104,171,47"/>
+<area shape="rect" id="Node000001" title="A simple RTSPClient using https://github.com/pschatzmann/arduino&#45;live555." alt="" coords="600,330,729,357"/>
+<area shape="rect" id="Node000002" href="$classaudiotools__rtsp_1_1_our_r_t_s_p_client.html" title=" " alt="" coords="265,207,379,234"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="352,241,401,274,460,303,532,323,603,337,597,337,531,329,458,308,399,279,350,246"/>
+<area shape="rect" id="Node000003" href="$class_r_t_s_p_client.html" title=" " alt="" coords="255,106,346,134"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="308,146,322,207,317,205,305,151"/>
+<area shape="rect" id="Node000004" href="$classaudiotools__rtsp_1_1_stream_client_state.html" title=" " alt="" coords="370,106,511,134"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="416,142,339,208,336,204,412,145"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="5,5,199,33"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="158,35,305,79,392,104,387,106,303,85,158,41"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="222,5,344,33"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="315,39,380,80,421,105,415,106,377,84,315,44"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="368,5,513,33"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="442,46,443,106,438,104,439,51"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="537,5,624,33"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="565,44,548,66,528,84,482,108,480,103,524,80,544,63,561,47"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="685,5,751,33"/>
+<area shape="poly" id="edge8_Node000004_Node000009" title=" " alt="" coords="710,45,698,68,681,84,651,96,608,106,512,117,511,112,607,100,649,91,678,80,694,64,706,49"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="404,207,560,234"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="516,241,647,329,642,329,514,246"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="584,207,745,234"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="667,248,667,331,663,327,663,252"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="769,207,819,234"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="784,247,767,279,742,308,703,332,702,326,739,304,762,276,780,250"/>
+<area shape="rect" id="Node000013" href="$classbool.html" title=" " alt="" coords="856,207,905,234"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="880,248,872,280,864,295,853,308,832,319,802,327,730,339,729,334,800,322,830,314,850,304,860,292,867,278,876,251"/>
 </map>

@@ -1,7 +1,15 @@
 <map id="AudioInfoFormat" name="AudioInfoFormat">
-<area shape="rect" id="Node000001" title="AudioInfo extended with a WAVEFORMATEX&#45;style codec tag (the &quot;wavcode&quot;): identifies the codec (PCM,..." alt="" coords="41,81,170,109"/>
-<area shape="rect" id="Node000002" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="5,5,89,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="68,43,98,80,93,81,66,48"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information." alt="" coords="113,5,216,33"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="147,44,118,83,114,79,142,46"/>
+<area shape="rect" id="Node000001" title="AudioInfo extended with a WAVEFORMATEX&#45;style codec tag (the &quot;wavcode&quot;): identifies the codec (PCM,..." alt="" coords="215,207,344,234"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="121,106,204,134"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="191,141,267,206,261,206,189,146"/>
+<area shape="rect" id="Node000003" href="$classuint32__t.html" title=" " alt="" coords="5,5,80,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="49,46,59,65,70,80,94,97,123,109,118,111,92,102,66,84,54,67,49,51"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="125,5,200,33"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="164,46,165,106,160,105,161,51"/>
+<area shape="rect" id="Node000005" href="$classuint8__t.html" title=" " alt="" coords="227,5,293,33"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="253,45,245,67,232,84,216,97,198,108,195,103,213,93,229,80,240,64,250,49"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information." alt="" coords="229,106,331,134"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="282,148,282,207,278,205,278,151"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="356,106,460,134"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="382,143,298,208,296,204,376,144"/>
 </map>

@@ -37,7 +37,7 @@
 <area shape="rect" id="Node000029" href="$classaudio__tools_1_1_r2_r_output.html" title="Output to R&#45;2R DAC. You need to define the used digital pins in the configuration...." alt="" coords="414,905,506,933"/>
 <area shape="poly" id="edge31_Node000001_Node000029" title=" " alt="" coords="303,936,416,923,412,926,306,940"/>
 <area shape="rect" id="Node000030" href="$classaudio__tools_1_1_r_t_s_p_output.html" title="RTSPOutput &#45; Audio Output Stream for RTSP Streaming." alt="" coords="368,957,552,985"/>
-<area shape="poly" id="edge32_Node000001_Node000030" title=" " alt="" coords="303,951,370,959,366,962,305,956"/>
+<area shape="poly" id="edge32_Node000001_Node000030" title=" " alt="" coords="303,951,370,959,366,962,306,956"/>
 <area shape="rect" id="Node000031" href="$classaudio__tools_1_1_r_t_t_t_l_output.html" title="RTTTL (Ring Tone Text Transfer Language) parser and player stream." alt="" coords="389,1009,531,1037"/>
 <area shape="poly" id="edge33_Node000001_Node000031" title=" " alt="" coords="275,965,338,994,391,1010,386,1012,336,999,276,970"/>
 <area shape="rect" id="Node000032" href="$classaudio__tools_1_1_s_p_i_audio_master.html" title="SPI master endpoint for remote audio sink configuration and PCM data transfer." alt="" coords="398,1061,522,1089"/>
@@ -47,26 +47,26 @@
 <area shape="rect" id="Node000034" href="$classaudio__tools_1_1_wake_word_detector.html" title="Template&#45;based wake word detector for microcontrollers using dominant frequency patterns." alt="" coords="360,1165,561,1193"/>
 <area shape="poly" id="edge36_Node000001_Node000034" title=" " alt="" coords="245,972,258,1014,275,1062,302,1110,319,1132,339,1150,361,1165,356,1166,335,1155,315,1135,298,1113,270,1065,252,1016,244,977"/>
 <area shape="rect" id="Node000035" href="$classaudio__tools_1_1_web_socket_output.html" title="A simple wrapper class that lets you use the standard Arduino Print class output commands to send aud..." alt="" coords="392,1217,528,1245"/>
-<area shape="poly" id="edge37_Node000001_Node000035" title=" " alt="" coords="242,973,252,1025,268,1087,296,1150,315,1178,339,1202,364,1217,394,1228,389,1229,362,1222,335,1207,311,1181,291,1152,263,1088,246,1026,241,978"/>
+<area shape="poly" id="edge37_Node000001_Node000035" title=" " alt="" coords="242,973,252,1025,268,1087,296,1150,315,1178,339,1202,364,1217,394,1227,389,1229,362,1222,335,1207,311,1181,291,1152,263,1088,246,1026,241,978"/>
 <area shape="rect" id="Node000036" href="$classaudio__tools_1_1audio__tools_1_1_audio_output_adapter.html" title="Base class for Output Adpapters." alt="" coords="384,1269,537,1297"/>
-<area shape="poly" id="edge38_Node000001_Node000036" title=" " alt="" coords="240,973,246,1034,261,1110,273,1150,290,1188,311,1224,339,1254,360,1268,386,1279,381,1280,357,1273,335,1259,307,1227,285,1191,268,1152,255,1112,241,1035,239,978"/>
+<area shape="poly" id="edge38_Node000001_Node000036" title=" " alt="" coords="240,973,246,1034,261,1110,273,1150,290,1188,311,1224,339,1254,360,1268,386,1278,381,1280,357,1273,335,1259,307,1227,285,1191,268,1152,255,1112,241,1035,239,978"/>
 <area shape="rect" id="Node000043" href="$classaudio__tools_1_1audio__tools_1_1_channel_split_output.html" title="Simple functionality to extract mono streams from a multichannel (e.g. stereo) signal." alt="" coords="386,1321,534,1349"/>
-<area shape="poly" id="edge45_Node000001_Node000043" title=" " alt="" coords="243,972,257,1055,277,1159,305,1257,321,1294,339,1319,361,1333,389,1343,384,1344,359,1338,335,1322,317,1297,300,1258,272,1160,252,1056,242,977"/>
-<area shape="poly" id="edge46_Node000001_Node000043" title=" " alt="" coords="244,972,259,1050,280,1147,307,1237,322,1271,339,1295,361,1309,389,1320,384,1321,359,1314,335,1298,317,1274,302,1239,274,1148,254,1051,244,978"/>
+<area shape="poly" id="edge45_Node000001_Node000043" title=" " alt="" coords="243,972,257,1055,277,1159,305,1257,321,1294,339,1319,361,1333,389,1343,384,1345,359,1338,335,1322,317,1297,300,1258,272,1160,252,1056,242,977"/>
+<area shape="poly" id="edge46_Node000001_Node000043" title=" " alt="" coords="244,972,259,1050,280,1147,307,1237,322,1271,339,1295,361,1309,389,1320,384,1322,359,1314,335,1298,317,1274,302,1239,274,1148,254,1051,244,978"/>
 <area shape="rect" id="Node000044" href="$classaudio__tools_1_1audio__tools_1_1_channels_select_output.html" title="Flexible functionality to extract one or more channels from a multichannel signal...." alt="" coords="378,1373,543,1401"/>
 <area shape="poly" id="edge47_Node000001_Node000044" title=" " alt="" coords="243,973,256,1063,275,1179,303,1288,320,1331,339,1359,357,1372,380,1382,374,1383,354,1376,335,1362,315,1333,297,1290,270,1180,250,1064,242,978"/>
 <area shape="rect" id="Node000045" href="$classaudio__tools_1_1audio__tools_1_1_csv_output.html" title="Stream Wrapper which can be used to print the values as readable ASCII to the screen to be analyzed i..." alt="" coords="396,1425,524,1453"/>
-<area shape="poly" id="edge48_Node000001_Node000045" title=" " alt="" coords="241,973,252,1076,270,1211,283,1279,299,1340,317,1390,339,1423,365,1440,399,1450,393,1450,363,1445,335,1426,313,1392,294,1341,278,1280,265,1212,247,1077,240,978"/>
-<area shape="poly" id="edge49_Node000001_Node000045" title=" " alt="" coords="242,973,254,1071,272,1199,285,1263,300,1320,318,1367,339,1399,365,1416,399,1427,393,1428,363,1421,335,1402,313,1370,295,1322,280,1264,267,1200,249,1072,241,978"/>
+<area shape="poly" id="edge48_Node000001_Node000045" title=" " alt="" coords="241,973,252,1076,270,1211,283,1279,299,1340,317,1390,339,1423,365,1440,398,1449,393,1451,363,1445,335,1426,313,1392,294,1341,278,1280,265,1212,247,1077,240,978"/>
+<area shape="poly" id="edge49_Node000001_Node000045" title=" " alt="" coords="242,973,254,1071,272,1199,285,1263,300,1320,318,1367,339,1399,365,1416,398,1427,393,1428,363,1421,335,1402,313,1370,295,1322,280,1264,267,1200,249,1072,241,978"/>
 <area shape="rect" id="Node000046" href="$classaudio__tools_1_1audio__tools_1_1_hex_dump_output.html" title="Creates a Hex Dump." alt="" coords="395,1477,525,1505"/>
 <area shape="poly" id="edge50_Node000001_Node000046" title=" " alt="" coords="241,973,250,1086,267,1237,280,1313,296,1381,315,1437,339,1475,365,1492,397,1502,392,1502,362,1496,335,1478,311,1440,291,1383,274,1314,262,1237,245,1087,240,978"/>
 <area shape="poly" id="edge51_Node000001_Node000046" title=" " alt="" coords="241,973,251,1081,268,1224,281,1296,297,1362,316,1415,339,1451,365,1468,397,1479,392,1480,362,1473,335,1454,311,1417,292,1363,276,1297,263,1225,246,1082,240,978"/>
 <area shape="rect" id="Node000047" href="$classaudio__tools_1_1audio__tools_1_1_memory_output.html" title="Writes to a preallocated memory." alt="" coords="400,1529,520,1557"/>
-<area shape="poly" id="edge52_Node000001_Node000047" title=" " alt="" coords="241,973,248,1095,264,1262,276,1346,293,1423,313,1485,326,1509,339,1527,352,1537,367,1545,403,1555,397,1555,365,1550,349,1542,335,1530,321,1512,309,1487,287,1424,271,1347,258,1262,243,1096,239,978"/>
-<area shape="poly" id="edge53_Node000001_Node000047" title=" " alt="" coords="241,972,249,1090,265,1249,277,1329,294,1403,314,1463,326,1485,339,1503,352,1513,367,1521,403,1533,397,1533,365,1526,349,1518,335,1506,321,1488,309,1465,288,1404,272,1330,260,1250,244,1091,240,977"/>
+<area shape="poly" id="edge52_Node000001_Node000047" title=" " alt="" coords="240,973,248,1095,264,1262,276,1346,293,1423,313,1485,326,1509,339,1527,352,1537,367,1545,403,1555,397,1555,365,1550,349,1542,335,1530,321,1512,309,1487,287,1424,271,1347,258,1262,243,1096,239,978"/>
+<area shape="poly" id="edge53_Node000001_Node000047" title=" " alt="" coords="241,972,249,1090,265,1249,277,1329,294,1403,314,1463,326,1485,339,1503,352,1513,367,1521,403,1532,397,1533,365,1526,349,1518,335,1506,321,1488,309,1465,288,1404,272,1330,260,1250,244,1091,240,977"/>
 <area shape="rect" id="Node000048" href="$classaudio__tools_1_1audio__tools_1_1_modifying_output.html" title="Abstract class: Objects can be put into a pipleline." alt="" coords="396,1581,525,1609"/>
-<area shape="poly" id="edge54_Node000001_Node000048" title=" " alt="" coords="240,973,246,1105,260,1287,273,1380,289,1464,311,1533,324,1559,339,1579,365,1596,398,1607,393,1606,363,1601,335,1582,320,1562,306,1535,284,1465,267,1380,255,1287,241,1105,239,978"/>
-<area shape="poly" id="edge56_Node000001_Node000048" title=" " alt="" coords="240,973,247,1100,261,1275,274,1363,290,1444,312,1510,325,1536,339,1555,365,1572,398,1584,393,1584,363,1577,335,1558,320,1538,307,1512,285,1446,269,1364,256,1275,242,1101,239,978"/>
+<area shape="poly" id="edge54_Node000001_Node000048" title=" " alt="" coords="240,973,246,1105,260,1287,273,1380,289,1464,311,1533,324,1559,339,1579,365,1596,398,1606,393,1606,363,1601,335,1582,320,1562,306,1535,284,1465,267,1380,255,1287,241,1105,239,978"/>
+<area shape="poly" id="edge59_Node000001_Node000048" title=" " alt="" coords="240,973,247,1100,261,1275,274,1363,290,1444,312,1510,325,1536,339,1555,365,1572,398,1584,393,1584,363,1577,335,1558,320,1538,307,1512,285,1446,269,1364,256,1275,242,1101,239,978"/>
 <area shape="rect" id="Node000002" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="46,880,98,908"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="110,911,188,937,184,940,113,916"/>
 <area shape="poly" id="edge4_Node000001_Node000002" title=" " alt="" coords="112,896,214,930,210,933,114,901"/>
@@ -90,18 +90,24 @@
 <area shape="poly" id="edge20_Node000013_Node000018" title=" " alt="" coords="515,386,551,393,585,408,600,420,610,433,618,446,633,458,659,470,689,479,684,482,657,475,630,463,614,450,605,436,597,424,582,412,549,399,517,390"/>
 <area shape="rect" id="Node000026" href="$classaudio__tools_1_1_opus_ogg_writer.html" title=" " alt="" coords="675,733,795,761"/>
 <area shape="poly" id="edge28_Node000025_Node000026" title=" " alt="" coords="552,745,677,746,672,749,554,750"/>
-<area shape="rect" id="Node000037" href="$classaudio__tools_1_1_adapter_audio_stream_to_audio_output.html" title="Wrapper which converts a AudioStream to a AudioOutput." alt="" coords="631,1120,839,1164"/>
-<area shape="poly" id="edge39_Node000036_Node000037" title=" " alt="" coords="550,1270,582,1254,598,1236,605,1216,613,1195,630,1175,652,1163,647,1166,633,1178,617,1198,610,1218,603,1239,585,1259,553,1275"/>
-<area shape="rect" id="Node000038" href="$classaudio__tools_1_1_adapter_print_to_audio_output.html" title="Wrapper which converts a Print to a AudioOutput." alt="" coords="636,1188,834,1216"/>
-<area shape="poly" id="edge40_Node000036_Node000038" title=" " alt="" coords="551,1264,582,1254,606,1240,630,1226,670,1215,665,1217,632,1231,609,1245,584,1259,553,1269"/>
-<area shape="rect" id="Node000039" href="$classaudio__tools_1_1_audio_writer_to_audio_output.html" title="Adapter class which lets an AudioWriter behave like a Print." alt="" coords="638,1240,832,1268"/>
-<area shape="poly" id="edge41_Node000036_Node000039" title=" " alt="" coords="552,1271,640,1263,635,1265,553,1276"/>
-<area shape="rect" id="Node000040" href="$classaudio__tools_1_1audio__tools_1_1_adapter_audio_stream_to_audio_output.html" title="Wrapper which converts a AudioStream to a AudioOutput." alt="" coords="631,1292,839,1336"/>
-<area shape="poly" id="edge42_Node000036_Node000040" title=" " alt="" coords="552,1291,633,1302,628,1303,553,1296"/>
-<area shape="rect" id="Node000041" href="$classaudio__tools_1_1audio__tools_1_1_adapter_print_to_audio_output.html" title="Wrapper which converts a Print to a AudioOutput." alt="" coords="636,1360,834,1388"/>
-<area shape="poly" id="edge43_Node000036_Node000041" title=" " alt="" coords="552,1295,585,1307,599,1317,609,1327,619,1337,633,1346,662,1359,656,1360,630,1351,615,1341,605,1331,596,1321,582,1312,552,1301"/>
-<area shape="rect" id="Node000042" href="$classaudio__tools_1_1audio__tools_1_1_audio_writer_to_audio_output.html" title="Adapter class which lets an AudioWriter behave like a Print." alt="" coords="638,1412,832,1440"/>
-<area shape="poly" id="edge44_Node000036_Node000042" title=" " alt="" coords="552,1291,585,1308,603,1330,610,1354,616,1376,633,1397,655,1412,650,1411,630,1401,612,1378,605,1355,599,1333,582,1312,552,1296"/>
-<area shape="rect" id="Node000049" href="$classaudio__tools_1_1_encoded_audio_output.html" title="A more natural Print class to process encoded data (aac, wav, mp3...). Just define the output and the..." alt="" coords="656,1581,814,1609"/>
-<area shape="poly" id="edge55_Node000048_Node000049" title=" " alt="" coords="540,1593,658,1595,653,1595,540,1598"/>
+<area shape="rect" id="Node000037" href="$classaudio__tools_1_1_adapter_audio_stream_to_audio_output.html" title="Wrapper which converts a AudioStream to a AudioOutput." alt="" coords="631,1118,839,1163"/>
+<area shape="poly" id="edge39_Node000036_Node000037" title=" " alt="" coords="550,1270,582,1254,598,1236,605,1216,613,1194,630,1173,652,1162,647,1165,633,1177,617,1197,610,1217,603,1238,585,1259,553,1275"/>
+<area shape="rect" id="Node000038" href="$classaudio__tools_1_1_adapter_print_to_audio_output.html" title="Wrapper which converts a Print to a AudioOutput." alt="" coords="636,1187,834,1214"/>
+<area shape="poly" id="edge40_Node000036_Node000038" title=" " alt="" coords="551,1265,582,1254,606,1240,630,1225,669,1214,664,1216,632,1230,609,1244,584,1259,553,1269"/>
+<area shape="rect" id="Node000039" href="$classaudio__tools_1_1_audio_writer_to_audio_output.html" title="Adapter class which lets an AudioWriter behave like a Print." alt="" coords="638,1239,832,1266"/>
+<area shape="poly" id="edge41_Node000036_Node000039" title=" " alt="" coords="551,1270,640,1262,635,1264,553,1275"/>
+<area shape="rect" id="Node000040" href="$classaudio__tools_1_1audio__tools_1_1_adapter_audio_stream_to_audio_output.html" title="Wrapper which converts a AudioStream to a AudioOutput." alt="" coords="631,1290,839,1335"/>
+<area shape="poly" id="edge42_Node000036_Node000040" title=" " alt="" coords="552,1290,633,1301,628,1302,553,1296"/>
+<area shape="rect" id="Node000041" href="$classaudio__tools_1_1audio__tools_1_1_adapter_print_to_audio_output.html" title="Wrapper which converts a Print to a AudioOutput." alt="" coords="636,1359,834,1386"/>
+<area shape="poly" id="edge43_Node000036_Node000041" title=" " alt="" coords="552,1296,585,1307,599,1317,609,1326,619,1336,633,1345,662,1358,657,1358,630,1350,615,1340,606,1330,596,1321,582,1312,552,1301"/>
+<area shape="rect" id="Node000042" href="$classaudio__tools_1_1audio__tools_1_1_audio_writer_to_audio_output.html" title="Adapter class which lets an AudioWriter behave like a Print." alt="" coords="638,1411,832,1438"/>
+<area shape="poly" id="edge44_Node000036_Node000042" title=" " alt="" coords="552,1291,585,1308,603,1330,610,1353,616,1375,633,1396,655,1410,650,1410,630,1400,612,1377,605,1354,599,1332,582,1312,552,1296"/>
+<area shape="rect" id="Node000049" href="$classaudio__tools_1_1_encoded_audio_output.html" title="A more natural Print class to process encoded data (aac, wav, mp3...). Just define the output and the..." alt="" coords="656,1503,814,1530"/>
+<area shape="poly" id="edge55_Node000048_Node000049" title=" " alt="" coords="539,1579,582,1566,606,1554,630,1541,667,1532,672,1530,632,1546,609,1558,584,1571,540,1584"/>
+<area shape="rect" id="Node000050" href="$classaudio__tools_1_1_multi_output.html" title="Replicates the output to multiple destinations." alt="" coords="686,1555,784,1582"/>
+<area shape="poly" id="edge56_Node000048_Node000050" title=" " alt="" coords="540,1585,688,1573,683,1574,540,1590"/>
+<area shape="rect" id="Node000051" href="$classaudio__tools_1_1audio__tools_1_1_encoded_audio_output.html" title="A more natural Print class to process encoded data (aac, wav, mp3...). Just define the output and the..." alt="" coords="656,1607,814,1634"/>
+<area shape="poly" id="edge57_Node000048_Node000051" title=" " alt="" coords="540,1600,658,1613,653,1613,540,1605"/>
+<area shape="rect" id="Node000052" href="$classaudio__tools_1_1audio__tools_1_1_multi_output.html" title="Replicates the output to multiple destinations." alt="" coords="686,1659,784,1686"/>
+<area shape="poly" id="edge58_Node000048_Node000052" title=" " alt="" coords="523,1611,632,1643,688,1661,683,1660,631,1648,523,1617"/>
 </map>

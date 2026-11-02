@@ -1,6 +1,9 @@
 <map id="ScaledParameter" name="ScaledParameter">
-<area shape="rect" id="Node000001" title="Scales a dynamic parameter to the indicated range." alt="" coords="11,106,142,134"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_abstract_parameter.html" title="Base class for all parameters." alt="" coords="5,5,148,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="75,46,76,57,76,82,78,106,73,104,71,82,71,57,73,51"/>
-<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="79,47,79,106,74,105,74,50"/>
+<area shape="rect" id="Node000001" title="Scales a dynamic parameter to the indicated range." alt="" coords="32,226,163,254"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_abstract_parameter.html" title="Base class for all parameters." alt="" coords="70,116,212,144"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="128,155,118,178,103,227,98,224,113,176,124,159"/>
+<area shape="poly" id="edge4_Node000001_Node000002" title=" " alt="" coords="133,157,105,227,100,225,128,159"/>
+<area shape="rect" id="Node000003" href="$classfloat.html" title=" " alt="" coords="5,5,56,33"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="22,51,17,98,18,126,24,152,35,174,50,194,82,225,77,227,46,197,31,177,19,154,12,127,12,98,22,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="55,41,130,114,125,116,54,46"/>
 </map>
